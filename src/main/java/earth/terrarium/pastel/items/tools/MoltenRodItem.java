@@ -15,37 +15,28 @@ import net.minecraft.world.level.material.FluidState;
 import java.util.List;
 
 public class MoltenRodItem extends PastelFishingRodItem {
+	
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/equipment/molten_rod");
+	
+	public MoltenRodItem(Properties settings) {
+		super(settings);
+	}
+	
+	@Override
+	public boolean canFishIn(FluidState fluidState) {
+		return fluidState.is(PastelFluidTags.MOLTEN_ROD_FISHABLE_IN);
+	}
+	
+	@Override
+	public void spawnBobber(Player user, Level world, int luckBonus, int waitTimeReductionTicks, int exuberanceLevel, int bigCatchLevel, int serendipityReelLevel, boolean inventoryInsertion, boolean shouldSmeltDrops) {
+		world.addFreshEntity(new MoltenFishingBobberEntity(user, world, luckBonus, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel, serendipityReelLevel, inventoryInsertion));
+	}
 
-    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/equipment/molten_rod");
-
-    public MoltenRodItem(Properties settings) {
-        super(settings);
-    }
-
-    @Override
-    public boolean canFishIn(FluidState fluidState) {
-        return fluidState.is(PastelFluidTags.MOLTEN_ROD_FISHABLE_IN);
-    }
-
-    @Override
-    public void spawnBobber(
-        Player user, Level world, int luckBonus, int waitTimeReductionTicks, int exuberanceLevel, int bigCatchLevel,
-        int serendipityReelLevel, boolean inventoryInsertion, boolean shouldSmeltDrops
-    ) {
-        world.addFreshEntity(
-            new MoltenFishingBobberEntity(
-                user, world, luckBonus, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel, serendipityReelLevel,
-                inventoryInsertion
-            ));
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.molten_rod.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.molten_rod.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-    }
-
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("item.pastel.molten_rod.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.molten_rod.tooltip2").withStyle(ChatFormatting.GRAY));
+	}
+	
 }

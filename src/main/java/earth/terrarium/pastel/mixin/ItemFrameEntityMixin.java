@@ -17,17 +17,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemFrame.class)
 public abstract class ItemFrameEntityMixin {
-
-    @Shadow
-    public abstract ItemStack getItem();
-
-    @Inject(method = "interact",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/decoration/ItemFrame;setRotation(I)V"))
-    public void interact(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (getItem().is(PastelItems.CELESTIAL_POCKETWATCH.get()) &&
-            (((ItemFrame) (Object) this).level() instanceof ServerLevel serverWorld)) {
-            CelestialPocketWatchItem.tryAdvanceTime(serverWorld, (ServerPlayer) player);
-        }
-    }
-
+	
+	@Shadow
+	public abstract ItemStack getItem();
+	
+	@Inject(method = "interact",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/decoration/ItemFrame;setRotation(I)V"))
+	public void interact(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+		if (getItem().is(PastelItems.CELESTIAL_POCKETWATCH.get()) && (((ItemFrame) (Object) this).level() instanceof ServerLevel serverWorld)) {
+			CelestialPocketWatchItem.tryAdvanceTime(serverWorld, (ServerPlayer) player);
+		}
+	}
+	
 }

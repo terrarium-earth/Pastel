@@ -11,11 +11,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AshFloraBlock extends SpreadableFloraBlock {
 
-    public static final MapCodec<AshFloraBlock> CODEC = simpleCodec(AshFloraBlock::new);
+	public static final MapCodec<AshFloraBlock> CODEC = simpleCodec(AshFloraBlock::new);
 
-    public AshFloraBlock(Properties settings) {
-        super(7, settings);
-    }
+	public AshFloraBlock(Properties settings) {
+		super(7, settings);
+	}
 
 //	@Override
 //	public MapCodec<? extends AshFloraBlock> getCodec() {
@@ -23,10 +23,9 @@ public class AshFloraBlock extends SpreadableFloraBlock {
 //		return CODEC;
 //	}
 
-    @Override
-    protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-        return (floor.is(PastelBlockTags.ASH) || floor.is(PastelBlocks.ASHEN_BLACKSLAG.get()) || super.mayPlaceOn(
-            floor, world, pos))
-               && floor.isFaceSturdy(world, pos, Direction.UP);
-    }
+	@Override
+	protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
+		return (floor.is(PastelBlockTags.ASH) || floor.is(PastelBlocks.ASHEN_BLACKSLAG.get()) || super.mayPlaceOn(floor, world, pos))
+				&& floor.isFaceSturdy(world, pos, Direction.UP);
+	}
 }

@@ -19,41 +19,36 @@ import java.util.Map;
 
 public class ColoredLeavesBlock extends LeavesBlock implements ColoredTree {
 
-    public static final MapCodec<ColoredLeavesBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                                                                                                 propertiesCodec(),
-                                                                                                                 InkColor.CODEC.fieldOf("color")
-                                                                                                                               .forGetter(ColoredLeavesBlock::getColor)
-                                                                                                             )
-                                                                                                             .apply(
-                                                                                                                 instance,
-                                                                                                                 ColoredLeavesBlock::new
-                                                                                                             ));
+	public static final MapCodec<ColoredLeavesBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			propertiesCodec(),
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredLeavesBlock::getColor)
+	).apply(instance, ColoredLeavesBlock::new));
+	
+	private static final Map<InkColor, ColoredLeavesBlock> LEAVES = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredLeavesBlock(Properties settings, InkColor color) {
+		super(settings);
+		this.color = color;
+		LEAVES.put(color, this);
+	}
 
-    private static final Map<InkColor, ColoredLeavesBlock> LEAVES = new Object2ObjectArrayMap<>();
-    protected final InkColor color;
-
-    public ColoredLeavesBlock(Properties settings, InkColor color) {
-        super(settings);
-        this.color = color;
-        LEAVES.put(color, this);
-    }
-
-    @Override
-    public MapCodec<? extends ColoredLeavesBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    public InkColor getColor() {
-        return this.color;
-    }
-
-    public static ColoredLeavesBlock byColor(InkColor color) {
-        return LEAVES.get(color);
-    }
-
-    public static Collection<ColoredLeavesBlock> all() {
-        return LEAVES.values();
-    }
-
+	@Override
+	public MapCodec<? extends ColoredLeavesBlock> codec() {
+		return CODEC;
+	}
+	
+	@Override
+	public InkColor getColor() {
+		return this.color;
+	}
+	
+	public static ColoredLeavesBlock byColor(InkColor color) {
+		return LEAVES.get(color);
+	}
+	
+	public static Collection<ColoredLeavesBlock> all() {
+		return LEAVES.values();
+	}
+	
 }

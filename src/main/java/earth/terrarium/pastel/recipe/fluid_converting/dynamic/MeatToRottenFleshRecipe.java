@@ -12,21 +12,21 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import java.util.Optional;
 
 public class MeatToRottenFleshRecipe extends DragonrotConvertingRecipe {
-
-    public MeatToRottenFleshRecipe() {
-        super("", false, Optional.of(UNLOCK_IDENTIFIER), getMeatsIngredient(), Items.ROTTEN_FLESH.getDefaultInstance());
-    }
-
-    private static Ingredient getMeatsIngredient() {
-        return Ingredient.of(BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.MEAT)
-                                                   .stream()
-                                                   .filter(item -> item.value() == Items.ROTTEN_FLESH)
-                                                   .map(ItemStack::new));
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return PastelRecipeSerializers.DRAGONROT_MEAT_TO_ROTTEN_FLESH;
-    }
-
+	
+	public MeatToRottenFleshRecipe() {
+		super("", false, Optional.of(UNLOCK_IDENTIFIER), getMeatsIngredient(), Items.ROTTEN_FLESH.getDefaultInstance());
+	}
+	
+	private static Ingredient getMeatsIngredient() {
+		return Ingredient.of(BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.MEAT)
+				.stream()
+				.filter(item -> item.value() == Items.ROTTEN_FLESH )
+				.map(ItemStack::new));
+	}
+	
+	@Override
+	public RecipeSerializer<?> getSerializer() {
+		return PastelRecipeSerializers.DRAGONROT_MEAT_TO_ROTTEN_FLESH;
+	}
+	
 }

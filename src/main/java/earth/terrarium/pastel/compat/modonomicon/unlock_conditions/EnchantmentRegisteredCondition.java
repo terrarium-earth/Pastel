@@ -21,34 +21,33 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import java.util.List;
 
 public class EnchantmentRegisteredCondition extends BookCondition {
-
+    
     protected static final String TOOLTIP = "book.condition.tooltip." + PastelCommon.MOD_ID + ".enchantment_registered";
-
+    
     protected ResourceKey<Enchantment> enchantmentKey;
-
+    
     public EnchantmentRegisteredCondition(Component tooltip, ResourceKey<Enchantment> enchantmentKey) {
         super(tooltip);
         this.enchantmentKey = enchantmentKey;
     }
-
-    public static EnchantmentRegisteredCondition fromJson(
-        ResourceLocation conditionParentId, JsonObject json, HolderLookup.Provider provider) {
+    
+    public static EnchantmentRegisteredCondition fromJson(ResourceLocation conditionParentId, JsonObject json, HolderLookup.Provider provider) {
         ResourceLocation enchantmentID = ResourceLocation.parse(GsonHelper.getAsString(json, "enchantment_id"));
         Component tooltip = tooltipFromJson(json, provider);
         return new EnchantmentRegisteredCondition(tooltip, ResourceKey.create(Registries.ENCHANTMENT, enchantmentID));
     }
-
+    
     public static EnchantmentRegisteredCondition fromNetwork(RegistryFriendlyByteBuf buffer) {
         var tooltip = buffer.readBoolean() ? ComponentSerialization.STREAM_CODEC.decode(buffer) : null;
         var entryId = buffer.readResourceLocation();
         return new EnchantmentRegisteredCondition(tooltip, ResourceKey.create(Registries.ENCHANTMENT, entryId));
     }
-
+    
     @Override
     public ResourceLocation getType() {
         return ModonomiconCompat.ENCHANTMENT_REGISTERED;
     }
-
+    
     @Override
     public void toNetwork(RegistryFriendlyByteBuf buffer) {
         buffer.writeBoolean(this.tooltip != null);
@@ -57,24 +56,16 @@ public class EnchantmentRegisteredCondition extends BookCondition {
         }
         buffer.writeResourceLocation(this.enchantmentKey.location());
     }
-
+    
     @Override
     public boolean test(BookConditionContext context, Player player) {
-        return Ench.getEntry(
-                       player.level()
-                             .registryAccess(), this.enchantmentKey
-                   )
-                   .isPresent();
+		return Ench.getEntry(player.level().registryAccess(), this.enchantmentKey).isPresent();
     }
-
+    
     @Override
     public List<Component> getTooltip(Player player, BookConditionContext context) {
         if (this.tooltip == null && context instanceof BookConditionEntryContext entryContext) {
-            this.tooltip = Component.translatable(
-                TOOLTIP, Component.translatable(entryContext.getBook()
-                                                            .getEntry(this.enchantmentKey.location())
-                                                            .getName())
-            );
+            this.tooltip = Component.translatable(TOOLTIP, Component.translatable(entryContext.getBook().getEntry(this.enchantmentKey.location()).getName()));
         }
         return super.getTooltip(player, context);
     }

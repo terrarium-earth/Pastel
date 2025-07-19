@@ -27,8 +27,7 @@ public abstract class SpreadableFloraBlock extends TallGrassBlock {
             for (int offset = 0; offset < 4; offset++) {
                 var plantPos = column.below(offset);
 
-                if (mayPlaceOn(world.getBlockState(plantPos), world, plantPos) && world.isEmptyBlock(
-                    plantPos.above())) {
+                if (mayPlaceOn(world.getBlockState(plantPos), world, plantPos) && world.isEmptyBlock(plantPos.above())) {
                     world.setBlockAndUpdate(plantPos.above(), defaultBlockState());
                     break;
                 }

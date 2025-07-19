@@ -18,43 +18,35 @@ import java.util.List;
 import java.util.Map;
 
 public class BedrockFishingRodItem extends PastelFishingRodItem implements Preenchanted {
+	
+	public BedrockFishingRodItem(Properties settings) {
+		super(settings);
+	}
+	
+	@Override
+	public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
+		return Map.of(Enchantments.LUCK_OF_THE_SEA, 4);
+	}
+	
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return true;
+	}
+	
+	@Override
+	public boolean canFishIn(FluidState fluidState) {
+		return fluidState.is(PastelFluidTags.BEDROCK_ROD_FISHABLE_IN);
+	}
+	
+	@Override
+	public void spawnBobber(Player user, Level world, int luckOfTheSeaLevel, int waitTimeReductionTicks, int exuberanceLevel, int bigCatchLevel, int serendipityReelLevel, boolean inventoryInsertion, boolean shouldSmeltDrops) {
+		world.addFreshEntity(new BedrockFishingBobberEntity(user, world, luckOfTheSeaLevel, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel, serendipityReelLevel, inventoryInsertion, shouldSmeltDrops));
+	}
 
-    public BedrockFishingRodItem(Properties settings) {
-        super(settings);
-    }
-
-    @Override
-    public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-        return Map.of(Enchantments.LUCK_OF_THE_SEA, 4);
-    }
-
-    @Override
-    public boolean isEnchantable(ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public boolean canFishIn(FluidState fluidState) {
-        return fluidState.is(PastelFluidTags.BEDROCK_ROD_FISHABLE_IN);
-    }
-
-    @Override
-    public void spawnBobber(
-        Player user, Level world, int luckOfTheSeaLevel, int waitTimeReductionTicks, int exuberanceLevel,
-        int bigCatchLevel, int serendipityReelLevel, boolean inventoryInsertion, boolean shouldSmeltDrops
-    ) {
-        world.addFreshEntity(
-            new BedrockFishingBobberEntity(
-                user, world, luckOfTheSeaLevel, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel,
-                serendipityReelLevel, inventoryInsertion, shouldSmeltDrops
-            ));
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.bedrock_fishing_rod.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-    }
-
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("item.pastel.bedrock_fishing_rod.tooltip").withStyle(ChatFormatting.GRAY));
+	}
+	
 }

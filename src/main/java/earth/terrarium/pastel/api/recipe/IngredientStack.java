@@ -27,140 +27,122 @@ import java.util.stream.Stream;
 
 public class IngredientStack implements ICustomIngredient {
 
-    public static final MapCodec<IngredientStack> MAP_CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                    MapCodec.assumeMapUnsafe(Ingredient.CODEC_NONEMPTY)
-                                                                                                            .forGetter(IngredientStack::getIngredient),
-                                                                                                    DataComponentPredicate.CODEC.optionalFieldOf("components", DataComponentPredicate.EMPTY)
-                                                                                                                                .forGetter(o -> o.componentPredicate),
-                                                                                                    DataComponentPatch.CODEC.optionalFieldOf("preview_components", DataComponentPatch.EMPTY)
-                                                                                                                            .forGetter(o -> o.previewComponents),
-                                                                                                    Codec.INT.optionalFieldOf("count", 1)
-                                                                                                             .forGetter(o -> o.count)
-                                                                                                )
-                                                                                                .apply(
-                                                                                                    i,
-                                                                                                    IngredientStack::new
-                                                                                                ));
+	public static final MapCodec<IngredientStack> MAP_CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+			MapCodec.assumeMapUnsafe(Ingredient.CODEC_NONEMPTY).forGetter(IngredientStack::getIngredient),
+			DataComponentPredicate.CODEC.optionalFieldOf("components", DataComponentPredicate.EMPTY).forGetter(o -> o.componentPredicate),
+			DataComponentPatch.CODEC.optionalFieldOf("preview_components", DataComponentPatch.EMPTY).forGetter(o -> o.previewComponents),
+			Codec.INT.optionalFieldOf("count", 1).forGetter(o -> o.count)
+	).apply(i, IngredientStack::new));
 
-    public static final Codec<IngredientStack> CODEC = Codec.withAlternative(
-        MAP_CODEC.codec(),
-        Codec.xor(BuiltInRegistries.ITEM.byNameCodec(), TagKey.hashedCodec(Registries.ITEM))
-             .xmap(
-                 either -> either.map(IngredientStack::ofItems, IngredientStack::ofTag),
-                 ingredientStack -> ingredientStack.item != null ? Either.left(ingredientStack.item)
-                                                                 : Either.right(ingredientStack.tag)
-             )
-    );
+	public static final Codec<IngredientStack> CODEC = Codec.withAlternative(
+			MAP_CODEC.codec(),
+			Codec.xor(BuiltInRegistries.ITEM.byNameCodec(), TagKey.hashedCodec(Registries.ITEM)).xmap(
+					either -> either.map(IngredientStack::ofItems, IngredientStack::ofTag),
+					ingredientStack -> ingredientStack.item != null ? Either.left(ingredientStack.item) : Either.right(ingredientStack.tag)
+			)
+	);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, IngredientStack> STREAM_CODEC = StreamCodec.composite(
-        Ingredient.CONTENTS_STREAM_CODEC, o -> o.ingredient,
-        DataComponentPredicate.STREAM_CODEC, o -> o.componentPredicate,
-        DataComponentPatch.STREAM_CODEC, o -> o.previewComponents,
-        ByteBufCodecs.VAR_INT, o -> o.count,
-        IngredientStack::new
-    );
+	public static final StreamCodec<RegistryFriendlyByteBuf, IngredientStack> STREAM_CODEC = StreamCodec.composite(
+			Ingredient.CONTENTS_STREAM_CODEC, o -> o.ingredient,
+			DataComponentPredicate.STREAM_CODEC, o -> o.componentPredicate,
+			DataComponentPatch.STREAM_CODEC, o -> o.previewComponents,
+			ByteBufCodecs.VAR_INT, o -> o.count,
+			IngredientStack::new
+	);
 
-    public static final IngredientType<IngredientStack> TYPE = new IngredientType<>(MAP_CODEC, STREAM_CODEC);
+	public static final IngredientType<IngredientStack> TYPE = new IngredientType<>(MAP_CODEC, STREAM_CODEC);
 
-    private final Ingredient ingredient;
-    private final DataComponentPredicate componentPredicate;
-    private final DataComponentPatch previewComponents;
-    private final int count;
+	private final Ingredient ingredient;
+	private final DataComponentPredicate componentPredicate;
+	private final DataComponentPatch previewComponents;
+	private final int count;
+	
+	// These are from the codec, to handle encoding
+	private Item item = null;
+	private TagKey<Item> tag = null;
+	
+	public static final IngredientStack EMPTY = new IngredientStack(Ingredient.EMPTY, DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, 0);
+	
+	public IngredientStack(Ingredient ingredient, DataComponentPredicate componentPredicate, DataComponentPatch previewComponents, int count) {
+		this.ingredient = ingredient;
+		this.componentPredicate = componentPredicate;
+		this.previewComponents = previewComponents;
+		this.count = count;
+	}
+	
+	private IngredientStack(Ingredient ingredient) {
+		this(ingredient, DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, 1);
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public Ingredient getIngredient() {
+		return ingredient;
+	}
+	
+	public static IngredientStack of(Ingredient ingredient) {
+		return new IngredientStack(ingredient);
+	}
+	
+	public static IngredientStack ofItems(Item item) {
+		return new IngredientStack(Ingredient.of(item));
+	}
+	
+	public static IngredientStack ofItems(Item item, int count) {
+		IngredientStack ingredientStack = new IngredientStack(Ingredient.of(item), DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, count);
+		ingredientStack.item = item;
+		return ingredientStack;
+	}
+	
+	public static IngredientStack ofTag(TagKey<Item> tag) {
+		return new IngredientStack(Ingredient.of(tag));
+	}
+	
+	public static IngredientStack ofTag(TagKey<Item> tag, int count) {
+		IngredientStack ingredientStack = new IngredientStack(Ingredient.of(tag), DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, count);
+		ingredientStack.tag = tag;
+		return ingredientStack;
+	}
+	
+	@Override
+	public boolean test(ItemStack itemStack) {
+		return this.ingredient.test(itemStack)
+				&& this.count <= itemStack.getCount()
+				&& this.componentPredicate.test(itemStack.getComponents());
+	}
 
-    // These are from the codec, to handle encoding
-    private Item item = null;
-    private TagKey<Item> tag = null;
+	@Override
+	public Stream<ItemStack> getItems() {
+		ItemStack[] matchingStacks = this.ingredient.getItems();
 
-    public static final IngredientStack EMPTY = new IngredientStack(
-        Ingredient.EMPTY, DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, 0);
+		return Arrays.stream(matchingStacks).map(stack -> {
+			ItemStack itemStack = new ItemStack(stack.getItem(), count);
+			itemStack.applyComponentsAndValidate(previewComponents);
+			return itemStack;
+		});
+	}
 
-    public IngredientStack(
-        Ingredient ingredient, DataComponentPredicate componentPredicate, DataComponentPatch previewComponents,
-        int count
-    ) {
-        this.ingredient = ingredient;
-        this.componentPredicate = componentPredicate;
-        this.previewComponents = previewComponents;
-        this.count = count;
-    }
+	@Override
+	public boolean isSimple() {
+		return false;
+	}
 
-    private IngredientStack(Ingredient ingredient) {
-        this(ingredient, DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, 1);
-    }
+	public boolean isEmpty() {
+		return this == EMPTY || this.ingredient.isEmpty();
+	}
 
-    public int getCount() {
-        return count;
-    }
+	@Override
+	public IngredientType<?> getType() {
+		return TYPE;
+	}
 
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
+	public static void register(IEventBus modEventBus) {
+		DeferredRegister<IngredientType<?>> register = DeferredRegister.create(NeoForgeRegistries.INGREDIENT_TYPES, PastelCommon.MOD_ID);
 
-    public static IngredientStack of(Ingredient ingredient) {
-        return new IngredientStack(ingredient);
-    }
+		register.register("ingredient_stack", () -> TYPE);
 
-    public static IngredientStack ofItems(Item item) {
-        return new IngredientStack(Ingredient.of(item));
-    }
-
-    public static IngredientStack ofItems(Item item, int count) {
-        IngredientStack ingredientStack = new IngredientStack(
-            Ingredient.of(item), DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, count);
-        ingredientStack.item = item;
-        return ingredientStack;
-    }
-
-    public static IngredientStack ofTag(TagKey<Item> tag) {
-        return new IngredientStack(Ingredient.of(tag));
-    }
-
-    public static IngredientStack ofTag(TagKey<Item> tag, int count) {
-        IngredientStack ingredientStack = new IngredientStack(
-            Ingredient.of(tag), DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, count);
-        ingredientStack.tag = tag;
-        return ingredientStack;
-    }
-
-    @Override
-    public boolean test(ItemStack itemStack) {
-        return this.ingredient.test(itemStack)
-               && this.count <= itemStack.getCount()
-               && this.componentPredicate.test(itemStack.getComponents());
-    }
-
-    @Override
-    public Stream<ItemStack> getItems() {
-        ItemStack[] matchingStacks = this.ingredient.getItems();
-
-        return Arrays.stream(matchingStacks)
-                     .map(stack -> {
-                         ItemStack itemStack = new ItemStack(stack.getItem(), count);
-                         itemStack.applyComponentsAndValidate(previewComponents);
-                         return itemStack;
-                     });
-    }
-
-    @Override
-    public boolean isSimple() {
-        return false;
-    }
-
-    public boolean isEmpty() {
-        return this == EMPTY || this.ingredient.isEmpty();
-    }
-
-    @Override
-    public IngredientType<?> getType() {
-        return TYPE;
-    }
-
-    public static void register(IEventBus modEventBus) {
-        DeferredRegister<IngredientType<?>> register = DeferredRegister.create(
-            NeoForgeRegistries.INGREDIENT_TYPES, PastelCommon.MOD_ID);
-
-        register.register("ingredient_stack", () -> TYPE);
-
-        register.register(modEventBus);
-    }
+		register.register(modEventBus);
+	}
 }

@@ -33,7 +33,6 @@ public class PedestalRecipeHandler implements StandardRecipeHandler<PedestalScre
     @Override
     public boolean supportsRecipe(EmiRecipe recipe) {
         EmiRecipeCategory category = recipe.getCategory();
-        return (category == PastelEmiRecipeCategories.PEDESTAL_CRAFTING ||
-                category == VanillaEmiRecipeCategories.CRAFTING) && recipe.supportsRecipeTree();
+        return (category == PastelEmiRecipeCategories.PEDESTAL_CRAFTING || category == VanillaEmiRecipeCategories.CRAFTING) && recipe.supportsRecipeTree();
     }
 }

@@ -12,35 +12,26 @@ import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.phys.Vec3;
 
 public class HummingstoneEventQueue extends EventQueue<HummingstoneEventQueue.EventEntry> {
-
+    
     public HummingstoneEventQueue(PositionSource positionSource, int range, Callback<EventEntry> listener) {
         super(positionSource, range, listener);
     }
-
+    
     @Override
     public void acceptEvent(Level world, GameEvent.ListenerInfo message, Vec3 sourcePos) {
         Vec3 pos = message.source();
         EventEntry eventEntry = new EventEntry(message, Mth.floor(pos.distanceTo(sourcePos)));
         int delay = eventEntry.distance * 2;
-        this.schedule(eventEntry, delay);
+		this.schedule(eventEntry, delay);
+	
+		if (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING) {
+			TypedTransmissionPayload.playTransmissionParticle((ServerLevel) world, new TypedTransmission(pos, this.positionSource, delay, TypedTransmission.Variant.HUMMINGSTONE));
+			if (getQueuedEventCount() > 20) {
+				world.gameEvent(message.context().sourceEntity(), PastelGameEvents.HUMMINGSTONE_HYMN, pos);
+			}
+		}
+	}
 
-        if (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING) {
-            TypedTransmissionPayload.playTransmissionParticle(
-                (ServerLevel) world, new TypedTransmission(
-                    pos, this.positionSource, delay,
-                    TypedTransmission.Variant.HUMMINGSTONE
-                )
-            );
-            if (getQueuedEventCount() > 20) {
-                world.gameEvent(
-                    message.context()
-                           .sourceEntity(), PastelGameEvents.HUMMINGSTONE_HYMN, pos
-                );
-            }
-        }
-    }
-
-    public record EventEntry(GameEvent.ListenerInfo message, int distance) {
-    }
+	public record EventEntry(GameEvent.ListenerInfo message, int distance) { }
 
 }

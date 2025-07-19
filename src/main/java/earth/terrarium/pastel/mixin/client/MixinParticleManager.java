@@ -18,13 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinParticleManager implements ExtendedParticleManager {
 
     @Unique
-    private final EarlyRenderingParticleContainer earlyRenderingParticleContainer
-        = new EarlyRenderingParticleContainer();
-
-    @Inject(method = "tick", at = @At(value = "INVOKE",
-                                      target = "Ljava/util/Map;computeIfAbsent(Ljava/lang/Object;" +
-                                               "Ljava/util/function/Function;)Ljava/lang/Object;"))
-    private void earlyRenderingHook(final CallbackInfo ci, @Local final Particle particle) {
+    private final EarlyRenderingParticleContainer earlyRenderingParticleContainer = new EarlyRenderingParticleContainer();
+	
+	@Inject(method = "tick", at = @At(value = "INVOKE", target = "Ljava/util/Map;computeIfAbsent(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;"))
+	private void earlyRenderingHook(final CallbackInfo ci, @Local final Particle particle) {
         earlyRenderingParticleContainer.add(particle);
     }
 
@@ -34,8 +31,7 @@ public class MixinParticleManager implements ExtendedParticleManager {
     }
 
     @Override
-    public void render(
-        final PoseStack matrices, final MultiBufferSource vertexConsumers, final Camera camera, final float tickDelta) {
+    public void render(final PoseStack matrices, final MultiBufferSource vertexConsumers, final Camera camera, final float tickDelta) {
         earlyRenderingParticleContainer.render(matrices, vertexConsumers, camera, tickDelta);
     }
 

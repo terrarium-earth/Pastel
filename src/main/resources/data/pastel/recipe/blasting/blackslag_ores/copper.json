@@ -1,11 +1,7 @@
 {
   "type": "minecraft:blasting",
   "group": "copper",
-  "ingredient": [
-    {
-      "item": "pastel:blackslag_copper_ore"
-    }
-  ],
+  "ingredient": [{"item": "pastel:blackslag_copper_ore"}],
   "result": {
     "id": "minecraft:raw_copper"
   },

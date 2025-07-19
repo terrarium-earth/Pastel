@@ -14,24 +14,23 @@ import org.jetbrains.annotations.NotNull;
 
 // a version of BasaltPillarFeature with configurable block state
 public class PillarFeature extends Feature<BlockStateFeatureConfig> {
-
-    public PillarFeature(Codec<BlockStateFeatureConfig> codec) {
-        super(codec);
-    }
-
-    @Override
-    public boolean place(FeaturePlaceContext<BlockStateFeatureConfig> context) {
-        BlockPos blockPos = context.origin();
-        WorldGenLevel structureWorldAccess = context.level();
-        RandomSource random = context.random();
-        if (structureWorldAccess.isEmptyBlock(blockPos) && !structureWorldAccess.isEmptyBlock(blockPos.above())) {
-            BlockState blockState = context.config()
-                                           .blockState();
-
-            BlockPos.MutableBlockPos mutable = blockPos.mutable();
-            BlockPos.MutableBlockPos mutable2 = blockPos.mutable();
-            boolean bl = true;
-            boolean bl2 = true;
+	
+	public PillarFeature(Codec<BlockStateFeatureConfig> codec) {
+		super(codec);
+	}
+	
+	@Override
+	public boolean place(FeaturePlaceContext<BlockStateFeatureConfig> context) {
+		BlockPos blockPos = context.origin();
+		WorldGenLevel structureWorldAccess = context.level();
+		RandomSource random = context.random();
+		if (structureWorldAccess.isEmptyBlock(blockPos) && !structureWorldAccess.isEmptyBlock(blockPos.above())) {
+			BlockState blockState = context.config().blockState();
+			
+			BlockPos.MutableBlockPos mutable = blockPos.mutable();
+			BlockPos.MutableBlockPos mutable2 = blockPos.mutable();
+			boolean bl = true;
+			boolean bl2 = true;
             boolean bl3 = true;
             boolean bl4 = true;
 
@@ -41,14 +40,10 @@ public class PillarFeature extends Feature<BlockStateFeatureConfig> {
                 }
 
                 structureWorldAccess.setBlock(mutable, blockState, 2);
-                bl = bl && this.stopOrPlace(
-                    structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.NORTH), blockState);
-                bl2 = bl2 && this.stopOrPlace(
-                    structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.SOUTH), blockState);
-                bl3 = bl3 && this.stopOrPlace(
-                    structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.WEST), blockState);
-                bl4 = bl4 && this.stopOrPlace(
-                    structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.EAST), blockState);
+                bl = bl && this.stopOrPlace(structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.NORTH), blockState);
+                bl2 = bl2 && this.stopOrPlace(structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.SOUTH), blockState);
+                bl3 = bl3 && this.stopOrPlace(structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.WEST), blockState);
+                bl4 = bl4 && this.stopOrPlace(structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.EAST), blockState);
                 mutable.move(Direction.DOWN);
             }
 
@@ -94,8 +89,7 @@ public class PillarFeature extends Feature<BlockStateFeatureConfig> {
         }
     }
 
-    private boolean stopOrPlace(
-        LevelAccessor world, @NotNull RandomSource random, BlockPos pos, BlockState blockState) {
+    private boolean stopOrPlace(LevelAccessor world, @NotNull RandomSource random, BlockPos pos, BlockState blockState) {
         if (random.nextInt(10) != 0) {
             world.setBlock(pos, blockState, 2);
             return true;

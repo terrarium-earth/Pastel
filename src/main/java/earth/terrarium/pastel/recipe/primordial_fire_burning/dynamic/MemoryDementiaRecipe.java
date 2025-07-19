@@ -16,37 +16,28 @@ import net.minecraft.world.level.Level;
 import java.util.Optional;
 
 public class MemoryDementiaRecipe extends PrimordialFireBurningRecipe {
-
-    public MemoryDementiaRecipe() {
-        super(
-            "", false, Optional.of(UNLOCK_IDENTIFIER),
-            Ingredient.of(
-                MemoryItem.getForEntityType(EntityType.BEE, 1), MemoryItem.getForEntityType(EntityType.FOX, 10),
-                MemoryItem.getForEntityType(EntityType.SKELETON, 5), MemoryItem.getForEntityType(EntityType.HUSK, 50),
-                MemoryItem.getForEntityType(EntityType.BLAZE, -1)
-            ),
-            PastelBlocks.MEMORY.get()
-                               .asItem()
-                               .getDefaultInstance()
-        );
-    }
-
-    @Override
-    public boolean matches(RecipeInput inv, Level world) {
-        return inv.getItem(0)
-                  .has(PastelDataComponentTypes.MEMORY);
-    }
-
-    @Override
-    public ItemStack assemble(RecipeInput inv, HolderLookup.Provider drm) {
-        ItemStack stack = inv.getItem(0);
-        stack.remove(PastelDataComponentTypes.MEMORY);
-        return stack;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return PastelRecipeSerializers.MEMORY_DEMENTIA;
-    }
-
+	
+	public MemoryDementiaRecipe() {
+		super("", false, Optional.of(UNLOCK_IDENTIFIER),
+				Ingredient.of(MemoryItem.getForEntityType(EntityType.BEE, 1), MemoryItem.getForEntityType(EntityType.FOX, 10), MemoryItem.getForEntityType(EntityType.SKELETON, 5), MemoryItem.getForEntityType(EntityType.HUSK, 50), MemoryItem.getForEntityType(EntityType.BLAZE, -1)),
+                PastelBlocks.MEMORY.get().asItem().getDefaultInstance());
+	}
+	
+	@Override
+	public boolean matches(RecipeInput inv, Level world) {
+		return inv.getItem(0).has(PastelDataComponentTypes.MEMORY);
+	}
+	
+	@Override
+	public ItemStack assemble(RecipeInput inv, HolderLookup.Provider drm) {
+		ItemStack stack = inv.getItem(0);
+		stack.remove(PastelDataComponentTypes.MEMORY);
+		return stack;
+	}
+	
+	@Override
+	public RecipeSerializer<?> getSerializer() {
+		return PastelRecipeSerializers.MEMORY_DEMENTIA;
+	}
+	
 }

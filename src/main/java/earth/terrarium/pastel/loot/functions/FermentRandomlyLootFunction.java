@@ -26,105 +26,71 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class FermentRandomlyLootFunction extends LootItemConditionalFunction {
-
-    public static final MapCodec<FermentRandomlyLootFunction> CODEC = RecordCodecBuilder.mapCodec(i -> commonFields(
-        i).and(i.group(
-              Codec.either(ResourceLocation.CODEC, FermentationData.CODEC)
-                   .fieldOf("fermentation")
-                   .forGetter(c -> c.fermentation),
-              NumberProviders.CODEC.fieldOf("days_fermented")
-                                   .forGetter(c -> c.daysFermented),
-              NumberProviders.CODEC.fieldOf("thickness")
-                                   .forGetter(c -> c.thickness)
-          ))
-          .apply(i, FermentRandomlyLootFunction::new));
-
-    private final Either<ResourceLocation, FermentationData> fermentation;
-    private final NumberProvider daysFermented;
-    private final NumberProvider thickness;
-
-    public FermentRandomlyLootFunction(
-        List<LootItemCondition> conditions, Either<ResourceLocation, FermentationData> fermentation,
-        NumberProvider daysFermented, NumberProvider thickness
-    ) {
-        super(conditions);
-        this.fermentation = fermentation;
-        this.daysFermented = daysFermented;
-        this.thickness = thickness;
-    }
-
-    public FermentRandomlyLootFunction(
-        List<LootItemCondition> conditions, @NotNull ResourceLocation fermentationRecipeIdentifier,
-        NumberProvider daysFermented, NumberProvider thickness
-    ) {
-        this(conditions, Either.left(fermentationRecipeIdentifier), daysFermented, thickness);
-    }
-
-    public FermentRandomlyLootFunction(
-        List<LootItemCondition> conditions, @NotNull FermentationData fermentationData, NumberProvider daysFermented,
-        NumberProvider thickness
-    ) {
-        this(conditions, Either.right(fermentationData), daysFermented, thickness);
-    }
-
-    @Override
-    public LootItemFunctionType<? extends LootItemConditionalFunction> getType() {
-        return PastelLootFunctionTypes.FERMENT_RANDOMLY;
-    }
-
-    @Override
-    public ItemStack run(ItemStack stack, LootContext context) {
-        FermentationData fermentationData = this.fermentation.map(
-            id -> {
-                var recipe = context.getLevel()
-                                    .getRecipeManager()
-                                    .byKey(id);
-                if (recipe.isPresent() && recipe.get()
-                                                .value() instanceof TitrationBarrelRecipe titrationBarrelRecipe) {
-                    return titrationBarrelRecipe.getFermentationData();
-                } else {
-                    PastelCommon.logError(
-                        "A 'pastel:ferment_randomly' loot function has set an invalid 'fermentation_recipe_id': " + id +
-                        " It has to match an existing Titration Barrel recipe.");
-                    return null;
-                }
-            },
-            data -> this.fermentation.right()
-                                     .orElse(null)
-        );
-        if (fermentationData != null) {
-            var origin = context.getParamOrNull(LootContextParams.ORIGIN);
-            if (origin != null) {
-                BlockPos pos = BlockPos.containing(origin);
-                Biome biome = context.getLevel()
-                                     .getBiome(pos)
-                                     .value();
-                float downfall = ((BiomeAccessor) (Object) biome).getClimateSettings()
-                                                                 .downfall();
-                return TitrationBarrelRecipe.getFermentedStack(
-                    fermentationData, this.thickness.getInt(context), TimeHelper.secondsFromMinecraftDays(
-                        this.daysFermented.getInt(context)), downfall, stack
-                );
-            } else {
-                PastelCommon.logError("A 'pastel:ferment_randomly' loot function does not have access to 'origin'.");
-            }
-        }
-        return stack;
-    }
-
-    public static LootItemConditionalFunction.Builder<?> builder(
-        FermentationData fermentationData, NumberProvider daysFermented, NumberProvider thickness) {
-        return simpleBuilder(
-            (conditions) -> new FermentRandomlyLootFunction(conditions, fermentationData, daysFermented, thickness));
-    }
-
-    public static LootItemConditionalFunction.Builder<?> builder(
-        ResourceLocation fermentationRecipeIdentifier, NumberProvider daysFermented, NumberProvider thickness) {
-        return simpleBuilder(
-            (conditions) -> new FermentRandomlyLootFunction(
-                conditions, fermentationRecipeIdentifier, daysFermented,
-                thickness
-            ));
-    }
-
+	
+	public static final MapCodec<FermentRandomlyLootFunction> CODEC = RecordCodecBuilder.mapCodec(i -> commonFields(i).and(i.group(
+			Codec.either(ResourceLocation.CODEC, FermentationData.CODEC).fieldOf("fermentation").forGetter(c -> c.fermentation),
+			NumberProviders.CODEC.fieldOf("days_fermented").forGetter(c -> c.daysFermented),
+			NumberProviders.CODEC.fieldOf("thickness").forGetter(c -> c.thickness)
+	)).apply(i, FermentRandomlyLootFunction::new));
+	
+	private final Either<ResourceLocation, FermentationData> fermentation;
+	private final NumberProvider daysFermented;
+	private final NumberProvider thickness;
+	
+	public FermentRandomlyLootFunction(List<LootItemCondition> conditions, Either<ResourceLocation, FermentationData> fermentation, NumberProvider daysFermented, NumberProvider thickness) {
+		super(conditions);
+		this.fermentation = fermentation;
+		this.daysFermented = daysFermented;
+		this.thickness = thickness;
+	}
+	
+	public FermentRandomlyLootFunction(List<LootItemCondition> conditions, @NotNull ResourceLocation fermentationRecipeIdentifier, NumberProvider daysFermented, NumberProvider thickness) {
+		this(conditions, Either.left(fermentationRecipeIdentifier), daysFermented, thickness);
+	}
+	
+	public FermentRandomlyLootFunction(List<LootItemCondition> conditions, @NotNull FermentationData fermentationData, NumberProvider daysFermented, NumberProvider thickness) {
+		this(conditions, Either.right(fermentationData), daysFermented, thickness);
+	}
+	
+	@Override
+	public LootItemFunctionType<? extends LootItemConditionalFunction> getType() {
+		return PastelLootFunctionTypes.FERMENT_RANDOMLY;
+	}
+	
+	@Override
+	public ItemStack run(ItemStack stack, LootContext context) {
+		FermentationData fermentationData = this.fermentation.map(
+				id -> {
+					var recipe = context.getLevel().getRecipeManager().byKey(id);
+					if (recipe.isPresent() && recipe.get().value() instanceof TitrationBarrelRecipe titrationBarrelRecipe) {
+						return titrationBarrelRecipe.getFermentationData();
+					} else {
+						PastelCommon.logError("A 'pastel:ferment_randomly' loot function has set an invalid 'fermentation_recipe_id': " + id + " It has to match an existing Titration Barrel recipe.");
+						return null;
+					}
+				},
+				data -> this.fermentation.right().orElse(null)
+		);
+		if (fermentationData != null) {
+			var origin = context.getParamOrNull(LootContextParams.ORIGIN);
+			if (origin != null) {
+				BlockPos pos = BlockPos.containing(origin);
+				Biome biome = context.getLevel().getBiome(pos).value();
+				float downfall = ((BiomeAccessor) (Object) biome).getClimateSettings().downfall();
+				return TitrationBarrelRecipe.getFermentedStack(fermentationData, this.thickness.getInt(context), TimeHelper.secondsFromMinecraftDays(this.daysFermented.getInt(context)), downfall, stack);
+			} else {
+				PastelCommon.logError("A 'pastel:ferment_randomly' loot function does not have access to 'origin'.");
+			}
+		}
+		return stack;
+	}
+	
+	public static LootItemConditionalFunction.Builder<?> builder(FermentationData fermentationData, NumberProvider daysFermented, NumberProvider thickness) {
+		return simpleBuilder((conditions) -> new FermentRandomlyLootFunction(conditions, fermentationData, daysFermented, thickness));
+	}
+	
+	public static LootItemConditionalFunction.Builder<?> builder(ResourceLocation fermentationRecipeIdentifier, NumberProvider daysFermented, NumberProvider thickness) {
+		return simpleBuilder((conditions) -> new FermentRandomlyLootFunction(conditions, fermentationRecipeIdentifier, daysFermented, thickness));
+	}
+	
 }

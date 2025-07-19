@@ -10,18 +10,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(targets = "net.minecraft.world.inventory.LoomMenu$5")
 public abstract class LoomContainerPatternSlotMixin extends Slot {
-    private LoomContainerPatternSlotMixin() {
-        super(null, 0, 0, 0);
-    }
-
-    @Inject(
-        at = {@At("HEAD")},
-        method = {"mayPlace"},
-        cancellable = true
-    )
-    private void checkBppLoomPatternItem(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
-        if (stack.getItem() instanceof LoomPatternProvider) {
-            info.setReturnValue(true);
-        }
-    }
+	private LoomContainerPatternSlotMixin() {
+		super(null, 0, 0, 0);
+	}
+	
+	@Inject(
+			at = {@At("HEAD")},
+			method = {"mayPlace"},
+			cancellable = true
+	)
+	private void checkBppLoomPatternItem(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
+		if (stack.getItem() instanceof LoomPatternProvider) {
+			info.setReturnValue(true);
+		}
+	}
 }

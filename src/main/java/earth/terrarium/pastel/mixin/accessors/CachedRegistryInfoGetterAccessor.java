@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(RegistryOps.HolderLookupAdapter.class)
 public interface CachedRegistryInfoGetterAccessor {
-
-    @Accessor
-    HolderLookup.Provider getLookupProvider();
-
+	
+	@Accessor
+	HolderLookup.Provider getLookupProvider();
+	
 }

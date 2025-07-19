@@ -18,49 +18,46 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ItemRoundelBlock extends InWorldInteractionBlock {
 
-    public static final MapCodec<ItemRoundelBlock> CODEC = simpleCodec(ItemRoundelBlock::new);
+	public static final MapCodec<ItemRoundelBlock> CODEC = simpleCodec(ItemRoundelBlock::new);
 
-    protected static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 14.0D, 12.0D);
+	protected static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 14.0D, 12.0D);
 
-    public ItemRoundelBlock(Properties settings) {
-        super(settings);
-    }
+	public ItemRoundelBlock(Properties settings) {
+		super(settings);
+	}
 
-    @Override
-    public MapCodec<? extends ItemRoundelBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ItemRoundelBlockEntity(pos, state);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }
-
-    @Override
-    public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-        BlockHitResult hit
-    ) {
-        if (world.isClientSide) {
-            return ItemInteractionResult.SUCCESS;
-        } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof ItemRoundelBlockEntity itemRoundelBlockEntity) {
-                if (player.isShiftKeyDown() || handStack.isEmpty()) {
-                    retrieveLastStack(world, pos, player, hand, handStack, itemRoundelBlockEntity);
-                } else {
-                    inputHandStack(world, player, hand, handStack, itemRoundelBlockEntity);
-                }
-                blockEntity.setChanged();
-                itemRoundelBlockEntity.updateInClientWorld();
-            }
-            return ItemInteractionResult.CONSUME;
-        }
-    }
-
+	@Override
+	public MapCodec<? extends ItemRoundelBlock> codec() {
+		return CODEC;
+	}
+	
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new ItemRoundelBlockEntity(pos, state);
+	}
+	
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		return SHAPE;
+	}
+	
+	@Override
+	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (world.isClientSide) {
+			return ItemInteractionResult.SUCCESS;
+		} else {
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (blockEntity instanceof ItemRoundelBlockEntity itemRoundelBlockEntity) {
+				if (player.isShiftKeyDown() || handStack.isEmpty()) {
+					retrieveLastStack(world, pos, player, hand, handStack, itemRoundelBlockEntity);
+				} else {
+					inputHandStack(world, player, hand, handStack, itemRoundelBlockEntity);
+				}
+				blockEntity.setChanged();
+				itemRoundelBlockEntity.updateInClientWorld();
+			}
+			return ItemInteractionResult.CONSUME;
+		}
+	}
+	
 }

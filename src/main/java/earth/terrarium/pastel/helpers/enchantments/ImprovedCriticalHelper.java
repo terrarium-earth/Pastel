@@ -6,13 +6,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 
 public class ImprovedCriticalHelper {
-
-    public static float getAddtionalCritDamageMultiplier(int improvedCriticalLevel) {
-        return PastelCommon.CONFIG.ImprovedCriticalExtraDamageMultiplierPerLevel * improvedCriticalLevel;
-    }
-
-    public static float getAddtionalCritDamageMultiplier(HolderLookup.Provider lookup, ItemStack stack) {
-        return getAddtionalCritDamageMultiplier(Ench.getLevel(lookup, PastelEnchantments.IMPROVED_CRITICAL, stack));
-    }
-
+	
+	public static float getAddtionalCritDamageMultiplier(int improvedCriticalLevel) {
+		return PastelCommon.CONFIG.ImprovedCriticalExtraDamageMultiplierPerLevel * improvedCriticalLevel;
+	}
+	
+	public static float getAddtionalCritDamageMultiplier(HolderLookup.Provider lookup, ItemStack stack) {
+		return getAddtionalCritDamageMultiplier(Ench.getLevel(lookup, PastelEnchantments.IMPROVED_CRITICAL, stack));
+	}
+	
 }

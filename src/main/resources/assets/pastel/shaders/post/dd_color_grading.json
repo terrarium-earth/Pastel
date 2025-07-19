@@ -7,7 +7,7 @@
   ],
   "passes": [
     {
-      "name": "pastel:highlights",
+      "name":"pastel:highlights",
       "intarget": "minecraft:main",
       "outtarget": "high"
     },
@@ -19,11 +19,8 @@
       "uniforms": [
         {
           "name": "BlurDir",
-          "values": [
-            1.0,
-            0.0
-          ],
-          "RadiusMultiplier": 0.2
+          "values": [ 1.0, 0.0 ],
+          "RadiusMultiplier" : 0.2
         }
       ]
     },
@@ -35,11 +32,8 @@
       "uniforms": [
         {
           "name": "BlurDir",
-          "values": [
-            0.0,
-            1.0
-          ],
-          "RadiusMultiplier": 0.2
+          "values": [ 0.0, 1.0 ],
+          "RadiusMultiplier" : 0.2
         }
       ]
     },
@@ -51,11 +45,8 @@
       "uniforms": [
         {
           "name": "BlurDir",
-          "values": [
-            1.0,
-            0.0
-          ],
-          "RadiusMultiplier": 0.06
+          "values": [ 1.0, 0.0 ],
+          "RadiusMultiplier" : 0.06
         }
       ]
     },
@@ -67,16 +58,13 @@
       "uniforms": [
         {
           "name": "BlurDir",
-          "values": [
-            0.0,
-            1.0
-          ],
-          "RadiusMultiplier": 0.06
+          "values": [ 0.0, 1.0 ],
+          "RadiusMultiplier" : 0.06
         }
       ]
     },
     {
-      "name": "pastel:color_grading",
+      "name":"pastel:color_grading",
       "intarget": "minecraft:main",
       "outtarget": "swap",
       "auxtargets": [

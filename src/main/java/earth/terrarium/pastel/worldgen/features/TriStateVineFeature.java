@@ -28,7 +28,7 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
         var config = context.config();
 
         var floorState = world.getBlockState(origin.above());
-
+    
         if (!(floorState.is(BlockTags.DIRT) || floorState.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN)))
             return false;
 
@@ -38,14 +38,11 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
         if (!(vineBlock instanceof TriStateVineBlock))
             throw new IllegalStateException("TriStateVineFeatures must use TriStateVineBlocks!");
 
-        if (berryChance > 0 && !vineBlock.defaultBlockState()
-                                         .hasProperty(BlockStateProperties.BERRIES))
+        if (berryChance > 0 && !vineBlock.defaultBlockState().hasProperty(BlockStateProperties.BERRIES))
             throw new IllegalStateException("Attempted to generate fruits for a vine with no fruiting state!");
 
-        var minHeight = config.minHeight()
-                              .sample(random);
-        var overgrowth = config.overgrowth()
-                               .sample(random);
+        var minHeight = config.minHeight().sample(random);
+        var overgrowth = config.overgrowth().sample(random);
 
         // try out how far we can grow
         var stemHeight = 0;
@@ -64,40 +61,33 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
 
         if (stemHeight <= config.cutoff())
             return false;
-
+    
         generateStem(world, random, origin, vineBlock, stemHeight, berryChance);
         return true;
     }
-
+    
     private static boolean isReplaceable(LevelAccessor world, BlockPos pos) {
-        return world.getBlockState(pos)
-                    .isAir();
+        return world.getBlockState(pos).isAir();
     }
-
-    private void generateStem(
-        LevelAccessor world, RandomSource random, BlockPos origin, Block vineBlock, int stemHeight, float berryChance) {
+    
+    private void generateStem(LevelAccessor world, RandomSource random, BlockPos origin, Block vineBlock, int stemHeight, float berryChance) {
         var stemPointer = origin.mutable();
-        var stemState = vineBlock.defaultBlockState()
-                                 .setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.STALK);
+        var stemState = vineBlock.defaultBlockState().setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.STALK);
 
         for (int height = 0; height <= stemHeight; height++) {
             if (height == stemHeight) {
                 if (berryChance > 0 && random.nextFloat() <= berryChance) {
-                    this.setBlock(
-                        world, stemPointer,
-                        stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE)
-                                 .setValue(BlockStateProperties.BERRIES, true)
-                    );
-                } else {
-                    this.setBlock(
-                        world, stemPointer,
-                        stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE)
-                    );
+                    this.setBlock(world, stemPointer, stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE).setValue(BlockStateProperties.BERRIES, true));
                 }
-            } else {
+                else {
+                    this.setBlock(world, stemPointer, stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE));
+                }
+            }
+            else {
                 if (berryChance > 0 && random.nextFloat() <= berryChance) {
                     this.setBlock(world, stemPointer, stemState.setValue(BlockStateProperties.BERRIES, true));
-                } else {
+                }
+                else {
                     this.setBlock(world, stemPointer, stemState);
                 }
             }
@@ -105,5 +95,5 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
             stemPointer.move(Direction.DOWN);
         }
     }
-
+    
 }

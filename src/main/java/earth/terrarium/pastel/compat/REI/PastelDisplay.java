@@ -17,52 +17,44 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class PastelDisplay extends BasicDisplay implements GatedRecipeDisplay {
-
-    private final ResourceLocation requiredAdvancementIdentifier;
-    private final boolean secret;
-    private final @Nullable Component secretHintText;
-
-    // 1 input => 1 output
-    public PastelDisplay(RecipeHolder<? extends GatedRecipe<?>> recipe, Ingredient input, ItemStack output) {
-        this(
-            recipe, Collections.singletonList(EntryIngredients.ofIngredient(input)),
-            Collections.singletonList(EntryIngredients.of(output))
-        );
-    }
-
-    // n inputs => 1 output
-    public PastelDisplay(
-        RecipeHolder<? extends GatedRecipe<?>> recipe, List<EntryIngredient> inputs, ItemStack output) {
-        this(recipe, inputs, Collections.singletonList(EntryIngredients.of(output)));
-    }
-
-    // n inputs => m outputs
-    public PastelDisplay(
-        RecipeHolder<? extends GatedRecipe<?>> recipe, List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
-        super(inputs, outputs);
-        this.secret = recipe.value()
-                            .isSecret();
-        this.requiredAdvancementIdentifier = recipe.value()
-                                                   .getRequiredAdvancementIdentifier()
-                                                   .orElse(null);
-        // FIXME
-        //this.secretHintText = recipe.getSecretHintText(id);
-        this.secretHintText = null;
-    }
-
-    @Override
-    public boolean isUnlocked() {
-        Minecraft client = Minecraft.getInstance();
-        return DatabankUtils.hasAdvancement(client.player, this.requiredAdvancementIdentifier);
-    }
-
-    @Override
-    public boolean isSecret() {
-        return this.secret;
-    }
-
-    public @Nullable Component getSecretHintText() {
-        return this.secretHintText;
-    }
-
+	
+	private final ResourceLocation requiredAdvancementIdentifier;
+	private final boolean secret;
+	private final @Nullable Component secretHintText;
+	
+	// 1 input => 1 output
+	public PastelDisplay(RecipeHolder<? extends GatedRecipe<?>> recipe, Ingredient input, ItemStack output) {
+		this(recipe, Collections.singletonList(EntryIngredients.ofIngredient(input)), Collections.singletonList(EntryIngredients.of(output)));
+	}
+	
+	// n inputs => 1 output
+	public PastelDisplay(RecipeHolder<? extends GatedRecipe<?>> recipe, List<EntryIngredient> inputs, ItemStack output) {
+		this(recipe, inputs, Collections.singletonList(EntryIngredients.of(output)));
+	}
+	
+	// n inputs => m outputs
+	public PastelDisplay(RecipeHolder<? extends GatedRecipe<?>> recipe, List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+		super(inputs, outputs);
+		this.secret = recipe.value().isSecret();
+		this.requiredAdvancementIdentifier = recipe.value().getRequiredAdvancementIdentifier().orElse(null);
+		// FIXME
+		//this.secretHintText = recipe.getSecretHintText(id);
+		this.secretHintText = null;
+	}
+	
+	@Override
+	public boolean isUnlocked() {
+		Minecraft client = Minecraft.getInstance();
+		return DatabankUtils.hasAdvancement(client.player, this.requiredAdvancementIdentifier);
+	}
+	
+	@Override
+	public boolean isSecret() {
+		return this.secret;
+	}
+	
+	public @Nullable Component getSecretHintText() {
+		return this.secretHintText;
+	}
+	
 }

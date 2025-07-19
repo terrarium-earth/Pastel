@@ -18,47 +18,39 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class ExtraMiningSpeedRingItem extends InkDrainTrinketItem {
+	
+	public ExtraMiningSpeedRingItem(Properties settings) {
+		super(settings, PastelCommon.locate("unlocks/trinkets/ring_of_pursuit"), InkColors.MAGENTA);
+	}
 
-    public ExtraMiningSpeedRingItem(Properties settings) {
-        super(settings, PastelCommon.locate("unlocks/trinkets/ring_of_pursuit"), InkColors.MAGENTA);
-    }
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		tooltip.add(Component.translatable("item.pastel.ring_of_pursuit.tooltip").withStyle(ChatFormatting.GRAY));
+		super.appendHoverText(stack, context, tooltip, type);
+	}
+	
+	public static ResourceLocation MINING_SPEED_ATTRIBUTE_ID = PastelCommon.locate("ring_of_pursuit_mining_speed");
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.ring_of_pursuit.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        super.appendHoverText(stack, context, tooltip, type);
-    }
-
-    public static ResourceLocation MINING_SPEED_ATTRIBUTE_ID = PastelCommon.locate("ring_of_pursuit_mining_speed");
-
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
-        ;
-
-        FixedSingleInkStorage inkStorage = getEnergyStorage(stack);
-        long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
-        double miningSpeedMod = getExtraMiningSpeed(storedInk);
-        if (miningSpeedMod != 0) {
-            modifiers.put(
-                Attributes.MINING_EFFICIENCY, new AttributeModifier(
-                    MINING_SPEED_ATTRIBUTE_ID, miningSpeedMod,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
-            );
-        }
-
-        return modifiers;
-    }
-
-    public double getExtraMiningSpeed(long storedInk) {
-        if (storedInk < 100) {
-            return 0;
-        } else {
-            return 1 + (int) (Math.log(storedInk / 100.0f) / Math.log(8));
-        }
-    }
-
+	@Override
+	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);;
+		
+		FixedSingleInkStorage inkStorage = getEnergyStorage(stack);
+		long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
+		double miningSpeedMod = getExtraMiningSpeed(storedInk);
+		if (miningSpeedMod != 0) {
+			modifiers.put(Attributes.MINING_EFFICIENCY, new AttributeModifier(MINING_SPEED_ATTRIBUTE_ID, miningSpeedMod, AttributeModifier.Operation.ADD_VALUE));
+		}
+		
+		return modifiers;
+	}
+	
+	public double getExtraMiningSpeed(long storedInk) {
+		if (storedInk < 100) {
+			return 0;
+		} else {
+			return 1 + (int) (Math.log(storedInk / 100.0f) / Math.log(8));
+		}
+	}
+	
 }

@@ -10,14 +10,14 @@ import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.level.Level;
 
 public class PhantomFrameItem extends PastelItemFrameItem {
-
-    public PhantomFrameItem(EntityType<? extends HangingEntity> entityType, Properties settings) {
-        super(entityType, settings);
-    }
-
-    @Override
-    public ItemFrame getItemFrameEntity(Level world, BlockPos blockPos, Direction direction) {
-        return new PhantomFrameEntity(PastelEntityTypes.PHANTOM_FRAME.get(), world, blockPos, direction);
-    }
-
+	
+	public PhantomFrameItem(EntityType<? extends HangingEntity> entityType, Properties settings) {
+		super(entityType, settings);
+	}
+	
+	@Override
+	public ItemFrame getItemFrameEntity(Level world, BlockPos blockPos, Direction direction) {
+		return new PhantomFrameEntity(PastelEntityTypes.PHANTOM_FRAME.get(), world, blockPos, direction);
+	}
+	
 }

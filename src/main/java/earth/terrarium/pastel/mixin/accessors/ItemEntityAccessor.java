@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(ItemEntity.class)
 public interface ItemEntityAccessor {
-
-    @Accessor("pickupDelay")
-    int getPickupDelay();
-
+	
+	@Accessor("pickupDelay")
+	int getPickupDelay();
+	
 }

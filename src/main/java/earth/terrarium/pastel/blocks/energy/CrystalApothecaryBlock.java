@@ -31,95 +31,89 @@ import java.util.List;
 
 public class CrystalApothecaryBlock extends BaseEntityBlock {
 
-    public static final MapCodec<CrystalApothecaryBlock> CODEC = simpleCodec(CrystalApothecaryBlock::new);
+	public static final MapCodec<CrystalApothecaryBlock> CODEC = simpleCodec(CrystalApothecaryBlock::new);
 
-    public CrystalApothecaryBlock(Properties settings) {
-        super(settings);
-    }
+	public CrystalApothecaryBlock(Properties settings) {
+		super(settings);
+	}
 
-    @Override
-    public MapCodec<? extends CrystalApothecaryBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends CrystalApothecaryBlock> codec() {
+		return CODEC;
+	}
+	
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new CrystalApothecaryBlockEntity(pos, state);
+	}
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CrystalApothecaryBlockEntity(pos, state);
-    }
-
-    @Override
-    public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("block.pastel.crystal_apothecary.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-    }
-
-    @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof CrystalApothecaryBlockEntity crystalApothecaryBlockEntity) {
-            if (placer instanceof ServerPlayer serverPlayerEntity) {
-                crystalApothecaryBlockEntity.setOwner(serverPlayerEntity);
-            }
-            crystalApothecaryBlockEntity.harvestExistingClusters();
-        }
-    }
-
-    @Override
-    public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        if (world.isClientSide) {
-            return InteractionResult.SUCCESS;
-        } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CrystalApothecaryBlockEntity crystalApothecaryBlockEntity) {
-                player.openMenu(crystalApothecaryBlockEntity);
-            }
-            return InteractionResult.CONSUME;
-        }
-    }
-
-    @Override
+	@Override
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("block.pastel.crystal_apothecary.tooltip").withStyle(ChatFormatting.GRAY));
+	}
+	
+	@Override
+	public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (blockEntity instanceof CrystalApothecaryBlockEntity crystalApothecaryBlockEntity) {
+			if (placer instanceof ServerPlayer serverPlayerEntity) {
+				crystalApothecaryBlockEntity.setOwner(serverPlayerEntity);
+			}
+			crystalApothecaryBlockEntity.harvestExistingClusters();
+		}
+	}
+	
+	@Override
+	public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+		if (world.isClientSide) {
+			return InteractionResult.SUCCESS;
+		} else {
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (blockEntity instanceof CrystalApothecaryBlockEntity crystalApothecaryBlockEntity) {
+				player.openMenu(crystalApothecaryBlockEntity);
+			}
+			return InteractionResult.CONSUME;
+		}
+	}
+	
+	@Override
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
-
-    @Override
+	
+	@Override
     public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
-        return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
+		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
     }
-
-    @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
-        Containers.dropContentsOnDestroy(state, newState, world, pos);
-        super.onRemove(state, world, pos, newState, moved);
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
-
-    @Override
-    public boolean isPathfindable(BlockState state, PathComputationType type) {
-        return false;
-    }
-
-    @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(
-            type, PastelBlockEntities.CRYSTAL_APOTHECARY.get(), CrystalApothecaryBlockEntity::tick);
-    }
-
-    @Override
-    @Nullable
-    public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
-        return blockEntity instanceof CrystalApothecaryBlockEntity crystalApothecaryBlockEntity
-               ? crystalApothecaryBlockEntity.getEventListener() : null;
-    }
-
+	
+	@Override
+	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
+		Containers.dropContentsOnDestroy(state, newState, world, pos);
+		super.onRemove(state, world, pos, newState, moved);
+	}
+	
+	@Override
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.MODEL;
+	}
+	
+	@Override
+	public boolean isPathfindable(BlockState state, PathComputationType type) {
+		return false;
+	}
+	
+	@Override
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+		return createTickerHelper(type, PastelBlockEntities.CRYSTAL_APOTHECARY.get(), CrystalApothecaryBlockEntity::tick);
+	}
+	
+	@Override
+	@Nullable
+	public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
+		return blockEntity instanceof CrystalApothecaryBlockEntity crystalApothecaryBlockEntity ? crystalApothecaryBlockEntity.getEventListener() : null;
+	}
+	
 }

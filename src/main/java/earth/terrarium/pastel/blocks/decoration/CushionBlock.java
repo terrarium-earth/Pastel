@@ -27,10 +27,10 @@ public class CushionBlock extends Block {
         super(settings);
     }
 
-    @Override
-    public MapCodec<? extends CushionBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends CushionBlock> codec() {
+		return CODEC;
+	}
 
     public void updateEntityAfterFallOn(BlockGetter world, Entity entity) {
         if (entity.isSuppressingBounce()) {
@@ -53,8 +53,7 @@ public class CushionBlock extends Block {
     }
 
     @Override
-    public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         var seat = getOrCreateSeatEntity(world, pos, state);
 
         if (seat.getFirstPassenger() == null) {
@@ -73,8 +72,8 @@ public class CushionBlock extends Block {
         seat.remove(Entity.RemovalReason.DISCARDED);
         return state;
     }
-
-    @Override
+	
+	@Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
         super.onRemove(state, world, pos, newState, moved);
 
@@ -90,12 +89,12 @@ public class CushionBlock extends Block {
 
         if (seats.isEmpty()) {
             seat = new SeatEntity(world, SITTING_OFFSET);
-            var seatPos = Vec3.atLowerCornerOf(pos)
-                              .add(0.5, SITTING_OFFSET, 0.5);
+            var seatPos = Vec3.atLowerCornerOf(pos).add(0.5, SITTING_OFFSET, 0.5);
             seat.setPos(seatPos);
             seat.setCushion(state);
             world.addFreshEntity(seat);
-        } else {
+        }
+        else {
             seat = seats.getFirst();
         }
 

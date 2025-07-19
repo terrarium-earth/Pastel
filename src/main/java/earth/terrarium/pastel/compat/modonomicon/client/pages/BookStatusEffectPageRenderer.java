@@ -14,11 +14,8 @@ public class BookStatusEffectPageRenderer extends BookTextPageRenderer {
 
     public BookStatusEffectPageRenderer(BookStatusEffectPage page) {
         super(page);
-        var statusEffect = BuiltInRegistries.MOB_EFFECT.getHolder(page.getStatusEffectId())
-                                                       .orElse(null);
-        this.statusEffectSprite = Minecraft.getInstance()
-                                           .getMobEffectTextures()
-                                           .get(statusEffect);
+        var statusEffect = BuiltInRegistries.MOB_EFFECT.getHolder(page.getStatusEffectId()).orElse(null);
+        this.statusEffectSprite = Minecraft.getInstance().getMobEffectTextures().get(statusEffect);
     }
 
     @Override

@@ -17,17 +17,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CapeLayerMixin {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     private void render(
-        PoseStack poseStack,
-        MultiBufferSource buffer,
-        int packedLight,
-        AbstractClientPlayer livingEntity,
-        float limbSwing,
-        float limbSwingAmount,
-        float partialTicks,
-        float ageInTicks,
-        float netHeadYaw,
-        float headPitch,
-        CallbackInfo callbackInfo
+            PoseStack poseStack,
+            MultiBufferSource buffer,
+            int packedLight,
+            AbstractClientPlayer livingEntity,
+            float limbSwing,
+            float limbSwingAmount,
+            float partialTicks,
+            float ageInTicks,
+            float netHeadYaw,
+            float headPitch,
+            CallbackInfo callbackInfo
     ) {
         ItemStack chestStack = VanitySlotsCompat.getEquippedStack(livingEntity, EquipmentSlot.CHEST);
         if (chestStack.getItem() == PastelItems.BEDROCK_CHESTPLATE.get()) {

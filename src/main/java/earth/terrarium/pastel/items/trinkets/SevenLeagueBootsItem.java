@@ -14,54 +14,41 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 
 public class SevenLeagueBootsItem extends PastelTrinketItem {
-
-    public static final ResourceLocation MOVEMENT_SPEED_ATTRIBUTE_ID = PastelCommon.locate(
-        "seven_league_boots_movement_speed");
-    public static final ResourceLocation STEP_UP_ATTRIBUTE_ID = PastelCommon.locate("seven_league_boots_step_up");
-
-    public SevenLeagueBootsItem(Properties settings) {
-        super(settings, PastelCommon.locate("unlocks/trinkets/seven_league_boots"));
-    }
-
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
+	
+	public static final ResourceLocation MOVEMENT_SPEED_ATTRIBUTE_ID = PastelCommon.locate("seven_league_boots_movement_speed");
+	public static final ResourceLocation STEP_UP_ATTRIBUTE_ID = PastelCommon.locate("seven_league_boots_step_up");
+	
+	public SevenLeagueBootsItem(Properties settings) {
+		super(settings, PastelCommon.locate("unlocks/trinkets/seven_league_boots"));
+	}
+	
+	@Override
+	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
 
 
-        int powerLevel = slotContext.entity() != null ? Ench.getLevel(
-            slotContext.entity()
-                       .level()
-                       .registryAccess(), Enchantments.POWER, stack
-        ) : 0;
-        double speedBoost = 0.05 * (powerLevel + 1);
-        modifiers.put(
-            Attributes.MOVEMENT_SPEED, new AttributeModifier(
-                MOVEMENT_SPEED_ATTRIBUTE_ID, speedBoost,
-                AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-            )
-        );
-        modifiers.put(
-            Attributes.STEP_HEIGHT,
-            new AttributeModifier(STEP_UP_ATTRIBUTE_ID, 0.75, AttributeModifier.Operation.ADD_VALUE)
-        );
 
-        return modifiers;
-    }
-
-    @Override
-    public boolean isEnchantable(ItemStack stack) {
-        return stack.getCount() == 1;
-    }
-
-    @Override
-    public int getEnchantmentValue() {
-        return 8;
-    }
-
-    @Override
-    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER);
-    }
-
+		int powerLevel = slotContext.entity() != null ? Ench.getLevel(slotContext.entity().level().registryAccess(), Enchantments.POWER, stack) : 0;
+		double speedBoost = 0.05 * (powerLevel + 1);
+		modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(MOVEMENT_SPEED_ATTRIBUTE_ID, speedBoost, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+		modifiers.put(Attributes.STEP_HEIGHT, new AttributeModifier(STEP_UP_ATTRIBUTE_ID, 0.75, AttributeModifier.Operation.ADD_VALUE));
+		
+		return modifiers;
+	}
+	
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return stack.getCount() == 1;
+	}
+	
+	@Override
+	public int getEnchantmentValue() {
+		return 8;
+	}
+	
+	@Override
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER);
+	}
+	
 }

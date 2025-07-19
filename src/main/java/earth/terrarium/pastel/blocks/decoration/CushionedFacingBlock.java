@@ -14,12 +14,11 @@ public class CushionedFacingBlock extends PastelFacingBlock {
         super(settings);
     }
 
-    @Override
-    public MapCodec<? extends CushionedFacingBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends CushionedFacingBlock> codec() {
+		return CODEC;
+	}
 
     @Override
-    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-    }
+    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {}
 }

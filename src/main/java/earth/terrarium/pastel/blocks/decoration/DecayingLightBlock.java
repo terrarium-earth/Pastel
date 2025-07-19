@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class DecayingLightBlock extends WandLightBlock {
 
-    public static final MapCodec<DecayingLightBlock> CODEC = simpleCodec(DecayingLightBlock::new);
+	public static final MapCodec<DecayingLightBlock> CODEC = simpleCodec(DecayingLightBlock::new);
 
-    public DecayingLightBlock(Properties settings) {
-        super(settings);
-    }
+	public DecayingLightBlock(Properties settings) {
+		super(settings);
+	}
 
 //	@Override
 //	public MapCodec<? extends DecayingLightBlock> getCodec() {
@@ -24,24 +24,24 @@ public class DecayingLightBlock extends WandLightBlock {
 //		return CODEC;
 //	}
 
-    @Override
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        super.randomTick(state, world, pos, random);
-        int light = state.getValue(LightBlock.LEVEL);
-        if (light < 2) {
-            if (state.getValue(WATERLOGGED)) {
-                world.setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
-            } else {
-                world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-            }
-        } else {
-            world.setBlock(pos, state.setValue(LightBlock.LEVEL, light - 1), 3);
-        }
-    }
-
+	@Override
+	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+		return ItemStack.EMPTY;
+	}
+	
+	@Override
+	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+		super.randomTick(state, world, pos, random);
+		int light = state.getValue(LightBlock.LEVEL);
+		if (light < 2) {
+			if (state.getValue(WATERLOGGED)) {
+				world.setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
+			} else {
+				world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+			}
+		} else {
+			world.setBlock(pos, state.setValue(LightBlock.LEVEL, light - 1), 3);
+		}
+	}
+	
 }

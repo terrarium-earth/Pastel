@@ -18,11 +18,9 @@ public class PastelEquipmentEvents {
     }
 
     private static void processRazingMod(PlayerEvent.BreakSpeed event) {
-        var stack = event.getEntity()
-                         .getMainHandItem();
+        var stack = event.getEntity().getMainHandItem();
         var tool = stack.get(DataComponents.TOOL);
-        var access = event.getEntity()
-                          .registryAccess();
+        var access = event.getEntity().registryAccess();
         var state = event.getState();
 
         if (tool == null)
@@ -30,15 +28,13 @@ public class PastelEquipmentEvents {
 
         var razing = Ench.getLevel(access, PastelEnchantments.RAZING, stack);
         if (razing > 0 && tool.isCorrectForDrops(state)) {
-            float hardness = state.getBlock()
-                                  .defaultDestroyTime();
+            float hardness = state.getBlock().defaultDestroyTime();
             event.setNewSpeed((float) Math.max(1 + hardness, Math.pow(2, 1 + razing / 8F)));
         }
     }
 
     private static void processInertiaMod(PlayerEvent.BreakSpeed event) {
-        var stack = event.getEntity()
-                         .getMainHandItem();
+        var stack = event.getEntity().getMainHandItem();
         var tool = stack.get(DataComponents.TOOL);
         var player = event.getEntity();
         var level = player.level();
@@ -46,8 +42,7 @@ public class PastelEquipmentEvents {
         if (tool == null)
             return;
 
-        var access = event.getEntity()
-                          .registryAccess();
+        var access = event.getEntity().registryAccess();
         var state = event.getState();
 
         var ench = Ench.getLevel(access, PastelEnchantments.INERTIA, stack);
@@ -67,10 +62,8 @@ public class PastelEquipmentEvents {
     }
 
     private static void processInexorable(PlayerEvent.BreakSpeed event) {
-        var stack = event.getEntity()
-                         .getMainHandItem();
-        var access = event.getEntity()
-                          .registryAccess();
+        var stack = event.getEntity().getMainHandItem();
+        var access = event.getEntity().registryAccess();
         var state = event.getState();
         var tool = stack.get(DataComponents.TOOL);
 

@@ -10,11 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 
-public class BookAnvilCrushingPageRenderer
-    extends BookGatedRecipePageRenderer<AnvilCrushingRecipe, BookGatedRecipePage<AnvilCrushingRecipe>> {
+public class BookAnvilCrushingPageRenderer extends BookGatedRecipePageRenderer<AnvilCrushingRecipe, BookGatedRecipePage<AnvilCrushingRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/container/anvil_crushing.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/container/anvil_crushing.png");
 
     public BookAnvilCrushingPageRenderer(BookGatedRecipePage<AnvilCrushingRecipe> page) {
         super(page);
@@ -26,10 +24,7 @@ public class BookAnvilCrushingPageRenderer
     }
 
     @Override
-    protected void drawRecipe(
-        GuiGraphics drawContext, RecipeHolder<AnvilCrushingRecipe> recipeEntry, int recipeX, int recipeY, int mouseX,
-        int mouseY, boolean second
-    ) {
+    protected void drawRecipe(GuiGraphics drawContext, RecipeHolder<AnvilCrushingRecipe> recipeEntry, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
         AnvilCrushingRecipe recipe = recipeEntry.value();
         Level world = Minecraft.getInstance().level;
         if (world == null) return;
@@ -40,17 +35,13 @@ public class BookAnvilCrushingPageRenderer
         renderTitle(drawContext, recipeY, second);
 
         // the ingredients
-        parentScreen.renderIngredient(
-            drawContext, recipeX + 16, recipeY + 35, mouseX, mouseY, recipe.getIngredients()
-                                                                           .getFirst()
-        );
+        parentScreen.renderIngredient(drawContext, recipeX + 16, recipeY + 35, mouseX, mouseY, recipe.getIngredients().getFirst());
 
         // the anvil
         parentScreen.renderItemStack(drawContext, recipeX + 16, recipeY + 15, mouseX, mouseY, recipe.getToastSymbol());
 
         // the output
-        parentScreen.renderItemStack(
-            drawContext, recipeX + 64, recipeY + 29, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
+        parentScreen.renderItemStack(drawContext, recipeX + 64, recipeY + 29, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
     }
 
 }

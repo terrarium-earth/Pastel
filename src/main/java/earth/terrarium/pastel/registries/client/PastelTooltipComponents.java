@@ -12,11 +12,11 @@ import net.neoforged.neoforge.client.event.*;
 
 @OnlyIn(Dist.CLIENT)
 public class PastelTooltipComponents {
-
-    public static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
-        event.register(CraftingTabletTooltipData.class, CraftingTabletTooltipComponent::new);
-        event.register(ItemStorageTooltipData.class, BottomlessBundleTooltipComponent::new);
-        event.register(PresentTooltipData.class, PresentTooltipComponent::new);
-    }
-
+	
+	public static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
+		event.register(CraftingTabletTooltipData.class, CraftingTabletTooltipComponent::new);
+		event.register(ItemStorageTooltipData.class, BottomlessBundleTooltipComponent::new);
+		event.register(PresentTooltipData.class, PresentTooltipComponent::new);
+	}
+	
 }

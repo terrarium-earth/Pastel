@@ -14,20 +14,20 @@ import java.util.function.Supplier;
  * <p>Recipes that use this serializer do not transport any data over the network, besides their ID.
  */
 public class EmptyRecipeSerializer<T extends Recipe<?>> implements RecipeSerializer<T> {
-    private final Supplier<T> instance;
+	private final Supplier<T> instance;
 
-    public EmptyRecipeSerializer(Supplier<T> factory) {
-        this.instance = Suppliers.memoize(factory::get);
-    }
-
-    @Override
-    public MapCodec<T> codec() {
-        return MapCodec.unit(instance);
-    }
-
-    @Override
-    public StreamCodec<RegistryFriendlyByteBuf, T> streamCodec() {
-        return StreamCodec.unit(instance.get());
-    }
-
+	public EmptyRecipeSerializer(Supplier<T> factory) {
+		this.instance = Suppliers.memoize(factory::get);
+	}
+	
+	@Override
+	public MapCodec<T> codec() {
+		return MapCodec.unit(instance);
+	}
+	
+	@Override
+	public StreamCodec<RegistryFriendlyByteBuf, T> streamCodec() {
+		return StreamCodec.unit(instance.get());
+	}
+	
 }

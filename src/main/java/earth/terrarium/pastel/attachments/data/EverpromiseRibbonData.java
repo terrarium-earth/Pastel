@@ -11,40 +11,36 @@ import net.neoforged.neoforge.network.handling.*;
 import java.util.*;
 
 public class EverpromiseRibbonData {
+	
+	public static final AttachmentType<Boolean> ATTACHMENT =
+			AttachmentType.builder(() -> false).serialize(Codec.BOOL).build();
+	
+	public static void attachRibbon(LivingEntity livingEntity) {
+		livingEntity.setData(ATTACHMENT, true);
+	}
+	
+	public static boolean hasRibbon(LivingEntity livingEntity) {
+		return livingEntity.getData(ATTACHMENT);
+	}
 
-    public static final AttachmentType<Boolean> ATTACHMENT =
-        AttachmentType.builder(() -> false)
-                      .serialize(Codec.BOOL)
-                      .build();
+	public record Payload(int entityId, boolean ribbon) implements CustomPacketPayload {
 
-    public static void attachRibbon(LivingEntity livingEntity) {
-        livingEntity.setData(ATTACHMENT, true);
-    }
+		public static final StreamCodec<FriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
+				ByteBufCodecs.INT, Payload::entityId,
+				ByteBufCodecs.BOOL, Payload::ribbon,
+				Payload::new
+		);
 
-    public static boolean hasRibbon(LivingEntity livingEntity) {
-        return livingEntity.getData(ATTACHMENT);
-    }
+		public static final Type<Payload> TYPE = AttachmentUtil.create("ribbon");
 
-    public record Payload(int entityId, boolean ribbon) implements CustomPacketPayload {
+		public static void execute(Payload payload, IPayloadContext context) {
+			var level = context.player().level();
+			Optional.ofNullable(level.getEntity(payload.entityId)).ifPresent(e -> e.setData(ATTACHMENT, payload.ribbon));
+		}
 
-        public static final StreamCodec<FriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
-            ByteBufCodecs.INT, Payload::entityId,
-            ByteBufCodecs.BOOL, Payload::ribbon,
-            Payload::new
-        );
-
-        public static final Type<Payload> TYPE = AttachmentUtil.create("ribbon");
-
-        public static void execute(Payload payload, IPayloadContext context) {
-            var level = context.player()
-                               .level();
-            Optional.ofNullable(level.getEntity(payload.entityId))
-                    .ifPresent(e -> e.setData(ATTACHMENT, payload.ribbon));
-        }
-
-        @Override
-        public Type<? extends CustomPacketPayload> type() {
-            return TYPE;
-        }
-    }
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
 }

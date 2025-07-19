@@ -12,18 +12,14 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @OnlyIn(Dist.CLIENT)
 @Mixin(DimensionType.class)
 public abstract class DimensionTypeMixin {
-
-    @ModifyArg(method = "timeOfDay", at = @At(value = "INVOKE", target = "Ljava/util/OptionalLong;orElse(J)J"))
-    private long getLerpedSkyAngle(long time) {
-        if (!Minecraft.getInstance()
-                      .isPaused() && PastelClient.skyLerper.isActive((DimensionType) (Object) this)) {
-            return PastelClient.skyLerper.tickLerp(time, Minecraft.getInstance()
-                                                                  .getTimer()
-                                                                  .getGameTimeDeltaPartialTick(false)
-            );
-        } else {
-            return time;
-        }
-    }
-
+	
+	@ModifyArg(method = "timeOfDay", at = @At(value = "INVOKE", target = "Ljava/util/OptionalLong;orElse(J)J"))
+	private long getLerpedSkyAngle(long time) {
+		if (!Minecraft.getInstance().isPaused() && PastelClient.skyLerper.isActive((DimensionType) (Object) this)) {
+			return PastelClient.skyLerper.tickLerp(time, Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false));
+		} else {
+			return time;
+		}
+	}
+	
 }

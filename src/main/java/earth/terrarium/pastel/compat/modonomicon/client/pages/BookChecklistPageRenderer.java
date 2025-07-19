@@ -29,20 +29,14 @@ public class BookChecklistPageRenderer extends BookTextPageRenderer {
         super.onBeginDisplayPage(parentScreen, left, top);
 
         List<MutableComponent> renderedTexts = renderedText.getRenderedText();
-
-        ResourceLocation font = BookDataManager.Client.get()
-                                                      .safeFont(this.page.getBook()
-                                                                         .getFont());
-
+        
+        ResourceLocation font = BookDataManager.Client.get().safeFont(this.page.getBook().getFont());
+        
         int i = 0;
-        for (Map.Entry<ResourceLocation, BookTextHolder> entry : checklistPage.getChecklist()
-                                                                              .entrySet()) {
+        for (Map.Entry<ResourceLocation, BookTextHolder> entry : checklistPage.getChecklist().entrySet()) {
             boolean hasAchievement = DatabankUtils.hasAdvancementClient(entry.getKey());
-            renderedTexts.get(i)
-                         .withStyle(Style.EMPTY.withStrikethrough(hasAchievement)
-                                               .withFont(font));
-            List<Component> siblings = renderedTexts.get(i)
-                                                    .getSiblings();
+            renderedTexts.get(i).withStyle(Style.EMPTY.withStrikethrough(hasAchievement).withFont(font));
+            List<Component> siblings = renderedTexts.get(i).getSiblings();
             siblings.removeLast();
             siblings.add(Component.literal(hasAchievement ? " ✔" : ""));
             i++;

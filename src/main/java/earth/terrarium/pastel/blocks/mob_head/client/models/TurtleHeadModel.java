@@ -21,15 +21,13 @@ public class TurtleHeadModel extends PastelSkullModel {
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-
+        
         modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(3, 0)
-                           .addBox(-3.0F, -5.0F, -3.0F, 6.0F, 5.0F, 6.0F),
-            PartPose.ZERO
+                PartNames.HEAD,
+                CubeListBuilder.create().texOffs(3, 0).addBox(-3.0F, -5.0F, -3.0F, 6.0F, 5.0F, 6.0F),
+                PartPose.ZERO
         );
-
+    
         return LayerDefinition.create(modelData, 128, 64);
     }
 

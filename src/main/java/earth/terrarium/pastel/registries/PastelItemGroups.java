@@ -27,2510 +27,1528 @@ import java.util.Map;
 
 public class PastelItemGroups {
 
-    public static final ResourceLocation INSTRUMENTS_ID = PastelCommon.locate("instruments");
-    public static final ResourceLocation TOOLS_ID = PastelCommon.locate("tools");
-    public static final ResourceLocation NATURAL_BLOCKS_ID = PastelCommon.locate("natural_blocks");
-    public static final ResourceLocation CUISINE_ID = PastelCommon.locate("cuisine");
-    public static final ResourceLocation RESOURCES_ID = PastelCommon.locate("resources");
-    public static final ResourceLocation DECORATION_ID = PastelCommon.locate("decoration");
-    public static final ResourceLocation HEADS_ID = PastelCommon.locate("heads");
-
-    public static void register(IEventBus bus) {
-        var register = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PastelCommon.MOD_ID);
-
-        // TODO make the tabs appear ingame in this order
-        register.register(INSTRUMENTS_ID.getPath(), () -> INSTRUMENTS);
-        register.register(TOOLS_ID.getPath(), () -> TOOLS);
-        register.register(NATURAL_BLOCKS_ID.getPath(), () -> NATURAL_BLOCKS);
-        register.register(CUISINE_ID.getPath(), () -> CUISINE);
-        register.register(RESOURCES_ID.getPath(), () -> RESOURCES);
-        register.register(DECORATION_ID.getPath(), () -> DECORATION);
-        register.register(HEADS_ID.getPath(), () -> HEADS);
-        register.register(bus);
-    }
-
-    public static void registerSpawnEggs(BuildCreativeModeTabContentsEvent event) {
-        if (!event.getTabKey()
-                  .equals(CreativeModeTabs.SPAWN_EGGS))
-            return;
-
-        event.accept(
-            PastelItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(
-            PastelItems.PRESERVATION_TURRET_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(PastelItems.KINDLING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(PastelItems.LIZARD_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(PastelItems.ERASER_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(PastelItems.BUCKET_OF_ERASER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-    }
-
-    public static final CreativeModeTab INSTRUMENTS = CreativeModeTab.builder()
-                                                                     .icon(PastelBlocks.PEDESTAL_BASIC_TOPAZ::toStack)
-                                                                     .title(Component.translatable(
-                                                                         "itemGroup.pastel.instruments"))
-                                                                     .displayItems((displayContext, entries) -> {
-                                                                         entries.accept(
-                                                                             PastelBlocks.PEDESTAL_BASIC_TOPAZ.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PEDESTAL_BASIC_AMETHYST.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PEDESTAL_BASIC_CITRINE.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PEDESTAL_ALL_BASIC.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PEDESTAL_ONYX.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PEDESTAL_MOONSTONE.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.FUSION_SHRINE_BASALT.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.FUSION_SHRINE_CALCITE.get());
-                                                                         entries.accept(PastelBlocks.ENCHANTER.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ITEM_BOWL_BASALT.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ITEM_BOWL_CALCITE.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ITEM_ROUNDEL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.POTION_WORKSHOP.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.SPIRIT_INSTILLER.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.CRYSTALLARIEUM.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.CINDERHEARTH.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.CRYSTAL_APOTHECARY.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.COLOR_PICKER.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_SPEED.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_SPEED2.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_SPEED3.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_EFFICIENCY.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_EFFICIENCY2.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_YIELD.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_YIELD2.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_EXPERIENCE.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UPGRADE_EXPERIENCE2.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.CONNECTION_NODE.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PROVIDER_NODE.get());
-                                                                         entries.accept(PastelBlocks.SENDER_NODE.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.STORAGE_NODE.get());
-                                                                         entries.accept(PastelBlocks.BUFFER_NODE.get());
-                                                                         entries.accept(PastelBlocks.GATHER_NODE.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.LIGHT_LEVEL_DETECTOR.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.WEATHER_DETECTOR.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ITEM_DETECTOR.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PLAYER_DETECTOR.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.CREATURE_DETECTOR.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.REDSTONE_TIMER.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.REDSTONE_CALCULATOR.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.REDSTONE_TRANSCEIVER.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.REDSTONE_SAND.get());
-                                                                         entries.accept(PastelBlocks.ENDER_GLASS.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.BLOCK_DETECTOR.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.BLOCK_PLACER.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.BLOCK_BREAKER.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.HEARTBOUND_CHEST.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.COMPACTING_CHEST.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.FABRICATION_CHEST.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.BLACK_HOLE_CHEST.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.ENDER_HOPPER.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ENDER_DROPPER.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.PARTICLE_SPAWNER.get());
-
-                                                                         entries.accept(BuiltInRegistries.BLOCK.get(
-                                                                             PastelBlocks.GLISTERING_MELON)); // ???
-                                                                         entries.accept(PastelBlocks.LAVA_SPONGE.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.WET_LAVA_SPONGE.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ETHEREAL_PLATFORM.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.UNIVERSE_SPYHOLE.get());
-                                                                         entries.accept(PastelBlocks.PRESENT.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.TITRATION_BARREL.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.INCANDESCENT_AMALGAM.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.BEDROCK_ANVIL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.CRACKED_END_PORTAL_FRAME.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.SEMI_PERMEABLE_GLASS.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.RADIANT_SEMI_PERMEABLE_GLASS.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.TOPAZ_SEMI_PERMEABLE_GLASS.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.AMETHYST_SEMI_PERMEABLE_GLASS.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.CITRINE_SEMI_PERMEABLE_GLASS.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ONYX_SEMI_PERMEABLE_GLASS.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.MOONSTONE_SEMI_PERMEABLE_GLASS.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.AXOLOTL_IDOL.get());
-                                                                         entries.accept(PastelBlocks.BAT_IDOL.get());
-                                                                         entries.accept(PastelBlocks.BEE_IDOL.get());
-                                                                         entries.accept(PastelBlocks.BLAZE_IDOL.get());
-                                                                         entries.accept(PastelBlocks.CAT_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.CHICKEN_IDOL.get());
-                                                                         entries.accept(PastelBlocks.COW_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.CREEPER_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ENDER_DRAGON_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ENDERMAN_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ENDERMITE_IDOL.get());
-                                                                         entries.accept(PastelBlocks.EVOKER_IDOL.get());
-                                                                         entries.accept(PastelBlocks.FISH_IDOL.get());
-                                                                         entries.accept(PastelBlocks.FOX_IDOL.get());
-                                                                         entries.accept(PastelBlocks.GHAST_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.GLOW_SQUID_IDOL.get());
-                                                                         entries.accept(PastelBlocks.GOAT_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.GUARDIAN_IDOL.get());
-                                                                         entries.accept(PastelBlocks.HORSE_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.ILLUSIONER_IDOL.get());
-                                                                         entries.accept(PastelBlocks.OCELOT_IDOL.get());
-                                                                         entries.accept(PastelBlocks.PARROT_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PHANTOM_IDOL.get());
-                                                                         entries.accept(PastelBlocks.PIG_IDOL.get());
-                                                                         entries.accept(PastelBlocks.PIGLIN_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.POLAR_BEAR_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.PUFFERFISH_IDOL.get());
-                                                                         entries.accept(PastelBlocks.RABBIT_IDOL.get());
-                                                                         entries.accept(PastelBlocks.SHEEP_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.SHULKER_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.SILVERFISH_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.SKELETON_IDOL.get());
-                                                                         entries.accept(PastelBlocks.SLIME_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.SNOW_GOLEM_IDOL.get());
-                                                                         entries.accept(PastelBlocks.SPIDER_IDOL.get());
-                                                                         entries.accept(PastelBlocks.SQUID_IDOL.get());
-                                                                         entries.accept(PastelBlocks.STRAY_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.STRIDER_IDOL.get());
-                                                                         entries.accept(PastelBlocks.TURTLE_IDOL.get());
-                                                                         entries.accept(PastelBlocks.WITCH_IDOL.get());
-                                                                         entries.accept(PastelBlocks.WITHER_IDOL.get());
-                                                                         entries.accept(
-                                                                             PastelBlocks.WITHER_SKELETON_IDOL.get());
-                                                                         entries.accept(PastelBlocks.ZOMBIE_IDOL.get());
-
-                                                                         // CREATIVE
-                                                                         entries.accept(
-                                                                             PastelItems.PEDESTAL_TIER_1_STRUCTURE_PLACER.get());
-                                                                         entries.accept(
-                                                                             PastelItems.PEDESTAL_TIER_2_STRUCTURE_PLACER.get());
-                                                                         entries.accept(
-                                                                             PastelItems.PEDESTAL_TIER_3_STRUCTURE_PLACER.get());
-                                                                         entries.accept(
-                                                                             PastelItems.FUSION_SHRINE_STRUCTURE_PLACER.get());
-                                                                         entries.accept(
-                                                                             PastelItems.ENCHANTER_STRUCTURE_PLACER.get());
-                                                                         entries.accept(
-                                                                             PastelItems.SPIRIT_INSTILLER_STRUCTURE_PLACER.get());
-                                                                         entries.accept(
-                                                                             PastelItems.CINDERHEARTH_STRUCTURE_PLACER.get());
-
-                                                                         entries.accept(
-                                                                             PastelBlocks.CREATIVE_PARTICLE_SPAWNER.get());
-                                                                     })
-                                                                     .build();
-
-    public static final CreativeModeTab TOOLS = CreativeModeTab.builder()
-                                                               .icon(PastelItems.PAINTBRUSH::toStack)
-                                                               .title(Component.translatable("itemGroup.pastel.tools"))
-                                                               .displayItems((displayContext, entries) -> {
-                                                                   HolderLookup.Provider lookup
-                                                                       = displayContext.holders();
-
-                                                                   // MAJOR TOOLS
-                                                                   entries.accept(PastelItems.GUIDEBOOK.get());
-                                                                   entries.accept(PastelItems.PAINTBRUSH.get());
-                                                                   entries.accept(PastelItems.TUNING_STAMP.get());
-                                                                   entries.accept(PastelItems.MYSTERIOUS_LOCKET.get());
-                                                                   entries.accept(PastelItems.MYSTERIOUS_COMPASS.get());
-
-                                                                   // MISC
-                                                                   entries.accept(PastelItems.BOTTLE_OF_FADING.get());
-                                                                   entries.accept(PastelItems.BOTTLE_OF_FAILING.get());
-                                                                   entries.accept(PastelItems.BOTTLE_OF_RUIN.get());
-                                                                   entries.accept(
-                                                                       PastelItems.BOTTLE_OF_FORFEITURE.get());
-                                                                   entries.accept(
-                                                                       PastelItems.BOTTLE_OF_DECAY_AWAY.get());
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.MULTITOOL.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.TENDER_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.LUCKY_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.RAZOR_FALCHION.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.OBLIVION_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.RESONANT_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup,
-                                                                       PastelItems.DRAGONRENDING_PICKAXE.get()
-                                                                   ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.LAGOON_ROD.get()));
-                                                                   entries.accept(PastelItems.MOLTEN_ROD.get());
-                                                                   entries.accept(PastelItems.FETCHLING_HELMET.get());
-                                                                   entries.accept(
-                                                                       PastelItems.FEROCIOUS_CHESTPLATE.get());
-                                                                   entries.accept(PastelItems.SYLPH_LEGGINGS.get());
-                                                                   entries.accept(PastelItems.OREAD_BOOTS.get());
-
-                                                                   // BEDROCK TOOLS
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_AXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_SHOVEL.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_SWORD.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_HOE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_BOW.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_CROSSBOW.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_SHEARS.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_FISHING_ROD.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_HELMET.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_CHESTPLATE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_LEGGINGS.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_BOOTS.get()));
-
-                                                                   // MALACHITE & GLASS CREST
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.MALACHITE_WORKSTAFF.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup,
-                                                                       PastelItems.MALACHITE_ULTRA_GREATSWORD.get()
-                                                                   ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.MALACHITE_CROSSBOW.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.MALACHITE_BIDENT.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup,
-                                                                       PastelItems.GLASS_CREST_WORKSTAFF.get()
-                                                                   ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup,
-                                                                       PastelItems.GLASS_CREST_ULTRA_GREATSWORD.get()
-                                                                   ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup,
-                                                                       PastelItems.FEROCIOUS_GLASS_CREST_BIDENT.get()
-                                                                   ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup,
-                                                                       PastelItems.FRACTAL_GLASS_CREST_BIDENT.get()
-                                                                   ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.GLASS_CREST_CROSSBOW.get()));
-                                                                   entries.accept(PastelItems.OMNI_ACCELERATOR.get());
-                                                                   entries.accept(
-                                                                       PastelItems.MALACHITE_GLASS_ARROW.get());
-                                                                   entries.accept(PastelItems.TOPAZ_GLASS_ARROW.get());
-                                                                   entries.accept(
-                                                                       PastelItems.AMETHYST_GLASS_ARROW.get());
-                                                                   entries.accept(
-                                                                       PastelItems.CITRINE_GLASS_ARROW.get());
-                                                                   entries.accept(PastelItems.ONYX_GLASS_ARROW.get());
-                                                                   entries.accept(
-                                                                       PastelItems.MOONSTONE_GLASS_ARROW.get());
-                                                                   entries.accept(
-                                                                       PastelItems.AZURITE_GLASS_AMPOULE.get());
-                                                                   entries.accept(
-                                                                       PastelItems.MALACHITE_GLASS_AMPOULE.get());
-                                                                   entries.accept(
-                                                                       PastelItems.BLOODSTONE_GLASS_AMPOULE.get());
-
-                                                                   // LEGENDARY WEAPONS
-                                                                   entries.accept(PastelItems.DREAMFLAYER.get());
-                                                                   entries.accept(PastelItems.NIGHTFALLS_BLADE.get());
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.DRACONIC_TWINSWORD.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.DRAGON_TALON.get()));
-                                                                   entries.accept(PastelItems.KNOTTED_SWORD.get());
-                                                                   entries.accept(PastelItems.NECTAR_LANCE.get());
-
-                                                                   // CURIOS
-                                                                   entries.accept(PastelItems.FANCIFUL_TUFF_RING.get());
-                                                                   entries.accept(PastelItems.FANCIFUL_BELT.get());
-                                                                   entries.accept(PastelItems.FANCIFUL_PENDANT.get());
-                                                                   entries.accept(PastelItems.FANCIFUL_CIRCLET.get());
-                                                                   entries.accept(PastelItems.FANCIFUL_GLOVES.get());
-                                                                   entries.accept(
-                                                                       PastelItems.FANCIFUL_BISMUTH_RING.get());
-                                                                   entries.accept(
-                                                                       PastelItems.GLOW_VISION_GOGGLES.get());
-                                                                   entries.accept(PastelItems.JEOPARDANT.get());
-                                                                   entries.accept(PastelItems.SEVEN_LEAGUE_BOOTS.get());
-                                                                   entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.SEVEN_LEAGUE_BOOTS.get(),
-                                                                       Map.of(
-                                                                           Enchantments.POWER, 5)
-                                                                   ));
-                                                                   entries.accept(PastelItems.COTTON_CLOUD_BOOTS.get());
-                                                                   entries.accept(PastelItems.RADIANCE_PIN.get());
-                                                                   entries.accept(PastelItems.TOTEM_PENDANT.get());
-                                                                   entries.accept(PastelItems.TAKE_OFF_BELT.get());
-                                                                   entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.TAKE_OFF_BELT.get(), Map.of(
-                                                                           Enchantments.POWER, 5,
-                                                                           Enchantments.FEATHER_FALLING, 4
-                                                                       )
-                                                                   ));
-                                                                   entries.accept(PastelItems.AZURE_DIKE_BELT.get());
-                                                                   entries.accept(PastelItems.AZURE_DIKE_RING.get());
-                                                                   entries.accept(PastelItems.SHIELDGRASP_AMULET.get());
-                                                                   entries.accept(PastelItems.SHIELDGRASP_AMULET.get()
-                                                                                                                .getFullStack());
-                                                                   entries.accept(
-                                                                       PastelItems.HEARTSINGERS_REWARD.get());
-                                                                   entries.accept(PastelItems.HEARTSINGERS_REWARD.get()
-                                                                                                                 .getFullStack());
-                                                                   entries.accept(
-                                                                       PastelItems.GLOVES_OF_DAWNS_GRASP.get());
-                                                                   entries.accept(
-                                                                       PastelItems.GLOVES_OF_DAWNS_GRASP.get()
-                                                                                                        .getFullStack());
-                                                                   entries.accept(PastelItems.RING_OF_PURSUIT.get());
-                                                                   entries.accept(PastelItems.RING_OF_PURSUIT.get()
-                                                                                                             .getFullStack());
-                                                                   entries.accept(
-                                                                       PastelItems.RING_OF_DENSER_STEPS.get());
-                                                                   entries.accept(PastelItems.RING_OF_DENSER_STEPS.get()
-                                                                                                                  .getFullStack());
-                                                                   entries.accept(
-                                                                       PastelItems.RING_OF_AERIAL_GRACE.get());
-                                                                   entries.accept(PastelItems.RING_OF_AERIAL_GRACE.get()
-                                                                                                                  .getFullStack());
-                                                                   entries.accept(
-                                                                       PastelItems.LAURELS_OF_SERENITY.get());
-                                                                   entries.accept(PastelItems.LAURELS_OF_SERENITY.get()
-                                                                                                                 .getFullStack());
-                                                                   entries.accept(PastelItems.GLEAMING_PIN.get());
-                                                                   entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.GLEAMING_PIN.get(), Map.of(
-                                                                           PastelEnchantments.SNIPING, 2)
-                                                                   ));
-                                                                   entries.accept(
-                                                                       PastelItems.LESSER_POTION_PENDANT.get());
-                                                                   entries.accept(
-                                                                       PastelItems.GREATER_POTION_PENDANT.get());
-                                                                   entries.accept(PastelItems.ASHEN_CIRCLET.get());
-                                                                   entries.accept(PastelItems.WEEPING_CIRCLET.get());
-                                                                   entries.accept(PastelItems.PUFF_CIRCLET.get());
-                                                                   entries.accept(PastelItems.WHISPY_CIRCLET.get());
-                                                                   entries.accept(
-                                                                       PastelItems.AZURESQUE_DIKE_CORE.get());
-                                                                   entries.accept(
-                                                                       PastelItems.CIRCLET_OF_ARROGANCE.get());
-                                                                   entries.accept(
-                                                                       PastelItems.AETHER_GRACED_NECTAR_GLOVES.get());
-
-                                                                   // NEAT RING (very important to subcategorize)
-                                                                   entries.accept(PastelItems.NEAT_RING.get());
-
-                                                                   // OTHER
-                                                                   entries.accept(PastelItems.CRAFTING_TABLET.get());
-                                                                   entries.accept(PastelBlocks.BOTTOMLESS_BUNDLE.get());
-                                                                   entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelBlocks.BOTTOMLESS_BUNDLE.get()
-                                                                                                             .asItem(),
-                                                                       Map.of(
-                                                                           Enchantments.POWER, 5,
-                                                                           PastelEnchantments.VOIDING, 1
-                                                                       )
-                                                                   ));
-
-                                                                   entries.accept(PastelItems.KNOWLEDGE_GEM.get());
-                                                                   ItemStack enchantedKnowledgeGemStack
-                                                                       = Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.KNOWLEDGE_GEM.get()
-                                                                                                        .asItem(),
-                                                                       Map.of(
-                                                                           Enchantments.EFFICIENCY, 5,
-                                                                           Enchantments.QUICK_CHARGE, 3
-                                                                       )
-                                                                   );
-                                                                   entries.accept(enchantedKnowledgeGemStack.copy());
-
-                                                                   ItemStack knowledgeGemStack
-                                                                       = PastelItems.KNOWLEDGE_GEM.get()
-                                                                                                  .getDefaultInstance();
-                                                                   var storage = knowledgeGemStack.getCapability(
-                                                                       PastelCapabilities.Misc.XP, lookup);
-                                                                   storage.insert(storage.getCapacity(), false);
-                                                                   entries.accept(knowledgeGemStack);
-
-                                                                   var otherStorage
-                                                                       = enchantedKnowledgeGemStack.getCapability(
-                                                                       PastelCapabilities.Misc.XP, lookup);
-                                                                   otherStorage.insert(
-                                                                       otherStorage.getCapacity(), false);
-                                                                   entries.accept(enchantedKnowledgeGemStack);
-
-                                                                   entries.accept(
-                                                                       PastelItems.CELESTIAL_POCKETWATCH.get());
-                                                                   entries.accept(PastelItems.GILDED_BOOK.get());
-                                                                   entries.accept(PastelItems.ENCHANTMENT_CANVAS.get());
-                                                                   entries.accept(PastelItems.NIGHT_SALTS.get());
-                                                                   entries.accept(PastelItems.SOOTHING_BOUQUET.get());
-                                                                   entries.accept(PastelItems.CONCEALING_OILS.get());
-                                                                   entries.accept(PastelItems.BITTER_OILS.get());
-                                                                   entries.accept(PastelItems.EVERPROMISE_RIBBON.get());
-                                                                   entries.accept(PastelItems.BAG_OF_HOLDING.get());
-                                                                   entries.accept(PastelItems.RADIANCE_STAFF.get());
-                                                                   entries.accept(PastelItems.NATURES_STAFF.get());
-                                                                   entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.NATURES_STAFF.get(), Map.of(
-                                                                           Enchantments.EFFICIENCY, 5)
-                                                                   ));
-                                                                   entries.accept(
-                                                                       PastelItems.STAFF_OF_REMEMBRANCE.get());
-                                                                   entries.accept(PastelItems.CONSTRUCTORS_STAFF.get());
-                                                                   entries.accept(PastelItems.EXCHANGING_STAFF.get());
-                                                                   Ench.addOrUpgradeEnchantmentOpt(
-                                                                           lookup, PastelItems.EXCHANGING_STAFF.get()
-                                                                                                               .getDefaultInstance(),
-                                                                           Enchantments.FORTUNE, 3, false, false
-                                                                       )
-                                                                       .ifPresent(entries::accept);
-                                                                   Ench.addOrUpgradeEnchantmentOpt(
-                                                                           lookup, PastelItems.EXCHANGING_STAFF.get()
-                                                                                                               .getDefaultInstance(),
-                                                                           Enchantments.SILK_TOUCH, 1, false, false
-                                                                       )
-                                                                       .ifPresent(entries::accept);
-                                                                   Ench.addOrUpgradeEnchantmentOpt(
-                                                                           lookup, PastelItems.EXCHANGING_STAFF.get()
-                                                                                                               .getDefaultInstance(),
-                                                                           PastelEnchantments.RESONANCE, 1, false, false
-                                                                       )
-                                                                       .ifPresent(entries::accept);
-                                                                   entries.accept(PastelItems.BLOCK_FLOODER.get());
-                                                                   entries.accept(PastelItems.ENDER_SPLICE.get());
-                                                                   entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.ENDER_SPLICE.get(), Map.of(
-                                                                           PastelEnchantments.RESONANCE, 1,
-                                                                           PastelEnchantments.INDESTRUCTIBLE, 1
-                                                                       )
-                                                                   ));
-                                                                   entries.accept(PastelItems.PERTURBED_EYE.get());
-                                                                   entries.accept(PastelItems.PIPE_BOMB.get());
-                                                                   entries.accept(PastelItems.CRESCENT_CLOCK.get());
-                                                                   entries.accept(PastelItems.ARTISANS_ATLAS.get());
-
-                                                                   entries.accept(
-                                                                       PastelItems.MUSIC_DISC_DISCOVERY.get());
-                                                                   entries.accept(PastelItems.MUSIC_DISC_CREDITS.get());
-                                                                   entries.accept(
-                                                                       PastelItems.MUSIC_DISC_DIVINITY.get());
-
-                                                                   // INK TOOLS
-                                                                   entries.accept(PastelItems.INK_FLASK.get());
-                                                                   for (InkColor color : InkColors.all()) {
-                                                                       entries.accept(PastelItems.INK_FLASK.get()
-                                                                                                           .getFullStack(
-                                                                                                               color));
-                                                                   }
-                                                                   entries.accept(PastelItems.INK_ASSORTMENT.get());
-                                                                   entries.accept(PastelItems.INK_ASSORTMENT.get()
-                                                                                                            .getFullStack());
-                                                                   entries.accept(PastelItems.PIGMENT_PALETTE.get());
-                                                                   entries.accept(PastelItems.PIGMENT_PALETTE.get()
-                                                                                                             .getFullStack());
-                                                                   entries.accept(PastelItems.ARTISTS_PALETTE.get());
-                                                                   entries.accept(PastelItems.ARTISTS_PALETTE.get()
-                                                                                                             .getFullStack());
-
-                                                                   // CREATIVE TOOLS
-                                                                   entries.accept(
-                                                                       PastelItems.CREATIVE_INK_ASSORTMENT.get());
-                                                                   entries.accept(PastelItems.PRIMORDIAL_LIGHTER.get());
-                                                                   entries.accept(PastelItems.DIVINATION_HEART.get());
-                                                               })
-                                                               .build();
-
-    public static final CreativeModeTab NATURAL_BLOCKS = CreativeModeTab.builder()
-                                                                        .icon(PastelBlocks.WEEPING_GALA_SPRIG::toStack)
-                                                                        .title(Component.translatable(
-                                                                            "itemGroup.pastel.natural_blocks"))
-                                                                        .displayItems((displayContext, entries) -> {
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_WALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.COBBLED_BLACKSLAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.COBBLED_BLACKSLAG_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.COBBLED_BLACKSLAG_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.COBBLED_BLACKSLAG_WALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_BLACKSLAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_BLACKSLAG_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_BLACKSLAG_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_BLACKSLAG_WALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_TILES.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_TILE_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_TILE_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_TILE_WALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CRACKED_BLACKSLAG_TILES.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_BRICKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_BRICK_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_BRICK_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACKSLAG_BRICK_WALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CRACKED_BLACKSLAG_BRICKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_BLACKSLAG_PILLAR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHISELED_POLISHED_BLACKSLAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.ANCIENT_CHISELED_POLISHED_BLACKSLAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_BLACKSLAG_BUTTON.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_BLACKSLAG_PRESSURE_PLATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.INFESTED_BLACKSLAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SHALE_CLAY.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.TILLED_SHALE_CLAY.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_SHALE_CLAY.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_SHALE_CLAY_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POLISHED_SHALE_CLAY_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SHALE_CLAY_BRICKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SHALE_CLAY_BRICK_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SHALE_CLAY_BRICK_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_SHALE_CLAY_BRICK_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_SHALE_CLAY_BRICK_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SHALE_CLAY_TILES.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_SHALE_CLAY_TILES.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_SHALE_CLAY_TILES.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SHALE_CLAY_TILE_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SHALE_CLAY_TILE_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_SHALE_CLAY_TILE_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB.get());
-
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACK_MATERIA.get());
-                                                                            entries.accept(PastelBlocks.SLUSH.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.OVERGROWN_SLUSH.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.TILLED_SLUSH.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.HORNSLAKE.get());
-
-                                                                            entries.accept(
-                                                                                PastelItems.ASH_FLAKES.get());
-                                                                            entries.accept(PastelBlocks.ASH.get());
-                                                                            entries.accept(PastelBlocks.ASH_PILE.get());
-
-                                                                            entries.accept(
-                                                                                PastelBlocks.ROCK_CRYSTAL.get());
-
-                                                                            entries.accept(
-                                                                                PastelBlocks.DRAGONBONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CRACKED_DRAGONBONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SAWBLADE_GRASS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.OVERGROWN_BLACKSLAG.get());
-                                                                            entries.accept(PastelBlocks.SHIMMEL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.ASHEN_BLACKSLAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.FLAYED_EARTH.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXSHROOM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXCAP_BLOCK.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXCAP_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_SLATE_NOXCAP_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXCAP_HYPHAE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_SLATE_NOXCAP_HYPHAE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXCAP_GILLS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_PLANKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_FENCE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_FENCE_GATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_DOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_TRAPDOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_PRESSURE_PLATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_BUTTON.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_PILLAR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_AMPHORA.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_LANTERN.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_LIGHT.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SLATE_NOXWOOD_LAMP.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXSHROOM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXCAP_BLOCK.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXCAP_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXCAP_HYPHAE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_EBONY_NOXCAP_HYPHAE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXCAP_GILLS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_PLANKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_FENCE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_FENCE_GATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_DOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_TRAPDOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_PRESSURE_PLATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_BUTTON.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_PILLAR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_AMPHORA.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_LANTERN.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_LIGHT.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.EBONY_NOXWOOD_LAMP.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXSHROOM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXCAP_BLOCK.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXCAP_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_IVORY_NOXCAP_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXCAP_HYPHAE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_IVORY_NOXCAP_HYPHAE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXCAP_GILLS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_PLANKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_FENCE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_FENCE_GATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_DOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_TRAPDOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_PRESSURE_PLATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_BUTTON.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_PILLAR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_AMPHORA.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_LANTERN.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_LIGHT.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.IVORY_NOXWOOD_LAMP.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXSHROOM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXCAP_BLOCK.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXCAP_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXCAP_HYPHAE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_HYPHAE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXCAP_GILLS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_PLANKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_FENCE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_FENCE_GATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_DOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_TRAPDOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_PRESSURE_PLATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_BUTTON.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_PILLAR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_AMPHORA.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_LANTERN.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_LIGHT.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CHESTNUT_NOXWOOD_LAMP.get());
-
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_SPRIG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_LEAVES.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_LOG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_WEEPING_GALA_LOG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_WOOD.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.STRIPPED_WEEPING_GALA_WOOD.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_PLANKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_DOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_PRESSURE_PLATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_FENCE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_TRAPDOOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_FENCE_GATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_BUTTON.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_PILLAR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_BARREL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_AMPHORA.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_LANTERN.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_LAMP.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WEEPING_GALA_LIGHT.get());
-
-                                                                            entries.accept(
-                                                                                PastelBlocks.SMALL_RED_DRAGONJAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SMALL_YELLOW_DRAGONJAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SMALL_PINK_DRAGONJAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SMALL_PURPLE_DRAGONJAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SMALL_BLACK_DRAGONJAG.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BRISTLE_SPROUTS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SNAPPING_IVY.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SWEET_PEA.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.APRICOTTI.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.HUMMING_BELL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.HUMMINGSTONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WAXED_HUMMINGSTONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.HUMMINGSTONE_GLASS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.HUMMINGSTONE_GLASS_PANE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.MOSS_BALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.GIANT_MOSS_BALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.NEPHRITE_BLOSSOM_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.NEPHRITE_BLOSSOM_LEAVES.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.VARIA_SPROUT.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.JADEITE_LOTUS_STEM.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.JADEITE_LOTUS_FLOWER.get());
-
-                                                                            entries.accept(
-                                                                                PastelBlocks.DOWNSTONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_STAIRS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_SLAB.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_WALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_BRICKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.SHIMMERING_PRESERVATION_BRICKS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.POWDER_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.DIKE_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.DREAM_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.DEEP_LIGHT_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.TREASURE_ITEM_BOWL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_GLASS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.TINTED_PRESERVATION_GLASS.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_ROUNDEL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_BLOCK_DETECTOR.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.DIKE_GATE_FOUNTAIN.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.DIKE_GATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.DREAM_GATE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_CONTROLLER.get());
-
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLACK_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BLUE_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.BROWN_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.CYAN_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.GRAY_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.GREEN_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.LIGHT_BLUE_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.LIGHT_GRAY_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.LIME_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.MAGENTA_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.ORANGE_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PINK_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PURPLE_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.RED_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.WHITE_CHISELED_PRESERVATION_STONE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.YELLOW_CHISELED_PRESERVATION_STONE.get());
-
-                                                                            entries.accept(
-                                                                                PastelBlocks.INVISIBLE_WALL.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.COURIER_STATUE.get());
-                                                                            entries.accept(
-                                                                                PastelBlocks.PRESERVATION_CHEST.get());
-                                                                        })
-                                                                        .build();
-
-    public static final CreativeModeTab CUISINE = CreativeModeTab.builder()
-                                                                 .icon(PastelItems.DEMON_TEA::toStack)
-                                                                 .title(
-                                                                     Component.translatable("itemGroup.pastel.cuisine"))
-                                                                 .displayItems((displayContext, entries) -> {
-
-                                                                     // COOKBOOKS
-                                                                     entries.accept(
-                                                                         PastelItems.IMBRIFER_COOKBOOK.get());
-                                                                     entries.accept(
-                                                                         PastelItems.IMPERIAL_COOKBOOK.get());
-                                                                     entries.accept(
-                                                                         PastelItems.MELOCHITES_COOKBOOK_VOL_1.get());
-                                                                     entries.accept(
-                                                                         PastelItems.MELOCHITES_COOKBOOK_VOL_2.get());
-                                                                     entries.accept(PastelItems.BREWERS_HANDBOOK.get());
-                                                                     //entries.add(PastelItems.VARIA_COOKBOOK);
-                                                                     entries.accept(
-                                                                         PastelItems.POISONERS_HANDBOOK.get());
-
-                                                                     // UNGODLY AMOUNT OF FOOD
-                                                                     entries.accept(
-                                                                         PastelItems.TRIPLE_MEAT_POT_PIE.get());
-                                                                     entries.accept(PastelItems.CLOTTED_CREAM.get());
-                                                                     entries.accept(PastelItems.FRESH_CHOCOLATE.get());
-                                                                     entries.accept(
-                                                                         PastelItems.BODACIOUS_BERRY_BAR.get());
-                                                                     entries.accept(PastelItems.HOT_CHOCOLATE.get());
-                                                                     entries.accept(PastelItems.KARAK_CHAI.get());
-                                                                     entries.accept(PastelItems.RESTORATION_TEA.get());
-                                                                     entries.accept(
-                                                                         PastelItems.GLISTERING_JELLY_TEA.get());
-                                                                     entries.accept(PastelItems.AZALEA_TEA.get());
-                                                                     entries.accept(PastelItems.DEMON_TEA.get());
-                                                                     entries.accept(
-                                                                         PastelItems.ENCHANTED_GOLDEN_CARROT.get());
-                                                                     entries.accept(PastelItems.JADE_JELLY.get());
-                                                                     entries.accept(PastelItems.JARAMEL.get());
-                                                                     entries.accept(
-                                                                         PastelItems.MOONSTRUCK_NECTAR.get());
-                                                                     entries.accept(PastelItems.GLASS_PEACH.get());
-                                                                     entries.accept(PastelItems.FISSURE_PLUM.get());
-                                                                     entries.accept(PastelItems.NIGHTDEW_SPROUT.get());
-                                                                     entries.accept(
-                                                                         PastelItems.NECTARDEW_BURGEON.get());
-                                                                     entries.accept(PastelItems.BLOODBOIL_SYRUP.get());
-                                                                     entries.accept(PastelItems.MILKY_RESIN.get());
-                                                                     entries.accept(PastelItems.SCONE.get());
-                                                                     entries.accept(PastelItems.STAR_CANDY.get());
-                                                                     entries.accept(
-                                                                         PastelItems.ENCHANTED_STAR_CANDY.get());
-                                                                     entries.accept(PastelItems.CHEONG.get());
-                                                                     entries.accept(PastelItems.MERMAIDS_JAM.get());
-                                                                     entries.accept(PastelItems.MERMAIDS_POPCORN.get());
-                                                                     entries.accept(
-                                                                         PastelItems.LE_FISHE_AU_CHOCOLAT.get());
-                                                                     //entries.add(PastelItems.STUFFED_PETALS);
-                                                                     //entries.add(PastelItems.PASTICHE);
-                                                                     //entries.add(PastelItems.VITTORIAS_ROAST);
-                                                                     entries.accept(PastelItems.LUCKY_ROLL.get());
-                                                                     entries.accept(PastelItems.HONEY_PASTRY.get());
-                                                                     entries.accept(PastelItems.JARAMEL_TART.get());
-                                                                     entries.accept(
-                                                                         PastelItems.SALTED_JARAMEL_TART.get());
-                                                                     entries.accept(PastelItems.ASHEN_TART.get());
-                                                                     entries.accept(PastelItems.WEEPING_TART.get());
-                                                                     entries.accept(PastelItems.WHISPY_TART.get());
-                                                                     entries.accept(PastelItems.PUFF_TART.get());
-                                                                     entries.accept(PastelItems.JARAMEL_TRIFLE.get());
-                                                                     entries.accept(
-                                                                         PastelItems.SALTED_JARAMEL_TRIFLE.get());
-                                                                     entries.accept(PastelItems.MONSTER_TRIFLE.get());
-                                                                     entries.accept(PastelItems.DEMON_TRIFLE.get());
-                                                                     entries.accept(PastelItems.MYCEYLON.get());
-                                                                     entries.accept(
-                                                                         PastelItems.MYCEYLON_APPLE_PIE.get());
-                                                                     entries.accept(
-                                                                         PastelItems.MYCEYLON_PUMPKIN_PIE.get());
-                                                                     entries.accept(PastelItems.MYCEYLON_COOKIE.get());
-                                                                     entries.accept(PastelItems.ALOE_LEAF.get());
-                                                                     entries.accept(
-                                                                         PastelItems.SAWBLADE_HOLLY_BERRY.get());
-                                                                     entries.accept(PastelItems.PRICKLY_BAYLEAF.get());
-                                                                     entries.accept(
-                                                                         PastelItems.TRIPLE_MEAT_POT_STEW.get());
-                                                                     entries.accept(PastelItems.DRAGONBONE_BROTH.get());
-                                                                     entries.accept(PastelItems.BAGNUN.get());
-                                                                     entries.accept(PastelItems.BANYASH.get());
-                                                                     entries.accept(PastelItems.BERLINER.get());
-                                                                     entries.accept(PastelItems.BRISTLE_MEAD.get());
-                                                                     entries.accept(
-                                                                         PastelItems.CHAUVE_SOURIS_AU_VIN.get());
-                                                                     entries.accept(PastelItems.CRAWFISH.get());
-                                                                     entries.accept(
-                                                                         PastelItems.CRAWFISH_COCKTAIL.get());
-                                                                     entries.accept(PastelItems.CREAM_PASTRY.get());
-                                                                     entries.accept(PastelItems.FADED_KOI.get());
-                                                                     entries.accept(PastelItems.FISHCAKE.get());
-                                                                     entries.accept(PastelItems.LIZARD_MEAT.get());
-                                                                     entries.accept(
-                                                                         PastelItems.COOKED_LIZARD_MEAT.get());
-                                                                     entries.accept(
-                                                                         PastelItems.GOLDEN_BRISTLE_TEA.get());
-                                                                     entries.accept(PastelItems.HARE_ROAST.get());
-                                                                     entries.accept(PastelItems.JUNKET.get());
-                                                                     entries.accept(PastelItems.KOI.get());
-                                                                     entries.accept(PastelItems.MEATLOAF.get());
-                                                                     entries.accept(
-                                                                         PastelItems.MEATLOAF_SANDWICH.get());
-                                                                     entries.accept(
-                                                                         PastelItems.MELLOW_SHALLOT_SOUP.get());
-                                                                     entries.accept(PastelItems.PEACHES_FLAMBE.get());
-                                                                     entries.accept(PastelItems.PEACH_CREAM.get());
-                                                                     entries.accept(PastelItems.PEACH_JAM.get());
-                                                                     entries.accept(PastelItems.RABBIT_CREAM_PIE.get());
-                                                                     entries.accept(PastelItems.SEDATIVES.get());
-                                                                     entries.accept(PastelItems.SLUSHSLIDE.get());
-                                                                     entries.accept(PastelItems.SURSTROMMING.get());
-                                                                     entries.accept(PastelItems.MORCHELLA.get());
-                                                                     entries.accept(
-                                                                         PastelItems.NECTERED_VIOGNIER.get());
-                                                                     entries.accept(PastelItems.FREIGEIST.get());
-
-                                                                     // adding all beverages from recipes
-                                                                     if (PastelCommon.getSidedServer() != null) {
-                                                                         for (RecipeHolder<ITitrationBarrelRecipe> recipe : PastelCommon.getSidedServer()
-                                                                                                                                        .getRecipeManager()
-                                                                                                                                        .getAllRecipesFor(
-                                                                                                                                            PastelRecipeTypes.TITRATION_BARREL)) {
-                                                                             ItemStack output = recipe.value()
-                                                                                                      .getResultItem(
-                                                                                                          PastelCommon.getRegistryAccess())
-                                                                                                      .copy();
-                                                                             if (output.getItem()
-                                                                                       .components()
-                                                                                       .has(
-                                                                                           PastelDataComponentTypes.INFUSED_BEVERAGE)) {
-                                                                                 output.setCount(1);
-                                                                                 entries.accept(output);
-                                                                             }
-                                                                         }
-                                                                     }
-
-                                                                     // SPECIAL FOODS
-                                                                     entries.accept(PastelItems.PURE_ALCOHOL.get());
-                                                                     entries.accept(PastelItems.REPRISE.get());
-                                                                     entries.accept(PastelItems.SUSPICIOUS_BREW.get());
-                                                                     entries.accept(PastelItems.JADE_WINE.get());
-                                                                     entries.accept(PastelItems.CHRYSOCOLLA.get());
-                                                                     entries.accept(PastelItems.AQUA_REGIA.get());
-                                                                     entries.accept(PastelItems.EVERNECTAR.get());
-                                                                 })
-                                                                 .build();
-
-    public static final CreativeModeTab RESOURCES = CreativeModeTab.builder()
-                                                                   .icon(PastelItems.TOPAZ_SHARD::toStack)
-                                                                   .title(Component.translatable(
-                                                                       "itemGroup.pastel.resources"))
-                                                                   .displayItems((displayContext, entries) -> {
-                                                                       entries.accept(PastelItems.TOPAZ_SHARD.get());
-                                                                       entries.accept(Items.AMETHYST_SHARD);
-                                                                       entries.accept(PastelItems.CITRINE_SHARD.get());
-                                                                       entries.accept(PastelItems.ONYX_SHARD.get());
-                                                                       entries.accept(
-                                                                           PastelItems.MOONSTONE_SHARD.get());
-
-                                                                       entries.accept(PastelBlocks.TOPAZ_BLOCK.get());
-                                                                       entries.accept(Blocks.AMETHYST_BLOCK);
-                                                                       entries.accept(PastelBlocks.CITRINE_BLOCK.get());
-                                                                       entries.accept(PastelBlocks.ONYX_BLOCK.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.MOONSTONE_BLOCK.get());
-
-                                                                       entries.accept(PastelItems.TOPAZ_POWDER.get());
-                                                                       entries.accept(
-                                                                           PastelItems.AMETHYST_POWDER.get());
-                                                                       entries.accept(PastelItems.CITRINE_POWDER.get());
-                                                                       entries.accept(PastelItems.ONYX_POWDER.get());
-                                                                       entries.accept(
-                                                                           PastelItems.MOONSTONE_POWDER.get());
-
-                                                                       entries.accept(
-                                                                           PastelBlocks.TOPAZ_POWDER_BLOCK.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.AMETHYST_POWDER_BLOCK.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.CITRINE_POWDER_BLOCK.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.ONYX_POWDER_BLOCK.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.MOONSTONE_POWDER_BLOCK.get());
-
-                                                                       entries.accept(PastelBlocks.BUDDING_TOPAZ.get());
-                                                                       entries.accept(Blocks.BUDDING_AMETHYST);
-                                                                       entries.accept(
-                                                                           PastelBlocks.BUDDING_CITRINE.get());
-                                                                       entries.accept(PastelBlocks.BUDDING_ONYX.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BUDDING_MOONSTONE.get());
-
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_TOPAZ_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.MEDIUM_TOPAZ_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_TOPAZ_BUD.get());
-                                                                       entries.accept(PastelBlocks.TOPAZ_CLUSTER.get());
-
-                                                                       entries.accept(Blocks.SMALL_AMETHYST_BUD);
-                                                                       entries.accept(Blocks.MEDIUM_AMETHYST_BUD);
-                                                                       entries.accept(Blocks.LARGE_AMETHYST_BUD);
-                                                                       entries.accept(Blocks.AMETHYST_CLUSTER);
-
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_CITRINE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.MEDIUM_CITRINE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_CITRINE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.CITRINE_CLUSTER.get());
-
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_ONYX_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.MEDIUM_ONYX_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_ONYX_BUD.get());
-                                                                       entries.accept(PastelBlocks.ONYX_CLUSTER.get());
-
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_MOONSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.MEDIUM_MOONSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_MOONSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.MOONSTONE_CLUSTER.get());
-
-                                                                       entries.accept(PastelBlocks.TOPAZ_ORE.get());
-                                                                       entries.accept(PastelBlocks.AMETHYST_ORE.get());
-                                                                       entries.accept(PastelBlocks.CITRINE_ORE.get());
-                                                                       entries.accept(PastelBlocks.ONYX_ORE.get());
-                                                                       entries.accept(PastelBlocks.MOONSTONE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_TOPAZ_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_AMETHYST_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_CITRINE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_ONYX_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_MOONSTONE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_TOPAZ_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_AMETHYST_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_CITRINE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_ONYX_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SHIMMERSTONE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_SHIMMERSTONE_ORE.get());
-                                                                       entries.accept(PastelBlocks.AZURITE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_AZURITE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_AZURITE_ORE.get());
-                                                                       entries.accept(PastelBlocks.STRATINE_ORE.get());
-                                                                       entries.accept(PastelBlocks.PALTAERIA_ORE.get());
-
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_COAL_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_COPPER_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_IRON_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_GOLD_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_DIAMOND_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_REDSTONE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_LAPIS_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_EMERALD_ORE.get());
-
-                                                                       entries.accept(PastelItems.BISMUTH_FLAKE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_BISMUTH_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_BISMUTH_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BISMUTH_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelItems.BISMUTH_CRYSTAL.get());
-
-                                                                       entries.accept(PastelBlocks.MALACHITE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_MALACHITE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_MALACHITE_ORE.get());
-                                                                       entries.accept(PastelItems.RAW_MALACHITE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_MALACHITE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_MALACHITE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.MALACHITE_CLUSTER.get());
-                                                                       entries.accept(PastelItems.PURE_MALACHITE.get());
-
-                                                                       entries.accept(PastelItems.RAW_AZURITE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_AZURITE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_AZURITE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.AZURITE_CLUSTER.get());
-                                                                       entries.accept(PastelItems.PURE_AZURITE.get());
-
-                                                                       entries.accept(PastelItems.RAW_BLOODSTONE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_BLOODSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_BLOODSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLOODSTONE_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelItems.PURE_BLOODSTONE.get());
-
-                                                                       entries.accept(
-                                                                           PastelItems.FROSTBITE_ESSENCE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.FROSTBITE_CRYSTAL.get());
-                                                                       entries.accept(
-                                                                           PastelItems.INCANDESCENT_ESSENCE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLAZING_CRYSTAL.get());
-
-                                                                       entries.accept(PastelBlocks.CLOVER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.FOUR_LEAF_CLOVER.get());
-                                                                       entries.accept(
-                                                                           PastelItems.BLOOD_ORCHID_PETAL.get());
-                                                                       entries.accept(PastelBlocks.BLOOD_ORCHID.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.QUITOXIC_REEDS.get());
-                                                                       entries.accept(
-                                                                           PastelItems.QUITOXIC_POWDER.get());
-
-                                                                       entries.accept(
-                                                                           PastelItems.AMARANTH_GRAINS.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.AMARANTH_BUSHEL.get());
-                                                                       entries.accept(BuiltInRegistries.ITEM.get(
-                                                                           PastelItems.GLISTERING_MELON_SEEDS));
-
-                                                                       entries.accept(
-                                                                           PastelBlocks.GLISTERING_SHOOTING_STAR.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.FIERY_SHOOTING_STAR.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.COLORFUL_SHOOTING_STAR.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PRISTINE_SHOOTING_STAR.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.GEMSTONE_SHOOTING_STAR.get());
-                                                                       entries.accept(PastelItems.STARDUST.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.STARDUST_BLOCK.get());
-                                                                       entries.accept(PastelItems.STAR_FRAGMENT.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.RADIATING_ENDER.get());
-
-                                                                       entries.accept(PastelItems.WHITE_PIGMENT.get());
-                                                                       entries.accept(PastelItems.ORANGE_PIGMENT.get());
-                                                                       entries.accept(
-                                                                           PastelItems.MAGENTA_PIGMENT.get());
-                                                                       entries.accept(
-                                                                           PastelItems.LIGHT_BLUE_PIGMENT.get());
-                                                                       entries.accept(PastelItems.YELLOW_PIGMENT.get());
-                                                                       entries.accept(PastelItems.LIME_PIGMENT.get());
-                                                                       entries.accept(PastelItems.PINK_PIGMENT.get());
-                                                                       entries.accept(PastelItems.GRAY_PIGMENT.get());
-                                                                       entries.accept(
-                                                                           PastelItems.LIGHT_GRAY_PIGMENT.get());
-                                                                       entries.accept(PastelItems.CYAN_PIGMENT.get());
-                                                                       entries.accept(PastelItems.PURPLE_PIGMENT.get());
-                                                                       entries.accept(PastelItems.BLUE_PIGMENT.get());
-                                                                       entries.accept(PastelItems.BROWN_PIGMENT.get());
-                                                                       entries.accept(PastelItems.GREEN_PIGMENT.get());
-                                                                       entries.accept(PastelItems.RED_PIGMENT.get());
-                                                                       entries.accept(PastelItems.BLACK_PIGMENT.get());
-
-                                                                       entries.accept(PastelItems.VEGETAL.get());
-                                                                       entries.accept(PastelItems.NEOLITH.get());
-                                                                       entries.accept(PastelItems.BEDROCK_DUST.get());
-                                                                       entries.accept(
-                                                                           PastelItems.MIDNIGHT_ABERRATION.get());
-                                                                       entries.accept(
-                                                                           PastelItems.MIDNIGHT_ABERRATION.get()
-                                                                                                          .getStableStack());
-                                                                       entries.accept(PastelItems.MIDNIGHT_CHIP.get());
-
-                                                                       entries.accept(
-                                                                           PastelItems.SHIMMERSTONE_GEM.get());
-                                                                       entries.accept(
-                                                                           PastelItems.PALTAERIA_FRAGMENTS.get());
-                                                                       entries.accept(PastelItems.PALTAERIA_GEM.get());
-                                                                       entries.accept(
-                                                                           PastelItems.STRATINE_FRAGMENTS.get());
-                                                                       entries.accept(PastelItems.STRATINE_GEM.get());
-
-                                                                       entries.accept(
-                                                                           PastelItems.HIBERNATING_JADE_VINE_BULB.get());
-                                                                       entries.accept(
-                                                                           PastelItems.GERMINATED_JADE_VINE_BULB.get());
-                                                                       entries.accept(
-                                                                           PastelItems.JADE_VINE_PETALS.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.NEPHRITE_BLOSSOM_BULB.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.JADEITE_LOTUS_BULB.get());
-                                                                       entries.accept(PastelItems.JADEITE_PETALS.get());
-
-                                                                       entries.accept(PastelItems.MERMAIDS_GEM.get());
-                                                                       entries.accept(PastelItems.STORM_STONE.get());
-                                                                       entries.accept(PastelItems.DOOMBLOOM_SEED.get());
-                                                                       entries.accept(
-                                                                           PastelItems.RESPLENDENT_FEATHER.get());
-                                                                       entries.accept(
-                                                                           PastelItems.DRAGONBONE_CHUNK.get());
-                                                                       entries.accept(PastelItems.BONE_ASH.get());
-                                                                       entries.accept(
-                                                                           PastelItems.DOWNSTONE_FRAGMENTS.get());
-                                                                       entries.accept(
-                                                                           PastelItems.RESONANCE_SHARD.get());
-                                                                       entries.accept(
-                                                                           PastelItems.AETHER_VESTIGES.get());
-                                                                       entries.accept(PastelItems.MOONSTONE_CORE.get());
-
-                                                                       entries.accept(
-                                                                           PastelItems.LIQUID_CRYSTAL_BUCKET.get());
-                                                                       entries.accept(PastelItems.HUMUS_BUCKET.get());
-                                                                       entries.accept(
-                                                                           PastelItems.MIDNIGHT_SOLUTION_BUCKET.get());
-                                                                       entries.accept(
-                                                                           PastelItems.DRAGONROT_BUCKET.get());
-
-                                                                       // PURE RESOURCES (HELL)
-                                                                       entries.accept(PastelItems.PURE_COAL.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_COAL_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_COAL_BUD.get());
-                                                                       entries.accept(PastelBlocks.COAL_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_COAL_BLOCK.get());
-                                                                       entries.accept(PastelItems.PURE_COPPER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_COPPER_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_COPPER_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.COPPER_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_COPPER_BLOCK.get());
-                                                                       entries.accept(PastelItems.PURE_IRON.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_IRON_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_IRON_BUD.get());
-                                                                       entries.accept(PastelBlocks.IRON_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_IRON_BLOCK.get());
-                                                                       entries.accept(PastelItems.PURE_GOLD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_GOLD_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_GOLD_BUD.get());
-                                                                       entries.accept(PastelBlocks.GOLD_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_GOLD_BLOCK.get());
-                                                                       entries.accept(PastelItems.PURE_LAPIS.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_LAPIS_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_LAPIS_BUD.get());
-                                                                       entries.accept(PastelBlocks.LAPIS_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_LAPIS_BLOCK.get());
-                                                                       entries.accept(PastelItems.PURE_REDSTONE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_REDSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_REDSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.REDSTONE_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_REDSTONE_BLOCK.get());
-                                                                       entries.accept(PastelItems.PURE_DIAMOND.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_DIAMOND_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_DIAMOND_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.DIAMOND_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_DIAMOND_BLOCK.get());
-                                                                       entries.accept(PastelItems.PURE_EMERALD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_EMERALD_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_EMERALD_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.EMERALD_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_EMERALD_BLOCK.get());
-
-                                                                       entries.accept(
-                                                                           PastelItems.PURE_PRISMARINE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_PRISMARINE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_PRISMARINE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PRISMARINE_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_PRISMARINE_BLOCK.get());
-
-                                                                       entries.accept(PastelItems.PURE_QUARTZ.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_QUARTZ_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_QUARTZ_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.QUARTZ_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_QUARTZ_BLOCK.get());
-                                                                       entries.accept(PastelItems.PURE_GLOWSTONE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_GLOWSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_GLOWSTONE_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.GLOWSTONE_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_GLOWSTONE_BLOCK.get());
-                                                                       entries.accept(
-                                                                           PastelItems.PURE_NETHERITE_SCRAP.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_NETHERITE_SCRAP_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_NETHERITE_SCRAP_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.NETHERITE_SCRAP_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_NETHERITE_SCRAP_BLOCK.get());
-
-                                                                       entries.accept(PastelItems.PURE_ECHO.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.SMALL_ECHO_BUD.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.LARGE_ECHO_BUD.get());
-                                                                       entries.accept(PastelBlocks.ECHO_CLUSTER.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.PURE_ECHO_BLOCK.get());
-
-                                                                       if (PastelIntegrationPacks.isIntegrationPackActive(
-                                                                           PastelIntegrationPacks.AE2_ID)) {
-                                                                           entries.accept(AE2Compat.SMALL_FLUIX_BUD);
-                                                                           entries.accept(AE2Compat.LARGE_FLUIX_BUD);
-                                                                           entries.accept(AE2Compat.FLUIX_CLUSTER);
-                                                                       }
-
-                                                                       if (PastelIntegrationPacks.isIntegrationPackActive(
-                                                                           PastelIntegrationPacks.CREATE_ID)) {
-                                                                           entries.accept(CreateCompat.PURE_ZINC);
-                                                                           entries.accept(CreateCompat.SMALL_ZINC_BUD);
-                                                                           entries.accept(CreateCompat.LARGE_ZINC_BUD);
-                                                                           entries.accept(CreateCompat.ZINC_CLUSTER);
-                                                                           entries.accept(CreateCompat.PURE_ZINC_BLOCK);
-                                                                       }
-                                                                   })
-                                                                   .build();
-
-    public static final CreativeModeTab DECORATION = CreativeModeTab.builder()
-                                                                    .icon(
-                                                                        PastelBlocks.CHISELED_POLISHED_BASALT::toStack)
-                                                                    .title(Component.translatable(
-                                                                        "itemGroup.pastel.decoration"))
-                                                                    .displayItems((displayContext, entries) -> {
-                                                                        entries.accept(
-                                                                            PastelBlocks.SMOOTH_BASALT_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.SMOOTH_BASALT_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.SMOOTH_BASALT_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASALT_PILLAR.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASALT_CREST.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CHISELED_POLISHED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.NOTCHED_POLISHED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASALT_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASALT_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASALT_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASALT_BRICKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASALT_BRICK_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASALT_BRICK_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASALT_BRICK_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CRACKED_BASALT_BRICKS.get());
-                                                                        entries.accept(PastelBlocks.BASALT_TILES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASALT_TILE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASALT_TILE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASALT_TILE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PLANED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PLANED_BASALT_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PLANED_BASALT_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PLANED_BASALT_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CRACKED_BASALT_TILES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASALT_BUTTON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASALT_PRESSURE_PLATE.get());
-
-                                                                        entries.accept(PastelBlocks.CALCITE_SLAB.get());
-                                                                        entries.accept(PastelBlocks.CALCITE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CALCITE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CALCITE_PILLAR.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CALCITE_CREST.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CHISELED_POLISHED_CALCITE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.NOTCHED_POLISHED_CALCITE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CALCITE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CALCITE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CALCITE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_BRICKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_BRICK_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_BRICK_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_BRICK_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CRACKED_CALCITE_BRICKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_TILES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_TILE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_TILE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_TILE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PLANED_CALCITE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PLANED_CALCITE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PLANED_CALCITE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PLANED_CALCITE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CRACKED_CALCITE_TILES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CALCITE_BUTTON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CALCITE_PRESSURE_PLATE.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BONE_ASH.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BONE_ASH_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BONE_ASH_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BONE_ASH_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_BRICKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_BRICK_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_BRICK_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_BRICK_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_TILES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_TILE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_TILE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_TILE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BONE_ASH_PILLAR.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BONE_ASH_SHINGLES.get());
-
-                                                                        entries.accept(PastelItems.PYRITE_CHUNK.get());
-                                                                        entries.accept(PastelBlocks.PYRITE.get());
-                                                                        entries.accept(PastelBlocks.PYRITE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.PYRITE_WALL.get());
-                                                                        entries.accept(PastelBlocks.PYRITE_PILE.get());
-                                                                        entries.accept(PastelBlocks.PYRITE_TILES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_TILES_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_TILES_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_TILES_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_PLATING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_TUBING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_RELIEF.get());
-                                                                        entries.accept(PastelBlocks.PYRITE_STACK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_PANELING.get());
-                                                                        entries.accept(PastelBlocks.PYRITE_VENT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_RIPPER.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PYRITE_PROJECTOR.get());
-
-                                                                        entries.accept(PastelBlocks.BASAL_MARBLE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASAL_MARBLE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASAL_MARBLE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASAL_MARBLE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_BASAL_MARBLE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_PILLAR.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_TILES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_TILE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_TILE_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_TILE_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_BRICKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_BRICK_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_BRICK_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASAL_MARBLE_BRICK_WALL.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LONGING_CHIMERA.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.PRIMORDIAL_TORCH.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_TOPAZ_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_AMETHYST_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_CITRINE_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_ONYX_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.POLISHED_MOONSTONE_BLOCK.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.VEGETAL_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.NEOLITH_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BEDROCK_DUST_BLOCK.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.SHIMMERSTONE_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.AZURITE_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MALACHITE_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLOODSTONE_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BISMUTH_BLOCK.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRATINE_FLOATBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PALTAERIA_FLOATBLOCK.get());
-                                                                        entries.accept(PastelBlocks.HOVER_BLOCK.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.TOPAZ_CALCITE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.AMETHYST_CALCITE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CITRINE_CALCITE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ONYX_CALCITE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MOONSTONE_CALCITE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.TOPAZ_BASALT_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.AMETHYST_BASALT_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CITRINE_BASALT_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ONYX_BASALT_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MOONSTONE_BASALT_LIGHT.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.BASALT_SHIMMERSTONE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CALCITE_SHIMMERSTONE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STONE_SHIMMERSTONE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GRANITE_SHIMMERSTONE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.DIORITE_SHIMMERSTONE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ANDESITE_SHIMMERSTONE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.DEEPSLATE_SHIMMERSTONE_LIGHT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLACKSLAG_SHIMMERSTONE_LIGHT.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.TOPAZ_CHISELED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.AMETHYST_CHISELED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CITRINE_CHISELED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ONYX_CHISELED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MOONSTONE_CHISELED_BASALT.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.TOPAZ_CHISELED_CALCITE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.AMETHYST_CHISELED_CALCITE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CITRINE_CHISELED_CALCITE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ONYX_CHISELED_CALCITE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MOONSTONE_CHISELED_CALCITE.get());
-
-                                                                        entries.accept(PastelBlocks.TOPAZ_GLASS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.AMETHYST_GLASS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CITRINE_GLASS.get());
-                                                                        entries.accept(PastelBlocks.ONYX_GLASS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MOONSTONE_GLASS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RADIANT_GLASS.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.TOPAZ_GLASS_PANE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.AMETHYST_GLASS_PANE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CITRINE_GLASS_PANE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ONYX_GLASS_PANE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MOONSTONE_GLASS_PANE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RADIANT_GLASS_PANE.get());
-
-                                                                        entries.accept(PastelBlocks.TOPAZ_CHIME.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.AMETHYST_CHIME.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CITRINE_CHIME.get());
-                                                                        entries.accept(PastelBlocks.ONYX_CHIME.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MOONSTONE_CHIME.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.AMETHYST_PYLON.get());
-                                                                        entries.accept(PastelBlocks.TOPAZ_PYLON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CITRINE_PYLON.get());
-                                                                        entries.accept(PastelBlocks.ONYX_PYLON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MOONSTONE_PYLON.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.JADE_VINE_PETAL_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.JADE_VINE_PETAL_CARPET.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.JADEITE_PETAL_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.JADEITE_PETAL_CARPET.get());
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.RESPLENDENT_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RESPLENDENT_CUSHION.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RESPLENDENT_CARPET.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RESPLENDENT_BED.get());
-
-
-                                                                        entries.accept(
-                                                                            PastelBlocks.RESONANT_LILY.get());
-                                                                        entries.accept(PastelItems.PHANTOM_FRAME.get());
-                                                                        entries.accept(
-                                                                            PastelItems.GLOW_PHANTOM_FRAME.get());
-                                                                        entries.accept(
-                                                                            PastelItems.LOGO_BANNER_PATTERN.get());
-                                                                        entries.accept(
-                                                                            PastelItems.AMETHYST_SHARD_BANNER_PATTERN.get());
-                                                                        entries.accept(
-                                                                            PastelItems.AMETHYST_CLUSTER_BANNER_PATTERN.get());
-                                                                        entries.accept(
-                                                                            PastelItems.ASTROLOGER_BANNER_PATTERN.get());
-                                                                        entries.accept(
-                                                                            PastelItems.VELVET_ASTROLOGER_BANNER_PATTERN.get());
-                                                                        entries.accept(
-                                                                            PastelItems.POISONBLOOM_BANNER_PATTERN.get());
-                                                                        entries.accept(
-                                                                            PastelItems.DEEP_LIGHT_BANNER_PATTERN.get());
-
-                                                                        entries.accept(PastelBlocks.WHITE_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.ORANGE_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.YELLOW_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.LIME_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.PINK_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.GRAY_BLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.CYAN_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.PURPLE_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.BLUE_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.BROWN_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.GREEN_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.RED_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.BLACK_BLOCK.get());
-                                                                        entries.accept(PastelBlocks.WHITE_LAMP.get());
-                                                                        entries.accept(PastelBlocks.ORANGE_LAMP.get());
-                                                                        entries.accept(PastelBlocks.MAGENTA_LAMP.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_LAMP.get());
-                                                                        entries.accept(PastelBlocks.YELLOW_LAMP.get());
-                                                                        entries.accept(PastelBlocks.LIME_LAMP.get());
-                                                                        entries.accept(PastelBlocks.PINK_LAMP.get());
-                                                                        entries.accept(PastelBlocks.GRAY_LAMP.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_LAMP.get());
-                                                                        entries.accept(PastelBlocks.CYAN_LAMP.get());
-                                                                        entries.accept(PastelBlocks.PURPLE_LAMP.get());
-                                                                        entries.accept(PastelBlocks.BLUE_LAMP.get());
-                                                                        entries.accept(PastelBlocks.BROWN_LAMP.get());
-                                                                        entries.accept(PastelBlocks.GREEN_LAMP.get());
-                                                                        entries.accept(PastelBlocks.RED_LAMP.get());
-                                                                        entries.accept(PastelBlocks.BLACK_LAMP.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.WHITE_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIME_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PINK_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GRAY_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CYAN_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLUE_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BROWN_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GREEN_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RED_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLACK_GLOWBLOCK.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.WHITE_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIME_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PINK_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GRAY_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CYAN_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLUE_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BROWN_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GREEN_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RED_SPORE_BLOSSOM.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLACK_SPORE_BLOSSOM.get());
-
-                                                                        entries.accept(PastelBlocks.WHITE_LOG.get());
-                                                                        entries.accept(PastelBlocks.ORANGE_LOG.get());
-                                                                        entries.accept(PastelBlocks.MAGENTA_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_LOG.get());
-                                                                        entries.accept(PastelBlocks.YELLOW_LOG.get());
-                                                                        entries.accept(PastelBlocks.LIME_LOG.get());
-                                                                        entries.accept(PastelBlocks.PINK_LOG.get());
-                                                                        entries.accept(PastelBlocks.GRAY_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_LOG.get());
-                                                                        entries.accept(PastelBlocks.CYAN_LOG.get());
-                                                                        entries.accept(PastelBlocks.PURPLE_LOG.get());
-                                                                        entries.accept(PastelBlocks.BLUE_LOG.get());
-                                                                        entries.accept(PastelBlocks.BROWN_LOG.get());
-                                                                        entries.accept(PastelBlocks.GREEN_LOG.get());
-                                                                        entries.accept(PastelBlocks.RED_LOG.get());
-                                                                        entries.accept(PastelBlocks.BLACK_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_WHITE_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_ORANGE_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_MAGENTA_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_LIGHT_BLUE_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_YELLOW_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_LIME_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_PINK_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_GRAY_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_LIGHT_GRAY_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_CYAN_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_PURPLE_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_BLUE_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_BROWN_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_GREEN_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_RED_LOG.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_BLACK_LOG.get());
-                                                                        entries.accept(PastelBlocks.WHITE_WOOD.get());
-                                                                        entries.accept(PastelBlocks.ORANGE_WOOD.get());
-                                                                        entries.accept(PastelBlocks.MAGENTA_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_WOOD.get());
-                                                                        entries.accept(PastelBlocks.YELLOW_WOOD.get());
-                                                                        entries.accept(PastelBlocks.LIME_WOOD.get());
-                                                                        entries.accept(PastelBlocks.PINK_WOOD.get());
-                                                                        entries.accept(PastelBlocks.GRAY_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_WOOD.get());
-                                                                        entries.accept(PastelBlocks.CYAN_WOOD.get());
-                                                                        entries.accept(PastelBlocks.PURPLE_WOOD.get());
-                                                                        entries.accept(PastelBlocks.BLUE_WOOD.get());
-                                                                        entries.accept(PastelBlocks.BROWN_WOOD.get());
-                                                                        entries.accept(PastelBlocks.GREEN_WOOD.get());
-                                                                        entries.accept(PastelBlocks.RED_WOOD.get());
-                                                                        entries.accept(PastelBlocks.BLACK_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_WHITE_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_ORANGE_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_MAGENTA_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_LIGHT_BLUE_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_YELLOW_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_LIME_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_PINK_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_GRAY_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_LIGHT_GRAY_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_CYAN_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_PURPLE_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_BLUE_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_BROWN_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_GREEN_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_RED_WOOD.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.STRIPPED_BLACK_WOOD.get());
-                                                                        entries.accept(PastelBlocks.WHITE_LEAVES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_LEAVES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_LEAVES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_LEAVES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.LIME_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.PINK_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.GRAY_LEAVES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.CYAN_LEAVES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.BLUE_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.BROWN_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.GREEN_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.RED_LEAVES.get());
-                                                                        entries.accept(PastelBlocks.BLACK_LEAVES.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.WHITE_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_SAPLING.get());
-                                                                        entries.accept(PastelBlocks.LIME_SAPLING.get());
-                                                                        entries.accept(PastelBlocks.PINK_SAPLING.get());
-                                                                        entries.accept(PastelBlocks.GRAY_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_SAPLING.get());
-                                                                        entries.accept(PastelBlocks.CYAN_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_SAPLING.get());
-                                                                        entries.accept(PastelBlocks.BLUE_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BROWN_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GREEN_SAPLING.get());
-                                                                        entries.accept(PastelBlocks.RED_SAPLING.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLACK_SAPLING.get());
-                                                                        entries.accept(PastelBlocks.WHITE_PLANKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_PLANKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_PLANKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_PLANKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.LIME_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.PINK_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.GRAY_PLANKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.CYAN_PLANKS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.BLUE_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.BROWN_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.GREEN_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.RED_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.BLACK_PLANKS.get());
-                                                                        entries.accept(PastelBlocks.WHITE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.LIME_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.PINK_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.GRAY_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.CYAN_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.BLUE_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.BROWN_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.GREEN_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.RED_STAIRS.get());
-                                                                        entries.accept(PastelBlocks.BLACK_STAIRS.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.WHITE_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIME_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PINK_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GRAY_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CYAN_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLUE_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BROWN_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GREEN_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RED_PRESSURE_PLATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLACK_PRESSURE_PLATE.get());
-                                                                        entries.accept(PastelBlocks.WHITE_FENCE.get());
-                                                                        entries.accept(PastelBlocks.ORANGE_FENCE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_FENCE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_FENCE.get());
-                                                                        entries.accept(PastelBlocks.YELLOW_FENCE.get());
-                                                                        entries.accept(PastelBlocks.LIME_FENCE.get());
-                                                                        entries.accept(PastelBlocks.PINK_FENCE.get());
-                                                                        entries.accept(PastelBlocks.GRAY_FENCE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_FENCE.get());
-                                                                        entries.accept(PastelBlocks.CYAN_FENCE.get());
-                                                                        entries.accept(PastelBlocks.PURPLE_FENCE.get());
-                                                                        entries.accept(PastelBlocks.BLUE_FENCE.get());
-                                                                        entries.accept(PastelBlocks.BROWN_FENCE.get());
-                                                                        entries.accept(PastelBlocks.GREEN_FENCE.get());
-                                                                        entries.accept(PastelBlocks.RED_FENCE.get());
-                                                                        entries.accept(PastelBlocks.BLACK_FENCE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.WHITE_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIME_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PINK_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GRAY_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.CYAN_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLUE_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BROWN_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.GREEN_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.RED_FENCE_GATE.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.BLACK_FENCE_GATE.get());
-                                                                        entries.accept(PastelBlocks.WHITE_BUTTON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.ORANGE_BUTTON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.MAGENTA_BUTTON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_BUTTON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.YELLOW_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.LIME_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.PINK_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.GRAY_BUTTON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.CYAN_BUTTON.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.PURPLE_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.BLUE_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.BROWN_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.GREEN_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.RED_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.BLACK_BUTTON.get());
-                                                                        entries.accept(PastelBlocks.WHITE_SLAB.get());
-                                                                        entries.accept(PastelBlocks.ORANGE_SLAB.get());
-                                                                        entries.accept(PastelBlocks.MAGENTA_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_BLUE_SLAB.get());
-                                                                        entries.accept(PastelBlocks.YELLOW_SLAB.get());
-                                                                        entries.accept(PastelBlocks.LIME_SLAB.get());
-                                                                        entries.accept(PastelBlocks.PINK_SLAB.get());
-                                                                        entries.accept(PastelBlocks.GRAY_SLAB.get());
-                                                                        entries.accept(
-                                                                            PastelBlocks.LIGHT_GRAY_SLAB.get());
-                                                                        entries.accept(PastelBlocks.CYAN_SLAB.get());
-                                                                        entries.accept(PastelBlocks.PURPLE_SLAB.get());
-                                                                        entries.accept(PastelBlocks.BLUE_SLAB.get());
-                                                                        entries.accept(PastelBlocks.BROWN_SLAB.get());
-                                                                        entries.accept(PastelBlocks.GREEN_SLAB.get());
-                                                                        entries.accept(PastelBlocks.RED_SLAB.get());
-                                                                        entries.accept(PastelBlocks.BLACK_SLAB.get());
-                                                                    })
-                                                                    .build();
-
-    public static final CreativeModeTab HEADS = CreativeModeTab.builder()
-                                                               .icon(() -> PastelSkullBlock.MOB_HEADS.get(
-                                                                                               PastelSkullType.EGG_LAYING_WOOLY_PIG)
-                                                                                                     .asItem()
-                                                                                                     .getDefaultInstance())
-                                                               .title(
-                                                                   Component.translatable("itemGroup.pastel.mob_heads"))
-                                                               .displayItems((displayContext, entries) -> {
-                                                                   for (Block skullBlock :
-                                                                       PastelSkullBlock.MOB_HEADS.values()) {
-                                                                       entries.accept(skullBlock.asItem());
-                                                                   }
-                                                               })
-                                                               .build();
-
+	public static final ResourceLocation INSTRUMENTS_ID = PastelCommon.locate("instruments");
+	public static final ResourceLocation TOOLS_ID = PastelCommon.locate("tools");
+	public static final ResourceLocation NATURAL_BLOCKS_ID = PastelCommon.locate("natural_blocks");
+	public static final ResourceLocation CUISINE_ID = PastelCommon.locate("cuisine");
+	public static final ResourceLocation RESOURCES_ID = PastelCommon.locate("resources");
+	public static final ResourceLocation DECORATION_ID = PastelCommon.locate("decoration");
+	public static final ResourceLocation HEADS_ID = PastelCommon.locate("heads");
+
+	public static void register(IEventBus bus) {
+		var register = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PastelCommon.MOD_ID);
+
+		// TODO make the tabs appear ingame in this order
+		register.register(INSTRUMENTS_ID.getPath(), () -> INSTRUMENTS);
+		register.register(TOOLS_ID.getPath(), () -> TOOLS);
+		register.register(NATURAL_BLOCKS_ID.getPath(), () -> NATURAL_BLOCKS);
+		register.register(CUISINE_ID.getPath(), () -> CUISINE);
+		register.register(RESOURCES_ID.getPath(), () -> RESOURCES);
+		register.register(DECORATION_ID.getPath(), () -> DECORATION);
+		register.register(HEADS_ID.getPath(), () -> HEADS);
+		register.register(bus);
+	}
+
+	public static void registerSpawnEggs(BuildCreativeModeTabContentsEvent event) {
+		if (!event.getTabKey().equals(CreativeModeTabs.SPAWN_EGGS))
+			return;
+
+		event.accept(PastelItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+		event.accept(PastelItems.PRESERVATION_TURRET_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+		event.accept(PastelItems.KINDLING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+		event.accept(PastelItems.LIZARD_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+		event.accept(PastelItems.ERASER_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+		event.accept(PastelItems.BUCKET_OF_ERASER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+	}
+
+	public static final CreativeModeTab INSTRUMENTS = CreativeModeTab.builder()
+			.icon(PastelBlocks.PEDESTAL_BASIC_TOPAZ::toStack)
+			.title(Component.translatable("itemGroup.pastel.instruments"))
+			.displayItems((displayContext, entries) -> {
+				entries.accept(PastelBlocks.PEDESTAL_BASIC_TOPAZ.get());
+				entries.accept(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get());
+				entries.accept(PastelBlocks.PEDESTAL_BASIC_CITRINE.get());
+				entries.accept(PastelBlocks.PEDESTAL_ALL_BASIC.get());
+				entries.accept(PastelBlocks.PEDESTAL_ONYX.get());
+				entries.accept(PastelBlocks.PEDESTAL_MOONSTONE.get());
+				entries.accept(PastelBlocks.FUSION_SHRINE_BASALT.get());
+				entries.accept(PastelBlocks.FUSION_SHRINE_CALCITE.get());
+				entries.accept(PastelBlocks.ENCHANTER.get());
+				entries.accept(PastelBlocks.ITEM_BOWL_BASALT.get());
+				entries.accept(PastelBlocks.ITEM_BOWL_CALCITE.get());
+				entries.accept(PastelBlocks.ITEM_ROUNDEL.get());
+				entries.accept(PastelBlocks.POTION_WORKSHOP.get());
+				entries.accept(PastelBlocks.SPIRIT_INSTILLER.get());
+				entries.accept(PastelBlocks.CRYSTALLARIEUM.get());
+				entries.accept(PastelBlocks.CINDERHEARTH.get());
+				entries.accept(PastelBlocks.CRYSTAL_APOTHECARY.get());
+				entries.accept(PastelBlocks.COLOR_PICKER.get());
+
+				entries.accept(PastelBlocks.UPGRADE_SPEED.get());
+				entries.accept(PastelBlocks.UPGRADE_SPEED2.get());
+				entries.accept(PastelBlocks.UPGRADE_SPEED3.get());
+				entries.accept(PastelBlocks.UPGRADE_EFFICIENCY.get());
+				entries.accept(PastelBlocks.UPGRADE_EFFICIENCY2.get());
+				entries.accept(PastelBlocks.UPGRADE_YIELD.get());
+				entries.accept(PastelBlocks.UPGRADE_YIELD2.get());
+				entries.accept(PastelBlocks.UPGRADE_EXPERIENCE.get());
+				entries.accept(PastelBlocks.UPGRADE_EXPERIENCE2.get());
+
+				entries.accept(PastelBlocks.CONNECTION_NODE.get());
+				entries.accept(PastelBlocks.PROVIDER_NODE.get());
+				entries.accept(PastelBlocks.SENDER_NODE.get());
+				entries.accept(PastelBlocks.STORAGE_NODE.get());
+				entries.accept(PastelBlocks.BUFFER_NODE.get());
+				entries.accept(PastelBlocks.GATHER_NODE.get());
+
+				entries.accept(PastelBlocks.LIGHT_LEVEL_DETECTOR.get());
+				entries.accept(PastelBlocks.WEATHER_DETECTOR.get());
+				entries.accept(PastelBlocks.ITEM_DETECTOR.get());
+				entries.accept(PastelBlocks.PLAYER_DETECTOR.get());
+				entries.accept(PastelBlocks.CREATURE_DETECTOR.get());
+				entries.accept(PastelBlocks.REDSTONE_TIMER.get());
+				entries.accept(PastelBlocks.REDSTONE_CALCULATOR.get());
+				entries.accept(PastelBlocks.REDSTONE_TRANSCEIVER.get());
+				entries.accept(PastelBlocks.REDSTONE_SAND.get());
+				entries.accept(PastelBlocks.ENDER_GLASS.get());
+				entries.accept(PastelBlocks.BLOCK_DETECTOR.get());
+				entries.accept(PastelBlocks.BLOCK_PLACER.get());
+				entries.accept(PastelBlocks.BLOCK_BREAKER.get());
+
+				entries.accept(PastelBlocks.HEARTBOUND_CHEST.get());
+				entries.accept(PastelBlocks.COMPACTING_CHEST.get());
+				entries.accept(PastelBlocks.FABRICATION_CHEST.get());
+				entries.accept(PastelBlocks.BLACK_HOLE_CHEST.get());
+
+				entries.accept(PastelBlocks.ENDER_HOPPER.get());
+				entries.accept(PastelBlocks.ENDER_DROPPER.get());
+
+				entries.accept(PastelBlocks.PARTICLE_SPAWNER.get());
+
+				entries.accept(BuiltInRegistries.BLOCK.get(PastelBlocks.GLISTERING_MELON)); // ???
+				entries.accept(PastelBlocks.LAVA_SPONGE.get());
+				entries.accept(PastelBlocks.WET_LAVA_SPONGE.get());
+				entries.accept(PastelBlocks.ETHEREAL_PLATFORM.get());
+				entries.accept(PastelBlocks.UNIVERSE_SPYHOLE.get());
+				entries.accept(PastelBlocks.PRESENT.get());
+				entries.accept(PastelBlocks.TITRATION_BARREL.get());
+
+				entries.accept(PastelBlocks.INCANDESCENT_AMALGAM.get());
+				entries.accept(PastelBlocks.BEDROCK_ANVIL.get());
+				entries.accept(PastelBlocks.CRACKED_END_PORTAL_FRAME.get());
+
+				entries.accept(PastelBlocks.SEMI_PERMEABLE_GLASS.get());
+				entries.accept(PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS.get());
+				entries.accept(PastelBlocks.RADIANT_SEMI_PERMEABLE_GLASS.get());
+				entries.accept(PastelBlocks.TOPAZ_SEMI_PERMEABLE_GLASS.get());
+				entries.accept(PastelBlocks.AMETHYST_SEMI_PERMEABLE_GLASS.get());
+				entries.accept(PastelBlocks.CITRINE_SEMI_PERMEABLE_GLASS.get());
+				entries.accept(PastelBlocks.ONYX_SEMI_PERMEABLE_GLASS.get());
+				entries.accept(PastelBlocks.MOONSTONE_SEMI_PERMEABLE_GLASS.get());
+
+				entries.accept(PastelBlocks.AXOLOTL_IDOL.get());
+				entries.accept(PastelBlocks.BAT_IDOL.get());
+				entries.accept(PastelBlocks.BEE_IDOL.get());
+				entries.accept(PastelBlocks.BLAZE_IDOL.get());
+				entries.accept(PastelBlocks.CAT_IDOL.get());
+				entries.accept(PastelBlocks.CHICKEN_IDOL.get());
+				entries.accept(PastelBlocks.COW_IDOL.get());
+				entries.accept(PastelBlocks.CREEPER_IDOL.get());
+				entries.accept(PastelBlocks.ENDER_DRAGON_IDOL.get());
+				entries.accept(PastelBlocks.ENDERMAN_IDOL.get());
+				entries.accept(PastelBlocks.ENDERMITE_IDOL.get());
+				entries.accept(PastelBlocks.EVOKER_IDOL.get());
+				entries.accept(PastelBlocks.FISH_IDOL.get());
+				entries.accept(PastelBlocks.FOX_IDOL.get());
+				entries.accept(PastelBlocks.GHAST_IDOL.get());
+				entries.accept(PastelBlocks.GLOW_SQUID_IDOL.get());
+				entries.accept(PastelBlocks.GOAT_IDOL.get());
+				entries.accept(PastelBlocks.GUARDIAN_IDOL.get());
+				entries.accept(PastelBlocks.HORSE_IDOL.get());
+				entries.accept(PastelBlocks.ILLUSIONER_IDOL.get());
+				entries.accept(PastelBlocks.OCELOT_IDOL.get());
+				entries.accept(PastelBlocks.PARROT_IDOL.get());
+				entries.accept(PastelBlocks.PHANTOM_IDOL.get());
+				entries.accept(PastelBlocks.PIG_IDOL.get());
+				entries.accept(PastelBlocks.PIGLIN_IDOL.get());
+				entries.accept(PastelBlocks.POLAR_BEAR_IDOL.get());
+				entries.accept(PastelBlocks.PUFFERFISH_IDOL.get());
+				entries.accept(PastelBlocks.RABBIT_IDOL.get());
+				entries.accept(PastelBlocks.SHEEP_IDOL.get());
+				entries.accept(PastelBlocks.SHULKER_IDOL.get());
+				entries.accept(PastelBlocks.SILVERFISH_IDOL.get());
+				entries.accept(PastelBlocks.SKELETON_IDOL.get());
+				entries.accept(PastelBlocks.SLIME_IDOL.get());
+				entries.accept(PastelBlocks.SNOW_GOLEM_IDOL.get());
+				entries.accept(PastelBlocks.SPIDER_IDOL.get());
+				entries.accept(PastelBlocks.SQUID_IDOL.get());
+				entries.accept(PastelBlocks.STRAY_IDOL.get());
+				entries.accept(PastelBlocks.STRIDER_IDOL.get());
+				entries.accept(PastelBlocks.TURTLE_IDOL.get());
+				entries.accept(PastelBlocks.WITCH_IDOL.get());
+				entries.accept(PastelBlocks.WITHER_IDOL.get());
+				entries.accept(PastelBlocks.WITHER_SKELETON_IDOL.get());
+				entries.accept(PastelBlocks.ZOMBIE_IDOL.get());
+
+				// CREATIVE
+				entries.accept(PastelItems.PEDESTAL_TIER_1_STRUCTURE_PLACER.get());
+				entries.accept(PastelItems.PEDESTAL_TIER_2_STRUCTURE_PLACER.get());
+				entries.accept(PastelItems.PEDESTAL_TIER_3_STRUCTURE_PLACER.get());
+				entries.accept(PastelItems.FUSION_SHRINE_STRUCTURE_PLACER.get());
+				entries.accept(PastelItems.ENCHANTER_STRUCTURE_PLACER.get());
+				entries.accept(PastelItems.SPIRIT_INSTILLER_STRUCTURE_PLACER.get());
+				entries.accept(PastelItems.CINDERHEARTH_STRUCTURE_PLACER.get());
+
+				entries.accept(PastelBlocks.CREATIVE_PARTICLE_SPAWNER.get());
+			})
+			.build();
+
+	public static final CreativeModeTab TOOLS = CreativeModeTab.builder()
+			.icon(PastelItems.PAINTBRUSH::toStack)
+			.title(Component.translatable("itemGroup.pastel.tools"))
+			.displayItems((displayContext, entries) -> {
+				HolderLookup.Provider lookup = displayContext.holders();
+
+				// MAJOR TOOLS
+				entries.accept(PastelItems.GUIDEBOOK.get());
+				entries.accept(PastelItems.PAINTBRUSH.get());
+				entries.accept(PastelItems.TUNING_STAMP.get());
+				entries.accept(PastelItems.MYSTERIOUS_LOCKET.get());
+				entries.accept(PastelItems.MYSTERIOUS_COMPASS.get());
+
+				// MISC
+				entries.accept(PastelItems.BOTTLE_OF_FADING.get());
+				entries.accept(PastelItems.BOTTLE_OF_FAILING.get());
+				entries.accept(PastelItems.BOTTLE_OF_RUIN.get());
+				entries.accept(PastelItems.BOTTLE_OF_FORFEITURE.get());
+				entries.accept(PastelItems.BOTTLE_OF_DECAY_AWAY.get());
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.MULTITOOL.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.TENDER_PICKAXE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.LUCKY_PICKAXE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.RAZOR_FALCHION.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.OBLIVION_PICKAXE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.RESONANT_PICKAXE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.DRAGONRENDING_PICKAXE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.LAGOON_ROD.get()));
+				entries.accept(PastelItems.MOLTEN_ROD.get());
+				entries.accept(PastelItems.FETCHLING_HELMET.get());
+				entries.accept(PastelItems.FEROCIOUS_CHESTPLATE.get());
+				entries.accept(PastelItems.SYLPH_LEGGINGS.get());
+				entries.accept(PastelItems.OREAD_BOOTS.get());
+
+				// BEDROCK TOOLS
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_PICKAXE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_AXE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_SHOVEL.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_SWORD.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_HOE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_BOW.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_CROSSBOW.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_SHEARS.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_FISHING_ROD.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_HELMET.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_CHESTPLATE.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_LEGGINGS.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.BEDROCK_BOOTS.get()));
+
+				// MALACHITE & GLASS CREST
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.MALACHITE_WORKSTAFF.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.MALACHITE_ULTRA_GREATSWORD.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.MALACHITE_CROSSBOW.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.MALACHITE_BIDENT.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.GLASS_CREST_WORKSTAFF.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.GLASS_CREST_ULTRA_GREATSWORD.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.FEROCIOUS_GLASS_CREST_BIDENT.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.FRACTAL_GLASS_CREST_BIDENT.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.GLASS_CREST_CROSSBOW.get()));
+				entries.accept(PastelItems.OMNI_ACCELERATOR.get());
+				entries.accept(PastelItems.MALACHITE_GLASS_ARROW.get());
+				entries.accept(PastelItems.TOPAZ_GLASS_ARROW.get());
+				entries.accept(PastelItems.AMETHYST_GLASS_ARROW.get());
+				entries.accept(PastelItems.CITRINE_GLASS_ARROW.get());
+				entries.accept(PastelItems.ONYX_GLASS_ARROW.get());
+				entries.accept(PastelItems.MOONSTONE_GLASS_ARROW.get());
+				entries.accept(PastelItems.AZURITE_GLASS_AMPOULE.get());
+				entries.accept(PastelItems.MALACHITE_GLASS_AMPOULE.get());
+				entries.accept(PastelItems.BLOODSTONE_GLASS_AMPOULE.get());
+
+				// LEGENDARY WEAPONS
+				entries.accept(PastelItems.DREAMFLAYER.get());
+				entries.accept(PastelItems.NIGHTFALLS_BLADE.get());
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.DRACONIC_TWINSWORD.get()));
+				entries.accept(Preenchanted.getDefaultEnchantedStack(lookup, PastelItems.DRAGON_TALON.get()));
+				entries.accept(PastelItems.KNOTTED_SWORD.get());
+				entries.accept(PastelItems.NECTAR_LANCE.get());
+
+				// CURIOS
+				entries.accept(PastelItems.FANCIFUL_TUFF_RING.get());
+				entries.accept(PastelItems.FANCIFUL_BELT.get());
+				entries.accept(PastelItems.FANCIFUL_PENDANT.get());
+				entries.accept(PastelItems.FANCIFUL_CIRCLET.get());
+				entries.accept(PastelItems.FANCIFUL_GLOVES.get());
+				entries.accept(PastelItems.FANCIFUL_BISMUTH_RING.get());
+				entries.accept(PastelItems.GLOW_VISION_GOGGLES.get());
+				entries.accept(PastelItems.JEOPARDANT.get());
+				entries.accept(PastelItems.SEVEN_LEAGUE_BOOTS.get());
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.SEVEN_LEAGUE_BOOTS.get(), Map.of(Enchantments.POWER, 5)));
+				entries.accept(PastelItems.COTTON_CLOUD_BOOTS.get());
+				entries.accept(PastelItems.RADIANCE_PIN.get());
+				entries.accept(PastelItems.TOTEM_PENDANT.get());
+				entries.accept(PastelItems.TAKE_OFF_BELT.get());
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.TAKE_OFF_BELT.get(), Map.of(Enchantments.POWER, 5, Enchantments.FEATHER_FALLING, 4)));
+				entries.accept(PastelItems.AZURE_DIKE_BELT.get());
+				entries.accept(PastelItems.AZURE_DIKE_RING.get());
+				entries.accept(PastelItems.SHIELDGRASP_AMULET.get());
+				entries.accept(PastelItems.SHIELDGRASP_AMULET.get().getFullStack());
+				entries.accept(PastelItems.HEARTSINGERS_REWARD.get());
+				entries.accept(PastelItems.HEARTSINGERS_REWARD.get().getFullStack());
+				entries.accept(PastelItems.GLOVES_OF_DAWNS_GRASP.get());
+				entries.accept(PastelItems.GLOVES_OF_DAWNS_GRASP.get().getFullStack());
+				entries.accept(PastelItems.RING_OF_PURSUIT.get());
+				entries.accept(PastelItems.RING_OF_PURSUIT.get().getFullStack());
+				entries.accept(PastelItems.RING_OF_DENSER_STEPS.get());
+				entries.accept(PastelItems.RING_OF_DENSER_STEPS.get().getFullStack());
+				entries.accept(PastelItems.RING_OF_AERIAL_GRACE.get());
+				entries.accept(PastelItems.RING_OF_AERIAL_GRACE.get().getFullStack());
+				entries.accept(PastelItems.LAURELS_OF_SERENITY.get());
+				entries.accept(PastelItems.LAURELS_OF_SERENITY.get().getFullStack());
+				entries.accept(PastelItems.GLEAMING_PIN.get());
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.GLEAMING_PIN.get(), Map.of(PastelEnchantments.SNIPING, 2)));
+				entries.accept(PastelItems.LESSER_POTION_PENDANT.get());
+				entries.accept(PastelItems.GREATER_POTION_PENDANT.get());
+				entries.accept(PastelItems.ASHEN_CIRCLET.get());
+				entries.accept(PastelItems.WEEPING_CIRCLET.get());
+				entries.accept(PastelItems.PUFF_CIRCLET.get());
+				entries.accept(PastelItems.WHISPY_CIRCLET.get());
+				entries.accept(PastelItems.AZURESQUE_DIKE_CORE.get());
+				entries.accept(PastelItems.CIRCLET_OF_ARROGANCE.get());
+				entries.accept(PastelItems.AETHER_GRACED_NECTAR_GLOVES.get());
+
+				// NEAT RING (very important to subcategorize)
+				entries.accept(PastelItems.NEAT_RING.get());
+
+				// OTHER
+				entries.accept(PastelItems.CRAFTING_TABLET.get());
+				entries.accept(PastelBlocks.BOTTOMLESS_BUNDLE.get());
+				entries.accept(Ench.getEnchantedStack(lookup, PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem(), Map.of(Enchantments.POWER, 5, PastelEnchantments.VOIDING, 1)));
+
+				entries.accept(PastelItems.KNOWLEDGE_GEM.get());
+				ItemStack enchantedKnowledgeGemStack = Ench.getEnchantedStack(lookup, PastelItems.KNOWLEDGE_GEM.get().asItem(), Map.of(Enchantments.EFFICIENCY, 5, Enchantments.QUICK_CHARGE, 3));
+				entries.accept(enchantedKnowledgeGemStack.copy());
+
+				ItemStack knowledgeGemStack = PastelItems.KNOWLEDGE_GEM.get().getDefaultInstance();
+				var storage = knowledgeGemStack.getCapability(PastelCapabilities.Misc.XP, lookup);
+				storage.insert(storage.getCapacity(), false);
+				entries.accept(knowledgeGemStack);
+
+				var otherStorage = enchantedKnowledgeGemStack.getCapability(PastelCapabilities.Misc.XP, lookup);
+				otherStorage.insert(otherStorage.getCapacity(), false);
+				entries.accept(enchantedKnowledgeGemStack);
+
+				entries.accept(PastelItems.CELESTIAL_POCKETWATCH.get());
+				entries.accept(PastelItems.GILDED_BOOK.get());
+				entries.accept(PastelItems.ENCHANTMENT_CANVAS.get());
+				entries.accept(PastelItems.NIGHT_SALTS.get());
+				entries.accept(PastelItems.SOOTHING_BOUQUET.get());
+				entries.accept(PastelItems.CONCEALING_OILS.get());
+				entries.accept(PastelItems.BITTER_OILS.get());
+				entries.accept(PastelItems.EVERPROMISE_RIBBON.get());
+				entries.accept(PastelItems.BAG_OF_HOLDING.get());
+				entries.accept(PastelItems.RADIANCE_STAFF.get());
+				entries.accept(PastelItems.NATURES_STAFF.get());
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.NATURES_STAFF.get(), Map.of(Enchantments.EFFICIENCY, 5)));
+				entries.accept(PastelItems.STAFF_OF_REMEMBRANCE.get());
+				entries.accept(PastelItems.CONSTRUCTORS_STAFF.get());
+				entries.accept(PastelItems.EXCHANGING_STAFF.get());
+				Ench.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), Enchantments.FORTUNE, 3, false, false).ifPresent(entries::accept);
+				Ench.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), Enchantments.SILK_TOUCH, 1, false, false).ifPresent(entries::accept);
+				Ench.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), PastelEnchantments.RESONANCE, 1, false, false).ifPresent(entries::accept);
+				entries.accept(PastelItems.BLOCK_FLOODER.get());
+				entries.accept(PastelItems.ENDER_SPLICE.get());
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.ENDER_SPLICE.get(), Map.of(PastelEnchantments.RESONANCE, 1, PastelEnchantments.INDESTRUCTIBLE, 1)));
+				entries.accept(PastelItems.PERTURBED_EYE.get());
+				entries.accept(PastelItems.PIPE_BOMB.get());
+				entries.accept(PastelItems.CRESCENT_CLOCK.get());
+				entries.accept(PastelItems.ARTISANS_ATLAS.get());
+
+				entries.accept(PastelItems.MUSIC_DISC_DISCOVERY.get());
+				entries.accept(PastelItems.MUSIC_DISC_CREDITS.get());
+				entries.accept(PastelItems.MUSIC_DISC_DIVINITY.get());
+
+				// INK TOOLS
+				entries.accept(PastelItems.INK_FLASK.get());
+				for (InkColor color : InkColors.all()) {
+					entries.accept(PastelItems.INK_FLASK.get().getFullStack(color));
+				}
+				entries.accept(PastelItems.INK_ASSORTMENT.get());
+				entries.accept(PastelItems.INK_ASSORTMENT.get().getFullStack());
+				entries.accept(PastelItems.PIGMENT_PALETTE.get());
+				entries.accept(PastelItems.PIGMENT_PALETTE.get().getFullStack());
+				entries.accept(PastelItems.ARTISTS_PALETTE.get());
+				entries.accept(PastelItems.ARTISTS_PALETTE.get().getFullStack());
+
+				// CREATIVE TOOLS
+				entries.accept(PastelItems.CREATIVE_INK_ASSORTMENT.get());
+				entries.accept(PastelItems.PRIMORDIAL_LIGHTER.get());
+				entries.accept(PastelItems.DIVINATION_HEART.get());
+			})
+			.build();
+
+	public static final CreativeModeTab NATURAL_BLOCKS = CreativeModeTab.builder()
+			.icon(PastelBlocks.WEEPING_GALA_SPRIG::toStack)
+			.title(Component.translatable("itemGroup.pastel.natural_blocks"))
+			.displayItems((displayContext, entries) -> {
+				entries.accept(PastelBlocks.BLACKSLAG.get());
+				entries.accept(PastelBlocks.BLACKSLAG_SLAB.get());
+				entries.accept(PastelBlocks.BLACKSLAG_WALL.get());
+				entries.accept(PastelBlocks.BLACKSLAG_STAIRS.get());
+				entries.accept(PastelBlocks.COBBLED_BLACKSLAG.get());
+				entries.accept(PastelBlocks.COBBLED_BLACKSLAG_STAIRS.get());
+				entries.accept(PastelBlocks.COBBLED_BLACKSLAG_SLAB.get());
+				entries.accept(PastelBlocks.COBBLED_BLACKSLAG_WALL.get());
+				entries.accept(PastelBlocks.POLISHED_BLACKSLAG.get());
+				entries.accept(PastelBlocks.POLISHED_BLACKSLAG_STAIRS.get());
+				entries.accept(PastelBlocks.POLISHED_BLACKSLAG_SLAB.get());
+				entries.accept(PastelBlocks.POLISHED_BLACKSLAG_WALL.get());
+				entries.accept(PastelBlocks.BLACKSLAG_TILES.get());
+				entries.accept(PastelBlocks.BLACKSLAG_TILE_STAIRS.get());
+				entries.accept(PastelBlocks.BLACKSLAG_TILE_SLAB.get());
+				entries.accept(PastelBlocks.BLACKSLAG_TILE_WALL.get());
+				entries.accept(PastelBlocks.CRACKED_BLACKSLAG_TILES.get());
+				entries.accept(PastelBlocks.BLACKSLAG_BRICKS.get());
+				entries.accept(PastelBlocks.BLACKSLAG_BRICK_STAIRS.get());
+				entries.accept(PastelBlocks.BLACKSLAG_BRICK_SLAB.get());
+				entries.accept(PastelBlocks.BLACKSLAG_BRICK_WALL.get());
+				entries.accept(PastelBlocks.CRACKED_BLACKSLAG_BRICKS.get());
+				entries.accept(PastelBlocks.POLISHED_BLACKSLAG_PILLAR.get());
+				entries.accept(PastelBlocks.CHISELED_POLISHED_BLACKSLAG.get());
+				entries.accept(PastelBlocks.ANCIENT_CHISELED_POLISHED_BLACKSLAG.get());
+				entries.accept(PastelBlocks.POLISHED_BLACKSLAG_BUTTON.get());
+				entries.accept(PastelBlocks.POLISHED_BLACKSLAG_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.INFESTED_BLACKSLAG.get());
+				entries.accept(PastelBlocks.SHALE_CLAY.get());
+				entries.accept(PastelBlocks.TILLED_SHALE_CLAY.get());
+				entries.accept(PastelBlocks.POLISHED_SHALE_CLAY.get());
+				entries.accept(PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY.get());
+				entries.accept(PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY.get());
+				entries.accept(PastelBlocks.POLISHED_SHALE_CLAY_STAIRS.get());
+				entries.accept(PastelBlocks.POLISHED_SHALE_CLAY_SLAB.get());
+				entries.accept(PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get());
+				entries.accept(PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get());
+				entries.accept(PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY_STAIRS.get());
+				entries.accept(PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY_SLAB.get());
+				entries.accept(PastelBlocks.SHALE_CLAY_BRICKS.get());
+				entries.accept(PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS.get());
+				entries.accept(PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS.get());
+				entries.accept(PastelBlocks.SHALE_CLAY_BRICK_STAIRS.get());
+				entries.accept(PastelBlocks.SHALE_CLAY_BRICK_SLAB.get());
+				entries.accept(PastelBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get());
+				entries.accept(PastelBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get());
+				entries.accept(PastelBlocks.WEATHERED_SHALE_CLAY_BRICK_STAIRS.get());
+				entries.accept(PastelBlocks.WEATHERED_SHALE_CLAY_BRICK_SLAB.get());
+				entries.accept(PastelBlocks.SHALE_CLAY_TILES.get());
+				entries.accept(PastelBlocks.EXPOSED_SHALE_CLAY_TILES.get());
+				entries.accept(PastelBlocks.WEATHERED_SHALE_CLAY_TILES.get());
+				entries.accept(PastelBlocks.SHALE_CLAY_TILE_STAIRS.get());
+				entries.accept(PastelBlocks.SHALE_CLAY_TILE_SLAB.get());
+				entries.accept(PastelBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get());
+				entries.accept(PastelBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get());
+				entries.accept(PastelBlocks.WEATHERED_SHALE_CLAY_TILE_STAIRS.get());
+				entries.accept(PastelBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB.get());
+
+				entries.accept(PastelBlocks.BLACK_MATERIA.get());
+				entries.accept(PastelBlocks.SLUSH.get());
+				entries.accept(PastelBlocks.OVERGROWN_SLUSH.get());
+				entries.accept(PastelBlocks.TILLED_SLUSH.get());
+				entries.accept(PastelBlocks.HORNSLAKE.get());
+
+				entries.accept(PastelItems.ASH_FLAKES.get());
+				entries.accept(PastelBlocks.ASH.get());
+				entries.accept(PastelBlocks.ASH_PILE.get());
+
+				entries.accept(PastelBlocks.ROCK_CRYSTAL.get());
+
+				entries.accept(PastelBlocks.DRAGONBONE.get());
+				entries.accept(PastelBlocks.CRACKED_DRAGONBONE.get());
+				entries.accept(PastelBlocks.SAWBLADE_GRASS.get());
+				entries.accept(PastelBlocks.OVERGROWN_BLACKSLAG.get());
+				entries.accept(PastelBlocks.SHIMMEL.get());
+				entries.accept(PastelBlocks.ASHEN_BLACKSLAG.get());
+				entries.accept(PastelBlocks.FLAYED_EARTH.get());
+				entries.accept(PastelBlocks.SLATE_NOXSHROOM.get());
+				entries.accept(PastelBlocks.SLATE_NOXCAP_BLOCK.get());
+				entries.accept(PastelBlocks.SLATE_NOXCAP_STEM.get());
+				entries.accept(PastelBlocks.STRIPPED_SLATE_NOXCAP_STEM.get());
+				entries.accept(PastelBlocks.SLATE_NOXCAP_HYPHAE.get());
+				entries.accept(PastelBlocks.STRIPPED_SLATE_NOXCAP_HYPHAE.get());
+				entries.accept(PastelBlocks.SLATE_NOXCAP_GILLS.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_PLANKS.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_STAIRS.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_SLAB.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_FENCE.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_FENCE_GATE.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_DOOR.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_TRAPDOOR.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_BUTTON.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_PILLAR.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_AMPHORA.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_LANTERN.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_LIGHT.get());
+				entries.accept(PastelBlocks.SLATE_NOXWOOD_LAMP.get());
+				entries.accept(PastelBlocks.EBONY_NOXSHROOM.get());
+				entries.accept(PastelBlocks.EBONY_NOXCAP_BLOCK.get());
+				entries.accept(PastelBlocks.EBONY_NOXCAP_STEM.get());
+				entries.accept(PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM.get());
+				entries.accept(PastelBlocks.EBONY_NOXCAP_HYPHAE.get());
+				entries.accept(PastelBlocks.STRIPPED_EBONY_NOXCAP_HYPHAE.get());
+				entries.accept(PastelBlocks.EBONY_NOXCAP_GILLS.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_PLANKS.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_STAIRS.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_SLAB.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_FENCE.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_FENCE_GATE.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_DOOR.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_TRAPDOOR.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_BUTTON.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_PILLAR.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_AMPHORA.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_LANTERN.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_LIGHT.get());
+				entries.accept(PastelBlocks.EBONY_NOXWOOD_LAMP.get());
+				entries.accept(PastelBlocks.IVORY_NOXSHROOM.get());
+				entries.accept(PastelBlocks.IVORY_NOXCAP_BLOCK.get());
+				entries.accept(PastelBlocks.IVORY_NOXCAP_STEM.get());
+				entries.accept(PastelBlocks.STRIPPED_IVORY_NOXCAP_STEM.get());
+				entries.accept(PastelBlocks.IVORY_NOXCAP_HYPHAE.get());
+				entries.accept(PastelBlocks.STRIPPED_IVORY_NOXCAP_HYPHAE.get());
+				entries.accept(PastelBlocks.IVORY_NOXCAP_GILLS.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_PLANKS.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_STAIRS.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_SLAB.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_FENCE.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_FENCE_GATE.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_DOOR.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_TRAPDOOR.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_BUTTON.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_PILLAR.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_AMPHORA.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_LANTERN.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_LIGHT.get());
+				entries.accept(PastelBlocks.IVORY_NOXWOOD_LAMP.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXSHROOM.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXCAP_BLOCK.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXCAP_STEM.get());
+				entries.accept(PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXCAP_HYPHAE.get());
+				entries.accept(PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_HYPHAE.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXCAP_GILLS.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_PLANKS.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_STAIRS.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_SLAB.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_FENCE.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_FENCE_GATE.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_DOOR.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_TRAPDOOR.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_BUTTON.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_PILLAR.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_AMPHORA.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_LANTERN.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_LIGHT.get());
+				entries.accept(PastelBlocks.CHESTNUT_NOXWOOD_LAMP.get());
+
+				entries.accept(PastelBlocks.WEEPING_GALA_SPRIG.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_LEAVES.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_WEEPING_GALA_LOG.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_WEEPING_GALA_WOOD.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_PLANKS.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_STAIRS.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_DOOR.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_FENCE.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_TRAPDOOR.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_FENCE_GATE.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_BUTTON.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_SLAB.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_PILLAR.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_BARREL.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_AMPHORA.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_LANTERN.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_LAMP.get());
+				entries.accept(PastelBlocks.WEEPING_GALA_LIGHT.get());
+
+				entries.accept(PastelBlocks.SMALL_RED_DRAGONJAG.get());
+				entries.accept(PastelBlocks.SMALL_YELLOW_DRAGONJAG.get());
+				entries.accept(PastelBlocks.SMALL_PINK_DRAGONJAG.get());
+				entries.accept(PastelBlocks.SMALL_PURPLE_DRAGONJAG.get());
+				entries.accept(PastelBlocks.SMALL_BLACK_DRAGONJAG.get());
+				entries.accept(PastelBlocks.BRISTLE_SPROUTS.get());
+				entries.accept(PastelBlocks.SNAPPING_IVY.get());
+				entries.accept(PastelBlocks.SWEET_PEA.get());
+				entries.accept(PastelBlocks.APRICOTTI.get());
+				entries.accept(PastelBlocks.HUMMING_BELL.get());
+				entries.accept(PastelBlocks.HUMMINGSTONE.get());
+				entries.accept(PastelBlocks.WAXED_HUMMINGSTONE.get());
+				entries.accept(PastelBlocks.HUMMINGSTONE_GLASS.get());
+				entries.accept(PastelBlocks.HUMMINGSTONE_GLASS_PANE.get());
+				entries.accept(PastelBlocks.MOSS_BALL.get());
+				entries.accept(PastelBlocks.GIANT_MOSS_BALL.get());
+				entries.accept(PastelBlocks.NEPHRITE_BLOSSOM_STEM.get());
+				entries.accept(PastelBlocks.NEPHRITE_BLOSSOM_LEAVES.get());
+				entries.accept(PastelBlocks.VARIA_SPROUT.get());
+				entries.accept(PastelBlocks.JADEITE_LOTUS_STEM.get());
+				entries.accept(PastelBlocks.JADEITE_LOTUS_FLOWER.get());
+
+				entries.accept(PastelBlocks.DOWNSTONE.get());
+				entries.accept(PastelBlocks.PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.PRESERVATION_STAIRS.get());
+				entries.accept(PastelBlocks.PRESERVATION_SLAB.get());
+				entries.accept(PastelBlocks.PRESERVATION_WALL.get());
+				entries.accept(PastelBlocks.PRESERVATION_BRICKS.get());
+				entries.accept(PastelBlocks.SHIMMERING_PRESERVATION_BRICKS.get());
+				entries.accept(PastelBlocks.POWDER_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.DIKE_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.DREAM_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.DEEP_LIGHT_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.TREASURE_ITEM_BOWL.get());
+				entries.accept(PastelBlocks.PRESERVATION_GLASS.get());
+				entries.accept(PastelBlocks.TINTED_PRESERVATION_GLASS.get());
+				entries.accept(PastelBlocks.PRESERVATION_ROUNDEL.get());
+				entries.accept(PastelBlocks.PRESERVATION_BLOCK_DETECTOR.get());
+				entries.accept(PastelBlocks.DIKE_GATE_FOUNTAIN.get());
+				entries.accept(PastelBlocks.DIKE_GATE.get());
+				entries.accept(PastelBlocks.DREAM_GATE.get());
+				entries.accept(PastelBlocks.PRESERVATION_CONTROLLER.get());
+
+				entries.accept(PastelBlocks.BLACK_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.BLUE_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.BROWN_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.CYAN_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.GRAY_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.GREEN_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.LIME_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.MAGENTA_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.ORANGE_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.PINK_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.PURPLE_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.RED_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.WHITE_CHISELED_PRESERVATION_STONE.get());
+				entries.accept(PastelBlocks.YELLOW_CHISELED_PRESERVATION_STONE.get());
+
+				entries.accept(PastelBlocks.INVISIBLE_WALL.get());
+				entries.accept(PastelBlocks.COURIER_STATUE.get());
+				entries.accept(PastelBlocks.PRESERVATION_CHEST.get());
+			})
+			.build();
+
+	public static final CreativeModeTab CUISINE = CreativeModeTab.builder()
+			.icon(PastelItems.DEMON_TEA::toStack)
+			.title(Component.translatable("itemGroup.pastel.cuisine"))
+			.displayItems((displayContext, entries) -> {
+
+				// COOKBOOKS
+				entries.accept(PastelItems.IMBRIFER_COOKBOOK.get());
+				entries.accept(PastelItems.IMPERIAL_COOKBOOK.get());
+				entries.accept(PastelItems.MELOCHITES_COOKBOOK_VOL_1.get());
+				entries.accept(PastelItems.MELOCHITES_COOKBOOK_VOL_2.get());
+				entries.accept(PastelItems.BREWERS_HANDBOOK.get());
+				//entries.add(PastelItems.VARIA_COOKBOOK);
+				entries.accept(PastelItems.POISONERS_HANDBOOK.get());
+
+				// UNGODLY AMOUNT OF FOOD
+				entries.accept(PastelItems.TRIPLE_MEAT_POT_PIE.get());
+				entries.accept(PastelItems.CLOTTED_CREAM.get());
+				entries.accept(PastelItems.FRESH_CHOCOLATE.get());
+				entries.accept(PastelItems.BODACIOUS_BERRY_BAR.get());
+				entries.accept(PastelItems.HOT_CHOCOLATE.get());
+				entries.accept(PastelItems.KARAK_CHAI.get());
+				entries.accept(PastelItems.RESTORATION_TEA.get());
+				entries.accept(PastelItems.GLISTERING_JELLY_TEA.get());
+				entries.accept(PastelItems.AZALEA_TEA.get());
+				entries.accept(PastelItems.DEMON_TEA.get());
+				entries.accept(PastelItems.ENCHANTED_GOLDEN_CARROT.get());
+				entries.accept(PastelItems.JADE_JELLY.get());
+				entries.accept(PastelItems.JARAMEL.get());
+				entries.accept(PastelItems.MOONSTRUCK_NECTAR.get());
+				entries.accept(PastelItems.GLASS_PEACH.get());
+				entries.accept(PastelItems.FISSURE_PLUM.get());
+				entries.accept(PastelItems.NIGHTDEW_SPROUT.get());
+				entries.accept(PastelItems.NECTARDEW_BURGEON.get());
+				entries.accept(PastelItems.BLOODBOIL_SYRUP.get());
+				entries.accept(PastelItems.MILKY_RESIN.get());
+				entries.accept(PastelItems.SCONE.get());
+				entries.accept(PastelItems.STAR_CANDY.get());
+				entries.accept(PastelItems.ENCHANTED_STAR_CANDY.get());
+				entries.accept(PastelItems.CHEONG.get());
+				entries.accept(PastelItems.MERMAIDS_JAM.get());
+				entries.accept(PastelItems.MERMAIDS_POPCORN.get());
+				entries.accept(PastelItems.LE_FISHE_AU_CHOCOLAT.get());
+				//entries.add(PastelItems.STUFFED_PETALS);
+				//entries.add(PastelItems.PASTICHE);
+				//entries.add(PastelItems.VITTORIAS_ROAST);
+				entries.accept(PastelItems.LUCKY_ROLL.get());
+				entries.accept(PastelItems.HONEY_PASTRY.get());
+				entries.accept(PastelItems.JARAMEL_TART.get());
+				entries.accept(PastelItems.SALTED_JARAMEL_TART.get());
+				entries.accept(PastelItems.ASHEN_TART.get());
+				entries.accept(PastelItems.WEEPING_TART.get());
+				entries.accept(PastelItems.WHISPY_TART.get());
+				entries.accept(PastelItems.PUFF_TART.get());
+				entries.accept(PastelItems.JARAMEL_TRIFLE.get());
+				entries.accept(PastelItems.SALTED_JARAMEL_TRIFLE.get());
+				entries.accept(PastelItems.MONSTER_TRIFLE.get());
+				entries.accept(PastelItems.DEMON_TRIFLE.get());
+				entries.accept(PastelItems.MYCEYLON.get());
+				entries.accept(PastelItems.MYCEYLON_APPLE_PIE.get());
+				entries.accept(PastelItems.MYCEYLON_PUMPKIN_PIE.get());
+				entries.accept(PastelItems.MYCEYLON_COOKIE.get());
+				entries.accept(PastelItems.ALOE_LEAF.get());
+				entries.accept(PastelItems.SAWBLADE_HOLLY_BERRY.get());
+				entries.accept(PastelItems.PRICKLY_BAYLEAF.get());
+				entries.accept(PastelItems.TRIPLE_MEAT_POT_STEW.get());
+				entries.accept(PastelItems.DRAGONBONE_BROTH.get());
+				entries.accept(PastelItems.BAGNUN.get());
+				entries.accept(PastelItems.BANYASH.get());
+				entries.accept(PastelItems.BERLINER.get());
+				entries.accept(PastelItems.BRISTLE_MEAD.get());
+				entries.accept(PastelItems.CHAUVE_SOURIS_AU_VIN.get());
+				entries.accept(PastelItems.CRAWFISH.get());
+				entries.accept(PastelItems.CRAWFISH_COCKTAIL.get());
+				entries.accept(PastelItems.CREAM_PASTRY.get());
+				entries.accept(PastelItems.FADED_KOI.get());
+				entries.accept(PastelItems.FISHCAKE.get());
+				entries.accept(PastelItems.LIZARD_MEAT.get());
+				entries.accept(PastelItems.COOKED_LIZARD_MEAT.get());
+				entries.accept(PastelItems.GOLDEN_BRISTLE_TEA.get());
+				entries.accept(PastelItems.HARE_ROAST.get());
+				entries.accept(PastelItems.JUNKET.get());
+				entries.accept(PastelItems.KOI.get());
+				entries.accept(PastelItems.MEATLOAF.get());
+				entries.accept(PastelItems.MEATLOAF_SANDWICH.get());
+				entries.accept(PastelItems.MELLOW_SHALLOT_SOUP.get());
+				entries.accept(PastelItems.PEACHES_FLAMBE.get());
+				entries.accept(PastelItems.PEACH_CREAM.get());
+				entries.accept(PastelItems.PEACH_JAM.get());
+				entries.accept(PastelItems.RABBIT_CREAM_PIE.get());
+				entries.accept(PastelItems.SEDATIVES.get());
+				entries.accept(PastelItems.SLUSHSLIDE.get());
+				entries.accept(PastelItems.SURSTROMMING.get());
+				entries.accept(PastelItems.MORCHELLA.get());
+				entries.accept(PastelItems.NECTERED_VIOGNIER.get());
+				entries.accept(PastelItems.FREIGEIST.get());
+
+				// adding all beverages from recipes
+				if (PastelCommon.getSidedServer() != null) {
+					for (RecipeHolder<ITitrationBarrelRecipe> recipe : PastelCommon.getSidedServer().getRecipeManager().getAllRecipesFor(PastelRecipeTypes.TITRATION_BARREL)) {
+						ItemStack output = recipe.value().getResultItem(PastelCommon.getRegistryAccess()).copy();
+						if (output.getItem().components().has(PastelDataComponentTypes.INFUSED_BEVERAGE)) {
+							output.setCount(1);
+							entries.accept(output);
+						}
+					}
+				}
+
+				// SPECIAL FOODS
+				entries.accept(PastelItems.PURE_ALCOHOL.get());
+				entries.accept(PastelItems.REPRISE.get());
+				entries.accept(PastelItems.SUSPICIOUS_BREW.get());
+				entries.accept(PastelItems.JADE_WINE.get());
+				entries.accept(PastelItems.CHRYSOCOLLA.get());
+				entries.accept(PastelItems.AQUA_REGIA.get());
+				entries.accept(PastelItems.EVERNECTAR.get());
+			})
+			.build();
+
+	public static final CreativeModeTab RESOURCES = CreativeModeTab.builder()
+			.icon(PastelItems.TOPAZ_SHARD::toStack)
+			.title(Component.translatable("itemGroup.pastel.resources"))
+			.displayItems((displayContext, entries) -> {
+				entries.accept(PastelItems.TOPAZ_SHARD.get());
+				entries.accept(Items.AMETHYST_SHARD);
+				entries.accept(PastelItems.CITRINE_SHARD.get());
+				entries.accept(PastelItems.ONYX_SHARD.get());
+				entries.accept(PastelItems.MOONSTONE_SHARD.get());
+
+				entries.accept(PastelBlocks.TOPAZ_BLOCK.get());
+				entries.accept(Blocks.AMETHYST_BLOCK);
+				entries.accept(PastelBlocks.CITRINE_BLOCK.get());
+				entries.accept(PastelBlocks.ONYX_BLOCK.get());
+				entries.accept(PastelBlocks.MOONSTONE_BLOCK.get());
+
+				entries.accept(PastelItems.TOPAZ_POWDER.get());
+				entries.accept(PastelItems.AMETHYST_POWDER.get());
+				entries.accept(PastelItems.CITRINE_POWDER.get());
+				entries.accept(PastelItems.ONYX_POWDER.get());
+				entries.accept(PastelItems.MOONSTONE_POWDER.get());
+
+				entries.accept(PastelBlocks.TOPAZ_POWDER_BLOCK.get());
+				entries.accept(PastelBlocks.AMETHYST_POWDER_BLOCK.get());
+				entries.accept(PastelBlocks.CITRINE_POWDER_BLOCK.get());
+				entries.accept(PastelBlocks.ONYX_POWDER_BLOCK.get());
+				entries.accept(PastelBlocks.MOONSTONE_POWDER_BLOCK.get());
+
+				entries.accept(PastelBlocks.BUDDING_TOPAZ.get());
+				entries.accept(Blocks.BUDDING_AMETHYST);
+				entries.accept(PastelBlocks.BUDDING_CITRINE.get());
+				entries.accept(PastelBlocks.BUDDING_ONYX.get());
+				entries.accept(PastelBlocks.BUDDING_MOONSTONE.get());
+
+				entries.accept(PastelBlocks.SMALL_TOPAZ_BUD.get());
+				entries.accept(PastelBlocks.MEDIUM_TOPAZ_BUD.get());
+				entries.accept(PastelBlocks.LARGE_TOPAZ_BUD.get());
+				entries.accept(PastelBlocks.TOPAZ_CLUSTER.get());
+
+				entries.accept(Blocks.SMALL_AMETHYST_BUD);
+				entries.accept(Blocks.MEDIUM_AMETHYST_BUD);
+				entries.accept(Blocks.LARGE_AMETHYST_BUD);
+				entries.accept(Blocks.AMETHYST_CLUSTER);
+
+				entries.accept(PastelBlocks.SMALL_CITRINE_BUD.get());
+				entries.accept(PastelBlocks.MEDIUM_CITRINE_BUD.get());
+				entries.accept(PastelBlocks.LARGE_CITRINE_BUD.get());
+				entries.accept(PastelBlocks.CITRINE_CLUSTER.get());
+
+				entries.accept(PastelBlocks.SMALL_ONYX_BUD.get());
+				entries.accept(PastelBlocks.MEDIUM_ONYX_BUD.get());
+				entries.accept(PastelBlocks.LARGE_ONYX_BUD.get());
+				entries.accept(PastelBlocks.ONYX_CLUSTER.get());
+
+				entries.accept(PastelBlocks.SMALL_MOONSTONE_BUD.get());
+				entries.accept(PastelBlocks.MEDIUM_MOONSTONE_BUD.get());
+				entries.accept(PastelBlocks.LARGE_MOONSTONE_BUD.get());
+				entries.accept(PastelBlocks.MOONSTONE_CLUSTER.get());
+
+				entries.accept(PastelBlocks.TOPAZ_ORE.get());
+				entries.accept(PastelBlocks.AMETHYST_ORE.get());
+				entries.accept(PastelBlocks.CITRINE_ORE.get());
+				entries.accept(PastelBlocks.ONYX_ORE.get());
+				entries.accept(PastelBlocks.MOONSTONE_ORE.get());
+				entries.accept(PastelBlocks.DEEPSLATE_TOPAZ_ORE.get());
+				entries.accept(PastelBlocks.DEEPSLATE_AMETHYST_ORE.get());
+				entries.accept(PastelBlocks.DEEPSLATE_CITRINE_ORE.get());
+				entries.accept(PastelBlocks.DEEPSLATE_ONYX_ORE.get());
+				entries.accept(PastelBlocks.DEEPSLATE_MOONSTONE_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_TOPAZ_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_AMETHYST_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_CITRINE_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_ONYX_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get());
+				entries.accept(PastelBlocks.SHIMMERSTONE_ORE.get());
+				entries.accept(PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_SHIMMERSTONE_ORE.get());
+				entries.accept(PastelBlocks.AZURITE_ORE.get());
+				entries.accept(PastelBlocks.DEEPSLATE_AZURITE_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_AZURITE_ORE.get());
+				entries.accept(PastelBlocks.STRATINE_ORE.get());
+				entries.accept(PastelBlocks.PALTAERIA_ORE.get());
+
+				entries.accept(PastelBlocks.BLACKSLAG_COAL_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_COPPER_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_IRON_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_GOLD_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_DIAMOND_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_REDSTONE_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_LAPIS_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_EMERALD_ORE.get());
+
+				entries.accept(PastelItems.BISMUTH_FLAKE.get());
+				entries.accept(PastelBlocks.SMALL_BISMUTH_BUD.get());
+				entries.accept(PastelBlocks.LARGE_BISMUTH_BUD.get());
+				entries.accept(PastelBlocks.BISMUTH_CLUSTER.get());
+				entries.accept(PastelItems.BISMUTH_CRYSTAL.get());
+
+				entries.accept(PastelBlocks.MALACHITE_ORE.get());
+				entries.accept(PastelBlocks.DEEPSLATE_MALACHITE_ORE.get());
+				entries.accept(PastelBlocks.BLACKSLAG_MALACHITE_ORE.get());
+				entries.accept(PastelItems.RAW_MALACHITE.get());
+				entries.accept(PastelBlocks.SMALL_MALACHITE_BUD.get());
+				entries.accept(PastelBlocks.LARGE_MALACHITE_BUD.get());
+				entries.accept(PastelBlocks.MALACHITE_CLUSTER.get());
+				entries.accept(PastelItems.PURE_MALACHITE.get());
+
+				entries.accept(PastelItems.RAW_AZURITE.get());
+				entries.accept(PastelBlocks.SMALL_AZURITE_BUD.get());
+				entries.accept(PastelBlocks.LARGE_AZURITE_BUD.get());
+				entries.accept(PastelBlocks.AZURITE_CLUSTER.get());
+				entries.accept(PastelItems.PURE_AZURITE.get());
+
+				entries.accept(PastelItems.RAW_BLOODSTONE.get());
+				entries.accept(PastelBlocks.SMALL_BLOODSTONE_BUD.get());
+				entries.accept(PastelBlocks.LARGE_BLOODSTONE_BUD.get());
+				entries.accept(PastelBlocks.BLOODSTONE_CLUSTER.get());
+				entries.accept(PastelItems.PURE_BLOODSTONE.get());
+
+				entries.accept(PastelItems.FROSTBITE_ESSENCE.get());
+				entries.accept(PastelBlocks.FROSTBITE_CRYSTAL.get());
+				entries.accept(PastelItems.INCANDESCENT_ESSENCE.get());
+				entries.accept(PastelBlocks.BLAZING_CRYSTAL.get());
+
+				entries.accept(PastelBlocks.CLOVER.get());
+				entries.accept(PastelBlocks.FOUR_LEAF_CLOVER.get());
+				entries.accept(PastelItems.BLOOD_ORCHID_PETAL.get());
+				entries.accept(PastelBlocks.BLOOD_ORCHID.get());
+				entries.accept(PastelBlocks.QUITOXIC_REEDS.get());
+				entries.accept(PastelItems.QUITOXIC_POWDER.get());
+
+				entries.accept(PastelItems.AMARANTH_GRAINS.get());
+				entries.accept(PastelBlocks.AMARANTH_BUSHEL.get());
+				entries.accept(BuiltInRegistries.ITEM.get(PastelItems.GLISTERING_MELON_SEEDS));
+
+				entries.accept(PastelBlocks.GLISTERING_SHOOTING_STAR.get());
+				entries.accept(PastelBlocks.FIERY_SHOOTING_STAR.get());
+				entries.accept(PastelBlocks.COLORFUL_SHOOTING_STAR.get());
+				entries.accept(PastelBlocks.PRISTINE_SHOOTING_STAR.get());
+				entries.accept(PastelBlocks.GEMSTONE_SHOOTING_STAR.get());
+				entries.accept(PastelItems.STARDUST.get());
+				entries.accept(PastelBlocks.STARDUST_BLOCK.get());
+				entries.accept(PastelItems.STAR_FRAGMENT.get());
+				entries.accept(PastelBlocks.RADIATING_ENDER.get());
+
+				entries.accept(PastelItems.WHITE_PIGMENT.get());
+				entries.accept(PastelItems.ORANGE_PIGMENT.get());
+				entries.accept(PastelItems.MAGENTA_PIGMENT.get());
+				entries.accept(PastelItems.LIGHT_BLUE_PIGMENT.get());
+				entries.accept(PastelItems.YELLOW_PIGMENT.get());
+				entries.accept(PastelItems.LIME_PIGMENT.get());
+				entries.accept(PastelItems.PINK_PIGMENT.get());
+				entries.accept(PastelItems.GRAY_PIGMENT.get());
+				entries.accept(PastelItems.LIGHT_GRAY_PIGMENT.get());
+				entries.accept(PastelItems.CYAN_PIGMENT.get());
+				entries.accept(PastelItems.PURPLE_PIGMENT.get());
+				entries.accept(PastelItems.BLUE_PIGMENT.get());
+				entries.accept(PastelItems.BROWN_PIGMENT.get());
+				entries.accept(PastelItems.GREEN_PIGMENT.get());
+				entries.accept(PastelItems.RED_PIGMENT.get());
+				entries.accept(PastelItems.BLACK_PIGMENT.get());
+
+				entries.accept(PastelItems.VEGETAL.get());
+				entries.accept(PastelItems.NEOLITH.get());
+				entries.accept(PastelItems.BEDROCK_DUST.get());
+				entries.accept(PastelItems.MIDNIGHT_ABERRATION.get());
+				entries.accept(PastelItems.MIDNIGHT_ABERRATION.get().getStableStack());
+				entries.accept(PastelItems.MIDNIGHT_CHIP.get());
+
+				entries.accept(PastelItems.SHIMMERSTONE_GEM.get());
+				entries.accept(PastelItems.PALTAERIA_FRAGMENTS.get());
+				entries.accept(PastelItems.PALTAERIA_GEM.get());
+				entries.accept(PastelItems.STRATINE_FRAGMENTS.get());
+				entries.accept(PastelItems.STRATINE_GEM.get());
+
+				entries.accept(PastelItems.HIBERNATING_JADE_VINE_BULB.get());
+				entries.accept(PastelItems.GERMINATED_JADE_VINE_BULB.get());
+				entries.accept(PastelItems.JADE_VINE_PETALS.get());
+				entries.accept(PastelBlocks.NEPHRITE_BLOSSOM_BULB.get());
+				entries.accept(PastelBlocks.JADEITE_LOTUS_BULB.get());
+				entries.accept(PastelItems.JADEITE_PETALS.get());
+
+				entries.accept(PastelItems.MERMAIDS_GEM.get());
+				entries.accept(PastelItems.STORM_STONE.get());
+				entries.accept(PastelItems.DOOMBLOOM_SEED.get());
+				entries.accept(PastelItems.RESPLENDENT_FEATHER.get());
+				entries.accept(PastelItems.DRAGONBONE_CHUNK.get());
+				entries.accept(PastelItems.BONE_ASH.get());
+				entries.accept(PastelItems.DOWNSTONE_FRAGMENTS.get());
+				entries.accept(PastelItems.RESONANCE_SHARD.get());
+				entries.accept(PastelItems.AETHER_VESTIGES.get());
+				entries.accept(PastelItems.MOONSTONE_CORE.get());
+
+				entries.accept(PastelItems.LIQUID_CRYSTAL_BUCKET.get());
+				entries.accept(PastelItems.HUMUS_BUCKET.get());
+				entries.accept(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get());
+				entries.accept(PastelItems.DRAGONROT_BUCKET.get());
+
+				// PURE RESOURCES (HELL)
+				entries.accept(PastelItems.PURE_COAL.get());
+				entries.accept(PastelBlocks.SMALL_COAL_BUD.get());
+				entries.accept(PastelBlocks.LARGE_COAL_BUD.get());
+				entries.accept(PastelBlocks.COAL_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_COAL_BLOCK.get());
+				entries.accept(PastelItems.PURE_COPPER.get());
+				entries.accept(PastelBlocks.SMALL_COPPER_BUD.get());
+				entries.accept(PastelBlocks.LARGE_COPPER_BUD.get());
+				entries.accept(PastelBlocks.COPPER_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_COPPER_BLOCK.get());
+				entries.accept(PastelItems.PURE_IRON.get());
+				entries.accept(PastelBlocks.SMALL_IRON_BUD.get());
+				entries.accept(PastelBlocks.LARGE_IRON_BUD.get());
+				entries.accept(PastelBlocks.IRON_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_IRON_BLOCK.get());
+				entries.accept(PastelItems.PURE_GOLD.get());
+				entries.accept(PastelBlocks.SMALL_GOLD_BUD.get());
+				entries.accept(PastelBlocks.LARGE_GOLD_BUD.get());
+				entries.accept(PastelBlocks.GOLD_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_GOLD_BLOCK.get());
+				entries.accept(PastelItems.PURE_LAPIS.get());
+				entries.accept(PastelBlocks.SMALL_LAPIS_BUD.get());
+				entries.accept(PastelBlocks.LARGE_LAPIS_BUD.get());
+				entries.accept(PastelBlocks.LAPIS_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_LAPIS_BLOCK.get());
+				entries.accept(PastelItems.PURE_REDSTONE.get());
+				entries.accept(PastelBlocks.SMALL_REDSTONE_BUD.get());
+				entries.accept(PastelBlocks.LARGE_REDSTONE_BUD.get());
+				entries.accept(PastelBlocks.REDSTONE_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_REDSTONE_BLOCK.get());
+				entries.accept(PastelItems.PURE_DIAMOND.get());
+				entries.accept(PastelBlocks.SMALL_DIAMOND_BUD.get());
+				entries.accept(PastelBlocks.LARGE_DIAMOND_BUD.get());
+				entries.accept(PastelBlocks.DIAMOND_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_DIAMOND_BLOCK.get());
+				entries.accept(PastelItems.PURE_EMERALD.get());
+				entries.accept(PastelBlocks.SMALL_EMERALD_BUD.get());
+				entries.accept(PastelBlocks.LARGE_EMERALD_BUD.get());
+				entries.accept(PastelBlocks.EMERALD_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_EMERALD_BLOCK.get());
+
+				entries.accept(PastelItems.PURE_PRISMARINE.get());
+				entries.accept(PastelBlocks.SMALL_PRISMARINE_BUD.get());
+				entries.accept(PastelBlocks.LARGE_PRISMARINE_BUD.get());
+				entries.accept(PastelBlocks.PRISMARINE_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_PRISMARINE_BLOCK.get());
+
+				entries.accept(PastelItems.PURE_QUARTZ.get());
+				entries.accept(PastelBlocks.SMALL_QUARTZ_BUD.get());
+				entries.accept(PastelBlocks.LARGE_QUARTZ_BUD.get());
+				entries.accept(PastelBlocks.QUARTZ_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_QUARTZ_BLOCK.get());
+				entries.accept(PastelItems.PURE_GLOWSTONE.get());
+				entries.accept(PastelBlocks.SMALL_GLOWSTONE_BUD.get());
+				entries.accept(PastelBlocks.LARGE_GLOWSTONE_BUD.get());
+				entries.accept(PastelBlocks.GLOWSTONE_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_GLOWSTONE_BLOCK.get());
+				entries.accept(PastelItems.PURE_NETHERITE_SCRAP.get());
+				entries.accept(PastelBlocks.SMALL_NETHERITE_SCRAP_BUD.get());
+				entries.accept(PastelBlocks.LARGE_NETHERITE_SCRAP_BUD.get());
+				entries.accept(PastelBlocks.NETHERITE_SCRAP_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_NETHERITE_SCRAP_BLOCK.get());
+
+				entries.accept(PastelItems.PURE_ECHO.get());
+				entries.accept(PastelBlocks.SMALL_ECHO_BUD.get());
+				entries.accept(PastelBlocks.LARGE_ECHO_BUD.get());
+				entries.accept(PastelBlocks.ECHO_CLUSTER.get());
+				entries.accept(PastelBlocks.PURE_ECHO_BLOCK.get());
+
+				if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.AE2_ID)) {
+					entries.accept(AE2Compat.SMALL_FLUIX_BUD);
+					entries.accept(AE2Compat.LARGE_FLUIX_BUD);
+					entries.accept(AE2Compat.FLUIX_CLUSTER);
+				}
+
+				if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.CREATE_ID)) {
+					entries.accept(CreateCompat.PURE_ZINC);
+					entries.accept(CreateCompat.SMALL_ZINC_BUD);
+					entries.accept(CreateCompat.LARGE_ZINC_BUD);
+					entries.accept(CreateCompat.ZINC_CLUSTER);
+					entries.accept(CreateCompat.PURE_ZINC_BLOCK);
+				}
+			})
+			.build();
+
+	public static final CreativeModeTab DECORATION = CreativeModeTab.builder()
+			.icon(PastelBlocks.CHISELED_POLISHED_BASALT::toStack)
+			.title(Component.translatable("itemGroup.pastel.decoration"))
+			.displayItems((displayContext, entries) -> {
+				entries.accept(PastelBlocks.SMOOTH_BASALT_SLAB.get());
+				entries.accept(PastelBlocks.SMOOTH_BASALT_WALL.get());
+				entries.accept(PastelBlocks.SMOOTH_BASALT_STAIRS.get());
+				entries.accept(PastelBlocks.POLISHED_BASALT.get());
+				entries.accept(PastelBlocks.POLISHED_BASALT_PILLAR.get());
+				entries.accept(PastelBlocks.POLISHED_BASALT_CREST.get());
+				entries.accept(PastelBlocks.CHISELED_POLISHED_BASALT.get());
+				entries.accept(PastelBlocks.NOTCHED_POLISHED_BASALT.get());
+				entries.accept(PastelBlocks.POLISHED_BASALT_SLAB.get());
+				entries.accept(PastelBlocks.POLISHED_BASALT_WALL.get());
+				entries.accept(PastelBlocks.POLISHED_BASALT_STAIRS.get());
+				entries.accept(PastelBlocks.BASALT_BRICKS.get());
+				entries.accept(PastelBlocks.BASALT_BRICK_SLAB.get());
+				entries.accept(PastelBlocks.BASALT_BRICK_WALL.get());
+				entries.accept(PastelBlocks.BASALT_BRICK_STAIRS.get());
+				entries.accept(PastelBlocks.CRACKED_BASALT_BRICKS.get());
+				entries.accept(PastelBlocks.BASALT_TILES.get());
+				entries.accept(PastelBlocks.BASALT_TILE_STAIRS.get());
+				entries.accept(PastelBlocks.BASALT_TILE_SLAB.get());
+				entries.accept(PastelBlocks.BASALT_TILE_WALL.get());
+				entries.accept(PastelBlocks.PLANED_BASALT.get());
+				entries.accept(PastelBlocks.PLANED_BASALT_SLAB.get());
+				entries.accept(PastelBlocks.PLANED_BASALT_STAIRS.get());
+				entries.accept(PastelBlocks.PLANED_BASALT_WALL.get());
+				entries.accept(PastelBlocks.CRACKED_BASALT_TILES.get());
+				entries.accept(PastelBlocks.POLISHED_BASALT_BUTTON.get());
+				entries.accept(PastelBlocks.POLISHED_BASALT_PRESSURE_PLATE.get());
+
+				entries.accept(PastelBlocks.CALCITE_SLAB.get());
+				entries.accept(PastelBlocks.CALCITE_WALL.get());
+				entries.accept(PastelBlocks.CALCITE_STAIRS.get());
+				entries.accept(PastelBlocks.POLISHED_CALCITE.get());
+				entries.accept(PastelBlocks.POLISHED_CALCITE_PILLAR.get());
+				entries.accept(PastelBlocks.POLISHED_CALCITE_CREST.get());
+				entries.accept(PastelBlocks.CHISELED_POLISHED_CALCITE.get());
+				entries.accept(PastelBlocks.NOTCHED_POLISHED_CALCITE.get());
+				entries.accept(PastelBlocks.POLISHED_CALCITE_SLAB.get());
+				entries.accept(PastelBlocks.POLISHED_CALCITE_WALL.get());
+				entries.accept(PastelBlocks.POLISHED_CALCITE_STAIRS.get());
+				entries.accept(PastelBlocks.CALCITE_BRICKS.get());
+				entries.accept(PastelBlocks.CALCITE_BRICK_SLAB.get());
+				entries.accept(PastelBlocks.CALCITE_BRICK_WALL.get());
+				entries.accept(PastelBlocks.CALCITE_BRICK_STAIRS.get());
+				entries.accept(PastelBlocks.CRACKED_CALCITE_BRICKS.get());
+				entries.accept(PastelBlocks.CALCITE_TILES.get());
+				entries.accept(PastelBlocks.CALCITE_TILE_STAIRS.get());
+				entries.accept(PastelBlocks.CALCITE_TILE_SLAB.get());
+				entries.accept(PastelBlocks.CALCITE_TILE_WALL.get());
+				entries.accept(PastelBlocks.PLANED_CALCITE.get());
+				entries.accept(PastelBlocks.PLANED_CALCITE_SLAB.get());
+				entries.accept(PastelBlocks.PLANED_CALCITE_STAIRS.get());
+				entries.accept(PastelBlocks.PLANED_CALCITE_WALL.get());
+				entries.accept(PastelBlocks.CRACKED_CALCITE_TILES.get());
+				entries.accept(PastelBlocks.POLISHED_CALCITE_BUTTON.get());
+				entries.accept(PastelBlocks.POLISHED_CALCITE_PRESSURE_PLATE.get());
+
+				entries.accept(PastelBlocks.POLISHED_BONE_ASH.get());
+				entries.accept(PastelBlocks.POLISHED_BONE_ASH_SLAB.get());
+				entries.accept(PastelBlocks.POLISHED_BONE_ASH_STAIRS.get());
+				entries.accept(PastelBlocks.POLISHED_BONE_ASH_WALL.get());
+				entries.accept(PastelBlocks.BONE_ASH_BRICKS.get());
+				entries.accept(PastelBlocks.BONE_ASH_BRICK_SLAB.get());
+				entries.accept(PastelBlocks.BONE_ASH_BRICK_STAIRS.get());
+				entries.accept(PastelBlocks.BONE_ASH_BRICK_WALL.get());
+				entries.accept(PastelBlocks.BONE_ASH_TILES.get());
+				entries.accept(PastelBlocks.BONE_ASH_TILE_SLAB.get());
+				entries.accept(PastelBlocks.BONE_ASH_TILE_STAIRS.get());
+				entries.accept(PastelBlocks.BONE_ASH_TILE_WALL.get());
+				entries.accept(PastelBlocks.POLISHED_BONE_ASH_PILLAR.get());
+				entries.accept(PastelBlocks.BONE_ASH_SHINGLES.get());
+
+				entries.accept(PastelItems.PYRITE_CHUNK.get());
+				entries.accept(PastelBlocks.PYRITE.get());
+				entries.accept(PastelBlocks.PYRITE_SLAB.get());
+				entries.accept(PastelBlocks.PYRITE_STAIRS.get());
+				entries.accept(PastelBlocks.PYRITE_WALL.get());
+				entries.accept(PastelBlocks.PYRITE_PILE.get());
+				entries.accept(PastelBlocks.PYRITE_TILES.get());
+				entries.accept(PastelBlocks.PYRITE_TILES_SLAB.get());
+				entries.accept(PastelBlocks.PYRITE_TILES_STAIRS.get());
+				entries.accept(PastelBlocks.PYRITE_TILES_WALL.get());
+				entries.accept(PastelBlocks.PYRITE_PLATING.get());
+				entries.accept(PastelBlocks.PYRITE_TUBING.get());
+				entries.accept(PastelBlocks.PYRITE_RELIEF.get());
+				entries.accept(PastelBlocks.PYRITE_STACK.get());
+				entries.accept(PastelBlocks.PYRITE_PANELING.get());
+				entries.accept(PastelBlocks.PYRITE_VENT.get());
+				entries.accept(PastelBlocks.PYRITE_RIPPER.get());
+				entries.accept(PastelBlocks.PYRITE_PROJECTOR.get());
+
+				entries.accept(PastelBlocks.BASAL_MARBLE.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_STAIRS.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_SLAB.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_WALL.get());
+				entries.accept(PastelBlocks.POLISHED_BASAL_MARBLE.get());
+				entries.accept(PastelBlocks.POLISHED_BASAL_MARBLE_STAIRS.get());
+				entries.accept(PastelBlocks.POLISHED_BASAL_MARBLE_SLAB.get());
+				entries.accept(PastelBlocks.POLISHED_BASAL_MARBLE_WALL.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_PILLAR.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_TILES.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_TILE_STAIRS.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_TILE_SLAB.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_TILE_WALL.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_BRICKS.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_BRICK_STAIRS.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_BRICK_SLAB.get());
+				entries.accept(PastelBlocks.BASAL_MARBLE_BRICK_WALL.get());
+				entries.accept(PastelBlocks.LONGING_CHIMERA.get());
+
+				entries.accept(PastelBlocks.PRIMORDIAL_TORCH.get());
+
+				entries.accept(PastelBlocks.POLISHED_TOPAZ_BLOCK.get());
+				entries.accept(PastelBlocks.POLISHED_AMETHYST_BLOCK.get());
+				entries.accept(PastelBlocks.POLISHED_CITRINE_BLOCK.get());
+				entries.accept(PastelBlocks.POLISHED_ONYX_BLOCK.get());
+				entries.accept(PastelBlocks.POLISHED_MOONSTONE_BLOCK.get());
+
+				entries.accept(PastelBlocks.VEGETAL_BLOCK.get());
+				entries.accept(PastelBlocks.NEOLITH_BLOCK.get());
+				entries.accept(PastelBlocks.BEDROCK_DUST_BLOCK.get());
+
+				entries.accept(PastelBlocks.SHIMMERSTONE_BLOCK.get());
+				entries.accept(PastelBlocks.AZURITE_BLOCK.get());
+				entries.accept(PastelBlocks.MALACHITE_BLOCK.get());
+				entries.accept(PastelBlocks.BLOODSTONE_BLOCK.get());
+				entries.accept(PastelBlocks.BISMUTH_BLOCK.get());
+
+				entries.accept(PastelBlocks.STRATINE_FLOATBLOCK.get());
+				entries.accept(PastelBlocks.PALTAERIA_FLOATBLOCK.get());
+				entries.accept(PastelBlocks.HOVER_BLOCK.get());
+
+				entries.accept(PastelBlocks.TOPAZ_CALCITE_LIGHT.get());
+				entries.accept(PastelBlocks.AMETHYST_CALCITE_LIGHT.get());
+				entries.accept(PastelBlocks.CITRINE_CALCITE_LIGHT.get());
+				entries.accept(PastelBlocks.ONYX_CALCITE_LIGHT.get());
+				entries.accept(PastelBlocks.MOONSTONE_CALCITE_LIGHT.get());
+				entries.accept(PastelBlocks.TOPAZ_BASALT_LIGHT.get());
+				entries.accept(PastelBlocks.AMETHYST_BASALT_LIGHT.get());
+				entries.accept(PastelBlocks.CITRINE_BASALT_LIGHT.get());
+				entries.accept(PastelBlocks.ONYX_BASALT_LIGHT.get());
+				entries.accept(PastelBlocks.MOONSTONE_BASALT_LIGHT.get());
+
+				entries.accept(PastelBlocks.BASALT_SHIMMERSTONE_LIGHT.get());
+				entries.accept(PastelBlocks.CALCITE_SHIMMERSTONE_LIGHT.get());
+				entries.accept(PastelBlocks.STONE_SHIMMERSTONE_LIGHT.get());
+				entries.accept(PastelBlocks.GRANITE_SHIMMERSTONE_LIGHT.get());
+				entries.accept(PastelBlocks.DIORITE_SHIMMERSTONE_LIGHT.get());
+				entries.accept(PastelBlocks.ANDESITE_SHIMMERSTONE_LIGHT.get());
+				entries.accept(PastelBlocks.DEEPSLATE_SHIMMERSTONE_LIGHT.get());
+				entries.accept(PastelBlocks.BLACKSLAG_SHIMMERSTONE_LIGHT.get());
+
+				entries.accept(PastelBlocks.TOPAZ_CHISELED_BASALT.get());
+				entries.accept(PastelBlocks.AMETHYST_CHISELED_BASALT.get());
+				entries.accept(PastelBlocks.CITRINE_CHISELED_BASALT.get());
+				entries.accept(PastelBlocks.ONYX_CHISELED_BASALT.get());
+				entries.accept(PastelBlocks.MOONSTONE_CHISELED_BASALT.get());
+				entries.accept(PastelBlocks.TOPAZ_CHISELED_CALCITE.get());
+				entries.accept(PastelBlocks.AMETHYST_CHISELED_CALCITE.get());
+				entries.accept(PastelBlocks.CITRINE_CHISELED_CALCITE.get());
+				entries.accept(PastelBlocks.ONYX_CHISELED_CALCITE.get());
+				entries.accept(PastelBlocks.MOONSTONE_CHISELED_CALCITE.get());
+
+				entries.accept(PastelBlocks.TOPAZ_GLASS.get());
+				entries.accept(PastelBlocks.AMETHYST_GLASS.get());
+				entries.accept(PastelBlocks.CITRINE_GLASS.get());
+				entries.accept(PastelBlocks.ONYX_GLASS.get());
+				entries.accept(PastelBlocks.MOONSTONE_GLASS.get());
+				entries.accept(PastelBlocks.RADIANT_GLASS.get());
+
+				entries.accept(PastelBlocks.TOPAZ_GLASS_PANE.get());
+				entries.accept(PastelBlocks.AMETHYST_GLASS_PANE.get());
+				entries.accept(PastelBlocks.CITRINE_GLASS_PANE.get());
+				entries.accept(PastelBlocks.ONYX_GLASS_PANE.get());
+				entries.accept(PastelBlocks.MOONSTONE_GLASS_PANE.get());
+				entries.accept(PastelBlocks.RADIANT_GLASS_PANE.get());
+
+				entries.accept(PastelBlocks.TOPAZ_CHIME.get());
+				entries.accept(PastelBlocks.AMETHYST_CHIME.get());
+				entries.accept(PastelBlocks.CITRINE_CHIME.get());
+				entries.accept(PastelBlocks.ONYX_CHIME.get());
+				entries.accept(PastelBlocks.MOONSTONE_CHIME.get());
+
+				entries.accept(PastelBlocks.AMETHYST_PYLON.get());
+				entries.accept(PastelBlocks.TOPAZ_PYLON.get());
+				entries.accept(PastelBlocks.CITRINE_PYLON.get());
+				entries.accept(PastelBlocks.ONYX_PYLON.get());
+				entries.accept(PastelBlocks.MOONSTONE_PYLON.get());
+
+				entries.accept(PastelBlocks.JADE_VINE_PETAL_BLOCK.get());
+				entries.accept(PastelBlocks.JADE_VINE_PETAL_CARPET.get());
+
+				entries.accept(PastelBlocks.JADEITE_PETAL_BLOCK.get());
+				entries.accept(PastelBlocks.JADEITE_PETAL_CARPET.get());
+
+				entries.accept(PastelBlocks.RESPLENDENT_BLOCK.get());
+				entries.accept(PastelBlocks.RESPLENDENT_CUSHION.get());
+				entries.accept(PastelBlocks.RESPLENDENT_CARPET.get());
+				entries.accept(PastelBlocks.RESPLENDENT_BED.get());
+
+
+				entries.accept(PastelBlocks.RESONANT_LILY.get());
+				entries.accept(PastelItems.PHANTOM_FRAME.get());
+				entries.accept(PastelItems.GLOW_PHANTOM_FRAME.get());
+				entries.accept(PastelItems.LOGO_BANNER_PATTERN.get());
+				entries.accept(PastelItems.AMETHYST_SHARD_BANNER_PATTERN.get());
+				entries.accept(PastelItems.AMETHYST_CLUSTER_BANNER_PATTERN.get());
+				entries.accept(PastelItems.ASTROLOGER_BANNER_PATTERN.get());
+				entries.accept(PastelItems.VELVET_ASTROLOGER_BANNER_PATTERN.get());
+				entries.accept(PastelItems.POISONBLOOM_BANNER_PATTERN.get());
+				entries.accept(PastelItems.DEEP_LIGHT_BANNER_PATTERN.get());
+
+				entries.accept(PastelBlocks.WHITE_BLOCK.get());
+				entries.accept(PastelBlocks.ORANGE_BLOCK.get());
+				entries.accept(PastelBlocks.MAGENTA_BLOCK.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_BLOCK.get());
+				entries.accept(PastelBlocks.YELLOW_BLOCK.get());
+				entries.accept(PastelBlocks.LIME_BLOCK.get());
+				entries.accept(PastelBlocks.PINK_BLOCK.get());
+				entries.accept(PastelBlocks.GRAY_BLOCK.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_BLOCK.get());
+				entries.accept(PastelBlocks.CYAN_BLOCK.get());
+				entries.accept(PastelBlocks.PURPLE_BLOCK.get());
+				entries.accept(PastelBlocks.BLUE_BLOCK.get());
+				entries.accept(PastelBlocks.BROWN_BLOCK.get());
+				entries.accept(PastelBlocks.GREEN_BLOCK.get());
+				entries.accept(PastelBlocks.RED_BLOCK.get());
+				entries.accept(PastelBlocks.BLACK_BLOCK.get());
+				entries.accept(PastelBlocks.WHITE_LAMP.get());
+				entries.accept(PastelBlocks.ORANGE_LAMP.get());
+				entries.accept(PastelBlocks.MAGENTA_LAMP.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_LAMP.get());
+				entries.accept(PastelBlocks.YELLOW_LAMP.get());
+				entries.accept(PastelBlocks.LIME_LAMP.get());
+				entries.accept(PastelBlocks.PINK_LAMP.get());
+				entries.accept(PastelBlocks.GRAY_LAMP.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_LAMP.get());
+				entries.accept(PastelBlocks.CYAN_LAMP.get());
+				entries.accept(PastelBlocks.PURPLE_LAMP.get());
+				entries.accept(PastelBlocks.BLUE_LAMP.get());
+				entries.accept(PastelBlocks.BROWN_LAMP.get());
+				entries.accept(PastelBlocks.GREEN_LAMP.get());
+				entries.accept(PastelBlocks.RED_LAMP.get());
+				entries.accept(PastelBlocks.BLACK_LAMP.get());
+				entries.accept(PastelBlocks.WHITE_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.ORANGE_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.MAGENTA_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.YELLOW_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.LIME_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.PINK_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.GRAY_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.CYAN_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.PURPLE_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.BLUE_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.BROWN_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.GREEN_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.RED_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.BLACK_GLOWBLOCK.get());
+				entries.accept(PastelBlocks.WHITE_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.ORANGE_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.MAGENTA_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.YELLOW_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.LIME_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.PINK_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.GRAY_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.CYAN_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.PURPLE_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.BLUE_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.BROWN_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.GREEN_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.RED_SPORE_BLOSSOM.get());
+				entries.accept(PastelBlocks.BLACK_SPORE_BLOSSOM.get());
+
+				entries.accept(PastelBlocks.WHITE_LOG.get());
+				entries.accept(PastelBlocks.ORANGE_LOG.get());
+				entries.accept(PastelBlocks.MAGENTA_LOG.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_LOG.get());
+				entries.accept(PastelBlocks.YELLOW_LOG.get());
+				entries.accept(PastelBlocks.LIME_LOG.get());
+				entries.accept(PastelBlocks.PINK_LOG.get());
+				entries.accept(PastelBlocks.GRAY_LOG.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_LOG.get());
+				entries.accept(PastelBlocks.CYAN_LOG.get());
+				entries.accept(PastelBlocks.PURPLE_LOG.get());
+				entries.accept(PastelBlocks.BLUE_LOG.get());
+				entries.accept(PastelBlocks.BROWN_LOG.get());
+				entries.accept(PastelBlocks.GREEN_LOG.get());
+				entries.accept(PastelBlocks.RED_LOG.get());
+				entries.accept(PastelBlocks.BLACK_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_WHITE_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_ORANGE_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_MAGENTA_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_LIGHT_BLUE_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_YELLOW_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_LIME_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_PINK_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_GRAY_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_LIGHT_GRAY_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_CYAN_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_PURPLE_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_BLUE_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_BROWN_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_GREEN_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_RED_LOG.get());
+				entries.accept(PastelBlocks.STRIPPED_BLACK_LOG.get());
+				entries.accept(PastelBlocks.WHITE_WOOD.get());
+				entries.accept(PastelBlocks.ORANGE_WOOD.get());
+				entries.accept(PastelBlocks.MAGENTA_WOOD.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_WOOD.get());
+				entries.accept(PastelBlocks.YELLOW_WOOD.get());
+				entries.accept(PastelBlocks.LIME_WOOD.get());
+				entries.accept(PastelBlocks.PINK_WOOD.get());
+				entries.accept(PastelBlocks.GRAY_WOOD.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_WOOD.get());
+				entries.accept(PastelBlocks.CYAN_WOOD.get());
+				entries.accept(PastelBlocks.PURPLE_WOOD.get());
+				entries.accept(PastelBlocks.BLUE_WOOD.get());
+				entries.accept(PastelBlocks.BROWN_WOOD.get());
+				entries.accept(PastelBlocks.GREEN_WOOD.get());
+				entries.accept(PastelBlocks.RED_WOOD.get());
+				entries.accept(PastelBlocks.BLACK_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_WHITE_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_ORANGE_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_MAGENTA_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_LIGHT_BLUE_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_YELLOW_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_LIME_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_PINK_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_GRAY_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_LIGHT_GRAY_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_CYAN_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_PURPLE_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_BLUE_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_BROWN_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_GREEN_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_RED_WOOD.get());
+				entries.accept(PastelBlocks.STRIPPED_BLACK_WOOD.get());
+				entries.accept(PastelBlocks.WHITE_LEAVES.get());
+				entries.accept(PastelBlocks.ORANGE_LEAVES.get());
+				entries.accept(PastelBlocks.MAGENTA_LEAVES.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_LEAVES.get());
+				entries.accept(PastelBlocks.YELLOW_LEAVES.get());
+				entries.accept(PastelBlocks.LIME_LEAVES.get());
+				entries.accept(PastelBlocks.PINK_LEAVES.get());
+				entries.accept(PastelBlocks.GRAY_LEAVES.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_LEAVES.get());
+				entries.accept(PastelBlocks.CYAN_LEAVES.get());
+				entries.accept(PastelBlocks.PURPLE_LEAVES.get());
+				entries.accept(PastelBlocks.BLUE_LEAVES.get());
+				entries.accept(PastelBlocks.BROWN_LEAVES.get());
+				entries.accept(PastelBlocks.GREEN_LEAVES.get());
+				entries.accept(PastelBlocks.RED_LEAVES.get());
+				entries.accept(PastelBlocks.BLACK_LEAVES.get());
+				entries.accept(PastelBlocks.WHITE_SAPLING.get());
+				entries.accept(PastelBlocks.ORANGE_SAPLING.get());
+				entries.accept(PastelBlocks.MAGENTA_SAPLING.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_SAPLING.get());
+				entries.accept(PastelBlocks.YELLOW_SAPLING.get());
+				entries.accept(PastelBlocks.LIME_SAPLING.get());
+				entries.accept(PastelBlocks.PINK_SAPLING.get());
+				entries.accept(PastelBlocks.GRAY_SAPLING.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_SAPLING.get());
+				entries.accept(PastelBlocks.CYAN_SAPLING.get());
+				entries.accept(PastelBlocks.PURPLE_SAPLING.get());
+				entries.accept(PastelBlocks.BLUE_SAPLING.get());
+				entries.accept(PastelBlocks.BROWN_SAPLING.get());
+				entries.accept(PastelBlocks.GREEN_SAPLING.get());
+				entries.accept(PastelBlocks.RED_SAPLING.get());
+				entries.accept(PastelBlocks.BLACK_SAPLING.get());
+				entries.accept(PastelBlocks.WHITE_PLANKS.get());
+				entries.accept(PastelBlocks.ORANGE_PLANKS.get());
+				entries.accept(PastelBlocks.MAGENTA_PLANKS.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_PLANKS.get());
+				entries.accept(PastelBlocks.YELLOW_PLANKS.get());
+				entries.accept(PastelBlocks.LIME_PLANKS.get());
+				entries.accept(PastelBlocks.PINK_PLANKS.get());
+				entries.accept(PastelBlocks.GRAY_PLANKS.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_PLANKS.get());
+				entries.accept(PastelBlocks.CYAN_PLANKS.get());
+				entries.accept(PastelBlocks.PURPLE_PLANKS.get());
+				entries.accept(PastelBlocks.BLUE_PLANKS.get());
+				entries.accept(PastelBlocks.BROWN_PLANKS.get());
+				entries.accept(PastelBlocks.GREEN_PLANKS.get());
+				entries.accept(PastelBlocks.RED_PLANKS.get());
+				entries.accept(PastelBlocks.BLACK_PLANKS.get());
+				entries.accept(PastelBlocks.WHITE_STAIRS.get());
+				entries.accept(PastelBlocks.ORANGE_STAIRS.get());
+				entries.accept(PastelBlocks.MAGENTA_STAIRS.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_STAIRS.get());
+				entries.accept(PastelBlocks.YELLOW_STAIRS.get());
+				entries.accept(PastelBlocks.LIME_STAIRS.get());
+				entries.accept(PastelBlocks.PINK_STAIRS.get());
+				entries.accept(PastelBlocks.GRAY_STAIRS.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_STAIRS.get());
+				entries.accept(PastelBlocks.CYAN_STAIRS.get());
+				entries.accept(PastelBlocks.PURPLE_STAIRS.get());
+				entries.accept(PastelBlocks.BLUE_STAIRS.get());
+				entries.accept(PastelBlocks.BROWN_STAIRS.get());
+				entries.accept(PastelBlocks.GREEN_STAIRS.get());
+				entries.accept(PastelBlocks.RED_STAIRS.get());
+				entries.accept(PastelBlocks.BLACK_STAIRS.get());
+				entries.accept(PastelBlocks.WHITE_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.ORANGE_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.MAGENTA_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.YELLOW_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.LIME_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.PINK_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.GRAY_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.CYAN_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.PURPLE_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.BLUE_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.BROWN_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.GREEN_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.RED_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.BLACK_PRESSURE_PLATE.get());
+				entries.accept(PastelBlocks.WHITE_FENCE.get());
+				entries.accept(PastelBlocks.ORANGE_FENCE.get());
+				entries.accept(PastelBlocks.MAGENTA_FENCE.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_FENCE.get());
+				entries.accept(PastelBlocks.YELLOW_FENCE.get());
+				entries.accept(PastelBlocks.LIME_FENCE.get());
+				entries.accept(PastelBlocks.PINK_FENCE.get());
+				entries.accept(PastelBlocks.GRAY_FENCE.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_FENCE.get());
+				entries.accept(PastelBlocks.CYAN_FENCE.get());
+				entries.accept(PastelBlocks.PURPLE_FENCE.get());
+				entries.accept(PastelBlocks.BLUE_FENCE.get());
+				entries.accept(PastelBlocks.BROWN_FENCE.get());
+				entries.accept(PastelBlocks.GREEN_FENCE.get());
+				entries.accept(PastelBlocks.RED_FENCE.get());
+				entries.accept(PastelBlocks.BLACK_FENCE.get());
+				entries.accept(PastelBlocks.WHITE_FENCE_GATE.get());
+				entries.accept(PastelBlocks.ORANGE_FENCE_GATE.get());
+				entries.accept(PastelBlocks.MAGENTA_FENCE_GATE.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_FENCE_GATE.get());
+				entries.accept(PastelBlocks.YELLOW_FENCE_GATE.get());
+				entries.accept(PastelBlocks.LIME_FENCE_GATE.get());
+				entries.accept(PastelBlocks.PINK_FENCE_GATE.get());
+				entries.accept(PastelBlocks.GRAY_FENCE_GATE.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_FENCE_GATE.get());
+				entries.accept(PastelBlocks.CYAN_FENCE_GATE.get());
+				entries.accept(PastelBlocks.PURPLE_FENCE_GATE.get());
+				entries.accept(PastelBlocks.BLUE_FENCE_GATE.get());
+				entries.accept(PastelBlocks.BROWN_FENCE_GATE.get());
+				entries.accept(PastelBlocks.GREEN_FENCE_GATE.get());
+				entries.accept(PastelBlocks.RED_FENCE_GATE.get());
+				entries.accept(PastelBlocks.BLACK_FENCE_GATE.get());
+				entries.accept(PastelBlocks.WHITE_BUTTON.get());
+				entries.accept(PastelBlocks.ORANGE_BUTTON.get());
+				entries.accept(PastelBlocks.MAGENTA_BUTTON.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_BUTTON.get());
+				entries.accept(PastelBlocks.YELLOW_BUTTON.get());
+				entries.accept(PastelBlocks.LIME_BUTTON.get());
+				entries.accept(PastelBlocks.PINK_BUTTON.get());
+				entries.accept(PastelBlocks.GRAY_BUTTON.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_BUTTON.get());
+				entries.accept(PastelBlocks.CYAN_BUTTON.get());
+				entries.accept(PastelBlocks.PURPLE_BUTTON.get());
+				entries.accept(PastelBlocks.BLUE_BUTTON.get());
+				entries.accept(PastelBlocks.BROWN_BUTTON.get());
+				entries.accept(PastelBlocks.GREEN_BUTTON.get());
+				entries.accept(PastelBlocks.RED_BUTTON.get());
+				entries.accept(PastelBlocks.BLACK_BUTTON.get());
+				entries.accept(PastelBlocks.WHITE_SLAB.get());
+				entries.accept(PastelBlocks.ORANGE_SLAB.get());
+				entries.accept(PastelBlocks.MAGENTA_SLAB.get());
+				entries.accept(PastelBlocks.LIGHT_BLUE_SLAB.get());
+				entries.accept(PastelBlocks.YELLOW_SLAB.get());
+				entries.accept(PastelBlocks.LIME_SLAB.get());
+				entries.accept(PastelBlocks.PINK_SLAB.get());
+				entries.accept(PastelBlocks.GRAY_SLAB.get());
+				entries.accept(PastelBlocks.LIGHT_GRAY_SLAB.get());
+				entries.accept(PastelBlocks.CYAN_SLAB.get());
+				entries.accept(PastelBlocks.PURPLE_SLAB.get());
+				entries.accept(PastelBlocks.BLUE_SLAB.get());
+				entries.accept(PastelBlocks.BROWN_SLAB.get());
+				entries.accept(PastelBlocks.GREEN_SLAB.get());
+				entries.accept(PastelBlocks.RED_SLAB.get());
+				entries.accept(PastelBlocks.BLACK_SLAB.get());
+			})
+			.build();
+
+	public static final CreativeModeTab HEADS = CreativeModeTab.builder()
+			.icon(() -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.EGG_LAYING_WOOLY_PIG).asItem().getDefaultInstance())
+			.title(Component.translatable("itemGroup.pastel.mob_heads"))
+			.displayItems((displayContext, entries) -> {
+				for (Block skullBlock : PastelSkullBlock.MOB_HEADS.values()) {
+					entries.accept(skullBlock.asItem());
+				}
+			})
+			.build();
+	
 }

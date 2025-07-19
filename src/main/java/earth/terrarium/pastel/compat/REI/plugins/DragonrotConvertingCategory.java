@@ -11,20 +11,20 @@ import net.minecraft.network.chat.Component;
 
 @OnlyIn(Dist.CLIENT)
 public class DragonrotConvertingCategory extends FluidConvertingCategory<DragonrotConvertingDisplay> {
-
-    @Override
-    public CategoryIdentifier<? extends FluidConvertingDisplay> getCategoryIdentifier() {
-        return PastelPlugins.DRAGONROT_CONVERTING;
-    }
-
-    @Override
-    public Renderer getIcon() {
-        return EntryStacks.of(PastelItems.DRAGONROT_BUCKET.get());
-    }
-
-    @Override
-    public Component getTitle() {
-        return Component.translatable("container.pastel.rei.dragonrot_converting.title");
-    }
-
+	
+	@Override
+	public CategoryIdentifier<? extends FluidConvertingDisplay> getCategoryIdentifier() {
+		return PastelPlugins.DRAGONROT_CONVERTING;
+	}
+	
+	@Override
+	public Renderer getIcon() {
+		return EntryStacks.of(PastelItems.DRAGONROT_BUCKET.get());
+	}
+	
+	@Override
+	public Component getTitle() {
+		return Component.translatable("container.pastel.rei.dragonrot_converting.title");
+	}
+	
 }

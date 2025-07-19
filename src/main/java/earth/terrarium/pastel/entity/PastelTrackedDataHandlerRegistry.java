@@ -14,28 +14,22 @@ import net.neoforged.neoforge.registries.*;
 
 public class PastelTrackedDataHandlerRegistry {
 
-    private static final DeferredRegister<EntityDataSerializer<?>> REGISTER = DeferredRegister.create(
-        NeoForgeRegistries.Keys.ENTITY_DATA_SERIALIZERS, PastelCommon.MOD_ID);
+	private static final DeferredRegister<EntityDataSerializer<?>> REGISTER = DeferredRegister.create(NeoForgeRegistries.Keys.ENTITY_DATA_SERIALIZERS, PastelCommon.MOD_ID);
 
-    public static final EntityDataSerializer<InkColor> INK_COLOR = EntityDataSerializer.forValueType(
-        ByteBufCodecs.registry(PastelRegistries.INK_COLOR.key()));
-    public static final EntityDataSerializer<GlassArrowVariant> GLASS_ARROW_VARIANT = EntityDataSerializer.forValueType(
-        ByteBufCodecs.registry(PastelRegistries.GLASS_ARROW_VARIANT.key()));
+	public static final EntityDataSerializer<InkColor> INK_COLOR = EntityDataSerializer.forValueType(ByteBufCodecs.registry(PastelRegistries.INK_COLOR.key()));
+	public static final EntityDataSerializer<GlassArrowVariant> GLASS_ARROW_VARIANT = EntityDataSerializer.forValueType(ByteBufCodecs.registry(PastelRegistries.GLASS_ARROW_VARIANT.key()));
 
-    public static final EntityDataSerializer<LizardFrillVariant> LIZARD_FRILL_VARIANT
-        = EntityDataSerializer.forValueType(ByteBufCodecs.registry(PastelRegistries.LIZARD_FRILL_VARIANT.key()));
-    public static final EntityDataSerializer<LizardHornVariant> LIZARD_HORN_VARIANT = EntityDataSerializer.forValueType(
-        ByteBufCodecs.registry(PastelRegistries.LIZARD_HORN_VARIANT.key()));
-    public static final EntityDataSerializer<KindlingVariant> KINDLING_VARIANT = EntityDataSerializer.forValueType(
-        ByteBufCodecs.registry(PastelRegistries.KINDLING_VARIANT.key()));
+	public static final EntityDataSerializer<LizardFrillVariant> LIZARD_FRILL_VARIANT = EntityDataSerializer.forValueType(ByteBufCodecs.registry(PastelRegistries.LIZARD_FRILL_VARIANT.key()));
+	public static final EntityDataSerializer<LizardHornVariant> LIZARD_HORN_VARIANT = EntityDataSerializer.forValueType(ByteBufCodecs.registry(PastelRegistries.LIZARD_HORN_VARIANT.key()));
+	public static final EntityDataSerializer<KindlingVariant> KINDLING_VARIANT = EntityDataSerializer.forValueType(ByteBufCodecs.registry(PastelRegistries.KINDLING_VARIANT.key()));
 
-    public static void register(IEventBus bus) {
-        REGISTER.register("ink_color", () -> INK_COLOR);
-        REGISTER.register("glass_arrow_variant", () -> GLASS_ARROW_VARIANT);
-        REGISTER.register("lizard_frill_variant", () -> LIZARD_FRILL_VARIANT);
-        REGISTER.register("lizard_horn_variant", () -> LIZARD_HORN_VARIANT);
-        REGISTER.register("kindling_variant", () -> KINDLING_VARIANT);
-        REGISTER.register(bus);
-    }
+	public static void register(IEventBus bus) {
+		REGISTER.register("ink_color", () -> INK_COLOR);
+		REGISTER.register("glass_arrow_variant", () -> GLASS_ARROW_VARIANT);
+		REGISTER.register("lizard_frill_variant", () -> LIZARD_FRILL_VARIANT);
+		REGISTER.register("lizard_horn_variant", () -> LIZARD_HORN_VARIANT);
+		REGISTER.register("kindling_variant", () -> KINDLING_VARIANT);
+		REGISTER.register(bus);
+	}
 
 }

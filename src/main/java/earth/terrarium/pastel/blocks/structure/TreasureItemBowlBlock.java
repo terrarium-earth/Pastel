@@ -21,51 +21,48 @@ import org.jetbrains.annotations.Nullable;
 
 public class TreasureItemBowlBlock extends Block implements EntityBlock {
 
-    public static final MapCodec<TreasureItemBowlBlock> CODEC = simpleCodec(TreasureItemBowlBlock::new);
+	public static final MapCodec<TreasureItemBowlBlock> CODEC = simpleCodec(TreasureItemBowlBlock::new);
 
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D);
 
-    public TreasureItemBowlBlock(Properties settings) {
-        super(settings);
-    }
+	public TreasureItemBowlBlock(Properties settings) {
+		super(settings);
+	}
 
-    @Override
-    public MapCodec<? extends TreasureItemBowlBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends TreasureItemBowlBlock> codec() {
+		return CODEC;
+	}
 
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		return SHAPE;
+	}
 
-    @Override
-    public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        var entity = world.getBlockEntity(pos);
+	@Override
+	public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+		var entity = world.getBlockEntity(pos);
 
-        if (!(entity instanceof PlayerTrackerBlockEntity bowl))
-            return InteractionResult.PASS;
+		if (!(entity instanceof PlayerTrackerBlockEntity bowl))
+			return InteractionResult.PASS;
 
-        if (bowl.hasTaken(player) || !canInteract(player))
-            return InteractionResult.FAIL;
+		if (bowl.hasTaken(player) || !canInteract(player))
+			return InteractionResult.FAIL;
 
-        world.playLocalSound(pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1F, 1F, true);
-        player.getInventory()
-              .placeItemBackInInventory(PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()
-                                                                               .getDefaultInstance());
-        bowl.markTaken(player);
+		world.playLocalSound(pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1F, 1F, true);
+		player.getInventory().placeItemBackInInventory(PastelItems.AETHER_GRACED_NECTAR_GLOVES.get().getDefaultInstance());
+		bowl.markTaken(player);
 
-        return InteractionResult.CONSUME;
-    }
+		return InteractionResult.CONSUME;
+	}
 
-    public static boolean canInteract(Player player) {
-        return player.hasEffect(PastelMobEffects.FATAL_SLUMBER);
-    }
+	public static boolean canInteract(Player player) {
+		return player.hasEffect(PastelMobEffects.FATAL_SLUMBER);
+	}
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new PlayerTrackerBlockEntity(pos, state);
-    }
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new PlayerTrackerBlockEntity(pos, state);
+	}
 }

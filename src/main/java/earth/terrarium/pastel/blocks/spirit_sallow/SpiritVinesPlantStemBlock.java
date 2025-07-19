@@ -22,91 +22,89 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class SpiritVinesPlantStemBlock extends GrowingPlantHeadBlock implements SpiritVine {
+	
+	private final GemstoneColor gemstoneColor;
+	
+	public SpiritVinesPlantStemBlock(Properties settings, GemstoneColor gemstoneColor) {
+		super(settings, Direction.DOWN, SHAPE, false, 0.0D);
+		this.registerDefaultState((this.stateDefinition.any()).setValue(CRYSTALS, false));
+		this.gemstoneColor = gemstoneColor;
+	}
 
-    private final GemstoneColor gemstoneColor;
-
-    public SpiritVinesPlantStemBlock(Properties settings, GemstoneColor gemstoneColor) {
-        super(settings, Direction.DOWN, SHAPE, false, 0.0D);
-        this.registerDefaultState((this.stateDefinition.any()).setValue(CRYSTALS, false));
-        this.gemstoneColor = gemstoneColor;
-    }
-
-    @Override
-    public MapCodec<? extends SpiritVinesPlantStemBlock> codec() {
-        //TODO: Make the codec
-        return null;
-    }
-
-    @Override
-    protected int getBlocksToGrowWhenBonemealed(RandomSource random) {
-        return 1;
-    }
-
-    @Override
-    protected boolean canGrowInto(BlockState state) {
-        return state.isAir();
-    }
-
-    @Override
-    protected Block getBodyBlock() {
-        switch (gemstoneColor) {
-            case BuiltinGemstoneColor.CYAN -> {
+	@Override
+	public MapCodec<? extends SpiritVinesPlantStemBlock> codec() {
+		//TODO: Make the codec
+		return null;
+	}
+	
+	@Override
+	protected int getBlocksToGrowWhenBonemealed(RandomSource random) {
+		return 1;
+	}
+	
+	@Override
+	protected boolean canGrowInto(BlockState state) {
+		return state.isAir();
+	}
+	
+	@Override
+	protected Block getBodyBlock() {
+		switch (gemstoneColor) {
+			case BuiltinGemstoneColor.CYAN -> {
                 return PastelBlocks.CYAN_SPIRIT_SALLOW_VINES_PLANT.get();
-            }
-            case BuiltinGemstoneColor.MAGENTA -> {
+			}
+			case BuiltinGemstoneColor.MAGENTA -> {
                 return PastelBlocks.MAGENTA_SPIRIT_SALLOW_VINES_PLANT.get();
-            }
-            case BuiltinGemstoneColor.YELLOW -> {
+			}
+			case BuiltinGemstoneColor.YELLOW -> {
                 return PastelBlocks.YELLOW_SPIRIT_SALLOW_VINES_PLANT.get();
-            }
-            case BuiltinGemstoneColor.BLACK -> {
+			}
+			case BuiltinGemstoneColor.BLACK -> {
                 return PastelBlocks.BLACK_SPIRIT_SALLOW_VINES_PLANT.get();
-            }
-            case BuiltinGemstoneColor.WHITE -> {
+			}
+			case BuiltinGemstoneColor.WHITE -> {
                 return PastelBlocks.WHITE_SPIRIT_SALLOW_VINES_PLANT.get();
-            }
-            default -> {
-                return null;
-            }
-        }
-    }
-
-    @Override
-    protected BlockState updateBodyAfterConvertedFromHead(BlockState from, BlockState to) {
-        return to.setValue(CRYSTALS, from.getValue(CRYSTALS));
-    }
-
-    @Override
-    protected BlockState getGrowIntoState(BlockState state, RandomSource random) {
-        return super.getGrowIntoState(state, random)
-                    .setValue(CRYSTALS, false);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return new ItemStack(SpiritVine.getYieldItem(state));
-    }
-
-    @Override
-    public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        return SpiritVine.pick(state, world, pos);
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(CRYSTALS);
-    }
-
-    @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
-        return false;
-    }
-
-    @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        world.setBlock(pos, state.setValue(CRYSTALS, false), 2);
-    }
+			}
+			default -> {
+				return null;
+			}
+		}
+	}
+	
+	@Override
+	protected BlockState updateBodyAfterConvertedFromHead(BlockState from, BlockState to) {
+		return to.setValue(CRYSTALS, from.getValue(CRYSTALS));
+	}
+	
+	@Override
+	protected BlockState getGrowIntoState(BlockState state, RandomSource random) {
+		return super.getGrowIntoState(state, random).setValue(CRYSTALS, false);
+	}
+	
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+		return new ItemStack(SpiritVine.getYieldItem(state));
+	}
+	
+	@Override
+	public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+		return SpiritVine.pick(state, world, pos);
+	}
+	
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(CRYSTALS);
+	}
+	
+	@Override
+	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+		return false;
+	}
+	
+	@Override
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+		world.setBlock(pos, state.setValue(CRYSTALS, false), 2);
+	}
 }

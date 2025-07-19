@@ -37,214 +37,175 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 public abstract class DragonrotFluid extends PastelFluid {
 
-    @Override
-    public Fluid getSource() {
-        return PastelFluids.DRAGONROT.get();
-    }
+	@Override
+	public Fluid getSource() {
+		return PastelFluids.DRAGONROT.get();
+	}
+	
+	@Override
+	public Fluid getFlowing() {
+		return PastelFluids.FLOWING_DRAGONROT.get();
+	}
+	
+	@Override
+	public Item getBucket() {
+		return PastelItems.DRAGONROT_BUCKET.get();
+	}
 
-    @Override
-    public Fluid getFlowing() {
-        return PastelFluids.FLOWING_DRAGONROT.get();
-    }
+	@Override
+	public FluidType getFluidType() {
+		return PastelFluids.DRAGONROT_TYPE.get();
+	}
 
-    @Override
-    public Item getBucket() {
-        return PastelItems.DRAGONROT_BUCKET.get();
-    }
+	@Override
+	protected BlockState createLegacyBlock(FluidState fluidState) {
+		return PastelBlocks.DRAGONROT.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+	}
+	
+	@Override
+	public boolean isSame(Fluid fluid) {
+		return fluid == PastelFluids.DRAGONROT.get() || fluid == PastelFluids.FLOWING_DRAGONROT.get();
+	}
+	
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(Level world, BlockPos pos, FluidState state, RandomSource random) {
+		BlockPos topPos = pos.above();
+		BlockState topState = world.getBlockState(topPos);
+		if (topState.isAir() && random.nextInt(3) == 0) {
+			float soundRandom = random.nextFloat();
+			if (soundRandom < 0.0003F) {
+				world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HONEY_DRINK, SoundSource.AMBIENT, random.nextFloat() * 0.65F + 0.25F, random.nextFloat() * 0.2F, false);
+			}else if (soundRandom < 0.0006F) {
+				world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.AMBIENT, random.nextFloat() * 0.4F + 0.25F, random.nextFloat() * 0.5F + 0.1F, false);
+			} else if (soundRandom < 0.0008F) {
+				world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.FROG_AMBIENT, SoundSource.AMBIENT, random.nextFloat() + 0.25F, random.nextFloat() * 0.3F + 0.01F, false);
+			} else if (soundRandom < 0.001F) {
+				world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.SCULK_BLOCK_PLACE, SoundSource.AMBIENT, random.nextFloat() + 0.25F, random.nextFloat() * 0.4F + 0.2F, false);
+			}  else if (soundRandom < 0.00148F) {
+				world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.PARROT_DEATH, SoundSource.AMBIENT, random.nextFloat() * 0.334F + 0.1F, 1F, false);
+			} else if (soundRandom < 0.00152F) {
+				world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.CAT_DEATH, SoundSource.AMBIENT, random.nextFloat() * 0.334F + 0.1F, 1F, false);
+			} else if (soundRandom < 0.00156F) {
+				world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOLF_DEATH, SoundSource.AMBIENT, random.nextFloat() * 0.3F + 0.1F, 1F, false);
+			} else if (soundRandom < 0.001564F) {
+				world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.AMBIENT, 2F, 0.1F, false);
+			}
+		}
+	}
+	
+	@Override
+	protected int getDropOff(LevelReader worldView) {
+		return 3;
+	}
+	
+	@Override
+	public int getTickDelay(LevelReader worldView) {
+		return 40;
+	}
+	
+	@Override
+	public ParticleOptions getDripParticle() {
+		return PastelParticleTypes.DRIPPING_DRAGONROT;
+	}
+	
+	@Override
+	public ParticleOptions getSplashParticle() {
+		return PastelParticleTypes.DRAGONROT_SPLASH;
+	}
+	
+	
+	@Override
+	public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
+		super.onEntityCollision(state, world, pos, entity);
+		
+		if (world instanceof ServerLevel serverWorld && entity instanceof LivingEntity livingEntity) {
+			// just check every 20 ticks for performance
+			if (!livingEntity.isDeadOrDying() && world.getGameTime() % 20 == 0 && !(livingEntity instanceof Enemy)) {
+				var dragon = entity.getType().is(PastelEntityTypeTags.DRACONIC);
+				var damage = dragon ? 30 : 6;
+				var ticks = dragon ? 20 : 5;
+				var cut = dragon ? 100 : 40;
 
-    @Override
-    public FluidType getFluidType() {
-        return PastelFluids.DRAGONROT_TYPE.get();
-    }
+				if (livingEntity.isEyeInFluid(PastelFluidTags.DRAGONROT)) {
+					livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage);
+				} else {
+					livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage / 2F);
+				}
+				if (!livingEntity.isDeadOrDying()) {
+					MobEffectInstance existingEffect = livingEntity.getEffect(PastelMobEffects.LIFE_DRAIN);
+					if (existingEffect == null) {
+						livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.LIFE_DRAIN, 600, 0));
+					}
+					else if(existingEffect.getDuration() < 500) {
+						((MobEffectInstanceInjector) existingEffect).setDuration(300);
 
-    @Override
-    protected BlockState createLegacyBlock(FluidState fluidState) {
-        return PastelBlocks.DRAGONROT.get()
-                                     .defaultBlockState()
-                                     .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
-    }
+						serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
+					}
 
-    @Override
-    public boolean isSame(Fluid fluid) {
-        return fluid == PastelFluids.DRAGONROT.get() || fluid == PastelFluids.FLOWING_DRAGONROT.get();
-    }
+					existingEffect = livingEntity.getEffect(PastelMobEffects.DEADLY_POISON);
+					if (existingEffect == null || existingEffect.getDuration() < 80) {
+						livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.DEADLY_POISON, 160, 0));
+					}
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void animateTick(Level world, BlockPos pos, FluidState state, RandomSource random) {
-        BlockPos topPos = pos.above();
-        BlockState topState = world.getBlockState(topPos);
-        if (topState.isAir() && random.nextInt(3) == 0) {
-            float soundRandom = random.nextFloat();
-            if (soundRandom < 0.0003F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HONEY_DRINK, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.65F + 0.25F, random.nextFloat() * 0.2F, false
-                );
-            } else if (soundRandom < 0.0006F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.4F + 0.25F, random.nextFloat() * 0.5F + 0.1F, false
-                );
-            } else if (soundRandom < 0.0008F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.FROG_AMBIENT, SoundSource.AMBIENT,
-                    random.nextFloat() + 0.25F, random.nextFloat() * 0.3F + 0.01F, false
-                );
-            } else if (soundRandom < 0.001F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.SCULK_BLOCK_PLACE, SoundSource.AMBIENT,
-                    random.nextFloat() + 0.25F, random.nextFloat() * 0.4F + 0.2F, false
-                );
-            } else if (soundRandom < 0.00148F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.PARROT_DEATH, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.334F + 0.1F, 1F, false
-                );
-            } else if (soundRandom < 0.00152F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.CAT_DEATH, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.334F + 0.1F, 1F, false
-                );
-            } else if (soundRandom < 0.00156F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOLF_DEATH, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.3F + 0.1F, 1F, false
-                );
-            } else if (soundRandom < 0.001564F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.AMBIENT, 2F,
-                    0.1F, false
-                );
-            }
-        }
-    }
+					existingEffect = livingEntity.getEffect(PastelMobEffects.IMMUNITY);
+					if (existingEffect != null) {
+						if (existingEffect.getDuration() <= cut) {
+							livingEntity.removeEffect(PastelMobEffects.IMMUNITY);
+						} else {
+							((MobEffectInstanceInjector) existingEffect).setDuration(existingEffect.getDuration() - cut);
+							serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
+						}
+					}
 
-    @Override
-    protected int getDropOff(LevelReader worldView) {
-        return 3;
-    }
+					if (!dragon)
+						return;
 
-    @Override
-    public int getTickDelay(LevelReader worldView) {
-        return 40;
-    }
-
-    @Override
-    public ParticleOptions getDripParticle() {
-        return PastelParticleTypes.DRIPPING_DRAGONROT;
-    }
-
-    @Override
-    public ParticleOptions getSplashParticle() {
-        return PastelParticleTypes.DRAGONROT_SPLASH;
-    }
-
-
-    @Override
-    public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
-
-        if (world instanceof ServerLevel serverWorld && entity instanceof LivingEntity livingEntity) {
-            // just check every 20 ticks for performance
-            if (!livingEntity.isDeadOrDying() && world.getGameTime() % 20 == 0 && !(livingEntity instanceof Enemy)) {
-                var dragon = entity.getType()
-                                   .is(PastelEntityTypeTags.DRACONIC);
-                var damage = dragon ? 30 : 6;
-                var ticks = dragon ? 20 : 5;
-                var cut = dragon ? 100 : 40;
-
-                if (livingEntity.isEyeInFluid(PastelFluidTags.DRAGONROT)) {
-                    livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage);
-                } else {
-                    livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage / 2F);
-                }
-                if (!livingEntity.isDeadOrDying()) {
-                    MobEffectInstance existingEffect = livingEntity.getEffect(PastelMobEffects.LIFE_DRAIN);
-                    if (existingEffect == null) {
-                        livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.LIFE_DRAIN, 600, 0));
-                    } else if (existingEffect.getDuration() < 500) {
-                        ((MobEffectInstanceInjector) existingEffect).setDuration(300);
-
-                        serverWorld.getChunkSource()
-                                   .broadcastAndSend(
-                                       livingEntity, new ClientboundUpdateMobEffectPacket(
-                                           livingEntity.getId(),
-                                           existingEffect, true
-                                       )
-                                   );
-                    }
-
-                    existingEffect = livingEntity.getEffect(PastelMobEffects.DEADLY_POISON);
-                    if (existingEffect == null || existingEffect.getDuration() < 80) {
-                        livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.DEADLY_POISON, 160, 0));
-                    }
-
-                    existingEffect = livingEntity.getEffect(PastelMobEffects.IMMUNITY);
-                    if (existingEffect != null) {
-                        if (existingEffect.getDuration() <= cut) {
-                            livingEntity.removeEffect(PastelMobEffects.IMMUNITY);
-                        } else {
-                            ((MobEffectInstanceInjector) existingEffect).setDuration(
-                                existingEffect.getDuration() - cut);
-                            serverWorld.getChunkSource()
-                                       .broadcastAndSend(
-                                           livingEntity, new ClientboundUpdateMobEffectPacket(
-                                               livingEntity.getId(),
-                                               existingEffect, true
-                                           )
-                                       );
-                        }
-                    }
-
-                    if (!dragon)
-                        return;
-
-                    existingEffect = livingEntity.getEffect(PastelMobEffects.DENSITY);
-                    if (existingEffect == null || existingEffect.getDuration() < 120) {
-                        livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.DENSITY, 2000, 1));
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType() {
-        return PastelRecipeTypes.DRAGONROT_CONVERTING;
-    }
-
-    public static class Flowing extends DragonrotFluid {
-
-        @Override
-        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
-            super.createFluidStateDefinition(builder);
-            builder.add(LEVEL);
-        }
-
-        @Override
-        public int getAmount(FluidState fluidState) {
-            return fluidState.getValue(LEVEL);
-        }
-
-        @Override
-        public boolean isSource(FluidState fluidState) {
-            return false;
-        }
-
-    }
-
-    public static class Still extends DragonrotFluid {
-
-        @Override
-        public int getAmount(FluidState fluidState) {
-            return 8;
-        }
-
-        @Override
-        public boolean isSource(FluidState fluidState) {
-            return true;
-        }
-
-    }
+					existingEffect = livingEntity.getEffect(PastelMobEffects.DENSITY);
+					if (existingEffect == null || existingEffect.getDuration() < 120) {
+						livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.DENSITY, 2000, 1));
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType() {
+		return PastelRecipeTypes.DRAGONROT_CONVERTING;
+	}
+	
+	public static class Flowing extends DragonrotFluid {
+		
+		@Override
+		protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
+			super.createFluidStateDefinition(builder);
+			builder.add(LEVEL);
+		}
+		
+		@Override
+		public int getAmount(FluidState fluidState) {
+			return fluidState.getValue(LEVEL);
+		}
+		
+		@Override
+		public boolean isSource(FluidState fluidState) {
+			return false;
+		}
+		
+	}
+	
+	public static class Still extends DragonrotFluid {
+		
+		@Override
+		public int getAmount(FluidState fluidState) {
+			return 8;
+		}
+		
+		@Override
+		public boolean isSource(FluidState fluidState) {
+			return true;
+		}
+		
+	}
 }

@@ -23,11 +23,9 @@ public class PhantomHeadModel extends PastelSkullModel {
         PartDefinition modelPartData = modelData.getRoot();
 
         modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(0, 0)
-                           .addBox(-3.5F, -3.0F, -2.5F, 7.0F, 3.0F, 5.0F),
-            PartPose.ZERO
+                PartNames.HEAD,
+                CubeListBuilder.create().texOffs(0, 0).addBox(-3.5F, -3.0F, -2.5F, 7.0F, 3.0F, 5.0F),
+                PartPose.ZERO
         );
 
         return LayerDefinition.create(modelData, 64, 64);

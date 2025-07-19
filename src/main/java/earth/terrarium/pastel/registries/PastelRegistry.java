@@ -12,42 +12,36 @@ import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.Nullable;
 
 public class PastelRegistry<T> extends MappedRegistry<T> {
-
-    public PastelRegistry(ResourceKey<? extends Registry<T>> key, Lifecycle lifecycle) {
-        super(key, lifecycle);
-    }
-
-    @Override
-    public Codec<T> byNameCodec() {
-        return this.referenceHolderWithLifecycle()
-                   .flatComapMap(Holder.Reference::value, value -> this.safeCastToReference(this.wrapAsHolder(value)));
-    }
-
-    @Override
-    public Codec<Holder<T>> holderByNameCodec() {
-        return this.referenceHolderWithLifecycle()
-                   .flatComapMap(entry -> entry, this::safeCastToReference);
-    }
-
-    protected Codec<Holder.Reference<T>> referenceHolderWithLifecycle() {
-        return CodecHelper.SPECTRUM_DEFAULTED_IDENTIFIER.comapFlatMap(
-            id -> this.getHolder(id)
-                      .map(DataResult::success)
-                      .orElseGet(() -> DataResult.error(() -> "Unknown registry key in " + this.key() + ": " + id)),
-            entry -> entry.key()
-                          .location()
-        );
-    }
-
-    protected DataResult<Holder.Reference<T>> safeCastToReference(Holder<T> entry) {
-        return entry instanceof Holder.Reference<T> reference
-               ? DataResult.success(reference)
-               : DataResult.error(() -> "Unregistered holder in " + this.key() + ": " + entry);
-    }
-
-    @Nullable
-    public T get(@Nullable String id) {
-        return id == null ? null : get(PastelCommon.ofPastel(id));
-    }
-
+	
+	public PastelRegistry(ResourceKey<? extends Registry<T>> key, Lifecycle lifecycle) {
+		super(key, lifecycle);
+	}
+	
+	@Override
+	public Codec<T> byNameCodec() {
+		return this.referenceHolderWithLifecycle().flatComapMap(Holder.Reference::value, value -> this.safeCastToReference(this.wrapAsHolder(value)));
+	}
+	
+	@Override
+	public Codec<Holder<T>> holderByNameCodec() {
+		return this.referenceHolderWithLifecycle().flatComapMap(entry -> entry, this::safeCastToReference);
+	}
+	
+	protected Codec<Holder.Reference<T>> referenceHolderWithLifecycle() {
+		return CodecHelper.SPECTRUM_DEFAULTED_IDENTIFIER.comapFlatMap(
+				id -> this.getHolder(id).map(DataResult::success).orElseGet(() -> DataResult.error(() -> "Unknown registry key in " + this.key() + ": " + id)),
+				entry -> entry.key().location());
+	}
+	
+	protected DataResult<Holder.Reference<T>> safeCastToReference(Holder<T> entry) {
+		return entry instanceof Holder.Reference<T> reference
+				? DataResult.success(reference)
+				: DataResult.error(() -> "Unregistered holder in " + this.key() + ": " + entry);
+	}
+	
+	@Nullable
+	public T get(@Nullable String id) {
+		return id == null ? null : get(PastelCommon.ofPastel(id));
+	}
+	
 }

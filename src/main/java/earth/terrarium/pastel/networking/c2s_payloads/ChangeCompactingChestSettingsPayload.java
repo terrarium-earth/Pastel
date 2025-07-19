@@ -12,32 +12,30 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public record ChangeCompactingChestSettingsPayload(AutoCraftingMode mode) implements CustomPacketPayload {
-
-    public static final CustomPacketPayload.Type<ChangeCompactingChestSettingsPayload> ID = PastelC2SPackets.makeId(
-        "change_compacting_chest_settings");
-    public static final StreamCodec<FriendlyByteBuf, ChangeCompactingChestSettingsPayload> CODEC
-        = StreamCodec.composite(
-        PacketCodecHelper.enumOf(AutoCraftingMode::values),
-        ChangeCompactingChestSettingsPayload::mode,
-        ChangeCompactingChestSettingsPayload::new
-    );
-
-    public static IPayloadHandler<ChangeCompactingChestSettingsPayload> getPayloadHandler() {
-        return (payload, context) -> {
-            // receive the client packet...
-            if (context.player().containerMenu instanceof CompactingChestScreenHandler compactingChestScreenHandler) {
-                BlockEntity blockEntity = compactingChestScreenHandler.getBlockEntity();
-                if (blockEntity instanceof CompactingChestBlockEntity compactingChestBlockEntity) {
-                    // apply the new settings
-                    compactingChestBlockEntity.applySettings(payload.mode);
-                }
-            }
-        };
-    }
-
-    @Override
-    public Type<? extends CustomPacketPayload> type() {
-        return ID;
-    }
-
+	
+	public static final CustomPacketPayload.Type<ChangeCompactingChestSettingsPayload> ID = PastelC2SPackets.makeId("change_compacting_chest_settings");
+	public static final StreamCodec<FriendlyByteBuf, ChangeCompactingChestSettingsPayload> CODEC = StreamCodec.composite(
+			PacketCodecHelper.enumOf(AutoCraftingMode::values),
+			ChangeCompactingChestSettingsPayload::mode,
+			ChangeCompactingChestSettingsPayload::new
+	);
+	
+	public static IPayloadHandler<ChangeCompactingChestSettingsPayload> getPayloadHandler() {
+		return (payload, context) -> {
+			// receive the client packet...
+			if (context.player().containerMenu instanceof CompactingChestScreenHandler compactingChestScreenHandler) {
+				BlockEntity blockEntity = compactingChestScreenHandler.getBlockEntity();
+				if (blockEntity instanceof CompactingChestBlockEntity compactingChestBlockEntity) {
+					// apply the new settings
+					compactingChestBlockEntity.applySettings(payload.mode);
+				}
+			}
+		};
+	}
+	
+	@Override
+	public Type<? extends CustomPacketPayload> type() {
+		return ID;
+	}
+	
 }

@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class PastelLootModifiers {
 
     public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> REGISTER =
-        DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, PastelCommon.MOD_ID);
+            DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, PastelCommon.MOD_ID);
 
     public static void register(IEventBus bus) {
         REGISTER.register("night_archeology", () -> NightArcheologyModifier.CODEC);

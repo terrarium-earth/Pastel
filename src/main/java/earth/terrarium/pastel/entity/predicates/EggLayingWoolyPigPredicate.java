@@ -14,34 +14,28 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public record EggLayingWoolyPigPredicate(Optional<DyeColor> color, Optional<Boolean> hatless, Optional<Boolean> sheared)
-    implements EntitySubPredicate {
+public record EggLayingWoolyPigPredicate(Optional<DyeColor> color, Optional<Boolean> hatless, Optional<Boolean> sheared) implements EntitySubPredicate {
 
-    public static final MapCodec<EggLayingWoolyPigPredicate> CODEC = RecordCodecBuilder.mapCodec(
-        (instance) -> instance.group(
-                                  DyeColor.CODEC.optionalFieldOf("color")
-                                                .forGetter(EggLayingWoolyPigPredicate::color),
-                                  Codec.BOOL.optionalFieldOf("hatless")
-                                            .forGetter(EggLayingWoolyPigPredicate::hatless),
-                                  Codec.BOOL.optionalFieldOf("sheared")
-                                            .forGetter(EggLayingWoolyPigPredicate::sheared)
-                              )
-                              .apply(instance, EggLayingWoolyPigPredicate::new));
+	public static final MapCodec<EggLayingWoolyPigPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+			DyeColor.CODEC.optionalFieldOf("color").forGetter(EggLayingWoolyPigPredicate::color),
+			Codec.BOOL.optionalFieldOf("hatless").forGetter(EggLayingWoolyPigPredicate::hatless),
+			Codec.BOOL.optionalFieldOf("sheared").forGetter(EggLayingWoolyPigPredicate::sheared)
+	).apply(instance, EggLayingWoolyPigPredicate::new));
 
-    @Override
-    public boolean matches(Entity entity, ServerLevel world, @Nullable Vec3 pos) {
-        if (!(entity instanceof EggLayingWoolyPigEntity wooly)) {
-            return false;
-        } else {
-            return (this.color.isEmpty() || this.color.get() == wooly.getColor())
-                   && (this.hatless.isEmpty() || this.hatless.get() == wooly.isHatless())
-                   && (this.sheared.isEmpty() || this.sheared.get() == wooly.isSheared());
-        }
-    }
+	@Override
+	public boolean matches(Entity entity, ServerLevel world, @Nullable Vec3 pos) {
+		if (!(entity instanceof EggLayingWoolyPigEntity wooly)) {
+			return false;
+		} else {
+			return (this.color.isEmpty() || this.color.get() == wooly.getColor())
+					&& (this.hatless.isEmpty() || this.hatless.get() == wooly.isHatless())
+					&& (this.sheared.isEmpty() || this.sheared.get() == wooly.isSheared());
+		}
+	}
 
-    @Override
-    public MapCodec<EggLayingWoolyPigPredicate> codec() {
-        return PastelEntitySubPredicateTypes.EGG_LAYING_WOOLY_PIG;
-    }
+	@Override
+	public MapCodec<EggLayingWoolyPigPredicate> codec() {
+		return PastelEntitySubPredicateTypes.EGG_LAYING_WOOLY_PIG;
+	}
 
 }

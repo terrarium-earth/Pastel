@@ -4086,7 +4086,7 @@
 
   "book.pastel.guidebook.enchantment_canvas.page0.text": "我看着我背包中快要坏掉的极品附魔工具而烦恼,想要修复要面临过于昂贵的问题.\\\n\\\n即使我不能拯救工具,至少我可以拯救附魔!这个画布不能捕捉颜色:但是当用于工具时,附魔就会被交换.",
   "book.pastel.guidebook.enchantment_canvas.page1.text": "一旦使用,所使用物品的附魔就会画在画布上,可以将其绑定到该类型的物品上.",
-  "book.pastel.guidebook.enchantment_canvas.page2.title": "解除绑定",
+	"book.pastel.guidebook.enchantment_canvas.page2.title": "解除绑定",
   "book.pastel.guidebook.enchantment_canvas.page2.text": "午夜溶液太适合用来给物品解除附魔了, 这大大提高了附魔画布的使用寿命! 让附魔画布浸泡在这种物质中可以完全重置它,允许我把它再用到其他任何我想要的地方.\\\n\\\n*无论我怎么洗，都觉得还想洗.*",
 
   "book.pastel.guidebook.ender_dropper.page0.text": "末影投掷器会在接收到[#](449900)红石脉冲[#]()后,从我的[#](bb00bb)末影箱[#]()中投掷一个物品.\\\n\\\n注意:这个机关可是谁都可以交互的哦——别被偷光了!\\\n末影投掷器与[末影漏斗](entry://magical_blocks/ender_hopper)在功能上互补.",
@@ -4379,7 +4379,7 @@
   "book.pastel.guidebook.hummingstone.page0.text": "在这些玻璃之间,我发现这些漂亮的石头在被触发时会一起发出令人愉快的嗡嗡声.我恰如其分地称之为*嗡鸣石*",
   "book.pastel.guidebook.hummingstone.page1.text": "这种非常坚固、抗爆的晶体散布在[水晶花园](entry://dimension/crystal_gardens)中.",
 
-  "book.pastel.guidebook.idea": "一缕灵感",
+	"book.pastel.guidebook.idea": "一缕灵感",
   "book.pastel.guidebook.ideas.a_gemstone": "关于一种宝石",
   "book.pastel.guidebook.ideas.a_new_ore": "关于一种新矿物",
   "book.pastel.guidebook.ideas.a_new_resource": "关于一种新资源",
@@ -4392,7 +4392,7 @@
   "book.pastel.guidebook.ideas.concise_instructions": "简明摘要",
   "book.pastel.guidebook.ideas.downstone_fragments.page0.text": "我在渊深的地下挖得越深，就越经常遇到那些似乎坚不可摧的岩石。 真的只有这些吗,还是有人在下面建了这些？",
   "book.pastel.guidebook.ideas.downstone_fragments.page1.text": "肯定不是! 看来以前的居民建造了巨大的结构来凿这些石头.我相信他们肯定还剩下一些.直觉告诉我,他们不再需要它了。",
-  "book.pastel.guidebook.ideas.dragonbone.page0.text": "我发现了一个庞然大物的残骸.\\\n用传统的方式似乎不可能采集这些方块, 因为当我尝试开采时, 有一股魔力在保护它并且会迅速将其修复.\\\n有没有什么非传统的方法可以突破这层魔法? 也许使用更强大的力量?",
+	"book.pastel.guidebook.ideas.dragonbone.page0.text": "我发现了一个庞然大物的残骸.\\\n用传统的方式似乎不可能采集这些方块, 因为当我尝试开采时, 有一股魔力在保护它并且会迅速将其修复.\\\n有没有什么非传统的方法可以突破这层魔法? 也许使用更强大的力量?",
   "book.pastel.guidebook.ideas.dragonbone.page1.text": "显然,如果我事先破坏掉这股魔力,开采这些方块就会变得很容易了,这样它就无法复原了!无论是用魔法爆炸,还是一次强大的普通爆炸, 都需要比TNT更有爆炸性, 比如白炽汞合金就应该能胜任.",
   "book.pastel.guidebook.ideas.fading.name": "实验 #1",
   "book.pastel.guidebook.ideas.fading.page0.text": "既然褪解之瓶里面是一个个弱小而又活泼的微生物,那么把有机方块放在它旁边来喂养它如何呢? 当我右键将瓶子里的东西以方块的形式放出来的时候, 我还可以把它们装回瓶子里.",
@@ -4412,7 +4412,7 @@
   "book.pastel.guidebook.ideas.nightdew_sprout.page0.text": "土壤里有一种芬芳的东西,但我无法确定它的位置……当然,更敏锐的嗅觉会有所帮助.",
   "book.pastel.guidebook.ideas.nightdew_sprout.page1.text": "我脚下的泥土中散落着一株不寻常的藤蔓的休眠枝条. 虽然它们对我来说过于精细和难以捉摸,但嗅探者自然可以胜任这项任务!",
   "book.pastel.guidebook.ideas.paltaeria.page0.text": "即使刚开始看起来是这样的: 末地一定不是全是末地石.",
-  "book.pastel.guidebook.ideas.paltaeria.page1.text": "我在末地主岛和外岛都发现了一种矿, 很少暴露在空气中, 因此挖入一个岛屿可能是我最好的选择. 它同样也有正常掉落物和一种稀有的掉落物.",
+	"book.pastel.guidebook.ideas.paltaeria.page1.text": "我在末地主岛和外岛都发现了一种矿, 很少暴露在空气中, 因此挖入一个岛屿可能是我最好的选择. 它同样也有正常掉落物和一种稀有的掉落物.",
   "book.pastel.guidebook.ideas.preservation_ruins.name": "三个结构",
   "book.pastel.guidebook.ideas.preservation_ruins.page0.text": "一位村民告诉我,他们发现了用坚不可摧的石头建造的不同类型的结构,这些结构大多藏在主世界的深板岩上层附近,遍布各个生物群系.",
   "book.pastel.guidebook.ideas.preservation_ruins.page1.text": "入口似乎被一个强大的力场封锁了.不过建造它的人好心地给我留下了一些线索! 这些在力场旁边的心形暗示我需要激活 [#](2c2e8e)蔚蓝护盾[#]().",
@@ -4568,7 +4568,7 @@
   "book.pastel.guidebook.infused_beverages.name": "瓶装饮品",
   "book.pastel.guidebook.infused_beverages.page0.text": "酿造是一门艺术!\\\n其中变化之多,尝试之广,恐怕我一生都无法试遍所有可能的组合.\\\n它们不仅在味道上各有千秋,效果上也各不相同.",
   "book.pastel.guidebook.infused_beverages.page3.text": "麦芽啤酒既能填饱肚子,尝起来又甜又香.多好的组合啊.",
-  "book.pastel.guidebook.infused_beverages.page4.text": "令人耳目一新, 但在我嘴里留下了苦涩的滋味.",
+	"book.pastel.guidebook.infused_beverages.page4.text": "令人耳目一新, 但在我嘴里留下了苦涩的滋味.",
   "book.pastel.guidebook.infused_beverages.page5.text": "带有肉桂味的苹果汁",
   "book.pastel.guidebook.infused_beverages.page6.text": "让我昏昏欲睡,被子一盖直接睡上一整天。",
   "book.pastel.guidebook.infused_beverages.page7.text": "除了给予急迫之外,它还可以根据发酵的时间提供一些饱和度.",
@@ -4617,9 +4617,9 @@
   "book.pastel.guidebook.intro.page2.text": "随着你对光谱世界的探索越发深入,你所达成的进度越多,解锁的新事物也就越多.\\\n随着你的进度,你原本熟知的世界会逐渐显露全新样貌,向你展现出前所未见的各色新事物——这些变化只对*你*展现.\\\n\\\n最终,你要汇集你的所学所识,完成最后的目标:深入基岩下方.",
   "book.pastel.guidebook.intro.page3.link_text": "光谱世界的Discord",
   "book.pastel.guidebook.intro.page3.text": "没有头绪吗?看看这本书或你的进度吧,它们会指引你前去探索.\\\n\\\n光谱世界仍在开发中,如果您发现Bug或者有什么建议,请加入光谱世界的Discord频道,或在GitHub上报告!\\\n祝你玩的开心!-DaFuqs",
-  "book.pastel.guidebook.intro.stuck.text": "看一眼这本任务书或者你的光谱世界进度吧. 在这两个地方你都能找到下一步要做什么的提示.\\\n\\\n您的旅程中会有多棵进度树,每当你进入新的章节都会解锁一棵.",
-  "book.pastel.guidebook.intro.hints.title": "可选提示系统",
-  "book.pastel.guidebook.intro.hints.text": "你的七彩世界任务书带有提示系统. 如果你感到盲目,请随时查阅这些条目以获得一些小提示,或是完整的解决办法.\\\n\\\n这些是完全可选的 - 你使用后不会有任何损失. 当然,你也可以为自己独自走完了这个模组而感到自豪！",
+	"book.pastel.guidebook.intro.stuck.text": "看一眼这本任务书或者你的光谱世界进度吧. 在这两个地方你都能找到下一步要做什么的提示.\\\n\\\n您的旅程中会有多棵进度树,每当你进入新的章节都会解锁一棵.",
+	"book.pastel.guidebook.intro.hints.title": "可选提示系统",
+	"book.pastel.guidebook.intro.hints.text": "你的七彩世界任务书带有提示系统. 如果你感到盲目,请随时查阅这些条目以获得一些小提示,或是完整的解决办法.\\\n\\\n这些是完全可选的 - 你使用后不会有任何损失. 当然,你也可以为自己独自走完了这个模组而感到自豪！",
 
   "book.pastel.guidebook.inventory_insertion.page0.text": "背包里装满[#](bb00bb)泥土[#]()的时候,继续开矿的结果很可能就是继续获得[#](bb00bb)泥土[#](),而矿物径直落入[#](bb00bb)熔岩[#]()……\\\n要那么多泥土干嘛?给新人盖火柴盒?\\\n\\\n嘛,反正[#](bb00bb)熔岩[#]()的事一定要有个头!",
   "book.pastel.guidebook.inventory_insertion.page1.text": "将挖掘的方块和生物的掉落物直接吸纳到背包中,而不是掉在地上.\\\n\\\n最大等级:1\\\n适用于采掘工具、剪刀、武器、弓、弩和 光谱世界 的钓鱼竿.",
@@ -6245,8 +6245,9 @@
   "advancements.pastel.eat_each_cookbook_heavy_meal.description": "品尝地下食谱中的所有美味佳肴",
   "advancements.pastel.dip_something_into_liquid_crystal.title": "晶化蜕变",
   "advancements.pastel.dip_something_into_liquid_crystal.description": "有些东西在接触液态水晶时会变成其他东西",
-  "advancements.pastel.become_enlightened.title": "专业爱猫发帖人士",
+	"advancements.pastel.become_enlightened.title": "专业爱猫发帖人士",
   "advancements.pastel.become_enlightened.description": "从每天发猫咪帖子到解开宇宙的奥秘: 你是精英种的精英.你终于搞明白Noaaan的名字里到底有几个A.",
+ 
 
   "______special_named_items_and_lore": "特殊物品名称:",
   "named_item.pastel.dirt_of_shame": "耻辱之土",

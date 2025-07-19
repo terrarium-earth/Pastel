@@ -18,36 +18,36 @@ import java.util.Set;
 
 @Mixin(Entity.class)
 public abstract class EntityApplyFluidsMixin implements TouchingWaterAware {
-
-    @Final
-    @Shadow
-    private Set<TagKey<Fluid>> fluidOnEyes;
-
-    @Unique
-    private boolean pastel$isActuallyTouchingWater = false;
-
-    @Override
-    public boolean isActuallyTouchingWater() {
-        return this.pastel$isActuallyTouchingWater;
-    }
-
-    @Override
-    public void setActuallyTouchingWater(boolean actuallyTouchingWater) {
-        this.pastel$isActuallyTouchingWater = actuallyTouchingWater;
-    }
-
-    @Inject(method = "isEyeInFluid", at = @At("RETURN"), cancellable = true)
-    public void isSubmergedIn(TagKey<Fluid> fluidTag, CallbackInfoReturnable<Boolean> cir) {
-        if (!cir.getReturnValue() && fluidTag == FluidTags.WATER) {
-            cir.setReturnValue(this.fluidOnEyes.contains(PastelFluidTags.SWIMMABLE_FLUID));
-        }
-    }
-
-    @Inject(method = "isUnderWater", at = @At("RETURN"), cancellable = true)
-    public void isSubmergedInWater(CallbackInfoReturnable<Boolean> cir) {
-        if (!cir.getReturnValue() && this.fluidOnEyes.contains(PastelFluidTags.SWIMMABLE_FLUID)) {
-            //this.submergedFluidTag.add(FluidTags.WATER);
-            cir.setReturnValue(true);
-        }
-    }
+	
+	@Final
+	@Shadow
+	private Set<TagKey<Fluid>> fluidOnEyes;
+	
+	@Unique
+	private boolean pastel$isActuallyTouchingWater = false;
+	
+	@Override
+	public boolean isActuallyTouchingWater() {
+		return this.pastel$isActuallyTouchingWater;
+	}
+	
+	@Override
+	public void setActuallyTouchingWater(boolean actuallyTouchingWater) {
+		this.pastel$isActuallyTouchingWater = actuallyTouchingWater;
+	}
+	
+	@Inject(method = "isEyeInFluid", at = @At("RETURN"), cancellable = true)
+	public void isSubmergedIn(TagKey<Fluid> fluidTag, CallbackInfoReturnable<Boolean> cir) {
+		if (!cir.getReturnValue() && fluidTag == FluidTags.WATER) {
+			cir.setReturnValue(this.fluidOnEyes.contains(PastelFluidTags.SWIMMABLE_FLUID));
+		}
+	}
+	
+	@Inject(method = "isUnderWater", at = @At("RETURN"), cancellable = true)
+	public void isSubmergedInWater(CallbackInfoReturnable<Boolean> cir) {
+		if (!cir.getReturnValue() && this.fluidOnEyes.contains(PastelFluidTags.SWIMMABLE_FLUID)) {
+			//this.submergedFluidTag.add(FluidTags.WATER);
+			cir.setReturnValue(true);
+		}
+	}
 }

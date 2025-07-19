@@ -11,23 +11,23 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 import java.util.List;
 
 public class ItemWithLoomPattern extends Item implements LoomPatternProvider {
+	
+	private final ResourceKey<BannerPattern> patternItemTag;
+	
+	public ItemWithLoomPattern(Properties settings, ResourceKey<BannerPattern> patternItemTag) {
+		super(settings);
+		this.patternItemTag = patternItemTag;
+	}
+	
+	@Override
+	public ResourceKey<BannerPattern> getPattern() {
+		return patternItemTag;
+	}
 
-    private final ResourceKey<BannerPattern> patternItemTag;
-
-    public ItemWithLoomPattern(Properties settings, ResourceKey<BannerPattern> patternItemTag) {
-        super(settings);
-        this.patternItemTag = patternItemTag;
-    }
-
-    @Override
-    public ResourceKey<BannerPattern> getPattern() {
-        return patternItemTag;
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        addBannerPatternProviderTooltip(tooltip);
-    }
-
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		addBannerPatternProviderTooltip(tooltip);
+	}
+	
 }

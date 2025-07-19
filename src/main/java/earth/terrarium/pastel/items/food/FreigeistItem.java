@@ -7,15 +7,15 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class FreigeistItem extends DrinkItem {
+	
+	public FreigeistItem(Properties settings) {
+		super(settings);
+	}
 
-    public FreigeistItem(Properties settings) {
-        super(settings);
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.freigeist.tooltip"));
-    }
-
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("item.pastel.freigeist.tooltip"));
+	}
+	
 }

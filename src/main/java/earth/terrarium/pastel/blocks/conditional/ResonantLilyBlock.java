@@ -9,27 +9,22 @@ import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ResonantLilyBlock extends FlowerBlock {
+	
+	public static final MapCodec<ResonantLilyBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			EFFECTS_FIELD.forGetter(FlowerBlock::getSuspiciousEffects),
+			propertiesCodec()
+	).apply(instance, ResonantLilyBlock::new));
 
-    public static final MapCodec<ResonantLilyBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                                                                                                EFFECTS_FIELD.forGetter(FlowerBlock::getSuspiciousEffects),
-                                                                                                                propertiesCodec()
-                                                                                                            )
-                                                                                                            .apply(
-                                                                                                                instance,
-                                                                                                                ResonantLilyBlock::new
-                                                                                                            ));
+	public ResonantLilyBlock(Holder<MobEffect> stewEffect, float effectLengthInSeconds, BlockBehaviour.Properties settings) {
+		this(makeEffectList(stewEffect, effectLengthInSeconds), settings);
+	}
 
-    public ResonantLilyBlock(
-        Holder<MobEffect> stewEffect, float effectLengthInSeconds, BlockBehaviour.Properties settings) {
-        this(makeEffectList(stewEffect, effectLengthInSeconds), settings);
-    }
+	public ResonantLilyBlock(SuspiciousStewEffects stewEffects, BlockBehaviour.Properties settings) {
+		super(stewEffects, settings);
+	}
 
-    public ResonantLilyBlock(SuspiciousStewEffects stewEffects, BlockBehaviour.Properties settings) {
-        super(stewEffects, settings);
-    }
-
-    @Override
-    public MapCodec<? extends ResonantLilyBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends ResonantLilyBlock> codec() {
+		return CODEC;
+	}
 }

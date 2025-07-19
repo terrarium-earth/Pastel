@@ -11,10 +11,10 @@ import java.util.Map;
 
 @Mixin(ParticleEngine.class)
 public interface ParticleManagerAccessor {
+	
+	@Accessor
+	Map<ResourceLocation, SpriteSet> getSpriteSets();
 
-    @Accessor
-    Map<ResourceLocation, SpriteSet> getSpriteSets();
-
-    @Accessor
-    TextureAtlas getTextureAtlas();
+	@Accessor
+	TextureAtlas getTextureAtlas();
 }

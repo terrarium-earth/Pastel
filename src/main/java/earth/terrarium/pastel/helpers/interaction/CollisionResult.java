@@ -11,13 +11,10 @@ public record CollisionResult<T>(Level world, T collision, CollisionType type, V
         if (type != CollisionType.BLOCK) {
             var collisionBox = ((Entity) collision).getBoundingBox();
             return collisionBox.contains(collisionPoint);
-        } else {
+        }
+        else {
             var pos = BlockPos.containing(collisionPoint);
-            return world.getBlockState(pos)
-                        .getInteractionShape(world, pos)
-                        .toAabbs()
-                        .stream()
-                        .anyMatch(box -> box.contains(collisionPoint));
+            return world.getBlockState(pos).getInteractionShape(world, pos).toAabbs().stream().anyMatch(box -> box.contains(collisionPoint));
         }
     }
 

@@ -27,18 +27,13 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
     private static final ItemReference EMPTY = ItemReference.of(Items.AIR);
 
     public static final Codec<ItemReference> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                         BuiltInRegistries.ITEM.byNameCodec()
-                                                                                                               .fieldOf("reference")
-                                                                                                               .forGetter(ref -> ref.reference),
-                                                                                         DataComponentPatch.CODEC.fieldOf("components")
-                                                                                                                 .forGetter(ref -> ref.components.asPatch())
-                                                                                     )
-                                                                                     .apply(i, ItemReference::new)
+            BuiltInRegistries.ITEM.byNameCodec().fieldOf("reference").forGetter(ref -> ref.reference),
+            DataComponentPatch.CODEC.fieldOf("components").forGetter(ref -> ref.components.asPatch())
+            ).apply(i, ItemReference::new)
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ItemReference> STREAM_CODEC = new StreamCodec<>() {
-        private static final StreamCodec<RegistryFriendlyByteBuf, Item> ITEM_CODEC = ByteBufCodecs.registry(
-            Registries.ITEM);
+        private static final StreamCodec<RegistryFriendlyByteBuf, Item> ITEM_CODEC = ByteBufCodecs.registry(Registries.ITEM);
 
         public ItemReference decode(RegistryFriendlyByteBuf buf) {
             var reference = ITEM_CODEC.decode(buf);
@@ -47,8 +42,8 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
         }
 
         public void encode(RegistryFriendlyByteBuf buf, ItemReference itemReference) {
-            ITEM_CODEC.encode(buf, itemReference.reference);
-            DataComponentPatch.STREAM_CODEC.encode(buf, itemReference.components.asPatch());
+                ITEM_CODEC.encode(buf, itemReference.reference);
+                DataComponentPatch.STREAM_CODEC.encode(buf, itemReference.components.asPatch());
         }
     };
 
@@ -72,7 +67,7 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
     public static ItemReference of(ItemStack stack) {
         if (stack.isEmpty())
             return new ItemReference(Items.AIR, stack.getComponentsPatch());
-        return new ItemReference(stack.getItem(), stack.getComponentsPatch());
+       return new ItemReference(stack.getItem(), stack.getComponentsPatch());
     }
 
     public boolean permits(ItemStack stack) {
@@ -126,8 +121,7 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
     }
 
     public boolean isEmpty() {
-        return reference.asItem()
-                        .equals(Items.AIR);
+        return reference.asItem().equals(Items.AIR);
     }
 
     @Override

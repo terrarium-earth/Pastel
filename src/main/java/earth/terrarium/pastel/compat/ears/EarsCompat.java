@@ -12,19 +12,13 @@ import net.minecraft.world.item.Item;
 
 public class EarsCompat {
     public static void register() {
-        EarsInhibitorRegistry.register(
-            PastelCommon.MOD_ID, (part, peer) -> {
-                Player player = (Player) peer;
-                if (part.isAnchoredTo(EarsAnchorPart.TORSO) && EarsStateOverriderRegistry.isActive(
-                                                                                             EarsStateType.WEARING_CHESTPLATE, peer, true)
-                                                                                         .getValue()) {
-                    Item equippedItem = player.getItemBySlot(EquipmentSlot.CHEST)
-                                              .getItem();
-                    return equippedItem == PastelItems.BEDROCK_CHESTPLATE.get() ||
-                           equippedItem == PastelItems.FEROCIOUS_CHESTPLATE.get();
-                }
-                return false;
+        EarsInhibitorRegistry.register(PastelCommon.MOD_ID, (part, peer) -> {
+            Player player = (Player) peer;
+            if (part.isAnchoredTo(EarsAnchorPart.TORSO) && EarsStateOverriderRegistry.isActive(EarsStateType.WEARING_CHESTPLATE, peer, true).getValue()) {
+                Item equippedItem = player.getItemBySlot(EquipmentSlot.CHEST).getItem();
+                return equippedItem == PastelItems.BEDROCK_CHESTPLATE.get() || equippedItem == PastelItems.FEROCIOUS_CHESTPLATE.get();
             }
-        );
+            return false;
+        });
     }
 }

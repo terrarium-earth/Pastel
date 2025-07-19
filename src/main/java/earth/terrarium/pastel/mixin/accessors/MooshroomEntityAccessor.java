@@ -7,11 +7,11 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(MushroomCow.class)
 public interface MooshroomEntityAccessor {
-
-    @Accessor
-    SuspiciousStewEffects getStewEffects();
-
-    @Accessor
-    void setStewEffects(SuspiciousStewEffects stewEffects);
-
+	
+	@Accessor
+	SuspiciousStewEffects getStewEffects();
+	
+	@Accessor
+	void setStewEffects(SuspiciousStewEffects stewEffects);
+	
 }

@@ -49,6 +49,7 @@
     "frame": "pastel:amethyst_shard"
   },
 
+
   {
     "advancement": "pastel:place_pedestal",
     "frame": "paginatedadvancements:crested"
@@ -81,6 +82,7 @@
     "advancement": "pastel:lategame/build_complex_pedestal_structure",
     "frame": "paginatedadvancements:crested"
   },
+
 
   {
     "advancement": "pastel:fail_to_take_item_out_of_pedestal",
@@ -448,7 +450,7 @@
     "frame": "paginatedadvancements:squircle"
   },
   {
-    "advancement": "pastel:pluck_resplendent_feather",
+		"advancement": "pastel:pluck_resplendent_feather",
     "frame": "paginatedadvancements:squircle"
   },
   {

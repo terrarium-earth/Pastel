@@ -11,15 +11,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PiglinAi.class)
 public abstract class PiglinBrainMixin {
-
-    @Inject(at = @At("HEAD"), method = "isWearingGold", cancellable = true)
-    private static void piglinSafeEquipment(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
-        for (ItemStack itemStack : entity.getArmorSlots()) {
-            if (itemStack.is(PastelItemTags.PIGLIN_SAFE_EQUIPMENT)) {
-                cir.setReturnValue(true);
-                break;
-            }
-        }
-    }
-
+	
+	@Inject(at = @At("HEAD"), method = "isWearingGold", cancellable = true)
+	private static void piglinSafeEquipment(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
+		for (ItemStack itemStack : entity.getArmorSlots()) {
+			if (itemStack.is(PastelItemTags.PIGLIN_SAFE_EQUIPMENT)) {
+				cir.setReturnValue(true);
+				break;
+			}
+		}
+	}
+	
 }

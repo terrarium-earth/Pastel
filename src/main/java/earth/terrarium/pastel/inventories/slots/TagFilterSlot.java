@@ -7,17 +7,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class TagFilterSlot extends Slot {
-
-    private final TagKey<Item> acceptedTag;
-
-    public TagFilterSlot(Container inventory, int index, int x, int y, TagKey<Item> acceptedTag) {
-        super(inventory, index, x, y);
-        this.acceptedTag = acceptedTag;
-    }
-
-    @Override
-    public boolean mayPlace(ItemStack stack) {
-        return stack.is(acceptedTag);
-    }
-
+	
+	private final TagKey<Item> acceptedTag;
+	
+	public TagFilterSlot(Container inventory, int index, int x, int y, TagKey<Item> acceptedTag) {
+		super(inventory, index, x, y);
+		this.acceptedTag = acceptedTag;
+	}
+	
+	@Override
+	public boolean mayPlace(ItemStack stack) {
+		return stack.is(acceptedTag);
+	}
+	
 }

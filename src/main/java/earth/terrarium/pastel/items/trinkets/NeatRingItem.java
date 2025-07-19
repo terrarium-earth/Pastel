@@ -12,20 +12,20 @@ import java.util.List;
 public class NeatRingItem extends PastelTrinketItem {
 
 
-    public NeatRingItem(Properties settings) {
-        super(settings, PastelCommon.locate("unlocks/trinkets/neat_ring"));
-    }
+	public NeatRingItem(Properties settings) {
+		super(settings, PastelCommon.locate("unlocks/trinkets/neat_ring"));
+	}
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.neat_ring.tooltip"));
-    }
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("item.pastel.neat_ring.tooltip"));
+	}
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return true;
-    }
-
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return true;
+	}
+	
 }

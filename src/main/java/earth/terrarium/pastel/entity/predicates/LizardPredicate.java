@@ -15,37 +15,28 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public record LizardPredicate(
-    Optional<InkColor> color, Optional<LizardFrillVariant> frills, Optional<LizardHornVariant> horns
-) implements EntitySubPredicate {
+public record LizardPredicate(Optional<InkColor> color, Optional<LizardFrillVariant> frills, Optional<LizardHornVariant> horns) implements EntitySubPredicate {
 
-    public static final MapCodec<LizardPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                                                                                                                InkColor.CODEC.optionalFieldOf("color")
-                                                                                                                              .forGetter(LizardPredicate::color),
-                                                                                                                LizardFrillVariant.CODEC.optionalFieldOf("frills_variant")
-                                                                                                                                        .forGetter(LizardPredicate::frills),
-                                                                                                                LizardHornVariant.CODEC.optionalFieldOf("horn_variant")
-                                                                                                                                       .forGetter(LizardPredicate::horns)
-                                                                                                            )
-                                                                                                            .apply(
-                                                                                                                instance,
-                                                                                                                LizardPredicate::new
-                                                                                                            ));
+	public static final MapCodec<LizardPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+			InkColor.CODEC.optionalFieldOf("color").forGetter(LizardPredicate::color),
+			LizardFrillVariant.CODEC.optionalFieldOf("frills_variant").forGetter(LizardPredicate::frills),
+			LizardHornVariant.CODEC.optionalFieldOf("horn_variant").forGetter(LizardPredicate::horns)
+	).apply(instance, LizardPredicate::new));
 
-    @Override
-    public boolean matches(Entity entity, ServerLevel world, @Nullable Vec3 pos) {
-        if (!(entity instanceof LizardEntity lizard)) {
-            return false;
-        } else {
-            return (this.color.isEmpty() || this.color.get() == lizard.getColor())
-                   && (this.frills.isEmpty() || this.frills.get() == lizard.getFrills())
-                   && (this.horns.isEmpty() || this.horns.get() == lizard.getHorns());
-        }
-    }
+	@Override
+	public boolean matches(Entity entity, ServerLevel world, @Nullable Vec3 pos) {
+		if (!(entity instanceof LizardEntity lizard)) {
+			return false;
+		} else {
+			return (this.color.isEmpty() || this.color.get() == lizard.getColor())
+					&& (this.frills.isEmpty() || this.frills.get() == lizard.getFrills())
+					&& (this.horns.isEmpty() || this.horns.get() == lizard.getHorns());
+		}
+	}
 
-    @Override
-    public MapCodec<LizardPredicate> codec() {
-        return PastelEntitySubPredicateTypes.LIZARD;
-    }
-
+	@Override
+	public MapCodec<LizardPredicate> codec() {
+		return PastelEntitySubPredicateTypes.LIZARD;
+	}
+	
 }

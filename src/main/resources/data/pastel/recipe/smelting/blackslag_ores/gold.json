@@ -1,11 +1,7 @@
 {
   "type": "minecraft:smelting",
   "group": "gold_ingot",
-  "ingredient": [
-    {
-      "item": "pastel:blackslag_gold_ore"
-    }
-  ],
+  "ingredient": [{"item": "pastel:blackslag_gold_ore"}],
   "result": {
     "id": "minecraft:gold_ingot"
   },

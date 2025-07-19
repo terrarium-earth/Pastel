@@ -7,19 +7,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 public class LiquidCrystalConvertingDisplay extends FluidConvertingDisplay {
-
-    public LiquidCrystalConvertingDisplay(RecipeHolder<LiquidCrystalConvertingRecipe> recipe) {
-        super(recipe);
-    }
-
-    @Override
-    public CategoryIdentifier<?> getCategoryIdentifier() {
-        return PastelPlugins.LIQUID_CRYSTAL_CONVERTING;
-    }
-
-    @Override
-    public ResourceLocation getUnlockIdentifier() {
-        return LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER;
-    }
-
+	
+	public LiquidCrystalConvertingDisplay(RecipeHolder<LiquidCrystalConvertingRecipe> recipe) {
+		super(recipe);
+	}
+	
+	@Override
+	public CategoryIdentifier<?> getCategoryIdentifier() {
+		return PastelPlugins.LIQUID_CRYSTAL_CONVERTING;
+	}
+	
+	@Override
+	public ResourceLocation getUnlockIdentifier() {
+		return LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER;
+	}
+	
 }

@@ -18,51 +18,50 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class FabricationChestBlock extends PastelChestBlock {
+	
+	public static final MapCodec<FabricationChestBlock> CODEC = simpleCodec(FabricationChestBlock::new);
 
-    public static final MapCodec<FabricationChestBlock> CODEC = simpleCodec(FabricationChestBlock::new);
+	protected static final VoxelShape CHEST_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+	
+	public FabricationChestBlock(Properties settings) {
+		super(settings);
+	}
 
-    protected static final VoxelShape CHEST_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return CODEC;
+	}
 
-    public FabricationChestBlock(Properties settings) {
-        super(settings);
-    }
+	@Override
+	@Nullable
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new FabricationChestBlockEntity(pos, state);
+	}
+	
+	@Override
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+		return createTickerHelper(type, PastelBlockEntities.FABRICATION_CHEST.get(), FabricationChestBlockEntity::tick);
+	}
+	
+	@Override
+	public void openScreen(Level world, BlockPos pos, Player player) {
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (blockEntity instanceof FabricationChestBlockEntity fabricationChestBlockEntity) {
+			if (!isChestBlocked(world, pos)) {
+				player.openMenu(fabricationChestBlockEntity);
+			}
+		}
+	}
 
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.MODEL;
+	}
 
-    @Override
-    @Nullable
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new FabricationChestBlockEntity(pos, state);
-    }
-
-    @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, PastelBlockEntities.FABRICATION_CHEST.get(), FabricationChestBlockEntity::tick);
-    }
-
-    @Override
-    public void openScreen(Level world, BlockPos pos, Player player) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof FabricationChestBlockEntity fabricationChestBlockEntity) {
-            if (!isChestBlocked(world, pos)) {
-                player.openMenu(fabricationChestBlockEntity);
-            }
-        }
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return CHEST_SHAPE;
-    }
-
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		return CHEST_SHAPE;
+	}
+	
 }

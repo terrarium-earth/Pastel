@@ -696,14 +696,14 @@
       "pastel:ender_splice_bound"
     ]
   },
-  "humus_ambient": {
-    "subtitle": "pastel.subtitles.block.humus.ambient",
+	"humus_ambient": {
+		"subtitle": "pastel.subtitles.block.humus.ambient",
     "sounds": [
-      "pastel:humus_ambient",
-      "pastel:humus_ambient2",
-      "pastel:humus_ambient3",
-      "pastel:humus_ambient4",
-      "pastel:humus_ambient5"
+			"pastel:humus_ambient",
+			"pastel:humus_ambient2",
+			"pastel:humus_ambient3",
+			"pastel:humus_ambient4",
+			"pastel:humus_ambient5"
     ]
   },
   "liquid_crystal_ambient": {

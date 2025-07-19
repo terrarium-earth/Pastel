@@ -21,26 +21,24 @@ import java.util.Map;
 
 public class RadiatingEnderBlock extends Block {
 
-    public static final MapCodec<RadiatingEnderBlock> CODEC = simpleCodec(RadiatingEnderBlock::new);
+	public static final MapCodec<RadiatingEnderBlock> CODEC = simpleCodec(RadiatingEnderBlock::new);
 
-    public RadiatingEnderBlock(Properties settings) {
-        super(settings);
-    }
+	public RadiatingEnderBlock(Properties settings) {
+		super(settings);
+	}
 
-    @Override
-    public MapCodec<? extends RadiatingEnderBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends RadiatingEnderBlock> codec() {
+		return CODEC;
+	}
 
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        Entity entity = builder.getOptionalParameter(LootContextParams.THIS_ENTITY);
-        if (entity instanceof EnderMan) {
-            return List.of(PastelBlocks.RADIATING_ENDER.get()
-                                                       .asItem()
-                                                       .getDefaultInstance());
-        }
-        return super.getDrops(state, builder);
-    }
-
+	@Override
+	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+		Entity entity = builder.getOptionalParameter(LootContextParams.THIS_ENTITY);
+		if (entity instanceof EnderMan) {
+			return List.of(PastelBlocks.RADIATING_ENDER.get().asItem().getDefaultInstance());
+		}
+		return super.getDrops(state, builder);
+	}
+	
 }

@@ -18,57 +18,53 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
 public abstract class BidentBaseEntity extends ThrownTrident {
-
-    protected static final EntityDataAccessor<ItemStack> STACK = SynchedEntityData.defineId(
-        BidentBaseEntity.class, EntityDataSerializers.ITEM_STACK);
-
-    public BidentBaseEntity(EntityType<? extends ThrownTrident> entityType, Level world) {
-        super(entityType, world);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(STACK, Items.AIR.getDefaultInstance());
-    }
-
-    @Override
-    public void setPickupItemStack(ItemStack stack) {
-        setTrackedStack(stack.copy());
-        super.setPickupItemStack(stack);
-        this.entityData.set(
-            TridentEntityAccessor.getLoyalty(),
-            (byte) Ench.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack)
-        );
-        this.entityData.set(TridentEntityAccessor.getEnchanted(), stack.hasFoil());
-    }
-
-    @Override
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return PastelSoundEvents.BIDENT_HIT_GROUND;
-    }
-
-    public ItemStack getTrackedStack() {
-        return this.entityData.get(STACK);
-    }
-
-    public void setTrackedStack(ItemStack stack) {
-        entityData.set(STACK, stack);
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag nbt) {
-        super.readAdditionalSaveData(nbt);
-        this.entityData.set(STACK, CodecHelper.fromNbt(ItemStack.CODEC, nbt.get("item"), ItemStack.EMPTY));
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag nbt) {
-        super.addAdditionalSaveData(nbt);
-    }
-
-    @Override
-    public AABB makeBoundingBox() {
-        return super.makeBoundingBox();
-    }
+	
+	protected static final EntityDataAccessor<ItemStack> STACK = SynchedEntityData.defineId(BidentBaseEntity.class, EntityDataSerializers.ITEM_STACK);
+	
+	public BidentBaseEntity(EntityType<? extends ThrownTrident> entityType, Level world) {
+		super(entityType, world);
+	}
+	
+	@Override
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(STACK, Items.AIR.getDefaultInstance());
+	}
+	
+	@Override
+	public void setPickupItemStack(ItemStack stack) {
+		setTrackedStack(stack.copy());
+		super.setPickupItemStack(stack);
+		this.entityData.set(TridentEntityAccessor.getLoyalty(), (byte) Ench.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack));
+		this.entityData.set(TridentEntityAccessor.getEnchanted(), stack.hasFoil());
+	}
+	
+	@Override
+	protected SoundEvent getDefaultHitGroundSoundEvent() {
+		return PastelSoundEvents.BIDENT_HIT_GROUND;
+	}
+	
+	public ItemStack getTrackedStack() {
+		return this.entityData.get(STACK);
+	}
+	
+	public void setTrackedStack(ItemStack stack) {
+		entityData.set(STACK, stack);
+	}
+	
+	@Override
+	public void readAdditionalSaveData(CompoundTag nbt) {
+		super.readAdditionalSaveData(nbt);
+		this.entityData.set(STACK, CodecHelper.fromNbt(ItemStack.CODEC, nbt.get("item"), ItemStack.EMPTY));
+	}
+	
+	@Override
+	public void addAdditionalSaveData(CompoundTag nbt) {
+		super.addAdditionalSaveData(nbt);
+	}
+	
+	@Override
+	public AABB makeBoundingBox() {
+		return super.makeBoundingBox();
+	}
 }

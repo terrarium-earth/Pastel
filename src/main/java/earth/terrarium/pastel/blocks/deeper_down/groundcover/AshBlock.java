@@ -12,29 +12,27 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class AshBlock extends Block {
 
-    public static final MapCodec<AshBlock> CODEC = simpleCodec(AshBlock::new);
+	public static final MapCodec<AshBlock> CODEC = simpleCodec(AshBlock::new);
 
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 14, 16);
+	public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 14, 16);
 
-    public AshBlock(Properties settings) {
-        super(settings);
-    }
+	public AshBlock(Properties settings) {
+		super(settings);
+	}
 
-    @Override
-    public MapCodec<? extends AshBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends AshBlock> codec() {
+		return CODEC;
+	}
 
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }
-
-    @Override
-    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        entity.causeFallDamage(fallDistance, 0.2F, world.damageSources()
-                                                        .fall()
-        );
-    }
-
+	@Override
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		return SHAPE;
+	}
+	
+	@Override
+	public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+		entity.causeFallDamage(fallDistance, 0.2F, world.damageSources().fall());
+	}
+	
 }

@@ -55,24 +55,20 @@ public class PastelPlayerEvents {
         var newMode = event.getNewGameMode();
         var player = event.getEntity();
 
-        if (newMode != GameType.SPECTATOR && curMode == GameType.SPECTATOR && HardcoreDeathTracker.hasHardcoreDeath(
-            player.getGameProfile())) {
+        if (newMode != GameType.SPECTATOR && curMode == GameType.SPECTATOR && HardcoreDeathTracker.hasHardcoreDeath(player.getGameProfile())) {
             HardcoreDeathTracker.removeHardcoreDeath(player.getGameProfile());
         }
     }
 
     private static void postPlayerDeath(LivingDeathEvent event) {
-        if (event.getSource()
-                 .getEntity() instanceof ServerPlayer player) {
+        if (event.getSource().getEntity() instanceof ServerPlayer player) {
 
             if (PastelTrinketItem.hasEquipped(player, PastelItems.JEOPARDANT.get()))
                 PastelAdvancementCriteria.JEOPARDANT_KILL.trigger(player, event.getEntity());
         }
 
         if (event.getEntity() instanceof ServerPlayer player) {
-            if (player.level()
-                      .getLevelData()
-                      .isHardcore() || HardcoreDeathTracker.isInHardcore(player)) {
+            if (player.level().getLevelData().isHardcore() || HardcoreDeathTracker.isInHardcore(player)) {
                 HardcoreDeathTracker.addHardcoreDeath(player.serverLevel(), player);
             }
         }
@@ -80,13 +76,8 @@ public class PastelPlayerEvents {
 
     private static void applyImprovedCritical(CriticalHitEvent event) {
         var player = event.getEntity();
-        var icl = Ench.getLevel(
-            player.level()
-                  .registryAccess(), PastelEnchantments.IMPROVED_CRITICAL, event.getEntity()
-                                                                                .getMainHandItem()
-        );
-        event.setDamageMultiplier(
-            event.getDamageMultiplier() + ImprovedCriticalHelper.getAddtionalCritDamageMultiplier(icl));
+        var icl = Ench.getLevel(player.level().registryAccess(), PastelEnchantments.IMPROVED_CRITICAL, event.getEntity().getMainHandItem());
+        event.setDamageMultiplier(event.getDamageMultiplier() + ImprovedCriticalHelper.getAddtionalCritDamageMultiplier(icl));
     }
 
     private static void forceCritical(CriticalHitEvent event) {
@@ -123,15 +114,15 @@ public class PastelPlayerEvents {
         tryMerge(event, player, mainHand, offHand);
     }
 
-    private static boolean trySplit(
-        LivingSwapItemsEvent.Hands event, ServerPlayer player, ItemStack mainHand, ItemStack offHand) {
+    private static boolean trySplit(LivingSwapItemsEvent.Hands event, ServerPlayer player, ItemStack mainHand, ItemStack offHand) {
         ItemStack offering = ItemStack.EMPTY;
         SplittableItem splittable = null;
 
         if (mainHand.getItem() instanceof SplittableItem split && offHand.isEmpty()) {
             offering = mainHand;
             splittable = split;
-        } else if (offHand.getItem() instanceof SplittableItem split && mainHand.isEmpty()) {
+        }
+        else if (offHand.getItem() instanceof SplittableItem split && mainHand.isEmpty()) {
             offering = offHand;
             splittable = split;
         }
@@ -148,8 +139,7 @@ public class PastelPlayerEvents {
         return false;
     }
 
-    private static void tryMerge(
-        LivingSwapItemsEvent.Hands event, ServerPlayer player, ItemStack mainHand, ItemStack offHand) {
+    private static void tryMerge(LivingSwapItemsEvent.Hands event, ServerPlayer player, ItemStack mainHand, ItemStack offHand) {
         ItemStack firstHalf = ItemStack.EMPTY;
         ItemStack secondHalf = ItemStack.EMPTY;
         MergeableItem mergeable = null;
@@ -159,7 +149,8 @@ public class PastelPlayerEvents {
             firstHalf = mainHand;
             secondHalf = offHand;
             mergeable = merge;
-        } else if (offHand.getItem() instanceof MergeableItem merge) {
+        }
+        else if (offHand.getItem() instanceof MergeableItem merge) {
             firstHalf = offHand;
             secondHalf = mainHand;
             off = true;
@@ -183,15 +174,13 @@ public class PastelPlayerEvents {
     private static void playerWakeUp(PlayerWakeUpEvent event) {
         var player = event.getEntity();
 
-        MiscPlayerData.get(player)
-                      .resetSleepingState(false);
+        MiscPlayerData.get(player).resetSleepingState(false);
         player.removeEffect(PastelMobEffects.SOMNOLENCE);
     }
 
     private static void playerTick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
-        MiscPlayerData.get(player)
-                      .tick();
+        MiscPlayerData.get(player).tick();
         InertiaData.tick(player);
     }
 
@@ -199,12 +188,11 @@ public class PastelPlayerEvents {
         var player = event.getEntity();
         var reason = event.getProblem();
 
-        if (reason != Player.BedSleepingProblem.NOT_POSSIBLE_NOW && MiscPlayerData.get(player)
-                                                                                  .isSleeping()) {
+        if (reason != Player.BedSleepingProblem.NOT_POSSIBLE_NOW && MiscPlayerData.get(player).isSleeping()) {
             event.setProblem(null);
-        } else if (
-            (reason == Player.BedSleepingProblem.NOT_POSSIBLE_NOW || reason == Player.BedSleepingProblem.NOT_SAFE)
-            && player.hasEffect(PastelMobEffects.SOMNOLENCE)) { // Somnolence lets you sleep whenever and wherever.
+        }
+        else if((reason == Player.BedSleepingProblem.NOT_POSSIBLE_NOW || reason == Player.BedSleepingProblem.NOT_SAFE)
+                && player.hasEffect(PastelMobEffects.SOMNOLENCE)) { // Somnolence lets you sleep whenever and wherever.
             event.setProblem(null);
         }
     }
@@ -217,8 +205,8 @@ public class PastelPlayerEvents {
         // When the sleep timer reached 100 the player is fully asleep
 
         if (player instanceof ServerPlayer serverPlayerEntity
-            && serverPlayerEntity.getSleepTimer() == 100
-            && PastelTrinketItem.hasEquipped(player, PastelItems.WHISPY_CIRCLET.get())) {
+                && serverPlayerEntity.getSleepTimer() == 100
+                && PastelTrinketItem.hasEquipped(player, PastelItems.WHISPY_CIRCLET.get())) {
 
             player.setHealth(player.getMaxHealth());
             WhispyCircletItem.removeNegativeStatusEffects(player);
@@ -230,13 +218,12 @@ public class PastelPlayerEvents {
         AzureDikeData newDike;
 
         if (event.isWasDeath()) {
-            newDike = AzureDikeData.CLONER.copy(
-                AzureDikeProvider.getAzureDikeComponent(original), original, original.registryAccess());
-        } else {
+            newDike = AzureDikeData.CLONER.copy(AzureDikeProvider.getAzureDikeComponent(original), original, original.registryAccess());
+        }
+        else {
             newDike = AzureDikeProvider.getAzureDikeComponent(original);
         }
 
-        event.getEntity()
-             .setData(AzureDikeData.ATTACHMENT, newDike);
+        event.getEntity().setData(AzureDikeData.ATTACHMENT, newDike);
     }
 }

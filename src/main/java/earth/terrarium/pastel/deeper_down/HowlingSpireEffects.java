@@ -19,121 +19,116 @@ import net.minecraft.world.level.biome.Biome;
 
 @OnlyIn(Dist.CLIENT)
 public class HowlingSpireEffects {
+	
+	public static int spireTicks, lastSpireTicks;
+	
+	private static boolean initialized = false;
+	
+	private static final long ASH_UPDATE_INTERVAL = 1600;
+	private static final double BASE_ASH_VELOCITY = 0.25;
+	private static double targetAshVelocity = 0.215, lastAshVelocity = 0.215, ashScaleA = 20000, ashScaleB = 2200, ashScaleC = 200;
+	private static int ashSwitchTicks = 50, ashSpawns;
+	private static Direction.Axis ashAxis = Direction.Axis.X;
+	private static Minecraft client = Minecraft.getInstance();
+	
+	public static void clientTick(ClientLevel world, Entity cameraEntity, Holder<Biome> biome) {
+		if (client.isPaused())
+			return;
 
-    public static int spireTicks, lastSpireTicks;
+		lastSpireTicks = spireTicks;
+		BiomeSoundInstance.update(biome);
 
-    private static boolean initialized = false;
+		boolean inHowlingSpires = biome.is(PastelBiomes.HOWLING_SPIRES);
+		if (inHowlingSpires) {
+			if (spireTicks < 60) {
+				spireTicks++;
+			}
+		} else if (spireTicks > 0) {
+			spireTicks--;
+		}
+		
+		var time = world.getGameTime();
+		var random = world.getRandom();
+		
+		var ashVelocity = targetAshVelocity;
+		if (ashSwitchTicks < 50) {
+			ashVelocity = Mth.clampedLerp(lastAshVelocity, targetAshVelocity, ashSwitchTicks);
+			ashSwitchTicks++;
+		}
+		
+		if (time % ASH_UPDATE_INTERVAL == 0 || !initialized) {
+			updateAshEffects(random);
+			
+			FallingAshParticle.setTargetVelocity(ashVelocity);
+			FallingAshParticle.setPrimaryAxis(ashAxis);
+			FallingAshParticle.setAshScaleA(ashScaleA);
+			FallingAshParticle.setAshScaleB(ashScaleB);
+			FallingAshParticle.setAshScaleC(ashScaleC);
+		}
+		
+		if (inHowlingSpires) {
+			var maxAsh = ashSpawns / (PastelCommon.CONFIG.ReducedParticles ? 2 : 1);
+			spawnHowlingSpiresAsh(cameraEntity, maxAsh, random, world, biome);
+		}
+		
+		initialized = true;
+	}
+	
+	private static void updateAshEffects(RandomSource random) {
+		ashSpawns = random.nextIntBetweenInclusive(5, 7);
+		
+		if (random.nextFloat() < 0.125) {
+			targetAshVelocity = Mth.clamp(targetAshVelocity + random.nextFloat() * 0.05 - 0.025, 0.025, 0.75);
+			return;
+		}
+		
+		if (random.nextFloat() < 0.95F)
+			return;
+		
+		ashScaleA = 500 * (random.nextDouble() + 1) * (random.nextDouble() * 20) + 1000;
+		ashScaleB = 100 * (random.nextDouble() + 1) * (random.nextDouble() * 10) + 250;
+		ashScaleC = 20 * (random.nextDouble() + 1) * (random.nextDouble() * 5) + 100;
+		
+		var newAxis = random.nextBoolean() ? Direction.Axis.X : Direction.Axis.Z;
+		if (newAxis == ashAxis)
+			return;
+		
+		targetAshVelocity = BASE_ASH_VELOCITY * (random.nextDouble() * 0.5 + 0.5) * (random.nextBoolean() ? -1 : 1);
+		ashAxis = newAxis;
+	}
 
-    private static final long ASH_UPDATE_INTERVAL = 1600;
-    private static final double BASE_ASH_VELOCITY = 0.25;
-    private static double targetAshVelocity = 0.215, lastAshVelocity = 0.215, ashScaleA = 20000, ashScaleB = 2200,
-        ashScaleC = 200;
-    private static int ashSwitchTicks = 50, ashSpawns;
-    private static Direction.Axis ashAxis = Direction.Axis.X;
-    private static Minecraft client = Minecraft.getInstance();
+	private static void spawnHowlingSpiresAsh(Entity cameraEntity, int maxAsh, RandomSource random, ClientLevel clientWorld, Holder<Biome> biome) {
+		var camera = cameraEntity.position();
+		var renderDistance = getRenderRadius();
+		var maxSpawnDistance = Math.min(96, renderDistance) * 2;
 
-    public static void clientTick(ClientLevel world, Entity cameraEntity, Holder<Biome> biome) {
-        if (client.isPaused())
-            return;
+		for (int i = 0; i < maxAsh; i++) {
+			var x = camera.x() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
+			var y = camera.y() + random.nextInt(64) - 32;
+			var z = camera.z() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
+			var pos = new BlockPos((int) x, (int) y, (int) z);
+			
+			if (clientWorld.getBlockState(pos).isAir()) {
+				clientWorld.addParticle(PastelParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
+			}
+		}
 
-        lastSpireTicks = spireTicks;
-        BiomeSoundInstance.update(biome);
+		maxSpawnDistance /= 2;
 
-        boolean inHowlingSpires = biome.is(PastelBiomes.HOWLING_SPIRES);
-        if (inHowlingSpires) {
-            if (spireTicks < 60) {
-                spireTicks++;
-            }
-        } else if (spireTicks > 0) {
-            spireTicks--;
-        }
+		for (int i = 0; i < maxAsh; i++) {
+			var x = camera.x() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
+			var y = camera.y() + random.nextInt(29) - 8;
+			var z = camera.z() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
+			var pos = new BlockPos((int) x, (int) y, (int) z);
 
-        var time = world.getGameTime();
-        var random = world.getRandom();
+			if (clientWorld.getBlockState(pos).isAir()) {
+				clientWorld.addParticle(PastelParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
+			}
+		}
+	}
 
-        var ashVelocity = targetAshVelocity;
-        if (ashSwitchTicks < 50) {
-            ashVelocity = Mth.clampedLerp(lastAshVelocity, targetAshVelocity, ashSwitchTicks);
-            ashSwitchTicks++;
-        }
-
-        if (time % ASH_UPDATE_INTERVAL == 0 || !initialized) {
-            updateAshEffects(random);
-
-            FallingAshParticle.setTargetVelocity(ashVelocity);
-            FallingAshParticle.setPrimaryAxis(ashAxis);
-            FallingAshParticle.setAshScaleA(ashScaleA);
-            FallingAshParticle.setAshScaleB(ashScaleB);
-            FallingAshParticle.setAshScaleC(ashScaleC);
-        }
-
-        if (inHowlingSpires) {
-            var maxAsh = ashSpawns / (PastelCommon.CONFIG.ReducedParticles ? 2 : 1);
-            spawnHowlingSpiresAsh(cameraEntity, maxAsh, random, world, biome);
-        }
-
-        initialized = true;
-    }
-
-    private static void updateAshEffects(RandomSource random) {
-        ashSpawns = random.nextIntBetweenInclusive(5, 7);
-
-        if (random.nextFloat() < 0.125) {
-            targetAshVelocity = Mth.clamp(targetAshVelocity + random.nextFloat() * 0.05 - 0.025, 0.025, 0.75);
-            return;
-        }
-
-        if (random.nextFloat() < 0.95F)
-            return;
-
-        ashScaleA = 500 * (random.nextDouble() + 1) * (random.nextDouble() * 20) + 1000;
-        ashScaleB = 100 * (random.nextDouble() + 1) * (random.nextDouble() * 10) + 250;
-        ashScaleC = 20 * (random.nextDouble() + 1) * (random.nextDouble() * 5) + 100;
-
-        var newAxis = random.nextBoolean() ? Direction.Axis.X : Direction.Axis.Z;
-        if (newAxis == ashAxis)
-            return;
-
-        targetAshVelocity = BASE_ASH_VELOCITY * (random.nextDouble() * 0.5 + 0.5) * (random.nextBoolean() ? -1 : 1);
-        ashAxis = newAxis;
-    }
-
-    private static void spawnHowlingSpiresAsh(
-        Entity cameraEntity, int maxAsh, RandomSource random, ClientLevel clientWorld, Holder<Biome> biome) {
-        var camera = cameraEntity.position();
-        var renderDistance = getRenderRadius();
-        var maxSpawnDistance = Math.min(96, renderDistance) * 2;
-
-        for (int i = 0; i < maxAsh; i++) {
-            var x = camera.x() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
-            var y = camera.y() + random.nextInt(64) - 32;
-            var z = camera.z() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
-            var pos = new BlockPos((int) x, (int) y, (int) z);
-
-            if (clientWorld.getBlockState(pos)
-                           .isAir()) {
-                clientWorld.addParticle(PastelParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
-            }
-        }
-
-        maxSpawnDistance /= 2;
-
-        for (int i = 0; i < maxAsh; i++) {
-            var x = camera.x() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
-            var y = camera.y() + random.nextInt(29) - 8;
-            var z = camera.z() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
-            var pos = new BlockPos((int) x, (int) y, (int) z);
-
-            if (clientWorld.getBlockState(pos)
-                           .isAir()) {
-                clientWorld.addParticle(PastelParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
-            }
-        }
-    }
-
-    public static int getRenderRadius() {
-        return (client.options.renderDistance()
-                              .get() + 1) * 16;
-    }
-
+	public static int getRenderRadius() {
+		return (client.options.renderDistance().get() + 1) * 16;
+	}
+	
 }

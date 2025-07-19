@@ -43,30 +43,30 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(AGE);
-    }
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(AGE);
+	}
 
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }
-
-    @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return world.getRawBrightness(pos, 0) <= MAX_LIGHT_LEVEL && super.canSurvive(state, world, pos);
-    }
-
-    @Override
-    protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-        return floor.is(PastelBlockTags.ALOE_PLANTABLE);
-    }
-
-    @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
-        return state.getValue(AGE) < BlockStateProperties.MAX_AGE_4;
-    }
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		return SHAPE;
+	}
+	
+	@Override
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return world.getRawBrightness(pos, 0) <= MAX_LIGHT_LEVEL && super.canSurvive(state, world, pos);
+	}
+	
+	@Override
+	protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
+		return floor.is(PastelBlockTags.ALOE_PLANTABLE);
+	}
+	
+	@Override
+	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+		return state.getValue(AGE) < BlockStateProperties.MAX_AGE_4;
+	}
 
     @Override
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
@@ -79,13 +79,9 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
             int age = state.getValue(AGE);
             if (age < BlockStateProperties.MAX_AGE_4) {
                 world.setBlockAndUpdate(pos, state.setValue(AGE, age + 1));
-                world.playSound(
-                    null, pos, state.getSoundType()
-                                    .getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F
-                );
+                world.playSound(null, pos, state.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
-                if (world.getBlockState(pos.below())
-                         .is(PastelBlockTags.ALOE_CONVERTED)) {
+                if (world.getBlockState(pos.below()).is(PastelBlockTags.ALOE_CONVERTED)) {
                     world.setBlockAndUpdate(pos.below(), Blocks.SAND.defaultBlockState());
                 }
             }
@@ -100,21 +96,15 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         int age = state.getValue(AGE);
         if (age > 1) {
             if (world.isClientSide) {
                 return InteractionResult.SUCCESS;
             } else {
                 world.setBlockAndUpdate(pos, state.setValue(AGE, age - 1));
-                player.getInventory()
-                      .placeItemBackInInventory(this.asItem()
-                                                    .getDefaultInstance());
-                world.playSound(
-                    null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F,
-                    0.9F + world.random.nextFloat() * 0.2F
-                );
+                player.getInventory().placeItemBackInInventory(this.asItem().getDefaultInstance());
+                world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F, 0.9F + world.random.nextFloat() * 0.2F);
                 return InteractionResult.CONSUME;
             }
         }

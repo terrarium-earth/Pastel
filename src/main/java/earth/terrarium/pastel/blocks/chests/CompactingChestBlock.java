@@ -14,38 +14,37 @@ import org.jetbrains.annotations.Nullable;
 
 public class CompactingChestBlock extends PastelChestBlock {
 
-    public static final MapCodec<CompactingChestBlock> CODEC = simpleCodec(CompactingChestBlock::new);
+	public static final MapCodec<CompactingChestBlock> CODEC = simpleCodec(CompactingChestBlock::new);
 
-    public CompactingChestBlock(Properties settings) {
-        super(settings);
-    }
+	public CompactingChestBlock(Properties settings) {
+		super(settings);
+	}
 
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return CODEC;
+	}
 
-    @Override
-    @Nullable
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CompactingChestBlockEntity(pos, state);
-    }
-
-    @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, PastelBlockEntities.COMPACTING_CHEST.get(), CompactingChestBlockEntity::tick);
-    }
-
-    @Override
-    public void openScreen(Level world, BlockPos pos, Player player) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof CompactingChestBlockEntity compactingChestBlockEntity) {
-            if (!isChestBlocked(world, pos)) {
-                player.openMenu(compactingChestBlockEntity);
-            }
-        }
-    }
-
+	@Override
+	@Nullable
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new CompactingChestBlockEntity(pos, state);
+	}
+	
+	@Override
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+		return createTickerHelper(type, PastelBlockEntities.COMPACTING_CHEST.get(), CompactingChestBlockEntity::tick);
+	}
+	
+	@Override
+	public void openScreen(Level world, BlockPos pos, Player player) {
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (blockEntity instanceof CompactingChestBlockEntity compactingChestBlockEntity) {
+			if (!isChestBlocked(world, pos)) {
+				player.openMenu(compactingChestBlockEntity);
+			}
+		}
+	}
+	
 }

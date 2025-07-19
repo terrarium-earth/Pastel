@@ -14,29 +14,27 @@ import java.util.List;
 
 public class CreativeParticleSpawnerBlock extends AbstractParticleSpawnerBlock implements CreativeOnlyItem {
 
-    public static final MapCodec<CreativeParticleSpawnerBlock> CODEC = simpleCodec(CreativeParticleSpawnerBlock::new);
+	public static final MapCodec<CreativeParticleSpawnerBlock> CODEC = simpleCodec(CreativeParticleSpawnerBlock::new);
 
-    public CreativeParticleSpawnerBlock(Properties settings) {
-        super(settings);
-    }
+	public CreativeParticleSpawnerBlock(Properties settings) {
+		super(settings);
+	}
 
-    @Override
-    public MapCodec<? extends CreativeParticleSpawnerBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends CreativeParticleSpawnerBlock> codec() {
+		return CODEC;
+	}
 
-    @Override
-    public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("block.pastel.creative_particle_spawner.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        CreativeOnlyItem.appendTooltip(tooltip);
-    }
-
-    @Override
-    public boolean shouldSpawnParticles(Level world, BlockPos pos) {
-        return true;
-    }
-
+	@Override
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("block.pastel.creative_particle_spawner.tooltip").withStyle(ChatFormatting.GRAY));
+		CreativeOnlyItem.appendTooltip(tooltip);
+	}
+	
+	@Override
+	public boolean shouldSpawnParticles(Level world, BlockPos pos) {
+		return true;
+	}
+	
 }

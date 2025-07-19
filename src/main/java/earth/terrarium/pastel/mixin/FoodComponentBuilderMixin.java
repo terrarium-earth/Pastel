@@ -7,14 +7,14 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(FoodProperties.Builder.class)
 public abstract class FoodComponentBuilderMixin implements FoodComponentBuilderInjector {
-
-    @Shadow
-    private float eatSeconds;
-
-    @Override
-    public FoodProperties.Builder setEatSeconds(float eatSeconds) {
-        this.eatSeconds = eatSeconds;
-        return (FoodProperties.Builder) (Object) this;
-    }
-
+	
+	@Shadow
+	private float eatSeconds;
+	
+	@Override
+	public FoodProperties.Builder setEatSeconds(float eatSeconds) {
+		this.eatSeconds = eatSeconds;
+		return (FoodProperties.Builder) (Object) this;
+	}
+	
 }

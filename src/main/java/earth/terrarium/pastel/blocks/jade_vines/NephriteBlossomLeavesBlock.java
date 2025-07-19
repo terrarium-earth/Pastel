@@ -40,55 +40,46 @@ public class NephriteBlossomLeavesBlock extends LeavesBlock implements Bonemeala
     public MapCodec<? extends NephriteBlossomLeavesBlock> codec() {
         return CODEC;
     }
-
+    
     @Override
-    public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-        BlockHitResult hit
-    ) {
+    public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (state.getValue(AGE) == MAX_AGE) {
-            int fortuneLevel = Ench.getLevel(world.registryAccess(), Enchantments.FORTUNE, handStack) / 2;
-            int count = 1 + world.getRandom()
-                                 .nextInt(fortuneLevel + 1);
-            player.getInventory()
-                  .placeItemBackInInventory(new ItemStack(PastelItems.GLASS_PEACH.get(), count));
-
-            world.setBlockAndUpdate(pos, state.setValue(AGE, 0));
-            player.playNotifySound(
-                SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1, 1 + player.getRandom()
-                                                                                            .nextFloat() * 0.25F
-            );
-            return ItemInteractionResult.sidedSuccess(world.isClientSide());
-        }
-
-        return super.useItemOn(handStack, state, world, pos, player, hand, hit);
-    }
-
-    @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        int age = state.getValue(AGE);
-        int leafSum = 0;
-
-        if (state.getValue(PERSISTENT) || random.nextFloat() > 0.1F) {
-            super.randomTick(state, world, pos, random);
-            return;
-        }
-
+			int fortuneLevel = Ench.getLevel(world.registryAccess(), Enchantments.FORTUNE, handStack) / 2;
+			int count = 1 + world.getRandom().nextInt(fortuneLevel + 1);
+			player.getInventory().placeItemBackInInventory(new ItemStack(PastelItems.GLASS_PEACH.get(), count));
+	
+			world.setBlockAndUpdate(pos, state.setValue(AGE, 0));
+			player.playNotifySound(SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1, 1 + player.getRandom().nextFloat() * 0.25F);
+			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+		}
+	
+		return super.useItemOn(handStack, state, world, pos, player, hand, hit);
+	}
+	
+	@Override
+	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+		int age = state.getValue(AGE);
+		int leafSum = 0;
+		
+		if (state.getValue(PERSISTENT) || random.nextFloat() > 0.1F) {
+			super.randomTick(state, world, pos, random);
+			return;
+		}
+    
         for (BlockPos iPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
             var leafState = world.getBlockState(iPos);
             if (leafState.is(this)) {
-                leafSum += (leafState.getValue(AGE)
-                                     .byteValue() + 1) * 3;
+                leafSum += (leafState.getValue(AGE).byteValue() + 1) * 3;
             }
         }
 
         leafSum = Math.max(leafSum, 0) + 1;
-
-        if (random.nextInt(leafSum) != 0) {
-            super.randomTick(state, world, pos, random);
-        } else {
-            world.setBlockAndUpdate(pos, state.setValue(AGE, age + 1));
-        }
+		
+		if (random.nextInt(leafSum) != 0) {
+			super.randomTick(state, world, pos, random);
+		} else {
+			world.setBlockAndUpdate(pos, state.setValue(AGE, age + 1));
+		}
     }
 
     @Override
@@ -103,9 +94,9 @@ public class NephriteBlossomLeavesBlock extends LeavesBlock implements Bonemeala
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
-        return state.getValue(AGE) != 2;
-    }
+	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+		return state.getValue(AGE) != 2;
+	}
 
     @Override
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
@@ -117,7 +108,7 @@ public class NephriteBlossomLeavesBlock extends LeavesBlock implements Bonemeala
         var age = state.getValue(AGE);
         if (age == MAX_AGE)
             return;
-
+    
         world.setBlockAndUpdate(pos, state.setValue(AGE, age + 1));
     }
 }

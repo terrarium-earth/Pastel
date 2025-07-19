@@ -8,16 +8,15 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class AzaleaTeaItem extends DrinkItem {
-
-    public AzaleaTeaItem(Properties settings) {
-        super(settings);
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.azalea_tea.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        super.appendHoverText(stack, context, tooltip, type);
-    }
-
+	
+	public AzaleaTeaItem(Properties settings) {
+		super(settings);
+	}
+	
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		tooltip.add(Component.translatable("item.pastel.azalea_tea.tooltip").withStyle(ChatFormatting.GRAY));
+		super.appendHoverText(stack, context, tooltip, type);
+	}
+	
 }

@@ -18,44 +18,41 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EnderMan.class)
 public abstract class EndermanEntityMixin {
-
-    @Unique
-    private final BlockState carriedBlockState = PastelBlocks.RADIATING_ENDER.get()
-                                                                             .defaultBlockState();
-
-    @Shadow
-    @Nullable
-    public abstract BlockState getCarriedBlock();
-
-    @Inject(at = @At("TAIL"), method = "<init>")
-    private void init(CallbackInfo info) {
-        EnderMan endermanEntity = ((EnderMan) (Object) this);
-        Level world = endermanEntity.getCommandSenderWorld();
-        if (world instanceof ServerLevel) {
-            RandomSource random = world.random;
-
-            float chance;
-            if (world.dimension()
-                     .equals(Level.END)) {
-                chance = PastelCommon.CONFIG.EndermanHoldingEnderTreasureInEndChance;
-            } else {
-                chance = PastelCommon.CONFIG.EndermanHoldingEnderTreasureChance;
-            }
-
-            if (random.nextFloat() < chance) {
-                if (endermanEntity.getCarriedBlock() == null) {
-                    endermanEntity.setCarriedBlock(carriedBlockState);
-                }
-            }
-        }
-    }
-
-    @Inject(at = @At("RETURN"), method = "requiresCustomPersistence", cancellable = true)
-    public void cannotDespawn(CallbackInfoReturnable<Boolean> cir) {
-        if (cir.getReturnValue() && this.getCarriedBlock() != null && this.getCarriedBlock()
-                                                                          .is(PastelBlocks.RADIATING_ENDER.get())) {
-            cir.setReturnValue(false);
-        }
-    }
-
+	
+	@Unique
+	private final BlockState carriedBlockState = PastelBlocks.RADIATING_ENDER.get().defaultBlockState();
+	
+	@Shadow
+	@Nullable
+	public abstract BlockState getCarriedBlock();
+	
+	@Inject(at = @At("TAIL"), method = "<init>")
+	private void init(CallbackInfo info) {
+		EnderMan endermanEntity = ((EnderMan) (Object) this);
+		Level world = endermanEntity.getCommandSenderWorld();
+		if (world instanceof ServerLevel) {
+			RandomSource random = world.random;
+			
+			float chance;
+			if (world.dimension().equals(Level.END)) {
+				chance = PastelCommon.CONFIG.EndermanHoldingEnderTreasureInEndChance;
+			} else {
+				chance = PastelCommon.CONFIG.EndermanHoldingEnderTreasureChance;
+			}
+			
+			if (random.nextFloat() < chance) {
+				if (endermanEntity.getCarriedBlock() == null) {
+					endermanEntity.setCarriedBlock(carriedBlockState);
+				}
+			}
+		}
+	}
+	
+	@Inject(at = @At("RETURN"), method = "requiresCustomPersistence", cancellable = true)
+	public void cannotDespawn(CallbackInfoReturnable<Boolean> cir) {
+		if (cir.getReturnValue() && this.getCarriedBlock() != null && this.getCarriedBlock().is(PastelBlocks.RADIATING_ENDER.get())) {
+			cir.setReturnValue(false);
+		}
+	}
+	
 }

@@ -16,25 +16,25 @@ import java.util.List;
 import java.util.Map;
 
 public class PreenchantedMultiToolItem extends MultiToolItem implements Preenchanted, LoomPatternProvider {
+	
+	public PreenchantedMultiToolItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
+		super(material, attackDamage, attackSpeed, settings);
+	}
+	
+	@Override
+	public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
+		return Map.of(Enchantments.EFFICIENCY, 1);
+	}
+	
+	@Override
+	public ResourceKey<BannerPattern> getPattern() {
+		return PastelBannerPatterns.MULTITOOL;
+	}
 
-    public PreenchantedMultiToolItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
-        super(material, attackDamage, attackSpeed, settings);
-    }
-
-    @Override
-    public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-        return Map.of(Enchantments.EFFICIENCY, 1);
-    }
-
-    @Override
-    public ResourceKey<BannerPattern> getPattern() {
-        return PastelBannerPatterns.MULTITOOL;
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        addBannerPatternProviderTooltip(tooltip);
-    }
-
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		addBannerPatternProviderTooltip(tooltip);
+	}
+	
 }

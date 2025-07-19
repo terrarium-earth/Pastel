@@ -12,23 +12,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.*;
 
 public class BlockPlacerBlockEntity extends DispenserBlockEntity implements SidedCapabilityProvider {
+	
+	public BlockPlacerBlockEntity(BlockPos pos, BlockState state) {
+		super(PastelBlockEntities.BLOCK_PLACER.get(), pos, state);
+	}
+	
+	@Override
+	protected Component getDefaultName() {
+		return Component.translatable("block.pastel.block_placer");
+	}
+	
+	@Override
+	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+		return Pastel3x3ContainerScreenHandler.createTier1(syncId, playerInventory, this);
+	}
 
-    public BlockPlacerBlockEntity(BlockPos pos, BlockState state) {
-        super(PastelBlockEntities.BLOCK_PLACER.get(), pos, state);
-    }
-
-    @Override
-    protected Component getDefaultName() {
-        return Component.translatable("block.pastel.block_placer");
-    }
-
-    @Override
-    protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-        return Pastel3x3ContainerScreenHandler.createTier1(syncId, playerInventory, this);
-    }
-
-    @Override
-    public IItemHandler exposeItemHandlers(Direction dir) {
-        return new ItemStackHandler(getItems());
-    }
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return new ItemStackHandler(getItems());
+	}
 }

@@ -7,22 +7,21 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
 public class ClearCraftingTabletRecipe extends SingleItemCraftingRecipe {
-
-    @Override
-    public boolean matches(Level world, ItemStack stack) {
-        return stack.getItem() instanceof CraftingTabletItem && CraftingTabletItem.getStoredRecipe(world, stack) !=
-                                                                null;
-    }
-
-    @Override
-    public ItemStack assemble(ItemStack stack) {
-        CraftingTabletItem.clearStoredRecipe(stack);
-        return stack;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return PastelRecipeSerializers.CLEAR_CRAFTING_TABLET_SERIALIZER;
-    }
-
+	
+	@Override
+	public boolean matches(Level world, ItemStack stack) {
+		return stack.getItem() instanceof CraftingTabletItem && CraftingTabletItem.getStoredRecipe(world, stack) != null;
+	}
+	
+	@Override
+	public ItemStack assemble(ItemStack stack) {
+		CraftingTabletItem.clearStoredRecipe(stack);
+		return stack;
+	}
+	
+	@Override
+	public RecipeSerializer<?> getSerializer() {
+		return PastelRecipeSerializers.CLEAR_CRAFTING_TABLET_SERIALIZER;
+	}
+	
 }

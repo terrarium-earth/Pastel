@@ -18,91 +18,78 @@ import org.joml.Quaternionf;
 
 public class EnchanterBlockEntityRenderer implements BlockEntityRenderer<EnchanterBlockEntity> {
 
-    protected static final double ITEM_STACK_RENDER_HEIGHT = 0.95F;
-    protected static EntityRenderDispatcher dispatcher;
+	protected static final double ITEM_STACK_RENDER_HEIGHT = 0.95F;
+	protected static EntityRenderDispatcher dispatcher;
 
-    @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
     public EnchanterBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
-        dispatcher = Minecraft.getInstance()
-                              .getEntityRenderDispatcher();
-    }
+		dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+	}
 
-    @Override
-    public void render(
-        EnchanterBlockEntity blockEntity, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light, int overlay
-    ) {
-        // The item lying on top of the enchanter
-        ItemStack stack = blockEntity.getItem(0);
-        if (!stack.isEmpty() && blockEntity.getItemFacingDirection() != null) {
-            Direction itemFacingDirection = blockEntity.getItemFacingDirection();
+	@Override
+	public void render(EnchanterBlockEntity blockEntity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, int overlay) {
+		// The item lying on top of the enchanter
+		ItemStack stack = blockEntity.getItem(0);
+		if (!stack.isEmpty() && blockEntity.getItemFacingDirection() != null) {
+			Direction itemFacingDirection = blockEntity.getItemFacingDirection();
 
-            poseStack.pushPose();
-            // item stack rotation
-            switch (itemFacingDirection) {
-                case NORTH -> {
-                    poseStack.translate(0.5, ITEM_STACK_RENDER_HEIGHT, 0.7);
-                    poseStack.mulPose(Axis.XP.rotationDegrees(270));
-                    poseStack.mulPose(Axis.YP.rotationDegrees(180));
-                }
-                case SOUTH -> { // perfect
-                    poseStack.translate(0.5, ITEM_STACK_RENDER_HEIGHT, 0.3);
-                    poseStack.mulPose(Axis.XP.rotationDegrees(90));
-                }
-                case EAST -> {
-                    poseStack.translate(0.3, ITEM_STACK_RENDER_HEIGHT, 0.5);
-                    poseStack.mulPose(Axis.XP.rotationDegrees(90));
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(270));
-                }
-                case WEST -> {
-                    poseStack.translate(0.7, ITEM_STACK_RENDER_HEIGHT, 0.5);
-                    poseStack.mulPose(Axis.XP.rotationDegrees(270));
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(90));
-                    poseStack.mulPose(Axis.YP.rotationDegrees(180));
-                }
-                default -> {
-                }
-            }
+			poseStack.pushPose();
+			// item stack rotation
+			switch (itemFacingDirection) {
+				case NORTH -> {
+					poseStack.translate(0.5, ITEM_STACK_RENDER_HEIGHT, 0.7);
+					poseStack.mulPose(Axis.XP.rotationDegrees(270));
+					poseStack.mulPose(Axis.YP.rotationDegrees(180));
+				}
+				case SOUTH -> { // perfect
+					poseStack.translate(0.5, ITEM_STACK_RENDER_HEIGHT, 0.3);
+					poseStack.mulPose(Axis.XP.rotationDegrees(90));
+				}
+				case EAST -> {
+					poseStack.translate(0.3, ITEM_STACK_RENDER_HEIGHT, 0.5);
+					poseStack.mulPose(Axis.XP.rotationDegrees(90));
+					poseStack.mulPose(Axis.ZP.rotationDegrees(270));
+				}
+				case WEST -> {
+					poseStack.translate(0.7, ITEM_STACK_RENDER_HEIGHT, 0.5);
+					poseStack.mulPose(Axis.XP.rotationDegrees(270));
+					poseStack.mulPose(Axis.ZP.rotationDegrees(90));
+					poseStack.mulPose(Axis.YP.rotationDegrees(180));
+				}
+				default -> {
+				}
+			}
+			
+			Minecraft.getInstance().getItemRenderer().renderStatic(
+					stack, ItemDisplayContext.GROUND, light, overlay, poseStack, vertexConsumerProvider, blockEntity.getLevel(), 0);
+			poseStack.popPose();
+		}
+		
+		// The Experience Item rendered in the air
+		ItemStack experienceItemStack = blockEntity.getItem(1);
+		if (!experienceItemStack.isEmpty()) {
+			float t = (blockEntity.getLevel().getGameTime() % 50000) + tickDelta;
 
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         stack, ItemDisplayContext.GROUND, light, overlay, poseStack, vertexConsumerProvider,
-                         blockEntity.getLevel(), 0
-                     );
-            poseStack.popPose();
-        }
+			final Vec3 cameraPos = dispatcher.camera.getPosition();
+			var refPos = blockEntity.getBlockPos().getCenter();
+			var xOffset = refPos.x - cameraPos.x;
+			var zOffset = refPos.z - cameraPos.z;
 
-        // The Experience Item rendered in the air
-        ItemStack experienceItemStack = blockEntity.getItem(1);
-        if (!experienceItemStack.isEmpty()) {
-            float t = (blockEntity.getLevel()
-                                  .getGameTime() % 50000) + tickDelta;
+			Quaternionf rot = Axis.YP.rotation((float) Mth.atan2(xOffset, zOffset));
 
-            final Vec3 cameraPos = dispatcher.camera.getPosition();
-            var refPos = blockEntity.getBlockPos()
-                                    .getCenter();
-            var xOffset = refPos.x - cameraPos.x;
-            var zOffset = refPos.z - cameraPos.z;
+			poseStack.pushPose();
+			poseStack.translate(0.5D, 2.5D + Mth.sin(t / 15F) / 5F, 0.5D);
+			poseStack.mulPose(rot);
 
-            Quaternionf rot = Axis.YP.rotation((float) Mth.atan2(xOffset, zOffset));
+			if (cameraPos.closerThan(refPos, 9))
+				poseStack.mulPose(Axis.YP.rotationDegrees(Math.clamp(0F, 360F, (t * 10) % 1800)));
 
-            poseStack.pushPose();
-            poseStack.translate(0.5D, 2.5D + Mth.sin(t / 15F) / 5F, 0.5D);
-            poseStack.mulPose(rot);
-
-            if (cameraPos.closerThan(refPos, 9))
-                poseStack.mulPose(Axis.YP.rotationDegrees(Math.clamp(0F, 360F, (t * 10) % 1800)));
-
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         experienceItemStack, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT,
-                         overlay, poseStack, vertexConsumerProvider, blockEntity.getLevel(), 0
-                     );
-
-            poseStack.popPose();
-        }
-    }
+			Minecraft.getInstance().getItemRenderer().renderStatic(
+					experienceItemStack, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT,
+					overlay, poseStack, vertexConsumerProvider, blockEntity.getLevel(), 0);
+			
+			poseStack.popPose();
+		}
+	}
 
 }

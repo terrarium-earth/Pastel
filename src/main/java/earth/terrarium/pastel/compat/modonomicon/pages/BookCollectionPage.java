@@ -33,30 +33,22 @@ public class BookCollectionPage extends BookTextPage {
     private final List<String> itemStrings;
     private final List<ItemStack> items;
 
-    public BookCollectionPage(
-        BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator,
-        String anchor, BookCondition condition, List<String> itemStrings
-    ) {
+    public BookCollectionPage(BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator, String anchor, BookCondition condition, List<String> itemStrings) {
         super(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition);
         this.itemStrings = itemStrings;
         this.items = new ArrayList<>(itemStrings.size());
     }
 
-    public static BookCollectionPage fromJson(
-        ResourceLocation entryId, JsonObject json, HolderLookup.Provider provider) {
+    public static BookCollectionPage fromJson(ResourceLocation entryId, JsonObject json, HolderLookup.Provider provider) {
         var title = BookGsonHelper.getAsBookTextHolder(json, "title", BookTextHolder.EMPTY, provider);
         var useMarkdownInTitle = GsonHelper.getAsBoolean(json, "use_markdown_title", false);
         var showTitleSeparator = GsonHelper.getAsBoolean(json, "show_title_separator", true);
         var text = BookGsonHelper.getAsBookTextHolder(json, "text", BookTextHolder.EMPTY, provider);
         var anchor = GsonHelper.getAsString(json, "anchor", "");
         var condition = json.has("condition")
-                        ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
-                        : new BookNoneCondition();
-        var items = GsonHelper.getAsJsonArray(json, "items", new JsonArray())
-                              .asList()
-                              .stream()
-                              .map(JsonElement::getAsString)
-                              .toList();
+                ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
+                : new BookNoneCondition();
+        var items = GsonHelper.getAsJsonArray(json, "items", new JsonArray()).asList().stream().map(JsonElement::getAsString).toList();
         return new BookCollectionPage(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, items);
     }
 
@@ -86,8 +78,7 @@ public class BookCollectionPage extends BookTextPage {
 
         for (String itemString : itemStrings) {
             try {
-                CommandBuildContext access = CommandBuildContext.simple(
-                    world.registryAccess(), world.enabledFeatures());
+                CommandBuildContext access = CommandBuildContext.simple(world.registryAccess(), world.enabledFeatures());
                 ItemArgument argumentType = new ItemArgument(access);
                 ItemInput argument = argumentType.parse(new StringReader(itemString));
                 items.add(argument.createItemStack(1, false));
@@ -106,11 +97,11 @@ public class BookCollectionPage extends BookTextPage {
     @Override
     public boolean matchesQuery(String query) {
         return super.matchesQuery(query)
-               || items.stream()
-                       .map(ItemStack::getDescriptionId)
-                       .map(I18n::get)
-                       .map(String::toLowerCase)
-                       .anyMatch(string -> string.contains(query));
+                || items.stream()
+                .map(ItemStack::getDescriptionId)
+                .map(I18n::get)
+                .map(String::toLowerCase)
+                .anyMatch(string -> string.contains(query));
     }
 
 }

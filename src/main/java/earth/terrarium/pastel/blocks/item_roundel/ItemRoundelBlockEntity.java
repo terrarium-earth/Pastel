@@ -10,32 +10,29 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.*;
 
 public class ItemRoundelBlockEntity extends InWorldInteractionBlockEntity implements SidedCapabilityProvider {
+	
+	protected static final int INVENTORY_SIZE = 6;
+	
+	public ItemRoundelBlockEntity(BlockPos pos, BlockState state) {
+		this(PastelBlockEntities.ITEM_ROUNDEL.get(), pos, state, INVENTORY_SIZE);
+	}
+	
+	public ItemRoundelBlockEntity(BlockEntityType<? extends ItemRoundelBlockEntity> blockEntityType, BlockPos pos, BlockState state, int inventorySize) {
+		super(blockEntityType, pos, state, inventorySize);
+	}
+	
+	public boolean renderStacksAsIndividualItems() {
+		return false;
+	}
 
-    protected static final int INVENTORY_SIZE = 6;
+	@Override
+	public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
+		this.unpackLootTable(null);
+		return super.getUpdateTag(registryLookup);
+	}
 
-    public ItemRoundelBlockEntity(BlockPos pos, BlockState state) {
-        this(PastelBlockEntities.ITEM_ROUNDEL.get(), pos, state, INVENTORY_SIZE);
-    }
-
-    public ItemRoundelBlockEntity(
-        BlockEntityType<? extends ItemRoundelBlockEntity> blockEntityType, BlockPos pos, BlockState state,
-        int inventorySize
-    ) {
-        super(blockEntityType, pos, state, inventorySize);
-    }
-
-    public boolean renderStacksAsIndividualItems() {
-        return false;
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
-        this.unpackLootTable(null);
-        return super.getUpdateTag(registryLookup);
-    }
-
-    @Override
-    public IItemHandler exposeItemHandlers(Direction dir) {
-        return inventory;
-    }
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return inventory;
+	}
 }

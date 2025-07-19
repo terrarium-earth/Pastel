@@ -17,57 +17,47 @@ import java.util.List;
 
 public class PastelResourceConditions {
 
-    public static final DeferredRegister<MapCodec<? extends ICondition>> REGISTER = DeferredRegister.create(
-        NeoForgeRegistries.CONDITION_SERIALIZERS, PastelCommon.MOD_ID);
+	public static final DeferredRegister<MapCodec<? extends ICondition>> REGISTER = DeferredRegister.create(NeoForgeRegistries.CONDITION_SERIALIZERS, PastelCommon.MOD_ID);
 
-    public static void register(IEventBus modEventBus) {
-        REGISTER.register("enchantments_exist", () -> EnchantmentsExistResourceCondition.CODEC);
-        REGISTER.register("integration_pack_active", () -> IntegrationPackActiveResourceCondition.CODEC);
+	public static void register(IEventBus modEventBus) {
+		REGISTER.register("enchantments_exist", () -> EnchantmentsExistResourceCondition.CODEC);
+		REGISTER.register("integration_pack_active", () -> IntegrationPackActiveResourceCondition.CODEC);
 
-        REGISTER.register(modEventBus);
-    }
+		REGISTER.register(modEventBus);
+	}
+	
+	public record EnchantmentsExistResourceCondition(List<ResourceKey<Enchantment>> enchantments) implements ICondition {
+		
+		public static MapCodec<EnchantmentsExistResourceCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+				ResourceKey.codec(Registries.ENCHANTMENT).listOf().fieldOf("values").forGetter(EnchantmentsExistResourceCondition::enchantments)
+		).apply(instance, EnchantmentsExistResourceCondition::new));
 
-    public record EnchantmentsExistResourceCondition(List<ResourceKey<Enchantment>> enchantments)
-        implements ICondition {
+		@Override
+		public MapCodec<? extends ICondition> codec() {
+			return CODEC;
+		}
 
-        public static MapCodec<EnchantmentsExistResourceCondition> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(
-                                    ResourceKey.codec(Registries.ENCHANTMENT)
-                                               .listOf()
-                                               .fieldOf("values")
-                                               .forGetter(EnchantmentsExistResourceCondition::enchantments)
-                                )
-                                .apply(instance, EnchantmentsExistResourceCondition::new));
+		@Override
+		public boolean test(IContext iContext) {
+			return true; // TODO fix
+		}
+	}
+	
+	public record IntegrationPackActiveResourceCondition(String integrationPack) implements ICondition {
+		
+		public static MapCodec<IntegrationPackActiveResourceCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+				Codec.STRING.fieldOf("integration_pack").forGetter(IntegrationPackActiveResourceCondition::integrationPack)
+		).apply(instance, IntegrationPackActiveResourceCondition::new));
 
-        @Override
-        public MapCodec<? extends ICondition> codec() {
-            return CODEC;
-        }
+		@Override
+		public MapCodec<? extends ICondition> codec() {
+			return CODEC;
+		}
 
-        @Override
-        public boolean test(IContext iContext) {
-            return true; // TODO fix
-        }
-    }
-
-    public record IntegrationPackActiveResourceCondition(String integrationPack) implements ICondition {
-
-        public static MapCodec<IntegrationPackActiveResourceCondition> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(
-                                    Codec.STRING.fieldOf("integration_pack")
-                                                .forGetter(IntegrationPackActiveResourceCondition::integrationPack)
-                                )
-                                .apply(instance, IntegrationPackActiveResourceCondition::new));
-
-        @Override
-        public MapCodec<? extends ICondition> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public boolean test(IContext iContext) {
-            return PastelIntegrationPacks.isIntegrationPackActive(integrationPack);
-        }
-    }
-
+		@Override
+		public boolean test(IContext iContext) {
+			return PastelIntegrationPacks.isIntegrationPackActive(integrationPack);
+		}
+	}
+	
 }

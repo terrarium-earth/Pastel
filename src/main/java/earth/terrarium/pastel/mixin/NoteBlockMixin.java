@@ -13,14 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(NoteBlock.class)
 public abstract class NoteBlockMixin {
-
-    @Inject(method = "getCustomSoundId", at = @At("HEAD"), cancellable = true)
-    protected void customNoteBlockSound(Level world, BlockPos pos, CallbackInfoReturnable<ResourceLocation> cir) {
-        BlockState state = world.getBlockState(pos.above());
-        if (state.getBlock() instanceof PastelSkullBlock pastelSkullBlock) {
-            cir.setReturnValue(pastelSkullBlock.getType()
-                                               .getNoteBlockSound());
-        }
-    }
-
+	
+	@Inject(method = "getCustomSoundId", at = @At("HEAD"), cancellable = true)
+	protected void customNoteBlockSound(Level world, BlockPos pos, CallbackInfoReturnable<ResourceLocation> cir) {
+		BlockState state = world.getBlockState(pos.above());
+		if (state.getBlock() instanceof PastelSkullBlock pastelSkullBlock) {
+			cir.setReturnValue(pastelSkullBlock.getType().getNoteBlockSound());
+		}
+	}
+	
 }

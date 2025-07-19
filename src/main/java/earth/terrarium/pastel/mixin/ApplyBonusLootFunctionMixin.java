@@ -19,40 +19,35 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(ApplyBonusCount.class)
 public abstract class ApplyBonusLootFunctionMixin {
-
-    @Shadow
-    @Final
-    private Holder<Enchantment> enchantment;
-    @Shadow
-    @Final
-    private ApplyBonusCount.Formula formula;
-
-    @ModifyVariable(
-        method = "run",
-        at = @At("STORE"),
-        ordinal = 1)
-    public int rerollBonusLoot(int oldValue, ItemStack stack, LootContext context) {
-        // if the player has the ANOTHER_DRAW effect the bonus loot of
-        // this function gets rerolled potency+1 times and the best one taken
-        ItemStack itemStack = context.getParamOrNull(LootContextParams.TOOL);
-        Entity entity = context.getParamOrNull(LootContextParams.THIS_ENTITY);
-        if (itemStack != null && entity instanceof LivingEntity livingEntity) {
-            int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(this.enchantment, itemStack);
-            if (enchantmentLevel > 0) {
-                MobEffectInstance effect = livingEntity.getEffect(PastelMobEffects.ANOTHER_ROLL);
-                if (effect != null) {
-                    int rollCount = effect.getAmplifier() + 1;
-                    int highestRoll = oldValue;
-                    for (int i = 0; i < rollCount; i++) {
-                        int thisRoll = this.formula.calculateNewCount(
-                            context.getRandom(), stack.getCount(), enchantmentLevel);
-                        highestRoll = Math.max(highestRoll, thisRoll);
-                    }
-                    return highestRoll;
-                }
-            }
-        }
-        return oldValue;
-    }
-
+	
+	@Shadow @Final private Holder<Enchantment> enchantment;
+	@Shadow @Final private ApplyBonusCount.Formula formula;
+	
+	@ModifyVariable(
+			method = "run",
+			at = @At("STORE"),
+			ordinal = 1)
+	public int rerollBonusLoot(int oldValue, ItemStack stack, LootContext context) {
+		// if the player has the ANOTHER_DRAW effect the bonus loot of
+		// this function gets rerolled potency+1 times and the best one taken
+		ItemStack itemStack = context.getParamOrNull(LootContextParams.TOOL);
+		Entity entity = context.getParamOrNull(LootContextParams.THIS_ENTITY);
+		if (itemStack != null && entity instanceof LivingEntity livingEntity) {
+			int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(this.enchantment, itemStack);
+			if (enchantmentLevel > 0) {
+				MobEffectInstance effect = livingEntity.getEffect(PastelMobEffects.ANOTHER_ROLL);
+				if (effect != null) {
+					int rollCount = effect.getAmplifier() + 1;
+					int highestRoll = oldValue;
+					for (int i = 0; i < rollCount; i++) {
+						int thisRoll = this.formula.calculateNewCount(context.getRandom(), stack.getCount(), enchantmentLevel);
+						highestRoll = Math.max(highestRoll, thisRoll);
+					}
+					return highestRoll;
+				}
+			}
+		}
+		return oldValue;
+	}
+	
 }

@@ -13,29 +13,27 @@ import java.util.List;
 
 public class RingOfAerialGraceItem extends GravityRingItem implements GravitableItem {
 
-    public RingOfAerialGraceItem(Properties settings) {
-        super(settings, PastelCommon.locate("unlocks/trinkets/ring_of_aerial_grace"), InkColors.WHITE);
-    }
+	public RingOfAerialGraceItem(Properties settings) {
+		super(settings, PastelCommon.locate("unlocks/trinkets/ring_of_aerial_grace"), InkColors.WHITE);
+	}
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.ring_of_aerial_grace.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.ring_of_aerial_grace.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-    }
-
-    public static ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("ring_of_aerial_grace_gravity");
-
-    @Override
-    protected ResourceLocation getAttributeID() {
-        return ATTRIBUTE_ID;
-    }
-
-    @Override
-    protected boolean negativeGravity() {
-        return true;
-    }
-
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("item.pastel.ring_of_aerial_grace.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.ring_of_aerial_grace.tooltip2").withStyle(ChatFormatting.GRAY));
+	}
+	
+	public static ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("ring_of_aerial_grace_gravity");
+	
+	@Override
+	protected ResourceLocation getAttributeID() {
+		return ATTRIBUTE_ID;
+	}
+	
+	@Override
+	protected boolean negativeGravity() {
+		return true;
+	}
+	
 }

@@ -27,7 +27,6 @@ public class PotionWorkshopRecipeHandler implements StandardRecipeHandler<Potion
     @Override
     public boolean supportsRecipe(EmiRecipe recipe) {
         EmiRecipeCategory category = recipe.getCategory();
-        return (category == PastelEmiRecipeCategories.POTION_WORKSHOP_BREWING ||
-                category == PastelEmiRecipeCategories.POTION_WORKSHOP_CRAFTING) && recipe.supportsRecipeTree();
+        return (category == PastelEmiRecipeCategories.POTION_WORKSHOP_BREWING || category == PastelEmiRecipeCategories.POTION_WORKSHOP_CRAFTING) && recipe.supportsRecipeTree();
     }
 }

@@ -8,6 +8,5 @@ import net.minecraft.client.renderer.MultiBufferSource;
 
 @OnlyIn(Dist.CLIENT)
 public interface EarlyRenderingParticle {
-    void renderAsEntity(
-        final PoseStack matrices, final MultiBufferSource vertexConsumers, final Camera camera, final float tickDelta);
+    void renderAsEntity(final PoseStack matrices, final MultiBufferSource vertexConsumers, final Camera camera, final float tickDelta);
 }

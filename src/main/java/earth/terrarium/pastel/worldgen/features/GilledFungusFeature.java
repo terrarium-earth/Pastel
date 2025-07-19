@@ -15,28 +15,27 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 public class GilledFungusFeature extends Feature<GilledFungusFeatureConfig> {
-
-    public GilledFungusFeature(Codec<GilledFungusFeatureConfig> codec) {
-        super(codec);
-    }
-
-    @Override
-    public boolean place(FeaturePlaceContext<GilledFungusFeatureConfig> context) {
-        WorldGenLevel structureWorldAccess = context.level();
-        BlockPos blockPos = context.origin();
-        GilledFungusFeatureConfig hugeFungusFeatureConfig = context.config();
-        Block validBaseBlock = hugeFungusFeatureConfig.validBase();
-        BlockState baseBlock = structureWorldAccess.getBlockState(blockPos.below());
-
-        if (!baseBlock.is(validBaseBlock)) {
-            return false;
-        }
+	
+	public GilledFungusFeature(Codec<GilledFungusFeatureConfig> codec) {
+		super(codec);
+	}
+	
+	@Override
+	public boolean place(FeaturePlaceContext<GilledFungusFeatureConfig> context) {
+		WorldGenLevel structureWorldAccess = context.level();
+		BlockPos blockPos = context.origin();
+		GilledFungusFeatureConfig hugeFungusFeatureConfig = context.config();
+		Block validBaseBlock = hugeFungusFeatureConfig.validBase();
+		BlockState baseBlock = structureWorldAccess.getBlockState(blockPos.below());
+		
+		if (!baseBlock.is(validBaseBlock)) {
+			return false;
+		}
 
         RandomSource random = context.random();
         ChunkGenerator chunkGenerator = context.chunkGenerator();
 
-        int stemHeight = hugeFungusFeatureConfig.baseStemHeight()
-                                                .sample(random);
+        int stemHeight = hugeFungusFeatureConfig.baseStemHeight().sample(random);
         if (random.nextInt(12) == 0) {
             stemHeight *= 2;
         }
@@ -55,10 +54,9 @@ public class GilledFungusFeature extends Feature<GilledFungusFeatureConfig> {
     }
 
     private void generateStem(LevelAccessor world, GilledFungusFeatureConfig config, BlockPos pos, int stemHeight) {
-        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-        BlockState blockState = config.stem()
-                                      .defaultBlockState();
-        int i = 0;
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+		BlockState blockState = config.stem().defaultBlockState();
+		int i = 0;
         for (int x = -i; x <= i; ++x) {
             for (int z = -i; z <= i; ++z) {
                 for (int y = 0; y < stemHeight; ++y) {
@@ -71,16 +69,13 @@ public class GilledFungusFeature extends Feature<GilledFungusFeatureConfig> {
         }
     }
 
-    private void generateHat(
-        LevelAccessor world, RandomSource random, GilledFungusFeatureConfig config, BlockPos pos, int stemHeight) {
+    private void generateHat(LevelAccessor world, RandomSource random, GilledFungusFeatureConfig config, BlockPos pos, int stemHeight) {
         BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
         int hatRadius = Math.min(random.nextInt(1 + stemHeight / 5) + 4, 9);
         int currentRadius;
 
-        BlockState gillsState = config.gills()
-                                      .defaultBlockState();
-        BlockState capState = config.cap()
-                                    .defaultBlockState();
+        BlockState gillsState = config.gills().defaultBlockState();
+        BlockState capState = config.cap().defaultBlockState();
         var start = hatRadius > 4 ? -2 : -1;
         var firstLoop = true;
 
@@ -88,8 +83,7 @@ public class GilledFungusFeature extends Feature<GilledFungusFeatureConfig> {
             var underHang = y < 0;
             boolean isLowestLevel = y == 0;
 
-            currentRadius = underHang ? hatRadius : (int) Math.round(hatRadius / Math.pow(1.175, Math.max(y - 1, 0))) -
-                                                    (isLowestLevel ? 0 : 1);
+            currentRadius = underHang ? hatRadius : (int) Math.round(hatRadius / Math.pow(1.175, Math.max(y - 1, 0))) - (isLowestLevel ? 0 : 1);
 
             for (int x = -currentRadius; x <= currentRadius; ++x) {
                 for (int z = -currentRadius; z <= currentRadius; ++z) {
@@ -104,24 +98,19 @@ public class GilledFungusFeature extends Feature<GilledFungusFeatureConfig> {
                         var rad = Math.sqrt(mutable.distToCenterSqr(pos.getX(), mutable.getY(), pos.getZ()));
 
                         if (underHang) {
-                            if (!(random.nextInt(3) == 0 && firstLoop) && rad <= currentRadius &&
-                                rad > currentRadius - 1) {
+                            if(!(random.nextInt(3) == 0 && firstLoop) && rad <= currentRadius && rad > currentRadius - 1) {
                                 this.setBlock(world, mutable, capState);
                             }
-                        } else if (isLowestLevel) {
+                        }
+                        else if (isLowestLevel) {
                             if (rad <= currentRadius - 1) {
-                                this.setBlock(
-                                    world, mutable, gillsState.setValue(
-                                        RotatedPillarBlock.AXIS,
-                                        Math.abs(x) < Math.abs(z) ? Direction.Axis.X
-                                                                  : Direction.Axis.Z
-                                    )
-                                );
-                            } else if (rad <= currentRadius) {
+                                this.setBlock(world, mutable, gillsState.setValue(RotatedPillarBlock.AXIS, Math.abs(x) < Math.abs(z) ? Direction.Axis.X : Direction.Axis.Z));
+                            } else if(rad <= currentRadius) {
                                 this.setBlock(world, mutable, capState);
 
                             }
-                        } else if (rad <= currentRadius) {
+                        }
+                        else if (rad <= currentRadius) {
                             this.setBlock(world, mutable, capState);
 
                         }

@@ -44,8 +44,7 @@ public class BookCollectionPageRenderer extends BookTextPageRenderer {
     @Override
     public int getTextY() {
         if (!(page instanceof BookCollectionPage collectionPage)) return super.getTextY();
-        return super.getTextY() + (int) Math.ceil(collectionPage.getItems()
-                                                                .size() / (float) ENTRIES_PER_ROW) * 18;
+        return super.getTextY() + (int) Math.ceil(collectionPage.getItems().size() / (float) ENTRIES_PER_ROW) * 18;
     }
 
 }

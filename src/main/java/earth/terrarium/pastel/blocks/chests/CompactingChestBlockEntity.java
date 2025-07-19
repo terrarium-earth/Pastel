@@ -42,257 +42,244 @@ import java.util.Optional;
 
 public class CompactingChestBlockEntity extends PastelChestBlockEntity {
 
-    private static final FlowAnimator.Factory<CompactingChestBlockEntity> FACTORY;
+	private static final FlowAnimator.Factory<CompactingChestBlockEntity> FACTORY;
 
-    @NotNull
-    private AutoCraftingMode mode = AutoCraftingMode.X3;
-    @NotNull
-    private Optional<RecipeHolder<CraftingRecipe>> cachedRecipe = Optional.empty();
-    private boolean isOpen;
-    public long craftingTimeStamp;
+	@NotNull
+	private AutoCraftingMode mode = AutoCraftingMode.X3;
+	@NotNull
+	private Optional<RecipeHolder<CraftingRecipe>> cachedRecipe = Optional.empty();
+	private boolean isOpen;
+	public long craftingTimeStamp;
 
-    protected FlowAnimator animator;
-    protected FlowData<Float> _piston = FlowData.NULL(), _driver = FlowData.NULL(), _cap = FlowData.NULL();
+	protected FlowAnimator animator;
+	protected FlowData<Float> _piston = FlowData.NULL(), _driver = FlowData.NULL(), _cap = FlowData.NULL();
 
 
-    private final ContainerData propertyDelegate = new ContainerData() {
-        @Override
-        public int get(int index) {
-            if (index == 0) return mode.ordinal();
-            return 0;
-        }
+	private final ContainerData propertyDelegate = new ContainerData() {
+		@Override
+		public int get(int index) {
+			if (index == 0) return mode.ordinal();
+			return 0;
+		}
 
-        @Override
-        public void set(int index, int value) {
-            if (index == 0) mode = AutoCraftingMode.values()[value];
-        }
+		@Override
+		public void set(int index, int value) {
+			if (index == 0) mode = AutoCraftingMode.values()[value];
+		}
 
-        @Override
-        public int getCount() {
-            return 1;
-        }
-    };
+		@Override
+		public int getCount() {
+			return 1;
+		}
+	};
+	
+	public CompactingChestBlockEntity(BlockPos blockPos, BlockState blockState) {
+		super(PastelBlockEntities.COMPACTING_CHEST.get(), blockPos, blockState);
+		inventory.addListener(i -> setChanged());
+	}
+	
+	@SuppressWarnings("unused")
+	public static void tick(Level world, BlockPos pos, BlockState state, CompactingChestBlockEntity chest) {
+		if (world.isClientSide())
+			chest.updateAnimator();
+		else
+			chest.process();
+	}
 
-    public CompactingChestBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(PastelBlockEntities.COMPACTING_CHEST.get(), blockPos, blockState);
-        inventory.addListener(i -> setChanged());
-    }
+	private void updateAnimator() {
+		if (animator == null)
+			animator = FACTORY.create(FlowStates.CLOSED, this);
 
-    @SuppressWarnings("unused")
-    public static void tick(Level world, BlockPos pos, BlockState state, CompactingChestBlockEntity chest) {
-        if (world.isClientSide())
-            chest.updateAnimator();
-        else
-            chest.process();
-    }
+		animator.tick();
 
-    private void updateAnimator() {
-        if (animator == null)
-            animator = FACTORY.create(FlowStates.CLOSED, this);
+		if (isOpen) {
+			animator.swapState(FlowStates.OPEN);
+		}
+		else if (level.getGameTime() - craftingTimeStamp < 20) {
+			animator.swapState(FlowStates.ACTIVE);
+		}
+		else {
+			animator.swapState(FlowStates.CLOSED);
+		}
+	}
 
-        animator.tick();
+	private void process() {
+		var available = InventoryHelper.getAvailableItems(inventory);
 
-        if (isOpen) {
-            animator.swapState(FlowStates.OPEN);
-        } else if (level.getGameTime() - craftingTimeStamp < 20) {
-            animator.swapState(FlowStates.ACTIVE);
-        } else {
-            animator.swapState(FlowStates.CLOSED);
-        }
-    }
+		if (cachedRecipe.isEmpty()) {
+			findRecipe(available);
+			return;
+		}
 
-    private void process() {
-        var available = InventoryHelper.getAvailableItems(inventory);
+		var recipe = cachedRecipe.get();
+		var ref = AutoCraftingMode.getCache(mode).getOrDefault(recipe.id(), ItemReference.empty());
 
-        if (cachedRecipe.isEmpty()) {
-            findRecipe(available);
-            return;
-        }
+		if (ref.isEmpty())
+			return;
 
-        var recipe = cachedRecipe.get();
-        var ref = AutoCraftingMode.getCache(mode)
-                                  .getOrDefault(recipe.id(), ItemReference.empty());
+		if (!hasEnough(ref, available)) {
+			cachedRecipe = Optional.empty();
+			return;
+		}
 
-        if (ref.isEmpty())
-            return;
+		var result = recipe.value().getResultItem(level.registryAccess()).copy();
 
-        if (!hasEnough(ref, available)) {
-            cachedRecipe = Optional.empty();
-            return;
-        }
+		if (!ItemHandlerHelper.insertItemStacked(inventory, result, true).isEmpty())
+			return;
 
-        var result = recipe.value()
-                           .getResultItem(level.registryAccess())
-                           .copy();
+		ItemHandlerHelper.insertItemStacked(inventory, result, false);
+		InventoryHelper.extractFromInventory(inventory, ref, mode.getSize());
+		craftingTimeStamp = level.getGameTime();
+		produceRunningEffects();
 
-        if (!ItemHandlerHelper.insertItemStacked(inventory, result, true)
-                              .isEmpty())
-            return;
+		if (level.getGameTime() % 5 == 0) {
+			CompactingChestStatusUpdatePayload.sendCompactingChestStatusUpdate(this);
+			((ServerLevel) level).getChunkSource().blockChanged(worldPosition);
+		}
+	}
 
-        ItemHandlerHelper.insertItemStacked(inventory, result, false);
-        InventoryHelper.extractFromInventory(inventory, ref, mode.getSize());
-        craftingTimeStamp = level.getGameTime();
-        produceRunningEffects();
+	private boolean hasEnough(ItemReference ref, List<ItemStorage> available) {
+		if (available.isEmpty())
+			return false;
 
-        if (level.getGameTime() % 5 == 0) {
-            CompactingChestStatusUpdatePayload.sendCompactingChestStatusUpdate(this);
-            ((ServerLevel) level).getChunkSource()
-                                 .blockChanged(worldPosition);
-        }
-    }
+		for (ItemStorage itemStorage : available) {
+			if (!itemStorage.getReference().equals(ref))
+				continue;
 
-    private boolean hasEnough(ItemReference ref, List<ItemStorage> available) {
-        if (available.isEmpty())
-            return false;
+			if (itemStorage.getCount() >= mode.getSize())
+				return true;
+		}
+		return false;
+	}
 
-        for (ItemStorage itemStorage : available) {
-            if (!itemStorage.getReference()
-                            .equals(ref))
-                continue;
+	private void findRecipe(List<ItemStorage> available) {
+		CraftingInput input = null;
+		ItemReference target = null;
 
-            if (itemStorage.getCount() >= mode.getSize())
-                return true;
-        }
-        return false;
-    }
+		for (ItemStorage storage : available) {
+			if (storage.getCount() >= mode.getSize()) {
+				input = mode.createRecipeInput(storage.stack(1)).input();
+				target = storage.getReference();
 
-    private void findRecipe(List<ItemStorage> available) {
-        CraftingInput input = null;
-        ItemReference target = null;
+				cachedRecipe = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, level);
+				if (cachedRecipe.isPresent())
+					break;
+			}
+		}
 
-        for (ItemStorage storage : available) {
-            if (storage.getCount() >= mode.getSize()) {
-                input = mode.createRecipeInput(storage.stack(1))
-                            .input();
-                target = storage.getReference();
+		if (input == null)
+			return;
 
-                cachedRecipe = level.getRecipeManager()
-                                    .getRecipeFor(RecipeType.CRAFTING, input, level);
-                if (cachedRecipe.isPresent())
-                    break;
-            }
-        }
+		ItemReference finalTarget = target;
+		cachedRecipe.ifPresent(r -> {
+			var recipes = AutoCraftingMode.getCache(mode);
+			recipes.putIfAbsent(r.id(), finalTarget);
+			craftingTimeStamp = level.getGameTime();
+			CompactingChestStatusUpdatePayload.sendCompactingChestStatusUpdate(this);
+		});
+	}
+	
+	public void produceRunningEffects() {
+		var random = level.getRandom();
+		if (random.nextFloat() < 0.04F) {
+			level.playSound(null, worldPosition, SoundEvents.REDSTONE_TORCH_BURNOUT, SoundSource.BLOCKS, 0.05F + random.nextFloat() * 0.1F, 0.334F + random.nextFloat() / 2F);
+			for (int i = 0; i < 4 + random.nextInt(5); i++) {
+				((ServerLevel) level).sendParticles(ParticleTypes.CLOUD, worldPosition.getX() + random.nextFloat(), worldPosition.getY() + 1 + random.nextFloat() * 0.667F, worldPosition.getZ() + random.nextFloat(), 0, 0, random.nextFloat() / 20F + 0.02F, 0, 1);
+			}
+		}
+	}
+	
+	@Override
+	protected Component getDefaultName() {
+		return Component.translatable("block.pastel.compacting_chest");
+	}
+	
+	@Override
+	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
+		super.loadAdditional(tag, registryLookup);
+		if (tag.contains("AutoCraftingMode", Tag.TAG_ANY_NUMERIC)) {
+			int autoCraftingModeInt = tag.getInt("AutoCraftingMode");
+			this.mode = AutoCraftingMode.values()[autoCraftingModeInt];
+		}
+	}
+	
+	@Override
+	public void saveAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
+		super.saveAdditional(tag, registryLookup);
+		tag.putInt("AutoCraftingMode", this.mode.ordinal());
+	}
 
-        if (input == null)
-            return;
+	@Override
+	public boolean triggerEvent(int type, int data) {
+		if (type == 1) {
+			isOpen = data > 0;
+		}
+		return super.triggerEvent(type, data);
+	}
+	
+	@Override
+	public SoundEvent getOpenSound() {
+		return PastelSoundEvents.COMPACTING_CHEST_OPEN;
+	}
+	
+	@Override
+	public SoundEvent getCloseSound() {
+		return PastelSoundEvents.COMPACTING_CHEST_CLOSE;
+	}
+	
+	public void applySettings(AutoCraftingMode mode) {
+		if (this.mode == mode)
+			return;
 
-        ItemReference finalTarget = target;
-        cachedRecipe.ifPresent(r -> {
-            var recipes = AutoCraftingMode.getCache(mode);
-            recipes.putIfAbsent(r.id(), finalTarget);
-            craftingTimeStamp = level.getGameTime();
-            CompactingChestStatusUpdatePayload.sendCompactingChestStatusUpdate(this);
-        });
-    }
+		this.mode = mode;
+		this.cachedRecipe = Optional.empty();
+		setChanged();
+	}
+	
+	@Override
+	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+		return new CompactingChestScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+	}
 
-    public void produceRunningEffects() {
-        var random = level.getRandom();
-        if (random.nextFloat() < 0.04F) {
-            level.playSound(
-                null, worldPosition, SoundEvents.REDSTONE_TORCH_BURNOUT, SoundSource.BLOCKS,
-                0.05F + random.nextFloat() * 0.1F, 0.334F + random.nextFloat() / 2F
-            );
-            for (int i = 0; i < 4 + random.nextInt(5); i++) {
-                ((ServerLevel) level).sendParticles(
-                    ParticleTypes.CLOUD, worldPosition.getX() + random.nextFloat(),
-                    worldPosition.getY() + 1 + random.nextFloat() * 0.667F, worldPosition.getZ() + random.nextFloat(),
-                    0, 0, random.nextFloat() / 20F + 0.02F, 0, 1
-                );
-            }
-        }
-    }
+	@Override
+	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+		BlockPos.STREAM_CODEC.encode(buffer, worldPosition);
+	}
 
-    @Override
-    protected Component getDefaultName() {
-        return Component.translatable("block.pastel.compacting_chest");
-    }
+	@Override
+	public int getContainerSize() {
+		return 27;
+	}
 
-    @Override
-    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
-        super.loadAdditional(tag, registryLookup);
-        if (tag.contains("AutoCraftingMode", Tag.TAG_ANY_NUMERIC)) {
-            int autoCraftingModeInt = tag.getInt("AutoCraftingMode");
-            this.mode = AutoCraftingMode.values()[autoCraftingModeInt];
-        }
-    }
+	static {
+		var builder = new FlowAnimator.Builder<>(CompactingChestBlockEntity.class);
+		builder.stateInfo(FlowStates.OPEN, 5);
+		builder.stateInfo(FlowStates.ACTIVE, 20);
+		builder.stateInfo(FlowStates.CLOSED, 14);
 
-    @Override
-    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
-        super.saveAdditional(tag, registryLookup);
-        tag.putInt("AutoCraftingMode", this.mode.ordinal());
-    }
+		builder.handle("piston", FlowHandlers.FLOAT)
+				.initial(0F)
+				.loopback(FlowStates.CLOSED)
+				.forStates(14F, FlowStates.OPEN)
+				.forStates(KeyFrame.sine(0.1F, 5, 4), FlowStates.ACTIVE)
+				.interpolate(Interpolation.CUBIC_IN)
+				.push();
 
-    @Override
-    public boolean triggerEvent(int type, int data) {
-        if (type == 1) {
-            isOpen = data > 0;
-        }
-        return super.triggerEvent(type, data);
-    }
+		builder.handle("driver", FlowHandlers.FLOAT)
+				.initial(0F)
+				.loopback(FlowStates.CLOSED)
+				.forStates(6F, FlowStates.OPEN)
+				.forStates(KeyFrame.sine(0.1F, 5, 5, 13), FlowStates.ACTIVE)
+				.interpolate(Interpolation.CUBIC_IN)
+				.push();
 
-    @Override
-    public SoundEvent getOpenSound() {
-        return PastelSoundEvents.COMPACTING_CHEST_OPEN;
-    }
+		builder.handle("cap", FlowHandlers.FLOAT)
+				.initial(0F)
+				.loopback(FlowStates.CLOSED, FlowStates.ACTIVE)
+				.forStates(5F, FlowStates.OPEN)
+				.interpolate(Interpolation.CUBIC_IN)
+				.push();
 
-    @Override
-    public SoundEvent getCloseSound() {
-        return PastelSoundEvents.COMPACTING_CHEST_CLOSE;
-    }
-
-    public void applySettings(AutoCraftingMode mode) {
-        if (this.mode == mode)
-            return;
-
-        this.mode = mode;
-        this.cachedRecipe = Optional.empty();
-        setChanged();
-    }
-
-    @Override
-    protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-        return new CompactingChestScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
-    }
-
-    @Override
-    public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
-        BlockPos.STREAM_CODEC.encode(buffer, worldPosition);
-    }
-
-    @Override
-    public int getContainerSize() {
-        return 27;
-    }
-
-    static {
-        var builder = new FlowAnimator.Builder<>(CompactingChestBlockEntity.class);
-        builder.stateInfo(FlowStates.OPEN, 5);
-        builder.stateInfo(FlowStates.ACTIVE, 20);
-        builder.stateInfo(FlowStates.CLOSED, 14);
-
-        builder.handle("piston", FlowHandlers.FLOAT)
-               .initial(0F)
-               .loopback(FlowStates.CLOSED)
-               .forStates(14F, FlowStates.OPEN)
-               .forStates(KeyFrame.sine(0.1F, 5, 4), FlowStates.ACTIVE)
-               .interpolate(Interpolation.CUBIC_IN)
-               .push();
-
-        builder.handle("driver", FlowHandlers.FLOAT)
-               .initial(0F)
-               .loopback(FlowStates.CLOSED)
-               .forStates(6F, FlowStates.OPEN)
-               .forStates(KeyFrame.sine(0.1F, 5, 5, 13), FlowStates.ACTIVE)
-               .interpolate(Interpolation.CUBIC_IN)
-               .push();
-
-        builder.handle("cap", FlowHandlers.FLOAT)
-               .initial(0F)
-               .loopback(FlowStates.CLOSED, FlowStates.ACTIVE)
-               .forStates(5F, FlowStates.OPEN)
-               .interpolate(Interpolation.CUBIC_IN)
-               .push();
-
-        FACTORY = builder.build();
-    }
+		FACTORY = builder.build();
+	}
 }

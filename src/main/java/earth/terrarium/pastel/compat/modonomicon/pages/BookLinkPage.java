@@ -23,10 +23,7 @@ public class BookLinkPage extends BookTextPage {
     private final String url;
     private BookTextHolder linkText;
 
-    public BookLinkPage(
-        BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator,
-        String anchor, BookCondition condition, String url, BookTextHolder linkText
-    ) {
+    public BookLinkPage(BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator, String anchor, BookCondition condition, String url, BookTextHolder linkText) {
         super(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition);
         this.url = url;
         this.linkText = linkText;
@@ -39,8 +36,8 @@ public class BookLinkPage extends BookTextPage {
         var text = BookGsonHelper.getAsBookTextHolder(json, "text", BookTextHolder.EMPTY, provider);
         var anchor = GsonHelper.getAsString(json, "anchor", "");
         var condition = json.has("condition")
-                        ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
-                        : new BookNoneCondition();
+                ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
+                : new BookNoneCondition();
         var url = GsonHelper.getAsString(json, "url", "");
         var linkText = BookGsonHelper.getAsBookTextHolder(json, "link_text", BookTextHolder.EMPTY, provider);
         return new BookLinkPage(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, url, linkText);
@@ -74,8 +71,8 @@ public class BookLinkPage extends BookTextPage {
         if (!linkText.hasComponent()) {
             MutableComponent text = Component.translatable(linkText.getKey());
             Style style = Style.EMPTY
-                .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url))
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.nullToEmpty(url)));
+                    .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.nullToEmpty(url)));
             linkText = new BookTextHolder(text.withStyle(style));
         }
     }
@@ -90,11 +87,8 @@ public class BookLinkPage extends BookTextPage {
     @Override
     public boolean matchesQuery(String query) {
         return super.matchesQuery(query)
-               || url.toLowerCase()
-                     .contains(query)
-               || linkText.getString()
-                          .toLowerCase()
-                          .contains(query);
+                || url.toLowerCase().contains(query)
+                || linkText.getString().toLowerCase().contains(query);
     }
 
 }

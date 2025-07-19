@@ -20,47 +20,21 @@ import java.util.List;
 public class NightArcheologyModifier extends LootModifier {
 
     public static final MapCodec<NightArcheologyModifier> CODEC = RecordCodecBuilder.mapCodec(i ->
-                                                                                                  LootModifier.codecStart(
-                                                                                                                  i)
-                                                                                                              .and(
-                                                                                                                  i.group(
-                                                                                                                      ExtraCodecs.RESOURCE_PATH_CODEC.xmap(
-                                                                                                                                     ResourceLocation::tryParse,
-                                                                                                                                     ResourceLocation::toString
-                                                                                                                                 )
-                                                                                                                                                     .listOf()
-                                                                                                                                                     .fieldOf(
-                                                                                                                                                         "targets")
-                                                                                                                                                     .forGetter(
-                                                                                                                                                         m -> m.targets),
-                                                                                                                      IntProvider.POSITIVE_CODEC.fieldOf(
-                                                                                                                                     "count")
-                                                                                                                                                .forGetter(
-                                                                                                                                                    m -> m.count),
-                                                                                                                      Codec.FLOAT.fieldOf(
-                                                                                                                               "chance")
-                                                                                                                                 .forGetter(
-                                                                                                                                     m -> m.chance),
-                                                                                                                      Codec.BOOL.fieldOf(
-                                                                                                                               "replace")
-                                                                                                                                .forGetter(
-                                                                                                                                    m -> m.replace)
-                                                                                                                  )
-                                                                                                              )
-                                                                                                              .apply(
-                                                                                                                  i,
-                                                                                                                  NightArcheologyModifier::new
-                                                                                                              ));
+            LootModifier.codecStart(i).and(i.group(
+                            ExtraCodecs.RESOURCE_PATH_CODEC.xmap(ResourceLocation::tryParse, ResourceLocation::toString)
+                                    .listOf().fieldOf("targets").forGetter(m -> m.targets),
+                            IntProvider.POSITIVE_CODEC.fieldOf("count").forGetter(m -> m.count),
+                            Codec.FLOAT.fieldOf("chance").forGetter(m -> m.chance),
+                            Codec.BOOL.fieldOf("replace").forGetter(m -> m.replace)
+                    )
+                    ).apply(i, NightArcheologyModifier::new));
 
     private final List<ResourceLocation> targets;
     private final IntProvider count;
     private final float chance;
     private final boolean replace;
 
-    protected NightArcheologyModifier(
-        LootItemCondition[] conditionsIn, List<ResourceLocation> targets, IntProvider count, float chance,
-        boolean replace
-    ) {
+    protected NightArcheologyModifier(LootItemCondition[] conditionsIn, List<ResourceLocation> targets, IntProvider count, float chance, boolean replace) {
         super(conditionsIn);
         this.targets = targets;
         this.count = count;

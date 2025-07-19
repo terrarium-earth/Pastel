@@ -68,8 +68,7 @@ public class StackHandlerView extends FriendlyStackHandler {
         if (!supportsInsertion)
             return stack;
 
-        if (!filters.getOrDefault(slot, stck -> true)
-                    .test(stack))
+        if (!filters.getOrDefault(slot, stck -> true).test(stack))
             return stack;
 
         return delegator.insertItem(slot + offset, stack, simulate);
@@ -107,8 +106,7 @@ public class StackHandlerView extends FriendlyStackHandler {
 
     @Override
     public void setInternalList(NonNullList<ItemStack> newStacks) {
-        throw new UnsupportedOperationException(
-            "Attempted to change the internal list of a forwarded ItemStackHandler");
+        throw new UnsupportedOperationException("Attempted to change the internal list of a forwarded ItemStackHandler");
     }
 
     @Override
@@ -117,10 +115,8 @@ public class StackHandlerView extends FriendlyStackHandler {
     }
 
     @Override
-    public void save(CompoundTag tag, HolderLookup.Provider provider) {
-    }
+    public void save(CompoundTag tag, HolderLookup.Provider provider) {}
 
     @Override
-    public void load(CompoundTag tag, HolderLookup.Provider provider) {
-    }
+    public void load(CompoundTag tag, HolderLookup.Provider provider) {}
 }

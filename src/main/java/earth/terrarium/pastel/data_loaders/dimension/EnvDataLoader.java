@@ -31,8 +31,7 @@ public class EnvDataLoader extends SimpleJsonResourceReloadListener {
     }
 
     @Override
-    protected void apply(
-        Map<ResourceLocation, JsonElement> files, ResourceManager resourceManager, ProfilerFiller profiler) {
+    protected void apply(Map<ResourceLocation, JsonElement> files, ResourceManager resourceManager, ProfilerFiller profiler) {
         DATA.clear();
 
         var ops = makeConditionalOps();
@@ -41,22 +40,18 @@ public class EnvDataLoader extends SimpleJsonResourceReloadListener {
 
             var biome = KEY_CODEC.parse(ops, parentObject.get("biome"));
 
-            if (biome.error()
-                     .isPresent()) {
+            if (biome.error().isPresent()) {
                 error(path, biome);
                 return;
             }
 
             var data = EnvironmentalData.CODEC.parse(ops, parentObject.getAsJsonObject("environment"));
 
-            if (data.error()
-                    .isPresent()) {
+            if (data.error().isPresent()) {
                 error(path, data);
             }
 
-            if (biome.result()
-                     .isEmpty() || data.result()
-                                       .isEmpty())
+            if (biome.result().isEmpty() || data.result().isEmpty())
                 return;
 
             DATA.put(biome.getOrThrow(), data.getOrThrow());
@@ -64,7 +59,6 @@ public class EnvDataLoader extends SimpleJsonResourceReloadListener {
     }
 
     private static void error(ResourceLocation path, DataResult<?> result) {
-        PastelCommon.logError("Env Data loading error [" + path + "]" + result.error()
-                                                                              .get());
+        PastelCommon.logError("Env Data loading error [" + path + "]" + result.error().get());
     }
 }

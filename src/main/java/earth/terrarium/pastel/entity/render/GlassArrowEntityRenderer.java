@@ -28,32 +28,22 @@ public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
         super(context);
         this.itemRenderer = context.getItemRenderer();
     }
-
+    
     @Override
-    public void render(
-        GlassArrowEntity persistentProjectileEntity, float yaw, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light
-    ) {
-        ItemStack itemStack = persistentProjectileEntity.getVariant()
-                                                        .getArrow()
-                                                        .getDefaultInstance();
+    public void render(GlassArrowEntity persistentProjectileEntity, float yaw, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light) {
+        ItemStack itemStack = persistentProjectileEntity.getVariant().getArrow().getDefaultInstance();
         renderAsItemStack(persistentProjectileEntity, tickDelta, poseStack, vertexConsumerProvider, light, itemStack);
         super.render(persistentProjectileEntity, yaw, tickDelta, poseStack, vertexConsumerProvider, light);
     }
 
-    private void renderAsItemStack(
-        AbstractArrow entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light,
-        ItemStack itemStack
-    ) {
+    private void renderAsItemStack(AbstractArrow entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, ItemStack itemStack) {
         BakedModel bakedModel = this.itemRenderer.getModel(itemStack, entity.level(), null, entity.getId());
 
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(tickDelta, entity.yRotO, entity.getYRot()) - 90.0F));
-        poseStack.mulPose(
-            Axis.ZP.rotationDegrees(getAdditionalPitch() + Mth.lerp(tickDelta, entity.xRotO, entity.getXRot())));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(getAdditionalPitch() + Mth.lerp(tickDelta, entity.xRotO, entity.getXRot())));
 
-        ItemTransform transformation = bakedModel.getTransforms()
-                                                 .getTransform(ItemDisplayContext.GROUND);
+        ItemTransform transformation = bakedModel.getTransforms().getTransform(ItemDisplayContext.GROUND);
         float scaleX = transformation.scale.x();
         float scaleY = transformation.scale.y();
         float scaleZ = transformation.scale.z();
@@ -73,26 +63,23 @@ public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
         if (shake > 0.0F) {
             poseStack.mulPose(Axis.ZP.rotationDegrees(-Mth.sin(shake * 3.0F) * shake));
         }
-
-        this.itemRenderer.render(
-            itemStack, ItemDisplayContext.GROUND, false, poseStack, vertexConsumerProvider, light,
-            OverlayTexture.NO_OVERLAY, bakedModel
-        );
-
+    
+        this.itemRenderer.render(itemStack, ItemDisplayContext.GROUND, false, poseStack, vertexConsumerProvider, light, OverlayTexture.NO_OVERLAY, bakedModel);
+    
         poseStack.popPose();
     }
-
+    
     public float getScale() {
         return 1.5F;
     }
-
+    
     public int getAdditionalPitch() {
         return -45;
     }
-
-    @Override
+	
+	@Override
     public ResourceLocation getTextureLocation(GlassArrowEntity itemEntity) {
-        return InventoryMenu.BLOCK_ATLAS;
+		return InventoryMenu.BLOCK_ATLAS;
     }
-
+    
 }

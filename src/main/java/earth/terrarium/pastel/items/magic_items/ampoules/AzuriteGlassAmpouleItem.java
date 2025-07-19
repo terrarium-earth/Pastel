@@ -17,33 +17,22 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AzuriteGlassAmpouleItem extends GlassAmpouleItem {
-
-    public AzuriteGlassAmpouleItem(Properties settings) {
-        super(settings);
-    }
-
-    @Override
-    public boolean trigger(
-        Level world, ItemStack stack, LivingEntity attacker, @Nullable LivingEntity target, Vec3 position) {
-        world.playLocalSound(
-            BlockPos.containing(position), PastelSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.35F, 0.9F +
-                                                                                                             world.getRandom()
-                                                                                                                  .nextFloat() *
-                                                                                                             0.334F,
-            true
-        );
-        LightShardEntity.summonBarrage(
-            world, attacker, target, LightShardBaseEntity.MONSTER_TARGET, position,
-            LightShardBaseEntity.DEFAULT_COUNT_PROVIDER
-        );
-        return true;
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.azurite_glass_ampoule.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-    }
-
+	
+	public AzuriteGlassAmpouleItem(Properties settings) {
+		super(settings);
+	}
+	
+	@Override
+	public boolean trigger(Level world, ItemStack stack, LivingEntity attacker, @Nullable LivingEntity target, Vec3 position) {
+		world.playLocalSound(BlockPos.containing(position), PastelSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.35F, 0.9F + world.getRandom().nextFloat() * 0.334F, true);
+		LightShardEntity.summonBarrage(world, attacker, target, LightShardBaseEntity.MONSTER_TARGET, position, LightShardBaseEntity.DEFAULT_COUNT_PROVIDER);
+		return true;
+	}
+	
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("item.pastel.azurite_glass_ampoule.tooltip").withStyle(ChatFormatting.GRAY));
+	}
+	
 }

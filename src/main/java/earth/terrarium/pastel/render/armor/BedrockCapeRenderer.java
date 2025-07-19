@@ -23,102 +23,96 @@ import net.neoforged.neoforge.client.event.*;
 
 public class BedrockCapeRenderer {
 
-    private static <T extends Entity> void registerCapeLayer(EntityRenderer<T> baseRenderer) {
-        if (!(baseRenderer instanceof LivingEntityRenderer<?, ?> livingRenderer)) {
-            return;
+	private static <T extends Entity> void registerCapeLayer(EntityRenderer<T> baseRenderer) {
+		if (!(baseRenderer instanceof LivingEntityRenderer<?, ?> livingRenderer)) {
+			return;
+		}
+
+		if (!(livingRenderer.getModel() instanceof HumanoidModel<?>)) {
+			return;
+		}
+
+		@SuppressWarnings("unchecked")
+		var humanoidRenderer = (LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>>) livingRenderer;
+
+		humanoidRenderer.addLayer(new BedrockCapeLayer<>(humanoidRenderer));
+	}
+
+	/**
+	 * Registers the bedrock cloth and cape layers on humanoid entities
+	 */
+	public static void registerLayers(EntityRenderersEvent.AddLayers event) {
+		for (PlayerSkin.Model skin : event.getSkins()) {
+			EntityRenderer<? extends Player> renderer = event.getSkin(skin);
+
+			registerCapeLayer(renderer);
+		}
+
+		for (EntityType<?> entityType : event.getEntityTypes()) {
+			EntityRenderer<?> renderer = event.getRenderer(entityType);
+
+			registerCapeLayer(renderer);
         }
+	}
 
-        if (!(livingRenderer.getModel() instanceof HumanoidModel<?>)) {
-            return;
-        }
+	private static class BedrockCapeLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
 
-        @SuppressWarnings("unchecked")
-        var humanoidRenderer = (LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>>) livingRenderer;
+		public BedrockCapeLayer(RenderLayerParent<T, M> renderer) {
+			super(renderer);
+		}
 
-        humanoidRenderer.addLayer(new BedrockCapeLayer<>(humanoidRenderer));
-    }
+		@Override
+		public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
+			// Check for the chestplate, and begin rendering the cape if equipped
+			ItemStack chestStack = VanitySlotsCompat.getEquippedStack(livingEntity, EquipmentSlot.CHEST);
+			if (chestStack.getItem() != PastelItems.BEDROCK_CHESTPLATE.get()) {
+				return;
+			}
 
-    /**
-     * Registers the bedrock cloth and cape layers on humanoid entities
-     */
-    public static void registerLayers(EntityRenderersEvent.AddLayers event) {
-        for (PlayerSkin.Model skin : event.getSkins()) {
-            EntityRenderer<? extends Player> renderer = event.getSkin(skin);
+			// Transform and render front cloth
+			var capeRotations = BedrockArmorModel.computeFrontClothRotation(livingEntity, partialTick);
+			float capeZOffset = capeRotations.getB();
 
-            registerCapeLayer(renderer);
-        }
+			VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entitySolid(PastelModelLayers.BEDROCK_ARMOR_MAIN_ID));
+			poseStack.pushPose();
+			poseStack.translate(0, 0.5, 0);
+			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.clamp(capeRotations.getA(), -25, 0)));
+			if (!livingEntity.isCrouching()) {
+				poseStack.mulPose(Axis.ZP.rotationDegrees(capeZOffset / 2.0F));
+			}
 
-        for (EntityType<?> entityType : event.getEntityTypes()) {
-            EntityRenderer<?> renderer = event.getRenderer(entityType);
+			// Make some space for your legs if crouching
+			poseStack.translate(0, -0.5, -0.025);
+			if (livingEntity.isCrouching()) {
+				poseStack.translate(0, 0.05, 0.35);
+			}
+			BedrockArmorCapeModel.FRONT_CLOTH.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+			poseStack.popPose();
 
-            registerCapeLayer(renderer);
-        }
-    }
+			// TODO - Respect player capes once armor tailoring is implemented
+			// Respect Elytras and Fabrics Render Event
 
-    private static class BedrockCapeLayer<T extends LivingEntity, M extends HumanoidModel<T>>
-        extends RenderLayer<T, M> {
+			if (RenderingContext.isElytraRendered) {
+				return;
+			}
 
-        public BedrockCapeLayer(RenderLayerParent<T, M> renderer) {
-            super(renderer);
-        }
+			// The front and back cape are almost matching, but inverted
+			float backCapeRotation = Mth.clamp(-capeRotations.getA(), -30, 45);
 
-        @Override
-        public void render(
-            PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, LivingEntity livingEntity,
-            float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw,
-            float headPitch
-        ) {
-            // Check for the chestplate, and begin rendering the cape if equipped
-            ItemStack chestStack = VanitySlotsCompat.getEquippedStack(livingEntity, EquipmentSlot.CHEST);
-            if (chestStack.getItem() != PastelItems.BEDROCK_CHESTPLATE.get()) {
-                return;
-            }
+			// Transform and render the custom cape
+			poseStack.pushPose();
+			poseStack.translate(0, -0.05, 0.0); // Push up and backwards, then rotate
+			poseStack.mulPose(Axis.XP.rotationDegrees(backCapeRotation));
+			poseStack.mulPose(Axis.ZP.rotationDegrees(capeZOffset / 2.0F));
+			poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - capeZOffset / 3.5F));
+			poseStack.translate(0, 0.05, -0.325); // Move back down
+			if (livingEntity.isCrouching()) {
+				poseStack.translate(0, 0.15, 0.125);
+			}
 
-            // Transform and render front cloth
-            var capeRotations = BedrockArmorModel.computeFrontClothRotation(livingEntity, partialTick);
-            float capeZOffset = capeRotations.getB();
-
-            VertexConsumer vertexConsumer = bufferSource.getBuffer(
-                RenderType.entitySolid(PastelModelLayers.BEDROCK_ARMOR_MAIN_ID));
-            poseStack.pushPose();
-            poseStack.translate(0, 0.5, 0);
-            poseStack.mulPose(Axis.XP.rotationDegrees(Mth.clamp(capeRotations.getA(), -25, 0)));
-            if (!livingEntity.isCrouching()) {
-                poseStack.mulPose(Axis.ZP.rotationDegrees(capeZOffset / 2.0F));
-            }
-
-            // Make some space for your legs if crouching
-            poseStack.translate(0, -0.5, -0.025);
-            if (livingEntity.isCrouching()) {
-                poseStack.translate(0, 0.05, 0.35);
-            }
-            BedrockArmorCapeModel.FRONT_CLOTH.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
-            poseStack.popPose();
-
-            // TODO - Respect player capes once armor tailoring is implemented
-            // Respect Elytras and Fabrics Render Event
-
-            if (RenderingContext.isElytraRendered) {
-                return;
-            }
-
-            // The front and back cape are almost matching, but inverted
-            float backCapeRotation = Mth.clamp(-capeRotations.getA(), -30, 45);
-
-            // Transform and render the custom cape
-            poseStack.pushPose();
-            poseStack.translate(0, -0.05, 0.0); // Push up and backwards, then rotate
-            poseStack.mulPose(Axis.XP.rotationDegrees(backCapeRotation));
-            poseStack.mulPose(Axis.ZP.rotationDegrees(capeZOffset / 2.0F));
-            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - capeZOffset / 3.5F));
-            poseStack.translate(0, 0.05, -0.325); // Move back down
-            if (livingEntity.isCrouching()) {
-                poseStack.translate(0, 0.15, 0.125);
-            }
-
-            BedrockArmorCapeModel.CAPE_MODEL.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
-            poseStack.popPose();
-        }
-    }
+			BedrockArmorCapeModel.CAPE_MODEL.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+			poseStack.popPose();
+		}
+	}
 
 }

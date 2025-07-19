@@ -17,39 +17,36 @@ import java.util.Map;
 
 public class ColoredStrippedWoodBlock extends RotatedPillarBlock implements ColoredTree {
 
-    public static final MapCodec<ColoredStrippedWoodBlock> CODEC = RecordCodecBuilder.mapCodec(
-        instance -> instance.group(
-                                propertiesCodec(),
-                                InkColor.CODEC.fieldOf("color")
-                                              .forGetter(ColoredStrippedWoodBlock::getColor)
-                            )
-                            .apply(instance, ColoredStrippedWoodBlock::new));
+	public static final MapCodec<ColoredStrippedWoodBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			propertiesCodec(),
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredStrippedWoodBlock::getColor)
+	).apply(instance, ColoredStrippedWoodBlock::new));
+	
+	private static final Map<InkColor, ColoredStrippedWoodBlock> WOOD = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredStrippedWoodBlock(Properties settings, InkColor color) {
+		super(settings);
+		this.color = color;
+		WOOD.put(color, this);
+	}
 
-    private static final Map<InkColor, ColoredStrippedWoodBlock> WOOD = new Object2ObjectArrayMap<>();
-    protected final InkColor color;
-
-    public ColoredStrippedWoodBlock(Properties settings, InkColor color) {
-        super(settings);
-        this.color = color;
-        WOOD.put(color, this);
-    }
-
-    @Override
-    public MapCodec<? extends ColoredStrippedWoodBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    public InkColor getColor() {
-        return this.color;
-    }
-
-    public static ColoredStrippedWoodBlock byColor(InkColor color) {
-        return WOOD.get(color);
-    }
-
-    public static Collection<ColoredStrippedWoodBlock> all() {
-        return WOOD.values();
-    }
-
+	@Override
+	public MapCodec<? extends ColoredStrippedWoodBlock> codec() {
+		return CODEC;
+	}
+	
+	@Override
+	public InkColor getColor() {
+		return this.color;
+	}
+	
+	public static ColoredStrippedWoodBlock byColor(InkColor color) {
+		return WOOD.get(color);
+	}
+	
+	public static Collection<ColoredStrippedWoodBlock> all() {
+		return WOOD.values();
+	}
+	
 }

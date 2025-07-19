@@ -28,28 +28,14 @@ import java.util.*;
 public class MiscPlayerData {
 
     public static final Codec<MiscPlayerData> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                          Codec.INT.fieldOf(
-                                                                                              "ticksBeforeSleep")
-                                                                                                   .forGetter(m -> m.ticksBeforeSleep),
-                                                                                          Codec.INT.fieldOf(
-                                                                                              "sleepingWindow")
-                                                                                                   .forGetter(m -> m.sleepingWindow),
-                                                                                          Codec.INT.fieldOf(
-                                                                                              "sleepInvincibility")
-                                                                                                   .forGetter(m -> m.sleepInvincibility),
-                                                                                          BuiltInRegistries.ITEM.byNameCodec()
-                                                                                                                .optionalFieldOf("sleepConsumable")
-                                                                                                                .forGetter(m -> (Optional<Item>) (Object) m.sleepConsumable)
-                                                                                      )
-                                                                                      .apply(
-                                                                                          i,
-                                                                                          MiscPlayerData::ofCodec
-                                                                                      ));
+            Codec.INT.fieldOf("ticksBeforeSleep").forGetter(m -> m.ticksBeforeSleep),
+            Codec.INT.fieldOf("sleepingWindow").forGetter(m -> m.sleepingWindow),
+            Codec.INT.fieldOf("sleepInvincibility").forGetter(m -> m.sleepInvincibility),
+            BuiltInRegistries.ITEM.byNameCodec().optionalFieldOf("sleepConsumable").forGetter(m -> (Optional<Item>) (Object) m.sleepConsumable)
+    ).apply(i, MiscPlayerData::ofCodec));
 
     public static final AttachmentType<MiscPlayerData> ATTACHMENT =
-        AttachmentType.builder((holder) -> new MiscPlayerData((Player) holder))
-                      .serialize(CODEC)
-                      .build();
+            AttachmentType.builder((holder) -> new MiscPlayerData((Player) holder)).serialize(CODEC).build();
 
     private Player player;
 
@@ -66,11 +52,9 @@ public class MiscPlayerData {
         this.player = player;
     }
 
-    private MiscPlayerData() {
-    }
+    private MiscPlayerData() {}
 
-    public static MiscPlayerData ofCodec(
-        int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable) {
+    public static MiscPlayerData ofCodec(int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable) {
         var data = new MiscPlayerData();
         data.ticksBeforeSleep = ticksBeforeSleep;
         data.sleepingWindow = sleepingWindow;
@@ -84,8 +68,7 @@ public class MiscPlayerData {
         tickSleep();
         tickSwordMechanics();
 
-        if (!player.level()
-                   .isClientSide()) {
+        if (!player.level().isClientSide()) {
             var fortitude = player.getAttributeValue(PastelEntityAttributes.MENTAL_PRESENCE);
             if (lastSyncedSleepPotency != fortitude) {
                 lastSyncedSleepPotency = fortitude;
@@ -136,7 +119,8 @@ public class MiscPlayerData {
     private void tickSwordMechanics() {
         if (parryTicks > 1) {
             parryTicks--;
-        } else if (parryTicks == 1) {
+        }
+        else if (parryTicks == 1) {
             parryTicks = 0;
             consumePerfectCounter();
         }
@@ -144,10 +128,12 @@ public class MiscPlayerData {
         if (!bHopWindow && isLunging) {
             if (isInModifiedMotionState()) {
                 isLunging = false;
-            } else {
+            }
+            else {
                 bHopWindow = true;
             }
-        } else if (isLunging && isInModifiedMotionState()) {
+        }
+        else if (isLunging && isInModifiedMotionState()) {
             bHopWindow = false;
         }
     }
@@ -187,8 +173,7 @@ public class MiscPlayerData {
     }
 
     private void failSleep() {
-        if (!player.level()
-                   .isClientSide()) {
+        if (!player.level().isClientSide()) {
             player.stopSleeping();
             resetSleepingState(true);
         }
@@ -229,18 +214,13 @@ public class MiscPlayerData {
         sleepInvincibility = invulnTicks;
         sync();
     }
-
+    
     public void setLastSleepItem(@NotNull SleepAlteringItem item) {
         this.sleepConsumable = Optional.of(item);
     }
 
     public void sync() {
-        AttachmentUtil.syncToTracking(
-            new Payload(
-                player.getUUID(), ticksBeforeSleep, sleepingWindow, sleepInvincibility,
-                (Optional<Item>) (Object) sleepConsumable
-            ), player.level(), player.blockPosition()
-        );
+        AttachmentUtil.syncToTracking(new Payload(player.getUUID(), ticksBeforeSleep, sleepingWindow, sleepInvincibility, (Optional<Item>) (Object) sleepConsumable),player.level(), player.blockPosition());
     }
 
     public static MiscPlayerData get(@NotNull Player player) {
@@ -259,25 +239,21 @@ public class MiscPlayerData {
         return lastSyncedSleepPotency;
     }
 
-    public record Payload(
-        UUID id, int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable
-    ) implements CustomPacketPayload {
+    public record Payload(UUID id, int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable) implements CustomPacketPayload {
 
         public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
-            UUIDUtil.STREAM_CODEC, Payload::id,
-            ByteBufCodecs.INT, Payload::ticksBeforeSleep,
-            ByteBufCodecs.INT, Payload::sleepingWindow,
-            ByteBufCodecs.INT, Payload::sleepInvincibility,
-            ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)), Payload::sleepConsumable,
-            Payload::new
+                UUIDUtil.STREAM_CODEC, Payload::id,
+                ByteBufCodecs.INT, Payload::ticksBeforeSleep,
+                ByteBufCodecs.INT, Payload::sleepingWindow,
+                ByteBufCodecs.INT, Payload::sleepInvincibility,
+                ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)), Payload::sleepConsumable,
+                Payload::new
         );
 
         public static final Type<Payload> TYPE = AttachmentUtil.create("player_misc");
 
         public static void execute(Payload payload, IPayloadContext context) {
-            var player = context.player()
-                                .level()
-                                .getPlayerByUUID(payload.id);
+            var player = context.player().level().getPlayerByUUID(payload.id);
 
             if (player == null)
                 return;

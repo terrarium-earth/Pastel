@@ -1,11 +1,7 @@
 {
   "type": "minecraft:smelting",
   "group": "emerald",
-  "ingredient": [
-    {
-      "item": "pastel:blackslag_emerald_ore"
-    }
-  ],
+  "ingredient": [{"item": "pastel:blackslag_emerald_ore"}],
   "result": {
     "id": "minecraft:emerald"
   },

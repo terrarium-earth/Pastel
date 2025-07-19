@@ -12,29 +12,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class BagOfHoldingItem extends Item {
-
-    public BagOfHoldingItem(Properties settings) {
-        super(settings);
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        ItemStack itemStack = user.getItemInHand(hand);
-
-        PlayerEnderChestContainer enderChestInventory = user.getEnderChestInventory();
-        if (enderChestInventory != null) {
-            user.openMenu(new SimpleMenuProvider(
-                (syncId, inventory, playerx) -> new BagOfHoldingScreenHandler(
-                    syncId, playerx.getInventory(),
-                                                                              playerx.getEnderChestInventory()
-                ), Component.translatable("container.enderchest")
-            ));
-
-            return InteractionResultHolder.consume(itemStack);
-        } else {
-            return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide);
-        }
-    }
-
-
+	
+	public BagOfHoldingItem(Properties settings) {
+		super(settings);
+	}
+	
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+		ItemStack itemStack = user.getItemInHand(hand);
+		
+		PlayerEnderChestContainer enderChestInventory = user.getEnderChestInventory();
+		if (enderChestInventory != null) {
+			user.openMenu(new SimpleMenuProvider((syncId, inventory, playerx) -> new BagOfHoldingScreenHandler(syncId, playerx.getInventory(), playerx.getEnderChestInventory()), Component.translatable("container.enderchest")));
+			
+			return InteractionResultHolder.consume(itemStack);
+		} else {
+			return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide);
+		}
+	}
+	
+	
 }

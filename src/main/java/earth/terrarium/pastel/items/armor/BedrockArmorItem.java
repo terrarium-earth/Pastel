@@ -21,8 +21,7 @@ public class BedrockArmorItem extends ArmorItem implements Preenchanted {
     }
 
     @Override
-    public @Nullable ResourceLocation getArmorTexture(
-        ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
         return PastelCommon.locate("textures/armor/bedrock_armor_main.png");
     }
 
@@ -40,9 +39,9 @@ public class BedrockArmorItem extends ArmorItem implements Preenchanted {
     public boolean isFoil(ItemStack stack) {
         return false;
     }
-
-    @Override
-    public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-        return Map.of();
-    }
+	
+	@Override
+	public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
+		return Map.of();
+	}
 }

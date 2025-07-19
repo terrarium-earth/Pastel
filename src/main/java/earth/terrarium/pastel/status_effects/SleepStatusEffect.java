@@ -25,22 +25,21 @@ public class SleepStatusEffect extends MobEffect {
         super(category, color);
         this.scales = scales;
     }
-
+	
     // oh my god
     // TODO: can the tag check be implemented into the entities base attribute modifier somehow?
     public static float getSleepResistance(@Nullable MobEffectInstance sleepEffect, LivingEntity entity) {
 
         var type = entity.getType();
-
+        
         if (sleepEffect == null || type.is(PastelEntityTypeTags.SOULLESS))
             return Float.MAX_VALUE;
 
         float scaling;
-        if (entity instanceof Player player && player.level()
-                                                     .isClientSide()) {
-            scaling = (float) MiscPlayerData.get(player)
-                                            .getLastSyncedSleepPotency();
-        } else {
+        if (entity instanceof Player player && player.level().isClientSide()) {
+            scaling = (float) MiscPlayerData.get(player).getLastSyncedSleepPotency();
+        }
+        else {
             scaling = (float) entity.getAttributeValue(PastelEntityAttributes.MENTAL_PRESENCE);
         }
 
@@ -51,28 +50,27 @@ public class SleepStatusEffect extends MobEffect {
         } else if (isResistedBy(entity)) {
             scaling *= 10F;
         }
-
+        
         return scaling;
     }
-
+    
     // TODO: can the tag check be implemented into the entities base attribute modifier somehow?
     public static boolean isResistedBy(LivingEntity entity) {
         if (entity.hasEffect(PastelMobEffects.FRENZY))
             return true;
-
+        
         var type = entity.getType();
         if (type.is(PastelEntityTypeTags.SLEEP_WEAK))
             return false;
-
+        
         return type.is(PastelEntityTypeTags.SLEEP_IMMUNEISH) || isConstruct(type);
     }
-
-    /**
+	
+	/**
      * @return -1 = false
      */
     public static float getGeneralSleepResistanceIfEntityHasSoporificEffect(LivingEntity entity) {
-        if (!isConstruct(entity.getType()) && PastelMobEffectTags.hasEffectWithTag(
-            entity, PastelMobEffectTags.SOPORIFIC)) {
+        if (!isConstruct(entity.getType()) && PastelMobEffectTags.hasEffectWithTag(entity, PastelMobEffectTags.SOPORIFIC)) {
             return getSleepResistance(entity.getEffect(getStrongestSleepEffect(entity)), entity);
         }
         return -1F;
@@ -82,9 +80,9 @@ public class SleepStatusEffect extends MobEffect {
      * @return -1 = false
      */
     public static float getSleepScaling(LivingEntity entity) {
-        if (entity == null) return -1;
+		if (entity == null) return -1;
         var potency = getGeneralSleepResistanceIfEntityHasSoporificEffect(entity);
-
+        
         if (potency == -1 || potency >= 1)
             return -1;
 
@@ -104,22 +102,24 @@ public class SleepStatusEffect extends MobEffect {
     }
 
     private static boolean isConstruct(EntityType<?> type) {
-        return type.is(PastelEntityTypeTags.SOULLESS);
-    }
-
+		return type.is(PastelEntityTypeTags.SOULLESS);
+	}
+    
     public static @Nullable Holder<MobEffect> getStrongestSleepEffect(LivingEntity entity) {
         if (entity.hasEffect(PastelMobEffects.FATAL_SLUMBER)) {
             return PastelMobEffects.FATAL_SLUMBER;
-        } else if (entity.hasEffect(PastelMobEffects.ETERNAL_SLUMBER)) {
+        }
+        else if (entity.hasEffect(PastelMobEffects.ETERNAL_SLUMBER)) {
             return PastelMobEffects.ETERNAL_SLUMBER;
-        } else if (entity.hasEffect(PastelMobEffects.SOMNOLENCE)) {
+        }
+        else if (entity.hasEffect(PastelMobEffects.SOMNOLENCE)) {
             return PastelMobEffects.SOMNOLENCE;
         }
         return null;
     }
 
     // Sleep effects don't scale except for uh, calming ufck
-    //TODO verify that you can't more than one level of eternal or fatal slumber
+	//TODO verify that you can't more than one level of eternal or fatal slumber
 //    @Override
 //    public double adjustModifierAmount(int amplifier, EntityAttributeModifier modifier) {
 //        if (scales)

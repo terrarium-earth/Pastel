@@ -17,10 +17,7 @@ public class SeatEntityRenderer extends EntityRenderer<SeatEntity> {
     }
 
     @Override
-    public void render(
-        SeatEntity entity, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
-        int light
-    ) {
+    public void render(SeatEntity entity, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light) {
     }
 
     @Override

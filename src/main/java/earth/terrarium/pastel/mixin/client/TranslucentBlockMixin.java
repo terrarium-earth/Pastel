@@ -16,14 +16,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(HalfTransparentBlock.class)
 public abstract class TranslucentBlockMixin {
 
-    @Inject(method = "skipRendering", at = @At("HEAD"), cancellable = true)
-    public void dontRenderVanillaPlayerOnlyGlass(
-        BlockState state, BlockState stateFrom, Direction direction,
-        CallbackInfoReturnable<Boolean> callbackInfoReturnable
-    ) {
-        if (state.is(Blocks.GLASS) && stateFrom.is(PastelBlocks.SEMI_PERMEABLE_GLASS.get())
-            || state.is(Blocks.TINTED_GLASS) && stateFrom.is(PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS.get()))
-            callbackInfoReturnable.setReturnValue(true);
-    }
-
+	@Inject(method = "skipRendering", at = @At("HEAD"), cancellable = true)
+	public void dontRenderVanillaPlayerOnlyGlass(BlockState state, BlockState stateFrom, Direction direction, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+		if (state.is(Blocks.GLASS) && stateFrom.is(PastelBlocks.SEMI_PERMEABLE_GLASS.get())
+				|| state.is(Blocks.TINTED_GLASS) && stateFrom.is(PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS.get()))
+			callbackInfoReturnable.setReturnValue(true);
+	}
+	
 }

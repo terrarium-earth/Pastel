@@ -12,39 +12,35 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public class StatusEffectDrinkItem extends DrinkItem {
-
-    public StatusEffectDrinkItem(Properties settings) {
-        super(settings);
-    }
-
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
-        Player playerEntity = user instanceof Player ? (Player) user : null;
-        if (playerEntity instanceof ServerPlayer) {
-            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) playerEntity, stack);
-        }
-
-        if (!world.isClientSide) {
-            PotionContents potionContentsComponent = stack.getOrDefault(
-                DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
-            potionContentsComponent.forEachEffect((effect) -> {
-                if ((effect.getEffect()
-                           .value()).isInstantenous()) {
-                    (effect.getEffect()
-                           .value()).applyInstantenousEffect(
-                        playerEntity, playerEntity, user, effect.getAmplifier(), 1.0);
-                } else {
-                    user.addEffect(effect);
-                }
-            });
-        }
-
-        if (playerEntity != null) {
-            playerEntity.awardStat(Stats.ITEM_USED.get(this));
-        }
-
-        user.gameEvent(GameEvent.DRINK);
-        return super.finishUsingItem(stack, world, user);
-    }
-
+	
+	public StatusEffectDrinkItem(Properties settings) {
+		super(settings);
+	}
+	
+	@Override
+	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
+		Player playerEntity = user instanceof Player ? (Player) user : null;
+		if (playerEntity instanceof ServerPlayer) {
+			CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) playerEntity, stack);
+		}
+		
+		if (!world.isClientSide) {
+			PotionContents potionContentsComponent = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+			potionContentsComponent.forEachEffect((effect) -> {
+				if ((effect.getEffect().value()).isInstantenous()) {
+					(effect.getEffect().value()).applyInstantenousEffect(playerEntity, playerEntity, user, effect.getAmplifier(), 1.0);
+				} else {
+					user.addEffect(effect);
+				}
+			});
+		}
+		
+		if (playerEntity != null) {
+			playerEntity.awardStat(Stats.ITEM_USED.get(this));
+		}
+		
+		user.gameEvent(GameEvent.DRINK);
+		return super.finishUsingItem(stack, world, user);
+	}
+	
 }

@@ -8,15 +8,15 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ProjectorBlockEntity extends BlockEntity {
 
-    final ResourceLocation texture;
-    final float heightOffset, bobMultiplier, scaling;
+	final ResourceLocation texture;
+	final float heightOffset, bobMultiplier, scaling;
 
-    public ProjectorBlockEntity(BlockPos pos, BlockState state) {
-        super(PastelBlockEntities.PROJECTOR.get(), pos, state);
-        var projectorBlock = (ProjectorBlock) state.getBlock();
-        heightOffset = projectorBlock.heightOffset;
-        bobMultiplier = projectorBlock.bobMultiplier;
-        texture = projectorBlock.texture;
-        scaling = projectorBlock.scaling;
-    }
+	public ProjectorBlockEntity(BlockPos pos, BlockState state) {
+		super(PastelBlockEntities.PROJECTOR.get(), pos, state);
+		var projectorBlock = (ProjectorBlock) state.getBlock();
+		heightOffset = projectorBlock.heightOffset;
+		bobMultiplier = projectorBlock.bobMultiplier;
+		texture = projectorBlock.texture;
+		scaling = projectorBlock.scaling;
+	}
 }

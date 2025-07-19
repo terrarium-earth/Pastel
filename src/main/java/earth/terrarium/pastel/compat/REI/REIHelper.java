@@ -14,22 +14,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class REIHelper {
-
-    public static List<EntryIngredient> toEntryIngredients(List<IngredientStack> ingredientStacks) {
-        return ingredientStacks.stream()
-                               .map(REIHelper::ofIngredientStack)
-                               .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public static EntryIngredient ofIngredientStack(@NotNull IngredientStack ingredientStack) {
-        return EntryIngredients.ofItemStacks(ingredientStack.getItems()
-                                                            .toList());
-    }
-
-    public static EntryIngredient ofFluidIngredient(FluidIngredient fluidIngredient) {
-        var fluids = Arrays.stream(fluidIngredient.getStacks())
-                           .map(stack -> EntryStacks.of(stack.getFluid(), stack.getAmount()));
-        return EntryIngredient.of(fluids.toList());
-    }
-
+	
+	public static List<EntryIngredient> toEntryIngredients(List<IngredientStack> ingredientStacks) {
+		return ingredientStacks.stream().map(REIHelper::ofIngredientStack).collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public static EntryIngredient ofIngredientStack(@NotNull IngredientStack ingredientStack) {
+		return EntryIngredients.ofItemStacks(ingredientStack.getItems().toList());
+	}
+	
+	public static EntryIngredient ofFluidIngredient(FluidIngredient fluidIngredient) {
+		var fluids = Arrays.stream(fluidIngredient.getStacks()).map(stack -> EntryStacks.of(stack.getFluid(), stack.getAmount()));
+		return EntryIngredient.of(fluids.toList());
+	}
+	
 }

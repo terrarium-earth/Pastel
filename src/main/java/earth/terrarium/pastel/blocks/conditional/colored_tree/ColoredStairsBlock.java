@@ -11,38 +11,32 @@ import java.util.Map;
 
 public class ColoredStairsBlock extends StairBlock {
 
-    public static final MapCodec<ColoredStairsBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                                                                                                 BlockState.CODEC.fieldOf("base_state")
-                                                                                                                                 .forGetter(b -> b.baseState),
-                                                                                                                 propertiesCodec(),
-                                                                                                                 InkColor.CODEC.fieldOf("color")
-                                                                                                                               .forGetter(ColoredStairsBlock::getColor)
-                                                                                                             )
-                                                                                                             .apply(
-                                                                                                                 instance,
-                                                                                                                 ColoredStairsBlock::new
-                                                                                                             ));
+	public static final MapCodec<ColoredStairsBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			BlockState.CODEC.fieldOf("base_state").forGetter(b -> b.baseState),
+			propertiesCodec(),
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredStairsBlock::getColor)
+	).apply(instance, ColoredStairsBlock::new));
+	
+	private static final Map<InkColor, ColoredStairsBlock> BLOCKS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredStairsBlock(BlockState baseBlockState, Properties settings, InkColor color) {
+		super(baseBlockState, settings);
+		this.color = color;
+		BLOCKS.put(color, this);
+	}
 
-    private static final Map<InkColor, ColoredStairsBlock> BLOCKS = new Object2ObjectArrayMap<>();
-    protected final InkColor color;
-
-    public ColoredStairsBlock(BlockState baseBlockState, Properties settings, InkColor color) {
-        super(baseBlockState, settings);
-        this.color = color;
-        BLOCKS.put(color, this);
-    }
-
-    @Override
-    public MapCodec<? extends ColoredStairsBlock> codec() {
-        return CODEC;
-    }
-
-    public InkColor getColor() {
-        return this.color;
-    }
-
-    public static ColoredStairsBlock byColor(InkColor color) {
-        return BLOCKS.get(color);
-    }
-
+	@Override
+	public MapCodec<? extends ColoredStairsBlock> codec() {
+		return CODEC;
+	}
+	
+	public InkColor getColor() {
+		return this.color;
+	}
+	
+	public static ColoredStairsBlock byColor(InkColor color) {
+		return BLOCKS.get(color);
+	}
+	
 }

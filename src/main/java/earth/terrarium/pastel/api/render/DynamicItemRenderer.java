@@ -15,9 +15,9 @@ import net.minecraft.world.item.ItemStack;
 @OnlyIn(Dist.CLIENT)
 @FunctionalInterface
 public interface DynamicItemRenderer {
-
+    
     Object2ObjectArrayMap<Item, DynamicItemRenderer> RENDERERS = new Object2ObjectArrayMap<>();
-
+    
     /**
      * Renders an item stack.
      *
@@ -30,9 +30,6 @@ public interface DynamicItemRenderer {
      * @param light           packed lightmap coordinates
      * @param overlay         the overlay UV passed to {@link com.mojang.blaze3d.vertex.VertexConsumer#setOverlay(int)}
      */
-    void render(
-        ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices,
-        MultiBufferSource vertexConsumers, int light, int overlay
-    );
-
+    void render(ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay);
+    
 }

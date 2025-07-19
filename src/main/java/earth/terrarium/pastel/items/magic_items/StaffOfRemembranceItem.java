@@ -39,104 +39,87 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class StaffOfRemembranceItem extends Item implements InkPowered, PrioritizedEntityInteraction {
-
-    public static final InkColor USED_COLOR = InkColors.LIGHT_GRAY;
-    public static final InkCost TURN_NEUTRAL_TO_MEMORY_COST = new InkCost(USED_COLOR, 1000);
-    public static final InkCost TURN_HOSTILE_TO_MEMORY_COST = new InkCost(USED_COLOR, 10000);
-
-    public StaffOfRemembranceItem(Properties settings) {
-        super(settings);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        super.appendHoverText(stack, context, tooltip, type);
-
-        tooltip.add(Component.translatable("item.pastel.staff_of_remembrance.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        addInkPoweredTooltip(tooltip);
-    }
-
-    @Override
-    public InteractionResult interactLivingEntity(
-        ItemStack stack, Player user, LivingEntity entity, InteractionHand hand) {
-        Level world = user.level();
-        Vec3 pos = entity.position();
-
-        if (!GenericClaimModsCompat.canInteract(world, entity, user)) {
-            return InteractionResult.FAIL;
-        }
-
-        if (!world.isClientSide && entity instanceof Mob mobEntity) {
-            if (turnEntityToMemory(user, mobEntity)) {
-                PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                    (ServerLevel) world, entity.position(), ColoredSparkleRisingParticleEffect.LIGHT_GRAY, 10,
-                    Vec3.ZERO, new Vec3(0.2, 0.2, 0.2)
-                );
-                PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-                    (ServerLevel) world, entity.position(), ColoredExplosionParticleEffect.LIGHT_GRAY, 1, Vec3.ZERO);
-                world.playSound(
-                    null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 1.0F,
-                    0.8F + world.random.nextFloat() * 0.4F
-                );
-            } else {
-                world.playSound(
-                    null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F,
-                    0.8F + world.random.nextFloat() * 0.4F
-                );
-            }
-        }
-        return InteractionResult.sidedSuccess(world.isClientSide);
-    }
-
-    private boolean turnEntityToMemory(Player user, Mob entity) {
-        if (!entity.isAlive() || entity.isRemoved() || entity.isVehicle()) {
-            return false;
-        }
-        if (entity.getType()
-                  .is(PastelEntityTypeTags.STAFF_OF_REMEMBRANCE_BLACKLISTED)) {
-            return false;
-        }
-
-        MobCategory spawnGroup = entity.getType()
-                                       .getCategory();
-        if (spawnGroup == MobCategory.MONSTER && (user.isCreative() || DatabankUtils.hasAdvancement(
-            user, PastelAdvancements.HOSTILE_MEMORIZING))) {
-            if (!InkPowered.tryDrainEnergy(user, TURN_HOSTILE_TO_MEMORY_COST)) {
-                return false;
-            }
-        } else if (!InkPowered.tryDrainEnergy(user, TURN_NEUTRAL_TO_MEMORY_COST)) {
-            return false;
-        }
-
-        entity.dropLeash(true, true);
-        entity.playAmbientSound();
-        entity.spawnAnim();
-
-        ItemStack memoryStack = MemoryItem.getMemoryForEntity(entity);
-        MemoryItem.setTicksToManifest(memoryStack, 1);
-        MemoryItem.setSpawnAsAdult(memoryStack, true);
-
-        Vec3 entityPos = entity.position();
-        ItemEntity itemEntity = new ItemEntity(
-            entity.level(), entityPos.x(), entityPos.y(), entityPos.z(), memoryStack);
-        itemEntity.setDeltaMovement(new Vec3(0.0, 0.15, 0.0));
-        entity.level()
-              .addFreshEntity(itemEntity);
-        entity.remove(Entity.RemovalReason.DISCARDED);
-
-        return true;
-    }
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.SPEAR;
-    }
-
-    @Override
-    public List<InkColor> getUsedColors() {
-        return List.of(USED_COLOR);
-    }
-
+	
+	public static final InkColor USED_COLOR = InkColors.LIGHT_GRAY;
+	public static final InkCost TURN_NEUTRAL_TO_MEMORY_COST = new InkCost(USED_COLOR, 1000);
+	public static final InkCost TURN_HOSTILE_TO_MEMORY_COST = new InkCost(USED_COLOR, 10000);
+	
+	public StaffOfRemembranceItem(Properties settings) {
+		super(settings);
+	}
+	
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		
+		tooltip.add(Component.translatable("item.pastel.staff_of_remembrance.tooltip").withStyle(ChatFormatting.GRAY));
+		addInkPoweredTooltip(tooltip);
+	}
+	
+	@Override
+	public InteractionResult interactLivingEntity(ItemStack stack, Player user, LivingEntity entity, InteractionHand hand) {
+		Level world = user.level();
+		Vec3 pos = entity.position();
+		
+		if (!GenericClaimModsCompat.canInteract(world, entity, user)) {
+			return InteractionResult.FAIL;
+		}
+		
+		if (!world.isClientSide && entity instanceof Mob mobEntity) {
+			if (turnEntityToMemory(user, mobEntity)) {
+				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world, entity.position(), ColoredSparkleRisingParticleEffect.LIGHT_GRAY, 10, Vec3.ZERO, new Vec3(0.2, 0.2, 0.2));
+				PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerLevel) world, entity.position(), ColoredExplosionParticleEffect.LIGHT_GRAY, 1, Vec3.ZERO);
+				world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+			} else {
+				world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+			}
+		}
+		return InteractionResult.sidedSuccess(world.isClientSide);
+	}
+	
+	private boolean turnEntityToMemory(Player user, Mob entity) {
+		if (!entity.isAlive() || entity.isRemoved() || entity.isVehicle()) {
+			return false;
+		}
+		if (entity.getType().is(PastelEntityTypeTags.STAFF_OF_REMEMBRANCE_BLACKLISTED)) {
+			return false;
+		}
+		
+		MobCategory spawnGroup = entity.getType().getCategory();
+		if (spawnGroup == MobCategory.MONSTER && (user.isCreative() || DatabankUtils.hasAdvancement(user, PastelAdvancements.HOSTILE_MEMORIZING))) {
+			if (!InkPowered.tryDrainEnergy(user, TURN_HOSTILE_TO_MEMORY_COST)) {
+				return false;
+			}
+		} else if (!InkPowered.tryDrainEnergy(user, TURN_NEUTRAL_TO_MEMORY_COST)) {
+			return false;
+		}
+		
+		entity.dropLeash(true, true);
+		entity.playAmbientSound();
+		entity.spawnAnim();
+		
+		ItemStack memoryStack = MemoryItem.getMemoryForEntity(entity);
+		MemoryItem.setTicksToManifest(memoryStack, 1);
+		MemoryItem.setSpawnAsAdult(memoryStack, true);
+		
+		Vec3 entityPos = entity.position();
+		ItemEntity itemEntity = new ItemEntity(entity.level(), entityPos.x(), entityPos.y(), entityPos.z(), memoryStack);
+		itemEntity.setDeltaMovement(new Vec3(0.0, 0.15, 0.0));
+		entity.level().addFreshEntity(itemEntity);
+		entity.remove(Entity.RemovalReason.DISCARDED);
+		
+		return true;
+	}
+	
+	@Override
+	public UseAnim getUseAnimation(ItemStack stack) {
+		return UseAnim.SPEAR;
+	}
+	
+	@Override
+	public List<InkColor> getUsedColors() {
+		return List.of(USED_COLOR);
+	}
+	
 }

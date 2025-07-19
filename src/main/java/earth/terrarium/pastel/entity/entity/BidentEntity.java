@@ -7,18 +7,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class BidentEntity extends BidentBaseEntity {
-
-    public BidentEntity(Level world) {
-        this(PastelEntityTypes.BIDENT.get(), world);
-    }
-
-    public BidentEntity(EntityType<? extends ThrownTrident> entityType, Level world) {
-        super(entityType, world);
-    }
-
-    @Override
-    protected void onHitBlock(BlockHitResult blockHitResult) {
-        super.onHitBlock(blockHitResult);
-    }
-
+	
+	public BidentEntity(Level world) {
+		this(PastelEntityTypes.BIDENT.get(), world);
+	}
+	
+	public BidentEntity(EntityType<? extends ThrownTrident> entityType, Level world) {
+		super(entityType, world);
+	}
+	
+	@Override
+	protected void onHitBlock(BlockHitResult blockHitResult) {
+		super.onHitBlock(blockHitResult);
+	}
+    
 }

@@ -15,12 +15,11 @@ public class CushionedCarpetBlock extends CarpetBlock {
         super(settings);
     }
 
-    @Override
-    public MapCodec<? extends CushionedCarpetBlock> codec() {
-        return CODEC;
-    }
+	@Override
+	public MapCodec<? extends CushionedCarpetBlock> codec() {
+		return CODEC;
+	}
 
     @Override
-    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-    }
+    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {}
 }

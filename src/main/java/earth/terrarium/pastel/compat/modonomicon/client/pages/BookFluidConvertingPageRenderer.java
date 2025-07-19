@@ -11,8 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 
-public abstract class BookFluidConvertingPageRenderer<R extends GatedRecipe<?>, T extends BookGatedRecipePage<R>>
-    extends BookGatedRecipePageRenderer<R, T> {
+public abstract class BookFluidConvertingPageRenderer<R extends GatedRecipe<?>, T extends BookGatedRecipePage<R>> extends BookGatedRecipePageRenderer<R, T> {
 
     public BookFluidConvertingPageRenderer(T page) {
         super(page);
@@ -24,10 +23,7 @@ public abstract class BookFluidConvertingPageRenderer<R extends GatedRecipe<?>, 
     }
 
     @Override
-    protected void drawRecipe(
-        GuiGraphics drawContext, RecipeHolder<R> recipeEntry, int recipeX, int recipeY, int mouseX, int mouseY,
-        boolean second
-    ) {
+    protected void drawRecipe(GuiGraphics drawContext, RecipeHolder<R> recipeEntry, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
         R recipe = recipeEntry.value();
         Level world = Minecraft.getInstance().level;
         if (world == null) return;
@@ -45,8 +41,7 @@ public abstract class BookFluidConvertingPageRenderer<R extends GatedRecipe<?>, 
         parentScreen.renderIngredient(drawContext, recipeX + 23, recipeY + 7, mouseX, mouseY, ingredients.getFirst());
 
         // the output
-        parentScreen.renderItemStack(
-            drawContext, recipeX + 75, recipeY + 7, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
+        parentScreen.renderItemStack(drawContext, recipeX + 75, recipeY + 7, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
     }
 
     public abstract ResourceLocation getBackgroundTexture();

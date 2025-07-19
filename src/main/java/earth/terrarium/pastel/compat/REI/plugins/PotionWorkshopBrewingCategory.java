@@ -10,20 +10,20 @@ import net.minecraft.resources.ResourceLocation;
 
 @OnlyIn(Dist.CLIENT)
 public class PotionWorkshopBrewingCategory extends PotionWorkshopCategory<PotionWorkshopBrewingDisplay> {
-
-    @Override
-    public CategoryIdentifier<PotionWorkshopBrewingDisplay> getCategoryIdentifier() {
-        return PastelPlugins.POTION_WORKSHOP_BREWING;
-    }
-
-    @Override
-    public ResourceLocation getIdentifier() {
-        return PastelCommon.locate("potion_workshop_brewing");
-    }
-
-    @Override
-    public Component getTitle() {
-        return Component.translatable("container.pastel.rei.potion_workshop_brewing.title");
-    }
-
+	
+	@Override
+	public CategoryIdentifier<PotionWorkshopBrewingDisplay> getCategoryIdentifier() {
+		return PastelPlugins.POTION_WORKSHOP_BREWING;
+	}
+	
+	@Override
+	public ResourceLocation getIdentifier() {
+		return PastelCommon.locate("potion_workshop_brewing");
+	}
+	
+	@Override
+	public Component getTitle() {
+		return Component.translatable("container.pastel.rei.potion_workshop_brewing.title");
+	}
+	
 }

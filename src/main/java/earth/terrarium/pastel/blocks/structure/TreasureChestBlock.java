@@ -19,47 +19,45 @@ import org.jetbrains.annotations.Nullable;
 
 public class TreasureChestBlock extends PastelChestBlock {
 
-    public static final MapCodec<TreasureChestBlock> CODEC = simpleCodec(TreasureChestBlock::new);
+	public static final MapCodec<TreasureChestBlock> CODEC = simpleCodec(TreasureChestBlock::new);
 
-    public TreasureChestBlock(Properties settings) {
-        super(settings);
-    }
+	public TreasureChestBlock(Properties settings) {
+		super(settings);
+	}
 
-    @Override
-    public MapCodec<? extends TreasureChestBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    public void openScreen(Level world, BlockPos pos, Player player) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof TreasureChestBlockEntity treasureChestBlockEntity) {
-            if (!isChestBlocked(world, pos)) {
-                if (treasureChestBlockEntity.canOpen(player)) {
-                    player.openMenu(treasureChestBlockEntity);
-                } else {
-                    world.playSound(null, pos, SoundEvents.CHEST_LOCKED, SoundSource.PLAYERS, 1.0F, 1.0F);
-                }
-            }
-        }
-    }
-
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new TreasureChestBlockEntity(pos, state);
-    }
-
-    @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? createTickerHelper(
-            type, PastelBlockEntities.PRESERVATION_CHEST.get(), TreasureChestBlockEntity::clientTick) : null;
-    }
-
-    @Override
-    public Material getTextureLocation() {
-        return new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/preservation_chest"));
-    }
-
+	@Override
+	public MapCodec<? extends TreasureChestBlock> codec() {
+		return CODEC;
+	}
+	
+	@Override
+	public void openScreen(Level world, BlockPos pos, Player player) {
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (blockEntity instanceof TreasureChestBlockEntity treasureChestBlockEntity) {
+			if (!isChestBlocked(world, pos)) {
+				if (treasureChestBlockEntity.canOpen(player)) {
+					player.openMenu(treasureChestBlockEntity);
+				} else {
+					world.playSound(null, pos, SoundEvents.CHEST_LOCKED, SoundSource.PLAYERS, 1.0F, 1.0F);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new TreasureChestBlockEntity(pos, state);
+	}
+	
+	@Override
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+		return world.isClientSide ? createTickerHelper(type, PastelBlockEntities.PRESERVATION_CHEST.get(), TreasureChestBlockEntity::clientTick) : null;
+	}
+	
+	@Override
+	public Material getTextureLocation() {
+		return new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/preservation_chest"));
+	}
+	
 }

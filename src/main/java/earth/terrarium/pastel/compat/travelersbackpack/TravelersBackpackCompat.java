@@ -28,94 +28,79 @@ import java.util.Random;
 
 public class TravelersBackpackCompat extends PastelIntegrationPacks.ModIntegrationPack {
 
-    public abstract static class PastelEffectFluid extends EffectFluid {
+	public abstract static class PastelEffectFluid extends EffectFluid {
 
-        public PastelEffectFluid(String id, Fluid fluid) {
-            super(id, fluid, 81000);
-        }
+		public PastelEffectFluid(String id, Fluid fluid) {
+			super(id, fluid, 81000);
+		}
 
-        public boolean canExecuteEffect(FluidStack stack, Level world, Entity entity) {
-            return stack.getAmount() >= this.amountRequired;
-        }
+		public boolean canExecuteEffect(FluidStack stack, Level world, Entity entity) {
+			return stack.getAmount() >= this.amountRequired;
+		}
 
-    }
+	}
 
-    @Override
-    public void register() {
-        EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid(
-            "pastel:humus", PastelFluids.HUMUS.get()
-                                              .getSource()
-        ) {
-            @Override
-            public void affectDrinker(FluidStack fluidVariantWrapper, Level world, Entity entity) {
-                if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200));
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 400, 2));
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600, 3));
-                }
-            }
+	@Override
+	public void register() {
+		EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid("pastel:humus", PastelFluids.HUMUS.get().getSource()) {
+			@Override
+			public void affectDrinker(FluidStack fluidVariantWrapper, Level world, Entity entity) {
+				if (entity instanceof LivingEntity livingEntity) {
+					livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200));
+					livingEntity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 400, 2));
+					livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600, 3));
+				}
+			}
 
-        });
+		});
 
-        EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid(
-            "pastel:liquid_crystal", PastelFluids.LIQUID_CRYSTAL.get()
-                                                                .getSource()
-        ) {
-            @Override
-            public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
-                if (entity instanceof Player player) {
-                    player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 400, 1));
-                }
-            }
-        });
+		EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid("pastel:liquid_crystal", PastelFluids.LIQUID_CRYSTAL.get().getSource()) {
+			@Override
+			public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
+				if (entity instanceof Player player) {
+					player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 400, 1));
+				}
+			}
+		});
 
-        EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid(
-            "pastel:midnight_solution", PastelFluids.MIDNIGHT_SOLUTION.get()
-                                                                      .getSource()
-        ) {
-            @Override
-            public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
-                if (entity instanceof Player player) {
-                    player.giveExperiencePoints(-20);
+		EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid("pastel:midnight_solution", PastelFluids.MIDNIGHT_SOLUTION.get().getSource()) {
+			@Override
+			public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
+				if (entity instanceof Player player) {
+					player.giveExperiencePoints(-20);
 
-                    // disenchant random enchanted item
-                    List<ItemStack> equipment = new ArrayList<>();
-                    player.getAllSlots()
-                          .forEach(equipment::add);
-                    Collections.shuffle(equipment);
+					// disenchant random enchanted item
+					List<ItemStack> equipment = new ArrayList<>();
+					player.getAllSlots().forEach(equipment::add);
+					Collections.shuffle(equipment);
 
-                    for (ItemStack equip : equipment) {
-                        ItemEnchantments enchants = EnchantmentHelper.getEnchantmentsForCrafting(equip);
-                        if (!enchants.isEmpty()) {
-                            var enchantments = enchants.keySet();
-                            var enchantment = enchantments.stream()
-                                                          .toList()
-                                                          .get(new Random().nextInt(enchantments.size()));
-                            Ench.removeEnchantments(equip, enchantment);
-                        }
-                    }
-                }
-            }
-        });
+					for (ItemStack equip : equipment) {
+						ItemEnchantments enchants = EnchantmentHelper.getEnchantmentsForCrafting(equip);
+						if (!enchants.isEmpty()) {
+							var enchantments = enchants.keySet();
+							var enchantment = enchantments.stream().toList().get(new Random().nextInt(enchantments.size()));
+							Ench.removeEnchantments(equip, enchantment);
+						}
+					}
+				}
+			}
+		});
 
-        EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid(
-            "pastel:dragonrot", PastelFluids.DRAGONROT.get()
-                                                      .getSource()
-        ) {
-            @Override
-            public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
-                if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.LIFE_DRAIN, 600, 3));
-                    livingEntity.hurt(PastelDamageTypes.dragonrot(world), 1000); // 💀
-                }
-            }
-        });
-    }
+		EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid("pastel:dragonrot", PastelFluids.DRAGONROT.get().getSource()) {
+			@Override
+			public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
+				if (entity instanceof LivingEntity livingEntity) {
+					livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.LIFE_DRAIN, 600, 3));
+					livingEntity.hurt(PastelDamageTypes.dragonrot(world), 1000); // 💀
+				}
+			}
+		});
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    @Override
-    public void registerClient() {
+	@OnlyIn(Dist.CLIENT)
+	@Override
+	public void registerClient() {
 
-    }
+	}
 
 }

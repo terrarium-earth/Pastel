@@ -20,10 +20,7 @@ public class BloodflyParticle extends TextureSheetParticle {
     private int switchTicks = 10;
     private float r, g, b;
 
-    protected BloodflyParticle(
-        ClientLevel clientWorld, double d, double e, double f, double velocityX, double velocityY, double velocityZ,
-        float scaleMultiplier, SpriteSet spriteProvider
-    ) {
+    protected BloodflyParticle(ClientLevel clientWorld, double d, double e, double f, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteSet spriteProvider) {
         super(clientWorld, d, e, f, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
         this.setSpriteFromAge(spriteProvider);
@@ -41,11 +38,13 @@ public class BloodflyParticle extends TextureSheetParticle {
             r = 255;
             g = Mth.lerpInt(random.nextFloat(), 110, 175);
             b = Mth.lerpInt(random.nextFloat(), 60, 100);
-        } else if (dist < 0.95F) {
+        }
+        else if (dist < 0.95F) {
             r = 170;
             g = Mth.lerpInt(random.nextFloat(), 200, 255);
             b = Mth.lerpInt(random.nextFloat(), 235, 255);
-        } else {
+        }
+        else {
             r = 255;
             g = 245;
             b = Mth.lerpInt(random.nextFloat(), 235, 250);
@@ -55,7 +54,7 @@ public class BloodflyParticle extends TextureSheetParticle {
         r /= 255F;
         g /= 255F;
         b /= 255F;
-
+        
         this.quadSize = 0.01F + random.nextFloat() * 0.325F;
         quadSize *= scaleMultiplier;
         setColor(r, g, b);
@@ -76,16 +75,15 @@ public class BloodflyParticle extends TextureSheetParticle {
         if (switchTicks < 10)
             switchTicks++;
 
-        var water = !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z))
-                               .isEmpty();
+        var water = !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).isEmpty();
 
         if (age % 11 == 0 && random.nextBoolean()) {
             switchTicks = 0;
             gravity = random.nextFloat() * 0.04F - 0.02F;
             lastVelX = xd;
             lastVelZ = zd;
-            xd = random.nextFloat() * 0.05F - 0.025F;
-            zd = random.nextFloat() * 0.05F - 0.025F;
+            xd = random.nextFloat()  * 0.05F - 0.025F;
+            zd = random.nextFloat()  * 0.05F - 0.025F;
         }
 
         var flutter = Math.sin(age / 8F) / 35F;
@@ -99,7 +97,7 @@ public class BloodflyParticle extends TextureSheetParticle {
             gravity = random.nextFloat() * 0.03F;
         }
 
-        this.yd -= 0.04 * (double) this.gravity;
+        this.yd -= 0.04 * (double)this.gravity;
         this.move(curVelX, this.yd + flutter, curVelZ);
         if (this.speedUpWhenYMotionIsBlocked && this.y == this.yo) {
             this.xd *= 1.1;
@@ -150,10 +148,7 @@ public class BloodflyParticle extends TextureSheetParticle {
             this.spriteProvider = spriteProvider;
         }
 
-        public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
-        ) {
+        public Particle createParticle(SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
             return new BloodflyParticle(clientWorld, d, e, f, 0.0, 0.0, 0.0, 1.0F, this.spriteProvider);
         }
     }

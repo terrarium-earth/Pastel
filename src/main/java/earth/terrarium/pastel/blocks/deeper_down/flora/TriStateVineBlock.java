@@ -40,8 +40,7 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
     private final int minHeight;
     private final float growthTickChance, spreadChance, overgrowth;
 
-    public TriStateVineBlock(
-        Properties settings, int minHeight, float growthChance, float spreadChance, float overgrowth) {
+    public TriStateVineBlock(Properties settings, int minHeight, float growthChance, float spreadChance, float overgrowth) {
         super(settings);
         registerDefaultState(defaultBlockState().setValue(LIFE_STAGE, LifeStage.GROWING));
         this.minHeight = minHeight;
@@ -51,13 +50,10 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
     }
 
     @Override
-    public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-        BlockHitResult hit
-    ) {
+    public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         var reference = BlockReference.of(state, pos);
         var creative = player.getAbilities().instabuild;
-
+        
         if (handStack.is(Tags.Items.TOOLS_SHEAR)) {
             if (reference.getProperty(LIFE_STAGE) != LifeStage.GROWING)
                 return ItemInteractionResult.FAIL;
@@ -67,14 +63,12 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
 
             reference.setProperty(LIFE_STAGE, LifeStage.MATURE);
             reference.update(world);
-
-            world.playSound(
-                null, pos, SoundEvents.BEEHIVE_SHEAR, SoundSource.BLOCKS, 1.0F,
-                Mth.randomBetween(world.random, 0.6F, 1.0F)
-            ); // TODO: custom sound event because subtitles
+            
+            world.playSound(null, pos, SoundEvents.BEEHIVE_SHEAR, SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.6F, 1.0F)); // TODO: custom sound event because subtitles
             world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, reference.getState()));
             return ItemInteractionResult.sidedSuccess(world.isClientSide());
-        } else if (handStack.is(PastelItems.MOONSTRUCK_NECTAR.get())) {
+        }
+        else if (handStack.is(PastelItems.MOONSTRUCK_NECTAR.get())) {
             if (reference.getProperty(LIFE_STAGE) != LifeStage.MATURE)
                 return ItemInteractionResult.FAIL;
 
@@ -83,11 +77,8 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
 
             reference.setProperty(LIFE_STAGE, LifeStage.GROWING);
             reference.update(world);
-
-            world.playSound(
-                null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F,
-                Mth.randomBetween(world.random, 0.6F, 1.0F)
-            ); // TODO: custom sound event because subtitles
+            
+            world.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.6F, 1.0F)); // TODO: custom sound event because subtitles
             world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, reference.getState()));
             return ItemInteractionResult.sidedSuccess(world.isClientSide());
         }
@@ -119,8 +110,7 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
     abstract boolean hasGrowthActions();
 
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-    }
+    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {}
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
@@ -137,7 +127,8 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
 
         if (hasGrowthActions() && random.nextBoolean() || stage != LifeStage.GROWING) {
             performBonemeal(world, random, pos, state);
-        } else {
+        }
+        else {
             if (!isBonemealSuccess(world, random, pos, state) || random.nextFloat() >= spreadChance)
                 return;
 
@@ -211,16 +202,12 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
 
     private void scheduleBreakCheck(LevelAccessor world, BlockPos pos) {
         var underside = pos.below();
-        if (world.getBlockState(underside)
-                 .is(this))
+        if (world.getBlockState(underside).is(this))
             world.scheduleTick(underside, this, 1);
     }
 
     @Override
-    public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
-        BlockPos neighborPos
-    ) {
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
         if (!canSurvive(state, world, pos)) {
             world.scheduleTick(pos, this, 1);
         }
@@ -279,7 +266,6 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         Vec3 vec3d = state.getOffset(world, pos);
-        return super.getShape(state, world, pos, context)
-                    .move(vec3d.x, vec3d.y, vec3d.z);
+        return super.getShape(state, world, pos, context).move(vec3d.x, vec3d.y, vec3d.z);
     }
 }
