@@ -53,12 +53,15 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
 		hideBlockWithItem(PastelBlocks.RADIATING_ENDER.get(), Blocks.COBBLESTONE, PastelAdvancements.REVEAL_RADIATING_ENDER);
 		hideBlockWithItem(PastelBlocks.FOUR_LEAF_CLOVER.get(), PastelBlocks.CLOVER.get(), PastelAdvancements.REVEAL_FOUR_LEAF_CLOVER);
 		hideBlockWithItem(PastelBlocks.AMARANTH_BUSHEL.get(), Blocks.FERN, PastelAdvancements.REVEAL_AMARANTH);
+		hideBlockWithItem(PastelBlocks.RESONANT_LILY.get(), Blocks.WHITE_TULIP, PastelCommon.locate("midgame/collect_resonant_lily"));
+		hideBlockWithItem(PastelBlocks.DRAGONBONE.get(), Blocks.BONE_BLOCK, PastelAdvancements.REVEAL_DRAGONBONE);
 		
 		hideBlock(PastelBlocks.BLOOD_ORCHID.get(), Blocks.RED_TULIP, PastelCommon.locate("midgame/collect_blood_orchid_petal"));
 		hideBlock(PastelBlocks.POTTED_BLOOD_ORCHID.get(), Blocks.POTTED_RED_TULIP, PastelCommon.locate("midgame/collect_blood_orchid_petal"));
 		hideBlock(PastelBlocks.MERMAIDS_BRUSH.get(), Blocks.SEAGRASS, PastelAdvancements.REVEAL_MERMAIDS_BRUSH);
 		hideBlock(PastelBlocks.POTTED_AMARANTH_BUSHEL.get(), Blocks.POTTED_FERN, PastelAdvancements.REVEAL_AMARANTH);
 		hideBlock(PastelBlocks.STUCK_STORM_STONE.get(), Blocks.AIR, PastelAdvancements.REVEAL_STORM_STONES);
+		hideBlock(PastelBlocks.POTTED_RESONANT_LILY.get(), Blocks.POTTED_WHITE_TULIP, PastelCommon.locate("midgame/collect_resonant_lily"));
 		
 		hideItem(PastelItems.AMARANTH_GRAINS.asItem(), Items.LARGE_FERN, PastelAdvancements.REVEAL_AMARANTH);
 		hideItem(PastelItems.MERMAIDS_GEM.asItem(), Items.KELP, PastelCommon.locate("place_pedestal"));

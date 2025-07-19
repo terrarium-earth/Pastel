@@ -27,13 +27,12 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class DragonboneBlock extends RotatedPillarBlock implements RevelationAware, MoonstoneStrikeableBlock {
+public class DragonboneBlock extends RotatedPillarBlock implements MoonstoneStrikeableBlock {
 
 	public static final MapCodec<DragonboneBlock> CODEC = simpleCodec(DragonboneBlock::new);
 
 	public DragonboneBlock(Properties settings) {
 		super(settings);
-		RevelationAware.register(this);
 	}
 
 	@Override
@@ -67,24 +66,4 @@ public class DragonboneBlock extends RotatedPillarBlock implements RevelationAwa
 			world.setBlockAndUpdate(pos, PastelBlocks.CRACKED_DRAGONBONE.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
 		}
 	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return PastelAdvancements.REVEAL_DRAGONBONE;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		for (Direction.Axis axis : BlockStateProperties.AXIS.getPossibleValues()) {
-			map.put(this.defaultBlockState().setValue(BlockStateProperties.AXIS, axis), Blocks.BONE_BLOCK.defaultBlockState().setValue(BlockStateProperties.AXIS, axis));
-		}
-		return map;
-	}
-	
-	@Override
-	public @Nullable Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.BONE_BLOCK.asItem());
-	}
-	
 }
