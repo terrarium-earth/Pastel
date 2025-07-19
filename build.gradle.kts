@@ -114,13 +114,13 @@ cloche {
             val additionalEntityAttributes = module(group = "maven.modrinth", name = "additionalentityattributes", version = "2.0.0+1.21.1-neoforge")
             val jgrapht = module(group = "org.jgrapht", name = "jgrapht-core", version = "1.5.2")
             val jheaps = module(group = "org.jheaps", name = "jheaps", version = "0.14")
-            val revelationary = module(group = "earth.terrarium", name = "revelationary", version = "1.0.1")
-            val databank = module(group = "com.cmdpro.databank", name = "databank", version = "1.1.5.2").setTransitive(false)//module(group = "maven.modrinth", name = "databank", version = "1.1.5.2")
+            //val revelationary = module(group = "earth.terrarium", name = "revelationary", version = "1.0.1")
+            val databank = module(group = "maven.modrinth", name = "databank", version = "1.1.6")
 
             include(additionalEntityAttributes)
             include(jgrapht)
             include(jheaps)
-            include(revelationary)
+            //include(revelationary)
             include(databank)
 
             include(module(group = "org.apfloat", name = "apfloat", version = "1.10.1"))
