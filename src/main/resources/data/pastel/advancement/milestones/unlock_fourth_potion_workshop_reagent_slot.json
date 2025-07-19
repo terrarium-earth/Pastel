@@ -1,9 +1,9 @@
 {
   "criteria": {
     "reached_potion_mastery": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/potion_mastery"
+        "advancement": "pastel:midgame/potion_mastery"
       }
     }
   }

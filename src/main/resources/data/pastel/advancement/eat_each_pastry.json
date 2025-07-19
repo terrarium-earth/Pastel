@@ -164,9 +164,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:craft_salted_jaramel_trifle_or_tart"
+        "advancement": "pastel:craft_salted_jaramel_trifle_or_tart"
       }
     }
   }

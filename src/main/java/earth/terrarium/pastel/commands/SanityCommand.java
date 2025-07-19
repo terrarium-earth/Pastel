@@ -1,11 +1,15 @@
 package earth.terrarium.pastel.commands;
 
+import com.cmdpro.databank.advancement.criteria.HasAdvancementCriteria;
+import com.cmdpro.databank.advancement.criteria.HasAdvancementsCriteria;
+import com.cmdpro.databank.hidden.Hidden;
+import com.cmdpro.databank.hidden.HiddenManager;
+import com.cmdpro.databank.hidden.conditions.AdvancementCondition;
+import com.cmdpro.databank.hidden.types.BlockHiddenType;
+import com.cmdpro.databank.registry.HiddenTypeRegistry;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.tree.ArgumentCommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import de.dafuqs.revelationary.RevelationRegistry;
-import de.dafuqs.revelationary.advancement_criteria.AdvancementCountCriterion;
-import de.dafuqs.revelationary.advancement_criteria.AdvancementGottenCriterion;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.color.ColorRegistry;
 import earth.terrarium.pastel.api.energy.color.InkColor;
@@ -298,15 +302,23 @@ public class SanityCommand {
 		
 		
 		// Impossible to unlock block cloaks
-		for (Map.Entry<ResourceLocation, List<BlockState>> cloaks : RevelationRegistry.getBlockStateEntries().entrySet()) {
-			if (advancementLoader.get(cloaks.getKey()) == null) {
-				PastelCommon.logWarning("[SANITY: Block Cloaks] Advancement '" + cloaks.getKey().toString() + "' for block cloaking does not exist. Registered cloaks: " + cloaks.getValue().size());
-			}
+		for (Map.Entry<ResourceLocation, Hidden> cloak : HiddenTypeRegistry.BLOCK.get().getHiddenOfType().entrySet()) {
+            if (cloak.getValue().condition instanceof AdvancementCondition condition) {
+                if (advancementLoader.get(condition.advancement.location()) == null) {
+                    PastelCommon.logWarning("[SANITY: Block Cloaks] Advancement '" + condition.advancement.location() +
+                                            "' for block cloaking does not exist. Registered cloak: " +
+                                            cloak.getKey());
+                }
+            }
 		}
-		for (Map.Entry<ResourceLocation, List<Item>> cloaks : RevelationRegistry.getItemEntries().entrySet()) {
-			if (advancementLoader.get(cloaks.getKey()) == null) {
-				PastelCommon.logWarning("[SANITY: Item Cloaks] Advancement '" + cloaks.getKey().toString() + "' for item cloaking does not exist. Registered cloaks: " + cloaks.getValue().size());
-			}
+		for (Map.Entry<ResourceLocation, Hidden> cloak : HiddenTypeRegistry.ITEM.get().getHiddenOfType().entrySet()) {
+            if (cloak.getValue().condition instanceof AdvancementCondition condition) {
+                if (advancementLoader.get(condition.advancement.location()) == null) {
+                    PastelCommon.logWarning("[SANITY: Item Cloaks] Advancement '" + condition.advancement.location() +
+                                            "' for item cloaking does not exist. Registered cloaks: " +
+                                            cloak.getKey());
+                }
+            }
 		}
 		
 		for (AdvancementHolder advancementEntry : advancementLoader.getAllAdvancements()) {
@@ -315,8 +327,8 @@ public class SanityCommand {
 				CriterionTriggerInstance conditions = criterion.triggerInstance();
 				
 				// "has advancement" criteria with nonexistent advancements
-				if (conditions instanceof AdvancementGottenCriterion.Conditions hasAdvancementConditions) {
-					ResourceLocation advancementIdentifier = hasAdvancementConditions.getAdvancementIdentifier();
+				if (conditions instanceof HasAdvancementCriteria.HasAdvancementCriteriaInstance hasAdvancementConditions) {
+					ResourceLocation advancementIdentifier = hasAdvancementConditions.advancement();
 					if (advancementIdentifier.equals(WIP_ADVANCEMENT_ID)) {
 						continue;
 					}
@@ -325,8 +337,8 @@ public class SanityCommand {
 						PastelCommon.logWarning("[SANITY: Has_Advancement Criteria] Advancement '" + advancementEntry.id() + "' references advancement '" + advancementIdentifier + "' that does not exist");
 					}
 					// "advancement count" criteria with nonexistent advancements
-				} else if (conditions instanceof AdvancementCountCriterion.Conditions hasAdvancementConditions) {
-					for (ResourceLocation advancementIdentifier : hasAdvancementConditions.advancementIdentifiers()) {
+				} else if (conditions instanceof HasAdvancementsCriteria.HasAdvancementsCriteriaInstance hasAdvancementConditions) {
+					for (ResourceLocation advancementIdentifier : hasAdvancementConditions.advancements()) {
 						if (advancementIdentifier.equals(WIP_ADVANCEMENT_ID)) {
 							continue;
 						}
@@ -349,8 +361,8 @@ public class SanityCommand {
 				for (List<String> requirement : advancement.value().requirements().requirements()) {
 					if (!requirement.isEmpty() && requirement.getFirst().equals("gotten_previous")) { // TODO: is that correct?
 						CriterionTriggerInstance conditions = advancement.value().criteria().get("gotten_previous").triggerInstance();
-						if (conditions instanceof AdvancementGottenCriterion.Conditions advancementConditions) {
-							gottenPreviousAdvancementIdentifier = advancementConditions.getAdvancementIdentifier();
+						if (conditions instanceof HasAdvancementCriteria.HasAdvancementCriteriaInstance advancementConditions) {
+							gottenPreviousAdvancementIdentifier = advancementConditions.advancement();
 							break;
 						} else {
 							PastelCommon.logWarning("[SANITY: Advancement Gating] Advancement '" + advancementId + "' has a \"gotten_previous\" requirement, but its not of type revelationary:advancement_gotten");

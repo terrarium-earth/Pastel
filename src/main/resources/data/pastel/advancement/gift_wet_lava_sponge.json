@@ -34,9 +34,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:craft_using_pedestal"
+        "advancement": "pastel:craft_using_pedestal"
       }
     }
   }

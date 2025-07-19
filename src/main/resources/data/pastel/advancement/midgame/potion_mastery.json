@@ -15,21 +15,21 @@
   },
   "criteria": {
     "brewed_lasting_potion_in_potion_workshop": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/brew_lasting_potion_in_potion_workshop"
+        "advancement": "pastel:midgame/brew_lasting_potion_in_potion_workshop"
       }
     },
     "brewed_potion_with_four_effects_in_potion_workshop": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/brew_potion_with_four_effects_in_potion_workshop"
+        "advancement": "pastel:midgame/brew_potion_with_four_effects_in_potion_workshop"
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/brew_powerful_potion_in_potion_workshop"
+        "advancement": "pastel:midgame/brew_powerful_potion_in_potion_workshop"
       }
     }
   }

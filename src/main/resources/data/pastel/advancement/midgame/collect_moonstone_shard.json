@@ -1,9 +1,9 @@
 {
   "criteria": {
     "backwards_compat_proxy": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_moonstone"
+        "advancement": "pastel:lategame/collect_moonstone"
       }
     }
   }

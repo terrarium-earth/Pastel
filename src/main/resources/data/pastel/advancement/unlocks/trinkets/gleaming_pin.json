@@ -1,27 +1,27 @@
 {
   "criteria": {
     "unlocked_liquid_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+        "advancement": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "unlocked_advanced_crafting": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_advanced_pedestal_structure"
+        "advancement": "pastel:midgame/build_advanced_pedestal_structure"
       }
     },
     "collected_star_fragment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_star_fragment"
+        "advancement": "pastel:collect_star_fragment"
       }
     },
     "collected_stardust": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_stardust"
+        "advancement": "pastel:hidden/collect_stardust"
       }
     }
   }

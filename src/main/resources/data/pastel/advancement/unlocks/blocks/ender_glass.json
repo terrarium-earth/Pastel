@@ -1,15 +1,15 @@
 {
   "criteria": {
     "gotten_radiating_ender": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_radiating_ender"
+        "advancement": "pastel:collect_radiating_ender"
       }
     },
     "amethyst_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/amethyst"
+        "advancement": "pastel:hidden/collect_shards/amethyst"
       }
     }
   }

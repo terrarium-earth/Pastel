@@ -1,21 +1,21 @@
 {
   "criteria": {
     "unlocked_liquid_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+        "advancement": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "unlocked_ink": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:milestones/unlock_ink_use"
+        "advancement": "pastel:milestones/unlock_ink_use"
       }
     },
     "collected_stratine_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_stratine_gem"
+        "advancement": "pastel:hidden/collect_stratine_gem"
       }
     }
   }

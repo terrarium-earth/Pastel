@@ -135,7 +135,7 @@ cloche {
 
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
-                modImplementation(revelationary)
+                //modImplementation(revelationary)
                 modImplementation(databank)
                 modImplementation(additionalEntityAttributes)
                 compileOnly(jgrapht)

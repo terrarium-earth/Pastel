@@ -1,15 +1,15 @@
 {
   "criteria": {
     "unlocked_memories": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/memories"
+        "advancement": "pastel:unlocks/blocks/memories"
       }
     },
     "reached_endgame": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:__wip"
+        "advancement": "pastel:__wip"
       }
     }
   }

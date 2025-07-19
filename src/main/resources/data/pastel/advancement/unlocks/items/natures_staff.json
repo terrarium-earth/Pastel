@@ -1,9 +1,9 @@
 {
   "criteria": {
     "collected_lime_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pigment/lime"
+        "advancement": "pastel:hidden/collect_pigment/lime"
       }
     }
   }

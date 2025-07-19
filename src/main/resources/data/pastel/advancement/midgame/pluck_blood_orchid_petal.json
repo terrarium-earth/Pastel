@@ -16,9 +16,9 @@
       "trigger": "pastel:blood_orchid_plucking"
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_blood_orchid_petal"
+        "advancement": "pastel:midgame/collect_blood_orchid_petal"
       }
     }
   }

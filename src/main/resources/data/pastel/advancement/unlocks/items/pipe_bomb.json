@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_moonstone_core": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_moonstone_core"
+        "advancement": "pastel:lategame/collect_moonstone_core"
       }
     },
     "collected_doombloom_seed": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_doombloom_seed"
+        "advancement": "pastel:lategame/collect_doombloom_seed"
       }
     },
     "opened_seed_vault_treasure2": {

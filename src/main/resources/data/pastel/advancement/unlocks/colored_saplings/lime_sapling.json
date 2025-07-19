@@ -1,21 +1,21 @@
 {
   "criteria": {
     "has_vegetal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_vegetal"
+        "advancement": "pastel:collect_vegetal"
       }
     },
     "collected_topaz_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/topaz"
+        "advancement": "pastel:hidden/collect_shards/topaz"
       }
     },
     "collected_citrine_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/citrine"
+        "advancement": "pastel:hidden/collect_shards/citrine"
       }
     }
   }

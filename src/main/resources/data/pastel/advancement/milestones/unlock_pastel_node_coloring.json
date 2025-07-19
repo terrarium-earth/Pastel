@@ -1,18 +1,18 @@
 {
   "criteria": {
     "created_pure_azurite": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/grow_azurite_in_crystallarieum"
+        "advancement": "pastel:midgame/grow_azurite_in_crystallarieum"
       }
     },
     "has_any_advanced_pastel_network_advacnement": {
-      "trigger": "revelationary:advancement_count",
+      "trigger": "databank:has_advancements",
       "conditions": {
-        "count": {
+        "range": {
           "min": 1
         },
-        "advancement_identifiers": [
+        "advancements": [
           "pastel:midgame/create_big_pastel_network",
           "pastel:midgame/create_pastel_network_using_every_node_type",
           "pastel:midgame/upgrade_pastel_node_throughput",

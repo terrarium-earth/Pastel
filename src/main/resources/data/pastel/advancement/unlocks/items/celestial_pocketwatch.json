@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_paltaeria_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_paltaeria_gem"
+        "advancement": "pastel:hidden/collect_paltaeria_gem"
       }
     },
     "unlocked_ink": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:milestones/unlock_ink_use"
+        "advancement": "pastel:milestones/unlock_ink_use"
       }
     }
   }

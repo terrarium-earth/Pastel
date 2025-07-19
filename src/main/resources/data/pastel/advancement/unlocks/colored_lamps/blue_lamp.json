@@ -1,15 +1,15 @@
 {
   "criteria": {
     "has_shimmerstone_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_shimmerstone"
+        "advancement": "pastel:collect_shimmerstone"
       }
     },
     "has_blue_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pigment/blue"
+        "advancement": "pastel:hidden/collect_pigment/blue"
       }
     }
   }

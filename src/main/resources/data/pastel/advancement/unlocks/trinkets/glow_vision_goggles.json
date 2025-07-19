@@ -1,21 +1,21 @@
 {
   "criteria": {
     "placed_pedestal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:place_pedestal"
+        "advancement": "pastel:place_pedestal"
       }
     },
     "collected_amethyst_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/amethyst"
+        "advancement": "pastel:hidden/collect_shards/amethyst"
       }
     },
     "collected_citrine_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/citrine"
+        "advancement": "pastel:hidden/collect_shards/citrine"
       }
     }
   }

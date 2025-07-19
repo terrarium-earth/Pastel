@@ -1,9 +1,9 @@
 {
   "criteria": {
     "unlocked_gloves_of_dawns_grasp": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/trinkets/gloves_of_dawns_grasp"
+        "advancement": "pastel:unlocks/trinkets/gloves_of_dawns_grasp"
       }
     }
   }

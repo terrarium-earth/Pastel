@@ -22,21 +22,21 @@
       }
     },
     "interacted_with_kindling": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/entity_interact/kindling"
+        "advancement": "pastel:hidden/entity_interact/kindling"
       }
     },
     "unlocked_kindling_memories": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/kindling_memory"
+        "advancement": "pastel:unlocks/blocks/kindling_memory"
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:break_cracked_dragonbone"
+        "advancement": "pastel:break_cracked_dragonbone"
       }
     }
   },

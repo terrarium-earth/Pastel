@@ -1,15 +1,15 @@
 {
   "criteria": {
     "unlocked_via_staff_of_remembrance": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/items/staff_of_remembrance"
+        "advancement": "pastel:unlocks/items/staff_of_remembrance"
       }
     },
     "unlocked_via_mob_head": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/memories_via_mob_head"
+        "advancement": "pastel:unlocks/blocks/memories_via_mob_head"
       }
     }
   },

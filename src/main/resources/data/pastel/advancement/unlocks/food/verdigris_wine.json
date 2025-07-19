@@ -1,33 +1,33 @@
 {
   "criteria": {
     "unlocked_titration_barrel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
+        "advancement": "pastel:unlocks/blocks/titration_barrel"
       }
     },
     "confirmed_drinking_age": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:triggers/confirmed_drinking_age"
+        "advancement": "pastel:triggers/confirmed_drinking_age"
       }
     },
     "collected_nightdew": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_nightdew"
+        "advancement": "pastel:collect_nightdew"
       }
     },
     "collected_quitoxic_reeds": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_quitoxic_reeds"
+        "advancement": "pastel:collect_quitoxic_reeds"
       }
     },
     "created_onyx": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:create_onyx_shard"
+        "advancement": "pastel:create_onyx_shard"
       }
     }
   }

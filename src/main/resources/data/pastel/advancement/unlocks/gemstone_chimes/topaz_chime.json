@@ -1,21 +1,21 @@
 {
   "criteria": {
     "built_advanced_pedestal_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_advanced_pedestal_structure"
+        "advancement": "pastel:midgame/build_advanced_pedestal_structure"
       }
     },
     "collected_shimmerstone_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_shimmerstone"
+        "advancement": "pastel:collect_shimmerstone"
       }
     },
     "collected_gemstone_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/topaz"
+        "advancement": "pastel:hidden/collect_shards/topaz"
       }
     }
   }

@@ -1,9 +1,9 @@
 {
   "criteria": {
     "unlocked_knowledge_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/items/knowledge_gem"
+        "advancement": "pastel:unlocks/items/knowledge_gem"
       }
     }
   }

@@ -1,51 +1,51 @@
 {
   "criteria": {
     "brewed_potion_with_four_effects_in_potion_workshop": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/brew_potion_with_four_effects_in_potion_workshop"
+        "advancement": "pastel:midgame/brew_potion_with_four_effects_in_potion_workshop"
       }
     },
     "brewed_powerful_potion_in_potion_workshop": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/brew_powerful_potion_in_potion_workshop"
+        "advancement": "pastel:midgame/brew_powerful_potion_in_potion_workshop"
       }
     },
     "brew_lasting_potion_in_potion_workshop": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/brew_lasting_potion_in_potion_workshop"
+        "advancement": "pastel:midgame/brew_lasting_potion_in_potion_workshop"
       }
     },
     "unlocked_liquid_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+        "advancement": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "collected_paltaeria_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_paltaeria_gem"
+        "advancement": "pastel:hidden/collect_paltaeria_gem"
       }
     },
     "collected_moonstone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_moonstone"
+        "advancement": "pastel:lategame/collect_moonstone"
       }
     },
     "collected_white_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pigment/white"
+        "advancement": "pastel:hidden/collect_pigment/white"
       }
     },
     "unlocked_ink": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:milestones/unlock_ink_use"
+        "advancement": "pastel:milestones/unlock_ink_use"
       }
     }
   },

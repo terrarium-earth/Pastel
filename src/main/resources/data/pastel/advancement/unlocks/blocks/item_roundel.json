@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_shimmerstone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_shimmerstone"
+        "advancement": "pastel:collect_shimmerstone"
       }
     },
     "entered_color_mixing_preservation_ruin": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:enter_color_mixing_preservation_ruin"
+        "advancement": "pastel:enter_color_mixing_preservation_ruin"
       }
     }
   }

@@ -1,21 +1,21 @@
 {
   "criteria": {
     "unlock_azurite_ampoule": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/ampoules/raw_azurite_ampoule"
+        "advancement": "pastel:unlocks/ampoules/raw_azurite_ampoule"
       }
     },
     "unlock_malachite_ampoule": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/ampoules/raw_malachite_ampoule"
+        "advancement": "pastel:unlocks/ampoules/raw_malachite_ampoule"
       }
     },
     "unlock_bloodstone_ampoule": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/ampoules/raw_bloodstone_ampoule"
+        "advancement": "pastel:unlocks/ampoules/raw_bloodstone_ampoule"
       }
     }
   },

@@ -25,9 +25,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:tap_titration_barrel"
+        "advancement": "pastel:tap_titration_barrel"
       }
     }
   }

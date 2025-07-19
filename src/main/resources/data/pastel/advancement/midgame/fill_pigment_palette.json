@@ -72,9 +72,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/craft_pigment_palette"
+        "advancement": "pastel:midgame/craft_pigment_palette"
       }
     }
   }

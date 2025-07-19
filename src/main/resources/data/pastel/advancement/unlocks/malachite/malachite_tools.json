@@ -1,21 +1,21 @@
 {
   "criteria": {
     "collected_malachite": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_malachite"
+        "advancement": "pastel:lategame/collect_malachite"
       }
     },
     "unlocked_crystallarieum": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/crystallarieum"
+        "advancement": "pastel:unlocks/blocks/crystallarieum"
       }
     },
     "collected_paltaeria": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_paltaeria"
+        "advancement": "pastel:lategame/collect_paltaeria"
       }
     }
   }

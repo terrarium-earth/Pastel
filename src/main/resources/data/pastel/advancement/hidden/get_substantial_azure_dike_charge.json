@@ -7,9 +7,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/get_azure_dike_charge"
+        "advancement": "pastel:midgame/get_azure_dike_charge"
       }
     }
   }

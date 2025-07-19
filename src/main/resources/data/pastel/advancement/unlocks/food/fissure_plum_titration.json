@@ -1,21 +1,21 @@
 {
   "criteria": {
     "unlocked_titration_barrel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
+        "advancement": "pastel:unlocks/blocks/titration_barrel"
       }
     },
     "confirmed_drinking_age": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:triggers/confirmed_drinking_age"
+        "advancement": "pastel:triggers/confirmed_drinking_age"
       }
     },
     "collected_fissure_plum": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_fissure_plum"
+        "advancement": "pastel:hidden/collect_fissure_plum"
       }
     }
   }

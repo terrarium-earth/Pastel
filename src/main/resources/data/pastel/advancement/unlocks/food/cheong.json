@@ -1,9 +1,9 @@
 {
   "criteria": {
     "unlocked_titration_barrel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
+        "advancement": "pastel:unlocks/blocks/titration_barrel"
       }
     }
   }

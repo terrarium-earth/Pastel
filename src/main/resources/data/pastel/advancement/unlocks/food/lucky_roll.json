@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_amaranth_bushel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_amaranth_bushel"
+        "advancement": "pastel:collect_amaranth_bushel"
       }
     },
     "collected_four_leaf_clover": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_four_leaf_clover"
+        "advancement": "pastel:collect_four_leaf_clover"
       }
     }
   }

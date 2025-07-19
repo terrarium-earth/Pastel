@@ -1,33 +1,33 @@
 {
   "criteria": {
     "unlocked_liquid_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+        "advancement": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "built_advanced_pedestal_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_advanced_pedestal_structure"
+        "advancement": "pastel:midgame/build_advanced_pedestal_structure"
       }
     },
     "collected_phantom_membrane": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/phantom_membrane"
+        "advancement": "pastel:hidden/collect_vanilla/phantom_membrane"
       }
     },
     "collected_mermaids_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_nightdew"
+        "advancement": "pastel:collect_nightdew"
       }
     },
     "collected_all_basic_pigments": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_all_basic_pigments"
+        "advancement": "pastel:collect_all_basic_pigments"
       }
     }
   }

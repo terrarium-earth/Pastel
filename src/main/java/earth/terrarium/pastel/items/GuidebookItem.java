@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.items;
 
+import com.cmdpro.databank.advancement.criteria.HasAdvancementCriteria;
 import com.klikli_dev.modonomicon.client.gui.BookGuiManager;
 import com.klikli_dev.modonomicon.client.gui.book.BookAddress;
-import de.dafuqs.revelationary.advancement_criteria.AdvancementGottenCriterion;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
 import earth.terrarium.pastel.registries.PastelBannerPatterns;
@@ -69,11 +69,11 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
                                                      .entrySet()) {
                     var conditions = criterionEntry.getValue()
                                                    .triggerInstance();
-                    if (conditions instanceof AdvancementGottenCriterion.Conditions hasAdvancementConditions) {
+                    if (conditions instanceof HasAdvancementCriteria.HasAdvancementCriteriaInstance hasAdvancementConditions) {
                         var advancementCriterionAdvancement = PastelCommon.getSidedServer()
                                                                           .getAdvancements()
                                                                           .get(
-                                                                              hasAdvancementConditions.getAdvancementIdentifier());
+                                                                              hasAdvancementConditions.advancement());
                         if (advancementCriterionAdvancement != null) {
                             var hasAdvancementCriterionAdvancement = tracker.getOrStartProgress(
                                 advancementCriterionAdvancement);

@@ -1,15 +1,15 @@
 {
   "criteria": {
     "remembered_kindling": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:remember_kindling"
+        "advancement": "pastel:remember_kindling"
       }
     },
     "experienced_somnolence": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/status_effects/somnolence"
+        "advancement": "pastel:hidden/status_effects/somnolence"
       }
     }
   }

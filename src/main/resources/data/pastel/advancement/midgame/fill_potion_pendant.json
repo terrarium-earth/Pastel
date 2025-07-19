@@ -36,9 +36,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/brew_potion_in_potion_workshop"
+        "advancement": "pastel:midgame/brew_potion_in_potion_workshop"
       }
     }
   }

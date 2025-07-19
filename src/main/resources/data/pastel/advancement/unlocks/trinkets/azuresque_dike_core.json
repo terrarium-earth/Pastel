@@ -1,27 +1,27 @@
 {
   "criteria": {
     "collected_aether_vestiges": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_aether_vestiges"
+        "advancement": "pastel:lategame/collect_aether_vestiges"
       }
     },
     "collected_moonstone_core": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_moonstone_core"
+        "advancement": "pastel:lategame/collect_moonstone_core"
       }
     },
     "collected_downstone_fragments": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_downstone_fragments"
+        "advancement": "pastel:lategame/collect_downstone_fragments"
       }
     },
     "got_large_amounts_of_dike": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/get_substantial_azure_dike_charge"
+        "advancement": "pastel:hidden/get_substantial_azure_dike_charge"
       }
     }
   }

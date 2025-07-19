@@ -1,21 +1,21 @@
 {
   "criteria": {
     "built_enchanting_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/enchantments/vanilla_trial"
+        "advancement": "pastel:unlocks/enchantments/vanilla_trial"
       }
     },
     "collected_dragonbone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:break_cracked_dragonbone"
+        "advancement": "pastel:break_cracked_dragonbone"
       }
     },
     "collected_blood_orchid_petal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_blood_orchid_petal"
+        "advancement": "pastel:midgame/collect_blood_orchid_petal"
       }
     }
   }
