@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.registries;
 
 import com.mojang.datafixers.util.Pair;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.*;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;

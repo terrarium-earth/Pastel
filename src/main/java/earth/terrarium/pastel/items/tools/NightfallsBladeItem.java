@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.tools;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
@@ -68,7 +68,7 @@ public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionF
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if(target.isAlive() && attacker instanceof Player player) {
-			if (AdvancementHelper.hasAdvancement(player, UNLOCK_IDENTIFIER)) {
+			if (DatabankUtils.hasAdvancement(player, UNLOCK_IDENTIFIER)) {
 				List<InkPoweredStatusEffectInstance> effects = InkPoweredPotionFillable.getEffects(stack);
 				for(InkPoweredStatusEffectInstance instance : effects) {
 					if(InkPowered.tryDrainEnergy(player, instance.getInkCost().color(), instance.getInkCost().cost())) {

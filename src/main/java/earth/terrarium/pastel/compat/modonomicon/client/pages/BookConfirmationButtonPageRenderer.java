@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.compat.modonomicon.client.pages;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.klikli_dev.modonomicon.book.BookTextHolder;
 import com.klikli_dev.modonomicon.book.page.BookTextPage;
 import com.klikli_dev.modonomicon.client.gui.BookGuiManager;
 import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.client.render.page.BookTextPageRenderer;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookConfirmationButtonPage;
 import earth.terrarium.pastel.networking.c2s_payloads.GuidebookConfirmationButtonPressedPayload;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -19,7 +19,7 @@ public class BookConfirmationButtonPageRenderer extends BookTextPageRenderer {
 
     public boolean isConfirmed() {
         if (!(page instanceof BookConfirmationButtonPage confirmationPage)) return false;
-        return AdvancementHelper.hasAdvancement(mc.player, confirmationPage.getCheckedAdvancement());
+        return DatabankUtils.hasAdvancement(mc.player, confirmationPage.getCheckedAdvancement());
     }
 
     @Override

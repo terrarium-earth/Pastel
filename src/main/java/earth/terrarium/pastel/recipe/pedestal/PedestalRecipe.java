@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.recipe.pedestal;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.PedestalVariant;
 import earth.terrarium.pastel.api.item.GemstoneColor;
@@ -233,7 +233,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 	
 	@Override
 	public boolean canPlayerCraft(Player playerEntity) {
-		return this.tier.hasUnlocked(playerEntity) && AdvancementHelper.hasAdvancement(playerEntity, this.requiredAdvancementIdentifier.orElse(null));
+		return this.tier.hasUnlocked(playerEntity) && DatabankUtils.hasAdvancement(playerEntity, this.requiredAdvancementIdentifier.orElse(null));
 	}
 	
 	@Override

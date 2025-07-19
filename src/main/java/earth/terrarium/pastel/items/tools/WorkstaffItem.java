@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.tools;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColors;
@@ -175,7 +175,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 				triggerUnenchantedWorkstaffAdvancement(serverPlayerEntity);
 			}
 		} else {
-			var addResult = Ench.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, AdvancementHelper.hasAdvancement(player, PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS));
+			var addResult = Ench.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, DatabankUtils.hasAdvancement(player, PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS));
 			if (addResult.getA()) {
 				stack.set(DataComponents.ENCHANTMENTS, addResult.getB().getEnchantments());
 				player.displayClientMessage(message, true);

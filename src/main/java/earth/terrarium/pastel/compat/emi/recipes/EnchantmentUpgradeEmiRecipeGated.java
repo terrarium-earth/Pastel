@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.google.common.collect.Lists;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
@@ -90,7 +90,7 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 	
 	@Override
 	public void addUnlockedWidgets(WidgetHolder widgets) {
-		var overEnchant = AdvancementHelper.hasAdvancement(Minecraft.getInstance().player, PastelAdvancements.OVERENCHANTING);
+		var overEnchant = DatabankUtils.hasAdvancement(Minecraft.getInstance().player, PastelAdvancements.OVERENCHANTING);
 		
 		// Reset the indexer
 		indexer = 1;

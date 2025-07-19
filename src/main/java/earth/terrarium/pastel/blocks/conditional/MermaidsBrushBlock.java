@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.blocks.conditional;
 
 import com.mojang.serialization.MapCodec;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.blocks.FluidLogging;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlockTags;

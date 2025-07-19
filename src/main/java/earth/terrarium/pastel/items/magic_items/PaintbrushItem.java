@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.magic_items;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
@@ -68,8 +68,8 @@ public class PaintbrushItem extends Item implements SignApplicator {
 	
 	@OnlyIn(Dist.CLIENT)
 	private static void appendClientTooltips(ItemStack stack, List<Component> tooltip) {
-		boolean unlockedColoring = AdvancementHelper.hasAdvancementClient(PastelAdvancements.PAINTBRUSH_COLORING);
-		boolean unlockedSlinging = AdvancementHelper.hasAdvancementClient(PastelAdvancements.PAINTBRUSH_INK_SLINGING);
+		boolean unlockedColoring = DatabankUtils.hasAdvancementClient(PastelAdvancements.PAINTBRUSH_COLORING);
+		boolean unlockedSlinging = DatabankUtils.hasAdvancementClient(PastelAdvancements.PAINTBRUSH_INK_SLINGING);
 		if (unlockedColoring || unlockedSlinging) {
 			Optional<InkColor> color = getColor(stack);
 			if (color.isEmpty()) {
@@ -88,11 +88,11 @@ public class PaintbrushItem extends Item implements SignApplicator {
 	}
 	
 	public static boolean canColor(Player player) {
-		return AdvancementHelper.hasAdvancement(player, PastelAdvancements.PAINTBRUSH_COLORING);
+		return DatabankUtils.hasAdvancement(player, PastelAdvancements.PAINTBRUSH_COLORING);
 	}
 	
 	public static boolean canInkSling(Player player) {
-		return AdvancementHelper.hasAdvancement(player, PastelAdvancements.PAINTBRUSH_INK_SLINGING);
+		return DatabankUtils.hasAdvancement(player, PastelAdvancements.PAINTBRUSH_INK_SLINGING);
 	}
 	
 	public MenuProvider createScreenHandlerFactory(ItemStack itemStack) {

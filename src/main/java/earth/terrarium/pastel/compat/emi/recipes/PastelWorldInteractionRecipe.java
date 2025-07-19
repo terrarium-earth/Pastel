@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.emi.PastelEmiRecipe;
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -29,7 +29,7 @@ public class PastelWorldInteractionRecipe extends EmiWorldInteractionRecipe {
 
 	public boolean hasAdvancement(ResourceLocation advancement) {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, advancement);
+		return DatabankUtils.hasAdvancement(client.player, advancement);
 	}
 
 	public boolean isUnlocked() {

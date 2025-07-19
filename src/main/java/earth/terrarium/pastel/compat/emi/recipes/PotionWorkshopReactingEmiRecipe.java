@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.recipe.DescriptiveGatedRecipe;
 import earth.terrarium.pastel.compat.emi.PastelEmiRecipe;
 import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
@@ -25,7 +25,7 @@ public class PotionWorkshopReactingEmiRecipe extends EmiInfoRecipe {
 	
 	public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, PotionWorkshopRecipe.UNLOCK_IDENTIFIER) && AdvancementHelper.hasAdvancement(client.player, recipe.getRequiredAdvancementIdentifier().orElse(null));
+		return DatabankUtils.hasAdvancement(client.player, PotionWorkshopRecipe.UNLOCK_IDENTIFIER) && DatabankUtils.hasAdvancement(client.player, recipe.getRequiredAdvancementIdentifier().orElse(null));
 	}
 	
 	@Override

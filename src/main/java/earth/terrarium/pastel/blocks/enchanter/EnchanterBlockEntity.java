@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.enchanter;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PlayerOwned;
@@ -510,8 +510,8 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	@Override
 	public void setOwner(Player playerEntity) {
 		this.ownerUUID = playerEntity.getUUID();
-		this.conflictEnchanting = AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS);
-		this.overenchanting = AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.OVERENCHANTING);
+		this.conflictEnchanting = DatabankUtils.hasAdvancement(playerEntity, PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS);
+		this.overenchanting = DatabankUtils.hasAdvancement(playerEntity, PastelAdvancements.OVERENCHANTING);
 		setChanged();
 	}
 	

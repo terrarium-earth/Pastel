@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
 import earth.terrarium.pastel.inventories.slots.DisabledSlot;
 import earth.terrarium.pastel.inventories.slots.ReagentSlot;
@@ -61,7 +61,7 @@ public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
 		this.addSlot(new Slot(inventory, 4, 41, 42));
 		
 		// reagent slots
-		if (AdvancementHelper.hasAdvancement(playerInventory.player, PastelAdvancements.FOURTH_BREWING_SLOT)) {
+		if (DatabankUtils.hasAdvancement(playerInventory.player, PastelAdvancements.FOURTH_BREWING_SLOT)) {
 			this.addSlot(new ReagentSlot(inventory, 5, 51, 19));
 			this.addSlot(new ReagentSlot(inventory, 6, 74, 19));
 			this.addSlot(new ReagentSlot(inventory, 7, 97, 19));

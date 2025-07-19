@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.potion_workshop;
 
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
@@ -499,7 +499,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		if (playerEntity == null) {
 			return false;
 		} else {
-			return AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.FOURTH_BREWING_SLOT);
+			return DatabankUtils.hasAdvancement(playerEntity, PastelAdvancements.FOURTH_BREWING_SLOT);
 		}
 	}
 	

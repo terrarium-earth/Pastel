@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.compat.REI.widgets.IndexedEntryWidget;
@@ -47,7 +47,7 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 	
 	@Override
 	public void setupWidgets(Point startPoint, Rectangle bounds, List<Widget> widgets, @NotNull EnchantmentUpgradeDisplay display) {
-		boolean overUnlocked = AdvancementHelper.hasAdvancement(Minecraft.getInstance().player, PastelAdvancements.OVERENCHANTING);
+		boolean overUnlocked = DatabankUtils.hasAdvancement(Minecraft.getInstance().player, PastelAdvancements.OVERENCHANTING);
 		List<EntryIngredient> inputs = display.getInputEntries();
 		
 		// enchanter structure background					            destinationX	 destinationY   sourceX, sourceY, width, height

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.structure;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
@@ -237,7 +237,7 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 			List<Player> players = level.getEntities(EntityType.PLAYER, checkBox, LivingEntity::isAlive);
 			for (Player playerEntity : players) {
 				if (!playerEntity.isCreative() && !playerEntity.isSpectator()) {
-					if (this.requiredAdvancement != null && AdvancementHelper.hasAdvancement(playerEntity, requiredAdvancement)) {
+					if (this.requiredAdvancement != null && DatabankUtils.hasAdvancement(playerEntity, requiredAdvancement)) {
 						PastelAdvancementCriteria.PRESERVATION_CHECK.trigger((ServerPlayer) playerEntity, checkName, true);
 					} else {
 						// yeet

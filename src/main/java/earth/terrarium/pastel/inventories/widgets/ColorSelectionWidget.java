@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories.widgets;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.energy.ColorPickerBlockEntity;
@@ -53,7 +53,7 @@ public class ColorSelectionWidget extends AbstractWidget {
 		this.screen = screen;
 		
 		for (InkColor inkColor : availableColors) {
-			usableColors.add(new Tuple<>(inkColor, AdvancementHelper.hasAdvancementClient(inkColor.getRequiredAdvancement())));
+			usableColors.add(new Tuple<>(inkColor, DatabankUtils.hasAdvancementClient(inkColor.getRequiredAdvancement())));
 		}
 	}
 	

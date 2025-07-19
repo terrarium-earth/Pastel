@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
@@ -43,7 +43,7 @@ public class EnchanterEnchantingDisplay extends EnchanterDisplay {
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, EnchanterCraftingRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
+		return DatabankUtils.hasAdvancement(client.player, EnchanterCraftingRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
 	}
 	
 }

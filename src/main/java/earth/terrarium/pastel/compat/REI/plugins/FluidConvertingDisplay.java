@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.REI.PastelDisplay;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
@@ -26,7 +26,7 @@ public abstract class FluidConvertingDisplay extends PastelDisplay {
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, getUnlockIdentifier()) && super.isUnlocked();
+		return DatabankUtils.hasAdvancement(client.player, getUnlockIdentifier()) && super.isUnlocked();
 	}
 	
 	public abstract ResourceLocation getUnlockIdentifier();

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.entity.spawners;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStar;
 import earth.terrarium.pastel.entity.entity.ShootingStarEntity;
@@ -29,7 +29,7 @@ public class ShootingStarSpawner implements CustomSpawner {
 		
 		for (Player playerEntity : world.getEntities(EntityType.PLAYER, Entity::isAlive)) {
 			if (!playerEntity.isSpectator()
-					&& AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.UNLOCK_SHOOTING_STARS)
+					&& DatabankUtils.hasAdvancement(playerEntity, PastelAdvancements.UNLOCK_SHOOTING_STARS)
 					&& world.getRandom().nextFloat() < getShootingStarChanceWithMultiplier(playerEntity)) {
 				
 				// 1 % chance for each cycle to spawn a lot of shooting stars for the player

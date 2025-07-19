@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.recipe;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.simibubi.create.foundation.utility.DistExecutor;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.progression.UnlockToastManager;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -29,8 +29,8 @@ public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	String getRecipeTypeShortID();
 	
 	default boolean canPlayerCraft(Player playerEntity) {
-		return AdvancementHelper.hasAdvancement(playerEntity, getRecipeTypeUnlockIdentifier())
-				&& AdvancementHelper.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier().orElse(null));
+		return DatabankUtils.hasAdvancement(playerEntity, getRecipeTypeUnlockIdentifier())
+				&& DatabankUtils.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier().orElse(null));
 	}
 	
 	default Component getSingleUnlockToastString() {

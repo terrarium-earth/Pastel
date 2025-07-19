@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.energy;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.helpers.Support;
@@ -37,7 +37,7 @@ public interface InkPowered {
 	}
 
 	static boolean canUse(Player playerEntity) {
-		return AdvancementHelper.hasAdvancement(playerEntity, InkPowered.REQUIRED_ADVANCEMENT);
+		return DatabankUtils.hasAdvancement(playerEntity, InkPowered.REQUIRED_ADVANCEMENT);
 	}
 
 	/**

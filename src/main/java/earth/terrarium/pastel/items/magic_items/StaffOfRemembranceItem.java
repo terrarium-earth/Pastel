@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.magic_items;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
@@ -87,7 +87,7 @@ public class StaffOfRemembranceItem extends Item implements InkPowered, Prioriti
 		}
 		
 		MobCategory spawnGroup = entity.getType().getCategory();
-		if (spawnGroup == MobCategory.MONSTER && (user.isCreative() || AdvancementHelper.hasAdvancement(user, PastelAdvancements.HOSTILE_MEMORIZING))) {
+		if (spawnGroup == MobCategory.MONSTER && (user.isCreative() || DatabankUtils.hasAdvancement(user, PastelAdvancements.HOSTILE_MEMORIZING))) {
 			if (!InkPowered.tryDrainEnergy(user, TURN_HOSTILE_TO_MEMORY_COST)) {
 				return false;
 			}

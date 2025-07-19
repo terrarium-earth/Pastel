@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.llamalad7.mixinextras.sugar.Local;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -36,7 +36,7 @@ public abstract class GlassBottleItemMixin {
 		
 		if (blockState.is(PastelBlocks.FADING.get())
 				&& PastelCommon.CONFIG.CanBottleUpFading
-				&& AdvancementHelper.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FADING)) {
+				&& DatabankUtils.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FADING)) {
 			
 			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
@@ -44,7 +44,7 @@ public abstract class GlassBottleItemMixin {
 			
 		} else if (blockState.is(PastelBlocks.FAILING.get())
 				&& PastelCommon.CONFIG.CanBottleUpFailing
-				&& AdvancementHelper.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FAILING)) {
+				&& DatabankUtils.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FAILING)) {
 			
 			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
@@ -52,7 +52,7 @@ public abstract class GlassBottleItemMixin {
 			
 		} else if (blockState.is(PastelBlocks.RUIN.get())
 				&& PastelCommon.CONFIG.CanBottleUpRuin
-				&& AdvancementHelper.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_RUIN)) {
+				&& DatabankUtils.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_RUIN)) {
 			
 			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
@@ -60,7 +60,7 @@ public abstract class GlassBottleItemMixin {
 			
 		} else if (blockState.is(PastelBlocks.FORFEITURE.get())
 				&& PastelCommon.CONFIG.CanBottleUpForfeiture
-				&& AdvancementHelper.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FORFEITURE)) {
+				&& DatabankUtils.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FORFEITURE)) {
 			
 			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);

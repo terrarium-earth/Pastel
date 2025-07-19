@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.blocks.conditional.amaranth;
 
 import com.mojang.serialization.MapCodec;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.blocks.TallCropBlock;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelItems;

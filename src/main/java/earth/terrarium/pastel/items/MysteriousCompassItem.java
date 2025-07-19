@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.items.magic_items.StructureCompassItem;
 import earth.terrarium.pastel.registries.PastelAdvancements;
@@ -21,7 +21,7 @@ public class MysteriousCompassItem extends StructureCompassItem implements SlotB
 	@Override
 	public void inventoryTick(@NotNull ItemStack stack, @NotNull Level world, Entity entity, int slot, boolean selected) {
 		if (!world.isClientSide && world.getGameTime() % 200 == 0 && entity instanceof Player player)
-			if (AdvancementHelper.hasAdvancement(player, PastelAdvancements.MYSTERIOUS_LOCKET_SOCKETING)) {
+			if (DatabankUtils.hasAdvancement(player, PastelAdvancements.MYSTERIOUS_LOCKET_SOCKETING)) {
 				locateStructure(stack, world, entity);
 			} else {
 				removeStructurePos(stack);
