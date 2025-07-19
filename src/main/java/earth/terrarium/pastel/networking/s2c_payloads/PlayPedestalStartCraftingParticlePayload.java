@@ -30,10 +30,10 @@ public record PlayPedestalStartCraftingParticlePayload(BlockPos pedestalPos) imp
     }
 
     public static void execute(PlayPedestalStartCraftingParticlePayload payload, IPayloadContext context) {
-        PedestalBlockEntity.spawnCraftingStartParticles(
-            context.player()
-                   .level(), payload.pedestalPos
-        );
+        //PedestalBlockEntity.spawnCraftingStartParticles(
+        //    context.player()
+        //           .level(), payload.pedestalPos
+        //);
     }
 
     @Override

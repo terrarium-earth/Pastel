@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.inventories.PedestalScreen;
-import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -52,11 +52,11 @@ public class PedestalCraftingEmiRecipeGated extends GatedSpectrumEmiRecipe<Pedes
             );
         }
         for (int i = 0; i < powderSlotCount; i++) {
-            GemstoneColor color = BuiltinGemstoneColor.values()[i];
+            GemstoneColor color = PastelGemstoneColor.values()[i];
             int powderAmount = recipe.getPowderInputs()
                                      .getOrDefault(color, 0);
             if (powderAmount > 0) {
-                list.set(9 + i, EmiStack.of(color.getGemstonePowderItem(), powderAmount));
+                list.set(9 + i, EmiStack.of(color.getPowder(), powderAmount));
             }
         }
         return list;

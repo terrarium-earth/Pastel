@@ -3,6 +3,7 @@ package earth.terrarium.pastel.inventories.slots;
 import earth.terrarium.pastel.api.gui.SlotWithOnClickAction;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -10,29 +11,40 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.ItemStack;
 
 public class PedestalPreviewSlot extends ReadOnlySlot implements SlotWithOnClickAction {
-    public PedestalPreviewSlot(Container inventory, int index, int x, int y) {
-        super(inventory, index, x, y);
-    }
+	public PedestalPreviewSlot(PedestalBlockEntity pedestal, int index, int x, int y) {
+		super(pedestal, index, x, y);
+	}
+	
+	@Override
+	public ItemStack getItem() {
+		var out = ItemStack.EMPTY;
+		var pedestal = (PedestalBlockEntity) container;
+		var registries = pedestal.getLevel().registryAccess();
 
-    @Override
-    public ItemStack getItem() {
-        if (this.container instanceof PedestalBlockEntity pedestalBlockEntity) {
-            return pedestalBlockEntity.getCurrentCraftingRecipeOutput();
-        }
+		if (pedestal.recipe.isEmpty())
+			return out;
 
-        return ItemStack.EMPTY;
-    }
+		var rec = pedestal.recipe.get().value();
 
-    @Override
-    public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
-        if (this.container instanceof PedestalBlockEntity pedestalBlockEntity) {
-            if (player instanceof ServerPlayer serverPlayerEntity) {
-                if (pedestalBlockEntity.currentRecipe != null) {
-                    Support.grantAdvancementCriterion(
-                        serverPlayerEntity, "fail_to_take_item_out_of_pedestal", "try_take_out_item_from_pedestal");
-                }
-            }
-        }
-        return false;
-    }
+		if (rec instanceof PedestalRecipe pr) {
+			out = pr.getResultItem(registries);
+		}
+		else {
+			out = rec.assemble(pedestal.getInput().getCraftingGridInput(), registries);
+		}
+		
+		return out;
+	}
+	
+	@Override
+	public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
+		if (this.container instanceof PedestalBlockEntity pedestalBlockEntity) {
+			if (player instanceof ServerPlayer serverPlayerEntity) {
+				if (pedestalBlockEntity.recipe!= null) {
+					Support.grantAdvancementCriterion(serverPlayerEntity, "fail_to_take_item_out_of_pedestal", "try_take_out_item_from_pedestal");
+				}
+			}
+		}
+		return false;
+	}
 }

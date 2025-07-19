@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -63,15 +63,15 @@ public class BookPedestalCraftingPageRenderer
         switch (recipe.getTier()) {
             case COMPLEX -> drawGemstonePowderSlots(
                 drawContext, recipe, recipe.getTier()
-                                           .getAvailableGemstoneColors(), 3, recipeX, recipeY, mouseX, mouseY
+                                           .gemstoneColors(), 3, recipeX, recipeY, mouseX, mouseY
             );
             case ADVANCED -> drawGemstonePowderSlots(
                 drawContext, recipe, recipe.getTier()
-                                           .getAvailableGemstoneColors(), 12, recipeX, recipeY, mouseX, mouseY
+                                           .gemstoneColors(), 12, recipeX, recipeY, mouseX, mouseY
             );
             default -> drawGemstonePowderSlots(
                 drawContext, recipe, recipe.getTier()
-                                           .getAvailableGemstoneColors(), 22, recipeX, recipeY, mouseX, mouseY
+                                           .gemstoneColors(), 22, recipeX, recipeY, mouseX, mouseY
             );
         }
 
@@ -87,7 +87,7 @@ public class BookPedestalCraftingPageRenderer
     }
 
     @Contract(pure = true)
-    private ResourceLocation getBackgroundTextureForTier(@NotNull PedestalRecipeTier pedestalRecipeTier) {
+    private ResourceLocation getBackgroundTextureForTier(@NotNull PedestalTier pedestalRecipeTier) {
         return switch (pedestalRecipeTier) {
             case BASIC -> BACKGROUND_TEXTURE1;
             case SIMPLE -> BACKGROUND_TEXTURE2;
@@ -105,7 +105,7 @@ public class BookPedestalCraftingPageRenderer
             int amount = recipe.getPowderInputs()
                                .getOrDefault(color, 0);
             if (amount > 0) {
-                ItemStack stack = color.getGemstonePowderItem()
+                ItemStack stack = color.getPowder()
                                        .getDefaultInstance();
                 stack.setCount(amount);
                 parentScreen.renderItemStack(

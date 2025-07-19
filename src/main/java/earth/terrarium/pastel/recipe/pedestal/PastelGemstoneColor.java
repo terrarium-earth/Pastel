@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.recipe.pedestal;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -9,18 +10,27 @@ import net.minecraft.core.Registry;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 
-public enum BuiltinGemstoneColor implements GemstoneColor, StringRepresentable {
-    CYAN("cyan", InkColors.CYAN_COLOR),
-    MAGENTA("magenta", InkColors.MAGENTA_COLOR),
-    YELLOW("yellow", InkColors.YELLOW_COLOR),
-    BLACK("black", InkColors.BLACK_COLOR),
-    WHITE("white", InkColors.WHITE_COLOR);
+public enum PastelGemstoneColor implements GemstoneColor, StringRepresentable {
+    CYAN("cyan", InkColors.CYAN, 0),
+    MAGENTA("magenta", InkColors.MAGENTA, 1),
+    YELLOW("yellow", InkColors.YELLOW, 2),
+    BLACK("black", InkColors.BLACK, 3),
+    WHITE("white", InkColors.WHITE, 4);
 
     private final int color;
+    private final InkColor inkColor;
+    private final int offset;
 
-    BuiltinGemstoneColor(String name, int color) {
+    PastelGemstoneColor(String name, InkColor color, int offset) {
+        this.offset = offset;
         Registry.register(PastelRegistries.GEMSTONE_COLOR, PastelCommon.locate(name), this);
-        this.color = color;
+        this.color = color.getColorInt();
+        this.inkColor = color;
+    }
+
+    @Override
+    public int getOffset() {
+        return offset;
     }
 
     @Override
@@ -29,7 +39,12 @@ public enum BuiltinGemstoneColor implements GemstoneColor, StringRepresentable {
     }
 
     @Override
-    public Item getGemstonePowderItem() {
+    public InkColor getInkColor() {
+        return inkColor;
+    }
+
+    @Override
+    public Item getPowder() {
         switch (this) {
             case CYAN -> {
                 return PastelItems.TOPAZ_POWDER.get();

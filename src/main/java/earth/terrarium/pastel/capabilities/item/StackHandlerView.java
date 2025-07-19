@@ -11,7 +11,7 @@ import java.util.function.*;
 
 public class StackHandlerView extends FriendlyStackHandler {
 
-    private final FriendlyStackHandler delegator;
+    protected final FriendlyStackHandler delegator;
     private final Int2ObjectMap<Predicate<ItemStack>> filters = new Int2ObjectArrayMap<>();
     private final int offset;
     private final int size;
@@ -53,6 +53,11 @@ public class StackHandlerView extends FriendlyStackHandler {
         return this;
     }
 
+    public StackHandlerView addFilter(int slot) {
+        filters.put(slot, stack -> false);
+        return this;
+    }
+
     @Override
     public void setStackInSlot(int slot, ItemStack stack) {
         delegator.setStackInSlot(slot + offset, stack);
@@ -86,11 +91,6 @@ public class StackHandlerView extends FriendlyStackHandler {
     @Override
     public ItemStack removeStackInSlot(int slot) {
         return delegator.removeStackInSlot(slot + offset);
-    }
-
-    @Override
-    public int getSlotLimit(int slot) {
-        return delegator.getSlotLimit(slot);
     }
 
     @Override

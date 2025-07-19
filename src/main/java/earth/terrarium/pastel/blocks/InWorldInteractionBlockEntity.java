@@ -47,7 +47,7 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
         return inventory;
     }
 
-    // Called when the chunk is first loaded to initialize this be
+    // Called when synchronizing the BE S2E
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
         CompoundTag nbtCompound = new CompoundTag();

@@ -146,7 +146,7 @@ import earth.terrarium.pastel.items.trinkets.TotemPendantItem;
 import earth.terrarium.pastel.items.trinkets.WeepingCircletItem;
 import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.registries.client.PastelModels;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -281,23 +281,23 @@ public class PastelItems {
 
     public static final DeferredItem<Item> TOPAZ_POWDER = register(simple(item(
         "topaz_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.COLLECT_TOPAZ, BuiltinGemstoneColor.CYAN, CYAN_DYE), InkColors.CYAN
+            IS.of(), PastelAdvancements.COLLECT_TOPAZ, PastelGemstoneColor.CYAN, CYAN_DYE), InkColors.CYAN
     )));
     public static final DeferredItem<Item> AMETHYST_POWDER = register(simple(item(
         "amethyst_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.COLLECT_AMETHYST, BuiltinGemstoneColor.MAGENTA, MAGENTA_DYE), InkColors.MAGENTA
+            IS.of(), PastelAdvancements.COLLECT_AMETHYST, PastelGemstoneColor.MAGENTA, MAGENTA_DYE), InkColors.MAGENTA
     )));
     public static final DeferredItem<Item> CITRINE_POWDER = register(simple(item(
         "citrine_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.COLLECT_CITRINE, BuiltinGemstoneColor.YELLOW, YELLOW_DYE), InkColors.YELLOW
+            IS.of(), PastelAdvancements.COLLECT_CITRINE, PastelGemstoneColor.YELLOW, YELLOW_DYE), InkColors.YELLOW
     )));
     public static final DeferredItem<Item> ONYX_POWDER = register(simple(item(
         "onyx_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.CREATE_ONYX, BuiltinGemstoneColor.BLACK, BLACK_DYE), InkColors.BLACK
+            IS.of(), PastelAdvancements.CREATE_ONYX, PastelGemstoneColor.BLACK, BLACK_DYE), InkColors.BLACK
     )));
     public static final DeferredItem<Item> MOONSTONE_POWDER = register(simple(item(
         "moonstone_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.COLLECT_MOONSTONE, BuiltinGemstoneColor.WHITE, WHITE_DYE), InkColors.WHITE
+            IS.of(), PastelAdvancements.COLLECT_MOONSTONE, PastelGemstoneColor.WHITE, WHITE_DYE), InkColors.WHITE
     )));
 
     // Pigment

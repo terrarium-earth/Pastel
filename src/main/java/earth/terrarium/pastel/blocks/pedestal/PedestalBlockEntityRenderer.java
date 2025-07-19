@@ -30,11 +30,6 @@ public class PedestalBlockEntityRenderer<C extends PedestalBlockEntity> implemen
     private final ResourceLocation GROUND_MARK = PastelCommon.locate("textures/misc/circle.png");
     private final ModelPart circle;
 
-    private static final int RECIPE_RECALCULATION_TICKS = 4;
-    private @Nullable Recipe<?> cachedRecipe;
-    private long cachedRecipeTime = 0;
-    private ItemStack cachedRecipeOutput = ItemStack.EMPTY;
-
     public PedestalBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
         super();
         this.circle = getTexturedModelData().bakeRoot()
@@ -59,17 +54,19 @@ public class PedestalBlockEntityRenderer<C extends PedestalBlockEntity> implemen
 
     @Override
     public void render(
-        PedestalBlockEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider,
-        int light, int overlay
-    ) {
-        if (entity.getLevel() == null) {
+        PedestalBlockEntity pedestal, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider,
+        int light, int overlay) {
+
+        if (pedestal.getLevel() == null) {
             return;
         }
 
-        // render floating item stacks
-        Recipe<?> currentRecipe = entity.getCurrentRecipe();
-        if (currentRecipe instanceof PedestalRecipe pedestalRecipe) {
-            float time = entity.getLevel()
+        if (pedestal.recipe.isEmpty())
+            return;
+
+        var recipe = pedestal.recipe.get().value();
+        if (recipe instanceof PedestalRecipe pr) {
+            float time = pedestal.getLevel()
                                .getGameTime() % 50000 + tickDelta;
             this.circle.yRot = time / 25.0F;
             this.circle.render(
@@ -77,31 +74,18 @@ public class PedestalBlockEntityRenderer<C extends PedestalBlockEntity> implemen
                     PastelRenderLayers.GlowInTheDarkRenderLayer.get(GROUND_MARK)), light, overlay
             );
 
-            long currentTime = entity.getLevel()
-                                     .getGameTime();
-            if (this.cachedRecipeTime + RECIPE_RECALCULATION_TICKS < currentTime ||
-                this.cachedRecipe != pedestalRecipe) {
-                this.cachedRecipeOutput = pedestalRecipe.assemble(
-                    entity.createRecipeInput(), entity.getLevel()
-                                                      .registryAccess()
-                );
-                this.cachedRecipe = pedestalRecipe;
-                this.cachedRecipeTime = currentTime;
-            }
-
             poseStack.pushPose();
             double height = Math.sin((time) / 8.0) / 6.0; // item height
             poseStack.translate(0.5F, 1.3 + height, 0.5F); // position offset
             poseStack.mulPose(Axis.YP.rotationDegrees((time) * 2)); // item stack rotation
 
-            // fixed lighting because:
-            // 1. light variable would always be 0 anyway (the pedestal is opaque, making the inside black)
-            // 2. the floating item looks like a hologram
+
             Minecraft.getInstance()
                      .getItemRenderer()
                      .renderStatic(
-                         this.cachedRecipeOutput, ItemDisplayContext.GROUND, LightTexture.FULL_BRIGHT, overlay,
-                         poseStack, vertexConsumerProvider, entity.getLevel(), 0
+                         pr.getResultItem(pedestal.getLevel().registryAccess()),
+                             ItemDisplayContext.GROUND, LightTexture.FULL_BRIGHT, overlay,
+                         poseStack, vertexConsumerProvider, pedestal.getLevel(), 0
                      );
             poseStack.popPose();
         }

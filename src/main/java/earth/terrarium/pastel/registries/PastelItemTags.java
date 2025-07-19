@@ -12,7 +12,7 @@ public class PastelItemTags {
     public static final TagKey<Item> SKULLS = common("skulls");
     public static final TagKey<Item> FRUITS = common("foods/fruit");
 
-    // "spectrum" namespace
+    // "pastel" namespace
     public static final TagKey<Item> COOKBOOKS = of("cookbooks");
     public static final TagKey<Item> FISHING_RODS = of("fishing_rods");
     public static final TagKey<Item> COLORED_PLANKS = of("colored_planks");
@@ -34,6 +34,8 @@ public class PastelItemTags {
     public static final TagKey<Item> PASTEL_NODE_UPGRADES = of("pastel_node_upgrades");
     public static final TagKey<Item> TAG_FILTERING_ITEMS = of("tag_filtering_items");
     public static final TagKey<Item> WEEPING_GALA_LOGS = of("weeping_gala_logs");
+
+    public static final TagKey<Item> PRODUCTIVITY_EXCLUDED = of("productivity_excluded");
 
     private static TagKey<Item> of(String id) {
         return TagKey.create(Registries.ITEM, PastelCommon.locate(id));

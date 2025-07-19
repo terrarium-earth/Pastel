@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.spirit_sallow;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -50,19 +50,19 @@ public class SpiritVinesPlantStemBlock extends GrowingPlantHeadBlock implements 
     @Override
     protected Block getBodyBlock() {
         switch (gemstoneColor) {
-            case BuiltinGemstoneColor.CYAN -> {
+            case PastelGemstoneColor.CYAN -> {
                 return PastelBlocks.CYAN_SPIRIT_SALLOW_VINES_PLANT.get();
             }
-            case BuiltinGemstoneColor.MAGENTA -> {
+            case PastelGemstoneColor.MAGENTA -> {
                 return PastelBlocks.MAGENTA_SPIRIT_SALLOW_VINES_PLANT.get();
             }
-            case BuiltinGemstoneColor.YELLOW -> {
+            case PastelGemstoneColor.YELLOW -> {
                 return PastelBlocks.YELLOW_SPIRIT_SALLOW_VINES_PLANT.get();
             }
-            case BuiltinGemstoneColor.BLACK -> {
+            case PastelGemstoneColor.BLACK -> {
                 return PastelBlocks.BLACK_SPIRIT_SALLOW_VINES_PLANT.get();
             }
-            case BuiltinGemstoneColor.WHITE -> {
+            case PastelGemstoneColor.WHITE -> {
                 return PastelBlocks.WHITE_SPIRIT_SALLOW_VINES_PLANT.get();
             }
             default -> {

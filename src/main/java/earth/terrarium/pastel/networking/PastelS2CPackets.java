@@ -26,7 +26,6 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithPatternAnd
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalCraftingFinishedParticlePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalStartCraftingParticlePayload;
-import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalUpgradedParticlePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPresentOpeningParticlesPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayShootingStarParticlesPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayTakeOffBeltSoundInstancePayload;
@@ -77,10 +76,6 @@ public class PastelS2CPackets {
         registrar.playToClient(
             PlayMemoryManifestingParticlesPayload.ID, PlayMemoryManifestingParticlesPayload.CODEC,
             PlayMemoryManifestingParticlesPayload::execute
-        );
-        registrar.playToClient(
-            PlayPedestalUpgradedParticlePayload.ID, PlayPedestalUpgradedParticlePayload.CODEC,
-            PlayPedestalUpgradedParticlePayload::execute
         );
         registrar.playToClient(
             PlayPedestalStartCraftingParticlePayload.ID, PlayPedestalStartCraftingParticlePayload.CODEC,
