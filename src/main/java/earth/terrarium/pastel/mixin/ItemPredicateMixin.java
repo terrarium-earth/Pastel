@@ -17,26 +17,34 @@ import java.util.Optional;
 
 @Mixin(ItemPredicate.class)
 public abstract class ItemPredicateMixin {
-	
-	@Shadow
-	@Final
-	private Optional<HolderSet<Item>> items;
 
-	// FUCK THIS MIXIN
-	// GO TO HELL - XOXO AZZYYPAARAS
-	@ModifyExpressionValue(method = "test(Lnet/minecraft/world/item/ItemStack;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/core/HolderSet;)Z"))
-	public boolean redirectShearsPredicates(boolean original, @Local(argsOnly = true) ItemStack stack) {
-		if (original)
-			return true;
-		
-		assert items.isPresent();
-		var entries = items.get();
-		
-		if (entries.stream().anyMatch(e -> e.value().equals(Items.SHEARS))) {
-			return stack.is(Tags.Items.TOOLS_SHEAR);
-		}
-		
-		return false;
-	}
-	
+    @Shadow
+    @Final
+    private Optional<HolderSet<Item>> items;
+
+    // FUCK THIS MIXIN
+    // GO TO HELL - XOXO AZZYYPAARAS
+    @ModifyExpressionValue(method = "test(Lnet/minecraft/world/item/ItemStack;)Z", at = @At(value = "INVOKE",
+                                                                                            target = "Lnet/minecraft" +
+                                                                                                     "/world/item" +
+                                                                                                     "/ItemStack;is" +
+                                                                                                     "(Lnet/minecraft" +
+                                                                                                     "/core" +
+                                                                                                     "/HolderSet;)Z"))
+    public boolean redirectShearsPredicates(boolean original, @Local(argsOnly = true) ItemStack stack) {
+        if (original)
+            return true;
+
+        assert items.isPresent();
+        var entries = items.get();
+
+        if (entries.stream()
+                   .anyMatch(e -> e.value()
+                                   .equals(Items.SHEARS))) {
+            return stack.is(Tags.Items.TOOLS_SHEAR);
+        }
+
+        return false;
+    }
+
 }

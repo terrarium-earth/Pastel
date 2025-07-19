@@ -12,19 +12,19 @@ uniform float DesaturateThreshold;
 
 out vec4 fragColor;
 
-#define sat(x) clamp(x,0.,1.)
+#define sat(x) clamp(x, 0., 1.)
 
 float Luma(vec3 color) { return dot(color, vec3(0.2126, 0.7152, 0.0722)); }
 
 // from https://github.com/trevorvanhoof/ColorGrading/blob/master/grading.glsl
-vec3 colorFromKelvin(float temperature) // photographic temperature values are between 15 to 150
+vec3 colorFromKelvin(float temperature)// photographic temperature values are between 15 to 150
 {
     float r, g, b;
-    if(temperature <= 66.0)
+    if (temperature <= 66.0)
     {
         r = 1.0;
         g = sat((99.4708025861 * log(temperature) - 161.1195681661) / 255.0);
-        if(temperature < 19.0)
+        if (temperature < 19.0)
         b = 0.0;
         else
         b = sat((138.5177312231 * log(temperature - 10.0) - 305.0447927307) / 255.0);
@@ -40,8 +40,8 @@ vec3 colorFromKelvin(float temperature) // photographic temperature values are b
 
 vec3 LinearToSRGB(vec3 rgb)
 {
-    rgb=max(rgb,vec3(0,0,0));
-    return max(1.055*pow(rgb,vec3(0.416666667))-0.055,0.0);
+    rgb=max(rgb, vec3(0, 0, 0));
+    return max(1.055*pow(rgb, vec3(0.416666667))-0.055, 0.0);
 }
 
 float max3(vec3 v) {
@@ -49,7 +49,7 @@ float max3(vec3 v) {
 }
 
 void main(){
-	vec4 diffuseColor = texture(DiffuseSampler, texCoord);
+    vec4 diffuseColor = texture(DiffuseSampler, texCoord);
     vec3 colorCorrect = vec3(diffuseColor.rgb);
 
     float luma = Luma(colorCorrect);
@@ -69,10 +69,10 @@ void main(){
     colorCorrect += luma / 15;
 
     if (luma > 0.4 && luma < 0.95)
-            colorCorrect += 0.0125;
+    colorCorrect += 0.0125;
 
     if (luma > 0.275 && luma < 0.95)
-        colorCorrect = min(colorCorrect + 0.005, colorCorrect * 1.005);
+    colorCorrect = min(colorCorrect + 0.005, colorCorrect * 1.005);
 
     colorCorrect.r += Rubedo;
 
@@ -81,5 +81,5 @@ void main(){
 
     colorCorrect += bloomColor * pow(0.3, intensity);
 
-	fragColor = vec4(colorCorrect, 1.0);
+    fragColor = vec4(colorCorrect, 1.0);
 }

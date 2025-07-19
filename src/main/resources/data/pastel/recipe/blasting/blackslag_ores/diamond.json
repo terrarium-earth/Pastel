@@ -1,7 +1,11 @@
 {
   "type": "minecraft:blasting",
   "group": "diamond",
-  "ingredient": [{"item": "pastel:blackslag_diamond_ore"}],
+  "ingredient": [
+    {
+      "item": "pastel:blackslag_diamond_ore"
+    }
+  ],
   "result": {
     "id": "minecraft:diamond"
   },

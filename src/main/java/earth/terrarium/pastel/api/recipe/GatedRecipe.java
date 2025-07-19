@@ -19,44 +19,47 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
-	
-	boolean isSecret();
-	
-	Optional<ResourceLocation> getRequiredAdvancementIdentifier();
-	
-	ResourceLocation getRecipeTypeUnlockIdentifier();
-	
-	String getRecipeTypeShortID();
-	
-	default boolean canPlayerCraft(Player playerEntity) {
-		return DatabankUtils.hasAdvancement(playerEntity, getRecipeTypeUnlockIdentifier())
-				&& DatabankUtils.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier().orElse(null));
-	}
-	
-	default Component getSingleUnlockToastString() {
-		return Component.translatable("pastel.toast." + getRecipeTypeShortID() + "_recipe_unlocked.title");
-	}
-	
-	default Component getMultipleUnlockToastString() {
-		return Component.translatable("pastel.toast." + getRecipeTypeShortID() + "_recipes_unlocked.title");
-	}
-	
-	default void registerInToastManager(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {
-		if (FMLLoader.getDist().isClient()) {
-			registerInToastManagerClient(recipeType, gatedRecipe);
-		}
-	}
-	
-	private void registerInToastManagerClient(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {
-		UnlockToastManager.registerGatedRecipe(recipeType, gatedRecipe);
-	}
-	
-	default @Nullable Component getSecretHintText(ResourceLocation id) {
-		if (isSecret()) {
-			String secretHintLangKey = id.toLanguageKey("recipe", "hint").replace("/", ".");
-			return Language.getInstance().has(secretHintLangKey) ? Component.translatable(secretHintLangKey) : null;
-		}
-		return null;
-	}
-	
+
+    boolean isSecret();
+
+    Optional<ResourceLocation> getRequiredAdvancementIdentifier();
+
+    ResourceLocation getRecipeTypeUnlockIdentifier();
+
+    String getRecipeTypeShortID();
+
+    default boolean canPlayerCraft(Player playerEntity) {
+        return DatabankUtils.hasAdvancement(playerEntity, getRecipeTypeUnlockIdentifier())
+               && DatabankUtils.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier().orElse(null));
+    }
+
+    default Component getSingleUnlockToastString() {
+        return Component.translatable("pastel.toast." + getRecipeTypeShortID() + "_recipe_unlocked.title");
+    }
+
+    default Component getMultipleUnlockToastString() {
+        return Component.translatable("pastel.toast." + getRecipeTypeShortID() + "_recipes_unlocked.title");
+    }
+
+    default void registerInToastManager(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {
+        if (FMLLoader.getDist()
+                     .isClient()) {
+            registerInToastManagerClient(recipeType, gatedRecipe);
+        }
+    }
+
+    private void registerInToastManagerClient(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {
+        UnlockToastManager.registerGatedRecipe(recipeType, gatedRecipe);
+    }
+
+    default @Nullable Component getSecretHintText(ResourceLocation id) {
+        if (isSecret()) {
+            String secretHintLangKey = id.toLanguageKey("recipe", "hint")
+                                         .replace("/", ".");
+            return Language.getInstance()
+                           .has(secretHintLangKey) ? Component.translatable(secretHintLangKey) : null;
+        }
+        return null;
+    }
+
 }

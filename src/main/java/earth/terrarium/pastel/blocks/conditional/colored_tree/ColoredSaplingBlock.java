@@ -23,32 +23,32 @@ public class ColoredSaplingBlock extends SaplingBlock implements ColoredTree {
 			createSettingsCodec(),
 			InkColor.CODEC.fieldOf("color").forGetter(ColoredSaplingBlock::getColor)
 	).apply(instance, ColoredSaplingBlock::new));*/
-	
-	private static final Map<InkColor, ColoredSaplingBlock> SAPLINGS = new Object2ObjectArrayMap<>();
-	protected final InkColor color;
-	
-	public ColoredSaplingBlock(Properties settings, InkColor color, TreeGrower saplingGenerator) {
-		super(saplingGenerator, settings);
-		this.color = color;
-		SAPLINGS.put(color, this);
-	}
 
-	@Override
-	public MapCodec<? extends ColoredSaplingBlock> codec() {
-		throw new NotImplementedException();
-	}
-	
-	@Override
-	public InkColor getColor() {
-		return this.color;
-	}
-	
-	public static ColoredSaplingBlock byColor(InkColor color) {
-		return SAPLINGS.get(color);
-	}
-	
-	public static Collection<ColoredSaplingBlock> all() {
-		return SAPLINGS.values();
-	}
-	
+    private static final Map<InkColor, ColoredSaplingBlock> SAPLINGS = new Object2ObjectArrayMap<>();
+    protected final InkColor color;
+
+    public ColoredSaplingBlock(Properties settings, InkColor color, TreeGrower saplingGenerator) {
+        super(saplingGenerator, settings);
+        this.color = color;
+        SAPLINGS.put(color, this);
+    }
+
+    @Override
+    public MapCodec<? extends ColoredSaplingBlock> codec() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public InkColor getColor() {
+        return this.color;
+    }
+
+    public static ColoredSaplingBlock byColor(InkColor color) {
+        return SAPLINGS.get(color);
+    }
+
+    public static Collection<ColoredSaplingBlock> all() {
+        return SAPLINGS.values();
+    }
+
 }

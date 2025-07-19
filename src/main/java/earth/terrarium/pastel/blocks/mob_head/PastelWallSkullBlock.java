@@ -21,43 +21,49 @@ import java.util.Collection;
 
 public class PastelWallSkullBlock extends WallSkullBlock {
 
-	public static final MapCodec<PastelWallSkullBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-			PastelSkullType.CODEC.fieldOf("kind").forGetter(b -> b.skullType),
-			propertiesCodec()
-	).apply(i, PastelWallSkullBlock::new));
+    public static final MapCodec<PastelWallSkullBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+                                                                                                     PastelSkullType.CODEC.fieldOf("kind")
+                                                                                                                          .forGetter(b -> b.skullType),
+                                                                                                     propertiesCodec()
+                                                                                                 )
+                                                                                                 .apply(
+                                                                                                     i,
+                                                                                                     PastelWallSkullBlock::new
+                                                                                                 ));
 
-	public static BiMap<PastelSkullType, Block> MOB_WALL_HEADS = EnumHashBiMap.create(PastelSkullType.class);
-	private final PastelSkullType skullType;
+    public static BiMap<PastelSkullType, Block> MOB_WALL_HEADS = EnumHashBiMap.create(PastelSkullType.class);
+    private final PastelSkullType skullType;
 
-	public PastelWallSkullBlock(PastelSkullType skullType, Properties settings) {
-		super(skullType, settings);
-		this.skullType = skullType;
-		MOB_WALL_HEADS.put(skullType, this);
-	}
+    public PastelWallSkullBlock(PastelSkullType skullType, Properties settings) {
+        super(skullType, settings);
+        this.skullType = skullType;
+        MOB_WALL_HEADS.put(skullType, this);
+    }
 
-	@Override
-	public MapCodec<? extends PastelWallSkullBlock> codec() {
-		return CODEC;
-	}
+    @Override
+    public MapCodec<? extends PastelWallSkullBlock> codec() {
+        return CODEC;
+    }
 
-	public static Block getMobWallHead(PastelSkullType skullType) {
-		return PastelWallSkullBlock.MOB_WALL_HEADS.get(skullType);
-	}
+    public static Block getMobWallHead(PastelSkullType skullType) {
+        return PastelWallSkullBlock.MOB_WALL_HEADS.get(skullType);
+    }
 
-	@Contract(pure = true)
-	public static @NotNull Collection<Block> getMobWallHeads() {
-		return PastelWallSkullBlock.MOB_WALL_HEADS.values();
-	}
+    @Contract(pure = true)
+    public static @NotNull Collection<Block> getMobWallHeads() {
+        return PastelWallSkullBlock.MOB_WALL_HEADS.values();
+    }
 
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new SkullBlockEntity(pos, state);
-	}
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new SkullBlockEntity(pos, state);
+    }
 
-	@Override
-	@Nullable
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return null;
-	}
+    @Override
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world, BlockState state, BlockEntityType<T> type) {
+        return null;
+    }
 
 }

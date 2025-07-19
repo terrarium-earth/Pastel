@@ -14,17 +14,17 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(AbstractClientPlayer.class)
 public abstract class AbstractClientPlayerEntityMixin {
 
-	@ModifyReturnValue(method = "getFieldOfViewModifier", at = @At("RETURN"))
-	private float arrowhead$applyCustomBowZoom(float original) {
-		AbstractClientPlayer thisPlayer = (AbstractClientPlayer)(Object) this;
-		ItemStack activeStack = thisPlayer.getUseItem();
-		if (thisPlayer.isUsingItem() && activeStack.getItem() ==PastelItems.BEDROCK_BOW.get()) {
-			int useTime = thisPlayer.getTicksUsingItem();
-			float g = Math.min(useTime / 30f, 1.0F);
-			original *= 1.0F - Mth.square(g) * 0.15F;
-		}
+    @ModifyReturnValue(method = "getFieldOfViewModifier", at = @At("RETURN"))
+    private float arrowhead$applyCustomBowZoom(float original) {
+        AbstractClientPlayer thisPlayer = (AbstractClientPlayer) (Object) this;
+        ItemStack activeStack = thisPlayer.getUseItem();
+        if (thisPlayer.isUsingItem() && activeStack.getItem() == PastelItems.BEDROCK_BOW.get()) {
+            int useTime = thisPlayer.getTicksUsingItem();
+            float g = Math.min(useTime / 30f, 1.0F);
+            original *= 1.0F - Mth.square(g) * 0.15F;
+        }
 
-		return original;
-	}
+        return original;
+    }
 
 }

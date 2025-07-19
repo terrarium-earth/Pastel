@@ -11,14 +11,21 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.Collections;
 
 public class PrimordialFireBurningDisplay extends PastelDisplay {
-	
-	public PrimordialFireBurningDisplay(RecipeHolder<PrimordialFireBurningRecipe> recipe) {
-		super(recipe, recipe.value().getIngredients().stream().map(EntryIngredients::ofIngredient).toList(), Collections.singletonList(EntryIngredients.of(recipe.value().getResultItem(BasicDisplay.registryAccess()))));
-	}
-	
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return PastelPlugins.PRIMORDIAL_FIRE_BURNING;
-	}
-	
+
+    public PrimordialFireBurningDisplay(RecipeHolder<PrimordialFireBurningRecipe> recipe) {
+        super(recipe, recipe.value()
+                            .getIngredients()
+                            .stream()
+                            .map(EntryIngredients::ofIngredient)
+                            .toList(), Collections.singletonList(EntryIngredients.of(recipe.value()
+                                                                                           .getResultItem(
+                                                                                               BasicDisplay.registryAccess())))
+        );
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return PastelPlugins.PRIMORDIAL_FIRE_BURNING;
+    }
+
 }

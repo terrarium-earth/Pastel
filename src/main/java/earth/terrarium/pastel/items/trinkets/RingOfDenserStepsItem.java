@@ -13,27 +13,29 @@ import java.util.List;
 
 public class RingOfDenserStepsItem extends GravityRingItem implements GravitableItem {
 
-	public RingOfDenserStepsItem(Properties settings) {
-		super(settings, PastelCommon.locate("unlocks/trinkets/ring_of_denser_steps"), InkColors.BROWN);
-	}
+    public RingOfDenserStepsItem(Properties settings) {
+        super(settings, PastelCommon.locate("unlocks/trinkets/ring_of_denser_steps"), InkColors.BROWN);
+    }
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.pastel.ring_of_denser_steps.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.pastel.ring_of_denser_steps.tooltip2").withStyle(ChatFormatting.GRAY));
-		super.appendHoverText(stack, context, tooltip, type);
-	}
-	
-	public static ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("ring_of_denser_steps_gravity");
-	
-	@Override
-	protected ResourceLocation getAttributeID() {
-		return ATTRIBUTE_ID;
-	}
-	
-	@Override
-	protected boolean negativeGravity() {
-		return false;
-	}
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        tooltip.add(Component.translatable("item.pastel.ring_of_denser_steps.tooltip")
+                             .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.pastel.ring_of_denser_steps.tooltip2")
+                             .withStyle(ChatFormatting.GRAY));
+        super.appendHoverText(stack, context, tooltip, type);
+    }
+
+    public static ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("ring_of_denser_steps_gravity");
+
+    @Override
+    protected ResourceLocation getAttributeID() {
+        return ATTRIBUTE_ID;
+    }
+
+    @Override
+    protected boolean negativeGravity() {
+        return false;
+    }
 
 }

@@ -17,46 +17,49 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class MalachiteCrossbowItem extends CrossbowItem implements Preenchanted, ArrowheadCrossbow {
-	
-	public static final Predicate<ItemStack> PROJECTILES = (stack) -> stack.is(ItemTags.ARROWS) || stack.is(PastelItemTags.GLASS_ARROWS);
-	
-	public MalachiteCrossbowItem(Properties settings) {
+
+    public static final Predicate<ItemStack> PROJECTILES = (stack) -> stack.is(ItemTags.ARROWS) || stack.is(
+        PastelItemTags.GLASS_ARROWS);
+
+    public MalachiteCrossbowItem(Properties settings) {
         super(settings);
     }
-	
-	@Override
-	public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-		return Map.of(Enchantments.PIERCING, 5);
-	}
-	
-	public static ItemStack getFirstProjectile(ItemStack crossbow) {
-		var projectiles = crossbow.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY).getItems();
-		return projectiles.isEmpty() ? ItemStack.EMPTY : projectiles.getFirst();
-	}
-	
-	@Override
-	public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
-		return PastelToolMaterial.MALACHITE.getRepairIngredient().test(ingredient) || super.isValidRepairItem(stack, ingredient);
-	}
-	
-	@Override
-	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return PROJECTILES;
-	}
 
-	@Override
-	public float getProjectileVelocityModifier(ItemStack stack) {
-		return 1.5F;
-	}
+    @Override
+    public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
+        return Map.of(Enchantments.PIERCING, 5);
+    }
 
-	// TODO What is this needed for?
-	public float getPullTimeModifier(ItemStack stack) {
-		return 2.0F;
-	}
+    public static ItemStack getFirstProjectile(ItemStack crossbow) {
+        var projectiles = crossbow.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)
+                                  .getItems();
+        return projectiles.isEmpty() ? ItemStack.EMPTY : projectiles.getFirst();
+    }
 
-	@Override
-	public float getDivergenceMod(ItemStack stack) {
-		return 0.75F;
-	}
-	
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
+        return PastelToolMaterial.MALACHITE.getRepairIngredient()
+                                           .test(ingredient) || super.isValidRepairItem(stack, ingredient);
+    }
+
+    @Override
+    public Predicate<ItemStack> getAllSupportedProjectiles() {
+        return PROJECTILES;
+    }
+
+    @Override
+    public float getProjectileVelocityModifier(ItemStack stack) {
+        return 1.5F;
+    }
+
+    // TODO What is this needed for?
+    public float getPullTimeModifier(ItemStack stack) {
+        return 2.0F;
+    }
+
+    @Override
+    public float getDivergenceMod(ItemStack stack) {
+        return 0.75F;
+    }
+
 }

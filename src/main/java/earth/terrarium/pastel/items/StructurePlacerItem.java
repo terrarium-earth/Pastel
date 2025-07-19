@@ -16,31 +16,34 @@ import net.minecraft.world.level.block.Rotation;
 import java.util.List;
 
 public class StructurePlacerItem extends Item implements CreativeOnlyItem {
-	
-	protected final ResourceLocation multiBlockIdentifier;
-	
-	public StructurePlacerItem(Properties settings, ResourceLocation multiBlockIdentifier) {
-		super(settings);
-		this.multiBlockIdentifier = multiBlockIdentifier;
-	}
-	
-	@Override
-	public InteractionResult useOn(UseOnContext context) {
-		if (context.getPlayer() != null && context.getPlayer().isCreative()) {
-			Multiblock multiblock = PastelMultiblocks.get(multiBlockIdentifier);
-			if (multiblock != null) {
-				Rotation blockRotation = Support.rotationFromDirection(context.getHorizontalDirection());
-				multiblock.place(context.getLevel(), context.getClickedPos().above(), blockRotation);
-				return InteractionResult.CONSUME;
-			}
-		}
-		return InteractionResult.PASS;
-	}
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		CreativeOnlyItem.appendTooltip(tooltip);
-	}
-	
+    protected final ResourceLocation multiBlockIdentifier;
+
+    public StructurePlacerItem(Properties settings, ResourceLocation multiBlockIdentifier) {
+        super(settings);
+        this.multiBlockIdentifier = multiBlockIdentifier;
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        if (context.getPlayer() != null && context.getPlayer()
+                                                  .isCreative()) {
+            Multiblock multiblock = PastelMultiblocks.get(multiBlockIdentifier);
+            if (multiblock != null) {
+                Rotation blockRotation = Support.rotationFromDirection(context.getHorizontalDirection());
+                multiblock.place(context.getLevel(), context.getClickedPos()
+                                                            .above(), blockRotation
+                );
+                return InteractionResult.CONSUME;
+            }
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        CreativeOnlyItem.appendTooltip(tooltip);
+    }
+
 }

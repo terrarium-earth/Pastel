@@ -1,7 +1,11 @@
 {
   "type": "minecraft:smelting",
   "group": "lapis_lazuli",
-  "ingredient": [{"item": "pastel:blackslag_lapis_ore"}],
+  "ingredient": [
+    {
+      "item": "pastel:blackslag_lapis_ore"
+    }
+  ],
   "result": {
     "id": "minecraft:lapis_lazuli"
   },

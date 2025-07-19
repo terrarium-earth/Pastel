@@ -17,29 +17,35 @@ public abstract class GameRendererMixin {
 
     @ModifyReturnValue(method = "getNightVisionScale", at = @At("RETURN"))
     private static float nerfNightVisionInDimension(float original, LivingEntity entity, float tickDelta) {
-		if (Environmental.isActive().force()) {
-			original /= 6F;
-		}
-		original *= 1F - Environmental.getEnvData().darkening();
+        if (Environmental.isActive()
+                         .force()) {
+            original /= 6F;
+        }
+        original *= 1F - Environmental.getEnvData()
+                                      .darkening();
 
         return original;
     }
-	
-	@Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;getMainRenderTarget()Lcom/mojang/blaze3d/pipeline/RenderTarget;", shift = At.Shift.BEFORE))
-	private void applyPostProcessShaders(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
-		RenderSystem.disableBlend();
-		RenderSystem.disableDepthTest();
-		RenderSystem.resetTextureMatrix();
-		PastelShaders.colorGradingPostProcess.ifPresent(pps -> pps.process(tickCounter.getGameTimeDeltaTicks()));
-	}
-	
-	@Inject(method = "close", at = @At("TAIL"))
-	private void closeShaders(CallbackInfo ci) {
-		PastelShaders.clearDimensionShaders();
-	}
-	
-	@Inject(method = "resize", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;resize(II)V"))
-	private void resizeShaders(int width, int height, CallbackInfo ci) {
-		PastelShaders.resizeShaders(width, height);
-	}
+
+    @Inject(method = "render", at = @At(value = "INVOKE",
+                                        target = "Lnet/minecraft/client/Minecraft;getMainRenderTarget()" +
+                                                 "Lcom/mojang/blaze3d/pipeline/RenderTarget;",
+                                        shift = At.Shift.BEFORE))
+    private void applyPostProcessShaders(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
+        RenderSystem.disableBlend();
+        RenderSystem.disableDepthTest();
+        RenderSystem.resetTextureMatrix();
+        PastelShaders.colorGradingPostProcess.ifPresent(pps -> pps.process(tickCounter.getGameTimeDeltaTicks()));
+    }
+
+    @Inject(method = "close", at = @At("TAIL"))
+    private void closeShaders(CallbackInfo ci) {
+        PastelShaders.clearDimensionShaders();
+    }
+
+    @Inject(method = "resize",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;resize(II)V"))
+    private void resizeShaders(int width, int height, CallbackInfo ci) {
+        PastelShaders.resizeShaders(width, height);
+    }
 }

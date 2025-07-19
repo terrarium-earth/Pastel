@@ -7,7 +7,8 @@ import com.klikli_dev.modonomicon.client.render.page.BookRecipePageRenderer;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import net.minecraft.client.gui.GuiGraphics;
 
-public abstract class BookGatedRecipePageRenderer<R extends GatedRecipe<?>, T extends BookRecipePage<R>> extends BookRecipePageRenderer<R, T> {
+public abstract class BookGatedRecipePageRenderer<R extends GatedRecipe<?>, T extends BookRecipePage<R>>
+    extends BookRecipePageRenderer<R, T> {
 
     public BookGatedRecipePageRenderer(T page) {
         super(page);
@@ -15,8 +16,10 @@ public abstract class BookGatedRecipePageRenderer<R extends GatedRecipe<?>, T ex
 
     public void renderTitle(GuiGraphics drawContext, int recipeY, boolean second) {
         BookTextHolder title = second ? page.getTitle2() : page.getTitle1();
-        if (!title.getString().isEmpty()) {
-            int titleY = second ? recipeY - (page.getTitle2().isEmpty() ? 10 : 0) - 10 : -5;
+        if (!title.getString()
+                  .isEmpty()) {
+            int titleY = second ? recipeY - (page.getTitle2()
+                                                 .isEmpty() ? 10 : 0) - 10 : -5;
             super.renderTitle(drawContext, title, false, BookEntryScreen.PAGE_WIDTH / 2, titleY);
         }
     }

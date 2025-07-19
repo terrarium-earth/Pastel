@@ -1,15 +1,15 @@
 {
-	"parent": "minecraft:item/generated",
-	"textures": {
-		"layer0": "pastel:item/ink_flask_base"
-	},
-	"overrides": [
-		{
-			"predicate": {
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/ink_flask_base"
+  },
+  "overrides": [
+    {
+      "predicate": {
         "fill_state": 0.1
-			},
+      },
       "model": "pastel:item/ink_flask_10"
-		},
+    },
     {
       "predicate": {
         "fill_state": 0.25
@@ -21,7 +21,8 @@
         "fill_state": 0.4
       },
       "model": "pastel:item/ink_flask_40"
-    },{
+    },
+    {
       "predicate": {
         "fill_state": 0.65
       },
@@ -34,11 +35,11 @@
       "model": "pastel:item/ink_flask_80"
     },
 
-		{
-			"predicate": {
+    {
+      "predicate": {
         "fill_state": 1
       },
       "model": "pastel:item/ink_flask_full"
-		}
-	]
+    }
+  ]
 }

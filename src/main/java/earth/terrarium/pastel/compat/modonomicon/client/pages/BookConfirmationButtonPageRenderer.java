@@ -30,13 +30,13 @@ public class BookConfirmationButtonPageRenderer extends BookTextPageRenderer {
         boolean completed = isConfirmed();
 
         BookTextHolder buttonText = completed
-                ? confirmationPage.getConfirmedButtonText()
-                : confirmationPage.getButtonText();
+                                    ? confirmationPage.getConfirmedButtonText()
+                                    : confirmationPage.getButtonText();
 
         Button button = Button.builder(buttonText.getComponent(), this::confirmationButtonClicked)
-                .size(BookEntryScreen.PAGE_WIDTH - 12, Button.DEFAULT_HEIGHT)
-                .pos(2, BookEntryScreen.PAGE_HEIGHT - 3)
-                .build();
+                              .size(BookEntryScreen.PAGE_WIDTH - 12, Button.DEFAULT_HEIGHT)
+                              .pos(2, BookEntryScreen.PAGE_HEIGHT - 3)
+                              .build();
 
         button.active = !completed;
         addButton(button);
@@ -44,9 +44,16 @@ public class BookConfirmationButtonPageRenderer extends BookTextPageRenderer {
 
     protected void confirmationButtonClicked(Button button) {
         if (!(page instanceof BookConfirmationButtonPage confirmationPage)) return;
-        PacketDistributor.sendToServer(new GuidebookConfirmationButtonPressedPayload(confirmationPage.getConfirmationString()));
-        button.setMessage(confirmationPage.getConfirmedButtonText().getComponent());
-        BookGuiManager.get().openEntry(page.getBook().getId(), page.getParentEntry().getId(), page.getPageNumber());
+        PacketDistributor.sendToServer(
+            new GuidebookConfirmationButtonPressedPayload(confirmationPage.getConfirmationString()));
+        button.setMessage(confirmationPage.getConfirmedButtonText()
+                                          .getComponent());
+        BookGuiManager.get()
+                      .openEntry(
+                          page.getBook()
+                              .getId(), page.getParentEntry()
+                                            .getId(), page.getPageNumber()
+                      );
     }
 
 }

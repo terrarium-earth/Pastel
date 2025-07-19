@@ -28,9 +28,15 @@ import net.minecraft.world.phys.Vec3;
 public class AzuriteOreBlock extends CloakedOreBlock {
 
     public static final MapCodec<AzuriteOreBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            IntProvider.codec(0, 10).fieldOf("experience").forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getXpRange()),
-            propertiesCodec()
-     ).apply(instance, AzuriteOreBlock::new));
+                                                                                                              IntProvider.codec(0, 10)
+                                                                                                                         .fieldOf("experience")
+                                                                                                                         .forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getXpRange()),
+                                                                                                              propertiesCodec()
+                                                                                                          )
+                                                                                                          .apply(
+                                                                                                              instance,
+                                                                                                              AzuriteOreBlock::new
+                                                                                                          ));
 
     public AzuriteOreBlock(IntProvider experienceDropped, Properties settings) {
         super(experienceDropped, settings);
@@ -44,18 +50,30 @@ public class AzuriteOreBlock extends CloakedOreBlock {
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
         super.stepOn(world, pos, state, entity);
-        if (world.isClientSide() && !entity.isSteppingCarefully() && world.random.nextInt(3) == 0 && entity instanceof Player player && BlockHiddenType.isVisible(state, player)) {
-			ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE_SMALL, pos, new Direction[]{Direction.UP}, 1, Vec3.ZERO);
+        if (world.isClientSide() && !entity.isSteppingCarefully() && world.random.nextInt(3) == 0 &&
+            entity instanceof Player player && BlockHiddenType.isVisible(state, player)) {
+            ParticleHelper.playParticleAroundBlockSides(
+                world, PastelParticleTypes.AZURE_MOTE_SMALL, pos, new Direction[]{Direction.UP}, 1, Vec3.ZERO);
         }
     }
-    
+
     @Override
     public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         super.playerWillDestroy(world, pos, state, player);
-        
+
         if (world.isClientSide() && BlockHiddenType.isVisible(state, player)) {
-            ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, 1, false, Vec3.ZERO, 0, true, Vec3.atCenterOf(pos), new Vec3(0, 0.08D + world.getRandom().nextDouble() * 0.04, 0));
-			ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE_SMALL, pos, Direction.values(), 3, Vec3.ZERO);
+            ParticleHelper.playTriangulatedParticle(
+                world, PastelParticleTypes.AZURE_AURA, 1, false, Vec3.ZERO, 0, true, Vec3.atCenterOf(pos), new Vec3(
+                    0,
+                    0.08D +
+                    world.getRandom()
+                         .nextDouble() *
+                    0.04,
+                    0
+                )
+            );
+            ParticleHelper.playParticleAroundBlockSides(
+                world, PastelParticleTypes.AZURE_MOTE_SMALL, pos, Direction.values(), 3, Vec3.ZERO);
         }
 
         return state;
@@ -64,28 +82,36 @@ public class AzuriteOreBlock extends CloakedOreBlock {
     @Override
     public void attack(BlockState state, Level world, BlockPos pos, Player player) {
         super.attack(state, world, pos, player);
-        
+
         if (world.isClientSide() && BlockHiddenType.isVisible(state, player)) {
-			ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(), 1, Vec3.ZERO);
+            ParticleHelper.playParticleAroundBlockSides(
+                world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(), 1, Vec3.ZERO);
         }
     }
-    
+
     @OnlyIn(Dist.CLIENT)
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(state, world, pos, random);
-        
+
         if (!BlockHiddenType.isVisible(state, Minecraft.getInstance().player))
             return;
 
         AuraSoundInstance.getOrCreateInstance(AuraData.AZURITE, world, pos);
 
-        if (world.getRandom().nextFloat() >= 0.02)
+        if (world.getRandom()
+                 .nextFloat() >= 0.02)
             return;
 
-        ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, 5, false, new Vec3(2, 0, 2), 0, true, Vec3.atLowerCornerOf(pos), new Vec3(0, 0.07D + random.nextDouble() * 0.06, 0));
-        ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(), random.nextIntBetweenInclusive(1, 3), Vec3.ZERO);
+        ParticleHelper.playTriangulatedParticle(
+            world, PastelParticleTypes.AZURE_AURA, 5, false, new Vec3(2, 0, 2), 0, true, Vec3.atLowerCornerOf(pos),
+            new Vec3(0, 0.07D + random.nextDouble() * 0.06, 0)
+        );
+        ParticleHelper.playParticleAroundBlockSides(
+            world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(), random.nextIntBetweenInclusive(1, 3),
+            Vec3.ZERO
+        );
         world.playSound(null, pos, PastelSoundEvents.SOFT_HUM, SoundSource.BLOCKS, 1F, random.nextFloat() * 0.5F + 1F);
     }
-    
+
 }

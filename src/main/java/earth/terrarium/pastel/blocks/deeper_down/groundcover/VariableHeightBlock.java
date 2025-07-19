@@ -9,23 +9,23 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class VariableHeightBlock extends MudBlock {
-	
-	private final VoxelShape shape;
-	
-	public VariableHeightBlock(Properties settings, int height) {
-		super(settings);
-		shape = Block.box(0, 0, 0, 16, height, 16);
-	}
+
+    private final VoxelShape shape;
+
+    public VariableHeightBlock(Properties settings, int height) {
+        super(settings);
+        shape = Block.box(0, 0, 0, 16, height, 16);
+    }
 
 //    @Override
 //    public MapCodec<? extends VariableHeightBlock> getCodec() {
 //        //TODO: Make the codec
 //        return CODEC;
 //    }
-	
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return shape;
-	}
-    
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return shape;
+    }
+
 }

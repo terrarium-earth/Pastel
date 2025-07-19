@@ -1,14 +1,59 @@
 {
   "parent": "pastel:block/present_red",
   "overrides": [
-    { "predicate": { "variant": 0.1 }, "model": "pastel:block/present_blue" },
-    { "predicate": { "variant": 0.2 }, "model": "pastel:block/present_cyan" },
-    { "predicate": { "variant": 0.3 }, "model": "pastel:block/present_green" },
-    { "predicate": { "variant": 0.4 }, "model": "pastel:block/present_purple" },
-    { "predicate": { "variant": 0.5 }, "model": "pastel:block/present_cake" },
-    { "predicate": { "variant": 0.6 }, "model": "pastel:block/present_striped" },
-    { "predicate": { "variant": 0.7 }, "model": "pastel:block/present_starry" },
-    { "predicate": { "variant": 0.8 }, "model": "pastel:block/present_winter" },
-    { "predicate": { "variant": 0.9 }, "model": "pastel:block/present_pride" }
+    {
+      "predicate": {
+        "variant": 0.1
+      },
+      "model": "pastel:block/present_blue"
+    },
+    {
+      "predicate": {
+        "variant": 0.2
+      },
+      "model": "pastel:block/present_cyan"
+    },
+    {
+      "predicate": {
+        "variant": 0.3
+      },
+      "model": "pastel:block/present_green"
+    },
+    {
+      "predicate": {
+        "variant": 0.4
+      },
+      "model": "pastel:block/present_purple"
+    },
+    {
+      "predicate": {
+        "variant": 0.5
+      },
+      "model": "pastel:block/present_cake"
+    },
+    {
+      "predicate": {
+        "variant": 0.6
+      },
+      "model": "pastel:block/present_striped"
+    },
+    {
+      "predicate": {
+        "variant": 0.7
+      },
+      "model": "pastel:block/present_starry"
+    },
+    {
+      "predicate": {
+        "variant": 0.8
+      },
+      "model": "pastel:block/present_winter"
+    },
+    {
+      "predicate": {
+        "variant": 0.9
+      },
+      "model": "pastel:block/present_pride"
+    }
   ]
 }

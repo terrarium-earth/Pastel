@@ -12,17 +12,17 @@ import net.minecraft.resources.ResourceLocation;
 
 @OnlyIn(Dist.CLIENT)
 public class EraserEntityRenderer extends MobRenderer<EraserEntity, EraserEntityModel> {
-	
-	public static final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/eraser/eraser_base.png");
-	
-	public EraserEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, new EraserEntityModel(context.bakeLayer(PastelModelLayers.ERASER)), 0.175F);
-		this.addLayer(new EraserOverlayFeatureRenderer(this));
-	}
-	
-	@Override
-	public ResourceLocation getTextureLocation(EraserEntity entity) {
-		return TEXTURE;
-	}
-	
+
+    public static final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/eraser/eraser_base.png");
+
+    public EraserEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new EraserEntityModel(context.bakeLayer(PastelModelLayers.ERASER)), 0.175F);
+        this.addLayer(new EraserOverlayFeatureRenderer(this));
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(EraserEntity entity) {
+        return TEXTURE;
+    }
+
 }

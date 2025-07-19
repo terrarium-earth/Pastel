@@ -18,43 +18,43 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 public abstract class PastelItemFrameItem extends ItemFrameItem {
 
-	public PastelItemFrameItem(EntityType<? extends HangingEntity> entityType, Item.Properties settings) {
-		super(entityType, settings);
-	}
+    public PastelItemFrameItem(EntityType<? extends HangingEntity> entityType, Item.Properties settings) {
+        super(entityType, settings);
+    }
 
-	public abstract ItemFrame getItemFrameEntity(Level world, BlockPos blockPos, Direction direction);
+    public abstract ItemFrame getItemFrameEntity(Level world, BlockPos blockPos, Direction direction);
 
-	@Override
-	public InteractionResult useOn(UseOnContext context) {
-		BlockPos blockPos = context.getClickedPos();
-		Direction direction = context.getClickedFace();
-		BlockPos blockPos2 = blockPos.relative(direction);
-		Player playerEntity = context.getPlayer();
-		ItemStack itemStack = context.getItemInHand();
-		if (playerEntity != null && !this.mayPlace(playerEntity, direction, itemStack, blockPos2)) {
-			return InteractionResult.FAIL;
-		} else {
-			Level world = context.getLevel();
-			ItemFrame invisibleItemFrameEntity = getItemFrameEntity(world, blockPos2, direction);
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        BlockPos blockPos = context.getClickedPos();
+        Direction direction = context.getClickedFace();
+        BlockPos blockPos2 = blockPos.relative(direction);
+        Player playerEntity = context.getPlayer();
+        ItemStack itemStack = context.getItemInHand();
+        if (playerEntity != null && !this.mayPlace(playerEntity, direction, itemStack, blockPos2)) {
+            return InteractionResult.FAIL;
+        } else {
+            Level world = context.getLevel();
+            ItemFrame invisibleItemFrameEntity = getItemFrameEntity(world, blockPos2, direction);
 
-			var nbtComponent = itemStack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
-			if (!nbtComponent.isEmpty()) {
-				EntityType.updateCustomEntityTag(world, playerEntity, invisibleItemFrameEntity, nbtComponent);
-			}
+            var nbtComponent = itemStack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
+            if (!nbtComponent.isEmpty()) {
+                EntityType.updateCustomEntityTag(world, playerEntity, invisibleItemFrameEntity, nbtComponent);
+            }
 
-			if (invisibleItemFrameEntity.survives()) {
-				if (!world.isClientSide) {
-					invisibleItemFrameEntity.playPlacementSound();
-					world.gameEvent(playerEntity, GameEvent.ENTITY_PLACE, blockPos);
-					world.addFreshEntity(invisibleItemFrameEntity);
-				}
+            if (invisibleItemFrameEntity.survives()) {
+                if (!world.isClientSide) {
+                    invisibleItemFrameEntity.playPlacementSound();
+                    world.gameEvent(playerEntity, GameEvent.ENTITY_PLACE, blockPos);
+                    world.addFreshEntity(invisibleItemFrameEntity);
+                }
 
-				itemStack.shrink(1);
-				return InteractionResult.sidedSuccess(world.isClientSide);
-			} else {
-				return InteractionResult.CONSUME;
-			}
-		}
-	}
+                itemStack.shrink(1);
+                return InteractionResult.sidedSuccess(world.isClientSide);
+            } else {
+                return InteractionResult.CONSUME;
+            }
+        }
+    }
 
 }

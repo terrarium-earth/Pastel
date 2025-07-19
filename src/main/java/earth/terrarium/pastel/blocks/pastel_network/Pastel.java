@@ -25,22 +25,23 @@ public class Pastel {
 
     public static ServerPastelNetworkManager getServerInstance() {
         if (serverManager == null && PastelCommon.getSidedServer() != null) {
-            serverManager = ServerPastelNetworkManager.get(PastelCommon.getSidedServer().overworld());
+            serverManager = ServerPastelNetworkManager.get(PastelCommon.getSidedServer()
+                                                                       .overworld());
         }
         return serverManager;
     }
-	
-	public static PastelNetworkManager<?, ?> getInstance(boolean client) {
+
+    public static PastelNetworkManager<?, ?> getInstance(boolean client) {
         if (client) {
             return getClientInstance();
         } else {
             return getServerInstance();
         }
     }
-    
+
     @OnlyIn(Dist.CLIENT)
     public static void clearClientInstance() {
-		getClientInstance().clearContent();
+        getClientInstance().clearContent();
         EarlyRenderingParticleContainer.clear();
     }
 

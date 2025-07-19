@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mixin(BundleContents.Mutable.class)
 public interface BundleContentsComponentBuilderAccessor {
-	
-	@Accessor
-	List<ItemStack> getItems();
-	
+
+    @Accessor
+    List<ItemStack> getItems();
+
 }

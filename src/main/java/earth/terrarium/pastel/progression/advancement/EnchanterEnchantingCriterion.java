@@ -9,14 +9,14 @@ import net.minecraft.world.item.ItemStack;
 
 public class EnchanterEnchantingCriterion extends SimpleCriterionTrigger<EnchanterCraftingCriterion.Conditions> {
 
-	public static final ResourceLocation ID = PastelCommon.locate("enchanter_enchanting");
+    public static final ResourceLocation ID = PastelCommon.locate("enchanter_enchanting");
 
-	public void trigger(ServerPlayer player, ItemStack itemStack, int spentExperience) {
-		this.trigger(player, (conditions) -> conditions.matches(itemStack, spentExperience));
-	}
+    public void trigger(ServerPlayer player, ItemStack itemStack, int spentExperience) {
+        this.trigger(player, (conditions) -> conditions.matches(itemStack, spentExperience));
+    }
 
-	@Override
-	public Codec<EnchanterCraftingCriterion.Conditions> codec() {
-		return EnchanterCraftingCriterion.Conditions.CODEC;
-	}
+    @Override
+    public Codec<EnchanterCraftingCriterion.Conditions> codec() {
+        return EnchanterCraftingCriterion.Conditions.CODEC;
+    }
 }

@@ -21,7 +21,8 @@ public class NectardewBurgeonItem extends Item implements SlotBackgroundEffect {
 
     public NectardewBurgeonItem(Properties settings, String lore) {
         super(settings);
-        this.lore = Component.translatable(lore).withStyle(ChatFormatting.GRAY);
+        this.lore = Component.translatable(lore)
+                             .withStyle(ChatFormatting.GRAY);
     }
 
     @Override

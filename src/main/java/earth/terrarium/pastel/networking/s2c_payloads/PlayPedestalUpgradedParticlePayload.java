@@ -15,25 +15,33 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
 
-public record PlayPedestalUpgradedParticlePayload(BlockPos pedestalPos, PedestalRecipeTier newTier) implements CustomPacketPayload {
-	
-	public static final Type<PlayPedestalUpgradedParticlePayload> ID = PastelC2SPackets.makeId("play_pedestal_upgraded_particle");
-	public static final StreamCodec<FriendlyByteBuf, PlayPedestalUpgradedParticlePayload> CODEC = StreamCodec.composite(
-			BlockPos.STREAM_CODEC, PlayPedestalUpgradedParticlePayload::pedestalPos,
-			PedestalRecipeTier.STREAM_CODEC, PlayPedestalUpgradedParticlePayload::newTier,
-			PlayPedestalUpgradedParticlePayload::new
-	);
-	
-	public static void spawnPedestalUpgradeParticles(Level world, BlockPos pedestalPos, @NotNull PedestalVariant newPedestalVariant) {
-		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) world, new ChunkPos(pedestalPos), new PlayPedestalUpgradedParticlePayload(pedestalPos, newPedestalVariant.getRecipeTier()));
-	}
-	
-	public static void execute(PlayPedestalUpgradedParticlePayload payload, IPayloadContext context) {
-		PedestalBlock.spawnUpgradeParticleEffectsForTier(payload.pedestalPos, payload.newTier);
-	}
-	
-	@Override
-	public Type<? extends CustomPacketPayload> type() {
-		return ID;
-	}
+public record PlayPedestalUpgradedParticlePayload(BlockPos pedestalPos, PedestalRecipeTier newTier)
+    implements CustomPacketPayload {
+
+    public static final Type<PlayPedestalUpgradedParticlePayload> ID = PastelC2SPackets.makeId(
+        "play_pedestal_upgraded_particle");
+    public static final StreamCodec<FriendlyByteBuf, PlayPedestalUpgradedParticlePayload> CODEC = StreamCodec.composite(
+        BlockPos.STREAM_CODEC, PlayPedestalUpgradedParticlePayload::pedestalPos,
+        PedestalRecipeTier.STREAM_CODEC, PlayPedestalUpgradedParticlePayload::newTier,
+        PlayPedestalUpgradedParticlePayload::new
+    );
+
+    public static void spawnPedestalUpgradeParticles(
+        Level world, BlockPos pedestalPos, @NotNull PedestalVariant newPedestalVariant) {
+        PacketDistributor.sendToPlayersTrackingChunk(
+            (ServerLevel) world, new ChunkPos(pedestalPos), new PlayPedestalUpgradedParticlePayload(
+                pedestalPos,
+                newPedestalVariant.getRecipeTier()
+            )
+        );
+    }
+
+    public static void execute(PlayPedestalUpgradedParticlePayload payload, IPayloadContext context) {
+        PedestalBlock.spawnUpgradeParticleEffectsForTier(payload.pedestalPos, payload.newTier);
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
+    }
 }

@@ -11,7 +11,7 @@
   "advancements.pastel.gift_or_open_present.title": "Colourful Spectacle",
   "advancements.pastel.kill_entity_with_ink_projectile.description": "Kill a creature by using your Paintbrush's Ink Slinging ability. Sneak-Use to select a colour.",
   "advancements.pastel.place_color_picker.description": "Craft and place down a Colour Picker",
-	"advancements.pastel.pluck_resplendent_feather.description": "§lOH LAWD OH SHUCKS OH SPIFFING OH BLIMEY OH SPLENDID",
+  "advancements.pastel.pluck_resplendent_feather.description": "§lOH LAWD OH SHUCKS OH SPIFFING OH BLIMEY OH SPLENDID",
   "advancements.pastel.solve_color_mixing_preservation_ruin.title": "Assorted Colours",
   "advancements.pastel.pastel.description": "A story about magic, colour and chaos",
 
@@ -80,7 +80,7 @@
   "book.pastel.guidebook.creature_manipulation.shulkers.text": "Works for every colour of Shulker.",
   "book.pastel.guidebook.crystal_flowers.page2.text": "Very herbal and bitter.\\\n\\\n*They resemble apricots only in colour.*",
   "book.pastel.guidebook.crystallarieum.page1.text": "Growing resources requires:\n- a starter bud thrown in\n- catalysts thrown in\n- a specific colour of Ink, supplied via [Flask](entry://ink/ink_flask)",
-	"book.pastel.guidebook.resplendent_deco.page0.text": "I truly envy my [Kindlings](entry://creating_life/kindlings), spending their days covered in these fluffy, puffy feathers. Beyond soft - luxurious in both feel and colour, even with the [#](f0af15)golden vibrancy[#]() flowing through them.\\\n\\\nI can see myself falling asleep on a cushion made from these.",
+  "book.pastel.guidebook.resplendent_deco.page0.text": "I truly envy my [Kindlings](entry://creating_life/kindlings), spending their days covered in these fluffy, puffy feathers. Beyond soft - luxurious in both feel and colour, even with the [#](f0af15)golden vibrancy[#]() flowing through them.\\\n\\\nI can see myself falling asleep on a cushion made from these.",
   "book.pastel.guidebook.enchantment_canvas.page0.text": "My pickaxe, which was sinfully expensive to enchant? It's almost broken, and each broken block now is more damaging to my nerves than the tool itself.\\\n\\\nEven if I can't save the tool, at least I can save the enchantments! This canvas does not capture colour: when used on a tool, the enchantments are swapped.",
   "book.pastel.guidebook.everpromise_ribbon.page1.text": "After naming it, I can use a [](item://minecraft:crafting_table) to add [Pigment](entry://general/pigment) to the [#](bb00bb)Ribbon[#]() to colour the pets name.",
   "book.pastel.guidebook.forsaken_cathedral.page1.text": "The end of my journey for now.\\\n\\\nIt was an arduous journey at times, but I have learned a lot.\\\n\\\nnSee you some day, my *Colourful World*.",

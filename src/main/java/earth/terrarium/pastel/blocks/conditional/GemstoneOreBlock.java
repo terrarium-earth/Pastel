@@ -11,22 +11,28 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class GemstoneOreBlock extends CloakedOreBlock {
 
-	public final MapCodec<GemstoneOreBlock> codec;
-	private final GemstoneColor gemstoneColor;
-	
-	public GemstoneOreBlock(IntProvider experienceDropped, Properties settings, GemstoneColor gemstoneColor) {
-		super(experienceDropped, settings);
-		this.gemstoneColor = gemstoneColor;
-		this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
-				IntProvider.codec(0, 10).fieldOf("experience").forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getXpRange()),
-				propertiesCodec(),
-				PastelRegistries.GEMSTONE_COLOR.byNameCodec().fieldOf("color").forGetter(b -> b.gemstoneColor)
-		).apply(instance, GemstoneOreBlock::new));
-	}
+    public final MapCodec<GemstoneOreBlock> codec;
+    private final GemstoneColor gemstoneColor;
 
-	@Override
-	public MapCodec<? extends GemstoneOreBlock> codec() {
-		return codec;
-	}
+    public GemstoneOreBlock(IntProvider experienceDropped, Properties settings, GemstoneColor gemstoneColor) {
+        super(experienceDropped, settings);
+        this.gemstoneColor = gemstoneColor;
+        this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                                                                         IntProvider.codec(0, 10)
+                                                                                    .fieldOf("experience")
+                                                                                    .forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getXpRange()),
+                                                                         propertiesCodec(),
+                                                                         PastelRegistries.GEMSTONE_COLOR.byNameCodec()
+                                                                                                        .fieldOf(
+                                                                                                            "color")
+                                                                                                        .forGetter(b -> b.gemstoneColor)
+                                                                     )
+                                                                     .apply(instance, GemstoneOreBlock::new));
+    }
+
+    @Override
+    public MapCodec<? extends GemstoneOreBlock> codec() {
+        return codec;
+    }
 
 }

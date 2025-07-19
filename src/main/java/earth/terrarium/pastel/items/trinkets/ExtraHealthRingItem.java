@@ -18,39 +18,45 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class ExtraHealthRingItem extends InkDrainTrinketItem {
-	
-	public ExtraHealthRingItem(Properties settings) {
-		super(settings, PastelCommon.locate("unlocks/trinkets/heartsingers_reward"), InkColors.PINK);
-	}
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.pastel.heartsingers_reward.tooltip").withStyle(ChatFormatting.GRAY));
-		super.appendHoverText(stack, context, tooltip, type);
-	}
-	
-	public static ResourceLocation HEALTH_ATTRIBUTE_ID = PastelCommon.locate("heartsingers_reward_health");
+    public ExtraHealthRingItem(Properties settings) {
+        super(settings, PastelCommon.locate("unlocks/trinkets/heartsingers_reward"), InkColors.PINK);
+    }
 
-	@Override
-	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
-		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);;
-		
-		FixedSingleInkStorage inkStorage = getEnergyStorage(stack);
-		long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
-		int extraHearts = getExtraHearts(storedInk);
-		if (extraHearts != 0) {
-			modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(HEALTH_ATTRIBUTE_ID, extraHearts, AttributeModifier.Operation.ADD_VALUE));
-		}
-		
-		return modifiers;
-	}
-	
-	public int getExtraHearts(long storedInk) {
-		if (storedInk < 100) {
-			return 0;
-		} else {
-			return 2 + 2 * (int) (Math.log(storedInk / 100.0f) / Math.log(8));
-		}
-	}
-	
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        tooltip.add(Component.translatable("item.pastel.heartsingers_reward.tooltip")
+                             .withStyle(ChatFormatting.GRAY));
+        super.appendHoverText(stack, context, tooltip, type);
+    }
+
+    public static ResourceLocation HEALTH_ATTRIBUTE_ID = PastelCommon.locate("heartsingers_reward_health");
+
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
+        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
+        ;
+
+        FixedSingleInkStorage inkStorage = getEnergyStorage(stack);
+        long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
+        int extraHearts = getExtraHearts(storedInk);
+        if (extraHearts != 0) {
+            modifiers.put(
+                Attributes.MAX_HEALTH,
+                new AttributeModifier(HEALTH_ATTRIBUTE_ID, extraHearts, AttributeModifier.Operation.ADD_VALUE)
+            );
+        }
+
+        return modifiers;
+    }
+
+    public int getExtraHearts(long storedInk) {
+        if (storedInk < 100) {
+            return 0;
+        } else {
+            return 2 + 2 * (int) (Math.log(storedInk / 100.0f) / Math.log(8));
+        }
+    }
+
 }

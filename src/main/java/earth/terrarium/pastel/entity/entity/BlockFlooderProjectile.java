@@ -22,93 +22,101 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class BlockFlooderProjectile extends ThrowableItemProjectile {
-	
-	public BlockFlooderProjectile(EntityType<BlockFlooderProjectile> thrownItemEntityEntityType, Level world) {
-		super(thrownItemEntityEntityType, world);
-	}
 
-	public BlockFlooderProjectile(Level world, LivingEntity owner) {
-		super(PastelEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), owner, world);
-	}
+    public BlockFlooderProjectile(EntityType<BlockFlooderProjectile> thrownItemEntityEntityType, Level world) {
+        super(thrownItemEntityEntityType, world);
+    }
 
-	public BlockFlooderProjectile(Level world, double x, double y, double z) {
-		super(PastelEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), x, y, z, world);
-	}
+    public BlockFlooderProjectile(Level world, LivingEntity owner) {
+        super(PastelEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), owner, world);
+    }
 
-	@Override
-	protected Item getDefaultItem() {
+    public BlockFlooderProjectile(Level world, double x, double y, double z) {
+        super(PastelEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), x, y, z, world);
+    }
+
+    @Override
+    protected Item getDefaultItem() {
         return PastelItems.BLOCK_FLOODER.get();
-	}
+    }
 
-	private ParticleOptions getParticleParameters() {
-		ItemStack itemStack = this.getItem();
-		return (itemStack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemStack));
-	}
+    private ParticleOptions getParticleParameters() {
+        ItemStack itemStack = this.getItem();
+        return (itemStack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(
+            ParticleTypes.ITEM, itemStack));
+    }
 
-	@Override
-	public void handleEntityEvent(byte status) {
-		if (status == 3) {
-			ParticleOptions particleEffect = this.getParticleParameters();
+    @Override
+    public void handleEntityEvent(byte status) {
+        if (status == 3) {
+            ParticleOptions particleEffect = this.getParticleParameters();
 
-			for (int i = 0; i < 8; ++i) {
-				this.level().addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
-			}
-		}
-	}
+            for (int i = 0; i < 8; ++i) {
+                this.level()
+                    .addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+            }
+        }
+    }
 
-	@Override
-	protected void onHit(HitResult hitResult) {
-		super.onHit(hitResult);
-		Level world = this.level();
-		if (!world.isClientSide()) {
-			world.broadcastEntityEvent(this, EntityEvent.DEATH);
+    @Override
+    protected void onHit(HitResult hitResult) {
+        super.onHit(hitResult);
+        Level world = this.level();
+        if (!world.isClientSide()) {
+            world.broadcastEntityEvent(this, EntityEvent.DEATH);
 
-			if (hitResult.getType() == HitResult.Type.BLOCK) {
-				BlockPos landingPos = getCorrectedBlockPos(hitResult.getLocation());
-				if (BlockFlooderBlock.isReplaceableBlock(world, landingPos) && this.getOwner() instanceof Player playerEntityOwner) {
-					world.setBlockAndUpdate(landingPos, PastelBlocks.BLOCK_FLOODER.get().defaultBlockState());
-					BlockEntity blockEntity = world.getBlockEntity(landingPos);
-					if (blockEntity instanceof BlockFlooderBlockEntity blockFlooderBlockEntity) {
-						blockFlooderBlockEntity.setOwnerUUID(playerEntityOwner.getUUID());
-						blockFlooderBlockEntity.setSourcePos(landingPos);
-					}
-					
-					this.discard();
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Since the projectile sometimes reports its position in the full neighboring position
-	 * on hit the blockPos has to be corrected to the closest neighboring Non-full block pos
-	 *
-	 * @return The "actual" hit block pos
-	 */
-	public BlockPos getCorrectedBlockPos(Vec3 hitPos) {
-		BlockPos hitBlockPos = BlockPos.containing(hitPos);
-		if (this.level().getBlockState(hitBlockPos).isRedstoneConductor(this.level(), hitBlockPos)) {
-			if (hitPos.x() % 1 < 0.05) {
-				return hitBlockPos.offset(-1, 0, 0);
-			}
-			if (hitPos.y() % 1 < 0.05) {
-				return hitBlockPos.offset(0, -1, 0);
-			}
-			if (hitPos.z() % 1 < 0.05) {
-				return hitBlockPos.offset(0, 0, -1);
-			}
-			
-			if (hitPos.x() % 1 < 0.95) {
-				return hitBlockPos.offset(1, 0, 0);
-			}
-			if (hitPos.y() % 1 < 0.95) {
-				return hitBlockPos.offset(0, 1, 0);
-			}
-			if (hitPos.z() % 1 < 0.95) {
-				return hitBlockPos.offset(0, 0, 1);
-			}
-		}
-		return hitBlockPos;
-	}
-	
+            if (hitResult.getType() == HitResult.Type.BLOCK) {
+                BlockPos landingPos = getCorrectedBlockPos(hitResult.getLocation());
+                if (BlockFlooderBlock.isReplaceableBlock(world, landingPos) &&
+                    this.getOwner() instanceof Player playerEntityOwner) {
+                    world.setBlockAndUpdate(
+                        landingPos, PastelBlocks.BLOCK_FLOODER.get()
+                                                              .defaultBlockState()
+                    );
+                    BlockEntity blockEntity = world.getBlockEntity(landingPos);
+                    if (blockEntity instanceof BlockFlooderBlockEntity blockFlooderBlockEntity) {
+                        blockFlooderBlockEntity.setOwnerUUID(playerEntityOwner.getUUID());
+                        blockFlooderBlockEntity.setSourcePos(landingPos);
+                    }
+
+                    this.discard();
+                }
+            }
+        }
+    }
+
+    /**
+     * Since the projectile sometimes reports its position in the full neighboring position
+     * on hit the blockPos has to be corrected to the closest neighboring Non-full block pos
+     *
+     * @return The "actual" hit block pos
+     */
+    public BlockPos getCorrectedBlockPos(Vec3 hitPos) {
+        BlockPos hitBlockPos = BlockPos.containing(hitPos);
+        if (this.level()
+                .getBlockState(hitBlockPos)
+                .isRedstoneConductor(this.level(), hitBlockPos)) {
+            if (hitPos.x() % 1 < 0.05) {
+                return hitBlockPos.offset(-1, 0, 0);
+            }
+            if (hitPos.y() % 1 < 0.05) {
+                return hitBlockPos.offset(0, -1, 0);
+            }
+            if (hitPos.z() % 1 < 0.05) {
+                return hitBlockPos.offset(0, 0, -1);
+            }
+
+            if (hitPos.x() % 1 < 0.95) {
+                return hitBlockPos.offset(1, 0, 0);
+            }
+            if (hitPos.y() % 1 < 0.95) {
+                return hitBlockPos.offset(0, 1, 0);
+            }
+            if (hitPos.z() % 1 < 0.95) {
+                return hitBlockPos.offset(0, 0, 1);
+            }
+        }
+        return hitBlockPos;
+    }
+
 }

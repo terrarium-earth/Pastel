@@ -15,35 +15,41 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class CottonCloudBootsItem extends PastelTrinketItem {
-	
-	public CottonCloudBootsItem(Properties settings) {
-		super(settings, PastelCommon.locate("unlocks/trinkets/cotton_cloud_boots"));
-	}
 
-	@Override
-	public void curioTick(SlotContext slotContext, ItemStack stack) {
-		super.curioTick(slotContext, stack);
-		LivingEntity entity = slotContext.entity();
+    public CottonCloudBootsItem(Properties settings) {
+        super(settings, PastelCommon.locate("unlocks/trinkets/cotton_cloud_boots"));
+    }
 
-		Level world = entity.level();
-		if (entity.isSprinting() && !entity.onGround() && !entity.isShiftKeyDown()) {
-			Vec3 velocity = entity.getDeltaMovement();
-			if (velocity.y < 0) {
-				entity.setDeltaMovement(entity.getDeltaMovement().multiply(1, 0.1, 1));
-				if (world.isClientSide) {
-					RandomSource random = world.random;
-					world.addParticle(ParticleTypes.CLOUD, entity.getX(), entity.getY(), entity.getZ(),
-							0.125 - random.nextFloat() * 0.25, 0.04 - random.nextFloat() * 0.08, 0.125 - random.nextFloat() * 0.25);
-				}
-			}
-		}
-	}
+    @Override
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        super.curioTick(slotContext, stack);
+        LivingEntity entity = slotContext.entity();
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.pastel.cotton_cloud_boots.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.pastel.cotton_cloud_boots.tooltip2").withStyle(ChatFormatting.GRAY));
-	}
-	
+        Level world = entity.level();
+        if (entity.isSprinting() && !entity.onGround() && !entity.isShiftKeyDown()) {
+            Vec3 velocity = entity.getDeltaMovement();
+            if (velocity.y < 0) {
+                entity.setDeltaMovement(entity.getDeltaMovement()
+                                              .multiply(1, 0.1, 1));
+                if (world.isClientSide) {
+                    RandomSource random = world.random;
+                    world.addParticle(
+                        ParticleTypes.CLOUD, entity.getX(), entity.getY(), entity.getZ(),
+                        0.125 - random.nextFloat() * 0.25, 0.04 - random.nextFloat() * 0.08,
+                        0.125 - random.nextFloat() * 0.25
+                    );
+                }
+            }
+        }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        tooltip.add(Component.translatable("item.pastel.cotton_cloud_boots.tooltip")
+                             .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.pastel.cotton_cloud_boots.tooltip2")
+                             .withStyle(ChatFormatting.GRAY));
+    }
+
 }

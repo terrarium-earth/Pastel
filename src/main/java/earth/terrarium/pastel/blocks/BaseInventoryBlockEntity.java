@@ -91,7 +91,8 @@ public abstract class BaseInventoryBlockEntity extends BlockEntity implements Wo
     // Pretty much a duck
     protected abstract FriendlyStackHandler getHandler();
 
-    protected void notifyInventoryUpdate() {}
+    protected void notifyInventoryUpdate() {
+    }
 
     @Override
     public boolean isEmpty() {

@@ -8,7 +8,12 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 public record BlockStateFeatureConfig(BlockState blockState) implements FeatureConfiguration {
 
     public static final Codec<BlockStateFeatureConfig> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			BlockState.CODEC.fieldOf("state").forGetter((config) -> config.blockState)
-    ).apply(instance, BlockStateFeatureConfig::new));
+                                                                                                                   BlockState.CODEC.fieldOf("state")
+                                                                                                                                   .forGetter((config) -> config.blockState)
+                                                                                                               )
+                                                                                                               .apply(
+                                                                                                                   instance,
+                                                                                                                   BlockStateFeatureConfig::new
+                                                                                                               ));
 
 }

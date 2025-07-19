@@ -1,14 +1,14 @@
 {
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "pastel:item/mysterious_locket"
-	},
-	"overrides": [
-		{
-			"predicate": {
-				"socketed": 1.0
-			},
-			"model": "pastel:item/mysterious_locket_socketed"
-		}
-	]
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "pastel:item/mysterious_locket"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "socketed": 1.0
+      },
+      "model": "pastel:item/mysterious_locket_socketed"
+    }
+  ]
 }

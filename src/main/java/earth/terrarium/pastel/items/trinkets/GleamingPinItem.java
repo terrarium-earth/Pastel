@@ -24,50 +24,66 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class GleamingPinItem extends PastelTrinketItem {
-	
-	public static final int BASE_RANGE = 12;
-	public static final int RANGE_BONUS_PER_LEVEL_OF_SNIPING = 4;
-	public static final int EFFECT_DURATION = 240;
-	public static final long COOLDOWN_TICKS = 160;
-	
-	public GleamingPinItem(Properties settings) {
-		super(settings, PastelCommon.locate("unlocks/trinkets/gleaming_pin"));
-	}
-	
-	public static void doGleamingPinEffect(@NotNull Player player, @NotNull ServerLevel world, ItemStack gleamingPinStack) {
-		world.playSound(null, player.getX(), player.getY(), player.getZ(), PastelSoundEvents.RADIANCE_PIN_TRIGGER, SoundSource.PLAYERS, 0.4F, 0.9F + world.getRandom().nextFloat() * 0.2F);
-		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, player.position().add(0, 0.75, 0), PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, 100, new Vec3(0, 0.5, 0), new Vec3(2.5, 0.1, 2.5));
-		
-		world.getEntities(player, player.getBoundingBox().inflate(getEffectRange(world, gleamingPinStack)), EntitySelector.LIVING_ENTITY_STILL_ALIVE).forEach((entity) -> {
-			if (entity instanceof LivingEntity livingEntity) {
-				livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, EFFECT_DURATION, 0, true, true));
-			}
-		});
-	}
-	
-	public static int getEffectRange(ServerLevel world, ItemStack stack) {
-		return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_SNIPING * Ench.getLevel(world.registryAccess(), PastelEnchantments.SNIPING, stack);
-	}
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.pastel.gleaming_pin.tooltip"));
-	}
-	
-	@Override
-	public boolean isEnchantable(ItemStack stack) {
-		return stack.getCount() == 1;
-	}
-	
-	@Override
-	public int getEnchantmentValue() {
-		return 16;
-	}
-	
-	@Override
-	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-		return super.supportsEnchantment(stack, enchantment) || enchantment.is(PastelEnchantments.SNIPING);
-	}
-	
+    public static final int BASE_RANGE = 12;
+    public static final int RANGE_BONUS_PER_LEVEL_OF_SNIPING = 4;
+    public static final int EFFECT_DURATION = 240;
+    public static final long COOLDOWN_TICKS = 160;
+
+    public GleamingPinItem(Properties settings) {
+        super(settings, PastelCommon.locate("unlocks/trinkets/gleaming_pin"));
+    }
+
+    public static void doGleamingPinEffect(
+        @NotNull Player player, @NotNull ServerLevel world, ItemStack gleamingPinStack) {
+        world.playSound(
+            null, player.getX(), player.getY(), player.getZ(), PastelSoundEvents.RADIANCE_PIN_TRIGGER,
+            SoundSource.PLAYERS, 0.4F, 0.9F + world.getRandom()
+                                                   .nextFloat() * 0.2F
+        );
+        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
+            world, player.position()
+                         .add(
+                             0, 0.75, 0), PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, 100, new Vec3(0, 0.5, 0),
+            new Vec3(2.5, 0.1, 2.5)
+        );
+
+        world.getEntities(
+                 player, player.getBoundingBox()
+                               .inflate(getEffectRange(world, gleamingPinStack)),
+                 EntitySelector.LIVING_ENTITY_STILL_ALIVE
+             )
+             .forEach((entity) -> {
+                 if (entity instanceof LivingEntity livingEntity) {
+                     livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, EFFECT_DURATION, 0, true, true));
+                 }
+             });
+    }
+
+    public static int getEffectRange(ServerLevel world, ItemStack stack) {
+        return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_SNIPING * Ench.getLevel(
+            world.registryAccess(), PastelEnchantments.SNIPING, stack);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        tooltip.add(Component.translatable("item.pastel.gleaming_pin.tooltip"));
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return stack.getCount() == 1;
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return 16;
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(PastelEnchantments.SNIPING);
+    }
+
 }
