@@ -67,7 +67,7 @@
     "RandomChanceLootConditionMixin",
     "RandomChanceWithEnchantedBonusLootConditionMixin",
     "ServerPlayerEntityMixin",
-    "ServerWorldMixin",
+    "ServerLevelMixin",
     "ShearsDispenserBehaviorMixin",
     "SpawnDensityCapperMixin",
     "MobEffectInstanceMixin",

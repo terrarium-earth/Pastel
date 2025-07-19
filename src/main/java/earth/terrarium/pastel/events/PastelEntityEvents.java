@@ -4,6 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ArmorWithHitEffect;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
+import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.tools.*;
@@ -23,7 +24,9 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 import net.minecraft.world.phys.*;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
 import top.theillusivec4.curios.api.*;
@@ -41,7 +44,16 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::parryingSwordBlock);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::disarming);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::armorEffects);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenEntityAdded);
 
+    }
+
+    private static void listenEntityAdded(EntityJoinLevelEvent event) {
+        if (event.loadedFromDisk())
+            return;
+
+        var entity = event.getEntity();
+        entity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
     }
 
     private static void armorEffects(LivingDamageEvent.Post event) {
