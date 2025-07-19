@@ -3,7 +3,6 @@ package earth.terrarium.pastel.blocks.conditional;
 import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import java.util.List;
 import java.util.Map;
@@ -42,7 +42,10 @@ public class CloakedOreBlock extends DropExperienceBlock {
 	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		// workaround: since onStacksDropped() has no way of checking if it was
 		// triggered by a player we have to cache that information here
-		Player lootPlayerEntity = RevelationAware.getLootPlayerEntity(builder);
+		Player lootPlayerEntity = null;
+		if (builder.getOptionalParameter(LootContextParams.THIS_ENTITY) instanceof Player player) {
+			lootPlayerEntity = player;
+		}
 		dropXP = lootPlayerEntity != null && BlockHiddenType.isVisible(state, lootPlayerEntity);
 		
 		return super.getDrops(state, builder);
