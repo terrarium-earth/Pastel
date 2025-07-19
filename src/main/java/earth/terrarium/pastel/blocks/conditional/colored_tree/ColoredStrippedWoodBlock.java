@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Collection;
 import java.util.Map;
 
-public class ColoredStrippedWoodBlock extends RotatedPillarBlock implements RevelationAware, ColoredTree {
+public class ColoredStrippedWoodBlock extends RotatedPillarBlock implements ColoredTree {
 
 	public static final MapCodec<ColoredStrippedWoodBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			propertiesCodec(),
@@ -29,27 +29,11 @@ public class ColoredStrippedWoodBlock extends RotatedPillarBlock implements Reve
 		super(settings);
 		this.color = color;
 		WOOD.put(color, this);
-		RevelationAware.register(this);
 	}
 
 	@Override
 	public MapCodec<? extends ColoredStrippedWoodBlock> codec() {
 		return CODEC;
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return ColoredTree.getTreeCloakAdvancementIdentifier(TreePart.STRIPPED_WOOD, this.color);
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		return Map.of(this.defaultBlockState(), Blocks.STRIPPED_OAK_WOOD.defaultBlockState());
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.STRIPPED_OAK_WOOD.asItem());
 	}
 	
 	@Override

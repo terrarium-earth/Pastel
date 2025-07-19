@@ -187,13 +187,13 @@ public class PastelColorProviders {
 	}
 	
 	public static void resetToggleableProviders() {
-		coloredLeavesBlockColorProvider.setShouldApply(true);
-		coloredLeavesItemColorProvider.setShouldApply(true);
+		coloredLeavesBlockColorProvider.setShouldApply(false);
+		coloredLeavesItemColorProvider.setShouldApply(false);
 		
-		amaranthBushelBlockColorProvider.setShouldApply(true);
-		amaranthBushelItemColorProvider.setShouldApply(true);
-		amaranthCropBlockColorProvider.setShouldApply(true);
-		amaranthCropItemColorProvider.setShouldApply(true);
+		amaranthBushelBlockColorProvider.setShouldApply(false);
+		amaranthBushelItemColorProvider.setShouldApply(false);
+		amaranthCropBlockColorProvider.setShouldApply(false);
+		amaranthCropItemColorProvider.setShouldApply(false);
 	}
 	
 }
