@@ -289,7 +289,9 @@ public class PastelMiscEvents {
     private static final Set<BlockPos> AREA_TARGETS = new HashSet<>();
 
     private static void handleAoEMining(BlockEvent.BreakEvent event) {
-        var player = (ServerPlayer) event.getPlayer();
+        if (!(event.getPlayer() instanceof ServerPlayer player))
+            return;
+
         var original = event.getPos();
 
         if (AREA_TARGETS.contains(original))
