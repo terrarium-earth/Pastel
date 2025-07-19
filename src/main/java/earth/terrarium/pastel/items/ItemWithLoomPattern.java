@@ -1,9 +1,8 @@
-package earth.terrarium.pastel.items.conditional;
+package earth.terrarium.pastel.items;
 
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -11,12 +10,12 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 
 import java.util.List;
 
-public class CloakedItemWithLoomPattern extends CloakedItem implements LoomPatternProvider {
+public class ItemWithLoomPattern extends Item implements LoomPatternProvider {
 	
 	private final ResourceKey<BannerPattern> patternItemTag;
 	
-	public CloakedItemWithLoomPattern(Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem, ResourceKey<BannerPattern> patternItemTag) {
-		super(settings, cloakAdvancementIdentifier, cloakItem);
+	public ItemWithLoomPattern(Properties settings, ResourceKey<BannerPattern> patternItemTag) {
+		super(settings);
 		this.patternItemTag = patternItemTag;
 	}
 	

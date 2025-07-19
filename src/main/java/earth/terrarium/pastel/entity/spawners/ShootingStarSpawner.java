@@ -4,6 +4,7 @@ import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStar;
 import earth.terrarium.pastel.entity.entity.ShootingStarEntity;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffects;
@@ -28,7 +29,7 @@ public class ShootingStarSpawner implements CustomSpawner {
 		
 		for (Player playerEntity : world.getEntities(EntityType.PLAYER, Entity::isAlive)) {
 			if (!playerEntity.isSpectator()
-					&& AdvancementHelper.hasAdvancement(playerEntity, PastelItems.STAR_FRAGMENT.get().getCloakAdvancementIdentifier())
+					&& AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.UNLOCK_SHOOTING_STARS)
 					&& world.getRandom().nextFloat() < getShootingStarChanceWithMultiplier(playerEntity)) {
 				
 				// 1 % chance for each cycle to spawn a lot of shooting stars for the player
