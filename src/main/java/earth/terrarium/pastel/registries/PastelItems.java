@@ -261,8 +261,8 @@ public class PastelItems {
     // Gem shards and powders
     public static final DeferredItem<Item> TOPAZ_SHARD = register(simple(item("topaz_shard", () -> new Item(IS.of()), InkColors.CYAN)));
     public static final DeferredItem<Item> CITRINE_SHARD = register(simple(item("citrine_shard", () -> new Item(IS.of()), InkColors.YELLOW)));
-    public static final DeferredItem<Item> ONYX_SHARD = register(simple(item("onyx_shard", () -> new CloakedItem(IS.of()), InkColors.BLACK)));
-    public static final DeferredItem<Item> MOONSTONE_SHARD = register(simple(item("moonstone_shard", () -> new CloakedItem(IS.of()), InkColors.WHITE)));
+    public static final DeferredItem<Item> ONYX_SHARD = register(simple(item("onyx_shard", () -> new Item(IS.of()), InkColors.BLACK)));
+    public static final DeferredItem<Item> MOONSTONE_SHARD = register(simple(item("moonstone_shard", () -> new Item(IS.of()), InkColors.WHITE)));
     public static final DeferredItem<Item> SPECTRAL_SHARD = register(simple(item("spectral_shard", () -> new Item(IS.of(Rarity.RARE)), InkColors.WHITE)));
 
     public static final DeferredItem<Item> TOPAZ_POWDER = register(simple(item("topaz_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.CYAN), InkColors.CYAN)));
@@ -736,7 +736,7 @@ public class PastelItems {
     )));
     public static final DeferredItem<Item> MIDNIGHT_CHIP = register(simple(item(
         "midnight_chip", () -> new Item(
-            IS.of(Rarity.UNCOMMON)
+            IS.of(Rarity.UNCOMMON)), InkColors.GRAY
     )));
 
     public static final DeferredItem<Item> BISMUTH_FLAKE = register(simple(item(
@@ -981,8 +981,7 @@ public class PastelItems {
     public static final DeferredItem<Item> NECTARDEW_BURGEON = register(simple(item(
         "nectardew_burgeon", () -> new NectardewBurgeonItem(
             IS.of()
-              .food(PastelFoodComponents.NECTARDEW_BURGEON), "item.pastel.nectardew_burgeon.tooltip",
-            PastelAdvancements.COLLECT_NECTARDEW, PastelItems.NIGHTDEW_SPROUT.get()
+              .food(PastelFoodComponents.NECTARDEW_BURGEON), "item.pastel.nectardew_burgeon.tooltip"
         ), InkColors.PURPLE
     )));
     public static final DeferredItem<Item> RESTORATION_TEA = register(simple(item(
