@@ -3,7 +3,6 @@ package earth.terrarium.pastel.blocks.enchanter;
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;

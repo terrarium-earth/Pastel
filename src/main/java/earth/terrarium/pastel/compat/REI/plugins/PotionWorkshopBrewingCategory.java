@@ -3,10 +3,10 @@ package earth.terrarium.pastel.compat.REI.plugins;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PotionWorkshopBrewingCategory extends PotionWorkshopCategory<PotionWorkshopBrewingDisplay> {

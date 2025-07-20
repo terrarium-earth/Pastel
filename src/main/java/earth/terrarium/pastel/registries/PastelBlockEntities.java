@@ -67,16 +67,15 @@ import earth.terrarium.pastel.blocks.titration_barrel.TitrationBarrelBlockEntity
 import earth.terrarium.pastel.blocks.upgrade.UpgradeBlockBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.upgrade.UpgradeBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.SkullBlockEntity;
-import net.neoforged.bus.api.*;
-import net.neoforged.fml.event.lifecycle.*;
-import net.neoforged.neoforge.event.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.Arrays;

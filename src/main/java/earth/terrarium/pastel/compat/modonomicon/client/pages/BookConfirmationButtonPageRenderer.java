@@ -8,8 +8,8 @@ import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.client.render.page.BookTextPageRenderer;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookConfirmationButtonPage;
 import earth.terrarium.pastel.networking.c2s_payloads.GuidebookConfirmationButtonPressedPayload;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.minecraft.client.gui.components.Button;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class BookConfirmationButtonPageRenderer extends BookTextPageRenderer {
 

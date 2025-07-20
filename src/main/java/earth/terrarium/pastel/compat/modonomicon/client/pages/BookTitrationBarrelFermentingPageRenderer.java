@@ -5,18 +5,18 @@ import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.data.BookDataManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.render.FluidRendering;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
+import earth.terrarium.pastel.render.FluidRendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.List;
 

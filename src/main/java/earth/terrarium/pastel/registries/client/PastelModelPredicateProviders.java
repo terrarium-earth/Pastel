@@ -3,7 +3,6 @@ package earth.terrarium.pastel.registries.client;
 import earth.terrarium.pastel.api.energy.storage.SingleInkStorage;
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
 import earth.terrarium.pastel.api.item.ActivatableItem;
-import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.api.item.Stampable;
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
@@ -12,7 +11,8 @@ import earth.terrarium.pastel.components.WrappedPresentComponent;
 import earth.terrarium.pastel.items.magic_items.EnderSpliceItem;
 import earth.terrarium.pastel.items.magic_items.PipeBombItem;
 import earth.terrarium.pastel.items.magic_items.StructureCompassItem;
-import earth.terrarium.pastel.items.tools.*;
+import earth.terrarium.pastel.items.tools.MalachiteCrossbowItem;
+import earth.terrarium.pastel.items.tools.PastelFishingRodItem;
 import earth.terrarium.pastel.items.trinkets.AshenCircletItem;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -30,7 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.component.CustomData;
-import net.neoforged.fml.event.lifecycle.*;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 // Vanilla models see: ModelPredicateProviderRegistry
 public class PastelModelPredicateProviders {

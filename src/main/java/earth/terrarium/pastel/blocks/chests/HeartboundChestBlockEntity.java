@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.chests;
 
 import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
-import earth.terrarium.pastel.capabilities.*;
+import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
 import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.*;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;

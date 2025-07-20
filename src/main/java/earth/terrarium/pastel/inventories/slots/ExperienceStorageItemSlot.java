@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.inventories.slots;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;

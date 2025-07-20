@@ -1,25 +1,28 @@
 package earth.terrarium.pastel.attachments.data;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
 import earth.terrarium.pastel.api.item.SleepAlteringItem;
 import earth.terrarium.pastel.networking.s2c_payloads.SyncMentalPresencePayload;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.attachment.*;
-import net.neoforged.neoforge.network.handling.*;
+import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Because not every niche thing can have its own component

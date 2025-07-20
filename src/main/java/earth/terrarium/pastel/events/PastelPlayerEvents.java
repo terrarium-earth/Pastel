@@ -1,24 +1,36 @@
 package earth.terrarium.pastel.events;
 
-import earth.terrarium.pastel.api.item.*;
-import earth.terrarium.pastel.attachments.*;
-import earth.terrarium.pastel.attachments.data.*;
-import earth.terrarium.pastel.attachments.data.azure_dike.*;
+import earth.terrarium.pastel.api.item.MergeableItem;
+import earth.terrarium.pastel.api.item.SplittableItem;
+import earth.terrarium.pastel.attachments.HardcoreDeathTracker;
+import earth.terrarium.pastel.attachments.data.InertiaData;
+import earth.terrarium.pastel.attachments.data.MiscPlayerData;
+import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeData;
+import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
-import earth.terrarium.pastel.helpers.enchantments.*;
-import earth.terrarium.pastel.items.tools.*;
-import earth.terrarium.pastel.items.trinkets.*;
-import earth.terrarium.pastel.progression.*;
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.entity.player.*;
-import net.neoforged.neoforge.event.tick.*;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
+import earth.terrarium.pastel.helpers.enchantments.ImprovedCriticalHelper;
+import earth.terrarium.pastel.items.tools.NectarLanceItem;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
+import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelMobEffects;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingSwapItemsEvent;
+import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class PastelPlayerEvents {
 

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.magic_items;
 
-import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
+import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelBannerPatterns;

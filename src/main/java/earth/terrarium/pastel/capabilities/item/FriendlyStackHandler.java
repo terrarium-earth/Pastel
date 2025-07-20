@@ -1,16 +1,20 @@
 package earth.terrarium.pastel.capabilities.item;
 
-import it.unimi.dsi.fastutil.ints.Int2IntArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.item.*;
-import net.neoforged.neoforge.items.*;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.ApiStatus;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class FriendlyStackHandler extends ItemStackHandler {
 

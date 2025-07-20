@@ -2,8 +2,8 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.StampDataCategory;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 @SuppressWarnings("unused")
 public class PastelStampDataCategories {

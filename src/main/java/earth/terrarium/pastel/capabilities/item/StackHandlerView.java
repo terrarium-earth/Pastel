@@ -1,13 +1,14 @@
 package earth.terrarium.pastel.capabilities.item;
 
 
-import it.unimi.dsi.fastutil.ints.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.item.*;
+import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.function.Predicate;
 
 public class StackHandlerView extends FriendlyStackHandler {
 

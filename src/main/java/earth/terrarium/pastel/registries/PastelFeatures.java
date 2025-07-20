@@ -29,14 +29,14 @@ import earth.terrarium.pastel.worldgen.features.WallPatchFeature;
 import earth.terrarium.pastel.worldgen.features.WallPatchFeatureConfig;
 import earth.terrarium.pastel.worldgen.features.WeightedRandomFeature;
 import earth.terrarium.pastel.worldgen.features.WeightedRandomFeatureConfig;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FossilFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelFeatures {
 

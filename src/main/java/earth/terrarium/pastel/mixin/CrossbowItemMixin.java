@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.items.ArrowheadCrossbow;
 import earth.terrarium.pastel.events.PastelMiscEvents;
+import earth.terrarium.pastel.items.ArrowheadCrossbow;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.CrossbowItem;

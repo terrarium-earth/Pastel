@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.map;
 
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.helpers.data.CodecHelper;
-import earth.terrarium.pastel.injectors.*;
+import earth.terrarium.pastel.injectors.MapDecorationInjector;
 import earth.terrarium.pastel.mixin.accessors.MapStateAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

@@ -2,11 +2,11 @@ package earth.terrarium.pastel.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import earth.terrarium.pastel.registries.PastelItems;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 

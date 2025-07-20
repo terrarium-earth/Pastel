@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.widget.WidgetHolder;
+import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
+import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
 
 public class FluidConvertingEmiRecipeGated extends GatedSpectrumEmiRecipe<FluidConvertingRecipe> {
 

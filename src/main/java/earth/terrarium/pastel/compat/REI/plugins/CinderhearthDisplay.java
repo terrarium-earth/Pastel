@@ -2,8 +2,8 @@ package earth.terrarium.pastel.compat.REI.plugins;
 
 import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.REI.PastelDisplay;
-import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryIngredients;

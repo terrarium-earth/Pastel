@@ -5,9 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class GemstoneOreBlock extends CloakedOreBlock {
 

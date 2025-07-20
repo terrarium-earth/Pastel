@@ -1,19 +1,20 @@
 package earth.terrarium.pastel.blocks.chests;
 
-import earth.terrarium.pastel.capabilities.*;
-import earth.terrarium.pastel.capabilities.item.*;
+import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.inventories.BlackHoleChestScreenHandler;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
 import earth.terrarium.pastel.inventories.FabricationChestScreenHandler;
-import net.minecraft.core.*;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -31,7 +32,9 @@ import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.*;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 //TODO: GET THIS LOOT CONTAINER SHIT OUT OF MY CHEST

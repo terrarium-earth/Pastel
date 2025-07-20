@@ -4,9 +4,7 @@ package earth.terrarium.pastel.recipe.pedestal;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.helpers.data.CodecHelper;
@@ -19,7 +17,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 

@@ -2,15 +2,16 @@ package earth.terrarium.pastel.items.armor;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.Preenchanted;
-import net.minecraft.world.entity.*;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 

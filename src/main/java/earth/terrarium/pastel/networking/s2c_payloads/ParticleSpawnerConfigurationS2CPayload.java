@@ -3,11 +3,11 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerBlockEntity;
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerConfiguration;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ParticleSpawnerConfigurationS2CPayload(BlockPos pos, ParticleSpawnerConfiguration configuration)
     implements CustomPacketPayload {

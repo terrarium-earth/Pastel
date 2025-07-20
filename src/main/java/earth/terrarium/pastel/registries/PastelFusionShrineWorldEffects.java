@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.registries;
 
-import earth.terrarium.pastel.*;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
 import earth.terrarium.pastel.blocks.fluid.MidnightSolutionFluidBlock;
 import earth.terrarium.pastel.helpers.Support;
@@ -17,8 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Optional;
 

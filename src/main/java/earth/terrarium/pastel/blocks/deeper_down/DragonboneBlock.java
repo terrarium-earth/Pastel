@@ -1,30 +1,20 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
 import com.mojang.serialization.MapCodec;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.api.block.MoonstoneStrikeableBlock;
-import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Hashtable;
-import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class DragonboneBlock extends RotatedPillarBlock implements MoonstoneStrikeableBlock {

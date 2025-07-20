@@ -19,11 +19,11 @@ import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopReactingRecip
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelRecipeTypes {
 

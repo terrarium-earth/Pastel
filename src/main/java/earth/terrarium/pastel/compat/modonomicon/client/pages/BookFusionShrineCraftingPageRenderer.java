@@ -2,11 +2,11 @@ package earth.terrarium.pastel.compat.modonomicon.client.pages;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.render.FluidRendering;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
+import earth.terrarium.pastel.render.FluidRendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;

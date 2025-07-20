@@ -1,10 +1,12 @@
 package earth.terrarium.pastel.mixin.client;
 
-import com.llamalad7.mixinextras.injector.*;
-import com.llamalad7.mixinextras.injector.wrapoperation.*;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.pastel.helpers.level.MobEffectHelper;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelLevels;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -16,7 +18,9 @@ import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)

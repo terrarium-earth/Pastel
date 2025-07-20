@@ -2,8 +2,8 @@ package earth.terrarium.pastel.compat.REI.plugins;
 
 import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.REI.PastelDisplay;
-import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.helpers.render.LoreHelper;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.SpawnerChangeRecipe;

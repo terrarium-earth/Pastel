@@ -2,13 +2,13 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.worldgen.tree_decorators.FrondsDecorator;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.*;
+import java.util.function.Supplier;
 
 public class PastelTreeDecoratorTypes {
 

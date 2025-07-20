@@ -2,10 +2,10 @@ package earth.terrarium.pastel.events.game;
 
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelGameEvents {
 

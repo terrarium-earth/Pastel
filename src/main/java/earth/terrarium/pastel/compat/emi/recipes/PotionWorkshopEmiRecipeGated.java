@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
+import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 

@@ -1,8 +1,6 @@
 package earth.terrarium.pastel.particle.client;
 
 import earth.terrarium.pastel.particle.effect.ColoredSporeBlossomAirParticleEffect;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
@@ -10,6 +8,8 @@ import net.minecraft.client.particle.SuspendedParticle;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.ParticleGroup;
 import net.minecraft.util.Mth;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
 import java.util.Optional;

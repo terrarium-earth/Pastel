@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.trinkets.GleamingPinItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.registries.PastelEnchantments;

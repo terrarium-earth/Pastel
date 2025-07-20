@@ -6,12 +6,12 @@ import earth.terrarium.pastel.entity.entity.LizardEntity;
 import earth.terrarium.pastel.entity.models.LizardEntityModel;
 import earth.terrarium.pastel.entity.variants.LizardHornVariant;
 import earth.terrarium.pastel.registries.client.PastelRenderLayers;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class LizardHornsFeatureRenderer<T extends LizardEntity> extends RenderLayer<T, LizardEntityModel<T>> {

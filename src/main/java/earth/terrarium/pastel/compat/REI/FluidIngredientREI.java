@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.compat.REI;
 
 import dev.architectury.fluid.FluidStack;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;

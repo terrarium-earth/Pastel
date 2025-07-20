@@ -2,7 +2,6 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -10,6 +9,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record GuidebookConfirmationButtonPressedPayload(String confirmationString) implements CustomPacketPayload {
 

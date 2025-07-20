@@ -2,11 +2,11 @@ package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.attachments.data.InertiaData;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.core.component.*;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.event.entity.player.*;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import net.minecraft.core.component.DataComponents;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class PastelEquipmentEvents {
 

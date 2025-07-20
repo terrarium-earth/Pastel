@@ -2,27 +2,16 @@ package earth.terrarium.pastel.blocks.conditional.amaranth;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.TallCropBlock;
-import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Hashtable;
-import java.util.Map;
 
 public class AmaranthCropBlock extends TallCropBlock {
 

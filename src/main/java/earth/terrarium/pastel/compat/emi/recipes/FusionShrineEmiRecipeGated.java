@@ -1,14 +1,14 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget.Alignment;
+import dev.emi.emi.api.widget.WidgetHolder;
 import earth.terrarium.pastel.compat.emi.FluidIngredientEmi;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import dev.emi.emi.api.stack.EmiIngredient;
-import dev.emi.emi.api.stack.EmiStack;
-import dev.emi.emi.api.widget.TextWidget.Alignment;
-import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.FormattedCharSequence;
 

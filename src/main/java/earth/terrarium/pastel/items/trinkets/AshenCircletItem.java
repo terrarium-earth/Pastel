@@ -5,9 +5,6 @@ import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import top.theillusivec4.curios.api.SlotContext;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -23,7 +20,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 

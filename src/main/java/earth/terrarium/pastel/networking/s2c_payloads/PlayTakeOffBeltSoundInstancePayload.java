@@ -2,12 +2,12 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.sound.TakeOffBeltSoundInstance;
-import net.neoforged.neoforge.network.*;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayTakeOffBeltSoundInstancePayload() implements CustomPacketPayload {
 

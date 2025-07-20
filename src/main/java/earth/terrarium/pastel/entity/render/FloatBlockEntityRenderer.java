@@ -2,8 +2,6 @@ package earth.terrarium.pastel.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.pastel.entity.entity.FloatBlockEntity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,6 +16,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class FloatBlockEntityRenderer extends EntityRenderer<FloatBlockEntity> {

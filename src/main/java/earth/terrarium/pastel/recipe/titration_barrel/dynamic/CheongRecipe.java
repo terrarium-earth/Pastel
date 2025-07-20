@@ -1,18 +1,18 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
-import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.registries.PastelItems;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.ArrayList;
 import java.util.Collections;

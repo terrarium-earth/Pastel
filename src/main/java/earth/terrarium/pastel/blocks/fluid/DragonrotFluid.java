@@ -9,10 +9,8 @@ import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.registries.PastelFluidTags;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
@@ -33,6 +31,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.fluids.FluidType;
 
 public abstract class DragonrotFluid extends PastelFluid {

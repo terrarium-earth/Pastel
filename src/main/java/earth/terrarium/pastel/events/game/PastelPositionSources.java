@@ -1,14 +1,14 @@
 package earth.terrarium.pastel.events.game;
 
 import earth.terrarium.pastel.PastelCommon;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.level.gameevent.PositionSourceType;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.*;
+import java.util.function.Supplier;
 
 public class PastelPositionSources {
 

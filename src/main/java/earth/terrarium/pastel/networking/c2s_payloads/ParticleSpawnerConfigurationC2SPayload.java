@@ -5,14 +5,13 @@ import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerConfigurati
 import earth.terrarium.pastel.inventories.ParticleSpawnerScreenHandler;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.networking.s2c_payloads.ParticleSpawnerConfigurationS2CPayload;
-
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.*;
-import net.neoforged.neoforge.network.*;
-import net.neoforged.neoforge.network.handling.*;
+import net.minecraft.world.level.ChunkPos;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record ParticleSpawnerConfigurationC2SPayload(
     ParticleSpawnerConfiguration configuration

@@ -4,15 +4,14 @@ import earth.terrarium.pastel.blocks.shooting_star.ShootingStar;
 import earth.terrarium.pastel.entity.entity.ShootingStarEntity;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import net.minecraft.world.level.*;
-import net.neoforged.neoforge.network.*;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record PlayShootingStarParticlesPayload(Vec3 shootingStarPos, ShootingStar.Variant variant)

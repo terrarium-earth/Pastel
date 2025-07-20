@@ -1,10 +1,14 @@
 package earth.terrarium.pastel.blocks.amphora;
 
-import earth.terrarium.pastel.capabilities.*;
+import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
 import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -22,7 +26,8 @@ import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.*;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class AmphoraBlockEntity extends RandomizableContainerBlockEntity implements SidedCapabilityProvider {
 

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.events;
 
-import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.items.trinkets.AetherGracedNectarGlovesItem;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
@@ -27,7 +27,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static earth.terrarium.pastel.registries.PastelMobEffects.*;
+import static earth.terrarium.pastel.registries.PastelMobEffects.CALMING;
+import static earth.terrarium.pastel.registries.PastelMobEffects.Cures;
+import static earth.terrarium.pastel.registries.PastelMobEffects.ETERNAL_SLUMBER;
+import static earth.terrarium.pastel.registries.PastelMobEffects.FATAL_SLUMBER;
+import static earth.terrarium.pastel.registries.PastelMobEffects.IMMUNITY;
+import static earth.terrarium.pastel.registries.PastelMobEffects.SOMNOLENCE;
+import static earth.terrarium.pastel.registries.PastelMobEffects.cutDuration;
 
 public class PastelEffectEvents {
 

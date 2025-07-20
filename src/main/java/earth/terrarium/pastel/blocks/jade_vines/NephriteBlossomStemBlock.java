@@ -2,7 +2,6 @@ package earth.terrarium.pastel.blocks.jade_vines;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -25,6 +24,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 public class NephriteBlossomStemBlock extends BushBlock {

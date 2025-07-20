@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.tools;
 
-import earth.terrarium.pastel.items.ArrowheadCrossbow;
 import earth.terrarium.pastel.api.item.Preenchanted;
+import earth.terrarium.pastel.items.ArrowheadCrossbow;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelToolMaterial;
 import net.minecraft.core.component.DataComponents;

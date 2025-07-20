@@ -1,10 +1,7 @@
 package earth.terrarium.pastel.api.recipe;
 
 import com.cmdpro.databank.DatabankUtils;
-import com.simibubi.create.foundation.utility.DistExecutor;
 import earth.terrarium.pastel.progression.UnlockToastManager;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +10,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.fml.util.thread.EffectiveSide;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;

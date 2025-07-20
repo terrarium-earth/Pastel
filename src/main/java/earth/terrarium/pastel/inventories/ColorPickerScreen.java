@@ -8,13 +8,13 @@ import earth.terrarium.pastel.inventories.widgets.ColorSelectionWidget;
 import earth.terrarium.pastel.inventories.widgets.InkGaugeWidget;
 import earth.terrarium.pastel.inventories.widgets.StackedInkMeterWidget;
 import earth.terrarium.pastel.networking.c2s_payloads.InkColorSelectedC2SPayload;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Optional;
 import java.util.function.Consumer;

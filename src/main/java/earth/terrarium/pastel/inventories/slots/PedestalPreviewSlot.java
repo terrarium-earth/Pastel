@@ -5,7 +5,6 @@ import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.ItemStack;

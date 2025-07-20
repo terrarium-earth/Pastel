@@ -5,8 +5,8 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.interaction.ResonanceProcessor;
 import earth.terrarium.pastel.data_loaders.resonance_processors.DropSelfResonanceProcessor;
 import earth.terrarium.pastel.data_loaders.resonance_processors.ModifyDropsResonanceProcessor;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelResonanceProcessorTypes {
 

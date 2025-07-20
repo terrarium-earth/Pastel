@@ -1,9 +1,6 @@
 package earth.terrarium.pastel.deeper_down;
 
-import net.minecraft.core.Holder;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import org.apache.commons.lang3.ArrayUtils;
 import org.joml.Vector3f;
 

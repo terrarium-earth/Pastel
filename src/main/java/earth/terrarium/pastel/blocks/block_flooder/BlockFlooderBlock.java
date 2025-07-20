@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.wrapper.*;
+import net.neoforged.neoforge.items.wrapper.PlayerInvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

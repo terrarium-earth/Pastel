@@ -6,7 +6,7 @@ import earth.terrarium.pastel.inventories.slots.InkInputSlot;
 import earth.terrarium.pastel.networking.s2c_payloads.UpdateBlockEntityInkPayload;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.*;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

@@ -1,16 +1,18 @@
 package earth.terrarium.pastel.registries.client;
 
-import earth.terrarium.pastel.registries.*;
-import earth.terrarium.pastel.render.armor.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.client.*;
-import net.minecraft.client.model.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.neoforged.neoforge.client.extensions.common.*;
-import net.neoforged.neoforge.registries.*;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.render.armor.BedrockArmorModel;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.util.*;
+import java.util.Map;
 
 public class PastelArmorRenderers {
 

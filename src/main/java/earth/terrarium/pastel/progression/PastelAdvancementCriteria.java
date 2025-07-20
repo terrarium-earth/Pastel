@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.progression;
 
-import earth.terrarium.pastel.*;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.progression.advancement.AzureDikeChargeCriterion;
 import earth.terrarium.pastel.progression.advancement.BlockBrokenCriterion;
 import earth.terrarium.pastel.progression.advancement.BloodOrchidPluckingCriterion;
@@ -23,6 +23,7 @@ import earth.terrarium.pastel.progression.advancement.LootFunctionTriggerCriteri
 import earth.terrarium.pastel.progression.advancement.MemoryManifestingCriterion;
 import earth.terrarium.pastel.progression.advancement.NaturesStaffConversionCriterion;
 import earth.terrarium.pastel.progression.advancement.PairedFoodEatenCriterion;
+import earth.terrarium.pastel.progression.advancement.PastelFishingRodHookedCriterion;
 import earth.terrarium.pastel.progression.advancement.PastelNetworkCreationCriterion;
 import earth.terrarium.pastel.progression.advancement.PastelNodeUpgradeCriterion;
 import earth.terrarium.pastel.progression.advancement.PedestalCraftingCriterion;
@@ -31,16 +32,15 @@ import earth.terrarium.pastel.progression.advancement.PotionWorkshopBrewingCrite
 import earth.terrarium.pastel.progression.advancement.PotionWorkshopCraftingCriterion;
 import earth.terrarium.pastel.progression.advancement.PreservationCheckCriterion;
 import earth.terrarium.pastel.progression.advancement.SlimeSizingCriterion;
-import earth.terrarium.pastel.progression.advancement.PastelFishingRodHookedCriterion;
 import earth.terrarium.pastel.progression.advancement.SpiritInstillerCraftingCriterion;
 import earth.terrarium.pastel.progression.advancement.TakeOffBeltJumpCriterion;
 import earth.terrarium.pastel.progression.advancement.TitrationBarrelTappingCriterion;
 import earth.terrarium.pastel.progression.advancement.TrinketChangeCriterion;
 import earth.terrarium.pastel.progression.advancement.UpgradePlaceCriterion;
-import net.minecraft.advancements.*;
-import net.minecraft.core.registries.*;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.core.registries.Registries;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelAdvancementCriteria {
 

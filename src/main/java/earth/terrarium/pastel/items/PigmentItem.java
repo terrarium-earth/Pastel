@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.items;
 
-import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
 import earth.terrarium.pastel.registries.PastelBannerPatterns;

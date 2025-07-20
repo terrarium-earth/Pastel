@@ -6,7 +6,6 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffs
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 

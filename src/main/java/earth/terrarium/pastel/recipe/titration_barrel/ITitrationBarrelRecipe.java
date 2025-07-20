@@ -1,14 +1,12 @@
 package earth.terrarium.pastel.recipe.titration_barrel;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.helpers.interaction.TimeHelper;
-import earth.terrarium.pastel.helpers.render.LoreHelper;
-import net.neoforged.neoforge.fluids.capability.templates.*;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.components.BeverageComponent;
+import earth.terrarium.pastel.helpers.interaction.TimeHelper;
+import earth.terrarium.pastel.helpers.render.LoreHelper;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -24,6 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.block;
 
-import earth.terrarium.pastel.capabilities.item.*;
-import net.neoforged.neoforge.fluids.capability.templates.*;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 public interface FluidTankInventory {
 

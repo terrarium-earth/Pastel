@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.api.interaction.projectile_behavior;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import earth.terrarium.pastel.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import earth.terrarium.pastel.PastelCommon;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 
 public record FlatDamageProjectileBehavior(boolean destroyItemOnHit, float damage)
     implements DamagingProjectileBehavior {

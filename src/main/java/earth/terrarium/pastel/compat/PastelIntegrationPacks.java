@@ -7,7 +7,7 @@ import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.compat.exclusions_lib.ExclusionsLibCompat;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;
 import earth.terrarium.pastel.compat.travelersbackpack.TravelersBackpackCompat;
-import net.neoforged.bus.api.*;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 

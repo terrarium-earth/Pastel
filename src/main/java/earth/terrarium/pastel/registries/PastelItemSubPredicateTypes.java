@@ -6,9 +6,9 @@ import earth.terrarium.pastel.api.predicate.item.BottomlessStackPredicate;
 import earth.terrarium.pastel.api.predicate.item.InfusedBeveragePredicate;
 import earth.terrarium.pastel.api.predicate.item.SweetenedPredicate;
 import net.minecraft.advancements.critereon.ItemSubPredicate;
-import net.minecraft.core.registries.*;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.minecraft.core.registries.Registries;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 @SuppressWarnings("unused")
 public class PastelItemSubPredicateTypes {

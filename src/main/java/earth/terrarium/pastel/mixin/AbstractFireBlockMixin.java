@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.blocks.PrimordialFireBlock;
-import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseFireBlock;

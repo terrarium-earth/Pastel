@@ -5,11 +5,11 @@ import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.inventories.AutoCraftingMode;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record ChangeCompactingChestSettingsPayload(AutoCraftingMode mode) implements CustomPacketPayload {
 

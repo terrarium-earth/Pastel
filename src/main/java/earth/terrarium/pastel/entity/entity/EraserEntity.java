@@ -2,8 +2,8 @@ package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.entity.PackEntity;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelMobEffects;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

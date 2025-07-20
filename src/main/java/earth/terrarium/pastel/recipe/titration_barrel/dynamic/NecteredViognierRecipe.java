@@ -1,17 +1,15 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
-import earth.terrarium.pastel.registries.PastelItems;
-import net.neoforged.neoforge.fluids.capability.templates.*;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -21,6 +19,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

@@ -1,13 +1,13 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
 import com.cmdpro.databank.DatabankUtils;
-import earth.terrarium.pastel.compat.emi.PastelEmiRecipe;
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.SlotWidget;
 import dev.emi.emi.api.widget.TextWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.compress.utils.Lists;

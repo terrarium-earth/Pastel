@@ -1,15 +1,16 @@
 package earth.terrarium.pastel.api.interaction.projectile_behavior;
 
-import com.mojang.serialization.*;
-import earth.terrarium.pastel.*;
-import earth.terrarium.pastel.entity.entity.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 public record MusicDiscProjectileBehavior() implements DamagingProjectileBehavior {
     public static final MusicDiscProjectileBehavior INSTANCE = new MusicDiscProjectileBehavior();

@@ -3,7 +3,6 @@ package earth.terrarium.pastel.items.trinkets;
 import com.google.common.collect.Multimap;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
-import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -12,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import top.theillusivec4.curios.api.SlotContext;
 
 public class SevenLeagueBootsItem extends PastelTrinketItem {
 

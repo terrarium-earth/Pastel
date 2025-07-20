@@ -3,7 +3,6 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.inventories.slots.ShadowSlot;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -12,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record SetShadowSlotPayload(
     int screenHandlerSyncId, int slotId,

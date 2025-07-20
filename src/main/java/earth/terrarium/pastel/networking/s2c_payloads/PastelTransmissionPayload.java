@@ -4,20 +4,19 @@ import earth.terrarium.pastel.blocks.pastel_network.network.PastelTransmission;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.particle.effect.PastelTransmissionParticleEffect;
-import net.minecraft.network.protocol.*;
-import net.minecraft.network.protocol.common.*;
-import net.minecraft.world.level.*;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.ChunkPos;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.HashSet;
 
 public record PastelTransmissionPayload(int networkColor, int travelTime, PastelTransmission transmission)
     implements CustomPacketPayload {

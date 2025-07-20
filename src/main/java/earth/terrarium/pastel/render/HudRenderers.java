@@ -3,17 +3,20 @@ package earth.terrarium.pastel.render;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.attachments.data.azure_dike.DikeShieldData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.resources.*;
+import earth.terrarium.pastel.attachments.data.azure_dike.DikeShieldData;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.gui.*;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 @OnlyIn(Dist.CLIENT)
 public class HudRenderers {

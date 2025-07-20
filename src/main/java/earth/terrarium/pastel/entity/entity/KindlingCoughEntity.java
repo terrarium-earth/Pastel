@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.blocks.PrimordialFireBlock;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
+import earth.terrarium.pastel.blocks.PrimordialFireBlock;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelDamageTypes;

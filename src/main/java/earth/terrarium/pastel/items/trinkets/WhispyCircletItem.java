@@ -4,7 +4,6 @@ import com.google.common.collect.Multimap;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelMobEffectTags;
-import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -21,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.ArrayList;
 import java.util.Collection;

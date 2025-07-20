@@ -3,11 +3,11 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.inventories.BedrockAnvilScreenHandler;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record AddLoreBedrockAnvilPayload(String lore) implements CustomPacketPayload {
 

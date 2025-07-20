@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.shooting_star;
 
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelLootTables;
 import io.netty.buffer.ByteBuf;

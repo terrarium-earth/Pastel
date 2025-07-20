@@ -2,9 +2,8 @@ package earth.terrarium.pastel.inventories;
 
 import earth.terrarium.pastel.blocks.chests.CompactingChestBlockEntity;
 import earth.terrarium.pastel.networking.c2s_payloads.ChangeCompactingChestSettingsPayload;
-import net.minecraft.network.*;
-import net.neoforged.neoforge.network.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +12,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class CompactingChestScreenHandler extends AbstractContainerMenu {
 

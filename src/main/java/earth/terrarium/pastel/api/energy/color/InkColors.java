@@ -1,12 +1,13 @@
 package earth.terrarium.pastel.api.energy.color;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelRegistries;
+import earth.terrarium.pastel.registries.PastelRegistryKeys;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 

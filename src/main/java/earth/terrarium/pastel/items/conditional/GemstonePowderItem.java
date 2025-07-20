@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.items.conditional;
 
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public class GemstonePowderItem extends Item {

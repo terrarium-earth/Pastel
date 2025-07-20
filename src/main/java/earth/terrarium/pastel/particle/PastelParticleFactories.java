@@ -18,19 +18,17 @@ import earth.terrarium.pastel.particle.client.LargePrimordialSmokeParticle;
 import earth.terrarium.pastel.particle.client.LightTrailParticle;
 import earth.terrarium.pastel.particle.client.LitParticle;
 import earth.terrarium.pastel.particle.client.MoonstoneStrikeParticle;
+import earth.terrarium.pastel.particle.client.PastelBlockLeakParticles;
 import earth.terrarium.pastel.particle.client.PastelTransmissionParticle;
 import earth.terrarium.pastel.particle.client.PrimordialSmokeParticle;
 import earth.terrarium.pastel.particle.client.QuartzFluffParticle;
 import earth.terrarium.pastel.particle.client.RainRippleParticle;
 import earth.terrarium.pastel.particle.client.RaindropParticle;
-import earth.terrarium.pastel.particle.client.PastelBlockLeakParticles;
 import earth.terrarium.pastel.particle.client.TranslucentSplashParticle;
 import earth.terrarium.pastel.particle.client.TransmissionParticle;
 import earth.terrarium.pastel.particle.client.VoidFogParticle;
 import earth.terrarium.pastel.particle.client.WindParticle;
 import earth.terrarium.pastel.particle.client.ZigZagParticle;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.BubblePopParticle;
@@ -42,7 +40,9 @@ import net.minecraft.client.particle.WakeParticle;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.client.event.*;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
 // See ParticleManager for vanilla
 @OnlyIn(Dist.CLIENT)

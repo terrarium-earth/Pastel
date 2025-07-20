@@ -8,8 +8,8 @@ import earth.terrarium.pastel.mixin.accessors.PersistentProjectileEntityAccessor
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelMobEffects;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;

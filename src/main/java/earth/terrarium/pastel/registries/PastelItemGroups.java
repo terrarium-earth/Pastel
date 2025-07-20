@@ -1,9 +1,11 @@
 package earth.terrarium.pastel.registries;
 
-import earth.terrarium.pastel.*;
-import earth.terrarium.pastel.api.energy.color.*;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.energy.color.InkColor;
+import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.Preenchanted;
-import earth.terrarium.pastel.blocks.mob_head.*;
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
@@ -11,17 +13,21 @@ import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.event.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Map;
 

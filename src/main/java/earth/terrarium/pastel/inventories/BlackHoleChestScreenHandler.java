@@ -6,14 +6,14 @@ import earth.terrarium.pastel.inventories.slots.ShadowSlot;
 import earth.terrarium.pastel.inventories.slots.StackFilterSlot;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItems;
-import net.minecraft.network.*;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class BlackHoleChestScreenHandler extends AbstractContainerMenu {

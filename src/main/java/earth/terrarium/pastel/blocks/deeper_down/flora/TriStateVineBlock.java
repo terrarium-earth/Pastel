@@ -2,7 +2,6 @@ package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import earth.terrarium.pastel.helpers.level.BlockReference;
 import earth.terrarium.pastel.registries.PastelItems;
-import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -32,6 +31,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class TriStateVineBlock extends BushBlock implements BonemealableBlock {

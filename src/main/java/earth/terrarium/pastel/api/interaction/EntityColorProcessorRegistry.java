@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.*;
+import java.util.function.Supplier;
 
 // Todo: Convert to capability
 public class EntityColorProcessorRegistry {

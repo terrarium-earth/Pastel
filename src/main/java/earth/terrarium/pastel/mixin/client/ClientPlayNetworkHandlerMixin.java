@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.injectors.*;
+import earth.terrarium.pastel.injectors.ClientboundUpdateMobEffectPacketInjector;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;

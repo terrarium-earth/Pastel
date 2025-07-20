@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.registries;
 
-import earth.terrarium.pastel.*;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;

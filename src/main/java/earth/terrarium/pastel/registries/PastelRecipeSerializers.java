@@ -46,11 +46,11 @@ import earth.terrarium.pastel.recipe.titration_barrel.dynamic.CheongRecipe;
 import earth.terrarium.pastel.recipe.titration_barrel.dynamic.JadeWineRecipe;
 import earth.terrarium.pastel.recipe.titration_barrel.dynamic.NecteredViognierRecipe;
 import earth.terrarium.pastel.recipe.titration_barrel.dynamic.SuspiciousBrewRecipe;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelRecipeSerializers {
 

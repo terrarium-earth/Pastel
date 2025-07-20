@@ -4,7 +4,6 @@ import com.google.common.collect.Multimap;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.FixedSingleInkStorage;
-import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -14,6 +13,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 

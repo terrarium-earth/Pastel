@@ -3,13 +3,12 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import net.neoforged.neoforge.network.*;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.UUID;
 

@@ -1,15 +1,18 @@
 package earth.terrarium.pastel.api.interaction.projectile_behavior;
 
-import earth.terrarium.pastel.entity.entity.*;
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.phys.*;
+import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 
 public interface DamagingProjectileBehavior extends ItemProjectileBehavior {
     @Override

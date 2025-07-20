@@ -1,16 +1,16 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
 import com.cmdpro.databank.DatabankUtils;
-import earth.terrarium.pastel.api.recipe.DescriptiveGatedRecipe;
-import earth.terrarium.pastel.compat.emi.PastelEmiRecipe;
-import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
-import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import dev.emi.emi.EmiPort;
 import dev.emi.emi.api.recipe.EmiInfoRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.TextWidget.Alignment;
 import dev.emi.emi.api.widget.WidgetHolder;
+import earth.terrarium.pastel.api.recipe.DescriptiveGatedRecipe;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipe;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
+import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import net.minecraft.client.Minecraft;
 
 import java.util.List;

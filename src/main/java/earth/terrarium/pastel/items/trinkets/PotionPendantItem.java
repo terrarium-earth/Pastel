@@ -3,7 +3,6 @@ package earth.terrarium.pastel.items.trinkets;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
-import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 

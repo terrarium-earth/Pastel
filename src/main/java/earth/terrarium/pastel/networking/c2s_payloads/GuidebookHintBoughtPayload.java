@@ -1,12 +1,9 @@
 package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import net.neoforged.neoforge.items.*;
-import net.neoforged.neoforge.items.wrapper.*;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -15,6 +12,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.items.wrapper.PlayerInvWrapper;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 import java.util.List;
 

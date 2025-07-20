@@ -1,21 +1,22 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.*;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.common.extensions.*;
-import net.neoforged.neoforge.network.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
+import net.neoforged.neoforge.network.IContainerFactory;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelScreenHandlerTypes {
 

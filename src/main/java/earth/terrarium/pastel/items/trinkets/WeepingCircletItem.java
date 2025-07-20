@@ -2,9 +2,7 @@ package earth.terrarium.pastel.items.trinkets;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.registries.PastelFluidTags;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -21,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 

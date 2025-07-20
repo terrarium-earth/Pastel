@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.compat.emi;
 
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;

@@ -1,17 +1,37 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
-import earth.terrarium.pastel.capabilities.*;
+import earth.terrarium.pastel.capabilities.AreaMiningHandler;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
+import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
 import net.minecraft.world.Container;
-import net.minecraft.world.level.block.entity.*;
-import net.neoforged.neoforge.capabilities.*;
-import net.neoforged.neoforge.fluids.capability.templates.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStackSimple;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
 import java.util.function.Supplier;
 
-import static earth.terrarium.pastel.registries.PastelBlockEntities.*;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.AMPHORA;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.BLACK_HOLE_CHEST;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.BLOCK_PLACER;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.BOTTOMLESS_BUNDLE;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.CINDERHEARTH;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.COLOR_PICKER;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.COMPACTING_CHEST;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.CRYSTALLARIEUM;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.CRYSTAL_APOTHECARY;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.ENCHANTER;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.FABRICATION_CHEST;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.FUSION_SHRINE;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.HEARTBOUND_CHEST;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.ITEM_BOWL;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.PEDESTAL;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.POTION_WORKSHOP;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.SPIRIT_INSTILLER;
+import static earth.terrarium.pastel.registries.PastelBlockEntities.TITRATION_BARREL;
 
 public class PastelCapabilityHandlers {
 

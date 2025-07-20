@@ -3,7 +3,6 @@ package earth.terrarium.pastel.compat.claims;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.neoforged.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 
 public class GenericClaimModsCompat {

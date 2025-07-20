@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.deeper_down.ColorGrading;
 import earth.terrarium.pastel.deeper_down.EnvironmentalData;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

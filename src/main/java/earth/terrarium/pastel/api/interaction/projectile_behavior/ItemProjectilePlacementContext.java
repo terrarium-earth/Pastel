@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.api.interaction.projectile_behavior;
 
-import earth.terrarium.pastel.entity.entity.*;
-import net.minecraft.core.*;
-import net.minecraft.world.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
+import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class ItemProjectilePlacementContext extends BlockPlaceContext {
     ItemProjectileEntity itemProjectileEntity;

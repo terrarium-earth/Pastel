@@ -2,10 +2,7 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.items.map.ArtisansAtlasState;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import net.minecraft.client.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -13,6 +10,9 @@ import net.minecraft.network.protocol.PacketUtils;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.game.ClientboundMapItemDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Optional;
 

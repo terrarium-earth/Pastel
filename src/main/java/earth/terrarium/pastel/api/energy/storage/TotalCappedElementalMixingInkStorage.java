@@ -4,9 +4,9 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColorTags;
 import earth.terrarium.pastel.api.energy.color.InkColors;
+import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.network.chat.Component;
 
 import java.util.List;
 import java.util.Map;

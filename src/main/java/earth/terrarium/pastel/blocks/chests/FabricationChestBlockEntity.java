@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.chests;
 
-import earth.terrarium.pastel.capabilities.item.*;
+import earth.terrarium.pastel.capabilities.item.StackHandlerView;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.inventories.FabricationChestScreenHandler;
 import earth.terrarium.pastel.items.magic_items.CraftingTabletItem;
@@ -23,7 +23,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.*;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

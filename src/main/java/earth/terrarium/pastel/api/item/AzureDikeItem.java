@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.api.item;
 
-import earth.terrarium.pastel.attachments.data.azure_dike.DikeShieldData;
-import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeData;
-import top.theillusivec4.curios.api.CuriosApi;
+import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
+import earth.terrarium.pastel.attachments.data.azure_dike.DikeShieldData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 

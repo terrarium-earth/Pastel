@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.registries;
 
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
-import earth.terrarium.pastel.*;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.mixin.accessors.StatusEffectInstanceAccessor;
 import earth.terrarium.pastel.status_effects.AscensionStatusEffect;
@@ -17,7 +17,7 @@ import earth.terrarium.pastel.status_effects.NourishingStatusEffect;
 import earth.terrarium.pastel.status_effects.ScarredStatusEffect;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
@@ -26,9 +26,9 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.neoforged.bus.api.*;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.EffectCure;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static earth.terrarium.pastel.PastelCommon.locate;
 

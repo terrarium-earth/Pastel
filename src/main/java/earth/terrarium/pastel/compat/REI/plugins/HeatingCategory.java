@@ -5,9 +5,9 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.network.chat.Component;
 
 @OnlyIn(Dist.CLIENT)
 public class HeatingCategory extends BlockToBlockWithChanceCategory {

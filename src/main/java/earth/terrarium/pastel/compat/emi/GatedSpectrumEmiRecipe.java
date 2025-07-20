@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.compat.emi;
 
-import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import dev.emi.emi.EmiPort;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.TextWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
+import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 

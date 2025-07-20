@@ -1,8 +1,6 @@
 package earth.terrarium.pastel.particle.client;
 
 import earth.terrarium.pastel.particle.effect.ColoredFallingSporeBlossomParticleEffect;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.DripParticle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -11,6 +9,8 @@ import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)

@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.sound.PastelSourceEffects;
 import earth.terrarium.pastel.mixin.client.accessors.SourceAccessor;
+import earth.terrarium.pastel.sound.PastelSourceEffects;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;

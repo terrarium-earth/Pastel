@@ -3,17 +3,16 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 import earth.terrarium.pastel.blocks.chests.FabricationChestBlockEntity;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import net.minecraft.server.level.*;
-import net.minecraft.world.level.*;
-import net.neoforged.neoforge.network.*;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.ArrayList;
 import java.util.List;

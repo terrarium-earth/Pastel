@@ -5,14 +5,14 @@ import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredExplosionParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class MoonstoneStrikeParticle extends NoRenderParticle {

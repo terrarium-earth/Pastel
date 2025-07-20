@@ -19,15 +19,15 @@ import earth.terrarium.pastel.entity.render.PhantomFrameEntityRenderer;
 import earth.terrarium.pastel.entity.render.PreservationTurretEntityRenderer;
 import earth.terrarium.pastel.entity.render.SeatEntityRenderer;
 import earth.terrarium.pastel.entity.render.ShootingStarEntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.fml.event.lifecycle.*;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 @OnlyIn(Dist.CLIENT)
 public class PastelEntityRenderers {

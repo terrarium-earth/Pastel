@@ -1,6 +1,9 @@
 package earth.terrarium.pastel.registries;
 
-import earth.terrarium.pastel.api.interaction.projectile_behavior.*;
+import earth.terrarium.pastel.api.interaction.projectile_behavior.DefaultProjectileBehavior;
+import earth.terrarium.pastel.api.interaction.projectile_behavior.FlatDamageProjectileBehavior;
+import earth.terrarium.pastel.api.interaction.projectile_behavior.ItemProjectileBehaviorRegistry;
+import earth.terrarium.pastel.api.interaction.projectile_behavior.MusicDiscProjectileBehavior;
 
 public class PastelItemProjectileBehaviors {
 

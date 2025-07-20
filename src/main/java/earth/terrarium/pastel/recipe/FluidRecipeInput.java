@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.recipe;
 
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.fluids.*;
-import net.neoforged.neoforge.fluids.capability.*;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import java.util.List;
 

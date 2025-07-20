@@ -3,7 +3,7 @@ package earth.terrarium.pastel.inventories;
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerBlockEntity;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.*;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;

@@ -2,7 +2,6 @@ package earth.terrarium.pastel.recipe.pedestal;
 
 import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.block.PedestalVariant;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
@@ -26,7 +25,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;

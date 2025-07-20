@@ -7,11 +7,11 @@ import earth.terrarium.pastel.loot.functions.FermentRandomlyLootFunction;
 import earth.terrarium.pastel.loot.functions.FillPotionFillableLootFunction;
 import earth.terrarium.pastel.loot.functions.GrantAdvancementLootFunction;
 import earth.terrarium.pastel.loot.functions.SetComponentsRandomlyLootFunction;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelLootFunctionTypes {
 

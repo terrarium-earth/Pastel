@@ -3,8 +3,7 @@ package earth.terrarium.pastel.inventories;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.inventories.slots.ShadowSlot;
-import net.minecraft.network.*;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,6 +12,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.function.Function;

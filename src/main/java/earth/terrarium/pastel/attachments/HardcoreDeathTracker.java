@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.attachments;
 
 import com.mojang.authlib.GameProfile;
-import earth.terrarium.pastel.*;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.AttachmentUtil;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.HolderLookup;
@@ -17,7 +17,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
-import net.minecraft.world.level.saveddata.*;
+import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;

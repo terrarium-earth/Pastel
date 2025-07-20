@@ -7,8 +7,6 @@ import earth.terrarium.pastel.entity.models.EggLayingWoolyPigEntityModel;
 import earth.terrarium.pastel.entity.models.EggLayingWoolyPigHatEntityModel;
 import earth.terrarium.pastel.entity.models.EggLayingWoolyPigWoolEntityModel;
 import earth.terrarium.pastel.registries.client.PastelModelLayers;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,6 +14,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class EggLayingWoolyPigWoolFeatureRenderer

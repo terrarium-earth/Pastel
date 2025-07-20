@@ -3,7 +3,6 @@ package earth.terrarium.pastel.recipe.spirit_instiller.dynamic;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
-import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.loot.modifiers.TreasureHunterModifier;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
@@ -15,13 +14,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SkullBlock;
 
 import java.util.Optional;
 

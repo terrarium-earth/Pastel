@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.compat.REI;
 
+import dev.architectury.event.EventResult;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
 import earth.terrarium.pastel.blocks.idols.FreezingIdolBlock;
@@ -20,10 +21,10 @@ import earth.terrarium.pastel.compat.REI.plugins.FreezingCategory;
 import earth.terrarium.pastel.compat.REI.plugins.FreezingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.FusionShrineCategory;
 import earth.terrarium.pastel.compat.REI.plugins.FusionShrineDisplay;
-import earth.terrarium.pastel.compat.REI.plugins.HumusConvertingCategory;
-import earth.terrarium.pastel.compat.REI.plugins.HumusConvertingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.HeatingCategory;
 import earth.terrarium.pastel.compat.REI.plugins.HeatingDisplay;
+import earth.terrarium.pastel.compat.REI.plugins.HumusConvertingCategory;
+import earth.terrarium.pastel.compat.REI.plugins.HumusConvertingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.InkConvertingCategory;
 import earth.terrarium.pastel.compat.REI.plugins.InkConvertingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.LiquidCrystalConvertingCategory;
@@ -74,7 +75,6 @@ import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import dev.architectury.event.EventResult;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
@@ -89,8 +89,6 @@ import me.shedaniel.rei.api.common.transfer.info.stack.SlotAccessor;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.Blocks;
 

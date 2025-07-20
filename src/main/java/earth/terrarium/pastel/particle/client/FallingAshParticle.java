@@ -3,8 +3,6 @@ package earth.terrarium.pastel.particle.client;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.deeper_down.HowlingSpireEffects;
 import earth.terrarium.pastel.registries.PastelBiomes;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -18,6 +16,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class FallingAshParticle extends TextureSheetParticle {
 

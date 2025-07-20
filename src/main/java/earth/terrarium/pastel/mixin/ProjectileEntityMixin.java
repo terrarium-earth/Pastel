@@ -1,14 +1,14 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
-import earth.terrarium.pastel.items.trinkets.PuffCircletItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
+import earth.terrarium.pastel.items.trinkets.PuffCircletItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelMobEffects;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;

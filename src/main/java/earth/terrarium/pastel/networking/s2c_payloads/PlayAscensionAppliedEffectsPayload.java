@@ -3,17 +3,17 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.DivinitySoundInstance;
-import net.minecraft.world.entity.player.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.*;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayAscensionAppliedEffectsPayload() implements CustomPacketPayload {
 

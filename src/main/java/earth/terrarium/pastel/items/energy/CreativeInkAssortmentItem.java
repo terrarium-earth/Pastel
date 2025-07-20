@@ -9,8 +9,6 @@ import earth.terrarium.pastel.api.item.CreativeOnlyItem;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +18,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

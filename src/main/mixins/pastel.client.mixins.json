@@ -4,12 +4,11 @@
   "package": "earth.terrarium.pastel.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "accessors.WorldRendererAccessor",
     "AbstractClientPlayerEntityMixin",
-    "ClientPlayNetworkHandlerMixin",
     "AbstractInventoryScreenMixin",
     "BipedEntityModelMixin",
     "CapeLayerMixin",
+    "ClientPlayNetworkHandlerMixin",
     "DeathScreenMixin",
     "DimensionTypeMixin",
     "DrawContextMixin",
@@ -32,7 +31,8 @@
     "TranslucentBlockMixin",
     "accessors.ParticleManagerAccessor",
     "accessors.RenderLayerAccessor",
-    "accessors.SourceAccessor"
+    "accessors.SourceAccessor",
+    "accessors.WorldRendererAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

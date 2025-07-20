@@ -4,13 +4,13 @@ import earth.terrarium.pastel.items.magic_items.EnderSpliceItem;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record BindEnderSpliceToPlayerPayload(int entityId) implements CustomPacketPayload {
 

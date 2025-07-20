@@ -1,15 +1,17 @@
 package earth.terrarium.pastel.blocks.redstone;
 
-import earth.terrarium.pastel.capabilities.*;
+import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
 import earth.terrarium.pastel.inventories.Pastel3x3ContainerScreenHandler;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.*;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class BlockPlacerBlockEntity extends DispenserBlockEntity implements SidedCapabilityProvider {
 

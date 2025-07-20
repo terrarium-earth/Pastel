@@ -7,7 +7,7 @@ import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetworkM
 import earth.terrarium.pastel.particle.render.EarlyRenderingParticleContainer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.event.server.*;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 
 public class Pastel {
 

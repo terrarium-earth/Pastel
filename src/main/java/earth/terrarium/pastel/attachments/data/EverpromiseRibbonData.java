@@ -1,14 +1,15 @@
 package earth.terrarium.pastel.attachments.data;
 
-import com.mojang.serialization.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
+import com.mojang.serialization.Codec;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.attachment.*;
-import net.neoforged.neoforge.network.handling.*;
+import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import java.util.*;
+import java.util.Optional;
 
 public class EverpromiseRibbonData {
 

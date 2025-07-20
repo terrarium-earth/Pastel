@@ -1,13 +1,13 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import earth.terrarium.pastel.api.item.AzureDikeItem;
-import top.theillusivec4.curios.api.SlotContext;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 

@@ -3,11 +3,11 @@ package earth.terrarium.pastel.registries;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.worldgen.structure_pool_elements.SingleBlockPoolElement;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElementType;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelStructurePoolElementTypes {
 

@@ -2,14 +2,13 @@ package earth.terrarium.pastel.recipe.fusion_shrine.dynamic;
 
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItemTags;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.fusion_shrine.FusionShrineBlockEntity;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStarItem;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.ArrayList;
 import java.util.List;

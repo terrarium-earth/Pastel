@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.components.JadeWineComponent;
@@ -16,6 +15,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.List;
 import java.util.Optional;

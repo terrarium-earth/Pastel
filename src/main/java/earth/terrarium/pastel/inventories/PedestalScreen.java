@@ -1,19 +1,13 @@
 package earth.terrarium.pastel.inventories;
 
-import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
-import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
-import earth.terrarium.pastel.registries.PastelMultiblocks;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.block.Rotation;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

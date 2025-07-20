@@ -1,23 +1,16 @@
 package earth.terrarium.pastel.blocks.conditional;
 
 import com.mojang.serialization.MapCodec;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
-import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.EnderMan;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import java.util.List;
-import java.util.Map;
 
 public class RadiatingEnderBlock extends Block {
 

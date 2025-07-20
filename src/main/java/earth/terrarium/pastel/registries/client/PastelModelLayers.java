@@ -69,11 +69,10 @@ import earth.terrarium.pastel.entity.models.KindlingEntityModel;
 import earth.terrarium.pastel.entity.models.LizardEntityModel;
 import earth.terrarium.pastel.entity.models.PreservationTurretEntityModel;
 import earth.terrarium.pastel.render.armor.BedrockArmorModel;
-import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.fml.event.lifecycle.*;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.ClientHooks;
 
 public class PastelModelLayers {

@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.attachments.data.azure_dike;
 
-import earth.terrarium.pastel.attachments.data.*;
+import earth.terrarium.pastel.attachments.data.AttachmentUtil;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
-import earth.terrarium.pastel.progression.*;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelItems;
-import net.minecraft.server.level.*;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 
 public class AzureDikeProvider {

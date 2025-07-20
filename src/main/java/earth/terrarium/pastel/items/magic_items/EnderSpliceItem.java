@@ -2,17 +2,14 @@ package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.components.EnderSpliceComponent;
-import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.networking.c2s_payloads.BindEnderSpliceToPlayerPayload;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.EnderSpliceChargingSoundInstance;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -41,6 +38,9 @@ import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

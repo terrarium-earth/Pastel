@@ -4,7 +4,6 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.status_effects.DivinityStatusEffect;
-import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 

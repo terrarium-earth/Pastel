@@ -5,7 +5,6 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStar;
 import earth.terrarium.pastel.entity.entity.ShootingStarEntity;
 import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;

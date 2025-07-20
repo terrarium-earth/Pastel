@@ -1,13 +1,13 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
+import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.widget.WidgetHolder;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.compat.emi.widgets.AnimatedTexturedWidget;
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
-import dev.emi.emi.api.render.EmiTexture;
-import dev.emi.emi.api.stack.EmiIngredient;
-import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.resources.ResourceLocation;
 
 public class PrimordialFireBurningEmiRecipeGated extends GatedSpectrumEmiRecipe<PrimordialFireBurningRecipe> {

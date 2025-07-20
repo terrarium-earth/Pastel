@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.particle.client;
 
 import earth.terrarium.pastel.helpers.data.ColorHelper;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.level.gameevent.PositionSource;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)

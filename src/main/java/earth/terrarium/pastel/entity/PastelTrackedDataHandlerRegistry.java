@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.entity;
 
-import earth.terrarium.pastel.*;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.entity.variants.KindlingVariant;
 import earth.terrarium.pastel.entity.variants.LizardFrillVariant;
@@ -9,8 +9,9 @@ import earth.terrarium.pastel.items.tools.GlassArrowVariant;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.syncher.EntityDataSerializer;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class PastelTrackedDataHandlerRegistry {
 

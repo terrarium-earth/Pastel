@@ -1,18 +1,20 @@
 package earth.terrarium.pastel.attachments.data.azure_dike;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import earth.terrarium.pastel.attachments.data.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import earth.terrarium.pastel.attachments.data.AttachmentUtil;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.*;
-import net.neoforged.neoforge.attachment.*;
-import net.neoforged.neoforge.network.handling.*;
+import net.minecraft.world.entity.LivingEntity;
+import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.attachment.IAttachmentCopyHandler;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import java.util.*;
+import java.util.Optional;
 
 // TODO: The azure dike impl is dogshit. Rewrite ASAP.
 public class AzureDikeData implements DikeShieldData {

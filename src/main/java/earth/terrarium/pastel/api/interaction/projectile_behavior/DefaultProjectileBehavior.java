@@ -1,23 +1,29 @@
 package earth.terrarium.pastel.api.interaction.projectile_behavior;
 
-import com.mojang.serialization.*;
-import earth.terrarium.pastel.*;
-import earth.terrarium.pastel.compat.claims.*;
-import earth.terrarium.pastel.entity.entity.*;
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
+import com.mojang.serialization.MapCodec;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
+import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.DirectionalPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 
 public record DefaultProjectileBehavior() implements ItemProjectileBehavior {
     public static final DefaultProjectileBehavior INSTANCE = new DefaultProjectileBehavior();

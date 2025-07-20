@@ -2,7 +2,6 @@ package earth.terrarium.pastel.items.conditional;
 
 import earth.terrarium.pastel.api.item.DamageAwareItem;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;

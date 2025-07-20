@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.blocks.crystallarieum.*;
+import earth.terrarium.pastel.blocks.crystallarieum.CrystallarieumBlock;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -14,11 +14,11 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;

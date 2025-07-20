@@ -1,17 +1,18 @@
 package earth.terrarium.pastel.api.interaction.projectile_behavior;
 
-import com.mojang.serialization.*;
+import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.resources.*;
+import earth.terrarium.pastel.registries.PastelDataMaps;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 // Todo: Convert to Registry
 public interface ItemProjectileBehavior {

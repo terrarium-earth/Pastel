@@ -1,9 +1,12 @@
 package earth.terrarium.pastel.api.interaction.projectile_behavior;
 
-import com.mojang.serialization.*;
-import net.minecraft.resources.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class ItemProjectileBehaviorRegistry {
     public static final Codec<ProjectileBehaviorType<?>> TYPE_CODEC = ResourceLocation.CODEC.comapFlatMap(
