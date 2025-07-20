@@ -2,7 +2,7 @@ import groovy.json.StringEscapeUtils
 
 plugins {
 	id("maven-publish")
-    id("earth.terrarium.cloche") version "0.10.18"
+    id("earth.terrarium.cloche") version "0.11.9"
 	id("com.teamresourceful.resourcefulgradle") version "0.0.+"
 }
 
