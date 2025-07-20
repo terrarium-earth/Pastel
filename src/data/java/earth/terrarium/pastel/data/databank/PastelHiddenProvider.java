@@ -67,7 +67,8 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
 		hideBlock(PastelBlocks.POTTED_AMARANTH_BUSHEL.get(), Blocks.POTTED_FERN, PastelAdvancements.REVEAL_AMARANTH);
 		hideBlock(PastelBlocks.STUCK_STORM_STONE.get(), Blocks.AIR, PastelAdvancements.REVEAL_STORM_STONES);
 		hideBlock(PastelBlocks.POTTED_RESONANT_LILY.get(), Blocks.POTTED_WHITE_TULIP, PastelCommon.locate("midgame/collect_resonant_lily"));
-		
+
+		hideItem(PastelBlocks.BLOOD_ORCHID.asItem(), Blocks.RED_TULIP.asItem(), PastelCommon.locate("midgame/collect_blood_orchid_petal"));
 		hideItem(PastelItems.AMARANTH_GRAINS.get(), Items.LARGE_FERN, PastelAdvancements.REVEAL_AMARANTH);
 		hideItem(PastelItems.MERMAIDS_GEM.get(), Items.KELP, PastelCommon.locate("place_pedestal"));
 		hideItem(PastelItems.STORM_STONE.get(), Items.YELLOW_DYE, PastelAdvancements.REVEAL_STORM_STONES);
@@ -113,7 +114,8 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
 		hideItem(PastelItems.PALTAERIA_GEM.get(), Items.CYAN_DYE, PastelAdvancements.REVEAL_PALTAERIA);
 		
 		createQuitoxicReeds(PastelBlocks.QUITOXIC_REEDS.get(), Blocks.SUGAR_CANE.asItem(), PastelAdvancements.REVEAL_QUITOXIC_REEDS);
-		
+
+		hideOre(PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get(), PastelBlocks.BLACKSLAG_AZURITE_ORE.get(), PastelAdvancements.REVEAL_AZURITE);
 		hideOre(PastelBlocks.MALACHITE_ORE.get(), PastelBlocks.DEEPSLATE_MALACHITE_ORE.get(), PastelBlocks.BLACKSLAG_MALACHITE_ORE.get(), PastelAdvancements.REVEAL_MALACHITE);
 		hideOre(PastelBlocks.SHIMMERSTONE_ORE.get(), PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get(), PastelBlocks.BLACKSLAG_SHIMMERSTONE_ORE.get(), PastelAdvancements.REVEAL_SHIMMERSTONE);
 		hideOre(PastelBlocks.TOPAZ_ORE.get(), PastelBlocks.DEEPSLATE_TOPAZ_ORE.get(), PastelBlocks.BLACKSLAG_TOPAZ_ORE.get(), PastelAdvancements.COLLECT_TOPAZ);

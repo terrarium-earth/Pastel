@@ -23,10 +23,11 @@ public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	ResourceLocation getRecipeTypeUnlockIdentifier();
 	
 	String getRecipeTypeShortID();
-	
+
 	default boolean canPlayerCraft(Player playerEntity) {
-		return DatabankUtils.hasAdvancement(playerEntity, getRecipeTypeUnlockIdentifier())
-				&& DatabankUtils.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier().orElse(null));
+		return DatabankUtils.hasAdvancement(playerEntity, getRecipeTypeUnlockIdentifier()) &&
+				(getRequiredAdvancementIdentifier().isEmpty() ||
+				DatabankUtils.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier().get()));
 	}
 	
 	default Component getSingleUnlockToastString() {

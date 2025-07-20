@@ -45,6 +45,9 @@ public abstract class PastelDisplay extends BasicDisplay implements GatedRecipeD
 	@Override
 	public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
+		if (client.player == null || requiredAdvancementIdentifier == null)
+			return true;
+
 		return DatabankUtils.hasAdvancement(client.player, this.requiredAdvancementIdentifier);
 	}
 	

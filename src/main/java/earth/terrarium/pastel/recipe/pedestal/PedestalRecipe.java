@@ -221,7 +221,8 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 	@Override
 	public boolean canPlayerCraft(Player playerEntity) {
 		return this.tier.hasUnlocked(playerEntity) &&
-				DatabankUtils.hasAdvancement(playerEntity, this.requiredAdvancementIdentifier.orElse(null));
+				requiredAdvancementIdentifier.map(a -> DatabankUtils.hasAdvancement(playerEntity, a))
+						.orElse(true);
 	}
 	
 	@Override
