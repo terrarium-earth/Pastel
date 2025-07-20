@@ -1,7 +1,7 @@
 {
   "parent": "pastel:templates/pedestal",
   "textures": {
-    "particle": "pastel:block/pedestal_moonstone_breaking",
+    "particle": "pastel:block/pedestal_moonstone_particle",
     "pedestal": "pastel:block/pedestal_moonstone"
   }
 }

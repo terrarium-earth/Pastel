@@ -1,5 +1,5 @@
 {
-  "type": "pastel:pedestal_shapeless",
+  "type": "pastel:pedestal",
   "time": 200,
   "tier": "simple",
   "colors": {
@@ -10,9 +10,15 @@
     "pastel:black": 0
   },
   "experience": 8.0,
-  "ingredients": [
-    "pastel:onyx_shard"
+  "pattern": [
+    "SOS",
+    "RRR"
   ],
+  "key": {
+    "O": "pastel:onyx_shard",
+    "S": "pastel:shimmerstone_gem",
+    "R": "minecraft:obsidian"
+  },
   "result": {
     "id": "pastel:pedestal_onyx",
     "count": 1

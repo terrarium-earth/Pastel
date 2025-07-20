@@ -1,5 +1,5 @@
 {
-  "type": "pastel:pedestal_shapeless",
+  "type": "pastel:pedestal",
   "time": 200,
   "tier": "advanced",
   "colors": {
@@ -10,9 +10,15 @@
     "pastel:black": 0
   },
   "experience": 16.0,
-  "ingredients": [
-    "pastel:moonstone_shard"
+  "pattern": [
+    "MMM",
+    "BRB"
   ],
+  "key": {
+    "M": "pastel:moonstone_shard",
+    "B": "pastel:bismuth_flake",
+    "R": "pastel:polished_onyx_block"
+  },
   "result": {
     "id": "pastel:pedestal_moonstone",
     "count": 1
