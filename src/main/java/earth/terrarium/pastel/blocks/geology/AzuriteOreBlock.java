@@ -43,7 +43,7 @@ public class AzuriteOreBlock extends CloakedOreBlock {
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
         super.stepOn(world, pos, state, entity);
-        if (world.isClientSide() && !entity.isSteppingCarefully() && world.random.nextInt(3) == 0 && entity instanceof Player player && BlockHiddenType.isVisible(state, player)) {
+        if (world.isClientSide() && !entity.isSteppingCarefully() && world.random.nextInt(3) == 0) {
 			ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE_SMALL, pos, new Direction[]{Direction.UP}, 1, Vec3.ZERO);
         }
     }
@@ -52,7 +52,7 @@ public class AzuriteOreBlock extends CloakedOreBlock {
     public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         super.playerWillDestroy(world, pos, state, player);
         
-        if (world.isClientSide() && BlockHiddenType.isVisible(state, player)) {
+        if (world.isClientSide() && BlockHiddenType.isVisibleClient(state)) {
             ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, 1, false, Vec3.ZERO, 0, true, Vec3.atCenterOf(pos), new Vec3(0, 0.08D + world.getRandom().nextDouble() * 0.04, 0));
 			ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE_SMALL, pos, Direction.values(), 3, Vec3.ZERO);
         }
@@ -74,7 +74,7 @@ public class AzuriteOreBlock extends CloakedOreBlock {
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(state, world, pos, random);
         
-        if (!BlockHiddenType.isVisible(state, Minecraft.getInstance().player))
+        if (!BlockHiddenType.isVisibleClient(state))
             return;
 
         AuraSoundInstance.getOrCreateInstance(AuraData.AZURITE, world, pos);
