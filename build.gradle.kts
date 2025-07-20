@@ -52,7 +52,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.0.6-BETA"
+		version = System.getenv("VERSION") ?: "1.1.0"
 
         description = "Do flowers dream of the moon?"
 
