@@ -2,9 +2,11 @@ package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ArmorWithHitEffect;
+import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
@@ -36,13 +38,16 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -59,8 +64,39 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::parryingSwordBlock);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::disarming);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::armorEffects);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenItemPickup);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenEntityAdded);
+    }
+    
+    private static void listenItemPickup(ItemEntityPickupEvent.Pre event) {
+        var entity = event.getPlayer();
+        var item = event.getItemEntity();
+        var original = item.getItem().copy();
 
+        if (item.pickupDelay != 0)
+            return;
+
+        var eListener = entity.getCapability(PastelCapabilities.Pickup.ENTITY);
+        ItemStack remainder = null;
+
+        if (eListener != null && eListener.accepts(Optional.empty(), item.getItem())) {
+            remainder = eListener.receive(Optional.empty(), item.getItem(), Optional.of(entity));
+        }
+
+        var inv = entity.getCapability(Capabilities.ItemHandler.ENTITY);
+        if (remainder == null && inv != null) {
+            remainder = ItemPickupListener.receiveRecursive(inv, 2, 0,
+                    item.getItem(), Optional.of(entity));
+        }
+
+        if (remainder == null || ItemStack.isSameItemSameComponents(remainder, original))
+            return;
+
+
+        item.setItem(remainder);
+        event.setCanPickup(TriState.FALSE);
+        entity.take(item, original.getCount() - remainder.getCount());
+        entity.onItemPickup(item);
     }
 
     private static void listenEntityAdded(EntityJoinLevelEvent event) {

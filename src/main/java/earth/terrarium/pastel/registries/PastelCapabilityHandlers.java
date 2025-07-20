@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.registries;
 
+import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.capabilities.AreaMiningHandler;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
@@ -74,6 +75,11 @@ public class PastelCapabilityHandlers {
             (stack, v) -> new FluidHandlerItemStackSimple.Consumable(
                 () -> PastelDataComponentTypes.MERMAIDS_GEM, stack, 1000),
             PastelItems.MERMAIDS_GEM.get()
+        );
+
+        event.registerItem(
+                PastelCapabilities.Pickup.ITEM, (stack, v) -> (ItemPickupListener) stack.getItem(),
+                PastelBlocks.BOTTOMLESS_BUNDLE.asItem()
         );
 
         event.registerItem(

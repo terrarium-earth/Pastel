@@ -2,10 +2,11 @@ package earth.terrarium.pastel.blocks.bottomless_bundle;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.item.InventoryInsertionAcceptor;
+import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.items.tooltip.ItemStorageTooltipData;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -62,7 +63,7 @@ import java.util.Optional;
  * Implementation Detail <p> While it may appear otherwise, the count a bottomless bundle can store may never exceed
  * {@link Integer#MAX_VALUE}
  */
-public class BottomlessBundleItem extends BlockItem implements InventoryInsertionAcceptor, ItemStorage.LimitCallback {
+public class BottomlessBundleItem extends BlockItem implements ItemPickupListener, ItemStorage.LimitCallback {
 
     private static final long MAX_STORED_AMOUNT_BASE = 20000;
 
@@ -135,7 +136,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 
     @Override
     public boolean canFitInsideContainerItems() {
-        return false;
+        return true;
     }
 
     @Override
@@ -285,21 +286,35 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 
 
     @Override
-    public boolean acceptsItemStack(ItemStack bundle, ItemStack itemStackToAccept) {
+    public boolean accepts(Optional<ItemStack> listener, ItemStack proposal) {
+        assert listener.isPresent();
+        var bundle = listener.get();
+
+        if (proposal.getCapability(PastelCapabilities.Pickup.ITEM) != null)
+            return false;
+
         var reference = getStoredReference(bundle);
-        return !reference.isEmpty() && reference.permits(itemStackToAccept);
+        return !reference.isEmpty() && reference.permits(proposal);
     }
 
     @Override
-    public int acceptItemStack(ItemStack bundle, ItemStack itemStackToAccept, Player playerEntity) {
+    public ItemStack receive(Optional<ItemStack> listener, ItemStack stack, Optional<Entity> unused) {
+        assert listener.isPresent();
+        var bundle = listener.get();
+
         if (isLocked(bundle)) {
-            return itemStackToAccept.getCount();
+            return stack;
         }
 
         var storage = ItemStorage.load(bundle);
-        var inserted = storage.insert(itemStackToAccept);
+        var inserted = storage.insert(stack);
         storage.save(bundle);
-        return itemStackToAccept.getCount() - inserted;
+
+        if (inserted == stack.getCount())
+            return ItemStack.EMPTY;
+
+        stack.shrink(inserted);
+        return stack;
     }
 
     private void playRemoveOneSound(Entity entity) {

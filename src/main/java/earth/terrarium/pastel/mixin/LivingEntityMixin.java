@@ -8,10 +8,12 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.entity.TouchingWaterAware;
+import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.components.PairedFoodComponent;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
@@ -44,6 +46,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -55,6 +58,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Optional;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -83,9 +88,6 @@ public abstract class LivingEntityMixin {
     public abstract ItemStack getOffhandItem();
 
     @Shadow
-    public abstract int getArmorValue();
-
-    @Shadow
     public abstract void remove(Entity.RemovalReason reason);
 
     @Shadow
@@ -98,15 +100,8 @@ public abstract class LivingEntityMixin {
     public abstract double getAttributeValue(Holder<Attribute> attribute);
 
     @Shadow
-    protected abstract @Nullable SoundEvent getDeathSound();
+    public boolean dead;
 
-    @Shadow
-    protected abstract float getSoundVolume();
-
-    @Shadow
-    protected boolean dead;
-
-    // FabricDefaultAttributeRegistry seems to only allow adding full containers and only single entity types?
     @Inject(method = "createLivingAttributes", require = 1, allow = 1, at = @At("RETURN"))
     private static void addAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> cir) {
         cir.getReturnValue()

@@ -62,7 +62,6 @@
     "PistonBlockMixin",
     "PlantOnCustomFarmlandMixin",
     "PlayerEntityMixin",
-    "PlayerInventoryMixin",
     "PotionItemMixin",
     "ProjectileEntityMixin",
     "RandomChanceLootConditionMixin",

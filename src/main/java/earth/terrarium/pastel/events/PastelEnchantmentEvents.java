@@ -2,6 +2,7 @@ package earth.terrarium.pastel.events;
 
 
 import earth.terrarium.pastel.api.interaction.ResonanceProcessor;
+import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.helpers.enchantments.ExuberanceHelper;
 import earth.terrarium.pastel.helpers.enchantments.FoundryHelper;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
@@ -10,19 +11,23 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.PlayerInvWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PastelEnchantmentEvents {
 
@@ -47,17 +52,17 @@ public class PastelEnchantmentEvents {
         var tool = event.getTool();
         var breaker = event.getBreaker();
 
-        if (!(breaker instanceof Player player))
-            return;
-
         if (!EnchantmentHelper.hasTag(tool, PastelEnchantmentTags.INVENTORY_INSERTION_EFFECT))
             return;
 
-        var handler = new PlayerInvWrapper(player.getInventory());
+        var handler = breaker.getCapability(Capabilities.ItemHandler.ENTITY);
+        if (handler == null)
+            return;
+
         var removed = new ArrayList<ItemEntity>();
         for (ItemEntity drop : event.getDrops()) {
             var stack = drop.getItem();
-            var remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
+            var remainder = insertStack(breaker, handler, stack);
 
             if (remainder.isEmpty()) {
                 removed.add(drop);
@@ -70,6 +75,16 @@ public class PastelEnchantmentEvents {
 
         removed.forEach(e -> event.getDrops()
                                   .remove(e));
+    }
+
+    private static ItemStack insertStack(Entity taker, IItemHandler inventory, ItemStack stack) {
+        var rem = ItemPickupListener.receiveRecursive(inventory, 2, 0,
+                stack, Optional.ofNullable(taker));
+
+        if (rem.isEmpty())
+            return rem;
+
+        return ItemHandlerHelper.insertItemStacked(inventory, stack, false);
     }
 
     private static void applyFoundry(BlockDropsEvent event) {
