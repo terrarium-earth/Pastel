@@ -30,6 +30,10 @@ public class PastelDataGenerator {
 		event.addProvider(new PastelWaxableDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelBurnTimeDataMapProvider(packOutput, lookupProvider));
 
+		if (event.includeClient()) {
+			event.addProvider(new PastelWoodOverlayTextureProvider(packOutput, existingFileHelper));
+		}
+
 		event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders());
 	}
 }

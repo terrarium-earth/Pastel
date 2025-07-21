@@ -230,9 +230,6 @@ public class PastelColorProviders {
 	private static void coloredBlocks(RegisterColorHandlersEvent.Block event) {
 		for (InkColor color : InkColors.all()) {
 			event.register(BLOCK_COLORED,
-					ColoredPlankBlock.byColor(color),
-					ColoredLogBlock.byColor(color),
-					ColoredStrippedLogBlock.byColor(color),
 					ColoredFenceBlock.byColor(color),
 					ColoredFenceGateBlock.byColor(color)
 			);
