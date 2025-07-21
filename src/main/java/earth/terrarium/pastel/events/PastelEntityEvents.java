@@ -49,6 +49,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import org.joml.Vector3f;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.Optional;
@@ -67,13 +68,13 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenItemPickup);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenEntityAdded);
     }
-    
+
     private static void listenItemPickup(ItemEntityPickupEvent.Pre event) {
         var entity = event.getPlayer();
         var item = event.getItemEntity();
         var original = item.getItem().copy();
 
-        if (item.pickupDelay != 0)
+        if (item.hasPickUpDelay())
             return;
 
         var eListener = entity.getCapability(PastelCapabilities.Pickup.ENTITY);
