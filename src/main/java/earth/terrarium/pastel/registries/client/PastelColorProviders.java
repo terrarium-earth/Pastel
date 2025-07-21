@@ -47,18 +47,6 @@ public class PastelColorProviders {
 	public static SwapBlockColor amaranthCrop;
 	public static SwapItemColor amaranthCropItem;
 
-	private static final BlockColor BLOCK_COLORED = (state, level, pos, tintIndex) -> {
-		var block = state.getBlock();
-
-		if (tintIndex != 0)
-			return NOOP;
-
-		if (block instanceof Colored colored)
-			return colored.getColor().getColorInt();
-
-		return NOOP;
-	};
-
 	private static final ItemColor ITEM_COLORED = (stack, tintIndex) -> {
 		if (tintIndex != 0 || !(stack.getItem() instanceof BlockItem blockItem))
 			return NOOP;
@@ -93,7 +81,6 @@ public class PastelColorProviders {
 		// Biome Colors for colored leaves items and blocks
 		// They don't use it, but their decoy oak leaves do
 		coloredLeavesBlock(event);
-		coloredBlocks(event);
 
 		// Same for Amaranth
 		amaranthBlock(event);
@@ -105,7 +92,6 @@ public class PastelColorProviders {
 		PastelCommon.logInfo("Registering Item Color Providers...");
 
 		coloredLeavesItem(event);
-		coloredItems(event);
 
 		amaranthItem(event);
 		event.register(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO, PastelBlocks.CLOVER.get(), PastelBlocks.FOUR_LEAF_CLOVER.get());
@@ -124,7 +110,7 @@ public class PastelColorProviders {
 				return NOOP;
 
 			return level != null && pos != null ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.getDefaultColor();
-		}, BLOCK_COLORED);
+		});
 
 		for (InkColor color : InkColors.all()) {
 			Block block = ColoredLeavesBlock.byColor(color);
@@ -227,27 +213,6 @@ public class PastelColorProviders {
 			}
 			return -1;
 		}, item);
-	}
-
-	private static void coloredBlocks(RegisterColorHandlersEvent.Block event) {
-		for (InkColor color : InkColors.all()) {
-			event.register(BLOCK_COLORED,
-					ColoredFenceBlock.byColor(color),
-					ColoredFenceGateBlock.byColor(color)
-			);
-		}
-	}
-
-	private static void coloredItems(RegisterColorHandlersEvent.Item event) {
-		for (InkColor color : InkColors.all()) {
-			event.register(ITEM_COLORED,
-					ColoredPlankBlock.byColor(color),
-					ColoredLogBlock.byColor(color),
-					ColoredStrippedLogBlock.byColor(color),
-					ColoredFenceBlock.byColor(color),
-					ColoredFenceGateBlock.byColor(color)
-			);
-		}
 	}
 
 	public static void resetToggleableProviders() {
