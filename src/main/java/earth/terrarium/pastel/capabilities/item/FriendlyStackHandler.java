@@ -1,16 +1,26 @@
 package earth.terrarium.pastel.capabilities.item;
 
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.item.*;
-import net.neoforged.neoforge.items.*;
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.ApiStatus;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class FriendlyStackHandler extends ItemStackHandler {
 
     private List<Consumer<Integer>> listeners;
+    private final Int2IntMap limits = new Int2IntOpenHashMap();
+    private int tempLimit = -1;
 
     public FriendlyStackHandler(int size) {
         super(size);
@@ -87,6 +97,31 @@ public class FriendlyStackHandler extends ItemStackHandler {
     @Override
     protected void validateSlotIndex(int slot) {
         super.validateSlotIndex(slot);
+    }
+
+    @Override
+    public int getSlotLimit(int slot) {
+        if (tempLimit != -1)
+            return tempLimit;
+
+        if (limits.containsKey(slot))
+            return limits.get(slot);
+
+        return super.getSlotLimit(slot);
+    }
+
+    public FriendlyStackHandler addLimit(int slot, int limit) {
+        limits.put(slot, limit);
+        return this;
+    }
+
+    public void clearLimits() {
+        limits.clear();
+    }
+
+    @ApiStatus.Internal
+    public void setTempLimit(int tempLimit) {
+        this.tempLimit = tempLimit;
     }
 
     public boolean hasAnyMatching(Predicate<ItemStack> predicate) {

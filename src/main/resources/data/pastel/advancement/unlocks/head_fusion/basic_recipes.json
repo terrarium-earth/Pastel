@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_mob_head_using_treasure_hunter": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_mob_head_using_treasure_hunter"
+        "advancement": "pastel:midgame/collect_mob_head_using_treasure_hunter"
       }
     },
     "built_spirit_instiller_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_spirit_instiller_structure"
+        "advancement": "pastel:midgame/build_spirit_instiller_structure"
       }
     }
   }

@@ -27,7 +27,7 @@ import java.util.Optional;
 
 @Mixin(GeodeFeature.class)
 public abstract class GeodeFeatureMixin {
-	
+
 	@Inject(at = @At("TAIL"), method = "place")
 	public void generate(FeaturePlaceContext<GeodeConfiguration> context, CallbackInfoReturnable<Boolean> cir) {
 		if (!cir.getReturnValueZ())
@@ -44,7 +44,7 @@ public abstract class GeodeFeatureMixin {
 
 		garden.get().place(level, context.chunkGenerator(), context.random(), context.origin());
 	}
-	
+
 	/**
 	 * After generating a geode place gemstone ores around of it
 	 * that way it is easier for players to spot geodes, gives them
@@ -149,28 +149,34 @@ public abstract class GeodeFeatureMixin {
 		return null;
 	}
 
-	/**
-	 * Returns a matching ore block for a gemstone block
-	 * Aka amethyst_block => amethyst_ore
-	 *
-	 * @param blockState The blockstate the geode generates with
-	 * @return the matching ore for that block state. Does return null if no matching ore exists. For example if another mod adds additional geodes
-	 */
-	@Unique
-	private BlockState getGemstoneBlackslagOreForGeodeBlock(BlockState blockState) {
-		Block block = blockState.getBlock();
-		if (block.equals(Blocks.AMETHYST_BLOCK)) {
-			return PastelBlocks.BLACKSLAG_AMETHYST_ORE.get().defaultBlockState();
-		} else if (block.equals(PastelBlocks.CITRINE_BLOCK.get())) {
-			return PastelBlocks.BLACKSLAG_CITRINE_ORE.get().defaultBlockState();
-		} else if (block.equals(PastelBlocks.TOPAZ_BLOCK.get())) {
-			return PastelBlocks.BLACKSLAG_TOPAZ_ORE.get().defaultBlockState();
-		} else if (block.equals(PastelBlocks.ONYX_BLOCK.get())) {
-			return PastelBlocks.BLACKSLAG_ONYX_ORE.get().defaultBlockState();
-		} else if (block.equals(PastelBlocks.MOONSTONE_BLOCK.get())) {
-			return PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get().defaultBlockState();
-		}
-		return null;
-	}
+    /**
+     * Returns a matching ore block for a gemstone block
+     * Aka amethyst_block => amethyst_ore
+     *
+     * @param blockState The blockstate the geode generates with
+     * @return the matching ore for that block state. Does return null if no matching ore exists. For example if
+     * another mod adds additional geodes
+     */
+    @Unique
+    private BlockState getGemstoneBlackslagOreForGeodeBlock(BlockState blockState) {
+        Block block = blockState.getBlock();
+        if (block.equals(Blocks.AMETHYST_BLOCK)) {
+            return PastelBlocks.BLACKSLAG_AMETHYST_ORE.get()
+                                                      .defaultBlockState();
+        } else if (block.equals(PastelBlocks.CITRINE_BLOCK.get())) {
+            return PastelBlocks.BLACKSLAG_CITRINE_ORE.get()
+                                                     .defaultBlockState();
+        } else if (block.equals(PastelBlocks.TOPAZ_BLOCK.get())) {
+            return PastelBlocks.BLACKSLAG_TOPAZ_ORE.get()
+                                                   .defaultBlockState();
+        } else if (block.equals(PastelBlocks.ONYX_BLOCK.get())) {
+            return PastelBlocks.BLACKSLAG_ONYX_ORE.get()
+                                                  .defaultBlockState();
+        } else if (block.equals(PastelBlocks.MOONSTONE_BLOCK.get())) {
+            return PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get()
+                                                       .defaultBlockState();
+        }
+        return null;
+    }
 
 }

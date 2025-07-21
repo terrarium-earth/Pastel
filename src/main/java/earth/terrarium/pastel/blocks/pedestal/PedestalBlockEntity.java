@@ -1,29 +1,28 @@
 package earth.terrarium.pastel.blocks.pedestal;
 
-import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PedestalVariant;
-import earth.terrarium.pastel.api.block.PlayerOwned;
+import earth.terrarium.pastel.api.color.ItemColors;
+import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.blocks.*;
+import earth.terrarium.pastel.blocks.ActionableBlockEntity;
+import earth.terrarium.pastel.blocks.Containerlike;
 import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
-import earth.terrarium.pastel.capabilities.*;
-import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.helpers.*;
-import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
-import earth.terrarium.pastel.inventories.*;
+import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
+import earth.terrarium.pastel.capabilities.item.StackHandlerView;
+import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.inventories.PedestalScreenHandler;
+import earth.terrarium.pastel.items.magic_items.CraftingTabletItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayBlockBoundSoundInstancePayload;
-import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalCraftingFinishedParticlePayload;
-import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalUpgradedParticlePayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
-import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelMultiblocks;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
@@ -32,782 +31,593 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.*;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.StackedContentsCompatible;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.*;
-import net.neoforged.neoforge.items.*;
-import net.neoforged.neoforge.items.wrapper.*;
-import org.jetbrains.annotations.Contract;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public class PedestalBlockEntity extends BaseInventoryBlockEntity implements MultiblockCrafter, SidedCapabilityProvider, StackedContentsCompatible {
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class PedestalBlockEntity extends ActionableBlockEntity implements MultiblockCrafter, SidedCapabilityProvider, MenuProvider, Containerlike {
 	
-	public static final int INVENTORY_SIZE = 16; // 9 crafting, 5 gems, 1 craftingTablet, 1 output
-	public static final int CRAFTING_TABLET_SLOT_ID = 14;
-	public static final int OUTPUT_SLOT_ID = 15;
-	
-	private static final int[] ACCESSIBLE_SLOTS_UP = {0, 9};
-	private static final int[] ACCESSIBLE_SLOTS_BASIC = {9, 3};
-	private static final int[] ACCESSIBLE_SLOTS_ADVANCED = {9, 4};
-	private static final int[] ACCESSIBLE_SLOTS_COMPLEX = {9, 5};
-	
-	protected UUID ownerUUID;
-	protected PedestalVariant pedestalVariant;
-	protected FriendlyStackHandler inventory;
-	protected boolean shouldCraft;
-	protected float storedXP;
-	protected PedestalRecipeTier cachedMaxPedestalTier;
-	protected long cachedMaxPedestalTierTick;
+	// 9 crafting, 5 powder, 1 craftingTablet, 1 output
+	public static final int SIZE = 16;
+	public static final int TABLET = 14;
+
+	protected UUID owner;
+	protected PedestalVariant variant;
+	protected Optional<PedestalTier> tier = Optional.empty();
 	protected UpgradeHolder upgrades;
-	protected boolean inventoryChanged;
-	public @Nullable RecipeHolder<?> currentRecipe;
-	
-	protected final CraftingDelegate propertyDelegate = new CraftingDelegate();
+	public Optional<RecipeHolder> recipe = Optional.empty();
+	protected Optional<BlockCapabilityCache<IItemHandler, Direction>> cache = Optional.empty();
+
+	protected int craftingTime = -1, totalTime = -1;
+	protected int storedXp;
+	protected boolean active, hadTablet;
+	protected final ContainerData data;
 	
 	public PedestalBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(PastelBlockEntities.PEDESTAL.get(), blockPos, blockState);
-		
-		if (blockState.getBlock() instanceof PedestalBlock pedestalBlock) {
-			this.pedestalVariant = pedestalBlock.getVariant();
-		} else {
-			this.pedestalVariant = BuiltinPedestalVariant.BASIC_AMETHYST;
-		}
-		
-		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
-	}
-	
-	public void updateInClientWorld() {
-		if (level instanceof ServerLevel serverWorld)
-			serverWorld.getChunkSource().blockChanged(worldPosition);
+		super(PastelBlockEntities.PEDESTAL.get(), blockPos, blockState, SIZE);
+		inventory.addListener(i -> setChanged());
+		refreshVariant();
+		data = initData();
 	}
 
-	@Override
-	protected FriendlyStackHandler getHandler() {
-		return inventory;
-	}
-	
-	@SuppressWarnings("unused")
-	public static void clientTick(@NotNull Level world, BlockPos blockPos, BlockState blockState, PedestalBlockEntity pedestalBlockEntity) {
-		Recipe<?> currentRecipe = pedestalBlockEntity.getCurrentRecipe();
-		if (currentRecipe instanceof PedestalRecipe pedestalRecipe) {
-			Map<GemstoneColor, Integer> gemstonePowderInputs = pedestalRecipe.getPowderInputs();
-			
-			for (Map.Entry<GemstoneColor, Integer> entry : gemstonePowderInputs.entrySet()) {
-				int amount = entry.getValue();
-				if (amount > 0) {
-					ParticleOptions particleEffect = ColoredCraftingParticleEffect.of(entry.getKey().getColor());
-					
-					float particleAmount = Support.chanceRound(amount * 0.125, world.random);
-					for (int i = 0; i < particleAmount; i++) {
-						float randomX = 2.0F - world.getRandom().nextFloat() * 5;
-						float randomZ = 2.0F - world.getRandom().nextFloat() * 5;
-						world.addParticle(particleEffect, blockPos.getX() + randomX, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D, 0.03D, 0.0D);
-					}
-				}
-			}
-		}
-	}
-	
-	public static void spawnCraftingStartParticles(@NotNull Level world, BlockPos blockPos) {
-		BlockEntity blockEntity = world.getBlockEntity(blockPos);
-		if (blockEntity instanceof PedestalBlockEntity pedestalBlockEntity) {
-			Recipe<?> currentRecipe = pedestalBlockEntity.getCurrentRecipe();
-			if (currentRecipe instanceof PedestalRecipe pedestalRecipe) {
-				Map<GemstoneColor, Integer> gemstonePowderInputs = pedestalRecipe.getPowderInputs();
-				
-				for (Map.Entry<GemstoneColor, Integer> entry : gemstonePowderInputs.entrySet()) {
-					int amount = entry.getValue();
-					if (amount > 0) {
-						ParticleOptions particleEffect = ColoredCraftingParticleEffect.of(entry.getKey().getColor());
-						
-						amount = amount * 4;
-						for (int i = 0; i < amount; i++) {
-							Direction direction = Direction.getRandom(world.random);
-							if (direction != Direction.DOWN) {
-								BlockPos offsetPos = blockPos.relative(direction);
-								BlockState offsetState = world.getBlockState(offsetPos);
-								if (!offsetState.isFaceSturdy(world, offsetPos, direction.getOpposite())) {
-									double d = direction.getStepX() == 0 ? world.random.nextDouble() : 0.5D + (double) direction.getStepX() * 0.6D;
-									double e = direction.getStepY() == 0 ? world.random.nextDouble() : 0.5D + (double) direction.getStepY() * 0.6D;
-									double f = direction.getStepZ() == 0 ? world.random.nextDouble() : 0.5D + (double) direction.getStepZ() * 0.6D;
-									world.addParticle(particleEffect, (double) blockPos.getX() + d, (double) blockPos.getY() + e, (double) blockPos.getZ() + f, 0.0D, 0.03D, 0.0D);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	public static void serverTick(@NotNull Level world, BlockPos blockPos, BlockState blockState, PedestalBlockEntity pedestalBlockEntity) {
-		if (pedestalBlockEntity.upgrades == null) {
-			pedestalBlockEntity.calculateUpgrades();
-		}
-		
-		// check recipe crafted last tick => performance
-		boolean shouldMarkDirty = false;
-		
-		var calculatedEntry = calculateRecipe(world, pedestalBlockEntity);
-		var calculatedRecipe = calculatedEntry == null ? null : calculatedEntry.value();
-		pedestalBlockEntity.inventoryChanged = false;
-		if (pedestalBlockEntity.currentRecipe != calculatedEntry) {
-			pedestalBlockEntity.shouldCraft = false;
-			pedestalBlockEntity.currentRecipe = calculatedEntry;
-			pedestalBlockEntity.propertyDelegate.craftingTime = 0;
-			if (calculatedRecipe instanceof PedestalRecipe calculatedPedestalRecipe) {
-				pedestalBlockEntity.propertyDelegate.craftingTimeTotal = (int) Math.ceil(calculatedPedestalRecipe.getCraftingTime() / pedestalBlockEntity.upgrades.getEffectiveValue(UpgradeType.SPEED));
-				
-				Player player = pedestalBlockEntity.getOwnerIfOnline();
-				if (player instanceof ServerPlayer serverPlayerEntity) {
-					PastelAdvancementCriteria.PEDESTAL_RECIPE_CALCULATED.trigger(serverPlayerEntity, calculatedPedestalRecipe.assemble(pedestalBlockEntity.createRecipeInput(), world.registryAccess()), (int) calculatedPedestalRecipe.getExperience(), pedestalBlockEntity.propertyDelegate.craftingTimeTotal);
-				}
-			} else {
-				pedestalBlockEntity.propertyDelegate.craftingTimeTotal = (int) Math.ceil(PastelCommon.CONFIG.VanillaRecipeCraftingTimeTicks / pedestalBlockEntity.upgrades.getEffectiveValue(UpgradeType.SPEED));
-			}
-			pedestalBlockEntity.setChanged();
-			PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) pedestalBlockEntity.getLevel(), pedestalBlockEntity.getBlockPos());
-			pedestalBlockEntity.updateInClientWorld();
-		}
-		
-		// only craft when there is redstone power
-		if (pedestalBlockEntity.propertyDelegate.craftingTime == 0 && !pedestalBlockEntity.shouldCraft && !(blockState.getBlock() instanceof PedestalBlock && blockState.getValue(BlockStateProperties.POWERED))) {
+	private void clientTick() {
+		if (level == null || recipe.isEmpty() || !isActive())
+			return;
+
+		var random = level.getRandom();
+		var particleColor = getPowderColor(random);
+
+		if (!(recipe.get().value() instanceof PedestalRecipe pr)) {
+			spawnParticles(ColoredCraftingParticleEffect.of(particleColor));
 			return;
 		}
-		
-		int maxCountPerStack = pedestalBlockEntity.getMaxStackSize();
-		// Pedestal crafting
-		boolean craftingFinished = false;
-		if (calculatedRecipe instanceof PedestalRecipe pedestalRecipe && pedestalBlockEntity.canAcceptRecipeOutput(calculatedRecipe, pedestalBlockEntity.createRecipeInput(), maxCountPerStack)) {
-			pedestalBlockEntity.propertyDelegate.craftingTime++;
-			if (pedestalBlockEntity.propertyDelegate.craftingTime == pedestalBlockEntity.propertyDelegate.craftingTimeTotal) {
-				pedestalBlockEntity.propertyDelegate.craftingTime = 0;
-				craftingFinished = craftPedestalRecipe(pedestalBlockEntity, pedestalRecipe, pedestalBlockEntity, maxCountPerStack);
-				if (craftingFinished) {
-					pedestalBlockEntity.inventoryChanged = true;
-				}
-				shouldMarkDirty = true;
-			}
-			// Vanilla crafting
-		} else if (calculatedRecipe instanceof CraftingRecipe vanillaCraftingRecipe && pedestalBlockEntity.canAcceptRecipeOutput(calculatedRecipe, pedestalBlockEntity.createRecipeInput(), maxCountPerStack)) {
-			pedestalBlockEntity.propertyDelegate.craftingTime++;
-			if (pedestalBlockEntity.propertyDelegate.craftingTime == pedestalBlockEntity.propertyDelegate.craftingTimeTotal) {
-				pedestalBlockEntity.propertyDelegate.craftingTime = 0;
-				craftingFinished = pedestalBlockEntity.craftVanillaRecipe(vanillaCraftingRecipe, pedestalBlockEntity, maxCountPerStack);
-				if (craftingFinished) {
-					playCraftingFinishedSoundEvent(pedestalBlockEntity, calculatedRecipe);
-					pedestalBlockEntity.inventoryChanged = true;
-				}
-				shouldMarkDirty = true;
-			}
-		}
-		
-		if (pedestalBlockEntity.propertyDelegate.craftingTime == 1 && pedestalBlockEntity.propertyDelegate.craftingTimeTotal > 1) {
-			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.PEDESTAL_CRAFTING, (ServerLevel) pedestalBlockEntity.getLevel(), pedestalBlockEntity.getBlockPos(), pedestalBlockEntity.propertyDelegate.craftingTimeTotal - pedestalBlockEntity.propertyDelegate.craftingTime);
-		}
-		
-		// try to output the currently stored output stack
-		ItemStack outputItemStack = pedestalBlockEntity.inventory.getStackInSlot(OUTPUT_SLOT_ID);
-		if (outputItemStack != ItemStack.EMPTY) {
-			if (world.getBlockState(blockPos.above()).getCollisionShape(world, blockPos.above()).isEmpty()) {
-				spawnOutputAsItemEntity((ServerLevel) world, blockPos, pedestalBlockEntity, outputItemStack);
-			} else {
-				int remaining = 0;
-				remaining += ItemHandlerHelper.insertItemStacked(world.getCapability(Capabilities.ItemHandler.BLOCK, blockPos.below(), Direction.UP), outputItemStack, false).getCount();
 
-				if (remaining > 0) {
-					remaining = 0;
-					remaining += ItemHandlerHelper.insertItemStacked(world.getCapability(Capabilities.ItemHandler.BLOCK, blockPos.below(), Direction.DOWN), outputItemStack, false).getCount();
-				}
+		var itemColor = ItemColors.ITEM_COLORS.getMapping(pr.getResultItem(level.registryAccess()).getItem());
+		spawnParticles(ColoredCraftingParticleEffect.of(
+				itemColor.map(InkColor::getColorInt).orElse(particleColor)
+		));
+	}
 
-				if (remaining == 0) {
-					shouldMarkDirty = true;
-				} else {
-					// play sound when the entity can not put its output anywhere
-					if (craftingFinished) {
-						pedestalBlockEntity.playSound(SoundEvents.LAVA_EXTINGUISH);
-					}
-				}
+	private int getPowderColor(RandomSource random) {
+		var colors = new ArrayList<InkColor>();
+		for (PastelGemstoneColor color : PastelGemstoneColor.values()) {
+			if (!inventory.getStackInSlot(powderSlot(color)).isEmpty())
+				colors.add(color.getInkColor());
+		}
+
+		if (colors.isEmpty())
+			return 0xffd6b5;
+
+        return colors.get(random.nextInt(colors.size())).getColorInt();
+	}
+
+	private void serverTick() {
+		if (level == null)
+			return;
+
+		if (!active) {
+			if (getBlockState().getValue(BlockStateProperties.POWERED))
+				active = true;
+			else
+				return;
+		}
+
+		if (this.upgrades == null)
+			calculateUpgrades();
+
+		var input = getInput();
+		if (recipe.isEmpty() && craftingTime > -1) {
+			findRecipe(input);
+		}
+
+		if (recipe.isEmpty() || craftingTime < 0) {
+			return;
+		}
+
+		if (craftingTime > 0) {
+			craftingTime--;
+			return;
+		}
+
+		finalizeCrafting(input);
+	}
+
+	private void finalizeCrafting(PedestalRecipeInput input) {
+		assert level != null;
+		assert recipe.isPresent();
+		var output = actionCraft(input);
+
+		if (recipe.get().value() instanceof PedestalRecipe pr && pr.isStructureUpgrade(level.registryAccess())) {
+			consumeAndPlaySound(input, pr);
+			upgrade(pr, input);
+			setChanged();
+			craftingTime = -1;
+			totalTime = -1;
+			active = false;
+			return;
+		}
+
+		if (!outputToStorage(output)) {
+			var pos = getBlockPos().getCenter();
+			var entity = new ItemEntity(level, pos.x, pos.y + 1, pos.z, output,
+					0, level.random.nextDouble() * 0.2 + 0.2, 0);
+			level.addFreshEntity(entity);
+		}
+
+		consumeAndPlaySound(input, recipe.get().value());
+		setChanged();
+		updateInClientWorld();
+		setRecipeTimings();
+	}
+
+	private void upgrade(PedestalRecipe recipe, PedestalRecipeInput input) {
+		assert level != null;
+
+		recipe.consumeIngredients(this, input);
+		var upgrade = (PedestalBlockItem) recipe.getResultItem(level.registryAccess()).getItem();
+		PedestalBlock.upgradeTo(level, getBlockPos(), getBlockState(), upgrade.getVariant());
+		level.playSound(null, getBlockPos(), PastelSoundEvents.PEDESTAL_UPGRADE,
+				SoundSource.BLOCKS, 1.5F, 1);
+	}
+
+	private ItemStack actionCraft(PedestalRecipeInput input) {
+		assert recipe.isPresent();
+		assert level != null;
+
+		boolean doYield;
+		var rec = recipe.get().value();
+		float xp;
+
+		var out = ItemStack.EMPTY;
+		if (rec instanceof PedestalRecipe pr) {
+			out = rec.assemble(input, level.registryAccess());
+			doYield = pr.allowsYield();
+			xp = pr.getExperience();
+		}
+		else {
+			out = rec.assemble(input.getCraftingGridInput(), level.registryAccess());
+			doYield = !isDupe(input.getCraftingGridInput(), (CraftingRecipe) rec, out);
+			xp = 1;
+		}
+
+		if (doYield)
+			out.setCount(Support.chanceRound(
+					out.getCount()
+							* upgrades.getEffectiveValue(UpgradeType.YIELD), level.random
+			));
+
+		xp *= upgrades.getEffectiveValue(UpgradeType.EXPERIENCE);
+		storedXp += Support.chanceRound(xp, level.random);
+		return out;
+	}
+
+	private void consumeAndPlaySound(PedestalRecipeInput input, Recipe<?> rec) {
+		var sound = PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_GENERIC;
+		if (rec instanceof PedestalRecipe pr) {
+			pr.consumeIngredients(this, input);
+			sound = pr.getSoundEvent(level.random);
+		}
+		else {
+			for (int i = 0; i < 9; i++) {
+				inventory.extractItem(i, 1, false);
 			}
 		}
-		
-		if (shouldMarkDirty) {
-			setChanged(world, blockPos, blockState);
-		}
+
+		level.playSound(null, getBlockPos(), sound, SoundSource.BLOCKS, 1F,
+				Support.varFloatCentered(level.random, 0.15F));
 	}
-	
-	@Contract(pure = true)
-	public static PedestalVariant getVariant(@NotNull PedestalBlockEntity pedestalBlockEntity) {
-		return pedestalBlockEntity.pedestalVariant;
-	}
-	
-	public static void spawnOutputAsItemEntity(ServerLevel world, BlockPos blockPos, @NotNull PedestalBlockEntity pedestalBlockEntity, ItemStack outputItemStack) {
-		// spawn crafting output
-		MultiblockCrafter.spawnItemStackAsEntitySplitViaMaxCount(world, pedestalBlockEntity.worldPosition, outputItemStack, outputItemStack.getCount(), new Vec3(0, 0.1, 0));
-		pedestalBlockEntity.inventory.setStackInSlot(OUTPUT_SLOT_ID, ItemStack.EMPTY);
-		
-		// spawn XP
-		MultiblockCrafter.spawnExperience(world, pedestalBlockEntity.worldPosition, pedestalBlockEntity.storedXP, world.random);
-		pedestalBlockEntity.storedXP = 0;
-		
-		// only triggered on server side. Therefore, has to be sent to client via S2C packet
-		PlayPedestalCraftingFinishedParticlePayload.sendPlayPedestalCraftingFinishedParticle(world, blockPos, outputItemStack);
-	}
-	
-	public static boolean tryPutIntoInventory(PedestalBlockEntity pedestalBlockEntity, Container targetInventory, ItemStack outputItemStack) {
-		ItemStack remainingStack = InventoryHelper.smartAddToInventory(outputItemStack, new InvWrapper(targetInventory), Direction.DOWN);
-		if (remainingStack.isEmpty()) {
-			pedestalBlockEntity.inventory.setStackInSlot(OUTPUT_SLOT_ID, ItemStack.EMPTY);
+
+	private boolean isDupe(CraftingInput input, CraftingRecipe recipe, ItemStack out) {
+		if (!out.isStackable() || out.getRarity().ordinal() > 1)
 			return true;
-		} else {
-			pedestalBlockEntity.inventory.setStackInSlot(OUTPUT_SLOT_ID, remainingStack);
+
+		if (recipe.category() == CraftingBookCategory.EQUIPMENT)
+			return true;
+
+		if (input.size() == 1 && input.getItem(0).is(PastelItemTags.PRODUCTIVITY_EXCLUDED))
+			return true;
+
+		return out.is(PastelItemTags.PRODUCTIVITY_EXCLUDED);
+	}
+
+	private void updateCache() {
+		if (cache.isPresent() && cache.get().getCapability() != null)
+			return;
+
+		cache = Optional.of(BlockCapabilityCache.create(
+				Capabilities.ItemHandler.BLOCK,
+				(ServerLevel) level,
+				getBlockPos().below(),
+				Direction.UP,
+				() -> !this.isRemoved(),
+				() -> cache = Optional.empty()
+		));
+
+		if (cache.get().getCapability() != null)
+			return;
+
+		cache = Optional.of(BlockCapabilityCache.create(
+				Capabilities.ItemHandler.BLOCK,
+				(ServerLevel) level,
+				getBlockPos().above(),
+				Direction.DOWN,
+				() -> !this.isRemoved(),
+				() -> cache = Optional.empty()
+		));
+	}
+
+	private boolean outputToStorage(ItemStack output) {
+		if (cache.isEmpty())
+			updateCache();
+
+		var cap = cache.get().getCapability();
+		if (cap == null)
 			return false;
+
+		if (ItemHandlerHelper.insertItemStacked(cap, output, true).isEmpty()) {
+			ItemHandlerHelper.insertItemStacked(cap, output, false);
+			return true;
 		}
-	}
-	
-	public static void playCraftingFinishedSoundEvent(PedestalBlockEntity pedestalBlockEntity, Recipe<?> craftingRecipe) {
-		Level world = pedestalBlockEntity.getLevel();
-		if (world != null && craftingRecipe instanceof PedestalRecipe pedestalRecipe) {
-			pedestalBlockEntity.playSound(pedestalRecipe.getSoundEvent(world.random));
-		} else {
-			pedestalBlockEntity.playSound(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_GENERIC);
-		}
-	}
-	
-	public static @Nullable RecipeHolder<?> calculateRecipe(Level world, @NotNull PedestalBlockEntity pedestalBlockEntity) {
-		var currentRecipe = pedestalBlockEntity.getCurrentRecipe();
-		
-		if (!pedestalBlockEntity.inventoryChanged) {
-			return pedestalBlockEntity.currentRecipe;
-		}
-		
-		// unchanged pedestal recipe?
-		if (currentRecipe instanceof PedestalRecipe pedestalRecipe && pedestalRecipe.matches(pedestalBlockEntity.createRecipeInput(), world)) {
-			return pedestalBlockEntity.currentRecipe;
-		}
-		
-		// unchanged vanilla recipe?
-		if (PastelCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
-			if (currentRecipe instanceof CraftingRecipe craftingRecipe && craftingRecipe.matches(pedestalBlockEntity.createRecipeInput().getCraftingGridInput(), world)) {
-				return pedestalBlockEntity.currentRecipe;
-			}
-		}
-		
-		// current recipe does not match last recipe
-		// => search valid recipe
-		var pedestalRecipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.PEDESTAL, pedestalBlockEntity.createRecipeInput(), world).orElse(null);
-		if (pedestalRecipe == null) {
-			if (PastelCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
-				return world.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pedestalBlockEntity.createRecipeInput().getCraftingGridInput(), world).orElse(null);
-			}
-			return null;
-		}
-		
-		if (!pedestalRecipe.value().canCraft(pedestalBlockEntity)) {
-			return null;
-		}
-		return pedestalRecipe;
-	}
-	
-	private boolean canAcceptRecipeOutput(@Nullable Recipe<?> recipe, PedestalRecipeInput input, int maxCountPerStack) {
-		if (recipe != null) {
-			ItemStack output;
-			if (recipe instanceof PedestalRecipe pedestalRecipe) {
-				output = pedestalRecipe.assemble(input, null);
-			} else if (recipe instanceof CraftingRecipe craftingRecipe) {
-				output = craftingRecipe.assemble(input.getCraftingGridInput(), null);
-			} else {
-				output = ItemStack.EMPTY;
-			}
-			
-			if (output.isEmpty()) {
-				return false;
-			}
-			
-			ItemStack existingOutput = this.getItem(OUTPUT_SLOT_ID);
-			if (existingOutput.isEmpty()) {
-				return true;
-			}
-			
-			if (!ItemStack.isSameItemSameComponents(existingOutput, output)) {
-				return false;
-			}
-			
-			if (existingOutput.getCount() < maxCountPerStack && existingOutput.getCount() < existingOutput.getMaxStackSize()) {
-				return true;
-			}
-			
-			return existingOutput.getCount() < output.getMaxStackSize();
-		}
-		
+
 		return false;
 	}
-	
-	private static boolean craftPedestalRecipe(PedestalBlockEntity pedestalBlockEntity, @Nullable PedestalRecipe recipe, Container inventory, int maxCountPerStack) {
-		var world = pedestalBlockEntity.level;
-		if (world == null || !pedestalBlockEntity.canAcceptRecipeOutput(recipe, pedestalBlockEntity.createRecipeInput(), maxCountPerStack)) {
+
+	@SuppressWarnings("unchecked")
+	private void findRecipe(PedestalRecipeInput input) {
+        assert level!=null;
+        recipe = (Optional<RecipeHolder>) (Object) level.getRecipeManager()
+				.getRecipeFor(PastelRecipeTypes.PEDESTAL, input, level);
+
+		if (recipe.isEmpty()) {
+			recipe = (Optional<RecipeHolder>) (Object) level.getRecipeManager()
+					.getRecipeFor(RecipeType.CRAFTING, input.getCraftingGridInput(), level);
+		}
+
+		if (!verifyRecipe())
+			recipe = Optional.empty();
+	}
+
+	private boolean verifyRecipe() {
+		if (recipe.isEmpty())
 			return false;
+
+		var tablet = tabletRecipe();
+		if (tablet.map(t -> !t.id().equals(recipe.get().id())).orElse(false))
+			return false;
+
+		assert level != null;
+		var rec = recipe.get().value();
+
+		if (rec instanceof PedestalRecipe pr) {
+            return pr.canCraft(this);
 		}
-		
-		ItemStack outputStack = recipe.assemble(pedestalBlockEntity.createRecipeInput(), world.registryAccess());
-		recipe.consumeIngredients(pedestalBlockEntity);
-		
-		if (!recipe.areYieldUpgradesDisabled()) {
-			double yieldModifier = pedestalBlockEntity.upgrades.getEffectiveValue(UpgradeType.YIELD);
-			if (yieldModifier != 1.0) {
-				int modifiedCount = Support.chanceRound(outputStack.getCount() * yieldModifier, world.random);
-				outputStack.setCount(Math.min(outputStack.getMaxStackSize(), modifiedCount));
-			}
-		}
-		
-		// Add the XP for this recipe to the pedestal
-		float experience = recipe.getExperience() * pedestalBlockEntity.upgrades.getEffectiveValue(UpgradeType.EXPERIENCE);
-		pedestalBlockEntity.storedXP += experience;
-		
-		Player player = pedestalBlockEntity.getOwnerIfOnline();
-		//TODO revisit onCraftByCrafter (see OfflineDataLookup)
-		if (player != null) {
-			outputStack.onCraftedBy(world, player, outputStack.getCount());
-		}
-		
-		// trigger advancements
-		pedestalBlockEntity.grantPlayerPedestalCraftingAdvancement(outputStack, (int) experience, pedestalBlockEntity.propertyDelegate.craftingTimeTotal);
-		
-		// if it was a recipe to upgrade the pedestal itself
-		// => upgrade
-		PedestalVariant newPedestalVariant = PedestalRecipe.getUpgradedPedestalVariantForOutput(outputStack);
-		if (newPedestalVariant != null && newPedestalVariant.isBetterThan(getVariant(pedestalBlockEntity))) {
-			// It is an upgrade recipe (output is a pedestal block item)
-			// => Upgrade
-			pedestalBlockEntity.playSound(PastelSoundEvents.PEDESTAL_UPGRADE);
-			PedestalBlock.upgradeToVariant(world, pedestalBlockEntity.getBlockPos(), newPedestalVariant);
-			PlayPedestalUpgradedParticlePayload.spawnPedestalUpgradeParticles(world, pedestalBlockEntity.worldPosition, newPedestalVariant);
-			
-			pedestalBlockEntity.pedestalVariant = newPedestalVariant;
-			pedestalBlockEntity.currentRecipe = null; // reset the recipe, otherwise pedestal would remember crafting the update
-		} else {
-			// Not an upgrade recipe => Add output to output slot
-			ItemStack existingOutput = inventory.getItem(OUTPUT_SLOT_ID);
-			if (!existingOutput.isEmpty()) {
-				// merge existing & newly crafted stacks
-				// protection against stacks > max stack size
-				outputStack.setCount(Math.min(existingOutput.getMaxStackSize(), existingOutput.getCount() + outputStack.getCount()));
-			}
-			inventory.setItem(OUTPUT_SLOT_ID, outputStack);
-		}
-		
-		pedestalBlockEntity.setChanged();
-		pedestalBlockEntity.inventoryChanged = true;
-		pedestalBlockEntity.updateInClientWorld();
-		
+
 		return true;
 	}
-	
-	public static Item getGemstonePowderItemForSlot(int slot) {
-		return switch (slot) {
-			case 9 -> PastelItems.TOPAZ_POWDER.get();
-			case 10 -> PastelItems.AMETHYST_POWDER.get();
-			case 11 -> PastelItems.CITRINE_POWDER.get();
-			case 12 -> PastelItems.ONYX_POWDER.get();
-			case 13 -> PastelItems.MOONSTONE_POWDER.get();
-			default -> Items.AIR;
-		};
-	}
-	
-	public static int getSlotForGemstonePowder(GemstoneColor gemstoneColor) {
-		return switch (gemstoneColor) {
-			case BuiltinGemstoneColor.CYAN -> 9;
-			case BuiltinGemstoneColor.MAGENTA -> 10;
-			case BuiltinGemstoneColor.YELLOW -> 11;
-			case BuiltinGemstoneColor.BLACK -> 12;
-			case BuiltinGemstoneColor.WHITE -> 13;
-			default -> -1;
-		};
-	}
-	
-	public void setVariant(PedestalVariant pedestalVariant) {
-		this.pedestalVariant = pedestalVariant;
-	}
-	
-	public PedestalVariant getVariant() {
-		return pedestalVariant;
-	}
-	
-	@Override
-	public Component getDefaultName() {
-		return Component.translatable("block.pastel.pedestal");
-	}
-	@Override
-	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-		return new PedestalScreenHandler(syncId, playerInventory, this, this.propertyDelegate, this.getPedestalTier(), this.getHighestAvailableRecipeTier());
+
+	@NotNull
+    public PedestalRecipeInput getInput() {
+		return PedestalRecipeInput.create(inventory.getInternalList(), getOwnerIfOnline());
 	}
 
-	@Override
-	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
-		PedestalScreenHandler.ScreenOpeningData.STREAM_CODEC.encode(buffer, new PedestalScreenHandler.ScreenOpeningData(this.getBlockPos(), this.getPedestalTier(), this.getHighestAvailableRecipeTier()));
-	}
-	
-	@Override
-	public boolean stillValid(Player player) {
-		if (level == null || level.getBlockEntity(worldPosition) != this) {
-			return false;
-		} else {
-			return player.distanceToSqr((double) worldPosition.getX() + 0.5D, (double) worldPosition.getY() + 0.5D, (double) worldPosition.getZ() + 0.5D) <= 64.0D;
-		}
-	}
-	
-	@Override
-	public void fillStackedContents(StackedContents recipeMatcher) {
-		for (ItemStack itemStack : this.inventory.getInternalList()) {
-			recipeMatcher.accountStack(itemStack);
-		}
-	}
-	
-	@Nullable
-	@Override
-	public Packet<ClientGamePacketListener> getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
-	}
-	
-	// Called when the chunk is first loaded to initialize this be or manually synced via updateInClientWorld()
-	@Override
-	public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
-		CompoundTag nbtCompound = new CompoundTag();
-		this.saveAdditional(nbtCompound, registryLookup);
-		return nbtCompound;
-	}
-	
-	@Override
-	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
-		super.loadAdditional(nbt, registryLookup);
-		
-		inventory.load(nbt, registryLookup);
-		
-		if (nbt.contains("StoredXP")) {
-			this.storedXP = nbt.getFloat("StoredXP");
-		}
-		if (nbt.contains("CraftingTime")) {
-			this.propertyDelegate.craftingTime = nbt.getShort("CraftingTime");
-		}
-		if (nbt.contains("CraftingTimeTotal")) {
-			this.propertyDelegate.craftingTimeTotal = nbt.getShort("CraftingTimeTotal");
-		}
-		this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
-		if (nbt.contains("Upgrades", Tag.TAG_LIST)) {
-			this.upgrades = UpgradeHolder.fromNbt(nbt.getList("Upgrades", Tag.TAG_COMPOUND));
-		} else {
-			this.upgrades = new UpgradeHolder();
-		}
-		if (nbt.contains("inventory_changed")) {
-			this.inventoryChanged = nbt.getBoolean("inventory_changed");
-		}
-		
-		this.currentRecipe = null;
-		this.currentRecipe = MultiblockCrafter.getRecipeEntryFromNbt(level, nbt);
-	}
-	
-	@Override
-	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
-		super.saveAdditional(nbt, registryLookup);
-		nbt.putFloat("StoredXP", this.storedXP);
-		nbt.putShort("CraftingTime", (short) this.propertyDelegate.craftingTime);
-		nbt.putShort("CraftingTimeTotal", (short) this.propertyDelegate.craftingTimeTotal);
-		nbt.putBoolean("inventory_changed", this.inventoryChanged);
-		
-		if (this.upgrades != null) {
-			nbt.put("Upgrades", this.upgrades.toNbt());
-		}
-		if (this.currentRecipe != null) {
-			nbt.putString("CurrentRecipe", this.currentRecipe.id().toString());
-		}
-		
-		inventory.save(nbt, registryLookup);
-	}
-	
-	public boolean isCrafting() {
-		return this.propertyDelegate.craftingTime > 0;
-	}
-	
-	private void playSound(SoundEvent soundEvent) {
-		if (level == null) return;
-		level.playSound(null, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), soundEvent, SoundSource.BLOCKS, 0.9F + level.random.nextFloat() * 0.2F, 0.9F + level.random.nextFloat() * 0.15F);
-	}
-	
-	private boolean craftVanillaRecipe(@Nullable CraftingRecipe recipe, PedestalBlockEntity pedestal, int maxCountPerStack) {
-		if (canAcceptRecipeOutput(recipe, createRecipeInput(), maxCountPerStack)) {
-			ItemStack recipeOutput = recipe.assemble(createRecipeInput().getCraftingGridInput(), null);
-			Player player = getOwnerIfOnline();
-			//TODO revise for non-player crafting
-			if (player == null) {
-				recipeOutput.onCraftedBySystem(this.getLevel());
-			} else {
-				recipeOutput.onCraftedBy(this.getLevel(), player, recipeOutput.getCount());
-			}
-			
-			// -1 for all crafting inputs
-			decrementInputStacks(pedestal);
-			
-			ItemStack existingOutput = pedestal.getItem(OUTPUT_SLOT_ID);
-			if (existingOutput.isEmpty()) {
-				pedestal.setItem(OUTPUT_SLOT_ID, recipeOutput.copy());
-			} else {
-				existingOutput.grow(recipeOutput.getCount());
-				pedestal.setItem(OUTPUT_SLOT_ID, existingOutput);
-			}
-			
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	private void decrementInputStacks(Container inventory) {
-		if (level == null) return;
-		for (int i = 0; i < 9; i++) {
-			ItemStack itemStack = inventory.getItem(i);
-			if (!itemStack.isEmpty()) {
-				ItemStack remainder = itemStack.getCraftingRemainingItem();
-				if (remainder.isEmpty()) {
-					itemStack.shrink(1);
-				} else {
-					if (this.inventory.getStackInSlot(i).getCount() == 1) {
-						this.inventory.setStackInSlot(i, remainder);
-					} else {
-						this.inventory.getStackInSlot(i).shrink(1);
-						ItemEntity itemEntity = new ItemEntity(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1, worldPosition.getZ() + 0.5, remainder);
-						itemEntity.push(0, 0.05, 0);
-						level.addFreshEntity(itemEntity);
-					}
-				}
-			}
-		}
-	}
-	
-	private void grantPlayerPedestalCraftingAdvancement(ItemStack output, int experience, int duration) {
-		ServerPlayer serverPlayerEntity = (ServerPlayer) getOwnerIfOnline();
-		if (serverPlayerEntity != null) {
-			PastelAdvancementCriteria.PEDESTAL_CRAFTING.trigger(serverPlayerEntity, output, experience, duration);
-		}
-	}
-	
-	@Override
-	public boolean canPlaceItem(int slot, ItemStack stack) {
-		if (slot < 9) {
-			return true;
-		} else if (slot == CRAFTING_TABLET_SLOT_ID && stack.is(PastelItems.CRAFTING_TABLET.get())) {
-			return true;
-		} else {
-			return stack.is(getGemstonePowderItemForSlot(slot));
+	private void updateRecipe() {
+		assert level != null;
+		var input = getInput();
+
+		if (tier.isEmpty())
+			tier = Optional.of(PedestalTier.getTier(this));
+
+		if (upgrades == null)
+			calculateUpgrades();
+
+		if (recipe.filter(r -> {
+			var rec = r.value();
+			if (rec instanceof CraftingRecipe)
+				return rec.matches(input.getCraftingGridInput(), level);
+			return rec.matches(input, level);
+
+		}).isPresent() && verifyRecipe())
+			return;
+
+		tier = Optional.of(PedestalTier.getTier(this));
+		findRecipe(input);
+		setRecipeTimings();
+
+		if (active && craftingTime == -1) {
+			setActive(false);
 		}
 	}
 
-	@Override
-	public int[] getSlotsForFace(Direction side) {
-		if (side == Direction.DOWN) {
-			return new int[]{OUTPUT_SLOT_ID, 1};
-		} else if (side == Direction.UP) {
-			return ACCESSIBLE_SLOTS_UP;
-		} else {
-			switch (this.pedestalVariant.getRecipeTier()) {
-				case COMPLEX -> {
-					return ACCESSIBLE_SLOTS_COMPLEX;
-				}
-				case ADVANCED -> {
-					return ACCESSIBLE_SLOTS_ADVANCED;
-				}
-				default -> {
-					return ACCESSIBLE_SLOTS_BASIC;
-				}
-			}
+	private void setRecipeTimings() {
+		if (recipe.isEmpty()) {
+			craftingTime = -1;
+			totalTime = -1;
+			return;
 		}
+
+		var rec = recipe.get();
+
+		if (rec.value() instanceof PedestalRecipe pr) {
+			craftingTime = pr.getCraftingTime();
+		}
+		else {
+			craftingTime = PastelCommon.CONFIG.VanillaRecipeCraftingTimeTicks;
+		}
+
+		craftingTime = adjustCraftingTime(craftingTime);
+		totalTime = craftingTime;
+	}
+
+	private int adjustCraftingTime(int base) {
+		return Math.round(base / upgrades.getEffectiveValue(UpgradeType.SPEED));
+	}
+
+	public void giveStoredXp(Player target) {
+		if (storedXp == 0)
+			return;
+
+		assert level != null;
+		target.giveExperiencePoints(storedXp);
+		storedXp = 0;
+		level.playSound(null, getBlockPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS,
+				0.3F, 1);
 	}
 
 	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
-		return false;
-	}
-
-	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		return false;
+	public void setChanged() {
+		super.setChanged();
+		if (level != null && !level.isClientSide()) {
+			updateRecipe();
+			updateInClientWorld();
+		}
 	}
 
 	@Override
 	public UUID getOwnerUUID() {
-		return this.ownerUUID;
-	}
-	
-	public @Nullable Recipe<?> getCurrentRecipe() {
-		return currentRecipe == null ? null : currentRecipe.value();
-	}
-	
-	public PedestalRecipeInput createRecipeInput() {
-		return PedestalRecipeInput.create(this.inventory.getInternalList(), getOwnerIfOnline());
-	}
-	
-	public CraftingInput.Positioned createPositionedInput() {
-		return CraftingInput.ofPositioned(3, 3, inventory.getInternalList());
-	}
-	
-	public ItemStack getCurrentCraftingRecipeOutput() {
-		var currentRecipe = getCurrentRecipe();
-		if (level == null || currentRecipe == null) {
-			return ItemStack.EMPTY;
-		}
-		
-		if (currentRecipe instanceof PedestalRecipe pedestalRecipe) {
-			return pedestalRecipe.assemble(createRecipeInput(), level.registryAccess());
-		}
-		
-		if (currentRecipe instanceof CraftingRecipe craftingRecipe) {
-			return craftingRecipe.assemble(createRecipeInput().getCraftingGridInput(), null);
-		}
-		
-		return ItemStack.EMPTY;
-	}
-	
-	public PedestalRecipeTier getHighestAvailableRecipeTier() {
-		if (level == null || level.getGameTime() <= cachedMaxPedestalTierTick + 20) {
-			return cachedMaxPedestalTier;
-		} else {
-			PedestalRecipeTier pedestalTier = getPedestalTier();
-			PedestalRecipeTier structureTier = getStructureTier();
-			
-			PedestalRecipeTier denominator = PedestalRecipeTier.values()[Math.min(pedestalTier.ordinal(), structureTier.ordinal())];
-			cachedMaxPedestalTier = denominator;
-			cachedMaxPedestalTierTick = level.getGameTime();
-			
-			return denominator;
-		}
-	}
-	
-	private PedestalRecipeTier getPedestalTier() {
-		return this.pedestalVariant.getRecipeTier();
-	}
-	
-	
-	@NotNull
-	private PedestalRecipeTier getStructureTier() {
-		Multiblock multiblock;
-		
-		multiblock = PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX);
-		if (multiblock.validate(level, worldPosition.below(), Rotation.NONE)) {
-			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
-			return PedestalRecipeTier.COMPLEX;
-		}
-		
-		multiblock = PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE);
-		if (multiblock.validate(level, worldPosition.below(), Rotation.NONE)) {
-			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
-			return PedestalRecipeTier.ADVANCED;
-		}
-		
-		multiblock = PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_ADVANCED);
-		if (multiblock.validate(level, worldPosition.below(), Rotation.NONE)) {
-			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
-			return PedestalRecipeTier.ADVANCED;
-		}
-		
-		multiblock = PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_SIMPLE);
-		if (multiblock.validate(level, worldPosition.below(), Rotation.NONE)) {
-			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
-			return PedestalRecipeTier.SIMPLE;
-		}
-		
-		return PedestalRecipeTier.BASIC;
-	}
-	
-	@Override
-	public void resetUpgrades() {
-		this.upgrades = null;
-		this.setChanged();
-	}
-	
-	/**
-	 * Search for upgrades at valid positions and apply
-	 */
-	@Override
-	public void calculateUpgrades() {
-		this.upgrades = Upgradeable.calculateUpgradeMods4(level, worldPosition, 3, 2, this.ownerUUID);
-		this.setChanged();
-	}
-	
-	@Override
-	public UpgradeHolder getUpgradeHolder() {
-		return this.upgrades;
+		return owner;
 	}
 
 	@Override
-	public void setOwner(Player playerEntity) {
-		this.ownerUUID = playerEntity.getUUID();
+	public void setOwner(Player player) {
+		this.owner = player.getUUID();
+	}
+
+	@Override
+	public void resetUpgrades() {
+		upgrades = null;
 		setChanged();
 	}
 
 	@Override
-	protected void notifyInventoryUpdate() {
-		setInventoryChanged();
+	public void calculateUpgrades() {
+		upgrades = Upgradeable.calculateUpgradeMods4(level, worldPosition, 3, 2, owner);
+		setChanged();
 	}
 
-	public void setInventoryChanged() {
-		this.inventoryChanged = true;
+	@Override
+	public UpgradeHolder getUpgradeHolder() {
+		return upgrades;
 	}
 
-	private void applyFiltersForTier(StackHandlerView view) {
-		view.addFilter(0, stack -> stack.is(PastelItems.TOPAZ_POWDER));
-		view.addFilter(1, stack -> stack.is(PastelItems.AMETHYST_POWDER));
-		view.addFilter(2, stack -> stack.is(PastelItems.CITRINE_POWDER));
+	public static int powderSlot(GemstoneColor gemstoneColor) {
+		return 9 + gemstoneColor.getOffset();
+	}
 
-		if (pedestalVariant.getRecipeTier().ordinal() >= PedestalRecipeTier.ADVANCED.ordinal())
-			view.addFilter(3, stack -> stack.is(PastelItems.ONYX_POWDER));
+	@Override
+	public Component getDisplayName() {
+		return Component.translatable("block.pastel.pedestal");
+	}
 
-		if (pedestalVariant.getRecipeTier() == PedestalRecipeTier.COMPLEX)
-			view.addFilter(4, stack -> stack.is(PastelItems.MOONSTONE_POWDER));
+	public void refreshVariant() {
+		if (getBlockState().getBlock() instanceof PedestalBlock pedestalBlock) {
+			this.variant = pedestalBlock.getVariant();
+		} else {
+			this.variant = PedestalVariants.BASIC_AMETHYST;
+		}
+	}
+
+	private void spawnParticles(ParticleOptions particle) {
+		assert level != null;
+		var random = level.getRandom();
+		var pos = getBlockPos().getCenter()
+				.add(
+						random.nextDouble() - 0.5,
+						0.5,
+						random.nextDouble() - 0.5
+				);
+
+		level.addParticle(
+				particle, pos.x, pos.y, pos.z, 0.0D,
+				0.03D, 0.0D
+		);
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+
+		if (active) {
+			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
+					PastelSoundEvents.PEDESTAL_CRAFTING, (ServerLevel) getLevel(),
+					getBlockPos(), Integer.MAX_VALUE
+			);
+		}
+		else {
+			PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) level, getBlockPos());
+		}
+	}
+
+	public PedestalTier getTier() {
+		return tier.orElse(PedestalTier.BASIC);
+	}
+
+	@Override
+	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.saveAdditional(tag, registries);
+		if (this.upgrades != null) {
+			tag.put("Upgrades", this.upgrades.toNbt());
+		}
+
+		tag.putBoolean("active", active);
+		tag.putInt("craftingTime", craftingTime);
+		recipe.ifPresent(recipeHolder -> tag.putString(
+				"CurrentRecipe", recipeHolder.id()
+						.toString()
+		));
+
+	}
+
+	@Override
+	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.loadAdditional(tag, registries);
+		if (tag.contains("Upgrades", Tag.TAG_LIST)) {
+			this.upgrades = UpgradeHolder.fromNbt(tag.getList("Upgrades", Tag.TAG_COMPOUND));
+		} else {
+			this.upgrades = new UpgradeHolder();
+		}
+
+		active = tag.getBoolean("active");
+		craftingTime = tag.getInt("craftingTime");
+		totalTime = craftingTime;
+		recipe = Optional.ofNullable(
+				MultiblockCrafter.getRecipeEntryFromNbt(level, tag));
+	}
+
+	@Override
+	public void containerChanged() {
+		inventoryChanged();
+	}
+
+	@Override
+	public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+		return new PedestalScreenHandler(containerId, playerInventory, this,
+				data, variant.getRecipeTier());
+	}
+
+	@Override
+	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+		PedestalScreenHandler.ScreenOpeningData.STREAM_CODEC.encode(buffer,
+				new PedestalScreenHandler.ScreenOpeningData(getBlockPos(), variant.getRecipeTier()));
+	}
+
+	public PedestalVariant getVariant() {
+		return variant;
+	}
+
+	@Override
+	public FriendlyStackHandler getInventory() {
+		return inventory;
 	}
 
 	@Override
 	public IItemHandler exposeItemHandlers(Direction dir) {
-		var slots = getSlotsForFace(dir);
-		var view = new StackHandlerView(inventory, slots[0], slots[1]);
-
-		if (dir.getAxis().isHorizontal())
-			applyFiltersForTier(view);
+		if (dir.getAxis().isHorizontal()) {
+            return powderTabletView();
+		}
 
 		if (dir == Direction.DOWN)
-			return view.disableInsertion();
-		else
-			return view.disableExtraction();
+			return null;
+
+		return new PedestalCraftingView(this, inventory);
+	}
+
+	protected List<Ingredient> getTabletIngredients() {
+		var autoRecipe = tabletRecipe();
+
+		if (autoRecipe.isEmpty() || !(autoRecipe.get().value() instanceof CraftingRecipe cr))
+			return Collections.emptyList();
+
+		return cr.getIngredients();
+	}
+
+	private Optional<RecipeHolder<?>> tabletRecipe() {
+		return Optional.ofNullable(CraftingTabletItem.getStoredRecipe(level, inventory.getStackInSlot(TABLET)));
+	}
+
+	private @NotNull StackHandlerView powderTabletView() {
+		var view = new StackHandlerView(inventory, 9, 6);
+
+		var permittedColors = Arrays.asList(variant.getRecipeTier().gemstoneColors());
+		for (PastelGemstoneColor color : PastelGemstoneColor.values()) {
+			var index = powderSlot(color) - 9;
+
+			if (!permittedColors.contains(color)) {
+				view.addFilter(index);
+				continue;
+			}
+
+			view.addFilter(index, s -> s.is(color.getPowder()));
+		}
+
+		view.addFilter(TABLET - 9, s -> s.is(PastelItems.CRAFTING_TABLET));
+		return view;
+	}
+
+	@SuppressWarnings("unused")
+	public static void clientTick(Level level, BlockPos pos, BlockState state, PedestalBlockEntity pedestal) {
+		pedestal.clientTick();
+	}
+
+	public static void serverTick(Level level, BlockPos pos, BlockState state, PedestalBlockEntity pedestal) {
+		pedestal.serverTick();
+	}
+
+	private @NotNull ContainerData initData() {
+		final ContainerData data;
+		data = new ContainerData() {
+			@Override
+			public int get(int index) {
+				if (index == 1)
+					return totalTime;
+
+				return totalTime - craftingTime;
+			}
+
+			@Override
+			public void set(int index, int value) {}
+
+			@Override
+			public int getCount() {
+				return 2;
+			}
+		};
+		return data;
 	}
 }

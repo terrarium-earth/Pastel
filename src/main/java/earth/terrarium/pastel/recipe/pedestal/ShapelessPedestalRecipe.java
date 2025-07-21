@@ -28,9 +28,9 @@ import java.util.Optional;
 public class ShapelessPedestalRecipe extends PedestalRecipe {
 	
 	public ShapelessPedestalRecipe(
-			String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-			PedestalRecipeTier tier, List<IngredientStack> craftingInputs, Map<GemstoneColor, Integer> gemstonePowderInputs, ItemStack output,
-			float experience, int craftingTime, boolean skipRecipeRemainders, boolean noBenefitsFromYieldUpgrades
+            String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
+            PedestalTier tier, List<IngredientStack> craftingInputs, Map<GemstoneColor, Integer> gemstonePowderInputs, ItemStack output,
+            float experience, int craftingTime, boolean skipRecipeRemainders, boolean noBenefitsFromYieldUpgrades
 	) {
 		super(group, secret, requiredAdvancementIdentifier, tier, craftingInputs, gemstonePowderInputs, output, experience, craftingTime, skipRecipeRemainders, noBenefitsFromYieldUpgrades);
 	}
@@ -46,12 +46,13 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 	}
 	
 	@Override
-	public void consumeIngredients(PedestalBlockEntity pedestal) {
-		super.consumeIngredients(pedestal);
-		
+	public void consumeIngredients(PedestalBlockEntity pedestal, PedestalRecipeInput input) {
+		super.consumeIngredients(pedestal, input);
+
+		var inv = pedestal.getInventory();
 		for (int slot : CRAFTING_GRID_SLOTS) {
 			for (IngredientStack ingredientStack : this.inputs) {
-				ItemStack slotStack = pedestal.getItem(slot);
+				ItemStack slotStack = inv.getStackInSlot(slot);
 				if (ingredientStack.test(slotStack)) {
 					decrementGridSlot(pedestal, slot, ingredientStack.getCount(), slotStack);
 					break;
@@ -66,7 +67,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				ResourceLocation.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
+				PedestalTier.CODEC.optionalFieldOf("tier", PedestalTier.BASIC).forGetter(recipe -> recipe.tier),
 				IngredientStack.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
 				CodecHelper.registryMap(PastelRegistries.GEMSTONE_COLOR, Codec.INT).fieldOf("colors").forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
@@ -80,7 +81,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-				PedestalRecipeTier.STREAM_CODEC, recipe -> recipe.tier,
+				PedestalTier.STREAM_CODEC, recipe -> recipe.tier,
 				IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.inputs,
 				ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(PastelRegistries.GEMSTONE_COLOR.key()), ByteBufCodecs.VAR_INT), recipe -> recipe.powderInputs,
 				ItemStack.STREAM_CODEC, recipe -> recipe.output,

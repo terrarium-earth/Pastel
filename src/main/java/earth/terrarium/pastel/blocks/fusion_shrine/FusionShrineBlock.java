@@ -12,8 +12,6 @@ import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import net.neoforged.neoforge.fluids.*;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -25,6 +23,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -42,202 +41,231 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.*;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("UnstableApiUsage")
 public class FusionShrineBlock extends InWorldInteractionBlock {
 
-	public static final MapCodec<FusionShrineBlock> CODEC = simpleCodec(FusionShrineBlock::new);
+    public static final MapCodec<FusionShrineBlock> CODEC = simpleCodec(FusionShrineBlock::new);
 
-	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("collect_all_basic_pigments_besides_brown");
-	public static final IntegerProperty LIGHT_LEVEL = IntegerProperty.create("light_level", 0, 15);
-	protected static final VoxelShape SHAPE;
+    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate(
+        "collect_all_basic_pigments_besides_brown");
+    public static final IntegerProperty LIGHT_LEVEL = IntegerProperty.create("light_level", 0, 15);
+    protected static final VoxelShape SHAPE;
 
-	public FusionShrineBlock(Properties settings) {
-		super(settings);
-		registerDefaultState(getStateDefinition().any().setValue(LIGHT_LEVEL, 0));
+    public FusionShrineBlock(Properties settings) {
+        super(settings);
+        registerDefaultState(getStateDefinition().any()
+                                                 .setValue(LIGHT_LEVEL, 0));
 
-	}
+    }
 
-	@Override
-	public MapCodec<? extends FusionShrineBlock> codec() {
-		return CODEC;
-	}
-	
-	public static void clearCurrentlyRenderedMultiBlock(Level world) {
-		if (world.isClientSide) {
-			if (world.isClientSide()) {
-				ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.FUSION_SHRINE));
-			}
-		}
-	}
-	
-	public static boolean verifySkyAccess(ServerLevel world, BlockPos shrinePos) {
-		if (world.getBlockState(shrinePos.above()).isRedstoneConductor(world, shrinePos.above())) {
-			world.playSound(null, shrinePos, PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
-			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, shrinePos.above().getCenter(), ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(0.1, 0.1, 0.1));
-			return false;
-		}
-		
-		// getTopY() returns the topmost "air" block
-		// which may or may not be the pos of the Fusion Shrine
-		// we search down until we find the shrine itself or a non-opaque block
-		int topY = world.getHeight(Heightmap.Types.WORLD_SURFACE, shrinePos.getX(), shrinePos.getZ());
-		BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(shrinePos.getX(), topY, shrinePos.getZ());
-		for (int y = topY; y > shrinePos.getY(); y--) {
-			mutablePos.setY(y - 1);
-			BlockState posState = world.getBlockState(mutablePos);
-			if (posState.getLightBlock(world, mutablePos) > 0) {
-				break;
-			}
-		}
-		
-		if (mutablePos.getY() == shrinePos.getY()) {
-			return true;
-		}
-		
-		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, new Vec3(shrinePos.getX() + 0.5, shrinePos.getY() + 1, shrinePos.getZ() + 0.5), ColoredSparkleRisingParticleEffect.RED, 1, new Vec3(0, 0.5, 0));
-		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, new Vec3(shrinePos.getX() + 0.5, topY - 0.5, shrinePos.getZ() + 0.5), ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(0.1, 0.1, 0.1));
-		world.playSound(null, shrinePos, PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
-		return false;
-	}
-	
-	public static boolean verifyStructure(Level world, BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity) {
-		Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.FUSION_SHRINE);
-		boolean valid = multiblock.validate(world, blockPos.below(), Rotation.NONE);
-		
-		if (valid) {
-			if (serverPlayerEntity != null) {
-				PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
-			}
-		} else {
-			if (world.isClientSide) {
-				ModonomiconHelper.renderMultiblock(multiblock, PastelMultiblocks.FUSION_SHRINE_TEXT, blockPos.below(2), Rotation.NONE);
-			} else if (world.getBlockEntity(blockPos) instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
-				fusionShrineBlockEntity.scatterContents(world);
-			}
-		}
-		
-		return valid;
-	}
-	
-	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(LIGHT_LEVEL);
-	}
-	
-	@Nullable
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new FusionShrineBlockEntity(pos, state);
-	}
-	
-	@Override
-	public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
-		if (world.getBlockEntity(pos) instanceof FusionShrineBlockEntity blockEntity) {
-			var inventory = blockEntity.getInventory();
-			
-			int i = 0;
-			float f = 0.0f;
-			for (int j = 0; j < inventory.getSlots(); ++j) {
-				ItemStack itemStack = blockEntity.getItem(j);
-				if (itemStack.isEmpty()) continue;
-				f += (float) itemStack.getCount() / (float) Math.min(blockEntity.getMaxStackSize(), itemStack.getMaxStackSize());
-				++i;
-			}
-			
-			if (blockEntity.tank.getFluidAmount() > 0) {
-				f += (float) blockEntity.tank.getFluidAmount() / (float) blockEntity.tank.getCapacity();
-				++i;
-			}
-			
-			return Mth.floor(f / ((float) inventory.getSlots() + 1) * 14.0f) + (i > 0 ? 1 : 0);
-		}
-		
-		return 0;
-	}
-	
-	@Override
-	public void destroy(LevelAccessor world, BlockPos pos, BlockState state) {
-		if (world.isClientSide()) {
-			clearCurrentlyRenderedMultiBlock((Level) world);
-		}
-	}
-	
-	@Override
-	public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-		if (!world.isClientSide) {
-			// Specially handle fluid items
-			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (entity instanceof ItemEntity itemEntity && blockEntity instanceof FusionShrineBlockEntity shrine) {
-				var itemStack = itemEntity.getItem();
-				var fluidHandler = FluidUtil.getFluidHandler(itemStack);
+    @Override
+    public MapCodec<? extends FusionShrineBlock> codec() {
+        return CODEC;
+    }
 
-				if (fluidHandler.isPresent()) {
-					FluidUtil.tryFluidTransfer(shrine.tank, fluidHandler.get(), 1000, true);
-				}
-				else {
-					itemEntity.setItem(ItemHandlerHelper.insertItemStacked(shrine.getInventory(), itemStack, false));
-				}
-			}
-			
-			// do not pick up items that were results of crafting
-			if (entity.position().x % 0.5 != 0 && entity.position().z % 0.5 != 0) {
-				super.fallOn(world, state, pos, entity, fallDistance);
-			}
-		}
-	}
-	
-	@Override
-	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (world.isClientSide) {
-			verifyStructure(world, pos, null);
-			return ItemInteractionResult.SUCCESS;
-		} else {
-			verifySkyAccess((ServerLevel) world, pos);
-			
-			// if the structure is valid the player can put / retrieve items and fluids into the shrine
-			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof FusionShrineBlockEntity shrine && verifyStructure(world, pos, (ServerPlayer) player)) {
-				shrine.setOwner(player);
-				
-				if (FluidUtil.interactWithFluidHandler(player, hand, shrine.getTank())) {
-					shrine.inventoryChanged = true;
-					shrine.setLightForFluid(pos, shrine.getTank().getFluid());
-					shrine.updateInClientWorld();
-					return ItemInteractionResult.CONSUME;
-				}
-				if ((player.isShiftKeyDown() || handStack.isEmpty()) && retrieveLastStack(world, pos, player, hand, handStack, shrine)) {
-					shrine.inventoryChanged = true;
-					return ItemInteractionResult.CONSUME;
-				}
-				if (!handStack.isEmpty() && inputHandStack(world, player, hand, handStack, shrine)) {
-					shrine.inventoryChanged = true;
-					return ItemInteractionResult.CONSUME;
-				}
-			}
-			
-			return ItemInteractionResult.CONSUME;
-		}
-	}
-	
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return SHAPE;
-	}
-	
-	@Nullable
-	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, PastelBlockEntities.FUSION_SHRINE.get(), world.isClientSide ? FusionShrineBlockEntity::clientTick : FusionShrineBlockEntity::serverTick);
-	}
-	
-	static {
-		VoxelShape neck = Block.box(2, 0, 2, 14, 12, 14);
-		VoxelShape head = Block.box(1, 12, 1, 15, 15, 15);
-		VoxelShape crystal = Block.box(6.5, 13, 6.5, 9.5, 23, 9.5);
-		neck = Shapes.or(neck, head);
-		SHAPE = Shapes.or(neck, crystal);
-	}
+    public static void clearCurrentlyRenderedMultiBlock(Level world) {
+        if (world.isClientSide) {
+            if (world.isClientSide()) {
+                ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.FUSION_SHRINE));
+            }
+        }
+    }
+
+    public static boolean verifySkyAccess(ServerLevel world, BlockPos shrinePos) {
+        if (world.getBlockState(shrinePos.above())
+                 .isRedstoneConductor(world, shrinePos.above())) {
+            world.playSound(null, shrinePos, PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
+                world, shrinePos.above()
+                                .getCenter(), ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(
+                    0.1, 0.1,
+                    0.1
+                )
+            );
+            return false;
+        }
+
+        // getTopY() returns the topmost "air" block
+        // which may or may not be the pos of the Fusion Shrine
+        // we search down until we find the shrine itself or a non-opaque block
+        int topY = world.getHeight(Heightmap.Types.WORLD_SURFACE, shrinePos.getX(), shrinePos.getZ());
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(shrinePos.getX(), topY, shrinePos.getZ());
+        for (int y = topY; y > shrinePos.getY(); y--) {
+            mutablePos.setY(y - 1);
+            BlockState posState = world.getBlockState(mutablePos);
+            if (posState.getLightBlock(world, mutablePos) > 0) {
+                break;
+            }
+        }
+
+        if (mutablePos.getY() == shrinePos.getY()) {
+            return true;
+        }
+
+        PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
+            world, new Vec3(shrinePos.getX() + 0.5, shrinePos.getY() + 1, shrinePos.getZ() + 0.5),
+            ColoredSparkleRisingParticleEffect.RED, 1, new Vec3(0, 0.5, 0)
+        );
+        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
+            world, new Vec3(shrinePos.getX() + 0.5, topY - 0.5, shrinePos.getZ() + 0.5),
+            ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(0.1, 0.1, 0.1)
+        );
+        world.playSound(null, shrinePos, PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+        return false;
+    }
+
+    public static boolean verifyStructure(Level world, BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity) {
+        Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.FUSION_SHRINE);
+        boolean valid = multiblock.validate(world, blockPos.below(), Rotation.NONE);
+
+        if (valid) {
+            if (serverPlayerEntity != null) {
+                PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
+            }
+        } else {
+            if (world.isClientSide) {
+                ModonomiconHelper.renderMultiblock(
+                    multiblock, PastelMultiblocks.FUSION_SHRINE_TEXT, blockPos.below(2), Rotation.NONE);
+            } else if (world.getBlockEntity(blockPos) instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
+                fusionShrineBlockEntity.scatterContents(world);
+            }
+        }
+
+        return valid;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(LIGHT_LEVEL);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new FusionShrineBlockEntity(pos, state);
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
+        if (world.getBlockEntity(pos) instanceof FusionShrineBlockEntity blockEntity) {
+            var inventory = blockEntity.getInventory();
+
+            int i = 0;
+            float f = 0.0f;
+            for (int j = 0; j < inventory.getSlots(); ++j) {
+                ItemStack itemStack = blockEntity.getItem(j);
+                if (itemStack.isEmpty()) continue;
+                f += (float) itemStack.getCount() / (float) Math.min(
+                    blockEntity.getMaxStackSize(), itemStack.getMaxStackSize());
+                ++i;
+            }
+
+            if (blockEntity.tank.getFluidAmount() > 0) {
+                f += (float) blockEntity.tank.getFluidAmount() / (float) blockEntity.tank.getCapacity();
+                ++i;
+            }
+
+            return Mth.floor(f / ((float) inventory.getSlots() + 1) * 14.0f) + (i > 0 ? 1 : 0);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public void destroy(LevelAccessor world, BlockPos pos, BlockState state) {
+        if (world.isClientSide()) {
+            clearCurrentlyRenderedMultiBlock((Level) world);
+        }
+    }
+
+    @Override
+    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        if (!world.isClientSide) {
+            // Specially handle fluid items
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (entity instanceof ItemEntity itemEntity && blockEntity instanceof FusionShrineBlockEntity shrine) {
+                var itemStack = itemEntity.getItem();
+                var fluidHandler = FluidUtil.getFluidHandler(itemStack);
+
+                if (fluidHandler.isPresent()) {
+                    FluidUtil.tryFluidTransfer(shrine.tank, fluidHandler.get(), 1000, true);
+                } else {
+                    itemEntity.setItem(ItemHandlerHelper.insertItemStacked(shrine.getInventory(), itemStack, false));
+                }
+            }
+
+            // do not pick up items that were results of crafting
+            if (entity.position().x % 0.5 != 0 && entity.position().z % 0.5 != 0) {
+                super.fallOn(world, state, pos, entity, fallDistance);
+            }
+        }
+    }
+
+    @Override
+    public ItemInteractionResult useItemOn(
+        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        BlockHitResult hit
+    ) {
+        if (world.isClientSide) {
+            verifyStructure(world, pos, null);
+            return ItemInteractionResult.SUCCESS;
+        } else {
+            verifySkyAccess((ServerLevel) world, pos);
+
+            // if the structure is valid the player can put / retrieve items and fluids into the shrine
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof FusionShrineBlockEntity shrine && verifyStructure(
+                world, pos, (ServerPlayer) player)) {
+                shrine.setOwner(player);
+
+                if (FluidUtil.interactWithFluidHandler(player, hand, shrine.getTank())) {
+                    shrine.inventoryChanged = true;
+                    shrine.setLightForFluid(
+                        pos, shrine.getTank()
+                                   .getFluid()
+                    );
+                    shrine.updateInClientWorld();
+                    return ItemInteractionResult.CONSUME;
+                }
+                if ((player.isShiftKeyDown() || handStack.isEmpty()) && retrieveLastStack(
+                    world, pos, player, hand, handStack, shrine)) {
+                    shrine.inventoryChanged = true;
+                    return ItemInteractionResult.CONSUME;
+                }
+                if (!handStack.isEmpty() && inputHandStack(world, player, hand, handStack, shrine)) {
+                    shrine.inventoryChanged = true;
+                    return ItemInteractionResult.CONSUME;
+                }
+            }
+
+            return ItemInteractionResult.CONSUME;
+        }
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(
+            type, PastelBlockEntities.FUSION_SHRINE.get(), world.isClientSide ? FusionShrineBlockEntity::clientTick
+                                                                              : FusionShrineBlockEntity::serverTick
+        );
+    }
+
+    static {
+        VoxelShape neck = Block.box(2, 0, 2, 14, 12, 14);
+        VoxelShape head = Block.box(1, 12, 1, 15, 15, 15);
+        VoxelShape crystal = Block.box(6.5, 13, 6.5, 9.5, 23, 9.5);
+        neck = Shapes.or(neck, head);
+        SHAPE = Shapes.or(neck, crystal);
+    }
 }

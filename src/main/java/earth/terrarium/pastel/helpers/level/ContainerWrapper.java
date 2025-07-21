@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.helpers.level;
 
-import earth.terrarium.pastel.capabilities.item.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public interface ContainerWrapper extends Container {
 

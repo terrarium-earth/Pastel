@@ -5,21 +5,13 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.PaintbrushTriggered;
 import earth.terrarium.pastel.api.block.PedestalVariant;
 import earth.terrarium.pastel.api.block.RedstonePoweredBlock;
-import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalStartCraftingParticlePayload;
-import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -30,7 +22,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.context.DirectionalPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -47,6 +38,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -64,19 +57,15 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 		this.variant = variant;
 		registerDefaultState(getStateDefinition().any().setValue(BlockStateProperties.POWERED, false));
 	}
-	
+
 	@Override
 	public MapCodec<? extends PedestalBlock> codec() {
-		//TODO: Make the codec
 		return null;
 	}
-	
-	/**
-	 * Sets pedestal to a new tier
-	 * while keeping the inventory and all other data
-	 */
-	public static void upgradeToVariant(@NotNull Level world, BlockPos blockPos, PedestalVariant newPedestalVariant) {
-		world.setBlockAndUpdate(blockPos, newPedestalVariant.getPedestalBlock().getStateForPlacement(new DirectionalPlaceContext(world, blockPos, Direction.DOWN, null, Direction.UP)));
+
+	public static void upgradeTo(@NotNull Level world, BlockPos blockPos, BlockState old, PedestalVariant upgrade) {
+		world.setBlockAndUpdate(blockPos, upgrade.getPedestalBlock().defaultBlockState()
+				.setValue(BlockStateProperties.POWERED, old.getValue(BlockStateProperties.POWERED)));
 	}
 	
 	public static void clearCurrentlyRenderedMultiBlock(Level world) {
@@ -85,84 +74,6 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_ADVANCED));
 			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX));
 			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE));
-		}
-	}
-	
-	/**
-	 * Called when a pedestal is upgraded to a new tier
-	 * (like amethyst to the cmy variant). Spawns lots of matching particles.
-	 *
-	 * @param newPedestalRecipeTier The tier the pedestal has been upgraded to
-	 */
-	@OnlyIn(Dist.CLIENT)
-	public static void spawnUpgradeParticleEffectsForTier(BlockPos blockPos, @NotNull PedestalRecipeTier newPedestalRecipeTier) {
-		Minecraft client = Minecraft.getInstance();
-		Level world = client.level;
-		if (world == null) return;
-		RandomSource random = world.getRandom();
-		
-		switch (newPedestalRecipeTier) {
-			case COMPLEX -> {
-				ParticleOptions particleEffect = ColoredCraftingParticleEffect.WHITE;
-				for (int i = 0; i < 25; i++) {
-					float randomZ = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffect, blockPos.getX() + 1.1, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D, 0.03D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomZ = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffect, blockPos.getX() - 0.1, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D, 0.03D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomX = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffect, blockPos.getX() + randomX, blockPos.getY(), blockPos.getZ() + 1.1, 0.0D, 0.03D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomX = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffect, blockPos.getX() + randomX, blockPos.getY(), blockPos.getZ() - 0.1, 0.0D, 0.03D, 0.0D);
-				}
-			}
-			case ADVANCED -> {
-				ParticleOptions particleEffect = ColoredCraftingParticleEffect.BLACK;
-				for (int i = 0; i < 25; i++) {
-					float randomZ = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffect, blockPos.getX() + 1.1, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D, 0.03D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomZ = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffect, blockPos.getX() - 0.1, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D, 0.03D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomX = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffect, blockPos.getX() + randomX, blockPos.getY(), blockPos.getZ() + 1.1, 0.0D, 0.03D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomX = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffect, blockPos.getX() + randomX, blockPos.getY(), blockPos.getZ() - 0.1, 0.0D, 0.03D, 0.0D);
-				}
-			}
-			case SIMPLE -> {
-				ParticleOptions particleEffectC = ColoredCraftingParticleEffect.CYAN;
-				ParticleOptions particleEffectM = ColoredCraftingParticleEffect.MAGENTA;
-				ParticleOptions particleEffectY = ColoredCraftingParticleEffect.YELLOW;
-				for (int i = 0; i < 25; i++) {
-					float randomZ = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffectY, blockPos.getX() + 1.1, blockPos.getY() + 0.1, blockPos.getZ() + randomZ, 0.0D, 0.05D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomZ = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffectC, blockPos.getX() - 0.1, blockPos.getY() + 0.1, blockPos.getZ() + randomZ, 0.0D, 0.05D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomX = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffectM, blockPos.getX() + randomX, blockPos.getY() + 0.1, blockPos.getZ() + 1.1, 0.0D, 0.05D, 0.0D);
-				}
-				for (int i = 0; i < 25; i++) {
-					float randomX = random.nextFloat() * 1.2F;
-					world.addParticle(particleEffectM, blockPos.getX() + randomX, blockPos.getY() + 0.1, blockPos.getZ() - 0.1, 0.0D, 0.05D, 0.0D);
-				}
-			}
-			case BASIC -> {
-			}
 		}
 	}
 	
@@ -176,23 +87,25 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 			}
 		}
 	}
-	
+
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(BlockStateProperties.POWERED);
 	}
 	
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		ItemInteractionResult actionResult = checkAndDoPaintbrushTrigger(state, world, pos, player, hand, hit);
+	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		ItemInteractionResult actionResult = checkAndDoPaintbrushTrigger(state, level, pos, player, hand, hit);
 		if (actionResult.consumesAction()) {
 			return actionResult;
 		}
 		
-		if (world.isClientSide) {
+		if (level.isClientSide) {
 			return ItemInteractionResult.SUCCESS;
 		} else {
-			this.openScreen(world, pos, player);
+			level.getBlockEntity(pos, PastelBlockEntities.PEDESTAL.get())
+					.ifPresent(p -> p.giveStoredXp(player));
+			this.openScreen(level, pos, player);
 			return ItemInteractionResult.CONSUME;
 		}
 	}
@@ -208,15 +121,12 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 	
 	@Override
 	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
-		if (newState.getBlock() instanceof PedestalBlock newStateBlock) {
-			if (!state.is(newStateBlock)) {
+		if (newState.getBlock() instanceof PedestalBlock newPed) {
+			if (!state.is(newPed)) {
 				// pedestal is getting upgraded. Keep the blockEntity with its contents
 				BlockEntity blockEntity = world.getBlockEntity(pos);
-				if (blockEntity instanceof PedestalBlockEntity pedestalBlockEntity) {
-					if (state.getBlock().equals(newStateBlock)) {
-						PedestalVariant newVariant = newStateBlock.getVariant();
-						pedestalBlockEntity.setVariant(newVariant);
-					}
+				if (blockEntity instanceof PedestalBlockEntity pedestal) {
+					pedestal.refreshVariant();
 				}
 			}
 		} else {
@@ -267,12 +177,12 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 			}
 		}
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(@NotNull BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (state.getValue(BlockStateProperties.POWERED)) {
-			Vector3f color = new Vector3f(0.5F, 0.5F, 0.5F);
+			Vector3f color = new Vector3f(0.6F, 0.33F, 0.1F);
 			float xOffset = random.nextFloat();
 			float zOffset = random.nextFloat();
 			world.addParticle(new DustParticleOptions(color, 1.0F), pos.getX() + xOffset, pos.getY() + 1, pos.getZ() + zOffset, 0.0D, 0.0D, 0.0D);
@@ -310,27 +220,23 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 	}
 	
 	@Override
-	public ItemInteractionResult onPaintBrushTrigger(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof PedestalBlockEntity pedestalBlockEntity) {
-			if (pedestalBlockEntity.propertyDelegate.craftingTime > 0) {
-				return ItemInteractionResult.FAIL;
-			}
-			if (pedestalBlockEntity.currentRecipe == null) {
-				return ItemInteractionResult.FAIL;
-			}
-			if (pedestalBlockEntity.currentRecipe.value() instanceof GatedRecipe<?> gatedRecipe && !gatedRecipe.canPlayerCraft(player)) {
-				return ItemInteractionResult.FAIL;
-			}
-			
-			if (!world.isClientSide) {
-				pedestalBlockEntity.shouldCraft = true;
-				PlayPedestalStartCraftingParticlePayload.spawnPedestalStartCraftingParticles(pedestalBlockEntity);
-			}
-			
-			return ItemInteractionResult.sidedSuccess(world.isClientSide);
+	public ItemInteractionResult onPaintBrushTrigger(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		var be = level.getBlockEntity(pos, PastelBlockEntities.PEDESTAL.get());
+		if (be.isEmpty())
+			return ItemInteractionResult.FAIL;
+
+		var pedestal = be.get();
+
+		if (pedestal.active || pedestal.craftingTime <= 0) {
+			return ItemInteractionResult.FAIL;
 		}
-		return ItemInteractionResult.FAIL;
+
+		if (!level.isClientSide) {
+			pedestal.setActive(true);
+			PlayPedestalStartCraftingParticlePayload.spawnPedestalStartCraftingParticles(pedestal);
+		}
+
+		return ItemInteractionResult.sidedSuccess(level.isClientSide);
 	}
 	
 }

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopBrewingRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
@@ -31,7 +31,7 @@ public class PotionWorkshopBrewingDisplay extends PotionWorkshopRecipeDisplay {
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, PotionWorkshopRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
+		return DatabankUtils.hasAdvancement(client.player, PotionWorkshopRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
 	}
 	
 }

@@ -11,29 +11,29 @@ import java.util.Map;
 
 @Mixin(MapItemSavedData.class)
 public interface MapStateAccessor {
-	
-	@Accessor
-	boolean getTrackingPosition();
-	
-	@Accessor
-	boolean getUnlimitedTracking();
-	
-	@Accessor
-	Map<String, MapBanner> getBannerMarkers();
-	
-	@Accessor
-	Map<String, MapDecoration> getDecorations();
-	
-	@Accessor
-	int getTrackedDecorationCount();
-	
-	@Accessor
-	void setTrackedDecorationCount(int decorationCount);
-	
-	@Invoker
-	void invokeSetDecorationsDirty();
-	
-	@Invoker
-	void invokeRemoveDecoration(String id);
-	
+
+    @Accessor
+    boolean getTrackingPosition();
+
+    @Accessor
+    boolean getUnlimitedTracking();
+
+    @Accessor
+    Map<String, MapBanner> getBannerMarkers();
+
+    @Accessor
+    Map<String, MapDecoration> getDecorations();
+
+    @Accessor
+    int getTrackedDecorationCount();
+
+    @Accessor
+    void setTrackedDecorationCount(int decorationCount);
+
+    @Invoker
+    void invokeSetDecorationsDirty();
+
+    @Invoker
+    void invokeRemoveDecoration(String id);
+
 }

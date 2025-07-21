@@ -1,9 +1,9 @@
 {
   "criteria": {
     "todo": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:__wip"
+        "advancement": "pastel:__wip"
       }
     }
   }

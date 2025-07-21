@@ -14,27 +14,27 @@
   },
   "criteria": {
     "unlocked_draconic_twinsword": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/equipment/draconic_twinsword"
+        "advancement": "pastel:unlocks/equipment/draconic_twinsword"
       }
     },
     "unlocked_nectar_lance": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/equipment/nectar_lance"
+        "advancement": "pastel:unlocks/equipment/nectar_lance"
       }
     },
     "unlocked_nightfalls_blade": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/equipment/nightfalls_blade"
+        "advancement": "pastel:unlocks/equipment/nightfalls_blade"
       }
     },
     "unlocked_dreamflayer": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/equipment/dreamflayer"
+        "advancement": "pastel:unlocks/equipment/dreamflayer"
       }
     },
     "collected_draconic_twinsword": {
@@ -78,9 +78,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_pure_resource"
+        "advancement": "pastel:lategame/collect_pure_resource"
       }
     }
   },

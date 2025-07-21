@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "pastel:item/knowledge_gem5"
-  }
-}

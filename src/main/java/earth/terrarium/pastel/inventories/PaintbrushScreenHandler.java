@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.block.InkColorSelectedPacketReceiver;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
@@ -27,7 +27,7 @@ public class PaintbrushScreenHandler extends QuickNavigationGridScreenHandler im
 		super(PastelScreenHandlerTypes.PAINTBRUSH, syncId);
 		this.player = playerInventory.player;
 		this.paintBrushStack = paintBrushStack;
-		this.hasAccessToWhites = AdvancementHelper.hasAdvancement(playerInventory.player, InkColors.WHITE.getRequiredAdvancement());
+		this.hasAccessToWhites = DatabankUtils.hasAdvancement(playerInventory.player, InkColors.WHITE.getRequiredAdvancement());
 	}
 	
 	@Override

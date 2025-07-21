@@ -5,6 +5,9 @@ on:
             version:
                 required: true
                 description: Version
+            channel:
+                required: true
+                description: release, beta, or alpha
             changelog:
                 required: true
                 description: Changelog for new release
@@ -58,7 +61,7 @@ jobs:
                     files: ./build/libs/!(*-@(dev|sources|dev-shadow)).jar
                     name: "Pastel ${{ github.event.inputs.version }}"
                     version: ${{ github.event.inputs.version }}
-                    version-type: beta
+                    version-type: ${{ github.event.inputs.channel }}
                     changelog: ${{ github.event.inputs.changelog }}
                     loaders: neoforge
                     game-versions: ${{ steps.properties.outputs.minecraftVersion }}
@@ -68,6 +71,7 @@ jobs:
                         cloth-config | depends | *
                         modonomicon | depends | *
                         curios | depends | *
+                        databank | depends | *
 
             -   name: Generate Discord Embed
                 run: ./gradlew injectEmbed

@@ -17,36 +17,39 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class GemstonePlayerOnlyGlassBlock extends GemstoneGlassBlock {
 
-	public final MapCodec<GemstonePlayerOnlyGlassBlock> codec;
+    public final MapCodec<GemstonePlayerOnlyGlassBlock> codec;
 
-	public GemstonePlayerOnlyGlassBlock(Properties settings, GemstoneColor gemstoneColor) {
-		super(settings, gemstoneColor);
-		this.codec = RecordCodecBuilder.mapCodec(i -> i.group(
-				propertiesCodec(),
-				PastelRegistries.GEMSTONE_COLOR.byNameCodec().fieldOf("color").forGetter(b -> b.gemstoneColor)
-		).apply(i, GemstonePlayerOnlyGlassBlock::new));
-	}
+    public GemstonePlayerOnlyGlassBlock(Properties settings, GemstoneColor gemstoneColor) {
+        super(settings, gemstoneColor);
+        this.codec = RecordCodecBuilder.mapCodec(i -> i.group(
+                                                           propertiesCodec(),
+                                                           PastelRegistries.GEMSTONE_COLOR.byNameCodec()
+                                                                                          .fieldOf("color")
+                                                                                          .forGetter(b -> b.gemstoneColor)
+                                                       )
+                                                       .apply(i, GemstonePlayerOnlyGlassBlock::new));
+    }
 
-	@Override
-	public MapCodec<? extends GemstonePlayerOnlyGlassBlock> codec() {
-		return codec;
-	}
+    @Override
+    public MapCodec<? extends GemstonePlayerOnlyGlassBlock> codec() {
+        return codec;
+    }
 
-	@Override
-	public boolean isPathfindable(BlockState state, PathComputationType type) {
-		return false;
-	}
+    @Override
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
+        return false;
+    }
 
-	@Override
-	@Deprecated
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		if (context instanceof EntityCollisionContext entityShapeContext) {
-			Entity entity = entityShapeContext.getEntity();
-			if (entity instanceof Player) {
-				return Shapes.empty();
-			}
-		}
-		return state.getShape(world, pos);
-	}
-	
+    @Override
+    @Deprecated
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        if (context instanceof EntityCollisionContext entityShapeContext) {
+            Entity entity = entityShapeContext.getEntity();
+            if (entity instanceof Player) {
+                return Shapes.empty();
+            }
+        }
+        return state.getShape(world, pos);
+    }
+
 }

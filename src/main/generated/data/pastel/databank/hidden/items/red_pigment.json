@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:red_dye",
+    "original": "pastel:red_pigment"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:craft_colored_sapling"
+  }
+}

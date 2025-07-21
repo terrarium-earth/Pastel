@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:large_fern",
+    "original": "pastel:amaranth_grains"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_amaranth"
+  }
+}

@@ -2,7 +2,6 @@ package earth.terrarium.pastel.items.conditional;
 
 import earth.terrarium.pastel.api.item.DamageAwareItem;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -15,10 +14,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.phys.Vec3;
 
-public class StormStoneItem extends CloakedItem implements DamageAwareItem {
+public class StormStoneItem extends Item implements DamageAwareItem {
 	
-	public StormStoneItem(Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
-		super(settings, cloakAdvancementIdentifier, cloakItem);
+	public StormStoneItem(Properties settings) {
+		super(settings);
 	}
 	
 	@Override

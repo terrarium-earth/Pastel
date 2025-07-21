@@ -5,23 +5,23 @@
       "item": "pastel:deepslate_shimmerstone_ore"
     }
   ],
-  "processingTime": 350,
+  "processing_time": 350,
   "results": [
     {
       "count": 4,
-      "item": "pastel:shimmerstone_gem"
+      "id": "pastel:shimmerstone_gem"
     },
     {
       "chance": 0.25,
-      "item": "pastel:shimmerstone_gem"
+      "id": "pastel:shimmerstone_gem"
     },
     {
       "chance": 0.75,
-      "item": "create:experience_nugget"
+      "id": "create:experience_nugget"
     },
     {
       "chance": 0.125,
-      "item": "minecraft:cobbled_deepslate"
+      "id": "minecraft:cobbled_deepslate"
     }
   ],
   "neoforge:conditions": [

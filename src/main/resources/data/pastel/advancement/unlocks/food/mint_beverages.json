@@ -1,27 +1,27 @@
 {
   "criteria": {
     "unlocked_titration_barrel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
+        "advancement": "pastel:unlocks/blocks/titration_barrel"
       }
     },
     "confirmed_drinking_age": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:triggers/confirmed_drinking_age"
+        "advancement": "pastel:triggers/confirmed_drinking_age"
       }
     },
     "collected_four_leaf_clover": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_four_leaf_clover"
+        "advancement": "pastel:collect_four_leaf_clover"
       }
     },
     "collected_mermaids_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_mermaids_gem"
+        "advancement": "pastel:collect_mermaids_gem"
       }
     }
   }

@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.capabilities;
 
-import net.minecraft.core.*;
-import net.neoforged.neoforge.fluids.capability.*;
-import net.neoforged.neoforge.items.*;
+import net.minecraft.core.Direction;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 
 public interface SidedCapabilityProvider {
 

@@ -1,0 +1,14 @@
+{
+  "type": {
+    "type": "databank:block",
+    "drop_original_loot_condition": {
+      "type": "databank:actual_player"
+    },
+    "hidden_as": "minecraft:stripped_oak_wood",
+    "original": "pastel:stripped_yellow_wood"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_colored_trees_cmy"
+  }
+}

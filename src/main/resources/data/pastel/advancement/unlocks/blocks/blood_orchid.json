@@ -1,21 +1,21 @@
 {
   "criteria": {
     "collected_resonant_lily": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_resonant_lily"
+        "advancement": "pastel:midgame/collect_resonant_lily"
       }
     },
     "collected_blood_orchid_petal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_blood_orchid_petal"
+        "advancement": "pastel:midgame/collect_blood_orchid_petal"
       }
     },
     "unlocked_spirit_instiller": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_spirit_instiller_structure"
+        "advancement": "pastel:midgame/build_spirit_instiller_structure"
       }
     }
   }

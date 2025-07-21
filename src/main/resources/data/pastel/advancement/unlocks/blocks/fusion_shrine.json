@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_all_basic_pigments_besides_brown": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_all_basic_pigments_besides_brown"
+        "advancement": "pastel:collect_all_basic_pigments_besides_brown"
       }
     },
     "crafted_cmy_pedestal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:craft_cmy_pedestal"
+        "advancement": "pastel:craft_cmy_pedestal"
       }
     }
   }

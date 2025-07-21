@@ -29,6 +29,7 @@ public interface Stampable {
 
     /**
      * Call this to request a stampable to process the provided data.
+     *
      * @return Whether the state of the impresser changed.
      */
     boolean handleImpression(Optional<UUID> stamper, Optional<Player> user, BlockReference reference, Level world);
@@ -81,7 +82,7 @@ public interface Stampable {
         var state = world.getBlockState(pos);
         reference = BlockReference.of(state, pos);
 
-        if (state.getBlock()instanceof Stampable interactable)
+        if (state.getBlock() instanceof Stampable interactable)
             stampInteractable = interactable;
 
         if (world.getBlockEntity(pos) instanceof Stampable interactable) {
@@ -109,7 +110,8 @@ public interface Stampable {
 
     /**
      * Called after this Stampable is used as the source for impressing another
-     * @param data the impressed
+     *
+     * @param data    the impressed
      * @param success whether the target's state changed
      */
     void onImpressedOther(StampData data, boolean success);
@@ -117,7 +119,10 @@ public interface Stampable {
     record StampData(Optional<UUID> stamper, BlockReference reference, Stampable source) {
 
         public StampData(@Nullable Entity stamper, BlockReference reference, Stampable source) {
-            this(Optional.ofNullable(stamper).map(Entity::getUUID), reference, source);
+            this(
+                Optional.ofNullable(stamper)
+                        .map(Entity::getUUID), reference, source
+            );
         }
 
         public boolean verifyStampData(StampData data) {

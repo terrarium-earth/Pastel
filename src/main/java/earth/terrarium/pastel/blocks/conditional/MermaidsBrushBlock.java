@@ -1,24 +1,19 @@
 package earth.terrarium.pastel.blocks.conditional;
 
 import com.mojang.serialization.MapCodec;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.blocks.FluidLogging;
-import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelFluidTags;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -41,10 +36,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Hashtable;
-import java.util.Map;
-
-public class MermaidsBrushBlock extends BushBlock implements BonemealableBlock, RevelationAware, FluidLogging.PastelFluidFillable {
+public class MermaidsBrushBlock extends BushBlock implements BonemealableBlock, FluidLogging.PastelFluidFillable {
 
 	public static final MapCodec<MermaidsBrushBlock> CODEC = simpleCodec(MermaidsBrushBlock::new);
 	private static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
@@ -55,7 +47,6 @@ public class MermaidsBrushBlock extends BushBlock implements BonemealableBlock, 
 	public MermaidsBrushBlock(Properties settings) {
 		super(settings);
 		this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(LOGGED, FluidLogging.State.WATER));
-		RevelationAware.register(this);
 	}
 
 	@Override
@@ -77,27 +68,6 @@ public class MermaidsBrushBlock extends BushBlock implements BonemealableBlock, 
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
 		super.entityInside(state, world, pos, entity);
 		state.getValue(LOGGED).onEntityCollision(state, world, pos, entity);
-	}
-
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return PastelAdvancements.REVEAL_MERMAIDS_BRUSH;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		BlockState cloakState = Blocks.SEAGRASS.defaultBlockState();
-		for (int i = 0; i < 8; i++) {
-			map.put(this.defaultBlockState().setValue(AGE, i).setValue(LOGGED, FluidLogging.State.WATER), cloakState);
-			map.put(this.defaultBlockState().setValue(AGE, i).setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL), cloakState);
-		}
-		return map;
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return null;
 	}
 	
 	@Nullable

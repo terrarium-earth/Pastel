@@ -8,7 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -17,52 +19,53 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.*;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.Nullable;
 
 public class BristleSproutsBlock extends BushBlock implements BonemealableBlock {
 
-	public static final MapCodec<BristleSproutsBlock> CODEC = simpleCodec(BristleSproutsBlock::new);
+    public static final MapCodec<BristleSproutsBlock> CODEC = simpleCodec(BristleSproutsBlock::new);
 
-	public static final float DAMAGE = 2.0F;
+    public static final float DAMAGE = 2.0F;
 
-	protected static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 3.0, 14.0);
+    protected static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 3.0, 14.0);
 
-	public BristleSproutsBlock(BlockBehaviour.Properties settings) {
-		super(settings);
-	}
-
-	@Override
-	public MapCodec<? extends BristleSproutsBlock> codec() {
-		return CODEC;
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 vec3d = state.getOffset(world, pos);
-		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
-	}
-	
-	@Override
-	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-		if (entity instanceof LivingEntity && !entity.getType().is(PastelEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
-			if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
-				double difX = Math.abs(entity.getX() - entity.xOld);
-				double difZ = Math.abs(entity.getZ() - entity.zOld);
-				if (difX >= 0.003 || difZ >= 0.003) {
-					entity.hurt(PastelDamageTypes.bristeSprouts(world), DAMAGE);
-				}
-			}
-		}
+    public BristleSproutsBlock(BlockBehaviour.Properties settings) {
+        super(settings);
     }
 
-	@Override
-	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
-		return true;
-	}
+    @Override
+    public MapCodec<? extends BristleSproutsBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        Vec3 vec3d = state.getOffset(world, pos);
+        return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
+    }
+
+    @Override
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+        if (entity instanceof LivingEntity && !entity.getType()
+                                                     .is(PastelEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
+            if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
+                double difX = Math.abs(entity.getX() - entity.xOld);
+                double difZ = Math.abs(entity.getZ() - entity.zOld);
+                if (difX >= 0.003 || difZ >= 0.003) {
+                    entity.hurt(PastelDamageTypes.bristeSprouts(world), DAMAGE);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+        return true;
+    }
 
     @Override
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
@@ -71,10 +74,13 @@ public class BristleSproutsBlock extends BushBlock implements BonemealableBlock 
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-		world.registryAccess()
-				.registryOrThrow(Registries.CONFIGURED_FEATURE)
-				.get(PastelConfiguredFeatures.BRISTLE_SPROUT_PATCH)
-				.place(world, world.getChunkSource().getGenerator(), random, pos);
+        world.registryAccess()
+             .registryOrThrow(Registries.CONFIGURED_FEATURE)
+             .get(PastelConfiguredFeatures.BRISTLE_SPROUT_PATCH)
+             .place(
+                 world, world.getChunkSource()
+                             .getGenerator(), random, pos
+             );
     }
 
     @Override
@@ -82,13 +88,14 @@ public class BristleSproutsBlock extends BushBlock implements BonemealableBlock 
         return 0.265F;
     }
 
-	@Override
-	public @Nullable PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-		return PathType.DAMAGE_OTHER;
-	}
+    @Override
+    public @Nullable PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
+        return PathType.DAMAGE_OTHER;
+    }
 
-	@Override
-	public @Nullable PathType getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
-		return PathType.DAMAGE_OTHER;
-	}
+    @Override
+    public @Nullable PathType getAdjacentBlockPathType(
+        BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
+        return PathType.DAMAGE_OTHER;
+    }
 }

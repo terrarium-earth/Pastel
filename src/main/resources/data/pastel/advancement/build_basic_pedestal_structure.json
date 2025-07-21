@@ -32,9 +32,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:craft_cmy_pedestal"
+        "advancement": "pastel:craft_cmy_pedestal"
       }
     }
   },

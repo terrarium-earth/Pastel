@@ -1,15 +1,15 @@
 {
   "criteria": {
     "unlocked_treasure_hunter": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/enchantments/treasure_hunter"
+        "advancement": "pastel:unlocks/enchantments/treasure_hunter"
       }
     },
     "unlocked_memory_to_head_recipe": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/memory_to_head"
+        "advancement": "pastel:unlocks/memory_to_head"
       }
     }
   },

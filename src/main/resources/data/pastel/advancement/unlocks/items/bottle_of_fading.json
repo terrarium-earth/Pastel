@@ -1,9 +1,9 @@
 {
   "criteria": {
     "collected_shimmerstone_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_shimmerstone"
+        "advancement": "pastel:collect_shimmerstone"
       }
     }
   }

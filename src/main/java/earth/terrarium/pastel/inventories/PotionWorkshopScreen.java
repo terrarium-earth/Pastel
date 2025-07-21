@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.inventories;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.registries.PastelAdvancements;
@@ -25,7 +25,7 @@ public class PotionWorkshopScreen extends AbstractContainerScreen<PotionWorkshop
 		super(handler, playerInventory, title);
 		this.imageHeight = 202;
 		
-		if (AdvancementHelper.hasAdvancement(playerInventory.player, PastelAdvancements.FOURTH_BREWING_SLOT)) {
+		if (DatabankUtils.hasAdvancement(playerInventory.player, PastelAdvancements.FOURTH_BREWING_SLOT)) {
 			background = BACKGROUND_4_SLOTS;
 		} else {
 			background = BACKGROUND_3_SLOTS;

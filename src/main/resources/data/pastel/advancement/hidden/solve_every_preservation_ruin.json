@@ -1,21 +1,21 @@
 {
   "criteria": {
     "solved_color_mixing_preservation_ruin": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:solve_color_mixing_preservation_ruin"
+        "advancement": "pastel:solve_color_mixing_preservation_ruin"
       }
     },
     "solved_dike_gate_preservation_ruin": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:solve_dike_gate_preservation_ruin"
+        "advancement": "pastel:solve_dike_gate_preservation_ruin"
       }
     },
     "solved_wireless_redstone_preservation_ruin": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:solve_wireless_redstone_preservation_ruin"
+        "advancement": "pastel:solve_wireless_redstone_preservation_ruin"
       }
     }
   }

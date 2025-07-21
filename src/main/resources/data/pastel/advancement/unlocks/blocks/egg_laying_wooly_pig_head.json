@@ -1,15 +1,15 @@
 {
   "criteria": {
     "created_midnight_aberration": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/create_midnight_aberration"
+        "advancement": "pastel:midgame/create_midnight_aberration"
       }
     },
     "unlocked_head_fusion": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/head_fusion/basic_recipes"
+        "advancement": "pastel:unlocks/head_fusion/basic_recipes"
       }
     }
   }

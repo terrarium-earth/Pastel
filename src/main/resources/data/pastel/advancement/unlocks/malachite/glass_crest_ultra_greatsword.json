@@ -1,21 +1,21 @@
 {
   "criteria": {
     "unlocked_glass_crest_tools": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/malachite/glass_crest_tools"
+        "advancement": "pastel:unlocks/malachite/glass_crest_tools"
       }
     },
     "collected_nether_star": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/nether_star"
+        "advancement": "pastel:hidden/collect_vanilla/nether_star"
       }
     },
     "collected_bismuth_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_bismuth_crystal"
+        "advancement": "pastel:lategame/collect_bismuth_crystal"
       }
     }
   }

@@ -1,13 +1,11 @@
 package earth.terrarium.pastel.inventories.widgets;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.energy.ColorPickerBlockEntity;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -18,6 +16,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Tuple;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class ColorSelectionWidget extends AbstractWidget {
 		this.screen = screen;
 		
 		for (InkColor inkColor : availableColors) {
-			usableColors.add(new Tuple<>(inkColor, AdvancementHelper.hasAdvancementClient(inkColor.getRequiredAdvancement())));
+			usableColors.add(new Tuple<>(inkColor, DatabankUtils.hasAdvancementClient(inkColor.getRequiredAdvancement())));
 		}
 	}
 	

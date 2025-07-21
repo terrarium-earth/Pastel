@@ -2,43 +2,46 @@ package earth.terrarium.pastel.blocks.mob_head.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.geom.PartNames;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PastelSkullModel extends SkullModelBase {
 
-	protected static final float ROTATION_VEC = (float) Math.PI / 180.0F;
+    protected static final float ROTATION_VEC = (float) Math.PI / 180.0F;
 
-	protected final ModelPart head;
+    protected final ModelPart head;
 
-	public PastelSkullModel(ModelPart root) {
-		super();
-		this.head = root.getChild(PartNames.HEAD);
-	}
+    public PastelSkullModel(ModelPart root) {
+        super();
+        this.head = root.getChild(PartNames.HEAD);
+    }
 
-	public void render(PoseStack matrices, VertexConsumer vertices, MultiBufferSource vertexConsumerProvider, int light, int overlay, int color) {
-		float scale = getScale();
-		matrices.scale(scale, scale, scale);
-		this.renderToBuffer(matrices, vertices, light, overlay, color);
-	}
+    public void render(
+        PoseStack matrices, VertexConsumer vertices, MultiBufferSource vertexConsumerProvider, int light, int overlay,
+        int color
+    ) {
+        float scale = getScale();
+        matrices.scale(scale, scale, scale);
+        this.renderToBuffer(matrices, vertices, light, overlay, color);
+    }
 
-	public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-		this.head.render(matrices, vertices, light, overlay, color);
-	}
+    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+        this.head.render(matrices, vertices, light, overlay, color);
+    }
 
-	@Override
-	public void setupAnim(float animationProgress, float yaw, float pitch) {
-		this.head.yRot = yaw * ROTATION_VEC;
-		this.head.xRot = pitch * ROTATION_VEC;
-	}
+    @Override
+    public void setupAnim(float animationProgress, float yaw, float pitch) {
+        this.head.yRot = yaw * ROTATION_VEC;
+        this.head.xRot = pitch * ROTATION_VEC;
+    }
 
-	public float getScale() {
-		return 0.86F;
-	}
+    public float getScale() {
+        return 0.86F;
+    }
 
 }

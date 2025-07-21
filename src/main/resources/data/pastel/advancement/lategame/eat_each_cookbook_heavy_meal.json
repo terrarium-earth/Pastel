@@ -214,9 +214,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_all_cookbooks"
+        "advancement": "pastel:lategame/collect_all_cookbooks"
       }
     }
   }

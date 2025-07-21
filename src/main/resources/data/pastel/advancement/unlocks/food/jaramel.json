@@ -1,15 +1,15 @@
 {
   "criteria": {
     "unlocked_cinderhearth": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/cinderhearth"
+        "advancement": "pastel:unlocks/blocks/cinderhearth"
       }
     },
     "collected_jade_jelly": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_jade_jelly"
+        "advancement": "pastel:midgame/collect_jade_jelly"
       }
     }
   }

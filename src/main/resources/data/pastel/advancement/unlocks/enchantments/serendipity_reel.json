@@ -1,21 +1,21 @@
 {
   "criteria": {
     "built_enchanting_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_enchanting_structure"
+        "advancement": "pastel:midgame/build_enchanting_structure"
       }
     },
     "collected_mermaids_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_mermaids_gem"
+        "advancement": "pastel:collect_mermaids_gem"
       }
     },
     "collected_bismuth": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_bismuth_crystal"
+        "advancement": "pastel:lategame/collect_bismuth_crystal"
       }
     }
   }

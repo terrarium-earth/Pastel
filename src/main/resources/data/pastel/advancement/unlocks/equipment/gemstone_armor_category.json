@@ -1,33 +1,33 @@
 {
   "criteria": {
     "built_basic_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:build_basic_pedestal_structure"
+        "advancement": "pastel:build_basic_pedestal_structure"
       }
     },
     "collected_ender_eye": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/ender_eye"
+        "advancement": "pastel:hidden/collect_vanilla/ender_eye"
       }
     },
     "collected_nautilus_shell": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/nautilus_shell"
+        "advancement": "pastel:hidden/collect_vanilla/nautilus_shell"
       }
     },
     "collected_phantom_membrane": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/phantom_membrane"
+        "advancement": "pastel:hidden/collect_vanilla/phantom_membrane"
       }
     },
     "collected_ghast_tear": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/ghast_tear"
+        "advancement": "pastel:hidden/collect_vanilla/ghast_tear"
       }
     }
   },

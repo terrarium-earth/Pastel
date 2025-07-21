@@ -53,7 +53,7 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
 		if (random.nextFloat() < 0.1F) {
 			var reference = BlockReference.of(state, pos);
 			var form = reference.get(FORM);
-			
+
 			if (form == Form.SPRIG) {
 				reference.set(FORM, Form.RESIN);
 				reference.update(world);
@@ -67,7 +67,7 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
 			}
 		}
 	}
-	
+
 	@Override
 	public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
 		var reference = BlockReference.of(state, pos);

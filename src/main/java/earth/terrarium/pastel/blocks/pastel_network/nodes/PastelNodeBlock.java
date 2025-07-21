@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.pastel_network.nodes;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
@@ -159,7 +159,7 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 		}
 		
 		if (player.isShiftKeyDown() && stack.isEmpty()) {
-			if (AdvancementHelper.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_UPGRADING)) {
+			if (DatabankUtils.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_UPGRADING)) {
 				if (!world.isClientSide) {
 					var removed = blockEntity.tryRemoveUpgrade();
 					if (!removed.isEmpty()) {
@@ -179,7 +179,7 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 		} else if (player.isCreative() && stack.is(PastelItems.PAINTBRUSH.get())) {
 			sendDebugMessage(world, pos, player, blockEntity);
 			return ItemInteractionResult.sidedSuccess(world.isClientSide());
-		} else if (AdvancementHelper.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_UPGRADING) && stack.is(PastelItemTags.PASTEL_NODE_UPGRADES)) {
+		} else if (DatabankUtils.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_UPGRADING) && stack.is(PastelItemTags.PASTEL_NODE_UPGRADES)) {
 			if (!world.isClientSide() && blockEntity.tryInteractRings(stack, pastelNodeType)) {
 				PastelAdvancementCriteria.PASTEL_NODE_UPGRADING.trigger((ServerPlayer) player, stack);
 				if (!player.getAbilities().instabuild)
@@ -254,7 +254,7 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 		if (!(user instanceof Player player)) {
 			return false;
 		}
-		if (!AdvancementHelper.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_COLORING)) {
+		if (!DatabankUtils.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_COLORING)) {
 			return false;
 		}
 		@Nullable PastelNodeBlockEntity blockEntity = getBlockEntity(world, pos);

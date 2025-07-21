@@ -1,3 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 * eol=lf
+
+src/main/generated/** -diff -merge
+src/main/generated/** linguist-generated=true

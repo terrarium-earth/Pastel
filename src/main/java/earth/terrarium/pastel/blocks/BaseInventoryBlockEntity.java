@@ -1,18 +1,24 @@
 package earth.terrarium.pastel.blocks;
 
-import earth.terrarium.pastel.capabilities.item.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.*;
+import javax.annotation.Nullable;
 
 public abstract class BaseInventoryBlockEntity extends BlockEntity implements WorldlyContainer, MenuProvider, Nameable {
 
@@ -91,7 +97,8 @@ public abstract class BaseInventoryBlockEntity extends BlockEntity implements Wo
     // Pretty much a duck
     protected abstract FriendlyStackHandler getHandler();
 
-    protected void notifyInventoryUpdate() {}
+    protected void notifyInventoryUpdate() {
+    }
 
     @Override
     public boolean isEmpty() {

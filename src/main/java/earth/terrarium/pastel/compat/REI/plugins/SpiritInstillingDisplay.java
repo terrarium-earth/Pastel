@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.REI.PastelDisplay;
-import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.helpers.render.LoreHelper;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.SpawnerChangeRecipe;
@@ -47,7 +47,7 @@ public class SpiritInstillingDisplay extends PastelDisplay {
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, SpiritInstillerRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
+		return DatabankUtils.hasAdvancement(client.player, SpiritInstillerRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
 	}
 	
 }

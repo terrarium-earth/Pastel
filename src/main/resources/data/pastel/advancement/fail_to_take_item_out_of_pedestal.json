@@ -17,9 +17,9 @@
       "trigger": "minecraft:impossible"
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:place_pedestal"
+        "advancement": "pastel:place_pedestal"
       }
     }
   }

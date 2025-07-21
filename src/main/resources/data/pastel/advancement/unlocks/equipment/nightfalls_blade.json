@@ -1,39 +1,39 @@
 {
   "criteria": {
     "built_complex_pedestal_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
+        "advancement": "pastel:lategame/build_complex_pedestal_structure"
       }
     },
     "collected_pyrite": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pyrite"
+        "advancement": "pastel:hidden/collect_pyrite"
       }
     },
     "collected_quitoxic_reeds": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_quitoxic_reeds"
+        "advancement": "pastel:collect_quitoxic_reeds"
       }
     },
     "collected_frostbite_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_frostbite_crystal"
+        "advancement": "pastel:hidden/collect_frostbite_crystal"
       }
     },
     "collected_pure_resource": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_pure_resource"
+        "advancement": "pastel:lategame/collect_pure_resource"
       }
     },
     "unlocked_ink": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:milestones/unlock_ink_use"
+        "advancement": "pastel:milestones/unlock_ink_use"
       }
     }
   }

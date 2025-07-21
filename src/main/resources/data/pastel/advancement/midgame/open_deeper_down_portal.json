@@ -16,15 +16,15 @@
       "trigger": "minecraft:impossible"
     },
     "entered_dimension": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/enter_dimension"
+        "advancement": "pastel:midgame/enter_dimension"
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/break_decayed_bedrock"
+        "advancement": "pastel:midgame/break_decayed_bedrock"
       }
     }
   },

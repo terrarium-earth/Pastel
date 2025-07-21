@@ -28,13 +28,6 @@
     },
     {
       "type": "pastel:titration_barrel_fermenting",
-      "title": "item.pastel.kimchi",
-      "anchor": "kimchi",
-      "recipe_id": "pastel:titration_barrel/kimchi",
-      "text": "book.pastel.guidebook.titration_barrel.page2.text"
-    },
-    {
-      "type": "pastel:titration_barrel_fermenting",
       "anchor": "fermented_spider_eyes",
       "recipe_id": "pastel:titration_barrel/fermented_spider_eyes",
       "text": "book.pastel.guidebook.titration_barrel.page3.text"
@@ -44,7 +37,6 @@
       "title": "item.pastel.clotted_cream",
       "anchor": "clotted_cream",
       "recipe_id": "pastel:titration_barrel/clotted_cream",
-      "recipe_id2": "pastel:titration_barrel/clotted_cream_fluid",
       "text": "book.pastel.guidebook.titration_barrel.page4.text"
     },
     {

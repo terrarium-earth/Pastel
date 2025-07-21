@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.magic_items;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
@@ -15,8 +15,6 @@ import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -35,6 +33,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -87,7 +87,7 @@ public class StaffOfRemembranceItem extends Item implements InkPowered, Prioriti
 		}
 		
 		MobCategory spawnGroup = entity.getType().getCategory();
-		if (spawnGroup == MobCategory.MONSTER && (user.isCreative() || AdvancementHelper.hasAdvancement(user, PastelAdvancements.HOSTILE_MEMORIZING))) {
+		if (spawnGroup == MobCategory.MONSTER && (user.isCreative() || DatabankUtils.hasAdvancement(user, PastelAdvancements.HOSTILE_MEMORIZING))) {
 			if (!InkPowered.tryDrainEnergy(user, TURN_HOSTILE_TO_MEMORY_COST)) {
 				return false;
 			}

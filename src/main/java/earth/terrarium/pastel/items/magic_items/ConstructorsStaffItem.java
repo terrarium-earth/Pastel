@@ -3,11 +3,9 @@ package earth.terrarium.pastel.items.magic_items;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.helpers.level.BuildingHelper;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import earth.terrarium.pastel.helpers.level.BuildingHelper;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -27,6 +25,8 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import oshi.util.tuples.Triplet;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class ConstructorsStaffItem extends BuildingStaffItem {
 		if (playerEntity == null || playerEntity.isCreative()) {
 			return CREATIVE_RANGE;
 		} else {
-			Optional<PedestalRecipeTier> highestUnlockedRecipeTier = PedestalRecipeTier.getHighestUnlockedRecipeTier(playerEntity);
+			Optional<PedestalTier> highestUnlockedRecipeTier = PedestalTier.getHighestUnlockedRecipeTier(playerEntity);
 			if (highestUnlockedRecipeTier.isPresent()) {
 				switch (highestUnlockedRecipeTier.get()) {
 					case COMPLEX -> {

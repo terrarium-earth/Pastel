@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.data;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.data.databank.PastelHiddenProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -29,6 +30,7 @@ public class PastelDataGenerator {
 		event.addProvider(new PastelCompostableDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelWaxableDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelBurnTimeDataMapProvider(packOutput, lookupProvider));
+		event.addProvider(new PastelHiddenProvider(packOutput, lookupProvider, existingFileHelper));
 
 		if (event.includeClient()) {
 			event.addProvider(new PastelWoodOverlayTextureProvider(packOutput, existingFileHelper));

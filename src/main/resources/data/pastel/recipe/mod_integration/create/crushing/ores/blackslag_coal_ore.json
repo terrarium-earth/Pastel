@@ -5,23 +5,23 @@
       "item": "pastel:blackslag_coal_ore"
     }
   ],
-  "processingTime": 375,
+  "processing_time": 375,
   "results": [
     {
       "count": 2,
-      "item": "minecraft:coal"
+      "id": "minecraft:coal"
     },
     {
       "chance": 0.25,
-      "item": "minecraft:coal"
+      "id": "minecraft:coal"
     },
     {
       "chance": 0.75,
-      "item": "create:experience_nugget"
+      "id": "create:experience_nugget"
     },
     {
       "chance": 0.125,
-      "item": "pastel:cobbled_blackslag"
+      "id": "pastel:cobbled_blackslag"
     }
   ],
   "neoforge:conditions": [

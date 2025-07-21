@@ -5,23 +5,23 @@
       "item": "pastel:blackslag_malachite_ore"
     }
   ],
-  "processingTime": 525,
+  "processing_time": 525,
   "results": [
     {
       "count": 3,
-      "item": "pastel:raw_malachite"
+      "id": "pastel:raw_malachite"
     },
     {
       "chance": 0.75,
-      "item": "pastel:raw_malachite"
+      "id": "pastel:raw_malachite"
     },
     {
       "chance": 0.75,
-      "item": "create:experience_nugget"
+      "id": "create:experience_nugget"
     },
     {
       "chance": 0.125,
-      "item": "pastel:cobbled_blackslag"
+      "id": "pastel:cobbled_blackslag"
     }
   ],
   "neoforge:conditions": [

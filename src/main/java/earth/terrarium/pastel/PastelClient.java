@@ -1,13 +1,16 @@
 package earth.terrarium.pastel;
 
-import de.dafuqs.revelationary.api.advancements.ClientAdvancementPacketCallback;
-import de.dafuqs.revelationary.api.revelations.RevealingCallback;
+import com.cmdpro.databank.advancement.ClientAdvancementListener;
+import com.cmdpro.databank.hidden.ClientHiddenListener;
+import com.cmdpro.databank.hidden.Hidden;
+import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModels;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ears.EarsCompat;
 import earth.terrarium.pastel.config.PastelConfig;
 import earth.terrarium.pastel.deeper_down.EnvironmentalOverrides;
 import earth.terrarium.pastel.entity.PastelEntityRenderers;
+import earth.terrarium.pastel.events.PastelClientEvents;
 import earth.terrarium.pastel.inventories.PastelScreenHandlerTypes;
 import earth.terrarium.pastel.particle.PastelParticleFactories;
 import earth.terrarium.pastel.progression.UnlockToastManager;
@@ -17,12 +20,11 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelTooltips;
-import earth.terrarium.pastel.registries.client.PastelDimensionsClient;
 import earth.terrarium.pastel.registries.client.PastelArmorRenderers;
+import earth.terrarium.pastel.registries.client.PastelDimensionsClient;
 import earth.terrarium.pastel.registries.client.PastelModelLayers;
 import earth.terrarium.pastel.registries.client.PastelModelPredicateProviders;
 import earth.terrarium.pastel.registries.client.PastelTooltipComponents;
-import earth.terrarium.pastel.events.PastelClientEvents;
 import earth.terrarium.pastel.render.HudRenderers;
 import earth.terrarium.pastel.render.SkyLerper;
 import earth.terrarium.pastel.render.armor.BedrockCapeRenderer;
@@ -31,9 +33,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
@@ -41,12 +41,13 @@ import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 
-import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
 
 import static earth.terrarium.pastel.PastelCommon.CONFIG;
 import static earth.terrarium.pastel.PastelCommon.logInfo;
 
-public class PastelClient implements RevealingCallback, ClientAdvancementPacketCallback {
+public class PastelClient implements ClientHiddenListener, ClientAdvancementListener {
 
 	public static final SkyLerper skyLerper = new SkyLerper();
 
@@ -118,29 +119,26 @@ public class PastelClient implements RevealingCallback, ClientAdvancementPacketC
 		pastelBus.addListener(PastelArmorRenderers::register);
 		WorthinessChecker.init();
 
-		RevealingCallback.register(this);
-		ClientAdvancementPacketCallback.registerCallback(this);
+		ADVANCEMENT_LISTENERS.add(this);
+		HIDDEN_LISTENERS.add(this);
 
 		logInfo("Client startup completed!");
 	}
-
+	
 	@Override
-	public void trigger(Set<ResourceLocation> advancements, Set<Block> blocks, Set<Item> items, boolean isJoinPacket) {
-		if (!isJoinPacket) {
-			for (Block block : blocks) {
-				if (BuiltInRegistries.BLOCK.getKey(block).getNamespace().equals(PastelCommon.MOD_ID)) {
+	public void onUnhide(List<Hidden> unlocked) {
+		for (Hidden i : unlocked) {
+			if (i.type instanceof BlockHiddenType.BlockHiddenTypeInstance type) {
+				if (BuiltInRegistries.BLOCK.getKey(type.original).getNamespace().equals(PastelCommon.MOD_ID)) {
 					RevelationToast.showRevelationToast(Minecraft.getInstance(), new ItemStack(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get().asItem()), PastelSoundEvents.NEW_REVELATION);
 					break;
 				}
 			}
 		}
 	}
-
+	
 	@Override
-	public void onClientAdvancementPacket(Set<ResourceLocation> gottenAdvancements, Set<ResourceLocation> removedAdvancements, boolean isJoinPacket) {
-		if (!isJoinPacket) {
-			UnlockToastManager.processAdvancements(gottenAdvancements);
-		}
+	public void onUnlock(List<ResourceLocation> unlocked) {
+		UnlockToastManager.processAdvancements(new HashSet<>(unlocked));
 	}
-
 }

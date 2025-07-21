@@ -1,27 +1,23 @@
 package earth.terrarium.pastel.blocks.conditional.colored_tree;
 
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.item.Item;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Hashtable;
+import java.util.Collection;
 import java.util.Map;
 
-public class PottedColoredSaplingBlock extends FlowerPotBlock implements RevelationAware, ColoredTree {
+public class PottedColoredSaplingBlock extends FlowerPotBlock implements ColoredTree {
 	
 	protected final InkColor color;
+	
+	private static final Map<InkColor, PottedColoredSaplingBlock> POTTED_SAPLINGS = new Object2ObjectArrayMap<>();
 	
 	public PottedColoredSaplingBlock(Block content, Properties settings, InkColor color) {
 		super(content, settings);
 		this.color = color;
-		RevelationAware.register(this);
+		POTTED_SAPLINGS.put(color, this);
 	}
 
 //	@Override
@@ -29,27 +25,16 @@ public class PottedColoredSaplingBlock extends FlowerPotBlock implements Revelat
 //		//TODO: Make the codec
 //		return null;
 //	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return ColoredTree.getTreeCloakAdvancementIdentifier(TreePart.SAPLING, this.color);
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		map.put(this.defaultBlockState(), Blocks.POTTED_OAK_SAPLING.defaultBlockState());
-		return map;
-	}
-	
-	@Override
-	public @Nullable Tuple<Item, Item> getItemCloak() {
-		return null; // does not exist in item form
-	}
-	
 	@Override
 	public InkColor getColor() {
 		return this.color;
 	}
 	
+	public static PottedColoredSaplingBlock byColor(InkColor color) {
+		return POTTED_SAPLINGS.get(color);
+	}
+	
+	public static Collection<PottedColoredSaplingBlock> all() {
+		return POTTED_SAPLINGS.values();
+	}
 }

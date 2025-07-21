@@ -1,21 +1,21 @@
 {
   "criteria": {
     "placed_pedestal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:place_pedestal"
+        "advancement": "pastel:place_pedestal"
       }
     },
     "collected_topaz": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/topaz"
+        "advancement": "pastel:hidden/collect_shards/topaz"
       }
     },
     "collected_mermaids_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_mermaids_gem"
+        "advancement": "pastel:collect_mermaids_gem"
       }
     }
   }

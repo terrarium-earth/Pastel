@@ -11,32 +11,33 @@ import java.util.List;
 
 public class EntityDetectorBlock extends DetectorBlock {
 
-	public static final MapCodec<EntityDetectorBlock> CODEC = simpleCodec(EntityDetectorBlock::new);
+    public static final MapCodec<EntityDetectorBlock> CODEC = simpleCodec(EntityDetectorBlock::new);
 
-	public EntityDetectorBlock(Properties settings) {
-		super(settings);
-	}
+    public EntityDetectorBlock(Properties settings) {
+        super(settings);
+    }
 
-	@Override
-	public MapCodec<? extends EntityDetectorBlock> codec() {
-		return CODEC;
-	}
-	
-	@Override
-	protected void updateState(BlockState state, Level world, BlockPos pos) {
-		List<LivingEntity> entities = world.getEntities(EntityTypeTest.forClass(LivingEntity.class), getDetectionBox(pos), LivingEntity::isAlive);
-		
-		int power = Math.min(entities.size(), 15);
-		
-		power = state.getValue(INVERTED) ? 15 - power : power;
-		if (state.getValue(POWER) != power) {
-			world.setBlock(pos, state.setValue(POWER, power), 3);
-		}
-	}
-	
-	@Override
-	int getUpdateFrequencyTicks() {
-		return 20;
-	}
-	
+    @Override
+    public MapCodec<? extends EntityDetectorBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected void updateState(BlockState state, Level world, BlockPos pos) {
+        List<LivingEntity> entities = world.getEntities(
+            EntityTypeTest.forClass(LivingEntity.class), getDetectionBox(pos), LivingEntity::isAlive);
+
+        int power = Math.min(entities.size(), 15);
+
+        power = state.getValue(INVERTED) ? 15 - power : power;
+        if (state.getValue(POWER) != power) {
+            world.setBlock(pos, state.setValue(POWER, power), 3);
+        }
+    }
+
+    @Override
+    int getUpdateFrequencyTicks() {
+        return 20;
+    }
+
 }

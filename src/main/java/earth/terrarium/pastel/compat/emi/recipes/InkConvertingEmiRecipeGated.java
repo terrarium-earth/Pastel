@@ -1,30 +1,37 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
-import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.widget.WidgetHolder;
+import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
+import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import net.minecraft.network.chat.Component;
 
 public class InkConvertingEmiRecipeGated extends GatedSpectrumEmiRecipe<InkConvertingRecipe> {
-	
-	public InkConvertingEmiRecipeGated(InkConvertingRecipe recipe) {
-		super(PastelEmiRecipeCategories.INK_CONVERTING, recipe, 136, 20);
-		this.inputs = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
-	}
-	
-	@Override
-	public void addUnlockedWidgets(WidgetHolder widgets) {
-		widgets.addSlot(inputs.getFirst(), 0, 1);
-		
-		widgets.addTexture(EmiTexture.EMPTY_ARROW, 22, 1);
 
-		// output amount & required time
-		Component colorText = Component.translatable("container.pastel.rei.ink_converting.color", recipe.getInkColor().getName());
-		Component amountText = Component.translatable("container.pastel.rei.ink_converting.amount", recipe.getInkAmount());
-		widgets.addText(colorText, 50, 1, 0x3f3f3f, false);
-		widgets.addText(amountText, 50, 11, 0x3f3f3f, false);
-	}
+    public InkConvertingEmiRecipeGated(InkConvertingRecipe recipe) {
+        super(PastelEmiRecipeCategories.INK_CONVERTING, recipe, 136, 20);
+        this.inputs = recipe.getIngredients()
+                            .stream()
+                            .map(EmiIngredient::of)
+                            .toList();
+    }
+
+    @Override
+    public void addUnlockedWidgets(WidgetHolder widgets) {
+        widgets.addSlot(inputs.getFirst(), 0, 1);
+
+        widgets.addTexture(EmiTexture.EMPTY_ARROW, 22, 1);
+
+        // output amount & required time
+        Component colorText = Component.translatable(
+            "container.pastel.rei.ink_converting.color", recipe.getInkColor()
+                                                               .getName()
+        );
+        Component amountText = Component.translatable(
+            "container.pastel.rei.ink_converting.amount", recipe.getInkAmount());
+        widgets.addText(colorText, 50, 1, 0x3f3f3f, false);
+        widgets.addText(amountText, 50, 11, 0x3f3f3f, false);
+    }
 }

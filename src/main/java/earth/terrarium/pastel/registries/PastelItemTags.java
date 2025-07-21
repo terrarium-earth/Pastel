@@ -36,12 +36,14 @@ public class PastelItemTags {
 	public static final TagKey<Item> COLORED_FENCES = of("colored_fences");
 	public static final TagKey<Item> COLORED_FENCE_GATES = of("colored_fence_gates");
 
-	private static TagKey<Item> of(String id) {
-		return TagKey.create(Registries.ITEM, PastelCommon.locate(id));
-	}
-	
-	private static TagKey<Item> common(String id) {
-		return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", id));
-	}
-	
+    public static final TagKey<Item> PRODUCTIVITY_EXCLUDED = of("productivity_excluded");
+
+    private static TagKey<Item> of(String id) {
+        return TagKey.create(Registries.ITEM, PastelCommon.locate(id));
+    }
+
+    private static TagKey<Item> common(String id) {
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", id));
+    }
+
 }

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.emi;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -42,7 +42,7 @@ public abstract class PastelEmiRecipe implements EmiRecipe {
 
 	public boolean hasAdvancement(ResourceLocation advancement) {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, advancement);
+		return DatabankUtils.hasAdvancement(client.player, advancement);
 	}
 
 	protected static Component getCraftingTimeText(int time) {

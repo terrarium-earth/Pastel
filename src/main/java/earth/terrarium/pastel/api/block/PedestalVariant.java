@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.api.block;
 
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.world.level.block.Block;
 
 public interface PedestalVariant {
 	
-	PedestalRecipeTier getRecipeTier();
+	PedestalTier getRecipeTier();
 	
 	Block getPedestalBlock();
 	

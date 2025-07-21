@@ -8,28 +8,28 @@ import net.minecraft.world.level.block.ButtonBlock;
 import java.util.Map;
 
 public class ColoredWoodenButtonBlock extends ButtonBlock {
-	
-	private static final Map<InkColor, ColoredWoodenButtonBlock> BLOCKS = new Object2ObjectArrayMap<>();
-	protected final InkColor color;
-	
-	public ColoredWoodenButtonBlock(Properties settings, InkColor color) {
-		super(PastelBlockSetTypes.COLORED_WOOD, 30, settings);
-		this.color = color;
-		BLOCKS.put(color, this);
-	}
+
+    private static final Map<InkColor, ColoredWoodenButtonBlock> BLOCKS = new Object2ObjectArrayMap<>();
+    protected final InkColor color;
+
+    public ColoredWoodenButtonBlock(Properties settings, InkColor color) {
+        super(PastelBlockSetTypes.COLORED_WOOD, 30, settings);
+        this.color = color;
+        BLOCKS.put(color, this);
+    }
 
 //	@Override
 //	public MapCodec<? extends ColoredWoodenButtonBlock> getCodec() {
 //		//TODO: Make the codec
 //		return null;
 //	}
-	
-	public InkColor getColor() {
-		return this.color;
-	}
-	
-	public static ColoredWoodenButtonBlock byColor(InkColor color) {
-		return BLOCKS.get(color);
-	}
-	
+
+    public InkColor getColor() {
+        return this.color;
+    }
+
+    public static ColoredWoodenButtonBlock byColor(InkColor color) {
+        return BLOCKS.get(color);
+    }
+
 }

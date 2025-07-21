@@ -1,8 +1,7 @@
 package earth.terrarium.pastel.capabilities.fluid;
 
-import earth.terrarium.pastel.capabilities.item.*;
-import net.neoforged.neoforge.fluids.*;
-import net.neoforged.neoforge.fluids.capability.*;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class FluidHandlerView implements IFluidHandler {
 

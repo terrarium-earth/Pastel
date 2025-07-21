@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.items.tools;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionFillable, SlotBackgroundEffectProvider {
+public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionFillable, SlotBackgroundEffect {
 	
 	private static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/equipment/nightfalls_blade");
 	
@@ -68,7 +68,7 @@ public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionF
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if(target.isAlive() && attacker instanceof Player player) {
-			if (AdvancementHelper.hasAdvancement(player, UNLOCK_IDENTIFIER)) {
+			if (DatabankUtils.hasAdvancement(player, UNLOCK_IDENTIFIER)) {
 				List<InkPoweredStatusEffectInstance> effects = InkPoweredPotionFillable.getEffects(stack);
 				for(InkPoweredStatusEffectInstance instance : effects) {
 					if(InkPowered.tryDrainEnergy(player, instance.getInkCost().color(), instance.getInkCost().cost())) {
@@ -100,15 +100,15 @@ public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionF
 	}
 	
 	@Override
-	public SlotBackgroundEffectProvider.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
+	public SlotBackgroundEffect.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
 		List<InkPoweredStatusEffectInstance> effects = InkPoweredPotionFillable.getEffects(stack);
 		if (effects.isEmpty()) {
-			return SlotBackgroundEffectProvider.SlotEffect.NONE;
+			return SlotBackgroundEffect.SlotEffect.NONE;
 		}
 		
 		var effect = effects.getFirst();
 		var usable = InkPowered.hasAvailableInk(player, new InkCost(effect.getInkCost().color(), adjustFinalCostFor(effect)));
-		return usable ? SlotBackgroundEffectProvider.SlotEffect.BORDER_FADE : SlotEffect.BORDER;
+		return usable ? SlotBackgroundEffect.SlotEffect.BORDER_FADE : SlotEffect.BORDER;
 	}
 	
 	@Override

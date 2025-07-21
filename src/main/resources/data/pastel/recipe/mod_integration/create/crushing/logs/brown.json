@@ -1,7 +1,9 @@
 {
   "type": "create:crushing",
   "ingredients": [
-    "#pastel:brown_logs"
+    {
+      "tag": "pastel:brown_logs"
+    }
   ],
   "results": [
     {
@@ -10,14 +12,12 @@
       "chance": 1.0
     },
     {
-      "result": {
-        "id": "pastel:brown_pigment",
-        "count": 1
-      },
-      "chance": 0.5
+      "id": "pastel:brown_pigment",
+      "count": 1,
+      "chance": 0.25
     }
   ],
-  "processingTime": 450,
+  "processing_time": 900,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

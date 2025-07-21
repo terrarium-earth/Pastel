@@ -12,39 +12,39 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class InvisibleWallBlock extends TransparentBlock {
 
-	public static final MapCodec<InvisibleWallBlock> CODEC = simpleCodec(InvisibleWallBlock::new);
+    public static final MapCodec<InvisibleWallBlock> CODEC = simpleCodec(InvisibleWallBlock::new);
 
-	public InvisibleWallBlock(Properties settings) {
-		super(settings);
-	}
+    public InvisibleWallBlock(Properties settings) {
+        super(settings);
+    }
 
-	@Override
-	public MapCodec<? extends InvisibleWallBlock> codec() {
-		return CODEC;
-	}
-	
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		if (context.isHoldingItem(this.asItem())) {
-			return Shapes.block();
-		} else {
-			return Shapes.empty();
-		}
-	}
-	
-	@Override
-	public RenderShape getRenderShape(BlockState state) {
-		return RenderShape.INVISIBLE;
-	}
-	
-	@Override
-	public float getShadeBrightness(BlockState state, BlockGetter world, BlockPos pos) {
-		return 1.0F;
-	}
-	
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return Shapes.block();
-	}
-	
+    @Override
+    public MapCodec<? extends InvisibleWallBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        if (context.isHoldingItem(this.asItem())) {
+            return Shapes.block();
+        } else {
+            return Shapes.empty();
+        }
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.INVISIBLE;
+    }
+
+    @Override
+    public float getShadeBrightness(BlockState state, BlockGetter world, BlockPos pos) {
+        return 1.0F;
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return Shapes.block();
+    }
+
 }

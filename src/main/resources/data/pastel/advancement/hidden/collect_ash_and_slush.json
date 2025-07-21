@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collect_ash": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_ash"
+        "advancement": "pastel:hidden/collect_ash"
       }
     },
     "collect_slush": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_slush"
+        "advancement": "pastel:hidden/collect_slush"
       }
     }
   }

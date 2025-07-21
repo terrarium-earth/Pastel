@@ -1,27 +1,27 @@
 {
   "criteria": {
     "unlocked_jeopardant": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/trinkets/jeopardant"
+        "advancement": "pastel:unlocks/trinkets/jeopardant"
       }
     },
     "unlocked_azure_dike_ring": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/trinkets/azure_dike_ring"
+        "advancement": "pastel:unlocks/trinkets/azure_dike_ring"
       }
     },
     "unlocked_heartsingers_reward": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/trinkets/heartsingers_reward"
+        "advancement": "pastel:unlocks/trinkets/heartsingers_reward"
       }
     },
     "unlocked_ring_of_denser_steps": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/trinkets/ring_of_denser_steps"
+        "advancement": "pastel:unlocks/trinkets/ring_of_denser_steps"
       }
     }
   },

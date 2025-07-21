@@ -2,22 +2,21 @@ package earth.terrarium.pastel.api.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 // Similar to FAPIs DynamicItemRenderer, except with a little more information.
 @OnlyIn(Dist.CLIENT)
 @FunctionalInterface
 public interface DynamicItemRenderer {
-    
+
     Object2ObjectArrayMap<Item, DynamicItemRenderer> RENDERERS = new Object2ObjectArrayMap<>();
-    
+
     /**
      * Renders an item stack.
      *
@@ -30,6 +29,9 @@ public interface DynamicItemRenderer {
      * @param light           packed lightmap coordinates
      * @param overlay         the overlay UV passed to {@link com.mojang.blaze3d.vertex.VertexConsumer#setOverlay(int)}
      */
-    void render(ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay);
-    
+    void render(
+        ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices,
+        MultiBufferSource vertexConsumers, int light, int overlay
+    );
+
 }

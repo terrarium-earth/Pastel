@@ -13,18 +13,26 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class ParticleHelper {
-	
-	public static void playParticleWithPatternAndVelocityClient(Level world, Vec3 position, ParticleOptions particleEffect, @NotNull VectorPattern pattern, double velocity) {
-		for (Vec3 vec3d : pattern.getVectors()) {
-			world.addParticle(particleEffect, position.x(), position.y(), position.z(), vec3d.x * velocity, vec3d.y * velocity, vec3d.z * velocity);
-		}
-	}
 
-	public static void playParticleWithRotation(Level world, Vec3 position, double longitude, double latitude, ParticleOptions particleEffect, @NotNull VectorPattern pattern, double velocity) {
-		for (Vec3 vec3d : pattern.getVectors()) {
-			var length = vec3d.length();
-			var orientation = Orientation.getVectorOrientation(vec3d).add(longitude, latitude);
-			vec3d = orientation.toVector(length);
+    public static void playParticleWithPatternAndVelocityClient(
+        Level world, Vec3 position, ParticleOptions particleEffect, @NotNull VectorPattern pattern, double velocity) {
+        for (Vec3 vec3d : pattern.getVectors()) {
+            world.addParticle(
+                particleEffect, position.x(), position.y(), position.z(), vec3d.x * velocity, vec3d.y * velocity,
+                vec3d.z * velocity
+            );
+        }
+    }
+
+    public static void playParticleWithRotation(
+        Level world, Vec3 position, double longitude, double latitude, ParticleOptions particleEffect,
+        @NotNull VectorPattern pattern, double velocity
+    ) {
+        for (Vec3 vec3d : pattern.getVectors()) {
+            var length = vec3d.length();
+            var orientation = Orientation.getVectorOrientation(vec3d)
+                                         .add(longitude, latitude);
+            vec3d = orientation.toVector(length);
 
 			world.addParticle(particleEffect, position.x(), position.y(), position.z(), vec3d.x * velocity, vec3d.y * velocity, vec3d.z * velocity);
 		}
@@ -61,7 +69,7 @@ public class ParticleHelper {
 	public static void horizontalBlock(Level world, ParticleOptions particleEffect, BlockPos position, int quantity, Vec3 velocity) {
 		playParticleAroundBlockSides(world, particleEffect, position, HORIZONTALS, quantity, velocity);
 	}
-	
+
 	public static void playParticleAroundBlockSides(Level world, ParticleOptions particleEffect, BlockPos position, Direction[] sides, int quantity, Vec3 velocity) {
 		playParticleAroundBlockSides(world, particleEffect, position, List.of(sides), quantity, velocity);
 	}

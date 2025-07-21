@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.structure;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.blocks.chests.PastelChestBlockEntity;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
@@ -146,7 +146,7 @@ public class TreasureChestBlockEntity extends PastelChestBlockEntity {
 		if (this.requiredAdvancementIdentifierToOpen == null) {
 			return true;
 		} else {
-			return AdvancementHelper.hasAdvancement(player, this.requiredAdvancementIdentifierToOpen);
+			return DatabankUtils.hasAdvancement(player, this.requiredAdvancementIdentifierToOpen);
 		}
 	}
 	

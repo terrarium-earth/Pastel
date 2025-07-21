@@ -24,33 +24,42 @@ import java.util.List;
  * Call checkAndDropStrippedLoot() in the blocks onStateReplaced()
  */
 public interface StrippableDrop {
-	
-	Block getStrippedBlock();
-	
-	ResourceKey<LootTable> getStrippingLootTableKey();
-	
-	default boolean checkAndDropStrippedLoot(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
-		if (!moved && newState.is(getStrippedBlock())) {
-			// we sadly don't have the entity or hand stack here, but oh well
-			List<ItemStack> harvestedStacks = getStrippedStacks(state, (ServerLevel) world, pos, world.getBlockEntity(pos), null, ItemStack.EMPTY, getStrippingLootTableKey());
-			for (ItemStack harvestedStack : harvestedStacks) {
-				Containers.dropItemStack(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, harvestedStack);
-			}
-			return true;
-		}
-		return false;
-	}
-	
-	static List<ItemStack> getStrippedStacks(BlockState state, ServerLevel world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack stack, ResourceKey<LootTable> lootTableKey) {
-		var builder = (new LootParams.Builder(world))
-				.withParameter(LootContextParams.BLOCK_STATE, state)
-				.withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
-				.withParameter(LootContextParams.TOOL, stack)
-				.withOptionalParameter(LootContextParams.THIS_ENTITY, entity)
-				.withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockEntity);
-		
-		LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(lootTableKey);
-		return lootTable.getRandomItems(builder.create(LootContextParamSets.BLOCK));
-	}
-	
+
+    Block getStrippedBlock();
+
+    ResourceKey<LootTable> getStrippingLootTableKey();
+
+    default boolean checkAndDropStrippedLoot(
+        BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!moved && newState.is(getStrippedBlock())) {
+            // we sadly don't have the entity or hand stack here, but oh well
+            List<ItemStack> harvestedStacks = getStrippedStacks(
+                state, (ServerLevel) world, pos, world.getBlockEntity(pos), null, ItemStack.EMPTY,
+                getStrippingLootTableKey()
+            );
+            for (ItemStack harvestedStack : harvestedStacks) {
+                Containers.dropItemStack(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, harvestedStack);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    static List<ItemStack> getStrippedStacks(
+        BlockState state, ServerLevel world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity,
+        ItemStack stack, ResourceKey<LootTable> lootTableKey
+    ) {
+        var builder = (new LootParams.Builder(world))
+            .withParameter(LootContextParams.BLOCK_STATE, state)
+            .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+            .withParameter(LootContextParams.TOOL, stack)
+            .withOptionalParameter(LootContextParams.THIS_ENTITY, entity)
+            .withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockEntity);
+
+        LootTable lootTable = world.getServer()
+                                   .reloadableRegistries()
+                                   .getLootTable(lootTableKey);
+        return lootTable.getRandomItems(builder.create(LootContextParamSets.BLOCK));
+    }
+
 }

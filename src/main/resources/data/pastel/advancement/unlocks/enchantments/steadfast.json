@@ -1,15 +1,15 @@
 {
   "criteria": {
     "built_enchanting_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_enchanting_structure"
+        "advancement": "pastel:midgame/build_enchanting_structure"
       }
     },
     "harvested_moonstruck_nectar": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/harvest_moonstruck_nectar"
+        "advancement": "pastel:midgame/harvest_moonstruck_nectar"
       }
     }
   }

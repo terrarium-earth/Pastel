@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:sugar_cane",
+    "original": "pastel:quitoxic_reeds"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_quitoxic_reeds"
+  }
+}

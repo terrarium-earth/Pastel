@@ -7,7 +7,7 @@ import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetworkM
 import earth.terrarium.pastel.particle.render.EarlyRenderingParticleContainer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.event.server.*;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 
 public class Pastel {
 
@@ -25,22 +25,23 @@ public class Pastel {
 
     public static ServerPastelNetworkManager getServerInstance() {
         if (serverManager == null && PastelCommon.getSidedServer() != null) {
-            serverManager = ServerPastelNetworkManager.get(PastelCommon.getSidedServer().overworld());
+            serverManager = ServerPastelNetworkManager.get(PastelCommon.getSidedServer()
+                                                                       .overworld());
         }
         return serverManager;
     }
-	
-	public static PastelNetworkManager<?, ?> getInstance(boolean client) {
+
+    public static PastelNetworkManager<?, ?> getInstance(boolean client) {
         if (client) {
             return getClientInstance();
         } else {
             return getServerInstance();
         }
     }
-    
+
     @OnlyIn(Dist.CLIENT)
     public static void clearClientInstance() {
-		getClientInstance().clearContent();
+        getClientInstance().clearContent();
         EarlyRenderingParticleContainer.clear();
     }
 

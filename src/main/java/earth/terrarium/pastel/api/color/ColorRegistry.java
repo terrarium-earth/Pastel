@@ -5,19 +5,19 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import java.util.Optional;
 
 public abstract class ColorRegistry<T> {
-	
-	public static ItemColors ITEM_COLORS;
-	public static FluidColors FLUID_COLORS;
-	
-	public static void registerColorRegistries() {
-		ITEM_COLORS = new ItemColors();
-		FLUID_COLORS = new FluidColors();
-	}
-	
-	public abstract void registerColorMapping(T element, InkColor dyeColor);
-	
-	public abstract Optional<InkColor> getMapping(T element);
-	
-	public abstract InkColor getMapping(T element, InkColor fallback);
-	
+
+    public static ItemColors ITEM_COLORS;
+    public static FluidColors FLUID_COLORS;
+
+    public static void registerColorRegistries() {
+        ITEM_COLORS = new ItemColors();
+        FLUID_COLORS = new FluidColors();
+    }
+
+    public abstract void registerColorMapping(T element, InkColor dyeColor);
+
+    public abstract Optional<InkColor> getMapping(T element);
+
+    public abstract InkColor getMapping(T element, InkColor fallback);
+
 }

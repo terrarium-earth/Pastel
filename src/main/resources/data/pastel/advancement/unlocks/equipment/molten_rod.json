@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_orange_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pigment/orange"
+        "advancement": "pastel:hidden/collect_pigment/orange"
       }
     },
     "collected_blaze_rod": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "nether/obtain_blaze_rod"
+        "advancement": "nether/obtain_blaze_rod"
       }
     }
   }

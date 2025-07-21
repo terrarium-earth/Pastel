@@ -2,34 +2,58 @@ package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ArmorWithHitEffect;
-import earth.terrarium.pastel.attachments.data.*;
-import earth.terrarium.pastel.attachments.data.azure_dike.*;
+import earth.terrarium.pastel.api.item.ItemPickupListener;
+import earth.terrarium.pastel.attachments.data.MiscPlayerData;
+import earth.terrarium.pastel.attachments.data.PrimordialFireData;
+import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
+import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
-import earth.terrarium.pastel.items.tools.*;
-import earth.terrarium.pastel.items.trinkets.*;
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.advancements.*;
-import net.minecraft.core.component.*;
-import net.minecraft.server.level.*;
-import net.minecraft.stats.*;
-import net.minecraft.tags.*;
+import earth.terrarium.pastel.items.tools.ParryingSwordItem;
+import earth.terrarium.pastel.items.trinkets.AshenCircletItem;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
+import earth.terrarium.pastel.registries.PastelAttributeTags;
+import earth.terrarium.pastel.registries.PastelDamageTypeTags;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelItems;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.tick.*;
-import top.theillusivec4.curios.api.*;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityEvent;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ResolvableProfile;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.util.TriState;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import org.joml.Vector3f;
+import top.theillusivec4.curios.api.CuriosApi;
 
-import java.util.*;
-import java.util.concurrent.atomic.*;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PastelEntityEvents {
 
@@ -41,13 +65,54 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::parryingSwordBlock);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::disarming);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::armorEffects);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenItemPickup);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenEntityAdded);
+    }
 
+    private static void listenItemPickup(ItemEntityPickupEvent.Pre event) {
+        var entity = event.getPlayer();
+        var item = event.getItemEntity();
+        var original = item.getItem().copy();
+
+        if (item.hasPickUpDelay())
+            return;
+
+        var eListener = entity.getCapability(PastelCapabilities.Pickup.ENTITY);
+        ItemStack remainder = null;
+
+        if (eListener != null && eListener.accepts(Optional.empty(), item.getItem())) {
+            remainder = eListener.receive(Optional.empty(), item.getItem(), Optional.of(entity));
+        }
+
+        var inv = entity.getCapability(Capabilities.ItemHandler.ENTITY);
+        if (remainder == null && inv != null) {
+            remainder = ItemPickupListener.receiveRecursive(inv, 2, 0,
+                    item.getItem(), Optional.of(entity));
+        }
+
+        if (remainder == null || ItemStack.isSameItemSameComponents(remainder, original))
+            return;
+
+
+        item.setItem(remainder);
+        event.setCanPickup(TriState.FALSE);
+        entity.take(item, original.getCount() - remainder.getCount());
+        entity.onItemPickup(item);
+    }
+
+    private static void listenEntityAdded(EntityJoinLevelEvent event) {
+        if (event.loadedFromDisk())
+            return;
+
+        var entity = event.getEntity();
+        entity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
     }
 
     private static void armorEffects(LivingDamageEvent.Post event) {
         var attacked = event.getEntity();
 
-        if (attacked.level().isClientSide())
+        if (attacked.level()
+                    .isClientSide())
             return;
 
         for (ItemStack armor : attacked.getArmorSlots()) {
@@ -61,25 +126,29 @@ public class PastelEntityEvents {
         var source = event.getSource();
         var entity = source.getEntity();
 
-        if (!(entity instanceof LivingEntity attacker) || event.getNewDamage() <= Mth.EPSILON || source.is(DamageTypes.THORNS))
+        if (!(entity instanceof LivingEntity attacker) || event.getNewDamage() <= Mth.EPSILON || source.is(
+            DamageTypes.THORNS))
             return;
 
-        var disarming = Ench.getLevel(attacker.registryAccess(), PastelEnchantments.DISARMING, attacker.getMainHandItem());
-        if (disarming > 0 && target.getRandom().nextFloat() < disarming * PastelCommon.CONFIG.DisarmingChancePerLevelMobs)
+        var disarming = Ench.getLevel(
+            attacker.registryAccess(), PastelEnchantments.DISARMING, attacker.getMainHandItem());
+        if (disarming > 0 && target.getRandom()
+                                   .nextFloat() < disarming * PastelCommon.CONFIG.DisarmingChancePerLevelMobs)
             DisarmingHelper.disarmEntity(target);
     }
 
 
-
     private static void parryingSwordBlock(LivingShieldBlockEvent event) {
-        var damage = event.getDamageContainer().getOriginalDamage();
+        var damage = event.getDamageContainer()
+                          .getOriginalDamage();
         var shielder = event.getEntity();
         var weapon = shielder.getUseItem();
 
         if (!(weapon.getItem() instanceof ParryingSwordItem parryingSword))
             return;
 
-        if (event.getDamageSource().is(PastelDamageTypeTags.BYPASSES_PARRYING)) {
+        if (event.getDamageSource()
+                 .is(PastelDamageTypeTags.BYPASSES_PARRYING)) {
             event.setBlocked(false);
             event.setBlockedDamage(0);
             return;
@@ -103,7 +172,11 @@ public class PastelEntityEvents {
         if (parryingSword.canDeflect(event.getDamageSource(), perfect)) {
             var mult = parryingSword.getBlockingMultiplier(event.getDamageSource(), weapon, shielder, useTime);
             if (mult > 0)
-                shielder.level().broadcastEntityEvent(shielder, (byte) 29); // without this, the shielding sound does not play on non-perfect parries
+                shielder.level()
+                        .broadcastEntityEvent(
+                            shielder,
+                            (byte) 29
+                        ); // without this, the shielding sound does not play on non-perfect parries
 
             event.setBlocked(true);
             event.setBlockedDamage(damage - damage * mult);
@@ -114,7 +187,8 @@ public class PastelEntityEvents {
         var entity = event.getEntity();
 
         if (entity instanceof LivingEntity living) {
-            if (living.level().isClientSide())
+            if (living.level()
+                      .isClientSide())
                 return;
 
             var additions = PastelEffectEvents.QUEUED_ADDITIONS.get(entity.getUUID());
@@ -125,7 +199,8 @@ public class PastelEntityEvents {
             }
 
             PrimordialFireData.serverTick(living);
-            AzureDikeProvider.getAzureDikeComponent(living).serverTick(living);
+            AzureDikeProvider.getAzureDikeComponent(living)
+                             .serverTick(living);
         }
     }
 
@@ -136,14 +211,16 @@ public class PastelEntityEvents {
         // If the player is damaged by lava and wears an ashen circlet:
         // prevent damage and grant fire resistance
         if (source.is(DamageTypes.LAVA)) {
-            Optional<ItemStack> ashenCircletStack = PastelTrinketItem.getFirstEquipped(entity, PastelItems.ASHEN_CIRCLET.get());
+            Optional<ItemStack> ashenCircletStack = PastelTrinketItem.getFirstEquipped(
+                entity, PastelItems.ASHEN_CIRCLET.get());
             if (ashenCircletStack.isPresent()) {
                 if (AshenCircletItem.getCooldownTicks(ashenCircletStack.get(), entity.level()) == 0) {
                     AshenCircletItem.grantFireResistance(ashenCircletStack.get(), entity);
                     event.setCanceled(true);
                 }
             }
-        } else if (source.is(DamageTypeTags.IS_FIRE) && PastelTrinketItem.hasEquipped(entity, PastelItems.ASHEN_CIRCLET.get())) {
+        } else if (source.is(DamageTypeTags.IS_FIRE) && PastelTrinketItem.hasEquipped(
+            entity, PastelItems.ASHEN_CIRCLET.get())) {
             event.setCanceled(true);
         }
     }
@@ -154,25 +231,38 @@ public class PastelEntityEvents {
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
 
-        var oldInexorable = Ench.getLevel(livingEntity.level().registryAccess(), PastelEnchantments.INEXORABLE, oldEquipment);
-        var newInexorable = Ench.getLevel(livingEntity.level().registryAccess(), PastelEnchantments.INEXORABLE, newEquipment);
+        var oldInexorable = Ench.getLevel(
+            livingEntity.level()
+                        .registryAccess(), PastelEnchantments.INEXORABLE, oldEquipment
+        );
+        var newInexorable = Ench.getLevel(
+            livingEntity.level()
+                        .registryAccess(), PastelEnchantments.INEXORABLE, newEquipment
+        );
 
-        var effectType = equipmentSlot == EquipmentSlot.CHEST ? PastelAttributeTags.INEXORABLE_ARMOR_EFFECTIVE : PastelAttributeTags.INEXORABLE_HANDHELD_EFFECTIVE;
+        var effectType = equipmentSlot == EquipmentSlot.CHEST ? PastelAttributeTags.INEXORABLE_ARMOR_EFFECTIVE
+                                                              : PastelAttributeTags.INEXORABLE_HANDHELD_EFFECTIVE;
 
         //TODO make inexorable use enchantment effects or something
         //TODO also move the enchantment cloaking logic from LivingEntityMixin into here
         if (oldInexorable > 0 && newInexorable <= 0) {
             livingEntity.getActiveEffects()
-                    .stream()
-                    .filter(instance -> {
-                        AtomicBoolean result = new AtomicBoolean(false);
-                        instance.getEffect().value().createModifiers(instance.getAmplifier(), (attribute, modifier) -> {
-                            if (attribute.is(effectType))
-                                result.set(true);
-                        });
-                        return result.get();
-                    })
-                    .forEach(instance -> instance.getEffect().value().onEffectStarted(livingEntity, instance.getAmplifier()));
+                        .stream()
+                        .filter(instance -> {
+                            AtomicBoolean result = new AtomicBoolean(false);
+                            instance.getEffect()
+                                    .value()
+                                    .createModifiers(
+                                        instance.getAmplifier(), (attribute, modifier) -> {
+                                            if (attribute.is(effectType))
+                                                result.set(true);
+                                        }
+                                    );
+                            return result.get();
+                        })
+                        .forEach(instance -> instance.getEffect()
+                                                     .value()
+                                                     .onEffectStarted(livingEntity, instance.getAmplifier()));
         }
 
     }
@@ -188,9 +278,11 @@ public class PastelEntityEvents {
         var curios = CuriosApi.getCuriosInventory(killedEntity);
 
         if (curios.isPresent()) {
-            var totem = curios.get().findFirstCurio(PastelItems.TOTEM_PENDANT.get());
+            var totem = curios.get()
+                              .findFirstCurio(PastelItems.TOTEM_PENDANT.get());
             if (totem.isPresent()) {
-                ItemStack totemStack = totem.get().stack();
+                ItemStack totemStack = totem.get()
+                                            .stack();
 
                 if (totemStack.getCount() > 0) {
                     // increase stat
@@ -206,14 +298,16 @@ public class PastelEntityEvents {
                     killedEntity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
                     killedEntity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
                     killedEntity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
-                    killedEntity.level().broadcastEntityEvent(killedEntity, EntityEvent.TALISMAN_ACTIVATE);
+                    killedEntity.level()
+                                .broadcastEntityEvent(killedEntity, EntityEvent.TALISMAN_ACTIVATE);
                     event.setCanceled(true);
                     return;
                 }
             }
         }
 
-        if (killedEntity instanceof ServerPlayer player) { //At this point it can only be concluded that this bitch dead as hell
+        if (killedEntity instanceof ServerPlayer player) { //At this point it can only be concluded that this bitch
+            // dead as hell
             evaluateAndDropPlayerHead(player, damageSource);
         }
     }
@@ -227,18 +321,22 @@ public class PastelEntityEvents {
             boolean shouldDropHead = source.is(PastelDamageTypeTags.ALWAYS_DROPS_MOB_HEAD);
             if (!shouldDropHead && source.getEntity() instanceof LivingEntity livingAttacker) {
                 int damageSourceTreasureHunt = Ench.getEquipmentLevel(
-                        serverWorld.registryAccess(),
-                        PastelEnchantments.TREASURE_HUNTER,
-                        livingAttacker);
+                    serverWorld.registryAccess(),
+                    PastelEnchantments.TREASURE_HUNTER,
+                    livingAttacker
+                );
 
-                shouldDropHead = damageSourceTreasureHunt > 0 && serverWorld.getRandom().nextFloat() < 0.2 * damageSourceTreasureHunt;
+                shouldDropHead = damageSourceTreasureHunt > 0 && serverWorld.getRandom()
+                                                                            .nextFloat() <
+                                                                 0.2 * damageSourceTreasureHunt;
             }
 
             if (shouldDropHead) {
                 ItemStack headItemStack = new ItemStack(Items.PLAYER_HEAD);
                 headItemStack.set(DataComponents.PROFILE, new ResolvableProfile(player.getGameProfile()));
 
-                ItemEntity headEntity = new ItemEntity(serverWorld, player.getX(), player.getY(), player.getZ(), headItemStack);
+                ItemEntity headEntity = new ItemEntity(
+                    serverWorld, player.getX(), player.getY(), player.getZ(), headItemStack);
                 serverWorld.addFreshEntity(headEntity);
             }
         }

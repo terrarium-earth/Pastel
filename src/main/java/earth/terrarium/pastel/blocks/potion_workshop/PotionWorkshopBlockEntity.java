@@ -1,13 +1,15 @@
 package earth.terrarium.pastel.blocks.potion_workshop;
 
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.capabilities.*;
-import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
+import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
+import earth.terrarium.pastel.capabilities.item.StackHandlerView;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.level.ContainerWrapper;
 import earth.terrarium.pastel.inventories.PotionWorkshopScreenHandler;
@@ -18,9 +20,15 @@ import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopBrewingRecipe
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopCraftingRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopReactingRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -32,7 +40,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.*;
+import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
@@ -43,11 +52,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.*;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -499,7 +509,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		if (playerEntity == null) {
 			return false;
 		} else {
-			return AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.FOURTH_BREWING_SLOT);
+			return DatabankUtils.hasAdvancement(playerEntity, PastelAdvancements.FOURTH_BREWING_SLOT);
 		}
 	}
 	

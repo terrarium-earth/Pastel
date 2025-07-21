@@ -5,31 +5,31 @@
       "item": "pastel:blackslag_onyx_ore"
     }
   ],
-  "processingTime": 425,
+  "processing_time": 425,
   "results": [
     {
       "count": 4,
-      "item": "pastel:onyx_shard"
+      "id": "pastel:onyx_shard"
     },
     {
       "chance": 0.25,
-      "item": "pastel:onyx_shard"
+      "id": "pastel:onyx_shard"
     },
     {
       "count": 4,
-      "item": "pastel:onyx_powder"
+      "id": "pastel:onyx_powder"
     },
     {
       "chance": 0.25,
-      "item": "pastel:onyx_powder"
+      "id": "pastel:onyx_powder"
     },
     {
       "chance": 0.75,
-      "item": "create:experience_nugget"
+      "id": "create:experience_nugget"
     },
     {
       "chance": 0.125,
-      "item": "pastel:cobbled_blackslag"
+      "id": "pastel:cobbled_blackslag"
     }
   ],
   "neoforge:conditions": [

@@ -4,9 +4,9 @@ import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.inventories.slots.LockableCraftingResultSlot;
 import earth.terrarium.pastel.inventories.slots.ReadOnlySlot;
 import earth.terrarium.pastel.items.magic_items.CraftingTabletItem;
-import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
@@ -43,7 +43,7 @@ public class CraftingTabletScreenHandler extends RecipeBookMenu<RecipeInput, Rec
 	private final Player player;
 	private final Level world;
 	private final ItemStack craftingTabletItemStack;
-	private final Optional<PedestalRecipeTier> highestUnlockedRecipeTier;
+	private final Optional<PedestalTier> highestUnlockedRecipeTier;
 	
 	private final LockableCraftingResultSlot lockableCraftingResultSlot;
 	
@@ -60,7 +60,7 @@ public class CraftingTabletScreenHandler extends RecipeBookMenu<RecipeInput, Rec
 		this.craftingTabletItemStack = craftingTabletItemStack;
 		this.player = playerInventory.player;
 		
-		this.highestUnlockedRecipeTier = PedestalRecipeTier.getHighestUnlockedRecipeTier(playerInventory.player);
+		this.highestUnlockedRecipeTier = PedestalTier.getHighestUnlockedRecipeTier(playerInventory.player);
 		
 		// crafting slots
 		int m;
@@ -137,31 +137,31 @@ public class CraftingTabletScreenHandler extends RecipeBookMenu<RecipeInput, Rec
 				ItemStack itemStack = pedestalRecipe.getResultItem(world.registryAccess()).copy();
 				craftingResultInventory.setItem(0, itemStack);
 				
-				int magenta = pedestalRecipe.getGemstonePowderAmount(BuiltinGemstoneColor.CYAN);
+				int magenta = pedestalRecipe.getPowder(PastelGemstoneColor.CYAN);
 				if (magenta > 0) {
 					inventory.setItem(9, new ItemStack(PastelItems.TOPAZ_POWDER.get(), magenta));
 				} else {
 					inventory.setItem(9, ItemStack.EMPTY);
 				}
-				int yellow = pedestalRecipe.getGemstonePowderAmount(BuiltinGemstoneColor.MAGENTA);
+				int yellow = pedestalRecipe.getPowder(PastelGemstoneColor.MAGENTA);
 				if (yellow > 0) {
 					inventory.setItem(10, new ItemStack(PastelItems.AMETHYST_POWDER.get(), yellow));
 				} else {
 					inventory.setItem(10, ItemStack.EMPTY);
 				}
-				int cyan = pedestalRecipe.getGemstonePowderAmount(BuiltinGemstoneColor.YELLOW);
+				int cyan = pedestalRecipe.getPowder(PastelGemstoneColor.YELLOW);
 				if (cyan > 0) {
 					inventory.setItem(11, new ItemStack(PastelItems.CITRINE_POWDER.get(), cyan));
 				} else {
 					inventory.setItem(11, ItemStack.EMPTY);
 				}
-				int black = pedestalRecipe.getGemstonePowderAmount(BuiltinGemstoneColor.BLACK);
+				int black = pedestalRecipe.getPowder(PastelGemstoneColor.BLACK);
 				if (black > 0) {
 					inventory.setItem(12, new ItemStack(PastelItems.ONYX_POWDER.get(), black));
 				} else {
 					inventory.setItem(12, ItemStack.EMPTY);
 				}
-				int white = pedestalRecipe.getGemstonePowderAmount(BuiltinGemstoneColor.WHITE);
+				int white = pedestalRecipe.getPowder(PastelGemstoneColor.WHITE);
 				if (white > 0) {
 					inventory.setItem(13, new ItemStack(PastelItems.MOONSTONE_POWDER.get(), white));
 				} else {
@@ -358,7 +358,7 @@ public class CraftingTabletScreenHandler extends RecipeBookMenu<RecipeInput, Rec
 		return index != this.getResultSlotIndex();
 	}
 	
-	public Optional<PedestalRecipeTier> getTier() {
+	public Optional<PedestalTier> getTier() {
 		return this.highestUnlockedRecipeTier;
 	}
 	

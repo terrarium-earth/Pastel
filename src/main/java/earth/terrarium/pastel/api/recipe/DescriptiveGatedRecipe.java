@@ -5,9 +5,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeInput;
 
 public interface DescriptiveGatedRecipe<C extends RecipeInput> extends GatedRecipe<C> {
-	
-	Component getDescription();
-	
-	Item getItem();
-	
+
+    Component getDescription();
+
+    Item getItem();
+
 }

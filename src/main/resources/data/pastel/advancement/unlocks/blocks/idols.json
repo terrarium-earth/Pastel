@@ -1,21 +1,21 @@
 {
   "criteria": {
     "collected_mob_head": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_mob_head_using_treasure_hunter"
+        "advancement": "pastel:midgame/collect_mob_head_using_treasure_hunter"
       }
     },
     "collected_stardust": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_stardust"
+        "advancement": "pastel:hidden/collect_stardust"
       }
     },
     "collected_quitoxic_reeds": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_quitoxic_reeds"
+        "advancement": "pastel:collect_quitoxic_reeds"
       }
     }
   }

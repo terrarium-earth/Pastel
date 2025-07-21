@@ -13,7 +13,7 @@ public class PastelJukeboxSongs {
     public static final ResourceKey<JukeboxSong> DIVINITY = of("divinity");
 
     private static ResourceKey<JukeboxSong> of(String id) {
-		return ResourceKey.create(Registries.JUKEBOX_SONG, PastelCommon.locate(id));
+        return ResourceKey.create(Registries.JUKEBOX_SONG, PastelCommon.locate(id));
     }
 
 }

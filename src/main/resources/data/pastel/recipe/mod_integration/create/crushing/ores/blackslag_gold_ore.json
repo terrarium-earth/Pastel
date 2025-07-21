@@ -5,24 +5,24 @@
       "item": "pastel:blackslag_gold_ore"
     }
   ],
-  "processingTime": 425,
+  "processing_time": 425,
   "results": [
     {
       "count": 2,
-      "item": "create:crushed_raw_gold"
+      "id": "create:crushed_raw_gold"
     },
     {
       "chance": 0.25,
-      "item": "create:crushed_raw_gold"
+      "id": "create:crushed_raw_gold"
     },
     {
       "chance": 0.75,
       "count": 2,
-      "item": "create:experience_nugget"
+      "id": "create:experience_nugget"
     },
     {
       "chance": 0.125,
-      "item": "pastel:cobbled_blackslag"
+      "id": "pastel:cobbled_blackslag"
     }
   ],
   "neoforge:conditions": [

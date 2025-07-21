@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.compat.emi.handlers;
 
-import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
-import earth.terrarium.pastel.inventories.CraftingTabletScreenHandler;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
 import dev.emi.emi.api.recipe.handler.StandardRecipeHandler;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
+import earth.terrarium.pastel.inventories.CraftingTabletScreenHandler;
 import net.minecraft.world.inventory.Slot;
 
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ public class CraftingTabletRecipeHandler implements StandardRecipeHandler<Crafti
     @Override
     public boolean supportsRecipe(EmiRecipe recipe) {
         EmiRecipeCategory category = recipe.getCategory();
-        return (category == PastelEmiRecipeCategories.PEDESTAL_CRAFTING || category == VanillaEmiRecipeCategories.CRAFTING) && recipe.supportsRecipeTree();
+        return (category == PastelEmiRecipeCategories.PEDESTAL_CRAFTING ||
+                category == VanillaEmiRecipeCategories.CRAFTING) && recipe.supportsRecipeTree();
     }
 }

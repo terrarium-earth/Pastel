@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.compat.emi;
 
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -18,6 +18,8 @@ public class FluidIngredientEmi {
         // Semi-redundant: the sole caller of this *checks if input is empty*.
         if (ingredient.isEmpty()) return EmiStack.EMPTY;
 
-        return EmiIngredient.of(Arrays.stream(ingredient.getStacks()).map(stack -> EmiStack.of(stack.getFluid(), stack.getAmount())).toList());
+        return EmiIngredient.of(Arrays.stream(ingredient.getStacks())
+                                      .map(stack -> EmiStack.of(stack.getFluid(), stack.getAmount()))
+                                      .toList());
     }
 }

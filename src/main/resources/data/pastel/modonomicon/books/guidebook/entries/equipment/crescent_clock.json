@@ -4,9 +4,7 @@
     "type": "modonomicon:advancement",
     "advancement_id": "pastel:unlocks/items/crescent_clock"
   },
-  "icon": {
-    "item": "pastel:crescent_clock"
-  },
+  "icon": "pastel:textures/item/crescent_clock_0.png",
   "category": "pastel:equipment",
   "hide_while_locked": true,
   "parents": [],

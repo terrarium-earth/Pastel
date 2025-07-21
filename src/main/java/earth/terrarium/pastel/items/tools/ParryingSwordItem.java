@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.tools;
 
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -20,116 +20,150 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ParryingSwordItem extends SwordItem implements ExtendedItemBarProvider {
+public abstract class ParryingSwordItem extends SwordItem implements ExtendedItemBar {
 
-	public static final int DEFAULT_MAX_BLOCK_TIME = 40;
-	public static final int DEFAULT_PERFECT_PARRY_WINDOW = 5;
+    public static final int DEFAULT_MAX_BLOCK_TIME = 40;
+    public static final int DEFAULT_PERFECT_PARRY_WINDOW = 5;
 
-	public ParryingSwordItem(Tier material, int attackDamage, float attackSpeed, float crit, float reach, Properties settings) {
-		super(material, settings.attributes(ItemAttributeModifiers.builder()
-				.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, material.getAttackDamageBonus() + attackDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(AdditionalEntityAttributes.CRITICAL_BONUS_DAMAGE, new AttributeModifier(PastelEntityAttributes.CRIT_MODIFIER_ID, crit, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(PastelEntityAttributes.REACH_MODIFIER_ID, reach, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.build()));
-	}
-	
-	@Override
-	public void releaseUsing(ItemStack stack, Level world, LivingEntity user, int remainingUseTicks) {
-		super.releaseUsing(stack, world, user, remainingUseTicks);
-		var usedTime = getMaxShieldingTime(user, stack) - remainingUseTicks;
+    public ParryingSwordItem(
+        Tier material, int attackDamage, float attackSpeed, float crit, float reach, Properties settings) {
+        super(
+            material, settings.attributes(ItemAttributeModifiers.builder()
+                                                                .add(
+                                                                    Attributes.ATTACK_DAMAGE,
+                                                                    new AttributeModifier(
+                                                                        BASE_ATTACK_DAMAGE_ID,
+                                                                        material.getAttackDamageBonus() +
+                                                                        attackDamage,
+                                                                        AttributeModifier.Operation.ADD_VALUE
+                                                                    ), EquipmentSlotGroup.MAINHAND
+                                                                )
+                                                                .add(
+                                                                    Attributes.ATTACK_SPEED,
+                                                                    new AttributeModifier(
+                                                                        BASE_ATTACK_SPEED_ID,
+                                                                        attackSpeed,
+                                                                        AttributeModifier.Operation.ADD_VALUE
+                                                                    ), EquipmentSlotGroup.MAINHAND
+                                                                )
+                                                                .add(
+                                                                    AdditionalEntityAttributes.CRITICAL_BONUS_DAMAGE,
+                                                                    new AttributeModifier(
+                                                                        PastelEntityAttributes.CRIT_MODIFIER_ID, crit,
+                                                                        AttributeModifier.Operation.ADD_VALUE
+                                                                    ), EquipmentSlotGroup.MAINHAND
+                                                                )
+                                                                .add(
+                                                                    Attributes.ENTITY_INTERACTION_RANGE,
+                                                                    new AttributeModifier(
+                                                                        PastelEntityAttributes.REACH_MODIFIER_ID, reach,
+                                                                        AttributeModifier.Operation.ADD_VALUE
+                                                                    ), EquipmentSlotGroup.MAINHAND
+                                                                )
+                                                                .build())
+        );
+    }
 
-		if (!(user instanceof Player player))
-			return;
+    @Override
+    public void releaseUsing(ItemStack stack, Level world, LivingEntity user, int remainingUseTicks) {
+        super.releaseUsing(stack, world, user, remainingUseTicks);
+        var usedTime = getMaxShieldingTime(user, stack) - remainingUseTicks;
 
-		cooldownAndDamage(stack, player, usedTime);
-	}
+        if (!(user instanceof Player player))
+            return;
 
-	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
-		releaseUsing(stack, world, user, 0);
-		return stack;
-	}
+        cooldownAndDamage(stack, player, usedTime);
+    }
 
-	private void cooldownAndDamage(ItemStack stack, Player player, int usedTime) {
-		if (usedTime > 1) {
-			player.getCooldowns().addCooldown(this, Math.max(usedTime, 10));
-		}
-		stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
-	}
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
+        releaseUsing(stack, world, user, 0);
+        return stack;
+    }
 
-	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-		return ItemUtils.startUsingInstantly(world, user, hand);
-	}
+    private void cooldownAndDamage(ItemStack stack, Player player, int usedTime) {
+        if (usedTime > 1) {
+            player.getCooldowns()
+                  .addCooldown(this, Math.max(usedTime, 10));
+        }
+        stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
+    }
 
-	public abstract float getBlockingMultiplier(DamageSource source, ItemStack stack, LivingEntity entity, int usedTime);
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+        return ItemUtils.startUsingInstantly(world, user, hand);
+    }
 
-	public boolean canPerfectParry(ItemStack stack, LivingEntity entity, int usedTime) {
-		return usedTime <= getPerfectParryWindow(entity, stack);
-	}
+    public abstract float getBlockingMultiplier(
+        DamageSource source, ItemStack stack, LivingEntity entity, int usedTime);
 
-	public boolean canBluffParry(ItemStack stack, LivingEntity entity, int usedTime) {
-		return usedTime <= getPerfectParryWindow(entity, stack) * 2;
-	}
+    public boolean canPerfectParry(ItemStack stack, LivingEntity entity, int usedTime) {
+        return usedTime <= getPerfectParryWindow(entity, stack);
+    }
 
-	public boolean canDeflect(DamageSource source, boolean perfect) {
-		if (source.is(DamageTypeTags.NO_IMPACT) || source.is(DamageTypeTags.BYPASSES_ARMOR))
-			return false;
+    public boolean canBluffParry(ItemStack stack, LivingEntity entity, int usedTime) {
+        return usedTime <= getPerfectParryWindow(entity, stack) * 2;
+    }
 
-		if (source.is(DamageTypeTags.BYPASSES_SHIELD)) {
-			return perfect;
-		}
+    public boolean canDeflect(DamageSource source, boolean perfect) {
+        if (source.is(DamageTypeTags.NO_IMPACT) || source.is(DamageTypeTags.BYPASSES_ARMOR))
+            return false;
 
-		return true;
-	}
+        if (source.is(DamageTypeTags.BYPASSES_SHIELD)) {
+            return perfect;
+        }
 
-	@Override
-	public int getUseDuration(ItemStack stack, LivingEntity user) {
-		return DEFAULT_MAX_BLOCK_TIME;
-	}
+        return true;
+    }
 
-	public int getMaxShieldingTime(LivingEntity user, ItemStack stack) {
-		return getUseDuration(stack, user);
-	}
+    @Override
+    public int getUseDuration(ItemStack stack, LivingEntity user) {
+        return DEFAULT_MAX_BLOCK_TIME;
+    }
 
-	@SuppressWarnings("unused")
-	public int getPerfectParryWindow(LivingEntity user, ItemStack stack) {
-		return DEFAULT_PERFECT_PARRY_WINDOW;
-	}
+    public int getMaxShieldingTime(LivingEntity user, ItemStack stack) {
+        return getUseDuration(stack, user);
+    }
 
-	@Override
-	public UseAnim getUseAnimation(ItemStack stack) {
-		return UseAnim.BLOCK;
-	}
+    @SuppressWarnings("unused")
+    public int getPerfectParryWindow(LivingEntity user, ItemStack stack) {
+        return DEFAULT_PERFECT_PARRY_WINDOW;
+    }
 
-	@Override
-	public int barCount(ItemStack stack) {
-		return 1;
-	}
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BLOCK;
+    }
 
-	protected abstract int getBarColor();
+    @Override
+    public int barCount(ItemStack stack) {
+        return 1;
+    }
 
-	@Override
-	public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
-		if (player == null || !player.isUsingItem())
-			return ExtendedItemBarProvider.PASS;
+    protected abstract int getBarColor();
 
-		var activeStack = player.getItemInHand(player.getUsedItemHand());
-		if (activeStack != stack)
-			return ExtendedItemBarProvider.PASS;
+    @Override
+    public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
+        if (player == null || !player.isUsingItem())
+            return ExtendedItemBar.PASS;
+
+        var activeStack = player.getItemInHand(player.getUsedItemHand());
+        if (activeStack != stack)
+            return ExtendedItemBar.PASS;
 
 
-		var progress = Math.round(Mth.clampedLerp(13, 0, ((float) player.getTicksUsingItem() / getMaxShieldingTime(player, stack))));
-		return new BarSignature(2, 13, 13, progress, 1, getBarColor(), 2, ExtendedItemBarProvider.DEFAULT_BACKGROUND_COLOR);
-	}
+        var progress = Math.round(
+            Mth.clampedLerp(13, 0, ((float) player.getTicksUsingItem() / getMaxShieldingTime(player, stack))));
+        return new BarSignature(2, 13, 13, progress, 1, getBarColor(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
+    }
 
-	@Override
-	public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
-		return super.canPerformAction(stack, itemAbility) || itemAbility == ItemAbilities.SHIELD_BLOCK;
-	}
+    @Override
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+        return super.canPerformAction(stack, itemAbility) || itemAbility == ItemAbilities.SHIELD_BLOCK;
+    }
 }

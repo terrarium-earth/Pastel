@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import com.cmdpro.databank.DatabankUtils;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.items.magic_items.StructureCompassItem;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelStructureTags;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MysteriousCompassItem extends StructureCompassItem implements SlotBackgroundEffectProvider {
+public class MysteriousCompassItem extends StructureCompassItem implements SlotBackgroundEffect {
 
 	public MysteriousCompassItem(Properties settings) {
 		super(settings, PastelStructureTags.MYSTERIOUS_COMPASS_LOCATED);
@@ -21,7 +21,7 @@ public class MysteriousCompassItem extends StructureCompassItem implements SlotB
 	@Override
 	public void inventoryTick(@NotNull ItemStack stack, @NotNull Level world, Entity entity, int slot, boolean selected) {
 		if (!world.isClientSide && world.getGameTime() % 200 == 0 && entity instanceof Player player)
-			if (AdvancementHelper.hasAdvancement(player, PastelAdvancements.MYSTERIOUS_LOCKET_SOCKETING)) {
+			if (DatabankUtils.hasAdvancement(player, PastelAdvancements.MYSTERIOUS_LOCKET_SOCKETING)) {
 				locateStructure(stack, world, entity);
 			} else {
 				removeStructurePos(stack);

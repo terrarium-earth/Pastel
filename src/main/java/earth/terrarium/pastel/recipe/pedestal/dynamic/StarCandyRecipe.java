@@ -3,8 +3,8 @@ package earth.terrarium.pastel.recipe.pedestal.dynamic;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
-import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.recipe.pedestal.RawShapedPedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -28,7 +28,7 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
 	public static final float PURPLE_STAR_CANDY_CHANCE = 0.01F;
 	
 	public StarCandyRecipe() {
-		super("", false, Optional.of(UNLOCK_IDENTIFIER), PedestalRecipeTier.BASIC, new RawShapedPedestalRecipe(3, 3, generateInputs(), Optional.empty()), Map.of(BuiltinGemstoneColor.YELLOW, 1), PastelItems.STAR_CANDY.get().getDefaultInstance(), 1.0F, 20, false, false);
+		super("", false, Optional.of(UNLOCK_IDENTIFIER), PedestalTier.BASIC, new RawShapedPedestalRecipe(3, 3, generateInputs(), Optional.empty()), Map.of(PastelGemstoneColor.YELLOW, 1), PastelItems.STAR_CANDY.get().getDefaultInstance(), 1.0F, 20, false, false);
 	}
 	
 	@Override

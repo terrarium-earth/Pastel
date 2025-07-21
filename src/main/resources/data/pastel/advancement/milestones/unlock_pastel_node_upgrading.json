@@ -1,9 +1,9 @@
 {
   "criteria": {
     "reached_endgame": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_pure_resource"
+        "advancement": "pastel:lategame/collect_pure_resource"
       }
     }
   }

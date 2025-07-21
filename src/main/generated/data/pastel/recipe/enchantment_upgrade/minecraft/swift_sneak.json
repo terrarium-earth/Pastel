@@ -1,0 +1,36 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:swift_sneak"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:light_blue_pigment"
+  },
+  "enchantment": "minecraft:swift_sneak",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      8,
+      32,
+      128,
+      256
+    ]
+  },
+  "level_cap": 5,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_swift_sneak",
+  "xp_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      200,
+      600,
+      2000,
+      5000
+    ]
+  }
+}

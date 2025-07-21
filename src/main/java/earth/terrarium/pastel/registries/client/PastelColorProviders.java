@@ -24,13 +24,15 @@ import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.util.FastColor;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.client.event.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 import java.util.List;
 

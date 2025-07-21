@@ -14,35 +14,35 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class BlockToBlockWithChanceDisplay extends BasicDisplay implements GatedRecipeDisplay {
-	
-	public final float chance;
-	
-	public BlockToBlockWithChanceDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, float chance) {
-		super(inputs, outputs);
-		this.chance = chance;
-	}
-	
-	public static EntryStack<?> blockToEntryStack(Block block) {
-		if (block instanceof LiquidBlock inFluidBlock) {
-			return EntryStacks.of(((FluidBlockAccessor) inFluidBlock).getFlowableFluid());
-		} else {
-			return EntryStacks.of(block);
-		}
-		
-	}
-	
-	public final float getChance() {
-		return chance;
-	}
-	
-	@Override
-	public boolean isSecret() {
-		return false;
-	}
-	
-	@Override
-	public @Nullable Component getSecretHintText() {
-		return null;
-	}
-	
+
+    public final float chance;
+
+    public BlockToBlockWithChanceDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, float chance) {
+        super(inputs, outputs);
+        this.chance = chance;
+    }
+
+    public static EntryStack<?> blockToEntryStack(Block block) {
+        if (block instanceof LiquidBlock inFluidBlock) {
+            return EntryStacks.of(((FluidBlockAccessor) inFluidBlock).getFlowableFluid());
+        } else {
+            return EntryStacks.of(block);
+        }
+
+    }
+
+    public final float getChance() {
+        return chance;
+    }
+
+    @Override
+    public boolean isSecret() {
+        return false;
+    }
+
+    @Override
+    public @Nullable Component getSecretHintText() {
+        return null;
+    }
+
 }

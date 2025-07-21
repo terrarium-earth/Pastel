@@ -1,26 +1,21 @@
 package earth.terrarium.pastel.blocks.conditional;
 
 import com.mojang.serialization.MapCodec;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.blocks.FluidLogging;
-import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelFluids;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -38,18 +33,14 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.EntityCollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidLogging.PastelFluidLoggable {
+public class QuitoxicReedsBlock extends Block implements FluidLogging.PastelFluidLoggable {
 
 	public static final MapCodec<QuitoxicReedsBlock> CODEC = simpleCodec(QuitoxicReedsBlock::new);
 
@@ -68,35 +59,12 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 	public QuitoxicReedsBlock(Properties settings) {
 		super(settings);
 		this.registerDefaultState(this.stateDefinition.any().setValue(LOGGED, FluidLogging.State.NOT_LOGGED).setValue(ALWAYS_DROP, false).setValue(AGE, 0));
-		RevelationAware.register(this);
 	}
 
 	@Override
 	public MapCodec<? extends QuitoxicReedsBlock> codec() {
 		return CODEC;
 	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return PastelAdvancements.REVEAL_QUITOXIC_REEDS;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		for (int i = 0; i <= BlockStateProperties.MAX_AGE_7; i++) {
-			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.NOT_LOGGED).setValue(AGE, i), Blocks.AIR.defaultBlockState());
-			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.WATER).setValue(AGE, i), Blocks.WATER.defaultBlockState());
-			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL).setValue(AGE, i), PastelBlocks.LIQUID_CRYSTAL.get().defaultBlockState());
-		}
-		return map;
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.SUGAR_CANE.asItem());
-	}
-	
 	@Override
 	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		if (!state.canSurvive(world, pos)) {
@@ -243,18 +211,8 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		if (context instanceof EntityCollisionContext entityShapeContext) {
-			Entity contextEntity = entityShapeContext.getEntity();
-			if (contextEntity instanceof Player player) {
-				if (this.isVisibleTo(player)) {
-					Vec3 vec3d = state.getOffset(world, pos);
-					return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
-				} else {
-					return Shapes.empty();
-				}
-			}
-		}
-		return Shapes.block(); // like breaking particles
+		Vec3 vec3d = state.getOffset(world, pos);
+		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}
 	
 	@Override

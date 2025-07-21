@@ -1,15 +1,15 @@
 {
   "criteria": {
     "unlocked_glass_crest_tools": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/malachite/glass_crest_tools"
+        "advancement": "pastel:unlocks/malachite/glass_crest_tools"
       }
     },
     "collected_star_fragment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_star_fragment"
+        "advancement": "pastel:collect_star_fragment"
       }
     }
   }

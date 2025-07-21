@@ -15,40 +15,53 @@ public class EnvironmentalOverrides {
 
     public static void init() {
         EnvironmentalOverride.register(
-                new EnvironmentalOverride(has(PastelMobEffects.SOMNOLENCE),
-                        new EnvironmentalOverride.ColorData(ColorHelper.colorIntToVec(PastelMobEffects.ETERNAL_SLUMBER_COLOR), 0.575F),
-                        new EnvironmentalData(-0.25F, 2F, 0.125F, 0.25F),
-                        0)
+            new EnvironmentalOverride(
+                has(PastelMobEffects.SOMNOLENCE),
+                new EnvironmentalOverride.ColorData(
+                    ColorHelper.colorIntToVec(PastelMobEffects.ETERNAL_SLUMBER_COLOR), 0.575F),
+                new EnvironmentalData(-0.25F, 2F, 0.125F, 0.25F),
+                0
+            )
         );
 
         EnvironmentalOverride.register(
-                new EnvironmentalOverride(has(PastelMobEffects.ETERNAL_SLUMBER),
-                        new EnvironmentalOverride.ColorData(ColorHelper.colorIntToVec(PastelMobEffects.ETERNAL_SLUMBER_COLOR), 0.65F),
-                        new EnvironmentalData(NOOP.darkening(), NOOP.brightMult(), -1.0F, -0.334F),
-                        2)
+            new EnvironmentalOverride(
+                has(PastelMobEffects.ETERNAL_SLUMBER),
+                new EnvironmentalOverride.ColorData(
+                    ColorHelper.colorIntToVec(PastelMobEffects.ETERNAL_SLUMBER_COLOR), 0.65F),
+                new EnvironmentalData(NOOP.darkening(), NOOP.brightMult(), -1.0F, -0.334F),
+                2
+            )
         );
 
         EnvironmentalOverride.register(
-                new EnvironmentalOverride(has(PastelMobEffects.FATAL_SLUMBER),
-                        new EnvironmentalOverride.ColorData(ColorHelper.colorIntToVec(0x8136c2), 0.65F),
-                        new EnvironmentalData(0.5F, -0.5F, -6F, -0.5F),
-                        10)
+            new EnvironmentalOverride(
+                has(PastelMobEffects.FATAL_SLUMBER),
+                new EnvironmentalOverride.ColorData(ColorHelper.colorIntToVec(0x8136c2), 0.65F),
+                new EnvironmentalData(0.5F, -0.5F, -6F, -0.5F),
+                10
+            )
         );
 
         EnvironmentalOverride.register(
-                new EnvironmentalOverride(has(PastelMobEffects.FRENZY),
-                        new EnvironmentalOverride.ColorData(ColorHelper.colorIntToVec(0xdf420d), 0.1F),
-                        new EnvironmentalData(0.1F, -0.1F, NOOP.fogNear(), NOOP.fogFar()),
-                        1)
+            new EnvironmentalOverride(
+                has(PastelMobEffects.FRENZY),
+                new EnvironmentalOverride.ColorData(ColorHelper.colorIntToVec(0xdf420d), 0.1F),
+                new EnvironmentalData(0.1F, -0.1F, NOOP.fogNear(), NOOP.fogFar()),
+                1
+            )
         );
 
         EnvironmentalOverride.register(
-                new EnvironmentalOverride(entity -> entity instanceof LivingEntity l &&
-                        l.hasEffect(PastelMobEffects.FRENZY) &&
-                        (l.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || l.hasEffect(PastelMobEffects.FATAL_SLUMBER)),
-                        new EnvironmentalOverride.ColorData(ColorHelper.colorIntToVec(0xdf2449), 0.55F),
-                        new EnvironmentalData(0.25F, -0.25F, -2.0F, -0.334F),
-                        11)
+            new EnvironmentalOverride(
+                entity -> entity instanceof LivingEntity l &&
+                          l.hasEffect(PastelMobEffects.FRENZY) &&
+                          (l.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || l.hasEffect(
+                              PastelMobEffects.FATAL_SLUMBER)),
+                new EnvironmentalOverride.ColorData(ColorHelper.colorIntToVec(0xdf2449), 0.55F),
+                new EnvironmentalData(0.25F, -0.25F, -2.0F, -0.334F),
+                11
+            )
         );
     }
 

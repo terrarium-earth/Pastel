@@ -1,9 +1,9 @@
 {
   "criteria": {
     "unlocked_star_candy": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/food/star_candy"
+        "advancement": "pastel:unlocks/food/star_candy"
       }
     },
     "collected_enchanted_star_candy": {

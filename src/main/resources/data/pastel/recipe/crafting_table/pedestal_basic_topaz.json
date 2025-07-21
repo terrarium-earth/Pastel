@@ -3,7 +3,7 @@
   "pattern": [
     "SSS",
     "WTW",
-    "CRC"
+    "WTW"
   ],
   "key": {
     "S": [
@@ -11,19 +11,9 @@
         "item": "pastel:topaz_shard"
       }
     ],
-    "C": [
-      {
-        "item": "pastel:polished_calcite"
-      }
-    ],
     "W": [
       {
-        "item": "pastel:polished_basalt"
-      }
-    ],
-    "R": [
-      {
-        "item": "minecraft:redstone"
+        "item": "minecraft:tuff"
       }
     ],
     "T": [

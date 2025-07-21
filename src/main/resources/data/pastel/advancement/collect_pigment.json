@@ -23,9 +23,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:craft_colored_sapling"
+        "advancement": "pastel:craft_colored_sapling"
       }
     }
   }

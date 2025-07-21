@@ -2,15 +2,12 @@ package earth.terrarium.pastel.items;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.items.conditional.CloakedItem;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Tuple;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
@@ -18,11 +15,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MidnightAberrationItem extends CloakedItem {
+public class MidnightAberrationItem extends Item {
 	
 	private static final ResourceLocation MIDNIGHT_ABERRATION_CRUMBLING_ADVANCEMENT_ID = PastelCommon.locate("midgame/crumble_midnight_aberration");
 	private static final String MIDNIGHT_ABERRATION_CRUMBLING_ADVANCEMENT_CRITERION = "have_midnight_aberration_crumble";
@@ -32,8 +28,8 @@ public class MidnightAberrationItem extends CloakedItem {
 	private static final int CRUMBLING_GRACE_PERIOD_TICKS = 40;
 	private static final String FIRST_INVENTORY_TICK_NBT = "first_inventory_tick";
 	
-	public MidnightAberrationItem(Item.Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
-		super(settings, cloakAdvancementIdentifier, cloakItem);
+	public MidnightAberrationItem(Item.Properties settings) {
+		super(settings);
 	}
 	
 	@Override
@@ -82,11 +78,6 @@ public class MidnightAberrationItem extends CloakedItem {
 		ItemStack stack = getDefaultInstance();
 		stack.set(PastelDataComponentTypes.STABLE, Unit.INSTANCE);
 		return stack;
-	}
-	
-	@Override
-	public @Nullable Tuple<Item, MutableComponent> getCloakedItemTranslation() {
-		return new Tuple<>(this, Component.translatable("item.pastel.midnight_aberration.cloaked"));
 	}
 	
 }

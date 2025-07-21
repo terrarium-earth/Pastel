@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.compat.modonomicon.client.pages;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.klikli_dev.modonomicon.book.BookTextHolder;
 import com.klikli_dev.modonomicon.book.RenderedBookTextHolder;
 import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.client.render.page.BookPageRenderer;
 import com.klikli_dev.modonomicon.client.render.page.PageWithTextRenderer;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookHintPage;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
@@ -80,7 +80,7 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
 
         obfuscatedText = null;
         
-        boolean isDone = AdvancementHelper.hasAdvancement(Minecraft.getInstance().player, page.getCompletionAdvancement());
+        boolean isDone = DatabankUtils.hasAdvancement(Minecraft.getInstance().player, page.getCompletionAdvancement());
         if (!isDone) {
             revealProgress = -1;
 			

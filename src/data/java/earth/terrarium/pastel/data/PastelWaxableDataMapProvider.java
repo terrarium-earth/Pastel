@@ -10,13 +10,15 @@ import java.util.concurrent.*;
 
 public class PastelWaxableDataMapProvider extends DataMapProvider {
 
-    protected PastelWaxableDataMapProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+    protected PastelWaxableDataMapProvider(
+        PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(packOutput, lookupProvider);
     }
 
     @Override
     protected void gather(HolderLookup.Provider provider) {
-        builder(NeoForgeDataMaps.WAXABLES).add(PastelBlocks.HUMMINGSTONE, new Waxable(PastelBlocks.WAXED_HUMMINGSTONE.get()), false);
+        builder(NeoForgeDataMaps.WAXABLES).add(
+            PastelBlocks.HUMMINGSTONE, new Waxable(PastelBlocks.WAXED_HUMMINGSTONE.get()), false);
     }
 
     @Override

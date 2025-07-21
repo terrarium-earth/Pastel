@@ -21,43 +21,49 @@ import java.util.List;
 
 public class GrotesqueBlock extends HorizontalDirectionalBlock {
 
-	private final VoxelShape shape;
-	protected final Component tooltipText;
+    private final VoxelShape shape;
+    protected final Component tooltipText;
 
 
-	public GrotesqueBlock(Properties settings, double width, double height, String tooltipKey) {
-		super(settings);
-		tooltipText = Component.translatable(tooltipKey).withStyle(ChatFormatting.GRAY);
-		var min = (16 - width) / 2;
-		var max = width + min;
-		shape = Block.box(min, 0, min, max, height, max);
-	}
+    public GrotesqueBlock(Properties settings, double width, double height, String tooltipKey) {
+        super(settings);
+        tooltipText = Component.translatable(tooltipKey)
+                               .withStyle(ChatFormatting.GRAY);
+        var min = (16 - width) / 2;
+        var max = width + min;
+        shape = Block.box(min, 0, min, max, height, max);
+    }
 
-	@Override
-	public MapCodec<? extends GrotesqueBlock> codec() {
-		//TODO: Make the codec
-		return null;
-	}
+    @Override
+    public MapCodec<? extends GrotesqueBlock> codec() {
+        //TODO: Make the codec
+        return null;
+    }
 
-	@Nullable
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-		return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
-	}
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState()
+                   .setValue(
+                       FACING, ctx.getHorizontalDirection()
+                                  .getOpposite()
+                   );
+    }
 
-	@Override
-	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(tooltipText);
-	}
+    @Override
+    public void appendHoverText(
+        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        tooltip.add(tooltipText);
+    }
 
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return shape;
-	}
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return shape;
+    }
 
-	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING);
-	}
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+    }
 }

@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import earth.terrarium.pastel.progression.toast.MessageToast;
 import earth.terrarium.pastel.progression.toast.UnlockedRecipeToast;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -110,7 +110,7 @@ public class UnlockToastManager {
 				}
 			}
 			
-			Optional<PedestalRecipeTier> newlyUnlockedRecipeTier = PedestalRecipeTier.hasJustUnlockedANewRecipeTier(doneAdvancement);
+			Optional<PedestalTier> newlyUnlockedRecipeTier = PedestalTier.hasJustUnlockedANewRecipeTier(doneAdvancement);
 			if (newlyUnlockedRecipeTier.isPresent()) {
 				List<GatedRecipe<?>> unlockedPedestalRecipes;
 				if (unlockedRecipesByType.containsKey(PastelRecipeTypes.PEDESTAL)) {
@@ -216,7 +216,7 @@ public class UnlockToastManager {
 	 *
 	 * @param pedestalRecipeTier The new pedestal recipe tier the player unlocked
 	 */
-	private static @NotNull List<PedestalRecipe> getRecipesForTierWithAllConditionsMet(PedestalRecipeTier pedestalRecipeTier, List<GatedRecipe<?>> pedestalRecipes) {
+	private static @NotNull List<PedestalRecipe> getRecipesForTierWithAllConditionsMet(PedestalTier pedestalRecipeTier, List<GatedRecipe<?>> pedestalRecipes) {
 		Minecraft client = Minecraft.getInstance();
 		Player player = client.player;
 		

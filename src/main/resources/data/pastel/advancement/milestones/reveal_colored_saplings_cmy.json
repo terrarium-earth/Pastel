@@ -1,9 +1,9 @@
 {
   "criteria": {
     "collected_vegetal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_vegetal"
+        "advancement": "pastel:collect_vegetal"
       }
     }
   }

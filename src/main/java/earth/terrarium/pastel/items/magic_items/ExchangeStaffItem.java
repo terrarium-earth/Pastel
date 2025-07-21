@@ -3,16 +3,14 @@ package earth.terrarium.pastel.items.magic_items;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.helpers.level.BuildingHelper;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
+import earth.terrarium.pastel.helpers.level.BuildingHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -41,6 +39,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import oshi.util.tuples.Triplet;
 
@@ -66,7 +66,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 		if (playerEntity == null || playerEntity.isCreative()) {
 			return CREATIVE_RANGE;
 		} else {
-			Optional<PedestalRecipeTier> highestUnlockedRecipeTier = PedestalRecipeTier.getHighestUnlockedRecipeTier(playerEntity);
+			Optional<PedestalTier> highestUnlockedRecipeTier = PedestalTier.getHighestUnlockedRecipeTier(playerEntity);
 			if (highestUnlockedRecipeTier.isPresent()) {
 				switch (highestUnlockedRecipeTier.get()) {
 					case COMPLEX -> {

@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collect_rock_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_rock_crystal"
+        "advancement": "pastel:hidden/collect_rock_crystal"
       }
     },
     "find_razor_edge": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/razor_edge"
+        "advancement": "pastel:hidden/visit_dd_biomes/razor_edge"
       }
     }
   },

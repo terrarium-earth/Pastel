@@ -32,6 +32,6 @@ public class InterpMemory<T> {
     }
 
     public boolean ready() {
-        return current!=null && last!=null;
+        return current != null && last != null;
     }
 }

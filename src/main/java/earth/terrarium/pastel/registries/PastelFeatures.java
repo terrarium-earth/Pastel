@@ -30,18 +30,19 @@ import earth.terrarium.pastel.worldgen.features.WallPatchFeature;
 import earth.terrarium.pastel.worldgen.features.WallPatchFeatureConfig;
 import earth.terrarium.pastel.worldgen.features.WeightedRandomFeature;
 import earth.terrarium.pastel.worldgen.features.WeightedRandomFeatureConfig;
-import net.minecraft.core.registries.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FossilFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelFeatures {
 
-	private static final DeferredRegister<Feature<?>> REGISTER = DeferredRegister.create(Registries.FEATURE, PastelCommon.MOD_ID);
+    private static final DeferredRegister<Feature<?>> REGISTER = DeferredRegister.create(
+        Registries.FEATURE, PastelCommon.MOD_ID);
 
 	public static Feature<WeightedRandomFeatureConfig> WEIGHTED_RANDOM_FEATURE = new WeightedRandomFeature(WeightedRandomFeatureConfig.CODEC);
 	public static Feature<GeodeConfiguration> AIR_CHECK_GEODE = new SolidBlockCheckGeodeFeature(GeodeConfiguration.CODEC);

@@ -5,26 +5,26 @@ import earth.terrarium.pastel.registries.PastelItems;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.network.chat.Component;
 
 @OnlyIn(Dist.CLIENT)
 public class DragonrotConvertingCategory extends FluidConvertingCategory<DragonrotConvertingDisplay> {
-	
-	@Override
-	public CategoryIdentifier<? extends FluidConvertingDisplay> getCategoryIdentifier() {
-		return PastelPlugins.DRAGONROT_CONVERTING;
-	}
-	
-	@Override
-	public Renderer getIcon() {
-		return EntryStacks.of(PastelItems.DRAGONROT_BUCKET.get());
-	}
-	
-	@Override
-	public Component getTitle() {
-		return Component.translatable("container.pastel.rei.dragonrot_converting.title");
-	}
-	
+
+    @Override
+    public CategoryIdentifier<? extends FluidConvertingDisplay> getCategoryIdentifier() {
+        return PastelPlugins.DRAGONROT_CONVERTING;
+    }
+
+    @Override
+    public Renderer getIcon() {
+        return EntryStacks.of(PastelItems.DRAGONROT_BUCKET.get());
+    }
+
+    @Override
+    public Component getTitle() {
+        return Component.translatable("container.pastel.rei.dragonrot_converting.title");
+    }
+
 }

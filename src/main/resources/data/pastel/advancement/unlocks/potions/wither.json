@@ -1,15 +1,15 @@
 {
   "criteria": {
     "crafted_potion_in_potion_brewery": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/brew_potion_in_potion_workshop"
+        "advancement": "pastel:midgame/brew_potion_in_potion_workshop"
       }
     },
     "collected_midnight_chip": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_midnight_chip"
+        "advancement": "pastel:midgame/collect_midnight_chip"
       }
     }
   }

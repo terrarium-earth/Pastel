@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.events;
 
-import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.items.trinkets.AetherGracedNectarGlovesItem;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
@@ -27,7 +27,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static earth.terrarium.pastel.registries.PastelMobEffects.*;
+import static earth.terrarium.pastel.registries.PastelMobEffects.CALMING;
+import static earth.terrarium.pastel.registries.PastelMobEffects.Cures;
+import static earth.terrarium.pastel.registries.PastelMobEffects.ETERNAL_SLUMBER;
+import static earth.terrarium.pastel.registries.PastelMobEffects.FATAL_SLUMBER;
+import static earth.terrarium.pastel.registries.PastelMobEffects.IMMUNITY;
+import static earth.terrarium.pastel.registries.PastelMobEffects.SOMNOLENCE;
+import static earth.terrarium.pastel.registries.PastelMobEffects.cutDuration;
 
 public class PastelEffectEvents {
 
@@ -46,7 +52,8 @@ public class PastelEffectEvents {
         var level = entity.level();
         var player = entity instanceof Player;
 
-        if (event.getEffectInstance() == null || !effect.getEffect().equals(FATAL_SLUMBER) || level.isClientSide())
+        if (event.getEffectInstance() == null || !effect.getEffect()
+                                                        .equals(FATAL_SLUMBER) || level.isClientSide())
             return;
 
         if (entity.isSpectator() || player && ((Player) entity).isCreative())
@@ -54,7 +61,8 @@ public class PastelEffectEvents {
 
         var damage = 777777777F;
         if (SleepStatusEffect.isResistedBy(entity)) {
-            if (entity.getType().is(Tags.EntityTypes.BOSSES))
+            if (entity.getType()
+                      .is(Tags.EntityTypes.BOSSES))
                 damage = entity.getHealth() * 0.34F;
             else
                 damage = entity.getHealth() * 0.95F;
@@ -83,25 +91,33 @@ public class PastelEffectEvents {
     }
 
     static final Map<UUID, List<MobEffectInstance>> QUEUED_ADDITIONS = new HashMap<>();
+
     private static void convertSleepEffects(MobEffectEvent.Remove event) {
         var removed = event.getEffectInstance();
-        var id = event.getEntity().getUUID();
+        var id = event.getEntity()
+                      .getUUID();
 
         if (removed == null)
             return;
 
-        if (removed.getEffect().equals(FATAL_SLUMBER)) {
-            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelMobEffects.ETERNAL_SLUMBER, 6000));
+        if (removed.getEffect()
+                   .equals(FATAL_SLUMBER)) {
+            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>())
+                            .add(new MobEffectInstance(PastelMobEffects.ETERNAL_SLUMBER, 6000));
             return;
         }
 
         if (!Cures.SEDATIVES.equals(event.getCure()))
             return;
 
-        if(removed.getEffect().equals(SOMNOLENCE)) {
-            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelMobEffects.ETERNAL_SLUMBER, removed.getDuration()));
-        } else if(removed.getEffect().equals(CALMING)) {
-            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(SOMNOLENCE, removed.getDuration()));
+        if (removed.getEffect()
+                   .equals(SOMNOLENCE)) {
+            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>())
+                            .add(new MobEffectInstance(PastelMobEffects.ETERNAL_SLUMBER, removed.getDuration()));
+        } else if (removed.getEffect()
+                          .equals(CALMING)) {
+            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>())
+                            .add(new MobEffectInstance(SOMNOLENCE, removed.getDuration()));
         } // Miniscule amount of trolling
     }
 
@@ -114,7 +130,8 @@ public class PastelEffectEvents {
 
         var immunity = entity.getEffect(IMMUNITY);
 
-        if (immunity == null || proposal.getEffect().is(PastelMobEffectTags.BYPASSES_IMMUNITY))
+        if (immunity == null || proposal.getEffect()
+                                        .is(PastelMobEffectTags.BYPASSES_IMMUNITY))
             return;
 
         if (!MobEffectHelper.resistsRemoval(proposal)) {
@@ -154,12 +171,16 @@ public class PastelEffectEvents {
         var sleepResist = Mth.clamp(SleepStatusEffect.getSleepResistance(effect, entity), 0.1F, 10F);
         boolean actioned = false;
 
-        if (effect.getEffect().equals(ETERNAL_SLUMBER)) {
+        if (effect.getEffect()
+                  .equals(ETERNAL_SLUMBER)) {
             sleepEternal(resistant, modifiable, effect, sleepResist);
             actioned = true;
-        }
-        else if (effect.getEffect().equals(FATAL_SLUMBER)) {
-            sleepFatal(resistant && entity.getType().is(Tags.EntityTypes.BOSSES), modifiable, effect, sleepResist);
+        } else if (effect.getEffect()
+                         .equals(FATAL_SLUMBER)) {
+            sleepFatal(
+                resistant && entity.getType()
+                                   .is(Tags.EntityTypes.BOSSES), modifiable, effect, sleepResist
+            );
             actioned = true;
         }
 
@@ -167,16 +188,17 @@ public class PastelEffectEvents {
             updateEffectInClient(entity, effect);
     }
 
-    private static void sleepEternal(boolean resistant, MobEffectInstanceInjector modifiable, MobEffectInstance effect, float sleepResist) {
+    private static void sleepEternal(
+        boolean resistant, MobEffectInstanceInjector modifiable, MobEffectInstance effect, float sleepResist) {
         if (resistant) {
             modifiable.setDuration(Math.round(effect.getDuration() / sleepResist));
-        }
-        else {
+        } else {
             modifiable.setDuration(MobEffectInstance.INFINITE_DURATION);
         }
     }
 
-    private static void sleepFatal(boolean applicableBoss, MobEffectInstanceInjector modifiable, MobEffectInstance effect, float sleepResist) {
+    private static void sleepFatal(
+        boolean applicableBoss, MobEffectInstanceInjector modifiable, MobEffectInstance effect, float sleepResist) {
         if (applicableBoss) {
             modifiable.setDuration(120 * 20);
         } // Two minutes
@@ -186,8 +208,15 @@ public class PastelEffectEvents {
     }
 
     private static void updateEffectInClient(LivingEntity entity, MobEffectInstance effect) {
-        if (!entity.level().isClientSide()) {
-            ((ServerLevel) entity.level()).getChunkSource().broadcastAndSend(entity, new ClientboundUpdateMobEffectPacket(entity.getId(), effect, false));
+        if (!entity.level()
+                   .isClientSide()) {
+            ((ServerLevel) entity.level()).getChunkSource()
+                                          .broadcastAndSend(
+                                              entity, new ClientboundUpdateMobEffectPacket(
+                                                  entity.getId(), effect,
+                                                  false
+                                              )
+                                          );
         }
     }
 }

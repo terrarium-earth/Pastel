@@ -2,8 +2,6 @@ package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.entity.entity.MagicProjectileEntity;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -12,6 +10,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Objects;
 
@@ -43,52 +43,63 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
     }
 
     @OnlyIn(Dist.CLIENT)
-	public static void startSoundInstance(MagicProjectileEntity projectile) {
-		Minecraft client = Minecraft.getInstance();
-		MagicProjectileSoundInstance newInstance = new MagicProjectileSoundInstance(client.level.dimension(), projectile);
-        Minecraft.getInstance().getSoundManager().play(newInstance);
+    public static void startSoundInstance(MagicProjectileEntity projectile) {
+        Minecraft client = Minecraft.getInstance();
+        MagicProjectileSoundInstance newInstance = new MagicProjectileSoundInstance(
+            client.level.dimension(), projectile);
+        Minecraft.getInstance()
+                 .getSoundManager()
+                 .play(newInstance);
     }
-	
-	@Override
-	public boolean isStopped() {
-		return this.done;
-	}
-	
-	@Override
-	public boolean canStartSilent() {
-		return true;
-	}
-	
-	@Override
-	public void tick() {
-		Minecraft client = Minecraft.getInstance();
+
+    @Override
+    public boolean isStopped() {
+        return this.done;
+    }
+
+    @Override
+    public boolean canStartSilent() {
+        return true;
+    }
+
+    @Override
+    public void tick() {
+        Minecraft client = Minecraft.getInstance();
         this.ticksPlayed++;
 
         this.x = this.projectile.getX();
         this.y = this.projectile.getY();
         this.z = this.projectile.getZ();
 
-        this.volume = Math.max(0.0F, 0.7F - Math.max(0.0F, projectile.blockPosition().distManhattan(client.player.blockPosition()) / 128F - 0.2F));
+        this.volume = Math.max(
+            0.0F, 0.7F - Math.max(
+                0.0F, projectile.blockPosition()
+                                .distManhattan(client.player.blockPosition()) / 128F - 0.2F
+            )
+        );
 
         if (ticksPlayed > maxDurationTicks
-                || !Objects.equals(this.worldKey, Minecraft.getInstance().level.dimension())
-                || projectile.isRemoved()) {
+            || !Objects.equals(this.worldKey, Minecraft.getInstance().level.dimension())
+            || projectile.isRemoved()) {
 
             this.setDone();
         }
     }
-	
-	protected final void setDone() {
-		Minecraft client = Minecraft.getInstance();
-		this.ticksPlayed = this.maxDurationTicks;
-		this.done = true;
-		this.looping = false;
 
-		if (projectile.isRemoved() && !playedExplosion) {
-			client.player.playNotifySound(SoundEvents.GENERIC_EXPLODE.value(), SoundSource.NEUTRAL, Math.max(0.1F, this.volume / 4), 1.1F + client.level.random.nextFloat() * 0.2F);
-			projectile.spawnImpactParticles();
-			playedExplosion = true;
-		}
-	}
+    protected final void setDone() {
+        Minecraft client = Minecraft.getInstance();
+        this.ticksPlayed = this.maxDurationTicks;
+        this.done = true;
+        this.looping = false;
+
+        if (projectile.isRemoved() && !playedExplosion) {
+            client.player.playNotifySound(
+                SoundEvents.GENERIC_EXPLODE.value(), SoundSource.NEUTRAL, Math.max(0.1F, this.volume / 4),
+                1.1F + client.level.random.nextFloat() * 0.2F
+            );
+            projectile.spawnImpactParticles();
+            playedExplosion = true;
+        }
+    }
 
 }

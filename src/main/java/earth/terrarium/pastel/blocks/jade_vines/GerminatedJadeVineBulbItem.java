@@ -1,11 +1,9 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
-import earth.terrarium.pastel.items.conditional.CloakedItem;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -21,10 +19,10 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 import java.util.List;
 
-public class GerminatedJadeVineBulbItem extends CloakedItem {
+public class GerminatedJadeVineBulbItem extends Item {
 	
-	public GerminatedJadeVineBulbItem(Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
-		super(settings, cloakAdvancementIdentifier, cloakItem);
+	public GerminatedJadeVineBulbItem(Properties settings) {
+		super(settings);
 	}
 	
 	@Override

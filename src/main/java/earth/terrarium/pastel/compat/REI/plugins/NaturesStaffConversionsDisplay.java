@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.REI.GatedRecipeDisplay;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.registries.PastelAdvancements;
@@ -32,8 +32,8 @@ public class NaturesStaffConversionsDisplay extends BasicDisplay implements Gate
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, this.requiredAdvancementIdentifier)
-				&& AdvancementHelper.hasAdvancement(client.player, PastelAdvancements.UNLOCK_NATURES_STAFF);
+		return DatabankUtils.hasAdvancement(client.player, this.requiredAdvancementIdentifier)
+				&& DatabankUtils.hasAdvancement(client.player, PastelAdvancements.UNLOCK_NATURES_STAFF);
 	}
 	
 	@Override

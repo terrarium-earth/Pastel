@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.item.SleepAlteringItem;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelMobEffects;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class SoothingBouquetItem extends Item implements SleepAlteringItem, SlotBackgroundEffectProvider {
+public class SoothingBouquetItem extends Item implements SleepAlteringItem, SlotBackgroundEffect {
 
     private static final MutableComponent TOOLTIP = Component.translatable("item.pastel.soothing_bouquet.tooltip");
 
@@ -46,12 +46,14 @@ public class SoothingBouquetItem extends Item implements SleepAlteringItem, Slot
 
             component.setSleepTimers(50, 20 * 6, 0);
             component.setLastSleepItem(this);
-			
-			player.addEffect(new MobEffectInstance(PastelMobEffects.CALMING, 20 * 10, 4)); // TODO: this should probably be a food component, so it shows up as tooltip
+
+            player.addEffect(new MobEffectInstance(
+                PastelMobEffects.CALMING, 20 * 10,
+                4
+            )); // TODO: this should probably be a food component, so it shows up as tooltip
             player.addEffect(new MobEffectInstance(PastelMobEffects.SOMNOLENCE, 20 * 10, 4));
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 50, 3));
-        }
-        else {
+        } else {
             user.addEffect(new MobEffectInstance(PastelMobEffects.SOMNOLENCE, 20 * 15, 2));
             user.startSleeping(user.blockPosition());
         }

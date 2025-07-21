@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:orange_dye",
+    "original": "pastel:incandescent_essence"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:midgame/pastel_midgame"
+  }
+}

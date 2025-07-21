@@ -9,7 +9,7 @@ import java.util.Map;
 
 // TODO: migrate to net.minecraft.world.tick ?
 public class SchedulerMap<K> implements Iterable<Map.Entry<K, Integer>> {
-	
+
     private final Map<K, Integer> map;
 
     public SchedulerMap() {
@@ -50,7 +50,8 @@ public class SchedulerMap<K> implements Iterable<Map.Entry<K, Integer>> {
 
     public void tick() {
         if (!map.isEmpty()) {
-            Iterator<Map.Entry<K, Integer>> iterator = map.entrySet().iterator();
+            Iterator<Map.Entry<K, Integer>> iterator = map.entrySet()
+                                                          .iterator();
             while (iterator.hasNext()) {
                 Map.Entry<K, Integer> next = iterator.next();
                 K key = next.getKey();
@@ -72,22 +73,29 @@ public class SchedulerMap<K> implements Iterable<Map.Entry<K, Integer>> {
 
     @Override
     public Iterator<Map.Entry<K, Integer>> iterator() {
-        return map.entrySet().iterator();
+        return map.entrySet()
+                  .iterator();
     }
 
     public static <K> Codec<SchedulerMap<K>> getCodec(Codec<Pair<K, Integer>> entryCodec) {
-		return Codec.list(entryCodec).xmap(list -> {
-			var map = new HashMap<K, Integer>();
-			list.forEach(p -> map.put(p.getFirst(), p.getSecond()));
-			return new SchedulerMap<>(map);
-		}, m -> m.map.entrySet().stream().map(e -> new Pair<>(e.getKey(), e.getValue())).toList());
+        return Codec.list(entryCodec)
+                    .xmap(
+                        list -> {
+                            var map = new HashMap<K, Integer>();
+                            list.forEach(p -> map.put(p.getFirst(), p.getSecond()));
+                            return new SchedulerMap<>(map);
+                        }, m -> m.map.entrySet()
+                                     .stream()
+                                     .map(e -> new Pair<>(e.getKey(), e.getValue()))
+                                     .toList()
+                    );
     }
-	
-	public Map<K, Integer> getMap() {
-		return map;
-	}
-	
-	public interface Callback {
+
+    public Map<K, Integer> getMap() {
+        return map;
+    }
+
+    public interface Callback {
         void trigger();
     }
 

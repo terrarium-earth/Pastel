@@ -1,27 +1,27 @@
 {
   "criteria": {
     "unlocked_liquid_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+        "advancement": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "unlocked_advanced_crafting": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_advanced_pedestal_structure"
+        "advancement": "pastel:midgame/build_advanced_pedestal_structure"
       }
     },
     "collected_four_leaf_clover": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_four_leaf_clover"
+        "advancement": "pastel:collect_four_leaf_clover"
       }
     },
     "collected_phantom_membrane": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/phantom_membrane"
+        "advancement": "pastel:hidden/collect_vanilla/phantom_membrane"
       }
     }
   }

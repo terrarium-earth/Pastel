@@ -44,9 +44,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/create_pastel_network"
+        "advancement": "pastel:midgame/create_pastel_network"
       }
     }
   }

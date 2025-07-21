@@ -1,33 +1,33 @@
 {
   "criteria": {
     "unlocked_liquid_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+        "advancement": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "collected_blood_orchid_petal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_blood_orchid_petal"
+        "advancement": "pastel:midgame/collect_blood_orchid_petal"
       }
     },
     "had_half_a_heart_with_divinity": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/have_half_a_heart_with_divinity"
+        "advancement": "pastel:midgame/have_half_a_heart_with_divinity"
       }
     },
     "collected_moonstone_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_moonstone"
+        "advancement": "pastel:lategame/collect_moonstone"
       }
     },
     "grew_malachite_in_crystallarieum": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/grow_malachite_in_crystallarieum"
+        "advancement": "pastel:lategame/grow_malachite_in_crystallarieum"
       }
     }
   }

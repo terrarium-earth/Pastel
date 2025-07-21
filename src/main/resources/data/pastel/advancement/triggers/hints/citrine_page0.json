@@ -4,9 +4,9 @@
       "trigger": "minecraft:impossible"
     },
     "advancement_gotten": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/citrine"
+        "advancement": "pastel:hidden/collect_shards/citrine"
       }
     }
   },

@@ -23,9 +23,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:pluck_resplendent_feather"
+        "advancement": "pastel:pluck_resplendent_feather"
       }
     }
   }

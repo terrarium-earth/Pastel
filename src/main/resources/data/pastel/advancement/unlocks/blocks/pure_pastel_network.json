@@ -1,9 +1,9 @@
 {
   "criteria": {
     "created_pure_azurite": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/grow_azurite_in_crystallarieum"
+        "advancement": "pastel:midgame/grow_azurite_in_crystallarieum"
       }
     }
   }

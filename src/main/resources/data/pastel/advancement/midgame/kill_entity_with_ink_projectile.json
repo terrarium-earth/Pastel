@@ -19,9 +19,9 @@
       "trigger": "pastel:ink_projectile_killing"
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/fill_ink_container"
+        "advancement": "pastel:midgame/fill_ink_container"
       }
     }
   }

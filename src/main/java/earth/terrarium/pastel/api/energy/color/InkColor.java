@@ -21,11 +21,12 @@ import java.util.Map;
 import java.util.Optional;
 
 public class InkColor {
-	
-	public static final Codec<InkColor> CODEC = CodecHelper.SPECTRUM_DEFAULTED_IDENTIFIER.comapFlatMap(
-			id -> ofId(id).map(DataResult::success).orElse(DataResult.error(() -> "Not a valid ink color: " + id)),
-			InkColor::getID
-	);
+
+    public static final Codec<InkColor> CODEC = CodecHelper.SPECTRUM_DEFAULTED_IDENTIFIER.comapFlatMap(
+        id -> ofId(id).map(DataResult::success)
+                      .orElse(DataResult.error(() -> "Not a valid ink color: " + id)),
+        InkColor::getID
+    );
 
 	public static final StreamCodec<ByteBuf, InkColor> STREAM_CODEC = ResourceLocation.STREAM_CODEC.map(
 			id -> ofId(id).orElseThrow(),
@@ -42,15 +43,15 @@ public class InkColor {
 	protected final String name;
 
 	protected final ResourceLocation requiredAdvancement;
-	
+
 	public InkColor(DyeColor dyeColor, String name, int color, ResourceLocation requiredAdvancement) {
 		this(Optional.of(dyeColor), name, color, color, requiredAdvancement);
 	}
-	
+
 	public InkColor(DyeColor dyeColor, String name, int color, int textColor, ResourceLocation requiredAdvancement) {
 		this(Optional.of(dyeColor), name, color, textColor, requiredAdvancement);
 	}
-	
+
 	public InkColor(Optional<DyeColor> dyeColor, String name, int color, int textColor, ResourceLocation requiredAdvancement) {
 		this.dyeColor = dyeColor;
 		this.colorInt = color;
@@ -59,31 +60,31 @@ public class InkColor {
 		this.textColorVec = ColorHelper.colorIntToVec(textColor);
 		this.requiredAdvancement = requiredAdvancement;
 		this.name = name;
-		
+
 		dyeColor.ifPresent(value -> DYE_TO_COLOR.put(value, this));
 	}
-	
+
 	public static @Nullable InkColor ofDyeColor(DyeColor dyeColor) {
 		return DYE_TO_COLOR.get(dyeColor);
 	}
-	
+
 	public static Optional<InkColor> ofId(ResourceLocation id) {
 		return PastelRegistries.INK_COLOR.getOptional(id);
 	}
-	
+
 	public static Optional<InkColor> ofIdString(String idString) {
 		return PastelRegistries.INK_COLOR.getOptional(ResourceLocation.parse(idString));
 	}
-	
+
 	public Optional<DyeColor> getDyeColor() {
 		return this.dyeColor;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.getID().toString();
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -91,17 +92,17 @@ public class InkColor {
 		InkColor that = (InkColor) o;
 		return this.dyeColor.equals(that.dyeColor);
 	}
-	
+
 	// hash lookup go wheeeeee!
 	@Override
 	public int hashCode() {
 		return colorInt;
 	}
-	
+
 	public MutableComponent getName() {
 		return Component.translatable(this.getID().toLanguageKey("ink", "name"));
 	}
-	
+
 	public MutableComponent getColoredName() {
 		return getName().setStyle(Style.EMPTY.withColor(textColor));
 	}

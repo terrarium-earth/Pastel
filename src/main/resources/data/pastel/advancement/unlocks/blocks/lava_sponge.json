@@ -1,21 +1,21 @@
 {
   "criteria": {
     "collected_topaz_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/topaz"
+        "advancement": "pastel:hidden/collect_shards/topaz"
       }
     },
     "collected_citrine_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_shards/citrine"
+        "advancement": "pastel:hidden/collect_shards/citrine"
       }
     },
     "collected_blaze_rod": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "nether/obtain_blaze_rod"
+        "advancement": "nether/obtain_blaze_rod"
       }
     }
   }

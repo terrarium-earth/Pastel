@@ -1,11 +1,13 @@
 package earth.terrarium.pastel.commands;
 
+import com.cmdpro.databank.advancement.criteria.HasAdvancementCriteria;
+import com.cmdpro.databank.advancement.criteria.HasAdvancementsCriteria;
+import com.cmdpro.databank.hidden.Hidden;
+import com.cmdpro.databank.hidden.conditions.AdvancementCondition;
+import com.cmdpro.databank.registry.HiddenTypeRegistry;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.tree.ArgumentCommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import de.dafuqs.revelationary.RevelationRegistry;
-import de.dafuqs.revelationary.advancement_criteria.AdvancementCountCriterion;
-import de.dafuqs.revelationary.advancement_criteria.AdvancementGottenCriterion;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.color.ColorRegistry;
 import earth.terrarium.pastel.api.energy.color.InkColor;
@@ -20,9 +22,9 @@ import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
-import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
@@ -169,10 +171,10 @@ public class SanityCommand {
 		
 		// Statistic: Build an empty map of maps for counting used gem colors for each tier
 		// This info can be used to balance usage a bit
-		Map<PedestalRecipeTier, Map<GemstoneColor, Integer>> usedColorsForEachTier = new HashMap<>();
-		for (PedestalRecipeTier pedestalRecipeTier : PedestalRecipeTier.values()) {
+		Map<PedestalTier, Map<GemstoneColor, Integer>> usedColorsForEachTier = new HashMap<>();
+		for (PedestalTier pedestalRecipeTier : PedestalTier.values()) {
 			Map<GemstoneColor, Integer> colorMap = new HashMap<>();
-			for (GemstoneColor gemstoneColor : BuiltinGemstoneColor.values()) {
+			for (GemstoneColor gemstoneColor : PastelGemstoneColor.values()) {
 				colorMap.put(gemstoneColor, 0);
 			}
 			usedColorsForEachTier.put(pedestalRecipeTier, colorMap);
@@ -189,13 +191,13 @@ public class SanityCommand {
 			   While the player does not have access to that yet it is no problem at all
 			*/
 			PedestalRecipe pedestalRecipe = pedestalRecipeEntry.value();
-			if (pedestalRecipe.getTier() == PedestalRecipeTier.BASIC || pedestalRecipe.getTier() == PedestalRecipeTier.SIMPLE) {
-				if (pedestalRecipe.getPowderInputs().getOrDefault(BuiltinGemstoneColor.BLACK, 0) > 0) {
+			if (pedestalRecipe.getTier() == PedestalTier.BASIC || pedestalRecipe.getTier() == PedestalTier.SIMPLE) {
+				if (pedestalRecipe.getPowderInputs().getOrDefault(PastelGemstoneColor.BLACK, 0) > 0) {
 					PastelCommon.logWarning("[SANITY: Pedestal Recipe Ingredients] Pedestal recipe '" + pedestalRecipeEntry.id() + "' of tier '" + pedestalRecipe.getTier() + "' is using onyx powder as input! Players will not have access to Onyx at that tier");
 				}
 			}
-			if (pedestalRecipe.getTier() != PedestalRecipeTier.COMPLEX) {
-				if (pedestalRecipe.getPowderInputs().getOrDefault(BuiltinGemstoneColor.WHITE, 0) > 0) {
+			if (pedestalRecipe.getTier() != PedestalTier.COMPLEX) {
+				if (pedestalRecipe.getPowderInputs().getOrDefault(PastelGemstoneColor.WHITE, 0) > 0) {
 					PastelCommon.logWarning("[SANITY: Pedestal Recipe Ingredients] Pedestal recipe '" + pedestalRecipeEntry.id() + "' of tier '" + pedestalRecipe.getTier() + "' is using moonstone powder as input! Players will not have access to Moonstone at that tier");
 				}
 			}
@@ -298,15 +300,23 @@ public class SanityCommand {
 		
 		
 		// Impossible to unlock block cloaks
-		for (Map.Entry<ResourceLocation, List<BlockState>> cloaks : RevelationRegistry.getBlockStateEntries().entrySet()) {
-			if (advancementLoader.get(cloaks.getKey()) == null) {
-				PastelCommon.logWarning("[SANITY: Block Cloaks] Advancement '" + cloaks.getKey().toString() + "' for block cloaking does not exist. Registered cloaks: " + cloaks.getValue().size());
-			}
+		for (Map.Entry<ResourceLocation, Hidden> cloak : HiddenTypeRegistry.BLOCK.get().getHiddenOfType().entrySet()) {
+            if (cloak.getValue().condition instanceof AdvancementCondition condition) {
+                if (advancementLoader.get(condition.advancement.location()) == null) {
+                    PastelCommon.logWarning("[SANITY: Block Cloaks] Advancement '" + condition.advancement.location() +
+                                            "' for block cloaking does not exist. Registered cloak: " +
+                                            cloak.getKey());
+                }
+            }
 		}
-		for (Map.Entry<ResourceLocation, List<Item>> cloaks : RevelationRegistry.getItemEntries().entrySet()) {
-			if (advancementLoader.get(cloaks.getKey()) == null) {
-				PastelCommon.logWarning("[SANITY: Item Cloaks] Advancement '" + cloaks.getKey().toString() + "' for item cloaking does not exist. Registered cloaks: " + cloaks.getValue().size());
-			}
+		for (Map.Entry<ResourceLocation, Hidden> cloak : HiddenTypeRegistry.ITEM.get().getHiddenOfType().entrySet()) {
+            if (cloak.getValue().condition instanceof AdvancementCondition condition) {
+                if (advancementLoader.get(condition.advancement.location()) == null) {
+                    PastelCommon.logWarning("[SANITY: Item Cloaks] Advancement '" + condition.advancement.location() +
+                                            "' for item cloaking does not exist. Registered cloaks: " +
+                                            cloak.getKey());
+                }
+            }
 		}
 		
 		for (AdvancementHolder advancementEntry : advancementLoader.getAllAdvancements()) {
@@ -315,8 +325,8 @@ public class SanityCommand {
 				CriterionTriggerInstance conditions = criterion.triggerInstance();
 				
 				// "has advancement" criteria with nonexistent advancements
-				if (conditions instanceof AdvancementGottenCriterion.Conditions hasAdvancementConditions) {
-					ResourceLocation advancementIdentifier = hasAdvancementConditions.getAdvancementIdentifier();
+				if (conditions instanceof HasAdvancementCriteria.HasAdvancementCriteriaInstance hasAdvancementConditions) {
+					ResourceLocation advancementIdentifier = hasAdvancementConditions.advancement();
 					if (advancementIdentifier.equals(WIP_ADVANCEMENT_ID)) {
 						continue;
 					}
@@ -325,8 +335,8 @@ public class SanityCommand {
 						PastelCommon.logWarning("[SANITY: Has_Advancement Criteria] Advancement '" + advancementEntry.id() + "' references advancement '" + advancementIdentifier + "' that does not exist");
 					}
 					// "advancement count" criteria with nonexistent advancements
-				} else if (conditions instanceof AdvancementCountCriterion.Conditions hasAdvancementConditions) {
-					for (ResourceLocation advancementIdentifier : hasAdvancementConditions.advancementIdentifiers()) {
+				} else if (conditions instanceof HasAdvancementsCriteria.HasAdvancementsCriteriaInstance hasAdvancementConditions) {
+					for (ResourceLocation advancementIdentifier : hasAdvancementConditions.advancements()) {
 						if (advancementIdentifier.equals(WIP_ADVANCEMENT_ID)) {
 							continue;
 						}
@@ -349,8 +359,8 @@ public class SanityCommand {
 				for (List<String> requirement : advancement.value().requirements().requirements()) {
 					if (!requirement.isEmpty() && requirement.getFirst().equals("gotten_previous")) { // TODO: is that correct?
 						CriterionTriggerInstance conditions = advancement.value().criteria().get("gotten_previous").triggerInstance();
-						if (conditions instanceof AdvancementGottenCriterion.Conditions advancementConditions) {
-							gottenPreviousAdvancementIdentifier = advancementConditions.getAdvancementIdentifier();
+						if (conditions instanceof HasAdvancementCriteria.HasAdvancementCriteriaInstance advancementConditions) {
+							gottenPreviousAdvancementIdentifier = advancementConditions.advancement();
 							break;
 						} else {
 							PastelCommon.logWarning("[SANITY: Advancement Gating] Advancement '" + advancementId + "' has a \"gotten_previous\" requirement, but its not of type revelationary:advancement_gotten");
@@ -390,13 +400,13 @@ public class SanityCommand {
 				continue;
 			}
 			
-			if (recipe.getTier() == PedestalRecipeTier.BASIC && !id.getPath().contains("/tier1/")) {
+			if (recipe.getTier() == PedestalTier.BASIC && !id.getPath().contains("/tier1/")) {
 				PastelCommon.logWarning("[SANITY: Pedestal Recipes] BASIC recipe not in the correct tier folder: '" + id + "'");
-			} else if (recipe.getTier() == PedestalRecipeTier.SIMPLE && !id.getPath().contains("/tier2/")) {
+			} else if (recipe.getTier() == PedestalTier.SIMPLE && !id.getPath().contains("/tier2/")) {
 				PastelCommon.logWarning("[SANITY: Pedestal Recipes] SIMPLE recipe not in the correct tier folder: '" + id + "'");
-			} else if (recipe.getTier() == PedestalRecipeTier.ADVANCED && !id.getPath().contains("/tier3/")) {
+			} else if (recipe.getTier() == PedestalTier.ADVANCED && !id.getPath().contains("/tier3/")) {
 				PastelCommon.logWarning("[SANITY: Pedestal Recipes] ADVANCED recipe not in the correct tier folder: '" + id + "'");
-			} else if (recipe.getTier() == PedestalRecipeTier.COMPLEX && !id.getPath().contains("/tier4/")) {
+			} else if (recipe.getTier() == PedestalTier.COMPLEX && !id.getPath().contains("/tier4/")) {
 				PastelCommon.logWarning("[SANITY: Pedestal Recipes] COMPLEX recipe not in the correct tier folder: '" + id + "'");
 			}
 		}
@@ -485,14 +495,14 @@ public class SanityCommand {
 		PastelCommon.logInfo("##### SANITY CHECK FINISHED ######");
 		
 		PastelCommon.logInfo("##### SANITY CHECK PEDESTAL RECIPE STATISTICS ######");
-		for (PedestalRecipeTier pedestalRecipeTier : PedestalRecipeTier.values()) {
+		for (PedestalTier pedestalRecipeTier : PedestalTier.values()) {
 			Map<GemstoneColor, Integer> entry = usedColorsForEachTier.get(pedestalRecipeTier);
 			PastelCommon.logInfo("[SANITY: Pedestal Recipe Gemstone Usages] Gemstone Powder for tier " + StringUtils.leftPad(pedestalRecipeTier.toString(), 8) +
-					": C:" + StringUtils.leftPad(entry.get(BuiltinGemstoneColor.CYAN).toString(), 4) +
-					" M:" + StringUtils.leftPad(entry.get(BuiltinGemstoneColor.MAGENTA).toString(), 4) +
-					" Y:" + StringUtils.leftPad(entry.get(BuiltinGemstoneColor.YELLOW).toString(), 4) +
-					" K:" + StringUtils.leftPad(entry.get(BuiltinGemstoneColor.BLACK).toString(), 4) +
-					" W:" + StringUtils.leftPad(entry.get(BuiltinGemstoneColor.WHITE).toString(), 4));
+					": C:" + StringUtils.leftPad(entry.get(PastelGemstoneColor.CYAN).toString(), 4) +
+					" M:" + StringUtils.leftPad(entry.get(PastelGemstoneColor.MAGENTA).toString(), 4) +
+					" Y:" + StringUtils.leftPad(entry.get(PastelGemstoneColor.YELLOW).toString(), 4) +
+					" K:" + StringUtils.leftPad(entry.get(PastelGemstoneColor.BLACK).toString(), 4) +
+					" W:" + StringUtils.leftPad(entry.get(PastelGemstoneColor.WHITE).toString(), 4));
 		}
 		
 		if (source.getEntity() instanceof ServerPlayer serverPlayerEntity) {

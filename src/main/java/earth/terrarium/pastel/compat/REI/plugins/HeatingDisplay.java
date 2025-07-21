@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
@@ -24,7 +24,7 @@ public class HeatingDisplay extends BlockToBlockWithChanceDisplay {
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, PastelAdvancements.UNLOCK_IDOLS);
+		return DatabankUtils.hasAdvancement(client.player, PastelAdvancements.UNLOCK_IDOLS);
 	}
 	
 }

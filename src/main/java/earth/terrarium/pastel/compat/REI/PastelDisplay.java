@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI;
 
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -45,7 +45,10 @@ public abstract class PastelDisplay extends BasicDisplay implements GatedRecipeD
 	@Override
 	public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, this.requiredAdvancementIdentifier);
+		if (client.player == null || requiredAdvancementIdentifier == null)
+			return true;
+
+		return DatabankUtils.hasAdvancement(client.player, this.requiredAdvancementIdentifier);
 	}
 	
 	@Override

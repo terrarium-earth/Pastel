@@ -1,23 +1,30 @@
 package earth.terrarium.pastel.attachments;
 
-import earth.terrarium.pastel.*;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
+import earth.terrarium.pastel.attachments.data.InertiaData;
+import earth.terrarium.pastel.attachments.data.LastKillData;
+import earth.terrarium.pastel.attachments.data.MiscPlayerData;
+import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeData;
-import earth.terrarium.pastel.attachments.data.*;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.attachment.*;
-import net.neoforged.neoforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class PastelDataAttachments {
 
-	private static final DeferredRegister<AttachmentType<?>> REGISTER = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, PastelCommon.MOD_ID);
+    private static final DeferredRegister<AttachmentType<?>> REGISTER = DeferredRegister.create(
+        NeoForgeRegistries.Keys.ATTACHMENT_TYPES, PastelCommon.MOD_ID);
 
-	public static void register(IEventBus bus) {
-		REGISTER.register("primfire", () -> PrimordialFireData.ATTACHMENT);
-		REGISTER.register("dike", () -> AzureDikeData.ATTACHMENT);
-		REGISTER.register("ribbon", () -> EverpromiseRibbonData.ATTACHMENT);
-		REGISTER.register("last_kill", () -> LastKillData.ATTACHMENT);
-		REGISTER.register("player_misc", () -> MiscPlayerData.ATTACHMENT);
-		REGISTER.register(bus);
-	}
+    public static void register(IEventBus bus) {
+        REGISTER.register("primfire", () -> PrimordialFireData.ATTACHMENT);
+        REGISTER.register("dike", () -> AzureDikeData.ATTACHMENT);
+        REGISTER.register("ribbon", () -> EverpromiseRibbonData.ATTACHMENT);
+        REGISTER.register("last_kill", () -> LastKillData.ATTACHMENT);
+        REGISTER.register("player_misc", () -> MiscPlayerData.ATTACHMENT);
+        REGISTER.register("inertia", () -> InertiaData.ATTACHMENT);
+        REGISTER.register(bus);
+    }
 
 }

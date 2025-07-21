@@ -4,14 +4,12 @@ import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.inventories.slots.DisabledSlot;
 import earth.terrarium.pastel.inventories.slots.PedestalPreviewSlot;
 import earth.terrarium.pastel.inventories.slots.StackFilterSlot;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItems;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -27,113 +25,111 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<RecipeInput>> {
 	
-	public record ScreenOpeningData(BlockPos pos, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
+	public record ScreenOpeningData(BlockPos pos, PedestalTier pedestalRecipeTier) {
 		public static final StreamCodec<ByteBuf, ScreenOpeningData> STREAM_CODEC = StreamCodec.composite(
 				BlockPos.STREAM_CODEC, ScreenOpeningData::pos,
-				PedestalRecipeTier.STREAM_CODEC, ScreenOpeningData::pedestalRecipeTier,
-				PedestalRecipeTier.STREAM_CODEC, ScreenOpeningData::maxRecipeTier,
+				PedestalTier.STREAM_CODEC, ScreenOpeningData::pedestalRecipeTier,
 				PedestalScreenHandler.ScreenOpeningData::new
 		);
 	}
 	
 	protected final Level world;
-	private final PedestalBlockEntity blockEntity;
-	private final ContainerData propertyDelegate;
+	private final PedestalBlockEntity pedestal;
+	private final ContainerData data;
 	private final RecipeBookType category;
 	
-	private final PedestalRecipeTier pedestalRecipeTier;
-	private final PedestalRecipeTier maxPedestalRecipeTier;
-	
-	// clientside
-	public PedestalScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf extraData) {
-		this(syncId, playerInventory, ScreenOpeningData.STREAM_CODEC.decode(extraData));
+	private final PedestalTier pedestalRecipeTier;
+
+    // clientside
+	public PedestalScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
+		this(syncId, playerInventory, ScreenOpeningData.STREAM_CODEC.decode(buf));
 	}
 
 	public PedestalScreenHandler(int syncId, Inventory playerInventory, ScreenOpeningData data) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos, PastelBlockEntities.PEDESTAL.get()).orElseThrow(), new SimpleContainerData(2), data.pedestalRecipeTier, data.maxRecipeTier);
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos, PastelBlockEntities.PEDESTAL.get()).orElseThrow(), new SimpleContainerData(2), data.pedestalRecipeTier);
 	}
 	
 	// serverside
-	public PedestalScreenHandler(int syncId, Inventory playerInventory, PedestalBlockEntity blockEntity, ContainerData propertyDelegate, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
-		this(PastelScreenHandlerTypes.PEDESTAL, RecipeBookType.CRAFTING, syncId, playerInventory, blockEntity, propertyDelegate, pedestalRecipeTier, maxRecipeTier);
+	public PedestalScreenHandler(int syncId, Inventory pInv, PedestalBlockEntity blockEntity, ContainerData data, PedestalTier tier) {
+		this(PastelScreenHandlerTypes.PEDESTAL, RecipeBookType.CRAFTING, syncId, pInv, blockEntity, data, tier);
 	}
 	
-	protected PedestalScreenHandler(MenuType<?> type, RecipeBookType recipeBookCategory, int i, Inventory playerInventory, PedestalBlockEntity blockEntity, ContainerData propertyDelegate, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
+	protected PedestalScreenHandler(MenuType<?> type, RecipeBookType recipeBookCategory, int i, Inventory pInv, PedestalBlockEntity pedestal, ContainerData data, PedestalTier tier) {
 		super(type, i);
 		this.category = recipeBookCategory;
-		this.propertyDelegate = propertyDelegate;
-		this.world = playerInventory.player.level();
+		this.data = data;
+		this.world = pInv.player.level();
 		
-		this.blockEntity = blockEntity;
-		this.pedestalRecipeTier = pedestalRecipeTier;
-		this.maxPedestalRecipeTier = maxRecipeTier;
-		
-		checkContainerSize(blockEntity, PedestalBlockEntity.INVENTORY_SIZE);
-		checkContainerDataCount(propertyDelegate, 2);
-		blockEntity.startOpen(playerInventory.player);
+		this.pedestal = pedestal;
+		this.pedestalRecipeTier = tier;
+
+        checkContainerSize(pedestal, PedestalBlockEntity.SIZE);
+		checkContainerDataCount(data, 2);
 		
 		// crafting slots
 		for (int m = 0; m < 3; ++m) {
 			for (int n = 0; n < 3; ++n) {
-				addSlot(new Slot(blockEntity, n + m * 3, 30 + n * 18, 19 + m * 18));
+				addSlot(new Slot(pedestal, n + m * 3, 30 + n * 18, 19 + m * 18));
 			}
 		}
 		
 		// gemstone powder slots
-		switch (getPedestalRecipeTier()) {
+		switch (getTier()) {
 			case BASIC, SIMPLE -> {
-				this.addSlot(new StackFilterSlot(blockEntity, 9, 44 + 18, 77, PastelItems.TOPAZ_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 10, 44 + 2 * 18, 77, PastelItems.AMETHYST_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 11, 44 + 3 * 18, 77, PastelItems.CITRINE_POWDER.get()));
-				this.addSlot(new DisabledSlot(blockEntity, 12, -2000, 77));
-				this.addSlot(new DisabledSlot(blockEntity, 13, -2000, 77));
+				this.addSlot(new StackFilterSlot(pedestal, 9, 44 + 18, 77, PastelItems.TOPAZ_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 10, 44 + 2 * 18, 77, PastelItems.AMETHYST_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 11, 44 + 3 * 18, 77, PastelItems.CITRINE_POWDER.get()));
+				this.addSlot(new DisabledSlot(pedestal, 12, -2000, 77));
+				this.addSlot(new DisabledSlot(pedestal, 13, -2000, 77));
 			}
 			case ADVANCED -> {
-				this.addSlot(new StackFilterSlot(blockEntity, 9, 35 + 18, 77, PastelItems.TOPAZ_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 10, 35 + 2 * 18, 77, PastelItems.AMETHYST_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 11, 35 + 3 * 18, 77, PastelItems.CITRINE_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 12, 35 + 4 * 18, 77, PastelItems.ONYX_POWDER.get()));
-				this.addSlot(new DisabledSlot(blockEntity, 13, -2000, 77));
+				this.addSlot(new StackFilterSlot(pedestal, 9, 35 + 18, 77, PastelItems.TOPAZ_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 10, 35 + 2 * 18, 77, PastelItems.AMETHYST_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 11, 35 + 3 * 18, 77, PastelItems.CITRINE_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 12, 35 + 4 * 18, 77, PastelItems.ONYX_POWDER.get()));
+				this.addSlot(new DisabledSlot(pedestal, 13, -2000, 77));
 			}
 			case COMPLEX -> {
-				this.addSlot(new StackFilterSlot(blockEntity, 9, 44, 77, PastelItems.TOPAZ_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 10, 44 + 18, 77, PastelItems.AMETHYST_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 11, 44 + 2 * 18, 77, PastelItems.CITRINE_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 12, 44 + 3 * 18, 77, PastelItems.ONYX_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 13, 44 + 4 * 18, 77, PastelItems.MOONSTONE_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 9, 44, 77, PastelItems.TOPAZ_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 10, 44 + 18, 77, PastelItems.AMETHYST_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 11, 44 + 2 * 18, 77, PastelItems.CITRINE_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 12, 44 + 3 * 18, 77, PastelItems.ONYX_POWDER.get()));
+				this.addSlot(new StackFilterSlot(pedestal, 13, 44 + 4 * 18, 77, PastelItems.MOONSTONE_POWDER.get()));
 			}
 		}
 		
 		// crafting tablet slot
-		this.addSlot(new StackFilterSlot(blockEntity, PedestalBlockEntity.CRAFTING_TABLET_SLOT_ID, 93, 19, PastelItems.CRAFTING_TABLET.get()));
+		this.addSlot(new StackFilterSlot(pedestal, PedestalBlockEntity.TABLET, 93, 19, PastelItems.CRAFTING_TABLET.get()));
 		
 		// preview slot
-		this.addSlot(new PedestalPreviewSlot(blockEntity, 15, 127, 37));
+		this.addSlot(new PedestalPreviewSlot(pedestal, 15, 127, 37));
 		
 		// player inventory
 		int l;
 		for (l = 0; l < 3; ++l) {
 			for (int k = 0; k < 9; ++k) {
-				this.addSlot(new Slot(playerInventory, k + l * 9 + 9, 8 + k * 18, 112 + l * 18));
+				this.addSlot(new Slot(pInv, k + l * 9 + 9, 8 + k * 18, 112 + l * 18));
 			}
 		}
 		
 		// player hotbar
 		for (l = 0; l < 9; ++l) {
-			this.addSlot(new Slot(playerInventory, l, 8 + l * 18, 170));
+			this.addSlot(new Slot(pInv, l, 8 + l * 18, 170));
 		}
 		
-		this.addDataSlots(propertyDelegate);
+		this.addDataSlots(data);
 	}
 	
 	@Override
 	public void fillCraftSlotsStackedContents(StackedContents recipeMatcher) {
-		this.blockEntity.fillStackedContents(recipeMatcher);
+		//this.blockEntity.fillStackedContents(recipeMatcher); This probably does something important. I suppose
 	}
-	
+
 	@Override
 	public void clearCraftingContent() {
 		for (int i = 0; i < 9; i++) {
@@ -143,7 +139,7 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 	
 	@Override
 	public boolean recipeMatches(RecipeHolder<Recipe<RecipeInput>> recipe) {
-		return blockEntity != null && recipe.value().matches(blockEntity.createRecipeInput(), world);
+		return pedestal!= null && recipe.value().matches(pedestal.getInput(), world);
 	}
 	
 	@Override
@@ -168,14 +164,16 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 	
 	@Override
 	public boolean stillValid(Player player) {
-		return blockEntity.stillValid(player);
+		return pedestal.stillValid(player);
 	}
 	
 	@OnlyIn(Dist.CLIENT)
 	public int getCraftingProgress() {
-		int craftingTime = getCraftingTime();
-		int craftingTimeTotal = getCraftingTimeTotal();
-		return craftingTimeTotal != 0 && craftingTime != 0 ? craftingTime * 24 / craftingTimeTotal : 0;
+		float time = getCraftingTime();
+		if (time < 0)
+			return 0;
+
+		return Math.round(time / getCraftingTimeTotal() * 24);
 	}
 	
 	public boolean isCrafting() {
@@ -203,9 +201,7 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 	public ItemStack quickMoveStack(Player player, int index) {
 		ItemStack clickedStackCopy = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
-		
-		blockEntity.setInventoryChanged();
-		
+
 		if (slot.hasItem()) {
 			ItemStack clickedStack = slot.getItem();
 			clickedStackCopy = clickedStack.copy();
@@ -236,13 +232,14 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 					return ItemStack.EMPTY;
 				}
 			} else if (clickedStackCopy.is(PastelItems.CRAFTING_TABLET.get())) {
-				if (!this.moveItemStackTo(clickedStack, PedestalBlockEntity.CRAFTING_TABLET_SLOT_ID, PedestalBlockEntity.CRAFTING_TABLET_SLOT_ID + 1, false)) {
+				if (!this.moveItemStackTo(clickedStack, PedestalBlockEntity.TABLET, PedestalBlockEntity.TABLET + 1, false)) {
 					return ItemStack.EMPTY;
 				}
 			}
 			
 			// crafting grid
 			if (!this.moveItemStackTo(clickedStack, 0, 9, false)) {
+				pedestal.setChanged();
 				return ItemStack.EMPTY;
 			}
 			
@@ -258,38 +255,33 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 			
 			slot.onTake(player, clickedStack);
 		}
-		
+
 		return clickedStackCopy;
 	}
-	
+
 	public int getCraftingTime() {
-		return propertyDelegate.get(0);
+		return data.get(0);
 	}
 	
 	public int getCraftingTimeTotal() {
-		return propertyDelegate.get(1);
+		return data.get(1);
 	}
 	
-	public PedestalRecipeTier getPedestalRecipeTier() {
+	public PedestalTier getTier() {
 		return this.pedestalRecipeTier;
 	}
 	
-	public PedestalRecipeTier getMaxPedestalRecipeTier() {
-		return this.maxPedestalRecipeTier;
-	}
-	
 	public PedestalBlockEntity getBlockEntity() {
-		return blockEntity;
+		return pedestal;
 	}
 	
 	public BlockPos getBlockPos() {
-		return blockEntity.getBlockPos();
+		return pedestal.getBlockPos();
 	}
 	
 	@Override
 	public void removed(Player player) {
 		super.removed(player);
-		blockEntity.stopOpen(player);
 	}
 	
 }

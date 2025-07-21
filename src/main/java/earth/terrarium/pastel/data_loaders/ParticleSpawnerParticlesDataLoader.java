@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.data_loaders;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -67,7 +67,7 @@ public class ParticleSpawnerParticlesDataLoader extends SimpleJsonResourceReload
 	public static List<ParticleSpawnerEntry> getAllUnlocked(Player player) {
 		List<ParticleSpawnerEntry> list = new ArrayList<>();
 		for (ParticleSpawnerParticlesDataLoader.ParticleSpawnerEntry entry : PARTICLES) {
-			if (AdvancementHelper.hasAdvancement(player, entry.unlockIdentifier())) {
+			if (DatabankUtils.hasAdvancement(player, entry.unlockIdentifier())) {
 				list.add(entry);
 			}
 		}

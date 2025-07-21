@@ -21,9 +21,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_midnight_chip"
+        "advancement": "pastel:midgame/collect_midnight_chip"
       }
     }
   }

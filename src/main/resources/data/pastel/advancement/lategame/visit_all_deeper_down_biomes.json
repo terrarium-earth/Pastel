@@ -14,57 +14,57 @@
   },
   "criteria": {
     "crystal_gardens": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/crystal_gardens"
+        "advancement": "pastel:hidden/visit_dd_biomes/crystal_gardens"
       }
     },
     "deep_barrens": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/deep_barrens"
+        "advancement": "pastel:hidden/visit_dd_biomes/deep_barrens"
       }
     },
     "deep_dripstone_caves": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/deep_dripstone_caves"
+        "advancement": "pastel:hidden/visit_dd_biomes/deep_dripstone_caves"
       }
     },
     "dragonrot_swamp": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/dragonrot_swamp"
+        "advancement": "pastel:hidden/visit_dd_biomes/dragonrot_swamp"
       }
     },
     "black_langast": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/black_langast"
+        "advancement": "pastel:hidden/visit_dd_biomes/black_langast"
       }
     },
     "noxshroom_forest": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/noxshroom_forest"
+        "advancement": "pastel:hidden/visit_dd_biomes/noxshroom_forest"
       }
     },
     "razor_edge": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/razor_edge"
+        "advancement": "pastel:hidden/visit_dd_biomes/razor_edge"
       }
     },
     "howling_spires": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/howling_spires"
+        "advancement": "pastel:hidden/visit_dd_biomes/howling_spires"
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/pastel_lategame"
+        "advancement": "pastel:lategame/pastel_lategame"
       }
     }
   },

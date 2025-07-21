@@ -10,12 +10,12 @@ import java.util.Map;
 
 public class PastelPickaxeItem extends PickaxeItem implements Preenchanted {
 
-	public PastelPickaxeItem(Tier material, Properties settings) {
-		super(material, settings);
-	}
+    public PastelPickaxeItem(Tier material, Properties settings) {
+        super(material, settings);
+    }
 
-	@Override
-	public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-		return Map.of();
-	}
+    @Override
+    public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
+        return Map.of();
+    }
 }

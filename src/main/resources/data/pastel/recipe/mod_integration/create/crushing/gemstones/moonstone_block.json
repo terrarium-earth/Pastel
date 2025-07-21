@@ -1,7 +1,9 @@
 {
   "type": "create:crushing",
   "ingredients": [
-    "pastel:moonstone_block"
+    {
+      "item": "pastel:moonstone_block"
+    }
   ],
   "results": [
     {
@@ -13,7 +15,7 @@
       "chance": 0.5
     }
   ],
-  "processingTime": 150,
+  "processing_time": 150,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

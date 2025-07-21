@@ -1,12 +1,10 @@
 package earth.terrarium.pastel.particle.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.*;
+import com.mojang.math.Axis;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.render.EarlyRenderingParticle;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -23,7 +21,9 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.BlockPositionSource;
 import net.minecraft.world.phys.Vec3;
-import org.joml.*;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +34,18 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
     private final ItemRenderer itemRenderer;
     private final List<Vec3> travelPositions;
     private final ItemStack itemStack;
-	private final ParticleOptions particleEffect;
-	
-	public PastelTransmissionParticle(ItemRenderer itemRenderer, ClientLevel world, double x, double y, double z, List<BlockPos> travelPositions, ItemStack stack, int travelTime, int networkColor) {
-        super(world, x, y, z, new BlockPositionSource(travelPositions.get(travelPositions.size()-1)), travelTime);
+    private final ParticleOptions particleEffect;
+
+    public PastelTransmissionParticle(
+        ItemRenderer itemRenderer, ClientLevel world, double x, double y, double z, List<BlockPos> travelPositions,
+        ItemStack stack, int travelTime, int networkColor
+    ) {
+        super(world, x, y, z, new BlockPositionSource(travelPositions.get(travelPositions.size() - 1)), travelTime);
 
         this.itemRenderer = itemRenderer;
         this.itemStack = stack;
         this.quadSize = 0.25F;
-		this.particleEffect = new DustParticleOptions(ColorHelper.colorIntToVec(networkColor), 0.8F);
+        this.particleEffect = new DustParticleOptions(ColorHelper.colorIntToVec(networkColor), 0.8F);
 
         this.travelPositions = new ArrayList<>();
         for (BlockPos p : travelPositions) {
@@ -51,7 +54,11 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
 
         // spawning sound & particles
         Vec3 startPos = this.travelPositions.get(0);
-		world.playLocalSound(startPos.x(), startPos.y() + 0.25, startPos.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.15F * PastelCommon.CONFIG.BlockSoundVolume + world.random.nextFloat() / 10F, 0.8F + world.random.nextFloat() * 0.3F, true);
+        world.playLocalSound(
+            startPos.x(), startPos.y() + 0.25, startPos.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
+            0.15F * PastelCommon.CONFIG.BlockSoundVolume + world.random.nextFloat() / 10F,
+            0.8F + world.random.nextFloat() * 0.3F, true
+        );
         world.addParticle(ParticleTypes.BUBBLE_POP, startPos.x(), startPos.y() + 0.25, startPos.z(), 0, 0, 0);
     }
 
@@ -63,9 +70,13 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         float travelPercent = (float) this.age / this.lifetime;
         if (travelPercent >= 1.0F) {
             Vec3 destination = this.travelPositions.get(vertexCount);
-            level.playLocalSound(destination.x(), destination.y() + 0.25, destination.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
-                    0.1F * PastelCommon.CONFIG.BlockSoundVolume + random.nextFloat() / 10F, 0.6F + level.random.nextFloat() * 0.3F, true);
-            level.addParticle(ParticleTypes.BUBBLE_POP, destination.x(), destination.y() + 0.25, destination.z(), 0, 0, 0);
+            level.playLocalSound(
+                destination.x(), destination.y() + 0.25, destination.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
+                0.1F * PastelCommon.CONFIG.BlockSoundVolume + random.nextFloat() / 10F,
+                0.6F + level.random.nextFloat() * 0.3F, true
+            );
+            level.addParticle(
+                ParticleTypes.BUBBLE_POP, destination.x(), destination.y() + 0.25, destination.z(), 0, 0, 0);
             this.remove();
             return;
         }
@@ -83,14 +94,19 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         this.x = Mth.lerp(nodeProgress, source.x, destination.x);
         this.y = Mth.lerp(nodeProgress, source.y, destination.y);
         this.z = Mth.lerp(nodeProgress, source.z, destination.z);
-		
-		//if (PastelCommon.CONFIG.PastelNetworkParticles && this.age % 3 == 0) {
-		//	level.addParticle(particleEffect, x + random.nextDouble() * 0.4 - 0.2, y + random.nextDouble() * 0.4 - 0.2, z + random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2);
-		//} TODO make these not bad and reimplement
+
+        //if (PastelCommon.CONFIG.PastelNetworkParticles && this.age % 3 == 0) {
+        //	level.addParticle(particleEffect, x + random.nextDouble() * 0.4 - 0.2, y + random.nextDouble() * 0.4 - 0
+        //	.2, z + random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2,
+        //	random.nextDouble() * 0.4 - 0.2);
+        //} TODO make these not bad and reimplement
     }
 
     @Override
-    public void renderAsEntity(final PoseStack poseStack, final MultiBufferSource vertexConsumers, final Camera camera, final float tickDelta) {
+    public void renderAsEntity(
+        final PoseStack poseStack, final MultiBufferSource vertexConsumers, final Camera camera,
+        final float tickDelta
+    ) {
         final Vec3 cameraPos = camera.getPosition();
         final float x = (float) (Mth.lerp(tickDelta, xo, this.x));
         final float y = (float) (Mth.lerp(tickDelta, yo, this.y));
@@ -107,7 +123,10 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         poseStack.mulPose(rot);
         //poseStack.scale(0.65F, 0.65F, 0.65F);
         poseStack.translate(0, -0.15, 0);
-		itemRenderer.renderStatic(itemStack, ItemDisplayContext.GROUND, light, OverlayTexture.NO_OVERLAY, poseStack, vertexConsumers, level, 0);
+        itemRenderer.renderStatic(
+            itemStack, ItemDisplayContext.GROUND, light, OverlayTexture.NO_OVERLAY, poseStack, vertexConsumers, level,
+            0
+        );
 
         poseStack.popPose();
     }

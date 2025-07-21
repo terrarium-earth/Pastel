@@ -1,27 +1,27 @@
 {
   "criteria": {
     "unlocked_titration_barrel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
+        "advancement": "pastel:unlocks/blocks/titration_barrel"
       }
     },
     "collected_quitoxic_reeds": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_quitoxic_reeds"
+        "advancement": "pastel:collect_quitoxic_reeds"
       }
     },
     "collected_blazing_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_blazing_crystal"
+        "advancement": "pastel:hidden/collect_blazing_crystal"
       }
     },
     "collected_doombloom_seeds": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_doombloom_seed"
+        "advancement": "pastel:lategame/collect_doombloom_seed"
       }
     }
   }

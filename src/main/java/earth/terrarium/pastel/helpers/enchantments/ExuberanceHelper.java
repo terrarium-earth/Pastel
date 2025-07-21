@@ -6,14 +6,14 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 
 public class ExuberanceHelper {
-	
-	public static float getExuberanceMod(RegistryAccess access, ItemStack tool) {
-		var level = Ench.getLevel(access, PastelEnchantments.EXUBERANCE, tool);
-		return getExuberanceMod(level);
-	}
-	
-	public static float getExuberanceMod(int level) {
-		return 1.0F + level * PastelCommon.CONFIG.ExuberanceBonusExperiencePercentPerLevel;
-	}
-	
+
+    public static float getExuberanceMod(RegistryAccess access, ItemStack tool) {
+        var level = Ench.getLevel(access, PastelEnchantments.EXUBERANCE, tool);
+        return getExuberanceMod(level);
+    }
+
+    public static float getExuberanceMod(int level) {
+        return 1.0F + level * PastelCommon.CONFIG.ExuberanceBonusExperiencePercentPerLevel;
+    }
+
 }
