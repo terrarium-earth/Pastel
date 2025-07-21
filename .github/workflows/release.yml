@@ -71,6 +71,7 @@ jobs:
                         cloth-config | depends | *
                         modonomicon | depends | *
                         curios | depends | *
+                        databank | depends | *
 
             -   name: Generate Discord Embed
                 run: ./gradlew injectEmbed
