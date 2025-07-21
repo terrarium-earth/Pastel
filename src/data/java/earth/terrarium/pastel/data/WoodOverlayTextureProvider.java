@@ -76,7 +76,12 @@ public abstract class WoodOverlayTextureProvider implements DataProvider {
     }
 
     private float blend(Function<Color, Float> channel, Color base, Color overlay, Color tint) {
-        return Math.min((channel.apply(base) * base.alpha() * (1 - overlay.alpha()) * channel.apply(tint) * tint.alpha()) + (channel.apply(overlay) * overlay.alpha()), 1.0f);
+        float alpha = overlay.alpha + base.alpha * (1 - overlay.alpha);
+        float color = (channel.apply(overlay) * overlay.alpha) +
+                      (channel.apply(base) * channel.apply(tint) * (1 - overlay.alpha));
+
+        color /= alpha;
+        return Math.min(color, 1F);
     }
 
     private NativeImage generateTexture(WoodOverlayTint overlayTint) {
@@ -92,7 +97,7 @@ public abstract class WoodOverlayTextureProvider implements DataProvider {
         var output = new NativeImage(base.getWidth(), base.getHeight(), false);
 
         try {
-            var tint = new Color(overlayTint.tint());
+            var tint = new Color(overlayTint.tint(), true);
 
             for (int x = 0; x < base.getWidth(); x++) {
                 for (int y = 0; y < base.getHeight(); y++) {
@@ -175,11 +180,18 @@ public abstract class WoodOverlayTextureProvider implements DataProvider {
         private final float green;
         private final float blue;
 
-        private Color(int packedColor) {
+        private Color(int packedColor, boolean tint) {
             this.alpha = FastColor.ABGR32.alpha(packedColor) / 255f;
             this.red = FastColor.ABGR32.red(packedColor) / 255f;
             this.green = FastColor.ABGR32.green(packedColor) / 255f;
             this.blue = FastColor.ABGR32.blue(packedColor) / 255f;
+        }
+
+        private Color(int packedColor) {
+            this.alpha = FastColor.ABGR32.alpha(packedColor) / 255f;
+            this.blue = FastColor.ABGR32.red(packedColor) / 255f;
+            this.green = FastColor.ABGR32.green(packedColor) / 255f;
+            this.red = FastColor.ABGR32.blue(packedColor) / 255f;
         }
 
         public float alpha() {

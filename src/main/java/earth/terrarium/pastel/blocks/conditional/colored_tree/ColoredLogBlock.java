@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.conditional.colored_tree;
 
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
+import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.blocks.*;
@@ -49,7 +49,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, ColoredTree {
+public class ColoredLogBlock extends PastelLogBlock implements ColoredTree {
 
 	public static final BooleanProperty DRIPPING = BooleanProperty.create("dripping");
 
@@ -63,31 +63,14 @@ public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, 
 		super(settings, sourceBlock);
 		this.color = color;
 		LOGS.put(color, this);
-		RevelationAware.register(this);
 
 		tappingLoot = ResourceKey.create(Registries.LOOT_TABLE, PastelCommon.locate("gameplay/tapping/" + color.getLootName()));
 		registerDefaultState(defaultBlockState().setValue(DRIPPING, false).setValue(NATURAL, false));//
 	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return ColoredTree.getTreeCloakAdvancementIdentifier(ColoredTree.TreePart.LOG, this.color);
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		for (Direction.Axis axis : RotatedPillarBlock.AXIS.getPossibleValues()) {
-			var normal = this.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis).setValue(NATURAL, true);
-			map.put(normal, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis));
-			map.put(normal.setValue(DRIPPING, true), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis));
-		}
-		return map;
-	}
 
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-		if (!isVisibleTo(player))
+		if (!BlockHiddenType.isVisible(state, player))
 			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
 		if (applyNectar(stack, state, level, pos, player))
@@ -198,7 +181,7 @@ public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, 
 
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-		if (!isVisibleTo(Minecraft.getInstance().player))
+		if (!BlockHiddenType.isVisibleClient(state))
 			return;
 
 		if (!isDripping(state))
@@ -213,11 +196,6 @@ public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, 
 		super.createBlockStateDefinition(builder);
 		builder.add(DRIPPING);
 		builder.add(NATURAL);
-	}
-
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.OAK_LOG.asItem());
 	}
 	
 	@Override

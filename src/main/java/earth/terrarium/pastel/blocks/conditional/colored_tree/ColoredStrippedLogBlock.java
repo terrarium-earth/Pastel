@@ -2,7 +2,6 @@ package earth.terrarium.pastel.blocks.conditional.colored_tree;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.core.Direction;
@@ -19,7 +18,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class ColoredStrippedLogBlock extends RotatedPillarBlock implements RevelationAware, ColoredTree {
+public class ColoredStrippedLogBlock extends RotatedPillarBlock implements ColoredTree {
 
 	public static final MapCodec<ColoredStrippedLogBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			propertiesCodec(),
@@ -33,7 +32,6 @@ public class ColoredStrippedLogBlock extends RotatedPillarBlock implements Revel
 		super(settings);
 		this.color = color;
 		LOGS.put(color, this);
-		RevelationAware.register(this);
 		registerDefaultState(defaultBlockState().setValue(NATURAL, false));
 	}
 
@@ -41,31 +39,11 @@ public class ColoredStrippedLogBlock extends RotatedPillarBlock implements Revel
 	public MapCodec<? extends ColoredStrippedLogBlock> codec() {
 		return CODEC;
 	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return ColoredTree.getTreeCloakAdvancementIdentifier(TreePart.STRIPPED_LOG, this.color);
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		for (Direction.Axis axis : RotatedPillarBlock.AXIS.getPossibleValues()) {
-			map.put(this.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis).setValue(NATURAL, true),
-					Blocks.STRIPPED_OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis));
-		}
-		return map;
-	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(NATURAL);
-	}
-
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.STRIPPED_OAK_LOG.asItem());
 	}
 	
 	@Override

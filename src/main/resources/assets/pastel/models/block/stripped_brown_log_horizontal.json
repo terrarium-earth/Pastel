@@ -1,9 +1,0 @@
-{
-  "parent": "pastel:templates/tint/overlay_column_horizontal",
-  "textures": {
-    "end": "pastel:block/blank/blank_stripped_log_top",
-    "side": "pastel:block/blank/blank_stripped_log",
-    "end_overlay": "pastel:block/blank/blank_stripped_log_top_overlay",
-    "side_overlay": "pastel:block/blank/blank_stripped_log_overlay"
-  }
-}
