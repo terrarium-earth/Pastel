@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:end_stone",
+    "original": "pastel:paltaeria_ore"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_paltaeria"
+  }
+}

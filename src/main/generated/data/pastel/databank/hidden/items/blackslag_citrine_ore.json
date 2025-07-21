@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "pastel:blackslag",
+    "original": "pastel:blackslag_citrine_ore"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:hidden/collect_shards/citrine"
+  }
+}

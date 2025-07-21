@@ -1,0 +1,67 @@
+{
+  "type": "pastel:crystallarieum_growing",
+  "additional_recipe_manager_results": [
+    {
+      "count": 1,
+      "id": "pastel:pure_gold"
+    }
+  ],
+  "catalysts": [
+    {
+      "consume_chance_per_second": 0.2,
+      "growth_acceleration_mod": 4.0,
+      "ingredient": {
+        "item": "minecraft:gold_nugget"
+      },
+      "ink_consumption_mod": 0.5
+    },
+    {
+      "consume_chance_per_second": 0.05,
+      "growth_acceleration_mod": 8.0,
+      "ingredient": {
+        "item": "pastel:shimmerstone_gem"
+      },
+      "ink_consumption_mod": 2.0
+    },
+    {
+      "consume_chance_per_second": 0.02,
+      "growth_acceleration_mod": 1.5,
+      "ingredient": {
+        "item": "pastel:neolith"
+      },
+      "ink_consumption_mod": 0.25
+    }
+  ],
+  "fluid_medium": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "growth_stage_states": [
+    {
+      "Name": "pastel:small_gold_bud",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "pastel:large_gold_bud",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "pastel:gold_cluster",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    }
+  ],
+  "ingredient": {
+    "item": "minecraft:raw_gold"
+  },
+  "ink_color": "pastel:brown",
+  "ink_cost_tier": 2,
+  "seconds_per_growth_stage": 60
+}

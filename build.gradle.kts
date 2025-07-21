@@ -7,7 +7,8 @@ plugins {
 }
 
 sourceSets.main {
-    resources.srcDir("src/main/generated")
+    // TODO Delete once everything in oldGenerated is properly data-genned
+    resources.srcDir("src/main/oldGenerated")
 }
 
 repositories {
@@ -99,6 +100,8 @@ cloche {
         @Suppress("UnstableApiUsage")
         neoforge {
             loaderVersion = "21.1.172"
+
+            datagenDirectory = file("src/main/generated")
 
             accessWideners.from(
                 "src/main/pastel.accessWidener",

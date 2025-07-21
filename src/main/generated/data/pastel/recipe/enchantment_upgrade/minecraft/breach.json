@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:breach"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:red_pigment"
+  },
+  "enchantment": "minecraft:breach",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 8
+  },
+  "level_cap": 5,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_trial_breaching",
+  "xp_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 200
+  }
+}

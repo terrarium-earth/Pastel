@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:light_blue_dye",
+    "original": "pastel:resonance_shard"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:lategame/strike_up_hummingstone_hymn"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:cyan_dye",
+    "original": "pastel:topaz_powder"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:hidden/collect_shards/topaz"
+  }
+}
