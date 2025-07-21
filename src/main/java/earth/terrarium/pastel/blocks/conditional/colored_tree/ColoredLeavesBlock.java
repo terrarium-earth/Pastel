@@ -30,7 +30,7 @@ public class ColoredLeavesBlock extends LeavesBlock implements ColoredTree {
 	protected final InkColor color;
 	
 	public ColoredLeavesBlock(Properties settings, InkColor color) {
-		super(settings.lightLevel(s -> 9).hasPostProcess((state, level, pos) -> true).emissiveRendering((state, level, pos) -> true));
+		super(settings);
 		this.color = color;
 		LEAVES.put(color, this);
 		registerDefaultState(defaultBlockState().setValue(NATURAL, false));
