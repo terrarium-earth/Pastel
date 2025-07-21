@@ -136,7 +136,7 @@ public abstract class WoodOverlayTextureProvider implements DataProvider {
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 HashingOutputStream hasher = new HashingOutputStream(Hashing.sha1(), outputStream);
 
-                ByteStreams.copy(Files.newInputStream(temp), outputStream);
+                ByteStreams.copy(Files.newInputStream(temp), hasher);
 
                 output.writeIfNeeded(path, outputStream.toByteArray(), hasher.hash());
             } catch (IOException e) {
