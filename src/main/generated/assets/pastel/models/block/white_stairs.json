@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "pastel:block/planks/white",
+    "side": "pastel:block/planks/white",
+    "top": "pastel:block/planks/white"
+  }
+}
