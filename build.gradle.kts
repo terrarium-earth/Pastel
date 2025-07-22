@@ -118,7 +118,7 @@ cloche {
             val jgrapht = module(group = "org.jgrapht", name = "jgrapht-core", version = "1.5.2")
             val jheaps = module(group = "org.jheaps", name = "jheaps", version = "0.14")
             //val revelationary = module(group = "earth.terrarium", name = "revelationary", version = "1.0.1")
-            val databank = module(group = "maven.modrinth", name = "databank", version = "1.1.8.4")
+            val databank = module(group = "maven.modrinth", name = "databank", version = "1.1.8.6")
 
             include(additionalEntityAttributes)
             include(jgrapht)

@@ -1,10 +1,13 @@
 package earth.terrarium.pastel.items.tools;
 
+import com.cmdpro.databank.misc.ColorGradient;
+import earth.terrarium.pastel.api.item.HasColorGradient;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,16 +21,24 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class LightGreatswordItem extends ParryingSwordItem implements SplitDamageHandler {
+public class LightGreatswordItem extends ParryingSwordItem implements SplitDamageHandler, HasColorGradient {
 
+    private final ColorGradient lungeGradient;
     private final int barColor;
 
     public LightGreatswordItem(
-        Tier material, int attackDamage, float attackSpeed, float crit, float reach, int barColor,
+        Tier material, int attackDamage, float attackSpeed, float crit, float reach, int barColor, ColorGradient lungeGradient,
         Properties settings
     ) {
         super(material, attackDamage, attackSpeed, crit, reach, settings);
         this.barColor = barColor;
+        this.lungeGradient = lungeGradient;
+    }
+    public LightGreatswordItem(
+        Tier material, int attackDamage, float attackSpeed, float crit, float reach, int barColor,
+        Properties settings
+    ) {
+        this(material, attackDamage, attackSpeed, crit, reach, barColor, null, settings);
     }
 
     @Override
@@ -67,7 +78,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
                                                           .nextFloat() * 0.2F
             );
             MiscPlayerData.get(player)
-                          .initiateLungeState();
+                          .initiateLungeState(this);
         }
     }
 
@@ -128,5 +139,13 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
     public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
         return entity instanceof Player player && MiscPlayerData.get(player)
                                                                 .isLunging();
+    }
+
+    @Override
+    public ColorGradient getColorGradient(ResourceLocation gradient) {
+        if (gradient.equals(HasColorGradient.LUNGE)) {
+            return lungeGradient;
+        }
+        return null;
     }
 }

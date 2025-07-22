@@ -1,11 +1,20 @@
 package earth.terrarium.pastel.attachments.data;
 
+import com.cmdpro.databank.misc.ColorGradient;
+import com.cmdpro.databank.misc.TrailRender;
+import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.databank.rendering.RenderTypeHandler;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
+import earth.terrarium.pastel.api.item.HasColorGradient;
 import earth.terrarium.pastel.api.item.SleepAlteringItem;
 import earth.terrarium.pastel.networking.s2c_payloads.SyncMentalPresencePayload;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -13,14 +22,22 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -62,7 +79,8 @@ public class MiscPlayerData {
     private Optional<SleepAlteringItem> sleepConsumable = Optional.empty();
 
     // Sword mechanics
-    private boolean isLunging, bHopWindow, perfectCounter;
+    private boolean isLunging, wasLunging, bHopWindow, perfectCounter;
+    private Item lungeItem;
     private int parryTicks;
 
     public MiscPlayerData(@NotNull Player player) {
@@ -83,6 +101,22 @@ public class MiscPlayerData {
         return data;
     }
 
+    private TrailRender lungeTrail;
+    public ColorGradient getLungeGradient() {
+        return new ColorGradient(
+            new Color(181, 255, 254),
+            new Color(149, 182, 255)
+        ).fadeAlpha(1, 0);
+    }
+    public TrailRender getLungeTrail() {
+        if (lungeTrail == null) {
+            lungeTrail = new TrailRender(player.getBoundingBox().getCenter(), 20, 20, 0.25f, PastelCommon.locate("textures/misc/trail/trail.png"),
+                                    RenderTypeHandler::transparent
+            ).setShrink(true);
+        }
+        return lungeTrail;
+    }
+
     public void tick() {
         tickSleep();
         tickSwordMechanics();
@@ -96,14 +130,40 @@ public class MiscPlayerData {
             }
         }
     }
+    @OnlyIn(Dist.CLIENT)
+    public void renderAdditional(RenderLevelStageEvent event) {
+        PoseStack poseStack = event.getPoseStack();
+        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
+        ColorGradient lungeGradient = null;
+        if (lungeItem instanceof HasColorGradient hasColorGradient) {
+            lungeGradient = hasColorGradient.getColorGradient(HasColorGradient.LUNGE);
+        }
+        if (lungeGradient != null) {
+            TrailRender lungeTrail = getLungeTrail();
+            poseStack.pushPose();
+            poseStack.translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
+            double d0 = Mth.lerp(partialTick, player.xOld, player.getX());
+            double d1 = Mth.lerp(partialTick, player.yOld, player.getY());
+            double d2 = Mth.lerp(partialTick, player.zOld, player.getZ());
+            if (isLunging) {
+                lungeTrail.position = new Vec3(d0, d1 + (player.getBoundingBox().getYsize() / 2f), d2);
+            }
+            lungeTrail.render(poseStack, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, lungeGradient);
+            poseStack.popPose();
+        }
+    }
 
     private boolean isInModifiedMotionState() {
         return player.onGround() || player.isSwimming() || player.isFallFlying() || player.getAbilities().flying;
     }
 
-    public void initiateLungeState() {
+    public void initiateLungeState(Item item) {
         isLunging = true;
         bHopWindow = true;
+        lungeItem = item;
+    }
+    public void initiateLungeState() {
+        initiateLungeState(null);
     }
 
     public void endLunge() {
@@ -152,6 +212,19 @@ public class MiscPlayerData {
             }
         } else if (isLunging && isInModifiedMotionState()) {
             bHopWindow = false;
+        }
+        if (!wasLunging && isLunging) {
+            if (player.level().isClientSide) {
+                TrailRender lungeTrail = getLungeTrail();
+                if (lungeTrail != null) {
+                    lungeTrail.reset();
+                    lungeTrail.position = player.getBoundingBox().getCenter();
+                }
+            }
+        }
+        wasLunging = isLunging;
+        if (player.level().isClientSide) {
+            getLungeTrail().tick();
         }
     }
 
@@ -241,7 +314,7 @@ public class MiscPlayerData {
         AttachmentUtil.syncToTracking(
             new Payload(
                 player.getUUID(), ticksBeforeSleep, sleepingWindow, sleepInvincibility,
-                (Optional<Item>) (Object) sleepConsumable
+                (Optional<Item>) (Object) sleepConsumable, new LungeData(isLunging, Optional.ofNullable(lungeItem))
             ), player.level(), player.blockPosition()
         );
     }
@@ -263,7 +336,7 @@ public class MiscPlayerData {
     }
 
     public record Payload(
-        UUID id, int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable
+        UUID id, int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable, LungeData lungeData
     ) implements CustomPacketPayload {
 
         public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
@@ -272,6 +345,7 @@ public class MiscPlayerData {
             ByteBufCodecs.INT, Payload::sleepingWindow,
             ByteBufCodecs.INT, Payload::sleepInvincibility,
             ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)), Payload::sleepConsumable,
+            LungeData.CODEC, Payload::lungeData,
             Payload::new
         );
 
@@ -290,11 +364,20 @@ public class MiscPlayerData {
             data.sleepingWindow = payload.sleepingWindow();
             data.sleepInvincibility = payload.sleepInvincibility();
             data.sleepConsumable = (Optional<SleepAlteringItem>) (Object) payload.sleepConsumable;
+            data.isLunging = payload.lungeData.isLunging;
+            data.lungeItem = payload.lungeData.lungeItem.orElse(null);
         }
 
         @Override
         public Type<? extends CustomPacketPayload> type() {
             return TYPE;
         }
+    }
+    public record LungeData(boolean isLunging, Optional<Item> lungeItem) {
+        public static final StreamCodec<RegistryFriendlyByteBuf, LungeData> CODEC = StreamCodec.composite(
+            ByteBufCodecs.BOOL, LungeData::isLunging,
+            ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)), LungeData::lungeItem,
+            LungeData::new
+        );
     }
 }

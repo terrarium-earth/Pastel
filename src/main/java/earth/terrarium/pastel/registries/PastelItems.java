@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.registries;
 
+import com.cmdpro.databank.misc.ColorGradient;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
@@ -184,6 +185,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -607,15 +609,17 @@ public class PastelItems {
     ));
     public static final DeferredItem<LightGreatswordItem> KNOTTED_SWORD = register(item(
         "knotted_sword", () -> new LightGreatswordItem(
-            PastelToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff, IS.of(1, Rarity.UNCOMMON)
-                                                                               .durability(
+            PastelToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff,
+            new ColorGradient(new Color(139, 255, 213, 0), new Color(0, 178, 183)).addPoint(new Color(139, 255, 213), 0.05f).fadeAlpha(1, 0), IS.of(1, Rarity.UNCOMMON)
+                                                                                   .durability(
                                                                                    PastelToolMaterial.VERDIGRIS.getUses())
         ), InkColors.GREEN
     ));
     public static final DeferredItem<NectarLanceItem> NECTAR_LANCE = register(item(
         "nectar_lance", () -> new NectarLanceItem(
-            PastelToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff, IS.of(1, Rarity.EPIC)
-                                                                           .durability(
+            PastelToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff,
+            new ColorGradient(new Color(246, 192, 255, 0), new Color(155, 0, 204)).addPoint(new Color(246, 192, 255), 0.05f).fadeAlpha(1, 0), IS.of(1, Rarity.EPIC)
+                                                                                                   .durability(
                                                                                PastelToolMaterial.NECTAR.getUses())
         ), InkColors.PURPLE
     ));

@@ -8,6 +8,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
+import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.data_loaders.ParticleSpawnerParticlesDataLoader;
@@ -105,6 +106,7 @@ public class PastelClientEvents {
         pastelBus.addListener(PastelClientEvents::registerDecorators);
 
         NeoForge.EVENT_BUS.addListener(PastelClientEvents::onWorldRenderStart);
+        NeoForge.EVENT_BUS.addListener(PastelClientEvents::handlePlayerRendering);
         NeoForge.EVENT_BUS.addListener(PastelClientEvents::onRenderBlockOutlines);
         NeoForge.EVENT_BUS.addListener(PastelClientEvents::onLogout);
         NeoForge.EVENT_BUS.addListener(PastelClientEvents::onLogin);
@@ -337,6 +339,17 @@ public class PastelClientEvents {
                     Pastel.getClientInstance()
                           .renderLines(minecraft.level, event.getPoseStack(), bufferSource, event.getCamera());
                 }
+            }
+        }
+    }
+    private static void handlePlayerRendering(RenderLevelStageEvent event) {
+        var stage = event.getStage();
+
+        if (stage == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.level == null) return;
+            for (Player i : mc.level.players()) {
+                i.getData(MiscPlayerData.ATTACHMENT).renderAdditional(event);
             }
         }
     }
