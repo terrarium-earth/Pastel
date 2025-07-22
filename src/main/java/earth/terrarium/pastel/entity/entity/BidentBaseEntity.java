@@ -1,5 +1,9 @@
 package earth.terrarium.pastel.entity.entity;
 
+import com.cmdpro.databank.misc.ColorGradient;
+import com.cmdpro.databank.misc.TrailRender;
+import com.cmdpro.databank.rendering.RenderTypeHandler;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
@@ -16,6 +20,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+
+import java.awt.*;
 
 public abstract class BidentBaseEntity extends ThrownTrident {
 
@@ -70,5 +76,32 @@ public abstract class BidentBaseEntity extends ThrownTrident {
     @Override
     public AABB makeBoundingBox() {
         return super.makeBoundingBox();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide()) {
+            TrailRender render = getTrail();
+            if (render != null) {
+                render.tick();
+            }
+        }
+    }
+
+    private TrailRender trail;
+    public ColorGradient getGradient() {
+        return new ColorGradient(
+            new Color(181, 255, 254),
+            new Color(149, 182, 255)
+        ).fadeAlpha(1, 0);
+    }
+    public TrailRender getTrail() {
+        if (trail == null) {
+            trail = new TrailRender(position(), 20, 20, 0.15f, PastelCommon.locate("textures/misc/trail/trail.png"),
+                                    RenderTypeHandler::transparent
+            ).setShrink(true);
+        }
+        return trail;
     }
 }

@@ -1,11 +1,14 @@
 package earth.terrarium.pastel.entity.render;
 
+import com.cmdpro.databank.misc.TrailRender;
+import com.cmdpro.databank.rendering.RenderHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import earth.terrarium.pastel.entity.entity.BidentBaseEntity;
 import earth.terrarium.pastel.entity.entity.BidentMirrorImageEntity;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -16,8 +19,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
 public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
@@ -38,10 +44,42 @@ public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
     }
 
     @Override
+    public boolean shouldRender(BidentBaseEntity livingEntity, Frustum camera, double camX, double camY, double camZ) {
+        return true;
+    }
+
+    @Override
     public void render(
         BidentBaseEntity bidentBaseEntity, float yaw, float tickDelta, PoseStack poseStack,
         MultiBufferSource vertexConsumerProvider, int light
     ) {
+        TrailRender trail = bidentBaseEntity.getTrail();
+        if (trail != null) {
+            poseStack.pushPose();
+            double d0 = Mth.lerp(tickDelta, bidentBaseEntity.xOld, bidentBaseEntity.getX());
+            double d1 = Mth.lerp(tickDelta, bidentBaseEntity.yOld, bidentBaseEntity.getY());
+            double d2 = Mth.lerp(tickDelta, bidentBaseEntity.zOld, bidentBaseEntity.getZ());
+            Vec3 posOffset = new Vec3(d0, d1, d2).subtract(bidentBaseEntity.position());
+            Vec3 pos = bidentBaseEntity.position()
+                                       .add(posOffset);
+            poseStack.translate(-pos.x, -pos.y, -pos.z);
+            Quaternionf offsetRot = new Quaternionf()
+                .rotateY((float) Math.toRadians(
+                    Mth.lerp(tickDelta, bidentBaseEntity.yRotO, bidentBaseEntity.getYRot()) - 90.0F))
+                .rotateZ((float) Math.toRadians(
+                    -135 + Mth.lerp(tickDelta, bidentBaseEntity.xRotO, bidentBaseEntity.getXRot()) + 90.0F));
+            Vector3f offset = new Vector3f(0, this.offset, 0).rotate(offsetRot);
+            trail.position = bidentBaseEntity.getBoundingBox()
+                                             .getCenter()
+                                             .add(posOffset)
+                                             .add(offset.x, offset.y, offset.z);
+            trail.render(
+                poseStack, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT,
+                bidentBaseEntity.getGradient()
+            );
+            poseStack.popPose();
+        }
+
         ItemStack itemStack = bidentBaseEntity.getTrackedStack();
         renderAsItemStack(bidentBaseEntity, tickDelta, poseStack, vertexConsumerProvider, light, itemStack);
         super.render(bidentBaseEntity, yaw, tickDelta, poseStack, vertexConsumerProvider, light);

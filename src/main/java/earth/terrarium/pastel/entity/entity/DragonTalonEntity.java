@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.entity.entity;
 
+import com.cmdpro.databank.misc.ColorGradient;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
@@ -39,6 +40,7 @@ import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.mutable.MutableDouble;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.Optional;
 
 public class DragonTalonEntity extends BidentBaseEntity {
@@ -315,5 +317,12 @@ public class DragonTalonEntity extends BidentBaseEntity {
     @Override
     public ItemEntity spawnAtLocation(ItemStack stack, float yOffset) {
         return null;
+    }
+    @Override
+    public ColorGradient getGradient() {
+        return new ColorGradient(
+            new Color(255, 159, 100),
+            new Color(255, 46, 46)
+        ).fadeAlpha(1, 0);
     }
 }
