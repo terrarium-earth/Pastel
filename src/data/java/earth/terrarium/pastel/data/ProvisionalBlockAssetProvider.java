@@ -36,10 +36,19 @@ public class ProvisionalBlockAssetProvider extends BlockStateProvider {
 
             stairsBlock(ColoredStairsBlock.byColor(color), plankTex);
             slabBlock(ColoredSlabBlock.byColor(color), modLoc(name(ColoredPlankBlock.byColor(color))), plankTex);
-            buttonBlock(ColoredWoodenButtonBlock.byColor(color), plankTex);
+
+            var button = ColoredWoodenButtonBlock.byColor(color);
+            buttonBlock(button, plankTex);
+            itemModels().buttonInventory(name(button), plankTex);
+            
             pressurePlateBlock(ColoredPressurePlateBlock.byColor(color), plankTex);
-            fenceBlock(ColoredFenceBlock.byColor(color), plankTex);
-            fenceGateBlock(ColoredFenceGateBlock.byColor(color), plankTex);
+
+            var fence = ColoredFenceBlock.byColor(color);
+            fenceBlock(fence, plankTex);
+            itemModels().fenceInventory(name(fence), plankTex);
+            var gate = ColoredFenceGateBlock.byColor(color);
+            fenceGateBlock(gate, plankTex);
+            itemModels().withExistingParent(name(gate), modLoc("block/" + name(gate)));
         }
     }
 

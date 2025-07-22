@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class InkColors {
 
     public static final ResourceLocation BASE_ADVANCEMENT_ID = PastelCommon.locate("midgame/pastel_midgame");
@@ -20,30 +21,30 @@ public class InkColors {
     private static final DeferredRegister<InkColor> REGISTER = DeferredRegister.create(
         PastelRegistryKeys.INK_COLOR, PastelCommon.MOD_ID);
 
-    /**
-     * A lot of places where color is displayed have black backgrounds, which would make displaying normal black on
-     * them... daft.
-     * <p>
-     * So, instead, we use something closer to midnight solution in shade.
-     */
-    public static final int BLACK_TEXT_COLOR = 0xff302951;
+    public static final int BLACK_TEXT_COLOR = 0x003767;
+    public static final int BROWN_TEXT_COLOR = 0x96402c;
 
-    public static final int CYAN_COLOR = 0xff5bffed;
-    public static final int MAGENTA_COLOR = 0xffff4ff6;
-    public static final int YELLOW_COLOR = 0xffeded00;
-    public static final int BLACK_COLOR = 0xff020106;
+    public static final int CYAN_COLOR = 0x00dfdf;
+    public static final int MAGENTA_COLOR = 0xff26ff;
+    public static final int YELLOW_COLOR = 0xfcd617;
+    public static final int BLACK_COLOR = 0x000b1a;
     public static final int WHITE_COLOR = 0xffffffff;
-    public static final int ORANGE_COLOR = 0xfff97b2d;
-    public static final int LIME_COLOR = 0xff98ff37;
-    public static final int PINK_COLOR = 0xffff9fc6;
-    public static final int RED_COLOR = 0xfff12a34;
-    public static final int LIGHT_BLUE_COLOR = 0xff7a9eff;
-    public static final int GREEN_COLOR = 0xff526b0f;
-    public static final int BLUE_COLOR = 0xff2432ff;
-    public static final int PURPLE_COLOR = 0xff802bc4;
-    public static final int BROWN_COLOR = 0xff70400d;
-    public static final int LIGHT_GRAY_COLOR = 0xffadadad;
-    public static final int GRAY_COLOR = 0xff464646;
+    public static final int ORANGE_COLOR = 0xff6817;
+    public static final int LIME_COLOR = 0xb8ff45;
+    public static final int PINK_COLOR = 0xff82a1;
+    public static final int RED_COLOR = 0xeb0915;
+    public static final int LIGHT_BLUE_COLOR = 0x85bbff;
+    public static final int GREEN_COLOR = 0x11894b;
+    public static final int BLUE_COLOR = 0x362cf5;
+    public static final int PURPLE_COLOR = 0xbc21ff;
+    public static final int BROWN_COLOR = 0x5d201b;
+    public static final int LIGHT_GRAY_COLOR = 0xbababa;
+    public static final int GRAY_COLOR = 0x505055;
+
+    // for use sooner than you'd think
+    public static final int ULTRAMARINE_COLOR = 0x0084f;
+    public static final int CERISE_COLOR = 0xe40063;
+    public static final int GOLDEN_OCHRE_COLOR = 0xef9700;
 
 	public static final InkColor CYAN = register(new InkColor(DyeColor.CYAN, "cyan", CYAN_COLOR, BASE_ADVANCEMENT_ID));
 	public static final InkColor LIGHT_BLUE = register(new InkColor(DyeColor.LIGHT_BLUE, "light_blue", LIGHT_BLUE_COLOR, BASE_ADVANCEMENT_ID));
@@ -56,7 +57,7 @@ public class InkColors {
 	public static final InkColor YELLOW = register(new InkColor(DyeColor.YELLOW, "yellow", YELLOW_COLOR, BASE_ADVANCEMENT_ID));
 	public static final InkColor LIME = register(new InkColor(DyeColor.LIME, "lime", LIME_COLOR, BASE_ADVANCEMENT_ID));
 	public static final InkColor GREEN = register(new InkColor(DyeColor.GREEN, "green", GREEN_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor BROWN = register(new InkColor(DyeColor.BROWN, "brown", BROWN_COLOR, BLACK_ADVANCEMENT_ID));
+	public static final InkColor BROWN = register(new InkColor(DyeColor.BROWN, "brown", BROWN_COLOR, BROWN_TEXT_COLOR, BLACK_ADVANCEMENT_ID));
 	public static final InkColor BLACK = register(new InkColor(DyeColor.BLACK, "black", BLACK_COLOR, BLACK_TEXT_COLOR, BLACK_ADVANCEMENT_ID));
 	public static final InkColor GRAY = register(new InkColor(DyeColor.GRAY, "gray", GRAY_COLOR, WHITE_ADVANCEMENT_ID));
 	public static final InkColor LIGHT_GRAY = register(new InkColor(DyeColor.LIGHT_GRAY, "light_gray", LIGHT_GRAY_COLOR, WHITE_ADVANCEMENT_ID));

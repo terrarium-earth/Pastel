@@ -34,7 +34,7 @@ import static earth.terrarium.pastel.PastelCommon.locate;
 
 public class PastelMobEffects {
 
-    public static final int ETERNAL_SLUMBER_COLOR = 0xc35fee;
+        public static final int ETERNAL_SLUMBER_COLOR = 0xc35fee;
     public static boolean effectsAreGettingStacked = false;
 
     private static final DeferredRegister<MobEffect> REGISTER = DeferredRegister.create(
