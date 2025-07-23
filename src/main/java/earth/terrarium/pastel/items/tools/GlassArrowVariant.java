@@ -105,7 +105,7 @@ public class GlassArrowVariant {
         public Attributes(float damage, float speed, float kb, boolean piercing, boolean homing, ResourceKey<DamageType> type,
                           int gStart, int gEnd, TriConsumer<GlassArrowEntity, HitResult, Level> postHit) {
             this(damage, speed, kb, piercing, homing, type, new ColorGradient(new Color(gStart), new Color(gEnd))
-                .fadeAlpha(1F, 0F), postHit);
+                .fadeAlpha(1F, 0F).fadeAlpha(0, 0, 1, 0.05f), postHit);
         }
 
         public Attributes(float damage, float speed, float kb, boolean piercing, boolean homing,

@@ -1,7 +1,9 @@
 package earth.terrarium.pastel.entity.entity;
 
 import com.cmdpro.databank.misc.ColorGradient;
+import com.cmdpro.databank.misc.TrailLeftoverHandler;
 import com.cmdpro.databank.misc.TrailRender;
+import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.databank.rendering.RenderTypeHandler;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
@@ -12,6 +14,7 @@ import earth.terrarium.pastel.items.tools.GlassArrowVariant;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -38,6 +41,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.Optional;
@@ -79,13 +84,6 @@ public class GlassArrowEntity extends AbstractArrow {
         if (tickCount > 400 || inGroundTime >= 20) {
             playSound(SoundEvents.GLASS_BREAK, 0.75F, 0.9F + getRandom().nextFloat() * 0.2F);
             discard();
-        }
-
-        if (this.level().isClientSide()) {
-            var trail = getTrail();
-            if (trail != null) {
-                trail.tick();
-            }
         }
 
         if (isFirstHit())
@@ -328,16 +326,31 @@ public class GlassArrowEntity extends AbstractArrow {
         }
     }
 
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void onClientRemoval() {
+        super.onClientRemoval();
+        TrailRender render = getTrail();
+        if (render != null) {
+            TrailLeftoverHandler.addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
+            shouldRenderTrail = false;
+        }
+    }
+
+    private boolean shouldRenderTrail = true;
     private TrailRender trail;
     public ColorGradient getGradient() {
         return getVariant().getGradient();
     }
 
     public TrailRender getTrail() {
+        if (!shouldRenderTrail) {
+            return null;
+        }
         if (trail == null) {
             trail = new TrailRender(position(), 20, 20, 0.15f, PastelCommon.locate("textures/misc/trail/trail.png"),
                                     RenderTypeHandler::transparent
-            ).setShrink(true);
+            ).setShrink(true).startTicking();
         }
         return trail;
     }

@@ -48,6 +48,11 @@ public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
         super.render(arrow, yaw, tickDelta, poseStack, buffers, light);
     }
 
+    @Override
+    public boolean shouldRender(GlassArrowEntity livingEntity, Frustum camera, double camX, double camY, double camZ) {
+        return true;
+    }
+
     private void renderType(
         GlassArrowEntity arrow, float tickDelta, PoseStack poseStack, MultiBufferSource consumers
     ) {
