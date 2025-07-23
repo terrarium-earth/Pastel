@@ -610,7 +610,7 @@ public class PastelItems {
     public static final DeferredItem<LightGreatswordItem> KNOTTED_SWORD = register(item(
         "knotted_sword", () -> new LightGreatswordItem(
             PastelToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff,
-            new ColorGradient(new Color(139, 255, 213, 0), new Color(0, 178, 183)).addPoint(new Color(139, 255, 213), 0.05f).fadeAlpha(1, 0), IS.of(1, Rarity.UNCOMMON)
+            new ColorGradient(new Color(139, 255, 213), new Color(0, 178, 183)).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f), IS.of(1, Rarity.UNCOMMON)
                                                                                    .durability(
                                                                                    PastelToolMaterial.VERDIGRIS.getUses())
         ), InkColors.GREEN
@@ -618,7 +618,7 @@ public class PastelItems {
     public static final DeferredItem<NectarLanceItem> NECTAR_LANCE = register(item(
         "nectar_lance", () -> new NectarLanceItem(
             PastelToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff,
-            new ColorGradient(new Color(246, 192, 255, 0), new Color(155, 0, 204)).addPoint(new Color(246, 192, 255), 0.05f).fadeAlpha(1, 0), IS.of(1, Rarity.EPIC)
+            new ColorGradient(new Color(246, 192, 255), new Color(155, 0, 204)).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f), IS.of(1, Rarity.EPIC)
                                                                                                    .durability(
                                                                                PastelToolMaterial.NECTAR.getUses())
         ), InkColors.PURPLE

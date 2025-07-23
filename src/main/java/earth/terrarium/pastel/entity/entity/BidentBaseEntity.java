@@ -1,13 +1,16 @@
 package earth.terrarium.pastel.entity.entity;
 
 import com.cmdpro.databank.misc.ColorGradient;
+import com.cmdpro.databank.misc.TrailLeftoverHandler;
 import com.cmdpro.databank.misc.TrailRender;
+import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.databank.rendering.RenderTypeHandler;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -79,28 +82,31 @@ public abstract class BidentBaseEntity extends ThrownTrident {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (this.level().isClientSide()) {
-            TrailRender render = getTrail();
-            if (render != null) {
-                render.tick();
-            }
+    public void onClientRemoval() {
+        super.onClientRemoval();
+        TrailRender render = getTrail();
+        if (render != null) {
+            TrailLeftoverHandler.addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
+            shouldRenderTrail = false;
         }
     }
 
+    private boolean shouldRenderTrail = true;
     private TrailRender trail;
     public ColorGradient getGradient() {
         return new ColorGradient(
             new Color(181, 255, 254),
             new Color(149, 182, 255)
-        ).fadeAlpha(1, 0);
+        ).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f);
     }
     public TrailRender getTrail() {
+        if (!shouldRenderTrail) {
+            return null;
+        }
         if (trail == null) {
             trail = new TrailRender(position(), 20, 20, 0.15f, PastelCommon.locate("textures/misc/trail/trail.png"),
                                     RenderTypeHandler::transparent
-            ).setShrink(true);
+            ).setShrink(true).startTicking();
         }
         return trail;
     }

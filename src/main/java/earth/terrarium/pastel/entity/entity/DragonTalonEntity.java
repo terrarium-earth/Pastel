@@ -323,6 +323,6 @@ public class DragonTalonEntity extends BidentBaseEntity {
         return new ColorGradient(
             new Color(255, 159, 100),
             new Color(255, 46, 46)
-        ).fadeAlpha(1, 0);
+        ).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f);
     }
 }
