@@ -161,6 +161,8 @@ cloche {
 				modRuntimeOnly("curse.maven:xycraft-653786:5601037") { isTransitive = false }
 				modRuntimeOnly("curse.maven:xycraft-machines-653791:5601045") { isTransitive = false }
 				modRuntimeOnly("curse.maven:xycraft-world-653789:5601038") { isTransitive = false }
+                //modRuntimeOnly("maven.modrinth:mmmmmmmmmmmm:neoforge_1.21-2.0.8")  { isTransitive = false }
+                //modRuntimeOnly("maven.modrinth:moonlight:1.21-2.20.3-neoforge")  { isTransitive = false }
 				modRuntimeOnly("maven.modrinth:jei:zRGLFYRx") // cuz xycraft >:(
             }
 

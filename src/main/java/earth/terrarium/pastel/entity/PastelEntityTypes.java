@@ -110,7 +110,7 @@ public class PastelEntityTypes {
         "glass_arrow", EntityType.Builder.<GlassArrowEntity>of(GlassArrowEntity::new, MobCategory.MISC)
                                          .sized(0.5F, 0.5F)
                                          .clientTrackingRange(4)
-                                         .updateInterval(20)
+                                         .updateInterval(1)
     );
     public static final DeferredHolder<EntityType<?>, EntityType<MiningProjectileEntity>> MINING_PROJECTILE = register(
         "mining_projectile", 4, 10, true, EntityDimensions.scalable(0.3F, 0.3F), true, MiningProjectileEntity::new);

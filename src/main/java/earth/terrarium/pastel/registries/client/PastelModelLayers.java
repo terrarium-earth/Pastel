@@ -68,6 +68,7 @@ import earth.terrarium.pastel.entity.models.KindlingCoughEntityModel;
 import earth.terrarium.pastel.entity.models.KindlingEntityModel;
 import earth.terrarium.pastel.entity.models.LizardEntityModel;
 import earth.terrarium.pastel.entity.models.PreservationTurretEntityModel;
+import earth.terrarium.pastel.entity.render.GlassArrowEntityRenderer;
 import earth.terrarium.pastel.render.armor.BedrockArmorModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -104,6 +105,9 @@ public class PastelModelLayers {
         PastelCommon.locate("kindling_cough"), "main");
     public static final ModelLayerLocation ERASER = new ModelLayerLocation(PastelCommon.locate("eraser"), "body");
 
+
+    public static final ModelLayerLocation GLASS_ARROW =
+        new ModelLayerLocation(PastelCommon.locate("glass_arrow"), "main");
 
     /**
      * Mob Heads
@@ -339,6 +343,8 @@ public class PastelModelLayers {
         ClientHooks.registerLayerDefinition(KINDLING_ARMOR, KindlingEntityModel::getTexturedModelData);
         ClientHooks.registerLayerDefinition(KINDLING_COUGH, KindlingCoughEntityModel::getTexturedModelData);
         ClientHooks.registerLayerDefinition(ERASER, EraserEntityModel::getTexturedModelData);
+
+        ClientHooks.registerLayerDefinition(GLASS_ARROW, GlassArrowEntityRenderer.Model::createBodyLayer);
 
         ClientHooks.registerLayerDefinition(ALLAY_HEAD, AllayHeadModel::getTexturedModelData);
         ClientHooks.registerLayerDefinition(AXOLOTL_BLUE_HEAD, AxolotlHeadModel::getTexturedModelData);

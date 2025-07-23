@@ -6,6 +6,8 @@
   "mixins": [
     "AbstractBlockStateMixin",
     "AbstractFireBlockMixin",
+    "AbstractArrowMixin",
+    "ProjectileWeaponItemMixin",
     "AbstractHorseEntityMixin",
     "AllowCopyBlockEntityDataMixin",
     "AnimalEntityMixin",

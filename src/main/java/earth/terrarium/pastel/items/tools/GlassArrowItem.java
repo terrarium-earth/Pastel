@@ -38,7 +38,7 @@ public class GlassArrowItem extends ArrowItem {
     public AbstractArrow asProjectile(Level world, Position pos, ItemStack stack, Direction direction) {
         GlassArrowEntity arrowEntity = new GlassArrowEntity(
             world, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1), null);
-        arrowEntity.pickup = AbstractArrow.Pickup.ALLOWED;
+        arrowEntity.pickup = AbstractArrow.Pickup.DISALLOWED;
         arrowEntity.setVariant(variant);
         return arrowEntity;
     }

@@ -70,6 +70,12 @@ public class Support {
             Attributes.BLOCK_INTERACTION_RANGE);
     }
 
+    public static float refineDamage(float damage) {
+        damage = Math.clamp(damage, 0, Float.MAX_VALUE / 2F);
+        damage = Math.round(damage);
+        return damage;
+    }
+
     public static final DecimalFormat DF = new DecimalFormat("0");
     public static final DecimalFormat DF1 = new DecimalFormat("0.0");
     public static final DecimalFormat DF2 = new DecimalFormat("0.00");
