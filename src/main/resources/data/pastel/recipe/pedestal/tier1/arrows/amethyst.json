@@ -4,7 +4,7 @@
   "time": 200,
   "tier": "basic",
   "colors": {
-    "pastel:magenta": 0,
+    "pastel:magenta": 1,
     "pastel:yellow": 0,
     "pastel:cyan": 0,
     "pastel:black": 0,
@@ -12,19 +12,17 @@
   },
   "experience": 1.0,
   "pattern": [
-    "TMT",
-    " S ",
-    " F "
+    "AA",
+    "GB"
   ],
   "key": {
-    "T": "minecraft:amethyst_shard",
-    "M": "pastel:raw_malachite",
-    "S": "minecraft:stick",
-    "F": "#pastel:resplendent_feathers"
+    "G": "minecraft:amethyst_shard",
+    "A": "pastel:malachite_glass_arrow",
+    "B": "pastel:bismuth_flake"
   },
   "result": {
     "id": "pastel:amethyst_glass_arrow",
-    "count": 4
+    "count": 2
   },
   "required_advancement": "pastel:unlocks/malachite/glass_arrows"
 }

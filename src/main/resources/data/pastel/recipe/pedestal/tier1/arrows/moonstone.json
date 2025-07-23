@@ -8,23 +8,21 @@
     "pastel:yellow": 0,
     "pastel:cyan": 0,
     "pastel:black": 0,
-    "pastel:white": 0
+    "pastel:white": 1
   },
   "experience": 1.0,
   "pattern": [
-    "TMT",
-    " S ",
-    " F "
+    "AA",
+    "GB"
   ],
   "key": {
-    "T": "pastel:moonstone_shard",
-    "M": "pastel:raw_malachite",
-    "S": "minecraft:stick",
-    "F": "#pastel:resplendent_feathers"
+    "G": "pastel:moonstone_shard",
+    "A": "pastel:malachite_glass_arrow",
+    "B": "pastel:bismuth_flake"
   },
   "result": {
     "id": "pastel:moonstone_glass_arrow",
-    "count": 4
+    "count": 2
   },
   "required_advancement": "pastel:unlocks/malachite/glass_arrows"
 }

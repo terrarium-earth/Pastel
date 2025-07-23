@@ -81,9 +81,9 @@ public class GlassArrowEntity extends AbstractArrow {
         var backtrack = getDeltaMovement().reverse();
         super.tick();
 
-        if (tickCount > 400 || inGroundTime >= 20) {
+        if (tickCount > 300 || inGroundTime >= 20) {
             playSound(SoundEvents.GLASS_BREAK, 0.75F, 0.9F + getRandom().nextFloat() * 0.2F);
-            discard();
+            remove(RemovalReason.DISCARDED);
         }
 
         if (isFirstHit())
@@ -99,13 +99,17 @@ public class GlassArrowEntity extends AbstractArrow {
     private void tryHome() {
         if (homingTarget.isPresent()) {
             var target = homingTarget.get();
+
+            var vel = Math.min(getDeltaMovement().length() * 1.5, 3);
             var homeVector = target
                 .position()
                 .add(0, target.getEyeHeight() * 0.75, 0)
                 .subtract(position())
                 .normalize();
-            var deltaDeltaDeltaMovement = homeVector.scale(0.65);
-            setDeltaMovement(getDeltaMovement().add(deltaDeltaDeltaMovement));
+
+            var curVector = getDeltaMovement().normalize();
+            var finalVector = curVector.scale(0.66).add(homeVector.scale(0.34)).scale(vel);
+            setDeltaMovement(finalVector);
         }
     }
 
@@ -233,11 +237,16 @@ public class GlassArrowEntity extends AbstractArrow {
 
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
-        if (getVariant().getAttributes().homing() && homingTarget.isPresent())
+        if (activelyHoming())
             return;
 
         super.onHitBlock(blockHitResult);
         postHit(blockHitResult);
+    }
+
+    public boolean activelyHoming() {
+        return getVariant().getAttributes()
+                           .homing() && homingTarget.isPresent();
     }
 
     private void postHit(HitResult hit) {

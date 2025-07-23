@@ -28,22 +28,18 @@
     },
     {
       "type": "pastel:pedestal_crafting",
-      "text": "book.pastel.guidebook.glass_arrows.page2.text",
       "recipe_id": "pastel:pedestal/tier1/arrows/amethyst"
     },
     {
       "type": "pastel:pedestal_crafting",
-      "text": "book.pastel.guidebook.glass_arrows.page3.text",
       "recipe_id": "pastel:pedestal/tier1/arrows/citrine"
     },
     {
       "type": "pastel:pedestal_crafting",
-      "text": "book.pastel.guidebook.glass_arrows.page4.text",
       "recipe_id": "pastel:pedestal/tier1/arrows/onyx"
     },
     {
       "type": "pastel:pedestal_crafting",
-      "text": "book.pastel.guidebook.glass_arrows.page5.text",
       "recipe_id": "pastel:pedestal/tier1/arrows/moonstone"
     }
   ]

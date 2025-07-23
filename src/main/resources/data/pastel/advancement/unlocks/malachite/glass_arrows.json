@@ -11,6 +11,12 @@
       "conditions": {
         "advancement": "pastel:pluck_resplendent_feather"
       }
+    },
+    "collected_bismuth": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:lategame/collect_bismuth"
+      }
     }
   }
 }
