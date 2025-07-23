@@ -23,6 +23,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
@@ -82,6 +84,7 @@ public abstract class BidentBaseEntity extends ThrownTrident {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void onClientRemoval() {
         super.onClientRemoval();
         TrailRender render = getTrail();
