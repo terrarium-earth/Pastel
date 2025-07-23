@@ -26,7 +26,7 @@ public class GlassArrowVariant {
     private static final Attributes TOP =
         new Attributes(1F, 1F, 5F, false, false, PastelDamageTypes.IMPALING, 0xf0fffd, 0x1c819a);
     private static final Attributes AME =
-        new Attributes(0.5F, 0.25F, 0F, false, true, DamageTypes.MAGIC, 0xffd6ff, 0xcb14c8);
+        new Attributes(0.5F, 0.334F, 0F, false, true, DamageTypes.MAGIC, 0xffd6ff, 0xcb14c8);
     private static final Attributes CIT =
         new Attributes(1F, 2F, 0F, true, false, DamageTypes.MAGIC, 0xfffbf2, 0xffa21f);
     private static final Attributes ONY =
@@ -105,7 +105,7 @@ public class GlassArrowVariant {
         public Attributes(float damage, float speed, float kb, boolean piercing, boolean homing, ResourceKey<DamageType> type,
                           int gStart, int gEnd, TriConsumer<GlassArrowEntity, HitResult, Level> postHit) {
             this(damage, speed, kb, piercing, homing, type, new ColorGradient(new Color(gStart), new Color(gEnd))
-                .fadeAlpha(1F, 0F).fadeAlpha(0, 0, 1, 0.05f), postHit);
+                .fadeAlpha(1F, 0.1F).fadeAlpha(0, 0, 1, 0.05f), postHit);
         }
 
         public Attributes(float damage, float speed, float kb, boolean piercing, boolean homing,

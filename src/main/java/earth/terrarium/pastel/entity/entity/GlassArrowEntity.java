@@ -348,7 +348,7 @@ public class GlassArrowEntity extends AbstractArrow {
             return null;
         }
         if (trail == null) {
-            trail = new TrailRender(position(), 20, 20, 0.15f, PastelCommon.locate("textures/misc/trail/trail.png"),
+            trail = new TrailRender(position(), 60, 60, 0.15f, PastelCommon.locate("textures/misc/trail/trail.png"),
                                     RenderTypeHandler::transparent
             ).setShrink(true).startTicking();
         }
