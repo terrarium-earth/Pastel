@@ -112,7 +112,7 @@ public class PastelCapabilityHandlers {
         event.registerBlockEntity(
             Capabilities.ItemHandler.BLOCK,
             type.get(),
-            SidedCapabilityProvider::exposeItemHandlers
+            SidedCapabilityProvider::exposeItemHandlersChecked
         );
     }
 
@@ -121,7 +121,7 @@ public class PastelCapabilityHandlers {
         event.registerBlockEntity(
             Capabilities.FluidHandler.BLOCK,
             type.get(),
-            SidedCapabilityProvider::exposeFluidHandlers
+            SidedCapabilityProvider::exposeFluidHandlersChecked
         );
     }
 }
