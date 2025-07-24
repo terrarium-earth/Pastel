@@ -1,6 +1,8 @@
 package earth.terrarium.pastel.entity.entity;
 
 import com.cmdpro.databank.misc.ColorGradient;
+import earth.terrarium.pastel.api.energy.color.InkColor;
+import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
@@ -540,8 +542,8 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
     @Override
     public ColorGradient getGradient() {
         return new ColorGradient(
-            new Color(255, 159, 100),
-            new Color(255, 46, 46)
+            new Color(InkColors.YELLOW_COLOR),
+            new Color(0xFF601C)
         ).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f);
     }
 }

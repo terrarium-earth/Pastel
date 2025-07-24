@@ -1,5 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
+import com.cmdpro.databank.misc.ColorGradient;
+import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
@@ -17,6 +19,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.*;
 
 public class BidentMirrorImageEntity extends BidentBaseEntity {
     public BidentMirrorImageEntity(Level world) {
@@ -92,4 +96,11 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
         );
     }
 
+    @Override
+    public ColorGradient getGradient() {
+        return new ColorGradient(
+            new Color(0xE3E0FF),
+            new Color(InkColors.PURPLE_COLOR)
+        ).fadeAlpha(0.8F, 0).fadeAlpha(0, 0, 1, 0.05f);
+    }
 }

@@ -98,10 +98,11 @@ public abstract class BidentBaseEntity extends ThrownTrident {
     private TrailRender trail;
     public ColorGradient getGradient() {
         return new ColorGradient(
-            new Color(181, 255, 254),
-            new Color(149, 182, 255)
+            new Color(0xCCFFF4),
+            new Color(0x00A687)
         ).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f);
     }
+
     public TrailRender getTrail() {
         if (!shouldRenderTrail) {
             return null;

@@ -214,9 +214,9 @@ public class DragonTalonEntity extends BidentBaseEntity {
         if (yoinked == null)
             return;
 
-        var yPos = yoinked.position();
-        var heightDif = Math.abs(yPos.y - target.y);
-        var velocity = target.subtract(yPos);
+        var yoinkPos = yoinked.position();
+        var heightDif = Math.abs(yoinkPos.y - target.y);
+        var velocity = target.subtract(yoinkPos);
         var sneaking = yoinked.isShiftKeyDown();
         var bonusMod = 1f;
 
@@ -239,7 +239,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
         xMod *= bonusMod;
         yMod *= bonusMod;
 
-        if (yoinked == getOwner() && yPos.y > target.y && !sneaking)
+        if (yoinked == getOwner() && yoinkPos.y > target.y && !sneaking)
             yMod = 0;
 
         yoinked.setDeltaMovement(velocity.multiply(xMod, yMod, xMod)
@@ -321,8 +321,8 @@ public class DragonTalonEntity extends BidentBaseEntity {
     @Override
     public ColorGradient getGradient() {
         return new ColorGradient(
-            new Color(255, 159, 100),
-            new Color(255, 46, 46)
+            new Color(255, 158, 60),
+            new Color(255, 77, 38)
         ).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f);
     }
 }
