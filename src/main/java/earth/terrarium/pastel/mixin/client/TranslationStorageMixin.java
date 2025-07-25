@@ -37,9 +37,9 @@ public class TranslationStorageMixin {
         builder.put("item.pastel.dragon_talon", "Sellsword Winblades");
         builder.put("effect.pastel.fatal_slumber", "Fat Slumber");
         builder.put("item.pastel.oblivion_pickaxe", "Oblivious Pickaxe");
-        builder.put("item.pastel.whispy_circlet", "Whisky Circlet");
         builder.put("item.pastel.shimmerstone_gem", "Stimmerstone Gem");
         builder.put("block.pastel.shimmerstone_block", "Block of Stimmerstone");
+        builder.put("block.pastel.amethyst_glass_arrow", "Chlorophyte Bullet");
 
         builder.put("item.pastel.mermaids_gem", translations.get("item.pastel.storm_stone"));
         builder.put("item.pastel.storm_stone", translations.get("item.pastel.mermaids_gem"));

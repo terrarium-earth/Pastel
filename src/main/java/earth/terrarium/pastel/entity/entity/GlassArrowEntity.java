@@ -108,7 +108,7 @@ public class GlassArrowEntity extends AbstractArrow {
                 .normalize();
 
             var curVector = getDeltaMovement().normalize();
-            var finalVector = curVector.scale(0.66).add(homeVector.scale(0.34)).scale(vel);
+            var finalVector = curVector.scale(0.6).add(homeVector.scale(0.4)).scale(vel);
             setDeltaMovement(finalVector);
         }
     }
@@ -196,8 +196,10 @@ public class GlassArrowEntity extends AbstractArrow {
         if (owner instanceof LivingEntity lvo)
             lvo.setLastHurtMob(target);
 
+        boolean discard = false;
         if (target.hurt(source, damage)) {
             postHurt(target, source);
+            discard = true;
         }
 
         if (!attributes.piercing()) {
@@ -206,6 +208,9 @@ public class GlassArrowEntity extends AbstractArrow {
         }
 
         postHit(hit);
+
+        if (discard && getVariant().getAttributes().homing())
+            remove(RemovalReason.DISCARDED);
     }
 
     protected void postHurt(Entity entity, DamageSource source) {

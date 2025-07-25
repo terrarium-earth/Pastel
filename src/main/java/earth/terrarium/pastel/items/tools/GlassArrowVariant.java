@@ -26,7 +26,7 @@ public class GlassArrowVariant {
     private static final Attributes TOP =
         new Attributes(1F, 1F, 5F, false, false, PastelDamageTypes.IMPALING, 0xf0fffd, 0x1c819a);
     private static final Attributes AME =
-        new Attributes(1F, 1F, 0F, false, true, DamageTypes.MAGIC, 0xffd6ff, 0xcb14c8);
+        new Attributes(1.5F, 1F, 0F, false, true, DamageTypes.MAGIC, 0xffd6ff, 0xcb14c8);
     private static final Attributes CIT =
         new Attributes(1F, 2F, 0F, true, false, DamageTypes.MAGIC, 0xfffbf2, 0xffa21f);
     private static final Attributes ONY =
