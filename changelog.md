@@ -1,2 +1,5 @@
-* Fixed critical sidedness crash
-* Fixed inventory insertion-bottomless bundle crash
+* Fixed a lot of broken Json
+* Fixed cloaked leaves being white
+* Fixed major performance issues
+* Reworked Glass Arrows
+* Added trails to various projectiles
