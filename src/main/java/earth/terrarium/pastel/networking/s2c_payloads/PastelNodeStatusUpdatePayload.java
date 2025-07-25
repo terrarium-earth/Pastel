@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import net.minecraft.core.BlockPos;

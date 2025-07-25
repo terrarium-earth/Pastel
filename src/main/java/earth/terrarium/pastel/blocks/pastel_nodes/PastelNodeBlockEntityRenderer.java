@@ -1,11 +1,11 @@
-package earth.terrarium.pastel.blocks.pastel_network.nodes;
+package earth.terrarium.pastel.blocks.pastel_nodes;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.pastel.PastelUpgradeSignature;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
-import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
+import earth.terrarium.pastel.logistics.PastelLogistics;
+import earth.terrarium.pastel.logistics.network.PastelNetwork;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -196,8 +196,8 @@ public class PastelNodeBlockEntityRenderer implements BlockEntityRenderer<Pastel
             matrices.mulPose(Axis.YP.rotation(node.crystalRotation));
         }
 
-        var color = ColorHelper.colorIntToVec(node.networkUUID.flatMap(id -> Pastel.getClientInstance()
-                                                                                   .getNetwork(id))
+        var color = ColorHelper.colorIntToVec(node.networkUUID.flatMap(id -> PastelLogistics.getClientInstance()
+                                                                                            .getNetwork(id))
                                                               .map(PastelNetwork::getColor)
                                                               .orElse(0xFFFFFF));
         color = ColorHelper.colorIntToVec(ColorHelper.interpolate(color, ColorHelper.WASH, 0.2125F));

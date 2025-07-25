@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.blocks.pastel_network.nodes;
+package earth.terrarium.pastel.blocks.pastel_nodes;
 
 import com.google.common.base.Predicates;
 import earth.terrarium.pastel.PastelCommon;
@@ -8,12 +8,12 @@ import earth.terrarium.pastel.api.item.StampDataCategory;
 import earth.terrarium.pastel.api.item.Stampable;
 import earth.terrarium.pastel.api.pastel.PastelUpgradeSignature;
 import earth.terrarium.pastel.api.pastel.PastelUpgradeable;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
-import earth.terrarium.pastel.blocks.pastel_network.network.NodeRemovalReason;
-import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
-import earth.terrarium.pastel.blocks.pastel_network.network.PastelTransmissionLogic;
-import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
-import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetworkManager;
+import earth.terrarium.pastel.logistics.PastelLogistics;
+import earth.terrarium.pastel.logistics.api.NodeRemovalReason;
+import earth.terrarium.pastel.logistics.network.PastelNetwork;
+import earth.terrarium.pastel.logistics.network.TransmissionLogic;
+import earth.terrarium.pastel.logistics.network.ServerPastelNetwork;
+import earth.terrarium.pastel.logistics.network.ServerPastelNetworkManager;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.helpers.level.BlockReference;
 import earth.terrarium.pastel.inventories.FilteringScreenHandler;
@@ -92,8 +92,8 @@ public class PastelNodeBlockEntity extends BlockEntity
 
     // upgrade impl stuff
     protected boolean lit, triggerTransfer, triggered, waiting, lamp, sensor, updated;
-    protected int transferCount = PastelTransmissionLogic.DEFAULT_MAX_TRANSFER_AMOUNT;
-    protected int transferTime = PastelTransmissionLogic.DEFAULT_TRANSFER_TICKS_PER_NODE;
+    protected int transferCount = TransmissionLogic.DEFAULT_MAX_TRANSFER_AMOUNT;
+    protected int transferTime = TransmissionLogic.DEFAULT_TRANSFER_TICKS_PER_NODE;
     protected int filterSlotRows = DEFAULT_FILTER_SLOT_ROWS;
 
     protected Optional<BlockCapabilityCache<IItemHandler, Direction>> cache = Optional.empty();
@@ -250,8 +250,8 @@ public class PastelNodeBlockEntity extends BlockEntity
     }
 
     public void updateUpgrades() {
-        transferCount = PastelTransmissionLogic.DEFAULT_MAX_TRANSFER_AMOUNT;
-        transferTime = PastelTransmissionLogic.DEFAULT_TRANSFER_TICKS_PER_NODE;
+        transferCount = TransmissionLogic.DEFAULT_MAX_TRANSFER_AMOUNT;
+        transferTime = TransmissionLogic.DEFAULT_TRANSFER_TICKS_PER_NODE;
         var oldFilterSlotCount = filterSlotRows;
         filterSlotRows = DEFAULT_FILTER_SLOT_ROWS;
         triggerTransfer = false;
@@ -328,7 +328,7 @@ public class PastelNodeBlockEntity extends BlockEntity
 		}
 		
 		if (!world.isClient && this.networkUUID.isPresent()) {
-			this.networkUUID = Optional.of(Pastel.getServerInstance().joinOrCreateNetwork(this, this.networkUUID.get()
+			this.networkUUID = Optional.of(PastelLogistics.getServerInstance().joinOrCreateNetwork(this, this.networkUUID.get()
 			).getUUID());
 		}
 		*/
@@ -465,8 +465,8 @@ public class PastelNodeBlockEntity extends BlockEntity
     public void setRemoved() {
         super.setRemoved();
         if (!level.isClientSide()) {
-            Pastel.getServerInstance()
-                  .removeNode(this, NodeRemovalReason.UNLOADED);
+            PastelLogistics.getServerInstance()
+                           .removeNode(this, NodeRemovalReason.UNLOADED);
         }
     }
 
@@ -476,8 +476,8 @@ public class PastelNodeBlockEntity extends BlockEntity
 
     public void onBroken() {
         if (level != null && !level.isClientSide) {
-            Pastel.getServerInstance()
-                  .removeNode(this, NodeRemovalReason.BROKEN);
+            PastelLogistics.getServerInstance()
+                           .removeNode(this, NodeRemovalReason.BROKEN);
         }
     }
 
@@ -588,7 +588,7 @@ public class PastelNodeBlockEntity extends BlockEntity
                                                           .orElseThrow(() -> new IllegalStateException(
                                                               "Attempted to connect a non-existent node - what did " +
                                                               "you do?!"));
-        var manager = Pastel.getInstance(world.isClientSide());
+        var manager = PastelLogistics.getInstance(world.isClientSide());
 
         var sourceNetwork = manager.getNetworkOrEmpty(sourceNode.networkUUID);
         var thisNetwork = manager.getNetworkOrEmpty(this.networkUUID);
@@ -606,8 +606,8 @@ public class PastelNodeBlockEntity extends BlockEntity
         }
 
         if (!world.isClientSide()) {
-            Pastel.getServerInstance()
-                  .connectNodes(this, sourceNode);
+            PastelLogistics.getServerInstance()
+                           .connectNodes(this, sourceNode);
         }
 
         thisNetwork.ifPresent(n -> {
@@ -648,8 +648,8 @@ public class PastelNodeBlockEntity extends BlockEntity
     @Override
     public void clearImpression() {
         if (!level.isClientSide()) {
-            Pastel.getServerInstance()
-                  .removeNode(this, NodeRemovalReason.DISCONNECT);
+            PastelLogistics.getServerInstance()
+                           .removeNode(this, NodeRemovalReason.DISCONNECT);
         }
 
         networkUUID = Optional.empty();
@@ -704,8 +704,8 @@ public class PastelNodeBlockEntity extends BlockEntity
 
         this.color = color;
 
-        var network = networkUUID.flatMap(id -> Pastel.getInstance(level.isClientSide())
-                                                      .getNetwork(id));
+        var network = networkUUID.flatMap(id -> PastelLogistics.getInstance(level.isClientSide())
+                                                               .getNetwork(id));
 
         if (network.isPresent()) {
             network.get()
@@ -722,8 +722,8 @@ public class PastelNodeBlockEntity extends BlockEntity
 
     public Optional<ServerPastelNetwork> getServerNetwork() {
         if (this.networkUUID.isPresent()) {
-            return Pastel.getServerInstance()
-                         .getNetwork(this.networkUUID.get());
+            return PastelLogistics.getServerInstance()
+                                  .getNetwork(this.networkUUID.get());
         }
         return Optional.empty();
     }

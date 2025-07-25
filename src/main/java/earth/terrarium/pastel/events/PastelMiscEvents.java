@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.item.PrioritizedBlockInteraction;
 import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
 import earth.terrarium.pastel.attachments.data.InertiaData;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
+import earth.terrarium.pastel.logistics.PastelLogistics;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.entity.spawners.ShootingStarSpawner;
 import earth.terrarium.pastel.helpers.Support;
@@ -233,10 +233,10 @@ public class PastelMiscEvents {
         }
 
         try {
-            Pastel.getServerInstance()
-                  .tick();
+            PastelLogistics.getServerInstance()
+                           .tick();
         } catch (Exception e) {
-            PastelCommon.logError("Error in the Pastel Network transmission loop.");
+            PastelCommon.logError("Error in the PastelLogistics Network transmission loop.");
             e.printStackTrace();
         }
 

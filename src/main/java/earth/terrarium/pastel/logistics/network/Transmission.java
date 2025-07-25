@@ -1,8 +1,8 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.network;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.helpers.data.SchedulerMap;
 import earth.terrarium.pastel.helpers.interaction.InWorldInteractionHelper;
 import net.minecraft.core.BlockPos;
@@ -18,33 +18,33 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PastelTransmission implements SchedulerMap.Callback {
+public class Transmission implements SchedulerMap.Callback {
 
-    public static final Codec<PastelTransmission> CODEC = RecordCodecBuilder.create(i -> i.group(
+    public static final Codec<Transmission> CODEC = RecordCodecBuilder.create(i -> i.group(
                                                                                               BlockPos.CODEC.listOf()
                                                                                                             .fieldOf(
                                                                                                                 "node_positions")
-                                                                                                            .forGetter(PastelTransmission::getNodePositions),
+                                                                                                            .forGetter(Transmission::getNodePositions),
                                                                                               ItemStack.CODEC.fieldOf("variant")
-                                                                                                             .forGetter(PastelTransmission::getStack),
+                                                                                                             .forGetter(Transmission::getStack),
                                                                                               Codec.LONG.fieldOf(
                                                                                                   "amount")
-                                                                                                        .forGetter(PastelTransmission::getAmount),
+                                                                                                        .forGetter(Transmission::getAmount),
                                                                                               Codec.INT.fieldOf(
                                                                                                   "vertex_time")
-                                                                                                       .forGetter(PastelTransmission::getVertexTime)
+                                                                                                       .forGetter(Transmission::getVertexTime)
                                                                                           )
                                                                                           .apply(
                                                                                               i,
-                                                                                              PastelTransmission::new
+                                                                                              Transmission::new
                                                                                           ));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmission> STREAM_CODEC = StreamCodec.composite(
-        BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), PastelTransmission::getNodePositions,
-        ItemStack.STREAM_CODEC, PastelTransmission::getStack,
-        ByteBufCodecs.VAR_LONG, PastelTransmission::getAmount,
-        ByteBufCodecs.VAR_INT, PastelTransmission::getVertexTime,
-        PastelTransmission::new
+    public static final StreamCodec<RegistryFriendlyByteBuf, Transmission> STREAM_CODEC = StreamCodec.composite(
+        BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), Transmission::getNodePositions,
+        ItemStack.STREAM_CODEC, Transmission::getStack,
+        ByteBufCodecs.VAR_LONG, Transmission::getAmount,
+        ByteBufCodecs.VAR_INT, Transmission::getVertexTime,
+        Transmission::new
     );
 
     private @Nullable ServerPastelNetwork network;
@@ -53,7 +53,7 @@ public class PastelTransmission implements SchedulerMap.Callback {
     private final long amount;
     private final int vertexTime;
 
-    public PastelTransmission(List<BlockPos> nodePositions, ItemStack stack, long amount, int vertexTime) {
+    public Transmission(List<BlockPos> nodePositions, ItemStack stack, long amount, int vertexTime) {
         this.nodePositions = nodePositions;
         this.stack = stack;
         this.amount = amount;

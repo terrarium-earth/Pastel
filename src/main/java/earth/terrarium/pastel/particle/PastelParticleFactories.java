@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.particle;
 
-import earth.terrarium.pastel.blocks.pastel_network.PastelRenderHelper;
+import earth.terrarium.pastel.logistics.client.PastelRenderHelper;
 import earth.terrarium.pastel.particle.client.AzureAuraParticle;
 import earth.terrarium.pastel.particle.client.AzureMoteParticle;
 import earth.terrarium.pastel.particle.client.BloodflyParticle;

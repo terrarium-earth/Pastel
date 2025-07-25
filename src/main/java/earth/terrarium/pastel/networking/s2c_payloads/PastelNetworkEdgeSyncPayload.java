@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
-import earth.terrarium.pastel.blocks.pastel_network.network.ClientPastelNetwork;
-import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
+import earth.terrarium.pastel.logistics.PastelLogistics;
+import earth.terrarium.pastel.logistics.network.ClientPastelNetwork;
+import earth.terrarium.pastel.logistics.network.ServerPastelNetwork;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -94,14 +94,14 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, int color, Graph<Bl
         context.enqueueWork(() -> {
             var level = context.player()
                                .level();
-            Optional<? extends ClientPastelNetwork> network = Pastel.getClientInstance()
-                                                                    .getNetwork(payload.networkUUID);
+            Optional<? extends ClientPastelNetwork> network = PastelLogistics.getClientInstance()
+                                                                             .getNetwork(payload.networkUUID);
             if (network.isPresent()) {
                 network.get()
                        .setGraph(payload.graph);
             } else {
-                ClientPastelNetwork newNetwork = Pastel.getClientInstance()
-                                                       .createNetwork(
+                ClientPastelNetwork newNetwork = PastelLogistics.getClientInstance()
+                                                                .createNetwork(
                                                            (ClientLevel) level, payload.networkUUID, payload.color);
                 newNetwork.setGraph(payload.graph);
             }

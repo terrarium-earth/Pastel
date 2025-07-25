@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.attachments.PastelDataAttachments;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
+import earth.terrarium.pastel.logistics.PastelLogistics;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.config.PastelConfig;
 import earth.terrarium.pastel.data_loaders.CrystalApothecarySimulationsDataLoader;
@@ -197,8 +197,8 @@ public class PastelCommon {
         logInfo("Registering Data Attachments...");
         PastelDataAttachments.register(pastelBus);
 
-        // Pastel
-        logInfo("Registering Pastel Upgrades...");
+        // PastelLogistics
+        logInfo("Registering PastelLogistics Upgrades...");
         PastelPastelUpgrades.register(pastelBus);
         logInfo("Registering Stamp Categories...");
         PastelStampDataCategories.register(pastelBus);
@@ -269,7 +269,7 @@ public class PastelCommon {
         logInfo("Registering Data Loaders...");
         NeoForge.EVENT_BUS.addListener(PastelCommon::registerReloadListeners);
 
-        NeoForge.EVENT_BUS.addListener(Pastel::clearServerInstance);
+        NeoForge.EVENT_BUS.addListener(PastelLogistics::clearServerInstance);
 
         logInfo("Adding to Fabric's Registries...");
         //PastelFlammableBlocks.register(); TODO find an event that makes this not shit your pants

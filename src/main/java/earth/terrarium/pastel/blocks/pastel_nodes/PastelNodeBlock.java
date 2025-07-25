@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.blocks.pastel_network.nodes;
+package earth.terrarium.pastel.blocks.pastel_nodes;
 
 import com.cmdpro.databank.DatabankUtils;
 import com.mojang.serialization.MapCodec;
@@ -6,8 +6,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
-import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
+import earth.terrarium.pastel.logistics.PastelLogistics;
+import earth.terrarium.pastel.logistics.network.PastelNetwork;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelItemTags;
@@ -218,7 +218,7 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 	
 	private static void sendDebugMessage(Level world, BlockPos pos, Player player, PastelNodeBlockEntity blockEntity) {
 		if (blockEntity != null) {
-			Optional<? extends PastelNetwork<?>> network = blockEntity.networkUUID.isPresent() ? Pastel.getInstance(world.isClientSide).getNetwork(blockEntity.networkUUID.get()) : Optional.empty();
+			Optional<? extends PastelNetwork<?>> network = blockEntity.networkUUID.isPresent() ? PastelLogistics.getInstance(world.isClientSide).getNetwork(blockEntity.networkUUID.get()) : Optional.empty();
 			String prefix = world.isClientSide ? "C (" : "S (";
 			Optional<DyeColor> color = blockEntity.getColor();
 			String colorString = color.isEmpty() ? "<uncolored>" : color.get().toString();

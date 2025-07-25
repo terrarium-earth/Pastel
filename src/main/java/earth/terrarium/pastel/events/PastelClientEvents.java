@@ -10,7 +10,7 @@ import earth.terrarium.pastel.api.interaction.ItemProvider;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
+import earth.terrarium.pastel.logistics.PastelLogistics;
 import earth.terrarium.pastel.data_loaders.ParticleSpawnerParticlesDataLoader;
 import earth.terrarium.pastel.data_loaders.dimension.ColorGradingLoader;
 import earth.terrarium.pastel.data_loaders.dimension.EnvDataLoader;
@@ -218,7 +218,7 @@ public class PastelClientEvents {
         event.addPackFinders(
             PastelCommon.locate("pastel_style_amethyst"),
             PackType.CLIENT_RESOURCES,
-            Component.literal("Pastel-Style Amethyst"),
+            Component.literal("PastelLogistics-Style Amethyst"),
             PackSource.BUILT_IN,
             false,
             Pack.Position.TOP
@@ -283,7 +283,7 @@ public class PastelClientEvents {
     }
 
     private static void onLogout(ClientPlayerNetworkEvent.LoggingOut event) {
-        Pastel.clearClientInstance();
+        PastelLogistics.clearClientInstance();
         PastelShaders.clearDimensionShaders();
     }
 
@@ -336,8 +336,8 @@ public class PastelClientEvents {
                                             .getEntity();
 
                 if (focusedEntity instanceof LivingEntity) {
-                    Pastel.getClientInstance()
-                          .renderLines(minecraft.level, event.getPoseStack(), bufferSource, event.getCamera());
+                    PastelLogistics.getClientInstance()
+                                   .renderLines(minecraft.level, event.getPoseStack(), bufferSource, event.getCamera());
                 }
             }
         }

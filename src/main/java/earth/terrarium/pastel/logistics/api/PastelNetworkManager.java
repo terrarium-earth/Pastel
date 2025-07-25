@@ -1,5 +1,6 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.api;
 
+import earth.terrarium.pastel.logistics.network.PastelNetwork;
 import net.minecraft.world.level.Level;
 
 import java.util.Optional;

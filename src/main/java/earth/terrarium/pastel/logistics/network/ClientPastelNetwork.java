@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.network;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;

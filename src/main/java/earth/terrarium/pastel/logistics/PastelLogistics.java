@@ -1,15 +1,15 @@
-package earth.terrarium.pastel.blocks.pastel_network;
+package earth.terrarium.pastel.logistics;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.blocks.pastel_network.network.ClientPastelNetworkManager;
-import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetworkManager;
-import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetworkManager;
+import earth.terrarium.pastel.logistics.network.ClientPastelNetworkManager;
+import earth.terrarium.pastel.logistics.api.PastelNetworkManager;
+import earth.terrarium.pastel.logistics.network.ServerPastelNetworkManager;
 import earth.terrarium.pastel.particle.render.EarlyRenderingParticleContainer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 
-public class Pastel {
+public class PastelLogistics {
 
     @OnlyIn(Dist.CLIENT)
     private static ClientPastelNetworkManager clientManager;

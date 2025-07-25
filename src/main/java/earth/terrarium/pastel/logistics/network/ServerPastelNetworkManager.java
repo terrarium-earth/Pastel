@@ -1,7 +1,9 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.network;
 
-import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.helpers.data.CodecHelper;
+import earth.terrarium.pastel.logistics.api.NodeRemovalReason;
+import earth.terrarium.pastel.logistics.api.PastelNetworkManager;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkRemovedPayload;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -83,7 +85,7 @@ public class ServerPastelNetworkManager extends SavedData
 
         // You uh, should not be getting here if both networks are equal.
         // Handle that in the impression please and thanks.
-        throw new IllegalStateException("Tried to merge a Pastel Network with itself");
+        throw new IllegalStateException("Tried to merge a PastelLogistics Network with itself");
     }
 
     private static void addAndSync(PastelNodeBlockEntity newNode, PastelNodeBlockEntity reference) {
@@ -151,15 +153,15 @@ public class ServerPastelNetworkManager extends SavedData
         return manager;
     }
 
-    private static @NotNull HashMap<PastelTransmission, Integer> transDecode(
+    private static @NotNull HashMap<Transmission, Integer> transDecode(
         CompoundTag schedulerNbt, ServerPastelNetwork network) {
         var transmissions = schedulerNbt.getList("transmissions", Tag.TAG_COMPOUND);
         var timers = schedulerNbt.getIntArray("timers");
-        var map = new HashMap<PastelTransmission, Integer>();
+        var map = new HashMap<Transmission, Integer>();
 
         for (int i = 0; i < transmissions.size(); i++) {
-            var result = PastelTransmission.CODEC.decode(NbtOps.INSTANCE, transmissions.get(i))
-                                                 .result();
+            var result = Transmission.CODEC.decode(NbtOps.INSTANCE, transmissions.get(i))
+                                           .result();
 
             if (result.isEmpty())
                 continue;
@@ -185,13 +187,13 @@ public class ServerPastelNetworkManager extends SavedData
         }
     }
 
-    private static CompoundTag transgender(Map<PastelTransmission, Integer> trans) {
+    private static CompoundTag transgender(Map<Transmission, Integer> trans) {
         var transNbt = new CompoundTag();
         var transmissions = new ListTag();
         var timers = new int[trans.size()];
-        for (Map.Entry<PastelTransmission, Integer> transmissionEntry : trans.entrySet()) {
-            var result = PastelTransmission.CODEC.encodeStart(NbtOps.INSTANCE, transmissionEntry.getKey())
-                                                 .result();
+        for (Map.Entry<Transmission, Integer> transmissionEntry : trans.entrySet()) {
+            var result = Transmission.CODEC.encodeStart(NbtOps.INSTANCE, transmissionEntry.getKey())
+                                           .result();
             if (result.isPresent()) {
                 transmissions.add(result.get());
                 timers[transmissions.size() - 1] = transmissionEntry.getValue();

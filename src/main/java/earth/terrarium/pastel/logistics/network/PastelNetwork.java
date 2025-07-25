@@ -1,6 +1,6 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.network;
 
-import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeColor;
@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class PastelNetwork<W extends Level> {
+public abstract class PastelNetwork<W extends Level> {
 
     protected Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
     protected final W world;

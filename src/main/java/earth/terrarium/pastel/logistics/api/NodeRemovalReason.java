@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.api;
 
 public enum NodeRemovalReason {
     UNLOADED(false, false),

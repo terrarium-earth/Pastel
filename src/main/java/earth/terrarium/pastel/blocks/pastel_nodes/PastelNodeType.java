@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.blocks.pastel_network.nodes;
+package earth.terrarium.pastel.blocks.pastel_nodes;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

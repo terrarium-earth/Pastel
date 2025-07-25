@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
-import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
+import earth.terrarium.pastel.logistics.PastelLogistics;
+import earth.terrarium.pastel.logistics.network.ServerPastelNetwork;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.FriendlyByteBuf;
@@ -27,8 +27,8 @@ public record PastelNetworkRemovedPayload(UUID networkUUID) implements CustomPac
 
     public static void execute(PastelNetworkRemovedPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            Pastel.getClientInstance()
-                  .removeNetwork(payload.networkUUID);
+            PastelLogistics.getClientInstance()
+                           .removeNetwork(payload.networkUUID);
         });
     }
 

@@ -32,7 +32,7 @@ public class PastelConfig implements ConfigData {
     @Comment("Post process shaders")
     public boolean PostProcess = true;
 
-    @Comment("Items transported by a Pastel Network spawn particles")
+    @Comment("Items transported by a PastelLogistics Network spawn particles")
     public boolean PastelNetworkParticles = true;
 
     @Comment("Adjusts the general brightness of the dimension (an increase of 1 is a lot, for reference)")

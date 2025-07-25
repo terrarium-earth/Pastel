@@ -1,8 +1,8 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.network;
 
 import earth.terrarium.pastel.api.item.ItemReference;
-import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
-import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
+import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeType;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelTransmissionPayload;
@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class PastelTransmissionLogic {
+public class TransmissionLogic {
 
     private enum TransferMode {
         PUSH,
@@ -39,7 +39,7 @@ public class PastelTransmissionLogic {
     private Map<BlockPos, Map<BlockPos, GraphPath<BlockPos, DefaultEdge>>> pathCache = new HashMap<>();
 
 
-    public PastelTransmissionLogic(ServerPastelNetwork network) {
+    public TransmissionLogic(ServerPastelNetwork network) {
         this.network = network;
     }
 
@@ -209,14 +209,14 @@ public class PastelTransmissionLogic {
         return false;
     }
 
-    public Optional<PastelTransmission> createTransmissionOnValidPath(
+    public Optional<Transmission> createTransmissionOnValidPath(
         PastelNodeBlockEntity source, PastelNodeBlockEntity destination, ItemStack variant, long amount,
         int vertexTime
     ) {
         GraphPath<BlockPos, DefaultEdge> graphPath = getPath(this.network.getGraph(), source, destination);
         if (graphPath != null) {
             PastelNodeStatusUpdatePayload.sendPastelNodeStatusUpdate(List.of(source), true);
-            return Optional.of(new PastelTransmission(graphPath.getVertexList(), variant, amount, vertexTime));
+            return Optional.of(new Transmission(graphPath.getVertexList(), variant, amount, vertexTime));
         }
         return Optional.empty();
     }

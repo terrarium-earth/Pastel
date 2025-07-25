@@ -1,7 +1,8 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.network;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.pastel.blocks.pastel_network.PastelRenderHelper;
+import earth.terrarium.pastel.logistics.api.PastelNetworkManager;
+import earth.terrarium.pastel.logistics.client.PastelRenderHelper;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;

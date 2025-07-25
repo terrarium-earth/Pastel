@@ -1,13 +1,14 @@
-package earth.terrarium.pastel.blocks.pastel_network.network;
+package earth.terrarium.pastel.logistics.network;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
-import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
-import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
+import earth.terrarium.pastel.logistics.PastelLogistics;
+import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeType;
 import earth.terrarium.pastel.helpers.data.SchedulerMap;
 import earth.terrarium.pastel.helpers.interaction.TickLooper;
+import earth.terrarium.pastel.logistics.api.NodeRemovalReason;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkRemovedPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
@@ -62,8 +63,8 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 
     // new transfers are checked for every 10 ticks
     private final TickLooper transferLooper;
-    protected final SchedulerMap<PastelTransmission> transmissions;
-    protected final PastelTransmissionLogic transmissionLogic;
+    protected final SchedulerMap<Transmission> transmissions;
+    protected final TransmissionLogic transmissionLogic;
 
     public ServerPastelNetwork(ServerLevel world, UUID uuid, int color) {
         this(world, uuid, color, new TickLooper(10));
@@ -78,7 +79,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         super(world, uuid, color);
         this.transferLooper = transferLoop;
         this.transmissions = new SchedulerMap<>();
-        this.transmissionLogic = new PastelTransmissionLogic(this);
+        this.transmissionLogic = new TransmissionLogic(this);
 
         for (PastelNodeType type : PastelNodeType.values()) {
             this.loadedNodes.put(type, new HashSet<>());
@@ -226,8 +227,8 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
                     vertex, PastelBlockEntities.PASTEL_NODE.get());
                 be.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.setNetworkUUID(null));
             }
-            Pastel.getServerInstance()
-                  .removeNetwork(this.getUUID());
+            PastelLogistics.getServerInstance()
+                           .removeNetwork(this.getUUID());
         }
 
         // if our network is still big enough, check if all vertices are still interconnected
@@ -310,8 +311,8 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
             }
 
             // and create a network for that group
-            ServerPastelNetwork newNetwork = Pastel.getServerInstance()
-                                                   .createNetwork(world, initialNode);
+            ServerPastelNetwork newNetwork = PastelLogistics.getServerInstance()
+                                                            .createNetwork(world, initialNode);
             Map<BlockPos, BlockPos> edges = new Object2ObjectArrayMap<>();
             for (BlockPos disconnectedNode : smallerSet) {
                 for (DefaultEdge edge : this.graph.edgesOf(disconnectedNode)) {
@@ -362,8 +363,8 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
                                       );
                                   });
 
-        Pastel.getServerInstance()
-              .removeNetwork(networkToIncorporate.getUUID());
+        PastelLogistics.getServerInstance()
+                       .removeNetwork(networkToIncorporate.getUUID());
         addNode(node);
         addNode(otherNode);
         addEdge(node, otherNode);
@@ -474,7 +475,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         tickNodeEffects();
     }
 
-    public Map<PastelTransmission, Integer> getTransmissions() {
+    public Map<Transmission, Integer> getTransmissions() {
         return transmissions.getMap();
     }
 
@@ -482,7 +483,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         List<PastelNodeBlockEntity> nodeSync = new ArrayList<>();
 
 
-        for (Map.Entry<PastelTransmission, Integer> transPair : transmissions) {
+        for (Map.Entry<Transmission, Integer> transPair : transmissions) {
             var transmission = transPair.getKey();
             var remainingTravelTime = transPair.getValue();
             var nodes = transmission.getNodePositions();
@@ -511,7 +512,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         }
     }
 
-    public void addTransmission(PastelTransmission transmission, int travelTime) {
+    public void addTransmission(Transmission transmission, int travelTime) {
         transmission.setNetwork(this);
         this.transmissions.put(transmission, travelTime);
     }
