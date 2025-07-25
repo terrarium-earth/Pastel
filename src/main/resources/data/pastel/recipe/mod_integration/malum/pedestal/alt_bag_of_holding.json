@@ -2,12 +2,14 @@
   "type": "pastel:pedestal",
   "time": 240,
   "tier": "basic",
-  "magenta": 4,
-  "yellow": 0,
-  "cyan": 4,
-  "black": 0,
-  "white": 0,
-  "experience": 2.0,
+  "colors": {
+    "magenta": 4,
+    "yellow": 0,
+    "cyan": 4,
+    "black": 0,
+    "white": 0,
+    "experience": 2.0
+  },
   "pattern": [
     "OOO",
     "TWT",

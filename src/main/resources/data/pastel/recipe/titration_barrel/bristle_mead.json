@@ -111,17 +111,5 @@
     "id": "pastel:bristle_mead",
     "count": 4
   },
-  "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:not",
-      "value": {
-        "type": "pastel:tags_populated",
-        "registry": "minecraft:fluid",
-        "values": [
-          "c:honey"
-        ]
-      }
-    }
-  ]
+  "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook"
 }

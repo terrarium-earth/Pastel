@@ -108,17 +108,5 @@
       }
     }
   },
-  "required_advancement": "pastel:triggers/confirmed_drinking_age",
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:not",
-      "value": {
-        "type": "pastel:tags_populated",
-        "registry": "minecraft:fluid",
-        "values": [
-          "c:honey"
-        ]
-      }
-    }
-  ]
+  "required_advancement": "pastel:triggers/confirmed_drinking_age"
 }

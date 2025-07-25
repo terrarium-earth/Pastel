@@ -120,7 +120,7 @@
       "type": "pastel:tags_populated",
       "registry": "minecraft:item",
       "values": [
-        "c:foods/rices"
+        "c:foods/rice"
       ]
     }
   ]

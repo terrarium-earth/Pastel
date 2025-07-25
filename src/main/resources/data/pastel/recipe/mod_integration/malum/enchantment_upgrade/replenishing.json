@@ -1,23 +1,19 @@
 {
   "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:black_pigment"
+  },
+  "item_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 8
+  },
+  "xp_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 400
+  },
   "enchantment": "malum:replenishing",
-  "levels": [
-    {
-      "experience": 400,
-      "item": "pastel:black_pigment",
-      "item_count": 8
-    },
-    {
-      "experience": 1600,
-      "item": "pastel:black_pigment",
-      "item_count": 32
-    },
-    {
-      "experience": 3200,
-      "item": "pastel:black_pigment",
-      "item_count": 128
-    }
-  ],
+  "group": "malum",
+  "level_cap": 5,
   "required_advancement": "pastel:mod_integration/malum/replenishing",
   "neoforge:conditions": [
     {

@@ -2,7 +2,7 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "id": "pastel:citrine_ore"
+      "item": "pastel:citrine_ore"
     }
   ],
   "processing_time": 250,

@@ -546,4 +546,5 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
             new Color(0xFF601C)
         ).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f);
     }
+
 }
