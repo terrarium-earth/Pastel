@@ -68,10 +68,11 @@ jobs:
                     version-resolver: exact
 
                     dependencies: |
-                        cloth-config | depends | *
-                        modonomicon | depends | *
-                        curios | depends | *
-                        databank | embedded | *
+                        cloth-config(required)
+                        modonomicon(required)
+                        curios(required)
+                        databank(embedded)
+                        emi(recommended)
 
             -   name: Generate Discord Embed
                 run: ./gradlew injectEmbed
