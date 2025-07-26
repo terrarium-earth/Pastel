@@ -62,7 +62,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack {
 
-    // Entry Types
+    // Sachet Types
     public static final ResourceLocation WEB_LINK_ENTRY_TYPE = PastelCommon.locate("web_link");
 
     // Page Types

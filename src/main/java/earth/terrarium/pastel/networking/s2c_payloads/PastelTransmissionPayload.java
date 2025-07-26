@@ -60,7 +60,7 @@ public record PastelTransmissionPayload(int networkColor, int travelTime, Transm
                .level()
                .addParticle(
                    new PastelTransmissionParticleEffect(
-                       transmission.getNodePositions(), transmission.getStack(),
+                       transmission.getNodePositions(), transmission.getWrapper(),
                        travelTime, color
                    ), spawnPos.getX() + 0.5, spawnPos.getY() + 0.5, spawnPos.getZ() + 0.5, 0, 0, 0
                );

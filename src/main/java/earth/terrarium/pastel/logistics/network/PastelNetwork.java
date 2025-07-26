@@ -1,97 +1,27 @@
 package earth.terrarium.pastel.logistics.network;
 
-import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public abstract class PastelNetwork<W extends Level> {
+public abstract class PastelNetwork<L extends Level> {
 
     protected Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-    protected final W world;
+    protected final L level;
     protected final UUID uuid;
     protected int color;
 
-    public enum NodePriority {
-        GENERIC,
-        MODERATE,
-        HIGH
-    }
-
-    public PastelNetwork(W world, UUID uuid, int color) {
-        this.world = world;
+    public PastelNetwork(L level, UUID uuid, int color) {
+        this.level = level;
         this.uuid = uuid;
         this.color = color;
-    }
-
-    public int size() {
-        return graph.vertexSet()
-                    .size();
-    }
-
-    public W getLevel() {
-        return this.world;
-    }
-
-    public Graph<BlockPos, DefaultEdge> getGraph() {
-        return this.graph;
-    }
-
-    public boolean addEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
-        return addEdge(node.getBlockPos(), parent.getBlockPos());
-    }
-
-    public boolean addEdge(BlockPos pos1, BlockPos pos2) {
-        if (!hasEdge(pos1, pos2)) {
-            graph.addEdge(pos1, pos2);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean hasEdge(BlockPos pos1, BlockPos pos2) {
-        if (!graph.containsVertex(pos1) || !graph.containsVertex(pos2))
-            return false;
-
-        return graph.containsEdge(pos1, pos2);
-    }
-
-    public boolean removeEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
-        return graph.removeEdge(node.getBlockPos(), parent.getBlockPos()) != null;
-    }
-
-    public UUID getUUID() {
-        return this.uuid;
-    }
-
-    public int getColor() {
-        return this.color;
-    }
-
-    public void setColor(Optional<DyeColor> dyeColor) {
-        if (dyeColor.isEmpty())
-            return;
-
-        var newColor = dyeColor.get()
-                               .getTextureDiffuseColor();
-
-        if (newColor == this.color)
-            return;
-
-        this.color = newColor;
-    }
-
-    public void setGraph(Graph<BlockPos, DefaultEdge> graph) {
-        this.graph = graph;
     }
 
     @Override
@@ -105,7 +35,18 @@ public abstract class PastelNetwork<W extends Level> {
         return false;
     }
 
-    //TODO: make this into a CODEC after the 1.21.1 port is done.
+    public int getColor() {
+        return color;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public L getLevel() {
+        return level;
+    }
+
     public CompoundTag graphToNbt() {
         var vertices = new ArrayList<>(graph.vertexSet());
         var graphStorage = new CompoundTag();

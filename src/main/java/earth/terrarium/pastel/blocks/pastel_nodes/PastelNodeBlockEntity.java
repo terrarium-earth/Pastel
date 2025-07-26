@@ -86,7 +86,6 @@ public class PastelNodeBlockEntity extends BlockEntity
     protected long lastTransferTick = 0;
     protected final long cachedRedstonePowerTick = 0;
     protected boolean cachedUnpowered = true;
-    protected PastelNetwork.NodePriority priority = PastelNetwork.NodePriority.GENERIC;
     protected long itemCountUnderway = 0;
 
 
@@ -195,10 +194,6 @@ public class PastelNodeBlockEntity extends BlockEntity
         return redstoneRing;
     }
 
-    public PastelNetwork.NodePriority getPriority() {
-        return priority;
-    }
-
     // outer goes first, then inner, then redstone
     public boolean tryInteractRings(ItemStack item, PastelNodeType type) {
         var upgrade = PastelPastelUpgrades.of(item);
@@ -258,8 +253,6 @@ public class PastelNodeBlockEntity extends BlockEntity
         lit = false;
         lamp = false;
         sensor = false;
-        var oldPriority = priority;
-        priority = PastelNetwork.NodePriority.GENERIC;
 
         //First one processed can't compound because it has nothing to compound on
         outerRing.ifPresent(r -> apply(r, Collections.emptyList()));
@@ -279,10 +272,6 @@ public class PastelNodeBlockEntity extends BlockEntity
         }
 
         if (level != null) {
-            networkUUID.ifPresent(uuid -> ServerPastelNetworkManager.get((ServerLevel) level)
-                                                                    .getNetwork(uuid)
-                                                                    .ifPresent(
-                                                                        n -> n.updateNodePriority(this, oldPriority)));
             if (getBlockState().getValue(BlockStateProperties.LIT) != lit)
                 level.setBlockAndUpdate(worldPosition, getBlockState().setValue(BlockStateProperties.LIT, lit));
         }
@@ -796,15 +785,6 @@ public class PastelNodeBlockEntity extends BlockEntity
     public void applyCompounding(PastelUpgradeSignature upgrade) {
         transferCount = Math.round(transferCount * upgrade.stackMult);
         transferTime = Math.round(transferTime * upgrade.speedMult);
-    }
-
-    @Override
-    public void upgradePriority() {
-        if (priority == PastelNetwork.NodePriority.GENERIC) {
-            priority = PastelNetwork.NodePriority.MODERATE;
-        } else {
-            priority = PastelNetwork.NodePriority.HIGH;
-        }
     }
 
     @Override

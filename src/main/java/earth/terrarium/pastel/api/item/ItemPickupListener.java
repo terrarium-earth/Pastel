@@ -10,7 +10,7 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import java.util.Optional;
 
 /**
- * Implementation detail: While not currently the case in base PastelLogistics. The listener shall be empty if not on an item.
+ * Implementation detail: While not currently the case in base Pastel. The listener shall be empty if not on an item.
  */
 public interface ItemPickupListener {
 

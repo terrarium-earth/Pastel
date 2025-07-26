@@ -422,7 +422,7 @@ public class SanityCommand {
 		
 		// Enchantments with nonexistent unlock enchantment
 		//TODO: Sanity between cloaked+revealed enchants and their tags
-//		for (Map.Entry<RegistryKey<Enchantment>, Enchantment> enchantment : registryManager.get(RegistryKeys.ENCHANTMENT).getEntrySet()) {
+//		for (Map.Sachet<RegistryKey<Enchantment>, Enchantment> enchantment : registryManager.get(RegistryKeys.ENCHANTMENT).getEntrySet()) {
 //			if (enchantment.getValue() instanceof SpectrumEnchantment spectrumEnchantment) {
 //				Identifier advancementIdentifier = spectrumEnchantment.getUnlockAdvancementIdentifier();
 //				AdvancementEntry advancementCriterionAdvancement = advancementLoader.get(advancementIdentifier);

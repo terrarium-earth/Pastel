@@ -236,7 +236,7 @@ public class PastelMiscEvents {
             PastelLogistics.getServerInstance()
                            .tick();
         } catch (Exception e) {
-            PastelCommon.logError("Error in the PastelLogistics Network transmission loop.");
+            PastelCommon.logError("Error in the Logistics Network transmission loop.");
             e.printStackTrace();
         }
 

@@ -11,6 +11,7 @@ import earth.terrarium.pastel.entity.variants.KindlingVariant;
 import earth.terrarium.pastel.entity.variants.LizardFrillVariant;
 import earth.terrarium.pastel.entity.variants.LizardHornVariant;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
+import earth.terrarium.pastel.logistics.api.Payload;
 import earth.terrarium.pastel.recipe.RecipeScaling;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
@@ -45,6 +46,8 @@ public class PastelRegistries {
 
     public static final Registry<StampDataCategory> STAMP_DATA_CATEGORY = register(
         PastelRegistryKeys.STAMP_DATA_CATEGORY, true);
+    public static final Registry<Payload<?, ?>> LOGISTIC_PAYLOAD = register(
+        PastelRegistryKeys.LOGISTIC_PAYLOAD, true);
 
     public static final Registry<MapCodec<? extends ResonanceProcessor>> RESONANCE_PROCESSOR_TYPE = register(
         PastelRegistryKeys.RESONANCE_PROCESSOR_TYPE, false);

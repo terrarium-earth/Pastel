@@ -218,7 +218,7 @@ public class PastelClientEvents {
         event.addPackFinders(
             PastelCommon.locate("pastel_style_amethyst"),
             PackType.CLIENT_RESOURCES,
-            Component.literal("PastelLogistics-Style Amethyst"),
+            Component.literal("Pastel-Style Amethyst"),
             PackSource.BUILT_IN,
             false,
             Pack.Position.TOP

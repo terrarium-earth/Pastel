@@ -12,6 +12,7 @@ import earth.terrarium.pastel.entity.variants.KindlingVariant;
 import earth.terrarium.pastel.entity.variants.LizardFrillVariant;
 import earth.terrarium.pastel.entity.variants.LizardHornVariant;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
+import earth.terrarium.pastel.logistics.api.Payload;
 import earth.terrarium.pastel.recipe.RecipeScaling;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -28,6 +29,7 @@ public class PastelRegistryKeys {
     public static final ResourceKey<Registry<PastelUpgradeSignature>> PASTEL_UPGRADE = of("pastel_upgrade");
     public static final ResourceKey<Registry<RecipeScaling>> RECIPE_SCALING = of("recipe_scaling");
     public static final ResourceKey<Registry<StampDataCategory>> STAMP_DATA_CATEGORY = of("stamp_data_category");
+    public static final ResourceKey<Registry<Payload<?, ?>>> LOGISTIC_PAYLOAD = of("logistic_payload");
 
     public static final ResourceKey<Registry<MapCodec<? extends ResonanceProcessor>>> RESONANCE_PROCESSOR_TYPE = of(
         "resonance_processor_type");

@@ -24,6 +24,7 @@ import earth.terrarium.pastel.events.PastelPlayerEvents;
 import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.events.game.PastelPositionSources;
 import earth.terrarium.pastel.inventories.PastelScreenHandlerTypes;
+import earth.terrarium.pastel.logistics.transfer.PastelPayloads;
 import earth.terrarium.pastel.loot.PastelLootContextTypes;
 import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import earth.terrarium.pastel.loot.PastelLootModifiers;
@@ -197,8 +198,9 @@ public class PastelCommon {
         logInfo("Registering Data Attachments...");
         PastelDataAttachments.register(pastelBus);
 
-        // PastelLogistics
-        logInfo("Registering PastelLogistics Upgrades...");
+        // Logistics
+        PastelPayloads.register(pastelBus);
+        logInfo("Registering Logistics Upgrades...");
         PastelPastelUpgrades.register(pastelBus);
         logInfo("Registering Stamp Categories...");
         PastelStampDataCategories.register(pastelBus);

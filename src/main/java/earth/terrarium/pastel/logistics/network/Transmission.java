@@ -5,59 +5,62 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.blocks.pastel_nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.helpers.data.SchedulerMap;
 import earth.terrarium.pastel.helpers.interaction.InWorldInteractionHelper;
+import earth.terrarium.pastel.logistics.api.Payload;
+import earth.terrarium.pastel.registries.PastelRegistries;
+import earth.terrarium.pastel.registries.PastelRegistryKeys;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Transmission implements SchedulerMap.Callback {
+public class Transmission<T, C> implements SchedulerMap.Callback {
 
-    public static final Codec<Transmission> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                              BlockPos.CODEC.listOf()
-                                                                                                            .fieldOf(
-                                                                                                                "node_positions")
-                                                                                                            .forGetter(Transmission::getNodePositions),
-                                                                                              ItemStack.CODEC.fieldOf("variant")
-                                                                                                             .forGetter(Transmission::getStack),
-                                                                                              Codec.LONG.fieldOf(
-                                                                                                  "amount")
-                                                                                                        .forGetter(Transmission::getAmount),
-                                                                                              Codec.INT.fieldOf(
-                                                                                                  "vertex_time")
-                                                                                                       .forGetter(Transmission::getVertexTime)
-                                                                                          )
-                                                                                          .apply(
-                                                                                              i,
-                                                                                              Transmission::new
-                                                                                          ));
+    @SuppressWarnings("unchecked")
+    public static final Codec<Transmission<?, ?>> CODEC = RecordCodecBuilder.create(i -> i.group(
+        BlockPos.CODEC.listOf()
+                      .fieldOf(
+                          "node_positions")
+                      .forGetter(Transmission::getNodePositions),
+        PastelRegistries.LOGISTIC_PAYLOAD.byNameCodec().dispatch(Payload.Wrapper::getType, Payload::wrapperCodec)
+                                         .fieldOf("reference").forGetter(Transmission::getWrapper),
+        Codec.INT.fieldOf(
+            "amount")
+                  .forGetter(Transmission::getCount),
+        Codec.INT.fieldOf(
+            "vertex_time")
+                 .forGetter(Transmission::getVertexTime)).apply(
+                     i,
+                     Transmission::new
+    ));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, Transmission> STREAM_CODEC = StreamCodec.composite(
+    @SuppressWarnings("unchecked")
+    public static final StreamCodec<RegistryFriendlyByteBuf, Transmission<?, ?>> STREAM_CODEC = StreamCodec.composite(
         BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), Transmission::getNodePositions,
-        ItemStack.STREAM_CODEC, Transmission::getStack,
-        ByteBufCodecs.VAR_LONG, Transmission::getAmount,
+        ByteBufCodecs.registry(PastelRegistryKeys.LOGISTIC_PAYLOAD).dispatch(Payload.Wrapper::getType, Payload::wrapperStream), Transmission::getWrapper,
+        ByteBufCodecs.VAR_INT, Transmission::getCount,
         ByteBufCodecs.VAR_INT, Transmission::getVertexTime,
         Transmission::new
     );
 
     private @Nullable ServerPastelNetwork network;
     private final List<BlockPos> nodePositions;
-    private final ItemStack stack;
-    private final long amount;
+    private final T reference;
+    private final Payload<T, C> payload;
+    private final int count;
     private final int vertexTime;
 
-    public Transmission(List<BlockPos> nodePositions, ItemStack stack, long amount, int vertexTime) {
+    public Transmission(List<BlockPos> nodePositions, Payload.Wrapper<T, C> reference, int count, int vertexTime) {
         this.nodePositions = nodePositions;
-        this.stack = stack;
-        this.amount = amount;
+        this.reference = reference.getWrapped();
+        this.count = count;
         this.vertexTime = vertexTime;
+        this.payload = reference.getType();
     }
 
     public void setNetwork(@NotNull ServerPastelNetwork network) {
@@ -80,16 +83,16 @@ public class Transmission implements SchedulerMap.Callback {
         return vertexTime * (nodePositions.size() - 1);
     }
 
-    public ItemStack getStack() {
-        return this.stack;
+    public Payload.Wrapper getWrapper() {
+        return payload.wrap(reference);
     }
 
-    public long getAmount() {
-        return this.amount;
+    public int getCount() {
+        return this.count;
     }
 
     public BlockPos getStartPos() {
-        return this.nodePositions.get(0);
+        return this.nodePositions.getFirst();
     }
 
     @Override
@@ -106,21 +109,19 @@ public class Transmission implements SchedulerMap.Callback {
         @Nullable PastelNodeBlockEntity destinationNode = this.network.getLoadedNodeAt(destinationPos);
         Level world = this.network.getLevel();
 
-        long inserted = 0;
+        var inserted = 0;
         if (destinationNode != null) {
             var destinationHandler = destinationNode.getConnectedHandler();
             if (destinationHandler != null) {
-                inserted = amount;
-                inserted -= ItemHandlerHelper.insertItemStacked(
-                                                 destinationHandler, stack.copyWithCount((int) amount), false)
-                                             .getCount();
-                destinationNode.addItemCountUnderway(-amount);
+                inserted = count;
+                inserted -= payload.getCount(payload.insert(null, reference, count, false));
+                destinationNode.addItemCountUnderway(-count);
             }
         }
-        if (inserted != amount) {
+        if (inserted != count) {
             InWorldInteractionHelper.scatter(
-                world, destinationPos.getX() + 0.5, destinationPos.getY() + 0.5, destinationPos.getZ() + 0.5, stack,
-                amount - inserted
+                world, destinationPos.getX() + 0.5, destinationPos.getY() + 0.5, destinationPos.getZ() + 0.5, reference,
+                count - inserted
             );
         }
     }

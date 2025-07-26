@@ -48,69 +48,6 @@ public class ServerPastelNetworkManager extends SavedData
                     .computeIfAbsent(type, PERSISTENT_STATE_ID);
     }
 
-    public ServerPastelNetwork createNetwork(ServerLevel world, PastelNodeBlockEntity initialNode) {
-        ServerPastelNetwork network = new ServerPastelNetwork(world, initialNode);
-        this.networks.add(network);
-        initialNode.setNetworkUUID(network.getUUID());
-        return network;
-    }
-
-    // TODO: detach connection logic from pastel node block entities
-    public void connectNodes(PastelNodeBlockEntity child, PastelNodeBlockEntity parent) {
-        var parentNetwork = parent.getServerNetwork();
-        var childNetwork = child.getServerNetwork();
-
-        if (childNetwork.isEmpty() && parentNetwork.isEmpty()) {
-            parentNetwork = Optional.of(createNetwork((ServerLevel) parent.getLevel(), parent));
-
-        }
-
-        if (childNetwork.isEmpty()) {
-            addAndSync(child, parent);
-            return;
-        } else if (parentNetwork.isEmpty()) {
-            addAndSync(parent, child);
-            return;
-        } else if (childNetwork.get() != parentNetwork.get()) {
-            if (parentNetwork.get()
-                             .size() > childNetwork.get()
-                                                   .size()) {
-                parentNetwork.get()
-                             .incorporate(childNetwork.get(), child, parent);
-            } else {
-                childNetwork.get()
-                            .incorporate(parentNetwork.get(), child, parent);
-            }
-        }
-
-        // You uh, should not be getting here if both networks are equal.
-        // Handle that in the impression please and thanks.
-        throw new IllegalStateException("Tried to merge a PastelLogistics Network with itself");
-    }
-
-    private static void addAndSync(PastelNodeBlockEntity newNode, PastelNodeBlockEntity reference) {
-        assert reference.getServerNetwork()
-                        .isPresent();
-        var parentNetwork = reference.getServerNetwork()
-                                     .get();
-        parentNetwork.addNodeAndConnect(newNode, reference);
-        parentNetwork.markDirty(reference.getBlockPos());
-    }
-
-    @Override
-    public ServerPastelNetwork createNetwork(ServerLevel world, UUID uuid, int color) {
-        ServerPastelNetwork network = new ServerPastelNetwork(world, uuid, color);
-        this.networks.add(network);
-        return network;
-    }
-
-    @Override
-    public Optional<ServerPastelNetwork> getNetwork(UUID uuid) {
-        return networks.stream()
-                       .filter(n -> n.uuid.equals(uuid))
-                       .findFirst();
-    }
-
 
     @Override
     public CompoundTag save(CompoundTag nbt, HolderLookup.Provider registryLookup) {
@@ -177,16 +114,6 @@ public class ServerPastelNetworkManager extends SavedData
         return map;
     }
 
-    public void tick() {
-        // using a for here instead of foreach
-        // to prevent ConcurrentModificationExceptions
-        //noinspection ForLoopReplaceableByForEach
-        for (int i = 0; i < this.networks.size(); i++) {
-            this.networks.get(i)
-                         .tick();
-        }
-    }
-
     private static CompoundTag transgender(Map<Transmission, Integer> trans) {
         var transNbt = new CompoundTag();
         var transmissions = new ListTag();
@@ -195,41 +122,13 @@ public class ServerPastelNetworkManager extends SavedData
             var result = Transmission.CODEC.encodeStart(NbtOps.INSTANCE, transmissionEntry.getKey())
                                            .result();
             if (result.isPresent()) {
-                transmissions.add(result.get());
-                timers[transmissions.size() - 1] = transmissionEntry.getValue();
+                    transmissions.add(result.get());
+                    timers[transmissions.size() - 1] = transmissionEntry.getValue();
+                }
             }
-        }
 
-        transNbt.put("transmissions", transmissions);
-        transNbt.putIntArray("timers", timers);
-        return transNbt;
-    }
-
-    @Override
-    public void removeNetwork(UUID uuid) {
-        ServerPastelNetwork foundNetwork = null;
-        for (ServerPastelNetwork network : this.networks) {
-            if (network.uuid.equals(uuid)) {
-                foundNetwork = network;
-                break;
-            }
+            transNbt.put("transmissions", transmissions);
+            transNbt.putIntArray("timers", timers);
+            return transNbt;
         }
-        if (foundNetwork != null) {
-            this.networks.remove(foundNetwork);
-            PastelNetworkRemovedPayload.send(foundNetwork);
-        }
-    }
-
-    public void removeNode(PastelNodeBlockEntity node, NodeRemovalReason reason) {
-        Optional<ServerPastelNetwork> optional = node.getServerNetwork();
-        if (optional.isPresent()) {
-            ServerPastelNetwork network = optional.get();
-
-            if (network.size() == 1) {
-                this.removeNetwork(network.getUUID());
-            } else {
-                network.removeNode(node, reason);
-            }
-        }
-    }
 }
