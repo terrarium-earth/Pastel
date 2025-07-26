@@ -2,7 +2,9 @@ package earth.terrarium.pastel.blocks.deeper_down;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.events.game.PastelGameEvents;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.progression.PastelCriteria;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
@@ -191,26 +193,26 @@ public class HummingstoneBlock extends BaseEntityBlock {
         );
     }
 
-    public static void onHymn(Level world, BlockPos pos, @Nullable Entity entity) {
-        if (!(world.getBlockState(pos)
+    public static void onHymn(Level level, BlockPos pos, @Nullable Entity entity) {
+        if (!(level.getBlockState(pos)
                    .getBlock() instanceof HummingstoneBlock)) {
             return;
         }
 
-        world.gameEvent(entity, PastelGameEvents.HUMMINGSTONE_HYMN, pos);
-        world.playSound(
+        level.gameEvent(entity, PastelGameEvents.HUMMINGSTONE_HYMN, pos);
+        level.playSound(
             null, pos, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.BLOCKS, 1.25F,
-            0.5F + world.random.nextFloat() * 1.2F
+            0.5F + level.random.nextFloat() * 1.2F
         );
-        world.destroyBlock(pos, false);
+        level.destroyBlock(pos, false);
         popResource(
-            world, pos, PastelItems.RESONANCE_SHARD.get()
+            level, pos, PastelItems.RESONANCE_SHARD.get()
                                                    .getDefaultInstance()
         );
 
-        if (entity instanceof ServerPlayer serverPlayerEntity) {
-            PastelAdvancementCriteria.CREATE_HUMMINGSTONE_HYMN.trigger(serverPlayerEntity, (ServerLevel) world, pos);
-        }
+        if (level instanceof ServerLevel sl)
+            Support.areaCriterion(sl, Support.HH_RANGE, pos, PastelAdvancements.ENTER_DIMENSION, p ->
+                PastelCriteria.CREATE_HUMMINGSTONE_HYMN.trigger(p, sl, pos));
     }
 
     @Nullable

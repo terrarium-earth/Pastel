@@ -15,7 +15,7 @@ import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.interaction.TickLooper;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
@@ -162,7 +162,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity
      * gets called 1/second
      */
     private static void tickRecipe(
-        @NotNull Level world, BlockPos blockPos, CrystallarieumBlockEntity crystal,
+        @NotNull Level level, BlockPos blockPos, CrystallarieumBlockEntity crystal,
         @NotNull RecipeHolder<CrystallarieumRecipe> recipe
     ) {
         if (crystal.currentCatalyst == CrystallarieumCatalyst.EMPTY && !recipe.value()
@@ -185,7 +185,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity
         float consumedInkFloat = (recipe.value()
                                         .getInkPerSecond() * crystal.currentCatalyst.growthAccelerationMod() *
                                   crystal.currentCatalyst.inkConsumptionMod());
-        int consumedInt = Support.chanceRound(consumedInkFloat, world.random);
+        int consumedInt = Support.chanceRound(consumedInkFloat, level.random);
         if (crystal.inkStorage.drainEnergy(
             recipe.value()
                   .getInkColor(), consumedInt
@@ -200,7 +200,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity
         crystal.currentGrowthStageTicks += (int) (SECOND * crystal.currentCatalyst.growthAccelerationMod());
 
         // check if a catalyst should get used up
-        if (world.random.nextFloat() < crystal.currentCatalyst.consumeChancePerSecond()) {
+        if (level.random.nextFloat() < crystal.currentCatalyst.consumeChancePerSecond()) {
             ItemStack catalystStack = crystal.getItem(CATALYST_SLOT_ID);
             catalystStack.shrink(1);
             crystal.updateInClientWorld();
@@ -217,16 +217,17 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity
         if (crystal.currentGrowthStageTicks >= recipe.value()
                                                      .getSecondsPerGrowthStage() * SECOND) {
             BlockPos topPos = blockPos.above();
-            BlockState topState = world.getBlockState(topPos);
+            BlockState topState = level.getBlockState(topPos);
             Optional<BlockState> nextState = recipe.value()
                                                    .getNextState(recipe, topState);
             if (nextState.isPresent()) {
-                world.setBlockAndUpdate(topPos, nextState.get());
-                ServerPlayer owner = (ServerPlayer) crystal.getOwnerIfOnline();
-                if (owner != null) {
-                    PastelAdvancementCriteria.CRYSTALLARIEUM_GROWING.trigger(
-                        owner, (ServerLevel) world, topPos, crystal.getItem(CATALYST_SLOT_ID));
-                }
+                level.setBlockAndUpdate(topPos, nextState.get());
+
+                if (level instanceof ServerLevel sl)
+                    Support.areaCriterion(sl, Support.M_RANGE, blockPos, Optional.empty(), p ->
+                        PastelCriteria.CRYSTALLARIEUM_GROWING.trigger(
+                            p, sl, topPos, crystal.getItem(CATALYST_SLOT_ID)));
+
             } else {
                 crystal.canWork = false;
             }

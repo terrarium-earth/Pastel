@@ -17,6 +17,7 @@ import earth.terrarium.pastel.inventories.PedestalScreenHandler;
 import earth.terrarium.pastel.items.magic_items.CraftingTabletItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayBlockBoundSoundInstancePayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
@@ -220,7 +221,15 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
 							* upgrades.getEffectiveValue(UpgradeType.YIELD), level.random
 			));
 
-		xp *= upgrades.getEffectiveValue(UpgradeType.EXPERIENCE);
+        xp *= upgrades.getEffectiveValue(UpgradeType.EXPERIENCE);
+        if (level instanceof ServerLevel sl) {
+            var finalXp = xp;
+            var finalOut = out;
+
+            Support.areaCriterion(sl, Support.H_RANGE, getBlockPos(), getTier().unlockAdvancementId, p ->
+                PastelCriteria.PEDESTAL_CRAFTING.trigger(p, finalOut, (int) finalXp, totalTime));
+        }
+
 		storedXp += Support.chanceRound(xp, level.random);
 		return out;
 	}

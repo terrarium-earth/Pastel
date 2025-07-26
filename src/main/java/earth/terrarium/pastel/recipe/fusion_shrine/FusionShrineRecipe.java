@@ -349,7 +349,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
         }
 
         //only triggered on server side. Therefore, has to be sent to client via S2C packet
-        fusionShrineBlockEntity.grantPlayerFusionCraftingAdvancement(stack, intExperience);
+        fusionShrineBlockEntity.grantCriterion(stack, intExperience);
     }
 
     public boolean shouldPlayCraftingFinishedEffects() {

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.attachments.data.azure_dike;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.attachments.data.AttachmentUtil;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -139,7 +139,7 @@ public class AzureDikeData implements DikeShieldData {
 
             sync(provider);
             if (provider instanceof ServerPlayer serverPlayerEntity) {
-                PastelAdvancementCriteria.AZURE_DIKE_CHARGE.trigger(
+                PastelCriteria.AZURE_DIKE_CHARGE.trigger(
                     serverPlayerEntity, this.currentProt, this.rechargeTicks, 1);
             }
         }

@@ -22,12 +22,9 @@ import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.inventories.CinderhearthScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
-import earth.terrarium.pastel.registries.PastelBlockEntities;
-import earth.terrarium.pastel.registries.PastelItemTags;
-import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -412,7 +409,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity
             return false;
         }
 
-        cinderhearthBlockEntity.structure = CinderhearthBlock.verifyStructure(world, blockPos, null);
+        cinderhearthBlockEntity.structure = CinderhearthBlock.verifyStructure(world, blockPos);
         if (cinderhearthBlockEntity.structure == CinderHearthStructureType.NONE) {
             world.playSound(
                 null, cinderhearthBlockEntity.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS,
@@ -539,11 +536,10 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity
     }
 
     public void grantPlayerCinderhearthSmeltingAdvancement(ItemStack input, List<ItemStack> outputs, int experience) {
-        ServerPlayer serverPlayerEntity = (ServerPlayer) getOwnerIfOnline();
-        if (serverPlayerEntity != null) {
-            PastelAdvancementCriteria.CINDERHEARTH_SMELTING.trigger(
-                serverPlayerEntity, input, outputs, experience, this.upgrades);
-        }
+        Support.areaCriterion(
+            (ServerLevel) level, Support.L_RANGE, getBlockPos(), PastelAdvancements.UNLOCK_CINDERHEARTH, p ->
+            PastelCriteria.CINDERHEARTH_SMELTING.trigger(
+                p, input, outputs, experience, this.upgrades));
     }
 
     public static void playCraftingFinishedEffects(@NotNull CinderhearthBlockEntity cinderhearthBlockEntity) {

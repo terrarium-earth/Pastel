@@ -111,19 +111,19 @@ public abstract class HumusFluid extends PastelFluid {
      * and losing their breath far quicker
      */
     @Override
-    public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+    public void onEntityCollision(BlockState state, Level level, BlockPos pos, Entity entity) {
+        super.onEntityCollision(state, level, pos, entity);
 
-        if (!world.isClientSide && entity instanceof LivingEntity livingEntity) {
+        if (!level.isClientSide && entity instanceof LivingEntity livingEntity) {
             // the entity is hurt at air == -20 and then reset to air = 0
             // this way the entity loses its breath way faster, but gets damaged just as slow afterwards
-            if (livingEntity.isEyeInFluid(PastelFluidTags.HUMUS) && world.getGameTime() % 2 == 0 &&
+            if (livingEntity.isEyeInFluid(PastelFluidTags.HUMUS) && level.getGameTime() % 2 == 0 &&
                 livingEntity.getAirSupply() > 0) {
                 livingEntity.setAirSupply(livingEntity.getAirSupply() - 1);
             }
 
             // just check every 20 ticks for performance
-            if (world.getGameTime() % 20 == 0) {
+            if (level.getGameTime() % 20 == 0) {
                 MobEffectInstance slownessInstance = livingEntity.getEffect(MobEffects.MOVEMENT_SLOWDOWN);
                 if (slownessInstance == null || slownessInstance.getDuration() < 20) {
                     MobEffectInstance newSlownessInstance = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 3);

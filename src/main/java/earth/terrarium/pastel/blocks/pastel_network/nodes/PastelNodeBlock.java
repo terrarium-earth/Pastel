@@ -8,7 +8,7 @@ import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -181,7 +181,7 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 			return ItemInteractionResult.sidedSuccess(world.isClientSide());
 		} else if (DatabankUtils.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_UPGRADING) && stack.is(PastelItemTags.PASTEL_NODE_UPGRADES)) {
 			if (!world.isClientSide() && blockEntity.tryInteractRings(stack, pastelNodeType)) {
-				PastelAdvancementCriteria.PASTEL_NODE_UPGRADING.trigger((ServerPlayer) player, stack);
+				PastelCriteria.PASTEL_NODE_UPGRADING.trigger((ServerPlayer) player, stack);
 				if (!player.getAbilities().instabuild)
 					stack.shrink(1);
 				blockEntity.updateUpgrades();

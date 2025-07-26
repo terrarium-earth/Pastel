@@ -19,7 +19,7 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayBlockBoundSoundInstanc
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.SimpleRecipeInput;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
@@ -179,17 +179,19 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			inputs.setStackInSlot(CENTER, output);
 		}
 
-		getOwner().ifPresent(p -> {
-			if (mode == EnchanterMode.CRAFTING) {
-                assert recipe instanceof EnchanterCraftingRecipe;
-                PastelAdvancementCriteria.ENCHANTER_CRAFTING.trigger(p ,output, ((EnchanterCraftingRecipe) recipe)
-                        .getRequiredExperience());
-            }
-			else
-				PastelAdvancementCriteria.ENCHANTER_UPGRADING.trigger(p ,
-						EnchantmentHelper.getEnchantmentsForCrafting(output),
-						((EnchantmentUpgradeRecipe) recipe).getXpScaling().apply(scaling));
-		});
+
+        var required = recipe.requiredAdvancementIdentifier;
+        if (mode == EnchanterMode.CRAFTING) {
+            assert recipe instanceof EnchanterCraftingRecipe;
+            Support.areaCriterion((ServerLevel) level, Support.H_RANGE + 2, getBlockPos(), required, p ->
+                PastelCriteria.ENCHANTER_CRAFTING.trigger(p ,output, ((EnchanterCraftingRecipe) recipe)
+                    .getRequiredExperience()));
+
+
+        }
+        else
+            Support.areaCriterion((ServerLevel) level, Support.H_RANGE + 2, getBlockPos(), required, p ->
+                PastelCriteria.ENCHANTER_UPGRADING.trigger(p , EnchantmentHelper.getEnchantmentsForCrafting(output), ((EnchantmentUpgradeRecipe) recipe).getXpScaling().apply(scaling)));
 
 		finalize(PastelSoundEvents.ENCHANTER_FINISH);
 	}
@@ -211,8 +213,8 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		finalize(SoundEvents.ENCHANTMENT_TABLE_USE);
 
 		updateVanillaStats(target, data.xpCost);
-		getOwner().ifPresent(p ->
-				PastelAdvancementCriteria.ENCHANTER_ENCHANTING.trigger(p ,target, data.xpCost));
+        Support.areaCriterion((ServerLevel) level, Support.H_RANGE + 2, getBlockPos(), Optional.empty(), p ->
+            PastelCriteria.ENCHANTER_ENCHANTING.trigger(p ,target, data.xpCost));
 	}
 
 	private void updateRecipeAndMode() {

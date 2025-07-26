@@ -18,7 +18,7 @@ import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.helpers.level.BlockReference;
 import earth.terrarium.pastel.inventories.FilteringScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelPastelUpgrades;
@@ -613,7 +613,7 @@ public class PastelNodeBlockEntity extends BlockEntity
         thisNetwork.ifPresent(n -> {
             user.filter(u -> u instanceof ServerPlayer)
                 .ifPresent(p -> {
-                    PastelAdvancementCriteria.PASTEL_NETWORK_CREATING.trigger(
+                    PastelCriteria.PASTEL_NETWORK_CREATING.trigger(
                         (ServerPlayer) p, (ServerPastelNetwork) n);
                 });
         });

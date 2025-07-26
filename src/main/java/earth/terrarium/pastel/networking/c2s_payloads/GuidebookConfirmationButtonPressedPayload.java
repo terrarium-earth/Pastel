@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,7 +29,7 @@ public record GuidebookConfirmationButtonPressedPayload(String confirmationStrin
     public static IPayloadHandler<GuidebookConfirmationButtonPressedPayload> getPayloadHandler() {
         return (payload, context) -> {
             ServerPlayer player = (ServerPlayer) context.player();
-            PastelAdvancementCriteria.CONFIRMATION_BUTTON_PRESSED.trigger(player, payload.confirmationString);
+            PastelCriteria.CONFIRMATION_BUTTON_PRESSED.trigger(player, payload.confirmationString);
             player.level()
                   .playSound(
                       player, player.getX(), player.getY(), player.getZ(), SoundEvents.UI_BUTTON_CLICK.value(),

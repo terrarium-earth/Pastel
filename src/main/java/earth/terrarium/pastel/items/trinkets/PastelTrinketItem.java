@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,7 +56,7 @@ public abstract class PastelTrinketItem extends Item implements ICurioItem {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         ICurioItem.super.onEquip(slotContext, prevStack, stack);
         if (slotContext.entity() instanceof ServerPlayer serverPlayerEntity) {
-            PastelAdvancementCriteria.TRINKET_CHANGE.trigger(serverPlayerEntity);
+            PastelCriteria.TRINKET_CHANGE.trigger(serverPlayerEntity);
         }
     }
 
@@ -65,7 +65,7 @@ public abstract class PastelTrinketItem extends Item implements ICurioItem {
         ICurioItem.super.onUnequip(slotContext, newStack, stack);
 
         if (slotContext.entity() instanceof ServerPlayer serverPlayerEntity) {
-            PastelAdvancementCriteria.TRINKET_CHANGE.trigger(serverPlayerEntity);
+            PastelCriteria.TRINKET_CHANGE.trigger(serverPlayerEntity);
         }
     }
 }

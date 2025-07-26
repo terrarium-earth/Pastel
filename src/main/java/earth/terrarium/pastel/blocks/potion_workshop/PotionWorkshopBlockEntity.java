@@ -13,7 +13,7 @@ import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.level.ContainerWrapper;
 import earth.terrarium.pastel.inventories.PotionWorkshopScreenHandler;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.SimpleRecipeInput;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionMod;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopBrewingRecipe;
@@ -298,11 +298,11 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		// trigger advancements for all brewed potions
 		ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 		if (brewedAmount <= 0) {
-			PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, ItemStack.EMPTY, 0);
+			PastelCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, ItemStack.EMPTY, 0);
 		} else {
 			for (ItemStack potion : results) {
 				if (serverPlayerEntity != null) {
-					PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potion, brewedAmount);
+					PastelCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potion, brewedAmount);
 					potion.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).potion().ifPresent(
 							p -> CriteriaTriggers.BREWED_POTION.trigger(serverPlayerEntity, p));
 				}
@@ -339,7 +339,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 		InventoryHelper.addToInventory(potionWorkshopBlockEntity.inventory, tippedArrows, FIRST_INVENTORY_SLOT, FIRST_INVENTORY_SLOT + INVENTORY_SLOT_COUNT);
 		if (serverPlayerEntity != null) {
-			PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, tippedArrows, tippedArrows.getCount());
+			PastelCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, tippedArrows, tippedArrows.getCount());
 		}
 		
 		potionWorkshopBlockEntity.lastBrewedRecipe = brewingRecipe;
@@ -359,7 +359,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 			if (maxBrewedPotionsAmount < 1) {
 				ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 				if (serverPlayerEntity != null) {
-					PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potionFillableStack, 0);
+					PastelCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potionFillableStack, 0);
 				}
 				return;
 			}
@@ -371,7 +371,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 			// trigger advancements for all brewed potions
 			ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 			if (serverPlayerEntity != null) {
-				PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potionFillableStack, 1);
+				PastelCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potionFillableStack, 1);
 			}
 			
 			potionWorkshopBlockEntity.lastBrewedRecipe = brewingRecipe;

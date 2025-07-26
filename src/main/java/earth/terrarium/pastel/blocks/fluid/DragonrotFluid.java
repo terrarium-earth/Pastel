@@ -142,12 +142,12 @@ public abstract class DragonrotFluid extends PastelFluid {
 
 
     @Override
-    public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+    public void onEntityCollision(BlockState state, Level level, BlockPos pos, Entity entity) {
+        super.onEntityCollision(state, level, pos, entity);
 
-        if (world instanceof ServerLevel serverWorld && entity instanceof LivingEntity livingEntity) {
+        if (level instanceof ServerLevel serverWorld && entity instanceof LivingEntity livingEntity) {
             // just check every 20 ticks for performance
-            if (!livingEntity.isDeadOrDying() && world.getGameTime() % 20 == 0 && !(livingEntity instanceof Enemy)) {
+            if (!livingEntity.isDeadOrDying() && level.getGameTime() % 20 == 0 && !(livingEntity instanceof Enemy)) {
                 var dragon = entity.getType()
                                    .is(PastelEntityTypeTags.DRACONIC);
                 var damage = dragon ? 30 : 6;
@@ -155,9 +155,9 @@ public abstract class DragonrotFluid extends PastelFluid {
                 var cut = dragon ? 100 : 40;
 
                 if (livingEntity.isEyeInFluid(PastelFluidTags.DRAGONROT)) {
-                    livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage);
+                    livingEntity.hurt(PastelDamageTypes.dragonrot(level), damage);
                 } else {
-                    livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage / 2F);
+                    livingEntity.hurt(PastelDamageTypes.dragonrot(level), damage / 2F);
                 }
                 if (!livingEntity.isDeadOrDying()) {
                     MobEffectInstance existingEffect = livingEntity.getEffect(PastelMobEffects.LIFE_DRAIN);

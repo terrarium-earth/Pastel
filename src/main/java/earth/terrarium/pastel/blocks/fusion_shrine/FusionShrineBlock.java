@@ -5,10 +5,11 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
@@ -118,20 +119,19 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
         return false;
     }
 
-    public static boolean verifyStructure(Level world, BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity) {
+    public static boolean verifyStructure(Level level, BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity) {
         Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.FUSION_SHRINE);
-        boolean valid = multiblock.validate(world, blockPos.below(), Rotation.NONE);
+        boolean valid = multiblock.validate(level, blockPos.below(), Rotation.NONE);
 
         if (valid) {
-            if (serverPlayerEntity != null) {
-                PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
-            }
+            if (level instanceof ServerLevel sl)
+                Support.mbCriterion(sl, blockPos, multiblock);
         } else {
-            if (world.isClientSide) {
+            if (level.isClientSide) {
                 ModonomiconHelper.renderMultiblock(
                     multiblock, PastelMultiblocks.FUSION_SHRINE_TEXT, blockPos.below(2), Rotation.NONE);
-            } else if (world.getBlockEntity(blockPos) instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
-                fusionShrineBlockEntity.scatterContents(world);
+            } else if (level.getBlockEntity(blockPos) instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
+                fusionShrineBlockEntity.scatterContents(level);
             }
         }
 

@@ -14,7 +14,7 @@
   },
   "criteria": {
     "trying_to_craft_consuming_pedestal_recipe": {
-      "trigger": "pastel:pedestal_recipe_calculated",
+      "trigger": "pastel:crafted_with_pedestal",
       "conditions": {
         "player": [
           {

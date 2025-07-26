@@ -32,7 +32,7 @@ import earth.terrarium.pastel.loot.PastelLootModifiers;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.networking.PastelS2CPackets;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelArmorMaterials;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelBlockSoundGroups;
@@ -169,7 +169,7 @@ public class PastelCommon {
         logInfo("Registering Status Effects...");
         PastelMobEffects.register(pastelBus);
         logInfo("Registering Advancement Criteria...");
-        PastelAdvancementCriteria.register(pastelBus);
+        PastelCriteria.register(pastelBus);
         logInfo("Registering Particle Types...");
         PastelParticleTypes.register(pastelBus);
         logInfo("Registering Sound Events...");

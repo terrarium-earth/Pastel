@@ -10,13 +10,14 @@ import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
 import earth.terrarium.pastel.capabilities.item.StackHandlerView;
 import earth.terrarium.pastel.events.PastelMiscEvents;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayBlockBoundSoundInstancePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayFusionCraftingFinishedParticlePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayFusionCraftingInProgressParticlePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredFluidRisingParticleEffect;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
@@ -339,11 +340,12 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
         }
     }
 
-    public void grantPlayerFusionCraftingAdvancement(ItemStack stack, int experience) {
-        ServerPlayer serverPlayerEntity = (ServerPlayer) getOwnerIfOnline();
-        if (serverPlayerEntity != null) {
-            PastelAdvancementCriteria.FUSION_SHRINE_CRAFTING.trigger(serverPlayerEntity, stack, experience);
-        }
+    public void grantCriterion(ItemStack stack, int experience) {
+        var required = currentRecipe.value().requiredAdvancementIdentifier;
+
+        if (level instanceof ServerLevel sl)
+            Support.areaCriterion(sl, Support.H_RANGE, getBlockPos(), required, p ->
+                PastelCriteria.FUSION_SHRINE_CRAFTING.trigger(p, stack, experience));
     }
 
     public @NotNull FluidTank getTank() {

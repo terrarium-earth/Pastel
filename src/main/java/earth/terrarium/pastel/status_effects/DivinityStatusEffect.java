@@ -4,7 +4,7 @@ import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
@@ -38,7 +38,7 @@ public class DivinityStatusEffect extends MobEffect {
         boolean doEffects = 40 >> amplifier == 0;
         if (entity instanceof Player player) {
             if (!world.isClientSide) {
-                PastelAdvancementCriteria.DIVINITY_TICK.trigger((ServerPlayer) player);
+                PastelCriteria.DIVINITY_TICK.trigger((ServerPlayer) player);
             }
             if (doEffects) {
                 player.getFoodData()

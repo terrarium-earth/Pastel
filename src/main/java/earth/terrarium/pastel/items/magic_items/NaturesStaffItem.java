@@ -10,7 +10,7 @@ import earth.terrarium.pastel.data_loaders.NaturesStaffConversionDataLoader;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
@@ -267,7 +267,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
                 if (success) {
                     payForUse(player, stack);
-                    PastelAdvancementCriteria.NATURES_STAFF_USE.trigger(
+                    PastelCriteria.NATURES_STAFF_USE.trigger(
                         player, sourceState, world.getBlockState(blockPos));
                     return InteractionResult.CONSUME;
                 }

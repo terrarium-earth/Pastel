@@ -5,14 +5,16 @@ import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
@@ -135,7 +137,6 @@ public enum PedestalTier implements StringRepresentable {
 		Multiblock multiblock;
 		var level = pedestal.getLevel();
 		var pos = pedestal.getBlockPos();
-		var owner = (ServerPlayer) pedestal.getOwnerIfOnline();
 		var maxTier = pedestal.getVariant().getRecipeTier();
 
 		if (maxTier == BASIC)
@@ -147,8 +148,9 @@ public enum PedestalTier implements StringRepresentable {
 			multiblock = PastelMultiblocks.get(proposal.structure);
 
 			if (multiblock.validate(level, pos.below(), Rotation.NONE)) {
-				if (owner != null)
-					PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(owner, multiblock);
+                if (level instanceof ServerLevel sl) {
+                    Support.mbCriterion(sl, pos, multiblock);
+                }
 				tier = proposal;
 			}
 		}

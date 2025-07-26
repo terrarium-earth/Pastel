@@ -105,12 +105,12 @@ public abstract class LiquidCrystalFluid extends PastelFluid {
      * Entities colliding with liquid crystal will get a slight regeneration effect
      */
     @Override
-    public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+    public void onEntityCollision(BlockState state, Level level, BlockPos pos, Entity entity) {
+        super.onEntityCollision(state, level, pos, entity);
 
-        if (!world.isClientSide && entity instanceof LivingEntity livingEntity) {
+        if (!level.isClientSide && entity instanceof LivingEntity livingEntity) {
             // just check every x ticks for performance and slow healing
-            if (world.getGameTime() % 200 == 0) {
+            if (level.getGameTime() % 200 == 0) {
                 MobEffectInstance regenerationInstance = livingEntity.getEffect(MobEffects.REGENERATION);
                 if (regenerationInstance == null) {
                     MobEffectInstance newRegenerationInstance = new MobEffectInstance(MobEffects.REGENERATION, 80);

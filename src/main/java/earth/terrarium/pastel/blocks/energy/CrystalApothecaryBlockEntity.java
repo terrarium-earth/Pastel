@@ -5,10 +5,11 @@ import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
 import earth.terrarium.pastel.data_loaders.CrystalApothecarySimulationsDataLoader;
 import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.BlockPosEventQueue;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
@@ -41,11 +42,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEntity
     implements PlayerOwnedWithName, BlockPosEventQueue.Callback<BlockPosEventQueue.EventEntry> {
@@ -264,12 +261,11 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
                 List<ItemStack> drops = eventState.getDrops(builder);
                 boolean anyDropsUsed = drops.isEmpty();
                 for (ItemStack drop : drops) {
-                    if (hasOwner()) {
-                        Player owner = getOwnerIfOnline();
-                        if (owner instanceof ServerPlayer serverPlayerEntity) {
-                            PastelAdvancementCriteria.CRYSTAL_APOTHECARY_COLLECTING.trigger(serverPlayerEntity, drop);
-                        }
-                    }
+
+                    if (level instanceof ServerLevel sl)
+                        Support.areaCriterion(sl, Support.HH_RANGE, getBlockPos(), Optional.empty(), p ->
+                            PastelCriteria.CRYSTAL_APOTHECARY_COLLECTING.trigger(p, drop));
+
                     ItemStack remainingStack = InventoryHelper.smartAddToInventory(drop, new InvWrapper(this), null);
                     if (remainingStack.isEmpty() || drop.getCount() != remainingStack.getCount()) {
                         anyDropsUsed = true;

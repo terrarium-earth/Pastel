@@ -1,14 +1,13 @@
 package earth.terrarium.pastel.blocks.memory;
 
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.PlayerOwned;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.level.EntityHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayMemoryManifestingParticlesPayload;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
-import earth.terrarium.pastel.registries.PastelBlockEntities;
-import earth.terrarium.pastel.registries.PastelBlockTags;
-import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.progression.PastelCriteria;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -138,22 +137,22 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
     }
 
     public static boolean manifest(
-        @NotNull ServerLevel world, BlockPos blockPos, ItemStack memoryItemStack, @Nullable UUID ownerUUID) {
-        BlockState blockState = world.getBlockState(blockPos);
+        @NotNull ServerLevel level, BlockPos blockPos, ItemStack memoryItemStack, @Nullable UUID ownerUUID) {
+        BlockState blockState = level.getBlockState(blockPos);
         if (blockState.getBlock() instanceof SimpleWaterloggedBlock && blockState.getValue(
             BlockStateProperties.WATERLOGGED)) {
-            world.setBlockAndUpdate(blockPos, Blocks.WATER.defaultBlockState());
+            level.setBlockAndUpdate(blockPos, Blocks.WATER.defaultBlockState());
         } else {
-            world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+            level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
         }
 
-        Optional<Entity> hatchedEntityOptional = hatchEntity(world, blockPos, memoryItemStack);
+        Optional<Entity> hatchedEntityOptional = hatchEntity(level, blockPos, memoryItemStack);
 
         if (hatchedEntityOptional.isPresent()) {
             Entity hatchedEntity = hatchedEntityOptional.get();
 
             PlayMemoryManifestingParticlesPayload.playMemoryManifestingParticles(
-                world, blockPos, hatchedEntity.getType(), 10);
+                level, blockPos, hatchedEntity.getType(), 10);
 
             if (hatchedEntity instanceof Mob hatchedMobEntity) {
                 hatchedMobEntity.setPersistenceRequired();
@@ -164,10 +163,10 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
                 EntityHelper.addPlayerTrust(hatchedEntity, ownerUUID);
             }
 
-            Player owner = PlayerOwned.getPlayerEntityIfOnline(ownerUUID);
-            if (owner instanceof ServerPlayer serverPlayerEntity) {
-                PastelAdvancementCriteria.MEMORY_MANIFESTING.trigger(serverPlayerEntity, hatchedEntity);
-            }
+
+            if (level instanceof ServerLevel sl)
+                Support.areaCriterion(sl, Support.HH_RANGE, blockPos, PastelCommon.locate("unlocks/blocks/memories"), p ->
+                    PastelCriteria.MEMORY_MANIFESTING.trigger(p, hatchedEntity));
 
             return true;
         }

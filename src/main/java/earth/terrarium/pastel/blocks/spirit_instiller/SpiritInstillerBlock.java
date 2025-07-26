@@ -6,10 +6,11 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -50,7 +51,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
     }
 
     public static boolean verifyStructure(
-        Level world, @NotNull BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity,
+        Level level, @NotNull BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity,
         @NotNull SpiritInstillerBlockEntity instiller
     ) {
         Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.SPIRIT_INSTILLER);
@@ -63,7 +64,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
         Rotation checkRotation = lastBlockRotation;
         for (int i = 0; i < Rotation.values().length; i++) {
             valid = multiblock.validate(
-                world, blockPos.below(1)
+                level, blockPos.below(1)
                                .relative(Support.directionFromRotation(checkRotation), offset), checkRotation
             );
             if (valid) {
@@ -79,11 +80,10 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
         instiller.setValidStructure(valid);
 
         if (valid) {
-            if (serverPlayerEntity != null) {
-                PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
-            }
+            if (level instanceof ServerLevel sl)
+                Support.mbCriterion(sl, blockPos, multiblock);
         } else {
-            if (world.isClientSide) {
+            if (level.isClientSide) {
                 Multiblock currentMultiBlock = MultiblockPreviewRenderer.getMultiblock();
                 if (currentMultiBlock == multiblock) {
                     lastBlockRotation = Rotation.values()[(MultiblockPreviewRenderer.getFacingRotation()
@@ -97,7 +97,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
                             .relative(Support.directionFromRotation(lastBlockRotation), offset), lastBlockRotation
                 );
             } else {
-                scatterContents(world, blockPos);
+                scatterContents(level, blockPos);
             }
         }
 

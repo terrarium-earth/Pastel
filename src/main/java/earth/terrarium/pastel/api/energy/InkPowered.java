@@ -4,7 +4,7 @@ import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -85,7 +85,7 @@ public interface InkPowered {
 			long drained = inkStorage.drainEnergy(color, amount);
 			if (drained > 0) {
 				if (player instanceof ServerPlayer serverPlayerEntity) {
-					PastelAdvancementCriteria.INK_CONTAINER_INTERACTION.trigger(serverPlayerEntity, stack, inkStorage, color, -amount);
+					PastelCriteria.INK_CONTAINER_INTERACTION.trigger(serverPlayerEntity, stack, inkStorage, color, -amount);
 				}
 
 				inkStorageItem.setEnergyStorage(stack, inkStorage);

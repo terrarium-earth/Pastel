@@ -13,7 +13,7 @@ import earth.terrarium.pastel.helpers.enchantments.ImprovedCriticalHelper;
 import earth.terrarium.pastel.items.tools.NectarLanceItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
@@ -78,7 +78,7 @@ public class PastelPlayerEvents {
                  .getEntity() instanceof ServerPlayer player) {
 
             if (PastelTrinketItem.hasEquipped(player, PastelItems.JEOPARDANT.get()))
-                PastelAdvancementCriteria.JEOPARDANT_KILL.trigger(player, event.getEntity());
+                PastelCriteria.JEOPARDANT_KILL.trigger(player, event.getEntity());
         }
 
         if (event.getEntity() instanceof ServerPlayer player) {

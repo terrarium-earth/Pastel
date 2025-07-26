@@ -162,6 +162,7 @@ public class PastelAdvancements {
     public static final ResourceLocation UNLOCK_PUFF_CIRCLET = PastelCommon.locate("unlocks/trinkets/puff_circlet");
     public static final ResourceLocation UNLOCK_AETHER_GRACED_NECTAR_GLOVES = PastelCommon.locate(
         "lategame/collect_aether_graced_nectar_gloves");
+    public static final ResourceLocation UNLOCK_CINDERHEARTH = PastelCommon.locate("unlocks/blocks/cinderhearth");
 
     // Misc
     public static final ResourceLocation ASCEND_KINDLING = PastelCommon.locate("ascend_kindling");

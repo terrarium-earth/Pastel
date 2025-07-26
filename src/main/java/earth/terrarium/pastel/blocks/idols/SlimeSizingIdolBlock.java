@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.idols;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.mixin.accessors.SlimeEntityAccessor;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -80,7 +80,7 @@ public class SlimeSizingIdolBlock extends IdolBlock {
 
                 // grant advancements
                 if (entity instanceof ServerPlayer serverPlayerEntity) {
-                    PastelAdvancementCriteria.SLIME_SIZING.trigger(serverPlayerEntity, newSize);
+                    PastelCriteria.SLIME_SIZING.trigger(serverPlayerEntity, newSize);
                 }
                 return true;
             }

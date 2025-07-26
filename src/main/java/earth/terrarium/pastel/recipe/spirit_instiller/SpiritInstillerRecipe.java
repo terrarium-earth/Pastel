@@ -12,7 +12,7 @@ import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity
 import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -26,6 +26,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -149,7 +150,7 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 
     // Calculate and spawn experience
     protected void spawnXPAndGrantAdvancements(
-        ItemStack resultStack, SpiritInstillerBlockEntity spiritInstillerBlockEntity,
+        ItemStack resultStack, SpiritInstillerBlockEntity instiller,
         Upgradeable.UpgradeHolder upgradeHolder, Level world, BlockPos pos
     ) {
         int awardedExperience = 0;
@@ -162,15 +163,14 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 
         // Run Advancement trigger
         grantPlayerSpiritInstillingAdvancementCriterion(
-            spiritInstillerBlockEntity.getOwnerUUID(), resultStack, awardedExperience);
+            (ServerLevel) instiller.getLevel(), instiller.getBlockPos(), resultStack, awardedExperience);
     }
 
-    protected static void grantPlayerSpiritInstillingAdvancementCriterion(
-        UUID playerUUID, ItemStack resultStack, int experience) {
-        ServerPlayer serverPlayerEntity = (ServerPlayer) PlayerOwned.getPlayerEntityIfOnline(playerUUID);
-        if (serverPlayerEntity != null) {
-            PastelAdvancementCriteria.SPIRIT_INSTILLER_CRAFTING.trigger(serverPlayerEntity, resultStack, experience);
-        }
+    protected void grantPlayerSpiritInstillingAdvancementCriterion(
+        ServerLevel level, BlockPos pos, ItemStack resultStack, int experience) {
+        Support.areaCriterion(level, Support.H_RANGE, pos, requiredAdvancementIdentifier, p ->
+            PastelCriteria.SPIRIT_INSTILLER_CRAFTING.trigger(p, resultStack, experience));
+
     }
 
     public float getExperience() {

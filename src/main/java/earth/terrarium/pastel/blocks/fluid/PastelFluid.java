@@ -1,7 +1,8 @@
 package earth.terrarium.pastel.blocks.fluid;
 
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -106,34 +107,33 @@ public abstract class PastelFluid extends FlowingFluid {
 
     public abstract ParticleOptions getSplashParticle();
 
-    public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
-        if (!world.isClientSide) {
+    public void onEntityCollision(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (!level.isClientSide) {
             if (entity instanceof ItemEntity itemEntity && !itemEntity.hasPickUpDelay() && !itemEntity.isRemoved()) {
-                if (world.random.nextInt(100) == 0) {
+                if (level.random.nextInt(100) == 0) {
                     ItemStack itemStack = itemEntity.getItem();
-                    FluidConvertingRecipe recipe = getConversionRecipeFor(getDippingRecipeType(), world, itemStack);
-                    if (recipe != null && !recipe.getResultItem(world.registryAccess())
+                    FluidConvertingRecipe recipe = getConversionRecipeFor(getDippingRecipeType(), level, itemStack);
+                    if (recipe != null && !recipe.getResultItem(level.registryAccess())
                                                  .is(itemStack.getItem())) { // do not try to convert items into
                         // itself for performance reasons
-                        world.playSound(
+                        level.playSound(
                             null, itemEntity.blockPosition(), SoundEvents.WOOL_BREAK, SoundSource.NEUTRAL, 1.0F, 0.9F +
-                                                                                                                 world.getRandom()
+                                                                                                                 level.getRandom()
                                                                                                                       .nextFloat() *
                                                                                                                  0.2F
                         );
 
-                        ItemStack result = assemble(recipe, itemStack, world);
+                        ItemStack result = assemble(recipe, itemStack, level);
                         int count = result.getCount() * itemStack.getCount();
                         result.setCount(count);
 
-                        if (itemEntity.getOwner() instanceof ServerPlayer serverPlayerEntity) {
-                            PastelAdvancementCriteria.FLUID_DIPPING.trigger(
-                                serverPlayerEntity, (ServerLevel) world, pos, itemStack, result);
-                        }
+                        Support.areaCriterion((ServerLevel) level, Support.L_RANGE, pos, Optional.empty(), p ->
+                            PastelCriteria.FLUID_DIPPING.trigger(
+                                p, (ServerLevel) level, pos, itemStack, result));
 
                         itemEntity.discard();
                         MultiblockCrafter.spawnItemStackAsEntitySplitViaMaxCount(
-                            world, itemEntity.position(), result, count, Vec3.ZERO, false, itemEntity.getOwner());
+                            level, itemEntity.position(), result, count, Vec3.ZERO, false, itemEntity.getOwner());
                     }
                 }
             }

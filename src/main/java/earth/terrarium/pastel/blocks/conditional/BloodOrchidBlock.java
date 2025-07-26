@@ -2,7 +2,8 @@ package earth.terrarium.pastel.blocks.conditional;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -26,6 +27,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+
+import java.util.Optional;
 
 public class BloodOrchidBlock extends FlowerBlock implements BonemealableBlock {
 
@@ -69,18 +72,18 @@ public class BloodOrchidBlock extends FlowerBlock implements BonemealableBlock {
 	}
 	
 	@Override
-	public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
 		int age = state.getValue(AGE);
 		if (age > 0) {
-			if (world.isClientSide) {
+			if (level.isClientSide) {
 				return InteractionResult.SUCCESS;
 			} else {
-				world.setBlockAndUpdate(pos, state.setValue(AGE, age - 1));
+				level.setBlockAndUpdate(pos, state.setValue(AGE, age - 1));
 				player.getInventory().placeItemBackInInventory(PastelItems.BLOOD_ORCHID_PETAL.get().getDefaultInstance());
-				world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F, 0.9F + world.random.nextFloat() * 0.2F);
-				if (player instanceof ServerPlayer serverPlayerEntity) {
-					PastelAdvancementCriteria.BLOOD_ORCHID_PLUCKING.trigger(serverPlayerEntity);
-				}
+				level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F, 0.9F + level.random.nextFloat() * 0.2F);
+
+                Support.areaCriterion((ServerLevel) level, Support.L_RANGE, pos, Optional.empty(), p ->
+                    PastelCriteria.BLOOD_ORCHID_PLUCKING.trigger(p));
 				return InteractionResult.CONSUME;
 			}
 		}

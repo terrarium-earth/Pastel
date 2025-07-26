@@ -138,23 +138,23 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
 
 
     @Override
-    public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+    public void onEntityCollision(BlockState state, Level level, BlockPos pos, Entity entity) {
+        super.onEntityCollision(state, level, pos, entity);
 
-        if (!world.isClientSide) {
+        if (!level.isClientSide) {
             if (entity instanceof LivingEntity livingEntity) {
-                if (!livingEntity.isDeadOrDying() && world.getGameTime() % 20 == 0) {
+                if (!livingEntity.isDeadOrDying() && level.getGameTime() % 20 == 0) {
                     var damageMult = 1F;
 
-                    if (world.getBiome(pos)
+                    if (level.getBiome(pos)
                              .is(PastelBiomes.BLACK_LANGAST))
                         damageMult = 9F;
 
                     if (livingEntity.isEyeInFluid(PastelFluidTags.MIDNIGHT_SOLUTION)) {
                         livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50, 0));
-                        livingEntity.hurt(PastelDamageTypes.midnightSolution(world), 2 * damageMult);
+                        livingEntity.hurt(PastelDamageTypes.midnightSolution(level), 2 * damageMult);
                     } else {
-                        livingEntity.hurt(PastelDamageTypes.midnightSolution(world), damageMult);
+                        livingEntity.hurt(PastelDamageTypes.midnightSolution(level), damageMult);
                     }
                     if (livingEntity.isDeadOrDying()) {
                         livingEntity.spawnAtLocation(PastelItems.MIDNIGHT_CHIP.get()
@@ -162,8 +162,8 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
                     }
                 }
             } else if (entity instanceof ItemEntity itemEntity && !itemEntity.hasPickUpDelay()) {
-                if (world.random.nextInt(120) == 0) {
-                    disenchantItemAndSpawnXP(world, itemEntity);
+                if (level.random.nextInt(120) == 0) {
+                    disenchantItemAndSpawnXP(level, itemEntity);
                 }
             }
         }

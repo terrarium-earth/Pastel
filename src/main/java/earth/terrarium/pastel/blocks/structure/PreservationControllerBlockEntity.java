@@ -4,7 +4,7 @@ import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -237,13 +237,11 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 			List<Player> players = level.getEntities(EntityType.PLAYER, checkBox, LivingEntity::isAlive);
 			for (Player playerEntity : players) {
 				if (!playerEntity.isCreative() && !playerEntity.isSpectator()) {
-					if (this.requiredAdvancement != null && DatabankUtils.hasAdvancement(playerEntity, requiredAdvancement)) {
-						PastelAdvancementCriteria.PRESERVATION_CHECK.trigger((ServerPlayer) playerEntity, checkName, true);
-					} else {
-						// yeet
-						PastelAdvancementCriteria.PRESERVATION_CHECK.trigger((ServerPlayer) playerEntity, checkName, false);
-						yeetPlayer(playerEntity);
-					}
+                    var worthy = this.requiredAdvancement == null || DatabankUtils.hasAdvancement(playerEntity, requiredAdvancement);
+                    PastelCriteria.PRESERVATION_CHECK.trigger((ServerPlayer) playerEntity, checkName, worthy);
+
+                    if (!worthy)
+                        yeetPlayer(playerEntity);
 				}
 			}
 		}

@@ -17,7 +17,7 @@ import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.tools.TuningStampItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -346,7 +346,7 @@ public class PastelMiscEvents {
                   );
         }
 
-        PastelAdvancementCriteria.BLOCK_BROKEN.trigger(player, state);
+        PastelCriteria.BLOCK_BROKEN.trigger(player, state);
     }
 
     private static void tagReload(TagsUpdatedEvent event) {

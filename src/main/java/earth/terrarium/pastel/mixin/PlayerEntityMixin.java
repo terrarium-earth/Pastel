@@ -8,7 +8,7 @@ import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.tools.LightGreatswordItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
@@ -125,7 +125,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
     protected void jumpAdvancementCriterion(CallbackInfo ci) {
 
         if ((Object) this instanceof ServerPlayer serverPlayerEntity) {
-            PastelAdvancementCriteria.TAKE_OFF_BELT_JUMP.trigger(serverPlayerEntity);
+            PastelCriteria.TAKE_OFF_BELT_JUMP.trigger(serverPlayerEntity);
         }
     }
 

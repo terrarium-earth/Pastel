@@ -6,13 +6,13 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -48,16 +48,16 @@ public class EnchanterBlock extends InWorldInteractionBlock {
         }
     }
 
-    public static boolean verifyStructure(Level world, BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity) {
+    public static boolean verifyStructure(Level level, BlockPos blockPos) {
         Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.ENCHANTER);
-        boolean valid = multiblock.validate(world, blockPos.below(3), Rotation.NONE);
+        boolean valid = multiblock.validate(level, blockPos.below(3), Rotation.NONE);
 
         if (valid) {
-            if (serverPlayerEntity != null) {
-                PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
+            if (level instanceof ServerLevel sl) {
+                Support.mbCriterion(sl, blockPos, multiblock);
             }
         } else {
-            if (world.isClientSide) {
+            if (level.isClientSide) {
                 ModonomiconHelper.renderMultiblock(
                     PastelMultiblocks.get(PastelMultiblocks.ENCHANTER), PastelMultiblocks.ENCHANTER_TEXT,
                     blockPos.below(4), Rotation.NONE
@@ -97,10 +97,10 @@ public class EnchanterBlock extends InWorldInteractionBlock {
         BlockHitResult hit
     ) {
         if (level.isClientSide) {
-            verifyStructure(level, pos, null);
+            verifyStructure(level, pos);
             return ItemInteractionResult.SUCCESS;
         } else {
-            if (verifyStructure(level, pos, (ServerPlayer) player)) {
+            if (verifyStructure(level, pos)) {
 
                 // if the structure is valid the player can put / retrieve blocks into the shrine
                 BlockEntity blockEntity = level.getBlockEntity(pos);

@@ -9,7 +9,7 @@ import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.mixin.accessors.BiomeAccessor;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
@@ -20,6 +20,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -221,13 +222,15 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
             }
         }
 
-        if (player != null) {
-            PastelAdvancementCriteria.TITRATION_BARREL_TAPPING.trigger(
-                (ServerPlayer) player, harvestedStack, daysSealed, inventoryCount);
+        if (level instanceof ServerLevel sl) {
+            var finalHarvestedStack = harvestedStack;
+            Support.areaCriterion(sl, Support.M_RANGE, blockPos, optionalRecipe.flatMap(r -> r.value().getRequiredAdvancementIdentifier()), p ->
+                PastelCriteria.TITRATION_BARREL_TAPPING.trigger(
+                    p, finalHarvestedStack, daysSealed, inventoryCount));
+        }
 
-
-            if (message != null)
-                player.displayClientMessage(message, true);
+        if (player != null && message != null) {
+            player.displayClientMessage(message, true);
         }
 
         if (shouldReset) {

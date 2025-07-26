@@ -11,7 +11,7 @@ import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.level.BlockVariantHelper;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredExplosionParticleEffect;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.BlockPos;
@@ -178,7 +178,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
                 }
 
                 if (owner instanceof ServerPlayer ownerPlayer && !target.isAlive()) {
-                    PastelAdvancementCriteria.KILLED_BY_INK_PROJECTILE.trigger(ownerPlayer, List.of(target));
+                    PastelCriteria.KILLED_BY_INK_PROJECTILE.trigger(ownerPlayer, List.of(target));
                 }
             }
 

@@ -27,7 +27,6 @@ import earth.terrarium.pastel.progression.advancement.PastelFishingRodHookedCrit
 import earth.terrarium.pastel.progression.advancement.PastelNetworkCreationCriterion;
 import earth.terrarium.pastel.progression.advancement.PastelNodeUpgradeCriterion;
 import earth.terrarium.pastel.progression.advancement.PedestalCraftingCriterion;
-import earth.terrarium.pastel.progression.advancement.PedestalRecipeCalculatedCriterion;
 import earth.terrarium.pastel.progression.advancement.PotionWorkshopBrewingCriterion;
 import earth.terrarium.pastel.progression.advancement.PotionWorkshopCraftingCriterion;
 import earth.terrarium.pastel.progression.advancement.PreservationCheckCriterion;
@@ -42,13 +41,11 @@ import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class PastelAdvancementCriteria {
+public class PastelCriteria {
 
     private static final DeferredRegister<CriterionTrigger<?>> REGISTER = DeferredRegister.create(
         Registries.TRIGGER_TYPE, PastelCommon.MOD_ID);
 
-    public static PedestalRecipeCalculatedCriterion PEDESTAL_RECIPE_CALCULATED
-        = new PedestalRecipeCalculatedCriterion();
     public static PedestalCraftingCriterion PEDESTAL_CRAFTING = new PedestalCraftingCriterion();
     public static FusionShrineCraftingCriterion FUSION_SHRINE_CRAFTING = new FusionShrineCraftingCriterion();
     public static CompletedMultiblockCriterion COMPLETED_MULTIBLOCK = new CompletedMultiblockCriterion();
@@ -88,7 +85,6 @@ public class PastelAdvancementCriteria {
     public static FluidDippingCriterion FLUID_DIPPING = new FluidDippingCriterion();
 
     public static void register(IEventBus bus) {
-        REGISTER.register(PedestalRecipeCalculatedCriterion.ID.getPath(), () -> PEDESTAL_RECIPE_CALCULATED);
         REGISTER.register(PedestalCraftingCriterion.ID.getPath(), () -> PEDESTAL_CRAFTING);
         REGISTER.register(FusionShrineCraftingCriterion.ID.getPath(), () -> FUSION_SHRINE_CRAFTING);
         REGISTER.register(CompletedMultiblockCriterion.ID.getPath(), () -> COMPLETED_MULTIBLOCK);

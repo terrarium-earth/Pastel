@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -53,7 +53,7 @@ public class GrantAdvancementLootFunction extends LootItemConditionalFunction {
         Entity entity = context.getParamOrNull(this.entity.getParam());
         if (entity instanceof ServerPlayer player) {
             for (ResourceLocation id : this.ids) {
-                PastelAdvancementCriteria.LOOT_FUNCTION_TRIGGER.trigger(player, id);
+                PastelCriteria.LOOT_FUNCTION_TRIGGER.trigger(player, id);
             }
         }
         return stack;

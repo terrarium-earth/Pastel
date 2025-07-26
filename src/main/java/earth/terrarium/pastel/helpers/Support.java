@@ -1,6 +1,9 @@
 package earth.terrarium.pastel.helpers;
 
+import com.cmdpro.databank.DatabankUtils;
+import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,11 +19,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.ServerAdvancementManager;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.FastBufferedInputStream;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +38,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.LevelResource;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Contract;
@@ -46,6 +52,7 @@ import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class Support {
 
@@ -170,6 +177,32 @@ public class Support {
         } else {
             return (int) d;
         }
+    }
+
+    public static final int HH_RANGE = 20;
+    public static final int H_RANGE = 16;
+    public static final int M_RANGE = 12;
+    public static final int L_RANGE = 8;
+
+    public static void areaCriterion(ServerLevel level, int radius, BlockPos center, Optional<ResourceLocation> prerequisite, Consumer<ServerPlayer> trigger) {
+        for (Entity proposal : level.getEntities(
+            null, AABB.ofSize(center.getCenter(), radius + 0.5, radius + 0.5, radius + 0.5))) {
+
+            if (!(proposal instanceof ServerPlayer player) ||
+                prerequisite.map(a -> !DatabankUtils.hasAdvancement(player, a)).orElse(false))
+                continue;
+
+            trigger.accept(player);
+        }
+    }
+
+    public static void areaCriterion(ServerLevel level, int radius, BlockPos center, ResourceLocation prerequisite, Consumer<ServerPlayer> trigger) {
+        areaCriterion(level, radius, center, Optional.of(prerequisite), trigger);
+    }
+
+    public static void mbCriterion(ServerLevel level, BlockPos center, Multiblock multiblock) {
+        Support.areaCriterion(level, Support.HH_RANGE, center, Optional.empty(), p ->
+            PastelCriteria.COMPLETED_MULTIBLOCK.trigger(p, multiblock));
     }
 
     /**

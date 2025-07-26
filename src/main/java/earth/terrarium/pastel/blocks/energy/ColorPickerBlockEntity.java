@@ -17,7 +17,7 @@ import earth.terrarium.pastel.helpers.level.ContainerWrapper;
 import earth.terrarium.pastel.inventories.ColorPickerScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredFluidRisingParticleEffect;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
@@ -338,7 +338,7 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
     private long tryTransferInk(ServerPlayer owner, ItemStack stack, InkStorage itemStorage, InkColor color) {
         long amount = InkStorage.transferInk(this.inkStorage, itemStorage, color);
         if (amount > 0 && owner != null) {
-            PastelAdvancementCriteria.INK_CONTAINER_INTERACTION.trigger(owner, stack, itemStorage, color, amount);
+            PastelCriteria.INK_CONTAINER_INTERACTION.trigger(owner, stack, itemStorage, color, amount);
         }
         return amount;
     }

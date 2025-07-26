@@ -10,7 +10,7 @@ import earth.terrarium.pastel.helpers.enchantments.FoundryHelper;
 import earth.terrarium.pastel.items.tools.PastelFishingRodItem;
 import earth.terrarium.pastel.loot.PastelLootContextTypes;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -535,7 +535,7 @@ public abstract class PastelFishingBobberEntity extends Projectile {
             if (this.hookedEntity != null) {
                 this.pullHookedEntity(this.hookedEntity);
 
-                PastelAdvancementCriteria.FISHING_ROD_HOOKED.trigger(
+                PastelCriteria.FISHING_ROD_HOOKED.trigger(
                     (ServerPlayer) playerEntity, usedItem, this, null, Collections.emptyList());
                 this.level()
                     .broadcastEntityEvent(this, EntityEvent.FISHING_ROD_REEL_IN);
@@ -705,7 +705,7 @@ public abstract class PastelFishingBobberEntity extends Projectile {
                     mobEntity.playAmbientSound();
                     mobEntity.spawnAnim();
                 }
-                PastelAdvancementCriteria.FISHING_ROD_HOOKED.trigger(
+                PastelCriteria.FISHING_ROD_HOOKED.trigger(
                     (ServerPlayer) playerEntity, usedItem, this, entity, List.of());
 
                 return true;
@@ -730,7 +730,7 @@ public abstract class PastelFishingBobberEntity extends Projectile {
                                   .reloadableRegistries()
                                   .getLootTable(PastelLootTables.UNIVERSAL_FISHING);
         List<ItemStack> list = lootTable.getRandomItems(lootContextParameterSet);
-        PastelAdvancementCriteria.FISHING_ROD_HOOKED.trigger((ServerPlayer) playerEntity, usedItem, this, null, list);
+        PastelCriteria.FISHING_ROD_HOOKED.trigger((ServerPlayer) playerEntity, usedItem, this, null, list);
 
         for (ItemStack itemStack : list) {
             if (itemStack.is(ItemTags.FISHES)) {

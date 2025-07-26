@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,7 +34,7 @@ public abstract class WorldMixin {
         @Local BlockState state
     ) {
         if (breakingEntity instanceof ServerPlayer serverPlayerEntity) {
-            PastelAdvancementCriteria.BLOCK_BROKEN.trigger(serverPlayerEntity, state);
+            PastelCriteria.BLOCK_BROKEN.trigger(serverPlayerEntity, state);
         }
     }
 
