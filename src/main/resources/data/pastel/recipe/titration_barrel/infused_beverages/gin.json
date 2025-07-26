@@ -3,7 +3,7 @@
   "group": "infused_beverages",
   "ingredients": [
     {
-      "item": "pastel:amaranth_bushel",
+      "item": "pastel:amaranth_grains",
       "count": 12
     }
   ],
