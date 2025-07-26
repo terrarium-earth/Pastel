@@ -7,13 +7,13 @@
                     "type": 2,
                     "label": "Modrinth",
                     "style": 5,
-                    "url": "https://modrinth.com/mod/pastel-mod/version/${modrinth_link}"
+                    "url": "${modrinth_link}"
                 },
                 {
                     "type": 2,
                     "label": "CurseForge",
                     "style": 5,
-                    "url": "https://www.curseforge.com/minecraft/mc-mods/pastel/files/${curseforge_link}"
+                    "url": "${curseforge_link}"
                 }
             ]
 
