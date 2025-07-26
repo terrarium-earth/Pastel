@@ -1,5 +1,7 @@
 package earth.terrarium.pastel;
 
+import com.cmdpro.databank.DatabankUtils;
+import com.cmdpro.databank.misc.VersionChangeHelper;
 import earth.terrarium.pastel.api.color.ColorRegistry;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
@@ -306,6 +308,10 @@ public class PastelCommon {
         logInfo("Common startup completed!");
 
         new PastelClient(pastelBus, container);
+
+        VersionChangeHelper.registerPlayerListener(MOD_ID, (modId, from, to, player) -> {
+            DatabankUtils.recheckAdvancements(player);
+        });
     }
 
     private static void registerReloadListeners(AddReloadListenerEvent event) {
