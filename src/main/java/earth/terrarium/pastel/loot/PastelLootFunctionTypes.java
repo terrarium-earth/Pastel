@@ -5,7 +5,6 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.loot.functions.DyeRandomlyLootFunction;
 import earth.terrarium.pastel.loot.functions.FermentRandomlyLootFunction;
 import earth.terrarium.pastel.loot.functions.FillPotionFillableLootFunction;
-import earth.terrarium.pastel.loot.functions.GrantAdvancementLootFunction;
 import earth.terrarium.pastel.loot.functions.SetComponentsRandomlyLootFunction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
@@ -26,8 +25,6 @@ public class PastelLootFunctionTypes {
         "set_components_randomly", SetComponentsRandomlyLootFunction.CODEC);
     public static final LootItemFunctionType<FillPotionFillableLootFunction> FILL_POTION_FILLABLE = register(
         "fill_potion_fillable", FillPotionFillableLootFunction.CODEC);
-    public static final LootItemFunctionType<GrantAdvancementLootFunction> GRANT_ADVANCEMENT = register(
-        "grant_advancement", GrantAdvancementLootFunction.CODEC);
 
     private static <T extends LootItemFunction> LootItemFunctionType<T> register(String id, MapCodec<T> codec) {
         var tLootItemFunctionType = new LootItemFunctionType<>(codec);

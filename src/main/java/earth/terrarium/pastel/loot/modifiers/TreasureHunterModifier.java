@@ -9,12 +9,14 @@ import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.entity.LizardEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
+import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -96,6 +98,7 @@ public class TreasureHunterModifier extends LootModifier {
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> original, LootContext lootContext) {
         var target = lootContext.getParamOrNull(LootContextParams.THIS_ENTITY);
+        var player = lootContext.getParamOrNull(LootContextParams.LAST_DAMAGE_PLAYER);
         float scalingChance = chance;
 
         if (target == null)
@@ -130,7 +133,12 @@ public class TreasureHunterModifier extends LootModifier {
             return original;
 
         assert head.isPresent();
-        original.add(new ItemStack(head.get()));
+        var headStack = new ItemStack(head.get());
+        original.add(headStack);
+
+        if (player instanceof ServerPlayer sp)
+            PastelCriteria.LOOT_FUNCTION_TRIGGER.trigger(sp, headStack);
+
         return original;
     }
 
