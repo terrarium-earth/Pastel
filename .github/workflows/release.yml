@@ -78,6 +78,8 @@ jobs:
                 env:
                     VERSION: ${{ github.event.inputs.version }}
                     CHANGELOG: ${{ github.event.inputs.changelog }}
+                    CURSEFORGE_RELEASE_URL: ${{ steps.release.outputs.curseforge-url }}
+                    MODRINTH_RELEASE_URL: ${{ steps.release.outputs.modrinth-url }}
 
             -   name: Upload Discord Embed
                 uses: tsickert/discord-webhook@v5.3.0

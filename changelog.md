@@ -1,5 +1,4 @@
-* Fixed a lot of broken Json
-* Fixed cloaked leaves being white
-* Fixed major performance issues
-* Reworked Glass Arrows
-* Added trails to various projectiles
+* Fixed advancement criteria only ever being checked once
+* Fixed Pigment Pedestal not giving its crafting criterion
+* Fixed cake tomfoolery
+* Most advancement criteria are now granted to all nearby players
