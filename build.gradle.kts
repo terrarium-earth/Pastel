@@ -53,7 +53,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.1.2"
+		version = System.getenv("VERSION") ?: "1.1.3"
 
         description = "Do flowers dream of the moon?"
 
@@ -240,6 +240,9 @@ resourcefulGradle {
 				"minecraft" to cloche.minecraftVersion,
 				"version" to System.getenv("VERSION"),
 				"changelog" to StringEscapeUtils.escapeJava(System.getenv("CHANGELOG")),
+                "version" to System.getenv("VERSION"),
+                "modrinth_link" to System.getenv("MODRINTH_RELEASE_URL"),
+                "curseforge_link" to System.getenv("CURSEFORGE_RELEASE_URL"),
 			))
 		}
 	}
