@@ -5,7 +5,7 @@ import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -119,7 +119,7 @@ public class DikeGateBlock extends TransparentBlock {
                     serverWorld, pos, PastelParticleTypes.AZURE_DIKE_RUNES, 10);
                 if (entity instanceof ServerPlayer serverPlayerEntity &&
                     (!decreasedSounds || ((ServerLevel) world).getGameTime() % 10 == 0)) {
-                    serverPlayerEntity.playNotifySound(PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
+                    serverPlayerEntity.playNotifySound(PastelSounds.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
                 }
             }
         }

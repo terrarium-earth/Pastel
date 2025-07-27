@@ -11,7 +11,7 @@ import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.registries.PastelToolMaterial;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
@@ -174,12 +174,12 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
                 )
             );
             bidentBaseEntity.pickup = AbstractArrow.Pickup.DISALLOWED;
-            soundEvent = PastelSoundEvents.BIDENT_MIRROR_IMAGE_THROWN;
+            soundEvent = PastelSounds.BIDENT_MIRROR_IMAGE_THROWN;
         } else if (playerEntity.getAbilities().instabuild) {
             bidentBaseEntity.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
         }
 
-        world.playSound(null, bidentBaseEntity, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
+        world.playSound(null, playerEntity, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
         if (!playerEntity.getAbilities().instabuild && !mirrorImage) {
             playerEntity.getInventory()
                         .removeItem(stack);

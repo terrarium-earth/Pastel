@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
@@ -17,7 +17,7 @@ public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implemen
     private boolean done;
 
     public NaturesStaffUseSoundInstance(Player player) {
-        super(PastelSoundEvents.NATURES_STAFF_USE, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
+        super(PastelSounds.NATURES_STAFF_USE, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
         this.looping = true;
         this.delay = 0;
         this.volume = 0.25F;

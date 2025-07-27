@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.item.DamageAwareItem;
 import earth.terrarium.pastel.api.item.TickAwareItem;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.PipeBombChargingSoundInstance;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -122,7 +122,7 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 
     public static void prime(ItemStack stack, Level world, Vec3 pos, @Nullable Entity user) {
         world.playSound(
-            null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.INCANDESCENT_ARM, SoundSource.PLAYERS, 2F, 0.9F);
+            null, pos.x(), pos.y(), pos.z(), PastelSounds.INCANDESCENT_ARM, SoundSource.PLAYERS, 2F, 0.9F);
         stack.set(PastelDataComponentTypes.TIMESTAMP, world.getGameTime());
         if (user instanceof Player player) {
             stack.set(DataComponents.PROFILE, new ResolvableProfile(player.getGameProfile()));

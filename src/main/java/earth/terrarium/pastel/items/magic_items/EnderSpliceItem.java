@@ -8,7 +8,7 @@ import earth.terrarium.pastel.networking.c2s_payloads.BindEnderSpliceToPlayerPay
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.EnderSpliceChargingSoundInstance;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
@@ -118,7 +118,7 @@ public class EnderSpliceItem extends Item {
                     // Nothing stored => Store current position
                     setTeleportTargetPos(itemStack, playerEntity.getCommandSenderWorld(), playerEntity.position());
                     world.playSound(
-                        null, playerEntity.blockPosition(), PastelSoundEvents.ENDER_SPLICE_BOUND, SoundSource.PLAYERS,
+                        null, playerEntity.blockPosition(), PastelSounds.ENDER_SPLICE_BOUND, SoundSource.PLAYERS,
                         1.0F, 1.0F
                     );
                 }
@@ -172,7 +172,7 @@ public class EnderSpliceItem extends Item {
         Vec3 currentPos = playerEntity.position();
         if ((hasResonance || isSameWorld) && targetWorld instanceof ServerLevel targetServerWorld) {
             world.playSound(
-                playerEntity, currentPos.x(), currentPos.y(), currentPos.z(), PastelSoundEvents.PLAYER_TELEPORTS,
+                playerEntity, currentPos.x(), currentPos.y(), currentPos.z(), PastelSounds.PLAYER_TELEPORTS,
                 SoundSource.PLAYERS, 1.0F, 1.0F
             );
 
@@ -186,14 +186,14 @@ public class EnderSpliceItem extends Item {
                 user.teleportTo(targetPos.x(), targetPos.y + 0.25, targetPos.z); // +0.25 makes it look way more lively
             }
             world.playSound(
-                playerEntity, targetPos.x(), targetPos.y, targetPos.z, PastelSoundEvents.PLAYER_TELEPORTS,
+                playerEntity, targetPos.x(), targetPos.y, targetPos.z, PastelSounds.PLAYER_TELEPORTS,
                 SoundSource.PLAYERS, 1.0F, 1.0F
             );
 
             // make sure the sound plays even when the player currently teleports
             if (playerEntity instanceof ServerPlayer) {
                 world.playSound(
-                    null, playerEntity.blockPosition(), PastelSoundEvents.PLAYER_TELEPORTS, SoundSource.PLAYERS, 1.0F,
+                    null, playerEntity.blockPosition(), PastelSounds.PLAYER_TELEPORTS, SoundSource.PLAYERS, 1.0F,
                     1.0F
                 );
                 world.playSound(
@@ -203,7 +203,7 @@ public class EnderSpliceItem extends Item {
         } else {
             user.releaseUsingItem();
             world.playSound(
-                null, currentPos.x(), currentPos.y(), currentPos.z(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS,
+                null, currentPos.x(), currentPos.y(), currentPos.z(), PastelSounds.USE_FAIL, SoundSource.PLAYERS,
                 1.0F, 1.0F
             );
             return false;

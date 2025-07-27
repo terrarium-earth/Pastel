@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.decoration;
 import earth.terrarium.pastel.items.magic_items.RadianceStaffItem;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -94,7 +94,7 @@ public class WandLightBlock extends LightBlock {
                 newState = newState.cycle(LEVEL);
             }
             world.playSound(
-                null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSoundEvents.RADIANCE_STAFF_PLACE,
+                null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSounds.RADIANCE_STAFF_PLACE,
                 SoundSource.PLAYERS, 1.0F, (float) (0.75 + 0.05 * newState.getValue(LEVEL))
             );
             world.setBlock(pos, newState, Block.UPDATE_CLIENTS);

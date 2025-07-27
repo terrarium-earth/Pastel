@@ -2,7 +2,7 @@ package earth.terrarium.pastel.sound;
 
 
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.status_effects.AscensionStatusEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
@@ -21,7 +21,7 @@ public class DivinitySoundInstance extends AbstractSoundInstance implements Tick
     private boolean done;
 
     public DivinitySoundInstance() {
-        super(PastelSoundEvents.MUSIC_DIVINITY, SoundSource.RECORDS, SoundInstance.createUnseededRandom());
+        super(PastelSounds.MUSIC_DIVINITY, SoundSource.RECORDS, SoundInstance.createUnseededRandom());
         this.looping = true;
         this.delay = 0;
         this.volume = 0.8F;

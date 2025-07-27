@@ -12,7 +12,7 @@ import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.nbt.CompoundTag;
@@ -73,6 +73,11 @@ public class GlassArrowEntity extends AbstractArrow {
 
     @Override
     public void tick() {
+        if (tickCount == 1 && getOwner() != null) {
+            var volMod = (float) (Math.clamp(getDeltaMovement().length() / 6, 0, 0.75) + 0.325);
+            getOwner().playSound(PastelSounds.PIERCING_RADIANCE, Support.varFloatCentered(random, 0.1F) * volMod, Support.varFloatCentered(random, 0.175F) + 0.2F);
+        }
+
         if (getVariant().getAttributes().homing()) {
             updateHomingTarget();
             tryHome();
@@ -171,7 +176,7 @@ public class GlassArrowEntity extends AbstractArrow {
 
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return PastelSoundEvents.SHATTER_LIGHT;
+        return PastelSounds.SHATTER_LIGHT;
     }
 
     @Override

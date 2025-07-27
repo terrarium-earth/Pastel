@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.entity.entity;
 
 import com.cmdpro.databank.misc.ColorGradient;
-import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
@@ -11,7 +10,7 @@ import earth.terrarium.pastel.items.tools.DraconicTwinswordItem;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -150,7 +149,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
             setPropelled(true);
             setRebounding(false);
             ((TridentEntityAccessor) this).setDealtDamage(false);
-            playSound(PastelSoundEvents.METAL_HIT, 0.8F, 0.8F + random.nextFloat() * 0.4F);
+            playSound(PastelSounds.METAL_HIT, 0.8F, 0.8F + random.nextFloat() * 0.4F);
         } else {
             jiggleTicks = 0;
             jiggleIntensity = 8;
@@ -237,10 +236,10 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
         }
 
         if (crit) {
-            this.playSound(PastelSoundEvents.CRITICAL_CRUNCH, 1F, 1.0F);
-            this.playSound(PastelSoundEvents.IMPACT_BASE, 1.8F, 0.5F);
+            this.playSound(PastelSounds.CRITICAL_CRUNCH, 1F, 1.0F);
+            this.playSound(PastelSounds.IMPACT_BASE, 1.8F, 0.5F);
         } else {
-            this.playSound(PastelSoundEvents.IMPALING_HIT, 1F, 0.9F + random.nextFloat() * 0.2F);
+            this.playSound(PastelSounds.IMPALING_HIT, 1F, 0.9F + random.nextFloat() * 0.2F);
         }
 
         // We do a lil piercing
@@ -297,7 +296,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
                 case Y -> setDeltaMovement(getDeltaMovement().multiply(boost, -boost, boost));
                 case Z -> setDeltaMovement(getDeltaMovement().multiply(boost, boost, -boost));
             }
-            playSound(PastelSoundEvents.METAL_TAP, 1, 1.5F);
+            playSound(PastelSounds.METAL_TAP, 1, 1.5F);
             applyChannelingAOE(channeling, damage, null, damageSource);
             travelingTicks = 0;
             return;
@@ -306,7 +305,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
         if (!isRebounding() && !isPropelled() && bounce && getOwner() != null) {
             travelingTicks = 0;
             rebound(getOwner().position(), 0.105, 0.15);
-            playSound(PastelSoundEvents.METAL_TAP, 1, 1.5F);
+            playSound(PastelSounds.METAL_TAP, 1, 1.5F);
             return;
         }
 
@@ -365,7 +364,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
                 }
 
                 world.playSeededSound(
-                    null, position().x, position().y, position().z, PastelSoundEvents.ELECTRIC_DISCHARGE,
+                    null, position().x, position().y, position().z, PastelSounds.ELECTRIC_DISCHARGE,
                     SoundSource.PLAYERS, 1F, 0.6F + random.nextFloat() * 0.2F, 0
                 );
             }

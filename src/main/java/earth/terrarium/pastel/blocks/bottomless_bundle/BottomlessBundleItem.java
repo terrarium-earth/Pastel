@@ -12,7 +12,7 @@ import earth.terrarium.pastel.items.tooltip.ItemStorageTooltipData;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -345,7 +345,7 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
 
     private void playZipSound(Entity entity, float basePitch) {
         entity.playSound(
-            PastelSoundEvents.BOTTOMLESS_BUNDLE_ZIP, 0.8F,
+            PastelSounds.BOTTOMLESS_BUNDLE_ZIP, 0.8F,
             basePitch + entity.level()
                               .getRandom()
                               .nextFloat() * 0.4F

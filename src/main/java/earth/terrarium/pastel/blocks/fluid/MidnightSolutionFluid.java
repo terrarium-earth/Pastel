@@ -14,7 +14,7 @@ import earth.terrarium.pastel.registries.PastelFluidTags;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -91,7 +91,7 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
         BlockState topState = world.getBlockState(topPos);
         if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(2000) == 0) {
             world.playLocalSound(
-                pos.getX(), pos.getY(), pos.getZ(), PastelSoundEvents.MIDNIGHT_SOLUTION_AMBIENT, SoundSource.BLOCKS,
+                pos.getX(), pos.getY(), pos.getZ(), PastelSounds.MIDNIGHT_SOLUTION_AMBIENT, SoundSource.BLOCKS,
                 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false
             );
         }

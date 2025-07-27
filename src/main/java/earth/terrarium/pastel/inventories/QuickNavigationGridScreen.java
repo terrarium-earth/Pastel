@@ -2,7 +2,7 @@ package earth.terrarium.pastel.inventories;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.render.RenderHelper;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphics;
@@ -322,7 +322,7 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
 
     private void back() {
         minecraft.level.playSound(
-            null, minecraft.player.blockPosition(), PastelSoundEvents.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F,
+            null, minecraft.player.blockPosition(), PastelSounds.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F,
             1.0F
         );
         if (gridStack.size() == 1) {
@@ -334,7 +334,7 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
 
     protected void selectGrid(Grid grid) {
         minecraft.level.playSound(
-            null, minecraft.player.blockPosition(), PastelSoundEvents.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F,
+            null, minecraft.player.blockPosition(), PastelSounds.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F,
             1.0F
         );
         gridStack.push(grid);

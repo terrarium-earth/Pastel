@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.redstone;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -86,7 +86,7 @@ public class BlockBreakerBlock extends RedstoneInteractionBlock implements Entit
         float hardness = blockState.getDestroySpeed(world, breakingPos);
         if (hardness < 0 || hardness > 50) {
             world.playSound(
-                null, breakerPos, PastelSoundEvents.REDSTONE_MECHANISM_BREAK_BLOCK, SoundSource.BLOCKS, 0.15f,
+                null, breakerPos, PastelSounds.REDSTONE_MECHANISM_BREAK_BLOCK, SoundSource.BLOCKS, 0.15f,
                 (2.0f + world.random.nextFloat())
             );
             return;

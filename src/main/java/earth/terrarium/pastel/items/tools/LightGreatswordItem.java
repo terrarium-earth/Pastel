@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -74,7 +74,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
             player.push(chargeDir.normalize()
                                  .scale(getLungeSpeed() * chargeStrength));
             player.playSound(
-                PastelSoundEvents.LUNGE, 2F, 0.8F + player.getRandom()
+                PastelSounds.LUNGE, 2F, 0.8F + player.getRandom()
                                                           .nextFloat() * 0.2F
             );
             MiscPlayerData.get(player)
@@ -111,7 +111,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
                 MiscPlayerData.get(player)
                               .endLunge();
                 target.playSound(
-                    PastelSoundEvents.LUNGE_CRIT, 1F, 0.9F + target.getRandom()
+                    PastelSounds.LUNGE_CRIT, 1F, 0.9F + target.getRandom()
                                                                    .nextFloat() * 0.2F
                 );
                 applyLungeHitEffects(stack, target, attacker);

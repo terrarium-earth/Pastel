@@ -36,7 +36,7 @@ public class PastelPresentUnpackBehaviors {
             PastelItems.PIPE_BOMB.getId(), (stack, presentBlockEntity, world, pos, random) -> {
                 stack.set(PastelDataComponentTypes.TIMESTAMP, world.getGameTime() - 70);
                 stack.set(DataComponents.PROFILE, presentBlockEntity.getOwner());
-                world.playSound(null, pos, PastelSoundEvents.INCANDESCENT_ARM, SoundSource.BLOCKS, 2.0F, 0.9F);
+                world.playSound(null, pos, PastelSounds.INCANDESCENT_ARM, SoundSource.BLOCKS, 2.0F, 0.9F);
                 return stack;
             }
         );

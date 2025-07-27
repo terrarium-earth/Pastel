@@ -4,7 +4,7 @@ import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelLootTables;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -227,22 +227,22 @@ public class EggLayingWoolyPigEntity extends Animal implements Shearable {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return PastelSoundEvents.ENTITY_EGG_LAYING_WOOLY_PIG_AMBIENT;
+        return PastelSounds.ENTITY_EGG_LAYING_WOOLY_PIG_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return PastelSoundEvents.ENTITY_EGG_LAYING_WOOLY_HURT;
+        return PastelSounds.ENTITY_EGG_LAYING_WOOLY_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return PastelSoundEvents.ENTITY_EGG_LAYING_WOOLY_DEATH;
+        return PastelSounds.ENTITY_EGG_LAYING_WOOLY_DEATH;
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(PastelSoundEvents.ENTITY_EGG_LAYING_WOOLY_STEP, 0.15F, 1.0F);
+        this.playSound(PastelSounds.ENTITY_EGG_LAYING_WOOLY_STEP, 0.15F, 1.0F);
     }
 
     @Override

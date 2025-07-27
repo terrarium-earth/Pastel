@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.toast;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.render.RenderHelper;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -34,7 +34,7 @@ public class UnlockedRecipeToast implements Toast {
     private final Component title;
     private final Component text;
     private final List<ItemStack> itemStacks;
-    private final SoundEvent soundEvent = PastelSoundEvents.NEW_RECIPE;
+    private final SoundEvent soundEvent = PastelSounds.NEW_RECIPE;
     private boolean soundPlayed;
 
     public UnlockedRecipeToast(Component title, Component text, List<ItemStack> itemStacks) {

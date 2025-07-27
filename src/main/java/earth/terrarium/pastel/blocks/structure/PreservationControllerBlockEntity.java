@@ -9,7 +9,7 @@ import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -219,7 +219,7 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 		}
 		
 		if (didSomething) {
-			level.playSound(null, worldPosition, PastelSoundEvents.STRUCTURE_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
+			level.playSound(null, worldPosition, PastelSounds.STRUCTURE_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 	
@@ -228,7 +228,7 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 			player.hurt(PastelDamageTypes.dike(player.level()), 1.0F);
 			Vec3 vec = Vec3.atCenterOf(destinationPos);
 			player.teleportTo(vec.x(), vec.y(), vec.z());
-			level.playSound(null, destinationPos, PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
+			level.playSound(null, destinationPos, PastelSounds.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
 		}
 	}
 	

@@ -5,7 +5,7 @@ import earth.terrarium.pastel.blocks.item_roundel.ItemRoundelBlockEntity;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Vec3i;
@@ -171,7 +171,7 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
                 (ServerLevel) level, Vec3.atCenterOf(worldPosition), ParticleTypes.HAPPY_VILLAGER, 10,
                 new Vec3(0.25, 0.5, 0.25), new Vec3(0.1, 0.1, 0.1)
             );
-            level.playSound(null, worldPosition, PastelSoundEvents.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.playSound(null, worldPosition, PastelSounds.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);
             return true;
         }
         return false;

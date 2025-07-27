@@ -13,7 +13,7 @@ import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.NaturesStaffUseSoundInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -366,7 +366,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
     private void playDenySound(@NotNull Level world, @NotNull Player playerEntity) {
         world.playSound(
-            null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), PastelSoundEvents.USE_FAIL,
+            null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), PastelSounds.USE_FAIL,
             SoundSource.PLAYERS, 1.0F, 0.8F + playerEntity.getRandom()
                                                           .nextFloat() * 0.4F
         );

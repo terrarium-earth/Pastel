@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.block.MoonstoneStrikeableBlock;
 import earth.terrarium.pastel.networking.s2c_payloads.MoonstoneBlastPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -56,30 +56,30 @@ public class MoonstoneStrike {
     }
 
     public static void create(
-        Level world, Entity entity, @Nullable DamageSource damageSource, double x, double y, double z, float power) {
-        create(world, entity, damageSource, x, y, z, power, power);
+        Level world, Entity entity, @Nullable DamageSource damageSource, double x, double y, double z, float power, float pitch) {
+        create(world, entity, damageSource, x, y, z, power, power, pitch);
     }
 
     public static void create(
         Level world, Entity entity, @Nullable DamageSource damageSource, double x, double y, double z, float power,
-        float knockbackMod
+        float knockbackMod, float pitch
     ) {
         MoonstoneStrike moonstoneStrike = new MoonstoneStrike(
             world, entity, damageSource, x, y, z, power, knockbackMod);
 
         if (world.isClientSide) {
             world.playLocalSound(
-                x, y, z, PastelSoundEvents.MOONSTONE_STRIKE, SoundSource.BLOCKS, 4.0F,
-                (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, false
+                x, y, z, PastelSounds.MOONSTONE_STRIKE, SoundSource.BLOCKS, 4.0F,
+                pitch, false
             );
             world.playLocalSound(
-                x, y, z, PastelSoundEvents.SOFT_HUM, SoundSource.BLOCKS, 0.5F,
-                (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, false
+                x, y, z, PastelSounds.SOFT_HUM, SoundSource.BLOCKS, 0.5F,
+                pitch, false
             );
             world.addParticle(PastelParticleTypes.MOONSTONE_STRIKE, x, y, z, 1.0, 0.0, 0.0);
         } else {
             moonstoneStrike.damageAndKnockbackEntities();
-            MoonstoneBlastPayload.sendMoonstoneBlast((ServerLevel) world, moonstoneStrike);
+            MoonstoneBlastPayload.sendMoonstoneBlast((ServerLevel) world, moonstoneStrike, pitch);
             moonstoneStrike.affectWorld();
         }
     }

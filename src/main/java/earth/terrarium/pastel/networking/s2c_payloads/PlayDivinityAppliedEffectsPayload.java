@@ -6,7 +6,7 @@ import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -44,7 +44,7 @@ public record PlayDivinityAppliedEffectsPayload() implements CustomPacketPayload
         client.gameRenderer.displayItemActivation(PastelItems.DIVINATION_HEART.get()
                                                                               .getDefaultInstance());
         level.playSound(
-            null, player.blockPosition(), PastelSoundEvents.FAILING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
+            null, player.blockPosition(), PastelSounds.FAILING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
         ParticleHelper.playParticleWithPatternAndVelocityClient(
             level, player.position(), ColoredCraftingParticleEffect.WHITE, VectorPattern.SIXTEEN, 0.4);
         ParticleHelper.playParticleWithPatternAndVelocityClient(

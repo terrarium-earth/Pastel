@@ -2,7 +2,7 @@ package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
@@ -21,7 +21,7 @@ public class PipeBombChargingSoundInstance extends AbstractSoundInstance impleme
     private boolean done;
 
     public PipeBombChargingSoundInstance(Player player) {
-        super(PastelSoundEvents.INCANDESCENT_CHARGE, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
+        super(PastelSounds.INCANDESCENT_CHARGE, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
         this.looping = true;
         this.delay = 0;
         this.volume = 1F;

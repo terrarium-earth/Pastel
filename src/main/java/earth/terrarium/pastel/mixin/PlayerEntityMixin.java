@@ -11,7 +11,7 @@ import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -88,7 +88,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         var component = MiscPlayerData.get(player);
         if (stack.getItem() instanceof LightGreatswordItem && component.isLunging()) {
             original.call(
-                instance, except, x, y, z, PastelSoundEvents.LUNGE_CRIT, category, 1F, 1F + random.nextFloat() * 0.2F);
+                instance, except, x, y, z, PastelSounds.LUNGE_CRIT, category, 1F, 1F + random.nextFloat() * 0.2F);
             return;
         }
         original.call(instance, except, x, y, z, sound, category, volume, pitch);
@@ -108,7 +108,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         if (stack.getItem() == PastelItems.DRACONIC_TWINSWORD.get() && getChanneling(stack) > 0) {
             this.level()
                 .playSound(
-                    except, x, y, z, PastelSoundEvents.ELECTRIC_DISCHARGE, category, 0.75F,
+                    except, x, y, z, PastelSounds.ELECTRIC_DISCHARGE, category, 0.75F,
                     0.9F + random.nextFloat() * 0.2F
                 );
             return;

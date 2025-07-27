@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.registries.PastelBiomes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -121,32 +121,32 @@ public class BiomeSoundInstance extends AbstractSoundInstance implements Tickabl
         if (biome.is(PastelBiomes.HOWLING_SPIRES)) {
             if (WIND_HIGH == null) {
                 WIND_HIGH = new BiomeSoundInstance(
-                    PastelBiomes.HOWLING_SPIRES, PastelSoundEvents.HOWLING_WIND_HIGH, 0.45F, false);
+                    PastelBiomes.HOWLING_SPIRES, PastelSounds.HOWLING_WIND_HIGH, 0.45F, false);
                 client.getSoundManager()
                       .play(WIND_HIGH);
             }
 
             if (WIND_LOW == null) {
                 WIND_LOW = new BiomeSoundInstance(
-                    PastelBiomes.HOWLING_SPIRES, PastelSoundEvents.HOWLING_WIND_LOW, 1.3F, true);
+                    PastelBiomes.HOWLING_SPIRES, PastelSounds.HOWLING_WIND_LOW, 1.3F, true);
                 client.getSoundManager()
                       .play(WIND_LOW);
             }
         } else if (biome.is(PastelBiomes.DEEP_DRIPSTONE_CAVES)) {
             if (SHOWER == null) {
                 SHOWER = new BiomeSoundInstance(
-                    PastelBiomes.DEEP_DRIPSTONE_CAVES, PastelSoundEvents.SHOWER, 0.425F, false);
+                    PastelBiomes.DEEP_DRIPSTONE_CAVES, PastelSounds.SHOWER, 0.425F, false);
                 client.getSoundManager()
                       .play(SHOWER);
             }
         } else if (biome.is(PastelBiomes.DRAGONROT_SWAMP)) {
             if (LAMENTS == null) {
-                LAMENTS = new BiomeSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSoundEvents.LAMENTS, 1F, true);
+                LAMENTS = new BiomeSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSounds.LAMENTS, 1F, true);
                 client.getSoundManager()
                       .play(LAMENTS);
             }
             if (SHOWER == null) {
-                SHOWER = new BiomeSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSoundEvents.SHOWER, 1F, false);
+                SHOWER = new BiomeSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSounds.SHOWER, 1F, false);
                 client.getSoundManager()
                       .play(SHOWER);
             }

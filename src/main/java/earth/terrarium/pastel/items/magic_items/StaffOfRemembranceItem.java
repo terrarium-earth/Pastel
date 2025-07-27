@@ -14,7 +14,7 @@ import earth.terrarium.pastel.particle.effect.ColoredExplosionParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -70,9 +70,9 @@ public class StaffOfRemembranceItem extends Item implements InkPowered, Prioriti
 			if (turnEntityToMemory(user, mobEntity)) {
 				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world, entity.position(), ColoredSparkleRisingParticleEffect.LIGHT_GRAY, 10, Vec3.ZERO, new Vec3(0.2, 0.2, 0.2));
 				PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerLevel) world, entity.position(), ColoredExplosionParticleEffect.LIGHT_GRAY, 1, Vec3.ZERO);
-				world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+				world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSounds.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 			} else {
-				world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+				world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSounds.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 			}
 		}
 		return InteractionResult.sidedSuccess(world.isClientSide);

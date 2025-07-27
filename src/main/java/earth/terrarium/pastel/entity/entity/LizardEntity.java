@@ -13,7 +13,7 @@ import earth.terrarium.pastel.entity.variants.LizardHornVariant;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelPointOfInterestTypeTags;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -293,17 +293,17 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return PastelSoundEvents.ENTITY_LIZARD_AMBIENT;
+        return PastelSounds.ENTITY_LIZARD_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return PastelSoundEvents.ENTITY_LIZARD_HURT;
+        return PastelSounds.ENTITY_LIZARD_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return PastelSoundEvents.ENTITY_LIZARD_DEATH;
+        return PastelSounds.ENTITY_LIZARD_DEATH;
     }
 
     // Breeding

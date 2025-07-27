@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.entity;
 import earth.terrarium.pastel.api.entity.PackEntity;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -93,19 +93,19 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
     }
 
     protected SoundEvent getAmbientSound() {
-        return PastelSoundEvents.ENTITY_ERASER_AMBIENT;
+        return PastelSounds.ENTITY_ERASER_AMBIENT;
     }
 
     protected SoundEvent getHurtSound(DamageSource source) {
-        return PastelSoundEvents.ENTITY_ERASER_HURT;
+        return PastelSounds.ENTITY_ERASER_HURT;
     }
 
     protected SoundEvent getDeathSound() {
-        return PastelSoundEvents.ENTITY_ERASER_DEATH;
+        return PastelSounds.ENTITY_ERASER_DEATH;
     }
 
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(PastelSoundEvents.ENTITY_ERASER_STEP, 0.15F, 1.0F);
+        this.playSound(PastelSounds.ENTITY_ERASER_STEP, 0.15F, 1.0F);
     }
 
     @Override

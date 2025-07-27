@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.toast;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.render.RenderHelper;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -33,7 +33,7 @@ public class MessageToast implements Toast {
 
     public MessageToast(ItemStack itemStack, String text) {
         this.itemStack = itemStack;
-        this.soundEvent = PastelSoundEvents.NEW_REVELATION;
+        this.soundEvent = PastelSounds.NEW_REVELATION;
         this.titleText = Component.translatable("pastel.toast.message." + text + ".title");
         this.messageText = Component.translatable("pastel.toast.message." + text + ".text");
         this.soundPlayed = false;

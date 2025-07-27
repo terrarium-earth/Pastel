@@ -18,7 +18,7 @@ import earth.terrarium.pastel.progression.toast.RevelationToast;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelFluids;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.registries.PastelTooltips;
 import earth.terrarium.pastel.registries.client.PastelArmorRenderers;
 import earth.terrarium.pastel.registries.client.PastelDimensionsClient;
@@ -130,7 +130,7 @@ public class PastelClient implements ClientHiddenListener, ClientAdvancementList
 		for (Hidden i : unlocked) {
 			if (i.type instanceof BlockHiddenType.BlockHiddenTypeInstance type) {
 				if (BuiltInRegistries.BLOCK.getKey(type.original).getNamespace().equals(PastelCommon.MOD_ID)) {
-					RevelationToast.showRevelationToast(Minecraft.getInstance(), new ItemStack(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get().asItem()), PastelSoundEvents.NEW_REVELATION);
+					RevelationToast.showRevelationToast(Minecraft.getInstance(), new ItemStack(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get().asItem()), PastelSounds.NEW_REVELATION);
 					break;
 				}
 			}

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.items.tools.GreatswordItem;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
@@ -19,7 +19,7 @@ public class GreatswordChargingSoundInstance extends AbstractSoundInstance imple
     private final int groundSlamChargeTicks;
 
     public GreatswordChargingSoundInstance(Player player, int groundSlamChargeTicks) {
-        super(PastelSoundEvents.GROUND_SLAM_CHARGE, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
+        super(PastelSounds.GROUND_SLAM_CHARGE, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
         this.groundSlamChargeTicks = groundSlamChargeTicks;
         this.looping = false;
         this.ticks = 0;

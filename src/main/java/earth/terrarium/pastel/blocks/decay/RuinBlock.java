@@ -7,7 +7,7 @@ import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelLevels;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
@@ -39,7 +39,7 @@ public class RuinBlock extends DecayBlock {
         super.setPlacedBy(world, pos, state, placer, itemStack);
 
         if (!world.isClientSide) {
-            world.playSound(null, pos, PastelSoundEvents.RUIN_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
+            world.playSound(null, pos, PastelSounds.RUIN_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
         } else {
             RandomSource random = world.getRandom();
             world.addParticle(

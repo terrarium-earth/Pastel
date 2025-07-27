@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.block;
 
 import earth.terrarium.pastel.items.magic_items.PaintbrushItem;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -22,9 +22,9 @@ public interface PaintbrushTriggered {
                   .getItem() instanceof PaintbrushItem) {
             ItemInteractionResult actionResult = onPaintBrushTrigger(state, world, pos, player, hand, hit);
             if (actionResult.consumesAction()) {
-                world.playSound(null, pos, PastelSoundEvents.PAINTBRUSH_TRIGGER, SoundSource.PLAYERS, 1.0F, 1.0F);
+                world.playSound(null, pos, PastelSounds.PAINTBRUSH_TRIGGER, SoundSource.PLAYERS, 1.0F, 1.0F);
             } else {
-                world.playSound(null, pos, PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
+                world.playSound(null, pos, PastelSounds.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
             return actionResult;
         }

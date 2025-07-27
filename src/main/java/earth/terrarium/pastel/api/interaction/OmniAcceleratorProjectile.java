@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.interaction;
 
 import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -81,7 +81,7 @@ public interface OmniAcceleratorProjectile {
      * @return The sound effect to play when the projectile has been fired successfully
      */
     default SoundEvent getSoundEffect() {
-        return PastelSoundEvents.OMNI_ACCELERATOR_SHOOT;
+        return PastelSounds.OMNI_ACCELERATOR_SHOOT;
     }
 
     static void setVelocity(Entity projectile, double x, double y, double z, float speed, float divergence) {

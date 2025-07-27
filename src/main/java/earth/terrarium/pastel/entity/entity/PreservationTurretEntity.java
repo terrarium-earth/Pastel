@@ -4,7 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.ai.FixedBodyControl;
 import earth.terrarium.pastel.registries.PastelMobEffectTags;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -128,18 +128,18 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return PastelSoundEvents.ENTITY_PRESERVATION_TURRET_AMBIENT;
+        return PastelSounds.ENTITY_PRESERVATION_TURRET_AMBIENT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return PastelSoundEvents.ENTITY_PRESERVATION_TURRET_DEATH;
+        return PastelSounds.ENTITY_PRESERVATION_TURRET_DEATH;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return this.isClosed() ? PastelSoundEvents.ENTITY_PRESERVATION_TURRET_HURT_CLOSED
-                               : PastelSoundEvents.ENTITY_PRESERVATION_TURRET_HURT;
+        return this.isClosed() ? PastelSounds.ENTITY_PRESERVATION_TURRET_HURT_CLOSED
+                               : PastelSounds.ENTITY_PRESERVATION_TURRET_HURT;
     }
 
     @Override
@@ -406,10 +406,10 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
                     .addPermanentModifier(COVERED_ARMOR_BONUS);
                 this.getAttribute(Attributes.ARMOR_TOUGHNESS)
                     .addPermanentModifier(COVERED_TOUGHNESS_BONUS);
-                this.playSound(PastelSoundEvents.ENTITY_PRESERVATION_TURRET_CLOSE, 1.0F, 1.0F);
+                this.playSound(PastelSounds.ENTITY_PRESERVATION_TURRET_CLOSE, 1.0F, 1.0F);
                 this.gameEvent(GameEvent.CONTAINER_CLOSE);
             } else {
-                this.playSound(PastelSoundEvents.ENTITY_PRESERVATION_TURRET_OPEN, 1.0F, 1.0F);
+                this.playSound(PastelSounds.ENTITY_PRESERVATION_TURRET_OPEN, 1.0F, 1.0F);
                 this.gameEvent(GameEvent.CONTAINER_OPEN);
             }
         }
@@ -578,12 +578,12 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
                            .mobAttack(PreservationTurretEntity.this), DAMAGE
                 );
                 PreservationTurretEntity.this.playSound(
-                    PastelSoundEvents.ENTITY_PRESERVATION_TURRET_SHOOT, 2.0F, 1.0F + 0.2F *
+                    PastelSounds.ENTITY_PRESERVATION_TURRET_SHOOT, 2.0F, 1.0F + 0.2F *
                                                                                      (PreservationTurretEntity.this.random.nextFloat() -
                                                                                       PreservationTurretEntity.this.random.nextFloat())
                 );
                 target.playSound(
-                    PastelSoundEvents.ENTITY_PRESERVATION_TURRET_SHOOT, 1.0F, 0.5F + 0.2F *
+                    PastelSounds.ENTITY_PRESERVATION_TURRET_SHOOT, 1.0F, 0.5F + 0.2F *
                                                                                      (PreservationTurretEntity.this.random.nextFloat() -
                                                                                       PreservationTurretEntity.this.random.nextFloat())
                 );

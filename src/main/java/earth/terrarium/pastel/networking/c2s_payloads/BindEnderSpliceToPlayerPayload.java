@@ -3,7 +3,7 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 import earth.terrarium.pastel.items.magic_items.EnderSpliceItem;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -36,8 +36,8 @@ public record BindEnderSpliceToPlayerPayload(int entityId) implements CustomPack
 
                 EnderSpliceItem.setTeleportTargetPlayer(player.getMainHandItem(), targetPlayerEntity);
 
-                player.playSound(PastelSoundEvents.ENDER_SPLICE_BOUND, 1.0F, 1.0F);
-                targetPlayerEntity.playSound(PastelSoundEvents.ENDER_SPLICE_BOUND, 1.0F, 1.0F);
+                player.playSound(PastelSounds.ENDER_SPLICE_BOUND, 1.0F, 1.0F);
+                targetPlayerEntity.playSound(PastelSounds.ENDER_SPLICE_BOUND, 1.0F, 1.0F);
             }
         };
     }

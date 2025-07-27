@@ -8,7 +8,7 @@ import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.OverchargingSoundInstance;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -77,7 +77,7 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem
         if (isCharged(stack) && remainingUseTicks <= 0) {
             if (remainingUseTicks % 4 == 0) {
                 world.playSound(
-                    null, user, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    null, user, PastelSounds.BLOCK_MOONSTONE_CLUSTER_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
         } else {
             super.onUseTick(world, user, stack, remainingUseTicks);

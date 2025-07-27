@@ -9,7 +9,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -53,10 +53,10 @@ public abstract class BidentBaseEntity extends ThrownTrident {
         );
         this.entityData.set(TridentEntityAccessor.getEnchanted(), stack.hasFoil());
     }
-
+//
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return PastelSoundEvents.BIDENT_HIT_GROUND;
+        return PastelSounds.BIDENT_HIT_GROUND;
     }
 
     public ItemStack getTrackedStack() {

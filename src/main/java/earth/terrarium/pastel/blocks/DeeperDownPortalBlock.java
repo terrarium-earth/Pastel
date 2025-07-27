@@ -10,7 +10,7 @@ import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelLevels;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -88,7 +88,7 @@ public class DeeperDownPortalBlock extends Block {
             if (!hasNeighboringPortals(world, pos)) {
                 world.playSound(
                     null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                    PastelSoundEvents.DEEPER_DOWN_PORTAL_OPEN, SoundSource.BLOCKS, 0.75F, 0.75F
+                    PastelSounds.DEEPER_DOWN_PORTAL_OPEN, SoundSource.BLOCKS, 0.75F, 0.75F
                 );
 
                 for (Player nearbyPlayer : world.getEntities(

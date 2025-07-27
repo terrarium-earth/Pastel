@@ -37,7 +37,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -412,7 +411,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity
         cinderhearthBlockEntity.structure = CinderhearthBlock.verifyStructure(world, blockPos);
         if (cinderhearthBlockEntity.structure == CinderHearthStructureType.NONE) {
             world.playSound(
-                null, cinderhearthBlockEntity.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS,
+                null, cinderhearthBlockEntity.getBlockPos(), PastelSounds.CRAFTING_ABORTED, SoundSource.BLOCKS,
                 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F
             );
             return false;

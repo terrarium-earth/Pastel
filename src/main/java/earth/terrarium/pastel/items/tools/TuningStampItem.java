@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.tools;
 import earth.terrarium.pastel.api.item.Stampable;
 import earth.terrarium.pastel.api.item.TooltipExtensions;
 import earth.terrarium.pastel.helpers.level.BlockReference;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -70,7 +70,7 @@ public class TuningStampItem extends Item implements TooltipExtensions {
             var target = potentialTarget.get();
 
             if (!source.verifyStampData(target) || !target.canUserStamp(player)) {
-                tryPlaySound(player, PastelSoundEvents.SHATTER_LIGHT, 0.75F);
+                tryPlaySound(player, PastelSounds.SHATTER_LIGHT, 0.75F);
                 return InteractionResult.FAIL;
             }
             var interactable = target.source();
@@ -79,7 +79,7 @@ public class TuningStampItem extends Item implements TooltipExtensions {
             source.notifySourceOfChange(target, targetChanged);
 
             if (!targetChanged) {
-                tryPlaySound(player, PastelSoundEvents.SHATTER_HEAVY, 0.45F);
+                tryPlaySound(player, PastelSounds.SHATTER_HEAVY, 0.45F);
                 return InteractionResult.FAIL;
             }
 
@@ -91,7 +91,7 @@ public class TuningStampItem extends Item implements TooltipExtensions {
                     saveToNbt(stack, newSource);
                     tryPlaySound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.825F);
                 } else {
-                    tryPlaySound(player, PastelSoundEvents.BLOCK_ONYX_BLOCK_CHIME, 0.825F);
+                    tryPlaySound(player, PastelSounds.BLOCK_ONYX_BLOCK_CHIME, 0.825F);
                 }
             });
 
@@ -115,7 +115,7 @@ public class TuningStampItem extends Item implements TooltipExtensions {
             if (candidate.isPresent() && candidate.get()
                                                   .canUserStamp(player)) {
                 saveToNbt(stack, candidate.get());
-                tryPlaySound(player, PastelSoundEvents.CRYSTAL_STRIKE, 0.75F);
+                tryPlaySound(player, PastelSounds.CRYSTAL_STRIKE, 0.75F);
                 return InteractionResult.sidedSuccess(world.isClientSide());
             }
         }

@@ -8,7 +8,7 @@ import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
@@ -95,7 +95,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
             if (scaling > 0) {
                 target.hurt(PastelDamageTypes.sleep(target.level(), target), scaling);
                 target.playSound(
-                    PastelSoundEvents.DEEP_CRYSTAL_RING, 0.5F, 0.8F + target.getRandom()
+                    PastelSounds.DEEP_CRYSTAL_RING, 0.5F, 0.8F + target.getRandom()
                                                                             .nextFloat() * 0.4F
                 );
             }
@@ -133,7 +133,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
                     ));
 
             target.playSound(
-                PastelSoundEvents.SOFT_HUM, 0.275F, 0.8F + target.getRandom()
+                PastelSounds.SOFT_HUM, 0.275F, 0.8F + target.getRandom()
                                                                  .nextFloat() * 0.4F
             );
         }
@@ -176,7 +176,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 
         target.hurt(type, damage);
         target.playSound(
-            PastelSoundEvents.DEEP_CRYSTAL_RING, 1.25F, 0.9F + target.getRandom()
+            PastelSounds.DEEP_CRYSTAL_RING, 1.25F, 0.9F + target.getRandom()
                                                                      .nextFloat() * 0.2F
         );
     }

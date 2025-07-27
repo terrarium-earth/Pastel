@@ -5,12 +5,13 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -43,7 +44,7 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 
 public class RadianceStaffItem extends Item implements InkPowered {
 
-    public static final int USE_DURATION = 12;
+    public static final int USE_DURATION = 20;
     public static final int REACH_STEP_DISTANCE = 4;
     public static final int MAX_REACH_STEPS = 8;
     public static final int PLACEMENT_TRIES_PER_STEP = 4;
@@ -85,7 +86,7 @@ public class RadianceStaffItem extends Item implements InkPowered {
         return false;
     }
 
-    public static void playSoundAndParticles(
+    public static void playParticles(
         Level world, BlockPos targetPos, ServerPlayer playerEntity, int useTimes, int iteration) {
         float pitch;
         if (useTimes % 2 == 0) { // high ding <=> deep ding
@@ -97,16 +98,11 @@ public class RadianceStaffItem extends Item implements InkPowered {
             (ServerLevel) world, Vec3.atCenterOf(targetPos), PastelParticleTypes.SHIMMERSTONE_SPARKLE, 20, Vec3.ZERO,
             new Vec3(0.3, 0.3, 0.3)
         );
-        world.playSound(
-            null, playerEntity.getX() + 0.5, playerEntity.getY() + 0.5, playerEntity.getZ() + 0.5,
-            PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS,
-            (float) Math.max(0.25, 1.0F - (float) iteration * 0.1F), pitch
-        );
     }
 
     public static void playDenySound(Level world, Player playerEntity) {
         world.playSound(
-            null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), PastelSoundEvents.USE_FAIL,
+            null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), PastelSounds.USE_FAIL,
             SoundSource.PLAYERS, 1.0F, 0.8F + playerEntity.getRandom()
                                                           .nextFloat() * 0.4F
         );
@@ -133,14 +129,15 @@ public class RadianceStaffItem extends Item implements InkPowered {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        if (!world.isClientSide) {
-            world.playSound(
-                null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.RADIANCE_STAFF_CHARGING,
-                SoundSource.PLAYERS, 1.0F, 1.0F
+    public InteractionResultHolder<ItemStack> use(Level level, Player user, InteractionHand hand) {
+        if (!level.isClientSide) {
+
+            level.playSound(
+                null, user.getX(), user.getY(), user.getZ(), PastelSounds.RADIANCE_STAFF_CHARGING,
+                SoundSource.PLAYERS, 1.0F, Support.varFloatCentered(level.random, 0.1F)
             );
         }
-        return ItemUtils.startUsingInstantly(world, user, hand);
+        return ItemUtils.startUsingInstantly(level, user, hand);
     }
 
     @Override
@@ -159,27 +156,30 @@ public class RadianceStaffItem extends Item implements InkPowered {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        Level world = context.getLevel();
-        if (world.isClientSide) {
+        Level level = context.getLevel();
+        if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         }
 
-        Player player = context.getPlayer();
-        if (player == null) {
+        Player user = context.getPlayer();
+        if (user == null) {
             return InteractionResult.PASS;
         }
 
         BlockPos pos = context.getClickedPos();
         Direction direction = context.getClickedFace();
 
-        if (!world.getBlockState(pos)
+        if (!level.getBlockState(pos)
                   .is(PastelBlocks.WAND_LIGHT_BLOCK.get())) { // those get destroyed instead
             BlockPos targetPos = pos.relative(direction);
-            if (placeLight(world, targetPos, (ServerPlayer) player)) {
-                RadianceStaffItem.playSoundAndParticles(
-                    world, targetPos, (ServerPlayer) player, world.random.nextInt(5), world.random.nextInt(5));
+            if (placeLight(level, targetPos, (ServerPlayer) user)) {
+                RadianceStaffItem.playParticles(
+                    level, targetPos, (ServerPlayer) user, level.random.nextInt(5), level.random.nextInt(5));
+
+                playPlaceSound(level, user, Support.varFloatCentered(level.random, 0.2F),
+                               Support.varFloatCentered(level.random, 0.125F));
             } else {
-                RadianceStaffItem.playDenySound(world, player);
+                RadianceStaffItem.playDenySound(level, user);
             }
             return InteractionResult.CONSUME;
         }
@@ -187,13 +187,14 @@ public class RadianceStaffItem extends Item implements InkPowered {
         return InteractionResult.PASS;
     }
 
-    public void usage(Level world, ServerPlayer user) {
+    public void usage(Level level, ServerPlayer user) {
         int useTimes = (user.getTicksUsingItem() / USE_DURATION);
         int maxCheckDistance = Math.min(MAX_REACH_STEPS, useTimes);
 
         BlockPos sourcePos = user.blockPosition();
         Vec3 cameraVec = user.getViewVector(0);
 
+        int successes = 0;
         for (int iteration = 1; iteration < maxCheckDistance; iteration++) {
             BlockPos targetPos = sourcePos.offset(
                 Mth.floor(cameraVec.x * iteration * REACH_STEP_DISTANCE),
@@ -201,30 +202,38 @@ public class RadianceStaffItem extends Item implements InkPowered {
                 Mth.floor(cameraVec.z * iteration * REACH_STEP_DISTANCE)
             );
 
-            boolean success = false;
             for (int tries = 0; tries < PLACEMENT_TRIES_PER_STEP; tries++) {
                 targetPos = targetPos.offset(
-                    iteration - world.getRandom()
+                    iteration - level.getRandom()
                                      .nextInt(2 * iteration),
-                    iteration - world.getRandom()
+                    iteration - level.getRandom()
                                      .nextInt(2 * iteration),
-                    iteration - world.getRandom()
+                    iteration - level.getRandom()
                                      .nextInt(2 * iteration)
                 );
 
-                if (world.getBrightness(LightLayer.BLOCK, targetPos) < MIN_LIGHT_LEVEL) {
-                    if (placeLight(world, targetPos, user)) {
-                        success = true;
-                        playSoundAndParticles(world, targetPos, user, useTimes, iteration);
+                if (level.getBrightness(LightLayer.BLOCK, targetPos) < MIN_LIGHT_LEVEL) {
+                    if (placeLight(level, targetPos, user)) {
+                        playParticles(level, targetPos, user, useTimes, iteration);
+                        successes++;
                         break;
                     }
                 }
             }
-
-            if (!success) {
-                playDenySound(world, user);
-            }
         }
+
+        float pitch = level.random.nextFloat() * 0.09F  + successes * 0.1F;
+        float vol = (float) Math.max(0.75, successes * 0.1F + 0.25F);
+        playPlaceSound(level, user, vol, 1F + pitch);
+        playPlaceSound(level, user, vol, 1F - pitch);
+    }
+
+    private static void playPlaceSound(Level level, Player user, float vol, float pitch) {
+        level.playSound(
+            null, user,
+            PastelSounds.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS,
+            vol, pitch
+        );
     }
 
     @Override

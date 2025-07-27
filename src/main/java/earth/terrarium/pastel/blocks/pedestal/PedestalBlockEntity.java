@@ -25,7 +25,7 @@ import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -191,7 +191,7 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
 		recipe.consumeIngredients(this, input);
 		var upgrade = (PedestalBlockItem) recipe.getResultItem(level.registryAccess()).getItem();
 		PedestalBlock.upgradeTo(level, getBlockPos(), getBlockState(), upgrade.getVariant());
-		level.playSound(null, getBlockPos(), PastelSoundEvents.PEDESTAL_UPGRADE,
+		level.playSound(null, getBlockPos(), PastelSounds.PEDESTAL_UPGRADE,
 				SoundSource.BLOCKS, 1.5F, 1);
 	}
 
@@ -235,7 +235,7 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
 	}
 
 	private void consumeAndPlaySound(PedestalRecipeInput input, Recipe<?> rec) {
-		var sound = PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_GENERIC;
+		var sound = PastelSounds.PEDESTAL_CRAFTING_FINISHED_GENERIC;
 		if (rec instanceof PedestalRecipe pr) {
 			pr.consumeIngredients(this, input);
 			sound = pr.getSoundEvent(level.random);
@@ -484,7 +484,7 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
 
 		if (active) {
 			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
-					PastelSoundEvents.PEDESTAL_CRAFTING, (ServerLevel) getLevel(),
+					PastelSounds.PEDESTAL_CRAFTING, (ServerLevel) getLevel(),
 					getBlockPos(), Integer.MAX_VALUE
 			);
 		}

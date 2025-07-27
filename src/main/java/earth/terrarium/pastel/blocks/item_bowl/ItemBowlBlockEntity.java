@@ -14,7 +14,7 @@ import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect
 import earth.terrarium.pastel.particle.effect.ColoredTransmission;
 import earth.terrarium.pastel.particle.effect.ColoredTransmissionParticleEffect;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -165,7 +165,7 @@ public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity implement
             }
 
             level.playSound(
-                null, this.worldPosition, PastelSoundEvents.CRAFTING_DING, SoundSource.BLOCKS,
+                null, this.worldPosition, PastelSounds.CRAFTING_DING, SoundSource.BLOCKS,
                 PastelCommon.CONFIG.BlockSoundVolume, 0.7F + level.random.nextFloat() * 0.6F
             );
         }

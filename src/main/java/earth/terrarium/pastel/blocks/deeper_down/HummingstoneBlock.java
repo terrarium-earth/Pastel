@@ -7,12 +7,11 @@ import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -93,7 +92,7 @@ public class HummingstoneBlock extends BaseEntityBlock {
         if (r < 0.3F) {
             float pitch = 0.4F + 0.4F * pos.getX() % 8 + 0.4F * pos.getY() % 8 + 0.4F * pos.getZ() % 8;
             world.playLocalSound(
-                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSoundEvents.HUMMINGSTONE_HUM,
+                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSounds.HUMMINGSTONE_HUM,
                 SoundSource.BLOCKS, 0.4F + random.nextFloat() * 0.1F, pitch, false
             );
         }
@@ -176,7 +175,7 @@ public class HummingstoneBlock extends BaseEntityBlock {
             return;
         }
 
-        world.playSound(null, pos, PastelSoundEvents.HUMMINGSTONE_HUM, SoundSource.BLOCKS, 0.75F, 1.0F);
+        world.playSound(null, pos, PastelSounds.HUMMINGSTONE_HUM, SoundSource.BLOCKS, 0.75F, 1.0F);
         if (!state.getValue(HUMMING)) {
             world.setBlockAndUpdate(pos, state.setValue(HUMMING, true));
         }

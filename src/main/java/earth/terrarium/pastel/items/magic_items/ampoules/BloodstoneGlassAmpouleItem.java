@@ -4,7 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
 import earth.terrarium.pastel.entity.entity.LightShardBaseEntity;
 import earth.terrarium.pastel.entity.entity.LightSpearEntity;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -49,7 +49,7 @@ public class BloodstoneGlassAmpouleItem extends GlassAmpouleItem implements Prio
     public boolean trigger(
         Level world, ItemStack stack, LivingEntity attacker, @Nullable LivingEntity target, Vec3 position) {
         world.playLocalSound(
-            BlockPos.containing(position), PastelSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.35F, 0.9F +
+            BlockPos.containing(position), PastelSounds.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.35F, 0.9F +
                                                                                                              world.getRandom()
                                                                                                                   .nextFloat() *
                                                                                                              0.334F,

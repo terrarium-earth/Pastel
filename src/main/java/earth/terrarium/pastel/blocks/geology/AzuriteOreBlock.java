@@ -7,10 +7,9 @@ import earth.terrarium.pastel.blocks.conditional.CloakedOreBlock;
 import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.AuraData;
 import earth.terrarium.pastel.sound.AuraSoundInstance;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -84,7 +83,7 @@ public class AzuriteOreBlock extends CloakedOreBlock {
 
         ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, 5, false, new Vec3(2, 0, 2), 0, true, Vec3.atLowerCornerOf(pos), new Vec3(0, 0.07D + random.nextDouble() * 0.06, 0));
         ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(), random.nextIntBetweenInclusive(1, 3), Vec3.ZERO);
-        world.playSound(null, pos, PastelSoundEvents.SOFT_HUM, SoundSource.BLOCKS, 1F, random.nextFloat() * 0.5F + 1F);
+        world.playSound(null, pos, PastelSounds.SOFT_HUM, SoundSource.BLOCKS, 1F, random.nextFloat() * 0.5F + 1F);
     }
     
 }

@@ -29,7 +29,7 @@ import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -193,7 +193,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
             Support.areaCriterion((ServerLevel) level, Support.H_RANGE + 2, getBlockPos(), required, p ->
                 PastelCriteria.ENCHANTER_UPGRADING.trigger(p , EnchantmentHelper.getEnchantmentsForCrafting(output), ((EnchantmentUpgradeRecipe) recipe).getXpScaling().apply(scaling)));
 
-		finalize(PastelSoundEvents.ENCHANTER_FINISH);
+		finalize(PastelSounds.ENCHANTER_FINISH);
 	}
 
 	private void finalizeEnchanting() {
@@ -246,7 +246,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		}
 
 		if (craftingTime > 0 && !wasCrafting)
-			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.ENCHANTER_WORKING,
+			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSounds.ENCHANTER_WORKING,
 					(ServerLevel) level, worldPosition, Integer.MAX_VALUE);
 	}
 

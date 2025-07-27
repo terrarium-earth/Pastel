@@ -176,7 +176,7 @@ public class PastelOmniAcceleratorProjectiles {
 
             @Override
             public SoundEvent getSoundEffect() {
-                return PastelSoundEvents.ENTITY_BLOCK_FLOODER_THROW;
+                return PastelSounds.ENTITY_BLOCK_FLOODER_THROW;
             }
         }, PastelItems.BLOCK_FLOODER);
 		 */
@@ -218,7 +218,7 @@ public class PastelOmniAcceleratorProjectiles {
 
                 @Override
                 public SoundEvent getSoundEffect() {
-                    return PastelSoundEvents.SHOOTING_STAR_CRACKER;
+                    return PastelSounds.SHOOTING_STAR_CRACKER;
                 }
             }, PastelItemTags.SHOOTING_STARS
         );

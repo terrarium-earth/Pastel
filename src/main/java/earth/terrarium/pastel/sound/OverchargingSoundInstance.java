@@ -3,7 +3,7 @@ package earth.terrarium.pastel.sound;
 import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.trinkets.TakeOffBeltItem;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
@@ -23,7 +23,7 @@ public class OverchargingSoundInstance extends AbstractSoundInstance implements 
     private boolean done;
 
     public OverchargingSoundInstance(Player player) {
-        super(PastelSoundEvents.OVERCHARGING, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
+        super(PastelSounds.OVERCHARGING, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
         this.player = player;
         this.looping = false;
         this.delay = 0;

@@ -18,7 +18,7 @@ import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.render.animation.FlowAnimator;
 import earth.terrarium.pastel.render.animation.FlowData;
 import earth.terrarium.pastel.render.animation.FlowHandlers;
@@ -168,7 +168,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
 
             if (blockEntity.craftingTime == 1) {
                 PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
-                    PastelSoundEvents.SPIRIT_INSTILLER_CRAFTING, (ServerLevel) world, blockEntity.worldPosition,
+                    PastelSounds.SPIRIT_INSTILLER_CRAFTING, (ServerLevel) world, blockEntity.worldPosition,
                     Integer.MAX_VALUE
                 );
             } else if (blockEntity.craftingTime == blockEntity.craftingTimeTotal * 0.01
@@ -284,7 +284,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
         if (!playerCanCraft || !structureComplete) {
             if (!structureComplete) {
                 world.playSound(
-                    null, instiller.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS,
+                    null, instiller.getBlockPos(), PastelSounds.CRAFTING_ABORTED, SoundSource.BLOCKS,
                     0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F
                 );
             }
@@ -426,7 +426,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
         Level world = spiritInstillerBlockEntity.getLevel();
         if (world == null) return;
         world.playSound(
-            null, spiritInstillerBlockEntity.worldPosition, PastelSoundEvents.SPIRIT_INSTILLER_CRAFTING_FINISHED,
+            null, spiritInstillerBlockEntity.worldPosition, PastelSounds.SPIRIT_INSTILLER_CRAFTING_FINISHED,
             SoundSource.BLOCKS, 1.0F, 1.0F
         );
         PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(

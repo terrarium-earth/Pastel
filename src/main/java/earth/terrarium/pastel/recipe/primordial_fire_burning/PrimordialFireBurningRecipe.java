@@ -9,7 +9,7 @@ import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -132,7 +132,7 @@ public class PrimordialFireBurningRecipe extends GatedPastelRecipe<RecipeInput> 
                                        .getDefaultInstance()), world.registryAccess()
         );
 
-        world.playSound(null, pos, PastelSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.7F, 1.0F);
+        world.playSound(null, pos, PastelSounds.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.7F, 1.0F);
         if (output.getItem() instanceof BlockItem blockItem) {
             world.setBlockAndUpdate(
                 pos, blockItem.getBlock()
@@ -165,7 +165,7 @@ public class PrimordialFireBurningRecipe extends GatedPastelRecipe<RecipeInput> 
 
         FireproofItemEntity.scatter(world, pos.x(), pos.y(), pos.z(), outputStack);
         world.playSound(
-            null, itemEntity.blockPosition(), PastelSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.7F,
+            null, itemEntity.blockPosition(), PastelSounds.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.7F,
             1.0F
         );
 

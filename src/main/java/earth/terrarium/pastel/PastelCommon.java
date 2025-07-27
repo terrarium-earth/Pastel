@@ -65,7 +65,7 @@ import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import earth.terrarium.pastel.registries.PastelResonanceProcessorTypes;
 import earth.terrarium.pastel.registries.PastelResourceConditions;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.registries.PastelStampDataCategories;
 import earth.terrarium.pastel.registries.PastelStructurePoolElementTypes;
 import earth.terrarium.pastel.registries.PastelStructureTypes;
@@ -173,7 +173,7 @@ public class PastelCommon {
         logInfo("Registering Particle Types...");
         PastelParticleTypes.register(pastelBus);
         logInfo("Registering Sound Events...");
-        PastelSoundEvents.register(pastelBus);
+        PastelSounds.register(pastelBus);
         logInfo("Registering BlockSound Groups...");
         PastelBlockSoundGroups.register();
         logInfo("Registering Fluids...");

@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelBlockTags;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
@@ -47,7 +47,7 @@ public class FailingBlock extends DecayBlock {
         super.setPlacedBy(world, pos, state, placer, itemStack);
 
         if (!world.isClientSide) {
-            world.playSound(null, pos, PastelSoundEvents.FAILING_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
+            world.playSound(null, pos, PastelSounds.FAILING_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
         } else {
             RandomSource random = world.getRandom();
             world.addParticle(

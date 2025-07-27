@@ -5,8 +5,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.spells.MoonstoneStrike;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Entity;
@@ -51,15 +50,15 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
         Level world = this.level();
         world.playSound(
             null, entityHitResult.getEntity()
-                                 .blockPosition(), PastelSoundEvents.MEDIUM_CRYSTAL_RING, SoundSource.PLAYERS, 1.334F,
+                                 .blockPosition(), PastelSounds.MEDIUM_CRYSTAL_RING, SoundSource.PLAYERS, 1.334F,
             0.9F + random.nextFloat() * 0.334F
         );
         world.playSound(
             null, entityHitResult.getEntity()
-                                 .blockPosition(), PastelSoundEvents.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F,
+                                 .blockPosition(), PastelSounds.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F,
             1.0F + random.nextFloat() * 0.2F
         );
-        MoonstoneStrike.create(world, this, null, this.getX(), this.getY(), this.getZ(), 1);
+
         if (!world.isClientSide) {
             processHit(entityHitResult.getEntity(), 1F);
         }
@@ -71,8 +70,8 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
         super.onHitBlock(blockHitResult);
         Level world = this.level();
         world.playSound(
-            null, blockHitResult.getBlockPos(), PastelSoundEvents.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F, 1.0F);
-        MoonstoneStrike.create(world, this, null, this.getX(), this.getY(), this.getZ(), 1);
+            null, blockHitResult.getBlockPos(), PastelSounds.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F, 1.0F);
+
         if (!world.isClientSide) {
             processHit(null, 0.667F);
         }

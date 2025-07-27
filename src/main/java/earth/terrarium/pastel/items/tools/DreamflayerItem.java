@@ -9,7 +9,7 @@ import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -80,7 +80,7 @@ public class DreamflayerItem extends SwordItem
                 setActivated(stack, false);
                 if (!world.isClientSide) {
                     world.playSound(
-                        null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.DREAMFLAYER_DEACTIVATE,
+                        null, user.getX(), user.getY(), user.getZ(), PastelSounds.DREAMFLAYER_DEACTIVATE,
                         SoundSource.PLAYERS, 1.0F, 1F
                     );
                 }
@@ -89,13 +89,13 @@ public class DreamflayerItem extends SwordItem
                     setActivated(stack, true);
                     if (!world.isClientSide) {
                         world.playSound(
-                            null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.DREAMFLAYER_ACTIVATE,
+                            null, user.getX(), user.getY(), user.getZ(), PastelSounds.DREAMFLAYER_ACTIVATE,
                             SoundSource.PLAYERS, 1.0F, 1F
                         );
                     }
                 } else if (!world.isClientSide) {
                     world.playSound(
-                        null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.DREAMFLAYER_DEACTIVATE,
+                        null, user.getX(), user.getY(), user.getZ(), PastelSounds.DREAMFLAYER_DEACTIVATE,
                         SoundSource.PLAYERS, 1.0F, 1F
                     );
                 }
@@ -126,7 +126,7 @@ public class DreamflayerItem extends SwordItem
                     player, USED_COLOR, INK_COST_PER_SECOND)) {
                     setActivated(stack, false);
                     world.playSound(
-                        null, entity.getX(), entity.getY(), entity.getZ(), PastelSoundEvents.DREAMFLAYER_DEACTIVATE,
+                        null, entity.getX(), entity.getY(), entity.getZ(), PastelSounds.DREAMFLAYER_DEACTIVATE,
                         SoundSource.PLAYERS, 0.8F, 1F
                     );
                 }

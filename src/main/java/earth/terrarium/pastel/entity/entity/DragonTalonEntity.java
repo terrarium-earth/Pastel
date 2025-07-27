@@ -10,7 +10,7 @@ import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -68,7 +68,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
                 case Y -> setDeltaMovement(getDeltaMovement().multiply(1, -1, 1));
                 case Z -> setDeltaMovement(getDeltaMovement().multiply(1, 1, -1));
             }
-            playSound(PastelSoundEvents.METAL_HIT, 1, 1.5F);
+            playSound(PastelSounds.METAL_HIT, 1, 1.5F);
             return;
         }
 
@@ -110,7 +110,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
                                   .multiply(-0.01, -0.1, -0.01));
         float g = 1.0F;
 
-        this.playSound(PastelSoundEvents.IMPALING_HIT, g, 1.0F);
+        this.playSound(PastelSounds.IMPALING_HIT, g, 1.0F);
     }
 
     private float getDamage(ItemStack stack) {
@@ -198,7 +198,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
                 }
 
                 world.playSeededSound(
-                    null, position().x, position().y, position().z, PastelSoundEvents.ELECTRIC_DISCHARGE,
+                    null, position().x, position().y, position().z, PastelSounds.ELECTRIC_DISCHARGE,
                     SoundSource.AMBIENT, 1F, 0.6F + random.nextFloat() * 0.2F, 0
                 );
             }

@@ -6,7 +6,7 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundSource;
@@ -71,7 +71,7 @@ public abstract class LiquidCrystalFluid extends PastelFluid {
         BlockState topState = world.getBlockState(topPos);
         if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(1000) == 0) {
             world.playLocalSound(
-                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSoundEvents.LIQUID_CRYSTAL_AMBIENT,
+                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSounds.LIQUID_CRYSTAL_AMBIENT,
                 SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false
             );
         }

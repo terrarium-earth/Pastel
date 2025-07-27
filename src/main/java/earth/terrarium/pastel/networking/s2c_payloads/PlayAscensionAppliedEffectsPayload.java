@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.DivinitySoundInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
@@ -36,7 +36,7 @@ public record PlayAscensionAppliedEffectsPayload() implements CustomPacketPayloa
     @OnlyIn(Dist.CLIENT)
     private static void execute(Player player) {
         var level = player.level();
-        level.playSound(null, player.blockPosition(), PastelSoundEvents.FADING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
+        level.playSound(null, player.blockPosition(), PastelSounds.FADING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
         Minecraft.getInstance()
                  .getSoundManager()
                  .play(new DivinitySoundInstance());

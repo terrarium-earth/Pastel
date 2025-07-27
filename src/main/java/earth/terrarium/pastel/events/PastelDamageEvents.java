@@ -5,7 +5,6 @@ import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
-import earth.terrarium.pastel.entity.entity.GlassArrowEntity;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.items.trinkets.AttackRingItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
@@ -17,7 +16,7 @@ import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelDamageTypeTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
 import net.minecraft.server.level.ServerLevel;
@@ -29,7 +28,6 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent;
-import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
@@ -286,7 +284,7 @@ public class PastelDamageEvents {
         }
         entity.level()
               .playSound(
-                  null, entity.blockPosition(), PastelSoundEvents.PUFF_CIRCLET_PFFT, SoundSource.PLAYERS,
+                  null, entity.blockPosition(), PastelSounds.PUFF_CIRCLET_PFFT, SoundSource.PLAYERS,
                   Support.varFloat(random, 0.2F), Support.varFloatCentered(random, 0.2F)
               );
         event.setCanceled(true);

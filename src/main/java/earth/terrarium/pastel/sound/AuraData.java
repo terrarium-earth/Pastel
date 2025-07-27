@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.registries.PastelBlockTags;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.Level;
@@ -14,7 +14,7 @@ public record AuraData(
 ) {
 
     public static final AuraData AZURITE = new AuraData(
-        PastelSoundEvents.OST_AZURE,
+        PastelSounds.OST_AZURE,
         (pos, level) -> level.getBlockState(pos)
                              .is(PastelBlockTags.AZURITE_ORES),
         true,

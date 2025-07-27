@@ -13,7 +13,7 @@ import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -146,23 +146,23 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 		List<SoundEvent> choices = new ArrayList<>();
 		
 		for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.MAGENTA, 0); i++) {
-			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_AMETHYST);
+			choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_AMETHYST);
 		}
 		for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.YELLOW, 0); i++) {
-			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_CITRINE);
+			choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_CITRINE);
 		}
 		for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.CYAN, 0); i++) {
-			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_TOPAZ);
+			choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_TOPAZ);
 		}
 		for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.BLACK, 0); i++) {
-			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_ONYX);
+			choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_ONYX);
 		}
 		for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.WHITE, 0); i++) {
-			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_MOONSTONE);
+			choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_MOONSTONE);
 		}
 		
 		if (choices.isEmpty()) {
-			return PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_GENERIC;
+			return PastelSounds.PEDESTAL_CRAFTING_FINISHED_GENERIC;
 		} else {
 			return choices.get(random.nextInt(choices.size()));
 		}

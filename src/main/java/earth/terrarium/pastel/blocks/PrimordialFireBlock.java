@@ -9,7 +9,7 @@ import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurni
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -335,7 +335,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
         if (random.nextInt(24) == 0) {
             world.playLocalSound(
                 (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5,
-                PastelSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.175F + random.nextFloat(),
+                PastelSounds.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.175F + random.nextFloat(),
                 random.nextFloat() * 0.7F + 0.3F, false
             );
         }

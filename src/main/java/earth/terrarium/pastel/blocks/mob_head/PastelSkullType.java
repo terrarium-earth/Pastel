@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.mob_head;
 
 import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;
@@ -121,25 +121,25 @@ public enum PastelSkullType implements SkullBlock.Type {
     // Spectrum
     EGG_LAYING_WOOLY_PIG(PastelEntityTypes.EGG_LAYING_WOOLY_PIG, SoundEvents.PIG_AMBIENT.getLocation()),
     ERASER(PastelEntityTypes.ERASER, SoundEvents.SPIDER_AMBIENT.getLocation()),
-    KINDLING(PastelEntityTypes.KINDLING, PastelSoundEvents.ENTITY_KINDLING_AMBIENT.getLocation()),
-    LIZARD_BLACK(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_BLUE(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_BROWN(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_CYAN(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_GRAY(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_GREEN(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_LIGHT_BLUE(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_LIGHT_GRAY(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_LIME(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_MAGENTA(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_ORANGE(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_PINK(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_PURPLE(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_RED(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_WHITE(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-    LIZARD_YELLOW(PastelEntityTypes.LIZARD, PastelSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
+    KINDLING(PastelEntityTypes.KINDLING, PastelSounds.ENTITY_KINDLING_AMBIENT.getLocation()),
+    LIZARD_BLACK(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_BLUE(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_BROWN(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_CYAN(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_GRAY(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_GREEN(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_LIGHT_BLUE(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_LIGHT_GRAY(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_LIME(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_MAGENTA(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_ORANGE(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_PINK(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_PURPLE(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_RED(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_WHITE(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
+    LIZARD_YELLOW(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
     PRESERVATION_TURRET(
-        PastelEntityTypes.PRESERVATION_TURRET, PastelSoundEvents.ENTITY_PRESERVATION_TURRET_AMBIENT.getLocation());
+        PastelEntityTypes.PRESERVATION_TURRET, PastelSounds.ENTITY_PRESERVATION_TURRET_AMBIENT.getLocation());
 
     public static final Codec<PastelSkullType> CODEC = StringRepresentable.fromEnum(PastelSkullType::values);
 

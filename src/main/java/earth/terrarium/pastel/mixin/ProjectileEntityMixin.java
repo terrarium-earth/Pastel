@@ -8,7 +8,7 @@ import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -86,7 +86,7 @@ public abstract class ProjectileEntityMixin {
                         );
 
                         world.playSound(
-                            null, thisEntity.blockPosition(), PastelSoundEvents.PUFF_CIRCLET_PFFT, SoundSource.PLAYERS,
+                            null, thisEntity.blockPosition(), PastelSounds.PUFF_CIRCLET_PFFT, SoundSource.PLAYERS,
                             1.0F, 1.0F
                         );
                         livingEntity.hurtTime = Math.max(livingEntity.hurtTime, 1);

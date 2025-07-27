@@ -23,7 +23,7 @@ import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelPastelUpgrades;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.registries.PastelStampDataCategories;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -240,7 +240,7 @@ public class PastelNodeBlockEntity extends BlockEntity
 
         if (!stack.isEmpty()) {
             level.playLocalSound(
-                worldPosition, PastelSoundEvents.SHATTER_LIGHT, SoundSource.BLOCKS, 0.25F, 0.9F + level.getRandom()
+                worldPosition, PastelSounds.SHATTER_LIGHT, SoundSource.BLOCKS, 0.25F, 0.9F + level.getRandom()
                                                                                                        .nextFloat() *
                                                                                                   0.2F, true
             );

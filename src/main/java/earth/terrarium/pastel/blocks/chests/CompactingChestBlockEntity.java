@@ -7,7 +7,7 @@ import earth.terrarium.pastel.inventories.AutoCraftingMode;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.CompactingChestStatusUpdatePayload;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.render.animation.FlowAnimator;
 import earth.terrarium.pastel.render.animation.FlowData;
 import earth.terrarium.pastel.render.animation.FlowHandlers;
@@ -232,12 +232,12 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
 
     @Override
     public SoundEvent getOpenSound() {
-        return PastelSoundEvents.COMPACTING_CHEST_OPEN;
+        return PastelSounds.COMPACTING_CHEST_OPEN;
     }
 
     @Override
     public SoundEvent getCloseSound() {
-        return PastelSoundEvents.COMPACTING_CHEST_CLOSE;
+        return PastelSounds.COMPACTING_CHEST_CLOSE;
     }
 
     public void applySettings(AutoCraftingMode mode) {

@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -89,10 +89,10 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
 
         if (newState.getValue(SENDER)) {
             world.playSound(
-                null, blockPos, PastelSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 0.9F);
+                null, blockPos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 0.9F);
         } else {
             world.playSound(
-                null, blockPos, PastelSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 1.1F);
+                null, blockPos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 1.1F);
         }
         checkTickOnNeighbor(world, blockPos, newState);
     }

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -54,7 +54,7 @@ public class MidnightAberrationItem extends Item {
 			if (world.random.nextFloat() < 0.2F) {
 				stack.shrink(1);
 				player.getInventory().placeItemBackInInventory(Items.GUNPOWDER.getDefaultInstance());
-				world.playSound(null, player, PastelSoundEvents.MIDNIGHT_ABERRATION_CRUMBLING, SoundSource.PLAYERS, 0.5F, 1.0F);
+				world.playSound(null, player, PastelSounds.MIDNIGHT_ABERRATION_CRUMBLING, SoundSource.PLAYERS, 0.5F, 1.0F);
 				
 				Support.grantAdvancementCriterion(player, MIDNIGHT_ABERRATION_CRUMBLING_ADVANCEMENT_ID, MIDNIGHT_ABERRATION_CRUMBLING_ADVANCEMENT_CRITERION);
 			}

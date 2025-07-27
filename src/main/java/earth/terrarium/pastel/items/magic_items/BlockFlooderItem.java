@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.entity.entity.BlockFlooderProjectile;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -26,7 +26,7 @@ public class BlockFlooderItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
         ItemStack itemStack = user.getItemInHand(hand);
         world.playSound(
-            null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.ENTITY_BLOCK_FLOODER_THROW,
+            null, user.getX(), user.getY(), user.getZ(), PastelSounds.ENTITY_BLOCK_FLOODER_THROW,
             SoundSource.NEUTRAL, 0.5F, 0.4F / (world.getRandom()
                                                     .nextFloat() * 0.4F + 0.8F)
         );

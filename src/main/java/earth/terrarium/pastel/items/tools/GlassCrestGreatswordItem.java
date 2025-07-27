@@ -7,8 +7,9 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.GreatswordChargingSoundInstance;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
 import net.minecraft.client.Minecraft;
@@ -118,15 +119,12 @@ public class GlassCrestGreatswordItem extends GreatswordItem
         return Ench.getLevel(lookup, Enchantments.SWEEPING_EDGE, stack);
     }
 
-    public void performGroundSlam(Level world, Vec3 pos, LivingEntity attacker, float strength) {
-        world.gameEvent(attacker, GameEvent.HIT_GROUND, BlockPos.containing(pos.x, pos.y, pos.z));
+    public void performGroundSlam(Level level, Vec3 pos, LivingEntity attacker, float strength) {
+        level.gameEvent(attacker, GameEvent.HIT_GROUND, BlockPos.containing(pos.x, pos.y, pos.z));
         MoonstoneStrike.create(
-            world, attacker, null, attacker.getX(), attacker.getY(), attacker.getZ(), strength, 1.75F);
-        world.playSound(null, attacker.blockPosition(), PastelSoundEvents.GROUND_SLAM, SoundSource.PLAYERS, 0.7F, 1.0F);
-        world.playSound(
-            null, attacker.blockPosition(), PastelSoundEvents.DEEP_CRYSTAL_RING, SoundSource.PLAYERS, 0.7F, 1.0F);
-        world.playSound(
-            null, attacker.blockPosition(), PastelSoundEvents.DEEP_CRYSTAL_RING, SoundSource.PLAYERS, 0.4F, 0.334F);
+            level, attacker, null, attacker.getX(), attacker.getY(), attacker.getZ(), strength, 1.75F,
+            Support.varFloat(level.random, 0.2F) - 0.1F);
+        level.playSound(null, attacker.blockPosition(), PastelSounds.GROUND_SLAM, SoundSource.PLAYERS, 1.1F, Support.varFloatCentered(level.random, 0.1F));
 
         if (attacker instanceof ServerPlayer serverPlayer) {
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));

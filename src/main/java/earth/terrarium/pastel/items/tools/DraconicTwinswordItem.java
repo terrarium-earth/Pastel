@@ -10,7 +10,7 @@ import earth.terrarium.pastel.entity.entity.DraconicTwinswordEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -177,7 +177,7 @@ public class DraconicTwinswordItem extends SwordItem
     @Override
     public void playSound(ServerPlayer player) {
         player.playNotifySound(
-            PastelSoundEvents.METALLIC_UNSHEATHE, SoundSource.PLAYERS, 0.5F, 0.8F + player.getRandom()
+            PastelSounds.METALLIC_UNSHEATHE, SoundSource.PLAYERS, 0.5F, 0.8F + player.getRandom()
                                                                                           .nextFloat() * 0.4F
         );
     }

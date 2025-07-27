@@ -2,7 +2,7 @@ package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -50,7 +50,7 @@ public class PhantomFrameEntity extends ItemFrame {
                 new Vec3(0.1, 0.1, 0.1)
             );
             this.level()
-                .playSound(null, this, PastelSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
+                .playSound(null, this, PastelSounds.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
         }
     }
 
@@ -64,7 +64,7 @@ public class PhantomFrameEntity extends ItemFrame {
                 new Vec3(0.1, 0.1, 0.1)
             );
             this.level()
-                .playSound(null, this, PastelSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
+                .playSound(null, this, PastelSounds.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
         }
         return success;
     }

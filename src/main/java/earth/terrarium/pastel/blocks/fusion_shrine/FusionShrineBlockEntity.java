@@ -22,7 +22,7 @@ import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -30,7 +30,6 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -138,7 +137,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
             new Vec3(0, -0.5, 0)
         );
         world.playSound(
-            null, this.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS,
+            null, this.getBlockPos(), PastelSounds.CRAFTING_ABORTED, SoundSource.BLOCKS,
             0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F
         );
         world.playSound(
@@ -214,7 +213,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
 
         if (fusionShrineBlockEntity.craftingTime == 1 && fusionShrineBlockEntity.craftingTimeTotal > 1) {
             PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
-                PastelSoundEvents.FUSION_SHRINE_CRAFTING, (ServerLevel) world, fusionShrineBlockEntity.getBlockPos(),
+                PastelSounds.FUSION_SHRINE_CRAFTING, (ServerLevel) world, fusionShrineBlockEntity.getBlockPos(),
                 fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime
             );
         }
@@ -268,7 +267,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
                                        .assemble(
                                            fusionShrineBlockEntity.getRecipeInput(), world.registryAccess())
             );
-            fusionShrineBlockEntity.playSound(PastelSoundEvents.FUSION_SHRINE_CRAFTING_FINISHED, 1.4F);
+            fusionShrineBlockEntity.playSound(PastelSounds.FUSION_SHRINE_CRAFTING_FINISHED, 1.4F);
         }
 
         scatterContents(world, blockPos.above(), fusionShrineBlockEntity); // drop remaining items

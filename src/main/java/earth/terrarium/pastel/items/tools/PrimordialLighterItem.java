@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.tools;
 import earth.terrarium.pastel.api.item.CreativeOnlyItem;
 import earth.terrarium.pastel.blocks.PrimordialFireBlock;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -72,7 +72,7 @@ public class PrimordialLighterItem extends FlintAndSteelItem implements Creative
 
         if (PrimordialFireBlock.canBePlacedAt(world, blockOnSide, context.getHorizontalDirection())) {
             world.playSound(
-                player, blockOnSide, PastelSoundEvents.ITEM_PRIMORDIAL_LIGHTER_USE, SoundSource.BLOCKS, 1.0F,
+                player, blockOnSide, PastelSounds.ITEM_PRIMORDIAL_LIGHTER_USE, SoundSource.BLOCKS, 1.0F,
                 world.getRandom()
                      .nextFloat() * 0.4F + 0.8F
             );

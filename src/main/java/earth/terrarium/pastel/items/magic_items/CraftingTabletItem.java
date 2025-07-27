@@ -7,7 +7,7 @@ import earth.terrarium.pastel.items.tooltip.CraftingTabletTooltipData;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.registries.PastelBannerPatterns;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
@@ -87,7 +87,7 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
                         return InteractionResultHolder.consume(user.getItemInHand(hand));
                     }
                 }
-                user.playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
+                user.playSound(PastelSounds.USE_FAIL, 1.0F, 1.0F);
                 return InteractionResultHolder.fail(user.getItemInHand(hand));
             }
         }

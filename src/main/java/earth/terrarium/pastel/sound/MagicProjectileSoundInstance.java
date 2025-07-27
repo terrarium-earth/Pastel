@@ -1,7 +1,8 @@
 package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.entity.entity.MagicProjectileEntity;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -25,9 +26,10 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
     private int ticksPlayed = 0;
     private boolean done;
     private boolean playedExplosion;
+    private float pitchMod;
 
     protected MagicProjectileSoundInstance(ResourceKey<Level> worldKey, MagicProjectileEntity projectile) {
-        super(PastelSoundEvents.INK_PROJECTILE_LAUNCH, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
+        super(PastelSounds.INK_PROJECTILE_LAUNCH, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
 
         this.worldKey = worldKey;
         this.projectile = projectile;
@@ -40,6 +42,7 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
         this.looping = false;
         this.delay = 0;
         this.volume = 1.0F;
+        pitchMod = Support.varFloatCentered(random, 0.1F);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -71,12 +74,10 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
         this.y = this.projectile.getY();
         this.z = this.projectile.getZ();
 
-        this.volume = Math.max(
-            0.0F, 0.7F - Math.max(
-                0.0F, projectile.blockPosition()
-                                .distManhattan(client.player.blockPosition()) / 128F - 0.2F
-            )
-        );
+        var proximity = 1F - (float) projectile.position().distanceTo(client.cameraEntity.position()) / 48F;
+        volume =  Math.clamp(proximity, 0, 1);
+        pitch = 1 - (1F - proximity) / 100;
+        pitch *= pitchMod;
 
         if (ticksPlayed > maxDurationTicks
             || !Objects.equals(this.worldKey, Minecraft.getInstance().level.dimension())
@@ -87,16 +88,11 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
     }
 
     protected final void setDone() {
-        Minecraft client = Minecraft.getInstance();
         this.ticksPlayed = this.maxDurationTicks;
         this.done = true;
         this.looping = false;
 
         if (projectile.isRemoved() && !playedExplosion) {
-            client.player.playNotifySound(
-                SoundEvents.GENERIC_EXPLODE.value(), SoundSource.NEUTRAL, Math.max(0.1F, this.volume / 4),
-                1.1F + client.level.random.nextFloat() * 0.2F
-            );
             projectile.spawnImpactParticles();
             playedExplosion = true;
         }

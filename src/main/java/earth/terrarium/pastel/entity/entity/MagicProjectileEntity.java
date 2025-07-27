@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.MagicProjectileSoundInstance;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
@@ -139,7 +139,7 @@ public abstract class MagicProjectileEntity extends Projectile {
     }
 
     protected SoundEvent getHitSound() {
-        return PastelSoundEvents.INK_PROJECTILE_HIT;
+        return PastelSounds.INK_PROJECTILE_HIT;
     }
 
     @Nullable

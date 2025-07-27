@@ -9,7 +9,7 @@ import earth.terrarium.pastel.api.interaction.OmniAcceleratorProjectile;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
 import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -80,7 +80,7 @@ public class OmniAcceleratorItem extends BundleItem implements InkPowered, Exten
 
         if (!InkPowered.tryDrainEnergy(player, COST)) {
             world.playSound(
-                null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F,
+                null, user.getX(), user.getY(), user.getZ(), PastelSounds.USE_FAIL, SoundSource.PLAYERS, 1.0F,
                 1.0F
             );
             return stack;

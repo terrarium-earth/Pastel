@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items;
 
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -32,7 +32,7 @@ public class MysteriousLocketItem extends Item {
                     .placeItemBackInInventory(PastelItems.MYSTERIOUS_COMPASS.get()
                                                                             .getDefaultInstance());
                 world.playSound(
-                    null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.UNLOCK, SoundSource.NEUTRAL, 1.0F,
+                    null, user.getX(), user.getY(), user.getZ(), PastelSounds.UNLOCK, SoundSource.NEUTRAL, 1.0F,
                     1.0F
                 );
             }

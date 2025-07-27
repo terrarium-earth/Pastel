@@ -10,7 +10,7 @@ import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -219,7 +219,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 						context.getClickLocation().z() + side.getStepZ() * 0.1);
 				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(serverWorld, sourcePos,
 						PastelParticleTypes.SHIMMERSTONE_SPARKLE_SMALL, 15, Vec3.ZERO, new Vec3(0.25, 0.25, 0.25));
-				world.playSound(null, player.blockPosition(), PastelSoundEvents.EXCHANGING_STAFF_SELECT,
+				world.playSound(null, player.blockPosition(), PastelSounds.EXCHANGING_STAFF_SELECT,
 						SoundSource.PLAYERS, 1.0F, 1.0F);
 			}
 			return InteractionResult.sidedSuccess(world.isClientSide);

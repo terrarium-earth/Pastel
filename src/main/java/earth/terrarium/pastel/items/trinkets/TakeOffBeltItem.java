@@ -8,7 +8,7 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayTakeOffBeltSoundInstan
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -76,7 +76,7 @@ public class TakeOffBeltItem extends PastelTrinketItem {
                     if (sneakTicks % CHARGE_TIME_TICKS == 0) {
                         if (sneakTicks > CHARGE_TIME_TICKS * MAX_CHARGES) {
                             world.playSound(
-                                null, entity.getX(), entity.getY(), entity.getZ(), PastelSoundEvents.USE_FAIL,
+                                null, entity.getX(), entity.getY(), entity.getZ(), PastelSounds.USE_FAIL,
                                 SoundSource.NEUTRAL, 4.0F, 1.05F
                             );
                             PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
@@ -89,7 +89,7 @@ public class TakeOffBeltItem extends PastelTrinketItem {
 
                             world.playSound(
                                 null, entity.getX(), entity.getY(), entity.getZ(),
-                                PastelSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SoundSource.NEUTRAL, 1.0F, 1.0F
+                                PastelSounds.BLOCK_TOPAZ_BLOCK_HIT, SoundSource.NEUTRAL, 1.0F, 1.0F
                             );
                             for (Vec3 vec : VectorPattern.SIXTEEN.getVectors()) {
                                 PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.redstone;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -70,7 +70,7 @@ public class RedstoneCalculatorBlock extends DiodeBlock implements EntityBlock {
             world.setBlock(pos, newModeState, Block.UPDATE_ALL);
             float pitch = 0.5F + state.getValue(CALCULATION_MODE)
                                       .ordinal() * 0.05F;
-            world.playSound(player, pos, PastelSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
+            world.playSound(player, pos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
             if (player instanceof ServerPlayer serverPlayerEntity) {
                 // since this triggers both on server and client side: just send the
                 // message once, client side is enough, since it is pretty irrelevant on the server

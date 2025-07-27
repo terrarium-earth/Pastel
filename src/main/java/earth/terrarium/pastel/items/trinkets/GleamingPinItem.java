@@ -5,7 +5,7 @@ import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -37,7 +37,7 @@ public class GleamingPinItem extends PastelTrinketItem {
     public static void doGleamingPinEffect(
         @NotNull Player player, @NotNull ServerLevel world, ItemStack gleamingPinStack) {
         world.playSound(
-            null, player.getX(), player.getY(), player.getZ(), PastelSoundEvents.RADIANCE_PIN_TRIGGER,
+            null, player.getX(), player.getY(), player.getZ(), PastelSounds.RADIANCE_PIN_TRIGGER,
             SoundSource.PLAYERS, 0.4F, 0.9F + world.getRandom()
                                                    .nextFloat() * 0.2F
         );

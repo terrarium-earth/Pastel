@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import earth.terrarium.pastel.entity.entity.LightMineEntity;
 import earth.terrarium.pastel.entity.entity.LightShardBaseEntity;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -46,7 +46,7 @@ public class MalachiteGlassAmpouleItem extends GlassAmpouleItem implements InkPo
         }
 
         world.playLocalSound(
-            BlockPos.containing(position), PastelSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.35F, 0.9F +
+            BlockPos.containing(position), PastelSounds.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.35F, 0.9F +
                                                                                                              world.getRandom()
                                                                                                                   .nextFloat() *
                                                                                                              0.334F,

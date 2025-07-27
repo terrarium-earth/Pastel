@@ -8,7 +8,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 @SuppressWarnings("unused")
-public class PastelSoundEvents {
+public class PastelSounds {
 
     private static final DeferredRegister<SoundEvent> REGISTER = DeferredRegister.create(
         Registries.SOUND_EVENT, PastelCommon.MOD_ID);
@@ -77,31 +77,58 @@ public class PastelSoundEvents {
     public static final SoundEvent GROUND_SLAM_CHARGE = register("ground_slam_charge");
     public static final SoundEvent GROUND_SLAM = register("ground_slam");
 
+    /**
+     * Ringing
+     */
     public static final SoundEvent DEEP_CRYSTAL_RING = register("deep_crystal_ring");
     public static final SoundEvent MEDIUM_CRYSTAL_RING = register("mid_crystal_ring");
     public static final SoundEvent LIGHT_CRYSTAL_RING = register("light_crystal_ring");
 
+    /**
+     * Hums
+     */
     public static final SoundEvent CRYSTAL_STRIKE = register("crystal_strike");
-
-    public static final SoundEvent SHATTER_LIGHT = register("shatter_light");
-    public static final SoundEvent SHATTER_HEAVY = register("shatter_heavy");
-    public static final SoundEvent GLASS_SHIMMER = register("glass_shimmer");
     public static final SoundEvent SOFT_HUM = register("soft_hum");
 
+    /**
+     * Crunches
+     */
+    public static final SoundEvent SHATTER_LIGHT = register("shatter_light");
+    public static final SoundEvent SHATTER_HEAVY = register("shatter_heavy");
     public static final SoundEvent CRITICAL_CRUNCH = register("critical_crunch");
-    public static final SoundEvent IMPACT_BASE = register("impact_base");
+
+    public static final SoundEvent LUNGE_CRIT = register("lunge_crit");
     public static final SoundEvent IMPALING_HIT = register("impaling_hit");
-    public static final SoundEvent LEGENDARY_WEAPON_CRAFT = register("legendary_weapon_craft");
-    public static final SoundEvent METAL_HIT = register("metal_hit");
+
+    /**
+     * Sparkly
+     */
+    public static final SoundEvent GLASS_SHIMMER = register("glass_shimmer");
+
+    /**
+     * Pings
+     */
+    public static final SoundEvent PIERCING_RADIANCE = register("piercing_radiance");
+    public static final SoundEvent PERFECT_PARRY = register("perfect_parry");
+
+
+    /**
+     * Clankers
+     */
     public static final SoundEvent METAL_TAP = register("metal_tap");
     public static final SoundEvent METALLIC_UNSHEATHE = register("metallic_unsheathe");
-
-    public static final SoundEvent ELECTRIC_DISCHARGE = register("discharge");
-
-    public static final SoundEvent PERFECT_PARRY = register("perfect_parry");
-    public static final SoundEvent LUNGE = register("lunge");
-    public static final SoundEvent LUNGE_CRIT = register("lunge_crit");
     public static final SoundEvent SWORD_BLOCK = register("sword_block");
+    public static final SoundEvent IMPACT_BASE = register("impact_base");
+
+    /**
+     * Bell-ish
+     */
+    public static final SoundEvent METAL_HIT = register("metal_hit");
+
+
+    public static final SoundEvent LEGENDARY_WEAPON_CRAFT = register("legendary_weapon_craft");
+    public static final SoundEvent ELECTRIC_DISCHARGE = register("discharge");
+    public static final SoundEvent LUNGE = register("lunge");
 
 
     public static final SoundEvent INCANDESCENT_CHARGE = register("incandescent_charge");

@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.networking.c2s_payloads.InkColorSelectedC2SPayload;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -111,7 +111,7 @@ public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreen
         PacketDistributor.sendToServer(new InkColorSelectedC2SPayload(Optional.ofNullable(entry)));
         Minecraft client = Minecraft.getInstance();
         client.level.playSound(
-            null, client.player.blockPosition(), PastelSoundEvents.PAINTBRUSH_PAINT, SoundSource.NEUTRAL, 0.6F, 1.0F);
+            null, client.player.blockPosition(), PastelSounds.PAINTBRUSH_PAINT, SoundSource.NEUTRAL, 0.6F, 1.0F);
         client.player.closeContainer();
     }
 

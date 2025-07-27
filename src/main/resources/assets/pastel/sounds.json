@@ -14,7 +14,7 @@
   "use_fail": {
     "subtitle": "pastel.subtitles.use_fail",
     "sounds": [
-      "pastel:use_fail"
+      "pastel:magic_fail"
     ]
   },
   "block.redstone_mechanism.trigger": {
@@ -138,10 +138,7 @@
   "ground_slam": {
     "subtitle": "pastel.subtitles.ground_slam",
     "sounds": [
-      "pastel:ground_slam1",
-      "pastel:ground_slam2",
-      "pastel:ground_slam3",
-      "pastel:ground_slam4"
+      "pastel:magic_slam"
     ]
   },
   "color_picker_processing": {
@@ -170,10 +167,7 @@
   "bident_hit_ground": {
     "subtitle": "pastel.subtitles.bident_hit_ground",
     "sounds": [
-      "pastel:ground_slam1",
-      "pastel:ground_slam2",
-      "pastel:ground_slam3",
-      "pastel:ground_slam4"
+      "pastel:bident_hit_ground"
     ]
   },
   "moonstone_strike": {
@@ -211,6 +205,12 @@
     "subtitle": "pastel.subtitles.glass_shimmer",
     "sounds": [
       "pastel:glass_shimmer"
+    ]
+  },
+  "piercing_radiance": {
+    "subtitle": "pastel.subtitles.piercing_radiance",
+    "sounds": [
+      "pastel:piercing_radiance"
     ]
   },
   "shatter_light": {
@@ -273,7 +273,7 @@
   },
   "ink_projectile_launch": {
     "sounds": [
-      "pastel:ink_projectile_launch"
+      "pastel:magic_wind"
     ]
   },
   "enchanter_working": {
@@ -412,7 +412,7 @@
   "radiance_staff_charging": {
     "subtitle": "pastel.subtitles.radiance_staff_charging",
     "sounds": [
-      "pastel:radiance_staff_charging"
+      "pastel:magic_charge"
     ]
   },
   "radiance_staff_place": {

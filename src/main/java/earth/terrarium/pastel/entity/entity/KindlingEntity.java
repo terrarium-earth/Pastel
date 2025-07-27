@@ -13,7 +13,7 @@ import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -283,27 +283,27 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return PastelSoundEvents.ENTITY_KINDLING_AMBIENT;
+        return PastelSounds.ENTITY_KINDLING_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return PastelSoundEvents.ENTITY_KINDLING_HURT;
+        return PastelSounds.ENTITY_KINDLING_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return PastelSoundEvents.ENTITY_KINDLING_DEATH;
+        return PastelSounds.ENTITY_KINDLING_DEATH;
     }
 
     @Override
     protected SoundEvent getAngrySound() {
-        return PastelSoundEvents.ENTITY_KINDLING_ANGRY;
+        return PastelSounds.ENTITY_KINDLING_ANGRY;
     }
 
     @Override
     protected void playJumpSound() {
-        this.playSound(PastelSoundEvents.ENTITY_KINDLING_JUMP, 0.4F, 1.0F);
+        this.playSound(PastelSounds.ENTITY_KINDLING_JUMP, 0.4F, 1.0F);
     }
 
     @Override
@@ -398,7 +398,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
             Level.ExplosionInteraction.MOB
         );
         playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE, 2F, 0.5F);
-        playSound(PastelSoundEvents.DEEP_CRYSTAL_RING, 2F, 0.334F);
+        playSound(PastelSounds.DEEP_CRYSTAL_RING, 2F, 0.334F);
         playSound(SoundEvents.ENDER_DRAGON_AMBIENT, 1F, 2F);
 
         ((ServerLevel) world).getPlayers(p -> p.distanceTo(this) < 64)
@@ -680,7 +680,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 
         if (!this.isSilent()) {
             this.playSound(
-                PastelSoundEvents.ENTITY_KINDLING_SHOOT, 1.0F,
+                PastelSounds.ENTITY_KINDLING_SHOOT, 1.0F,
                 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F
             );
         }

@@ -6,7 +6,7 @@ import earth.terrarium.pastel.items.tools.WorkstaffItem;
 import earth.terrarium.pastel.networking.c2s_payloads.WorkstaffToggleSelectedPayload;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -133,7 +133,7 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
         PacketDistributor.sendToServer(new WorkstaffToggleSelectedPayload(toggle.ordinal()));
         Minecraft client = Minecraft.getInstance();
         client.level.playSound(
-            null, client.player.blockPosition(), PastelSoundEvents.PAINTBRUSH_SELECT, SoundSource.NEUTRAL, 0.6F, 1.0F);
+            null, client.player.blockPosition(), PastelSounds.PAINTBRUSH_SELECT, SoundSource.NEUTRAL, 0.6F, 1.0F);
         client.player.closeContainer();
     }
 

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.interaction.projectile_behavior;
 
 import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -41,7 +41,7 @@ public interface DamagingProjectileBehavior extends ItemProjectileBehavior {
                         new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
                 }
                 projectile.playSound(
-                    PastelSoundEvents.BLOCK_CITRINE_CLUSTER_HIT, 1.0F, 1.2F / (projectile.level()
+                    PastelSounds.BLOCK_CITRINE_CLUSTER_HIT, 1.0F, 1.2F / (projectile.level()
                                                                                          .getRandom()
                                                                                          .nextFloat() * 0.2F + 0.9F)
                 );

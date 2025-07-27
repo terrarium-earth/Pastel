@@ -9,10 +9,9 @@ import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -79,7 +78,7 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
     public static boolean verifySkyAccess(ServerLevel world, BlockPos shrinePos) {
         if (world.getBlockState(shrinePos.above())
                  .isRedstoneConductor(world, shrinePos.above())) {
-            world.playSound(null, shrinePos, PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+            world.playSound(null, shrinePos, PastelSounds.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
             PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
                 world, shrinePos.above()
                                 .getCenter(), ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(
@@ -115,7 +114,7 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
             world, new Vec3(shrinePos.getX() + 0.5, topY - 0.5, shrinePos.getZ() + 0.5),
             ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(0.1, 0.1, 0.1)
         );
-        world.playSound(null, shrinePos, PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+        world.playSound(null, shrinePos, PastelSounds.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
         return false;
     }
 

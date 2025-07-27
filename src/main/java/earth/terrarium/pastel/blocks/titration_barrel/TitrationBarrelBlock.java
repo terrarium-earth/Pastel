@@ -6,7 +6,7 @@ import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -219,7 +219,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
                                     Component.translatable("block.pastel.titration_barrel.debug_added_day"), true);
                                 barrelEntity.addOneDayOfSealTime();
                                 world.playSound(
-                                    null, pos, PastelSoundEvents.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                    null, pos, PastelSounds.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);
                             }
 
                             // funky check to allow shenanigans when sealing it when changing the computer's clock to

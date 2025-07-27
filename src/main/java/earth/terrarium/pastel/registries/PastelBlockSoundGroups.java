@@ -10,118 +10,118 @@ public class PastelBlockSoundGroups {
     // float volume, float pitch, SoundEvent breakSound, SoundEvent stepSound, SoundEvent placeSound, SoundEvent
     // hitSound, SoundEvent fallSound
     public static final SoundType CITRINE_BLOCK = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_CITRINE_BLOCK_BREAK, PastelSoundEvents.BLOCK_CITRINE_BLOCK_STEP,
-        PastelSoundEvents.BLOCK_CITRINE_BLOCK_PLACE, PastelSoundEvents.BLOCK_CITRINE_BLOCK_HIT,
-        PastelSoundEvents.BLOCK_CITRINE_BLOCK_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_CITRINE_BLOCK_BREAK, PastelSounds.BLOCK_CITRINE_BLOCK_STEP,
+        PastelSounds.BLOCK_CITRINE_BLOCK_PLACE, PastelSounds.BLOCK_CITRINE_BLOCK_HIT,
+        PastelSounds.BLOCK_CITRINE_BLOCK_FALL
     );
     public static final SoundType CITRINE_CLUSTER = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_BREAK, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_CITRINE_CLUSTER_PLACE, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_CITRINE_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_CITRINE_CLUSTER_BREAK, PastelSounds.BLOCK_CITRINE_CLUSTER_STEP,
+        PastelSounds.BLOCK_CITRINE_CLUSTER_PLACE, PastelSounds.BLOCK_CITRINE_CLUSTER_HIT,
+        PastelSounds.BLOCK_CITRINE_CLUSTER_FALL
     );
     public static final SoundType SMALL_CITRINE_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_SMALL_CITRINE_BUD_BREAK, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_SMALL_CITRINE_BUD_PLACE, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_CITRINE_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_SMALL_CITRINE_BUD_BREAK, PastelSounds.BLOCK_CITRINE_CLUSTER_STEP,
+        PastelSounds.BLOCK_SMALL_CITRINE_BUD_PLACE, PastelSounds.BLOCK_CITRINE_CLUSTER_HIT,
+        PastelSounds.BLOCK_CITRINE_CLUSTER_FALL
     );
     public static final SoundType MEDIUM_CITRINE_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_MEDIUM_CITRINE_BUD_BREAK, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_MEDIUM_CITRINE_BUD_PLACE, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_CITRINE_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_MEDIUM_CITRINE_BUD_BREAK, PastelSounds.BLOCK_CITRINE_CLUSTER_STEP,
+        PastelSounds.BLOCK_MEDIUM_CITRINE_BUD_PLACE, PastelSounds.BLOCK_CITRINE_CLUSTER_HIT,
+        PastelSounds.BLOCK_CITRINE_CLUSTER_FALL
     );
     public static final SoundType LARGE_CITRINE_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_LARGE_CITRINE_BUD_BREAK, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_LARGE_CITRINE_BUD_PLACE, PastelSoundEvents.BLOCK_CITRINE_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_CITRINE_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_LARGE_CITRINE_BUD_BREAK, PastelSounds.BLOCK_CITRINE_CLUSTER_STEP,
+        PastelSounds.BLOCK_LARGE_CITRINE_BUD_PLACE, PastelSounds.BLOCK_CITRINE_CLUSTER_HIT,
+        PastelSounds.BLOCK_CITRINE_CLUSTER_FALL
     );
 
     public static final SoundType TOPAZ_BLOCK = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_TOPAZ_BLOCK_BREAK, PastelSoundEvents.BLOCK_TOPAZ_BLOCK_STEP,
-        PastelSoundEvents.BLOCK_TOPAZ_BLOCK_PLACE, PastelSoundEvents.BLOCK_TOPAZ_BLOCK_HIT,
-        PastelSoundEvents.BLOCK_TOPAZ_BLOCK_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_TOPAZ_BLOCK_BREAK, PastelSounds.BLOCK_TOPAZ_BLOCK_STEP,
+        PastelSounds.BLOCK_TOPAZ_BLOCK_PLACE, PastelSounds.BLOCK_TOPAZ_BLOCK_HIT,
+        PastelSounds.BLOCK_TOPAZ_BLOCK_FALL
     );
     public static final SoundType TOPAZ_CLUSTER = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_BREAK, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_PLACE, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_TOPAZ_CLUSTER_BREAK, PastelSounds.BLOCK_TOPAZ_CLUSTER_STEP,
+        PastelSounds.BLOCK_TOPAZ_CLUSTER_PLACE, PastelSounds.BLOCK_TOPAZ_CLUSTER_HIT,
+        PastelSounds.BLOCK_TOPAZ_CLUSTER_FALL
     );
     public static final SoundType SMALL_TOPAZ_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_SMALL_TOPAZ_BUD_BREAK, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_SMALL_TOPAZ_BUD_PLACE, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_SMALL_TOPAZ_BUD_BREAK, PastelSounds.BLOCK_TOPAZ_CLUSTER_STEP,
+        PastelSounds.BLOCK_SMALL_TOPAZ_BUD_PLACE, PastelSounds.BLOCK_TOPAZ_CLUSTER_HIT,
+        PastelSounds.BLOCK_TOPAZ_CLUSTER_FALL
     );
     public static final SoundType MEDIUM_TOPAZ_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_MEDIUM_TOPAZ_BUD_BREAK, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_MEDIUM_TOPAZ_BUD_PLACE, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_MEDIUM_TOPAZ_BUD_BREAK, PastelSounds.BLOCK_TOPAZ_CLUSTER_STEP,
+        PastelSounds.BLOCK_MEDIUM_TOPAZ_BUD_PLACE, PastelSounds.BLOCK_TOPAZ_CLUSTER_HIT,
+        PastelSounds.BLOCK_TOPAZ_CLUSTER_FALL
     );
     public static final SoundType LARGE_TOPAZ_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_LARGE_TOPAZ_BUD_BREAK, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_LARGE_TOPAZ_BUD_PLACE, PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_TOPAZ_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_LARGE_TOPAZ_BUD_BREAK, PastelSounds.BLOCK_TOPAZ_CLUSTER_STEP,
+        PastelSounds.BLOCK_LARGE_TOPAZ_BUD_PLACE, PastelSounds.BLOCK_TOPAZ_CLUSTER_HIT,
+        PastelSounds.BLOCK_TOPAZ_CLUSTER_FALL
     );
 
     public static final SoundType ONYX_BLOCK = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_ONYX_BLOCK_BREAK, PastelSoundEvents.BLOCK_ONYX_BLOCK_STEP,
-        PastelSoundEvents.BLOCK_ONYX_BLOCK_PLACE, PastelSoundEvents.BLOCK_ONYX_BLOCK_HIT,
-        PastelSoundEvents.BLOCK_ONYX_BLOCK_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_ONYX_BLOCK_BREAK, PastelSounds.BLOCK_ONYX_BLOCK_STEP,
+        PastelSounds.BLOCK_ONYX_BLOCK_PLACE, PastelSounds.BLOCK_ONYX_BLOCK_HIT,
+        PastelSounds.BLOCK_ONYX_BLOCK_FALL
     );
     public static final SoundType ONYX_CLUSTER = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_ONYX_CLUSTER_BREAK, PastelSoundEvents.BLOCK_ONYX_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_ONYX_CLUSTER_PLACE, PastelSoundEvents.BLOCK_ONYX_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_ONYX_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_ONYX_CLUSTER_BREAK, PastelSounds.BLOCK_ONYX_CLUSTER_STEP,
+        PastelSounds.BLOCK_ONYX_CLUSTER_PLACE, PastelSounds.BLOCK_ONYX_CLUSTER_HIT,
+        PastelSounds.BLOCK_ONYX_CLUSTER_FALL
     );
     public static final SoundType SMALL_ONYX_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_SMALL_ONYX_BUD_BREAK, PastelSoundEvents.BLOCK_ONYX_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_SMALL_ONYX_BUD_PLACE, PastelSoundEvents.BLOCK_ONYX_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_ONYX_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_SMALL_ONYX_BUD_BREAK, PastelSounds.BLOCK_ONYX_CLUSTER_STEP,
+        PastelSounds.BLOCK_SMALL_ONYX_BUD_PLACE, PastelSounds.BLOCK_ONYX_CLUSTER_HIT,
+        PastelSounds.BLOCK_ONYX_CLUSTER_FALL
     );
     public static final SoundType MEDIUM_ONYX_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_MEDIUM_ONYX_BUD_BREAK, PastelSoundEvents.BLOCK_ONYX_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_MEDIUM_ONYX_BUD_PLACE, PastelSoundEvents.BLOCK_ONYX_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_ONYX_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_MEDIUM_ONYX_BUD_BREAK, PastelSounds.BLOCK_ONYX_CLUSTER_STEP,
+        PastelSounds.BLOCK_MEDIUM_ONYX_BUD_PLACE, PastelSounds.BLOCK_ONYX_CLUSTER_HIT,
+        PastelSounds.BLOCK_ONYX_CLUSTER_FALL
     );
     public static final SoundType LARGE_ONYX_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_LARGE_ONYX_BUD_BREAK, PastelSoundEvents.BLOCK_ONYX_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_LARGE_ONYX_BUD_PLACE, PastelSoundEvents.BLOCK_ONYX_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_ONYX_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_LARGE_ONYX_BUD_BREAK, PastelSounds.BLOCK_ONYX_CLUSTER_STEP,
+        PastelSounds.BLOCK_LARGE_ONYX_BUD_PLACE, PastelSounds.BLOCK_ONYX_CLUSTER_HIT,
+        PastelSounds.BLOCK_ONYX_CLUSTER_FALL
     );
 
     public static final SoundType MOONSTONE_BLOCK = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_MOONSTONE_BLOCK_BREAK, PastelSoundEvents.BLOCK_MOONSTONE_BLOCK_STEP,
-        PastelSoundEvents.BLOCK_MOONSTONE_BLOCK_PLACE, PastelSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT,
-        PastelSoundEvents.BLOCK_MOONSTONE_BLOCK_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_MOONSTONE_BLOCK_BREAK, PastelSounds.BLOCK_MOONSTONE_BLOCK_STEP,
+        PastelSounds.BLOCK_MOONSTONE_BLOCK_PLACE, PastelSounds.BLOCK_MOONSTONE_BLOCK_HIT,
+        PastelSounds.BLOCK_MOONSTONE_BLOCK_FALL
     );
     public static final SoundType MOONSTONE_CLUSTER = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_BREAK, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_PLACE, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_MOONSTONE_CLUSTER_BREAK, PastelSounds.BLOCK_MOONSTONE_CLUSTER_STEP,
+        PastelSounds.BLOCK_MOONSTONE_CLUSTER_PLACE, PastelSounds.BLOCK_MOONSTONE_CLUSTER_HIT,
+        PastelSounds.BLOCK_MOONSTONE_CLUSTER_FALL
     );
     public static final SoundType SMALL_MOONSTONE_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_SMALL_MOONSTONE_BUD_BREAK, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_SMALL_MOONSTONE_BUD_PLACE, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_SMALL_MOONSTONE_BUD_BREAK, PastelSounds.BLOCK_MOONSTONE_CLUSTER_STEP,
+        PastelSounds.BLOCK_SMALL_MOONSTONE_BUD_PLACE, PastelSounds.BLOCK_MOONSTONE_CLUSTER_HIT,
+        PastelSounds.BLOCK_MOONSTONE_CLUSTER_FALL
     );
     public static final SoundType MEDIUM_MOONSTONE_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_MEDIUM_MOONSTONE_BUD_BREAK, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_MEDIUM_MOONSTONE_BUD_PLACE, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_MEDIUM_MOONSTONE_BUD_BREAK, PastelSounds.BLOCK_MOONSTONE_CLUSTER_STEP,
+        PastelSounds.BLOCK_MEDIUM_MOONSTONE_BUD_PLACE, PastelSounds.BLOCK_MOONSTONE_CLUSTER_HIT,
+        PastelSounds.BLOCK_MOONSTONE_CLUSTER_FALL
     );
     public static final SoundType LARGE_MOONSTONE_BUD = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.BLOCK_LARGE_MOONSTONE_BUD_BREAK, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_STEP,
-        PastelSoundEvents.BLOCK_LARGE_MOONSTONE_BUD_PLACE, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_HIT,
-        PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_FALL
+        1.0F, 1.0F, PastelSounds.BLOCK_LARGE_MOONSTONE_BUD_BREAK, PastelSounds.BLOCK_MOONSTONE_CLUSTER_STEP,
+        PastelSounds.BLOCK_LARGE_MOONSTONE_BUD_PLACE, PastelSounds.BLOCK_MOONSTONE_CLUSTER_HIT,
+        PastelSounds.BLOCK_MOONSTONE_CLUSTER_FALL
     );
 
     public static final SoundType SPECTRAL_BLOCK = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.SPECTRAL_BLOCK_BREAK, PastelSoundEvents.SPECTRAL_BLOCK_STEP,
-        PastelSoundEvents.SPECTRAL_BLOCK_PLACE, PastelSoundEvents.SPECTRAL_BLOCK_HIT,
-        PastelSoundEvents.SPECTRAL_BLOCK_FALL
+        1.0F, 1.0F, PastelSounds.SPECTRAL_BLOCK_BREAK, PastelSounds.SPECTRAL_BLOCK_STEP,
+        PastelSounds.SPECTRAL_BLOCK_PLACE, PastelSounds.SPECTRAL_BLOCK_HIT,
+        PastelSounds.SPECTRAL_BLOCK_FALL
     );
     public static final SoundType WAND_LIGHT = new SoundType(
-        1.0F, 1.0F, PastelSoundEvents.RADIANCE_STAFF_BREAK, SoundEvents.AMETHYST_CLUSTER_STEP,
-        PastelSoundEvents.RADIANCE_STAFF_PLACE, PastelSoundEvents.RADIANCE_STAFF_BREAK,
-        PastelSoundEvents.RADIANCE_STAFF_BREAK
+        1.0F, 1.0F, PastelSounds.RADIANCE_STAFF_BREAK, SoundEvents.AMETHYST_CLUSTER_STEP,
+        PastelSounds.RADIANCE_STAFF_PLACE, PastelSounds.RADIANCE_STAFF_BREAK,
+        PastelSounds.RADIANCE_STAFF_BREAK
     );
 
     // MOB BLOCKS

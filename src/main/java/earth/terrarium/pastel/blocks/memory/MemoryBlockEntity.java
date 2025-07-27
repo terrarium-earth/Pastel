@@ -13,7 +13,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.Entity;
@@ -122,7 +121,7 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
                         PlayMemoryManifestingParticlesPayload.playMemoryManifestingParticles(
                             world, blockPos, entityTypeOptional.get(), 3);
                         world.playSound(
-                            null, this.worldPosition, PastelSoundEvents.BLOCK_MEMORY_ADVANCE, SoundSource.BLOCKS, 0.7F,
+                            null, this.worldPosition, PastelSounds.BLOCK_MEMORY_ADVANCE, SoundSource.BLOCKS, 0.7F,
                             0.9F + world.random.nextFloat() * 0.2F
                         );
                         this.setChanged();

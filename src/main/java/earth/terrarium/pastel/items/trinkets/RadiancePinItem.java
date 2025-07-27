@@ -5,7 +5,7 @@ import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -86,7 +86,7 @@ public class RadiancePinItem extends PastelTrinketItem {
                     sendSmallLightCreatedParticle((ServerLevel) world, pos);
                     world.playSound(
                         null, entity.getX() + 0.5, entity.getY() + 0.5, entity.getZ() + 0.5,
-                        PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 0.08F,
+                        PastelSounds.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 0.08F,
                         0.9F + world.random.nextFloat() * 0.2F
                     );
                 }

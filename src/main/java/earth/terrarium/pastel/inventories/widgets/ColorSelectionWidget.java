@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.energy.ColorPickerBlockEntity;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -95,7 +95,7 @@ public class ColorSelectionWidget extends AbstractWidget {
 		Minecraft client = Minecraft.getInstance();
 		
 		if (isUnselection(mouseX, mouseY)) {
-			client.player.playSound(PastelSoundEvents.BUTTON_CLICK, 1.0F, 1.0F);
+			client.player.playSound(PastelSounds.BUTTON_CLICK, 1.0F, 1.0F);
 			onChanged(Optional.empty());
 		}
 		
@@ -110,10 +110,10 @@ public class ColorSelectionWidget extends AbstractWidget {
 			
 			var clickedColor = usableColors.get(newColorIndex);
 			if (clickedColor.getB()) {
-				client.player.playSound(PastelSoundEvents.BUTTON_CLICK, 1.0F, 1.0F);
+				client.player.playSound(PastelSounds.BUTTON_CLICK, 1.0F, 1.0F);
 				onChanged(Optional.of(PastelRegistries.INK_COLOR.wrapAsHolder(clickedColor.getA())));
 			} else {
-				client.player.playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
+				client.player.playSound(PastelSounds.USE_FAIL, 1.0F, 1.0F);
 				onChanged(Optional.empty());
 			}
 			

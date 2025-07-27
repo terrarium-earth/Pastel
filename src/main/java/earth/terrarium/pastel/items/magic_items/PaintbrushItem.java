@@ -15,7 +15,7 @@ import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -145,9 +145,9 @@ public class PaintbrushItem extends Item implements SignApplicator {
 		if (state.getBlock() instanceof ColorableBlock colorableBlock) {
 			if (!colorableBlock.isColor(world, pos, dyeColor)) {
 				if (payBlockColorCost(context.getPlayer(), inkColor.get()) && colorableBlock.color(world, pos, dyeColor, context.getPlayer())) {
-					context.getLevel().playSound(null, context.getClickedPos(), PastelSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
+					context.getLevel().playSound(null, context.getClickedPos(), PastelSounds.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
 				} else {
-					context.getLevel().playSound(null, context.getClickedPos(), PastelSoundEvents.USE_FAIL, SoundSource.BLOCKS, 1.0F, 1.0F);
+					context.getLevel().playSound(null, context.getClickedPos(), PastelSounds.USE_FAIL, SoundSource.BLOCKS, 1.0F, 1.0F);
 				}
 			}
 			return false;
@@ -182,12 +182,12 @@ public class PaintbrushItem extends Item implements SignApplicator {
 		if (payBlockColorCost(context.getPlayer(), inkColor)) {
 			if (!world.isClientSide) {
 				world.setBlockAndUpdate(context.getClickedPos(), newBlockState);
-				world.playSound(null, context.getClickedPos(), PastelSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
+				world.playSound(null, context.getClickedPos(), PastelSounds.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
 			}
 			return true;
 		} else {
 			if (world.isClientSide) {
-				context.getPlayer().playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
+				context.getPlayer().playSound(PastelSounds.USE_FAIL, 1.0F, 1.0F);
 			}
 		}
 		return false;
@@ -242,7 +242,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
 					}
 				} else {
 					if (world.isClientSide) {
-						user.playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
+						user.playSound(PastelSounds.USE_FAIL, 1.0F, 1.0F);
 					}
 				}
 				
@@ -282,7 +282,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
 		if (tryUseOnSign(world, signBlockEntity, front, player, player.getItemInHand(InteractionHand.MAIN_HAND))) return true;
 		if (tryUseOnSign(world, signBlockEntity, front, player, player.getItemInHand(InteractionHand.OFF_HAND))) return true;
 		
-		player.playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
+		player.playSound(PastelSounds.USE_FAIL, 1.0F, 1.0F);
 		return false;
 	}
 	
@@ -301,7 +301,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
 						}
 						return signText;
 					}, front)) {
-						world.playSound(null, signBlockEntity.getBlockPos(), PastelSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
+						world.playSound(null, signBlockEntity.getBlockPos(), PastelSounds.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
 						return true;
 					}
 				}

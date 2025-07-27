@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -77,7 +77,7 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
                 Component.translatable("block.pastel.manxi.nope")
                          .withStyle(s -> s.withColor(PastelMobEffects.ETERNAL_SLUMBER_COLOR)), true
             );
-            world.playLocalSound(pos, PastelSoundEvents.DEEP_CRYSTAL_RING, SoundSource.BLOCKS, 1, 1.5F, true);
+            world.playLocalSound(pos, PastelSounds.DEEP_CRYSTAL_RING, SoundSource.BLOCKS, 1, 1.5F, true);
             player.hurt(PastelDamageTypes.sleep(world, null), 6);
             player.knockback(2, player.getX() - (pos.getX() + 0.5), player.getZ() - (pos.getZ() + 0.5));
         }

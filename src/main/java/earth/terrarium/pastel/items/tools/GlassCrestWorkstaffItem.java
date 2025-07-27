@@ -9,7 +9,7 @@ import earth.terrarium.pastel.entity.entity.MiningProjectileEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -51,7 +51,7 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
                 user.getCooldowns()
                     .addCooldown(this, COOLDOWN_DURATION_TICKS);
                 if (!world.isClientSide) {
-                    user.playNotifySound(PastelSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.5F, 0.75F +
+                    user.playNotifySound(PastelSounds.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.5F, 0.75F +
                                                                                                           user.getRandom()
                                                                                                               .nextFloat()
                     );

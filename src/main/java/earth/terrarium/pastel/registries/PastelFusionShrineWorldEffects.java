@@ -288,7 +288,7 @@ public class PastelFusionShrineWorldEffects {
             @Override
             public void trigger(ServerLevel world, BlockPos pos) {
                 world.playSound(
-                    null, pos.above(), PastelSoundEvents.LEGENDARY_WEAPON_CRAFT, SoundSource.BLOCKS, 1.5F, 1F);
+                    null, pos.above(), PastelSounds.LEGENDARY_WEAPON_CRAFT, SoundSource.BLOCKS, 1.5F, 1F);
             }
         }
     );
@@ -298,7 +298,7 @@ public class PastelFusionShrineWorldEffects {
             @Override
             public void trigger(ServerLevel world, BlockPos pos) {
                 world.playSound(
-                    null, pos.above(), PastelSoundEvents.SQUEAKER, SoundSource.BLOCKS, 1.4F,
+                    null, pos.above(), PastelSounds.SQUEAKER, SoundSource.BLOCKS, 1.4F,
                     1.2F + world.random.nextFloat() * 0.4F
                 );
             }

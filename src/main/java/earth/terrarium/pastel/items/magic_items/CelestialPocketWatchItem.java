@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.networking.s2c_payloads.StartSkyLerpingPayload;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -55,7 +55,7 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
         if (!world.isClientSide) {
             if (!tryAdvanceTime((ServerLevel) world, (ServerPlayer) user)) {
                 world.playSound(
-                    null, user.blockPosition(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    null, user.blockPosition(), PastelSounds.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
 
             return InteractionResultHolder.consume(itemStack);
@@ -72,7 +72,7 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
             case SUCCESS -> {
                 if (InkPowered.tryDrainEnergy(user, COST)) {
                     world.playSound(
-                        null, user.blockPosition(), PastelSoundEvents.CELESTIAL_POCKET_WATCH_TICKING,
+                        null, user.blockPosition(), PastelSounds.CELESTIAL_POCKET_WATCH_TICKING,
                         SoundSource.PLAYERS, 1.0F, 1.0F
                     );
                     advanceTime(world, TIME_STEP_TICKS);

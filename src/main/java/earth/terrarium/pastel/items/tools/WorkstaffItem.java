@@ -13,7 +13,7 @@ import earth.terrarium.pastel.inventories.WorkstaffScreenHandler;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
@@ -186,7 +186,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 	}
 	
 	private static void triggerUnenchantedWorkstaffAdvancement(ServerPlayer player) {
-		player.playNotifySound(PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
+		player.playNotifySound(PastelSounds.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
 		Support.grantAdvancementCriterion(player, "lategame/trigger_unenchanted_workstaff", "code_triggered");
 	}
 

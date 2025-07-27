@@ -22,7 +22,7 @@ import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.registries.PastelRegistries;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -251,7 +251,7 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
 
                 if (PastelCommon.CONFIG.BlockSoundVolume > 0) {
                     world.playSound(
-                        null, worldPosition, PastelSoundEvents.COLOR_PICKER_PROCESSING, SoundSource.BLOCKS,
+                        null, worldPosition, PastelSounds.COLOR_PICKER_PROCESSING, SoundSource.BLOCKS,
                         PastelCommon.CONFIG.BlockSoundVolume / 3, 1.0F
                     );
                 }

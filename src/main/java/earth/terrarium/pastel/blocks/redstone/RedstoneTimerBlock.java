@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.redstone;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -91,7 +91,7 @@ public class RedstoneTimerBlock extends DiodeBlock {
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         BlockState newState = state.setValue(POWERED, !state.getValue(POWERED));
         world.setBlock(pos, newState, 3);
-        world.playSound(null, pos, PastelSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 1.0F);
+        world.playSound(null, pos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 1.0F);
         world.scheduleTick(pos, this, this.getDelay(state), TickPriority.NORMAL);
     }
 
@@ -129,7 +129,7 @@ public class RedstoneTimerBlock extends DiodeBlock {
                 );
                 float pitch = 0.5F + newStep.ordinal() * 0.05F;
                 world.playSound(
-                    null, pos, PastelSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
+                    null, pos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
                 world.setBlockAndUpdate(
                     pos, world.getBlockState(pos)
                               .setValue(INACTIVE_TIME, newStep)
@@ -144,7 +144,7 @@ public class RedstoneTimerBlock extends DiodeBlock {
                 );
                 float pitch = 0.5F + newStep.ordinal() * 0.05F;
                 world.playSound(
-                    null, pos, PastelSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
+                    null, pos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
                 world.setBlockAndUpdate(
                     pos, world.getBlockState(pos)
                               .setValue(ACTIVE_TIME, newStep)

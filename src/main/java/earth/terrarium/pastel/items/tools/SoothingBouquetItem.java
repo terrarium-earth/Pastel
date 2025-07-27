@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.item.SleepAlteringItem;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -58,7 +58,7 @@ public class SoothingBouquetItem extends Item implements SleepAlteringItem, Slot
             user.startSleeping(user.blockPosition());
         }
 
-        world.playSound(null, user, PastelSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 1F, 1.2F);
+        world.playSound(null, user, PastelSounds.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 1F, 1.2F);
         return stack;
     }
 

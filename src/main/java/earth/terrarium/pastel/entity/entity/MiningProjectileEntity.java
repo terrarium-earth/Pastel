@@ -3,6 +3,7 @@ package earth.terrarium.pastel.entity.entity;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.level.AoEHelper;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
@@ -73,15 +74,19 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
         super.onHitEntity(entityHitResult);
-        MoonstoneStrike.create(this.level(), this, null, this.getX(), this.getY(), this.getZ(), 1);
+        strike();
         this.discard();
+    }
+
+    private void strike() {
+        MoonstoneStrike.create(this.level(), this, null, this.getX(), this.getY(), this.getZ(), 1,
+                               Support.varFloatCentered(random, 0.3F) - 0.1F);
     }
 
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
-
-        MoonstoneStrike.create(this.level(), this, null, this.getX(), this.getY(), this.getZ(), 1);
+        strike();
 
         Entity entity = getOwner();
         if (entity instanceof Player player) {

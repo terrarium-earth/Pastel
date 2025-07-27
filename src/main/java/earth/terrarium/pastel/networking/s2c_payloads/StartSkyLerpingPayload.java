@@ -2,7 +2,7 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.PastelClient;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -44,7 +44,7 @@ public record StartSkyLerpingPayload(long startTime, long endTime) implements Cu
         );
         if (level.canSeeSky(client.player.blockPosition())) {
             level.playSound(
-                null, client.player.blockPosition(), PastelSoundEvents.CELESTIAL_POCKET_WATCH_FLY_BY,
+                null, client.player.blockPosition(), PastelSounds.CELESTIAL_POCKET_WATCH_FLY_BY,
                 SoundSource.NEUTRAL, 0.15F, 1.0F
             );
         }

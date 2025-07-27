@@ -10,7 +10,7 @@ import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelLootTables;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -269,7 +269,7 @@ public class ShootingStarEntity extends Entity {
                     PlayShootingStarParticlesPayload.sendPlayShootingStarParticles(this);
                     this.level()
                         .playSound(
-                            null, this.blockPosition(), PastelSoundEvents.SHOOTING_STAR_CRACKER, SoundSource.BLOCKS,
+                            null, this.blockPosition(), PastelSounds.SHOOTING_STAR_CRACKER, SoundSource.BLOCKS,
                             1.0F, 1.0F
                         );
                 }
@@ -283,7 +283,7 @@ public class ShootingStarEntity extends Entity {
                     PlayShootingStarParticlesPayload.sendPlayShootingStarParticles(this);
                     this.level()
                         .playSound(
-                            null, this.blockPosition(), PastelSoundEvents.SHOOTING_STAR_CRACKER, SoundSource.BLOCKS,
+                            null, this.blockPosition(), PastelSounds.SHOOTING_STAR_CRACKER, SoundSource.BLOCKS,
                             1.0F, 1.0F
                         );
                 }
@@ -317,7 +317,7 @@ public class ShootingStarEntity extends Entity {
                     null, this.blockPosition()
                               .getX(), this.blockPosition()
                                            .getY(), this.blockPosition()
-                                                        .getZ(), PastelSoundEvents.SHOOTING_STAR_CRACKER,
+                                                        .getZ(), PastelSounds.SHOOTING_STAR_CRACKER,
                     SoundSource.PLAYERS, 1.5F + random.nextFloat() * 0.4F, 0.8F + random.nextFloat() * 0.4F
                 );
             PlayShootingStarParticlesPayload.sendPlayShootingStarParticles(this);
@@ -402,7 +402,7 @@ public class ShootingStarEntity extends Entity {
                 null, this.blockPosition()
                           .getX(), this.blockPosition()
                                        .getY(), this.blockPosition()
-                                                    .getZ(), PastelSoundEvents.SHOOTING_STAR_CRACKER,
+                                                    .getZ(), PastelSounds.SHOOTING_STAR_CRACKER,
                 SoundSource.PLAYERS, 1.5F + random.nextFloat() * 0.4F, 0.8F + random.nextFloat() * 0.4F
             );
     }

@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -77,7 +77,7 @@ public class GlowVisionGogglesItem extends PastelTrinketItem implements InkPower
                         MobEffects.NIGHT_VISION, 20 * PastelCommon.CONFIG.GlowVisionGogglesDuration, 0, true, true);
                     serverPlayerEntity.addEffect(newNightVisionInstance);
                     world.playSound(
-                        null, serverPlayerEntity, PastelSoundEvents.ITEM_ARMOR_EQUIP_GLOW_VISION, SoundSource.PLAYERS,
+                        null, serverPlayerEntity, PastelSounds.ITEM_ARMOR_EQUIP_GLOW_VISION, SoundSource.PLAYERS,
                         0.2F, 1.0F
                     );
                 }

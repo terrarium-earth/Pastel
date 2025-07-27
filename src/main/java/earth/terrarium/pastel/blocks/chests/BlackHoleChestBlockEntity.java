@@ -17,7 +17,7 @@ import earth.terrarium.pastel.networking.s2c_payloads.BlackHoleChestStatusUpdate
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -349,12 +349,12 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
 
     @Override
     public SoundEvent getOpenSound() {
-        return PastelSoundEvents.BLACK_HOLE_CHEST_OPEN;
+        return PastelSounds.BLACK_HOLE_CHEST_OPEN;
     }
 
     @Override
     public SoundEvent getCloseSound() {
-        return PastelSoundEvents.BLACK_HOLE_CHEST_CLOSE;
+        return PastelSounds.BLACK_HOLE_CHEST_CLOSE;
     }
 
     @Override

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.entity;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -102,7 +102,7 @@ public abstract class LightShardBaseEntity extends Projectile {
         }
 
         if (tickCount > getMaxAge()) {
-            playSound(PastelSoundEvents.SOFT_HUM, random.nextFloat() + 0.25F, 1F + random.nextFloat());
+            playSound(PastelSounds.SOFT_HUM, random.nextFloat() + 0.25F, 1F + random.nextFloat());
             this.remove(RemovalReason.DISCARDED);
         }
 
@@ -245,9 +245,9 @@ public abstract class LightShardBaseEntity extends Projectile {
             finalDamage
         );
 
-        attacked.playSound(PastelSoundEvents.SOFT_HUM, 1.334F, 0.9F + random.nextFloat());
+        attacked.playSound(PastelSounds.SOFT_HUM, 1.334F, 0.9F + random.nextFloat());
         attacked.playSound(
-            PastelSoundEvents.CRYSTAL_STRIKE, random.nextFloat() * 0.4F + 0.2F, 0.8F + random.nextFloat());
+            PastelSounds.CRYSTAL_STRIKE, random.nextFloat() * 0.4F + 0.2F, 0.8F + random.nextFloat());
     }
 
     @Override
@@ -289,7 +289,7 @@ public abstract class LightShardBaseEntity extends Projectile {
         var projectiles = count.sample(random);
 
         world.playSound(
-            null, BlockPos.containing(pos), PastelSoundEvents.GLASS_SHIMMER, SoundSource.AMBIENT, 1F,
+            null, BlockPos.containing(pos), PastelSounds.GLASS_SHIMMER, SoundSource.AMBIENT, 1F,
             0.9F + random.nextFloat() * 0.5F
         );
 
