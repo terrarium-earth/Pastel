@@ -6,6 +6,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.components.WorkstaffComponent;
 import earth.terrarium.pastel.entity.entity.MiningProjectileEntity;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
@@ -42,21 +43,19 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        InteractionResultHolder<ItemStack> result = super.use(world, user, hand);
+    public InteractionResultHolder<ItemStack> use(Level level, Player user, InteractionHand hand) {
+        InteractionResultHolder<ItemStack> result = super.use(level, user, hand);
         if (!result.getResult()
                    .consumesAction()) {
             ItemStack stack = user.getItemInHand(hand);
             if (canShoot(stack) && InkPowered.tryDrainEnergy(user, PROJECTILE_COST)) {
                 user.getCooldowns()
                     .addCooldown(this, COOLDOWN_DURATION_TICKS);
-                if (!world.isClientSide) {
-                    user.playNotifySound(PastelSounds.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.5F, 0.75F +
-                                                                                                          user.getRandom()
-                                                                                                              .nextFloat()
-                    );
-                    MiningProjectileEntity.shoot(world, user, user.getItemInHand(hand));
-                }
+
+                user.playSound(PastelSounds.CAST_RADIANCE, 0.5F, Support.varFloat(level.random,0.2F)
+                );
+                MiningProjectileEntity.shoot(level, user, user.getItemInHand(hand));
+
                 stack.hurtAndBreak(2, user, EquipmentSlot.MAINHAND);
 
                 return InteractionResultHolder.consume(stack);

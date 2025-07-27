@@ -261,6 +261,12 @@
       "pastel:ground_slam_charge"
     ]
   },
+  "cast_radiance": {
+    "subtitle": "pastel.subtitles.cast_radiance",
+    "sounds": [
+      "pastel:cast_radiance"
+    ]
+  },
   "ink_projectile_hit": {
     "subtitle": "pastel.subtitles.ink_projectile_hit",
     "sounds": [

@@ -104,6 +104,7 @@ public class PastelSounds {
      * Sparkly
      */
     public static final SoundEvent GLASS_SHIMMER = register("glass_shimmer");
+    public static final SoundEvent CAST_RADIANCE = register("cast_radiance");
 
     /**
      * Pings

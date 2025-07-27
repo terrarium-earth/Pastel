@@ -20,7 +20,7 @@ public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implemen
         super(PastelSounds.NATURES_STAFF_USE, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
         this.looping = true;
         this.delay = 0;
-        this.volume = 0.25F;
+        this.volume = 0.0F;
         this.player = player;
         this.x = player.getX();
         this.y = player.getY();
@@ -39,6 +39,9 @@ public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implemen
 
     @Override
     public void tick() {
+        if (volume < 1.3)
+            volume += 0.05F;
+
         if (player == null || !player.isUsingItem() || !player.getUseItem()
                                                               .is(PastelItems.NATURES_STAFF.get())) {
             this.setDone();

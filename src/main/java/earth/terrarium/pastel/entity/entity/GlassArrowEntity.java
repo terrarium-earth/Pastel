@@ -24,6 +24,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -75,7 +76,11 @@ public class GlassArrowEntity extends AbstractArrow {
     public void tick() {
         if (tickCount == 1 && getOwner() != null) {
             var volMod = (float) (Math.clamp(getDeltaMovement().length() / 6, 0, 0.75) + 0.325);
-            getOwner().playSound(PastelSounds.PIERCING_RADIANCE, Support.varFloatCentered(random, 0.1F) * volMod, Support.varFloatCentered(random, 0.175F) + 0.2F);
+            float pitch = Support.varFloatCentered(random, 0.175F) + 0.2F;
+            level().playSound(null, this, PastelSounds.PIERCING_RADIANCE, SoundSource.PLAYERS, Support.varFloatCentered(random, 0.1F) * volMod,
+                              pitch
+            );
+            getOwner().playSound(PastelSounds.CAST_RADIANCE, 0.7F, pitch);
         }
 
         if (getVariant().getAttributes().homing()) {
