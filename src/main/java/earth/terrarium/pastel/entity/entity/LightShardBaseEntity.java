@@ -144,7 +144,7 @@ public abstract class LightShardBaseEntity extends Projectile {
         if (this.targetEntity.isPresent()) {
             var target = targetEntity.get();
 
-            var vel = Math.min(getDeltaMovement().length() * 1.175, 2.25);
+            var vel = Math.min(getDeltaMovement().length() + 0.05, 1.8);
             var homeVector = target
                 .position()
                 .add(0, target.getEyeHeight() * 0.75, 0)
@@ -152,7 +152,7 @@ public abstract class LightShardBaseEntity extends Projectile {
                 .normalize();
 
             var curVector = getDeltaMovement().normalize();
-            var finalVector = curVector.scale(0.45).add(homeVector.scale(0.55)).scale(vel);
+            var finalVector = curVector.scale(0.85).add(homeVector.scale(0.15)).scale(vel);
             setDeltaMovement(finalVector);
         }
     }

@@ -124,8 +124,8 @@ public class PastelEntityTypes {
                                          .noSave()
                                          .fireImmune()
                                          .sized(0.75F, 0.75F)
-                                         .clientTrackingRange(4)
-                                         .updateInterval(20)
+                                         .clientTrackingRange(6)
+                                         .updateInterval(1)
     );
     public static final DeferredHolder<EntityType<?>, EntityType<LightSpearEntity>> LIGHT_SPEAR = register(
         "light_spear", EntityType.Builder.<LightSpearEntity>of(LightSpearEntity::new, MobCategory.MISC)
