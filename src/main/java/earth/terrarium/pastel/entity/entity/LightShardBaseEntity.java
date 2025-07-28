@@ -1,9 +1,17 @@
 package earth.terrarium.pastel.entity.entity;
 
+import com.cmdpro.databank.misc.ColorGradient;
+import com.cmdpro.databank.misc.TrailLeftoverHandler;
+import com.cmdpro.databank.misc.TrailRender;
+import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.databank.rendering.RenderTypeHandler;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -31,6 +39,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +58,6 @@ public abstract class LightShardBaseEntity extends Projectile {
         LightShardBaseEntity.class, EntityDataSerializers.INT);
 
     public static final int DECELERATION_PHASE_LENGTH = 25;
-    public static final float DEFAULT_ACCELERATION = 0.03F;
 
     protected float scaleOffset, damage, detectionRange;
     protected Optional<UUID> target = Optional.empty();
@@ -93,12 +101,10 @@ public abstract class LightShardBaseEntity extends Projectile {
         super.tick();
 
         tickCount++;
-        if (this.level()
+        if (!shouldRenderTrail && this.level()
                 .isClientSide() && tickCount > DECELERATION_PHASE_LENGTH - 1 && getDeltaMovement().length() > 0.075) {
-            if (getDeltaMovement().length() > 0.2 || this.level()
-                                                         .getGameTime() % 2 == 0)
-                this.level()
-                    .addParticle(PastelParticleTypes.LIGHT_TRAIL, true, xo, yo, zo, 0, 0, 0);
+                shouldRenderTrail = true;
+                noCulling = true;
         }
 
         if (tickCount > getMaxAge()) {
@@ -136,16 +142,18 @@ public abstract class LightShardBaseEntity extends Projectile {
         }
 
         if (this.targetEntity.isPresent()) {
-            var entity = targetEntity.get();
+            var target = targetEntity.get();
 
-            var transformVector = entity
+            var vel = Math.min(getDeltaMovement().length() * 1.175, 2.25);
+            var homeVector = target
                 .position()
-                .add(0, entity.getBbHeight() / 2, 0)
+                .add(0, target.getEyeHeight() * 0.75, 0)
                 .subtract(position())
                 .normalize();
 
-            var accelerationVector = transformVector.scale(DEFAULT_ACCELERATION);
-            push(accelerationVector.x, accelerationVector.y, accelerationVector.z);
+            var curVector = getDeltaMovement().normalize();
+            var finalVector = curVector.scale(0.45).add(homeVector.scale(0.55)).scale(vel);
+            setDeltaMovement(finalVector);
         }
     }
 
@@ -227,9 +235,6 @@ public abstract class LightShardBaseEntity extends Projectile {
             if (!(hitEntity instanceof LivingEntity livingEntity)) {
                 return;
             }
-            if (!isValidTarget(livingEntity)) {
-                return;
-            }
 
             onHitEntity(livingEntity);
         }
@@ -252,6 +257,11 @@ public abstract class LightShardBaseEntity extends Projectile {
 
     @Override
     public void onClientRemoval() {
+        var render = getTrail();
+        if (render != null) {
+            TrailLeftoverHandler.addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
+            shouldRenderTrail = false;
+        }
     }
 
     @Override
@@ -342,6 +352,27 @@ public abstract class LightShardBaseEntity extends Projectile {
     public void setTarget(@NotNull LivingEntity target) {
         this.target = Optional.ofNullable(target.getUUID());
         this.targetEntity = Optional.of(target);
+    }
+
+    private boolean shouldRenderTrail;
+    private TrailRender trail;
+    public ColorGradient getGradient() {
+        return new ColorGradient(
+            new Color(0xFFFFFF),
+            new Color(InkColors.PURPLE_COLOR)
+        ).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f);
+    }
+
+    public TrailRender getTrail() {
+        if (!shouldRenderTrail) {
+            return null;
+        }
+        if (trail == null) {
+            trail = new TrailRender(position(), 20, 20, 0.125f, PastelCommon.locate("textures/misc/trail/trail.png"),
+                                    RenderTypeHandler::transparent
+            ).setShrink(true).startTicking();
+        }
+        return trail;
     }
 
     @Override
