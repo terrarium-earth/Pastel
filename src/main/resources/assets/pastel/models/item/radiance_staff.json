@@ -1,14 +1,14 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "item/handheld",
   "textures": {
     "layer0": "pastel:item/radiance_staff"
   },
   "overrides": [
     {
       "predicate": {
-        "in_use": 1
+        "oversized": 1.0
       },
-      "model": "pastel:item/radiance_staff_use"
+      "model": "pastel:item/radiance_staff_oversized"
     }
   ]
 }
