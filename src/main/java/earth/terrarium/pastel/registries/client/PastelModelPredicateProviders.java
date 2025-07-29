@@ -43,7 +43,6 @@ public class PastelModelPredicateProviders {
         registerSpectrumFishingRodItemPredicates(PastelItems.BEDROCK_FISHING_ROD.get());
         registerEnderSplicePredicates(PastelItems.ENDER_SPLICE.get());
         registerAnimatedWandPredicates(PastelItems.NATURES_STAFF.get());
-        registerAnimatedWandPredicates(PastelItems.RADIANCE_STAFF.get());
         registerAnimatedWandPredicates(PastelItems.STAFF_OF_REMEMBRANCE.get());
         registerKnowledgeDropPredicates(PastelItems.KNOWLEDGE_GEM.get());
         registerAshenCircletPredicates(PastelItems.ASHEN_CIRCLET.get());
@@ -59,6 +58,8 @@ public class PastelModelPredicateProviders {
 
         registerOversizedItemPredicate(PastelItems.PAINTBRUSH.get());
         registerStampingItemPredicate(PastelItems.TUNING_STAMP.get());
+
+        registerOversizedItemPredicate(PastelItems.RADIANCE_STAFF.get());
 
         registerOversizedItemPredicate(PastelItems.DRACONIC_TWINSWORD.get());
         registerOversizedItemPredicate(PastelItems.DRAGON_TALON.get());
