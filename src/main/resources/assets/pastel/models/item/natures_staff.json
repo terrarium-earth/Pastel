@@ -6,9 +6,9 @@
   "overrides": [
     {
       "predicate": {
-        "in_use": 1
+        "oversized": 1.0
       },
-      "model": "pastel:item/natures_staff_use"
+      "model": "pastel:item/natures_staff_oversized"
     }
   ]
 }
