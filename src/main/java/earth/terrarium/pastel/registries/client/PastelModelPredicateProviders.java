@@ -60,6 +60,7 @@ public class PastelModelPredicateProviders {
         registerStampingItemPredicate(PastelItems.TUNING_STAMP.get());
 
         registerOversizedItemPredicate(PastelItems.RADIANCE_STAFF.get());
+        registerOversizedItemPredicate(PastelItems.NATURES_STAFF.get());
 
         registerOversizedItemPredicate(PastelItems.DRACONIC_TWINSWORD.get());
         registerOversizedItemPredicate(PastelItems.DRAGON_TALON.get());
