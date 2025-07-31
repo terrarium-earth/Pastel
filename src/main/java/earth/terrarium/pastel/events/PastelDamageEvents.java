@@ -79,7 +79,7 @@ public class PastelDamageEvents {
         );
         var frenzy = attacker.getEffect(PastelMobEffects.FRENZY);
         if (frenzy != null) {
-            ((FrenzyStatusEffect) frenzy.getEffect()).onKill(attacker, frenzy.getAmplifier());
+            ((FrenzyStatusEffect) frenzy.getEffect().value()).onKill(attacker, frenzy.getAmplifier());
         }
     }
 
