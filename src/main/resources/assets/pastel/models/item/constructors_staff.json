@@ -1,0 +1,14 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "pastel:item/constructors_staff"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "oversized": 1.0
+      },
+      "model": "pastel:item/constructors_staff_oversized"
+    }
+  ]
+}
