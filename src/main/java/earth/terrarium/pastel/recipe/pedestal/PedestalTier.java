@@ -92,48 +92,8 @@ public enum PedestalTier implements StringRepresentable {
 		}
 		return Optional.empty();
 	}
-	
-	
-	@Contract(pure = true)
-	public @Nullable ResourceLocation getStructureID(Player player) {
-		switch (this) {
-			case COMPLEX -> {
-				if (DatabankUtils.hasAdvancement(player, PastelAdvancements.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE)) {
-					return PastelMultiblocks.PEDESTAL_COMPLEX;
-				} else {
-					return PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE;
-				}
-			}
-			case ADVANCED -> {
-				return PastelMultiblocks.PEDESTAL_ADVANCED;
-			}
-			case SIMPLE -> {
-				return PastelMultiblocks.PEDESTAL_SIMPLE;
-			}
-			default -> {
-				return null;
-			}
-		}
-	}
-	
-	public @Nullable Component getStructureText() {
-		switch (this) {
-			case COMPLEX -> {
-				return PastelMultiblocks.PEDESTAL_COMPLEX_TEXT;
-			}
-			case ADVANCED -> {
-				return PastelMultiblocks.PEDESTAL_ADVANCED_TEXT;
-			}
-			case SIMPLE -> {
-				return PastelMultiblocks.PEDESTAL_SIMPLE_TEXT;
-			}
-			default -> {
-				return null;
-			}
-		}
-	}
 
-	public static PedestalTier getTier(PedestalBlockEntity pedestal) {
+	public static PedestalTier getTier(Optional<Player> player, PedestalBlockEntity pedestal) {
 		Multiblock multiblock;
 		var level = pedestal.getLevel();
 		var pos = pedestal.getBlockPos();
@@ -145,9 +105,9 @@ public enum PedestalTier implements StringRepresentable {
 		var tier = BASIC;
 		for (int i = 1; i <= maxTier.ordinal(); i++) {
 			var proposal = values()[i];
-			multiblock = PastelMultiblocks.get(proposal.structure);
+            multiblock = getStructureFor(player, proposal);
 
-			if (multiblock.validate(level, pos.below(), Rotation.NONE)) {
+            if (multiblock.validate(level, pos.below(), Rotation.NONE)) {
                 if (level instanceof ServerLevel sl) {
                     Support.mbCriterion(sl, pos, multiblock);
                 }
@@ -158,7 +118,18 @@ public enum PedestalTier implements StringRepresentable {
 		return tier;
 	}
 
-	@Override
+    private static Multiblock getStructureFor(Optional<Player> player, PedestalTier proposal) {
+        if (player.isPresent() && proposal == COMPLEX &&
+            !DatabankUtils.hasAdvancement(
+                player.get(), PastelAdvancements.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE)) {
+
+            return PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE);
+        }
+
+        return PastelMultiblocks.get(proposal.structure);
+    }
+
+    @Override
 	public String getSerializedName() {
 		return name().toLowerCase();
 	}
