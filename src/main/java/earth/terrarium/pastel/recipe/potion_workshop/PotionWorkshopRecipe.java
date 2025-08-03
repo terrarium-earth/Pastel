@@ -141,7 +141,7 @@ public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<Recipe
     }
 
     @Override
-    public @Nullable ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public @Nullable ResourceLocation typeAdvancementID() {
         return UNLOCK_IDENTIFIER;
     }
 

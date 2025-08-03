@@ -98,7 +98,7 @@ public class PotionWorkshopReactingRecipe extends GatedPastelRecipe<RecipeInput>
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return PotionWorkshopRecipe.UNLOCK_IDENTIFIER;
     }
 

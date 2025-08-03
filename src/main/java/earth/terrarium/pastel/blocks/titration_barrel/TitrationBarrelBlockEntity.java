@@ -21,7 +21,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -224,7 +223,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 
         if (level instanceof ServerLevel sl) {
             var finalHarvestedStack = harvestedStack;
-            Support.areaCriterion(sl, Support.M_RANGE, blockPos, optionalRecipe.flatMap(r -> r.value().getRequiredAdvancementIdentifier()), p ->
+            Support.areaCriterion(sl, Support.M_RANGE, blockPos, optionalRecipe.flatMap(r -> r.value().advancementID()), p ->
                 PastelCriteria.TITRATION_BARREL_TAPPING.trigger(
                     p, finalHarvestedStack, daysSealed, inventoryCount));
         }

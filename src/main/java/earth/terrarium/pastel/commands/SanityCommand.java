@@ -284,9 +284,9 @@ public class SanityCommand {
 		// Impossible to unlock recipes
 		for (RecipeHolder<?> recipeEntry : recipeManager.getRecipes()) {
 			if (recipeEntry.value() instanceof GatedRecipe<?> gatedRecipe) {
-				Optional<ResourceLocation> advancementIdentifier = gatedRecipe.getRequiredAdvancementIdentifier();
+				Optional<ResourceLocation> advancementIdentifier = gatedRecipe.advancementID();
 				if (advancementIdentifier.isPresent() && advancementLoader.get(advancementIdentifier.get()) == null) {
-					PastelCommon.logWarning("[SANITY: " + gatedRecipe.getRecipeTypeShortID() + " Recipe Unlocks] Advancement '" + gatedRecipe.getRequiredAdvancementIdentifier() + "' in recipe '" + recipeEntry.id() + "' does not exist");
+					PastelCommon.logWarning("[SANITY: " + gatedRecipe.getRecipeTypeShortID() + " Recipe Unlocks] Advancement '" + gatedRecipe.advancementID() + "' in recipe '" + recipeEntry.id() + "' does not exist");
 				}
 			}
 		}
@@ -514,7 +514,7 @@ public class SanityCommand {
 	
 	private static <R extends GatedRecipe<C>, C extends RecipeInput> void testRecipeUnlocks(RecipeType<R> recipeType, String name, RecipeManager recipeManager, ServerAdvancementManager advancementLoader) {
 		for (RecipeHolder<R> recipe : recipeManager.getAllRecipesFor(recipeType)) {
-			Optional<ResourceLocation> advancementIdentifier = recipe.value().getRequiredAdvancementIdentifier();
+			Optional<ResourceLocation> advancementIdentifier = recipe.value().advancementID();
 			if (advancementIdentifier.isPresent() && advancementLoader.get(advancementIdentifier.get()) == null) {
 				PastelCommon.logWarning("[SANITY: " + name + " Recipe Unlocks] Advancement '" + advancementIdentifier + "' in recipe '" + recipe.id() + "' does not exist");
 			}

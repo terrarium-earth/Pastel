@@ -186,7 +186,7 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return UNLOCK_IDENTIFIER;
     }
 

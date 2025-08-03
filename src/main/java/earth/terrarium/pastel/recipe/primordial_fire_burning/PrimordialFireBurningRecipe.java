@@ -81,7 +81,7 @@ public class PrimordialFireBurningRecipe extends GatedPastelRecipe<RecipeInput> 
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return UNLOCK_IDENTIFIER;
     }
 

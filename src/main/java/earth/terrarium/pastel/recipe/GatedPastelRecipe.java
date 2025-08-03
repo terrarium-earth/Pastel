@@ -37,12 +37,12 @@ public abstract class GatedPastelRecipe<C extends RecipeInput> implements GatedR
      * @return The advancement identifier. A null value means the player is always able to craft this recipe
      */
     @Override
-    public Optional<ResourceLocation> getRequiredAdvancementIdentifier() {
+    public Optional<ResourceLocation> advancementID() {
         return this.requiredAdvancementIdentifier;
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return null;
     }
 

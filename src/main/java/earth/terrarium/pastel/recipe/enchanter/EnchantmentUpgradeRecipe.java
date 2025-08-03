@@ -218,7 +218,7 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return EnchanterCraftingRecipe.UNLOCK_IDENTIFIER;
     }
 

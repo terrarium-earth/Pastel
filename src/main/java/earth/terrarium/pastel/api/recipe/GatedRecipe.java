@@ -17,18 +17,29 @@ import java.util.Optional;
 public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	
 	boolean isSecret();
-	
-	Optional<ResourceLocation> getRequiredAdvancementIdentifier();
-	
-	ResourceLocation getRecipeTypeUnlockIdentifier();
+
+    /**
+     * The advancement this recipe is gated behind, or empty if it is unlocked by default
+     */
+	Optional<ResourceLocation> advancementID();
+
+    /**
+     * The advancement this recipe type is gated behind
+     */
+	ResourceLocation typeAdvancementID();
 	
 	String getRecipeTypeShortID();
 
 	default boolean canPlayerCraft(Player playerEntity) {
-		return DatabankUtils.hasAdvancement(playerEntity, getRecipeTypeUnlockIdentifier()) &&
-				(getRequiredAdvancementIdentifier().isEmpty() ||
-				DatabankUtils.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier().get()));
-	}
+        if (!DatabankUtils.hasAdvancement(playerEntity, typeAdvancementID()))
+            return false;
+
+        var advancement = advancementID();
+
+        return advancement.map(adv -> DatabankUtils.hasAdvancement(playerEntity, adv))
+                          .orElse(true);
+
+    }
 	
 	default Component getSingleUnlockToastString() {
 		return Component.translatable("pastel.toast." + getRecipeTypeShortID() + "_recipe_unlocked.title");

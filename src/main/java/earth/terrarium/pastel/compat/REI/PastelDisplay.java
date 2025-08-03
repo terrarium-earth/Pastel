@@ -36,7 +36,7 @@ public abstract class PastelDisplay extends BasicDisplay implements GatedRecipeD
 	public PastelDisplay(RecipeHolder<? extends GatedRecipe<?>> recipe, List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
 		super(inputs, outputs);
 		this.secret = recipe.value().isSecret();
-		this.requiredAdvancementIdentifier = recipe.value().getRequiredAdvancementIdentifier().orElse(null);
+		this.requiredAdvancementIdentifier = recipe.value().advancementID().orElse(null);
 		// FIXME
 		//this.secretHintText = recipe.getSecretHintText(id);
 		this.secretHintText = null;
