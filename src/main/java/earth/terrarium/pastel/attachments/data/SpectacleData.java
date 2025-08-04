@@ -106,7 +106,7 @@ public class SpectacleData {
 
     public static boolean isActive(Player player) {
         return player.getData(ATTACHMENT).potency > 0 &&
-               PriscillentSpectaclesItem.hasEquipped(player, PastelItems.GLOW_VISION_GOGGLES.get());
+               PriscillentSpectaclesItem.hasEquipped(player, PastelItems.PRISCILLENT_SPECTACLES.get());
     }
 
     public float getPotency() {

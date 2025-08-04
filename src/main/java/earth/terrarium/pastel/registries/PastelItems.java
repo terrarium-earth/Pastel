@@ -1659,7 +1659,7 @@ public class PastelItems {
     public static final DeferredItem<Item> FANCIFUL_BISMUTH_RING = register(
         simple(item("fanciful_bismuth_ring", () -> new Item(IS.of(16, Rarity.UNCOMMON)), InkColors.GREEN)));
 
-    public static final DeferredItem<Item> GLOW_VISION_GOGGLES = register(simple(
+    public static final DeferredItem<Item> PRISCILLENT_SPECTACLES = register(simple(
         item("glow_vision_goggles", () -> new PriscillentSpectaclesItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
     public static final DeferredItem<Item> JEOPARDANT = register(
         simple(item("jeopardant", () -> new AttackRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.RED)));

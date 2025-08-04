@@ -151,7 +151,7 @@ public class PastelClientEvents {
         slotEffect(PastelBlocks.CRYSTALLARIEUM, e);
 
         slotEffect(PastelItems.AETHER_GRACED_NECTAR_GLOVES, e);
-        slotEffect(PastelItems.GLOW_VISION_GOGGLES, e);
+        slotEffect(PastelItems.PRISCILLENT_SPECTACLES, e);
         InkDrainTrinketItem.BY_COLOR.values()
                                     .forEach(i -> slotEffect(i, e));
     }

@@ -1,27 +1,17 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.attachments.data.SpectacleData;
-import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelLevels;
-import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -80,7 +70,7 @@ public class PriscillentSpectaclesItem extends PastelTrinketItem implements InkP
 
     @Override
     public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
-        if (player == null || PastelTrinketItem.getFirstEquipped(player, PastelItems.GLOW_VISION_GOGGLES.get())
+        if (player == null || PastelTrinketItem.getFirstEquipped(player, PastelItems.PRISCILLENT_SPECTACLES.get())
                                                .map(s -> s != stack).orElse(true))
             return ExtendedItemBar.PASS;
 
