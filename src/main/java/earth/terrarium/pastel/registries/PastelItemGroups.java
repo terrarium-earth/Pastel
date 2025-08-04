@@ -563,6 +563,7 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.BITTER_OILS.get());
                                                                    entries.accept(PastelItems.EVERPROMISE_RIBBON.get());
                                                                    entries.accept(PastelItems.BAG_OF_HOLDING.get());
+                                                                   entries.accept(PastelItems.WIRE_HOOK.get());
                                                                    entries.accept(PastelItems.RADIANCE_STAFF.get());
                                                                    entries.accept(PastelItems.NATURES_STAFF.get());
                                                                    entries.accept(Ench.getEnchantedStack(

@@ -1,34 +1,7 @@
 package earth.terrarium.pastel.entity;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.entity.entity.BedrockFishingBobberEntity;
-import earth.terrarium.pastel.entity.entity.BidentEntity;
-import earth.terrarium.pastel.entity.entity.BidentMirrorImageEntity;
-import earth.terrarium.pastel.entity.entity.BlockFlooderProjectile;
-import earth.terrarium.pastel.entity.entity.DraconicTwinswordEntity;
-import earth.terrarium.pastel.entity.entity.DragonTalonEntity;
-import earth.terrarium.pastel.entity.entity.EggLayingWoolyPigEntity;
-import earth.terrarium.pastel.entity.entity.EraserEntity;
-import earth.terrarium.pastel.entity.entity.FireproofItemEntity;
-import earth.terrarium.pastel.entity.entity.FloatBlockEntity;
-import earth.terrarium.pastel.entity.entity.GlassArrowEntity;
-import earth.terrarium.pastel.entity.entity.InkProjectileEntity;
-import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
-import earth.terrarium.pastel.entity.entity.KindlingCoughEntity;
-import earth.terrarium.pastel.entity.entity.KindlingEntity;
-import earth.terrarium.pastel.entity.entity.LagoonFishingBobberEntity;
-import earth.terrarium.pastel.entity.entity.LightMineEntity;
-import earth.terrarium.pastel.entity.entity.LightShardEntity;
-import earth.terrarium.pastel.entity.entity.LightSpearEntity;
-import earth.terrarium.pastel.entity.entity.LivingMarkerEntity;
-import earth.terrarium.pastel.entity.entity.LizardEntity;
-import earth.terrarium.pastel.entity.entity.MiningProjectileEntity;
-import earth.terrarium.pastel.entity.entity.MoltenFishingBobberEntity;
-import earth.terrarium.pastel.entity.entity.PhantomFrameEntity;
-import earth.terrarium.pastel.entity.entity.PhantomGlowFrameEntity;
-import earth.terrarium.pastel.entity.entity.PreservationTurretEntity;
-import earth.terrarium.pastel.entity.entity.SeatEntity;
-import earth.terrarium.pastel.entity.entity.ShootingStarEntity;
+import earth.terrarium.pastel.entity.entity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -62,6 +35,11 @@ public class PastelEntityTypes {
         = register(
         "block_flooder_projectile", 4, 10, true, EntityDimensions.scalable(0.25F, 0.25F), true,
         BlockFlooderProjectile::new
+    );
+    public static final DeferredHolder<EntityType<?>, EntityType<WireHookEntity>> WIRE_HOOK
+        = register(
+        "wire_hook", 8, 10, true, EntityDimensions.scalable(0.25F, 0.25F), true,
+        WireHookEntity::new
     );
     public static final DeferredHolder<EntityType<?>, EntityType<InkProjectileEntity>> INK_PROJECTILE = register(
         "ink_projectile", 4, 10, true, EntityDimensions.scalable(0.3F, 0.3F), true, InkProjectileEntity::new);
