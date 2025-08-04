@@ -46,7 +46,7 @@ public class WireHookItem extends Item {
                                Support.varFloatCentered(player.getRandom(), 0.1F));
 
         var hook = level.getEntity(data.getLinkedHook().get());
-        if (hook != null)
-            hook.remove(Entity.RemovalReason.DISCARDED);
+        if (hook instanceof WireHookEntity wireHook)
+            wireHook.recall();
     }
 }
