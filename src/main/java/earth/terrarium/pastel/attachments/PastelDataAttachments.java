@@ -21,6 +21,7 @@ public class PastelDataAttachments {
         REGISTER.register("player_misc", () -> MiscPlayerData.ATTACHMENT);
         REGISTER.register("inertia", () -> InertiaData.ATTACHMENT);
         REGISTER.register("spectacle", () -> SpectacleData.ATTACHMENT);
+        REGISTER.register("hookshot", () -> HookshotData.ATTACHMENT);
         REGISTER.register(bus);
     }
 

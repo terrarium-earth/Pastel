@@ -1,24 +1,6 @@
 package earth.terrarium.pastel.entity;
 
-import earth.terrarium.pastel.entity.render.BedrockFishingBobberEntityRenderer;
-import earth.terrarium.pastel.entity.render.BidentEntityRenderer;
-import earth.terrarium.pastel.entity.render.EggLayingWoolyPigEntityRenderer;
-import earth.terrarium.pastel.entity.render.EraserEntityRenderer;
-import earth.terrarium.pastel.entity.render.FloatBlockEntityRenderer;
-import earth.terrarium.pastel.entity.render.GlassArrowEntityRenderer;
-import earth.terrarium.pastel.entity.render.KindlingCoughEntityRenderer;
-import earth.terrarium.pastel.entity.render.KindlingEntityRenderer;
-import earth.terrarium.pastel.entity.render.LagoonFishingBobberEntityRenderer;
-import earth.terrarium.pastel.entity.render.LightMineEntityRenderer;
-import earth.terrarium.pastel.entity.render.LightShardEntityRenderer;
-import earth.terrarium.pastel.entity.render.LightSpearEntityRenderer;
-import earth.terrarium.pastel.entity.render.LizardEntityRenderer;
-import earth.terrarium.pastel.entity.render.MagicProjectileEntityRenderer;
-import earth.terrarium.pastel.entity.render.MoltenFishingBobberEntityRenderer;
-import earth.terrarium.pastel.entity.render.PhantomFrameEntityRenderer;
-import earth.terrarium.pastel.entity.render.PreservationTurretEntityRenderer;
-import earth.terrarium.pastel.entity.render.SeatEntityRenderer;
-import earth.terrarium.pastel.entity.render.ShootingStarEntityRenderer;
+import earth.terrarium.pastel.entity.render.*;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
@@ -40,6 +22,7 @@ public class PastelEntityRenderers {
         register(PastelEntityTypes.GLOW_PHANTOM_FRAME.get(), PhantomFrameEntityRenderer::new);
         register(PastelEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), ThrownItemRenderer::new);
         register(PastelEntityTypes.INK_PROJECTILE.get(), MagicProjectileEntityRenderer::new);
+        register(PastelEntityTypes.WIRE_HOOK.get(), WireHoikEntityRenderer::new);
         register(PastelEntityTypes.LAGOON_FISHING_BOBBER.get(), LagoonFishingBobberEntityRenderer::new);
         register(PastelEntityTypes.MOLTEN_FISHING_BOBBER.get(), MoltenFishingBobberEntityRenderer::new);
         register(PastelEntityTypes.BEDROCK_FISHING_BOBBER.get(), BedrockFishingBobberEntityRenderer::new);
