@@ -346,9 +346,10 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
 	private void updateRecipe() {
 		assert level != null;
 		var input = getInput();
+        var owner = Optional.ofNullable(getOwnerIfOnline());
 
 		if (tier.isEmpty())
-			tier = Optional.of(PedestalTier.getTier(this));
+			tier = Optional.of(PedestalTier.getTier(owner, this));
 
 		if (upgrades == null)
 			calculateUpgrades();
@@ -362,7 +363,7 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
 		}).isPresent() && verifyRecipe())
 			return;
 
-		tier = Optional.of(PedestalTier.getTier(this));
+		tier = Optional.of(PedestalTier.getTier(owner, this));
 		findRecipe(input);
 		setRecipeTimings();
 

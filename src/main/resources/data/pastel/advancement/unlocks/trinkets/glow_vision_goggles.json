@@ -6,12 +6,6 @@
         "advancement": "pastel:place_pedestal"
       }
     },
-    "collected_amethyst_shard": {
-      "trigger": "databank:has_advancement",
-      "conditions": {
-        "advancement": "pastel:hidden/collect_shards/amethyst"
-      }
-    },
     "collected_citrine_shard": {
       "trigger": "databank:has_advancement",
       "conditions": {

@@ -40,8 +40,8 @@ public interface GatedGuidebookPage {
                             "Guidebook page " + entryId + " page " + pageNr + " is missing its recipe");
                         continue;
                     }
-                    Optional<ResourceLocation> recipeAdvId = recipe.getRequiredAdvancementIdentifier();
-                    ResourceLocation combinedAdvId = recipeAdvId.orElse(recipe.getRecipeTypeUnlockIdentifier());
+                    Optional<ResourceLocation> recipeAdvId = recipe.advancementID();
+                    ResourceLocation combinedAdvId = recipeAdvId.orElse(recipe.typeAdvancementID());
                     if (combinedAdvId == null) {
                         PastelCommon.logWarning(
                             "Guidebook page " + entryId + "[" + pageNr + "] references advancement " + pageAdvancement +

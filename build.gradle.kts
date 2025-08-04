@@ -53,7 +53,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.1.3"
+		version = System.getenv("VERSION") ?: "1.1.4"
 
         description = "Do flowers dream of the moon?"
 
@@ -117,13 +117,11 @@ cloche {
             val additionalEntityAttributes = module(group = "maven.modrinth", name = "additionalentityattributes", version = "2.0.0+1.21.1-neoforge")
             val jgrapht = module(group = "org.jgrapht", name = "jgrapht-core", version = "1.5.2")
             val jheaps = module(group = "org.jheaps", name = "jheaps", version = "0.14")
-            //val revelationary = module(group = "earth.terrarium", name = "revelationary", version = "1.0.1")
-            val databank = module(group = "maven.modrinth", name = "databank", version = "1.2.0.1")
+            val databank = module(group = "maven.modrinth", name = "databank", version = "1.2.1")
 
             include(additionalEntityAttributes)
             include(jgrapht)
             include(jheaps)
-            //include(revelationary)
             include(databank)
 
             include(module(group = "org.apfloat", name = "apfloat", version = "1.10.1"))
@@ -138,7 +136,6 @@ cloche {
 
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
-                //modImplementation(revelationary)
                 modImplementation(databank)
                 modImplementation(additionalEntityAttributes)
                 compileOnly(jgrapht)

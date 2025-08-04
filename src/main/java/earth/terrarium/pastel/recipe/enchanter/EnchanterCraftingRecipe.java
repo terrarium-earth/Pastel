@@ -151,7 +151,7 @@ public class EnchanterCraftingRecipe extends EnchanterRecipe {
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return UNLOCK_IDENTIFIER;
     }
 

@@ -1,11 +1,7 @@
 package earth.terrarium.pastel.networking;
 
 import earth.terrarium.pastel.attachments.HardcoreDeathTracker;
-import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
-import earth.terrarium.pastel.attachments.data.InertiaData;
-import earth.terrarium.pastel.attachments.data.LastKillData;
-import earth.terrarium.pastel.attachments.data.MiscPlayerData;
-import earth.terrarium.pastel.attachments.data.PrimordialFireData;
+import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeData;
 import earth.terrarium.pastel.networking.s2c_payloads.BlackHoleChestStatusUpdatePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.ColorTransmissionPayload;
@@ -157,6 +153,7 @@ public class PastelS2CPackets {
         registrar.playToClient(
             MiscPlayerData.Payload.TYPE, MiscPlayerData.Payload.CODEC, MiscPlayerData.Payload::execute);
         registrar.playToClient(InertiaData.Payload.TYPE, InertiaData.Payload.CODEC, InertiaData.Payload::execute);
+        registrar.playToClient(SpectacleData.Payload.TYPE, SpectacleData.Payload.CODEC, SpectacleData.Payload::execute);
 
         // SavedData stuff
         registrar.playToClient(

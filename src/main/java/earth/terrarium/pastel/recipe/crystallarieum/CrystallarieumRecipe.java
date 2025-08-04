@@ -131,7 +131,7 @@ public class CrystallarieumRecipe extends GatedPastelRecipe<SingleRecipeInput> {
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return UNLOCK_IDENTIFIER;
     }
 

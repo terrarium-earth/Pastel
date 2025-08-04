@@ -79,7 +79,7 @@ public class PastelDamageEvents {
         );
         var frenzy = attacker.getEffect(PastelMobEffects.FRENZY);
         if (frenzy != null) {
-            ((FrenzyStatusEffect) frenzy.getEffect()).onKill(attacker, frenzy.getAmplifier());
+            ((FrenzyStatusEffect) frenzy.getEffect().value()).onKill(attacker, frenzy.getAmplifier());
         }
     }
 
@@ -183,6 +183,7 @@ public class PastelDamageEvents {
     private static void splitDamage(LivingIncomingDamageEvent event) {
         var target = event.getEntity();
 
+        var invuln = event.getContainer().getPostAttackInvulnerabilityTicks();
         if (RECURSIVE_TARGETS.contains(target)) {
             event.getContainer()
                  .setPostAttackInvulnerabilityTicks(
@@ -215,7 +216,7 @@ public class PastelDamageEvents {
 
         RECURSIVE_TARGETS.remove(target);
         event.setAmount(0);
-        event.setCanceled(true);
+        event.getContainer().setPostAttackInvulnerabilityTicks(invuln);
     }
 
     private static void vulnerability(LivingDamageEvent.Pre event) {

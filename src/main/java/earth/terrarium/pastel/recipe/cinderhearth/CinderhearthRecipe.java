@@ -90,7 +90,7 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return UNLOCK_IDENTIFIER;
     }
 

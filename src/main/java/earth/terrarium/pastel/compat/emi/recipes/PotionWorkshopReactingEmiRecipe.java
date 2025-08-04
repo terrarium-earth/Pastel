@@ -25,7 +25,7 @@ public class PotionWorkshopReactingEmiRecipe extends EmiInfoRecipe {
 	
 	public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return DatabankUtils.hasAdvancement(client.player, PotionWorkshopRecipe.UNLOCK_IDENTIFIER) && DatabankUtils.hasAdvancement(client.player, recipe.getRequiredAdvancementIdentifier().orElse(null));
+		return DatabankUtils.hasAdvancement(client.player, PotionWorkshopRecipe.UNLOCK_IDENTIFIER) && DatabankUtils.hasAdvancement(client.player, recipe.advancementID().orElse(null));
 	}
 	
 	@Override

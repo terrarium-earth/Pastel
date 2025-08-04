@@ -214,7 +214,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 	}
 	
 	@Override
-	public ResourceLocation getRecipeTypeUnlockIdentifier() {
+	public ResourceLocation typeAdvancementID() {
 		return UNLOCK_IDENTIFIER;
 	}
 	

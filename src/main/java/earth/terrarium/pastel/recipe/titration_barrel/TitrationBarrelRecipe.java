@@ -282,7 +282,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return ITitrationBarrelRecipe.UNLOCK_ADVANCEMENT_IDENTIFIER;
     }
 

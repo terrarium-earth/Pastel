@@ -444,7 +444,7 @@ public class PastelItemGroups {
                                                                    entries.accept(
                                                                        PastelItems.FANCIFUL_BISMUTH_RING.get());
                                                                    entries.accept(
-                                                                       PastelItems.GLOW_VISION_GOGGLES.get());
+                                                                       PastelItems.PRISCILLENT_SPECTACLES.get());
                                                                    entries.accept(PastelItems.JEOPARDANT.get());
                                                                    entries.accept(PastelItems.SEVEN_LEAGUE_BOOTS.get());
                                                                    entries.accept(Ench.getEnchantedStack(

@@ -225,7 +225,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     }
 
     @Override
-    public ResourceLocation getRecipeTypeUnlockIdentifier() {
+    public ResourceLocation typeAdvancementID() {
         return UNLOCK_IDENTIFIER;
     }
 

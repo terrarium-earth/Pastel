@@ -23,7 +23,7 @@ public abstract class GatedSpectrumEmiRecipe<T extends GatedRecipe<?>> extends P
     public final T recipe;
 
     public GatedSpectrumEmiRecipe(EmiRecipeCategory category, T recipe, int width, int height) {
-        super(category, recipe.getRecipeTypeUnlockIdentifier(), EmiPort.getId(recipe), width, height);
+        super(category, recipe.typeAdvancementID(), EmiPort.getId(recipe), width, height);
         this.recipe = recipe;
         this.outputs = List.of(EmiStack.of(recipe.getResultItem(getRegistryManager())));
         this.secretHintText = recipe.getSecretHintText(getId());
@@ -31,8 +31,10 @@ public abstract class GatedSpectrumEmiRecipe<T extends GatedRecipe<?>> extends P
 
     @Override
     public boolean isUnlocked() {
-        return hasAdvancement(recipe.getRequiredAdvancementIdentifier()
-                                    .orElse(null)) && super.isUnlocked();
+        if (!super.isUnlocked())
+            return false;
+
+        return recipe.advancementID().map(this::hasAdvancement).orElse(true);
     }
 
     @Override

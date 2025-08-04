@@ -17,6 +17,7 @@ public interface ExtendedItemBar {
         return true;
     }
 
+    @NotNull
     BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index);
 
     record BarSignature(
