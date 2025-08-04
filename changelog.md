@@ -1,4 +1,5 @@
-* Fixed advancement criteria only ever being checked once
-* Fixed Pigment Pedestal not giving its crafting criterion
-* Fixed cake tomfoolery
-* Most advancement criteria are now granted to all nearby players
+* Fixed some recipes displaying as locked when they shouldn't
+* Fixed certain weapons not activating their on-hit effects
+* Fixed moonstoneless moonstone pedestal not being checked
+* Overhaled + Resprited the glow vision goggles
+* Renamed the glow vision goggles to the priscillent spectacles

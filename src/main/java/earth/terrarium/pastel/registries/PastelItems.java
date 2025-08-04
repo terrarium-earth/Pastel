@@ -128,7 +128,7 @@ import earth.terrarium.pastel.items.trinkets.ExtraHealthRingItem;
 import earth.terrarium.pastel.items.trinkets.ExtraMiningSpeedRingItem;
 import earth.terrarium.pastel.items.trinkets.ExtraReachGlovesItem;
 import earth.terrarium.pastel.items.trinkets.GleamingPinItem;
-import earth.terrarium.pastel.items.trinkets.GlowVisionGogglesItem;
+import earth.terrarium.pastel.items.trinkets.PriscillentSpectaclesItem;
 import earth.terrarium.pastel.items.trinkets.InkDrainTrinketItem;
 import earth.terrarium.pastel.items.trinkets.LaurelsOfSerenityItem;
 import earth.terrarium.pastel.items.trinkets.NeatRingItem;
@@ -1660,7 +1660,7 @@ public class PastelItems {
         simple(item("fanciful_bismuth_ring", () -> new Item(IS.of(16, Rarity.UNCOMMON)), InkColors.GREEN)));
 
     public static final DeferredItem<Item> GLOW_VISION_GOGGLES = register(simple(
-        item("glow_vision_goggles", () -> new GlowVisionGogglesItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
+        item("glow_vision_goggles", () -> new PriscillentSpectaclesItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
     public static final DeferredItem<Item> JEOPARDANT = register(
         simple(item("jeopardant", () -> new AttackRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.RED)));
     public static final DeferredItem<SevenLeagueBootsItem> SEVEN_LEAGUE_BOOTS = register(simple(

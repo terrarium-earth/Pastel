@@ -1,11 +1,7 @@
 package earth.terrarium.pastel.attachments;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
-import earth.terrarium.pastel.attachments.data.InertiaData;
-import earth.terrarium.pastel.attachments.data.LastKillData;
-import earth.terrarium.pastel.attachments.data.MiscPlayerData;
-import earth.terrarium.pastel.attachments.data.PrimordialFireData;
+import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeData;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -24,6 +20,7 @@ public class PastelDataAttachments {
         REGISTER.register("last_kill", () -> LastKillData.ATTACHMENT);
         REGISTER.register("player_misc", () -> MiscPlayerData.ATTACHMENT);
         REGISTER.register("inertia", () -> InertiaData.ATTACHMENT);
+        REGISTER.register("spectacle", () -> SpectacleData.ATTACHMENT);
         REGISTER.register(bus);
     }
 

@@ -130,6 +130,7 @@ public class MiscPlayerData {
             }
         }
     }
+
     @OnlyIn(Dist.CLIENT)
     public void renderAdditional(RenderLevelStageEvent event) {
         PoseStack poseStack = event.getPoseStack();
@@ -161,9 +162,6 @@ public class MiscPlayerData {
         isLunging = true;
         bHopWindow = true;
         lungeItem = item;
-    }
-    public void initiateLungeState() {
-        initiateLungeState(null);
     }
 
     public void endLunge() {

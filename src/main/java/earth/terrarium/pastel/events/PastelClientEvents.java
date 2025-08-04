@@ -10,6 +10,7 @@ import earth.terrarium.pastel.api.interaction.ItemProvider;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
+import earth.terrarium.pastel.attachments.data.SpectacleData;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.data_loaders.ParticleSpawnerParticlesDataLoader;
 import earth.terrarium.pastel.data_loaders.dimension.ColorGradingLoader;
@@ -150,6 +151,7 @@ public class PastelClientEvents {
         slotEffect(PastelBlocks.CRYSTALLARIEUM, e);
 
         slotEffect(PastelItems.AETHER_GRACED_NECTAR_GLOVES, e);
+        slotEffect(PastelItems.GLOW_VISION_GOGGLES, e);
         InkDrainTrinketItem.BY_COLOR.values()
                                     .forEach(i -> slotEffect(i, e));
     }
@@ -231,11 +233,15 @@ public class PastelClientEvents {
         if (entity instanceof LivingEntity living) {
             PrimordialFireData.clientTick(living);
         }
+
+        if (entity instanceof Player player)
+            SpectacleData.tickClient(player);
     }
 
     private static void afterClientTick(ClientTickEvent.Post event) {
         var client = Minecraft.getInstance();
         var level = client.level;
+
         Entity cameraEntity = client.getCameraEntity();
         if (level == null || cameraEntity == null) {
             BiomeSoundInstance.clear();
