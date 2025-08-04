@@ -36,6 +36,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -256,6 +258,7 @@ public abstract class LightShardBaseEntity extends Projectile {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void onClientRemoval() {
         var render = getTrail();
         if (render != null) {

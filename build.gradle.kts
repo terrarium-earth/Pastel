@@ -53,7 +53,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.1.4"
+		version = System.getenv("VERSION") ?: "1.1.4.1"
 
         description = "Do flowers dream of the moon?"
 
@@ -234,7 +234,7 @@ resourcefulGradle {
 
 			source.set(file("templates/embed.json.template"))
 			injectedValues.set(mapOf(
-				"minecraft" to cloche.minecraftVersion,
+				"minecraft" to "1.21.1", // TODO: ask Ash (awawawa) how to fix this
 				"version" to System.getenv("VERSION"),
 				"changelog" to StringEscapeUtils.escapeJava(System.getenv("CHANGELOG")),
                 "version" to System.getenv("VERSION"),
