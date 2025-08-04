@@ -78,43 +78,7 @@ import earth.terrarium.pastel.items.magic_items.ampoules.MalachiteGlassAmpouleIt
 import earth.terrarium.pastel.items.map.ArtisansAtlasItem;
 import earth.terrarium.pastel.items.misc.AetherVestigesItem;
 import earth.terrarium.pastel.items.misc.AshItem;
-import earth.terrarium.pastel.items.tools.BedrockAxeItem;
-import earth.terrarium.pastel.items.tools.BedrockBowItem;
-import earth.terrarium.pastel.items.tools.BedrockCrossbowItem;
-import earth.terrarium.pastel.items.tools.BedrockFishingRodItem;
-import earth.terrarium.pastel.items.tools.BedrockHoeItem;
-import earth.terrarium.pastel.items.tools.BedrockShearsItem;
-import earth.terrarium.pastel.items.tools.BedrockShovelItem;
-import earth.terrarium.pastel.items.tools.BedrockSwordItem;
-import earth.terrarium.pastel.items.tools.DraconicTwinswordItem;
-import earth.terrarium.pastel.items.tools.DragonTalonItem;
-import earth.terrarium.pastel.items.tools.DreamflayerItem;
-import earth.terrarium.pastel.items.tools.FerociousBidentItem;
-import earth.terrarium.pastel.items.tools.FractalBidentItem;
-import earth.terrarium.pastel.items.tools.GlassArrowItem;
-import earth.terrarium.pastel.items.tools.GlassArrowVariant;
-import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
-import earth.terrarium.pastel.items.tools.GlassCrestGreatswordItem;
-import earth.terrarium.pastel.items.tools.GlassCrestWorkstaffItem;
-import earth.terrarium.pastel.items.tools.GlintlessPickaxe;
-import earth.terrarium.pastel.items.tools.GreatswordItem;
-import earth.terrarium.pastel.items.tools.LagoonRodItem;
-import earth.terrarium.pastel.items.tools.LightGreatswordItem;
-import earth.terrarium.pastel.items.tools.MalachiteBidentItem;
-import earth.terrarium.pastel.items.tools.MalachiteCrossbowItem;
-import earth.terrarium.pastel.items.tools.MoltenRodItem;
-import earth.terrarium.pastel.items.tools.NectarLanceItem;
-import earth.terrarium.pastel.items.tools.NightSaltsItem;
-import earth.terrarium.pastel.items.tools.NightfallsBladeItem;
-import earth.terrarium.pastel.items.tools.OblivionPickaxeItem;
-import earth.terrarium.pastel.items.tools.OmniAcceleratorItem;
-import earth.terrarium.pastel.items.tools.PastelPickaxeItem;
-import earth.terrarium.pastel.items.tools.PreenchantedMultiToolItem;
-import earth.terrarium.pastel.items.tools.PrimordialLighterItem;
-import earth.terrarium.pastel.items.tools.RazorFalchionItem;
-import earth.terrarium.pastel.items.tools.SoothingBouquetItem;
-import earth.terrarium.pastel.items.tools.TuningStampItem;
-import earth.terrarium.pastel.items.tools.WorkstaffItem;
+import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.AetherGracedNectarGlovesItem;
 import earth.terrarium.pastel.items.trinkets.AshenCircletItem;
 import earth.terrarium.pastel.items.trinkets.AttackRingItem;
@@ -1565,6 +1529,8 @@ public class PastelItems {
     // Magical Tools
     public static final DeferredItem<Item> BAG_OF_HOLDING = register(
         simple(item("bag_of_holding", () -> new BagOfHoldingItem(IS.of(1)), InkColors.PURPLE)));
+    public static final DeferredItem<Item> WIRE_HOOK = register(
+        simple(item("wire_hook", () -> new WireHookItem(IS.of(1)), InkColors.LIGHT_BLUE)));
     public static final DeferredItem<Item> RADIANCE_STAFF = register(
         item("radiance_staff", () -> new RadianceStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW));
     public static final DeferredItem<NaturesStaffItem> NATURES_STAFF = register(

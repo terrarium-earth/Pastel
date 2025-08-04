@@ -1,0 +1,12 @@
+{
+  "aliases": [
+    {
+      "stacks": "item:pastel:wire_hook",
+      "text": [
+        "item.pastel.wire_hook.alias_0",
+        "item.pastel.wire_hook.alias_1",
+        "item.pastel.wire_hook.alias_2"
+      ]
+    }
+  ]
+}
