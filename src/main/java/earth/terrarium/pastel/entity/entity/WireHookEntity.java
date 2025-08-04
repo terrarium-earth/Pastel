@@ -19,13 +19,14 @@ import net.minecraft.world.phys.HitResult;
 public class WireHookEntity extends Projectile {
 
     public static final float STIFFNESS = 0.5F;
+    public static final int DEFAULT_MAX_RANGE = 48;
 
     protected static final EntityDataAccessor<Boolean> HOOKED = SynchedEntityData.defineId(
         WireHookEntity.class, EntityDataSerializers.BOOLEAN);
-    protected static final EntityDataAccessor<Boolean> PROPELLED = SynchedEntityData.defineId(
+    protected static final EntityDataAccessor<Boolean> RECALLED = SynchedEntityData.defineId(
         WireHookEntity.class, EntityDataSerializers.BOOLEAN);
 
-    private float neutral;
+    private float neutral = -1F;
     private boolean grabbed;
 
     public WireHookEntity(EntityType<WireHookEntity> entityType, Level level) {
@@ -48,23 +49,46 @@ public class WireHookEntity extends Projectile {
             return;
 
         processCollision();
-        if (isHooked() != grabbed) {
-            grabbed = isHooked();
-            playSound(PastelSounds.METAL_HIT);
+        updateHookStatus();
 
-            if (getOwner() != null)
-                neutral = getOwner().distanceTo(this) * 0.5F;
-        }
+        if (!(getOwner() instanceof Player player))
+            return;
 
-        if (!isHooked()) {
-            moveTo(position().add(getDeltaMovement()));
-        }
-        else {
-            if (!(getOwner() instanceof Player player))
-                return;
-
+        if (isHooked()) {
             updateEquilibrium(player);
             springMove(player);
+        }
+        else {
+            setOldPosAndRot();
+            moveTo(position().add(getDeltaMovement()));
+        }
+
+        if (hasRecalled()) {
+            var distance = distanceTo(player);
+
+            if (distance < 1.75) {
+                remove(RemovalReason.DISCARDED);
+                return;
+            }
+
+            var returnVector = player.position().subtract(position()).normalize();
+            setDeltaMovement(returnVector.scale(Math.min(Math.pow(distance / 3, 1.5), 4) + 0.5));
+        }
+    }
+
+    private void updateHookStatus() {
+        if (isHooked() != grabbed) {
+            grabbed = isHooked();
+
+            if (grabbed) {
+                playSound(PastelSounds.METAL_HIT);
+
+                if (getOwner() != null)
+                    neutral = getOwner().distanceTo(this) * 0.5F;
+            }
+            else {
+                playSound(PastelSounds.METAL_TAP);
+            }
         }
     }
 
@@ -116,16 +140,18 @@ public class WireHookEntity extends Projectile {
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
+        if (hasRecalled())
+            return;
+
         setDeltaMovement(0, 0, 0);
         entityData.set(HOOKED, true);
-        entityData.set(PROPELLED, false);
 
         super.onHitBlock(result);
     }
 
     @Override
     protected double getDefaultGravity() {
-        return entityData.get(PROPELLED) ? 0 :0.08;
+        return 0;
     }
 
     @Override
@@ -150,17 +176,26 @@ public class WireHookEntity extends Projectile {
         return entityData.get(HOOKED);
     }
 
+    public boolean hasRecalled() {
+        return entityData.get(RECALLED);
+    }
+
+    public void recall() {
+        entityData.set(RECALLED, true);
+        entityData.set(HOOKED, false);
+    }
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(HOOKED, false);
-        builder.define(PROPELLED, true);
+        builder.define(RECALLED, false);
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("hooked", entityData.get(HOOKED));
-        compound.putBoolean("propelled", entityData.get(PROPELLED));
+        compound.putBoolean("propelled", entityData.get(RECALLED));
         compound.putFloat("neutral", neutral);
         compound.getBoolean("grabbed");
     }
@@ -169,7 +204,7 @@ public class WireHookEntity extends Projectile {
     protected void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         entityData.set(HOOKED, compound.getBoolean("hooked"));
-        entityData.set(PROPELLED, compound.getBoolean("propelled"));
+        entityData.set(RECALLED, compound.getBoolean("propelled"));
         neutral = compound.getFloat("neutral");
         grabbed = compound.getBoolean("grabbed");
     }
