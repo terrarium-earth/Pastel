@@ -2,10 +2,11 @@ package earth.terrarium.pastel.attachments.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.entity.entity.WireHookEntity;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,6 +24,7 @@ public class HookshotData {
             .serialize(CODEC).build();
 
     private Optional<UUID> linkedHook = Optional.empty();
+    private int hookId = -1;
     private Player holder;
 
     public HookshotData(Player holder) {
@@ -41,15 +43,26 @@ public class HookshotData {
         return linkedHook;
     }
 
-    public void setLinkedHook(UUID id) {
-        linkedHook = Optional.of(id);
+    public Entity getHookEntity(Level level) {
+        if (linkedHook.isEmpty())
+            return null;
+
+        if (level instanceof ServerLevel sl)
+            return sl.getEntity(linkedHook.get());
+
+        return level.getEntity(hookId);
+    }
+
+    public void setLinkedHook(Entity entity) {
+        linkedHook = Optional.of(entity.getUUID());
+        hookId = entity.getId();
     }
 
     public boolean isAlreadyHooked() {
         if (linkedHook.isEmpty())
             return false;
 
-        var entity = (WireHookEntity) ((ServerLevel) holder.level()).getEntity(linkedHook.get());
+        var entity = getHookEntity(holder.level());
 
         if (entity == null || entity.isRemoved() || !entity.isAlive()) {
             linkedHook = Optional.empty();
@@ -57,6 +70,10 @@ public class HookshotData {
         }
 
         return true;
+    }
+
+    public float getFrictionModifier() {
+        return linkedHook.isPresent() ? 0.03F : 0F;
     }
 
     public static HookshotData get(@NotNull Player player) {

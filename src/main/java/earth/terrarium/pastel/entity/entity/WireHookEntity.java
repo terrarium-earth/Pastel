@@ -1,25 +1,32 @@
 package earth.terrarium.pastel.entity.entity;
 
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.HookshotData;
+import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 
 public class WireHookEntity extends Projectile {
 
     public static final float STIFFNESS = 0.5F;
-    public static final int DEFAULT_MAX_RANGE = 48;
 
     protected static final EntityDataAccessor<Boolean> HOOKED = SynchedEntityData.defineId(
         WireHookEntity.class, EntityDataSerializers.BOOLEAN);
@@ -27,18 +34,30 @@ public class WireHookEntity extends Projectile {
         WireHookEntity.class, EntityDataSerializers.BOOLEAN);
 
     private float neutral = -1F;
+    private double lastRebound;
     private boolean grabbed;
 
     public WireHookEntity(EntityType<WireHookEntity> entityType, Level level) {
         super(entityType, level);
     }
 
-    public WireHookEntity(Player shooter, double x, double y, double z, Level level) {
+    public WireHookEntity(Player shooter, Level level) {
         this(PastelEntityTypes.WIRE_HOOK.get(), level);
 
-        setPos(x, y, z);
+        setPos(shooter.getX(),
+                shooter.getY() + shooter.getBbHeight() * 0.667,
+                shooter.getZ());
+        setRot(shooter.getYRot(),
+                shooter.getXRot());
         setOwner(shooter);
-        HookshotData.get(shooter).setLinkedHook(getUUID());
+        HookshotData.get(shooter).setLinkedHook(this);
+    }
+
+    @Override
+    public void recreateFromPacket(ClientboundAddEntityPacket packet) {
+        super.recreateFromPacket(packet);
+        if (getOwner() instanceof Player shooter)
+            HookshotData.get(shooter).setLinkedHook(this);
     }
 
     @Override
@@ -54,26 +73,55 @@ public class WireHookEntity extends Projectile {
         if (!(getOwner() instanceof Player player))
             return;
 
+        var slack = distanceTo(player);
+        if (slack > getMaxRange()) {
+            if (slack > getMaxRange() * 2) {
+                discard();
+                player.playNotifySound(PastelSounds.SHATTER_LIGHT, SoundSource.PLAYERS, 0.75F, 1);
+                return;
+            }
+
+            if (!isHooked() && !hasRecalled())
+                recall();
+        }
+
         if (isHooked()) {
-            updateEquilibrium(player);
+            updateEquilibrium(player, slack);
             springMove(player);
         }
         else {
             setOldPosAndRot();
+            updateRotation();
             moveTo(position().add(getDeltaMovement()));
         }
 
         if (hasRecalled()) {
-            var distance = distanceTo(player);
-
-            if (distance < 1.75) {
+            if (slack < 1.75) {
                 remove(RemovalReason.DISCARDED);
                 return;
             }
 
             var returnVector = player.position().subtract(position()).normalize();
-            setDeltaMovement(returnVector.scale(Math.min(Math.pow(distance / 3, 1.5), 4) + 0.5));
+            setDeltaMovement(returnVector.scale(Math.min(Math.pow(slack / 3, 1.5), 4) + 0.5));
         }
+    }
+
+    private static int getMaxRange() {
+        return PastelCommon.CONFIG.WireHookRange;
+    }
+
+    private boolean nearLowerLimit(LivingEntity owner, float slack) {
+        if (getMaxRange() - slack < 2)
+            return false;
+
+        if (owner.getY() > getY() - 2)
+            return false;
+
+        return owner.onGround() || owner.isSwimming();
+    }
+
+    private boolean nearUpperLimit(LivingEntity owner, float slack) {
+        return slack < getMaxRange() / 40F + owner.getBbHeight();
     }
 
     private void updateHookStatus() {
@@ -84,7 +132,7 @@ public class WireHookEntity extends Projectile {
                 playSound(PastelSounds.METAL_HIT);
 
                 if (getOwner() != null)
-                    neutral = getOwner().distanceTo(this) * 0.5F;
+                    neutral = getOwner().distanceTo(this) * 0.675F;
             }
             else {
                 playSound(PastelSounds.METAL_TAP);
@@ -92,41 +140,54 @@ public class WireHookEntity extends Projectile {
         }
     }
 
-    private void updateEquilibrium(Player player) {
+    private void updateEquilibrium(Player player, float slack) {
         if (player.isShiftKeyDown() && player.jumping) {
             return;
         }
 
-        if (player.isShiftKeyDown()) {
-            neutral += 0.2F;
+        if (player.isShiftKeyDown() && !nearLowerLimit(player, slack)) {
+            neutral += chainSpeed();
         }
-        else if(player.jumping) {
-            neutral -= 0.2F;
+        else if(player.jumping && !nearUpperLimit(player, slack)) {
+            neutral -= chainSpeed();
         }
     }
 
+    private static float chainSpeed() {
+        return 0.225F;
+    }
+
     private void springMove(Player player) {
-        var displacement = position().subtract(player.position()).multiply(1.5, 1, 1.5);
+        var displacement = springDisplacement(player);
 
-        if (displacement.y < 0)
-            displacement = displacement.multiply(1, 0, 1);
-
-        var rebound = STIFFNESS * (displacement.length() * 0.8F - neutral);
+        var rebound = reboundStrength(displacement);
         var stabilization = 1 - Math.min(Math.abs(rebound), 1);
 
         var offset = player.position().multiply(1, 0, 1)
                            .distanceTo(position().multiply(1, 0, 1)) / 1.5;
 
         stabilization *= 1 - Math.clamp(offset, 0, 1);
-
         var vel = player.getDeltaMovement().multiply(1, 0, 1).length() * 4;
 
         stabilization *= 1 - Math.clamp(vel, 0, 1);
-
         rebound = Math.clamp(rebound * 4, 0, player.getGravity() * 2);
-        player.addDeltaMovement(player.getDeltaMovement().multiply(0, stabilization * -0.4, 0));
+        lastRebound = rebound * (1 - stabilization);
 
+        player.addDeltaMovement(player.getDeltaMovement().multiply(0, stabilization * -0.3, 0));
         player.addDeltaMovement(displacement.normalize().scale(rebound));
+        player.resetFallDistance();
+    }
+
+    private double reboundStrength(Vec3 displacement) {
+        return STIFFNESS * (displacement.length() * 0.8F - neutral);
+    }
+
+    private @NotNull Vec3 springDisplacement(Player player) {
+        var displacement = position().subtract(player.position()).multiply(1.5, 1, 1.5);
+
+        if (displacement.y < 0)
+            displacement = displacement.multiply(1, 0, 1);
+        return displacement;
     }
 
     private void processCollision() {
@@ -144,6 +205,7 @@ public class WireHookEntity extends Projectile {
             return;
 
         setDeltaMovement(0, 0, 0);
+        moveTo(result.getLocation());
         entityData.set(HOOKED, true);
 
         super.onHitBlock(result);
@@ -154,16 +216,12 @@ public class WireHookEntity extends Projectile {
         return 0;
     }
 
-    @Override
-    public boolean canBeCollidedWith() {
-        return isHooked();
-    }
-
     private boolean ensureUniqueness() {
         if (level().isClientSide())
             return true;
 
         var player = (Player) getOwner();
+        assert player!=null;
         var data = HookshotData.get(player);
         if (data.getLinkedHook().map(id -> !id.equals(getUUID())).orElse(true)) {
             discard();
@@ -183,6 +241,40 @@ public class WireHookEntity extends Projectile {
     public void recall() {
         entityData.set(RECALLED, true);
         entityData.set(HOOKED, false);
+
+        if (getOwner() instanceof Player player) {
+            if (!player.level().isClientSide()) {
+                var data = MiscPlayerData.get(player);
+                data.initiateLungeState(PastelItems.WIRE_HOOK.get());
+                data.sync();
+            }
+
+            if (grabbed)
+                lunge(player);
+        }
+    }
+
+    public void lunge(Player owner) {
+        // No lunging without forward input
+        if (Math.abs(owner.zza) < 0.5F)
+            return;
+
+        var dir = owner.getDeltaMovement().normalize();
+        var motion = Math.clamp(owner.getDeltaMovement().length() * 1.334, 0.325, 2.25);
+
+        if (owner.getY() > getY() || (owner.getGravity() > 0 && dir.y() < 0))
+            dir = dir.multiply(1, 0, 1);
+
+        if (owner.jumping) {
+            dir = dir.add(0, 0.5, 0);
+        }
+        else {
+            dir = dir.add(0, 0.1, 0);
+        }
+
+        dir = dir.multiply(1, lastRebound + 1, 1);
+
+        owner.addDeltaMovement(dir.scale(motion));
     }
 
     @Override
@@ -197,7 +289,8 @@ public class WireHookEntity extends Projectile {
         compound.putBoolean("hooked", entityData.get(HOOKED));
         compound.putBoolean("propelled", entityData.get(RECALLED));
         compound.putFloat("neutral", neutral);
-        compound.getBoolean("grabbed");
+        compound.putBoolean("grabbed", grabbed);
+        compound.putDouble("lastRebound", lastRebound);
     }
 
     @Override
@@ -207,5 +300,6 @@ public class WireHookEntity extends Projectile {
         entityData.set(RECALLED, compound.getBoolean("propelled"));
         neutral = compound.getFloat("neutral");
         grabbed = compound.getBoolean("grabbed");
+        lastRebound = compound.getDouble("lastRebound");
     }
 }

@@ -1,9 +1,11 @@
 package earth.terrarium.pastel.events;
 
+import earth.terrarium.pastel.attachments.data.HookshotData;
 import earth.terrarium.pastel.attachments.data.InertiaData;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.util.Mth;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -14,7 +16,15 @@ public class PastelEquipmentEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, PastelEquipmentEvents::processRazingMod);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, PastelEquipmentEvents::processInertiaMod);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEquipmentEvents::processInexorable);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelEquipmentEvents::hookshotAntiAirSlowdown);
+    }
 
+    private static void hookshotAntiAirSlowdown(PlayerEvent.BreakSpeed event) {
+        var player = event.getEntity();
+        var speed = event.getNewSpeed();
+        if (!player.onGround() && HookshotData.get(player).isAlreadyHooked()
+            && speed <= event.getOriginalSpeed() + Mth.EPSILON)
+            event.setNewSpeed(event.getNewSpeed() * 5);
     }
 
     private static void processRazingMod(PlayerEvent.BreakSpeed event) {
