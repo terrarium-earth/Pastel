@@ -10,6 +10,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.entity.TouchingWaterAware;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
+import earth.terrarium.pastel.attachments.data.HookshotData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.components.PairedFoodComponent;
@@ -27,10 +28,12 @@ import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.status_effects.EffectProlongingStatusEffect;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -155,7 +158,7 @@ public abstract class LivingEntityMixin {
                                                                  .getEnergyStorage(optionalTrinket.get());
                 var storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
                 friction = (float) Math.max(
-                    friction, 0.91 + (((RingOfAerialGraceItem) PastelItems.RING_OF_AERIAL_GRACE.get()).getBonus(
+                    friction, f.get() + (((RingOfAerialGraceItem) PastelItems.RING_OF_AERIAL_GRACE.get()).getBonus(
                         storedInk) / 150F)
                 );
                 override = true;
@@ -167,10 +170,9 @@ public abstract class LivingEntityMixin {
                 friction += MiscPlayerData.get(player)
                                           .getFrictionModifiers();
             } else {
-                f.set(Math.min(
+                friction = Math.min(
                     f.get() + MiscPlayerData.get(player)
-                                            .getFrictionModifiers(), 0.99F
-                ));
+                                            .getFrictionModifiers(), 0.99F);
             }
         }
 
@@ -243,6 +245,33 @@ public abstract class LivingEntityMixin {
         }
     }
 
+    @ModifyReturnValue(method = "onClimbable", at = @At("RETURN"))
+    private boolean hookshotClimb(boolean original) {
+        if (original)
+            return true;
+
+        if (((Object) this) instanceof Player player) {
+            var hookData = HookshotData.get(player);
+            var hook = hookData.getHookEntity(player.level());
+
+            if (hook == null)
+                return original;
+
+            var yDif = Math.abs(hook.getY() - player.getEyeY());
+            if (yDif > 3 + Mth.EPSILON)
+                return false;
+
+            for (Direction dir : Direction.values()) {
+                if (dir.getAxis()
+                       .isVertical())
+                    continue;
+
+                return player.horizontalCollision;
+            }
+        }
+
+        return false;
+    }
 
     @Inject(
         method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;" +

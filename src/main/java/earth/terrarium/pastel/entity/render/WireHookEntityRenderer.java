@@ -14,9 +14,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 
-public class WireHoikEntityRenderer extends EntityRenderer<WireHookEntity> {
+public class WireHookEntityRenderer extends EntityRenderer<WireHookEntity> {
 
-    public WireHoikEntityRenderer(EntityRendererProvider.Context context) {
+    public WireHookEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
 

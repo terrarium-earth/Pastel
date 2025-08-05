@@ -22,7 +22,7 @@ public class PastelEntityRenderers {
         register(PastelEntityTypes.GLOW_PHANTOM_FRAME.get(), PhantomFrameEntityRenderer::new);
         register(PastelEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), ThrownItemRenderer::new);
         register(PastelEntityTypes.INK_PROJECTILE.get(), MagicProjectileEntityRenderer::new);
-        register(PastelEntityTypes.WIRE_HOOK.get(), WireHoikEntityRenderer::new);
+        register(PastelEntityTypes.WIRE_HOOK.get(), WireHookEntityRenderer::new);
         register(PastelEntityTypes.LAGOON_FISHING_BOBBER.get(), LagoonFishingBobberEntityRenderer::new);
         register(PastelEntityTypes.MOLTEN_FISHING_BOBBER.get(), MoltenFishingBobberEntityRenderer::new);
         register(PastelEntityTypes.BEDROCK_FISHING_BOBBER.get(), BedrockFishingBobberEntityRenderer::new);

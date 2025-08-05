@@ -160,12 +160,20 @@ public class PastelConfig implements ConfigData {
         "If > 0 the Disarming Enchantment is able to remove armor and hand tools from a hit player. Should be a far " +
         "smaller chance than for mobs")
     public float DisarmingChancePerLevelPlayers = 0.001F;
+
     @Comment("The duration a glow ink sac gives night vision when wearing a glow vision helmet in seconds")
     public int GlowVisionGogglesDuration = 120;
+
     @Comment(
         "If the Omni Accelerator should be able to have interactions in PvP that can drain the targets XP, modify " +
         "their equipment, ... (configured via the requires_omni_accelerator_pvp_enabled item tag)")
     public boolean OmniAcceleratorPvP = false;
+
+    @Comment(
+        "The base range of the wire hook" +
+        "Enchantments apply to this as a multiplier"
+    )
+    public int WireHookRange = 32;
 
     public int GemstoneArmorHelmetProtection = 3;
     public int GemstoneArmorChestplateProtection = 7;
