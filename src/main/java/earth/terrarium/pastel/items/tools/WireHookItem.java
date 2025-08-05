@@ -43,6 +43,7 @@ public class WireHookItem extends Item implements HasColorGradient {
         else {
             if (!level.isClientSide()) {
                 var hook = new WireHookEntity(player, stack, level);
+                var vel = 2 + hook.hookshotLevel(Enchantments.EFFICIENCY) / 4F;
                 hook.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 2, 0);
                 level.addFreshEntity(hook);
             }

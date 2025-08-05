@@ -15,6 +15,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -111,7 +112,9 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
             }
 
             var returnVector = player.position().subtract(position()).normalize();
-            setDeltaMovement(returnVector.scale(Math.min(Math.pow(slack / 3, 1.5), 4) + 0.5));
+            var eff = hookshotLevel(Enchantments.EFFICIENCY);
+            setDeltaMovement(returnVector.scale(Math.min(Math.pow(slack / 3, 1.5), 4 + eff / 2F)
+                    + eff / 8F + 0.5));
         }
     }
 
@@ -120,7 +123,7 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
         return PastelCommon.CONFIG.WireHookRange * (sniping + 1);
     }
 
-    private int hookshotLevel(ResourceKey<Enchantment> ench) {
+    public int hookshotLevel(ResourceKey<Enchantment> ench) {
         return Ench.getLevel(registryAccess(), ench, entityData.get(HOOKSHOT));
     }
 
@@ -169,7 +172,7 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
 
     private float chainSpeed() {
         var eff = hookshotLevel(Enchantments.EFFICIENCY);
-        return 0.225F + 0.055F * eff;
+        return 0.225F + 0.05F * eff;
     }
 
     @Override
