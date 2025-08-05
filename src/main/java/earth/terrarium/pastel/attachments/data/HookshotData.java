@@ -73,7 +73,9 @@ public class HookshotData {
     }
 
     public float getFrictionModifier() {
-        return linkedHook.isPresent() ? 0.03F : 0F;
+        if (getHookEntity(holder.level()) instanceof FrictionProvider fp)
+            return fp.getFrictionMod();
+        return 0F;
     }
 
     public static HookshotData get(@NotNull Player player) {
@@ -82,5 +84,9 @@ public class HookshotData {
             data.holder = player;
 
         return data;
+    }
+
+    public interface FrictionProvider {
+        float getFrictionMod();
     }
 }
