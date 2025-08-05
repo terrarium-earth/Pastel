@@ -26,6 +26,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -99,15 +100,9 @@ public class MiscPlayerData {
     }
 
     private TrailRender lungeTrail;
-    public ColorGradient getLungeGradient() {
-        return new ColorGradient(
-            new Color(181, 255, 254),
-            new Color(149, 182, 255)
-        ).fadeAlpha(1, 0);
-    }
     public TrailRender getLungeTrail() {
         if (lungeTrail == null) {
-            lungeTrail = new TrailRender(player.getBoundingBox().getCenter(), 20, 20, 0.25f, PastelCommon.locate("textures/misc/trail/trail.png"),
+            lungeTrail = new TrailRender(player.getBoundingBox().getCenter(), 10, 10, 0.2f, PastelCommon.locate("textures/misc/trail/trail.png"),
                                     RenderTypeHandler::transparent
             ).setShrink(true);
         }
@@ -155,10 +150,10 @@ public class MiscPlayerData {
         return player.onGround() || player.isSwimming() || player.isFallFlying() || player.getAbilities().flying;
     }
 
-    public void initiateLungeState(Item item) {
+    public void initiateLungeState(ItemLike item) {
         isLunging = true;
         bHopWindow = true;
-        lungeItem = item;
+        lungeItem = item.asItem();
     }
 
     public void endLunge() {
@@ -224,7 +219,12 @@ public class MiscPlayerData {
     }
 
     public float getFrictionModifiers() {
+        var hookData = HookshotData.get(player);
+        if (hookData.getFrictionModifier() > 0)
+            return hookData.getFrictionModifier();
+
         return isLunging ? 0.04F : 0F;
+
     }
 
     private void tickSleep() {
