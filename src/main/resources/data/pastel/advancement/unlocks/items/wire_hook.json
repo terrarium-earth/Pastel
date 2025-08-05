@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "collected_shimmerstone": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:collect_shimmerstone"
+      }
+    },
+    "built_basic_pedestal": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:build_basic_pedestal_structure"
+      }
+    }
+  }
+}

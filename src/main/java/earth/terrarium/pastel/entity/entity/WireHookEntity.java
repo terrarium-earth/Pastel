@@ -4,6 +4,8 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.HookshotData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
+import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.nbt.CompoundTag;
@@ -11,11 +13,15 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -24,7 +30,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 
-public class WireHookEntity extends Projectile {
+public class WireHookEntity extends Projectile implements HookshotData.FrictionProvider {
 
     public static final float STIFFNESS = 0.5F;
 
@@ -32,6 +38,8 @@ public class WireHookEntity extends Projectile {
         WireHookEntity.class, EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Boolean> RECALLED = SynchedEntityData.defineId(
         WireHookEntity.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<ItemStack> HOOKSHOT = SynchedEntityData.defineId(
+            WireHookEntity.class, EntityDataSerializers.ITEM_STACK);
 
     private float neutral = -1F;
     private double lastRebound;
@@ -41,7 +49,7 @@ public class WireHookEntity extends Projectile {
         super(entityType, level);
     }
 
-    public WireHookEntity(Player shooter, Level level) {
+    public WireHookEntity(Player shooter, ItemStack hookshot, Level level) {
         this(PastelEntityTypes.WIRE_HOOK.get(), level);
 
         setPos(shooter.getX(),
@@ -50,6 +58,7 @@ public class WireHookEntity extends Projectile {
         setRot(shooter.getYRot(),
                 shooter.getXRot());
         setOwner(shooter);
+        entityData.set(HOOKSHOT, hookshot.copy());
         HookshotData.get(shooter).setLinkedHook(this);
     }
 
@@ -106,8 +115,13 @@ public class WireHookEntity extends Projectile {
         }
     }
 
-    private static int getMaxRange() {
-        return PastelCommon.CONFIG.WireHookRange;
+    private int getMaxRange() {
+        var sniping = hookshotLevel(PastelEnchantments.SNIPING);
+        return PastelCommon.CONFIG.WireHookRange * (sniping + 1);
+    }
+
+    private int hookshotLevel(ResourceKey<Enchantment> ench) {
+        return Ench.getLevel(registryAccess(), ench, entityData.get(HOOKSHOT));
     }
 
     private boolean nearLowerLimit(LivingEntity owner, float slack) {
@@ -153,8 +167,15 @@ public class WireHookEntity extends Projectile {
         }
     }
 
-    private static float chainSpeed() {
-        return 0.225F;
+    private float chainSpeed() {
+        var eff = hookshotLevel(Enchantments.EFFICIENCY);
+        return 0.225F + 0.055F * eff;
+    }
+
+    @Override
+    public float getFrictionMod() {
+        var feather = hookshotLevel(Enchantments.FEATHER_FALLING);
+        return 0.03F + feather * 0.005F;
     }
 
     private void springMove(Player player) {
@@ -173,13 +194,15 @@ public class WireHookEntity extends Projectile {
         rebound = Math.clamp(rebound * 4, 0, player.getGravity() * 2);
         lastRebound = rebound * (1 - stabilization);
 
-        player.addDeltaMovement(player.getDeltaMovement().multiply(0, stabilization * -0.3, 0));
+        var redux = -0.3 - hookshotLevel(Enchantments.POWER) * 0.05;
+        player.addDeltaMovement(player.getDeltaMovement().multiply(0, stabilization * redux, 0));
         player.addDeltaMovement(displacement.normalize().scale(rebound));
         player.resetFallDistance();
     }
 
     private double reboundStrength(Vec3 displacement) {
-        return STIFFNESS * (displacement.length() * 0.8F - neutral);
+        var stiffness = STIFFNESS + hookshotLevel(Enchantments.POWER) * 0.025F;
+        return stiffness * (displacement.length() * 0.8F - neutral);
     }
 
     private @NotNull Vec3 springDisplacement(Player player) {
@@ -260,7 +283,8 @@ public class WireHookEntity extends Projectile {
             return;
 
         var dir = owner.getDeltaMovement().normalize();
-        var motion = Math.clamp(owner.getDeltaMovement().length() * 1.334, 0.325, 2.25);
+        var mult = 1.2 + hookshotLevel(Enchantments.POWER) * 0.1;
+        var motion = Math.clamp(owner.getDeltaMovement().length() * mult, 0.325, 2.25);
 
         if (owner.getY() > getY() || (owner.getGravity() > 0 && dir.y() < 0))
             dir = dir.multiply(1, 0, 1);
@@ -274,13 +298,14 @@ public class WireHookEntity extends Projectile {
 
         dir = dir.multiply(1, lastRebound + 1, 1);
 
-        owner.addDeltaMovement(dir.scale(motion));
+        owner.addDeltaMovement(dir.multiply(motion, motion / 3, motion));
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(HOOKED, false);
         builder.define(RECALLED, false);
+        builder.define(HOOKSHOT, ItemStack.EMPTY);
     }
 
     @Override
@@ -291,6 +316,7 @@ public class WireHookEntity extends Projectile {
         compound.putFloat("neutral", neutral);
         compound.putBoolean("grabbed", grabbed);
         compound.putDouble("lastRebound", lastRebound);
+        compound.put("hookshot", entityData.get(HOOKSHOT).saveOptional(registryAccess()));
     }
 
     @Override
@@ -298,6 +324,8 @@ public class WireHookEntity extends Projectile {
         super.readAdditionalSaveData(compound);
         entityData.set(HOOKED, compound.getBoolean("hooked"));
         entityData.set(RECALLED, compound.getBoolean("propelled"));
+        ItemStack.parse(registryAccess(), compound.getCompound("hookshot")).ifPresent(
+                s -> entityData.set(HOOKSHOT, s));
         neutral = compound.getFloat("neutral");
         grabbed = compound.getBoolean("grabbed");
         lastRebound = compound.getDouble("lastRebound");
