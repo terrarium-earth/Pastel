@@ -6,7 +6,7 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.Item;
+import earth.terrarium.pastel.items.ItemWithTooltip;
 import net.minecraft.world.item.context.UseOnContext;
 
 import java.util.Optional;
