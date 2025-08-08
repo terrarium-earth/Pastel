@@ -11,10 +11,10 @@ import net.minecraft.world.item.context.UseOnContext;
 
 import java.util.Optional;
 
-public class AshItem extends Item {
+public class AshItem extends ItemWithTooltip {
 
-    public AshItem(Properties settings) {
-        super(settings);
+    public AshItem(Properties settings,  String tooltip) {
+        super(settings, tooltip);
     }
 
     @Override
