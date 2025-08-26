@@ -4303,6 +4303,7 @@
   "item.pastel.artists_palette.tooltip": "§7Stores up to %d§7 of elemental Ink in total",
   "item.pastel.artists_palette.tooltip.mix_on_demand": "§7Mixes other types of Ink on demand",
   "item.pastel.ash_flakes": "Ash Flakes",
+  "item.pastel.ash_flakes.tooltip": "§O it's ash.",
   "item.pastel.ashen_circlet": "Ashen Circlet",
   "item.pastel.ashen_circlet.tooltip": "§7Protects you from Fire Damage and",
   "item.pastel.ashen_circlet.tooltip.cooldown_full": "§2Ready to absorb immense heat",

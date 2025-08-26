@@ -924,7 +924,7 @@ public class PastelItems {
         InkColors.PURPLE
     )));
     public static final DeferredItem<Item> ASH_FLAKES = register(
-        simple(item("ash_flakes", () -> new AshItem(IS.of()), InkColors.LIGHT_GRAY)));
+        simple(item("ash_flakes", () -> new AshItem(IS.of(), "item.pastel.ash_flakes.tooltip"), InkColors.LIGHT_GRAY)));
 
     public static final DeferredItem<Item> HIBERNATING_JADE_VINE_BULB = register(simple(item(
         "hibernating_jade_vine_bulb",

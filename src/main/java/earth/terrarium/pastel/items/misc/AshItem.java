@@ -6,15 +6,15 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.Item;
+import earth.terrarium.pastel.items.ItemWithTooltip;
 import net.minecraft.world.item.context.UseOnContext;
 
 import java.util.Optional;
 
-public class AshItem extends Item {
+public class AshItem extends ItemWithTooltip {
 
-    public AshItem(Properties settings) {
-        super(settings);
+    public AshItem(Properties settings,  String tooltip) {
+        super(settings, tooltip);
     }
 
     @Override
