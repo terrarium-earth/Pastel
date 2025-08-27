@@ -30,7 +30,7 @@ public class PlayerEntityRendererMixin {
     }
 
     @ModifyReturnValue(method = "getArmPose", at = @At(value = "RETURN", ordinal = 1))
-    private static HumanoidModel.ArmPose cumAction(
+    private static HumanoidModel.ArmPose lgsHoldAction(
         HumanoidModel.ArmPose original, @Local ItemStack itemStack,
         @Local(argsOnly = true) AbstractClientPlayer player
     ) {
