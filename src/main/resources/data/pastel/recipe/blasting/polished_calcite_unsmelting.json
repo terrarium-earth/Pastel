@@ -48,6 +48,12 @@
     },
     {
       "item": "pastel:planed_calcite"
+    },
+    {
+      "item": "pastel:planed_calcite_stairs"
+    },
+    {
+      "item": "pastel:planed_calcite_wall"
     }
   ],
   "result": {

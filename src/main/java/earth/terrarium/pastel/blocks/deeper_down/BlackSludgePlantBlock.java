@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
