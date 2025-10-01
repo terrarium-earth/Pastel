@@ -46,7 +46,7 @@ import java.util.Optional;
 @SuppressWarnings("deprecation")
 public class TreasureHunterModifier extends LootModifier {
 
-    private static final Map<Holder<EntityType<?>>, HeadProvider> SPECIAL_CASES = new HashMap();
+    private static final Map<Holder<EntityType<?>>, HeadProvider> SPECIAL_CASES = new HashMap<>();
 
     public static final MapCodec<TreasureHunterModifier> CODEC = RecordCodecBuilder.mapCodec(i ->
                                                                                                  LootModifier.codecStart(

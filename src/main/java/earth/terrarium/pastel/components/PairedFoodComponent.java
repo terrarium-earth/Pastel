@@ -68,16 +68,17 @@ public record PairedFoodComponent(
         ItemStack foundRequiredStack = player.getInventory()
                                              .getItem(requiredSlotStack);
 
+        // trigger the advancement before potentially modifying the stack
+        if (player instanceof ServerPlayer serverPlayer) {
+            PastelCriteria.CONDITIONAL_FOOD_EATEN.trigger(serverPlayer, eatenStack, foundRequiredStack);
+        }
+
         // should the required stack be consumed, too?
         if (consumeAndApplyRequiredStack) {
             FoodProperties component = foundRequiredStack.get(DataComponents.FOOD);
             if (component != null) {
                 player.eat(world, foundRequiredStack, component);
             }
-        }
-
-        if (player instanceof ServerPlayer serverPlayer) {
-            PastelCriteria.CONDITIONAL_FOOD_EATEN.trigger(serverPlayer, eatenStack, foundRequiredStack);
         }
     }
 
