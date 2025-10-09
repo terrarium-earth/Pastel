@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "pastel:polished_amethyst_block",
+    "pastel:polished_citrine_block",
+    "pastel:polished_topaz_block",
+    "pastel:polished_onyx_block",
+    "pastel:polished_moonstone_block"
+  ]
+}
