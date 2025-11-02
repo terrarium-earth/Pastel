@@ -53,24 +53,19 @@ public class TitrationBarrelTappingCriterion
                                                                                                     ));
 
         public boolean matches(ItemStack itemStack, int ingameDaysAge, int ingredientCount) {
-            if (this.ingameDaysAgeRange.isEmpty()) return false;
-            if (this.ingredientCountRange.isEmpty()) return false;
+            if (this.ingameDaysAgeRange.isPresent() && !this.ingameDaysAgeRange.get().matches(ingameDaysAge))
+                return false;
 
-            if (this.ingameDaysAgeRange.get()
-                                       .matches(ingameDaysAge) && this.ingredientCountRange.get()
-                                                                                           .matches(ingredientCount)) {
-                List<ItemPredicate> list = new ObjectArrayList<>(this.tappedItemsPredicate.orElse(List.of()));
-                if (list.isEmpty()) {
-                    return true;
-                } else {
-                    if (!itemStack.isEmpty()) {
-                        list.removeIf((itemPredicate) -> itemPredicate.test(itemStack));
-                    }
-                    return list.isEmpty();
-                }
-            }
+            if (this.ingredientCountRange.isPresent() && !this.ingredientCountRange.get().matches(ingredientCount))
+                return false;
 
-            return false;
+            var list = this.tappedItemsPredicate.orElse(List.of());
+            if (list.isEmpty())
+                return true;
+            if (itemStack.isEmpty())
+                return false;
+
+            return list.stream().allMatch(x -> x.test(itemStack));
         }
     }
 

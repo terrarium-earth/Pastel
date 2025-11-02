@@ -32,6 +32,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.AbstractSkullBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -45,7 +46,7 @@ import java.util.Optional;
 @SuppressWarnings("deprecation")
 public class TreasureHunterModifier extends LootModifier {
 
-    private static final Map<Holder<EntityType<?>>, HeadProvider> SPECIAL_CASES = new HashMap();
+    private static final Map<Holder<EntityType<?>>, HeadProvider> SPECIAL_CASES = new HashMap<>();
 
     public static final MapCodec<TreasureHunterModifier> CODEC = RecordCodecBuilder.mapCodec(i ->
                                                                                                  LootModifier.codecStart(
@@ -215,6 +216,10 @@ public class TreasureHunterModifier extends LootModifier {
                     case CYAN -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.AXOLOTL_CYAN);
                     case BLUE -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.AXOLOTL_BLUE);
                 }
+        );
+
+        SPECIAL_CASES.put(
+            EntityType.ENDER_DRAGON.builtInRegistryHolder(), (entity) -> Blocks.DRAGON_HEAD
         );
 
         SPECIAL_CASES.put(

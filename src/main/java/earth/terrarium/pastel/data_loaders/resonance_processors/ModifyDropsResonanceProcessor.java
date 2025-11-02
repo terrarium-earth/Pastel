@@ -16,10 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
 
@@ -72,7 +69,9 @@ public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
     }
 
     private void modifyDrops(List<ItemStack> droppedStacks) {
-        for (ItemStack stack : droppedStacks) {
+        ListIterator<ItemStack> it = droppedStacks.listIterator();
+        while(it.hasNext()) {
+            ItemStack stack = it.next();
             for (Map.Entry<Ingredient, Item> modifiedDrop : modifiedDrops.entrySet()) {
                 if (modifiedDrop.getKey()
                                 .test(stack)) {
@@ -81,8 +80,7 @@ public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
                                                  .getDefaultInstance();
                     convertedStack.setCount(stack.getCount());
 
-                    droppedStacks.remove(stack);
-                    droppedStacks.add(convertedStack);
+                    it.set(convertedStack);
                     break;
                 }
             }

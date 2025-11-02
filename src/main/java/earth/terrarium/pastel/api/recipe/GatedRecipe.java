@@ -30,15 +30,14 @@ public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	
 	String getRecipeTypeShortID();
 
-	default boolean canPlayerCraft(Player playerEntity) {
-        if (!DatabankUtils.hasAdvancement(playerEntity, typeAdvancementID()))
+	default boolean canPlayerCraft(@Nullable Player playerEntity) {
+        if (playerEntity == null || !DatabankUtils.hasAdvancement(playerEntity, typeAdvancementID()))
             return false;
 
         var advancement = advancementID();
 
         return advancement.map(adv -> DatabankUtils.hasAdvancement(playerEntity, adv))
                           .orElse(true);
-
     }
 	
 	default Component getSingleUnlockToastString() {

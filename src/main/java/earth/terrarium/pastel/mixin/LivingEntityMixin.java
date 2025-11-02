@@ -281,10 +281,10 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(
-        method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;)" +
+        method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/food/FoodProperties;)" +
                  "Lnet/minecraft/world/item/ItemStack;",
         at = @At(value = "HEAD"))
-    private void conditionalFood(Level world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+    private void conditionalFood(Level world, ItemStack stack, FoodProperties foodProperties, CallbackInfoReturnable<ItemStack> cir) {
         PairedFoodComponent component = stack.get(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT);
         if (component != null) {
             component.tryEatFood(world, (LivingEntity) (Object) this, stack);

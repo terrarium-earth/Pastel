@@ -16,7 +16,7 @@
       "trigger": "pastel:loot_function_trigger",
       "conditions": {
         "tags": [
-          "pastel:dragon_head"
+          "pastel:mob_heads/dragon_heads"
         ]
       }
     },
