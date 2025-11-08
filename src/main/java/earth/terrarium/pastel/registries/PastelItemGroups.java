@@ -56,18 +56,22 @@ public class PastelItemGroups {
     }
 
     public static void registerSpawnEggs(BuildCreativeModeTabContentsEvent event) {
-        if (!event.getTabKey()
-                  .equals(CreativeModeTabs.SPAWN_EGGS))
-            return;
+        if (event.getTabKey().equals(CreativeModeTabs.SPAWN_EGGS)) {
+            event.accept(
+                PastelItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.accept(
+                PastelItems.PRESERVATION_TURRET_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.accept(
+                PastelItems.KINDLING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.accept(
+                PastelItems.LIZARD_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.accept(
+                PastelItems.ERASER_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
 
-        event.accept(
-            PastelItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(
-            PastelItems.PRESERVATION_TURRET_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(PastelItems.KINDLING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(PastelItems.LIZARD_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(PastelItems.ERASER_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        event.accept(PastelItems.BUCKET_OF_ERASER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES))
+            event.accept(
+                PastelItems.BUCKET_OF_ERASER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
     }
 
     public static final CreativeModeTab INSTRUMENTS = CreativeModeTab.builder()

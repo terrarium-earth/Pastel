@@ -48,6 +48,12 @@
     },
     {
       "item": "pastel:planed_basalt"
+    },
+    {
+      "item": "pastel:planed_basalt_stairs"
+    },
+    {
+      "item": "pastel:planed_basalt_wall"
     }
   ],
   "result": {
