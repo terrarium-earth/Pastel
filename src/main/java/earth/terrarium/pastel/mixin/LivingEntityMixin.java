@@ -125,12 +125,12 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @ModifyVariable(method = "travel", at = @At(value = "STORE"), ordinal = 0)
-    private boolean noSlowFallingSlowdown(boolean b) {
-        if (!b) {
-            return false;
+    @WrapOperation(method = "travel", at = @At(value = "INVOKE", target="Ljava.Lang.Math;min(DD)D",ordinal = 0))
+    private double noSlowFallingSlowdown(double gravity, double slowdown, Operation<Double> original) {
+        if(InexorableHelper.isArmorActive((LivingEntity) (Object) this)){
+            return gravity;
         }
-        return !InexorableHelper.isArmorActive((LivingEntity) (Object) this);
+        return original.call(gravity,slowdown);
     }
 
     @Inject(method = "travel",
