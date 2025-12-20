@@ -78,8 +78,10 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
         super(PastelBlockEntities.COLOR_PICKER.get(), blockPos, blockState);
         inventory.addListener(i -> {
             setChanged();
-            if (!level.isClientSide())
+            if (!level.isClientSide()) {
                 updateInClientWorld();
+                this.paused = false;
+            }
         });
         this.inkStorage = new TotalCappedInkStorage(STORAGE_AMOUNT, Map.of());
     }
