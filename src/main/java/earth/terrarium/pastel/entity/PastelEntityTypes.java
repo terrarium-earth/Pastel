@@ -216,6 +216,9 @@ public class PastelEntityTypes {
             ERASER.get(), EraserEntity.createEraserAttributes()
                                       .build()
         );
+        event.put(
+            LIVING_MARKER.get(), LivingMarkerEntity.createLivingAttributes()
+                                                        .build());
     }
 
     public static void register(IEventBus pastelBus) {
