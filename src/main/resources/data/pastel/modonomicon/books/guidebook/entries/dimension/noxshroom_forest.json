@@ -22,7 +22,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
-      "use_legacy_rendering": true,
+      "use_legacy_rendering": false,
       "title": "biome.pastel.noxshroom_forest",
       "images": [
         "pastel:textures/gui/guidebook/dd_noxshroom_forest.png"

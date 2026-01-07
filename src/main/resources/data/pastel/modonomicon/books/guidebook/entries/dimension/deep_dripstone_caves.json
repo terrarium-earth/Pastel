@@ -22,7 +22,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
-      "use_legacy_rendering": true,
+      "use_legacy_rendering": false,
       "title": "biome.pastel.deep_dripstone_caves",
       "images": [
         "pastel:textures/gui/guidebook/dd_deep_dripstone_caves.png"

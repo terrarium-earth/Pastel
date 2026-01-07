@@ -21,7 +21,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
-      "use_legacy_rendering": true,
+      "use_legacy_rendering": false,
       "title": "book.pastel.guidebook.forgotten_cities.name",
       "images": [
         "pastel:textures/gui/guidebook/dd_forgotten_city.png"

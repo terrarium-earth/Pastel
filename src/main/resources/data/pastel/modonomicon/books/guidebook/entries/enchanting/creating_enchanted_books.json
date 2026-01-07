@@ -27,7 +27,7 @@
     },
     {
       "type": "modonomicon:image",
-      "use_legacy_rendering": true,
+      "use_legacy_rendering": false,
       "images": [
         "pastel:textures/gui/guidebook/creating_enchanted_books.png"
       ],
