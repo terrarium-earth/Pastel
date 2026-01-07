@@ -176,7 +176,7 @@ public class DreamflayerItem extends SwordItem
                                     AttributeModifier.Operation.ADD_VALUE
                                 ), EquipmentSlotGroup.MAINHAND
                             );
-                        if (entry.modifier()
+                        else if (entry.modifier()
                                  .is(BASE_ATTACK_SPEED_ID))
                             builder.add(
                                 Attributes.ATTACK_SPEED, new AttributeModifier(
