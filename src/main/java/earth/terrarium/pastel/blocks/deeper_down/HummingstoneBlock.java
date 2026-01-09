@@ -210,8 +210,10 @@ public class HummingstoneBlock extends BaseEntityBlock {
         );
 
         if (level instanceof ServerLevel sl)
-            Support.areaCriterion(sl, Support.HH_RANGE, pos, PastelAdvancements.ENTER_DIMENSION, p ->
-                PastelCriteria.CREATE_HUMMINGSTONE_HYMN.trigger(p, sl, pos));
+            Support.areaCriterion(
+                sl, Support.HH_RANGE, pos, PastelAdvancements.Midgame.ENTER_DIMENSION, p ->
+                    PastelCriteria.CREATE_HUMMINGSTONE_HYMN.trigger(p, sl, pos)
+            );
     }
 
     @Nullable

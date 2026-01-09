@@ -175,7 +175,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 				triggerUnenchantedWorkstaffAdvancement(serverPlayerEntity);
 			}
 		} else {
-			var addResult = Ench.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, DatabankUtils.hasAdvancement(player, PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS));
+			var addResult = Ench.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, DatabankUtils.hasAdvancement(player, PastelAdvancements.Milestones.UNLOCK_CONFLICTED_ENCHANTING_WITH_ENCHANTER));
 			if (addResult.getA()) {
 				stack.set(DataComponents.ENCHANTMENTS, addResult.getB().getEnchantments());
 				player.displayClientMessage(message, true);

@@ -536,9 +536,10 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity
 
     public void grantPlayerCinderhearthSmeltingAdvancement(ItemStack input, List<ItemStack> outputs, int experience) {
         Support.areaCriterion(
-            (ServerLevel) level, Support.L_RANGE, getBlockPos(), PastelAdvancements.UNLOCK_CINDERHEARTH, p ->
-            PastelCriteria.CINDERHEARTH_SMELTING.trigger(
-                p, input, outputs, experience, this.upgrades));
+            (ServerLevel) level, Support.L_RANGE, getBlockPos(), PastelAdvancements.Unlocks.Blocks.CINDERHEARTH, p ->
+                PastelCriteria.CINDERHEARTH_SMELTING.trigger(
+                    p, input, outputs, experience, this.upgrades)
+        );
     }
 
     public static void playCraftingFinishedEffects(@NotNull CinderhearthBlockEntity cinderhearthBlockEntity) {

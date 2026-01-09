@@ -8,6 +8,7 @@ import earth.terrarium.pastel.recipe.RecipeScaling;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelResourceConditions;
@@ -38,34 +39,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import static earth.terrarium.pastel.registries.PastelAdvancements.COLLECT_AZURITE;
-import static earth.terrarium.pastel.registries.PastelAdvancements.COLLECT_MALACHITE;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_BIG_CATCH;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_CLOVERS_FAVOR;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_DISARMING;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_EXUBERANCE;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_FIRST_STRIKE;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_IMPROVED_CRITICAL;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_INERTIA;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_RAZING;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_SERENDIPITY_REEL;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_SNIPING;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_TIGHT_GRIP;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_TREASURE_HUNTER;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_BREACHING;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_DAMAGE;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_LUCK;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_PROJECTILE;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_PROTECTION;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_QUITOXIC;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_SWIFT_SNEAK;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_TREASURE;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_TRIAL;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_TRIDENT;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_UNBREAKING;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_WATER;
-import static earth.terrarium.pastel.registries.PastelAdvancements.ENCHANTMENTS_VANILLA_WATER_LUCK;
-import static earth.terrarium.pastel.registries.PastelAdvancements.UNLOCK_BLOODSTONE;
 import static earth.terrarium.pastel.registries.PastelEnchantments.BIG_CATCH;
 import static earth.terrarium.pastel.registries.PastelEnchantments.CLOVERS_FAVOR;
 import static earth.terrarium.pastel.registries.PastelEnchantments.DISARMING;
@@ -364,7 +337,8 @@ public class PastelRecipeProvider extends RecipeProvider {
         );
 
         generateCrystallarieumRecipe(
-            ctx, "pastel/azurite", RAW_AZURITE, null, COLLECT_AZURITE, 300, InkColors.BLUE, 4, false,
+            ctx, "pastel/azurite", RAW_AZURITE, null, PastelAdvancements.Midgame.COLLECT_AZURITE, 300, InkColors.BLUE,
+            4, false,
             List.of(
                 PastelBlocks.SMALL_AZURITE_BUD.get(), PastelBlocks.LARGE_AZURITE_BUD.get(),
                 PastelBlocks.AZURITE_CLUSTER.get()
@@ -394,7 +368,8 @@ public class PastelRecipeProvider extends RecipeProvider {
         );
 
         generateCrystallarieumRecipe(
-            ctx, "pastel/bloodstone", RAW_BLOODSTONE, null, UNLOCK_BLOODSTONE, 300, InkColors.RED, 4, false,
+            ctx, "pastel/bloodstone", RAW_BLOODSTONE, null, PastelAdvancements.Unlocks.Resources.BLOODSTONE, 300,
+            InkColors.RED, 4, false,
             List.of(
                 PastelBlocks.SMALL_BLOODSTONE_BUD.get(), PastelBlocks.LARGE_BLOODSTONE_BUD.get(),
                 PastelBlocks.BLOODSTONE_CLUSTER.get()
@@ -409,7 +384,8 @@ public class PastelRecipeProvider extends RecipeProvider {
         );
 
         generateCrystallarieumRecipe(
-            ctx, "pastel/malachite", RAW_MALACHITE, null, COLLECT_MALACHITE, 300, InkColors.WHITE, 4, false,
+            ctx, "pastel/malachite", RAW_MALACHITE, null, PastelAdvancements.Lategame.COLLECT_MALACHITE, 300,
+            InkColors.WHITE, 4, false,
             List.of(
                 PastelBlocks.SMALL_MALACHITE_BUD.get(), PastelBlocks.LARGE_MALACHITE_BUD.get(),
                 PastelBlocks.MALACHITE_CLUSTER.get()
@@ -427,185 +403,207 @@ public class PastelRecipeProvider extends RecipeProvider {
 
         // Spectrum
         generateEnchantmentUpgradeRecipe(
-            ctx, "", BIG_CATCH, ENCHANTMENTS_BIG_CATCH, LIGHT_BLUE_PIGMENT, 3, RecipeScaling.doubling(400),
+            ctx, "", BIG_CATCH, PastelAdvancements.Unlocks.Enchantments.BIG_CATCH, LIGHT_BLUE_PIGMENT, 3,
+            RecipeScaling.doubling(400),
             RecipeScaling.indices(32, 128)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", CLOVERS_FAVOR, ENCHANTMENTS_CLOVERS_FAVOR, LIGHT_BLUE_PIGMENT, 6,
+            ctx, "", CLOVERS_FAVOR, PastelAdvancements.Unlocks.Enchantments.CLOVERS_FAVOR, LIGHT_BLUE_PIGMENT, 6,
             RecipeScaling.indices(200, 400, 2000, 10000, 40000), RecipeScaling.indices(8, 32, 128, 512, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", DISARMING, ENCHANTMENTS_DISARMING, RED_PIGMENT, 4, RecipeScaling.indices(400, 2000, 10000),
+            ctx, "", DISARMING, PastelAdvancements.Unlocks.Enchantments.DISARMING, RED_PIGMENT, 4,
+            RecipeScaling.indices(400, 2000, 10000),
             RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", EXUBERANCE, ENCHANTMENTS_EXUBERANCE, PURPLE_PIGMENT, 10, RecipeScaling.linear(400, 200, 1.0F),
+            ctx, "", EXUBERANCE, PastelAdvancements.Unlocks.Enchantments.EXUBERANCE, PURPLE_PIGMENT, 10,
+            RecipeScaling.linear(400, 200, 1.0F),
             RecipeScaling.indices(8, 16, 32, 64, 128, 256, 512, 512, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", FIRST_STRIKE, ENCHANTMENTS_FIRST_STRIKE, PINK_PIGMENT, 5,
+            ctx, "", FIRST_STRIKE, PastelAdvancements.Unlocks.Enchantments.FIRST_STRIKE, PINK_PIGMENT, 5,
             RecipeScaling.indices(200, 400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", IMPROVED_CRITICAL, ENCHANTMENTS_IMPROVED_CRITICAL, BLACK_PIGMENT, 4,
+            ctx, "", IMPROVED_CRITICAL, PastelAdvancements.Unlocks.Enchantments.IMPROVED_CRITICAL, BLACK_PIGMENT, 4,
             RecipeScaling.indices(400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", INERTIA, ENCHANTMENTS_INERTIA, BROWN_PIGMENT, 5, RecipeScaling.indices(200, 400, 2000, 10000),
+            ctx, "", INERTIA, PastelAdvancements.Unlocks.Enchantments.INERTIA, BROWN_PIGMENT, 5,
+            RecipeScaling.indices(200, 400, 2000, 10000),
             RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", RAZING, ENCHANTMENTS_RAZING, GRAY_PIGMENT, 5, RecipeScaling.indices(400, 2000, 10000, 10000),
+            ctx, "", RAZING, PastelAdvancements.Unlocks.Enchantments.RAZING_USAGE, GRAY_PIGMENT, 5,
+            RecipeScaling.indices(400, 2000, 10000, 10000),
             RecipeScaling.indices(32, 128, 256, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", SERENDIPITY_REEL, ENCHANTMENTS_SERENDIPITY_REEL, LIGHT_BLUE_PIGMENT, 3,
+            ctx, "", SERENDIPITY_REEL, PastelAdvancements.Unlocks.Enchantments.SERENDIPITY_REEL, LIGHT_BLUE_PIGMENT, 3,
             RecipeScaling.doubling(400), RecipeScaling.indices(32, 128)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", SNIPING, ENCHANTMENTS_SNIPING, GREEN_PIGMENT, 5, RecipeScaling.indices(200, 1000, 5000, 10000),
+            ctx, "", SNIPING, PastelAdvancements.Unlocks.Enchantments.SNIPING, GREEN_PIGMENT, 5,
+            RecipeScaling.indices(200, 1000, 5000, 10000),
             RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", TIGHT_GRIP, ENCHANTMENTS_TIGHT_GRIP, YELLOW_PIGMENT, 4, RecipeScaling.indices(400, 2000, 10000),
+            ctx, "", TIGHT_GRIP, PastelAdvancements.Unlocks.Enchantments.TIGHT_GRIP, YELLOW_PIGMENT, 4,
+            RecipeScaling.indices(400, 2000, 10000),
             RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "", TREASURE_HUNTER, ENCHANTMENTS_TREASURE_HUNTER, LIGHT_BLUE_PIGMENT, 5,
+            ctx, "", TREASURE_HUNTER, PastelAdvancements.Unlocks.Enchantments.TREASURE_HUNTER, LIGHT_BLUE_PIGMENT, 5,
             RecipeScaling.indices(200, 400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F)
         );
 
         // Vanilla
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", BANE_OF_ARTHROPODS, ENCHANTMENTS_VANILLA_DAMAGE, BLACK_PIGMENT, 8,
+            ctx, "minecraft", BANE_OF_ARTHROPODS, PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, BLACK_PIGMENT,
+            8,
             RecipeScaling.doubling(100), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", BLAST_PROTECTION, ENCHANTMENTS_VANILLA_PROTECTION, PINK_PIGMENT, 8,
+            ctx, "minecraft", BLAST_PROTECTION, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROTECTION,
+            PINK_PIGMENT, 8,
             RecipeScaling.doubling(100), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", DEPTH_STRIDER, ENCHANTMENTS_VANILLA_WATER, BLUE_PIGMENT, 3, RecipeScaling.doubling(200),
+            ctx, "minecraft", DEPTH_STRIDER, PastelAdvancements.Unlocks.Enchantments.VANILLA_WATER, BLUE_PIGMENT, 3,
+            RecipeScaling.doubling(200),
             RecipeScaling.indices(8, 32)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", EFFICIENCY, ENCHANTMENTS_VANILLA_QUITOXIC, YELLOW_PIGMENT, 8,
+            ctx, "minecraft", EFFICIENCY, PastelAdvancements.Unlocks.Enchantments.VANILLA_QUITOXIC, YELLOW_PIGMENT, 8,
             RecipeScaling.indices(200, 400, 600, 800, 1600, 2600, 4000), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", FEATHER_FALLING, ENCHANTMENTS_VANILLA_QUITOXIC, BLUE_PIGMENT, 6,
+            ctx, "minecraft", FEATHER_FALLING, PastelAdvancements.Unlocks.Enchantments.VANILLA_QUITOXIC, BLUE_PIGMENT,
+            6,
             RecipeScaling.doubling(250), RecipeScaling.indices(8, 16, 32, 64, 256)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", FIRE_ASPECT, ENCHANTMENTS_VANILLA_DAMAGE, RED_PIGMENT, 4,
+            ctx, "minecraft", FIRE_ASPECT, PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, RED_PIGMENT, 4,
             RecipeScaling.doubling(200, 200, 2.0F), RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", FIRE_PROTECTION, ENCHANTMENTS_VANILLA_PROTECTION, PINK_PIGMENT, 8,
+            ctx, "minecraft", FIRE_PROTECTION, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROTECTION, PINK_PIGMENT,
+            8,
             RecipeScaling.indices(100, 200, 300, 400, 800, 1300, 2000), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", FORTUNE, ENCHANTMENTS_VANILLA_LUCK, LIGHT_BLUE_PIGMENT, 5,
+            ctx, "minecraft", FORTUNE, PastelAdvancements.Unlocks.Enchantments.VANILLA_LUCK, LIGHT_BLUE_PIGMENT, 5,
             RecipeScaling.indices(100, 400, 3000, 10000), RecipeScaling.indices(32, 128, 256, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", FROST_WALKER, ENCHANTMENTS_VANILLA_TREASURE, LIGHT_GRAY_PIGMENT, 4,
+            ctx, "minecraft", FROST_WALKER, PastelAdvancements.Unlocks.Enchantments.VANILLA_TREASURE,
+            LIGHT_GRAY_PIGMENT, 4,
             RecipeScaling.indices(400, 1600, 3200), RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", IMPALING, ENCHANTMENTS_VANILLA_TRIDENT, BROWN_PIGMENT, 8,
+            ctx, "minecraft", IMPALING, PastelAdvancements.Unlocks.Enchantments.VANILLA_TRIDENT, BROWN_PIGMENT, 8,
             RecipeScaling.indices(100, 200, 300, 400, 800, 1300, 2000), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", KNOCKBACK, ENCHANTMENTS_VANILLA_DAMAGE, BLACK_PIGMENT, 5,
+            ctx, "minecraft", KNOCKBACK, PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, BLACK_PIGMENT, 5,
             RecipeScaling.indices(200, 1600, 3200, 6400), RecipeScaling.indices(8, 32, 128, 256)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", LOOTING, ENCHANTMENTS_VANILLA_LUCK, LIGHT_BLUE_PIGMENT, 6,
+            ctx, "minecraft", LOOTING, PastelAdvancements.Unlocks.Enchantments.VANILLA_LUCK, LIGHT_BLUE_PIGMENT, 6,
             RecipeScaling.indices(200, 500, 2400, 10000, 40000), RecipeScaling.indices(8, 32, 128, 512, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", LOYALTY, ENCHANTMENTS_VANILLA_TRIDENT, BROWN_PIGMENT, 4,
+            ctx, "minecraft", LOYALTY, PastelAdvancements.Unlocks.Enchantments.VANILLA_TRIDENT, BROWN_PIGMENT, 4,
             RecipeScaling.doubling(0, 200, 2.0F), RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", LUCK_OF_THE_SEA, ENCHANTMENTS_VANILLA_WATER_LUCK, LIGHT_BLUE_PIGMENT, 5,
+            ctx, "minecraft", LUCK_OF_THE_SEA, PastelAdvancements.Unlocks.Enchantments.VANILLA_WATER_LUCK,
+            LIGHT_BLUE_PIGMENT, 5,
             RecipeScaling.indices(200, 400, 2000, 4000), RecipeScaling.indices(8, 32, 128, 256)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", LURE, ENCHANTMENTS_VANILLA_WATER, BLUE_PIGMENT, 5,
+            ctx, "minecraft", LURE, PastelAdvancements.Unlocks.Enchantments.VANILLA_WATER, BLUE_PIGMENT, 5,
             RecipeScaling.indices(200, 400, 2000, 4000), RecipeScaling.indices(8, 32, 128, 256)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", PIERCING, ENCHANTMENTS_VANILLA_PROJECTILE, RED_PIGMENT, 8,
+            ctx, "minecraft", PIERCING, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROJECTILE, RED_PIGMENT, 8,
             RecipeScaling.indices(100, 200, 300, 400, 800, 1300, 2000), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", POWER, ENCHANTMENTS_VANILLA_PROJECTILE, RED_PIGMENT, 8, RecipeScaling.doubling(200),
+            ctx, "minecraft", POWER, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROJECTILE, RED_PIGMENT, 8,
+            RecipeScaling.doubling(200),
             RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", PROJECTILE_PROTECTION, ENCHANTMENTS_VANILLA_PROTECTION, PINK_PIGMENT, 8,
+            ctx, "minecraft", PROJECTILE_PROTECTION, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROTECTION,
+            PINK_PIGMENT, 8,
             RecipeScaling.indices(100, 200, 300, 400, 800, 1300, 2000), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", PROTECTION, ENCHANTMENTS_VANILLA_PROTECTION, PINK_PIGMENT, 8,
+            ctx, "minecraft", PROTECTION, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROTECTION, PINK_PIGMENT, 8,
             RecipeScaling.indices(200, 400, 600, 800, 1600, 4000, 8000), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", PUNCH, ENCHANTMENTS_VANILLA_PROJECTILE, RED_PIGMENT, 5,
+            ctx, "minecraft", PUNCH, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROJECTILE, RED_PIGMENT, 5,
             RecipeScaling.indices(200, 1600, 3200, 6400), RecipeScaling.indices(8, 32, 128, 256)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", QUICK_CHARGE, ENCHANTMENTS_VANILLA_PROJECTILE, RED_PIGMENT, 5,
+            ctx, "minecraft", QUICK_CHARGE, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROJECTILE, RED_PIGMENT, 5,
             RecipeScaling.indices(200, 1600, 5000, 10000), RecipeScaling.indices(8, 32, 512, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", RESPIRATION, ENCHANTMENTS_VANILLA_WATER, BLUE_PIGMENT, 6,
+            ctx, "minecraft", RESPIRATION, PastelAdvancements.Unlocks.Enchantments.VANILLA_WATER, BLUE_PIGMENT, 6,
             RecipeScaling.indices(100, 200, 1600, 4800, 10000), RecipeScaling.indices(8, 32, 128, 256, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", RIPTIDE, ENCHANTMENTS_VANILLA_TRIDENT, BROWN_PIGMENT, 3,
+            ctx, "minecraft", RIPTIDE, PastelAdvancements.Unlocks.Enchantments.VANILLA_TRIDENT, BROWN_PIGMENT, 3,
             RecipeScaling.indices(200, 2400, 10000), RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", SHARPNESS, ENCHANTMENTS_VANILLA_DAMAGE, BLACK_PIGMENT, 8, RecipeScaling.doubling(75),
+            ctx, "minecraft", SHARPNESS, PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, BLACK_PIGMENT, 8,
+            RecipeScaling.doubling(75),
             RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", SMITE, ENCHANTMENTS_VANILLA_DAMAGE, BLACK_PIGMENT, 8,
+            ctx, "minecraft", SMITE, PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, BLACK_PIGMENT, 8,
             RecipeScaling.indices(100, 200, 300, 400, 800, 1300, 2000), RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", SOUL_SPEED, ENCHANTMENTS_VANILLA_TREASURE, LIGHT_GRAY_PIGMENT, 3,
+            ctx, "minecraft", SOUL_SPEED, PastelAdvancements.Unlocks.Enchantments.VANILLA_TREASURE, LIGHT_GRAY_PIGMENT,
+            3,
             RecipeScaling.indices(200, 2400, 10000), RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", SWEEPING_EDGE, ENCHANTMENTS_VANILLA_DAMAGE, RED_PIGMENT, 7,
+            ctx, "minecraft", SWEEPING_EDGE, PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, RED_PIGMENT, 7,
             RecipeScaling.indices(100, 400, 1000, 2000, 5000, 10000), RecipeScaling.indices(8, 32, 64, 128, 256, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", SWIFT_SNEAK, ENCHANTMENTS_VANILLA_SWIFT_SNEAK, LIGHT_BLUE_PIGMENT, 5,
+            ctx, "minecraft", SWIFT_SNEAK, PastelAdvancements.Unlocks.Enchantments.VANILLA_SWIFT_SNEAK,
+            LIGHT_BLUE_PIGMENT, 5,
             RecipeScaling.indices(200, 600, 2000, 5000), RecipeScaling.indices(8, 32, 128, 256)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", THORNS, ENCHANTMENTS_VANILLA_PROTECTION, PINK_PIGMENT, 6,
+            ctx, "minecraft", THORNS, PastelAdvancements.Unlocks.Enchantments.VANILLA_PROTECTION, PINK_PIGMENT, 6,
             RecipeScaling.indices(100, 400, 2000, 4000, 10000), RecipeScaling.indices(8, 32, 128, 256, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", UNBREAKING, ENCHANTMENTS_VANILLA_UNBREAKING, CYAN_PIGMENT, 6,
+            ctx, "minecraft", UNBREAKING, PastelAdvancements.Unlocks.Enchantments.VANILLA_UNBREAKING, CYAN_PIGMENT, 6,
             RecipeScaling.indices(100, 400, 2000, 4000, 10000), RecipeScaling.indices(8, 32, 256, 512, 512)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", WIND_BURST, ENCHANTMENTS_VANILLA_DAMAGE, YELLOW_PIGMENT, 5, RecipeScaling.doubling(200),
+            ctx, "minecraft", WIND_BURST, PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, YELLOW_PIGMENT, 5,
+            RecipeScaling.doubling(200),
             RecipeScaling.doubling(16)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", BREACH, ENCHANTMENTS_VANILLA_BREACHING, RED_PIGMENT, 5, RecipeScaling.doubling(200),
+            ctx, "minecraft", BREACH, PastelAdvancements.Unlocks.Enchantments.VANILLA_TRIAL_BREACHING, RED_PIGMENT, 5,
+            RecipeScaling.doubling(200),
             RecipeScaling.doubling(8)
         );
         generateEnchantmentUpgradeRecipe(
-            ctx, "minecraft", DENSITY, ENCHANTMENTS_VANILLA_TRIAL, CYAN_PIGMENT, 8, RecipeScaling.doubling(400),
+            ctx, "minecraft", DENSITY, PastelAdvancements.Unlocks.Enchantments.VANILLA_TRIAL, CYAN_PIGMENT, 8,
+            RecipeScaling.doubling(400),
             RecipeScaling.doubling(16)
         );
 

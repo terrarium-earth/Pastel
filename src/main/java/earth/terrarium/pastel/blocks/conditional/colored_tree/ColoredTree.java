@@ -18,14 +18,14 @@ public interface ColoredTree {
 
     static ResourceLocation getTreeCloakAdvancementIdentifier(TreePart treePart, InkColor color) {
         if (color == InkColors.WHITE || color == InkColors.LIGHT_GRAY || color == InkColors.GRAY) {
-            return PastelAdvancements.REVEAL_COLORED_TREES_WHITE;
+            return PastelAdvancements.Milestones.REVEAL_COLORED_TREES_W;
         }
         if (color == InkColors.BLACK || color == InkColors.BROWN) {
-            return PastelAdvancements.REVEAL_COLORED_TREES_BLACK;
+            return PastelAdvancements.Milestones.REVEAL_COLORED_TREES_K;
         }
 
-        return treePart == TreePart.SAPLING ? PastelAdvancements.REVEAL_COLORED_SAPLINGS_CMY
-                                            : PastelAdvancements.REVEAL_COLORED_TREES_CMY;
+        return treePart == TreePart.SAPLING ? PastelAdvancements.Milestones.REVEAL_COLORED_SAPLINGS_CMY
+                                            : PastelAdvancements.Milestones.REVEAL_COLORED_TREES_CMY;
     }
 
     InkColor getColor();

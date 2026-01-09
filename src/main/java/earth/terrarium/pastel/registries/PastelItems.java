@@ -265,17 +265,30 @@ public class PastelItems {
     )));
 
     // Gem shards and powders
-    public static final DeferredItem<Item> TOPAZ_SHARD = register(simple(item("topaz_shard", () -> new Item(IS.of()), InkColors.CYAN)));
-    public static final DeferredItem<Item> CITRINE_SHARD = register(simple(item("citrine_shard", () -> new Item(IS.of()), InkColors.YELLOW)));
-    public static final DeferredItem<Item> ONYX_SHARD = register(simple(item("onyx_shard", () -> new Item(IS.of()), InkColors.BLACK)));
-    public static final DeferredItem<Item> MOONSTONE_SHARD = register(simple(item("moonstone_shard", () -> new Item(IS.of()), InkColors.WHITE)));
-    public static final DeferredItem<Item> SPECTRAL_SHARD = register(simple(item("spectral_shard", () -> new Item(IS.of(Rarity.RARE)), InkColors.WHITE)));
+    public static final DeferredItem<Item> TOPAZ_SHARD = register(
+        simple(item("topaz_shard", () -> new Item(IS.of()), InkColors.CYAN)));
+    public static final DeferredItem<Item> CITRINE_SHARD = register(
+        simple(item("citrine_shard", () -> new Item(IS.of()), InkColors.YELLOW)));
+    public static final DeferredItem<Item> ONYX_SHARD = register(
+        simple(item("onyx_shard", () -> new Item(IS.of()), InkColors.BLACK)));
+    public static final DeferredItem<Item> MOONSTONE_SHARD = register(
+        simple(item("moonstone_shard", () -> new Item(IS.of()), InkColors.WHITE)));
+    public static final DeferredItem<Item> SPECTRAL_SHARD = register(
+        simple(item("spectral_shard", () -> new Item(IS.of(Rarity.RARE)), InkColors.WHITE)));
 
-    public static final DeferredItem<Item> TOPAZ_POWDER = register(simple(item("topaz_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.CYAN), InkColors.CYAN)));
-    public static final DeferredItem<Item> AMETHYST_POWDER = register(simple(item("amethyst_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.MAGENTA), InkColors.MAGENTA)));
-    public static final DeferredItem<Item> CITRINE_POWDER = register(simple(item("citrine_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.YELLOW), InkColors.YELLOW)));
-    public static final DeferredItem<Item> ONYX_POWDER = register(simple(item("onyx_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.BLACK), InkColors.BLACK)));
-    public static final DeferredItem<Item> MOONSTONE_POWDER = register(simple(item("moonstone_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.WHITE), InkColors.WHITE)));
+    public static final DeferredItem<Item> TOPAZ_POWDER = register(
+        simple(item("topaz_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.CYAN), InkColors.CYAN)));
+    public static final DeferredItem<Item> AMETHYST_POWDER = register(simple(
+        item(
+            "amethyst_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.MAGENTA),
+            InkColors.MAGENTA
+        )));
+    public static final DeferredItem<Item> CITRINE_POWDER = register(simple(
+        item("citrine_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.YELLOW), InkColors.YELLOW)));
+    public static final DeferredItem<Item> ONYX_POWDER = register(
+        simple(item("onyx_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.BLACK), InkColors.BLACK)));
+    public static final DeferredItem<Item> MOONSTONE_POWDER = register(simple(
+        item("moonstone_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.WHITE), InkColors.WHITE)));
 
     // Pigment
     public static final DeferredItem<Item> WHITE_PIGMENT = register(
@@ -610,17 +623,21 @@ public class PastelItems {
     public static final DeferredItem<LightGreatswordItem> KNOTTED_SWORD = register(item(
         "knotted_sword", () -> new LightGreatswordItem(
             PastelToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff,
-            new ColorGradient(new Color(139, 255, 213), new Color(0, 178, 183)).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f), IS.of(1, Rarity.UNCOMMON)
-                                                                                   .durability(
-                                                                                   PastelToolMaterial.VERDIGRIS.getUses())
+            new ColorGradient(new Color(139, 255, 213), new Color(0, 178, 183)).fadeAlpha(1, 0)
+                                                                               .fadeAlpha(0, 0, 1, 0.05f),
+            IS.of(1, Rarity.UNCOMMON)
+              .durability(
+                  PastelToolMaterial.VERDIGRIS.getUses())
         ), InkColors.GREEN
     ));
     public static final DeferredItem<NectarLanceItem> NECTAR_LANCE = register(item(
         "nectar_lance", () -> new NectarLanceItem(
             PastelToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff,
-            new ColorGradient(new Color(246, 192, 255), new Color(155, 0, 204)).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f), IS.of(1, Rarity.EPIC)
-                                                                                                   .durability(
-                                                                               PastelToolMaterial.NECTAR.getUses())
+            new ColorGradient(new Color(246, 192, 255), new Color(155, 0, 204)).fadeAlpha(1, 0)
+                                                                               .fadeAlpha(0, 0, 1, 0.05f),
+            IS.of(1, Rarity.EPIC)
+              .durability(
+                  PastelToolMaterial.NECTAR.getUses())
         ), InkColors.PURPLE
     ));
 
@@ -1675,19 +1692,20 @@ public class PastelItems {
         simple(item("take_off_belt", () -> new TakeOffBeltItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW)));
     public static final DeferredItem<Item> AZURE_DIKE_BELT = register(simple(item(
         "azure_dike_belt", () -> new AzureDikeBeltItem(
-            IS.of(1, Rarity.UNCOMMON), PastelAdvancements.UNLOCK_AZURE_DIKE_BELT), InkColors.BLUE
+            IS.of(1, Rarity.UNCOMMON), PastelAdvancements.Unlocks.Trinkets.AZURE_DIKE_BELT), InkColors.BLUE
     )));
     public static final DeferredItem<Item> AZURE_DIKE_RING = register(simple(item(
         "azure_dike_ring", () -> new AzureDikeRingItem(
-            IS.of(1, Rarity.UNCOMMON), PastelAdvancements.UNLOCK_AZURE_DIKE_RING), InkColors.BLUE
+            IS.of(1, Rarity.UNCOMMON), PastelAdvancements.Unlocks.Trinkets.AZURE_DIKE_RING), InkColors.BLUE
     )));
     public static final DeferredItem<Item> AZURESQUE_DIKE_CORE = register(simple(item(
         "azuresque_dike_core", () -> new AzureDikeCoreItem(
-            IS.of(1, Rarity.EPIC), PastelAdvancements.UNLOCK_AZURESQUE_DIKE_CORE), InkColors.WHITE
+            IS.of(1, Rarity.EPIC), PastelAdvancements.Unlocks.Trinkets.AZURESQUE_DIKE_CORE), InkColors.WHITE
     )));
     public static final DeferredItem<InkDrainTrinketItem> SHIELDGRASP_AMULET = register(simple(item(
         "shieldgrasp_amulet",
-        () -> new AzureDikeAmuletItem(IS.of(1, Rarity.UNCOMMON), PastelAdvancements.UNLOCK_SHIELDGRASP_AMULET),
+        () -> new AzureDikeAmuletItem(
+            IS.of(1, Rarity.UNCOMMON), PastelAdvancements.Unlocks.Trinkets.SHIELDGRASP_AMULET),
         InkColors.BLUE
     )));
     public static final DeferredItem<InkDrainTrinketItem> HEARTSINGERS_REWARD = register(
@@ -1706,7 +1724,7 @@ public class PastelItems {
     // Ink storage
     public static final DeferredItem<InkFlaskItem> INK_FLASK = register(
         item("ink_flask", () -> new InkFlaskItem(IS.of(1), 64 * 64 * 100), InkColors.WHITE));
-        // 64 stacks of pigments (1 pigment => 100 energy)
+    // 64 stacks of pigments (1 pigment => 100 energy)
     public static final DeferredItem<InkAssortmentItem> INK_ASSORTMENT = register(
         simple(item("ink_assortment", () -> new InkAssortmentItem(IS.of(1), 64 * 100), InkColors.WHITE)));
     public static final DeferredItem<PigmentPaletteItem> PIGMENT_PALETTE = register(simple(item(
@@ -1726,7 +1744,7 @@ public class PastelItems {
         item(
             "lesser_potion_pendant", () -> new PotionPendantItem(
                 IS.of(1, Rarity.UNCOMMON), 1, CONFIG.MaxLevelForEffectsInLesserPotionPendant - 1,
-                PastelAdvancements.UNLOCK_LESSER_POTION_PENDANT
+                PastelAdvancements.Unlocks.Trinkets.LESSER_POTION_PENDANT
             ), InkColors.PINK
         ), "_base", "_overlay"
     ));
@@ -1734,7 +1752,7 @@ public class PastelItems {
         item(
             "greater_potion_pendant", () -> new PotionPendantItem(
                 IS.of(1, Rarity.UNCOMMON), 3, CONFIG.MaxLevelForEffectsInGreaterPotionPendant - 1,
-                PastelAdvancements.UNLOCK_GREATER_POTION_PENDANT
+                PastelAdvancements.Unlocks.Trinkets.GREATER_POTION_PENDANT
             ), InkColors.PINK
         ), "_base", "_overlay_1", "_overlay_2", "_overlay_3"
     ));
@@ -1746,7 +1764,7 @@ public class PastelItems {
         simple(item("weeping_circlet", () -> new WeepingCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE)));
     public static final DeferredItem<Item> PUFF_CIRCLET = register(simple(item(
         "puff_circlet", () -> new PuffCircletItem(
-            IS.of(1, Rarity.UNCOMMON), PastelAdvancements.UNLOCK_PUFF_CIRCLET), InkColors.WHITE
+            IS.of(1, Rarity.UNCOMMON), PastelAdvancements.Unlocks.Trinkets.PUFF_CIRCLET), InkColors.WHITE
     )));
     public static final DeferredItem<Item> WHISPY_CIRCLET = register(
         simple(item("whispy_circlet", () -> new WhispyCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BROWN)));
@@ -1757,7 +1775,7 @@ public class PastelItems {
 
     public static final DeferredItem<Item> AETHER_GRACED_NECTAR_GLOVES = register(simple(item(
         "aether_graced_nectar_gloves", () -> new AetherGracedNectarGlovesItem(
-            IS.of(1, Rarity.EPIC), PastelAdvancements.UNLOCK_AETHER_GRACED_NECTAR_GLOVES), InkColors.PURPLE
+            IS.of(1, Rarity.EPIC), PastelAdvancements.Lategame.COLLECT_AETHER_GRACED_NECTAR_GLOVES), InkColors.PURPLE
     )));
 
     // Pure Clusters
