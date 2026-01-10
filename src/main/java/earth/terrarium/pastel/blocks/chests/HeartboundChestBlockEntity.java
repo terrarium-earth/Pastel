@@ -19,6 +19,8 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.scores.PlayerTeam;
+import net.minecraft.world.scores.Team;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,7 +51,9 @@ public class HeartboundChestBlockEntity extends PastelChestBlockEntity
 
     @Override
     protected void onInvOpenOrClose(
-        Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        Level world, BlockPos pos, BlockState state, int oldViewerCount,
+        int newViewerCount
+    ) {
         super.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
 
         if (oldViewerCount != newViewerCount) {
@@ -58,8 +62,7 @@ public class HeartboundChestBlockEntity extends PastelChestBlockEntity
     }
 
     public void updateRedstone(BlockPos pos, BlockState state) {
-        if (level == null)
-            return;
+        if (level == null) return;
 
         level.updateNeighborsAt(pos, state.getBlock());
         level.updateNeighborsAt(pos.below(), state.getBlock());
@@ -92,8 +95,7 @@ public class HeartboundChestBlockEntity extends PastelChestBlockEntity
     @Override
     public void onScheduledTick() {
         super.onScheduledTick();
-        if (level != null)
-            this.updateRedstone(this.getBlockPos(), level.getBlockState(worldPosition));
+        if (level != null) this.updateRedstone(this.getBlockPos(), level.getBlockState(worldPosition));
     }
 
     @Override
@@ -154,7 +156,9 @@ public class HeartboundChestBlockEntity extends PastelChestBlockEntity
     public boolean canOpen(Player player) {
         boolean isOwner = this.getOwnerUUID()
                               .equals(player.getUUID());
-
+        PlayerTeam team = player.getTeam(); // todo: replace with our own teams feature when it exists
+        if (!isOwner && team != null) isOwner = team.getPlayers()
+                                                    .contains(this.ownerName);
         if (!isOwner && this.getLevel() != null) {
             this.lastNonOwnerOpenedTick = this.getLevel()
                                               .getGameTime();
