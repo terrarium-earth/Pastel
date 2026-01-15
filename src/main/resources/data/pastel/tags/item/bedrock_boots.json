@@ -1,0 +1,9 @@
+{
+  "values": [
+    "pastel:bedrock_boots",
+    {
+      "id": "magic_of_color:bedrock_warlock_greaves",
+      "required": false
+    }
+  ]
+}

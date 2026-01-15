@@ -23,22 +23,22 @@
               "equipment": {
                 "head": {
                   "items": [
-                    "pastel:bedrock_helmet"
+                    "#pastel:bedrock_helmets"
                   ]
                 },
                 "chest": {
                   "items": [
-                    "pastel:bedrock_chestplate"
+                    "#pastel:bedrock_chestplates"
                   ]
                 },
                 "legs": {
                   "items": [
-                    "pastel:bedrock_leggings"
+                    "#pastel:bedrock_leggings"
                   ]
                 },
                 "feet": {
                   "items": [
-                    "pastel:bedrock_boots"
+                    "#pastel:bedrock_boots"
                   ]
                 }
               }
