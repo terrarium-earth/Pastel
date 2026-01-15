@@ -223,10 +223,18 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity
             if (nextState.isPresent()) {
                 level.setBlockAndUpdate(topPos, nextState.get());
 
-                if (level instanceof ServerLevel sl)
-                    Support.areaCriterion(sl, Support.M_RANGE, blockPos, Optional.empty(), p ->
+                if (level instanceof ServerLevel sl) {
+                    ServerPlayer owner = (ServerPlayer) crystal.getOwnerIfOnline();
+                    if (owner != null)
                         PastelCriteria.CRYSTALLARIEUM_GROWING.trigger(
-                            p, sl, topPos, crystal.getItem(CATALYST_SLOT_ID)));
+                            owner, sl, topPos, crystal.getItem(CATALYST_SLOT_ID));
+
+                    Support.areaCriterion(
+                        sl, Support.M_RANGE, blockPos, Optional.empty(), p ->
+                            PastelCriteria.CRYSTALLARIEUM_GROWING.trigger(
+                                p, sl, topPos, crystal.getItem(CATALYST_SLOT_ID))
+                    );
+                }
 
             } else {
                 crystal.canWork = false;
