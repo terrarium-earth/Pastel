@@ -652,8 +652,8 @@ public class PastelAdvancements {
             "lategame/enchant_exchanging_staff");
         public static final ResourceLocation WEAR_BOTH_GRAVITY_TRINKETS = PastelCommon.locate(
             "lategame/wear_both_gravity_trinkets");
-        public static final ResourceLocation CRAFT_RESONANT_PICKAXE = PastelCommon.locate(
-            "lategame/craft_resonant_pickaxe");
+        public static final ResourceLocation CRAFT_RESONANT_TOOL = PastelCommon.locate(
+            "lategame/craft_resonant_tool");
         public static final ResourceLocation CREATE_JADE_VINE = PastelCommon.locate("lategame/create_jade_vine");
         public static final ResourceLocation GROW_BISMUTH_IN_CRYSTALLARIEUM = PastelCommon.locate(
             "lategame/grow_bismuth_in_crystallarieum");
@@ -688,8 +688,6 @@ public class PastelAdvancements {
         public static final ResourceLocation BREAK_SPAWNER_WITH_RESONANCE_TOOL = PastelCommon.locate(
             "lategame/break_spawner_with_resonance_tool");
         public static final ResourceLocation COLLECT_MOONSTONE = PastelCommon.locate("lategame/collect_moonstone");
-        public static final ResourceLocation CREATE_RESONANCE_ENCHANTED_BOOK = PastelCommon.locate(
-            "lategame/create_resonance_enchanted_book");
         public static final ResourceLocation ENTER_STRANGE_PRESERVATION_RUIN = PastelCommon.locate(
             "lategame/enter_strange_preservation_ruin");
         public static final ResourceLocation FIND_UNDERGROWTH_MANOR = PastelCommon.locate(
