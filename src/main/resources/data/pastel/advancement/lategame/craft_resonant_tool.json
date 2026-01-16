@@ -12,10 +12,10 @@
       }
     },
     "title": {
-      "translate": "advancements.pastel.craft_resonant_pickaxe.title"
+      "translate": "advancements.pastel.craft_resonant_tool.title"
     },
     "description": {
-      "translate": "advancements.pastel.craft_resonant_pickaxe.description"
+      "translate": "advancements.pastel.craft_resonant_tool.description"
     }
   },
   "criteria": {
