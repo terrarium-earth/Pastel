@@ -1,19 +1,20 @@
-package earth.terrarium.pastel.entity;
+package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
+import earth.terrarium.pastel.components.EnderSpliceComponent;
+import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import earth.terrarium.pastel.entity.variants.KindlingVariant;
 import earth.terrarium.pastel.entity.variants.LizardFrillVariant;
 import earth.terrarium.pastel.entity.variants.LizardHornVariant;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
-import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-public class PastelTrackedDataHandlerRegistry {
+public class PastelTrackedDataHandlers {
 
     private static final DeferredRegister<EntityDataSerializer<?>> REGISTER = DeferredRegister.create(
         NeoForgeRegistries.Keys.ENTITY_DATA_SERIALIZERS, PastelCommon.MOD_ID);
@@ -30,12 +31,20 @@ public class PastelTrackedDataHandlerRegistry {
     public static final EntityDataSerializer<KindlingVariant> KINDLING_VARIANT = EntityDataSerializer.forValueType(
         ByteBufCodecs.registry(PastelRegistries.KINDLING_VARIANT.key()));
 
+    public static final EntityDataSerializer<EnderSpliceComponent> ENDER_SPLICE_COMPONENT
+        = EntityDataSerializer.forValueType(EnderSpliceComponent.STREAM_CODEC);
+    public static final EntityDataSerializer<EnderCanvasEntity.EnderCanvasVariant> ENDER_CANVAS_VARIANT
+        = EntityDataSerializer.forValueType(
+        EnderCanvasEntity.EnderCanvasVariant.STREAM_CODEC);
+
     public static void register(IEventBus bus) {
         REGISTER.register("ink_color", () -> INK_COLOR);
         REGISTER.register("glass_arrow_variant", () -> GLASS_ARROW_VARIANT);
         REGISTER.register("lizard_frill_variant", () -> LIZARD_FRILL_VARIANT);
         REGISTER.register("lizard_horn_variant", () -> LIZARD_HORN_VARIANT);
         REGISTER.register("kindling_variant", () -> KINDLING_VARIANT);
+        REGISTER.register("ender_splice_component", () -> ENDER_SPLICE_COMPONENT);
+        REGISTER.register("ender_canvas_variant", () -> ENDER_CANVAS_VARIANT);
         REGISTER.register(bus);
     }
 

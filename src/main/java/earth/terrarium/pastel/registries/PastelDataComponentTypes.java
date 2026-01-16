@@ -19,6 +19,7 @@ import earth.terrarium.pastel.components.ShootingStarComponent;
 import earth.terrarium.pastel.components.WithMilkComponent;
 import earth.terrarium.pastel.components.WorkstaffComponent;
 import earth.terrarium.pastel.components.WrappedPresentComponent;
+import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
@@ -79,6 +80,11 @@ public class PastelDataComponentTypes {
     public static final DataComponentType<EnderSpliceComponent> ENDER_SPLICE = register(
         "ender_splice", builder -> builder.persistent(EnderSpliceComponent.CODEC)
                                           .networkSynchronized(EnderSpliceComponent.STREAM_CODEC)
+    );
+    public static final DataComponentType<EnderCanvasEntity.EnderCanvasVariant> ENDER_CANVAS_VARIANT = register(
+        "ender_canvas_variant", builder -> builder.persistent(EnderCanvasEntity.EnderCanvasVariant.CODEC)
+                                                  .networkSynchronized(
+                                                      EnderCanvasEntity.EnderCanvasVariant.STREAM_CODEC)
     );
     public static final DataComponentType<ExtendedBundleComponent> EXTENDED_BUNDLE = register(
         "extended_bundle", builder -> builder.persistent(ExtendedBundleComponent.CODEC)

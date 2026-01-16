@@ -1,10 +1,7 @@
 package earth.terrarium.pastel.entity;
 
 import earth.terrarium.pastel.entity.render.*;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.ItemEntityRenderer;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
@@ -43,6 +40,7 @@ public class PastelEntityRenderers {
         register(PastelEntityTypes.ITEM_PROJECTILE.get(), ThrownItemRenderer::new);
         register(PastelEntityTypes.DRAGON_TALON.get(), (context) -> new BidentEntityRenderer(context, 1.5F, 0));
         register(PastelEntityTypes.DRACONIC_TWINSWORD.get(), (context) -> new BidentEntityRenderer(context, 2.15F, 0));
+        register(PastelEntityTypes.ENDER_CANVAS.get(), EnderCanvasRenderer::new);
     }
 
     private static <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> factory) {

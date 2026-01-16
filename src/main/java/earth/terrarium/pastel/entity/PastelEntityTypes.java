@@ -173,6 +173,10 @@ public class PastelEntityTypes {
         = register(
         "draconic_twinsword", 6, 2, true, EntityDimensions.scalable(0.5F, 0.5F), true, DraconicTwinswordEntity::new);
 
+    public static final DeferredHolder<EntityType<?>,EntityType<EnderCanvasEntity>> ENDER_CANVAS = register(
+        "ender_canvas",EntityType.Builder.of(EnderCanvasEntity::new,MobCategory.MISC).clientTrackingRange(10).updateInterval(Integer.MAX_VALUE)
+    );
+
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(
             EGG_LAYING_WOOLY_PIG.get(), EggLayingWoolyPigEntity.createEggLayingWoolyPigAttributes()

@@ -7,7 +7,7 @@ import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.databank.rendering.RenderTypeHandler;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.registries.PastelTrackedDataHandlers;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
@@ -54,7 +54,7 @@ public class GlassArrowEntity extends AbstractArrow {
     private static final String VARIANT_STRING = "variant";
     public static final float DAMAGE_MODIFIER = 1.5F;
     private static final EntityDataAccessor<GlassArrowVariant> VARIANT = SynchedEntityData.defineId(
-        GlassArrowEntity.class, PastelTrackedDataHandlerRegistry.GLASS_ARROW_VARIANT);
+        GlassArrowEntity.class, PastelTrackedDataHandlers.GLASS_ARROW_VARIANT);
 
     private final IntOpenHashSet pierced = new IntOpenHashSet();
     private Optional<Entity> homingTarget = Optional.empty();

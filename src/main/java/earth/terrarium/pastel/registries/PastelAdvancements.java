@@ -1076,6 +1076,9 @@ public class PastelAdvancements {
             "midgame/collect_moonstone_shard");
         public static final ResourceLocation SMELT_PURE_RESOURCE_IN_CINDERHEARTH = PastelCommon.locate(
             "midgame/smelt_pure_resource_in_cinderhearth");
+        public static final ResourceLocation RUN_INTO_WALL = PastelCommon.locate(
+            "midgame/run_into_wall"
+        );
     }
 
     public static class Triggers {

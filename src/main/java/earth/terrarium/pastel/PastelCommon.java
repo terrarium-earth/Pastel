@@ -15,7 +15,7 @@ import earth.terrarium.pastel.data_loaders.EntityFishingDataLoader;
 import earth.terrarium.pastel.data_loaders.NaturesStaffConversionDataLoader;
 import earth.terrarium.pastel.entity.PastelEntitySubPredicateTypes;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.registries.PastelTrackedDataHandlers;
 import earth.terrarium.pastel.events.PastelDamageEvents;
 import earth.terrarium.pastel.events.PastelEffectEvents;
 import earth.terrarium.pastel.events.PastelEnchantmentEvents;
@@ -244,7 +244,7 @@ public class PastelCommon {
 
 
         logInfo("Registering Entities...");
-        PastelTrackedDataHandlerRegistry.register(pastelBus);
+        PastelTrackedDataHandlers.register(pastelBus);
         PastelEntityTypes.register(pastelBus);
 
         logInfo("Registering Omni Accelerator Projectiles & Behaviors...");
