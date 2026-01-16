@@ -5,15 +5,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.blocks.BedrockAnvilBlock;
-import earth.terrarium.pastel.blocks.BismuthBudBlock;
-import earth.terrarium.pastel.blocks.BlockWithTooltip;
-import earth.terrarium.pastel.blocks.CrackedEndPortalFrameBlock;
-import earth.terrarium.pastel.blocks.DeeperDownPortalBlock;
-import earth.terrarium.pastel.blocks.PastelLogBlock;
-import earth.terrarium.pastel.blocks.PrimordialFireBlock;
-import earth.terrarium.pastel.blocks.PureRedstoneBlock;
-import earth.terrarium.pastel.blocks.TallCropBlock;
+import earth.terrarium.pastel.blocks.*;
 import earth.terrarium.pastel.blocks.amalgam.IncandescentAmalgamBlock;
 import earth.terrarium.pastel.blocks.amalgam.IncandescentAmalgamItem;
 import earth.terrarium.pastel.blocks.amphora.AmphoraBlock;
@@ -347,6 +339,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
@@ -436,6 +429,20 @@ import static net.minecraft.world.level.block.Blocks.STRIPPED_OAK_WOOD;
 import static net.minecraft.world.level.block.Blocks.TINTED_GLASS;
 import static net.minecraft.world.level.block.Blocks.WET_SPONGE;
 import static net.minecraft.world.level.block.Blocks.WHITE_WOOL;
+import static net.minecraft.world.level.block.Blocks.ORANGE_WOOL;
+import static net.minecraft.world.level.block.Blocks.MAGENTA_WOOL;
+import static net.minecraft.world.level.block.Blocks.YELLOW_WOOL;
+import static net.minecraft.world.level.block.Blocks.BLUE_WOOL;
+import static net.minecraft.world.level.block.Blocks.LIGHT_BLUE_WOOL;
+import static net.minecraft.world.level.block.Blocks.LIGHT_GRAY_WOOL;
+import static net.minecraft.world.level.block.Blocks.LIME_WOOL;
+import static net.minecraft.world.level.block.Blocks.PURPLE_WOOL;
+import static net.minecraft.world.level.block.Blocks.GRAY_WOOL;
+import static net.minecraft.world.level.block.Blocks.GREEN_WOOL;
+import static net.minecraft.world.level.block.Blocks.PINK_WOOL;
+import static net.minecraft.world.level.block.Blocks.BLACK_WOOL;
+import static net.minecraft.world.level.block.Blocks.CYAN_WOOL;
+import static net.minecraft.world.level.block.Blocks.BROWN_WOOL;
 import static net.minecraft.world.level.block.Blocks.litBlockEmission;
 import static net.minecraft.world.level.block.Blocks.woodenButton;
 
@@ -552,31 +559,31 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> BLACKSLAG = register(blockWithItem("blackslag", () -> new BlackslagBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK).withBlockModel((ctx, block) -> PastelModelHelper.createMirroredVariantsSupplier(block, TexturedModel.COLUMN_ALT, PastelTexturedModels.CUBE_COLUMN_MIRRORED, ctx.modelOutput).with(PastelModelHelper.createAxisRotatedVariantMap())));
 	public static final DeferredBlock<Block> BLACKSLAG_STAIRS = register(blockWithItem("blackslag_stairs", () -> new StairBlock(PastelBlocks.BLACKSLAG.get().defaultBlockState(), blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_SLAB = register(blockWithItem("blackslag_slab", () -> new SlabBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
-	public static final DeferredBlock<Block> BLACKSLAG_WALL = register(blockWithItem("blackslag_wall", () -> new WallBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
+	public static final DeferredBlock<Block> BLACKSLAG_WALL = register(blockWithItem("blackslag_wall", () -> new WallBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> INFESTED_BLACKSLAG = register(parented(blockWithItem("infested_blackslag", () -> new InfestedBlock(PastelBlocks.BLACKSLAG.get(), blackslag(SoundType.DEEPSLATE)), InkColors.BLACK), b -> PastelBlocks.BLACKSLAG.get()));
 
 	public static final DeferredBlock<Block> COBBLED_BLACKSLAG = register(blockWithItem("cobbled_blackslag", () -> new Block(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> COBBLED_BLACKSLAG_STAIRS = register(blockWithItem("cobbled_blackslag_stairs", () -> new StairBlock(PastelBlocks.COBBLED_BLACKSLAG.get().defaultBlockState(), blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> COBBLED_BLACKSLAG_SLAB = register(blockWithItem("cobbled_blackslag_slab", () -> new SlabBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
-	public static final DeferredBlock<Block> COBBLED_BLACKSLAG_WALL = register(blockWithItem("cobbled_blackslag_wall", () -> new WallBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
+	public static final DeferredBlock<Block> COBBLED_BLACKSLAG_WALL = register(blockWithItem("cobbled_blackslag_wall", () -> new WallBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> BLACKSLAG_TILES = register(blockWithItem("blackslag_tiles", () -> new Block(blackslag(SoundType.DEEPSLATE_TILES)), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_TILE_STAIRS = register(blockWithItem("blackslag_tile_stairs", () -> new StairBlock(PastelBlocks.BLACKSLAG_TILES.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_TILE_SLAB = register(blockWithItem("blackslag_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK));
-	public static final DeferredBlock<Block> BLACKSLAG_TILE_WALL = register(blockWithItem("blackslag_tile_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK));
+	public static final DeferredBlock<Block> BLACKSLAG_TILE_WALL = register(blockWithItem("blackslag_tile_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> CRACKED_BLACKSLAG_TILES = register(blockWithItem("cracked_blackslag_tiles", () -> new Block(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK));
 
 	public static final DeferredBlock<Block> BLACKSLAG_BRICKS = register(blockWithItem("blackslag_bricks", () -> new Block(blackslag(SoundType.DEEPSLATE_BRICKS)), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_BRICK_STAIRS = register(blockWithItem("blackslag_brick_stairs", () -> new StairBlock(PastelBlocks.BLACKSLAG_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_BRICK_SLAB = register(blockWithItem("blackslag_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK));
-	public static final DeferredBlock<Block> BLACKSLAG_BRICK_WALL = register(blockWithItem("blackslag_brick_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK));
+	public static final DeferredBlock<Block> BLACKSLAG_BRICK_WALL = register(blockWithItem("blackslag_brick_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> CRACKED_BLACKSLAG_BRICKS = register(blockWithItem("cracked_blackslag_bricks", () -> new Block(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK));
 
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG = register(blockWithItem("polished_blackslag", () -> new Block(blackslag(SoundType.POLISHED_DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_STAIRS = register(blockWithItem("polished_blackslag_stairs", () -> new StairBlock(PastelBlocks.POLISHED_BLACKSLAG.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.POLISHED_BLACKSLAG.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_SLAB = register(blockWithItem("polished_blackslag_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_BLACKSLAG.get())), InkColors.BLACK));
-	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_WALL = register(blockWithItem("polished_blackslag_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_BLACKSLAG.get())), InkColors.BLACK));
+	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_WALL = register(blockWithItem("polished_blackslag_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_BLACKSLAG.get())), InkColors.BLACK).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_BUTTON = register(blockWithItem("polished_blackslag_button", () -> new ButtonBlock(PastelBlockSetTypes.POLISHED_BLACKSLAG, 5, Properties.of().pushReaction(PushReaction.DESTROY).noCollission().strength(0.5F)), InkColors.BLACK));
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_PRESSURE_PLATE = register(blockWithItem("polished_blackslag_pressure_plate", () -> new PressurePlateBlock(PastelBlockSetTypes.POLISHED_BLACKSLAG, Properties.of().mapColor(MapColor.COLOR_BLACK).requiresCorrectToolForDrops().noCollission().strength(0.5F)), InkColors.BLACK));
 	public static final DeferredBlock<Block> CHISELED_POLISHED_BLACKSLAG = register(blockWithItem("chiseled_polished_blackslag", () -> new Block(blackslag(SoundType.DEEPSLATE_BRICKS)), InkColors.BLACK));
@@ -627,7 +634,7 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> PYRITE = register(axisRotated(blockWithItem("pyrite", () -> new RotatedPillarBlock(settings(MapColor.TERRACOTTA_YELLOW, SoundType.CHAIN, 50.0F).requiresCorrectToolForDrops()), InkColors.BROWN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> PYRITE_SLAB = register(blockWithItem("pyrite_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PYRITE_STAIRS = register(blockWithItem("pyrite_stairs", () -> new StairBlock(PastelBlocks.PYRITE.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> PYRITE_WALL = register(blockWithItem("pyrite_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> PYRITE_WALL = register(blockWithItem("pyrite_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> PYRITE_PILE = register(axisRotated(blockWithItem("pyrite_pile", () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> PYRITE_PLATING = register(simple(blockWithItem("pyrite_plating", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN)));
@@ -655,7 +662,7 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> PYRITE_TILES = register(simple(blockWithItem("pyrite_tiles", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN)));
 	public static final DeferredBlock<Block> PYRITE_TILES_SLAB = register(blockWithItem("pyrite_tiles_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.PYRITE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PYRITE_TILES_STAIRS = register(blockWithItem("pyrite_tiles_stairs", () -> new StairBlock(PastelBlocks.PYRITE_TILES.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.PYRITE_TILES.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> PYRITE_TILES_WALL = register(blockWithItem("pyrite_tiles_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.PYRITE_TILES.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> PYRITE_TILES_WALL = register(blockWithItem("pyrite_tiles_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.PYRITE_TILES.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> DRAGONBONE = register(axisRotated(blockWithItem("dragonbone", () -> new DragonboneBlock(Properties.ofFullCopy(BONE_BLOCK).strength(-1.0F, 22.0F).pushReaction(PushReaction.BLOCK)), InkColors.GREEN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> CRACKED_DRAGONBONE = register(axisRotated(blockWithItem("cracked_dragonbone", () -> new RotatedPillarBlock(Properties.ofFullCopy(BONE_BLOCK).strength(100.0F, 1200.0F).pushReaction(PushReaction.BLOCK)), InkColors.GREEN), TexturedModel.COLUMN));
@@ -663,7 +670,7 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> POLISHED_BONE_ASH = register(blockWithItem("polished_bone_ash", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CRACKED_DRAGONBONE.get()).destroyTime(1500.0F).mapColor(MapColor.SNOW)), InkColors.CYAN));
 	public static final DeferredBlock<Block> POLISHED_BONE_ASH_STAIRS = register(blockWithItem("polished_bone_ash_stairs", () -> new StairBlock(PastelBlocks.POLISHED_BONE_ASH.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> POLISHED_BONE_ASH_SLAB = register(blockWithItem("polished_bone_ash_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
-	public static final DeferredBlock<Block> POLISHED_BONE_ASH_WALL = register(blockWithItem("polished_bone_ash_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
+	public static final DeferredBlock<Block> POLISHED_BONE_ASH_WALL = register(blockWithItem("polished_bone_ash_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> POLISHED_BONE_ASH_PILLAR = register(axisRotated(blockWithItem("polished_bone_ash_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> BONE_ASH_SHINGLES = register(blockWithItem("bone_ash_shingles", () -> new ShinglesBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get()).noOcclusion()), InkColors.CYAN).withBlockModel((ctx, block) -> PastelModelHelper.createVariantsSupplier(block, ModelLocationUtils.getModelLocation(block)).with(PastelModelHelper.createEastDefaultHorizontalFacingVariantMap())));
@@ -671,12 +678,12 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> BONE_ASH_BRICKS = register(blockWithItem("bone_ash_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_BRICK_STAIRS = register(blockWithItem("bone_ash_brick_stairs", () -> new StairBlock(PastelBlocks.BONE_ASH_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.BONE_ASH_BRICKS.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_BRICK_SLAB = register(blockWithItem("bone_ash_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.BONE_ASH_BRICKS.get())), InkColors.CYAN));
-	public static final DeferredBlock<Block> BONE_ASH_BRICK_WALL = register(blockWithItem("bone_ash_brick_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BONE_ASH_BRICKS.get())), InkColors.CYAN));
+	public static final DeferredBlock<Block> BONE_ASH_BRICK_WALL = register(blockWithItem("bone_ash_brick_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BONE_ASH_BRICKS.get())), InkColors.CYAN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> BONE_ASH_TILES = register(blockWithItem("bone_ash_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_TILE_STAIRS = register(blockWithItem("bone_ash_tile_stairs", () -> new StairBlock(PastelBlocks.BONE_ASH_TILES.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.BONE_ASH_TILES.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_TILE_SLAB = register(blockWithItem("bone_ash_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.BONE_ASH_TILES.get())), InkColors.CYAN));
-	public static final DeferredBlock<Block> BONE_ASH_TILE_WALL = register(blockWithItem("bone_ash_tile_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BONE_ASH_TILES.get())), InkColors.CYAN));
+	public static final DeferredBlock<Block> BONE_ASH_TILE_WALL = register(blockWithItem("bone_ash_tile_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BONE_ASH_TILES.get())), InkColors.CYAN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> SLUSH = register(simple(blockWithItem("slush", () -> new RotatedPillarBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)), InkColors.BROWN)));
 	public static final DeferredBlock<Block> OVERGROWN_SLUSH = register(snowy(blockWithItem("overgrown_slush", () -> new SlushVegetationBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)), InkColors.BROWN), PastelTexturedModels.cubeBottomTopParticle(b -> b, "_side", b -> b, "_top", b -> PastelBlocks.SLUSH.get(), "", b -> b, "_top"), PastelTexturedModels.cubeBottomTopParticle(b -> b, "_snow_side", b -> b, "_snow_top", b -> PastelBlocks.SLUSH.get(), "", b -> b, "_snow_top")));
@@ -718,12 +725,12 @@ public class PastelBlocks {
 
 	public static final DeferredBlock<Block> SMOOTH_BASALT_STAIRS = register(blockWithItem("smooth_basalt_stairs", () -> new StairBlock(BASALT.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN));
 	public static final DeferredBlock<Block> SMOOTH_BASALT_SLAB = register(blockWithItem("smooth_basalt_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN));
-	public static final DeferredBlock<Block> SMOOTH_BASALT_WALL = register(blockWithItem("smooth_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN));
+	public static final DeferredBlock<Block> SMOOTH_BASALT_WALL = register(blockWithItem("smooth_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> POLISHED_BASALT = register(blockWithItem("polished_basalt", () -> new Block(settings(MapColor.COLOR_BLACK, SoundType.BASALT, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_BASALT_STAIRS = register(blockWithItem("polished_basalt_stairs", () -> new StairBlock(PastelBlocks.POLISHED_BASALT.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_BASALT_SLAB = register(blockWithItem("polished_basalt_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> POLISHED_BASALT_WALL = register(blockWithItem("polished_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> POLISHED_BASALT_WALL = register(blockWithItem("polished_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> POLISHED_BASALT_BUTTON = register(blockWithItem("polished_basalt_button", () -> new ButtonBlock(PastelBlockSetTypes.POLISHED_BASALT, 5, Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY)), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_BASALT_PRESSURE_PLATE = register(blockWithItem("polished_basalt_pressure_plate", () -> new PressurePlateBlock(PastelBlockSetTypes.POLISHED_BASALT, Properties.of().mapColor(MapColor.COLOR_BLACK).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY)), InkColors.BROWN));
 	public static final DeferredBlock<Block> CHISELED_POLISHED_BASALT = register(blockWithItem("chiseled_polished_basalt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
@@ -735,19 +742,19 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> BASALT_BRICKS = register(blockWithItem("basalt_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASALT_BRICK_STAIRS = register(blockWithItem("basalt_brick_stairs", () -> new StairBlock(PastelBlocks.BASALT_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASALT_BRICK_SLAB = register(blockWithItem("basalt_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> BASALT_BRICK_WALL = register(blockWithItem("basalt_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> BASALT_BRICK_WALL = register(blockWithItem("basalt_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> CRACKED_BASALT_BRICKS = register(blockWithItem("cracked_basalt_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN));
 
 	public static final DeferredBlock<Block> BASALT_TILES = register(blockWithItem("basalt_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASALT_TILE_STAIRS = register(blockWithItem("basalt_tile_stairs", () -> new StairBlock(PastelBlocks.BASALT_TILES.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASALT_TILE_SLAB = register(blockWithItem("basalt_tile_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_TILES.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> BASALT_TILE_WALL = register(blockWithItem("basalt_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_TILES.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> BASALT_TILE_WALL = register(blockWithItem("basalt_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_TILES.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> CRACKED_BASALT_TILES = register(blockWithItem("cracked_basalt_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_TILES.get())), InkColors.BROWN));
 
 	public static final DeferredBlock<Block> PLANED_BASALT = register(blockWithItem("planed_basalt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_BASALT_STAIRS = register(blockWithItem("planed_basalt_stairs", () -> new StairBlock(PastelBlocks.PLANED_BASALT.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_BASALT_SLAB = register(blockWithItem("planed_basalt_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_BASALT.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> PLANED_BASALT_WALL = register(blockWithItem("planed_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_BASALT.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> PLANED_BASALT_WALL = register(blockWithItem("planed_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_BASALT.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> TOPAZ_CHISELED_BASALT = register(simple(blockWithItem("topaz_chiseled_basalt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get()).lightLevel(s -> 6)), InkColors.CYAN)));
 	public static final DeferredBlock<Block> AMETHYST_CHISELED_BASALT = register(simple(blockWithItem("amethyst_chiseled_basalt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get()).lightLevel(s -> 5)), InkColors.MAGENTA)));
@@ -757,12 +764,12 @@ public class PastelBlocks {
 
 	public static final DeferredBlock<Block> CALCITE_STAIRS = register(blockWithItem("calcite_stairs", () -> new StairBlock(CALCITE.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_SLAB = register(blockWithItem("calcite_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN));
-	public static final DeferredBlock<Block> CALCITE_WALL = register(blockWithItem("calcite_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN));
+	public static final DeferredBlock<Block> CALCITE_WALL = register(blockWithItem("calcite_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> POLISHED_CALCITE = register(blockWithItem("polished_calcite", () -> new Block(settings(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_CALCITE_STAIRS = register(blockWithItem("polished_calcite_stairs", () -> new StairBlock(PastelBlocks.POLISHED_CALCITE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_CALCITE_SLAB = register(blockWithItem("polished_calcite_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> POLISHED_CALCITE_WALL = register(blockWithItem("polished_calcite_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> POLISHED_CALCITE_WALL = register(blockWithItem("polished_calcite_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> POLISHED_CALCITE_BUTTON = register(blockWithItem("polished_calcite_button", () -> new ButtonBlock(PastelBlockSetTypes.POLISHED_CALCITE, 5, Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY)), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_CALCITE_PRESSURE_PLATE = register(blockWithItem("polished_calcite_pressure_plate", () -> new PressurePlateBlock(PastelBlockSetTypes.POLISHED_CALCITE, Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY)), InkColors.BROWN));
 	public static final DeferredBlock<Block> CHISELED_POLISHED_CALCITE = register(blockWithItem("chiseled_polished_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
@@ -774,19 +781,19 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> CALCITE_BRICKS = register(blockWithItem("calcite_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_BRICK_STAIRS = register(blockWithItem("calcite_brick_stairs", () -> new StairBlock(PastelBlocks.CALCITE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_BRICK_SLAB = register(blockWithItem("calcite_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> CALCITE_BRICK_WALL = register(blockWithItem("calcite_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> CALCITE_BRICK_WALL = register(blockWithItem("calcite_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> CRACKED_CALCITE_BRICKS = register(blockWithItem("cracked_calcite_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN));
 
 	public static final DeferredBlock<Block> CALCITE_TILES = register(blockWithItem("calcite_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_TILE_STAIRS = register(blockWithItem("calcite_tile_stairs", () -> new StairBlock(PastelBlocks.CALCITE_TILES.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_TILE_SLAB = register(blockWithItem("calcite_tile_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> CALCITE_TILE_WALL = register(blockWithItem("calcite_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> CALCITE_TILE_WALL = register(blockWithItem("calcite_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 	public static final DeferredBlock<Block> CRACKED_CALCITE_TILES = register(blockWithItem("cracked_calcite_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN));
 
 	public static final DeferredBlock<Block> PLANED_CALCITE = register(blockWithItem("planed_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_CALCITE_STAIRS = register(blockWithItem("planed_calcite_stairs", () -> new StairBlock(PastelBlocks.PLANED_CALCITE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_CALCITE_SLAB = register(blockWithItem("planed_calcite_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_CALCITE.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> PLANED_CALCITE_WALL = register(blockWithItem("planed_calcite_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_CALCITE.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> PLANED_CALCITE_WALL = register(blockWithItem("planed_calcite_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_CALCITE.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> TOPAZ_CHISELED_CALCITE = register(simple(blockWithItem("topaz_chiseled_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get()).lightLevel(s -> 6)), InkColors.CYAN)));
 	public static final DeferredBlock<Block> AMETHYST_CHISELED_CALCITE = register(simple(blockWithItem("amethyst_chiseled_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get()).lightLevel(s -> 5)), InkColors.MAGENTA)));
@@ -1283,31 +1290,49 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> WEEPING_GALA_LAMP = register(redstoneLamp(blockWithItem("weeping_gala_lamp", () -> new RedstoneLampBlock(galaWood(MapColor.COLOR_BROWN).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)), InkColors.LIME)));
 	public static final DeferredBlock<Block> WEEPING_GALA_LIGHT = register(translucent(axisRotated(blockWithItem("weeping_gala_light", () -> new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN).lightLevel(state -> 15).noOcclusion()), InkColors.LIME), PastelTexturedModels.BASE_TRANS_LIGHT_CORE)));
 
-	public static Properties basalMarble() {
+    public static final DeferredBlock<Block> TEA_TABLE = register(cutout(blockWithItem("tea_table", () -> new TeaTable(galaWood(MapColor.COLOR_BROWN).noOcclusion()), InkColors.LIME).withBlockModel((ctx, block)->PastelModelHelper.createVariantsSupplier(block, PastelModels.TEA_TABLE))));
+    public static final DeferredBlock<Block> WHITE_CUSHION = register(singleton(blockWithItem("cushion_white", () -> new CushionBlock(Properties.ofFullCopy(WHITE_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.WHITE), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> ORANGE_CUSHION = register(singleton(blockWithItem("cushion_orange", () -> new CushionBlock(Properties.ofFullCopy(ORANGE_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.ORANGE), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> MAGENTA_CUSHION = register(singleton(blockWithItem("cushion_magenta", () -> new CushionBlock(Properties.ofFullCopy(MAGENTA_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.MAGENTA), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> LIGHT_BLUE_CUSHION = register(singleton(blockWithItem("cushion_light_blue", () -> new CushionBlock(Properties.ofFullCopy(LIGHT_BLUE_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.LIGHT_BLUE), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> YELLOW_CUSHION = register(singleton(blockWithItem("cushion_yellow", () -> new CushionBlock(Properties.ofFullCopy(YELLOW_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.YELLOW), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> LIME_CUSHION = register(singleton(blockWithItem("cushion_lime", () -> new CushionBlock(Properties.ofFullCopy(LIME_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.LIME), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> PINK_CUSHION = register(singleton(blockWithItem("cushion_pink", () -> new CushionBlock(Properties.ofFullCopy(PINK_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.PINK), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> GRAY_CUSHION = register(singleton(blockWithItem("cushion_gray", () -> new CushionBlock(Properties.ofFullCopy(GRAY_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.GRAY), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> LIGHT_GRAY_CUSHION = register(singleton(blockWithItem("cushion_light_gray", () -> new CushionBlock(Properties.ofFullCopy(LIGHT_GRAY_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.LIGHT_GRAY), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> CYAN_CUSHION = register(singleton(blockWithItem("cushion_cyan", () -> new CushionBlock(Properties.ofFullCopy(CYAN_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.CYAN), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> PURPLE_CUSHION = register(singleton(blockWithItem("cushion_purple", () -> new CushionBlock(Properties.ofFullCopy(PURPLE_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.PURPLE), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> BLUE_CUSHION = register(singleton(blockWithItem("cushion_blue", () -> new CushionBlock(Properties.ofFullCopy(BLUE_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.BLUE), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> BROWN_CUSHION = register(singleton(blockWithItem("cushion_brown", () -> new CushionBlock(Properties.ofFullCopy(BROWN_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.BROWN), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> GREEN_CUSHION = register(singleton(blockWithItem("cushion_green", () -> new CushionBlock(Properties.ofFullCopy(GREEN_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.GREEN), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> RED_CUSHION = register(singleton(blockWithItem("cushion_red", () -> new CushionBlock(Properties.ofFullCopy(RED_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.RED), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+    public static final DeferredBlock<Block> BLACK_CUSHION = register(singleton(blockWithItem("cushion_black", () -> new CushionBlock(Properties.ofFullCopy(BLACK_WOOL).noOcclusion().isValidSpawn(PastelBlocks::never),DyeColor.BLACK), IS.of(Rarity.COMMON), InkColors.PINK), PastelTexturedModels.TINTED_CUSHION));
+
+    public static Properties basalMarble() {
 		return settings(MapColor.COLOR_GRAY, SoundType.DRIPSTONE_BLOCK, 8.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops();
 	}
 
 	public static final DeferredBlock<Block> BASAL_MARBLE = register(axisRotated(blockWithItem("basal_marble", () -> new RotatedPillarBlock(basalMarble()), InkColors.BROWN), TexturedModel.COLUMN_ALT));
 	public static final DeferredBlock<Block> BASAL_MARBLE_STAIRS = register(blockWithItem("basal_marble_stairs", () -> new StairBlock(PastelBlocks.BASAL_MARBLE.get().defaultBlockState(), basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_SLAB = register(blockWithItem("basal_marble_slab", () -> new SlabBlock(basalMarble()), InkColors.BROWN));
-	public static final DeferredBlock<Block> BASAL_MARBLE_WALL = register(blockWithItem("basal_marble_wall", () -> new WallBlock(basalMarble()), InkColors.BROWN));
+	public static final DeferredBlock<Block> BASAL_MARBLE_WALL = register(blockWithItem("basal_marble_wall", () -> new WallBlock(basalMarble()), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> BASAL_MARBLE_PILLAR = register(axisRotated(blockWithItem("basal_marble_pillar", () -> new RotatedPillarBlock(basalMarble()), InkColors.BROWN), TexturedModel.COLUMN));
 
 	public static final DeferredBlock<Block> POLISHED_BASAL_MARBLE = register(defaultUpFacing(blockWithItem("polished_basal_marble", () -> new PastelFacingBlock(basalMarble()), InkColors.BROWN), TexturedModel.CUBE_TOP_BOTTOM));
 	public static final DeferredBlock<Block> POLISHED_BASAL_MARBLE_STAIRS = register(blockWithItem("polished_basal_marble_stairs", () -> new StairBlock(PastelBlocks.POLISHED_BASAL_MARBLE.get().defaultBlockState(), basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_BASAL_MARBLE_SLAB = register(blockWithItem("polished_basal_marble_slab", () -> new SlabBlock(basalMarble()), InkColors.BROWN));
-	public static final DeferredBlock<Block> POLISHED_BASAL_MARBLE_WALL = register(blockWithItem("polished_basal_marble_wall", () -> new WallBlock(basalMarble()), InkColors.BROWN));
+	public static final DeferredBlock<Block> POLISHED_BASAL_MARBLE_WALL = register(blockWithItem("polished_basal_marble_wall", () -> new WallBlock(basalMarble()), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> BASAL_MARBLE_TILES = register(blockWithItem("basal_marble_tiles", () -> new Block(basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_TILE_STAIRS = register(blockWithItem("basal_marble_tile_stairs", () -> new StairBlock(PastelBlocks.BASAL_MARBLE_TILES.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.BASAL_MARBLE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_TILE_SLAB = register(blockWithItem("basal_marble_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.BASAL_MARBLE_TILES.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> BASAL_MARBLE_TILE_WALL = register(blockWithItem("basal_marble_tile_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BASAL_MARBLE_TILES.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> BASAL_MARBLE_TILE_WALL = register(blockWithItem("basal_marble_tile_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BASAL_MARBLE_TILES.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> BASAL_MARBLE_BRICKS = register(blockWithItem("basal_marble_bricks", () -> new Block(basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_BRICK_STAIRS = register(blockWithItem("basal_marble_brick_stairs", () -> new StairBlock(PastelBlocks.BASAL_MARBLE_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(PastelBlocks.BASAL_MARBLE_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_BRICK_SLAB = register(blockWithItem("basal_marble_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.BASAL_MARBLE_BRICKS.get())), InkColors.BROWN));
-	public static final DeferredBlock<Block> BASAL_MARBLE_BRICK_WALL = register(blockWithItem("basal_marble_brick_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BASAL_MARBLE_BRICKS.get())), InkColors.BROWN));
+	public static final DeferredBlock<Block> BASAL_MARBLE_BRICK_WALL = register(blockWithItem("basal_marble_brick_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.BASAL_MARBLE_BRICKS.get())), InkColors.BROWN).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> LONGING_CHIMERA = register(cutout(defaultNorthHorizontalFacing(blockWithItem("longing_chimera", () -> new GrotesqueBlock(basalMarble().noOcclusion(), 12, 15, "block.pastel.longing_chimera.tooltip"), InkColors.BROWN), ModelLocationUtils::getModelLocation)));
 
@@ -1375,7 +1400,7 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> GIANT_MOSS_BALL = register(blockWithItem("giant_moss_ball", () -> new GiantMossBallBlock(settings(MapColor.PLANT, SoundType.WET_GRASS, 10F).noCollission().noOcclusion().offsetType(OffsetType.XYZ)), InkColors.GREEN).withBlockModel((ctx, block) -> PastelModelHelper.createVariantsSupplier(block, ModelLocationUtils.getModelLocation(block))));
 
 	public static final DeferredBlock<Block> RESPLENDENT_BLOCK = register(defaultUpFacing(blockWithItem("resplendent_block", () -> new CushionedFacingBlock(Properties.ofFullCopy(RED_WOOL)), IS.of(Rarity.UNCOMMON), InkColors.YELLOW), TexturedModel.CUBE_TOP_BOTTOM));
-	public static final DeferredBlock<Block> RESPLENDENT_CUSHION = register(singleton(blockWithItem("resplendent_cushion", () -> new CushionBlock(Properties.ofFullCopy(PastelBlocks.RESPLENDENT_BLOCK.get()).noOcclusion().isValidSpawn(PastelBlocks::never)), IS.of(Rarity.UNCOMMON), InkColors.YELLOW), PastelTexturedModels.CUSHION));
+	public static final DeferredBlock<Block> RESPLENDENT_CUSHION = register(singleton(blockWithItem("resplendent_cushion", () -> new CushionBlock(Properties.ofFullCopy(PastelBlocks.RESPLENDENT_BLOCK.get()).noOcclusion().isValidSpawn(PastelBlocks::never),null), IS.of(Rarity.UNCOMMON), InkColors.YELLOW), PastelTexturedModels.CUSHION));
 	public static final DeferredBlock<Block> RESPLENDENT_CARPET = register(singleton(blockWithItem("resplendent_carpet", () -> new CushionedCarpetBlock(Properties.ofFullCopy(RED_CARPET)), IS.of(Rarity.UNCOMMON), InkColors.YELLOW), TexturedModel.CARPET));
 	public static final DeferredBlock<Block> RESPLENDENT_BED = register(cutout(blockWithItem("resplendent_bed", () -> new PastelBedBlock(DyeColor.RED, Properties.ofFullCopy(RED_BED)), IS.of(1, Rarity.UNCOMMON), InkColors.YELLOW)).withPredefinedItemModel().withBlockModel((ctx, block) -> MultiVariantGenerator.multiVariant(block).with(PastelModelHelper.createSouthDefaultHorizontalFacingVariantMap()).with(PropertyDispatch.property(BedBlock.PART).select(BedPart.HEAD, PastelModelHelper.createModelVariant(block, "_head")).select(BedPart.FOOT, PastelModelHelper.createModelVariant(block, "_foot")))));
 
@@ -2046,7 +2071,7 @@ public class PastelBlocks {
 	}));
 	public static final DeferredBlock<Block> PRESERVATION_STAIRS = register(blockWithItem("preservation_stairs", () -> new StairBlock(PastelBlocks.PRESERVATION_STONE.get().defaultBlockState(), preservationBlock()), InkColors.BLUE));
 	public static final DeferredBlock<Block> PRESERVATION_SLAB = register(blockWithItem("preservation_slab", () -> new SlabBlock(preservationBlock()), InkColors.BLUE));
-	public static final DeferredBlock<Block> PRESERVATION_WALL = register(blockWithItem("preservation_wall", () -> new WallBlock(preservationBlock()), InkColors.BLUE));
+	public static final DeferredBlock<Block> PRESERVATION_WALL = register(blockWithItem("preservation_wall", () -> new WallBlock(preservationBlock()), InkColors.BLUE).withBlockItemModel((ctx,block)->PastelModelHelper.registerParentedItemModel(ctx, block, block, "_inventory")));
 
 	public static final DeferredBlock<Block> POWDER_CHISELED_PRESERVATION_STONE = register(singleton(blockWithItem("powder_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 2)), InkColors.BLUE), PastelTexturedModels.cubeColumn(b -> b, "", b -> PastelBlocks.PRESERVATION_STONE.get(), "_top_generic")));
 	public static final DeferredBlock<Block> DIKE_CHISELED_PRESERVATION_STONE = register(simple(blockWithItem("dike_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 6)), InkColors.BLUE)));
@@ -2338,7 +2363,7 @@ public class PastelBlocks {
 	}
 
 	public static <T extends Block> BlockRegistrar<T> pedestal(BlockRegistrar<T> registrar) {
-		return cutout(singleton(registrar, TexturedModel.createDefault(b -> new TextureMapping().put(PastelTextureKeys.PEDESTAL, TextureMapping.getBlockTexture(b)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(b, "_breaking")), PastelModels.PEDESTAL)));
+		return cutout(singleton(registrar, TexturedModel.createDefault(b -> new TextureMapping().put(PastelTextureKeys.PEDESTAL, TextureMapping.getBlockTexture(b)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(b, "_particle")), PastelModels.PEDESTAL)));
 	}
 
 	public static <T extends Block> BlockRegistrar<T> sugarStick(BlockRegistrar<T> registrar, UnaryOperator<Block> sugarBlock) {
@@ -2479,7 +2504,7 @@ public class PastelBlocks {
 			PastelModelHelper.ITEM_MODEL_REGISTRAR.defer(ctx -> {
 				if (hasItem) {
 					Objects.requireNonNull(holder);
-					//callback.accept(ctx, holder.get());
+					callback.accept(ctx, (T) holder.get());
 				}
 			});
 			return this;
@@ -2546,5 +2571,5 @@ public class PastelBlocks {
 	public static void registerClient(FMLClientSetupEvent event) {
 		PastelBlocks.CLIENT_REGISTRAR.flush();
 	}
-	
+
 }

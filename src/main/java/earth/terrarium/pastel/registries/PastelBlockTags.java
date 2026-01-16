@@ -65,7 +65,8 @@ public class PastelBlockTags {
     public static final TagKey<Block> CRYSTAL_APOTHECARY_HARVESTABLE = of("crystal_apothecary_harvestable");
     public static final TagKey<Block> UNBREAKABLE_STRUCTURE_BLOCKS = of("unbreakable_structure_blocks");
     public static final TagKey<Block> INK_EFFECT_BLACKLISTED = of("ink_effect_blacklisted");
-        // blacklisting form block coloring, repairing, ...
+    // blacklisting form block coloring, repairing, ...
+    public static final TagKey<Block> TEA_TABLE_SEATS = of("tea_table_seats");
     public static final TagKey<Block> SPREADS_TO_BLACKSLAG = of("spreads_to_blackslag");
     public static final TagKey<Block> ASH = of("ash");
     public static final TagKey<Block> PRECIPITATION_SOURCES = of("precipitation_source");

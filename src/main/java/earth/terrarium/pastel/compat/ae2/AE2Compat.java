@@ -47,7 +47,7 @@ public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
                 PastelClusterBlock.GrowthStage.CLUSTER
             ), InkColors.YELLOW
         ), PastelModels.CRYSTALLARIEUM_FARMABLE
-    ));
+    ).withPredefinedItemModel());
 
     @Override
     public void register() {

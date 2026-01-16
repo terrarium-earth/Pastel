@@ -1459,8 +1459,8 @@ public class PastelItems {
         item("natures_staff", () -> new NaturesStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIME));
     public static final DeferredItem<Item> STAFF_OF_REMEMBRANCE = register(
         item("staff_of_remembrance", () -> new StaffOfRemembranceItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIME));
-    public static final DeferredItem<Item> CONSTRUCTORS_STAFF = register(handheld(
-        item("constructors_staff", () -> new ConstructorsStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY)));
+    public static final DeferredItem<Item> CONSTRUCTORS_STAFF = register(
+        item("constructors_staff", () -> new ConstructorsStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY));
     public static final DeferredItem<Item> EXCHANGING_STAFF = register(handheld(
         item("exchanging_staff", () -> new ExchangeStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY)));
     public static final DeferredItem<Item> BLOCK_FLOODER = register(

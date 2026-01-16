@@ -63,7 +63,7 @@ public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
                 PastelClusterBlock.GrowthStage.CLUSTER
             ), InkColors.BROWN
         ), PastelModels.CRYSTALLARIEUM_FARMABLE
-    ));
+    ).withPredefinedItemModel());
     public static DeferredBlock<Block> PURE_ZINC_BLOCK = PastelBlocks.register(simple(
         blockWithItem(
             "pure_zinc_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),
