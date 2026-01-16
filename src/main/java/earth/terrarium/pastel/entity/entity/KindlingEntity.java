@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.entity;
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.registries.PastelTrackedDataHandlers;
 import earth.terrarium.pastel.entity.variants.KindlingVariant;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.mixin.accessors.ProjectileAttackGoalAccessor;
@@ -99,7 +99,7 @@ import java.util.UUID;
 public class KindlingEntity extends AbstractHorse implements RangedAttackMob, NeutralMob, Shearable {
 
     protected static final EntityDataAccessor<KindlingVariant> VARIANT = SynchedEntityData.defineId(
-        KindlingEntity.class, PastelTrackedDataHandlerRegistry.KINDLING_VARIANT);
+        KindlingEntity.class, PastelTrackedDataHandlers.KINDLING_VARIANT);
     protected static final Ingredient FOOD = Ingredient.of(PastelItemTags.KINDLING_FOOD);
 
     private static final UniformInt ANGER_TIME_RANGE = TimeUtil.rangeOfSeconds(30, 59);

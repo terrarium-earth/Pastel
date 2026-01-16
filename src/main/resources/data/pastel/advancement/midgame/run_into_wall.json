@@ -1,0 +1,27 @@
+{
+  "parent": "pastel:midgame/collect_neolith",
+  "display": {
+    "icon": {
+      "id": "pastel:ender_canvas"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.run_into_wall.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.run_into_wall.description"
+    }
+  },
+  "criteria": {
+    "run_into_wall": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:midgame/collect_neolith"
+      }
+    }
+  }
+}
+}

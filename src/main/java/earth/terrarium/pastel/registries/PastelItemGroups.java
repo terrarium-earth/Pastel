@@ -4,12 +4,15 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.Preenchanted;
+import earth.terrarium.pastel.attachments.PastelDataAttachments;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
 import earth.terrarium.pastel.compat.create.CreateCompat;
+import earth.terrarium.pastel.components.EnderSpliceComponent;
+import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import net.minecraft.core.HolderLookup;
@@ -23,13 +26,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class PastelItemGroups {
 
@@ -56,22 +62,25 @@ public class PastelItemGroups {
     }
 
     public static void registerSpawnEggs(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey().equals(CreativeModeTabs.SPAWN_EGGS)) {
+        if (event.getTabKey()
+                 .equals(CreativeModeTabs.SPAWN_EGGS)) {
             event.accept(
-                PastelItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                PastelItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG.toStack(),
+                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
+            );
             event.accept(
-                PastelItems.PRESERVATION_TURRET_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                PastelItems.PRESERVATION_TURRET_SPAWN_EGG.toStack(),
+                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
+            );
             event.accept(
                 PastelItems.KINDLING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.accept(
-                PastelItems.LIZARD_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.accept(
-                PastelItems.ERASER_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.accept(PastelItems.LIZARD_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.accept(PastelItems.ERASER_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
 
-        if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES))
-            event.accept(
-                PastelItems.BUCKET_OF_ERASER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        if (event.getTabKey()
+                 .equals(CreativeModeTabs.TOOLS_AND_UTILITIES)) event.accept(
+            PastelItems.BUCKET_OF_ERASER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
     }
 
     public static final CreativeModeTab INSTRUMENTS = CreativeModeTab.builder()
@@ -329,24 +338,45 @@ public class PastelItemGroups {
                                                                        PastelItems.BOTTLE_OF_FORFEITURE.get());
                                                                    entries.accept(
                                                                        PastelItems.BOTTLE_OF_DECAY_AWAY.get());
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.MULTITOOL.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.TENDER_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.LUCKY_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.RAZOR_FALCHION.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.OBLIVION_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.RESONANT_PICKAXE.get()));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.MULTITOOL.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.TENDER_PICKAXE.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.LUCKY_PICKAXE.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.RAZOR_FALCHION.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.OBLIVION_PICKAXE.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.RESONANT_PICKAXE.get()
+                                                                       ));
                                                                    entries.accept(Preenchanted.getDefaultEnchantedStack(
                                                                        lookup,
                                                                        PastelItems.DRAGONRENDING_PICKAXE.get()
                                                                    ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.LAGOON_ROD.get()));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.LAGOON_ROD.get()
+                                                                       ));
                                                                    entries.accept(PastelItems.MOLTEN_ROD.get());
                                                                    entries.accept(PastelItems.FETCHLING_HELMET.get());
                                                                    entries.accept(
@@ -355,44 +385,92 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.OREAD_BOOTS.get());
 
                                                                    // BEDROCK TOOLS
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_PICKAXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_AXE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_SHOVEL.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_SWORD.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_HOE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_BOW.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_CROSSBOW.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_SHEARS.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_FISHING_ROD.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_HELMET.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_CHESTPLATE.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_LEGGINGS.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.BEDROCK_BOOTS.get()));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_PICKAXE.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_AXE.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_SHOVEL.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_SWORD.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_HOE.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_BOW.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_CROSSBOW.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_SHEARS.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_FISHING_ROD.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_HELMET.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_CHESTPLATE.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_LEGGINGS.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.BEDROCK_BOOTS.get()
+                                                                       ));
 
                                                                    // MALACHITE & GLASS CREST
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.MALACHITE_WORKSTAFF.get()));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.MALACHITE_WORKSTAFF.get()
+                                                                       ));
                                                                    entries.accept(Preenchanted.getDefaultEnchantedStack(
                                                                        lookup,
                                                                        PastelItems.MALACHITE_ULTRA_GREATSWORD.get()
                                                                    ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.MALACHITE_CROSSBOW.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.MALACHITE_BIDENT.get()));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.MALACHITE_CROSSBOW.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.MALACHITE_BIDENT.get()
+                                                                       ));
                                                                    entries.accept(Preenchanted.getDefaultEnchantedStack(
                                                                        lookup,
                                                                        PastelItems.GLASS_CREST_WORKSTAFF.get()
@@ -409,8 +487,11 @@ public class PastelItemGroups {
                                                                        lookup,
                                                                        PastelItems.FRACTAL_GLASS_CREST_BIDENT.get()
                                                                    ));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.GLASS_CREST_CROSSBOW.get()));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.GLASS_CREST_CROSSBOW.get()
+                                                                       ));
                                                                    entries.accept(PastelItems.OMNI_ACCELERATOR.get());
                                                                    entries.accept(
                                                                        PastelItems.MALACHITE_GLASS_ARROW.get());
@@ -432,10 +513,16 @@ public class PastelItemGroups {
                                                                    // LEGENDARY WEAPONS
                                                                    entries.accept(PastelItems.DREAMFLAYER.get());
                                                                    entries.accept(PastelItems.NIGHTFALLS_BLADE.get());
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.DRACONIC_TWINSWORD.get()));
-                                                                   entries.accept(Preenchanted.getDefaultEnchantedStack(
-                                                                       lookup, PastelItems.DRAGON_TALON.get()));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.DRACONIC_TWINSWORD.get()
+                                                                       ));
+                                                                   entries.accept(
+                                                                       Preenchanted.getDefaultEnchantedStack(
+                                                                           lookup,
+                                                                           PastelItems.DRAGON_TALON.get()
+                                                                       ));
                                                                    entries.accept(PastelItems.KNOTTED_SWORD.get());
                                                                    entries.accept(PastelItems.NECTAR_LANCE.get());
 
@@ -453,8 +540,7 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.SEVEN_LEAGUE_BOOTS.get());
                                                                    entries.accept(Ench.getEnchantedStack(
                                                                        lookup, PastelItems.SEVEN_LEAGUE_BOOTS.get(),
-                                                                       Map.of(
-                                                                           Enchantments.POWER, 5)
+                                                                       Map.of(Enchantments.POWER, 5)
                                                                    ));
                                                                    entries.accept(PastelItems.COTTON_CLOUD_BOOTS.get());
                                                                    entries.accept(PastelItems.RADIANCE_PIN.get());
@@ -497,8 +583,8 @@ public class PastelItemGroups {
                                                                                                                  .getFullStack());
                                                                    entries.accept(PastelItems.GLEAMING_PIN.get());
                                                                    entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.GLEAMING_PIN.get(), Map.of(
-                                                                           PastelEnchantments.SNIPING, 2)
+                                                                       lookup, PastelItems.GLEAMING_PIN.get(),
+                                                                       Map.of(PastelEnchantments.SNIPING, 2)
                                                                    ));
                                                                    entries.accept(
                                                                        PastelItems.LESSER_POTION_PENDANT.get());
@@ -571,8 +657,8 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.RADIANCE_STAFF.get());
                                                                    entries.accept(PastelItems.NATURES_STAFF.get());
                                                                    entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.NATURES_STAFF.get(), Map.of(
-                                                                           Enchantments.EFFICIENCY, 5)
+                                                                       lookup, PastelItems.NATURES_STAFF.get(),
+                                                                       Map.of(Enchantments.EFFICIENCY, 5)
                                                                    ));
                                                                    entries.accept(
                                                                        PastelItems.STAFF_OF_REMEMBRANCE.get());
@@ -598,6 +684,20 @@ public class PastelItemGroups {
                                                                        .ifPresent(entries::accept);
                                                                    entries.accept(PastelItems.BLOCK_FLOODER.get());
                                                                    entries.accept(PastelItems.ENDER_SPLICE.get());
+                                                                   var canvasStack = new ItemStack(
+                                                                       PastelItems.ENDER_CANVAS.get());
+                                                                   canvasStack.set(
+                                                                       PastelDataComponentTypes.ENDER_CANVAS_VARIANT,
+                                                                       EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
+                                                                   );
+                                                                   canvasStack.set(
+                                                                       PastelDataComponentTypes.ENDER_SPLICE,
+                                                                       new EnderSpliceComponent(
+                                                                           new Vec3(0, 80, 0),
+                                                                           Level.OVERWORLD
+                                                                       )
+                                                                   );
+                                                                   entries.accept(canvasStack);
                                                                    entries.accept(Ench.getEnchantedStack(
                                                                        lookup, PastelItems.ENDER_SPLICE.get(), Map.of(
                                                                            PastelEnchantments.RESONANCE, 1,
