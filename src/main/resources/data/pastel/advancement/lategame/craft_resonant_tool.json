@@ -73,9 +73,7 @@
   "requirements": [
     [
       "crafted_resonance_book",
-      "enchanted_resonance_book"
-    ],
-    [
+      "enchanted_resonance_book",
       "craft_pedestal"
     ],
     [
