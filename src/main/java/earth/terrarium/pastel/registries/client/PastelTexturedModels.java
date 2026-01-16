@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.registries.client;
 
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplate;
@@ -71,6 +72,13 @@ public class PastelTexturedModels {
         TextureMapping::logColumn, ModelTemplates.CUBE_COLUMN_MIRRORED);
     public static final TexturedModel.Provider CUSHION = TexturedModel.createDefault(
         b -> PastelTextureMaps.sideTopBottom(b, "_side", b, "_top", b, "_bottom"), PastelModels.CUSHION);
+    public static final TexturedModel.Provider TINTED_CUSHION = TexturedModel.createDefault(
+        b -> new TextureMapping()
+            .put(SIDE, PastelCommon.locate("block/wool_cushion_side"))
+            .put(TOP, PastelCommon.locate("block/wool_cushion_top"))
+            .put(BOTTOM, PastelCommon.locate("block/wool_cushion_bottom")),
+        PastelModels.CUSHION
+    );
     public static final TexturedModel.Provider FUSION_SHRINE = TexturedModel.createDefault(
         b -> new TextureMapping().put(SHRINE, getBlockTexture(b))
                                  .put(PARTICLE, getBlockTexture(b, "_breaking")), PastelModels.FUSION_SHRINE

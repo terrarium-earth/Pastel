@@ -2188,6 +2188,24 @@ public class PastelItemGroups {
                                                                         entries.accept(
                                                                             PastelBlocks.RESPLENDENT_BED.get());
 
+                                                                        entries.accept(PastelBlocks.TEA_TABLE.get());
+                                                                        entries.accept(PastelBlocks.WHITE_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.ORANGE_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.MAGENTA_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.LIGHT_BLUE_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.YELLOW_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.LIME_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.PINK_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.GRAY_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.LIGHT_GRAY_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.CYAN_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.PURPLE_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.BLUE_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.BROWN_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.GREEN_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.RED_CUSHION.get());
+                                                                        entries.accept(PastelBlocks.BLACK_CUSHION.get());
+
 
                                                                         entries.accept(
                                                                             PastelBlocks.RESONANT_LILY.get());

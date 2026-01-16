@@ -1,3 +1,84 @@
 {
-  "values": []
+  "values": [
+    {
+      "id": "pastel:big_catch",
+      "required": false
+    },
+    {
+      "id": "pastel:clovers_favor",
+      "required": false
+    },
+    {
+      "id": "pastel:disarming",
+      "required": false
+    },
+    {
+      "id": "pastel:exuberance",
+      "required": false
+    },
+    {
+      "id": "pastel:first_strike",
+      "required": false
+    },
+    {
+      "id": "pastel:foundry",
+      "required": false
+    },
+    {
+      "id": "pastel:improved_critical",
+      "required": false
+    },
+    {
+      "id": "pastel:indestructible",
+      "required": false
+    },
+    {
+      "id": "pastel:inertia",
+      "required": false
+    },
+    {
+      "id": "pastel:inexorable",
+      "required": false
+    },
+    {
+      "id": "pastel:inventory_insertion",
+      "required": false
+    },
+    {
+      "id": "pastel:pest_control",
+      "required": false
+    },
+    {
+      "id": "pastel:razing",
+      "required": false
+    },
+    {
+      "id": "pastel:resonance",
+      "required": false
+    },
+    {
+      "id": "pastel:serendipity_reel",
+      "required": false
+    },
+    {
+      "id": "pastel:sniping",
+      "required": false
+    },
+    {
+      "id": "pastel:steadfast",
+      "required": false
+    },
+    {
+      "id": "pastel:tight_grip",
+      "required": false
+    },
+    {
+      "id": "pastel:treasure_hunter",
+      "required": false
+    },
+    {
+      "id": "pastel:voiding",
+      "required": false
+    }
+  ]
 }

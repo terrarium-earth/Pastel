@@ -20,11 +20,7 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.registries.PastelTooltips;
-import earth.terrarium.pastel.registries.client.PastelArmorRenderers;
-import earth.terrarium.pastel.registries.client.PastelDimensionsClient;
-import earth.terrarium.pastel.registries.client.PastelModelLayers;
-import earth.terrarium.pastel.registries.client.PastelModelPredicateProviders;
-import earth.terrarium.pastel.registries.client.PastelTooltipComponents;
+import earth.terrarium.pastel.registries.client.*;
 import earth.terrarium.pastel.render.HudRenderers;
 import earth.terrarium.pastel.render.SkyLerper;
 import earth.terrarium.pastel.render.armor.BedrockCapeRenderer;
@@ -63,6 +59,8 @@ public class PastelClient implements ClientHiddenListener, ClientAdvancementList
 
 		logInfo("Setting up Block Rendering...");
 		pastelBus.addListener(PastelBlocks::registerClient);
+        pastelBus.addListener(PastelColorHandlers::registerBlockColorHandlers);
+        pastelBus.addListener(PastelColorHandlers::registerItemColorHandlers);
 
 		logInfo("Setting up client side Mod Compat...");
 		PastelIntegrationPacks.registerClient();

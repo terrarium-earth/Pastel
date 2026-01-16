@@ -141,6 +141,7 @@ public class PastelModels {
     public static final ResourceLocation MOB_BLOCK = PastelCommon.locate("block/mob_block");
     public static final ResourceLocation MOB_BLOCK_COOLDOWN = PastelCommon.locate("block/mob_block_cooldown");
     public static final ResourceLocation MOB_HEAD = PastelCommon.locate("block/mob_head");
+    public static final ResourceLocation TEA_TABLE = PastelCommon.locate("block/tea_table");
 
     public static ModelTemplate baseTransLantern(boolean diagonal, boolean tall) {
         return new ModelTemplate(
