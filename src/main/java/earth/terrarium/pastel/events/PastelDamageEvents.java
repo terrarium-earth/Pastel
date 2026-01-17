@@ -57,7 +57,6 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handlePiercing);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vulnerability);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handlePuffCirclet);
-        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::handleDike);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::applyKillBonuses);
     }
 
@@ -163,19 +162,6 @@ public class PastelDamageEvents {
         }
 
         event.setCanceled(true); // No further processing required for this
-    }
-
-    // Holy lesbians
-    private static void handleDike(LivingIncomingDamageEvent event) {
-        if (event.getSource()
-                 .is(PastelDamageTypeTags.BYPASSES_DIKE))
-            return;
-
-        var target = event.getEntity();
-        var container = event.getContainer();
-
-
-        container.setNewDamage(AzureDikeProvider.absorbDamage(target, container.getNewDamage()));
     }
 
     private static final Set<LivingEntity> RECURSIVE_TARGETS = new HashSet<>();
