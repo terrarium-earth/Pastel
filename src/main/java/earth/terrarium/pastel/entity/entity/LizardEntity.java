@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.entity.POIMemorized;
 import earth.terrarium.pastel.api.entity.PackEntity;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.registries.PastelTrackedDataHandlers;
 import earth.terrarium.pastel.entity.variants.LizardFrillVariant;
 import earth.terrarium.pastel.entity.variants.LizardHornVariant;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -63,11 +63,11 @@ import org.jetbrains.annotations.Nullable;
 public class LizardEntity extends TamableAnimal implements PackEntity<LizardEntity>, POIMemorized {
 
     protected static final EntityDataAccessor<LizardFrillVariant> FRILL_VARIANT = SynchedEntityData.defineId(
-        LizardEntity.class, PastelTrackedDataHandlerRegistry.LIZARD_FRILL_VARIANT);
+        LizardEntity.class, PastelTrackedDataHandlers.LIZARD_FRILL_VARIANT);
     protected static final EntityDataAccessor<LizardHornVariant> HORN_VARIANT = SynchedEntityData.defineId(
-        LizardEntity.class, PastelTrackedDataHandlerRegistry.LIZARD_HORN_VARIANT);
+        LizardEntity.class, PastelTrackedDataHandlers.LIZARD_HORN_VARIANT);
     protected static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(
-        LizardEntity.class, PastelTrackedDataHandlerRegistry.INK_COLOR);
+        LizardEntity.class, PastelTrackedDataHandlers.INK_COLOR);
 
     protected @Nullable LizardEntity leader;
     protected int groupSize = 1;

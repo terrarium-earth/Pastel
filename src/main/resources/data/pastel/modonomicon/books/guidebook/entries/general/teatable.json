@@ -1,0 +1,47 @@
+{
+  "name": "block.pastel.tea_table",
+  "icon": {
+    "item": "pastel:tea_table"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/fusion_shrine"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/fusion_shrine"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 4,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:tea_table"
+      },
+      "text": "book.pastel.guidebook.teatable.page0.text",
+      "title": "book.pastel.guidebook.teatable.name"
+    },
+    {
+      "type" : "modonomicon:text",
+      "text": "book.pastel.guidebook.teatable.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/teatable",
+      "text": "book.pastel.guidebook.teatable.page2.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/cushions/cushion_white",
+      "text": "book.pastel.guidebook.teatable.page3.text"
+    }
+  ]
+}

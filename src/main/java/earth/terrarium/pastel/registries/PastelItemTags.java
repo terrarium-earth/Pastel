@@ -34,6 +34,7 @@ public class PastelItemTags {
     public static final TagKey<Item> PASTEL_NODE_UPGRADES = of("pastel_node_upgrades");
     public static final TagKey<Item> TAG_FILTERING_ITEMS = of("tag_filtering_items");
     public static final TagKey<Item> WEEPING_GALA_LOGS = of("weeping_gala_logs");
+    public static final TagKey<Item> TEA_TABLE_DRINKS = of("tea_table_drinks");
 
     public static final TagKey<Item> PRODUCTIVITY_EXCLUDED = of("productivity_excluded");
 

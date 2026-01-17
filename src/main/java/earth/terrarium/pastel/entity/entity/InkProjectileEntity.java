@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.EntityColorProcessorRegistry;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.registries.PastelTrackedDataHandlers;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.level.BlockVariantHelper;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
@@ -54,7 +54,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
     private static final float DAMAGE_PER_POTENCY = 0.5F;
 
     private static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(
-        InkProjectileEntity.class, PastelTrackedDataHandlerRegistry.INK_COLOR);
+        InkProjectileEntity.class, PastelTrackedDataHandlers.INK_COLOR);
 
     public InkProjectileEntity(EntityType<InkProjectileEntity> type, Level world) {
         super(type, world);

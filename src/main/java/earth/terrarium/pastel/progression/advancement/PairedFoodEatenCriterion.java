@@ -16,8 +16,8 @@ public class PairedFoodEatenCriterion extends SimpleCriterionTrigger<PairedFoodE
 
     public static final ResourceLocation ID = PastelCommon.locate("consumed_paired_food");
 
-    public void trigger(ServerPlayer player, ItemStack teaStack, ItemStack sconeStack) {
-        this.trigger(player, (conditions) -> conditions.matches(teaStack, sconeStack));
+    public void trigger(ServerPlayer player, ItemStack eatenStack, ItemStack pairedStack) {
+        this.trigger(player, (conditions) -> conditions.matches(eatenStack, pairedStack));
     }
 
     @Override
@@ -27,27 +27,26 @@ public class PairedFoodEatenCriterion extends SimpleCriterionTrigger<PairedFoodE
 
     public record Conditions(
         Optional<ContextAwarePredicate> player,
-        ItemPredicate teaItem,
-        ItemPredicate sconeItem
+        Optional<ItemPredicate> eatenItem,
+        Optional<ItemPredicate> pairedItem
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
         public static final Codec<PairedFoodEatenCriterion.Conditions> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                                     ContextAwarePredicate.CODEC.optionalFieldOf("player")
                                                                .forGetter(PairedFoodEatenCriterion.Conditions::player),
-                                    ItemPredicate.CODEC.optionalFieldOf("eaten_item", ItemPredicate.Builder.item()
-                                                                                                           .build()
-                                                 )
-                                                       .forGetter(PairedFoodEatenCriterion.Conditions::teaItem),
-                                    ItemPredicate.CODEC.optionalFieldOf("paired_item", ItemPredicate.Builder.item()
-                                                                                                            .build()
-                                                 )
-                                                       .forGetter(PairedFoodEatenCriterion.Conditions::sconeItem)
+                                    ItemPredicate.CODEC.optionalFieldOf("eaten_item")
+                                                       .forGetter(PairedFoodEatenCriterion.Conditions::eatenItem),
+                                    ItemPredicate.CODEC.optionalFieldOf("paired_item")
+                                                       .forGetter(PairedFoodEatenCriterion.Conditions::pairedItem)
                                 )
                                 .apply(instance, PairedFoodEatenCriterion.Conditions::new));
 
-        public boolean matches(ItemStack teaStack, ItemStack sconeStack) {
-            return teaItem.test(teaStack) && sconeItem.test(sconeStack);
+        public boolean matches(ItemStack eatenStack, ItemStack pairedStack) {
+            if (eatenItem.isPresent() && !eatenItem.get().test(eatenStack))
+                return false;
+
+            return pairedItem.isEmpty() || pairedItem.get().test(pairedStack);
         }
     }
 

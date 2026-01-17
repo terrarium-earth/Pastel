@@ -21,7 +21,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
-      "use_legacy_rendering": true,
+      "use_legacy_rendering": false,
       "title": "structure.pastel.undergrowth_manor",
       "images": [
         "pastel:textures/gui/guidebook/undergrowth_manor.png"

@@ -45,7 +45,7 @@
     },
     {
       "type": "modonomicon:image",
-      "use_legacy_rendering": true,
+      "use_legacy_rendering": false,
       "title": "book.pastel.guidebook.pedestal_customisation.title",
       "images": [
         "pastel:textures/gui/guidebook/pastel_hall_customisation.png"

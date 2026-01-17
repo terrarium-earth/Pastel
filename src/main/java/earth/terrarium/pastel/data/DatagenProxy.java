@@ -8,10 +8,11 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
 
 public class DatagenProxy {
 
-    public static final boolean IS_DATAGEN = System.getProperty("fabric-api.datagen") != null;
+    public static final boolean IS_DATAGEN = DatagenModLoader.isRunningDataGen();
 
     public interface TagBuilderCallback<T> {
         TagsProvider.TagAppender<T> build(TagsProvider.TagAppender<T> provider);

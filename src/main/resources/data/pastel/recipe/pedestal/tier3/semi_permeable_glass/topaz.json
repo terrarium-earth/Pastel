@@ -4,9 +4,9 @@
   "time": 80,
   "tier": "advanced",
   "colors": {
-    "pastel:magenta": 8,
+    "pastel:magenta": 0,
     "pastel:yellow": 0,
-    "pastel:cyan": 0,
+    "pastel:cyan": 8,
     "pastel:black": 0,
     "pastel:white": 0
   },

@@ -182,8 +182,8 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
             if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
                 continue;
 
-            var recipe = CraftingTabletItem.getStoredRecipe(level, tablet)
-                                           .value();
+            var storedRecipe = CraftingTabletItem.getStoredRecipe(level, tablet);
+            var recipe = storedRecipe == null ? null : storedRecipe.value();
             if (isRecipeValid(recipe) && isRecipeCraftable(recipe) && canSlotFitCraftingOutput(
                 inventory.getStackInSlot(RESULT_SLOTS[i]), recipe))
                 return true;

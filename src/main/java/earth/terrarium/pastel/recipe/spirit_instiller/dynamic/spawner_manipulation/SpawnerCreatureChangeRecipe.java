@@ -24,7 +24,7 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
         super(
             IngredientStack.ofTag(PastelItemTags.SKULLS),
             IngredientStack.ofItems(PastelItems.DOWNSTONE_FRAGMENTS.get(), 4),
-            Optional.of(PastelAdvancements.SPAWNER_CREATURE_CHANGE)
+            Optional.of(PastelAdvancements.Milestones.UNLOCK_SPAWNER_CREATURE_CHANGE)
         );
     }
 

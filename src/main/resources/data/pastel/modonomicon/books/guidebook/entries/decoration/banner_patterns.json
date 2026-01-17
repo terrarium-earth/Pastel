@@ -17,7 +17,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
-      "use_legacy_rendering": true,
+      "use_legacy_rendering": false,
       "title": "book.pastel.guidebook.banner_patterns.name",
       "border": true,
       "images": [

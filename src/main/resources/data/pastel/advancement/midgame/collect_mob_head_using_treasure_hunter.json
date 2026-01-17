@@ -16,7 +16,7 @@
       "trigger": "pastel:loot_function_trigger",
       "conditions": {
         "tags": [
-          "pastel:mob_head"
+          "c:skulls"
         ]
       }
     },

@@ -38,7 +38,7 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 
     public SpawnerChangeRecipe(IngredientStack ingredient) {
         super(
-            "spawner_manipulation", false, Optional.of(PastelAdvancements.SPAWNER_MANIPULATION),
+            "spawner_manipulation", false, Optional.of(PastelAdvancements.Milestones.UNLOCK_SPAWNER_MANIPULATION),
             IngredientStack.ofItems(Items.SPAWNER), ingredient, IngredientStack.ofItems(PastelItems.VEGETAL.get(), 4),
             Items.SPAWNER.getDefaultInstance(), 200, 0, true
         );

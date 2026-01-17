@@ -39,8 +39,8 @@ public abstract class EntityMixin {
     @Inject(method = "getBlockSpeedFactor", at = @At("RETURN"), cancellable = true)
     private void applyInexorableAntiSlowdown(CallbackInfoReturnable<Float> cir) {
         var entity = (Entity) (Object) this;
-        if (entity instanceof LivingEntity livingEntity && InexorableHelper.isArmorActive(livingEntity)) {
-            cir.setReturnValue(Math.max(cir.getReturnValue(), 1F));
+        if (cir.getReturnValue() < 1f && entity instanceof LivingEntity livingEntity && InexorableHelper.isArmorActive(livingEntity)) {
+            cir.setReturnValue(1F);
         }
     }
 

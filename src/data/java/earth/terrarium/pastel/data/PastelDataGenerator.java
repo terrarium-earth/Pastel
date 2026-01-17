@@ -25,7 +25,7 @@ public class PastelDataGenerator {
 		event.addProvider(blockTagsProvider);
 		event.addProvider(new PastelItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
 		event.addProvider(new PastelEnchantmentTagsProvider(packOutput, lookupProvider, existingFileHelper));
-		//event.addProvider(new SpectrumModelProvider(packOutput, lookupProvider));
+		event.addProvider(new PastelModelProvider(packOutput));
 		event.addProvider(new PastelRecipeProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelCompostableDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelWaxableDataMapProvider(packOutput, lookupProvider));

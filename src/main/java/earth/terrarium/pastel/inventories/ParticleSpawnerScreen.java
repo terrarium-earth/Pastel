@@ -30,6 +30,7 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.function.Predicate;
 
 @OnlyIn(Dist.CLIENT)
@@ -400,24 +401,24 @@ public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawn
             addParticleButton(startX + 23 + 100, startY + 16)
         );
 
-        this.particleSelectionIndex = 0;
-        int particleIndex = 0;
-        for (ParticleSpawnerParticlesDataLoader.ParticleSpawnerEntry availableParticle : displayedParticleEntries) {
+        this.particleSelectionIndex = -1;
+        ListIterator<ParticleSpawnerParticlesDataLoader.ParticleSpawnerEntry> it = displayedParticleEntries.listIterator();
+        while(it.hasNext()) {
+            var availableParticle = it.next();
             if (availableParticle.particleType()
                                  .equals(configuration.particleType())) {
-                this.particleSelectionIndex = particleIndex;
+                this.particleSelectionIndex = it.previousIndex();
                 break;
             }
-            particleIndex++;
         }
 
         if (displayedParticleEntries.isEmpty()) {
             setColoringEnabled(false);
+        } else if (this.particleSelectionIndex != -1) {
+            ParticleSpawnerParticlesDataLoader.ParticleSpawnerEntry entry = displayedParticleEntries.get(
+                this.particleSelectionIndex);
+            setColoringEnabled(entry.supportsColoring());
         }
-
-        ParticleSpawnerParticlesDataLoader.ParticleSpawnerEntry entry = displayedParticleEntries.get(
-            this.particleSelectionIndex);
-        setColoringEnabled(entry.supportsColoring());
     }
 
     private void navigationButtonPressed(Button buttonWidget) {

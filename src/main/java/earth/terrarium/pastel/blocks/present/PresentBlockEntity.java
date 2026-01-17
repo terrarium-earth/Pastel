@@ -1,11 +1,17 @@
 package earth.terrarium.pastel.blocks.present;
 
+import com.mojang.authlib.GameProfile;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
+import earth.terrarium.pastel.components.WrappedPresentComponent;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,6 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +29,6 @@ import java.util.UUID;
 
 public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithName {
 
-    protected ItemStack presentStack = ItemStack.EMPTY;
     private UUID openerUUID;
     protected int openingTicks = 0;
 
@@ -52,7 +59,6 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
         super.loadAdditional(nbt, registryLookup);
-        this.presentStack = ItemStack.parseOptional(registryLookup, nbt.getCompound("Present"));
         if (nbt.contains("OpenerUUID")) {
             this.openerUUID = nbt.getUUID("OpenerUUID");
         } else {
@@ -66,7 +72,6 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
     @Override
     protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
         super.saveAdditional(nbt, registryLookup);
-        nbt.put("Present", this.presentStack.saveOptional(registryLookup));
         if (this.openerUUID != null) {
             nbt.putUUID("OpenerUUID", this.openerUUID);
         }
@@ -82,27 +87,40 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
     }
 
     @Override
+    @Nullable
     public UUID getOwnerUUID() {
-        return PresentBlockItem.getOwner(this.presentStack)
-                               .flatMap(ResolvableProfile::id)
-                               .orElse(null);
+        var profile = getOwner();
+        return profile == null ? null : profile.id().orElse(null);
     }
 
+    @Nullable
     public ResolvableProfile getOwner() {
-        return PresentBlockItem.getOwner(this.presentStack)
-                               .orElse(null);
+        return components().get(DataComponents.PROFILE);
     }
 
     @Override
     public String getOwnerName() {
-        return PresentBlockItem.getOwner(this.presentStack)
-                               .flatMap(ResolvableProfile::name)
-                               .orElse("???");
+        var profile = getOwner();
+        return profile == null ? "???" : profile.name().orElse("???");
     }
 
     @Override
-    public void setOwner(Player playerEntity) {
-        PresentBlockItem.setOwner(this.presentStack, playerEntity);
+    public void setOwner(@Nullable Player playerEntity) {
+        ResolvableProfile result;
+        var builder = DataComponentPatch.builder();
+
+        if (playerEntity == null)
+            builder.remove(DataComponents.PROFILE);
+        else {
+            var profile = new GameProfile(
+                playerEntity.getUUID(), playerEntity.getName()
+                                                    .getString()
+            );
+
+            builder.set(DataComponents.PROFILE, new ResolvableProfile(profile));
+        }
+
+        applyComponents(components(), builder.build());
         setChanged();
     }
 
@@ -116,26 +134,24 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
     }
 
     public ItemStack retrievePresent() {
-        return this.presentStack.copy();
+        var result = PastelBlocks.PRESENT.toStack();
+        result.applyComponents(components());
+        return result;
     }
 
     public Map<Integer, Integer> getColors() {
-        return PresentBlockItem.getWrapData(this.presentStack)
-                               .colors();
+        return components().getOrDefault(PastelDataComponentTypes.WRAPPED_PRESENT, WrappedPresentComponent.DEFAULT).colors();
     }
 
     public List<ItemStack> getStacks() {
-        return PresentBlockItem.getBundledStacks(this.presentStack)
-                               .toList();
-    }
-
-    public void setPresent(ItemStack present) {
-        this.presentStack = present;
-        setChanged();
+        var contents = components().get(DataComponents.BUNDLE_CONTENTS);
+        return contents == null ? List.of() : contents.itemCopyStream()
+                                                      .toList();
     }
 
     public boolean isEmpty() {
-        return PresentBlockItem.isEmpty(this.presentStack);
+        var contents = components().get(DataComponents.BUNDLE_CONTENTS);
+        return contents == null || contents.isEmpty();
     }
 
 }

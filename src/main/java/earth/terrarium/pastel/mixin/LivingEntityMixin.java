@@ -128,12 +128,12 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @ModifyVariable(method = "travel", at = @At(value = "STORE"), ordinal = 0)
-    private boolean noSlowFallingSlowdown(boolean b) {
-        if (!b) {
-            return false;
+    @WrapOperation(method = "travel", at = @At(value = "INVOKE", target="Ljava/lang/Math;min(DD)D",ordinal = 0))
+    private double noSlowFallingSlowdown(double gravity, double slowdown, Operation<Double> original) {
+        if(InexorableHelper.isArmorActive((LivingEntity) (Object) this)){
+            return gravity;
         }
-        return !InexorableHelper.isArmorActive((LivingEntity) (Object) this);
+        return original.call(gravity,slowdown);
     }
 
     @Inject(method = "travel",
@@ -310,10 +310,10 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(
-        method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;)" +
+        method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/food/FoodProperties;)" +
                  "Lnet/minecraft/world/item/ItemStack;",
         at = @At(value = "HEAD"))
-    private void conditionalFood(Level world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+    private void conditionalFood(Level world, ItemStack stack, FoodProperties foodProperties, CallbackInfoReturnable<ItemStack> cir) {
         PairedFoodComponent component = stack.get(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT);
         if (component != null) {
             component.tryEatFood(world, (LivingEntity) (Object) this, stack);
