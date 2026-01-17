@@ -1,0 +1,60 @@
+{
+  "name": "item.pastel.ender_canvas",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/ender_splice"
+  },
+  "icon": {
+    "item": "pastel:ender_canvas"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/ender_splice"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 6,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:ender_canvas"
+      },
+      "text": "book.pastel.guidebook.ender_canvas.page0.text",
+      "title": "item.pastel.ender_canvas"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.ender_canvas.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/ender_canvas"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.ender_canvas.page2.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/ender_canvas_large"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/create_resonance_enchanted_book"
+      },
+      "title": "enchantment.pastel.resonance",
+      "item": {
+        "item": "pastel:ender_canvas"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:resonance": 1
+        }
+      },
+      "text": "book.pastel.guidebook.ender_splice.page3.text"
+    }
+  ]
+}
