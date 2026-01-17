@@ -1,3 +1,6 @@
 {
-  "parent": "pastel:block/ebony_noxwood_door"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:block/ebony_noxwood_door"
+  }
 }
