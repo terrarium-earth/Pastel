@@ -2,6 +2,8 @@ package earth.terrarium.pastel.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.entity.entity.CanvasWorkaroundPlayerEntity;
 import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.RemotePlayer;
@@ -12,11 +14,13 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.attachment.AttachmentType;
 
-public class EnderCanvasRenderer extends EntityRenderer<EnderCanvasEntity> {
+public class EnderCanvasEntityRenderer extends EntityRenderer<EnderCanvasEntity> {
     private final EntityRendererProvider.Context context;
 
-    public EnderCanvasRenderer(EntityRendererProvider.Context context) {
+    public EnderCanvasEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.context = context;
     }
@@ -69,16 +73,27 @@ public class EnderCanvasRenderer extends EntityRenderer<EnderCanvasEntity> {
                                                                                           .targetGameProfile()
                                                                                           .isPresent() &&
             Minecraft.getInstance().level != null) {
-            RemotePlayer toRender = new RemotePlayer(
-                Minecraft.getInstance().level, entity.getSpliceData()
-                                                     .targetGameProfile()
-                                                     .get()
-            );
-            toRender.setCustomNameVisible(false);
+            CanvasWorkaroundPlayerEntity toRender;
+            if (entity.cachedPlayer == null) {
+                toRender = new CanvasWorkaroundPlayerEntity(
+                    Minecraft.getInstance().level, entity.getSpliceData()
+                                                         .targetGameProfile()
+                                                         .get()
+                );
+                toRender.setCustomNameVisible(false);
+
+                toRender.getEntityData()
+                        .set(Player.DATA_PLAYER_MODE_CUSTOMISATION, (byte) 0b1111111);
+                entity.cachedPlayer = toRender;
+            } else {
+                toRender = entity.cachedPlayer;
+            }
+            
             toRender.lookAt(
                 EntityAnchorArgument.Anchor.EYES, toRender.getEyePosition()
                                                           .relative(entity.getDirection(), 1.0)
             );
+
             poseStack.pushPose();
             poseStack.mulPose(entity.getDirection()
                                     .getAxis() == Direction.Axis.Z ? Axis.YP.rotationDegrees(180f - entityYaw)

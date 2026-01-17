@@ -8,6 +8,7 @@ import earth.terrarium.pastel.items.magic_items.EnderSpliceItem;
 import earth.terrarium.pastel.registries.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -41,6 +42,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.level.NoteBlockEvent;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nullable;
@@ -51,6 +53,7 @@ import java.util.function.IntFunction;
 
 public class EnderCanvasEntity extends HangingEntity implements VariantHolder<EnderCanvasEntity.EnderCanvasVariant> {
 
+    public CanvasWorkaroundPlayerEntity cachedPlayer;
     private static final EntityDataAccessor<EnderSpliceComponent> SPLICE_DATA = SynchedEntityData.defineId(
         EnderCanvasEntity.class,
         PastelTrackedDataHandlers.ENDER_SPLICE_COMPONENT
