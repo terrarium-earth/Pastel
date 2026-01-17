@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:midgame/plant_jade_vines",
+  "display": {
+    "icon": {
+      "id": "pastel:jade_petals"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_jade_petals.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_jade_petals.description"
+    }
+  },
+  "criteria": {
+    "collected_jade_petals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:jade_petals"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:midgame/plant_jade_vines"
+      }
+    }
+  }
+}

@@ -28,7 +28,7 @@ public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBelt
     public void trigger(ServerPlayer player) {
         this.trigger(
             player, (conditions) ->
-                PastelTrinketItem.getFirstEquipped(player, PastelItems.TAKE_OFF_BELT.get())
+                PastelTrinketItem.getFirstEquipped(player, PastelItems.TAKEOFF_BELT.get())
                                  .map((belt) -> TakeOffBeltItem.getCurrentCharge(player) > 0)
                                  .orElse(false)
         );

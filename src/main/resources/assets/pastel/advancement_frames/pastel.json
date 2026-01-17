@@ -346,7 +346,7 @@
     "frame": "paginatedadvancements:squircle"
   },
   {
-    "advancement": "pastel:midgame/open_deeper_down_portal",
+    "advancement": "pastel:midgame/open_fissure",
     "frame": "paginatedadvancements:squircle"
   },
   {
@@ -466,7 +466,7 @@
     "frame": "paginatedadvancements:squircle"
   },
   {
-    "advancement": "pastel:midgame/collect_jade_vine_petals",
+    "advancement": "pastel:midgame/collect_jade_petals",
     "frame": "paginatedadvancements:squircle"
   }
 ]

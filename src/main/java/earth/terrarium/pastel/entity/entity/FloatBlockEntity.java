@@ -347,7 +347,7 @@ public class FloatBlockEntity extends Entity {
             if (entity instanceof FloatBlockEntity other && isPaltaeriaStratineCollision(other)) {
                 world.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, Level.ExplosionInteraction.NONE);
 
-                ItemStack collisionStack = PastelBlocks.HOVER_BLOCK.get()
+                ItemStack collisionStack = PastelBlocks.HOVERBLOCK.get()
                                                                    .asItem()
                                                                    .getDefaultInstance();
                 ItemEntity itemEntity = new ItemEntity(world, this.getX(), this.getY(), this.getZ(), collisionStack);

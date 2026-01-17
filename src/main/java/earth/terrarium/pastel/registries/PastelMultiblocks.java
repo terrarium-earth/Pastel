@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class PastelMultiblocks {
-
     public static final Component PEDESTAL_SIMPLE_TEXT = Component.translatable("multiblock.pastel.pedestal_simple");
     public static final ResourceLocation PEDESTAL_SIMPLE = PastelCommon.locate("pedestal_simple");
     public static final Component PEDESTAL_ADVANCED_TEXT = Component.translatable(

@@ -14,7 +14,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelEntityTypes {
 
-    private static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(
+    public static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(
         Registries.ENTITY_TYPE, PastelCommon.MOD_ID);
 
     public static final DeferredHolder<EntityType<?>, EntityType<LivingMarkerEntity>> LIVING_MARKER = register(
@@ -24,7 +24,7 @@ public class PastelEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<SeatEntity>> SEAT = register(
         "seat", 8, 10, false, EntityDimensions.scalable(0.01F, 0.01F), true, SeatEntity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<FloatBlockEntity>> FLOAT_BLOCK = register(
-        "float_block", 10, 20, true, EntityDimensions.scalable(0.98F, 0.98F), true, FloatBlockEntity::new);
+        "floatblock", 10, 20, true, EntityDimensions.scalable(0.98F, 0.98F), true, FloatBlockEntity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<PhantomFrameEntity>> PHANTOM_FRAME = register(
         "phantom_frame", 10, 2147483647, false, EntityDimensions.scalable(0.5F, 0.5F), false, PhantomFrameEntity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<PhantomGlowFrameEntity>> GLOW_PHANTOM_FRAME = register(

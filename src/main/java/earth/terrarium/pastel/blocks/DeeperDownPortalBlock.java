@@ -53,8 +53,8 @@ public class DeeperDownPortalBlock extends Block {
     public static final MapCodec<DeeperDownPortalBlock> CODEC = simpleCodec(DeeperDownPortalBlock::new);
 
     private final static ResourceLocation CREATE_PORTAL_ADVANCEMENT_IDENTIFIER = PastelCommon.locate(
-        "midgame/open_deeper_down_portal");
-    private final static String CREATE_PORTAL_ADVANCEMENT_CRITERION = "opened_deeper_down_portal";
+        "midgame/open_fissure");
+    private final static String CREATE_PORTAL_ADVANCEMENT_CRITERION = "opened_fissure";
 
     public static final BooleanProperty FACING_UP = BlockStateProperties.UP;
 
@@ -88,7 +88,7 @@ public class DeeperDownPortalBlock extends Block {
             if (!hasNeighboringPortals(world, pos)) {
                 world.playSound(
                     null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                    PastelSounds.DEEPER_DOWN_PORTAL_OPEN, SoundSource.BLOCKS, 0.75F, 0.75F
+                    PastelSounds.FISSURE_OPEN, SoundSource.BLOCKS, 0.75F, 0.75F
                 );
 
                 for (Player nearbyPlayer : world.getEntities(
@@ -168,9 +168,9 @@ public class DeeperDownPortalBlock extends Block {
                 if (facingUp) {
                     BlockPos portalPos = new BlockPos(pos.getX(), world.getMinBuildHeight(), pos.getZ());
                     if (!world.getBlockState(portalPos)
-                              .is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
+                              .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
                         world.setBlockAndUpdate(
-                            portalPos, PastelBlocks.DEEPER_DOWN_PORTAL.get()
+                            portalPos, PastelBlocks.IMBRIFER_PORTAL.get()
                                                                       .defaultBlockState()
                                                                       .setValue(FACING_UP, false)
                         );
@@ -193,9 +193,9 @@ public class DeeperDownPortalBlock extends Block {
                                                                      .logicalHeight() - 1, pos.getZ()
                     );
                     if (!world.getBlockState(portalPos)
-                              .is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
+                              .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
                         world.setBlockAndUpdate(
-                            portalPos, PastelBlocks.DEEPER_DOWN_PORTAL.get()
+                            portalPos, PastelBlocks.IMBRIFER_PORTAL.get()
                                                                       .defaultBlockState()
                                                                       .setValue(FACING_UP, true)
                         );
@@ -224,9 +224,9 @@ public class DeeperDownPortalBlock extends Block {
                 if (targetWorld != null) {
                     BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMaxBuildHeight() - 1, pos.getZ());
                     if (!targetWorld.getBlockState(portalPos)
-                                    .is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
+                                    .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
                         targetWorld.setBlockAndUpdate(
-                            portalPos, PastelBlocks.DEEPER_DOWN_PORTAL.get()
+                            portalPos, PastelBlocks.IMBRIFER_PORTAL.get()
                                                                       .defaultBlockState()
                                                                       .setValue(FACING_UP, true)
                         );
@@ -253,9 +253,9 @@ public class DeeperDownPortalBlock extends Block {
             if (targetWorld != null) {
                 BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMinBuildHeight(), pos.getZ());
                 if (!targetWorld.getBlockState(portalPos)
-                                .is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
+                                .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
                     targetWorld.setBlockAndUpdate(
-                        portalPos, PastelBlocks.DEEPER_DOWN_PORTAL.get()
+                        portalPos, PastelBlocks.IMBRIFER_PORTAL.get()
                                                                   .defaultBlockState()
                                                                   .setValue(FACING_UP, false)
                     );

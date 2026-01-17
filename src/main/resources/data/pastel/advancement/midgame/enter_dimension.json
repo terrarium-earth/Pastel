@@ -1,5 +1,5 @@
 {
-  "parent": "pastel:midgame/open_deeper_down_portal",
+  "parent": "pastel:midgame/open_fissure",
   "display": {
     "icon": {
       "id": "pastel:black_glowblock"

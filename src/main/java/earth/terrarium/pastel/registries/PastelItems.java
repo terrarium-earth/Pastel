@@ -842,8 +842,8 @@ public class PastelItems {
     )));
     public static final DeferredItem<Item> GERMINATED_JADE_VINE_BULB = register(
         simple(item("germinated_jade_vine_bulb", () -> new GerminatedJadeVineBulbItem(IS.of(16)), InkColors.LIME)));
-    public static final DeferredItem<Item> JADE_VINE_PETALS = register(simple(item(
-        "jade_vine_petals", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.JADE_VINE), InkColors.LIME)));
+    public static final DeferredItem<Item> JADE_PETALS = register(simple(item(
+        "jade_petals", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.JADE_VINE), InkColors.LIME)));
         // TODO: Funky unlock?
     public static final DeferredItem<Item> JADEITE_PETALS = register(
         simple(item("jadeite_petals", () -> new Item(IS.of(Rarity.UNCOMMON)), InkColors.BROWN)));
@@ -1165,7 +1165,7 @@ public class PastelItems {
         InkColors.PINK
     )));
     public static final DeferredItem<Item> DRAGONBONE_BROTH = register(simple(item(
-        "dragonbone_broth", () -> new StackableStewItem(IS.of(8)
+        "wyrmscale_jelly", () -> new StackableStewItem(IS.of(8)
                                                           .food(PastelFoodComponents.DRAGONBONE_BROTH)), InkColors.GRAY
     )));
     public static final DeferredItem<Item> DOOMBLOOM_SEED = register(simple(item(
@@ -1440,7 +1440,7 @@ public class PastelItems {
     ));
     public static final DeferredItem<Item> LIZARD_SPAWN_EGG = register(parented(
         item(
-            "lizard_spawn_egg", () -> new SpawnEggItem(PastelEntityTypes.LIZARD.get(), 0x896459, 0x503a40, IS.of()),
+            "lurking_lizard_spawn_egg", () -> new SpawnEggItem(PastelEntityTypes.LIZARD.get(), 0x896459, 0x503a40, IS.of()),
             InkColors.WHITE
         ), PastelModels.SPAWN_EGG
     ));
@@ -1564,7 +1564,7 @@ public class PastelItems {
         simple(item("fanciful_bismuth_ring", () -> new Item(IS.of(16, Rarity.UNCOMMON)), InkColors.GREEN)));
 
     public static final DeferredItem<Item> PRISCILLENT_SPECTACLES = register(simple(
-        item("glow_vision_goggles", () -> new PriscillentSpectaclesItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
+        item("priscillent_spectacles", () -> new PriscillentSpectaclesItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
     public static final DeferredItem<Item> JEOPARDANT = register(
         simple(item("jeopardant", () -> new AttackRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.RED)));
     public static final DeferredItem<SevenLeagueBootsItem> SEVEN_LEAGUE_BOOTS = register(simple(
@@ -1575,8 +1575,8 @@ public class PastelItems {
         simple(item("radiance_pin", () -> new RadiancePinItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BLUE)));
     public static final DeferredItem<Item> TOTEM_PENDANT = register(
         simple(item("totem_pendant", () -> new TotemPendantItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BLUE)));
-    public static final DeferredItem<TakeOffBeltItem> TAKE_OFF_BELT = register(
-        simple(item("take_off_belt", () -> new TakeOffBeltItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW)));
+    public static final DeferredItem<TakeOffBeltItem> TAKEOFF_BELT = register(
+        simple(item("takeoff_belt", () -> new TakeOffBeltItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW)));
     public static final DeferredItem<Item> AZURE_DIKE_BELT = register(simple(item(
         "azure_dike_belt",
         () -> new AzureDikeBeltItem(IS.of(1, Rarity.UNCOMMON), PastelAdvancements.Unlocks.Trinkets.AZURE_DIKE_BELT),
@@ -1605,8 +1605,8 @@ public class PastelItems {
         item("ring_of_pursuit", () -> new ExtraMiningSpeedRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.MAGENTA)));
     public static final DeferredItem<InkDrainTrinketItem> RING_OF_DENSER_STEPS = register(simple(
         item("ring_of_denser_steps", () -> new RingOfDenserStepsItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BROWN)));
-    public static final DeferredItem<InkDrainTrinketItem> RING_OF_AERIAL_GRACE = register(simple(
-        item("ring_of_aerial_grace", () -> new RingOfAerialGraceItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
+    public static final DeferredItem<InkDrainTrinketItem> RING_OF_AETHERIAL_GRACE = register(simple(
+        item("ring_of_aetherial_grace", () -> new RingOfAerialGraceItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
     public static final DeferredItem<InkDrainTrinketItem> LAURELS_OF_SERENITY = register(simple(
         item("laurels_of_serenity", () -> new LaurelsOfSerenityItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE)));
 

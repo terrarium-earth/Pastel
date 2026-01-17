@@ -78,7 +78,7 @@
       "title": "book.pastel.guidebook.jade_vines.page5.title",
       "anchor": "petals",
       "item": {
-        "item": "pastel:jade_vine_petals"
+        "item": "pastel:jade_petals"
       },
       "condition": {
         "type": "modonomicon:advancement",

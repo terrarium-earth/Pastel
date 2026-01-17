@@ -28,10 +28,10 @@ public class RadiancePinItem extends PastelTrinketItem {
 
     public static final int CHECK_EVERY_X_TICKS = 20;
     public static final int MAX_LIGHT_LEVEL = 7;
-    public static final BlockState LIGHT_BLOCK_STATE = PastelBlocks.DECAYING_LIGHT_BLOCK.get()
+    public static final BlockState LIGHT_BLOCK_STATE = PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get()
                                                                                         .defaultBlockState()
                                                                                         .setValue(LightBlock.LEVEL, 15);
-    public static final BlockState LIGHT_BLOCK_STATE_WATER = PastelBlocks.DECAYING_LIGHT_BLOCK.get()
+    public static final BlockState LIGHT_BLOCK_STATE_WATER = PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get()
                                                                                               .defaultBlockState()
                                                                                               .setValue(
                                                                                                   LightBlock.LEVEL, 15)
@@ -74,7 +74,7 @@ public class RadiancePinItem extends PastelTrinketItem {
                 } else if (currentState.equals(Blocks.WATER.defaultBlockState())) {
                     world.setBlock(pos, LIGHT_BLOCK_STATE_WATER, 3);
                     placed = true;
-                } else if (currentState.is(PastelBlocks.DECAYING_LIGHT_BLOCK.get())) {
+                } else if (currentState.is(PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get())) {
                     if (currentState.getValue(LightBlock.WATERLOGGED)) {
                         world.setBlock(pos, LIGHT_BLOCK_STATE_WATER, 3);
                     } else {

@@ -494,8 +494,8 @@ public class PastelAdvancements {
             public static final ResourceLocation WEATHER_DETECTOR = PastelCommon.locate(
                 "unlocks/redstone/weather_detector");
             public static final ResourceLocation BLOCK_BREAKER = PastelCommon.locate("unlocks/redstone/block_breaker");
-            public static final ResourceLocation LIGHT_LEVEL_DETECTOR = PastelCommon.locate(
-                "unlocks/redstone/light_level_detector");
+            public static final ResourceLocation BLOCK_LIGHT_DETECTOR = PastelCommon.locate(
+                "unlocks/redstone/block_light_detector");
             public static final ResourceLocation REDSTONE_CALCULATOR = PastelCommon.locate(
                 "unlocks/redstone/redstone_calculator");
         }
@@ -693,7 +693,7 @@ public class PastelAdvancements {
         public static final ResourceLocation FIND_UNDERGROWTH_MANOR = PastelCommon.locate(
             "lategame/find_undergrowth_manor");
         public static final ResourceLocation COLLECT_MALACHITE = PastelCommon.locate("lategame/collect_malachite");
-        public static final ResourceLocation COLLECT_HOVER_BLOCK = PastelCommon.locate("lategame/collect_hover_block");
+        public static final ResourceLocation COLLECT_HOVERBLOCK = PastelCommon.locate("lategame/collect_hoverblock");
         public static final ResourceLocation PASTEL_LATEGAME = PastelCommon.locate("lategame/pastel_lategame");
         public static final ResourceLocation BUILD_COMPLEX_PEDESTAL_STRUCTURE = PastelCommon.locate(
             "lategame/build_complex_pedestal_structure");
@@ -978,8 +978,8 @@ public class PastelAdvancements {
             "midgame/craft_bottle_of_decay_away");
         public static final ResourceLocation CRAFT_AND_GET_25_XP = PastelCommon.locate("midgame/craft_and_get_25_xp");
         public static final ResourceLocation CRAFT_BOTTLE_OF_RUIN = PastelCommon.locate("midgame/craft_bottle_of_ruin");
-        public static final ResourceLocation OPEN_DEEPER_DOWN_PORTAL = PastelCommon.locate(
-            "midgame/open_deeper_down_portal");
+        public static final ResourceLocation OPEN_FISSURE = PastelCommon.locate(
+            "midgame/open_fissure");
         public static final ResourceLocation CREATE_HUGE_SLIME = PastelCommon.locate("midgame/create_huge_slime");
         public static final ResourceLocation UPGRADE_PASTEL_NODE_THROUGHPUT = PastelCommon.locate(
             "midgame/upgrade_pastel_node_throughput");
@@ -1043,8 +1043,8 @@ public class PastelAdvancements {
         public static final ResourceLocation COLLECT_STRATINE = PastelCommon.locate("midgame/collect_stratine");
         public static final ResourceLocation TAKE_OFF_BELT_OVERCHARGED = PastelCommon.locate(
             "midgame/take_off_belt_overcharged");
-        public static final ResourceLocation COLLECT_JADE_VINE_PETALS = PastelCommon.locate(
-            "midgame/collect_jade_vine_petals");
+        public static final ResourceLocation COLLECT_JADE_PETALS = PastelCommon.locate(
+            "midgame/collect_jade_petals");
         public static final ResourceLocation BREW_NO_POTION_IN_POTION_WORKSHOP = PastelCommon.locate(
             "midgame/brew_no_potion_in_potion_workshop");
         public static final ResourceLocation TAP_SWEETENED_JADE_WINE = PastelCommon.locate(

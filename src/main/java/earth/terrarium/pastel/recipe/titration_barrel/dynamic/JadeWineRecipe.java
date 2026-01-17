@@ -34,7 +34,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
     public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
         add(IngredientStack.ofItems(PastelItems.GERMINATED_JADE_VINE_BULB.get()));
-        add(IngredientStack.ofItems(PastelItems.JADE_VINE_PETALS.get(), 3));
+        add(IngredientStack.ofItems(PastelItems.JADE_PETALS.get(), 3));
     }};
 
     public JadeWineRecipe() {
@@ -47,7 +47,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
     @Override
     public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
         int bulbCount = InventoryHelper.getItemCountInInventory(inventory, PastelItems.GERMINATED_JADE_VINE_BULB.get());
-        int petalCount = InventoryHelper.getItemCountInInventory(inventory, PastelItems.JADE_VINE_PETALS.get());
+        int petalCount = InventoryHelper.getItemCountInInventory(inventory, PastelItems.JADE_PETALS.get());
         boolean nectar = InventoryHelper.getItemCountInInventory(inventory, PastelItems.MOONSTRUCK_NECTAR.get()) > 0;
 
         float thickness = getThickness(bulbCount, petalCount);
@@ -115,7 +115,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
             }
             if (stack.is(PastelItems.GERMINATED_JADE_VINE_BULB.get())) {
                 bulbsFound = true;
-            } else if (!stack.is(PastelItems.JADE_VINE_PETALS.get()) && !stack.is(
+            } else if (!stack.is(PastelItems.JADE_PETALS.get()) && !stack.is(
                 PastelItems.MOONSTRUCK_NECTAR.get())) {
                 return false;
             }

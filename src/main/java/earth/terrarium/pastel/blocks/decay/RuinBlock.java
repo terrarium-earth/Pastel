@@ -96,27 +96,27 @@ public class RuinBlock extends DecayBlock {
                                                                    .logicalHeight() -
                                   1) { // Attempt to match the nether ceiling. Tricky...
                     world.setBlock(
-                        pos, PastelBlocks.DEEPER_DOWN_PORTAL.get()
+                        pos, PastelBlocks.IMBRIFER_PORTAL.get()
                                                             .defaultBlockState()
                                                             .setValue(DeeperDownPortalBlock.FACING_UP, true), 3
                     );
                 } else if (pos.getY() == world.getMinBuildHeight()) {
                     world.setBlock(
-                        pos, PastelBlocks.DEEPER_DOWN_PORTAL.get()
+                        pos, PastelBlocks.IMBRIFER_PORTAL.get()
                                                             .defaultBlockState()
                                                             .setValue(DeeperDownPortalBlock.FACING_UP, false), 3
                     );
                 }
             } else if (world.dimension() == Level.OVERWORLD && pos.getY() == world.getMinBuildHeight()) {
                 world.setBlock(
-                    pos, PastelBlocks.DEEPER_DOWN_PORTAL.get()
+                    pos, PastelBlocks.IMBRIFER_PORTAL.get()
                                                         .defaultBlockState()
                                                         .setValue(DeeperDownPortalBlock.FACING_UP, false), 3
                 );
             } else if (world.dimension() == PastelLevels.DIMENSION_KEY &&
                        pos.getY() == world.getMaxBuildHeight() - 1) { // highest layer cannot be built on
                 world.setBlock(
-                    pos, PastelBlocks.DEEPER_DOWN_PORTAL.get()
+                    pos, PastelBlocks.IMBRIFER_PORTAL.get()
                                                         .defaultBlockState()
                                                         .setValue(DeeperDownPortalBlock.FACING_UP, true), 3
                 );

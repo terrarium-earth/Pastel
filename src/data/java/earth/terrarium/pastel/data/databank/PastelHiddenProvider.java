@@ -113,7 +113,7 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         hideItem(PastelItems.RAW_AZURITE.get(), Items.BLUE_DYE, PastelAdvancements.Milestones.REVEAL_AZURITE);
         hideItem(PastelItems.STARDUST.get(), Items.PURPLE_DYE, PastelAdvancements.Milestones.UNLOCK_SHOOTING_STARS);
         hideItem(
-            PastelItems.JADE_VINE_PETALS.get(), Items.LIME_DYE,
+            PastelItems.JADE_PETALS.get(), Items.LIME_DYE,
             PastelAdvancements.Midgame.BUILD_SPIRIT_INSTILLER_STRUCTURE
         );
         hideItem(

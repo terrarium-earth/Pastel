@@ -339,15 +339,11 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -448,15 +444,15 @@ import static net.minecraft.world.level.block.Blocks.woodenButton;
 
 @SuppressWarnings({"unused"})
 public class PastelBlocks {
-	
+
 	private static Properties settings(MapColor mapColor, SoundType blockSoundGroup, float strength) {
 		return BlockBehaviour.Properties.of().mapColor(mapColor).sound(blockSoundGroup).strength(strength);
 	}
-	
+
 	private static Properties settings(MapColor mapColor, SoundType blockSoundGroup, float strength, float resistance) {
 		return settings(mapColor, blockSoundGroup, strength).explosionResistance(resistance);
 	}
-	
+
 	private static Properties craftingBlock(MapColor mapColor, SoundType blockSoundGroup) {
 		return settings(mapColor, blockSoundGroup, 5.0F, 8.0F).isRedstoneConductor(PastelBlocks::never).isViewBlocking(PastelBlocks::never).noOcclusion().requiresCorrectToolForDrops();
 	}
@@ -892,9 +888,8 @@ public class PastelBlocks {
 			.withBlockModel((ctx, block) -> MultiVariantGenerator.multiVariant(block).with(PastelModelHelper.createBooleanModelMap(BottomlessBundleBlock.LOCKED, ModelLocationUtils.getModelLocation(block, "_locked"), ModelLocationUtils.getModelLocation(block, "_unlocked"))))
 			.withPredefinedItemModel());
 
-	//TODO these names don't match
-	public static final DeferredBlock<Block> WAND_LIGHT_BLOCK = register(singleton(block("wand_light", () -> new WandLightBlock(BlockBehaviour.Properties.ofFullCopy(LIGHT).sound(PastelBlockSoundGroups.WAND_LIGHT).instabreak())), PastelTexturedModels.particle(PastelTextures.SHIMMERSTONE_LIGHT)));
-	public static final DeferredBlock<Block> DECAYING_LIGHT_BLOCK = register(parented(block("decaying_light", () -> new DecayingLightBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.WAND_LIGHT_BLOCK.get()).randomTicks())), b -> PastelBlocks.WAND_LIGHT_BLOCK.get()));
+	public static final DeferredBlock<Block> SHIMMERSTONE_LIGHT = register(singleton(block("shimmerstone_light", () -> new WandLightBlock(BlockBehaviour.Properties.ofFullCopy(LIGHT).sound(PastelBlockSoundGroups.WAND_LIGHT).instabreak())), PastelTexturedModels.particle(PastelTextures.SHIMMERSTONE_LIGHT)));
+	public static final DeferredBlock<Block> TEMPORAL_SHIMMERSTONE_LIGHT = register(parented(block("temporal_shimmerstone_light", () -> new DecayingLightBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.SHIMMERSTONE_LIGHT.get()).randomTicks())), b -> PastelBlocks.SHIMMERSTONE_LIGHT.get()));
 
 	private static Properties decay(MapColor mapColor, SoundType soundGroup, float strength, float resistance, PushReaction pistonBehavior) {
 		return settings(mapColor, soundGroup, strength, resistance).pushReaction(pistonBehavior).randomTicks().isValidSpawn((state, world, pos, type) -> false);
@@ -1421,8 +1416,8 @@ public class PastelBlocks {
 		if (age == 7) return PastelModelHelper.createModelVariant(model.createWithSuffix(block, suffix, PastelTextureMaps.flowerParticle(PastelTextures.JADE_VINE_PLANT_BLOOMING, PastelTextures.JADE_VINE_PLANT_BREAKING), ctx.modelOutput));
 		return PastelModelHelper.createModelVariant(block, suffix);
 	}))));
-	public static final DeferredBlock<Block> JADE_VINE_PETAL_BLOCK = register(cutout(simple(blockWithItem("jade_vine_petal_block", () -> new JadeVinePetalBlock(jadeVine().lightLevel(state -> 3)), InkColors.LIME))));
-	public static final DeferredBlock<Block> JADE_VINE_PETAL_CARPET = register(cutout(singleton(blockWithItem("jade_vine_petal_carpet", () -> new CarpetBlock(jadeVine().lightLevel(state -> 3)), InkColors.LIME), PastelTexturedModels.carpet(b -> PastelBlocks.JADE_VINE_PETAL_BLOCK.get(), ""))));
+	public static final DeferredBlock<Block> JADE_PETAL_BLOCK = register(cutout(simple(blockWithItem("jade_petal_block", () -> new JadeVinePetalBlock(jadeVine().lightLevel(state -> 3)), InkColors.LIME))));
+	public static final DeferredBlock<Block> JADE_PETAL_CARPET = register(cutout(singleton(blockWithItem("jade_petal_carpet", () -> new CarpetBlock(jadeVine().lightLevel(state -> 3)), InkColors.LIME), PastelTexturedModels.carpet(b -> PastelBlocks.JADE_PETAL_BLOCK.get(), ""))));
 
 	public static final DeferredBlock<Block> NEPHRITE_BLOSSOM_STEM = register(cutout(blockWithItem("nephrite_blossom_stem", () -> new NephriteBlossomStemBlock(settings(MapColor.COLOR_PINK, SoundType.WOOL, 2.0F).noOcclusion().noCollission()), InkColors.PINK)).withBlockItemModel((ctx, block) -> PastelModelHelper.registerBlockTexturedItemModel(ctx, block, "_bottom")).withBlockModel((ctx, block) -> {
 		ResourceLocation bottom = PastelTexturedModels.cross(b -> b, "_bottom").createWithSuffix(block, "_bottom", ctx.modelOutput);
@@ -1510,7 +1505,7 @@ public class PastelBlocks {
 
 	public static final DeferredBlock<Block> PALTAERIA_FLOATBLOCK = register(singleton(blockWithItem("paltaeria_floatblock", () -> new FloatBlock(gravityBlock(MapColor.COLOR_LIGHT_BLUE), 0.2F), block -> new FloatBlockItem(block, IS.of().fireResistant(), 0.02F), InkColors.RED), PastelTexturedModels.cubeBottomTop(b -> b, "", b -> b, "_top", b -> b, "_bottom")));
 	public static final DeferredBlock<Block> STRATINE_FLOATBLOCK = register(singleton(blockWithItem("stratine_floatblock", () -> new FloatBlock(gravityBlock(MapColor.NETHER), -0.2F), block -> new FloatBlockItem(block, IS.of(), -0.02F), InkColors.CYAN), PastelTexturedModels.cubeBottomTop(b -> b, "", b -> b, "_top", b -> b, "_bottom")));
-	public static final DeferredBlock<Block> HOVER_BLOCK = register(singleton(blockWithItem("hover_block", () -> new FloatBlock(gravityBlock(MapColor.DIAMOND), 0.0F), block -> new FloatBlockItem(block, IS.of(), 0F) {
+	public static final DeferredBlock<Block> HOVERBLOCK = register(singleton(blockWithItem("hoverblock", () -> new FloatBlock(gravityBlock(MapColor.DIAMOND), 0.0F), block -> new FloatBlockItem(block, IS.of(), 0F) {
 		@Override
 		public double applyGravity(ItemStack stack, Level world, Entity entity) {
 			return 0;
@@ -1569,7 +1564,8 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> LAVA_SPONGE = register(simple(blockWithItem("lava_sponge", () -> new LavaSpongeBlock(BlockBehaviour.Properties.ofFullCopy(SPONGE).mapColor(MapColor.COLOR_ORANGE)), IS.of().fireResistant(), InkColors.ORANGE)));
 	public static final DeferredBlock<Block> WET_LAVA_SPONGE = register(simple(burnable(blockWithItem("wet_lava_sponge", () -> new WetLavaSpongeBlock(BlockBehaviour.Properties.ofFullCopy(WET_SPONGE).mapColor(MapColor.COLOR_ORANGE).lightLevel(s -> 9).emissiveRendering(PastelBlocks::always).hasPostProcess(PastelBlocks::always)), block -> new WetLavaSpongeItem(block, IS.of(1).fireResistant().craftRemainder(PastelBlocks.LAVA_SPONGE.get().asItem())), InkColors.ORANGE), 12800)));
 
-	public static final DeferredBlock<Block> LIGHT_LEVEL_DETECTOR = register(detector(blockWithItem("light_level_detector", () -> new BlockLightDetectorBlock(BlockBehaviour.Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED)));
+	public static final DeferredBlock<Block> BLOCK_LIGHT_DETECTOR
+        = register(detector(blockWithItem("block_light_detector", () -> new BlockLightDetectorBlock(BlockBehaviour.Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED)));
 	public static final DeferredBlock<Block> WEATHER_DETECTOR = register(detector(blockWithItem("weather_detector", () -> new WeatherDetectorBlock(BlockBehaviour.Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED)));
 	public static final DeferredBlock<Block> ITEM_DETECTOR = register(detector(blockWithItem("item_detector", () -> new ItemDetectorBlock(BlockBehaviour.Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED)));
 	public static final DeferredBlock<Block> PLAYER_DETECTOR = register(detector(blockWithItem("player_detector", () -> new PlayerDetectorBlock(BlockBehaviour.Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED)));
@@ -1657,7 +1653,7 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> WHITE_SPIRIT_SALLOW_VINES = register(spiritVines(block("white_spirit_sallow_vines_head", () -> new SpiritVinesPlantStemBlock(spiritVines(MapColor.TERRACOTTA_WHITE), PastelGemstoneColor.WHITE))));
 
 	public static final DeferredBlock<Block> STUCK_STORM_STONE = register(cutout(defaultWestHorizontalFacing(block("stuck_storm_stone", () -> new StuckStormStoneBlock(settings(MapColor.NONE, SoundType.SMALL_AMETHYST_BUD, 0.0F).noCollission().noOcclusion().isSuffocating(PastelBlocks::never).noTerrainParticles().isViewBlocking(PastelBlocks::never).replaceable())), ModelLocationUtils::getModelLocation)));
-	public static final DeferredBlock<Block> DEEPER_DOWN_PORTAL = register(block("deeper_down_portal", () -> new DeeperDownPortalBlock(settings(MapColor.COLOR_BLACK, SoundType.EMPTY, -1.0F, 3600000.0F).pushReaction(PushReaction.BLOCK).lightLevel(state -> 8).noLootTable())).withBlockModel((ctx, block) -> MultiVariantGenerator.multiVariant(block).with(PastelModelHelper.createBooleanModelMap(DeeperDownPortalBlock.FACING_UP, ModelLocationUtils.getModelLocation(block, "_up"), ModelLocationUtils.getModelLocation(block)))));
+	public static final DeferredBlock<Block> IMBRIFER_PORTAL = register(block("fissure", () -> new DeeperDownPortalBlock(settings(MapColor.COLOR_BLACK, SoundType.EMPTY, -1.0F, 3600000.0F).pushReaction(PushReaction.BLOCK).lightLevel(state -> 8).noLootTable())).withBlockModel((ctx, block) -> MultiVariantGenerator.multiVariant(block).with(PastelModelHelper.createBooleanModelMap(DeeperDownPortalBlock.FACING_UP, ModelLocationUtils.getModelLocation(block, "_up"), ModelLocationUtils.getModelLocation(block)))));
 
 	private static Properties upgrade() {
 		return BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get()).forceSolidOn();
@@ -2079,8 +2075,7 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> DREAM_CHISELED_PRESERVATION_STONE = register(simple(blockWithItem("dream_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 6)), InkColors.BLUE)));
 	public static final DeferredBlock<Block> DEEP_LIGHT_CHISELED_PRESERVATION_STONE = register(singleton(blockWithItem("deep_light_chiseled_preservation_stone", () -> new DeepLightBlock(preservationBlock().lightLevel(state -> 2)), InkColors.BLUE), PastelTexturedModels.cubeColumn(b -> b, "", b -> PastelBlocks.PRESERVATION_STONE.get(), "_top_generic")));
 
-	//TODO not sure which is correct, but this should probably be renamed
-	public static final DeferredBlock<Block> TREASURE_ITEM_BOWL = register(cutout(singleton(blockWithItem("item_bowl_enlightenment", () -> new TreasureItemBowlBlock(preservationBlock().noOcclusion().isRedstoneConductor(PastelBlocks::never).isSuffocating(PastelBlocks::never).isViewBlocking(PastelBlocks::never)), InkColors.BLUE), TexturedModel.createDefault(b -> new TextureMapping().put(TextureSlot.SIDE, TextureMapping.getBlockTexture(b, "_side")).put(TextureSlot.TOP, TextureMapping.getBlockTexture(b, "_top")).put(TextureSlot.BOTTOM, locate("block/item_bowl_preservation_bottom")).put(PastelTextureKeys.INNER, locate("block/item_bowl_preservation_bottom")), PastelModels.BOWL))));
+	public static final DeferredBlock<Block> ENLIGHTENMENT_ITEM_BOWL = register(cutout(singleton(blockWithItem("enlightenment_item_bowl", () -> new TreasureItemBowlBlock(preservationBlock().noOcclusion().isRedstoneConductor(PastelBlocks::never).isSuffocating(PastelBlocks::never).isViewBlocking(PastelBlocks::never)), InkColors.BLUE), TexturedModel.createDefault(b -> new TextureMapping().put(TextureSlot.SIDE, TextureMapping.getBlockTexture(b, "_side")).put(TextureSlot.TOP, TextureMapping.getBlockTexture(b, "_top")).put(TextureSlot.BOTTOM, locate("block/item_bowl_preservation_bottom")).put(PastelTextureKeys.INNER, locate("block/item_bowl_preservation_bottom")), PastelModels.BOWL))));
 
 	public static final DeferredBlock<Block> DIKE_GATE_FOUNTAIN = register(defaultUpFacing(blockWithItem("dike_gate_fountain", () -> new PastelFacingBlock(preservationBlock()), InkColors.BLUE), PastelTexturedModels.cubeBottomTopParticle(b -> b, "_side", b -> b, "_top", b -> PastelBlocks.PRESERVATION_STONE.get(), "", b -> PastelBlocks.PRESERVATION_STONE.get(), "")));
 	public static final DeferredBlock<Block> PRESERVATION_BRICKS = register(simple(blockWithItem("preservation_bricks", () -> new Block(preservationBlock()), InkColors.BLUE)));
@@ -2434,7 +2429,7 @@ public class PastelBlocks {
 					.with(Condition.condition().term(BlockStateProperties.FACING, Direction.EAST).term(PylonBlock.PEDESTAL, true), PastelModelHelper.createModelVariant(pedestal).with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90));
 		});
 	}
-	
+
 	public static class BlockRegistrar<T extends Block> {
 
 		private final ResourceLocation id;
@@ -2546,33 +2541,37 @@ public class PastelBlocks {
 		public DeferredBlock<Block> holder() {
 			return holder;
 		}
-		
+
 		@Nullable
 		public Item item() {
 			return item;
 		}
-		
+
 		public ResourceKey<Block> blockKey() {
 			return ResourceKey.create(Registries.BLOCK, id);
 		}
-		
+
 		public ResourceKey<Item> itemKey() {
 			return ResourceKey.create(Registries.ITEM, id);
 		}
-		
+
 	}
-	
+
+    public static Map<PastelSkullType,DeferredBlock<Block>> MOB_HEADS = new HashMap<>();
+    public static Map<PastelSkullType,DeferredBlock<Block>> WALL_HEADS = new HashMap<>();
+
 	public static void registerCommon(IEventBus bus) {
 		// All the mob heads
 		for (PastelSkullType type : PastelSkullType.values()) {
 			BlockRegistrar<PastelSkullBlock> registrar = block(type.getSerializedName() + "_head", () -> new PastelSkullBlock(type, BlockBehaviour.Properties.ofFullCopy(SKELETON_SKULL).instrument(NoteBlockInstrument.CUSTOM_HEAD))).withBlockItemModel((ctx, block) -> PastelModelHelper.registerParentedItemModel(ctx, block, PastelModels.SKULL_ITEM)).withBlockModel((ctx, block) -> PastelModelHelper.createVariantsSupplier(block, PastelModels.MOB_HEAD));
 			DeferredBlock<Block> wallHead = register(block(type.getSerializedName() + "_wall_head", () -> new PastelWallSkullBlock(type, BlockBehaviour.Properties.ofFullCopy(SKELETON_SKULL).dropsLike(registrar.holder().get()))).withBlockModel((ctx, block) -> PastelModelHelper.createVariantsSupplier(block, PastelModels.MOB_HEAD)));
-			register(registrar.withItem(block -> new StandingAndWallBlockItem(block, wallHead.get(), IS.of(), Direction.DOWN), InkColors.GRAY));
+            MOB_HEADS.put(type,register(registrar.withItem(block -> new StandingAndWallBlockItem(block, wallHead.get(), IS.of(), Direction.DOWN), InkColors.GRAY)));
+            WALL_HEADS.put(type,wallHead);
 		}
 
 		PastelBlocks.COMMON_REGISTRAR.register(bus);
 	}
-	
+
 	public static void registerClient(FMLClientSetupEvent event) {
 		PastelBlocks.CLIENT_REGISTRAR.flush();
 	}

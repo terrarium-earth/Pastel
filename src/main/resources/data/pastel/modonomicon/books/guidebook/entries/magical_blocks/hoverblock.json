@@ -1,11 +1,11 @@
 {
-  "name": "block.pastel.hover_block",
+  "name": "block.pastel.hoverblock",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:lategame/collect_hover_block"
+    "advancement_id": "pastel:lategame/collect_hoverblock"
   },
   "icon": {
-    "item": "pastel:hover_block"
+    "item": "pastel:hoverblock"
   },
   "category": "pastel:magical_blocks",
   "hide_while_locked": true,
@@ -18,10 +18,10 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "item": "pastel:hover_block"
+        "item": "pastel:hoverblock"
       },
       "text": "book.pastel.guidebook.hoverblock.page0.text",
-      "title": "block.pastel.hover_block"
+      "title": "block.pastel.hoverblock"
     },
     {
       "type": "modonomicon:text",

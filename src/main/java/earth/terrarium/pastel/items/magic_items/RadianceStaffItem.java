@@ -67,7 +67,7 @@ public class RadianceStaffItem extends Item implements InkPowered {
             if (playerEntity.isCreative() || InkPowered.tryDrainEnergy(playerEntity, INK_COST) ||
                 InventoryHelper.removeFromInventoryWithRemainders(playerEntity, COST)) {
                 world.setBlock(
-                    targetPos, PastelBlocks.WAND_LIGHT_BLOCK.get()
+                    targetPos, PastelBlocks.SHIMMERSTONE_LIGHT.get()
                                                             .defaultBlockState(), 3
                 );
                 return true;
@@ -76,7 +76,7 @@ public class RadianceStaffItem extends Item implements InkPowered {
             if (playerEntity.isCreative() || InkPowered.tryDrainEnergy(playerEntity, INK_COST) ||
                 InventoryHelper.removeFromInventoryWithRemainders(playerEntity, COST)) {
                 world.setBlock(
-                    targetPos, PastelBlocks.WAND_LIGHT_BLOCK.get()
+                    targetPos, PastelBlocks.SHIMMERSTONE_LIGHT.get()
                                                             .defaultBlockState()
                                                             .setValue(WATERLOGGED, true), 3
                 );
@@ -170,7 +170,7 @@ public class RadianceStaffItem extends Item implements InkPowered {
         Direction direction = context.getClickedFace();
 
         if (!level.getBlockState(pos)
-                  .is(PastelBlocks.WAND_LIGHT_BLOCK.get())) { // those get destroyed instead
+                  .is(PastelBlocks.SHIMMERSTONE_LIGHT.get())) { // those get destroyed instead
             BlockPos targetPos = pos.relative(direction);
             if (placeLight(level, targetPos, (ServerPlayer) user)) {
                 RadianceStaffItem.playParticles(

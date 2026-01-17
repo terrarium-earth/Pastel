@@ -10,6 +10,7 @@ import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.entity.LizardEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.progression.PastelCriteria;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Holder;
@@ -194,27 +195,27 @@ public class TreasureHunterModifier extends LootModifier {
         SPECIAL_CASES.put(
             EntityType.FOX.builtInRegistryHolder(), (entity) ->
                 switch (((Fox) entity).getVariant()) {
-                    case RED -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.FOX);
-                    case SNOW -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.FOX_ARCTIC);
+                    case RED -> PastelBlocks.MOB_HEADS.get(PastelSkullType.FOX).get();
+                    case SNOW -> PastelBlocks.MOB_HEADS.get(PastelSkullType.FOX_ARCTIC).get();
                 }
         );
 
         SPECIAL_CASES.put(
             EntityType.MOOSHROOM.builtInRegistryHolder(), (entity) ->
                 switch (((MushroomCow) entity).getVariant()) {
-                    case RED -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.MOOSHROOM_RED);
-                    case BROWN -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.MOOSHROOM_BROWN);
+                    case RED -> PastelBlocks.MOB_HEADS.get(PastelSkullType.MOOSHROOM_RED).get();
+                    case BROWN -> PastelBlocks.MOB_HEADS.get(PastelSkullType.MOOSHROOM_BROWN).get();
                 }
         );
 
         SPECIAL_CASES.put(
             EntityType.AXOLOTL.builtInRegistryHolder(), (entity) ->
                 switch (((Axolotl) entity).getVariant()) {
-                    case LUCY -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.AXOLOTL_LEUCISTIC);
-                    case WILD -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.AXOLOTL_WILD);
-                    case GOLD -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.AXOLOTL_GOLD);
-                    case CYAN -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.AXOLOTL_CYAN);
-                    case BLUE -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.AXOLOTL_BLUE);
+                    case LUCY -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_LEUCISTIC).get();
+                    case WILD -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_WILD).get();
+                    case GOLD -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_GOLD).get();
+                    case CYAN -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_CYAN).get();
+                    case BLUE -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_BLUE).get();
                 }
         );
 
@@ -225,11 +226,11 @@ public class TreasureHunterModifier extends LootModifier {
         SPECIAL_CASES.put(
             EntityType.PARROT.builtInRegistryHolder(), (entity) ->
                 switch (((Parrot) entity).getVariant()) {
-                    case RED_BLUE -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.PARROT_RED);
-                    case BLUE -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.PARROT_BLUE);
-                    case GREEN -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.PARROT_GREEN);
-                    case YELLOW_BLUE -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.PARROT_CYAN);
-                    case GRAY -> PastelSkullBlock.MOB_HEADS.get(PastelSkullType.PARROT_GRAY);
+                    case RED_BLUE -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_RED).get();
+                    case BLUE -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_BLUE).get();
+                    case GREEN -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_GREEN).get();
+                    case YELLOW_BLUE -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_CYAN).get();
+                    case GRAY -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_GRAY).get();
                 }
         );
 
@@ -238,11 +239,11 @@ public class TreasureHunterModifier extends LootModifier {
                 var variant = ((Frog) entity).getVariant();
 
                 if (variant == FrogVariant.WARM)
-                    return PastelSkullBlock.MOB_HEADS.get(PastelSkullType.FROG_COLD);
+                    return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_COLD).get();
                 else if (variant == FrogVariant.COLD)
-                    return PastelSkullBlock.MOB_HEADS.get(PastelSkullType.FROG_WARM);
+                    return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_WARM).get();
                 else
-                    return PastelSkullBlock.MOB_HEADS.get(PastelSkullType.FROG_TEMPERATE);
+                    return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_TEMPERATE).get();
             }
         );
 
@@ -252,7 +253,7 @@ public class TreasureHunterModifier extends LootModifier {
                 var type = PastelSkullType.SHULKER;
 
                 if (color.isEmpty())
-                    return PastelSkullBlock.MOB_HEADS.get(type);
+                    return PastelBlocks.MOB_HEADS.get(type).get();
 
                 type = switch (color.get()) {
                     case WHITE -> PastelSkullType.SHULKER_WHITE;
@@ -272,7 +273,7 @@ public class TreasureHunterModifier extends LootModifier {
                     case RED -> PastelSkullType.SHULKER_RED;
                     case BLACK -> PastelSkullType.SHULKER_BLACK;
                 };
-                return PastelSkullBlock.MOB_HEADS.get(type);
+                return PastelBlocks.MOB_HEADS.get(type).get();
             }
         );
 
@@ -300,7 +301,7 @@ public class TreasureHunterModifier extends LootModifier {
                     case RED -> PastelSkullType.LIZARD_RED;
                     case BLACK -> PastelSkullType.LIZARD_BLACK;
                 };
-                return PastelSkullBlock.MOB_HEADS.get(type);
+                return PastelBlocks.MOB_HEADS.get(type).get();
             }
         );
     }

@@ -37,7 +37,7 @@ public class PastelFluids {
 
     private static final DeferredRegister<Fluid> FLUID_REGISTER = DeferredRegister.create(
         Registries.FLUID, PastelCommon.MOD_ID);
-    private static final DeferredRegister<FluidType> TYPE_REGISTER = DeferredRegister.create(
+    public static final DeferredRegister<FluidType> TYPE_REGISTER = DeferredRegister.create(
         NeoForgeRegistries.FLUID_TYPES, PastelCommon.MOD_ID);
 
     // LIQUID CRYSTAL

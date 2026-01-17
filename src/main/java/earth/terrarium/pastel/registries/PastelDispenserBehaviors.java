@@ -52,7 +52,7 @@ public class PastelDispenserBehaviors {
 
         // Equipping Mob Heads
         DispenseItemBehavior armorEquipBehavior = DispenserBlock.DISPENSER_REGISTRY.get(Items.PLAYER_HEAD);
-        for (Block skullBlock : PastelSkullBlock.MOB_HEADS.values()) {
+        for (var skullBlock : PastelBlocks.MOB_HEADS.values()) {
             DispenserBlock.registerBehavior(skullBlock, armorEquipBehavior);
         }
 

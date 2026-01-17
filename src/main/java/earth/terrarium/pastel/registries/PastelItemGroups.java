@@ -4,7 +4,6 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.Preenchanted;
-import earth.terrarium.pastel.attachments.PastelDataAttachments;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
@@ -34,8 +33,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import javax.print.attribute.standard.MediaSize;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class PastelItemGroups {
 
@@ -46,6 +46,8 @@ public class PastelItemGroups {
     public static final ResourceLocation RESOURCES_ID = PastelCommon.locate("resources");
     public static final ResourceLocation DECORATION_ID = PastelCommon.locate("decoration");
     public static final ResourceLocation HEADS_ID = PastelCommon.locate("heads");
+    public static final List<ResourceLocation> ITEM_GROUP_IDS = List.of(
+        INSTRUMENTS_ID, TOOLS_ID, NATURAL_BLOCKS_ID, CUISINE_ID, RESOURCES_ID, DECORATION_ID, HEADS_ID);
 
     public static void register(IEventBus bus) {
         var register = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PastelCommon.MOD_ID);
@@ -154,7 +156,7 @@ public class PastelItemGroups {
                                                                          entries.accept(PastelBlocks.GATHER_NODE.get());
 
                                                                          entries.accept(
-                                                                             PastelBlocks.LIGHT_LEVEL_DETECTOR.get());
+                                                                             PastelBlocks.BLOCK_LIGHT_DETECTOR.get());
                                                                          entries.accept(
                                                                              PastelBlocks.WEATHER_DETECTOR.get());
                                                                          entries.accept(
@@ -545,9 +547,9 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.COTTON_CLOUD_BOOTS.get());
                                                                    entries.accept(PastelItems.RADIANCE_PIN.get());
                                                                    entries.accept(PastelItems.TOTEM_PENDANT.get());
-                                                                   entries.accept(PastelItems.TAKE_OFF_BELT.get());
+                                                                   entries.accept(PastelItems.TAKEOFF_BELT.get());
                                                                    entries.accept(Ench.getEnchantedStack(
-                                                                       lookup, PastelItems.TAKE_OFF_BELT.get(), Map.of(
+                                                                       lookup, PastelItems.TAKEOFF_BELT.get(), Map.of(
                                                                            Enchantments.POWER, 5,
                                                                            Enchantments.FEATHER_FALLING, 4
                                                                        )
@@ -574,9 +576,10 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.RING_OF_DENSER_STEPS.get()
                                                                                                                   .getFullStack());
                                                                    entries.accept(
-                                                                       PastelItems.RING_OF_AERIAL_GRACE.get());
-                                                                   entries.accept(PastelItems.RING_OF_AERIAL_GRACE.get()
-                                                                                                                  .getFullStack());
+                                                                       PastelItems.RING_OF_AETHERIAL_GRACE.get());
+                                                                   entries.accept(
+                                                                       PastelItems.RING_OF_AETHERIAL_GRACE.get()
+                                                                                                          .getFullStack());
                                                                    entries.accept(
                                                                        PastelItems.LAURELS_OF_SERENITY.get());
                                                                    entries.accept(PastelItems.LAURELS_OF_SERENITY.get()
@@ -1169,7 +1172,7 @@ public class PastelItemGroups {
                                                                             entries.accept(
                                                                                 PastelBlocks.DEEP_LIGHT_CHISELED_PRESERVATION_STONE.get());
                                                                             entries.accept(
-                                                                                PastelBlocks.TREASURE_ITEM_BOWL.get());
+                                                                                PastelBlocks.ENLIGHTENMENT_ITEM_BOWL.get());
                                                                             entries.accept(
                                                                                 PastelBlocks.PRESERVATION_GLASS.get());
                                                                             entries.accept(
@@ -1655,7 +1658,7 @@ public class PastelItemGroups {
                                                                        entries.accept(
                                                                            PastelItems.GERMINATED_JADE_VINE_BULB.get());
                                                                        entries.accept(
-                                                                           PastelItems.JADE_VINE_PETALS.get());
+                                                                           PastelItems.JADE_PETALS.get());
                                                                        entries.accept(
                                                                            PastelBlocks.NEPHRITE_BLOSSOM_BULB.get());
                                                                        entries.accept(
@@ -2066,7 +2069,7 @@ public class PastelItemGroups {
                                                                             PastelBlocks.STRATINE_FLOATBLOCK.get());
                                                                         entries.accept(
                                                                             PastelBlocks.PALTAERIA_FLOATBLOCK.get());
-                                                                        entries.accept(PastelBlocks.HOVER_BLOCK.get());
+                                                                        entries.accept(PastelBlocks.HOVERBLOCK.get());
 
                                                                         entries.accept(
                                                                             PastelBlocks.TOPAZ_CALCITE_LIGHT.get());
@@ -2170,9 +2173,9 @@ public class PastelItemGroups {
                                                                             PastelBlocks.MOONSTONE_PYLON.get());
 
                                                                         entries.accept(
-                                                                            PastelBlocks.JADE_VINE_PETAL_BLOCK.get());
+                                                                            PastelBlocks.JADE_PETAL_BLOCK.get());
                                                                         entries.accept(
-                                                                            PastelBlocks.JADE_VINE_PETAL_CARPET.get());
+                                                                            PastelBlocks.JADE_PETAL_CARPET.get());
 
                                                                         entries.accept(
                                                                             PastelBlocks.JADEITE_PETAL_BLOCK.get());
@@ -2189,22 +2192,32 @@ public class PastelItemGroups {
                                                                             PastelBlocks.RESPLENDENT_BED.get());
 
                                                                         entries.accept(PastelBlocks.TEA_TABLE.get());
-                                                                        entries.accept(PastelBlocks.WHITE_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.ORANGE_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.MAGENTA_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.LIGHT_BLUE_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.YELLOW_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.WHITE_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.ORANGE_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.MAGENTA_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.LIGHT_BLUE_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.YELLOW_CUSHION.get());
                                                                         entries.accept(PastelBlocks.LIME_CUSHION.get());
                                                                         entries.accept(PastelBlocks.PINK_CUSHION.get());
                                                                         entries.accept(PastelBlocks.GRAY_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.LIGHT_GRAY_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.LIGHT_GRAY_CUSHION.get());
                                                                         entries.accept(PastelBlocks.CYAN_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.PURPLE_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.PURPLE_CUSHION.get());
                                                                         entries.accept(PastelBlocks.BLUE_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.BROWN_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.GREEN_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.BROWN_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.GREEN_CUSHION.get());
                                                                         entries.accept(PastelBlocks.RED_CUSHION.get());
-                                                                        entries.accept(PastelBlocks.BLACK_CUSHION.get());
+                                                                        entries.accept(
+                                                                            PastelBlocks.BLACK_CUSHION.get());
 
 
                                                                         entries.accept(
@@ -2648,15 +2661,15 @@ public class PastelItemGroups {
                                                                     .build();
 
     public static final CreativeModeTab HEADS = CreativeModeTab.builder()
-                                                               .icon(() -> PastelSkullBlock.MOB_HEADS.get(
-                                                                                               PastelSkullType.EGG_LAYING_WOOLY_PIG)
-                                                                                                     .asItem()
-                                                                                                     .getDefaultInstance())
+                                                               .icon(() -> PastelBlocks.MOB_HEADS.get(
+                                                                                           PastelSkullType.EGG_LAYING_WOOLY_PIG)
+                                                                                                 .asItem()
+                                                                                                 .getDefaultInstance())
                                                                .title(
                                                                    Component.translatable("itemGroup.pastel.mob_heads"))
                                                                .displayItems((displayContext, entries) -> {
-                                                                   for (Block skullBlock :
-                                                                       PastelSkullBlock.MOB_HEADS.values()) {
+                                                                   for (var skullBlock :
+                                                                       PastelBlocks.MOB_HEADS.values()) {
                                                                        entries.accept(skullBlock.asItem());
                                                                    }
                                                                })

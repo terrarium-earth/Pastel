@@ -32,11 +32,11 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "item": "pastel:jade_vine_petal_block"
+        "item": "pastel:jade_petal_block"
       },
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "pastel:hidden/collect_jade_vine_petals"
+        "advancement_id": "pastel:hidden/collect_jade_petals"
       },
       "text": "book.pastel.guidebook.mod_integration.little_ants.page1.text"
     },

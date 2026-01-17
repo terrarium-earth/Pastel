@@ -7,6 +7,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.helpers.Support;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
@@ -28,6 +30,7 @@ import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,6 +39,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
+
+import static earth.terrarium.pastel.registries.PastelBlocks.MOB_HEADS;
 
 public class PastelSkullBlock extends SkullBlock {
 
@@ -49,7 +54,6 @@ public class PastelSkullBlock extends SkullBlock {
                                                                                                  PastelSkullBlock::new
                                                                                              ));
 
-    public static final BiMap<PastelSkullType, Block> MOB_HEADS = EnumHashBiMap.create(PastelSkullType.class);
     private static final Map<Supplier<EntityType<?>>, PastelSkullType> ENTITY_TYPE_TO_SKULL_TYPE
         = new Object2ObjectOpenHashMap<>();
     private final PastelSkullType skullType;
@@ -60,8 +64,6 @@ public class PastelSkullBlock extends SkullBlock {
     public PastelSkullBlock(PastelSkullType skullType, Properties settings) {
         super(skullType, settings);
 
-        // TODO Avoid this pattern, blocks shouldn't register themselves to a list
-        MOB_HEADS.put(skullType, this);
         ENTITY_TYPE_TO_SKULL_TYPE.put(skullType.getEntityType(), skullType);
         this.skullType = skullType;
     }
@@ -74,6 +76,15 @@ public class PastelSkullBlock extends SkullBlock {
     @Override
     public PastelSkullType getType() {
         return (PastelSkullType) super.getType();
+    }
+
+    @Override
+    public MutableComponent getName() {
+        return Component.translatable(
+            getType().getHeadTranslationKey(), Component.translatable(getType().getEntityType()
+                                                                               .get()
+                                                                               .getDescriptionId())
+        );
     }
 
     public static Optional<EntityType<?>> getEntityTypeOfSkullStack(ItemStack itemStack) {
@@ -105,7 +116,8 @@ public class PastelSkullBlock extends SkullBlock {
 
     public static Optional<Block> getBlock(SkullBlock.Type skullType) {
         if (skullType instanceof PastelSkullType pastelSkullType) {
-            return Optional.of(MOB_HEADS.get(pastelSkullType));
+            return Optional.of(MOB_HEADS.get(pastelSkullType)
+                                        .get());
         }
         if (SkullBlock.Types.CREEPER == skullType) {
             return Optional.of(Blocks.CREEPER_HEAD);
@@ -142,7 +154,7 @@ public class PastelSkullBlock extends SkullBlock {
     }
 
     @Contract(pure = true)
-    public static @NotNull Collection<Block> getMobHeads() {
+    public static @NotNull Collection<DeferredBlock<Block>> getMobHeads() {
         return MOB_HEADS.values();
     }
 

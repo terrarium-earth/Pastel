@@ -154,13 +154,13 @@ public abstract class LivingEntityMixin {
         }
 
         if (!entity.onGround()) {
-            var optionalTrinket = PastelTrinketItem.getFirstEquipped(entity, PastelItems.RING_OF_AERIAL_GRACE.get());
+            var optionalTrinket = PastelTrinketItem.getFirstEquipped(entity, PastelItems.RING_OF_AETHERIAL_GRACE.get());
             if (optionalTrinket.isPresent()) {
-                var inkStorage = PastelItems.RING_OF_AERIAL_GRACE.get()
+                var inkStorage = PastelItems.RING_OF_AETHERIAL_GRACE.get()
                                                                  .getEnergyStorage(optionalTrinket.get());
                 var storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
                 friction = (float) Math.max(
-                    friction, f.get() + (((RingOfAerialGraceItem) PastelItems.RING_OF_AERIAL_GRACE.get()).getBonus(
+                    friction, f.get() + (((RingOfAerialGraceItem) PastelItems.RING_OF_AETHERIAL_GRACE.get()).getBonus(
                         storedInk) / 150F)
                 );
                 override = true;
@@ -207,7 +207,7 @@ public abstract class LivingEntityMixin {
     private boolean modifyFluidWalking(boolean original) {
         var entity = (LivingEntity) (Object) this;
 
-        if (PastelTrinketItem.hasEquipped(entity, PastelItems.RING_OF_AERIAL_GRACE.get()))
+        if (PastelTrinketItem.hasEquipped(entity, PastelItems.RING_OF_AETHERIAL_GRACE.get()))
             return !entity.isUnderWater();
 
         return original;

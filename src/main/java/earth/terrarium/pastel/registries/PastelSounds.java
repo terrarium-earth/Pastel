@@ -186,7 +186,7 @@ public class PastelSounds {
     public static final SoundEvent RUIN_PLACED = register("ruin_placed");
     public static final SoundEvent FORFEITURE_PLACED = register("forfeiture_placed");
 
-    public static final SoundEvent DEEPER_DOWN_PORTAL_OPEN = register("deeper_down_portal_open");
+    public static final SoundEvent FISSURE_OPEN = register("fissure_open");
     public static final SoundEvent SQUEAKER = register("squeaker");
 
     public static final SoundEvent BLOCK_MEMORY_ADVANCE = register("block.memory.advance");

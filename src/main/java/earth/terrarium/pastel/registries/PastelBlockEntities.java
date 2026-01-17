@@ -245,7 +245,7 @@ public class PastelBlockEntities {
         DEEP_LIGHT = register(
             "deep_light", DeepLightBlockEntity::new, PastelBlocks.DEEP_LIGHT_CHISELED_PRESERVATION_STONE);
         PLAYER_TRACKING = register(
-            "player_tracking", PlayerTrackerBlockEntity::new, PastelBlocks.MANXI, PastelBlocks.TREASURE_ITEM_BOWL);
+            "player_tracking", PlayerTrackerBlockEntity::new, PastelBlocks.MANXI, PastelBlocks.ENLIGHTENMENT_ITEM_BOWL);
 
         // All the upgrades
         List<Supplier<? extends Block>> upgradeBlocksList = List.of(
@@ -270,7 +270,9 @@ public class PastelBlockEntities {
         List<Block> skullBlocksList = new ArrayList<>(PastelSkullBlock.getMobHeads()
                                                                       .size() + PastelWallSkullBlock.getMobWallHeads()
                                                                                                     .size());
-        skullBlocksList.addAll(PastelSkullBlock.getMobHeads());
+        for (var head : PastelSkullBlock.getMobHeads()) {
+            skullBlocksList.add(head.get());
+        }
         skullBlocksList.addAll(PastelWallSkullBlock.getMobWallHeads());
 
         event.modify(BlockEntityType.SKULL, skullBlocksList.toArray(new Block[0]));

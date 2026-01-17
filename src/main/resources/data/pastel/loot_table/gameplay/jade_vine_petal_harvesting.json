@@ -23,7 +23,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pastel:jade_vine_petals",
+          "name": "pastel:jade_petals",
           "functions": [
             {
               "function": "minecraft:set_count",

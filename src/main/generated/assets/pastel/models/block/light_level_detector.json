@@ -1,7 +1,0 @@
-{
-  "parent": "pastel:templates/slab_detector",
-  "textures": {
-    "side": "pastel:block/light_level_detector_side",
-    "top": "pastel:block/light_level_detector_top"
-  }
-}

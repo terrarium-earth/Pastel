@@ -55,8 +55,8 @@ public class PastelFlammableBlocks {
         add(PastelBlocks.JADE_VINES.get(), 5, 5);
         add(PastelBlocks.JADEITE_LOTUS_STEM.get(), 5, 5);
         add(PastelBlocks.JADEITE_LOTUS_FLOWER.get(), 30, 60);
-        add(PastelBlocks.JADE_VINE_PETAL_BLOCK.get(), 30, 60);
-        add(PastelBlocks.JADE_VINE_PETAL_CARPET.get(), 60, 20);
+        add(PastelBlocks.JADE_PETAL_BLOCK.get(), 30, 60);
+        add(PastelBlocks.JADE_PETAL_CARPET.get(), 60, 20);
         add(PastelBlocks.JADEITE_PETAL_BLOCK.get(), 30, 60);
         add(PastelBlocks.JADEITE_PETAL_CARPET.get(), 60, 20);
 

@@ -38,9 +38,9 @@ public class PastelCompostableBlocks {
 
         add.accept(PastelItems.HIBERNATING_JADE_VINE_BULB.get(), HIGH);
         add.accept(PastelItems.GERMINATED_JADE_VINE_BULB.get(), HIGH);
-        add.accept(PastelItems.JADE_VINE_PETALS.get(), HIGH);
-        add.accept(PastelBlocks.JADE_VINE_PETAL_BLOCK.get(), ALWAYS);
-        add.accept(PastelBlocks.JADE_VINE_PETAL_CARPET.get(), HIGH);
+        add.accept(PastelItems.JADE_PETALS.get(), HIGH);
+        add.accept(PastelBlocks.JADE_PETAL_BLOCK.get(), ALWAYS);
+        add.accept(PastelBlocks.JADE_PETAL_CARPET.get(), HIGH);
 
         add.accept(PastelBlocks.VARIA_SPROUT.get(), MEDIUM);
         add.accept(PastelBlocks.WEEPING_GALA_SPRIG.get(), LOW);

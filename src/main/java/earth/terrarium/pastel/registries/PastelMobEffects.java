@@ -37,7 +37,7 @@ public class PastelMobEffects {
     public static final int ETERNAL_SLUMBER_COLOR = 0xc35fee;
     public static boolean effectsAreGettingStacked = false;
 
-    private static final DeferredRegister<MobEffect> REGISTER = DeferredRegister.create(
+    public static final DeferredRegister<MobEffect> REGISTER = DeferredRegister.create(
         Registries.MOB_EFFECT, PastelCommon.MOD_ID);
 
     /**
@@ -51,7 +51,6 @@ public class PastelMobEffects {
                 AttributeModifier.Operation.ADD_VALUE
             )
     );
-
     /**
      * Like Saturation, but not OP
      */

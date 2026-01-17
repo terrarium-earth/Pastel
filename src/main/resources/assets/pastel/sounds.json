@@ -288,10 +288,10 @@
       "pastel:enchanter_working"
     ]
   },
-  "deeper_down_portal_open": {
-    "subtitle": "pastel.subtitles.deeper_down_portal_open",
+  "fissure_open": {
+    "subtitle": "pastel.subtitles.fissure_open",
     "sounds": [
-      "pastel:deeper_down_portal_open"
+      "pastel:fissure_open"
     ]
   },
   "enchanter_finish": {

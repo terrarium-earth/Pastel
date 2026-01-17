@@ -1,0 +1,40 @@
+{
+  "parent": "pastel:midgame/break_decayed_bedrock",
+  "display": {
+    "icon": {
+      "id": "minecraft:bedrock"
+    },
+    "title": {
+      "translate": "advancements.pastel.open_fissure.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.open_fissure.description"
+    }
+  },
+  "criteria": {
+    "opened_fissure": {
+      "trigger": "minecraft:impossible"
+    },
+    "entered_dimension": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:midgame/enter_dimension"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:midgame/break_decayed_bedrock"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "opened_fissure",
+      "entered_dimension"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

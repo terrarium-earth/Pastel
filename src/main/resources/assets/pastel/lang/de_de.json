@@ -215,7 +215,7 @@
   "block.pastel.player_detector": "Spieler Detektor",
   "block.pastel.item_detector": "Item Detektor",
   "block.pastel.weather_detector": "Wetter Detektor",
-  "block.pastel.light_level_detector": "Block Licht Detektor",
+  "block.pastel.block_light_detector": "Block Licht Detektor",
 	"block.pastel.creature_detector": "Kreaturen Detektor",
   "block.pastel.block_placer": "Block Plazierer",
   "block.pastel.redstone_transceiver": "Kabelloses Redstone",

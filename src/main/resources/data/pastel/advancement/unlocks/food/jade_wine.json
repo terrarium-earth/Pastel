@@ -12,10 +12,10 @@
         "advancement": "pastel:triggers/confirmed_drinking_age"
       }
     },
-    "collected_jade_vine_petals": {
+    "collected_jade_petals": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:midgame/collect_jade_vine_petals"
+        "advancement": "pastel:midgame/collect_jade_petals"
       }
     }
   }

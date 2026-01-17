@@ -1,0 +1,78 @@
+package earth.terrarium.pastel.data.lang;
+
+import earth.terrarium.pastel.data.PastelLanguageProvider;
+
+public class PastelRecipeGroupLang {
+    public static void addTranslations(PastelLanguageProvider provider) {
+        provider.add("recipeGroup.pastel.amethyst_lights", "Amethyst Lights");
+        provider.add("recipeGroup.pastel.gemstone_chiseled_blocks", "Gemstone Chiseled Blocks");
+        provider.add("recipeGroup.pastel.pylons", "Gemstone Pylons");
+        provider.add("recipeGroup.pastel.azalea_tea", "Azalea Tea");
+        provider.add("recipeGroup.pastel.bedrock_armor", "Bedrock Armor");
+        provider.add("recipeGroup.pastel.bedrock_tools", "Bedrock Tools");
+        provider.add("recipeGroup.pastel.bismuth_crushing", "Bismuth");
+        provider.add("recipeGroup.pastel.block_cracking", "Block Cracking");
+        provider.add("recipeGroup.pastel.bone_ash_blocks", "Dragonbone Blocks");
+        provider.add("recipeGroup.pastel.boss_memories", "Boss Memories");
+        provider.add("recipeGroup.pastel.botania_glimmering_flowers", "Glimmering Flowers");
+        provider.add("recipeGroup.pastel.botania_mushrooms", "Colored Mushrooms");
+        provider.add("recipeGroup.pastel.chalk_chalk", "Unbreakable Chalk");
+        provider.add("recipeGroup.pastel.chalk_glow_chalk", "Unbr. Glow Chalk");
+        provider.add("recipeGroup.pastel.citrine_lights", "Citrine Lights");
+        provider.add("recipeGroup.pastel.cobbled_blackslag", "Cobbled Blackslag");
+        provider.add("recipeGroup.pastel.colored_lamps", "Colored Lamps");
+        provider.add("recipeGroup.pastel.colored_saplings", "Colored Saplings");
+        provider.add("recipeGroup.pastel.colored_spore_blossoms", "Colored Spore Blossoms");
+        provider.add("recipeGroup.pastel.compacting", "Compacting");
+        provider.add("recipeGroup.pastel.crafting_tablet", "Crafting Tablet");
+        provider.add("recipeGroup.pastel.crystallarieum_growable_crushing", "Crystallarieum Buds");
+        provider.add("recipeGroup.pastel.demon_tea", "Demon Tea");
+        provider.add("recipeGroup.pastel.deserts", "Magical Deserts");
+        provider.add("recipeGroup.pastel.resplendent_decorations", "Resplendent Decorations");
+        provider.add("recipeGroup.pastel.enchanter_exchanging_staff", "Exchange Staff");
+        provider.add("recipeGroup.pastel.extraalchemy_potions", "Extra Alchemy Potions");
+        provider.add("recipeGroup.pastel.fusion_shrines", "Fusion Shrines");
+        provider.add("recipeGroup.pastel.gemstone_chimes", "Gemstone Chimes");
+        provider.add("recipeGroup.pastel.gemstone_crushing", "Gemstone Shards & Buds");
+        provider.add("recipeGroup.pastel.gemstone_glass", "Gemstone Glass");
+        provider.add("recipeGroup.pastel.glass_ampoules", "Glass Ampoules");
+        provider.add("recipeGroup.pastel.glass_arrows", "Glass Arrows");
+        provider.add("recipeGroup.pastel.glass_crest_equipment", "Glass Crest Equipment");
+        provider.add("recipeGroup.pastel.glistering_jelly_tea", "Glistering Jelly Tea");
+        provider.add("recipeGroup.pastel.glowblocks", "Glowblocks");
+        provider.add("recipeGroup.pastel.hare_roasts", "Hare Roasts");
+        provider.add("recipeGroup.pastel.head_fusion", "Creature Manipulation");
+        provider.add("recipeGroup.pastel.horse_armor", "Horse Armor");
+        provider.add("recipeGroup.pastel.idols", "Idols");
+        provider.add("recipeGroup.pastel.infused_beverages", "Infused Beverages");
+        provider.add("recipeGroup.pastel.item_bowls", "Item Bowl");
+        provider.add("recipeGroup.pastel.jade_decorations", "Jade Decorations");
+        provider.add("recipeGroup.pastel.jadeite_decorations", "Jadeite Decorations");
+        provider.add("recipeGroup.pastel.malachite_equipment", "Malachite Equipment");
+        provider.add("recipeGroup.pastel.memories", "Memories");
+        provider.add("recipeGroup.pastel.moonstone_lights", "Moonstone Lights");
+        provider.add("recipeGroup.pastel.noxwood_amphoras", "Noxwood Amphoras");
+        provider.add("recipeGroup.pastel.noxwood_decorations", "Noxwood Decorations");
+        provider.add("recipeGroup.pastel.noxwood_lamps", "Noxwood Lamps");
+        provider.add("recipeGroup.pastel.noxwood_lanterns", "Noxwood Lamps");
+        provider.add("recipeGroup.pastel.noxwood_lights", "Noxwood Lights");
+        provider.add("recipeGroup.pastel.noxwood_planks", "Noxwood Planks");
+        provider.add("recipeGroup.pastel.onyx_lights", "Onyx Lights");
+        provider.add("recipeGroup.pastel.pastel_network", "Pastel Network");
+        provider.add("recipeGroup.pastel.pure_pastel_network", "Pure Pastel Network");
+        provider.add("recipeGroup.pastel.pigment_compacting", "Pigment Compacting");
+        provider.add("recipeGroup.pastel.phantom_frames", "Phantom Frames");
+        provider.add("recipeGroup.pastel.semi_permeable_glass", "Semi-Permeable Glass");
+        provider.add("recipeGroup.pastel.pure_to_vanilla_resources", "Pure Resource Blasting");
+        provider.add("recipeGroup.pastel.radiant_glass", "Radiant Glass");
+        provider.add("recipeGroup.pastel.resistance_potions", "Resistance Potions");
+        provider.add("recipeGroup.pastel.restoration_tea", "Restoration Tea");
+        provider.add("recipeGroup.pastel.shimmerstone_lights", "Shimmerstone Lights");
+        provider.add("recipeGroup.pastel.sleep_potions", "Sleep Potions");
+        provider.add("recipeGroup.pastel.spawner_manipulation", "Spawner Manipulation");
+        provider.add("recipeGroup.pastel.topaz_lights", "Topaz Lights");
+        provider.add("recipeGroup.pastel.vanilla", "Vanilla Enchantments");
+        provider.add("recipeGroup.pastel.vanilla_potions", "Vanilla Potions");
+        provider.add("recipeGroup.pastel.weeping_gala_deco", "Weeping Gala Deco");
+    }
+}

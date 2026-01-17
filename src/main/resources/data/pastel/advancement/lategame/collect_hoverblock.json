@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:lategame/collect_paltaeria",
+  "display": {
+    "icon": {
+      "id": "pastel:hoverblock"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_hoverblock.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_hoverblock.description"
+    }
+  },
+  "criteria": {
+    "collected_hoverblock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:hoverblock"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:lategame/collect_paltaeria"
+      }
+    }
+  }
+}

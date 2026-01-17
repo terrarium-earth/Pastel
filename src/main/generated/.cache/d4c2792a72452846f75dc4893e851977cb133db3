@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-21T03:15:34.677424898	Hidden
+// 1.21.1	2026-01-17T03:46:40.39388718	Hidden
 e9abd5422ddfa3fec76fb0801e1c552d2ba31407 data/pastel/databank/hidden/blocks/amaranth_bushel.json
 2d6dce2aac1525c75c9c49fa3c765b9134c938b8 data/pastel/databank/hidden/blocks/amethyst_ore.json
 242d792a36026a6e51f215c84db42b8f004bf10a data/pastel/databank/hidden/blocks/azurite_ore.json
@@ -191,7 +191,7 @@ c36bfb714c18266ee5cf6ac654d261d61cb673a8 data/pastel/databank/hidden/items/germi
 2df70f892569b5c9f42451ed59d0e08e373c8896 data/pastel/databank/hidden/items/gray_pigment.json
 b9f809a596ae97a6a49be11cab131d1f95e1c0a6 data/pastel/databank/hidden/items/green_pigment.json
 deed085ea21de938f1efed670db1c1546326b59c data/pastel/databank/hidden/items/incandescent_essence.json
-0504652908f2c4ae4f6ccfec85f80b0f5fa58c8e data/pastel/databank/hidden/items/jade_vine_petals.json
+ff39ff27e58884832da178765578e4cf6aa87f7e data/pastel/databank/hidden/items/jade_petals.json
 ddad715a4e4682a4922e1afde824f0e1a91accaf data/pastel/databank/hidden/items/leaves/black_leaves.json
 2af11e87a2e27444f96cfd0dd6d00a8f52628f17 data/pastel/databank/hidden/items/leaves/blue_leaves.json
 69865a4b4fbd73564d382fb42447c980c076e737 data/pastel/databank/hidden/items/leaves/brown_leaves.json

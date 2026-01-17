@@ -23,6 +23,7 @@ public class PastelDataGenerator {
 		PastelBlockTagsProvider blockTagsProvider = new PastelBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
 
 		event.addProvider(blockTagsProvider);
+        event.addProvider(new PastelLanguageProvider(packOutput));
 		event.addProvider(new PastelItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
 		event.addProvider(new PastelEnchantmentTagsProvider(packOutput, lookupProvider, existingFileHelper));
 		event.addProvider(new PastelModelProvider(packOutput));

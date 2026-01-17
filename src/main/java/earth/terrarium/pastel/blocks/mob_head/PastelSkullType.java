@@ -3,6 +3,7 @@ package earth.terrarium.pastel.blocks.mob_head;
 import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;
@@ -90,7 +91,10 @@ public enum PastelSkullType implements SkullBlock.Type {
     SHULKER_WHITE(() -> EntityType.SHULKER, SoundEvents.SHULKER_AMBIENT.getLocation()),
     SHULKER_YELLOW(() -> EntityType.SHULKER, SoundEvents.SHULKER_AMBIENT.getLocation()),
     SILVERFISH(() -> EntityType.SILVERFISH, SoundEvents.SILVERFISH_AMBIENT.getLocation()),
-    SKELETON_HORSE(() -> EntityType.SKELETON_HORSE, SoundEvents.SKELETON_HORSE_AMBIENT.getLocation()),
+    SKELETON_HORSE(
+        () -> EntityType.SKELETON_HORSE, SoundEvents.SKELETON_HORSE_AMBIENT.getLocation(),
+        PastelSkullType.SKULL_TRANSLATION_KEY
+    ),
     SLIME(() -> EntityType.SLIME, SoundEvents.SLIME_SQUISH.getLocation()),
     SNIFFER(() -> EntityType.SNIFFER, SoundEvents.SNIFFER_IDLE.getLocation()),
     SNOW_GOLEM(() -> EntityType.SNOW_GOLEM, SoundEvents.SNOW_GOLEM_AMBIENT.getLocation()),
@@ -107,7 +111,7 @@ public enum PastelSkullType implements SkullBlock.Type {
     WANDERING_TRADER(() -> EntityType.WANDERING_TRADER, SoundEvents.WANDERING_TRADER_AMBIENT.getLocation()),
     WARDEN(() -> EntityType.WARDEN, SoundEvents.WARDEN_AMBIENT.getLocation()),
     WITCH(() -> EntityType.WITCH, SoundEvents.WITCH_AMBIENT.getLocation()),
-    WITHER(() -> EntityType.WITHER, SoundEvents.WITHER_AMBIENT.getLocation()),
+    WITHER(() -> EntityType.WITHER, SoundEvents.WITHER_AMBIENT.getLocation(), PastelSkullType.SKULL_TRANSLATION_KEY),
     WOLF(() -> EntityType.WOLF, SoundEvents.WOLF_AMBIENT.getLocation()),
     ZOGLIN(() -> EntityType.ZOGLIN, SoundEvents.ZOGLIN_AMBIENT.getLocation()),
     ZOMBIE_HORSE(() -> EntityType.ZOMBIE_HORSE, SoundEvents.ZOMBIE_HORSE_AMBIENT.getLocation()),
@@ -118,7 +122,7 @@ public enum PastelSkullType implements SkullBlock.Type {
     BOGGED(() -> EntityType.BOGGED, SoundEvents.BOGGED_AMBIENT.getLocation()),
     PIGLIN_BRUTE(() -> EntityType.PIGLIN_BRUTE, SoundEvents.PIGLIN_BRUTE_AMBIENT.getLocation()),
 
-    // Spectrum
+    // Pastel
     EGG_LAYING_WOOLY_PIG(PastelEntityTypes.EGG_LAYING_WOOLY_PIG, SoundEvents.PIG_AMBIENT.getLocation()),
     ERASER(PastelEntityTypes.ERASER, SoundEvents.SPIDER_AMBIENT.getLocation()),
     KINDLING(PastelEntityTypes.KINDLING, PastelSounds.ENTITY_KINDLING_AMBIENT.getLocation()),
@@ -145,10 +149,23 @@ public enum PastelSkullType implements SkullBlock.Type {
 
     private final Supplier<? extends EntityType<?>> entityType;
     private final ResourceLocation noteBlockSound;
+    private final String headTranslationKey;
+
+    public static final String HEAD_TRANSLATION_KEY = "pastel.entity.head";
+    public static final String SKULL_TRANSLATION_KEY = "pastel.entity.skull";
+
 
     PastelSkullType(Supplier<? extends EntityType<?>> entityType, ResourceLocation noteBlockSound) {
         this.entityType = entityType;
         this.noteBlockSound = noteBlockSound;
+        this.headTranslationKey = HEAD_TRANSLATION_KEY;
+    }
+
+    PastelSkullType(
+        Supplier<? extends EntityType<?>> entityType, ResourceLocation noteBlockSound, String headTranslationKey) {
+        this.entityType = entityType;
+        this.noteBlockSound = noteBlockSound;
+        this.headTranslationKey = headTranslationKey;
     }
 
     @SuppressWarnings("unchecked")
@@ -158,6 +175,10 @@ public enum PastelSkullType implements SkullBlock.Type {
 
     public ResourceLocation getNoteBlockSound() {
         return this.noteBlockSound;
+    }
+
+    public String getHeadTranslationKey() {
+        return this.headTranslationKey;
     }
 
     @Override

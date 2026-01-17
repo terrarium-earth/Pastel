@@ -72,7 +72,7 @@ public class PlayerTrackingBlockEntityRenderer implements BlockEntityRenderer<Pl
                     overlay, matrices, vertexConsumers, entity.getLevel(), 0
                 );
             }
-        } else if (state.is(PastelBlocks.TREASURE_ITEM_BOWL.get()) && !taker && TreasureItemBowlBlock.canInteract(
+        } else if (state.is(PastelBlocks.ENLIGHTENMENT_ITEM_BOWL.get()) && !taker && TreasureItemBowlBlock.canInteract(
             Minecraft.getInstance().player)) {
             double currentRadiant = radiant + (radiant * (time / 16.0) / 8.0F);
             double height = Math.sin((time + currentRadiant) / 8.0) / 7.0; // item height

@@ -6,6 +6,9 @@
     "pastel:black_fence_gate": {
       "burn_time": 300
     },
+    "pastel:block_light_detector": {
+      "burn_time": 300
+    },
     "pastel:blue_fence": {
       "burn_time": 300
     },
@@ -58,9 +61,6 @@
       "burn_time": 300
     },
     "pastel:light_gray_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:light_level_detector": {
       "burn_time": 300
     },
     "pastel:lime_fence": {
