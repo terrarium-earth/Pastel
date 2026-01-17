@@ -34,6 +34,8 @@ public class PastelBlockLang {
                         "polished_citrine_block"
                     )
                     .contains(name)) name = name.substring(0, name.length() - 6);
+            // the switcheroo
+            if (name.startsWith("cushion_")) name = name.substring(8) + "_cushion";
             // handle storage blocks
             if (name.endsWith("_block") && !name.endsWith("_noxcap_block") && !name.equals("resplendent_block"))
                 name = "block_of_" + name.substring(0, name.length() - 6);
