@@ -2,6 +2,8 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.PlacedItemBlockEntity;
+import earth.terrarium.pastel.blocks.TeaTableBlockEntity;
+import earth.terrarium.pastel.blocks.TeaTableBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.amphora.AmphoraBlockEntity;
 import earth.terrarium.pastel.blocks.block_flooder.BlockFlooderBlockEntity;
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleBlockEntity;
@@ -131,6 +133,7 @@ public class PastelBlockEntities {
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PastelNodeBlockEntity>> PASTEL_NODE;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<HummingstoneBlockEntity>> HUMMINGSTONE;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PlacedItemBlockEntity>> PLACED_ITEM;
+    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<TeaTableBlockEntity>> TEA_TABLE;
 
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PreservationControllerBlockEntity>>
         PRESERVATION_CONTROLLER;
@@ -220,6 +223,7 @@ public class PastelBlockEntities {
         CINDERHEARTH = register("cinderhearth", CinderhearthBlockEntity::new, PastelBlocks.CINDERHEARTH);
         PRESENT = register("present", PresentBlockEntity::new, PastelBlocks.PRESENT);
         TITRATION_BARREL = register("titration_barrel", TitrationBarrelBlockEntity::new, PastelBlocks.TITRATION_BARREL);
+        TEA_TABLE = register("tea_table", TeaTableBlockEntity::new, PastelBlocks.TEA_TABLE);
         PASTEL_NODE = register(
             "pastel_node", PastelNodeBlockEntity::new, PastelBlocks.CONNECTION_NODE, PastelBlocks.PROVIDER_NODE,
             PastelBlocks.STORAGE_NODE, PastelBlocks.SENDER_NODE, PastelBlocks.GATHER_NODE, PastelBlocks.BUFFER_NODE
@@ -306,6 +310,7 @@ public class PastelBlockEntities {
             PastelBlockEntities.PLAYER_TRACKING.get(), PlayerTrackingBlockEntityRenderer::new);
 
         BlockEntityRenderers.register(PastelBlockEntities.PASTEL_NODE.get(), PastelNodeBlockEntityRenderer::new);
+        BlockEntityRenderers.register(PastelBlockEntities.TEA_TABLE.get(), TeaTableBlockEntityRenderer::new);
     }
 
 }

@@ -140,7 +140,10 @@ cloche {
 
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
-                modImplementation("maven.modrinth:databank:1.2.2")
+                modImplementation("com.cmdpro.databank:databank:1.3.1") {
+                    exclude(module = "sodium")
+                    exclude(module = "iris")
+                }
                 modImplementation(additionalEntityAttributes)
                 compileOnly(jgrapht)
                 implementation(jheaps)
@@ -148,7 +151,7 @@ cloche {
 				modImplementation("dev.emi:emi-neoforge:1.1.19+1.21.1")
 
                 modCompileOnly("maven.modrinth:colorful-hearts:10.3.8") { isTransitive = false }
-                modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge") { isTransitive = false }
+                modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.9-neoforge") { isTransitive = false }
                 modCompileOnly("com.unascribed:ears-api:1.4.6")
                 modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
 				modCompileOnly("maven.modrinth:vanity:xWfEA0yC") // compile only cuz accessories

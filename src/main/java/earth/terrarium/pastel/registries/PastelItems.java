@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.registries;
 
+import com.cmdpro.databank.misc.AnimatedBlockItemUtil;
 import com.cmdpro.databank.misc.ColorGradient;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.PastelCommon;
@@ -144,6 +145,8 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -1840,6 +1843,17 @@ public class PastelItems {
 
     public static PairedFoodComponent teaSconeBonus(FoodProperties foodComponent) {
         return new PairedFoodComponent(PastelItems.SCONE, true, foodComponent);
+    }
+
+    // I couldn't find any fitting instances of this event already. feel free to move it ~Esét
+    @SubscribeEvent
+    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerItem(
+            AnimatedBlockItemUtil.createBasicExtensions(
+                PastelCommon.locate("textures/block/tea_table.png"),
+                PastelCommon.locate("tea_table")
+            ), PastelBlocks.TEA_TABLE.asItem()
+        );
     }
 
 }

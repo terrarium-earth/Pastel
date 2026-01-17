@@ -26,15 +26,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeaTable extends Block {
+public class TeaTable extends Block implements EntityBlock {
     // Please for the love of all that is sacred, someone find a better way to do this
     public static final ResourceLocation[] upToOnyx = new ResourceLocation[]{
         PastelAdvancements.COLLECT_RADIATING_ENDER, PastelAdvancements.ENTER_ENDER_GLASS,
@@ -533,5 +536,15 @@ public class TeaTable extends Block {
             }
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TeaTableBlockEntity(pos, state);
     }
 }

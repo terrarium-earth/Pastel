@@ -1,0 +1,567 @@
+{
+  "animations": {
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": []
+    },
+    "idle": {
+      "length": 0,
+      "looping": true,
+      "animation": []
+    }
+  },
+  "parts": [
+    {
+      "type": "databank:group",
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "children": [
+        {
+          "type": "databank:group",
+          "name": "table",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            5,
+            0,
+            -7
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "surface",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -13,
+                -5,
+                -1
+              ],
+              "texOffset": [
+                0,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                2,
+                15,
+                2
+              ],
+              "dimensions": [
+                12,
+                2,
+                12
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "legs",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -10,
+                0,
+                2
+              ],
+              "texOffset": [
+                0,
+                14
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "dimensions": [
+                10,
+                10,
+                10
+              ],
+              "inflate": -0.01
+            },
+            {
+              "type": "databank:cube",
+              "name": "cloth_n",
+              "rotation": [
+                0.2617993877991494,
+                0,
+                0
+              ],
+              "offset": [
+                -5,
+                10,
+                1
+              ],
+              "texOffset": [
+                40,
+                14
+              ],
+              "mirror": false,
+              "origin": [
+                -6.5,
+                -9,
+                0
+              ],
+              "dimensions": [
+                13,
+                9,
+                0
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "cloth_s",
+              "rotation": [
+                -0.2617993877991494,
+                0,
+                0
+              ],
+              "offset": [
+                -5,
+                10,
+                13
+              ],
+              "texOffset": [
+                40,
+                23
+              ],
+              "mirror": false,
+              "origin": [
+                -6.5,
+                -9,
+                0
+              ],
+              "dimensions": [
+                13,
+                9,
+                0
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "cloth_e",
+              "rotation": [
+                0,
+                0,
+                0.2617993877991494
+              ],
+              "offset": [
+                1,
+                10,
+                7
+              ],
+              "texOffset": [
+                0,
+                34
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -9,
+                -6.5
+              ],
+              "dimensions": [
+                0,
+                9,
+                13
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "cloth_w",
+              "rotation": [
+                0,
+                0,
+                -0.2617993877991494
+              ],
+              "offset": [
+                -11,
+                10,
+                7
+              ],
+              "texOffset": [
+                26,
+                34
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -9,
+                -6.5
+              ],
+              "dimensions": [
+                0,
+                9,
+                13
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:mesh",
+              "name": "cloth",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -5,
+                2,
+                7
+              ],
+              "vertices": {
+                "O888": {
+                  "x": 6,
+                  "y": 8,
+                  "z": 6,
+                  "weights": {}
+                },
+                "q3c8": {
+                  "x": 6,
+                  "y": 8,
+                  "z": -6,
+                  "weights": {}
+                },
+                "R8rO": {
+                  "x": 8,
+                  "y": 0,
+                  "z": 8,
+                  "weights": {}
+                },
+                "1vzk": {
+                  "x": 8,
+                  "y": 0,
+                  "z": -8,
+                  "weights": {}
+                },
+                "CNEg": {
+                  "x": -6,
+                  "y": 8,
+                  "z": 6,
+                  "weights": {}
+                },
+                "dRcQ": {
+                  "x": -6,
+                  "y": 8,
+                  "z": -6,
+                  "weights": {}
+                },
+                "WGDd": {
+                  "x": -8,
+                  "y": 0,
+                  "z": 8,
+                  "weights": {}
+                },
+                "4HVW": {
+                  "x": -8,
+                  "y": 0,
+                  "z": -8,
+                  "weights": {}
+                }
+              },
+              "faces": [
+                [
+                  {
+                    "id": "q3c8",
+                    "u": 46,
+                    "v": 56
+                  },
+                  {
+                    "id": "O888",
+                    "u": 34,
+                    "v": 56
+                  },
+                  {
+                    "id": "R8rO",
+                    "u": 32,
+                    "v": 64
+                  },
+                  {
+                    "id": "1vzk",
+                    "u": 48,
+                    "v": 64
+                  }
+                ],
+                [
+                  {
+                    "id": "WGDd",
+                    "u": 79,
+                    "v": 70
+                  },
+                  {
+                    "id": "CNEg",
+                    "u": 77,
+                    "v": 62
+                  },
+                  {
+                    "id": "dRcQ",
+                    "u": 65,
+                    "v": 62
+                  },
+                  {
+                    "id": "4HVW",
+                    "u": 63,
+                    "v": 70
+                  }
+                ],
+                [
+                  {
+                    "id": "CNEg",
+                    "u": 52,
+                    "v": 66
+                  },
+                  {
+                    "id": "O888",
+                    "u": 64,
+                    "v": 66
+                  },
+                  {
+                    "id": "q3c8",
+                    "u": 64,
+                    "v": 54
+                  },
+                  {
+                    "id": "dRcQ",
+                    "u": 52,
+                    "v": 54
+                  }
+                ],
+                [
+                  {
+                    "id": "1vzk",
+                    "u": 68,
+                    "v": 54
+                  },
+                  {
+                    "id": "R8rO",
+                    "u": 68,
+                    "v": 38
+                  },
+                  {
+                    "id": "WGDd",
+                    "u": 52,
+                    "v": 38
+                  },
+                  {
+                    "id": "4HVW",
+                    "u": 52,
+                    "v": 54
+                  }
+                ],
+                [
+                  {
+                    "id": "R8rO",
+                    "u": 16,
+                    "v": 64
+                  },
+                  {
+                    "id": "O888",
+                    "u": 14,
+                    "v": 56
+                  },
+                  {
+                    "id": "CNEg",
+                    "u": 2,
+                    "v": 56
+                  },
+                  {
+                    "id": "WGDd",
+                    "u": 0,
+                    "v": 64
+                  }
+                ],
+                [
+                  {
+                    "id": "dRcQ",
+                    "u": 30,
+                    "v": 56
+                  },
+                  {
+                    "id": "q3c8",
+                    "u": 18,
+                    "v": 56
+                  },
+                  {
+                    "id": "1vzk",
+                    "u": 16,
+                    "v": 64
+                  },
+                  {
+                    "id": "4HVW",
+                    "u": 32,
+                    "v": 64
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "teapot",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -2,
+            17,
+            -2
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "base",
+              "rotation": [
+                0,
+                -0.7853981633974483,
+                0
+              ],
+              "offset": [
+                3,
+                -5,
+                3
+              ],
+              "texOffset": [
+                48,
+                8
+              ],
+              "mirror": false,
+              "origin": [
+                -3,
+                0,
+                -2
+              ],
+              "dimensions": [
+                4,
+                1,
+                4
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "pot",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                1.25,
+                -4,
+                1.25
+              ],
+              "texOffset": [
+                48,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                0,
+                -1
+              ],
+              "dimensions": [
+                6,
+                4,
+                4
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "handle",
+              "rotation": [
+                0,
+                0,
+                0.7853981633974483
+              ],
+              "offset": [
+                6,
+                -4.25,
+                1.25
+              ],
+              "texOffset": [
+                52,
+                32
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                0,
+                1
+              ],
+              "dimensions": [
+                3,
+                3,
+                0
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "spout",
+              "rotation": [
+                0,
+                0,
+                0.39269908169872414
+              ],
+              "offset": [
+                -2,
+                -3.5,
+                0.25
+              ],
+              "texOffset": [
+                52,
+                35
+              ],
+              "mirror": false,
+              "origin": [
+                1,
+                0,
+                2
+              ],
+              "dimensions": [
+                1,
+                3,
+                0
+              ],
+              "inflate": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    128,
+    128
+  ],
+  "version": 1
+}
