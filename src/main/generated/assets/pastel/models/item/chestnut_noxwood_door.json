@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "pastel:block/chestnut_noxwood_door"
+    "layer0": "pastel:item/chestnut_noxwood_door"
   }
 }
