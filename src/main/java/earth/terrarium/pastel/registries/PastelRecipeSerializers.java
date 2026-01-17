@@ -25,6 +25,8 @@ import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
 import earth.terrarium.pastel.recipe.fusion_shrine.dynamic.ShootingStarHardeningRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapelessPedestalRecipe;
+import earth.terrarium.pastel.recipe.pedestal.dynamic.EnderCanvasLargeRecipe;
+import earth.terrarium.pastel.recipe.pedestal.dynamic.EnderCanvasRecipe;
 import earth.terrarium.pastel.recipe.pedestal.dynamic.StarCandyRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopBrewingRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopCraftingRecipe;
@@ -80,6 +82,10 @@ public class PastelRecipeSerializers {
         "pedestal_shapeless", new ShapelessPedestalRecipe.Serializer());
     public static final RecipeSerializer<StarCandyRecipe> PEDESTAL_STAR_CANDY = register(
         "pedestal_star_candy", new EmptyRecipeSerializer<>(StarCandyRecipe::new));
+    public static final RecipeSerializer<EnderCanvasRecipe> PEDESTAL_ENDER_CANVAS = register(
+        "pedestal_ender_canvas", new EmptyRecipeSerializer<>(EnderCanvasRecipe::new));
+    public static final RecipeSerializer<EnderCanvasLargeRecipe> PEDESTAL_ENDER_CANVAS_LARGE = register(
+        "pedestal_ender_canvas_large", new EmptyRecipeSerializer<>(EnderCanvasLargeRecipe::new));
 
     // Anvil Crushing
     public static final RecipeSerializer<AnvilCrushingRecipe> ANVIL_CRUSHING_RECIPE_SERIALIZER = register(

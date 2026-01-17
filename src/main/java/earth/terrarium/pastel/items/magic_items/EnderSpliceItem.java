@@ -178,7 +178,7 @@ public class EnderSpliceItem extends Item {
                 SoundSource.PLAYERS, 1.0F, 1.0F
             );
 
-            if (!isSameWorld) {
+            if (!world.dimension().equals(targetWorld.dimension())) {
                 user.changeDimension(new DimensionTransition(
                     targetServerWorld, targetPos.add(0, 0.25, 0), new Vec3(0, 0, 0), user.getYRot(), user.getXRot(),
                     DimensionTransition.DO_NOTHING

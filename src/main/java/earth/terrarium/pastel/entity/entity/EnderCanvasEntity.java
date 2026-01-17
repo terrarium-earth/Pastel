@@ -192,25 +192,30 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
         boolean canWarp = resonant || EnderSpliceItem.isSameWorld(level(), targetLevel);
 
         for (Entity entity : list) {
+            boolean narcissus = false;
             Vec3i towardsPainting = this.direction.getOpposite()
                                                   .getNormal();
             PastelCommon.logInfo(String.valueOf(entity.getDeltaMovement()
                                                       .normalize()
                                                       .dot(Vec3.atLowerCornerOf(towardsPainting))));
-            var entityMovement = entity.getDeltaMovement()
-                                       .normalize();
-            var paintingDir = Vec3.atLowerCornerOf(towardsPainting);
-            var dot = entityMovement.dot(paintingDir);
             if (entity.getDeltaMovement()
                       .normalize()
                       .dot(Vec3.atLowerCornerOf(towardsPainting)) >= 0) {
-                if (!canWarp && entity instanceof ServerPlayer player) {
+                if (entity instanceof ServerPlayer player) {
+                    narcissus = (spliceData.targetGameProfile()
+                                           .isPresent() &&
+                                 player.getGameProfile()
+                                       .equals(
+                                           spliceData.targetGameProfile()
+                                                     .get()));
+                }
+                if (entity instanceof ServerPlayer player && (!canWarp || narcissus)) {
                     AdvancementHolder coyoteAdvancement = server.getAdvancements()
                                                                 .get(PastelAdvancements.Midgame.RUN_INTO_WALL);
                     if (coyoteAdvancement != null) player.getAdvancements()
                                                          .award(coyoteAdvancement, "run_into_wall");
                 }
-                if (canWarp)
+                if (canWarp && !narcissus)
                     teleportEntityToPos(level(), entity, targetLevel, targetPos);
             }
         }
@@ -225,7 +230,8 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
                 SoundSource.PLAYERS, 1.0F, 1.0F
             );
 
-            if (!EnderSpliceItem.isSameWorld(world, targetWorld)) {
+            if (!world.dimension()
+                      .equals(targetWorld.dimension())) {
                 entity.changeDimension(new DimensionTransition(
                     targetServerWorld, targetPos.add(0, 0.25, 0), new Vec3(0, 0, 0), entity.getYRot(), entity.getXRot(),
                     DimensionTransition.DO_NOTHING
@@ -332,12 +338,16 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
                                                                  .getOrThrow()
         );
         compound.putBoolean("Resonant", resonant);
+        compound.put("Direction", Direction.CODEC.encodeStart(NbtOps.INSTANCE, direction)
+                                                 .getOrThrow()
+        );
         return super.save(compound);
     }
 
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
+        setDirection(Direction.CODEC.parse(NbtOps.INSTANCE,compound.get("Direction")).getOrThrow());
         if (compound.contains("SpliceData")) {
             setSpliceData(EnderSpliceComponent.CODEC.parse(NbtOps.INSTANCE, compound.get("SpliceData"))
                                                     .getOrThrow());
