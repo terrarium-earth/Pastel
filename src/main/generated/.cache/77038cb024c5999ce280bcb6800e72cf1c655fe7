@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-16T16:14:11.003504754	Model Definitions
+// 1.21.1	2026-01-16T16:23:39.333070858	Model Definitions
 2e209fa76a738ef1d22af6817df1419142cc743a assets/pastel/blockstates/abyssal_vines.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_head.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_wall_head.json
@@ -2252,7 +2252,7 @@ ef326898b563ffd2285cf0cffb2494e753ee9fbc assets/pastel/models/item/cheong.json
 44f9459fb684784d083818076c4c0bcd6b8afeb5 assets/pastel/models/item/chestnut_noxshroom.json
 da6258ea1623e782f4d8b882e000d69da298d604 assets/pastel/models/item/chestnut_noxwood_amphora.json
 2ab18567727bdf27d71264cc98c9f8d77aed1c04 assets/pastel/models/item/chestnut_noxwood_button.json
-49202a72a3f6e4e9ed55944c3d7f1fae673d1541 assets/pastel/models/item/chestnut_noxwood_door.json
+03e7d69300dd685f0d1f2560cc6fe0a5c1a2d929 assets/pastel/models/item/chestnut_noxwood_door.json
 3b00374ae38b49a4ff6789558fe651b5e2657856 assets/pastel/models/item/chestnut_noxwood_fence.json
 db40fcd185bc9950972b6fabd4fd896ee7e3be65 assets/pastel/models/item/chestnut_noxwood_fence_gate.json
 90a7dd56770ee2d163ebaaa157780e4548461694 assets/pastel/models/item/chestnut_noxwood_lamp.json
@@ -2395,7 +2395,7 @@ ad8d159a9c75c2c357d31297e0b002042bf2e2be assets/pastel/models/item/ebony_noxcap_
 44d3cc1bb204442d82ffecca35ab2dc1979c9c3f assets/pastel/models/item/ebony_noxshroom.json
 4fb5fdc936c9f1abae60bda2636ca1598ac6bf83 assets/pastel/models/item/ebony_noxwood_amphora.json
 9ebc92a6317d2922e10c618ae730b43bb978e002 assets/pastel/models/item/ebony_noxwood_button.json
-c8b02d4caebcadf77567d67dd6bd614386512dee assets/pastel/models/item/ebony_noxwood_door.json
+d85f95541ef492fff75f498873ab8fb0efe16309 assets/pastel/models/item/ebony_noxwood_door.json
 77b9dac0bdb08e32d0448819bf3ef8ac1a4aeca0 assets/pastel/models/item/ebony_noxwood_fence.json
 0c30a50761bae27c9d9e8b963599dd374113c4c8 assets/pastel/models/item/ebony_noxwood_fence_gate.json
 8d5004bedde9ef0404231a5f7a54152672e2c1b5 assets/pastel/models/item/ebony_noxwood_lamp.json
@@ -2574,7 +2574,7 @@ a572e370551b8bb56f75031249f80ecae69796a5 assets/pastel/models/item/item_roundel.
 bc1d5a09f82dcb74a0bad8091d3efb65b9a9e507 assets/pastel/models/item/ivory_noxshroom.json
 940c57cb4f5a4e17cf09917d8bfa1684dab2ca98 assets/pastel/models/item/ivory_noxwood_amphora.json
 8865bcf45e8e4259df852c423ce633e5e1db68bf assets/pastel/models/item/ivory_noxwood_button.json
-ebdfe30d633de45d033a1530fe76ef8405240c7c assets/pastel/models/item/ivory_noxwood_door.json
+25565cb60e4aa0f90fa00987145b5647ad10b83a assets/pastel/models/item/ivory_noxwood_door.json
 b84ff010e0fbd8fd1db1e3d75e80e0277478d1fd assets/pastel/models/item/ivory_noxwood_fence.json
 79fed443efc94acf2743483368618f784c4f8215 assets/pastel/models/item/ivory_noxwood_fence_gate.json
 8816485775f5e18af519397dc7deaa3794d1aff7 assets/pastel/models/item/ivory_noxwood_lamp.json
@@ -3318,7 +3318,7 @@ d2757d2905479071b60f49cae7ab62bff2561016 assets/pastel/models/item/weathered_sha
 cd74fbca832d9b3eb24e477c20ca7809bd9205a1 assets/pastel/models/item/weeping_gala_amphora.json
 37c03d802632fb2115901f4661cdbc56673bbdc8 assets/pastel/models/item/weeping_gala_barrel.json
 2c7a0f576506335b4f9b006850a919181e28b2f0 assets/pastel/models/item/weeping_gala_button.json
-a2713402784313a19ef68c55044cf39aab337356 assets/pastel/models/item/weeping_gala_door.json
+fccca3c71f30bd329b93c8bdfc79b4e7d5aee991 assets/pastel/models/item/weeping_gala_door.json
 28ddd56b6bcc7fba27eb69609e39bea3f13283ae assets/pastel/models/item/weeping_gala_fence.json
 f4bd0a58e4f6ba309cc85a630aaf8fa1fdf624c3 assets/pastel/models/item/weeping_gala_fence_gate.json
 9a2b19700f98179cb161f10f5a8b26ca7311d148 assets/pastel/models/item/weeping_gala_lamp.json
