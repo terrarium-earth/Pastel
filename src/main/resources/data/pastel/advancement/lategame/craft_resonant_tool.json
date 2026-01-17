@@ -1,17 +1,32 @@
 {
-  "parent": "pastel:lategame/craft_resonant_pickaxe",
+  "parent": "pastel:lategame/collect_paltaeria",
   "display": {
     "icon": {
-      "id": "minecraft:enchanted_book"
+      "id": "pastel:resonant_pickaxe",
+      "components": {
+        "minecraft:enchantments": {
+          "levels": {
+            "pastel:resonance": 1
+          }
+        }
+      }
     },
     "title": {
-      "translate": "advancements.pastel.create_resonance_enchanted_book.title"
+      "translate": "advancements.pastel.craft_resonant_tool.title"
     },
     "description": {
-      "translate": "advancements.pastel.create_resonance_enchanted_book.description"
+      "translate": "advancements.pastel.craft_resonant_tool.description"
     }
   },
   "criteria": {
+    "craft_pedestal": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "pastel:resonant_pickaxe"
+        }
+      }
+    },
     "crafted_resonance_book": {
       "trigger": "pastel:enchanter_crafting",
       "conditions": {
@@ -51,14 +66,15 @@
     "gotten_previous": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:lategame/craft_resonant_pickaxe"
+        "advancement": "pastel:lategame/build_complex_pedestal_structure"
       }
     }
   },
   "requirements": [
     [
       "crafted_resonance_book",
-      "enchanted_resonance_book"
+      "enchanted_resonance_book",
+      "craft_pedestal"
     ],
     [
       "gotten_previous"

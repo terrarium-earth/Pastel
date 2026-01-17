@@ -50,7 +50,7 @@
       "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "pastel:lategame/create_resonance_enchanted_book"
+        "advancement_id": "pastel:lategame/create_resonant_tool"
       },
       "title": "enchantment.pastel.resonance",
       "item": {

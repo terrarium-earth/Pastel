@@ -164,8 +164,9 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 			level = stack.getOrDefault(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT).fortuneLevel();
 		} else {
 			int fortuneLevel = Ench.getLevel(registryLookup, Enchantments.FORTUNE, stack);
-			stack.update(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT, comp ->
-					new WorkstaffComponent(comp.canTill(), comp.canShoot(), Math.min(fortuneLevel, 1)));
+            if(fortuneLevel > 0)
+			    stack.update(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT, comp ->
+				    	new WorkstaffComponent(comp.canTill(), comp.canShoot(), Math.max(fortuneLevel, 1)));
 		}
 		
 		ItemStack newStack = stack.copy();

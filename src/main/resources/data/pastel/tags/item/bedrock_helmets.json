@@ -1,0 +1,17 @@
+{
+  "values": [
+    "pastel:bedrock_helmet",
+    {
+      "id": "magic_of_color:bedrock_warlock_hat",
+      "required": false
+    },
+    {
+      "id": "magic_of_color:bedrock_warlock_hood",
+      "required": false
+    },
+    {
+      "id": "magic_of_color:bedrock_warlock_helmet",
+      "required": false
+    }
+  ]
+}

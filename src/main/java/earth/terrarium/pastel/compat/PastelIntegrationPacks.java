@@ -54,7 +54,7 @@ public class PastelIntegrationPacks {
         }
 
         registerIntegrationPack(AE2_ID, () -> new AE2Compat());
-        registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
+        //registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
         //registerIntegrationPack(FARMERSDELIGHT_ID, () -> new FDCompat());
         registerIntegrationPack(CREATE_ID, () -> new CreateCompat());
         bus.addListener((FMLCommonSetupEvent event) -> {

@@ -12,6 +12,7 @@ import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
 import earth.terrarium.pastel.attachments.data.HookshotData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
+import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.components.PairedFoodComponent;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
@@ -20,12 +21,7 @@ import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.items.tools.ParryingSwordItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.items.trinkets.RingOfAerialGraceItem;
-import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelEntityAttributes;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSounds;
+import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.EffectProlongingStatusEffect;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.core.Direction;
@@ -47,6 +43,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -58,6 +55,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Stack;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -99,6 +98,9 @@ public abstract class LivingEntityMixin {
 
     @Shadow
     public boolean dead;
+
+    @Shadow
+    protected Stack<DamageContainer> damageContainers;
 
     @Inject(method = "createLivingAttributes", require = 1, allow = 1, at = @At("RETURN"))
     private static void addAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> cir) {
@@ -371,4 +373,15 @@ public abstract class LivingEntityMixin {
                                         : livingEntity.isInWaterRainOrBubble();
     }
 
+    @WrapOperation(at = @At(value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"), method = "hurt")
+    private void applyDike(LivingEntity instance, DamageSource source, float amount, Operation<Void> original) {
+        if (source.is(PastelDamageTypeTags.BYPASSES_DIKE)) {
+            original.call(instance, source, amount);
+            return;
+        }
+        var container = this.damageContainers.peek();
+        var passedDamage = AzureDikeProvider.absorbDamage(instance, container.getNewDamage());
+        container.setNewDamage(passedDamage);
+        instance.actuallyHurt(source, passedDamage);
+    }
 }
