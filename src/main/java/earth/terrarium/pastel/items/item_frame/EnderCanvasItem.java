@@ -7,6 +7,7 @@ import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -64,7 +65,8 @@ public class EnderCanvasItem extends HangingEntityItem {
 
             Optional<EnderCanvasEntity> canvasEntity = EnderCanvasEntity.createNew(
                 level, relative, clickedFace, spliceComponent, variant,
-                EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.DIMENSIONAL_TELEPORT));
+                EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.DIMENSIONAL_TELEPORT)
+            );
 
             if (canvasEntity.isEmpty()) {
                 return InteractionResult.CONSUME;
@@ -99,7 +101,12 @@ public class EnderCanvasItem extends HangingEntityItem {
                                         .getB();
             tooltip.add(
                 Component.translatable(
-                    "item.pastel.ender_canvas.tooltip.bound_pos", (int) pos.x, (int) pos.y, (int) pos.z,
+                    stack.getOrDefault(
+                        PastelDataComponentTypes.ENDER_CANVAS_VARIANT,
+                        EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
+                    ) == EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
+                    ? "item.pastel.ender_canvas.tooltip.large_landscape"
+                    : "item.pastel.ender_canvas.tooltip.small_landscape", (int) pos.x, (int) pos.y, (int) pos.z,
                     dimensionDisplayString
                 ));
         } else {
@@ -108,11 +115,11 @@ public class EnderCanvasItem extends HangingEntityItem {
                 Optional<Component> teleportTargetPlayerName = getTeleportTargetPlayerName(stack);
                 if (teleportTargetPlayerName.isPresent()) {
                     tooltip.add(Component.translatable(
-                        "item.pastel.ender_canvas.tooltip.bound_player",
+                        "item.pastel.ender_canvas.tooltip.portrait",
                         teleportTargetPlayerName.get()
                     ));
                 } else {
-                    tooltip.add(Component.translatable("item.pastel.ender_canvas.tooltip.bound_player", "???"));
+                    tooltip.add(Component.translatable("item.pastel.ender_canvas.tooltip.portrait", "???"));
                 }
             }
         }
@@ -132,7 +139,8 @@ public class EnderCanvasItem extends HangingEntityItem {
 
     public Optional<UUID> getTeleportTargetPlayerUUID(@NotNull ItemStack itemStack) {
         return itemStack.getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT)
-                        .targetGameProfile().map(GameProfile::getId);
+                        .targetGameProfile()
+                        .map(GameProfile::getId);
     }
 
     public Optional<Component> getTeleportTargetPlayerName(@NotNull ItemStack itemStack) {
