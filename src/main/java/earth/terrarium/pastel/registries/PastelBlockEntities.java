@@ -55,7 +55,6 @@ import earth.terrarium.pastel.blocks.redstone.RedstoneCalculatorBlockEntity;
 import earth.terrarium.pastel.blocks.redstone.RedstoneTransceiverBlockEntity;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntityRenderer;
-import earth.terrarium.pastel.blocks.spirit_sallow.OminousSaplingBlockEntity;
 import earth.terrarium.pastel.blocks.structure.DeepLightBlockEntity;
 import earth.terrarium.pastel.blocks.structure.DeepLightBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.structure.PlayerTrackerBlockEntity;
@@ -89,7 +88,6 @@ public class PastelBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(
         Registries.BLOCK_ENTITY_TYPE, PastelCommon.MOD_ID);
 
-    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<OminousSaplingBlockEntity>> OMINOUS_SAPLING;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PedestalBlockEntity>> PEDESTAL;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<FusionShrineBlockEntity>> FUSION_SHRINE;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<EnchanterBlockEntity>> ENCHANTER;
@@ -166,8 +164,6 @@ public class PastelBlockEntities {
     }
 
     public static void register(IEventBus bus) {
-        OMINOUS_SAPLING = register(
-            "ominous_sapling_block_entity", OminousSaplingBlockEntity::new, PastelBlocks.OMINOUS_SAPLING);
         PEDESTAL = register(
             "pedestal_block_entity", PedestalBlockEntity::new, PastelBlocks.PEDESTAL_BASIC_AMETHYST,
             PastelBlocks.PEDESTAL_BASIC_TOPAZ, PastelBlocks.PEDESTAL_BASIC_CITRINE, PastelBlocks.PEDESTAL_ALL_BASIC,
