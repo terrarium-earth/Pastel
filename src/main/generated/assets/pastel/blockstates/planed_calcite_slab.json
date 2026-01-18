@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pastel:block/planed_calcite_slab"
+    },
+    "type=double": {
+      "model": "pastel:block/planed_calcite"
+    },
+    "type=top": {
+      "model": "pastel:block/planed_calcite_slab_top"
+    }
+  }
+}

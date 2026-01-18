@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pastel:block/shale_clay_brick_slab"
+    },
+    "type=double": {
+      "model": "pastel:block/shale_clay_bricks"
+    },
+    "type=top": {
+      "model": "pastel:block/shale_clay_brick_slab_top"
+    }
+  }
+}

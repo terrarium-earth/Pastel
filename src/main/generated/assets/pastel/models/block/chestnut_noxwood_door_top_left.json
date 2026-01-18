@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left",
+  "textures": {
+    "bottom": "pastel:block/chestnut_noxwood_door_bottom",
+    "top": "pastel:block/chestnut_noxwood_door_top"
+  }
+}
