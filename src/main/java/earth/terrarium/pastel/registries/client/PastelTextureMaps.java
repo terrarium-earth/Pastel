@@ -100,7 +100,6 @@ public class PastelTextureMaps {
 
     public static TextureMapping sideTopBottom(
         Block sideBlock, String sideSuffix, Block topBlock, String topSuffix, Block bottomBlock, String bottomSuffix) {
-        PastelCommon.logWarning(getBlockTexture(sideBlock, sideSuffix).toString());
         return new TextureMapping().put(SIDE, getBlockTexture(sideBlock, sideSuffix))
                                    .put(TOP, getBlockTexture(topBlock, topSuffix))
                                    .put(BOTTOM, getBlockTexture(bottomBlock, bottomSuffix));
