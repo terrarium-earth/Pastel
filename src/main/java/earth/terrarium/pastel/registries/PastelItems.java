@@ -11,7 +11,6 @@ import earth.terrarium.pastel.blocks.gravity.FloatItem;
 import earth.terrarium.pastel.blocks.jade_vines.GerminatedJadeVineBulbItem;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.components.PairedFoodComponent;
-import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.items.ConcealingOilsItem;
 import earth.terrarium.pastel.items.CookbookItem;
@@ -110,12 +109,8 @@ import earth.terrarium.pastel.items.trinkets.WeepingCircletItem;
 import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
-import earth.terrarium.pastel.registries.client.PastelModels;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -157,8 +152,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 import static earth.terrarium.pastel.PastelCommon.CONFIG;
@@ -1154,9 +1147,9 @@ public class PastelItems {
                                                               .food(PastelFoodComponents.TRIPLE_MEAT_POT_STEW)),
         InkColors.PINK
     ));
-    public static final DeferredItem<Item> DRAGONBONE_BROTH = register(item(
+    public static final DeferredItem<Item> WYRMSCALE_JELLY = register(item(
         "wyrmscale_jelly", () -> new StackableStewItem(IS.of(8)
-                                                         .food(PastelFoodComponents.DRAGONBONE_BROTH)), InkColors.GRAY
+                                                         .food(PastelFoodComponents.WYRMSCALE_JELLY)), InkColors.GRAY
     ));
     public static final DeferredItem<Item> DOOMBLOOM_SEED = register(item(
         "doombloom_seed", () -> new ItemNameBlockItem(

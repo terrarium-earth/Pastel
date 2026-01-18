@@ -1,20 +1,20 @@
 {
-  "parent": "pastel:midgame/high_jump_with_take_off_belt",
+  "parent": "pastel:midgame/high_jump_with_takeoff_belt",
   "display": {
     "icon": {
-      "id": "pastel:take_off_belt"
+      "id": "pastel:takeoff_belt"
     },
     "hidden": true,
     "title": {
-      "translate": "advancements.pastel.take_off_belt_overcharged.title"
+      "translate": "advancements.pastel.takeoff_belt_overcharged.title"
     },
     "description": {
-      "translate": "advancements.pastel.take_off_belt_overcharged.description"
+      "translate": "advancements.pastel.takeoff_belt_overcharged.description"
     }
   },
   "criteria": {
     "high_jump": {
-      "trigger": "pastel:take_off_belt_jump",
+      "trigger": "pastel:takeoff_belt_jump",
       "conditions": {
         "charges": {
           "min": 9,

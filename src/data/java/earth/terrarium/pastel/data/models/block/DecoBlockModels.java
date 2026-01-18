@@ -331,6 +331,12 @@ public class DecoBlockModels {
         StoneLikeBlockModels.generateItemModels(generators);
         WoodLikeBlockModels.generateItemModels(generators);
 
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.TOPAZ_PYLON, PastelBlocks.TOPAZ_PYLON.get(),"_head");
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.AMETHYST_PYLON, PastelBlocks.AMETHYST_PYLON.get(),"_head");
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.CITRINE_PYLON, PastelBlocks.CITRINE_PYLON.get(),"_head");
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.ONYX_PYLON, PastelBlocks.ONYX_PYLON.get(),"_head");
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.MOONSTONE_PYLON, PastelBlocks.MOONSTONE_PYLON.get(),"_head");
+
         PastelModelHelper.registerItemModel(generators, PastelBlocks.PRIMORDIAL_TORCH.asItem());
 
         PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SEMI_PERMEABLE_GLASS, GLASS);

@@ -431,7 +431,7 @@ public class TeaTable extends Block implements EntityBlock {
         PastelAdvancements.Unlocks.Food.MOONSHINE, PastelAdvancements.Unlocks.Food.FISSURE_PLUM_TITRATION,
         PastelAdvancements.Unlocks.Food.GLASS_PEACH_TITRATION, PastelAdvancements.Unlocks.Food.TRIPLE_MEAT_POT_STEW,
         PastelAdvancements.Unlocks.Food.HONEY, PastelAdvancements.Unlocks.Food.SPIKED_MULLET_WINE,
-        PastelAdvancements.Unlocks.Food.DRAGONBONE_BROTH, PastelAdvancements.Unlocks.Food.SAWBLADE_HOLLY_TITRATION,
+        PastelAdvancements.Unlocks.Food.WYRMSCALE_JELLY, PastelAdvancements.Unlocks.Food.SAWBLADE_HOLLY_TITRATION,
         PastelAdvancements.Unlocks.Food.NECTARDEW_TITRATION, PastelAdvancements.Unlocks.Food.MYCEYLON_LIQUOR,
         PastelAdvancements.Unlocks.Food.GATORWINE, PastelAdvancements.Unlocks.ColoredSaplings.BLACK_SAPLING,
         PastelAdvancements.Unlocks.ColoredSaplings.LIGHT_GRAY_SAPLING,

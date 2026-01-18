@@ -2,18 +2,18 @@
   "parent": "pastel:midgame/collect_storm_stone",
   "display": {
     "icon": {
-      "id": "pastel:take_off_belt"
+      "id": "pastel:takeoff_belt"
     },
     "title": {
-      "translate": "advancements.pastel.high_jump_with_take_off_belt.title"
+      "translate": "advancements.pastel.high_jump_with_takeoff_belt.title"
     },
     "description": {
-      "translate": "advancements.pastel.high_jump_with_take_off_belt.description"
+      "translate": "advancements.pastel.high_jump_with_takeoff_belt.description"
     }
   },
   "criteria": {
     "high_jump": {
-      "trigger": "pastel:take_off_belt_jump",
+      "trigger": "pastel:takeoff_belt_jump",
       "conditions": {
         "charges": {
           "min": 8,

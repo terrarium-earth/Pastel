@@ -545,8 +545,8 @@ public class PastelAdvancements {
             public static final ResourceLocation JADE_WINE = PastelCommon.locate("unlocks/food/jade_wine");
             public static final ResourceLocation SPIKED_MULLET_WINE = PastelCommon.locate(
                 "unlocks/food/spiked_mullet_wine");
-            public static final ResourceLocation DRAGONBONE_BROTH = PastelCommon.locate(
-                "unlocks/food/dragonbone_broth");
+            public static final ResourceLocation WYRMSCALE_JELLY = PastelCommon.locate(
+                "unlocks/food/wyrmscale_jelly");
             public static final ResourceLocation JARAMEL = PastelCommon.locate("unlocks/food/jaramel");
             public static final ResourceLocation SAWBLADE_HOLLY_TITRATION = PastelCommon.locate(
                 "unlocks/food/sawblade_holly_titration");

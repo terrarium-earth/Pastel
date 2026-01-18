@@ -365,7 +365,7 @@ public class PastelFoodComponents {
                                         .effect(new MobEffectInstance(PastelMobEffects.NOURISHING, 12000, 1), 1.0F)
                                         .build();
 
-    public static final FoodProperties DRAGONBONE_BROTH = new FoodProperties.Builder()
+    public static final FoodProperties WYRMSCALE_JELLY = new FoodProperties.Builder()
         .nutrition(6)
         .saturationModifier(SAT_LOW)
         .effect(new MobEffectInstance(PastelMobEffects.MAGIC_ANNULATION, 2400, 1), 1.0F)

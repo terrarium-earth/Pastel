@@ -7,6 +7,5 @@ public class PastelCuriosLang {
         provider.add("curios.identifier.pin", "Pin");
         provider.add("curios.identifier.pigment_palette", "Palette");
         provider.add("curios.modifiers.feet", "When worn as footwear:");
-
     }
 }

@@ -22,8 +22,8 @@
     "B": "minecraft:bowl"
   },
   "result": {
-    "id": "pastel:dragonbone_broth",
+    "id": "pastel:wyrmscale_jelly",
     "count": 1
   },
-  "required_advancement": "pastel:unlocks/food/dragonbone_broth"
+  "required_advancement": "pastel:unlocks/food/wyrmscale_jelly"
 }

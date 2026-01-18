@@ -76,7 +76,7 @@ public class CuisineItemModels {
         PastelModelHelper.ITEM.simple(generators,PastelItems.SAWBLADE_HOLLY_BERRY);
         PastelModelHelper.ITEM.simple(generators,PastelItems.PRICKLY_BAYLEAF);
         PastelModelHelper.ITEM.simple(generators,PastelItems.TRIPLE_MEAT_POT_STEW);
-        PastelModelHelper.ITEM.simple(generators,PastelItems.DRAGONBONE_BROTH);
+        PastelModelHelper.ITEM.simple(generators,PastelItems.WYRMSCALE_JELLY);
         
         // Cookbooks
         PastelModelHelper.ITEM.simple(generators,PastelItems.MELOCHITES_COOKBOOK_VOL_1);

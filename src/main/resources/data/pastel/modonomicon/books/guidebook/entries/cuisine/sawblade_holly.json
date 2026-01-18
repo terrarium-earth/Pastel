@@ -38,9 +38,9 @@
       "type": "pastel:pedestal_crafting",
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "pastel:unlocks/food/dragonbone_broth"
+        "advancement_id": "pastel:unlocks/food/wyrmscale_jelly"
       },
-      "recipe_id": "pastel:pedestal/tier1/food/dragonbone_broth"
+      "recipe_id": "pastel:pedestal/tier1/food/wyrmscale_jelly"
     }
   ]
 }

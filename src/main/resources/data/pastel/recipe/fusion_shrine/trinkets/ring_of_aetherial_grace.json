@@ -18,9 +18,9 @@
     "pastel:paltaeria_gem"
   ],
   "result": {
-    "id": "pastel:ring_of_aerial_grace"
+    "id": "pastel:ring_of_aetherial_grace"
   },
-  "required_advancement": "pastel:unlocks/trinkets/ring_of_aerial_grace",
+  "required_advancement": "pastel:unlocks/trinkets/ring_of_aetherial_grace",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],
   "finish_crafting_effect": "single_visual_explosion_on_shrine"

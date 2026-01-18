@@ -14,7 +14,6 @@ import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -1312,7 +1311,7 @@ public class PastelItemGroups {
                                                                      entries.accept(PastelItems.PRICKLY_BAYLEAF.get());
                                                                      entries.accept(
                                                                          PastelItems.TRIPLE_MEAT_POT_STEW.get());
-                                                                     entries.accept(PastelItems.DRAGONBONE_BROTH.get());
+                                                                     entries.accept(PastelItems.WYRMSCALE_JELLY.get());
                                                                      entries.accept(PastelItems.BAGNUN.get());
                                                                      entries.accept(PastelItems.BANYASH.get());
                                                                      entries.accept(PastelItems.BERLINER.get());
