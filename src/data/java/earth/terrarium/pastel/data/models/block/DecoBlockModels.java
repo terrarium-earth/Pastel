@@ -277,6 +277,7 @@ public class DecoBlockModels {
         PastelModelHelper.singleton(generators, PastelBlocks.RESPLENDENT_CUSHION, PastelTexturedModels.CUSHION);
         PastelModelHelper.singleton(generators, PastelBlocks.RESPLENDENT_CARPET, TexturedModel.CARPET);
 
+        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.RESPLENDENT_BED);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.RESPLENDENT_BED.get())
                                                                 .with(
                                                                     PastelModelHelper.createSouthDefaultHorizontalFacingVariantMap())

@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-17T23:09:29.518077924	Model Definitions
+// 1.21.1	2026-01-17T23:19:42.781369022	Model Definitions
 16b08361bc65a3c74e8df5774303ab1909bbffbb assets/minecraft/models/item/air.json
 2e209fa76a738ef1d22af6817df1419142cc743a assets/pastel/blockstates/abyssal_vines.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_head.json
@@ -3796,7 +3796,6 @@ a5cd3b686784a4490bb5ea0585a0c771a2187c5e assets/pastel/models/item/red_stairs.js
 7a15b6778540589619631e34fd5b1dc017b0d2c3 assets/pastel/models/item/redstone_cluster.json
 09be432658724581fb4f83f9daf3ea9ca8bce8a4 assets/pastel/models/item/redstone_sand.json
 7fa76edc7525b8d31921c781e91cfc77ed3b7511 assets/pastel/models/item/resonant_lily.json
-db30db379357096512c8bf5f2478f540db65a2bb assets/pastel/models/item/resplendent_bed.json
 e99e6efda141efa6a846b97f51309d57342c3c40 assets/pastel/models/item/resplendent_block.json
 c97142704b31f3c710d931eac280a14e9612a090 assets/pastel/models/item/resplendent_carpet.json
 546b5168f93e86dd6e83e434d8a4e34f4707e865 assets/pastel/models/item/resplendent_cushion.json
@@ -3953,7 +3952,6 @@ c8a834860768456b2e284cab113f6e041f1f7c67 assets/pastel/models/item/stripped_yell
 2c3c24c4803bfcc60abdb49c82539a23c8aa9fab assets/pastel/models/item/stripped_yellow_wood.json
 5ca75f281d0fe54f2ad55e66c5639fe44f91965d assets/pastel/models/item/sweet_pea.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/tadpole_head.json
-e96698127595ec543a7bfdedfdcb4dce3a6302b7 assets/pastel/models/item/tea_table.json
 41743bea3686c8b5b06815c748e384180f967afe assets/pastel/models/item/tilled_shale_clay.json
 952428bd902b39dd4021fa5ec8f363729a72ae02 assets/pastel/models/item/tilled_slush.json
 6b581b993b1066b842d14d87ff872ba9cbcbfb2d assets/pastel/models/item/tinted_preservation_glass.json

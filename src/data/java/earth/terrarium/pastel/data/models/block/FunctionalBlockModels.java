@@ -90,6 +90,7 @@ import static net.minecraft.world.level.block.Blocks.*;
 
 public class FunctionalBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {
+        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.TEA_TABLE);
 
         generatePrimfireModel(generators);
 
