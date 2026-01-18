@@ -6873,7 +6873,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.whispy_circlet.page1.text",
-            "After just a few minutes of waring it, I feel physically and mentally refreshed and recover more quickly" +
+            "After just a few minutes of wearing it, I feel physically and mentally refreshed and recover more quickly" +
             " from any negative effects.\\\n\\\n*The pleasures of a good night's sleep.*"
         );
 
