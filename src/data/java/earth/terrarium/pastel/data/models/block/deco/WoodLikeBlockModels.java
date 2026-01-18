@@ -390,43 +390,6 @@ public class WoodLikeBlockModels {
         PastelModelHelper.registerItemModel(generators, PastelBlocks.IVORY_NOXWOOD_LANTERN.asItem(), "_item");
         PastelModelHelper.registerItemModel(generators, PastelBlocks.CHESTNUT_NOXWOOD_LANTERN.asItem(), "_item");
 
-//        PastelModelHelper.registerParentedItemModel(
-//            generators, PastelBlocks.SLATE_NOXWOOD_TRAPDOOR.get(),
-//            PastelBlocks.SLATE_NOXWOOD_TRAPDOOR.get(), "_bottom"
-//        );
-//        PastelModelHelper.registerParentedItemModel(
-//            generators, PastelBlocks.EBONY_NOXWOOD_TRAPDOOR.get(),
-//            PastelBlocks.EBONY_NOXWOOD_TRAPDOOR.get(), "_bottom"
-//        );
-//        PastelModelHelper.registerParentedItemModel(
-//            generators, PastelBlocks.IVORY_NOXWOOD_TRAPDOOR.get(),
-//            PastelBlocks.IVORY_NOXWOOD_TRAPDOOR.get(), "_bottom"
-//        );
-//        PastelModelHelper.registerParentedItemModel(
-//            generators, PastelBlocks.CHESTNUT_NOXWOOD_TRAPDOOR.get(), PastelBlocks.CHESTNUT_NOXWOOD_TRAPDOOR.get(),
-//            "_bottom"
-//        );
-//        PastelModelHelper.registerParentedItemModel(
-//            generators, PastelBlocks.WEEPING_GALA_TRAPDOOR.get(), PastelBlocks.WEEPING_GALA_TRAPDOOR.get(), "_bottom");
-
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.SLATE_NOXWOOD_FENCE);
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.EBONY_NOXWOOD_FENCE);
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.IVORY_NOXWOOD_FENCE);
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.CHESTNUT_NOXWOOD_FENCE);
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.WEEPING_GALA_FENCE);
-//
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.SLATE_NOXWOOD_BUTTON);
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.EBONY_NOXWOOD_BUTTON);
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.IVORY_NOXWOOD_BUTTON);
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.CHESTNUT_NOXWOOD_BUTTON);
-//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.WEEPING_GALA_BUTTON);
-
-//        PastelModelHelper.registerItemModel(generators, PastelBlocks.SLATE_NOXWOOD_DOOR.asItem());
-//        PastelModelHelper.registerItemModel(generators, PastelBlocks.EBONY_NOXWOOD_DOOR.asItem());
-//        PastelModelHelper.registerItemModel(generators, PastelBlocks.IVORY_NOXWOOD_DOOR.asItem());
-//        PastelModelHelper.registerItemModel(generators, PastelBlocks.CHESTNUT_NOXWOOD_DOOR.asItem());
-//        PastelModelHelper.registerItemModel(generators, PastelBlocks.WEEPING_GALA_DOOR.asItem());
-
         PastelModelHelper.registerItemModel(generators, PastelBlocks.WEEPING_GALA_LANTERN.asItem(), "_item");
     }
 }
