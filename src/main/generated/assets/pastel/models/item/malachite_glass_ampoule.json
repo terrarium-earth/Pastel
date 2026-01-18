@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/malachite_glass_ampoule_base",
+    "layer1": "pastel:item/malachite_glass_ampoule_overlay"
+  }
+}
