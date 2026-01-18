@@ -195,8 +195,6 @@ public class PastelItemGroups {
                                                                          entries.accept(
                                                                              PastelBlocks.PARTICLE_SPAWNER.get());
 
-                                                                         entries.accept(BuiltInRegistries.BLOCK.get(
-                                                                             PastelBlocks.GLISTERING_MELON.getKey())); // ???
                                                                          entries.accept(PastelBlocks.LAVA_SPONGE.get());
                                                                          entries.accept(
                                                                              PastelBlocks.WET_LAVA_SPONGE.get());
@@ -1593,6 +1591,7 @@ public class PastelItemGroups {
                                                                            PastelBlocks.AMARANTH_BUSHEL.get());
                                                                        entries.accept(BuiltInRegistries.ITEM.get(
                                                                            PastelItems.GLISTERING_MELON_SEEDS));
+                                                                       entries.accept(PastelBlocks.GLISTERING_MELON);
 
                                                                        entries.accept(
                                                                            PastelBlocks.GLISTERING_SHOOTING_STAR.get());
