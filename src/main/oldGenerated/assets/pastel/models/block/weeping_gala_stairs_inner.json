@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "pastel:block/weeping_gala_planks",
-    "side": "pastel:block/weeping_gala_planks",
-    "top": "pastel:block/weeping_gala_planks"
-  }
-}

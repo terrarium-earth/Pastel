@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "pastel:block/pyrite_plating",
-    "side": "pastel:block/pyrite_plating",
-    "top": "pastel:block/pyrite_plating"
-  }
-}
