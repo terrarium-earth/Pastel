@@ -20,7 +20,7 @@
             "condition": "minecraft:location_check",
             "predicate": {
               "block": {
-                "blocks": "pastel:wand_light",
+                "blocks": "pastel:shimmerstone_light",
                 "state": {
                   "level": "1"
                 }

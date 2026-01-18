@@ -799,7 +799,7 @@
   "block.pastel.spirit_sallow_leaves": "Листва Фантомной Ивы",
   "block.pastel.spirit_sallow_heart": "Сердце Фантомной Ивы",
   "block.pastel.sacred_soil": "Священная Почва",
-  "block.pastel.wand_light": "Сверкаменный Свет",
+  "block.pastel.shimmerstone_light": "Сверкаменный Свет",
   "block.pastel.stardust_block": "Блок Звёздной Пыли",
   "block.pastel.vegetal_block": "Блок Природной Смеси",
   "block.pastel.neolith_block": "Блок Неолита",
@@ -2066,7 +2066,7 @@
   "item.pastel.egg_laying_wooly_pig_spawn_egg": "Яйцо призыва Яйцекладущей Шерстяной Свиньи",
   "item.pastel.preservation_turret_spawn_egg": "Яйцо призыва Охранной Турели",
   "item.pastel.kindling_spawn_egg": "Яйцо призыва Киндлинга",
-  "item.pastel.lizard_spawn_egg": "Яйцо призыва Прятщерицы",
+  "item.pastel.lurking_lizard_spawn_egg": "Яйцо призыва Прятщерицы",
   "item.pastel.eraser_spawn_egg": "Яйцо призыва Стирателя",
 
   "item.pastel.spawner.tooltip.unknown_mob": "Неизвестный моб",
