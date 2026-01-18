@@ -1,6 +1,3 @@
 {
-  "parent": "pastel:templates_item/cluster",
-  "textures": {
-    "layer0": "pastel:block/gold_cluster"
-  }
+  "parent": "pastel:block/gold_cluster"
 }

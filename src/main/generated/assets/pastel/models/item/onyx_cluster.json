@@ -1,6 +1,3 @@
 {
-  "parent": "pastel:templates_item/cluster",
-  "textures": {
-    "layer0": "pastel:block/onyx_cluster"
-  }
+  "parent": "pastel:block/onyx_cluster"
 }

@@ -1,6 +1,3 @@
 {
-  "parent": "pastel:templates_item/small_bud",
-  "textures": {
-    "layer0": "pastel:block/small_coal_bud"
-  }
+  "parent": "pastel:block/small_coal_bud"
 }

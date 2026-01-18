@@ -1,6 +1,3 @@
 {
-  "parent": "pastel:templates_item/cluster",
-  "textures": {
-    "layer0": "pastel:block/emerald_cluster"
-  }
+  "parent": "pastel:block/emerald_cluster"
 }

@@ -1,6 +1,6 @@
 {
-  "parent": "pastel:templates/crystallarieum_farmable",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "cross": "pastel:block/bloodstone_cluster"
+    "all": "pastel:block/bloodstone_cluster"
   }
 }

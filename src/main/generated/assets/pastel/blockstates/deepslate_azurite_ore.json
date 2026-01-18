@@ -1,12 +1,7 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "pastel:block/deepslate_azurite_ore"
-      },
-      {
-        "model": "pastel:block/deepslate_azurite_ore_mirrored"
-      }
-    ]
+    "": {
+      "model": "pastel:block/deepslate_azurite_ore"
+    }
   }
 }

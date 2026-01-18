@@ -1,6 +1,3 @@
 {
-  "parent": "pastel:templates_item/cluster",
-  "textures": {
-    "layer0": "pastel:block/moonstone_cluster"
-  }
+  "parent": "pastel:block/moonstone_cluster"
 }

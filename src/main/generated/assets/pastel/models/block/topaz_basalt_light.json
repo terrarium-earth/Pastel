@@ -1,8 +1,0 @@
-{
-  "parent": "pastel:templates/multilayer_light",
-  "textures": {
-    "inside": "pastel:block/topaz_block",
-    "side": "pastel:block/topaz_basalt_light",
-    "top": "pastel:block/basalt_cap"
-  }
-}

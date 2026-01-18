@@ -1,6 +1,3 @@
 {
-  "parent": "pastel:templates_item/cluster",
-  "textures": {
-    "layer0": "pastel:block/citrine_cluster"
-  }
+  "parent": "pastel:block/citrine_cluster"
 }

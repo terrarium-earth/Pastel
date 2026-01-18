@@ -6,9 +6,6 @@
     "pastel:black_fence_gate": {
       "burn_time": 300
     },
-    "pastel:block_light_detector": {
-      "burn_time": 300
-    },
     "pastel:blue_fence": {
       "burn_time": 300
     },
@@ -23,9 +20,6 @@
     },
     "pastel:chrysocolla": {
       "burn_time": 16000
-    },
-    "pastel:creature_detector": {
-      "burn_time": 300
     },
     "pastel:cyan_fence": {
       "burn_time": 300
@@ -47,9 +41,6 @@
     },
     "pastel:incandescent_essence": {
       "burn_time": 2400
-    },
-    "pastel:item_detector": {
-      "burn_time": 300
     },
     "pastel:light_blue_fence": {
       "burn_time": 300
@@ -87,9 +78,6 @@
     "pastel:pink_fence_gate": {
       "burn_time": 300
     },
-    "pastel:player_detector": {
-      "burn_time": 300
-    },
     "pastel:pure_alcohol": {
       "burn_time": 16000
     },
@@ -122,9 +110,6 @@
     },
     "pastel:vegetal_block": {
       "burn_time": 8000
-    },
-    "pastel:weather_detector": {
-      "burn_time": 300
     },
     "pastel:weeping_gala_button": {
       "burn_time": 200

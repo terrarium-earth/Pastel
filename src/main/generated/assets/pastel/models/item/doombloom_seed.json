@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "pastel:item/doombloom_seed"
-  }
+  "parent": "pastel:block/doombloom"
 }

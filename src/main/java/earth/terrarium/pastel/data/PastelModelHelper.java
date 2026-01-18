@@ -43,7 +43,7 @@ import java.util.function.UnaryOperator;
 
 public class PastelModelHelper {
     public static final DeferredRegistrar.Contextual<ItemModelGenerators> ITEM_MODEL_REGISTRAR
-        = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
+        = new DeferredRegistrar.Contextual<>(false);
     // Item Models
 
     public static void registerItemModel(ItemModelGenerators ctx, Item item) {

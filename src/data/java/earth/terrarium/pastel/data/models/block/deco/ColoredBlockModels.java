@@ -431,23 +431,22 @@ public class ColoredBlockModels {
     }
 
     public static void generateItemModels(ItemModelGenerators generators) {
-        // colored fences need inventory models, colored saplings need blocktextureditemmodels
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.BLACK_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.BLUE_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.BROWN_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.CYAN_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.GRAY_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.GREEN_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.LIGHT_BLUE_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.LIGHT_GRAY_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.LIME_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.MAGENTA_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.ORANGE_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.PINK_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.PURPLE_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.RED_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.WHITE_FENCE);
-        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.YELLOW_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.BLACK_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.BLUE_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.BROWN_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.CYAN_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.GRAY_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.GREEN_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.LIGHT_BLUE_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.LIGHT_GRAY_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.LIME_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.MAGENTA_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.ORANGE_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.PINK_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.PURPLE_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.RED_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.WHITE_FENCE);
+//        PastelModelHelper.generateInventoryParentedItemModel(generators, PastelBlocks.YELLOW_FENCE);
 
         PastelModelHelper.registerBlockTexturedItemModel(generators, PastelBlocks.BLACK_SAPLING.get());
         PastelModelHelper.registerBlockTexturedItemModel(generators, PastelBlocks.BLUE_SAPLING.get());
