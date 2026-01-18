@@ -1,11 +1,11 @@
 {
-  "name": "item.pastel.glow_vision_goggles",
+  "name": "item.pastel.priscillent_spectacles",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:unlocks/trinkets/glow_vision_goggles"
+    "advancement_id": "pastel:unlocks/trinkets/priscillent_spectacles"
   },
   "icon": {
-    "item": "pastel:glow_vision_goggles"
+    "item": "pastel:priscillent_spectacles"
   },
   "category": "pastel:equipment",
   "hide_while_locked": true,
@@ -23,16 +23,16 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "item": "pastel:glow_vision_goggles"
+        "item": "pastel:priscillent_spectacles"
       },
-      "text": "book.pastel.guidebook.glow_vision_goggles.page0.text",
-      "title": "item.pastel.glow_vision_goggles"
+      "text": "book.pastel.guidebook.priscillent_spectacles.page0.text",
+      "title": "item.pastel.priscillent_spectacles"
     },
     {
       "type": "pastel:pedestal_crafting",
-      "text": "book.pastel.guidebook.glow_vision_goggles.page1.text",
+      "text": "book.pastel.guidebook.priscillent_spectacles.page1.text",
       "title": "container.pastel.rei.pedestal_recipe",
-      "recipe_id": "pastel:pedestal/tier1/glow_vision_goggles"
+      "recipe_id": "pastel:pedestal/tier1/priscillent_spectacles"
     }
   ]
 }

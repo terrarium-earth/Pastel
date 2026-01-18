@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-18T14:29:13.092752649	Model Definitions
+// 1.21.1	2026-01-18T14:42:41.209574325	Model Definitions
 16b08361bc65a3c74e8df5774303ab1909bbffbb assets/minecraft/models/item/air.json
 2e209fa76a738ef1d22af6817df1419142cc743a assets/pastel/blockstates/abyssal_vines.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_head.json
@@ -3025,7 +3025,7 @@ ac2d9061c758c5e16ea9e0c1d3003e7ce6ed9dd0 assets/pastel/models/item/amethyst_calc
 8e98b724d80caf64bf6997f3ad341d3152e4fad8 assets/pastel/models/item/amethyst_ore.json
 246ec7561b5f9d9946c7d29f9f4771c34ae4810e assets/pastel/models/item/amethyst_powder.json
 33809430eed193a7f6858259e575d4e25f786311 assets/pastel/models/item/amethyst_powder_block.json
-87dcf3afc5b716e93a4f6e77a0183037dada38f6 assets/pastel/models/item/amethyst_pylon.json
+4750d162f6bb2d6f5a5f9bae016821199d777b2c assets/pastel/models/item/amethyst_pylon.json
 3f00412742920b91af38e2bdb3023f6bbc58921f assets/pastel/models/item/amethyst_semi_permeable_glass.json
 76cc0259870cfb4d2558a0841a90cd670919ed4e assets/pastel/models/item/amethyst_shard_banner_pattern.json
 cd84d7ba83065406cdf9320d2926a5a5810cfb0c assets/pastel/models/item/ancient_chiseled_polished_blackslag.json
@@ -3044,7 +3044,7 @@ dfe85914d05da225bb1e44df5522bd7df56c0d65 assets/pastel/models/item/ashen_blacksl
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/axolotl_blue_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/axolotl_cyan_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/axolotl_gold_head.json
-27c3169d99d1a9cf95cd31ac6b104fca970c9240 assets/pastel/models/item/axolotl_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/axolotl_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/axolotl_leucistic_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/axolotl_wild_head.json
 6dc15430ac7a29bfc359819dcbe256d5384345aa assets/pastel/models/item/azalea_tea.json
@@ -3081,7 +3081,7 @@ e9fd68f55ba1c9b59f07035cab9ca4a7a8e5ad1f assets/pastel/models/item/basalt_tile_s
 c508e863c22d1ac8931d919e2e34eec262d46019 assets/pastel/models/item/basalt_tile_wall.json
 0a5664e433c4bdcd3c75059a30f3f6d33e30bdc2 assets/pastel/models/item/basalt_tiles.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/bat_head.json
-087b64a2026c6e2eb7def345936a16a682f61889 assets/pastel/models/item/bat_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/bat_idol.json
 d4a7d39040cf31dbe1118a5e89afaa4777f445a9 assets/pastel/models/item/bedrock_anvil.json
 b24b04078baa40b790c08312337167a11777a81e assets/pastel/models/item/bedrock_boots.json
 9081993928615d50618bf592f6ba645d3b533b09 assets/pastel/models/item/bedrock_chestplate.json
@@ -3094,7 +3094,7 @@ a9ef3048760591dc7bce30c92d4c6b2b40f0854c assets/pastel/models/item/bedrock_leggi
 c538d596b15876f96c3a936dc2c7fa66c61336a9 assets/pastel/models/item/bedrock_shears.json
 f2b0df5224fb84f17505474d2d1b8eec6c39cc08 assets/pastel/models/item/bedrock_shovel.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/bee_head.json
-18c2839dfe1b66f4a902bb523e2b2d7b5111db95 assets/pastel/models/item/bee_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/bee_idol.json
 c8a4418eb2989ebf66db67bc8720623584d835f9 assets/pastel/models/item/berliner.json
 c52168f240c34a1935f0df38bf390a7231e813e8 assets/pastel/models/item/bismuth_block.json
 7b69a881b26438a4e4a7747c482fafaf0aa97214 assets/pastel/models/item/bismuth_cluster.json
@@ -3150,7 +3150,7 @@ c56cbafa63d5e52871515a7c0723745315a054e3 assets/pastel/models/item/blackslag_til
 28b5febea6dc794b0d3043aa1abdbfac3621dc1c assets/pastel/models/item/blackslag_topaz_ore.json
 9d2d5b5ec58a08dde158a95266a8ea2bd3beeb3f assets/pastel/models/item/blackslag_wall.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/blaze_head.json
-71a5c93a540dc3ea5ea7be8a8d722faef816874d assets/pastel/models/item/blaze_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/blaze_idol.json
 7791bd3b84a7772baef33088eb5d4a026fe5ff4a assets/pastel/models/item/blazing_crystal.json
 8062f76ce0619734902450c0b0b87df1bd1f7c4e assets/pastel/models/item/block_breaker.json
 69e48450b6e1e55b9df34b1b52c57190fa30fa9b assets/pastel/models/item/block_detector.json
@@ -3237,7 +3237,7 @@ e8279770daab8d3792838e787353653fde00e112 assets/pastel/models/item/calcite_tiles
 da40c5c86f802f7d1d7e7cce8ed50a849f03f3b6 assets/pastel/models/item/calcite_wall.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/camel_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/cat_head.json
-fd8ea6983b174be8643a812e3b1b128c4bdeb239 assets/pastel/models/item/cat_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/cat_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/cave_spider_head.json
 2c71be583e4e417f8d1a4bcab75ea225ab16089d assets/pastel/models/item/celestial_pocketwatch.json
 ae004273c3b4ad3e26e79cde3a4d6793d00862f7 assets/pastel/models/item/chauve_souris_au_vin.json
@@ -3262,7 +3262,7 @@ dc4f1e513240e8cf8b77902bda8e66c660805a91 assets/pastel/models/item/chestnut_noxw
 4d3dcadef94bc5ae4b4dad4e0ab96d5c27b792dd assets/pastel/models/item/chestnut_noxwood_stairs.json
 18b4e7c8633d1a314d6c6ba4c3d2ac000ae22aab assets/pastel/models/item/chestnut_noxwood_trapdoor.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/chicken_head.json
-10604be1ff9dc63f0c383406753216b8e10849dc assets/pastel/models/item/chicken_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/chicken_idol.json
 44576915032afd1b8a92c07025302d18637d1ea8 assets/pastel/models/item/chiseled_polished_basalt.json
 e5af3f4e684e7ed6df2b09adfabeddd50f3f0616 assets/pastel/models/item/chiseled_polished_blackslag.json
 aecebd7183ef5279d229aa1e95fbcbb110904d9e assets/pastel/models/item/chiseled_polished_calcite.json
@@ -3283,7 +3283,7 @@ af75531065124ae68fd0a85aefc0d2155a806173 assets/pastel/models/item/citrine_glass
 ec8c7002a842189f3c0016621cb0435010b999b7 assets/pastel/models/item/citrine_ore.json
 cd34bb83994e476f9341435748bde8ba3490337f assets/pastel/models/item/citrine_powder.json
 913d91d99ce06ce0a56b2a2b21be657939bb9d81 assets/pastel/models/item/citrine_powder_block.json
-432686a042160e07385a214ac11ca1716cb23caf assets/pastel/models/item/citrine_pylon.json
+2eae8d37aa97d47cb78022e871c9738f39785698 assets/pastel/models/item/citrine_pylon.json
 e7b58164a44f933921519734fba8f62cfc64a5b4 assets/pastel/models/item/citrine_semi_permeable_glass.json
 8ccfdcf80af607c452cc6061aa0fe8072b4e12b4 assets/pastel/models/item/citrine_shard.json
 a57d5453a383cb886cf800fdfbd159af6748a1c0 assets/pastel/models/item/clotted_cream.json
@@ -3302,7 +3302,7 @@ a4d6baf613fd2d9b09e682892e6b35e74a693561 assets/pastel/models/item/cooked_lizard
 242fe1d65cb7849999bbc501ac990e413d2a04bc assets/pastel/models/item/cotton_cloud_boots.json
 a6ba157089f8e279b6f00b12d7333e33d7e2ef46 assets/pastel/models/item/courier_statue.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/cow_head.json
-a5b8aa43a699160e085831af8d56bd949876c4cd assets/pastel/models/item/cow_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/cow_idol.json
 90ecf12882a76ed682640d278c97fdf254f75b7b assets/pastel/models/item/cracked_basalt_bricks.json
 ac6f313acee3e93f3015e167abf92a5117d0502c assets/pastel/models/item/cracked_basalt_tiles.json
 14fd25e679db2aa09ea997e3553050b79e9c8ed1 assets/pastel/models/item/cracked_blackslag_bricks.json
@@ -3318,7 +3318,7 @@ c9ecd24ad355444c780cbb9818a542b256949a7b assets/pastel/models/item/cream_pastry.
 82a8442f3c1207a02113024fb39302effb4e42ac assets/pastel/models/item/creative_ink_assortment.json
 8de8f45cc4933998a676dc8ce58142f71f51a7d7 assets/pastel/models/item/creative_particle_spawner.json
 9474d9297bf74324783b290fa7b8d93209fbe35e assets/pastel/models/item/creature_detector.json
-e8a63cb925b317e5064df68bd436fa38f0a9aaad assets/pastel/models/item/creeper_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/creeper_idol.json
 6566bd7bb9b544cc2737e3fef3abe2250b85560f assets/pastel/models/item/crystal_apothecary.json
 2c951308a0a49ca7fe78b48d895c7bcb12b3c261 assets/pastel/models/item/cushion_black.json
 7e0505f3c462eee7a5b422bfe37faa055637b41f assets/pastel/models/item/cushion_blue.json
@@ -3413,14 +3413,14 @@ cda266028f95ad72e787db68f467c02759c4513f assets/pastel/models/item/enchanted_gol
 ff38db5b9d7a92708b6761886af74cc5bf614a9f assets/pastel/models/item/enchanter.json
 9db4a7c16f42b17d542d1a63eb23a2a75083b37f assets/pastel/models/item/enchanter_structure_placer.json
 e3adbb5ab324ca54a6cfbcc021c317179371d199 assets/pastel/models/item/ender_canvas.json
-ba8d728a8582f9c9c63b3740a631e99a076869dd assets/pastel/models/item/ender_dragon_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/ender_dragon_idol.json
 ff41d7e76a9f8eee9fe88072de63c5ca692520c4 assets/pastel/models/item/ender_dropper.json
 a460541c0ea3dd60c35dad2de505887f2682418d assets/pastel/models/item/ender_glass.json
 119cc6e6980c1ea70278f67aac39870190c70b11 assets/pastel/models/item/ender_hopper.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/enderman_head.json
-962e18561401e8609fa831f6939ffc180cd74c38 assets/pastel/models/item/enderman_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/enderman_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/endermite_head.json
-2b3745ed435d3a3022ecf12129152bfff0bc1e34 assets/pastel/models/item/endermite_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/endermite_idol.json
 1ab252928cbaae7cbd3224c7e9b289ddc7ec7a37 assets/pastel/models/item/enlightenment_item_bowl.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/eraser_head.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/pastel/models/item/eraser_spawn_egg.json
@@ -3428,7 +3428,7 @@ a460541c0ea3dd60c35dad2de505887f2682418d assets/pastel/models/item/ender_glass.j
 f0ad18cddbb6c26a0d750b69b70304a4ac569d11 assets/pastel/models/item/evernectar.json
 491bf78fb6dee0084bd45707070e9a35fdaa38c8 assets/pastel/models/item/everpromise_ribbon.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/evoker_head.json
-95b336fe4db25a664e68a7ce4fadafcb918992ce assets/pastel/models/item/evoker_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/evoker_idol.json
 add1d0e92227e95f4decf36ae2b50b68c1d6d695 assets/pastel/models/item/exchanging_staff.json
 63638a38e24439d5eadf50d5cda5753e85e7530c assets/pastel/models/item/exposed_polished_shale_clay.json
 d8dc4e93348bb591ebd0b946e105d6d39e2109e2 assets/pastel/models/item/exposed_polished_shale_clay_slab.json
@@ -3450,14 +3450,14 @@ b122d2831f5dfcab4ef428c6888038d8db3b00c5 assets/pastel/models/item/fanciful_tuff
 67c369b8f019acc690a2b397a4a7fe202b75d088 assets/pastel/models/item/ferocious_chestplate.json
 b9a6ee8ec7eaf8add73a57f46ca42fe1e722f66a assets/pastel/models/item/fetchling_helmet.json
 4293522b7cfe3b79d353e1b26a79a18457257489 assets/pastel/models/item/fiery_shooting_star.json
-527c8c3d58f4134c98f5fd902cd549eb113aa0c9 assets/pastel/models/item/fish_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/fish_idol.json
 3c7e63e6627f6663d463ec5564edb163337f705d assets/pastel/models/item/fishcake.json
 941196fab90057240a6116699802525db24ab7b2 assets/pastel/models/item/fissure_plum.json
 d3550222ab23beba85fdbe80865cbcf9f41fde4a assets/pastel/models/item/flayed_earth.json
 834f4b2a62193d0bfbee973fe252ebe266036b3c assets/pastel/models/item/four_leaf_clover.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/fox_arctic_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/fox_head.json
-9f31ab098a218514f73741a7429a76f818e8e63f assets/pastel/models/item/fox_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/fox_idol.json
 42953b5402bd7488ea50ef99f5f1385a083d2de5 assets/pastel/models/item/freigeist.json
 b33155bcf5ddae2c2f6cd5a4c3b67cedb724d0b5 assets/pastel/models/item/fresh_chocolate.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/frog_cold_head.json
@@ -3471,7 +3471,7 @@ e9497798a44490461ad1f75105ae27b36330568d assets/pastel/models/item/fusion_shrine
 b103b52f885bbbc0e8273dd8750a63d053a66ff9 assets/pastel/models/item/gemstone_shooting_star.json
 a535b000a3735cd2df3c06628bd9ac22f5824a5f assets/pastel/models/item/germinated_jade_vine_bulb.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/ghast_head.json
-5009944265645a70afa2a4dd54043c37efa32268 assets/pastel/models/item/ghast_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/ghast_idol.json
 7136aba633205eb455a99b0c4b037069000bd553 assets/pastel/models/item/giant_moss_ball.json
 73530fd9cbf2a0bd830bc159800e0996c00a7743 assets/pastel/models/item/gilded_book.json
 3e2b9985f8440c7b5ecac7e96329864bfad3f919 assets/pastel/models/item/glass_peach.json
@@ -3483,10 +3483,10 @@ e4491dbd201bde8186ed8080f027aae23a5e35ce assets/pastel/models/item/glistering_je
 88b3456ff65640dc7124a8abd4c4071742929f45 assets/pastel/models/item/gloves_of_dawns_grasp.json
 a1a44d00ee0837fab80edd38fef588b0d49a4661 assets/pastel/models/item/glow_phantom_frame.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/glow_squid_head.json
-25d6aab4efeafb0f5af3a4b5f39a4ef1c630d751 assets/pastel/models/item/glow_squid_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/glow_squid_idol.json
 3dc1ac8c084fcf8f02d0c52933ec7b9df02d1bb1 assets/pastel/models/item/glowstone_cluster.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/goat_head.json
-a2ad407f3f4789788b865bc478f94e56f1d3a734 assets/pastel/models/item/goat_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/goat_idol.json
 f4337b228dabe2fc0f453f621c047a8ae814b9c5 assets/pastel/models/item/gold_cluster.json
 5061453d61921b72a2a3cffeec2c6eec5d228c6f assets/pastel/models/item/golden_bristle_tea.json
 4477db9dd6478a4ce6e9072a8088b707fd6cc95b assets/pastel/models/item/granite_shimmerstone_light.json
@@ -3526,7 +3526,7 @@ bfb2871bf0c5a08de32bfa32a7f1501e43393151 assets/pastel/models/item/green_leaves.
 7fb9dd9b5c04d4eec5b32d400becfe0550d476e7 assets/pastel/models/item/green_stairs.json
 56aa2f9b0e7c5f23da3d531c8fba73753147c4de assets/pastel/models/item/green_wood.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/guardian_head.json
-f3d8f1a46b8ac96164980c0dc0590677a35e0ac3 assets/pastel/models/item/guardian_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/guardian_idol.json
 ed04c6aa233b8fc988342f587dee4772579e4978 assets/pastel/models/item/guidebook.json
 1eca782bd8ab948bc22c7b68b8685d3a134b05fa assets/pastel/models/item/hare_roast.json
 ddf304a3f6849c898ab6bb6bc1a6c3d4471d7a06 assets/pastel/models/item/heartbound_chest.json
@@ -3536,7 +3536,7 @@ ddf304a3f6849c898ab6bb6bc1a6c3d4471d7a06 assets/pastel/models/item/heartbound_ch
 4ba3d6be1ceb82a5e1998c44c354addbcb4e3e3f assets/pastel/models/item/honey_pastry.json
 620f12e7f63f11e73266c257c9014024eac8f719 assets/pastel/models/item/hornslake.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/horse_head.json
-9d06c3d33801f628923b544c7025638c1bb94bbe assets/pastel/models/item/horse_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/horse_idol.json
 5fdb35dcd76546e58e65e1050fd906bec7cb0cb3 assets/pastel/models/item/hot_chocolate.json
 15bfe8d997f5e78280ec01250429ae29c8e418e3 assets/pastel/models/item/hoverblock.json
 2ca3f0a6b2f284e7fba9feef32021e358f8b7f61 assets/pastel/models/item/humming_bell.json
@@ -3546,7 +3546,7 @@ ae7d9a5ade9d537a660468feca5a529a60ebfd51 assets/pastel/models/item/hummingstone_
 09294c7ca57928d928738fb49e1150b6c37a4928 assets/pastel/models/item/humus_bucket.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/husk_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/illusioner_head.json
-f6b2d12f2bfe1489fb776842f1b8189455770f3c assets/pastel/models/item/illusioner_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/illusioner_idol.json
 2dcdd8f9ee1939d0b602464c47919dd6a772d2d0 assets/pastel/models/item/imbrifer_cookbook.json
 312d1fafb5b729c897981d97bc494b7c3172b758 assets/pastel/models/item/imperial_cookbook.json
 b57c48dbac6c0fda9ec0a71b4f34ed3c85d0ccd0 assets/pastel/models/item/incandescent_amalgam.json
@@ -3758,7 +3758,7 @@ cd9b1c435bfeae3ac612d636fd5245942788054a assets/pastel/models/item/moonstone_cor
 4c336254983413b4ae3d8deb34f9dacf82b837bf assets/pastel/models/item/moonstone_ore.json
 4d368133831bf799815e76afb6888a879482dbef assets/pastel/models/item/moonstone_powder.json
 765be5ff8db1bbbf3ed74abc8490b23c6d507bd5 assets/pastel/models/item/moonstone_powder_block.json
-8ccb45407361524ae7d20f4439a4e25a884c41c0 assets/pastel/models/item/moonstone_pylon.json
+cbbd7b4b22d3bb29354b63a8f540d7e9d7bd3cbb assets/pastel/models/item/moonstone_pylon.json
 6712215424c6f7328265fe7f1e743e86597eccbb assets/pastel/models/item/moonstone_semi_permeable_glass.json
 ac10fc6b6fbc374b98ff5c246f42f0356fd68ca9 assets/pastel/models/item/moonstone_shard.json
 c59cd2697499de8fbeb6fc56bd6cdd39cdf96a59 assets/pastel/models/item/moonstruck_nectar.json
@@ -3791,7 +3791,7 @@ a63162895a7b04437fef38ccef6c28e0f0615fc1 assets/pastel/models/item/notched_polis
 978d18b3729da4da0c54c04784fa7035ec234d74 assets/pastel/models/item/notched_polished_calcite.json
 718f89304df1064943301fba18b41327e3653ccb assets/pastel/models/item/oblivion_pickaxe.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/ocelot_head.json
-06360f11edf78c16bc3a4d4227f8228341500f55 assets/pastel/models/item/ocelot_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/ocelot_idol.json
 b9c0271540b9bd7b624b0044d61077e3cedf6b1e assets/pastel/models/item/onyx_basalt_light.json
 34ad1e8bcf23549d98929f4da281187db1dd77c2 assets/pastel/models/item/onyx_block.json
 de7d6215ba4f16e0eea4baabc43c51afa553da1c assets/pastel/models/item/onyx_calcite_light.json
@@ -3805,7 +3805,7 @@ c0831ba17bdf3e881b1c5c0390513a994b3eb61c assets/pastel/models/item/onyx_glass_ar
 47a873f8181813bc995b2042ff1b460bba48c8f1 assets/pastel/models/item/onyx_ore.json
 015c53a62c3c00a5e84cb6e82296abe462769dfd assets/pastel/models/item/onyx_powder.json
 4e966f2bacdb286ff8e4cb83a4aebcd2dbbc28f4 assets/pastel/models/item/onyx_powder_block.json
-de88b58e82268aaa23984497c1b5132688b07a7c assets/pastel/models/item/onyx_pylon.json
+850647d369e05654b654fcbadd51d06f314d726a assets/pastel/models/item/onyx_pylon.json
 85d014e11f592dcae8c8b184c8174afb4a4e5119 assets/pastel/models/item/onyx_semi_permeable_glass.json
 8718ef1e0fb81c8fd301ac63e6dad12d287b8d5c assets/pastel/models/item/onyx_shard.json
 052535bdafa75f6062c8901f814ad6164f76fc69 assets/pastel/models/item/orange_block.json
@@ -3837,7 +3837,7 @@ c717550e5bd682a90c2a47e63d682a03e3692967 assets/pastel/models/item/paltaeria_ore
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/parrot_cyan_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/parrot_gray_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/parrot_green_head.json
-6818ce974c0efa6bf72aa1a6ad0a8a2dd071ef57 assets/pastel/models/item/parrot_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/parrot_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/parrot_red_head.json
 8de8f45cc4933998a676dc8ce58142f71f51a7d7 assets/pastel/models/item/particle_spawner.json
 85540b9d5c4696bc9fc2d124497cce365187b616 assets/pastel/models/item/peach_cream.json
@@ -3855,11 +3855,11 @@ c2c911a91540796975981190e0124fe738380349 assets/pastel/models/item/pedestal_tier
 26c74957b36bad57edb61b606837f8cc390904dd assets/pastel/models/item/perturbed_eye.json
 8c1d9ce9d7856b731193fe3e145a02a14fbb6cfe assets/pastel/models/item/phantom_frame.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/phantom_head.json
-b343263636ff1938c2a1b7569cdbeaccbc976ed7 assets/pastel/models/item/phantom_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/phantom_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/pig_head.json
-5e239fa474b27acacc43cdb8e91af7c4e1a56d0e assets/pastel/models/item/pig_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/pig_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/piglin_brute_head.json
-1697af2da930c1b76b18b5d88d780b15eb671bf3 assets/pastel/models/item/piglin_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/piglin_idol.json
 4db942ed5cf0f0e361af2c4a5d5d61ef62a9c386 assets/pastel/models/item/pigment_palette.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/pillager_head.json
 4bbaee70dc9345d1b0824c6d39058648e3015b62 assets/pastel/models/item/pink_block.json
@@ -3891,7 +3891,7 @@ ecb5e967c1f239a75165b680214d8894c5593519 assets/pastel/models/item/planed_calcit
 76cc0259870cfb4d2558a0841a90cd670919ed4e assets/pastel/models/item/poisonbloom_banner_pattern.json
 382e88a656930942b15e8945f00c3b26c554f017 assets/pastel/models/item/poisoners_handbook.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/polar_bear_head.json
-742cf572321a2bfed39513e89fc503641104502b assets/pastel/models/item/polar_bear_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/polar_bear_idol.json
 2c847c995d5be05d7707dadf8d9bc7301b1c949a assets/pastel/models/item/polished_amethyst_block.json
 c51850eb20c9374a341e28ab4aec1334d1737747 assets/pastel/models/item/polished_basal_marble.json
 2959819b5a4f8bd4d3246124fd213aaf776fafb0 assets/pastel/models/item/polished_basal_marble_slab.json
@@ -3954,7 +3954,7 @@ c22ced4022274dc78cb8a53bd68f82b1a03fb2be assets/pastel/models/item/prismarine_cl
 84c5ae5da1d2ea44493d0a0e3cba587880d27b06 assets/pastel/models/item/puff_circlet.json
 cceabb561ad13a1087692e4c25f3340c6cd66c63 assets/pastel/models/item/puff_tart.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/pufferfish_head.json
-58effbdc343885c1827e4b9b1b954895f8f179fc assets/pastel/models/item/pufferfish_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/pufferfish_idol.json
 49b6b3bba9e1d16ac7168e709ee1f7491215ced3 assets/pastel/models/item/pure_alcohol.json
 b40cf1f33c4f67bc1c9444d1ee906c0af954c29e assets/pastel/models/item/pure_azurite.json
 2c87895d4e73d9104ea9b2fe17e74ddc52642905 assets/pastel/models/item/pure_bloodstone.json
@@ -4026,7 +4026,7 @@ f4e27daf36ee0e6487ba1d7b849a21842f77bdcf assets/pastel/models/item/pyrite_wall.j
 4cb710e0c886da83932e7c27af3f3dcbf40376bf assets/pastel/models/item/quitoxic_reeds.json
 bd794f51d5f46b1bd15dc80ad4a408650c6cece4 assets/pastel/models/item/rabbit_cream_pie.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/rabbit_head.json
-daff24a3a4f278b3d550a034a37db89fbe5fd00f assets/pastel/models/item/rabbit_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/rabbit_idol.json
 d2923f6c5facc485d248aedb6595e5304a1a745c assets/pastel/models/item/radiance_pin.json
 01faac62ef9596e341d78913e3a9a3482c6526c9 assets/pastel/models/item/radiant_glass.json
 c9bdaced9c2f4ed14d77309ccce10ba890c281a3 assets/pastel/models/item/radiant_glass_pane.json
@@ -4086,7 +4086,7 @@ e6b1a73e2228a3216085e31392b29703b4c7cda9 assets/pastel/models/item/semi_permeabl
 f0ce9f5b18ba0311f69c7845f48376cd9200efc9 assets/pastel/models/item/shale_clay_tile_stairs.json
 8ef86e534bf3bc42ce5a4e6e04cbe456ed67f2fc assets/pastel/models/item/shale_clay_tiles.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/sheep_head.json
-08e80c12dc7a0108e6039e7f7f08aad4b536eeb1 assets/pastel/models/item/sheep_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/sheep_idol.json
 ee89f8b3d253b483f49144cccfce41c6528adc27 assets/pastel/models/item/shieldgrasp_amulet.json
 b7110093d464fd2546d4b94a66645e40b9eb1247 assets/pastel/models/item/shimmel.json
 e4aed75e7a50f11b328ddf63efee8a9811ddd035 assets/pastel/models/item/shimmering_preservation_bricks.json
@@ -4100,7 +4100,7 @@ c5d6bd27c3a55c5697fcb2db5197d0611822a90d assets/pastel/models/item/shimmerstone_
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/shulker_gray_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/shulker_green_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/shulker_head.json
-c88e438c7c3bdfcea73f261019720e7205cf7473 assets/pastel/models/item/shulker_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/shulker_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/shulker_light_blue_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/shulker_light_gray_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/shulker_lime_head.json
@@ -4112,9 +4112,9 @@ c88e438c7c3bdfcea73f261019720e7205cf7473 assets/pastel/models/item/shulker_idol.
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/shulker_white_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/shulker_yellow_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/silverfish_head.json
-d67256c665a9b13803d564e965f10331e335b95d assets/pastel/models/item/silverfish_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/silverfish_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/skeleton_horse_head.json
-2249da3cac787069f36e05c31b8eeb1f4afdc063 assets/pastel/models/item/skeleton_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/skeleton_idol.json
 a3cc6f52fbd0cb1d2d0bb40b00b9a726b51d485c assets/pastel/models/item/slate_noxcap_block.json
 109e59f7db8681fe11bc27c87e6b993ddba5cbbe assets/pastel/models/item/slate_noxcap_gills.json
 8731945aad9a886ef5f41e35cf1693c3f7f48639 assets/pastel/models/item/slate_noxcap_hyphae.json
@@ -4135,7 +4135,7 @@ fed15ad54252fc75a291f5e1f059452b31f14a7d assets/pastel/models/item/slate_noxwood
 083df39b8cdcfc30cf5b40463c4b53600f33c08d assets/pastel/models/item/slate_noxwood_stairs.json
 6544d5115539860cfdcab32c7a24bc5259494d11 assets/pastel/models/item/slate_noxwood_trapdoor.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/slime_head.json
-e871036a150b9defde17f1f4fd71430695d964c3 assets/pastel/models/item/slime_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/slime_idol.json
 62ebc372eaf90c1b0fb536b939278bea1fc50192 assets/pastel/models/item/slush.json
 dfd2561f497d1838ba13f6f5889cce4874b56f16 assets/pastel/models/item/slushslide.json
 b129e71d058cf8d9840260cbab59d67199a7a3f2 assets/pastel/models/item/small_azurite_bud.json
@@ -4172,14 +4172,14 @@ a105f4591412f5fcfcf3fe7e222f1d8864d87454 assets/pastel/models/item/small_zinc_bu
 35586a5cf6a636fc8ddd1171f8a666efa25f55cd assets/pastel/models/item/snapping_ivy.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/sniffer_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/snow_golem_head.json
-65f0670921240bea0a720a2946192a05cb6af711 assets/pastel/models/item/snow_golem_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/snow_golem_idol.json
 79583ac94bedf199b4e58782a1284d4ce67a4a13 assets/pastel/models/item/soothing_bouquet.json
 a159d7c1279034c548393ba9371c0f5b3b350ca3 assets/pastel/models/item/spectral_shard.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/spider_head.json
-2c03252774cfae2241f9270c72f6c607cbbeef3c assets/pastel/models/item/spider_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/spider_idol.json
 2dce758f6d5b6bb2bb3b1ba2b04616edb95a4626 assets/pastel/models/item/spirit_instiller_structure_placer.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/squid_head.json
-06bd0360a741eedc324d37ef886641982bcbadb0 assets/pastel/models/item/squid_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/squid_idol.json
 c8b70b118337df48411e6283def372e2293a97ce assets/pastel/models/item/star_candy.json
 b44ed0c4ba5312d40bbb79887a7b30d37b5effa5 assets/pastel/models/item/star_fragment.json
 87e406f84e0b9f9d2a1887f5efc4a92c5457412b assets/pastel/models/item/stardust.json
@@ -4191,9 +4191,9 @@ aaea48bb4a57b982d5fd3bd39c045f0d01716b21 assets/pastel/models/item/stone_shimmer
 ac83504eb6d73436b0d2301783bcd93dd3b909b1 assets/pastel/models/item/stratine_gem.json
 41319e8f467e7c25c7f1b93ca3db59e243ee04a2 assets/pastel/models/item/stratine_ore.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/stray_head.json
-75b4acd0c64cdee4cb02f4f31763243f43f26706 assets/pastel/models/item/stray_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/stray_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/strider_head.json
-9cef77f099cdb008378a13ed00acfb6da7825aee assets/pastel/models/item/strider_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/strider_idol.json
 73c1f28927284fae076d0e95a6c4140142f1579c assets/pastel/models/item/stripped_black_log.json
 67155ad429915ae333f8fabd572d82fa5f05fc15 assets/pastel/models/item/stripped_black_wood.json
 5b190c37472b0255d6083779c3e2fc4267777515 assets/pastel/models/item/stripped_blue_log.json
@@ -4261,7 +4261,7 @@ e132f1fb7c4abf9ccf5f8337284d3638b6ca77cb assets/pastel/models/item/topaz_glass_a
 6ecb9263bce5035c162882f3063ede490313a19c assets/pastel/models/item/topaz_ore.json
 f4eec503571780e93e9e97f47f20cd90703b85c9 assets/pastel/models/item/topaz_powder.json
 2b49bac4d88cb0855565494fa82bd3c44afda927 assets/pastel/models/item/topaz_powder_block.json
-282a7941e553cdaf75ea83eb4aba78485c85b783 assets/pastel/models/item/topaz_pylon.json
+8c9a798377b83177f7bd5ef2ad7c59e97b25c7c5 assets/pastel/models/item/topaz_pylon.json
 2b4072254152efbebcfd7022b57727f784ade1ea assets/pastel/models/item/topaz_semi_permeable_glass.json
 a29af8656b020c68faef510396a4cdb9877d6135 assets/pastel/models/item/topaz_shard.json
 df2c5acc221f6f3dff2f4b85a342daa3862a5a68 assets/pastel/models/item/totem_pendant.json
@@ -4269,7 +4269,7 @@ e545876d7617377032a199ce809da40fc047232c assets/pastel/models/item/triple_meat_p
 babdae21a9ad1905cbe0440d705ef741e07b145f assets/pastel/models/item/triple_meat_pot_stew.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/tropical_fish_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/turtle_head.json
-5f711acaf5c1ce9c80c15de8885cbda4b4758b1a assets/pastel/models/item/turtle_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/turtle_idol.json
 f7becf1cede3583d3f6dae557ffed019c24bb90d assets/pastel/models/item/universe_spyhole.json
 11fa26e0b6bf214c326e1245a27c44da0d5b5c45 assets/pastel/models/item/upgrade_efficiency.json
 11fa26e0b6bf214c326e1245a27c44da0d5b5c45 assets/pastel/models/item/upgrade_efficiency2.json
@@ -4343,10 +4343,10 @@ a894792014e09f372a0de0d5ea79294ca9928050 assets/pastel/models/item/white_spore_b
 aab31cea6b0ba8a937977a5a12783cab550c5e1a assets/pastel/models/item/white_wood.json
 c4be03afc3b43597f1326a437ee8241fd2d66af5 assets/pastel/models/item/wire_hook.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/witch_head.json
-643298242e7acc781501592878e893b2244d1d3e assets/pastel/models/item/witch_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/witch_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/wither_head.json
-10bb39a15230b578ba189652129627183b2e019e assets/pastel/models/item/wither_idol.json
-82c14059e0ebe7bed33ed16986616191e4848a78 assets/pastel/models/item/wither_skeleton_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/wither_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/wither_skeleton_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/wolf_head.json
 73bb90bb241b0f18fbd55692653a2ab02d7c9f5e assets/pastel/models/item/wyrmscale_jelly.json
 0a37b5040316ba667626858eee369a9ddc7052e2 assets/pastel/models/item/yellow_block.json
@@ -4368,6 +4368,6 @@ e24265061b18b164b447532ab35c02c9564e0a11 assets/pastel/models/item/yellow_stairs
 6901f28b39eb08314d73692fdcacbc5aeb21f670 assets/pastel/models/item/yellow_wood.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/zoglin_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/zombie_horse_head.json
-eb9f9def4f3580aab3be672300e82da5b91dc41f assets/pastel/models/item/zombie_idol.json
+e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/zombie_idol.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/zombie_villager_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/zombified_piglin_head.json

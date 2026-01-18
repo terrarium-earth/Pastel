@@ -23,7 +23,7 @@ import java.util.List;
 public class PriscillentSpectaclesItem extends PastelTrinketItem implements InkPowered, ExtendedItemBar {
 
     public PriscillentSpectaclesItem(Properties settings) {
-        super(settings, PastelCommon.locate("unlocks/trinkets/glow_vision_goggles"));
+        super(settings, PastelCommon.locate("unlocks/trinkets/priscillent_spectacles"));
     }
 
     @Override
@@ -50,11 +50,11 @@ public class PriscillentSpectaclesItem extends PastelTrinketItem implements InkP
         super.appendHoverText(stack, context, tooltip, type);
         if (InkPowered.canUseClient()) {
             tooltip.add(Component.translatable(
-                "item.pastel.glow_vision_goggles.tooltip_with_ink", SpectacleData.INK_COST.color()
+                "item.pastel.priscillent_spectacles.tooltip_with_ink", SpectacleData.INK_COST.color()
                                                                             .getColoredInkName()
             ));
         } else {
-            tooltip.add(Component.translatable("item.pastel.glow_vision_goggles.tooltip"));
+            tooltip.add(Component.translatable("item.pastel.priscillent_spectacles.tooltip"));
         }
     }
 

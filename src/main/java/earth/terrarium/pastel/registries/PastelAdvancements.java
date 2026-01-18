@@ -216,8 +216,8 @@ public class PastelAdvancements {
                 "unlocks/trinkets/laurels_of_serenity");
             public static final ResourceLocation COTTON_CLOUD_BOOTS = PastelCommon.locate(
                 "unlocks/trinkets/cotton_cloud_boots");
-            public static final ResourceLocation GLOW_VISION_GOGGLES = PastelCommon.locate(
-                "unlocks/trinkets/glow_vision_goggles");
+            public static final ResourceLocation PRISCILLENT_SPECTACLES = PastelCommon.locate(
+                "unlocks/trinkets/priscillent_spectacles");
             public static final ResourceLocation FANCIFUL_BELT = PastelCommon.locate("unlocks/trinkets/fanciful_belt");
             public static final ResourceLocation TAKE_OFF_BELT = PastelCommon.locate("unlocks/trinkets/take_off_belt");
             public static final ResourceLocation WEEPING_CIRCLET = PastelCommon.locate(

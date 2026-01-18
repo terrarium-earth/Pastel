@@ -2191,9 +2191,9 @@
   "item.pastel.molten_rod": "熔融钓竿",
   "item.pastel.molten_rod.tooltip": "可在熔岩或其它液体中钓鱼",
   "item.pastel.molten_rod.tooltip2": "钓上来的鱼会直接烤熟-在岩浆中会钓出其他东西",
-  "item.pastel.glow_vision_goggles": "夜视眼镜",
-  "item.pastel.glow_vision_goggles.tooltip": "§7由 §b发光墨囊§7 供能",
-  "item.pastel.glow_vision_goggles.tooltip_with_ink": "§7由 §b发光墨囊§r 或 §3淡蓝色墨水§r 供能",
+  "item.pastel.priscillent_spectacles": "夜视眼镜",
+  "item.pastel.priscillent_spectacles.tooltip": "§7由 §b发光墨囊§7 供能",
+  "item.pastel.priscillent_spectacles.tooltip_with_ink": "§7由 §b发光墨囊§r 或 §3淡蓝色墨水§r 供能",
   "item.pastel.ender_splice": "末影连弦",
   "item.pastel.ender_splice.tooltip.unbound": "§7使用它以绑定你的当前位置",
   "item.pastel.ender_splice.tooltip.bound_pos": "§7绑定于 %d %d %d§7 在 %s§7.使用它来传送",
@@ -4273,8 +4273,8 @@
   "book.pastel.guidebook.gloves_of_dawns_grasp.page0.text": "我曾问过邻居关于那种叫什么[#](bb00bb)\"戈伯\"[#]()材料的事情: \"哎呀,你个破画画的懂什么!这种顶天材料是你能摸到的吗\"!\\\n\"顶天?摸到?是字面意义吗?\" 他们还没来得及解释,我为此就已经设计好一双手套了.哎呀!",
   "book.pastel.guidebook.gloves_of_dawns_grasp.page1.text": "嘛,设计都设计好了,*将就着用咯*.\\\n\\\n注入[淡蓝色墨水](entry://ink/ink)即可进一步提升攻击距离上限.",
 
-  "book.pastel.guidebook.glow_vision_goggles.page0.text": "如果能为我最喜欢的生物投票,我肯定毫不犹豫地选择发光鱿鱼!我喜欢它们在黑暗的洞穴中为我照亮道路.可惜,这种美丽的生物常因搁浅而悲惨的死去.\\\n为了纪念,我设计了这套眼镜,让这份独特的荧光继续发亮吧,指引不灭,光明不息.",
-  "book.pastel.guidebook.glow_vision_goggles.page1.text": "如果我身在伸手不见五指之处并且身上有发光墨囊的时候,夜视眼镜会消耗发光墨囊赋予我[#](449900)夜视效果[#]().",
+  "book.pastel.guidebook.priscillent_spectacles.page0.text": "如果能为我最喜欢的生物投票,我肯定毫不犹豫地选择发光鱿鱼!我喜欢它们在黑暗的洞穴中为我照亮道路.可惜,这种美丽的生物常因搁浅而悲惨的死去.\\\n为了纪念,我设计了这套眼镜,让这份独特的荧光继续发亮吧,指引不灭,光明不息.",
+  "book.pastel.guidebook.priscillent_spectacles.page1.text": "如果我身在伸手不见五指之处并且身上有发光墨囊的时候,夜视眼镜会消耗发光墨囊赋予我[#](449900)夜视效果[#]().",
 
   "book.pastel.guidebook.glowblocks.name": "发光方块",
   "book.pastel.guidebook.glowblocks.page0.text": "既然我有最为纯净的颜料,何不着手制造一些颜色同样纯净无暇的方块呢?\\\n\\\n我曾想到过[#](449900)逆方块[#]()的名字,然而既然都是方块有什么好逆不逆呢……还是不叫这名了吧?",

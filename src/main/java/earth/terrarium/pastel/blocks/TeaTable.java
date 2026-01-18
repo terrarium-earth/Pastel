@@ -96,7 +96,7 @@ public class TeaTable extends Block implements EntityBlock {
         PastelAdvancements.Unlocks.Blocks.COMPACTING_CHEST, PastelAdvancements.Unlocks.Blocks.ENDER_GLASS,
         PastelAdvancements.Unlocks.Blocks.TITRATION_BARREL, PastelAdvancements.Unlocks.Blocks.ENDER_BLOCKS,
         PastelAdvancements.Unlocks.Blocks.PRESENT, PastelAdvancements.Unlocks.Blocks.FUSION_SHRINE,
-        PastelAdvancements.Unlocks.Trinkets.GLOW_VISION_GOGGLES, PastelAdvancements.Hidden.CollectVanilla.QUARTZ,
+        PastelAdvancements.Unlocks.Trinkets.PRISCILLENT_SPECTACLES, PastelAdvancements.Hidden.CollectVanilla.QUARTZ,
         PastelAdvancements.Hidden.CollectVanilla.ENDER_EYE, PastelAdvancements.Hidden.CollectVanilla.DRAGON_BREATH,
         PastelAdvancements.Hidden.CollectVanilla.ECHO_SHARD, PastelAdvancements.Hidden.CollectVanilla.PHANTOM_MEMBRANE,
         PastelAdvancements.Hidden.CollectVanilla.GLOW_LICHEN,

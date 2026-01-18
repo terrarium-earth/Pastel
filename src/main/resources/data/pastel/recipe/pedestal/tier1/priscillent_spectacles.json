@@ -20,8 +20,8 @@
     "G": "minecraft:gold_nugget"
   },
   "result": {
-    "id": "pastel:glow_vision_goggles",
+    "id": "pastel:priscillent_spectacles",
     "count": 1
   },
-  "required_advancement": "pastel:unlocks/trinkets/glow_vision_goggles"
+  "required_advancement": "pastel:unlocks/trinkets/priscillent_spectacles"
 }
