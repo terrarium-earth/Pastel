@@ -45,6 +45,16 @@ public class PastelBlockLang {
             if (name.startsWith("upgrade_")) continue;
             // avoid duplicate keys
             if (name.equals("primordial_wall_torch") || name.endsWith("_wall_head")) continue;
+            // mob heads with variants need a little switcheroo
+            if (name.endsWith("head") && (name.startsWith("axolotl") || name.startsWith("shulker") || name.startsWith(
+                "lizard") || name.startsWith("frog") || name.startsWith("parrot") || name.startsWith("mooshroom") ||
+                                          name.startsWith("fox_arctic"))) {
+                var words = name.split("_");
+                var tmp = words[0];
+                words[0] = words[1];
+                words[1] = tmp;
+                name = String.join("_", words);
+            }
 
             var formattedName = PastelLanguageProvider.prettifyRegisteredName(name);
 
