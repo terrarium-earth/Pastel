@@ -45,7 +45,6 @@ import static net.minecraft.world.level.block.Blocks.REDSTONE_BLOCK;
 
 public class CompactBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {
-        PastelModelHelper.translucent(PastelBlocks.VEGETAL_BLOCK);
         PastelModelHelper.singleton(
             generators, PastelBlocks.VEGETAL_BLOCK, TexturedModel.createDefault(
                 TextureMapping::defaultTexture,

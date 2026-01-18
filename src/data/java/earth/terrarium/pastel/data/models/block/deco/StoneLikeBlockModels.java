@@ -1,21 +1,6 @@
 package earth.terrarium.pastel.data.models.block.deco;
 
-import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.blocks.BlockFamilies;
-import earth.terrarium.pastel.blocks.decay.BlackMateriaBlock;
-import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
-import earth.terrarium.pastel.blocks.decoration.ProjectorBlock;
-import earth.terrarium.pastel.blocks.decoration.ShinglesBlock;
 import earth.terrarium.pastel.blocks.deeper_down.PyriteRipperBlock;
-import earth.terrarium.pastel.blocks.deeper_down.groundcover.BlackslagBlock;
-import earth.terrarium.pastel.blocks.deeper_down.groundcover.BlackslagVegetationBlock;
-import earth.terrarium.pastel.blocks.deeper_down.groundcover.SlushVegetationBlock;
-import earth.terrarium.pastel.blocks.deeper_down.groundcover.VariableHeightBlock;
-import earth.terrarium.pastel.blocks.farming.TilledShaleClayBlock;
-import earth.terrarium.pastel.blocks.farming.TilledSlushBlock;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
-import earth.terrarium.pastel.blocks.weathering.Weathering;
-import earth.terrarium.pastel.blocks.weathering.WeatheringBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.client.PastelTextureMaps;
@@ -32,11 +17,7 @@ import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class StoneLikeBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {
@@ -286,7 +267,6 @@ public class StoneLikeBlockModels {
             generators, PastelBlocks.PYRITE_VENT,
             PastelTexturedModels.cubeColumn(b -> b, "", b -> PastelBlocks.PYRITE_PLATING.get(), "")
         );
-        PastelModelHelper.mippedCutout(PastelBlocks.PYRITE_RIPPER);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.PYRITE_RIPPER.get())
                                                                 .with(PropertyDispatch.properties(
                                                                                           BlockStateProperties.FACING,

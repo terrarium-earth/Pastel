@@ -196,7 +196,7 @@ public class PastelItemGroups {
                                                                              PastelBlocks.PARTICLE_SPAWNER.get());
 
                                                                          entries.accept(BuiltInRegistries.BLOCK.get(
-                                                                             PastelBlocks.GLISTERING_MELON)); // ???
+                                                                             PastelBlocks.GLISTERING_MELON.getKey())); // ???
                                                                          entries.accept(PastelBlocks.LAVA_SPONGE.get());
                                                                          entries.accept(
                                                                              PastelBlocks.WET_LAVA_SPONGE.get());

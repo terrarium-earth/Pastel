@@ -58,9 +58,9 @@ public class PastelClient implements ClientHiddenListener, ClientAdvancementList
 		pastelBus.addListener(PastelModelLayers::register);
 
 		logInfo("Setting up Block Rendering...");
-		pastelBus.addListener(PastelBlocks::registerClient);
         pastelBus.addListener(PastelColorHandlers::registerBlockColorHandlers);
         pastelBus.addListener(PastelColorHandlers::registerItemColorHandlers);
+        pastelBus.addListener(PastelBlocks::registerClient);
 
 		logInfo("Setting up client side Mod Compat...");
 		PastelIntegrationPacks.registerClient();

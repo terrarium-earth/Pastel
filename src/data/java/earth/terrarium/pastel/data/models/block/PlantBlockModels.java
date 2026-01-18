@@ -45,8 +45,8 @@ public class PlantBlockModels {
         PastelModelHelper.cross(generators, PastelBlocks.SMALL_SAG_BUBBLE);
 
         PastelModelHelper.singleton(generators, PastelBlocks.GLISTERING_MELON, TexturedModel.COLUMN);
-        PastelModelHelper.cutout(PastelBlocks.ATTACHED_GLISTERING_MELON_STEM);
-        PastelModelHelper.cutout(PastelBlocks.GLISTERING_MELON_STEM);
+
+
         PastelModelHelper.predefinedItemModel(generators, PastelBlocks.GLISTERING_MELON_STEM);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.GLISTERING_MELON_STEM.get())
                                                                 .with(PropertyDispatch.property(
@@ -72,7 +72,7 @@ public class PlantBlockModels {
                                                             .with(
                                                                 PastelModelHelper.createWestDefaultHorizontalFacingVariantMap()));
 
-        PastelModelHelper.cutout(PastelBlocks.VARIA_SPROUT);
+
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
             PastelBlocks.VARIA_SPROUT.get(), PastelModelHelper.createModelVariant(PastelTexturedModels.cross(b -> b, "")
                                                                                                       .createWithSuffix(
@@ -113,13 +113,13 @@ public class PlantBlockModels {
         registerTallDragonjagBlock(generators, PastelBlocks.TALL_PURPLE_DRAGONJAG);
         registerTallDragonjagBlock(generators, PastelBlocks.TALL_BLACK_DRAGONJAG);
 
-        PastelModelHelper.cutout(PastelBlocks.ALOE);
-        PastelModelHelper.cutout(PastelBlocks.SAWBLADE_HOLLY_BUSH);
-        PastelModelHelper.cutout(PastelBlocks.BRISTLE_SPROUTS);
-        PastelModelHelper.cutout(PastelBlocks.DOOMBLOOM);
-        PastelModelHelper.cutout(PastelBlocks.SNAPPING_IVY);
-        PastelModelHelper.cutout(PastelBlocks.ABYSSAL_VINES);
-        PastelModelHelper.cutout(PastelBlocks.NIGHTDEW);
+
+
+
+
+
+
+
 
         //Flora
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.ALOE.get())
@@ -322,7 +322,7 @@ public class PlantBlockModels {
         PastelModelHelper.cross(generators, PastelBlocks.APRICOTTI);
         PastelModelHelper.cross(generators, PastelBlocks.HUMMING_BELL);
 
-        PastelModelHelper.cutout(PastelBlocks.MOSS_BALL);
+
         List<Variant> variants = new ArrayList<>(PastelModelHelper.createHorizontalRotationVariantList(
             ModelLocationUtils.getModelLocation(PastelBlocks.MOSS_BALL.get(), "_tuft")));
         variants.add(PastelModelHelper.createModelVariant(PastelBlocks.MOSS_BALL.get(), "")
@@ -334,9 +334,9 @@ public class PlantBlockModels {
             ModelLocationUtils.getModelLocation(PastelBlocks.GIANT_MOSS_BALL.get())
         ));
 
-        PastelModelHelper.cutout(PastelBlocks.JADE_VINE_ROOTS);
-        PastelModelHelper.cutout(PastelBlocks.JADE_VINE_BULB);
-        PastelModelHelper.cutout(PastelBlocks.JADE_VINES);
+
+
+
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.JADE_VINE_ROOTS.get())
                                                                 .with(PastelModelHelper.createBooleanModelMap(
                                                                     JadeVineBulbBlock.DEAD,
@@ -440,9 +440,9 @@ public class PlantBlockModels {
                                                                                           );
                                                                                       })));
 
-        PastelModelHelper.cutout(PastelBlocks.NEPHRITE_BLOSSOM_STEM);
-        PastelModelHelper.cutout(PastelBlocks.NEPHRITE_BLOSSOM_LEAVES);
-        PastelModelHelper.cutout(PastelBlocks.NEPHRITE_BLOSSOM_BULB);
+
+
+
 
         generateNephriteBlossomStemModel(generators);
         generators.blockStateOutput.accept(
@@ -460,8 +460,8 @@ public class PlantBlockModels {
                                                        })));
         PastelModelHelper.cross(generators, PastelBlocks.NEPHRITE_BLOSSOM_BULB);
 
-        PastelModelHelper.cutout(PastelBlocks.JADEITE_LOTUS_STEM);
-        PastelModelHelper.cutout(PastelBlocks.JADEITE_LOTUS_FLOWER);
+
+
 
         generateJadeiteLotusStemModel(generators);
         PastelModelHelper.defaultUpFacingGetter(
@@ -469,7 +469,7 @@ public class PlantBlockModels {
         PastelModelHelper.cross(generators, PastelBlocks.JADEITE_LOTUS_BULB);
         PastelModelHelper.cross(generators, PastelBlocks.QUITOXIC_REEDS);
 
-        PastelModelHelper.cutout(PastelBlocks.MERMAIDS_BRUSH);
+
         generateMermaidBrushModel(generators);
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AMARANTH.get())
@@ -511,8 +511,8 @@ public class PlantBlockModels {
                                                                                                                   ));
                                                                                       })));
 
-        PastelModelHelper.cutout(PastelBlocks.CLOVER);
-        PastelModelHelper.cutout(PastelBlocks.FOUR_LEAF_CLOVER);
+
+
         PastelModelHelper.singletonWithSoup(generators, PastelBlocks.CLOVER, ModelLocationUtils::getModelLocation);
         PastelModelHelper.singletonWithSoup(
             generators, PastelBlocks.FOUR_LEAF_CLOVER, ModelLocationUtils::getModelLocation);
@@ -523,8 +523,8 @@ public class PlantBlockModels {
         PastelModelHelper.cross(generators, PastelBlocks.RESONANT_LILY);
         PastelModelHelper.pottedPlant(generators, PastelBlocks.POTTED_RESONANT_LILY, false);
 
-        PastelModelHelper.cutout(PastelBlocks.BLOOD_ORCHID);
-        PastelModelHelper.cutout(PastelBlocks.POTTED_BLOOD_ORCHID);
+
+
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.BLOOD_ORCHID.get())
                                                                 .with(PropertyDispatch.property(BloodOrchidBlock.AGE)
                                                                                       .generate(
@@ -679,12 +679,10 @@ public class PlantBlockModels {
     }
 
     public static void registerSmallDragonjagBlock(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.cutout(block);
         PastelModelHelper.singleton(generators, block, PastelTexturedModels.doubleCross(b -> b, ""));
     }
 
     public static void registerTallDragonjagBlock(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.cutout(block);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
                                                                 .with(PropertyDispatch.properties(
                                                                                           DoublePlantBlock.HALF,

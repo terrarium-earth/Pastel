@@ -35,7 +35,6 @@ import static net.minecraft.world.level.block.Blocks.*;
 public class WoodLikeBlockModels {
     // noxshrooms are close enough to saplings
     public static void generateNoxshroomBlockModel(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.cutout(block);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
             block.get(), PastelModelHelper.createModelVariant(PastelTexturedModels.cross(b -> b, "_type_1")
                                                                                   .createWithSuffix(
@@ -65,7 +64,6 @@ public class WoodLikeBlockModels {
     }
 
     public static void generateNoxwoodLanternBlockModel(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.cutout(block);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
                                                                 .with(PropertyDispatch.properties(
                                                                                           BlockStateProperties.HANGING,
@@ -304,7 +302,6 @@ public class WoodLikeBlockModels {
         PastelModelHelper.wood(
             generators, PastelBlocks.STRIPPED_WEEPING_GALA_WOOD, PastelBlocks.STRIPPED_WEEPING_GALA_LOG);
         PastelModelHelper.cross(generators, PastelBlocks.WEEPING_GALA_FRONDS);
-        PastelModelHelper.cutout(PastelBlocks.WEEPING_GALA_FRONDS_PLANT);
         generators.blockStateOutput.accept(
             MultiVariantGenerator.multiVariant(PastelBlocks.WEEPING_GALA_FRONDS_PLANT.get())
                                  .with(PropertyDispatch.property(WeepingGalaFrondsTipBlock.FORM)
@@ -345,7 +342,6 @@ public class WoodLikeBlockModels {
         PastelModelHelper.axisRotated(generators, PastelBlocks.WEEPING_GALA_PILLAR, TexturedModel.COLUMN);
         PastelModelHelper.barrellike(generators, PastelBlocks.WEEPING_GALA_BARREL, b -> b, "_bottom");
         PastelModelHelper.barrellike(generators, PastelBlocks.WEEPING_GALA_AMPHORA, b -> b, "_bottom");
-        PastelModelHelper.translucent(PastelBlocks.WEEPING_GALA_LANTERN);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.WEEPING_GALA_LANTERN.get())
                                                                 .with(PropertyDispatch.property(
                                                                                           BlockStateProperties.HANGING)
@@ -377,7 +373,6 @@ public class WoodLikeBlockModels {
                                                                                                                     generators.modelOutput
                                                                                                                 )))));
         PastelModelHelper.redstoneLamp(generators, PastelBlocks.WEEPING_GALA_LAMP);
-        PastelModelHelper.translucent(PastelBlocks.WEEPING_GALA_LANTERN);
         PastelModelHelper.axisRotated(
             generators, PastelBlocks.WEEPING_GALA_LANTERN, PastelTexturedModels.BASE_TRANS_LIGHT_CORE);
     }

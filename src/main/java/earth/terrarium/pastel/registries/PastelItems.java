@@ -1177,7 +1177,7 @@ public class PastelItems {
 
     public static final ResourceKey<Item> GLISTERING_MELON_SEEDS = simple(
         new ItemRegistrar<>("glistering_melon_seeds").withItem(
-            () -> new ItemNameBlockItem(BuiltInRegistries.BLOCK.get(PastelBlocks.GLISTERING_MELON_STEM), IS.of()),
+            () -> new ItemNameBlockItem(BuiltInRegistries.BLOCK.get(PastelBlocks.GLISTERING_MELON_STEM.getKey()), IS.of()),
             InkColors.LIME
         )).itemKey();
     public static final DeferredItem<Item> AMARANTH_GRAINS = register(simple(

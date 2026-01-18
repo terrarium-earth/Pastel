@@ -8,12 +8,6 @@ import net.minecraft.data.models.BlockModelGenerators;
 
 public class PastelNetworkBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators){
-        PastelModelHelper.cutout(PastelBlocks.CONNECTION_NODE);
-        PastelModelHelper.cutout(PastelBlocks.PROVIDER_NODE);
-        PastelModelHelper.cutout(PastelBlocks.STORAGE_NODE);
-        PastelModelHelper.cutout(PastelBlocks.BUFFER_NODE);
-        PastelModelHelper.cutout(PastelBlocks.SENDER_NODE);
-        PastelModelHelper.cutout(PastelBlocks.GATHER_NODE);
 
         PastelModelHelper.predefinedItemModel(generators,PastelBlocks.CONNECTION_NODE);
         PastelModelHelper.predefinedItemModel(generators,PastelBlocks.PROVIDER_NODE);

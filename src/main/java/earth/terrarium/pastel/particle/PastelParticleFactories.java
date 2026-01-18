@@ -27,7 +27,6 @@ import earth.terrarium.pastel.particle.client.RaindropParticle;
 import earth.terrarium.pastel.particle.client.TranslucentSplashParticle;
 import earth.terrarium.pastel.particle.client.TransmissionParticle;
 import earth.terrarium.pastel.particle.client.VoidFogParticle;
-import earth.terrarium.pastel.particle.client.WindParticle;
 import earth.terrarium.pastel.particle.client.ZigZagParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -156,7 +155,6 @@ public class PastelParticleFactories {
         event.registerSpriteSet(PastelParticleTypes.HUMUS_POP, BubblePopParticle.Provider::new);
         event.registerSpriteSet(PastelParticleTypes.BLUE_BUBBLE_POP, BubblePopParticle.Provider::new);
         event.registerSpriteSet(PastelParticleTypes.GREEN_BUBBLE_POP, BubblePopParticle.Provider::new);
-        event.registerSpriteSet(PastelParticleTypes.SPIRIT_SALLOW, WindParticle.Factory::new);
         event.registerSpriteSet(PastelParticleTypes.JADE_VINES, ZigZagParticle.Factory::new);
         event.registerSpriteSet(PastelParticleTypes.JADE_VINES_BLOOM, ZigZagParticle.Factory::new);
         event.registerSpriteSet(PastelParticleTypes.MIRROR_IMAGE, LitParticle.Factory::new);

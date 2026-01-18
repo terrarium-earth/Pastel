@@ -90,68 +90,65 @@ import static net.minecraft.world.level.block.Blocks.*;
 
 public class FunctionalBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {
-        PastelModelHelper.cutout(PastelBlocks.PRIMORDIAL_FIRE);
+
         generatePrimfireModel(generators);
 
-        PastelModelHelper.translucent(PastelBlocks.ETHEREAL_PLATFORM);
-        PastelModelHelper.simple(generators,PastelBlocks.ETHEREAL_PLATFORM);
+        PastelModelHelper.simple(generators, PastelBlocks.ETHEREAL_PLATFORM);
 
-        PastelModelHelper.translucent(PastelBlocks.UNIVERSE_SPYHOLE);
-        PastelModelHelper.simple(generators,PastelBlocks.UNIVERSE_SPYHOLE);
+        PastelModelHelper.simple(generators, PastelBlocks.UNIVERSE_SPYHOLE);
 
-        PastelModelHelper.cutout(PastelBlocks.PRESENT);
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.PRESENT);
+        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.PRESENT);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.PRESENT.get())
-                                                                .with(
-                                                                    PropertyDispatch.property(
-                                                                                        PresentBlock.VARIANT)
-                                                                                    .generate(
-                                                                                        variant -> PastelModelHelper.createModelVariant(
-                                                                                            PastelModels.PRESENT.createWithSuffix(
-                                                                                                PastelBlocks.PRESENT.get(), "_" +
-                                                                                                       variant.getSerializedName(),
-                                                                                                new TextureMapping().put(
-                                                                                                                        TextureSlot.TEXTURE,
-                                                                                                                        TextureMapping.getBlockTexture(
-                                                                                                                            PastelBlocks.PRESENT.get(),
-                                                                                                                            "_" +
-                                                                                                                            variant.getSerializedName()
-                                                                                                                        )
-                                                                                                                    )
-                                                                                                                    .put(
-                                                                                                                        TextureSlot.PARTICLE,
-                                                                                                                        TextureMapping.getBlockTexture(
-                                                                                                                            variant.woolBase)
-                                                                                                                    ),
-                                                                                                generators.modelOutput
-                                                                                            )))));
+                                                                .with(PropertyDispatch.property(PresentBlock.VARIANT)
+                                                                                      .generate(
+                                                                                          variant -> PastelModelHelper.createModelVariant(
+                                                                                              PastelModels.PRESENT.createWithSuffix(
+                                                                                                  PastelBlocks.PRESENT.get(),
+                                                                                                  "_" +
+                                                                                                  variant.getSerializedName(),
+                                                                                                  new TextureMapping().put(
+                                                                                                                          TextureSlot.TEXTURE,
+                                                                                                                          TextureMapping.getBlockTexture(
+                                                                                                                              PastelBlocks.PRESENT.get(),
+                                                                                                                              "_" +
+                                                                                                                              variant.getSerializedName()
+                                                                                                                          )
+                                                                                                                      )
+                                                                                                                      .put(
+                                                                                                                          TextureSlot.PARTICLE,
+                                                                                                                          TextureMapping.getBlockTexture(
+                                                                                                                              variant.woolBase)
+                                                                                                                      ),
+                                                                                                  generators.modelOutput
+                                                                                              )))));
 
-        PastelModelHelper.simple(generators,PastelBlocks.BLOCK_FLOODER);
+        PastelModelHelper.simple(generators, PastelBlocks.BLOCK_FLOODER);
 
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.BOTTOMLESS_BUNDLE);
-        PastelModelHelper.cutout(PastelBlocks.BOTTOMLESS_BUNDLE);
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
-                                                                    PastelBlocks.BOTTOMLESS_BUNDLE.get())
-                                                                .with(
-                                                                    PastelModelHelper.createBooleanModelMap(
-                                                                        BottomlessBundleBlock.LOCKED,
-                                                                        ModelLocationUtils.getModelLocation(
-                                                                            PastelBlocks.BOTTOMLESS_BUNDLE.get(),
-                                                                            "_locked"
-                                                                        ),
-                                                                        ModelLocationUtils.getModelLocation(
-                                                                            PastelBlocks.BOTTOMLESS_BUNDLE.get(),
-                                                                            "_unlocked"
-                                                                        )
-                                                                    )));
+        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.BOTTOMLESS_BUNDLE);
 
-        PastelModelHelper.singleton(generators,PastelBlocks.SHIMMERSTONE_LIGHT,PastelTexturedModels.particle(PastelTextures.SHIMMERSTONE_LIGHT));
-        PastelModelHelper.parented(generators,PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get(),PastelBlocks.SHIMMERSTONE_LIGHT.get());
+        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.BOTTOMLESS_BUNDLE.get())
+                                                                .with(PastelModelHelper.createBooleanModelMap(
+                                                                    BottomlessBundleBlock.LOCKED,
+                                                                    ModelLocationUtils.getModelLocation(
+                                                                        PastelBlocks.BOTTOMLESS_BUNDLE.get(),
+                                                                        "_locked"
+                                                                    ), ModelLocationUtils.getModelLocation(
+                                                                        PastelBlocks.BOTTOMLESS_BUNDLE.get(),
+                                                                        "_unlocked"
+                                                                    )
+                                                                )));
 
-        decay(generators,PastelBlocks.FADING);
-        decay(generators,PastelBlocks.FAILING);
-        decay(generators,PastelBlocks.RUIN);
-        decay(generators,PastelBlocks.FORFEITURE);
+        PastelModelHelper.singleton(
+            generators, PastelBlocks.SHIMMERSTONE_LIGHT,
+            PastelTexturedModels.particle(PastelTextures.SHIMMERSTONE_LIGHT)
+        );
+        PastelModelHelper.parented(
+            generators, PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get(), PastelBlocks.SHIMMERSTONE_LIGHT.get());
+
+        decay(generators, PastelBlocks.FADING);
+        decay(generators, PastelBlocks.FAILING);
+        decay(generators, PastelBlocks.RUIN);
+        decay(generators, PastelBlocks.FORFEITURE);
 
 
         PastelModelHelper.simple(generators, PastelBlocks.DECAY_AWAY);
@@ -163,17 +160,16 @@ public class FunctionalBlockModels {
         PastelModelHelper.defaultNorthHorizontalFacing(
             generators, PastelBlocks.COMPACTING_CHEST, ModelLocationUtils::getModelLocation);
 
-        PastelModelHelper.cutout(PastelBlocks.FABRICATION_CHEST);
+
         PastelModelHelper.predefinedItemModel(generators, PastelBlocks.FABRICATION_CHEST);
         PastelModelHelper.defaultNorthHorizontalFacing(
             generators, PastelBlocks.FABRICATION_CHEST, ModelLocationUtils::getModelLocation);
 
-        PastelModelHelper.translucent(PastelBlocks.BLACK_HOLE_CHEST);
+
         PastelModelHelper.defaultNorthHorizontalFacing(
             generators, PastelBlocks.BLACK_HOLE_CHEST, ModelLocationUtils::getModelLocation);
 
-        PastelModelHelper.cutout(PastelBlocks.PARTICLE_SPAWNER);
-        PastelModelHelper.cutout(PastelBlocks.CREATIVE_PARTICLE_SPAWNER);
+
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.PARTICLE_SPAWNER.get())
                                                                 .with(PastelModelHelper.createBooleanModelMap(
                                                                     BlockStateProperties.POWERED,
@@ -192,14 +188,15 @@ public class FunctionalBlockModels {
                                                                     )
                                                                 )));
         PastelModelHelper.singletonWithSoup(
-            generators, PastelBlocks.CREATIVE_PARTICLE_SPAWNER, b -> ModelLocationUtils.getModelLocation(
+            generators, PastelBlocks.CREATIVE_PARTICLE_SPAWNER,
+            b -> ModelLocationUtils.getModelLocation(
                 PastelBlocks.PARTICLE_SPAWNER.get())
         );
 
         PastelModelHelper.defaultSouthHorizontalFacing(
             generators, PastelBlocks.BEDROCK_ANVIL, ModelLocationUtils::getModelLocation);
 
-        PastelModelHelper.translucent(PastelBlocks.MEMORY);
+
         PastelModelHelper.singletonWithSoup(generators, PastelBlocks.MEMORY, ModelLocationUtils::getModelLocation);
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
@@ -238,43 +235,39 @@ public class FunctionalBlockModels {
         PastelModelHelper.detector(generators, PastelBlocks.CREATURE_DETECTOR);
 
         PastelModelHelper.predefinedItemModel(generators, PastelBlocks.REDSTONE_TIMER);
-        PastelModelHelper.cutout(PastelBlocks.REDSTONE_TIMER);
+
         generateRedstoneTimerModel(generators);
 
         PastelModelHelper.predefinedItemModel(generators, PastelBlocks.REDSTONE_CALCULATOR);
-        PastelModelHelper.cutout(PastelBlocks.REDSTONE_CALCULATOR);
+
         generateRedstoneCalculatorModel(generators);
 
         PastelModelHelper.predefinedItemModel(generators, PastelBlocks.REDSTONE_TRANSCEIVER);
         generateRedstoneTransceiverModel(generators);
 
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(
-                                 generators, PastelBlocks.BLOCK_PLACER.get(),
-                                 PastelTexturedModels.complexOrientable(
-                                     b -> b, "_side", b -> b, "_top",
-                                     b -> PastelBlocks.NOTCHED_POLISHED_CALCITE.get(), "_top", b -> b,
-                                     "_front", b -> b, "_back", b -> b, "_side"
-                                 )
-                             )
-                             .with(PastelModelHelper.createUpNorthDefaultOrientationVariantMap()));
+        generators.blockStateOutput.accept(PastelModelHelper.createVariantsSupplier(
+                                                                generators, PastelBlocks.BLOCK_PLACER.get(),
+                                                                PastelTexturedModels.complexOrientable(
+                                                                    b -> b, "_side", b -> b, "_top",
+                                                                    b -> PastelBlocks.NOTCHED_POLISHED_CALCITE.get(),
+                                                                    "_top", b -> b,
+                                                                    "_front", b -> b, "_back", b -> b, "_side"
+                                                                )
+                                                            )
+                                                            .with(
+                                                                PastelModelHelper.createUpNorthDefaultOrientationVariantMap()));
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.BLOCK_DETECTOR.get())
                                                                 .with(
                                                                     PastelModelHelper.createUpNorthDefaultOrientationVariantMap())
                                                                 .with(PastelModelHelper.createBooleanModelMap(
                                                                     BlockStateProperties.TRIGGERED,
                                                                     PastelTexturedModels.complexOrientable(
-                                                                                            b -> b,
-                                                                                            "_side",
-                                                                                            b -> b,
+                                                                                            b -> b, "_side", b -> b,
                                                                                             "_top",
                                                                                             b -> PastelBlocks.NOTCHED_POLISHED_BASALT.get(),
-                                                                                            "_top",
+                                                                                            "_top", b -> b, "_front",
                                                                                             b -> b,
-                                                                                            "_front",
-                                                                                            b -> b,
-                                                                                            "_back_active",
-                                                                                            b -> b,
+                                                                                            "_back_active", b -> b,
                                                                                             "_side"
                                                                                         )
                                                                                         .createWithSuffix(
@@ -283,34 +276,29 @@ public class FunctionalBlockModels {
                                                                                             generators.modelOutput
                                                                                         ),
                                                                     PastelTexturedModels.complexOrientable(
-                                                                                            b -> b,
-                                                                                            "_side",
-                                                                                            b -> b,
+                                                                                            b -> b, "_side", b -> b,
                                                                                             "_top",
                                                                                             b -> PastelBlocks.NOTCHED_POLISHED_BASALT.get(),
-                                                                                            "_top",
-                                                                                            b -> b,
-                                                                                            "_front",
-                                                                                            b -> b,
-                                                                                            "_back",
-                                                                                            b -> b,
-                                                                                            "_side"
+                                                                                            "_top", b -> b, "_front",
+                                                                                            b -> b, "_back",
+                                                                                            b -> b, "_side"
                                                                                         )
                                                                                         .create(
                                                                                             PastelBlocks.BLOCK_DETECTOR.get(),
                                                                                             generators.modelOutput
                                                                                         )
                                                                 )));
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(
-                                 generators, PastelBlocks.BLOCK_BREAKER.get(),
-                                 PastelTexturedModels.complexOrientable(
-                                     b -> b, "_side", b -> b, "_top",
-                                     b -> PastelBlocks.POLISHED_BONE_ASH_PILLAR.get(), "_top", b -> b,
-                                     "_front", b -> b, "_back", b -> b, "_side"
-                                 )
-                             )
-                             .with(PastelModelHelper.createUpNorthDefaultOrientationVariantMap()));
+        generators.blockStateOutput.accept(PastelModelHelper.createVariantsSupplier(
+                                                                generators, PastelBlocks.BLOCK_BREAKER.get(),
+                                                                PastelTexturedModels.complexOrientable(
+                                                                    b -> b, "_side", b -> b, "_top",
+                                                                    b -> PastelBlocks.POLISHED_BONE_ASH_PILLAR.get(),
+                                                                    "_top", b -> b,
+                                                                    "_front", b -> b, "_back", b -> b, "_side"
+                                                                )
+                                                            )
+                                                            .with(
+                                                                PastelModelHelper.createUpNorthDefaultOrientationVariantMap()));
 
         PastelModelHelper.orientable(generators, PastelBlocks.ENDER_DROPPER);
         PastelModelHelper.singletonWithSoup(
@@ -341,7 +329,7 @@ public class FunctionalBlockModels {
 
         PastelModelHelper.simple(generators, PastelBlocks.REDSTONE_SAND);
 
-        PastelModelHelper.translucent(PastelBlocks.ENDER_GLASS);
+
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.ENDER_GLASS.get())
                                                                 .with(PropertyDispatch.property(
                                                                                           EnderGlassBlock.TRANSPARENCY_STATE)
@@ -357,7 +345,7 @@ public class FunctionalBlockModels {
                                                                                                                       transparency.getSerializedName(),
                                                                                                                       generators.modelOutput
                                                                                                                   )))));
-        PastelModelHelper.cutout(PastelBlocks.INCANDESCENT_AMALGAM);
+
         PastelModelHelper.singletonWithSoup(
             generators, PastelBlocks.INCANDESCENT_AMALGAM, ModelLocationUtils::getModelLocation);
 
@@ -559,14 +547,17 @@ public class FunctionalBlockModels {
     public static void generateRedstoneTimerModel(BlockModelGenerators generators) {
         MultiPartGenerator rTimerMultipart = MultiPartGenerator.multiPart(PastelBlocks.REDSTONE_TIMER.get());
         ResourceLocation on = PastelModels.REDSTONE_TIMER.create(
-            PastelBlocks.REDSTONE_TIMER.get(), new TextureMapping().put(
-                PastelTextureKeys.LIGHT,
-                TextureMapping.getBlockTexture(REDSTONE_TORCH)
-            ), generators.modelOutput
+            PastelBlocks.REDSTONE_TIMER.get(),
+            new TextureMapping().put(PastelTextureKeys.LIGHT, TextureMapping.getBlockTexture(REDSTONE_TORCH)),
+            generators.modelOutput
         );
         ResourceLocation off = PastelModels.REDSTONE_TIMER.createWithSuffix(
-            PastelBlocks.REDSTONE_TIMER.get(), "_off", new TextureMapping().put(
-                PastelTextureKeys.LIGHT, TextureMapping.getBlockTexture(REDSTONE_TORCH, "_off")), generators.modelOutput
+            PastelBlocks.REDSTONE_TIMER.get(), "_off",
+            new TextureMapping().put(
+                PastelTextureKeys.LIGHT,
+                TextureMapping.getBlockTexture(
+                    REDSTONE_TORCH, "_off")
+            ), generators.modelOutput
         );
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             VariantProperties.Rotation rotation = PastelModelHelper.getSouthDefaultRotation(direction);
@@ -689,8 +680,9 @@ public class FunctionalBlockModels {
         }
         for (DyeColor color : DyeColor.values()) {
             ResourceLocation channel = PastelModels.REDSTONE_TRANSCEIVER_CHANNEL.createWithSuffix(
-                PastelBlocks.REDSTONE_TRANSCEIVER.get(), "_channel_" + color.getSerializedName(), PastelTextureMaps.all(
-                    PastelCommon.locate("block/" + color.getSerializedName() + "_block")), generators.modelOutput
+                PastelBlocks.REDSTONE_TRANSCEIVER.get(), "_channel_" + color.getSerializedName(),
+                PastelTextureMaps.all(PastelCommon.locate("block/" + color.getSerializedName() + "_block")),
+                generators.modelOutput
             );
             rTransMultipart.with(
                 Condition.condition()
@@ -795,6 +787,7 @@ public class FunctionalBlockModels {
         PastelModelHelper.registerParentedItemModel(
             generators, PastelBlocks.CREATIVE_PARTICLE_SPAWNER, PastelBlocks.PARTICLE_SPAWNER.get(), "_off");
 
-        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT,PastelBlocks.SHIMMERSTONE_LIGHT.get());
+        PastelModelHelper.registerParentedItemModel(
+            generators, PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT, PastelBlocks.SHIMMERSTONE_LIGHT.get());
     }
 }

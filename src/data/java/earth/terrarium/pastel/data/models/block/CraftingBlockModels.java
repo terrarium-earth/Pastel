@@ -39,33 +39,21 @@ public class CraftingBlockModels {
         PastelModelHelper.pedestal(generators, PastelBlocks.PEDESTAL_ALL_BASIC);
         PastelModelHelper.pedestal(generators, PastelBlocks.PEDESTAL_ONYX);
         PastelModelHelper.pedestal(generators, PastelBlocks.PEDESTAL_MOONSTONE);
-
-        PastelModelHelper.cutout(PastelBlocks.FUSION_SHRINE_BASALT);
-        PastelModelHelper.cutout(PastelBlocks.FUSION_SHRINE_CALCITE);
         PastelModelHelper.singleton(generators, PastelBlocks.FUSION_SHRINE_BASALT, PastelTexturedModels.FUSION_SHRINE);
         PastelModelHelper.singleton(generators, PastelBlocks.FUSION_SHRINE_CALCITE, PastelTexturedModels.FUSION_SHRINE);
-
-        PastelModelHelper.cutout(PastelBlocks.ENCHANTER);
         PastelModelHelper.singletonWithSoup(generators, PastelBlocks.ENCHANTER, ModelLocationUtils::getModelLocation);
 
-        PastelModelHelper.translucent(PastelBlocks.POTION_WORKSHOP);
         PastelModelHelper.defaultNorthHorizontalFacing(
             generators, PastelBlocks.POTION_WORKSHOP, ModelLocationUtils::getModelLocation);
-
-        PastelModelHelper.cutout(PastelBlocks.SPIRIT_INSTILLER);
         PastelModelHelper.singletonWithSoup(
             generators, PastelBlocks.SPIRIT_INSTILLER, ModelLocationUtils::getModelLocation);
         PastelModelHelper.predefinedItemModel(generators, PastelBlocks.SPIRIT_INSTILLER);
-
-        PastelModelHelper.cutout(PastelBlocks.CRYSTALLARIEUM);
         PastelModelHelper.singletonWithSoup(
             generators, PastelBlocks.CRYSTALLARIEUM, ModelLocationUtils::getModelLocation);
         PastelModelHelper.predefinedItemModel(generators, PastelBlocks.CRYSTALLARIEUM);
 
         PastelModelHelper.defaultNorthHorizontalFacing(
             generators, PastelBlocks.CINDERHEARTH, ModelLocationUtils::getModelLocation);
-
-        PastelModelHelper.cutout(PastelBlocks.COLOR_PICKER);
         PastelModelHelper.defaultWestHorizontalFacing(
             generators, PastelBlocks.COLOR_PICKER, ModelLocationUtils::getModelLocation);
 

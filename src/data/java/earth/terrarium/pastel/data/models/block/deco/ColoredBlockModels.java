@@ -18,7 +18,6 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class ColoredBlockModels {
     public static void generateColoredLightBlockModel(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.translucent(block);
         ResourceLocation off = TexturedModel.CUBE.create(block.get(), generators.modelOutput);
         ResourceLocation on = PastelModels.COLORED_LAMP_ON.createWithSuffix(
             block.get(), "_on", PastelTextureMaps.innerOuter(
@@ -32,7 +31,6 @@ public class ColoredBlockModels {
 
     public static void generateColoredSporeBlossomBlockModel(
         BlockModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.cutout(block);
         PastelModelHelper.singleton(
             generators, block,
             TexturedModel.createDefault(

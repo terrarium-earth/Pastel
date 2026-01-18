@@ -1,12 +1,10 @@
 package earth.terrarium.pastel.data;
 
 import com.google.gson.JsonElement;
-import earth.terrarium.pastel.blocks.crystallarieum.PastelClusterBlock;
 import earth.terrarium.pastel.blocks.decoration.CardinalFacingBlock;
 import earth.terrarium.pastel.blocks.decoration.PylonBlock;
 import earth.terrarium.pastel.blocks.idols.IdolBlock;
-import earth.terrarium.pastel.blocks.spirit_sallow.SpiritVine;
-import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.DeferredRegistrar;
 import earth.terrarium.pastel.registries.client.PastelModels;
 import earth.terrarium.pastel.registries.client.PastelTextureKeys;
 import earth.terrarium.pastel.registries.client.PastelTextureMaps;
@@ -44,7 +42,8 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public class PastelModelHelper {
-
+    public static final DeferredRegistrar.Contextual<ItemModelGenerators> ITEM_MODEL_REGISTRAR
+        = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
     // Item Models
 
     public static void registerItemModel(ItemModelGenerators ctx, Item item) {
@@ -826,7 +825,6 @@ public class PastelModelHelper {
     }
 
     public static void cross(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        cutout(block);
         generators.blockStateOutput.accept(PastelModelHelper.createVariantsSupplier(
             block.get(), PastelTexturedModels.cross(b -> b, "")
                                              .create(
@@ -843,7 +841,6 @@ public class PastelModelHelper {
 
     public static void pottedPlant(
         BlockModelGenerators generators, DeferredBlock<Block> block, boolean tinted) {
-        cutout(block);
         generators.blockStateOutput.accept(
             PastelModelHelper.pottedPlantBlockModel(generators, (FlowerPotBlock) block.get(), tinted));
     }
@@ -923,7 +920,6 @@ public class PastelModelHelper {
     }
 
     public static void idol(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        translucent(block);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
                                                                 .with(PastelModelHelper.createBooleanModelMap(
                                                                     IdolBlock.COOLDOWN, PastelModels.MOB_BLOCK,
@@ -932,7 +928,6 @@ public class PastelModelHelper {
     }
 
     public static void pedestal(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        cutout(block);
         singleton(
             generators, block, TexturedModel.createDefault(
                 b -> new TextureMapping().put(PastelTextureKeys.PEDESTAL, TextureMapping.getBlockTexture(b))
