@@ -124,14 +124,14 @@ public class GemstoneBlockModels {
         PastelModelHelper.cluster(generators,PastelBlocks.LARGE_PRISMARINE_BUD,PastelModels.CRYSTALLARIEUM_FARMABLE);
         PastelModelHelper.cluster(generators,PastelBlocks.PRISMARINE_CLUSTER,PastelModels.CRYSTALLARIEUM_FARMABLE);
 
-        PastelModelHelper.simple(generators,PastelBlocks.AZURITE_CLUSTER);
-        PastelModelHelper.simple(generators,PastelBlocks.LARGE_AZURITE_BUD);
-        PastelModelHelper.simple(generators,PastelBlocks.SMALL_AZURITE_BUD);
-        PastelModelHelper.simple(generators,PastelBlocks.MALACHITE_CLUSTER);
-        PastelModelHelper.simple(generators,PastelBlocks.LARGE_MALACHITE_BUD);
-        PastelModelHelper.simple(generators,PastelBlocks.SMALL_MALACHITE_BUD);
-        PastelModelHelper.simple(generators,PastelBlocks.BLOODSTONE_CLUSTER);
-        PastelModelHelper.simple(generators,PastelBlocks.LARGE_BLOODSTONE_BUD);
-        PastelModelHelper.simple(generators,PastelBlocks.SMALL_BLOODSTONE_BUD);
+        PastelModelHelper.cluster(generators,PastelBlocks.AZURITE_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators,PastelBlocks.LARGE_AZURITE_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators,PastelBlocks.SMALL_AZURITE_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators,PastelBlocks.MALACHITE_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators,PastelBlocks.LARGE_MALACHITE_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators,PastelBlocks.SMALL_MALACHITE_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators,PastelBlocks.BLOODSTONE_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators,PastelBlocks.LARGE_BLOODSTONE_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators,PastelBlocks.SMALL_BLOODSTONE_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
     }
 }

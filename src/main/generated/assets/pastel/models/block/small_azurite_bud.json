@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "pastel:templates/crystallarieum_farmable",
   "textures": {
-    "all": "pastel:block/small_azurite_bud"
+    "cross": "pastel:block/small_azurite_bud"
   }
 }

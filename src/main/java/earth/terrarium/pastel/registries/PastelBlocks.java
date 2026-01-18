@@ -799,7 +799,7 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> BISMUTH_BLOCK = register(
         blockWithItem(
             "bismuth_block", () -> new Block(gemstoneBlock(MapColor.WARPED_STEM, SoundType.CHAIN)), InkColors.CYAN));
-        // Once we unfuck the datagen remember to ensure this still has its mirrored form
+    // Once we unfuck the datagen remember to ensure this still has its mirrored form
 
     // DD BLOCKS
     private static final float BLACKSLAG_HARDNESS = 5.0F;
@@ -3980,7 +3980,8 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> AMARANTH_BUSHEL = register(blockWithItem(
         "amaranth_bushel", () -> new AmaranthBushelBlock(
             PastelMobEffects.NOURISHING, 8, settings(
-            MapColor.NONE, SoundType.CROP, 0.0F).noCollission()), InkColors.RED
+            MapColor.NONE, SoundType.CROP, 0.0F).noCollission()
+        ), InkColors.RED
     ));
     public static final DeferredBlock<Block> POTTED_AMARANTH_BUSHEL = register(
         block("potted_amaranth_bushel", () -> new FlowerPotBlock(PastelBlocks.AMARANTH_BUSHEL.get(), pottedPlant())));
@@ -5721,15 +5722,24 @@ public class PastelBlocks {
         PastelModelHelper.cutout(PastelBlocks.LARGE_PRISMARINE_BUD);
         PastelModelHelper.cutout(PastelBlocks.PRISMARINE_CLUSTER);
         PastelModelHelper.translucent(PastelBlocks.TOPAZ_BASALT_LIGHT);
-            PastelModelHelper.translucent(PastelBlocks.AMETHYST_BASALT_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.AMETHYST_BASALT_LIGHT);
         PastelModelHelper.translucent(PastelBlocks.CITRINE_BASALT_LIGHT);
-            PastelModelHelper.translucent(PastelBlocks.ONYX_BASALT_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.ONYX_BASALT_LIGHT);
         PastelModelHelper.translucent(PastelBlocks.MOONSTONE_BASALT_LIGHT);
-            PastelModelHelper.translucent(PastelBlocks.TOPAZ_CALCITE_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.TOPAZ_CALCITE_LIGHT);
         PastelModelHelper.translucent(PastelBlocks.AMETHYST_CALCITE_LIGHT);
-            PastelModelHelper.translucent(PastelBlocks.CITRINE_CALCITE_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.CITRINE_CALCITE_LIGHT);
         PastelModelHelper.translucent(PastelBlocks.ONYX_CALCITE_LIGHT);
-            PastelModelHelper.translucent(PastelBlocks.MOONSTONE_CALCITE_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.MOONSTONE_CALCITE_LIGHT);
+        PastelModelHelper.cutout(PastelBlocks.AZURITE_CLUSTER);
+        PastelModelHelper.cutout(PastelBlocks.LARGE_AZURITE_BUD);
+        PastelModelHelper.cutout(PastelBlocks.SMALL_AZURITE_BUD);
+        PastelModelHelper.cutout(PastelBlocks.MALACHITE_CLUSTER);
+        PastelModelHelper.cutout(PastelBlocks.LARGE_MALACHITE_BUD);
+        PastelModelHelper.cutout(PastelBlocks.SMALL_MALACHITE_BUD);
+        PastelModelHelper.cutout(PastelBlocks.BLOODSTONE_CLUSTER);
+        PastelModelHelper.cutout(PastelBlocks.LARGE_BLOODSTONE_BUD);
+        PastelModelHelper.cutout(PastelBlocks.SMALL_BLOODSTONE_BUD);
     }
 
 }
