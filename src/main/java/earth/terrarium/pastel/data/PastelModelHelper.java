@@ -1490,7 +1490,6 @@ public class PastelModelHelper {
     }
 
     public static void cluster(BlockModelGenerators generators, DeferredBlock<Block> block, ModelTemplate model) {
-        cutout(block);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
                                                                     block.get(),
                                                                     PastelModelHelper.createModelVariant(TexturedModel.createDefault(TextureMapping::cross, model)

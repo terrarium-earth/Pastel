@@ -374,7 +374,7 @@ public class WoodLikeBlockModels {
                                                                                                                 )))));
         PastelModelHelper.redstoneLamp(generators, PastelBlocks.WEEPING_GALA_LAMP);
         PastelModelHelper.axisRotated(
-            generators, PastelBlocks.WEEPING_GALA_LANTERN, PastelTexturedModels.BASE_TRANS_LIGHT_CORE);
+            generators, PastelBlocks.WEEPING_GALA_LIGHT, PastelTexturedModels.BASE_TRANS_LIGHT_CORE);
     }
 
     public static void generateItemModels(ItemModelGenerators generators) {

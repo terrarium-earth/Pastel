@@ -55,8 +55,12 @@ public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
     public void register() {
     }
 
+    // todo
     @Override
     @OnlyIn(Dist.CLIENT)
     public void registerClient() {
+//        PastelModelHelper.cutout(SMALL_FLUIX_BUD);
+//        PastelModelHelper.cutout(LARGE_FLUIX_BUD);
+//        PastelModelHelper.cutout(FLUIX_CLUSTER);
     }
 }

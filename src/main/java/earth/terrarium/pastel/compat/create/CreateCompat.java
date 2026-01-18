@@ -113,9 +113,13 @@ public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
         return null;
     }
 
+    // todo
     @Override
     @OnlyIn(Dist.CLIENT)
     public void registerClient() {
+//        PastelModelHelper.cutout(SMALL_ZINC_BUD);
+//        PastelModelHelper.cutout(LARGE_ZINC_BUD);
+//        PastelModelHelper.cutout(ZINC_CLUSTER);
     }
 
 }
