@@ -141,13 +141,6 @@ public class StoneLikeBlockModels {
                                                                                                   PastelBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB.get())
                                                                                               .getFamily()
         );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.WEATHERED_SHALE_CLAY_TILES.get()).stairs(
-                                                                                                  PastelBlocks.WEATHERED_SHALE_CLAY_TILE_STAIRS.get())
-                                                                                              .slab(
-                                                                                                  PastelBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB.get())
-                                                                                              .getFamily()
-        );
 
         PastelModelHelper.registerBlockFamilyExceptBase(
             generators, new BlockFamily.Builder(PastelBlocks.PYRITE.get()).stairs(PastelBlocks.PYRITE_STAIRS.get())
