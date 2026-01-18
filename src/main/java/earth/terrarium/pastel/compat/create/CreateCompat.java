@@ -5,10 +5,12 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.crystallarieum.PastelClusterBlock;
 import earth.terrarium.pastel.blocks.fluid.PastelFluidBlock;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
+import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelItems.IS;
 import earth.terrarium.pastel.registries.client.PastelModels;
+import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -27,48 +29,46 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
 import static earth.terrarium.pastel.registries.PastelBlocks.blockWithItem;
-import static earth.terrarium.pastel.registries.PastelBlocks.cluster;
-import static earth.terrarium.pastel.registries.PastelBlocks.simple;
 import static earth.terrarium.pastel.registries.PastelItems.item;
 import static earth.terrarium.pastel.registries.PastelItems.simple;
 
 public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
 
-    public static DeferredBlock<Block> SMALL_ZINC_BUD = PastelBlocks.register(cluster(
-        blockWithItem(
-            "small_zinc_bud", () -> new PastelClusterBlock(
-                BlockBehaviour.Properties.of()
-                                         .pushReaction(PushReaction.DESTROY)
-                                         .destroyTime(1.0f)
-                                         .mapColor(Blocks.LIGHT_GRAY_CONCRETE.defaultMapColor())
-                                         .requiresCorrectToolForDrops()
-                                         .noOcclusion(), PastelClusterBlock.GrowthStage.SMALL
-            ), InkColors.BROWN
-        ), ModelTemplates.CROSS
+    public static void generateBlockModels(BlockModelGenerators generators){
+        PastelModelHelper.cluster(generators, SMALL_ZINC_BUD, ModelTemplates.CROSS);
+        PastelModelHelper.cluster(generators, LARGE_ZINC_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators, ZINC_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.predefinedItemModel(generators, ZINC_CLUSTER);
+        PastelModelHelper.simple(generators, PURE_ZINC_BLOCK);
+    }
+    public static DeferredBlock<Block> SMALL_ZINC_BUD = PastelBlocks.register(blockWithItem(
+        "small_zinc_bud", () -> new PastelClusterBlock(
+            BlockBehaviour.Properties.of()
+                                     .pushReaction(PushReaction.DESTROY)
+                                     .destroyTime(1.0f)
+                                     .mapColor(Blocks.LIGHT_GRAY_CONCRETE.defaultMapColor())
+                                     .requiresCorrectToolForDrops()
+                                     .noOcclusion(), PastelClusterBlock.GrowthStage.SMALL
+        ), InkColors.BROWN
     ));
-    public static DeferredBlock<Block> LARGE_ZINC_BUD = PastelBlocks.register(cluster(
-        blockWithItem(
-            "large_zinc_bud",
-            () -> new PastelClusterBlock(
-                BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()),
-                PastelClusterBlock.GrowthStage.LARGE
-            ), InkColors.BROWN
-        ), PastelModels.CRYSTALLARIEUM_FARMABLE
+    public static DeferredBlock<Block> LARGE_ZINC_BUD = PastelBlocks.register(blockWithItem(
+        "large_zinc_bud",
+        () -> new PastelClusterBlock(
+            BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()),
+            PastelClusterBlock.GrowthStage.LARGE
+        ), InkColors.BROWN
     ));
-    public static DeferredBlock<Block> ZINC_CLUSTER = PastelBlocks.register(cluster(
-        blockWithItem(
-            "zinc_cluster",
-            () -> new PastelClusterBlock(
-                BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()),
-                PastelClusterBlock.GrowthStage.CLUSTER
-            ), InkColors.BROWN
-        ), PastelModels.CRYSTALLARIEUM_FARMABLE
-    ).withPredefinedItemModel());
-    public static DeferredBlock<Block> PURE_ZINC_BLOCK = PastelBlocks.register(simple(
-        blockWithItem(
-            "pure_zinc_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),
-            InkColors.BROWN
-        )));
+    public static DeferredBlock<Block> ZINC_CLUSTER = PastelBlocks.register(blockWithItem(
+        "zinc_cluster",
+        () -> new PastelClusterBlock(
+            BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()),
+            PastelClusterBlock.GrowthStage.CLUSTER
+        ), InkColors.BROWN
+    ));
+    public static DeferredBlock<Block> PURE_ZINC_BLOCK = PastelBlocks.register(blockWithItem(
+        "pure_zinc_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),
+        InkColors.BROWN
+    ));
 
     public static DeferredItem<Item> PURE_ZINC = PastelItems.register(
         simple(item("pure_zinc", () -> new Item(IS.of()), InkColors.BROWN)));

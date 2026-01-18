@@ -3,8 +3,10 @@ package earth.terrarium.pastel.compat.ae2;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.crystallarieum.PastelClusterBlock;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
+import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.client.PastelModels;
+import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -14,40 +16,40 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import static earth.terrarium.pastel.registries.PastelBlocks.blockWithItem;
-import static earth.terrarium.pastel.registries.PastelBlocks.cluster;
 
 public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
 
-    public static DeferredBlock<Block> SMALL_FLUIX_BUD = PastelBlocks.register(cluster(
-        blockWithItem(
-            "small_fluix_bud", () -> new PastelClusterBlock(
-                BlockBehaviour.Properties.of()
-                                         .pushReaction(PushReaction.DESTROY)
-                                         .destroyTime(1.0f)
-                                         .mapColor(Blocks.PURPLE_CONCRETE.defaultMapColor())
-                                         .requiresCorrectToolForDrops()
-                                         .noOcclusion(), PastelClusterBlock.GrowthStage.SMALL
-            ), InkColors.YELLOW
-        ), PastelModels.CRYSTALLARIEUM_FARMABLE
+    public static void generateBlockModels(BlockModelGenerators generators) {
+        PastelModelHelper.cluster(generators, SMALL_FLUIX_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators, LARGE_FLUIX_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.cluster(generators, FLUIX_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.predefinedItemModel(generators, FLUIX_CLUSTER);
+    }
+
+    public static DeferredBlock<Block> SMALL_FLUIX_BUD = PastelBlocks.register(blockWithItem(
+        "small_fluix_bud", () -> new PastelClusterBlock(
+            BlockBehaviour.Properties.of()
+                                     .pushReaction(PushReaction.DESTROY)
+                                     .destroyTime(1.0f)
+                                     .mapColor(Blocks.PURPLE_CONCRETE.defaultMapColor())
+                                     .requiresCorrectToolForDrops()
+                                     .noOcclusion(), PastelClusterBlock.GrowthStage.SMALL
+        ), InkColors.YELLOW
     ));
-    public static DeferredBlock<Block> LARGE_FLUIX_BUD = PastelBlocks.register(cluster(
-        blockWithItem(
-            "large_fluix_bud",
-            () -> new PastelClusterBlock(
-                BlockBehaviour.Properties.ofFullCopy(SMALL_FLUIX_BUD.get()),
-                PastelClusterBlock.GrowthStage.LARGE
-            ), InkColors.YELLOW
-        ), PastelModels.CRYSTALLARIEUM_FARMABLE
+    public static DeferredBlock<Block> LARGE_FLUIX_BUD = PastelBlocks.register(blockWithItem(
+        "large_fluix_bud",
+        () -> new PastelClusterBlock(
+            BlockBehaviour.Properties.ofFullCopy(SMALL_FLUIX_BUD.get()),
+            PastelClusterBlock.GrowthStage.LARGE
+        ), InkColors.YELLOW
     ));
-    public static DeferredBlock<Block> FLUIX_CLUSTER = PastelBlocks.register(cluster(
-        blockWithItem(
-            "fluix_cluster",
-            () -> new PastelClusterBlock(
-                BlockBehaviour.Properties.ofFullCopy(SMALL_FLUIX_BUD.get()),
-                PastelClusterBlock.GrowthStage.CLUSTER
-            ), InkColors.YELLOW
-        ), PastelModels.CRYSTALLARIEUM_FARMABLE
-    ).withPredefinedItemModel());
+    public static DeferredBlock<Block> FLUIX_CLUSTER = PastelBlocks.register(blockWithItem(
+        "fluix_cluster",
+        () -> new PastelClusterBlock(
+            BlockBehaviour.Properties.ofFullCopy(SMALL_FLUIX_BUD.get()),
+            PastelClusterBlock.GrowthStage.CLUSTER
+        ), InkColors.YELLOW
+    ));
 
     @Override
     public void register() {
