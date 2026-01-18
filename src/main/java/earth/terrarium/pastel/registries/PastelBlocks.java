@@ -5720,6 +5720,16 @@ public class PastelBlocks {
         PastelModelHelper.cutout(PastelBlocks.SMALL_PRISMARINE_BUD);
         PastelModelHelper.cutout(PastelBlocks.LARGE_PRISMARINE_BUD);
         PastelModelHelper.cutout(PastelBlocks.PRISMARINE_CLUSTER);
+        PastelModelHelper.translucent(PastelBlocks.TOPAZ_BASALT_LIGHT);
+            PastelModelHelper.translucent(PastelBlocks.AMETHYST_BASALT_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.CITRINE_BASALT_LIGHT);
+            PastelModelHelper.translucent(PastelBlocks.ONYX_BASALT_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.MOONSTONE_BASALT_LIGHT);
+            PastelModelHelper.translucent(PastelBlocks.TOPAZ_CALCITE_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.AMETHYST_CALCITE_LIGHT);
+            PastelModelHelper.translucent(PastelBlocks.CITRINE_CALCITE_LIGHT);
+        PastelModelHelper.translucent(PastelBlocks.ONYX_CALCITE_LIGHT);
+            PastelModelHelper.translucent(PastelBlocks.MOONSTONE_CALCITE_LIGHT);
     }
 
 }

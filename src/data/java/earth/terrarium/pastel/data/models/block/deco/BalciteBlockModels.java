@@ -2,12 +2,17 @@ package earth.terrarium.pastel.data.models.block.deco;
 
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.client.PastelModels;
+import earth.terrarium.pastel.registries.client.PastelTextureMaps;
 import earth.terrarium.pastel.registries.client.PastelTextures;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.world.level.block.*;
+
+import static net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK;
 
 public class BalciteBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {
@@ -142,9 +147,107 @@ public class BalciteBlockModels {
                                  generators, PastelBlocks.POLISHED_CALCITE_CREST.get(), TexturedModel.COLUMN)
                              .with(PastelModelHelper.createCardinalFacingVariantMap()));
         PastelModelHelper.singleton(generators, PastelBlocks.NOTCHED_POLISHED_CALCITE, TexturedModel.COLUMN);
+
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.TOPAZ_BASALT_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.BASALT_CAP,
+                    TextureMapping.getBlockTexture(PastelBlocks.TOPAZ_BLOCK.get())
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.AMETHYST_BASALT_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.BASALT_CAP,
+                    TextureMapping.getBlockTexture(AMETHYST_BLOCK)
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.CITRINE_BASALT_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.BASALT_CAP, TextureMapping.getBlockTexture(
+                        PastelBlocks.CITRINE_BLOCK.get())
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.ONYX_BASALT_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.BASALT_CAP,
+                    TextureMapping.getBlockTexture(PastelBlocks.ONYX_BLOCK.get())
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.MOONSTONE_BASALT_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.BASALT_CAP, TextureMapping.getBlockTexture(
+                        PastelBlocks.MOONSTONE_BLOCK.get())
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.TOPAZ_CALCITE_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.CALCITE_CAP,
+                    TextureMapping.getBlockTexture(PastelBlocks.TOPAZ_BLOCK.get())
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.AMETHYST_CALCITE_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.CALCITE_CAP,
+                    TextureMapping.getBlockTexture(AMETHYST_BLOCK)
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.CITRINE_CALCITE_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.CALCITE_CAP, TextureMapping.getBlockTexture(
+                        PastelBlocks.CITRINE_BLOCK.get())
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.ONYX_CALCITE_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block),
+                    PastelTextures.CALCITE_CAP,
+                    TextureMapping.getBlockTexture(PastelBlocks.ONYX_BLOCK.get())
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+        PastelModelHelper.axisRotated(
+            generators, PastelBlocks.MOONSTONE_CALCITE_LIGHT, TexturedModel.createDefault(
+                block -> PastelTextureMaps.sideTopInside(
+                    TextureMapping.getBlockTexture(block), PastelTextures.CALCITE_CAP,
+                    TextureMapping.getBlockTexture(PastelBlocks.MOONSTONE_BLOCK.get())
+                ), PastelModels.MULTILAYER_LIGHT
+            )
+        );
+
     }
-    public static void generateItemModels(ItemModelGenerators generators){
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.MOONSTONE_CHISELED_BASALT.get(), PastelBlocks.MOONSTONE_CHISELED_BASALT.get(), "_down");
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.MOONSTONE_CHISELED_CALCITE.get(), PastelBlocks.MOONSTONE_CHISELED_CALCITE.get(), "_down");
+
+    public static void generateItemModels(ItemModelGenerators generators) {
+        PastelModelHelper.registerParentedItemModel(
+            generators, PastelBlocks.MOONSTONE_CHISELED_BASALT.get(), PastelBlocks.MOONSTONE_CHISELED_BASALT.get(),
+            "_down"
+        );
+        PastelModelHelper.registerParentedItemModel(
+            generators, PastelBlocks.MOONSTONE_CHISELED_CALCITE.get(), PastelBlocks.MOONSTONE_CHISELED_CALCITE.get(),
+            "_down"
+        );
     }
 }
