@@ -2663,7 +2663,7 @@ public class PastelItemGroups {
                                                                                                  .asItem()
                                                                                                  .getDefaultInstance())
                                                                .title(
-                                                                   Component.translatable("itemGroup.pastel.mob_heads"))
+                                                                   Component.translatable("itemGroup.pastel.heads"))
                                                                .displayItems((displayContext, entries) -> {
                                                                    for (var skullBlock :
                                                                        PastelBlocks.MOB_HEADS.values()) {
