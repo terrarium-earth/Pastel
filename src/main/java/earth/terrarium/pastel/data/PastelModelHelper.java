@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.data;
 
 import com.google.gson.JsonElement;
+import earth.terrarium.pastel.blocks.crystallarieum.PastelClusterBlock;
 import earth.terrarium.pastel.blocks.decoration.CardinalFacingBlock;
 import earth.terrarium.pastel.blocks.decoration.PylonBlock;
 import earth.terrarium.pastel.blocks.idols.IdolBlock;
@@ -1526,6 +1527,15 @@ public class PastelModelHelper {
 
         public static void banner(ItemModelGenerators generators, DeferredItem<? extends Item> item) {
             parented(generators, item, CREEPER_BANNER_PATTERN);
+        }
+
+        public static void cluster(ItemModelGenerators generators, DeferredBlock<? extends Block> block, PastelClusterBlock.GrowthStage stage){
+            switch (stage) {
+                case PastelClusterBlock.GrowthStage.SMALL -> PastelModels.SMALL_BUD_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block.get()), generators.output);
+                case PastelClusterBlock.GrowthStage.MEDIUM -> PastelModels.MEDIUM_BUD_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block.get()), generators.output);
+                case PastelClusterBlock.GrowthStage.LARGE -> PastelModels.LARGE_BUD_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block.get()), generators.output);
+                case PastelClusterBlock.GrowthStage.CLUSTER -> PastelModels.CLUSTER_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block.get()), generators.output);
+            }
         }
     }
 }

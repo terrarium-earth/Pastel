@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-18T14:42:41.209574325	Model Definitions
+// 1.21.1	2026-01-18T15:30:48.118898864	Model Definitions
 16b08361bc65a3c74e8df5774303ab1909bbffbb assets/minecraft/models/item/air.json
 2e209fa76a738ef1d22af6817df1419142cc743a assets/pastel/blockstates/abyssal_vines.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_head.json
@@ -3252,7 +3252,7 @@ da6258ea1623e782f4d8b882e000d69da298d604 assets/pastel/models/item/chestnut_noxw
 03e7d69300dd685f0d1f2560cc6fe0a5c1a2d929 assets/pastel/models/item/chestnut_noxwood_door.json
 3b00374ae38b49a4ff6789558fe651b5e2657856 assets/pastel/models/item/chestnut_noxwood_fence.json
 db40fcd185bc9950972b6fabd4fd896ee7e3be65 assets/pastel/models/item/chestnut_noxwood_fence_gate.json
-42de1bfbc4f3380095a4b4bcd655526572645841 assets/pastel/models/item/chestnut_noxwood_lamp.json
+90a7dd56770ee2d163ebaaa157780e4548461694 assets/pastel/models/item/chestnut_noxwood_lamp.json
 b21a36d4151ac35f777ddb1a3c49e0cc3cec2072 assets/pastel/models/item/chestnut_noxwood_lantern.json
 0407cdab849449d0584b4234defe03f8d9e0d873 assets/pastel/models/item/chestnut_noxwood_light.json
 f2386d019caf338bf19a1b576310958ef7fa1c3c assets/pastel/models/item/chestnut_noxwood_pillar.json
@@ -3394,7 +3394,7 @@ ad8d159a9c75c2c357d31297e0b002042bf2e2be assets/pastel/models/item/ebony_noxcap_
 d85f95541ef492fff75f498873ab8fb0efe16309 assets/pastel/models/item/ebony_noxwood_door.json
 77b9dac0bdb08e32d0448819bf3ef8ac1a4aeca0 assets/pastel/models/item/ebony_noxwood_fence.json
 0c30a50761bae27c9d9e8b963599dd374113c4c8 assets/pastel/models/item/ebony_noxwood_fence_gate.json
-af5884cfb19d1dfa596753066b4ef81a46b4ce5b assets/pastel/models/item/ebony_noxwood_lamp.json
+8d5004bedde9ef0404231a5f7a54152672e2c1b5 assets/pastel/models/item/ebony_noxwood_lamp.json
 a74424a898e469d684666b94115167ee6a6d2a92 assets/pastel/models/item/ebony_noxwood_lantern.json
 e4dbaf42062abc6e23d431afa5986ae51fe7e6e3 assets/pastel/models/item/ebony_noxwood_light.json
 6875b86077da4c9a89e17e1772e38928f2a3c5ae assets/pastel/models/item/ebony_noxwood_pillar.json
@@ -3454,6 +3454,7 @@ e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/fish_idol.jso
 3c7e63e6627f6663d463ec5564edb163337f705d assets/pastel/models/item/fishcake.json
 941196fab90057240a6116699802525db24ab7b2 assets/pastel/models/item/fissure_plum.json
 d3550222ab23beba85fdbe80865cbcf9f41fde4a assets/pastel/models/item/flayed_earth.json
+8b69b4b41fe2bd3e40f371624c793e03aadbd037 assets/pastel/models/item/fluix_cluster.json
 834f4b2a62193d0bfbee973fe252ebe266036b3c assets/pastel/models/item/four_leaf_clover.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/fox_arctic_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/fox_head.json
@@ -3571,7 +3572,7 @@ bc1d5a09f82dcb74a0bad8091d3efb65b9a9e507 assets/pastel/models/item/ivory_noxshro
 25565cb60e4aa0f90fa00987145b5647ad10b83a assets/pastel/models/item/ivory_noxwood_door.json
 b84ff010e0fbd8fd1db1e3d75e80e0277478d1fd assets/pastel/models/item/ivory_noxwood_fence.json
 79fed443efc94acf2743483368618f784c4f8215 assets/pastel/models/item/ivory_noxwood_fence_gate.json
-ab72d2761859ac76cb05f0324b6b9e1195613863 assets/pastel/models/item/ivory_noxwood_lamp.json
+8816485775f5e18af519397dc7deaa3794d1aff7 assets/pastel/models/item/ivory_noxwood_lamp.json
 f7d52631fcf04dc7bf44a0512f3931756e19478b assets/pastel/models/item/ivory_noxwood_lantern.json
 3528f298324068a80684c562ae189c967fa3caeb assets/pastel/models/item/ivory_noxwood_light.json
 49f641cab32acd6ecf7d4e68df3445f3d333db4b assets/pastel/models/item/ivory_noxwood_pillar.json
@@ -3610,7 +3611,7 @@ f50b594684931060d061d9c6e0e75138224d3d66 assets/pastel/models/item/large_citrine
 5610429122369740ecd39a5de420a0c15aa5b076 assets/pastel/models/item/large_diamond_bud.json
 ec3739bd8b2535f6c4e53757a89ffa33b198bd02 assets/pastel/models/item/large_echo_bud.json
 b68ce00bd44bfa1aeb8e43c1531218972a9b380b assets/pastel/models/item/large_emerald_bud.json
-9fac8c74881166ceaf8c0f877a0f86c9349532d9 assets/pastel/models/item/large_fluix_bud.json
+287c8a58ac417f0642fa1b6919ebe41f3a622f11 assets/pastel/models/item/large_fluix_bud.json
 a98401542f065c619b38606a1ba80ff8cd34981c assets/pastel/models/item/large_glowstone_bud.json
 7fdfd371b294487a0e209ed60702bd51531b5c8e assets/pastel/models/item/large_gold_bud.json
 3c2c0571be2695c30735ac7179ad993e3668235a assets/pastel/models/item/large_iron_bud.json
@@ -3623,7 +3624,7 @@ a24e395dc91adf13ec61942d58ec3eda61e9b95d assets/pastel/models/item/large_onyx_bu
 d955fbd4dadf2820219ea08e8759557dfce083a2 assets/pastel/models/item/large_quartz_bud.json
 e1cdc46baa85049f3905e78dd82de6983edcd70c assets/pastel/models/item/large_redstone_bud.json
 c9f109c26ac93d4deafd775cc18c886cd51fb4b4 assets/pastel/models/item/large_topaz_bud.json
-80b8b36ca03b054563ee678c6cc1f41360066475 assets/pastel/models/item/large_zinc_bud.json
+4f92cacea45bc1f63b34e9ea3b35caae1e112f19 assets/pastel/models/item/large_zinc_bud.json
 2949fd05d694b1092b08cad3d77657d0588390c5 assets/pastel/models/item/laurels_of_serenity.json
 a0663fb8c8ad58e074386913305de49c887358d1 assets/pastel/models/item/lava_sponge.json
 4cf66a7cfb4efe052fd3f6c911e446d0d76f6516 assets/pastel/models/item/le_fishe_au_chocolat.json
@@ -3985,6 +3986,7 @@ ba9dff63d7ee8e4373ff71799681ef873ad100bd assets/pastel/models/item/pure_prismari
 0055c598bb848f286f1b2a200c327542dc333d06 assets/pastel/models/item/pure_quartz_block.json
 166b59bfc1c774cae422a6bbf92a8d93407a9436 assets/pastel/models/item/pure_redstone.json
 f44803241c9de4abeec31cd0b24008b7daa5c819 assets/pastel/models/item/pure_redstone_block.json
+30616ae69a0d55780f84b6c64b19cd684a339557 assets/pastel/models/item/pure_zinc.json
 e6e3052d21763c93d9e6240576bc481c40480c67 assets/pastel/models/item/pure_zinc_block.json
 61589e7db47324728d3f448d77cc847847f4b77b assets/pastel/models/item/purple_block.json
 35c0e6ab3dfc7887d9483061c42e7167f1a4b928 assets/pastel/models/item/purple_button.json
@@ -4125,7 +4127,7 @@ de9b5957fa70a2def88caa4dd6c694ce9101436c assets/pastel/models/item/slate_noxwood
 30c4a8a9ac77d2121f46ec17468e9cd8dc2dd74d assets/pastel/models/item/slate_noxwood_door.json
 3a7d4f992457fbc61653e1f60ab32f11e87c7cb4 assets/pastel/models/item/slate_noxwood_fence.json
 46a6c886df56db30d85f47c9bcb46f20fef806d3 assets/pastel/models/item/slate_noxwood_fence_gate.json
-6223ab59daeac62b0f074d7922018a4e35edad89 assets/pastel/models/item/slate_noxwood_lamp.json
+177452a620bf93eee6bfd6688600047a13a7a872 assets/pastel/models/item/slate_noxwood_lamp.json
 a3430070645621dae8966499a79a5918c7361c41 assets/pastel/models/item/slate_noxwood_lantern.json
 b4e3fd9b26a35c864e4abbe77fc720517297b4ed assets/pastel/models/item/slate_noxwood_light.json
 fed15ad54252fc75a291f5e1f059452b31f14a7d assets/pastel/models/item/slate_noxwood_pillar.json
@@ -4148,7 +4150,7 @@ a66188b36b5385261f1957eed0655127057d2960 assets/pastel/models/item/small_bloodst
 ee46281736af1a122daa2b50234281a71883dd0c assets/pastel/models/item/small_diamond_bud.json
 66efdd3eac452d026763cf682d07fe14d209e448 assets/pastel/models/item/small_echo_bud.json
 b7d09fd8727d8ee37322889c4fa26d00fa046422 assets/pastel/models/item/small_emerald_bud.json
-b56dbf71a6ca10c4b911545dd47c52ce43a794fa assets/pastel/models/item/small_fluix_bud.json
+59ad6b10a156954a2043c6621b2aa23c95fc1e63 assets/pastel/models/item/small_fluix_bud.json
 6489588ee9af42a923a3ca97fd0539a1b021f74f assets/pastel/models/item/small_glowstone_bud.json
 41790860870745dac01b3aa51690d1d459a86d31 assets/pastel/models/item/small_gold_bud.json
 68470292266da276f59bac9d3a4550055fa959c8 assets/pastel/models/item/small_iron_bud.json
@@ -4165,7 +4167,7 @@ d731e87218660f575597c4a4edb6f18992df533f assets/pastel/models/item/small_prismar
 397a4e5f96c39c34b0a2a8c25ca444ba6536dc45 assets/pastel/models/item/small_redstone_bud.json
 a7cb47393c21b9042b932c9234e12077a948b568 assets/pastel/models/item/small_topaz_bud.json
 6505051fe312e3485d6b49908180b0c511e2b7b9 assets/pastel/models/item/small_yellow_dragonjag.json
-a105f4591412f5fcfcf3fe7e222f1d8864d87454 assets/pastel/models/item/small_zinc_bud.json
+a8d0be01a0b053225a2365707f0128c480cd50b2 assets/pastel/models/item/small_zinc_bud.json
 639a632addb83e0420c38cbf8e6ce18fde3d1031 assets/pastel/models/item/smooth_basalt_slab.json
 0a8eb41b7ac14ea81f8a1738a77fffc9a5906cd1 assets/pastel/models/item/smooth_basalt_stairs.json
 44ee15c4124c8ee976c3ea93e7fa8a5723629214 assets/pastel/models/item/smooth_basalt_wall.json
@@ -4307,7 +4309,7 @@ cd74fbca832d9b3eb24e477c20ca7809bd9205a1 assets/pastel/models/item/weeping_gala_
 fccca3c71f30bd329b93c8bdfc79b4e7d5aee991 assets/pastel/models/item/weeping_gala_door.json
 90c26e2f3c64d9a9e049b3a574162ce88cd977cf assets/pastel/models/item/weeping_gala_fence.json
 f4bd0a58e4f6ba309cc85a630aaf8fa1fdf624c3 assets/pastel/models/item/weeping_gala_fence_gate.json
-690f89ddbae6cb39abf26e7570266508da5d2696 assets/pastel/models/item/weeping_gala_lamp.json
+9a2b19700f98179cb161f10f5a8b26ca7311d148 assets/pastel/models/item/weeping_gala_lamp.json
 12b15ecb1ccee4af8728e7cf99fcdedeec0591e2 assets/pastel/models/item/weeping_gala_lantern.json
 4ed954efd02bee7b6895e6e1e4624e10b051ea50 assets/pastel/models/item/weeping_gala_leaves.json
 87545d0cbd76ed08c672f4d569b0a9a5a213d583 assets/pastel/models/item/weeping_gala_light.json
@@ -4366,6 +4368,7 @@ a112b438d636fbbc03a85bd92e9e2f371e1b1689 assets/pastel/models/item/yellow_planks
 9aec206599825299cb28de31264fe97039f0cd23 assets/pastel/models/item/yellow_spore_blossom.json
 e24265061b18b164b447532ab35c02c9564e0a11 assets/pastel/models/item/yellow_stairs.json
 6901f28b39eb08314d73692fdcacbc5aeb21f670 assets/pastel/models/item/yellow_wood.json
+a5742e8b3ee55c0e642208e7d3ee56570991ce98 assets/pastel/models/item/zinc_cluster.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/zoglin_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/zombie_horse_head.json
 e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/zombie_idol.json

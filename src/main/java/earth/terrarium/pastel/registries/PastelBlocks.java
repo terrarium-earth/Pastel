@@ -1910,7 +1910,7 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> SHIMMERSTONE_LIGHT = register(block(
         "shimmerstone_light", () -> new WandLightBlock(
             Properties.ofFullCopy(LIGHT)
-                      .sound(PastelBlockSoundGroups.WAND_LIGHT)
+                      .sound(PastelBlockSoundGroups.SHIMMERSTONE_LIGHT)
                       .instabreak())
     ));
     public static final DeferredBlock<Block> TEMPORAL_SHIMMERSTONE_LIGHT = register(block(

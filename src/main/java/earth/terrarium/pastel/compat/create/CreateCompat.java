@@ -43,6 +43,9 @@ public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
     }
 
     public static void generateItemModels(ItemModelGenerators generators){
+        PastelModelHelper.ITEM.cluster(generators, SMALL_ZINC_BUD, PastelClusterBlock.GrowthStage.SMALL);
+        PastelModelHelper.ITEM.cluster(generators, LARGE_ZINC_BUD, PastelClusterBlock.GrowthStage.LARGE);
+        PastelModelHelper.ITEM.cluster(generators, ZINC_CLUSTER, PastelClusterBlock.GrowthStage.CLUSTER);
         PastelModelHelper.ITEM.simple(generators,PURE_ZINC);
     }
     public static DeferredBlock<Block> SMALL_ZINC_BUD = PastelBlocks.register(blockWithItem(

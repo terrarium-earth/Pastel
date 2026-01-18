@@ -7,6 +7,7 @@ import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.client.PastelModels;
 import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -24,6 +25,12 @@ public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
         PastelModelHelper.BLOCK.cluster(generators, LARGE_FLUIX_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
         PastelModelHelper.BLOCK.cluster(generators, FLUIX_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
         PastelModelHelper.BLOCK.predefinedItemModel(generators, FLUIX_CLUSTER);
+    }
+
+    public static void generateItemModels(ItemModelGenerators generators){
+        PastelModelHelper.ITEM.cluster(generators, SMALL_FLUIX_BUD, PastelClusterBlock.GrowthStage.SMALL);
+        PastelModelHelper.ITEM.cluster(generators, LARGE_FLUIX_BUD, PastelClusterBlock.GrowthStage.LARGE);
+        PastelModelHelper.ITEM.cluster(generators, FLUIX_CLUSTER, PastelClusterBlock.GrowthStage.CLUSTER);
     }
 
     public static DeferredBlock<Block> SMALL_FLUIX_BUD = PastelBlocks.register(blockWithItem(

@@ -1,5 +1,8 @@
 package earth.terrarium.pastel.data.models;
 
+import earth.terrarium.pastel.compat.PastelIntegrationPacks;
+import earth.terrarium.pastel.compat.ae2.AE2Compat;
+import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.data.models.item.*;
 import net.minecraft.data.models.ItemModelGenerators;
 
@@ -14,5 +17,8 @@ public class PastelItemModels {
         TechnicalItemModels.generateItemModels(generators);
         ToolItemModels.generateItemModels(generators);
         VanillaItemGroupItemModels.generateItemModels(generators);
+
+        if(PastelIntegrationPacks.isIntegrationPackActive("ae2")) AE2Compat.generateItemModels(generators);
+        if(PastelIntegrationPacks.isIntegrationPackActive("create")) CreateCompat.generateItemModels(generators);
     }
 }

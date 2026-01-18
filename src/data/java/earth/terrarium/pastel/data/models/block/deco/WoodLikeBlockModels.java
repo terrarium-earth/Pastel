@@ -380,5 +380,11 @@ public class WoodLikeBlockModels {
         PastelModelHelper.registerItemModel(generators, PastelBlocks.CHESTNUT_NOXWOOD_LANTERN.asItem(), "_item");
 
         PastelModelHelper.registerItemModel(generators, PastelBlocks.WEEPING_GALA_LANTERN.asItem(), "_item");
+
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.WEEPING_GALA_LAMP,PastelBlocks.WEEPING_GALA_LAMP.get(),"_off");
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.SLATE_NOXWOOD_LAMP,PastelBlocks.SLATE_NOXWOOD_LAMP.get(),"_off");
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.EBONY_NOXWOOD_LAMP,PastelBlocks.EBONY_NOXWOOD_LAMP.get(),"_off");
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.IVORY_NOXWOOD_LAMP,PastelBlocks.IVORY_NOXWOOD_LAMP.get(),"_off");
+        PastelModelHelper.registerParentedItemModel(generators,PastelBlocks.CHESTNUT_NOXWOOD_LAMP,PastelBlocks.CHESTNUT_NOXWOOD_LAMP.get(),"_off");
     }
 }

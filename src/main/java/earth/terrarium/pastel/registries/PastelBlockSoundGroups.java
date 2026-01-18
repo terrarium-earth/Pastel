@@ -118,7 +118,7 @@ public class PastelBlockSoundGroups {
         PastelSounds.SPECTRAL_BLOCK_PLACE, PastelSounds.SPECTRAL_BLOCK_HIT,
         PastelSounds.SPECTRAL_BLOCK_FALL
     );
-    public static final SoundType WAND_LIGHT = new SoundType(
+    public static final SoundType SHIMMERSTONE_LIGHT = new SoundType(
         1.0F, 1.0F, PastelSounds.RADIANCE_STAFF_BREAK, SoundEvents.AMETHYST_CLUSTER_STEP,
         PastelSounds.RADIANCE_STAFF_PLACE, PastelSounds.RADIANCE_STAFF_BREAK,
         PastelSounds.RADIANCE_STAFF_BREAK
