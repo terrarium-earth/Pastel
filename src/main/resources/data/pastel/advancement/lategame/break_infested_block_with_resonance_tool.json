@@ -1,5 +1,5 @@
 {
-  "parent": "pastel:lategame/craft_resonant_pickaxe",
+  "parent": "pastel:lategame/craft_resonant_tool",
   "display": {
     "icon": {
       "id": "minecraft:infested_cracked_stone_bricks"
@@ -45,7 +45,7 @@
     "gotten_previous": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:lategame/craft_resonant_pickaxe"
+        "advancement": "pastel:lategame/craft_resonant_tool"
       }
     }
   }
