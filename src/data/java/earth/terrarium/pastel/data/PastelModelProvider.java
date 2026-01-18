@@ -1,6 +1,8 @@
 package earth.terrarium.pastel.data;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.data.models.PastelBlockModels;
+import earth.terrarium.pastel.data.models.PastelItemModels;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
@@ -13,11 +15,12 @@ public class PastelModelProvider extends AbstractModelProvider{
 
     @Override
     protected void generateBlockModels(BlockModelGenerators generators) {
-        PastelModelHelper.BLOCK_STATE_MODEL_REGISTRAR.flush(generators);
+        PastelBlockModels.generateBlockModels(generators);
     }
 
     @Override
     protected void generateItemModels(ItemModelGenerators generators) {
-        PastelModelHelper.ITEM_MODEL_REGISTRAR.flush(generators);
+        PastelBlockModels.generateItemModels(generators);
+        PastelItemModels.generateItemModels(generators);
     }
 }

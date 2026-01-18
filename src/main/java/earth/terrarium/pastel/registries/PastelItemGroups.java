@@ -4,7 +4,6 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.Preenchanted;
-import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
@@ -26,14 +25,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import javax.print.attribute.standard.MediaSize;
 import java.util.List;
 import java.util.Map;
 
@@ -1977,11 +1974,11 @@ public class PastelItemGroups {
                                                                         entries.accept(PastelBlocks.PYRITE_PILE.get());
                                                                         entries.accept(PastelBlocks.PYRITE_TILES.get());
                                                                         entries.accept(
-                                                                            PastelBlocks.PYRITE_TILES_SLAB.get());
+                                                                            PastelBlocks.PYRITE_TILE_SLAB.get());
                                                                         entries.accept(
-                                                                            PastelBlocks.PYRITE_TILES_STAIRS.get());
+                                                                            PastelBlocks.PYRITE_TILE_STAIRS.get());
                                                                         entries.accept(
-                                                                            PastelBlocks.PYRITE_TILES_WALL.get());
+                                                                            PastelBlocks.PYRITE_TILE_WALL.get());
                                                                         entries.accept(
                                                                             PastelBlocks.PYRITE_PLATING.get());
                                                                         entries.accept(

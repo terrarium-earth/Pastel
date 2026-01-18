@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "pastel:block/pyrite_tiles_slab"
+      "model": "pastel:block/pyrite_tile_slab"
     },
     "type=double": {
       "model": "pastel:block/pyrite_tiles"
     },
     "type=top": {
-      "model": "pastel:block/pyrite_tiles_slab_top"
+      "model": "pastel:block/pyrite_tile_slab_top"
     }
   }
 }
