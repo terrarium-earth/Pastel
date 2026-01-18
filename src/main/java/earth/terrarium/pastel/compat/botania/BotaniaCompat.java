@@ -4,7 +4,9 @@ import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
+import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelItems;
+import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -21,15 +23,18 @@ import vazkii.botania.common.item.BlackHoleTalismanItem;
 import vazkii.botania.common.item.BotaniaItems;
 
 import static earth.terrarium.pastel.registries.PastelItems.item;
-import static earth.terrarium.pastel.registries.PastelItems.simple;
 
 @SuppressWarnings("unused")
 public class BotaniaCompat extends PastelIntegrationPacks.ModIntegrationPack {
+    public static void generateItemModels(ItemModelGenerators generators){
+        PastelModelHelper.ITEM.simple(generators,LEAST_BLACK_LOTUS);
+        PastelModelHelper.ITEM.simple(generators,BLACKEST_LOTUS);
+    }
 
     public static DeferredItem<Item> LEAST_BLACK_LOTUS = PastelItems.register(
-        simple(item("least_black_lotus", () -> new LeastBlackLotusItem(new Item.Properties()), InkColors.BLACK)));
+        item("least_black_lotus", () -> new LeastBlackLotusItem(new Item.Properties()), InkColors.BLACK));
     public static DeferredItem<Item> BLACKEST_LOTUS = PastelItems.register(
-        simple(item("blackest_lotus", () -> new BlackestLotusItem(new Item.Properties()), InkColors.BLACK)));
+        item("blackest_lotus", () -> new BlackestLotusItem(new Item.Properties()), InkColors.BLACK));
 
     private static void onServerStarted(ServerStartedEvent event) {
         ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.overgrowthSeed, InkColors.LIME);

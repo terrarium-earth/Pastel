@@ -1,3 +1,6 @@
 {
-  "parent": "pastel:block/abyssal_vines"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/fissure_plum"
+  }
 }

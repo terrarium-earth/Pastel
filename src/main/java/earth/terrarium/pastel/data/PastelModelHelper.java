@@ -4,7 +4,6 @@ import com.google.gson.JsonElement;
 import earth.terrarium.pastel.blocks.decoration.CardinalFacingBlock;
 import earth.terrarium.pastel.blocks.decoration.PylonBlock;
 import earth.terrarium.pastel.blocks.idols.IdolBlock;
-import earth.terrarium.pastel.registries.DeferredRegistrar;
 import earth.terrarium.pastel.registries.client.PastelModels;
 import earth.terrarium.pastel.registries.client.PastelTextureKeys;
 import earth.terrarium.pastel.registries.client.PastelTextureMaps;
@@ -33,6 +32,7 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,9 +41,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+import static net.minecraft.world.item.Items.CREEPER_BANNER_PATTERN;
+
 public class PastelModelHelper {
-    public static final DeferredRegistrar.Contextual<ItemModelGenerators> ITEM_MODEL_REGISTRAR
-        = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
     // Item Models
 
     public static void registerItemModel(ItemModelGenerators ctx, Item item) {
@@ -693,830 +693,839 @@ public class PastelModelHelper {
         };
     }
 
-//
-//		public BlockRegistrar<T> withBlockModel(BiFunction<BlockModelGenerators, Block, BlockStateGenerator>
-//		callback) {
-//			PastelModelHelper.BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-//				Objects.requireNonNull(holder);
-//				ctx.blockStateOutput.accept(callback.apply(ctx, holder.get()));
-//			});
-//			return this;
-//		}
-//
-//		public BlockRegistrar<T> withBlockItemModel(BiConsumer<ItemModelGenerators, ? super T> callback) {
-//			PastelModelHelper.ITEM_MODEL_REGISTRAR.defer(ctx -> {
-//				if (hasItem) {
-//					Objects.requireNonNull(holder);
-//					callback.accept(ctx, (T) holder.get());
-//				}
-//			});
-//			return this;
-//		}
-//
-//		public BlockRegistrar<T> withItemModel(BiConsumer<ItemModelGenerators, Item> callback) {
-//			PastelModelHelper.ITEM_MODEL_REGISTRAR.defer(ctx -> {
-//				if (hasItem) {
-//					Objects.requireNonNull(holder);
-//					callback.accept(ctx, holder.asItem());
-//				}
-//			});
-//			return this;
-//		}
-//
+    public static class BLOCK {
 
-    public static void predefinedItemModel(BlockModelGenerators generators,DeferredBlock<Block> block){
-        generators.skipAutoItemBlock(block.get());
-    }
-    // imported helpers from PastelBlocks
-    public static void cutout(DeferredBlock<Block> block) {
-        ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.CUTOUT);
-    }
+        public static void predefinedItemModel(BlockModelGenerators generators,DeferredBlock<Block> block){
+            generators.skipAutoItemBlock(block.get());
+        }
 
-    public static void mippedCutout(DeferredBlock<Block> block) {
-        ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.CUTOUT_MIPPED);
-    }
+        public static void cutout(DeferredBlock<Block> block) {
+            ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.CUTOUT);
+        }
 
-    public static void translucent(DeferredBlock<Block> block) {
-        ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.TRANSLUCENT);
-    }
+        public static void mippedCutout(DeferredBlock<Block> block) {
+            ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.CUTOUT_MIPPED);
+        }
 
-    public static void simple(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        singleton(generators, block, TexturedModel.CUBE);
-    }
+        public static void translucent(DeferredBlock<Block> block) {
+            ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.TRANSLUCENT);
+        }
 
-    @SafeVarargs
-    public static void simple(BlockModelGenerators generators, DeferredBlock<Block>... blocks) {
-        for (DeferredBlock<Block> block : blocks) {
-            simple(generators, block);
+        public static void simple(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            singleton(generators, block, TexturedModel.CUBE);
+        }
+
+        @SafeVarargs
+        public static void simple(BlockModelGenerators generators, DeferredBlock<Block>... blocks) {
+            for (DeferredBlock<Block> block : blocks) {
+                simple(generators, block);
+            }
+        }
+
+        public static void simpleMirrored(
+            BlockModelGenerators generators, DeferredBlock<Block> block) {
+            generators.blockStateOutput.accept(PastelModelHelper.createMirroredVariantsSupplier(
+                block.get(), TexturedModel.CUBE, TexturedModel.CUBE_MIRRORED, generators.modelOutput));
+        }
+
+        public static void singleton(
+            BlockModelGenerators generators, DeferredBlock<Block> block, TexturedModel.Provider factory) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block.get(), factory.create(block.get(), generators.modelOutput)));
+        }
+
+        public static void singletonWithSoup(
+            BlockModelGenerators generators, DeferredBlock<Block> block,
+            Function<Block, ResourceLocation> modelIdSupplier
+        ) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block.get(), modelIdSupplier.apply(block.get())));
+        }
+
+        public static void parented(BlockModelGenerators generators, Block block, Block parent) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block, ModelLocationUtils.getModelLocation(parent)));
+        }
+
+        public static void axisRotated(
+            BlockModelGenerators generators, DeferredBlock<Block> block, TexturedModel.Provider factory) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block.get(), factory.create(block.get(), generators.modelOutput))
+                                 .with(PastelModelHelper.createAxisRotatedVariantMap()));
+        }
+
+        public static void defaultUpFacing(
+            BlockModelGenerators generators, DeferredBlock<Block> block, TexturedModel.Provider factory) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block.get(), factory.create(block.get(), generators.modelOutput))
+                                 .with(PastelModelHelper.createUpDefaultFacingVariantMap()));
+        }
+
+        public static void defaultUpFacingGetter(
+            BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
+            PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
+                             .with(PastelModelHelper.createUpDefaultFacingVariantMap());
+        }
+
+        public static void defaultNorthHorizontalFacing(
+            BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
+                                 .with(PastelModelHelper.createNorthDefaultHorizontalFacingVariantMap()));
+        }
+
+        public static void defaultSouthHorizontalFacing(
+            BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
+                                 .with(PastelModelHelper.createSouthDefaultHorizontalFacingVariantMap()));
+        }
+
+        public static void defaultWestHorizontalFacing(
+            BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
+                                 .with(PastelModelHelper.createWestDefaultHorizontalFacingVariantMap()));
+        }
+
+        public static void defaultEastHorizontalFacing(
+            BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
+                                 .with(PastelModelHelper.createEastDefaultHorizontalFacingVariantMap()));
+        }
+
+        public static void cross(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            generators.blockStateOutput.accept(PastelModelHelper.createVariantsSupplier(
+                block.get(), PastelTexturedModels.cross(b -> b, "")
+                                                 .create(
+                                                     block.get(),
+                                                     generators.modelOutput
+                                                 )
+            ));
+
+        }
+
+        public static void simplePlant(ItemModelGenerators generators, DeferredBlock<Block> block) {
+            PastelModelHelper.registerBlockTexturedItemModel(generators, block.get());
+        }
+
+        public static void pottedPlant(
+            BlockModelGenerators generators, DeferredBlock<Block> block, boolean tinted) {
+            generators.blockStateOutput.accept(
+                PastelModelHelper.pottedPlantBlockModel(generators, (FlowerPotBlock) block.get(), tinted));
+        }
+
+        public static void log(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            generators.blockStateOutput.accept(PastelModelHelper.logBlockModel(generators, block.get()));
+        }
+
+        public static void wood(
+            BlockModelGenerators generators, DeferredBlock<Block> block, DeferredBlock<Block> logBlock) {
+            generators.blockStateOutput.accept(PastelModelHelper.woodBlockModel(generators, block.get(), logBlock.get()));
+        }
+
+        public static void snowy(
+            BlockModelGenerators generators, DeferredBlock<Block> block, TexturedModel.Provider base,
+            TexturedModel.Provider snowy
+        ) {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
+                                                                    .with(PropertyDispatch.property(
+                                                                                              BlockStateProperties.SNOWY)
+                                                                                          .select(
+                                                                                              false,
+                                                                                              PastelModelHelper.createHorizontalRotationVariantList(
+                                                                                                  base.create(
+                                                                                                      block.get(),
+                                                                                                      generators.modelOutput
+                                                                                                  ))
+                                                                                          )
+                                                                                          .select(
+                                                                                              true,
+                                                                                              PastelModelHelper.createHorizontalRotationVariantList(
+                                                                                                  snowy.createWithSuffix(
+                                                                                                      block.get(), "_snow",
+                                                                                                      generators.modelOutput
+                                                                                                  ))
+                                                                                          )));
+        }
+
+        public static void redstoneLamp(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            ResourceLocation off = PastelTexturedModels.cubeAll(b -> b, "_off")
+                                                       .createWithSuffix(block.get(), "_off", generators.modelOutput);
+            ResourceLocation on = PastelTexturedModels.cubeAll(b -> b, "_on")
+                                                      .createWithSuffix(block.get(), "_on", generators.modelOutput);
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
+                                                                    .with(PastelModelHelper.createBooleanModelMap(
+                                                                        BlockStateProperties.LIT, on, off)));
+        }
+
+        public static void barrellike(
+            BlockModelGenerators generators, DeferredBlock<Block> block, UnaryOperator<Block> bottomBlock,
+            String bottomSuffix
+        ) {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
+                                                                    .with(
+                                                                        PastelModelHelper.createUpDefaultFacingVariantMap())
+                                                                    .with(PastelModelHelper.createBooleanModelMap(
+                                                                        BlockStateProperties.OPEN,
+                                                                        PastelTexturedModels.cubeBottomTop(
+                                                                                                b -> b, "_side", b -> b,
+                                                                                                "_top_open",
+                                                                                                bottomBlock, bottomSuffix
+                                                                                            )
+                                                                                            .createWithSuffix(
+                                                                                                block.get(), "_open",
+                                                                                                generators.modelOutput
+                                                                                            ),
+                                                                        PastelTexturedModels.cubeBottomTop(
+                                                                                                b -> b, "_side", b -> b,
+                                                                                                "_top", bottomBlock,
+                                                                                                bottomSuffix
+                                                                                            )
+                                                                                            .create(
+                                                                                                block.get(),
+                                                                                                generators.modelOutput
+                                                                                            )
+                                                                    )));
+        }
+
+        public static void idol(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
+                                                                    .with(PastelModelHelper.createBooleanModelMap(
+                                                                        IdolBlock.COOLDOWN, PastelModels.MOB_BLOCK,
+                                                                        PastelModels.MOB_BLOCK_COOLDOWN
+                                                                    )));
+        }
+
+        public static void pedestal(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            singleton(
+                generators, block, TexturedModel.createDefault(
+                    b -> new TextureMapping().put(PastelTextureKeys.PEDESTAL, TextureMapping.getBlockTexture(b))
+                                             .put(
+                                                 TextureSlot.PARTICLE, TextureMapping.getBlockTexture(b, "_particle")),
+                    PastelModels.PEDESTAL
+                )
+            );
+        }
+
+        public static void detector(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
+                                                                    .with(PastelModelHelper.createBooleanModelMap(
+                                                                        BlockStateProperties.INVERTED,
+                                                                        PastelModels.SLAB_DETECTOR.createWithSuffix(
+                                                                            block.get(), "_inverted",
+                                                                            PastelTextureMaps.sideTop(
+                                                                                block.get(), "_side", block.get(),
+                                                                                "_inverted_top"
+                                                                            ), generators.modelOutput
+                                                                        ), PastelModels.SLAB_DETECTOR.create(
+                                                                            block.get(), PastelTextureMaps.sideTop(
+                                                                                block.get(), "_side", block.get(), "_top"),
+                                                                            generators.modelOutput
+                                                                        )
+                                                                    )));
+        }
+
+        public static void orientable(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            ResourceLocation horizontal = ModelTemplates.CUBE_ORIENTABLE.create(
+                block.get(), new TextureMapping().put(TextureSlot.TOP, TextureMapping.getBlockTexture(block.get(), "_top"))
+                                                 .put(
+                                                     TextureSlot.SIDE, TextureMapping.getBlockTexture(
+                                                         block.get(), "_side")
+                                                 )
+                                                 .put(
+                                                     TextureSlot.FRONT, TextureMapping.getBlockTexture(
+                                                         block.get(), "_front")
+                                                 ), generators.modelOutput
+            );
+            ResourceLocation vertical = ModelTemplates.CUBE_ORIENTABLE_VERTICAL.create(
+                block.get(), new TextureMapping().put(
+                                                     TextureSlot.SIDE, TextureMapping.getBlockTexture(block.get(), "_top"))
+                                                 .put(
+                                                     TextureSlot.FRONT, TextureMapping.getBlockTexture(
+                                                         block.get(), "_front_vertical")
+                                                 ), generators.modelOutput
+            );
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
+                                                                    .with(PropertyDispatch.property(
+                                                                                              BlockStateProperties.FACING)
+                                                                                          .select(
+                                                                                              Direction.DOWN,
+                                                                                              PastelModelHelper.createModelVariant(
+                                                                                                                   vertical)
+                                                                                                               .with(
+                                                                                                                   VariantProperties.X_ROT,
+                                                                                                                   VariantProperties.Rotation.R180
+                                                                                                               )
+                                                                                          )
+                                                                                          .select(
+                                                                                              Direction.UP,
+                                                                                              PastelModelHelper.createModelVariant(
+                                                                                                  vertical)
+                                                                                          )
+                                                                                          .select(
+                                                                                              Direction.NORTH,
+                                                                                              PastelModelHelper.createModelVariant(
+                                                                                                  horizontal)
+                                                                                          )
+                                                                                          .select(
+                                                                                              Direction.EAST,
+                                                                                              PastelModelHelper.createModelVariant(
+                                                                                                                   horizontal)
+                                                                                                               .with(
+                                                                                                                   VariantProperties.Y_ROT,
+                                                                                                                   VariantProperties.Rotation.R90
+                                                                                                               )
+                                                                                          )
+                                                                                          .select(
+                                                                                              Direction.SOUTH,
+                                                                                              PastelModelHelper.createModelVariant(
+                                                                                                                   horizontal)
+                                                                                                               .with(
+                                                                                                                   VariantProperties.Y_ROT,
+                                                                                                                   VariantProperties.Rotation.R180
+                                                                                                               )
+                                                                                          )
+                                                                                          .select(
+                                                                                              Direction.WEST,
+                                                                                              PastelModelHelper.createModelVariant(
+                                                                                                                   horizontal)
+                                                                                                               .with(
+                                                                                                                   VariantProperties.Y_ROT,
+                                                                                                                   VariantProperties.Rotation.R270
+                                                                                                               )
+                                                                                          )));
+        }
+
+        public static void pylon(BlockModelGenerators generators, DeferredBlock<Block> block) {
+            ResourceLocation head = ModelLocationUtils.getModelLocation(block.get(), "_head");
+            ResourceLocation body = ModelLocationUtils.getModelLocation(block.get(), "_body");
+            ResourceLocation waist = ModelLocationUtils.getModelLocation(block.get(), "_waist");
+            ResourceLocation foot = ModelLocationUtils.getModelLocation(block.get(), "_foot");
+            ResourceLocation end = ModelLocationUtils.getModelLocation(block.get(), "_end");
+            ResourceLocation pedestal = PastelModels.BALCITE_PYLON_PEDESTAL;
+            PastelModels.BASE_PYLON_BODY.create(head, PastelTextureMaps.sideEnd(head, end), generators.modelOutput);
+            PastelModels.BASE_PYLON_BODY.create(body, PastelTextureMaps.sideEnd(body, end), generators.modelOutput);
+            PastelModels.BASE_PYLON_BODY.create(waist, PastelTextureMaps.sideEnd(waist, end), generators.modelOutput);
+            PastelModels.BASE_PYLON_BODY.create(foot, PastelTextureMaps.sideEnd(foot, end), generators.modelOutput);
+            generators.blockStateOutput.accept(MultiPartGenerator.multiPart(block.get())
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.DOWN
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.HEAD
+                                                                              ), PastelModelHelper.createModelVariant(head)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R180
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.DOWN
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.BODY
+                                                                              ), PastelModelHelper.createModelVariant(body)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R180
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.DOWN
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.WAIST
+                                                                              ), PastelModelHelper.createModelVariant(waist)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R180
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.DOWN
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.FOOT
+                                                                              ), PastelModelHelper.createModelVariant(foot)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R180
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.DOWN
+                                                                              )
+                                                                              .term(PylonBlock.PEDESTAL, true),
+                                                                     PastelModelHelper.createModelVariant(pedestal)
+                                                                                      .with(
+                                                                                          VariantProperties.X_ROT,
+                                                                                          VariantProperties.Rotation.R180
+                                                                                      )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING, Direction.UP)
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.HEAD
+                                                                              ), PastelModelHelper.createModelVariant(head)
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING, Direction.UP)
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.BODY
+                                                                              ), PastelModelHelper.createModelVariant(body)
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING, Direction.UP)
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.WAIST
+                                                                              ), PastelModelHelper.createModelVariant(waist)
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING, Direction.UP)
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.FOOT
+                                                                              ), PastelModelHelper.createModelVariant(foot)
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING, Direction.UP)
+                                                                              .term(PylonBlock.PEDESTAL, true),
+                                                                     PastelModelHelper.createModelVariant(pedestal)
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.NORTH
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.HEAD
+                                                                              ), PastelModelHelper.createModelVariant(head)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.NORTH
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.BODY
+                                                                              ), PastelModelHelper.createModelVariant(body)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.NORTH
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.WAIST
+                                                                              ), PastelModelHelper.createModelVariant(waist)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.NORTH
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.FOOT
+                                                                              ), PastelModelHelper.createModelVariant(foot)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.NORTH
+                                                                              )
+                                                                              .term(PylonBlock.PEDESTAL, true),
+                                                                     PastelModelHelper.createModelVariant(pedestal)
+                                                                                      .with(
+                                                                                          VariantProperties.X_ROT,
+                                                                                          VariantProperties.Rotation.R90
+                                                                                      )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.SOUTH
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.HEAD
+                                                                              ), PastelModelHelper.createModelVariant(head)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R270
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.SOUTH
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.BODY
+                                                                              ), PastelModelHelper.createModelVariant(body)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R270
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.SOUTH
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.WAIST
+                                                                              ), PastelModelHelper.createModelVariant(waist)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R270
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.SOUTH
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.FOOT
+                                                                              ), PastelModelHelper.createModelVariant(foot)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R270
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.SOUTH
+                                                                              )
+                                                                              .term(PylonBlock.PEDESTAL, true),
+                                                                     PastelModelHelper.createModelVariant(pedestal)
+                                                                                      .with(
+                                                                                          VariantProperties.X_ROT,
+                                                                                          VariantProperties.Rotation.R270
+                                                                                      )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.WEST
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.HEAD
+                                                                              ), PastelModelHelper.createModelVariant(head)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                                                  .with(
+                                                                                                      VariantProperties.Y_ROT,
+                                                                                                      VariantProperties.Rotation.R270
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.WEST
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.BODY
+                                                                              ), PastelModelHelper.createModelVariant(body)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                                                  .with(
+                                                                                                      VariantProperties.Y_ROT,
+                                                                                                      VariantProperties.Rotation.R270
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.WEST
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.WAIST
+                                                                              ), PastelModelHelper.createModelVariant(waist)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                                                  .with(
+                                                                                                      VariantProperties.Y_ROT,
+                                                                                                      VariantProperties.Rotation.R270
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.WEST
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.FOOT
+                                                                              ), PastelModelHelper.createModelVariant(foot)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                                                  .with(
+                                                                                                      VariantProperties.Y_ROT,
+                                                                                                      VariantProperties.Rotation.R270
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.WEST
+                                                                              )
+                                                                              .term(PylonBlock.PEDESTAL, true),
+                                                                     PastelModelHelper.createModelVariant(pedestal)
+                                                                                      .with(
+                                                                                          VariantProperties.X_ROT,
+                                                                                          VariantProperties.Rotation.R90
+                                                                                      )
+                                                                                      .with(
+                                                                                          VariantProperties.Y_ROT,
+                                                                                          VariantProperties.Rotation.R270
+                                                                                      )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.EAST
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.HEAD
+                                                                              ), PastelModelHelper.createModelVariant(head)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                                                  .with(
+                                                                                                      VariantProperties.Y_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.EAST
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.BODY
+                                                                              ), PastelModelHelper.createModelVariant(body)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                                                  .with(
+                                                                                                      VariantProperties.Y_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.EAST
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.WAIST
+                                                                              ), PastelModelHelper.createModelVariant(waist)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                                                  .with(
+                                                                                                      VariantProperties.Y_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.EAST
+                                                                              )
+                                                                              .term(
+                                                                                  PylonBlock.SECTION,
+                                                                                  PylonBlock.Section.FOOT
+                                                                              ), PastelModelHelper.createModelVariant(foot)
+                                                                                                  .with(
+                                                                                                      VariantProperties.X_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                                                  .with(
+                                                                                                      VariantProperties.Y_ROT,
+                                                                                                      VariantProperties.Rotation.R90
+                                                                                                  )
+                                                                 )
+                                                                 .with(
+                                                                     Condition.condition()
+                                                                              .term(
+                                                                                  BlockStateProperties.FACING,
+                                                                                  Direction.EAST
+                                                                              )
+                                                                              .term(PylonBlock.PEDESTAL, true),
+                                                                     PastelModelHelper.createModelVariant(pedestal)
+                                                                                      .with(
+                                                                                          VariantProperties.X_ROT,
+                                                                                          VariantProperties.Rotation.R90
+                                                                                      )
+                                                                                      .with(
+                                                                                          VariantProperties.Y_ROT,
+                                                                                          VariantProperties.Rotation.R90
+                                                                                      )
+                                                                 ));
+        }
+
+        public static void cluster(BlockModelGenerators generators, DeferredBlock<Block> block, ModelTemplate model) {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
+                                                                        block.get(),
+                                                                        PastelModelHelper.createModelVariant(TexturedModel.createDefault(TextureMapping::cross, model)
+                                                                                                                                       .create(
+                                                                                                                                           block.get(), generators.modelOutput))
+                                                                    )
+                                                                    .with(
+                                                                        PastelModelHelper.createUpDefaultFacingVariantMap()));
+        }
+
+        public static void moonstoneChiseled(
+            BlockModelGenerators generators, DeferredBlock<Block> block, ResourceLocation capTexture) {
+            TextureMapping textureMap = PastelTextureMaps.sideLine(capTexture, TextureMapping.getBlockTexture(block.get()));
+            PastelModels.MOONSTONE_CHISELED.create(block.get(), textureMap, generators.modelOutput);
+            PastelModels.MOONSTONE_CHISELED_DOWN.createWithSuffix(
+                block.get(), "_down", textureMap, generators.modelOutput);
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
+                                                                    .with(
+                                                                        PastelModelHelper.createDownDefaultFacingVariantMap(
+                                                                            ModelLocationUtils.getModelLocation(
+                                                                                block.get()),
+                                                                            ModelLocationUtils.getModelLocation(
+                                                                                block.get(), "_down")
+                                                                        )));
         }
     }
+    
+    public static class ITEM{
+        public static void simple(ItemModelGenerators generators, DeferredItem<? extends Item> item) {
+            registerItemModel(generators,item.get());
+        }
 
-    public static void simpleMirrored(
-        BlockModelGenerators generators, DeferredBlock<Block> block) {
-        generators.blockStateOutput.accept(PastelModelHelper.createMirroredVariantsSupplier(
-            block.get(), TexturedModel.CUBE, TexturedModel.CUBE_MIRRORED, generators.modelOutput));
-    }
+        public static void handheld(ItemModelGenerators generators, DeferredItem<? extends Item> item) {
+            registerItemModel(generators, item.asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        }
 
-    public static void singleton(
-        BlockModelGenerators generators, DeferredBlock<Block> block, TexturedModel.Provider factory) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block.get(), factory.create(block.get(), generators.modelOutput)));
-    }
+        public static void layered(
+            ItemModelGenerators generators, DeferredItem<? extends Item> item, String suffix0, String suffix1) {
+            registerLayeredItemModel(
+                generators, item.get(), ModelTemplates.TWO_LAYERED_ITEM, suffix0, suffix1);
+        }
 
-    public static void singletonWithSoup(
-        BlockModelGenerators generators, DeferredBlock<Block> block,
-        Function<Block, ResourceLocation> modelIdSupplier
-    ) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block.get(), modelIdSupplier.apply(block.get())));
-    }
+        public static void layered(
+            ItemModelGenerators generators, DeferredItem<? extends Item> item, String suffix0, String suffix1, String suffix2) {
+            registerLayeredItemModel(
+                generators, item.get(), ModelTemplates.THREE_LAYERED_ITEM, suffix0, suffix1, suffix2);
+        }
 
-    public static void parented(BlockModelGenerators generators, Block block, Block parent) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block, ModelLocationUtils.getModelLocation(parent)));
-    }
+        public static void layered(
+            ItemModelGenerators generators, DeferredItem<? extends Item> item, String suffix0, String suffix1, String suffix2, String suffix3) {
+            registerLayeredItemModel(
+                generators, item.get(), PastelModels.GENERATED_FOUR_LAYERS, suffix0, suffix1, suffix2, suffix3);
+        }
 
-    public static void axisRotated(
-        BlockModelGenerators generators, DeferredBlock<Block> block, TexturedModel.Provider factory) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block.get(), factory.create(block.get(), generators.modelOutput))
-                             .with(PastelModelHelper.createAxisRotatedVariantMap()));
-    }
+        public static void parented(ItemModelGenerators generators, DeferredItem<? extends Item> item, ItemLike parent) {
+            registerParentedItemModel(generators, item.get(), parent.asItem());
+        }
 
-    public static void defaultUpFacing(
-        BlockModelGenerators generators, DeferredBlock<Block> block, TexturedModel.Provider factory) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block.get(), factory.create(block.get(), generators.modelOutput))
-                             .with(PastelModelHelper.createUpDefaultFacingVariantMap()));
-    }
+        public static void parented(
+            ItemModelGenerators generators, DeferredItem<? extends Item> item, ResourceLocation parentModelId) {
+                registerParentedItemModel(generators, item.get(), parentModelId);
+        }
 
-    public static void defaultUpFacingGetter(
-        BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
-        PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
-                         .with(PastelModelHelper.createUpDefaultFacingVariantMap());
-    }
-
-    public static void defaultNorthHorizontalFacing(
-        BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
-                             .with(PastelModelHelper.createNorthDefaultHorizontalFacingVariantMap()));
-    }
-
-    public static void defaultSouthHorizontalFacing(
-        BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
-                             .with(PastelModelHelper.createSouthDefaultHorizontalFacingVariantMap()));
-    }
-
-    public static void defaultWestHorizontalFacing(
-        BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
-                             .with(PastelModelHelper.createWestDefaultHorizontalFacingVariantMap()));
-    }
-
-    public static void defaultEastHorizontalFacing(
-        BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
-                             .with(PastelModelHelper.createEastDefaultHorizontalFacingVariantMap()));
-    }
-
-    public static void cross(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        generators.blockStateOutput.accept(PastelModelHelper.createVariantsSupplier(
-            block.get(), PastelTexturedModels.cross(b -> b, "")
-                                             .create(
-                                                 block.get(),
-                                                 generators.modelOutput
-                                             )
-        ));
-
-    }
-
-    public static void simplePlant(ItemModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.registerBlockTexturedItemModel(generators, block.get());
-    }
-
-    public static void pottedPlant(
-        BlockModelGenerators generators, DeferredBlock<Block> block, boolean tinted) {
-        generators.blockStateOutput.accept(
-            PastelModelHelper.pottedPlantBlockModel(generators, (FlowerPotBlock) block.get(), tinted));
-    }
-
-    public static void log(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        generators.blockStateOutput.accept(PastelModelHelper.logBlockModel(generators, block.get()));
-    }
-
-    public static void wood(
-        BlockModelGenerators generators, DeferredBlock<Block> block, DeferredBlock<Block> logBlock) {
-        generators.blockStateOutput.accept(PastelModelHelper.woodBlockModel(generators, block.get(), logBlock.get()));
-    }
-
-    public static void snowy(
-        BlockModelGenerators generators, DeferredBlock<Block> block, TexturedModel.Provider base,
-        TexturedModel.Provider snowy
-    ) {
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
-                                                                .with(PropertyDispatch.property(
-                                                                                          BlockStateProperties.SNOWY)
-                                                                                      .select(
-                                                                                          false,
-                                                                                          PastelModelHelper.createHorizontalRotationVariantList(
-                                                                                              base.create(
-                                                                                                  block.get(),
-                                                                                                  generators.modelOutput
-                                                                                              ))
-                                                                                      )
-                                                                                      .select(
-                                                                                          true,
-                                                                                          PastelModelHelper.createHorizontalRotationVariantList(
-                                                                                              snowy.createWithSuffix(
-                                                                                                  block.get(), "_snow",
-                                                                                                  generators.modelOutput
-                                                                                              ))
-                                                                                      )));
-    }
-
-    public static void redstoneLamp(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        ResourceLocation off = PastelTexturedModels.cubeAll(b -> b, "_off")
-                                                   .createWithSuffix(block.get(), "_off", generators.modelOutput);
-        ResourceLocation on = PastelTexturedModels.cubeAll(b -> b, "_on")
-                                                  .createWithSuffix(block.get(), "_on", generators.modelOutput);
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
-                                                                .with(PastelModelHelper.createBooleanModelMap(
-                                                                    BlockStateProperties.LIT, on, off)));
-    }
-
-    public static void barrellike(
-        BlockModelGenerators generators, DeferredBlock<Block> block, UnaryOperator<Block> bottomBlock,
-        String bottomSuffix
-    ) {
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
-                                                                .with(
-                                                                    PastelModelHelper.createUpDefaultFacingVariantMap())
-                                                                .with(PastelModelHelper.createBooleanModelMap(
-                                                                    BlockStateProperties.OPEN,
-                                                                    PastelTexturedModels.cubeBottomTop(
-                                                                                            b -> b, "_side", b -> b,
-                                                                                            "_top_open",
-                                                                                            bottomBlock, bottomSuffix
-                                                                                        )
-                                                                                        .createWithSuffix(
-                                                                                            block.get(), "_open",
-                                                                                            generators.modelOutput
-                                                                                        ),
-                                                                    PastelTexturedModels.cubeBottomTop(
-                                                                                            b -> b, "_side", b -> b,
-                                                                                            "_top", bottomBlock,
-                                                                                            bottomSuffix
-                                                                                        )
-                                                                                        .create(
-                                                                                            block.get(),
-                                                                                            generators.modelOutput
-                                                                                        )
-                                                                )));
-    }
-
-    public static void idol(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
-                                                                .with(PastelModelHelper.createBooleanModelMap(
-                                                                    IdolBlock.COOLDOWN, PastelModels.MOB_BLOCK,
-                                                                    PastelModels.MOB_BLOCK_COOLDOWN
-                                                                )));
-    }
-
-    public static void pedestal(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        singleton(
-            generators, block, TexturedModel.createDefault(
-                b -> new TextureMapping().put(PastelTextureKeys.PEDESTAL, TextureMapping.getBlockTexture(b))
-                                         .put(
-                                             TextureSlot.PARTICLE, TextureMapping.getBlockTexture(b, "_particle")),
-                PastelModels.PEDESTAL
-            )
-        );
-    }
-
-    public static void detector(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
-                                                                .with(PastelModelHelper.createBooleanModelMap(
-                                                                    BlockStateProperties.INVERTED,
-                                                                    PastelModels.SLAB_DETECTOR.createWithSuffix(
-                                                                        block.get(), "_inverted",
-                                                                        PastelTextureMaps.sideTop(
-                                                                            block.get(), "_side", block.get(),
-                                                                            "_inverted_top"
-                                                                        ), generators.modelOutput
-                                                                    ), PastelModels.SLAB_DETECTOR.create(
-                                                                        block.get(), PastelTextureMaps.sideTop(
-                                                                            block.get(), "_side", block.get(), "_top"),
-                                                                        generators.modelOutput
-                                                                    )
-                                                                )));
-    }
-
-    public static void orientable(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        ResourceLocation horizontal = ModelTemplates.CUBE_ORIENTABLE.create(
-            block.get(), new TextureMapping().put(TextureSlot.TOP, TextureMapping.getBlockTexture(block.get(), "_top"))
-                                             .put(
-                                                 TextureSlot.SIDE, TextureMapping.getBlockTexture(
-                                                     block.get(), "_side")
-                                             )
-                                             .put(
-                                                 TextureSlot.FRONT, TextureMapping.getBlockTexture(
-                                                     block.get(), "_front")
-                                             ), generators.modelOutput
-        );
-        ResourceLocation vertical = ModelTemplates.CUBE_ORIENTABLE_VERTICAL.create(
-            block.get(), new TextureMapping().put(
-                                                 TextureSlot.SIDE, TextureMapping.getBlockTexture(block.get(), "_top"))
-                                             .put(
-                                                 TextureSlot.FRONT, TextureMapping.getBlockTexture(
-                                                     block.get(), "_front_vertical")
-                                             ), generators.modelOutput
-        );
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
-                                                                .with(PropertyDispatch.property(
-                                                                                          BlockStateProperties.FACING)
-                                                                                      .select(
-                                                                                          Direction.DOWN,
-                                                                                          PastelModelHelper.createModelVariant(
-                                                                                                               vertical)
-                                                                                                           .with(
-                                                                                                               VariantProperties.X_ROT,
-                                                                                                               VariantProperties.Rotation.R180
-                                                                                                           )
-                                                                                      )
-                                                                                      .select(
-                                                                                          Direction.UP,
-                                                                                          PastelModelHelper.createModelVariant(
-                                                                                              vertical)
-                                                                                      )
-                                                                                      .select(
-                                                                                          Direction.NORTH,
-                                                                                          PastelModelHelper.createModelVariant(
-                                                                                              horizontal)
-                                                                                      )
-                                                                                      .select(
-                                                                                          Direction.EAST,
-                                                                                          PastelModelHelper.createModelVariant(
-                                                                                                               horizontal)
-                                                                                                           .with(
-                                                                                                               VariantProperties.Y_ROT,
-                                                                                                               VariantProperties.Rotation.R90
-                                                                                                           )
-                                                                                      )
-                                                                                      .select(
-                                                                                          Direction.SOUTH,
-                                                                                          PastelModelHelper.createModelVariant(
-                                                                                                               horizontal)
-                                                                                                           .with(
-                                                                                                               VariantProperties.Y_ROT,
-                                                                                                               VariantProperties.Rotation.R180
-                                                                                                           )
-                                                                                      )
-                                                                                      .select(
-                                                                                          Direction.WEST,
-                                                                                          PastelModelHelper.createModelVariant(
-                                                                                                               horizontal)
-                                                                                                           .with(
-                                                                                                               VariantProperties.Y_ROT,
-                                                                                                               VariantProperties.Rotation.R270
-                                                                                                           )
-                                                                                      )));
-    }
-
-    public static void pylon(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        ResourceLocation head = ModelLocationUtils.getModelLocation(block.get(), "_head");
-        ResourceLocation body = ModelLocationUtils.getModelLocation(block.get(), "_body");
-        ResourceLocation waist = ModelLocationUtils.getModelLocation(block.get(), "_waist");
-        ResourceLocation foot = ModelLocationUtils.getModelLocation(block.get(), "_foot");
-        ResourceLocation end = ModelLocationUtils.getModelLocation(block.get(), "_end");
-        ResourceLocation pedestal = PastelModels.BALCITE_PYLON_PEDESTAL;
-        PastelModels.BASE_PYLON_BODY.create(head, PastelTextureMaps.sideEnd(head, end), generators.modelOutput);
-        PastelModels.BASE_PYLON_BODY.create(body, PastelTextureMaps.sideEnd(body, end), generators.modelOutput);
-        PastelModels.BASE_PYLON_BODY.create(waist, PastelTextureMaps.sideEnd(waist, end), generators.modelOutput);
-        PastelModels.BASE_PYLON_BODY.create(foot, PastelTextureMaps.sideEnd(foot, end), generators.modelOutput);
-        generators.blockStateOutput.accept(MultiPartGenerator.multiPart(block.get())
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.DOWN
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.HEAD
-                                                                          ), PastelModelHelper.createModelVariant(head)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R180
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.DOWN
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.BODY
-                                                                          ), PastelModelHelper.createModelVariant(body)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R180
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.DOWN
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.WAIST
-                                                                          ), PastelModelHelper.createModelVariant(waist)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R180
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.DOWN
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.FOOT
-                                                                          ), PastelModelHelper.createModelVariant(foot)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R180
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.DOWN
-                                                                          )
-                                                                          .term(PylonBlock.PEDESTAL, true),
-                                                                 PastelModelHelper.createModelVariant(pedestal)
-                                                                                  .with(
-                                                                                      VariantProperties.X_ROT,
-                                                                                      VariantProperties.Rotation.R180
-                                                                                  )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING, Direction.UP)
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.HEAD
-                                                                          ), PastelModelHelper.createModelVariant(head)
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING, Direction.UP)
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.BODY
-                                                                          ), PastelModelHelper.createModelVariant(body)
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING, Direction.UP)
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.WAIST
-                                                                          ), PastelModelHelper.createModelVariant(waist)
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING, Direction.UP)
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.FOOT
-                                                                          ), PastelModelHelper.createModelVariant(foot)
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING, Direction.UP)
-                                                                          .term(PylonBlock.PEDESTAL, true),
-                                                                 PastelModelHelper.createModelVariant(pedestal)
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.NORTH
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.HEAD
-                                                                          ), PastelModelHelper.createModelVariant(head)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.NORTH
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.BODY
-                                                                          ), PastelModelHelper.createModelVariant(body)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.NORTH
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.WAIST
-                                                                          ), PastelModelHelper.createModelVariant(waist)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.NORTH
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.FOOT
-                                                                          ), PastelModelHelper.createModelVariant(foot)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.NORTH
-                                                                          )
-                                                                          .term(PylonBlock.PEDESTAL, true),
-                                                                 PastelModelHelper.createModelVariant(pedestal)
-                                                                                  .with(
-                                                                                      VariantProperties.X_ROT,
-                                                                                      VariantProperties.Rotation.R90
-                                                                                  )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.SOUTH
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.HEAD
-                                                                          ), PastelModelHelper.createModelVariant(head)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R270
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.SOUTH
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.BODY
-                                                                          ), PastelModelHelper.createModelVariant(body)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R270
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.SOUTH
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.WAIST
-                                                                          ), PastelModelHelper.createModelVariant(waist)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R270
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.SOUTH
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.FOOT
-                                                                          ), PastelModelHelper.createModelVariant(foot)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R270
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.SOUTH
-                                                                          )
-                                                                          .term(PylonBlock.PEDESTAL, true),
-                                                                 PastelModelHelper.createModelVariant(pedestal)
-                                                                                  .with(
-                                                                                      VariantProperties.X_ROT,
-                                                                                      VariantProperties.Rotation.R270
-                                                                                  )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.WEST
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.HEAD
-                                                                          ), PastelModelHelper.createModelVariant(head)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                                                              .with(
-                                                                                                  VariantProperties.Y_ROT,
-                                                                                                  VariantProperties.Rotation.R270
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.WEST
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.BODY
-                                                                          ), PastelModelHelper.createModelVariant(body)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                                                              .with(
-                                                                                                  VariantProperties.Y_ROT,
-                                                                                                  VariantProperties.Rotation.R270
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.WEST
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.WAIST
-                                                                          ), PastelModelHelper.createModelVariant(waist)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                                                              .with(
-                                                                                                  VariantProperties.Y_ROT,
-                                                                                                  VariantProperties.Rotation.R270
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.WEST
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.FOOT
-                                                                          ), PastelModelHelper.createModelVariant(foot)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                                                              .with(
-                                                                                                  VariantProperties.Y_ROT,
-                                                                                                  VariantProperties.Rotation.R270
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.WEST
-                                                                          )
-                                                                          .term(PylonBlock.PEDESTAL, true),
-                                                                 PastelModelHelper.createModelVariant(pedestal)
-                                                                                  .with(
-                                                                                      VariantProperties.X_ROT,
-                                                                                      VariantProperties.Rotation.R90
-                                                                                  )
-                                                                                  .with(
-                                                                                      VariantProperties.Y_ROT,
-                                                                                      VariantProperties.Rotation.R270
-                                                                                  )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.EAST
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.HEAD
-                                                                          ), PastelModelHelper.createModelVariant(head)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                                                              .with(
-                                                                                                  VariantProperties.Y_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.EAST
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.BODY
-                                                                          ), PastelModelHelper.createModelVariant(body)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                                                              .with(
-                                                                                                  VariantProperties.Y_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.EAST
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.WAIST
-                                                                          ), PastelModelHelper.createModelVariant(waist)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                                                              .with(
-                                                                                                  VariantProperties.Y_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.EAST
-                                                                          )
-                                                                          .term(
-                                                                              PylonBlock.SECTION,
-                                                                              PylonBlock.Section.FOOT
-                                                                          ), PastelModelHelper.createModelVariant(foot)
-                                                                                              .with(
-                                                                                                  VariantProperties.X_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                                                              .with(
-                                                                                                  VariantProperties.Y_ROT,
-                                                                                                  VariantProperties.Rotation.R90
-                                                                                              )
-                                                             )
-                                                             .with(
-                                                                 Condition.condition()
-                                                                          .term(
-                                                                              BlockStateProperties.FACING,
-                                                                              Direction.EAST
-                                                                          )
-                                                                          .term(PylonBlock.PEDESTAL, true),
-                                                                 PastelModelHelper.createModelVariant(pedestal)
-                                                                                  .with(
-                                                                                      VariantProperties.X_ROT,
-                                                                                      VariantProperties.Rotation.R90
-                                                                                  )
-                                                                                  .with(
-                                                                                      VariantProperties.Y_ROT,
-                                                                                      VariantProperties.Rotation.R90
-                                                                                  )
-                                                             ));
-    }
-
-    public static void cluster(BlockModelGenerators generators, DeferredBlock<Block> block, ModelTemplate model) {
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
-                                                                    block.get(),
-                                                                    PastelModelHelper.createModelVariant(TexturedModel.createDefault(TextureMapping::cross, model)
-                                                                                                                                   .create(
-                                                                                                                                       block.get(), generators.modelOutput))
-                                                                )
-                                                                .with(
-                                                                    PastelModelHelper.createUpDefaultFacingVariantMap()));
-    }
-
-    public static void moonstoneChiseled(
-        BlockModelGenerators generators, DeferredBlock<Block> block, ResourceLocation capTexture) {
-        TextureMapping textureMap = PastelTextureMaps.sideLine(capTexture, TextureMapping.getBlockTexture(block.get()));
-        ResourceLocation base = PastelModels.MOONSTONE_CHISELED.create(block.get(), textureMap, generators.modelOutput);
-        ResourceLocation down = PastelModels.MOONSTONE_CHISELED_DOWN.createWithSuffix(
-            block.get(), "_down", textureMap, generators.modelOutput);
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
-                                                                .with(
-                                                                    PastelModelHelper.createDownDefaultFacingVariantMap(
-                                                                        ModelLocationUtils.getModelLocation(
-                                                                            block.get()),
-                                                                        ModelLocationUtils.getModelLocation(
-                                                                            block.get(), "_down")
-                                                                    )));
-    }
-
-    public static void generateInventoryParentedItemModel(ItemModelGenerators generators, DeferredBlock<Block> block) {
-        registerParentedItemModel(generators, block.get(), block.get(), "_inventory");
+        public static void banner(ItemModelGenerators generators, DeferredItem<? extends Item> item) {
+            parented(generators, item, CREEPER_BANNER_PATTERN);
+        }
     }
 }

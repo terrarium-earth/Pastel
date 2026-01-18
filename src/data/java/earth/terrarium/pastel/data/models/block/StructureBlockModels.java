@@ -1,9 +1,6 @@
 package earth.terrarium.pastel.data.models.block;
 
-import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
 import earth.terrarium.pastel.blocks.statues.StatueBlock;
-import earth.terrarium.pastel.blocks.structure.*;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.client.PastelModels;
@@ -22,9 +19,7 @@ import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,18 +40,18 @@ public class StructureBlockModels {
                                                                                       .getFamily(), TexturedModel.CUBE
         );
 
-        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.PRESERVATION_CONTROLLER);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.PRESERVATION_CONTROLLER);
 
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.PRESERVATION_CONTROLLER, ModelLocationUtils::getModelLocation);
 
 
-        PastelModelHelper.simple(generators, PastelBlocks.DIKE_GATE);
-        PastelModelHelper.simple(generators, PastelBlocks.DREAM_GATE);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DIKE_GATE);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DREAM_GATE);
 
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.INVISIBLE_WALL, PastelTexturedModels.particle(b -> GLASS, ""));
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.PRESERVATION_CHEST, ModelLocationUtils::getModelLocation);
 
         List<ResourceLocation> modelIds = new ArrayList<>();
@@ -82,7 +77,7 @@ public class StructureBlockModels {
         }
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
             PastelBlocks.PRESERVATION_STONE.get(), variants.toArray(Variant[]::new)));
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.POWDER_CHISELED_PRESERVATION_STONE,
             PastelTexturedModels.cubeColumn(
                 b -> b, "",
@@ -90,9 +85,9 @@ public class StructureBlockModels {
                 "_top_generic"
             )
         );
-        PastelModelHelper.simple(
+        PastelModelHelper.BLOCK.simple(
             generators, PastelBlocks.DIKE_CHISELED_PRESERVATION_STONE, PastelBlocks.DREAM_CHISELED_PRESERVATION_STONE);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.DEEP_LIGHT_CHISELED_PRESERVATION_STONE,
             PastelTexturedModels.cubeColumn(
                 b -> b, "",
@@ -102,7 +97,7 @@ public class StructureBlockModels {
         );
 
 
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.ENLIGHTENMENT_ITEM_BOWL, TexturedModel.createDefault(
                 b -> new TextureMapping().put(TextureSlot.SIDE, TextureMapping.getBlockTexture(b, "_side"))
                                          .put(TextureSlot.TOP, TextureMapping.getBlockTexture(b, "_top"))
@@ -111,13 +106,13 @@ public class StructureBlockModels {
                 PastelModels.BOWL
             )
         );
-        PastelModelHelper.defaultUpFacing(
+        PastelModelHelper.BLOCK.defaultUpFacing(
             generators, PastelBlocks.DIKE_GATE_FOUNTAIN, PastelTexturedModels.cubeBottomTopParticle(
                 b -> b, "_side", b -> b, "_top", b -> PastelBlocks.PRESERVATION_STONE.get(), "",
                 b -> PastelBlocks.PRESERVATION_STONE.get(), ""
             )
         );
-        PastelModelHelper.simple(
+        PastelModelHelper.BLOCK.simple(
             generators, PastelBlocks.PRESERVATION_BRICKS, PastelBlocks.SHIMMERING_PRESERVATION_BRICKS);
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.COURIER_STATUE.get())
@@ -138,46 +133,46 @@ public class StructureBlockModels {
                                                                                               "_top"
                                                                                           )
                                                                                       )));
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.MANXI, (Function<Block, ResourceLocation>) b -> PastelModels.MOB_HEAD);
 
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.BLACK_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.BLUE_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.BROWN_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.CYAN_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.GRAY_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.GREEN_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.LIGHT_BLUE_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.LIGHT_GRAY_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.LIME_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.MAGENTA_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.ORANGE_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.PINK_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.PURPLE_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(generators, PastelBlocks.RED_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.RED_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.WHITE_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.YELLOW_CHISELED_PRESERVATION_STONE, TexturedModel.COLUMN_ALT);
 
 
 
-        PastelModelHelper.simple(generators, PastelBlocks.PRESERVATION_GLASS, PastelBlocks.TINTED_PRESERVATION_GLASS);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.PRESERVATION_GLASS, PastelBlocks.TINTED_PRESERVATION_GLASS);
 
-        PastelModelHelper.singleton(generators, PastelBlocks.PRESERVATION_ROUNDEL, PastelTexturedModels.ROUNDEL);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.PRESERVATION_ROUNDEL, PastelTexturedModels.ROUNDEL);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
                                                                     PastelBlocks.PRESERVATION_BLOCK_DETECTOR.get(),
                                                                     PastelModelHelper.createModelVariant(

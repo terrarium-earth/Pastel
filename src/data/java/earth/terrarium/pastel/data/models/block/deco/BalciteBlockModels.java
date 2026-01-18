@@ -121,34 +121,34 @@ public class BalciteBlockModels {
                                                                                   .getFamily()
         );
 
-        PastelModelHelper.axisRotated(generators, PastelBlocks.POLISHED_BASALT_PILLAR, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.POLISHED_BASALT_PILLAR, TexturedModel.COLUMN);
         generators.blockStateOutput.accept(
             PastelModelHelper.createVariantsSupplier(
                                  generators, PastelBlocks.POLISHED_BASALT_CREST.get(), TexturedModel.COLUMN)
                              .with(PastelModelHelper.createCardinalFacingVariantMap()));
-        PastelModelHelper.singleton(generators, PastelBlocks.NOTCHED_POLISHED_BASALT, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.NOTCHED_POLISHED_BASALT, TexturedModel.COLUMN);
 
-        PastelModelHelper.simple(
+        PastelModelHelper.BLOCK.simple(
             generators, PastelBlocks.TOPAZ_CHISELED_BASALT, PastelBlocks.AMETHYST_CHISELED_BASALT,
             PastelBlocks.CITRINE_CHISELED_BASALT, PastelBlocks.ONYX_CHISELED_BASALT
         );
-        PastelModelHelper.simple(
+        PastelModelHelper.BLOCK.simple(
             generators, PastelBlocks.TOPAZ_CHISELED_CALCITE,
             PastelBlocks.AMETHYST_CHISELED_CALCITE, PastelBlocks.CITRINE_CHISELED_CALCITE,
             PastelBlocks.ONYX_CHISELED_CALCITE
         );
-        PastelModelHelper.moonstoneChiseled(
+        PastelModelHelper.BLOCK.moonstoneChiseled(
             generators, PastelBlocks.MOONSTONE_CHISELED_BASALT, PastelTextures.BASALT_CAP);
-        PastelModelHelper.moonstoneChiseled(
+        PastelModelHelper.BLOCK.moonstoneChiseled(
             generators, PastelBlocks.MOONSTONE_CHISELED_CALCITE, PastelTextures.CALCITE_CAP);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.POLISHED_CALCITE_PILLAR, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.POLISHED_CALCITE_PILLAR, TexturedModel.COLUMN);
         generators.blockStateOutput.accept(
             PastelModelHelper.createVariantsSupplier(
                                  generators, PastelBlocks.POLISHED_CALCITE_CREST.get(), TexturedModel.COLUMN)
                              .with(PastelModelHelper.createCardinalFacingVariantMap()));
-        PastelModelHelper.singleton(generators, PastelBlocks.NOTCHED_POLISHED_CALCITE, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.NOTCHED_POLISHED_CALCITE, TexturedModel.COLUMN);
 
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.TOPAZ_BASALT_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -157,7 +157,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.AMETHYST_BASALT_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -166,7 +166,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.CITRINE_BASALT_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -175,7 +175,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.ONYX_BASALT_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -184,7 +184,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.MOONSTONE_BASALT_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -193,7 +193,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.TOPAZ_CALCITE_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -202,7 +202,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.AMETHYST_CALCITE_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -211,7 +211,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.CITRINE_CALCITE_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -220,7 +220,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.ONYX_CALCITE_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block),
@@ -229,7 +229,7 @@ public class BalciteBlockModels {
                 ), PastelModels.MULTILAYER_LIGHT
             )
         );
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.MOONSTONE_CALCITE_LIGHT, TexturedModel.createDefault(
                 block -> PastelTextureMaps.sideTopInside(
                     TextureMapping.getBlockTexture(block), PastelTextures.CALCITE_CAP,

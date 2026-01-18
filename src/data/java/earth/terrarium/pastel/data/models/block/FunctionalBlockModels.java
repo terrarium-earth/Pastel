@@ -1,104 +1,38 @@
 package earth.terrarium.pastel.data.models.block;
 
-import com.simibubi.create.foundation.model.BakedModelHelper;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.*;
-import earth.terrarium.pastel.blocks.amalgam.IncandescentAmalgamBlock;
-import earth.terrarium.pastel.blocks.amalgam.IncandescentAmalgamItem;
-import earth.terrarium.pastel.blocks.block_flooder.BlockFlooderBlock;
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleBlock;
-import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
-import earth.terrarium.pastel.blocks.chests.BlackHoleChestBlock;
-import earth.terrarium.pastel.blocks.chests.CompactingChestBlock;
-import earth.terrarium.pastel.blocks.chests.FabricationChestBlock;
-import earth.terrarium.pastel.blocks.chests.HeartboundChestBlock;
-import earth.terrarium.pastel.blocks.cinderhearth.CinderhearthBlock;
-import earth.terrarium.pastel.blocks.crystallarieum.CrystallarieumBlock;
 import earth.terrarium.pastel.blocks.decay.*;
-import earth.terrarium.pastel.blocks.decoration.DecayingLightBlock;
-import earth.terrarium.pastel.blocks.decoration.EtherealPlatformBlock;
-import earth.terrarium.pastel.blocks.decoration.WandLightBlock;
-import earth.terrarium.pastel.blocks.ender.EnderDropperBlock;
-import earth.terrarium.pastel.blocks.ender.EnderHopperBlock;
-import earth.terrarium.pastel.blocks.energy.ColorPickerBlock;
-import earth.terrarium.pastel.blocks.energy.CrystalApothecaryBlock;
-import earth.terrarium.pastel.blocks.gravity.FloatBlock;
-import earth.terrarium.pastel.blocks.gravity.FloatBlockItem;
-import earth.terrarium.pastel.blocks.idols.*;
-import earth.terrarium.pastel.blocks.lava_sponge.LavaSpongeBlock;
-import earth.terrarium.pastel.blocks.lava_sponge.WetLavaSpongeBlock;
-import earth.terrarium.pastel.blocks.lava_sponge.WetLavaSpongeItem;
-import earth.terrarium.pastel.blocks.memory.MemoryBlock;
-import earth.terrarium.pastel.blocks.memory.MemoryItem;
-import earth.terrarium.pastel.blocks.particle_spawner.CreativeParticleSpawnerBlock;
-import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerBlock;
 import earth.terrarium.pastel.blocks.present.PresentBlock;
-import earth.terrarium.pastel.blocks.present.PresentBlockItem;
 import earth.terrarium.pastel.blocks.redstone.*;
-import earth.terrarium.pastel.blocks.upgrade.UpgradeBlock;
-import earth.terrarium.pastel.blocks.upgrade.UpgradeBlockItem;
-import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.data.PastelModelHelper;
-import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.entity.entity.LivingMarkerEntity;
-import earth.terrarium.pastel.registries.PastelBlockSoundGroups;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelFoodComponents;
-import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.client.*;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Position;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Vex;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.component.BundleContents;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.TransparentBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.registries.DeferredBlock;
-
-import java.util.function.Function;
 
 import static net.minecraft.world.level.block.Blocks.*;
 
 public class FunctionalBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.TEA_TABLE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.TEA_TABLE);
 
         generatePrimfireModel(generators);
 
-        PastelModelHelper.simple(generators, PastelBlocks.ETHEREAL_PLATFORM);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.ETHEREAL_PLATFORM);
 
-        PastelModelHelper.simple(generators, PastelBlocks.UNIVERSE_SPYHOLE);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.UNIVERSE_SPYHOLE);
 
-        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.PRESENT);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.PRESENT);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.PRESENT.get())
                                                                 .with(PropertyDispatch.property(PresentBlock.VARIANT)
                                                                                       .generate(
@@ -123,9 +57,9 @@ public class FunctionalBlockModels {
                                                                                                   generators.modelOutput
                                                                                               )))));
 
-        PastelModelHelper.simple(generators, PastelBlocks.BLOCK_FLOODER);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.BLOCK_FLOODER);
 
-        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.BOTTOMLESS_BUNDLE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.BOTTOMLESS_BUNDLE);
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.BOTTOMLESS_BUNDLE.get())
                                                                 .with(PastelModelHelper.createBooleanModelMap(
@@ -139,11 +73,11 @@ public class FunctionalBlockModels {
                                                                     )
                                                                 )));
 
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.SHIMMERSTONE_LIGHT,
             PastelTexturedModels.particle(PastelTextures.SHIMMERSTONE_LIGHT)
         );
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get(), PastelBlocks.SHIMMERSTONE_LIGHT.get());
 
         decay(generators, PastelBlocks.FADING);
@@ -152,22 +86,22 @@ public class FunctionalBlockModels {
         decay(generators, PastelBlocks.FORFEITURE);
 
 
-        PastelModelHelper.simple(generators, PastelBlocks.DECAY_AWAY);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DECAY_AWAY);
 
-        PastelModelHelper.singleton(generators, PastelBlocks.HOVERBLOCK, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.HOVERBLOCK, TexturedModel.COLUMN);
 
-        PastelModelHelper.defaultNorthHorizontalFacing(
+        PastelModelHelper.BLOCK.defaultNorthHorizontalFacing(
             generators, PastelBlocks.HEARTBOUND_CHEST, ModelLocationUtils::getModelLocation);
-        PastelModelHelper.defaultNorthHorizontalFacing(
+        PastelModelHelper.BLOCK.defaultNorthHorizontalFacing(
             generators, PastelBlocks.COMPACTING_CHEST, ModelLocationUtils::getModelLocation);
 
 
-        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.FABRICATION_CHEST);
-        PastelModelHelper.defaultNorthHorizontalFacing(
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.FABRICATION_CHEST);
+        PastelModelHelper.BLOCK.defaultNorthHorizontalFacing(
             generators, PastelBlocks.FABRICATION_CHEST, ModelLocationUtils::getModelLocation);
 
 
-        PastelModelHelper.defaultNorthHorizontalFacing(
+        PastelModelHelper.BLOCK.defaultNorthHorizontalFacing(
             generators, PastelBlocks.BLACK_HOLE_CHEST, ModelLocationUtils::getModelLocation);
 
 
@@ -188,17 +122,17 @@ public class FunctionalBlockModels {
                                                                         ), generators.modelOutput
                                                                     )
                                                                 )));
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.CREATIVE_PARTICLE_SPAWNER,
             b -> ModelLocationUtils.getModelLocation(
                 PastelBlocks.PARTICLE_SPAWNER.get())
         );
 
-        PastelModelHelper.defaultSouthHorizontalFacing(
+        PastelModelHelper.BLOCK.defaultSouthHorizontalFacing(
             generators, PastelBlocks.BEDROCK_ANVIL, ModelLocationUtils::getModelLocation);
 
 
-        PastelModelHelper.singletonWithSoup(generators, PastelBlocks.MEMORY, ModelLocationUtils::getModelLocation);
+        PastelModelHelper.BLOCK.singletonWithSoup(generators, PastelBlocks.MEMORY, ModelLocationUtils::getModelLocation);
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
                                                                     PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
@@ -226,24 +160,24 @@ public class FunctionalBlockModels {
                                                                                                   type.getSerializedName()
                                                                                               )))));
 
-        PastelModelHelper.simple(generators, PastelBlocks.LAVA_SPONGE);
-        PastelModelHelper.simple(generators, PastelBlocks.WET_LAVA_SPONGE);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.LAVA_SPONGE);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.WET_LAVA_SPONGE);
 
-        PastelModelHelper.detector(generators, PastelBlocks.BLOCK_LIGHT_DETECTOR);
-        PastelModelHelper.detector(generators, PastelBlocks.WEATHER_DETECTOR);
-        PastelModelHelper.detector(generators, PastelBlocks.ITEM_DETECTOR);
-        PastelModelHelper.detector(generators, PastelBlocks.PLAYER_DETECTOR);
-        PastelModelHelper.detector(generators, PastelBlocks.CREATURE_DETECTOR);
+        PastelModelHelper.BLOCK.detector(generators, PastelBlocks.BLOCK_LIGHT_DETECTOR);
+        PastelModelHelper.BLOCK.detector(generators, PastelBlocks.WEATHER_DETECTOR);
+        PastelModelHelper.BLOCK.detector(generators, PastelBlocks.ITEM_DETECTOR);
+        PastelModelHelper.BLOCK.detector(generators, PastelBlocks.PLAYER_DETECTOR);
+        PastelModelHelper.BLOCK.detector(generators, PastelBlocks.CREATURE_DETECTOR);
 
-        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.REDSTONE_TIMER);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.REDSTONE_TIMER);
 
         generateRedstoneTimerModel(generators);
 
-        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.REDSTONE_CALCULATOR);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.REDSTONE_CALCULATOR);
 
         generateRedstoneCalculatorModel(generators);
 
-        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.REDSTONE_TRANSCEIVER);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.REDSTONE_TRANSCEIVER);
         generateRedstoneTransceiverModel(generators);
 
         generators.blockStateOutput.accept(PastelModelHelper.createVariantsSupplier(
@@ -301,8 +235,8 @@ public class FunctionalBlockModels {
                                                             .with(
                                                                 PastelModelHelper.createUpNorthDefaultOrientationVariantMap()));
 
-        PastelModelHelper.orientable(generators, PastelBlocks.ENDER_DROPPER);
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.orientable(generators, PastelBlocks.ENDER_DROPPER);
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.ENDER_HOPPER, ModelLocationUtils::getModelLocation);
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.IMBRIFER_PORTAL.get())
@@ -314,21 +248,21 @@ public class FunctionalBlockModels {
                                                                         PastelBlocks.IMBRIFER_PORTAL.get())
                                                                 )));
 
-        PastelModelHelper.parented(generators, PastelBlocks.UPGRADE_SPEED.get(), PastelBlocks.UPGRADE_SPEED.get());
-        PastelModelHelper.parented(generators, PastelBlocks.UPGRADE_SPEED2.get(), PastelBlocks.UPGRADE_SPEED.get());
-        PastelModelHelper.parented(generators, PastelBlocks.UPGRADE_SPEED3.get(), PastelBlocks.UPGRADE_SPEED.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_SPEED.get(), PastelBlocks.UPGRADE_SPEED.get());
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_SPEED2.get(), PastelBlocks.UPGRADE_SPEED.get());
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_SPEED3.get(), PastelBlocks.UPGRADE_SPEED.get());
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.UPGRADE_EFFICIENCY.get(), PastelBlocks.UPGRADE_EFFICIENCY.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.UPGRADE_EFFICIENCY2.get(), PastelBlocks.UPGRADE_EFFICIENCY.get());
-        PastelModelHelper.parented(generators, PastelBlocks.UPGRADE_YIELD.get(), PastelBlocks.UPGRADE_YIELD.get());
-        PastelModelHelper.parented(generators, PastelBlocks.UPGRADE_YIELD2.get(), PastelBlocks.UPGRADE_YIELD.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_YIELD.get(), PastelBlocks.UPGRADE_YIELD.get());
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_YIELD2.get(), PastelBlocks.UPGRADE_YIELD.get());
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.UPGRADE_EXPERIENCE.get(), PastelBlocks.UPGRADE_EXPERIENCE.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.UPGRADE_EXPERIENCE2.get(), PastelBlocks.UPGRADE_EXPERIENCE.get());
 
-        PastelModelHelper.simple(generators, PastelBlocks.REDSTONE_SAND);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.REDSTONE_SAND);
 
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.ENDER_GLASS.get())
@@ -347,52 +281,52 @@ public class FunctionalBlockModels {
                                                                                                                       generators.modelOutput
                                                                                                                   )))));
 
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.INCANDESCENT_AMALGAM, ModelLocationUtils::getModelLocation);
 
-        PastelModelHelper.idol(generators, PastelBlocks.AXOLOTL_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.BAT_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.BEE_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.BLAZE_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.CAT_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.CHICKEN_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.COW_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.CREEPER_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.ENDER_DRAGON_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.ENDERMAN_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.ENDERMITE_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.EVOKER_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.FISH_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.FOX_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.GHAST_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.GLOW_SQUID_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.GOAT_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.GUARDIAN_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.HORSE_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.ILLUSIONER_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.OCELOT_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.PARROT_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.PHANTOM_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.PIG_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.PIGLIN_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.POLAR_BEAR_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.PUFFERFISH_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.RABBIT_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.SHEEP_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.SHULKER_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.SILVERFISH_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.SKELETON_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.SLIME_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.SNOW_GOLEM_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.SPIDER_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.SQUID_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.STRAY_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.STRIDER_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.TURTLE_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.WITCH_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.WITHER_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.WITHER_SKELETON_IDOL);
-        PastelModelHelper.idol(generators, PastelBlocks.ZOMBIE_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.AXOLOTL_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.BAT_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.BEE_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.BLAZE_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.CAT_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.CHICKEN_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.COW_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.CREEPER_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.ENDER_DRAGON_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.ENDERMAN_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.ENDERMITE_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.EVOKER_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.FISH_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.FOX_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.GHAST_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.GLOW_SQUID_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.GOAT_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.GUARDIAN_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.HORSE_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.ILLUSIONER_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.OCELOT_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.PARROT_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.PHANTOM_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.PIG_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.PIGLIN_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.POLAR_BEAR_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.PUFFERFISH_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.RABBIT_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.SHEEP_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.SHULKER_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.SILVERFISH_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.SKELETON_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.SLIME_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.SNOW_GOLEM_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.SPIDER_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.SQUID_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.STRAY_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.STRIDER_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.TURTLE_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.WITCH_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.WITHER_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.WITHER_SKELETON_IDOL);
+        PastelModelHelper.BLOCK.idol(generators, PastelBlocks.ZOMBIE_IDOL);
     }
 
     public static void generatePrimfireModel(BlockModelGenerators generators) {

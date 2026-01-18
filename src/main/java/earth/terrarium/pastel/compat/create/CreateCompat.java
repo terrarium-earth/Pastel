@@ -11,6 +11,7 @@ import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelItems.IS;
 import earth.terrarium.pastel.registries.client.PastelModels;
 import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -30,16 +31,19 @@ import org.jetbrains.annotations.NotNull;
 
 import static earth.terrarium.pastel.registries.PastelBlocks.blockWithItem;
 import static earth.terrarium.pastel.registries.PastelItems.item;
-import static earth.terrarium.pastel.registries.PastelItems.simple;
 
 public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
 
     public static void generateBlockModels(BlockModelGenerators generators){
-        PastelModelHelper.cluster(generators, SMALL_ZINC_BUD, ModelTemplates.CROSS);
-        PastelModelHelper.cluster(generators, LARGE_ZINC_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
-        PastelModelHelper.cluster(generators, ZINC_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
-        PastelModelHelper.predefinedItemModel(generators, ZINC_CLUSTER);
-        PastelModelHelper.simple(generators, PURE_ZINC_BLOCK);
+        PastelModelHelper.BLOCK.cluster(generators, SMALL_ZINC_BUD, ModelTemplates.CROSS);
+        PastelModelHelper.BLOCK.cluster(generators, LARGE_ZINC_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.BLOCK.cluster(generators, ZINC_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, ZINC_CLUSTER);
+        PastelModelHelper.BLOCK.simple(generators, PURE_ZINC_BLOCK);
+    }
+
+    public static void generateItemModels(ItemModelGenerators generators){
+        PastelModelHelper.ITEM.simple(generators,PURE_ZINC);
     }
     public static DeferredBlock<Block> SMALL_ZINC_BUD = PastelBlocks.register(blockWithItem(
         "small_zinc_bud", () -> new PastelClusterBlock(
@@ -71,7 +75,7 @@ public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
     ));
 
     public static DeferredItem<Item> PURE_ZINC = PastelItems.register(
-        simple(item("pure_zinc", () -> new Item(IS.of()), InkColors.BROWN)));
+        item("pure_zinc", () -> new Item(IS.of()), InkColors.BROWN));
 
     @Override
     public void register() {
@@ -113,13 +117,9 @@ public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
         return null;
     }
 
-    // todo
     @Override
     @OnlyIn(Dist.CLIENT)
     public void registerClient() {
-//        PastelModelHelper.cutout(SMALL_ZINC_BUD);
-//        PastelModelHelper.cutout(LARGE_ZINC_BUD);
-//        PastelModelHelper.cutout(ZINC_CLUSTER);
     }
 
 }

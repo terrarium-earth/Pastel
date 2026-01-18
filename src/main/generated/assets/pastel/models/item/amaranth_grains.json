@@ -1,3 +1,6 @@
 {
-  "parent": "pastel:block/amaranth"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/amaranth_grains"
+  }
 }

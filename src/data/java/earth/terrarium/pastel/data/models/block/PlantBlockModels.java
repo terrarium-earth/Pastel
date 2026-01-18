@@ -1,20 +1,11 @@
 package earth.terrarium.pastel.data.models.block;
 
-import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.TallCropBlock;
 import earth.terrarium.pastel.blocks.conditional.BloodOrchidBlock;
-import earth.terrarium.pastel.blocks.conditional.MermaidsBrushBlock;
-import earth.terrarium.pastel.blocks.conditional.QuitoxicReedsBlock;
-import earth.terrarium.pastel.blocks.conditional.amaranth.AmaranthBushelBlock;
-import earth.terrarium.pastel.blocks.conditional.amaranth.AmaranthCropBlock;
-import earth.terrarium.pastel.blocks.decoration.CloverBlock;
 import earth.terrarium.pastel.blocks.deeper_down.flora.*;
 import earth.terrarium.pastel.blocks.jade_vines.*;
 import earth.terrarium.pastel.data.PastelModelHelper;
-import earth.terrarium.pastel.items.conditional.FourLeafCloverItem;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.client.PastelModels;
 import earth.terrarium.pastel.registries.client.PastelTextureMaps;
 import earth.terrarium.pastel.registries.client.PastelTexturedModels;
@@ -26,28 +17,24 @@ import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.minecraft.world.level.block.Blocks.*;
-
 public class PlantBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {
 
-        PastelModelHelper.cross(generators, PastelBlocks.SAG_LEAF);
-        PastelModelHelper.cross(generators, PastelBlocks.SAG_BUBBLE);
-        PastelModelHelper.cross(generators, PastelBlocks.SMALL_SAG_BUBBLE);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.SAG_LEAF);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.SAG_BUBBLE);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.SMALL_SAG_BUBBLE);
 
-        PastelModelHelper.singleton(generators, PastelBlocks.GLISTERING_MELON, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.GLISTERING_MELON, TexturedModel.COLUMN);
 
 
-        PastelModelHelper.predefinedItemModel(generators, PastelBlocks.GLISTERING_MELON_STEM);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.GLISTERING_MELON_STEM);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.GLISTERING_MELON_STEM.get())
                                                                 .with(PropertyDispatch.property(
                                                                                           BlockStateProperties.AGE_7)
@@ -318,9 +305,9 @@ public class PlantBlockModels {
                                                                                                                   ));
                                                                                       })));
 
-        PastelModelHelper.cross(generators, PastelBlocks.SWEET_PEA);
-        PastelModelHelper.cross(generators, PastelBlocks.APRICOTTI);
-        PastelModelHelper.cross(generators, PastelBlocks.HUMMING_BELL);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.SWEET_PEA);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.APRICOTTI);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.HUMMING_BELL);
 
 
         List<Variant> variants = new ArrayList<>(PastelModelHelper.createHorizontalRotationVariantList(
@@ -458,16 +445,16 @@ public class PlantBlockModels {
                                                                                        suffix, generators.modelOutput
                                                                                    ));
                                                        })));
-        PastelModelHelper.cross(generators, PastelBlocks.NEPHRITE_BLOSSOM_BULB);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.NEPHRITE_BLOSSOM_BULB);
 
 
 
 
         generateJadeiteLotusStemModel(generators);
-        PastelModelHelper.defaultUpFacingGetter(
+        PastelModelHelper.BLOCK.defaultUpFacingGetter(
             generators, PastelBlocks.JADEITE_LOTUS_FLOWER, ModelLocationUtils::getModelLocation);
-        PastelModelHelper.cross(generators, PastelBlocks.JADEITE_LOTUS_BULB);
-        PastelModelHelper.cross(generators, PastelBlocks.QUITOXIC_REEDS);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.JADEITE_LOTUS_BULB);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.QUITOXIC_REEDS);
 
 
         generateMermaidBrushModel(generators);
@@ -513,15 +500,15 @@ public class PlantBlockModels {
 
 
 
-        PastelModelHelper.singletonWithSoup(generators, PastelBlocks.CLOVER, ModelLocationUtils::getModelLocation);
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.singletonWithSoup(generators, PastelBlocks.CLOVER, ModelLocationUtils::getModelLocation);
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.FOUR_LEAF_CLOVER, ModelLocationUtils::getModelLocation);
 
-        PastelModelHelper.cross(generators, PastelBlocks.AMARANTH_BUSHEL);
-        PastelModelHelper.pottedPlant(generators, PastelBlocks.POTTED_AMARANTH_BUSHEL, false);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.AMARANTH_BUSHEL);
+        PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_AMARANTH_BUSHEL, false);
 
-        PastelModelHelper.cross(generators, PastelBlocks.RESONANT_LILY);
-        PastelModelHelper.pottedPlant(generators, PastelBlocks.POTTED_RESONANT_LILY, false);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.RESONANT_LILY);
+        PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_RESONANT_LILY, false);
 
 
 
@@ -538,7 +525,7 @@ public class PlantBlockModels {
                                                                                                                       stage.toString(),
                                                                                                                       generators.modelOutput
                                                                                                                   )))));
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.POTTED_BLOOD_ORCHID,
             PastelTexturedModels.flowerPotCross(b -> PastelBlocks.BLOOD_ORCHID.get(), "5", false)
         );
@@ -679,7 +666,7 @@ public class PlantBlockModels {
     }
 
     public static void registerSmallDragonjagBlock(BlockModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.singleton(generators, block, PastelTexturedModels.doubleCross(b -> b, ""));
+        PastelModelHelper.BLOCK.singleton(generators, block, PastelTexturedModels.doubleCross(b -> b, ""));
     }
 
     public static void registerTallDragonjagBlock(BlockModelGenerators generators, DeferredBlock<Block> block) {
@@ -721,9 +708,9 @@ public class PlantBlockModels {
         PastelModelHelper.registerBlockTexturedItemModel(generators, PastelBlocks.SMALL_BLACK_DRAGONJAG.get());
         PastelModelHelper.registerBlockTexturedItemModel(generators, PastelBlocks.VARIA_SPROUT.get());
         PastelModelHelper.registerBlockTexturedItemModel(generators, PastelBlocks.BRISTLE_SPROUTS.get(), "_1");
-        PastelModelHelper.simplePlant(generators, PastelBlocks.SWEET_PEA);
-        PastelModelHelper.simplePlant(generators, PastelBlocks.APRICOTTI);
-        PastelModelHelper.simplePlant(generators, PastelBlocks.HUMMING_BELL);
+        PastelModelHelper.BLOCK.simplePlant(generators, PastelBlocks.SWEET_PEA);
+        PastelModelHelper.BLOCK.simplePlant(generators, PastelBlocks.APRICOTTI);
+        PastelModelHelper.BLOCK.simplePlant(generators, PastelBlocks.HUMMING_BELL);
         PastelModelHelper.registerBlockTexturedItemModel(
             generators, PastelBlocks.NEPHRITE_BLOSSOM_STEM.get(), "_bottom");
         PastelModelHelper.registerItemModel(generators, PastelBlocks.NEPHRITE_BLOSSOM_BULB.asItem());
@@ -733,7 +720,7 @@ public class PlantBlockModels {
         PastelModelHelper.registerItemModel(generators, PastelBlocks.CLOVER.asItem());
         PastelModelHelper.registerItemModel(generators, PastelBlocks.FOUR_LEAF_CLOVER.asItem());
         PastelModelHelper.registerItemModel(generators, PastelBlocks.AMARANTH_BUSHEL.asItem());
-        PastelModelHelper.simplePlant(generators, PastelBlocks.RESONANT_LILY);
+        PastelModelHelper.BLOCK.simplePlant(generators, PastelBlocks.RESONANT_LILY);
         PastelModelHelper.registerBlockTexturedItemModel(generators, PastelBlocks.BLOOD_ORCHID.get(), "5");
     }
 }

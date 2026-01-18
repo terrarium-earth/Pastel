@@ -1,52 +1,26 @@
 package earth.terrarium.pastel.data.models.block;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.blocks.decoration.*;
 import earth.terrarium.pastel.blocks.deeper_down.HummingstoneBlock;
-import earth.terrarium.pastel.blocks.deeper_down.groundcover.AshBlock;
-import earth.terrarium.pastel.blocks.deeper_down.groundcover.AshPileBlock;
-import earth.terrarium.pastel.blocks.item_bowl.ItemBowlBlock;
-import earth.terrarium.pastel.blocks.item_roundel.ItemRoundelBlock;
-import earth.terrarium.pastel.blocks.jade_vines.JadeVinePetalBlock;
-import earth.terrarium.pastel.blocks.shooting_star.ShootingStar;
-import earth.terrarium.pastel.blocks.shooting_star.ShootingStarBlock;
-import earth.terrarium.pastel.blocks.shooting_star.ShootingStarItem;
-import earth.terrarium.pastel.blocks.statues.GrotesqueBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
-import earth.terrarium.pastel.data.models.PastelBlockModels;
 import earth.terrarium.pastel.data.models.block.deco.BalciteBlockModels;
 import earth.terrarium.pastel.data.models.block.deco.ColoredBlockModels;
 import earth.terrarium.pastel.data.models.block.deco.StoneLikeBlockModels;
 import earth.terrarium.pastel.data.models.block.deco.WoodLikeBlockModels;
-import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
-import earth.terrarium.pastel.registries.PastelBlockSoundGroups;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.registries.client.PastelModels;
 import earth.terrarium.pastel.registries.client.PastelTextureMaps;
 import earth.terrarium.pastel.registries.client.PastelTexturedModels;
 import earth.terrarium.pastel.registries.client.PastelTextures;
-import net.minecraft.core.Direction;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.List;
@@ -54,7 +28,6 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import static net.minecraft.world.level.block.Blocks.*;
-import static net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK;
 
 public class DecoBlockModels {
 
@@ -91,56 +64,56 @@ public class DecoBlockModels {
         WoodLikeBlockModels.generateBlockModels(generators);
 
 
-        PastelModelHelper.singleton(generators, PastelBlocks.ITEM_BOWL_BASALT, PastelTexturedModels.BOWL);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.ITEM_BOWL_BASALT, PastelTexturedModels.BOWL);
 
-        PastelModelHelper.singleton(generators, PastelBlocks.ITEM_BOWL_CALCITE, PastelTexturedModels.BOWL);
-        PastelModelHelper.singleton(generators, PastelBlocks.ITEM_ROUNDEL, PastelTexturedModels.ROUNDEL);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.ITEM_BOWL_CALCITE, PastelTexturedModels.BOWL);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.ITEM_ROUNDEL, PastelTexturedModels.ROUNDEL);
 
-        PastelModelHelper.defaultEastHorizontalFacing(
+        PastelModelHelper.BLOCK.defaultEastHorizontalFacing(
             generators, PastelBlocks.PRIMORDIAL_WALL_TORCH, ModelLocationUtils::getModelLocation);
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.PRIMORDIAL_TORCH, ModelLocationUtils::getModelLocation);
 
-        PastelModelHelper.simple(generators, PastelBlocks.TOPAZ_GLASS);
-        PastelModelHelper.simple(generators, PastelBlocks.AMETHYST_GLASS);
-        PastelModelHelper.simple(generators, PastelBlocks.CITRINE_GLASS);
-        PastelModelHelper.simple(generators, PastelBlocks.ONYX_GLASS);
-        PastelModelHelper.simple(generators, PastelBlocks.MOONSTONE_GLASS);
-        PastelModelHelper.simple(generators, PastelBlocks.RADIANT_GLASS);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.TOPAZ_GLASS);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.AMETHYST_GLASS);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.CITRINE_GLASS);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.ONYX_GLASS);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.MOONSTONE_GLASS);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.RADIANT_GLASS);
         glassPane(generators, PastelBlocks.TOPAZ_GLASS_PANE, PastelBlocks.TOPAZ_GLASS);
         glassPane(generators, PastelBlocks.AMETHYST_GLASS_PANE, PastelBlocks.AMETHYST_GLASS);
         glassPane(generators, PastelBlocks.CITRINE_GLASS_PANE, PastelBlocks.CITRINE_GLASS);
         glassPane(generators, PastelBlocks.ONYX_GLASS_PANE, PastelBlocks.ONYX_GLASS);
         glassPane(generators, PastelBlocks.MOONSTONE_GLASS_PANE, PastelBlocks.MOONSTONE_GLASS);
         glassPane(generators, PastelBlocks.RADIANT_GLASS_PANE, PastelBlocks.RADIANT_GLASS);
-        PastelModelHelper.singleton(generators, PastelBlocks.TOPAZ_CHIME, PastelTexturedModels.CHIME);
-        PastelModelHelper.singleton(generators, PastelBlocks.AMETHYST_CHIME, PastelTexturedModels.CHIME);
-        PastelModelHelper.singleton(generators, PastelBlocks.CITRINE_CHIME, PastelTexturedModels.CHIME);
-        PastelModelHelper.singleton(generators, PastelBlocks.ONYX_CHIME, PastelTexturedModels.CHIME);
-        PastelModelHelper.singleton(generators, PastelBlocks.MOONSTONE_CHIME, PastelTexturedModels.CHIME);
-        PastelModelHelper.pylon(generators, PastelBlocks.TOPAZ_PYLON);
-        PastelModelHelper.pylon(generators, PastelBlocks.AMETHYST_PYLON);
-        PastelModelHelper.pylon(generators, PastelBlocks.CITRINE_PYLON);
-        PastelModelHelper.pylon(generators, PastelBlocks.ONYX_PYLON);
-        PastelModelHelper.pylon(generators, PastelBlocks.MOONSTONE_PYLON);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.TOPAZ_CHIME, PastelTexturedModels.CHIME);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.AMETHYST_CHIME, PastelTexturedModels.CHIME);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.CITRINE_CHIME, PastelTexturedModels.CHIME);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.ONYX_CHIME, PastelTexturedModels.CHIME);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.MOONSTONE_CHIME, PastelTexturedModels.CHIME);
+        PastelModelHelper.BLOCK.pylon(generators, PastelBlocks.TOPAZ_PYLON);
+        PastelModelHelper.BLOCK.pylon(generators, PastelBlocks.AMETHYST_PYLON);
+        PastelModelHelper.BLOCK.pylon(generators, PastelBlocks.CITRINE_PYLON);
+        PastelModelHelper.BLOCK.pylon(generators, PastelBlocks.ONYX_PYLON);
+        PastelModelHelper.BLOCK.pylon(generators, PastelBlocks.MOONSTONE_PYLON);
 
-        PastelModelHelper.parented(generators, PastelBlocks.SEMI_PERMEABLE_GLASS.get(), GLASS);
-        PastelModelHelper.parented(generators, PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS.get(), TINTED_GLASS);
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.SEMI_PERMEABLE_GLASS.get(), GLASS);
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS.get(), TINTED_GLASS);
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.TOPAZ_SEMI_PERMEABLE_GLASS.get(), PastelBlocks.TOPAZ_GLASS.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.AMETHYST_SEMI_PERMEABLE_GLASS.get(), PastelBlocks.AMETHYST_GLASS.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.CITRINE_SEMI_PERMEABLE_GLASS.get(), PastelBlocks.CITRINE_GLASS.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.ONYX_SEMI_PERMEABLE_GLASS.get(), PastelBlocks.ONYX_GLASS.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.MOONSTONE_SEMI_PERMEABLE_GLASS.get(), PastelBlocks.MOONSTONE_GLASS.get());
-        PastelModelHelper.parented(
+        PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.RADIANT_SEMI_PERMEABLE_GLASS.get(), PastelBlocks.RADIANT_GLASS.get());
 
 
-        PastelModelHelper.simple(generators, PastelBlocks.HUMMINGSTONE_GLASS);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.HUMMINGSTONE_GLASS);
         glassPane(generators, PastelBlocks.HUMMINGSTONE_GLASS_PANE, PastelBlocks.HUMMINGSTONE_GLASS);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.HUMMINGSTONE.get())
                                                                 .with(PastelModelHelper.createBooleanModelMap(
@@ -155,7 +128,7 @@ public class DecoBlockModels {
                                                                         generators.modelOutput
                                                                     )
                                                                 )));
-        PastelModelHelper.parented(generators, PastelBlocks.WAXED_HUMMINGSTONE.get(), PastelBlocks.HUMMINGSTONE.get());
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.WAXED_HUMMINGSTONE.get(), PastelBlocks.HUMMINGSTONE.get());
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
             PastelBlocks.ASH.get(), PastelModelHelper.createModelVariant(PastelTexturedModels.cubeAll(b -> b, "")
@@ -271,13 +244,13 @@ public class DecoBlockModels {
                                                                                     })));
 
 
-        PastelModelHelper.defaultNorthHorizontalFacing(
+        PastelModelHelper.BLOCK.defaultNorthHorizontalFacing(
             generators, PastelBlocks.LONGING_CHIMERA, ModelLocationUtils::getModelLocation);
-        PastelModelHelper.defaultUpFacing(generators, PastelBlocks.RESPLENDENT_BLOCK, TexturedModel.CUBE_TOP_BOTTOM);
-        PastelModelHelper.singleton(generators, PastelBlocks.RESPLENDENT_CUSHION, PastelTexturedModels.CUSHION);
-        PastelModelHelper.singleton(generators, PastelBlocks.RESPLENDENT_CARPET, TexturedModel.CARPET);
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.RESPLENDENT_BLOCK, TexturedModel.CUBE_TOP_BOTTOM);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.RESPLENDENT_CUSHION, PastelTexturedModels.CUSHION);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.RESPLENDENT_CARPET, TexturedModel.CARPET);
 
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.RESPLENDENT_BED);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.RESPLENDENT_BED);
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.RESPLENDENT_BED.get())
                                                                 .with(
                                                                     PastelModelHelper.createSouthDefaultHorizontalFacingVariantMap())
@@ -298,12 +271,12 @@ public class DecoBlockModels {
                                                                                       )));
 
 
-        PastelModelHelper.simple(generators, PastelBlocks.JADE_PETAL_BLOCK, PastelBlocks.JADEITE_PETAL_BLOCK);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.JADE_PETAL_BLOCK, PastelBlocks.JADEITE_PETAL_BLOCK);
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.JADE_PETAL_CARPET,
             PastelTexturedModels.carpet(b -> PastelBlocks.JADE_PETAL_BLOCK.get(), "")
         );
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.JADEITE_PETAL_CARPET,
             PastelTexturedModels.carpet(b -> PastelBlocks.JADEITE_PETAL_BLOCK.get(), "")
         );
@@ -332,14 +305,14 @@ public class DecoBlockModels {
         );
 
 
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.GLISTERING_SHOOTING_STAR, PastelTexturedModels.SHOOTING_STAR);
-        PastelModelHelper.singleton(generators, PastelBlocks.FIERY_SHOOTING_STAR, PastelTexturedModels.SHOOTING_STAR);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.FIERY_SHOOTING_STAR, PastelTexturedModels.SHOOTING_STAR);
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.COLORFUL_SHOOTING_STAR, PastelTexturedModels.SHOOTING_STAR);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.PRISTINE_SHOOTING_STAR, PastelTexturedModels.SHOOTING_STAR);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.GEMSTONE_SHOOTING_STAR, PastelTexturedModels.SHOOTING_STAR);
 
         for (var head : PastelBlocks.MOB_HEADS.values()) {

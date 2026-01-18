@@ -1,3 +1,6 @@
 {
-  "parent": "pastel:block/sawblade_holly_bush"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/sawblade_holly_berry"
+  }
 }

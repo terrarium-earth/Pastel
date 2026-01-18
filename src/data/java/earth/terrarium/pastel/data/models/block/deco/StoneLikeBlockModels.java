@@ -16,7 +16,6 @@ import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
-import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class StoneLikeBlockModels {
@@ -229,7 +228,7 @@ public class StoneLikeBlockModels {
                                                                                       .getFamily()
         );
 
-        PastelModelHelper.axisRotated(generators, PastelBlocks.BASAL_MARBLE, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.BASAL_MARBLE, TexturedModel.COLUMN_ALT);
         generators.blockStateOutput.accept(PastelModelHelper.createMirroredVariantsSupplier(
                                                                 PastelBlocks.BLACKSLAG.get(),
                                                                 TexturedModel.COLUMN_ALT,
@@ -237,33 +236,33 @@ public class StoneLikeBlockModels {
                                                                 generators.modelOutput
                                                             )
                                                             .with(PastelModelHelper.createAxisRotatedVariantMap()));
-        PastelModelHelper.parented(generators, PastelBlocks.INFESTED_BLACKSLAG.get(), PastelBlocks.BLACKSLAG.get());
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.INFESTED_BLACKSLAG.get(), PastelBlocks.BLACKSLAG.get());
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.POLISHED_BLACKSLAG_PILLAR, TexturedModel.createDefault(
                 b -> PastelTextureMaps.sideEnd(b, "", PastelBlocks.CHISELED_POLISHED_BLACKSLAG.get(), ""),
                 ModelTemplates.CUBE_COLUMN
             )
         );
-        PastelModelHelper.simple(generators, PastelBlocks.ANCIENT_CHISELED_POLISHED_BLACKSLAG);
-        PastelModelHelper.singleton(generators, PastelBlocks.SHALE_CLAY, TexturedModel.COLUMN);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.ANCIENT_CHISELED_POLISHED_BLACKSLAG);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.SHALE_CLAY, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.TILLED_SHALE_CLAY,
             PastelTexturedModels.farmland(b -> PastelBlocks.SHALE_CLAY.get(), "_side", b -> b, "")
         );
-        PastelModelHelper.axisRotated(generators, PastelBlocks.PYRITE_PILE, TexturedModel.COLUMN);
-        PastelModelHelper.simple(generators, PastelBlocks.PYRITE_PLATING);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.PYRITE_TUBING, TexturedModel.COLUMN);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.PYRITE_PILE, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.PYRITE_PLATING);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.PYRITE_TUBING, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.PYRITE_RELIEF,
             PastelTexturedModels.cubeColumn(
                 b -> b, "_side", b -> PastelBlocks.PYRITE_TUBING.get(), "_top")
         );
-        PastelModelHelper.simple(generators, PastelBlocks.PYRITE_STACK);
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.PYRITE_STACK);
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.PYRITE_PANELING,
             PastelTexturedModels.cubeColumn(b -> b, "", b -> PastelBlocks.PYRITE_PLATING.get(), "")
         );
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.PYRITE_VENT,
             PastelTexturedModels.cubeColumn(b -> b, "", b -> PastelBlocks.PYRITE_PLATING.get(), "")
         );
@@ -408,30 +407,30 @@ public class StoneLikeBlockModels {
                                                                                                                VariantProperties.Rotation.R90
                                                                                                            )
                                                                                       )));
-        PastelModelHelper.singletonWithSoup(
+        PastelModelHelper.BLOCK.singletonWithSoup(
             generators, PastelBlocks.PYRITE_PROJECTOR, ModelLocationUtils::getModelLocation);
-        PastelModelHelper.simple(generators, PastelBlocks.PYRITE_TILES);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.POLISHED_BONE_ASH_PILLAR, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.PYRITE_TILES);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.POLISHED_BONE_ASH_PILLAR, TexturedModel.COLUMN);
         generators.blockStateOutput.accept(PastelModelHelper.createVariantsSupplier(
                                                                 PastelBlocks.BONE_ASH_SHINGLES.get(),
                                                                 ModelLocationUtils.getModelLocation(PastelBlocks.BONE_ASH_SHINGLES.get())
                                                             )
                                                             .with(
                                                                 PastelModelHelper.createEastDefaultHorizontalFacingVariantMap()));
-        PastelModelHelper.simple(generators, PastelBlocks.SLUSH);
-        PastelModelHelper.snowy(
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.SLUSH);
+        PastelModelHelper.BLOCK.snowy(
             generators, PastelBlocks.OVERGROWN_SLUSH, PastelTexturedModels.cubeBottomTopParticle(
                 b -> b, "_side", b -> b, "_top", b -> PastelBlocks.SLUSH.get(), "", b -> b, "_top"),
             PastelTexturedModels.cubeBottomTopParticle(
                 b -> b, "_snow_side", b -> b, "_snow_top", b -> PastelBlocks.SLUSH.get(), "", b -> b, "_snow_top")
         );
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.TILLED_SLUSH,
             PastelTexturedModels.farmland(b -> PastelBlocks.SLUSH.get(), "", b -> b, "")
         );
-        PastelModelHelper.simple(generators, PastelBlocks.BLACK_MATERIA);
-        PastelModelHelper.simple(generators, PastelBlocks.HORNSLAKE);
-        PastelModelHelper.snowy(
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.BLACK_MATERIA);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.HORNSLAKE);
+        PastelModelHelper.BLOCK.snowy(
             generators, PastelBlocks.SAWBLADE_GRASS, PastelTexturedModels.cubeBottomTopParticle(
                 b -> b, "_side", b -> b, "_top", b -> PastelBlocks.BLACKSLAG.get(), "_top", b -> b, "_top"),
             PastelTexturedModels.cubeBottomTopParticle(
@@ -439,7 +438,7 @@ public class StoneLikeBlockModels {
                 "_snow_top"
             )
         );
-        PastelModelHelper.snowy(
+        PastelModelHelper.BLOCK.snowy(
             generators, PastelBlocks.SHIMMEL, PastelTexturedModels.cubeBottomTopParticle(
                 b -> b, "_side", b -> b, "_top", b -> PastelBlocks.BLACKSLAG.get(), "_top",
                 b -> PastelBlocks.BLACKSLAG.get(), "_top"
@@ -448,7 +447,7 @@ public class StoneLikeBlockModels {
                 b -> PastelBlocks.BLACKSLAG.get(), "_top"
             )
         );
-        PastelModelHelper.snowy(
+        PastelModelHelper.BLOCK.snowy(
             generators, PastelBlocks.OVERGROWN_BLACKSLAG, PastelTexturedModels.overgrown(
                 b -> b, "_side", b -> b, "_top", b -> PastelBlocks.BLACKSLAG.get(), "_top", b -> b, "_fronds"),
             PastelTexturedModels.overgrown(
@@ -467,17 +466,17 @@ public class StoneLikeBlockModels {
                 PastelTexturedModels.cubeAll(b -> b, "_2")
                                     .createWithSuffix(PastelBlocks.FLAYED_EARTH.get(), "_2", generators.modelOutput))
         ));
-        PastelModelHelper.singleton(
+        PastelModelHelper.BLOCK.singleton(
             generators, PastelBlocks.ASHEN_BLACKSLAG,
             PastelTexturedModels.cubeBottomTopParticle(
                 b -> b, "_side", b -> b, "_top", b -> PastelBlocks.BLACKSLAG.get(), "_top",
                 b -> b, "_top"
             )
         );
-        PastelModelHelper.axisRotated(generators, PastelBlocks.BASAL_MARBLE_PILLAR, TexturedModel.COLUMN);
-        PastelModelHelper.defaultUpFacing(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.BASAL_MARBLE_PILLAR, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.defaultUpFacing(
             generators, PastelBlocks.POLISHED_BASAL_MARBLE, TexturedModel.CUBE_TOP_BOTTOM);
-        PastelModelHelper.simple(generators, PastelBlocks.DOWNSTONE);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DOWNSTONE);
 
     }
 

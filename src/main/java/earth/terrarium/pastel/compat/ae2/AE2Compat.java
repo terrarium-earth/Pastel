@@ -20,10 +20,10 @@ import static earth.terrarium.pastel.registries.PastelBlocks.blockWithItem;
 public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
 
     public static void generateBlockModels(BlockModelGenerators generators) {
-        PastelModelHelper.cluster(generators, SMALL_FLUIX_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
-        PastelModelHelper.cluster(generators, LARGE_FLUIX_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
-        PastelModelHelper.cluster(generators, FLUIX_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
-        PastelModelHelper.predefinedItemModel(generators, FLUIX_CLUSTER);
+        PastelModelHelper.BLOCK.cluster(generators, SMALL_FLUIX_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.BLOCK.cluster(generators, LARGE_FLUIX_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.BLOCK.cluster(generators, FLUIX_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, FLUIX_CLUSTER);
     }
 
     public static DeferredBlock<Block> SMALL_FLUIX_BUD = PastelBlocks.register(blockWithItem(
@@ -59,8 +59,5 @@ public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void registerClient() {
-//        PastelModelHelper.cutout(SMALL_FLUIX_BUD);
-//        PastelModelHelper.cutout(LARGE_FLUIX_BUD);
-//        PastelModelHelper.cutout(FLUIX_CLUSTER);
     }
 }

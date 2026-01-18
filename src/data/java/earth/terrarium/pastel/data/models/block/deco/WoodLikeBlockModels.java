@@ -1,14 +1,8 @@
 package earth.terrarium.pastel.data.models.block.deco;
 
-import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.blocks.PastelLogBlock;
-import earth.terrarium.pastel.blocks.amphora.AmphoraBlock;
 import earth.terrarium.pastel.blocks.decoration.DiagonalBlock;
 import earth.terrarium.pastel.blocks.decoration.FlexLanternBlock;
-import earth.terrarium.pastel.blocks.deeper_down.StrippingLootPillarBlock;
 import earth.terrarium.pastel.blocks.deeper_down.WeepingGalaFrondsTipBlock;
-import earth.terrarium.pastel.blocks.deeper_down.flora.WeepingGalaFrondsBlock;
-import earth.terrarium.pastel.blocks.deeper_down.flora.WeepingGalaSprigBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.registries.client.PastelModels;
@@ -24,13 +18,8 @@ import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
-
-import static net.minecraft.world.level.block.Blocks.*;
 
 public class WoodLikeBlockModels {
     // noxshrooms are close enough to saplings
@@ -54,7 +43,7 @@ public class WoodLikeBlockModels {
 
     public static void generateNoxwoodLightBlockModel(
         BlockModelGenerators generators, DeferredBlock<Block> block, DeferredBlock<Block> gillsBlock) {
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(
             generators, block,
             TexturedModel.createDefault(
                 b -> PastelTextureMaps.sideTopInside(b, "", b, "_top", gillsBlock.get(), ""),
@@ -195,113 +184,113 @@ public class WoodLikeBlockModels {
         generateNoxshroomBlockModel(generators, PastelBlocks.IVORY_NOXSHROOM);
         generateNoxshroomBlockModel(generators, PastelBlocks.CHESTNUT_NOXSHROOM);
 
-        PastelModelHelper.pottedPlant(generators, PastelBlocks.POTTED_SLATE_NOXSHROOM, false);
-        PastelModelHelper.pottedPlant(generators, PastelBlocks.POTTED_EBONY_NOXSHROOM, false);
-        PastelModelHelper.pottedPlant(generators, PastelBlocks.POTTED_IVORY_NOXSHROOM, false);
-        PastelModelHelper.pottedPlant(generators, PastelBlocks.POTTED_CHESTNUT_NOXSHROOM, false);
+        PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_SLATE_NOXSHROOM, false);
+        PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_EBONY_NOXSHROOM, false);
+        PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_IVORY_NOXSHROOM, false);
+        PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_CHESTNUT_NOXSHROOM, false);
 
-        PastelModelHelper.axisRotated(generators, PastelBlocks.STRIPPED_SLATE_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.STRIPPED_SLATE_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.STRIPPED_SLATE_NOXCAP_HYPHAE,
             PastelTexturedModels.cubeColumn(
                 b -> PastelBlocks.STRIPPED_SLATE_NOXCAP_STEM.get(), "",
                 b -> PastelBlocks.STRIPPED_SLATE_NOXCAP_STEM.get(), ""
             )
         );
-        PastelModelHelper.axisRotated(generators, PastelBlocks.SLATE_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.SLATE_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.SLATE_NOXCAP_HYPHAE,
             PastelTexturedModels.cubeColumn(
                 b -> PastelBlocks.SLATE_NOXCAP_STEM.get(), "", b -> PastelBlocks.SLATE_NOXCAP_STEM.get(), "")
         );
-        PastelModelHelper.singleton(generators, PastelBlocks.SLATE_NOXCAP_BLOCK, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.SLATE_NOXCAP_GILLS, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.SLATE_NOXWOOD_PILLAR, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.redstoneLamp(generators, PastelBlocks.SLATE_NOXWOOD_LAMP);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.SLATE_NOXCAP_BLOCK, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.SLATE_NOXCAP_GILLS, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.SLATE_NOXWOOD_PILLAR, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.redstoneLamp(generators, PastelBlocks.SLATE_NOXWOOD_LAMP);
         generateNoxwoodLightBlockModel(generators, PastelBlocks.SLATE_NOXWOOD_LIGHT, PastelBlocks.SLATE_NOXCAP_GILLS);
-        PastelModelHelper.barrellike(
+        PastelModelHelper.BLOCK.barrellike(
             generators, PastelBlocks.SLATE_NOXWOOD_AMPHORA, b -> PastelBlocks.SLATE_NOXWOOD_LIGHT.get(), "_top");
         generateNoxwoodLanternBlockModel(generators, PastelBlocks.SLATE_NOXWOOD_LANTERN);
 
-        PastelModelHelper.axisRotated(generators, PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.STRIPPED_EBONY_NOXCAP_HYPHAE,
             PastelTexturedModels.cubeColumn(
                 b -> PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM.get(), "",
                 b -> PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM.get(), ""
             )
         );
-        PastelModelHelper.axisRotated(generators, PastelBlocks.EBONY_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.EBONY_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.EBONY_NOXCAP_HYPHAE,
             PastelTexturedModels.cubeColumn(
                 b -> PastelBlocks.EBONY_NOXCAP_STEM.get(), "", b -> PastelBlocks.EBONY_NOXCAP_STEM.get(), "")
         );
-        PastelModelHelper.singleton(generators, PastelBlocks.EBONY_NOXCAP_BLOCK, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.EBONY_NOXCAP_GILLS, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.EBONY_NOXWOOD_PILLAR, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.redstoneLamp(generators, PastelBlocks.EBONY_NOXWOOD_LAMP);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.EBONY_NOXCAP_BLOCK, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.EBONY_NOXCAP_GILLS, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.EBONY_NOXWOOD_PILLAR, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.redstoneLamp(generators, PastelBlocks.EBONY_NOXWOOD_LAMP);
         generateNoxwoodLightBlockModel(generators, PastelBlocks.EBONY_NOXWOOD_LIGHT, PastelBlocks.EBONY_NOXCAP_GILLS);
-        PastelModelHelper.barrellike(
+        PastelModelHelper.BLOCK.barrellike(
             generators, PastelBlocks.EBONY_NOXWOOD_AMPHORA, b -> PastelBlocks.EBONY_NOXWOOD_LIGHT.get(), "_top");
         generateNoxwoodLanternBlockModel(generators, PastelBlocks.EBONY_NOXWOOD_LANTERN);
 
-        PastelModelHelper.axisRotated(generators, PastelBlocks.STRIPPED_IVORY_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.STRIPPED_IVORY_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.STRIPPED_IVORY_NOXCAP_HYPHAE,
             PastelTexturedModels.cubeColumn(
                 b -> PastelBlocks.STRIPPED_IVORY_NOXCAP_STEM.get(), "",
                 b -> PastelBlocks.STRIPPED_IVORY_NOXCAP_STEM.get(), ""
             )
         );
-        PastelModelHelper.axisRotated(generators, PastelBlocks.IVORY_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.IVORY_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.IVORY_NOXCAP_HYPHAE,
             PastelTexturedModels.cubeColumn(
                 b -> PastelBlocks.IVORY_NOXCAP_STEM.get(), "", b -> PastelBlocks.IVORY_NOXCAP_STEM.get(), "")
         );
-        PastelModelHelper.singleton(generators, PastelBlocks.IVORY_NOXCAP_BLOCK, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.IVORY_NOXCAP_GILLS, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.IVORY_NOXWOOD_PILLAR, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.redstoneLamp(generators, PastelBlocks.IVORY_NOXWOOD_LAMP);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.IVORY_NOXCAP_BLOCK, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.IVORY_NOXCAP_GILLS, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.IVORY_NOXWOOD_PILLAR, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.redstoneLamp(generators, PastelBlocks.IVORY_NOXWOOD_LAMP);
         generateNoxwoodLightBlockModel(generators, PastelBlocks.IVORY_NOXWOOD_LIGHT, PastelBlocks.IVORY_NOXCAP_GILLS);
-        PastelModelHelper.barrellike(
+        PastelModelHelper.BLOCK.barrellike(
             generators, PastelBlocks.IVORY_NOXWOOD_AMPHORA, b -> PastelBlocks.IVORY_NOXWOOD_LIGHT.get(), "_top");
         generateNoxwoodLanternBlockModel(generators, PastelBlocks.IVORY_NOXWOOD_LANTERN);
 
-        PastelModelHelper.axisRotated(generators, PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_HYPHAE,
             PastelTexturedModels.cubeColumn(
                 b -> PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM.get(), "",
                 b -> PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM.get(), ""
             )
         );
-        PastelModelHelper.axisRotated(generators, PastelBlocks.CHESTNUT_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.CHESTNUT_NOXCAP_STEM, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.CHESTNUT_NOXCAP_HYPHAE,
             PastelTexturedModels.cubeColumn(
                 b -> PastelBlocks.CHESTNUT_NOXCAP_STEM.get(), "", b -> PastelBlocks.CHESTNUT_NOXCAP_STEM.get(), "")
         );
-        PastelModelHelper.singleton(generators, PastelBlocks.CHESTNUT_NOXCAP_BLOCK, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.CHESTNUT_NOXCAP_GILLS, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.axisRotated(generators, PastelBlocks.CHESTNUT_NOXWOOD_PILLAR, TexturedModel.COLUMN_ALT);
-        PastelModelHelper.redstoneLamp(generators, PastelBlocks.CHESTNUT_NOXWOOD_LAMP);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.CHESTNUT_NOXCAP_BLOCK, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.CHESTNUT_NOXCAP_GILLS, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.CHESTNUT_NOXWOOD_PILLAR, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.redstoneLamp(generators, PastelBlocks.CHESTNUT_NOXWOOD_LAMP);
         generateNoxwoodLightBlockModel(
             generators, PastelBlocks.CHESTNUT_NOXWOOD_LIGHT, PastelBlocks.CHESTNUT_NOXCAP_GILLS);
-        PastelModelHelper.barrellike(
+        PastelModelHelper.BLOCK.barrellike(
             generators, PastelBlocks.CHESTNUT_NOXWOOD_AMPHORA, b -> PastelBlocks.CHESTNUT_NOXWOOD_LIGHT.get(), "_top");
         generateNoxwoodLanternBlockModel(generators, PastelBlocks.CHESTNUT_NOXWOOD_LANTERN);
 
-        PastelModelHelper.cross(generators, PastelBlocks.WEEPING_GALA_SPRIG);
-        PastelModelHelper.pottedPlant(generators, PastelBlocks.POTTED_WEEPING_GALA_SPRIG, false);
-        PastelModelHelper.singleton(generators, PastelBlocks.WEEPING_GALA_LEAVES, TexturedModel.LEAVES);
-        PastelModelHelper.log(generators, PastelBlocks.WEEPING_GALA_LOG);
-        PastelModelHelper.log(generators, PastelBlocks.STRIPPED_WEEPING_GALA_LOG);
-        PastelModelHelper.wood(generators, PastelBlocks.WEEPING_GALA_WOOD, PastelBlocks.WEEPING_GALA_LOG);
-        PastelModelHelper.wood(
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.WEEPING_GALA_SPRIG);
+        PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_WEEPING_GALA_SPRIG, false);
+        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.WEEPING_GALA_LEAVES, TexturedModel.LEAVES);
+        PastelModelHelper.BLOCK.log(generators, PastelBlocks.WEEPING_GALA_LOG);
+        PastelModelHelper.BLOCK.log(generators, PastelBlocks.STRIPPED_WEEPING_GALA_LOG);
+        PastelModelHelper.BLOCK.wood(generators, PastelBlocks.WEEPING_GALA_WOOD, PastelBlocks.WEEPING_GALA_LOG);
+        PastelModelHelper.BLOCK.wood(
             generators, PastelBlocks.STRIPPED_WEEPING_GALA_WOOD, PastelBlocks.STRIPPED_WEEPING_GALA_LOG);
-        PastelModelHelper.cross(generators, PastelBlocks.WEEPING_GALA_FRONDS);
+        PastelModelHelper.BLOCK.cross(generators, PastelBlocks.WEEPING_GALA_FRONDS);
         generators.blockStateOutput.accept(
             MultiVariantGenerator.multiVariant(PastelBlocks.WEEPING_GALA_FRONDS_PLANT.get())
                                  .with(PropertyDispatch.property(WeepingGalaFrondsTipBlock.FORM)
@@ -339,9 +328,9 @@ public class WoodLikeBlockModels {
                                                                                        "_resin", generators.modelOutput
                                                                                    ))
                                                        )));
-        PastelModelHelper.axisRotated(generators, PastelBlocks.WEEPING_GALA_PILLAR, TexturedModel.COLUMN);
-        PastelModelHelper.barrellike(generators, PastelBlocks.WEEPING_GALA_BARREL, b -> b, "_bottom");
-        PastelModelHelper.barrellike(generators, PastelBlocks.WEEPING_GALA_AMPHORA, b -> b, "_bottom");
+        PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.WEEPING_GALA_PILLAR, TexturedModel.COLUMN);
+        PastelModelHelper.BLOCK.barrellike(generators, PastelBlocks.WEEPING_GALA_BARREL, b -> b, "_bottom");
+        PastelModelHelper.BLOCK.barrellike(generators, PastelBlocks.WEEPING_GALA_AMPHORA, b -> b, "_bottom");
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.WEEPING_GALA_LANTERN.get())
                                                                 .with(PropertyDispatch.property(
                                                                                           BlockStateProperties.HANGING)
@@ -372,8 +361,8 @@ public class WoodLikeBlockModels {
                                                                                                                      : "_small"),
                                                                                                                     generators.modelOutput
                                                                                                                 )))));
-        PastelModelHelper.redstoneLamp(generators, PastelBlocks.WEEPING_GALA_LAMP);
-        PastelModelHelper.axisRotated(
+        PastelModelHelper.BLOCK.redstoneLamp(generators, PastelBlocks.WEEPING_GALA_LAMP);
+        PastelModelHelper.BLOCK.axisRotated(
             generators, PastelBlocks.WEEPING_GALA_LIGHT, PastelTexturedModels.BASE_TRANS_LIGHT_CORE);
     }
 

@@ -9,18 +9,18 @@ import net.minecraft.data.models.BlockModelGenerators;
 public class PastelNetworkBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators){
 
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.CONNECTION_NODE);
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.PROVIDER_NODE);
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.STORAGE_NODE);
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.BUFFER_NODE);
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.SENDER_NODE);
-        PastelModelHelper.predefinedItemModel(generators,PastelBlocks.GATHER_NODE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.CONNECTION_NODE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.PROVIDER_NODE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.STORAGE_NODE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.BUFFER_NODE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.SENDER_NODE);
+        PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.GATHER_NODE);
 
-        PastelModelHelper.defaultUpFacing(generators, PastelBlocks.CONNECTION_NODE,PastelTexturedModels.parented(PastelModels.PASTEL_GENERIC_NODE));
-        PastelModelHelper.defaultUpFacing(generators, PastelBlocks.PROVIDER_NODE,PastelTexturedModels.parented(PastelModels.PASTEL_PUSH_NODE));
-        PastelModelHelper.defaultUpFacing(generators, PastelBlocks.STORAGE_NODE,PastelTexturedModels.parented(PastelModels.PASTEL_STORE_NODE));
-        PastelModelHelper.defaultUpFacing(generators, PastelBlocks.BUFFER_NODE,PastelTexturedModels.parented(PastelModels.PASTEL_STORE_NODE));
-        PastelModelHelper.defaultUpFacing(generators, PastelBlocks.SENDER_NODE,PastelTexturedModels.parented(PastelModels.PASTEL_PUSH_NODE));
-        PastelModelHelper.defaultUpFacing(generators, PastelBlocks.GATHER_NODE,PastelTexturedModels.parented(PastelModels.PASTEL_PULL_NODE));
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.CONNECTION_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_GENERIC_NODE));
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.PROVIDER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_PUSH_NODE));
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.STORAGE_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_STORE_NODE));
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.BUFFER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_STORE_NODE));
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.SENDER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_PUSH_NODE));
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.GATHER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_PULL_NODE));
     }
 }

@@ -1,3 +1,6 @@
 {
-  "parent": "pastel:block/fading"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/bottle_of_fading"
+  }
 }

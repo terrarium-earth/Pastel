@@ -1589,8 +1589,7 @@ public class PastelItemGroups {
                                                                            PastelItems.AMARANTH_GRAINS.get());
                                                                        entries.accept(
                                                                            PastelBlocks.AMARANTH_BUSHEL.get());
-                                                                       entries.accept(BuiltInRegistries.ITEM.get(
-                                                                           PastelItems.GLISTERING_MELON_SEEDS));
+                                                                       entries.accept(PastelItems.GLISTERING_MELON_SEEDS);
                                                                        entries.accept(PastelBlocks.GLISTERING_MELON);
 
                                                                        entries.accept(
