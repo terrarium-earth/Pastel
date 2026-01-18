@@ -1845,15 +1845,4 @@ public class PastelItems {
         return new PairedFoodComponent(PastelItems.SCONE, true, foodComponent);
     }
 
-    // I couldn't find any fitting instances of this event already. feel free to move it ~Esét
-    @SubscribeEvent
-    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(
-            AnimatedBlockItemUtil.createBasicExtensions(
-                PastelCommon.locate("textures/block/tea_table.png"),
-                PastelCommon.locate("tea_table")
-            ), PastelBlocks.TEA_TABLE.asItem()
-        );
-    }
-
 }
