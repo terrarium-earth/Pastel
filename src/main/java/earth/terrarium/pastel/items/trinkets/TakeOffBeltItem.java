@@ -40,7 +40,7 @@ public class TakeOffBeltItem extends PastelTrinketItem {
     private static final HashMap<LivingEntity, Long> sneakingTimes = new HashMap<>();
 
     public TakeOffBeltItem(Properties settings) {
-        super(settings, PastelCommon.locate("unlocks/trinkets/take_off_belt"));
+        super(settings, PastelCommon.locate("unlocks/trinkets/takeoff_belt"));
     }
 
     public static int getJumpBoostAmplifier(int sneakTime, int powerEnchantmentLevel) {
@@ -59,7 +59,7 @@ public class TakeOffBeltItem extends PastelTrinketItem {
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.take_off_belt.tooltip")
+        tooltip.add(Component.translatable("item.pastel.takeoff_belt.tooltip")
                              .withStyle(ChatFormatting.GRAY));
     }
 

@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "id": "pastel:ring_of_aerial_grace"
+      "id": "pastel:ring_of_aetherial_grace"
     },
     "hidden": true,
     "title": {
@@ -19,7 +19,7 @@
         "items": [
           {
             "items": [
-              "pastel:ring_of_aerial_grace"
+              "pastel:ring_of_aetherial_grace"
             ]
           },
           {

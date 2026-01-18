@@ -5830,11 +5830,11 @@ public class PastelGuidebookLang {
             " Wither. *Convenient*"
         );
         provider.add(
-            "book.pastel.guidebook.ring_of_aerial_grace.page0.text",
+            "book.pastel.guidebook.ring_of_aetherial_grace.page0.text",
             "I know myself well enough now to be the one having one's head in the clouds.\\\n\\\n*Literally*, this " +
             "time around, though!"
         );
-        provider.add("book.pastel.guidebook.ring_of_aerial_grace.page1.text", "*I'm in a light mood today*");
+        provider.add("book.pastel.guidebook.ring_of_aetherial_grace.page1.text", "*I'm in a light mood today*");
         provider.add(
             "book.pastel.guidebook.ring_of_denser_steps.page0.text",
             "You know, I always wondered where all that Ink goes, when I infuse my small trinkets with it. Does it " +
@@ -6289,20 +6289,20 @@ public class PastelGuidebookLang {
             "[#](449900)Increases my attack speed[#]() with every level."
         );
         provider.add(
-            "book.pastel.guidebook.take_off_belt.page0.text",
+            "book.pastel.guidebook.takeoff_belt.page0.text",
             "Climbing mountains or misshapen caves is time consuming. If I don't see a way to scramble up an uneven " +
             "ledge, I've had no choice but to carve a path into the rock - until now!\\\nWith my new belt here I'm " +
             "able to put great vertical distances behind me, sparing me time and the beautiful nature from " +
             "destruction."
         );
         provider.add(
-            "book.pastel.guidebook.take_off_belt.page1.text",
+            "book.pastel.guidebook.takeoff_belt.page1.text",
             "Sneak to charge a high jump, getting more powerful the longer I charge.\\\n\\\n*Even if the name implies" +
             " it, please don't take it off.*"
         );
-        provider.add("book.pastel.guidebook.take_off_belt.page2.text", "Increases the jump height even further.");
+        provider.add("book.pastel.guidebook.takeoff_belt.page2.text", "Increases the jump height even further.");
         provider.add(
-            "book.pastel.guidebook.take_off_belt.page3.text",
+            "book.pastel.guidebook.takeoff_belt.page3.text",
             "Will give me a short slow fall effect, allowing to better navigate where to land. A high level of " +
             "Feather Falling may be a viable way to get back down those cliffs again safely, actually."
         );

@@ -33,7 +33,6 @@ public class PastelRecipeLang {
         provider.add("pastel.recipe.fusion_shrine.explanation.midnight_aberration", "Daytime with sunny weather");
         provider.add("pastel.recipe.fusion_shrine.explanation.netherite_ingot", "Risky, but yielding...");
         provider.add("pastel.recipe.fusion_shrine.explanation.no_rgb", "Saw you peeking");
-        provider.add("pastel.recipe.fusion_shrine.explanation.ominous_sapling", "Requires daytime");
         provider.add("pastel.recipe.fusion_shrine.explanation.onyx_shard", "Midnight on a new moon only");
         provider.add("pastel.recipe.fusion_shrine.explanation.soothing_bouquet", "Perform at the darkest hour");
         provider.add("pastel.recipe.fusion_shrine.explanation.paltaeria_gem", "Requires a thunderstorm");

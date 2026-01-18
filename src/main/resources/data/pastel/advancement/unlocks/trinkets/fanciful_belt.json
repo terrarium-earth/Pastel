@@ -6,17 +6,17 @@
         "advancement": "pastel:unlocks/trinkets/azure_dike_belt"
       }
     },
-    "unlocked_take_off_belt": {
+    "unlocked_takeoff_belt": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:unlocks/trinkets/take_off_belt"
+        "advancement": "pastel:unlocks/trinkets/takeoff_belt"
       }
     }
   },
   "requirements": [
     [
       "unlocked_azure_dike_belt",
-      "unlocked_take_off_belt"
+      "unlocked_takeoff_belt"
     ]
   ]
 }

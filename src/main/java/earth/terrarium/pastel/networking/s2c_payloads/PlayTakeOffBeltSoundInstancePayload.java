@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 public record PlayTakeOffBeltSoundInstancePayload() implements CustomPacketPayload {
 
     public static final Type<PlayTakeOffBeltSoundInstancePayload> ID = PastelC2SPackets.makeId(
-        "play_take_off_belt_sound_instance");
+        "play_takeoff_belt_sound_instance");
     public static final StreamCodec<FriendlyByteBuf, PlayTakeOffBeltSoundInstancePayload> CODEC = StreamCodec.of(
         (buf, value) -> {
         }, buf -> new PlayTakeOffBeltSoundInstancePayload()

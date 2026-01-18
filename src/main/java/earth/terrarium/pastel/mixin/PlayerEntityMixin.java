@@ -125,7 +125,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
     protected void jumpAdvancementCriterion(CallbackInfo ci) {
 
         if ((Object) this instanceof ServerPlayer serverPlayerEntity) {
-            PastelCriteria.TAKE_OFF_BELT_JUMP.trigger(serverPlayerEntity);
+            PastelCriteria.TAKEOFF_BELT_JUMP.trigger(serverPlayerEntity);
         }
     }
 

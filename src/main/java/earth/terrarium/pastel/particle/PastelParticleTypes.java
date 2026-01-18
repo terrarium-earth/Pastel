@@ -77,7 +77,6 @@ public class PastelParticleTypes {
     public static final SimpleParticleType BLUE_BUBBLE_POP = register("blue_bubble_pop", false);
     public static final SimpleParticleType GREEN_BUBBLE_POP = register("green_bubble_pop", false);
 
-    public static final SimpleParticleType SPIRIT_SALLOW = register("spirit_sallow", false);
     public static final SimpleParticleType DIVINITY = register("divinity", false);
     public static final SimpleParticleType SHOOTING_STAR = register("shooting_star", false);
     public static final SimpleParticleType JADE_VINES = register("jade_vines", false);

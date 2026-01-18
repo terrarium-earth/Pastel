@@ -421,7 +421,7 @@ public class PastelItemLang {
         provider.add("item.pastel.suspicious_brew.tooltip.preview", "Exponentially longer duration the higher Alc. %");
         provider.add("item.pastel.suspicious_brew.tooltip.preview2", "Effects depend on the flowers used");
         provider.add("item.pastel.sylph_leggings.tooltip", "Grants Regeneration when hit");
-        provider.add("item.pastel.take_off_belt.tooltip", "Crouch to charge a High-Jump");
+        provider.add("item.pastel.takeoff_belt.tooltip", "Crouch to charge a High-Jump");
         provider.add("item.pastel.tooltip.explosives.modifiers", "Use the Pigment Pedestal to add modifiers");
         provider.add("item.pastel.tooltip.explosives.remaining_slots", "Modifiers used: %d/%d");
         provider.add("item.pastel.tooltip.loom_pattern_available", "✿ Usable as Banner Pattern");

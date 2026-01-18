@@ -12,10 +12,10 @@
         "advancement": "pastel:unlocks/trinkets/neat_ring"
       }
     },
-    "unlocked_ring_of_aerial_grace": {
+    "unlocked_ring_of_aetherial_grace": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:unlocks/trinkets/ring_of_aerial_grace"
+        "advancement": "pastel:unlocks/trinkets/ring_of_aetherial_grace"
       }
     }
   },
@@ -23,7 +23,7 @@
     [
       "unlocked_ring_of_pursuit",
       "unlocked_neat_ring",
-      "unlocked_ring_of_aerial_grace"
+      "unlocked_ring_of_aetherial_grace"
     ]
   ]
 }

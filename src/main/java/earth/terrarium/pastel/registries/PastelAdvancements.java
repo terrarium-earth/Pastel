@@ -114,8 +114,6 @@ public class PastelAdvancements {
             public static final ResourceLocation ETHEREAL_PLATFORM = PastelCommon.locate(
                 "unlocks/blocks/ethereal_platform");
             public static final ResourceLocation CINDERHEARTH = PastelCommon.locate("unlocks/blocks/cinderhearth");
-            public static final ResourceLocation OMINOUS_SAPLING = PastelCommon.locate(
-                "unlocks/blocks/ominous_sapling");
             public static final ResourceLocation HEARTBOUND_CHEST = PastelCommon.locate(
                 "unlocks/blocks/heartbound_chest");
             public static final ResourceLocation BUDDING_ONYX = PastelCommon.locate("unlocks/blocks/budding_onyx");
@@ -201,8 +199,8 @@ public class PastelAdvancements {
             public static final ResourceLocation FANCIFUL_BISMUTH_RING = PastelCommon.locate(
                 "unlocks/trinkets/fanciful_bismuth_ring");
             public static final ResourceLocation TOTEM_PENDANT = PastelCommon.locate("unlocks/trinkets/totem_pendant");
-            public static final ResourceLocation RING_OF_AERIAL_GRACE = PastelCommon.locate(
-                "unlocks/trinkets/ring_of_aerial_grace");
+            public static final ResourceLocation RING_OF_AETHERIAL_GRACE = PastelCommon.locate(
+                "unlocks/trinkets/ring_of_aetherial_grace");
             public static final ResourceLocation GLEAMING_PIN = PastelCommon.locate("unlocks/trinkets/gleaming_pin");
             public static final ResourceLocation GLOVES_OF_DAWNS_GRASP = PastelCommon.locate(
                 "unlocks/trinkets/gloves_of_dawns_grasp");
@@ -219,7 +217,7 @@ public class PastelAdvancements {
             public static final ResourceLocation PRISCILLENT_SPECTACLES = PastelCommon.locate(
                 "unlocks/trinkets/priscillent_spectacles");
             public static final ResourceLocation FANCIFUL_BELT = PastelCommon.locate("unlocks/trinkets/fanciful_belt");
-            public static final ResourceLocation TAKE_OFF_BELT = PastelCommon.locate("unlocks/trinkets/take_off_belt");
+            public static final ResourceLocation TAKEOFF_BELT = PastelCommon.locate("unlocks/trinkets/takeoff_belt");
             public static final ResourceLocation WEEPING_CIRCLET = PastelCommon.locate(
                 "unlocks/trinkets/weeping_circlet");
             public static final ResourceLocation FANCIFUL_CIRCLET = PastelCommon.locate(
@@ -1004,8 +1002,8 @@ public class PastelAdvancements {
             "midgame/create_midnight_aberration");
         public static final ResourceLocation COLLECT_GEMSTONE_SHARD_USING_CRYSTAL_APOTHECARY = PastelCommon.locate(
             "midgame/collect_gemstone_shard_using_crystal_apothecary");
-        public static final ResourceLocation HIGH_JUMP_WITH_TAKE_OFF_BELT = PastelCommon.locate(
-            "midgame/high_jump_with_take_off_belt");
+        public static final ResourceLocation HIGH_JUMP_WITH_TAKEOFF_BELT = PastelCommon.locate(
+            "midgame/high_jump_with_takeoff_belt");
         public static final ResourceLocation BREAK_DECAYED_BEDROCK = PastelCommon.locate(
             "midgame/break_decayed_bedrock");
         public static final ResourceLocation COLLECT_STORM_STONE = PastelCommon.locate("midgame/collect_storm_stone");
@@ -1041,8 +1039,8 @@ public class PastelAdvancements {
         public static final ResourceLocation COLLECT_ENDER_DRAGON_HEAD_USING_TREASURE_HUNTER = PastelCommon.locate(
             "midgame/collect_ender_dragon_head_using_treasure_hunter");
         public static final ResourceLocation COLLECT_STRATINE = PastelCommon.locate("midgame/collect_stratine");
-        public static final ResourceLocation TAKE_OFF_BELT_OVERCHARGED = PastelCommon.locate(
-            "midgame/take_off_belt_overcharged");
+        public static final ResourceLocation TAKEOFF_BELT_OVERCHARGED = PastelCommon.locate(
+            "midgame/takeoff_belt_overcharged");
         public static final ResourceLocation COLLECT_JADE_PETALS = PastelCommon.locate(
             "midgame/collect_jade_petals");
         public static final ResourceLocation BREW_NO_POTION_IN_POTION_WORKSHOP = PastelCommon.locate(

@@ -18,9 +18,9 @@
     }
   ],
   "result": {
-    "id": "pastel:take_off_belt"
+    "id": "pastel:takeoff_belt"
   },
-  "required_advancement": "pastel:unlocks/trinkets/take_off_belt",
+  "required_advancement": "pastel:unlocks/trinkets/takeoff_belt",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],
   "finish_crafting_effect": "single_visual_explosion_on_shrine"

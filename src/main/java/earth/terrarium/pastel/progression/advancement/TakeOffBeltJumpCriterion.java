@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBeltJumpCriterion.Conditions> {
 
-    public static final ResourceLocation ID = PastelCommon.locate("take_off_belt_jump");
+    public static final ResourceLocation ID = PastelCommon.locate("takeoff_belt_jump");
 
     public static TakeOffBeltJumpCriterion.Conditions create(
         ItemPredicate itemPredicate, MinMaxBounds.Ints chargesRange) {

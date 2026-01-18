@@ -734,8 +734,6 @@ public class PastelAdvancementLang {
             "lifetime. Is there another way?"
         );
         provider.add("advancements.pastel.grow_malachite_in_crystallarieum.title", "Eons squeezed into Minutes");
-        provider.add("advancements.pastel.grow_ominous_sapling.description", "It looks... kind of dead?");
-        provider.add("advancements.pastel.grow_ominous_sapling.title", "A failed experiment?");
         provider.add(
             "advancements.pastel.harvest_moonstruck_nectar.description",
             "Harvest Moonstruck Nectar by using a Glass Bottle on fully grown Jade Vines"
@@ -747,10 +745,10 @@ public class PastelAdvancementLang {
         );
         provider.add("advancements.pastel.have_half_a_heart_with_divinity.title", "Dangerously Close To Gods");
         provider.add(
-            "advancements.pastel.high_jump_with_take_off_belt.description",
+            "advancements.pastel.high_jump_with_takeoff_belt.description",
             "Charge up a Takeoff Belt to the maximum by sneaking. Then jump!"
         );
-        provider.add("advancements.pastel.high_jump_with_take_off_belt.title", "Perfect Timing");
+        provider.add("advancements.pastel.high_jump_with_takeoff_belt.title", "Perfect Timing");
         provider.add(
             "advancements.pastel.hook_entity_with_molten_rod.description",
             "Give someone a fish and they will eat for a day. Give them a Molten Rod, and they will set the world" +
@@ -813,11 +811,6 @@ public class PastelAdvancementLang {
             "exposed to gentle moonlight"
         );
         provider.add("advancements.pastel.plant_jade_vines.title", "Legacy of Times long Past");
-        provider.add(
-            "advancements.pastel.plant_ominous_sapling.description",
-            "You're sure combining Vegetal with a Young sapling will yield something interesting"
-        );
-        provider.add("advancements.pastel.plant_ominous_sapling.title", "Let it grow, let it grow!");
         provider.add(
             "advancements.pastel.pluck_blood_orchid_petal.description",
             "Create a Blood Orchid Plant and pluck it to get more Petals"
@@ -926,10 +919,10 @@ public class PastelAdvancementLang {
         );
         provider.add("advancements.pastel.survive_fatal_slumber.title", "Deep Light");
         provider.add(
-            "advancements.pastel.take_off_belt_overcharged.description",
+            "advancements.pastel.takeoff_belt_overcharged.description",
             "Charge up a Takeoff Belt too far and lose its charge"
         );
-        provider.add("advancements.pastel.take_off_belt_overcharged.title", "Not-So-Perfect Timing");
+        provider.add("advancements.pastel.takeoff_belt_overcharged.title", "Not-So-Perfect Timing");
         provider.add("advancements.pastel.tame_lizard.description", "'Tame' a Lurking Lizard");
         provider.add("advancements.pastel.tame_lizard.title", "Friend or Foe? Why not Both!");
         provider.add(

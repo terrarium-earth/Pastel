@@ -1,11 +1,11 @@
 {
-  "name": "item.pastel.take_off_belt",
+  "name": "item.pastel.takeoff_belt",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:unlocks/trinkets/take_off_belt"
+    "advancement_id": "pastel:unlocks/trinkets/takeoff_belt"
   },
   "icon": {
-    "item": "pastel:take_off_belt"
+    "item": "pastel:takeoff_belt"
   },
   "category": "pastel:equipment",
   "hide_while_locked": true,
@@ -22,14 +22,14 @@
   "pages": [
     {
       "type": "modonomicon:text",
-      "text": "book.pastel.guidebook.take_off_belt.page0.text",
-      "title": "item.pastel.take_off_belt"
+      "text": "book.pastel.guidebook.takeoff_belt.page0.text",
+      "title": "item.pastel.takeoff_belt"
     },
     {
       "type": "pastel:fusion_shrine_crafting",
       "title": "container.pastel.rei.fusion_recipe",
-      "recipe_id": "pastel:fusion_shrine/trinkets/take_off_belt",
-      "text": "book.pastel.guidebook.take_off_belt.page1.text"
+      "recipe_id": "pastel:fusion_shrine/trinkets/takeoff_belt",
+      "text": "book.pastel.guidebook.takeoff_belt.page1.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -39,14 +39,14 @@
       },
       "title": "enchantment.minecraft.power",
       "item": {
-        "item": "pastel:take_off_belt"
+        "item": "pastel:takeoff_belt"
       },
       "components": {
         "enchantments": {
           "minecraft:power": 5
         }
       },
-      "text": "book.pastel.guidebook.take_off_belt.page2.text"
+      "text": "book.pastel.guidebook.takeoff_belt.page2.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -56,14 +56,14 @@
       },
       "title": "enchantment.minecraft.feather_falling",
       "item": {
-        "item": "pastel:take_off_belt"
+        "item": "pastel:takeoff_belt"
       },
       "components": {
         "enchantments": {
           "minecraft:feather_falling": 4
         }
       },
-      "text": "book.pastel.guidebook.take_off_belt.page3.text"
+      "text": "book.pastel.guidebook.takeoff_belt.page3.text"
     }
   ]
 }

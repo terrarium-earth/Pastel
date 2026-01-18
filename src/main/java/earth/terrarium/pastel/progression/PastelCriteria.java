@@ -59,7 +59,7 @@ public class PastelCriteria {
     public static TrinketChangeCriterion TRINKET_CHANGE = new TrinketChangeCriterion();
     public static PotionWorkshopBrewingCriterion POTION_WORKSHOP_BREWING = new PotionWorkshopBrewingCriterion();
     public static PotionWorkshopCraftingCriterion POTION_WORKSHOP_CRAFTING = new PotionWorkshopCraftingCriterion();
-    public static TakeOffBeltJumpCriterion TAKE_OFF_BELT_JUMP = new TakeOffBeltJumpCriterion();
+    public static TakeOffBeltJumpCriterion TAKEOFF_BELT_JUMP = new TakeOffBeltJumpCriterion();
     public static InkContainerInteractionCriterion INK_CONTAINER_INTERACTION = new InkContainerInteractionCriterion();
     public static JeopardantKillCriterion JEOPARDANT_KILL = new JeopardantKillCriterion();
     public static MemoryManifestingCriterion MEMORY_MANIFESTING = new MemoryManifestingCriterion();
@@ -98,7 +98,7 @@ public class PastelCriteria {
         REGISTER.register(TrinketChangeCriterion.ID.getPath(), () -> TRINKET_CHANGE);
         REGISTER.register(PotionWorkshopBrewingCriterion.ID.getPath(), () -> POTION_WORKSHOP_BREWING);
         REGISTER.register(PotionWorkshopCraftingCriterion.ID.getPath(), () -> POTION_WORKSHOP_CRAFTING);
-        REGISTER.register(TakeOffBeltJumpCriterion.ID.getPath(), () -> TAKE_OFF_BELT_JUMP);
+        REGISTER.register(TakeOffBeltJumpCriterion.ID.getPath(), () -> TAKEOFF_BELT_JUMP);
         REGISTER.register(InkContainerInteractionCriterion.ID.getPath(), () -> INK_CONTAINER_INTERACTION);
         REGISTER.register(JeopardantKillCriterion.ID.getPath(), () -> JEOPARDANT_KILL);
         REGISTER.register(MemoryManifestingCriterion.ID.getPath(), () -> MEMORY_MANIFESTING);
