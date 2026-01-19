@@ -44,6 +44,7 @@ import java.util.function.UnaryOperator;
 
 import static net.minecraft.world.item.Items.CREEPER_BANNER_PATTERN;
 
+// todo the only reason this is in main sourceset is because rendertypes are evil
 public class PastelModelHelper {
     // Item Models
 
