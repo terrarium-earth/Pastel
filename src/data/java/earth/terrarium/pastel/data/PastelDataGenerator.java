@@ -3,6 +3,7 @@ package earth.terrarium.pastel.data;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.data.databank.PastelHiddenProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -32,7 +33,10 @@ public class PastelDataGenerator {
 		event.addProvider(new PastelWaxableDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelBurnTimeDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelHiddenProvider(packOutput, lookupProvider, existingFileHelper));
+        event.getGenerator().addProvider(event.includeServer(),
+                                         (DataProvider.Factory<PastelDatapackBuiltinEntriesProvider>) (output) -> new PastelDatapackBuiltinEntriesProvider(output, event.getLookupProvider())
+        );
 
-		event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders());
+		event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders(lookupProvider));
 	}
 }

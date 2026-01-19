@@ -2,9 +2,14 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
+
+import static earth.terrarium.pastel.PastelCommon.locate;
 
 public class PastelItemTags {
 
@@ -38,6 +43,36 @@ public class PastelItemTags {
 
     public static final TagKey<Item> PRODUCTIVITY_EXCLUDED = of("productivity_excluded");
 
+    public static class EnchantableWith{
+        public static final TagKey<Item> BIG_CATCH = getEnchantableTag(PastelEnchantments.BIG_CATCH);
+        public static final TagKey<Item> CLOVERS_FAVOR = getEnchantableTag(PastelEnchantments.CLOVERS_FAVOR);
+        public static final TagKey<Item> DISARMING = getEnchantableTag(PastelEnchantments.DISARMING);
+        public static final TagKey<Item> EXUBERANCE = getEnchantableTag(PastelEnchantments.EXUBERANCE);
+        public static final TagKey<Item> FIRST_STRIKE = getEnchantableTag(PastelEnchantments.FIRST_STRIKE);
+        public static final TagKey<Item> FOUNDRY = getEnchantableTag(PastelEnchantments.FOUNDRY);
+        public static final TagKey<Item> IMPROVED_CRITICAL = getEnchantableTag(PastelEnchantments.IMPROVED_CRITICAL);
+        public static final TagKey<Item> INDESTRUCTIBLE = getEnchantableTag(PastelEnchantments.INDESTRUCTIBLE);
+        public static final TagKey<Item> INERTIA = getEnchantableTag(PastelEnchantments.INERTIA);
+        public static final TagKey<Item> INEXORABLE = getEnchantableTag(PastelEnchantments.INEXORABLE);
+        public static final TagKey<Item> INVENTORY_INSERTION = getEnchantableTag(PastelEnchantments.INVENTORY_INSERTION);
+        public static final TagKey<Item> PEST_CONTROL = getEnchantableTag(PastelEnchantments.PEST_CONTROL);
+        public static final TagKey<Item> RAZING = getEnchantableTag(PastelEnchantments.RAZING);
+        public static final TagKey<Item> RESONANCE = getEnchantableTag(PastelEnchantments.RESONANCE);
+        public static final TagKey<Item> SERENDIPITY_REEL = getEnchantableTag(PastelEnchantments.SERENDIPITY_REEL);
+        public static final TagKey<Item> SNIPING = getEnchantableTag(PastelEnchantments.SNIPING);
+        public static final TagKey<Item> STEADFAST = getEnchantableTag(PastelEnchantments.STEADFAST);
+        public static final TagKey<Item> TIGHT_GRIP = getEnchantableTag(PastelEnchantments.TIGHT_GRIP);
+        public static final TagKey<Item> TREASURE_HUNTER = getEnchantableTag(PastelEnchantments.TREASURE_HUNTER);
+        public static final TagKey<Item> VOIDING = getEnchantableTag(PastelEnchantments.VOIDING);
+    }
+    
+    public static TagKey<Item> getEnchantableTag(ResourceKey<Enchantment> key) {
+        return TagKey.create(
+            Registries.ITEM, locate("enchantable/" + key.location()
+                                                        .getPath())
+        );
+    }
+    
     private static TagKey<Item> of(String id) {
         return TagKey.create(Registries.ITEM, PastelCommon.locate(id));
     }

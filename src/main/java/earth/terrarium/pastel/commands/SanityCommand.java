@@ -476,7 +476,7 @@ public class SanityCommand {
 		for (Enchantment enchantment : registryManager.registryOrThrow(Registries.ENCHANTMENT)) {
 			Holder<Enchantment> entry = registryManager.registryOrThrow(Registries.ENCHANTMENT).wrapAsHolder(enchantment);
 			ResourceLocation id = entry.unwrapKey().get().location();
-			if (id.getNamespace().equals(modId) && !entry.is(PastelEnchantmentTags.SPECTRUM_ENCHANTMENT)) {
+			if (id.getNamespace().equals(modId) && !entry.is(PastelEnchantmentTags.PASTEL_ENCHANTMENT)) {
 				PastelCommon.logWarning("[SANITY: Enchantment Tags] Enchantment '" + id + "' is missing in the pastel:enchantments tag");
 			}
 		}
