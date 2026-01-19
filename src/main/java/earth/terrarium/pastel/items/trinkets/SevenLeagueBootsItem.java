@@ -25,6 +25,7 @@ public class SevenLeagueBootsItem extends PastelTrinketItem {
     public static final ResourceLocation MOVEMENT_SPEED_ATTRIBUTE_ID = PastelCommon.locate(
         "seven_league_boots_movement_speed");
     public static final ResourceLocation STEP_UP_ATTRIBUTE_ID = PastelCommon.locate("seven_league_boots_step_up");
+    private static final double STEP_UP_MAGNITUDE = 0.75;
 
     public SevenLeagueBootsItem(Properties settings) {
         super(settings, PastelCommon.locate("unlocks/trinkets/seven_league_boots"));
@@ -39,7 +40,7 @@ public class SevenLeagueBootsItem extends PastelTrinketItem {
         var hasMod = attribute.hasModifier(STEP_UP_ATTRIBUTE_ID);
         if (!slotContext.entity()
                         .isCrouching() && !hasMod) attribute.addTransientModifier(
-            new AttributeModifier(STEP_UP_ATTRIBUTE_ID, 0.75, AttributeModifier.Operation.ADD_VALUE));
+            new AttributeModifier(STEP_UP_ATTRIBUTE_ID, STEP_UP_MAGNITUDE, AttributeModifier.Operation.ADD_VALUE));
         if (slotContext.entity()
                        .isCrouching() && hasMod) attribute.removeModifier(STEP_UP_ATTRIBUTE_ID);
     }
@@ -53,18 +54,23 @@ public class SevenLeagueBootsItem extends PastelTrinketItem {
             STEP_UP_ATTRIBUTE_ID);
     }
 
-    // bad and naughty curios get literal tooltip strings until 1.2 delivers redemption in the form of lang datagen
     @Override
     public List<Component> getAttributesTooltip(List<Component> tooltips, TooltipContext context, ItemStack stack) {
         var result = super.getAttributesTooltip(tooltips, context, stack);
-        result.add(Component.literal("When not crouching:").withStyle(ChatFormatting.GOLD));
-        result.add(Component.literal("+0.75 Step Height").withStyle(ChatFormatting.BLUE).append(Component.literal(" [+0.75]").withStyle(ChatFormatting.GRAY)));
+        result.add(Component.translatable("curios.modifiers.not_crouching")
+                            .withStyle(ChatFormatting.GOLD));
+        result.add(Component.translatable("curios.modifiers.seven_league_boots_step_height", STEP_UP_MAGNITUDE)
+                            .withStyle(ChatFormatting.BLUE)
+                            .append(Component.translatable("curios.modifiers.double_magnitude", STEP_UP_MAGNITUDE)
+                                             .withStyle(ChatFormatting.GRAY)));
         return result;
     }
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        SlotContext slotContext,
+        ResourceLocation id, ItemStack stack
+    ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
 
 
