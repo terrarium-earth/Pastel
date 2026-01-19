@@ -12,6 +12,9 @@ public class PastelRegistryAliases {
         PastelBlocks.COMMON_REGISTRAR.addAlias(PastelCommon.locate("jade_vine_petal_carpet"),PastelBlocks.JADE_PETAL_CARPET.getId());
         PastelBlocks.COMMON_REGISTRAR.addAlias(PastelCommon.locate("light_level_detector"),PastelBlocks.BLOCK_LIGHT_DETECTOR.getId());
         PastelBlocks.COMMON_REGISTRAR.addAlias(PastelCommon.locate("wand_light"),PastelBlocks.SHIMMERSTONE_LIGHT.getId());
+        PastelBlocks.COMMON_REGISTRAR.addAlias(PastelCommon.locate("pyrite_tiles_slab"),PastelBlocks.PYRITE_TILE_SLAB.getId());
+        PastelBlocks.COMMON_REGISTRAR.addAlias(PastelCommon.locate("pyrite_tiles_stairs"),PastelBlocks.PYRITE_TILE_STAIRS.getId());
+        PastelBlocks.COMMON_REGISTRAR.addAlias(PastelCommon.locate("pyrite_tiles_wall"),PastelBlocks.PYRITE_TILE_WALL.getId());
 
         PastelItems.ITEM_REGISTRAR.addAlias(PastelCommon.locate("dragonbone_broth"),PastelItems.WYRMSCALE_JELLY.getId());
         PastelItems.ITEM_REGISTRAR.addAlias(PastelCommon.locate("glow_vision_goggles"),PastelItems.PRISCILLENT_SPECTACLES.getId());
