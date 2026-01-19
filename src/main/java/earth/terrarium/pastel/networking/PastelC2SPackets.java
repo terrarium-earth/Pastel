@@ -4,7 +4,6 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.networking.c2s_payloads.AddLoreBedrockAnvilPayload;
 import earth.terrarium.pastel.networking.c2s_payloads.BindEnderSpliceToPlayerPayload;
 import earth.terrarium.pastel.networking.c2s_payloads.ChangeCompactingChestSettingsPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.GuidebookConfirmationButtonPressedPayload;
 import earth.terrarium.pastel.networking.c2s_payloads.GuidebookHintBoughtPayload;
 import earth.terrarium.pastel.networking.c2s_payloads.InkColorSelectedC2SPayload;
 import earth.terrarium.pastel.networking.c2s_payloads.ParticleSpawnerConfigurationC2SPayload;
@@ -35,10 +34,6 @@ public class PastelC2SPackets {
         registrar.playToServer(
             ChangeCompactingChestSettingsPayload.ID, ChangeCompactingChestSettingsPayload.CODEC,
             ChangeCompactingChestSettingsPayload.getPayloadHandler()
-        );
-        registrar.playToServer(
-            GuidebookConfirmationButtonPressedPayload.ID, GuidebookConfirmationButtonPressedPayload.CODEC,
-            GuidebookConfirmationButtonPressedPayload.getPayloadHandler()
         );
         registrar.playToServer(
             GuidebookHintBoughtPayload.ID, GuidebookHintBoughtPayload.CODEC,

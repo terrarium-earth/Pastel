@@ -6,7 +6,6 @@ import earth.terrarium.pastel.progression.advancement.BlockBrokenCriterion;
 import earth.terrarium.pastel.progression.advancement.BloodOrchidPluckingCriterion;
 import earth.terrarium.pastel.progression.advancement.CinderhearthSmeltingCriterion;
 import earth.terrarium.pastel.progression.advancement.CompletedMultiblockCriterion;
-import earth.terrarium.pastel.progression.advancement.ConfirmationButtonPressedCriterion;
 import earth.terrarium.pastel.progression.advancement.CrystalApothecaryCollectingCriterion;
 import earth.terrarium.pastel.progression.advancement.CrystallarieumGrownCriterion;
 import earth.terrarium.pastel.progression.advancement.DivinityTickCriterion;
@@ -73,8 +72,6 @@ public class PastelCriteria {
     public static InkProjectileKillingCriterion KILLED_BY_INK_PROJECTILE = new InkProjectileKillingCriterion();
     public static PastelFishingRodHookedCriterion FISHING_ROD_HOOKED = new PastelFishingRodHookedCriterion();
     public static TitrationBarrelTappingCriterion TITRATION_BARREL_TAPPING = new TitrationBarrelTappingCriterion();
-    public static ConfirmationButtonPressedCriterion CONFIRMATION_BUTTON_PRESSED
-        = new ConfirmationButtonPressedCriterion();
     public static BloodOrchidPluckingCriterion BLOOD_ORCHID_PLUCKING = new BloodOrchidPluckingCriterion();
     public static DivinityTickCriterion DIVINITY_TICK = new DivinityTickCriterion();
     public static PairedFoodEatenCriterion CONDITIONAL_FOOD_EATEN = new PairedFoodEatenCriterion();
@@ -111,7 +108,6 @@ public class PastelCriteria {
         REGISTER.register(InkProjectileKillingCriterion.ID.getPath(), () -> KILLED_BY_INK_PROJECTILE);
         REGISTER.register(PastelFishingRodHookedCriterion.ID.getPath(), () -> FISHING_ROD_HOOKED);
         REGISTER.register(TitrationBarrelTappingCriterion.ID.getPath(), () -> TITRATION_BARREL_TAPPING);
-        REGISTER.register(ConfirmationButtonPressedCriterion.ID.getPath(), () -> CONFIRMATION_BUTTON_PRESSED);
         REGISTER.register(BloodOrchidPluckingCriterion.ID.getPath(), () -> BLOOD_ORCHID_PLUCKING);
         REGISTER.register(DivinityTickCriterion.ID.getPath(), () -> DIVINITY_TICK);
         REGISTER.register(PairedFoodEatenCriterion.ID.getPath(), () -> CONDITIONAL_FOOD_EATEN);

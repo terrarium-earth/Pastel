@@ -13,7 +13,6 @@ import earth.terrarium.pastel.compat.modonomicon.client.pages.BookAnvilCrushingP
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookChecklistPageRenderer;
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookCinderhearthSmeltingPageRenderer;
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookCollectionPageRenderer;
-import earth.terrarium.pastel.compat.modonomicon.client.pages.BookConfirmationButtonPageRenderer;
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookCrystallarieumGrowingPageRenderer;
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookEnchanterCraftingPageRenderer;
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookEnchanterUpgradingPageRenderer;
@@ -31,7 +30,6 @@ import earth.terrarium.pastel.compat.modonomicon.client.pages.BookTitrationBarre
 import earth.terrarium.pastel.compat.modonomicon.page_types.WebLinkEntry;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookChecklistPage;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookCollectionPage;
-import earth.terrarium.pastel.compat.modonomicon.pages.BookConfirmationButtonPage;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookHintPage;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookLinkPage;
@@ -89,7 +87,6 @@ public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack
     public static final ResourceLocation STATUS_EFFECT_PAGE = PastelCommon.locate("status_effect");
     public static final ResourceLocation HINT_PAGE = PastelCommon.locate("hint");
     public static final ResourceLocation CHECKLIST_PAGE = PastelCommon.locate("checklist");
-    public static final ResourceLocation CONFIRMATION_BUTTON_PAGE = PastelCommon.locate("confirmation_button");
     public static final ResourceLocation SNIPPET_PAGE = PastelCommon.locate("snippet");
     public static final ResourceLocation LINK_PAGE = PastelCommon.locate("link");
     public static final ResourceLocation COLLECTION_PAGE = PastelCommon.locate("collection");
@@ -138,10 +135,6 @@ public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack
             HINT_PAGE, (BookPageJsonLoader<?>) BookHintPage::fromJson, BookHintPage::fromNetwork);
         LoaderRegistry.registerPageLoader(
             CHECKLIST_PAGE, (BookPageJsonLoader<?>) BookChecklistPage::fromJson, BookChecklistPage::fromNetwork);
-        LoaderRegistry.registerPageLoader(
-            CONFIRMATION_BUTTON_PAGE, (BookPageJsonLoader<?>) BookConfirmationButtonPage::fromJson,
-            BookConfirmationButtonPage::fromNetwork
-        );
         LoaderRegistry.registerPageLoader(
             SNIPPET_PAGE, (BookPageJsonLoader<?>) BookSnippetPage::fromJson, BookSnippetPage::fromNetwork);
         LoaderRegistry.registerPageLoader(
@@ -225,8 +218,6 @@ public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack
         PageRendererRegistry.registerPageRenderer(HINT_PAGE, p -> new BookHintPageRenderer((BookHintPage) p));
         PageRendererRegistry.registerPageRenderer(
             CHECKLIST_PAGE, p -> new BookChecklistPageRenderer((BookChecklistPage) p));
-        PageRendererRegistry.registerPageRenderer(
-            CONFIRMATION_BUTTON_PAGE, p -> new BookConfirmationButtonPageRenderer((BookConfirmationButtonPage) p));
         PageRendererRegistry.registerPageRenderer(SNIPPET_PAGE, p -> new BookSnippetPageRenderer((BookSnippetPage) p));
         PageRendererRegistry.registerPageRenderer(LINK_PAGE, p -> new BookLinkPageRenderer((BookLinkPage) p));
         PageRendererRegistry.registerPageRenderer(
