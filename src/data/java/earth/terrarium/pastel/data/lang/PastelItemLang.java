@@ -3,6 +3,7 @@ package earth.terrarium.pastel.data.lang;
 import earth.terrarium.pastel.data.PastelLanguageProvider;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemNameBlockItem;
 
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class PastelItemLang {
     public static void addTranslations(PastelLanguageProvider provider) {
 
         for (var item : PastelItems.ITEM_REGISTRAR.getEntries()) {
-            if (item.get() instanceof BlockItem) continue; // prevent duplicate keys
+            if (item.get() instanceof BlockItem && !(item.get() instanceof ItemNameBlockItem)) continue; // prevent duplicate keys
             if (specialCasedItemTranslations.containsKey(item.getRegisteredName())) {
                 provider.addItem(item, specialCasedItemTranslations.get(item.getRegisteredName()));
                 continue;
