@@ -175,10 +175,10 @@ public class PastelConfig implements ConfigData {
     )
     public int WireHookRange = 32;
 
-    public int CrystalArmorHelmetProtection = 3;
-    public int CrystalArmorChestplateProtection = 7;
+    public int CrystalArmorHelmetProtection = 2;
+    public int CrystalArmorChestplateProtection = 6;
     public int CrystalArmorLeggingsProtection = 5;
-    public int CrystalArmorBootsProtection = 3;
+    public int CrystalArmorBootsProtection = 2;
     public float CrystalArmorToughness = 0.0F;
     public float CrystalArmorKnockbackResistance = 0.0F;
 
