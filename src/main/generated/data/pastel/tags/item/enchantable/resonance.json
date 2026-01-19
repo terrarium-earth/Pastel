@@ -2,6 +2,7 @@
   "values": [
     "#minecraft:enchantable/mining",
     "pastel:ender_splice",
+    "pastel:ender_canvas",
     "pastel:exchanging_staff"
   ]
 }

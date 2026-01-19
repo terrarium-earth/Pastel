@@ -3,7 +3,6 @@
   "description": {
     "translate": "enchantment.pastel.pest_control"
   },
-  "exclusive_set": "#pastel:exclusive_set/pest_control",
   "max_cost": {
     "base": 30,
     "per_level_above_first": 0

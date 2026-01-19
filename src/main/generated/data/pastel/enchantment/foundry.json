@@ -3,7 +3,6 @@
   "description": {
     "translate": "enchantment.pastel.foundry"
   },
-  "exclusive_set": "#pastel:exclusive_set/foundry",
   "max_cost": {
     "base": 65,
     "per_level_above_first": 0

@@ -4,10 +4,6 @@
     "#minecraft:enchantable/weapon",
     "#minecraft:enchantable/bow",
     "#minecraft:enchantable/crossbow",
-    "#pastel:fishing_rods",
-    {
-      "id": "#malum:scythe",
-      "required": false
-    }
+    "#pastel:fishing_rods"
   ]
 }

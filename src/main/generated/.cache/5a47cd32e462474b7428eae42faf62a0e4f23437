@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-09T13:02:56.987780069	Tags for minecraft:item mod id pastel
+// 1.21.1	2026-01-18T20:07:51.572045967	Tags for minecraft:item mod id pastel
 8d6a33eaf2aef1479259cf079bac277e877c90b5 data/minecraft/tags/item/bookshelf_books.json
 a79bbc34dd65fc64b671209c043ee6c560614079 data/pastel/tags/item/cookbooks.json
 ed88d920184bf6ae96c019a36cf9901c1b31eecd data/pastel/tags/item/enchantable/big_catch.json
@@ -11,10 +11,10 @@ c922e9c39d9c9f2a645e213682320f6bec0590ad data/pastel/tags/item/enchantable/disar
 c0cbb8f2c8d2ac0028efc77cadaf6b0f06906f8f data/pastel/tags/item/enchantable/indestructible.json
 528161b06a78bbeb3467ea30b8cfd9196b8c9cdf data/pastel/tags/item/enchantable/inertia.json
 305a1921b73f03abb1d5e99e62d3e13423681d64 data/pastel/tags/item/enchantable/inexorable.json
-030c0c4050cf5fe960ba6c25c23a3bc803a54be0 data/pastel/tags/item/enchantable/inventory_insertion.json
+7ada313a5b9d44a6fee1f203379fb437832e8f4b data/pastel/tags/item/enchantable/inventory_insertion.json
 528161b06a78bbeb3467ea30b8cfd9196b8c9cdf data/pastel/tags/item/enchantable/pest_control.json
 528161b06a78bbeb3467ea30b8cfd9196b8c9cdf data/pastel/tags/item/enchantable/razing.json
-4952d7d71eb5c804ca4b64c0da7b68c31d40452e data/pastel/tags/item/enchantable/resonance.json
+5244ed97c2faa7d3a6880f5583067a8ec338c255 data/pastel/tags/item/enchantable/resonance.json
 ed88d920184bf6ae96c019a36cf9901c1b31eecd data/pastel/tags/item/enchantable/serendipity_reel.json
 386512395e85a392d57ff72f2af7c5a521807ff2 data/pastel/tags/item/enchantable/sniping.json
 ef33fe47867ddf73ea085a4d492efc6fa340a225 data/pastel/tags/item/enchantable/steadfast.json

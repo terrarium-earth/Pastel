@@ -3,7 +3,6 @@
   "description": {
     "translate": "enchantment.pastel.inexorable"
   },
-  "exclusive_set": "#pastel:exclusive_set/inexorable",
   "max_cost": {
     "base": 100,
     "per_level_above_first": 0

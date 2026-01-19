@@ -3,7 +3,6 @@
   "description": {
     "translate": "enchantment.pastel.big_catch"
   },
-  "exclusive_set": "#pastel:exclusive_set/big_catch",
   "max_cost": {
     "base": 50,
     "per_level_above_first": 0

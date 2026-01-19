@@ -3,11 +3,8 @@ package earth.terrarium.pastel.registries;
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 
 import static earth.terrarium.pastel.PastelCommon.locate;
 

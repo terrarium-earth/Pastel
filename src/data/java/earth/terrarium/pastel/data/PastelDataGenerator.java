@@ -33,10 +33,6 @@ public class PastelDataGenerator {
 		event.addProvider(new PastelWaxableDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelBurnTimeDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelHiddenProvider(packOutput, lookupProvider, existingFileHelper));
-        event.getGenerator().addProvider(event.includeServer(),
-                                         (DataProvider.Factory<PastelDatapackBuiltinEntriesProvider>) (output) -> new PastelDatapackBuiltinEntriesProvider(output, event.getLookupProvider())
-        );
-
-		event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders(lookupProvider));
+		event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders());
 	}
 }
