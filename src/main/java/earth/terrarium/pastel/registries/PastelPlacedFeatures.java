@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.data.DatagenProxy;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -22,9 +22,8 @@ public class PastelPlacedFeatures {
         return ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate(id));
     }
 
-    private static HolderSet<Biome> tag(DatagenProxy.BootstrapContext<BiomeModifier> context, TagKey<Biome> tag) {
-        return context
-            .registerable()
+    private static HolderSet<Biome> tag(BootstrapContext<BiomeModifier> bootstrap, TagKey<Biome> tag) {
+        return bootstrap
             .lookup(Registries.BIOME)
             .get(tag)
             .<HolderSet<Biome>>map(Function.identity())
@@ -32,24 +31,24 @@ public class PastelPlacedFeatures {
     }
 
     private static void addFeature(
-        DatagenProxy.BootstrapContext<BiomeModifier> context, TagKey<Biome> tag, GenerationStep.Decoration step,
+        BootstrapContext<BiomeModifier> bootstrap, TagKey<Biome> tag, GenerationStep.Decoration step,
         ResourceKey<PlacedFeature> placedFeature
     ) {
-        var biomes = context.registerable()
+        var biomes = bootstrap
                             .lookup(Registries.BIOME);
 
         biomes.get(tag)
-              .ifPresent(set -> addFeature(context, set, step, placedFeature));
+              .ifPresent(set -> addFeature(bootstrap, set, step, placedFeature));
     }
 
     private static void addFeature(
-        DatagenProxy.BootstrapContext<BiomeModifier> context, HolderSet<Biome> biomeSet, GenerationStep.Decoration step,
+        BootstrapContext<BiomeModifier> bootstrap, HolderSet<Biome> biomeSet, GenerationStep.Decoration step,
         ResourceKey<PlacedFeature> placedFeature
     ) {
-        var placedFeatures = context.registerable()
+        var placedFeatures = bootstrap
                                     .lookup(Registries.PLACED_FEATURE);
 
-        context.registerable()
+        bootstrap
                .register(
                    ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, placedFeature.location()),
                    new BiomeModifiers.AddFeaturesBiomeModifier(
@@ -61,71 +60,71 @@ public class PastelPlacedFeatures {
     }
 
     // TODO Make this register only one modifier per biome tag
-    public static void addBiomeModifications(DatagenProxy.BootstrapContext<BiomeModifier> context) {
+    public static void addBiomeModifications(BootstrapContext<BiomeModifier> bootstrap) {
         // Geodes
         addFeature(
-            context, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
+            bootstrap, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("citrine_geode"))
         );
         addFeature(
-            context, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
+            bootstrap, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("topaz_geode"))
         );
 
         // Ores
         addFeature(
-            context, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_ORES,
+            bootstrap, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_ORES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("shimmerstone_ore"))
         );
         addFeature(
-            context, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_ORES,
+            bootstrap, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_ORES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("azurite_ore"))
         );
         addFeature(
-            context, Tags.Biomes.IS_NETHER, GenerationStep.Decoration.UNDERGROUND_ORES,
+            bootstrap, Tags.Biomes.IS_NETHER, GenerationStep.Decoration.UNDERGROUND_ORES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("stratine_ore"))
         );
         addFeature(
-            context, Tags.Biomes.IS_END, GenerationStep.Decoration.UNDERGROUND_ORES,
+            bootstrap, Tags.Biomes.IS_END, GenerationStep.Decoration.UNDERGROUND_ORES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("paltaeria_ore"))
         );
 
         addFeature(
-            context, PastelBiomeTags.COLORED_TREES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap, PastelBiomeTags.COLORED_TREES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("colored_tree_patch"))
         );
 
         // Plants
         addFeature(
-            context, PastelBiomeTags.MERMAIDS_BRUSHES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap, PastelBiomeTags.MERMAIDS_BRUSHES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("mermaids_brushes"))
         );
         addFeature(
-            context, PastelBiomeTags.CLOVER_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap, PastelBiomeTags.CLOVER_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("clover_patch"))
         );
 
         addFeature(
-            context, PastelBiomeTags.QUITOXIC_REEDS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap, PastelBiomeTags.QUITOXIC_REEDS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("quitoxic_reeds"))
         );
 
         //TODO: find out why this is fucked
         //if (PastelCommon.CONFIG.QuitoxicSpawnTag) {
-        //	addFeature(context, PastelBiomeTags.QUITOXIC_REEDS_GENERATING_IN, GenerationStep.Decoration
+        //	addFeature(bootstrap, PastelBiomeTags.QUITOXIC_REEDS_GENERATING_IN, GenerationStep.Decoration
         //	.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("quitoxic_reeds")));
         //} else {
-        //	var overworld = tag(context, Tags.Biomes.IS_OVERWORLD);
-        //	var aquatic = tag(context, Tags.Biomes.IS_AQUATIC);
-        //	var hot = tag(context, Tags.Biomes.IS_HOT);
-        //	var vegetationDense = tag(context, Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD);
-        //	var swamp = tag(context, Tags.Biomes.IS_SWAMP);
-        //	var wet = tag(context, Tags.Biomes.IS_WET_OVERWORLD);
+        //	var overworld = tag(bootstrap, Tags.Biomes.IS_OVERWORLD);
+        //	var aquatic = tag(bootstrap, Tags.Biomes.IS_AQUATIC);
+        //	var hot = tag(bootstrap, Tags.Biomes.IS_HOT);
+        //	var vegetationDense = tag(bootstrap, Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD);
+        //	var swamp = tag(bootstrap, Tags.Biomes.IS_SWAMP);
+        //	var wet = tag(bootstrap, Tags.Biomes.IS_WET_OVERWORLD);
 //
         //	//Either the biome is hot, lush, and wet, or it is a straight-up swamp.
         //	var set = new AndHolderSet<>(
         //		overworld,
-        //		new NotHolderSet<>(context.registerable().registryLookup(Registries.BIOME).orElseThrow(), aquatic),
+        //		new NotHolderSet<>(bootstrap.registerable().registryLookup(Registries.BIOME).orElseThrow(), aquatic),
         //		new OrHolderSet<>(
         //			new AndHolderSet<>(
         //				hot,
@@ -136,17 +135,17 @@ public class PastelPlacedFeatures {
         //		wet
         //	);
 //
-        //	addFeature(context, set, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries
+        //	addFeature(bootstrap, set, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries
         //	.PLACED_FEATURE, PastelCommon.locate("quitoxic_reeds")));
         //}
 
         // Dragonbone in the Overworld
         addFeature(
-            context, PastelBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN, GenerationStep.Decoration.UNDERGROUND_DECORATION,
+            bootstrap, PastelBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN, GenerationStep.Decoration.UNDERGROUND_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("dragon_fossil_overworld_buried"))
         );
         addFeature(
-            context, PastelBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap, PastelBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("dragon_fossil_overworld_exposed"))
         );
     }

@@ -15,8 +15,7 @@ public class PastelDynamicRegistryProvider {
                                        )
                                        .add(
                                            NeoForgeRegistries.Keys.BIOME_MODIFIERS,
-                                           bootstrap -> PastelPlacedFeatures.addBiomeModifications(
-                                               new DatagenProxy.BootstrapContext<>(bootstrap))
+                                           PastelPlacedFeatures::addBiomeModifications
                                        )
                                        .add(Registries.ENCHANTMENT, EnchantmentRegistry::registerEnchantments);
     }
