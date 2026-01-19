@@ -3,6 +3,7 @@ package earth.terrarium.pastel.items.tools;
 import earth.terrarium.pastel.api.item.SleepAlteringItem;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.registries.PastelMobEffects;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -78,7 +79,7 @@ public class NightSaltsItem extends Item implements SleepAlteringItem {
 
     @Override
     public SoundEvent getDrinkingSound() {
-        return SoundEvents.SNIFFER_SCENTING;
+        return PastelSounds.ITEM_NIGHT_SALTS_USE;
     }
 
     @Override

@@ -191,6 +191,7 @@ public class PastelSounds {
 
     public static final SoundEvent BLOCK_MEMORY_ADVANCE = register("block.memory.advance");
     public static final SoundEvent ITEM_PRIMORDIAL_LIGHTER_USE = register("item.primordial_lighter.use");
+    public static final SoundEvent ITEM_NIGHT_SALTS_USE = register("item.night_salts.use");
 
     // Block Sounds
     public static final SoundEvent BLOCK_CITRINE_BLOCK_BREAK = register("block.citrine_block.break");
