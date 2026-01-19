@@ -64,7 +64,7 @@
       }
     },
     {
-      "type": "modnomicon:text",
+      "type": "modonomicon:text",
       "title": "book.pastel.guidebook.crystal_armor.page5.title",
       "text": "book.pastel.guidebook.crystal_armor.page5.text",
       "condition": {
