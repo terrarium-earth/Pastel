@@ -3,15 +3,22 @@ package earth.terrarium.pastel.items.trinkets;
 import com.google.common.collect.Multimap;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
+
+import java.util.List;
 
 public class SevenLeagueBootsItem extends PastelTrinketItem {
 
@@ -21,6 +28,38 @@ public class SevenLeagueBootsItem extends PastelTrinketItem {
 
     public SevenLeagueBootsItem(Properties settings) {
         super(settings, PastelCommon.locate("unlocks/trinkets/seven_league_boots"));
+    }
+
+    @Override
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        super.curioTick(slotContext, stack);
+        var attribute = slotContext.entity()
+                                   .getAttribute(Attributes.STEP_HEIGHT);
+        if (attribute == null) return;
+        var hasMod = attribute.hasModifier(STEP_UP_ATTRIBUTE_ID);
+        if (!slotContext.entity()
+                        .isCrouching() && !hasMod) attribute.addTransientModifier(
+            new AttributeModifier(STEP_UP_ATTRIBUTE_ID, 0.75, AttributeModifier.Operation.ADD_VALUE));
+        if (slotContext.entity()
+                       .isCrouching() && hasMod) attribute.removeModifier(STEP_UP_ATTRIBUTE_ID);
+    }
+
+    @Override
+    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        super.onUnequip(slotContext, newStack, stack);
+        var attribute = slotContext.entity()
+                                   .getAttribute(Attributes.STEP_HEIGHT);
+        if (attribute != null && attribute.hasModifier(STEP_UP_ATTRIBUTE_ID)) attribute.removeModifier(
+            STEP_UP_ATTRIBUTE_ID);
+    }
+
+    // bad and naughty curios get literal tooltip strings until 1.2 delivers redemption in the form of lang datagen
+    @Override
+    public List<Component> getAttributesTooltip(List<Component> tooltips, TooltipContext context, ItemStack stack) {
+        var result = super.getAttributesTooltip(tooltips, context, stack);
+        result.add(Component.literal("When not crouching:").withStyle(ChatFormatting.GOLD));
+        result.add(Component.literal("+0.75 Step Height").withStyle(ChatFormatting.BLUE).append(Component.literal(" [+0.75]").withStyle(ChatFormatting.GRAY)));
+        return result;
     }
 
     @Override
@@ -40,10 +79,6 @@ public class SevenLeagueBootsItem extends PastelTrinketItem {
                 MOVEMENT_SPEED_ATTRIBUTE_ID, speedBoost,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
             )
-        );
-        modifiers.put(
-            Attributes.STEP_HEIGHT,
-            new AttributeModifier(STEP_UP_ATTRIBUTE_ID, 0.75, AttributeModifier.Operation.ADD_VALUE)
         );
 
         return modifiers;
