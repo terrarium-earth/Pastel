@@ -25,7 +25,7 @@ import earth.terrarium.pastel.items.MysteriousLocketItem;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.items.StructurePlacerItem;
 import earth.terrarium.pastel.items.armor.BedrockArmorItem;
-import earth.terrarium.pastel.items.armor.GemstoneArmorItem;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import earth.terrarium.pastel.items.bundles.ExtendedBundleItem;
 import earth.terrarium.pastel.items.conditional.GemstonePowderItem;
 import earth.terrarium.pastel.items.conditional.StormStoneItem;
@@ -661,33 +661,33 @@ public class PastelItems {
     ));
 
     // Crystal Armor - Iron-level dura
-    public static final DeferredItem<GemstoneArmorItem> ONYX_HELMET = register(item(
-        "onyx_helmet", () -> new GemstoneArmorItem(
+    public static final DeferredItem<CrystalArmorItem> ONYX_HELMET = register(item(
+        "onyx_helmet", () -> new CrystalArmorItem(
             PastelArmorMaterials.CRYSTAL, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON)
                                                                    .durability(30 * 13)
         ), InkColors.BLUE
     ));
-    public static final DeferredItem<GemstoneArmorItem> AMETHYST_CHESTPLATE = register(item(
-        "amethyst_chestplate", () -> new GemstoneArmorItem(
+    public static final DeferredItem<CrystalArmorItem> AMETHYST_CHESTPLATE = register(item(
+        "amethyst_chestplate", () -> new CrystalArmorItem(
             PastelArmorMaterials.CRYSTAL, ArmorItem.Type.CHESTPLATE, IS.of(Rarity.UNCOMMON)
                                                                        .durability(30 * 15)
         ), InkColors.BLUE
     ));
-    public static final DeferredItem<GemstoneArmorItem> TOPAZ_LEGGINGS = register(item(
-        "topaz_leggings", () -> new GemstoneArmorItem(
+    public static final DeferredItem<CrystalArmorItem> TOPAZ_LEGGINGS = register(item(
+        "topaz_leggings", () -> new CrystalArmorItem(
             PastelArmorMaterials.CRYSTAL, ArmorItem.Type.LEGGINGS, IS.of(Rarity.UNCOMMON)
                                                                      .durability(30 * 16 * 2)
         ), InkColors.BLUE
     ));
-    public static final DeferredItem<GemstoneArmorItem> CITRINE_BOOTS = register(item(
-        "citrine_boots", () -> new GemstoneArmorItem(
+    public static final DeferredItem<CrystalArmorItem> CITRINE_BOOTS = register(item(
+        "citrine_boots", () -> new CrystalArmorItem(
             PastelArmorMaterials.CRYSTAL, ArmorItem.Type.BOOTS, IS.of(Rarity.UNCOMMON)
                                                                   .durability(30 * 11)
                                                                   .attributes(new ItemAttributeModifiers(
                                                                       List.of(
                                                                           new ItemAttributeModifiers.Entry(
                                                                               Attributes.MOVEMENT_SPEED,
-                                                                              GemstoneArmorItem.GEM_BOOTS_SPEED,
+                                                                              CrystalArmorItem.GEM_BOOTS_SPEED,
                                                                               EquipmentSlotGroup.FEET
                                                                           ), new ItemAttributeModifiers.Entry(
                                                                               Attributes.ARMOR, new AttributeModifier(

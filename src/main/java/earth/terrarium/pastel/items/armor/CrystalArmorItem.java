@@ -3,9 +3,7 @@ package earth.terrarium.pastel.items.armor;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.TickingEquipmentItem;
 import earth.terrarium.pastel.api.item.UnequipAwareItem;
-import earth.terrarium.pastel.attachments.PastelDataAttachments;
 import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
-import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -19,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class GemstoneArmorItem extends ArmorItem implements TickingEquipmentItem, UnequipAwareItem {
+public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem, UnequipAwareItem {
 
     private static final AttributeModifier GEM_LEGGINGS_KB_RESIST = new AttributeModifier(
         PastelCommon.locate("gem_armor_kb_resist"), 0.5f, AttributeModifier.Operation.ADD_VALUE);
@@ -31,14 +29,14 @@ public class GemstoneArmorItem extends ArmorItem implements TickingEquipmentItem
     public static final AttributeModifier GEM_SET_SPEED = new AttributeModifier(
         PastelCommon.locate("gem_armor_setbonus_speed"), 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
-    public GemstoneArmorItem(Holder<ArmorMaterial> material, ArmorItem.Type type, Properties settings) {
+    public CrystalArmorItem(Holder<ArmorMaterial> material, ArmorItem.Type type, Properties settings) {
         super(material, type, settings);
     }
 
     public boolean isWearingFullSet(LivingEntity bearer) {
         for (var slot : List.of(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)) {
             if (!(bearer.getItemBySlot(slot)
-                        .getItem() instanceof GemstoneArmorItem)) return false;
+                        .getItem() instanceof CrystalArmorItem)) return false;
         }
         return true;
     }

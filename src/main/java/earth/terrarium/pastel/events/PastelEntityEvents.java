@@ -11,17 +11,15 @@ import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
-import earth.terrarium.pastel.items.armor.GemstoneArmorItem;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import earth.terrarium.pastel.items.tools.ParryingSwordItem;
 import earth.terrarium.pastel.items.trinkets.AshenCircletItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -31,7 +29,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,7 +41,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -221,7 +217,7 @@ public class PastelEntityEvents {
             event.setCanceled(true);
         }
 
-        if(source.is(DamageTypes.FALL) && entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof GemstoneArmorItem leggings){
+        if(source.is(DamageTypes.FALL) && entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof CrystalArmorItem leggings){
             leggings.onFall(entity.getItemBySlot(EquipmentSlot.LEGS),entity,event.getAmount());
             entity.level().playSound(entity, entity.blockPosition(), SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 1f, 1f);
             event.getEntity().playSound(PastelSounds.SHATTER_HEAVY);
