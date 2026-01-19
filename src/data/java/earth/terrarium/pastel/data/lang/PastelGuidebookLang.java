@@ -1981,20 +1981,20 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.crystal_armor.page1.text",
-            "At first, I wasn't sure how the aspect of [#](ff4ff6)time[#]() would manifest in a chestplate—certainly I " +
-            "don't want to accelerate harm!—but the ghast tear seems to " +
+            "At first, I wasn't sure how the aspect of [#](ff4ff6)time[#]() would manifest in a chestplate—certainly " +
+            "I " + "don't want to accelerate harm!—but the ghast tear seems to " +
             "direct its effects nicely. Grants slow regeneration."
         );
         provider.add(
             "book.pastel.guidebook.crystal_armor.page2.text",
-            "As expected from armor bearing the aspect of [#](5bffed)matter[#](), these are far denser than they look. " +
-            "Sturdy enough to take falls in my stead, and I should be able " +
+            "As expected from armor bearing the aspect of [#](5bffed)matter[#](), these are far denser than they look" +
+            ". " + "Sturdy enough to take falls in my stead, and I should be able " +
             "to stand my ground easier while crouching."
         );
         provider.add(
             "book.pastel.guidebook.crystal_armor.page3.text",
-            "The aspect of [#](eded00)energy[#]() lends itself well to boots, putting a definite spring in my step. They " +
-            "even allow me to defy gravity a bit."
+            "The aspect of [#](eded00)energy[#]() lends itself well to boots, putting a definite spring in my step. " +
+            "They " + "even allow me to defy gravity a bit."
         );
         provider.add("book.pastel.guidebook.crystal_armor.page4.title", "An incomplete set?");
         provider.add(
@@ -2002,6 +2002,18 @@ public class PastelGuidebookLang {
             "When I designed these, I had hoped to find enough gems for a full armor set. It seems that won't be " +
             "happening anytime soon, so I'll have to make do with mundane materials until I find something suitably " +
             "interesting to cap off the set with."
+        );
+        provider.add("book.pastel.guidebook.crystal_armor.page5.title", "Incomplete no more");
+        provider.add(
+            "book.pastel.guidebook.crystal_armor.page5.text",
+            "Finally, I have created something worthy of this armor's capstone. These [Onyx Shards]" +
+            "(entry://general/onyx_shards), infused with the power of Liquid Crystal, seem to be able to unify the " +
+            "effects of the rest of the set, enhancing each effect, in addition to increasing the set's magic " +
+            "capacity overall, making enchantments more effective. I would accept nothing less."
+        );
+        provider.add(
+            "book.pastel.guidebook.crystal_armor.page6.text",
+            "*Some say black is the color of magic itself*"
         );
         provider.add("book.pastel.guidebook.gemstone_chimes.name", "Gemstone Chimes");
         provider.add(

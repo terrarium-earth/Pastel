@@ -55,6 +55,31 @@
         "type": "modonomicon:advancement",
         "advancement_id": "pastel:collect_all_basic_shards"
       }
+    },
+    {
+      "type": "modonomicon:empty",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_all_basic_shards"
+      }
+    },
+    {
+      "type": "modnomicon:text",
+      "title": "book.pastel.guidebook.crystal_armor.page5.title",
+      "text": "book.pastel.guidebook.crystal_armor.page5.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/onyx_helmet"
+      }
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.crystal_armor.page6.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/onyx_helmet"
+      },
+      "recipe_id": "pastel:pedestal/tier3/onyx_helmet"
     }
   ]
 }

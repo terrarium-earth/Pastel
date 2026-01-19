@@ -91,6 +91,10 @@ public class PastelAdvancements {
                 "unlocks/equipment/any_preenchanted_tool");
             public static final ResourceLocation OBLIVION_PICKAXE = PastelCommon.locate(
                 "unlocks/equipment/oblivion_pickaxe");
+            public static final ResourceLocation ONYX_HELMET = PastelCommon.locate("unlocks/equipment/onyx_helmet");
+            public static final ResourceLocation AMETHYST_CHESTPLATE = PastelCommon.locate("unlocks/equipment/amethyst_chestplate");
+            public static final ResourceLocation TOPAZ_LEGGINGS = PastelCommon.locate("unlocks/equipment/topaz_leggings");
+            public static final ResourceLocation CITRINE_BOOTS = PastelCommon.locate("unlocks/equipment/");
         }
 
         public static class Blocks {
