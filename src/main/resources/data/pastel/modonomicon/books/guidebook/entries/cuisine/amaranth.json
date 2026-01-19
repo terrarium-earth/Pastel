@@ -59,8 +59,8 @@
         "type": "modonomicon:advancement",
         "advancement_id": "pastel:collect_amaranth_bushel"
       },
-      "recipe_id": "pastel:pedestal/tier1/vanilla/packed_humus",
-      "text": "book.pastel.guidebook.amaranth.packed_humus.text"
+      "recipe_id": "pastel:pedestal/tier1/vanilla/packed_mud",
+      "text": "book.pastel.guidebook.amaranth.packed_mud.text"
     },
     {
       "type": "pastel:pedestal_crafting",
