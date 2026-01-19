@@ -684,10 +684,10 @@ public class PastelAdvancementLang {
         );
         provider.add("advancements.pastel.get_azure_dike_charge.title", "Shield Up");
         provider.add(
-            "advancements.pastel.get_hit_while_wearing_full_suit_of_gemstone_armor.description",
+            "advancements.pastel.get_hit_while_wearing_full_suit_of_crystal_armor.description",
             "Get hit while wearing a full suit of Gemstone Armor"
         );
-        provider.add("advancements.pastel.get_hit_while_wearing_full_suit_of_gemstone_armor.title", "Overcharged");
+        provider.add("advancements.pastel.get_hit_while_wearing_full_suit_of_crystal_armor.title", "Overcharged");
         provider.add(
             "advancements.pastel.get_killed_while_out_of_deeper_down_bounds.description",
             "Find the way back to your home via unusual means"

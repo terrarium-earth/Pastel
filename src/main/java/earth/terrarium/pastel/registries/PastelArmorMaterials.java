@@ -25,24 +25,24 @@ public class PastelArmorMaterials {
     private static final DeferredRegister<ArmorMaterial> REGISTER = DeferredRegister.create(
         Registries.ARMOR_MATERIAL, PastelCommon.MOD_ID);
 
-    public static Holder<ArmorMaterial> GEMSTONE;
+    public static Holder<ArmorMaterial> CRYSTAL;
     public static Holder<ArmorMaterial> BEDROCK;
 
     public static void register(IEventBus bus) {
-        GEMSTONE = register(
-            "gemstone",
+        CRYSTAL = register(
+            "crystal",
             Util.make(
                 new EnumMap<>(ArmorItem.Type.class), map -> {
-                    map.put(ArmorItem.Type.BOOTS, PastelCommon.CONFIG.GemstoneArmorBootsProtection);
-                    map.put(ArmorItem.Type.LEGGINGS, PastelCommon.CONFIG.GemstoneArmorLeggingsProtection);
-                    map.put(ArmorItem.Type.CHESTPLATE, PastelCommon.CONFIG.GemstoneArmorChestplateProtection);
-                    map.put(ArmorItem.Type.HELMET, PastelCommon.CONFIG.GemstoneArmorHelmetProtection);
+                    map.put(ArmorItem.Type.BOOTS, PastelCommon.CONFIG.CrystalArmorBootsProtection);
+                    map.put(ArmorItem.Type.LEGGINGS, PastelCommon.CONFIG.CrystalArmorLeggingsProtection);
+                    map.put(ArmorItem.Type.CHESTPLATE, PastelCommon.CONFIG.CrystalArmorChestplateProtection);
+                    map.put(ArmorItem.Type.HELMET, PastelCommon.CONFIG.CrystalArmorHelmetProtection);
                 }
             ),
             15,
             BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.AMETHYST_BLOCK_CHIME),
-            PastelCommon.CONFIG.GemstoneArmorToughness,
-            PastelCommon.CONFIG.GemstoneArmorKnockbackResistance,
+            PastelCommon.CONFIG.CrystalArmorToughness,
+            PastelCommon.CONFIG.CrystalArmorKnockbackResistance,
             () -> Ingredient.of(PastelItemTags.GEMSTONE_SHARDS)
         );
 

@@ -1,8 +1,9 @@
 package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.item.ArmorWithHitEffect;
 import earth.terrarium.pastel.api.item.ItemPickupListener;
+import earth.terrarium.pastel.api.item.TickingEquipmentItem;
+import earth.terrarium.pastel.api.item.UnequipAwareItem;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
@@ -10,17 +11,19 @@ import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
+import earth.terrarium.pastel.items.armor.GemstoneArmorItem;
 import earth.terrarium.pastel.items.tools.ParryingSwordItem;
 import earth.terrarium.pastel.items.trinkets.AshenCircletItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
-import earth.terrarium.pastel.registries.PastelAttributeTags;
-import earth.terrarium.pastel.registries.PastelDamageTypeTags;
-import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -28,6 +31,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,6 +44,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -49,9 +54,9 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import org.joml.Vector3f;
 import top.theillusivec4.curios.api.CuriosApi;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -64,7 +69,6 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::entityDeath);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::parryingSwordBlock);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::disarming);
-        NeoForge.EVENT_BUS.addListener(PastelEntityEvents::armorEffects);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenItemPickup);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenEntityAdded);
     }
@@ -106,19 +110,6 @@ public class PastelEntityEvents {
 
         var entity = event.getEntity();
         entity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
-    }
-
-    private static void armorEffects(LivingDamageEvent.Post event) {
-        var attacked = event.getEntity();
-
-        if (attacked.level()
-                    .isClientSide())
-            return;
-
-        for (ItemStack armor : attacked.getArmorSlots()) {
-            if (armor.getItem() instanceof ArmorWithHitEffect effect)
-                effect.onHit(armor, event.getSource(), attacked, event.getNewDamage());
-        }
     }
 
     private static void disarming(LivingDamageEvent.Post event) {
@@ -198,6 +189,12 @@ public class PastelEntityEvents {
                 additions.clear();
             }
 
+            for(var slot : List.of(EquipmentSlot.HEAD,EquipmentSlot.CHEST,EquipmentSlot.LEGS,EquipmentSlot.FEET)){
+                if(entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(slot).getItem() instanceof TickingEquipmentItem item){
+                    item.tick(livingEntity,livingEntity.getItemBySlot(slot));
+                }
+            }
+
             PrimordialFireData.serverTick(living);
             AzureDikeProvider.getAzureDikeComponent(living)
                              .serverTick(living);
@@ -223,6 +220,13 @@ public class PastelEntityEvents {
             entity, PastelItems.ASHEN_CIRCLET.get())) {
             event.setCanceled(true);
         }
+
+        if(source.is(DamageTypes.FALL) && entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof GemstoneArmorItem leggings){
+            leggings.onFall(entity.getItemBySlot(EquipmentSlot.LEGS),entity,event.getAmount());
+            entity.level().playSound(entity, entity.blockPosition(), SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 1f, 1f);
+            event.getEntity().playSound(PastelSounds.SHATTER_HEAVY);
+            event.setCanceled(true);
+        }
     }
 
     private static void equipmentChange(LivingEquipmentChangeEvent event) {
@@ -230,6 +234,10 @@ public class PastelEntityEvents {
         var oldEquipment = event.getFrom();
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
+
+        if(oldEquipment.getItem() instanceof UnequipAwareItem item){
+            item.onUnequip(livingEntity, oldEquipment, equipmentSlot);
+        }
 
         var oldInexorable = Ench.getLevel(
             livingEntity.level()

@@ -374,11 +374,11 @@ public class PastelItemGroups {
                                                                            PastelItems.LAGOON_ROD.get()
                                                                        ));
                                                                    entries.accept(PastelItems.MOLTEN_ROD.get());
-                                                                   entries.accept(PastelItems.FETCHLING_HELMET.get());
+                                                                   entries.accept(PastelItems.ONYX_HELMET.get());
                                                                    entries.accept(
-                                                                       PastelItems.FEROCIOUS_CHESTPLATE.get());
-                                                                   entries.accept(PastelItems.SYLPH_LEGGINGS.get());
-                                                                   entries.accept(PastelItems.OREAD_BOOTS.get());
+                                                                       PastelItems.AMETHYST_CHESTPLATE.get());
+                                                                   entries.accept(PastelItems.TOPAZ_LEGGINGS.get());
+                                                                   entries.accept(PastelItems.CITRINE_BOOTS.get());
 
                                                                    // BEDROCK TOOLS
                                                                    entries.accept(

@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "time": 400,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 4,
+    "pastel:yellow": 4,
+    "pastel:black": 4,
+    "pastel:white": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "KKK",
+    "KCK"
+  ],
+  "key": {
+    "K": "pastel:onyx_shard",
+    "C": "pastel:liquid_crystal_bucket"
+  },
+  "result": {
+    "id": "pastel:onyx_helmet",
+    "count": 1
+  },
+  "required_advancement": "pastel:midgame/build_advanced_pedestal_structure"
+}

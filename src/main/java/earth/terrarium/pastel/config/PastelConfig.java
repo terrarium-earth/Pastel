@@ -175,19 +175,12 @@ public class PastelConfig implements ConfigData {
     )
     public int WireHookRange = 32;
 
-    public int GemstoneArmorHelmetProtection = 3;
-    public int GemstoneArmorChestplateProtection = 7;
-    public int GemstoneArmorLeggingsProtection = 5;
-    public int GemstoneArmorBootsProtection = 3;
-    public float GemstoneArmorToughness = 0.0F;
-    public float GemstoneArmorKnockbackResistance = 0.0F;
-
-    public int GemstoneArmorWeaknessAmplifier = 1;
-    public int GemstoneArmorSlownessAmplifier = 1;
-    public int GemstoneArmorAbsorptionAmplifier = 0;
-    public int GemstoneArmorResistanceAmplifier = 0;
-    public int GemstoneArmorRegenerationAmplifier = 0;
-    public int GemstoneArmorSpeedAmplifier = 1;
+    public int CrystalArmorHelmetProtection = 3;
+    public int CrystalArmorChestplateProtection = 7;
+    public int CrystalArmorLeggingsProtection = 5;
+    public int CrystalArmorBootsProtection = 3;
+    public float CrystalArmorToughness = 0.0F;
+    public float CrystalArmorKnockbackResistance = 0.0F;
 
     public int BedrockArmorHelmetProtection = 5;
     public int BedrockArmorLeggingsProtection = 9;

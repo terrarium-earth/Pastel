@@ -7,6 +7,18 @@
         "item.pastel.wire_hook.alias_1",
         "item.pastel.wire_hook.alias_2"
       ]
+    },
+    {
+      "stacks": [
+        "item:pastel:onyx_helmet",
+        "item:pastel:amethyst_chestplate",
+        "item:pastel:topaz_leggings",
+        "item:pastel:citrine_boots"
+      ],
+      "text": [
+        "item.pastel.crystal_armor.alias_0",
+        "item.pastel.crystal_armor.alias_1"
+      ]
     }
   ]
 }

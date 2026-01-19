@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "time": 400,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 4,
+    "pastel:yellow": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "A A",
+    "ATA",
+    "AAA"
+  ],
+  "key": {
+    "A": "minecraft:amethyst_shard",
+    "T": "minecraft:ghast_tear"
+  },
+  "result": {
+    "id": "pastel:amethyst_chestplate",
+    "count": 1
+  },
+  "required_advancement": "pastel:hidden/collect_shards/amethyst"
+}

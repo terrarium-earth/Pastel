@@ -52,19 +52,12 @@ public class PrintConfigCommand {
                      PastelCommon.CONFIG.BedrockArmorToughness + ", Knockback Resistance: " +
                      PastelCommon.CONFIG.BedrockArmorKnockbackResistance + ")"
         );
-        send(source, "Gemstone Armor Protection: " + PastelCommon.CONFIG.GemstoneArmorHelmetProtection + ", " +
-                     PastelCommon.CONFIG.GemstoneArmorChestplateProtection + ", " +
-                     PastelCommon.CONFIG.GemstoneArmorLeggingsProtection + ", " +
-                     PastelCommon.CONFIG.GemstoneArmorBootsProtection + " (Toughness: " +
-                     PastelCommon.CONFIG.GemstoneArmorToughness + ", Knockback Resistance: " +
-                     PastelCommon.CONFIG.GemstoneArmorKnockbackResistance + ")"
-        );
-        send(source, "Bedrock Armor Effect Amplifiers: " + PastelCommon.CONFIG.GemstoneArmorWeaknessAmplifier + ", " +
-                     PastelCommon.CONFIG.GemstoneArmorSlownessAmplifier + ", " +
-                     PastelCommon.CONFIG.GemstoneArmorAbsorptionAmplifier + ", " +
-                     PastelCommon.CONFIG.GemstoneArmorResistanceAmplifier + ", " +
-                     PastelCommon.CONFIG.GemstoneArmorRegenerationAmplifier + ", " +
-                     PastelCommon.CONFIG.GemstoneArmorSpeedAmplifier + ")"
+        send(source, "Crystal Armor Protection: " + PastelCommon.CONFIG.CrystalArmorHelmetProtection + ", " +
+                     PastelCommon.CONFIG.CrystalArmorChestplateProtection + ", " +
+                     PastelCommon.CONFIG.CrystalArmorLeggingsProtection + ", " +
+                     PastelCommon.CONFIG.CrystalArmorBootsProtection + " (Toughness: " +
+                     PastelCommon.CONFIG.CrystalArmorToughness + ", Knockback Resistance: " +
+                     PastelCommon.CONFIG.CrystalArmorKnockbackResistance + ")"
         );
 
         return 0;

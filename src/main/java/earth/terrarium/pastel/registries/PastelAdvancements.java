@@ -83,8 +83,8 @@ public class PastelAdvancements {
             public static final ResourceLocation MOLTEN_ROD = PastelCommon.locate("unlocks/equipment/molten_rod");
             public static final ResourceLocation DRACONIC_TWINSWORD = PastelCommon.locate(
                 "unlocks/equipment/draconic_twinsword");
-            public static final ResourceLocation GEMSTONE_ARMOR_CATEGORY = PastelCommon.locate(
-                "unlocks/equipment/gemstone_armor_category");
+            public static final ResourceLocation CRYSTAL_ARMOR_CATEGORY = PastelCommon.locate(
+                "unlocks/equipment/crystal_armor_category");
             public static final ResourceLocation SOOTHING_BOUQUET = PastelCommon.locate(
                 "unlocks/equipment/soothing_bouquet");
             public static final ResourceLocation ANY_PREENCHANTED_TOOL = PastelCommon.locate(
@@ -1227,8 +1227,8 @@ public class PastelAdvancements {
         "grow_bloodstone_in_crystallarieum");
     public static final ResourceLocation FAIL_TO_TAKE_ITEM_OUT_OF_PEDESTAL = PastelCommon.locate(
         "fail_to_take_item_out_of_pedestal");
-    public static final ResourceLocation GET_HIT_WHILE_WEARING_FULL_SUIT_OF_GEMSTONE_ARMOR = PastelCommon.locate(
-        "get_hit_while_wearing_full_suit_of_gemstone_armor");
+    public static final ResourceLocation GET_HIT_WHILE_WEARING_FULL_SUIT_OF_CRYSTAL_ARMOR = PastelCommon.locate(
+        "get_hit_while_wearing_full_suit_of_crystal_armor");
     public static final ResourceLocation SOLVE_COLOR_MIXING_PRESERVATION_RUIN = PastelCommon.locate(
         "solve_color_mixing_preservation_ruin");
     public static final ResourceLocation CREATE_ONYX_SHARD = PastelCommon.locate("create_onyx_shard");

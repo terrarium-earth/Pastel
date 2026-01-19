@@ -1972,40 +1972,36 @@ public class PastelGuidebookLang {
             "(entry://pastel_network/sender_node)\n3. [Provider Nodes](entry://pastel_network/provider_node)\n4. " +
             "[Storage Nodes](entry://pastel_network/storage_node)"
         );
-        provider.add("book.pastel.guidebook.gemstone_armor.name", "Gemstone Armor");
+        provider.add("book.pastel.guidebook.crystal_armor.name", "Crystal Armor");
         provider.add(
-            "book.pastel.guidebook.gemstone_armor.page0.text",
-            "I've had more than enough time to develop my own individual fighting style.\\\nTo best support it, I've " +
-            "designed a range of matching gear.\\\n\\\nDisadvantage: The ingredients used to make them are very " +
-            "brittle. Therefore, the durability of this equipment is relatively low."
-        );
-        provider.add("book.pastel.guidebook.gemstone_armor.checklist.helmet", "Helmet: when nothingness meets hell");
-        provider.add("book.pastel.guidebook.gemstone_armor.checklist.chestplate", "Chestplate: the Golden Ratio");
-        provider.add("book.pastel.guidebook.gemstone_armor.checklist.leggings", "Leggings: mourning of the Nether");
-        provider.add("book.pastel.guidebook.gemstone_armor.checklist.boots", "Boots: the source of nightmares");
-        provider.add(
-            "book.pastel.guidebook.gemstone_armor.page1.text",
-            "\\\nThey can be repaired in [Anvils](item://minecraft:anvil) by using [Gemstone Shards]" +
-            "(entry://general/shards).\\\n\\\nTo take advantage of their unique abilities I will need some special " +
-            "materials:"
+            "book.pastel.guidebook.crystal_armor.page0.text",
+            "These gems I have found are curious things. While I'm sure they have more refined uses, one of my first " +
+            "thoughts was to shape them into equipment. They seem mediocre as armor, comparable to iron, but each " +
+            "piece bears a magical effect of some kind that more than makes up for it."
         );
         provider.add(
-            "book.pastel.guidebook.gemstone_armor.page2.text",
-            "Gives attackers Weakness and Slowness when they hit me, allowing me to slip through their hands like a " +
-            "shadow."
+            "book.pastel.guidebook.crystal_armor.page1.text",
+            "At first, I wasn't sure how the aspect of [#](ff4ff6)time[#]() would manifest in a chestplate—certainly I " +
+            "don't want to accelerate harm!—but the ghast tear seems to " +
+            "direct its effects nicely. Grants slow regeneration."
         );
         provider.add(
-            "book.pastel.guidebook.gemstone_armor.page3.text",
-            "Gives me Absorption and Resistance when hit, making me a massive wall for a short duration."
+            "book.pastel.guidebook.crystal_armor.page2.text",
+            "As expected from armor bearing the aspect of [#](5bffed)matter[#](), these are far denser than they look. " +
+            "Sturdy enough to take falls in my stead, and I should be able " +
+            "to stand my ground easier while crouching."
         );
         provider.add(
-            "book.pastel.guidebook.gemstone_armor.page4.text",
-            "Gives me a short burst of Regeneration when hit, so I can get right back up and fight back."
+            "book.pastel.guidebook.crystal_armor.page3.text",
+            "The aspect of [#](eded00)energy[#]() lends itself well to boots, putting a definite spring in my step. They " +
+            "even allow me to defy gravity a bit."
         );
+        provider.add("book.pastel.guidebook.crystal_armor.page4.title", "An incomplete set?");
         provider.add(
-            "book.pastel.guidebook.gemstone_armor.page5.text",
-            "Gives me a short burst of Speed and Invisibility when hit, allowing me to retreat. Perfect for ranged " +
-            "combat."
+            "book.pastel.guidebook.crystal_armor.page4.text",
+            "When I designed these, I had hoped to find enough gems for a full armor set. It seems that won't be " +
+            "happening anytime soon, so I'll have to make do with mundane materials until I find something suitably " +
+            "interesting to cap off the set with."
         );
         provider.add("book.pastel.guidebook.gemstone_chimes.name", "Gemstone Chimes");
         provider.add(
@@ -6873,8 +6869,8 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.whispy_circlet.page1.text",
-            "After just a few minutes of wearing it, I feel physically and mentally refreshed and recover more quickly" +
-            " from any negative effects.\\\n\\\n*The pleasures of a good night's sleep.*"
+            "After just a few minutes of wearing it, I feel physically and mentally refreshed and recover more " +
+            "quickly" + " from any negative effects.\\\n\\\n*The pleasures of a good night's sleep.*"
         );
 
         provider.add("pastel.gui.guidebook.reveal_hint_button.text", "Uncover Insight    ");

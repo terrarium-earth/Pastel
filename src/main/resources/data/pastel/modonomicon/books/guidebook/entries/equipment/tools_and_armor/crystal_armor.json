@@ -1,0 +1,60 @@
+{
+  "name": "book.pastel.guidebook.crystal_armor.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/crystal_armor_category"
+  },
+  "icon": {
+    "item": "pastel:amethyst_chestplate"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.crystal_armor.page0.text",
+      "title": "book.pastel.guidebook.crystal_armor.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/amethyst_chestplate"
+      },
+      "text": "book.pastel.guidebook.crystal_armor.page1.text",
+      "recipe_id": "pastel:pedestal/tier1/crystal_armor/amethyst_chestplate"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.crystal_armor.page2.text",
+      "recipe_id": "pastel:pedestal/tier1/crystal_armor/topaz_leggings",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/topaz_leggings"
+      }
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.crystal_armor.page3.text",
+      "recipe_id": "pastel:pedestal/tier1/crystal_armor/citrine_boots",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/citrine_boots"
+      }
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.crystal_armor.page4.title",
+      "text": "book.pastel.guidebook.crystal_armor.page4.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_all_basic_shards"
+      }
+    }
+  ]
+}

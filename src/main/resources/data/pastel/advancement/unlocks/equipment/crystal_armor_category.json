@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "collected_amethyst": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/collect_shards/amethyst"
+      }
+    },
+    "collected_topaz": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/collect_shards/topaz"
+      }
+    },
+    "collected_citrine": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/collect_shards/citrine"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collected_amethyst",
+      "collected_topaz",
+      "collected_citrine"
+    ]
+  ]
+}

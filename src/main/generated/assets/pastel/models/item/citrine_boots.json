@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "pastel:item/ferocious_chestplate"
+    "layer0": "pastel:item/citrine_boots"
   }
 }
