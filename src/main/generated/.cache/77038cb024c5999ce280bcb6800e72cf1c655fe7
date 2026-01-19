@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-18T15:30:48.118898864	Model Definitions
+// 1.21.1	2026-01-18T23:22:48.723139548	Model Definitions
 16b08361bc65a3c74e8df5774303ab1909bbffbb assets/minecraft/models/item/air.json
 2e209fa76a738ef1d22af6817df1419142cc743a assets/pastel/blockstates/abyssal_vines.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_head.json
@@ -1136,6 +1136,7 @@ b274eec595b828ed43f8c44709127d12f1f45e91 assets/pastel/blockstates/stripped_whit
 df451c3b6c37527914b1e915e09e8c0a6ce0ae77 assets/pastel/blockstates/stripped_white_wood.json
 dc3e65bd23e2e3555337c13a4c50fec0e30d877c assets/pastel/blockstates/stripped_yellow_log.json
 ebaa1624ec6dd6659a2a29f2a361e6eb0491d0d2 assets/pastel/blockstates/stripped_yellow_wood.json
+37d92e1c0441b2310124fc8b851cbb4aec829c9f assets/pastel/blockstates/stuck_storm_stone.json
 c8f314f3384f4473238518a63337d8c9085b7688 assets/pastel/blockstates/sweet_pea.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/tadpole_head.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/tadpole_wall_head.json

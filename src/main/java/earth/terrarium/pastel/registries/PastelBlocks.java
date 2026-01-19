@@ -5741,6 +5741,7 @@ public class PastelBlocks {
         PastelModelHelper.BLOCK.cutout(PastelBlocks.BLOODSTONE_CLUSTER);
         PastelModelHelper.BLOCK.cutout(PastelBlocks.LARGE_BLOODSTONE_BUD);
         PastelModelHelper.BLOCK.cutout(PastelBlocks.SMALL_BLOODSTONE_BUD);
+        PastelModelHelper.BLOCK.cutout(PastelBlocks.STUCK_STORM_STONE);
 
         if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.AE2_ID)) {
             PastelModelHelper.BLOCK.cutout(AE2Compat.SMALL_FLUIX_BUD);
