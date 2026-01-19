@@ -56,9 +56,9 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
 
         // Works out to half of regen 1, or regen 1 with the set bonus
         if (type.equals(Type.CHESTPLATE) && (bearer.level()
-                                                   .getGameTime() % 50 == 0 || (isWearingFullSet(bearer) &&
+                                                   .getGameTime() % 100 == 0 || (isWearingFullSet(bearer) &&
                                                                                 bearer.level()
-                                                                                      .getGameTime() % 25 == 0))) {
+                                                                                      .getGameTime() % 50 == 0))) {
             bearer.heal(1.0f);
         }
         if (type.equals(Type.LEGGINGS)) {
