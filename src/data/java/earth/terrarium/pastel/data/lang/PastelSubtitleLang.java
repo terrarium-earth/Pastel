@@ -99,6 +99,7 @@ public class PastelSubtitleLang {
         provider.add("pastel.subtitles.midnight_aberration_crumbling", "Midnight Aberration crumbles");
         provider.add("pastel.subtitles.moonstone_strike", "Magic ruptures");
         provider.add("pastel.subtitles.natures_staff_use", "Nature's Staff rings");
+        provider.add("pastel.subtitles.night_salts.use", "Player sniffs");
         provider.add("pastel.subtitles.overcharging", "Overcharging");
         provider.add("pastel.subtitles.paintbrush_paint", "Paintbrush paints");
         provider.add("pastel.subtitles.paintbrush_trigger", "Paintbrush activation");

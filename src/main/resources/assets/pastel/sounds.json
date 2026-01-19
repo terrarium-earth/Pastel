@@ -2102,5 +2102,13 @@
       "pastel:entity.lizard.ambient2",
       "pastel:entity.lizard.ambient3"
     ]
+  },
+  "item.night_salts.use": {
+    "subtitle": "pastel.subtitles.night_salts.use",
+    "sounds": [
+      "minecraft:mob/sniffer/scenting1",
+      "minecraft:mob/sniffer/scenting2",
+      "minecraft:mob/sniffer/scenting3"
+    ]
   }
 }
