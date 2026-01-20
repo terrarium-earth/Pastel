@@ -9,6 +9,7 @@ import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.entity.TouchingWaterAware;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
+import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
 import earth.terrarium.pastel.attachments.data.HookshotData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
@@ -384,4 +385,17 @@ public abstract class LivingEntityMixin {
         container.setNewDamage(passedDamage);
         instance.actuallyHurt(source, passedDamage);
     }
+
+//    @WrapOperation(method="aiStep",
+//                   at = @At(value = "INVOKE",
+//                            target = "Lnet/minecraft/world/entity/Entity;onGround()Z",
+//                            ordinal = 0))
+//    private boolean doubleJump(Entity instance, Operation<Boolean> original){
+//        var actuallyOnGround = original.call(instance);
+//        if(!actuallyOnGround && instance.getData(CitrineJumpsAttachment.ATTACHMENT)>0){
+//            instance.setData(CitrineJumpsAttachment.ATTACHMENT,instance.getData(CitrineJumpsAttachment.ATTACHMENT)-1);
+//            return true;
+//        }
+//        return actuallyOnGround;
+//    }
 }

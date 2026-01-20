@@ -231,8 +231,16 @@ public class PastelEntityEvents {
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
 
+        PastelCommon.logWarning("test 1");
         if(oldEquipment.getItem() instanceof UnequipAwareItem item){
+            PastelCommon.logWarning("test 2");
             item.onUnequip(livingEntity, oldEquipment, equipmentSlot);
+        }
+
+        if(equipmentSlot.getType() == EquipmentSlot.Type.HAND && oldEquipment.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)){
+            PastelCommon.logWarning("test 3");
+            // this needs to be handled specially here since the items won't be UnequipAware
+            CrystalArmorItem.removeEmpowered(oldEquipment);
         }
 
         var oldInexorable = Ench.getLevel(
