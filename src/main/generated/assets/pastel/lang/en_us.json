@@ -4898,6 +4898,7 @@
   "pastel.tooltip.able_to_summon_warden": "Calls out to the Warden",
   "pastel.tooltip.biomemakeover_cursed": "Got cursed by a wicked altar",
   "pastel.tooltip.coming_soon": "Not available in Survival yet",
+  "pastel.tooltip.crystal_armor_empowered": "+I",
   "pastel.tooltip.dragon_and_wither_immune": "§7Ender Dragon and Wither proof",
   "pastel.tooltip.ink_cost": "§7 [%s %s]",
   "pastel.tooltip.ink_drain.tooltip.ink_for_next_step": "%d %s - %d until next improvement",

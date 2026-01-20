@@ -28,7 +28,7 @@ public class TranslationStorageMixin {
     @Inject(method = "<init>", at = @At("TAIL"))
     private void addTranslations(Map<String, String> translations, boolean rightToLeft, CallbackInfo ci) {
         Calendar calendar = Calendar.getInstance();
-        if (calendar.get(Calendar.MONTH) != Calendar.APRIL || calendar.get(Calendar.DAY_OF_MONTH) != 1) return;
+//        if (calendar.get(Calendar.MONTH) != Calendar.APRIL || calendar.get(Calendar.DAY_OF_MONTH) != 1) return;
 
         Map<String, String> builder = new HashMap<>(translations);
         builder.put("block.pastel.crystallarieum", getCrystallarieuaeuieueum());
@@ -40,6 +40,7 @@ public class TranslationStorageMixin {
         builder.put("item.pastel.shimmerstone_gem", "Stimmerstone Gem");
         builder.put("block.pastel.shimmerstone_block", "Block of Stimmerstone");
         builder.put("block.pastel.amethyst_glass_arrow", "Chlorophyte Bullet");
+        builder.put("pastel.tooltip.crystal_armor_empowered","+あたし");
 
         builder.put("item.pastel.mermaids_gem", translations.get("item.pastel.storm_stone"));
         builder.put("item.pastel.storm_stone", translations.get("item.pastel.mermaids_gem"));

@@ -8,6 +8,7 @@ import earth.terrarium.pastel.api.gui.SlotWithOnClickAction;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.item.TooltipExtensions;
 import earth.terrarium.pastel.items.ConcealingOilsItem;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -165,30 +166,35 @@ public abstract class ItemStackMixin {
         ItemEnchantments itemEnchantments = (ItemEnchantments) instance.get(component);
         if (itemEnchantments != null) {
             // if you are using this to grant more than 3 levels you are doing something wrong
-            String addString = "+" + "I".repeat(Math.max(0, empowerLevel));
+            Component addComponent = Component.translatable("pastel.tooltip.crystal_armor_empowered")
+                                              .withStyle(ChatFormatting.DARK_BLUE);
             if (itemEnchantments.showInTooltip) {
                 HolderLookup.Provider registries = context.registries();
                 HolderSet<Enchantment> orderedEnchants = ItemEnchantments.getTagOrEmpty(
                     registries, Registries.ENCHANTMENT, EnchantmentTags.TOOLTIP_ORDER);
-
                 for (Holder<Enchantment> orderedEnchantment : orderedEnchants) {
+                    var effectiveBoost = orderedEnchantment.value()
+                                                           .getMaxLevel() == 1 ? 0 : empowerLevel;
                     int level = itemEnchantments.enchantments.getInt(orderedEnchantment);
                     if (level > 0 && Enchantment.getFullname(
-                        orderedEnchantment, level-empowerLevel) instanceof MutableComponent mutableComponent) {
-                        tooltipAdder.accept(mutableComponent.append(Component.literal(addString)
-                                                                             .withStyle(ChatFormatting.DARK_BLUE)));
+                        orderedEnchantment, level - effectiveBoost) instanceof MutableComponent mutableComponent) {
+                        tooltipAdder.accept(
+                            mutableComponent.append(effectiveBoost == 0 ? Component.empty() : addComponent));
                     }
                 }
 
                 for (Object2IntMap.Entry<Holder<Enchantment>> enchantment :
                     itemEnchantments.enchantments.object2IntEntrySet()) {
+                    var effectiveBoost = enchantment.getKey()
+                                                    .value()
+                                                    .getMaxLevel() == 1 ? 0 : empowerLevel;
                     Holder<Enchantment> enchantmentKey = (Holder<Enchantment>) enchantment.getKey();
                     if (!orderedEnchants.contains(enchantmentKey) && Enchantment.getFullname(
                         (Holder<Enchantment>) enchantment.getKey(),
-                        enchantment.getIntValue()-empowerLevel
+                        enchantment.getIntValue() - effectiveBoost
                     ) instanceof MutableComponent mutableComponent) {
-                        tooltipAdder.accept(mutableComponent.append(Component.literal(addString)
-                                                                             .withStyle(ChatFormatting.DARK_BLUE)));
+                        tooltipAdder.accept(
+                            mutableComponent.append(effectiveBoost == 0 ? Component.empty() : addComponent));
                     }
                 }
             }
