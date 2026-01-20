@@ -165,7 +165,6 @@ public abstract class ItemStackMixin {
 
         ItemEnchantments itemEnchantments = (ItemEnchantments) instance.get(component);
         if (itemEnchantments != null) {
-            // if you are using this to grant more than 3 levels you are doing something wrong
             Component addComponent = Component.translatable("pastel.tooltip.crystal_armor_empowered")
                                               .withStyle(ChatFormatting.DARK_BLUE);
             if (itemEnchantments.showInTooltip) {

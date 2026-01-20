@@ -166,7 +166,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         if (enchantments == null || enchantments.isEmpty()) return;
         for (var enchantment : enchantments.keySet()) {
             if (enchantments.getLevel(enchantment) > 0 && enchantment.value()
-                                                                     .getMaxLevel() > 1) Ench.addOrUpgradeEnchantment(
+                                                                     .getMaxLevel() >1) Ench.addOrUpgradeEnchantment(
                 stack, enchantment, enchantments.getLevel(enchantment) + ENCHANTMENT_BONUS, true, true);
         }
     }
@@ -178,7 +178,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
             var newEnchants = new ItemEnchantments.Mutable(enchantments);
             for (var enchantment : enchantments.keySet()) {
                 if (enchantment.value()
-                               .getMaxLevel() < stack.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0))
+                               .getMaxLevel()==1)
                     continue;
                 int level = enchantments.getLevel(enchantment);
                 if (level < stack.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0)) newEnchants.set(
