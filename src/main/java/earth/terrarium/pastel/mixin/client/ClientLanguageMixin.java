@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mixin(ClientLanguage.class)
-public class TranslationStorageMixin {
+public class ClientLanguageMixin {
 
     @Mutable
     @Shadow
@@ -41,6 +41,7 @@ public class TranslationStorageMixin {
         builder.put("block.pastel.shimmerstone_block", "Block of Stimmerstone");
         builder.put("block.pastel.amethyst_glass_arrow", "Chlorophyte Bullet");
         builder.put("pastel.tooltip.crystal_armor_empowered","+あたし");
+        builder.put("item.pastel.celestial_pocketwatch","Luna Dial");
 
         builder.put("item.pastel.mermaids_gem", translations.get("item.pastel.storm_stone"));
         builder.put("item.pastel.storm_stone", translations.get("item.pastel.mermaids_gem"));
