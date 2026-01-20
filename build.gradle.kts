@@ -6,11 +6,6 @@ plugins {
 	id("com.teamresourceful.resourcefulgradle") version "0.0.+"
 }
 
-sourceSets.main {
-    // TODO Delete once everything in oldGenerated is properly data-genned
-    resources.srcDir("src/main/oldGenerated")
-}
-
 repositories {
     cloche.librariesMinecraft()
 
