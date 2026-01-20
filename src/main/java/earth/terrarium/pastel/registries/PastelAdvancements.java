@@ -9,20 +9,6 @@ import static earth.terrarium.pastel.PastelCommon.locate;
 @SuppressWarnings("unused")
 public class PastelAdvancements {
     public static class Unlocks {
-        public static class Ampoules {
-            public static final ResourceLocation PURE_AZURITE_AMPOULE = PastelCommon.locate(
-                "unlocks/ampoules/pure_azurite_ampoule");
-            public static final ResourceLocation RAW_BLOODSTONE_AMPOULE = PastelCommon.locate(
-                "unlocks/ampoules/raw_bloodstone_ampoule");
-            public static final ResourceLocation PURE_BLOODSTONE_AMPOULE = PastelCommon.locate(
-                "unlocks/ampoules/pure_bloodstone_ampoule");
-            public static final ResourceLocation RAW_AZURITE_AMPOULE = PastelCommon.locate(
-                "unlocks/ampoules/raw_azurite_ampoule");
-            public static final ResourceLocation RAW_MALACHITE_AMPOULE = PastelCommon.locate(
-                "unlocks/ampoules/raw_malachite_ampoule");
-            public static final ResourceLocation PURE_MALACHITE_AMPOULE = PastelCommon.locate(
-                "unlocks/ampoules/pure_malachite_ampoule");
-        }
 
         public static class ColoredLamps {
             public static final ResourceLocation LIGHT_GRAY_LAMP = PastelCommon.locate(
@@ -253,7 +239,6 @@ public class PastelAdvancements {
             public static final ResourceLocation KNOWLEDGE_GEM = PastelCommon.locate("unlocks/items/knowledge_gem");
             public static final ResourceLocation CONSTRUCTORS_STAFF = PastelCommon.locate(
                 "unlocks/items/constructors_staff");
-            public static final ResourceLocation GLASS_AMPOULES = PastelCommon.locate("unlocks/items/glass_ampoules");
             public static final ResourceLocation PERTURBED_EYE = PastelCommon.locate("unlocks/items/perturbed_eye");
             public static final ResourceLocation NATURES_STAFF = PastelCommon.locate("unlocks/items/natures_staff");
             public static final ResourceLocation EXPERIENCE_BOTTLE = PastelCommon.locate(

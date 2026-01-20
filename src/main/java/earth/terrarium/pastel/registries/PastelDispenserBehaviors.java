@@ -3,7 +3,6 @@ package earth.terrarium.pastel.registries;
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStarDispenserBehavior;
-import earth.terrarium.pastel.items.magic_items.ampoules.GlassAmpouleItem;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
 import earth.terrarium.pastel.items.tools.PrimordialLighterItem;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
@@ -67,19 +66,6 @@ public class PastelDispenserBehaviors {
 
         DispenserBlock.registerBehavior(PastelItems.PRIMORDIAL_LIGHTER.get(), PrimordialLighterItem.DISPENSER_BEHAVIOR);
 
-        // Glass Ampoules
-        DispenseItemBehavior ampouleBehavior = (pointer, stack) -> {
-            if (((GlassAmpouleItem) stack.getItem()).trigger(
-                pointer.level(), stack, null, null, pointer.pos()
-                                                           .getCenter()
-            )) {
-                stack.shrink(1);
-            }
-            return stack;
-        };
-        DispenserBlock.registerBehavior(PastelItems.AZURITE_GLASS_AMPOULE.get(), ampouleBehavior);
-        DispenserBlock.registerBehavior(PastelItems.MALACHITE_GLASS_AMPOULE.get(), ampouleBehavior);
-        DispenserBlock.registerBehavior(PastelItems.BLOODSTONE_GLASS_AMPOULE.get(), ampouleBehavior);
     }
 
 }

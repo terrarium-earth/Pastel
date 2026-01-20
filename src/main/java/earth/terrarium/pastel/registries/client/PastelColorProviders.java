@@ -75,7 +75,7 @@ public class PastelColorProviders {
 		event.register(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO, PastelBlocks.CLOVER.get(), PastelBlocks.FOUR_LEAF_CLOVER.get());
 
 		memoryItem(event, PastelBlocks.MEMORY.get());
-		registerPotionFillables(event, PastelItems.LESSER_POTION_PENDANT.get(), PastelItems.GREATER_POTION_PENDANT.get(), PastelItems.MALACHITE_GLASS_AMPOULE.get());
+		registerPotionFillables(event, PastelItems.LESSER_POTION_PENDANT.get(), PastelItems.GREATER_POTION_PENDANT.get());
 		registerPickyPotionFillables(event, PastelItems.NIGHTFALLS_BLADE.get(), PastelItems.CONCEALING_OILS.get());
 		registerSingleInkStorages(event, PastelItems.INK_FLASK.get());
 		registerBrewColors(event, PastelItems.INFUSED_BEVERAGE.get());

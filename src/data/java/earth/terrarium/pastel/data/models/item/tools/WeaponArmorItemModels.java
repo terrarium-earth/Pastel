@@ -5,9 +5,6 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.items.armor.BedrockArmorItem;
 import earth.terrarium.pastel.items.armor.GemstoneArmorItem;
-import earth.terrarium.pastel.items.magic_items.ampoules.AzuriteGlassAmpouleItem;
-import earth.terrarium.pastel.items.magic_items.ampoules.BloodstoneGlassAmpouleItem;
-import earth.terrarium.pastel.items.magic_items.ampoules.MalachiteGlassAmpouleItem;
 import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelArmorMaterials;
@@ -38,10 +35,6 @@ public class WeaponArmorItemModels {
         PastelModelHelper.ITEM.simple(generators, PastelItems.CITRINE_GLASS_ARROW);
         PastelModelHelper.ITEM.simple(generators, PastelItems.ONYX_GLASS_ARROW);
         PastelModelHelper.ITEM.simple(generators, PastelItems.MOONSTONE_GLASS_ARROW);
-
-        PastelModelHelper.ITEM.simple(generators, PastelItems.AZURITE_GLASS_AMPOULE);
-        PastelModelHelper.ITEM.simple(generators, PastelItems.BLOODSTONE_GLASS_AMPOULE);
-        PastelModelHelper.ITEM.layered(generators, PastelItems.MALACHITE_GLASS_AMPOULE, "_base", "_overlay");
 
         PastelModelHelper.registerLayeredItemModel(
             generators, PastelItems.NIGHTFALLS_BLADE.get(), PastelModels.HANDHELD_THREE_LAYERS, "", "_tint",

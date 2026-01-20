@@ -89,7 +89,6 @@ public class PastelItemLang {
         provider.add(
             "item.pastel.azuresque_dike_core.tooltip2", "§7Increases §9Azure Dike§7 charging and recovery speed");
         provider.add("item.pastel.azuresque_dike_core.tooltip3", "§7Doubles damage that cannot be absorbed");
-        provider.add("item.pastel.azurite_glass_ampoule.tooltip", "Summon spheres of Ink that home in on your enemies");
         provider.add("item.pastel.wire_hook.alias_0", "Hookshot");
         provider.add("item.pastel.wire_hook.alias_1", "Grappling Hook");
         provider.add("item.pastel.wire_hook.alias_2", "Grapple");
@@ -103,8 +102,6 @@ public class PastelItemLang {
         provider.add("item.pastel.block_flooder.tooltip2", "Throw to use; Radius of 10 blocks");
         provider.add("item.pastel.block_flooder.tooltip3", "Takes matching blocks right out of your inventory");
         provider.add("item.pastel.block_flooder.tooltip4", "Alternatively uses Cobblestone");
-        provider.add(
-            "item.pastel.bloodstone_glass_ampoule.tooltip", "Summon arrows of Ink that pierces the enemy you hit");
         provider.add("item.pastel.bottle_of_decay_away.tooltip", "§2Apply directly to corrupted area");
         provider.add("item.pastel.bottle_of_fading.tooltip", "§2Glibbery");
         provider.add("item.pastel.bottle_of_failing.tooltip", "§e⚠ Hungry");
@@ -294,9 +291,6 @@ public class PastelItemLang {
         provider.add("item.pastel.velvet_astrologer_banner_pattern.desc", "Velvet Astrologer");
         provider.add("item.pastel.poisonbloom_banner_pattern.desc", "Poisonbloom");
         provider.add("item.pastel.deep_light_banner_pattern.desc", "Deep Light");
-        provider.add(
-            "item.pastel.malachite_glass_ampoule.tooltip", "Summon mines of ink that hit everything getting too close");
-        provider.add("item.pastel.malachite_glass_ampoule.tooltip.when_hit", "When Hit:");
         provider.add("item.pastel.melochites_cookbook_vol_1.tooltip", "§3§oMelochites recipe compendium - Volume 1");
         provider.add("item.pastel.melochites_cookbook_vol_2.tooltip", "§3§oMelochites recipe compendium - Volume 2");
         provider.add("item.pastel.memory.tooltip.does_not_manifest", "Will not manifest in your lifetime");
