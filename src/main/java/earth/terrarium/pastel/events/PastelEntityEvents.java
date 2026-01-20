@@ -219,8 +219,7 @@ public class PastelEntityEvents {
 
         if(source.is(DamageTypes.FALL) && entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof CrystalArmorItem leggings){
             leggings.onFall(entity.getItemBySlot(EquipmentSlot.LEGS),entity,event.getAmount());
-            entity.level().playSound(entity, entity.blockPosition(), SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 1f, 1f);
-            event.getEntity().playSound(PastelSounds.SHATTER_HEAVY);
+            entity.level().playSound(null, entity.blockPosition(), PastelSounds.SHATTER_LIGHT, SoundSource.PLAYERS, 2f, 1f);
             event.setCanceled(true);
         }
     }
@@ -231,16 +230,13 @@ public class PastelEntityEvents {
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
 
-        PastelCommon.logWarning("test 1");
         if(oldEquipment.getItem() instanceof UnequipAwareItem item){
-            PastelCommon.logWarning("test 2");
-            item.onUnequip(livingEntity, oldEquipment, equipmentSlot);
+            item.onUnequip(livingEntity, oldEquipment, equipmentSlot, newEquipment);
         }
 
         if(equipmentSlot.getType() == EquipmentSlot.Type.HAND && oldEquipment.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)){
-            PastelCommon.logWarning("test 3");
-            // this needs to be handled specially here since the items won't be UnequipAware
             CrystalArmorItem.removeEmpowered(oldEquipment);
+            event.getEntity().onEquipItem(equipmentSlot,oldEquipment,newEquipment);
         }
 
         var oldInexorable = Ench.getLevel(
