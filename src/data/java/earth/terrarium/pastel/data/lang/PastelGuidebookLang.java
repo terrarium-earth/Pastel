@@ -1981,9 +1981,9 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.crystal_armor.page1.text",
-            "At first, I wasn't sure how the aspect of [#](ff4ff6)time[#]() would manifest in a chestplate—certainly " +
-            "I " + "don't want to accelerate harm!—but the ghast tear seems to " +
-            "direct its effects nicely. Grants slow regeneration."
+            "At first, I wasn't sure how the aspect of [#](ff4ff6)time[#]() would manifest in a chestplate—\\\ncertainly " +
+            "I don't want to accelerate harm!—but the ghast tear seems to direct its effects nicely. Grants slow " +
+            "regeneration and lets me burn through toxins faster."
         );
         provider.add(
             "book.pastel.guidebook.crystal_armor.page2.text",
@@ -2007,14 +2007,12 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.crystal_armor.page5.text",
             "Finally, I have created something worthy of this armor's capstone. These [Onyx Shards]" +
-            "(entry://general/onyx_shards), infused with the power of Liquid Crystal, seem to be able to unify the " +
-            "effects of the rest of the set, enhancing each effect, in addition to increasing the set's magic " +
-            "capacity overall, making enchantments more effective. I would accept nothing less."
+            "(entry://general/onyx_shards), infused with the power of Liquid Crystal, seem to harmonize with the " +
+            "rest of the set, enhancing each effect when all are brought together. They also increase the armor's " +
+            "magical attunement overall, making enchantments more effective. When I wear the whole set, " +
+            "this benefit even flows through me to anything I hold! I would accept nothing less."
         );
-        provider.add(
-            "book.pastel.guidebook.crystal_armor.page6.text",
-            "*Some say black is the color of magic itself*"
-        );
+        provider.add("book.pastel.guidebook.crystal_armor.page6.text", "*Some say black is the color of magic itself*");
         provider.add("book.pastel.guidebook.gemstone_chimes.name", "Gemstone Chimes");
         provider.add(
             "book.pastel.guidebook.gemstone_chimes.page0.text",

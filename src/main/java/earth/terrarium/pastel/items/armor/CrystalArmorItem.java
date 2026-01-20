@@ -6,12 +6,14 @@ import earth.terrarium.pastel.api.item.TickingEquipmentItem;
 import earth.terrarium.pastel.api.item.UnequipAwareItem;
 import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
-import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -22,6 +24,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem, UnequipAwareItem {
@@ -103,7 +107,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
                                                                                  bearer.level()
                                                                                        .getGameTime() % 50 == 0))) {
             bearer.heal(1.0f);
-            WhispyCircletItem.shortenNegativeStatusEffects(bearer,25);
+            shortenNegativeStatusEffects(bearer,25);
         }
         if (type.equals(Type.LEGGINGS)) {
             var kb_resist = bearer.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
@@ -194,4 +198,27 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         return stack;
     }
 
+    public static void shortenNegativeStatusEffects(@NotNull LivingEntity entity, int duration) {
+        Collection<MobEffectInstance> newEffects = new ArrayList<>();
+        Collection<Holder<MobEffect>> effectTypesToClear = new ArrayList<>();
+
+        // remove them first, so hidden "stacked" effects are preserved
+        for (MobEffectInstance instance : entity.getActiveEffects()) {
+            if (instance.getEffect()
+                        .value()
+                        .getCategory() == MobEffectCategory.HARMFUL) {
+                int newDurationTicks = instance.getDuration() - duration;
+                if (newDurationTicks > 0) {
+                    newEffects.add(
+                        new MobEffectInstance(
+                            instance.getEffect(), newDurationTicks, instance.getAmplifier(), instance.isAmbient(),
+                            instance.isVisible(), instance.showIcon()
+                        ));
+                }
+                if (!effectTypesToClear.contains(instance.getEffect())) {
+                    effectTypesToClear.add(instance.getEffect());
+                }
+            }
+        }
+    }
 }
