@@ -1,15 +1,14 @@
 package earth.terrarium.pastel.items.armor;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.TickingEquipmentItem;
 import earth.terrarium.pastel.api.item.UnequipAwareItem;
 import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +16,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import org.jetbrains.annotations.NotNull;
@@ -113,10 +111,6 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     }
 
     public void onUnequip(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
-        if (stack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)) {
-            CrystalArmorItem.removeEmpowered(stack);
-        }
-
         if (type == Type.HELMET) {
             for (var equippedStack : entity.getAllSlots()) {
                 if (equippedStack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED))
@@ -149,11 +143,11 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
             case HELMET -> tooltip.add(Component.translatable("item.pastel.onyx_helmet.tooltip")
                                                 .withStyle(ChatFormatting.DARK_BLUE));
             case CHESTPLATE -> tooltip.add(Component.translatable("item.pastel.amethyst_chestplate.tooltip")
-                                                    .withStyle(ChatFormatting.LIGHT_PURPLE));
+                                                    .withColor(InkColors.MAGENTA.getTextColorInt()));
             case LEGGINGS -> tooltip.add(Component.translatable("item.pastel.topaz_leggings.tooltip")
-                                                  .withStyle(ChatFormatting.AQUA));
+                                                  .withColor(InkColors.CYAN.getTextColorInt()));
             case BOOTS -> tooltip.add(Component.translatable("item.pastel.citrine_boots.tooltip")
-                                               .withStyle(ChatFormatting.YELLOW));
+                                               .withColor(InkColors.YELLOW.getTextColorInt()));
         }
     }
 
@@ -167,7 +161,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         }
     }
 
-    public static void removeEmpowered(ItemStack stack) {
+    public static ItemStack removeEmpowered(ItemStack stack) {
         var enchantments = stack.get(EnchantmentHelper.getComponentType(stack));
         if (enchantments != null && !enchantments.isEmpty()) {
             var newEnchants = new ItemEnchantments.Mutable(enchantments);
@@ -181,6 +175,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
             EnchantmentHelper.setEnchantments(stack, newEnchants.toImmutable());
         }
         stack.remove(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED);
+        return stack;
     }
 
 }

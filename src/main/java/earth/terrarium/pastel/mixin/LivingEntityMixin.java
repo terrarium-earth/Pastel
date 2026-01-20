@@ -392,6 +392,6 @@ public abstract class LivingEntityMixin {
                             target = "net/minecraft/world/entity/LivingEntity.onGround()Z",
                             ordinal = 0))
     private boolean doubleJump(LivingEntity instance){
-        return CrystalArmorItem.actuallyDoubleJump(instance,instance.onGround());
+        return true; // todo
     }
 }

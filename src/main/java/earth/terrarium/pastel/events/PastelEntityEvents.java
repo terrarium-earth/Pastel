@@ -20,7 +20,6 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
@@ -43,6 +42,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
@@ -67,15 +67,25 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::disarming);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenItemPickup);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenEntityAdded);
+        NeoForge.EVENT_BUS.addListener(PastelEntityEvents::itemTossHandler);
+    }
+
+    private static void itemTossHandler(ItemTossEvent event) {
+        var stack = event.getEntity()
+                         .getItem();
+        if (stack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)) {
+            event.getEntity()
+                 .setItem(CrystalArmorItem.removeEmpowered(stack));
+        }
     }
 
     private static void listenItemPickup(ItemEntityPickupEvent.Pre event) {
         var entity = event.getPlayer();
         var item = event.getItemEntity();
-        var original = item.getItem().copy();
+        var original = item.getItem()
+                           .copy();
 
-        if (item.hasPickUpDelay())
-            return;
+        if (item.hasPickUpDelay()) return;
 
         var eListener = entity.getCapability(PastelCapabilities.Pickup.ENTITY);
         ItemStack remainder = null;
@@ -86,12 +96,10 @@ public class PastelEntityEvents {
 
         var inv = entity.getCapability(Capabilities.ItemHandler.ENTITY);
         if (remainder == null && inv != null) {
-            remainder = ItemPickupListener.receiveRecursive(inv, 2, 0,
-                    item.getItem(), Optional.of(entity));
+            remainder = ItemPickupListener.receiveRecursive(inv, 2, 0, item.getItem(), Optional.of(entity));
         }
 
-        if (remainder == null || ItemStack.isSameItemSameComponents(remainder, original))
-            return;
+        if (remainder == null || ItemStack.isSameItemSameComponents(remainder, original)) return;
 
 
         item.setItem(remainder);
@@ -101,8 +109,7 @@ public class PastelEntityEvents {
     }
 
     private static void listenEntityAdded(EntityJoinLevelEvent event) {
-        if (event.loadedFromDisk())
-            return;
+        if (event.loadedFromDisk()) return;
 
         var entity = event.getEntity();
         entity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
@@ -114,8 +121,7 @@ public class PastelEntityEvents {
         var entity = source.getEntity();
 
         if (!(entity instanceof LivingEntity attacker) || event.getNewDamage() <= Mth.EPSILON || source.is(
-            DamageTypes.THORNS))
-            return;
+            DamageTypes.THORNS)) return;
 
         var disarming = Ench.getLevel(
             attacker.registryAccess(), PastelEnchantments.DISARMING, attacker.getMainHandItem());
@@ -131,8 +137,7 @@ public class PastelEntityEvents {
         var shielder = event.getEntity();
         var weapon = shielder.getUseItem();
 
-        if (!(weapon.getItem() instanceof ParryingSwordItem parryingSword))
-            return;
+        if (!(weapon.getItem() instanceof ParryingSwordItem parryingSword)) return;
 
         if (event.getDamageSource()
                  .is(PastelDamageTypeTags.BYPASSES_PARRYING)) {
@@ -152,18 +157,16 @@ public class PastelEntityEvents {
             var misc = MiscPlayerData.get(player);
             misc.setParryTicks(15);
 
-            if (perfect)
-                misc.markForPerfectCounter();
+            if (perfect) misc.markForPerfectCounter();
         }
 
         if (parryingSword.canDeflect(event.getDamageSource(), perfect)) {
             var mult = parryingSword.getBlockingMultiplier(event.getDamageSource(), weapon, shielder, useTime);
-            if (mult > 0)
-                shielder.level()
-                        .broadcastEntityEvent(
-                            shielder,
-                            (byte) 29
-                        ); // without this, the shielding sound does not play on non-perfect parries
+            if (mult > 0) shielder.level()
+                                  .broadcastEntityEvent(
+                                      shielder,
+                                      (byte) 29
+                                  ); // without this, the shielding sound does not play on non-perfect parries
 
             event.setBlocked(true);
             event.setBlockedDamage(damage - damage * mult);
@@ -175,8 +178,7 @@ public class PastelEntityEvents {
 
         if (entity instanceof LivingEntity living) {
             if (living.level()
-                      .isClientSide())
-                return;
+                      .isClientSide()) return;
 
             var additions = PastelEffectEvents.QUEUED_ADDITIONS.get(entity.getUUID());
 
@@ -185,9 +187,23 @@ public class PastelEntityEvents {
                 additions.clear();
             }
 
-            for(var slot : List.of(EquipmentSlot.HEAD,EquipmentSlot.CHEST,EquipmentSlot.LEGS,EquipmentSlot.FEET)){
-                if(entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(slot).getItem() instanceof TickingEquipmentItem item){
-                    item.tick(livingEntity,livingEntity.getItemBySlot(slot));
+            if (entity instanceof LivingEntity livingEntity) {
+                for (var slot : List.of(
+                    EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)) {
+                    if (livingEntity.getItemBySlot(slot)
+                                    .getItem() instanceof TickingEquipmentItem item) {
+                        item.tick(livingEntity, livingEntity.getItemBySlot(slot));
+                    }
+                }
+            }
+
+            // this is kind of awful but we have to do it because neoforge
+            if (entity instanceof ServerPlayer serverPlayer) {
+                for (ItemStack i : serverPlayer.getInventory().items) {
+                    if (!i.equals(serverPlayer.getMainHandItem()) && i.has(
+                        PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)) {
+                        CrystalArmorItem.removeEmpowered(i);
+                    }
                 }
             }
 
@@ -217,9 +233,11 @@ public class PastelEntityEvents {
             event.setCanceled(true);
         }
 
-        if(source.is(DamageTypes.FALL) && entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof CrystalArmorItem leggings){
-            leggings.onFall(entity.getItemBySlot(EquipmentSlot.LEGS),entity,event.getAmount());
-            entity.level().playSound(null, entity.blockPosition(), PastelSounds.SHATTER_LIGHT, SoundSource.PLAYERS, 2f, 1f);
+        if (source.is(DamageTypes.FALL) && entity.getItemBySlot(EquipmentSlot.LEGS)
+                                                 .getItem() instanceof CrystalArmorItem leggings) {
+            leggings.onFall(entity.getItemBySlot(EquipmentSlot.LEGS), entity, event.getAmount());
+            entity.level()
+                  .playSound(null, entity.blockPosition(), PastelSounds.SHATTER_LIGHT, SoundSource.PLAYERS, 2f, 1f);
             event.setCanceled(true);
         }
     }
@@ -230,13 +248,8 @@ public class PastelEntityEvents {
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
 
-        if(oldEquipment.getItem() instanceof UnequipAwareItem item){
-            item.onUnequip(livingEntity, oldEquipment, equipmentSlot, newEquipment);
-        }
-
-        if(equipmentSlot.getType() == EquipmentSlot.Type.HAND && oldEquipment.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)){
-            CrystalArmorItem.removeEmpowered(oldEquipment);
-            event.getEntity().onEquipItem(equipmentSlot,oldEquipment,newEquipment);
+        if(oldEquipment.getItem() instanceof UnequipAwareItem unequipAwareItem){
+            unequipAwareItem.onUnequip(livingEntity,oldEquipment,equipmentSlot);
         }
 
         var oldInexorable = Ench.getLevel(
@@ -262,8 +275,7 @@ public class PastelEntityEvents {
                                     .value()
                                     .createModifiers(
                                         instance.getAmplifier(), (attribute, modifier) -> {
-                                            if (attribute.is(effectType))
-                                                result.set(true);
+                                            if (attribute.is(effectType)) result.set(true);
                                         }
                                     );
                             return result.get();
@@ -330,8 +342,7 @@ public class PastelEntityEvents {
             if (!shouldDropHead && source.getEntity() instanceof LivingEntity livingAttacker) {
                 int damageSourceTreasureHunt = Ench.getEquipmentLevel(
                     serverWorld.registryAccess(),
-                    PastelEnchantments.TREASURE_HUNTER,
-                    livingAttacker
+                    PastelEnchantments.TREASURE_HUNTER, livingAttacker
                 );
 
                 shouldDropHead = damageSourceTreasureHunt > 0 && serverWorld.getRandom()
