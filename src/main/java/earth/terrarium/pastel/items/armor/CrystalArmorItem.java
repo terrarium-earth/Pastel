@@ -6,6 +6,7 @@ import earth.terrarium.pastel.api.item.TickingEquipmentItem;
 import earth.terrarium.pastel.api.item.UnequipAwareItem;
 import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
+import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -102,6 +103,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
                                                                                  bearer.level()
                                                                                        .getGameTime() % 50 == 0))) {
             bearer.heal(1.0f);
+            WhispyCircletItem.shortenNegativeStatusEffects(bearer,25);
         }
         if (type.equals(Type.LEGGINGS)) {
             var kb_resist = bearer.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
