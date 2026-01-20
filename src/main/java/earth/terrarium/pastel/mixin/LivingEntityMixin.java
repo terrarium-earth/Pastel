@@ -19,6 +19,7 @@ import earth.terrarium.pastel.components.PairedFoodComponent;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import earth.terrarium.pastel.items.tools.ParryingSwordItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.items.trinkets.RingOfAerialGraceItem;
@@ -386,16 +387,11 @@ public abstract class LivingEntityMixin {
         instance.actuallyHurt(source, passedDamage);
     }
 
-//    @WrapOperation(method="aiStep",
-//                   at = @At(value = "INVOKE",
-//                            target = "Lnet/minecraft/world/entity/Entity;onGround()Z",
-//                            ordinal = 0))
-//    private boolean doubleJump(Entity instance, Operation<Boolean> original){
-//        var actuallyOnGround = original.call(instance);
-//        if(!actuallyOnGround && instance.getData(CitrineJumpsAttachment.ATTACHMENT)>0){
-//            instance.setData(CitrineJumpsAttachment.ATTACHMENT,instance.getData(CitrineJumpsAttachment.ATTACHMENT)-1);
-//            return true;
-//        }
-//        return actuallyOnGround;
-//    }
+    @Redirect(method="aiStep",
+                   at = @At(value = "INVOKE",
+                            target = "net/minecraft/world/entity/LivingEntity.onGround()Z",
+                            ordinal = 0))
+    private boolean doubleJump(LivingEntity instance){
+        return CrystalArmorItem.actuallyDoubleJump(instance,instance.onGround());
+    }
 }
