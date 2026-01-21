@@ -191,18 +191,6 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
 
     private static void calculateCurrentRecipe(
         @NotNull Level world, @NotNull SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
-        // test the cached recipe => faster
-        if (spiritInstillerBlockEntity.currentRecipe != null && !spiritInstillerBlockEntity.isEmpty()) {
-            if (spiritInstillerBlockEntity.currentRecipe.value()
-                                                        .matches(spiritInstillerBlockEntity.getRecipeInput(), world)) {
-                return;
-            }
-        }
-
-        // cached recipe did not match => calculate new
-        spiritInstillerBlockEntity.craftingTime = 0;
-        spiritInstillerBlockEntity.currentRecipe = null;
-
         ItemStack instillerStack = spiritInstillerBlockEntity.getItem(SpiritInstillerRecipe.CENTER);
         if (!instillerStack.isEmpty()) {
             spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.CENTER, instillerStack);
@@ -221,6 +209,18 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
             } else {
                 spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.SECOND, ItemStack.EMPTY);
             }
+
+            // test the cached recipe => faster
+            if (spiritInstillerBlockEntity.currentRecipe != null && !spiritInstillerBlockEntity.isEmpty()) {
+                if (spiritInstillerBlockEntity.currentRecipe.value()
+                                                            .matches(spiritInstillerBlockEntity.getRecipeInput(), world)) {
+                    return;
+                }
+            }
+
+            // cached recipe did not match => calculate new
+            spiritInstillerBlockEntity.craftingTime = 0;
+            spiritInstillerBlockEntity.currentRecipe = null;
 
             RecipeHolder<SpiritInstillerRecipe> spiritInstillerRecipe = world.getRecipeManager()
                                                                              .getRecipeFor(

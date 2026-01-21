@@ -39,6 +39,14 @@ public class FriendlyStackHandler extends ItemStackHandler {
         return removed;
     }
 
+    public ItemStack removeStackInSlotNoUpdate(int slot) {
+        ItemStack removed;
+
+        this.validateSlotIndex(slot);
+        removed = this.stacks.set(slot, ItemStack.EMPTY);
+        return removed;
+    }
+
     public NonNullList<ItemStack> getInternalList() {
         return stacks;
     }

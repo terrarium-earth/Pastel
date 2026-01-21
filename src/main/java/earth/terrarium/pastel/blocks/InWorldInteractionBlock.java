@@ -2,6 +2,7 @@ package earth.terrarium.pastel.blocks;
 
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
@@ -55,6 +56,9 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
                 itemEntity.remove(Entity.RemovalReason.DISCARDED);
             } else {
                 itemEntity.setItem(remainingStack);
+            }
+            if(world.getBlockEntity(pos) instanceof InWorldInteractionBlockEntity blockEntity){
+                blockEntity.updateInClientWorld();
             }
         } else {
             super.fallOn(world, state, pos, entity, fallDistance);

@@ -157,7 +157,7 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
 
     @Override
     public ItemStack removeItemNoUpdate(int slot) {
-        return inventory.removeStackInSlot(slot);
+        return inventory.removeStackInSlotNoUpdate(slot);
     }
 
     @Override
