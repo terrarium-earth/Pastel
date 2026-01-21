@@ -2,6 +2,7 @@ package earth.terrarium.pastel.mixin.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.ClientLanguage;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -25,8 +26,8 @@ public class ClientLanguageMixin {
     @Final
     private Map<String, String> storage;
 
-    @Inject(method = "<init>", at = @At("TAIL"))
-    private void addTranslations(Map<String, String> translations, boolean rightToLeft, CallbackInfo ci) {
+    @Inject(method = "Lnet/minecraft/client/resources/language/ClientLanguage;<init>(Ljava/util/Map;ZLjava/util/Map;)V", at = @At("TAIL"))
+    private void addTranslations(Map<String,String> translations, boolean rightToLeft, Map<String, Component> componentStorage, CallbackInfo ci) {
         Calendar calendar = Calendar.getInstance();
 //        if (calendar.get(Calendar.MONTH) != Calendar.APRIL || calendar.get(Calendar.DAY_OF_MONTH) != 1) return;
 
