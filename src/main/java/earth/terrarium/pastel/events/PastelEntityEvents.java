@@ -4,6 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.api.item.TickingEquipmentItem;
 import earth.terrarium.pastel.api.item.UnequipAwareItem;
+import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
@@ -177,6 +178,20 @@ public class PastelEntityEvents {
         var entity = event.getEntity();
 
         if (entity instanceof LivingEntity living) {
+            if (living.hasData(JumpCooldownAttachment.ATTACHMENT)) {
+                int jumpCooldown = living.getData(JumpCooldownAttachment.ATTACHMENT);
+                if (jumpCooldown > 0) {
+                    living.setData(JumpCooldownAttachment.ATTACHMENT, jumpCooldown - 1);
+                }
+            }
+            // some tick effects are on the client, so we do this before the clientside check
+            for (var slot : List.of(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)) {
+                if (living.getItemBySlot(slot)
+                          .getItem() instanceof TickingEquipmentItem item) {
+                    item.tick(living, living.getItemBySlot(slot));
+                }
+            }
+
             if (living.level()
                       .isClientSide()) return;
 
@@ -185,16 +200,6 @@ public class PastelEntityEvents {
             if (additions != null) {
                 additions.forEach(living::addEffect);
                 additions.clear();
-            }
-
-            if (entity instanceof LivingEntity livingEntity) {
-                for (var slot : List.of(
-                    EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)) {
-                    if (livingEntity.getItemBySlot(slot)
-                                    .getItem() instanceof TickingEquipmentItem item) {
-                        item.tick(livingEntity, livingEntity.getItemBySlot(slot));
-                    }
-                }
             }
 
             // this is kind of awful but we have to do it because neoforge
@@ -248,8 +253,8 @@ public class PastelEntityEvents {
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
 
-        if(oldEquipment.getItem() instanceof UnequipAwareItem unequipAwareItem){
-            unequipAwareItem.onUnequip(livingEntity,oldEquipment,equipmentSlot);
+        if (oldEquipment.getItem() instanceof UnequipAwareItem unequipAwareItem) {
+            unequipAwareItem.onUnequip(livingEntity, oldEquipment, equipmentSlot);
         }
 
         var oldInexorable = Ench.getLevel(

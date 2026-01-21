@@ -386,12 +386,4 @@ public abstract class LivingEntityMixin {
         container.setNewDamage(passedDamage);
         instance.actuallyHurt(source, passedDamage);
     }
-
-    @Redirect(method="aiStep",
-                   at = @At(value = "INVOKE",
-                            target = "net/minecraft/world/entity/LivingEntity.onGround()Z",
-                            ordinal = 0))
-    private boolean doubleJump(LivingEntity instance){
-        return true; // todo
-    }
 }

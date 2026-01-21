@@ -5,9 +5,13 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.TickingEquipmentItem;
 import earth.terrarium.pastel.api.item.UnequipAwareItem;
 import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
+import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
+import earth.terrarium.pastel.mixin.client.LocalPlayerMixin;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -39,7 +43,8 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         PastelCommon.locate("gem_armor_setbonus_kb_immunity"), 0.5f, AttributeModifier.Operation.ADD_VALUE);
     public static final AttributeModifier GEM_SET_SPEED = new AttributeModifier(
         PastelCommon.locate("gem_armor_setbonus_speed"), 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-    public static int ENCHANTMENT_BONUS = 1;
+    public static final int ENCHANTMENT_BONUS = 1;
+    public static final int JUMP_COOLDOWN = 7;
 
     public CrystalArmorItem(Holder<ArmorMaterial> material, ArmorItem.Type type, Properties settings) {
         super(material, type, settings);
@@ -55,18 +60,24 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
 
     public void tick(LivingEntity bearer, ItemStack stack) {
         // this needs to happen on the client as well apparently
-        if (type.equals(Type.BOOTS) && bearer instanceof Player player) {
-            if (player.onGround()) {
-                var jumps = player.getData(CitrineJumpsAttachment.ATTACHMENT);
-                int maxJumps = isWearingFullSet(player) ? 2 : 1;
-                if (jumps < maxJumps) {
-                    player.setData(CitrineJumpsAttachment.ATTACHMENT, maxJumps);
-                }
-            }
-        }
 
         if (bearer.level()
-                  .isClientSide()) return;
+                  .isClientSide()) {
+            if (type.equals(Type.BOOTS) && bearer instanceof Player player) {
+                if (player.onGround()) {
+                    var jumps = player.getData(CitrineJumpsAttachment.ATTACHMENT);
+                    int maxJumps = isWearingFullSet(player) ? 2 : 1;
+                    if (jumps != maxJumps) { // it can be greater if you take off an onyx helmet
+                        player.setData(CitrineJumpsAttachment.ATTACHMENT, maxJumps);
+                    }
+                }
+            }
+            return;
+        }
+
+        // why are you like this
+        if(!bearer.getItemBySlot(EquipmentSlot.HEAD).is(PastelItems.ONYX_HELMET) && stack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED))
+            removeEmpowered(stack);
 
         if (type.equals(Type.HELMET)) {
             for (EquipmentSlot slot : List.of(
@@ -107,7 +118,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
                                                                                  bearer.level()
                                                                                        .getGameTime() % 50 == 0))) {
             bearer.heal(1.0f);
-            shortenNegativeStatusEffects(bearer,25);
+            shortenNegativeStatusEffects(bearer, 25);
         }
         if (type.equals(Type.LEGGINGS)) {
             var kb_resist = bearer.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
@@ -172,7 +183,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         if (enchantments == null || enchantments.isEmpty()) return;
         for (var enchantment : enchantments.keySet()) {
             if (enchantments.getLevel(enchantment) > 0 && enchantment.value()
-                                                                     .getMaxLevel() >1) Ench.addOrUpgradeEnchantment(
+                                                                     .getMaxLevel() > 1) Ench.addOrUpgradeEnchantment(
                 stack, enchantment, enchantments.getLevel(enchantment) + ENCHANTMENT_BONUS, true, true);
         }
     }
@@ -184,8 +195,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
             var newEnchants = new ItemEnchantments.Mutable(enchantments);
             for (var enchantment : enchantments.keySet()) {
                 if (enchantment.value()
-                               .getMaxLevel()==1)
-                    continue;
+                               .getMaxLevel() == 1) continue;
                 int level = enchantments.getLevel(enchantment);
                 if (level < stack.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0)) newEnchants.set(
                     enchantment, 0);
@@ -220,5 +230,15 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
                 }
             }
         }
+    }
+
+    public static boolean doubleJump(LocalPlayer instance, boolean actuallyOnGround) {
+        int jumps = instance.getData(CitrineJumpsAttachment.ATTACHMENT);
+        var cooldown = instance.getData(JumpCooldownAttachment.ATTACHMENT);
+        if (jumps <= 0 || actuallyOnGround || cooldown != 0 || !instance.input.jumping) return actuallyOnGround;
+        instance.setData(CitrineJumpsAttachment.ATTACHMENT, jumps - 1);
+        instance.setData(JumpCooldownAttachment.ATTACHMENT,JUMP_COOLDOWN);
+        instance.jumpFromGround();
+        return false;
     }
 }

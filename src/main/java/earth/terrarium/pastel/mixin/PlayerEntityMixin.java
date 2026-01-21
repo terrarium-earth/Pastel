@@ -3,9 +3,11 @@ package earth.terrarium.pastel.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
+import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import earth.terrarium.pastel.items.tools.LightGreatswordItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.progression.PastelCriteria;
@@ -173,4 +175,5 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         }
         original.call(instance, entityPose);
     }
+
 }

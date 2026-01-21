@@ -25,6 +25,7 @@ public class PastelDataAttachments {
         REGISTER.register("spectacle", () -> SpectacleData.ATTACHMENT);
         REGISTER.register("hookshot", () -> HookshotData.ATTACHMENT);
         REGISTER.register("citrine_jumps",()->CitrineJumpsAttachment.ATTACHMENT);
+        REGISTER.register("jump_cooldown",()->JumpCooldownAttachment.ATTACHMENT);
         REGISTER.register(bus);
     }
 
