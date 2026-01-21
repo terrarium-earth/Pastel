@@ -28,7 +28,7 @@
     "PotionItemClientMixin",
     "SleepingChatScreenMixin",
     "SoundSystemMixin",
-    "TranslationStorageMixin",
+    "ClientLanguageMixin",
     "TranslucentBlockMixin",
     "accessors.ParticleManagerAccessor",
     "accessors.RenderLayerAccessor",
