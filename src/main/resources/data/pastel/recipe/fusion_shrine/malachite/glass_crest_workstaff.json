@@ -14,24 +14,8 @@
       "count": 8
     },
     {
-      "item": "minecraft:enchanted_book",
-      "predicates": {
-        "minecraft:stored_enchantments": [
-          {
-            "enchantments": "pastel:resonance",
-            "levels": {
-              "min": 1
-            }
-          }
-        ]
-      },
-      "preview_components": {
-        "minecraft:stored_enchantments": {
-          "levels": {
-            "pastel:resonance": 1
-          }
-        }
-      }
+      "item": "pastel:resonance_shard",
+      "count": 4
     },
     {
       "item": "pastel:white_pigment",

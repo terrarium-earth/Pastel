@@ -9,7 +9,7 @@
     "unlocked_resonance_crafting": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:unlocks/enchantments/resonance_crafting"
+        "advancement": "pastel:lategame/craft_resonant_tool"
       }
     }
   }
