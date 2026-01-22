@@ -8,6 +8,7 @@ import earth.terrarium.pastel.api.block.RedstonePoweredBlock;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalStartCraftingParticlePayload;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;
@@ -103,8 +104,11 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 		if (level.isClientSide) {
 			return ItemInteractionResult.SUCCESS;
 		} else {
-			level.getBlockEntity(pos, PastelBlockEntities.PEDESTAL.get())
-					.ifPresent(p -> p.giveStoredXp(player));
+            var pedestal = level.getBlockEntity(pos,PastelBlockEntities.PEDESTAL.get());
+            if(pedestal.isPresent()){
+                pedestal.get().updateTier(player);
+                pedestal.get().giveStoredXp(player);
+            }
 			this.openScreen(level, pos, player);
 			return ItemInteractionResult.CONSUME;
 		}
