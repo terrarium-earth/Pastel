@@ -176,6 +176,16 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 				triggerUnenchantedWorkstaffAdvancement(serverPlayerEntity);
 			}
 		} else {
+            // since we've already checked that the enchant to be removed *isn't* zero, this means you:
+            // - disenchanted a workstaff
+            // - enchanted it again with something other than fortune
+            // - tried to switch to fortune while fortuneLevel was set to 0
+            // congrats? anyway have your fortune back
+            if (level == 0) {
+                stack.update(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT, comp ->
+                    new WorkstaffComponent(comp.canTill(), comp.canShoot(), 4));
+                level = 1;
+            }
 			var addResult = Ench.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, DatabankUtils.hasAdvancement(player, PastelAdvancements.Milestones.UNLOCK_CONFLICTED_ENCHANTING_WITH_ENCHANTER));
 			if (addResult.getA()) {
 				stack.set(DataComponents.ENCHANTMENTS, addResult.getB().getEnchantments());
