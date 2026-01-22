@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.attachments.data.JeopardantBonusData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -42,10 +43,17 @@ public class AttackRingItem extends PastelTrinketItem {
     }
 
     @Override
+    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+        super.onEquip(slotContext, prevStack, stack);
+        slotContext.entity().setData(JeopardantBonusData.ATTACHMENT,true);
+    }
+
+    @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         super.onUnequip(slotContext, newStack, stack);
         LivingEntity entity = slotContext.entity();
 
+        entity.setData(JeopardantBonusData.ATTACHMENT,false);
         if (entity.getAttributes()
                   .hasModifier(Attributes.ATTACK_DAMAGE, AttackRingItem.ATTACK_RING_DAMAGE_ID)) {
             Multimap<Holder<Attribute>, AttributeModifier> map = Multimaps.newMultimap(
