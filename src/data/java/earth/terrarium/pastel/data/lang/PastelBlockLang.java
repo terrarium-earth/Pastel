@@ -79,6 +79,7 @@ public class PastelBlockLang {
         provider.add(PastelBlocks.UPGRADE_YIELD2.get(), "Production Surge T2");
 
         // Tooltips and such
+        provider.add("block.pastel.amphora", "Amphora");
         provider.add("block.pastel.fusion_shrine", "Fusion Shrine");
         provider.add("block.pastel.longing_chimera.tooltip", "Unknown Author - The Longing");
         provider.add("block.pastel.manxi.nope", "Powerful magic repels you");
