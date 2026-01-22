@@ -184,7 +184,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
             if (level == 0) {
                 stack.update(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT, comp ->
                     new WorkstaffComponent(comp.canTill(), comp.canShoot(), 4));
-                level = 1;
+                level = 4;
             }
 			var addResult = Ench.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, DatabankUtils.hasAdvancement(player, PastelAdvancements.Milestones.UNLOCK_CONFLICTED_ENCHANTING_WITH_ENCHANTER));
 			if (addResult.getA()) {
