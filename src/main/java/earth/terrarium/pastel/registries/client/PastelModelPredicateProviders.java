@@ -221,7 +221,7 @@ public class PastelModelPredicateProviders {
         ItemProperties.register(
             item, ResourceLocation.parse("phase"), (stack, world, entity, i) -> {
                 Entity holder = entity != null ? entity : stack.getEntityRepresentation();
-                if (entity == null) {
+                if (holder == null) {
                     return 0.0F;
                 } else {
                     if (world == null && holder.level() instanceof ClientLevel clientWorld) {
