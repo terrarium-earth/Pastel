@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-19T01:23:01.735470269	Model Definitions
+// 1.21.1	2026-01-21T22:25:55.734996851	Model Definitions
 16b08361bc65a3c74e8df5774303ab1909bbffbb assets/minecraft/models/item/air.json
 2e209fa76a738ef1d22af6817df1419142cc743a assets/pastel/blockstates/abyssal_vines.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_head.json
@@ -3055,7 +3055,6 @@ e141619c1852a0ceb7b8ef98b15ef03ccd16973a assets/pastel/models/item/axolotl_idol.
 6f0f5351969810337ed047c4f8afaa844ed71c1a assets/pastel/models/item/azuresque_dike_core.json
 e1b6cb08cb8500b7a435802694a543bc32241ab5 assets/pastel/models/item/azurite_block.json
 4a685b7ff9885dc3d712beea170379ed338cab9e assets/pastel/models/item/azurite_cluster.json
-29829b1543aabffb7359c2f23d88d71095435f95 assets/pastel/models/item/azurite_glass_ampoule.json
 d06ecf52fb4d434c42c26b0dffed142279dda14b assets/pastel/models/item/azurite_ore.json
 f8068049987d2e6e989e2cf25badc88ef84fac80 assets/pastel/models/item/bag_of_holding.json
 5a1d47dcc2dbbbde307f4ef1970ca5d503dbe6df assets/pastel/models/item/bagnun.json
@@ -3164,7 +3163,6 @@ dbdf7dd9e065ebbf2c1bd099506f8291c514d29d assets/pastel/models/item/blood_orchid_
 84c3d7f5f6c22a31eb8a69a4852524418f12647d assets/pastel/models/item/bloodboil_syrup.json
 60b2ed69602c39592769cd5b145d10ce4faec5ba assets/pastel/models/item/bloodstone_block.json
 68bb2dccdbfd6a9f3a6ee1f8ae4856f8752498ab assets/pastel/models/item/bloodstone_cluster.json
-683e019bd23717084b20875c677d67f7eae798a3 assets/pastel/models/item/bloodstone_glass_ampoule.json
 8b27d0fe3671447b545883f8feb43f6000a8a2db assets/pastel/models/item/blue_block.json
 e5935614411db41c216ab2c0eac5b2cd7103969e assets/pastel/models/item/blue_button.json
 7576dd7b82bfa5cff4554a1245a6b67c522b92b9 assets/pastel/models/item/blue_chiseled_preservation_stone.json
@@ -3725,7 +3723,6 @@ d619593b86573ba6a4216db7b36e679bf481504e assets/pastel/models/item/magenta_wood.
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/magma_cube_head.json
 ddf037a8fe8418cf43877035c7cff5e1a38e8cf1 assets/pastel/models/item/malachite_block.json
 ed75ff7f028eda1eddb47edb6dc9b1b82adc8ac6 assets/pastel/models/item/malachite_cluster.json
-53b372ff2306cf0469c8d75c91300af1db59e0c4 assets/pastel/models/item/malachite_glass_ampoule.json
 548c4346542db08cad99688f33a9f5a4710df752 assets/pastel/models/item/malachite_glass_arrow.json
 490b2e0664ec18eebdc020b0ae601967d40d0322 assets/pastel/models/item/malachite_ore.json
 68c8cf5e2e0a5c18404d519da7063fef8f9620f8 assets/pastel/models/item/meatloaf.json
