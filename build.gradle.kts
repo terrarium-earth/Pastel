@@ -110,7 +110,7 @@ cloche {
     singleTarget {
         @Suppress("UnstableApiUsage")
         neoforge {
-            loaderVersion = "21.1.172"
+            loaderVersion = "21.1.218"
 
             datagenDirectory = file("src/main/generated")
 
