@@ -59,9 +59,6 @@ public class PastelEnchantments {
     // Increase luck when fishing
     public static final ResourceKey<Enchantment> SERENDIPITY_REEL = of("serendipity_reel");
 
-    // Increases projectile speed => increased damage + range
-    public static final ResourceKey<Enchantment> SNIPING = of("sniping");
-
     // ItemStacks with this enchantment are not destroyed by cactus, fire, lava, ...
     public static final ResourceKey<Enchantment> STEADFAST = of("steadfast");
 

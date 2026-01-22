@@ -92,10 +92,6 @@ public class EnchantmentRegistry {
             List.of(EquipmentSlotGroup.MAINHAND)
         );
         registerEnchantment(
-            bootstrap, PastelEnchantments.SNIPING, 1, 2, 20, 50, 8,
-            List.of(EquipmentSlotGroup.MAINHAND), true
-        );
-        registerEnchantment(
             bootstrap, PastelEnchantments.STEADFAST, 10, 1, 30, 60, 1,
             List.of(EquipmentSlotGroup.MAINHAND), ItemTags.DURABILITY_ENCHANTABLE
         );

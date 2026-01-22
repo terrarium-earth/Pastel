@@ -45,8 +45,6 @@ public class PastelEnchantmentLang {
         );
         provider.add("enchantment.pastel.serendipity_reel", "Serendipity Reel");
         provider.add("enchantment.pastel.serendipity_reel.desc", "Chance to reel in double loot");
-        provider.add("enchantment.pastel.sniping", "Sniping");
-        provider.add("enchantment.pastel.sniping.desc", "Increased projectile speed");
         provider.add("enchantment.pastel.steadfast", "Steadfast");
         provider.add(
             "enchantment.pastel.steadfast.desc",

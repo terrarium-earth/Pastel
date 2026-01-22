@@ -373,7 +373,6 @@ public class PastelAdvancements {
                 "unlocks/enchantments/voiding_usage");
             public static final ResourceLocation INVENTORY_INSERTION = PastelCommon.locate(
                 "unlocks/enchantments/inventory_insertion");
-            public static final ResourceLocation SNIPING = PastelCommon.locate("unlocks/enchantments/sniping");
             public static final ResourceLocation VANILLA_PROTECTION = PastelCommon.locate(
                 "unlocks/enchantments/vanilla_protection");
             public static final ResourceLocation BIG_CATCH = PastelCommon.locate("unlocks/enchantments/big_catch");

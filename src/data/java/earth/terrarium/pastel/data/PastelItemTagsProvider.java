@@ -71,8 +71,6 @@ public class PastelItemTagsProvider extends ItemTagsProvider {
                                                      .add(PastelItems.ENDER_CANVAS.getKey())
                                                      .add(PastelItems.EXCHANGING_STAFF.getKey());
         tag(PastelItemTags.EnchantableWith.SERENDIPITY_REEL).addTag(ItemTags.FISHING_ENCHANTABLE);
-        tag(PastelItemTags.EnchantableWith.SNIPING).addTag(ItemTags.CROSSBOW_ENCHANTABLE)
-                                                   .add(PastelItems.GLEAMING_PIN.getKey());
         tag(PastelItemTags.EnchantableWith.STEADFAST).addTag(ItemTags.DURABILITY_ENCHANTABLE)
                                                      .addTag(ItemTags.MINING_ENCHANTABLE)
                                                      .addTag(ItemTags.VANISHING_ENCHANTABLE)

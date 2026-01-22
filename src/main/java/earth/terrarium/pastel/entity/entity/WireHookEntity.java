@@ -119,8 +119,8 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
     }
 
     private int getMaxRange() {
-        var sniping = hookshotLevel(PastelEnchantments.SNIPING);
-        return PastelCommon.CONFIG.WireHookRange * (sniping + 1);
+        var piercing = hookshotLevel(Enchantments.PIERCING);
+        return PastelCommon.CONFIG.WireHookRange * (piercing + 1);
     }
 
     public int hookshotLevel(ResourceKey<Enchantment> ench) {

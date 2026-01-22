@@ -34,7 +34,6 @@ public class PastelEnchantmentTags {
         public static final TagKey<Enchantment> PEST_CONTROL = getExclusiveSetTag(PastelEnchantments.PEST_CONTROL);
         public static final TagKey<Enchantment> RAZING = getExclusiveSetTag(PastelEnchantments.RAZING);
         public static final TagKey<Enchantment> RESONANCE = getExclusiveSetTag(PastelEnchantments.RESONANCE);
-        public static final TagKey<Enchantment> SNIPING = getExclusiveSetTag(PastelEnchantments.SNIPING);
         public static final TagKey<Enchantment> TIGHT_GRIP = getExclusiveSetTag(PastelEnchantments.TIGHT_GRIP);
         public static final TagKey<Enchantment> TREASURE_HUNTER = getExclusiveSetTag(PastelEnchantments.TREASURE_HUNTER);
     }

@@ -273,7 +273,7 @@ public class TeaTable extends Block implements EntityBlock {
         PastelAdvancements.Unlocks.Enchantments.VANILLA_SWIFT_SNEAK,
         PastelAdvancements.Unlocks.Enchantments.VANILLA_WATER, PastelAdvancements.Unlocks.Enchantments.VANILLA_TRIDENT,
         PastelAdvancements.Unlocks.Enchantments.VANILLA_QUITOXIC,
-        PastelAdvancements.Unlocks.Enchantments.INVENTORY_INSERTION, PastelAdvancements.Unlocks.Enchantments.SNIPING,
+        PastelAdvancements.Unlocks.Enchantments.INVENTORY_INSERTION,
         PastelAdvancements.Unlocks.Enchantments.BIG_CATCH, PastelAdvancements.Unlocks.Enchantments.FIRST_STRIKE,
         PastelAdvancements.Unlocks.Enchantments.EXUBERANCE, PastelAdvancements.Unlocks.Enchantments.VOIDING_CRAFTING,
         PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, PastelAdvancements.Unlocks.Weather.THUNDER,

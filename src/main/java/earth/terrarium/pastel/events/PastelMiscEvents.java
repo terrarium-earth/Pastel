@@ -92,12 +92,6 @@ public class PastelMiscEvents {
         ItemStack crossbow = shooter.getItemInHand(shooter.getUsedItemHand());
         Level level = shooter.level();
 
-        int snipingLevel = Ench.getLevel(level.registryAccess(), PastelEnchantments.SNIPING, crossbow);
-        if (snipingLevel > 0) {
-            projectile.setDeltaMovement(projectile.getDeltaMovement()
-                                                  .scale(1.25F * snipingLevel)); // TODO: is this a sensible value?
-        }
-
         if (crossbow.getItem() != PastelItems.GLASS_CREST_CROSSBOW.get() || !GlassCrestCrossbowItem.isOvercharged(
             crossbow)) {
             return;

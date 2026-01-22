@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-21T03:15:34.675988941	Recipes
+// 1.21.1	2026-01-21T17:33:52.132632417	Recipes
 08d6ed118ecf6cd7da98bbc838a32fa0ae2db07c data/pastel/recipe/crystallarieum/minecraft/coal.json
 2c0d2823fa6f1a56f5bd449841168510fa9bb2f1 data/pastel/recipe/crystallarieum/minecraft/copper.json
 9faea5a3eb4a0a4dddcffdb8850a184f284920ce data/pastel/recipe/crystallarieum/minecraft/diamond.json
@@ -52,7 +52,6 @@ d00ed7af7d37430432ed3065f3c76165443d5a5c data/pastel/recipe/enchantment_upgrade/
 224cedb9697f0e37f93b8a9237e02056d79edf4c data/pastel/recipe/enchantment_upgrade/minecraft/serendipity_reel.json
 265eb8812270b465e0ad3e0243c1c9e3607e6fd8 data/pastel/recipe/enchantment_upgrade/minecraft/sharpness.json
 d02eec10cddc85548e41a91857167865a5622cdf data/pastel/recipe/enchantment_upgrade/minecraft/smite.json
-ac1c8de2272e4824a7ce3132e0ca842fa28d1fe8 data/pastel/recipe/enchantment_upgrade/minecraft/sniping.json
 ba86cc95bc2cf6c7c159ce398d3834830fd05438 data/pastel/recipe/enchantment_upgrade/minecraft/soul_speed.json
 68d637f6bd7b4e3c68e1d3f0588885af64e9197d data/pastel/recipe/enchantment_upgrade/minecraft/sweeping_edge.json
 6316fc7fb69a1fa1188484c20c14f3b9daae2ac4 data/pastel/recipe/enchantment_upgrade/minecraft/swift_sneak.json

@@ -78,6 +78,6 @@ public class WireHookItem extends Item implements HasColorGradient {
         return enchantment.is(Enchantments.EFFICIENCY)
             || enchantment.is(Enchantments.POWER)
             || enchantment.is(Enchantments.FEATHER_FALLING)
-            || enchantment.is(PastelEnchantments.SNIPING);
+            || enchantment.is(Enchantments.PIERCING);
     }
 }

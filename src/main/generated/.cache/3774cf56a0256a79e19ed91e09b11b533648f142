@@ -1,5 +1,5 @@
-// 1.21.1	2026-01-18T20:07:51.573053497	Tags for minecraft:enchantment mod id pastel
-27d736dbf449b794ccde8f7c14b27153c5591ac9 data/pastel/tags/enchantment/enchantments.json
+// 1.21.1	2026-01-21T17:33:52.12854485	Tags for minecraft:enchantment mod id pastel
+d907cba180561d9649b627bd5f92cf73ccaeb4d7 data/pastel/tags/enchantment/enchantments.json
 82f9bbe33aeb9128fe821fd56c1e9a80adf4d10e data/pastel/tags/enchantment/exclusive_set/clovers_favor.json
 a2d8de7da6b9e197f7d6ee2e810d7b19118a5928 data/pastel/tags/enchantment/exclusive_set/foundry.json
 e5d0c1320533518afb06922a889bf06517c8582d data/pastel/tags/enchantment/exclusive_set/improved_critical.json
@@ -8,6 +8,5 @@ b701476493e441c742af68015fa70656797a7236 data/pastel/tags/enchantment/exclusive_
 83f049f9bfdae024d8f5109edd262936af13288a data/pastel/tags/enchantment/exclusive_set/pest_control.json
 ed24aa6b6832acb08291aaf110329f8bb3ae3a93 data/pastel/tags/enchantment/exclusive_set/razing.json
 b866c00131b0465f64af383927ba8a6d03866d82 data/pastel/tags/enchantment/exclusive_set/resonance.json
-8b63ae481b06dc7961b40796c627aa4800a905aa data/pastel/tags/enchantment/exclusive_set/sniping.json
 8b18e7c7b25756d80c2979803047955cd468a1ed data/pastel/tags/enchantment/exclusive_set/tight_grip.json
 82f9bbe33aeb9128fe821fd56c1e9a80adf4d10e data/pastel/tags/enchantment/exclusive_set/treasure_hunter.json

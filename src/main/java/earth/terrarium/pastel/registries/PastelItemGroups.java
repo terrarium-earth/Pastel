@@ -575,7 +575,7 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.GLEAMING_PIN.get());
                                                                    entries.accept(Ench.getEnchantedStack(
                                                                        lookup, PastelItems.GLEAMING_PIN.get(),
-                                                                       Map.of(PastelEnchantments.SNIPING, 2)
+                                                                       Map.of(Enchantments.PIERCING, 2)
                                                                    ));
                                                                    entries.accept(
                                                                        PastelItems.LESSER_POTION_PENDANT.get());
