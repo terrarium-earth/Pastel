@@ -1,6 +1,6 @@
 {
   "particle_type": "pastel:light_trail",
   "gui_texture": "pastel:light_trail_0",
-  "unlock_identifier": "pastel:unlocks/items/glass_ampoules",
+  "unlock_identifier": "pastel:lategame/build_complex_pedestal_structure",
   "supports_coloring": false
 }

@@ -17,10 +17,6 @@ public class WeaponArmorItemModels {
         PastelModelHelper.ITEM.simple(generators, PastelItems.ONYX_GLASS_ARROW);
         PastelModelHelper.ITEM.simple(generators, PastelItems.MOONSTONE_GLASS_ARROW);
 
-        PastelModelHelper.ITEM.simple(generators, PastelItems.AZURITE_GLASS_AMPOULE);
-        PastelModelHelper.ITEM.simple(generators, PastelItems.BLOODSTONE_GLASS_AMPOULE);
-        PastelModelHelper.ITEM.layered(generators, PastelItems.MALACHITE_GLASS_AMPOULE, "_base", "_overlay");
-
         PastelModelHelper.registerLayeredItemModel(
             generators, PastelItems.NIGHTFALLS_BLADE.get(), PastelModels.HANDHELD_THREE_LAYERS, "", "_tint",
             "_overlay"

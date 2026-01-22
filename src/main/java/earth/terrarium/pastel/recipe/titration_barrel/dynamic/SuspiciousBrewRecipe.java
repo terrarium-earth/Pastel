@@ -92,7 +92,8 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
             var stewEffects = new HashMap<Holder<MobEffect>, Double>();
             for (var stack : stacks) {
                 var stewEffectsComponent = SuspiciousStewEffects.EMPTY;
-                if (stack.getItem() instanceof SuspiciousEffectHolder sussyBakka) // IN THIS WORL YOU ARE EITHER A
+                var sussyBakka = SuspiciousEffectHolder.tryGet(stack.getItem());
+                if (sussyBakka!=null) // IN THIS WORL YOU ARE EITHER A
                     // SUSSY BAKKA OR A BUSSY SUKKA
                     stewEffectsComponent = sussyBakka.getSuspiciousEffects();
 

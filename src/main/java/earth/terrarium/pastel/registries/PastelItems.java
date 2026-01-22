@@ -72,9 +72,6 @@ import earth.terrarium.pastel.items.magic_items.PerturbedEyeItem;
 import earth.terrarium.pastel.items.magic_items.PipeBombItem;
 import earth.terrarium.pastel.items.magic_items.RadianceStaffItem;
 import earth.terrarium.pastel.items.magic_items.StaffOfRemembranceItem;
-import earth.terrarium.pastel.items.magic_items.ampoules.AzuriteGlassAmpouleItem;
-import earth.terrarium.pastel.items.magic_items.ampoules.BloodstoneGlassAmpouleItem;
-import earth.terrarium.pastel.items.magic_items.ampoules.MalachiteGlassAmpouleItem;
 import earth.terrarium.pastel.items.map.ArtisansAtlasItem;
 import earth.terrarium.pastel.items.misc.AetherVestigesItem;
 import earth.terrarium.pastel.items.misc.AshItem;
@@ -540,17 +537,6 @@ public class PastelItems {
                                                                 BundleContents.EMPTY
                                                             )), InkColors.YELLOW
     ));
-
-    public static final DeferredItem<Item> AZURITE_GLASS_AMPOULE = register(
-        item("azurite_glass_ampoule", () -> new AzuriteGlassAmpouleItem(IS.of(Rarity.UNCOMMON)), InkColors.BLUE));
-    public static final DeferredItem<Item> BLOODSTONE_GLASS_AMPOULE = register(item(
-        "bloodstone_glass_ampoule", () -> new BloodstoneGlassAmpouleItem(IS.of(Rarity.UNCOMMON)
-                                                                           .attributes(
-                                                                               BloodstoneGlassAmpouleItem.createAttributeModifiers())),
-        InkColors.RED
-    ));
-    public static final DeferredItem<Item> MALACHITE_GLASS_AMPOULE = register(
-        item("malachite_glass_ampoule", () -> new MalachiteGlassAmpouleItem(IS.of(Rarity.UNCOMMON)), InkColors.GREEN));
 
     // Special tools
     // TODO: set attribute modifiers similarly to how vanilla swords do it

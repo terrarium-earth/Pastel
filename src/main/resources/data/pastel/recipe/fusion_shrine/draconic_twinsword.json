@@ -22,19 +22,6 @@
       "count": 8
     },
     {
-      "item": "minecraft:enchanted_book",
-      "predicates": {
-        "minecraft:stored_enchantments": [
-          {
-            "enchantments": "pastel:sniping",
-            "levels": {
-              "min": 2
-            }
-          }
-        ]
-      }
-    },
-    {
       "item": "pastel:yellow_pigment",
       "count": 16
     }

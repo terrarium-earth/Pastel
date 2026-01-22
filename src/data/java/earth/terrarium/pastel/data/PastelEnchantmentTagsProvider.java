@@ -63,8 +63,6 @@ public class PastelEnchantmentTagsProvider extends EnchantmentTagsProvider {
         tag(PastelEnchantmentTags.ExclusiveSet.RESONANCE)
             .addTag(EnchantmentTags.MINING_EXCLUSIVE)
             .add(PastelEnchantments.PEST_CONTROL);
-        tag(PastelEnchantmentTags.ExclusiveSet.SNIPING)
-            .add(Enchantments.MULTISHOT);
         tag(PastelEnchantmentTags.ExclusiveSet.TIGHT_GRIP)
             .addOptional(ResourceLocation.parse("malum:rebound"));
         tag(PastelEnchantmentTags.ExclusiveSet.TREASURE_HUNTER)

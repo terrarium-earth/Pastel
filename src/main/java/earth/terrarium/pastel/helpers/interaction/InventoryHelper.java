@@ -561,6 +561,7 @@ public class InventoryHelper {
         int itemCount = 0;
         int firstEmptySlot = -1;
         ItemStack matchingStack = null;
+        int matchingSlot = -1;
         for (int i = 0; i < inventory.getSlots(); i++) {
             ItemStack slotStack = inventory.getStackInSlot(i);
 
@@ -572,6 +573,7 @@ public class InventoryHelper {
                 itemCount += slotStack.getCount();
                 if (ItemStack.isSameItemSameComponents(itemStack, slotStack)) {
                     matchingStack = slotStack;
+                    matchingSlot = i;
                 }
             }
         }
@@ -587,6 +589,7 @@ public class InventoryHelper {
             if (addedCount > 0) {
                 matchingStack.setCount(matchingStack.getCount() + addedCount);
                 itemStack.shrink(addedCount);
+                inventory.setStackInSlot(matchingSlot,matchingStack); // needed so that listeners are called
             }
             return itemStack;
         }

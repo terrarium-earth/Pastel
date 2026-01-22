@@ -19,6 +19,7 @@ public class LastKillData {
                       .build();
 
     public static void rememberKillTick(LivingEntity livingEntity, long tick) {
+        if(tick==livingEntity.getData(ATTACHMENT)) return; // ratelimit to prevent piercing projectiles from obliterating your tps with packets
         livingEntity.setData(ATTACHMENT, tick);
         AttachmentUtil.syncToTracking(
             new Payload(livingEntity.getId(), tick), livingEntity.level(), livingEntity.blockPosition());

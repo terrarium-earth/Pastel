@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-18T20:07:51.572045967	Tags for minecraft:item mod id pastel
+// 1.21.1	2026-01-21T17:33:52.127450959	Tags for minecraft:item mod id pastel
 8d6a33eaf2aef1479259cf079bac277e877c90b5 data/minecraft/tags/item/bookshelf_books.json
 a79bbc34dd65fc64b671209c043ee6c560614079 data/pastel/tags/item/cookbooks.json
 ed88d920184bf6ae96c019a36cf9901c1b31eecd data/pastel/tags/item/enchantable/big_catch.json
@@ -16,7 +16,6 @@ c0cbb8f2c8d2ac0028efc77cadaf6b0f06906f8f data/pastel/tags/item/enchantable/indes
 528161b06a78bbeb3467ea30b8cfd9196b8c9cdf data/pastel/tags/item/enchantable/razing.json
 5244ed97c2faa7d3a6880f5583067a8ec338c255 data/pastel/tags/item/enchantable/resonance.json
 ed88d920184bf6ae96c019a36cf9901c1b31eecd data/pastel/tags/item/enchantable/serendipity_reel.json
-386512395e85a392d57ff72f2af7c5a521807ff2 data/pastel/tags/item/enchantable/sniping.json
 ef33fe47867ddf73ea085a4d492efc6fa340a225 data/pastel/tags/item/enchantable/steadfast.json
 33a6119f910497252cae4009d997fa8d9285de91 data/pastel/tags/item/enchantable/tight_grip.json
 901c5821c5d224c41bfed4b9eaa0fbfdf4f6aa44 data/pastel/tags/item/enchantable/treasure_hunter.json

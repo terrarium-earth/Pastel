@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +27,7 @@ import java.util.List;
 public class GleamingPinItem extends PastelTrinketItem {
 
     public static final int BASE_RANGE = 12;
-    public static final int RANGE_BONUS_PER_LEVEL_OF_SNIPING = 4;
+    public static final int RANGE_BONUS_PER_LEVEL_OF_PIERCING = 4;
     public static final int EFFECT_DURATION = 240;
     public static final long COOLDOWN_TICKS = 160;
 
@@ -61,8 +62,8 @@ public class GleamingPinItem extends PastelTrinketItem {
     }
 
     public static int getEffectRange(ServerLevel world, ItemStack stack) {
-        return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_SNIPING * Ench.getLevel(
-            world.registryAccess(), PastelEnchantments.SNIPING, stack);
+        return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_PIERCING * Ench.getLevel(
+            world.registryAccess(), Enchantments.PIERCING, stack);
     }
 
     @Override
@@ -83,7 +84,7 @@ public class GleamingPinItem extends PastelTrinketItem {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(PastelEnchantments.SNIPING);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.PIERCING);
     }
 
 }

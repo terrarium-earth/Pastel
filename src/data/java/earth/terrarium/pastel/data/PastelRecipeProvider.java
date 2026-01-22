@@ -48,7 +48,6 @@ import static earth.terrarium.pastel.registries.PastelEnchantments.IMPROVED_CRIT
 import static earth.terrarium.pastel.registries.PastelEnchantments.INERTIA;
 import static earth.terrarium.pastel.registries.PastelEnchantments.RAZING;
 import static earth.terrarium.pastel.registries.PastelEnchantments.SERENDIPITY_REEL;
-import static earth.terrarium.pastel.registries.PastelEnchantments.SNIPING;
 import static earth.terrarium.pastel.registries.PastelEnchantments.TIGHT_GRIP;
 import static earth.terrarium.pastel.registries.PastelEnchantments.TREASURE_HUNTER;
 import static earth.terrarium.pastel.registries.PastelItems.BEDROCK_DUST;
@@ -60,7 +59,6 @@ import static earth.terrarium.pastel.registries.PastelItems.BROWN_PIGMENT;
 import static earth.terrarium.pastel.registries.PastelItems.CYAN_PIGMENT;
 import static earth.terrarium.pastel.registries.PastelItems.FROSTBITE_ESSENCE;
 import static earth.terrarium.pastel.registries.PastelItems.GRAY_PIGMENT;
-import static earth.terrarium.pastel.registries.PastelItems.GREEN_PIGMENT;
 import static earth.terrarium.pastel.registries.PastelItems.INCANDESCENT_ESSENCE;
 import static earth.terrarium.pastel.registries.PastelItems.LIGHT_BLUE_PIGMENT;
 import static earth.terrarium.pastel.registries.PastelItems.LIGHT_GRAY_PIGMENT;
@@ -442,11 +440,6 @@ public class PastelRecipeProvider extends RecipeProvider {
         generateEnchantmentUpgradeRecipe(
             ctx, "", SERENDIPITY_REEL, PastelAdvancements.Unlocks.Enchantments.SERENDIPITY_REEL, LIGHT_BLUE_PIGMENT, 3,
             RecipeScaling.doubling(400), RecipeScaling.indices(32, 128)
-        );
-        generateEnchantmentUpgradeRecipe(
-            ctx, "", SNIPING, PastelAdvancements.Unlocks.Enchantments.SNIPING, GREEN_PIGMENT, 5,
-            RecipeScaling.indices(200, 1000, 5000, 10000),
-            RecipeScaling.doubling(0, 8, 2.0F)
         );
         generateEnchantmentUpgradeRecipe(
             ctx, "", TIGHT_GRIP, PastelAdvancements.Unlocks.Enchantments.TIGHT_GRIP, YELLOW_PIGMENT, 4,

@@ -2148,18 +2148,6 @@ public class PastelGuidebookLang {
             "[#](bb00bb)copy enchantments from all kinds of Items[#]() in the Item Bowls around the Enchanter onto " +
             "itself!\n\n\\\n*All is not gold that glitters.\\\nThese books, however, are.*"
         );
-        provider.add("book.pastel.guidebook.glass_ampoules.name", "Glass Ampoules");
-        provider.add(
-            "book.pastel.guidebook.glass_ampoules.page0.text",
-            "Violas made of wafer-thin glass, so delicate that they almost break just looking at them. The contents " +
-            "are... spectacular, not to put too fine a point on it. If I break them, the contents immediately " +
-            "evaporate and disperse into the air. Only to rain down on my enemies."
-        );
-        provider.add(
-            "book.pastel.guidebook.glass_ampoules.page1.text",
-            "These things can definitely be used for some wack nonsense - be it defense or offense.\\\nThey even work" +
-            " in dispensers."
-        );
         provider.add("book.pastel.guidebook.glass_arrows.name", "Glass Arrows");
         provider.add(
             "book.pastel.guidebook.glass_arrows.page0.text",
@@ -2219,7 +2207,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.gleaming_pin.page1.text", "*Can't run, can't hide*");
         provider.add(
             "book.pastel.guidebook.gleaming_pin.page2.text",
-            "Sniping allows the surge to pierce even more matter, increasing its range."
+            "Piercing allows the surge to pierce even more matter, increasing its range."
         );
         provider.add(
             "book.pastel.guidebook.glistering_jelly_tea.page0.text",
@@ -4792,7 +4780,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.overchanting.page1.text",
             "- Clovers' Favor: 3 → 6\n- Disarming: 2 → 4\n- Exuberance: 5 → 10\n- First Strike: 2 → 5\n- Improved " +
-            "Critical: 2 → 4\n- Inertia: 2 → 5\n- Tight Grip: 2 → 4\n- Treasure Hunter: 3 → 5\n- Sniping: 2 → 4"
+            "Critical: 2 → 4\n- Inertia: 2 → 5\n- Tight Grip: 2 → 4\n- Treasure Hunter: 3 → 5"
         );
         provider.add("book.pastel.guidebook.overchanting.page1.title", "Pastel Enchantments");
         provider.add(
@@ -6075,16 +6063,6 @@ public class PastelGuidebookLang {
             "Ever-moist farmland, with lots of nutrients. Plants thrive on it."
         );
         provider.add("book.pastel.guidebook.smelting_back", "Smelting them back");
-        provider.add(
-            "book.pastel.guidebook.sniping.page0.text",
-            "Compared to the [#](bb00bb)Bow[#](), the [#](bb00bb)Crossbow[#]() leads a rather inconspicuous existence" +
-            ".\\\n\\\nWith the Sniping Enchantment however, the crossbow becomes a deadly ranged weapon."
-        );
-        provider.add(
-            "book.pastel.guidebook.sniping.page1.text",
-            "Increases damage, accuracy and projectile speed.\\\n\\\nMax Level: 2\\\nApplicable to Crossbows" +
-            ".\\\nMutually exclusive with Multishot."
-        );
         provider.add(
             "book.pastel.guidebook.somnolence.page0.text",
             "A [#](449900)strong, stupefying effect that scales with level[#](). This works on anything, *myself " +

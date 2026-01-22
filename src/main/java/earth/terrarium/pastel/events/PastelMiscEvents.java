@@ -16,6 +16,7 @@ import earth.terrarium.pastel.inventories.AutoCraftingMode;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.tools.TuningStampItem;
+import earth.terrarium.pastel.items.tools.WorkstaffItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -62,6 +63,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class PastelMiscEvents {
 
@@ -91,12 +93,6 @@ public class PastelMiscEvents {
     public static void onCrossbowShot(LivingEntity shooter, Projectile projectile) {
         ItemStack crossbow = shooter.getItemInHand(shooter.getUsedItemHand());
         Level level = shooter.level();
-
-        int snipingLevel = Ench.getLevel(level.registryAccess(), PastelEnchantments.SNIPING, crossbow);
-        if (snipingLevel > 0) {
-            projectile.setDeltaMovement(projectile.getDeltaMovement()
-                                                  .scale(1.25F * snipingLevel)); // TODO: is this a sensible value?
-        }
 
         if (crossbow.getItem() != PastelItems.GLASS_CREST_CROSSBOW.get() || !GlassCrestCrossbowItem.isOvercharged(
             crossbow)) {
@@ -321,8 +317,15 @@ public class PastelMiscEvents {
             case Z -> original.offset(-aoe.getX(), -aoe.getY(), 0);
         };
 
+        Predicate<BlockState> minableBlocksPredicate = state -> {
+            boolean suitableTool = !state.requiresCorrectToolForDrops() || event.getPlayer().getMainHandItem().isCorrectToolForDrops(state);
+            boolean suitableSpeed = event.getPlayer().getMainHandItem().getDestroySpeed(state) > 1;
+            return suitableTool && suitableSpeed;
+        };
+
         BlockPos.betweenClosedStream(start, end)
-                .filter(pos -> !pos.equals(original) && player.canInteractWithBlock(pos, 1.0 + reach))
+                .filter(pos -> !pos.equals(original) && player.canInteractWithBlock(pos, 1.0 + reach) &&
+                               minableBlocksPredicate.test(event.getPlayer().level().getBlockState(pos)))
                 .peek(AREA_TARGETS::add)
                 .peek(player.gameMode::destroyBlock)
                 .forEach(AREA_TARGETS::remove);

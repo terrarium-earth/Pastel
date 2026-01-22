@@ -21,11 +21,13 @@
   "criteria": {
     "created_malachite_tool": {
       "trigger": "pastel:crafted_with_fusion_shrine",
-      "items": [
-        {
-          "items": "#pastel:malachite_equipment"
-        }
-      ]
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:malachite_equipment"
+          }
+        ]
+      }
     },
     "gotten_previous": {
       "trigger": "databank:has_advancement",

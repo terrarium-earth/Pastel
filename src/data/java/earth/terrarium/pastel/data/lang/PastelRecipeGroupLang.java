@@ -35,7 +35,6 @@ public class PastelRecipeGroupLang {
         provider.add("recipeGroup.pastel.gemstone_chimes", "Gemstone Chimes");
         provider.add("recipeGroup.pastel.gemstone_crushing", "Gemstone Shards & Buds");
         provider.add("recipeGroup.pastel.gemstone_glass", "Gemstone Glass");
-        provider.add("recipeGroup.pastel.glass_ampoules", "Glass Ampoules");
         provider.add("recipeGroup.pastel.glass_arrows", "Glass Arrows");
         provider.add("recipeGroup.pastel.glass_crest_equipment", "Glass Crest Equipment");
         provider.add("recipeGroup.pastel.glistering_jelly_tea", "Glistering Jelly Tea");

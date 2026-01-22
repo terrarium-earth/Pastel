@@ -4,7 +4,6 @@ import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -59,7 +58,6 @@ public class PastelItemTags {
         public static final TagKey<Item> RAZING = getEnchantableTag(PastelEnchantments.RAZING);
         public static final TagKey<Item> RESONANCE = getEnchantableTag(PastelEnchantments.RESONANCE);
         public static final TagKey<Item> SERENDIPITY_REEL = getEnchantableTag(PastelEnchantments.SERENDIPITY_REEL);
-        public static final TagKey<Item> SNIPING = getEnchantableTag(PastelEnchantments.SNIPING);
         public static final TagKey<Item> STEADFAST = getEnchantableTag(PastelEnchantments.STEADFAST);
         public static final TagKey<Item> TIGHT_GRIP = getEnchantableTag(PastelEnchantments.TIGHT_GRIP);
         public static final TagKey<Item> TREASURE_HUNTER = getEnchantableTag(PastelEnchantments.TREASURE_HUNTER);

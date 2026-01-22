@@ -192,7 +192,6 @@ public class PastelConfigLang {
         provider.add(
             "text.autoconfig.pastel.option.ShootingStarChance", "Chance for a Shooting Star to fall every 100 ticks");
         provider.add("text.autoconfig.pastel.option.ShootingStarWorlds", "Worlds with Shooting Stars");
-        provider.add("text.autoconfig.pastel.option.SnipingEnchantmentEnabled", "Enchantment Sniping available");
         provider.add("text.autoconfig.pastel.option.SteadfastEnchantmentEnabled", "Enchantment Steadfast available");
         provider.add(
             "text.autoconfig.pastel.option.StormStonesChance", "Chance for a Storm Stone to spawn on lightning strike");
