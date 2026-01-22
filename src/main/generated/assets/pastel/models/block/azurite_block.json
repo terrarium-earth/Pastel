@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "pastel:block/azurite_block_bottom",
-    "side": "pastel:block/azurite_block_side",
-    "top": "pastel:block/azurite_block_top"
-  }
-}

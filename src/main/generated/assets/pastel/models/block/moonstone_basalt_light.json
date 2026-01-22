@@ -1,8 +1,0 @@
-{
-  "parent": "pastel:templates/multilayer_light",
-  "textures": {
-    "inside": "pastel:block/moonstone_block",
-    "side": "pastel:block/moonstone_basalt_light",
-    "top": "pastel:block/basalt_cap"
-  }
-}

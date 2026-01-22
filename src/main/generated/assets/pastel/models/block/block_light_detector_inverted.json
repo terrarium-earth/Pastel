@@ -1,7 +1,0 @@
-{
-  "parent": "pastel:templates/slab_detector",
-  "textures": {
-    "side": "pastel:block/block_light_detector_side",
-    "top": "pastel:block/block_light_detector_inverted_top"
-  }
-}

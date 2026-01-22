@@ -1,9 +1,0 @@
-{
-  "parent": "pastel:templates/base_bowl",
-  "textures": {
-    "bottom": "pastel:block/item_bowl_preservation_bottom",
-    "inner": "pastel:block/item_bowl_preservation_bottom",
-    "side": "pastel:block/enlightenment_item_bowl_side",
-    "top": "pastel:block/enlightenment_item_bowl_top"
-  }
-}

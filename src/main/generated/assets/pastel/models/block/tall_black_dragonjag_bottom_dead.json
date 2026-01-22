@@ -1,6 +1,0 @@
-{
-  "parent": "pastel:templates/double_cross",
-  "textures": {
-    "cross": "pastel:block/tall_black_dragonjag_bottom_dead"
-  }
-}

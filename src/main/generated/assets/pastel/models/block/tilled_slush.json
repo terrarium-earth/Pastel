@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_farmland",
-  "textures": {
-    "dirt": "pastel:block/slush",
-    "top": "pastel:block/tilled_slush"
-  }
-}

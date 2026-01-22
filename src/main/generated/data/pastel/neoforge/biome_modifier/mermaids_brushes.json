@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#pastel:mermaids_brushes_generating_in",
-  "features": "pastel:mermaids_brushes",
-  "step": "vegetal_decoration"
-}

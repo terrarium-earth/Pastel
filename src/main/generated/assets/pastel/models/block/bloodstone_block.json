@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "pastel:block/bloodstone_block_top",
-    "side": "pastel:block/bloodstone_block_side"
-  }
-}

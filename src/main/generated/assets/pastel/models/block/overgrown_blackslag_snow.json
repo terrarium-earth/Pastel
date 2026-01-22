@@ -1,9 +1,0 @@
-{
-  "parent": "pastel:templates/overgrown",
-  "textures": {
-    "bottom": "pastel:block/blackslag_top",
-    "fronds": "pastel:block/overgrown_blackslag_snow_fronds",
-    "side": "pastel:block/overgrown_blackslag_snow_side",
-    "top": "pastel:block/overgrown_blackslag_snow_top"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "pastel:block/hoverblock_top",
-    "side": "pastel:block/hoverblock_side"
-  }
-}

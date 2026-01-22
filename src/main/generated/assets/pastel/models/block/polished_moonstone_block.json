@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "pastel:block/polished_moonstone_block_bottom",
-    "side": "pastel:block/polished_moonstone_block",
-    "top": "pastel:block/polished_moonstone_block_top"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "pastel:templates/particle_spawner",
-  "textures": {
-    "top": "pastel:block/particle_spawner_top_off"
-  }
-}

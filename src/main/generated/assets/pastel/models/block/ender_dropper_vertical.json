@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/orientable_vertical",
-  "textures": {
-    "front": "pastel:block/ender_dropper_front_vertical",
-    "side": "pastel:block/ender_dropper_top"
-  }
-}

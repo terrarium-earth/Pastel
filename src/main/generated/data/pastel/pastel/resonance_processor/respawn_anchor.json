@@ -1,9 +1,0 @@
-{
-  "type": "pastel:drop_self",
-  "block": {
-    "blocks": "minecraft:respawn_anchor"
-  },
-  "state_properties_to_copy": [
-    "charges"
-  ]
-}

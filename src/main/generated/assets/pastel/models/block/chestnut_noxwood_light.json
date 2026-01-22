@@ -1,8 +1,0 @@
-{
-  "parent": "pastel:templates/multilayer_light",
-  "textures": {
-    "inside": "pastel:block/chestnut_noxcap_gills",
-    "side": "pastel:block/chestnut_noxwood_light",
-    "top": "pastel:block/chestnut_noxwood_light_top"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "pastel:templates/colored_lamp_on",
-  "textures": {
-    "inner": "pastel:block/light_blue_lamp_on",
-    "outer": "pastel:block/light_blue_lamp_outer"
-  }
-}

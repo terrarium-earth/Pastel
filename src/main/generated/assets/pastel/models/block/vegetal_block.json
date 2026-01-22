@@ -1,6 +1,0 @@
-{
-  "parent": "pastel:templates/translucent_outer1",
-  "textures": {
-    "texture": "pastel:block/vegetal_block"
-  }
-}

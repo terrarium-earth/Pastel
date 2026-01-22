@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "pastel:block/ivory_noxshroom_type_2"
-  }
-}

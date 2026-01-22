@@ -1,8 +1,0 @@
-{
-  "parent": "pastel:templates/multilayer_light",
-  "textures": {
-    "inside": "pastel:block/ivory_noxcap_gills",
-    "side": "pastel:block/ivory_noxwood_light",
-    "top": "pastel:block/ivory_noxwood_light_top"
-  }
-}

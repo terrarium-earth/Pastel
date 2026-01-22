@@ -1,7 +1,0 @@
-{
-  "parent": "pastel:templates/shooting_star",
-  "textures": {
-    "core": "pastel:block/pristine_shooting_star",
-    "side": "pastel:block/pristine_shooting_star_side"
-  }
-}

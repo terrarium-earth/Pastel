@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "pastel:block/polished_basalt_crest_top",
-    "side": "pastel:block/polished_basalt_crest_side"
-  }
-}

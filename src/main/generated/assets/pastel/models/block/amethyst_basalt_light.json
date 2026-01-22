@@ -1,8 +1,0 @@
-{
-  "parent": "pastel:templates/multilayer_light",
-  "textures": {
-    "inside": "minecraft:block/amethyst_block",
-    "side": "pastel:block/amethyst_basalt_light",
-    "top": "pastel:block/basalt_cap"
-  }
-}

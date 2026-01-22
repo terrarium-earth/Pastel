@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "pastel:item/cheong",
-    "layer1": "pastel:item/cheong_overlay",
-    "layer2": "pastel:item/cheong_cap"
-  }
-}

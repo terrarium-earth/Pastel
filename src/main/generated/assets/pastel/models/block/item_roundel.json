@@ -1,6 +1,0 @@
-{
-  "parent": "pastel:templates/base_roundel",
-  "textures": {
-    "all": "pastel:block/item_roundel"
-  }
-}
