@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "pastel:block/weeping_gala_log",
-    "side": "pastel:block/weeping_gala_log"
-  }
-}

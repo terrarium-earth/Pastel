@@ -1,7 +1,0 @@
-{
-  "parent": "pastel:templates/base_pylon_body",
-  "textures": {
-    "end": "pastel:block/amethyst_pylon_end",
-    "side": "pastel:block/amethyst_pylon_head"
-  }
-}

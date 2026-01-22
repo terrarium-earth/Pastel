@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "pastel:block/slate_noxwood_planks",
-    "side": "pastel:block/slate_noxwood_planks",
-    "top": "pastel:block/slate_noxwood_planks"
-  }
-}

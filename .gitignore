@@ -29,3 +29,6 @@ backup/
 
 # adrian having a mac moment
 .DS_Store
+
+# generated resources
+src/main/generated

@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#pastel:colored_trees_generating_in",
-  "features": "pastel:colored_tree_patch",
-  "step": "vegetal_decoration"
-}

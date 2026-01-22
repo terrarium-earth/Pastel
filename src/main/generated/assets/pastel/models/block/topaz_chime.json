@@ -1,7 +1,0 @@
-{
-  "parent": "pastel:templates/chime",
-  "textures": {
-    "base": "pastel:block/balcite_chime_base",
-    "gemstone": "pastel:block/topaz_chime"
-  }
-}

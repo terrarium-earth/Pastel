@@ -1,6 +1,0 @@
-{
-  "parent": "pastel:templates_item/small_bud",
-  "textures": {
-    "layer0": "pastel:block/small_zinc_bud"
-  }
-}

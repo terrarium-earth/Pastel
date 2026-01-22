@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "pastel:block/tall_red_dragonjag_top_dead"
-  }
-}

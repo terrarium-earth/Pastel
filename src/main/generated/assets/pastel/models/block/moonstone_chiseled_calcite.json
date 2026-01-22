@@ -1,7 +1,0 @@
-{
-  "parent": "pastel:templates/moonstone_chiseled",
-  "textures": {
-    "line": "pastel:block/moonstone_chiseled_calcite",
-    "side": "pastel:block/calcite_cap"
-  }
-}

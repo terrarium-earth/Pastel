@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "pastel:item/memory_base",
-    "layer1": "pastel:item/memory_overlay",
-    "layer2": "pastel:item/memory_brighten"
-  }
-}

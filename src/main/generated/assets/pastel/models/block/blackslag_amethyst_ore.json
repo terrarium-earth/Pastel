@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "pastel:block/blackslag_amethyst_ore_top",
-    "side": "pastel:block/blackslag_amethyst_ore"
-  }
-}

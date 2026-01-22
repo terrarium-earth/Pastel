@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "pastel:block/pyrite_tubing_top",
-    "side": "pastel:block/pyrite_relief_side"
-  }
-}

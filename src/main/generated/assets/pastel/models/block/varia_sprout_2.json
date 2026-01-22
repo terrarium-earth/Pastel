@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "pastel:block/varia_sprout_2"
-  }
-}
