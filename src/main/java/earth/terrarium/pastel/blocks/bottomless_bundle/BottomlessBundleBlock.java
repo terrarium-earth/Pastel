@@ -227,7 +227,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 
     @Override
     public MutableComponent getName() {
-        return Component.translatable("item.pastel.bottomless_bundle");
+        return Component.translatable("block.pastel.bottomless_bundle");
     }
 
     @Override
