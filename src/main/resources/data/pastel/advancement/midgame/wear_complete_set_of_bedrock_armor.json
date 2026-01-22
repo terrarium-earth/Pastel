@@ -22,24 +22,16 @@
             "predicate": {
               "equipment": {
                 "head": {
-                  "items": [
-                    "#pastel:bedrock_helmets"
-                  ]
+                  "items": "#pastel:bedrock_helmets"
                 },
                 "chest": {
-                  "items": [
-                    "#pastel:bedrock_chestplates"
-                  ]
+                  "items": "#pastel:bedrock_chestplates"
                 },
                 "legs": {
-                  "items": [
-                    "#pastel:bedrock_leggings"
-                  ]
+                  "items": "#pastel:bedrock_leggings"
                 },
                 "feet": {
-                  "items": [
-                    "#pastel:bedrock_boots"
-                  ]
+                  "items": "#pastel:bedrock_boots"
                 }
               }
             }

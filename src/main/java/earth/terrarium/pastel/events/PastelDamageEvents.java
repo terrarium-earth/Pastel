@@ -2,6 +2,7 @@ package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
+import earth.terrarium.pastel.attachments.data.JeopardantBonusData;
 import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
@@ -24,6 +25,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
@@ -67,7 +69,8 @@ public class PastelDamageEvents {
         if (!(entity instanceof LivingEntity attacker))
             return;
 
-        if (PastelTrinketItem.hasEquipped(attacker, PastelItems.JEOPARDANT.get())) {
+        // should be a more performant check than iterating over your entire curios inv every time something takes damage
+        if (attacker.getData(JeopardantBonusData.ATTACHMENT)) {
             event.setNewDamage((float) (event.getNewDamage() * (AttackRingItem.getAttackModifierForEntity(attacker) +
                                                                 1)));
         }
@@ -78,7 +81,8 @@ public class PastelDamageEvents {
         );
         var frenzy = attacker.getEffect(PastelMobEffects.FRENZY);
         if (frenzy != null) {
-            ((FrenzyStatusEffect) frenzy.getEffect().value()).onKill(attacker, frenzy.getAmplifier());
+            ((FrenzyStatusEffect) frenzy.getEffect()
+                                        .value()).onKill(attacker, frenzy.getAmplifier());
         }
     }
 
@@ -169,7 +173,8 @@ public class PastelDamageEvents {
     private static void splitDamage(LivingIncomingDamageEvent event) {
         var target = event.getEntity();
 
-        var invuln = event.getContainer().getPostAttackInvulnerabilityTicks();
+        var invuln = event.getContainer()
+                          .getPostAttackInvulnerabilityTicks();
         if (RECURSIVE_TARGETS.contains(target)) {
             event.getContainer()
                  .setPostAttackInvulnerabilityTicks(
@@ -202,7 +207,8 @@ public class PastelDamageEvents {
 
         RECURSIVE_TARGETS.remove(target);
         event.setAmount(0);
-        event.getContainer().setPostAttackInvulnerabilityTicks(invuln);
+        event.getContainer()
+             .setPostAttackInvulnerabilityTicks(invuln);
     }
 
     private static void vulnerability(LivingDamageEvent.Pre event) {

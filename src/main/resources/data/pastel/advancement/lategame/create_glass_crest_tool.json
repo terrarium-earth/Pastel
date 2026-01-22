@@ -21,11 +21,13 @@
   "criteria": {
     "created_glass_crest_tool": {
       "trigger": "pastel:crafted_with_fusion_shrine",
-      "items": [
-        {
-          "items": "#pastel:glass_crest_equipment"
-        }
-      ]
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:glass_crest_equipment"
+          }
+        ]
+      }
     },
     "gotten_previous": {
       "trigger": "databank:has_advancement",

@@ -21,7 +21,7 @@ repositories {
 
     maven(url = "https://maven.shedaniel.me/") // Cloth config, REI
 
-    maven(url = "https://api.modrinth.com/maven") // Additional Entity Attributes, Databank (temporary)
+    maven(url = "https://api.modrinth.com/maven") // Additional Entity Attributes, ExclusionsLib, Databank (temporary)
 
     maven(url = "https://maven.terraformersmc.com/") // EMI
 
@@ -48,7 +48,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.1.4.2"
+		version = System.getenv("VERSION") ?: "1.2.0"
 
         description = "Do flowers dream of the moon?"
 
@@ -80,6 +80,11 @@ cloche {
             required = true
         }
 
+        dependency {
+            modId = "exclusions_lib"
+            required = true
+        }
+
         author("Azzyypaaras", "azzy@terrarium.earth")
         author("Dafuqs")
 
@@ -100,7 +105,7 @@ cloche {
     singleTarget {
         @Suppress("UnstableApiUsage")
         neoforge {
-            loaderVersion = "21.1.172"
+            loaderVersion = "21.1.218"
 
             datagenDirectory = file("src/main/generated")
 
@@ -139,6 +144,7 @@ cloche {
                     exclude(module = "sodium")
                     exclude(module = "iris")
                 }
+                modImplementation("maven.modrinth:exclusions-lib:1.1.0-NEO")
                 modImplementation(additionalEntityAttributes)
                 compileOnly(jgrapht)
                 implementation(jheaps)

@@ -48,7 +48,7 @@ public abstract class ProjectileEntityMixin {
                                                          .getRandom()
                                                          .nextFloat() <
                                                    PastelMobEffects.PROJECTILE_REBOUND_CHANCE_PER_LEVEL *
-                                                   reboundInstance.getAmplifier()) {
+                                                   (reboundInstance.getAmplifier()+1)) {
                         protect = true;
                     } else {
                         if (PastelTrinketItem.hasEquipped(livingEntity, PastelItems.PUFF_CIRCLET.get())) {

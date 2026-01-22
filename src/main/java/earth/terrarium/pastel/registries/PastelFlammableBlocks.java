@@ -120,19 +120,6 @@ public class PastelFlammableBlocks {
         add(PastelBlocks.CHESTNUT_NOXWOOD_PILLAR.get(), 5, 20);
         add(PastelBlocks.CHESTNUT_NOXWOOD_LIGHT.get(), 5, 20);
 
-        add(PastelBlocks.WEEPING_GALA_LOG.get(), 2, 2);
-        add(PastelBlocks.WEEPING_GALA_LEAVES.get(), 10, 20);
-        add(PastelBlocks.WEEPING_GALA_PLANKS.get(), 2, 8);
-        add(PastelBlocks.WEEPING_GALA_SLAB.get(), 2, 8);
-        add(PastelBlocks.WEEPING_GALA_FENCE.get(), 2, 8);
-        add(PastelBlocks.WEEPING_GALA_FENCE_GATE.get(), 2, 8);
-        add(PastelBlocks.WEEPING_GALA_STAIRS.get(), 2, 8);
-        add(PastelBlocks.STRIPPED_WEEPING_GALA_LOG.get(), 2, 8);
-        add(PastelBlocks.STRIPPED_WEEPING_GALA_WOOD.get(), 2, 8);
-        add(PastelBlocks.WEEPING_GALA_PILLAR.get(), 2, 8);
-        add(PastelBlocks.WEEPING_GALA_LIGHT.get(), 2, 8);
-        add(PastelBlocks.WEEPING_GALA_LAMP.get(), 2, 8);
-
         add(PastelBlocks.MOSS_BALL.get(), 30, 60);
         add(PastelBlocks.GIANT_MOSS_BALL.get(), 30, 60);
     }

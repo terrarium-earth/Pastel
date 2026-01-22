@@ -11,11 +11,6 @@ import java.util.Stack;
 
 @Mixin(LivingEntity.class)
 public interface LivingEntityAccessor {
-    @Accessor
-    DamageSource getLastDamageSource();
-
-    @Accessor
-    void setLastDamageSource(DamageSource damageSource);
 
     @Accessor
     Stack<DamageContainer> getDamageContainers();

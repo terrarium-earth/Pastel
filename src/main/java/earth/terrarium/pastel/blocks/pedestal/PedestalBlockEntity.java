@@ -343,6 +343,10 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
 		return PedestalRecipeInput.create(inventory.getInternalList(), getOwnerIfOnline());
 	}
 
+    public void updateTier(Player owner){
+        tier = Optional.of(PedestalTier.getTier(Optional.ofNullable(owner), this));
+    }
+
 	private void updateRecipe() {
 		assert level != null;
 		var input = getInput();
