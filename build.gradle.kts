@@ -26,7 +26,7 @@ repositories {
 
     maven(url = "https://maven.shedaniel.me/") // Cloth config, REI
 
-    maven(url = "https://api.modrinth.com/maven") // Additional Entity Attributes, Databank (temporary)
+    maven(url = "https://api.modrinth.com/maven") // Additional Entity Attributes, ExclusionsLib, Databank (temporary)
 
     maven(url = "https://maven.terraformersmc.com/") // EMI
 
@@ -82,6 +82,11 @@ cloche {
 
         dependency {
             modId = "databank"
+            required = true
+        }
+
+        dependency {
+            modId = "exclusions_lib"
             required = true
         }
 
@@ -141,6 +146,7 @@ cloche {
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
                 modImplementation("maven.modrinth:databank:1.2.2")
+                modImplementation("maven.modrinth:exclusions-lib:1.1.0-NEO")
                 modImplementation(additionalEntityAttributes)
                 compileOnly(jgrapht)
                 implementation(jheaps)
