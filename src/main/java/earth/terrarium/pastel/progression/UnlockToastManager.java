@@ -13,13 +13,18 @@ import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.entity.BannerPattern;
+import net.minecraft.world.level.block.entity.BannerPatternLayers;
+import net.minecraft.world.level.block.entity.BannerPatterns;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -80,6 +85,9 @@ public class UnlockToastManager {
                                                .getDefaultInstance(), "ascend_kindling"
             )
         );
+        put(PastelAdvancements.Hidden.GET_DENIED_BY_MANXI,new Tuple<>(
+            PastelItems.NECTARDEW_BURGEON.get().getDefaultInstance(), "get_denied_by_manxi"
+        ));
         put(
             PastelCommon.locate("mod_integration/neepmeat/vivisect_kindling"), new Tuple<>(
                 PastelItems.DIVINATION_HEART.get()

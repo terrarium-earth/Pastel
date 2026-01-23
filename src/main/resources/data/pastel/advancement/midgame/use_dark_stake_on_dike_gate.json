@@ -1,0 +1,26 @@
+{
+  "parent": "pastel:midgame/collect_midnight_chip",
+  "display": {
+    "icon": {
+      "id": "pastel:dark_stake"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.use_dark_stake_on_dike_gate.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.use_dark_stake_on_dike_gate.description"
+    }
+  },
+  "criteria": {
+    "vampirephobia": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:unlocks/equipment/dark_stakes"
+      }
+    }
+  }
+}

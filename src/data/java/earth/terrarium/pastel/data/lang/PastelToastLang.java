@@ -43,6 +43,8 @@ public class PastelToastLang {
         provider.add("pastel.toast.message.pastel_node_coloring.text", "You are now able to color Pastel Nodes");
         provider.add("pastel.toast.message.ascend_kindling.text", "§lLorian will remember that.");
         provider.add("pastel.toast.message.ascend_kindling.title", "Uh Oh!");
+        provider.add("pastel.toast.message.get_denied_by_manxi.text", "Remil is not amused.");
+        provider.add("pastel.toast.message.get_denied_by_manxi.title", "Unwise.");
         provider.add("pastel.toast.message.vivisect_kindling.text", "What is wrong with you?");
         provider.add("pastel.toast.message.vivisect_kindling.title", "§lYou Monster...");
         provider.add(

@@ -87,7 +87,7 @@ public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
                 .forEach(pos -> {
                     var state = level().getBlockState(pos);
                     if (state.getBlock() instanceof WardDisruptableBlock disruptableBlock)
-                        disruptableBlock.onWardDisrupt(pos, state, level());
+                        disruptableBlock.onWardDisrupt(pos, state, level(),this);
                 });
     }
 

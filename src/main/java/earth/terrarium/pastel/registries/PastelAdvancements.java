@@ -78,9 +78,12 @@ public class PastelAdvancements {
             public static final ResourceLocation OBLIVION_PICKAXE = PastelCommon.locate(
                 "unlocks/equipment/oblivion_pickaxe");
             public static final ResourceLocation ONYX_HELMET = PastelCommon.locate("unlocks/equipment/onyx_helmet");
-            public static final ResourceLocation AMETHYST_CHESTPLATE = PastelCommon.locate("unlocks/equipment/amethyst_chestplate");
-            public static final ResourceLocation TOPAZ_LEGGINGS = PastelCommon.locate("unlocks/equipment/topaz_leggings");
-            public static final ResourceLocation CITRINE_BOOTS = PastelCommon.locate("unlocks/equipment/");
+            public static final ResourceLocation AMETHYST_CHESTPLATE = PastelCommon.locate(
+                "unlocks/equipment/amethyst_chestplate");
+            public static final ResourceLocation TOPAZ_LEGGINGS = PastelCommon.locate(
+                "unlocks/equipment/topaz_leggings");
+            public static final ResourceLocation CITRINE_BOOTS = PastelCommon.locate("unlocks/equipment/citrine_boots");
+            public static final ResourceLocation DARK_STAKES = PastelCommon.locate("unlocks/equipment/dark_stakes");
         }
 
         public static class Blocks {
@@ -907,6 +910,7 @@ public class PastelAdvancements {
         public static final ResourceLocation COLLECT_GLASS_PEACH = PastelCommon.locate("hidden/collect_glass_peach");
         public static final ResourceLocation COLLECT_ALOE = PastelCommon.locate("hidden/collect_aloe");
         public static final ResourceLocation COLLECT_DRAGONJAG = PastelCommon.locate("hidden/collect_dragonjag");
+        public static final ResourceLocation GET_DENIED_BY_MANXI = PastelCommon.locate("hidden/get_denied_by_manxi");
     }
 
     public static class Midgame {
@@ -1065,6 +1069,8 @@ public class PastelAdvancements {
         public static final ResourceLocation RUN_INTO_WALL = PastelCommon.locate(
             "midgame/run_into_wall"
         );
+        public static final ResourceLocation USE_DARK_STAKE_ON_DIKE_GATE = PastelCommon.locate(
+            "midgame/use_dark_stake_on_dike_gate");
     }
 
     public static class Triggers {

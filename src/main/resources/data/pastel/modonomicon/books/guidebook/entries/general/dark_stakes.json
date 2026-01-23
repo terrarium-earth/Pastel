@@ -42,6 +42,20 @@
       "type": "pastel:pedestal_crafting",
       "text": "book.pastel.guidebook.dark_stakes.page2.text",
       "recipe_id": "pastel:pedestal/tier3/dark_stakes"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "book.pastel.guidebook.dark_stakes.page3.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/use_dark_stake_on_dike_gate"
+      },
+      "images": [
+        "pastel:textures/gui/guidebook/preservation_ruin_dike_gate.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.dark_stakes.page3.text"
     }
   ]
 }

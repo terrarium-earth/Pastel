@@ -3718,8 +3718,14 @@ public class PastelGuidebookLang {
             "protection seems effective, either—the Stakes seem able to bypass everything from Resistance potions to" +
             " the Protection enchantment, and hitting a shield with one will render it unusable for a time."
         );
-        provider.add("book.pastel.guidebook.dark_stakes.page2.text", "*It sure is beautiful, isn't it? ...This black shard.*");
-
+        provider.add(
+            "book.pastel.guidebook.dark_stakes.page2.text", "*It sure is beautiful, isn't it? ...This black shard.*");
+        provider.add("book.pastel.guidebook.dark_stakes.page3.title", "Denied once more?");
+        provider.add(
+            "book.pastel.guidebook.dark_stakes.page3.text",
+            "As much as it pains me to admit, whoever built these wards is far better at it than I am. My Dark Stakes" +
+            " don't even leave a scratch! I'll have to find another way."
+        );
         provider.add(
             "book.pastel.guidebook.midnight_solution.page0.text",
             "This bizarre liquid is a direct result of [my failed fusion experiment]" +

@@ -966,6 +966,8 @@ public class PastelAdvancementLang {
             "its properties"
         );
         provider.add("advancements.pastel.use_all_pedestal_upgrades.title", "Enhance");
+        provider.add("advancements.pastel.use_dark_stake_on_dike_gate.title","Carmilla Weeps");
+        provider.add("advancements.pastel.use_dark_stake_on_dike_gate.description","Try—and fail—to force your way through a powerful ward");
         provider.add(
             "advancements.pastel.use_decay_away_on_sculk.description",
             "Looks like Sculk very much qualifies as a self-replicating organism, too"

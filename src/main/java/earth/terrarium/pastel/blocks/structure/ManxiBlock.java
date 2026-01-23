@@ -1,16 +1,18 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSounds;
+import earth.terrarium.pastel.blocks.WardDisruptableBlock;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -22,7 +24,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBlock {
+public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBlock, WardDisruptableBlock {
 
     public static final MapCodec<ManxiBlock> CODEC = simpleCodec(ManxiBlock::new);
 
@@ -52,14 +54,14 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state, Level world, BlockPos pos, Player player,
+        BlockHitResult hit
+    ) {
         var entity = world.getBlockEntity(pos);
 
-        if (!(entity instanceof PlayerTrackerBlockEntity manxi))
-            return InteractionResult.PASS;
+        if (!(entity instanceof PlayerTrackerBlockEntity manxi)) return InteractionResult.PASS;
 
-        if (manxi.hasTaken(player))
-            return InteractionResult.FAIL;
+        if (manxi.hasTaken(player)) return InteractionResult.FAIL;
 
         world.playLocalSound(pos, SoundEvents.CHISELED_BOOKSHELF_PICKUP_ENCHANTED, SoundSource.BLOCKS, 1F, 1F, true);
         player.getInventory()
@@ -80,6 +82,22 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
             world.playLocalSound(pos, PastelSounds.DEEP_CRYSTAL_RING, SoundSource.BLOCKS, 1, 1.5F, true);
             player.hurt(PastelDamageTypes.sleep(world, null), 6);
             player.knockback(2, player.getX() - (pos.getX() + 0.5), player.getZ() - (pos.getZ() + 0.5));
+        }
+    }
+
+    @Override
+    public void onWardDisrupt(BlockPos pos, BlockState state, Level level, Entity trigger) {
+        if (!level.isClientSide() && trigger instanceof Projectile projectile &&
+            projectile.getOwner() instanceof ServerPlayer player && level instanceof ServerLevel serverLevel) {
+            var advancement = serverLevel.getServer()
+                                         .getAdvancements()
+                                         .get(PastelAdvancements.Hidden.GET_DENIED_BY_MANXI);
+            if (advancement == null) return;
+            player.getAdvancements()
+                  .revoke(advancement, "rejected");
+            player.getAdvancements()
+                  .award(advancement, "rejected");
+            player.hurt(PastelDamageTypes.sleep(level, null), 40);
         }
     }
 

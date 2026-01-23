@@ -129,7 +129,7 @@ public class AzuriteOreBlock extends CloakedOreBlock implements WardDisruptableB
     }
 
     @Override
-    public void onWardDisrupt(BlockPos pos, BlockState state, Level level) {
+    public void onWardDisrupt(BlockPos pos, BlockState state, Level level, Entity trigger) {
         if (level instanceof ServerLevel serverLevel) serverLevel.setBlock(
             pos, state.setValue(WARDED, false),
             Block.UPDATE_CLIENTS |
