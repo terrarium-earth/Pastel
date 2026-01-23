@@ -199,7 +199,7 @@ public class DoomBloomBlock extends FlowerBlock implements BonemealableBlock {
         }
     }
 
-    protected static void explode(Level world, BlockPos pos, BlockState state) {
+    public static void explode(Level world, BlockPos pos, BlockState state) {
         if (state.getValue(AGE) == AGE_MAX) {
             world.removeBlock(pos, false);
             world.explode(

@@ -5,6 +5,8 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.NaturesStaffTriggered;
+import earth.terrarium.pastel.blocks.TallCropBlock;
+import earth.terrarium.pastel.blocks.deeper_down.flora.DoomBloomBlock;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.data_loaders.NaturesStaffConversionDataLoader;
 import earth.terrarium.pastel.helpers.Support;
@@ -20,12 +22,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -41,20 +45,25 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.DirectionalPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CoralPlantBlock;
-import net.minecraft.world.level.block.LevelEvent;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import static earth.terrarium.pastel.blocks.TallCropBlock.HALF;
 
 public class NaturesStaffItem extends Item implements InkPowered {
 
@@ -84,9 +93,8 @@ public class NaturesStaffItem extends Item implements InkPowered {
             int chancePercent = (int) (getInkCostMod(context.registries(), stack) * 100);
             if (InkPowered.canUseClient()) {
                 tooltip.add(Component.translatable(
-                    "item.pastel.natures_staff.tooltip_with_ink_and_chance",
-                    INK_COST.color()
-                            .getColoredInkName(), chancePercent
+                    "item.pastel.natures_staff.tooltip_with_ink_and_chance", INK_COST.color()
+                                                                                     .getColoredInkName(), chancePercent
                 ));
             } else {
                 tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip_with_chance", chancePercent));
@@ -142,8 +150,8 @@ public class NaturesStaffItem extends Item implements InkPowered {
             HitResult hitResult = Support.playerBlockInteractionRaycast(world, user, player);
             if (hitResult.getType() == HitResult.Type.BLOCK) {
                 useOn(new UseOnContext(
-                    world, player, player.getUsedItemHand(),
-                                       player.getItemInHand(player.getUsedItemHand()), (BlockHitResult) hitResult
+                    world, player, player.getUsedItemHand(), player.getItemInHand(player.getUsedItemHand()),
+                    (BlockHitResult) hitResult
                 ));
             }
         }
@@ -251,15 +259,22 @@ public class NaturesStaffItem extends Item implements InkPowered {
                             sourceState.randomTick((ServerLevel) world, blockPos, world.random);
                         }
                         success = true;
+                    } else if (world instanceof ServerLevel level && tryHarvest(
+                        sourceState, blockPos, player, level, new BlockHitResult(
+                            context.getClickLocation(), context.getClickedFace(), blockPos, context.isInside()),
+                        context.getItemInHand()
+                    )) {
+                        success = true;
                     } else if (BoneMealItem.growCrop(Items.BONE_MEAL.getDefaultInstance(), world, blockPos)) {
                         // fertilizable => grow!
                         success = true;
                     } else {
-                        if (sourceState.isFaceSturdy(world, blockPos, context.getClickedFace())
-                            && BoneMealItem.growWaterPlant(
-                            Items.BONE_MEAL.getDefaultInstance(), world, blockPos.relative(context.getClickedFace()),
-                            context.getClickedFace()
-                        )) {
+                        if (sourceState.isFaceSturdy(world, blockPos, context.getClickedFace()) &&
+                            BoneMealItem.growWaterPlant(
+                                Items.BONE_MEAL.getDefaultInstance(), world,
+                                blockPos.relative(context.getClickedFace()),
+                                context.getClickedFace()
+                            )) {
                             success = true;
                         }
                     }
@@ -267,8 +282,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
                 if (success) {
                     payForUse(player, stack);
-                    PastelCriteria.NATURES_STAFF_USE.trigger(
-                        player, sourceState, world.getBlockState(blockPos));
+                    PastelCriteria.NATURES_STAFF_USE.trigger(player, sourceState, world.getBlockState(blockPos));
                     return InteractionResult.CONSUME;
                 }
             }
@@ -276,6 +290,92 @@ public class NaturesStaffItem extends Item implements InkPowered {
         }
 
         return InteractionResult.PASS;
+    }
+
+    private boolean tryHarvest(
+        BlockState state, BlockPos pos, ServerPlayer player, ServerLevel level, BlockHitResult hitResult,
+        ItemStack naturesStaff
+    ) {
+        boolean growable = false;
+        Block block = state.getBlock();
+        int tall = 0;
+
+        // handle amaranth and such
+        if (block instanceof TallCropBlock) {
+            tall = 1;
+            if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+                tall = 2;
+                pos = pos.below();
+                state = level.getBlockState(pos);
+                hitResult = new BlockHitResult(
+                    hitResult.getLocation()
+                             .relative(Direction.DOWN, 1), hitResult.getDirection(), pos, hitResult.isInside()
+                );
+                block = state.getBlock();
+            }
+        }
+
+        // nether wart isn't bonemealable, but it acts like it is, so we special case it
+        if (state.is(Blocks.NETHER_WART)) {
+            growable = state.getValue(NetherWartBlock.AGE) < 3;
+        } else if (block instanceof BonemealableBlock bonemealableBlock) {
+            growable = bonemealableBlock.isValidBonemealTarget(level, pos, state);
+        }
+
+        // if the block isn't valid, or it still has room to grow, or we're on the client somehow, we shouldn't do 
+        // anything. also, some blocks are bonemealable, but aren't actually crops, so we don't do 
+        // anything to them here
+        if (level.isClientSide() || growable || !state.is(PastelBlockTags.NATURES_STAFF_HARVEST_WHITELIST))
+            return false;
+
+
+        // this allows us to benefit from fortune
+        var drops = state.getDrops(new LootParams.Builder(level).withParameter(
+                                                                    LootContextParams.ORIGIN, new Vec3(
+                                                                        pos.getX(),
+                                                                        pos.getY(),
+                                                                        pos.getZ()
+                                                                    )
+                                                                )
+                                                                .withParameter(LootContextParams.BLOCK_STATE, state)
+                                                                .withParameter(LootContextParams.THIS_ENTITY, player)
+                                                                .withParameter(LootContextParams.TOOL, naturesStaff));
+
+        BlockState restoreTo = block.defaultBlockState();
+        // preserve the direction of orientable blocks
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            restoreTo = restoreTo.setValue(
+                BlockStateProperties.HORIZONTAL_FACING, state.getValue(BlockStateProperties.HORIZONTAL_FACING));
+        }
+
+        // vanilla crops like wheat use this state instead
+        if (state.hasProperty(BlockStateProperties.AGE_7)) {
+            restoreTo = state.setValue(BlockStateProperties.AGE_7, 0);
+        }
+
+        level.setBlockAndUpdate(pos, restoreTo);
+        if (tall > 0)
+            level.setBlockAndUpdate(pos.above(), Blocks.AIR.defaultBlockState());
+        ItemStack seeds = state.getCloneItemStack(hitResult, level, pos, player);
+        for (ItemStack drop : drops) {
+            if (drop.is(seeds.getItem())) drop.shrink(1);
+            if (drop.isEmpty()) continue;
+            Containers.dropItemStack(level, player.getX(), player.getY(), player.getZ(), drop);
+        }
+
+        var enchantments = level.registryAccess()
+                                .lookup(Registries.ENCHANTMENT);
+        if (enchantments.isPresent()) {
+            var silk = enchantments.get()
+                                   .get(Enchantments.SILK_TOUCH);
+            if (silk.isPresent() && block instanceof DoomBloomBlock && naturesStaff.getEnchantmentLevel(Holder.direct(
+                silk.get()
+                    .value())) < 1) {
+                DoomBloomBlock.explode(level, pos, state);
+            }
+        }
+
+        return true;
     }
 
     private boolean tryPlaceBlock(BlockState blockState, Level world, BlockPos pos, Direction facing, Direction side) {
@@ -301,13 +401,11 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
     private static boolean touchesWater(Level world, BlockPos blockPos) {
         return world.getFluidState(blockPos.north())
-                    .is(FluidTags.WATER)
-               || world.getFluidState(blockPos.east())
-                       .is(FluidTags.WATER)
-               || world.getFluidState(blockPos.south())
-                       .is(FluidTags.WATER)
-               || world.getFluidState(blockPos.west())
-                       .is(FluidTags.WATER);
+                    .is(FluidTags.WATER) || world.getFluidState(blockPos.east())
+                                                 .is(FluidTags.WATER) || world.getFluidState(blockPos.south())
+                                                                              .is(FluidTags.WATER) ||
+               world.getFluidState(blockPos.west())
+                    .is(FluidTags.WATER);
     }
 
     private static void spawnParticlesAndEffect(Level world, BlockPos blockPos) {
@@ -389,7 +487,8 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY) ||
+               enchantment.is(Enchantments.FORTUNE) || enchantment.is(Enchantments.SILK_TOUCH);
     }
 
 }

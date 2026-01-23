@@ -42,6 +42,40 @@
         }
       },
       "text": "book.pastel.guidebook.natures_staff.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/build_enchanting_structure"
+      },
+      "title": "enchantment.minecraft.fortune",
+      "item": {
+        "item": "pastel:natures_staff"
+      },
+      "components": {
+        "enchantments": {
+          "minecraft:fortune": 5
+        }
+      },
+      "text": "book.pastel.guidebook.natures_staff.page3.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/build_enchanting_structure"
+      },
+      "title": "enchantment.minecraft.silk_touch",
+      "item": {
+        "item": "pastel:natures_staff"
+      },
+      "components": {
+        "enchantments": {
+          "minecraft:silk_touch": 5
+        }
+      },
+      "text": "book.pastel.guidebook.natures_staff.page4.text"
     }
   ]
 }

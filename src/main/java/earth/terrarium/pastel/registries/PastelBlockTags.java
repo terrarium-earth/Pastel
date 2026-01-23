@@ -56,6 +56,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> NATURES_STAFF_TICKABLE = of("natures_staff_tickable");
     public static final TagKey<Block> NATURES_STAFF_STACKABLE = of("natures_staff_stackable");
     public static final TagKey<Block> NATURES_STAFF_SPREADABLE = of("natures_staff_spreadable");
+    public static final TagKey<Block> NATURES_STAFF_HARVEST_WHITELIST = of("natures_staff_harvest_whitelist");
     public static final TagKey<Block> BUILDING_STAFFS_BLACKLISTED = of("building_staffs_blacklisted");
     public static final TagKey<Block> CRYSTAL_APOTHECARY_HARVESTABLE = of("crystal_apothecary_harvestable");
     public static final TagKey<Block> UNBREAKABLE_STRUCTURE_BLOCKS = of("unbreakable_structure_blocks");
