@@ -4603,12 +4603,20 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.natures_staff.page0.text",
             "Using the essence of [#](98ff37)Fertility[#](), I have come up with this stroke of genius.\\\nBone meal " +
             "is a joke in comparison - this staff works on a lot of blocks where [#](bb00bb)Bone meal[#]() failed me" +
-            ".\\\n\\\nUsing it will also tempt all kinds of animals."
+            ".\\\n\\\nI can also harvest crops with it, and using it will tempt all kinds of animals."
         );
         provider.add("book.pastel.guidebook.natures_staff.page1.text", "*Point at something you want to see blossom*");
         provider.add(
             "book.pastel.guidebook.natures_staff.page2.text",
             "Decreases the chance of [Vegetal](entry://general/vegetal) getting consumed."
+        );
+        provider.add(
+            "book.pastel.guidebook.natures_staff.page3.text",
+            "Increases yields from harvested crops."
+        );
+        provider.add(
+            "book.pastel.guidebook.natures_staff.page4.text",
+            "Allows safe harvesting of delicate crops."
         );
         provider.add("book.pastel.guidebook.neat_ring.page0.text", "*I just think it's neat.*");
         provider.add("book.pastel.guidebook.nectardew_burgeon.name", "Nectardew Burgeons");
