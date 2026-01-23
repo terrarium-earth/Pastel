@@ -37,6 +37,10 @@ accessible	method	net/minecraft/client/particle/SuspendedParticle	<init>	(Lnet/m
 
 accessible method net/minecraft/world/entity/LivingEntity hurtCurrentlyUsedShield (F)V
 
+accessible field net/minecraft/world/item/enchantment/ItemEnchantments showInTooltip Z
+accessible method net/minecraft/world/item/enchantment/ItemEnchantments getTagOrEmpty (Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/tags/TagKey;)Lnet/minecraft/core/HolderSet;
+accessible field net/minecraft/world/item/enchantment/ItemEnchantments enchantments Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;
+
 accessible method net/minecraft/world/entity/LivingEntity hurtArmor (Lnet/minecraft/world/damagesource/DamageSource;F)V
 
 accessible field net/minecraft/world/entity/player/Player DATA_PLAYER_MODE_CUSTOMISATION Lnet/minecraft/network/syncher/EntityDataAccessor;

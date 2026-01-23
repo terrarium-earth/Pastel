@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "collected_amethyst": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/collect_shards/topaz"
+      }
+    },
+    "placed_pedestal": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:place_pedestal"
+      }
+    }
+  }
+}

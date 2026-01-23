@@ -21,7 +21,7 @@ public class EarsCompat {
                     Item equippedItem = player.getItemBySlot(EquipmentSlot.CHEST)
                                               .getItem();
                     return equippedItem == PastelItems.BEDROCK_CHESTPLATE.get() ||
-                           equippedItem == PastelItems.FEROCIOUS_CHESTPLATE.get();
+                           equippedItem == PastelItems.AMETHYST_CHESTPLATE.get();
                 }
                 return false;
             }

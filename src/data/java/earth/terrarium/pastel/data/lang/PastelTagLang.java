@@ -117,7 +117,7 @@ public class PastelTagLang {
         provider.add("tag.pastel.emissive", "Emissive Item");
         provider.add("tag.pastel.enchantable_books", "Enchantable Books");
         provider.add("tag.pastel.fishing_rods", "Pastel Fishing Rods");
-        provider.add("tag.pastel.gemstone_armor", "Gemstone Armor");
+        provider.add("tag.pastel.crystal_armor", "Gemstone Armor");
         provider.add("tag.pastel.gemstone_buds", "Gemstone Buds");
         provider.add("tag.pastel.gemstone_clusters", "Gemstone Clusters");
         provider.add("tag.pastel.gemstone_glass", "Gemstone Glass");

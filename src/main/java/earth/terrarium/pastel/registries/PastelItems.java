@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.registries;
 
-import com.cmdpro.databank.misc.AnimatedBlockItemUtil;
 import com.cmdpro.databank.misc.ColorGradient;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.PastelCommon;
@@ -26,7 +25,7 @@ import earth.terrarium.pastel.items.MysteriousLocketItem;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.items.StructurePlacerItem;
 import earth.terrarium.pastel.items.armor.BedrockArmorItem;
-import earth.terrarium.pastel.items.armor.GemstoneArmorItem;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import earth.terrarium.pastel.items.bundles.ExtendedBundleItem;
 import earth.terrarium.pastel.items.conditional.GemstonePowderItem;
 import earth.terrarium.pastel.items.conditional.StormStoneItem;
@@ -113,6 +112,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.ArmorItem;
@@ -131,14 +133,13 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Unbreakable;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -189,10 +190,11 @@ public class PastelItems {
         "fusion_shrine_structure_placer", () -> new StructurePlacerItem(IS.of(1), PastelMultiblocks.FUSION_SHRINE),
         InkColors.WHITE
     ));
-    public static final DeferredItem<Item> ENCHANTER_STRUCTURE_PLACER = register(item(
-        "enchanter_structure_placer", () -> new StructurePlacerItem(IS.of(1), PastelMultiblocks.ENCHANTER),
-        InkColors.WHITE
-    ));
+    public static final DeferredItem<Item> ENCHANTER_STRUCTURE_PLACER = register(
+        item(
+            "enchanter_structure_placer", () -> new StructurePlacerItem(IS.of(1), PastelMultiblocks.ENCHANTER),
+            InkColors.WHITE
+        ));
     public static final DeferredItem<Item> SPIRIT_INSTILLER_STRUCTURE_PLACER = register(item(
         "spirit_instiller_structure_placer",
         () -> new StructurePlacerItem(IS.of(1), PastelMultiblocks.SPIRIT_INSTILLER), InkColors.WHITE
@@ -216,8 +218,8 @@ public class PastelItems {
 
     public static final DeferredItem<Item> TOPAZ_POWDER = register(
         item("topaz_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.CYAN), InkColors.CYAN));
-    public static final DeferredItem<Item> AMETHYST_POWDER = register(item(
-        "amethyst_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.MAGENTA), InkColors.MAGENTA));
+    public static final DeferredItem<Item> AMETHYST_POWDER = register(
+        item("amethyst_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.MAGENTA), InkColors.MAGENTA));
     public static final DeferredItem<Item> CITRINE_POWDER = register(
         item("citrine_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.YELLOW), InkColors.YELLOW));
     public static final DeferredItem<Item> ONYX_POWDER = register(
@@ -232,10 +234,11 @@ public class PastelItems {
         item("orange_pigment", () -> new PigmentItem(IS.of(), InkColors.ORANGE, ORANGE_DYE), InkColors.ORANGE));
     public static final DeferredItem<Item> MAGENTA_PIGMENT = register(
         item("magenta_pigment", () -> new PigmentItem(IS.of(), InkColors.MAGENTA, MAGENTA_DYE), InkColors.MAGENTA));
-    public static final DeferredItem<Item> LIGHT_BLUE_PIGMENT = register(item(
-        "light_blue_pigment", () -> new PigmentItem(IS.of(), InkColors.LIGHT_BLUE, LIGHT_BLUE_DYE),
-        InkColors.LIGHT_BLUE
-    ));
+    public static final DeferredItem<Item> LIGHT_BLUE_PIGMENT = register(
+        item(
+            "light_blue_pigment", () -> new PigmentItem(IS.of(), InkColors.LIGHT_BLUE, LIGHT_BLUE_DYE),
+            InkColors.LIGHT_BLUE
+        ));
     public static final DeferredItem<Item> YELLOW_PIGMENT = register(
         item("yellow_pigment", () -> new PigmentItem(IS.of(), InkColors.YELLOW, YELLOW_DYE), InkColors.YELLOW));
     public static final DeferredItem<Item> LIME_PIGMENT = register(
@@ -244,10 +247,11 @@ public class PastelItems {
         item("pink_pigment", () -> new PigmentItem(IS.of(), InkColors.PINK, PINK_DYE), InkColors.PINK));
     public static final DeferredItem<Item> GRAY_PIGMENT = register(
         item("gray_pigment", () -> new PigmentItem(IS.of(), InkColors.GRAY, GRAY_DYE), InkColors.GRAY));
-    public static final DeferredItem<Item> LIGHT_GRAY_PIGMENT = register(item(
-        "light_gray_pigment", () -> new PigmentItem(IS.of(), InkColors.LIGHT_GRAY, LIGHT_GRAY_DYE),
-        InkColors.LIGHT_GRAY
-    ));
+    public static final DeferredItem<Item> LIGHT_GRAY_PIGMENT = register(
+        item(
+            "light_gray_pigment", () -> new PigmentItem(IS.of(), InkColors.LIGHT_GRAY, LIGHT_GRAY_DYE),
+            InkColors.LIGHT_GRAY
+        ));
     public static final DeferredItem<Item> CYAN_PIGMENT = register(
         item("cyan_pigment", () -> new PigmentItem(IS.of(), InkColors.CYAN, CYAN_DYE), InkColors.CYAN));
     public static final DeferredItem<Item> PURPLE_PIGMENT = register(
@@ -338,14 +342,16 @@ public class PastelItems {
             }
         }, InkColors.WHITE
     ));
-    public static final DeferredItem<LagoonRodItem> LAGOON_ROD = register(item(
-        "lagoon_rod", () -> new LagoonRodItem(IS.of()
-                                                .durability(256)), InkColors.LIGHT_BLUE
-    ));
-    public static final DeferredItem<MoltenRodItem> MOLTEN_ROD = register(item(
-        "molten_rod", () -> new MoltenRodItem(IS.of()
-                                                .durability(256)), InkColors.ORANGE
-    ));
+    public static final DeferredItem<LagoonRodItem> LAGOON_ROD = register(
+        item(
+            "lagoon_rod", () -> new LagoonRodItem(IS.of()
+                                                    .durability(256)), InkColors.LIGHT_BLUE
+        ));
+    public static final DeferredItem<MoltenRodItem> MOLTEN_ROD = register(
+        item(
+            "molten_rod", () -> new MoltenRodItem(IS.of()
+                                                    .durability(256)), InkColors.ORANGE
+        ));
 
     // Bedrock Tools
     public static final DeferredItem<PastelPickaxeItem> BEDROCK_PICKAXE = register(item(
@@ -411,8 +417,9 @@ public class PastelItems {
                                                             .fireResistant()
                                                             .durability(PastelToolMaterial.BEDROCK.getUses())
                                                             .component(
-                                                                DataComponents.UNBREAKABLE, new Unbreakable(false))),
-        InkColors.BLACK
+                                                                DataComponents.UNBREAKABLE,
+                                                                new Unbreakable(false)
+                                                            )), InkColors.BLACK
     ));
     public static final DeferredItem<BedrockShearsItem> BEDROCK_SHEARS = register(item(
         "bedrock_shears", () -> new BedrockShearsItem(IS.of(Rarity.UNCOMMON)
@@ -420,8 +427,9 @@ public class PastelItems {
                                                         .durability(PastelToolMaterial.BEDROCK.getUses())
                                                         .component(DataComponents.UNBREAKABLE, new Unbreakable(false))
                                                         .component(
-                                                            DataComponents.TOOL, ShearsItem.createToolProperties())),
-        InkColors.BLACK
+                                                            DataComponents.TOOL,
+                                                            ShearsItem.createToolProperties()
+                                                        )), InkColors.BLACK
     ));
     public static final DeferredItem<BedrockFishingRodItem> BEDROCK_FISHING_ROD = register(item(
         "bedrock_fishing_rod", () -> new BedrockFishingRodItem(IS.of(Rarity.UNCOMMON)
@@ -433,10 +441,11 @@ public class PastelItems {
                                                                  )), InkColors.BLACK
     ));
 
-    public static final DeferredItem<WorkstaffItem> MALACHITE_WORKSTAFF = register(item(
-        "malachite_workstaff",
-        () -> new WorkstaffItem(PastelToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN
-    ));
+    public static final DeferredItem<WorkstaffItem> MALACHITE_WORKSTAFF = register(
+        item(
+            "malachite_workstaff",
+            () -> new WorkstaffItem(PastelToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN
+        ));
     public static final DeferredItem<GreatswordItem> MALACHITE_ULTRA_GREATSWORD = register(item(
         "malachite_ultra_greatsword",
         () -> new GreatswordItem(PastelToolMaterial.MALACHITE, 7, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)),
@@ -488,39 +497,45 @@ public class PastelItems {
 
     public static final DeferredItem<Item> MALACHITE_GLASS_ARROW = register(item(
         "malachite_glass_arrow", () -> new GlassArrowItem(
-            IS.of(Rarity.UNCOMMON), GlassArrowVariant.MALACHITE, ColoredCraftingParticleEffect.LIME), InkColors.GREEN
+            IS.of(Rarity.UNCOMMON), GlassArrowVariant.MALACHITE,
+            ColoredCraftingParticleEffect.LIME
+        ), InkColors.GREEN
     ));
     public static final DeferredItem<Item> TOPAZ_GLASS_ARROW = register(item(
-        "topaz_glass_arrow", () -> new GlassArrowItem(
-            IS.of(Rarity.UNCOMMON), GlassArrowVariant.TOPAZ,
-            ColoredCraftingParticleEffect.CYAN
-        ), InkColors.CYAN
+        "topaz_glass_arrow",
+        () -> new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.TOPAZ, ColoredCraftingParticleEffect.CYAN),
+        InkColors.CYAN
     ));
     public static final DeferredItem<Item> AMETHYST_GLASS_ARROW = register(item(
         "amethyst_glass_arrow", () -> new GlassArrowItem(
-            IS.of(Rarity.UNCOMMON), GlassArrowVariant.AMETHYST, ColoredCraftingParticleEffect.MAGENTA),
-        InkColors.MAGENTA
+            IS.of(Rarity.UNCOMMON), GlassArrowVariant.AMETHYST,
+            ColoredCraftingParticleEffect.MAGENTA
+        ), InkColors.MAGENTA
     ));
     public static final DeferredItem<Item> CITRINE_GLASS_ARROW = register(item(
         "citrine_glass_arrow", () -> new GlassArrowItem(
-            IS.of(Rarity.UNCOMMON), GlassArrowVariant.CITRINE, ColoredCraftingParticleEffect.YELLOW), InkColors.YELLOW
+            IS.of(Rarity.UNCOMMON), GlassArrowVariant.CITRINE,
+            ColoredCraftingParticleEffect.YELLOW
+        ), InkColors.YELLOW
     ));
     public static final DeferredItem<Item> ONYX_GLASS_ARROW = register(item(
-        "onyx_glass_arrow", () -> new GlassArrowItem(
-            IS.of(Rarity.UNCOMMON), GlassArrowVariant.ONYX,
-            ColoredCraftingParticleEffect.BLACK
-        ), InkColors.BLACK
+        "onyx_glass_arrow",
+        () -> new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.ONYX, ColoredCraftingParticleEffect.BLACK),
+        InkColors.BLACK
     ));
     public static final DeferredItem<Item> MOONSTONE_GLASS_ARROW = register(item(
         "moonstone_glass_arrow", () -> new GlassArrowItem(
-            IS.of(Rarity.UNCOMMON), GlassArrowVariant.MOONSTONE, ColoredCraftingParticleEffect.WHITE), InkColors.WHITE
+            IS.of(Rarity.UNCOMMON), GlassArrowVariant.MOONSTONE,
+            ColoredCraftingParticleEffect.WHITE
+        ), InkColors.WHITE
     ));
 
     public static final DeferredItem<Item> OMNI_ACCELERATOR = register(item(
         "omni_accelerator", () -> new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON)
                                                             .component(
-                                                                DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)),
-        InkColors.YELLOW
+                                                                DataComponents.BUNDLE_CONTENTS,
+                                                                BundleContents.EMPTY
+                                                            )), InkColors.YELLOW
     ));
 
     // Special tools
@@ -529,10 +544,11 @@ public class PastelItems {
         "dreamflayer", () -> new DreamflayerItem(PastelToolMaterial.DREAMFLAYER, 3, -1.8F, IS.of(1, Rarity.UNCOMMON)),
         InkColors.RED
     ));
-    public static final DeferredItem<NightfallsBladeItem> NIGHTFALLS_BLADE = register(item(
-        "nightfalls_blade", () -> new NightfallsBladeItem(Tiers.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)),
-        InkColors.GRAY
-    ));
+    public static final DeferredItem<NightfallsBladeItem> NIGHTFALLS_BLADE = register(
+        item(
+            "nightfalls_blade", () -> new NightfallsBladeItem(Tiers.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)),
+            InkColors.GRAY
+        ));
     public static final DeferredItem<DraconicTwinswordItem> DRACONIC_TWINSWORD = register(item(
         "draconic_twinsword",
         () -> new DraconicTwinswordItem(PastelToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)), InkColors.YELLOW
@@ -628,47 +644,63 @@ public class PastelItems {
         }, InkColors.BLACK
     ));
 
-    // Armor
-    public static final DeferredItem<GemstoneArmorItem> FETCHLING_HELMET = register(item(
-        "fetchling_helmet", () -> new GemstoneArmorItem(
-            PastelArmorMaterials.GEMSTONE, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON)
-                                                                    .durability(9 * 13)
+    // Crystal Armor - Iron-level dura
+    public static final DeferredItem<CrystalArmorItem> ONYX_HELMET = register(item(
+        "onyx_helmet", () -> new CrystalArmorItem(
+            PastelArmorMaterials.CRYSTAL, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON)
+                                                                   .durability(15 * 13)
         ), InkColors.BLUE
     ));
-    public static final DeferredItem<GemstoneArmorItem> FEROCIOUS_CHESTPLATE = register(item(
-        "ferocious_chestplate", () -> new GemstoneArmorItem(
-            PastelArmorMaterials.GEMSTONE, ArmorItem.Type.CHESTPLATE, IS.of(Rarity.UNCOMMON)
-                                                                        .durability(9 * 15)
+    public static final DeferredItem<CrystalArmorItem> AMETHYST_CHESTPLATE = register(item(
+        "amethyst_chestplate", () -> new CrystalArmorItem(
+            PastelArmorMaterials.CRYSTAL, ArmorItem.Type.CHESTPLATE, IS.of(Rarity.UNCOMMON)
+                                                                       .durability(15 * 15)
         ), InkColors.BLUE
     ));
-    public static final DeferredItem<GemstoneArmorItem> SYLPH_LEGGINGS = register(item(
-        "sylph_leggings", () -> new GemstoneArmorItem(
-            PastelArmorMaterials.GEMSTONE, ArmorItem.Type.LEGGINGS, IS.of(Rarity.UNCOMMON)
-                                                                      .durability(9 * 16)
+    // double dura because it's topaz
+    public static final DeferredItem<CrystalArmorItem> TOPAZ_LEGGINGS = register(item(
+        "topaz_leggings", () -> new CrystalArmorItem(
+            PastelArmorMaterials.CRYSTAL, ArmorItem.Type.LEGGINGS, IS.of(Rarity.UNCOMMON)
+                                                                     .durability(15 * 16 * 2)
         ), InkColors.BLUE
     ));
-    public static final DeferredItem<GemstoneArmorItem> OREAD_BOOTS = register(item(
-        "oread_boots", () -> new GemstoneArmorItem(
-            PastelArmorMaterials.GEMSTONE, ArmorItem.Type.BOOTS, IS.of(Rarity.UNCOMMON)
-                                                                   .durability(9 * 11)
+    public static final DeferredItem<CrystalArmorItem> CITRINE_BOOTS = register(item(
+        "citrine_boots", () -> new CrystalArmorItem(
+            PastelArmorMaterials.CRYSTAL, ArmorItem.Type.BOOTS, IS.of(Rarity.UNCOMMON)
+                                                                  .durability(15 * 11)
+                                                                  .attributes(new ItemAttributeModifiers(
+                                                                      List.of(
+                                                                          new ItemAttributeModifiers.Entry(
+                                                                              Attributes.MOVEMENT_SPEED,
+                                                                              CrystalArmorItem.GEM_BOOTS_SPEED,
+                                                                              EquipmentSlotGroup.FEET
+                                                                          ), new ItemAttributeModifiers.Entry(
+                                                                              Attributes.ARMOR, new AttributeModifier(
+                                                                              PastelCommon.locate(
+                                                                                  "citrine_boots_armor"), 3,
+                                                                              AttributeModifier.Operation.ADD_VALUE
+                                                                          ), EquipmentSlotGroup.FEET
+                                                                          )
+                                                                      ), true
+                                                                  ))
         ), InkColors.BLUE
     ));
 
     // Decay drops
-    public static final DeferredItem<Item> VEGETAL = register(burnable(
-        item("vegetal", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.VEGETAL), InkColors.LIME),
-        800
-    ));
+    public static final DeferredItem<Item> VEGETAL = register(
+        burnable(
+            item("vegetal", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.VEGETAL), InkColors.LIME),
+            800
+        ));
     public static final DeferredItem<Item> NEOLITH = register(
         item(
             "neolith", () -> new ItemWithLoomPattern(IS.of(Rarity.UNCOMMON), PastelBannerPatterns.NEOLITH),
             InkColors.PINK
         ));
-    public static final DeferredItem<Item> BEDROCK_DUST = register(
-        item(
-            "bedrock_dust", () -> new ItemWithLoomPattern(IS.of(Rarity.UNCOMMON), PastelBannerPatterns.BEDROCK_DUST),
-            InkColors.BLACK
-        ));
+    public static final DeferredItem<Item> BEDROCK_DUST = register(item(
+        "bedrock_dust", () -> new ItemWithLoomPattern(IS.of(Rarity.UNCOMMON), PastelBannerPatterns.BEDROCK_DUST),
+        InkColors.BLACK
+    ));
 
     public static final DeferredItem<MidnightAberrationItem> MIDNIGHT_ABERRATION = register(
         item("midnight_aberration", () -> new MidnightAberrationItem(IS.of(Rarity.UNCOMMON)), InkColors.GRAY));
@@ -712,7 +744,8 @@ public class PastelItems {
 
     // Decay bottles
     public static final DeferredItem<Item> BOTTLE_OF_FADING = register(item(
-        "bottle_of_fading", () -> new DecayPlacerItem(
+        "bottle_of_fading",
+        () -> new DecayPlacerItem(
             PastelBlocks.FADING.get(), IS.of(16),
             List.of(Component.translatable("item.pastel.bottle_of_fading.tooltip"))
         ), InkColors.GRAY
@@ -726,11 +759,13 @@ public class PastelItems {
     ));
     public static final DeferredItem<Item> BOTTLE_OF_RUIN = register(item(
         "bottle_of_ruin", () -> new DecayPlacerItem(
-            PastelBlocks.RUIN.get(), IS.of(16), List.of(Component.translatable("item.pastel.bottle_of_ruin.tooltip"))),
-        InkColors.GRAY
+            PastelBlocks.RUIN.get(), IS.of(16), List.of(
+            Component.translatable("item.pastel.bottle_of_ruin.tooltip"))
+        ), InkColors.GRAY
     ));
     public static final DeferredItem<Item> BOTTLE_OF_FORFEITURE = register(item(
-        "bottle_of_forfeiture", () -> new DecayPlacerItem(
+        "bottle_of_forfeiture",
+        () -> new DecayPlacerItem(
             PastelBlocks.FORFEITURE.get(), IS.of(16),
             List.of(CreativeOnlyItem.DESCRIPTION, Component.translatable("item.pastel.bottle_of_forfeiture.tooltip"))
         ), InkColors.GRAY
@@ -744,10 +779,11 @@ public class PastelItems {
     ));
 
     // Resources
-    public static final DeferredItem<Item> SHIMMERSTONE_GEM = register(item(
-        "shimmerstone_gem", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.SHIMMERSTONE),
-        InkColors.YELLOW
-    ));
+    public static final DeferredItem<Item> SHIMMERSTONE_GEM = register(
+        item(
+            "shimmerstone_gem", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.SHIMMERSTONE),
+            InkColors.YELLOW
+        ));
     public static final DeferredItem<Item> RAW_AZURITE = register(
         item("raw_azurite", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.RAW_AZURITE), InkColors.BLUE));
     public static final DeferredItem<Item> PURE_AZURITE = register(
@@ -811,14 +847,15 @@ public class PastelItems {
     public static final DeferredItem<Item> ASH_FLAKES = register(
         item("ash_flakes", () -> new AshItem(IS.of(), "item.pastel.ash_flakes.tooltip"), InkColors.LIGHT_GRAY));
 
-    public static final DeferredItem<Item> HIBERNATING_JADE_VINE_BULB = register(item(
-        "hibernating_jade_vine_bulb",
-        () -> new ItemWithTooltip(IS.of(16), "item.pastel.hibernating_jade_vine_bulb.tooltip"), InkColors.GRAY
-    ));
+    public static final DeferredItem<Item> HIBERNATING_JADE_VINE_BULB = register(
+        item(
+            "hibernating_jade_vine_bulb",
+            () -> new ItemWithTooltip(IS.of(16), "item.pastel.hibernating_jade_vine_bulb.tooltip"), InkColors.GRAY
+        ));
     public static final DeferredItem<Item> GERMINATED_JADE_VINE_BULB = register(
         item("germinated_jade_vine_bulb", () -> new GerminatedJadeVineBulbItem(IS.of(16)), InkColors.LIME));
-    public static final DeferredItem<Item> JADE_PETALS = register(item(
-        "jade_petals", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.JADE_VINE), InkColors.LIME));
+    public static final DeferredItem<Item> JADE_PETALS = register(
+        item("jade_petals", () -> new ItemWithLoomPattern(IS.of(), PastelBannerPatterns.JADE_VINE), InkColors.LIME));
     // TODO: Funky unlock?
     public static final DeferredItem<Item> JADEITE_PETALS = register(
         item("jadeite_petals", () -> new Item(IS.of(Rarity.UNCOMMON)), InkColors.BROWN));
@@ -889,10 +926,11 @@ public class PastelItems {
         }
         ), InkColors.PINK
     ));
-    public static final DeferredItem<Item> FRESH_CHOCOLATE = register(item(
-        "fresh_chocolate", () -> new Item(IS.of()
-                                            .food(PastelFoodComponents.FRESH_CHOCOLATE)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> FRESH_CHOCOLATE = register(
+        item(
+            "fresh_chocolate", () -> new Item(IS.of()
+                                                .food(PastelFoodComponents.FRESH_CHOCOLATE)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> HOT_CHOCOLATE = register(item(
         "hot_chocolate", () -> new DrinkItem(IS.of(16)
                                                .food(PastelFoodComponents.HOT_CHOCOLATE)
@@ -917,10 +955,11 @@ public class PastelItems {
                                                     teaSconeBonus(PastelFoodComponents.AZALEA_TEA_SCONE_BONUS)
                                                 )), InkColors.PURPLE
     ));
-    public static final DeferredItem<Item> BODACIOUS_BERRY_BAR = register(item(
-        "bodacious_berry_bar", () -> new Item(IS.of()
-                                                .food(PastelFoodComponents.BODACIOUS_BERRY_BAR)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> BODACIOUS_BERRY_BAR = register(
+        item(
+            "bodacious_berry_bar", () -> new Item(IS.of()
+                                                    .food(PastelFoodComponents.BODACIOUS_BERRY_BAR)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> DEMON_TEA = register(item(
         "demon_tea", () -> new BloodOrchidDrinkItem(IS.of(16)
                                                       .food(PastelFoodComponents.DEMON_TEA)
@@ -929,10 +968,11 @@ public class PastelItems {
                                                           teaSconeBonus(PastelFoodComponents.DEMON_TEA_SCONE_BONUS)
                                                       )), InkColors.RED
     ));
-    public static final DeferredItem<Item> SCONE = register(item(
-        "scone", () -> new Item(IS.of()
-                                  .food(PastelFoodComponents.SCONE)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> SCONE = register(
+        item(
+            "scone", () -> new Item(IS.of()
+                                      .food(PastelFoodComponents.SCONE)), InkColors.PINK
+        ));
 
     public static final DeferredItem<Item> CHEONG = register(item(
         "cheong", () -> new ItemWithTooltip(
@@ -940,20 +980,22 @@ public class PastelItems {
               .food(PastelFoodComponents.CHEONG), "item.pastel.cheong.tooltip"
         ), InkColors.PINK
     ));
-    public static final DeferredItem<Item> MERMAIDS_JAM = register(item(
-        "mermaids_jam", () -> new Item(IS.of()
-                                         .food(PastelFoodComponents.MERMAIDS_JAM)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> MERMAIDS_JAM = register(
+        item(
+            "mermaids_jam", () -> new Item(IS.of()
+                                             .food(PastelFoodComponents.MERMAIDS_JAM)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> MERMAIDS_POPCORN = register(item(
         "mermaids_popcorn", () -> new ItemWithTooltip(
             IS.of()
               .food(PastelFoodComponents.MERMAIDS_POPCORN), "item.pastel.mermaids_popcorn.tooltip"
         ), InkColors.PINK
     ));
-    public static final DeferredItem<Item> LE_FISHE_AU_CHOCOLAT = register(item(
-        "le_fishe_au_chocolat", () -> new Item(IS.of()
-                                                 .food(PastelFoodComponents.LE_FISHE_AU_CHOCOLAT)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> LE_FISHE_AU_CHOCOLAT = register(
+        item(
+            "le_fishe_au_chocolat", () -> new Item(IS.of()
+                                                     .food(PastelFoodComponents.LE_FISHE_AU_CHOCOLAT)), InkColors.PINK
+        ));
 //	public static final Item STUFFED_PETALS = register((item("stuffed_petals", () -> new Item(IS.of().food
 //	(PastelFoodComponents.STUFFED_PETALS)), InkColors.PINK)));
 //	public static final Item PASTICHE = register((item("pastiche", () -> new Item(IS.of().food
@@ -968,8 +1010,7 @@ public class PastelItems {
         "infused_beverage", () -> new BeverageItem(IS.of(16)
                                                      .food(PastelFoodComponents.BEVERAGE)
                                                      .craftRemainder(GLASS_BOTTLE)
-                                                     .component(
-                                                         DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
+                                                     .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
                                                      .component(
                                                          PastelDataComponentTypes.INFUSED_BEVERAGE,
                                                          InfusedBeverageComponent.DEFAULT
@@ -1005,18 +1046,21 @@ public class PastelItems {
         ), 16000
     ));
 
-    public static final DeferredItem<Item> HONEY_PASTRY = register(item(
-        "honey_pastry", () -> new Item(IS.of()
-                                         .food(PastelFoodComponents.HONEY_PASTRY)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> LUCKY_ROLL = register(item(
-        "lucky_roll", () -> new Item(IS.of(16)
-                                       .food(PastelFoodComponents.LUCKY_ROLL)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> TRIPLE_MEAT_POT_PIE = register(item(
-        "triple_meat_pot_pie", () -> new Item(IS.of(8)
-                                                .food(PastelFoodComponents.TRIPLE_MEAT_POT_PIE)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> HONEY_PASTRY = register(
+        item(
+            "honey_pastry", () -> new Item(IS.of()
+                                             .food(PastelFoodComponents.HONEY_PASTRY)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> LUCKY_ROLL = register(
+        item(
+            "lucky_roll", () -> new Item(IS.of(16)
+                                           .food(PastelFoodComponents.LUCKY_ROLL)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> TRIPLE_MEAT_POT_PIE = register(
+        item(
+            "triple_meat_pot_pie", () -> new Item(IS.of(8)
+                                                    .food(PastelFoodComponents.TRIPLE_MEAT_POT_PIE)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> GLISTERING_JELLY_TEA = register(item(
         "glistering_jelly_tea", () -> new DrinkItem(IS.of(16)
                                                       .food(PastelFoodComponents.GLISTERING_JELLY_TEA)
@@ -1031,15 +1075,17 @@ public class PastelItems {
                                                .food(PastelFoodComponents.FREIGEIST)
                                                .craftRemainder(GLASS_BOTTLE)), InkColors.RED
     ));
-    public static final DeferredItem<Item> DIVINATION_HEART = register(item(
-        "divination_heart", () -> new Item(IS.of()
-                                             .food(PastelFoodComponents.DIVINATION_HEART)), InkColors.RED
-    ));
+    public static final DeferredItem<Item> DIVINATION_HEART = register(
+        item(
+            "divination_heart", () -> new Item(IS.of()
+                                                 .food(PastelFoodComponents.DIVINATION_HEART)), InkColors.RED
+        ));
 
-    public static final DeferredItem<Item> STAR_CANDY = register(item(
-        "star_candy", () -> new StarCandyItem(IS.of(Rarity.UNCOMMON)
-                                                .food(PastelFoodComponents.STAR_CANDY)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> STAR_CANDY = register(
+        item(
+            "star_candy", () -> new StarCandyItem(IS.of(Rarity.UNCOMMON)
+                                                    .food(PastelFoodComponents.STAR_CANDY)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> ENCHANTED_STAR_CANDY = register(item(
         "enchanted_star_candy", () -> new EnchantedStarCandyItem(IS.of(Rarity.UNCOMMON)
                                                                    .food(PastelFoodComponents.ENCHANTED_STAR_CANDY)),
@@ -1051,67 +1097,81 @@ public class PastelItems {
                                                              .food(PastelFoodComponents.ENCHANTED_GOLDEN_CARROT)),
         InkColors.PINK
     ));
-    public static final DeferredItem<Item> JARAMEL = register(item(
-        "jaramel", () -> new Item(IS.of()
-                                    .food(PastelFoodComponents.JARAMEL)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> JARAMEL = register(
+        item(
+            "jaramel", () -> new Item(IS.of()
+                                        .food(PastelFoodComponents.JARAMEL)), InkColors.PINK
+        ));
 
-    public static final DeferredItem<Item> JARAMEL_TART = register(item(
-        "jaramel_tart", () -> new Item(IS.of()
-                                         .food(PastelFoodComponents.JARAMEL_TART)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> SALTED_JARAMEL_TART = register(item(
-        "salted_jaramel_tart", () -> new Item(IS.of()
-                                                .food(PastelFoodComponents.SALTED_JARAMEL_TART)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> ASHEN_TART = register(item(
-        "ashen_tart", () -> new Item(IS.of()
-                                       .food(PastelFoodComponents.ASHEN_TART)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> WEEPING_TART = register(item(
-        "weeping_tart", () -> new Item(IS.of()
-                                         .food(PastelFoodComponents.WEEPING_TART)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> WHISPY_TART = register(item(
-        "whispy_tart", () -> new Item(IS.of()
-                                        .food(PastelFoodComponents.WHISPY_TART)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> PUFF_TART = register(item(
-        "puff_tart", () -> new Item(IS.of()
-                                      .food(PastelFoodComponents.PUFF_TART)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> JARAMEL_TART = register(
+        item(
+            "jaramel_tart", () -> new Item(IS.of()
+                                             .food(PastelFoodComponents.JARAMEL_TART)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> SALTED_JARAMEL_TART = register(
+        item(
+            "salted_jaramel_tart", () -> new Item(IS.of()
+                                                    .food(PastelFoodComponents.SALTED_JARAMEL_TART)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> ASHEN_TART = register(
+        item(
+            "ashen_tart", () -> new Item(IS.of()
+                                           .food(PastelFoodComponents.ASHEN_TART)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> WEEPING_TART = register(
+        item(
+            "weeping_tart", () -> new Item(IS.of()
+                                             .food(PastelFoodComponents.WEEPING_TART)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> WHISPY_TART = register(
+        item(
+            "whispy_tart", () -> new Item(IS.of()
+                                            .food(PastelFoodComponents.WHISPY_TART)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> PUFF_TART = register(
+        item(
+            "puff_tart", () -> new Item(IS.of()
+                                          .food(PastelFoodComponents.PUFF_TART)), InkColors.PINK
+        ));
 
-    public static final DeferredItem<Item> JARAMEL_TRIFLE = register(item(
-        "jaramel_trifle", () -> new Item(IS.of()
-                                           .food(PastelFoodComponents.JARAMEL_TRIFLE)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> SALTED_JARAMEL_TRIFLE = register(item(
-        "salted_jaramel_trifle", () -> new Item(IS.of()
-                                                  .food(PastelFoodComponents.SALTED_JARAMEL_TRIFLE)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> MONSTER_TRIFLE = register(item(
-        "monster_trifle", () -> new Item(IS.of()
-                                           .food(PastelFoodComponents.MONSTER_TRIFLE)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> DEMON_TRIFLE = register(item(
-        "demon_trifle", () -> new Item(IS.of()
-                                         .food(PastelFoodComponents.DEMON_TRIFLE)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> JARAMEL_TRIFLE = register(
+        item(
+            "jaramel_trifle", () -> new Item(IS.of()
+                                               .food(PastelFoodComponents.JARAMEL_TRIFLE)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> SALTED_JARAMEL_TRIFLE = register(
+        item(
+            "salted_jaramel_trifle", () -> new Item(IS.of()
+                                                      .food(PastelFoodComponents.SALTED_JARAMEL_TRIFLE)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> MONSTER_TRIFLE = register(
+        item(
+            "monster_trifle", () -> new Item(IS.of()
+                                               .food(PastelFoodComponents.MONSTER_TRIFLE)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> DEMON_TRIFLE = register(
+        item(
+            "demon_trifle", () -> new Item(IS.of()
+                                             .food(PastelFoodComponents.DEMON_TRIFLE)), InkColors.PINK
+        ));
 
     public static final DeferredItem<Item> MYCEYLON = register(
         item("myceylon", () -> new Item(IS.of()), InkColors.PINK));
-    public static final DeferredItem<Item> MYCEYLON_APPLE_PIE = register(item(
-        "myceylon_apple_pie", () -> new Item(IS.of()
-                                               .food(PastelFoodComponents.MYCEYLON_APPLE_PIE)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> MYCEYLON_PUMPKIN_PIE = register(item(
-        "myceylon_pumpkin_pie", () -> new Item(IS.of()
-                                                 .food(PastelFoodComponents.MYCEYLON_PUMPKIN_PIE)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> MYCEYLON_COOKIE = register(item(
-        "myceylon_cookie", () -> new Item(IS.of()
-                                            .food(PastelFoodComponents.MYCEYLON_COOKIE)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> MYCEYLON_APPLE_PIE = register(
+        item(
+            "myceylon_apple_pie", () -> new Item(IS.of()
+                                                   .food(PastelFoodComponents.MYCEYLON_APPLE_PIE)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> MYCEYLON_PUMPKIN_PIE = register(
+        item(
+            "myceylon_pumpkin_pie", () -> new Item(IS.of()
+                                                     .food(PastelFoodComponents.MYCEYLON_PUMPKIN_PIE)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> MYCEYLON_COOKIE = register(
+        item(
+            "myceylon_cookie", () -> new Item(IS.of()
+                                                .food(PastelFoodComponents.MYCEYLON_COOKIE)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> ALOE_LEAF = register(item(
         "aloe_leaf", () -> new ItemNameBlockItem(
             PastelBlocks.ALOE.get(), IS.of()
@@ -1124,10 +1184,11 @@ public class PastelItems {
                                                       .food(Foods.SWEET_BERRIES)
         ), InkColors.PINK
     ));
-    public static final DeferredItem<Item> PRICKLY_BAYLEAF = register(item(
-        "prickly_bayleaf", () -> new Item(IS.of()
-                                            .food(PastelFoodComponents.PRICKLY_BAYLEAF)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> PRICKLY_BAYLEAF = register(
+        item(
+            "prickly_bayleaf", () -> new Item(IS.of()
+                                                .food(PastelFoodComponents.PRICKLY_BAYLEAF)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> TRIPLE_MEAT_POT_STEW = register(item(
         "triple_meat_pot_stew", () -> new StackableStewItem(IS.of(8)
                                                               .food(PastelFoodComponents.TRIPLE_MEAT_POT_STEW)),
@@ -1144,11 +1205,10 @@ public class PastelItems {
         ), InkColors.BLACK
     ));
 
-    public static final DeferredItem<Item> GLISTERING_MELON_SEEDS = register(
-        item(
-            "glistering_melon_seeds", () -> new ItemNameBlockItem(PastelBlocks.GLISTERING_MELON_STEM.get(), IS.of()),
-            InkColors.LIME
-        ));
+    public static final DeferredItem<Item> GLISTERING_MELON_SEEDS = register(item(
+        "glistering_melon_seeds", () -> new ItemNameBlockItem(PastelBlocks.GLISTERING_MELON_STEM.get(), IS.of()),
+        InkColors.LIME
+    ));
 
     public static final DeferredItem<Item> AMARANTH_GRAINS = register(
         item("amaranth_grains", () -> new ItemNameBlockItem(PastelBlocks.AMARANTH.get(), IS.of()), InkColors.LIME));
@@ -1159,7 +1219,9 @@ public class PastelItems {
             IS.of()
               .stacksTo(1)
               .rarity(Rarity.UNCOMMON), GuidebookItem.addressOf(
-            GuidebookItem.CUISINE_CATEGORY_ID, locate("cuisine/cookbooks/melochites_cookbook_vol_1"))
+            GuidebookItem.CUISINE_CATEGORY_ID,
+            locate("cuisine/cookbooks/melochites_cookbook_vol_1")
+        )
         ), InkColors.PURPLE
     ));
     public static final DeferredItem<Item> MELOCHITES_COOKBOOK_VOL_2 = register(item(
@@ -1167,7 +1229,9 @@ public class PastelItems {
             IS.of()
               .stacksTo(1)
               .rarity(Rarity.UNCOMMON), GuidebookItem.addressOf(
-            GuidebookItem.CUISINE_CATEGORY_ID, locate("cuisine/cookbooks/melochites_cookbook_vol_2"))
+            GuidebookItem.CUISINE_CATEGORY_ID,
+            locate("cuisine/cookbooks/melochites_cookbook_vol_2")
+        )
         ), InkColors.PURPLE
     ));
     public static final DeferredItem<Item> IMBRIFER_COOKBOOK = register(item(
@@ -1207,60 +1271,72 @@ public class PastelItems {
         ), InkColors.PURPLE
     ));
 
-    public static final DeferredItem<Item> AQUA_REGIA = register(item(
-        "aqua_regia", () -> new JadeWineItem(IS.of(16)
-                                               .food(PastelFoodComponents.AQUA_REGIA)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> BAGNUN = register(item(
-        "bagnun", () -> new Item(IS.of()
-                                   .food(PastelFoodComponents.BAGNUN)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> BANYASH = register(item(
-        "banyash", () -> new Item(IS.of()
-                                    .food(PastelFoodComponents.BANYASH)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> BERLINER = register(item(
-        "berliner", () -> new Item(IS.of()
-                                     .food(PastelFoodComponents.BERLINER)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> AQUA_REGIA = register(
+        item(
+            "aqua_regia", () -> new JadeWineItem(IS.of(16)
+                                                   .food(PastelFoodComponents.AQUA_REGIA)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> BAGNUN = register(
+        item(
+            "bagnun", () -> new Item(IS.of()
+                                       .food(PastelFoodComponents.BAGNUN)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> BANYASH = register(
+        item(
+            "banyash", () -> new Item(IS.of()
+                                        .food(PastelFoodComponents.BANYASH)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> BERLINER = register(
+        item(
+            "berliner", () -> new Item(IS.of()
+                                         .food(PastelFoodComponents.BERLINER)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> BRISTLE_MEAD = register(item(
         "bristle_mead", () -> new BeverageItem(IS.of(16)
                                                  .food(PastelFoodComponents.BEVERAGE)
                                                  .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)),
         InkColors.PINK
     ));
-    public static final DeferredItem<Item> CHAUVE_SOURIS_AU_VIN = register(item(
-        "chauve_souris_au_vin", () -> new Item(IS.of()
-                                                 .food(PastelFoodComponents.CHAUVE_SOURIS_AU_VIN)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> CRAWFISH = register(item(
-        "crawfish", () -> new Item(IS.of()
-                                     .food(PastelFoodComponents.CRAWFISH)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> CRAWFISH_COCKTAIL = register(item(
-        "crawfish_cocktail", () -> new Item(IS.of()
-                                              .food(PastelFoodComponents.CRAWFISH_COCKTAIL)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> CREAM_PASTRY = register(item(
-        "cream_pastry", () -> new Item(IS.of()
-                                         .food(PastelFoodComponents.CREAM_PASTRY)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> FADED_KOI = register(item(
-        "faded_koi", () -> new Item(IS.of()
-                                      .food(PastelFoodComponents.FADED_KOI)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> FISHCAKE = register(item(
-        "fishcake", () -> new Item(IS.of()
-                                     .food(PastelFoodComponents.FISHCAKE)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> LIZARD_MEAT = register(item(
-        "lizard_meat", () -> new Item(IS.of()
-                                        .food(PastelFoodComponents.LIZARD_MEAT)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> COOKED_LIZARD_MEAT = register(item(
-        "cooked_lizard_meat", () -> new Item(IS.of()
-                                               .food(PastelFoodComponents.COOKED_LIZARD_MEAT)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> CHAUVE_SOURIS_AU_VIN = register(
+        item(
+            "chauve_souris_au_vin", () -> new Item(IS.of()
+                                                     .food(PastelFoodComponents.CHAUVE_SOURIS_AU_VIN)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> CRAWFISH = register(
+        item(
+            "crawfish", () -> new Item(IS.of()
+                                         .food(PastelFoodComponents.CRAWFISH)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> CRAWFISH_COCKTAIL = register(
+        item(
+            "crawfish_cocktail", () -> new Item(IS.of()
+                                                  .food(PastelFoodComponents.CRAWFISH_COCKTAIL)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> CREAM_PASTRY = register(
+        item(
+            "cream_pastry", () -> new Item(IS.of()
+                                             .food(PastelFoodComponents.CREAM_PASTRY)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> FADED_KOI = register(
+        item(
+            "faded_koi", () -> new Item(IS.of()
+                                          .food(PastelFoodComponents.FADED_KOI)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> FISHCAKE = register(
+        item(
+            "fishcake", () -> new Item(IS.of()
+                                         .food(PastelFoodComponents.FISHCAKE)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> LIZARD_MEAT = register(
+        item(
+            "lizard_meat", () -> new Item(IS.of()
+                                            .food(PastelFoodComponents.LIZARD_MEAT)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> COOKED_LIZARD_MEAT = register(
+        item(
+            "cooked_lizard_meat", () -> new Item(IS.of()
+                                                   .food(PastelFoodComponents.COOKED_LIZARD_MEAT)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> GOLDEN_BRISTLE_TEA = register(item(
         "golden_bristle_tea", () -> new DrinkItem(IS.of(16)
                                                     .food(PastelFoodComponents.GOLDEN_BRISTLE_TEA)
@@ -1269,44 +1345,52 @@ public class PastelItems {
                                                             PastelFoodComponents.GOLDEN_BRISTLE_TEA_SCONE_BONUS)
                                                     )), InkColors.PINK
     ));
-    public static final DeferredItem<Item> HARE_ROAST = register(item(
-        "hare_roast", () -> new Item(IS.of()
-                                       .food(PastelFoodComponents.HARE_ROAST)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> JUNKET = register(item(
-        "junket", () -> new Item(IS.of()
-                                   .food(PastelFoodComponents.JUNKET)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> KOI = register(item(
-        "koi", () -> new Item(IS.of()
-                                .food(PastelFoodComponents.KOI)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> MEATLOAF = register(item(
-        "meatloaf", () -> new Item(IS.of()
-                                     .food(PastelFoodComponents.MEATLOAF)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> MEATLOAF_SANDWICH = register(item(
-        "meatloaf_sandwich", () -> new Item(IS.of()
-                                              .food(PastelFoodComponents.MEATLOAF_SANDWICH)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> MELLOW_SHALLOT_SOUP = register(item(
-        "mellow_shallot_soup", () -> new Item(IS.of()
-                                                .food(PastelFoodComponents.MELLOW_SHALLOT_SOUP)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> HARE_ROAST = register(
+        item(
+            "hare_roast", () -> new Item(IS.of()
+                                           .food(PastelFoodComponents.HARE_ROAST)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> JUNKET = register(
+        item(
+            "junket", () -> new Item(IS.of()
+                                       .food(PastelFoodComponents.JUNKET)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> KOI = register(
+        item(
+            "koi", () -> new Item(IS.of()
+                                    .food(PastelFoodComponents.KOI)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> MEATLOAF = register(
+        item(
+            "meatloaf", () -> new Item(IS.of()
+                                         .food(PastelFoodComponents.MEATLOAF)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> MEATLOAF_SANDWICH = register(
+        item(
+            "meatloaf_sandwich", () -> new Item(IS.of()
+                                                  .food(PastelFoodComponents.MEATLOAF_SANDWICH)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> MELLOW_SHALLOT_SOUP = register(
+        item(
+            "mellow_shallot_soup", () -> new Item(IS.of()
+                                                    .food(PastelFoodComponents.MELLOW_SHALLOT_SOUP)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> MORCHELLA = register(item(
         "morchella", () -> new BeverageItem(IS.of(16)
                                               .food(PastelFoodComponents.BEVERAGE)
                                               .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)),
         InkColors.PINK
     ));
-    public static final DeferredItem<Item> NECTERED_VIOGNIER = register(item(
-        "nectered_viognier", () -> new JadeWineItem(IS.of(16)
-                                                      .food(PastelFoodComponents.NECTERED_VIOGNIER)), InkColors.PINK
-    ));
-    public static final DeferredItem<Item> PEACHES_FLAMBE = register(item(
-        "peaches_flambe", () -> new Item(IS.of()
-                                           .food(PastelFoodComponents.PEACHES_FLAMBE)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> NECTERED_VIOGNIER = register(
+        item(
+            "nectered_viognier", () -> new JadeWineItem(IS.of(16)
+                                                          .food(PastelFoodComponents.NECTERED_VIOGNIER)), InkColors.PINK
+        ));
+    public static final DeferredItem<Item> PEACHES_FLAMBE = register(
+        item(
+            "peaches_flambe", () -> new Item(IS.of()
+                                               .food(PastelFoodComponents.PEACHES_FLAMBE)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> PEACH_CREAM = register(item(
         "peach_cream", () -> new DrinkItem(IS.of(16)
                                              .food(PastelFoodComponents.PEACH_CREAM)
@@ -1315,10 +1399,11 @@ public class PastelItems {
                                                  teaSconeBonus(PastelFoodComponents.PEACH_CREAM_SCONE_BONUS)
                                              )), InkColors.PINK
     ));
-    public static final DeferredItem<Item> PEACH_JAM = register(item(
-        "peach_jam", () -> new Item(IS.of()
-                                      .food(PastelFoodComponents.PEACH_JAM)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> PEACH_JAM = register(
+        item(
+            "peach_jam", () -> new Item(IS.of()
+                                          .food(PastelFoodComponents.PEACH_JAM)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> RABBIT_CREAM_PIE = register(item(
         "rabbit_cream_pie", () -> new ItemWithTooltip(
             IS.of()
@@ -1337,10 +1422,11 @@ public class PastelItems {
               .food(PastelFoodComponents.SLUSHSLIDE), "item.pastel.slushslide.tooltip"
         ), InkColors.PINK
     ));
-    public static final DeferredItem<Item> SURSTROMMING = register(item(
-        "surstromming", () -> new Item(IS.of()
-                                         .food(PastelFoodComponents.SURSTROMMING)), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> SURSTROMMING = register(
+        item(
+            "surstromming", () -> new Item(IS.of()
+                                             .food(PastelFoodComponents.SURSTROMMING)), InkColors.PINK
+        ));
     public static final DeferredItem<Item> EVERNECTAR = register(item(
         "evernectar", () -> new EvernectarItem(
             IS.of(1, Rarity.EPIC)
@@ -1385,7 +1471,8 @@ public class PastelItems {
 
     // Spawning items
     public static final DeferredItem<Item> BUCKET_OF_ERASER = register(item(
-        "bucket_of_eraser", () -> new EmptyFluidEntityBucketItem(
+        "bucket_of_eraser",
+        () -> new EmptyFluidEntityBucketItem(
             PastelEntityTypes.ERASER.get(), Fluids.EMPTY, SoundEvents.BUCKET_EMPTY, IS.of()), InkColors.PINK
     ));
     public static final DeferredItem<Item> EGG_LAYING_WOOLY_PIG_SPAWN_EGG = register(item(
@@ -1436,10 +1523,11 @@ public class PastelItems {
         item("ender_canvas", () -> new EnderCanvasItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE));
     public static final DeferredItem<Item> PERTURBED_EYE = register(
         item("perturbed_eye", () -> new PerturbedEyeItem(IS.of(Rarity.UNCOMMON)), InkColors.RED));
-    public static final DeferredItem<Item> CRESCENT_CLOCK = register(item(
-        "crescent_clock", () -> new ItemWithTooltip(IS.of(1), "item.pastel.crescent_clock.tooltip"),
-        InkColors.MAGENTA
-    ));
+    public static final DeferredItem<Item> CRESCENT_CLOCK = register(
+        item(
+            "crescent_clock", () -> new ItemWithTooltip(IS.of(1), "item.pastel.crescent_clock.tooltip"),
+            InkColors.MAGENTA
+        ));
     public static final DeferredItem<Item> PRIMORDIAL_LIGHTER = register(
         item("primordial_lighter", () -> new PrimordialLighterItem(IS.of(1)), InkColors.ORANGE));
 
@@ -1449,10 +1537,11 @@ public class PastelItems {
         item("soothing_bouquet", () -> new SoothingBouquetItem(IS.of(1, Rarity.RARE)), InkColors.PURPLE));
     public static final DeferredItem<Item> CONCEALING_OILS = register(
         item("concealing_oils", () -> new ConcealingOilsItem(IS.of(1)), InkColors.BLACK));
-    public static final DeferredItem<Item> BITTER_OILS = register(item(
-        "bitter_oils", () -> new DrinkItem(IS.of(16)
-                                             .food(PastelFoodComponents.BITTER_OILS)), InkColors.BLUE
-    ));
+    public static final DeferredItem<Item> BITTER_OILS = register(
+        item(
+            "bitter_oils", () -> new DrinkItem(IS.of(16)
+                                                 .food(PastelFoodComponents.BITTER_OILS)), InkColors.BLUE
+        ));
 
     public static final DeferredItem<Item> INCANDESCENT_ESSENCE = register(burnable(
         item(
@@ -1466,24 +1555,28 @@ public class PastelItems {
         item("moonstone_core", () -> new Item(IS.of(16, Rarity.RARE)), InkColors.WHITE));
 
     // Music discs
-    public static final DeferredItem<Item> MUSIC_DISC_DISCOVERY = register(item(
-        "music_disc_discovery", () -> new Item(IS.of(1, Rarity.RARE)
-                                                 .jukeboxPlayable(PastelJukeboxSongs.DISCOVERY)), InkColors.GREEN
-    ));
-    public static final DeferredItem<Item> MUSIC_DISC_CREDITS = register(item(
-        "music_disc_credits", () -> new Item(IS.of(1, Rarity.RARE)
-                                               .jukeboxPlayable(PastelJukeboxSongs.CREDITS)), InkColors.GREEN
-    ));
-    public static final DeferredItem<Item> MUSIC_DISC_DIVINITY = register(item(
-        "music_disc_divinity", () -> new Item(IS.of(1, Rarity.RARE)
-                                                .jukeboxPlayable(PastelJukeboxSongs.DIVINITY)), InkColors.GREEN
-    ));
+    public static final DeferredItem<Item> MUSIC_DISC_DISCOVERY = register(
+        item(
+            "music_disc_discovery", () -> new Item(IS.of(1, Rarity.RARE)
+                                                     .jukeboxPlayable(PastelJukeboxSongs.DISCOVERY)), InkColors.GREEN
+        ));
+    public static final DeferredItem<Item> MUSIC_DISC_CREDITS = register(
+        item(
+            "music_disc_credits", () -> new Item(IS.of(1, Rarity.RARE)
+                                                   .jukeboxPlayable(PastelJukeboxSongs.CREDITS)), InkColors.GREEN
+        ));
+    public static final DeferredItem<Item> MUSIC_DISC_DIVINITY = register(
+        item(
+            "music_disc_divinity", () -> new Item(IS.of(1, Rarity.RARE)
+                                                    .jukeboxPlayable(PastelJukeboxSongs.DIVINITY)), InkColors.GREEN
+        ));
 
     // Item Frames
-    public static final DeferredItem<Item> PHANTOM_FRAME = register(item(
-        "phantom_frame", () -> new PhantomFrameItem(PastelEntityTypes.PHANTOM_FRAME.get(), IS.of()),
-        InkColors.YELLOW
-    ));
+    public static final DeferredItem<Item> PHANTOM_FRAME = register(
+        item(
+            "phantom_frame", () -> new PhantomFrameItem(PastelEntityTypes.PHANTOM_FRAME.get(), IS.of()),
+            InkColors.YELLOW
+        ));
     public static final DeferredItem<Item> GLOW_PHANTOM_FRAME = register(item(
         "glow_phantom_frame", () -> new PhantomGlowFrameItem(PastelEntityTypes.GLOW_PHANTOM_FRAME.get(), IS.of()),
         InkColors.YELLOW
@@ -1492,8 +1585,9 @@ public class PastelItems {
     // Specialty Magical Tools
     public static final DeferredItem<KnowledgeGemItem> KNOWLEDGE_GEM = register(
         item("knowledge_gem", () -> new KnowledgeGemItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE));
-    public static final DeferredItem<Item> CELESTIAL_POCKETWATCH = register(item(
-        "celestial_pocketwatch", () -> new CelestialPocketWatchItem(IS.of(1, Rarity.UNCOMMON)), InkColors.MAGENTA));
+    public static final DeferredItem<Item> CELESTIAL_POCKETWATCH = register(
+        item(
+            "celestial_pocketwatch", () -> new CelestialPocketWatchItem(IS.of(1, Rarity.UNCOMMON)), InkColors.MAGENTA));
     public static final DeferredItem<Item> ARTISANS_ATLAS = register(
         item("artisans_atlas", () -> new ArtisansAtlasItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW));
     public static final DeferredItem<Item> GILDED_BOOK = register(
@@ -1553,11 +1647,12 @@ public class PastelItems {
         () -> new AzureDikeCoreItem(IS.of(1, Rarity.EPIC), PastelAdvancements.Unlocks.Trinkets.AZURESQUE_DIKE_CORE),
         InkColors.WHITE
     ));
-    public static final DeferredItem<InkDrainTrinketItem> SHIELDGRASP_AMULET = register(
-        item(
-            "shieldgrasp_amulet", () -> new AzureDikeAmuletItem(
-                IS.of(1, Rarity.UNCOMMON), PastelAdvancements.Unlocks.Trinkets.SHIELDGRASP_AMULET), InkColors.BLUE
-        ));
+    public static final DeferredItem<InkDrainTrinketItem> SHIELDGRASP_AMULET = register(item(
+        "shieldgrasp_amulet", () -> new AzureDikeAmuletItem(
+            IS.of(1, Rarity.UNCOMMON),
+            PastelAdvancements.Unlocks.Trinkets.SHIELDGRASP_AMULET
+        ), InkColors.BLUE
+    ));
     public static final DeferredItem<InkDrainTrinketItem> HEARTSINGERS_REWARD = register(
         item("heartsingers_reward", () -> new ExtraHealthRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PINK));
     public static final DeferredItem<InkDrainTrinketItem> GLOVES_OF_DAWNS_GRASP = register(
@@ -1577,33 +1672,40 @@ public class PastelItems {
     // 64 stacks of pigments (1 pigment => 100 energy)
     public static final DeferredItem<InkAssortmentItem> INK_ASSORTMENT = register(
         item("ink_assortment", () -> new InkAssortmentItem(IS.of(1), 64 * 100), InkColors.WHITE));
-    public static final DeferredItem<PigmentPaletteItem> PIGMENT_PALETTE = register(item(
-        "pigment_palette", () -> new PigmentPaletteItem(IS.of(1, Rarity.UNCOMMON), 64 * 64 * 100), InkColors.WHITE));
-    public static final DeferredItem<ArtistsPaletteItem> ARTISTS_PALETTE = register(item(
-        "artists_palette", () -> new ArtistsPaletteItem(IS.of(1, Rarity.UNCOMMON), 64 * 64 * 64 * 64 * 100),
-        InkColors.WHITE
-    ));
+    public static final DeferredItem<PigmentPaletteItem> PIGMENT_PALETTE = register(
+        item(
+            "pigment_palette", () -> new PigmentPaletteItem(IS.of(1, Rarity.UNCOMMON), 64 * 64 * 100),
+            InkColors.WHITE
+        ));
+    public static final DeferredItem<ArtistsPaletteItem> ARTISTS_PALETTE = register(
+        item(
+            "artists_palette", () -> new ArtistsPaletteItem(IS.of(1, Rarity.UNCOMMON), 64 * 64 * 64 * 64 * 100),
+            InkColors.WHITE
+        ));
     public static final DeferredItem<CreativeInkAssortmentItem> CREATIVE_INK_ASSORTMENT = register(
         item("creative_ink_assortment", () -> new CreativeInkAssortmentItem(IS.of(1, Rarity.EPIC)), InkColors.WHITE));
 
     public static final DeferredItem<GleamingPinItem> GLEAMING_PIN = register(
         item("gleaming_pin", () -> new GleamingPinItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW));
     public static final DeferredItem<Item> LESSER_POTION_PENDANT = register(item(
-        "lesser_potion_pendant", () -> new PotionPendantItem(
+        "lesser_potion_pendant",
+        () -> new PotionPendantItem(
             IS.of(1, Rarity.UNCOMMON), 1, CONFIG.MaxLevelForEffectsInLesserPotionPendant - 1,
             PastelAdvancements.Unlocks.Trinkets.LESSER_POTION_PENDANT
         ), InkColors.PINK
     ));
     public static final DeferredItem<Item> GREATER_POTION_PENDANT = register(item(
-        "greater_potion_pendant", () -> new PotionPendantItem(
+        "greater_potion_pendant",
+        () -> new PotionPendantItem(
             IS.of(1, Rarity.UNCOMMON), 3, CONFIG.MaxLevelForEffectsInGreaterPotionPendant - 1,
             PastelAdvancements.Unlocks.Trinkets.GREATER_POTION_PENDANT
         ), InkColors.PINK
     ));
-    public static final DeferredItem<Item> ASHEN_CIRCLET = register(item(
-        "ashen_circlet", () -> new AshenCircletItem(IS.of(1, Rarity.UNCOMMON)
-                                                      .fireResistant()), InkColors.ORANGE
-    ));
+    public static final DeferredItem<Item> ASHEN_CIRCLET = register(
+        item(
+            "ashen_circlet", () -> new AshenCircletItem(IS.of(1, Rarity.UNCOMMON)
+                                                          .fireResistant()), InkColors.ORANGE
+        ));
     public static final DeferredItem<Item> WEEPING_CIRCLET = register(
         item("weeping_circlet", () -> new WeepingCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE));
     public static final DeferredItem<Item> PUFF_CIRCLET = register(item(
@@ -1620,7 +1722,9 @@ public class PastelItems {
 
     public static final DeferredItem<Item> AETHER_GRACED_NECTAR_GLOVES = register(item(
         "aether_graced_nectar_gloves", () -> new AetherGracedNectarGlovesItem(
-            IS.of(1, Rarity.EPIC), PastelAdvancements.Lategame.COLLECT_AETHER_GRACED_NECTAR_GLOVES), InkColors.PURPLE
+            IS.of(1, Rarity.EPIC),
+            PastelAdvancements.Lategame.COLLECT_AETHER_GRACED_NECTAR_GLOVES
+        ), InkColors.PURPLE
     ));
 
     // Pure Clusters
@@ -1646,10 +1750,11 @@ public class PastelItems {
         item("pure_glowstone", () -> new Item(IS.of()), InkColors.YELLOW));
     public static final DeferredItem<Item> PURE_PRISMARINE = register(
         item("pure_prismarine", () -> new Item(IS.of()), InkColors.CYAN));
-    public static final DeferredItem<Item> PURE_NETHERITE_SCRAP = register(item(
-        "pure_netherite_scrap", () -> new Item(IS.of()
-                                                 .fireResistant()), InkColors.BROWN
-    ));
+    public static final DeferredItem<Item> PURE_NETHERITE_SCRAP = register(
+        item(
+            "pure_netherite_scrap", () -> new Item(IS.of()
+                                                     .fireResistant()), InkColors.BROWN
+        ));
     public static final DeferredItem<Item> PURE_ECHO = register(
         item("pure_echo", () -> new Item(IS.of()), InkColors.BROWN));
 

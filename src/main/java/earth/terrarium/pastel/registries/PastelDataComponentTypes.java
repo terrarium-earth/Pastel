@@ -195,6 +195,11 @@ public class PastelDataComponentTypes {
                                           .networkSynchronized(SimpleFluidContent.STREAM_CODEC)
     );
 
+    public static final DataComponentType<Integer> CRYSTAL_ARMOR_EMPOWERED = register(
+        "crystal_armor_empowered", builder -> builder.persistent(Codec.INT)
+                                                     .networkSynchronized(ByteBufCodecs.INT)
+    );
+
     public static <T> DataComponentType<T> register(
         String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
         var type = builderOperator.apply(DataComponentType.builder())

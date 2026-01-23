@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "unlocked_liquid_crystal": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel/unlocks/blocks/liquid_crystal"
+      }
+    },
+    "built_pastel_temple": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:midgame/build_advanced_pedestal_structure"
+      }
+    }
+  }
+}

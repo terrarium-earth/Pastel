@@ -69,14 +69,18 @@ public class PastelAdvancements {
             public static final ResourceLocation MOLTEN_ROD = PastelCommon.locate("unlocks/equipment/molten_rod");
             public static final ResourceLocation DRACONIC_TWINSWORD = PastelCommon.locate(
                 "unlocks/equipment/draconic_twinsword");
-            public static final ResourceLocation GEMSTONE_ARMOR_CATEGORY = PastelCommon.locate(
-                "unlocks/equipment/gemstone_armor_category");
+            public static final ResourceLocation CRYSTAL_ARMOR_CATEGORY = PastelCommon.locate(
+                "unlocks/equipment/crystal_armor_category");
             public static final ResourceLocation SOOTHING_BOUQUET = PastelCommon.locate(
                 "unlocks/equipment/soothing_bouquet");
             public static final ResourceLocation ANY_PREENCHANTED_TOOL = PastelCommon.locate(
                 "unlocks/equipment/any_preenchanted_tool");
             public static final ResourceLocation OBLIVION_PICKAXE = PastelCommon.locate(
                 "unlocks/equipment/oblivion_pickaxe");
+            public static final ResourceLocation ONYX_HELMET = PastelCommon.locate("unlocks/equipment/onyx_helmet");
+            public static final ResourceLocation AMETHYST_CHESTPLATE = PastelCommon.locate("unlocks/equipment/amethyst_chestplate");
+            public static final ResourceLocation TOPAZ_LEGGINGS = PastelCommon.locate("unlocks/equipment/topaz_leggings");
+            public static final ResourceLocation CITRINE_BOOTS = PastelCommon.locate("unlocks/equipment/");
         }
 
         public static class Blocks {
@@ -1211,8 +1215,6 @@ public class PastelAdvancements {
         "grow_bloodstone_in_crystallarieum");
     public static final ResourceLocation FAIL_TO_TAKE_ITEM_OUT_OF_PEDESTAL = PastelCommon.locate(
         "fail_to_take_item_out_of_pedestal");
-    public static final ResourceLocation GET_HIT_WHILE_WEARING_FULL_SUIT_OF_GEMSTONE_ARMOR = PastelCommon.locate(
-        "get_hit_while_wearing_full_suit_of_gemstone_armor");
     public static final ResourceLocation SOLVE_COLOR_MIXING_PRESERVATION_RUIN = PastelCommon.locate(
         "solve_color_mixing_preservation_ruin");
     public static final ResourceLocation CREATE_ONYX_SHARD = PastelCommon.locate("create_onyx_shard");

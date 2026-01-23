@@ -1,28 +1,9 @@
 package earth.terrarium.pastel.data.models.item.tools;
 
-import com.cmdpro.databank.misc.ColorGradient;
-import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.data.PastelModelHelper;
-import earth.terrarium.pastel.items.armor.BedrockArmorItem;
-import earth.terrarium.pastel.items.armor.GemstoneArmorItem;
-import earth.terrarium.pastel.items.tools.*;
-import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.PastelArmorMaterials;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelToolMaterial;
 import earth.terrarium.pastel.registries.client.PastelModels;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.BundleContents;
-import net.minecraft.world.item.component.Unbreakable;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.neoforged.neoforge.registries.DeferredItem;
-
-import java.awt.*;
-import java.util.Map;
 
 public class WeaponArmorItemModels {
     public static void generateItemModels(ItemModelGenerators generators) {
@@ -46,9 +27,9 @@ public class WeaponArmorItemModels {
         PastelModelHelper.ITEM.simple(generators, PastelItems.BEDROCK_LEGGINGS);
         PastelModelHelper.ITEM.simple(generators, PastelItems.BEDROCK_BOOTS);
 
-        PastelModelHelper.ITEM.simple(generators, PastelItems.FETCHLING_HELMET);
-        PastelModelHelper.ITEM.simple(generators, PastelItems.FEROCIOUS_CHESTPLATE);
-        PastelModelHelper.ITEM.simple(generators, PastelItems.SYLPH_LEGGINGS);
-        PastelModelHelper.ITEM.simple(generators, PastelItems.OREAD_BOOTS);
+        PastelModelHelper.ITEM.simple(generators, PastelItems.ONYX_HELMET);
+        PastelModelHelper.ITEM.simple(generators, PastelItems.AMETHYST_CHESTPLATE);
+        PastelModelHelper.ITEM.simple(generators, PastelItems.TOPAZ_LEGGINGS);
+        PastelModelHelper.ITEM.simple(generators, PastelItems.CITRINE_BOOTS);
     }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "pastel:item/fetchling_helmet"
+    "layer0": "pastel:item/onyx_helmet"
   }
 }

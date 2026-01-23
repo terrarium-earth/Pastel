@@ -60,7 +60,20 @@ public class PastelItemLang {
             provider.addItem(item, prettifiedName);
         }
 
+        // EMI aliases
+        provider.add("item.pastel.crystal_armor.alias_0","Gemstone Armor");
+        provider.add("item.pastel.crystal_armor.alias_1","Crystal Armor");
+
+        provider.add("item.pastel.wire_hook.alias_0", "Hookshot");
+        provider.add("item.pastel.wire_hook.alias_1", "Grappling Hook");
+        provider.add("item.pastel.wire_hook.alias_2", "Grapple");
+
         // tooltips and such
+        provider.add("item.pastel.onyx_helmet.tooltip", "Unity");
+        provider.add("item.pastel.amethyst_chestplate.tooltip", "Time heals all wounds");
+        provider.add("item.pastel.topaz_leggings.tooltip", "Sturdy legs");
+        provider.add("item.pastel.citrine_boots.tooltip", "Put a spring in your step");
+
         provider.add("item.pastel.amethyst_cluster_banner_pattern.desc", "Amethyst Cluster");
         provider.add("item.pastel.amethyst_glass_arrow.tooltip", "-aggressive homing-");
         provider.add("item.pastel.amethyst_shard_banner_pattern.desc", "Amethyst Shard");
@@ -89,9 +102,6 @@ public class PastelItemLang {
         provider.add(
             "item.pastel.azuresque_dike_core.tooltip2", "§7Increases §9Azure Dike§7 charging and recovery speed");
         provider.add("item.pastel.azuresque_dike_core.tooltip3", "§7Doubles damage that cannot be absorbed");
-        provider.add("item.pastel.wire_hook.alias_0", "Hookshot");
-        provider.add("item.pastel.wire_hook.alias_1", "Grappling Hook");
-        provider.add("item.pastel.wire_hook.alias_2", "Grapple");
         provider.add("item.pastel.bedrock_fishing_rod.tooltip", "Able to fish even in the most aggressive of fluids");
         provider.add("item.pastel.bident.postToolTip.ap", " %d%% Armor Piercing");
         provider.add("item.pastel.bident.postToolTip.disable", "Right Click in inventory to toggle ability");
@@ -178,12 +188,10 @@ public class PastelItemLang {
             "item.pastel.everpromise_ribbon.tooltip2", "then use it on an animal to promise it never ending affection");
         provider.add("item.pastel.exchanging_staff.tooltip.range", "Exchanges blocks up to %s blocks around it");
         provider.add("item.pastel.exchanging_staff.tooltip.target", "Target: %s");
-        provider.add("item.pastel.ferocious_chestplate.tooltip", "Grants Absorption & Resistance when hit");
         provider.add("item.pastel.ferocious_glass_crest_bident.tooltip", "Does not require Water to §fRiptide§r");
         provider.add(
             "item.pastel.ferocious_glass_crest_bident.tooltip2", "Tap §fRiptide§r when §fRiptide§r to §fRiptide§r");
         provider.add("item.pastel.ferocious_glass_crest_bident.tooltip3", "Damages creatures around you while flying");
-        provider.add("item.pastel.fetchling_helmet.tooltip", "Gives the attacker Weakness & Slowness");
         provider.add("item.pastel.fissure_plum.tooltip", "§onutty and aromatic");
         provider.add("item.pastel.fractal_glass_crest_bident.tooltip", "Will not leave your hands when thrown");
         provider.add(
@@ -339,7 +347,6 @@ public class PastelItemLang {
         provider.add("item.pastel.nightdew_sprout.tooltip", "§oFragrant like tea");
         provider.add("item.pastel.nightfalls_blade.when_struck", "When Struck:");
         provider.add("item.pastel.onyx_glass_arrow.tooltip", "-gravity well-");
-        provider.add("item.pastel.oread_boots.tooltip", "Grants Speed & Invisibility when hit");
         provider.add("item.pastel.paintbrush.ability.block_coloring", "- Block Coloring");
         provider.add("item.pastel.paintbrush.ability.header", "Abilities:");
         provider.add("item.pastel.paintbrush.ability.ink_slinging", "- Ink Slinging");
@@ -415,7 +422,6 @@ public class PastelItemLang {
         provider.add("item.pastel.suspicious_brew.tooltip", "What might be mixed together here?");
         provider.add("item.pastel.suspicious_brew.tooltip.preview", "Exponentially longer duration the higher Alc. %");
         provider.add("item.pastel.suspicious_brew.tooltip.preview2", "Effects depend on the flowers used");
-        provider.add("item.pastel.sylph_leggings.tooltip", "Grants Regeneration when hit");
         provider.add("item.pastel.takeoff_belt.tooltip", "Crouch to charge a High-Jump");
         provider.add("item.pastel.tooltip.explosives.modifiers", "Use the Pigment Pedestal to add modifiers");
         provider.add("item.pastel.tooltip.explosives.remaining_slots", "Modifiers used: %d/%d");

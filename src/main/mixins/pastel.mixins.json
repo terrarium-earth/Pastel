@@ -71,6 +71,7 @@
     "ServerLevelMixin",
     "ServerPlayerEntityMixin",
     "ShearsDispenserBehaviorMixin",
+    "SlotMixin",
     "SpawnDensityCapperMixin",
     "StatusEffectUtilMixin",
     "TemptGoalMixin",
