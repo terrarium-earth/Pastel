@@ -499,6 +499,7 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.ONYX_GLASS_ARROW.get());
                                                                    entries.accept(
                                                                        PastelItems.MOONSTONE_GLASS_ARROW.get());
+                                                                   entries.accept(PastelItems.DARK_STAKE.get());
 
                                                                    // LEGENDARY WEAPONS
                                                                    entries.accept(PastelItems.DREAMFLAYER.get());

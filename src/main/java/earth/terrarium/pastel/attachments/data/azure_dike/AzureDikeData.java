@@ -3,6 +3,7 @@ package earth.terrarium.pastel.attachments.data.azure_dike;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.attachments.data.AttachmentUtil;
+import earth.terrarium.pastel.entity.entity.DarkStakeEntity;
 import earth.terrarium.pastel.progression.PastelCriteria;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -10,6 +11,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.attachment.IAttachmentCopyHandler;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -23,16 +25,16 @@ public class AzureDikeData implements DikeShieldData {
                                                                                          Codec.FLOAT.fieldOf("maxProt")
                                                                                                     .forGetter(AzureDikeData::getMaxProtection),
                                                                                          Codec.FLOAT.fieldOf(
-                                                                                             "currentProt")
+                                                                                                  "currentProt")
                                                                                                     .forGetter(AzureDikeData::getCurrentProtection),
                                                                                          Codec.INT.fieldOf(
-                                                                                             "rechargeTicks")
+                                                                                                  "rechargeTicks")
                                                                                                   .forGetter(AzureDikeData::getTicksPerPointOfRecharge),
                                                                                          Codec.INT.fieldOf(
-                                                                                             "rechargeDelayPostHit")
+                                                                                                  "rechargeDelayPostHit")
                                                                                                   .forGetter(AzureDikeData::getRechargeDelayTicksAfterGettingHit),
                                                                                          Codec.INT.fieldOf(
-                                                                                             "rechargeDelay")
+                                                                                                  "rechargeDelay")
                                                                                                   .forGetter(AzureDikeData::getCurrentRechargeDelay)
                                                                                      )
                                                                                      .apply(i, AzureDikeData::new));
@@ -100,14 +102,14 @@ public class AzureDikeData implements DikeShieldData {
     }
 
     @Override
-    public float absorbDamage(float incomingDamage) {
+    public float absorbDamage(float incomingDamage, boolean effective) {
         if (incomingDamage == 0)
             return 0;
-
+        int dikePenetration = effective?2:1;
         this.rechargeDelay = this.rechargeDelayPostTick;
         if (this.currentProt > 0) {
-            float absorbedDamage = Math.min(currentProt, incomingDamage);
-            this.currentProt -= absorbedDamage;
+            float absorbedDamage = Math.min(currentProt/dikePenetration, incomingDamage);
+            this.currentProt -= absorbedDamage*dikePenetration;
 
             return incomingDamage - absorbedDamage;
         } else {
@@ -132,15 +134,27 @@ public class AzureDikeData implements DikeShieldData {
     public void serverTick(LivingEntity provider) {
         if (this.rechargeDelay > 0) {
             this.rechargeDelay--;
-
         } else if (this.currentProt < this.maxProt) {
-            currentProt = Math.min(maxProt, currentProt + 1);
-            this.rechargeDelay = this.rechargeTicks;
+            // dark stakes slow dike regen nearby
+            if (provider.level()
+                        .getRandom()
+                        .nextBoolean() && !provider.level()
+                                                   .getEntitiesOfClass(
+                                                       DarkStakeEntity.class,
+                                                       AABB.ofSize(provider.position(), 10.0, 10.0, 10.0)
+                                                   )
+                                                   .isEmpty()) {
+                this.rechargeDelay = this.rechargeTicks;
+                sync(provider);
+            } else {
+                currentProt = Math.min(maxProt, currentProt + 1);
+                this.rechargeDelay = this.rechargeTicks;
 
-            sync(provider);
-            if (provider instanceof ServerPlayer serverPlayerEntity) {
-                PastelCriteria.AZURE_DIKE_CHARGE.trigger(
-                    serverPlayerEntity, this.currentProt, this.rechargeTicks, 1);
+                sync(provider);
+                if (provider instanceof ServerPlayer serverPlayerEntity) {
+                    PastelCriteria.AZURE_DIKE_CHARGE.trigger(
+                        serverPlayerEntity, this.currentProt, this.rechargeTicks, 1);
+                }
             }
         }
     }

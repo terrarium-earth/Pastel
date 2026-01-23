@@ -17,7 +17,7 @@ public interface DikeShieldData {
 
     int getRechargeDelayTicksAfterGettingHit();
 
-    float absorbDamage(float incomingDamage);
+    float absorbDamage(float incomingDamage, boolean effective);
 
     void set(float maxProtection, int rechargeDelayDefault, int fasterRechargeAfterDamageTicks, boolean resetCharge);
 }

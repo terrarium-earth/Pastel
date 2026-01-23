@@ -155,6 +155,8 @@ import java.util.function.Supplier;
 import static earth.terrarium.pastel.PastelCommon.CONFIG;
 import static earth.terrarium.pastel.PastelCommon.locate;
 import static net.minecraft.world.item.Items.*;
+import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_DAMAGE_ID;
+import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_SPEED_ID;
 
 //TODO: I am not sure how our tools are implemented rn but they REALLY should be migrated to working off of tool
 // components. ~ Azzyy (whom will not be the one doing this)
@@ -530,6 +532,26 @@ public class PastelItems {
         ), InkColors.WHITE
     ));
 
+    public static final DeferredItem<Item> DARK_STAKE = register(item(
+        "dark_stake", () -> new DarkStakeItem(IS.of(16,Rarity.UNCOMMON)
+                                                .attributes(ItemAttributeModifiers.builder()
+                                                                                  .add(
+                                                                                      Attributes.ATTACK_DAMAGE,
+                                                                                      new AttributeModifier(
+                                                                                          BASE_ATTACK_DAMAGE_ID, 4.0f,
+                                                                                          AttributeModifier.Operation.ADD_VALUE
+                                                                                      ), EquipmentSlotGroup.MAINHAND
+                                                                                  )
+                                                                                  .add(
+                                                                                      Attributes.ATTACK_SPEED,
+                                                                                      new AttributeModifier(
+                                                                                          BASE_ATTACK_SPEED_ID, -2.5f,
+                                                                                          AttributeModifier.Operation.ADD_VALUE
+                                                                                      ), EquipmentSlotGroup.MAINHAND
+                                                                                  )
+                                                                                  .build())), InkColors.BLACK
+    ));
+
     public static final DeferredItem<Item> OMNI_ACCELERATOR = register(item(
         "omni_accelerator", () -> new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON)
                                                             .component(
@@ -549,10 +571,12 @@ public class PastelItems {
             "nightfalls_blade", () -> new NightfallsBladeItem(Tiers.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)),
             InkColors.GRAY
         ));
-    public static final DeferredItem<DraconicTwinswordItem> DRACONIC_TWINSWORD = register(item(
-        "draconic_twinsword",
-        () -> new DraconicTwinswordItem(PastelToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)), InkColors.YELLOW
-    ));
+    public static final DeferredItem<DraconicTwinswordItem> DRACONIC_TWINSWORD = register(
+        item(
+            "draconic_twinsword",
+            () -> new DraconicTwinswordItem(PastelToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)),
+            InkColors.YELLOW
+        ));
     public static final DeferredItem<DragonTalonItem> DRAGON_TALON = register(item(
         "dragon_talon", () -> new DragonTalonItem(
             PastelToolMaterial.DRACONIC, -3.0, -1.0, IS.of(1, Rarity.RARE)
@@ -1194,10 +1218,12 @@ public class PastelItems {
                                                               .food(PastelFoodComponents.TRIPLE_MEAT_POT_STEW)),
         InkColors.PINK
     ));
-    public static final DeferredItem<Item> WYRMSCALE_JELLY = register(item(
-        "wyrmscale_jelly", () -> new StackableStewItem(IS.of(8)
-                                                         .food(PastelFoodComponents.WYRMSCALE_JELLY)), InkColors.GRAY
-    ));
+    public static final DeferredItem<Item> WYRMSCALE_JELLY = register(
+        item(
+            "wyrmscale_jelly", () -> new StackableStewItem(IS.of(8)
+                                                             .food(PastelFoodComponents.WYRMSCALE_JELLY)),
+            InkColors.GRAY
+        ));
     public static final DeferredItem<Item> DOOMBLOOM_SEED = register(item(
         "doombloom_seed", () -> new ItemNameBlockItem(
             PastelBlocks.DOOMBLOOM.get(), IS.of()
@@ -1464,17 +1490,22 @@ public class PastelItems {
         () -> new BannerPatternItem(PastelBannerPatternTags.POISONBLOOM_TAG, IS.of(1, Rarity.RARE)),
         InkColors.LIGHT_BLUE
     ));
-    public static final DeferredItem<Item> DEEP_LIGHT_BANNER_PATTERN = register(item(
-        "deep_light_banner_pattern",
-        () -> new BannerPatternItem(PastelBannerPatternTags.DEEP_LIGHT_TAG, IS.of(1, Rarity.RARE)), InkColors.LIGHT_BLUE
-    ));
+    public static final DeferredItem<Item> DEEP_LIGHT_BANNER_PATTERN = register(
+        item(
+            "deep_light_banner_pattern",
+            () -> new BannerPatternItem(PastelBannerPatternTags.DEEP_LIGHT_TAG, IS.of(1, Rarity.RARE)),
+            InkColors.LIGHT_BLUE
+        ));
 
     // Spawning items
-    public static final DeferredItem<Item> BUCKET_OF_ERASER = register(item(
-        "bucket_of_eraser",
-        () -> new EmptyFluidEntityBucketItem(
-            PastelEntityTypes.ERASER.get(), Fluids.EMPTY, SoundEvents.BUCKET_EMPTY, IS.of()), InkColors.PINK
-    ));
+    public static final DeferredItem<Item> BUCKET_OF_ERASER = register(
+        item(
+            "bucket_of_eraser",
+            () -> new EmptyFluidEntityBucketItem(
+                PastelEntityTypes.ERASER.get(), Fluids.EMPTY, SoundEvents.BUCKET_EMPTY,
+                IS.of()
+            ), InkColors.PINK
+        ));
     public static final DeferredItem<Item> EGG_LAYING_WOOLY_PIG_SPAWN_EGG = register(item(
         "egg_laying_wooly_pig_spawn_egg",
         () -> new SpawnEggItem(PastelEntityTypes.EGG_LAYING_WOOLY_PIG.get(), 0x3a2c38, 0xfff2e0, IS.of()),
@@ -1587,7 +1618,9 @@ public class PastelItems {
         item("knowledge_gem", () -> new KnowledgeGemItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE));
     public static final DeferredItem<Item> CELESTIAL_POCKETWATCH = register(
         item(
-            "celestial_pocketwatch", () -> new CelestialPocketWatchItem(IS.of(1, Rarity.UNCOMMON)), InkColors.MAGENTA));
+            "celestial_pocketwatch", () -> new CelestialPocketWatchItem(IS.of(1, Rarity.UNCOMMON)),
+            InkColors.MAGENTA
+        ));
     public static final DeferredItem<Item> ARTISANS_ATLAS = register(
         item("artisans_atlas", () -> new ArtisansAtlasItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW));
     public static final DeferredItem<Item> GILDED_BOOK = register(
@@ -1619,7 +1652,9 @@ public class PastelItems {
 
     public static final DeferredItem<Item> PRISCILLENT_SPECTACLES = register(
         item(
-            "priscillent_spectacles", () -> new PriscillentSpectaclesItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE));
+            "priscillent_spectacles", () -> new PriscillentSpectaclesItem(IS.of(1, Rarity.UNCOMMON)),
+            InkColors.WHITE
+        ));
     public static final DeferredItem<Item> JEOPARDANT = register(
         item("jeopardant", () -> new AttackRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.RED));
     public static final DeferredItem<SevenLeagueBootsItem> SEVEN_LEAGUE_BOOTS = register(

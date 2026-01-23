@@ -382,7 +382,7 @@ public abstract class LivingEntityMixin {
             return;
         }
         var container = this.damageContainers.peek();
-        var passedDamage = AzureDikeProvider.absorbDamage(instance, container.getNewDamage());
+        var passedDamage = AzureDikeProvider.absorbDamage(instance, container.getNewDamage(),source.is(PastelDamageTypeTags.DISRUPTS_WARDS));
         container.setNewDamage(passedDamage);
         instance.actuallyHurt(source, passedDamage);
     }

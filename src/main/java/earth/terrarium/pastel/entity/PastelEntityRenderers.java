@@ -41,6 +41,7 @@ public class PastelEntityRenderers {
         register(PastelEntityTypes.DRAGON_TALON.get(), (context) -> new BidentEntityRenderer(context, 1.5F, 0));
         register(PastelEntityTypes.DRACONIC_TWINSWORD.get(), (context) -> new BidentEntityRenderer(context, 2.15F, 0));
         register(PastelEntityTypes.ENDER_CANVAS.get(), EnderCanvasEntityRenderer::new);
+        register(PastelEntityTypes.DARK_STAKE.get(), ThrownItemRenderer::new);
     }
 
     private static <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> factory) {

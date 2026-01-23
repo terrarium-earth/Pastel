@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "warded=false": {
       "model": "pastel:block/azurite_ore"
+    },
+    "warded=true": {
+      "model": "pastel:block/azurite_ore_warded"
     }
   }
 }

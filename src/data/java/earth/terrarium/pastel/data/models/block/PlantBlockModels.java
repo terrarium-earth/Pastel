@@ -100,14 +100,6 @@ public class PlantBlockModels {
         registerTallDragonjagBlock(generators, PastelBlocks.TALL_PURPLE_DRAGONJAG);
         registerTallDragonjagBlock(generators, PastelBlocks.TALL_BLACK_DRAGONJAG);
 
-
-
-
-
-
-
-
-
         //Flora
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.ALOE.get())
                                                                 .with(PropertyDispatch.property(

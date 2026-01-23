@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "collected_raw_azurite": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:midgame/collect_azurite"
+      }
+    },
+    "collected_midnight_chip": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:collect_midnight_chip"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:midgame/create_midnight_abberation"
+      }
+    }
+  }
+}

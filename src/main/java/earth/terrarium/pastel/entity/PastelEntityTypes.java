@@ -41,6 +41,10 @@ public class PastelEntityTypes {
         "wire_hook", 8, 10, true, EntityDimensions.scalable(0.25F, 0.25F), true,
         WireHookEntity::new
     );
+    public static final DeferredHolder<EntityType<?>, EntityType<DarkStakeEntity>> DARK_STAKE = register(
+        "dark_stake", 4, 20, true, EntityDimensions.scalable(
+            0.5f, 0.5f), false, DarkStakeEntity::new
+    );
     public static final DeferredHolder<EntityType<?>, EntityType<InkProjectileEntity>> INK_PROJECTILE = register(
         "ink_projectile", 4, 10, true, EntityDimensions.scalable(0.3F, 0.3F), true, InkProjectileEntity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<LagoonFishingBobberEntity>> LAGOON_FISHING_BOBBER
@@ -173,8 +177,10 @@ public class PastelEntityTypes {
         = register(
         "draconic_twinsword", 6, 2, true, EntityDimensions.scalable(0.5F, 0.5F), true, DraconicTwinswordEntity::new);
 
-    public static final DeferredHolder<EntityType<?>,EntityType<EnderCanvasEntity>> ENDER_CANVAS = register(
-        "ender_canvas",EntityType.Builder.of(EnderCanvasEntity::new,MobCategory.MISC).clientTrackingRange(10).updateInterval(Integer.MAX_VALUE)
+    public static final DeferredHolder<EntityType<?>, EntityType<EnderCanvasEntity>> ENDER_CANVAS = register(
+        "ender_canvas", EntityType.Builder.of(EnderCanvasEntity::new, MobCategory.MISC)
+                                          .clientTrackingRange(10)
+                                          .updateInterval(Integer.MAX_VALUE)
     );
 
     public static void registerAttributes(EntityAttributeCreationEvent event) {
@@ -200,7 +206,8 @@ public class PastelEntityTypes {
         );
         event.put(
             LIVING_MARKER.get(), LivingMarkerEntity.createLivingAttributes()
-                                                        .build());
+                                                   .build()
+        );
     }
 
     public static void register(IEventBus pastelBus) {

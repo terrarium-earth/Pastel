@@ -44,11 +44,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -69,6 +65,22 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenItemPickup);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::listenEntityAdded);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::itemTossHandler);
+        NeoForge.EVENT_BUS.addListener(PastelEntityEvents::livingDrops);
+    }
+
+    private static void livingDrops(LivingDropsEvent event) {
+        if (event.getSource()
+                 .is(PastelDamageTypes.DARK_STAKE)) {
+            var entity = event.getEntity();
+            var pos = entity.position();
+            var level = entity.level();
+            event.getDrops()
+                 .add(new ItemEntity(
+                     entity.level(), pos.x(), pos.y(), pos.z(), PastelItems.MIDNIGHT_CHIP.toStack(level.getRandom()
+                                                                                                       .nextIntBetweenInclusive(
+                                                                                                           1, 4))
+                 ));
+        }
     }
 
     private static void itemTossHandler(ItemTossEvent event) {

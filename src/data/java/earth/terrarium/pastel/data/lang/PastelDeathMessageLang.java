@@ -68,6 +68,9 @@ public class PastelDeathMessageLang {
             "death.attack.pastel_sleep.player",
             "%2$s sent %1$s on, unto the bottomless sea, accepting of all that is and could be."
         );
+        provider.add("death.attack.pastel_dark_stake", "%1$s was unable to ward off death.");
+        provider.add("death.attack.pastel_dark_stake.item", "%2$s used %3$s to disrupt %1$s's hold on life.");
+        provider.add("death.attack.pastel_dark_stake.player", "%1$s thought they could escape %2$s's knives.");
         provider.add("death.attack.pastel_snapping_ivy", "%1$s was held back a bit");
     }
 }

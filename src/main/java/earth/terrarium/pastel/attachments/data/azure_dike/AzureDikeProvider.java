@@ -17,8 +17,12 @@ public class AzureDikeProvider {
      * @return All damage that could not be protected from
      */
     public static float absorbDamage(LivingEntity provider, float incomingDamage) {
+        return absorbDamage(provider, incomingDamage, false);
+    }
+
+    public static float absorbDamage(LivingEntity provider, float incomingDamage, boolean effective) {
         var azureDike = provider.getData(AzureDikeData.ATTACHMENT);
-        var passedDamage = azureDike.absorbDamage(incomingDamage);
+        var passedDamage = azureDike.absorbDamage(incomingDamage, effective);
 
         if (incomingDamage - passedDamage > 0.0001F) {
             AttachmentUtil.syncToTracking(
