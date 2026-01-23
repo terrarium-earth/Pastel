@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:gray_dye",
+    "original": "pastel:dragonbone_chunk"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:break_cracked_dragonbone"
+  }
+}

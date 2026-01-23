@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "pastel:block/weeping_gala_barrel_bottom",
+    "side": "pastel:block/weeping_gala_barrel_side",
+    "top": "pastel:block/weeping_gala_barrel_top"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "pastel:block/preservation_stone",
+    "side": "pastel:block/preservation_stone",
+    "top": "pastel:block/preservation_stone"
+  }
+}

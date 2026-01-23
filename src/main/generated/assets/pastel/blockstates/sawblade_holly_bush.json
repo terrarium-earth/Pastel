@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "pastel:block/sawblade_holly_bush_stage0"
+    },
+    "age=1": {
+      "model": "pastel:block/sawblade_holly_bush_stage1"
+    },
+    "age=2": {
+      "model": "pastel:block/sawblade_holly_bush_stage1"
+    },
+    "age=3": {
+      "model": "pastel:block/sawblade_holly_bush_stage2"
+    },
+    "age=4": {
+      "model": "pastel:block/sawblade_holly_bush_stage2"
+    },
+    "age=5": {
+      "model": "pastel:block/sawblade_holly_bush_stage2"
+    },
+    "age=6": {
+      "model": "pastel:block/sawblade_holly_bush_stage2"
+    },
+    "age=7": {
+      "model": "pastel:block/sawblade_holly_bush_stage3"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": {
+    "type": "databank:block",
+    "drop_original_loot_condition": {
+      "type": "databank:actual_player"
+    },
+    "hidden_as": "minecraft:oak_log",
+    "original": "pastel:light_blue_log"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_colored_trees_cmy"
+  }
+}

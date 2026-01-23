@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pastel:block/pink_chiseled_preservation_stone_top",
+    "side": "pastel:block/pink_chiseled_preservation_stone"
+  }
+}

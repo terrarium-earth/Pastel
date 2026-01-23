@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "dead=false": {
+      "model": "pastel:block/jade_vine_roots"
+    },
+    "dead=true": {
+      "model": "pastel:block/jade_vine_roots_dead"
+    }
+  }
+}

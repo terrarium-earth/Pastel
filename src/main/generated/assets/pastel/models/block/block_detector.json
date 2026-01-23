@@ -1,0 +1,11 @@
+{
+  "parent": "pastel:templates/complex_orientable",
+  "textures": {
+    "back": "pastel:block/block_detector_back",
+    "bottom": "pastel:block/notched_polished_basalt_top",
+    "front": "pastel:block/block_detector_front",
+    "particle": "pastel:block/block_detector_side",
+    "side": "pastel:block/block_detector_side",
+    "top": "pastel:block/block_detector_top"
+  }
+}

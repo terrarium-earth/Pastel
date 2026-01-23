@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "pastel:block/aloe0"
+    },
+    "age=1": {
+      "model": "pastel:block/aloe1"
+    },
+    "age=2": {
+      "model": "pastel:block/aloe2"
+    },
+    "age=3": {
+      "model": "pastel:block/aloe3"
+    },
+    "age=4": {
+      "model": "pastel:block/aloe4"
+    }
+  }
+}

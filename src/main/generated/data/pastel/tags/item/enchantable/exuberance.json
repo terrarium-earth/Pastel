@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#minecraft:enchantable/weapon",
+    "#minecraft:enchantable/mining_loot",
+    "#pastel:fishing_rods",
+    {
+      "id": "#malum:scythe",
+      "required": false
+    }
+  ]
+}

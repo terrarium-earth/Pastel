@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "pastel:block/tinted_preservation_glass"
+  }
+}

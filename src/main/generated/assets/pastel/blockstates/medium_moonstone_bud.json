@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "pastel:block/medium_moonstone_bud",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "pastel:block/medium_moonstone_bud",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "pastel:block/medium_moonstone_bud",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "pastel:block/medium_moonstone_bud",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "pastel:block/medium_moonstone_bud"
+    },
+    "facing=west": {
+      "model": "pastel:block/medium_moonstone_bud",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

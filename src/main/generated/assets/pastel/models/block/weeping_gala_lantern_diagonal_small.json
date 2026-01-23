@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/base_trans_lantern_diagonal_small",
+  "textures": {
+    "case": "pastel:block/weeping_gala_lantern_case_on",
+    "glass": "pastel:block/weeping_gala_lantern_glass_on"
+  }
+}

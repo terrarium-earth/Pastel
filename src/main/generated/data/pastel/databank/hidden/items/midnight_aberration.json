@@ -1,0 +1,14 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "pastel:spectral_shard",
+    "name_override": {
+      "translate": "item.pastel.midnight_aberration.cloaked"
+    },
+    "original": "pastel:midnight_aberration"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:midgame/create_midnight_aberration"
+  }
+}

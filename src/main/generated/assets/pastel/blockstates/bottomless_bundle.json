@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "locked=false": {
+      "model": "pastel:block/bottomless_bundle_unlocked"
+    },
+    "locked=true": {
+      "model": "pastel:block/bottomless_bundle_locked"
+    }
+  }
+}

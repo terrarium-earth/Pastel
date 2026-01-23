@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "inverted=false": {
+      "model": "pastel:block/creature_detector"
+    },
+    "inverted=true": {
+      "model": "pastel:block/creature_detector_inverted"
+    }
+  }
+}

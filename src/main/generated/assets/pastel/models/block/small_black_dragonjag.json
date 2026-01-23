@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates/double_cross",
+  "textures": {
+    "cross": "pastel:block/small_black_dragonjag"
+  }
+}

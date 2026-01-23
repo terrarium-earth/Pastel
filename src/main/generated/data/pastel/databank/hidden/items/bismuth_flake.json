@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:cyan_dye",
+    "original": "pastel:bismuth_flake"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:midgame/enter_dimension"
+  }
+}

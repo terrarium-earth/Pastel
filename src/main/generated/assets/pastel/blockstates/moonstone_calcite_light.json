@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "pastel:block/moonstone_calcite_light",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "pastel:block/moonstone_calcite_light"
+    },
+    "axis=z": {
+      "model": "pastel:block/moonstone_calcite_light",
+      "x": 90
+    }
+  }
+}

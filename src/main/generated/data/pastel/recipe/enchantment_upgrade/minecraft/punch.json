@@ -1,0 +1,36 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:punch"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:red_pigment"
+  },
+  "enchantment": "minecraft:punch",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      8,
+      32,
+      128,
+      256
+    ]
+  },
+  "level_cap": 5,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_projectile",
+  "xp_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      200,
+      1600,
+      3200,
+      6400
+    ]
+  }
+}

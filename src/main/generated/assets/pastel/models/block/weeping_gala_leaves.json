@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "pastel:block/weeping_gala_leaves"
+  }
+}

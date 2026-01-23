@@ -1,0 +1,15 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "pastel:block/ivory_noxshroom_type_1"
+      },
+      {
+        "model": "pastel:block/ivory_noxshroom_type_2"
+      },
+      {
+        "model": "pastel:block/ivory_noxshroom_type_3"
+      }
+    ]
+  }
+}

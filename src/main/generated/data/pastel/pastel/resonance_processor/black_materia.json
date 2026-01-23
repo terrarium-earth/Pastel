@@ -1,0 +1,6 @@
+{
+  "type": "pastel:drop_self",
+  "block": {
+    "blocks": "pastel:black_materia"
+  }
+}

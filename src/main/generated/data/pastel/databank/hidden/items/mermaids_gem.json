@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:kelp",
+    "original": "pastel:mermaids_gem"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:place_pedestal"
+  }
+}

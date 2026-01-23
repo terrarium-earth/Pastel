@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "pastel:block/exposed_shale_clay_tiles",
+    "side": "pastel:block/exposed_shale_clay_tiles",
+    "top": "pastel:block/exposed_shale_clay_tiles"
+  }
+}

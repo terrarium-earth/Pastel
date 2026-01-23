@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "pastel:block/pink_lamp"
+    },
+    "lit=true": {
+      "model": "pastel:block/pink_lamp_on"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "pastel:block/weathered_shale_clay_tiles"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/slab_detector",
+  "textures": {
+    "side": "pastel:block/weather_detector_side",
+    "top": "pastel:block/weather_detector_top"
+  }
+}

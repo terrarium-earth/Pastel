@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#pastel:dragonbone_fossils_generating_in",
+  "features": "pastel:dragon_fossil_overworld_exposed",
+  "step": "vegetal_decoration"
+}

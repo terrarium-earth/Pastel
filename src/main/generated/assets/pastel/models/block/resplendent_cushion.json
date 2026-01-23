@@ -1,0 +1,8 @@
+{
+  "parent": "pastel:templates/cushion",
+  "textures": {
+    "bottom": "pastel:block/resplendent_cushion_bottom",
+    "side": "pastel:block/resplendent_cushion_side",
+    "top": "pastel:block/resplendent_cushion_top"
+  }
+}
