@@ -1,0 +1,61 @@
+{
+  "name": "item.pastel.dark_stake",
+  "icon": {
+    "item": "pastel:dark_stake"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/dark_stakes"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/azurite"
+    },
+    {
+      "entry": "pastel:general/midnight_chip"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 16,
+  "y": -3,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:dark_stake"
+      },
+      "text": "book.pastel.guidebook.dark_stakes.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.dark_stakes.page1.text",
+      "title": "book.pastel.guidebook.dark_stakes.page1.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/trinkets/any_azure_dike_equipment"
+      }
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.dark_stakes.page2.text",
+      "recipe_id": "pastel:pedestal/tier3/dark_stakes"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "book.pastel.guidebook.dark_stakes.page3.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/use_dark_stake_on_dike_gate"
+      },
+      "images": [
+        "pastel:textures/gui/guidebook/preservation_ruin_dike_gate.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.dark_stakes.page3.text"
+    }
+  ]
+}

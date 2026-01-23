@@ -2,6 +2,7 @@ package earth.terrarium.pastel.attachments.data.azure_dike;
 
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 
 public interface DikeShieldData {
 
@@ -17,7 +18,7 @@ public interface DikeShieldData {
 
     int getRechargeDelayTicksAfterGettingHit();
 
-    float absorbDamage(float incomingDamage);
+    float absorbDamage(float incomingDamage, boolean effective);
 
     void set(float maxProtection, int rechargeDelayDefault, int fasterRechargeAfterDamageTicks, boolean resetCharge);
 }

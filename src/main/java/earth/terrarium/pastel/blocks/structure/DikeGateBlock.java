@@ -2,8 +2,11 @@ package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
+import earth.terrarium.pastel.blocks.WardDisruptableBlock;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.Util;
@@ -29,7 +32,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Iterator;
 
-public class DikeGateBlock extends TransparentBlock {
+public class DikeGateBlock extends TransparentBlock implements WardDisruptableBlock {
 
     public static final MapCodec<DikeGateBlock> CODEC = simpleCodec(DikeGateBlock::new);
 
@@ -73,7 +76,9 @@ public class DikeGateBlock extends TransparentBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state, Level world, BlockPos pos, Player player,
+        BlockHitResult hit
+    ) {
         punishEntityWithoutAzureDike(world, pos, player, false);
         return super.useWithoutItem(state, world, pos, player, hit);
     }
@@ -108,6 +113,30 @@ public class DikeGateBlock extends TransparentBlock {
                 );
             }
         }
+    }
+
+    public void onWardDisrupt(BlockPos pos, BlockState state, Level level, Entity trigger) {
+        var random = level.getRandom();
+        for (int i = 0; i < 4; i++) {
+            level.addParticle(
+                PastelParticleTypes.AZURE_DIKE_RUNES, trigger.position()
+                                                             .x(), trigger.position()
+                                                                          .y(), trigger.position()
+                                                                                       .z(), random.nextDouble()*(random.nextBoolean()?-1:1),
+                random.nextDouble()*(random.nextBoolean()?-1:1), random.nextDouble()*(random.nextBoolean()?-1:1)
+            );
+        }
+        if (level.isClientSide() || !(level instanceof ServerLevel serverLevel)) return;
+        var advancement = serverLevel.getServer()
+                                     .getAdvancements()
+                                     .get(PastelAdvancements.Midgame.USE_DARK_STAKE_ON_DIKE_GATE);
+        if (advancement == null) return;
+        Support.areaCriterion(
+            serverLevel, 16, pos, PastelAdvancements.Unlocks.Equipment.DARK_STAKES, (player) -> {
+                player.getAdvancements()
+                      .award(advancement, "vampirephobia");
+            }
+        );
     }
 
     public void punishEntityWithoutAzureDike(BlockGetter world, BlockPos pos, Entity entity, boolean decreasedSounds) {

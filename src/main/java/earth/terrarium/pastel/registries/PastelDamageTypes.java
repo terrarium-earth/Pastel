@@ -20,6 +20,9 @@ public class PastelDamageTypes {
 
     public static final ResourceKey<DamageType> BRISTLE_SPROUTS = ResourceKey.create(
         Registries.DAMAGE_TYPE, locate("bristle_sprouts"));
+    public static final ResourceKey<DamageType> DARK_STAKE = ResourceKey.create(
+        Registries.DAMAGE_TYPE, locate("dark_stake")
+    );
     public static final ResourceKey<DamageType> DEADLY_POISON = ResourceKey.create(
         Registries.DAMAGE_TYPE, locate("deadly_poison"));
     public static final ResourceKey<DamageType> DECAY = ResourceKey.create(Registries.DAMAGE_TYPE, locate("decay"));
@@ -119,6 +122,10 @@ public class PastelDamageTypes {
 
     public static DamageSource midnightSolution(Level world) {
         return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(MIDNIGHT_SOLUTION));
+    }
+
+    public static DamageSource darkStake(Level world){
+        return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(DARK_STAKE));
     }
 
     public static DamageSource decay(Level world) {

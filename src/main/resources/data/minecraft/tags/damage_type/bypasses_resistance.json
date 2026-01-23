@@ -2,6 +2,7 @@
   "values": [
     "pastel:irradiance",
     "pastel:set_health",
-    "pastel:evisceration"
+    "pastel:evisceration",
+    "pastel:dark_stake"
   ]
 }

@@ -902,7 +902,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.cinderhearth.page6.text",
             "It's also hot enough to soften up stone, allowing me to fuse slabs into full blocks! I never was good at" +
-                " the whole \"measure twice, cut once\" thing."
+            " the whole \"measure twice, cut once\" thing."
         );
         provider.add(
             "book.pastel.guidebook.cinderhearth.page2.text", "Upgrades must be placed on the two Chiseled Blocks.");
@@ -3693,13 +3693,38 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.midnight_chip.page0.text",
             "Creatures that die in Midnight Solution drop a small splinter almost resembling [Midnight Aberration]" +
             "(entry://general/midnight_aberration), only much, much smaller, sharp-edged, and vicious" +
-            ".\\\n\\\nCreatures unalived by this gruesome process also seem to [#](449900)drop items as if they " +
+            ".\\\n\\\nCreatures killed by this gruesome process also seem to [#](449900)drop items as if they " +
             "were killed by a player[#]()."
         );
         provider.add(
             "book.pastel.guidebook.midnight_chip.page1.text",
             "The very drop I get from killing creatures with this feisty liquid enables me to make even more of it. " +
             "Quite morbid, when I think about it."
+        );
+        provider.add(
+            "book.pastel.guidebook.dark_stakes.page0.text",
+            "That cave full of brilliant blue Azurite will deny me no more. With the magic-stripping properties of " +
+            "Midnight Solution, I have created the Dark Stake. Driving one into a wall or the floor activates it, " +
+            "disrupting wards in the area—including the one guarding all that Azurite. In addition, while it's hardly" +
+            " the sturdiest of weapons, it does fly through the air quite nicely, and if I kill something with it, " +
+            "more Midnight Chips seem to form. How convenient."
+        );
+        provider.add("book.pastel.guidebook.dark_stakes.page1.title", "Combat Effects");
+        provider.add(
+            "book.pastel.guidebook.dark_stakes.page1.text",
+            "My Azure Dike is dreadfully weak to these, it would seem. A direct hit from one does far more damage to " +
+            "the shield than a mundane strike would, and simply being near one that's active hampers the ward's " +
+            "ability to repair itself. I suppose I will have to console myself with the fact that no *other* form of " +
+            "protection seems effective, either—the Stakes seem able to bypass everything from Resistance potions to" +
+            " the Protection enchantment, and hitting a shield with one will render it unusable for a time."
+        );
+        provider.add(
+            "book.pastel.guidebook.dark_stakes.page2.text", "*It sure is beautiful, isn't it? ...This black shard.*");
+        provider.add("book.pastel.guidebook.dark_stakes.page3.title", "Denied once more?");
+        provider.add(
+            "book.pastel.guidebook.dark_stakes.page3.text",
+            "As much as it pains me to admit, whoever built these wards is far better at it than I am. My Dark Stakes" +
+            " don't even leave a scratch! I'll have to find another way."
         );
         provider.add(
             "book.pastel.guidebook.midnight_solution.page0.text",

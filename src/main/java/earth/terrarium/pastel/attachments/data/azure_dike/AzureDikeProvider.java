@@ -17,9 +17,12 @@ public class AzureDikeProvider {
      * @return All damage that could not be protected from
      */
     public static float absorbDamage(LivingEntity provider, float incomingDamage) {
-        var azureDike = provider.getData(AzureDikeData.ATTACHMENT);
-        var passedDamage = azureDike.absorbDamage(incomingDamage);
+        return absorbDamage(provider, incomingDamage, incomingDamage, false);
+    }
 
+    public static float absorbDamage(LivingEntity provider, float rawDamage, float incomingDamage, boolean effective) {
+        var azureDike = provider.getData(AzureDikeData.ATTACHMENT);
+        var passedDamage = azureDike.absorbDamage(incomingDamage, effective);
         if (incomingDamage - passedDamage > 0.0001F) {
             AttachmentUtil.syncToTracking(
                 new AzureDikeData.Payload(provider.getId(), azureDike), provider.level(), provider.blockPosition());
@@ -28,6 +31,9 @@ public class AzureDikeProvider {
                     player, azureDike.getCurrentProtection(), azureDike.getTicksPerPointOfRecharge(),
                     -(incomingDamage - passedDamage)
                 );
+        } else {
+            // dike didn't do anything, so undo the armor calculation so it doesn't apply twice
+            passedDamage = rawDamage;
         }
 
         if (PastelTrinketItem.hasEquipped(provider, PastelItems.AZURESQUE_DIKE_CORE.get()))

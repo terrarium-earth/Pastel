@@ -1,0 +1,7 @@
+{
+  "criteria": {
+    "rejected": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

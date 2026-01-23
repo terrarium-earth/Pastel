@@ -9,6 +9,7 @@ public class PastelDamageTypeTags {
 
     public static final TagKey<DamageType> DROPS_LOOT_LIKE_PLAYERS = of("drops_loot_like_players");
     public static final TagKey<DamageType> UNBLOCKABLE = of("unblockable");
+    public static final TagKey<DamageType> DISRUPTS_WARDS = of("disrupts_wards");
     public static final TagKey<DamageType> BYPASSES_DIKE = of("bypasses_dike");
     public static final TagKey<DamageType> BYPASSES_PARRYING = of("bypasses_parrying");
     public static final TagKey<DamageType> INCREASED_ARMOR_DAMAGE = of("increased_armor_damage");

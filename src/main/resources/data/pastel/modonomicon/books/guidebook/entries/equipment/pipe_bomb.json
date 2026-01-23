@@ -23,7 +23,7 @@
     {
       "type": "pastel:pedestal_crafting",
       "text": "book.pastel.guidebook.pipe_bomb.page1.text",
-      "recipe_id": "pastel:pedestal/tier3/boom/pipe_bomb"
+      "recipe_id": "pastel:pedestal/tier3/pipe_bomb"
     }
   ]
 }
