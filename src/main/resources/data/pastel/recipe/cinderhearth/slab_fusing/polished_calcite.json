@@ -1,0 +1,15 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "pastel:polished_calcite_slab",
+    "count": 2
+  },
+  "results": [
+    {
+      "id": "pastel:polished_calcite",
+      "count": 1
+    }
+  ],
+  "experience": 0.1,
+  "time": 100
+}

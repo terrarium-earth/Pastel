@@ -1,0 +1,15 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "minecraft:blackstone_slab",
+    "count": 2
+  },
+  "results": [
+    {
+      "id": "minecraft:blackstone",
+      "count": 1
+    }
+  ],
+  "experience": 0.1,
+  "time": 100
+}

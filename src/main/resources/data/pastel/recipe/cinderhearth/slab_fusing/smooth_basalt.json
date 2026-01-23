@@ -1,0 +1,15 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "pastel:smooth_basalt_slab",
+    "count": 2
+  },
+  "results": [
+    {
+      "id": "minecraft:smooth_basalt",
+      "count": 1
+    }
+  ],
+  "experience": 0.1,
+  "time": 100
+}

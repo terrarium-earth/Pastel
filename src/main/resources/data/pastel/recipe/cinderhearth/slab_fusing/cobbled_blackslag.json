@@ -1,0 +1,16 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "pastel:cobbled_blackslag_slab",
+    "count": 2
+  },
+  "results": [
+    {
+      "id": "pastel:cobbled_blackslag",
+      "count": 1
+    }
+  ],
+  "experience": 0.1,
+  "time": 100,
+  "required_advancement": "pastel:midgame/enter_dimension"
+}

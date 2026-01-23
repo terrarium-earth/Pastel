@@ -1,0 +1,15 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "minecraft:deepslate_brick_slab",
+    "count": 2
+  },
+  "results": [
+    {
+      "id": "minecraft:deepslate_bricks",
+      "count": 1
+    }
+  ],
+  "experience": 0.1,
+  "time": 100
+}

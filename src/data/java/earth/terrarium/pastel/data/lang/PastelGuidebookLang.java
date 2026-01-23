@@ -898,6 +898,12 @@ public class PastelGuidebookLang {
             "Putting in a [Knowledge Gem](entry://enchanting/knowledge_gem) will funnel experience gained from " +
             "smelting XP into it."
         );
+        provider.add("book.pastel.guidebook.cinderhearth.page6.title", "Slab Fusing");
+        provider.add(
+            "book.pastel.guidebook.cinderhearth.page6.text",
+            "It's also hot enough to soften up stone, allowing me to fuse slabs into full blocks! I never was good at" +
+                " the whole \"measure twice, cut once\" thing."
+        );
         provider.add(
             "book.pastel.guidebook.cinderhearth.page2.text", "Upgrades must be placed on the two Chiseled Blocks.");
         provider.add(
@@ -4610,14 +4616,8 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.natures_staff.page2.text",
             "Decreases the chance of [Vegetal](entry://general/vegetal) getting consumed."
         );
-        provider.add(
-            "book.pastel.guidebook.natures_staff.page3.text",
-            "Increases yields from harvested crops."
-        );
-        provider.add(
-            "book.pastel.guidebook.natures_staff.page4.text",
-            "Allows safe harvesting of delicate crops."
-        );
+        provider.add("book.pastel.guidebook.natures_staff.page3.text", "Increases yields from harvested crops.");
+        provider.add("book.pastel.guidebook.natures_staff.page4.text", "Allows safe harvesting of delicate crops.");
         provider.add("book.pastel.guidebook.neat_ring.page0.text", "*I just think it's neat.*");
         provider.add("book.pastel.guidebook.nectardew_burgeon.name", "Nectardew Burgeons");
         provider.add(

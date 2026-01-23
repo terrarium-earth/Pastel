@@ -1,0 +1,15 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "minecraft:andesite_slab",
+    "count": 2
+  },
+  "results": [
+    {
+      "id": "minecraft:andesite",
+      "count": 1
+    }
+  ],
+  "experience": 0.1,
+  "time": 100
+}
