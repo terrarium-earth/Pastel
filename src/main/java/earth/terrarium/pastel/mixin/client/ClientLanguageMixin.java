@@ -29,7 +29,7 @@ public class ClientLanguageMixin {
     @Inject(method = "Lnet/minecraft/client/resources/language/ClientLanguage;<init>(Ljava/util/Map;ZLjava/util/Map;)V", at = @At("TAIL"))
     private void addTranslations(Map<String,String> translations, boolean rightToLeft, Map<String, Component> componentStorage, CallbackInfo ci) {
         Calendar calendar = Calendar.getInstance();
-//        if (calendar.get(Calendar.MONTH) != Calendar.APRIL || calendar.get(Calendar.DAY_OF_MONTH) != 1) return;
+        if (calendar.get(Calendar.MONTH) != Calendar.APRIL || calendar.get(Calendar.DAY_OF_MONTH) != 1) return;
 
         Map<String, String> builder = new HashMap<>(translations);
         builder.put("block.pastel.crystallarieum", getCrystallarieuaeuieueum());
