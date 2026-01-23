@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "pastel:block/bristle_sprouts_1"
+      },
+      {
+        "model": "pastel:block/bristle_sprouts_2"
+      },
+      {
+        "model": "pastel:block/bristle_sprouts_3"
+      },
+      {
+        "model": "pastel:block/bristle_sprouts_4"
+      }
+    ]
+  }
+}

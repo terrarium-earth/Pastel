@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates/noxwood_lamp_hanging_small",
+  "textures": {
+    "all": "pastel:block/slate_noxwood_lantern"
+  }
+}

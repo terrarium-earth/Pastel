@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "pastel:block/chestnut_noxwood_lamp_off"
+    },
+    "lit=true": {
+      "model": "pastel:block/chestnut_noxwood_lamp_on"
+    }
+  }
+}

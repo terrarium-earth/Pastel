@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "pastel:block/overgrown_blackslag"
+      },
+      {
+        "model": "pastel:block/overgrown_blackslag",
+        "y": 90
+      },
+      {
+        "model": "pastel:block/overgrown_blackslag",
+        "y": 180
+      },
+      {
+        "model": "pastel:block/overgrown_blackslag",
+        "y": 270
+      }
+    ],
+    "snowy=true": [
+      {
+        "model": "pastel:block/overgrown_blackslag_snow"
+      },
+      {
+        "model": "pastel:block/overgrown_blackslag_snow",
+        "y": 90
+      },
+      {
+        "model": "pastel:block/overgrown_blackslag_snow",
+        "y": 180
+      },
+      {
+        "model": "pastel:block/overgrown_blackslag_snow",
+        "y": 270
+      }
+    ]
+  }
+}

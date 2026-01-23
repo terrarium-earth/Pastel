@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "pastel:block/onyx_block"
+      },
+      {
+        "model": "pastel:block/onyx_block_mirrored"
+      }
+    ]
+  }
+}

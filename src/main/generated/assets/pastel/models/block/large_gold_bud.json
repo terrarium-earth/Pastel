@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates/crystallarieum_farmable",
+  "textures": {
+    "cross": "pastel:block/large_gold_bud"
+  }
+}

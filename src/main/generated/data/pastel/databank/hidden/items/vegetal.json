@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:gunpowder",
+    "original": "pastel:vegetal"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:craft_bottle_of_fading"
+  }
+}

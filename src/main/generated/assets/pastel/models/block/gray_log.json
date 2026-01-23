@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pastel:block/gray_log_top",
+    "side": "pastel:block/gray_log"
+  }
+}

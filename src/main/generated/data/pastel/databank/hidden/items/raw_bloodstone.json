@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:red_dye",
+    "original": "pastel:raw_bloodstone"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:pluck_resplendent_feather"
+  }
+}

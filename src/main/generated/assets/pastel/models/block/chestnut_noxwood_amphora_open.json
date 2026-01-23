@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "pastel:block/chestnut_noxwood_light_top",
+    "side": "pastel:block/chestnut_noxwood_amphora_side",
+    "top": "pastel:block/chestnut_noxwood_amphora_top_open"
+  }
+}

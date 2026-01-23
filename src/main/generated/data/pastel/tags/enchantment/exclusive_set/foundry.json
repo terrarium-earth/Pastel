@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:silk_touch",
+    {
+      "id": "gofish:deepfry",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates/noxwood_lamp_tall",
+  "textures": {
+    "all": "pastel:block/ivory_noxwood_lantern"
+  }
+}

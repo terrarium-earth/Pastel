@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "pastel:block/weeping_gala_fronds_tip"
+  }
+}

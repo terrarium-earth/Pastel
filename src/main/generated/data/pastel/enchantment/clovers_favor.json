@@ -1,0 +1,21 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.pastel.clovers_favor"
+  },
+  "exclusive_set": "#pastel:exclusive_set/clovers_favor",
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 0
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 20,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#pastel:enchantable/clovers_favor",
+  "weight": 2
+}

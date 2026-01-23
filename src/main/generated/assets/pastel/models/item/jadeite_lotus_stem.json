@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:block/jadeite_lotus_stem_top"
+  }
+}

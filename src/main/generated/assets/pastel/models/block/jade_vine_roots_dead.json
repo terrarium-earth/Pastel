@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/jade_vine_roots",
+  "textures": {
+    "flower": "pastel:block/jade_vine_plant_ripe",
+    "particle": "pastel:block/jade_vine_plant_ripe_breaking"
+  }
+}

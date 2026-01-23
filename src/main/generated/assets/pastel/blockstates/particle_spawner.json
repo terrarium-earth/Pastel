@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "pastel:block/particle_spawner_off"
+    },
+    "powered=true": {
+      "model": "pastel:block/particle_spawner"
+    }
+  }
+}

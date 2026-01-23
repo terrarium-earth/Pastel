@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pastel:block/white_log_top",
+    "side": "pastel:block/white_log"
+  }
+}

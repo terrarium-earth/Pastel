@@ -1,0 +1,6 @@
+{
+  "type": "pastel:drop_self",
+  "block": {
+    "blocks": "#c:budding_blocks"
+  }
+}

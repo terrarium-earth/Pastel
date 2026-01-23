@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "pastel:block/topaz_block"
+      },
+      {
+        "model": "pastel:block/topaz_block_mirrored"
+      }
+    ]
+  }
+}

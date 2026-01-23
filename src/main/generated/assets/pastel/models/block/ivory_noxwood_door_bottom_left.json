@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "pastel:block/ivory_noxwood_door_bottom",
+    "top": "pastel:block/ivory_noxwood_door_top"
+  }
+}

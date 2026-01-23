@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "pastel:block/fabrication_chest",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "pastel:block/fabrication_chest"
+    },
+    "facing=south": {
+      "model": "pastel:block/fabrication_chest",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "pastel:block/fabrication_chest",
+      "y": 270
+    }
+  }
+}

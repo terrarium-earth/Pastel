@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "up=false": {
+      "model": "pastel:block/fissure"
+    },
+    "up=true": {
+      "model": "pastel:block/fissure_up"
+    }
+  }
+}

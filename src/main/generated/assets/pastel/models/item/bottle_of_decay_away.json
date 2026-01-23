@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/bottle_of_decay_away"
+  }
+}

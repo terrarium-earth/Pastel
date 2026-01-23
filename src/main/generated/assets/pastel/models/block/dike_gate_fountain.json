@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "pastel:block/preservation_stone",
+    "particle": "pastel:block/preservation_stone",
+    "side": "pastel:block/dike_gate_fountain_side",
+    "top": "pastel:block/dike_gate_fountain_top"
+  }
+}

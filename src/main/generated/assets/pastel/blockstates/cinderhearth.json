@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "pastel:block/cinderhearth",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "pastel:block/cinderhearth"
+    },
+    "facing=south": {
+      "model": "pastel:block/cinderhearth",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "pastel:block/cinderhearth",
+      "y": 270
+    }
+  }
+}

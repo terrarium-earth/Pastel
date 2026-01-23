@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pastel:block/stripped_pink_log",
+    "side": "pastel:block/stripped_pink_log"
+  }
+}

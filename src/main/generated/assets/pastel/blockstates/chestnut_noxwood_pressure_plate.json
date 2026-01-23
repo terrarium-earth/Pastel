@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "pastel:block/chestnut_noxwood_pressure_plate"
+    },
+    "powered=true": {
+      "model": "pastel:block/chestnut_noxwood_pressure_plate_down"
+    }
+  }
+}

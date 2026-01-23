@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pastel:block/pyrite_plating",
+    "side": "pastel:block/pyrite_vent"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "humming=false": {
+      "model": "pastel:block/hummingstone"
+    },
+    "humming=true": {
+      "model": "pastel:block/hummingstone_humming"
+    }
+  }
+}

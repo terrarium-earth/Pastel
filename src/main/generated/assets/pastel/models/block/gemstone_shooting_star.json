@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/shooting_star",
+  "textures": {
+    "core": "pastel:block/gemstone_shooting_star",
+    "side": "pastel:block/gemstone_shooting_star_side"
+  }
+}

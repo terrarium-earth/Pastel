@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_glass_pane_post",
+  "textures": {
+    "edge": "pastel:block/moonstone_glass_pane_top",
+    "pane": "pastel:block/moonstone_glass"
+  }
+}

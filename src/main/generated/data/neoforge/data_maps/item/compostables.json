@@ -1,0 +1,253 @@
+{
+  "values": {
+    "pastel:aloe_leaf": {
+      "chance": 0.5
+    },
+    "pastel:apricotti": {
+      "chance": 0.65
+    },
+    "pastel:black_leaves": {
+      "chance": 0.3
+    },
+    "pastel:black_sapling": {
+      "chance": 0.3
+    },
+    "pastel:blood_orchid": {
+      "chance": 0.65
+    },
+    "pastel:blood_orchid_petal": {
+      "chance": 0.3
+    },
+    "pastel:blue_leaves": {
+      "chance": 0.3
+    },
+    "pastel:blue_sapling": {
+      "chance": 0.3
+    },
+    "pastel:bone_ash": {
+      "chance": 1.0
+    },
+    "pastel:bristle_sprouts": {
+      "chance": 0.5
+    },
+    "pastel:brown_leaves": {
+      "chance": 0.3
+    },
+    "pastel:brown_sapling": {
+      "chance": 0.3
+    },
+    "pastel:chestnut_noxcap_block": {
+      "chance": 0.85
+    },
+    "pastel:chestnut_noxcap_gills": {
+      "chance": 0.85
+    },
+    "pastel:chestnut_noxshroom": {
+      "chance": 0.65
+    },
+    "pastel:clover": {
+      "chance": 0.5
+    },
+    "pastel:cyan_leaves": {
+      "chance": 0.3
+    },
+    "pastel:cyan_sapling": {
+      "chance": 0.3
+    },
+    "pastel:ebony_noxcap_block": {
+      "chance": 0.85
+    },
+    "pastel:ebony_noxcap_gills": {
+      "chance": 0.85
+    },
+    "pastel:ebony_noxshroom": {
+      "chance": 0.65
+    },
+    "pastel:fissure_plum": {
+      "chance": 0.65
+    },
+    "pastel:four_leaf_clover": {
+      "chance": 0.5
+    },
+    "pastel:germinated_jade_vine_bulb": {
+      "chance": 0.65
+    },
+    "pastel:giant_moss_ball": {
+      "chance": 1.0
+    },
+    "pastel:gray_leaves": {
+      "chance": 0.3
+    },
+    "pastel:gray_sapling": {
+      "chance": 0.3
+    },
+    "pastel:green_leaves": {
+      "chance": 0.3
+    },
+    "pastel:green_sapling": {
+      "chance": 0.3
+    },
+    "pastel:hibernating_jade_vine_bulb": {
+      "chance": 0.65
+    },
+    "pastel:humming_bell": {
+      "chance": 0.65
+    },
+    "pastel:ivory_noxcap_block": {
+      "chance": 0.85
+    },
+    "pastel:ivory_noxcap_gills": {
+      "chance": 0.85
+    },
+    "pastel:ivory_noxshroom": {
+      "chance": 0.65
+    },
+    "pastel:jade_petal_block": {
+      "chance": 1.0
+    },
+    "pastel:jade_petal_carpet": {
+      "chance": 0.65
+    },
+    "pastel:jade_petals": {
+      "chance": 0.65
+    },
+    "pastel:jadeite_lotus_bulb": {
+      "chance": 0.65
+    },
+    "pastel:jadeite_lotus_flower": {
+      "chance": 0.85
+    },
+    "pastel:jadeite_petal_block": {
+      "chance": 1.0
+    },
+    "pastel:jadeite_petal_carpet": {
+      "chance": 0.65
+    },
+    "pastel:jadeite_petals": {
+      "chance": 0.65
+    },
+    "pastel:light_blue_leaves": {
+      "chance": 0.3
+    },
+    "pastel:light_blue_sapling": {
+      "chance": 0.3
+    },
+    "pastel:light_gray_leaves": {
+      "chance": 0.3
+    },
+    "pastel:light_gray_sapling": {
+      "chance": 0.3
+    },
+    "pastel:lime_leaves": {
+      "chance": 0.3
+    },
+    "pastel:lime_sapling": {
+      "chance": 0.3
+    },
+    "pastel:magenta_leaves": {
+      "chance": 0.3
+    },
+    "pastel:magenta_sapling": {
+      "chance": 0.3
+    },
+    "pastel:moss_ball": {
+      "chance": 0.5
+    },
+    "pastel:nectardew_burgeon": {
+      "chance": 0.85
+    },
+    "pastel:nephrite_blossom_bulb": {
+      "chance": 0.65
+    },
+    "pastel:nephrite_blossom_leaves": {
+      "chance": 0.3
+    },
+    "pastel:nightdew_sprout": {
+      "chance": 0.65
+    },
+    "pastel:orange_leaves": {
+      "chance": 0.3
+    },
+    "pastel:orange_sapling": {
+      "chance": 0.3
+    },
+    "pastel:pink_leaves": {
+      "chance": 0.3
+    },
+    "pastel:pink_sapling": {
+      "chance": 0.3
+    },
+    "pastel:purple_leaves": {
+      "chance": 0.3
+    },
+    "pastel:purple_sapling": {
+      "chance": 0.3
+    },
+    "pastel:red_leaves": {
+      "chance": 0.3
+    },
+    "pastel:red_sapling": {
+      "chance": 0.3
+    },
+    "pastel:resonant_lily": {
+      "chance": 0.65
+    },
+    "pastel:sawblade_holly_berry": {
+      "chance": 0.65
+    },
+    "pastel:slate_noxcap_block": {
+      "chance": 0.85
+    },
+    "pastel:slate_noxcap_gills": {
+      "chance": 0.85
+    },
+    "pastel:slate_noxshroom": {
+      "chance": 0.65
+    },
+    "pastel:small_black_dragonjag": {
+      "chance": 0.3
+    },
+    "pastel:small_pink_dragonjag": {
+      "chance": 0.3
+    },
+    "pastel:small_purple_dragonjag": {
+      "chance": 0.3
+    },
+    "pastel:small_red_dragonjag": {
+      "chance": 0.3
+    },
+    "pastel:small_yellow_dragonjag": {
+      "chance": 0.3
+    },
+    "pastel:snapping_ivy": {
+      "chance": 0.65
+    },
+    "pastel:sweet_pea": {
+      "chance": 0.65
+    },
+    "pastel:varia_sprout": {
+      "chance": 0.5
+    },
+    "pastel:vegetal": {
+      "chance": 1.0
+    },
+    "pastel:weeping_gala_leaves": {
+      "chance": 0.3
+    },
+    "pastel:weeping_gala_sprig": {
+      "chance": 0.3
+    },
+    "pastel:white_leaves": {
+      "chance": 0.3
+    },
+    "pastel:white_sapling": {
+      "chance": 0.3
+    },
+    "pastel:yellow_leaves": {
+      "chance": 0.3
+    },
+    "pastel:yellow_sapling": {
+      "chance": 0.3
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "pastel:block/basal_marble_pillar",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "pastel:block/basal_marble_pillar"
+    },
+    "axis=z": {
+      "model": "pastel:block/basal_marble_pillar",
+      "x": 90
+    }
+  }
+}

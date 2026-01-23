@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "pastel:block/sawblade_grass"
+      },
+      {
+        "model": "pastel:block/sawblade_grass",
+        "y": 90
+      },
+      {
+        "model": "pastel:block/sawblade_grass",
+        "y": 180
+      },
+      {
+        "model": "pastel:block/sawblade_grass",
+        "y": 270
+      }
+    ],
+    "snowy=true": [
+      {
+        "model": "pastel:block/sawblade_grass_snow"
+      },
+      {
+        "model": "pastel:block/sawblade_grass_snow",
+        "y": 90
+      },
+      {
+        "model": "pastel:block/sawblade_grass_snow",
+        "y": 180
+      },
+      {
+        "model": "pastel:block/sawblade_grass_snow",
+        "y": 270
+      }
+    ]
+  }
+}

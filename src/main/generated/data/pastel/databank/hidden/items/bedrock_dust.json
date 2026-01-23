@@ -1,0 +1,11 @@
+{
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:gunpowder",
+    "original": "pastel:bedrock_dust"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:midgame/break_decayed_bedrock"
+  }
+}
