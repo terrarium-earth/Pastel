@@ -3718,7 +3718,7 @@ public class PastelGuidebookLang {
             "protection seems effective, either—the Stakes seem able to bypass everything from Resistance potions to" +
             " the Protection enchantment, and hitting a shield with one will render it unusable for a time."
         );
-        provider.add("book.pastel.guidebook.dark_stakes.page2.text", "*Black Knife*");
+        provider.add("book.pastel.guidebook.dark_stakes.page2.text", "*It sure is beautiful, isn't it? ...This black shard.*");
 
         provider.add(
             "book.pastel.guidebook.midnight_solution.page0.text",
