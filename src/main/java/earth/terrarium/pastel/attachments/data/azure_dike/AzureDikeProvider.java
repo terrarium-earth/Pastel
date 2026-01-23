@@ -17,13 +17,14 @@ public class AzureDikeProvider {
      * @return All damage that could not be protected from
      */
     public static float absorbDamage(LivingEntity provider, float incomingDamage) {
-        return absorbDamage(provider, incomingDamage, false);
+        return absorbDamage(provider, incomingDamage, incomingDamage, false);
     }
 
-    public static float absorbDamage(LivingEntity provider, float incomingDamage, boolean effective) {
+    public static float absorbDamage(LivingEntity provider, float rawDamage, float incomingDamage, boolean effective) {
         var azureDike = provider.getData(AzureDikeData.ATTACHMENT);
         var passedDamage = azureDike.absorbDamage(incomingDamage, effective);
-
+        // dike didn't do anything, so undo the armor calculation so it doesn't apply twice
+        if(passedDamage == incomingDamage) passedDamage = rawDamage;
         if (incomingDamage - passedDamage > 0.0001F) {
             AttachmentUtil.syncToTracking(
                 new AzureDikeData.Payload(provider.getId(), azureDike), provider.level(), provider.blockPosition());

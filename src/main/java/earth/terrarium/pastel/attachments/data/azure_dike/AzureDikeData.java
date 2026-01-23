@@ -105,11 +105,11 @@ public class AzureDikeData implements DikeShieldData {
     public float absorbDamage(float incomingDamage, boolean effective) {
         if (incomingDamage == 0)
             return 0;
-        int dikePenetration = effective?2:1;
-        this.rechargeDelay = effective ?200:this.rechargeDelayPostTick;
+        int dikePenetration = effective ? 2 : 1;
+        this.rechargeDelay = effective ? 200 : this.rechargeDelayPostTick;
         if (this.currentProt > 0) {
-            float absorbedDamage = Math.min(currentProt/dikePenetration, incomingDamage);
-            this.currentProt -= absorbedDamage*dikePenetration;
+            float absorbedDamage = Math.min(currentProt / dikePenetration, incomingDamage);
+            this.currentProt -= absorbedDamage * dikePenetration;
 
             return incomingDamage - absorbedDamage;
         } else {

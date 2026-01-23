@@ -36,6 +36,7 @@ accessible	field	net/minecraft/client/particle/Particle	gravity	F
 accessible	method	net/minecraft/client/particle/SuspendedParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/client/particle/SpriteSet;DDDDDD)V
 
 accessible method net/minecraft/world/entity/LivingEntity hurtCurrentlyUsedShield (F)V
+accessible method net/minecraft/world/entity/LivingEntity getDamageAfterArmorAbsorb (Lnet/minecraft/world/damagesource/DamageSource;F)F
 
 accessible field net/minecraft/world/item/enchantment/ItemEnchantments showInTooltip Z
 accessible method net/minecraft/world/item/enchantment/ItemEnchantments getTagOrEmpty (Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/tags/TagKey;)Lnet/minecraft/core/HolderSet;
