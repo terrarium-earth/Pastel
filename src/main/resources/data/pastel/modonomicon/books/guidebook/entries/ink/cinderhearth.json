@@ -54,6 +54,12 @@
     {
       "type": "modonomicon:text",
       "text": "book.pastel.guidebook.cinderhearth.page5.text"
+    },
+    {
+      "type": "pastel:cinderhearth_smelting",
+      "title": "book.pastel.guidebook.cinderhearth.page6.title",
+      "recipe_id": "pastel:cinderhearth/slab_fusing/polished_calcite",
+      "text": "book.pastel.guidebook.cinderhearth.page6.text"
     }
   ]
 }

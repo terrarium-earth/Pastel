@@ -9,6 +9,7 @@
     "#pastel:blackslags",
     "#pastel:shale_clays",
     "#pastel:dragonbone_blocks",
+    "#minecraft:slabs",
     "minecraft:wet_sponge",
     {
       "id": "c:dusts",

@@ -1,0 +1,16 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "pastel:polished_bone_ash_slab",
+    "count": 2
+  },
+  "results": [
+    {
+      "id": "pastel:polished_bone_ash",
+      "count": 1
+    }
+  ],
+  "experience": 0.1,
+  "time": 100,
+  "required_advancement": "pastel:break_cracked_dragonbone"
+}
