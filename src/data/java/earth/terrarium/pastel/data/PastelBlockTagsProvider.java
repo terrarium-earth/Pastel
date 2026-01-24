@@ -40,8 +40,7 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
                                               .add(Blocks.INFESTED_STONE_BRICKS)
                                               .add(PastelBlocks.INFESTED_BLACKSLAG.get());
         tag(PastelBlockTags.WARD_DISRUPTABLE).add(
-            PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get(),
-            PastelBlocks.BLACKSLAG_AZURITE_ORE.get()
+            PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get()
         );
 
     }

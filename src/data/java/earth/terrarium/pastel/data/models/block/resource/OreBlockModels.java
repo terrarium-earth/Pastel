@@ -13,8 +13,6 @@ public class OreBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.SHIMMERSTONE_ORE);
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE);
-        PastelModelHelper.BLOCK.singleton(
-            generators, PastelBlocks.BLACKSLAG_SHIMMERSTONE_ORE, TexturedModel.COLUMN_ALT);
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.SHIMMERSTONE_BLOCK);
 
         // hell.
@@ -44,21 +42,6 @@ public class OreBlockModels {
                                                                                                                   )
                                                                                                                   .createWithSuffix(
                                                                                                                       PastelBlocks.DEEPSLATE_AZURITE_ORE.get(),
-                                                                                                                      warded ? "_warded"
-                                                                                                                             : "",
-                                                                                                                      generators.modelOutput
-                                                                                                                  )))));
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.BLACKSLAG_AZURITE_ORE.get())
-                                                                .with(PropertyDispatch.property(AzuriteOreBlock.WARDED)
-                                                                                      .generate(
-                                                                                          (warded) -> PastelModelHelper.createModelVariant(
-                                                                                              PastelTexturedModels.cubeAll(
-                                                                                                                      b -> b,
-                                                                                                                      warded ? "_warded"
-                                                                                                                             : ""
-                                                                                                                  )
-                                                                                                                  .createWithSuffix(
-                                                                                                                      PastelBlocks.BLACKSLAG_AZURITE_ORE.get(),
                                                                                                                       warded ? "_warded"
                                                                                                                              : "",
                                                                                                                       generators.modelOutput

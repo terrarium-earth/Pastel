@@ -179,15 +179,15 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
 
         hideOre(
             PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get(),
-            PastelBlocks.BLACKSLAG_AZURITE_ORE.get(), PastelAdvancements.Milestones.REVEAL_AZURITE
+            null, PastelAdvancements.Milestones.REVEAL_AZURITE
         );
         hideOre(
             PastelBlocks.MALACHITE_ORE.get(), PastelBlocks.DEEPSLATE_MALACHITE_ORE.get(),
             PastelBlocks.BLACKSLAG_MALACHITE_ORE.get(), PastelAdvancements.Milestones.REVEAL_MALACHITE
         );
         hideOre(
-            PastelBlocks.SHIMMERSTONE_ORE.get(), PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get(),
-            PastelBlocks.BLACKSLAG_SHIMMERSTONE_ORE.get(), PastelAdvancements.Milestones.REVEAL_SHIMMERSTONE
+            PastelBlocks.SHIMMERSTONE_ORE.get(), PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get(),null,
+            PastelAdvancements.Milestones.REVEAL_SHIMMERSTONE
         );
         hideOre(
             PastelBlocks.TOPAZ_ORE.get(), PastelBlocks.DEEPSLATE_TOPAZ_ORE.get(),

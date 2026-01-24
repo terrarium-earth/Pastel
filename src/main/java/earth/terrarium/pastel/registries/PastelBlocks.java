@@ -3400,12 +3400,7 @@ public class PastelBlocks {
             "deepslate_shimmerstone_ore",
             () -> new ShimmerstoneOreBlock(UniformInt.of(2, 4), deepslateOre().randomTicks()), InkColors.YELLOW
         ));
-    public static final DeferredBlock<Block> BLACKSLAG_SHIMMERSTONE_ORE = register(
-        blockWithItem(
-            "blackslag_shimmerstone_ore",
-            () -> new ShimmerstoneOreBlock(UniformInt.of(2, 4), blackslagOre().randomTicks()), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> SHIMMERSTONE_BLOCK = register(blockWithItem(
+   public static final DeferredBlock<Block> SHIMMERSTONE_BLOCK = register(blockWithItem(
         "shimmerstone_block", () -> new ShimmerstoneBlock(settings(
             MapColor.COLOR_YELLOW, SoundType.GLASS, 2.0F).lightLevel((state) -> 15)), InkColors.YELLOW
     ));
@@ -3416,11 +3411,6 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> DEEPSLATE_AZURITE_ORE = register(
         blockWithItem(
             "deepslate_azurite_ore", () -> new AzuriteOreBlock(UniformInt.of(4, 7), deepslateOre().randomTicks()),
-            InkColors.BLUE
-        ));
-    public static final DeferredBlock<Block> BLACKSLAG_AZURITE_ORE = register(
-        blockWithItem(
-            "blackslag_azurite_ore", () -> new AzuriteOreBlock(UniformInt.of(4, 7), blackslagOre().randomTicks()),
             InkColors.BLUE
         ));
     public static final DeferredBlock<Block> AZURITE_BLOCK = register(blockWithItem(

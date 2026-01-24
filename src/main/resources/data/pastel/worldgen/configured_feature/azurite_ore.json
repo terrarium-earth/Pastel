@@ -21,15 +21,6 @@
         "state": {
           "Name": "pastel:deepslate_azurite_ore"
         }
-      },
-      {
-        "target": {
-          "predicate_type": "minecraft:tag_match",
-          "tag": "pastel:blackslag_ore_replaceables"
-        },
-        "state": {
-          "Name": "pastel:blackslag_azurite_ore"
-        }
       }
     ]
   }
