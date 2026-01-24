@@ -2,7 +2,7 @@
   "name": "book.pastel.guidebook.paltaeria.name",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:lategame/collect_paltaeria"
+    "advancement_id": "pastel:midgame/collect_paltaeria"
   },
   "icon": {
     "item": "pastel:paltaeria_fragments"
@@ -11,13 +11,13 @@
   "hide_while_locked": true,
   "parents": [
     {
-      "entry": "pastel:general/pedestal_upgrade_moonstone_2"
+      "entry": "pastel:general/midnight_chip"
     }
   ],
   "background_u_index": 0,
   "background_v_index": 0,
-  "x": 8,
-  "y": 11,
+  "x": 16,
+  "y": 3,
   "pages": [
     {
       "type": "modonomicon:spotlight",

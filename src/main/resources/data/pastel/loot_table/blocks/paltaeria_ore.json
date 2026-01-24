@@ -51,16 +51,6 @@
             },
             {
               "type": "minecraft:item",
-              "name": "pastel:paltaeria_gem",
-              "conditions": [
-                {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.06
-                }
-              ]
-            },
-            {
-              "type": "minecraft:item",
               "name": "pastel:paltaeria_fragments",
               "functions": [
                 {

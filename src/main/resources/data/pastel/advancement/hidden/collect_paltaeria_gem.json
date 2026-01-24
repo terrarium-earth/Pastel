@@ -1,9 +1,9 @@
 {
   "criteria": {
-    "collected_paltaeria": {
+    "gotten_previous": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:lategame/collect_paltaeria"
+        "advancement": "pastel:lategame/craft_resonant_tool"
       }
     },
     "has_paltaeria_gem": {

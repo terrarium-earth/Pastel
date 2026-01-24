@@ -170,7 +170,7 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         hideItem(PastelItems.STRATINE_FRAGMENTS.get(), Items.RED_DYE, PastelAdvancements.Milestones.REVEAL_STRATINE);
         hideItem(PastelItems.STRATINE_GEM.get(), Items.RED_DYE, PastelAdvancements.Milestones.REVEAL_STRATINE);
         hideItem(PastelItems.PALTAERIA_FRAGMENTS.get(), Items.CYAN_DYE, PastelAdvancements.Milestones.REVEAL_PALTAERIA);
-        hideItem(PastelItems.PALTAERIA_GEM.get(), Items.CYAN_DYE, PastelAdvancements.Milestones.REVEAL_PALTAERIA);
+        hideItem(PastelItems.PALTAERIA_GEM.get(), Items.CYAN_DYE, PastelAdvancements.Lategame.CRAFT_RESONANT_TOOL);
 
         createQuitoxicReeds(
             PastelBlocks.QUITOXIC_REEDS.get(), Blocks.SUGAR_CANE.asItem(),

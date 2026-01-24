@@ -6,7 +6,7 @@
     "advancement_gotten": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:hidden/collect_paltaeria_gem"
+        "advancement": "pastel:midgame/collect_paltaeria"
       }
     }
   },

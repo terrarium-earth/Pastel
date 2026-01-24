@@ -18,11 +18,11 @@
   "key": {
     "E": "minecraft:ender_eye",
     "R": "pastel:radiating_ender",
-    "P": "pastel:paltaeria_fragments"
+    "P": "pastel:paltaeria_gem"
   },
   "result": {
     "id": "pastel:perturbed_eye",
-    "count": 4
+    "count": 12
   },
   "required_advancement": "pastel:unlocks/items/perturbed_eye"
 }

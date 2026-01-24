@@ -4,5 +4,5 @@
   "modifiers": {
     "additional_random_positive_effect_count": 1.0
   },
-  "required_advancement": "pastel:lategame/collect_paltaeria"
+  "required_advancement": "pastel:midgame/collect_paltaeria"
 }

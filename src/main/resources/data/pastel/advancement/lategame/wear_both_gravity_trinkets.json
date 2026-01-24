@@ -11,7 +11,7 @@
       "translate": "advancements.pastel.wear_both_gravity_trinkets.description"
     }
   },
-  "parent": "pastel:lategame/collect_paltaeria",
+  "parent": "pastel:lategame/craft_resonant_tool",
   "criteria": {
     "wearing_both_gravity_trinkets": {
       "trigger": "pastel:trinket_change",
@@ -33,7 +33,7 @@
     "gotten_previous": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:lategame/collect_paltaeria"
+        "advancement": "pastel:hidden/collect_paltaeria_gem"
       }
     }
   }

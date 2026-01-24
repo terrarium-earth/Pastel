@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-23T21:36:39.930254898	Hidden
+// 1.21.1	2026-01-24T00:10:47.080279416	Hidden
 5a6ed83feb1f4fc09998e1c1b774200de3b46520 data/pastel/databank/hidden/blocks/amaranth_bushel.json
 71f30f020da337ad50218be35168093a2b88b7c4 data/pastel/databank/hidden/blocks/amethyst_ore.json
 e93543374ab57096b980509bc9cb3c0c35c2ce8d data/pastel/databank/hidden/blocks/azurite_ore.json
@@ -244,7 +244,7 @@ e38580d61a9d07a583aba2431146da31adc59b6e data/pastel/databank/hidden/items/onyx_
 59942476ad8c095c355770c9e8fc0165869a6ef0 data/pastel/databank/hidden/items/onyx_shard.json
 5e5b0c582278b74e38d73ff0dedd569dc2efe5dc data/pastel/databank/hidden/items/orange_pigment.json
 fa75917bab92836ec98183eb91d11fa4b5a15c55 data/pastel/databank/hidden/items/paltaeria_fragments.json
-72943603c7eecc5f4157d2fc76cc10b339a1d99e data/pastel/databank/hidden/items/paltaeria_gem.json
+0dd6aa46b01bdf9b9557d797b4ffc70ce1f45cc1 data/pastel/databank/hidden/items/paltaeria_gem.json
 547a2648d69904992067f0819a6ff3d3d60f8c93 data/pastel/databank/hidden/items/paltaeria_ore.json
 9a4df169c37b295c3c8a532b0a2330e0de57c9f0 data/pastel/databank/hidden/items/pink_pigment.json
 4c9e890fafd8c9e1e1f8b8f21db1922ec27eb809 data/pastel/databank/hidden/items/potted_saplings/potted_black_sapling.json

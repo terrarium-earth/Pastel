@@ -10,7 +10,7 @@
       "translate": "advancements.pastel.use_perturbed_eye.description"
     }
   },
-  "parent": "pastel:lategame/collect_paltaeria",
+  "parent": "pastel:lategame/craft_resonant_tool",
   "criteria": {
     "used": {
       "trigger": "minecraft:item_used_on_block",
@@ -39,7 +39,7 @@
     "gotten_previous": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:lategame/collect_paltaeria"
+        "advancement": "pastel:hidden/collect_paltaeria_gem"
       }
     }
   }

@@ -2464,8 +2464,15 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.ideas.paltaeria.page1.text",
             "I saw an ore both on the central island and in the outer regions of the End, just rarely generating " +
-            "exposed to air, so digging into one of the islands may be my best bet. It has both a common and a rare " +
-            "drop."
+            "exposed to air, so digging into one of the islands may be my best bet."
+        );
+        provider.add(
+            "book.pastel.guidebook.ideas.paltaeria_gem.page0.text",
+            "Now that I have Resonance, perhaps the End would be worth another visit?"
+        );
+        provider.add(
+            "book.pastel.guidebook.ideas.paltaeria_gem.page1.text",
+            "Paltaeria is far too fragile to harvest intacts gems from normally, but Resonance should do the trick."
         );
         provider.add("book.pastel.guidebook.ideas.preservation_ruins.name", "3 Structures");
         provider.add(
@@ -4859,7 +4866,9 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.paltaeria.page0.text",
             "The pale blue color is the hallmark of this ore, found exclusively in small clusters in the End" +
-            ".\\\n\\\nLike the End itself, the curious properties of this material are not to be overlooked."
+            ".\\\n\\\nLike the End itself, the curious properties of this material are not to be overlooked" +
+            ".\\\n\\\nUnfortunately, this one seems far more fragile than [Stratine](entry://general/stratine)—I " +
+            "won't be able to get an intact gem without special equipment."
         );
         provider.add(
             "book.pastel.guidebook.paltaeria.page2.text",
