@@ -40,6 +40,7 @@ public class PastelIntegrationPacks {
     public static final String TRAVELERS_BACKPACK_ID = "travelersbackpack";
     public static final String BOTANIA_ID = "botania";
     public static final String MODONOMICON_ID = "modonomicon";
+    public static final String MALUM_ID = "malum";
     public static final String CREATE_ID = "create";
     public static final String FARMERSDELIGHT_ID = "farmersdelight";
     public static final String EXCLUSIONS_LIB_ID = "exclusions_lib";

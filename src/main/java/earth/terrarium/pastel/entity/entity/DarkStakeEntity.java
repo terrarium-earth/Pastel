@@ -36,7 +36,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
-    public static final int EFFECT_RADIUS = 5;
+    public static final int EFFECT_RADIUS = 10;
     private double baseDamage = 2.0f;
     private int life = 0;
     @Nullable

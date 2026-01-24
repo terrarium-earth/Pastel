@@ -73,6 +73,8 @@
     "ShearsDispenserBehaviorMixin",
     "SlotMixin",
     "SpawnDensityCapperMixin",
+    "SoulWardDataMixin",
+    "SoulWardHandlerMixin",
     "StatusEffectUtilMixin",
     "TemptGoalMixin",
     "TridentEntityMixin",

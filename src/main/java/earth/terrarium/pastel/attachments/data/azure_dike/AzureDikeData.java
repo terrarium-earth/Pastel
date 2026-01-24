@@ -141,7 +141,8 @@ public class AzureDikeData implements DikeShieldData {
                         .nextBoolean() && !provider.level()
                                                    .getEntitiesOfClass(
                                                        DarkStakeEntity.class,
-                                                       AABB.ofSize(provider.position(), 10.0, 10.0, 10.0)
+                                                       provider.getBoundingBox()
+                                                               .inflate(DarkStakeEntity.EFFECT_RADIUS)
                                                    )
                                                    .isEmpty()) {
                 this.rechargeDelay = this.rechargeTicks;

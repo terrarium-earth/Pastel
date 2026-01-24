@@ -5,6 +5,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.attachments.data.azure_dike.DikeShieldData;
+import earth.terrarium.pastel.compat.PastelIntegrationPacks;
+import earth.terrarium.pastel.compat.malum.MalumCompat;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
@@ -38,8 +41,7 @@ public class HudRenderers {
 
     public static void registerInjects(RenderGuiLayerEvent.Post event) {
         if (event.getName()
-                 .equals(VanillaGuiLayers.CROSSHAIR))
-            renderSelectedStaffStack(event.getGuiGraphics());
+                 .equals(VanillaGuiLayers.CROSSHAIR)) renderSelectedStaffStack(event.getGuiGraphics());
     }
 
     private static final int DIKE_HEARTS_PER_ROW = 10;
@@ -51,10 +53,7 @@ public class HudRenderers {
         public void render(GuiGraphics gui, DeltaTracker deltaTracker) {
             var minecraft = Minecraft.getInstance();
 
-            if (minecraft.options.hideGui ||
-                minecraft.gameMode == null ||
-                !minecraft.gameMode.canHurtPlayer())
-                return;
+            if (minecraft.options.hideGui || minecraft.gameMode == null || !minecraft.gameMode.canHurtPlayer()) return;
 
             var cameraPlayer = Minecraft.getInstance().player;
             var x = gui.guiWidth() / 2 - 91;
@@ -85,6 +84,13 @@ public class HudRenderers {
                 x += PastelCommon.CONFIG.AzureDikeHudOffsetX;
                 y += hasArmor ? PastelCommon.CONFIG.AzureDikeHudOffsetYWithArmor
                               : PastelCommon.CONFIG.AzureDikeHudOffsetY;
+
+                if (ModList.get()
+                           .isLoaded(PastelIntegrationPacks.MALUM_ID)){
+                    var rows = MalumCompat.getSoulWardRows(cameraPlayer);
+                    if(rows>0)
+                        y -= 13 + 3 * (rows - 1);
+                }
 
                 RenderSystem.enableBlend();
 
