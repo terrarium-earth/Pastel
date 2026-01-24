@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:oak_leaves",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.oak_leaves"
+    },
     "original": "pastel:blue_leaves"
   },
   "condition": {

@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:oak_sapling",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.oak_sapling"
+    },
     "original": "pastel:light_gray_sapling"
   },
   "condition": {

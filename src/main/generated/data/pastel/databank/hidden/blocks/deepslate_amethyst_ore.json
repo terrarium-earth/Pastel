@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:deepslate",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.deepslate"
+    },
     "original": "pastel:deepslate_amethyst_ore"
   },
   "condition": {

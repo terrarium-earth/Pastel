@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:potted_red_tulip",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.potted_red_tulip"
+    },
     "original": "pastel:potted_blood_orchid"
   },
   "condition": {

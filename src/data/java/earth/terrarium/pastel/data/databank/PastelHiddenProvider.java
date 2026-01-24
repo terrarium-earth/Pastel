@@ -273,10 +273,13 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
 
     public void hideBlock(Block block, Block hiddenAs, ResourceLocation advancement) {
         createHidden(
-            PastelCommon.locate("blocks/" + getName(block)),
-            setOriginalLootCondition(
-                createBlockInstance(block, hiddenAs), new NotCondition(new ActualPlayerCondition())),
-            createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+            PastelCommon.locate("blocks/" + getName(block)), setOriginalLootCondition(
+                setNameOverride(
+                    createBlockInstance(block, hiddenAs), Component.translatable(hiddenAs.getDescriptionId())
+                                                                   .append(
+                                                                       Component.translatable("pastel.cloaked.suffix"))
+                ), new NotCondition(new ActualPlayerCondition())
+            ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
     }
 
@@ -309,15 +312,20 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
             String name = getName(block);
             ResourceLocation advancement = ColoredTree.getTreeCloakAdvancementIdentifier(part, tree.getColor());
             createHidden(
-                PastelCommon.locate("blocks/" + directory + "/" + name),
-                setOriginalLootCondition(
-                    createBlockInstance(block, hiddenAs), new NotCondition(new ActualPlayerCondition())),
-                createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+                PastelCommon.locate("blocks/" + directory + "/" + name), setOriginalLootCondition(
+                    setNameOverride(
+                        createBlockInstance(block, hiddenAs), Component.translatable(hiddenAs.getDescriptionId())
+                                                                       .append(Component.translatable(
+                                                                           "pastel.cloaked.suffix"))
+                    ), new NotCondition(new ActualPlayerCondition())
+                ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
             );
             createHidden(
-                PastelCommon.locate("items/" + directory + "/" + name),
-                createItemInstance(block.asItem(), hiddenAs.asItem()),
-                createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+                PastelCommon.locate("items/" + directory + "/" + name), setNameOverride(
+                    createItemInstance(block.asItem(), hiddenAs.asItem()),
+                    Component.translatable(hiddenAs.getDescriptionId())
+                             .append(Component.translatable("pastel.cloaked.suffix"))
+                ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
             );
         }
     }

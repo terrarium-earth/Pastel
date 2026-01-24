@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:stripped_oak_wood",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.stripped_oak_wood"
+    },
     "original": "pastel:stripped_pink_wood"
   },
   "condition": {

@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:bone_block",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.bone_block"
+    },
     "original": "pastel:dragonbone"
   },
   "condition": {

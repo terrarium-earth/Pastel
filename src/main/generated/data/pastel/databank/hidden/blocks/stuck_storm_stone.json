@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:air",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.air"
+    },
     "original": "pastel:stuck_storm_stone"
   },
   "condition": {

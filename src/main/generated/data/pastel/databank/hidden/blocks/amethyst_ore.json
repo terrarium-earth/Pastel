@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:stone",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.stone"
+    },
     "original": "pastel:amethyst_ore"
   },
   "condition": {

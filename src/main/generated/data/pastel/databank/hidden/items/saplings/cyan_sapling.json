@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:oak_sapling",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.oak_sapling"
+    },
     "original": "pastel:cyan_sapling"
   },
   "condition": {

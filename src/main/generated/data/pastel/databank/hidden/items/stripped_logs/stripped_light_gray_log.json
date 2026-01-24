@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:stripped_oak_log",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.stripped_oak_log"
+    },
     "original": "pastel:stripped_light_gray_log"
   },
   "condition": {

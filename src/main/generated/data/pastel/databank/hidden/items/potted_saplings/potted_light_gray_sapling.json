@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:air",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.potted_oak_sapling"
+    },
     "original": "minecraft:air"
   },
   "condition": {

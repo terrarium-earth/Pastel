@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "pastel:blackslag",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.pastel.blackslag"
+    },
     "original": "pastel:blackslag_amethyst_ore"
   },
   "condition": {

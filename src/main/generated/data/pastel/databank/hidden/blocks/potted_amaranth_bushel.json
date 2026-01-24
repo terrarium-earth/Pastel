@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:potted_fern",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.potted_fern"
+    },
     "original": "pastel:potted_amaranth_bushel"
   },
   "condition": {

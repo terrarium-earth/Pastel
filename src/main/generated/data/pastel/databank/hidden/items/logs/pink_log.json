@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:oak_log",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.oak_log"
+    },
     "original": "pastel:pink_log"
   },
   "condition": {

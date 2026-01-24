@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:potted_oak_sapling",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.potted_oak_sapling"
+    },
     "original": "pastel:potted_blue_sapling"
   },
   "condition": {

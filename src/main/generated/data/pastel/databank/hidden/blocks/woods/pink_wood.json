@@ -8,6 +8,14 @@
       }
     },
     "hidden_as": "minecraft:oak_wood",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.oak_wood"
+    },
     "original": "pastel:pink_wood"
   },
   "condition": {
