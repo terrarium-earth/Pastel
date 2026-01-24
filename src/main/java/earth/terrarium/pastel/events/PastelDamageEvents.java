@@ -2,12 +2,14 @@ package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
+import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
 import earth.terrarium.pastel.attachments.data.JeopardantBonusData;
 import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.items.trinkets.AttackRingItem;
+import earth.terrarium.pastel.items.trinkets.ConsumptionRingItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.items.trinkets.PuffCircletItem;
 import earth.terrarium.pastel.mixin.accessors.LivingEntityAccessor;
@@ -21,6 +23,7 @@ import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -63,6 +66,14 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handlePuffCirclet);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::applyKillBonuses);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::fuckWithWards);
+        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vampirism);
+    }
+
+    private static void vampirism(LivingDamageEvent.Post event){
+        var attacker = event.getSource().getDirectEntity();
+        if(attacker instanceof ServerPlayer player && player.getData(ConsumptionRingData.ATTACHMENT)){
+            ConsumptionRingItem.applyOverheal(player,event.getNewDamage());
+        }
     }
 
     private static void fuckWithWards(LivingDamageEvent.Post event) {

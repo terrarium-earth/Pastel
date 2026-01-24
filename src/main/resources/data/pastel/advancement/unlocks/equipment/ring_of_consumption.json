@@ -1,0 +1,10 @@
+{
+  "criteria": {
+    "unlocked_bismuth_trinkets": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:unlocks/trinkets/fanciful_bismuth_ring"
+      }
+    }
+  }
+}

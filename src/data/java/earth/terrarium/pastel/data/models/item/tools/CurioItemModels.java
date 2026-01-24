@@ -25,6 +25,7 @@ public class CurioItemModels {
         PastelModelHelper.ITEM.simple(generators, PastelItems.AZURESQUE_DIKE_CORE);
         PastelModelHelper.ITEM.simple(generators, PastelItems.SHIELDGRASP_AMULET);
         PastelModelHelper.ITEM.simple(generators, PastelItems.HEARTSINGERS_REWARD);
+        PastelModelHelper.ITEM.simple(generators, PastelItems.RING_OF_CONSUMPTION);
         PastelModelHelper.ITEM.simple(generators, PastelItems.GLOVES_OF_DAWNS_GRASP);
         PastelModelHelper.ITEM.simple(generators, PastelItems.RING_OF_PURSUIT);
         PastelModelHelper.ITEM.simple(generators, PastelItems.RING_OF_DENSER_STEPS);

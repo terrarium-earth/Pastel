@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-22T21:32:14.752545321	Model Definitions
+// 1.21.1	2026-01-23T15:30:05.602245598	Model Definitions
 16b08361bc65a3c74e8df5774303ab1909bbffbb assets/minecraft/models/item/air.json
 2e209fa76a738ef1d22af6817df1419142cc743a assets/pastel/blockstates/abyssal_vines.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_head.json
@@ -4070,6 +4070,7 @@ c97142704b31f3c710d931eac280a14e9612a090 assets/pastel/models/item/resplendent_c
 0f8c0a24571ca60f4d5e3ee7ce3021d47849fb86 assets/pastel/models/item/resplendent_feather.json
 2f13fa284add7affba48160e10e731aea7dbb19e assets/pastel/models/item/restoration_tea.json
 bc60c45ae0a0a7eb035b24559e2b157006dd096d assets/pastel/models/item/ring_of_aetherial_grace.json
+b9099e307e3f9ee002e8b8acd1eb5d6b06b06e8b assets/pastel/models/item/ring_of_consumption.json
 2a7108b4c8db71fb2ade7af17343d88858c50898 assets/pastel/models/item/ring_of_denser_steps.json
 f5b1adff68c589f319294523f688cf13084d388e assets/pastel/models/item/ring_of_pursuit.json
 4463ef4e3aefe6451a447f28c1ab28bf83b22a58 assets/pastel/models/item/rock_crystal.json

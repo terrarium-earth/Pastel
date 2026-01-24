@@ -4,6 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.api.item.TickingEquipmentItem;
 import earth.terrarium.pastel.api.item.UnequipAwareItem;
+import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
 import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
@@ -233,6 +234,9 @@ public class PastelEntityEvents {
     private static void allowDamage(LivingIncomingDamageEvent event) {
         var entity = event.getEntity();
         var source = event.getSource();
+
+        // your body is already eating itself alive, there's no need to also take starvation ticks
+        if (source.is(DamageTypes.STARVE) && entity.getData(ConsumptionRingData.ATTACHMENT)) event.setCanceled(true);
 
         // If the player is damaged by lava and wears an ashen circlet:
         // prevent damage and grant fire resistance

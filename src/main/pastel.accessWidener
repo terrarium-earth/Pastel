@@ -43,6 +43,8 @@ accessible method net/minecraft/world/item/enchantment/ItemEnchantments getTagOr
 accessible field net/minecraft/world/item/enchantment/ItemEnchantments enchantments Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;
 
 accessible method net/minecraft/world/entity/LivingEntity hurtArmor (Lnet/minecraft/world/damagesource/DamageSource;F)V
+accessible field net/minecraft/world/entity/LivingEntity lastDamageSource Lnet/minecraft/world/damagesource/DamageSource;
+accessible field net/minecraft/world/entity/LivingEntity lastDamageStamp J
 
 accessible field net/minecraft/world/entity/player/Player DATA_PLAYER_MODE_CUSTOMISATION Lnet/minecraft/network/syncher/EntityDataAccessor;
 

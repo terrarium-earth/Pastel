@@ -76,33 +76,7 @@ import earth.terrarium.pastel.items.map.ArtisansAtlasItem;
 import earth.terrarium.pastel.items.misc.AetherVestigesItem;
 import earth.terrarium.pastel.items.misc.AshItem;
 import earth.terrarium.pastel.items.tools.*;
-import earth.terrarium.pastel.items.trinkets.AetherGracedNectarGlovesItem;
-import earth.terrarium.pastel.items.trinkets.AshenCircletItem;
-import earth.terrarium.pastel.items.trinkets.AttackRingItem;
-import earth.terrarium.pastel.items.trinkets.AzureDikeAmuletItem;
-import earth.terrarium.pastel.items.trinkets.AzureDikeBeltItem;
-import earth.terrarium.pastel.items.trinkets.AzureDikeCoreItem;
-import earth.terrarium.pastel.items.trinkets.AzureDikeRingItem;
-import earth.terrarium.pastel.items.trinkets.CircletOfArroganceItem;
-import earth.terrarium.pastel.items.trinkets.CottonCloudBootsItem;
-import earth.terrarium.pastel.items.trinkets.ExtraHealthRingItem;
-import earth.terrarium.pastel.items.trinkets.ExtraMiningSpeedRingItem;
-import earth.terrarium.pastel.items.trinkets.ExtraReachGlovesItem;
-import earth.terrarium.pastel.items.trinkets.GleamingPinItem;
-import earth.terrarium.pastel.items.trinkets.PriscillentSpectaclesItem;
-import earth.terrarium.pastel.items.trinkets.InkDrainTrinketItem;
-import earth.terrarium.pastel.items.trinkets.LaurelsOfSerenityItem;
-import earth.terrarium.pastel.items.trinkets.NeatRingItem;
-import earth.terrarium.pastel.items.trinkets.PotionPendantItem;
-import earth.terrarium.pastel.items.trinkets.PuffCircletItem;
-import earth.terrarium.pastel.items.trinkets.RadiancePinItem;
-import earth.terrarium.pastel.items.trinkets.RingOfAerialGraceItem;
-import earth.terrarium.pastel.items.trinkets.RingOfDenserStepsItem;
-import earth.terrarium.pastel.items.trinkets.SevenLeagueBootsItem;
-import earth.terrarium.pastel.items.trinkets.TakeOffBeltItem;
-import earth.terrarium.pastel.items.trinkets.TotemPendantItem;
-import earth.terrarium.pastel.items.trinkets.WeepingCircletItem;
-import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
+import earth.terrarium.pastel.items.trinkets.*;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import net.minecraft.core.component.DataComponents;
@@ -533,7 +507,7 @@ public class PastelItems {
     ));
 
     public static final DeferredItem<Item> DARK_STAKE = register(item(
-        "dark_stake", () -> new DarkStakeItem(IS.of(16,Rarity.UNCOMMON)
+        "dark_stake", () -> new DarkStakeItem(IS.of(16, Rarity.UNCOMMON)
                                                 .attributes(ItemAttributeModifiers.builder()
                                                                                   .add(
                                                                                       Attributes.ATTACK_DAMAGE,
@@ -1688,6 +1662,8 @@ public class PastelItems {
             PastelAdvancements.Unlocks.Trinkets.SHIELDGRASP_AMULET
         ), InkColors.BLUE
     ));
+    public static final DeferredItem<Item> RING_OF_CONSUMPTION = register(
+        item("ring_of_consumption", () -> new ConsumptionRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.RED));
     public static final DeferredItem<InkDrainTrinketItem> HEARTSINGERS_REWARD = register(
         item("heartsingers_reward", () -> new ExtraHealthRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PINK));
     public static final DeferredItem<InkDrainTrinketItem> GLOVES_OF_DAWNS_GRASP = register(

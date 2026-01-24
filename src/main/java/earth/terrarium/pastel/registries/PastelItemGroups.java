@@ -548,6 +548,7 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.SHIELDGRASP_AMULET.get());
                                                                    entries.accept(PastelItems.SHIELDGRASP_AMULET.get()
                                                                                                                 .getFullStack());
+                                                                   entries.accept(PastelItems.RING_OF_CONSUMPTION.get());
                                                                    entries.accept(
                                                                        PastelItems.HEARTSINGERS_REWARD.get());
                                                                    entries.accept(PastelItems.HEARTSINGERS_REWARD.get()
