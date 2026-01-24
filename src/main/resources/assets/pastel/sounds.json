@@ -170,6 +170,13 @@
       "pastel:bident_hit_ground"
     ]
   },
+  "dark_stake_thrown": {
+    "subtitle": "pastel.subtitles.dark_stake_thrown",
+    "sounds": [
+      "minecraft:item/trident/throw1",
+      "minecraft:item/trident/throw2"
+    ]
+  },
   "moonstone_strike": {
     "subtitle": "pastel.subtitles.moonstone_strike",
     "sounds": [
