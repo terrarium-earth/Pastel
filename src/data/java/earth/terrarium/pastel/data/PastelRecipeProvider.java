@@ -399,7 +399,7 @@ public class PastelRecipeProvider extends RecipeProvider {
     private void generateEnchantmentUpgradeRecipes(RecipeOutput ctx) {
         //TODO These could benefit from a revisit
 
-        // Spectrum
+        // Pastel
         generateEnchantmentUpgradeRecipe(
             ctx, "", BIG_CATCH, PastelAdvancements.Unlocks.Enchantments.BIG_CATCH, LIGHT_BLUE_PIGMENT, 3,
             RecipeScaling.doubling(400),
@@ -632,8 +632,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         RecipeScaling.ScalingData itemScaling
     ) {
         ctx = ctx.withConditions(new PastelResourceConditions.EnchantmentsExistResourceCondition(List.of(enchantment)));
-        String namespace = enchantment.registry()
-                                      .getNamespace();
+        String namespace = enchantment.location().getNamespace();
         String base = "enchantment_upgrade/" + namespace + "/" + enchantment.location()
                                                                             .getPath()
                                                                             .replace("/", ".");

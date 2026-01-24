@@ -63,11 +63,6 @@
       "text": "book.pastel.guidebook.brewers_handbook.page7.text"
     },
     {
-      "type": "pastel:titration_barrel_fermenting",
-      "recipe_id": "pastel:titration_barrel/bristle_mead_fluid",
-      "text": "book.pastel.guidebook.brewers_handbook.page7.text"
-    },
-    {
       "type": "modonomicon:text",
       "title": "book.pastel.guidebook.brewers_handbook.page9.title",
       "text": "book.pastel.guidebook.brewers_handbook.page9.text"
