@@ -2,7 +2,10 @@
   "type": {
     "type": "databank:block",
     "drop_original_loot_condition": {
-      "type": "databank:actual_player"
+      "type": "databank:not",
+      "condition": {
+        "type": "databank:actual_player"
+      }
     },
     "hidden_as": "minecraft:potted_oak_sapling",
     "original": "pastel:potted_gray_sapling"

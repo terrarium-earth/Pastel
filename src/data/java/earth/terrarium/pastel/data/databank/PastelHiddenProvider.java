@@ -1,6 +1,9 @@
 package earth.terrarium.pastel.data.databank;
 
 import com.cmdpro.databank.datagen.HiddenDatagenProvider;
+import com.cmdpro.databank.hidden.HiddenCondition;
+import com.cmdpro.databank.hidden.conditions.ActualPlayerCondition;
+import com.cmdpro.databank.hidden.conditions.NotCondition;
 import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
@@ -241,7 +244,14 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         );
         createHidden(
             PastelCommon.locate("blocks/" + getName(block)),
-            addOverride(addOverride(createBlockInstance(block, Blocks.AIR), waterOverride), crystalOverride),
+            addOverride(
+                addOverride(
+                    setOriginalLootCondition(
+                        createBlockInstance(block, Blocks.AIR),
+                        new NotCondition(new ActualPlayerCondition())
+                    ), waterOverride
+                ), crystalOverride
+            ),
             createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
         hideItem(block.asItem(), itemHiddenAs, advancement);
@@ -266,7 +276,11 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
 
     public void hideBlock(Block block, Block hiddenAs, ResourceLocation advancement) {
         createHidden(
-            PastelCommon.locate("blocks/" + getName(block)), createBlockInstance(block, hiddenAs),
+            PastelCommon.locate("blocks/" + getName(block)),
+            setOriginalLootCondition(
+                createBlockInstance(block, hiddenAs),
+                new NotCondition(new ActualPlayerCondition())
+            ),
             createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
     }
@@ -299,7 +313,8 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
             ResourceLocation advancement = ColoredTree.getTreeCloakAdvancementIdentifier(part, tree.getColor());
             createHidden(
                 PastelCommon.locate("blocks/" + directory + "/" + name),
-                createBlockInstance(block, hiddenAs),
+                setOriginalLootCondition(
+                    createBlockInstance(block, hiddenAs), new NotCondition(new ActualPlayerCondition())),
                 createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
             );
             createHidden(
