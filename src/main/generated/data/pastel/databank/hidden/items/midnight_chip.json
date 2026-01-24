@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:gray_dye",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "item.minecraft.gray_dye"
+    },
     "original": "pastel:midnight_chip"
   },
   "condition": {

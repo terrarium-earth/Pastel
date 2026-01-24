@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:red_dye",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "item.minecraft.red_dye"
+    },
     "original": "pastel:blood_orchid_petal"
   },
   "condition": {

@@ -83,8 +83,7 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
             PastelBlocks.PALTAERIA_ORE.get(), Blocks.END_STONE, PastelAdvancements.Milestones.REVEAL_PALTAERIA);
 
         hideBlock(
-            PastelBlocks.BLOOD_ORCHID.get(), Blocks.RED_TULIP, PastelAdvancements.Midgame.COLLECT_BLOOD_ORCHID_PETAL
-        );
+            PastelBlocks.BLOOD_ORCHID.get(), Blocks.RED_TULIP, PastelAdvancements.Midgame.COLLECT_BLOOD_ORCHID_PETAL);
         hideBlock(
             PastelBlocks.POTTED_BLOOD_ORCHID.get(), Blocks.POTTED_RED_TULIP,
             PastelAdvancements.Midgame.COLLECT_BLOOD_ORCHID_PETAL
@@ -243,16 +242,14 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
                                             .orElseThrow(), PastelBlocks.LIQUID_CRYSTAL.get()
         );
         createHidden(
-            PastelCommon.locate("blocks/" + getName(block)),
-            addOverride(
+            PastelCommon.locate("blocks/" + getName(block)), addOverride(
                 addOverride(
                     setOriginalLootCondition(
                         createBlockInstance(block, Blocks.AIR),
                         new NotCondition(new ActualPlayerCondition())
                     ), waterOverride
                 ), crystalOverride
-            ),
-            createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+            ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
         hideItem(block.asItem(), itemHiddenAs, advancement);
     }
@@ -278,17 +275,17 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         createHidden(
             PastelCommon.locate("blocks/" + getName(block)),
             setOriginalLootCondition(
-                createBlockInstance(block, hiddenAs),
-                new NotCondition(new ActualPlayerCondition())
-            ),
+                createBlockInstance(block, hiddenAs), new NotCondition(new ActualPlayerCondition())),
             createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
     }
 
     public void hideItem(Item item, Item hiddenAs, ResourceLocation advancement) {
         createHidden(
-            PastelCommon.locate("items/" + getName(item)), createItemInstance(item, hiddenAs),
-            createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+            PastelCommon.locate("items/" + getName(item)), setNameOverride(
+                createItemInstance(item, hiddenAs), Component.translatable(hiddenAs.getDescriptionId())
+                                                             .append(Component.translatable("pastel.cloaked.suffix"))
+            ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
     }
 

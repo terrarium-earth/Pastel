@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:magenta_dye",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "item.minecraft.magenta_dye"
+    },
     "original": "pastel:magenta_pigment"
   },
   "condition": {

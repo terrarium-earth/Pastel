@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:cyan_dye",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "item.minecraft.cyan_dye"
+    },
     "original": "pastel:topaz_powder"
   },
   "condition": {

@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "minecraft:pink_dye",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "item.minecraft.pink_dye"
+    },
     "original": "pastel:pink_pigment"
   },
   "condition": {

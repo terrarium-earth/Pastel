@@ -59,5 +59,7 @@ public class PastelLanguageProvider extends LanguageProvider {
         PastelVanillaChangeLang.addTranslations(this);
 
         PastelTodoUnusedLang.addTranslations(this);
+
+        this.add("pastel.cloaked.suffix","...?");
     }
 }

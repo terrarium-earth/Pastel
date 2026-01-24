@@ -4653,6 +4653,7 @@
   "multiblock.pastel.perturbed_eye_portal": "Reconstructed Portal",
   "multiblock.pastel.spirit_instiller": "Spirit Instiller",
   "named_item.pastel.dirt_of_shame": "Dirt of Shame",
+  "pastel.cloaked.suffix": "...?",
   "pastel.food.whenDrunk": "When Drunk:",
   "pastel.food.whenEaten": "When Eaten:",
   "pastel.food.withChance": "%s [%d%%]",

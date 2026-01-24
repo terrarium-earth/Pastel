@@ -2,6 +2,14 @@
   "type": {
     "type": "databank:item",
     "hidden_as": "pastel:clover",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.pastel.clover"
+    },
     "original": "pastel:four_leaf_clover"
   },
   "condition": {
