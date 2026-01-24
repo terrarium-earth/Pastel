@@ -3,11 +3,11 @@
   "time": 40,
   "tier": "simple",
   "colors": {
-    "cyan": 8,
-    "magenta": 2,
-    "yellow": 0,
-    "black": 0,
-    "white": 0
+    "pastel:cyan": 8,
+    "pastel:magenta": 2,
+    "pastel:yellow": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
   },
   "experience": 2.0,
   "pattern": [

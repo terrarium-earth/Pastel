@@ -4,11 +4,11 @@
   "time": 80,
   "tier": "basic",
   "colors": {
-    "cyan": 0,
-    "magenta": 0,
-    "yellow": 2,
-    "white": 0,
-    "black": 0
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 2,
+    "pastel:white": 0,
+    "pastel:black": 0
   },
   "experience": 0.5,
   "pattern": [

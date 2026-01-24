@@ -3,13 +3,13 @@
   "time": 240,
   "tier": "basic",
   "colors": {
-    "magenta": 4,
-    "yellow": 0,
-    "cyan": 4,
-    "black": 0,
-    "white": 0,
-    "experience": 2.0
+    "pastel:magenta": 4,
+    "pastel:yellow": 0,
+    "pastel:cyan": 4,
+    "pastel:black": 0,
+    "pastel:white": 0
   },
+  "experience": 2.0,
   "pattern": [
     "OOO",
     "TWT",
