@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-23T15:30:05.602245598	Model Definitions
+// 1.21.1	2026-01-24T12:37:14.281974158	Model Definitions
 16b08361bc65a3c74e8df5774303ab1909bbffbb assets/minecraft/models/item/air.json
 2e209fa76a738ef1d22af6817df1419142cc743a assets/pastel/blockstates/abyssal_vines.json
 9d6e914fa3ff43b20fc87fb4407b150f6ed34da5 assets/pastel/blockstates/allay_head.json
@@ -3298,6 +3298,7 @@ a57d5453a383cb886cf800fdfbd159af6748a1c0 assets/pastel/models/item/clotted_cream
 9bec07326b77cb7f265385bab8f9e1d30e88699e assets/pastel/models/item/cobbled_blackslag_stairs.json
 b9d3070a6c477e06f4c78ceebfecc9f065aab0f3 assets/pastel/models/item/cobbled_blackslag_wall.json
 5fc735b9ba744ffe44533bf98f5d6d4e88e8ac78 assets/pastel/models/item/color_picker.json
+76cc0259870cfb4d2558a0841a90cd670919ed4e assets/pastel/models/item/color_theory_banner_pattern.json
 c9ceb60606342706a0eb6551e23881a501482527 assets/pastel/models/item/colorful_shooting_star.json
 ba8b91c898d2d296707d27786c231cd27346070d assets/pastel/models/item/compacting_chest.json
 e88106842f677e6c5ff499dd71aee52f11b9d31c assets/pastel/models/item/concealing_oils.json
@@ -3702,7 +3703,6 @@ ea070be1659e016f829d698ffb0bfcbd96b471de assets/pastel/models/item/lime_spore_bl
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/lizard_white_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/lizard_yellow_head.json
 43d32e7d031485f83a1b4eb56ecb3cc40a456163 assets/pastel/models/item/llama_head.json
-76cc0259870cfb4d2558a0841a90cd670919ed4e assets/pastel/models/item/logo_banner_pattern.json
 e99c7a7479e777835585900ebf880667be47a488 assets/pastel/models/item/longing_chimera.json
 092042b0902cc7bd46cd0a3ec1c8c6f96f2bc36e assets/pastel/models/item/lucky_pickaxe.json
 cdc8dd958f03ff4f1739b37027ddb343bb6e3a60 assets/pastel/models/item/lucky_roll.json

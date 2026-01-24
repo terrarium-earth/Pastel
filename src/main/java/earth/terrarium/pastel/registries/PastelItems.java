@@ -1436,9 +1436,9 @@ public class PastelItems {
     ));
 
     // Banner Patterns
-    public static final DeferredItem<Item> LOGO_BANNER_PATTERN = register(item(
-        "logo_banner_pattern",
-        () -> new BannerPatternItem(PastelBannerPatternTags.SPECTRUM_LOGO_TAG, IS.of(1, Rarity.UNCOMMON)),
+    public static final DeferredItem<Item> COLOR_THEORY_BANNER_PATTERN = register(item(
+        "color_theory_banner_pattern",
+        () -> new BannerPatternItem(PastelBannerPatternTags.COLOR_THEORY_TAG, IS.of(1, Rarity.UNCOMMON)),
         InkColors.LIGHT_BLUE
     ));
     public static final DeferredItem<Item> AMETHYST_SHARD_BANNER_PATTERN = register(item(

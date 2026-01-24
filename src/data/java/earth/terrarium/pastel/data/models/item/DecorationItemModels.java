@@ -9,7 +9,7 @@ public class DecorationItemModels {
         // don't ask why these are in this tab
         PastelModelHelper.ITEM.simple(generators,PastelItems.PYRITE_CHUNK);
 
-        PastelModelHelper.ITEM.banner(generators,PastelItems.LOGO_BANNER_PATTERN);
+        PastelModelHelper.ITEM.banner(generators,PastelItems.COLOR_THEORY_BANNER_PATTERN);
         PastelModelHelper.ITEM.banner(generators,PastelItems.AMETHYST_SHARD_BANNER_PATTERN);
         PastelModelHelper.ITEM.banner(generators, PastelItems.AMETHYST_CLUSTER_BANNER_PATTERN);
         PastelModelHelper.ITEM.banner(generators,PastelItems.ASTROLOGER_BANNER_PATTERN);
