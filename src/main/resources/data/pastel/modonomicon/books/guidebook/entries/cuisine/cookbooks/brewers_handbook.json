@@ -18,7 +18,7 @@
     {
       "type": "pastel:snippet",
       "title": "book.pastel.guidebook.brewers_handbook.page0.title",
-      "resource_path": "pastel:textures/gui/guidebook/taswell.png",
+      "resource_path": "pastel:textures/gui/guidebook/remil.png",
       "resource_width": 116,
       "resource_height": 116,
       "texture_x": 0,
