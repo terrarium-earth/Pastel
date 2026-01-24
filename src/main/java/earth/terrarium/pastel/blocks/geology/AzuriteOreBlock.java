@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.geology;
 import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.blocks.WardDisruptableBlock;
+import earth.terrarium.pastel.api.block.WardDisruptableBlock;
 import earth.terrarium.pastel.blocks.conditional.CloakedOreBlock;
 import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
@@ -31,7 +31,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
-public class AzuriteOreBlock extends CloakedOreBlock implements WardDisruptableBlock {
+public class AzuriteOreBlock extends CloakedOreBlock {
     public static final MapCodec<AzuriteOreBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                                                                                                               IntProvider.codec(0, 10)
                                                                                                                          .fieldOf("experience")
@@ -128,13 +128,4 @@ public class AzuriteOreBlock extends CloakedOreBlock implements WardDisruptableB
                                    .setValue(WARDED, false);
     }
 
-    @Override
-    public void onWardDisrupt(BlockPos pos, BlockState state, Level level, Entity trigger) {
-        if (level instanceof ServerLevel serverLevel) serverLevel.setBlock(
-            pos, state.setValue(WARDED, false),
-            Block.UPDATE_CLIENTS |
-            Block.UPDATE_KNOWN_SHAPE |
-            Block.UPDATE_SUPPRESS_DROPS
-        );
-    }
 }

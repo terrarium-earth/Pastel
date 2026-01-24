@@ -24,33 +24,25 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
-        tag(PastelBlockTags.C_LIGHTNING_RODS).add(Blocks.LIGHTNING_ROD.builtInRegistryHolder()
-                                                                      .key())
+        tag(PastelBlockTags.C_LIGHTNING_RODS).add(Blocks.LIGHTNING_ROD)
                                              .addOptionalTag(ResourceLocation.parse("friendsandfoes:lightning_rods"));
 
-        tag(PastelBlockTags.C_BRUSHABLE_BLOCKS).add(Blocks.SUSPICIOUS_SAND.builtInRegistryHolder()
-                                                                          .key())
-                                               .add(Blocks.SUSPICIOUS_GRAVEL.builtInRegistryHolder()
-                                                                            .key())
+        tag(PastelBlockTags.C_BRUSHABLE_BLOCKS).add(Blocks.SUSPICIOUS_SAND)
+                                               .add(Blocks.SUSPICIOUS_GRAVEL)
                                                .addOptional(
                                                    ResourceLocation.parse("the_bumblezone:pile_of_pollen_suspicious"));
-        tag(PastelBlockTags.C_INFESTED_BLOCKS).add(Blocks.INFESTED_COBBLESTONE.builtInRegistryHolder()
-                                                                              .key())
-                                              .add(Blocks.INFESTED_CHISELED_STONE_BRICKS.builtInRegistryHolder()
-                                                                                        .key())
-                                              .add(Blocks.INFESTED_CRACKED_STONE_BRICKS.builtInRegistryHolder()
-                                                                                       .key())
-                                              .add(Blocks.INFESTED_DEEPSLATE.builtInRegistryHolder()
-                                                                            .key())
-                                              .add(Blocks.INFESTED_STONE.builtInRegistryHolder()
-                                                                        .key())
-                                              .add(Blocks.INFESTED_MOSSY_STONE_BRICKS.builtInRegistryHolder()
-                                                                                     .key())
-                                              .add(Blocks.INFESTED_STONE_BRICKS.builtInRegistryHolder()
-                                                                               .key())
-                                              .add(PastelBlocks.INFESTED_BLACKSLAG.get()
-                                                                                  .builtInRegistryHolder()
-                                                                                  .key());
+        tag(PastelBlockTags.C_INFESTED_BLOCKS).add(Blocks.INFESTED_COBBLESTONE)
+                                              .add(Blocks.INFESTED_CHISELED_STONE_BRICKS)
+                                              .add(Blocks.INFESTED_CRACKED_STONE_BRICKS)
+                                              .add(Blocks.INFESTED_DEEPSLATE)
+                                              .add(Blocks.INFESTED_STONE)
+                                              .add(Blocks.INFESTED_MOSSY_STONE_BRICKS)
+                                              .add(Blocks.INFESTED_STONE_BRICKS)
+                                              .add(PastelBlocks.INFESTED_BLACKSLAG.get());
+        tag(PastelBlockTags.WARD_DISRUPTABLE).add(
+            PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get(),
+            PastelBlocks.BLACKSLAG_AZURITE_ORE.get()
+        );
 
     }
 

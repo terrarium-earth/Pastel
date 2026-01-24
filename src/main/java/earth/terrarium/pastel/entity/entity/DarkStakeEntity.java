@@ -1,13 +1,11 @@
 package earth.terrarium.pastel.entity.entity;
 
-import com.google.common.collect.Lists;
-import earth.terrarium.pastel.blocks.WardDisruptableBlock;
+import earth.terrarium.pastel.api.block.WardDisruptableBlock;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSounds;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -15,25 +13,26 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.UUID;
+
+import static earth.terrarium.pastel.blocks.geology.AzuriteOreBlock.WARDED;
 
 public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
     public static final int EFFECT_RADIUS = 10;
@@ -87,7 +86,13 @@ public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
                 .forEach(pos -> {
                     var state = level().getBlockState(pos);
                     if (state.getBlock() instanceof WardDisruptableBlock disruptableBlock)
-                        disruptableBlock.onWardDisrupt(pos, state, level(),this);
+                        disruptableBlock.onWardDisrupt(pos, state, level(), this);
+                    else if (state.is(PastelBlockTags.WARD_DISRUPTABLE) &&
+                             this.level() instanceof ServerLevel serverLevel) serverLevel.setBlock(
+                        pos, state.setValue(
+                            WARDED, false),
+                        Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_SUPPRESS_DROPS
+                    );
                 });
     }
 
