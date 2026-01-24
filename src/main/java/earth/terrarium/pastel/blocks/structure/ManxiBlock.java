@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.blocks.WardDisruptableBlock;
+import earth.terrarium.pastel.api.block.WardDisruptableBlock;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
