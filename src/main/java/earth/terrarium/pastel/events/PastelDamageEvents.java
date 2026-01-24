@@ -16,10 +16,7 @@ import earth.terrarium.pastel.mixin.accessors.LivingEntityAccessor;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithPatternAndVelocityPayload;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.PastelDamageTypeTags;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelMobEffects;
-import earth.terrarium.pastel.registries.PastelSounds;
+import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
 import net.minecraft.server.level.ServerLevel;
@@ -69,10 +66,14 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vampirism);
     }
 
-    private static void vampirism(LivingDamageEvent.Post event){
-        var attacker = event.getSource().getDirectEntity();
-        if(attacker instanceof ServerPlayer player && player.getData(ConsumptionRingData.ATTACHMENT)){
-            ConsumptionRingItem.applyOverheal(player,event.getNewDamage());
+    private static void vampirism(LivingDamageEvent.Post event) {
+        if (event.getEntity()
+                 .getType()
+                 .is(PastelEntityTypeTags.SOULLESS)) return;
+        var attacker = event.getSource()
+                            .getDirectEntity();
+        if (attacker instanceof ServerPlayer player && player.getData(ConsumptionRingData.ATTACHMENT)) {
+            ConsumptionRingItem.applyOverheal(player, event.getNewDamage());
         }
     }
 

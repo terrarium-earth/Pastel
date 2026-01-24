@@ -84,7 +84,6 @@ public class PastelAdvancements {
                 "unlocks/equipment/topaz_leggings");
             public static final ResourceLocation CITRINE_BOOTS = PastelCommon.locate("unlocks/equipment/citrine_boots");
             public static final ResourceLocation DARK_STAKES = PastelCommon.locate("unlocks/equipment/dark_stakes");
-            public static final ResourceLocation RING_OF_CONSUMPTION = PastelCommon.locate("unlocks/equipment/ring_of_consumption");
         }
 
         public static class Blocks {
@@ -220,6 +219,7 @@ public class PastelAdvancements {
             public static final ResourceLocation AZURE_DIKE_RING = PastelCommon.locate(
                 "unlocks/trinkets/azure_dike_ring");
             public static final ResourceLocation ASHEN_CIRCLET = PastelCommon.locate("unlocks/trinkets/ashen_circlet");
+            public static final ResourceLocation RING_OF_CONSUMPTION = PastelCommon.locate("unlocks/equipment/ring_of_consumption");
         }
 
         public static class Pylons {

@@ -144,6 +144,8 @@ public class PastelS2CPackets {
         // Data attachment stuff
         registrar.playToClient(
             PrimordialFireData.Payload.TYPE, PrimordialFireData.Payload.CODEC, PrimordialFireData.Payload::execute);
+        registrar.playToClient(
+            ConsumptionRingData.Payload.TYPE, ConsumptionRingData.Payload.CODEC, ConsumptionRingData.Payload::execute);
         registrar.playToClient(AzureDikeData.Payload.TYPE, AzureDikeData.Payload.CODEC, AzureDikeData.Payload::execute);
         registrar.playToClient(
             EverpromiseRibbonData.Payload.TYPE, EverpromiseRibbonData.Payload.CODEC,

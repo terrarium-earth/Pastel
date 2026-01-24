@@ -5858,6 +5858,19 @@ public class PastelGuidebookLang {
             " Wither. *Convenient*"
         );
         provider.add(
+            "book.pastel.guidebook.ring_of_consumption.page0.text",
+            "Looking back, it's clear that the Midnight Aberration was a failure of perspective. Now that I'm a bit " +
+            "wiser, though, maybe I can make better use of it. The way its derivatives consume matter to spread could" +
+            " be useful, if directed; as such, I have created this ring. When I attack an enemy, some of their life " +
+            "is consumed to bolster my own, even beyond its normal limits. Unfortunately, this is not without cost, " +
+            "as it also sends my metabolism into overdrive... if I'm not careful, my body will eat itself alive. " +
+            "Just in case, I've added an anaesthetic effect."
+        );
+        provider.add(
+            "book.pastel.guidebook.ring_of_consumption.page1.text",
+            "*I got the whole cookbook, I'm going to use the whole cookbook.*"
+        );
+        provider.add(
             "book.pastel.guidebook.ring_of_aetherial_grace.page0.text",
             "I know myself well enough now to be the one having one's head in the clouds.\\\n\\\n*Literally*, this " +
             "time around, though!"

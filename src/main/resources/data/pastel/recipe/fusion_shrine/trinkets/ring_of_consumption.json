@@ -1,0 +1,30 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1200,
+  "experience": 4.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_bismuth_ring",
+    {
+      "item": "pastel:midnight_chip",
+      "count": 4
+    },
+    {
+      "item": "pastel:blood_orchid_petal",
+      "count": 4
+    },
+    {
+      "item": "pastel:nightdew_sprout",
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "pastel:ring_of_consumption"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/ring_of_consumption",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

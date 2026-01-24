@@ -222,6 +222,7 @@ public class PastelItemLang {
         provider.add("item.pastel.priscillent_spectacles.tooltip", "§7Powered by §bGlow Ink Sacs");
         provider.add("item.pastel.priscillent_spectacles.tooltip_with_ink", "§7Powered by %s or §bGlow Ink Sacs§r");
         provider.add("item.pastel.heartsingers_reward.tooltip", "Grants you extra Hearts");
+        provider.add("item.pastel.ring_of_consumption.tooltip", "Grants lifesteal, at the cost of hunger");
         provider.add("item.pastel.hibernating_jade_vine_bulb.tooltip", "Kind of... deadish?");
         provider.add("item.pastel.imbrifer_cookbook.tooltip", "§9§oCookbook of Imbrifer - Blue glass and Aqua regia");
         provider.add(
