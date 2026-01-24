@@ -67,6 +67,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> ASH = of("ash");
     public static final TagKey<Block> PRECIPITATION_SOURCES = of("precipitation_source");
     public static final TagKey<Block> ANIMALS_SPAWNABLE_ON_ADDITIONS = of("animals_spawnable_on_additions");
+    public static final TagKey<Block> WARD_DISRUPTABLE = of("ward_disruptable");
 
     // ORES
     public static final TagKey<Block> AZURITE_ORES = of("azurite_ores");
