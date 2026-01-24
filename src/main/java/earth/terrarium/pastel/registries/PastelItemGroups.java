@@ -2216,7 +2216,7 @@ public class PastelItemGroups {
                                                                         entries.accept(
                                                                             PastelItems.GLOW_PHANTOM_FRAME.get());
                                                                         entries.accept(
-                                                                            PastelItems.LOGO_BANNER_PATTERN.get());
+                                                                            PastelItems.COLOR_THEORY_BANNER_PATTERN.get());
                                                                         entries.accept(
                                                                             PastelItems.AMETHYST_SHARD_BANNER_PATTERN.get());
                                                                         entries.accept(

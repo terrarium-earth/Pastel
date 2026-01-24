@@ -3,6 +3,7 @@ package earth.terrarium.pastel.data.lang;
 import earth.terrarium.pastel.data.PastelLanguageProvider;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemNameBlockItem;
 
 import java.util.Map;
@@ -67,6 +68,39 @@ public class PastelItemLang {
         provider.add("item.pastel.wire_hook.alias_0", "Hookshot");
         provider.add("item.pastel.wire_hook.alias_1", "Grappling Hook");
         provider.add("item.pastel.wire_hook.alias_2", "Grapple");
+        
+        // banner patterns (the formatter is determined to fuck this up)
+        for (Map.Entry<String, String> pattern : Map.ofEntries(
+                                                        Map.entry("amethyst_cluster", "Amethyst Cluster"),
+                                                        Map.entry("amethyst_shard", "Amethyst Shard"),
+                                                        Map.entry("bedrock_dust", "Bedrock Dust"),
+                                                        Map.entry("crafting_tablet", "Crafting Tablet"),
+                                                        Map.entry("four_leaf_clover", "Four-leafed Clover"),
+                                                        Map.entry("guidebook", "Colorful World"),
+                                                        Map.entry("jade_vine", "Jade Vine"),
+                                                        Map.entry("knowledge_gem", "Knowledge Gem"),
+                                                        Map.entry("color_theory", "Color Theory"),
+                                                        Map.entry("multitool", "Multitool"),
+                                                        Map.entry("neolith", "Neolith"),
+                                                        Map.entry("palette", "Artistry"),
+                                                        Map.entry("pigment", "Pigment"),
+                                                        Map.entry("raw_azurite", "Azurite"),
+                                                        Map.entry("shimmer", "Shimmer"),
+                                                        Map.entry("shimmerstone", "Shimmerstone"),
+                                                        Map.entry("vegetal", "Vegetal"),
+                                                        Map.entry("astrologer", "Astrologer"),
+                                                        Map.entry("poisonbloom", "Poisonbloom"),
+                                                        Map.entry("deep_light", "Deep Light")
+                                                    )
+                                                    .entrySet()) {
+            for (DyeColor color : DyeColor.values()) {
+                // evil oneliner go
+                provider.add(
+                    "block.minecraft.banner.pastel." + pattern.getKey() + "." + color.name().toLowerCase(),
+                    PastelLanguageProvider.prettifyRegisteredName(color.getName()) + " " + pattern.getValue()
+                );
+            }
+        }
 
         // tooltips and such
         provider.add("item.pastel.onyx_helmet.tooltip", "Unity");
@@ -295,7 +329,7 @@ public class PastelItemLang {
             "item.pastel.knowledge_gem.tooltip.use", "Use to drain, or crouch-use to store experience (%d/tick)");
         provider.add("item.pastel.lagoon_rod.tooltip", "The bobber indicates fishing in open waters");
         provider.add("item.pastel.least_black_lotus.tooltip", "Washed one too many times?");
-        provider.add("item.pastel.logo_banner_pattern.desc", "Color Theory");
+        provider.add("item.pastel.color_theory_banner_pattern.desc", "Color Theory");
         provider.add("item.pastel.astrologer_banner_pattern.desc", "Astrologer");
         provider.add("item.pastel.velvet_astrologer_banner_pattern.desc", "Velvet Astrologer");
         provider.add("item.pastel.poisonbloom_banner_pattern.desc", "Poisonbloom");

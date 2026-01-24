@@ -22,5 +22,6 @@ public class PastelRegistryAliases {
         PastelItems.ITEM_REGISTRAR.addAlias(PastelCommon.locate("lizard_spawn_egg"),PastelItems.LIZARD_SPAWN_EGG.getId());
         PastelItems.ITEM_REGISTRAR.addAlias(PastelCommon.locate("ring_of_aerial_grace"),PastelItems.RING_OF_AETHERIAL_GRACE.getId());
         PastelItems.ITEM_REGISTRAR.addAlias(PastelCommon.locate("take_off_belt"),PastelItems.TAKEOFF_BELT.getId());
+        PastelItems.ITEM_REGISTRAR.addAlias(PastelCommon.locate("logo_banner_pattern"),PastelItems.COLOR_THEORY_BANNER_PATTERN.getId());
     }
 }
