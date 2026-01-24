@@ -30,3 +30,5 @@ backup/
 # adrian having a mac moment
 .DS_Store
 
+# generated cache
+src/main/generated/.cache/
