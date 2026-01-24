@@ -138,7 +138,6 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     public void onUnequip(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
         if (type == Type.HELMET) {
             for (var equippedStack : entity.getAllSlots()) {
-                PastelCommon.logWarning("helmet removed");
                 if (equippedStack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED))
                     CrystalArmorItem.removeEmpowered(stack);
             }
