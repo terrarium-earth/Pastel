@@ -31,7 +31,7 @@ public class OreBlockModels {
                                                                                                                              : "",
                                                                                                                       generators.modelOutput
                                                                                                                   )))));
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.DEEPSLATE_AZURITE_ORE.get())
+        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AZURE_CRYSTAL.get())
                                                                 .with(PropertyDispatch.property(AzuriteOreBlock.WARDED)
                                                                                       .generate(
                                                                                           (warded) -> PastelModelHelper.createModelVariant(
@@ -41,7 +41,7 @@ public class OreBlockModels {
                                                                                                                              : ""
                                                                                                                   )
                                                                                                                   .createWithSuffix(
-                                                                                                                      PastelBlocks.DEEPSLATE_AZURITE_ORE.get(),
+                                                                                                                      PastelBlocks.AZURE_CRYSTAL.get(),
                                                                                                                       warded ? "_warded"
                                                                                                                              : "",
                                                                                                                       generators.modelOutput

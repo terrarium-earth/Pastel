@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.data.databank;
 
 import com.cmdpro.databank.datagen.HiddenDatagenProvider;
-import com.cmdpro.databank.hidden.HiddenCondition;
 import com.cmdpro.databank.hidden.conditions.ActualPlayerCondition;
 import com.cmdpro.databank.hidden.conditions.NotCondition;
 import com.cmdpro.databank.hidden.types.BlockHiddenType;
@@ -17,7 +16,6 @@ import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredStrippedWoo
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredTree;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredWoodBlock;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.PottedColoredSaplingBlock;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -177,10 +175,10 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
             PastelAdvancements.Milestones.REVEAL_QUITOXIC_REEDS
         );
 
-        hideOre(
-            PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get(),
-            null, PastelAdvancements.Milestones.REVEAL_AZURITE
-        );
+        hideOre(null, PastelBlocks.AZURE_CRYSTAL.get(), null, PastelAdvancements.Milestones.REVEAL_AZURITE);
+
+        hideBlock(PastelBlocks.AZURE_OUTCROP.get(), Blocks.DEEPSLATE, PastelAdvancements.Milestones.REVEAL_AZURITE);
+
         hideOre(
             PastelBlocks.MALACHITE_ORE.get(), PastelBlocks.DEEPSLATE_MALACHITE_ORE.get(),
             PastelBlocks.BLACKSLAG_MALACHITE_ORE.get(), PastelAdvancements.Milestones.REVEAL_MALACHITE

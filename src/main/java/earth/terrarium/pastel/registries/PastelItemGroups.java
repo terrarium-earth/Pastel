@@ -1496,9 +1496,8 @@ public class PastelItemGroups {
                                                                            PastelBlocks.SHIMMERSTONE_ORE.get());
                                                                        entries.accept(
                                                                            PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get());
-                                                                       entries.accept(PastelBlocks.AZURITE_ORE.get());
                                                                        entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_AZURITE_ORE.get());
+                                                                           PastelBlocks.AZURE_CRYSTAL.get());
                                                                        entries.accept(PastelBlocks.STRATINE_ORE.get());
                                                                        entries.accept(PastelBlocks.PALTAERIA_ORE.get());
 
