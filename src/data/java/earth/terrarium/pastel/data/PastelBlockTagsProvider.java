@@ -43,6 +43,7 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
             PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get(),
             PastelBlocks.BLACKSLAG_AZURITE_ORE.get()
         );
+        tag(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST).addTag(PastelBlockTags.UNBREAKABLE);
 
     }
 

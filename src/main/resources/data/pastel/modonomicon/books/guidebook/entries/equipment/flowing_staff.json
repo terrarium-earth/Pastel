@@ -1,0 +1,47 @@
+{
+  "name": "item.pastel.flowing_staff",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/flowing_staff"
+  },
+  "icon": {
+    "item": "pastel:flowing_staff"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 10,
+  "y": 7,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.flowing_staff.page0.text",
+      "title": "item.pastel.flowing_staff"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.flowing_staff.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/flowing_staff"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/craft_resonant_tool"
+      },
+      "title": "enchantment.pastel.resonance",
+      "item": {
+        "item": "pastel:flowing_staff"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:resonance": 1
+        }
+      },
+      "text": "book.pastel.guidebook.flowing_staff.page2.text"
+    }
+  ]
+}

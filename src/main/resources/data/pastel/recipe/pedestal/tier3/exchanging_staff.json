@@ -1,24 +1,24 @@
 {
   "type": "pastel:pedestal",
   "time": 1200,
-  "tier": "complex",
+  "tier": "simple",
   "colors": {
-    "pastel:cyan": 2,
-    "pastel:magenta": 4,
-    "pastel:yellow": 0,
-    "pastel:white": 4,
+    "pastel:cyan": 6,
+    "pastel:magenta": 0,
+    "pastel:yellow": 2,
+    "pastel:white": 0,
     "pastel:black": 1
   },
   "experience": 2.0,
   "pattern": [
-    " PG",
-    " SP",
-    "S  "
+    " BP",
+    " TB",
+    "T  "
   ],
   "key": {
-    "S": "minecraft:stick",
-    "P": "pastel:light_gray_pigment",
-    "G": "pastel:paltaeria_fragments"
+    "T": "minecraft:stick",
+    "B": "pastel:brown_pigment",
+    "P": "pastel:hoverblock"
   },
   "result": {
     "id": "pastel:exchanging_staff",

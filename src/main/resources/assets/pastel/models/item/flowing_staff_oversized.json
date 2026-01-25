@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:item/handheld_oversized_high_grip",
+  "textures": {
+    "layer0": "pastel:item/flowing_staff_oversized"
+  }
+}

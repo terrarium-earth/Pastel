@@ -2,7 +2,7 @@
   "name": "block.pastel.hoverblock",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:lategame/collect_hoverblock"
+    "advancement_id": "pastel:midgame/collect_hoverblock"
   },
   "icon": {
     "item": "pastel:hoverblock"

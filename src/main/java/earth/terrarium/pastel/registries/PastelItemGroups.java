@@ -548,7 +548,8 @@ public class PastelItemGroups {
                                                                    entries.accept(PastelItems.SHIELDGRASP_AMULET.get());
                                                                    entries.accept(PastelItems.SHIELDGRASP_AMULET.get()
                                                                                                                 .getFullStack());
-                                                                   entries.accept(PastelItems.RING_OF_CONSUMPTION.get());
+                                                                   entries.accept(
+                                                                       PastelItems.RING_OF_CONSUMPTION.get());
                                                                    entries.accept(
                                                                        PastelItems.HEARTSINGERS_REWARD.get());
                                                                    entries.accept(PastelItems.HEARTSINGERS_REWARD.get()
@@ -656,6 +657,11 @@ public class PastelItemGroups {
                                                                    entries.accept(
                                                                        PastelItems.STAFF_OF_REMEMBRANCE.get());
                                                                    entries.accept(PastelItems.CONSTRUCTORS_STAFF.get());
+                                                                   entries.accept(PastelItems.FLOWING_STAFF.get());
+                                                                   entries.accept(Ench.getEnchantedStack(
+                                                                       lookup, PastelItems.FLOWING_STAFF.get(), Map.of(
+                                                                           PastelEnchantments.RESONANCE, 1)
+                                                                   ));
                                                                    entries.accept(PastelItems.EXCHANGING_STAFF.get());
                                                                    Ench.addOrUpgradeEnchantmentOpt(
                                                                            lookup, PastelItems.EXCHANGING_STAFF.get()
@@ -1584,7 +1590,8 @@ public class PastelItemGroups {
                                                                            PastelItems.AMARANTH_GRAINS.get());
                                                                        entries.accept(
                                                                            PastelBlocks.AMARANTH_BUSHEL.get());
-                                                                       entries.accept(PastelItems.GLISTERING_MELON_SEEDS);
+                                                                       entries.accept(
+                                                                           PastelItems.GLISTERING_MELON_SEEDS);
                                                                        entries.accept(PastelBlocks.GLISTERING_MELON);
 
                                                                        entries.accept(

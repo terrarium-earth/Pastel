@@ -6,10 +6,10 @@
         "advancement": "pastel:midgame/collect_stratine"
       }
     },
-    "collected_orange_pigment": {
+    "collected_light_blue_pigment": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:hidden/collect_pigment/orange"
+        "advancement": "pastel:hidden/collect_pigment/light_blue"
       }
     },
     "unlocked_ink": {

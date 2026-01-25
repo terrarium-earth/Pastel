@@ -22,6 +22,8 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import vazkii.botania.common.item.BlackHoleTalismanItem;
 import vazkii.botania.common.item.BotaniaItems;
 
+import java.util.List;
+
 import static earth.terrarium.pastel.registries.PastelItems.item;
 
 @SuppressWarnings("unused")
@@ -55,6 +57,12 @@ public class BotaniaCompat extends PastelIntegrationPacks.ModIntegrationPack {
                         }
                     }
                     return 0;
+                }
+
+                @Override
+                public List<Item> getContainedItems(Player player, ItemStack stack) {
+                    Block storedBlock = BlackHoleTalismanItem.getBlock(stack);
+                    return storedBlock==null?List.of():List.of(storedBlock.asItem());
                 }
 
                 @Override

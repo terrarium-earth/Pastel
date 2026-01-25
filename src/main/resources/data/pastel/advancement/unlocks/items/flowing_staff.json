@@ -1,15 +1,15 @@
 {
   "criteria": {
-    "collected_hoverblock": {
+    "collected_paltaeria": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:midgame/collect_hoverblock"
+        "advancement": "pastel:midgame/collect_paltaeria"
       }
     },
-    "collected_brown_pigment": {
+    "collected_yellow_pigment": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:hidden/collect_pigment/brown"
+        "advancement": "pastel:hidden/collect_pigment/yellow"
       }
     },
     "unlocked_ink": {

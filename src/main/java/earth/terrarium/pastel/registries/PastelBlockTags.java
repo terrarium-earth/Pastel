@@ -59,6 +59,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> NATURES_STAFF_HARVEST_WHITELIST = of("natures_staff_harvest_whitelist");
     public static final TagKey<Block> BUILDING_STAFFS_BLACKLISTED = of("building_staffs_blacklisted");
     public static final TagKey<Block> CRYSTAL_APOTHECARY_HARVESTABLE = of("crystal_apothecary_harvestable");
+    public static final TagKey<Block> UNBREAKABLE = of("unbreakable");
     public static final TagKey<Block> UNBREAKABLE_STRUCTURE_BLOCKS = of("unbreakable_structure_blocks");
     public static final TagKey<Block> INK_EFFECT_BLACKLISTED = of("ink_effect_blacklisted");
     // blacklisting form block coloring, repairing, ...
@@ -68,6 +69,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> PRECIPITATION_SOURCES = of("precipitation_source");
     public static final TagKey<Block> ANIMALS_SPAWNABLE_ON_ADDITIONS = of("animals_spawnable_on_additions");
     public static final TagKey<Block> WARD_DISRUPTABLE = of("ward_disruptable");
+    public static final TagKey<Block> FLOWING_STAFF_MOVE_BLACKLIST = of("flowing_staff_move_blacklist");
 
     // ORES
     public static final TagKey<Block> AZURITE_ORES = of("azurite_ores");

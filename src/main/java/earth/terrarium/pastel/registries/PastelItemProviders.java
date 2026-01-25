@@ -13,6 +13,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -49,6 +50,12 @@ public class PastelItemProviders {
                             return 0;
 
                         return (int) storage.extractPure(amount);
+                    }
+
+                    @Override
+                    public List<Item> getContainedItems(Player player, ItemStack stack) {
+                        var storage = ItemStorage.load(stack);
+                        return List.of(storage.getReference().asItem());
                     }
 
                     @Override
@@ -94,6 +101,13 @@ public class PastelItemProviders {
                     }
                 }
                 return removedCount;
+            }
+
+            @Override
+            public List<Item> getContainedItems(Player player, ItemStack stack) {
+                List<Item> ret = new ArrayList<>();
+                iterableFactory.apply(player,stack).forEach(itemStack -> ret.add(itemStack.getItem()));
+                return ret;
             }
 
             @Override
