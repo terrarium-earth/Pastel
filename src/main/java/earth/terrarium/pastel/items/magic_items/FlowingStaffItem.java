@@ -346,9 +346,8 @@ public class FlowingStaffItem extends BuildingStaffItem {
                           .iterator()
                           .next();
             if (blockPosCache.contains(pos)) pos = null;
-
-            if (pos != null && !level.getBlockState(pos)
-                                     .canBeReplaced()) {
+            else if (!level.getBlockState(pos)
+                           .canBeReplaced()) {
                 blockPosCache.add(pos);
                 pos = null;
             }
