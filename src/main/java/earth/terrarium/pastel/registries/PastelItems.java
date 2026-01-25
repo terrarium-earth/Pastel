@@ -55,23 +55,7 @@ import earth.terrarium.pastel.items.food.beverages.SuspiciousBrewItem;
 import earth.terrarium.pastel.items.item_frame.EnderCanvasItem;
 import earth.terrarium.pastel.items.item_frame.PhantomFrameItem;
 import earth.terrarium.pastel.items.item_frame.PhantomGlowFrameItem;
-import earth.terrarium.pastel.items.magic_items.BagOfHoldingItem;
-import earth.terrarium.pastel.items.magic_items.BlockFlooderItem;
-import earth.terrarium.pastel.items.magic_items.CelestialPocketWatchItem;
-import earth.terrarium.pastel.items.magic_items.ConstructorsStaffItem;
-import earth.terrarium.pastel.items.magic_items.CraftingTabletItem;
-import earth.terrarium.pastel.items.magic_items.EnchantmentCanvasItem;
-import earth.terrarium.pastel.items.magic_items.EnderSpliceItem;
-import earth.terrarium.pastel.items.magic_items.EverpromiseRibbonItem;
-import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
-import earth.terrarium.pastel.items.magic_items.GildedBookItem;
-import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
-import earth.terrarium.pastel.items.magic_items.NaturesStaffItem;
-import earth.terrarium.pastel.items.magic_items.PaintbrushItem;
-import earth.terrarium.pastel.items.magic_items.PerturbedEyeItem;
-import earth.terrarium.pastel.items.magic_items.PipeBombItem;
-import earth.terrarium.pastel.items.magic_items.RadianceStaffItem;
-import earth.terrarium.pastel.items.magic_items.StaffOfRemembranceItem;
+import earth.terrarium.pastel.items.magic_items.*;
 import earth.terrarium.pastel.items.map.ArtisansAtlasItem;
 import earth.terrarium.pastel.items.misc.AetherVestigesItem;
 import earth.terrarium.pastel.items.misc.AshItem;
@@ -1515,9 +1499,11 @@ public class PastelItems {
     public static final DeferredItem<Item> STAFF_OF_REMEMBRANCE = register(
         item("staff_of_remembrance", () -> new StaffOfRemembranceItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIME));
     public static final DeferredItem<Item> CONSTRUCTORS_STAFF = register(
-        item("constructors_staff", () -> new ConstructorsStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY));
+        item("constructors_staff", () -> new ConstructorsStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.CYAN));
+    public static final DeferredItem<Item> FLOWING_STAFF = register(
+        item("flowing_staff", () -> new FlowingStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.CYAN));
     public static final DeferredItem<Item> EXCHANGING_STAFF = register(
-        item("exchanging_staff", () -> new ExchangeStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY));
+        item("exchanging_staff", () -> new ExchangeStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.CYAN));
     public static final DeferredItem<Item> BLOCK_FLOODER = register(
         item("block_flooder", () -> new BlockFlooderItem(IS.of(Rarity.UNCOMMON)), InkColors.LIGHT_GRAY));
     public static final DeferredItem<Item> PIPE_BOMB = register(

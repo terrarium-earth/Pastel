@@ -11,18 +11,18 @@
   },
   "experience": 2.0,
   "pattern": [
-    " LT",
-    " SL",
+    " YP",
+    " SY",
     "S  "
   ],
   "key": {
     "S": "minecraft:stick",
-    "L": "pastel:light_blue_pigment",
-    "T": "pastel:stratine_fragments"
+    "Y": "pastel:yellow_pigment",
+    "P": "pastel:paltaeria_fragments"
   },
   "result": {
-    "id": "pastel:constructors_staff",
+    "id": "pastel:flowing_staff",
     "count": 1
   },
-  "required_advancement": "pastel:unlocks/items/constructors_staff"
+  "required_advancement": "pastel:unlocks/items/flowing_staff"
 }

@@ -203,7 +203,7 @@
       },
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "pastel:lategame/collect_paltaeria"
+        "advancement_id": "pastel:midgame/collect_paltaeria"
       },
       "text": "book.pastel.guidebook.potion_workshop_reagents.paltaeria_fragments.text"
     },

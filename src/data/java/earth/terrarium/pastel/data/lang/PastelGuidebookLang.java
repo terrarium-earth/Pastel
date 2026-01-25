@@ -1101,6 +1101,22 @@ public class PastelGuidebookLang {
             "When sneaking, expands based on all blocks instead of just matching ones."
         );
         provider.add(
+            "book.pastel.guidebook.flowing_staff.page0.text",
+            "Sometimes, I want to floodfill an area, or need some texture on my latest build. Sure, I *could* place " +
+            "all those blocks manually... or I could let gravity—and a bit of Cyan Ink—do the work for me.\\\nTakes " +
+            "blocks matching whatever I hold in my other hand, or conjures cobblestone out of a bit of extra Ink."
+        );
+        provider.add(
+            "book.pastel.guidebook.flowing_staff.page1.text",
+            "Tip: use a Bundle to build a block palette, or a Shulker Box for fine-tuning block weights."
+        );
+        provider.add(
+            "book.pastel.guidebook.flowing_staff.page2.text",
+            "It seems the power of gravity is more versatile than I initially expected. With this enchantment, the " +
+            "staff loses its floodfilling functionality in favor of being able to pick up the most complex of blocks" +
+            " and carry them around."
+        );
+        provider.add(
             "book.pastel.guidebook.cotton_cloud_boots.page0.text",
             "Being able to fly like the birds has always been a dream of many people, including myself.\\\n\\\nI " +
             "designed these boots to make it happen. The freedom is almost overwhelming! (*I didn't quite get it " +
@@ -2464,8 +2480,15 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.ideas.paltaeria.page1.text",
             "I saw an ore both on the central island and in the outer regions of the End, just rarely generating " +
-            "exposed to air, so digging into one of the islands may be my best bet. It has both a common and a rare " +
-            "drop."
+            "exposed to air, so digging into one of the islands may be my best bet."
+        );
+        provider.add(
+            "book.pastel.guidebook.ideas.paltaeria_gem.page0.text",
+            "Now that I have Resonance, perhaps the End would be worth another visit?"
+        );
+        provider.add(
+            "book.pastel.guidebook.ideas.paltaeria_gem.page1.text",
+            "Paltaeria is far too fragile to harvest intacts gems from normally, but Resonance should do the trick."
         );
         provider.add("book.pastel.guidebook.ideas.preservation_ruins.name", "3 Structures");
         provider.add(
@@ -4859,7 +4882,9 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.paltaeria.page0.text",
             "The pale blue color is the hallmark of this ore, found exclusively in small clusters in the End" +
-            ".\\\n\\\nLike the End itself, the curious properties of this material are not to be overlooked."
+            ".\\\n\\\nLike the End itself, the curious properties of this material are not to be overlooked" +
+            ".\\\n\\\nUnfortunately, this one seems far more fragile than [Stratine](entry://general/stratine)—I " +
+            "won't be able to get an intact gem without special equipment."
         );
         provider.add(
             "book.pastel.guidebook.paltaeria.page2.text",

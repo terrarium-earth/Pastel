@@ -56,32 +56,12 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	public ExchangeStaffItem(Properties settings) {
 		super(settings);
 	}
-	
-	// The range grows with the players' progression
-	// this way the item is not overpowered at the start
-	// but not useless at the end
-	// this way the player does not need to craft 5 tiers
-	// of staffs that each do basically feel the same
+
 	public static int getRange(Player playerEntity) {
 		if (playerEntity == null || playerEntity.isCreative()) {
 			return CREATIVE_RANGE;
 		} else {
-			Optional<PedestalTier> highestUnlockedRecipeTier = PedestalTier.getHighestUnlockedRecipeTier(playerEntity);
-			if (highestUnlockedRecipeTier.isPresent()) {
-				switch (highestUnlockedRecipeTier.get()) {
-					case COMPLEX -> {
-						return 5;
-					}
-					case ADVANCED -> {
-						return 4;
-					}
-					default -> {
-						return 3;
-					}
-				}
-			} else {
-				return 2;
-			}
+			return 5;
 		}
 	}
 	

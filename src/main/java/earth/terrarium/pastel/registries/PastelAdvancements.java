@@ -668,7 +668,6 @@ public class PastelAdvancements {
             "lategame/collect_prickly_bayleaf");
         public static final ResourceLocation REVIVE_BLACK_SLUDGE_PLANT = PastelCommon.locate(
             "lategame/revive_black_sludge_plant");
-        public static final ResourceLocation COLLECT_PALTAERIA = PastelCommon.locate("lategame/collect_paltaeria");
         public static final ResourceLocation COLLECT_MOONSTONE_CORE = PastelCommon.locate(
             "lategame/collect_moonstone_core");
         public static final ResourceLocation CREATE_EVERNECTAR = PastelCommon.locate("lategame/create_evernectar");
@@ -1072,6 +1071,7 @@ public class PastelAdvancements {
         );
         public static final ResourceLocation USE_DARK_STAKE_ON_DIKE_GATE = PastelCommon.locate(
             "midgame/use_dark_stake_on_dike_gate");
+        public static final ResourceLocation COLLECT_PALTAERIA = PastelCommon.locate("midgame/collect_paltaeria");
     }
 
     public static class Triggers {

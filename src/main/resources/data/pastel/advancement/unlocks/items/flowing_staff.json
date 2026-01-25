@@ -6,10 +6,16 @@
         "advancement": "pastel:midgame/collect_paltaeria"
       }
     },
-    "collected_radiating_ender": {
+    "collected_yellow_pigment": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:collect_radiating_ender"
+        "advancement": "pastel:hidden/collect_pigment/yellow"
+      }
+    },
+    "unlocked_ink": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:milestones/unlock_ink_use"
       }
     }
   }

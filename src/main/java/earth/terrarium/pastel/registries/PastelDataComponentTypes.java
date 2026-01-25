@@ -4,21 +4,7 @@ import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.item.ItemStorage;
-import earth.terrarium.pastel.components.BeverageComponent;
-import earth.terrarium.pastel.components.CustomPotionDataComponent;
-import earth.terrarium.pastel.components.EnderSpliceComponent;
-import earth.terrarium.pastel.components.ExtendedBundleComponent;
-import earth.terrarium.pastel.components.InfusedBeverageComponent;
-import earth.terrarium.pastel.components.InkPoweredComponent;
-import earth.terrarium.pastel.components.InkStorageComponent;
-import earth.terrarium.pastel.components.JadeWineComponent;
-import earth.terrarium.pastel.components.MemoryComponent;
-import earth.terrarium.pastel.components.PairedFoodComponent;
-import earth.terrarium.pastel.components.PairedItemComponent;
-import earth.terrarium.pastel.components.ShootingStarComponent;
-import earth.terrarium.pastel.components.WithMilkComponent;
-import earth.terrarium.pastel.components.WorkstaffComponent;
-import earth.terrarium.pastel.components.WrappedPresentComponent;
+import earth.terrarium.pastel.components.*;
 import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
@@ -85,6 +71,14 @@ public class PastelDataComponentTypes {
         "ender_canvas_variant", builder -> builder.persistent(EnderCanvasEntity.EnderCanvasVariant.CODEC)
                                                   .networkSynchronized(
                                                       EnderCanvasEntity.EnderCanvasVariant.STREAM_CODEC)
+    );
+    public static final DataComponentType<FlowingStaffComponent> FLOWING_STAFF = register(
+        "flowing_staff", builder -> builder.persistent(FlowingStaffComponent.CODEC)
+                                           .networkSynchronized(FlowingStaffComponent.STREAM_CODEC)
+    );
+    public static final DataComponentType<StoredBlockEntityComponent> STORED_BLOCK_ENTITY = register("stored_block_entity",
+                                                                                        builder -> builder.persistent(
+                                                                                            StoredBlockEntityComponent.CODEC)
     );
     public static final DataComponentType<ExtendedBundleComponent> EXTENDED_BUNDLE = register(
         "extended_bundle", builder -> builder.persistent(ExtendedBundleComponent.CODEC)

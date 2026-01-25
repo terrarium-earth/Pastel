@@ -1,40 +1,40 @@
 {
   "name": "book.pastel.guidebook.idea",
-  "description": "book.pastel.guidebook.ideas.a_new_ore",
+  "description": "book.pastel.guidebook.ideas.a_new_resource",
   "category": "pastel:general",
   "hide_while_locked": true,
   "parents": [],
   "background_u_index": 0,
   "background_v_index": 5,
-  "x": 15,
+  "x": 17,
   "y": 3,
   "icon": "pastel:textures/gui/guidebook/icons/idea.png",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:milestones/reveal_paltaeria"
+    "advancement_id": "pastel:lategame/craft_resonant_tool"
   },
   "read_by_default": true,
-  "turnin": "pastel:midgame/collect_paltaeria",
+  "turnin": "pastel:hidden/collect_paltaeria_gem",
   "pages": [
     {
       "type": "pastel:hint",
       "title": "book.pastel.guidebook.ideas.where_to_find",
-      "completion_advancement": "pastel:triggers/hints/paltaeria_page0",
+      "completion_advancement": "pastel:triggers/hints/paltaeria_gem_page0",
       "cost": {
-        "item": "pastel:raw_azurite",
+        "item": "pastel:moonstone_shard",
         "count": 8
       },
-      "text": "book.pastel.guidebook.ideas.paltaeria.page0.text"
+      "text": "book.pastel.guidebook.ideas.paltaeria_gem.page0.text"
     },
     {
       "type": "pastel:hint",
       "title": "book.pastel.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": "pastel:raw_azurite",
+        "item": "pastel:moonstone_shard",
         "count": 32
       },
-      "text": "book.pastel.guidebook.ideas.paltaeria.page1.text",
-      "completion_advancement": "pastel:triggers/hints/paltaeria_page1"
+      "text": "book.pastel.guidebook.ideas.paltaeria_gem.page1.text",
+      "completion_advancement": "pastel:triggers/hints/paltaeria_gem_page1"
     }
   ]
 }

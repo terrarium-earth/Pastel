@@ -6,6 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.ItemCapability;
 
+import java.util.List;
+
 public interface ItemProvider {
     ItemCapability<ItemProvider, Void> CAPABILITY = ItemCapability.createVoid(
         PastelCommon.ofPastel("item_provider"), ItemProvider.class);
@@ -13,4 +15,6 @@ public interface ItemProvider {
     int getItemCount(Player player, ItemStack stack, Item requestedItem);
 
     int provideItems(Player player, ItemStack stack, Item requestedItem, int amount);
+
+    List<Item> getContainedItems(Player player, ItemStack stack);
 }

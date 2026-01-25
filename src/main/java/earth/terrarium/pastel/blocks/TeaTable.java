@@ -274,9 +274,9 @@ public class TeaTable extends Block implements EntityBlock {
         PastelAdvancements.Unlocks.Enchantments.VANILLA_SWIFT_SNEAK,
         PastelAdvancements.Unlocks.Enchantments.VANILLA_WATER, PastelAdvancements.Unlocks.Enchantments.VANILLA_TRIDENT,
         PastelAdvancements.Unlocks.Enchantments.VANILLA_QUITOXIC,
-        PastelAdvancements.Unlocks.Enchantments.INVENTORY_INSERTION,
-        PastelAdvancements.Unlocks.Enchantments.BIG_CATCH, PastelAdvancements.Unlocks.Enchantments.FIRST_STRIKE,
-        PastelAdvancements.Unlocks.Enchantments.EXUBERANCE, PastelAdvancements.Unlocks.Enchantments.VOIDING_CRAFTING,
+        PastelAdvancements.Unlocks.Enchantments.INVENTORY_INSERTION, PastelAdvancements.Unlocks.Enchantments.BIG_CATCH,
+        PastelAdvancements.Unlocks.Enchantments.FIRST_STRIKE, PastelAdvancements.Unlocks.Enchantments.EXUBERANCE,
+        PastelAdvancements.Unlocks.Enchantments.VOIDING_CRAFTING,
         PastelAdvancements.Unlocks.Enchantments.VANILLA_DAMAGE, PastelAdvancements.Unlocks.Weather.THUNDER,
         PastelAdvancements.Unlocks.Potions.WEAK_SLEEP_EFFECTS, PastelAdvancements.Unlocks.Potions.DARKNESS,
         PastelAdvancements.Unlocks.Potions.DEADLY_POISON, PastelAdvancements.Unlocks.Potions.LUCK,
@@ -316,8 +316,8 @@ public class TeaTable extends Block implements EntityBlock {
         PastelAdvancements.Unlocks.Food.RABBIT_POISON, PastelAdvancements.Unlocks.Food.DEMON_TEA,
         PastelAdvancements.Unlocks.Food.FREIGEIST, PastelAdvancements.Milestones.REVEAL_BLOOD_ORCHID_PETALS,
         PastelAdvancements.Hidden.StatusEffects.ASCENSION, PastelAdvancements.Hidden.StatusEffects.DIVINITY,
-        PastelAdvancements.Hidden.StatusEffects.FRENZY,
-        };
+        PastelAdvancements.Hidden.StatusEffects.FRENZY, PastelAdvancements.Midgame.COLLECT_PALTAERIA
+    };
     public static final ResourceLocation[] imbriferToEndgame = new ResourceLocation[]{
         PastelAdvancements.Unlocks.Equipment.NECTAR_LANCE, PastelAdvancements.Unlocks.Equipment.DRAGONRENDING_PICKAXE,
         PastelAdvancements.Unlocks.Equipment.DREAMFLAYER, PastelAdvancements.Unlocks.Equipment.NIGHTFALLS_BLADE,
@@ -356,8 +356,7 @@ public class TeaTable extends Block implements EntityBlock {
         PastelAdvancements.Lategame.CREATE_GLASS_CREST_TOOL,
         PastelAdvancements.Lategame.PUT_TOO_MANY_LOW_GRAVITY_BLOCKS_INTO_ANIMAL,
         PastelAdvancements.Lategame.COLLECT_PRICKLY_BAYLEAF, PastelAdvancements.Lategame.REVIVE_BLACK_SLUDGE_PLANT,
-        PastelAdvancements.Lategame.COLLECT_PALTAERIA, PastelAdvancements.Lategame.COLLECT_MOONSTONE_CORE,
-        PastelAdvancements.Lategame.CREATE_EVERNECTAR,
+        PastelAdvancements.Lategame.COLLECT_MOONSTONE_CORE, PastelAdvancements.Lategame.CREATE_EVERNECTAR,
         PastelAdvancements.Lategame.BREAK_INFESTED_BLOCK_WITH_RESONANCE_TOOL,
         PastelAdvancements.Lategame.REACHED_DD_FLOOR, PastelAdvancements.Lategame.BREAK_SPAWNER_WITH_RESONANCE_TOOL,
         PastelAdvancements.Lategame.COLLECT_MOONSTONE, PastelAdvancements.Lategame.ENTER_STRANGE_PRESERVATION_RUIN,

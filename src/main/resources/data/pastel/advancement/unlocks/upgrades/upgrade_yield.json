@@ -3,7 +3,7 @@
     "collected_paltaeria": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:lategame/collect_paltaeria"
+        "advancement": "pastel:midgame/collect_paltaeria"
       }
     }
   }

@@ -1,5 +1,5 @@
 {
-  "parent": "pastel:lategame/build_complex_pedestal_structure",
+  "parent": "pastel:midgame/create_midnight_aberration",
   "display": {
     "icon": {
       "id": "pastel:paltaeria_fragments"
@@ -20,7 +20,6 @@
           {
             "items": [
               "pastel:paltaeria_ore",
-              "pastel:paltaeria_gem",
               "pastel:paltaeria_fragments"
             ]
           }
@@ -30,7 +29,7 @@
     "gotten_previous": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:lategame/build_complex_pedestal_structure"
+        "advancement": "pastel:midgame/create_midnight_aberration"
       }
     }
   }

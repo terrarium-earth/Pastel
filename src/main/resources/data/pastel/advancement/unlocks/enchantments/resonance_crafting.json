@@ -12,10 +12,10 @@
         "advancement": "pastel:midgame/build_enchanting_structure"
       }
     },
-    "collected_paltaeria_gem": {
+    "collected_paltaeria": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:hidden/collect_paltaeria_gem"
+        "advancement": "pastel:midgame/collect_paltaeria"
       }
     },
     "struck_up_hummingstone_hymn": {

@@ -108,6 +108,14 @@ public class PastelItemLang {
         provider.add("item.pastel.topaz_leggings.tooltip", "Sturdy legs");
         provider.add("item.pastel.citrine_boots.tooltip", "Put a spring in your step");
 
+        provider.add("item.pastel.flowing_staff.tooltip.setcorners","Crouch-use to attune corners. Max of %s blocks on any axis");
+        provider.add("item.pastel.flowing_staff.tooltip.crouch","Crouch to preview affected area");
+        provider.add("item.pastel.flowing_staff.tooltip.use","Use to place blocks randomly");
+        provider.add("item.pastel.flowing_staff.tooltip.pos1","First corner: [%s,%s,%s]");
+        provider.add("item.pastel.flowing_staff.tooltip.pos2","Second corner: [%s,%s,%s]");
+        provider.add("item.pastel.flowing_staff.tooltip.stored","Carrying: ");
+        provider.add("item.pastel.flowing_staff.tooltip.pickup","Crouch-use to pick up a complex block");
+
         provider.add("item.pastel.amethyst_cluster_banner_pattern.desc", "Amethyst Cluster");
         provider.add("item.pastel.amethyst_glass_arrow.tooltip", "-aggressive homing-");
         provider.add("item.pastel.amethyst_shard_banner_pattern.desc", "Amethyst Shard");
