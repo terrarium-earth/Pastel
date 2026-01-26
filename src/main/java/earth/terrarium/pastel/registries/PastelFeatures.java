@@ -21,6 +21,7 @@ public class PastelFeatures {
     public static Feature<GeodeConfiguration> AIR_CHECK_GEODE = new SolidBlockCheckGeodeFeature(
         GeodeConfiguration.CODEC);
     public static Feature<BlockStateFeatureConfig> AIR_EXPOSED_STATE = new AirExposedStateFeature(BlockStateFeatureConfig.CODEC);
+    public static Feature<BlockStateFeatureConfig> CRYSTAL_SPIKE = new CrystalSpikeFeature(BlockStateFeatureConfig.CODEC);
     public static Feature<RandomBudsFeaturesConfig> RANDOM_BUDS = new RandomBudsFeature(RandomBudsFeaturesConfig.CODEC);
     public static Feature<OreConfiguration> AIR_CHECK_DISK = new AirCheckDiskFeature(OreConfiguration.CODEC);
     public static Feature<GilledFungusFeatureConfig> GILLED_FUNGUS = new GilledFungusFeature(
@@ -48,6 +49,7 @@ public class PastelFeatures {
         registerFeature("weighted_random_feature", WEIGHTED_RANDOM_FEATURE);
         registerFeature("air_check_geode", AIR_CHECK_GEODE);
         registerFeature("air_exposed_state",AIR_EXPOSED_STATE);
+        registerFeature("crystal_spike",CRYSTAL_SPIKE);
         registerFeature("random_buds", RANDOM_BUDS);
         registerFeature("air_check_disk", AIR_CHECK_DISK);
         registerFeature("gilled_fungus", GILLED_FUNGUS);

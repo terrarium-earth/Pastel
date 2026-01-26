@@ -3408,7 +3408,7 @@ public class PastelBlocks {
     ));
     public static final DeferredBlock<Block> AZURE_CRYSTAL = register(
         blockWithItem(
-            "azure_crystal", () -> new AzuriteOreBlock(UniformInt.of(4, 7), deepslateOre().randomTicks()),
+            "azure_crystal", () -> new AzuriteOreBlock(UniformInt.of(4, 7), deepslateOre().randomTicks().noOcclusion()),
             InkColors.BLUE
         ));
     public static final DeferredBlock<Block> AZURE_OUTCROP = register(block(
@@ -5740,6 +5740,7 @@ public class PastelBlocks {
         PastelModelHelper.BLOCK.cutout(PastelBlocks.STUCK_STORM_STONE);
         PastelModelHelper.BLOCK.cutout(PastelBlocks.AMARANTH);
         PastelModelHelper.BLOCK.cutout(PastelBlocks.AMARANTH_BUSHEL);
+        PastelModelHelper.BLOCK.translucent(PastelBlocks.AZURE_CRYSTAL);
 
         if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.AE2_ID)) {
             PastelModelHelper.BLOCK.cutout(AE2Compat.SMALL_FLUIX_BUD);
