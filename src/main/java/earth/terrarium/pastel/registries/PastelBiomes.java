@@ -30,7 +30,7 @@ public class PastelBiomes {
         BiomePlacement.addOverworld(
             AZURE_SPIRES, new Climate.ParameterPoint(
                 Climate.Parameter.span(-0.45F, 0.15F), Climate.Parameter.span(-1.0F, -0.35F),
-                Climate.Parameter.span(0.03F, 1.0F), Climate.Parameter.span(-0.375F, -0.2225F),
+                Climate.Parameter.span(0.03F, 1.0F), Climate.Parameter.span(-0.2225F,0.05F),
                 Climate.Parameter.point(1.0F), Climate.Parameter.span(-1.0F, 1.0F), 0L
             )
         );
