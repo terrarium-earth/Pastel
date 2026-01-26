@@ -28,27 +28,27 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
-public class AzuriteOreBlock extends CloakedOreBlock {
-    public static final MapCodec<AzuriteOreBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+public class AzureCrystalBlock extends CloakedOreBlock {
+    public static final MapCodec<AzureCrystalBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                                                                                                               IntProvider.codec(0, 10)
                                                                                                                          .fieldOf("experience")
                                                                                                                          .forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getXpRange()), propertiesCodec()
                                                                                                           )
                                                                                                           .apply(
                                                                                                               instance,
-                                                                                                              AzuriteOreBlock::new
+                                                                                                              AzureCrystalBlock::new
                                                                                                           ));
 
     public static final Property<Boolean> WARDED = BooleanProperty.create("warded");
 
-    public AzuriteOreBlock(IntProvider experienceDropped, Properties settings) {
+    public AzureCrystalBlock(IntProvider experienceDropped, Properties settings) {
         super(experienceDropped, settings);
         this.registerDefaultState(getStateDefinition().any()
                                                       .setValue(WARDED, true));
     }
 
     @Override
-    public MapCodec<? extends AzuriteOreBlock> codec() {
+    public MapCodec<? extends AzureCrystalBlock> codec() {
         return CODEC;
     }
 

@@ -1,0 +1,26 @@
+{
+  "type": "pastel:azurite_outcrops",
+  "config": {
+    "buddingState": {
+      "Name": "pastel:budding_azurite"
+    },
+    "baseState": {
+      "Name": "pastel:azure_outcrop",
+      "Properties": {
+        "spire_part": "base"
+      }
+    },
+    "bodyState": {
+      "Name": "pastel:azure_outcrop",
+      "Properties": {
+        "spire_part": "body"
+      }
+    },
+    "tipState": {
+      "Name": "pastel:azure_outcrop",
+      "Properties": {
+        "spire_part": "tip"
+      }
+    }
+  }
+}

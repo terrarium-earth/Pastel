@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.data.models.block.resource;
 
-import earth.terrarium.pastel.blocks.geology.AzuriteOreBlock;
+import earth.terrarium.pastel.blocks.geology.AzureCrystalBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.client.PastelTexturedModels;
@@ -17,7 +17,7 @@ public class OreBlockModels {
 
         // hell.
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AZURE_CRYSTAL.get())
-                                                                .with(PropertyDispatch.property(AzuriteOreBlock.WARDED)
+                                                                .with(PropertyDispatch.property(AzureCrystalBlock.WARDED)
                                                                                       .generate(
                                                                                           (warded) -> PastelModelHelper.createModelVariant(
                                                                                               PastelTexturedModels.cubeAll(
