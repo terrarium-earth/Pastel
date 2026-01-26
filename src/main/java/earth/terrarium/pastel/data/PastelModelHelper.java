@@ -765,8 +765,8 @@ public class PastelModelHelper {
 
         public static void defaultUpFacingGetter(
             BlockModelGenerators generators, DeferredBlock<Block> block, Function<Block, ResourceLocation> modelIdGetter) {
-            PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
-                             .with(PastelModelHelper.createUpDefaultFacingVariantMap());
+            generators.blockStateOutput.accept(PastelModelHelper.createVariantsSupplier(block.get(), modelIdGetter.apply(block.get()))
+                             .with(PastelModelHelper.createUpDefaultFacingVariantMap()));
         }
 
         public static void defaultNorthHorizontalFacing(
