@@ -19,10 +19,7 @@ import earth.terrarium.pastel.items.tools.TuningStampItem;
 import earth.terrarium.pastel.items.tools.WorkstaffItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.progression.PastelCriteria;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelLevels;
+import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
@@ -48,6 +45,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.NeoForge;
@@ -88,6 +86,12 @@ public class PastelMiscEvents {
         // 	}
         // 	return TriState.DEFAULT;
         // });
+    }
+
+    public static void loadComplete(FMLLoadCompleteEvent event){
+        // Biomes
+        PastelCommon.logInfo("Registering biome placements...");
+        PastelBiomes.registerBiomePlacements();
     }
 
     public static void onCrossbowShot(LivingEntity shooter, Projectile projectile) {

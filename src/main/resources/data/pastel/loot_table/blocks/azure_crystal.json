@@ -10,7 +10,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "pastel:azurite_ore",
+              "name": "pastel:azure_crystal",
               "conditions": [
                 {
                   "condition": "minecraft:match_tool",

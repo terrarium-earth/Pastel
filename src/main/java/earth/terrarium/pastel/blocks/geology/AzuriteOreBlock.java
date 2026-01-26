@@ -3,17 +3,13 @@ package earth.terrarium.pastel.blocks.geology;
 import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.api.block.WardDisruptableBlock;
 import earth.terrarium.pastel.blocks.conditional.CloakedOreBlock;
 import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
-import earth.terrarium.pastel.sound.AuraData;
-import earth.terrarium.pastel.sound.AuraSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -99,8 +95,6 @@ public class AzuriteOreBlock extends CloakedOreBlock {
         super.animateTick(state, world, pos, random);
 
         if (!BlockHiddenType.isVisibleClient(state)) return;
-
-        AuraSoundInstance.getOrCreateInstance(AuraData.AZURITE, world, pos);
 
         if (world.getRandom()
                  .nextFloat() >= 0.02) return;

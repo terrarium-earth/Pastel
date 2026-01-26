@@ -265,6 +265,8 @@ public class PastelCommon {
         logInfo("Registering Tree Decorator Types...");
         PastelTreeDecoratorTypes.register(pastelBus);
 
+        pastelBus.addListener(PastelMiscEvents::loadComplete);
+
         PastelDataMaps.register();
 
         // Builtin Resource Packs

@@ -1,16 +1,16 @@
 {
   "type": {
     "type": "databank:item",
-    "hidden_as": "minecraft:stone",
+    "hidden_as": "minecraft:deepslate",
     "name_override": {
       "extra": [
         {
           "translate": "pastel.cloaked.suffix"
         }
       ],
-      "translate": "block.minecraft.stone"
+      "translate": "block.minecraft.deepslate"
     },
-    "original": "pastel:azurite_ore"
+    "original": "pastel:azure_crystal"
   },
   "condition": {
     "type": "databank:advancement",

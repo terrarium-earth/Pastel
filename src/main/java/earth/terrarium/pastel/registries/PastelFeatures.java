@@ -1,34 +1,7 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.worldgen.features.AirCheckDiskFeature;
-import earth.terrarium.pastel.worldgen.features.AshDunesFeature;
-import earth.terrarium.pastel.worldgen.features.AshDunesFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.BlockStateFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.ColumnsFeature;
-import earth.terrarium.pastel.worldgen.features.ColumnsFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.CrystalFormationFeature;
-import earth.terrarium.pastel.worldgen.features.CrystalFormationFeatureFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.ExposedFossilFeature;
-import earth.terrarium.pastel.worldgen.features.GiantGilledFungusFeature;
-import earth.terrarium.pastel.worldgen.features.GilledFungusFeature;
-import earth.terrarium.pastel.worldgen.features.GilledFungusFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.JadeiteLotusFeature;
-import earth.terrarium.pastel.worldgen.features.JadeiteLotusFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.NephriteBlossomFeature;
-import earth.terrarium.pastel.worldgen.features.NephriteBlossomFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.PillarFeature;
-import earth.terrarium.pastel.worldgen.features.RandomBlockProximityPatchFeature;
-import earth.terrarium.pastel.worldgen.features.RandomBlockProximityPatchFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.RandomBudsFeature;
-import earth.terrarium.pastel.worldgen.features.RandomBudsFeaturesConfig;
-import earth.terrarium.pastel.worldgen.features.SolidBlockCheckGeodeFeature;
-import earth.terrarium.pastel.worldgen.features.TriStateVineFeature;
-import earth.terrarium.pastel.worldgen.features.TriStateVineFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.WallPatchFeature;
-import earth.terrarium.pastel.worldgen.features.WallPatchFeatureConfig;
-import earth.terrarium.pastel.worldgen.features.WeightedRandomFeature;
-import earth.terrarium.pastel.worldgen.features.WeightedRandomFeatureConfig;
+import earth.terrarium.pastel.worldgen.features.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FossilFeatureConfiguration;
@@ -47,6 +20,7 @@ public class PastelFeatures {
         WeightedRandomFeatureConfig.CODEC);
     public static Feature<GeodeConfiguration> AIR_CHECK_GEODE = new SolidBlockCheckGeodeFeature(
         GeodeConfiguration.CODEC);
+    public static Feature<BlockStateFeatureConfig> AIR_EXPOSED_STATE = new AirExposedStateFeature(BlockStateFeatureConfig.CODEC);
     public static Feature<RandomBudsFeaturesConfig> RANDOM_BUDS = new RandomBudsFeature(RandomBudsFeaturesConfig.CODEC);
     public static Feature<OreConfiguration> AIR_CHECK_DISK = new AirCheckDiskFeature(OreConfiguration.CODEC);
     public static Feature<GilledFungusFeatureConfig> GILLED_FUNGUS = new GilledFungusFeature(
@@ -73,6 +47,7 @@ public class PastelFeatures {
     public static void register(IEventBus bus) {
         registerFeature("weighted_random_feature", WEIGHTED_RANDOM_FEATURE);
         registerFeature("air_check_geode", AIR_CHECK_GEODE);
+        registerFeature("air_exposed_state",AIR_EXPOSED_STATE);
         registerFeature("random_buds", RANDOM_BUDS);
         registerFeature("air_check_disk", AIR_CHECK_DISK);
         registerFeature("gilled_fungus", GILLED_FUNGUS);

@@ -16,21 +16,6 @@ public class OreBlockModels {
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.SHIMMERSTONE_BLOCK);
 
         // hell.
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AZURITE_ORE.get())
-                                                                .with(PropertyDispatch.property(AzuriteOreBlock.WARDED)
-                                                                                      .generate(
-                                                                                          (warded) -> PastelModelHelper.createModelVariant(
-                                                                                              PastelTexturedModels.cubeAll(
-                                                                                                                      b -> b,
-                                                                                                                      warded ? "_warded"
-                                                                                                                             : ""
-                                                                                                                  )
-                                                                                                                  .createWithSuffix(
-                                                                                                                      PastelBlocks.AZURITE_ORE.get(),
-                                                                                                                      warded ? "_warded"
-                                                                                                                             : "",
-                                                                                                                      generators.modelOutput
-                                                                                                                  )))));
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AZURE_CRYSTAL.get())
                                                                 .with(PropertyDispatch.property(AzuriteOreBlock.WARDED)
                                                                                       .generate(
@@ -46,6 +31,7 @@ public class OreBlockModels {
                                                                                                                              : "",
                                                                                                                       generators.modelOutput
                                                                                                                   )))));
+        PastelModelHelper.BLOCK.simple(generators,PastelBlocks.BUDDING_AZURITE);
 
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.MALACHITE_ORE);
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DEEPSLATE_MALACHITE_ORE);

@@ -1,13 +1,9 @@
 {
-  "feature": "pastel:azurite_ore",
+  "feature": "pastel:azure_spire",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 60
-    },
-    {
       "type": "minecraft:count",
-      "count": 1
+      "count": 80
     },
     {
       "type": "minecraft:in_square"
@@ -15,12 +11,12 @@
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:trapezoid",
+        "type": "minecraft:uniform",
         "min_inclusive": {
-          "above_bottom": 0
+          "above_bottom": 4
         },
         "max_inclusive": {
-          "above_bottom": 32
+          "above_bottom": 64
         }
       }
     },

@@ -118,6 +118,7 @@ import earth.terrarium.pastel.blocks.gemstone.PastelBuddingBlock;
 import earth.terrarium.pastel.blocks.gemstone.PastelGemstoneBlock;
 import earth.terrarium.pastel.blocks.geology.AzuriteOreBlock;
 import earth.terrarium.pastel.blocks.geology.AzuriteSpireBlock;
+import earth.terrarium.pastel.blocks.geology.BuddingAzuriteBlock;
 import earth.terrarium.pastel.blocks.geology.ShimmerstoneOreBlock;
 import earth.terrarium.pastel.blocks.gravity.FloatBlock;
 import earth.terrarium.pastel.blocks.gravity.FloatBlockItem;
@@ -3401,7 +3402,7 @@ public class PastelBlocks {
             "deepslate_shimmerstone_ore",
             () -> new ShimmerstoneOreBlock(UniformInt.of(2, 4), deepslateOre().randomTicks()), InkColors.YELLOW
         ));
-   public static final DeferredBlock<Block> SHIMMERSTONE_BLOCK = register(blockWithItem(
+    public static final DeferredBlock<Block> SHIMMERSTONE_BLOCK = register(blockWithItem(
         "shimmerstone_block", () -> new ShimmerstoneBlock(settings(
             MapColor.COLOR_YELLOW, SoundType.GLASS, 2.0F).lightLevel((state) -> 15)), InkColors.YELLOW
     ));
@@ -3413,6 +3414,10 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> AZURE_OUTCROP = register(block(
         "azure_outcrop",
         () -> new AzuriteSpireBlock(gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5))
+    ));
+    public static final DeferredBlock<Block> BUDDING_AZURITE = register(block(
+        "budding_azurite",
+        () -> new BuddingAzuriteBlock(gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5))
     ));
     public static final DeferredBlock<Block> AZURITE_BLOCK = register(blockWithItem(
         "azurite_block", () -> new PastelFacingBlock(
