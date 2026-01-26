@@ -16,6 +16,7 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -122,4 +123,13 @@ public class AzuriteOreBlock extends CloakedOreBlock {
                                    .setValue(WARDED, false);
     }
 
+    @Override
+    protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        return state.getValue(WARDED)?0:super.getDestroyProgress(state, player, level, pos);
+    }
+
+    @Override
+    public float defaultDestroyTime() {
+        return -1;
+    }
 }
