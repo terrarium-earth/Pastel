@@ -178,6 +178,7 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         hideOre(null, PastelBlocks.AZURE_CRYSTAL.get(), null, PastelAdvancements.Milestones.REVEAL_AZURITE);
 
         hideBlock(PastelBlocks.AZURE_OUTCROP.get(), Blocks.DEEPSLATE, PastelAdvancements.Milestones.REVEAL_AZURITE);
+        hideBlock(PastelBlocks.BUDDING_AZURITE.get(), Blocks.DEEPSLATE, PastelAdvancements.Milestones.REVEAL_AZURITE);
 
         hideOre(
             PastelBlocks.MALACHITE_ORE.get(), PastelBlocks.DEEPSLATE_MALACHITE_ORE.get(),
