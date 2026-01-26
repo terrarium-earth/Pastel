@@ -48,6 +48,8 @@ accessible field net/minecraft/world/entity/LivingEntity lastDamageStamp J
 
 accessible field net/minecraft/world/entity/player/Player DATA_PLAYER_MODE_CUSTOMISATION Lnet/minecraft/network/syncher/EntityDataAccessor;
 
+extendable method net/minecraft/world/entity/decoration/HangingEntity recalculateBoundingBox ()V
+
 accessible method net/minecraft/data/models/model/TextureSlot create (Ljava/lang/String;)Lnet/minecraft/data/models/model/TextureSlot;
 
 accessible	method	net/minecraft/client/particle/DripParticle$DripHangParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
