@@ -31,9 +31,9 @@ public class SoulWardHandlerMixin {
     @WrapOperation(method = "shieldPlayer", at = @At(value = "INVOKE",
                                                      target = "Lcom/sammy/malum/common/data/attachment/SoulWardData;" +
                                                               "addCooldown(Lnet/minecraft/world/entity/LivingEntity;" +
-                                                              "D)V"))
+                                                              "F)V"))
     private static void extraCooldownOnDisrupt(
-        SoulWardData instance, LivingEntity living, double multiplier, Operation<Void> original,
+        SoulWardData instance, LivingEntity living, float multiplier, Operation<Void> original,
         LivingDamageEvent.Pre event
     ) {
         original.call(
