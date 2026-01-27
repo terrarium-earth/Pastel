@@ -35,7 +35,7 @@ public class OreBlockModels {
 
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.MALACHITE_ORE);
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DEEPSLATE_MALACHITE_ORE);
-        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.BLACKSLAG_MALACHITE_ORE, TexturedModel.COLUMN_ALT);
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.BLACKSLAG_MALACHITE_ORE);
 
 
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.STRATINE_ORE);

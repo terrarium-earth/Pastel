@@ -3455,7 +3455,7 @@ public class PastelBlocks {
         ));
     public static final DeferredBlock<Block> BLACKSLAG_MALACHITE_ORE = register(
         blockWithItem(
-            "blackslag_malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), blackslagOre()),
+            "blackslag_malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), blackslagOre().noOcclusion()),
             IS.of(Rarity.UNCOMMON), InkColors.GREEN
         ));
     public static final DeferredBlock<Block> MALACHITE_BLOCK = register(
@@ -5741,6 +5741,7 @@ public class PastelBlocks {
         PastelModelHelper.BLOCK.cutout(PastelBlocks.AMARANTH);
         PastelModelHelper.BLOCK.cutout(PastelBlocks.AMARANTH_BUSHEL);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.AZURE_CRYSTAL);
+        PastelModelHelper.BLOCK.translucent(PastelBlocks.BLACKSLAG_MALACHITE_ORE);
 
         if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.AE2_ID)) {
             PastelModelHelper.BLOCK.cutout(AE2Compat.SMALL_FLUIX_BUD);

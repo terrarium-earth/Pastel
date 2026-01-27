@@ -21,6 +21,7 @@ public class PastelBiomes {
     public static final ResourceKey<Biome> RAZOR_EDGE = getKey("razor_edge");
 
     public static final ResourceKey<Biome> AZURE_SPIRES = getKey("azure_spires");
+    public static final ResourceKey<Biome> VIRIDIAN_CAVERNS = getKey("viridian_caverns");
 
     private static ResourceKey<Biome> getKey(String name) {
         return ResourceKey.create(Registries.BIOME, PastelCommon.locate(name));
