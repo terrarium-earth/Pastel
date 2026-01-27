@@ -5741,6 +5741,7 @@ public class PastelBlocks {
         PastelModelHelper.BLOCK.cutout(PastelBlocks.AMARANTH);
         PastelModelHelper.BLOCK.cutout(PastelBlocks.AMARANTH_BUSHEL);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.AZURE_CRYSTAL);
+        PastelModelHelper.BLOCK.translucent(PastelBlocks.AZURE_OUTCROP);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.BLACKSLAG_MALACHITE_ORE);
 
         if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.AE2_ID)) {

@@ -31,6 +31,7 @@ public class OreBlockModels {
                                                                                                                              : "",
                                                                                                                       generators.modelOutput
                                                                                                                   )))));
+        PastelModelHelper.BLOCK.cross(generators,PastelBlocks.AZURE_OUTCROP);
         PastelModelHelper.BLOCK.simple(generators,PastelBlocks.BUDDING_AZURITE);
 
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.MALACHITE_ORE);
