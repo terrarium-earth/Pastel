@@ -3076,8 +3076,8 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.github.description",
             "Report bugs or contribute. Here you will also find the technical wiki"
         );
-        provider.add("book.pastel.guidebook.kofi_azzy.name", "Donate to Azzypaaras");
-        provider.add("book.pastel.guidebook.kofi_azzy.description", "Pastel Author & Artsy Queer");
+        provider.add("book.pastel.guidebook.kofi_dev.name", "Donate to Devotion");
+        provider.add("book.pastel.guidebook.kofi_dev.description", "Pastel Lead Dev & Heiress of Color");
         provider.add("book.pastel.guidebook.kofi_terrarium.name", "Donate to Terrarium");
         provider.add("book.pastel.guidebook.kofi_terrarium.description", "Thanks Adrian");
         provider.add("book.pastel.guidebook.modrinth.name", "Pastel on Modrinth");
