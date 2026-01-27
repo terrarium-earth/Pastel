@@ -158,7 +158,7 @@ cloche {
 				modCompileOnly("maven.modrinth:vanity:xWfEA0yC") // compile only cuz accessories
 
                 modImplementation("maven.modrinth:create:1.21.1-6.0.4") { isTransitive = false }
-                modImplementation("maven.modrinth:lodestonelib:1.7.1") { isTransitive = false }
+                modImplementation("maven.modrinth:lodestonelib:1.8.2") { isTransitive = false }
                 modImplementation("maven.modrinth:malum:1.8.2") { isTransitive = false }
                 modImplementation("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
 				modRuntimeOnly("maven.modrinth:ae2:19.2.12") { isTransitive = false }
