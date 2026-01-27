@@ -1,5 +1,5 @@
 {
-  "type": "pastel:azurite_outcrops",
+  "type": "pastel:azure_outcrop",
   "config": {
     "buddingState": {
       "Name": "pastel:budding_azurite"

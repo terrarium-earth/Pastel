@@ -6,6 +6,7 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -42,6 +43,8 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
         tag(PastelBlockTags.WARD_DISRUPTABLE).add(
             PastelBlocks.AZURE_CRYSTAL.get()
         );
+        tag(PastelBlockTags.CRYSTAL_SPIKE_BASES).addTag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
+                                                .addTag(BlockTags.ICE);
         tag(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST).addTag(PastelBlockTags.UNBREAKABLE);
 
     }

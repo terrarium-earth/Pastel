@@ -28,10 +28,12 @@
     [],
     [],
     [],
-    [],
+    [
+      "pastel:ice_disk"
+    ],
     [
       "pastel:azure_spire",
-      "pastel:azurite_outcrops"
+      "pastel:azure_outcrop"
     ],
     [],
     [],

@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.worldgen.features;
 
 import com.mojang.serialization.Codec;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.tags.BlockTags;
@@ -36,10 +37,10 @@ public class CrystalSpikeFeature extends Feature<BlockStateFeatureConfig> {
         boolean up;
         if (level.getBlockState(pos.below())
                  .canBeReplaced() && level.getBlockState(pos.above())
-                                          .is(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) up = false;
+                                          .is(PastelBlockTags.CRYSTAL_SPIKE_BASES)) up = false;
         else if (level.getBlockState(pos.above())
                       .canBeReplaced() && level.getBlockState(pos.below())
-                                               .is(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) up = true;
+                                               .is(PastelBlockTags.CRYSTAL_SPIKE_BASES)) up = true;
         else return false;
         if (direction.y > 0 && !up) direction = direction.multiply(1, -1, 1);
         var radiusDecrement = (float) SPIKE_BASE_RADIUS / (float) SPIKE_LENGTH;

@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.worldgen.features;
 
 import com.mojang.serialization.Codec;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -21,14 +22,14 @@ public class HyperspecificOutcropFeature extends Feature<HyperspecificOutcropFea
         var level = context.level();
         var origin = context.origin();
         if (!level.getBlockState(origin)
-                  .is(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) return false;
+                  .is(PastelBlockTags.CRYSTAL_SPIKE_BASES)) return false;
         Direction increment;
         if (level.getBlockState(origin.below())
                  .canBeReplaced() && level.getBlockState(origin.above())
-                                          .is(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) increment = Direction.DOWN;
+                                          .is(PastelBlockTags.CRYSTAL_SPIKE_BASES)) increment = Direction.DOWN;
         else if (level.getBlockState(origin.above())
                       .canBeReplaced() && level.getBlockState(origin.below())
-                                               .is(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) increment = Direction.UP;
+                                               .is(PastelBlockTags.CRYSTAL_SPIKE_BASES)) increment = Direction.UP;
         else return false;
         level.setBlock(
             origin, context.config()

@@ -20,9 +20,12 @@ public class PastelFeatures {
         WeightedRandomFeatureConfig.CODEC);
     public static Feature<GeodeConfiguration> AIR_CHECK_GEODE = new SolidBlockCheckGeodeFeature(
         GeodeConfiguration.CODEC);
-    public static Feature<BlockStateFeatureConfig> AIR_EXPOSED_STATE = new AirExposedStateFeature(BlockStateFeatureConfig.CODEC);
-    public static Feature<BlockStateFeatureConfig> CRYSTAL_SPIKE = new CrystalSpikeFeature(BlockStateFeatureConfig.CODEC);
-    public static Feature<HyperspecificOutcropFeatureConfig> AZURITE_OUTCROPS = new HyperspecificOutcropFeature(HyperspecificOutcropFeatureConfig.CODEC);
+    public static Feature<BlockStateFeatureConfig> AIR_EXPOSED_STATE = new AirExposedStateFeature(
+        BlockStateFeatureConfig.CODEC);
+    public static Feature<BlockStateFeatureConfig> CRYSTAL_SPIKE = new CrystalSpikeFeature(
+        BlockStateFeatureConfig.CODEC);
+    public static Feature<HyperspecificOutcropFeatureConfig> AZURE_OUTCROP = new HyperspecificOutcropFeature(
+        HyperspecificOutcropFeatureConfig.CODEC);
     public static Feature<RandomBudsFeaturesConfig> RANDOM_BUDS = new RandomBudsFeature(RandomBudsFeaturesConfig.CODEC);
     public static Feature<OreConfiguration> AIR_CHECK_DISK = new AirCheckDiskFeature(OreConfiguration.CODEC);
     public static Feature<GilledFungusFeatureConfig> GILLED_FUNGUS = new GilledFungusFeature(
@@ -49,9 +52,9 @@ public class PastelFeatures {
     public static void register(IEventBus bus) {
         registerFeature("weighted_random_feature", WEIGHTED_RANDOM_FEATURE);
         registerFeature("air_check_geode", AIR_CHECK_GEODE);
-        registerFeature("air_exposed_state",AIR_EXPOSED_STATE);
-        registerFeature("crystal_spike",CRYSTAL_SPIKE);
-        registerFeature("azurite_outcrops",AZURITE_OUTCROPS);
+        registerFeature("air_exposed_state", AIR_EXPOSED_STATE);
+        registerFeature("crystal_spike", CRYSTAL_SPIKE);
+        registerFeature("azure_outcrop", AZURE_OUTCROP);
         registerFeature("random_buds", RANDOM_BUDS);
         registerFeature("air_check_disk", AIR_CHECK_DISK);
         registerFeature("gilled_fungus", GILLED_FUNGUS);
