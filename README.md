@@ -22,12 +22,13 @@ https://discord.gg/terrarium
 - AE2: Lots of additional Recipes; Crystal Apothecary compat
 - Botania: New custom items, Black Hole Talisman support, additional recipes & Potion Workshop reagents
 - Create: Additional recipes
+- ...and many more, including Xycraft, Malum, and The Bumblezone
 
 ## Support
-| ![Azzy](https://avatars.githubusercontent.com/u/20349662?s=40&v=4) Azzyypaaras       |
+| ![Devotion](https://avatars.githubusercontent.com/u/17069895?s=40&v=4) Devotion      |
 |--------------------------------------------------------------------------------------|
-| Ms. Pastel & Lady of Salt                                                            |
-| [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/azzyypaaras) |
+| Heiress of Color & Pastel Lead Dev                                                   |
+| [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/devotionheiressofcolor) |
 
 ![Stuff](/images/readme/pastel_cluster.png)
 
