@@ -430,87 +430,77 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> PEDESTAL_BASIC_TOPAZ = register(blockWithItem(
         "pedestal_basic_topaz", () -> new PedestalBlock(
-            craftingBlock(
-                MapColor.DIAMOND, PastelBlockSoundGroups.TOPAZ_BLOCK), PedestalVariants.BASIC_TOPAZ
-        ), block -> new PedestalBlockItem(
+            craftingBlock(MapColor.DIAMOND, PastelBlockSoundGroups.TOPAZ_BLOCK), PedestalVariants.BASIC_TOPAZ),
+        block -> new PedestalBlockItem(
             block, IS.of(1), PedestalVariants.BASIC_TOPAZ, "item.pastel.pedestal.tooltip.basic_topaz"), InkColors.WHITE
     ));
     public static final DeferredBlock<Block> PEDESTAL_BASIC_AMETHYST = register(blockWithItem(
         "pedestal_basic_amethyst", () -> new PedestalBlock(
-            craftingBlock(
-                MapColor.COLOR_PURPLE, SoundType.AMETHYST), PedestalVariants.BASIC_AMETHYST
-        ), block -> new PedestalBlockItem(
+            craftingBlock(MapColor.COLOR_PURPLE, SoundType.AMETHYST), PedestalVariants.BASIC_AMETHYST),
+        block -> new PedestalBlockItem(
             block, IS.of(1), PedestalVariants.BASIC_AMETHYST, "item.pastel.pedestal.tooltip.basic_amethyst"),
         InkColors.WHITE
     ));
     public static final DeferredBlock<Block> PEDESTAL_BASIC_CITRINE = register(blockWithItem(
         "pedestal_basic_citrine", () -> new PedestalBlock(
-            craftingBlock(
-                MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK), PedestalVariants.BASIC_CITRINE
-        ), block -> new PedestalBlockItem(
+            craftingBlock(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK), PedestalVariants.BASIC_CITRINE),
+        block -> new PedestalBlockItem(
             block, IS.of(1), PedestalVariants.BASIC_CITRINE, "item.pastel.pedestal.tooltip.basic_citrine"),
         InkColors.WHITE
     ));
     public static final DeferredBlock<Block> PEDESTAL_ALL_BASIC = register(blockWithItem(
-        "pedestal_all_basic", () -> new PedestalBlock(
-            craftingBlock(
-                MapColor.COLOR_PURPLE, SoundType.AMETHYST), PedestalVariants.CMY
-        ), block -> new PedestalBlockItem(
-            block, IS.of(1), PedestalVariants.CMY, "item.pastel.pedestal.tooltip.all_basic"), InkColors.WHITE
+        "pedestal_all_basic",
+        () -> new PedestalBlock(craftingBlock(MapColor.COLOR_PURPLE, SoundType.AMETHYST), PedestalVariants.CMY),
+        block -> new PedestalBlockItem(block, IS.of(1), PedestalVariants.CMY, "item.pastel.pedestal.tooltip.all_basic"),
+        InkColors.WHITE
     ));
     public static final DeferredBlock<Block> PEDESTAL_ONYX = register(blockWithItem(
         "pedestal_onyx", () -> new PedestalBlock(
-            craftingBlock(
-                MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK), PedestalVariants.ONYX
-        ), block -> new PedestalBlockItem(block, IS.of(1), PedestalVariants.ONYX, "item.pastel.pedestal.tooltip.onyx"),
+            craftingBlock(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK), PedestalVariants.ONYX),
+        block -> new PedestalBlockItem(block, IS.of(1), PedestalVariants.ONYX, "item.pastel.pedestal.tooltip.onyx"),
         InkColors.WHITE
     ));
     public static final DeferredBlock<Block> PEDESTAL_MOONSTONE = register(blockWithItem(
         "pedestal_moonstone", () -> new PedestalBlock(
-            craftingBlock(
-                MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK), PedestalVariants.MOONSTONE
-        ), block -> new PedestalBlockItem(
+            craftingBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK), PedestalVariants.MOONSTONE),
+        block -> new PedestalBlockItem(
             block, IS.of(1), PedestalVariants.MOONSTONE, "item.pastel.pedestal.tooltip.moonstone"), InkColors.WHITE
     ));
 
     public static final DeferredBlock<Block> FUSION_SHRINE_BASALT = register(blockWithItem(
-        "fusion_shrine_basalt", () -> new FusionShrineBlock(craftingBlock(
-            MapColor.COLOR_BLACK, SoundType.BASALT).lightLevel(value -> value.getValue(FusionShrineBlock.LIGHT_LEVEL))),
-        IS.of(1), InkColors.GRAY
+        "fusion_shrine_basalt", () -> new FusionShrineBlock(
+            craftingBlock(MapColor.COLOR_BLACK, SoundType.BASALT).lightLevel(
+                value -> value.getValue(FusionShrineBlock.LIGHT_LEVEL))), IS.of(1), InkColors.GRAY
     ));
     public static final DeferredBlock<Block> FUSION_SHRINE_CALCITE = register(blockWithItem(
-        "fusion_shrine_calcite", () -> new FusionShrineBlock(craftingBlock(
-            MapColor.TERRACOTTA_WHITE, SoundType.CALCITE).lightLevel(value -> value.getValue(
-            FusionShrineBlock.LIGHT_LEVEL))), IS.of(1), InkColors.GRAY
+        "fusion_shrine_calcite", () -> new FusionShrineBlock(
+            craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE).lightLevel(
+                value -> value.getValue(FusionShrineBlock.LIGHT_LEVEL))), IS.of(1), InkColors.GRAY
     ));
 
-    public static final DeferredBlock<Block> ENCHANTER = register(
-        blockWithItem(
-            "enchanter", () -> new EnchanterBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
-            IS.of(1), InkColors.PURPLE
-        ));
-    public static final DeferredBlock<Block> ITEM_BOWL_BASALT = register(
-        blockWithItem(
-            "item_bowl_basalt", () -> new ItemBowlBlock(craftingBlock(MapColor.COLOR_BLACK, SoundType.BASALT)),
-            IS.of(16), InkColors.PINK
-        ));
-    public static final DeferredBlock<Block> ITEM_BOWL_CALCITE = register(
-        blockWithItem(
-            "item_bowl_calcite", () -> new ItemBowlBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
-            IS.of(16), InkColors.PINK
-        ));
-    public static final DeferredBlock<Block> ITEM_ROUNDEL = register(
-        blockWithItem(
-            "item_roundel", () -> new ItemRoundelBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
-            IS.of(16), InkColors.PINK
-        ));
+    public static final DeferredBlock<Block> ENCHANTER = register(blockWithItem(
+        "enchanter", () -> new EnchanterBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)), IS.of(1),
+        InkColors.PURPLE
+    ));
+    public static final DeferredBlock<Block> ITEM_BOWL_BASALT = register(blockWithItem(
+        "item_bowl_basalt", () -> new ItemBowlBlock(craftingBlock(MapColor.COLOR_BLACK, SoundType.BASALT)), IS.of(16),
+        InkColors.PINK
+    ));
+    public static final DeferredBlock<Block> ITEM_BOWL_CALCITE = register(blockWithItem(
+        "item_bowl_calcite", () -> new ItemBowlBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
+        IS.of(16), InkColors.PINK
+    ));
+    public static final DeferredBlock<Block> ITEM_ROUNDEL = register(blockWithItem(
+        "item_roundel", () -> new ItemRoundelBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
+        IS.of(16), InkColors.PINK
+    ));
     public static final DeferredBlock<Block> POTION_WORKSHOP = register(blockWithItem(
-        "potion_workshop", () -> new PotionWorkshopBlock(craftingBlock(
-            MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)), IS.of(1), InkColors.PURPLE
+        "potion_workshop", () -> new PotionWorkshopBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
+        IS.of(1), InkColors.PURPLE
     ));
     public static final DeferredBlock<Block> SPIRIT_INSTILLER = register(blockWithItem(
-        "spirit_instiller", () -> new SpiritInstillerBlock(craftingBlock(
-            MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)), IS.of(1), InkColors.WHITE
+        "spirit_instiller", () -> new SpiritInstillerBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
+        IS.of(1), InkColors.WHITE
     ));
     public static final DeferredBlock<Block> CRYSTALLARIEUM = register(
         blockWithItem(
@@ -518,21 +508,20 @@ public class PastelBlocks {
             () -> new CrystallarieumBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)), IS.of(1),
             InkColors.BROWN
         ));
-    public static final DeferredBlock<Block> CINDERHEARTH = register(
-        blockWithItem(
-            "cinderhearth", () -> new CinderhearthBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
-            IS.of(1)
-              .fireResistant(), InkColors.ORANGE
-        ));
+    public static final DeferredBlock<Block> CINDERHEARTH = register(blockWithItem(
+        "cinderhearth", () -> new CinderhearthBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
+        IS.of(1)
+          .fireResistant(), InkColors.ORANGE
+    ));
 
-    public static final DeferredBlock<Block> COLOR_PICKER = register(
-        blockWithItem(
-            "color_picker", () -> new ColorPickerBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
-            IS.of(8), InkColors.GREEN
-        ));
+    public static final DeferredBlock<Block> COLOR_PICKER = register(blockWithItem(
+        "color_picker", () -> new ColorPickerBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)),
+        IS.of(8), InkColors.GREEN
+    ));
     public static final DeferredBlock<Block> CRYSTAL_APOTHECARY = register(blockWithItem(
-        "crystal_apothecary", () -> new CrystalApothecaryBlock(craftingBlock(
-            MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)), IS.of(8), InkColors.GREEN
+        "crystal_apothecary",
+        () -> new CrystalApothecaryBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE)), IS.of(8),
+        InkColors.GREEN
     ));
 
     private static Properties gemstone(MapColor mapColor, SoundType blockSoundGroup, int luminance) {
@@ -548,177 +537,162 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> TOPAZ_CLUSTER = register(blockWithItem(
         "topaz_cluster", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_CLUSTER, 8), PastelClusterBlock.GrowthStage.CLUSTER
+            gemstone(MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_CLUSTER, 8),
+            PastelClusterBlock.GrowthStage.CLUSTER
         ), InkColors.CYAN
     ));
     public static final DeferredBlock<Block> LARGE_TOPAZ_BUD = register(blockWithItem(
         "large_topaz_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_CYAN, PastelBlockSoundGroups.LARGE_TOPAZ_BUD, 6), PastelClusterBlock.GrowthStage.LARGE
+            gemstone(MapColor.COLOR_CYAN, PastelBlockSoundGroups.LARGE_TOPAZ_BUD, 6),
+            PastelClusterBlock.GrowthStage.LARGE
         ), InkColors.CYAN
     ));
     public static final DeferredBlock<Block> MEDIUM_TOPAZ_BUD = register(blockWithItem(
         "medium_topaz_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_CYAN, PastelBlockSoundGroups.MEDIUM_TOPAZ_BUD, 4), PastelClusterBlock.GrowthStage.MEDIUM
+            gemstone(MapColor.COLOR_CYAN, PastelBlockSoundGroups.MEDIUM_TOPAZ_BUD, 4),
+            PastelClusterBlock.GrowthStage.MEDIUM
         ), InkColors.CYAN
     ));
     public static final DeferredBlock<Block> SMALL_TOPAZ_BUD = register(blockWithItem(
         "small_topaz_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_CYAN, PastelBlockSoundGroups.SMALL_TOPAZ_BUD, 2), PastelClusterBlock.GrowthStage.SMALL
+            gemstone(MapColor.COLOR_CYAN, PastelBlockSoundGroups.SMALL_TOPAZ_BUD, 2),
+            PastelClusterBlock.GrowthStage.SMALL
         ), InkColors.CYAN
     ));
-    public static final DeferredBlock<Block> BUDDING_TOPAZ = register(
-        blockWithItem(
-            "budding_topaz", () -> new PastelBuddingBlock(
-                gemstoneBlock(
-                    MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK).pushReaction(PushReaction.DESTROY)
-                                                                            .randomTicks(),
-                PastelBlocks.SMALL_TOPAZ_BUD.get(), PastelBlocks.MEDIUM_TOPAZ_BUD.get(),
-                PastelBlocks.LARGE_TOPAZ_BUD.get(), PastelBlocks.TOPAZ_CLUSTER.get(),
-                PastelSounds.BLOCK_TOPAZ_BLOCK_HIT, PastelSounds.BLOCK_TOPAZ_BLOCK_CHIME
-            ), InkColors.CYAN
-        ));
+    public static final DeferredBlock<Block> BUDDING_TOPAZ = register(blockWithItem(
+        "budding_topaz", () -> new PastelBuddingBlock(
+            gemstoneBlock(MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK).pushReaction(PushReaction.DESTROY)
+                                                                                  .randomTicks(),
+            PastelBlocks.SMALL_TOPAZ_BUD.get(), PastelBlocks.MEDIUM_TOPAZ_BUD.get(), PastelBlocks.LARGE_TOPAZ_BUD.get(),
+            PastelBlocks.TOPAZ_CLUSTER.get(), PastelSounds.BLOCK_TOPAZ_BLOCK_HIT, PastelSounds.BLOCK_TOPAZ_BLOCK_CHIME
+        ), InkColors.CYAN
+    ));
     public static final DeferredBlock<Block> TOPAZ_BLOCK = register(blockWithItem(
         "topaz_block", () -> new PastelGemstoneBlock(
-            gemstoneBlock(
-                MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK), PastelSounds.BLOCK_TOPAZ_BLOCK_HIT,
+            gemstoneBlock(MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK), PastelSounds.BLOCK_TOPAZ_BLOCK_HIT,
             PastelSounds.BLOCK_TOPAZ_BLOCK_CHIME
         ), InkColors.CYAN
     ));
 
     public static final DeferredBlock<Block> CITRINE_CLUSTER = register(blockWithItem(
         "citrine_cluster", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_CLUSTER, 9),
+            gemstone(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_CLUSTER, 9),
             PastelClusterBlock.GrowthStage.CLUSTER
         ), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> LARGE_CITRINE_BUD = register(blockWithItem(
         "large_citrine_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_YELLOW, PastelBlockSoundGroups.LARGE_CITRINE_BUD, 7),
+            gemstone(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.LARGE_CITRINE_BUD, 7),
             PastelClusterBlock.GrowthStage.LARGE
         ), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> MEDIUM_CITRINE_BUD = register(blockWithItem(
         "medium_citrine_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_YELLOW, PastelBlockSoundGroups.MEDIUM_CITRINE_BUD, 5),
+            gemstone(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.MEDIUM_CITRINE_BUD, 5),
             PastelClusterBlock.GrowthStage.MEDIUM
         ), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> SMALL_CITRINE_BUD = register(blockWithItem(
         "small_citrine_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_YELLOW, PastelBlockSoundGroups.SMALL_CITRINE_BUD, 3),
+            gemstone(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.SMALL_CITRINE_BUD, 3),
             PastelClusterBlock.GrowthStage.SMALL
         ), InkColors.YELLOW
     ));
-    public static final DeferredBlock<Block> BUDDING_CITRINE = register(
-        blockWithItem(
-            "budding_citrine", () -> new PastelBuddingBlock(
-                gemstoneBlock(
-                    MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK).pushReaction(PushReaction.DESTROY)
-                                                                                .randomTicks(),
-                PastelBlocks.SMALL_CITRINE_BUD.get(), PastelBlocks.MEDIUM_CITRINE_BUD.get(),
-                PastelBlocks.LARGE_CITRINE_BUD.get(), PastelBlocks.CITRINE_CLUSTER.get(),
-                PastelSounds.BLOCK_CITRINE_BLOCK_HIT, PastelSounds.BLOCK_CITRINE_BLOCK_CHIME
-            ), InkColors.YELLOW
-        ));
+    public static final DeferredBlock<Block> BUDDING_CITRINE = register(blockWithItem(
+        "budding_citrine", () -> new PastelBuddingBlock(
+            gemstoneBlock(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK).pushReaction(
+                                                                                          PushReaction.DESTROY)
+                                                                                      .randomTicks(),
+            PastelBlocks.SMALL_CITRINE_BUD.get(), PastelBlocks.MEDIUM_CITRINE_BUD.get(),
+            PastelBlocks.LARGE_CITRINE_BUD.get(), PastelBlocks.CITRINE_CLUSTER.get(),
+            PastelSounds.BLOCK_CITRINE_BLOCK_HIT, PastelSounds.BLOCK_CITRINE_BLOCK_CHIME
+        ), InkColors.YELLOW
+    ));
     public static final DeferredBlock<Block> CITRINE_BLOCK = register(blockWithItem(
-        "citrine_block", () -> new PastelGemstoneBlock(
-            gemstoneBlock(
-                MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK), PastelSounds.BLOCK_CITRINE_BLOCK_HIT,
-            PastelSounds.BLOCK_CITRINE_BLOCK_CHIME
+        "citrine_block",
+        () -> new PastelGemstoneBlock(
+            gemstoneBlock(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK),
+            PastelSounds.BLOCK_CITRINE_BLOCK_HIT, PastelSounds.BLOCK_CITRINE_BLOCK_CHIME
         ), InkColors.YELLOW
     ));
 
     public static final DeferredBlock<Block> ONYX_CLUSTER = register(blockWithItem(
         "onyx_cluster", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_CLUSTER, 6), PastelClusterBlock.GrowthStage.CLUSTER
+            gemstone(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_CLUSTER, 6),
+            PastelClusterBlock.GrowthStage.CLUSTER
         ), InkColors.BLACK
     ));
     public static final DeferredBlock<Block> LARGE_ONYX_BUD = register(blockWithItem(
         "large_onyx_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_BLACK, PastelBlockSoundGroups.LARGE_ONYX_BUD, 5), PastelClusterBlock.GrowthStage.LARGE
+            gemstone(MapColor.COLOR_BLACK, PastelBlockSoundGroups.LARGE_ONYX_BUD, 5),
+            PastelClusterBlock.GrowthStage.LARGE
         ), InkColors.BLACK
     ));
     public static final DeferredBlock<Block> MEDIUM_ONYX_BUD = register(blockWithItem(
         "medium_onyx_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_BLACK, PastelBlockSoundGroups.MEDIUM_ONYX_BUD, 3), PastelClusterBlock.GrowthStage.MEDIUM
+            gemstone(MapColor.COLOR_BLACK, PastelBlockSoundGroups.MEDIUM_ONYX_BUD, 3),
+            PastelClusterBlock.GrowthStage.MEDIUM
         ), InkColors.BLACK
     ));
     public static final DeferredBlock<Block> SMALL_ONYX_BUD = register(blockWithItem(
         "small_onyx_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_BLACK, PastelBlockSoundGroups.SMALL_ONYX_BUD, 1), PastelClusterBlock.GrowthStage.SMALL
+            gemstone(MapColor.COLOR_BLACK, PastelBlockSoundGroups.SMALL_ONYX_BUD, 1),
+            PastelClusterBlock.GrowthStage.SMALL
         ), InkColors.BLACK
     ));
-    public static final DeferredBlock<Block> BUDDING_ONYX = register(
-        blockWithItem(
-            "budding_onyx", () -> new PastelBuddingBlock(
-                gemstoneBlock(
-                    MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK).pushReaction(PushReaction.DESTROY)
-                                                                            .randomTicks(),
-                PastelBlocks.SMALL_ONYX_BUD.get(), PastelBlocks.MEDIUM_ONYX_BUD.get(),
-                PastelBlocks.LARGE_ONYX_BUD.get(), PastelBlocks.ONYX_CLUSTER.get(), PastelSounds.BLOCK_ONYX_BLOCK_HIT,
-                PastelSounds.BLOCK_ONYX_BLOCK_CHIME
-            ), InkColors.BLACK
-        ));
+    public static final DeferredBlock<Block> BUDDING_ONYX = register(blockWithItem(
+        "budding_onyx", () -> new PastelBuddingBlock(
+            gemstoneBlock(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK).pushReaction(PushReaction.DESTROY)
+                                                                                  .randomTicks(),
+            PastelBlocks.SMALL_ONYX_BUD.get(), PastelBlocks.MEDIUM_ONYX_BUD.get(), PastelBlocks.LARGE_ONYX_BUD.get(),
+            PastelBlocks.ONYX_CLUSTER.get(), PastelSounds.BLOCK_ONYX_BLOCK_HIT, PastelSounds.BLOCK_ONYX_BLOCK_CHIME
+        ), InkColors.BLACK
+    ));
     public static final DeferredBlock<Block> ONYX_BLOCK = register(blockWithItem(
         "onyx_block", () -> new PastelGemstoneBlock(
-            gemstoneBlock(
-                MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK), PastelSounds.BLOCK_ONYX_BLOCK_HIT,
+            gemstoneBlock(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK), PastelSounds.BLOCK_ONYX_BLOCK_HIT,
             PastelSounds.BLOCK_ONYX_BLOCK_CHIME
         ), InkColors.BLACK
     ));
 
     public static final DeferredBlock<Block> MOONSTONE_CLUSTER = register(blockWithItem(
         "moonstone_cluster", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_CLUSTER, 15), PastelClusterBlock.GrowthStage.CLUSTER
+            gemstone(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_CLUSTER, 15),
+            PastelClusterBlock.GrowthStage.CLUSTER
         ), InkColors.WHITE
     ));
     public static final DeferredBlock<Block> LARGE_MOONSTONE_BUD = register(blockWithItem(
         "large_moonstone_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.SNOW, PastelBlockSoundGroups.LARGE_MOONSTONE_BUD, 12), PastelClusterBlock.GrowthStage.LARGE
+            gemstone(MapColor.SNOW, PastelBlockSoundGroups.LARGE_MOONSTONE_BUD, 12),
+            PastelClusterBlock.GrowthStage.LARGE
         ), InkColors.WHITE
     ));
     public static final DeferredBlock<Block> MEDIUM_MOONSTONE_BUD = register(blockWithItem(
         "medium_moonstone_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.SNOW, PastelBlockSoundGroups.MEDIUM_MOONSTONE_BUD, 9), PastelClusterBlock.GrowthStage.MEDIUM
+            gemstone(MapColor.SNOW, PastelBlockSoundGroups.MEDIUM_MOONSTONE_BUD, 9),
+            PastelClusterBlock.GrowthStage.MEDIUM
         ), InkColors.WHITE
     ));
     public static final DeferredBlock<Block> SMALL_MOONSTONE_BUD = register(blockWithItem(
         "small_moonstone_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.SNOW, PastelBlockSoundGroups.SMALL_MOONSTONE_BUD, 6), PastelClusterBlock.GrowthStage.SMALL
+            gemstone(MapColor.SNOW, PastelBlockSoundGroups.SMALL_MOONSTONE_BUD, 6),
+            PastelClusterBlock.GrowthStage.SMALL
         ), InkColors.WHITE
     ));
-    public static final DeferredBlock<Block> BUDDING_MOONSTONE = register(
-        blockWithItem(
-            "budding_moonstone", () -> new PastelBuddingBlock(
-                gemstoneBlock(
-                    MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK).pushReaction(PushReaction.DESTROY)
-                                                                          .randomTicks(),
-                PastelBlocks.SMALL_MOONSTONE_BUD.get(), PastelBlocks.MEDIUM_MOONSTONE_BUD.get(),
-                PastelBlocks.LARGE_MOONSTONE_BUD.get(), PastelBlocks.MOONSTONE_CLUSTER.get(),
-                PastelSounds.BLOCK_MOONSTONE_BLOCK_HIT, PastelSounds.BLOCK_MOONSTONE_BLOCK_CHIME
-            ), InkColors.WHITE
-        ));
+    public static final DeferredBlock<Block> BUDDING_MOONSTONE = register(blockWithItem(
+        "budding_moonstone", () -> new PastelBuddingBlock(
+            gemstoneBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK).pushReaction(PushReaction.DESTROY)
+                                                                                .randomTicks(),
+            PastelBlocks.SMALL_MOONSTONE_BUD.get(), PastelBlocks.MEDIUM_MOONSTONE_BUD.get(),
+            PastelBlocks.LARGE_MOONSTONE_BUD.get(), PastelBlocks.MOONSTONE_CLUSTER.get(),
+            PastelSounds.BLOCK_MOONSTONE_BLOCK_HIT, PastelSounds.BLOCK_MOONSTONE_BLOCK_CHIME
+        ), InkColors.WHITE
+    ));
     public static final DeferredBlock<Block> MOONSTONE_BLOCK = register(blockWithItem(
-        "moonstone_block", () -> new PastelGemstoneBlock(
-            gemstoneBlock(
-                MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK), PastelSounds.BLOCK_MOONSTONE_BLOCK_HIT,
-            PastelSounds.BLOCK_MOONSTONE_BLOCK_CHIME
+        "moonstone_block",
+        () -> new PastelGemstoneBlock(
+            gemstoneBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK),
+            PastelSounds.BLOCK_MOONSTONE_BLOCK_HIT, PastelSounds.BLOCK_MOONSTONE_BLOCK_CHIME
         ), InkColors.WHITE
     ));
 
@@ -753,13 +727,12 @@ public class PastelBlocks {
         ), InkColors.WHITE
     ));
 
-    public static final DeferredBlock<Block> VEGETAL_BLOCK = register(
-        burnable(
-            blockWithItem(
-                "vegetal_block", () -> new Block(settings(MapColor.GRASS, SoundType.FUNGUS, 2.0F).noOcclusion()),
-                InkColors.GREEN
-            ), 8000
-        ));
+    public static final DeferredBlock<Block> VEGETAL_BLOCK = register(burnable(
+        blockWithItem(
+            "vegetal_block", () -> new Block(settings(MapColor.GRASS, SoundType.FUNGUS, 2.0F).noOcclusion()),
+            InkColors.GREEN
+        ), 8000
+    ));
     public static final DeferredBlock<Block> NEOLITH_BLOCK = register(blockWithItem(
         "neolith_block", () -> new PastelFacingBlock(settings(
             MapColor.COLOR_PURPLE, SoundType.COPPER, 6.0F).requiresCorrectToolForDrops()
@@ -768,40 +741,34 @@ public class PastelBlocks {
                                                           .hasPostProcess(PastelBlocks::always)
                                                           .emissiveRendering(PastelBlocks::always)), InkColors.PINK
     ));
-    public static final DeferredBlock<Block> BEDROCK_DUST_BLOCK = register(
-        blockWithItem(
-            "bedrock_dust_block", () -> new BlockWithTooltip(
-                settings(
-                    MapColor.STONE, SoundType.STONE, 100.0F, 3600.0F).pushReaction(PushReaction.BLOCK)
-                                                                     .requiresCorrectToolForDrops()
-                                                                     .instrument(NoteBlockInstrument.BASEDRUM),
-                Component.translatable("pastel.tooltip.dragon_and_wither_immune")
-            ), IS.of(Rarity.UNCOMMON), InkColors.BLACK
-        ));
+    public static final DeferredBlock<Block> BEDROCK_DUST_BLOCK = register(blockWithItem(
+        "bedrock_dust_block", () -> new BlockWithTooltip(
+            settings(MapColor.STONE, SoundType.STONE, 100.0F, 3600.0F).pushReaction(PushReaction.BLOCK)
+                                                                      .requiresCorrectToolForDrops()
+                                                                      .instrument(NoteBlockInstrument.BASEDRUM),
+            Component.translatable("pastel.tooltip.dragon_and_wither_immune")
+        ), IS.of(Rarity.UNCOMMON), InkColors.BLACK
+    ));
 
     public static final DeferredBlock<Block> BISMUTH_CLUSTER = register(blockWithItem(
         "bismuth_cluster", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.WARPED_STEM, SoundType.CHAIN, 8), PastelClusterBlock.GrowthStage.CLUSTER
-        ), IS.of(Rarity.UNCOMMON), InkColors.CYAN
+            gemstone(MapColor.WARPED_STEM, SoundType.CHAIN, 8), PastelClusterBlock.GrowthStage.CLUSTER),
+        IS.of(Rarity.UNCOMMON), InkColors.CYAN
     ));
     public static final DeferredBlock<Block> LARGE_BISMUTH_BUD = register(blockWithItem(
         "large_bismuth_bud", () -> new BismuthBudBlock(
-            gemstone(
-                MapColor.WARPED_STEM, SoundType.CHAIN, 6).randomTicks(), PastelClusterBlock.GrowthStage.LARGE,
+            gemstone(MapColor.WARPED_STEM, SoundType.CHAIN, 6).randomTicks(), PastelClusterBlock.GrowthStage.LARGE,
             PastelBlocks.BISMUTH_CLUSTER.get()
         ), IS.of(Rarity.UNCOMMON), InkColors.CYAN
     ));
     public static final DeferredBlock<Block> SMALL_BISMUTH_BUD = register(blockWithItem(
         "small_bismuth_bud", () -> new BismuthBudBlock(
-            gemstone(
-                MapColor.WARPED_STEM, SoundType.CHAIN, 4).randomTicks(), PastelClusterBlock.GrowthStage.SMALL,
+            gemstone(MapColor.WARPED_STEM, SoundType.CHAIN, 4).randomTicks(), PastelClusterBlock.GrowthStage.SMALL,
             PastelBlocks.LARGE_BISMUTH_BUD.get()
         ), IS.of(Rarity.UNCOMMON), InkColors.CYAN
     ));
-    public static final DeferredBlock<Block> BISMUTH_BLOCK = register(
-        blockWithItem(
-            "bismuth_block", () -> new Block(gemstoneBlock(MapColor.WARPED_STEM, SoundType.CHAIN)), InkColors.CYAN));
+    public static final DeferredBlock<Block> BISMUTH_BLOCK = register(blockWithItem(
+        "bismuth_block", () -> new Block(gemstoneBlock(MapColor.WARPED_STEM, SoundType.CHAIN)), InkColors.CYAN));
     // Once we unfuck the datagen remember to ensure this still has its mirrored form
 
     // DD BLOCKS
@@ -829,11 +796,10 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> BLACKSLAG_WALL = register(
         blockWithItem("blackslag_wall", () -> new WallBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
 
-    public static final DeferredBlock<Block> INFESTED_BLACKSLAG = register(
-        blockWithItem(
-            "infested_blackslag", () -> new InfestedBlock(PastelBlocks.BLACKSLAG.get(), blackslag(SoundType.DEEPSLATE)),
-            InkColors.BLACK
-        ));
+    public static final DeferredBlock<Block> INFESTED_BLACKSLAG = register(blockWithItem(
+        "infested_blackslag", () -> new InfestedBlock(PastelBlocks.BLACKSLAG.get(), blackslag(SoundType.DEEPSLATE)),
+        InkColors.BLACK
+    ));
 
     public static final DeferredBlock<Block> COBBLED_BLACKSLAG = register(
         blockWithItem("cobbled_blackslag", () -> new Block(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
@@ -928,23 +894,19 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> CHISELED_POLISHED_BLACKSLAG = register(blockWithItem(
         "chiseled_polished_blackslag", () -> new Block(blackslag(SoundType.DEEPSLATE_BRICKS)), InkColors.BLACK));
 
-    public static final DeferredBlock<Block> POLISHED_BLACKSLAG_PILLAR = register(
-        blockWithItem(
-            "polished_blackslag_pillar",
-            () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK
-        ));
-    public static final DeferredBlock<Block> ANCIENT_CHISELED_POLISHED_BLACKSLAG = register(
-        blockWithItem(
-            "ancient_chiseled_polished_blackslag", () -> new Block(blackslag(SoundType.DEEPSLATE_BRICKS)),
-            InkColors.BLACK
-        ));
+    public static final DeferredBlock<Block> POLISHED_BLACKSLAG_PILLAR = register(blockWithItem(
+        "polished_blackslag_pillar",
+        () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK
+    ));
+    public static final DeferredBlock<Block> ANCIENT_CHISELED_POLISHED_BLACKSLAG = register(blockWithItem(
+        "ancient_chiseled_polished_blackslag", () -> new Block(blackslag(SoundType.DEEPSLATE_BRICKS)),
+        InkColors.BLACK
+    ));
 
-    public static final DeferredBlock<Block> SHALE_CLAY = register(
-        blockWithItem(
-            "shale_clay",
-            () -> new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, blackslag(SoundType.MUD_BRICKS)),
-            InkColors.BROWN
-        ));
+    public static final DeferredBlock<Block> SHALE_CLAY = register(blockWithItem(
+        "shale_clay", () -> new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, blackslag(SoundType.MUD_BRICKS)),
+        InkColors.BROWN
+    ));
     public static final DeferredBlock<Block> TILLED_SHALE_CLAY = register(blockWithItem(
         "tilled_shale_clay", () -> new TilledShaleClayBlock(
             Properties.ofFullCopy(PastelBlocks.SHALE_CLAY.get()), PastelBlocks.SHALE_CLAY.get()
@@ -1101,11 +1063,11 @@ public class PastelBlocks {
             Weathering.WeatheringLevel.WEATHERED, Properties.ofFullCopy(PastelBlocks.SHALE_CLAY.get())), InkColors.BROWN
     ));
 
-    public static final DeferredBlock<Block> ROCK_CRYSTAL = register(
-        blockWithItem(
-            "rock_crystal", () -> new Block(
-                settings(MapColor.QUARTZ, SoundType.NETHER_BRICKS, 200F).requiresCorrectToolForDrops()), InkColors.BROWN
-        ));
+    public static final DeferredBlock<Block> ROCK_CRYSTAL = register(blockWithItem(
+        "rock_crystal",
+        () -> new Block(settings(MapColor.QUARTZ, SoundType.NETHER_BRICKS, 200F).requiresCorrectToolForDrops()),
+        InkColors.BROWN
+    ));
 
     public static final DeferredBlock<Block> PYRITE = register(blockWithItem(
         "pyrite", () -> new RotatedPillarBlock(
@@ -1122,33 +1084,26 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> PYRITE_WALL = register(blockWithItem(
         "pyrite_wall", () -> new WallBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
 
-    public static final DeferredBlock<Block> PYRITE_PILE = register(
-        blockWithItem(
-            "pyrite_pile", () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())),
-            InkColors.BROWN
-        ));
-    public static final DeferredBlock<Block> PYRITE_PLATING = register(
-        blockWithItem(
-            "pyrite_plating", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
-    public static final DeferredBlock<Block> PYRITE_TUBING = register(
-        blockWithItem(
-            "pyrite_tubing", () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())),
-            InkColors.BROWN
-        ));
-    public static final DeferredBlock<Block> PYRITE_RELIEF = register(
-        blockWithItem(
-            "pyrite_relief", () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())),
-            InkColors.BROWN
-        ));
-    public static final DeferredBlock<Block> PYRITE_STACK = register(
-        blockWithItem(
-            "pyrite_stack", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
-    public static final DeferredBlock<Block> PYRITE_PANELING = register(
-        blockWithItem(
-            "pyrite_paneling", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
-    public static final DeferredBlock<Block> PYRITE_VENT = register(
-        blockWithItem(
-            "pyrite_vent", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
+    public static final DeferredBlock<Block> PYRITE_PILE = register(blockWithItem(
+        "pyrite_pile", () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())),
+        InkColors.BROWN
+    ));
+    public static final DeferredBlock<Block> PYRITE_PLATING = register(blockWithItem(
+        "pyrite_plating", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
+    public static final DeferredBlock<Block> PYRITE_TUBING = register(blockWithItem(
+        "pyrite_tubing", () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())),
+        InkColors.BROWN
+    ));
+    public static final DeferredBlock<Block> PYRITE_RELIEF = register(blockWithItem(
+        "pyrite_relief", () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())),
+        InkColors.BROWN
+    ));
+    public static final DeferredBlock<Block> PYRITE_STACK = register(blockWithItem(
+        "pyrite_stack", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
+    public static final DeferredBlock<Block> PYRITE_PANELING = register(blockWithItem(
+        "pyrite_paneling", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
+    public static final DeferredBlock<Block> PYRITE_VENT = register(blockWithItem(
+        "pyrite_vent", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
     public static final DeferredBlock<Block> PYRITE_RIPPER = register(blockWithItem(
         "pyrite_ripper", () -> new PyriteRipperBlock(Properties.ofFullCopy(PastelBlocks.PYRITE.get())
                                                                .noOcclusion()
@@ -1161,9 +1116,8 @@ public class PastelBlocks {
         InkColors.BROWN
     ));
 
-    public static final DeferredBlock<Block> PYRITE_TILES = register(
-        blockWithItem(
-            "pyrite_tiles", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
+    public static final DeferredBlock<Block> PYRITE_TILES = register(blockWithItem(
+        "pyrite_tiles", () -> new Block(Properties.ofFullCopy(PastelBlocks.PYRITE.get())), InkColors.BROWN));
     public static final DeferredBlock<Block> PYRITE_TILE_SLAB = register(blockWithItem(
         "pyrite_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(PastelBlocks.PYRITE_TILES.get())),
         InkColors.BROWN
@@ -1211,11 +1165,10 @@ public class PastelBlocks {
         InkColors.CYAN
     ));
 
-    public static final DeferredBlock<Block> POLISHED_BONE_ASH_PILLAR = register(
-        blockWithItem(
-            "polished_bone_ash_pillar", () -> new RotatedPillarBlock(
-                Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN
-        ));
+    public static final DeferredBlock<Block> POLISHED_BONE_ASH_PILLAR = register(blockWithItem(
+        "polished_bone_ash_pillar",
+        () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN
+    ));
     public static final DeferredBlock<Block> BONE_ASH_SHINGLES = register(blockWithItem(
         "bone_ash_shingles", () -> new ShinglesBlock(
             BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BONE_ASH.get())
@@ -1260,14 +1213,10 @@ public class PastelBlocks {
         InkColors.CYAN
     ));
 
-    public static final DeferredBlock<Block> SLUSH = register(
-        blockWithItem(
-            "slush", () -> new RotatedPillarBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)), InkColors.BROWN));
-    public static final DeferredBlock<Block> OVERGROWN_SLUSH = register(
-        blockWithItem(
-            "overgrown_slush", () -> new SlushVegetationBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)),
-            InkColors.BROWN
-        ));
+    public static final DeferredBlock<Block> SLUSH = register(blockWithItem(
+        "slush", () -> new RotatedPillarBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)), InkColors.BROWN));
+    public static final DeferredBlock<Block> OVERGROWN_SLUSH = register(blockWithItem(
+        "overgrown_slush", () -> new SlushVegetationBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)), InkColors.BROWN));
     public static final DeferredBlock<Block> TILLED_SLUSH = register(blockWithItem(
         "tilled_slush", () -> new TilledSlushBlock(
             Properties.ofFullCopy(PastelBlocks.SLUSH.get()), PastelBlocks.SLUSH.get()
@@ -1275,31 +1224,27 @@ public class PastelBlocks {
         ), InkColors.BROWN
     ));
 
-    public static final DeferredBlock<Block> BLACK_MATERIA = register(
-        blockWithItem(
-            "black_materia", () -> new BlackMateriaBlock(settings(
-                MapColor.TERRACOTTA_BLACK, SoundType.SAND, 0.0F).instrument(NoteBlockInstrument.SNARE)
-                                                                .randomTicks()), InkColors.GRAY
-        ));
+    public static final DeferredBlock<Block> BLACK_MATERIA = register(blockWithItem(
+        "black_materia", () -> new BlackMateriaBlock(settings(
+            MapColor.TERRACOTTA_BLACK, SoundType.SAND, 0.0F).instrument(NoteBlockInstrument.SNARE)
+                                                            .randomTicks()), InkColors.GRAY
+    ));
     public static final DeferredBlock<Block> HORNSLAKE = register(blockWithItem(
         "hornslake", () -> new Block(
             settings(MapColor.TERRACOTTA_BLACK, SoundType.SAND, 0.5F).instrument(NoteBlockInstrument.SNARE)),
         InkColors.GRAY
     ));
     public static final DeferredBlock<Block> SAG_LEAF = register(block(
-        "sag_leaf", () -> new BlackSludgePlantBlock(
-            Properties.ofFullCopy(SHORT_GRASS)
-                      .mapColor(MapColor.TERRACOTTA_BLACK))
+        "sag_leaf", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS)
+                                                              .mapColor(MapColor.TERRACOTTA_BLACK))
     ));
     public static final DeferredBlock<Block> SAG_BUBBLE = register(block(
-        "sag_bubble", () -> new BlackSludgePlantBlock(
-            Properties.ofFullCopy(SHORT_GRASS)
-                      .mapColor(MapColor.TERRACOTTA_BLACK))
+        "sag_bubble", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS)
+                                                                .mapColor(MapColor.TERRACOTTA_BLACK))
     ));
     public static final DeferredBlock<Block> SMALL_SAG_BUBBLE = register(block(
-        "small_sag_bubble", () -> new BlackSludgePlantBlock(
-            Properties.ofFullCopy(SHORT_GRASS)
-                      .mapColor(MapColor.TERRACOTTA_BLACK))
+        "small_sag_bubble", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS)
+                                                                      .mapColor(MapColor.TERRACOTTA_BLACK))
     ));
 
     public static final DeferredBlock<Block> PRIMORDIAL_FIRE = register(block(
@@ -1317,13 +1262,14 @@ public class PastelBlocks {
         "primordial_torch", () -> new TorchBlock(
             PastelParticleTypes.PRIMORDIAL_FLAME, Properties.ofFullCopy(SOUL_TORCH)
                                                             .lightLevel(s -> 13)
-        ), block -> new StandingAndWallBlockItem(
-            block, PastelBlocks.PRIMORDIAL_WALL_TORCH.get(), IS.of(), Direction.DOWN), InkColors.ORANGE
+        ),
+        block -> new StandingAndWallBlockItem(block, PastelBlocks.PRIMORDIAL_WALL_TORCH.get(), IS.of(), Direction.DOWN),
+        InkColors.ORANGE
     ));
 
     public static final DeferredBlock<Block> SMOOTH_BASALT_STAIRS = register(blockWithItem(
-        "smooth_basalt_stairs", () -> new StairBlock(
-            BASALT.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN
+        "smooth_basalt_stairs",
+        () -> new StairBlock(BASALT.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> SMOOTH_BASALT_SLAB = register(blockWithItem(
         "smooth_basalt_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN));
@@ -1331,9 +1277,10 @@ public class PastelBlocks {
         "smooth_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN));
 
     public static final DeferredBlock<Block> POLISHED_BASALT = register(blockWithItem(
-        "polished_basalt", () -> new Block(settings(
-            MapColor.COLOR_BLACK, SoundType.BASALT, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM)
-                                                               .requiresCorrectToolForDrops()), InkColors.BROWN
+        "polished_basalt", () -> new Block(settings(MapColor.COLOR_BLACK, SoundType.BASALT, 2.0F, 5.0F).instrument(
+                                                                                                           NoteBlockInstrument.BASEDRUM)
+                                                                                                       .requiresCorrectToolForDrops()),
+        InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_BASALT_STAIRS = register(blockWithItem(
         "polished_basalt_stairs", () -> new StairBlock(
@@ -1343,12 +1290,12 @@ public class PastelBlocks {
         ), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_BASALT_SLAB = register(blockWithItem(
-        "polished_basalt_slab", () -> new SlabBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN
+        "polished_basalt_slab",
+        () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_BASALT_WALL = register(blockWithItem(
-        "polished_basalt_wall", () -> new WallBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN
+        "polished_basalt_wall",
+        () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_BASALT_BUTTON = register(blockWithItem(
         "polished_basalt_button", () -> new ButtonBlock(
@@ -1376,18 +1323,18 @@ public class PastelBlocks {
     ));
 
     public static final DeferredBlock<Block> POLISHED_BASALT_PILLAR = register(blockWithItem(
-        "polished_basalt_pillar", () -> new RotatedPillarBlock(
-            Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN
+        "polished_basalt_pillar",
+        () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_BASALT_CREST = register(blockWithItem(
-        "polished_basalt_crest", () -> new CardinalFacingBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())), InkColors.BROWN
+        "polished_basalt_crest",
+        () -> new CardinalFacingBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())),
+        InkColors.BROWN
     ));
-    public static final DeferredBlock<Block> NOTCHED_POLISHED_BASALT = register(
-        blockWithItem(
-            "notched_polished_basalt", () -> new Block(Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())),
-            InkColors.BROWN
-        ));
+    public static final DeferredBlock<Block> NOTCHED_POLISHED_BASALT = register(blockWithItem(
+        "notched_polished_basalt", () -> new Block(Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())),
+        InkColors.BROWN
+    ));
 
     public static final DeferredBlock<Block> BASALT_BRICKS = register(blockWithItem(
         "basalt_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_BASALT.get())),
@@ -1401,16 +1348,16 @@ public class PastelBlocks {
         ), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> BASALT_BRICK_SLAB = register(blockWithItem(
-        "basalt_brick_slab", () -> new SlabBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN
+        "basalt_brick_slab",
+        () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> BASALT_BRICK_WALL = register(blockWithItem(
-        "basalt_brick_wall", () -> new WallBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN
+        "basalt_brick_wall",
+        () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> CRACKED_BASALT_BRICKS = register(blockWithItem(
-        "cracked_basalt_bricks", () -> new Block(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN
+        "cracked_basalt_bricks",
+        () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())), InkColors.BROWN
     ));
 
     public static final DeferredBlock<Block> BASALT_TILES = register(blockWithItem(
@@ -1449,44 +1396,40 @@ public class PastelBlocks {
         ), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> PLANED_BASALT_SLAB = register(blockWithItem(
-        "planed_basalt_slab", () -> new SlabBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_BASALT.get())), InkColors.BROWN
+        "planed_basalt_slab",
+        () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_BASALT.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> PLANED_BASALT_WALL = register(blockWithItem(
-        "planed_basalt_wall", () -> new WallBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_BASALT.get())), InkColors.BROWN
+        "planed_basalt_wall",
+        () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_BASALT.get())), InkColors.BROWN
     ));
 
     public static final DeferredBlock<Block> TOPAZ_CHISELED_BASALT = register(blockWithItem(
-        "topaz_chiseled_basalt", () -> new Block(
-            Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
-                      .lightLevel(s -> 6)), InkColors.CYAN
+        "topaz_chiseled_basalt", () -> new Block(Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
+                                                           .lightLevel(s -> 6)), InkColors.CYAN
     ));
-    public static final DeferredBlock<Block> AMETHYST_CHISELED_BASALT = register(
-        blockWithItem(
-            "amethyst_chiseled_basalt", () -> new Block(Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
-                                                                  .lightLevel(s -> 5)), InkColors.MAGENTA
-        ));
+    public static final DeferredBlock<Block> AMETHYST_CHISELED_BASALT = register(blockWithItem(
+        "amethyst_chiseled_basalt", () -> new Block(Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
+                                                              .lightLevel(s -> 5)), InkColors.MAGENTA
+    ));
     public static final DeferredBlock<Block> CITRINE_CHISELED_BASALT = register(blockWithItem(
-        "citrine_chiseled_basalt", () -> new Block(
-            Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
-                      .lightLevel(s -> 7)), InkColors.YELLOW
+        "citrine_chiseled_basalt", () -> new Block(Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
+                                                             .lightLevel(s -> 7)), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> ONYX_CHISELED_BASALT = register(blockWithItem(
-        "onyx_chiseled_basalt", () -> new Block(
-            Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
-                      .lightLevel(s -> 3)), InkColors.BLACK
+        "onyx_chiseled_basalt", () -> new Block(Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
+                                                          .lightLevel(s -> 3)), InkColors.BLACK
     ));
-    public static final DeferredBlock<Block> MOONSTONE_CHISELED_BASALT = register(
-        blockWithItem(
-            "moonstone_chiseled_basalt", () -> new PastelLineFacingBlock(
-                Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
-                          .lightLevel(s -> 12)), InkColors.WHITE
-        ));
+    public static final DeferredBlock<Block> MOONSTONE_CHISELED_BASALT = register(blockWithItem(
+        "moonstone_chiseled_basalt", () -> new PastelLineFacingBlock(
+            Properties.ofFullCopy(PastelBlocks.BASALT_BRICKS.get())
+                      .lightLevel(s -> 12)), InkColors.WHITE
+    ));
 
     public static final DeferredBlock<Block> CALCITE_STAIRS = register(blockWithItem(
-        "calcite_stairs", () -> new StairBlock(
-            CALCITE.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN
+        "calcite_stairs",
+        () -> new StairBlock(CALCITE.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(CALCITE)),
+        InkColors.BROWN
     ));
     public static final DeferredBlock<Block> CALCITE_SLAB = register(blockWithItem(
         "calcite_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN));
@@ -1506,12 +1449,12 @@ public class PastelBlocks {
         ), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_CALCITE_SLAB = register(blockWithItem(
-        "polished_calcite_slab", () -> new SlabBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN
+        "polished_calcite_slab",
+        () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_CALCITE_WALL = register(blockWithItem(
-        "polished_calcite_wall", () -> new WallBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN
+        "polished_calcite_wall",
+        () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_CALCITE_BUTTON = register(blockWithItem(
         "polished_calcite_button", () -> new ButtonBlock(
@@ -1539,18 +1482,18 @@ public class PastelBlocks {
     ));
 
     public static final DeferredBlock<Block> POLISHED_CALCITE_PILLAR = register(blockWithItem(
-        "polished_calcite_pillar", () -> new RotatedPillarBlock(
-            Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN
+        "polished_calcite_pillar",
+        () -> new RotatedPillarBlock(Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> POLISHED_CALCITE_CREST = register(blockWithItem(
-        "polished_calcite_crest", () -> new CardinalFacingBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())), InkColors.BROWN
+        "polished_calcite_crest",
+        () -> new CardinalFacingBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())),
+        InkColors.BROWN
     ));
-    public static final DeferredBlock<Block> NOTCHED_POLISHED_CALCITE = register(
-        blockWithItem(
-            "notched_polished_calcite", () -> new Block(Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())),
-            InkColors.BROWN
-        ));
+    public static final DeferredBlock<Block> NOTCHED_POLISHED_CALCITE = register(blockWithItem(
+        "notched_polished_calcite", () -> new Block(Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())),
+        InkColors.BROWN
+    ));
 
     public static final DeferredBlock<Block> CALCITE_BRICKS = register(blockWithItem(
         "calcite_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.POLISHED_CALCITE.get())),
@@ -1564,16 +1507,16 @@ public class PastelBlocks {
         ), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> CALCITE_BRICK_SLAB = register(blockWithItem(
-        "calcite_brick_slab", () -> new SlabBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN
+        "calcite_brick_slab",
+        () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> CALCITE_BRICK_WALL = register(blockWithItem(
-        "calcite_brick_wall", () -> new WallBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN
+        "calcite_brick_wall",
+        () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> CRACKED_CALCITE_BRICKS = register(blockWithItem(
-        "cracked_calcite_bricks", () -> new Block(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN
+        "cracked_calcite_bricks",
+        () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())), InkColors.BROWN
     ));
 
     public static final DeferredBlock<Block> CALCITE_TILES = register(blockWithItem(
@@ -1588,16 +1531,16 @@ public class PastelBlocks {
         ), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> CALCITE_TILE_SLAB = register(blockWithItem(
-        "calcite_tile_slab", () -> new SlabBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN
+        "calcite_tile_slab",
+        () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> CALCITE_TILE_WALL = register(blockWithItem(
-        "calcite_tile_wall", () -> new WallBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN
+        "calcite_tile_wall",
+        () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> CRACKED_CALCITE_TILES = register(blockWithItem(
-        "cracked_calcite_tiles", () -> new Block(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN
+        "cracked_calcite_tiles",
+        () -> new Block(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.CALCITE_TILES.get())), InkColors.BROWN
     ));
 
     public static final DeferredBlock<Block> PLANED_CALCITE = register(blockWithItem(
@@ -1612,40 +1555,35 @@ public class PastelBlocks {
         ), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> PLANED_CALCITE_SLAB = register(blockWithItem(
-        "planed_calcite_slab", () -> new SlabBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_CALCITE.get())), InkColors.BROWN
+        "planed_calcite_slab",
+        () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_CALCITE.get())), InkColors.BROWN
     ));
     public static final DeferredBlock<Block> PLANED_CALCITE_WALL = register(blockWithItem(
-        "planed_calcite_wall", () -> new WallBlock(
-            BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_CALCITE.get())), InkColors.BROWN
+        "planed_calcite_wall",
+        () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(PastelBlocks.PLANED_CALCITE.get())), InkColors.BROWN
     ));
 
     public static final DeferredBlock<Block> TOPAZ_CHISELED_CALCITE = register(blockWithItem(
-        "topaz_chiseled_calcite", () -> new Block(
-            Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
-                      .lightLevel(s -> 6)), InkColors.CYAN
+        "topaz_chiseled_calcite", () -> new Block(Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
+                                                            .lightLevel(s -> 6)), InkColors.CYAN
     ));
-    public static final DeferredBlock<Block> AMETHYST_CHISELED_CALCITE = register(
-        blockWithItem(
-            "amethyst_chiseled_calcite", () -> new Block(Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
-                                                                   .lightLevel(s -> 5)), InkColors.MAGENTA
-        ));
-    public static final DeferredBlock<Block> CITRINE_CHISELED_CALCITE = register(
-        blockWithItem(
-            "citrine_chiseled_calcite", () -> new Block(Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
-                                                                  .lightLevel(s -> 7)), InkColors.YELLOW
-        ));
+    public static final DeferredBlock<Block> AMETHYST_CHISELED_CALCITE = register(blockWithItem(
+        "amethyst_chiseled_calcite", () -> new Block(Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
+                                                               .lightLevel(s -> 5)), InkColors.MAGENTA
+    ));
+    public static final DeferredBlock<Block> CITRINE_CHISELED_CALCITE = register(blockWithItem(
+        "citrine_chiseled_calcite", () -> new Block(Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
+                                                              .lightLevel(s -> 7)), InkColors.YELLOW
+    ));
     public static final DeferredBlock<Block> ONYX_CHISELED_CALCITE = register(blockWithItem(
-        "onyx_chiseled_calcite", () -> new Block(
-            Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
-                      .lightLevel(s -> 3)), InkColors.BLACK
+        "onyx_chiseled_calcite", () -> new Block(Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
+                                                           .lightLevel(s -> 3)), InkColors.BLACK
     ));
-    public static final DeferredBlock<Block> MOONSTONE_CHISELED_CALCITE = register(
-        blockWithItem(
-            "moonstone_chiseled_calcite", () -> new PastelLineFacingBlock(
-                Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
-                          .lightLevel(s -> 12)), InkColors.WHITE
-        ));
+    public static final DeferredBlock<Block> MOONSTONE_CHISELED_CALCITE = register(blockWithItem(
+        "moonstone_chiseled_calcite", () -> new PastelLineFacingBlock(
+            Properties.ofFullCopy(PastelBlocks.CALCITE_BRICKS.get())
+                      .lightLevel(s -> 12)), InkColors.WHITE
+    ));
 
     public static DeferredBlock<Block> registerGemstoneLight(
         String name, DeferredBlock<Block> gemBlock, DeferredBlock<Block> baseBlock, InkColor color) {
@@ -1697,42 +1635,39 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> TOPAZ_GLASS = register(blockWithItem(
         "topaz_glass", () -> new GemstoneGlassBlock(
-            gemstoneGlass(
-                PastelBlockSoundGroups.TOPAZ_CLUSTER, MapColor.COLOR_CYAN), PastelGemstoneColor.CYAN
-        ), InkColors.CYAN
+            gemstoneGlass(PastelBlockSoundGroups.TOPAZ_CLUSTER, MapColor.COLOR_CYAN), PastelGemstoneColor.CYAN),
+        InkColors.CYAN
     ));
     public static final DeferredBlock<Block> AMETHYST_GLASS = register(blockWithItem(
         "amethyst_glass", () -> new GemstoneGlassBlock(
-            gemstoneGlass(
-                SoundType.AMETHYST_CLUSTER, MapColor.COLOR_MAGENTA), PastelGemstoneColor.MAGENTA
-        ), InkColors.MAGENTA
+            gemstoneGlass(SoundType.AMETHYST_CLUSTER, MapColor.COLOR_MAGENTA), PastelGemstoneColor.MAGENTA),
+        InkColors.MAGENTA
     ));
     public static final DeferredBlock<Block> CITRINE_GLASS = register(blockWithItem(
         "citrine_glass", () -> new GemstoneGlassBlock(
-            gemstoneGlass(
-                PastelBlockSoundGroups.CITRINE_CLUSTER, MapColor.COLOR_YELLOW), PastelGemstoneColor.YELLOW
-        ), InkColors.YELLOW
+            gemstoneGlass(PastelBlockSoundGroups.CITRINE_CLUSTER, MapColor.COLOR_YELLOW), PastelGemstoneColor.YELLOW),
+        InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> ONYX_GLASS = register(blockWithItem(
         "onyx_glass", () -> new GemstoneGlassBlock(
-            gemstoneGlass(
-                PastelBlockSoundGroups.ONYX_CLUSTER, MapColor.COLOR_BLACK), PastelGemstoneColor.BLACK
-        ), InkColors.BLACK
+            gemstoneGlass(PastelBlockSoundGroups.ONYX_CLUSTER, MapColor.COLOR_BLACK), PastelGemstoneColor.BLACK),
+        InkColors.BLACK
     ));
     public static final DeferredBlock<Block> MOONSTONE_GLASS = register(blockWithItem(
         "moonstone_glass", () -> new GemstoneGlassBlock(
-            gemstoneGlass(
-                PastelBlockSoundGroups.MOONSTONE_CLUSTER, MapColor.SNOW), PastelGemstoneColor.WHITE
-        ), InkColors.WHITE
+            gemstoneGlass(PastelBlockSoundGroups.MOONSTONE_CLUSTER, MapColor.SNOW), PastelGemstoneColor.WHITE),
+        InkColors.WHITE
     ));
     public static final DeferredBlock<Block> RADIANT_GLASS = register(blockWithItem(
-        "radiant_glass", () -> new RadiantGlassBlock(gemstoneGlass(
-            SoundType.GLASS, MapColor.SAND).lightLevel(value -> 12)), InkColors.WHITE
+        "radiant_glass",
+        () -> new RadiantGlassBlock(gemstoneGlass(SoundType.GLASS, MapColor.SAND).lightLevel(value -> 12)),
+        InkColors.WHITE
     ));
 
     public static final DeferredBlock<Block> TOPAZ_GLASS_PANE = register(blockWithItem(
-        "topaz_glass_pane", () -> new IronBarsBlock(gemstoneGlass(
-            PastelBlockSoundGroups.TOPAZ_CLUSTER, MapColor.COLOR_CYAN)), InkColors.CYAN
+        "topaz_glass_pane",
+        () -> new IronBarsBlock(gemstoneGlass(PastelBlockSoundGroups.TOPAZ_CLUSTER, MapColor.COLOR_CYAN)),
+        InkColors.CYAN
     ));
     public static final DeferredBlock<Block> AMETHYST_GLASS_PANE = register(
         blockWithItem(
@@ -1741,33 +1676,34 @@ public class PastelBlocks {
             InkColors.MAGENTA
         ));
     public static final DeferredBlock<Block> CITRINE_GLASS_PANE = register(blockWithItem(
-        "citrine_glass_pane", () -> new IronBarsBlock(gemstoneGlass(
-            PastelBlockSoundGroups.CITRINE_CLUSTER, MapColor.COLOR_YELLOW)), InkColors.YELLOW
+        "citrine_glass_pane",
+        () -> new IronBarsBlock(gemstoneGlass(PastelBlockSoundGroups.CITRINE_CLUSTER, MapColor.COLOR_YELLOW)),
+        InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> ONYX_GLASS_PANE = register(blockWithItem(
-        "onyx_glass_pane", () -> new IronBarsBlock(gemstoneGlass(
-            PastelBlockSoundGroups.ONYX_CLUSTER, MapColor.COLOR_BLACK)), InkColors.BLACK
+        "onyx_glass_pane",
+        () -> new IronBarsBlock(gemstoneGlass(PastelBlockSoundGroups.ONYX_CLUSTER, MapColor.COLOR_BLACK)),
+        InkColors.BLACK
     ));
     public static final DeferredBlock<Block> MOONSTONE_GLASS_PANE = register(blockWithItem(
-        "moonstone_glass_pane", () -> new IronBarsBlock(gemstoneGlass(
-            PastelBlockSoundGroups.MOONSTONE_CLUSTER, MapColor.SNOW)), InkColors.WHITE
+        "moonstone_glass_pane",
+        () -> new IronBarsBlock(gemstoneGlass(PastelBlockSoundGroups.MOONSTONE_CLUSTER, MapColor.SNOW)), InkColors.WHITE
     ));
     public static final DeferredBlock<Block> RADIANT_GLASS_PANE = register(blockWithItem(
-        "radiant_glass_pane", () -> new IronBarsBlock(gemstoneGlass(
-            SoundType.GLASS, MapColor.SAND).lightLevel(value -> 12)), InkColors.WHITE
+        "radiant_glass_pane",
+        () -> new IronBarsBlock(gemstoneGlass(SoundType.GLASS, MapColor.SAND).lightLevel(value -> 12)), InkColors.WHITE
     ));
 
     public static final DeferredBlock<Block> ETHEREAL_PLATFORM = register(blockWithItem(
-        "ethereal_platform", () -> new EtherealPlatformBlock(gemstoneGlass(
-            SoundType.AMETHYST, MapColor.NONE).pushReaction(PushReaction.NORMAL)), InkColors.LIGHT_GRAY
+        "ethereal_platform", () -> new EtherealPlatformBlock(
+            gemstoneGlass(SoundType.AMETHYST, MapColor.NONE).pushReaction(PushReaction.NORMAL)), InkColors.LIGHT_GRAY
     ));
-    public static final DeferredBlock<Block> UNIVERSE_SPYHOLE = register(
-        blockWithItem(
-            "universe_spyhole", () -> new TransparentBlock(settings(
-                MapColor.NONE, PastelBlockSoundGroups.CITRINE_BLOCK, 1.5F).requiresCorrectToolForDrops()
-                                                                          .isViewBlocking(PastelBlocks::never)),
-            InkColors.LIGHT_GRAY
-        ));
+    public static final DeferredBlock<Block> UNIVERSE_SPYHOLE = register(blockWithItem(
+        "universe_spyhole", () -> new TransparentBlock(settings(
+            MapColor.NONE, PastelBlockSoundGroups.CITRINE_BLOCK, 1.5F).requiresCorrectToolForDrops()
+                                                                      .isViewBlocking(PastelBlocks::never)),
+        InkColors.LIGHT_GRAY
+    ));
 
     private static Properties chime(BlockBehaviour block) {
         return BlockBehaviour.Properties.ofFullCopy(block)
@@ -1815,56 +1751,49 @@ public class PastelBlocks {
         blockWithItem("topaz_pylon", () -> new PylonBlock(pylon(PastelBlocks.TOPAZ_BLOCK.get())), InkColors.CYAN));
     public static final DeferredBlock<Block> AMETHYST_PYLON = register(
         blockWithItem("amethyst_pylon", () -> new PylonBlock(pylon(AMETHYST_BLOCK)), InkColors.MAGENTA));
-    public static final DeferredBlock<Block> CITRINE_PYLON = register(
-        blockWithItem(
-            "citrine_pylon", () -> new PylonBlock(pylon(PastelBlocks.CITRINE_BLOCK.get())), InkColors.YELLOW));
+    public static final DeferredBlock<Block> CITRINE_PYLON = register(blockWithItem(
+        "citrine_pylon", () -> new PylonBlock(pylon(PastelBlocks.CITRINE_BLOCK.get())), InkColors.YELLOW));
     public static final DeferredBlock<Block> ONYX_PYLON = register(
         blockWithItem("onyx_pylon", () -> new PylonBlock(pylon(PastelBlocks.ONYX_BLOCK.get())), InkColors.BLACK));
-    public static final DeferredBlock<Block> MOONSTONE_PYLON = register(
-        blockWithItem(
-            "moonstone_pylon", () -> new PylonBlock(pylon(PastelBlocks.MOONSTONE_BLOCK.get())), InkColors.WHITE));
+    public static final DeferredBlock<Block> MOONSTONE_PYLON = register(blockWithItem(
+        "moonstone_pylon", () -> new PylonBlock(pylon(PastelBlocks.MOONSTONE_BLOCK.get())), InkColors.WHITE));
 
     public static final DeferredBlock<Block> SEMI_PERMEABLE_GLASS = register(blockWithItem(
-        "semi_permeable_glass", () -> new AlternatePlayerOnlyGlassBlock(
-            Properties.ofFullCopy(GLASS), GLASS, false), InkColors.WHITE
+        "semi_permeable_glass", () -> new AlternatePlayerOnlyGlassBlock(Properties.ofFullCopy(GLASS), GLASS, false),
+        InkColors.WHITE
     ));
-    public static final DeferredBlock<Block> TINTED_SEMI_PERMEABLE_GLASS = register(
-        blockWithItem(
-            "tinted_semi_permeable_glass", () -> new AlternatePlayerOnlyGlassBlock(
-                Properties.ofFullCopy(TINTED_GLASS), TINTED_GLASS, true), InkColors.BLACK
-        ));
-    public static final DeferredBlock<Block> RADIANT_SEMI_PERMEABLE_GLASS = register(
-        blockWithItem(
-            "radiant_semi_permeable_glass", () -> new AlternatePlayerOnlyGlassBlock(
-                Properties.ofFullCopy(PastelBlocks.RADIANT_GLASS.get()), PastelBlocks.RADIANT_GLASS.get(), false),
-            InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> TOPAZ_SEMI_PERMEABLE_GLASS = register(
-        blockWithItem(
-            "topaz_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
-                Properties.ofFullCopy(PastelBlocks.TOPAZ_GLASS.get()), PastelGemstoneColor.CYAN), InkColors.CYAN
-        ));
+    public static final DeferredBlock<Block> TINTED_SEMI_PERMEABLE_GLASS = register(blockWithItem(
+        "tinted_semi_permeable_glass",
+        () -> new AlternatePlayerOnlyGlassBlock(Properties.ofFullCopy(TINTED_GLASS), TINTED_GLASS, true),
+        InkColors.BLACK
+    ));
+    public static final DeferredBlock<Block> RADIANT_SEMI_PERMEABLE_GLASS = register(blockWithItem(
+        "radiant_semi_permeable_glass", () -> new AlternatePlayerOnlyGlassBlock(
+            Properties.ofFullCopy(PastelBlocks.RADIANT_GLASS.get()), PastelBlocks.RADIANT_GLASS.get(), false),
+        InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> TOPAZ_SEMI_PERMEABLE_GLASS = register(blockWithItem(
+        "topaz_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
+            Properties.ofFullCopy(PastelBlocks.TOPAZ_GLASS.get()), PastelGemstoneColor.CYAN), InkColors.CYAN
+    ));
     public static final DeferredBlock<Block> AMETHYST_SEMI_PERMEABLE_GLASS = register(
         blockWithItem(
             "amethyst_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
                 Properties.ofFullCopy(PastelBlocks.AMETHYST_GLASS.get()), PastelGemstoneColor.MAGENTA),
             InkColors.MAGENTA
         ));
-    public static final DeferredBlock<Block> CITRINE_SEMI_PERMEABLE_GLASS = register(
-        blockWithItem(
-            "citrine_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
-                Properties.ofFullCopy(PastelBlocks.CITRINE_GLASS.get()), PastelGemstoneColor.YELLOW), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> ONYX_SEMI_PERMEABLE_GLASS = register(
-        blockWithItem(
-            "onyx_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
-                Properties.ofFullCopy(PastelBlocks.ONYX_GLASS.get()), PastelGemstoneColor.BLACK), InkColors.BLACK
-        ));
-    public static final DeferredBlock<Block> MOONSTONE_SEMI_PERMEABLE_GLASS = register(
-        blockWithItem(
-            "moonstone_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
-                Properties.ofFullCopy(PastelBlocks.MOONSTONE_GLASS.get()), PastelGemstoneColor.WHITE), InkColors.WHITE
-        ));
+    public static final DeferredBlock<Block> CITRINE_SEMI_PERMEABLE_GLASS = register(blockWithItem(
+        "citrine_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
+            Properties.ofFullCopy(PastelBlocks.CITRINE_GLASS.get()), PastelGemstoneColor.YELLOW), InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> ONYX_SEMI_PERMEABLE_GLASS = register(blockWithItem(
+        "onyx_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
+            Properties.ofFullCopy(PastelBlocks.ONYX_GLASS.get()), PastelGemstoneColor.BLACK), InkColors.BLACK
+    ));
+    public static final DeferredBlock<Block> MOONSTONE_SEMI_PERMEABLE_GLASS = register(blockWithItem(
+        "moonstone_semi_permeable_glass", () -> new GemstonePlayerOnlyGlassBlock(
+            Properties.ofFullCopy(PastelBlocks.MOONSTONE_GLASS.get()), PastelGemstoneColor.WHITE), InkColors.WHITE
+    ));
 
     public static final DeferredBlock<Block> GLISTERING_MELON = register(
         block("glistering_melon", () -> new Block(BlockBehaviour.Properties.ofFullCopy(MELON))).withItem(
@@ -1883,14 +1812,12 @@ public class PastelBlocks {
         )
     ));
 
-    public static final DeferredBlock<Block> PRESENT = register(
-        blockWithItem(
-            "present", () -> new PresentBlock(Properties.ofFullCopy(WHITE_WOOL)), block -> new PresentBlockItem(
-                block, IS.of(1)
-                         .component(
-                             DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)
-            ), InkColors.LIGHT_GRAY
-        ));
+    public static final DeferredBlock<Block> PRESENT = register(blockWithItem(
+        "present", () -> new PresentBlock(Properties.ofFullCopy(WHITE_WOOL)), block -> new PresentBlockItem(
+            block, IS.of(1)
+                     .component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)
+        ), InkColors.LIGHT_GRAY
+    ));
     public static final DeferredBlock<Block> TITRATION_BARREL = register(blockWithItem(
         "titration_barrel", () -> new TitrationBarrelBlock(BlockBehaviour.Properties.ofFullCopy(OAK_PLANKS)
                                                                                     .mapColor(MapColor.COLOR_RED)),
@@ -1899,21 +1826,21 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> BLOCK_FLOODER = register(
         block("block_flooder", () -> new BlockFlooderBlock(settings(MapColor.CLAY, SoundType.ROOTED_DIRT, 0.0F))));
-    public static final DeferredBlock<Block> BOTTOMLESS_BUNDLE = register(
-        blockWithItem(
-            "bottomless_bundle", () -> new BottomlessBundleBlock(settings(
-                MapColor.ICE, SoundType.WOOL, 1.0F).noOcclusion()
-                                                   .pushReaction(PushReaction.DESTROY)),
-            block -> new BottomlessBundleItem(block, IS.of(1)), InkColors.LIGHT_GRAY
-        )
+    public static final DeferredBlock<Block> BOTTOMLESS_BUNDLE = register(blockWithItem(
+                                                                              "bottomless_bundle",
+                                                                              () -> new BottomlessBundleBlock(settings(MapColor.ICE, SoundType.WOOL, 1.0F).noOcclusion()
+                                                                                                                                                                               .pushReaction(
+                                                                                                                                                                                   PushReaction.DESTROY)),
+                                                                              block -> new BottomlessBundleItem(block
+                                                                                  , IS.of(1)), InkColors.LIGHT_GRAY
+                                                                          )
 
     );
 
     public static final DeferredBlock<Block> SHIMMERSTONE_LIGHT = register(block(
-        "shimmerstone_light", () -> new WandLightBlock(
-            Properties.ofFullCopy(LIGHT)
-                      .sound(PastelBlockSoundGroups.SHIMMERSTONE_LIGHT)
-                      .instabreak())
+        "shimmerstone_light", () -> new WandLightBlock(Properties.ofFullCopy(LIGHT)
+                                                                 .sound(PastelBlockSoundGroups.SHIMMERSTONE_LIGHT)
+                                                                 .instabreak())
     ));
     public static final DeferredBlock<Block> TEMPORAL_SHIMMERSTONE_LIGHT = register(block(
         "temporal_shimmerstone_light", () -> new DecayingLightBlock(
@@ -1932,21 +1859,20 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> FADING = register(block(
         "fading", () -> new FadingBlock(decay(MapColor.PLANT, SoundType.GRASS, 0.5F, 0.5F, PushReaction.DESTROY))));
     public static final DeferredBlock<Block> FAILING = register(block(
-        "failing", () -> new FailingBlock(
-            decay(MapColor.COLOR_BLACK, SoundType.STONE, 20.0F, 50.0F, PushReaction.BLOCK))
+        "failing",
+        () -> new FailingBlock(decay(MapColor.COLOR_BLACK, SoundType.STONE, 20.0F, 50.0F, PushReaction.BLOCK))
     ));
     public static final DeferredBlock<Block> RUIN = register(block(
-        "ruin", () -> new RuinBlock(
-            decay(MapColor.COLOR_BLACK, SoundType.STONE, 100.0F, 3600000.0F, PushReaction.BLOCK))
+        "ruin",
+        () -> new RuinBlock(decay(MapColor.COLOR_BLACK, SoundType.STONE, 100.0F, 3600000.0F, PushReaction.BLOCK))
     ));
     public static final DeferredBlock<Block> FORFEITURE = register(block(
         "forfeiture", () -> new ForfeitureBlock(
             decay(MapColor.COLOR_BLACK, SoundType.STONE, 100.0F, 3600000.0F, PushReaction.BLOCK))
     ));
     public static final DeferredBlock<Block> DECAY_AWAY = register(block(
-        "decay_away", () -> new DecayAwayBlock(
-            Properties.ofFullCopy(DIRT)
-                      .pushReaction(PushReaction.DESTROY))
+        "decay_away", () -> new DecayAwayBlock(Properties.ofFullCopy(DIRT)
+                                                         .pushReaction(PushReaction.DESTROY))
     ));
 
     // PASTEL NETWORK
@@ -1957,38 +1883,37 @@ public class PastelBlocks {
     }
 
     public static final DeferredBlock<Block> CONNECTION_NODE = register(blockWithItem(
-        "connection_node", () -> new PastelNodeBlock(
-            pastelNode(SoundType.AMETHYST_CLUSTER), PastelNodeType.CONNECTION), IS.of(16), InkColors.LIGHT_GRAY
+        "connection_node", () -> new PastelNodeBlock(pastelNode(SoundType.AMETHYST_CLUSTER), PastelNodeType.CONNECTION),
+        IS.of(16), InkColors.LIGHT_GRAY
     ));
-    public static final DeferredBlock<Block> PROVIDER_NODE = register(
+    public static final DeferredBlock<Block> PROVIDER_NODE = register(blockWithItem(
+        "provider_node", () -> new PastelNodeBlock(pastelNode(SoundType.AMETHYST_CLUSTER), PastelNodeType.PROVIDER),
+        IS.of(16), InkColors.MAGENTA
+    ));
+    public static final DeferredBlock<Block> STORAGE_NODE = register(
         blockWithItem(
-            "provider_node", () -> new PastelNodeBlock(pastelNode(SoundType.AMETHYST_CLUSTER), PastelNodeType.PROVIDER),
-            IS.of(16), InkColors.MAGENTA
+            "storage_node",
+            () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.STORAGE),
+            IS.of(16), InkColors.CYAN
         ));
-    public static final DeferredBlock<Block> STORAGE_NODE = register(blockWithItem(
-        "storage_node", () -> new PastelNodeBlock(
-            pastelNode(PastelBlockSoundGroups.TOPAZ_CLUSTER),
-            PastelNodeType.STORAGE
-        ), IS.of(16), InkColors.CYAN
-    ));
-    public static final DeferredBlock<Block> BUFFER_NODE = register(blockWithItem(
-        "buffer_node", () -> new PastelNodeBlock(
-            pastelNode(PastelBlockSoundGroups.TOPAZ_CLUSTER),
-            PastelNodeType.BUFFER
-        ), IS.of(16), InkColors.GREEN
-    ));
-    public static final DeferredBlock<Block> SENDER_NODE = register(blockWithItem(
-        "sender_node", () -> new PastelNodeBlock(
-            pastelNode(PastelBlockSoundGroups.CITRINE_CLUSTER),
-            PastelNodeType.SENDER
-        ), IS.of(16), InkColors.YELLOW
-    ));
-    public static final DeferredBlock<Block> GATHER_NODE = register(blockWithItem(
-        "gather_node", () -> new PastelNodeBlock(
-            pastelNode(PastelBlockSoundGroups.ONYX_CLUSTER),
-            PastelNodeType.GATHER
-        ), IS.of(16), InkColors.BLACK
-    ));
+    public static final DeferredBlock<Block> BUFFER_NODE = register(
+        blockWithItem(
+            "buffer_node",
+            () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.BUFFER),
+            IS.of(16), InkColors.GREEN
+        ));
+    public static final DeferredBlock<Block> SENDER_NODE = register(
+        blockWithItem(
+            "sender_node",
+            () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.CITRINE_CLUSTER), PastelNodeType.SENDER),
+            IS.of(16), InkColors.YELLOW
+        ));
+    public static final DeferredBlock<Block> GATHER_NODE = register(
+        blockWithItem(
+            "gather_node",
+            () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.ONYX_CLUSTER), PastelNodeType.GATHER),
+            IS.of(16), InkColors.BLACK
+        ));
 
     // COLORED BLOCK FAMILIES
 
@@ -2320,12 +2245,14 @@ public class PastelBlocks {
             InkColors.LIME
         ));
     public static final DeferredBlock<Block> SHIMMEL = register(blockWithItem(
-        "shimmel", () -> new BlackslagVegetationBlock(overgrownBlackslag(
-            MapColor.TERRACOTTA_GRAY, SoundType.WART_BLOCK)), InkColors.LIME
+        "shimmel",
+        () -> new BlackslagVegetationBlock(overgrownBlackslag(MapColor.TERRACOTTA_GRAY, SoundType.WART_BLOCK)),
+        InkColors.LIME
     ));
     public static final DeferredBlock<Block> OVERGROWN_BLACKSLAG = register(blockWithItem(
-        "overgrown_blackslag", () -> new BlackslagVegetationBlock(overgrownBlackslag(
-            MapColor.PLANT, SoundType.VINE).speedFactor(0.925F)), InkColors.LIME
+        "overgrown_blackslag",
+        () -> new BlackslagVegetationBlock(overgrownBlackslag(MapColor.PLANT, SoundType.VINE).speedFactor(0.925F)),
+        InkColors.LIME
     ));
     public static final DeferredBlock<Block> FLAYED_EARTH = register(blockWithItem(
         "flayed_earth", () -> new VariableHeightBlock(
@@ -2347,11 +2274,10 @@ public class PastelBlocks {
         ).requiresCorrectToolForDrops();
     }
 
-    public static final DeferredBlock<Block> ASHEN_BLACKSLAG = register(
-        blockWithItem(
-            "ashen_blackslag", () -> new BlackslagBlock(blackslag(SoundType.DEEPSLATE).mapColor(MapColor.QUARTZ)),
-            InkColors.LIGHT_GRAY
-        ));
+    public static final DeferredBlock<Block> ASHEN_BLACKSLAG = register(blockWithItem(
+        "ashen_blackslag", () -> new BlackslagBlock(blackslag(SoundType.DEEPSLATE).mapColor(MapColor.QUARTZ)),
+        InkColors.LIGHT_GRAY
+    ));
     public static final DeferredBlock<Block> ASH = register(
         blockWithItem("ash", () -> new AshBlock(ash(SoundType.POWDER_SNOW)), InkColors.GRAY));
     public static final DeferredBlock<Block> ASH_PILE = register(blockWithItem(
@@ -2364,20 +2290,18 @@ public class PastelBlocks {
         InkColors.LIGHT_GRAY
     ));
 
-    public static final DeferredBlock<Block> VARIA_SPROUT = register(
-        blockWithItem(
-            "varia_sprout", () -> new AshFloraBlock(settings(MapColor.SNOW, SoundType.STEM, 0F).instabreak()
-                                                                                               .lightLevel(state -> 11)
-                                                                                               .offsetType(
-                                                                                                   OffsetType.XZ)
-                                                                                               .dynamicShape()
-                                                                                               .noCollission()
-                                                                                               .hasPostProcess(
-                                                                                                   PastelBlocks::always)
-                                                                                               .emissiveRendering(
-                                                                                                   PastelBlocks::always)),
-            InkColors.WHITE
-        ));
+    public static final DeferredBlock<Block> VARIA_SPROUT = register(blockWithItem(
+        "varia_sprout", () -> new AshFloraBlock(settings(MapColor.SNOW, SoundType.STEM, 0F).instabreak()
+                                                                                           .lightLevel(state -> 11)
+                                                                                           .offsetType(OffsetType.XZ)
+                                                                                           .dynamicShape()
+                                                                                           .noCollission()
+                                                                                           .hasPostProcess(
+                                                                                               PastelBlocks::always)
+                                                                                           .emissiveRendering(
+                                                                                               PastelBlocks::always)),
+        InkColors.WHITE
+    ));
 
     public static final ToIntFunction<BlockState> LANTERN_LIGHT_PROVIDER = state -> state.getValue(
         RedstoneLampBlock.LIT) ? 15 : 0;
@@ -2428,12 +2352,10 @@ public class PastelBlocks {
 
     private static final int NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS = 30;
 
-    public static final DeferredBlock<Block> STRIPPED_SLATE_NOXCAP_STEM = register(
-        blockWithItem(
-            "stripped_slate_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.COLOR_GRAY)), InkColors.LIME));
-    public static final DeferredBlock<Block> STRIPPED_SLATE_NOXCAP_HYPHAE = register(
-        blockWithItem(
-            "stripped_slate_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.COLOR_GRAY)), InkColors.LIME));
+    public static final DeferredBlock<Block> STRIPPED_SLATE_NOXCAP_STEM = register(blockWithItem(
+        "stripped_slate_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.COLOR_GRAY)), InkColors.LIME));
+    public static final DeferredBlock<Block> STRIPPED_SLATE_NOXCAP_HYPHAE = register(blockWithItem(
+        "stripped_slate_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.COLOR_GRAY)), InkColors.LIME));
     public static final DeferredBlock<Block> SLATE_NOXCAP_STEM = register(blockWithItem(
         "slate_noxcap_stem", () -> new StrippingLootPillarBlock(
             noxcap(MapColor.COLOR_GRAY), PastelBlocks.STRIPPED_SLATE_NOXCAP_STEM.get(),
@@ -2457,12 +2379,12 @@ public class PastelBlocks {
         InkColors.LIME
     ));
 
-    public static final DeferredBlock<Block> SLATE_NOXWOOD_PILLAR = register(
-        blockWithItem(
-            "slate_noxwood_pillar", () -> new RotatedPillarBlock(noxcap(MapColor.COLOR_GRAY)), InkColors.LIME));
+    public static final DeferredBlock<Block> SLATE_NOXWOOD_PILLAR = register(blockWithItem(
+        "slate_noxwood_pillar", () -> new RotatedPillarBlock(noxcap(MapColor.COLOR_GRAY)), InkColors.LIME));
     public static final DeferredBlock<Block> SLATE_NOXWOOD_LAMP = register(blockWithItem(
-        "slate_noxwood_lamp", () -> new RedstoneLampBlock(
-            noxcap(MapColor.COLOR_GRAY).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)), InkColors.LIME
+        "slate_noxwood_lamp",
+        () -> new RedstoneLampBlock(noxcap(MapColor.COLOR_GRAY).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)),
+        InkColors.LIME
     ));
     public static final DeferredBlock<Block> SLATE_NOXWOOD_LIGHT = registerNoxwoodLightBlock(
         "slate_noxwood_light", PastelBlocks.SLATE_NOXCAP_GILLS, MapColor.COLOR_GRAY);
@@ -2492,16 +2414,14 @@ public class PastelBlocks {
         "slate_noxwood_fence_gate",
         () -> new FenceGateBlock(PastelWoodTypes.SLATE_NOXWOOD, noxcap(MapColor.COLOR_GRAY)), InkColors.LIME
     ));
-    public static final DeferredBlock<Block> SLATE_NOXWOOD_DOOR = register(
-        blockWithItem(
-            "slate_noxwood_door", () -> new DoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.COLOR_GRAY)),
-            InkColors.LIME
-        ));
-    public static final DeferredBlock<Block> SLATE_NOXWOOD_TRAPDOOR = register(
-        blockWithItem(
-            "slate_noxwood_trapdoor", () -> new TrapDoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.COLOR_GRAY)),
-            InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> SLATE_NOXWOOD_DOOR = register(blockWithItem(
+        "slate_noxwood_door", () -> new DoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.COLOR_GRAY)),
+        InkColors.LIME
+    ));
+    public static final DeferredBlock<Block> SLATE_NOXWOOD_TRAPDOOR = register(blockWithItem(
+        "slate_noxwood_trapdoor", () -> new TrapDoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.COLOR_GRAY)),
+        InkColors.LIME
+    ));
     public static final DeferredBlock<Block> SLATE_NOXWOOD_BUTTON = register(blockWithItem(
         "slate_noxwood_button", () -> new ButtonBlock(
             PastelBlockSetTypes.NOXWOOD, PastelBlocks.NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS,
@@ -2513,16 +2433,12 @@ public class PastelBlocks {
         () -> new PressurePlateBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.COLOR_GRAY)), InkColors.LIME
     ));
 
-    public static final DeferredBlock<Block> STRIPPED_EBONY_NOXCAP_STEM = register(
-        blockWithItem(
-            "stripped_ebony_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)),
-            InkColors.LIME
-        ));
-    public static final DeferredBlock<Block> STRIPPED_EBONY_NOXCAP_HYPHAE = register(
-        blockWithItem(
-            "stripped_ebony_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)),
-            InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> STRIPPED_EBONY_NOXCAP_STEM = register(blockWithItem(
+        "stripped_ebony_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME));
+    public static final DeferredBlock<Block> STRIPPED_EBONY_NOXCAP_HYPHAE = register(blockWithItem(
+        "stripped_ebony_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)),
+        InkColors.LIME
+    ));
     public static final DeferredBlock<Block> EBONY_NOXCAP_STEM = register(blockWithItem(
         "ebony_noxcap_stem", () -> new StrippingLootPillarBlock(
             noxcap(MapColor.TERRACOTTA_BLACK), PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM.get(),
@@ -2546,18 +2462,16 @@ public class PastelBlocks {
         InkColors.LIME
     ));
 
-    public static final DeferredBlock<Block> EBONY_NOXWOOD_PILLAR = register(
-        blockWithItem(
-            "ebony_noxwood_pillar", () -> new RotatedPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME));
+    public static final DeferredBlock<Block> EBONY_NOXWOOD_PILLAR = register(blockWithItem(
+        "ebony_noxwood_pillar", () -> new RotatedPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME));
     public static final DeferredBlock<Block> EBONY_NOXWOOD_LAMP = register(blockWithItem(
         "ebony_noxwood_lamp", () -> new RedstoneLampBlock(
             noxcap(MapColor.TERRACOTTA_BLACK).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)), InkColors.LIME
     ));
     public static final DeferredBlock<Block> EBONY_NOXWOOD_LIGHT = registerNoxwoodLightBlock(
         "ebony_noxwood_light", PastelBlocks.EBONY_NOXCAP_GILLS, MapColor.TERRACOTTA_BLACK);
-    public static final DeferredBlock<Block> EBONY_NOXWOOD_AMPHORA = register(
-        blockWithItem(
-            "ebony_noxwood_amphora", () -> new AmphoraBlock(noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME));
+    public static final DeferredBlock<Block> EBONY_NOXWOOD_AMPHORA = register(blockWithItem(
+        "ebony_noxwood_amphora", () -> new AmphoraBlock(noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME));
     public static final DeferredBlock<Block> EBONY_NOXWOOD_LANTERN = registerNoxwoodLantern(
         "ebony_noxwood_lantern", () -> new FlexLanternBlock(BlockBehaviour.Properties.ofFullCopy(LANTERN)
                                                                                      .lightLevel(s -> 13)
@@ -2582,16 +2496,14 @@ public class PastelBlocks {
         "ebony_noxwood_fence_gate",
         () -> new FenceGateBlock(PastelWoodTypes.EBONY_NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME
     ));
-    public static final DeferredBlock<Block> EBONY_NOXWOOD_DOOR = register(
-        blockWithItem(
-            "ebony_noxwood_door", () -> new DoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)),
-            InkColors.LIME
-        ));
-    public static final DeferredBlock<Block> EBONY_NOXWOOD_TRAPDOOR = register(
-        blockWithItem(
-            "ebony_noxwood_trapdoor",
-            () -> new TrapDoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> EBONY_NOXWOOD_DOOR = register(blockWithItem(
+        "ebony_noxwood_door", () -> new DoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)),
+        InkColors.LIME
+    ));
+    public static final DeferredBlock<Block> EBONY_NOXWOOD_TRAPDOOR = register(blockWithItem(
+        "ebony_noxwood_trapdoor",
+        () -> new TrapDoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME
+    ));
     public static final DeferredBlock<Block> EBONY_NOXWOOD_BUTTON = register(blockWithItem(
         "ebony_noxwood_button", () -> new ButtonBlock(
             PastelBlockSetTypes.NOXWOOD, PastelBlocks.NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS,
@@ -2603,12 +2515,10 @@ public class PastelBlocks {
         () -> new PressurePlateBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME
     ));
 
-    public static final DeferredBlock<Block> STRIPPED_IVORY_NOXCAP_STEM = register(
-        blockWithItem(
-            "stripped_ivory_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME));
-    public static final DeferredBlock<Block> STRIPPED_IVORY_NOXCAP_HYPHAE = register(
-        blockWithItem(
-            "stripped_ivory_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME));
+    public static final DeferredBlock<Block> STRIPPED_IVORY_NOXCAP_STEM = register(blockWithItem(
+        "stripped_ivory_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME));
+    public static final DeferredBlock<Block> STRIPPED_IVORY_NOXCAP_HYPHAE = register(blockWithItem(
+        "stripped_ivory_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME));
     public static final DeferredBlock<Block> IVORY_NOXCAP_STEM = register(blockWithItem(
         "ivory_noxcap_stem", () -> new StrippingLootPillarBlock(
             noxcap(MapColor.QUARTZ), PastelBlocks.STRIPPED_IVORY_NOXCAP_STEM.get(),
@@ -2634,11 +2544,11 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> IVORY_NOXWOOD_PILLAR = register(
         blockWithItem("ivory_noxwood_pillar", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME));
-    public static final DeferredBlock<Block> IVORY_NOXWOOD_LAMP = register(
-        blockWithItem(
-            "ivory_noxwood_lamp", () -> new RedstoneLampBlock(
-                noxcap(MapColor.QUARTZ).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)), InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> IVORY_NOXWOOD_LAMP = register(blockWithItem(
+        "ivory_noxwood_lamp",
+        () -> new RedstoneLampBlock(noxcap(MapColor.QUARTZ).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)),
+        InkColors.LIME
+    ));
     public static final DeferredBlock<Block> IVORY_NOXWOOD_LIGHT = registerNoxwoodLightBlock(
         "ivory_noxwood_light", PastelBlocks.IVORY_NOXCAP_GILLS, MapColor.QUARTZ);
     public static final DeferredBlock<Block> IVORY_NOXWOOD_AMPHORA = register(
@@ -2667,16 +2577,14 @@ public class PastelBlocks {
         "ivory_noxwood_fence_gate", () -> new FenceGateBlock(PastelWoodTypes.CHESTNUT_NOXWOOD, noxcap(MapColor.QUARTZ)),
         InkColors.LIME
     ));
-    public static final DeferredBlock<Block> IVORY_NOXWOOD_DOOR = register(
-        blockWithItem(
-            "ivory_noxwood_door", () -> new DoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.QUARTZ)),
-            InkColors.LIME
-        ));
-    public static final DeferredBlock<Block> IVORY_NOXWOOD_TRAPDOOR = register(
-        blockWithItem(
-            "ivory_noxwood_trapdoor", () -> new TrapDoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.QUARTZ)),
-            InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> IVORY_NOXWOOD_DOOR = register(blockWithItem(
+        "ivory_noxwood_door", () -> new DoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.QUARTZ)),
+        InkColors.LIME
+    ));
+    public static final DeferredBlock<Block> IVORY_NOXWOOD_TRAPDOOR = register(blockWithItem(
+        "ivory_noxwood_trapdoor", () -> new TrapDoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.QUARTZ)),
+        InkColors.LIME
+    ));
     public static final DeferredBlock<Block> IVORY_NOXWOOD_BUTTON = register(blockWithItem(
         "ivory_noxwood_button", () -> new ButtonBlock(
             PastelBlockSetTypes.NOXWOOD, PastelBlocks.NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS,
@@ -2688,14 +2596,12 @@ public class PastelBlocks {
         () -> new PressurePlateBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.QUARTZ)), InkColors.LIME
     ));
 
-    public static final DeferredBlock<Block> STRIPPED_CHESTNUT_NOXCAP_STEM = register(
-        blockWithItem(
-            "stripped_chestnut_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.CRIMSON_NYLIUM)),
-            InkColors.LIME
-        ));
-    public static final DeferredBlock<Block> STRIPPED_CHESTNUT_NOXCAP_HYPHAE = register(
-        blockWithItem(
-            "stripped_chestnut_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME));
+    public static final DeferredBlock<Block> STRIPPED_CHESTNUT_NOXCAP_STEM = register(blockWithItem(
+        "stripped_chestnut_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.CRIMSON_NYLIUM)),
+        InkColors.LIME
+    ));
+    public static final DeferredBlock<Block> STRIPPED_CHESTNUT_NOXCAP_HYPHAE = register(blockWithItem(
+        "stripped_chestnut_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME));
     public static final DeferredBlock<Block> CHESTNUT_NOXCAP_STEM = register(blockWithItem(
         "chestnut_noxcap_stem", () -> new StrippingLootPillarBlock(
             noxcap(MapColor.CRIMSON_NYLIUM), PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM.get(),
@@ -2719,18 +2625,16 @@ public class PastelBlocks {
         InkColors.LIME
     ));
 
-    public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_PILLAR = register(
-        blockWithItem(
-            "chestnut_noxwood_pillar", () -> new RotatedPillarBlock(noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME));
+    public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_PILLAR = register(blockWithItem(
+        "chestnut_noxwood_pillar", () -> new RotatedPillarBlock(noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME));
     public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_LAMP = register(blockWithItem(
         "chestnut_noxwood_lamp", () -> new RedstoneLampBlock(
             noxcap(MapColor.CRIMSON_NYLIUM).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)), InkColors.LIME
     ));
     public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_LIGHT = registerNoxwoodLightBlock(
         "chestnut_noxwood_light", PastelBlocks.CHESTNUT_NOXCAP_GILLS, MapColor.CRIMSON_NYLIUM);
-    public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_AMPHORA = register(
-        blockWithItem(
-            "chestnut_noxwood_amphora", () -> new AmphoraBlock(noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME));
+    public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_AMPHORA = register(blockWithItem(
+        "chestnut_noxwood_amphora", () -> new AmphoraBlock(noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME));
     public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_LANTERN = registerNoxwoodLantern(
         "chestnut_noxwood_lantern", () -> new FlexLanternBlock(BlockBehaviour.Properties.ofFullCopy(LANTERN)
                                                                                         .lightLevel(s -> 13)
@@ -2755,16 +2659,14 @@ public class PastelBlocks {
         "chestnut_noxwood_fence_gate",
         () -> new FenceGateBlock(PastelWoodTypes.IVORY_NOXWOOD, noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME
     ));
-    public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_DOOR = register(
-        blockWithItem(
-            "chestnut_noxwood_door", () -> new DoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.CRIMSON_NYLIUM)),
-            InkColors.LIME
-        ));
-    public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_TRAPDOOR = register(
-        blockWithItem(
-            "chestnut_noxwood_trapdoor",
-            () -> new TrapDoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_DOOR = register(blockWithItem(
+        "chestnut_noxwood_door", () -> new DoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.CRIMSON_NYLIUM)),
+        InkColors.LIME
+    ));
+    public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_TRAPDOOR = register(blockWithItem(
+        "chestnut_noxwood_trapdoor",
+        () -> new TrapDoorBlock(PastelBlockSetTypes.NOXWOOD, noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME
+    ));
     public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_BUTTON = register(blockWithItem(
         "chestnut_noxwood_button", () -> new ButtonBlock(
             PastelBlockSetTypes.NOXWOOD, PastelBlocks.NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS,
@@ -2781,21 +2683,19 @@ public class PastelBlocks {
                                                             .ignitedByLava();
     }
 
-    public static final DeferredBlock<Block> WEEPING_GALA_SPRIG = register(
-        blockWithItem(
-            "weeping_gala_sprig",
-            () -> new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.WARPED_WART_BLOCK)), InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> WEEPING_GALA_SPRIG = register(blockWithItem(
+        "weeping_gala_sprig",
+        () -> new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.WARPED_WART_BLOCK)), InkColors.LIME
+    ));
     public static final DeferredBlock<Block> POTTED_WEEPING_GALA_SPRIG = register(block(
         "potted_weeping_gala_sprig", () -> new FlowerPotBlock(
             PastelBlocks.WEEPING_GALA_SPRIG.get(), pottedPlant())
     ));
 
-    public static final DeferredBlock<Block> WEEPING_GALA_LEAVES = register(
-        blockWithItem(
-            "weeping_gala_leaves", () -> new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.WARPED_WART_BLOCK)),
-            InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> WEEPING_GALA_LEAVES = register(blockWithItem(
+        "weeping_gala_leaves", () -> new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.WARPED_WART_BLOCK)),
+        InkColors.LIME
+    ));
     public static final DeferredBlock<Block> STRIPPED_WEEPING_GALA_LOG = register(burnable(
         blockWithItem(
             "stripped_weeping_gala_log", () -> new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME),
@@ -2825,11 +2725,12 @@ public class PastelBlocks {
                       .noCollission())
     ));
     public static final DeferredBlock<Block> WEEPING_GALA_FRONDS_PLANT = register(block(
-        "weeping_gala_fronds_plant", () -> new WeepingGalaFrondsTipBlock(
-            Properties.ofFullCopy(PastelBlocks.WEEPING_GALA_LEAVES.get())
-                      .noCollission()
-                      .lightLevel(s -> s.getValue(WeepingGalaFrondsTipBlock.FORM)
-                                        .getLuminance()))
+        "weeping_gala_fronds_plant", () -> new WeepingGalaFrondsTipBlock(Properties.ofFullCopy(
+                                                                                       PastelBlocks.WEEPING_GALA_LEAVES.get())
+                                                                                   .noCollission()
+                                                                                   .lightLevel(s -> s.getValue(
+                                                                                                         WeepingGalaFrondsTipBlock.FORM)
+                                                                                                     .getLuminance()))
     ));
 
     public static final BlockSetType GALA_BLOCK_SET_TYPE = new BlockSetType("gala");
@@ -2881,9 +2782,8 @@ public class PastelBlocks {
         ), 600
     ));
 
-    public static final DeferredBlock<Block> WEEPING_GALA_PILLAR = register(
-        blockWithItem(
-            "weeping_gala_pillar", () -> new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME));
+    public static final DeferredBlock<Block> WEEPING_GALA_PILLAR = register(blockWithItem(
+        "weeping_gala_pillar", () -> new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME));
     public static final DeferredBlock<Block> WEEPING_GALA_BARREL = register(
         blockWithItem("weeping_gala_barrel", () -> new BarrelBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME));
     public static final DeferredBlock<Block> WEEPING_GALA_AMPHORA = register(
@@ -2896,8 +2796,9 @@ public class PastelBlocks {
         InkColors.LIME
     ));
     public static final DeferredBlock<Block> WEEPING_GALA_LAMP = register(blockWithItem(
-        "weeping_gala_lamp", () -> new RedstoneLampBlock(
-            galaWood(MapColor.COLOR_BROWN).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)), InkColors.LIME
+        "weeping_gala_lamp",
+        () -> new RedstoneLampBlock(galaWood(MapColor.COLOR_BROWN).lightLevel(PastelBlocks.LANTERN_LIGHT_PROVIDER)),
+        InkColors.LIME
     ));
     public static final DeferredBlock<Block> WEEPING_GALA_LIGHT = register(blockWithItem(
         "weeping_gala_light", () -> new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN).lightLevel(state -> 15)
@@ -3090,8 +2991,9 @@ public class PastelBlocks {
     ));
 
     public static final DeferredBlock<Block> LONGING_CHIMERA = register(blockWithItem(
-        "longing_chimera", () -> new GrotesqueBlock(
-            basalMarble().noOcclusion(), 12, 15, "block.pastel.longing_chimera.tooltip"), InkColors.BROWN
+        "longing_chimera",
+        () -> new GrotesqueBlock(basalMarble().noOcclusion(), 12, 15, "block.pastel.longing_chimera.tooltip"),
+        InkColors.BROWN
     ));
 
     public static DeferredBlock<Block> registerSmallDragonjagBlock(String name, Dragonjag.Variant variant) {
@@ -3130,113 +3032,109 @@ public class PastelBlocks {
 
     //Flora
     public static final DeferredBlock<Block> ALOE = register(block(
-        "aloe", () -> new AloeBlock(settings(
-            MapColor.PLANT, SoundType.GRASS, 1.0F).noCollission()
-                                                  .randomTicks()
-                                                  .noOcclusion())
+        "aloe", () -> new AloeBlock(settings(MapColor.PLANT, SoundType.GRASS, 1.0F).noCollission()
+                                                                                   .randomTicks()
+                                                                                   .noOcclusion())
     ));
-    public static final DeferredBlock<Block> SAWBLADE_HOLLY_BUSH = register(
-        block(
-            "sawblade_holly_bush", () -> new SawbladeHollyBushBlock(settings(
-                MapColor.TERRACOTTA_GREEN, SoundType.GRASS, 0.0F).noCollission()
-                                                                 .randomTicks()
-                                                                 .noOcclusion()
-                                                                 .lightLevel(s -> s.getValue(
-                                                                     SawbladeHollyBushBlock.AGE) ==
-                                                                                  SawbladeHollyBushBlock.MAX_AGE ? 10
-                                                                                                                 : 0))
-        ));
-    public static final DeferredBlock<Block> BRISTLE_SPROUTS = register(
-        blockWithItem(
-            "bristle_sprouts", () -> new BristleSproutsBlock(settings(
-                MapColor.GRASS, SoundType.GRASS, 0.0F).noCollission()
-                                                      .noOcclusion()
-                                                      .offsetType(OffsetType.XZ)
-                                                      .replaceable()), InkColors.LIME
-        ));
-    public static final DeferredBlock<Block> DOOMBLOOM = register(
-        block(
-            "doombloom", () -> new DoomBloomBlock(
-                PastelMobEffects.STIFFNESS, 8, settings(
-                MapColor.GRASS, SoundType.GRASS, 0.0F).randomTicks()
-                                                      .noCollission()
-                                                      .lightLevel((state) -> state.getValue(DoomBloomBlock.AGE) * 2)
-                                                      .noOcclusion()
-            )
-        ));
-    public static final DeferredBlock<Block> SNAPPING_IVY = register(
-        blockWithItem(
-            "snapping_ivy", () -> new SnappingIvyBlock(settings(
-                MapColor.GRASS, SoundType.GRASS, 3.0F).noCollission()
-                                                      .noOcclusion()), InkColors.RED
-        ));
-
-    public static final DeferredBlock<Block> ABYSSAL_VINES = register(
-        block(
-            "abyssal_vines", () -> new AbyssalVineBlock(settings(
-                MapColor.PLANT, SoundType.CAVE_VINES, 2.0F).noCollission()
-                                                           .offsetType(OffsetType.XYZ)
-                                                           .randomTicks()
-                                                           .noOcclusion()
-                                                           .lightLevel(
-                                                               state -> state.getValue(BlockStateProperties.BERRIES)
-                                                                        ? 13 : 0))
-        ));
-    public static final DeferredBlock<Block> NIGHTDEW = register(
-        block(
-            "nightdew", () -> new NightdewBlock(settings(
-                MapColor.WARPED_NYLIUM, SoundType.CAVE_VINES, 0.0F).noCollission()
-                                                                   .offsetType(OffsetType.XYZ)
-                                                                   .randomTicks()
-                                                                   .noOcclusion()
-                                                                   .instabreak())
-        ));
-    public static final DeferredBlock<Block> SWEET_PEA = register(
-        blockWithItem(
-            "sweet_pea", () -> new FlowerBlock(
-                MobEffects.NIGHT_VISION, 5, settings(
-                MapColor.COLOR_MAGENTA, SoundType.GRASS, 0.0F).offsetType(OffsetType.XZ)
-                                                              .noCollission()
-                                                              .noOcclusion()
-                                                              .lightLevel(s -> 11)
-                                                              .hasPostProcess(PastelBlocks::always)
-                                                              .emissiveRendering(PastelBlocks::always)
-            ), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> APRICOTTI = register(
-        blockWithItem(
-            "apricotti", () -> new FlowerBlock(
-                MobEffects.GLOWING, 5, settings(
-                MapColor.COLOR_ORANGE, SoundType.GRASS, 0.0F).offsetType(OffsetType.XZ)
-                                                             .noCollission()
+    public static final DeferredBlock<Block> SAWBLADE_HOLLY_BUSH = register(block(
+        "sawblade_holly_bush", () -> new SawbladeHollyBushBlock(settings(
+            MapColor.TERRACOTTA_GREEN, SoundType.GRASS, 0.0F).noCollission()
+                                                             .randomTicks()
                                                              .noOcclusion()
-                                                             .lightLevel(s -> 11)
-                                                             .hasPostProcess(PastelBlocks::always)
-                                                             .emissiveRendering(PastelBlocks::always)
-            ), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> HUMMING_BELL = register(
-        blockWithItem(
-            "humming_bell", () -> new FlowerBlock(
-                PastelMobEffects.LIGHTWEIGHT, 5, settings(MapColor.COLOR_LIGHT_BLUE, SoundType.GRASS, 0.0F).offsetType(
-                                                                                                               OffsetType.XZ)
-                                                                                                           .noCollission()
-                                                                                                           .noOcclusion()
-                                                                                                           .lightLevel(
-                                                                                                               s -> 9)
-                                                                                                           .hasPostProcess(
-                                                                                                               PastelBlocks::always)
-                                                                                                           .emissiveRendering(
-                                                                                                               PastelBlocks::always)
-            ), InkColors.LIME
-        ));
+                                                             .lightLevel(s -> s.getValue(SawbladeHollyBushBlock.AGE) ==
+                                                                              SawbladeHollyBushBlock.MAX_AGE ? 10 : 0))
+    ));
+    public static final DeferredBlock<Block> BRISTLE_SPROUTS = register(blockWithItem(
+        "bristle_sprouts", () -> new BristleSproutsBlock(settings(MapColor.GRASS, SoundType.GRASS, 0.0F).noCollission()
+                                                                                                        .noOcclusion()
+                                                                                                        .offsetType(
+                                                                                                            OffsetType.XZ)
+                                                                                                        .replaceable()),
+        InkColors.LIME
+    ));
+    public static final DeferredBlock<Block> DOOMBLOOM = register(block(
+        "doombloom", () -> new DoomBloomBlock(
+            PastelMobEffects.STIFFNESS, 8, settings(MapColor.GRASS, SoundType.GRASS, 0.0F).randomTicks()
+                                                                                          .noCollission()
+                                                                                          .lightLevel((state) ->
+                                                                                                          state.getValue(
+                                                                                                              DoomBloomBlock.AGE) *
+                                                                                                          2)
+                                                                                          .noOcclusion()
+        )
+    ));
+    public static final DeferredBlock<Block> SNAPPING_IVY = register(blockWithItem(
+        "snapping_ivy", () -> new SnappingIvyBlock(settings(MapColor.GRASS, SoundType.GRASS, 3.0F).noCollission()
+                                                                                                  .noOcclusion()),
+        InkColors.RED
+    ));
 
-    public static final DeferredBlock<Block> HUMMINGSTONE_GLASS = register(
-        blockWithItem(
-            "hummingstone_glass", () -> new TransparentBlock(settings(
-                MapColor.SAND, SoundType.GLASS, 5.0F, 100.0F).noOcclusion()
-                                                             .requiresCorrectToolForDrops()), InkColors.LIGHT_BLUE
-        ));
+    public static final DeferredBlock<Block> ABYSSAL_VINES = register(block(
+        "abyssal_vines", () -> new AbyssalVineBlock(settings(MapColor.PLANT, SoundType.CAVE_VINES, 2.0F).noCollission()
+                                                                                                        .offsetType(
+                                                                                                            OffsetType.XYZ)
+                                                                                                        .randomTicks()
+                                                                                                        .noOcclusion()
+                                                                                                        .lightLevel(
+                                                                                                            state ->
+                                                                                                                state.getValue(
+                                                                                                                    BlockStateProperties.BERRIES)
+                                                                                                                ? 13
+                                                                                                                : 0))
+    ));
+    public static final DeferredBlock<Block> NIGHTDEW = register(block(
+        "nightdew", () -> new NightdewBlock(settings(MapColor.WARPED_NYLIUM, SoundType.CAVE_VINES, 0.0F).noCollission()
+                                                                                                        .offsetType(
+                                                                                                            OffsetType.XYZ)
+                                                                                                        .randomTicks()
+                                                                                                        .noOcclusion()
+                                                                                                        .instabreak())
+    ));
+    public static final DeferredBlock<Block> SWEET_PEA = register(blockWithItem(
+        "sweet_pea", () -> new FlowerBlock(
+            MobEffects.NIGHT_VISION, 5, settings(MapColor.COLOR_MAGENTA, SoundType.GRASS, 0.0F).offsetType(
+                                                                                                   OffsetType.XZ)
+                                                                                               .noCollission()
+                                                                                               .noOcclusion()
+                                                                                               .lightLevel(s -> 11)
+                                                                                               .hasPostProcess(
+                                                                                                   PastelBlocks::always)
+                                                                                               .emissiveRendering(
+                                                                                                   PastelBlocks::always)
+        ), InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> APRICOTTI = register(blockWithItem(
+        "apricotti", () -> new FlowerBlock(
+            MobEffects.GLOWING, 5, settings(MapColor.COLOR_ORANGE, SoundType.GRASS, 0.0F).offsetType(OffsetType.XZ)
+                                                                                         .noCollission()
+                                                                                         .noOcclusion()
+                                                                                         .lightLevel(s -> 11)
+                                                                                         .hasPostProcess(
+                                                                                             PastelBlocks::always)
+                                                                                         .emissiveRendering(
+                                                                                             PastelBlocks::always)
+        ), InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> HUMMING_BELL = register(blockWithItem(
+        "humming_bell", () -> new FlowerBlock(
+            PastelMobEffects.LIGHTWEIGHT, 5, settings(MapColor.COLOR_LIGHT_BLUE, SoundType.GRASS, 0.0F).offsetType(
+                                                                                                           OffsetType.XZ)
+                                                                                                       .noCollission()
+                                                                                                       .noOcclusion()
+                                                                                                       .lightLevel(
+                                                                                                           s -> 9)
+                                                                                                       .hasPostProcess(
+                                                                                                           PastelBlocks::always)
+                                                                                                       .emissiveRendering(
+                                                                                                           PastelBlocks::always)
+        ), InkColors.LIME
+    ));
+
+    public static final DeferredBlock<Block> HUMMINGSTONE_GLASS = register(blockWithItem(
+        "hummingstone_glass", () -> new TransparentBlock(settings(
+            MapColor.SAND, SoundType.GLASS, 5.0F, 100.0F).noOcclusion()
+                                                         .requiresCorrectToolForDrops()), InkColors.LIGHT_BLUE
+    ));
     public static final DeferredBlock<Block> HUMMINGSTONE_GLASS_PANE = register(blockWithItem(
         "hummingstone_glass_pane",
         () -> new IronBarsBlock(Properties.ofFullCopy(PastelBlocks.HUMMINGSTONE_GLASS.get())), InkColors.LIGHT_BLUE
@@ -3245,19 +3143,18 @@ public class PastelBlocks {
         "hummingstone", () -> new HummingstoneBlock(Properties.ofFullCopy(PastelBlocks.HUMMINGSTONE_GLASS.get())
                                                               .lightLevel((state) -> 14)), InkColors.LIGHT_BLUE
     ));
-    public static final DeferredBlock<Block> WAXED_HUMMINGSTONE = register(
-        blockWithItem(
-            "waxed_hummingstone", () -> new TransparentBlock(Properties.ofFullCopy(PastelBlocks.HUMMINGSTONE.get())),
-            InkColors.LIGHT_BLUE
-        ));
+    public static final DeferredBlock<Block> WAXED_HUMMINGSTONE = register(blockWithItem(
+        "waxed_hummingstone", () -> new TransparentBlock(Properties.ofFullCopy(PastelBlocks.HUMMINGSTONE.get())),
+        InkColors.LIGHT_BLUE
+    ));
 
-    public static final DeferredBlock<Block> MOSS_BALL = register(
-        blockWithItem(
-            "moss_ball", () -> new MossBallBlock(settings(
-                MapColor.PLANT, SoundType.WET_GRASS, 1F).noCollission()
-                                                        .noOcclusion()
-                                                        .offsetType(OffsetType.XYZ)), InkColors.GREEN
-        ));
+    public static final DeferredBlock<Block> MOSS_BALL = register(blockWithItem(
+        "moss_ball", () -> new MossBallBlock(settings(MapColor.PLANT, SoundType.WET_GRASS, 1F).noCollission()
+                                                                                              .noOcclusion()
+                                                                                              .offsetType(
+                                                                                                  OffsetType.XYZ)),
+        InkColors.GREEN
+    ));
     public static final DeferredBlock<Block> GIANT_MOSS_BALL = register(blockWithItem(
         "giant_moss_ball", () -> new GiantMossBallBlock(settings(
             MapColor.PLANT, SoundType.WET_GRASS, 10F).noCollission()
@@ -3265,11 +3162,10 @@ public class PastelBlocks {
                                                      .offsetType(OffsetType.XYZ)), InkColors.GREEN
     ));
 
-    public static final DeferredBlock<Block> RESPLENDENT_BLOCK = register(
-        blockWithItem(
-            "resplendent_block", () -> new CushionedFacingBlock(Properties.ofFullCopy(RED_WOOL)),
-            IS.of(Rarity.UNCOMMON), InkColors.YELLOW
-        ));
+    public static final DeferredBlock<Block> RESPLENDENT_BLOCK = register(blockWithItem(
+        "resplendent_block", () -> new CushionedFacingBlock(Properties.ofFullCopy(RED_WOOL)), IS.of(Rarity.UNCOMMON),
+        InkColors.YELLOW
+    ));
     public static final DeferredBlock<Block> RESPLENDENT_CUSHION = register(blockWithItem(
         "resplendent_cushion", () -> new CushionBlock(
             Properties.ofFullCopy(PastelBlocks.RESPLENDENT_BLOCK.get())
@@ -3277,16 +3173,14 @@ public class PastelBlocks {
                       .isValidSpawn(PastelBlocks::never), null
         ), IS.of(Rarity.UNCOMMON), InkColors.YELLOW
     ));
-    public static final DeferredBlock<Block> RESPLENDENT_CARPET = register(
-        blockWithItem(
-            "resplendent_carpet", () -> new CushionedCarpetBlock(Properties.ofFullCopy(RED_CARPET)),
-            IS.of(Rarity.UNCOMMON), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> RESPLENDENT_BED = register(
-        blockWithItem(
-            "resplendent_bed", () -> new PastelBedBlock(DyeColor.RED, Properties.ofFullCopy(RED_BED)),
-            IS.of(1, Rarity.UNCOMMON), InkColors.YELLOW
-        ));
+    public static final DeferredBlock<Block> RESPLENDENT_CARPET = register(blockWithItem(
+        "resplendent_carpet", () -> new CushionedCarpetBlock(Properties.ofFullCopy(RED_CARPET)), IS.of(Rarity.UNCOMMON),
+        InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> RESPLENDENT_BED = register(blockWithItem(
+        "resplendent_bed", () -> new PastelBedBlock(DyeColor.RED, Properties.ofFullCopy(RED_BED)),
+        IS.of(1, Rarity.UNCOMMON), InkColors.YELLOW
+    ));
 
     // JADE VINES
     public static Properties jadeVine() {
@@ -3296,39 +3190,38 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> JADE_VINE_ROOTS = register(block(
         "jade_vine_roots", () -> new JadeVineRootsBlock(jadeVine().randomTicks()
-                                                                  .lightLevel((state) -> state.getValue(
-                                                                      JadeVineRootsBlock.DEAD) ? 0 : 4))
+                                                                  .lightLevel(
+                                                                      (state) -> state.getValue(JadeVineRootsBlock.DEAD)
+                                                                                 ? 0 : 4))
     ));
     public static final DeferredBlock<Block> JADE_VINE_BULB = register(block(
-        "jade_vine_bulb", () -> new JadeVineBulbBlock(jadeVine().lightLevel((state) -> state.getValue(
-            JadeVineBulbBlock.DEAD) ? 0 : 5))
+        "jade_vine_bulb", () -> new JadeVineBulbBlock(
+            jadeVine().lightLevel((state) -> state.getValue(JadeVineBulbBlock.DEAD) ? 0 : 5))
     ));
     public static final DeferredBlock<Block> JADE_VINES = register(block(
         "jade_vines", () -> new JadeVinePlantBlock(
             jadeVine().lightLevel((state) -> state.getValue(JadeVinePlantBlock.AGE) == 0 ? 0 : 5))
     ));
-    public static final DeferredBlock<Block> JADE_PETAL_BLOCK = register(
-        blockWithItem(
-            "jade_petal_block", () -> new JadeVinePetalBlock(jadeVine().lightLevel(state -> 3)), InkColors.LIME));
+    public static final DeferredBlock<Block> JADE_PETAL_BLOCK = register(blockWithItem(
+        "jade_petal_block", () -> new JadeVinePetalBlock(jadeVine().lightLevel(state -> 3)), InkColors.LIME));
     public static final DeferredBlock<Block> JADE_PETAL_CARPET = register(
         blockWithItem("jade_petal_carpet", () -> new CarpetBlock(jadeVine().lightLevel(state -> 3)), InkColors.LIME));
 
-    public static final DeferredBlock<Block> NEPHRITE_BLOSSOM_STEM = register(
-        blockWithItem(
-            "nephrite_blossom_stem", () -> new NephriteBlossomStemBlock(settings(
-                MapColor.COLOR_PINK, SoundType.WOOL, 2.0F).noOcclusion()
-                                                          .noCollission()), InkColors.PINK
-        ));
-    public static final DeferredBlock<Block> NEPHRITE_BLOSSOM_LEAVES = register(
-        blockWithItem(
-            "nephrite_blossom_leaves", () -> new NephriteBlossomLeavesBlock(settings(
-                MapColor.COLOR_PINK, SoundType.GRASS, 0.2F).noOcclusion()
-                                                           .randomTicks()
-                                                           .lightLevel(state -> 13)), InkColors.PINK
-        ));
+    public static final DeferredBlock<Block> NEPHRITE_BLOSSOM_STEM = register(blockWithItem(
+        "nephrite_blossom_stem", () -> new NephriteBlossomStemBlock(settings(
+            MapColor.COLOR_PINK, SoundType.WOOL, 2.0F).noOcclusion()
+                                                      .noCollission()), InkColors.PINK
+    ));
+    public static final DeferredBlock<Block> NEPHRITE_BLOSSOM_LEAVES = register(blockWithItem(
+        "nephrite_blossom_leaves", () -> new NephriteBlossomLeavesBlock(settings(
+            MapColor.COLOR_PINK, SoundType.GRASS, 0.2F).noOcclusion()
+                                                       .randomTicks()
+                                                       .lightLevel(state -> 13)), InkColors.PINK
+    ));
     public static final DeferredBlock<Block> NEPHRITE_BLOSSOM_BULB = register(blockWithItem(
-        "nephrite_blossom_bulb", () -> new NephriteBlossomBulbBlock(
-            Properties.ofFullCopy(PastelBlocks.NEPHRITE_BLOSSOM_STEM.get())), IS.of(16), InkColors.PINK
+        "nephrite_blossom_bulb",
+        () -> new NephriteBlossomBulbBlock(Properties.ofFullCopy(PastelBlocks.NEPHRITE_BLOSSOM_STEM.get())), IS.of(16),
+        InkColors.PINK
     ));
 
     public static Properties jadeite() {
@@ -3339,19 +3232,17 @@ public class PastelBlocks {
                                                             .emissiveRendering(PastelBlocks::always);
     }
 
-    public static final DeferredBlock<Block> JADEITE_LOTUS_STEM = register(
-        blockWithItem(
-            "jadeite_lotus_stem", () -> new JadeiteLotusStemBlock(settings(
-                MapColor.COLOR_BLACK, SoundType.WOOL, 2.0F).noOcclusion()
-                                                           .noCollission()), InkColors.LIME
-        ));
-    public static final DeferredBlock<Block> JADEITE_LOTUS_FLOWER = register(
-        blockWithItem(
-            "jadeite_lotus_flower", () -> new JadeiteLotusFlowerBlock(settings(
-                MapColor.SNOW, SoundType.WOOL, 2.0F).lightLevel(state -> 14)
-                                                    .hasPostProcess(PastelBlocks::always)
-                                                    .emissiveRendering(PastelBlocks::always)), IS.of(16), InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> JADEITE_LOTUS_STEM = register(blockWithItem(
+        "jadeite_lotus_stem", () -> new JadeiteLotusStemBlock(settings(
+            MapColor.COLOR_BLACK, SoundType.WOOL, 2.0F).noOcclusion()
+                                                       .noCollission()), InkColors.LIME
+    ));
+    public static final DeferredBlock<Block> JADEITE_LOTUS_FLOWER = register(blockWithItem(
+        "jadeite_lotus_flower", () -> new JadeiteLotusFlowerBlock(settings(
+            MapColor.SNOW, SoundType.WOOL, 2.0F).lightLevel(state -> 14)
+                                                .hasPostProcess(PastelBlocks::always)
+                                                .emissiveRendering(PastelBlocks::always)), IS.of(16), InkColors.LIME
+    ));
     public static final DeferredBlock<Block> JADEITE_LOTUS_BULB = register(blockWithItem(
         "jadeite_lotus_bulb", () -> new JadeiteLotusBulbBlock(
             Properties.ofFullCopy(PastelBlocks.JADEITE_LOTUS_STEM.get())
@@ -3392,296 +3283,262 @@ public class PastelBlocks {
                                         .requiresCorrectToolForDrops();
     }
 
-    public static final DeferredBlock<Block> SHIMMERSTONE_ORE = register(
-        blockWithItem(
-            "shimmerstone_ore", () -> new ShimmerstoneOreBlock(UniformInt.of(2, 4), ore().randomTicks()),
-            InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> DEEPSLATE_SHIMMERSTONE_ORE = register(
-        blockWithItem(
-            "deepslate_shimmerstone_ore",
-            () -> new ShimmerstoneOreBlock(UniformInt.of(2, 4), deepslateOre().randomTicks()), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> SHIMMERSTONE_BLOCK = register(blockWithItem(
-        "shimmerstone_block", () -> new ShimmerstoneBlock(settings(
-            MapColor.COLOR_YELLOW, SoundType.GLASS, 2.0F).lightLevel((state) -> 15)), InkColors.YELLOW
+    public static final DeferredBlock<Block> SHIMMERSTONE_ORE = register(blockWithItem(
+        "shimmerstone_ore", () -> new ShimmerstoneOreBlock(UniformInt.of(2, 4), ore().randomTicks()),
+        InkColors.YELLOW
     ));
-    public static final DeferredBlock<Block> AZURE_CRYSTAL = register(
-        blockWithItem(
-            "azure_crystal", () -> new AzureCrystalBlock(UniformInt.of(4, 7), deepslateOre().randomTicks().noOcclusion()),
-            InkColors.BLUE
-        ));
+    public static final DeferredBlock<Block> DEEPSLATE_SHIMMERSTONE_ORE = register(blockWithItem(
+        "deepslate_shimmerstone_ore", () -> new ShimmerstoneOreBlock(UniformInt.of(2, 4), deepslateOre().randomTicks()),
+        InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> SHIMMERSTONE_BLOCK = register(blockWithItem(
+        "shimmerstone_block", () -> new ShimmerstoneBlock(
+            settings(MapColor.COLOR_YELLOW, SoundType.GLASS, 2.0F).lightLevel((state) -> 15)), InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> AZURE_CRYSTAL = register(blockWithItem(
+        "azure_crystal", () -> new AzureCrystalBlock(
+            UniformInt.of(4, 7), deepslateOre().randomTicks()
+                                               .noOcclusion()
+                                               .lightLevel(state -> state.getValue(AzureCrystalBlock.WARDED) ? 5 : 0)
+        ), InkColors.BLUE
+    ));
     public static final DeferredBlock<Block> AZURE_OUTCROP = register(block(
         "azure_outcrop",
         () -> new AzuriteOutcropBlock(gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5))
     ));
     public static final DeferredBlock<Block> BUDDING_AZURITE = register(block(
-        "budding_azurite",
-        () -> new BuddingAzuriteBlock(gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5).randomTicks())
+        "budding_azurite", () -> new BuddingAzuriteBlock(
+            gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5).randomTicks())
     ));
     public static final DeferredBlock<Block> AZURITE_BLOCK = register(blockWithItem(
-        "azurite_block", () -> new PastelFacingBlock(
-            Properties.ofFullCopy(LAPIS_BLOCK)
-                      .mapColor(MapColor.COLOR_BLUE)), InkColors.BLUE
+        "azurite_block", () -> new PastelFacingBlock(Properties.ofFullCopy(LAPIS_BLOCK)
+                                                               .mapColor(MapColor.COLOR_BLUE)), InkColors.BLUE
     ));
     public static final DeferredBlock<Block> AZURITE_CLUSTER = register(blockWithItem(
         "azurite_cluster", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_BLUE, PastelBlockSoundGroups.SMALL_ONYX_BUD, 2), PastelClusterBlock.GrowthStage.CLUSTER
+            gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.SMALL_ONYX_BUD, 2),
+            PastelClusterBlock.GrowthStage.CLUSTER
         ), IS.of(Rarity.UNCOMMON), InkColors.BLUE
     ));
     public static final DeferredBlock<Block> LARGE_AZURITE_BUD = register(blockWithItem(
         "large_azurite_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_BLUE, PastelBlockSoundGroups.LARGE_ONYX_BUD, 3), PastelClusterBlock.GrowthStage.LARGE
+            gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.LARGE_ONYX_BUD, 3),
+            PastelClusterBlock.GrowthStage.LARGE
         ), IS.of(Rarity.UNCOMMON), InkColors.BLUE
     ));
     public static final DeferredBlock<Block> SMALL_AZURITE_BUD = register(blockWithItem(
         "small_azurite_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5), PastelClusterBlock.GrowthStage.SMALL
+            gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5),
+            PastelClusterBlock.GrowthStage.SMALL
         ), IS.of(Rarity.UNCOMMON), InkColors.BLUE
     ));
 
-    public static final DeferredBlock<Block> MALACHITE_ORE = register(
-        blockWithItem(
-            "malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), ore()), IS.of(Rarity.UNCOMMON),
-            InkColors.GREEN
-        ));
-    public static final DeferredBlock<Block> DEEPSLATE_MALACHITE_ORE = register(
-        blockWithItem(
-            "deepslate_malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), deepslateOre()),
-            IS.of(Rarity.UNCOMMON), InkColors.GREEN
-        ));
-    public static final DeferredBlock<Block> BLACKSLAG_MALACHITE_ORE = register(
-        blockWithItem(
-            "blackslag_malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), blackslagOre().noOcclusion()),
-            IS.of(Rarity.UNCOMMON), InkColors.GREEN
-        ));
-    public static final DeferredBlock<Block> MALACHITE_BLOCK = register(
-        blockWithItem(
-            "malachite_block", () -> new PastelFacingBlock(gemstoneBlock(MapColor.EMERALD, SoundType.CHAIN)),
-            IS.of(Rarity.UNCOMMON), InkColors.GREEN
-        ));
+    public static final DeferredBlock<Block> MALACHITE_ORE = register(blockWithItem(
+        "malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), ore()), IS.of(Rarity.UNCOMMON),
+        InkColors.GREEN
+    ));
+    public static final DeferredBlock<Block> DEEPSLATE_MALACHITE_ORE = register(blockWithItem(
+        "deepslate_malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), deepslateOre()),
+        IS.of(Rarity.UNCOMMON), InkColors.GREEN
+    ));
+    public static final DeferredBlock<Block> BLACKSLAG_MALACHITE_ORE = register(blockWithItem(
+        "blackslag_malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), blackslagOre().noOcclusion()),
+        IS.of(Rarity.UNCOMMON), InkColors.GREEN
+    ));
+    public static final DeferredBlock<Block> MALACHITE_BLOCK = register(blockWithItem(
+        "malachite_block", () -> new PastelFacingBlock(gemstoneBlock(MapColor.EMERALD, SoundType.CHAIN)),
+        IS.of(Rarity.UNCOMMON), InkColors.GREEN
+    ));
     public static final DeferredBlock<Block> MALACHITE_CLUSTER = register(blockWithItem(
         "malachite_cluster", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.EMERALD, SoundType.CHAIN, 9), PastelClusterBlock.GrowthStage.CLUSTER
-        ), IS.of(Rarity.UNCOMMON), InkColors.GREEN
+            gemstone(MapColor.EMERALD, SoundType.CHAIN, 9), PastelClusterBlock.GrowthStage.CLUSTER),
+        IS.of(Rarity.UNCOMMON), InkColors.GREEN
     ));
     public static final DeferredBlock<Block> LARGE_MALACHITE_BUD = register(blockWithItem(
         "large_malachite_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.EMERALD, SoundType.CHAIN, 7), PastelClusterBlock.GrowthStage.LARGE
-        ), IS.of(Rarity.UNCOMMON), InkColors.GREEN
+            gemstone(MapColor.EMERALD, SoundType.CHAIN, 7), PastelClusterBlock.GrowthStage.LARGE),
+        IS.of(Rarity.UNCOMMON), InkColors.GREEN
     ));
     public static final DeferredBlock<Block> SMALL_MALACHITE_BUD = register(blockWithItem(
         "small_malachite_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.EMERALD, SoundType.CHAIN, 5), PastelClusterBlock.GrowthStage.SMALL
-        ), IS.of(Rarity.UNCOMMON), InkColors.GREEN
+            gemstone(MapColor.EMERALD, SoundType.CHAIN, 5), PastelClusterBlock.GrowthStage.SMALL),
+        IS.of(Rarity.UNCOMMON), InkColors.GREEN
     ));
 
     public static final DeferredBlock<Block> BLOODSTONE_BLOCK = register(blockWithItem(
-        "bloodstone_block", () -> new PastelFacingBlock(gemstoneBlock(
-            MapColor.COLOR_RED, PastelBlockSoundGroups.ONYX_CLUSTER)), IS.of(Rarity.UNCOMMON), InkColors.RED
+        "bloodstone_block",
+        () -> new PastelFacingBlock(gemstoneBlock(MapColor.COLOR_RED, PastelBlockSoundGroups.ONYX_CLUSTER)),
+        IS.of(Rarity.UNCOMMON), InkColors.RED
     ));
     public static final DeferredBlock<Block> BLOODSTONE_CLUSTER = register(blockWithItem(
         "bloodstone_cluster", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_RED, PastelBlockSoundGroups.SMALL_ONYX_BUD, 6), PastelClusterBlock.GrowthStage.CLUSTER
+            gemstone(MapColor.COLOR_RED, PastelBlockSoundGroups.SMALL_ONYX_BUD, 6),
+            PastelClusterBlock.GrowthStage.CLUSTER
         ), IS.of(Rarity.UNCOMMON), InkColors.RED
     ));
     public static final DeferredBlock<Block> LARGE_BLOODSTONE_BUD = register(blockWithItem(
         "large_bloodstone_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_RED, PastelBlockSoundGroups.SMALL_ONYX_BUD, 4), PastelClusterBlock.GrowthStage.LARGE
+            gemstone(MapColor.COLOR_RED, PastelBlockSoundGroups.SMALL_ONYX_BUD, 4),
+            PastelClusterBlock.GrowthStage.LARGE
         ), IS.of(Rarity.UNCOMMON), InkColors.RED
     ));
     public static final DeferredBlock<Block> SMALL_BLOODSTONE_BUD = register(blockWithItem(
         "small_bloodstone_bud", () -> new PastelClusterBlock(
-            gemstone(
-                MapColor.COLOR_RED, PastelBlockSoundGroups.ONYX_CLUSTER, 3), PastelClusterBlock.GrowthStage.SMALL
-        ), IS.of(Rarity.UNCOMMON), InkColors.RED
+            gemstone(MapColor.COLOR_RED, PastelBlockSoundGroups.ONYX_CLUSTER, 3), PastelClusterBlock.GrowthStage.SMALL),
+        IS.of(Rarity.UNCOMMON), InkColors.RED
     ));
 
-    public static final DeferredBlock<Block> STRATINE_ORE = register(
-        blockWithItem(
-            "stratine_ore", () -> new CloakedOreBlock(UniformInt.of(3, 5), netherrackOre()),
-            block -> new FloatBlockItem(
-                block, IS.of()
-                         .fireResistant(), -0.01F
-            ), InkColors.RED
-        ));
-    public static final DeferredBlock<Block> PALTAERIA_ORE = register(
-        blockWithItem(
-            "paltaeria_ore", () -> new CloakedOreBlock(UniformInt.of(2, 4), endstoneOre()),
-            block -> new FloatBlockItem(block, IS.of(), 0.01F), InkColors.CYAN
-        ));
+    public static final DeferredBlock<Block> STRATINE_ORE = register(blockWithItem(
+        "stratine_ore", () -> new CloakedOreBlock(UniformInt.of(3, 5), netherrackOre()), block -> new FloatBlockItem(
+            block, IS.of()
+                     .fireResistant(), -0.01F
+        ), InkColors.RED
+    ));
+    public static final DeferredBlock<Block> PALTAERIA_ORE = register(blockWithItem(
+        "paltaeria_ore", () -> new CloakedOreBlock(UniformInt.of(2, 4), endstoneOre()),
+        block -> new FloatBlockItem(block, IS.of(), 0.01F), InkColors.CYAN
+    ));
 
     private static Properties gravityBlock(MapColor mapColor) {
         return settings(mapColor, SoundType.METAL, 4.0F, 6.0F).instrument(NoteBlockInstrument.BASEDRUM)
                                                               .requiresCorrectToolForDrops();
     }
 
-    public static final DeferredBlock<Block> PALTAERIA_FLOATBLOCK = register(
-        blockWithItem(
-            "paltaeria_floatblock", () -> new FloatBlock(gravityBlock(MapColor.COLOR_LIGHT_BLUE), 0.2F),
-            block -> new FloatBlockItem(
-                block, IS.of()
-                         .fireResistant(), 0.02F
-            ), InkColors.RED
-        ));
-    public static final DeferredBlock<Block> STRATINE_FLOATBLOCK = register(
-        blockWithItem(
-            "stratine_floatblock", () -> new FloatBlock(gravityBlock(MapColor.NETHER), -0.2F),
-            block -> new FloatBlockItem(block, IS.of(), -0.02F), InkColors.CYAN
-        ));
-    public static final DeferredBlock<Block> HOVERBLOCK = register(
-        blockWithItem(
-            "hoverblock", () -> new FloatBlock(gravityBlock(MapColor.DIAMOND), 0.0F),
-            block -> new FloatBlockItem(block, IS.of(), 0F) {
-                @Override
-                public double applyGravity(ItemStack stack, Level world, Entity entity) {
-                    return 0;
-                }
+    public static final DeferredBlock<Block> PALTAERIA_FLOATBLOCK = register(blockWithItem(
+        "paltaeria_floatblock", () -> new FloatBlock(gravityBlock(MapColor.COLOR_LIGHT_BLUE), 0.2F),
+        block -> new FloatBlockItem(
+            block, IS.of()
+                     .fireResistant(), 0.02F
+        ), InkColors.RED
+    ));
+    public static final DeferredBlock<Block> STRATINE_FLOATBLOCK = register(blockWithItem(
+        "stratine_floatblock", () -> new FloatBlock(gravityBlock(MapColor.NETHER), -0.2F),
+        block -> new FloatBlockItem(block, IS.of(), -0.02F), InkColors.CYAN
+    ));
+    public static final DeferredBlock<Block> HOVERBLOCK = register(blockWithItem(
+        "hoverblock", () -> new FloatBlock(gravityBlock(MapColor.DIAMOND), 0.0F),
+        block -> new FloatBlockItem(block, IS.of(), 0F) {
+            @Override
+            public double applyGravity(ItemStack stack, Level world, Entity entity) {
+                return 0;
+            }
 
-                @Override
-                public void applyGravity(ItemStack stack, Level world, ItemEntity itemEntity) {
-                    itemEntity.setNoGravity(true);
-                }
-            }, InkColors.GREEN
-        ));
+            @Override
+            public void applyGravity(ItemStack stack, Level world, ItemEntity itemEntity) {
+                itemEntity.setNoGravity(true);
+            }
+        }, InkColors.GREEN
+    ));
 
-    public static final DeferredBlock<Block> BLACKSLAG_COAL_ORE = register(
-        blockWithItem(
-            "blackslag_coal_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), blackslagOre()), InkColors.BLACK));
-    public static final DeferredBlock<Block> BLACKSLAG_COPPER_ORE = register(
-        blockWithItem(
-            "blackslag_copper_ore", () -> new DropExperienceBlock(ConstantInt.of(0), blackslagOre()), InkColors.BLACK));
-    public static final DeferredBlock<Block> BLACKSLAG_IRON_ORE = register(
-        blockWithItem(
-            "blackslag_iron_ore", () -> new DropExperienceBlock(ConstantInt.of(0), blackslagOre()), InkColors.BROWN));
-    public static final DeferredBlock<Block> BLACKSLAG_GOLD_ORE = register(
-        blockWithItem(
-            "blackslag_gold_ore", () -> new DropExperienceBlock(ConstantInt.of(0), blackslagOre()), InkColors.YELLOW));
-    public static final DeferredBlock<Block> BLACKSLAG_LAPIS_ORE = register(
-        blockWithItem(
-            "blackslag_lapis_ore", () -> new DropExperienceBlock(UniformInt.of(2, 5), blackslagOre()), InkColors.BLUE));
-    public static final DeferredBlock<Block> BLACKSLAG_DIAMOND_ORE = register(
-        blockWithItem(
-            "blackslag_diamond_ore", () -> new DropExperienceBlock(UniformInt.of(3, 7), blackslagOre()),
-            InkColors.LIGHT_BLUE
-        ));
+    public static final DeferredBlock<Block> BLACKSLAG_COAL_ORE = register(blockWithItem(
+        "blackslag_coal_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), blackslagOre()), InkColors.BLACK));
+    public static final DeferredBlock<Block> BLACKSLAG_COPPER_ORE = register(blockWithItem(
+        "blackslag_copper_ore", () -> new DropExperienceBlock(ConstantInt.of(0), blackslagOre()), InkColors.BLACK));
+    public static final DeferredBlock<Block> BLACKSLAG_IRON_ORE = register(blockWithItem(
+        "blackslag_iron_ore", () -> new DropExperienceBlock(ConstantInt.of(0), blackslagOre()), InkColors.BROWN));
+    public static final DeferredBlock<Block> BLACKSLAG_GOLD_ORE = register(blockWithItem(
+        "blackslag_gold_ore", () -> new DropExperienceBlock(ConstantInt.of(0), blackslagOre()), InkColors.YELLOW));
+    public static final DeferredBlock<Block> BLACKSLAG_LAPIS_ORE = register(blockWithItem(
+        "blackslag_lapis_ore", () -> new DropExperienceBlock(UniformInt.of(2, 5), blackslagOre()), InkColors.BLUE));
+    public static final DeferredBlock<Block> BLACKSLAG_DIAMOND_ORE = register(blockWithItem(
+        "blackslag_diamond_ore", () -> new DropExperienceBlock(UniformInt.of(3, 7), blackslagOre()),
+        InkColors.LIGHT_BLUE
+    ));
     public static final DeferredBlock<Block> BLACKSLAG_REDSTONE_ORE = register(blockWithItem(
         "blackslag_redstone_ore", () -> new RedStoneOreBlock(blackslagOre().randomTicks()
                                                                            .lightLevel(litBlockEmission(9))),
         InkColors.RED
     ));
-    public static final DeferredBlock<Block> BLACKSLAG_EMERALD_ORE = register(
-        blockWithItem(
-            "blackslag_emerald_ore", () -> new DropExperienceBlock(UniformInt.of(3, 7), blackslagOre()),
-            InkColors.LIME
-        ));
+    public static final DeferredBlock<Block> BLACKSLAG_EMERALD_ORE = register(blockWithItem(
+        "blackslag_emerald_ore", () -> new DropExperienceBlock(UniformInt.of(3, 7), blackslagOre()), InkColors.LIME));
 
     // FUNCTIONAL BLOCKS
-    public static final DeferredBlock<Block> HEARTBOUND_CHEST = register(
-        blockWithItem(
-            "heartbound_chest", () -> new HeartboundChestBlock(settings(
-                MapColor.TERRACOTTA_WHITE, SoundType.STONE, -1.0F, 3600000.0F).requiresCorrectToolForDrops()
-                                                                              .noOcclusion()), InkColors.BLUE
-        ));
-    public static final DeferredBlock<Block> COMPACTING_CHEST = register(
-        blockWithItem(
-            "compacting_chest", () -> new CompactingChestBlock(settings(
-                MapColor.TERRACOTTA_WHITE, SoundType.STONE, 4.0F, 4.0F).requiresCorrectToolForDrops()
-                                                                       .noOcclusion()), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> FABRICATION_CHEST = register(
-        blockWithItem(
-            "fabrication_chest", () -> new FabricationChestBlock(settings(
-                MapColor.COLOR_ORANGE, SoundType.STONE, 4.0F, 4.0F).requiresCorrectToolForDrops()
+    public static final DeferredBlock<Block> HEARTBOUND_CHEST = register(blockWithItem(
+        "heartbound_chest", () -> new HeartboundChestBlock(settings(
+            MapColor.TERRACOTTA_WHITE, SoundType.STONE, -1.0F, 3600000.0F).requiresCorrectToolForDrops()
+                                                                          .noOcclusion()), InkColors.BLUE
+    ));
+    public static final DeferredBlock<Block> COMPACTING_CHEST = register(blockWithItem(
+        "compacting_chest", () -> new CompactingChestBlock(settings(
+            MapColor.TERRACOTTA_WHITE, SoundType.STONE, 4.0F, 4.0F).requiresCorrectToolForDrops()
                                                                    .noOcclusion()), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> BLACK_HOLE_CHEST = register(
-        blockWithItem(
-            "black_hole_chest", () -> new BlackHoleChestBlock(settings(
-                MapColor.COLOR_BLACK, SoundType.STONE, 4.0F, 4.0F).requiresCorrectToolForDrops()
-                                                                  .noOcclusion()), InkColors.LIGHT_GRAY
-        ));
-    public static final DeferredBlock<Block> PARTICLE_SPAWNER = register(
-        blockWithItem(
-            "particle_spawner", () -> new ParticleSpawnerBlock(settings(
-                MapColor.TERRACOTTA_WHITE, SoundType.AMETHYST, 5.0F, 6.0F).requiresCorrectToolForDrops()
-                                                                          .noOcclusion()), InkColors.PINK
-        ));
-    public static final DeferredBlock<Block> CREATIVE_PARTICLE_SPAWNER = register(
-        blockWithItem(
-            "creative_particle_spawner", () -> new CreativeParticleSpawnerBlock(
-                Properties.ofFullCopy(PastelBlocks.PARTICLE_SPAWNER.get())
-                          .strength(-1.0F, 3600000.8F)
-                          .noLootTable()), block -> new BlockItem(block, IS.of(Rarity.EPIC)), InkColors.PINK
-        ));
+    ));
+    public static final DeferredBlock<Block> FABRICATION_CHEST = register(blockWithItem(
+        "fabrication_chest", () -> new FabricationChestBlock(settings(
+            MapColor.COLOR_ORANGE, SoundType.STONE, 4.0F, 4.0F).requiresCorrectToolForDrops()
+                                                               .noOcclusion()), InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> BLACK_HOLE_CHEST = register(blockWithItem(
+        "black_hole_chest", () -> new BlackHoleChestBlock(settings(
+            MapColor.COLOR_BLACK, SoundType.STONE, 4.0F, 4.0F).requiresCorrectToolForDrops()
+                                                              .noOcclusion()), InkColors.LIGHT_GRAY
+    ));
+    public static final DeferredBlock<Block> PARTICLE_SPAWNER = register(blockWithItem(
+        "particle_spawner", () -> new ParticleSpawnerBlock(settings(
+            MapColor.TERRACOTTA_WHITE, SoundType.AMETHYST, 5.0F, 6.0F).requiresCorrectToolForDrops()
+                                                                      .noOcclusion()), InkColors.PINK
+    ));
+    public static final DeferredBlock<Block> CREATIVE_PARTICLE_SPAWNER = register(blockWithItem(
+        "creative_particle_spawner", () -> new CreativeParticleSpawnerBlock(Properties.ofFullCopy(
+                                                                                          PastelBlocks.PARTICLE_SPAWNER.get())
+                                                                                      .strength(-1.0F, 3600000.8F)
+                                                                                      .noLootTable()),
+        block -> new BlockItem(block, IS.of(Rarity.EPIC)), InkColors.PINK
+    ));
     public static final DeferredBlock<Block> BEDROCK_ANVIL = register(blockWithItem(
-        "bedrock_anvil", () -> new BedrockAnvilBlock(
-            Properties.ofFullCopy(ANVIL)
-                      .requiresCorrectToolForDrops()
-                      .strength(8.0F, 8.0F)
-                      .sound(SoundType.METAL)), InkColors.BLACK
+        "bedrock_anvil", () -> new BedrockAnvilBlock(Properties.ofFullCopy(ANVIL)
+                                                               .requiresCorrectToolForDrops()
+                                                               .strength(8.0F, 8.0F)
+                                                               .sound(SoundType.METAL)), InkColors.BLACK
     ));
 
     // SOLID LIQUID CRYSTAL
     public static final DeferredBlock<Block> FROSTBITE_CRYSTAL = register(blockWithItem(
-        "frostbite_crystal", () -> new Block(
-            Properties.ofFullCopy(GLOWSTONE)
-                      .mapColor(MapColor.CLAY)), InkColors.LIGHT_BLUE
+        "frostbite_crystal", () -> new Block(Properties.ofFullCopy(GLOWSTONE)
+                                                       .mapColor(MapColor.CLAY)), InkColors.LIGHT_BLUE
     ));
     public static final DeferredBlock<Block> BLAZING_CRYSTAL = register(blockWithItem(
-        "blazing_crystal", () -> new Block(
-            Properties.ofFullCopy(GLOWSTONE)
-                      .mapColor(MapColor.COLOR_ORANGE)), IS.of()
-                                                           .fireResistant(), InkColors.ORANGE
+        "blazing_crystal", () -> new Block(Properties.ofFullCopy(GLOWSTONE)
+                                                     .mapColor(MapColor.COLOR_ORANGE)), IS.of()
+                                                                                          .fireResistant(),
+        InkColors.ORANGE
     ));
 
-    public static final DeferredBlock<Block> QUITOXIC_REEDS = register(
-        blockWithItem(
-            "quitoxic_reeds", () -> new QuitoxicReedsBlock(settings(MapColor.NONE, SoundType.GRASS, 0.0F).noCollission()
-                                                                                                         .offsetType(
-                                                                                                             OffsetType.XYZ)
+    public static final DeferredBlock<Block> QUITOXIC_REEDS = register(blockWithItem(
+        "quitoxic_reeds", () -> new QuitoxicReedsBlock(settings(MapColor.NONE, SoundType.GRASS, 0.0F).noCollission()
+                                                                                                     .offsetType(
+                                                                                                         OffsetType.XYZ)
+                                                                                                     .randomTicks()
+                                                                                                     .lightLevel(
+                                                                                                         state -> state.getValue(
+                                                                                                                           QuitoxicReedsBlock.LOGGED)
+                                                                                                                       .getLuminance())),
+        InkColors.PURPLE
+    ));
+    public static final DeferredBlock<Block> MERMAIDS_BRUSH = register(block(
+        "mermaids_brush", () -> new MermaidsBrushBlock(settings(MapColor.NONE, SoundType.WET_GRASS, 0.0F).noCollission()
                                                                                                          .randomTicks()
                                                                                                          .lightLevel(
                                                                                                              state -> state.getValue(
-                                                                                                                               QuitoxicReedsBlock.LOGGED)
-                                                                                                                           .getLuminance())),
-            InkColors.PURPLE
-        ));
-    public static final DeferredBlock<Block> MERMAIDS_BRUSH = register(
-        block(
-            "mermaids_brush", () -> new MermaidsBrushBlock(settings(
-                MapColor.NONE, SoundType.WET_GRASS, 0.0F).noCollission()
-                                                         .randomTicks()
-                                                         .lightLevel(state -> state.getValue(MermaidsBrushBlock.LOGGED)
-                                                                                   .getLuminance()))
-        ));
-    public static final DeferredBlock<Block> RADIATING_ENDER = register(blockWithItem(
-        "radiating_ender", () -> new RadiatingEnderBlock(
-            Properties.ofFullCopy(EMERALD_BLOCK)
-                      .mapColor(MapColor.COLOR_PURPLE)), InkColors.PURPLE
+                                                                                                                               MermaidsBrushBlock.LOGGED)
+                                                                                                                           .getLuminance()))
     ));
-    public static final DeferredBlock<Block> AMARANTH = register(
-        block(
-            "amaranth", () -> new AmaranthCropBlock(settings(MapColor.NONE, SoundType.CROP, 0.0F).noCollission()
-                                                                                                 .randomTicks())
-        ));
+    public static final DeferredBlock<Block> RADIATING_ENDER = register(blockWithItem(
+        "radiating_ender", () -> new RadiatingEnderBlock(Properties.ofFullCopy(EMERALD_BLOCK)
+                                                                   .mapColor(MapColor.COLOR_PURPLE)), InkColors.PURPLE
+    ));
+    public static final DeferredBlock<Block> AMARANTH = register(block(
+        "amaranth", () -> new AmaranthCropBlock(settings(MapColor.NONE, SoundType.CROP, 0.0F).noCollission()
+                                                                                             .randomTicks())
+    ));
 
-    public static final DeferredBlock<Block> MEMORY = register(
-        blockWithItem(
-            "memory", () -> new MemoryBlock(settings(MapColor.NONE, SoundType.AMETHYST, 0.0F).isViewBlocking(
-                                                                                                 PastelBlocks::never)
-                                                                                             .noOcclusion()
-                                                                                             .randomTicks()),
-            block -> new MemoryItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY
-        ));
+    public static final DeferredBlock<Block> MEMORY = register(blockWithItem(
+        "memory", () -> new MemoryBlock(settings(MapColor.NONE, SoundType.AMETHYST, 0.0F).isViewBlocking(
+                                                                                             PastelBlocks::never)
+                                                                                         .noOcclusion()
+                                                                                         .randomTicks()),
+        block -> new MemoryItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY
+    ));
     public static final DeferredBlock<Block> CRACKED_END_PORTAL_FRAME = register(blockWithItem(
         "cracked_end_portal_frame", () -> new CrackedEndPortalFrameBlock(settings(
             MapColor.ICE, SoundType.GLASS, -1.0F, 3600000.0F).instrument(NoteBlockInstrument.BASEDRUM)
@@ -3690,19 +3547,19 @@ public class PastelBlocks {
         InkColors.PURPLE
     ));
     public static final DeferredBlock<Block> LAVA_SPONGE = register(blockWithItem(
-        "lava_sponge", () -> new LavaSpongeBlock(
-            Properties.ofFullCopy(SPONGE)
-                      .mapColor(MapColor.COLOR_ORANGE)), IS.of()
-                                                           .fireResistant(), InkColors.ORANGE
+        "lava_sponge", () -> new LavaSpongeBlock(Properties.ofFullCopy(SPONGE)
+                                                           .mapColor(MapColor.COLOR_ORANGE)), IS.of()
+                                                                                                .fireResistant(),
+        InkColors.ORANGE
     ));
     public static final DeferredBlock<Block> WET_LAVA_SPONGE = register(burnable(
         blockWithItem(
-            "wet_lava_sponge", () -> new WetLavaSpongeBlock(
-                Properties.ofFullCopy(WET_SPONGE)
-                          .mapColor(MapColor.COLOR_ORANGE)
-                          .lightLevel(s -> 9)
-                          .emissiveRendering(PastelBlocks::always)
-                          .hasPostProcess(PastelBlocks::always)), block -> new WetLavaSpongeItem(
+            "wet_lava_sponge", () -> new WetLavaSpongeBlock(Properties.ofFullCopy(WET_SPONGE)
+                                                                      .mapColor(MapColor.COLOR_ORANGE)
+                                                                      .lightLevel(s -> 9)
+                                                                      .emissiveRendering(PastelBlocks::always)
+                                                                      .hasPostProcess(PastelBlocks::always)),
+            block -> new WetLavaSpongeItem(
                 block, IS.of(1)
                          .fireResistant()
                          .craftRemainder(PastelBlocks.LAVA_SPONGE.get()
@@ -3711,38 +3568,24 @@ public class PastelBlocks {
         ), 12800
     ));
 
-    public static final DeferredBlock<Block> BLOCK_LIGHT_DETECTOR
-        = register(
-        blockWithItem(
-            "block_light_detector", () -> new BlockLightDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)),
-            InkColors.RED
-        ));
-    public static final DeferredBlock<Block> WEATHER_DETECTOR = register(
-        blockWithItem(
-            "weather_detector", () -> new WeatherDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)),
-            InkColors.RED
-        ));
-    public static final DeferredBlock<Block> ITEM_DETECTOR = register(
-        blockWithItem(
-            "item_detector", () -> new ItemDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED));
-    public static final DeferredBlock<Block> PLAYER_DETECTOR = register(
-        blockWithItem(
-            "player_detector", () -> new PlayerDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED));
-    public static final DeferredBlock<Block> CREATURE_DETECTOR = register(
-        blockWithItem(
-            "creature_detector", () -> new EntityDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)),
-            InkColors.RED
-        ));
+    public static final DeferredBlock<Block> BLOCK_LIGHT_DETECTOR = register(blockWithItem(
+        "block_light_detector", () -> new BlockLightDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)),
+        InkColors.RED
+    ));
+    public static final DeferredBlock<Block> WEATHER_DETECTOR = register(blockWithItem(
+        "weather_detector", () -> new WeatherDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED));
+    public static final DeferredBlock<Block> ITEM_DETECTOR = register(blockWithItem(
+        "item_detector", () -> new ItemDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED));
+    public static final DeferredBlock<Block> PLAYER_DETECTOR = register(blockWithItem(
+        "player_detector", () -> new PlayerDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED));
+    public static final DeferredBlock<Block> CREATURE_DETECTOR = register(blockWithItem(
+        "creature_detector", () -> new EntityDetectorBlock(Properties.ofFullCopy(DAYLIGHT_DETECTOR)), InkColors.RED));
     public static final DeferredBlock<Block> REDSTONE_TIMER = register(
         blockWithItem("redstone_timer", () -> new RedstoneTimerBlock(Properties.ofFullCopy(REPEATER)), InkColors.RED));
-    public static final DeferredBlock<Block> REDSTONE_CALCULATOR = register(
-        blockWithItem(
-            "redstone_calculator", () -> new RedstoneCalculatorBlock(Properties.ofFullCopy(REPEATER)), InkColors.RED));
-    public static final DeferredBlock<Block> REDSTONE_TRANSCEIVER = register(
-        blockWithItem(
-            "redstone_transceiver", () -> new RedstoneTransceiverBlock(Properties.ofFullCopy(REPEATER)),
-            InkColors.RED
-        ));
+    public static final DeferredBlock<Block> REDSTONE_CALCULATOR = register(blockWithItem(
+        "redstone_calculator", () -> new RedstoneCalculatorBlock(Properties.ofFullCopy(REPEATER)), InkColors.RED));
+    public static final DeferredBlock<Block> REDSTONE_TRANSCEIVER = register(blockWithItem(
+        "redstone_transceiver", () -> new RedstoneTransceiverBlock(Properties.ofFullCopy(REPEATER)), InkColors.RED));
     public static final DeferredBlock<Block> BLOCK_PLACER = register(blockWithItem(
         "block_placer", () -> new BlockPlacerBlock(BlockBehaviour.Properties.ofFullCopy(DISPENSER)), InkColors.CYAN));
     public static final DeferredBlock<Block> BLOCK_DETECTOR = register(blockWithItem(
@@ -3752,30 +3595,27 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> BLOCK_BREAKER = register(blockWithItem(
         "block_breaker", () -> new BlockBreakerBlock(BlockBehaviour.Properties.ofFullCopy(DISPENSER)), InkColors.CYAN));
     public static final DeferredBlock<Block> ENDER_DROPPER = register(blockWithItem(
-        "ender_dropper", () -> new EnderDropperBlock(
-            Properties.ofFullCopy(DROPPER)
-                      .mapColor(MapColor.COLOR_GRAY)
-                      .requiresCorrectToolForDrops()
-                      .strength(15F, 60.0F)), InkColors.PURPLE
+        "ender_dropper", () -> new EnderDropperBlock(Properties.ofFullCopy(DROPPER)
+                                                               .mapColor(MapColor.COLOR_GRAY)
+                                                               .requiresCorrectToolForDrops()
+                                                               .strength(15F, 60.0F)), InkColors.PURPLE
     ));
     public static final DeferredBlock<Block> ENDER_HOPPER = register(blockWithItem(
-        "ender_hopper", () -> new EnderHopperBlock(
-            Properties.ofFullCopy(HOPPER)
-                      .mapColor(MapColor.COLOR_GRAY)
-                      .requiresCorrectToolForDrops()
-                      .strength(15F, 60.0F)), InkColors.PURPLE
+        "ender_hopper", () -> new EnderHopperBlock(Properties.ofFullCopy(HOPPER)
+                                                             .mapColor(MapColor.COLOR_GRAY)
+                                                             .requiresCorrectToolForDrops()
+                                                             .strength(15F, 60.0F)), InkColors.PURPLE
     ));
 
-    public static final DeferredBlock<Block> STUCK_STORM_STONE = register(
-        block(
-            "stuck_storm_stone", () -> new StuckStormStoneBlock(settings(
-                MapColor.NONE, SoundType.SMALL_AMETHYST_BUD, 0.0F).noCollission()
-                                                                  .noOcclusion()
-                                                                  .isSuffocating(PastelBlocks::never)
-                                                                  .noTerrainParticles()
-                                                                  .isViewBlocking(PastelBlocks::never)
-                                                                  .replaceable())
-        ));
+    public static final DeferredBlock<Block> STUCK_STORM_STONE = register(block(
+        "stuck_storm_stone", () -> new StuckStormStoneBlock(settings(
+            MapColor.NONE, SoundType.SMALL_AMETHYST_BUD, 0.0F).noCollission()
+                                                              .noOcclusion()
+                                                              .isSuffocating(PastelBlocks::never)
+                                                              .noTerrainParticles()
+                                                              .isViewBlocking(PastelBlocks::never)
+                                                              .replaceable())
+    ));
     public static final DeferredBlock<Block> IMBRIFER_PORTAL = register(block(
         "fissure", () -> new DeeperDownPortalBlock(settings(
             MapColor.COLOR_BLACK, SoundType.EMPTY, -1.0F, 3600000.0F).pushReaction(PushReaction.BLOCK)
@@ -3789,81 +3629,75 @@ public class PastelBlocks {
     }
 
     public static final DeferredBlock<Block> UPGRADE_SPEED = register(blockWithItem(
-        "upgrade_speed", () -> new UpgradeBlock(
-            upgrade(), Upgradeable.UpgradeType.SPEED, 1, InkColors.MAGENTA_COLOR),
+        "upgrade_speed", () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.SPEED, 1, InkColors.MAGENTA_COLOR),
         block -> new UpgradeBlockItem(block, IS.of(16), "upgrade_speed"), InkColors.LIGHT_GRAY
     ));
-    public static final DeferredBlock<Block> UPGRADE_SPEED2 = register(
-        blockWithItem(
-            "upgrade_speed2",
-            () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.SPEED, 2, InkColors.MAGENTA_COLOR),
-            block -> new UpgradeBlockItem(block, IS.of(16, Rarity.UNCOMMON), "upgrade_speed2"), InkColors.LIGHT_GRAY
-        ));
-    public static final DeferredBlock<Block> UPGRADE_SPEED3 = register(
-        blockWithItem(
-            "upgrade_speed3",
-            () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.SPEED, 8, InkColors.MAGENTA_COLOR),
-            block -> new UpgradeBlockItem(block, IS.of(16, Rarity.RARE), "upgrade_speed3"), InkColors.LIGHT_GRAY
-        ));
+    public static final DeferredBlock<Block> UPGRADE_SPEED2 = register(blockWithItem(
+        "upgrade_speed2", () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.SPEED, 2, InkColors.MAGENTA_COLOR),
+        block -> new UpgradeBlockItem(block, IS.of(16, Rarity.UNCOMMON), "upgrade_speed2"), InkColors.LIGHT_GRAY
+    ));
+    public static final DeferredBlock<Block> UPGRADE_SPEED3 = register(blockWithItem(
+        "upgrade_speed3", () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.SPEED, 8, InkColors.MAGENTA_COLOR),
+        block -> new UpgradeBlockItem(block, IS.of(16, Rarity.RARE), "upgrade_speed3"), InkColors.LIGHT_GRAY
+    ));
     public static final DeferredBlock<Block> UPGRADE_EFFICIENCY = register(blockWithItem(
-        "upgrade_efficiency", () -> new UpgradeBlock(
-            upgrade(), Upgradeable.UpgradeType.EFFICIENCY, 1, InkColors.YELLOW_COLOR), block -> new UpgradeBlockItem(
-            block, IS.of(16, Rarity.UNCOMMON), "upgrade_efficiency"), InkColors.LIGHT_GRAY
+        "upgrade_efficiency",
+        () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.EFFICIENCY, 1, InkColors.YELLOW_COLOR),
+        block -> new UpgradeBlockItem(block, IS.of(16, Rarity.UNCOMMON), "upgrade_efficiency"), InkColors.LIGHT_GRAY
     ));
     public static final DeferredBlock<Block> UPGRADE_EFFICIENCY2 = register(blockWithItem(
-        "upgrade_efficiency2", () -> new UpgradeBlock(
-            upgrade(), Upgradeable.UpgradeType.EFFICIENCY, 4, InkColors.YELLOW_COLOR), block -> new UpgradeBlockItem(
-            block, IS.of(16, Rarity.RARE), "upgrade_efficiency2"), InkColors.LIGHT_GRAY
+        "upgrade_efficiency2",
+        () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.EFFICIENCY, 4, InkColors.YELLOW_COLOR),
+        block -> new UpgradeBlockItem(block, IS.of(16, Rarity.RARE), "upgrade_efficiency2"), InkColors.LIGHT_GRAY
     ));
     public static final DeferredBlock<Block> UPGRADE_YIELD = register(blockWithItem(
-        "upgrade_yield", () -> new UpgradeBlock(
-            upgrade(), Upgradeable.UpgradeType.YIELD, 1, InkColors.CYAN_COLOR),
+        "upgrade_yield", () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.YIELD, 1, InkColors.CYAN_COLOR),
         block -> new UpgradeBlockItem(block, IS.of(16, Rarity.UNCOMMON), "upgrade_yield"), InkColors.LIGHT_GRAY
     ));
-    public static final DeferredBlock<Block> UPGRADE_YIELD2 = register(
-        blockWithItem(
-            "upgrade_yield2", () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.YIELD, 4, InkColors.CYAN_COLOR),
-            block -> new UpgradeBlockItem(block, IS.of(16, Rarity.RARE), "upgrade_yield2"), InkColors.LIGHT_GRAY
-        ));
+    public static final DeferredBlock<Block> UPGRADE_YIELD2 = register(blockWithItem(
+        "upgrade_yield2", () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.YIELD, 4, InkColors.CYAN_COLOR),
+        block -> new UpgradeBlockItem(block, IS.of(16, Rarity.RARE), "upgrade_yield2"), InkColors.LIGHT_GRAY
+    ));
     public static final DeferredBlock<Block> UPGRADE_EXPERIENCE = register(blockWithItem(
-        "upgrade_experience", () -> new UpgradeBlock(
-            upgrade(), Upgradeable.UpgradeType.EXPERIENCE, 1, InkColors.PURPLE_COLOR), block -> new UpgradeBlockItem(
-            block, IS.of(16), "upgrade_experience"), InkColors.LIGHT_GRAY
+        "upgrade_experience",
+        () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.EXPERIENCE, 1, InkColors.PURPLE_COLOR),
+        block -> new UpgradeBlockItem(block, IS.of(16), "upgrade_experience"), InkColors.LIGHT_GRAY
     ));
     public static final DeferredBlock<Block> UPGRADE_EXPERIENCE2 = register(blockWithItem(
-        "upgrade_experience2", () -> new UpgradeBlock(
-            upgrade(), Upgradeable.UpgradeType.EXPERIENCE, 4, InkColors.PURPLE_COLOR), block -> new UpgradeBlockItem(
-            block, IS.of(16, Rarity.UNCOMMON), "upgrade_experience2"), InkColors.LIGHT_GRAY
+        "upgrade_experience2",
+        () -> new UpgradeBlock(upgrade(), Upgradeable.UpgradeType.EXPERIENCE, 4, InkColors.PURPLE_COLOR),
+        block -> new UpgradeBlockItem(block, IS.of(16, Rarity.UNCOMMON), "upgrade_experience2"), InkColors.LIGHT_GRAY
     ));
 
     public static final DeferredBlock<Block> REDSTONE_SAND = register(blockWithItem(
-        "redstone_sand", () -> new RedstoneGravityBlock(
-            Properties.ofFullCopy(SAND)
-                      .mapColor(MapColor.FIRE)), InkColors.RED
+        "redstone_sand", () -> new RedstoneGravityBlock(Properties.ofFullCopy(SAND)
+                                                                  .mapColor(MapColor.FIRE)), InkColors.RED
     ));
     public static final DeferredBlock<Block> ENDER_GLASS = register(blockWithItem(
-        "ender_glass", () -> new EnderGlassBlock(
-            Properties.ofFullCopy(GLASS)
-                      .mapColor(MapColor.COLOR_PURPLE)
-                      .noOcclusion()
-                      .isRedstoneConductor(PastelBlocks::never)
-                      .isValidSpawn(
-                          (state, world, pos, entityType) -> state.getValue(EnderGlassBlock.TRANSPARENCY_STATE) ==
-                                                             EnderGlassBlock.TransparencyState.SOLID)
-                      .isSuffocating((state, world, pos) -> state.getValue(EnderGlassBlock.TRANSPARENCY_STATE) ==
-                                                            EnderGlassBlock.TransparencyState.SOLID)
-                      .isViewBlocking((state, world, pos) -> state.getValue(EnderGlassBlock.TRANSPARENCY_STATE) ==
-                                                             EnderGlassBlock.TransparencyState.SOLID)), InkColors.PURPLE
+        "ender_glass", () -> new EnderGlassBlock(Properties.ofFullCopy(GLASS)
+                                                           .mapColor(MapColor.COLOR_PURPLE)
+                                                           .noOcclusion()
+                                                           .isRedstoneConductor(PastelBlocks::never)
+                                                           .isValidSpawn((state, world, pos, entityType) ->
+                                                                             state.getValue(
+                                                                                 EnderGlassBlock.TRANSPARENCY_STATE) ==
+                                                                             EnderGlassBlock.TransparencyState.SOLID)
+                                                           .isSuffocating((state, world, pos) -> state.getValue(
+                                                               EnderGlassBlock.TRANSPARENCY_STATE) ==
+                                                                                                 EnderGlassBlock.TransparencyState.SOLID)
+                                                           .isViewBlocking((state, world, pos) -> state.getValue(
+                                                               EnderGlassBlock.TRANSPARENCY_STATE) ==
+                                                                                                  EnderGlassBlock.TransparencyState.SOLID)),
+        InkColors.PURPLE
     ));
     public static final DeferredBlock<Block> CLOVER = register(blockWithItem(
-        "clover", () -> new CloverBlock(
-            Properties.ofFullCopy(SHORT_GRASS)
-                      .offsetType(OffsetType.XZ)), IS.of(), InkColors.LIME
+        "clover", () -> new CloverBlock(Properties.ofFullCopy(SHORT_GRASS)
+                                                  .offsetType(OffsetType.XZ)), IS.of(), InkColors.LIME
     ));
     public static final DeferredBlock<Block> FOUR_LEAF_CLOVER = register(blockWithItem(
-        "four_leaf_clover", () -> new CloverBlock(
-            Properties.ofFullCopy(SHORT_GRASS)
-                      .offsetType(OffsetType.XZ)), block -> new FourLeafCloverItem(block, IS.of()), InkColors.LIME
+        "four_leaf_clover", () -> new CloverBlock(Properties.ofFullCopy(SHORT_GRASS)
+                                                            .offsetType(OffsetType.XZ)),
+        block -> new FourLeafCloverItem(block, IS.of()), InkColors.LIME
     ));
 
     private static final UniformInt gemOreExperienceProvider = UniformInt.of(1, 4);
@@ -3872,62 +3706,83 @@ public class PastelBlocks {
         InkColors.CYAN
     ));
     public static final DeferredBlock<Block> AMETHYST_ORE = register(blockWithItem(
-        "amethyst_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, ore(), PastelGemstoneColor.MAGENTA), InkColors.MAGENTA
+        "amethyst_ore",
+        () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, ore(), PastelGemstoneColor.MAGENTA),
+        InkColors.MAGENTA
     ));
     public static final DeferredBlock<Block> CITRINE_ORE = register(blockWithItem(
-        "citrine_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, ore(), PastelGemstoneColor.YELLOW), InkColors.YELLOW
+        "citrine_ore",
+        () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, ore(), PastelGemstoneColor.YELLOW),
+        InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> ONYX_ORE = register(blockWithItem(
         "onyx_ore", () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, ore(), PastelGemstoneColor.BLACK),
         InkColors.BLACK
     ));
     public static final DeferredBlock<Block> MOONSTONE_ORE = register(blockWithItem(
-        "moonstone_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, ore(), PastelGemstoneColor.WHITE), InkColors.WHITE
+        "moonstone_ore",
+        () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, ore(), PastelGemstoneColor.WHITE),
+        InkColors.WHITE
     ));
 
     public static final DeferredBlock<Block> DEEPSLATE_TOPAZ_ORE = register(blockWithItem(
-        "deepslate_topaz_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(), PastelGemstoneColor.CYAN), InkColors.CYAN
+        "deepslate_topaz_ore",
+        () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, deepslateOre(), PastelGemstoneColor.CYAN),
+        InkColors.CYAN
     ));
     public static final DeferredBlock<Block> DEEPSLATE_AMETHYST_ORE = register(blockWithItem(
         "deepslate_amethyst_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(), PastelGemstoneColor.MAGENTA), InkColors.MAGENTA
+            PastelBlocks.gemOreExperienceProvider, deepslateOre(),
+            PastelGemstoneColor.MAGENTA
+        ), InkColors.MAGENTA
     ));
     public static final DeferredBlock<Block> DEEPSLATE_CITRINE_ORE = register(blockWithItem(
         "deepslate_citrine_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(), PastelGemstoneColor.YELLOW), InkColors.YELLOW
+            PastelBlocks.gemOreExperienceProvider, deepslateOre(),
+            PastelGemstoneColor.YELLOW
+        ), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> DEEPSLATE_ONYX_ORE = register(blockWithItem(
         "deepslate_onyx_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(), PastelGemstoneColor.BLACK), InkColors.BLACK
+            PastelBlocks.gemOreExperienceProvider, deepslateOre(),
+            PastelGemstoneColor.BLACK
+        ), InkColors.BLACK
     ));
     public static final DeferredBlock<Block> DEEPSLATE_MOONSTONE_ORE = register(blockWithItem(
         "deepslate_moonstone_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(), PastelGemstoneColor.WHITE), InkColors.WHITE
+            PastelBlocks.gemOreExperienceProvider, deepslateOre(),
+            PastelGemstoneColor.WHITE
+        ), InkColors.WHITE
     ));
 
     public static final DeferredBlock<Block> BLACKSLAG_TOPAZ_ORE = register(blockWithItem(
-        "blackslag_topaz_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(), PastelGemstoneColor.CYAN), InkColors.CYAN
+        "blackslag_topaz_ore",
+        () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, blackslagOre(), PastelGemstoneColor.CYAN),
+        InkColors.CYAN
     ));
     public static final DeferredBlock<Block> BLACKSLAG_AMETHYST_ORE = register(blockWithItem(
         "blackslag_amethyst_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(), PastelGemstoneColor.MAGENTA), InkColors.MAGENTA
+            PastelBlocks.gemOreExperienceProvider, blackslagOre(),
+            PastelGemstoneColor.MAGENTA
+        ), InkColors.MAGENTA
     ));
     public static final DeferredBlock<Block> BLACKSLAG_CITRINE_ORE = register(blockWithItem(
         "blackslag_citrine_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(), PastelGemstoneColor.YELLOW), InkColors.YELLOW
+            PastelBlocks.gemOreExperienceProvider, blackslagOre(),
+            PastelGemstoneColor.YELLOW
+        ), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> BLACKSLAG_ONYX_ORE = register(blockWithItem(
         "blackslag_onyx_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(), PastelGemstoneColor.BLACK), InkColors.BLACK
+            PastelBlocks.gemOreExperienceProvider, blackslagOre(),
+            PastelGemstoneColor.BLACK
+        ), InkColors.BLACK
     ));
     public static final DeferredBlock<Block> BLACKSLAG_MOONSTONE_ORE = register(blockWithItem(
         "blackslag_moonstone_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(), PastelGemstoneColor.WHITE), InkColors.WHITE
+            PastelBlocks.gemOreExperienceProvider, blackslagOre(),
+            PastelGemstoneColor.WHITE
+        ), InkColors.WHITE
     ));
 
     private static Properties polishedGemBlock(MapColor mapColor, SoundType soundGroup) {
@@ -3935,27 +3790,25 @@ public class PastelBlocks {
     }
 
     public static final DeferredBlock<Block> POLISHED_TOPAZ_BLOCK = register(blockWithItem(
-        "polished_topaz_block", () -> new Block(polishedGemBlock(
-            MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK)), InkColors.CYAN
+        "polished_topaz_block",
+        () -> new Block(polishedGemBlock(MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK)), InkColors.CYAN
     ));
-    public static final DeferredBlock<Block> POLISHED_AMETHYST_BLOCK = register(
-        blockWithItem(
-            "polished_amethyst_block", () -> new Block(polishedGemBlock(MapColor.COLOR_MAGENTA, SoundType.AMETHYST)),
-            InkColors.MAGENTA
-        ));
+    public static final DeferredBlock<Block> POLISHED_AMETHYST_BLOCK = register(blockWithItem(
+        "polished_amethyst_block", () -> new Block(polishedGemBlock(MapColor.COLOR_MAGENTA, SoundType.AMETHYST)),
+        InkColors.MAGENTA
+    ));
     public static final DeferredBlock<Block> POLISHED_CITRINE_BLOCK = register(blockWithItem(
-        "polished_citrine_block", () -> new Block(polishedGemBlock(
-            MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK)), InkColors.YELLOW
+        "polished_citrine_block",
+        () -> new Block(polishedGemBlock(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK)), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> POLISHED_ONYX_BLOCK = register(blockWithItem(
-        "polished_onyx_block", () -> new Block(polishedGemBlock(
-            MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK)), InkColors.BLACK
+        "polished_onyx_block",
+        () -> new Block(polishedGemBlock(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK)), InkColors.BLACK
     ));
-    public static final DeferredBlock<Block> POLISHED_MOONSTONE_BLOCK = register(
-        blockWithItem(
-            "polished_moonstone_block",
-            () -> new Block(polishedGemBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK)), InkColors.WHITE
-        ));
+    public static final DeferredBlock<Block> POLISHED_MOONSTONE_BLOCK = register(blockWithItem(
+        "polished_moonstone_block",
+        () -> new Block(polishedGemBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK)), InkColors.WHITE
+    ));
 
     private static BlockBehaviour.Properties deferredCopyWithMapColor(DeferredBlock<Block> baseBlock, MapColor color) {
         return BlockBehaviour.Properties.ofFullCopy(baseBlock.get())
@@ -3974,12 +3827,12 @@ public class PastelBlocks {
                          .pushReaction(PushReaction.DESTROY);
     }
 
-    public static final DeferredBlock<Block> AMARANTH_BUSHEL = register(blockWithItem(
-        "amaranth_bushel", () -> new AmaranthBushelBlock(
-            PastelMobEffects.NOURISHING, 8, settings(
-            MapColor.NONE, SoundType.CROP, 0.0F).noCollission()
-        ), InkColors.RED
-    ));
+    public static final DeferredBlock<Block> AMARANTH_BUSHEL = register(
+        blockWithItem(
+            "amaranth_bushel", () -> new AmaranthBushelBlock(
+                PastelMobEffects.NOURISHING, 8, settings(MapColor.NONE, SoundType.CROP, 0.0F).noCollission()),
+            InkColors.RED
+        ));
     public static final DeferredBlock<Block> POTTED_AMARANTH_BUSHEL = register(
         block("potted_amaranth_bushel", () -> new FlowerPotBlock(PastelBlocks.AMARANTH_BUSHEL.get(), pottedPlant())));
 
@@ -3995,8 +3848,7 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> BLOOD_ORCHID = register(blockWithItem(
         "blood_orchid", () -> new BloodOrchidBlock(
             PastelMobEffects.FRENZY, 10, Properties.ofFullCopy(POPPY)
-                                                   .offsetType(
-                                                       OffsetType.NONE)
+                                                   .offsetType(OffsetType.NONE)
                                                    .randomTicks()
         ), InkColors.RED
     ));
@@ -4479,11 +4331,12 @@ public class PastelBlocks {
     public static DeferredBlock<Block> registerShimmerstoneLight(
         String name, SoundType soundGroup, Supplier<ResourceLocation> outerSupplier) {
         return register(blockWithItem(
-            name, () -> new ShimmerstoneLightBlock(settings(
-                MapColor.NONE, soundGroup, 1.0F).noOcclusion()
-                                                .requiresCorrectToolForDrops()
-                                                .lightLevel(state -> 15)
-                                                .pushReaction(PushReaction.DESTROY)), InkColors.YELLOW
+            name, () -> new ShimmerstoneLightBlock(settings(MapColor.NONE, soundGroup, 1.0F).noOcclusion()
+                                                                                            .requiresCorrectToolForDrops()
+                                                                                            .lightLevel(state -> 15)
+                                                                                            .pushReaction(
+                                                                                                PushReaction.DESTROY)),
+            InkColors.YELLOW
         ));
     }
 
@@ -4515,8 +4368,9 @@ public class PastelBlocks {
     }
 
     public static final DeferredBlock<Block> SMALL_COAL_BUD = register(blockWithItem(
-        "small_coal_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(COAL_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.BROWN
+        "small_coal_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(COAL_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.BROWN
     ));
     public static final DeferredBlock<Block> LARGE_COAL_BUD = register(blockWithItem(
         "large_coal_bud", () -> new PastelClusterBlock(
@@ -4529,8 +4383,9 @@ public class PastelBlocks {
         InkColors.BROWN
     ));
     public static final DeferredBlock<Block> SMALL_IRON_BUD = register(blockWithItem(
-        "small_iron_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(IRON_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.BROWN
+        "small_iron_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(IRON_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.BROWN
     ));
     public static final DeferredBlock<Block> LARGE_IRON_BUD = register(blockWithItem(
         "large_iron_bud", () -> new PastelClusterBlock(
@@ -4543,8 +4398,9 @@ public class PastelBlocks {
         InkColors.BROWN
     ));
     public static final DeferredBlock<Block> SMALL_GOLD_BUD = register(blockWithItem(
-        "small_gold_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(GOLD_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.BROWN
+        "small_gold_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(GOLD_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.BROWN
     ));
     public static final DeferredBlock<Block> LARGE_GOLD_BUD = register(blockWithItem(
         "large_gold_bud", () -> new PastelClusterBlock(
@@ -4557,8 +4413,9 @@ public class PastelBlocks {
         InkColors.BROWN
     ));
     public static final DeferredBlock<Block> SMALL_DIAMOND_BUD = register(blockWithItem(
-        "small_diamond_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(DIAMOND_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.CYAN
+        "small_diamond_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(DIAMOND_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.CYAN
     ));
     public static final DeferredBlock<Block> LARGE_DIAMOND_BUD = register(blockWithItem(
         "large_diamond_bud", () -> new PastelClusterBlock(
@@ -4571,8 +4428,9 @@ public class PastelBlocks {
         InkColors.CYAN
     ));
     public static final DeferredBlock<Block> SMALL_EMERALD_BUD = register(blockWithItem(
-        "small_emerald_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(EMERALD_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.CYAN
+        "small_emerald_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(EMERALD_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.CYAN
     ));
     public static final DeferredBlock<Block> LARGE_EMERALD_BUD = register(blockWithItem(
         "large_emerald_bud", () -> new PastelClusterBlock(
@@ -4585,8 +4443,9 @@ public class PastelBlocks {
         InkColors.CYAN
     ));
     public static final DeferredBlock<Block> SMALL_REDSTONE_BUD = register(blockWithItem(
-        "small_redstone_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(REDSTONE_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.RED
+        "small_redstone_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(REDSTONE_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.RED
     ));
     public static final DeferredBlock<Block> LARGE_REDSTONE_BUD = register(blockWithItem(
         "large_redstone_bud", () -> new PastelClusterBlock(
@@ -4599,8 +4458,9 @@ public class PastelBlocks {
         InkColors.RED
     ));
     public static final DeferredBlock<Block> SMALL_LAPIS_BUD = register(blockWithItem(
-        "small_lapis_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(LAPIS_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.PURPLE
+        "small_lapis_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(LAPIS_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.PURPLE
     ));
     public static final DeferredBlock<Block> LARGE_LAPIS_BUD = register(blockWithItem(
         "large_lapis_bud", () -> new PastelClusterBlock(
@@ -4613,8 +4473,9 @@ public class PastelBlocks {
         InkColors.PURPLE
     ));
     public static final DeferredBlock<Block> SMALL_COPPER_BUD = register(blockWithItem(
-        "small_copper_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(COPPER_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.BROWN
+        "small_copper_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(COPPER_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.BROWN
     ));
     public static final DeferredBlock<Block> LARGE_COPPER_BUD = register(blockWithItem(
         "large_copper_bud", () -> new PastelClusterBlock(
@@ -4627,8 +4488,9 @@ public class PastelBlocks {
         InkColors.BROWN
     ));
     public static final DeferredBlock<Block> SMALL_QUARTZ_BUD = register(blockWithItem(
-        "small_quartz_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(QUARTZ_BLOCK), PastelClusterBlock.GrowthStage.SMALL), InkColors.BROWN
+        "small_quartz_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(QUARTZ_BLOCK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.BROWN
     ));
     public static final DeferredBlock<Block> LARGE_QUARTZ_BUD = register(blockWithItem(
         "large_quartz_bud", () -> new PastelClusterBlock(
@@ -4640,21 +4502,18 @@ public class PastelBlocks {
             Properties.ofFullCopy(PastelBlocks.SMALL_QUARTZ_BUD.get()), PastelClusterBlock.GrowthStage.CLUSTER),
         InkColors.BROWN
     ));
-    public static final DeferredBlock<Block> SMALL_NETHERITE_SCRAP_BUD = register(
-        blockWithItem(
-            "small_netherite_scrap_bud", () -> new PastelClusterBlock(
-                crystallarieumGrowable(ANCIENT_DEBRIS), PastelClusterBlock.GrowthStage.SMALL), IS.of()
-                                                                                                 .fireResistant(),
-            InkColors.BROWN
-        ));
-    public static final DeferredBlock<Block> LARGE_NETHERITE_SCRAP_BUD = register(
-        blockWithItem(
-            "large_netherite_scrap_bud", () -> new PastelClusterBlock(
-                Properties.ofFullCopy(PastelBlocks.SMALL_NETHERITE_SCRAP_BUD.get()),
-                PastelClusterBlock.GrowthStage.LARGE
-            ), IS.of()
-                 .fireResistant(), InkColors.BROWN
-        ));
+    public static final DeferredBlock<Block> SMALL_NETHERITE_SCRAP_BUD = register(blockWithItem(
+        "small_netherite_scrap_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(ANCIENT_DEBRIS), PastelClusterBlock.GrowthStage.SMALL),
+        IS.of()
+          .fireResistant(), InkColors.BROWN
+    ));
+    public static final DeferredBlock<Block> LARGE_NETHERITE_SCRAP_BUD = register(blockWithItem(
+        "large_netherite_scrap_bud", () -> new PastelClusterBlock(
+            Properties.ofFullCopy(PastelBlocks.SMALL_NETHERITE_SCRAP_BUD.get()), PastelClusterBlock.GrowthStage.LARGE),
+        IS.of()
+          .fireResistant(), InkColors.BROWN
+    ));
     public static final DeferredBlock<Block> NETHERITE_SCRAP_CLUSTER = register(blockWithItem(
         "netherite_scrap_cluster", () -> new PastelClusterBlock(
             Properties.ofFullCopy(PastelBlocks.SMALL_NETHERITE_SCRAP_BUD.get()),
@@ -4662,12 +4521,11 @@ public class PastelBlocks {
         ), IS.of()
              .fireResistant(), InkColors.BROWN
     ));
-    public static final DeferredBlock<Block> SMALL_ECHO_BUD = register(
-        blockWithItem(
-            "small_echo_bud",
-            () -> new PastelClusterBlock(crystallarieumGrowable(SCULK), PastelClusterBlock.GrowthStage.SMALL),
-            InkColors.BROWN
-        ));
+    public static final DeferredBlock<Block> SMALL_ECHO_BUD = register(blockWithItem(
+        "small_echo_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(SCULK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.BROWN
+    ));
     public static final DeferredBlock<Block> LARGE_ECHO_BUD = register(blockWithItem(
         "large_echo_bud", () -> new PastelClusterBlock(
             Properties.ofFullCopy(PastelBlocks.SMALL_ECHO_BUD.get()), PastelClusterBlock.GrowthStage.LARGE),
@@ -4696,8 +4554,9 @@ public class PastelBlocks {
         ), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> SMALL_PRISMARINE_BUD = register(blockWithItem(
-        "small_prismarine_bud", () -> new PastelClusterBlock(
-            crystallarieumGrowable(SCULK), PastelClusterBlock.GrowthStage.SMALL), InkColors.CYAN
+        "small_prismarine_bud",
+        () -> new PastelClusterBlock(crystallarieumGrowable(SCULK), PastelClusterBlock.GrowthStage.SMALL),
+        InkColors.CYAN
     ));
     public static final DeferredBlock<Block> LARGE_PRISMARINE_BUD = register(blockWithItem(
         "large_prismarine_bud", () -> new PastelClusterBlock(
@@ -4710,11 +4569,8 @@ public class PastelBlocks {
         InkColors.CYAN
     ));
 
-    public static final DeferredBlock<Block> PURE_COAL_BLOCK = register(
-        burnable(
-            blockWithItem("pure_coal_block", () -> new Block(Properties.ofFullCopy(COAL_BLOCK)), InkColors.BROWN),
-            32000
-        ));
+    public static final DeferredBlock<Block> PURE_COAL_BLOCK = register(burnable(
+        blockWithItem("pure_coal_block", () -> new Block(Properties.ofFullCopy(COAL_BLOCK)), InkColors.BROWN), 32000));
     public static final DeferredBlock<Block> PURE_IRON_BLOCK = register(
         blockWithItem("pure_iron_block", () -> new Block(Properties.ofFullCopy(IRON_BLOCK)), InkColors.BROWN));
     public static final DeferredBlock<Block> PURE_GOLD_BLOCK = register(
@@ -4723,9 +4579,8 @@ public class PastelBlocks {
         blockWithItem("pure_diamond_block", () -> new Block(Properties.ofFullCopy(DIAMOND_BLOCK)), InkColors.CYAN));
     public static final DeferredBlock<Block> PURE_EMERALD_BLOCK = register(
         blockWithItem("pure_emerald_block", () -> new Block(Properties.ofFullCopy(EMERALD_BLOCK)), InkColors.CYAN));
-    public static final DeferredBlock<Block> PURE_REDSTONE_BLOCK = register(
-        blockWithItem(
-            "pure_redstone_block", () -> new PureRedstoneBlock(Properties.ofFullCopy(REDSTONE_BLOCK)), InkColors.RED));
+    public static final DeferredBlock<Block> PURE_REDSTONE_BLOCK = register(blockWithItem(
+        "pure_redstone_block", () -> new PureRedstoneBlock(Properties.ofFullCopy(REDSTONE_BLOCK)), InkColors.RED));
     public static final DeferredBlock<Block> PURE_LAPIS_BLOCK = register(
         blockWithItem("pure_lapis_block", () -> new Block(Properties.ofFullCopy(LAPIS_BLOCK)), InkColors.PURPLE));
     public static final DeferredBlock<Block> PURE_COPPER_BLOCK = register(
@@ -4736,12 +4591,11 @@ public class PastelBlocks {
         blockWithItem("pure_glowstone_block", () -> new Block(Properties.ofFullCopy(GLOWSTONE)), InkColors.YELLOW));
     public static final DeferredBlock<Block> PURE_PRISMARINE_BLOCK = register(
         blockWithItem("pure_prismarine_block", () -> new Block(Properties.ofFullCopy(PRISMARINE)), InkColors.CYAN));
-    public static final DeferredBlock<Block> PURE_NETHERITE_SCRAP_BLOCK = register(
-        blockWithItem(
-            "pure_netherite_scrap_block", () -> new Block(Properties.ofFullCopy(ANCIENT_DEBRIS)), IS.of()
-                                                                                                    .fireResistant(),
-            InkColors.BROWN
-        ));
+    public static final DeferredBlock<Block> PURE_NETHERITE_SCRAP_BLOCK = register(blockWithItem(
+        "pure_netherite_scrap_block", () -> new Block(Properties.ofFullCopy(ANCIENT_DEBRIS)), IS.of()
+                                                                                                .fireResistant(),
+        InkColors.BROWN
+    ));
     public static final DeferredBlock<Block> PURE_ECHO_BLOCK = register(
         blockWithItem("pure_echo_block", () -> new Block(Properties.ofFullCopy(DIAMOND_BLOCK)), InkColors.BROWN));
 
@@ -4806,26 +4660,22 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> PRESERVATION_WALL = register(
         blockWithItem("preservation_wall", () -> new WallBlock(preservationBlock()), InkColors.BLUE));
 
-    public static final DeferredBlock<Block> POWDER_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem(
-            "powder_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 2)),
-            InkColors.BLUE
-        ));
-    public static final DeferredBlock<Block> DIKE_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem(
-            "dike_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 6)),
-            InkColors.BLUE
-        ));
-    public static final DeferredBlock<Block> DREAM_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem(
-            "dream_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 6)),
-            InkColors.BLUE
-        ));
-    public static final DeferredBlock<Block> DEEP_LIGHT_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem(
-            "deep_light_chiseled_preservation_stone",
-            () -> new DeepLightBlock(preservationBlock().lightLevel(state -> 2)), InkColors.BLUE
-        ));
+    public static final DeferredBlock<Block> POWDER_CHISELED_PRESERVATION_STONE = register(blockWithItem(
+        "powder_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 2)),
+        InkColors.BLUE
+    ));
+    public static final DeferredBlock<Block> DIKE_CHISELED_PRESERVATION_STONE = register(blockWithItem(
+        "dike_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 6)),
+        InkColors.BLUE
+    ));
+    public static final DeferredBlock<Block> DREAM_CHISELED_PRESERVATION_STONE = register(blockWithItem(
+        "dream_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 6)),
+        InkColors.BLUE
+    ));
+    public static final DeferredBlock<Block> DEEP_LIGHT_CHISELED_PRESERVATION_STONE = register(blockWithItem(
+        "deep_light_chiseled_preservation_stone", () -> new DeepLightBlock(preservationBlock().lightLevel(state -> 2)),
+        InkColors.BLUE
+    ));
 
     public static final DeferredBlock<Block> ENLIGHTENMENT_ITEM_BOWL = register(blockWithItem(
         "enlightenment_item_bowl", () -> new TreasureItemBowlBlock(preservationBlock().noOcclusion()
@@ -4842,9 +4692,8 @@ public class PastelBlocks {
         blockWithItem("dike_gate_fountain", () -> new PastelFacingBlock(preservationBlock()), InkColors.BLUE));
     public static final DeferredBlock<Block> PRESERVATION_BRICKS = register(
         blockWithItem("preservation_bricks", () -> new Block(preservationBlock()), InkColors.BLUE));
-    public static final DeferredBlock<Block> SHIMMERING_PRESERVATION_BRICKS = register(
-        blockWithItem(
-            "shimmering_preservation_bricks", () -> new Block(preservationBlock().lightLevel(s -> 5)), InkColors.BLUE));
+    public static final DeferredBlock<Block> SHIMMERING_PRESERVATION_BRICKS = register(blockWithItem(
+        "shimmering_preservation_bricks", () -> new Block(preservationBlock().lightLevel(s -> 5)), InkColors.BLUE));
     public static final DeferredBlock<Block> COURIER_STATUE = register(
         blockWithItem("courier_statue", () -> new StatueBlock(preservationBlock()), InkColors.BLUE));
     public static final DeferredBlock<Block> MANXI = register(block(
@@ -4865,12 +4714,10 @@ public class PastelBlocks {
         blockWithItem("gray_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.GRAY));
     public static final DeferredBlock<Block> GREEN_CHISELED_PRESERVATION_STONE = register(
         blockWithItem("green_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.GREEN));
-    public static final DeferredBlock<Block> LIGHT_BLUE_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem(
-            "light_blue_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.LIGHT_BLUE));
-    public static final DeferredBlock<Block> LIGHT_GRAY_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem(
-            "light_gray_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.LIGHT_GRAY));
+    public static final DeferredBlock<Block> LIGHT_BLUE_CHISELED_PRESERVATION_STONE = register(blockWithItem(
+        "light_blue_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.LIGHT_BLUE));
+    public static final DeferredBlock<Block> LIGHT_GRAY_CHISELED_PRESERVATION_STONE = register(blockWithItem(
+        "light_gray_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.LIGHT_GRAY));
     public static final DeferredBlock<Block> LIME_CHISELED_PRESERVATION_STONE = register(
         blockWithItem("lime_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.LIME));
     public static final DeferredBlock<Block> MAGENTA_CHISELED_PRESERVATION_STONE = register(
@@ -4896,11 +4743,10 @@ public class PastelBlocks {
                                                                             .isViewBlocking(PastelBlocks::never)),
         InkColors.BLUE
     ));
-    public static final DeferredBlock<Block> TINTED_PRESERVATION_GLASS = register(
-        blockWithItem(
-            "tinted_preservation_glass", () -> new TintedGlassBlock(
-                Properties.ofFullCopy(PastelBlocks.PRESERVATION_GLASS.get())), InkColors.BLUE
-        ));
+    public static final DeferredBlock<Block> TINTED_PRESERVATION_GLASS = register(blockWithItem(
+        "tinted_preservation_glass",
+        () -> new TintedGlassBlock(Properties.ofFullCopy(PastelBlocks.PRESERVATION_GLASS.get())), InkColors.BLUE
+    ));
     public static final DeferredBlock<Block> PRESERVATION_ROUNDEL = register(blockWithItem(
         "preservation_roundel", () -> new PreservationRoundelBlock(preservationBlock().noOcclusion()
                                                                                       .forceSolidOn()), InkColors.BLUE
@@ -4913,31 +4759,26 @@ public class PastelBlocks {
                                         .noOcclusion();
     }
 
-    public static final DeferredBlock<Block> GLISTERING_SHOOTING_STAR = register(
-        blockWithItem(
-            "glistering_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.GLISTERING),
-            block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
-        ));
-    public static final DeferredBlock<Block> FIERY_SHOOTING_STAR = register(
-        blockWithItem(
-            "fiery_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.FIERY),
-            block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
-        ));
-    public static final DeferredBlock<Block> COLORFUL_SHOOTING_STAR = register(
-        blockWithItem(
-            "colorful_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.COLORFUL),
-            block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
-        ));
-    public static final DeferredBlock<Block> PRISTINE_SHOOTING_STAR = register(
-        blockWithItem(
-            "pristine_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.PRISTINE),
-            block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
-        ));
-    public static final DeferredBlock<Block> GEMSTONE_SHOOTING_STAR = register(
-        blockWithItem(
-            "gemstone_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.GEMSTONE),
-            block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
-        ));
+    public static final DeferredBlock<Block> GLISTERING_SHOOTING_STAR = register(blockWithItem(
+        "glistering_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.GLISTERING),
+        block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
+    ));
+    public static final DeferredBlock<Block> FIERY_SHOOTING_STAR = register(blockWithItem(
+        "fiery_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.FIERY),
+        block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
+    ));
+    public static final DeferredBlock<Block> COLORFUL_SHOOTING_STAR = register(blockWithItem(
+        "colorful_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.COLORFUL),
+        block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
+    ));
+    public static final DeferredBlock<Block> PRISTINE_SHOOTING_STAR = register(blockWithItem(
+        "pristine_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.PRISTINE),
+        block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
+    ));
+    public static final DeferredBlock<Block> GEMSTONE_SHOOTING_STAR = register(blockWithItem(
+        "gemstone_shooting_star", () -> new ShootingStarBlock(shootingStar(), ShootingStar.Variant.GEMSTONE),
+        block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE
+    ));
     public static final DeferredBlock<Block> STARDUST_BLOCK = register(blockWithItem(
         "stardust_block", () -> new ColoredFallingBlock(
             new ColorRGBA(DyeColor.PURPLE.getFireworkColor()), Properties.ofFullCopy(SAND)
@@ -4946,10 +4787,10 @@ public class PastelBlocks {
     ));
 
     public static final DeferredBlock<Block> INCANDESCENT_AMALGAM = register(blockWithItem(
-        "incandescent_amalgam", () -> new IncandescentAmalgamBlock(
-            Properties.of()
-                      .instabreak()
-                      .noOcclusion()), block -> new IncandescentAmalgamItem(
+        "incandescent_amalgam", () -> new IncandescentAmalgamBlock(Properties.of()
+                                                                             .instabreak()
+                                                                             .noOcclusion()),
+        block -> new IncandescentAmalgamItem(
             block, IS.of(16)
                      .food(PastelFoodComponents.INCANDESCENT_AMALGAM)
         ), InkColors.RED
@@ -4970,19 +4811,18 @@ public class PastelBlocks {
             idol(PastelBlockSoundGroups.BAT_IDOL), ParticleTypes.INSTANT_EFFECT, MobEffects.GLOWING, 0, 200, 8),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> BEE_IDOL = register(
-        blockWithItem(
-            "bee_idol", () -> new BonemealingIdolBlock(
-                idol(PastelBlockSoundGroups.BEE_IDOL), ParticleTypes.DRIPPING_HONEY), InkColors.PINK
-        ));
+    public static final DeferredBlock<Block> BEE_IDOL = register(blockWithItem(
+        "bee_idol", () -> new BonemealingIdolBlock(idol(PastelBlockSoundGroups.BEE_IDOL), ParticleTypes.DRIPPING_HONEY),
+        InkColors.PINK
+    ));
     public static final DeferredBlock<Block> BLAZE_IDOL = register(blockWithItem(
-        "blaze_idol", () -> new FirestarterIdolBlock(
-            idol(PastelBlockSoundGroups.BLAZE_IDOL), ParticleTypes.FLAME),
+        "blaze_idol", () -> new FirestarterIdolBlock(idol(PastelBlockSoundGroups.BLAZE_IDOL), ParticleTypes.FLAME),
         InkColors.PINK
     ));
     public static final DeferredBlock<Block> CAT_IDOL = register(blockWithItem(
-        "cat_idol", () -> new FallDamageNegatingIdolBlock(
-            idol(PastelBlockSoundGroups.CAT_IDOL), ParticleTypes.ENCHANTED_HIT), InkColors.PINK
+        "cat_idol",
+        () -> new FallDamageNegatingIdolBlock(idol(PastelBlockSoundGroups.CAT_IDOL), ParticleTypes.ENCHANTED_HIT),
+        InkColors.PINK
     ));
     public static final DeferredBlock<Block> CHICKEN_IDOL = register(blockWithItem(
         "chicken_idol", () -> new StatusEffectIdolBlock(
@@ -5073,12 +4913,12 @@ public class PastelBlocks {
             idol(PastelBlockSoundGroups.GLOW_SQUID_IDOL), ParticleTypes.GLOW_SQUID_INK, MobEffects.GLOWING, 0, 200),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> GOAT_IDOL = register(blockWithItem(
-        "goat_idol", () -> new KnockbackIdolBlock(
-            idol(PastelBlockSoundGroups.GOAT_IDOL), ParticleTypes.ENCHANTED_HIT,
-            5.0F, 0.5F
-        ), InkColors.PINK
-    )); // knocks mostly sideways
+    public static final DeferredBlock<Block> GOAT_IDOL = register(
+        blockWithItem(
+            "goat_idol",
+            () -> new KnockbackIdolBlock(
+                idol(PastelBlockSoundGroups.GOAT_IDOL), ParticleTypes.ENCHANTED_HIT, 5.0F, 0.5F), InkColors.PINK
+        )); // knocks mostly sideways
     public static final DeferredBlock<Block> GUARDIAN_IDOL = register(blockWithItem(
         "guardian_idol", () -> new StatusEffectIdolBlock(
             idol(PastelBlockSoundGroups.GUARDIAN_IDOL), ParticleTypes.BUBBLE, MobEffects.DIG_SLOWDOWN, 2, 200),
@@ -5105,27 +4945,26 @@ public class PastelBlocks {
             idol(PastelBlockSoundGroups.PARROT_IDOL), ParticleTypes.INSTANT_EFFECT, MobEffects.ABSORPTION, 0, 100),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> PHANTOM_IDOL = register(blockWithItem(
-        "phantom_idol", () -> new InsomniaIdolBlock(
-            idol(PastelBlockSoundGroups.PHANTOM_IDOL), ParticleTypes.POOF,
-            24000
-        ), InkColors.PINK
-    )); // +1 ingame day without sleep
+    public static final DeferredBlock<Block> PHANTOM_IDOL = register(
+        blockWithItem(
+            "phantom_idol",
+            () -> new InsomniaIdolBlock(idol(PastelBlockSoundGroups.PHANTOM_IDOL), ParticleTypes.POOF, 24000),
+            InkColors.PINK
+        )); // +1 ingame day without sleep
     public static final DeferredBlock<Block> PIG_IDOL = register(blockWithItem(
         "pig_idol", () -> new FeedingIdolBlock(idol(PastelBlockSoundGroups.PIG_IDOL), ParticleTypes.INSTANT_EFFECT, 6),
         InkColors.PINK
     ));
     public static final DeferredBlock<Block> PIGLIN_IDOL = register(blockWithItem(
-        "piglin_idol", () -> new PiglinTradeIdolBlock(
-            idol(PastelBlockSoundGroups.PIGLIN_IDOL), ParticleTypes.HEART),
+        "piglin_idol", () -> new PiglinTradeIdolBlock(idol(PastelBlockSoundGroups.PIGLIN_IDOL), ParticleTypes.HEART),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> POLAR_BEAR_IDOL = register(blockWithItem(
-        "polar_bear_idol", () -> new FreezingIdolBlock(
-            idol(PastelBlockSoundGroups.POLAR_BEAR_IDOL),
-            ParticleTypes.SNOWFLAKE
-        ), InkColors.PINK
-    ));
+    public static final DeferredBlock<Block> POLAR_BEAR_IDOL = register(
+        blockWithItem(
+            "polar_bear_idol",
+            () -> new FreezingIdolBlock(idol(PastelBlockSoundGroups.POLAR_BEAR_IDOL), ParticleTypes.SNOWFLAKE),
+            InkColors.PINK
+        ));
     public static final DeferredBlock<Block> PUFFERFISH_IDOL = register(blockWithItem(
         "pufferfish_idol", () -> new StatusEffectIdolBlock(
             idol(PastelBlockSoundGroups.PUFFERFISH_IDOL), ParticleTypes.SPLASH, MobEffects.CONFUSION, 0, 200),
@@ -5136,12 +4975,12 @@ public class PastelBlocks {
             idol(PastelBlockSoundGroups.RABBIT_IDOL), ParticleTypes.INSTANT_EFFECT, MobEffects.JUMP, 3, 100),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> SHEEP_IDOL = register(blockWithItem(
-        "sheep_idol", () -> new ShearingIdolBlock(
-            idol(PastelBlockSoundGroups.SHEEP_IDOL), ParticleTypes.ENCHANTED_HIT,
-            6
-        ), InkColors.PINK
-    ));
+    public static final DeferredBlock<Block> SHEEP_IDOL = register(
+        blockWithItem(
+            "sheep_idol",
+            () -> new ShearingIdolBlock(idol(PastelBlockSoundGroups.SHEEP_IDOL), ParticleTypes.ENCHANTED_HIT, 6),
+            InkColors.PINK
+        ));
     public static final DeferredBlock<Block> SHULKER_IDOL = register(blockWithItem(
         "shulker_idol", () -> new StatusEffectIdolBlock(
             idol(PastelBlockSoundGroups.SHULKER_IDOL), ParticleTypes.END_ROD, MobEffects.LEVITATION, 0, 100),
@@ -5149,7 +4988,9 @@ public class PastelBlocks {
     ));
     public static final DeferredBlock<Block> SILVERFISH_IDOL = register(blockWithItem(
         "silverfish_idol", () -> new SilverfishInsertingIdolBlock(
-            idol(PastelBlockSoundGroups.SILVERFISH_IDOL), ParticleTypes.EXPLOSION), InkColors.PINK
+            idol(PastelBlockSoundGroups.SILVERFISH_IDOL),
+            ParticleTypes.EXPLOSION
+        ), InkColors.PINK
     ));
     public static final DeferredBlock<Block> SKELETON_IDOL = register(blockWithItem(
         "skeleton_idol", () -> new ProjectileIdolBlock(
@@ -5165,12 +5006,12 @@ public class PastelBlocks {
             }
         }, InkColors.PINK
     ));
-    public static final DeferredBlock<Block> SLIME_IDOL = register(blockWithItem(
-        "slime_idol", () -> new SlimeSizingIdolBlock(
-            idol(PastelBlockSoundGroups.SLIME_IDOL), ParticleTypes.ITEM_SLIME,
-            6, 8
-        ), InkColors.PINK
-    ));
+    public static final DeferredBlock<Block> SLIME_IDOL = register(
+        blockWithItem(
+            "slime_idol",
+            () -> new SlimeSizingIdolBlock(idol(PastelBlockSoundGroups.SLIME_IDOL), ParticleTypes.ITEM_SLIME, 6, 8),
+            InkColors.PINK
+        ));
     public static final DeferredBlock<Block> SNOW_GOLEM_IDOL = register(blockWithItem(
         "snow_golem_idol", () -> new ProjectileIdolBlock(
             idol(PastelBlockSoundGroups.SNOW_GOLEM_IDOL), ParticleTypes.SNOWFLAKE, EntityType.SNOWBALL,
@@ -5231,7 +5072,9 @@ public class PastelBlocks {
     ));
     public static final DeferredBlock<Block> ZOMBIE_IDOL = register(blockWithItem(
         "zombie_idol", () -> new VillagerConvertingIdolBlock(
-            idol(PastelBlockSoundGroups.ZOMBIE_IDOL), ParticleTypes.ENCHANTED_HIT), InkColors.PINK
+            idol(PastelBlockSoundGroups.ZOMBIE_IDOL),
+            ParticleTypes.ENCHANTED_HIT
+        ), InkColors.PINK
     ));
 
     // FLUIDS

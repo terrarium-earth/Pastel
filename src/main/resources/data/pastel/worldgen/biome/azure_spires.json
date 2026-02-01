@@ -13,6 +13,12 @@
       "min_delay": 0,
       "max_delay": 0,
       "replace_current_music": true
+    },
+    "particle": {
+      "options": {
+        "type": "pastel:azure_aura"
+      },
+      "probability": 0.00125
     }
   },
   "spawners": {

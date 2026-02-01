@@ -90,28 +90,6 @@ public class AzureCrystalBlock extends CloakedOreBlock {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
-    @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        super.animateTick(state, world, pos, random);
-
-        if (!BlockHiddenType.isVisibleClient(state)) return;
-
-        if (world.getRandom()
-                 .nextFloat() >= 0.02) return;
-
-        ParticleHelper.playTriangulatedParticle(
-            world, PastelParticleTypes.AZURE_AURA, 5, false, new Vec3(2, 0, 2), 0,
-            true, Vec3.atLowerCornerOf(pos),
-            new Vec3(0, 0.07D + random.nextDouble() * 0.06, 0)
-        );
-        ParticleHelper.playParticleAroundBlockSides(
-            world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(),
-            random.nextIntBetweenInclusive(1, 3), Vec3.ZERO
-        );
-        world.playSound(null, pos, PastelSounds.SOFT_HUM, SoundSource.BLOCKS, 1F, random.nextFloat() * 0.5F + 1F);
-    }
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(WARDED);

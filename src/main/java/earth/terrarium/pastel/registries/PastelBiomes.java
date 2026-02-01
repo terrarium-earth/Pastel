@@ -38,23 +38,6 @@ public class PastelBiomes {
                 Climate.Parameter.point(1.0F), Climate.Parameter.span(-1.0F, 1.0F), 0L
             )
         );
-
-        SurfaceRules.RuleSource azuriceFloor = SurfaceRules.ifTrue(
-            SurfaceRules.isBiome(PastelBiomes.AZURE_SPIRES), SurfaceRules.ifTrue(
-                SurfaceRules.ON_FLOOR, SurfaceRules.state(
-                    Blocks.BLUE_ICE.defaultBlockState())
-            )
-        );
-
-        SurfaceRules.RuleSource azuriceCeiling = SurfaceRules.ifTrue(
-            SurfaceRules.isBiome(PastelBiomes.AZURE_SPIRES), SurfaceRules.ifTrue(
-                SurfaceRules.ON_CEILING, SurfaceRules.state(
-                    Blocks.BLUE_ICE.defaultBlockState())
-            )
-        );
-
-        SurfaceGeneration.addOverworldSurfaceRules(
-            ResourceLocation.withDefaultNamespace("rules/overworld"), azuriceFloor, azuriceCeiling);
     }
 
 }
