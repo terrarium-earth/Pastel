@@ -13,7 +13,7 @@ public class PedestalPreviewSlot extends ReadOnlySlot implements SlotWithOnClick
 	public PedestalPreviewSlot(PedestalBlockEntity pedestal, int index, int x, int y) {
 		super(pedestal, index, x, y);
 	}
-	
+
 	@Override
 	public ItemStack getItem() {
 		var out = ItemStack.EMPTY;
@@ -26,20 +26,22 @@ public class PedestalPreviewSlot extends ReadOnlySlot implements SlotWithOnClick
 		var rec = pedestal.recipe.get().value();
 
 		if (rec instanceof PedestalRecipe pr) {
-			out = pr.getResultItem(registries);
+            if(pr.matches(pedestal.getInput(),pedestal.getLevel()))
+			    out = pr.getResultItem(registries);
 		}
 		else {
-			out = rec.assemble(pedestal.getInput().getCraftingGridInput(), registries);
+            if(rec.matches(pedestal.getInput().getCraftingGridInput(),pedestal.getLevel()))
+			    out = rec.assemble(pedestal.getInput().getCraftingGridInput(), registries);
 		}
-		
+
 		return out;
 	}
-	
+
 	@Override
 	public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
 		if (this.container instanceof PedestalBlockEntity pedestalBlockEntity) {
 			if (player instanceof ServerPlayer serverPlayerEntity) {
-				if (pedestalBlockEntity.recipe!= null) {
+				if (pedestalBlockEntity.recipe.isPresent()) {
 					Support.grantAdvancementCriterion(serverPlayerEntity, "fail_to_take_item_out_of_pedestal", "try_take_out_item_from_pedestal");
 				}
 			}
