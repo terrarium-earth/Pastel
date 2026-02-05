@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "pastel:polished_amethyst_block",
-    "pastel:polished_citrine_block",
-    "pastel:polished_topaz_block",
-    "pastel:polished_onyx_block",
-    "pastel:polished_moonstone_block"
+    "minecraft:amethyst_block",
+    "pastel:citrine_block",
+    "pastel:topaz_block",
+    "pastel:onyx_block",
+    "pastel:moonstone_block"
   ]
 }
