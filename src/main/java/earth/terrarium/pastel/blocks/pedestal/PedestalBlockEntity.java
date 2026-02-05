@@ -35,6 +35,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -225,6 +226,11 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
         if (level instanceof ServerLevel sl) {
             var finalXp = xp;
             var finalOut = out;
+
+            ServerPlayer owner = (ServerPlayer) getOwnerIfOnline();
+            if (owner != null) {
+                PastelCriteria.PEDESTAL_CRAFTING.trigger(owner, finalOut, (int) finalXp, totalTime);
+            }
 
             Support.areaCriterion(sl, Support.H_RANGE, getBlockPos(), getTier().unlockAdvancementId, p ->
                 PastelCriteria.PEDESTAL_CRAFTING.trigger(p, finalOut, (int) finalXp, totalTime));
