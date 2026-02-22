@@ -1,0 +1,20 @@
+{
+  "type": "pastel:drop_self",
+  "block": {
+    "blocks": [
+      "twilightforest:time_log_core",
+      "twilightforest:transformation_log_core",
+      "twilightforest:mining_log_core",
+      "twilightforest:sorting_log_core"
+    ]
+  },
+  "state_properties_to_copy": [
+    "active"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ]
+}
