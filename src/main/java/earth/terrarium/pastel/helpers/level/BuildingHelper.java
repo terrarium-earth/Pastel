@@ -86,11 +86,43 @@ public class BuildingHelper {
         }
     }
 
+    // only searches positions normal to the given direction
+    public static @NotNull List<BlockPos> getConnectedBlocks(
+        @NotNull Level world, @NotNull BlockPos blockPos, long maxCount, int maxRange, Direction direction) {
+        switch (direction.getAxis()) {
+            case X -> {
+                return getConnectedBlocks(
+                    world, blockPos, maxCount, maxRange, Direction.DOWN, Direction.UP, Direction.NORTH,
+                    Direction.SOUTH
+                );
+            }
+            case Y -> {
+                return getConnectedBlocks(
+                    world, blockPos, maxCount, maxRange, Direction.EAST, Direction.WEST, Direction.NORTH,
+                    Direction.SOUTH
+                );
+            }
+            case Z -> {
+                return getConnectedBlocks(
+                    world, blockPos, maxCount, maxRange, Direction.DOWN, Direction.UP, Direction.EAST, Direction.WEST);
+            }
+            default -> {
+                return getConnectedBlocks(world, blockPos, maxCount, maxRange);
+            }
+        }
+    }
+
+    // searches all directions
+    public static @NotNull List<BlockPos> getConnectedBlocks(
+        @NotNull Level world, @NotNull BlockPos blockPos, long maxCount, int maxRange) {
+        return getConnectedBlocks(world, blockPos, maxCount, maxRange, Direction.values());
+    }
+
     /**
      * A simple implementation of a breadth first search
      */
     public static @NotNull List<BlockPos> getConnectedBlocks(
-        @NotNull Level world, @NotNull BlockPos blockPos, long maxCount, int maxRange) {
+        @NotNull Level world, @NotNull BlockPos blockPos, long maxCount, int maxRange, Direction... directions) {
         BlockState originState = world.getBlockState(blockPos);
         Block originBlock = originState.getBlock();
 
@@ -106,7 +138,7 @@ public class BuildingHelper {
             if (currentPos == null) {
                 break;
             } else {
-                for (Direction direction : Direction.values()) {
+                for (Direction direction : directions) {
                     BlockPos offsetPos = currentPos.relative(direction);
                     if (!visitedPositions.contains(offsetPos)) {
                         visitedPositions.add(offsetPos);
