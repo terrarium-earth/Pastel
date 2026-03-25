@@ -123,8 +123,8 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
         return blockEntity;
     }
 
-    public AutoCraftingMode getCraftingMode() {
-        return AutoCraftingMode.values()[propertyDelegate.get(0)];
+    public CompactionCraftingMode getCraftingMode() {
+        return CompactionCraftingMode.values()[propertyDelegate.get(0)];
     }
 
 }
