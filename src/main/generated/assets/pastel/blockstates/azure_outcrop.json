@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
-      "model": "pastel:block/azure_outcrop"
+    "spire_part=base": {
+      "model": "pastel:block/azure_outcrop_base"
+    },
+    "spire_part=body": {
+      "model": "pastel:block/azure_outcrop_body"
+    },
+    "spire_part=tip": {
+      "model": "pastel:block/azure_outcrop_tip"
     }
   }
 }

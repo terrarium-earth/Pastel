@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.data.models.block.resource;
 
 import earth.terrarium.pastel.blocks.geology.AzureCrystalBlock;
+import earth.terrarium.pastel.blocks.geology.AzuriteOutcropBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.client.PastelTexturedModels;
@@ -17,22 +18,71 @@ public class OreBlockModels {
 
         // hell.
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AZURE_CRYSTAL.get())
-                                                                .with(PropertyDispatch.property(AzureCrystalBlock.WARDED)
+                                                                .with(
+                                                                    PropertyDispatch.property(AzureCrystalBlock.WARDED)
+                                                                                    .generate(
+                                                                                        (warded) -> PastelModelHelper.createModelVariant(
+                                                                                            PastelTexturedModels.cubeAll(
+                                                                                                                    b -> b,
+                                                                                                                    warded ? "_warded"
+                                                                                                                           : ""
+                                                                                                                )
+                                                                                                                .createWithSuffix(
+                                                                                                                    PastelBlocks.AZURE_CRYSTAL.get(),
+                                                                                                                    warded
+                                                                                                                    ?
+                                                                                                                    "_warded"
+                                                                                                                    :
+                                                                                                                    "",
+                                                                                                                    generators.modelOutput
+                                                                                                                )))));
+        // i hate everything about this
+        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AZURE_OUTCROP.get())
+                                                                .with(PropertyDispatch.property(
+                                                                                          AzuriteOutcropBlock.SPIRE_PART)
                                                                                       .generate(
-                                                                                          (warded) -> PastelModelHelper.createModelVariant(
-                                                                                              PastelTexturedModels.cubeAll(
-                                                                                                                      b -> b,
-                                                                                                                      warded ? "_warded"
-                                                                                                                             : ""
-                                                                                                                  )
-                                                                                                                  .createWithSuffix(
-                                                                                                                      PastelBlocks.AZURE_CRYSTAL.get(),
-                                                                                                                      warded ? "_warded"
-                                                                                                                             : "",
-                                                                                                                      generators.modelOutput
-                                                                                                                  )))));
-        PastelModelHelper.BLOCK.cross(generators,PastelBlocks.AZURE_OUTCROP);
-        PastelModelHelper.BLOCK.simple(generators,PastelBlocks.BUDDING_AZURITE);
+                                                                                          (part) -> {
+                                                                                              switch (part) {
+                                                                                                  case BODY -> {
+                                                                                                      return PastelModelHelper.createModelVariant(
+                                                                                                          PastelTexturedModels.cross(
+                                                                                                                                  b -> b,
+                                                                                                                                  "_body"
+                                                                                                                              )
+                                                                                                                              .createWithSuffix(
+                                                                                                                                  PastelBlocks.AZURE_OUTCROP.get(),
+                                                                                                                                  "_body",
+                                                                                                                                  generators.modelOutput
+                                                                                                                              ));
+                                                                                                  }
+                                                                                                  case BASE -> {
+                                                                                                      return PastelModelHelper.createModelVariant(
+                                                                                                          PastelTexturedModels.cross(
+                                                                                                                                  b -> b,
+                                                                                                                                  "_base"
+                                                                                                                              )
+                                                                                                                              .createWithSuffix(
+                                                                                                                                  PastelBlocks.AZURE_OUTCROP.get(),
+                                                                                                                                  "_base",
+                                                                                                                                  generators.modelOutput
+                                                                                                                              ));
+                                                                                                  }
+                                                                                                  case TIP -> {
+                                                                                                      return PastelModelHelper.createModelVariant(
+                                                                                                          PastelTexturedModels.cross(
+                                                                                                                                  b -> b,
+                                                                                                                                  "_tip"
+                                                                                                                              )
+                                                                                                                              .createWithSuffix(
+                                                                                                                                  PastelBlocks.AZURE_OUTCROP.get(),
+                                                                                                                                  "_tip",
+                                                                                                                                  generators.modelOutput
+                                                                                                                              ));
+                                                                                                  }
+                                                                                              }
+                                                                                              return null;
+                                                                                          })));
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.BUDDING_AZURITE);
 
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.VIRIDIAN_CRYSTAL);
 
