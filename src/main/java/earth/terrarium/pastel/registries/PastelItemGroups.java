@@ -1528,11 +1528,8 @@ public class PastelItemGroups {
                                                                        entries.accept(
                                                                            PastelItems.BISMUTH_CRYSTAL.get());
 
-                                                                       entries.accept(PastelBlocks.MALACHITE_ORE.get());
                                                                        entries.accept(
-                                                                           PastelBlocks.DEEPSLATE_MALACHITE_ORE.get());
-                                                                       entries.accept(
-                                                                           PastelBlocks.BLACKSLAG_MALACHITE_ORE.get());
+                                                                           PastelBlocks.VIRIDIAN_CRYSTAL.get());
                                                                        entries.accept(PastelItems.RAW_MALACHITE.get());
                                                                        entries.accept(
                                                                            PastelBlocks.SMALL_MALACHITE_BUD.get());

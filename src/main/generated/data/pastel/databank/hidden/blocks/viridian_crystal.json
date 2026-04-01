@@ -7,16 +7,16 @@
         "type": "databank:actual_player"
       }
     },
-    "hidden_as": "minecraft:stone",
+    "hidden_as": "pastel:blackslag",
     "name_override": {
       "extra": [
         {
           "translate": "pastel.cloaked.suffix"
         }
       ],
-      "translate": "block.minecraft.stone"
+      "translate": "block.pastel.blackslag"
     },
-    "original": "pastel:malachite_ore"
+    "original": "pastel:viridian_crystal"
   },
   "condition": {
     "type": "databank:advancement",

@@ -3333,16 +3333,8 @@ public class PastelBlocks {
         ), IS.of(Rarity.UNCOMMON), InkColors.BLUE
     ));
 
-    public static final DeferredBlock<Block> MALACHITE_ORE = register(blockWithItem(
-        "malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), ore()), IS.of(Rarity.UNCOMMON),
-        InkColors.GREEN
-    ));
-    public static final DeferredBlock<Block> DEEPSLATE_MALACHITE_ORE = register(blockWithItem(
-        "deepslate_malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), deepslateOre()),
-        IS.of(Rarity.UNCOMMON), InkColors.GREEN
-    ));
-    public static final DeferredBlock<Block> BLACKSLAG_MALACHITE_ORE = register(blockWithItem(
-        "blackslag_malachite_ore", () -> new CloakedOreBlock(UniformInt.of(7, 11), blackslagOre().noOcclusion()),
+    public static final DeferredBlock<Block> VIRIDIAN_CRYSTAL = register(blockWithItem(
+        "viridian_crystal", () -> new CloakedOreBlock(UniformInt.of(7, 11), blackslagOre().noOcclusion()),
         IS.of(Rarity.UNCOMMON), InkColors.GREEN
     ));
     public static final DeferredBlock<Block> MALACHITE_BLOCK = register(blockWithItem(
@@ -5585,7 +5577,7 @@ public class PastelBlocks {
         PastelModelHelper.BLOCK.cutout(PastelBlocks.AMARANTH_BUSHEL);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.AZURE_CRYSTAL);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.AZURE_OUTCROP);
-        PastelModelHelper.BLOCK.translucent(PastelBlocks.BLACKSLAG_MALACHITE_ORE);
+        PastelModelHelper.BLOCK.translucent(PastelBlocks.VIRIDIAN_CRYSTAL);
 
         if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.AE2_ID)) {
             PastelModelHelper.BLOCK.cutout(AE2Compat.SMALL_FLUIX_BUD);

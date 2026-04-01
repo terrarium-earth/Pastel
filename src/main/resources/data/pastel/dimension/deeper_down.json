@@ -203,36 +203,6 @@
             ],
             "erosion": [
               0,
-              0.75
-            ],
-            "weirdness": [
-              0,
-              0.5
-            ],
-            "depth": [
-              -0.5,
-              0.5
-            ],
-            "offset": 0
-          }
-        },
-        {
-          "biome": "pastel:viridian_caverns",
-          "parameters": {
-            "temperature": [
-              0,
-              0.5
-            ],
-            "humidity": [
-              -1,
-              0
-            ],
-            "continentalness": [
-              0.45,
-              1
-            ],
-            "erosion": [
-              0.75,
               1
             ],
             "weirdness": [

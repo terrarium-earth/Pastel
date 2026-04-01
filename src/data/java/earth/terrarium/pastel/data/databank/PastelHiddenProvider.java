@@ -175,14 +175,12 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
             PastelAdvancements.Milestones.REVEAL_QUITOXIC_REEDS
         );
 
-        hideOre(null, PastelBlocks.AZURE_CRYSTAL.get(), null, PastelAdvancements.Milestones.REVEAL_AZURITE);
-
+        hideBlock(PastelBlocks.AZURE_CRYSTAL.get(), Blocks.DEEPSLATE, PastelAdvancements.Milestones.REVEAL_AZURITE);
         hideBlock(PastelBlocks.AZURE_OUTCROP.get(), Blocks.DEEPSLATE, PastelAdvancements.Milestones.REVEAL_AZURITE);
         hideBlock(PastelBlocks.BUDDING_AZURITE.get(), Blocks.DEEPSLATE, PastelAdvancements.Milestones.REVEAL_AZURITE);
 
-        hideOre(
-            PastelBlocks.MALACHITE_ORE.get(), PastelBlocks.DEEPSLATE_MALACHITE_ORE.get(),
-            PastelBlocks.BLACKSLAG_MALACHITE_ORE.get(), PastelAdvancements.Milestones.REVEAL_MALACHITE
+        hideBlock(
+            PastelBlocks.VIRIDIAN_CRYSTAL.get(), PastelBlocks.BLACKSLAG.get(), PastelAdvancements.Milestones.REVEAL_MALACHITE
         );
         hideOre(
             PastelBlocks.SHIMMERSTONE_ORE.get(), PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get(),null,

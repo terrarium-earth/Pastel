@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:ore",
+  "type": "pastel:air_exposed_ore",
   "config": {
     "size": 32,
     "discard_chance_on_air_exposure": 0.0,
@@ -10,7 +10,7 @@
           "tag": "minecraft:stone_ore_replaceables"
         },
         "state": {
-          "Name": "pastel:malachite_ore"
+          "Name": "pastel:viridian_crystal"
         }
       },
       {
@@ -19,16 +19,16 @@
           "tag": "minecraft:deepslate_ore_replaceables"
         },
         "state": {
-          "Name": "pastel:deepslate_malachite_ore"
+          "Name": "pastel:viridian_crystal"
         }
       },
       {
         "target": {
-          "predicate_type": "minecraft:tag_match",
-          "tag": "pastel:blackslag_ore_replaceables"
+          "predicate_type": "minecraft:block_match",
+          "block": "pastel:overgrown_blackslag"
         },
         "state": {
-          "Name": "pastel:blackslag_malachite_ore"
+          "Name": "pastel:viridian_crystal"
         }
       }
     ]

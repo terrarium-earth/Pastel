@@ -22,6 +22,7 @@ public class PastelFeatures {
         GeodeConfiguration.CODEC);
     public static Feature<BlockStateFeatureConfig> AIR_EXPOSED_STATE = new AirExposedStateFeature(
         BlockStateFeatureConfig.CODEC);
+    public static Feature<OreConfiguration> AIR_EXPOSED_ORE = new AirExposedOreFeature(OreConfiguration.CODEC);
     public static Feature<BlockStateFeatureConfig> CRYSTAL_SPIKE = new CrystalSpikeFeature(
         BlockStateFeatureConfig.CODEC);
     public static Feature<HyperspecificOutcropFeatureConfig> AZURE_OUTCROP = new HyperspecificOutcropFeature(
@@ -53,6 +54,7 @@ public class PastelFeatures {
         registerFeature("weighted_random_feature", WEIGHTED_RANDOM_FEATURE);
         registerFeature("air_check_geode", AIR_CHECK_GEODE);
         registerFeature("air_exposed_state", AIR_EXPOSED_STATE);
+        registerFeature("air_exposed_ore", AIR_EXPOSED_ORE);
         registerFeature("crystal_spike", CRYSTAL_SPIKE);
         registerFeature("azure_outcrop", AZURE_OUTCROP);
         registerFeature("random_buds", RANDOM_BUDS);
