@@ -3717,6 +3717,8 @@ public class PastelBlocks {
         InkColors.WHITE
     ));
 
+    public static final DeferredBlock<Block> FROSTED_DEEPSLATE = register(blockWithItem("frosted_deepslate",()->new Block(Properties.ofFullCopy(Blocks.DEEPSLATE)),InkColors.BLUE));
+
     public static final DeferredBlock<Block> DEEPSLATE_TOPAZ_ORE = register(blockWithItem(
         "deepslate_topaz_ore",
         () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, deepslateOre(), PastelGemstoneColor.CYAN),

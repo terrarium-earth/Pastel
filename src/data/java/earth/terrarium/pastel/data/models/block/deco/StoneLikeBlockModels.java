@@ -477,7 +477,7 @@ public class StoneLikeBlockModels {
         PastelModelHelper.BLOCK.defaultUpFacing(
             generators, PastelBlocks.POLISHED_BASAL_MARBLE, TexturedModel.CUBE_TOP_BOTTOM);
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DOWNSTONE);
-
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.FROSTED_DEEPSLATE);
     }
 
     public static void generateItemModels(ItemModelGenerators generators) {

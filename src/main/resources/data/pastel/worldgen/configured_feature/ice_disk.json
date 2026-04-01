@@ -9,21 +9,10 @@
     },
     "state_provider": {
       "fallback": {
-        "type": "minecraft:weighted_state_provider",
-        "entries": [
-          {
-            "data": {
-              "Name": "minecraft:blue_ice"
-            },
-            "weight": 5
-          },
-          {
-            "data": {
-              "Name": "minecraft:packed_ice"
-            },
-            "weight": 1
-          }
-        ]
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "pastel:frosted_deepslate"
+        }
       },
       "rules": []
     },
