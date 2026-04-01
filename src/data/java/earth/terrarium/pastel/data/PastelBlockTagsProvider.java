@@ -44,7 +44,7 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
             PastelBlocks.AZURE_CRYSTAL.get()
         );
         tag(PastelBlockTags.CRYSTAL_SPIKE_BASES).addTag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
-                                                .addTag(BlockTags.ICE);
+                                                .add(PastelBlocks.FROSTED_DEEPSLATE.get());
         tag(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST).addTag(PastelBlockTags.UNBREAKABLE);
 
     }
