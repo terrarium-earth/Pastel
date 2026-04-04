@@ -2,7 +2,7 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "item": "pastel:malachite_ore"
+      "item": "pastel:viridian_crystal"
     }
   ],
   "processing_time": 350,

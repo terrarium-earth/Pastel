@@ -10,7 +10,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "pastel:deepslate_malachite_ore",
+              "name": "pastel:viridian_crystal",
               "conditions": [
                 {
                   "condition": "minecraft:match_tool",
