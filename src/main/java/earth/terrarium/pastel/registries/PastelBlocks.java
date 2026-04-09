@@ -1918,6 +1918,10 @@ public class PastelBlocks {
             Properties.ofFullCopy(PastelBlocks.SHIMMERSTONE_LIGHT.get())
                       .randomTicks())
     ));
+//    public static final DeferredBlock<Block> ENERGETIC_MOTE = register(block(
+//        "energetic_mote", () -> new EnergeticMoteBlock(
+//            Properties.ofFullCopy(PastelBlocks.SHIMMERSTONE_LIGHT.get()))
+//    ));
 
     private static Properties decay(
         MapColor mapColor, SoundType soundGroup, float strength, float resistance, PushReaction pistonBehavior) {

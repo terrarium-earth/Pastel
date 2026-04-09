@@ -390,11 +390,11 @@ public class PastelItemLang {
         provider.add("item.pastel.nightdew_sprout.tooltip", "§oFragrant like tea");
         provider.add("item.pastel.nightfalls_blade.when_struck", "When Struck:");
         provider.add("item.pastel.onyx_glass_arrow.tooltip", "-gravity well-");
-        provider.add("item.pastel.paintbrush.ability.block_coloring", "- Block Coloring");
-        provider.add("item.pastel.paintbrush.ability.header", "Abilities:");
-        provider.add("item.pastel.paintbrush.ability.ink_slinging", "- Ink Slinging");
-        provider.add("item.pastel.paintbrush.ability.pedestal_triggering", "- Pedestal Triggering");
-        provider.add("item.pastel.paintbrush.tooltip.select_color", "Crouch-Use to select a Color");
+        provider.add("item.pastel.paintbrush.tooltip.menu", " to change mode and color");
+        provider.add("item.pastel.paintbrush.tooltip.info", "Use on blocks to gather information");
+        provider.add("item.pastel.paintbrush.tooltip.paint", "Use on blocks or entities to paint, use on air to launch a paint projectile");
+        provider.add("item.pastel.paintbrush.tooltip.spell", "Use to cast an Ink Cantrip");
+        provider.add("item.pastel.paintbrush.tooltip.color.selected", "Selected color: ");
         provider.add("item.pastel.tuning_stamp.controls", "Right Click to start/apply links");
         provider.add("item.pastel.tuning_stamp.controls2", "Strike a block to clear the stamp");
         provider.add("item.pastel.tuning_stamp.controls3", "Shift to remain tuned to the last node");

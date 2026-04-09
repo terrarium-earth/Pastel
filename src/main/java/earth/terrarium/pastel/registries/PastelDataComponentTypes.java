@@ -194,6 +194,10 @@ public class PastelDataComponentTypes {
                                                      .networkSynchronized(ByteBufCodecs.INT)
     );
 
+    public static final DataComponentType<PaintbrushComponent> PAINTBRUSH = register(
+        "paintbrush", builder -> builder.persistent(PaintbrushComponent.CODEC)
+    );
+
     public static <T> DataComponentType<T> register(
         String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
         var type = builderOperator.apply(DataComponentType.builder())

@@ -79,6 +79,9 @@ public class FunctionalBlockModels {
         );
         PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get(), PastelBlocks.SHIMMERSTONE_LIGHT.get());
+//        PastelModelHelper.BLOCK.parented(
+//            generators, PastelBlocks.ENERGETIC_MOTE.get(), PastelBlocks.SHIMMERSTONE_LIGHT.get()
+//        );
 
         decay(generators, PastelBlocks.FADING);
         decay(generators, PastelBlocks.FAILING);

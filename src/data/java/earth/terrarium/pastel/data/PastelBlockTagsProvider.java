@@ -6,6 +6,7 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -43,7 +44,20 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
             PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get()
         );
         tag(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST).addTag(PastelBlockTags.UNBREAKABLE);
-
+        tag(PastelBlockTags.CRACKED_BLOCKS).add(
+            Blocks.CRACKED_DEEPSLATE_BRICKS, Blocks.CRACKED_DEEPSLATE_TILES, Blocks.CRACKED_NETHER_BRICKS,
+            Blocks.CRACKED_STONE_BRICKS, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, Blocks.INFESTED_CRACKED_STONE_BRICKS
+        );
+        tag(PastelBlockTags.REALLY_FALLING_BLOCK_BLACKLISTED).addOptionalTag(
+            ResourceLocation.fromNamespaceAndPath("c", "relocation_not_supported"));
+        tag(PastelBlockTags.FALLING_BLOCK_BLACKLISTED).addTag(PastelBlockTags.REALLY_FALLING_BLOCK_BLACKLISTED)
+                                                      .add(
+                                                          PastelBlocks.BUDDING_CITRINE.get(),
+                                                          PastelBlocks.BUDDING_MOONSTONE.get(),
+                                                          PastelBlocks.BUDDING_ONYX.get(),
+                                                          PastelBlocks.BUDDING_TOPAZ.get(),
+                                                          Blocks.SPAWNER, Blocks.TRIAL_SPAWNER
+                                                      );
     }
 
 }
