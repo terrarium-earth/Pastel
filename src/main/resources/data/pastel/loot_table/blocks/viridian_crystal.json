@@ -13,8 +13,19 @@
               "name": "pastel:viridian_crystal",
               "conditions": [
                 {
-                  "condition": "pastel:near_moonstone",
-                  "search_radius": 10
+                  "condition": "minecraft:any_of",
+                  "terms": [
+                    {
+                      "condition": "pastel:near_moonstone",
+                      "search_radius": 10
+                    },
+                    {
+                      "condition": "minecraft:match_tool",
+                      "predicate": {
+                        "items": "#pastel:workstaffs"
+                      }
+                    }
+                  ]
                 },
                 {
                   "condition": "minecraft:match_tool",
@@ -38,8 +49,19 @@
               "name": "pastel:raw_malachite",
               "conditions": [
                 {
-                  "condition": "pastel:near_moonstone",
-                  "search_radius": 10
+                  "condition": "minecraft:any_of",
+                  "terms": [
+                    {
+                      "condition": "pastel:near_moonstone",
+                      "search_radius": 10
+                    },
+                    {
+                      "condition": "minecraft:match_tool",
+                      "predicate": {
+                        "items": "#pastel:workstaffs"
+                      }
+                    }
+                  ]
                 }
               ],
               "functions": [
@@ -69,8 +91,19 @@
                 {
                   "condition": "minecraft:inverted",
                   "term": {
-                    "condition": "pastel:near_moonstone",
-                    "search_radius": 10
+                    "condition": "minecraft:any_of",
+                    "terms": [
+                      {
+                        "condition": "pastel:near_moonstone",
+                        "search_radius": 10
+                      },
+                      {
+                        "condition": "minecraft:match_tool",
+                        "predicate": {
+                          "items": "#pastel:workstaffs"
+                        }
+                      }
+                    ]
                   }
                 }
               ]
