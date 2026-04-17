@@ -41,7 +41,11 @@
       "pastel:azure_spire",
       "pastel:azure_outcrop"
     ],
-    [],
+    [
+      "pastel:snowgrave_spider",
+      "pastel:snowgrave_skeleton",
+      "pastel:snowgrave_zombie"
+    ],
     [],
     [],
     []

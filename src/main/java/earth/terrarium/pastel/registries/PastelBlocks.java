@@ -116,10 +116,7 @@ import earth.terrarium.pastel.blocks.fluid.MidnightSolutionFluidBlock;
 import earth.terrarium.pastel.blocks.fusion_shrine.FusionShrineBlock;
 import earth.terrarium.pastel.blocks.gemstone.PastelBuddingBlock;
 import earth.terrarium.pastel.blocks.gemstone.PastelGemstoneBlock;
-import earth.terrarium.pastel.blocks.geology.AzureCrystalBlock;
-import earth.terrarium.pastel.blocks.geology.AzuriteOutcropBlock;
-import earth.terrarium.pastel.blocks.geology.BuddingAzuriteBlock;
-import earth.terrarium.pastel.blocks.geology.ShimmerstoneOreBlock;
+import earth.terrarium.pastel.blocks.geology.*;
 import earth.terrarium.pastel.blocks.gravity.FloatBlock;
 import earth.terrarium.pastel.blocks.gravity.FloatBlockItem;
 import earth.terrarium.pastel.blocks.idols.AoEStatusEffectIdolBlock;
@@ -3718,6 +3715,7 @@ public class PastelBlocks {
     ));
 
     public static final DeferredBlock<Block> FROSTED_DEEPSLATE = register(blockWithItem("frosted_deepslate",()->new Block(Properties.ofFullCopy(Blocks.DEEPSLATE)),InkColors.BLUE));
+    public static final DeferredBlock<Block> SNOWGRAVE = register(block("snowgrave",()->new SnowgraveBlock(Properties.ofFullCopy(Blocks.ICE))));
 
     public static final DeferredBlock<Block> DEEPSLATE_TOPAZ_ORE = register(blockWithItem(
         "deepslate_topaz_ore",
@@ -5265,6 +5263,7 @@ public class PastelBlocks {
         PastelModelHelper.BLOCK.translucent(PastelBlocks.RED_LAMP);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.WHITE_LAMP);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.YELLOW_LAMP);
+        PastelModelHelper.BLOCK.translucent(PastelBlocks.SNOWGRAVE);
         PastelModelHelper.BLOCK.mippedCutout(PastelBlocks.PYRITE_RIPPER);
         PastelModelHelper.BLOCK.cutout(PastelBlocks.SLATE_NOXSHROOM);
         PastelModelHelper.BLOCK.cutout(PastelBlocks.EBONY_NOXSHROOM);

@@ -50,6 +50,8 @@ public class PastelFeatures {
     public static Feature<WallPatchFeatureConfig> WALL_PATCH = new WallPatchFeature(WallPatchFeatureConfig.CODEC);
     public static Feature<AshDunesFeatureConfig> ASH_DUNES = new AshDunesFeature(AshDunesFeatureConfig.CODEC);
 
+    public static Feature<SnowgraveFeatureConfig> SNOWGRAVE = new SnowgraveFeature(SnowgraveFeatureConfig.CODEC);
+
     public static void register(IEventBus bus) {
         registerFeature("weighted_random_feature", WEIGHTED_RANDOM_FEATURE);
         registerFeature("air_check_geode", AIR_CHECK_GEODE);
@@ -71,6 +73,7 @@ public class PastelFeatures {
         registerFeature("exposed_fossil", EXPOSED_FOSSIL);
         registerFeature("wall_patch", WALL_PATCH);
         registerFeature("ash_dunes", ASH_DUNES);
+        registerFeature("snowgrave", SNOWGRAVE);
         REGISTER.register(bus);
     }
 

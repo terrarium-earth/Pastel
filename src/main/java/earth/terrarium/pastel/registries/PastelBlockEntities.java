@@ -32,6 +32,8 @@ import earth.terrarium.pastel.blocks.energy.ColorPickerBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.energy.CrystalApothecaryBlockEntity;
 import earth.terrarium.pastel.blocks.fusion_shrine.FusionShrineBlockEntity;
 import earth.terrarium.pastel.blocks.fusion_shrine.FusionShrineBlockEntityRenderer;
+import earth.terrarium.pastel.blocks.geology.SnowgraveBlockEntity;
+import earth.terrarium.pastel.blocks.geology.SnowgraveBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.item_bowl.ItemBowlBlockEntity;
 import earth.terrarium.pastel.blocks.item_bowl.ItemBowlBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.item_roundel.ItemRoundelBlockEntity;
@@ -141,6 +143,7 @@ public class PastelBlockEntities {
         PRESERVATION_BLOCK_DETECTOR;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<DeepLightBlockEntity>> DEEP_LIGHT;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PlayerTrackerBlockEntity>> PLAYER_TRACKING;
+    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<SnowgraveBlockEntity>> SNOWGRAVE;
 
     private static <T extends BlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> register(
         String id, BlockEntityType.BlockEntitySupplier<T> factory, Supplier<? extends Block>... blocks) {
@@ -243,6 +246,8 @@ public class PastelBlockEntities {
         PLAYER_TRACKING = register(
             "player_tracking", PlayerTrackerBlockEntity::new, PastelBlocks.MANXI, PastelBlocks.ENLIGHTENMENT_ITEM_BOWL);
 
+        SNOWGRAVE = register("snowgrave", SnowgraveBlockEntity::new, PastelBlocks.SNOWGRAVE);
+
         // All the upgrades
         List<Supplier<? extends Block>> upgradeBlocksList = List.of(
             PastelBlocks.UPGRADE_SPEED,
@@ -306,6 +311,7 @@ public class PastelBlockEntities {
         BlockEntityRenderers.register(PastelBlockEntities.DEEP_LIGHT.get(), DeepLightBlockEntityRenderer::new);
         BlockEntityRenderers.register(
             PastelBlockEntities.PLAYER_TRACKING.get(), PlayerTrackingBlockEntityRenderer::new);
+        BlockEntityRenderers.register(PastelBlockEntities.SNOWGRAVE.get(), SnowgraveBlockEntityRenderer::new);
 
         BlockEntityRenderers.register(PastelBlockEntities.PASTEL_NODE.get(), PastelNodeBlockEntityRenderer::new);
         BlockEntityRenderers.register(PastelBlockEntities.TEA_TABLE.get(), TeaTableBlockEntityRenderer::new);

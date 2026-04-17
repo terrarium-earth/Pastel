@@ -45,7 +45,6 @@ public class PlayerTrackingBlockEntityRenderer implements BlockEntityRenderer<Pl
 
         // It would sure be nice if you could have multiple BERs for one block entity type... Anyways nice janky
         // hacks you got there
-        // Dafuqs: oh my god, this is so cursed
         if (state.is(PastelBlocks.MANXI.get())) {
             float f = (state.getValue(ChestBlock.FACING)).toYRot();
             double yBreath = Math.sin(time / 19) * 0.02;
