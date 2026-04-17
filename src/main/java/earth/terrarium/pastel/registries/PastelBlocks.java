@@ -257,38 +257,7 @@ import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AttachedStemBlock;
-import net.minecraft.world.level.block.BarrelBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.CarpetBlock;
-import net.minecraft.world.level.block.ColoredFallingBlock;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.FenceBlock;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.FlowerBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.FungusBlock;
-import net.minecraft.world.level.block.InfestedBlock;
-import net.minecraft.world.level.block.IronBarsBlock;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.PressurePlateBlock;
-import net.minecraft.world.level.block.RedStoneOreBlock;
-import net.minecraft.world.level.block.RedstoneLampBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SnowLayerBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.StemBlock;
-import net.minecraft.world.level.block.TintedGlassBlock;
-import net.minecraft.world.level.block.TorchBlock;
-import net.minecraft.world.level.block.TransparentBlock;
-import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.world.level.block.WallBlock;
-import net.minecraft.world.level.block.WallTorchBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.OffsetType;
@@ -1844,10 +1813,17 @@ public class PastelBlocks {
             Properties.ofFullCopy(PastelBlocks.SHIMMERSTONE_LIGHT.get())
                       .randomTicks())
     ));
-//    public static final DeferredBlock<Block> ENERGETIC_MOTE = register(block(
-//        "energetic_mote", () -> new EnergeticMoteBlock(
-//            Properties.ofFullCopy(PastelBlocks.SHIMMERSTONE_LIGHT.get()))
-//    ));
+    public static final DeferredBlock<Block> ENERGETIC_MOTE = register(block(
+        "energetic_mote", () -> new EnergeticMoteBlock(
+            BlockBehaviour.Properties.of()
+                                     .replaceable()
+                                     .strength(-1.0F, 3600000.8F)
+                                     .mapColor(MapColor.NONE)
+                                     .noLootTable()
+                                     .noOcclusion()
+                                     .sound(PastelBlockSoundGroups.SHIMMERSTONE_LIGHT)
+                                     .instabreak())
+    ));
 
     private static Properties decay(
         MapColor mapColor, SoundType soundGroup, float strength, float resistance, PushReaction pistonBehavior) {

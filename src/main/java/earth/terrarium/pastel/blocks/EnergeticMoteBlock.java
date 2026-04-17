@@ -12,10 +12,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 
 public class EnergeticMoteBlock extends Block {
-    public static final Property<Integer> TICKS = BlockStateProperties.AGE_2;
+    private static final Property<Integer> TICKS = BlockStateProperties.AGE_2;
+
     public EnergeticMoteBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(TICKS,0));
+        registerDefaultState(stateDefinition.any().setValue(TICKS, 0));
     }
 
     @Override
