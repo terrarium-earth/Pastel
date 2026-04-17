@@ -191,6 +191,7 @@ public class PastelCommon {
         // Loot
         logInfo("Registering Loot Conditions & Functions...");
         PastelLootContextTypes.register();
+        PastelLootConditions.register(pastelBus);
         PastelLootFunctionTypes.register(pastelBus);
         PastelLootModifiers.register(pastelBus);
 

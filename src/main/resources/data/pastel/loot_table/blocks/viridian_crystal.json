@@ -13,8 +13,7 @@
               "name": "pastel:viridian_crystal",
               "conditions": [
                 {
-                  "condition": "pastel:near_block",
-                  "block": "#pastel:viridian_crystal_purity_sources",
+                  "condition": "pastel:near_moonstone",
                   "search_radius": 10
                 },
                 {
@@ -39,8 +38,7 @@
               "name": "pastel:raw_malachite",
               "conditions": [
                 {
-                  "condition": "pastel:near_block",
-                  "block": "#pastel:viridian_crystal_purity_sources",
+                  "condition": "pastel:near_moonstone",
                   "search_radius": 10
                 }
               ],
@@ -71,8 +69,7 @@
                 {
                   "condition": "minecraft:inverted",
                   "term": {
-                    "condition": "pastel:near_block",
-                    "block": "#pastel:viridian_crystal_purity_sources",
+                    "condition": "pastel:near_moonstone",
                     "search_radius": 10
                   }
                 }

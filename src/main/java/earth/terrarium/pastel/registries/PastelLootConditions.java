@@ -1,17 +1,22 @@
 package earth.terrarium.pastel.registries;
 
-import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.loot.conditions.NearBlockLootCondition;
+import earth.terrarium.pastel.loot.conditions.NearMoonstoneLootCondition;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
 public class PastelLootConditions {
     public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES =
-        DeferredRegister.create(PastelCommon.MOD_ID,Registries.LOOT_CONDITION_TYPE);
+        DeferredRegister.create(Registries.LOOT_CONDITION_TYPE,PastelCommon.MOD_ID);
 
-    public static final Supplier<LootItemConditionType> NEAR_BLOCK =
-        LOOT_CONDITION_TYPES.register("near_block", () -> new LootItemConditionType(NearBlockLootCondition.CODEC));
+    public static final Supplier<LootItemConditionType> NEAR_MOONSTONE =
+        LOOT_CONDITION_TYPES.register("near_moonstone", () -> new LootItemConditionType(NearMoonstoneLootCondition.CODEC));
+
+    public static void register(IEventBus bus){
+        LOOT_CONDITION_TYPES.register(bus);
+    }
 }
