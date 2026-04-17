@@ -1,9 +1,15 @@
 package earth.terrarium.pastel.registries;
 
+import com.terraformersmc.biolith.api.biome.BiomePlacement;
+import com.terraformersmc.biolith.api.surface.SurfaceGeneration;
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Climate;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 @SuppressWarnings("unused")
 public class PastelBiomes {
@@ -17,12 +23,21 @@ public class PastelBiomes {
     public static final ResourceKey<Biome> NOXSHROOM_FOREST = getKey("noxshroom_forest");
     public static final ResourceKey<Biome> RAZOR_EDGE = getKey("razor_edge");
 
+    public static final ResourceKey<Biome> AZURE_SPIRES = getKey("azure_spires");
+    public static final ResourceKey<Biome> VIRIDIAN_CAVERNS = getKey("viridian_caverns");
+
     private static ResourceKey<Biome> getKey(String name) {
         return ResourceKey.create(Registries.BIOME, PastelCommon.locate(name));
     }
 
-    public static void register() {
-
+    public static void registerBiomePlacements() {
+        BiomePlacement.addOverworld(
+            AZURE_SPIRES, new Climate.ParameterPoint(
+                Climate.Parameter.span(-0.45F, 0.15F), Climate.Parameter.span(-1.0F, -0.35F),
+                Climate.Parameter.span(0.03F, 1.0F), Climate.Parameter.span(-0.2225F, 0.05F),
+                Climate.Parameter.point(1.0F), Climate.Parameter.span(-1.0F, 1.0F), 0L
+            )
+        );
     }
 
 }

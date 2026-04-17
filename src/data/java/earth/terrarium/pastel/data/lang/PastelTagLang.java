@@ -146,7 +146,6 @@ public class PastelTagLang {
         provider.add("tag.pastel.liquid_crystal", "Liquid Crystal");
         provider.add("tag.pastel.magenta_logs", "Magenta Logs");
         provider.add("tag.pastel.malachite_equipment", "Malachite Equipment");
-        provider.add("tag.pastel.malachite_ores", "Malachite Ores");
         provider.add("tag.pastel.memory_bonding_agents", "Memory Bonding Agents");
         provider.add("tag.pastel.memory_bonding_agents_concealable", "Concealable Memory Bonding Agents");
         provider.add("tag.pastel.midnight_solution", "Midnight Solution");

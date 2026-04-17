@@ -40,6 +40,10 @@ repositories {
     maven(url = "https://repo.unascribed.com") // Ears API
 
 	maven(url = "https://cursemaven.com") // xycraft
+
+    maven(url = "https://maven.terraformersmc.com/"){ // biolith
+        name = "TerraformersMC"
+    }
 }
 
 cloche {
@@ -82,6 +86,11 @@ cloche {
 
         dependency {
             modId = "exclusions_lib"
+            required = true
+        }
+
+        dependency {
+            modId = "biolith"
             required = true
         }
 
@@ -148,6 +157,8 @@ cloche {
                 modImplementation(additionalEntityAttributes)
                 compileOnly(jgrapht)
                 implementation(jheaps)
+
+                modImplementation("com.terraformersmc:biolith-neoforge:3.0.10")
 
 				modImplementation("dev.emi:emi-neoforge:1.1.19+1.21.1")
 

@@ -26,6 +26,11 @@ public class PastelBlockLang {
                 provider.addBlock(block, "Stargazer Manxi");
                 continue;
             }
+            // this is set to be ice because it is ice
+            if(name.equals("snowgrave")){
+                provider.addBlock(block, "Ice");
+                continue;
+            }
             // pastel nodes have fancy formatting
             if (name.endsWith("node")) continue;
             // all pedestals bear the same name, and the fusion shrines are twins; item bowls, likewise

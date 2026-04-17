@@ -16,6 +16,8 @@ import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class StoneLikeBlockModels {
@@ -477,7 +479,8 @@ public class StoneLikeBlockModels {
         PastelModelHelper.BLOCK.defaultUpFacing(
             generators, PastelBlocks.POLISHED_BASAL_MARBLE, TexturedModel.CUBE_TOP_BOTTOM);
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.DOWNSTONE);
-
+        PastelModelHelper.BLOCK.simple(generators, PastelBlocks.FROSTED_DEEPSLATE);
+        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.SNOWGRAVE.get(), Blocks.ICE);
     }
 
     public static void generateItemModels(ItemModelGenerators generators) {

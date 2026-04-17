@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "warded=false": {
+      "model": "pastel:block/azure_crystal"
+    },
+    "warded=true": {
+      "model": "pastel:block/azure_crystal_warded"
+    }
+  }
+}

@@ -191,6 +191,7 @@ public class PastelCommon {
         // Loot
         logInfo("Registering Loot Conditions & Functions...");
         PastelLootContextTypes.register();
+        PastelLootConditions.register(pastelBus);
         PastelLootFunctionTypes.register(pastelBus);
         PastelLootModifiers.register(pastelBus);
 
@@ -264,6 +265,8 @@ public class PastelCommon {
         PastelEnchantmentEvents.register();
         logInfo("Registering Tree Decorator Types...");
         PastelTreeDecoratorTypes.register(pastelBus);
+
+        pastelBus.addListener(PastelMiscEvents::loadComplete);
 
         PastelDataMaps.register();
 

@@ -188,13 +188,9 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.azurite.name", "Azurite");
         provider.add(
             "book.pastel.guidebook.azurite.page0.text",
-            "A rich blue ore I found deep underground that, at a distance, I almost mistook for [Lapis]" +
-            "(item://minecraft:lapis_lazuli) - were it not for the stunning aura that surrounded it. Raw Azurite " +
-            "contains many impurities.\\\n\\\nSeems to be able to intensify the energy of Pigment."
-        );
-        provider.add(
-            "book.pastel.guidebook.azurite.page1.text",
-            "Refining Azurite is not a cheap task.\\\nIn this refined form Azurite can be used for many more recipes."
+            "What a brilliant crystal! I stumbled into caverns full of the stuff, suffused with a deep chill. The " +
+            "aura of [#](2432ff)Stasis[#]() is so pervasive, not even monsters dwell within... and I can't even make" +
+            " a dent in those crystals! Thankfully, the smaller outcrops look weaker."
         );
         provider.add("book.pastel.guidebook.azurite.growing.title", "Growing Azurite");
         provider.add(
@@ -1246,6 +1242,13 @@ public class PastelGuidebookLang {
             "The ground is covered with a small layer of soil. Not much, but more than enough to cover it with a " +
             "thick carpet of moss.\\\n\\\nUnlike most other biomes, the many natural light sources in this one seem " +
             "to allow for the growth of plants here, which I can also find on the surface."
+        );
+        provider.add(
+            "book.pastel.guidebook.crystal_gardens.page2.text",
+            "The ground is marred by great seams of brilliant green crystal, carving vast scars through the " +
+            "landscape. Crystals of such size must have grown in isolation over unfathomable time, and they'd surely" +
+            " be of use to me, but... any attempts to harvest them prove fruitless. I will need to find some way to" +
+            " ensure a **[#](b9bebe)Pure.** environment if I am to have any hope of collecting them intact."
         );
         provider.add(
             "book.pastel.guidebook.crystallarieum.page0.text",
@@ -2351,12 +2354,12 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.ideas.amethyst.page0.text", "Geodes are usually found deep underground.");
         provider.add(
             "book.pastel.guidebook.ideas.azurite.page0.text",
-            "In some areas just above bedrock I noticed a striking blue aura. I wonder what causes it."
+            "In some areas just above bedrock I noticed a stark drop in temperature. I wonder what causes it."
         );
         provider.add(
             "book.pastel.guidebook.ideas.azurite.page1.text",
-            "These auras, accompanied by soft humming, seem to be caused by giant deposits of rich blue ore! It is " +
-            "buried within rock in rare, but giant clusters."
+            "In the more tranquil areas of the world, deep underground, there are vast frozen caves of brilliant blue" +
+            " crystal."
         );
         provider.add(
             "book.pastel.guidebook.ideas.citrine.page0.text",

@@ -77,10 +77,6 @@ public class PastelPlacedFeatures {
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("shimmerstone_ore"))
         );
         addFeature(
-            bootstrap, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_ORES,
-            ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("azurite_ore"))
-        );
-        addFeature(
             bootstrap, Tags.Biomes.IS_NETHER, GenerationStep.Decoration.UNDERGROUND_ORES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("stratine_ore"))
         );

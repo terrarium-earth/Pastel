@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -40,9 +41,12 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
                                               .add(Blocks.INFESTED_MOSSY_STONE_BRICKS)
                                               .add(Blocks.INFESTED_STONE_BRICKS)
                                               .add(PastelBlocks.INFESTED_BLACKSLAG.get());
-        tag(PastelBlockTags.WARD_DISRUPTABLE).add(
-            PastelBlocks.AZURITE_ORE.get(), PastelBlocks.DEEPSLATE_AZURITE_ORE.get()
-        );
+        tag(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST).addTag(PastelBlockTags.UNBREAKABLE)
+                                                         .addTag(BlockTags.BEDS);
+
+        tag(PastelBlockTags.WARD_DISRUPTABLE).add(PastelBlocks.AZURE_CRYSTAL.get());
+        tag(PastelBlockTags.CRYSTAL_SPIKE_BASES).addTag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
+                                                .add(PastelBlocks.FROSTED_DEEPSLATE.get());
         tag(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST).addTag(PastelBlockTags.UNBREAKABLE);
         tag(PastelBlockTags.CRACKED_BLOCKS).add(
             Blocks.CRACKED_DEEPSLATE_BRICKS, Blocks.CRACKED_DEEPSLATE_TILES, Blocks.CRACKED_NETHER_BRICKS,
@@ -58,6 +62,14 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
                                                           PastelBlocks.BUDDING_TOPAZ.get(),
                                                           Blocks.SPAWNER, Blocks.TRIAL_SPAWNER
                                                       );
+        tag(PastelBlockTags.VIRIDIAN_CRYSTAL_PURITY_SOURCES).add(
+            PastelBlocks.MOONSTONE_BLOCK.get(), PastelBlocks.POLISHED_MOONSTONE_BLOCK.get(),
+            PastelBlocks.MOONSTONE_POWDER_BLOCK.get(), PastelBlocks.MOONSTONE_CLUSTER.get(),
+            PastelBlocks.BUDDING_MOONSTONE.get(), PastelBlocks.MOONSTONE_ORE.get(),
+            PastelBlocks.DEEPSLATE_MOONSTONE_ORE.get(), PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get(),
+            PastelBlocks.SMALL_MOONSTONE_BUD.get(), PastelBlocks.MEDIUM_MOONSTONE_BUD.get(),
+            PastelBlocks.LARGE_MOONSTONE_BUD.get()
+        );
     }
 
 }

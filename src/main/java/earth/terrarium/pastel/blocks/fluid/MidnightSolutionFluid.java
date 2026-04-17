@@ -217,6 +217,7 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
                 ItemEnchantments targetEnchants = builder.toImmutable();
                 if (targetEnchants.isEmpty()) {
                     itemStack.remove(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
+                    itemStack.remove(PastelDataComponentTypes.BOUND_ITEM);
                 } else {
                     itemStack.set(PastelDataComponentTypes.CANVAS_ENCHANTMENTS, targetEnchants);
                 }
