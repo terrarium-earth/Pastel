@@ -45,6 +45,13 @@
         "pastel:giant_moss_ball"
       ],
       "text": "book.pastel.guidebook.crystal_gardens.moss_balls.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:viridian_crystal"
+      },
+      "text": "book.pastel.guidebook.crystal_gardens.page2.text"
     }
   ]
 }

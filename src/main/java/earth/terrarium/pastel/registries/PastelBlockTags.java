@@ -48,6 +48,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> BASE_STONE_DEEPER_DOWN = of("base_stone_deeper_down");
     public static final TagKey<Block> BLACKSLAG_ORE_REPLACEABLES = of("blackslag_ore_replaceables");
     public static final TagKey<Block> DEEPER_DOWN_FEATURE_REPLACEABLES = of("deeper_down_feature_replaceables");
+    public static final TagKey<Block> CRYSTAL_SPIKE_BASES = of("crystal_spike_bases");
 
     // MISC
     public static final TagKey<Block> MULTITOOL_MINEABLE = of("multitool_mineable");
@@ -70,6 +71,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> ANIMALS_SPAWNABLE_ON_ADDITIONS = of("animals_spawnable_on_additions");
     public static final TagKey<Block> WARD_DISRUPTABLE = of("ward_disruptable");
     public static final TagKey<Block> FLOWING_STAFF_MOVE_BLACKLIST = of("flowing_staff_move_blacklist");
+    public static final TagKey<Block> VIRIDIAN_CRYSTAL_PURITY_SOURCES = of("viridian_crystal_purity_sources");
 
     // ORES
     public static final TagKey<Block> AZURITE_ORES = of("azurite_ores");

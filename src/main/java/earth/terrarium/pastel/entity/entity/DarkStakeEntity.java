@@ -24,7 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -32,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-import static earth.terrarium.pastel.blocks.geology.AzuriteOreBlock.WARDED;
+import static earth.terrarium.pastel.blocks.geology.AzureCrystalBlock.WARDED;
 
 public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
     public static final int EFFECT_RADIUS = 10;

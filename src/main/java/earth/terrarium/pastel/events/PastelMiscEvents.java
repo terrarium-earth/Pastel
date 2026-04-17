@@ -18,11 +18,9 @@ import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.tools.TuningStampItem;
 import earth.terrarium.pastel.items.tools.WorkstaffItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.progression.PastelCriteria;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelLevels;
+import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
@@ -48,6 +46,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.NeoForge;
@@ -79,6 +78,7 @@ public class PastelMiscEvents {
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::tagReload);
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::leftClickBlock);
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::registerTillable);
+        NeoForge.EVENT_BUS.addListener(PastelMiscEvents::viridanShimmer);
 
         // Doesn't seem to have an actual equivalent?
         // EnchantmentEvents.ALLOW_ENCHANTING.register((registryEntry, itemStack, enchantingContext) -> {
@@ -88,6 +88,12 @@ public class PastelMiscEvents {
         // 	}
         // 	return TriState.DEFAULT;
         // });
+    }
+
+    public static void loadComplete(FMLLoadCompleteEvent event) {
+        // Biomes
+        PastelCommon.logInfo("Registering biome placements...");
+        PastelBiomes.registerBiomePlacements();
     }
 
     public static void onCrossbowShot(LivingEntity shooter, Projectile projectile) {
@@ -105,29 +111,36 @@ public class PastelMiscEvents {
         if (GlassCrestCrossbowItem.getOvercharge(crossbow) > 0.99F) {
             PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
                 (ServerLevel) level,
-                projectile.position(), ParticleTypes.SCRAPE, 5,
-                Vec3.ZERO, particleVelocity
+                projectile.position(),
+                ParticleTypes.SCRAPE,
+                5, Vec3.ZERO,
+                particleVelocity
             );
             PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
                 (ServerLevel) level,
-                projectile.position(), ParticleTypes.WAX_OFF, 5,
-                Vec3.ZERO, particleVelocity
+                projectile.position(),
+                ParticleTypes.WAX_OFF,
+                5, Vec3.ZERO,
+                particleVelocity
             );
             PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
                 (ServerLevel) level,
-                projectile.position(), ParticleTypes.WAX_ON, 5,
-                Vec3.ZERO, particleVelocity
+                projectile.position(),
+                ParticleTypes.WAX_ON,
+                5, Vec3.ZERO,
+                particleVelocity
             );
             PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
                 (ServerLevel) level,
-                projectile.position(), ParticleTypes.GLOW, 5,
-                Vec3.ZERO, particleVelocity
+                projectile.position(),
+                ParticleTypes.GLOW,
+                5, Vec3.ZERO,
+                particleVelocity
             );
 
             if (shooter instanceof ServerPlayer serverPlayerEntity) {
                 Support.grantAdvancementCriterion(
-                    serverPlayerEntity,
-                    PastelCommon.locate("lategame/shoot_fully_overcharged_crossbow"),
+                    serverPlayerEntity, PastelCommon.locate("lategame/shoot_fully_overcharged_crossbow"),
                     "shot_fully_overcharged_crossbow"
                 );
             }
@@ -138,8 +151,10 @@ public class PastelMiscEvents {
 
         PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
             (ServerLevel) level,
-            projectile.position(), ParticleTypes.FIREWORK, 10,
-            Vec3.ZERO, particleVelocity
+            projectile.position(),
+            ParticleTypes.FIREWORK,
+            10, Vec3.ZERO,
+            particleVelocity
         );
 
         GlassCrestCrossbowItem.unOvercharge(crossbow);
@@ -151,8 +166,7 @@ public class PastelMiscEvents {
         var tool = context.getItemInHand();
         var action = event.getItemAbility();
 
-        if (action != ItemAbilities.HOE_TILL || !tool.canPerformAction(action))
-            return;
+        if (action != ItemAbilities.HOE_TILL || !tool.canPerformAction(action)) return;
 
         if (originalState.is(PastelBlocks.SLUSH.get()) || originalState.is(PastelBlocks.OVERGROWN_SLUSH.get())) {
             event.setFinalState(PastelBlocks.TILLED_SLUSH.get()
@@ -167,8 +181,7 @@ public class PastelMiscEvents {
         event.addListener(new ResourceManagerReloadListener() {
             @Override
             public void onResourceManagerReload(ResourceManager resourceManager) {
-                if (!FMLEnvironment.dist.isDedicatedServer())
-                    PastelSided.clearToastManager();
+                if (!FMLEnvironment.dist.isDedicatedServer()) PastelSided.clearToastManager();
 
                 AutoCraftingMode.clearCache();
                 PastelCommon.CACHED_ITEM_TAG_MAP.clear();
@@ -196,8 +209,7 @@ public class PastelMiscEvents {
     private static void startServerLevelTick(LevelTickEvent.Pre event) {
         var level = event.getLevel();
 
-        if (level.isClientSide())
-            return;
+        if (level.isClientSide()) return;
 
         if (!level.tickRateManager()
                   .runsNormally()) {
@@ -263,8 +275,7 @@ public class PastelMiscEvents {
             entity instanceof LivingEntity livingEntity) {
             event.setCancellationResult(handStack.interactLivingEntity(player, livingEntity, hand));
             if (event.getCancellationResult()
-                     .indicateItemUse())
-                event.setCanceled(true);
+                     .indicateItemUse()) event.setCanceled(true);
         }
     }
 
@@ -277,32 +288,46 @@ public class PastelMiscEvents {
         if (handStack.getItem() instanceof PrioritizedBlockInteraction) {
             event.setCancellationResult(handStack.useOn(new UseOnContext(player, hand, hitResult)));
             if (event.getCancellationResult()
-                     .indicateItemUse())
-                event.setCanceled(true);
+                     .indicateItemUse()) event.setCanceled(true);
         }
     }
 
     private static final Set<BlockPos> AREA_TARGETS = new HashSet<>();
 
+    private static void viridanShimmer(BlockEvent.EntityPlaceEvent event) {
+        if (!event.getPlacedBlock()
+                  .is(PastelBlockTags.VIRIDIAN_CRYSTAL_PURITY_SOURCES)) return;
+        var pos = event.getBlockSnapshot()
+                       .getPos();
+        var level = event.getLevel();
+        var random = level.getRandom();
+        for (BlockPos testPos : BlockPos.withinManhattan(pos, 10, 10, 10)) {
+            if (!level.isOutsideBuildHeight(testPos) && level.getBlockState(testPos)
+                                                             .is(PastelBlocks.VIRIDIAN_CRYSTAL)) {
+                if (level instanceof ServerLevel serverLevel) // always true apparently
+                    serverLevel.sendParticles(
+                        PastelParticleTypes.LIGHT_TRAIL, testPos.getX(), testPos.getY(),
+                        testPos.getZ(), 4, 0.5, 0.5, 0.5, 0.1
+                    );
+            }
+        }
+    }
+
     private static void handleAoEMining(BlockEvent.BreakEvent event) {
-        if (!(event.getPlayer() instanceof ServerPlayer player))
-            return;
+        if (!(event.getPlayer() instanceof ServerPlayer player)) return;
 
         var original = event.getPos();
 
-        if (AREA_TARGETS.contains(original))
-            return; // No recursion
+        if (AREA_TARGETS.contains(original)) return; // No recursion
 
         var cap = player.getMainHandItem()
                         .getCapability(PastelCapabilities.Misc.MINING);
-        if (cap == null)
-            return;
+        if (cap == null) return;
 
         var aoe = cap.getMiningArea(player, player.getMainHandItem(), original);
         var reach = Math.max(Math.max(aoe.getX(), aoe.getY()), aoe.getZ());
 
-        if (aoe.equals(Vec3i.ZERO))
-            return;
+        if (aoe.equals(Vec3i.ZERO)) return;
 
         var start = switch (player.getNearestViewDirection()
                                   .getAxis()) {
@@ -318,22 +343,27 @@ public class PastelMiscEvents {
         };
 
         Predicate<BlockState> minableBlocksPredicate = state -> {
-            boolean suitableTool = !state.requiresCorrectToolForDrops() || event.getPlayer().getMainHandItem().isCorrectToolForDrops(state);
-            boolean suitableSpeed = event.getPlayer().getMainHandItem().getDestroySpeed(state) > 1;
+            boolean suitableTool = !state.requiresCorrectToolForDrops() || event.getPlayer()
+                                                                                .getMainHandItem()
+                                                                                .isCorrectToolForDrops(state);
+            boolean suitableSpeed = event.getPlayer()
+                                         .getMainHandItem()
+                                         .getDestroySpeed(state) > 1;
             return suitableTool && suitableSpeed;
         };
 
         BlockPos.betweenClosedStream(start, end)
                 .filter(pos -> !pos.equals(original) && player.canInteractWithBlock(pos, 1.0 + reach) &&
-                               minableBlocksPredicate.test(event.getPlayer().level().getBlockState(pos)))
+                               minableBlocksPredicate.test(event.getPlayer()
+                                                                .level()
+                                                                .getBlockState(pos)))
                 .peek(AREA_TARGETS::add)
                 .peek(player.gameMode::destroyBlock)
                 .forEach(AREA_TARGETS::remove);
     }
 
     private static void updateInertia(BlockEvent.BreakEvent event) {
-        if (!(event.getPlayer() instanceof ServerPlayer player))
-            return;
+        if (!(event.getPlayer() instanceof ServerPlayer player)) return;
 
         var state = event.getState();
         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
@@ -372,12 +402,11 @@ public class PastelMiscEvents {
                 if (exchangeStaffItem.canInteractWith(targetBlockState, level, pos, player)) {
                     Optional<Block> storedBlock = ExchangeStaffItem.getStoredBlock(player.getMainHandItem());
 
-                    if (storedBlock.isPresent()
-                        && storedBlock.get() != targetBlockState.getBlock()
-                        && storedBlock.get()
-                                      .asItem() != Items.AIR
-                        && ExchangeStaffItem.exchange(
-                        level, pos, player, storedBlock.get(), player.getMainHandItem(), true, direction)) {
+                    if (storedBlock.isPresent() && storedBlock.get() != targetBlockState.getBlock() && storedBlock.get()
+                                                                                                                  .asItem() !=
+                                                                                                       Items.AIR &&
+                        ExchangeStaffItem.exchange(
+                            level, pos, player, storedBlock.get(), player.getMainHandItem(), true, direction)) {
 
                         event.setCanceled(true);
                         return;
@@ -388,8 +417,8 @@ public class PastelMiscEvents {
                     null, player.blockPosition(), SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
             } else if (mainHandStack.getItem() instanceof TuningStampItem tuningStampItem) {
                 if (mainHandStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY)
-                                 .contains(TuningStampItem.DATA))
-                    tuningStampItem.clearData(Optional.of(player), mainHandStack);
+                                 .contains(TuningStampItem.DATA)) tuningStampItem.clearData(
+                    Optional.of(player), mainHandStack);
                 event.setCanceled(true);
             }
         }

@@ -33,7 +33,6 @@ import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import earth.terrarium.pastel.registries.client.PastelShaders;
 import earth.terrarium.pastel.render.HudRenderers;
 import earth.terrarium.pastel.render.item.SlotEffectDecorator;
-import earth.terrarium.pastel.sound.AuraSoundInstance;
 import earth.terrarium.pastel.sound.BiomeSoundInstance;
 import earth.terrarium.pastel.sound.WorldAttenuation;
 import net.minecraft.ChatFormatting;
@@ -239,7 +238,6 @@ public class PastelClientEvents {
         Entity cameraEntity = client.getCameraEntity();
         if (level == null || cameraEntity == null) {
             BiomeSoundInstance.clear();
-            AuraSoundInstance.clear();
             return;
         }
 

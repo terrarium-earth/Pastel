@@ -1,0 +1,45 @@
+{
+  "type": "pastel:air_exposed_ore",
+  "config": {
+    "size": 48,
+    "discard_chance_on_air_exposure": 0.0,
+    "targets": [
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        },
+        "state": {
+          "Name": "pastel:viridian_crystal"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        },
+        "state": {
+          "Name": "pastel:viridian_crystal"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "pastel:blackslag_ore_replaceables"
+        },
+        "state": {
+          "Name": "pastel:viridian_crystal"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "pastel:overgrown_blackslag"
+        },
+        "state": {
+          "Name": "pastel:viridian_crystal"
+        }
+      }
+    ]
+  }
+}

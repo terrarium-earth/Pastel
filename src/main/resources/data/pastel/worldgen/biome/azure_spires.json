@@ -1,0 +1,54 @@
+{
+  "temperature": 0.8,
+  "downfall": 0.0,
+  "creature_spawn_probability": 0,
+  "effects": {
+    "sky_color": 7907327,
+    "fog_color": 12638463,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color_modifier": "none",
+    "music": {
+      "sound": "pastel:ost.azure",
+      "min_delay": 0,
+      "max_delay": 0,
+      "replace_current_music": true
+    },
+    "particle": {
+      "options": {
+        "type": "pastel:azure_aura"
+      },
+      "probability": 0.00125
+    }
+  },
+  "spawners": {
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "pastel:azure_cave"
+    ]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "pastel:ice_disk"
+    ],
+    [
+      "pastel:azure_spire",
+      "pastel:azure_outcrop"
+    ],
+    [
+      "pastel:snowgrave_spider",
+      "pastel:snowgrave_skeleton",
+      "pastel:snowgrave_zombie"
+    ],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": true
+}

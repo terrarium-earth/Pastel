@@ -1,0 +1,25 @@
+{
+  "type": {
+    "type": "databank:block",
+    "drop_original_loot_condition": {
+      "type": "databank:not",
+      "condition": {
+        "type": "databank:actual_player"
+      }
+    },
+    "hidden_as": "minecraft:deepslate",
+    "name_override": {
+      "extra": [
+        {
+          "translate": "pastel.cloaked.suffix"
+        }
+      ],
+      "translate": "block.minecraft.deepslate"
+    },
+    "original": "pastel:azure_outcrop"
+  },
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_azurite"
+  }
+}

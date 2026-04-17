@@ -2,7 +2,7 @@
   "type": "minecraft:smelting",
   "ingredient": [
     {
-      "tag": "pastel:malachite_ores"
+      "item": "pastel:viridian_crystal"
     }
   ],
   "result": {
