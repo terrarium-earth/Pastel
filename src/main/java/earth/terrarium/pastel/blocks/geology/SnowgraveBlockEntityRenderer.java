@@ -42,7 +42,8 @@ public class SnowgraveBlockEntityRenderer implements BlockEntityRenderer<Snowgra
         var offset = variant == SnowgraveBlock.FrozenMob.SPIDER ? 1 : 0.5;
         poseStack.pushPose();
         poseStack.scale(0.9f,0.9f,0.9f);
-        dispatcher.render(toRender,offset,0,offset,0,0,poseStack,bufferSource,packedLight);
+        poseStack.translate(offset/0.9,0, offset/0.9);
+        dispatcher.render(toRender,0,0,0,0,0,poseStack,bufferSource,packedLight);
         poseStack.popPose();
     }
 }
