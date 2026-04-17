@@ -3,7 +3,7 @@
     "found_crystal_gardens": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:hidden/visit_dd_biomes/crystal_gardens"
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/crystal_gardens"
       }
     },
     "has_apricotti": {

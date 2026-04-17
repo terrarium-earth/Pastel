@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.particle.client;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.deeper_down.HowlingSpireEffects;
+import earth.terrarium.pastel.imbrifer.HowlingSpireEffects;
 import earth.terrarium.pastel.registries.PastelBiomes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

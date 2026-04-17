@@ -259,7 +259,7 @@ public class PastelMiscEvents {
                 );
                 if (player.isDeadOrDying()) {
                     Support.grantAdvancementCriterion(
-                        player, "lategame/get_killed_while_out_of_deeper_down_bounds", "get_rekt");
+                        player, "lategame/get_killed_while_out_of_imbrifer_bounds", "get_rekt");
                 }
             }
         }

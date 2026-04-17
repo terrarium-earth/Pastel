@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.worldgen.features;
 
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.blocks.deeper_down.groundcover.AshPileBlock;
+import earth.terrarium.pastel.blocks.imbrifer.groundcover.AshPileBlock;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

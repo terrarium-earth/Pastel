@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.blocks.deeper_down.flora.Dragonjag;
+import earth.terrarium.pastel.blocks.imbrifer.flora.Dragonjag;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;

@@ -1,0 +1,74 @@
+{
+  "parent": "pastel:lategame/pastel_lategame",
+  "display": {
+    "icon": {
+      "id": "pastel:polished_blackslag"
+    },
+    "frame": "goal",
+    "title": {
+      "translate": "advancements.pastel.visit_all_imbrifer_biomes.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.visit_all_imbrifer_biomes.description"
+    }
+  },
+  "criteria": {
+    "crystal_gardens": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/crystal_gardens"
+      }
+    },
+    "deep_barrens": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/deep_barrens"
+      }
+    },
+    "deep_dripstone_caves": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/deep_dripstone_caves"
+      }
+    },
+    "dragonrot_swamp": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/dragonrot_swamp"
+      }
+    },
+    "black_langast": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/black_langast"
+      }
+    },
+    "noxshroom_forest": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/noxshroom_forest"
+      }
+    },
+    "razor_edge": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/razor_edge"
+      }
+    },
+    "howling_spires": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/howling_spires"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:lategame/pastel_lategame"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 500
+  }
+}

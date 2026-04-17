@@ -9,7 +9,7 @@
     "found_howling_spires": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:hidden/visit_dd_biomes/howling_spires"
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/howling_spires"
       }
     },
     "gotten_previous": {

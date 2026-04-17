@@ -21,11 +21,11 @@
         },
         "advancements": [
           "pastel:break_cracked_dragonbone",
-          "pastel:lategame/visit_all_deeper_down_biomes",
+          "pastel:lategame/visit_all_imbrifer_biomes",
           "pastel:lategame/revive_hornslake_plant",
           "pastel:lategame/find_excavation_site",
           "pastel:lategame/find_forgotten_city",
-          "pastel:lategame/reached_dd_floor",
+          "pastel:lategame/reached_imbrifer_floor",
           "pastel:lategame/strike_up_hummingstone_hymn",
           "pastel:lategame/collect_moonstone"
         ]

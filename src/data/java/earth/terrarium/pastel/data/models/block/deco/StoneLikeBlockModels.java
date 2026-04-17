@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.data.models.block.deco;
 
-import earth.terrarium.pastel.blocks.deeper_down.PyriteRipperBlock;
+import earth.terrarium.pastel.blocks.imbrifer.PyriteRipperBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.client.PastelTextureMaps;
@@ -16,7 +16,6 @@ import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 

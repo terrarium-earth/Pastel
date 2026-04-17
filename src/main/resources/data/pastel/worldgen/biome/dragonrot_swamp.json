@@ -23,7 +23,7 @@
       "probability": 0.02
     },
     "music": {
-      "sound": "pastel:music.deeper_down.dragonrot_swamp",
+      "sound": "pastel:music.imbrifer.dragonrot_swamp",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -86,7 +86,7 @@
   "spawn_costs": {},
   "carvers": {
     "air": [
-      "pastel:dd_cave"
+      "pastel:imbrifer_cave"
     ]
   },
   "features": [
@@ -96,7 +96,7 @@
       "pastel:lake_dragonrot_underground"
     ],
     [
-      "pastel:dd_downstone_sloped",
+      "pastel:imbrifer_downstone_sloped",
       "pastel:moonstone_geode",
       "pastel:blackslag_pile"
     ],
@@ -108,28 +108,28 @@
     [],
     [],
     [
-      "pastel:dd_iron_ore",
-      "pastel:dd_gold_ore",
-      "pastel:dd_diamond_ore",
-      "pastel:dd_emerald_ore",
-      "pastel:dd_hornslake_disk",
-      "pastel:dd_tuff",
-      "pastel:dd_gravel",
-      "pastel:dd_infested",
-      "pastel:dd_granite",
-      "pastel:dd_diorite",
-      "pastel:dd_andesite",
-      "pastel:dd_stone"
+      "pastel:imbrifer_iron_ore",
+      "pastel:imbrifer_gold_ore",
+      "pastel:imbrifer_diamond_ore",
+      "pastel:imbrifer_emerald_ore",
+      "pastel:imbrifer_hornslake_disk",
+      "pastel:imbrifer_tuff",
+      "pastel:imbrifer_gravel",
+      "pastel:imbrifer_infested",
+      "pastel:imbrifer_granite",
+      "pastel:imbrifer_diorite",
+      "pastel:imbrifer_andesite",
+      "pastel:imbrifer_stone"
     ],
     [],
     [],
     [
       "minecraft:cave_vines",
-      "pastel:dd_glow_lichen",
-      "pastel:dd_vines",
+      "pastel:imbrifer_glow_lichen",
+      "pastel:imbrifer_vines",
       "pastel:doombloom_patch",
       "pastel:dragonjags/random_patch",
-      "pastel:dd_ferns",
+      "pastel:imbrifer_ferns",
       "pastel:snapping_ivy_patch"
     ],
     []

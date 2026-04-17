@@ -8,7 +8,7 @@ import net.minecraft.world.level.biome.Biome;
 @SuppressWarnings("unused")
 public class PastelBiomeTags {
 
-    public static final TagKey<Biome> DD_BIOMES = getReference("in_deeper_down");
+    public static final TagKey<Biome> IMBRIFER_BIOMES = getReference("in_imbrifer");
 
     public static final TagKey<Biome> COLORED_TREES_GENERATING_IN = getReference("colored_trees_generating_in");
     public static final TagKey<Biome> MERMAIDS_BRUSHES_GENERATING_IN = getReference("mermaids_brushes_generating_in");

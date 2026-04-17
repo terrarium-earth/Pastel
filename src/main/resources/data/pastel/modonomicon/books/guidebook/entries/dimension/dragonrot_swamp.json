@@ -2,7 +2,7 @@
   "name": "biome.pastel.dragonrot_swamp",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:hidden/visit_dd_biomes/dragonrot_swamp"
+    "advancement_id": "pastel:hidden/visit_imbrifer_biomes/dragonrot_swamp"
   },
   "icon": {
     "item": "pastel:flayed_earth"
@@ -25,7 +25,7 @@
       "use_legacy_rendering": false,
       "title": "biome.pastel.dragonrot_swamp",
       "images": [
-        "pastel:textures/gui/guidebook/dd_dragonrot_swamp.png"
+        "pastel:textures/gui/guidebook/imbrifer_dragonrot_swamp.png"
       ],
       "border": true,
       "text": "book.pastel.guidebook.dragonrot_swamp.page0.text"

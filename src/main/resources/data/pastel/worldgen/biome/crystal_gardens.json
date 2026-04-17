@@ -23,7 +23,7 @@
       "offset": 2
     },
     "music": {
-      "sound": "pastel:music.deeper_down.crystal_gardens",
+      "sound": "pastel:music.imbrifer.crystal_gardens",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -70,7 +70,7 @@
   "spawn_costs": {},
   "carvers": {
     "air": [
-      "pastel:dd_cave"
+      "pastel:imbrifer_cave"
     ]
   },
   "features": [
@@ -79,37 +79,37 @@
       "pastel:lake_liquid_crystal_underground"
     ],
     [
-      "pastel:dd_downstone_sloped",
+      "pastel:imbrifer_downstone_sloped",
       "pastel:moonstone_geode",
       "pastel:viridian_crystal"
     ],
     [],
     [
-      "pastel:dd_diorite_delta"
+      "pastel:imbrifer_diorite_delta"
     ],
     [],
     [
       "pastel:disk_overgrown_slush",
-      "pastel:dd_iron_ore",
-      "pastel:dd_gold_ore",
-      "pastel:dd_diamond_ore",
-      "pastel:dd_emerald_ore",
-      "pastel:dd_tuff",
-      "pastel:dd_gravel",
-      "pastel:dd_infested",
-      "pastel:dd_granite",
-      "pastel:dd_diorite",
-      "pastel:dd_andesite",
-      "pastel:dd_stone"
+      "pastel:imbrifer_iron_ore",
+      "pastel:imbrifer_gold_ore",
+      "pastel:imbrifer_diamond_ore",
+      "pastel:imbrifer_emerald_ore",
+      "pastel:imbrifer_tuff",
+      "pastel:imbrifer_gravel",
+      "pastel:imbrifer_infested",
+      "pastel:imbrifer_granite",
+      "pastel:imbrifer_diorite",
+      "pastel:imbrifer_andesite",
+      "pastel:imbrifer_stone"
     ],
     [
       "pastel:hummingstone_crystal_formations",
-      "pastel:dd_bismuth"
+      "pastel:imbrifer_bismuth"
     ],
     [
-      "pastel:dd_water_springs",
-      "pastel:dd_lava_springs",
-      "pastel:dd_liquid_crystal_springs"
+      "pastel:imbrifer_water_springs",
+      "pastel:imbrifer_lava_springs",
+      "pastel:imbrifer_liquid_crystal_springs"
     ],
     [
       "pastel:nightdew_vine",
@@ -118,9 +118,9 @@
       "pastel:apricotti",
       "pastel:humming_bell",
       "pastel:moss_balls",
-      "pastel:dd_patch_grass_normal",
-      "pastel:dd_glow_lichen",
-      "pastel:dd_liquid_crystal_flower_patch",
+      "pastel:imbrifer_patch_grass_normal",
+      "pastel:imbrifer_glow_lichen",
+      "pastel:imbrifer_liquid_crystal_flower_patch",
       "pastel:nephrite_blossoms"
     ],
     []

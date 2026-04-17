@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.registries.client;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.deeper_down.ColorGrading;
+import earth.terrarium.pastel.imbrifer.ColorGrading;
 import earth.terrarium.pastel.registries.PastelLevels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class PastelShaders {
 
-    public static final ResourceLocation COLOR_GRADING_ID = PastelCommon.locate("shaders/post/dd_color_grading.json");
+    public static final ResourceLocation COLOR_GRADING_ID = PastelCommon.locate("shaders/post/imbrifer_color_grading.json");
     public static Optional<PostChain> colorGradingPostProcess = Optional.empty();
 
     private static final String[] COLOR_GRADING_UNIFORMS = new String[]{

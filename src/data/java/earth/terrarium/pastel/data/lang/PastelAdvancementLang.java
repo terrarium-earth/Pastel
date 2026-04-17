@@ -181,10 +181,10 @@ public class PastelAdvancementLang {
         provider.add("advancements.pastel.collect_blood_orchid_petal.description", "Find a Blood Orchid Petal");
         provider.add("advancements.pastel.collect_blood_orchid_petal.title", "Jagged Leaf");
         provider.add(
-            "advancements.pastel.collect_dd_resources.description",
+            "advancements.pastel.collect_imbrifer_resources.description",
             "Collect all the various resources scattered around Imbrifer"
         );
-        provider.add("advancements.pastel.collect_dd_resources.title", "Hoarder");
+        provider.add("advancements.pastel.collect_imbrifer_resources.title", "Hoarder");
         provider.add(
             "advancements.pastel.collect_doombloom_seed.description",
             "A howling fire, explosions, death. And a seed or two"
@@ -684,10 +684,10 @@ public class PastelAdvancementLang {
         );
         provider.add("advancements.pastel.get_azure_dike_charge.title", "Shield Up");
         provider.add(
-            "advancements.pastel.get_killed_while_out_of_deeper_down_bounds.description",
+            "advancements.pastel.get_killed_while_out_of_imbrifer_bounds.description",
             "Find the way back to your home via unusual means"
         );
-        provider.add("advancements.pastel.get_killed_while_out_of_deeper_down_bounds.title", "Duct Tape Escape");
+        provider.add("advancements.pastel.get_killed_while_out_of_imbrifer_bounds.title", "Duct Tape Escape");
         provider.add(
             "advancements.pastel.collect_radiating_ender.description",
             "Some Endermen that appear in your world carry blocks with them that seem to radiate an eerie aura"
@@ -834,8 +834,8 @@ public class PastelAdvancementLang {
             "advancements.pastel.put_too_many_low_gravity_blocks_into_animal.title",
             "I must go, my planet needs me"
         );
-        provider.add("advancements.pastel.reached_dd_floor.description", "Reach the deepest depths of the deep");
-        provider.add("advancements.pastel.reached_dd_floor.title", "Bedrock 2: Electric Boogaloo");
+        provider.add("advancements.pastel.reached_imbrifer_floor.description", "Reach the deepest depths of the deep");
+        provider.add("advancements.pastel.reached_imbrifer_floor.title", "Bedrock 2: Electric Boogaloo");
         provider.add(
             "advancements.pastel.remember_egg_laying_wooly_pig.description",
             "Hatch the Memory of an Egg Laying Wooly Pig"
@@ -986,8 +986,8 @@ public class PastelAdvancementLang {
         );
         provider.add("advancements.pastel.use_perturbed_eye.title", "I like to move it, move it");
         provider.add(
-            "advancements.pastel.visit_all_deeper_down_biomes.description", "Visit each of the biomes in Imbrifer");
-        provider.add("advancements.pastel.visit_all_deeper_down_biomes.title", "Biomes Below Bedrock");
+            "advancements.pastel.visit_all_imbrifer_biomes.description", "Visit each of the biomes in Imbrifer");
+        provider.add("advancements.pastel.visit_all_imbrifer_biomes.title", "Biomes Below Bedrock");
         provider.add(
             "advancements.pastel.wear_both_gravity_trinkets.description",
             "Equip both gravity-affecting rings at the same time"

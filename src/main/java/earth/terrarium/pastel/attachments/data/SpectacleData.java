@@ -4,7 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.deeper_down.Environmental;
+import earth.terrarium.pastel.imbrifer.Environmental;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.items.trinkets.PriscillentSpectaclesItem;
 import earth.terrarium.pastel.registries.PastelItems;

@@ -2,7 +2,7 @@
   "name": "biome.pastel.crystal_gardens",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:hidden/visit_dd_biomes/crystal_gardens"
+    "advancement_id": "pastel:hidden/visit_imbrifer_biomes/crystal_gardens"
   },
   "icon": {
     "item": "pastel:overgrown_blackslag"
@@ -25,7 +25,7 @@
       "use_legacy_rendering": false,
       "title": "biome.pastel.crystal_gardens",
       "images": [
-        "pastel:textures/gui/guidebook/dd_crystal_gardens.png"
+        "pastel:textures/gui/guidebook/imbrifer_crystal_gardens.png"
       ],
       "border": true,
       "text": "book.pastel.guidebook.crystal_gardens.page0.text"

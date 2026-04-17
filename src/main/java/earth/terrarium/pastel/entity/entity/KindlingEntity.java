@@ -465,7 +465,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
                     continue;
                 }
 
-                if (candidate.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN)) {
+                if (candidate.is(PastelBlockTags.BASE_STONE_IMBRIFER)) {
                     world.setBlockAndUpdate(
                         transmutePos, PastelBlocks.BLACK_MATERIA.get()
                                                                 .defaultBlockState()

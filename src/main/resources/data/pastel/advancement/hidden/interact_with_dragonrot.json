@@ -19,7 +19,7 @@
     "entered_dragonrot_swamp": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:hidden/visit_dd_biomes/dragonrot_swamp"
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/dragonrot_swamp"
       }
     }
   },

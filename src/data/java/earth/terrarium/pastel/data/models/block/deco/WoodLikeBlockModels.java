@@ -2,7 +2,7 @@ package earth.terrarium.pastel.data.models.block.deco;
 
 import earth.terrarium.pastel.blocks.decoration.DiagonalBlock;
 import earth.terrarium.pastel.blocks.decoration.FlexLanternBlock;
-import earth.terrarium.pastel.blocks.deeper_down.WeepingGalaFrondsTipBlock;
+import earth.terrarium.pastel.blocks.imbrifer.WeepingGalaFrondsTipBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.registries.client.PastelModels;

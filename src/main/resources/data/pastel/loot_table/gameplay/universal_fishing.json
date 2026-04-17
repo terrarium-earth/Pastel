@@ -95,12 +95,12 @@
           "children": [
             {
               "type": "minecraft:loot_table",
-              "value": "pastel:gameplay/fishing/deeper_down/fishing",
+              "value": "pastel:gameplay/fishing/imbrifer/fishing",
               "conditions": [
                 {
                   "condition": "minecraft:location_check",
                   "predicate": {
-                    "dimension": "pastel:deeper_down"
+                    "dimension": "pastel:imbrifer"
                   }
                 }
               ]

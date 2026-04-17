@@ -1,14 +1,9 @@
 package earth.terrarium.pastel.blocks;
 
 import com.cmdpro.databank.DatabankUtils;
-import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.blocks.energy.CrystalApothecaryBlockEntity;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelItemTags;
-import earth.terrarium.pastel.sound.WorldAttenuation;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;
@@ -18,9 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -343,7 +336,7 @@ public class TeaTable extends Block implements EntityBlock {
         PastelAdvancements.Lategame.SHOOT_FULLY_OVERCHARGED_CROSSBOW, PastelAdvancements.Lategame.COLLECT_NECTARDEW,
         PastelAdvancements.Lategame.COLLECT_AETHER_GRACED_NECTAR_GLOVES,
         PastelAdvancements.Lategame.FIND_EXCAVATION_SITE,
-        PastelAdvancements.Lategame.GET_KILLED_WHILE_OUT_OF_DEEPER_DOWN_BOUNDS,
+        PastelAdvancements.Lategame.GET_KILLED_WHILE_OUT_OF_IMBRIFER_BOUNDS,
         PastelAdvancements.Lategame.COLLECT_ENOUGH_HINTS, PastelAdvancements.Lategame.COLLECT_AETHER_VESTIGES,
         PastelAdvancements.Lategame.COLLECT_BISMUTH_CRYSTAL, PastelAdvancements.Lategame.COLLECT_ALL_LEGENDARY_WEAPONS,
         PastelAdvancements.Lategame.COLLECT_PURE_RESOURCE, PastelAdvancements.Lategame.COLLECT_NOXWOOD,
@@ -364,7 +357,7 @@ public class TeaTable extends Block implements EntityBlock {
         PastelAdvancements.Lategame.COLLECT_HOVERBLOCK, PastelAdvancements.Lategame.PASTEL_LATEGAME,
         PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE,
         PastelAdvancements.Lategame.STRIKE_UP_HUMMINGSTONE_HYMN, PastelAdvancements.Lategame.COLLECT_MYSTERIOUS_LOCKET,
-        PastelAdvancements.Lategame.VISIT_ALL_DEEPER_DOWN_BIOMES, PastelAdvancements.Lategame.COLLECT_HUMMINGSTONE,
+        PastelAdvancements.Lategame.VISIT_ALL_IMBRIFER_BIOMES, PastelAdvancements.Lategame.COLLECT_HUMMINGSTONE,
         PastelAdvancements.Lategame.TAME_LIZARD, PastelAdvancements.Lategame.COLLECT_DOWNSTONE_FRAGMENTS,
         PastelAdvancements.Lategame.CRAFT_MOONSTONE_PEDESTAL,
         PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE,

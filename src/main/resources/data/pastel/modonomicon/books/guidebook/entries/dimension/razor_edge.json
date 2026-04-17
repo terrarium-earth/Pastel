@@ -2,7 +2,7 @@
   "name": "biome.pastel.razor_edge",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:hidden/visit_dd_biomes/razor_edge"
+    "advancement_id": "pastel:hidden/visit_imbrifer_biomes/razor_edge"
   },
   "icon": {
     "item": "pastel:shale_clay"
@@ -25,7 +25,7 @@
       "use_legacy_rendering": false,
       "title": "biome.pastel.razor_edge",
       "images": [
-        "pastel:textures/gui/guidebook/dd_razor_edge.png"
+        "pastel:textures/gui/guidebook/imbrifer_razor_edge.png"
       ],
       "border": true,
       "text": "book.pastel.guidebook.razor_edge.page0.text"

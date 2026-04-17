@@ -22,7 +22,7 @@ import earth.terrarium.pastel.blocks.crystallarieum.CrystallarieumBlockEntity;
 import earth.terrarium.pastel.blocks.crystallarieum.CrystallarieumBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.decoration.ProjectorBlockEntity;
 import earth.terrarium.pastel.blocks.decoration.ProjectorBlockEntityRenderer;
-import earth.terrarium.pastel.blocks.deeper_down.HummingstoneBlockEntity;
+import earth.terrarium.pastel.blocks.imbrifer.HummingstoneBlockEntity;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.ender.EnderDropperBlockEntity;

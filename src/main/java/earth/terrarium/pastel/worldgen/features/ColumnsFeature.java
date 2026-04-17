@@ -131,7 +131,7 @@ public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
         } else {
             BlockState blockState = world.getBlockState(mutablePos.move(Direction.DOWN));
             mutablePos.move(Direction.UP);
-            return !blockState.isAir() && !blockState.is(PastelBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES) &&
+            return !blockState.isAir() && !blockState.is(PastelBlockTags.IMBRIFER_FEATURE_REPLACEABLES) &&
                    !CANNOT_REPLACE_BLOCKS.stream()
                                          .anyMatch(block -> blockState.getBlock() == block);
         }
@@ -146,7 +146,7 @@ public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
                 return null;
             }
 
-            if (blockState.isAir() || blockState.is(PastelBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES)) {
+            if (blockState.isAir() || blockState.is(PastelBlockTags.IMBRIFER_FEATURE_REPLACEABLES)) {
                 return mutablePos;
             }
 
@@ -158,7 +158,7 @@ public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
 
     private static boolean isReplaceable(LevelAccessor world, int seaLevel, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos);
-        return blockState.isAir() || blockState.is(PastelBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES) ||
+        return blockState.isAir() || blockState.is(PastelBlockTags.IMBRIFER_FEATURE_REPLACEABLES) ||
                !blockState.getFluidState()
                           .isEmpty() && pos.getY() <= seaLevel;
     }

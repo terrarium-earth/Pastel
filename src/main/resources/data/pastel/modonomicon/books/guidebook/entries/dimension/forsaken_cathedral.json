@@ -24,7 +24,7 @@
       "use_legacy_rendering": true,
       "title": "structure.pastel.forsaken_cathedral",
       "images": [
-        "pastel:textures/gui/guidebook/dd_forsaken_cathedral.png"
+        "pastel:textures/gui/guidebook/imbrifer_forsaken_cathedral.png"
       ],
       "border": true,
       "text": "book.pastel.guidebook.forsaken_cathedral.page0.text"

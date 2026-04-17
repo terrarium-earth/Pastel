@@ -17,7 +17,7 @@
       "offset": 2
     },
     "music": {
-      "sound": "pastel:music.deeper_down.deep_barrens",
+      "sound": "pastel:music.imbrifer.deep_barrens",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -74,7 +74,7 @@
   "spawn_costs": {},
   "carvers": {
     "air": [
-      "pastel:dd_cave"
+      "pastel:imbrifer_cave"
     ]
   },
   "features": [
@@ -83,7 +83,7 @@
     ],
     [],
     [
-      "pastel:dd_downstone_sloped",
+      "pastel:imbrifer_downstone_sloped",
       "pastel:moonstone_geode",
       "pastel:blackslag_pile",
       "pastel:stone_pile",
@@ -93,29 +93,29 @@
     [],
     [],
     [
-      "pastel:dd_iron_ore",
-      "pastel:dd_iron_ore_extra",
-      "pastel:dd_gold_ore",
-      "pastel:dd_gold_ore_extra",
-      "pastel:dd_diamond_ore",
-      "pastel:dd_emerald_ore",
-      "pastel:dd_tuff",
-      "pastel:dd_gravel",
-      "pastel:dd_infested",
-      "pastel:dd_granite",
-      "pastel:dd_diorite",
-      "pastel:dd_andesite",
-      "pastel:dd_stone"
+      "pastel:imbrifer_iron_ore",
+      "pastel:imbrifer_iron_ore_extra",
+      "pastel:imbrifer_gold_ore",
+      "pastel:imbrifer_gold_ore_extra",
+      "pastel:imbrifer_diamond_ore",
+      "pastel:imbrifer_emerald_ore",
+      "pastel:imbrifer_tuff",
+      "pastel:imbrifer_gravel",
+      "pastel:imbrifer_infested",
+      "pastel:imbrifer_granite",
+      "pastel:imbrifer_diorite",
+      "pastel:imbrifer_andesite",
+      "pastel:imbrifer_stone"
     ],
     [],
     [
-      "pastel:dd_water_springs",
-      "pastel:dd_lava_springs"
+      "pastel:imbrifer_water_springs",
+      "pastel:imbrifer_lava_springs"
     ],
     [
       "minecraft:brown_mushroom_nether",
       "minecraft:red_mushroom_nether",
-      "pastel:dd_glow_lichen",
+      "pastel:imbrifer_glow_lichen",
       "pastel:dragonjags/random_single"
     ],
     []

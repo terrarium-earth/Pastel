@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.data.models.block;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.blocks.deeper_down.HummingstoneBlock;
+import earth.terrarium.pastel.blocks.imbrifer.HummingstoneBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.data.models.block.deco.BalciteBlockModels;
 import earth.terrarium.pastel.data.models.block.deco.ColoredBlockModels;

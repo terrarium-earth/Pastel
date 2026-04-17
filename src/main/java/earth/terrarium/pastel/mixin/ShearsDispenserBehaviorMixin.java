@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.blocks.deeper_down.flora.SawbladeHollyBushBlock;
+import earth.terrarium.pastel.blocks.imbrifer.flora.SawbladeHollyBushBlock;
 import earth.terrarium.pastel.blocks.jade_vines.JadeVinePlantBlock;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelLootTables;
