@@ -2,7 +2,7 @@
   "name": "biome.pastel.deep_dripstone_caves",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:hidden/visit_dd_biomes/deep_dripstone_caves"
+    "advancement_id": "pastel:hidden/visit_imbrifer_biomes/deep_dripstone_caves"
   },
   "icon": {
     "item": "minecraft:dripstone_block"
@@ -25,7 +25,7 @@
       "use_legacy_rendering": false,
       "title": "biome.pastel.deep_dripstone_caves",
       "images": [
-        "pastel:textures/gui/guidebook/dd_deep_dripstone_caves.png"
+        "pastel:textures/gui/guidebook/imbrifer_deep_dripstone_caves.png"
       ],
       "border": true,
       "text": "book.pastel.guidebook.deep_dripstone_caves.page0.text"

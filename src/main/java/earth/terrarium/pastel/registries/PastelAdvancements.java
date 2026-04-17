@@ -2,9 +2,6 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-
-import static earth.terrarium.pastel.PastelCommon.locate;
 
 @SuppressWarnings("unused")
 public class PastelAdvancements {
@@ -604,7 +601,7 @@ public class PastelAdvancements {
             "lategame/trigger_unenchanted_workstaff");
         public static final ResourceLocation COLLECT_BISMUTH = PastelCommon.locate("lategame/collect_bismuth");
         public static final ResourceLocation COLLECT_DD_RESOURCES = PastelCommon.locate(
-            "lategame/collect_dd_resources");
+            "lategame/collect_imbrifer_resources");
         public static final ResourceLocation BREAK_BUDDING_BLOCK_WITH_RESONANCE_TOOL = PastelCommon.locate(
             "lategame/break_budding_block_with_resonance_tool");
         public static final ResourceLocation EQUIP_NEAT_RING = PastelCommon.locate("lategame/equip_neat_ring");
@@ -625,8 +622,8 @@ public class PastelAdvancements {
             "lategame/collect_aether_graced_nectar_gloves");
         public static final ResourceLocation FIND_EXCAVATION_SITE = PastelCommon.locate(
             "lategame/find_excavation_site");
-        public static final ResourceLocation GET_KILLED_WHILE_OUT_OF_DEEPER_DOWN_BOUNDS = PastelCommon.locate(
-            "lategame/get_killed_while_out_of_deeper_down_bounds");
+        public static final ResourceLocation GET_KILLED_WHILE_OUT_OF_IMBRIFER_BOUNDS = PastelCommon.locate(
+            "lategame/get_killed_while_out_of_imbrifer_bounds");
         public static final ResourceLocation COLLECT_ENOUGH_HINTS = PastelCommon.locate(
             "lategame/collect_enough_hints");
         public static final ResourceLocation COLLECT_AETHER_VESTIGES = PastelCommon.locate(
@@ -673,7 +670,7 @@ public class PastelAdvancements {
         public static final ResourceLocation CREATE_EVERNECTAR = PastelCommon.locate("lategame/create_evernectar");
         public static final ResourceLocation BREAK_INFESTED_BLOCK_WITH_RESONANCE_TOOL = PastelCommon.locate(
             "lategame/break_infested_block_with_resonance_tool");
-        public static final ResourceLocation REACHED_DD_FLOOR = PastelCommon.locate("lategame/reached_dd_floor");
+        public static final ResourceLocation REACHED_DD_FLOOR = PastelCommon.locate("lategame/reached_imbrifer_floor");
         public static final ResourceLocation BREAK_SPAWNER_WITH_RESONANCE_TOOL = PastelCommon.locate(
             "lategame/break_spawner_with_resonance_tool");
         public static final ResourceLocation COLLECT_MOONSTONE = PastelCommon.locate("lategame/collect_moonstone");
@@ -690,8 +687,8 @@ public class PastelAdvancements {
             "lategame/strike_up_hummingstone_hymn");
         public static final ResourceLocation COLLECT_MYSTERIOUS_LOCKET = PastelCommon.locate(
             "lategame/collect_mysterious_locket");
-        public static final ResourceLocation VISIT_ALL_DEEPER_DOWN_BIOMES = PastelCommon.locate(
-            "lategame/visit_all_deeper_down_biomes");
+        public static final ResourceLocation VISIT_ALL_IMBRIFER_BIOMES = PastelCommon.locate(
+            "lategame/visit_all_imbrifer_biomes");
         public static final ResourceLocation COLLECT_HUMMINGSTONE = PastelCommon.locate(
             "lategame/collect_hummingstone");
         public static final ResourceLocation TAME_LIZARD = PastelCommon.locate("lategame/tame_lizard");
@@ -718,20 +715,20 @@ public class PastelAdvancements {
     public static class Hidden {
         public static class VisitDDBiomes {
             public static final ResourceLocation BLACK_LANGAST = PastelCommon.locate(
-                "hidden/visit_dd_biomes/black_langast");
+                "hidden/visit_imbrifer_biomes/black_langast");
             public static final ResourceLocation NOXSHROOM_FOREST = PastelCommon.locate(
-                "hidden/visit_dd_biomes/noxshroom_forest");
+                "hidden/visit_imbrifer_biomes/noxshroom_forest");
             public static final ResourceLocation DEEP_BARRENS = PastelCommon.locate(
-                "hidden/visit_dd_biomes/deep_barrens");
+                "hidden/visit_imbrifer_biomes/deep_barrens");
             public static final ResourceLocation CRYSTAL_GARDENS = PastelCommon.locate(
-                "hidden/visit_dd_biomes/crystal_gardens");
+                "hidden/visit_imbrifer_biomes/crystal_gardens");
             public static final ResourceLocation DRAGONROT_SWAMP = PastelCommon.locate(
-                "hidden/visit_dd_biomes/dragonrot_swamp");
+                "hidden/visit_imbrifer_biomes/dragonrot_swamp");
             public static final ResourceLocation DEEP_DRIPSTONE_CAVES = PastelCommon.locate(
-                "hidden/visit_dd_biomes/deep_dripstone_caves");
+                "hidden/visit_imbrifer_biomes/deep_dripstone_caves");
             public static final ResourceLocation HOWLING_SPIRES = PastelCommon.locate(
-                "hidden/visit_dd_biomes/howling_spires");
-            public static final ResourceLocation RAZOR_EDGE = PastelCommon.locate("hidden/visit_dd_biomes/razor_edge");
+                "hidden/visit_imbrifer_biomes/howling_spires");
+            public static final ResourceLocation RAZOR_EDGE = PastelCommon.locate("hidden/visit_imbrifer_biomes/razor_edge");
         }
 
         public static class CollectCookbooks {

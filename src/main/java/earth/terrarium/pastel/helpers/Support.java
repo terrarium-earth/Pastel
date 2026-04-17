@@ -274,8 +274,8 @@ public class Support {
             case "minecraft:end" -> {
                 return "End";
             }
-            case "pastel:deeper_down" -> {
-                return "Deeper Down";
+            case "pastel:imbrifer" -> {
+                return "Imbrifer";
             }
             default -> {
                 if (dimensionKeyString.contains(":")) {

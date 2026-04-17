@@ -1,0 +1,43 @@
+{
+  "parent": "pastel:lategame/pastel_lategame",
+  "display": {
+    "icon": {
+      "id": "pastel:downstone"
+    },
+    "title": {
+      "translate": "advancements.pastel.reached_imbrifer_floor.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.reached_imbrifer_floor.description"
+    }
+  },
+  "criteria": {
+    "reached_imbrifer_floor": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "position": {
+                  "y": {
+                    "max": -310
+                  }
+                },
+                "dimension": "pastel:imbrifer"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:lategame/pastel_lategame"
+      }
+    }
+  }
+}

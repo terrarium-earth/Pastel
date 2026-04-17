@@ -33,7 +33,7 @@ public class PastelSubtitleLang {
         provider.add("pastel.subtitles.deep_crystal_ring", "Radiance resonates deeply");
         provider.add("pastel.subtitles.fissure_open", "Portal opens");
         provider.add("pastel.subtitles.dark_stake_thrown", "Dark Stake clangs");
-        provider.add("pastel.subtitles.deeper_down_theme_plays", "Imbrifer theme plays");
+        provider.add("pastel.subtitles.imbrifer_theme_plays", "Imbrifer theme plays");
         provider.add("pastel.subtitles.dimension.ambient", "Cave howls");
         provider.add("pastel.subtitles.discharge", "Electricity discharges");
         provider.add("pastel.subtitles.perfect_parry", "Sword Perfectly Parries");

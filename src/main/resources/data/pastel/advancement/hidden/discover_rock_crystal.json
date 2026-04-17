@@ -9,7 +9,7 @@
     "find_razor_edge": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:hidden/visit_dd_biomes/razor_edge"
+        "advancement": "pastel:hidden/visit_imbrifer_biomes/razor_edge"
       }
     }
   },

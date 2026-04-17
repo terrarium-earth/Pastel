@@ -514,7 +514,7 @@
     ]
   },
 
-  "music.deeper_down.black_langast": {
+  "music.imbrifer.black_langast": {
     "sounds": [
       {
         "name": "pastel:music/sunsette_darker_than_hell",
@@ -534,7 +534,7 @@
       }
     ]
   },
-  "music.deeper_down.crystal_gardens": {
+  "music.imbrifer.crystal_gardens": {
     "sounds": [
       {
         "name": "pastel:music/sunsette_darker_than_hell",
@@ -554,7 +554,7 @@
       }
     ]
   },
-  "music.deeper_down.deep_barrens": {
+  "music.imbrifer.deep_barrens": {
     "sounds": [
       {
         "name": "pastel:music/sunsette_darker_than_hell",
@@ -574,7 +574,7 @@
       }
     ]
   },
-  "music.deeper_down.deep_dripstone_caves": {
+  "music.imbrifer.deep_dripstone_caves": {
     "sounds": [
       {
         "name": "pastel:music/radiarc_circumstance",
@@ -594,7 +594,7 @@
       }
     ]
   },
-  "music.deeper_down.dragonrot_swamp": {
+  "music.imbrifer.dragonrot_swamp": {
     "sounds": [
       {
         "name": "pastel:music/sunsette_darker_than_hell",
@@ -614,7 +614,7 @@
       }
     ]
   },
-  "music.deeper_down.howling_spires": {
+  "music.imbrifer.howling_spires": {
     "sounds": [
       {
         "name": "pastel:music/radiarc_finality",
@@ -634,7 +634,7 @@
       }
     ]
   },
-  "music.deeper_down.noxshroom_forest": {
+  "music.imbrifer.noxshroom_forest": {
     "sounds": [
       {
         "name": "pastel:music/sunsette_darker_than_hell",
@@ -654,7 +654,7 @@
       }
     ]
   },
-  "music.deeper_down.razor_edge": {
+  "music.imbrifer.razor_edge": {
     "sounds": [
       {
         "name": "pastel:music/sunsette_darker_than_hell",

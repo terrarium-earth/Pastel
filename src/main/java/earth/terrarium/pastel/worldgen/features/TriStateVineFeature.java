@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.worldgen.features;
 
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.blocks.deeper_down.flora.TriStateVineBlock;
+import earth.terrarium.pastel.blocks.imbrifer.flora.TriStateVineBlock;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +29,7 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
 
         var floorState = world.getBlockState(origin.above());
 
-        if (!(floorState.is(BlockTags.DIRT) || floorState.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN)))
+        if (!(floorState.is(BlockTags.DIRT) || floorState.is(PastelBlockTags.BASE_STONE_IMBRIFER)))
             return false;
 
         var berryChance = config.berryChance();

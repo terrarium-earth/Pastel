@@ -45,9 +45,9 @@ public class PastelBlockTags {
     public static final TagKey<Block> UNBREAKABLE_MOVABLE = of("technical/unbreakable_movable");
 
     // WORLDGEN
-    public static final TagKey<Block> BASE_STONE_DEEPER_DOWN = of("base_stone_deeper_down");
+    public static final TagKey<Block> BASE_STONE_IMBRIFER = of("base_stone_imbrifer");
     public static final TagKey<Block> BLACKSLAG_ORE_REPLACEABLES = of("blackslag_ore_replaceables");
-    public static final TagKey<Block> DEEPER_DOWN_FEATURE_REPLACEABLES = of("deeper_down_feature_replaceables");
+    public static final TagKey<Block> IMBRIFER_FEATURE_REPLACEABLES = of("imbrifer_feature_replaceables");
     public static final TagKey<Block> CRYSTAL_SPIKE_BASES = of("crystal_spike_bases");
 
     // MISC

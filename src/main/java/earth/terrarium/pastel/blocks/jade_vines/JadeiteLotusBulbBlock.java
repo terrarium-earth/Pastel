@@ -56,7 +56,7 @@ public class JadeiteLotusBulbBlock extends BushBlock implements BonemealableBloc
 
     @Override
     protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-        return super.mayPlaceOn(floor, world, pos) || floor.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN);
+        return super.mayPlaceOn(floor, world, pos) || floor.is(PastelBlockTags.BASE_STONE_IMBRIFER);
     }
 
     @Override

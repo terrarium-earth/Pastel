@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.SpectacleData;
-import earth.terrarium.pastel.deeper_down.Environmental;
+import earth.terrarium.pastel.imbrifer.Environmental;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.util.Mth;

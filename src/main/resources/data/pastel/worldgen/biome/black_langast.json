@@ -17,7 +17,7 @@
       "offset": 2
     },
     "music": {
-      "sound": "pastel:music.deeper_down.black_langast",
+      "sound": "pastel:music.imbrifer.black_langast",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -74,7 +74,7 @@
   "spawn_costs": {},
   "carvers": {
     "air": [
-      "pastel:dd_cave"
+      "pastel:imbrifer_cave"
     ]
   },
   "features": [
@@ -83,7 +83,7 @@
       "pastel:lake_midnight_solution_underground"
     ],
     [
-      "pastel:dd_downstone_sloped",
+      "pastel:imbrifer_downstone_sloped",
       "pastel:blackslag_pile"
     ],
     [
@@ -93,23 +93,23 @@
     [],
     [],
     [
-      "pastel:dd_iron_ore",
-      "pastel:dd_gold_ore",
-      "pastel:dd_diamond_ore",
-      "pastel:dd_emerald_ore",
-      "pastel:dd_tuff",
-      "pastel:dd_infested",
-      "pastel:dd_granite",
-      "pastel:dd_diorite",
-      "pastel:dd_andesite",
-      "pastel:dd_stone"
+      "pastel:imbrifer_iron_ore",
+      "pastel:imbrifer_gold_ore",
+      "pastel:imbrifer_diamond_ore",
+      "pastel:imbrifer_emerald_ore",
+      "pastel:imbrifer_tuff",
+      "pastel:imbrifer_infested",
+      "pastel:imbrifer_granite",
+      "pastel:imbrifer_diorite",
+      "pastel:imbrifer_andesite",
+      "pastel:imbrifer_stone"
     ],
     [
       "pastel:sludge_vegetation"
     ],
     [],
     [
-      "pastel:dd_glow_lichen",
+      "pastel:imbrifer_glow_lichen",
       "pastel:aloe_patch_sand"
     ],
     []

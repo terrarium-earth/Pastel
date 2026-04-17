@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import com.google.common.collect.ImmutableList;
-import earth.terrarium.pastel.deeper_down.DDOreVeinSampler;
+import earth.terrarium.pastel.imbrifer.ImbriferOreVeinSampler;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.world.level.levelgen.Aquifer;
 import net.minecraft.world.level.levelgen.DensityFunction;
@@ -35,7 +35,7 @@ public abstract class ChunkNoiseSamplerMixin {
         if (noiseGeneratorSettings.defaultBlock() == PastelBlocks.BLACKSLAG.get()
                                                                            .defaultBlockState()) {
             builder.add(
-                DDOreVeinSampler.create(
+                ImbriferOreVeinSampler.create(
                     noiseRouter.veinToggle(), noiseRouter.veinRidged(), noiseRouter.veinGap(),
                     random.oreRandom()
                 ));

@@ -8,7 +8,7 @@ import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModels;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ears.EarsCompat;
 import earth.terrarium.pastel.config.PastelConfig;
-import earth.terrarium.pastel.deeper_down.EnvironmentalOverrides;
+import earth.terrarium.pastel.imbrifer.EnvironmentalOverrides;
 import earth.terrarium.pastel.entity.PastelEntityRenderers;
 import earth.terrarium.pastel.events.PastelClientEvents;
 import earth.terrarium.pastel.inventories.PastelScreenHandlerTypes;

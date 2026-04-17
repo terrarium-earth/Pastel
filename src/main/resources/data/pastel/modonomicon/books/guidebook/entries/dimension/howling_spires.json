@@ -2,7 +2,7 @@
   "name": "biome.pastel.howling_spires",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:hidden/visit_dd_biomes/howling_spires"
+    "advancement_id": "pastel:hidden/visit_imbrifer_biomes/howling_spires"
   },
   "icon": {
     "item": "pastel:ashen_blackslag"
@@ -25,7 +25,7 @@
       "use_legacy_rendering": false,
       "title": "biome.pastel.howling_spires",
       "images": [
-        "pastel:textures/gui/guidebook/dd_howling_spires.png"
+        "pastel:textures/gui/guidebook/imbrifer_howling_spires.png"
       ],
       "border": true,
       "text": "book.pastel.guidebook.howling_spires.page0.text"

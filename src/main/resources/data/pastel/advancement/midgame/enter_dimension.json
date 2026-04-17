@@ -18,7 +18,7 @@
     "enter_dimension": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "to": "pastel:deeper_down"
+        "to": "pastel:imbrifer"
       }
     },
     "gotten_previous": {

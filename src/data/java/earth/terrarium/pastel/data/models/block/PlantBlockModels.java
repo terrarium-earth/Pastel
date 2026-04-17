@@ -2,7 +2,7 @@ package earth.terrarium.pastel.data.models.block;
 
 import earth.terrarium.pastel.blocks.TallCropBlock;
 import earth.terrarium.pastel.blocks.conditional.BloodOrchidBlock;
-import earth.terrarium.pastel.blocks.deeper_down.flora.*;
+import earth.terrarium.pastel.blocks.imbrifer.flora.*;
 import earth.terrarium.pastel.blocks.jade_vines.*;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;

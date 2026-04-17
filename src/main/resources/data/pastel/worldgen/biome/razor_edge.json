@@ -23,7 +23,7 @@
       "offset": 2
     },
     "music": {
-      "sound": "pastel:music.deeper_down.razor_edge",
+      "sound": "pastel:music.imbrifer.razor_edge",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -80,50 +80,50 @@
   "spawn_costs": {},
   "carvers": {
     "air": [
-      "pastel:dd_cave"
+      "pastel:imbrifer_cave"
     ]
   },
   "features": [
     [],
     [],
     [
-      "pastel:dd_downstone_sloped",
+      "pastel:imbrifer_downstone_sloped",
       "pastel:moonstone_geode",
-      "pastel:dd_pyrite_pillar",
-      "pastel:dd_shale_clay_pillar",
+      "pastel:imbrifer_pyrite_pillar",
+      "pastel:imbrifer_shale_clay_pillar",
       "pastel:blackslag_pile"
     ],
     [],
     [
-      "pastel:dd_shale_clay_columns",
-      "pastel:dd_pyrite_columns",
-      "pastel:dd_rock_crystal_columns",
-      "pastel:dd_shale_clay_crystal_formations",
-      "pastel:dd_sawblade_delta"
+      "pastel:imbrifer_shale_clay_columns",
+      "pastel:imbrifer_pyrite_columns",
+      "pastel:imbrifer_rock_crystal_columns",
+      "pastel:imbrifer_shale_clay_crystal_formations",
+      "pastel:imbrifer_sawblade_delta"
     ],
     [],
     [
-      "pastel:dd_iron_ore",
-      "pastel:dd_gold_ore",
-      "pastel:dd_coal_ore_razor",
-      "pastel:dd_diamond_ore",
-      "pastel:dd_emerald_ore",
-      "pastel:dd_tuff",
-      "pastel:dd_gravel",
-      "pastel:dd_infested",
-      "pastel:dd_granite",
-      "pastel:dd_diorite",
-      "pastel:dd_andesite",
-      "pastel:dd_stone"
+      "pastel:imbrifer_iron_ore",
+      "pastel:imbrifer_gold_ore",
+      "pastel:imbrifer_coal_ore_razor",
+      "pastel:imbrifer_diamond_ore",
+      "pastel:imbrifer_emerald_ore",
+      "pastel:imbrifer_tuff",
+      "pastel:imbrifer_gravel",
+      "pastel:imbrifer_infested",
+      "pastel:imbrifer_granite",
+      "pastel:imbrifer_diorite",
+      "pastel:imbrifer_andesite",
+      "pastel:imbrifer_stone"
     ],
     [],
     [
-      "pastel:dd_water_springs",
-      "pastel:dd_lava_springs"
+      "pastel:imbrifer_water_springs",
+      "pastel:imbrifer_lava_springs"
     ],
     [
       "pastel:pyrite_ripper_wall_patch",
-      "pastel:dd_glow_lichen",
+      "pastel:imbrifer_glow_lichen",
       "pastel:aloe_patch",
       "pastel:sawblade_holly_bush_patch",
       "pastel:bristle_sprouts"

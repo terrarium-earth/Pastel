@@ -233,7 +233,7 @@ public class DeeperDownPortalBlock extends Block {
                     }
 
                     if (entity instanceof Player) {
-                        makeRoomAround(targetWorld, portalPos, 4, 2, false, PastelBlockTags.BASE_STONE_DEEPER_DOWN);
+                        makeRoomAround(targetWorld, portalPos, 4, 2, false, PastelBlockTags.BASE_STONE_IMBRIFER);
                     }
 
                     BlockPos targetPos = portalPos.below(3);

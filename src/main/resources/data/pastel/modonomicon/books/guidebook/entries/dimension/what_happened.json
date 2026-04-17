@@ -29,8 +29,8 @@
       "type": "pastel:checklist",
       "title": "book.pastel.guidebook.ideas.where_to_look",
       "checklist": {
-        "pastel:lategame/visit_all_deeper_down_biomes": "book.pastel.guidebook.what_happened.page1.checklist.entry0",
-        "pastel:lategame/reached_dd_floor": "book.pastel.guidebook.what_happened.page1.checklist.entry1",
+        "pastel:lategame/visit_all_imbrifer_biomes": "book.pastel.guidebook.what_happened.page1.checklist.entry0",
+        "pastel:lategame/reached_imbrifer_floor": "book.pastel.guidebook.what_happened.page1.checklist.entry1",
         "pastel:lategame/find_excavation_site": "book.pastel.guidebook.what_happened.page1.checklist.entry2"
       }
     },
@@ -47,7 +47,7 @@
       "type": "modonomicon:text",
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "pastel:lategame/visit_all_deeper_down_biomes"
+        "advancement_id": "pastel:lategame/visit_all_imbrifer_biomes"
       },
       "title": "book.pastel.guidebook.what_happened.page3.title",
       "text": "book.pastel.guidebook.what_happened.page3.text"
@@ -56,7 +56,7 @@
       "type": "modonomicon:text",
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "pastel:lategame/reached_dd_floor"
+        "advancement_id": "pastel:lategame/reached_imbrifer_floor"
       },
       "title": "book.pastel.guidebook.what_happened.page4.title",
       "text": "book.pastel.guidebook.what_happened.page4.text"

@@ -11,7 +11,7 @@
   "icon": "pastel:textures/gui/guidebook/icons/idea.png",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:hidden/visit_dd_biomes/crystal_gardens"
+    "advancement_id": "pastel:hidden/visit_imbrifer_biomes/crystal_gardens"
   },
   "read_by_default": true,
   "turnin": "pastel:midgame/collect_resonant_lily",

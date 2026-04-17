@@ -30,7 +30,7 @@ public class JadeiteLotusFeature extends Feature<JadeiteLotusFeatureConfig> {
 
         var floorState = world.getBlockState(inverted ? origin.below() : origin.above());
 
-        if (!(floorState.is(BlockTags.DIRT) || floorState.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN)))
+        if (!(floorState.is(BlockTags.DIRT) || floorState.is(PastelBlockTags.BASE_STONE_IMBRIFER)))
             return false;
 
         // try out how far we can grow

@@ -6,10 +6,10 @@
     },
     "frame": "goal",
     "title": {
-      "translate": "advancements.pastel.collect_dd_resources.title"
+      "translate": "advancements.pastel.collect_imbrifer_resources.title"
     },
     "description": {
-      "translate": "advancements.pastel.collect_dd_resources.description"
+      "translate": "advancements.pastel.collect_imbrifer_resources.description"
     }
   },
   "criteria": {

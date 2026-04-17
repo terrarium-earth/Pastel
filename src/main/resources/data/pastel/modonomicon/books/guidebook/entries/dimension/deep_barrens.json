@@ -2,7 +2,7 @@
   "name": "biome.pastel.deep_barrens",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:hidden/visit_dd_biomes/deep_barrens"
+    "advancement_id": "pastel:hidden/visit_imbrifer_biomes/deep_barrens"
   },
   "icon": {
     "item": "pastel:blackslag"
@@ -25,7 +25,7 @@
       "use_legacy_rendering": false,
       "title": "biome.pastel.deep_barrens",
       "images": [
-        "pastel:textures/gui/guidebook/dd_deep_barrens.png"
+        "pastel:textures/gui/guidebook/imbrifer_deep_barrens.png"
       ],
       "border": true,
       "text": "book.pastel.guidebook.deep_barrens.page0.text"

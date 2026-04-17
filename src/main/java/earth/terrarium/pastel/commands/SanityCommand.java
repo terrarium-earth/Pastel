@@ -14,7 +14,7 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import earth.terrarium.pastel.blocks.PlacedItemBlock;
-import earth.terrarium.pastel.blocks.deeper_down.flora.WeepingGalaFrondsBlock;
+import earth.terrarium.pastel.blocks.imbrifer.flora.WeepingGalaFrondsBlock;
 import earth.terrarium.pastel.blocks.gemstone.PastelBuddingBlock;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;

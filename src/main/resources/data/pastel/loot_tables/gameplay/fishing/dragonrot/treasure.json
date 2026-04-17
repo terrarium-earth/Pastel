@@ -58,7 +58,7 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "dimension": "pastel:deeper_down"
+                "dimension": "pastel:imbrifer"
               }
             }
           ]

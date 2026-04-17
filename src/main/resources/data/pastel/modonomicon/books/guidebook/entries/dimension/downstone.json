@@ -2,7 +2,7 @@
   "name": "block.pastel.downstone",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "pastel:lategame/reached_dd_floor"
+    "advancement_id": "pastel:lategame/reached_imbrifer_floor"
   },
   "icon": {
     "item": "pastel:downstone"
