@@ -13,6 +13,11 @@
               "name": "pastel:viridian_crystal",
               "conditions": [
                 {
+                  "condition": "pastel:near_block",
+                  "block": "#pastel:viridian_crystal_purity_sources",
+                  "search_radius": 10
+                },
+                {
                   "condition": "minecraft:match_tool",
                   "predicate": {
                     "predicates": {
@@ -32,6 +37,13 @@
             {
               "type": "minecraft:item",
               "name": "pastel:raw_malachite",
+              "conditions": [
+                {
+                  "condition": "pastel:near_block",
+                  "block": "#pastel:viridian_crystal_purity_sources",
+                  "search_radius": 10
+                }
+              ],
               "functions": [
                 {
                   "function": "minecraft:set_count",
@@ -49,6 +61,20 @@
                 },
                 {
                   "function": "minecraft:explosion_decay"
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:raw_copper",
+              "conditions": [
+                {
+                  "condition": "minecraft:inverted",
+                  "term": {
+                    "condition": "pastel:near_block",
+                    "block": "#pastel:viridian_crystal_purity_sources",
+                    "search_radius": 10
+                  }
                 }
               ]
             }

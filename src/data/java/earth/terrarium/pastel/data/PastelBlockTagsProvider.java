@@ -40,13 +40,18 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
                                               .add(Blocks.INFESTED_MOSSY_STONE_BRICKS)
                                               .add(Blocks.INFESTED_STONE_BRICKS)
                                               .add(PastelBlocks.INFESTED_BLACKSLAG.get());
-        tag(PastelBlockTags.WARD_DISRUPTABLE).add(
-            PastelBlocks.AZURE_CRYSTAL.get()
-        );
+        tag(PastelBlockTags.WARD_DISRUPTABLE).add(PastelBlocks.AZURE_CRYSTAL.get());
         tag(PastelBlockTags.CRYSTAL_SPIKE_BASES).addTag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
                                                 .add(PastelBlocks.FROSTED_DEEPSLATE.get());
         tag(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST).addTag(PastelBlockTags.UNBREAKABLE);
-
+        tag(PastelBlockTags.VIRIDIAN_CRYSTAL_PURITY_SOURCES).add(
+            PastelBlocks.MOONSTONE_BLOCK.get(), PastelBlocks.POLISHED_MOONSTONE_BLOCK.get(),
+            PastelBlocks.MOONSTONE_POWDER_BLOCK.get(), PastelBlocks.MOONSTONE_CLUSTER.get(),
+            PastelBlocks.BUDDING_MOONSTONE.get(), PastelBlocks.MOONSTONE_ORE.get(),
+            PastelBlocks.DEEPSLATE_MOONSTONE_ORE.get(), PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get(),
+            PastelBlocks.SMALL_MOONSTONE_BUD.get(), PastelBlocks.MEDIUM_MOONSTONE_BUD.get(),
+            PastelBlocks.LARGE_MOONSTONE_BUD.get()
+        );
     }
 
 }
