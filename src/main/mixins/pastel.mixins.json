@@ -45,7 +45,6 @@
     "InfestedBlockMixin",
     "ItemEntityMixin",
     "ItemFrameEntityMixin",
-    "ItemPredicateMixin",
     "ItemStackMixin",
     "KilledByPlayerLootConditionMixin",
     "LightningEntityMixin",

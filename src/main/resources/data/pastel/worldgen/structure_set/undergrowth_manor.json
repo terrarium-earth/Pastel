@@ -11,10 +11,10 @@
     "spread_type": "triangular",
     "frequency": 0.9,
     "spacing": 80,
-    "separation": 60
-  },
-  "exclusion_zone": {
-    "chunk_count": 16,
-    "other_set": "pastel:city_below"
+    "separation": 60,
+    "exclusion_zone": {
+      "chunk_count": 16,
+      "other_set": "pastel:city_below"
+    }
   }
 }
