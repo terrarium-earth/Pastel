@@ -1,15 +1,11 @@
 package earth.terrarium.pastel.registries;
 
 import com.terraformersmc.biolith.api.biome.BiomePlacement;
-import com.terraformersmc.biolith.api.surface.SurfaceGeneration;
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
 
 @SuppressWarnings("unused")
 public class PastelBiomes {

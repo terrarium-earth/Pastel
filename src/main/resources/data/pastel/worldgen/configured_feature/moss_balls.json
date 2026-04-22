@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "pastel:vegetation_patch",
   "config": {
     "tries": 96,
     "xz_spread": 11,
@@ -35,6 +35,12 @@
             "blocks": "minecraft:air"
           }
         }
+      ]
+    },
+    "valid_soil": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "pastel:overgrown_blackslag"
       ]
     }
   }
