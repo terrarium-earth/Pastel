@@ -12,7 +12,7 @@ import earth.terrarium.pastel.entity.spawners.ShootingStarSpawner;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
-import earth.terrarium.pastel.inventories.AutoCraftingMode;
+import earth.terrarium.pastel.inventories.CompactionCraftingMode;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.tools.TuningStampItem;
@@ -183,7 +183,7 @@ public class PastelMiscEvents {
             public void onResourceManagerReload(ResourceManager resourceManager) {
                 if (!FMLEnvironment.dist.isDedicatedServer()) PastelSided.clearToastManager();
 
-                AutoCraftingMode.clearCache();
+                CompactionCraftingMode.clearCache();
                 PastelCommon.CACHED_ITEM_TAG_MAP.clear();
 
                 if (PastelCommon.getSidedServer() != null) {

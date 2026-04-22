@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.chests;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
-import earth.terrarium.pastel.inventories.AutoCraftingMode;
+import earth.terrarium.pastel.inventories.CompactionCraftingMode;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.CompactingChestStatusUpdatePayload;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
@@ -28,7 +28,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -45,15 +44,14 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
     private static final FlowAnimator.Factory<CompactingChestBlockEntity> FACTORY;
 
     @NotNull
-    private AutoCraftingMode mode = AutoCraftingMode.X3;
+    private CompactionCraftingMode mode = CompactionCraftingMode.X3;
     @NotNull
-    private Optional<RecipeHolder<CraftingRecipe>> cachedRecipe = Optional.empty();
+    private Optional<CompactionRecipe> activeRecipe = Optional.empty();
     private boolean isOpen;
     public long craftingTimeStamp;
 
     protected FlowAnimator animator;
     protected FlowData<Float> _piston = FlowData.NULL(), _driver = FlowData.NULL(), _cap = FlowData.NULL();
-
 
     private final ContainerData propertyDelegate = new ContainerData() {
         @Override
@@ -64,7 +62,7 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
 
         @Override
         public void set(int index, int value) {
-            if (index == 0) mode = AutoCraftingMode.values()[value];
+            if (index == 0) mode = CompactionCraftingMode.values()[value];
         }
 
         @Override
@@ -102,26 +100,23 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
     }
 
     private void process() {
-        var available = InventoryHelper.getAvailableItems(inventory);
-
-        if (cachedRecipe.isEmpty()) {
-            findRecipe(available);
+        if (activeRecipe.isEmpty()) {
+            activeRecipe = findRecipe(mode, InventoryHelper.getAvailableItems(inventory));
             return;
         }
 
-        var recipe = cachedRecipe.get();
-        var ref = AutoCraftingMode.getCache(mode)
-                                  .getOrDefault(recipe.id(), ItemReference.empty());
+        var recipe = activeRecipe.get();
+        var ref = recipe.inputRef();
 
         if (ref.isEmpty())
             return;
 
-        if (!hasEnough(ref, available)) {
-            cachedRecipe = Optional.empty();
+        if (!InventoryHelper.isItemCountInInventory(inventory, ref, mode.getSize())) {
+            activeRecipe = Optional.empty();
             return;
         }
 
-        var result = recipe.value()
+        var result = recipe.recipe().value()
                            .getResultItem(level.registryAccess())
                            .copy();
 
@@ -141,48 +136,34 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
         }
     }
 
-    private boolean hasEnough(ItemReference ref, List<ItemStorage> available) {
-        if (available.isEmpty())
-            return false;
-
-        for (ItemStorage itemStorage : available) {
-            if (!itemStorage.getReference()
-                            .equals(ref))
-                continue;
-
-            if (itemStorage.getCount() >= mode.getSize())
-                return true;
-        }
-        return false;
-    }
-
-    private void findRecipe(List<ItemStorage> available) {
-        CraftingInput input = null;
-        ItemReference target = null;
-
+    private Optional<CompactionRecipe> findRecipe(CompactionCraftingMode mode, List<ItemStorage> available) {
+        var compactionCache = mode.getCache();
         for (ItemStorage storage : available) {
             if (storage.getCount() >= mode.getSize()) {
-                input = mode.createRecipeInput(storage.stack(1))
-                            .input();
-                target = storage.getReference();
+                var inputStack = mode.createRecipeInput(storage.stack(1))
+                        .input();
+                var inputRef = storage.getReference();
 
-                cachedRecipe = level.getRecipeManager()
-                                    .getRecipeFor(RecipeType.CRAFTING, input, level);
-                if (cachedRecipe.isPresent())
-                    break;
+                var cacheTry = compactionCache.get(inputRef);
+                if (cacheTry.isPresent()) {
+                    var cacheHit = cacheTry.get();
+                    // the cache hit so there's no need to go to the global recipe manager
+                    // if the recipe is not present, this item is not compactable in this mode
+                    if (cacheHit.isPresent())
+                        return cacheHit.map(r -> new CompactionRecipe(inputRef, r));
+                    else
+                        continue;
+                }
+
+                var recipe = level.getRecipeManager()
+                                  .getRecipeFor(RecipeType.CRAFTING, inputStack, level);
+                
+                compactionCache.put(inputRef, recipe);
+                if (recipe.isPresent())
+                    return recipe.map(r -> new CompactionRecipe(inputRef, r));
             }
         }
-
-        if (input == null)
-            return;
-
-        ItemReference finalTarget = target;
-        cachedRecipe.ifPresent(r -> {
-            var recipes = AutoCraftingMode.getCache(mode);
-            recipes.putIfAbsent(r.id(), finalTarget);
-            craftingTimeStamp = level.getGameTime();
-            CompactingChestStatusUpdatePayload.sendCompactingChestStatusUpdate(this);
-        });
+        return Optional.empty();
     }
 
     public void produceRunningEffects() {
@@ -212,7 +193,11 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
         super.loadAdditional(tag, registryLookup);
         if (tag.contains("AutoCraftingMode", Tag.TAG_ANY_NUMERIC)) {
             int autoCraftingModeInt = tag.getInt("AutoCraftingMode");
-            this.mode = AutoCraftingMode.values()[autoCraftingModeInt];
+            var mode = CompactionCraftingMode.values()[autoCraftingModeInt];
+            if (this.mode != mode) {
+                this.mode = mode;
+                this.activeRecipe = Optional.empty();
+            }
         }
     }
 
@@ -240,12 +225,12 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
         return PastelSounds.COMPACTING_CHEST_CLOSE;
     }
 
-    public void applySettings(AutoCraftingMode mode) {
+    public void applySettings(CompactionCraftingMode mode) {
         if (this.mode == mode)
             return;
 
         this.mode = mode;
-        this.cachedRecipe = Optional.empty();
+        this.activeRecipe = Optional.empty();
         setChanged();
     }
 
@@ -295,4 +280,6 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
 
         FACTORY = builder.build();
     }
+
+    private record CompactionRecipe(ItemReference inputRef, RecipeHolder<CraftingRecipe> recipe) {}
 }
