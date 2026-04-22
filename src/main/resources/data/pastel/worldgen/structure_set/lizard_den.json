@@ -20,7 +20,7 @@
   "placement": {
     "type": "minecraft:random_spread",
     "salt": 893368,
-    "exclusion zone": {
+    "exclusion_zone": {
       "other_set": "pastel:city_below",
       "chunk_count": 1
     },
