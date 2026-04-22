@@ -2424,13 +2424,13 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.ideas.malachite.page0.text",
-            "When venturing through the depths, I saw small mineral inclusions in the stone. I did not think too much" +
-            " about them at the time. But now..."
+            "When walking through those verdant gardens, I saw great seams of crystal running through the rock. When " +
+            "I tried to collect some, though, all I got was copper..."
         );
         provider.add(
             "book.pastel.guidebook.ideas.malachite.page1.text",
-            "That bright green ore can be found in the deepest parts of Imbrifer. It's not often found exposed to the" +
-            " air, so the best way to get it is by branch mining."
+            "Malachite is found in large quantities in the crystal gardens, but requires a **[#](b9bebe)Pure** block " +
+            "placed nearby, or a tool infused with **[#](b9bebe)Purity**, to harvest."
         );
         provider.add(
             "book.pastel.guidebook.ideas.mermaids_gems.page0.text",
