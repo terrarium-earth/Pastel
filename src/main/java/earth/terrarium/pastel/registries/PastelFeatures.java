@@ -51,6 +51,7 @@ public class PastelFeatures {
     public static Feature<AshDunesFeatureConfig> ASH_DUNES = new AshDunesFeature(AshDunesFeatureConfig.CODEC);
 
     public static Feature<SnowgraveFeatureConfig> SNOWGRAVE = new SnowgraveFeature(SnowgraveFeatureConfig.CODEC);
+    public static Feature<VegetationPatchFeatureConfig> VEGETATION_PATCH = new VegetationPatchFeature(VegetationPatchFeatureConfig.CODEC);
 
     public static void register(IEventBus bus) {
         registerFeature("weighted_random_feature", WEIGHTED_RANDOM_FEATURE);
@@ -74,6 +75,7 @@ public class PastelFeatures {
         registerFeature("wall_patch", WALL_PATCH);
         registerFeature("ash_dunes", ASH_DUNES);
         registerFeature("snowgrave", SNOWGRAVE);
+        registerFeature("vegetation_patch", VEGETATION_PATCH);
         REGISTER.register(bus);
     }
 
