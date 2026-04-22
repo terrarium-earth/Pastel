@@ -2,7 +2,7 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.blocks.chests.CompactingChestBlockEntity;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
-import earth.terrarium.pastel.inventories.AutoCraftingMode;
+import earth.terrarium.pastel.inventories.CompactionCraftingMode;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,13 +11,13 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
-public record ChangeCompactingChestSettingsPayload(AutoCraftingMode mode) implements CustomPacketPayload {
+public record ChangeCompactingChestSettingsPayload(CompactionCraftingMode mode) implements CustomPacketPayload {
 
     public static final CustomPacketPayload.Type<ChangeCompactingChestSettingsPayload> ID = PastelC2SPackets.makeId(
         "change_compacting_chest_settings");
     public static final StreamCodec<FriendlyByteBuf, ChangeCompactingChestSettingsPayload> CODEC
         = StreamCodec.composite(
-        PacketCodecHelper.enumOf(AutoCraftingMode::values),
+        PacketCodecHelper.enumOf(CompactionCraftingMode::values),
         ChangeCompactingChestSettingsPayload::mode,
         ChangeCompactingChestSettingsPayload::new
     );
