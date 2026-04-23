@@ -4,16 +4,19 @@ import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.api.block.PaintbrushInformed;
 import earth.terrarium.pastel.api.block.PaintbrushTriggered;
+import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.EntityColorProcessorRegistry;
+import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.components.PaintbrushComponent;
 import earth.terrarium.pastel.entity.entity.InkProjectileEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.level.BlockVariantHelper;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.inventories.PaintbrushScreenHandler;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.registries.*;
@@ -27,12 +30,18 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Interaction;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -41,24 +50,31 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.util.thread.EffectiveSide;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class PaintbrushItem extends Item implements SignApplicator {
 
     public static final int COOLDOWN_DURATION_TICKS = 10;
     public static final int BLOCK_COLOR_COST = 25;
     public static final int INK_SLING_COST = 100;
-    public static final int CANTRIP_COST = 100;
+    public static final int CANTRIP_COST = 50;
     public static final int ITEM_VACUUM_RANGE = 16; // todo move to config?
+    public static final float PINK_HEAL_AMOUNT = 4f;
+    public static final TagKey<Block>[] MUTANDIS_TAGS = new TagKey[]{
+        BlockTags.FLOWERS, BlockTags.SAPLINGS, BlockTags.LEAVES, BlockTags.CROPS, BlockTags.CORALS,
+        BlockTags.WART_BLOCKS
+    };
 
     public PaintbrushItem(Properties settings) {
         super(settings);
@@ -106,8 +122,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
 
     public MenuProvider createScreenHandlerFactory(ItemStack itemStack) {
         return new SimpleMenuProvider(
-            (syncId, inventory, player) ->
-                new PaintbrushScreenHandler(syncId, inventory, itemStack),
+            (syncId, inventory, player) -> new PaintbrushScreenHandler(syncId, inventory, itemStack),
             Component.translatable("item.pastel.paintbrush")
         );
     }
@@ -151,8 +166,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 var player = context.getPlayer();
                 if (state.getBlock() instanceof PaintbrushInformed infoBlock && player != null) {
                     var message = infoBlock.getStatusBarInfo(level, context.getClickedPos(), player);
-                    if (message != null)
-                        player.displayClientMessage(message, true);
+                    if (message != null) player.displayClientMessage(message, true);
                 }
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
@@ -162,7 +176,10 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 }
             }
             case SPELL -> {
-                if (canTrip(context.getPlayer()) && tryBlockCantrip(context)) {
+                var color = getColor(context.getItemInHand());
+                if (context.getPlayer() != null && canTrip(context.getPlayer()) && color.isPresent() &&
+                    InkPowered.hasAvailableInk(
+                        context.getPlayer(), new InkCost(color.get(), CANTRIP_COST)) && tryBlockCantrip(context)) {
                     if (context.getPlayer() != null && getColor(context.getItemInHand()).isPresent())
                         InkPowered.tryDrainEnergy(
                             context.getPlayer(), getColor(context.getItemInHand()).get(), CANTRIP_COST);
@@ -187,6 +204,9 @@ public class PaintbrushItem extends Item implements SignApplicator {
         var pos = context.getClickedPos();
         var state = level.getBlockState(pos);
         var block = state.getBlock();
+        var blockRegistry = context.getLevel()
+                                   .registryAccess()
+                                   .registryOrThrow(Registries.BLOCK);
         switch (dyeColor.get()) { // note: because java is fucked up and evil the stargazer colors will not be able
             // to be in here
             case DyeColor.MAGENTA -> { // "World’s worst tick acceleration"
@@ -218,8 +238,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
             case DyeColor.CYAN -> { // "Falling Block"
                 var destroySpeed = state.getDestroySpeed(level, pos);
                 if (!(level instanceof ServerLevel serverLevel) || destroySpeed == -1 || destroySpeed >= 50 ||
-                    state.hasBlockEntity()
-                    || state.is(PastelBlockTags.REALLY_FALLING_BLOCK_BLACKLISTED)) {
+                    state.hasBlockEntity() || state.is(PastelBlockTags.REALLY_FALLING_BLOCK_BLACKLISTED)) {
                     return false;
                 }
                 var enchReg = level.registryAccess()
@@ -236,15 +255,47 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 return true;
             }
             case DyeColor.YELLOW -> { // "Lightning"
-//                var offsetPos = pos.relative(context.getClickedFace());
-//                if(level.getBlockState(offsetPos).canBeReplaced()){
-//                    level.setBlockAndUpdate(offsetPos, PastelBlocks.ENERGETIC_MOTE.get().defaultBlockState());
-//                    return true;
-//                }
+                var offsetPos = pos.relative(context.getClickedFace());
+                if (level.getBlockState(offsetPos)
+                         .canBeReplaced()) {
+                    level.setBlockAndUpdate(
+                        offsetPos, PastelBlocks.ENERGETIC_MOTE.get()
+                                                              .defaultBlockState()
+                    );
+                    return true;
+                }
                 return false;
             }
             case DyeColor.LIME -> { // "Mutandis from the hit mod Witchery Resurrected"
-                // todo make the lists and such for this
+                if (!(level instanceof ServerLevel sl)) return false;
+                if (state.is(PastelBlockTags.MUTANDIS_BLACKLIST)) return false;
+                for (TagKey<Block> tag : MUTANDIS_TAGS) {
+                    if (state.is(tag)) {
+                        var tagEntries = blockRegistry.getTag(tag);
+                        if (tagEntries.isEmpty()) continue;
+                        var list = tagEntries.get().contents;
+                        var index = list.indexOf(state.getBlockHolder()) + 1;
+                        if (index >= list.size()) index = 0;
+                        if (list.get(index)
+                                .is(PastelBlockTags.MUTANDIS_BLACKLIST)) index = (index + 1) % list.size();
+                        var holder = list.get(index)
+                                         .unwrap();
+                        // waugh. this is needed so that mutating from a double block (like peonies) to a single block
+                        // (like poppies) doesn't leave floating half-flowers
+                        BlockPos finalPos = (state.getBlock() instanceof DoublePlantBlock && state.getValue(
+                            DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER) ? pos.below() : pos;
+                        if (state.getBlock() instanceof DoublePlantBlock) level.setBlock(
+                            pos.above(), Blocks.AIR.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS);
+                        holder.ifLeft(blockResourceKey -> {
+                                  var newBlock = blockRegistry.get(blockResourceKey);
+                                  if (newBlock != null) mutate(finalPos, newBlock, sl);
+                              })
+                              .ifRight(block1 -> {
+                                  mutate(finalPos, block1, sl);
+                              });
+                        return true;
+                    }
+                }
                 return false;
             }
             case DyeColor.PINK -> { // "Touch Heal"
@@ -272,6 +323,15 @@ public class PaintbrushItem extends Item implements SignApplicator {
             case null, default -> throw new IllegalStateException(
                 "Unimplemented color, yell at lily (unless this is from an addon in which case yell at them): " +
                 inkColor.get());
+        }
+    }
+
+    private void mutate(BlockPos pos, Block block, ServerLevel level) {
+        if (block instanceof DoublePlantBlock doublePlantBlock) {
+            DoublePlantBlock.placeAt(
+                level, block.defaultBlockState(), pos, Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
+        } else {
+            level.setBlock(pos, block.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
         }
     }
 
@@ -417,25 +477,93 @@ public class PaintbrushItem extends Item implements SignApplicator {
 
     @Override
     public InteractionResult interactLivingEntity(
-        ItemStack stack, Player user, LivingEntity entity, InteractionHand hand) {
-        Level world = user.level();
-        if (canPaint(user) && GenericClaimModsCompat.canInteract(entity.level(), entity, user)) {
-            Optional<InkColor> color = getColor(stack);
-
-            if (color.isPresent()
-                && payBlockColorCost(user, color.get())
-                && EntityColorProcessorRegistry.colorEntity(
-                entity, color.get()
-                             .getDyeColor(), entity instanceof Player player ? player : null
-            )) {
-
-                entity.level()
-                      .playSound(null, entity, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-                return InteractionResult.sidedSuccess(world.isClientSide);
+        ItemStack stack, Player player, LivingEntity entity,
+        InteractionHand hand
+    ) {
+        Level level = player.level();
+        switch (getMode(stack)) {
+            case INFO -> {
+                if (entity instanceof PaintbrushInformed infoBlock) {
+                    var message = infoBlock.getStatusBarInfo(level, entity.blockPosition(), player);
+                    if (message != null) player.displayClientMessage(message, true);
+                }
+                return InteractionResult.sidedSuccess(level.isClientSide);
             }
+            case PAINT -> {
+                if (canPaint(player) && GenericClaimModsCompat.canInteract(entity.level(), entity, player)) {
+                    Optional<InkColor> color = getColor(stack);
 
+                    if (color.isPresent() && payBlockColorCost(player, color.get()) &&
+                        EntityColorProcessorRegistry.colorEntity(
+                            entity, color.get()
+                                         .getDyeColor(), entity instanceof Player targetPlayer ? targetPlayer : null
+                        )) {
+                        entity.level()
+                              .playSound(null, entity, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+                        return InteractionResult.sidedSuccess(level.isClientSide);
+                    }
+                }
+            }
+            case SPELL -> {
+                if (canTrip(player) && getColor(stack).isPresent() && InkPowered.hasAvailableInk(
+                    player, getColor(stack).get(), CANTRIP_COST) && tryEntityCantrip(stack, player, entity, hand)) {
+                    InkPowered.tryDrainEnergy(player, getColor(stack).get(), CANTRIP_COST);
+                    return InteractionResult.sidedSuccess(level.isClientSide);
+                }
+            }
         }
-        return super.interactLivingEntity(stack, user, entity, hand);
+        return super.interactLivingEntity(stack, player, entity, hand);
+    }
+
+    private boolean tryEntityCantrip(
+        ItemStack stack, Player player, LivingEntity entity,
+        InteractionHand hand
+    ) {
+        Optional<InkColor> inkColor = getColor(stack);
+        if (inkColor.isEmpty()) {
+            return false;
+        }
+        var dyeColor = inkColor.get()
+                               .getDyeColor();
+        if (dyeColor.isEmpty()) return false;
+        switch (dyeColor.get()) {
+            case LIGHT_GRAY -> {
+                if (entity instanceof AgeableMob mob) {
+                    mob.ageUp(AgeableMob.getSpeedUpSecondsWhenFeeding(-mob.getAge()), true);
+                    return true;
+                }
+            }
+            case PINK -> {
+                entity.heal(PINK_HEAL_AMOUNT);
+                return true;
+            }
+            case ORANGE -> {
+                entity.igniteForSeconds(5);
+                entity.level()
+                      .playSound(null, entity.blockPosition(), SoundEvents.FLINTANDSTEEL_USE, SoundSource.PLAYERS, 1.0F,
+                                 entity.level()
+                                       .getRandom()
+                                       .nextFloat() * 0.4F + 0.8F
+                      );
+                return true;
+            }
+            case PURPLE -> {
+                return entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 30 * 20, 0, false, false));
+            }
+            case YELLOW -> {
+                // lightning damage, todo
+            }
+            // these don't do anything to entities
+            case CYAN, MAGENTA, BLACK, BLUE, LIME, LIGHT_BLUE, RED, BROWN, GREEN, GRAY -> {
+                return false;
+            }
+            default -> {
+                throw new IllegalStateException(
+                    "Unimplemented color, yell at lily (unless this is from an addon in which case yell at them): " +
+                    inkColor.get());
+            }
+        }
+        return false;
     }
 
     @Override
@@ -468,8 +596,8 @@ public class PaintbrushItem extends Item implements SignApplicator {
                         }, front
                     )) {
                         world.playSound(
-                            null, signBlockEntity.getBlockPos(), PastelSounds.PAINTBRUSH_PAINT, SoundSource.BLOCKS,
-                            1.0F, 1.0F
+                            null, signBlockEntity.getBlockPos(), PastelSounds.PAINTBRUSH_PAINT,
+                            SoundSource.BLOCKS, 1.0F, 1.0F
                         );
                         return true;
                     }

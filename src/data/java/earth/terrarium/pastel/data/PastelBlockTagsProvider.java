@@ -70,6 +70,11 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
             PastelBlocks.SMALL_MOONSTONE_BUD.get(), PastelBlocks.MEDIUM_MOONSTONE_BUD.get(),
             PastelBlocks.LARGE_MOONSTONE_BUD.get()
         );
+        // in order: endskip 2 prevention, hanging block safeguard, progressionskip, progressionskip
+        tag(PastelBlockTags.MUTANDIS_BLACKLIST).add(
+            Blocks.CHORUS_FLOWER, Blocks.SPORE_BLOSSOM, PastelBlocks.NEPHRITE_BLOSSOM_LEAVES.get(),
+            PastelBlocks.JADEITE_LOTUS_FLOWER.get()
+        );
     }
 
 }
