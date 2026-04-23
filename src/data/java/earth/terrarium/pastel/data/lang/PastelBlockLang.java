@@ -27,7 +27,7 @@ public class PastelBlockLang {
                 continue;
             }
             // this is set to be ice because it is ice
-            if(name.equals("snowgrave")){
+            if (name.equals("snowgrave")) {
                 provider.addBlock(block, "Ice");
                 continue;
             }
@@ -52,7 +52,8 @@ public class PastelBlockLang {
             if (name.endsWith("_block") && !name.endsWith("_noxcap_block") && !name.equals("resplendent_block"))
                 name = "block_of_" + name.substring(0, name.length() - 6);
             // semi-permeable glass has a hyphen and is in a weird order
-            if (name.contains("semi_permeable")) name = "Semi-Permeable_" + name.replace("_semi_permeable", "");
+            if (name.contains("semi_permeable")) name = "Semi-Permeable_" + name.replace("_semi_permeable", "")
+                                                                                .replace("semi_permeable", "");
             // upgrade names are also fairly unique
             if (name.startsWith("upgrade_")) continue;
             // avoid duplicate keys
@@ -67,7 +68,6 @@ public class PastelBlockLang {
                 words[1] = tmp;
                 name = String.join("_", words);
             }
-
             var formattedName = PastelLanguageProvider.prettifyRegisteredName(name);
 
             provider.add(block.get(), formattedName);
