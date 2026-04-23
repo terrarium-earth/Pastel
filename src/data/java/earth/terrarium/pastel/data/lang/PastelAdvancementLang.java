@@ -240,9 +240,9 @@ public class PastelAdvancementLang {
         provider.add("advancements.pastel.collect_jade_petals.title", "Soft as Velvet");
         provider.add(
             "advancements.pastel.collect_malachite.description",
-            "Bump into Malachite on your way through Imbrifer"
+            "Solve the Riddle of Spinel"
         );
-        provider.add("advancements.pastel.collect_malachite.title", "A mesmerizing shade of Green");
+        provider.add("advancements.pastel.collect_malachite.title", "It seems to react to Moonstone");
         provider.add("advancements.pastel.collect_mermaids_gem.description", "Collect a Mermaid's Gem");
         provider.add("advancements.pastel.collect_mermaids_gem.title", "What grows deep under the Sea?");
         provider.add(
