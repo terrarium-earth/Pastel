@@ -38,6 +38,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AgeableMob;
@@ -545,10 +546,10 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 return true;
             }
             case PURPLE -> {
-                return entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 30 * 20, 0, false, false));
+                return entity.addEffect(new MobEffectInstance(PastelMobEffects.TRUE_INVISIBILITY, 30 * 20, 0, false, false));
             }
             case YELLOW -> {
-                // lightning damage, todo
+                entity.hurt(PastelDamageTypes.electric(entity.level()), 2f);
             }
             // these don't do anything to entities
             case CYAN, MAGENTA, BLACK, BLUE, LIME, LIGHT_BLUE, RED, BROWN, GREEN, GRAY -> {

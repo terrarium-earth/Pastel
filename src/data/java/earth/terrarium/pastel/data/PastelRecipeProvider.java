@@ -163,7 +163,14 @@ public class PastelRecipeProvider extends RecipeProvider {
         entry(Blocks.CRACKED_NETHER_BRICKS, Blocks.NETHER_BRICKS),
         entry(Blocks.CRACKED_STONE_BRICKS, Blocks.STONE_BRICKS),
         entry(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE_BRICKS),
-        entry(Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_STONE_BRICKS)
+        entry(Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_STONE_BRICKS),
+        entry(PastelBlocks.CRACKED_BASALT_BRICKS.get(), PastelBlocks.BASALT_BRICKS.get()),
+        entry(PastelBlocks.CRACKED_BASALT_TILES.get(), PastelBlocks.BASALT_TILES.get()),
+        entry(PastelBlocks.CRACKED_BLACKSLAG_BRICKS.get(), PastelBlocks.BLACKSLAG_BRICKS.get()),
+//      entry(PastelBlocks.CRACKED_DRAGONBONE.get(), PastelBlocks.DRAGONBONE.get()), hahaha. no.
+        entry(PastelBlocks.CRACKED_CALCITE_BRICKS.get(), PastelBlocks.CALCITE_BRICKS.get()),
+        entry(PastelBlocks.CRACKED_CALCITE_TILES.get(), PastelBlocks.CALCITE_TILES.get())
+//      entry(PastelBlocks.CRACKED_END_PORTAL_FRAME.get(), Blocks.END_PORTAL_FRAME) // nope
     );
 
     private void generateHealingDegradingRecipes(RecipeOutput ctx) {
