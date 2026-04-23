@@ -9,7 +9,7 @@
     "collected_midnight_chip": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:collect_midnight_chip"
+        "advancement": "pastel:midgame/collect_midnight_chip"
       }
     },
     "gotten_previous": {
