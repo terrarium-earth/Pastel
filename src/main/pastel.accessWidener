@@ -72,3 +72,4 @@ accessible class net/minecraft/client/renderer/ItemInHandRenderer$HandRenderSele
 accessible method net/minecraft/world/item/CrossbowItem getProjectileShotVector (Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/Vec3;F)Lorg/joml/Vector3f;
 
 extendable  method  net/minecraft/world/entity/decoration/HangingEntity recalculateBoundingBox ()V
+accessible field net/minecraft/world/entity/monster/Creeper DATA_IS_POWERED Lnet/minecraft/network/syncher/EntityDataAccessor;

@@ -78,6 +78,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> FALLING_BLOCK_BLACKLISTED = of("falling_block_requires_resonance");
     public static final TagKey<Block> REALLY_FALLING_BLOCK_BLACKLISTED = of("falling_block_blacklisted");
     public static final TagKey<Block> MUTANDIS_BLACKLIST = of("lime_mutation_blacklist");
+    public static final TagKey<Block> TICK_ACCEL_BLACKLIST = of("tick_acceleration_blacklist");
 
     // ORES
     public static final TagKey<Block> AZURITE_ORES = of("azurite_ores");

@@ -1,0 +1,10 @@
+{
+  "type": "pastel:cantrip_degrading",
+  "ingredient": {
+    "item": "minecraft:infested_stone_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:infested_cracked_stone_bricks"
+  }
+}

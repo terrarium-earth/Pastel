@@ -75,6 +75,7 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
             Blocks.CHORUS_FLOWER, Blocks.SPORE_BLOSSOM, PastelBlocks.NEPHRITE_BLOSSOM_LEAVES.get(),
             PastelBlocks.JADEITE_LOTUS_FLOWER.get()
         );
+        tag(PastelBlockTags.TICK_ACCEL_BLACKLIST);
     }
 
 }

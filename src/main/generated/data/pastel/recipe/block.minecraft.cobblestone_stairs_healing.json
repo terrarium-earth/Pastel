@@ -1,0 +1,10 @@
+{
+  "type": "pastel:cantrip_healing",
+  "ingredient": {
+    "item": "minecraft:cobblestone_stairs"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:stone_stairs"
+  }
+}

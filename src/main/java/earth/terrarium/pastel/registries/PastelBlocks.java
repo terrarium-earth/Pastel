@@ -575,8 +575,7 @@ public class PastelBlocks {
         ), InkColors.YELLOW
     ));
     public static final DeferredBlock<Block> CITRINE_BLOCK = register(blockWithItem(
-        "citrine_block",
-        () -> new PastelGemstoneBlock(
+        "citrine_block", () -> new PastelGemstoneBlock(
             gemstoneBlock(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK),
             PastelSounds.BLOCK_CITRINE_BLOCK_HIT, PastelSounds.BLOCK_CITRINE_BLOCK_CHIME
         ), InkColors.YELLOW
@@ -655,8 +654,7 @@ public class PastelBlocks {
         ), InkColors.WHITE
     ));
     public static final DeferredBlock<Block> MOONSTONE_BLOCK = register(blockWithItem(
-        "moonstone_block",
-        () -> new PastelGemstoneBlock(
+        "moonstone_block", () -> new PastelGemstoneBlock(
             gemstoneBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK),
             PastelSounds.BLOCK_MOONSTONE_BLOCK_HIT, PastelSounds.BLOCK_MOONSTONE_BLOCK_CHIME
         ), InkColors.WHITE
@@ -1794,7 +1792,7 @@ public class PastelBlocks {
         block("block_flooder", () -> new BlockFlooderBlock(settings(MapColor.CLAY, SoundType.ROOTED_DIRT, 0.0F))));
     public static final DeferredBlock<Block> BOTTOMLESS_BUNDLE = register(blockWithItem(
                                                                               "bottomless_bundle",
-                                                                              () -> new BottomlessBundleBlock(settings(MapColor.ICE, SoundType.WOOL, 1.0F).noOcclusion()
+        () -> new BottomlessBundleBlock(settings(MapColor.ICE, SoundType.WOOL, 1.0F).noOcclusion()
                                                                                                                                                                                .pushReaction(
                                                                                                                                                                                    PushReaction.DESTROY)),
                                                                               block -> new BottomlessBundleItem(block
@@ -1814,15 +1812,21 @@ public class PastelBlocks {
                       .randomTicks())
     ));
     public static final DeferredBlock<Block> ENERGETIC_MOTE = register(block(
-        "energetic_mote", () -> new EnergeticMoteBlock(
-            BlockBehaviour.Properties.of()
-                                     .replaceable()
-                                     .strength(-1.0F, 3600000.8F)
-                                     .mapColor(MapColor.NONE)
-                                     .noLootTable()
-                                     .noOcclusion()
-                                     .sound(PastelBlockSoundGroups.SHIMMERSTONE_LIGHT)
-                                     .instabreak())
+        "energetic_mote", () -> new EnergeticMoteBlock(BlockBehaviour.Properties.of()
+                                                                                .replaceable()
+                                                                                .strength(-1.0F, 3600000.8F)
+                                                                                .mapColor(MapColor.NONE)
+                                                                                .noLootTable()
+                                                                                .noOcclusion()
+                                                                                .sound(
+                                                                                    PastelBlockSoundGroups.SHIMMERSTONE_LIGHT)
+                                                                                .instabreak())
+    ));
+
+    public static final DeferredBlock<Block> TEMPORARY_PLATFORM = register(block(
+        "temporary_platform", () -> new TemporaryPlatformBlock(
+            Properties.ofFullCopy(PastelBlocks.ETHEREAL_PLATFORM.get())
+                      .instabreak())
     ));
 
     private static Properties decay(
@@ -1867,30 +1871,26 @@ public class PastelBlocks {
         "provider_node", () -> new PastelNodeBlock(pastelNode(SoundType.AMETHYST_CLUSTER), PastelNodeType.PROVIDER),
         IS.of(16), InkColors.MAGENTA
     ));
-    public static final DeferredBlock<Block> STORAGE_NODE = register(
-        blockWithItem(
-            "storage_node",
-            () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.STORAGE),
-            IS.of(16), InkColors.CYAN
-        ));
-    public static final DeferredBlock<Block> BUFFER_NODE = register(
-        blockWithItem(
-            "buffer_node",
-            () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.BUFFER),
-            IS.of(16), InkColors.GREEN
-        ));
-    public static final DeferredBlock<Block> SENDER_NODE = register(
-        blockWithItem(
-            "sender_node",
-            () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.CITRINE_CLUSTER), PastelNodeType.SENDER),
-            IS.of(16), InkColors.YELLOW
-        ));
-    public static final DeferredBlock<Block> GATHER_NODE = register(
-        blockWithItem(
-            "gather_node",
-            () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.ONYX_CLUSTER), PastelNodeType.GATHER),
-            IS.of(16), InkColors.BLACK
-        ));
+    public static final DeferredBlock<Block> STORAGE_NODE = register(blockWithItem(
+        "storage_node",
+        () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.STORAGE), IS.of(16),
+        InkColors.CYAN
+    ));
+    public static final DeferredBlock<Block> BUFFER_NODE = register(blockWithItem(
+        "buffer_node",
+        () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.BUFFER), IS.of(16),
+        InkColors.GREEN
+    ));
+    public static final DeferredBlock<Block> SENDER_NODE = register(blockWithItem(
+        "sender_node",
+        () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.CITRINE_CLUSTER), PastelNodeType.SENDER), IS.of(16),
+        InkColors.YELLOW
+    ));
+    public static final DeferredBlock<Block> GATHER_NODE = register(blockWithItem(
+        "gather_node",
+        () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.ONYX_CLUSTER), PastelNodeType.GATHER), IS.of(16),
+        InkColors.BLACK
+    ));
 
     // COLORED BLOCK FAMILIES
 
@@ -3694,68 +3694,78 @@ public class PastelBlocks {
         InkColors.WHITE
     ));
 
-    public static final DeferredBlock<Block> FROSTED_DEEPSLATE = register(blockWithItem("frosted_deepslate",()->new Block(Properties.ofFullCopy(Blocks.DEEPSLATE)),InkColors.BLUE));
-    public static final DeferredBlock<Block> SNOWGRAVE = register(block("snowgrave",()->new SnowgraveBlock(Properties.ofFullCopy(Blocks.ICE))));
+    public static final DeferredBlock<Block> FROSTED_DEEPSLATE = register(
+        blockWithItem("frosted_deepslate", () -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE)), InkColors.BLUE));
+    public static final DeferredBlock<Block> SNOWGRAVE = register(
+        block("snowgrave", () -> new SnowgraveBlock(Properties.ofFullCopy(Blocks.ICE))));
 
     public static final DeferredBlock<Block> DEEPSLATE_TOPAZ_ORE = register(blockWithItem(
         "deepslate_topaz_ore",
         () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, deepslateOre(), PastelGemstoneColor.CYAN),
         InkColors.CYAN
     ));
-    public static final DeferredBlock<Block> DEEPSLATE_AMETHYST_ORE = register(blockWithItem(
-        "deepslate_amethyst_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(),
-            PastelGemstoneColor.MAGENTA
-        ), InkColors.MAGENTA
-    ));
-    public static final DeferredBlock<Block> DEEPSLATE_CITRINE_ORE = register(blockWithItem(
-        "deepslate_citrine_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(),
-            PastelGemstoneColor.YELLOW
-        ), InkColors.YELLOW
-    ));
-    public static final DeferredBlock<Block> DEEPSLATE_ONYX_ORE = register(blockWithItem(
-        "deepslate_onyx_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(),
-            PastelGemstoneColor.BLACK
-        ), InkColors.BLACK
-    ));
-    public static final DeferredBlock<Block> DEEPSLATE_MOONSTONE_ORE = register(blockWithItem(
-        "deepslate_moonstone_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, deepslateOre(),
-            PastelGemstoneColor.WHITE
-        ), InkColors.WHITE
-    ));
+    public static final DeferredBlock<Block> DEEPSLATE_AMETHYST_ORE = register(
+        blockWithItem(
+            "deepslate_amethyst_ore", () -> new GemstoneOreBlock(
+                PastelBlocks.gemOreExperienceProvider, deepslateOre(),
+                PastelGemstoneColor.MAGENTA
+            ), InkColors.MAGENTA
+        ));
+    public static final DeferredBlock<Block> DEEPSLATE_CITRINE_ORE = register(
+        blockWithItem(
+            "deepslate_citrine_ore", () -> new GemstoneOreBlock(
+                PastelBlocks.gemOreExperienceProvider, deepslateOre(),
+                PastelGemstoneColor.YELLOW
+            ), InkColors.YELLOW
+        ));
+    public static final DeferredBlock<Block> DEEPSLATE_ONYX_ORE = register(
+        blockWithItem(
+            "deepslate_onyx_ore", () -> new GemstoneOreBlock(
+                PastelBlocks.gemOreExperienceProvider, deepslateOre(),
+                PastelGemstoneColor.BLACK
+            ), InkColors.BLACK
+        ));
+    public static final DeferredBlock<Block> DEEPSLATE_MOONSTONE_ORE = register(
+        blockWithItem(
+            "deepslate_moonstone_ore", () -> new GemstoneOreBlock(
+                PastelBlocks.gemOreExperienceProvider, deepslateOre(),
+                PastelGemstoneColor.WHITE
+            ), InkColors.WHITE
+        ));
 
     public static final DeferredBlock<Block> BLACKSLAG_TOPAZ_ORE = register(blockWithItem(
         "blackslag_topaz_ore",
         () -> new GemstoneOreBlock(PastelBlocks.gemOreExperienceProvider, blackslagOre(), PastelGemstoneColor.CYAN),
         InkColors.CYAN
     ));
-    public static final DeferredBlock<Block> BLACKSLAG_AMETHYST_ORE = register(blockWithItem(
-        "blackslag_amethyst_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(),
-            PastelGemstoneColor.MAGENTA
-        ), InkColors.MAGENTA
-    ));
-    public static final DeferredBlock<Block> BLACKSLAG_CITRINE_ORE = register(blockWithItem(
-        "blackslag_citrine_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(),
-            PastelGemstoneColor.YELLOW
-        ), InkColors.YELLOW
-    ));
-    public static final DeferredBlock<Block> BLACKSLAG_ONYX_ORE = register(blockWithItem(
-        "blackslag_onyx_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(),
-            PastelGemstoneColor.BLACK
-        ), InkColors.BLACK
-    ));
-    public static final DeferredBlock<Block> BLACKSLAG_MOONSTONE_ORE = register(blockWithItem(
-        "blackslag_moonstone_ore", () -> new GemstoneOreBlock(
-            PastelBlocks.gemOreExperienceProvider, blackslagOre(),
-            PastelGemstoneColor.WHITE
-        ), InkColors.WHITE
-    ));
+    public static final DeferredBlock<Block> BLACKSLAG_AMETHYST_ORE = register(
+        blockWithItem(
+            "blackslag_amethyst_ore", () -> new GemstoneOreBlock(
+                PastelBlocks.gemOreExperienceProvider, blackslagOre(),
+                PastelGemstoneColor.MAGENTA
+            ), InkColors.MAGENTA
+        ));
+    public static final DeferredBlock<Block> BLACKSLAG_CITRINE_ORE = register(
+        blockWithItem(
+            "blackslag_citrine_ore", () -> new GemstoneOreBlock(
+                PastelBlocks.gemOreExperienceProvider, blackslagOre(),
+                PastelGemstoneColor.YELLOW
+            ), InkColors.YELLOW
+        ));
+    public static final DeferredBlock<Block> BLACKSLAG_ONYX_ORE = register(
+        blockWithItem(
+            "blackslag_onyx_ore", () -> new GemstoneOreBlock(
+                PastelBlocks.gemOreExperienceProvider, blackslagOre(),
+                PastelGemstoneColor.BLACK
+            ), InkColors.BLACK
+        ));
+    public static final DeferredBlock<Block> BLACKSLAG_MOONSTONE_ORE = register(
+        blockWithItem(
+            "blackslag_moonstone_ore", () -> new GemstoneOreBlock(
+                PastelBlocks.gemOreExperienceProvider, blackslagOre(),
+                PastelGemstoneColor.WHITE
+            ), InkColors.WHITE
+        ));
 
     private static Properties polishedGemBlock(MapColor mapColor, SoundType soundGroup) {
         return settings(mapColor, soundGroup, 5.0F, 6.0F);
@@ -4885,12 +4895,11 @@ public class PastelBlocks {
             idol(PastelBlockSoundGroups.GLOW_SQUID_IDOL), ParticleTypes.GLOW_SQUID_INK, MobEffects.GLOWING, 0, 200),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> GOAT_IDOL = register(
-        blockWithItem(
-            "goat_idol",
-            () -> new KnockbackIdolBlock(
-                idol(PastelBlockSoundGroups.GOAT_IDOL), ParticleTypes.ENCHANTED_HIT, 5.0F, 0.5F), InkColors.PINK
-        )); // knocks mostly sideways
+    public static final DeferredBlock<Block> GOAT_IDOL = register(blockWithItem(
+        "goat_idol",
+        () -> new KnockbackIdolBlock(idol(PastelBlockSoundGroups.GOAT_IDOL), ParticleTypes.ENCHANTED_HIT, 5.0F, 0.5F),
+        InkColors.PINK
+    )); // knocks mostly sideways
     public static final DeferredBlock<Block> GUARDIAN_IDOL = register(blockWithItem(
         "guardian_idol", () -> new StatusEffectIdolBlock(
             idol(PastelBlockSoundGroups.GUARDIAN_IDOL), ParticleTypes.BUBBLE, MobEffects.DIG_SLOWDOWN, 2, 200),
@@ -4917,12 +4926,11 @@ public class PastelBlocks {
             idol(PastelBlockSoundGroups.PARROT_IDOL), ParticleTypes.INSTANT_EFFECT, MobEffects.ABSORPTION, 0, 100),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> PHANTOM_IDOL = register(
-        blockWithItem(
-            "phantom_idol",
-            () -> new InsomniaIdolBlock(idol(PastelBlockSoundGroups.PHANTOM_IDOL), ParticleTypes.POOF, 24000),
-            InkColors.PINK
-        )); // +1 ingame day without sleep
+    public static final DeferredBlock<Block> PHANTOM_IDOL = register(blockWithItem(
+        "phantom_idol",
+        () -> new InsomniaIdolBlock(idol(PastelBlockSoundGroups.PHANTOM_IDOL), ParticleTypes.POOF, 24000),
+        InkColors.PINK
+    )); // +1 ingame day without sleep
     public static final DeferredBlock<Block> PIG_IDOL = register(blockWithItem(
         "pig_idol", () -> new FeedingIdolBlock(idol(PastelBlockSoundGroups.PIG_IDOL), ParticleTypes.INSTANT_EFFECT, 6),
         InkColors.PINK
@@ -4931,12 +4939,11 @@ public class PastelBlocks {
         "piglin_idol", () -> new PiglinTradeIdolBlock(idol(PastelBlockSoundGroups.PIGLIN_IDOL), ParticleTypes.HEART),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> POLAR_BEAR_IDOL = register(
-        blockWithItem(
-            "polar_bear_idol",
-            () -> new FreezingIdolBlock(idol(PastelBlockSoundGroups.POLAR_BEAR_IDOL), ParticleTypes.SNOWFLAKE),
-            InkColors.PINK
-        ));
+    public static final DeferredBlock<Block> POLAR_BEAR_IDOL = register(blockWithItem(
+        "polar_bear_idol",
+        () -> new FreezingIdolBlock(idol(PastelBlockSoundGroups.POLAR_BEAR_IDOL), ParticleTypes.SNOWFLAKE),
+        InkColors.PINK
+    ));
     public static final DeferredBlock<Block> PUFFERFISH_IDOL = register(blockWithItem(
         "pufferfish_idol", () -> new StatusEffectIdolBlock(
             idol(PastelBlockSoundGroups.PUFFERFISH_IDOL), ParticleTypes.SPLASH, MobEffects.CONFUSION, 0, 200),
@@ -4947,23 +4954,23 @@ public class PastelBlocks {
             idol(PastelBlockSoundGroups.RABBIT_IDOL), ParticleTypes.INSTANT_EFFECT, MobEffects.JUMP, 3, 100),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> SHEEP_IDOL = register(
-        blockWithItem(
-            "sheep_idol",
-            () -> new ShearingIdolBlock(idol(PastelBlockSoundGroups.SHEEP_IDOL), ParticleTypes.ENCHANTED_HIT, 6),
-            InkColors.PINK
-        ));
+    public static final DeferredBlock<Block> SHEEP_IDOL = register(blockWithItem(
+        "sheep_idol",
+        () -> new ShearingIdolBlock(idol(PastelBlockSoundGroups.SHEEP_IDOL), ParticleTypes.ENCHANTED_HIT, 6),
+        InkColors.PINK
+    ));
     public static final DeferredBlock<Block> SHULKER_IDOL = register(blockWithItem(
         "shulker_idol", () -> new StatusEffectIdolBlock(
             idol(PastelBlockSoundGroups.SHULKER_IDOL), ParticleTypes.END_ROD, MobEffects.LEVITATION, 0, 100),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> SILVERFISH_IDOL = register(blockWithItem(
-        "silverfish_idol", () -> new SilverfishInsertingIdolBlock(
-            idol(PastelBlockSoundGroups.SILVERFISH_IDOL),
-            ParticleTypes.EXPLOSION
-        ), InkColors.PINK
-    ));
+    public static final DeferredBlock<Block> SILVERFISH_IDOL = register(
+        blockWithItem(
+            "silverfish_idol", () -> new SilverfishInsertingIdolBlock(
+                idol(PastelBlockSoundGroups.SILVERFISH_IDOL),
+                ParticleTypes.EXPLOSION
+            ), InkColors.PINK
+        ));
     public static final DeferredBlock<Block> SKELETON_IDOL = register(blockWithItem(
         "skeleton_idol", () -> new ProjectileIdolBlock(
             idol(PastelBlockSoundGroups.SKELETON_IDOL), ParticleTypes.INSTANT_EFFECT, EntityType.ARROW,
@@ -4978,12 +4985,11 @@ public class PastelBlocks {
             }
         }, InkColors.PINK
     ));
-    public static final DeferredBlock<Block> SLIME_IDOL = register(
-        blockWithItem(
-            "slime_idol",
-            () -> new SlimeSizingIdolBlock(idol(PastelBlockSoundGroups.SLIME_IDOL), ParticleTypes.ITEM_SLIME, 6, 8),
-            InkColors.PINK
-        ));
+    public static final DeferredBlock<Block> SLIME_IDOL = register(blockWithItem(
+        "slime_idol",
+        () -> new SlimeSizingIdolBlock(idol(PastelBlockSoundGroups.SLIME_IDOL), ParticleTypes.ITEM_SLIME, 6, 8),
+        InkColors.PINK
+    ));
     public static final DeferredBlock<Block> SNOW_GOLEM_IDOL = register(blockWithItem(
         "snow_golem_idol", () -> new ProjectileIdolBlock(
             idol(PastelBlockSoundGroups.SNOW_GOLEM_IDOL), ParticleTypes.SNOWFLAKE, EntityType.SNOWBALL,
@@ -5042,12 +5048,13 @@ public class PastelBlocks {
             idol(PastelBlockSoundGroups.WITHER_SKELETON_IDOL), ParticleTypes.ENCHANTED_HIT, MobEffects.WITHER, 0, 100),
         InkColors.PINK
     ));
-    public static final DeferredBlock<Block> ZOMBIE_IDOL = register(blockWithItem(
-        "zombie_idol", () -> new VillagerConvertingIdolBlock(
-            idol(PastelBlockSoundGroups.ZOMBIE_IDOL),
-            ParticleTypes.ENCHANTED_HIT
-        ), InkColors.PINK
-    ));
+    public static final DeferredBlock<Block> ZOMBIE_IDOL = register(
+        blockWithItem(
+            "zombie_idol", () -> new VillagerConvertingIdolBlock(
+                idol(PastelBlockSoundGroups.ZOMBIE_IDOL),
+                ParticleTypes.ENCHANTED_HIT
+            ), InkColors.PINK
+        ));
 
     // FLUIDS
     private static Properties fluid(MapColor mapColor) {

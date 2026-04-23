@@ -28,7 +28,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Creeper;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent;
@@ -64,6 +66,40 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::applyKillBonuses);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::fuckWithWards);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vampirism);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelDamageEvents::electricDamage);
+    }
+
+    private static void electricDamage(LivingIncomingDamageEvent event) {
+        var source = event.getSource();
+        if (!source.is(PastelDamageTypes.ELECTRIC))
+            return;
+        if(event.getEntity() instanceof Creeper creeper){
+            creeper.getEntityData().set(Creeper.DATA_IS_POWERED, true);
+        }
+        float mult = 1.0f;
+        for (var i : event.getEntity()
+                          .getArmorSlots()) {
+            if (i.is(PastelItemTags.METAL_ARMOR)) {
+                mult += 0.25f;
+            }
+        }
+        event.setAmount(event.getAmount() * mult);
+        int mitigated = 0;
+        for (var i : event.getEntity()
+                          .getArmorSlots()) {
+            var storage = i.getCapability(Capabilities.EnergyStorage.ITEM);
+            if (storage != null && storage.getEnergyStored() > 0) {
+                mitigated = storage.extractEnergy(
+                    Math.min(
+                        storage.getEnergyStored(),
+                        Mth.ceil(storage.getMaxEnergyStored() * event.getAmount() / 100)
+                    ), false
+                );
+            }
+        }
+        if (mitigated >= event.getAmount()) {
+            event.setAmount(0);
+        }
     }
 
     private static void vampirism(LivingDamageEvent.Post event) {

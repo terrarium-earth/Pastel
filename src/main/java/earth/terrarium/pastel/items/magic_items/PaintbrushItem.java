@@ -9,16 +9,16 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.EntityColorProcessorRegistry;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.components.PaintbrushComponent;
 import earth.terrarium.pastel.entity.entity.InkProjectileEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.level.BlockVariantHelper;
-import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.inventories.PaintbrushScreenHandler;
 import earth.terrarium.pastel.items.PigmentItem;
+import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
+import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -41,7 +41,6 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Interaction;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -209,33 +208,28 @@ public class PaintbrushItem extends Item implements SignApplicator {
                                    .registryOrThrow(Registries.BLOCK);
         switch (dyeColor.get()) { // note: because java is fucked up and evil the stargazer colors will not be able
             // to be in here
-            case DyeColor.MAGENTA -> { // "World’s worst tick acceleration"
+            case MAGENTA -> { // "World’s worst tick acceleration"
+                if(state.is(PastelBlockTags.TICK_ACCEL_BLACKLIST) || !(level instanceof ServerLevel sl))
+                    return false;
                 if (state.isRandomlyTicking()) {
-                    if (level instanceof ServerLevel serverLevel) {
-                        state.randomTick(serverLevel, pos, serverLevel.getRandom());
-                    }
+                    state.randomTick(sl, pos, sl.getRandom());
+                }
+                state.tick(sl, pos, level.random);
+                return false;
+            }
+            case BLUE -> { // "Temporary Blocks"
+                var toPlace = pos.relative(context.getClickedFace());
+                if(level.getBlockState(toPlace).canBeReplaced()){
+                    level.setBlock(toPlace, PastelBlocks.TEMPORARY_PLATFORM.get().defaultBlockState(), Block.UPDATE_ALL);
                     return true;
                 }
                 return false;
             }
-            case DyeColor.BLACK -> { // "Item Vacuum"
-                if (level instanceof ServerLevel serverLevel) {
-                    for (var i : serverLevel.getEntitiesOfClass(
-                        ItemEntity.class, new AABB(pos).inflate(ITEM_VACUUM_RANGE))) {
-                        i.moveTo(player.position());
-                    }
-                }
-                return true;
-            }
-            case DyeColor.BLUE -> { // "Temporary Blocks"
-                // todo actually impl this
-                return true;
-            }
-            case DyeColor.ORANGE -> { // "Flint and Steel"
+            case ORANGE -> { // "Flint and Steel"
                 Items.FLINT_AND_STEEL.useOn(context);
                 return true;
             }
-            case DyeColor.CYAN -> { // "Falling Block"
+            case CYAN -> { // "Falling Block"
                 var destroySpeed = state.getDestroySpeed(level, pos);
                 if (!(level instanceof ServerLevel serverLevel) || destroySpeed == -1 || destroySpeed >= 50 ||
                     state.hasBlockEntity() || state.is(PastelBlockTags.REALLY_FALLING_BLOCK_BLACKLISTED)) {
@@ -254,7 +248,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 FallingBlockEntity.fall(serverLevel, pos, state);
                 return true;
             }
-            case DyeColor.YELLOW -> { // "Lightning"
+            case YELLOW -> { // "Lightning"
                 var offsetPos = pos.relative(context.getClickedFace());
                 if (level.getBlockState(offsetPos)
                          .canBeReplaced()) {
@@ -266,7 +260,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 }
                 return false;
             }
-            case DyeColor.LIME -> { // "Mutandis from the hit mod Witchery Resurrected"
+            case LIME -> { // "Mutandis from the hit mod Witchery Resurrected"
                 if (!(level instanceof ServerLevel sl)) return false;
                 if (state.is(PastelBlockTags.MUTANDIS_BLACKLIST)) return false;
                 for (TagKey<Block> tag : MUTANDIS_TAGS) {
@@ -298,26 +292,29 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 }
                 return false;
             }
-            case DyeColor.PINK -> { // "Touch Heal"
-                if (!state.is(PastelBlockTags.CRACKED_BLOCKS) || state.hasBlockEntity()) return false;
-                // fucked up and evil
-                var blockRegistryResult = level.registryAccess()
-                                               .registry(Registries.BLOCK);
-                if (blockRegistryResult.isEmpty()) return false;
-                var blocks = blockRegistryResult.get();
-                var blockKey = blocks.getResourceKey(block);
-                if (blockKey.isEmpty()) return false;
-                var blockLoc = blockKey.get()
-                                       .location();
-                var newBlock = blocks.get(ResourceLocation.fromNamespaceAndPath(
-                    blockLoc.getNamespace(), blockLoc.getPath()
-                                                     .replaceFirst("cracked_", "")
-                ));
-                if (newBlock == null) return false;
-                level.setBlock(pos, newBlock.withPropertiesOf(state), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
+            case PINK -> { // "Touch Heal"
+                if(!HealingRecipe.processBlock(level, pos, state)){
+                    var ret = false;
+                    var items = level.getEntitiesOfClass(ItemEntity.class,AABB.encapsulatingFullBlocks(pos.relative(context.getClickedFace()), pos.relative(context.getClickedFace())));
+                    for(var i : items){
+                        ret |= HealingRecipe.processItemEntity(level, i);
+                    }
+                    return ret;
+                }
                 return true;
             }
-            case DyeColor.LIGHT_GRAY, DyeColor.LIGHT_BLUE -> { // These don't do anything on blocks
+            case GRAY -> { // “Degrades” blocks into similar weaker blocks
+                if(!DegradingRecipe.processBlock(level, pos, state)){
+                    var ret = false;
+                    var items = level.getEntitiesOfClass(ItemEntity.class,AABB.encapsulatingFullBlocks(pos.relative(context.getClickedFace()), pos.relative(context.getClickedFace())));
+                    for(var i : items){
+                        ret |= DegradingRecipe.processItemEntity(level, i);
+                    }
+                    return ret;
+                }
+                return true;
+            }
+            case LIGHT_GRAY, LIGHT_BLUE, BLACK, PURPLE, RED, BROWN, GREEN -> { // These don't do anything on blocks
                 return false;
             }
             case null, default -> throw new IllegalStateException(
