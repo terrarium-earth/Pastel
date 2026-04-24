@@ -20,7 +20,7 @@ public class PastelItemLang {
         entry(PastelItems.CONSTRUCTORS_STAFF.getRegisteredName(), "Constructor's Staff"),
         entry(PastelItems.AETHER_GRACED_NECTAR_GLOVES.getRegisteredName(), "Aether-Graced Nectar Gloves"),
         entry(PastelItems.GLOVES_OF_DAWNS_GRASP.getRegisteredName(), "Gloves of Dawn's Grasp"),
-        entry(PastelItems.GUIDEBOOK.getRegisteredName(), "Colorful World"),
+        entry(PastelItems.GUIDEBOOK.getRegisteredName(), "Artist's Journal"),
         entry(PastelItems.HEARTSINGERS_REWARD.getRegisteredName(), "Heartsinger's Reward"),
         entry(PastelItems.MALACHITE_GLASS_ARROW.getRegisteredName(), "Glass Arrow"),
         entry(PastelItems.MERMAIDS_GEM.getRegisteredName(), "Mermaid's Gem"),
