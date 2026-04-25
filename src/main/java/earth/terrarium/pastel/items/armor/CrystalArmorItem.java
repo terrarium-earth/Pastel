@@ -177,7 +177,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     }
 
     public static void addEmpowered(ItemStack stack) {
-        if(stack.has(DataComponents.STORED_ENCHANTMENTS))
+        if(stack.has(DataComponents.STORED_ENCHANTMENTS) || stack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS))
             return; // we do not want to touch enchanted books or anything like enchanted books
         stack.set(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, ENCHANTMENT_BONUS);
         var enchantments = stack.get(DataComponents.ENCHANTMENTS);
@@ -190,7 +190,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     }
 
     public static ItemStack removeEmpowered(ItemStack stack) {
-        if(stack.has(DataComponents.STORED_ENCHANTMENTS))
+        if(stack.has(DataComponents.STORED_ENCHANTMENTS) || stack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS))
             return stack; // we do not want to touch enchanted books or anything like enchanted books
         if (!stack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)) return stack;
         var enchantments = stack.get(EnchantmentHelper.getComponentType(stack));
