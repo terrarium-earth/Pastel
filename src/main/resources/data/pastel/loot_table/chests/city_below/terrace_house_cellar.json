@@ -19,7 +19,7 @@
             "type_specific": {
               "type": "player",
               "advancements": {
-                "pastel:triggers/confirmed_drinking_age": true
+                "pastel:unlocks/blocks/titration_barrel": true
               }
             }
           }
