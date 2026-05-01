@@ -233,7 +233,6 @@ public class InkProjectileEntity extends MagicProjectileEntity {
     }
 
     protected void onHit(LivingEntity target) {
-        // TODO: this is a dummy effect. Add unique effects for each ink color
         Vec3 vec3d = this.getDeltaMovement()
                          .multiply(1.0D, 0.0D, 1.0D)
                          .normalize()
