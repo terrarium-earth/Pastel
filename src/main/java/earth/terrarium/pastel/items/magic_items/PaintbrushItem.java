@@ -236,7 +236,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
                     state.randomTick(sl, pos, sl.getRandom());
                 }
                 state.tick(sl, pos, level.random);
-                return false;
+                return true;
             }
             case BLUE -> { // "Temporary Blocks"
                 var toPlace = pos.relative(context.getClickedFace());
@@ -729,6 +729,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
             }
             case YELLOW -> {
                 entity.hurt(PastelDamageTypes.electric(entity.level()), 2f);
+                return true;
             }
             // these don't do anything to entities
             case CYAN, MAGENTA, BLACK, BLUE, LIME, LIGHT_BLUE, RED, BROWN, GREEN, GRAY -> {

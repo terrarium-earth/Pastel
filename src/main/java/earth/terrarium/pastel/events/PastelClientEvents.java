@@ -154,7 +154,6 @@ public class PastelClientEvents {
     }
 
     private static void handlePickBlock(InputEvent.Key event) {
-        PastelCommon.logInfo("InputEvent.Key called with " + event.getKey());
         var instance = Minecraft.getInstance();
         var keyPickItem = instance.options.keyPickItem;
         if (instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.KEYSYM) ||
@@ -168,7 +167,6 @@ public class PastelClientEvents {
     }
 
     private static void handlePickBlockAgain(InputEvent.MouseButton.Pre event) {
-        PastelCommon.logInfo("InputEvent.MouseButton.Pre called with " + event.getButton());
         var instance = Minecraft.getInstance();
         var keyPickItem = instance.options.keyPickItem;
         if (instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.MOUSE) ||

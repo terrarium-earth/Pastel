@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.events;
 
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
@@ -19,6 +20,7 @@ import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -29,6 +31,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
@@ -73,8 +76,9 @@ public class PastelDamageEvents {
         var source = event.getSource();
         if (!source.is(PastelDamageTypes.ELECTRIC))
             return;
-        if(event.getEntity() instanceof Creeper creeper){
-            creeper.getEntityData().set(Creeper.DATA_IS_POWERED, true);
+        if (event.getEntity() instanceof Creeper creeper) {
+            creeper.getEntityData()
+                   .set(Creeper.DATA_IS_POWERED, true);
         }
         float mult = 1.0f;
         for (var i : event.getEntity()
@@ -85,19 +89,27 @@ public class PastelDamageEvents {
         }
         event.setAmount(event.getAmount() * mult);
         int mitigated = 0;
+        var totalCap = 0;
         for (var i : event.getEntity()
                           .getArmorSlots()) {
             var storage = i.getCapability(Capabilities.EnergyStorage.ITEM);
             if (storage != null && storage.getEnergyStored() > 0) {
-                mitigated = storage.extractEnergy(
+                mitigated += storage.extractEnergy(
                     Math.min(
                         storage.getEnergyStored(),
                         Mth.ceil(storage.getMaxEnergyStored() * event.getAmount() / 100)
                     ), false
                 );
+                totalCap += storage.getMaxEnergyStored();
             }
         }
-        if (mitigated >= event.getAmount()) {
+        if (event.getEntity() instanceof Player player) {
+            player.displayClientMessage(
+                Component.literal(
+                    "Your tech armor shields you from the shock, draining " + mitigated*100 / totalCap + "% of its power!"), true
+            );
+        }
+        if ((float) mitigated * 100 / totalCap >= event.getAmount()) {
             event.setAmount(0);
         }
     }
