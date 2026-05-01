@@ -192,7 +192,7 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
         // we can't warp to a dimension that doesn't exist
         if (targetLevel == null) return;
 
-        boolean canWarp = resonant || EnderSpliceItem.isSameWorld(level(), targetLevel);
+        boolean canWarp = resonant || PastelCommon.isSameDimension(level(), targetLevel);
 
         for (Entity entity : list) {
             boolean narcissus = false;

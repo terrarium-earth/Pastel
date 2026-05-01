@@ -163,13 +163,14 @@ public class PastelClientEvents {
         }
     }
 
-    private static void handlePickBlockAgain(InputEvent.MouseButton event){
+    private static void handlePickBlockAgain(InputEvent.MouseButton.Pre event){
         var instance = Minecraft.getInstance();
         var keyPickItem = instance.options.keyPickItem;
         if(instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.MOUSE) || !keyPickItem.matchesMouse(event.getButton())) return;
         var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
         if(heldItem.getItem() instanceof PickBlockActivated item){
             item.onPickBlock(heldItem, instance.player);
+            event.setCanceled(true);
         }
     }
 

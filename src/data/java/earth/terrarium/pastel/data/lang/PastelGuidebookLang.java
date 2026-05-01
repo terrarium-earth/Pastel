@@ -4858,29 +4858,34 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.paintbrush.page0.text",
-            "Why a *brush* of all things?\\\n\\\nGood question, I wondered that myself, after I came up with it. It " +
-            "was mostly intuition, really. There is something about the colorful Pedestal and the bright colors of " +
-            "the crystals that awakened something I now call my inner artist."
+            "If I am to delve into the mysteries of color magic, I will need an appropriate tool; as such, I have " +
+            "designed this Paintbrush. Far from an ordinary brush, it should serve me well in my artistic endeavors; " +
+            "certain blocks will divulge information at its touch, while others (like my [Pigment Pedestal]" +
+            "(entry://general/pedestal)) will be activated."
         );
         provider.add(
             "book.pastel.guidebook.paintbrush.page1.text",
-            "Giving the [Pigment Pedestal](entry://general/pedestal) a good whack with it will make it start crafting."
+            "*I'm sure I can work greater wonders with this thing, I just need to find something suitably magical to " +
+            "paint with...*"
         );
         provider.add("book.pastel.guidebook.paintbrush.page1.title", "Crafting Recipe");
         provider.add(
             "book.pastel.guidebook.paintbrush.page2.text",
-            "What better use is there for [Pigment](entry://general/pigment) than to color with it?\\\n\\\nIf I [#]" +
-            "(449900)crouch with my Paintbrush equipped I can bring up the color selection menu[#]().\\\n\\\nAfter " +
-            "choosing a color all I have to do is slightly touch a colorable block I want to color and the " +
-            "[Pigment](entry://general/pigment) will flow into it and change it to that new color."
+            "This seems like a good time to start upgrading my Paintbrush. I've tweaked it to be able to channel " +
+            "Pigment directly into objects; I simply need to crouch to attune the brush to a color, then use the " +
+            "paintbrush on whatever needs a splash of vibrance. To actually use that functionality, though, I'll need" +
+            " to attune the brush to the coloring mode; trying to Pick Block should do the trick."
         );
-        provider.add("book.pastel.guidebook.paintbrush.page2.title", "Block Recoloring");
+        provider.add("book.pastel.guidebook.paintbrush.page2.title", "Paintbrush Modes");
         provider.add(
             "book.pastel.guidebook.paintbrush.page3.text",
-            "I can use my brush to bundle up Ink and sling it as a projectile.\\\n\\\nThe surface (or creature!) the " +
-            "projectile hits will be painted as long as it can be recolored, plus dealing a good amount of knockback."
+            "Ink... I could think of no better thing to paint onto reality with. In addition to obviating my habit of" +
+            " carrying large quantities of Pigment around, it also lets me perform a decidedly more magical form of " +
+            "painting. The new mode I've added allows me to channel Ink through the brush into the world, creating a " +
+            "minor magical effect I've dubbed an Ink Cantrip. Each color has different effects, ranging from the " +
+            "simple Ignition to the legendary Falling Block. Some experimentation is definitely in order."
         );
-        provider.add("book.pastel.guidebook.paintbrush.page3.title", "Paint Slinging");
+        provider.add("book.pastel.guidebook.paintbrush.page3.title", "Ink Cantrips");
         provider.add("book.pastel.guidebook.paltaeria.name", "Paltaeria");
         provider.add(
             "book.pastel.guidebook.paltaeria.page0.text",

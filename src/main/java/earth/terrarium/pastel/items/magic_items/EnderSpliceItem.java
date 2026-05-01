@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.items.magic_items;
 
 import com.mojang.authlib.GameProfile;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.components.EnderSpliceComponent;
 import earth.terrarium.pastel.helpers.Support;
@@ -50,19 +51,6 @@ public class EnderSpliceItem extends Item {
 
     public EnderSpliceItem(Properties settings) {
         super(settings);
-    }
-
-    // lorewise imbrifer and the overworld are the same dimension, which makes this a bit of a mess
-    // todo: move this to a tag later once we have melochites and such
-    public static boolean isSameWorld(Level world1, Level world2) {
-        return world1.dimension()
-                     .equals(world2.dimension())
-               || (world1.dimension()
-                         .equals(PastelLevels.DIMENSION_KEY) && world2.dimension()
-                                                                      .equals(Level.OVERWORLD)
-                   || (world1.dimension()
-                             .equals(Level.OVERWORLD) && world2.dimension()
-                                                               .equals(PastelLevels.DIMENSION_KEY)));
     }
 
     public static void setTeleportTargetPos(@NotNull ItemStack itemStack, Level world, Vec3 pos) {
@@ -170,7 +158,7 @@ public class EnderSpliceItem extends Item {
 
     private boolean teleportPlayerToPos(
         Level world, LivingEntity user, Player playerEntity, Level targetWorld, Vec3 targetPos, boolean hasResonance) {
-        boolean isSameWorld = isSameWorld(user.getCommandSenderWorld(), targetWorld);
+        boolean isSameWorld = PastelCommon.isSameDimension(user.getCommandSenderWorld(), targetWorld);
         Vec3 currentPos = playerEntity.position();
         if ((hasResonance || isSameWorld) && targetWorld instanceof ServerLevel targetServerWorld) {
             world.playSound(

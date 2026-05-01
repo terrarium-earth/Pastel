@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.items.magic_items;
 
 import com.cmdpro.databank.DatabankUtils;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.api.block.PaintbrushInformed;
 import earth.terrarium.pastel.api.block.PaintbrushTriggered;
@@ -153,7 +154,9 @@ public class PaintbrushItem extends Item implements PickBlockActivated, SignAppl
         var component = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
         stack.set(
             PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
-                component.mode(), Optional.ofNullable(color), component.brown(), component.greenPos())
+                component.mode(), Optional.ofNullable(color), component.brown(), component.greenPos(),
+                component.greenDim()
+            )
         );
     }
 
@@ -348,8 +351,11 @@ public class PaintbrushItem extends Item implements PickBlockActivated, SignAppl
                                                       .equals(pos))
                     return false; // no charge if you try to set it to the same block
                 paintbrush.set(
-                    PastelDataComponentTypes.PAINTBRUSH,
-                    new PaintbrushComponent(component.mode(), component.color(), component.brown(), Optional.of(pos))
+                    PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
+                        component.mode(), component.color(), component.brown(), Optional.of(pos), level.dimension()
+                                                                                                       .location()
+                                                                                                       .toString()
+                    )
                 );
                 return true;
             }
@@ -562,17 +568,34 @@ public class PaintbrushItem extends Item implements PickBlockActivated, SignAppl
                 var component = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
                 stack.set(
                     PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
-                        component.mode(), component.color(), !component.brown(), component.greenPos())
+                        component.mode(), component.color(), !component.brown(), component.greenPos(),
+                        component.greenDim()
+                    )
                 );
                 return true;
             }
             case GREEN -> {
                 if (!(player instanceof ServerPlayer serverPlayer)) return false;
-                var optionalPos = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT)
-                                       .greenPos();
-                if (optionalPos.isEmpty()) return false;
+                var component = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+                var optionalPos = component.greenPos();
+                if (optionalPos.isEmpty() || component.greenDim()
+                                                      .isEmpty()) return false;
                 var pos = optionalPos.get();
-                if (!level.isLoaded(pos)) return false;
+                if (!PastelCommon.isSameDimension(level, component.greenDim()) || !level.isLoaded(pos)) return false;
+                // we are in the same "lore dimension" but not the same level, so we need to get the right level
+                if (!level.dimension()
+                          .location()
+                          .toString()
+                          .equals(component.greenDim())) {
+                    if (level.getServer() == null) return false;
+                    switch (component.greenDim()) {
+                        case "minecraft:overworld" -> level = level.getServer()
+                                                                   .getLevel(Level.OVERWORLD);
+                        case "pastel:imbrifer" -> level = level.getServer()
+                                                               .getLevel(PastelLevels.DIMENSION_KEY);
+                    }
+                }
+                if (level == null) return false;
                 serverPlayer.gameMode.useItemOn(
                     serverPlayer, level, stack, hand,
                     new BlockHitResult(pos.getCenter(), player.getNearestViewDirection(), pos, false)
@@ -764,18 +787,20 @@ public class PaintbrushItem extends Item implements PickBlockActivated, SignAppl
             case INFO -> stack.set(
                 PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
                     PaintbrushComponent.PaintbrushMode.PAINT, component.color(), component.brown(),
-                    component.greenPos()
+                    component.greenPos(), component.greenDim()
                 )
             );
             case PAINT -> stack.set(
                 PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
                     PaintbrushComponent.PaintbrushMode.SPELL, component.color(), component.brown(),
-                    component.greenPos()
+                    component.greenPos(), component.greenDim()
                 )
             );
             case SPELL -> stack.set(
                 PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
-                    PaintbrushComponent.PaintbrushMode.INFO, component.color(), component.brown(), component.greenPos())
+                    PaintbrushComponent.PaintbrushMode.INFO, component.color(), component.brown(), component.greenPos(),
+                    component.greenDim()
+                )
             );
         }
         player.level()
