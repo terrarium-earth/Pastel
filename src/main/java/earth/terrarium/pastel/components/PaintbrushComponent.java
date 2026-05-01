@@ -2,8 +2,10 @@ package earth.terrarium.pastel.components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.sun.jna.platform.win32.WinDef;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
@@ -12,13 +14,15 @@ import net.minecraft.util.StringRepresentable;
 import java.util.Optional;
 import java.util.function.IntFunction;
 
-public record PaintbrushComponent(PaintbrushMode mode, Optional<InkColor> color) {
-    public static final PaintbrushComponent DEFAULT = new PaintbrushComponent(PaintbrushMode.INFO, Optional.empty());
+public record PaintbrushComponent(PaintbrushMode mode, Optional<InkColor> color, boolean brown, Optional<BlockPos> greenPos) {
+    public static final PaintbrushComponent DEFAULT = new PaintbrushComponent(PaintbrushMode.INFO, Optional.empty(), false, Optional.empty());
     public static final Codec<PaintbrushComponent> CODEC = RecordCodecBuilder.create(i -> i.group(
                                                                                                PaintbrushMode.CODEC.fieldOf("mode")
                                                                                                                    .forGetter(PaintbrushComponent::mode),
                                                                                                InkColor.CODEC.optionalFieldOf("color")
-                                                                                                             .forGetter(PaintbrushComponent::color)
+                                                                                                             .forGetter(PaintbrushComponent::color),
+                                                                                               Codec.BOOL.fieldOf("brown").forGetter(PaintbrushComponent::brown),
+                                                                                               BlockPos.CODEC.optionalFieldOf("green_pos").forGetter(PaintbrushComponent::greenPos)
                                                                                            )
                                                                                            .apply(
                                                                                                i,
@@ -28,6 +32,8 @@ public record PaintbrushComponent(PaintbrushMode mode, Optional<InkColor> color)
     public static final StreamCodec<ByteBuf,PaintbrushComponent> STREAM_CODEC = StreamCodec.composite(
         PaintbrushMode.STREAM_CODEC,PaintbrushComponent::mode,
         InkColor.STREAM_CODEC.apply(ByteBufCodecs::optional),PaintbrushComponent::color,
+        ByteBufCodecs.BOOL,PaintbrushComponent::brown,
+        BlockPos.STREAM_CODEC.apply(ByteBufCodecs::optional),PaintbrushComponent::greenPos,
         PaintbrushComponent::new
     );
 

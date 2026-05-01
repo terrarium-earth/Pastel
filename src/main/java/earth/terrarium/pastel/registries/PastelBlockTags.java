@@ -19,6 +19,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> ALOE_CONVERTED = of("aloe_converted");
     public static final TagKey<Block> GROWTH_ACCELERATORS = of("growth_accelerators");
     public static final TagKey<Block> NIGHTDEW_SOILS = of("nightdew_soils");
+    public static final TagKey<Block> COLORED_SAPLINGS = of("colored_saplings");
 
     // DECAY
     public static final TagKey<Block> DECAY = of("decay/decay");

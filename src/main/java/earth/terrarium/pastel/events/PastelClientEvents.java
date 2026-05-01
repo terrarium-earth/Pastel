@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.events;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -7,6 +8,7 @@ import com.mojang.datafixers.util.Either;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
+import earth.terrarium.pastel.api.item.PickBlockActivated;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
@@ -51,6 +53,7 @@ import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -108,6 +111,8 @@ public class PastelClientEvents {
         NeoForge.EVENT_BUS.addListener(PastelClientEvents::onEntityTick);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, PastelClientEvents::modifyFog);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, PastelClientEvents::modifyFogColor);
+        NeoForge.EVENT_BUS.addListener(PastelClientEvents::handlePickBlock);
+        NeoForge.EVENT_BUS.addListener(PastelClientEvents::handlePickBlockAgain);
 
         // registerCustomItemRenderer(PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem(), BottomlessBundleItem
         // .Renderer::new); TODO unholy
@@ -146,6 +151,26 @@ public class PastelClientEvents {
         slotEffect(PastelItems.PRISCILLENT_SPECTACLES, e);
         InkDrainTrinketItem.BY_COLOR.values()
                                     .forEach(i -> slotEffect(i, e));
+    }
+
+    private static void handlePickBlock(InputEvent.Key event){
+        var instance = Minecraft.getInstance();
+        var keyPickItem = instance.options.keyPickItem;
+        if(instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.KEYSYM) || !keyPickItem.matches(event.getKey(),event.getScanCode())) return;
+        var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
+        if(heldItem.getItem() instanceof PickBlockActivated item){
+            item.onPickBlock(heldItem, instance.player);
+        }
+    }
+
+    private static void handlePickBlockAgain(InputEvent.MouseButton event){
+        var instance = Minecraft.getInstance();
+        var keyPickItem = instance.options.keyPickItem;
+        if(instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.MOUSE) || !keyPickItem.matchesMouse(event.getButton())) return;
+        var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
+        if(heldItem.getItem() instanceof PickBlockActivated item){
+            item.onPickBlock(heldItem, instance.player);
+        }
     }
 
     private static void slotEffect(ItemLike item, RegisterItemDecorationsEvent event) {
