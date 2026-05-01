@@ -5566,6 +5566,7 @@ public class PastelBlocks {
         PastelModelHelper.BLOCK.translucent(PastelBlocks.AZURE_CRYSTAL);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.AZURE_OUTCROP);
         PastelModelHelper.BLOCK.translucent(PastelBlocks.VIRIDIAN_CRYSTAL);
+        PastelModelHelper.BLOCK.translucent(PastelBlocks.TEMPORARY_PLATFORM);
 
         if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.AE2_ID)) {
             PastelModelHelper.BLOCK.cutout(AE2Compat.SMALL_FLUIX_BUD);

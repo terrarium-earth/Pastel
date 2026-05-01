@@ -76,9 +76,10 @@ public class PastelDataComponentTypes {
         "flowing_staff", builder -> builder.persistent(FlowingStaffComponent.CODEC)
                                            .networkSynchronized(FlowingStaffComponent.STREAM_CODEC)
     );
-    public static final DataComponentType<StoredBlockEntityComponent> STORED_BLOCK_ENTITY = register("stored_block_entity",
-                                                                                        builder -> builder.persistent(
-                                                                                            StoredBlockEntityComponent.CODEC)
+    public static final DataComponentType<StoredBlockEntityComponent> STORED_BLOCK_ENTITY = register(
+        "stored_block_entity",
+        builder -> builder.persistent(
+            StoredBlockEntityComponent.CODEC)
     );
     public static final DataComponentType<ExtendedBundleComponent> EXTENDED_BUNDLE = register(
         "extended_bundle", builder -> builder.persistent(ExtendedBundleComponent.CODEC)
@@ -196,6 +197,7 @@ public class PastelDataComponentTypes {
 
     public static final DataComponentType<PaintbrushComponent> PAINTBRUSH = register(
         "paintbrush", builder -> builder.persistent(PaintbrushComponent.CODEC)
+                                        .networkSynchronized(PaintbrushComponent.STREAM_CODEC)
     );
 
     public static <T> DataComponentType<T> register(

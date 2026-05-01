@@ -79,9 +79,10 @@ public class FunctionalBlockModels {
         );
         PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get(), PastelBlocks.SHIMMERSTONE_LIGHT.get());
-//        PastelModelHelper.BLOCK.parented(
-//            generators, PastelBlocks.ENERGETIC_MOTE.get(), PastelBlocks.SHIMMERSTONE_LIGHT.get()
-//        );
+        PastelModelHelper.BLOCK.parented(
+            generators, PastelBlocks.ENERGETIC_MOTE.get(), PastelBlocks.SHIMMERSTONE_LIGHT.get());
+        PastelModelHelper.BLOCK.parented(
+            generators, PastelBlocks.TEMPORARY_PLATFORM.get(), PastelBlocks.MOONSTONE_GLASS.get());
 
         decay(generators, PastelBlocks.FADING);
         decay(generators, PastelBlocks.FAILING);
@@ -135,7 +136,8 @@ public class FunctionalBlockModels {
             generators, PastelBlocks.BEDROCK_ANVIL, ModelLocationUtils::getModelLocation);
 
 
-        PastelModelHelper.BLOCK.singletonWithSoup(generators, PastelBlocks.MEMORY, ModelLocationUtils::getModelLocation);
+        PastelModelHelper.BLOCK.singletonWithSoup(
+            generators, PastelBlocks.MEMORY, ModelLocationUtils::getModelLocation);
 
         generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(
                                                                     PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
@@ -251,15 +253,20 @@ public class FunctionalBlockModels {
                                                                         PastelBlocks.IMBRIFER_PORTAL.get())
                                                                 )));
 
-        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_SPEED.get(), PastelBlocks.UPGRADE_SPEED.get());
-        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_SPEED2.get(), PastelBlocks.UPGRADE_SPEED.get());
-        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_SPEED3.get(), PastelBlocks.UPGRADE_SPEED.get());
+        PastelModelHelper.BLOCK.parented(
+            generators, PastelBlocks.UPGRADE_SPEED.get(), PastelBlocks.UPGRADE_SPEED.get());
+        PastelModelHelper.BLOCK.parented(
+            generators, PastelBlocks.UPGRADE_SPEED2.get(), PastelBlocks.UPGRADE_SPEED.get());
+        PastelModelHelper.BLOCK.parented(
+            generators, PastelBlocks.UPGRADE_SPEED3.get(), PastelBlocks.UPGRADE_SPEED.get());
         PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.UPGRADE_EFFICIENCY.get(), PastelBlocks.UPGRADE_EFFICIENCY.get());
         PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.UPGRADE_EFFICIENCY2.get(), PastelBlocks.UPGRADE_EFFICIENCY.get());
-        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_YIELD.get(), PastelBlocks.UPGRADE_YIELD.get());
-        PastelModelHelper.BLOCK.parented(generators, PastelBlocks.UPGRADE_YIELD2.get(), PastelBlocks.UPGRADE_YIELD.get());
+        PastelModelHelper.BLOCK.parented(
+            generators, PastelBlocks.UPGRADE_YIELD.get(), PastelBlocks.UPGRADE_YIELD.get());
+        PastelModelHelper.BLOCK.parented(
+            generators, PastelBlocks.UPGRADE_YIELD2.get(), PastelBlocks.UPGRADE_YIELD.get());
         PastelModelHelper.BLOCK.parented(
             generators, PastelBlocks.UPGRADE_EXPERIENCE.get(), PastelBlocks.UPGRADE_EXPERIENCE.get());
         PastelModelHelper.BLOCK.parented(
@@ -491,11 +498,8 @@ public class FunctionalBlockModels {
         );
         ResourceLocation off = PastelModels.REDSTONE_TIMER.createWithSuffix(
             PastelBlocks.REDSTONE_TIMER.get(), "_off",
-            new TextureMapping().put(
-                PastelTextureKeys.LIGHT,
-                TextureMapping.getBlockTexture(
-                    REDSTONE_TORCH, "_off")
-            ), generators.modelOutput
+            new TextureMapping().put(PastelTextureKeys.LIGHT, TextureMapping.getBlockTexture(REDSTONE_TORCH, "_off")),
+            generators.modelOutput
         );
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             VariantProperties.Rotation rotation = PastelModelHelper.getSouthDefaultRotation(direction);
@@ -728,48 +732,49 @@ public class FunctionalBlockModels {
         PastelModelHelper.registerParentedItemModel(
             generators, PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT, PastelBlocks.SHIMMERSTONE_LIGHT.get());
 
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.AXOLOTL_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.BAT_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.BEE_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.BLAZE_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.CAT_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.CHICKEN_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.COW_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.CREEPER_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ENDER_DRAGON_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ENDERMAN_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ENDERMITE_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.EVOKER_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.FISH_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.FOX_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.GHAST_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.GLOW_SQUID_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.GOAT_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.GUARDIAN_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.HORSE_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ILLUSIONER_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.OCELOT_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PARROT_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PHANTOM_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PIG_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PIGLIN_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.POLAR_BEAR_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PUFFERFISH_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.RABBIT_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SHEEP_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SHULKER_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SILVERFISH_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SKELETON_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SLIME_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SNOW_GOLEM_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SPIDER_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SQUID_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.STRAY_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.STRIDER_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.TURTLE_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.WITCH_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.WITHER_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.WITHER_SKELETON_IDOL,PastelModels.MOB_BLOCK);
-        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ZOMBIE_IDOL,PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.AXOLOTL_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.BAT_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.BEE_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.BLAZE_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.CAT_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.CHICKEN_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.COW_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.CREEPER_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ENDER_DRAGON_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ENDERMAN_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ENDERMITE_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.EVOKER_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.FISH_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.FOX_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.GHAST_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.GLOW_SQUID_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.GOAT_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.GUARDIAN_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.HORSE_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ILLUSIONER_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.OCELOT_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PARROT_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PHANTOM_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PIG_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PIGLIN_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.POLAR_BEAR_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.PUFFERFISH_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.RABBIT_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SHEEP_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SHULKER_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SILVERFISH_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SKELETON_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SLIME_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SNOW_GOLEM_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SPIDER_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.SQUID_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.STRAY_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.STRIDER_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.TURTLE_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.WITCH_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.WITHER_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(
+            generators, PastelBlocks.WITHER_SKELETON_IDOL, PastelModels.MOB_BLOCK);
+        PastelModelHelper.registerParentedItemModel(generators, PastelBlocks.ZOMBIE_IDOL, PastelModels.MOB_BLOCK);
     }
 }

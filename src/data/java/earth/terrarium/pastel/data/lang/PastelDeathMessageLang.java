@@ -71,6 +71,9 @@ public class PastelDeathMessageLang {
         provider.add("death.attack.pastel_dark_stake", "%1$s was unable to ward off death.");
         provider.add("death.attack.pastel_dark_stake.item", "%2$s used %3$s to disrupt %1$s's hold on life.");
         provider.add("death.attack.pastel_dark_stake.player", "%1$s thought they could escape %2$s's knives.");
+        provider.add("death.attack.pastel_electric", "%1$s couldn't handle the wattage.");
+        provider.add("death.attack.pastel_electric.item", "%2$s orders in perfect %3$s, shocks %1$s!");
+        provider.add("death.attack.pastel_electric.player", "%1$s found %2$s quite shocking.");
         provider.add("death.attack.pastel_snapping_ivy", "%1$s was held back a bit");
     }
 }

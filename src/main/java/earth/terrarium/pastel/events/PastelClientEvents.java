@@ -14,6 +14,7 @@ import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.attachments.data.SpectacleData;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
+import earth.terrarium.pastel.components.PaintbrushComponent;
 import earth.terrarium.pastel.data_loaders.ParticleSpawnerParticlesDataLoader;
 import earth.terrarium.pastel.data_loaders.dimension.ColorGradingLoader;
 import earth.terrarium.pastel.data_loaders.dimension.EnvDataLoader;
@@ -26,11 +27,9 @@ import earth.terrarium.pastel.items.magic_items.ConstructorsStaffItem;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.items.trinkets.InkDrainTrinketItem;
 import earth.terrarium.pastel.mixin.client.accessors.WorldRendererAccessor;
+import earth.terrarium.pastel.networking.c2s_payloads.PaintbrushModeSwitchPayload;
 import earth.terrarium.pastel.particle.render.ExtendedParticleManager;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItemTags;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelLevels;
+import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import earth.terrarium.pastel.registries.client.PastelShaders;
 import earth.terrarium.pastel.render.HudRenderers;
@@ -77,6 +76,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import oshi.util.tuples.Triplet;
 
@@ -153,23 +153,31 @@ public class PastelClientEvents {
                                     .forEach(i -> slotEffect(i, e));
     }
 
-    private static void handlePickBlock(InputEvent.Key event){
+    private static void handlePickBlock(InputEvent.Key event) {
+        PastelCommon.logInfo("InputEvent.Key called with " + event.getKey());
         var instance = Minecraft.getInstance();
         var keyPickItem = instance.options.keyPickItem;
-        if(instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.KEYSYM) || !keyPickItem.matches(event.getKey(),event.getScanCode())) return;
+        if (instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.KEYSYM) ||
+            !keyPickItem.matches(event.getKey(), event.getScanCode())) return;
         var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
-        if(heldItem.getItem() instanceof PickBlockActivated item){
-            item.onPickBlock(heldItem, instance.player);
+        if (heldItem.is(PastelItems.PAINTBRUSH)) {
+            var component = heldItem.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+            PacketDistributor.sendToServer(new PaintbrushModeSwitchPayload(component.mode()
+                                                                                    .ordinal()));
         }
     }
 
-    private static void handlePickBlockAgain(InputEvent.MouseButton.Pre event){
+    private static void handlePickBlockAgain(InputEvent.MouseButton.Pre event) {
+        PastelCommon.logInfo("InputEvent.MouseButton.Pre called with " + event.getButton());
         var instance = Minecraft.getInstance();
         var keyPickItem = instance.options.keyPickItem;
-        if(instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.MOUSE) || !keyPickItem.matchesMouse(event.getButton())) return;
+        if (instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.MOUSE) ||
+            !keyPickItem.matchesMouse(event.getButton())) return;
         var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
-        if(heldItem.getItem() instanceof PickBlockActivated item){
-            item.onPickBlock(heldItem, instance.player);
+        if (heldItem.is(PastelItems.PAINTBRUSH)) {
+            var component = heldItem.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+            PacketDistributor.sendToServer(new PaintbrushModeSwitchPayload(component.mode()
+                                                                                    .ordinal()));
             event.setCanceled(true);
         }
     }
@@ -182,8 +190,7 @@ public class PastelClientEvents {
         var state = Environmental.isActive();
         var far = event.getFarPlaneDistance();
 
-        if (state.force())
-            far *= 1.25F;
+        if (state.force()) far *= 1.25F;
 
         var original = far;
         if (state.overrides) {
@@ -236,12 +243,8 @@ public class PastelClientEvents {
 
     private static void addResourcePacks(AddPackFindersEvent event) {
         event.addPackFinders(
-            PastelCommon.locate("pastel_style_amethyst"),
-            PackType.CLIENT_RESOURCES,
-            Component.literal("Pastel-Style Amethyst"),
-            PackSource.BUILT_IN,
-            false,
-            Pack.Position.TOP
+            PastelCommon.locate("pastel_style_amethyst"), PackType.CLIENT_RESOURCES,
+            Component.literal("Pastel-Style Amethyst"), PackSource.BUILT_IN, false, Pack.Position.TOP
         );
     }
 
@@ -252,8 +255,7 @@ public class PastelClientEvents {
             PrimordialFireData.clientTick(living);
         }
 
-        if (entity instanceof Player player)
-            SpectacleData.tickClient(player);
+        if (entity instanceof Player player) SpectacleData.tickClient(player);
     }
 
     private static void afterClientTick(ClientTickEvent.Post event) {
@@ -321,14 +323,16 @@ public class PastelClientEvents {
                 Item handItem = handStack.getItem();
                 if (handItem instanceof ConstructorsStaffItem) {
                     shouldCancel = renderPlacementStaffOutline(
-                        event.getPoseStack(), camera, camera.getPosition().x, camera.getPosition().y,
-                        camera.getPosition().z, event.getMultiBufferSource(), target
+                        event.getPoseStack(), camera, camera.getPosition().x,
+                        camera.getPosition().y, camera.getPosition().z,
+                        event.getMultiBufferSource(), target
                     );
                     break;
                 } else if (handItem instanceof ExchangeStaffItem) {
                     shouldCancel = renderExchangeStaffOutline(
-                        event.getPoseStack(), camera, camera.getPosition().x, camera.getPosition().y,
-                        camera.getPosition().z, event.getMultiBufferSource(), handStack, target
+                        event.getPoseStack(), camera, camera.getPosition().x,
+                        camera.getPosition().y, camera.getPosition().z,
+                        event.getMultiBufferSource(), handStack, target
                     );
                     break;
                 }
@@ -349,11 +353,10 @@ public class PastelClientEvents {
                                                                    .bufferSource();
 
             if (stage == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
-                ((ExtendedParticleManager) minecraft.particleEngine)
-                    .render(
-                        event.getPoseStack(), bufferSource, event.getCamera(), event.getPartialTick()
-                                                                                    .getGameTimeDeltaTicks()
-                    );
+                ((ExtendedParticleManager) minecraft.particleEngine).render(
+                    event.getPoseStack(), bufferSource, event.getCamera(), event.getPartialTick()
+                                                                                .getGameTimeDeltaTicks()
+                );
             } else if (stage == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
                 Entity focusedEntity = event.getCamera()
                                             .getEntity();
@@ -365,6 +368,7 @@ public class PastelClientEvents {
             }
         }
     }
+
     private static void handlePlayerRendering(RenderLevelStageEvent event) {
         var stage = event.getStage();
 
@@ -372,7 +376,8 @@ public class PastelClientEvents {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level == null) return;
             for (Player i : mc.level.players()) {
-                i.getData(MiscPlayerData.ATTACHMENT).renderAdditional(event);
+                i.getData(MiscPlayerData.ATTACHMENT)
+                 .renderAdditional(event);
             }
         }
     }
@@ -403,14 +408,13 @@ public class PastelClientEvents {
     }
 
     private static boolean renderPlacementStaffOutline(
-        PoseStack matrices, Camera camera, double d, double e, double f, MultiBufferSource consumers,
-        @NotNull BlockHitResult hitResult
+        PoseStack matrices, Camera camera, double d, double e, double f,
+        MultiBufferSource consumers, @NotNull BlockHitResult hitResult
     ) {
         Minecraft client = Minecraft.getInstance();
         ClientLevel world = client.level;
         Player player = client.player;
-        if (player == null || world == null)
-            return false;
+        if (player == null || world == null) return false;
 
         BlockPos lookingAtPos = hitResult.getBlockPos();
         BlockState lookingAtState = world.getBlockState(lookingAtPos);
@@ -443,8 +447,8 @@ public class PastelClientEvents {
                 } else {
                     long usableCount = Math.min(itemCountInInventory, inkLimit);
                     List<BlockPos> positions = BuildingHelper.calculateBuildingStaffSelection(
-                        world, lookingAtPos, hitResult.getDirection(), usableCount, ConstructorsStaffItem.getRange(
-                            player), !sneaking
+                        world, lookingAtPos, hitResult.getDirection(), usableCount,
+                        ConstructorsStaffItem.getRange(player), !sneaking
                     );
                     if (!positions.isEmpty()) {
                         for (BlockPos newPosition : positions) {
@@ -456,8 +460,7 @@ public class PastelClientEvents {
                                                              world, lookingAtPos,
                                                              CollisionContext.of(camera.getEntity())
                                                          )
-                                                         .move(
-                                                             -testPos.getX(), -testPos.getY(), -testPos.getZ())
+                                                         .move(-testPos.getX(), -testPos.getY(), -testPos.getZ())
                                 );
                             }
                         }
@@ -465,8 +468,10 @@ public class PastelClientEvents {
                         HudRenderers.setItemStackToRender(new ItemStack(item), positions.size(), false);
                         VertexConsumer linesBuffer = consumers.getBuffer(RenderType.lines());
                         WorldRendererAccessor.invokeRenderShape(
-                            matrices, linesBuffer, shape, (double) lookingAtPos.getX() - d,
-                            (double) lookingAtPos.getY() - e, (double) lookingAtPos.getZ() - f, 0.0F, 0.0F, 0.0F, 0.4F
+                            matrices, linesBuffer, shape,
+                            (double) lookingAtPos.getX() - d,
+                            (double) lookingAtPos.getY() - e,
+                            (double) lookingAtPos.getZ() - f, 0.0F, 0.0F, 0.0F, 0.4F
                         );
                         return true;
                     }
@@ -478,8 +483,9 @@ public class PastelClientEvents {
     }
 
     private static boolean renderExchangeStaffOutline(
-        PoseStack matrices, Camera camera, double d, double e, double f, MultiBufferSource consumers,
-        ItemStack exchangeStaffItemStack, BlockHitResult hitResult
+        PoseStack matrices, Camera camera, double d, double e, double f,
+        MultiBufferSource consumers, ItemStack exchangeStaffItemStack,
+        BlockHitResult hitResult
     ) {
         Minecraft client = Minecraft.getInstance();
         ClientLevel level = client.level;
@@ -488,8 +494,7 @@ public class PastelClientEvents {
 
         Player player = client.player;
 
-        if (player == null)
-            return false;
+        if (player == null) return false;
 
         if (player.getMainHandItem()
                   .getItem() instanceof BuildingStaffItem staff && (player.isCreative() || staff.canInteractWith(
@@ -539,8 +544,7 @@ public class PastelClientEvents {
                                                              level, lookingAtPos,
                                                              CollisionContext.of(camera.getEntity())
                                                          )
-                                                         .move(
-                                                             -testPos.getX(), -testPos.getY(), -testPos.getZ())
+                                                         .move(-testPos.getX(), -testPos.getY(), -testPos.getZ())
                                 );
                             }
                         }
@@ -548,9 +552,8 @@ public class PastelClientEvents {
                         HudRenderers.setItemStackToRender(new ItemStack(exchangeBlockItem), positions.size(), false);
                         VertexConsumer linesBuffer = consumers.getBuffer(RenderType.lines());
                         WorldRendererAccessor.invokeRenderShape(
-                            matrices, linesBuffer, shape,
-                            (double) lookingAtPos.getX() - d, (double) lookingAtPos.getY() - e,
-                            (double) lookingAtPos.getZ() - f, 0.0F, 0.0F, 0.0F, 0.4F
+                            matrices, linesBuffer, shape, (double) lookingAtPos.getX() - d,
+                            (double) lookingAtPos.getY() - e, (double) lookingAtPos.getZ() - f, 0.0F, 0.0F, 0.0F, 0.4F
                         );
                         return true;
                     }

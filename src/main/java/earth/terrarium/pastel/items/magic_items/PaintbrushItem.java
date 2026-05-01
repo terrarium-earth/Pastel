@@ -19,6 +19,7 @@ import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.level.BlockVariantHelper;
 import earth.terrarium.pastel.inventories.PaintbrushScreenHandler;
 import earth.terrarium.pastel.items.PigmentItem;
+import earth.terrarium.pastel.networking.c2s_payloads.PaintbrushModeSwitchPayload;
 import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
 import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
 import earth.terrarium.pastel.registries.*;
@@ -65,11 +66,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.util.thread.EffectiveSide;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class PaintbrushItem extends Item implements PickBlockActivated, SignApplicator {
+public class PaintbrushItem extends Item implements SignApplicator {
     public static final int BLOCK_COLOR_COST = 25;
     public static final int CANTRIP_COST = 50;
     public static final int ITEM_VACUUM_RANGE = 16; // todo move to config? also this is a DIAMETER not a radius!
@@ -244,6 +246,7 @@ public class PaintbrushItem extends Item implements PickBlockActivated, SignAppl
                         toPlace, PastelBlocks.TEMPORARY_PLATFORM.get()
                                                                 .defaultBlockState(), Block.UPDATE_ALL
                     );
+                    level.scheduleTick(toPlace, PastelBlocks.TEMPORARY_PLATFORM.get(), 600);
                     return true;
                 }
                 return false;
@@ -279,6 +282,7 @@ public class PaintbrushItem extends Item implements PickBlockActivated, SignAppl
                         offsetPos, PastelBlocks.ENERGETIC_MOTE.get()
                                                               .defaultBlockState()
                     );
+                    level.scheduleTick(offsetPos, PastelBlocks.ENERGETIC_MOTE.get(), 2);
                     return true;
                 }
                 return false;
@@ -606,13 +610,15 @@ public class PaintbrushItem extends Item implements PickBlockActivated, SignAppl
                 BlockHitResult hitResult = raycast(level, player, stack, hand);
                 if (hitResult == null || !level.getBlockState(hitResult.getBlockPos())
                                                .canBeReplaced()) return false;
+                var pos = hitResult.getBlockPos()
+                                   .relative(player.getNearestViewDirection()
+                                                   .getOpposite());
                 level.setBlock(
-                    hitResult.getBlockPos()
-                             .relative(player.getNearestViewDirection()
-                                             .getOpposite()), PastelBlocks.TEMPORARY_PLATFORM.get()
-                                                                                             .defaultBlockState(),
+                    pos, PastelBlocks.TEMPORARY_PLATFORM.get()
+                                                        .defaultBlockState(),
                     Block.UPDATE_ALL
                 );
+                level.scheduleTick(pos, PastelBlocks.TEMPORARY_PLATFORM.get(), 600);
                 return false;
             }
             case LIGHT_BLUE -> {
@@ -777,33 +783,5 @@ public class PaintbrushItem extends Item implements PickBlockActivated, SignAppl
         }
 
         return false;
-    }
-
-    // this will be a cohesive intangible-style menu later™ but for now you get this
-    @Override
-    public void onPickBlock(ItemStack stack, LocalPlayer player) {
-        var component = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
-        switch (component.mode()) {
-            case INFO -> stack.set(
-                PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
-                    PaintbrushComponent.PaintbrushMode.PAINT, component.color(), component.brown(),
-                    component.greenPos(), component.greenDim()
-                )
-            );
-            case PAINT -> stack.set(
-                PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
-                    PaintbrushComponent.PaintbrushMode.SPELL, component.color(), component.brown(),
-                    component.greenPos(), component.greenDim()
-                )
-            );
-            case SPELL -> stack.set(
-                PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
-                    PaintbrushComponent.PaintbrushMode.INFO, component.color(), component.brown(), component.greenPos(),
-                    component.greenDim()
-                )
-            );
-        }
-        player.level()
-              .playSound(null, BlockPos.containing(player.position()), PastelSounds.CAST_RADIANCE, SoundSource.PLAYERS);
     }
 }

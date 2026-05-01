@@ -1,15 +1,7 @@
 package earth.terrarium.pastel.networking;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.networking.c2s_payloads.AddLoreBedrockAnvilPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.BindEnderSpliceToPlayerPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.ChangeCompactingChestSettingsPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.GuidebookHintBoughtPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.InkColorSelectedC2SPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.ParticleSpawnerConfigurationC2SPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.RenameItemInBedrockAnvilPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.SetShadowSlotPayload;
-import earth.terrarium.pastel.networking.c2s_payloads.WorkstaffToggleSelectedPayload;
+import earth.terrarium.pastel.networking.c2s_payloads.*;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -57,6 +49,7 @@ public class PastelC2SPackets {
             WorkstaffToggleSelectedPayload.ID, WorkstaffToggleSelectedPayload.CODEC,
             WorkstaffToggleSelectedPayload.getPayloadHandler()
         );
+        registrar.playToServer(PaintbrushModeSwitchPayload.TYPE,PaintbrushModeSwitchPayload.STREAM_CODEC,PaintbrushModeSwitchPayload.getPayloadHandler());
     }
 
 }

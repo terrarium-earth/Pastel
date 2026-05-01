@@ -12,16 +12,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 
 public class EnergeticMoteBlock extends Block {
-    private static final Property<Integer> TICKS = BlockStateProperties.AGE_2;
 
     public EnergeticMoteBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(TICKS, 0));
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TICKS);
     }
 
     @Override
@@ -41,10 +34,6 @@ public class EnergeticMoteBlock extends Block {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if(state.getValue(TICKS)<2){
-            state.setValue(TICKS,state.getValue(TICKS)+1);
-        } else {
-            level.removeBlock(pos,false);
-        }
+        level.removeBlock(pos,false);
     }
 }
