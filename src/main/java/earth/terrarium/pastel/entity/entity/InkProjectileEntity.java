@@ -50,8 +50,7 @@ import java.util.Optional;
 public class InkProjectileEntity extends MagicProjectileEntity {
 
     private static final int COLOR_SPLAT_RANGE = 2;
-    private static final int SPELL_POTENCY = 2;
-    private static final float DAMAGE_PER_POTENCY = 0.5F;
+    private static final float DAMAGE = 4f;
 
     private static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(
         InkProjectileEntity.class, PastelTrackedDataHandlers.INK_COLOR);
@@ -148,10 +147,6 @@ public class InkProjectileEntity extends MagicProjectileEntity {
                   .playSound(null, target, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
         }
 
-        float velocity = (float) this.getDeltaMovement()
-                                     .length();
-        int damage = Mth.ceil(Mth.clamp((double) velocity * DAMAGE_PER_POTENCY * SPELL_POTENCY, 0.0D, 2.147483647E9D));
-
         DamageSource damageSource;
         if (owner == null) {
             damageSource = PastelDamageTypes.inkProjectile(this, this);
@@ -162,7 +157,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
             }
         }
 
-        if (target.hurt(damageSource, (float) damage)) {
+        if (target.hurt(damageSource, DAMAGE)) {
             if (target instanceof LivingEntity livingTarget) {
 
                 if (this.level() instanceof ServerLevel serverWorld) {
@@ -282,7 +277,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
         double posY = this.position().y;
         double posZ = this.position().z;
 
-        float q = SPELL_POTENCY * 2.0F;
+        float q = 4.0F;
         double k = Mth.floor(posX - (double) q - 1.0D);
         double l = Mth.floor(posX + (double) q + 1.0D);
         int r = Mth.floor(posY - (double) q - 1.0D);
