@@ -1792,7 +1792,7 @@ public class PastelBlocks {
         block("block_flooder", () -> new BlockFlooderBlock(settings(MapColor.CLAY, SoundType.ROOTED_DIRT, 0.0F))));
     public static final DeferredBlock<Block> BOTTOMLESS_BUNDLE = register(blockWithItem(
                                                                               "bottomless_bundle",
-        () -> new BottomlessBundleBlock(settings(MapColor.ICE, SoundType.WOOL, 1.0F).noOcclusion()
+                                                                              () -> new BottomlessBundleBlock(settings(MapColor.ICE, SoundType.WOOL, 1.0F).noOcclusion()
                                                                                                                                                                                .pushReaction(
                                                                                                                                                                                    PushReaction.DESTROY)),
                                                                               block -> new BottomlessBundleItem(block
@@ -1820,7 +1820,10 @@ public class PastelBlocks {
                                                                                 .noOcclusion()
                                                                                 .sound(
                                                                                     PastelBlockSoundGroups.SHIMMERSTONE_LIGHT)
-                                                                                .instabreak())
+                                                                                .instabreak()
+                                                                                .noCollission()
+                                                                                .noLootTable()
+                                                                                .pushReaction(PushReaction.DESTROY))
     ));
 
     public static final DeferredBlock<Block> TEMPORARY_PLATFORM = register(block(

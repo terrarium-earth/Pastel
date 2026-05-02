@@ -278,9 +278,9 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 var offsetPos = pos.relative(context.getClickedFace());
                 if (level.getBlockState(offsetPos)
                          .canBeReplaced()) {
-                    level.setBlockAndUpdate(
+                    level.setBlock(
                         offsetPos, PastelBlocks.ENERGETIC_MOTE.get()
-                                                              .defaultBlockState()
+                                                              .defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE
                     );
                     level.scheduleTick(offsetPos, PastelBlocks.ENERGETIC_MOTE.get(), 2);
                     return true;
@@ -325,7 +325,9 @@ public class PaintbrushItem extends Item implements SignApplicator {
                     var ret = false;
                     var items = level.getEntitiesOfClass(
                         ItemEntity.class, AABB.encapsulatingFullBlocks(
-                            pos.relative(context.getClickedFace()), pos.relative(context.getClickedFace()))
+                            pos.relative(context.getClickedFace()),
+                            pos.relative(context.getClickedFace())
+                        )
                     );
                     for (var i : items) {
                         ret |= HealingRecipe.processItemEntity(level, i);
@@ -339,7 +341,9 @@ public class PaintbrushItem extends Item implements SignApplicator {
                     var ret = false;
                     var items = level.getEntitiesOfClass(
                         ItemEntity.class, AABB.encapsulatingFullBlocks(
-                            pos.relative(context.getClickedFace()), pos.relative(context.getClickedFace()))
+                            pos.relative(context.getClickedFace()),
+                            pos.relative(context.getClickedFace())
+                        )
                     );
                     for (var i : items) {
                         ret |= DegradingRecipe.processItemEntity(level, i);
@@ -615,8 +619,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
                                                    .getOpposite());
                 level.setBlock(
                     pos, PastelBlocks.TEMPORARY_PLATFORM.get()
-                                                        .defaultBlockState(),
-                    Block.UPDATE_ALL
+                                                        .defaultBlockState(), Block.UPDATE_ALL
                 );
                 level.scheduleTick(pos, PastelBlocks.TEMPORARY_PLATFORM.get(), 600);
                 return false;
