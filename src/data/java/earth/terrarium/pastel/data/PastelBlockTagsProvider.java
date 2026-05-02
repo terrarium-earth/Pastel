@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -56,12 +57,18 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
             ResourceLocation.fromNamespaceAndPath("c", "relocation_not_supported"));
         tag(PastelBlockTags.FALLING_BLOCK_BLACKLISTED).addTag(PastelBlockTags.REALLY_FALLING_BLOCK_BLACKLISTED)
                                                       .add(
-                                                          PastelBlocks.BUDDING_CITRINE.get(),
-                                                          PastelBlocks.BUDDING_MOONSTONE.get(),
-                                                          PastelBlocks.BUDDING_ONYX.get(),
-                                                          PastelBlocks.BUDDING_TOPAZ.get(),
-                                                          Blocks.SPAWNER, Blocks.TRIAL_SPAWNER
-                                                      );
+                                                          Blocks.SPAWNER, Blocks.TRIAL_SPAWNER,
+                                                          PastelBlocks.BLACK_MATERIA.get(), Blocks.CAKE,
+                                                          Blocks.COMPOSTER, Blocks.FROGSPAWN, Blocks.GILDED_BLACKSTONE,
+                                                          Blocks.REINFORCED_DEEPSLATE, Blocks.RESPAWN_ANCHOR,
+                                                          Blocks.SCULK_SHRIEKER
+                                                      )
+                                                      .addTag(PastelBlockTags.C_BRUSHABLE_BLOCKS)
+                                                      .addTag(Tags.Blocks.BUDDING_BLOCKS)
+                                                      .addTag(Tags.Blocks.BUDS)
+                                                      .addTag(Tags.Blocks.CLUSTERS)
+                                                      .addTag(PastelBlockTags.C_INFESTED_BLOCKS)
+                                                      .addTag(BlockTags.ALL_SIGNS);
         tag(PastelBlockTags.VIRIDIAN_CRYSTAL_PURITY_SOURCES).add(
             PastelBlocks.MOONSTONE_BLOCK.get(), PastelBlocks.POLISHED_MOONSTONE_BLOCK.get(),
             PastelBlocks.MOONSTONE_POWDER_BLOCK.get(), PastelBlocks.MOONSTONE_CLUSTER.get(),
@@ -71,11 +78,16 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
             PastelBlocks.LARGE_MOONSTONE_BUD.get()
         );
         tag(PastelBlockTags.MUTANDIS_BLACKLIST).add(
-            Blocks.CHORUS_FLOWER, Blocks.SPORE_BLOSSOM, PastelBlocks.NEPHRITE_BLOSSOM_LEAVES.get(),
-            PastelBlocks.JADEITE_LOTUS_FLOWER.get(), PastelBlocks.RESONANT_LILY.get(),
-            PastelBlocks.AMARANTH_BUSHEL.get(), PastelBlocks.BLOOD_ORCHID.get(), PastelBlocks.DOOMBLOOM.get(),
-            PastelBlocks.SWEET_PEA.get(), PastelBlocks.HUMMING_BELL.get(), PastelBlocks.APRICOTTI.get()
-        ).addTag(PastelBlockTags.COLORED_SAPLINGS);
+                                                   Blocks.CHORUS_FLOWER, Blocks.SPORE_BLOSSOM,
+                                                   PastelBlocks.NEPHRITE_BLOSSOM_LEAVES.get(),
+                                                   PastelBlocks.JADEITE_LOTUS_FLOWER.get(),
+                                                   PastelBlocks.RESONANT_LILY.get(),
+                                                   PastelBlocks.AMARANTH_BUSHEL.get(),
+                                                   PastelBlocks.BLOOD_ORCHID.get(), PastelBlocks.DOOMBLOOM.get(),
+                                                   PastelBlocks.SWEET_PEA.get(), PastelBlocks.HUMMING_BELL.get(),
+                                                   PastelBlocks.APRICOTTI.get()
+                                               )
+                                               .addTag(PastelBlockTags.COLORED_SAPLINGS);
         tag(PastelBlockTags.TICK_ACCEL_BLACKLIST);
     }
 
