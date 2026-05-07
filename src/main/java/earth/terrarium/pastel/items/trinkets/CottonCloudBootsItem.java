@@ -31,6 +31,8 @@ public class CottonCloudBootsItem extends PastelTrinketItem {
             if (velocity.y < 0) {
                 entity.setDeltaMovement(entity.getDeltaMovement()
                                               .multiply(1, 0.1, 1));
+                entity.resetFallDistance();
+
                 if (world.isClientSide) {
                     RandomSource random = world.random;
                     world.addParticle(
