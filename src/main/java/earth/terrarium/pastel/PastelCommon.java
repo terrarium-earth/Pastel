@@ -41,6 +41,7 @@ import earth.terrarium.pastel.registries.PastelCapabilityHandlers;
 import earth.terrarium.pastel.registries.PastelCommands;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelDataMaps;
+import earth.terrarium.pastel.registries.PastelDispenserBehaviors;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelEntityColorProcessors;
 import earth.terrarium.pastel.registries.PastelFeatures;
@@ -83,6 +84,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
@@ -281,9 +283,12 @@ public class PastelCommon {
         PastelPositionSources.register(pastelBus);
 
         logInfo("Registering Dispenser, Resonance & Present Unwrap Behaviors...");
-        // PastelDispenserBehaviors.register(); TODO these two also need to be initialized later
-        // PastelPresentUnpackBehaviors.register();
         PastelResonanceProcessorTypes.register(pastelBus);
+
+        // These need to be done after deferred registries are done registering
+        // They do not use the Registry system but depend on some registries
+        pastelBus.addListener(PastelCommon::registerDispenserLikeBehaviors);
+
 
         logInfo("Registering Resource Conditions...");
         PastelResourceConditions.register(pastelBus);
@@ -318,6 +323,11 @@ public class PastelCommon {
         event.addListener(NaturesStaffConversionDataLoader.INSTANCE);
         event.addListener(EntityFishingDataLoader.INSTANCE);
         event.addListener(CrystalApothecarySimulationsDataLoader.INSTANCE);
+    }
+
+    private static void registerDispenserLikeBehaviors(FMLCommonSetupEvent event) {
+        PastelDispenserBehaviors.register();
+        PastelPresentUnpackBehaviors.register();
     }
 
     /**
