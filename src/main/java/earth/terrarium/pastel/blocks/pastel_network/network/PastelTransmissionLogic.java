@@ -1,13 +1,21 @@
 package earth.terrarium.pastel.blocks.pastel_network.network;
 
+import earth.terrarium.pastel.api.energy.InkStorage;
+import earth.terrarium.pastel.api.energy.InkStorageItem;
 import earth.terrarium.pastel.api.item.ItemReference;
+import earth.terrarium.pastel.blocks.cinderhearth.CinderhearthBlockEntity;
+import earth.terrarium.pastel.blocks.crystallarieum.CrystallarieumBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlock;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
+import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelTransmissionPayload;
+import earth.terrarium.pastel.registries.PastelItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
@@ -17,10 +25,7 @@ import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class PastelTransmissionLogic {
@@ -129,6 +134,89 @@ public class PastelTransmissionLogic {
         IItemHandler destinationStorage, TransferMode transferMode
     ) {
         long totalAvailableStorage = -destinationNode.getItemCountUnderway();
+        //TODO: Remove Below when ink networking and-or 2.0
+        if(destinationNode.getNodeType() == PastelNodeType.GATHER) {
+            int inkStorageAt = -1;
+            //TLDR: We do some shenanigans, and need to reference the actual BE we are targeting with the gather node.
+            BlockEntity targetBE = Objects.requireNonNull(destinationNode.getLevel())
+                                          .getBlockEntity(destinationNode.getBlockPos().offset(destinationNode.getBlockState().getValue(
+                                              PastelNodeBlock.FACING).getOpposite().getNormal()));
+            //Find if destination has ink storage, if it does, note the slot.
+            for(int i =0; i< destinationStorage.getSlots();i++) {
+                ItemStack inSlot = destinationStorage.getStackInSlot(i);
+                if(inSlot.getItem() instanceof InkStorageItem<?>) {
+                    inkStorageAt = i;
+                    break;
+                }
+            }
+
+            //Crystalariums are weird... they dont have normal inventories, so special case to find the ink holder here.
+            if(targetBE instanceof CrystallarieumBlockEntity crystally) {
+                //Note: The variable for the slot is protected, so we cant see it...
+                //If this breaks later when someone changes it I claim innocence! Not my fault!
+                if(crystally.getItem(1).getItem() instanceof InkStorageItem<?>) {
+                    inkStorageAt = 1;
+                }
+            }
+            //CinderHearths are... also weird...
+            if(targetBE instanceof CinderhearthBlockEntity cinder) {
+                //Hey atleast this one is public.
+                if(cinder.getItem(CinderhearthBlockEntity.INK_PROVIDER_SLOT_ID).getItem() instanceof InkStorageItem<?>) {
+                    inkStorageAt = CinderhearthBlockEntity.INK_PROVIDER_SLOT_ID;
+                }
+            }
+            //If we dont have an ink storage in container, try to transfer items below.
+            if(inkStorageAt != -1) {
+                //Copy of normal-node code.
+                Predicate<ItemStack> filter = sourceNode.getTransferFilterTo(destinationNode);
+                var proposals = new HashMap<ItemEntry, Long>();
+                for (int s = 0; s < sourceStorage.getSlots(); s++) {
+                    var stack = sourceStorage.extractItem(s, DEFAULT_MAX_TRANSFER_AMOUNT, true); // Simulate extraction
+
+                    if (stack.isEmpty()) // We don't consider empty stacks..... duh
+                        continue;
+                    //We dont care about anything that isnt a pigment in this section.
+                    if(!stack.is(PastelItemTags.PIGMENTS)) {
+                        continue;
+                    }
+                    if (!filter.test(stack))
+                        continue;
+
+                    var entry = new ItemEntry(stack);
+                    proposals.put(entry, proposals.getOrDefault(entry, 0L) + entry.stack.getCount());
+                }
+                //Try to transfer ink into the container, 1 at a time, If we do, bail
+                for (ItemEntry proposal : proposals.keySet()) {
+                    PigmentItem pigment = (PigmentItem)proposal.stack.getItem();
+                    ItemStack inkStorageItem = destinationStorage.getStackInSlot(inkStorageAt);
+                    if(inkStorageItem.getItem() instanceof InkStorageItem<?> inkStorer) {
+                        InkStorage store = inkStorer.getEnergyStorage(inkStorageItem);
+                        int toTransfer = Math.min(proposal.stack.getCount(), 1);
+                        //We dont want to give the item to the chest, we're doing the logic manually.
+                        var trans = createTransmissionOnValidPath(
+                            sourceNode, destinationNode, proposal.stack.copy(), 0, sourceNode.getTransferTime());
+                        if (trans.isPresent() && store.accepts(pigment.getInkColor()) && store.getRoom(pigment.getInkColor()) >= 100L) {
+                            store.addEnergy(pigment.getInkColor(), 100L);
+                            inkStorer.setEnergyStorage(inkStorageItem, store);
+                            InventoryHelper.extractFromInventory(sourceStorage, ItemReference.of(pigment), toTransfer);
+                            network.addTransmission(
+                                trans.get(), trans.get()
+                                                  .getTransmissionDuration()
+                            );
+                            PastelTransmissionPayload.sendPastelTransmissionParticle(
+                                this.network, trans.get()
+                                                   .getTransmissionDuration(), trans.get()
+                            );
+                            destinationNode.markTransferred();
+                            destinationNode.addItemCountUnderway(toTransfer);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        //TODO: Remove above when 2.0 and-or ink Networking
+
         for (int d = 0; d < destinationStorage.getSlots(); d++) {
             var stack = destinationStorage.getStackInSlot(d);
 
