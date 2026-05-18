@@ -512,7 +512,7 @@ public class PastelInkNodeBlockEntity extends BlockEntity
             user.filter(u -> u instanceof ServerPlayer)
                 .ifPresent(p -> {
                     PastelCriteria.PASTEL_NETWORK_CREATING.trigger(
-                        (ServerPlayer) p, (ServerPastelNetwork) n);
+                        (ServerPlayer) p, (PastelNetwork<ServerLevel>) n);
                 });
         });
 

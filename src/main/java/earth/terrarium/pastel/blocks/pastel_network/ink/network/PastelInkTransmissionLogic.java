@@ -122,24 +122,32 @@ public class PastelInkTransmissionLogic {
     ) {
 
         AtomicReference<InkColor> targetColor = new AtomicReference<InkColor>(null);
-        InkColors.BUILTIN_COLORS.forEach(col -> {
-            if(targetColor.get() == null) {
-                long inkAmt = sourceStorage.getEnergyStorage()
-                                           .getEnergy(col);
-                if (inkAmt > 0L && destinationStorage.getEnergyStorage()
-                                                     .getRoom(col) >= inkAmt) {
+        for (int i = 0; i < InkColors.BUILTIN_COLORS.size(); i++) {
+            if (targetColor.get() == null) {
+                InkColor col = InkColors.BUILTIN_COLORS.get(i);
+                long inkAmt = sourceStorage.getEnergyStorage().getEnergy(col);
+                if (inkAmt > 0L &&
+                    destinationStorage.getEnergyStorage().accepts(col) &&
+                        destinationStorage.getEnergyStorage().getRoom(col) >= inkAmt) {
                     targetColor.set(col);
                 }
             }
-        });
-        if (targetColor.get() == null) {return false;}
+        }
+
+        if (targetColor.get() == null) {
+            return false;
+        }
         InkColor movingColor = targetColor.get();
-        long targetAmnt = Math.min(Math.min(sourceStorage.getEnergyStorage().getEnergy(movingColor),DEFAULT_MAX_TRANSFER_AMOUNT),destinationStorage.getEnergyStorage().getRoom(movingColor));
+        long targetAmnt = Math.min(Math.min(sourceStorage.getEnergyStorage()
+                                                         .getEnergy(movingColor), DEFAULT_MAX_TRANSFER_AMOUNT),
+                                   destinationStorage.getEnergyStorage()
+                                                     .getRoom(movingColor));
 
         var trans = createTransmissionOnValidPath(
             sourceNode, destinationNode, movingColor, targetAmnt, sourceNode.getTransferTime());
         if (trans.isPresent()) {
-            sourceStorage.getEnergyStorage().drainEnergy(movingColor,targetAmnt);
+            sourceStorage.getEnergyStorage()
+                         .drainEnergy(movingColor, targetAmnt);
             sourceStorage.setInkDirty();
             network.addTransmission(
                 trans.get(), trans.get()
