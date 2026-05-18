@@ -161,6 +161,8 @@ import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.blocks.mob_head.PastelWallSkullBlock;
 import earth.terrarium.pastel.blocks.particle_spawner.CreativeParticleSpawnerBlock;
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerBlock;
+import earth.terrarium.pastel.blocks.pastel_network.ink.nodes.PastelInkNodeBlock;
+import earth.terrarium.pastel.blocks.pastel_network.ink.nodes.PastelInkNodeType;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlock;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlock;
@@ -1909,6 +1911,22 @@ public class PastelBlocks {
         blockWithItem(
             "gather_node",
             () -> new PastelNodeBlock(pastelNode(PastelBlockSoundGroups.ONYX_CLUSTER), PastelNodeType.GATHER),
+            IS.of(16), InkColors.BLACK
+        ));
+
+
+    public static final DeferredBlock<Block> INK_CONNECTION_NODE = register(blockWithItem(
+        "ink_connection_node", () -> new PastelInkNodeBlock(pastelNode(SoundType.AMETHYST_CLUSTER), PastelInkNodeType.CONNECTION),
+        IS.of(16), InkColors.LIGHT_GRAY
+    ));
+    public static final DeferredBlock<Block> INK_PROVIDER_NODE = register(blockWithItem(
+        "ink_provider_node", () -> new PastelInkNodeBlock(pastelNode(SoundType.AMETHYST_CLUSTER), PastelInkNodeType.PROVIDER),
+        IS.of(16), InkColors.MAGENTA
+    ));
+    public static final DeferredBlock<Block> INK_GATHER_NODE = register(
+        blockWithItem(
+            "ink_gather_node",
+            () -> new PastelInkNodeBlock(pastelNode(PastelBlockSoundGroups.ONYX_CLUSTER), PastelInkNodeType.GATHER),
             IS.of(16), InkColors.BLACK
         ));
 

@@ -1,16 +1,19 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
+import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.UUID;
+import java.util.logging.Level;
 
 public record PastelNetworkRemovedPayload(UUID networkUUID) implements CustomPacketPayload {
 
@@ -20,7 +23,7 @@ public record PastelNetworkRemovedPayload(UUID networkUUID) implements CustomPac
         PastelNetworkRemovedPayload::new
     );
 
-    public static void send(ServerPastelNetwork network) {
+    public static void send(PastelNetwork<ServerLevel> network) {
         PacketDistributor.sendToPlayersInDimension(
             network.getLevel(), new PastelNetworkRemovedPayload(network.getUUID()));
     }

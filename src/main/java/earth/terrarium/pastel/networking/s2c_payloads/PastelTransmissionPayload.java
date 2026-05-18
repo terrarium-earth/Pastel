@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
+import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
 import earth.terrarium.pastel.blocks.pastel_network.network.PastelTransmission;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
@@ -11,6 +12,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -30,7 +32,7 @@ public record PastelTransmissionPayload(int networkColor, int travelTime, Pastel
     );
 
     public static void sendPastelTransmissionParticle(
-        ServerPastelNetwork network, int travelTime, @NotNull PastelTransmission transmission) {
+        PastelNetwork<ServerLevel> network, int travelTime, @NotNull PastelTransmission transmission) {
         Packet<?> packet = new ClientboundCustomPayloadPacket(
             new PastelTransmissionPayload(network.getColor(), travelTime, transmission));
         var targetPlayers = new HashSet<ServerPlayer>();

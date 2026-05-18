@@ -76,8 +76,11 @@ public class PastelBlockLang {
         // Special cased blocks
         provider.add(PastelBlocks.BUFFER_NODE.get(), "§aPastel Network Buffer Node");
         provider.add(PastelBlocks.CONNECTION_NODE.get(), "§7Pastel Network Connection Node");
+        provider.add(PastelBlocks.INK_CONNECTION_NODE.get(), "§7Pastel Ink Network Connection Node");
         provider.add(PastelBlocks.GATHER_NODE.get(), "§8Pastel Network Gather Node");
+        provider.add(PastelBlocks.INK_GATHER_NODE.get(), "§8Pastel Ink Network Gather Node");
         provider.add(PastelBlocks.PROVIDER_NODE.get(), "§dPastel Network Provider Node");
+        provider.add(PastelBlocks.INK_PROVIDER_NODE.get(), "§dPastel Ink Network Provider Node");
         provider.add(PastelBlocks.SENDER_NODE.get(), "§ePastel Network Sender Node");
         provider.add(PastelBlocks.STORAGE_NODE.get(), "§bPastel Network Storage Node");
         provider.add(PastelBlocks.UPGRADE_EFFICIENCY.get(), "Efficiency Slope");
@@ -137,6 +140,7 @@ public class PastelBlockLang {
             "block.pastel.feeding_idol.tooltip", "§7Feeds animals in a range of %d§7 blocks using food on the ground");
         provider.add("block.pastel.freezing_idol.tooltip", "§7Freezes blocks around it");
         provider.add("block.pastel.gather_node.tooltip", "Gathers items from Sender, Provider and Storage Nodes");
+        provider.add("block.pastel.ink_gather_node.tooltip", "Gathers ink from Provider Nodes");
         provider.add("block.pastel.heartbound_chest.owner", "%s's Heartbound Chest");
         provider.add(
             "block.pastel.incandescent_amalgam.tooltip", "§6⚠§r High yield magical explosive, handle with care");
@@ -161,6 +165,7 @@ public class PastelBlockLang {
         provider.add("block.pastel.particle_spawner.velocity", "Velocity");
         provider.add("block.pastel.pastel_network_nodes.connection_debug", "This node is connected to:");
         provider.add("block.pastel.pastel_network_nodes.tooltip.placing", "Place against some form of inventory");
+        provider.add("block.pastel.pastel_ink_network_nodes.tooltip.placing", "Place against some form of ink storage");
         provider.add("block.pastel.pastel_network_nodes.tooltip.range", "Connects to other nodes in a %d block radius");
         provider.add("block.pastel.pastel_node", "Pastel Node");
         provider.add("block.pastel.pedestal", "Pigment Pedestal");
@@ -177,6 +182,7 @@ public class PastelBlockLang {
             "block.pastel.present.tooltip.wrapped_placed.giver", "A present wrapped by %s! (sneak-use to open)");
         provider.add("block.pastel.projectile_idol.tooltip", "§7Shoots a %s");
         provider.add("block.pastel.provider_node.tooltip", "Supplies Gather Nodes with items");
+        provider.add("block.pastel.ink_provider_node.tooltip", "Supplies Gather Nodes with ink");
         provider.add(
             "block.pastel.random_teleporting_idol.tooltip", "§7Teleports you up to %d blocks in a random direction");
         provider.add("block.pastel.redstone_calculator.mode.addition", "Addition");

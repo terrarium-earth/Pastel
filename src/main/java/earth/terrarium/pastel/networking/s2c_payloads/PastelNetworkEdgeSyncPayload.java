@@ -2,6 +2,7 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.blocks.pastel_network.network.ClientPastelNetwork;
+import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -11,6 +12,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -80,7 +82,7 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, int color, Graph<Bl
         PastelNetworkEdgeSyncPayload::new
     );
 
-    public static void send(ServerPastelNetwork network, BlockPos pos) {
+    public static void send(PastelNetwork<ServerLevel> network, BlockPos pos) {
         PacketDistributor.sendToPlayersTrackingChunk(
             network.getLevel(), new ChunkPos(pos), new PastelNetworkEdgeSyncPayload(
                 network.getUUID(),

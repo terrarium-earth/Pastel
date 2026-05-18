@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.blocks.pastel_network.network;
 
+import earth.terrarium.pastel.blocks.pastel_network.ink.nodes.PastelInkNodeBlockEntity;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +19,7 @@ public class PastelNetwork<W extends Level> {
 
     protected Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
     protected final W world;
-    protected final UUID uuid;
+    public final UUID uuid;
     protected int color;
 
     public enum NodePriority {
@@ -66,6 +67,10 @@ public class PastelNetwork<W extends Level> {
     }
 
     public boolean removeEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
+        return graph.removeEdge(node.getBlockPos(), parent.getBlockPos()) != null;
+    }
+
+    public boolean removeEdge(PastelInkNodeBlockEntity node, PastelInkNodeBlockEntity parent) {
         return graph.removeEdge(node.getBlockPos(), parent.getBlockPos()) != null;
     }
 

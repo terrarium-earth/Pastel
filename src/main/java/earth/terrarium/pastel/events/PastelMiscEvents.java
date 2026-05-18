@@ -243,6 +243,8 @@ public class PastelMiscEvents {
         try {
             Pastel.getServerInstance()
                   .tick();
+            Pastel.getServerInkInstance()
+                .tick();
         } catch (Exception e) {
             PastelCommon.logError("Error in the Pastel Network transmission loop.");
             e.printStackTrace();

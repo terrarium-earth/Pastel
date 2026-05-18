@@ -44,6 +44,8 @@ import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.mob_head.PastelWallSkullBlock;
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_network.ink.nodes.PastelInkNodeBlockEntity;
+import earth.terrarium.pastel.blocks.pastel_network.ink.nodes.PastelInkNodeBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
@@ -131,6 +133,7 @@ public class PastelBlockEntities {
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PresentBlockEntity>> PRESENT;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<TitrationBarrelBlockEntity>> TITRATION_BARREL;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PastelNodeBlockEntity>> PASTEL_NODE;
+    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PastelInkNodeBlockEntity>> PASTEL_INK_NODE;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<HummingstoneBlockEntity>> HUMMINGSTONE;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PlacedItemBlockEntity>> PLACED_ITEM;
     public static DeferredHolder<BlockEntityType<?>, BlockEntityType<TeaTableBlockEntity>> TEA_TABLE;
@@ -227,6 +230,9 @@ public class PastelBlockEntities {
             "pastel_node", PastelNodeBlockEntity::new, PastelBlocks.CONNECTION_NODE, PastelBlocks.PROVIDER_NODE,
             PastelBlocks.STORAGE_NODE, PastelBlocks.SENDER_NODE, PastelBlocks.GATHER_NODE, PastelBlocks.BUFFER_NODE
         );
+        PASTEL_INK_NODE = register(
+            "pastel_ink_node", PastelInkNodeBlockEntity::new, PastelBlocks.INK_CONNECTION_NODE, PastelBlocks.INK_PROVIDER_NODE, PastelBlocks.INK_GATHER_NODE
+        );
         HUMMINGSTONE = register("hummingstone", HummingstoneBlockEntity::new, PastelBlocks.HUMMINGSTONE);
         PLACED_ITEM = register(
             "placed_item", PlacedItemBlockEntity::new, PastelBlocks.INCANDESCENT_AMALGAM,
@@ -314,6 +320,7 @@ public class PastelBlockEntities {
         BlockEntityRenderers.register(PastelBlockEntities.SNOWGRAVE.get(), SnowgraveBlockEntityRenderer::new);
 
         BlockEntityRenderers.register(PastelBlockEntities.PASTEL_NODE.get(), PastelNodeBlockEntityRenderer::new);
+        BlockEntityRenderers.register(PastelBlockEntities.PASTEL_INK_NODE.get(), PastelInkNodeBlockEntityRenderer::new);
         BlockEntityRenderers.register(PastelBlockEntities.TEA_TABLE.get(), TeaTableBlockEntityRenderer::new);
     }
 

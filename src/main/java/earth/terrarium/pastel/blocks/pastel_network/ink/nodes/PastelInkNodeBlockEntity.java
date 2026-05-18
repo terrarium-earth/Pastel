@@ -1,0 +1,715 @@
+package earth.terrarium.pastel.blocks.pastel_network.ink.nodes;
+
+import com.google.common.base.Predicates;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.block.FilterConfigurable;
+import earth.terrarium.pastel.api.energy.InkStorageBlockEntity;
+import earth.terrarium.pastel.api.item.ItemReference;
+import earth.terrarium.pastel.api.item.StampDataCategory;
+import earth.terrarium.pastel.api.item.Stampable;
+import earth.terrarium.pastel.api.pastel.PastelUpgradeSignature;
+import earth.terrarium.pastel.api.pastel.PastelUpgradeable;
+import earth.terrarium.pastel.blocks.pastel_network.Pastel;
+import earth.terrarium.pastel.blocks.pastel_network.ink.network.ServerPastelInkNetwork;
+import earth.terrarium.pastel.blocks.pastel_network.network.*;
+import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
+import earth.terrarium.pastel.helpers.level.BlockReference;
+import earth.terrarium.pastel.inventories.FilteringScreenHandler;
+import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
+import earth.terrarium.pastel.progression.PastelCriteria;
+import earth.terrarium.pastel.registries.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.function.Predicate;
+
+public class PastelInkNodeBlockEntity extends BlockEntity
+    implements FilterConfigurable, MenuProvider, PastelUpgradeable, Stampable {
+
+    public static final int MAX_FILTER_SLOTS = 25;
+    public static final int SLOTS_PER_ROW = 5;
+    public static final int DEFAULT_FILTER_SLOT_ROWS = 1;
+    public static final int RANGE = 12;
+
+    @NotNull
+    protected UUID nodeId = UUID.randomUUID();
+    protected Optional<UUID> networkUUID = Optional.empty();
+    protected Optional<PastelUpgradeSignature> outerRing, innerRing, redstoneRing;
+    protected Optional<DyeColor> color = Optional.empty();
+
+    // TODO: move these to ServerPastelNetwork?
+    protected long lastTransferTick = 0;
+    protected final long cachedRedstonePowerTick = 0;
+    protected boolean cachedUnpowered = true;
+    protected PastelNetwork.NodePriority priority = PastelNetwork.NodePriority.GENERIC;
+    protected long itemCountUnderway = 0;
+
+
+    // upgrade impl stuff
+    protected boolean lit, triggerTransfer, triggered, waiting, lamp, sensor, updated;
+    protected int transferCount = PastelTransmissionLogic.DEFAULT_MAX_TRANSFER_AMOUNT;
+    protected int transferTime = PastelTransmissionLogic.DEFAULT_TRANSFER_TICKS_PER_NODE;
+    protected int filterSlotRows = DEFAULT_FILTER_SLOT_ROWS;
+
+    protected Optional<BlockCapabilityCache<InkStorageBlockEntity, Direction>> cache = Optional.empty();
+    protected Direction cacheDirection = null;
+
+    private final NonNullList<ItemReference> filterItems;
+    float rotationTarget, crystalRotation, lastRotationTarget, heightTarget, crystalHeight, lastHeightTarget,
+        alphaTarget, ringAlpha, lastAlphaTarget;
+    long creationStamp = -1, interpTicks, interpLength = -1, spinTicks;
+    private ConnectionState connectionState;
+
+    public PastelInkNodeBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(PastelBlockEntities.PASTEL_INK_NODE.get(), blockPos, blockState);
+        this.filterItems = NonNullList.withSize(MAX_FILTER_SLOTS, ItemReference.empty());
+        this.outerRing = Optional.empty();
+        this.innerRing = Optional.empty();
+        this.redstoneRing = Optional.empty();
+    }
+    //This is bad. Someone please make this a Block Capability.
+    public @Nullable InkStorageBlockEntity getConnectedHandler() {
+        var ret = level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(PastelInkNodeBlock.FACING).getOpposite()));
+        if(ret != null){
+            if (ret instanceof InkStorageBlockEntity<?> it) {
+                return it;
+            }
+        }
+        return null;
+    }
+
+    public static void tick(@NotNull Level world, BlockPos pos, BlockState state, PastelInkNodeBlockEntity node) {
+        if (node.lamp && state.getValue(BlockStateProperties.LIT) != node.canTransfer()) {
+            world.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, node.cachedUnpowered));
+        }
+
+        //Trigger transfer logic needs to be ticked here
+        if (node.triggerTransfer) {
+            var powered = world.hasNeighborSignal(pos);
+
+            if (node.waiting && !powered) {
+                node.waiting = false;
+            }
+
+            if (!node.triggered && !node.waiting && powered) {
+                node.triggered = true;
+            }
+        }
+
+        if (world.isClientSide()) {
+            if (node.networkUUID.isEmpty()) {
+                node.changeConnectionState(ConnectionState.DISCONNECTED);
+                node.interpLength = 17;
+            } else if (!node.canTransfer()) {
+                node.changeConnectionState(ConnectionState.INACTIVE);
+                node.interpLength = 21;
+            } else if (node.spinTicks > 0) {
+                node.changeConnectionState(ConnectionState.ACTIVE);
+                node.interpLength = 17;
+            } else {
+                node.changeConnectionState(ConnectionState.CONNECTED);
+                node.interpLength = 13;
+            }
+
+            if (node.interpTicks < node.interpLength)
+                node.interpTicks++;
+
+            if (node.spinTicks > 0)
+                node.spinTicks--;
+        } else if (!node.updated) {
+            node.updateUpgrades();
+            node.updated = true;
+        }
+    }
+
+    public void changeConnectionState(ConnectionState connectionState) {
+        if (this.connectionState != connectionState) {
+            this.connectionState = connectionState;
+            lastRotationTarget = crystalRotation;
+            lastHeightTarget = crystalHeight;
+            lastAlphaTarget = ringAlpha;
+            interpTicks = 0;
+        }
+    }
+
+    public void setSpinTicks(long spinTicks) {
+        this.spinTicks = spinTicks;
+    }
+
+    public Optional<PastelUpgradeSignature> getInnerRing() {
+        return innerRing;
+    }
+
+    public Optional<PastelUpgradeSignature> getOuterRing() {
+        return outerRing;
+    }
+
+    public Optional<PastelUpgradeSignature> getRedstoneRing() {
+        return redstoneRing;
+    }
+
+    public PastelNetwork.NodePriority getPriority() {
+        return priority;
+    }
+
+    // inverted order of adding them
+    public ItemStack tryRemoveUpgrade() {
+        var stack = ItemStack.EMPTY;
+
+        if (redstoneRing.isPresent()) {
+            stack = redstoneRing.get().upgradeItem.getDefaultInstance();
+            redstoneRing = Optional.empty();
+        } else if (innerRing.isPresent()) {
+            stack = innerRing.get().upgradeItem.getDefaultInstance();
+            innerRing = Optional.empty();
+        } else if (outerRing.isPresent()) {
+            stack = outerRing.get().upgradeItem.getDefaultInstance();
+            outerRing = Optional.empty();
+        }
+
+        if (!stack.isEmpty()) {
+            level.playLocalSound(
+                worldPosition, PastelSounds.SHATTER_LIGHT, SoundSource.BLOCKS, 0.25F, 0.9F + level.getRandom()
+                                                                                                       .nextFloat() *
+                                                                                                  0.2F, true
+            );
+            setChanged();
+        }
+        return stack;
+    }
+
+    public void updateUpgrades() {
+        transferCount = PastelTransmissionLogic.DEFAULT_MAX_TRANSFER_AMOUNT;
+        transferTime = PastelTransmissionLogic.DEFAULT_TRANSFER_TICKS_PER_NODE;
+        var oldFilterSlotCount = filterSlotRows;
+        filterSlotRows = DEFAULT_FILTER_SLOT_ROWS;
+        triggerTransfer = false;
+        lit = false;
+        lamp = false;
+        sensor = false;
+        var oldPriority = priority;
+        priority = PastelNetwork.NodePriority.GENERIC;
+
+        //First one processed can't compound because it has nothing to compound on
+        outerRing.ifPresent(r -> apply(r, Collections.emptyList()));
+        innerRing.ifPresent(r -> apply(
+            r, outerRing.map(List::of)
+                        .orElse(Collections.emptyList())
+        ));
+        redstoneRing.ifPresent(r -> apply(r, Collections.emptyList()));
+
+        // Sanity
+        transferCount = Math.max(transferCount, 1);
+        transferTime = Mth.clamp(transferTime, 2, 100);
+        filterSlotRows = Mth.clamp(filterSlotRows, 1, 5);
+
+        if (lit && lamp) {
+            lit = false;
+        }
+
+        if (level != null) {
+            networkUUID.ifPresent(uuid -> ServerPastelNetworkManager.get((ServerLevel) level)
+                                                                    .getNetwork(uuid)
+                                                                    .ifPresent(
+                                                                        n -> n.updateNodePriority(this, oldPriority)));
+            if (getBlockState().getValue(BlockStateProperties.LIT) != lit)
+                level.setBlockAndUpdate(worldPosition, getBlockState().setValue(BlockStateProperties.LIT, lit));
+        }
+
+        if (filterSlotRows < oldFilterSlotCount) {
+            for (int i = getDrawnSlots(); i < filterItems.size(); i++) {
+                filterItems.set(i, ItemReference.empty());
+            }
+        }
+    }
+
+    @Override
+    public void notifySensor() {
+        if (level != null) {
+            var state = getBlockState();
+            level.setBlockAndUpdate(worldPosition, state.setValue(BlockStateProperties.POWERED, true));
+            if (!level.getBlockTicks()
+                      .hasScheduledTick(worldPosition, state.getBlock())) {
+                level.scheduleTick(worldPosition, state.getBlock(), 2);
+            }
+        }
+    }
+
+    public int getTransferTime() {
+        return transferTime;
+    }
+
+    @Override
+    public void setLevel(Level world) {
+        super.setLevel(world);
+
+        if (!world.isClientSide()) {
+            getServerNetwork().ifPresent(network -> network.initializeNode(this));
+        }
+		
+		/* TODO: this freezes the world on join
+		if (creationStamp == -1) {
+			creationStamp = (world.getTime() + world.getRandom().nextInt(7)) % 20;
+		}
+		
+		if (!world.isClient && this.networkUUID.isPresent()) {
+			this.networkUUID = Optional.of(Pastel.getServerInstance().joinOrCreateNetwork(this, this.networkUUID.get()
+			).getUUID());
+		}
+		*/
+    }
+
+    public float getRedstoneAlphaMult() {
+        return redstoneRing.isPresent() ? 0.5F : 0.25F;
+    }
+
+    public boolean canTransfer() {
+        var result = redstoneRing.map(r -> r.preProcessor
+                                     .apply(new PastelUpgradeSignature.RedstoneContext(this, level, worldPosition,
+                                                                                       cachedUnpowered)))
+                                 .orElse(InteractionResult.PASS);
+
+        if (result == InteractionResult.SUCCESS)
+            return true;
+
+        if (result == InteractionResult.FAIL)
+            return false;
+
+        long time = this.getLevel()
+                        .getGameTime();
+        if (time > this.cachedRedstonePowerTick && !getBlockState().getValue(PastelInkNodeBlock.REDSTONE_EMITTING)) {
+            this.cachedUnpowered = level.getBestNeighborSignal(this.worldPosition) == 0;
+        }
+
+        boolean notPowered = redstoneRing.map(r -> {
+                                             var post = r.postProcessor.apply(
+                                                 new PastelUpgradeSignature.RedstoneContext(this, level,
+                                                                                            worldPosition,
+                                                                                            cachedUnpowered));
+
+                                             if (post == InteractionResult.SUCCESS)
+                                                 return true;
+
+                                             if (post == InteractionResult.FAIL)
+                                                 return false;
+
+                                             return cachedUnpowered;
+                                         })
+                                         .orElse(cachedUnpowered);
+
+        var canTransfer = this.getLevel()
+                              .getGameTime() > lastTransferTick;
+        if (triggerTransfer) {
+            return triggered && canTransfer;
+        }
+
+        return canTransfer && notPowered;
+    }
+
+    public void markTransferred() {
+        if (triggerTransfer) {
+            markTriggered();
+        }
+
+        this.lastTransferTick = level.getGameTime();
+        this.setChanged();
+    }
+
+    public Optional<UUID> getNetworkUUID() {
+        return networkUUID;
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
+        super.loadAdditional(nbt, registryLookup);
+
+        this.nodeId = nbt.contains("NodeID") ? nbt.getUUID("NodeID") : UUID.randomUUID();
+        this.networkUUID = nbt.contains("NetworkUUID") ? Optional.of(nbt.getUUID("NetworkUUID")) : Optional.empty();
+        this.triggered = nbt.contains("Triggered") && nbt.getBoolean("Triggered");
+        this.waiting = nbt.contains("Waiting") && nbt.getBoolean("Waiting");
+        this.creationStamp = nbt.contains("creationStamp") ? nbt.getLong("creationStamp") : 0;
+        this.lastTransferTick = nbt.contains("LastTransferTick", Tag.TAG_LONG) ? nbt.getLong("LastTransferTick") : 0;
+        this.itemCountUnderway = nbt.contains("ItemCountUnderway", Tag.TAG_LONG) ? nbt.getLong("ItemCountUnderway") : 0;
+        this.outerRing = nbt.contains("OuterRing") ? Optional.ofNullable(
+            PastelRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("OuterRing"))))
+                                                   : Optional.empty();
+        this.innerRing = nbt.contains("InnerRing") ? Optional.ofNullable(
+            PastelRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("InnerRing"))))
+                                                   : Optional.empty();
+        this.redstoneRing = nbt.contains("RedstoneRing") ? Optional.ofNullable(
+            PastelRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("RedstoneRing"))))
+                                                         : Optional.empty();
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
+        super.saveAdditional(nbt, registryLookup);
+        if (creationStamp != -1) {
+            nbt.putLong("creationStamp", creationStamp);
+        }
+        if (this.networkUUID.isPresent()) {
+            nbt.putUUID("NetworkUUID", this.networkUUID.get());
+        }
+        nbt.putUUID("NodeID", this.nodeId);
+        nbt.putBoolean("Triggered", this.triggered);
+        nbt.putBoolean("Waiting", this.waiting);
+        nbt.putLong("LastTransferTick", this.lastTransferTick);
+        nbt.putLong("ItemCountUnderway", this.itemCountUnderway);
+        outerRing.ifPresent(r -> nbt.putString("OuterRing", PastelPastelUpgrades.toString(r)));
+        innerRing.ifPresent(r -> nbt.putString("InnerRing", PastelPastelUpgrades.toString(r)));
+        redstoneRing.ifPresent(r -> nbt.putString("RedstoneRing", PastelPastelUpgrades.toString(r)));
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
+        Optional<ServerPastelInkNetwork> network = getServerNetwork();
+        network.ifPresent(serverPastelNetwork -> PastelNetworkEdgeSyncPayload.send(serverPastelNetwork, worldPosition));
+
+        CompoundTag nbtCompound = new CompoundTag();
+        this.saveAdditional(nbtCompound, registryLookup);
+        return nbtCompound;
+    }
+
+    // triggered when the chunk is unloaded, or the world quit
+    @Override
+    public void setRemoved() {
+        super.setRemoved();
+        if (!level.isClientSide()) {
+            Pastel.getServerInkInstance()
+                  .removeNode(this, NodeRemovalReason.UNLOADED);
+        }
+    }
+
+    public @NotNull UUID getNodeId() {
+        return nodeId;
+    }
+
+    public void onBroken() {
+        if (level != null && !level.isClientSide) {
+            Pastel.getServerInkInstance()
+                  .removeNode(this, NodeRemovalReason.BROKEN);
+        }
+    }
+
+    public PastelInkNodeType getNodeType() {
+        if (this.getBlockState()
+                .getBlock() instanceof PastelInkNodeBlock pastelNodeBlock) {
+            return pastelNodeBlock.pastelNodeType;
+        }
+        return PastelInkNodeType.CONNECTION;
+    }
+
+    public void setNetworkUUID(@Nullable UUID uuid) {
+        this.networkUUID = Optional.ofNullable(uuid);
+        if (this.getLevel() != null && !this.getLevel()
+                                            .isClientSide()) {
+            this.setChanged();
+            this.updateInClientWorld();
+        }
+    }
+
+    public long getItemCountUnderway() {
+        return this.itemCountUnderway;
+    }
+
+    public void addItemCountUnderway(long count) {
+        this.itemCountUnderway += count;
+        this.itemCountUnderway = Math.max(0, this.itemCountUnderway);
+        this.setChanged();
+    }
+
+    // interaction methods
+    public void updateInClientWorld() {
+        ((ServerLevel) level).getChunkSource()
+                             .blockChanged(worldPosition);
+    }
+
+    @Override
+    public NonNullList<ItemReference> getItemFilters() {
+        return this.filterItems;
+    }
+
+    @Override
+    public void setFilterItem(int slot, ItemStack item) {
+        this.filterItems.set(slot, ItemReference.of(item));
+    }
+
+    public boolean handleImpression(
+        Optional<UUID> stamper, Optional<Player> user, BlockReference reference, Level world) {
+        var sourceNode = (PastelInkNodeBlockEntity) reference.tryGetBlockEntity()
+                                                             .orElseThrow(() -> new IllegalStateException(
+                                                              "Attempted to connect a non-existent node - what did " +
+                                                              "you do?!"));
+        var manager = Pastel.getInkInstance(world.isClientSide());
+
+        var sourceNetwork = manager.getNetworkOrEmpty(sourceNode.networkUUID);
+        var thisNetwork = manager.getNetworkOrEmpty(this.networkUUID);
+
+        if (!sourceNode.canConnect(this))
+            return false;
+
+        if (sourceNetwork.isPresent() && sourceNetwork.equals(thisNetwork)) {
+            if (sourceNetwork.get()
+                             .removeEdge(this, sourceNode))
+                return true;
+
+            return sourceNetwork.get()
+                                .addEdge(this.getBlockPos(), sourceNode.getBlockPos());
+        }
+
+        if (!world.isClientSide()) {
+            Pastel.getServerInkInstance()
+                  .connectNodes(this, sourceNode);
+        }
+
+        thisNetwork.ifPresent(n -> {
+            user.filter(u -> u instanceof ServerPlayer)
+                .ifPresent(p -> {
+                    PastelCriteria.PASTEL_NETWORK_CREATING.trigger(
+                        (ServerPlayer) p, (ServerPastelNetwork) n);
+                });
+        });
+
+        return true;
+    }
+
+    @Override
+    public StampData recordStampData(Optional<Player> user, BlockReference reference, Level world) {
+        return new StampData(user.map(Entity::getUUID), reference, this);
+    }
+
+    @Override
+    public StampDataCategory getStampCategory() {
+        return PastelStampDataCategories.PASTEL;
+    }
+
+    @Override
+    public boolean canUserStamp(Optional<Player> stamper) {
+
+        return true;
+    }
+
+    @Override
+    public void onImpressedOther(StampData data, boolean success) {
+    }
+
+    public long getCreationStamp() {
+        return creationStamp;
+    }
+
+    @Override
+    public void clearImpression() {
+        if (!level.isClientSide()) {
+            Pastel.getServerInkInstance()
+                  .removeNode(this, NodeRemovalReason.DISCONNECT);
+        }
+
+        networkUUID = Optional.empty();
+        setChanged();
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("block.pastel.pastel_node");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
+        return new FilteringScreenHandler(syncId, inv, new ExtendedData(this));
+    }
+
+    @Override
+    public int getFilterRows() {
+        return filterSlotRows;
+    }
+
+    @Override
+    public int getDrawnSlots() {
+        return getFilterRows() * SLOTS_PER_ROW;
+    }
+
+    @Override
+    public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+        ExtendedData.STREAM_CODEC.encode(buffer, new ExtendedData(this));
+    }
+
+    public boolean equals(Object obj) {
+        return obj instanceof PastelInkNodeBlockEntity blockEntity && this.worldPosition.equals(blockEntity.worldPosition);
+    }
+
+    public int hashCode() {
+        return this.worldPosition.hashCode();
+    }
+
+    public ConnectionState getState() {
+        return connectionState;
+    }
+
+    public Optional<DyeColor> getColor() {
+        return this.color;
+    }
+
+    public boolean setColor(Optional<DyeColor> color, @Nullable Entity user) {
+        if (this.color == color)
+            return false;
+
+        this.color = color;
+
+        var network = networkUUID.flatMap(id -> Pastel.getInstance(level.isClientSide())
+                                                      .getNetwork(id));
+
+        if (network.isPresent()) {
+            network.get()
+                   .setColor(color);
+        }
+
+        return true;
+    }
+
+    public boolean canConnect(PastelInkNodeBlockEntity target) {
+        return this != target && this.getBlockPos()
+                                     .closerThan(target.getBlockPos(), RANGE);
+    }
+
+    public Optional<ServerPastelInkNetwork> getServerNetwork() {
+        if (this.networkUUID.isPresent()) {
+            return Pastel.getServerInkInstance()
+                         .getNetwork(this.networkUUID.get());
+        }
+        return Optional.empty();
+    }
+
+    public int getPastelNetworkColor() {
+        Optional<DyeColor> color = getColor();
+        return color.isPresent() ? color.get()
+                                        .getTextureDiffuseColor() : ColorHelper.getRandomColor(getNodeId().hashCode());
+    }
+
+    public enum ConnectionState {
+        DISCONNECTED,
+        CONNECTED,
+        ACTIVE,
+        INACTIVE
+    }
+
+    @Override
+    public void markLit() {
+        lit = true;
+    }
+
+    @Override
+    public void markLamp() {
+        this.lamp = true;
+    }
+
+    @Override
+    public void markTriggerTransfer() {
+        triggerTransfer = true;
+    }
+
+    @Override
+    public void markSensor() {
+        sensor = true;
+    }
+
+    @Override
+    public void markTriggered() {
+        triggered = false;
+        waiting = true;
+    }
+
+    @Override
+    public boolean isTriggerTransfer() {
+        return triggerTransfer;
+    }
+
+    @Override
+    public boolean isSensor() {
+        return sensor;
+    }
+
+    @Override
+    public void applySlotUpgrade(PastelUpgradeSignature upgrade) {
+        filterSlotRows += upgrade.slotRows * 2;
+    }
+
+    @Override
+    public void applySimple(PastelUpgradeSignature upgrade) {
+        transferCount += upgrade.stack;
+        transferTime += upgrade.speed;
+    }
+
+    @Override
+    public void applyCompounding(PastelUpgradeSignature upgrade) {
+        transferCount = Math.round(transferCount * upgrade.stackMult);
+        transferTime = Math.round(transferTime * upgrade.speedMult);
+    }
+
+    @Override
+    public void upgradePriority() {
+        if (priority == PastelNetwork.NodePriority.GENERIC) {
+            priority = PastelNetwork.NodePriority.MODERATE;
+        } else {
+            priority = PastelNetwork.NodePriority.HIGH;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.getNodeType()
+                   .toString() + "-" +
+               this.getColor()
+                   .toString() + "-" +
+               this.getBlockPos()
+                   .toString() + "-" +
+               this.getNodeId();
+    }
+
+}

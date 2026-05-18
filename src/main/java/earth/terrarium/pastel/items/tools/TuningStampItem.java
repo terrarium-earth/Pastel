@@ -74,7 +74,14 @@ public class TuningStampItem extends Item implements TooltipExtensions {
                 return InteractionResult.FAIL;
             }
             var interactable = target.source();
-
+            if(world.getBlockEntity(source.reference().pos) != null && world.getBlockEntity(target.reference().pos) != null) {
+                if (world.getBlockEntity(source.reference().pos)
+                         .getClass() != world.getBlockEntity(target.reference().pos)
+                                             .getClass()) {
+                    tryPlaySound(player, PastelSounds.SHATTER_LIGHT, 0.75F);
+                    return InteractionResult.FAIL;
+                }
+            }
             var targetChanged = interactable.handleImpression(source.stamper(), player, source.reference(), world);
             source.notifySourceOfChange(target, targetChanged);
 
