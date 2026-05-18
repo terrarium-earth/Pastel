@@ -1,3 +1,4 @@
+import arrow.core.compareTo
 import groovy.json.StringEscapeUtils
 
 plugins {
@@ -246,6 +247,9 @@ publishing {
 	}
 }
 
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
 
 resourcefulGradle {
 	templates {

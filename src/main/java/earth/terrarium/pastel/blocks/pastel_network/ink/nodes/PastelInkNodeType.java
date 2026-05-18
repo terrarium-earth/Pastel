@@ -14,7 +14,7 @@ public enum PastelInkNodeType implements StringRepresentable {
                      .withStyle(ChatFormatting.WHITE),
             Component.translatable("block.pastel.pastel_ink_network_nodes.tooltip.placing")
                      .withStyle(ChatFormatting.GRAY)
-        ), false, true
+        ), false, false
     ),
     GATHER(
         List.of(
@@ -22,7 +22,7 @@ public enum PastelInkNodeType implements StringRepresentable {
                      .withStyle(ChatFormatting.WHITE),
             Component.translatable("block.pastel.pastel_ink_network_nodes.tooltip.placing")
                      .withStyle(ChatFormatting.GRAY)
-        ), true, false
+        ), false, false
     );
 
     private final List<Component> tooltips;

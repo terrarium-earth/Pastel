@@ -1087,6 +1087,17 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.connection_node.page1.text",
             "Like all other nodes, the Connection Node has a range of 12 blocks."
         );
+        provider.add("book.pastel.guidebook.ink_connection_node.name", "Ink Connection Node");
+        provider.add(
+            "book.pastel.guidebook.ink_connection_node.page0.text",
+            "As the simplest of nodes the Ink Connection Node has no active use.\\\n\\\nThey solely act as a cheap and " +
+            "unobtrusive way of extending the reach of my networks."
+        );
+        provider.add(
+            "book.pastel.guidebook.ink_connection_node.page1.text",
+            "Like all other nodes, the Connection Node has a range of 12 blocks. As an Ink node, it can not connect "  +
+            "to regular nodes."
+        );
         provider.add(
             "book.pastel.guidebook.constructors_staff.page0.text",
             "I spend a lot of time placing blocks, so much so that I could almost believe that this is the main " +
@@ -1996,6 +2007,16 @@ public class PastelGuidebookLang {
             "Gathering Order:\n1. [Buffer Nodes](entry://pastel_network/buffer_node)\n2. [Sender Nodes]" +
             "(entry://pastel_network/sender_node)\n3. [Provider Nodes](entry://pastel_network/provider_node)\n4. " +
             "[Storage Nodes](entry://pastel_network/storage_node)"
+        );
+        provider.add("book.pastel.guidebook.ink_gather_node.name", "Ink Gather Node");
+        provider.add(
+            "book.pastel.guidebook.ink_gather_node.page0.text",
+            "The Ink Gather Node will actively request ink from other nodes and put them in the connected ink storage" +
+            ".\\\n\\\nDoes not have a [#](449900)filter[#]()."
+        );
+        provider.add(
+            "book.pastel.guidebook.ink_gather_node.page1.text",
+            "Gathering Order:\n1. [Ink Provider Nodes](entry://pastel_network/ink_provider_node)"
         );
         provider.add("book.pastel.guidebook.crystal_armor.name", "Crystal Armor");
         provider.add(
@@ -5584,6 +5605,13 @@ public class PastelGuidebookLang {
             "Make the items in the connected inventory available in their [Pastel Network]" +
             "(entry://pastel_network/pastel_network).\\\n\\\nItems are not pushed, but can be requested from [Gather" +
             " Nodes](entry://pastel_network/gather_node) and [Buffer Nodes](entry://pastel_network/buffer_node)."
+        );
+        provider.add("book.pastel.guidebook.ink_provider_node.name", "Ink Provider Node");
+        provider.add(
+            "book.pastel.guidebook.ink_provider_node.page0.text",
+            "Make the ink storage in the connected block available in their [Pastel Network]" +
+            "(entry://pastel_network/pastel_network).\\\n\\\nInk is not pushed, but can be requested from [Ink Gather" +
+            " Nodes](entry://pastel_network/ink_gather_node)."
         );
         provider.add(
             "book.pastel.guidebook.puff_circlet.page0.text",
