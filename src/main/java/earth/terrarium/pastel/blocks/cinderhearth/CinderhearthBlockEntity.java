@@ -79,7 +79,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity
 
     public static final List<InkColor> USED_INK_COLORS = List.of(
         InkColors.ORANGE, InkColors.MAGENTA, InkColors.LIGHT_BLUE, InkColors.PURPLE, InkColors.BLACK);
-    public static final long INK_STORAGE_SIZE = 8 * 64 * 100;
+    public static final long INK_STORAGE_SIZE = 2 * 64 * 100;
     public static final long INK_COST_PER_TICK = 8;
     protected IndividualCappedInkStorage inkStorage;
 

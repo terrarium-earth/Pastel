@@ -60,7 +60,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity
     protected final static int INK_STORAGE_STACK_SLOT_ID = 1;
     protected final static int INVENTORY_SIZE = 2;
 
-    public static final long INK_STORAGE_SIZE = 64 * 64 * 100;
+    public static final long INK_STORAGE_SIZE = 64 * 100;
 
     protected IndividualCappedInkStorage inkStorage;
     protected boolean inkDirty;

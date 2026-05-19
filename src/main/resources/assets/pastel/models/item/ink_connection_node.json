@@ -1,10 +1,11 @@
 {
+	"format_version": "1.21.11",
 	"credit": "~ XOXO Azzyypaaras ~",
 	"textures": {
-		"0": "pastel:block/pastel_pedestal",
-		"1": "pastel:block/connection_node",
+		"0": "pastel:block/pastel_ink_pedestal",
+		"1": "pastel:block/ink_connection_node",
 		"2": "pastel:block/connection_node_crystal",
-		"particle": "pastel:block/pastel_pedestal"
+		"particle": "pastel:block/pastel_ink_pedestal"
 	},
 	"elements": [
 		{
@@ -193,7 +194,7 @@
 			"scale": [0.4, 0.4, 0.4]
 		},
 		"firstperson_lefthand": {
-			"rotation": [0, 225, 0],
+			"rotation": [0, -135, 0],
 			"translation": [0.25, 1.5, 0],
 			"scale": [0.4, 0.4, 0.4]
 		},
@@ -202,7 +203,7 @@
 			"scale": [0.25, 0.25, 0.25]
 		},
 		"gui": {
-			"rotation": [30, 225, 0],
+			"rotation": [30, -135, 0],
 			"translation": [0, 1.75, 0],
 			"scale": [0.75, 0.75, 0.75]
 		},
@@ -215,15 +216,15 @@
 		{
 			"name": "infloration",
 			"origin": [0, 0, 0],
+			"scope": 0,
 			"color": 0,
-			"nbt": "{}",
 			"children": [1, 2, 3, 4, 5, 6, 7, 8, 9]
 		},
 		{
 			"name": "crystal",
 			"origin": [8, 3.5, 8],
+			"scope": 0,
 			"color": 0,
-			"nbt": "{}",
 			"children": [10, 11]
 		}
 	]

@@ -33,7 +33,7 @@ public class PastelInkTransmissionLogic {
         PUSH_PULL
     }
 
-    public static final int DEFAULT_MAX_TRANSFER_AMOUNT = 100;
+    public static final int DEFAULT_MAX_TRANSFER_AMOUNT = 400;
     private final ServerPastelInkNetwork network;
 
     private DijkstraShortestPath<BlockPos, DefaultEdge> dijkstra;
@@ -125,7 +125,7 @@ public class PastelInkTransmissionLogic {
         for (int i = 0; i < InkColors.BUILTIN_COLORS.size(); i++) {
             if (targetColor.get() == null) {
                 InkColor col = InkColors.BUILTIN_COLORS.get(i);
-                long inkAmt = sourceStorage.getEnergyStorage().getEnergy(col);
+                long inkAmt = Math.min(sourceStorage.getEnergyStorage().getEnergy(col),DEFAULT_MAX_TRANSFER_AMOUNT);
                 if (inkAmt > 0L &&
                     destinationStorage.getEnergyStorage().accepts(col) &&
                         destinationStorage.getEnergyStorage().getRoom(col) >= inkAmt) {
