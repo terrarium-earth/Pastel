@@ -1,6 +1,8 @@
 package earth.terrarium.pastel.entity.entity;
 
 import com.cmdpro.databank.misc.ColorGradient;
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.companion.SubLevelAccess;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
@@ -207,6 +209,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
         }
 
         getEntityData().set(TridentEntityAccessor.getLoyalty(), (byte) 4);
+        setPos(transformPosition(level(), position()));
         setNoPhysics(true);
     }
 
@@ -214,9 +217,11 @@ public class DragonTalonEntity extends BidentBaseEntity {
         if (yoinked == null)
             return;
 
-        var yoinkPos = yoinked.position();
-        var heightDif = Math.abs(yoinkPos.y - target.y);
-        var velocity = target.subtract(yoinkPos);
+        var yoinkPos = transformPosition(level(), yoinked.position());
+        var targetPos = transformPosition(level(), target);
+
+        var heightDif = Math.abs(yoinkPos.y - targetPos.y);
+        var velocity = targetPos.subtract(yoinkPos);
         var sneaking = yoinked.isShiftKeyDown();
         var bonusMod = 1f;
 
@@ -239,7 +244,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
         xMod *= bonusMod;
         yMod *= bonusMod;
 
-        if (yoinked == getOwner() && yoinkPos.y > target.y && !sneaking)
+        if (yoinked == getOwner() && yoinkPos.y > targetPos.y && !sneaking)
             yMod = 0;
 
         yoinked.setDeltaMovement(velocity.multiply(xMod, yMod, xMod)
@@ -247,6 +252,13 @@ public class DragonTalonEntity extends BidentBaseEntity {
         yoinked.fallDistance = 0F;
         yoinked.hurtMarked = true;
         yoinked.hasImpulse = true;
+    }
+
+    private Vec3 transformPosition(Level level, Vec3 pos) {
+        if (level == null) return pos;
+        SubLevelAccess sublevel = SableCompanion.INSTANCE.getContaining(level, pos);
+        if (sublevel == null) return pos;
+        return sublevel.logicalPose().transformPosition(pos);
     }
 
     @Override
