@@ -135,6 +135,9 @@ public class PastelModels {
     public static final ResourceLocation PASTEL_GENERIC_NODE = PastelCommon.locate("pastel/generic_node");
     public static final ResourceLocation PASTEL_PUSH_NODE = PastelCommon.locate("pastel/push_node");
     public static final ResourceLocation PASTEL_PULL_NODE = PastelCommon.locate("pastel/pull_node");
+    public static final ResourceLocation PASTEL_INK_GENERIC_NODE = PastelCommon.locate("pastel/ink_generic_node");
+    public static final ResourceLocation PASTEL_INK_PUSH_NODE = PastelCommon.locate("pastel/ink_push_node");
+    public static final ResourceLocation PASTEL_INK_PULL_NODE = PastelCommon.locate("pastel/ink_pull_node");
     public static final ResourceLocation PASTEL_STORE_NODE = PastelCommon.locate("pastel/store_node");
 
     public static final ResourceLocation BALCITE_PYLON_PEDESTAL = PastelCommon.locate("block/balcite_pylon_pedestal");

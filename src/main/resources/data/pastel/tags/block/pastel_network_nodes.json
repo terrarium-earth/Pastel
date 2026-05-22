@@ -5,6 +5,9 @@
     "pastel:storage_node",
     "pastel:sender_node",
     "pastel:gather_node",
-    "pastel:buffer_node"
+    "pastel:buffer_node",
+    "pastel:ink_provider_node",
+    "pastel:ink_gather_node",
+    "pastel_ink_connection_node"
   ]
 }

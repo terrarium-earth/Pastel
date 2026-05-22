@@ -147,6 +147,11 @@ public class PastelItemGroups {
                                                                              PastelBlocks.PROVIDER_NODE.get());
                                                                          entries.accept(PastelBlocks.SENDER_NODE.get());
                                                                          entries.accept(
+                                                                             PastelBlocks.INK_CONNECTION_NODE.get());
+                                                                         entries.accept(
+                                                                             PastelBlocks.INK_PROVIDER_NODE.get());
+                                                                         entries.accept(PastelBlocks.INK_GATHER_NODE.get());
+                                                                         entries.accept(
                                                                              PastelBlocks.STORAGE_NODE.get());
                                                                          entries.accept(PastelBlocks.BUFFER_NODE.get());
                                                                          entries.accept(PastelBlocks.GATHER_NODE.get());

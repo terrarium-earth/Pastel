@@ -20,15 +20,15 @@ public class PastelNetworkBlockModels {
         PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.INK_PROVIDER_NODE);
         PastelModelHelper.BLOCK.predefinedItemModel(generators, PastelBlocks.INK_GATHER_NODE);
 
-        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.INK_CONNECTION_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_GENERIC_NODE));
-        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.INK_PROVIDER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_PUSH_NODE));
-        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.INK_GATHER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_PULL_NODE));
-
         PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.CONNECTION_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_GENERIC_NODE));
         PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.PROVIDER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_PUSH_NODE));
         PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.STORAGE_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_STORE_NODE));
         PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.BUFFER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_STORE_NODE));
         PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.SENDER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_PUSH_NODE));
         PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.GATHER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_PULL_NODE));
+
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.INK_CONNECTION_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_INK_GENERIC_NODE));
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.INK_PROVIDER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_INK_PUSH_NODE));
+        PastelModelHelper.BLOCK.defaultUpFacing(generators, PastelBlocks.INK_GATHER_NODE, PastelTexturedModels.parented(PastelModels.PASTEL_INK_PULL_NODE));
     }
 }

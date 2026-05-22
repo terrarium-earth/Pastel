@@ -46,7 +46,7 @@ public class PastelInkNodeBlockEntityRenderer implements BlockEntityRenderer<Pas
                                        .getDefaultInstance(), 0.1, false
     );
 
-    private static final ResourceLocation BASE = PastelCommon.locate("textures/block/pastel_node_base.png");
+    private static final ResourceLocation BASE = PastelCommon.locate("textures/block/pastel_ink_node_base.png");
 
     private static final ResourceLocation INNER_RING = PastelCommon.locate(
         "textures/block/pastel_node_inner_ring_blank.png");
