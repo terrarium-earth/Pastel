@@ -10,7 +10,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -34,6 +33,7 @@ public abstract class AbstractBlockStateMixin {
         return dropExperience;
     }
 
+    // https://github.com/apace100/water-walking-fix
     @ModifyReturnValue(method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", at = @At(
         "RETURN"))
     public VoxelShape getFluidloggedCollisionShape(VoxelShape original, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -41,16 +41,19 @@ public abstract class AbstractBlockStateMixin {
         int fluidLevel = fluidState.getAmount();
         if (fluidLevel == 0) return original;
         VoxelShape fluidShape = FLUID_LEVEL_SHAPES[fluidLevel];
-        if (!context.canStandOnFluid(level.getFluidState(pos.above()), fluidState)) return original;
-        return Shapes.or(original, fluidShape);
+
+        if (
+            context.isAbove(fluidShape, pos, true) &&
+            context.canStandOnFluid(level.getFluidState(pos.above()), fluidState)
+        ) return Shapes.or(original, fluidShape);
+        return original;
     }
 
-    // https://github.com/apace100/water-walking-fix
     @Unique
     private static final VoxelShape[] FLUID_LEVEL_SHAPES;
     static {
         FLUID_LEVEL_SHAPES = new VoxelShape[16];
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i <= 8; i++) {
             FLUID_LEVEL_SHAPES[i] = Block.box(0.0, 0.0, 0.0, 16.0, i, 16.0);
         }
     }

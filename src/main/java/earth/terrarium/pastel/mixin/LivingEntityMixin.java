@@ -39,6 +39,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import org.jetbrains.annotations.Nullable;
@@ -205,8 +206,17 @@ public abstract class LivingEntityMixin {
     private boolean modifyFluidWalking(boolean original) {
         var entity = (LivingEntity) (Object) this;
 
-        if (PastelTrinketItem.hasEquipped(entity, PastelItems.RING_OF_AERIAL_GRACE.get()))
-            return !entity.isUnderWater();
+        if (PastelTrinketItem.hasEquipped(entity, PastelItems.RING_OF_AERIAL_GRACE.get())) {
+            double fluidHeight = entity.getFluidTypeHeight(entity.getMaxHeightFluidType());
+            double feetPos = entity.getBoundingBox().deflate(0.001).minY;
+            // striders use the collision of the lava source block which has a height of 8.0/16.0,
+            // however, getFluidTypeHeight uses FluidState#getHeight, which gives source blocks a height of 8.0/9.0
+            double fractionalHeight = (fluidHeight + feetPos) % 1;
+            if (fractionalHeight < 0) fractionalHeight++;
+            double collisionHeight = fractionalHeight * FluidState.AMOUNT_MAX / 16.0 + Math.floor(fluidHeight + feetPos);
+
+            return feetPos > collisionHeight - 1.0E-5F;
+        }
 
         return original;
     }
