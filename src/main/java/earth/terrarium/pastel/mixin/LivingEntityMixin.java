@@ -7,7 +7,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.entity.TouchingWaterAware;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
@@ -345,13 +344,6 @@ public abstract class LivingEntityMixin {
                                             .getGameTime() % 20 == 0) {
             InexorableHelper.checkAndRemoveSlowdownModifiers(entity);
         }
-    }
-
-    @Redirect(method = "aiStep",
-              at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isInWaterRainOrBubble()Z"))
-    private boolean isWet(LivingEntity livingEntity) {
-        return livingEntity.isInWater() ? ((TouchingWaterAware) livingEntity).isActuallyTouchingWater()
-                                        : livingEntity.isInWaterRainOrBubble();
     }
 
     @WrapOperation(at = @At(value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"), method = "hurt")
