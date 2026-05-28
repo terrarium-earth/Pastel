@@ -1,11 +1,15 @@
 package earth.terrarium.pastel.api.block;
 
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.inventories.slots.ShadowSlot;
 import earth.terrarium.pastel.networking.c2s_payloads.SetShadowSlotPayload;
+import earth.terrarium.pastel.registries.PastelItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
@@ -13,6 +17,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -22,6 +27,7 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,6 +51,46 @@ public interface FilterConfigurable {
 
     default int getDrawnSlots() {
         return getItemFilters().size();
+    }
+
+    default boolean filter(ItemStack itemStack) {
+        if (itemStack.isEmpty()) return false;
+        if (hasEmptyFilter()) return true;
+        return getItemFilters()
+            .stream()
+            .anyMatch(filterItem -> {
+
+                if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem.asStack()
+                                                                              .is(PastelItemTags.TAG_FILTERING_ITEMS))
+                    return filterItem.permits(itemStack);
+
+                var name = StringUtils.trim(filterItem.asStack()
+                                                      .getHoverName()
+                                                      .getString());
+
+                // This is to allow nbt filtering without item / tag filtering.
+                if (StringUtils.equalsAnyIgnoreCase(
+                    name, "*", "any", "all", "everything", "c:*", "c:any", "c:all", "c:everything"))
+                    return true;
+
+                var id = ResourceLocation.tryParse(
+                    StringUtils.remove(name, '#')); // let's be nice and remove any pound signs
+                if (id == null)
+                    return false;
+
+                var tag = PastelCommon.CACHED_ITEM_TAG_MAP.computeIfAbsent(
+                    id, tagId -> BuiltInRegistries.ITEM.getTagNames()
+                                                       .filter(t -> t.location()
+                                                                     .equals(tagId))
+                                                       .findFirst()
+                                                       .orElse(null)
+                );
+
+                if (tag == null)
+                    return false;
+
+                return itemStack.is(tag);
+            });
     }
 
     static void writeFilterNbt(CompoundTag tag, List<ItemReference> filterItems, HolderLookup.Provider lookup) {
