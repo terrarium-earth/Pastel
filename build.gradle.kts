@@ -175,7 +175,9 @@ cloche {
                 //modRuntimeOnly("maven.modrinth:mmmmmmmmmmmm:neoforge_1.21-2.0.8")  { isTransitive = false }
                 //modRuntimeOnly("maven.modrinth:moonlight:1.21-2.20.3-neoforge")  { isTransitive = false }
 				modRuntimeOnly("maven.modrinth:jei:zRGLFYRx") // cuz xycraft >:(
-                modRuntimeOnly("dev.ryanhcode.sable:sable-neoforge-1.21.1:1.2.2") { isTransitive = false }
+                //modRuntimeOnly("dev.ryanhcode.sable:sable-neoforge-1.21.1:1.2.2") { isTransitive = false }
+                //modRuntimeOnly("maven.modrinth:enchiridion:0.2.0+1.21.1-neoforge") { isTransitive = false }
+                //modRuntimeOnly("maven.modrinth:owo-lib:0.12.15.5-beta.1+1.21") { isTransitive = false }
             }
 
             dependencies {
