@@ -7,7 +7,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.entity.TouchingWaterAware;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
@@ -45,6 +44,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import org.checkerframework.checker.units.qual.A;
@@ -219,8 +219,17 @@ public abstract class LivingEntityMixin {
     private boolean modifyFluidWalking(boolean original) {
         var entity = (LivingEntity) (Object) this;
 
-        if (PastelTrinketItem.hasEquipped(entity, PastelItems.RING_OF_AETHERIAL_GRACE.get()))
-            return !entity.isUnderWater();
+        if (PastelTrinketItem.hasEquipped(entity, PastelItems.RING_OF_AETHERIAL_GRACE.get())) {
+            double fluidHeight = entity.getFluidTypeHeight(entity.getMaxHeightFluidType());
+            double feetPos = entity.getBoundingBox().deflate(0.001).minY;
+            // striders use the collision of the lava source block which has a height of 8.0/16.0,
+            // however, getFluidTypeHeight uses FluidState#getHeight, which gives source blocks a height of 8.0/9.0
+            double fractionalHeight = (fluidHeight + feetPos) % 1;
+            if (fractionalHeight < 0) fractionalHeight++;
+            double collisionHeight = fractionalHeight * FluidState.AMOUNT_MAX / 16.0 + Math.floor(fluidHeight + feetPos);
+
+            return feetPos > collisionHeight - 1.0E-5F;
+        }
 
         return original;
     }
@@ -372,13 +381,6 @@ public abstract class LivingEntityMixin {
                                             .getGameTime() % 20 == 0) {
             InexorableHelper.checkAndRemoveSlowdownModifiers(entity);
         }
-    }
-
-    @Redirect(method = "aiStep",
-              at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isInWaterRainOrBubble()Z"))
-    private boolean isWet(LivingEntity livingEntity) {
-        return livingEntity.isInWater() ? ((TouchingWaterAware) livingEntity).isActuallyTouchingWater()
-                                        : livingEntity.isInWaterRainOrBubble();
     }
 
     @WrapOperation(at = @At(value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.actuallyHurt" +
