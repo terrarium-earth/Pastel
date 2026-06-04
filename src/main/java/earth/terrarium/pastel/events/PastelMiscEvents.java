@@ -55,6 +55,7 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -79,6 +80,7 @@ public class PastelMiscEvents {
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::tagReload);
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::leftClickBlock);
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::registerTillable);
+        NeoForge.EVENT_BUS.addListener(PastelMiscEvents::sleepThroughDay);
 
         // Doesn't seem to have an actual equivalent?
         // EnchantmentEvents.ALLOW_ENCHANTING.register((registryEntry, itemStack, enchantingContext) -> {
@@ -406,4 +408,11 @@ public class PastelMiscEvents {
                     .getLightLevel(fluid);
     }
 
+    public static void sleepThroughDay(SleepFinishedTimeEvent event) {
+        var time = event.getLevel().dayTime();
+        if (TimeHelper.getTimeOfDay(time).isDay()) {
+            var sunset = (time - time % 24000) + 13000L;
+            event.setTimeAddition(sunset);
+        }
+    }
 }
