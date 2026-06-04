@@ -10,10 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PastelBlockLang {
     public static void addTranslations(PastelLanguageProvider provider) {
@@ -63,9 +60,16 @@ public class PastelBlockLang {
                 "lizard") || name.startsWith("frog") || name.startsWith("parrot") || name.startsWith("mooshroom") ||
                                           name.startsWith("fox_arctic"))) {
                 var words = name.split("_");
-                var tmp = words[0];
-                words[0] = words[1];
-                words[1] = tmp;
+                if(Objects.equals(words[1], "light")){
+                    var tmp1 = words[0];
+                    words[0] = words[1];
+                    words[1] = words[2];
+                    words[2] = tmp1;
+                } else {
+                    var tmp = words[0];
+                    words[0] = words[1];
+                    words[1] = tmp;
+                }
                 name = String.join("_", words);
             }
             var formattedName = PastelLanguageProvider.prettifyRegisteredName(name);
