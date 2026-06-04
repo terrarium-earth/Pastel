@@ -4456,6 +4456,7 @@
   "item.pastel.exchanging_staff": "Exchanging Staff",
   "item.pastel.exchanging_staff.tooltip.range": "Exchanges blocks up to %s blocks around it",
   "item.pastel.exchanging_staff.tooltip.target": "Target: %s",
+  "item.pastel.exchanging_staff.tooltop.pickblock": " to adjust the range, up to a maximum of %s.",
   "item.pastel.extended_bundle": "Extended Bundle",
   "item.pastel.faded_koi": "Faded Koi",
   "item.pastel.fanciful_belt": "Fanciful Belt",

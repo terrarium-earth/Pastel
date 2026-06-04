@@ -229,6 +229,7 @@ public class PastelItemLang {
         provider.add(
             "item.pastel.everpromise_ribbon.tooltip2", "then use it on an animal to promise it never ending affection");
         provider.add("item.pastel.exchanging_staff.tooltip.range", "Exchanges blocks up to %s blocks around it");
+        provider.add("item.pastel.exchanging_staff.tooltop.pickblock", " to adjust the range, up to a maximum of %s.");
         provider.add("item.pastel.exchanging_staff.tooltip.target", "Target: %s");
         provider.add("item.pastel.ferocious_glass_crest_bident.tooltip", "Does not require Water to §fRiptide§r");
         provider.add(

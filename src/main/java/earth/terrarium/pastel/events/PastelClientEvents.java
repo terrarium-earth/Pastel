@@ -532,7 +532,7 @@ public class PastelClientEvents {
                     } else {
                         long usableCount = Math.min(itemCountInInventory, inkLimit);
                         List<BlockPos> positions = BuildingHelper.getConnectedBlocks(
-                            level, lookingAtPos, usableCount, ExchangeStaffItem.getRange(player));
+                            level, lookingAtPos, usableCount, ExchangeStaffItem.getRange(player.getMainHandItem()));
                         for (BlockPos newPosition : positions) {
                             if (level.getWorldBorder()
                                      .isWithinBounds(newPosition)) {

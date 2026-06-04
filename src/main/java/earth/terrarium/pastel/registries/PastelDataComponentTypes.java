@@ -76,6 +76,10 @@ public class PastelDataComponentTypes {
         "flowing_staff", builder -> builder.persistent(FlowingStaffComponent.CODEC)
                                            .networkSynchronized(FlowingStaffComponent.STREAM_CODEC)
     );
+    public static final DataComponentType<ExchangingStaffComponent> EXCHANGING_STAFF = register(
+        "exchanging_staff", builder -> builder.persistent(ExchangingStaffComponent.CODEC)
+                                           .networkSynchronized(ExchangingStaffComponent.STREAM_CODEC)
+    );
     public static final DataComponentType<StoredBlockEntityComponent> STORED_BLOCK_ENTITY = register(
         "stored_block_entity",
         builder -> builder.persistent(
