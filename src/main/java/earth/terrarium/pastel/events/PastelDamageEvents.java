@@ -9,6 +9,7 @@ import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.trinkets.AttackRingItem;
 import earth.terrarium.pastel.items.trinkets.ConsumptionRingItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
@@ -67,6 +68,7 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vulnerability);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handlePuffCirclet);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::applyKillBonuses);
+        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handleFirstStrike);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::fuckWithWards);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vampirism);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelDamageEvents::electricDamage);
@@ -374,6 +376,22 @@ public class PastelDamageEvents {
                 (damageContainer, f) -> f * (1 - ap.getDefenseMultiplier(
                     target, weapon))
             );
+        }
+    }
+
+    private static void handleFirstStrike(LivingDamageEvent.Pre event) {
+        var target = event.getEntity();
+        var source = event.getSource();
+        var amount = event.getNewDamage();
+
+        if (source.getEntity() instanceof LivingEntity livingAttacker) {
+            if (amount != 0 && target.getHealth() == target.getMaxHealth()) {
+                var mainHandStack = livingAttacker.getMainHandItem();
+                var level = Ench.getLevel(livingAttacker.level().registryAccess(), PastelEnchantments.FIRST_STRIKE, mainHandStack);
+                if (level > 0) {
+                    event.setNewDamage(amount + PastelCommon.CONFIG.FirstStrikeDamagePerLevel * level);
+                }
+            }
         }
     }
 }
