@@ -407,7 +407,7 @@ public class PastelAdvancementLang {
         provider.add("advancements.pastel.craft_onyx_pedestal.title", "One more can't hurt, right?");
         provider.add(
             "advancements.pastel.craft_resonant_tool.description",
-            "Create a tool with Resonance. Its smooth vibrations seem to enable you to harvest a range of special" +
+            "Enchant something with Resonance. Its smooth vibrations seem to enable you to harvest a range of special" +
             " blocks that were once unobtainable"
         );
         provider.add("advancements.pastel.craft_resonant_tool.title", "Good Vibrations");
