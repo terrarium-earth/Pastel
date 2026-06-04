@@ -393,7 +393,7 @@ public class PastelItemLang {
         provider.add("item.pastel.onyx_glass_arrow.tooltip", "-gravity well-");
         provider.add("item.pastel.paintbrush.tooltip.menu", " to change mode and color");
         provider.add("item.pastel.paintbrush.tooltip.info", "Use on blocks to gather information");
-        provider.add("item.pastel.paintbrush.tooltip.paint", "Use on blocks or entities to paint, use on air to launch a paint projectile");
+        provider.add("item.pastel.paintbrush.tooltip.paint", "Use on blocks or entities to paint");
         provider.add("item.pastel.paintbrush.tooltip.spell", "Use to cast an Ink Cantrip");
         provider.add("item.pastel.paintbrush.tooltip.color.selected", "Selected color: ");
         provider.add("item.pastel.paintbrush.tooltip.cantrip.cyan", "Falling Blocks");

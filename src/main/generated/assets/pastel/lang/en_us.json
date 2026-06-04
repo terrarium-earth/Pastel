@@ -4744,7 +4744,7 @@
   "item.pastel.paintbrush.tooltip.color.selected": "Selected color: ",
   "item.pastel.paintbrush.tooltip.info": "Use on blocks to gather information",
   "item.pastel.paintbrush.tooltip.menu": " to change mode and color",
-  "item.pastel.paintbrush.tooltip.paint": "Use on blocks or entities to paint, use on air to launch a paint projectile",
+  "item.pastel.paintbrush.tooltip.paint": "Use on blocks or entities to paint",
   "item.pastel.paintbrush.tooltip.spell": "Use to cast an Ink Cantrip",
   "item.pastel.paltaeria_fragments": "Paltaeria Fragments",
   "item.pastel.paltaeria_gem": "Paltaeria Gem",
