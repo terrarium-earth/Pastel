@@ -152,7 +152,7 @@ cloche {
 
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
-                modImplementation("com.cmdpro.databank:databank:1.3.1") {
+                modImplementation("maven.modrinth:databank:1.3.1") {
                     exclude(module = "sodium")
                     exclude(module = "iris")
                 }
