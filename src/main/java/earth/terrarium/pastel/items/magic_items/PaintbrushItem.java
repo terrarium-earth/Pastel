@@ -5,12 +5,15 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.api.block.PaintbrushInformed;
 import earth.terrarium.pastel.api.block.PaintbrushTriggered;
-import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.EntityColorProcessorRegistry;
-import earth.terrarium.pastel.api.item.PickBlockActivated;
+import earth.terrarium.pastel.blocks.TallCropBlock;
+import earth.terrarium.pastel.blocks.decay.DecayAwayBlock;
+import earth.terrarium.pastel.blocks.decay.DecayBlock;
+import earth.terrarium.pastel.blocks.decay.FailingBlock;
+import earth.terrarium.pastel.blocks.decay.ForfeitureBlock;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.components.PaintbrushComponent;
 import earth.terrarium.pastel.entity.entity.InkProjectileEntity;
@@ -19,18 +22,15 @@ import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.level.BlockVariantHelper;
 import earth.terrarium.pastel.inventories.PaintbrushScreenHandler;
 import earth.terrarium.pastel.items.PigmentItem;
-import earth.terrarium.pastel.networking.c2s_payloads.PaintbrushModeSwitchPayload;
+import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
 import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
 import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
 import earth.terrarium.pastel.registries.*;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -43,9 +43,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
@@ -66,7 +64,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.util.thread.EffectiveSide;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -302,10 +299,10 @@ public class PaintbrushItem extends Item implements SignApplicator {
                                    .is(PastelBlockTags.MUTANDIS_BLACKLIST)) index = (index + 1) % list.size();
                         var holder = list.get(index)
                                          .unwrap();
-                        // waugh. this is needed so that mutating from a double block (like peonies) to a single block
-                        // (like poppies) doesn't leave floating half-flowers
-                        BlockPos finalPos = (state.getBlock() instanceof DoublePlantBlock && state.getValue(
-                            DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER) ? pos.below() : pos;
+                        // waugh. this is needed so that mutating from amaranth to a single block
+                        // doesn't leave floating half-crops
+                        BlockPos finalPos = (state.getBlock() instanceof TallCropBlock && state.getValue(
+                            TallCropBlock.HALF) == DoubleBlockHalf.UPPER) ? pos.below() : pos;
                         if (state.getBlock() instanceof DoublePlantBlock) level.setBlock(
                             pos.above(), Blocks.AIR.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS);
                         holder.ifLeft(blockResourceKey -> {
@@ -367,6 +364,18 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 );
                 return true;
             }
+            case WHITE -> {
+                if(!(level instanceof ServerLevel sl)) return false;
+                BlockState currentBlockState = sl.getBlockState(pos);
+                if (currentBlockState.is(PastelBlockTags.DECAY_AWAY_CURABLES)) {
+                    sl.setBlockAndUpdate(pos, getTargetCurableState(currentBlockState, sl));
+                } else if (currentBlockState.is(PastelBlockTags.DECAY_AWAY_REMOVABLES)) {
+                    sl.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                } else {
+                    return false;
+                }
+                return true;
+            }
             case LIGHT_GRAY, LIGHT_BLUE, BLACK, PURPLE, RED, BROWN -> { // These don't do anything on blocks
                 return false;
             }
@@ -374,6 +383,24 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 "Unimplemented color, yell at lily (unless this is from an addon in which case yell at them): " +
                 inkColor.get());
         }
+    }
+
+
+    public BlockState getTargetCurableState(BlockState blockState, ServerLevel sl) { // don't even
+        if (blockState.getBlock() instanceof DecayBlock) {
+            if (blockState.is(PastelBlocks.RUIN.get()) || blockState.is(PastelBlocks.FORFEITURE.get())) {
+                if (blockState.getValue(ForfeitureBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
+                    return Blocks.BEDROCK.defaultBlockState();
+                }
+            } else if (blockState.is(PastelBlocks.FAILING.get())) {
+                if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
+                    return Blocks.OBSIDIAN.defaultBlockState();
+                } else if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.SPECIAL) {
+                    return Blocks.CRYING_OBSIDIAN.defaultBlockState();
+                }
+            }
+        }
+        return DecayAwayBlock.TargetConversion.DEFAULT.getTargetState(sl);
     }
 
     private void mutate(BlockPos pos, Block block, ServerLevel level) {
@@ -634,6 +661,10 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 serverPlayer.gameMode.useItemOn(serverPlayer, level, stack, hand, hitResult);
                 return true;
             }
+            case WHITE -> {
+                WhispyCircletItem.shortenNegativeStatusEffects(player, WhispyCircletItem.NEGATIVE_EFFECT_SHORTENING_TICKS);
+                return true;
+            }
             // these need an actual target
             case CYAN, MAGENTA, YELLOW, ORANGE, LIME, LIGHT_GRAY, GRAY, PURPLE -> {
                 return false;
@@ -732,6 +763,10 @@ public class PaintbrushItem extends Item implements SignApplicator {
             }
             case YELLOW -> {
                 entity.hurt(PastelDamageTypes.electric(entity.level()), 2f);
+                return true;
+            }
+            case WHITE -> {
+                WhispyCircletItem.shortenNegativeStatusEffects(entity, WhispyCircletItem.NEGATIVE_EFFECT_SHORTENING_TICKS);
                 return true;
             }
             // these don't do anything to entities

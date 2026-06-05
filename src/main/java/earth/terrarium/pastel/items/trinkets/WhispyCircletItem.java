@@ -31,7 +31,7 @@ import java.util.Set;
 public class WhispyCircletItem extends PastelTrinketItem {
 
     private final static int TRIGGER_EVERY_X_TICKS = 100;
-    private final static int NEGATIVE_EFFECT_SHORTENING_TICKS = 200;
+    public final static int NEGATIVE_EFFECT_SHORTENING_TICKS = 200;
 
     public WhispyCircletItem(Properties settings) {
         super(settings, PastelCommon.locate("unlocks/trinkets/whispy_circlet"));

@@ -400,7 +400,7 @@ public class PastelItemLang {
         provider.add("item.pastel.paintbrush.tooltip.cantrip.magenta", "Extra Tick");
         provider.add("item.pastel.paintbrush.tooltip.cantrip.yellow", "Zap");
         provider.add("item.pastel.paintbrush.tooltip.cantrip.black", "Item Vacuum");
-        provider.add("item.pastel.paintbrush.tooltip.cantrip.white", "This will crash your game, seriously, do not, I am not joking.");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.white", "Purity");
         provider.add("item.pastel.paintbrush.tooltip.cantrip.orange", "Ignition");
         provider.add("item.pastel.paintbrush.tooltip.cantrip.blue", "Temporary Platforms");
         provider.add("item.pastel.paintbrush.tooltip.cantrip.lime", "Plant Mutation");
