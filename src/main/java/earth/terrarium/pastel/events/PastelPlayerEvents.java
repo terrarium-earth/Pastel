@@ -25,11 +25,7 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingSwapItemsEvent;
-import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
-import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
+import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class PastelPlayerEvents {
@@ -45,6 +41,7 @@ public class PastelPlayerEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelPlayerEvents::applyImprovedCritical);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelPlayerEvents::postPlayerDeath);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelPlayerEvents::removeHardcoreDeath);
+        NeoForge.EVENT_BUS.addListener(PastelPlayerEvents::sleepThroughDay);
     }
 
     private static void absorbExperience(PlayerXpEvent.PickupXp event) {
@@ -218,6 +215,16 @@ public class PastelPlayerEvents {
             (reason == Player.BedSleepingProblem.NOT_POSSIBLE_NOW || reason == Player.BedSleepingProblem.NOT_SAFE)
             && player.hasEffect(PastelMobEffects.SOMNOLENCE)) { // Somnolence lets you sleep whenever and wherever.
             event.setProblem(null);
+        }
+    }
+
+    public static void sleepThroughDay(CanContinueSleepingEvent event) {
+        var player = event.getEntity();
+        var reason = event.getProblem();
+        if (
+            reason == Player.BedSleepingProblem.NOT_POSSIBLE_NOW && player.hasEffect(PastelMobEffects.SOMNOLENCE)
+        ) {
+            event.setContinueSleeping(true);
         }
     }
 

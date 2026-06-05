@@ -20,7 +20,7 @@ public class PastelItemLang {
         entry(PastelItems.CONSTRUCTORS_STAFF.getRegisteredName(), "Constructor's Staff"),
         entry(PastelItems.AETHER_GRACED_NECTAR_GLOVES.getRegisteredName(), "Aether-Graced Nectar Gloves"),
         entry(PastelItems.GLOVES_OF_DAWNS_GRASP.getRegisteredName(), "Gloves of Dawn's Grasp"),
-        entry(PastelItems.GUIDEBOOK.getRegisteredName(), "Colorful World"),
+        entry(PastelItems.GUIDEBOOK.getRegisteredName(), "Artist's Journal"),
         entry(PastelItems.HEARTSINGERS_REWARD.getRegisteredName(), "Heartsinger's Reward"),
         entry(PastelItems.MALACHITE_GLASS_ARROW.getRegisteredName(), "Glass Arrow"),
         entry(PastelItems.MERMAIDS_GEM.getRegisteredName(), "Mermaid's Gem"),
@@ -229,6 +229,7 @@ public class PastelItemLang {
         provider.add(
             "item.pastel.everpromise_ribbon.tooltip2", "then use it on an animal to promise it never ending affection");
         provider.add("item.pastel.exchanging_staff.tooltip.range", "Exchanges blocks up to %s blocks around it");
+        provider.add("item.pastel.exchanging_staff.tooltop.pickblock", " to adjust the range, up to a maximum of %s.");
         provider.add("item.pastel.exchanging_staff.tooltip.target", "Target: %s");
         provider.add("item.pastel.ferocious_glass_crest_bident.tooltip", "Does not require Water to §fRiptide§r");
         provider.add(
@@ -390,11 +391,27 @@ public class PastelItemLang {
         provider.add("item.pastel.nightdew_sprout.tooltip", "§oFragrant like tea");
         provider.add("item.pastel.nightfalls_blade.when_struck", "When Struck:");
         provider.add("item.pastel.onyx_glass_arrow.tooltip", "-gravity well-");
-        provider.add("item.pastel.paintbrush.ability.block_coloring", "- Block Coloring");
-        provider.add("item.pastel.paintbrush.ability.header", "Abilities:");
-        provider.add("item.pastel.paintbrush.ability.ink_slinging", "- Ink Slinging");
-        provider.add("item.pastel.paintbrush.ability.pedestal_triggering", "- Pedestal Triggering");
-        provider.add("item.pastel.paintbrush.tooltip.select_color", "Crouch-Use to select a Color");
+        provider.add("item.pastel.paintbrush.tooltip.menu", " to change mode and color");
+        provider.add("item.pastel.paintbrush.tooltip.info", "Use on blocks to gather information");
+        provider.add("item.pastel.paintbrush.tooltip.paint", "Use on blocks or entities to paint");
+        provider.add("item.pastel.paintbrush.tooltip.spell", "Use to cast an Ink Cantrip");
+        provider.add("item.pastel.paintbrush.tooltip.color.selected", "Selected color: ");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.cyan", "Falling Blocks");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.magenta", "Extra Tick");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.yellow", "Zap");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.black", "Item Vacuum");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.white", "Purity");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.orange", "Ignition");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.blue", "Temporary Platforms");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.lime", "Plant Mutation");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.light_gray", "Animal Aging");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.pink", "Healing Touch");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.light_blue", "Infinite Reach");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.red", "Painted Fury");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.gray", "Degrading Touch");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.brown", "Sacrificial Discount");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.green", "Remote Activation");
+        provider.add("item.pastel.paintbrush.tooltip.cantrip.purple", "True Invisibility");
         provider.add("item.pastel.tuning_stamp.controls", "Right Click to start/apply links");
         provider.add("item.pastel.tuning_stamp.controls2", "Strike a block to clear the stamp");
         provider.add("item.pastel.tuning_stamp.controls3", "Shift to remain tuned to the last node");

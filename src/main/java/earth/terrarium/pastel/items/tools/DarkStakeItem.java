@@ -1,6 +1,8 @@
 package earth.terrarium.pastel.items.tools;
 
+import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.entity.entity.DarkStakeEntity;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,11 +20,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class DarkStakeItem extends Item implements ProjectileItem {
+public class DarkStakeItem extends Item implements ProjectileItem, SplitDamageHandler {
     public DarkStakeItem(Properties properties) {
         super(properties);
     }
@@ -45,6 +46,14 @@ public class DarkStakeItem extends Item implements ProjectileItem {
         ItemStack itemstack = player.getItemInHand(hand);
         player.startUsingItem(hand);
         return InteractionResultHolder.consume(itemstack);
+    }
+
+    @Override
+    public SplitDamageHandler.DamageComposition getDamageComposition(
+        LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
+        var composition = new SplitDamageHandler.DamageComposition();
+        composition.add(PastelDamageTypes.darkStake(attacker.level()), damage);
+        return composition;
     }
 
     @Override

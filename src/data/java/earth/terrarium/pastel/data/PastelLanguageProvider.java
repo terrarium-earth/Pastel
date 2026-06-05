@@ -15,10 +15,15 @@ public class PastelLanguageProvider extends LanguageProvider {
     public static String prettifyRegisteredName(String registeredName) {
         StringBuilder formattedName = new StringBuilder();
         for (String word : registeredName.split("_")) {
-            formattedName.append(word.substring(0, 1)
-                                     .toUpperCase())
-                         .append(word.substring(1))
-                         .append(" ");
+            if (!word.isEmpty()) {
+                if(word.length()==1)
+                    formattedName.append(word.toUpperCase()).append(" ");
+                else
+                    formattedName.append(word.substring(0, 1)
+                                         .toUpperCase())
+                             .append(word.substring(1))
+                             .append(" ");
+            }
         }
         return formattedName.toString().strip();
     }

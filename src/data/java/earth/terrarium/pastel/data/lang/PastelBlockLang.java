@@ -10,10 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PastelBlockLang {
     public static void addTranslations(PastelLanguageProvider provider) {
@@ -27,7 +24,7 @@ public class PastelBlockLang {
                 continue;
             }
             // this is set to be ice because it is ice
-            if(name.equals("snowgrave")){
+            if (name.equals("snowgrave")) {
                 provider.addBlock(block, "Ice");
                 continue;
             }
@@ -52,7 +49,8 @@ public class PastelBlockLang {
             if (name.endsWith("_block") && !name.endsWith("_noxcap_block") && !name.equals("resplendent_block"))
                 name = "block_of_" + name.substring(0, name.length() - 6);
             // semi-permeable glass has a hyphen and is in a weird order
-            if (name.contains("semi_permeable")) name = "Semi-Permeable_" + name.replace("_semi_permeable", "");
+            if (name.contains("semi_permeable")) name = "Semi-Permeable_" + name.replace("_semi_permeable", "")
+                                                                                .replace("semi_permeable", "");
             // upgrade names are also fairly unique
             if (name.startsWith("upgrade_")) continue;
             // avoid duplicate keys
@@ -62,12 +60,18 @@ public class PastelBlockLang {
                 "lizard") || name.startsWith("frog") || name.startsWith("parrot") || name.startsWith("mooshroom") ||
                                           name.startsWith("fox_arctic"))) {
                 var words = name.split("_");
-                var tmp = words[0];
-                words[0] = words[1];
-                words[1] = tmp;
+                if(Objects.equals(words[1], "light")){
+                    var tmp1 = words[0];
+                    words[0] = words[1];
+                    words[1] = words[2];
+                    words[2] = tmp1;
+                } else {
+                    var tmp = words[0];
+                    words[0] = words[1];
+                    words[1] = tmp;
+                }
                 name = String.join("_", words);
             }
-
             var formattedName = PastelLanguageProvider.prettifyRegisteredName(name);
 
             provider.add(block.get(), formattedName);

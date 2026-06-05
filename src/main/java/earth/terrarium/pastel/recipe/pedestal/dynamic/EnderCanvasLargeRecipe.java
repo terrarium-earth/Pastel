@@ -52,8 +52,9 @@ public class EnderCanvasLargeRecipe extends ShapedPedestalRecipe {
     @Override
     public ItemStack assemble(PedestalRecipeInput input, HolderLookup.Provider wrapperLookup) {
         ItemStack canvas = input.getItem(4);
-        canvas.set(PastelDataComponentTypes.ENDER_CANVAS_VARIANT, EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE);
-        return canvas.copy();
+        var copy = canvas.copy();
+        copy.set(PastelDataComponentTypes.ENDER_CANVAS_VARIANT, EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE);
+        return copy;
     }
 
     @Override

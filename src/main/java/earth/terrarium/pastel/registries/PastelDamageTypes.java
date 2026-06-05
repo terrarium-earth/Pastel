@@ -30,6 +30,8 @@ public class PastelDamageTypes {
         Registries.DAMAGE_TYPE, locate("dike_gate"));
     public static final ResourceKey<DamageType> DRAGONROT = ResourceKey.create(
         Registries.DAMAGE_TYPE, locate("dragonrot"));
+    public static final ResourceKey<DamageType> ELECTRIC = ResourceKey.create(
+        Registries.DAMAGE_TYPE, locate("electric"));
     public static final ResourceKey<DamageType> EVISCERATION = ResourceKey.create(
         Registries.DAMAGE_TYPE, locate("evisceration"));
     public static final ResourceKey<DamageType> FLOATBLOCK = ResourceKey.create(
@@ -98,6 +100,10 @@ public class PastelDamageTypes {
 
     public static DamageSource evisceration(Level world, @Nullable Entity attacker) {
         return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(EVISCERATION), attacker);
+    }
+
+    public static DamageSource electric(Level world){
+        return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(ELECTRIC));
     }
 
     public static DamageSource setHealth(Level world, @Nullable LivingEntity attacker) {

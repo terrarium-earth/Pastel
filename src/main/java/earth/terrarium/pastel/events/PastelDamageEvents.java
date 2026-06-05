@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.events;
 
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
@@ -8,6 +9,7 @@ import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.trinkets.AttackRingItem;
 import earth.terrarium.pastel.items.trinkets.ConsumptionRingItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
@@ -19,6 +21,7 @@ import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -28,7 +31,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent;
@@ -62,8 +68,52 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vulnerability);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handlePuffCirclet);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::applyKillBonuses);
+        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handleFirstStrike);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::fuckWithWards);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vampirism);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelDamageEvents::electricDamage);
+    }
+
+    private static void electricDamage(LivingIncomingDamageEvent event) {
+        var source = event.getSource();
+        if (!source.is(PastelDamageTypes.ELECTRIC))
+            return;
+        if (event.getEntity() instanceof Creeper creeper) {
+            creeper.getEntityData()
+                   .set(Creeper.DATA_IS_POWERED, true);
+        }
+        float mult = 1.0f;
+        for (var i : event.getEntity()
+                          .getArmorSlots()) {
+            if (i.is(PastelItemTags.METAL_ARMOR)) {
+                mult += 0.25f;
+            }
+        }
+        event.setAmount(event.getAmount() * mult);
+        int mitigated = 0;
+        var totalCap = 0;
+        for (var i : event.getEntity()
+                          .getArmorSlots()) {
+            var storage = i.getCapability(Capabilities.EnergyStorage.ITEM);
+            if (storage != null && storage.getEnergyStored() > 0) {
+                mitigated += storage.extractEnergy(
+                    Math.min(
+                        storage.getEnergyStored(),
+                        Mth.ceil(storage.getMaxEnergyStored() * event.getAmount() / 100)
+                    ), false
+                );
+                totalCap += storage.getMaxEnergyStored();
+            }
+        }
+        if (event.getEntity() instanceof Player player) {
+            player.displayClientMessage(
+                Component.literal(
+                    "Your tech armor shields you from the shock, draining " + mitigated*100 / totalCap + "% of its power!"), true
+            );
+        }
+        if ((float) mitigated * 100 / totalCap >= event.getAmount()) {
+            event.setAmount(0);
+        }
     }
 
     private static void vampirism(LivingDamageEvent.Post event) {
@@ -326,6 +376,22 @@ public class PastelDamageEvents {
                 (damageContainer, f) -> f * (1 - ap.getDefenseMultiplier(
                     target, weapon))
             );
+        }
+    }
+
+    private static void handleFirstStrike(LivingDamageEvent.Pre event) {
+        var target = event.getEntity();
+        var source = event.getSource();
+        var amount = event.getNewDamage();
+
+        if (source.getEntity() instanceof LivingEntity livingAttacker) {
+            if (amount != 0 && target.getHealth() == target.getMaxHealth()) {
+                var mainHandStack = livingAttacker.getMainHandItem();
+                var level = Ench.getLevel(livingAttacker.level().registryAccess(), PastelEnchantments.FIRST_STRIKE, mainHandStack);
+                if (level > 0) {
+                    event.setNewDamage(amount + PastelCommon.CONFIG.FirstStrikeDamagePerLevel * level);
+                }
+            }
         }
     }
 }

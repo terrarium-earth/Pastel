@@ -1,8 +1,10 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
 import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
+import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
@@ -54,6 +56,10 @@ public class PastelRecipeTypes {
     public static final RecipeType<ITitrationBarrelRecipe> TITRATION_BARREL = register("titration_barrel");
     public static final RecipeType<PrimordialFireBurningRecipe> PRIMORDIAL_FIRE_BURNING = register(
         "primordial_fire_burning");
+    public static final RecipeType<HealingRecipe> CANTRIP_HEALING = register(
+        "cantrip_healing");
+    public static final RecipeType<DegradingRecipe> CANTRIP_DEGRADING = register(
+        "cantrip_degrading");
 
     private static <T extends Recipe<?>> RecipeType<T> register(String id) {
         var type = new RecipeType<T>() {
