@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.blocks.pastel_network.nodes;
 
 import com.google.common.base.Predicates;
-import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.StampDataCategory;
@@ -20,7 +19,6 @@ import earth.terrarium.pastel.inventories.FilteringScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
 import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
-import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelPastelUpgrades;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import earth.terrarium.pastel.registries.PastelSounds;
@@ -29,8 +27,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -58,7 +54,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -540,46 +535,6 @@ public class PastelNodeBlockEntity extends BlockEntity
         } else {
             return ItemStack -> true;
         }
-    }
-
-    private boolean filter(ItemStack variant) {
-        return filterItems
-            .stream()
-            .anyMatch(filterItem -> {
-
-                if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem.asStack()
-                                                                              .is(PastelItemTags.TAG_FILTERING_ITEMS))
-                    return filterItem.permits(variant);
-
-                var name = StringUtils.trim(filterItem.asStack()
-                                                      .getHoverName()
-                                                      .getString());
-
-                // This is to allow nbt filtering without item / tag filtering.
-                if (StringUtils.equalsAnyIgnoreCase(
-                    name, "*", "any", "all", "everything", "c:*", "c:any", "c:all", "c:everything"))
-                    return true;
-
-                var id = ResourceLocation.tryParse(
-                    StringUtils.remove(name, '#')); // let's be nice and remove any pound signs
-                if (id == null)
-                    return false;
-
-                var tag = PastelCommon.CACHED_ITEM_TAG_MAP.computeIfAbsent(
-                    id, tagId -> BuiltInRegistries.ITEM.getTagNames()
-                                                       .filter(t -> t.location()
-                                                                     .equals(tagId))
-                                                       .findFirst()
-                                                       .orElse(null)
-                );
-
-                if (tag == null)
-                    return false;
-
-                return variant.getItem()
-                              .builtInRegistryHolder()
-                              .is(tag);
-            });
     }
 
     public boolean handleImpression(

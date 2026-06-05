@@ -19,6 +19,7 @@ public class PastelBlockTags {
     public static final TagKey<Block> ALOE_CONVERTED = of("aloe_converted");
     public static final TagKey<Block> GROWTH_ACCELERATORS = of("growth_accelerators");
     public static final TagKey<Block> NIGHTDEW_SOILS = of("nightdew_soils");
+    public static final TagKey<Block> COLORED_SAPLINGS = of("colored_saplings");
 
     // DECAY
     public static final TagKey<Block> DECAY = of("decay/decay");
@@ -72,6 +73,13 @@ public class PastelBlockTags {
     public static final TagKey<Block> WARD_DISRUPTABLE = of("ward_disruptable");
     public static final TagKey<Block> FLOWING_STAFF_MOVE_BLACKLIST = of("flowing_staff_move_blacklist");
     public static final TagKey<Block> VIRIDIAN_CRYSTAL_PURITY_SOURCES = of("viridian_crystal_purity_sources");
+
+    // tags for ink cantrips
+    public static final TagKey<Block> CRACKED_BLOCKS = of("cracked_blocks");
+    public static final TagKey<Block> FALLING_BLOCK_BLACKLISTED = of("falling_block_requires_resonance");
+    public static final TagKey<Block> REALLY_FALLING_BLOCK_BLACKLISTED = of("falling_block_blacklisted");
+    public static final TagKey<Block> MUTANDIS_BLACKLIST = of("lime_mutation_blacklist");
+    public static final TagKey<Block> TICK_ACCEL_BLACKLIST = of("tick_acceleration_blacklist");
 
     // ORES
     public static final TagKey<Block> AZURITE_ORES = of("azurite_ores");

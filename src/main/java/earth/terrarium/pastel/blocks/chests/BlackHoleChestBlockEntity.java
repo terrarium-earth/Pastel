@@ -302,7 +302,7 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
         } else if (entry instanceof ItemEntityEventQueue.EventEntry itemEntry) {
             ItemEntity itemEntity = itemEntry.itemEntity;
             if (itemEntity != null && itemEntity.isAlive() &&
-                ((ItemEntityAccessor) itemEntity).getPickupDelay() != 32767 && acceptsItemStack(itemEntity.getItem())) {
+                ((ItemEntityAccessor) itemEntity).getPickupDelay() != 32767 && filter(itemEntity.getItem())) {
                 int previousAmount = itemEntity.getItem()
                                                .getCount();
                 ItemStack remainingStack = InventoryHelper.smartAddToInventory(
@@ -380,23 +380,6 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
     public void setFilterItem(int slot, ItemStack item) {
         this.filterItems.set(slot, ItemReference.of(item));
         this.setChanged();
-    }
-
-    public boolean acceptsItemStack(ItemStack itemStack) {
-        if (itemStack.isEmpty()) {
-            return false;
-        }
-
-        boolean allAir = true;
-        for (int i = 0; i < ITEM_FILTER_SLOT_COUNT; i++) {
-            var filterItem = this.filterItems.get(i);
-            if (filterItem.permits(itemStack)) {
-                return true;
-            } else if (!filterItem.isEmpty()) {
-                allAir = false;
-            }
-        }
-        return allAir;
     }
 
     public Optional<ExperienceHandler> getExperienceStorage() {

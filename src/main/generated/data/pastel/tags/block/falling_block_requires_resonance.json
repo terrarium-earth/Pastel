@@ -1,0 +1,21 @@
+{
+  "values": [
+    "#pastel:falling_block_blacklisted",
+    "minecraft:spawner",
+    "minecraft:trial_spawner",
+    "pastel:black_materia",
+    "minecraft:cake",
+    "minecraft:composter",
+    "minecraft:frogspawn",
+    "minecraft:gilded_blackstone",
+    "minecraft:reinforced_deepslate",
+    "minecraft:respawn_anchor",
+    "minecraft:sculk_shrieker",
+    "#c:brushable_blocks",
+    "#c:budding_blocks",
+    "#c:buds",
+    "#c:clusters",
+    "#c:infested_blocks",
+    "#minecraft:all_signs"
+  ]
+}

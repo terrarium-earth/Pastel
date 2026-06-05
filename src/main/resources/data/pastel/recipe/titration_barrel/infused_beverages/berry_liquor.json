@@ -103,5 +103,5 @@
       }
     }
   },
-  "required_advancement": "pastel:triggers/confirmed_drinking_age"
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel"
 }

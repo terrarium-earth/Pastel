@@ -9,6 +9,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -37,6 +39,13 @@ public class PastelItemTagsProvider extends ItemTagsProvider {
 
         tag(ItemTags.BOOKSHELF_BOOKS).addTag(PastelItemTags.COOKBOOKS)
                                      .add(PastelItems.GILDED_BOOK.get(), PastelItems.GUIDEBOOK.get());
+        tag(PastelItemTags.METAL_ARMOR).add(
+            Items.IRON_HELMET, Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS, Items.CHAINMAIL_HELMET,
+            Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS, Items.GOLDEN_HELMET,
+            Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS, Items.NETHERITE_HELMET,
+            Items.NETHERITE_CHESTPLATE, Items.NETHERITE_LEGGINGS, Items.NETHERITE_BOOTS, Items.IRON_HORSE_ARMOR,
+            Items.GOLDEN_HORSE_ARMOR
+        );
     }
 
     public void generateEnchantableTags() {

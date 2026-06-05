@@ -1,5 +1,5 @@
 {
-  "name": "item.pastel.bottomless_bundle",
+  "name": "block.pastel.bottomless_bundle",
   "condition": {
     "type": "modonomicon:advancement",
     "advancement_id": "pastel:unlocks/items/bottomless_bundle"
@@ -21,7 +21,7 @@
         "item": "pastel:bottomless_bundle"
       },
       "text": "book.pastel.guidebook.bottomless_bundle.page0.text",
-      "title": "item.pastel.bottomless_bundle"
+      "title": "block.pastel.bottomless_bundle"
     },
     {
       "type": "pastel:pedestal_crafting",

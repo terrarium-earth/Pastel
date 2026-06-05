@@ -35,6 +35,7 @@ import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
@@ -44,6 +45,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -54,6 +57,7 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -78,6 +82,7 @@ public class PastelMiscEvents {
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::tagReload);
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::leftClickBlock);
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::registerTillable);
+        NeoForge.EVENT_BUS.addListener(PastelMiscEvents::sleepThroughDay);
         NeoForge.EVENT_BUS.addListener(PastelMiscEvents::viridanShimmer);
 
         // Doesn't seem to have an actual equivalent?
@@ -320,6 +325,12 @@ public class PastelMiscEvents {
 
         var original = event.getPos();
 
+        var hitResult = player.pick(player.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE),0,false);
+        var direction = player.getNearestViewDirection();
+        if(hitResult.getType() == HitResult.Type.BLOCK){
+            direction = ((BlockHitResult) hitResult).getDirection();
+        }
+
         if (AREA_TARGETS.contains(original)) return; // No recursion
 
         var cap = player.getMainHandItem()
@@ -331,14 +342,12 @@ public class PastelMiscEvents {
 
         if (aoe.equals(Vec3i.ZERO)) return;
 
-        var start = switch (player.getNearestViewDirection()
-                                  .getAxis()) {
+        var start = switch (direction.getAxis()) {
             case X -> original.offset(aoe.getZ(), aoe.getY(), aoe.getX());
             case Y -> original.offset(aoe.getX(), aoe.getZ(), aoe.getY());
             case Z -> original.offset(aoe.getX(), aoe.getY(), aoe.getZ());
         };
-        var end = switch (player.getNearestViewDirection()
-                                .getAxis()) {
+        var end = switch (direction.getAxis()) {
             case X -> original.offset(0, -aoe.getY(), -aoe.getX());
             case Y -> original.offset(-aoe.getX(), 0, -aoe.getY());
             case Z -> original.offset(-aoe.getX(), -aoe.getY(), 0);
@@ -431,4 +440,11 @@ public class PastelMiscEvents {
                     .getLightLevel(fluid);
     }
 
+    public static void sleepThroughDay(SleepFinishedTimeEvent event) {
+        var time = event.getLevel().dayTime();
+        if (TimeHelper.getTimeOfDay(time).isDay()) {
+            var sunset = (time - time % 24000) + 13000L;
+            event.setTimeAddition(sunset);
+        }
+    }
 }

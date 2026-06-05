@@ -12,10 +12,10 @@
         "advancement": "pastel:lategame/collect_myceylon"
       }
     },
-    "confirmed_drinking_age": {
+    "unlocked_titration_barrel": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:triggers/confirmed_drinking_age"
+        "advancement": "pastel:unlocks/blocks/titration_barrel"
       }
     }
   }

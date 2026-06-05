@@ -1,0 +1,32 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 480,
+  "experience": 1.0,
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "ae2:certus_quartz_crystal",
+      "count": 8
+    },
+    "pastel:storm_stone"
+  ],
+  "result": {
+    "id": "ae2:charged_certus_quartz_crystal",
+    "count": 8
+  },
+  "required_advancement": "pastel:midgame/collect_storm_stone",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [
+    "nothing",
+    "visual_explosions_on_shrine"
+  ],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine",
+  "neoforge:conditions": [
+    {
+      "type": "pastel:integration_pack_active",
+      "integration_pack": "ae2"
+    }
+  ]
+}

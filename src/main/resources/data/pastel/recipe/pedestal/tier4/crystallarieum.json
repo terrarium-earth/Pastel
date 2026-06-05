@@ -20,7 +20,7 @@
     "C": "pastel:polished_calcite",
     "B": "pastel:polished_basalt",
     "P": "#pastel:pigment_blocks",
-    "L": "pastel:liquid_crystal_bucket"
+    "L": "minecraft:bucket"
   },
   "result": {
     "id": "pastel:crystallarieum",

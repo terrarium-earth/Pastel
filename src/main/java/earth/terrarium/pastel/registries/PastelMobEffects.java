@@ -297,6 +297,15 @@ public class PastelMobEffects {
             MobEffectCategory.BENEFICIAL, 0x77e6df)
     );
 
+    /**
+     *  Invisibility but real
+     */
+    public static final Holder<MobEffect> TRUE_INVISIBILITY = REGISTER.register(
+        "true_invisibility", () -> new NoopStatusEffect(
+            MobEffectCategory.BENEFICIAL, 16185078
+        )
+    );
+
     public static void register(IEventBus bus) {
         REGISTER.register(bus);
     }
