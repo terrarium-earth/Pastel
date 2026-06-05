@@ -1,10 +1,14 @@
-import arrow.core.compareTo
 import groovy.json.StringEscapeUtils
 
 plugins {
 	id("maven-publish")
     id("earth.terrarium.cloche") version "0.11.10"
 	id("com.teamresourceful.resourcefulgradle") version "0.0.+"
+}
+
+sourceSets.main {
+    // TODO Delete once everything in oldGenerated is properly data-genned
+    resources.srcDir("src/main/oldGenerated")
 }
 
 repositories {
@@ -42,9 +46,7 @@ repositories {
 
 	maven(url = "https://cursemaven.com") // xycraft
 
-    maven(url = "https://maven.terraformersmc.com/"){ // biolith
-        name = "TerraformersMC"
-    }
+    maven(url = "https://maven.ryanhcode.dev/releases") // sable
 }
 
 cloche {
@@ -53,7 +55,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.2.0"
+		version = System.getenv("VERSION") ?: "1.1.5.5"
 
         description = "Do flowers dream of the moon?"
 
@@ -90,11 +92,6 @@ cloche {
             required = true
         }
 
-        dependency {
-            modId = "biolith"
-            required = true
-        }
-
         author("Azzyypaaras", "azzy@terrarium.earth")
         author("Dafuqs")
 
@@ -115,7 +112,7 @@ cloche {
     singleTarget {
         @Suppress("UnstableApiUsage")
         neoforge {
-            loaderVersion = "21.1.218"
+            loaderVersion = "21.1.219"
 
             datagenDirectory = file("src/main/generated")
 
@@ -133,11 +130,12 @@ cloche {
             val additionalEntityAttributes = module(group = "maven.modrinth", name = "additionalentityattributes", version = "2.0.0+1.21.1-neoforge")
             val jgrapht = module(group = "org.jgrapht", name = "jgrapht-core", version = "1.5.2")
             val jheaps = module(group = "org.jheaps", name = "jheaps", version = "0.14")
+            val sableCompanion = module(group = "dev.ryanhcode.sable-companion", name = "sable-companion-common-1.21.1", version = "1.6.0")
 
             include(additionalEntityAttributes)
             include(jgrapht)
             include(jheaps)
-
+            include(sableCompanion)
             include(module(group = "org.apfloat", name = "apfloat", version = "1.10.1"))
 
             dependencies {
@@ -150,28 +148,24 @@ cloche {
 
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
-                modImplementation("maven.modrinth:databank:1.3.1") {
-                    exclude(module = "sodium")
-                    exclude(module = "iris")
-                }
+                modImplementation("maven.modrinth:databank:1.2.2")
                 modImplementation("maven.modrinth:exclusions-lib:1.1.0-NEO")
                 modImplementation(additionalEntityAttributes)
                 compileOnly(jgrapht)
                 implementation(jheaps)
-
-                modImplementation("com.terraformersmc:biolith-neoforge:3.0.10")
+                modApi(sableCompanion)
 
 				modImplementation("dev.emi:emi-neoforge:1.1.19+1.21.1")
 
                 modCompileOnly("maven.modrinth:colorful-hearts:10.3.8") { isTransitive = false }
-                modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.9-neoforge") { isTransitive = false }
+                modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge") { isTransitive = false }
                 modCompileOnly("com.unascribed:ears-api:1.4.6")
                 modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
 				modCompileOnly("maven.modrinth:vanity:xWfEA0yC") // compile only cuz accessories
 
-                modImplementation("maven.modrinth:create:1.21.1-6.0.4") { isTransitive = false }
-                modImplementation("maven.modrinth:lodestonelib:1.8.2") { isTransitive = false }
-                modImplementation("maven.modrinth:malum:1.8.2") { isTransitive = false }
+                modImplementation("maven.modrinth:create:6.0.10+mc1.21.1") { isTransitive = false }
+                modImplementation("maven.modrinth:lodestonelib:1.7.1") { isTransitive = false }
+                modImplementation("maven.modrinth:malum:1.7.3.1") { isTransitive = false }
                 modImplementation("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
 				modRuntimeOnly("maven.modrinth:ae2:19.2.12") { isTransitive = false }
 				modRuntimeOnly("maven.modrinth:guideme:21.1.13") { isTransitive = false }
@@ -181,6 +175,9 @@ cloche {
                 //modRuntimeOnly("maven.modrinth:mmmmmmmmmmmm:neoforge_1.21-2.0.8")  { isTransitive = false }
                 //modRuntimeOnly("maven.modrinth:moonlight:1.21-2.20.3-neoforge")  { isTransitive = false }
 				modRuntimeOnly("maven.modrinth:jei:zRGLFYRx") // cuz xycraft >:(
+                //modRuntimeOnly("dev.ryanhcode.sable:sable-neoforge-1.21.1:1.2.2") { isTransitive = false }
+                //modRuntimeOnly("maven.modrinth:enchiridion:0.2.0+1.21.1-neoforge") { isTransitive = false }
+                //modRuntimeOnly("maven.modrinth:owo-lib:0.12.15.5-beta.1+1.21") { isTransitive = false }
             }
 
             dependencies {
@@ -247,9 +244,6 @@ publishing {
 	}
 }
 
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
 
 resourcefulGradle {
 	templates {

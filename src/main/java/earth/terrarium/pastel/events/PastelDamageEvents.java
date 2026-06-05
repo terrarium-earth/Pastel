@@ -1,16 +1,15 @@
 package earth.terrarium.pastel.events;
 
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
-import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
 import earth.terrarium.pastel.attachments.data.JeopardantBonusData;
 import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.Support;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.trinkets.AttackRingItem;
-import earth.terrarium.pastel.items.trinkets.ConsumptionRingItem;
-import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.items.trinkets.PuffCircletItem;
 import earth.terrarium.pastel.mixin.accessors.LivingEntityAccessor;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithPatternAndVelocityPayload;
@@ -20,14 +19,10 @@ import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
@@ -62,43 +57,17 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vulnerability);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handlePuffCirclet);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::applyKillBonuses);
-        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::fuckWithWards);
-        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vampirism);
-    }
-
-    private static void vampirism(LivingDamageEvent.Post event) {
-        if (event.getEntity()
-                 .getType()
-                 .is(PastelEntityTypeTags.SOULLESS)) return;
-        var attacker = event.getSource()
-                            .getDirectEntity();
-        if (attacker instanceof ServerPlayer player && player.getData(ConsumptionRingData.ATTACHMENT)) {
-            ConsumptionRingItem.applyOverheal(player, event.getNewDamage());
-        }
-    }
-
-    private static void fuckWithWards(LivingDamageEvent.Post event) {
-        if (event.getSource()
-                 .is(PastelDamageTypeTags.DISRUPTS_WARDS)) return;
-        var entity = event.getEntity();
-        if (entity.hasEffect(MobEffects.DAMAGE_RESISTANCE)) {
-            var oldResistance = entity.getEffect(MobEffects.DAMAGE_RESISTANCE);
-            if (oldResistance == null || oldResistance.isInfiniteDuration()) return;
-            var duration = oldResistance.getDuration() - 100;
-            var potency = oldResistance.getAmplifier();
-            entity.removeEffect(MobEffects.DAMAGE_RESISTANCE);
-            entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, duration, potency));
-        }
+        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handleFirstStrike);
     }
 
     private static void applyKillBonuses(LivingDamageEvent.Pre event) {
         var entity = event.getSource()
                           .getEntity();
 
-        if (!(entity instanceof LivingEntity attacker)) return;
+        if (!(entity instanceof LivingEntity attacker))
+            return;
 
-        // should be a more performant check than iterating over your entire curios inv every time something takes
-        // damage
+        // should be a more performant check than iterating over your entire curios inv every time something takes damage
         if (attacker.getData(JeopardantBonusData.ATTACHMENT)) {
             event.setNewDamage((float) (event.getNewDamage() * (AttackRingItem.getAttackModifierForEntity(attacker) +
                                                                 1)));
@@ -123,10 +92,12 @@ public class PastelDamageEvents {
         var source = event.getSource();
         var attacker = source.getEntity();
 
-        if (attacker == null || !source.is(PastelDamageTypeTags.RATE_LIMITED)) return;
+        if (attacker == null || !source.is(PastelDamageTypeTags.RATE_LIMITED))
+            return;
 
         if (event.getContainer()
-                 .getNewDamage() < Mth.EPSILON) return;
+                 .getNewDamage() < Mth.EPSILON)
+            return;
 
         var memory = RATE_LIMITS.computeIfAbsent(attacker.getUUID(), u -> new Object2LongArrayMap<>());
 
@@ -150,7 +121,8 @@ public class PastelDamageEvents {
 
         for (UUID attacker : RATE_LIMITS.keySet()) {
             if (RATE_LIMITS.get(attacker)
-                           .isEmpty()) remove.add(attacker);
+                           .isEmpty())
+                remove.add(attacker);
         }
 
         remove.forEach(RATE_LIMITS::remove);
@@ -159,7 +131,8 @@ public class PastelDamageEvents {
         for (Object2LongArrayMap<UUID> limits : RATE_LIMITS.values()) {
             for (var attacked : limits.object2LongEntrySet()) {
 
-                if (time - attacked.getLongValue() > RATE_COOLDOWN) remove.add(attacked.getKey());
+                if (time - attacked.getLongValue() > RATE_COOLDOWN)
+                    remove.add(attacked.getKey());
             }
 
             remove.forEach(limits::removeLong);
@@ -180,7 +153,8 @@ public class PastelDamageEvents {
         var damage = container.getOriginalDamage();
         var source = event.getSource();
 
-        if (!source.is(PastelDamageTypeTags.UNBLOCKABLE) || target.isDeadOrDying()) return;
+        if (!source.is(PastelDamageTypeTags.UNBLOCKABLE) || target.isDeadOrDying())
+            return;
 
         target.setHealth(target.getHealth() - container.getOriginalDamage());
         if (target.isDeadOrDying()) {
@@ -209,15 +183,18 @@ public class PastelDamageEvents {
         var entity = event.getSource()
                           .getEntity();
 
-        if (!(entity instanceof LivingEntity attacker) || event.getAmount() <= Mth.EPSILON) return;
+        if (!(entity instanceof LivingEntity attacker) || event.getAmount() <= Mth.EPSILON)
+            return;
 
         var weapon = attacker.getMainHandItem();
 
-        if (weapon.isEmpty()) return;
+        if (weapon.isEmpty())
+            return;
 
         var split = weapon.getCapability(PastelCapabilities.Misc.SPLIT_DAMAGE);
 
-        if (split == null) return;
+        if (split == null)
+            return;
 
         RECURSIVE_TARGETS.add(target);
 
@@ -238,7 +215,8 @@ public class PastelDamageEvents {
 
         var vuln = target.getEffect(PastelMobEffects.VULNERABILITY);
 
-        if (vuln == null) return;
+        if (vuln == null)
+            return;
 
         container.setNewDamage(container.getNewDamage() * PastelMobEffects.vulnerabilityMod(vuln));
     }
@@ -246,11 +224,13 @@ public class PastelDamageEvents {
     private static void modifyArmorDamage(ArmorHurtEvent event) {
         var entity = event.getEntity();
         var containers = ((LivingEntityAccessor) entity).getDamageContainers();
-        if (containers == null) return;
+        if (containers == null)
+            return;
 
         var container = containers.peek();
 
-        if (container == null) return;
+        if (container == null)
+            return;
 
         var source = container.getSource();
 
@@ -270,14 +250,16 @@ public class PastelDamageEvents {
 
         if (!CuriosApi.getCuriosInventory(entity)
                       .map(i -> i.isEquipped(PastelItems.PUFF_CIRCLET.asItem()))
-                      .orElse(false)) return;
+                      .orElse(false))
+            return;
 
         var damage = ((LivingEntityAccessor) entity).callCalculateFallDamage(
             event.getDistance(), event.getDamageMultiplier());
         var cost = Math.min(damage, PuffCircletItem.FALL_DAMAGE_NEGATING_COST);
         var random = entity.getRandom();
 
-        if (cost <= 0 || AzureDikeProvider.getAzureDikeCharges(entity) < cost) return;
+        if (cost <= 0 || AzureDikeProvider.getAzureDikeCharges(entity) < cost)
+            return;
 
         AzureDikeProvider.absorbDamage(entity, cost);
         if (!entity.level()
@@ -287,10 +269,7 @@ public class PastelDamageEvents {
                 VectorPattern.EIGHT, 0.4
             );
             PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(
-                null,
-                (ServerLevel) entity.level(),
-                entity.position(),
-                ColoredCraftingParticleEffect.BLUE,
+                null, (ServerLevel) entity.level(), entity.position(), ColoredCraftingParticleEffect.BLUE,
                 VectorPattern.EIGHT_OFFSET, 0.5
             );
         }
@@ -307,25 +286,41 @@ public class PastelDamageEvents {
         var entity = event.getSource()
                           .getEntity();
 
-        if (!(entity instanceof LivingEntity attacker)) return;
+        if (!(entity instanceof LivingEntity attacker))
+            return;
 
         var weapon = attacker.getMainHandItem();
 
-        if (weapon.isEmpty()) return;
+        if (weapon.isEmpty())
+            return;
 
         if (weapon.getCapability(PastelCapabilities.Misc.SPLIT_DAMAGE) instanceof ArmorPiercingHandler ap) {
             var target = event.getEntity();
 
             container.addModifier(
-                DamageContainer.Reduction.ENCHANTMENTS,
-                (damageContainer, f) -> f * (1 - ap.getProtReduction(
+                DamageContainer.Reduction.ENCHANTMENTS, (damageContainer, f) -> f * (1 - ap.getProtReduction(
                     target, weapon))
             );
             container.addModifier(
-                DamageContainer.Reduction.ARMOR,
-                (damageContainer, f) -> f * (1 - ap.getDefenseMultiplier(
+                DamageContainer.Reduction.ARMOR, (damageContainer, f) -> f * (1 - ap.getDefenseMultiplier(
                     target, weapon))
             );
+        }
+    }
+
+    private static void handleFirstStrike(LivingDamageEvent.Pre event) {
+        var target = event.getEntity();
+        var source = event.getSource();
+        var amount = event.getNewDamage();
+
+        if (source.getEntity() instanceof LivingEntity livingAttacker) {
+            if (amount != 0 && target.getHealth() == target.getMaxHealth()) {
+                var mainHandStack = livingAttacker.getMainHandItem();
+                var level = Ench.getLevel(livingAttacker.level().registryAccess(), PastelEnchantments.FIRST_STRIKE, mainHandStack);
+                if (level > 0) {
+                    event.setNewDamage(amount + PastelCommon.CONFIG.FirstStrikeDamagePerLevel * level);
+                }
+            }
         }
     }
 }
