@@ -8,6 +8,6 @@
     "pastel:buffer_node",
     "pastel:ink_provider_node",
     "pastel:ink_gather_node",
-    "pastel_ink_connection_node"
+    "pastel:ink_connection_node"
   ]
 }
