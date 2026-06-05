@@ -1,0 +1,10 @@
+{
+  "type": "pastel:cantrip_degrading",
+  "ingredient": {
+    "item": "pastel:calcite_tiles"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:cracked_calcite_tiles"
+  }
+}

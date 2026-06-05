@@ -15,7 +15,7 @@
     "gotten_previous": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel:midgame/create_midnight_abberation"
+        "advancement": "pastel:midgame/create_midnight_aberration"
       }
     }
   }

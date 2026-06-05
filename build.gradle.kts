@@ -6,11 +6,6 @@ plugins {
 	id("com.teamresourceful.resourcefulgradle") version "0.0.+"
 }
 
-sourceSets.main {
-    // TODO Delete once everything in oldGenerated is properly data-genned
-    resources.srcDir("src/main/oldGenerated")
-}
-
 repositories {
     cloche.librariesMinecraft()
 
@@ -46,6 +41,10 @@ repositories {
 
 	maven(url = "https://cursemaven.com") // xycraft
 
+    maven(url = "https://maven.terraformersmc.com/"){ // biolith
+        name = "TerraformersMC"
+    }
+
     maven(url = "https://maven.ryanhcode.dev/releases") // sable
 }
 
@@ -55,7 +54,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.1.5.5"
+		version = System.getenv("VERSION") ?: "1.2.0"
 
         description = "Do flowers dream of the moon?"
 
@@ -89,6 +88,11 @@ cloche {
 
         dependency {
             modId = "exclusions_lib"
+            required = true
+        }
+
+        dependency {
+            modId = "biolith"
             required = true
         }
 
@@ -148,24 +152,29 @@ cloche {
 
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
-                modImplementation("maven.modrinth:databank:1.2.2")
+                modImplementation("maven.modrinth:databank:1.3.1") {
+                    exclude(module = "sodium")
+                    exclude(module = "iris")
+                }
                 modImplementation("maven.modrinth:exclusions-lib:1.1.0-NEO")
                 modImplementation(additionalEntityAttributes)
                 compileOnly(jgrapht)
                 implementation(jheaps)
                 modApi(sableCompanion)
 
+                modImplementation("com.terraformersmc:biolith-neoforge:3.0.10")
+
 				modImplementation("dev.emi:emi-neoforge:1.1.19+1.21.1")
 
                 modCompileOnly("maven.modrinth:colorful-hearts:10.3.8") { isTransitive = false }
-                modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge") { isTransitive = false }
+                modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.9-neoforge") { isTransitive = false }
                 modCompileOnly("com.unascribed:ears-api:1.4.6")
                 modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
 				modCompileOnly("maven.modrinth:vanity:xWfEA0yC") // compile only cuz accessories
 
                 modImplementation("maven.modrinth:create:6.0.10+mc1.21.1") { isTransitive = false }
-                modImplementation("maven.modrinth:lodestonelib:1.7.1") { isTransitive = false }
-                modImplementation("maven.modrinth:malum:1.7.3.1") { isTransitive = false }
+                modImplementation("maven.modrinth:lodestonelib:1.8.2") { isTransitive = false }
+                modImplementation("maven.modrinth:malum:1.8.2") { isTransitive = false }
                 modImplementation("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
 				modRuntimeOnly("maven.modrinth:ae2:19.2.12") { isTransitive = false }
 				modRuntimeOnly("maven.modrinth:guideme:21.1.13") { isTransitive = false }

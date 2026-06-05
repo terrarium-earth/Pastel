@@ -1,9 +1,11 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
 import earth.terrarium.pastel.recipe.EmptyRecipeSerializer;
 import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
+import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import earth.terrarium.pastel.recipe.crafting.dynamic.ClearCraftingTabletRecipe;
 import earth.terrarium.pastel.recipe.crafting.dynamic.ClearEnderSpliceRecipe;
@@ -186,6 +188,12 @@ public class PastelRecipeSerializers {
         "memory_dementia", new EmptyRecipeSerializer<>(MemoryDementiaRecipe::new));
     public static final RecipeSerializer<EnchantedBookUnsoulingRecipe> ENCHANTED_BOOK_UNSOULING = register(
         "enchanted_book_unsouling", new EnchantedBookUnsoulingRecipe.Serializer());
+
+    // Ink Cantrips
+    public static final RecipeSerializer<HealingRecipe> CANTRIP_HEALING_RECIPE_SERIALIZER
+        = register("cantrip_healing", new HealingRecipe.Serializer());
+    public static final RecipeSerializer<DegradingRecipe> CANTRIP_DEGRADING_RECIPE_SERIALIZER
+        = register("cantrip_degrading", new DegradingRecipe.Serializer());
 
 
     static <S extends RecipeSerializer<T>, T extends Recipe<?>> S register(String id, S serializer) {

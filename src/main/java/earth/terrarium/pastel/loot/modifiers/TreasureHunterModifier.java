@@ -238,9 +238,9 @@ public class TreasureHunterModifier extends LootModifier {
             EntityType.FROG.builtInRegistryHolder(), (entity) -> {
                 var variant = ((Frog) entity).getVariant();
 
-                if (variant == FrogVariant.WARM)
+                if (variant.is(FrogVariant.COLD))
                     return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_COLD).get();
-                else if (variant == FrogVariant.COLD)
+                else if (variant.is(FrogVariant.WARM))
                     return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_WARM).get();
                 else
                     return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_TEMPERATE).get();

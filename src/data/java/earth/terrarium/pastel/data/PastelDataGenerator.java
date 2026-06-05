@@ -18,6 +18,7 @@ public class PastelDataGenerator {
 	@SubscribeEvent
 	public static void onInitializeDataGenerator(GatherDataEvent event) {
 		PackOutput packOutput = event.getGenerator().getPackOutput();
+        event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders());
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
@@ -34,6 +35,5 @@ public class PastelDataGenerator {
 		event.addProvider(new PastelWaxableDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelBurnTimeDataMapProvider(packOutput, lookupProvider));
 		event.addProvider(new PastelHiddenProvider(packOutput, lookupProvider, existingFileHelper));
-		event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders());
 	}
 }

@@ -73,6 +73,7 @@ import earth.terrarium.pastel.registries.PastelStructureTypes;
 import earth.terrarium.pastel.registries.PastelTreeDecoratorTypes;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -314,9 +315,11 @@ public class PastelCommon {
 
         new PastelClient(pastelBus, container);
 
-        VersionChangeHelper.registerPlayerListener(MOD_ID, (modId, from, to, player) -> {
-            DatabankUtils.recheckAdvancements(player);
-        });
+        VersionChangeHelper.registerPlayerListener(
+            MOD_ID, (modId, from, to, player) -> {
+                DatabankUtils.recheckAdvancements(player);
+            }
+        );
     }
 
     private static void registerReloadListeners(AddReloadListenerEvent event) {
@@ -360,4 +363,26 @@ public class PastelCommon {
         }
     }
 
+    // you'd think this would be simple. you would be wrong. imbrifer is the overworld but down, same with melochites
+    // and the presruin dimension
+    public static boolean isSameDimension(Level level1, Level level2) {
+        return level1.dimension()
+                     .equals(level2.dimension())
+               || level1.dimension()
+                        .equals(PastelLevels.DIMENSION_KEY) && level2.dimension()
+                                                                     .equals(Level.OVERWORLD)
+               || level1.dimension()
+                        .equals(Level.OVERWORLD) && level2.dimension()
+                                                          .equals(PastelLevels.DIMENSION_KEY);
+    }
+
+    public static boolean isSameDimension(Level level, String resourceLoc) {
+        ResourceLocation resourceLocation = ResourceLocation.parse(resourceLoc);
+        return level.dimension()
+                    .location() == resourceLocation ||
+               resourceLoc.equals("minecraft:overworld") && level.dimension()
+                                                                 .equals(PastelLevels.DIMENSION_KEY) ||
+               resourceLoc.equals("pastel:imbrifer") && level.dimension()
+                                                             .equals(Level.OVERWORLD);
+    }
 }

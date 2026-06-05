@@ -52,6 +52,12 @@ public class PastelNetwork<W extends Level> {
     }
 
     public boolean addEdge(BlockPos pos1, BlockPos pos2) {
+        // under ordinary circumstances, these two lines do nothing since the node should already be in the network if
+        // this is called. HOWEVER if you ctrl-pick block a pastel node the network uuid is saved meaning it thinks it
+        // is in the network when it is not. so we add it to the graph to prevent a crash. this doesn't have any side
+        // effects since ServerPastelNetwork will override the node's network uuid if you move it to another network
+        graph.addVertex(pos1);
+        graph.addVertex(pos2);
         if (!hasEdge(pos1, pos2)) {
             graph.addEdge(pos1, pos2);
             return true;

@@ -89,7 +89,7 @@ public class AzuriteOutcropBlock extends Block {
                 }
             }
         }
-        if (level.getBlockState(pos)
+        if (level.getBlockState(pos).is(PastelBlocks.AZURE_OUTCROP) && level.getBlockState(pos)
                  .getValue(SPIRE_PART) != SpirePart.TIP && level.getBlockState(pos.relative(state.getValue(FACING)))
                                                                 .canBeReplaced()) {
             // we've just done all the update code, and at the end of it we're not a tip but we don't have one—make one!

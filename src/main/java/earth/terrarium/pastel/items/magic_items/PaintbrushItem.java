@@ -1,57 +1,82 @@
 package earth.terrarium.pastel.items.magic_items;
 
 import com.cmdpro.databank.DatabankUtils;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.ColorableBlock;
+import earth.terrarium.pastel.api.block.PaintbrushInformed;
+import earth.terrarium.pastel.api.block.PaintbrushTriggered;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.EntityColorProcessorRegistry;
+import earth.terrarium.pastel.blocks.TallCropBlock;
+import earth.terrarium.pastel.blocks.decay.DecayAwayBlock;
+import earth.terrarium.pastel.blocks.decay.DecayBlock;
+import earth.terrarium.pastel.blocks.decay.FailingBlock;
+import earth.terrarium.pastel.blocks.decay.ForfeitureBlock;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
+import earth.terrarium.pastel.components.PaintbrushComponent;
 import earth.terrarium.pastel.entity.entity.InkProjectileEntity;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.level.BlockVariantHelper;
 import earth.terrarium.pastel.inventories.PaintbrushScreenHandler;
 import earth.terrarium.pastel.items.PigmentItem;
-import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSounds;
-import net.minecraft.ChatFormatting;
+import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
+import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
+import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SignApplicator;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.util.thread.EffectiveSide;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class PaintbrushItem extends Item implements SignApplicator {
-
-    public static final int COOLDOWN_DURATION_TICKS = 10;
     public static final int BLOCK_COLOR_COST = 25;
-    public static final int INK_SLING_COST = 100;
+    public static final int CANTRIP_COST = 50;
+    public static final int ITEM_VACUUM_RANGE = 16; // todo move to config? also this is a DIAMETER not a radius!
+    public static final float PINK_HEAL_AMOUNT = 4f;
+    public static final TagKey<Block>[] MUTANDIS_TAGS = new TagKey[]{
+        BlockTags.SMALL_FLOWERS, BlockTags.SAPLINGS, BlockTags.LEAVES, BlockTags.CROPS, BlockTags.CORALS,
+        BlockTags.WART_BLOCKS
+    };
 
     public PaintbrushItem(Properties settings) {
         super(settings);
@@ -69,75 +94,322 @@ public class PaintbrushItem extends Item implements SignApplicator {
 
     @OnlyIn(Dist.CLIENT)
     private static void appendClientTooltips(ItemStack stack, List<Component> tooltip) {
-        boolean unlockedColoring = DatabankUtils.hasAdvancementClient(PastelAdvancements.COLLECT_PIGMENT);
-        boolean unlockedSlinging = DatabankUtils.hasAdvancementClient(PastelAdvancements.Midgame.FILL_INK_CONTAINER);
-        if (unlockedColoring || unlockedSlinging) {
-            Optional<InkColor> color = getColor(stack);
-            if (color.isEmpty()) {
-                tooltip.add(Component.translatable("item.pastel.paintbrush.tooltip.select_color"));
-            }
+        if (DatabankUtils.hasAdvancementClient(PastelAdvancements.COLLECT_PIGMENT) ||
+            DatabankUtils.hasAdvancementClient(PastelAdvancements.Midgame.FILL_INK_CONTAINER)) {
+            tooltip.add(Component.translatable("key.pickItem")
+                                 .append(Component.translatable("item.pastel.paintbrush.tooltip.menu")));
         }
-
-        tooltip.add(Component.translatable("item.pastel.paintbrush.ability.header")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.paintbrush.ability.pedestal_triggering")
-                             .withStyle(ChatFormatting.GRAY));
-        if (unlockedColoring) {
-            tooltip.add(Component.translatable("item.pastel.paintbrush.ability.block_coloring")
-                                 .withStyle(ChatFormatting.GRAY));
+        PaintbrushComponent data = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+        switch (data.mode()) {
+            case INFO -> tooltip.add(Component.translatable("item.pastel.paintbrush.tooltip.info"));
+            case PAINT -> tooltip.add(Component.translatable("item.pastel.paintbrush.tooltip.paint"));
+            case SPELL -> tooltip.add(Component.translatable("item.pastel.paintbrush.tooltip.spell"));
         }
-        if (unlockedSlinging) {
-            tooltip.add(Component.translatable("item.pastel.paintbrush.ability.ink_slinging")
-                                 .withStyle(ChatFormatting.GRAY));
+        if (data.mode() == PaintbrushComponent.PaintbrushMode.PAINT && data.color()
+                                                                           .isPresent()) {
+            tooltip.add(Component.translatable("item.pastel.paintbrush.tooltip.color.selected")
+                                 .append(data.color()
+                                             .get()
+                                             .getColoredName()));
+        }
+        if (data.color()
+                .isPresent() && data.mode() == PaintbrushComponent.PaintbrushMode.SPELL && data.color()
+                                                                                               .get()
+                                                                                               .getDyeColor()
+                                                                                               .isPresent()) {
+            tooltip.add(Component.translatable("item.pastel.paintbrush.tooltip.cantrip." + data.color()
+                                                                                               .get()
+                                                                                               .toString()
+                                                                                               .substring(7))
+                                 .withColor(data.color()
+                                                .get()
+                                                .getTextColorInt()));
         }
     }
 
-    public static boolean canColor(Player player) {
+    public static boolean canPaint(Player player) {
         return DatabankUtils.hasAdvancement(player, PastelAdvancements.COLLECT_PIGMENT);
     }
 
-    public static boolean canInkSling(Player player) {
+    public static boolean canTrip(Player player) {
         return DatabankUtils.hasAdvancement(player, PastelAdvancements.Midgame.FILL_INK_CONTAINER);
     }
 
     public MenuProvider createScreenHandlerFactory(ItemStack itemStack) {
         return new SimpleMenuProvider(
-            (syncId, inventory, player) ->
-                new PaintbrushScreenHandler(syncId, inventory, itemStack),
+            (syncId, inventory, player) -> new PaintbrushScreenHandler(syncId, inventory, itemStack),
             Component.translatable("item.pastel.paintbrush")
         );
     }
 
     @Override
     public Component getName(ItemStack stack) {
-        Component name = Component.translatable(this.getDescriptionId(stack));
-
-        Optional<InkColor> color = getColor(stack);
-        if (color.isPresent()) {
-            InkColor inkColor = color.get();
-            name = inkColor.getColoredName()
-                           .append(" ")
-                           .append(name);
-        }
-
+        MutableComponent name = Component.translatable(this.getDescriptionId(stack));
+        getColor(stack).ifPresent(inkColor -> name.setStyle(Style.EMPTY.withColor(inkColor.getTextColorInt())));
         return name;
     }
 
     public static void setColor(ItemStack stack, @Nullable InkColor color) {
-        stack.set(PastelDataComponentTypes.INK_COLOR, color);
+        var component = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+        stack.set(
+            PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
+                component.mode(), Optional.ofNullable(color), component.brown(), component.greenPos(),
+                component.greenDim()
+            )
+        );
     }
 
     public static Optional<InkColor> getColor(ItemStack stack) {
-        return Optional.ofNullable(stack.get(PastelDataComponentTypes.INK_COLOR));
+        return stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT)
+                    .color();
+    }
+
+    public PaintbrushComponent.PaintbrushMode getMode(ItemStack stack) {
+        return stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT)
+                    .mode();
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        Level world = context.getLevel();
-        if (canColor(context.getPlayer()) && tryColorBlock(context)) {
-            return InteractionResult.sidedSuccess(world.isClientSide);
+        Level level = context.getLevel();
+        var state = level.getBlockState(context.getClickedPos());
+        if (state.getBlock() instanceof PaintbrushTriggered && context.getPlayer() != null && !context.getPlayer()
+                                                                                                      .isShiftKeyDown()) {
+            return InteractionResult.PASS; // paintbrush triggering is handled on the block itself so we no-op here
+        }
+        switch (getMode(context.getItemInHand())) {
+            case INFO -> {
+                var player = context.getPlayer();
+                if (state.getBlock() instanceof PaintbrushInformed infoBlock && player != null) {
+                    var message = infoBlock.getStatusBarInfo(level, context.getClickedPos(), player);
+                    if (message != null) player.displayClientMessage(message, true);
+                }
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            }
+            case PAINT -> {
+                if (canPaint(context.getPlayer()) && tryColorBlock(context)) {
+                    return InteractionResult.sidedSuccess(level.isClientSide);
+                }
+            }
+            case SPELL -> {
+                var paintbrush = context.getItemInHand();
+                var color = getColor(paintbrush);
+                if (context.getPlayer() != null && canTrip(context.getPlayer()) && color.isPresent() && hasCost(
+                    paintbrush, context.getPlayer(), color.get()) && tryBlockCantrip(context)) {
+                    if (context.getPlayer() != null && getColor(paintbrush).isPresent() && tryDrainCost(
+                        paintbrush, context.getPlayer(), getColor(paintbrush).get())) {
+
+                        return InteractionResult.sidedSuccess(level.isClientSide);
+                    }
+                }
+            }
         }
         return super.useOn(context);
+    }
+
+    private boolean tryBlockCantrip(UseOnContext context) {
+        var paintbrush = context.getItemInHand();
+        Optional<InkColor> inkColor = getColor(paintbrush);
+        if (inkColor.isEmpty()) {
+            return false;
+        }
+        var dyeColor = inkColor.get()
+                               .getDyeColor();
+        if (dyeColor.isEmpty()) return false;
+        var player = context.getPlayer();
+        if (player == null || !InkPowered.hasAvailableInk(player, inkColor.get(), CANTRIP_COST)) return false;
+        var level = context.getLevel();
+        var pos = context.getClickedPos();
+        var state = level.getBlockState(pos);
+        var component = paintbrush.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+        var blockRegistry = context.getLevel()
+                                   .registryAccess()
+                                   .registryOrThrow(Registries.BLOCK);
+        switch (dyeColor.get()) { // note: because java is fucked up and evil the stargazer colors will not be able
+            // to be in here
+            case MAGENTA -> { // "World’s worst tick acceleration"
+                if (state.is(PastelBlockTags.TICK_ACCEL_BLACKLIST) || !(level instanceof ServerLevel sl)) return false;
+                if (state.isRandomlyTicking()) {
+                    state.randomTick(sl, pos, sl.getRandom());
+                }
+                state.tick(sl, pos, level.random);
+                return true;
+            }
+            case BLUE -> { // "Temporary Blocks"
+                var toPlace = pos.relative(context.getClickedFace());
+                if (level.getBlockState(toPlace)
+                         .canBeReplaced()) {
+                    level.setBlock(
+                        toPlace, PastelBlocks.TEMPORARY_PLATFORM.get()
+                                                                .defaultBlockState(), Block.UPDATE_ALL
+                    );
+                    level.scheduleTick(toPlace, PastelBlocks.TEMPORARY_PLATFORM.get(), 600);
+                    return true;
+                }
+                return false;
+            }
+            case ORANGE -> { // "Flint and Steel"
+                Items.FLINT_AND_STEEL.useOn(context);
+                return true;
+            }
+            case CYAN -> { // "Falling Block"
+                var destroySpeed = state.getDestroySpeed(level, pos);
+                if (!(level instanceof ServerLevel serverLevel) || destroySpeed == -1 || destroySpeed >= 50 ||
+                    state.hasBlockEntity() || state.is(PastelBlockTags.REALLY_FALLING_BLOCK_BLACKLISTED)) {
+                    return false;
+                }
+                var enchReg = level.registryAccess()
+                                   .registry(Registries.ENCHANTMENT);
+                if (enchReg.isEmpty()) return false;
+                var resonance = enchReg.get()
+                                       .getHolder(PastelEnchantments.RESONANCE);
+                if (resonance.isEmpty()) return false;
+                if (state.is(PastelBlockTags.FALLING_BLOCK_BLACKLISTED) && !Ench.hasEnchantment(
+                    serverLevel.registryAccess(), PastelEnchantments.RESONANCE, paintbrush)) {
+                    return false;
+                }
+                FallingBlockEntity.fall(serverLevel, pos, state);
+                return true;
+            }
+            case YELLOW -> { // "Lightning"
+                var offsetPos = pos.relative(context.getClickedFace());
+                if (level.getBlockState(offsetPos)
+                         .canBeReplaced()) {
+                    level.setBlock(
+                        offsetPos, PastelBlocks.ENERGETIC_MOTE.get()
+                                                              .defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE
+                    );
+                    level.scheduleTick(offsetPos, PastelBlocks.ENERGETIC_MOTE.get(), 2);
+                    return true;
+                }
+                return false;
+            }
+            case LIME -> { // "Mutandis from the hit mod Witchery Resurrected"
+                if (!(level instanceof ServerLevel sl)) return false;
+                if (state.is(PastelBlockTags.MUTANDIS_BLACKLIST)) return false;
+                for (TagKey<Block> tag : MUTANDIS_TAGS) {
+                    if (state.is(tag)) {
+                        var tagEntries = blockRegistry.getTag(tag);
+                        if (tagEntries.isEmpty()) continue;
+                        var list = tagEntries.get().contents;
+                        var index = list.indexOf(state.getBlockHolder()) + 1;
+                        if (index >= list.size()) index = 0;
+                        // if you blacklist an entire tag and cause an infinite loop here: i hate you so much
+                        while (list.get(index)
+                                   .is(PastelBlockTags.MUTANDIS_BLACKLIST)) index = (index + 1) % list.size();
+                        var holder = list.get(index)
+                                         .unwrap();
+                        // waugh. this is needed so that mutating from amaranth to a single block
+                        // doesn't leave floating half-crops
+                        BlockPos finalPos = (state.getBlock() instanceof TallCropBlock && state.getValue(
+                            TallCropBlock.HALF) == DoubleBlockHalf.UPPER) ? pos.below() : pos;
+                        if (state.getBlock() instanceof DoublePlantBlock) level.setBlock(
+                            pos.above(), Blocks.AIR.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS);
+                        holder.ifLeft(blockResourceKey -> {
+                                  var newBlock = blockRegistry.get(blockResourceKey);
+                                  if (newBlock != null) mutate(finalPos, newBlock, sl);
+                              })
+                              .ifRight(block1 -> {
+                                  mutate(finalPos, block1, sl);
+                              });
+                        return true;
+                    }
+                }
+                return false;
+            }
+            case PINK -> { // "Touch Heal"
+                if (!HealingRecipe.processBlock(level, pos, state)) {
+                    var ret = false;
+                    var items = level.getEntitiesOfClass(
+                        ItemEntity.class, AABB.encapsulatingFullBlocks(
+                            pos.relative(context.getClickedFace()),
+                            pos.relative(context.getClickedFace())
+                        )
+                    );
+                    for (var i : items) {
+                        ret |= HealingRecipe.processItemEntity(level, i);
+                    }
+                    return ret;
+                }
+                return true;
+            }
+            case GRAY -> { // “Degrades” blocks into similar weaker blocks
+                if (!DegradingRecipe.processBlock(level, pos, state)) {
+                    var ret = false;
+                    var items = level.getEntitiesOfClass(
+                        ItemEntity.class, AABB.encapsulatingFullBlocks(
+                            pos.relative(context.getClickedFace()),
+                            pos.relative(context.getClickedFace())
+                        )
+                    );
+                    for (var i : items) {
+                        ret |= DegradingRecipe.processItemEntity(level, i);
+                    }
+                    return ret;
+                }
+                return true;
+            }
+            case GREEN -> {
+                if (component.greenPos()
+                             .isPresent() && component.greenPos()
+                                                      .get()
+                                                      .equals(pos))
+                    return false; // no charge if you try to set it to the same block
+                paintbrush.set(
+                    PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
+                        component.mode(), component.color(), component.brown(), Optional.of(pos), level.dimension()
+                                                                                                       .location()
+                                                                                                       .toString()
+                    )
+                );
+                return true;
+            }
+            case WHITE -> {
+                if(!(level instanceof ServerLevel sl)) return false;
+                BlockState currentBlockState = sl.getBlockState(pos);
+                if (currentBlockState.is(PastelBlockTags.DECAY_AWAY_CURABLES)) {
+                    sl.setBlockAndUpdate(pos, getTargetCurableState(currentBlockState, sl));
+                } else if (currentBlockState.is(PastelBlockTags.DECAY_AWAY_REMOVABLES)) {
+                    sl.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                } else {
+                    return false;
+                }
+                return true;
+            }
+            case LIGHT_GRAY, LIGHT_BLUE, BLACK, PURPLE, RED, BROWN -> { // These don't do anything on blocks
+                return false;
+            }
+            case null, default -> throw new IllegalStateException(
+                "Unimplemented color, yell at lily (unless this is from an addon in which case yell at them): " +
+                inkColor.get());
+        }
+    }
+
+
+    public BlockState getTargetCurableState(BlockState blockState, ServerLevel sl) { // don't even
+        if (blockState.getBlock() instanceof DecayBlock) {
+            if (blockState.is(PastelBlocks.RUIN.get()) || blockState.is(PastelBlocks.FORFEITURE.get())) {
+                if (blockState.getValue(ForfeitureBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
+                    return Blocks.BEDROCK.defaultBlockState();
+                }
+            } else if (blockState.is(PastelBlocks.FAILING.get())) {
+                if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
+                    return Blocks.OBSIDIAN.defaultBlockState();
+                } else if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.SPECIAL) {
+                    return Blocks.CRYING_OBSIDIAN.defaultBlockState();
+                }
+            }
+        }
+        return DecayAwayBlock.TargetConversion.DEFAULT.getTargetState(sl);
+    }
+
+    private void mutate(BlockPos pos, Block block, ServerLevel level) {
+        if (block instanceof DoublePlantBlock) {
+            DoublePlantBlock.placeAt(
+                level, block.defaultBlockState(), pos, Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
+        } else {
+            level.setBlock(pos, block.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
+        }
     }
 
     private boolean tryColorBlock(UseOnContext context) {
@@ -233,44 +505,21 @@ public class PaintbrushItem extends Item implements SignApplicator {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        if (user.isShiftKeyDown()) {
-            if (user instanceof ServerPlayer serverPlayerEntity) {
-                if (canColor(serverPlayerEntity)) {
-                    serverPlayerEntity.openMenu(createScreenHandlerFactory(user.getItemInHand(hand)));
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        var paintbrush = player.getItemInHand(hand);
+        if (player.isShiftKeyDown()) {
+            if (player instanceof ServerPlayer serverPlayerEntity) {
+                if (canPaint(serverPlayerEntity)) {
+                    serverPlayerEntity.openMenu(createScreenHandlerFactory(player.getItemInHand(hand)));
                 }
             }
-            return InteractionResultHolder.pass(user.getItemInHand(hand));
-        } else if (canInkSling(user)) {
-            Optional<InkColor> optionalInkColor = getColor(user.getItemInHand(hand));
-            if (optionalInkColor.isPresent()) {
-
-                InkColor inkColor = optionalInkColor.get();
-                if (user.isCreative() || InkPowered.tryDrainEnergy(user, inkColor, INK_SLING_COST)) {
-                    user.getCooldowns()
-                        .addCooldown(this, COOLDOWN_DURATION_TICKS);
-
-                    if (!world.isClientSide) {
-                        InkProjectileEntity.shoot(world, user, inkColor);
-                    }
-                    // cause the slightest bit of knockback (more if Red)
-                    if (!user.isCreative()) {
-                        if (inkColor == InkColors.RED) {
-                            causeKnockback(user, user.getYRot(), user.getXRot(), 0.1F, 0.5F);
-                        } else {
-                            causeKnockback(user, user.getYRot(), user.getXRot(), 0, 0.3F);
-                        }
-                    }
-                } else {
-                    if (world.isClientSide) {
-                        user.playSound(PastelSounds.USE_FAIL, 1.0F, 1.0F);
-                    }
-                }
-
-                return InteractionResultHolder.pass(user.getItemInHand(hand));
-            }
+            return InteractionResultHolder.pass(player.getItemInHand(hand));
+        } else if (canTrip(player) && getColor(paintbrush).isPresent() && hasCost(
+            paintbrush, player, getColor(paintbrush).get()) && tryAirCantrip(paintbrush, level, player, hand)) {
+            tryDrainCost(paintbrush, player, getColor(paintbrush).get());
+            return InteractionResultHolder.sidedSuccess(paintbrush, level.isClientSide);
         }
-        return super.use(world, user, hand);
+        return super.use(level, player, hand);
     }
 
     private void causeKnockback(Player user, float yaw, float pitch, float roll, float multiplier) {
@@ -280,27 +529,257 @@ public class PaintbrushItem extends Item implements SignApplicator {
         user.push(f, g, h);
     }
 
+    private boolean hasCost(ItemStack stack, Player player, InkColor color) {
+        if (color == InkColors.BROWN) {
+            return true; // brown doesn't drain anything since it's just a toggle
+        }
+        var inkCost = CANTRIP_COST;
+        var brownCost = 0;
+        if (stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT)
+                 .brown()) {
+            inkCost = inkCost / 2;
+            brownCost = inkCost;
+        }
+        return InkPowered.hasAvailableInk(player, color, inkCost) && (brownCost == 0 || InkPowered.hasAvailableInk(
+            player, InkColors.BROWN, inkCost / 4));
+    }
+
+    private boolean tryDrainCost(ItemStack stack, Player player, InkColor color) {
+        if (color == InkColors.BROWN) {
+            return true; // brown doesn't drain anything since it's just a toggle
+        }
+        var inkCost = CANTRIP_COST;
+        var brownCost = 0;
+        if (stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT)
+                 .brown()) {
+            inkCost = inkCost / 2;
+            brownCost = inkCost / 2;
+        }
+        // this is only called on a successful cantrip cast soooo
+        player.level()
+              .playSound(null, BlockPos.containing(player.position()), PastelSounds.CAST_RADIANCE, SoundSource.PLAYERS);
+        return InkPowered.tryDrainEnergy(player, color, inkCost) && InkPowered.tryDrainEnergy(
+            player, InkColors.BROWN, brownCost);
+    }
+
+    private boolean tryAirCantrip(ItemStack stack, Level level, Player player, InteractionHand hand) {
+        Optional<InkColor> inkColor = getColor(stack);
+        if (inkColor.isEmpty()) {
+            return false;
+        }
+        var dyeColor = inkColor.get()
+                               .getDyeColor();
+        if (dyeColor.isEmpty()) return false;
+        switch (dyeColor.get()) {
+            case RED -> {
+                if (!level.isClientSide) {
+                    InkProjectileEntity.shoot(level, player, inkColor.get());
+                }
+                if (!player.isCreative()) {
+                    causeKnockback(player, player.getYRot(), player.getXRot(), 0.1F, 0.5F);
+                }
+                return true;
+            }
+            case PINK -> {
+                if (player.getHealth() == player.getMaxHealth()) return false;
+                player.heal(PINK_HEAL_AMOUNT);
+                return true;
+            }
+            case BLACK -> {
+                var done = false;
+                for (var item : level.getEntitiesOfClass(
+                    ItemEntity.class,
+                    AABB.ofSize(
+                        player.position(), ITEM_VACUUM_RANGE, ITEM_VACUUM_RANGE,
+                        ITEM_VACUUM_RANGE
+                    )
+                )) {
+                    item.teleportTo(player.getX(), player.getY(), player.getZ());
+                    done = true;
+                }
+                return done;
+            }
+            case BROWN -> {
+                var component = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+                stack.set(
+                    PastelDataComponentTypes.PAINTBRUSH, new PaintbrushComponent(
+                        component.mode(), component.color(), !component.brown(), component.greenPos(),
+                        component.greenDim()
+                    )
+                );
+                return true;
+            }
+            case GREEN -> {
+                if (!(player instanceof ServerPlayer serverPlayer)) return false;
+                var component = stack.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+                var optionalPos = component.greenPos();
+                if (optionalPos.isEmpty() || component.greenDim()
+                                                      .isEmpty()) return false;
+                var pos = optionalPos.get();
+                if (!PastelCommon.isSameDimension(level, component.greenDim()) || !level.isLoaded(pos)) return false;
+                // we are in the same "lore dimension" but not the same level, so we need to get the right level
+                if (!level.dimension()
+                          .location()
+                          .toString()
+                          .equals(component.greenDim())) {
+                    if (level.getServer() == null) return false;
+                    switch (component.greenDim()) {
+                        case "minecraft:overworld" -> level = level.getServer()
+                                                                   .getLevel(Level.OVERWORLD);
+                        case "pastel:imbrifer" -> level = level.getServer()
+                                                               .getLevel(PastelLevels.DIMENSION_KEY);
+                    }
+                }
+                if (level == null) return false;
+                serverPlayer.gameMode.useItemOn(
+                    serverPlayer, level, stack, hand,
+                    new BlockHitResult(pos.getCenter(), player.getNearestViewDirection(), pos, false)
+                );
+                return true;
+            }
+            case BLUE -> {
+                BlockHitResult hitResult = raycast(level, player, stack, hand);
+                if (hitResult == null || !level.getBlockState(hitResult.getBlockPos())
+                                               .canBeReplaced()) return false;
+                var pos = hitResult.getBlockPos()
+                                   .relative(player.getNearestViewDirection()
+                                                   .getOpposite());
+                level.setBlock(
+                    pos, PastelBlocks.TEMPORARY_PLATFORM.get()
+                                                        .defaultBlockState(), Block.UPDATE_ALL
+                );
+                level.scheduleTick(pos, PastelBlocks.TEMPORARY_PLATFORM.get(), 600);
+                return false;
+            }
+            case LIGHT_BLUE -> {
+                if (!(level instanceof ServerLevel serverLevel) || !(player instanceof ServerPlayer serverPlayer))
+                    return false;
+                BlockHitResult hitResult = raycast(level, player, stack, hand);
+                if (hitResult == null) return false;
+                // shouldn't be possible, but hey, you never know
+                if (!serverLevel.isLoaded(hitResult.getBlockPos())) return false;
+                serverPlayer.gameMode.useItemOn(serverPlayer, level, stack, hand, hitResult);
+                return true;
+            }
+            case WHITE -> {
+                WhispyCircletItem.shortenNegativeStatusEffects(player, WhispyCircletItem.NEGATIVE_EFFECT_SHORTENING_TICKS);
+                return true;
+            }
+            // these need an actual target
+            case CYAN, MAGENTA, YELLOW, ORANGE, LIME, LIGHT_GRAY, GRAY, PURPLE -> {
+                return false;
+            }
+            default -> {
+                throw new IllegalStateException(
+                    "Unimplemented color, yell at lily (unless this is from an addon in which case yell at them): " +
+                    inkColor.get());
+            }
+        }
+    }
+
+    private BlockHitResult raycast(Level level, Player player, ItemStack stack, InteractionHand hand) {
+        if (!(level instanceof ServerLevel serverLevel) || !(player instanceof ServerPlayer serverPlayer)) return null;
+        int reachDistance = (serverLevel.getChunkSource().distanceManager.simulationDistance - 1) * 16;
+        return level.clip(new ClipContext(
+            player.getEyePosition(), player.getEyePosition()
+                                           .add(player.getViewVector(0f)
+                                                      .normalize()
+                                                      .scale(reachDistance)), ClipContext.Block.OUTLINE,
+            ClipContext.Fluid.NONE, player
+        ));
+    }
+
     @Override
     public InteractionResult interactLivingEntity(
-        ItemStack stack, Player user, LivingEntity entity, InteractionHand hand) {
-        Level world = user.level();
-        if (canColor(user) && GenericClaimModsCompat.canInteract(entity.level(), entity, user)) {
-            Optional<InkColor> color = getColor(stack);
-
-            if (color.isPresent()
-                && payBlockColorCost(user, color.get())
-                && EntityColorProcessorRegistry.colorEntity(
-                entity, color.get()
-                             .getDyeColor(), entity instanceof Player player ? player : null
-            )) {
-
-                entity.level()
-                      .playSound(null, entity, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-                return InteractionResult.sidedSuccess(world.isClientSide);
+        ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
+        Level level = player.level();
+        switch (getMode(stack)) {
+            case INFO -> {
+                if (entity instanceof PaintbrushInformed infoBlock) {
+                    var message = infoBlock.getStatusBarInfo(level, entity.blockPosition(), player);
+                    if (message != null) player.displayClientMessage(message, true);
+                }
+                return InteractionResult.sidedSuccess(level.isClientSide);
             }
+            case PAINT -> {
+                if (canPaint(player) && GenericClaimModsCompat.canInteract(entity.level(), entity, player)) {
+                    Optional<InkColor> color = getColor(stack);
 
+                    if (color.isPresent() && payBlockColorCost(player, color.get()) &&
+                        EntityColorProcessorRegistry.colorEntity(
+                            entity, color.get()
+                                         .getDyeColor(), entity instanceof Player targetPlayer ? targetPlayer : null
+                        )) {
+                        entity.level()
+                              .playSound(null, entity, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+                        return InteractionResult.sidedSuccess(level.isClientSide);
+                    }
+                }
+            }
+            case SPELL -> {
+                if (canTrip(player) && getColor(stack).isPresent() && hasCost(stack, player, getColor(stack).get()) &&
+                    tryEntityCantrip(stack, player, entity, hand)) {
+                    tryDrainCost(stack, player, getColor(stack).get());
+                    return InteractionResult.sidedSuccess(level.isClientSide);
+                }
+            }
         }
-        return super.interactLivingEntity(stack, user, entity, hand);
+        return super.interactLivingEntity(stack, player, entity, hand);
+    }
+
+    private boolean tryEntityCantrip(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
+        Optional<InkColor> inkColor = getColor(stack);
+        if (inkColor.isEmpty()) {
+            return false;
+        }
+        var dyeColor = inkColor.get()
+                               .getDyeColor();
+        if (dyeColor.isEmpty()) return false;
+        switch (dyeColor.get()) {
+            case LIGHT_GRAY -> {
+                if (entity instanceof AgeableMob mob) {
+                    mob.ageUp(AgeableMob.getSpeedUpSecondsWhenFeeding(-mob.getAge()), true);
+                    return true;
+                }
+            }
+            case PINK -> {
+                entity.heal(PINK_HEAL_AMOUNT);
+                return true;
+            }
+            case ORANGE -> {
+                entity.igniteForSeconds(5);
+                entity.level()
+                      .playSound(
+                          null, entity.blockPosition(), SoundEvents.FLINTANDSTEEL_USE, SoundSource.PLAYERS, 1.0F,
+                          entity.level()
+                                .getRandom()
+                                .nextFloat() * 0.4F + 0.8F
+                      );
+                return true;
+            }
+            case PURPLE -> {
+                return entity.addEffect(
+                    new MobEffectInstance(PastelMobEffects.TRUE_INVISIBILITY, 30 * 20, 0, false, false));
+            }
+            case YELLOW -> {
+                entity.hurt(PastelDamageTypes.electric(entity.level()), 2f);
+                return true;
+            }
+            case WHITE -> {
+                WhispyCircletItem.shortenNegativeStatusEffects(entity, WhispyCircletItem.NEGATIVE_EFFECT_SHORTENING_TICKS);
+                return true;
+            }
+            // these don't do anything to entities
+            case CYAN, MAGENTA, BLACK, BLUE, LIME, LIGHT_BLUE, RED, BROWN, GREEN, GRAY -> {
+                return false;
+            }
+            default -> {
+                throw new IllegalStateException(
+                    "Unimplemented color, yell at lily (unless this is from an addon in which case yell at them): " +
+                    inkColor.get());
+            }
+        }
+        return false;
     }
 
     @Override
@@ -323,7 +802,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
                 InkColor inkColor = color.get();
                 Optional<DyeColor> dyeColor = inkColor.getDyeColor();
 
-                if (canColor(player) && payBlockColorCost(player, inkColor)) {
+                if (canPaint(player) && payBlockColorCost(player, inkColor)) {
                     if (signBlockEntity.updateText(
                         signText -> {
                             if (dyeColor.isPresent()) {

@@ -8,7 +8,9 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
+import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
+import earth.terrarium.pastel.attachments.data.HookshotData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
@@ -16,19 +18,23 @@ import earth.terrarium.pastel.components.PairedFoodComponent;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import earth.terrarium.pastel.items.tools.ParryingSwordItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.items.trinkets.RingOfAerialGraceItem;
 import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.EffectProlongingStatusEffect;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -41,6 +47,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -99,6 +106,14 @@ public abstract class LivingEntityMixin {
     @Shadow
     protected Stack<DamageContainer> damageContainers;
 
+    @WrapOperation(
+        method = "updateInvisibilityStatus()V",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hasEffect(Lnet/minecraft/core/Holder;)Z")
+    )
+    private boolean trueInvis(LivingEntity instance, Holder<MobEffect> effect, Operation<Boolean> original){
+        return instance.hasEffect(PastelMobEffects.TRUE_INVISIBILITY) || original.call(instance, effect);
+    }
+
     @Inject(method = "createLivingAttributes", require = 1, allow = 1, at = @At("RETURN"))
     private static void addAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> cir) {
         cir.getReturnValue()
@@ -108,8 +123,7 @@ public abstract class LivingEntityMixin {
     @ModifyArg(method = "dropExperience", at = @At(value = "INVOKE",
                                                    target = "Lnet/minecraft/world/entity/ExperienceOrb;award" +
                                                             "(Lnet/minecraft/server/level/ServerLevel;" +
-                                                            "Lnet/minecraft/world/phys/Vec3;I)V"),
-               index = 2)
+                                                            "Lnet/minecraft/world/phys/Vec3;I)V"), index = 2)
     protected int applyExuberance(int originalXP) {
         return (int) (originalXP * getExuberanceMod(this.lastHurtByPlayer));
     }
@@ -127,12 +141,12 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @WrapOperation(method = "travel", at = @At(value = "INVOKE", target="Ljava/lang/Math;min(DD)D",ordinal = 0))
+    @WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(DD)D", ordinal = 0))
     private double noSlowFallingSlowdown(double gravity, double slowdown, Operation<Double> original) {
-        if(InexorableHelper.isArmorActive((LivingEntity) (Object) this)){
+        if (InexorableHelper.isArmorActive((LivingEntity) (Object) this)) {
             return gravity;
         }
-        return original.call(gravity,slowdown);
+        return original.call(gravity, slowdown);
     }
 
     @Inject(method = "travel",
@@ -151,14 +165,15 @@ public abstract class LivingEntityMixin {
         }
 
         if (!entity.onGround()) {
-            var optionalTrinket = PastelTrinketItem.getFirstEquipped(entity, PastelItems.RING_OF_AERIAL_GRACE.get());
+            var optionalTrinket = PastelTrinketItem.getFirstEquipped(entity, PastelItems.RING_OF_AETHERIAL_GRACE.get());
             if (optionalTrinket.isPresent()) {
-                var inkStorage = PastelItems.RING_OF_AERIAL_GRACE.get()
-                                                                 .getEnergyStorage(optionalTrinket.get());
+                var inkStorage = PastelItems.RING_OF_AETHERIAL_GRACE.get()
+                                                                    .getEnergyStorage(optionalTrinket.get());
                 var storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
                 friction = (float) Math.max(
-                    friction, 0.91 + (((RingOfAerialGraceItem) PastelItems.RING_OF_AERIAL_GRACE.get()).getBonus(
-                        storedInk) / 150F)
+                    friction, f.get() +
+                              (((RingOfAerialGraceItem) PastelItems.RING_OF_AETHERIAL_GRACE.get()).getBonus(
+                                  storedInk) / 150F)
                 );
                 override = true;
             }
@@ -169,15 +184,14 @@ public abstract class LivingEntityMixin {
                 friction += MiscPlayerData.get(player)
                                           .getFrictionModifiers();
             } else {
-                f.set(Math.min(
+                friction = Math.min(
                     f.get() + MiscPlayerData.get(player)
                                             .getFrictionModifiers(), 0.99F
-                ));
+                );
             }
         }
 
-        if (friction >= 0)
-            f.set(Math.min(friction, 0.99F));
+        if (friction >= 0) f.set(Math.min(friction, 0.99F));
     }
 
     @ModifyExpressionValue(method = "travel", at = @At(value = "INVOKE",
@@ -205,7 +219,7 @@ public abstract class LivingEntityMixin {
     private boolean modifyFluidWalking(boolean original) {
         var entity = (LivingEntity) (Object) this;
 
-        if (PastelTrinketItem.hasEquipped(entity, PastelItems.RING_OF_AERIAL_GRACE.get())) {
+        if (PastelTrinketItem.hasEquipped(entity, PastelItems.RING_OF_AETHERIAL_GRACE.get())) {
             double fluidHeight = entity.getFluidTypeHeight(entity.getMaxHeightFluidType());
             double feetPos = entity.getBoundingBox().deflate(0.001).minY;
             // striders use the collision of the lava source block which has a height of 8.0/16.0,
@@ -225,8 +239,7 @@ public abstract class LivingEntityMixin {
                                                                     "(Lnet/minecraft/world/item/ItemStack;" +
                                                                     "Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int allowInstantBlockForParryingSwords(int original) {
-        if (useItem.getItem() instanceof ParryingSwordItem)
-            return Integer.MAX_VALUE;
+        if (useItem.getItem() instanceof ParryingSwordItem) return Integer.MAX_VALUE;
 
         return original;
     }
@@ -236,7 +249,9 @@ public abstract class LivingEntityMixin {
                                                                    " (Lnet/minecraft/sounds/SoundEvent;FF)V",
                                                           ordinal = 1))
     private void swapBlockSound(
-        LivingEntity instance, SoundEvent soundEvent, float v, float p, Operation<Void> original) {
+        LivingEntity instance, SoundEvent soundEvent, float v, float p,
+        Operation<Void> original
+    ) {
         if (!(instance.getUseItem()
                       .getItem() instanceof ParryingSwordItem parryingSword)) {
             original.call(instance, soundEvent, v, p);
@@ -249,23 +264,44 @@ public abstract class LivingEntityMixin {
             original.call(
                 instance, PastelSounds.SWORD_BLOCK, 0.667F, 0.5F + instance.level().random.nextFloat() * 0.3F);
         } else {
-            original.call(
-                instance, PastelSounds.SWORD_BLOCK, 1.0F, 0.8F + instance.level().random.nextFloat() * 0.4F);
+            original.call(instance, PastelSounds.SWORD_BLOCK, 1.0F, 0.8F + instance.level().random.nextFloat() * 0.4F);
         }
     }
 
+    @ModifyReturnValue(method = "onClimbable", at = @At("RETURN"))
+    private boolean hookshotClimb(boolean original) {
+        if (original) return true;
 
-    @Inject(
-        method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;" +
-                 "Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;",
-        at = @At(value = "INVOKE",
-                 target = "Lnet/minecraft/world/entity/LivingEntity;addEatEffect" +
-                          "(Lnet/minecraft/world/food/FoodProperties;)V"))
+        if (((Object) this) instanceof Player player) {
+            var hookData = HookshotData.get(player);
+            var hook = hookData.getHookEntity(player.level());
+
+            if (hook == null) return original;
+
+            var yDif = Math.abs(hook.getY() - player.getEyeY());
+            if (yDif > 3 + Mth.EPSILON) return false;
+
+            for (Direction dir : Direction.values()) {
+                if (dir.getAxis()
+                       .isVertical()) continue;
+
+                return player.horizontalCollision;
+            }
+        }
+
+        return false;
+    }
+
+    @Inject(method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;" +
+                     "Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEatEffect" +
+                                                "(Lnet/minecraft/world/food/FoodProperties;)V"))
     private void applyConcealedEffects(
-        Level world, ItemStack stack, FoodProperties foodComponent, CallbackInfoReturnable<ItemStack> cir) {
+        Level world, ItemStack stack, FoodProperties foodComponent,
+        CallbackInfoReturnable<ItemStack> cir
+    ) {
         var oilEffect = stack.get(PastelDataComponentTypes.CONCEALED_EFFECT);
-        if (!world.isClientSide() && oilEffect != null)
-            ((LivingEntity) (Object) this).addEffect(oilEffect);
+        if (!world.isClientSide() && oilEffect != null) ((LivingEntity) (Object) this).addEffect(oilEffect);
     }
 
     /**
@@ -273,8 +309,7 @@ public abstract class LivingEntityMixin {
      */
     @ModifyReturnValue(method = "isSleeping", at = @At("RETURN"))
     private boolean forceSleepingState(boolean original) {
-        if (original)
-            return true;
+        if (original) return true;
 
         if (hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || hasEffect(PastelMobEffects.FATAL_SLUMBER))
             return !(((LivingEntity) (Object) this) instanceof Player);
@@ -291,11 +326,13 @@ public abstract class LivingEntityMixin {
         return sprinting;
     }
 
-    @Inject(
-        method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/food/FoodProperties;)" +
-                 "Lnet/minecraft/world/item/ItemStack;",
-        at = @At(value = "HEAD"))
-    private void conditionalFood(Level world, ItemStack stack, FoodProperties foodProperties, CallbackInfoReturnable<ItemStack> cir) {
+    @Inject(method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;" +
+                     "Lnet/minecraft/world/food/FoodProperties;)" + "Lnet/minecraft/world/item/ItemStack;",
+            at = @At(value = "HEAD"))
+    private void conditionalFood(
+        Level world, ItemStack stack, FoodProperties foodProperties,
+        CallbackInfoReturnable<ItemStack> cir
+    ) {
         PairedFoodComponent component = stack.get(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT);
         if (component != null) {
             component.tryEatFood(world, (LivingEntity) (Object) this, stack);
@@ -346,14 +383,19 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @WrapOperation(at = @At(value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"), method = "hurt")
+    @WrapOperation(at = @At(value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.actuallyHurt" +
+                                                       "(Lnet/minecraft/world/damagesource/DamageSource;F)V"),
+                   method = "hurt")
     private void applyDike(LivingEntity instance, DamageSource source, float amount, Operation<Void> original) {
         if (source.is(PastelDamageTypeTags.BYPASSES_DIKE)) {
             original.call(instance, source, amount);
             return;
         }
         var container = this.damageContainers.peek();
-        var passedDamage = AzureDikeProvider.absorbDamage(instance, container.getNewDamage());
+        var passedDamage = AzureDikeProvider.absorbDamage(
+            instance, container.getNewDamage(), instance.getDamageAfterArmorAbsorb(source, container.getNewDamage()),
+            source.is(PastelDamageTypeTags.DISRUPTS_WARDS)
+        );
         container.setNewDamage(passedDamage);
         instance.actuallyHurt(source, passedDamage);
     }

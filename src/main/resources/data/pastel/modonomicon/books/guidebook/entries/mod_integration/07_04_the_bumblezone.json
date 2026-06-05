@@ -59,7 +59,7 @@
       "recipe_id": "pastel:mod_integration/the_bumblezone/titration_barrel/crown_jewel",
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+        "advancement_id": "pastel:unlocks/blocks/titration_barrel"
       }
     }
   ]

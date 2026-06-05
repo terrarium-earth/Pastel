@@ -1,0 +1,10 @@
+{
+  "type": "pastel:cantrip_degrading",
+  "ingredient": {
+    "item": "minecraft:polished_blackstone_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:cracked_polished_blackstone_bricks"
+  }
+}
