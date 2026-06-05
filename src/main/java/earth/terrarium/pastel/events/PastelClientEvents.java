@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.events;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -8,12 +7,12 @@ import com.mojang.datafixers.util.Either;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
-import earth.terrarium.pastel.api.item.PickBlockActivated;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.attachments.data.SpectacleData;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
+import earth.terrarium.pastel.components.ExchangingStaffComponent;
 import earth.terrarium.pastel.components.PaintbrushComponent;
 import earth.terrarium.pastel.data_loaders.ParticleSpawnerParticlesDataLoader;
 import earth.terrarium.pastel.data_loaders.dimension.ColorGradingLoader;
@@ -27,6 +26,7 @@ import earth.terrarium.pastel.items.magic_items.ConstructorsStaffItem;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.items.trinkets.InkDrainTrinketItem;
 import earth.terrarium.pastel.mixin.client.accessors.WorldRendererAccessor;
+import earth.terrarium.pastel.networking.c2s_payloads.ExchangingStaffAdjustPayload;
 import earth.terrarium.pastel.networking.c2s_payloads.PaintbrushModeSwitchPayload;
 import earth.terrarium.pastel.particle.render.ExtendedParticleManager;
 import earth.terrarium.pastel.registries.*;
@@ -112,7 +112,6 @@ public class PastelClientEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, PastelClientEvents::modifyFog);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, PastelClientEvents::modifyFogColor);
         NeoForge.EVENT_BUS.addListener(PastelClientEvents::handlePickBlock);
-        NeoForge.EVENT_BUS.addListener(PastelClientEvents::handlePickBlockAgain);
 
         // registerCustomItemRenderer(PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem(), BottomlessBundleItem
         // .Renderer::new); TODO unholy
@@ -153,30 +152,19 @@ public class PastelClientEvents {
                                     .forEach(i -> slotEffect(i, e));
     }
 
-    private static void handlePickBlock(InputEvent.Key event) {
+    private static void handlePickBlock(ClientTickEvent.Post event) {
         var instance = Minecraft.getInstance();
-        var keyPickItem = instance.options.keyPickItem;
-        if (instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.KEYSYM) ||
-            !keyPickItem.matches(event.getKey(), event.getScanCode())) return;
-        var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
-        if (heldItem.is(PastelItems.PAINTBRUSH)) {
-            var component = heldItem.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
-            PacketDistributor.sendToServer(new PaintbrushModeSwitchPayload(component.mode()
-                                                                                    .ordinal()));
-        }
-    }
-
-    private static void handlePickBlockAgain(InputEvent.MouseButton.Pre event) {
-        var instance = Minecraft.getInstance();
-        var keyPickItem = instance.options.keyPickItem;
-        if (instance.player == null || !(keyPickItem.key.getType() == InputConstants.Type.MOUSE) ||
-            !keyPickItem.matchesMouse(event.getButton())) return;
-        var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
-        if (heldItem.is(PastelItems.PAINTBRUSH)) {
-            var component = heldItem.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
-            PacketDistributor.sendToServer(new PaintbrushModeSwitchPayload(component.mode()
-                                                                                    .ordinal()));
-            event.setCanceled(true);
+        if(instance.player == null) return;
+        while(instance.options.keyPickItem.consumeClick()){
+            var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
+            if (heldItem.is(PastelItems.PAINTBRUSH)) {
+                var component = heldItem.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
+                PacketDistributor.sendToServer(new PaintbrushModeSwitchPayload(component.mode()
+                                                                                        .ordinal()));
+            } else if(heldItem.is(PastelItems.EXCHANGING_STAFF)){
+                var component = heldItem.getOrDefault(PastelDataComponentTypes.EXCHANGING_STAFF, ExchangingStaffComponent.DEFAULT);
+                PacketDistributor.sendToServer(new ExchangingStaffAdjustPayload(component.range()));
+            }
         }
     }
 

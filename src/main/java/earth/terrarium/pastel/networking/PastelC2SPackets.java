@@ -50,6 +50,7 @@ public class PastelC2SPackets {
             WorkstaffToggleSelectedPayload.getPayloadHandler()
         );
         registrar.playToServer(PaintbrushModeSwitchPayload.TYPE,PaintbrushModeSwitchPayload.STREAM_CODEC,PaintbrushModeSwitchPayload.getPayloadHandler());
+        registrar.playToServer(ExchangingStaffAdjustPayload.TYPE,ExchangingStaffAdjustPayload.STREAM_CODEC,ExchangingStaffAdjustPayload.getPayloadHandler());
     }
 
 }

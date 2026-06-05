@@ -2,7 +2,6 @@ package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.api.item.PickBlockActivated;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.components.ExchangingStaffComponent;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
@@ -13,7 +12,6 @@ import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -49,7 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ExchangeStaffItem extends BuildingStaffItem implements PickBlockActivated {
+public class ExchangeStaffItem extends BuildingStaffItem {
 
     public static final int INK_COST_PER_BLOCK = 5;
     public static final int MAX_RANGE = 5;
@@ -61,15 +59,6 @@ public class ExchangeStaffItem extends BuildingStaffItem implements PickBlockAct
     public static int getRange(ItemStack stack) {
         return stack.getOrDefault(PastelDataComponentTypes.EXCHANGING_STAFF, ExchangingStaffComponent.DEFAULT)
                     .range();
-    }
-
-    @Override
-    public void onPickBlock(ItemStack stack, LocalPlayer player) {
-        var component = stack.getOrDefault(PastelDataComponentTypes.EXCHANGING_STAFF, ExchangingStaffComponent.DEFAULT);
-        stack.set(
-            PastelDataComponentTypes.EXCHANGING_STAFF,
-            new ExchangingStaffComponent((component.range() + 1) % (MAX_RANGE + 1))
-        );
     }
 
     @Override
