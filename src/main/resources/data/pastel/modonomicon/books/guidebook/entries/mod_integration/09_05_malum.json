@@ -127,12 +127,6 @@
       "text": "book.pastel.guidebook.mod_integration.malum.void_salts_reagent.text"
     },
     {
-      "type": "pastel:primordial_fire_burning",
-      "title": "container.pastel.rei.primordial_fire_burning.title",
-      "text": "book.pastel.guidebook.mod_integration.malum.crystal_burning.text",
-      "recipe_id": "pastel:mod_integration/malum/primordial_fire_burning/crystal_burning"
-    },
-    {
       "type": "pastel:status_effect",
       "title": "effect.malum.silenced",
       "condition": {

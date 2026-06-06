@@ -24,7 +24,7 @@
       "type": "pastel:pedestal_crafting",
       "text": "book.pastel.guidebook.exchanging_staff.page1.text",
       "title": "container.pastel.rei.pedestal_recipe",
-      "recipe_id": "pastel:pedestal/tier4/exchanging_staff"
+      "recipe_id": "pastel:pedestal/tier3/exchanging_staff"
     },
     {
       "type": "modonomicon:spotlight",
