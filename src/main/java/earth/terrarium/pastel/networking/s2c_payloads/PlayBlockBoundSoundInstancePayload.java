@@ -20,28 +20,27 @@ import org.jetbrains.annotations.NotNull;
 
 // MaxDurationTicks of <1 means "stop playing"
 public record PlayBlockBoundSoundInstancePayload(
-    SoundEvent soundEvent, BlockPos pos, Holder<Block> block, int maxDurationTicks
+    SoundEvent soundEvent, BlockPos pos, Holder<Block> block, int maxDurationTicks, float volume
 ) implements CustomPacketPayload {
 
     public static final Type<PlayBlockBoundSoundInstancePayload> ID = PastelC2SPackets.makeId(
         "play_block_bound_sound_instance");
     public static final StreamCodec<RegistryFriendlyByteBuf, PlayBlockBoundSoundInstancePayload> CODEC
         = StreamCodec.composite(
-        SoundEvent.DIRECT_STREAM_CODEC, PlayBlockBoundSoundInstancePayload::soundEvent,
-        BlockPos.STREAM_CODEC, PlayBlockBoundSoundInstancePayload::pos,
-        ByteBufCodecs.holderRegistry(Registries.BLOCK), PlayBlockBoundSoundInstancePayload::block,
-        ByteBufCodecs.INT, PlayBlockBoundSoundInstancePayload::maxDurationTicks,
-        PlayBlockBoundSoundInstancePayload::new
+        SoundEvent.DIRECT_STREAM_CODEC, PlayBlockBoundSoundInstancePayload::soundEvent, BlockPos.STREAM_CODEC,
+        PlayBlockBoundSoundInstancePayload::pos, ByteBufCodecs.holderRegistry(Registries.BLOCK),
+        PlayBlockBoundSoundInstancePayload::block, ByteBufCodecs.INT,
+        PlayBlockBoundSoundInstancePayload::maxDurationTicks, ByteBufCodecs.FLOAT,
+        PlayBlockBoundSoundInstancePayload::volume, PlayBlockBoundSoundInstancePayload::new
     );
 
     public static void sendPlayBlockBoundSoundInstance(
-        SoundEvent soundEvent, @NotNull ServerLevel world, BlockPos pos, int maxDurationTicks) {
+        SoundEvent soundEvent, @NotNull ServerLevel world, BlockPos pos, int maxDurationTicks, float volume) {
         PacketDistributor.sendToPlayersTrackingChunk(
             world, new ChunkPos(pos), new PlayBlockBoundSoundInstancePayload(
                 soundEvent, pos, world.getBlockState(pos)
                                       .getBlock()
-                                      .builtInRegistryHolder(),
-                maxDurationTicks
+                                      .builtInRegistryHolder(), maxDurationTicks, volume
             )
         );
     }
@@ -49,10 +48,9 @@ public record PlayBlockBoundSoundInstancePayload(
     public static void sendCancelBlockBoundSoundInstance(@NotNull ServerLevel world, BlockPos pos) {
         PacketDistributor.sendToPlayersTrackingChunk(
             world, new ChunkPos(pos), new PlayBlockBoundSoundInstancePayload(
-                SoundEvents.EMPTY, pos,
-                world.getBlockState(pos)
-                     .getBlock()
-                     .builtInRegistryHolder(), -1
+                SoundEvents.EMPTY, pos, world.getBlockState(pos)
+                                             .getBlock()
+                                             .builtInRegistryHolder(), -1, 0
             )
         );
     }
@@ -62,7 +60,7 @@ public record PlayBlockBoundSoundInstancePayload(
             CraftingBlockSoundInstance.stopPlayingOnPos(payload.pos);
         } else {
             CraftingBlockSoundInstance.startSoundInstance(
-                payload.soundEvent, payload.pos, payload.block.value(), payload.maxDurationTicks);
+                payload.soundEvent, payload.pos, payload.block.value(), payload.maxDurationTicks, payload.volume);
         }
     }
 

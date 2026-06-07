@@ -169,7 +169,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
             if (blockEntity.craftingTime == 1) {
                 PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
                     PastelSounds.SPIRIT_INSTILLER_CRAFTING, (ServerLevel) world, blockEntity.worldPosition,
-                    Integer.MAX_VALUE
+                    Integer.MAX_VALUE, 1f
                 );
             } else if (blockEntity.craftingTime == blockEntity.craftingTimeTotal * 0.01
                        || blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.25)

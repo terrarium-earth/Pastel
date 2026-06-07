@@ -267,7 +267,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         if (craftingTime > 0 && !wasCrafting)
             PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
                 PastelSounds.ENCHANTER_WORKING,
-                (ServerLevel) level, worldPosition, Integer.MAX_VALUE
+                (ServerLevel) level, worldPosition, Integer.MAX_VALUE, 1f
             );
     }
 

@@ -1561,6 +1561,11 @@ public class PastelItems {
             "music_disc_divinity", () -> new Item(IS.of(1, Rarity.RARE)
                                                     .jukeboxPlayable(PastelJukeboxSongs.DIVINITY)), InkColors.GREEN
         ));
+    public static final DeferredItem<Item> MUSIC_DISC_MEMORIAL = register(
+        item(
+            "music_disc_memorial", () -> new Item(IS.of(1, Rarity.RARE)
+                                                    .jukeboxPlayable(PastelJukeboxSongs.MEMORIAL)), InkColors.GREEN
+        ));
 
     // Item Frames
     public static final DeferredItem<Item> PHANTOM_FRAME = register(

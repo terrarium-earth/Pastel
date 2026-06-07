@@ -29,6 +29,7 @@ public class ToolItemModels {
         PastelModelHelper.ITEM.simple(generators,PastelItems.MUSIC_DISC_DISCOVERY);
         PastelModelHelper.ITEM.simple(generators,PastelItems.MUSIC_DISC_CREDITS);
         PastelModelHelper.ITEM.simple(generators,PastelItems.MUSIC_DISC_DIVINITY);
+        PastelModelHelper.ITEM.parented(generators, PastelItems.MUSIC_DISC_MEMORIAL, PastelItems.MUSIC_DISC_DISCOVERY);
 
         PastelModelHelper.ITEM.simple(generators,PastelItems.INK_ASSORTMENT);
         PastelModelHelper.ITEM.parented(generators,PastelItems.CREATIVE_INK_ASSORTMENT,PastelItems.INK_ASSORTMENT);

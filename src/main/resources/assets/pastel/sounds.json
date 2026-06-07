@@ -514,6 +514,16 @@
     ]
   },
 
+  "music.memorial": {
+    "sounds": [
+      {
+        "name": "pastel:music/memory_of_a_visionary",
+        "stream": true,
+        "volume": 2.0
+      }
+    ]
+  },
+
   "music.imbrifer.black_langast": {
     "sounds": [
       {
@@ -782,7 +792,11 @@
   },
   "pedestal_crafting": {
     "sounds": [
-      "pastel:pedestal_crafting"
+      {
+        "name": "pastel:pedestal_crafting",
+        "volume": 2.0,
+        "stream": true
+      }
     ]
   },
   "pedestal_upgrade": {

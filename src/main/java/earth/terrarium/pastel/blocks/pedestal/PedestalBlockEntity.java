@@ -496,7 +496,7 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements Multib
 		if (active) {
 			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
 					PastelSounds.PEDESTAL_CRAFTING, (ServerLevel) getLevel(),
-					getBlockPos(), Integer.MAX_VALUE
+					getBlockPos(), Integer.MAX_VALUE, 16.0f
 			);
 		}
 		else {
