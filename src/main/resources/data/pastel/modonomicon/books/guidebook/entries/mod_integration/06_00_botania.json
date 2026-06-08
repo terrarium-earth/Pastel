@@ -90,18 +90,6 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "title": "book.pastel.guidebook.mod_integration.botania.page8.title",
-      "condition": {
-        "type": "modonomicon:advancement",
-        "advancement_id": "pastel:unlocks/equipment/resonant_pickaxe"
-      },
-      "item": {
-        "item": "botania:enchanted_soil"
-      },
-      "text": "book.pastel.guidebook.mod_integration.botania.page8.text"
-    },
-    {
-      "type": "modonomicon:spotlight",
       "title": "book.pastel.guidebook.potion_reagent",
       "condition": {
         "type": "modonomicon:advancement",

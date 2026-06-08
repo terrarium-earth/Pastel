@@ -4007,11 +4007,6 @@ public class PastelGuidebookLang {
             "Those elusive seeds I could only find in chests hidden across the world? Expensive - maybe not even " +
             "worth the hassle - but I finally found a way to reproduce them."
         );
-        provider.add(
-            "book.pastel.guidebook.mod_integration.botania.page8.text",
-            "I can finally harvest Enchanted Soil! [Resonance](entry://enchanting/enchantments/resonance) is the key."
-        );
-        provider.add("book.pastel.guidebook.mod_integration.botania.page8.title", "Enchanted Soil");
         provider.add("book.pastel.guidebook.mod_integration.byg.name", "Oh The Biomes You'll Go");
         provider.add("book.pastel.guidebook.mod_integration.chalk.name", "Chalk");
         provider.add(
