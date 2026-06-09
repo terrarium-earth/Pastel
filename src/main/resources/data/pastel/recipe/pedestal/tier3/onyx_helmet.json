@@ -22,5 +22,5 @@
     "id": "pastel:onyx_helmet",
     "count": 1
   },
-  "required_advancement": "pastel:midgame/build_advanced_pedestal_structure"
+  "required_advancement": "pastel:unlocks/equipment/onyx_helmet"
 }
