@@ -18,6 +18,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -75,6 +76,11 @@ public abstract class LiquidCrystalFluid extends PastelFluid {
                 SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false
             );
         }
+    }
+
+    @Override
+    public boolean canExtinguish(FluidState state, BlockGetter getter, BlockPos pos) {
+        return true;
     }
 
     @Override
