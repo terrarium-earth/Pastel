@@ -1248,7 +1248,7 @@ public class PastelGuidebookLang {
             "The ground is marred by great seams of brilliant green crystal, carving vast scars through the " +
             "landscape. Crystals of such size must have grown in isolation over unfathomable time, and they'd surely" +
             " be of use to me, but... any attempts to harvest them prove fruitless. I will need to find some way to" +
-            " ensure a **[#](b9bebe)Pure.** environment if I am to have any hope of collecting them intact."
+            " ensure a **[#](b9bebe)Pure[#]()** environment if I am to have any hope of collecting them intact."
         );
         provider.add(
             "book.pastel.guidebook.crystallarieum.page0.text",
