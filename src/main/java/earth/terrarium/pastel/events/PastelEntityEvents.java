@@ -3,7 +3,7 @@ package earth.terrarium.pastel.events;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.api.item.TickingEquipmentItem;
-import earth.terrarium.pastel.api.item.UnequipAwareItem;
+import earth.terrarium.pastel.api.item.EquipAwareItem;
 import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
 import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
@@ -269,8 +269,12 @@ public class PastelEntityEvents {
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
 
-        if (oldEquipment.getItem() instanceof UnequipAwareItem unequipAwareItem) {
-            unequipAwareItem.onUnequip(livingEntity, oldEquipment, equipmentSlot);
+        if (oldEquipment.getItem() instanceof EquipAwareItem equipAwareItem) {
+            equipAwareItem.onEquipChange(livingEntity, oldEquipment, equipmentSlot, true);
+        }
+
+        if (newEquipment.getItem() instanceof EquipAwareItem equipAwareItem) {
+            equipAwareItem.onEquipChange(livingEntity, newEquipment, equipmentSlot, false);
         }
 
         var oldInexorable = Ench.getLevel(

@@ -2,10 +2,13 @@ package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
+import earth.terrarium.pastel.api.item.EntityAttackAwareItem;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
+import earth.terrarium.pastel.attachments.PastelDataAttachments;
 import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
 import earth.terrarium.pastel.attachments.data.JeopardantBonusData;
 import earth.terrarium.pastel.attachments.data.LastKillData;
+import earth.terrarium.pastel.attachments.data.WhipFollowupStrikesAttachment;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.Support;
@@ -26,6 +29,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -72,6 +77,26 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::fuckWithWards);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vampirism);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelDamageEvents::electricDamage);
+        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::attackAware);
+        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::followupStrikes);
+    }
+
+    private static void followupStrikes(LivingDamageEvent.Post event) {
+        var source = event.getSource();
+        if(event.getEntity().hasData(WhipFollowupStrikesAttachment.ATTACHMENT)) return;
+        if(source.getEntity() == null
+           || source.getEntity().getWeaponItem() == null
+           || !source.getEntity().getWeaponItem().is(PastelItems.FOX_O_NINE_TAILS)) return;
+        // we're hitting something with the fox-o-nine-tails and our victim has no component. give them 8 more lashings, sire!
+        event.getEntity().setData(WhipFollowupStrikesAttachment.ATTACHMENT, 8);
+    }
+
+    private static void attackAware(LivingDamageEvent.Post event){
+        var attacker = event.getSource().getEntity();
+        var victim = event.getEntity();
+        if(attacker instanceof LivingEntity livingEntity && livingEntity.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof EntityAttackAwareItem item) {
+            item.onEntityDamage(livingEntity.getItemInHand(InteractionHand.MAIN_HAND), victim, livingEntity, event.getSource(), event.getNewDamage());
+        }
     }
 
     private static void electricDamage(LivingIncomingDamageEvent event) {

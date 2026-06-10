@@ -170,6 +170,18 @@
       "pastel:bident_hit_ground"
     ]
   },
+  "whip_fervor_expend": {
+    "subtitle": "pastel.subtitles.whip_fervor_expend",
+    "sounds": [
+      "pastel:bident_hit_ground"
+    ]
+  },
+  "whip_fervor_peak": {
+    "subtitle": "pastel.subtitles.whip_fervor_peak",
+    "sounds": [
+      "pastel:glass_shimmer"
+    ]
+  },
   "dark_stake_thrown": {
     "subtitle": "pastel.subtitles.dark_stake_thrown",
     "sounds": [

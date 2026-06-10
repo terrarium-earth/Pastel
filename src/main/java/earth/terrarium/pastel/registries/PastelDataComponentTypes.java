@@ -78,13 +78,10 @@ public class PastelDataComponentTypes {
     );
     public static final DataComponentType<ExchangingStaffComponent> EXCHANGING_STAFF = register(
         "exchanging_staff", builder -> builder.persistent(ExchangingStaffComponent.CODEC)
-                                           .networkSynchronized(ExchangingStaffComponent.STREAM_CODEC)
+                                              .networkSynchronized(ExchangingStaffComponent.STREAM_CODEC)
     );
     public static final DataComponentType<StoredBlockEntityComponent> STORED_BLOCK_ENTITY = register(
-        "stored_block_entity",
-        builder -> builder.persistent(
-            StoredBlockEntityComponent.CODEC)
-    );
+        "stored_block_entity", builder -> builder.persistent(StoredBlockEntityComponent.CODEC));
     public static final DataComponentType<ExtendedBundleComponent> EXTENDED_BUNDLE = register(
         "extended_bundle", builder -> builder.persistent(ExtendedBundleComponent.CODEC)
                                              .networkSynchronized(ExtendedBundleComponent.STREAM_CODEC)
@@ -202,6 +199,15 @@ public class PastelDataComponentTypes {
     public static final DataComponentType<PaintbrushComponent> PAINTBRUSH = register(
         "paintbrush", builder -> builder.persistent(PaintbrushComponent.CODEC)
                                         .networkSynchronized(PaintbrushComponent.STREAM_CODEC)
+    );
+
+    public static final DataComponentType<Integer> FERVOR = register(
+        "fervor", builder -> builder.persistent(Codec.INT)
+                                    .networkSynchronized(ByteBufCodecs.INT)
+    );
+    public static final DataComponentType<Boolean> FERVOR_RESET = register(
+        "fervor_reset", builder -> builder.persistent(Codec.BOOL)
+                                          .networkSynchronized(ByteBufCodecs.BOOL)
     );
 
     public static <T> DataComponentType<T> register(

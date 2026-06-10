@@ -559,6 +559,16 @@ public class PastelItems {
                                                                                                PastelToolMaterial.NECTAR.getUses())
         ), InkColors.PURPLE
     ));
+    public static final DeferredItem<VerdigrisLashItem> VERDIGRIS_LASH = register(item(
+        "verdigris_lash", () -> new VerdigrisLashItem(
+            PastelToolMaterial.VERDIGRIS, 2, -3, IS.of(1, Rarity.UNCOMMON).durability(PastelToolMaterial.VERDIGRIS.getUses())
+        ), InkColors.GREEN // it's actually _cerise_, but we don't have the stargazer colors yet
+    ));
+    public static final DeferredItem<FoxoNineTailsItem> FOX_O_NINE_TAILS = register(item(
+        "fox_o_nine_tails", () -> new FoxoNineTailsItem(
+            PastelToolMaterial.VERDIGRIS, 1, -3, IS.of(1, Rarity.EPIC).durability(PastelToolMaterial.NECTAR.getUses())
+        ), InkColors.PINK // it's even cerisier, but we don't have the stargazer colors yet
+    ));
 
     // Bedrock Armor
     public static final DeferredItem<BedrockArmorItem> BEDROCK_HELMET = register(item(

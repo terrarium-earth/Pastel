@@ -516,6 +516,8 @@ public class PastelItemGroups {
                                                                        ));
                                                                    entries.accept(PastelItems.KNOTTED_SWORD.get());
                                                                    entries.accept(PastelItems.NECTAR_LANCE.get());
+                                                                   entries.accept(PastelItems.VERDIGRIS_LASH.get());
+                                                                   entries.accept(PastelItems.FOX_O_NINE_TAILS.get());
 
                                                                    // CURIOS
                                                                    entries.accept(PastelItems.FANCIFUL_TUFF_RING.get());

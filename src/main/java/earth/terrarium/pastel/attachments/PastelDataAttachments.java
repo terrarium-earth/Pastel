@@ -26,6 +26,7 @@ public class PastelDataAttachments {
         REGISTER.register("citrine_jumps", () -> CitrineJumpsAttachment.ATTACHMENT);
         REGISTER.register("jump_cooldown", () -> JumpCooldownAttachment.ATTACHMENT);
         REGISTER.register("ring_of_consumption_equipped", () -> ConsumptionRingData.ATTACHMENT);
+        REGISTER.register("whip_victim", () -> WhipFollowupStrikesAttachment.ATTACHMENT);
         REGISTER.register(bus);
     }
 

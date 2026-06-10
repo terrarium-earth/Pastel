@@ -75,5 +75,8 @@ public class PastelDeathMessageLang {
         provider.add("death.attack.pastel_electric.item", "%2$s orders in perfect %3$s, shocks %1$s!");
         provider.add("death.attack.pastel_electric.player", "%1$s found %2$s quite shocking.");
         provider.add("death.attack.pastel_snapping_ivy", "%1$s was held back a bit");
+        provider.add("death.attack.pastel_whip", "%1$s succumbed to their lacerations.");
+        provider.add("death.attack.pastel_whip.item", "%2$s used %3$s to show %1$s that power is meaningless without purpose!");
+        provider.add("death.attack.pastel_whip.player", "%1$s couldn't handle the depths of %2$s's devotion.");
     }
 }

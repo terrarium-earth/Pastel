@@ -3,11 +3,10 @@ package earth.terrarium.pastel.items.armor;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.TickingEquipmentItem;
-import earth.terrarium.pastel.api.item.UnequipAwareItem;
+import earth.terrarium.pastel.api.item.EquipAwareItem;
 import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
-import earth.terrarium.pastel.mixin.client.LocalPlayerMixin;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.ChatFormatting;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem, UnequipAwareItem {
+public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem, EquipAwareItem {
 
     private static final AttributeModifier GEM_LEGGINGS_KB_RESIST = new AttributeModifier(
         PastelCommon.locate("gem_armor_kb_resist"), 0.5f, AttributeModifier.Operation.ADD_VALUE);
@@ -135,7 +134,8 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         if (type.equals(Type.LEGGINGS)) itemStack.hurtAndBreak(Math.round(amount), targetEntity, type.getSlot());
     }
 
-    public void onUnequip(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+    public void onEquipChange(LivingEntity entity, ItemStack stack, EquipmentSlot slot, boolean unequip) {
+        if(!unequip) return;
         if (type == Type.HELMET) {
             for (var equippedStack : entity.getAllSlots()) {
                 if (equippedStack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED))

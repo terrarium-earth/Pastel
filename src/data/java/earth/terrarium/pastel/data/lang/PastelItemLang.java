@@ -19,6 +19,7 @@ public class PastelItemLang {
         entry(PastelItems.BREWERS_HANDBOOK.getRegisteredName(), "Brewer's Handbook"),
         entry(PastelItems.CONSTRUCTORS_STAFF.getRegisteredName(), "Constructor's Staff"),
         entry(PastelItems.AETHER_GRACED_NECTAR_GLOVES.getRegisteredName(), "Aether-Graced Nectar Gloves"),
+        entry(PastelItems.FOX_O_NINE_TAILS.getRegisteredName(), "Fox o' Nine Tails"),
         entry(PastelItems.GLOVES_OF_DAWNS_GRASP.getRegisteredName(), "Gloves of Dawn's Grasp"),
         entry(PastelItems.GUIDEBOOK.getRegisteredName(), "Artist's Journal"),
         entry(PastelItems.HEARTSINGERS_REWARD.getRegisteredName(), "Heartsinger's Reward"),

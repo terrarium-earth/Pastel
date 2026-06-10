@@ -127,6 +127,8 @@ public class PastelClientEvents {
 
         slotEffect(PastelItems.KNOTTED_SWORD, e);
         slotEffect(PastelItems.NECTAR_LANCE, e);
+        slotEffect(PastelItems.VERDIGRIS_LASH, e);
+        slotEffect(PastelItems.FOX_O_NINE_TAILS, e);
         slotEffect(PastelItems.DRACONIC_TWINSWORD, e);
         slotEffect(PastelItems.DRAGON_TALON, e);
         slotEffect(PastelItems.DREAMFLAYER, e);
