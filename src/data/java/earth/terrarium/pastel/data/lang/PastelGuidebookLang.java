@@ -552,7 +552,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.brewers_handbook.page1.text",
             "Hayo! The current state of relations between the overworld and the deep is rather poor, and sadly it " +
-            "seems to only be getting worse, and there's not much I can do about it.\\\n\\\nSo I've have taken some " +
+            "seems to only be getting worse, and there's not much I can do about it.\\\n\\\nSo I've taken some " +
             "of my time to collect a bunch of brewing recipes from the surface, adapt them to use ingredients found" +
             " in our depths, and publish that as a gift to you all, in the hope that it will aid you."
         );
