@@ -215,7 +215,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
         if (fusionShrineBlockEntity.craftingTime == 1 && fusionShrineBlockEntity.craftingTimeTotal > 1) {
             PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
                 PastelSounds.FUSION_SHRINE_CRAFTING, (ServerLevel) world, fusionShrineBlockEntity.getBlockPos(),
-                fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime
+                fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime, 1f
             );
         }
 

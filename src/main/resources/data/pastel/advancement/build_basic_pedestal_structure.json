@@ -39,7 +39,10 @@
     }
   },
   "rewards": {
-    "experience": 100
+    "experience": 100,
+    "loot": [
+      "pastel:advancement_reward/adv_cmy"
+    ]
   },
   "requirements": [
     [

@@ -64,7 +64,7 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
     private final ItemAndExperienceEventQueue itemAndExperienceEventQueue;
     private final NonNullList<ItemReference> filterItems;
     private State state = State.CLOSED_INACTIVE;
-    private boolean isOpen, isFull, hasXPStorage;
+    private boolean isOpen, isFull, hasXPStorage, updateQueued;
     float storageTarget, storagePos, lastStorageTarget, capTarget, capPos, lastCapTarget, orbTarget, orbPos,
         lastOrbTarget, yawTarget, orbYaw, lastYawTarget;
     long interpTicks, interpLength = 1, age, storedXP, maxStoredXP;
@@ -111,6 +111,10 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
             chest.itemAndExperienceEventQueue.tick(world);
             if (world.getGameTime() % 80 == 0 && !PastelChestBlock.isChestBlocked(world, pos)) {
                 searchForNearbyEntities(chest);
+                if(chest.updateQueued){
+                    world.updateNeighborsAt(pos, state.getBlock());
+                    chest.updateQueued = false;
+                }
             }
         }
     }
@@ -326,6 +330,7 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
                     );
                     itemEntity.setItem(remainingStack);
                 }
+                this.updateQueued = true;
             }
         }
     }

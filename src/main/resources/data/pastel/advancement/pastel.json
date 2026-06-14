@@ -13,7 +13,7 @@
   },
   "rewards": {
     "loot": [
-      "pastel:advancement_reward/adv_spectrum"
+      "pastel:advancement_reward/adv_pastel"
     ]
   },
   "criteria": {

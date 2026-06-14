@@ -44,8 +44,8 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.pylons.name", "Gemstone Pylons");
         provider.add(
             "book.pastel.guidebook.pylons.page0.text",
-            "Gemstone geodes have this aura bout them that is hard to put into words. Gazing up at the crystals, " +
-            "shimmering in all shades of their vibrant color... it is stunning\\\n\\\nThese pylons should hopefully " +
+            "Gemstone geodes have this aura about them that is hard to put into words. Gazing up at the crystals, " +
+            "shimmering in all shades of their vibrant color... it is stunning.\\\n\\\nThese pylons should hopefully " +
             "capture a bit of that awe. Though not as imposing as the geodes, they still stand tall like beacons of" +
             " color."
         );
@@ -90,7 +90,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.amaranth.packed_mud.text", "Amaranth is just as suitable as wheat for firming mud.");
         provider.add(
             "book.pastel.guidebook.another_roll.page0.text",
-            "Amount-based drops, such as when using [#](449900)Fortune[#]() to mine ores, [#](449900)Looting[#]() to " +
+            "Amount-based drops, such as when using [#](449900)Fortune[#]() to mine ores, or [#](449900)Looting[#]() to " +
             "kill mobs, resulted in a much higher amount.\\\nEach level of Another Roll increases the chances of " +
             "getting the highest possible amount."
         );
@@ -150,7 +150,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.azalea_tea.page0.text",
             "That [Nightdew's](entry://general/nightdew_sprout) essences seem great for getting more sleep in. " +
-            "Steeping them with azalea flowers should results in a sweet smelling infusion ripe with those effects" +
+            "Steeping them with azalea flowers should result in a sweet smelling infusion ripe with those effects" +
             ".\\\n\\\n*There is something about the day that just makes me unable to get any sleep, this should fix" +
             " that.*"
         );
@@ -264,7 +264,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.bedrock_dust.page1.text",
-            "Note to myself: Should I be reading my old notes here while some of [that stuff](entry://general/ruin) " +
+            "Note to self: Should I be reading my old notes here while some of [that stuff](entry://general/ruin) " +
             "is still out there, I should change that as soon as possible, or I *might* regret it.\\\n\\\nLuckily " +
             "I've already invented a [suitable counteragent](entry://general/decay_away)."
         );
@@ -412,7 +412,7 @@ public class PastelGuidebookLang {
             "Like a caveman, I've always had to run around illuminating caves or closing their unsightly entrances in" +
             " my immediate vicinity. To relieve myself of this task I took inspiration from the self-replicating " +
             "abilities of [Fading](entry://general/fading) and developed the Block Flooder.\\\nIf I throw one into " +
-            "a narrow path, pond or ravine, it will fill up with blocks - in 5%% of the time the result even looks" +
+            "a narrow path, pond or ravine, it will fill up with blocks - 5%% of the time the result even looks" +
             " acceptable!"
         );
         provider.add(
@@ -456,7 +456,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.blood_orchid_petal.page0.text",
             "These leaves seem to belong to a flower I have never seen before. Did it bloom here once? Was it grown " +
             "by those who came before me? Perhaps a souvenir from a world I do not even know exists?\\\nYet it looks" +
-            " like as if it was plucked only five minutes ago."
+            " as if it was plucked only five minutes ago."
         );
         provider.add(
             "book.pastel.guidebook.blood_orchid_petal.page1.text",
@@ -552,7 +552,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.brewers_handbook.page1.text",
             "Hayo! The current state of relations between the overworld and the deep is rather poor, and sadly it " +
-            "seems to only be getting worse, and there's not much I can do about it.\\\n\\\nSo I've have taken some " +
+            "seems to only be getting worse, and there's not much I can do about it.\\\n\\\nSo I've taken some " +
             "of my time to collect a bunch of brewing recipes from the surface, adapt them to use ingredients found" +
             " in our depths, and publish that as a gift to you all, in the hope that it will aid you."
         );
@@ -578,7 +578,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.brewers_handbook.page15.text",
             " ...Asteras\\\nI hope that this message will reach you. The state of things has only worsened since we " +
             "last spoke, the nobles are still targeting you, but more worryingly.... They are preparing for war, it " +
-            "is clear by now. They want the Bloomstone, and they are willing to sacrifice a lot for it. Things are " +
+            "is clear by now. They want the Work, and they are willing to sacrifice a lot for it. Things are " +
             "going to get bad, please stay safe.\\\n        *...I miss you.*"
         );
         provider.add("book.pastel.guidebook.brewers_handbook.page15.title", "[Hidden Page 2]");
@@ -607,7 +607,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.brewers_handbook.page6.text",
-            "\\\nThis not mead, you could not legally call it mead, I am obligated to clarify it is not mead" +
+            "\\\nThis is not mead, you could not legally call it mead, I am obligated to clarify it is not mead" +
             ".\\\n\\\n\\\n So this mead is a bit of a favorite recipe of mine, it took a while to figure out how to " +
             "adapt honey wine for a place that has no bees, but trust me, this genuinely outdoes the real deal."
         );
@@ -645,7 +645,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.poisoners_handbook.page3.text",
-            "Ever since he took me in as his disciple, I've kept this journal - jutting down important lessons and " +
+            "Ever since he took me in as his disciple, I've kept this journal - jotting down important lessons and " +
             "writing about every notable thing that happened in our shared journey... but now that he has passed, I " +
             "have decided to dedicate this handbook to him.\\\n\\\n*Forever will I remember, but never will I speak" +
             " it*\\\n*He wished for his name to remain hidden, and I will honor that until my own death.*\\\n**~ " +
@@ -722,7 +722,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.poisoners_handbook.page14.text",
             "Panacea and poison are much more alike than what most would think. Often it is simply a matter of dose" +
             ".\\\nWhile I would rather it not be this way, the rituals we must partake in often demand we straddle " +
-            "that line.\\\n\\\nThis nectar-kissed extract of jadeite is a common reagent used in annointing and, " +
+            "that line.\\\n\\\nThis nectar-kissed extract of jadeite is a common reagent used in anointing and, " +
             "for the especially dedicated folk, consumption."
         );
         provider.add("book.pastel.guidebook.poisoners_handbook.page14.title", "A Precarious Gambit");
@@ -795,7 +795,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.poisoners_handbook.page25.text",
             "*This recipe is a personal creation of mine. It uses the soporific qualities of burgeons to calm the " +
-            "spiritis of the extracts, stabilizing them and allowing them to be stored in a pure form.*"
+            "spirits of the extracts, stabilizing them and allowing them to be stored in a pure form.*"
         );
         provider.add("book.pastel.guidebook.poisoners_handbook.page.text", "");
         provider.add("book.pastel.guidebook.brown_is_weird.name", "Brown Pigment?");
@@ -858,8 +858,8 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.category.mod_integration.name", "Mod Integration");
         provider.add(
             "book.pastel.guidebook.category.mod_integration.description",
-            "In my free time, I also enjoy other activities from time to time!\\\n\\\nTransfer knowledge is a great " +
-            "thing."
+            "In my free time, I also enjoy other activities from time to time!\\\n\\\nThe transfer of knowledge is " +
+            "a great thing."
         );
         provider.add("book.pastel.guidebook.category.pastel_network.name", "Pastel Network");
         provider.add(
@@ -911,7 +911,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.cinderhearth.page4.text",
             "[Upgrades](entry://magical_blocks/upgrades) placed on the [#](bb00bb)Chiseled Blocks[#]() require an " +
-            "additional type of [Ink](entry://ink/ink), depending on the type of Upgrade. The higher the upgrades " +
+            "additional type of [Ink](entry://ink/ink), depending on the type of Upgrade. The higher the upgrade's " +
             "level, the higher the consumption."
         );
         provider.add("book.pastel.guidebook.cinderhearth.page4.title", "Upgrades");
@@ -1032,8 +1032,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.colored_trees.page1.text",
             "The recipes require specific combination of [Gemstone Powder](entry://general/gemstone_powder) per " +
-            "color, corresponding to the [amount I noted to mix it](entry://general/color_mixing_cmy).\\\n\\\nThe " +
-            "leaves will need to be broken by hand."
+            "color, corresponding to the [amount I noted to mix it](entry://general/color_mixing_cmy)."
         );
         provider.add(
             "book.pastel.guidebook.colored_trees.crafting_colored_saplings.title", "Creating a Colored Sapling");
@@ -1259,7 +1258,7 @@ public class PastelGuidebookLang {
             "The ground is marred by great seams of brilliant green crystal, carving vast scars through the " +
             "landscape. Crystals of such size must have grown in isolation over unfathomable time, and they'd surely" +
             " be of use to me, but... any attempts to harvest them prove fruitless. I will need to find some way to" +
-            " ensure a **[#](b9bebe)Pure.** environment if I am to have any hope of collecting them intact."
+            " ensure a **[#](b9bebe)Pure[#]()** environment if I am to have any hope of collecting them intact."
         );
         provider.add(
             "book.pastel.guidebook.crystallarieum.page0.text",
@@ -1347,7 +1346,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.delving_deeper_down.page1.text",
             "A place that has not seen a single ray of sunlight for eons. A place where the sun never shines. A place" +
-            " shrouded in eternal darkness.\\\n\\\nWhat's waiting to be discovered by me down there?"
+            " shrouded in eternal darkness.\\\n\\\nWhat's waiting for me to discover down there?"
         );
         provider.add("book.pastel.guidebook.delving_deeper_down.page1.title", "Imbrifer");
         provider.add(
@@ -1384,7 +1383,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.doomblooms.page0.text",
             "This plant has a rather... unusual way of distributing its seeds and scaring off predators: Its flower " +
             "contains a capsule of explosive gas that pops, when disturbed.\\\n\\\nIf I am not careful around this " +
-            "flower, for example if I tough it too roughly, I risk turning my surroundings into a fiery crater."
+            "flower, for example if I touch it too roughly, I risk turning my surroundings into a fiery crater."
         );
         provider.add(
             "book.pastel.guidebook.doomblooms.page1.text",
@@ -1957,7 +1956,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.freigeist.page0.text",
             "As the first drop touched my lips, it already filled my body with immense might. Just the memory of it " +
             "makes my hand *tremble* with tension again. That's no good.\\\nAnd yet I've never felt more powerful " +
-            "and alive than I did in this very moment.\\\n\\\nIs it really worth emptying that vial? Should I die " +
+            "and alive than I did in that very moment.\\\n\\\nIs it really worth emptying that vial? Should I die " +
             "against all odds, the price will be immense, I can feel it."
         );
         provider.add(
@@ -2111,7 +2110,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.gemstone_runes.name", "Gemstone Chiseled Blocks");
         provider.add(
             "book.pastel.guidebook.gemstone_runes.page0.text",
-            "The [#](bb00bb)Calcite[#]() and [#](bb00bb)Basalt[#]() keep the gems energies at bay as long as they " +
+            "The [#](bb00bb)Calcite[#]() and [#](bb00bb)Basalt[#]() keep the gems' energies at bay as long as they " +
             "completely enclose the geode, that much is certain. Sometimes, however, the energy that has built up " +
             "over the centuries seems to be so strong that it literally tears a hole into the geode.\\\n\\\nI " +
             "recreated the whole thing in miniature."
@@ -2231,7 +2230,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.glass_crest_tools.page4.text",
-            "The result of combining a Bident and a Pocket Thunderstorm. I can hurl myself into the air and damage " +
+            "The result of combining a Bident and a pocket thunderstorm. I can hurl myself into the air and damage " +
             "everything in my path, even in the driest of deserts! ...as long as I don't run out of Ink. This " +
             "ability scales with the level of [#](449900)Riptide[#](). *Flying isn't the problem. Landing is.*"
         );
@@ -2430,7 +2429,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.ideas.fading.page1.text",
             "They could enjoy the same food as me! How about organic blocks like Pumpkins or Melons - maybe even " +
             "Leaves! (not to say I enjoy these particularly much). I should place one of those next to a Block of " +
-            "Fading and wait a while.\\\nI am interested what kind of metabolic produce they would yield."
+            "Fading and wait a while.\\\nI am interested in what kind of metabolic produce they would yield."
         );
         provider.add("book.pastel.guidebook.ideas.failing.name", "Experiment #2");
         provider.add(
@@ -2450,8 +2449,8 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.ideas.malachite.page1.text",
-            "Malachite is found in large quantities in the crystal gardens, but requires a **[#](b9bebe)Pure** block " +
-            "placed nearby, or a tool infused with **[#](b9bebe)Purity**, to harvest."
+            "Malachite is found in large quantities in the crystal gardens, but requires a **[#](b9bebe)Pure[#]()** block " +
+            "placed nearby, or a tool infused with **[#](b9bebe)Purity[#]()**, to harvest."
         );
         provider.add(
             "book.pastel.guidebook.ideas.mermaids_gems.page0.text",
@@ -2461,8 +2460,8 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.ideas.mermaids_gems.page1.text",
-            "Not The source of these gem-like seedlings is a coral-like plant that grows in small groups on the " +
-            "seabed, hard to differenciate from sea grass at first. As with most plants, I can Bone Meal it, until " +
+            "The source of these gem-like seedlings is a coral-like plant that grows in small groups on the " +
+            "seabed, hard to differentiate from sea grass at first. As with most plants, I can Bone Meal it, until " +
             "it releases its precious treasure. With that knowledge up my sleeve after, I will be able to see the " +
             "plant for what it is more clearly."
         );
@@ -2512,7 +2511,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.ideas.paltaeria_gem.page1.text",
-            "Paltaeria is far too fragile to harvest intacts gems from normally, but Resonance should do the trick."
+            "Paltaeria is far too fragile to harvest intact gems from normally, but Resonance should do the trick."
         );
         provider.add("book.pastel.guidebook.ideas.preservation_ruins.name", "3 Structures");
         provider.add(
@@ -2557,8 +2556,8 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.ideas.radiating_ender.page1.text",
             "Some Endermen appear to carry blocks that could very well be small relics of the End itself. At first I " +
-            "thought it was Cobblestone and it very much looks like one placed down, but if I could get one by " +
-            "killing an Enderman while it is still carrying it, I can get a hold of one. Endermen holding these " +
+            "thought it was Cobblestone and it very much looks like that placed down, but if I could get one by " +
+            "killing an Enderman while it is still carrying it, I can get ahold of one. Endermen holding these " +
             "blocks can also be found in the End, albeit more rarely."
         );
         provider.add(
@@ -2569,14 +2568,14 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.ideas.resonance_shards.page1.text",
             "Hummingstones, part of crystal formations in [Crystal Gardens](entry://dimension/crystal_gardens), begin" +
-            " to vibrate when disturbed, causing other nearby Hummingstones in their vicinity vibrate as well. The " +
+            " to vibrate when disturbed, causing other nearby Hummingstones in their vicinity to vibrate as well. The " +
             "more there are, the stronger the echo seems to be."
         );
         provider.add(
             "book.pastel.guidebook.ideas.resonant_lily.page0.text",
             "In [Crystal Gardens](entry://dimension/crystal_gardens), flowers that grow near [Liquid Crystal]" +
             "(entry://general/liquid_crystal) have strange characteristics. Has their proximity to the liquid " +
-            "changed them?."
+            "changed them?"
         );
         provider.add(
             "book.pastel.guidebook.ideas.resonant_lily.page1.text",
@@ -2592,7 +2591,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.ideas.ruin.page1.text",
             "What could be more resilient than the unbreakable Bedrock floor itself? Better have some Decay Away up " +
-            "my sleeve a backup plan in case things get out of hand."
+            "my sleeve as a backup plan in case things get out of hand."
         );
         provider.add(
             "book.pastel.guidebook.ideas.shimmerstone.page0.text",
@@ -2604,7 +2603,7 @@ public class PastelGuidebookLang {
             "It generates in large deposits in all biomes in the middle and upper layers of the Overworld. It is most" +
             " commonly found exposed in mountains."
         );
-        provider.add("book.pastel.guidebook.ideas.small_clue", "An obervation");
+        provider.add("book.pastel.guidebook.ideas.small_clue", "An observation");
         provider.add(
             "book.pastel.guidebook.ideas.stargazing.page0.text",
             "I saw a Shooting Star at night not too far from me! It was beautiful. Having something to help me see " +
@@ -2623,12 +2622,12 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.ideas.storm_stones.page1.text",
-            "There was a strange occurence at the place lightning struck. There even is an easy way to focus " +
+            "There was a strange occurrence at the place lightning struck. There even is an easy way to focus " +
             "lightning on a specific location, to make reproducing that phenomenon even more efficient."
         );
         provider.add(
             "book.pastel.guidebook.ideas.stratine.page0.text",
-            "Some parts of Netherrack struck me more red than others."
+            "Some parts of Netherrack struck me as more red than others."
         );
         provider.add(
             "book.pastel.guidebook.ideas.stratine.page1.text",
@@ -2662,7 +2661,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.howling_spires.page0.text",
-            "Silvered fog hides the land in a veil of white; these wind hewn caves are icy, but there is no snow in " +
+            "Silvered fog hides the land in a veil of white; these wind-hewn caves are icy, but there is no snow in " +
             "this place."
         );
         provider.add(
@@ -2752,7 +2751,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.imbrifer_cookbook.page0.title", "Imbrifer Fine Dining");
         provider.add(
             "book.pastel.guidebook.imbrifer_cookbook.page1.text",
-            "Welcome. Lets not get caught up with introductions - you're here because you want to learn how to cook, " +
+            "Welcome. Let's not get caught up with introductions - you're here because you want to learn how to cook, " +
             "I can teach you. I studied in the Meriloux Culinary College, the finest culinary institution in the " +
             "deep; I trained under the mentorship of Imperial Chef Aeverstrone, catering for the [#](ff3d71)scarlet" +
             " moon bloodline[#](); I, with a team of my own apprentices, brought Imbrifer its first full-lotus " +
@@ -2785,7 +2784,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.imbrifer_cookbook.page4.text",
             "\\\nBagnun is a culinary school classic. A heavily spiced, luxurious soup cut by a dollop of fresh " +
             "cream; the contrast of scarlet, peppery soup and refreshing pearly cream makes a feast for the eyes and" +
-            " tongue alike. There was a woman I used to know of melochites. She loved a soup not too dissimilar to " +
+            " tongue alike. There was a woman I used to know of Melochites. She loved a soup not too dissimilar to " +
             "this one. We used to be good friends long ago, she called me egocentric."
         );
         provider.add("book.pastel.guidebook.imbrifer_cookbook.page4.title", "Melancholic Bisque");
@@ -2838,7 +2837,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.imperial_cookbook.page10.text",
             "\\\nAh, wine, what a diverse and vibrant world. This recipe predates me - I know, it may surprise you to" +
-            " hear that there are things older than me, heh - it's a sort of desert wine, popular in my court and " +
+            " hear that there are things older than me, heh - it's a sort of dessert wine, popular in my court and " +
             "used in many recipes you may have seen.\\\n\\\nI'll tell you, go easy on it, this stuff hits a lot " +
             "harder than you'd expect."
         );
@@ -2862,7 +2861,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.imperial_cookbook.page4.text",
             "\\\nThis dish of lizard meat braised in wine and petals is a delicacy, and one that I would not blame " +
-            "you if you got it wrong the first 2 or 20 times you cooked it. To this day it remains one of the " +
+            "you if you got it wrong the first 2 or 20 times you cooked it. To this day it remains one of the more " +
             "difficult dishes I cook regularly, it is a protracted process involving many delicate ingredients. But" +
             " the result is something truly wonderful."
         );
@@ -2963,7 +2962,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.inexorable.page0.text",
             "I've come a long way and there are few things that can still stop me, except for the Ocean Temples with " +
-            "mining fatigue, slowness, mining underwater, when I am flying the air and other adverse conditions.." +
+            "mining fatigue, slowness, mining underwater, when I am flying in the air and other adverse conditions.." +
             ".\\\n\\\n*Hm, written out like this, that was a bit more than expected*."
         );
         provider.add(
@@ -3152,7 +3151,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.inventory_insertion.page0.text",
             "If I got a [#](bb00bb)Dirt Block[#]() whenever I mined an ore and it fell right into [#](bb00bb)Lava[#]" +
             "(), I'd have a whole lot of [#](bb00bb)Dirt[#]().\\\nNo idea what I would do with that much, to be " +
-            "honest. Give it to a friend who has just arrived here and needs shelter on his first " +
+            "honest. Give it to a friend who has just arrived here and needs shelter on their first " +
             "night?\\\n\\\nAnyway, the dropping stuff into [#](bb00bb)Lava[#]() thing has to stop. I haven't " +
             "forgotten about you, [#](bb00bb)Ghast Tears[#]()."
         );
@@ -3166,7 +3165,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.item_bowl.page0.text",
             "There's always something I forget when I leave my base... perhaps placing it in this decorative bowl " +
-            "will serve me as a good reminder?\\\n*Probably not*\\\n\\\nI made both [#](bb00bb)Basalt[#]() and [#]" +
+            "will serve me as a good reminder?\\\n*Probably not.*\\\n\\\nI made both [#](bb00bb)Basalt[#]() and [#]" +
             "(bb00bb)Calcite[#]() variants."
         );
         provider.add(
@@ -3258,12 +3257,12 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.jadeite.page0.text",
             "Imposing vines hang from the high ceiling, breaking the darkness with their light. They are very tasty " +
-            "and can be used as [Potion Reagent](entry://brewing/potion_workshop_reagents)."
+            "and can be used as a [Potion Reagent](entry://brewing/potion_workshop_reagents)."
         );
         provider.add("book.pastel.guidebook.jadeite.page0.title", "Jadeite Blossoms");
         provider.add(
             "book.pastel.guidebook.jadeite.page1.text",
-            "They are very tasty and can be used as [Potion Reagent](entry://brewing/potion_workshop_reagents)."
+            "They are very tasty and can be used as a [Potion Reagent](entry://brewing/potion_workshop_reagents)."
         );
         provider.add("book.pastel.guidebook.jadeite.page1.title", "Jadeite Blocks");
         provider.add("book.pastel.guidebook.jadeite.page2.title", "Jadeite Carpet");
@@ -3376,7 +3375,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.lava_sponge.page2.text",
-            "The Lava Sponge can be used as highly efficient fuel in the [Furnaces](item://minecraft:furnace), drying" +
+            "The Lava Sponge can be used as highly efficient fuel in [Furnaces](item://minecraft:furnace), drying" +
             " in the process."
         );
         provider.add("book.pastel.guidebook.lava_sponge.page2.title", "Furnace Fuel");
@@ -3695,8 +3694,8 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.mermaids_brush.page0.title", "Mermaid's Brushes");
         provider.add(
             "book.pastel.guidebook.mermaids_brush.page1.text",
-            "These seeds can be planted to grow another plant.\\\n\\\nMermaid's Gems have a strong bond with water - " +
-            "So much so, that when I crack one open, water just comes rushing out.\\\n\\\n*Much more convenient than" +
+            "These seeds can be planted to grow another Brush.\\\n\\\nMermaid's Gems have a strong bond with water - " +
+            "so much so, that when I crack one open, water just comes rushing out.\\\n\\\n*Much more convenient than" +
             " lugging heavy buckets filled to the brim with water around...*\\\n*Where does the water come from?*"
         );
         provider.add("book.pastel.guidebook.mermaids_brush.page1.title", "Mermaid's Gems");
@@ -3731,7 +3730,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.midnight_aberration.page1.text",
-            "While the chaos that ensued was *definitely* not the result I craved for, the result does indeed hold " +
+            "While the chaos that ensued was *definitely* not the result I craved, the result does indeed hold " +
             "immense power.\\\nSo much so that it will crumble to dust if not used quickly.\\\n\\\nAnd then there is" +
             " that aggressive blackish fluid that manifested in the process. Because of its color I named it " +
             "[Midnight Solution](entry://general/midnight_solution)."
@@ -3833,7 +3832,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.mod_integration.ae2.page3.text",
             "Tools enchanted with [Resonance](entry://enchanting/enchantments/resonance) are able to harvest [#]" +
-            "(bb00bb)Budding Quartz[#](), they even retain their *flawless* state."
+            "(bb00bb)Budding Quartz[#](), even retaining their *flawless* state."
         );
         provider.add("book.pastel.guidebook.mod_integration.ae2.page3.title", "Moving Budding Quartz");
         provider.add(
@@ -3984,7 +3983,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.mod_integration.botania.page0.text",
             "I found an abundance of colorful flowers growing in small patches in forests and plains! What's up with " +
-            "those? Definitely worth a look tinkering with them and train my brown thumb."
+            "those? Definitely worth a look tinkering with them and training my green thumb."
         );
         provider.add(
             "book.pastel.guidebook.mod_integration.botania.page1.text",
@@ -4000,7 +3999,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.mod_integration.botania.page2.title", "Ink from Petals");
         provider.add(
             "book.pastel.guidebook.mod_integration.botania.page20.text",
-            "Constructors and Exchanging Staffs are able to pull blocks out of my Black Hole Talisman."
+            "My Constructor's and Exchanging Staffs are able to pull blocks out of a Black Hole Talisman."
         );
         provider.add("book.pastel.guidebook.mod_integration.botania.page20.title", "Providing Building Blocks");
         provider.add(
@@ -4028,11 +4027,6 @@ public class PastelGuidebookLang {
             "Those elusive seeds I could only find in chests hidden across the world? Expensive - maybe not even " +
             "worth the hassle - but I finally found a way to reproduce them."
         );
-        provider.add(
-            "book.pastel.guidebook.mod_integration.botania.page8.text",
-            "I can finally harvest Enchanted Soil! [Resonance](entry://enchanting/enchantments/resonance) is the key."
-        );
-        provider.add("book.pastel.guidebook.mod_integration.botania.page8.title", "Enchanted Soil");
         provider.add("book.pastel.guidebook.mod_integration.byg.name", "Oh The Biomes You'll Go");
         provider.add("book.pastel.guidebook.mod_integration.chalk.name", "Chalk");
         provider.add(
@@ -4132,7 +4126,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.mod_integration.dimdoors.page0.text",
             "I was just wandering around, looking for geodes *again*, not having the greatest time. But then I " +
             "stumbled over a... star fissure... rift... whatever I will be calling it.\\\n\\\nYou know how the " +
-            "saying goes: Of one door closes..."
+            "saying goes: If one door closes..."
         );
         provider.add(
             "book.pastel.guidebook.mod_integration.dimdoors.altered_fabric_resonance.title", "The Finest Touch");
@@ -4388,7 +4382,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.mod_integration.paginatedadvancements.page1.text",
-            "Mark the start and end of an advancement tree: important milestones in my journey."
+            "Marks the start and end of an advancement tree: important milestones in my journey."
         );
         provider.add("book.pastel.guidebook.mod_integration.paginatedadvancements.page1.title", "Milestones");
         provider.add(
@@ -4586,7 +4580,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.aether_vestiges.page0.text",
             "Words leave me every time I look at this. I wish I could write more but...\\\n\\\nEvery time I look at " +
-            "this I loose track of time and space; my head pounds as if my brain were a trapped rat, trying to " +
+            "this I lose track of time and space; my head pounds as if my brain were a trapped rat, trying to " +
             "escape from certain doom. An overwhelming sense of dread creeps up from my heart and up my throat, it " +
             "strangles and chokes me until I tear up."
         );
@@ -5010,7 +5004,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.pedestal_upgrade_moonstone.name", "Moonstone Pedestal");
         provider.add(
             "book.pastel.guidebook.pedestal_upgrade_moonstone.page0.text",
-            "I can upgrade my [Pigment Pedestal](entry://general/pedestal) by using a [Moonstone Shard]" +
+            "I can upgrade my [Pigment Pedestal](entry://general/pedestal) by using [Moonstone Shards]" +
             "(entry://general/shards@moonstone)."
         );
         provider.add(
@@ -5027,7 +5021,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.pedestal_upgrade_moonstone_2.page0.text",
             "My latest structure feels... lacking. And now I know exactly why: more [#](b9bebe)Moonstone[#]()! The " +
-            "tricky part: for me being able to create [#](bb00bb)Moonstone Chiseled Blocks[#]() would require me to " +
+            "tricky part is being able to create [#](bb00bb)Moonstone Chiseled Blocks[#]() would require me to " +
             "use the full capabilities of my [#](bb00bb)Moonstone Pedestal[#]() already, but without the finished " +
             "structure I can't use Moonstone Powder yet.\\\n*Could there be a way around this? A kickstart, if you" +
             " will?*"
@@ -5042,7 +5036,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.pedestal_upgrade_onyx.name", "Pedestal Onyx Upgrade");
         provider.add(
             "book.pastel.guidebook.pedestal_upgrade_onyx.page0.text",
-            "I can upgrade my [Pigment Pedestal](entry://general/pedestal) by using an [Onyx Shard]" +
+            "I can upgrade my [Pigment Pedestal](entry://general/pedestal) by using [Onyx Shards]" +
             "(entry://general/shards@onyx) to further increase its magical power."
         );
         provider.add("book.pastel.guidebook.pedestal_upgrade_onyx.page0.title", "Onyx Variant");
@@ -5091,7 +5085,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.phantom_frame.page0.text",
             "I wanted to display my most precious possessions on my walls and so far, I've always used item frames to" +
-            " do this.\\\n\\\nBut some of my exhibitions looked better if you don't see the frame, so here we are!"
+            " do this.\\\n\\\nBut some of my exhibitions would look better if you don't see the frame, so here we are!"
         );
         provider.add("book.pastel.guidebook.phantom_frame.page0.title", "Phantom Frames");
         provider.add(
@@ -5131,85 +5125,113 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.pigment.page1.text", "A hypothetical list.");
         provider.add(
             "book.pastel.guidebook.pigment.page10.text",
-            "This juicy lime almost smells like a warm spring morning. Or is it just my imagination?\\\n\\\n[#]" +
-            "(98ff37)Lime[#]() represents *Happiness* and *Fertility*."
+            "Bright and contagious, lime is abuzz with life. It yearns for others and it yearns for itself, an " +
+            "ambitious thing that always wants to be more. It spreads with such reckless abandon that it will often " +
+            "suffocate in its own desire.\\\n\\\n[#]" +
+            "(98ff37)Lime[#]() represents *[#](98ff37)GROWTH[#]()*, *Fertility*, *Kinship*, and *Ecstasy*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page11.text",
-            "Soft magenta always puts me in a calm and contented, almost serene mood.\\\n\\\n[#](ff4ff6)Magenta[#]() " +
-            "represents *Time*, *Kindness* and *Tolerance*."
+            "The flow of time. A waiting, marching thing; expectant yet impatient, magenta marks the path of entropy " +
+            "and the flow of all things unto themselves. The pursuit at the root of the world, playing metronome to " +
+            "all.\\\n\\\n[#](ff4ff6)Magenta[#]() represents *[#](ff4ff6)TIME[#]()*, *Flux*, *Procession* and *Longing*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page12.text",
-            "This orange color reminds me of autumn. Makes me feel a bit like sitting in a comfy armchair in front of" +
-            " a fireplace.\\\n\\\n[#](f97b2d)Orange[#]() represents *Warmth* and *Comfort*."
+            "A scorching color, burning bright with defiance. It incandesces with wayward light, burning the world "+
+            "down. But from cinders and ash new things can be born, fates can be reforged." +
+            "\\\n\\\n[#](f97b2d)Orange[#]() represents *[#](f97b2d)ARDOR[#]()*, *Heat*, *Light*, and *Revolution*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page13.text",
-            "This bright, vibrant cotton candy pink makes me beam with joy.\\\n\\\n[#](ff9fc6)Pink[#]() represents " +
-            "*Health* and *Admiration*."
+            "Neither the most intense nor the most powerful, this is a gentle color. But it is a color rich with hope "+
+            "and promise, it wants to make things better, it wants to return what was lost. But it is ultimately " +
+            "naive, nothing more than a small, wishful pink.\\\n\\\n[#](ff9fc6)Pink[#]() represents " +
+            "*[#](ff9fc6)RETURN[#]()*, *Hope*, *Healing*, and *Innocence*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page14.text",
-            "This sight gets my mind going. It not only stimulates my thirst for knowledge, but also sparks creative " +
-            "ideas.\\\n\\\n[#](802bc4)Purple[#]() represents *Wisdom* and *Creativity*."
+            "The color of the derelict and recusant. It is a delightful yet languid tone, reserved... concealed. It " +
+            "sings a song of velvet that lulls the viewer and obscures its true nature. Some deem it holy, others "+
+            "a bad omen.\\\n\\\n" +
+            "[#](802bc4)Purple[#]() represents *[#](802bc4)DREAMS[#]()*, *Poison*, *Wisdom*, and *Enlightenment*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page15.text",
-            "I feel the urge and desire to create something beautiful.\\\n\\\n[#](f12a34)Red[#]() represents " +
-            "*Passion* and *Willpower*."
+            "Strength, uncouth and graceless on its own, yet quite prone to blending and compounding. The color is " +
+            "ultimately little more than a mirror - it emboldens and makes bare... but all the furies that it paints " +
+            "are yours alone.\\\n\\\n[#](f12a34)Red[#]() represents " +
+            "*[#](f12a34)ENMITY[#]()*, *Willpower*, *Obsession*, and *Regret*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page16.text",
-            "I cannot put it into words exactly. Staggering, overwhelming, but in a good way. There is something " +
-            "unspeakably wonderful about this Pigment.\\\n\\\n[#](b9bebe)White[#]() represents *LIFE*, *Light* and " +
-            "*Purity*."
+            "The melancholy of eternity. A vast field of countless mirrors, arranged to create a bottomless illusion. "+
+            "Stunning geometries that trap truth in false dichotomy, birthing perception. Its facets project reality " +
+            "looking in, but the walls writhe and ulcerate bereft its twin." +
+            "\\\n\\\n[#](b9bebe)White[#]() represents *[#](b9bebe)PURITY[#]()*, *Divinity*, *Unity*, and *Eternity*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page17.text",
-            "The vibrant yellow is almost bursting with energy.\\\n\\\n[#](eded00)Yellow[#]() represents *Energy* and" +
-            " *Joy*."
+            "The fervor of life. Sparking, lively… zealous. An electrifying color that breathes life into the passing "+
+            "and the static, building and tearing down in a grand spiral; a solution seeking a problem."+
+            "\\\n\\\n[#](eded00)Yellow[#]() represents *[#](eded00)ENERGY[#]()*, *Motive*, *Motion*, and *Cycles*."
         );
         provider.add("book.pastel.guidebook.pigment.page18.text", "I can always craft them back into Pigment.");
         provider.add("book.pastel.guidebook.pigment.page18.title", "Pigment Blocks");
         provider.add(
             "book.pastel.guidebook.pigment.page2.text",
-            "The darkest material I have ever held in my hands. It looks almost surreal.\\\n\\\n[#](302951)Black[#]()" +
-            " represents the nothingness of the *Void*, *Power* and *Mystery*."
+            "The endlessness of absolutes. Vacuous thing ending time, so deep and overwhelming it threatens to swallow"+
+            " the liar. It dwarves its cage, exposes the null act of existence. It is only in the absence of color "+
+            "that you can see the barren waters beneath.\\\n\\\n[#](302951)Black[#]()" +
+            " represents *[#](302951)CONCLUSION[#]()*, *Truth*, *Void*, and *Consequence*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page3.text",
-            "Holding it in my hand gives me a sense of security. All nonsense of course, after all, it is only a " +
-            "color. But still...\\\n\\\n[#](2432ff)Blue[#]() represents *Safety* and *Permanence*."
+            "A world forever in motion makes that which refuses an enigmatic concept; blue is a mystery, seeking " +
+            "isolation yet welcoming its peers with open arms. A matter unchanging, denying time’s claim to make all " +
+            "things decay - yet not eternal.\\\n\\\n" +
+            "[#](2432ff)Blue[#]() represents *[#](2432ff)STASIS[#]()*, *Stability*, *Stillness*, and *Preservation*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page4.text",
-            "This rich brown makes me long for mother nature.\\\n\\\n[#](70400d)Brown[#]() represents *Nature* and " +
-            "*Stability*."
+            "Brown is... strange. It is faint, fading, always being lost. It gives itself up so that greater things " +
+            "may be born, an altruistic act to be sure. Though rather plain in its own right, its self-sacrifice gives"+
+            " way to much more interesting things.\\\n\\\n[#](70400d)Brown[#]() represents *[#](70400d)FORFEIT[#]()*," +
+            " *Sacrifice*, *Selflessness*, and *Altruism*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page5.text",
-            "Makes me feel like I am sitting on the top of a mountain, taking in the infinite vastness of this world" +
-            ".\\\n\\\n[#](5bffed)Cyan[#]() represents *Matter* and *Integrity*."
+            "The weight of the world. A color unyielding and immovable. It is vast like the horizon and as lofty as "+
+            "the sky - a momentous thing, so light in your hand yet so heavy in your heart." +
+            "\\\n\\\n[#](5bffed)Cyan[#]() represents *[#](5bffed)MATTER[#]()*, *Mass*, *Space*, and *Consequence*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page6.text",
-            "This color looks to me like the defeated older brother of light gray. Looking at it makes me a little " +
-            "sad, but I am not sure why exactly.\\\n\\\n[#](464646)Gray[#]() represents *Evanescence*."
+            "A passing color, whose coming bears a grim backing. There is something unspeakable about it, a longing " +
+            "and an emptiness. It takes and takes, until there is nothing more to take - and once nothing remains, it" +
+            " will discard you and move on to the next. A shifting of dust with no beginning or end.\\\n\\\n" +
+            "[#](464646)Gray[#]() represents *[#](464646)LOSS[#]()*, *Tumbling*, *Confusion*, and *Evanescence*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page7.text",
-            "This Pigment gently radiates inner peace.\\\n\\\n[#](526b0f)Green[#]() represents *Balance* and *Harmony*."
+            "Such verdant hues echo a sympathetic nature. It resonates and catalyses, it conducts and manipulates - " +
+            "green is a color that stands by its siblings. An unremarkable essence becomes remarkable when placed " +
+            "into greater context, when allowed to create unity.\\\n\\\n" +
+            "[#](526b0f)Green[#]() represents *[#](526b0f)UNION[#]()*, *Harmony*, *Sympathy*, and *Empowerment*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page8.text",
-            "I feel a sense of optimism, but also of departure.\\\n\\\n[#](7a9eff)Light Blue[#]() represents *Luck* " +
-            "and *Peace*."
+            "So light, so airy, so lofty. It fills the sky and grants you wings - it makes all that is pursued seem " +
+            "well within your grasp. There is a fatefulness to this hue, as if it asks the world to make way for the " +
+            "path you have chosen.\\\n\\\n[#](7a9eff)Light Blue[#]() represents *[#](7a9eff)AMBITION[#]()*, " +
+            "*Fortune*, *Chance*, and *Assurance*."
         );
         provider.add(
             "book.pastel.guidebook.pigment.page9.text",
-            "Do you know the feeling of sitting serenely, looking at the landscape, feeling life pass you by, and yet" +
-            " everything is okay?\\\n\\\n[#](adadad)Light Gray[#]() represents *Change*, but also *Quiet*."
+            "A passing color, whose only purpose is to herald consequence. There is promise in its essence, it " +
+            "whispers of renewal and what great many things the future may hold; uncertain as it may be, light grey " +
+            "reassures you as you march into the unknown.\\\n\\\n[#](adadad)Light Gray[#]()" +
+            " represents *[#](adadad)RENEWAL[#]()*, *Acceptance*, *Change*, and *Anticipation*."
         );
         provider.add(
             "book.pastel.guidebook.pigment_palette.page0.text",
@@ -5305,8 +5327,8 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.potion_workshop_crafting.page0.text",
             "As the name implies, I designed the [Potion Workshop](entry://brewing/potion_workshop) around the " +
             "creation of powerful potions.\\\nBut with the help of all of the filigree and granular adjustable " +
-            "switches and valves I found great utility in it for creating other things with it, as well!\\\n\\\nAll" +
-            " of those recipes do not require [Reagents](entry://brewing/potion_workshop_reagents)."
+            "switches and valves I found great utility in it for creating other things, as well!\\\n\\\nAll" +
+            " of these recipes do not require [Reagents](entry://brewing/potion_workshop_reagents)."
         );
         provider.add("book.pastel.guidebook.potion_workshop_crafting.page1.title", "Water");
         provider.add(
@@ -5332,7 +5354,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.potion_workshop_reagents.nectardew_burgeon.text",
-            "- +100%% potency\n- +100%% duration\n- -3 yield\n- infused the drink with soporific qualities"
+            "- +100%% potency\n- +100%% duration\n- -3 yield\n- infuses the drink with soporific qualities"
         );
         provider.add(
             "book.pastel.guidebook.potion_workshop_reagents.nightdew_sprout.text",
@@ -5370,11 +5392,11 @@ public class PastelGuidebookLang {
             "Instead of adding ingredients to the potion bit by bit, as in the [#](bb00bb)Brewing Stand[#](), I " +
             "experimented with dissolving all the ingredients in the liquid contained in [Mermaid's Gems]" +
             "(entry://general/mermaids_brush) all at once and adding some of my magical collectibles as reagents" +
-            ".\\\n**Breakthrough!**\\\n\\\nEach reagent will have an unique effect on the [#](bb00bb)Potion[#]()."
+            ".\\\n**Breakthrough!**\\\n\\\nEach reagent will have a unique effect on the [#](bb00bb)Potion[#]()."
         );
         provider.add(
             "book.pastel.guidebook.potion_workshop_reagents.page1.text",
-            "- the order in which I arrange the reagents will not matter\n- flat bonuses get applied first, " +
+            "- the order in which I arrange the reagents does not matter\n- flat bonuses get applied first, " +
             "percentage-based bonuses modify that value afterwards\n- the same reagent cannot be stacked"
         );
         provider.add("book.pastel.guidebook.potion_workshop_reagents.page1.title", "Rules of Application");
@@ -5450,7 +5472,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.potion_workshop_reagents.bismuth_flake.text",
-            "- +1 potency for positive effects\n- colors the potion in a random color"
+            "- +1 potency for positive effects\n- changes the potion to a random color"
         );
         provider.add(
             "book.pastel.guidebook.potion_workshop_reagents.raw_malachite.text",
@@ -5602,7 +5624,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.primordial_fire.primordial_torch.text", "*A purple light in the darkness.*");
         provider.add(
             "book.pastel.guidebook.projectile_rebound.page0.text",
-            "Each level gave me a small chance of [#](449900)bouncing off incoming projectiles[#]()."
+            "Each level gave me a small chance of [#](449900)incoming projectiles bouncing off me[#]()."
         );
         provider.add("book.pastel.guidebook.provider_node.name", "Provider Node");
         provider.add(
@@ -5621,7 +5643,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.puff_circlet.page0.text",
             "This glistening hoop creates a protective film of air around me.\\\n\\\nGrants [#](495b24)4[#]() units " +
-            "of [#](2c2e8e)Azure Dike[#](). Will protects me from projectiles and can cushion a long fall, using " +
+            "of [#](2c2e8e)Azure Dike[#](). Will protect me from projectiles and can cushion a long fall, using " +
             "some of those charges.\\\nThe Puff Circlet also prevents [#](bb00bb)Farmland[#]() from being trampled."
         );
         provider.add(
@@ -5756,11 +5778,11 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.razor_edge.page1.text",
-            "Even the ground: Parched and razor-sharp from lack of light and water - hence the name."
+            "Even the ground: parched and razor-sharp from lack of light and water - hence the name."
         );
         provider.add(
             "book.pastel.guidebook.razor_edge.page2.text",
-            "Small mean plants that sting immensely when I make contact with them."
+            "Small, mean plants that sting immensely when I make contact with them."
         );
         provider.add(
             "book.pastel.guidebook.redstone_calculator.page0.text",
@@ -5831,7 +5853,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.remembering", "Remembering");
         provider.add(
             "book.pastel.guidebook.reprise.page0.text",
-            "This drink, brewed from the [#](bb00bb)Chorus Fruit[#](), inherits - and amplifies - not only the " +
+            "This drink, brewed from [#](bb00bb)Chorus Fruit[#](), inherits - and amplifies - not only the " +
             "plant's special taste, but also its unique properties.\\\n\\\nWhen consumed, this drink will randomly " +
             "teleport me over great distances. The higher the alcohol content, the further."
         );
@@ -5855,7 +5877,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.resonance.page11.title", "Signs");
         provider.add(
             "book.pastel.guidebook.resonance.page12.text",
-            "The gentle vibrations lull the silverfish hiding in the blocks.\\\n\\\nI can pack up the blocks " +
+            "The gentle vibrations lull the silverfish hiding in the blocks.\\\n\\\nI can pick up the blocks " +
             "including the Silverfish and take them with me, without them knowing what is happening to them" +
             ".\\\nSweet, sweet revenge."
         );
@@ -5875,7 +5897,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.resonance.page5.text",
             "Colored Leaves are stimulated to release many more [#](bb00bb)Saplings[#]().\\\n\\\nApplied to a hoe " +
-            "this will finally be my key to getting [Colored Saplings](entry://general/colored_trees) renewable."
+            "this will finally be my key to getting [Colored Saplings](entry://general/colored_trees) renewably."
         );
         provider.add("book.pastel.guidebook.resonance.page5.title", "Colored Leaves");
         provider.add(
@@ -6077,7 +6099,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.shards.page0.text",
             "In a [geode](entry://general/geodes) I found this interesting gemstone. Not an item like every other for" +
-            " sure. This one (and other ones?) are special.\\\n\\\nEach type of gem represents both an elemental " +
+            " sure. This one (and other ones?) is special.\\\n\\\nEach type of gem represents both an elemental " +
             "color and a natural force."
         );
         provider.add(
@@ -6228,7 +6250,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.spawner_manipulation.max_nearby_entities_change.title", "Summoning Criteria");
         provider.add(
             "book.pastel.guidebook.spawner_manipulation.required_player_range_change.text",
-            "Increases the distance I can be away from a spawner and it still works."
+            "Increases the distance I can be away from a spawner for it to work."
         );
         provider.add(
             "book.pastel.guidebook.spawner_manipulation.required_player_range_change.title", "Activation Range");
@@ -6277,7 +6299,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.star_candy.page2.text",
-            "Now THAT's a tasty one!\\\nJust touching those star-strudded strips gave me the same tingling sensation " +
+            "Now THAT's a tasty one!\\\nJust touching those star-studded strips gave me the same tingling sensation " +
             "as eating the whole thing before."
         );
         provider.add("book.pastel.guidebook.star_candy.page2.title", "A rare Find");
@@ -6290,7 +6312,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.stargazing.page1.text",
             "The small Shooting Stars are made of a material unknown to me thus far.\\\n\\\nCan I catch one right out" +
-            " of the sky?\\\n\\\n*I am sure they are even easier to spot when I am using a Telescope or Night Vision.*"
+            " of the sky?\\\n\\\n*I am sure they are even easier to spot when I am using a Spyglass or Night Vision.*"
         );
         provider.add("book.pastel.guidebook.stargazing.page1.title", "Shooting Stars");
         provider.add(
@@ -6477,7 +6499,7 @@ public class PastelGuidebookLang {
         provider.add(
             "book.pastel.guidebook.the_perfect_compound.page0.text",
             "The results of my [last experiment](entry://general/failing) make me long for more: how much power can I" +
-            " squeeze out of these gemstones?\\\nI am sure there's more, and [Neolith](entry://general/neolith) must" +
+            " squeeze out of these gemstones?\\\nI am sure there's more, and [Neolith](entry://general/neolith)" +
             " will be my entry gate! With such coherence, it may allow me to unite the powers of all the gems into " +
             "one. This relic shall be the capstone to my creation, my personal Philosopher's stone, making me a " +
             "living god!"
@@ -6509,7 +6531,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.titration_barrel.page1.text",
-            "*Sometimes it feels like that when I blink the world has ceased to exist? Each time the barrel " +
+            "*Sometimes it feels like when I blink the world has ceased to exist, and each time the barrel " +
             "fermentation process seems to have progressed.*"
         );
         provider.add(
@@ -6556,7 +6578,7 @@ public class PastelGuidebookLang {
             "I recently completed a painting, showing a fantastic creature that has appeared in my dreams: apparently" +
             " made of [#](bb00bb)Soul Sand[#]() and [#](bb00bb)Wither Skeleton Skulls[#](). I waited in a Nether " +
             "Fortress for hours, trying to recreate it, only to nearly lose my own head while searching for a " +
-            "Wither Skeleton with a spine loose enough to drop its skull. Heads up, I never were the one to bury " +
+            "Wither Skeleton with a spine loose enough to drop its skull. Heads up, I was never one to bury " +
             "my head in the sand."
         );
         provider.add(
@@ -6726,7 +6748,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.upgrades.page2.text",
-            "The Pedestal Accelerator T2 improves on its predecessor. Making crafting even more fast."
+            "The Pedestal Accelerator T2 improves on its predecessor, making crafting even more fast."
         );
         provider.add(
             "book.pastel.guidebook.upgrades.page3.text",
@@ -6747,7 +6769,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.upgrades.page7.text",
-            "This 'upgrade of the upgrade' further reduces the use use of input materials."
+            "This 'upgrade of the upgrade' further reduces the use of input materials."
         );
         provider.add(
             "book.pastel.guidebook.upgrades.page8.text",
@@ -6790,7 +6812,7 @@ public class PastelGuidebookLang {
         provider.add("book.pastel.guidebook.mundane_items.page4.text", "Explodes when punched.");
         provider.add("book.pastel.guidebook.mundane_items.page4.title", "Unstable TNT");
         provider.add("book.pastel.guidebook.mundane_items.bundle.text", "Shouldn't have taken this long");
-        provider.add("book.pastel.guidebook.mundane_items.cobweb.text", "How is string only sticky in web-form?");
+        provider.add("book.pastel.guidebook.mundane_items.cobweb.text", "How is string only sticky in web form?");
         provider.add("book.pastel.guidebook.mundane_items.writeable_book.text", "Self-explanatory");
         provider.add("book.pastel.guidebook.mundane_items.spectral_arrow.text", "Prettier in amber");
         provider.add("book.pastel.guidebook.mundane_items.bell.text", "Alluring to foxes");
@@ -6814,7 +6836,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.vegetal.page0.text",
-            "The answer seemed to be organics! Easily digestible indeed. Quite of obvious in retrospect...\\\nWhen " +
+            "The answer seemed to be organics! Easily digestible indeed. Quite obvious in retrospect...\\\nWhen " +
             "digested by the organism, they created an interesting byproduct which I called Vegetal, representing " +
             "the **raw energy of nature**.\\\n\\\nI am sure it will be very useful to me down the line."
         );
@@ -6915,7 +6937,7 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.what_happened.page2.checklist.entry3", "Can I find Geodes around here, too?");
         provider.add(
             "book.pastel.guidebook.what_happened.page3.text",
-            "I searched far and wide for a place that I might could have missed. But no matter where I looked, there " +
+            "I searched far and wide for a place that I could have missed. But no matter where I looked, there " +
             "was not a single soul in sight."
         );
         provider.add("book.pastel.guidebook.what_happened.page3.title", "Clue: Biomes");

@@ -28,13 +28,14 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
     final BlockPos sourceBlockPos;
     final Block sourceBlock;
     final int maxDurationTicks;
+    private float volumeMul;
 
     private int ticksPlayed = 0;
     private boolean done;
 
     protected CraftingBlockSoundInstance(
         SoundEvent soundEvent, ResourceKey<Level> worldKey, BlockPos sourceBlockPos, Block sourceBlock,
-        int maxDurationTicks
+        int maxDurationTicks, float volumeMul
     ) {
         super(soundEvent, SoundSource.BLOCKS, SoundInstance.createUnseededRandom());
 
@@ -42,6 +43,7 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
         this.sourceBlockPos = sourceBlockPos;
         this.sourceBlock = sourceBlock;
         this.maxDurationTicks = maxDurationTicks;
+        this.volumeMul = volumeMul;
 
         this.looping = true;
         this.delay = 0;
@@ -55,12 +57,12 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
 
     @OnlyIn(Dist.CLIENT)
     public static void startSoundInstance(
-        SoundEvent soundEvent, BlockPos sourceBlockPos, Block sourceBlock, int maxDurationTicks) {
+        SoundEvent soundEvent, BlockPos sourceBlockPos, Block sourceBlock, int maxDurationTicks, float volumeMul) {
         Minecraft client = Minecraft.getInstance();
         stopPlayingOnPos(sourceBlockPos);
 
         CraftingBlockSoundInstance newInstance = new CraftingBlockSoundInstance(
-            soundEvent, client.level.dimension(), sourceBlockPos, sourceBlock, maxDurationTicks);
+            soundEvent, client.level.dimension(), sourceBlockPos, sourceBlock, maxDurationTicks, volumeMul);
         playingSoundInstances.add(newInstance);
         Minecraft.getInstance()
                  .getSoundManager()
@@ -94,7 +96,7 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
         Minecraft client = Minecraft.getInstance();
         this.volume = Math.max(
             0, 0.75F * (PastelCommon.CONFIG.BlockSoundVolume - sourceBlockPos.distManhattan(
-                client.player.blockPosition()) / 64F)
+                client.player.blockPosition()) / 64F) * volumeMul
         );
     }
 

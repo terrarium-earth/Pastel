@@ -3,7 +3,7 @@
     "unlocked_liquid_crystal": {
       "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement": "pastel/unlocks/blocks/liquid_crystal"
+        "advancement": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "built_pastel_temple": {

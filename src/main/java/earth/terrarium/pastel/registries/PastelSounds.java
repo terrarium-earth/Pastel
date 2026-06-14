@@ -17,6 +17,7 @@ public class PastelSounds {
     public static final SoundEvent MUSIC_DISCOVERY = register("music.discovery");
     public static final SoundEvent MUSIC_CREDITS = register("music.credits");
     public static final SoundEvent MUSIC_DIVINITY = register("music.divinity");
+    public static final SoundEvent MUSIC_MEMORIAL = register("music.memorial");
 
     // Music referenced in the biome.jsons
     public static final SoundEvent MUSIC_IMBRIFER_BLACK_LANGAST = register("music.imbrifer.black_langast");

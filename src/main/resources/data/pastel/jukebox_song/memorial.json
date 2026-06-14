@@ -1,0 +1,8 @@
+{
+  "comparator_output": 4,
+  "description": {
+    "translate": "jukebox_song.pastel.memorial"
+  },
+  "length_in_seconds": 70,
+  "sound_event": "pastel:music.memorial"
+}
