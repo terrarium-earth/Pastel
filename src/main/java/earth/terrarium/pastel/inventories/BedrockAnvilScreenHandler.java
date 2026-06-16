@@ -353,6 +353,7 @@ public class BedrockAnvilScreenHandler extends ItemCombinerMenu {
             }
 
             this.createResult();
+            this.newItemName = null;
             return true;
         } else {
             return false;
