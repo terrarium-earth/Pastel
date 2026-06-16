@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:verdigris_lash"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_verdigris_lash.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_verdigris_lash.description"
+    }
+  },
+  "parent": "pastel:midgame/pastel_midgame",
+  "criteria": {
+    "created_verdigris_lash": {
+      "trigger": "pastel:crafted_with_fusion_shrine",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:verdigris_lash"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:midgame/pastel_midgame"
+      }
+    }
+  }
+}

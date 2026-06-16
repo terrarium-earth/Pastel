@@ -198,9 +198,6 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
             boolean narcissus = false;
             Vec3i towardsPainting = this.direction.getOpposite()
                                                   .getNormal();
-            PastelCommon.logInfo(String.valueOf(entity.getDeltaMovement()
-                                                      .normalize()
-                                                      .dot(Vec3.atLowerCornerOf(towardsPainting))));
             if (entity.getDeltaMovement()
                       .normalize()
                       .dot(Vec3.atLowerCornerOf(towardsPainting)) >= 0) {

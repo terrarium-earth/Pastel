@@ -78,9 +78,9 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
     public boolean matches(InstanceRecipeInput input, Level world) {
         List<IngredientStack> ing = getIngredientStacks();
 
-        if (bowlMatches(input))
-            return ing.getFirst()
-                      .test(input.getItem(CENTER));
+        if (bowlMatches(input) && ing.getFirst()
+                                     .test(input.getItem(CENTER)))
+            return canCraftWithStacks(input, world);
 
         return false;
     }

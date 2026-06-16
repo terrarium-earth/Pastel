@@ -8,13 +8,11 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
-import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
-import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
-import earth.terrarium.pastel.attachments.data.HookshotData;
-import earth.terrarium.pastel.attachments.data.MiscPlayerData;
+import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.components.PairedFoodComponent;
+import earth.terrarium.pastel.events.PastelDamageEvents;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
@@ -30,6 +28,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -371,6 +371,26 @@ public abstract class LivingEntityMixin {
                       .addFreshEntity(itemEntity);
 
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "aiStep", at = @At("TAIL"))
+    protected void whip(CallbackInfo ci) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        if(entity.level().getGameTime()%2 != 0) return;
+        if (entity.hasData(WhipFollowupStrikesAttachment.ATTACHMENT)) {
+            var whippings = entity.getData(WhipFollowupStrikesAttachment.ATTACHMENT);
+            if(whippings == 1)
+                entity.removeData(WhipFollowupStrikesAttachment.ATTACHMENT);
+            else
+                entity.setData(WhipFollowupStrikesAttachment.ATTACHMENT, whippings - 1);
+            entity.level().playSound(null, entity.blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
+            entity.hurt(PastelDamageTypes.lacerating(entity.level(), entity.getLastAttacker()), 0.5f); // each one doesn't hurt. much.
+            if(entity.getLastAttacker() instanceof Player player)
+                player.magicCrit(entity);
+            var delta = entity.getDeltaMovement();
+            if(entity.hasEffect(PastelMobEffects.HOVERING))
+                entity.setDeltaMovement(delta.x, 0, delta.z); // otherwise they go to the moon
         }
     }
 

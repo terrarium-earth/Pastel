@@ -28,6 +28,8 @@ public class PastelRecipeLang {
         provider.add("pastel.recipe.fusion_shrine.explanation.decay_away", "Requires a clear sky");
         provider.add("pastel.recipe.fusion_shrine.explanation.draconic_twinsword", "Handle with care");
         provider.add("pastel.recipe.fusion_shrine.explanation.draconic_twinsword_reclaim", "For if you ever lose one");
+        provider.add("pastel.recipe.fusion_shrine.explanation.verdigris_lash", "An imperfect substitute, to claim future potential");
+        provider.add("pastel.recipe.fusion_shrine.explanation.fox_o_nine_tails", "An imperfect substitute, to beseech the kindly goddess");
         provider.add("pastel.recipe.fusion_shrine.explanation.dreamflayer", "Nights on a full moon");
         provider.add("pastel.recipe.fusion_shrine.explanation.egg_laying_wooly_pig_head", "An all-purpose Allrounder");
         provider.add("pastel.recipe.fusion_shrine.explanation.midnight_aberration", "Daytime with sunny weather");

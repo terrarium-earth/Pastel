@@ -4,6 +4,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public interface UnequipAwareItem {
-    void onUnequip(LivingEntity entity, ItemStack stack, EquipmentSlot slot);
+public interface EquipAwareItem {
+    void onEquipChange(LivingEntity entity, ItemStack stack, EquipmentSlot slot, boolean unequip);
 }

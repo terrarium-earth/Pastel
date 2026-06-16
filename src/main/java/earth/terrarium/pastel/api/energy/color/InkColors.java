@@ -45,6 +45,11 @@ public class InkColors {
     public static final int LIGHT_GRAY_COLOR = 0xffadadad;
     public static final int GRAY_COLOR = 0xff464646;
 
+    public static final int ULTRAMARINE_COLOR = 0xff000ac8; // i can't believe we're doing this already
+    public static final int CERISE_COLOR = 0xffff4d76;
+    public static final int GOLDEN_OCHRE_COLOR = 0xffd2811e;
+
+
     public static final InkColor CYAN = register("cyan", new InkColor(DyeColor.CYAN, CYAN_COLOR, BASE_ADVANCEMENT_ID));
     public static final InkColor LIGHT_BLUE = register(
         "light_blue", new InkColor(DyeColor.LIGHT_BLUE, LIGHT_BLUE_COLOR, BASE_ADVANCEMENT_ID));

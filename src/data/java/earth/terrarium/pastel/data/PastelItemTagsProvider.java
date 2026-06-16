@@ -46,6 +46,9 @@ public class PastelItemTagsProvider extends ItemTagsProvider {
             Items.NETHERITE_CHESTPLATE, Items.NETHERITE_LEGGINGS, Items.NETHERITE_BOOTS, Items.IRON_HORSE_ARMOR,
             Items.GOLDEN_HORSE_ARMOR
         );
+
+        // the enchant switching on these would make this an absolute pain to deal with so we just don't :)
+        tag(PastelItemTags.CRYSTAL_EMPOWER_BLACKLIST);
     }
 
     public void generateEnchantableTags() {

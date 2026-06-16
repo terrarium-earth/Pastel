@@ -3,19 +3,10 @@ package earth.terrarium.pastel.registries;
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
+import earth.terrarium.pastel.api.energy.color.InkColor;
+import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.mixin.accessors.StatusEffectInstanceAccessor;
-import earth.terrarium.pastel.status_effects.AscensionStatusEffect;
-import earth.terrarium.pastel.status_effects.DeadlyPoisonStatusEffect;
-import earth.terrarium.pastel.status_effects.DivinityStatusEffect;
-import earth.terrarium.pastel.status_effects.EffectProlongingStatusEffect;
-import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
-import earth.terrarium.pastel.status_effects.GravityStatusEffect;
-import earth.terrarium.pastel.status_effects.ImmunityStatusEffect;
-import earth.terrarium.pastel.status_effects.LifeDrainStatusEffect;
-import earth.terrarium.pastel.status_effects.NoopStatusEffect;
-import earth.terrarium.pastel.status_effects.NourishingStatusEffect;
-import earth.terrarium.pastel.status_effects.ScarredStatusEffect;
-import earth.terrarium.pastel.status_effects.SleepStatusEffect;
+import earth.terrarium.pastel.status_effects.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
@@ -83,6 +74,12 @@ public class PastelMobEffects {
      */
     public static final Holder<MobEffect> LIGHTWEIGHT = REGISTER.register(
         "lightweight", () -> new GravityStatusEffect(MobEffectCategory.NEUTRAL, 0x00dde4, 0.02F));
+
+    /**
+     * Causes the entity to hover at the same height, by setting their y-vel to 0 every tick
+     */
+    public static final Holder<MobEffect> HOVERING = REGISTER.register(
+        "hovering", () -> new HoveringStatusEffect(MobEffectCategory.NEUTRAL, 0x802bc4));
 
     /**
      * Adds gravity to the entity

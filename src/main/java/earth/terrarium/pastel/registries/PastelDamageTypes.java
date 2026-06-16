@@ -60,6 +60,7 @@ public class PastelDamageTypes {
     public static final ResourceKey<DamageType> SLEEP = ResourceKey.create(Registries.DAMAGE_TYPE, locate("sleep"));
     public static final ResourceKey<DamageType> SNAPPING_IVY = ResourceKey.create(
         Registries.DAMAGE_TYPE, locate("snapping_ivy"));
+    public static final ResourceKey<DamageType> LACERATING = ResourceKey.create(Registries.DAMAGE_TYPE, locate("lacerating"));
 
     public static DamageSource sleep(Level world, @Nullable LivingEntity attacker) {
         return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(SLEEP), attacker);
@@ -166,6 +167,10 @@ public class PastelDamageTypes {
         return new PrimordialFireDamageSource(world, attacker);
     }
 
+    public static DamageSource lacerating(Level world, @Nullable LivingEntity attacker) {
+        return new LaceratingDamageSource(world, attacker);
+    }
+
     public static class SetHealthDamageSource extends DamageSource {
 
         public SetHealthDamageSource(Level world, @Nullable LivingEntity attacker) {
@@ -205,6 +210,13 @@ public class PastelDamageTypes {
 
         public PrimordialFireDamageSource(Level world, @Nullable LivingEntity attacker) {
             super(world.damageSources().damageTypes.getHolderOrThrow(PRIMORDIAL_FIRE), attacker);
+        }
+    }
+
+    public static class LaceratingDamageSource extends DamageSource {
+
+        public LaceratingDamageSource(Level world, @Nullable LivingEntity attacker) {
+            super(world.damageSources().damageTypes.getHolderOrThrow(LACERATING), attacker);
         }
     }
 }

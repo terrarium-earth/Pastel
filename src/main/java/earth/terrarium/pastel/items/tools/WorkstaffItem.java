@@ -153,6 +153,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 		var registryLookup = player.level().registryAccess();
 
 		int existingLevel = Ench.getLevel(registryLookup, enchantment, stack);
+        int crystalEmpower = stack.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0);
 		if (existingLevel > 0) {
 			player.displayClientMessage(Component.translatable("item.pastel.workstaff.message.already_has_the_enchantment"), true);
 			return;
@@ -163,7 +164,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 		if (enchantment == Enchantments.FORTUNE) {
 			level = stack.getOrDefault(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT).fortuneLevel();
 		} else {
-			int fortuneLevel = Ench.getLevel(registryLookup, Enchantments.FORTUNE, stack);
+			int fortuneLevel = Ench.getLevel(registryLookup, Enchantments.FORTUNE, stack) - crystalEmpower; // don't store empowered bonuses
             if(fortuneLevel > 0)
 			    stack.update(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT, comp ->
 				    	new WorkstaffComponent(comp.canTill(), comp.canShoot(), Math.max(fortuneLevel, 1)));
@@ -186,6 +187,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
                     new WorkstaffComponent(comp.canTill(), comp.canShoot(), 4));
                 level = 4;
             }
+            if(enchantment == Enchantments.FORTUNE) level += crystalEmpower; // only fortune is a multi-level enchant, here, so only it gets empowered
 			var addResult = Ench.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, DatabankUtils.hasAdvancement(player, PastelAdvancements.Milestones.UNLOCK_CONFLICTED_ENCHANTING_WITH_ENCHANTER));
 			if (addResult.getA()) {
 				stack.set(DataComponents.ENCHANTMENTS, addResult.getB().getEnchantments());

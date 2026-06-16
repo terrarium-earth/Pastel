@@ -6,6 +6,8 @@ public class PastelSubtitleLang {
     public static void addTranslations(PastelLanguageProvider provider) {
         provider.add("pastel.subtitles.air_launch_belt_charging", "Takeoff Belt charging");
         provider.add("pastel.subtitles.bident_hit_ground", "Bident vibrates");
+        provider.add("pastel.subtitles.whip_fervor_expend", "Fervor resonates");
+        provider.add("pastel.subtitles.whip_fervor_peak", "Fervor reaches its peak");
         provider.add("pastel.subtitles.bident_mirror_image_thrown", "Bident clangs");
         provider.add("pastel.subtitles.block.black_hole_chest.close", "Black Hole Chest closes");
         provider.add("pastel.subtitles.block.black_hole_chest.open", "Black Hole Chest opens");

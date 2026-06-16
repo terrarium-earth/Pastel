@@ -1392,7 +1392,7 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.knotted_sword.page0.text",
-            "A living sword! Just as lively to use!.\\\nPlaying around with [Nightdew]" +
+            "A living sword! Just as lively to use!\\\nPlaying around with [Nightdew]" +
             "(entry://general/nightdew_sprout) and some of that [Vegetal](entry://general/vegetal) stuff I created, " +
             "I managed to create this [#](bb00bb)light greatsword[#](). I can use it to block attacks and even " +
             "strengthen my counterattack if I shield right before I am hit.\\\nIf I am airborne when I stop " +
@@ -1415,6 +1415,26 @@ public class PastelGuidebookLang {
             "DoT effects will deal a chunk of the damage they would have dealt; if there are none, then those " +
             "afflicted with sleep will always be crit. If neither of those can happen, then it will steal positive " +
             "effects.\\\n\\\n*This one does not have a knot...*"
+        );
+        provider.add(
+            "book.pastel.guidebook.fox_o_nine_tails.page0.text",
+            "As I dreamt, pondering those fathomless vestiges, I was once again struck with what I can only describe " +
+            "as divine inspiration. A way to use various resources, and one of those precious vestiges, to awaken the" +
+            " true nature of my [Verdigris Lash](entry://equipment/tools_and_armor/verdigris_lash). No longer " +
+            "resembling night alchemy at all, this nine-tailed whip is strung with countless tiny chimes that sound " +
+            "with each motion, resonating with the bearer's devotion. Each tail strikes in rapid succession, keeping " +
+            "enemies at bay quite effectively."
+        );
+        provider.add(
+            "book.pastel.guidebook.fox_o_nine_tails.page1.text",
+            "Not only are its effects far more potent, but they do not even require me to be striking with the whip " +
+            "itself. Holding it in my other hand while swinging another weapon, or being hit myself, can build " +
+            "[#](ff4d76)Fervor[#]() as well, though not as effectively. While swinging it alongside another weapon is" +
+            " a bit too much for me to handle, I can channel [#](ff4d76)Fervor[#]() into myself or others just fine."
+        );
+        provider.add(
+            "book.pastel.guidebook.fox_o_nine_tails.page2.text",
+            "*I get the feeling this isn't the ideal way to do this. The future holds many secrets, indeed...*"
         );
         provider.add(
             "book.pastel.guidebook.draconic_twinsword.page0.text",
@@ -1450,6 +1470,26 @@ public class PastelGuidebookLang {
             "(entry://enchanting/enchantments/improved_critical) improves hits against airborne targets\n- " +
             "Channeling improves sweeping and trades single-target ranged damage for AoE.\n- Piercing does " +
             "exactly what I would expect"
+        );
+        provider.add(
+            "book.pastel.guidebook.verdigris_lash.page0.text",
+            "What a strange thing this Nightdew is. I was pondering a way to use its soporific effects to my " +
+            "advantage in combat, as I fell asleep—a vital part of the creative process—and the perfect idea came to" +
+            " me in a dream. A living whip, suited for striking many enemies at once. While this is definitely a work" +
+            " of night alchemy, the finished product seems to draw upon an older power..."
+        );
+        provider.add(
+            "book.pastel.guidebook.verdigris_lash.page1.text",
+            "Striking enemies with the whip invigorates it, building up an energy I've taken to calling '[#](ff4d76)" +
+            "Fervor[#]()'. Using the whip on a friend (I'm sure they won't mind) will expend all [#](ff4d76)Fervor[#]" +
+            "() to heal and invigorate them, or I can try the same on empty air to charge my next strike with a " +
+            "cocktail of nasty effects. Repeating the latter while the whip is charged will instead channel the [#]" +
+            "(ff4d76)Fervor[#]() into myself. All effects scale with the amount of [#](ff4d76)Fervor[#]() expended; " +
+            "using a fully-charged whip will generally have even better effects."
+        );
+        provider.add(
+            "book.pastel.guidebook.verdigris_lash.page2.text",
+            "*I get the feeling this isn't the ideal way to do this. The future holds many secrets, indeed...*"
         );
         provider.add(
             "book.pastel.guidebook.nectar_gloves.page0.text",
@@ -1905,11 +1945,11 @@ public class PastelGuidebookLang {
             "So **there is** intelligent life down there! Or... was.\\\nAlthough the city looks like it's absolutely " +
             "inhabited, I haven't found a single sign of the inhabitants.\\\n\\\nWhere are they?\\\nWhere did they go?"
         );
-        provider.add("book.pastel.guidebook.forsaken_cathedral.page0.text", "*A final landmark*");
+        provider.add("book.pastel.guidebook.forsaken_cathedral.page0.text", "*A conclusion, concealed*");
         provider.add(
             "book.pastel.guidebook.forsaken_cathedral.page1.text",
-            "The end of my journey for now.\\\n\\\nIt was an arduous journey at times, but I have learned a lot" +
-            ".\\\n\\\nSee you some day, my *Colorful World*."
+            "The end of my journey, it seems, is yet out of reach. Naught is to be done for it but to wait, and hone " +
+            "my craft. Someday, I will reach what lies beyond the threshold."
         );
         provider.add("book.pastel.guidebook.undergrowth_manor.page0.text", "*Hidden away, but why?*");
         provider.add(

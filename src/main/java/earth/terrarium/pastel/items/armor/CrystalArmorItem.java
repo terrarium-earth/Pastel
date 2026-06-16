@@ -3,12 +3,12 @@ package earth.terrarium.pastel.items.armor;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.TickingEquipmentItem;
-import earth.terrarium.pastel.api.item.UnequipAwareItem;
+import earth.terrarium.pastel.api.item.EquipAwareItem;
 import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
-import earth.terrarium.pastel.mixin.client.LocalPlayerMixin;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem, UnequipAwareItem {
+public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem, EquipAwareItem {
 
     private static final AttributeModifier GEM_LEGGINGS_KB_RESIST = new AttributeModifier(
         PastelCommon.locate("gem_armor_kb_resist"), 0.5f, AttributeModifier.Operation.ADD_VALUE);
@@ -135,7 +135,8 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         if (type.equals(Type.LEGGINGS)) itemStack.hurtAndBreak(Math.round(amount), targetEntity, type.getSlot());
     }
 
-    public void onUnequip(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+    public void onEquipChange(LivingEntity entity, ItemStack stack, EquipmentSlot slot, boolean unequip) {
+        if(!unequip) return;
         if (type == Type.HELMET) {
             for (var equippedStack : entity.getAllSlots()) {
                 if (equippedStack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED))
@@ -177,8 +178,12 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     }
 
     public static void addEmpowered(ItemStack stack) {
+        if(stack.is(PastelItemTags.CRYSTAL_EMPOWER_BLACKLIST))
+            return; // don't touch blacklisted items
         if(stack.has(DataComponents.STORED_ENCHANTMENTS) || stack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS))
             return; // we do not want to touch enchanted books or anything like enchanted books
+        if(!stack.has(DataComponents.ENCHANTMENTS) || stack.getMaxStackSize() != 1)
+            return; // we also only want to affect enchanted gear
         stack.set(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, ENCHANTMENT_BONUS);
         var enchantments = stack.get(DataComponents.ENCHANTMENTS);
         if (enchantments == null || enchantments.isEmpty()) return;

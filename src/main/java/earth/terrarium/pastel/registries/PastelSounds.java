@@ -49,6 +49,8 @@ public class PastelSounds {
     public static final SoundEvent BOTTOMLESS_BUNDLE_ZIP = register("bottomless_bundle_zip");
     public static final SoundEvent BIDENT_MIRROR_IMAGE_THROWN = register("bident_mirror_image_thrown");
     public static final SoundEvent BIDENT_HIT_GROUND = register("bident_hit_ground");
+    public static final SoundEvent WHIP_FERVOR_EXPEND = register("whip_fervor_expend");
+    public static final SoundEvent WHIP_FERVOR_PEAK = register("whip_fervor_peak");
     public static final SoundEvent DARK_STAKE_THROWN = register("dark_stake_thrown");
     public static final SoundEvent MOONSTONE_STRIKE = register("moonstone_strike");
     public static final SoundEvent ENTITY_BLOCK_FLOODER_THROW = register("entity.block_flooder.throw");

@@ -997,6 +997,10 @@ public class PastelAdvancementLang {
             "advancements.pastel.wear_complete_set_of_bedrock_armor.description",
             "Black Knight of the roses, everlasting. Wear a full suit of Bedrock Armor"
         );
+        provider.add("advancements.pastel.craft_verdigris_lash.title", "Die, monster!");
+        provider.add("advancements.pastel.craft_verdigris_lash.description", "Get early access to future content, by the grace of the god not wanted.");
+        provider.add("advancements.pastel.craft_fox_o_nine_tails.title", "Where's the fluff- ow!");
+        provider.add("advancements.pastel.craft_fox_o_nine_tails.description", "Get early access to future content, by the grace of the kindly goddess.");
         provider.add("advancements.pastel.wear_complete_set_of_bedrock_armor.title", "Black Knight");
         provider.add("advancements.pastel.become_enlightened.title", "The Professional Catposter");
         provider.add(

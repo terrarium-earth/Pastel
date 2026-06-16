@@ -33,5 +33,8 @@ public class WeaponArmorItemModels {
         PastelModelHelper.ITEM.simple(generators, PastelItems.AMETHYST_CHESTPLATE);
         PastelModelHelper.ITEM.simple(generators, PastelItems.TOPAZ_LEGGINGS);
         PastelModelHelper.ITEM.simple(generators, PastelItems.CITRINE_BOOTS);
+
+        PastelModelHelper.ITEM.handheld(generators, PastelItems.VERDIGRIS_LASH);
+        PastelModelHelper.ITEM.handheld(generators, PastelItems.FOX_O_NINE_TAILS);
     }
 }

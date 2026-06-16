@@ -237,7 +237,10 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
                                                                                    Upgradeable.UpgradeType.SPEED));
             }
         }
-
+        else { // can't craft with no center item now can you genius
+            spiritInstillerBlockEntity.craftingTime = 0;
+            spiritInstillerBlockEntity.currentRecipe = null;
+        }
         spiritInstillerBlockEntity.updateInClientWorld();
     }
 
