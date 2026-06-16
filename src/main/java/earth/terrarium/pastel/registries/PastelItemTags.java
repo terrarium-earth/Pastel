@@ -40,6 +40,7 @@ public class PastelItemTags {
     public static final TagKey<Item> WEEPING_GALA_LOGS = of("weeping_gala_logs");
     public static final TagKey<Item> TEA_TABLE_DRINKS = of("tea_table_drinks");
     public static final TagKey<Item> METAL_ARMOR = of("metal_armor");
+    public static final TagKey<Item> CRYSTAL_EMPOWER_BLACKLIST = of("crystal_empower_blacklist");
 
     public static final TagKey<Item> PRODUCTIVITY_EXCLUDED = of("productivity_excluded");
 

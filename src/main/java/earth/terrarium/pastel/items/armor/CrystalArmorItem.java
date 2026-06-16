@@ -8,6 +8,7 @@ import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
 import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
@@ -177,6 +178,8 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     }
 
     public static void addEmpowered(ItemStack stack) {
+        if(stack.is(PastelItemTags.CRYSTAL_EMPOWER_BLACKLIST))
+            return; // don't touch blacklisted items
         if(stack.has(DataComponents.STORED_ENCHANTMENTS) || stack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS))
             return; // we do not want to touch enchanted books or anything like enchanted books
         if(!stack.has(DataComponents.ENCHANTMENTS) || stack.getMaxStackSize() != 1)
