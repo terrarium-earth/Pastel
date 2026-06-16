@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.blocks;
 
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -118,6 +119,7 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
                 if (ItemStack.isSameItemSameComponents(handStack, currentStack)) {
                     InventoryHelper.setOrCombineStack(blockEntity.inventory, slot, handStack);
                 } else {
+                    CrystalArmorItem.removeEmpowered(handStack);
                     blockEntity.setItem(slot, handStack);
                     player.setItemInHand(hand, currentStack);
                 }
@@ -125,6 +127,7 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
             } else {
                 if (!handStack.isEmpty()) {
                     ItemStack singleStack = handStack.split(1);
+                    CrystalArmorItem.removeEmpowered(singleStack);
                     blockEntity.setItem(slot, singleStack);
                     itemsChanged = true;
                 }

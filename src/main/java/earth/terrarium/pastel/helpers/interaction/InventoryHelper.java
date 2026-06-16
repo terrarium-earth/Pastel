@@ -4,6 +4,7 @@ import earth.terrarium.pastel.api.interaction.ItemProvider;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
+import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.WorldlyContainer;
@@ -166,6 +167,7 @@ public class InventoryHelper {
 
     public static ItemStack setOrCombineStack(IItemHandlerModifiable inventory, int slot, ItemStack addingStack) {
         ItemStack existingStack = inventory.getStackInSlot(slot);
+        CrystalArmorItem.removeEmpowered(addingStack);
         if (existingStack.isEmpty()) {
             if (addingStack.getCount() > addingStack.getMaxStackSize()) {
                 int amount = addingStack.getMaxStackSize();
