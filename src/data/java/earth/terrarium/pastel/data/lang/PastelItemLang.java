@@ -41,7 +41,8 @@ public class PastelItemLang {
     public static void addTranslations(PastelLanguageProvider provider) {
 
         for (var item : PastelItems.ITEM_REGISTRAR.getEntries()) {
-            if (item.get() instanceof BlockItem && !(item.get() instanceof ItemNameBlockItem)) continue; // prevent duplicate keys
+            if (item.get() instanceof BlockItem && !(item.get() instanceof ItemNameBlockItem))
+                continue; // prevent duplicate keys
             if (specialCasedItemTranslations.containsKey(item.getRegisteredName())) {
                 provider.addItem(item, specialCasedItemTranslations.get(item.getRegisteredName()));
                 continue;
@@ -63,41 +64,42 @@ public class PastelItemLang {
         }
 
         // EMI aliases
-        provider.add("item.pastel.crystal_armor.alias_0","Gemstone Armor");
-        provider.add("item.pastel.crystal_armor.alias_1","Crystal Armor");
+        provider.add("item.pastel.crystal_armor.alias_0", "Gemstone Armor");
+        provider.add("item.pastel.crystal_armor.alias_1", "Crystal Armor");
 
         provider.add("item.pastel.wire_hook.alias_0", "Hookshot");
         provider.add("item.pastel.wire_hook.alias_1", "Grappling Hook");
         provider.add("item.pastel.wire_hook.alias_2", "Grapple");
-        
+
         // banner patterns (the formatter is determined to fuck this up)
         for (Map.Entry<String, String> pattern : Map.ofEntries(
-                                                        Map.entry("amethyst_cluster", "Amethyst Cluster"),
-                                                        Map.entry("amethyst_shard", "Amethyst Shard"),
-                                                        Map.entry("bedrock_dust", "Bedrock Dust"),
-                                                        Map.entry("crafting_tablet", "Crafting Tablet"),
+                                                        Map.entry("amethyst_cluster", "Amethyst Cluster"), Map.entry(
+                                                            "amethyst_shard", "Amethyst Shard"),
+                                                        Map.entry("bedrock_dust", "Bedrock Dust"), Map.entry(
+                                                            "crafting_tablet", "Crafting Tablet"),
                                                         Map.entry("four_leaf_clover", "Four-leafed Clover"),
                                                         Map.entry("guidebook", "Colorful World"),
-                                                        Map.entry("jade_vine", "Jade Vine"),
-                                                        Map.entry("knowledge_gem", "Knowledge Gem"),
-                                                        Map.entry("color_theory", "Color Theory"),
-                                                        Map.entry("multitool", "Multitool"),
-                                                        Map.entry("neolith", "Neolith"),
-                                                        Map.entry("palette", "Artistry"),
+                                                        Map.entry("jade_vine", "Jade Vine"), Map.entry("knowledge_gem"
+                                                            , "Knowledge Gem"),
+                                                        Map.entry("color_theory", "Color Theory"), Map.entry(
+                                                            "multitool", "Multitool"),
+                                                        Map.entry("neolith", "Neolith"), Map.entry("palette",
+                                                                                                   "Artistry"),
                                                         Map.entry("pigment", "Pigment"),
-                                                        Map.entry("raw_azurite", "Azurite"),
-                                                        Map.entry("shimmer", "Shimmer"),
-                                                        Map.entry("shimmerstone", "Shimmerstone"),
-                                                        Map.entry("vegetal", "Vegetal"),
-                                                        Map.entry("astrologer", "Astrologer"),
-                                                        Map.entry("poisonbloom", "Poisonbloom"),
+                                                        Map.entry("raw_azurite", "Azurite"), Map.entry("shimmer",
+                                                                                                       "Shimmer"),
+                                                        Map.entry("shimmerstone", "Shimmerstone"), Map.entry("vegetal"
+                                                            , "Vegetal"),
+                                                        Map.entry("astrologer", "Astrologer"), Map.entry("poisonbloom"
+                                                            , "Poisonbloom"),
                                                         Map.entry("deep_light", "Deep Light")
                                                     )
                                                     .entrySet()) {
             for (DyeColor color : DyeColor.values()) {
                 // evil oneliner go
                 provider.add(
-                    "block.minecraft.banner.pastel." + pattern.getKey() + "." + color.name().toLowerCase(),
+                    "block.minecraft.banner.pastel." + pattern.getKey() + "." + color.name()
+                                                                                     .toLowerCase(),
                     PastelLanguageProvider.prettifyRegisteredName(color.getName()) + " " + pattern.getValue()
                 );
             }
@@ -109,13 +111,20 @@ public class PastelItemLang {
         provider.add("item.pastel.topaz_leggings.tooltip", "Sturdy legs");
         provider.add("item.pastel.citrine_boots.tooltip", "Put a spring in your step");
 
-        provider.add("item.pastel.flowing_staff.tooltip.setcorners","Crouch-use to attune corners. Max of %s blocks on any axis");
-        provider.add("item.pastel.flowing_staff.tooltip.crouch","Crouch to preview affected area");
-        provider.add("item.pastel.flowing_staff.tooltip.use","Use to place blocks randomly");
-        provider.add("item.pastel.flowing_staff.tooltip.pos1","First corner: [%s,%s,%s]");
-        provider.add("item.pastel.flowing_staff.tooltip.pos2","Second corner: [%s,%s,%s]");
-        provider.add("item.pastel.flowing_staff.tooltip.stored","Carrying: ");
-        provider.add("item.pastel.flowing_staff.tooltip.pickup","Crouch-use to pick up a complex block");
+        provider.add(
+            "item.pastel.flowing_staff.tooltip.setcorners",
+            "Crouch-use to attune corners. Max of %s blocks on any axis"
+        );
+        provider.add("item.pastel.flowing_staff.tooltip.crouch", "Crouch to preview affected area");
+        provider.add("item.pastel.flowing_staff.tooltip.use", "Use to place blocks randomly");
+        provider.add("item.pastel.flowing_staff.tooltip.pos1", "First corner: [%s,%s,%s]");
+        provider.add("item.pastel.flowing_staff.tooltip.pos2", "Second corner: [%s,%s,%s]");
+        provider.add("item.pastel.flowing_staff.tooltip.stored", "Carrying: ");
+        provider.add("item.pastel.flowing_staff.tooltip.pickup", "Crouch-use to pick up a complex block");
+
+        provider.add("item.pastel.whip.tooltip", "Strike enemies to build Fervor");
+        provider.add("item.pastel.whip.tooltip1", "Expend Fervor to heal, buff, and debuff");
+        provider.add("item.pastel.whip.tooltip2", "All effects scale with Fervor consumed");
 
         provider.add("item.pastel.amethyst_cluster_banner_pattern.desc", "Amethyst Cluster");
         provider.add("item.pastel.amethyst_glass_arrow.tooltip", "-aggressive homing-");

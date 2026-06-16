@@ -10,6 +10,7 @@ import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -29,11 +30,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.fml.util.thread.EffectiveSide;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttackAwareItem, EquipAwareItem,
     SplitDamageHandler {
@@ -80,6 +85,17 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
     public AABB getSweepHitBox(ItemStack stack, Player player, Entity target) {
         return target.getBoundingBox()
                      .inflate(5.0, 0.25, 5.0); // it's a whip
+    }
+
+    @Override
+    public void appendHoverText(
+        ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        if(EffectiveSide.get().isClient()) {
+            tooltipComponents.add(Component.translatable("item.pastel.whip.tooltip"));
+            tooltipComponents.add(Component.translatable("item.pastel.whip.tooltip1"));
+            tooltipComponents.add(Component.translatable("item.pastel.whip.tooltip2"));
+        }
     }
 
     @Override

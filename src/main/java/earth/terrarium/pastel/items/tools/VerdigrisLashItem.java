@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Tier;
 
-public class VerdigrisLashItem extends WhipItem{
+public class VerdigrisLashItem extends WhipItem {
     public VerdigrisLashItem(Tier tier, int attackDamage, float attackSpeed, Properties properties) {
         super(tier, attackDamage, attackSpeed, 0.5f,16, 1, 5, 0.2f, properties); // 16 hits to fully charge up your fervor, seems reasonable; might need to tune it down actually because it can proc multiple times with big sweeps
     }
