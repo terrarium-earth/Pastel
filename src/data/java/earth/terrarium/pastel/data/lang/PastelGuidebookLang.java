@@ -1430,8 +1430,8 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.fox_o_nine_tails.page1.text",
             "Not only are its effects far more potent, but they do not even require me to be striking with the whip " +
             "itself. Holding it in my other hand while swinging another weapon, or being hit myself, can build " +
-            "Fervor as well, though not as effectively. While swinging it alongside another weapon is a bit too " +
-            "much for me to handle, I can channel Fervor into myself or others just fine."
+            "[#](ff4d76)Fervor[#]() as well, though not as effectively. While swinging it alongside another weapon is" +
+            " a bit too much for me to handle, I can channel [#](ff4d76)Fervor[#]() into myself or others just fine."
         );
         provider.add(
             "book.pastel.guidebook.fox_o_nine_tails.page2.text",
@@ -1481,12 +1481,12 @@ public class PastelGuidebookLang {
         );
         provider.add(
             "book.pastel.guidebook.verdigris_lash.page1.text",
-            "Striking enemies with the whip invigorates it, building up an energy I've taken to calling 'Fervor'. " +
-            "Using the whip on a friend (I'm sure they won't mind) will expend all Fervor to heal and invigorate " +
-            "them, or I can try the same on empty air to charge my next strike with a cocktail of nasty effects. " +
-            "Repeating the latter while the whip is charged will instead channel the Fervor into myself. All effects " +
-            "scale with the amount of Fervor expended; using a fully-charged whip will generally have even better " +
-            "effects."
+            "Striking enemies with the whip invigorates it, building up an energy I've taken to calling '[#](ff4d76)" +
+            "Fervor[#]()'. Using the whip on a friend (I'm sure they won't mind) will expend all [#](ff4d76)Fervor[#]" +
+            "() to heal and invigorate them, or I can try the same on empty air to charge my next strike with a " +
+            "cocktail of nasty effects. Repeating the latter while the whip is charged will instead channel the [#]" +
+            "(ff4d76)Fervor[#]() into myself. All effects scale with the amount of [#](ff4d76)Fervor[#]() expended; " +
+            "using a fully-charged whip will generally have even better effects."
         );
         provider.add(
             "book.pastel.guidebook.verdigris_lash.page2.text",
