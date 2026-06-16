@@ -64,6 +64,8 @@ public class PastelItemLang {
         }
 
         // EMI aliases
+        provider.add("item.pastel.whip.alias", "Whip");
+
         provider.add("item.pastel.crystal_armor.alias_0", "Gemstone Armor");
         provider.add("item.pastel.crystal_armor.alias_1", "Crystal Armor");
 

@@ -1,0 +1,37 @@
+{
+  "name": "item.pastel.fox_o_nine_tails",
+  "icon": {
+    "item": "pastel:fox_o_nine_tails"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/fox_o_nine_tails"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/aether_vestiges"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -2,
+  "y": -8,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "item.pastel.fox_o_nine_tails",
+      "text": "book.pastel.guidebook.fox_o_nine_tails.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.fox_o_nine_tails.page1.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "recipe_id": "pastel:fusion_shrine/fox_o_nine_tails",
+      "text": "book.pastel.guidebook.fox_o_nine_tails.page2.text"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "unlocked_verdigris_lash": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:unlocks/equipment/verdigris_lash"
+      }
+    },
+    "collected_aether_vestiges": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:lategame/collect_aether_vestiges"
+      }
+    }
+  }
+}

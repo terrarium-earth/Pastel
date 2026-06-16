@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:fox_o_nine_tails"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_fox_o_nine_tails.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_fox_o_nine_tails.description"
+    }
+  },
+  "parent": "pastel:lategame/collect_aether_vestiges",
+  "criteria": {
+    "created_fox_o_nine_tails": {
+      "trigger": "pastel:crafted_with_fusion_shrine",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:fox_o_nine_tails"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "databank:has_advancement",
+      "conditions": {
+        "advancement": "pastel:lategame/collect_aether_vestiges"
+      }
+    }
+  }
+}

@@ -87,6 +87,18 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
                      .inflate(5.0, 0.25, 5.0); // it's a whip
     }
 
+    public static void incrementFervor(ItemStack stack, int fervor) {
+        checkFervorReset(stack);
+        stack.set(PastelDataComponentTypes.FERVOR, stack.getOrDefault(PastelDataComponentTypes.FERVOR, 0) + fervor);
+    }
+
+    public static void checkFervorReset(ItemStack stack) {
+        if(stack.getOrDefault(PastelDataComponentTypes.FERVOR_RESET, false)){
+            stack.set(PastelDataComponentTypes.FERVOR_RESET, false);
+            stack.set(PastelDataComponentTypes.FERVOR, 0);
+        }
+    }
+    
     @Override
     public void appendHoverText(
         ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
@@ -108,10 +120,7 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
     // fervor! so it's entirely invisible to the player
     @Override
     public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        if (stack.getOrDefault(PastelDataComponentTypes.FERVOR_RESET, false)) {
-            stack.set(PastelDataComponentTypes.FERVOR, 0);
-            stack.set(PastelDataComponentTypes.FERVOR_RESET, false);
-        }
+        checkFervorReset(stack);
         return super.onLeftClickEntity(stack, player, entity);
     }
 
@@ -120,10 +129,7 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
         var stack = player.getItemInHand(usedHand);
         var fervor = stack
                            .getOrDefault(PastelDataComponentTypes.FERVOR, 0);
-        if(stack.getOrDefault(PastelDataComponentTypes.FERVOR_RESET, false)) {
-            stack.set(PastelDataComponentTypes.FERVOR, 0);
-            stack.set(PastelDataComponentTypes.FERVOR_RESET, false);
-        }
+        checkFervorReset(stack);
         if (fervor < 0) { // we're using it while we're already charged up and full of fervor; apply buffs to self
             stack
                   .set(PastelDataComponentTypes.FERVOR, 0);
@@ -151,10 +157,7 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
         ItemStack stack, Player player, LivingEntity interactionTarget,
         InteractionHand usedHand
     ) {
-        if(stack.getOrDefault(PastelDataComponentTypes.FERVOR_RESET, false)) {
-            stack.set(PastelDataComponentTypes.FERVOR, 0);
-            stack.set(PastelDataComponentTypes.FERVOR_RESET, false);
-        }
+        checkFervorReset(stack);
         var fervor = stack.getOrDefault(PastelDataComponentTypes.FERVOR, 0);
         if (fervor < 0) // we're "activated", correct the value to use
             fervor = -fervor;

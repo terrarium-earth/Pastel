@@ -13,6 +13,7 @@ import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
+import earth.terrarium.pastel.items.tools.WhipItem;
 import earth.terrarium.pastel.items.trinkets.AttackRingItem;
 import earth.terrarium.pastel.items.trinkets.ConsumptionRingItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
@@ -79,30 +80,61 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelDamageEvents::electricDamage);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::attackAware);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::followupStrikes);
+        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::gatherFervor);
+    }
+
+    private static void gatherFervor(LivingDamageEvent.Post event) {
+        if (event.getNewDamage() <= 0) return;
+        if (event.getEntity() instanceof Player player) {
+            var mainHandStack = player.getMainHandItem();
+            var offHandStack = player.getOffhandItem();
+            if (mainHandStack.is(PastelItems.FOX_O_NINE_TAILS)) {
+                WhipItem.incrementFervor(mainHandStack, 1);
+            }
+            if (offHandStack.is(PastelItems.FOX_O_NINE_TAILS)) {
+                WhipItem.incrementFervor(offHandStack, 1);
+            }
+        }
+        if (event.getSource()
+                 .getEntity() instanceof Player player) {
+            var offHandStack = player.getOffhandItem();
+            if (offHandStack.is(PastelItems.FOX_O_NINE_TAILS)) {
+                WhipItem.incrementFervor(offHandStack, 1);
+            }
+        }
     }
 
     private static void followupStrikes(LivingDamageEvent.Post event) {
         var source = event.getSource();
-        if(event.getEntity().hasData(WhipFollowupStrikesAttachment.ATTACHMENT)) return;
-        if(source.getEntity() == null
-           || source.getEntity().getWeaponItem() == null
-           || !source.getEntity().getWeaponItem().is(PastelItems.FOX_O_NINE_TAILS)) return;
-        // we're hitting something with the fox-o-nine-tails and our victim has no component. give them 8 more lashings, sire!
-        event.getEntity().setData(WhipFollowupStrikesAttachment.ATTACHMENT, 8);
+        if (event.getEntity()
+                 .hasData(WhipFollowupStrikesAttachment.ATTACHMENT)) return;
+        if (source.getEntity() == null || source.getEntity()
+                                                .getWeaponItem() == null || !source.getEntity()
+                                                                                   .getWeaponItem()
+                                                                                   .is(PastelItems.FOX_O_NINE_TAILS))
+            return;
+        // we're hitting something with the fox-o-nine-tails and our victim has no component. give them 8 more
+        // lashings, sire!
+        event.getEntity()
+             .setData(WhipFollowupStrikesAttachment.ATTACHMENT, 8);
     }
 
-    private static void attackAware(LivingDamageEvent.Post event){
-        var attacker = event.getSource().getEntity();
+    private static void attackAware(LivingDamageEvent.Post event) {
+        var attacker = event.getSource()
+                            .getEntity();
         var victim = event.getEntity();
-        if(attacker instanceof LivingEntity livingEntity && livingEntity.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof EntityAttackAwareItem item) {
-            item.onEntityDamage(livingEntity.getItemInHand(InteractionHand.MAIN_HAND), victim, livingEntity, event.getSource(), event.getNewDamage());
+        if (attacker instanceof LivingEntity livingEntity && livingEntity.getItemInHand(InteractionHand.MAIN_HAND)
+                                                                         .getItem() instanceof EntityAttackAwareItem item) {
+            item.onEntityDamage(
+                livingEntity.getItemInHand(InteractionHand.MAIN_HAND), victim, livingEntity,
+                event.getSource(), event.getNewDamage()
+            );
         }
     }
 
     private static void electricDamage(LivingIncomingDamageEvent event) {
         var source = event.getSource();
-        if (!source.is(PastelDamageTypes.ELECTRIC))
-            return;
+        if (!source.is(PastelDamageTypes.ELECTRIC)) return;
         if (event.getEntity() instanceof Creeper creeper) {
             creeper.getEntityData()
                    .set(Creeper.DATA_IS_POWERED, true);
@@ -132,8 +164,8 @@ public class PastelDamageEvents {
         }
         if (event.getEntity() instanceof Player player) {
             player.displayClientMessage(
-                Component.literal(
-                    "Your tech armor shields you from the shock, draining " + mitigated*100 / totalCap + "% of its power!"), true
+                Component.literal("Your tech armor shields you from the shock, draining " + mitigated * 100 / totalCap +
+                                  "% of its power!"), true
             );
         }
         if ((float) mitigated * 100 / totalCap >= event.getAmount()) {
@@ -412,7 +444,10 @@ public class PastelDamageEvents {
         if (source.getEntity() instanceof LivingEntity livingAttacker) {
             if (amount != 0 && target.getHealth() == target.getMaxHealth()) {
                 var mainHandStack = livingAttacker.getMainHandItem();
-                var level = Ench.getLevel(livingAttacker.level().registryAccess(), PastelEnchantments.FIRST_STRIKE, mainHandStack);
+                var level = Ench.getLevel(
+                    livingAttacker.level()
+                                  .registryAccess(), PastelEnchantments.FIRST_STRIKE, mainHandStack
+                );
                 if (level > 0) {
                     event.setNewDamage(amount + PastelCommon.CONFIG.FirstStrikeDamagePerLevel * level);
                 }

@@ -19,6 +19,15 @@
         "item.pastel.crystal_armor.alias_0",
         "item.pastel.crystal_armor.alias_1"
       ]
+    },
+    {
+      "stacks": [
+        "item:pastel:verdigris_lash",
+        "item:pastel:fox_o_nine_tails"
+      ],
+      "text": [
+        "item.pastel.whip.alias"
+      ]
     }
   ]
 }

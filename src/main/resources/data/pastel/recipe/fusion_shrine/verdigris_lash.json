@@ -1,0 +1,42 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 400,
+  "experience": 12.0,
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    "minecraft:lead",
+    {
+      "item": "pastel:nightdew_sprout",
+      "count": 3
+    },
+    {
+      "item": "pastel:vegetal",
+      "count": 8
+    },
+    {
+      "item": "pastel:stardust",
+      "count": 16
+    },
+    {
+      "item": "pastel:frostbite_essence",
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "pastel:verdigris_lash"
+  },
+  "required_advancement": "pastel:unlocks/equipment/verdigris_lash",
+  "start_crafting_effect": "single_visual_explosion_on_shrine",
+  "during_crafting_effects": [
+    "nothing",
+    "visual_explosions_on_shrine",
+    "nothing"
+  ],
+  "finish_crafting_effect": "legendary_tool_craft",
+  "description": {
+    "type": "translatable",
+    "translate": "pastel.recipe.fusion_shrine.explanation.verdigris_lash"
+  }
+}

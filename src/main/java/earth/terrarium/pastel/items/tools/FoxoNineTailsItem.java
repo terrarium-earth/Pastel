@@ -72,6 +72,6 @@ public class FoxoNineTailsItem extends WhipItem implements SlotBackgroundEffect 
 
     @Override
     public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
-        return InkColors.PINK_COLOR;
+        return InkColors.CERISE_COLOR;
     }
 }
