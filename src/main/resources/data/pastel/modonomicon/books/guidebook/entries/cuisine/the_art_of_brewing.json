@@ -28,15 +28,6 @@
     {
       "type": "modonomicon:text",
       "text": "book.pastel.guidebook.the_art_of_brewing.page2.text"
-    },
-    {
-      "type": "pastel:confirmation_button",
-      "title": "book.pastel.guidebook.the_art_of_brewing.drinking_age.title",
-      "checked_advancement": "pastel:unlocks/blocks/titration_barrel",
-      "button_text": "book.pastel.guidebook.the_art_of_brewing.drinking_age.button_text",
-      "button_text_confirmed": "book.pastel.guidebook.the_art_of_brewing.drinking_age.button_text_confirmed",
-      "confirmation": "confirm_drinking_age",
-      "text": "book.pastel.guidebook.the_art_of_brewing.drinking_age.text"
     }
   ]
 }
