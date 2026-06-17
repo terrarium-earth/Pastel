@@ -6475,8 +6475,6 @@ public class PastelGuidebookLang {
             "book.pastel.guidebook.teatable.page3.text",
             "*Warm and soft. Beloved of hawks. Comes in all 16 colors of the rainbow!*"
         );
-        provider.add("book.pastel.guidebook.the_art_of_brewing.drinking_age.button_text", "I confirm");
-        provider.add("book.pastel.guidebook.the_art_of_brewing.drinking_age.button_text_confirmed", "Confirmed ✔");
         provider.add(
             "book.pastel.guidebook.the_art_of_brewing.drinking_age.text",
             "The [Titration Barrel](entry://cuisine/titration_barrel) is capable of brewing alcoholic beverages. If " +
