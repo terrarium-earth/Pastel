@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<module name="Checker">
+    <module name="TreeWalker">
+        <module name="FallThrough"/>
+        <module name="AvoidStarImport"/>
+        <module name="OneTopLevelClass"/>
+        <module name="NoLineWrap">
+            <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT"/>
+        </module>
+        <module name="CustomImportOrder">
+            <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="separateLineBetweenGroups" value="true"/>
+            <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
+        </module>
+        <module name="UnusedImports"/>
+    </module>
+</module>

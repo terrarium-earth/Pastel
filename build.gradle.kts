@@ -1,16 +1,18 @@
 import groovy.json.StringEscapeUtils
 
 plugins {
-	id("maven-publish")
+    id("maven-publish")
     id("earth.terrarium.cloche") version "0.11.10"
-	id("com.teamresourceful.resourcefulgradle") version "0.0.+"
+    id("com.teamresourceful.resourcefulgradle") version "0.0.+"
+    id("com.diffplug.spotless") version "8.7.0"
+    checkstyle
 }
 
 repositories {
     cloche.librariesMinecraft()
 
     mavenCentral()
-	mavenLocal()
+    mavenLocal()
 
     cloche {
         mavenNeoforgedMeta()
@@ -39,7 +41,7 @@ repositories {
 
     maven(url = "https://repo.unascribed.com") // Ears API
 
-	maven(url = "https://cursemaven.com") // xycraft
+    maven(url = "https://cursemaven.com") // xycraft
 
     maven(url = "https://maven.terraformersmc.com/"){ // biolith
         name = "TerraformersMC"
@@ -54,7 +56,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.2.0"
+        version = System.getenv("VERSION") ?: "1.2.0"
 
         description = "Do flowers dream of the moon?"
 
@@ -164,26 +166,26 @@ cloche {
 
                 modImplementation("com.terraformersmc:biolith-neoforge:3.0.10")
 
-				modImplementation("dev.emi:emi-neoforge:1.1.19+1.21.1")
+                modImplementation("dev.emi:emi-neoforge:1.1.19+1.21.1")
 
                 modCompileOnly("maven.modrinth:colorful-hearts:10.3.8") { isTransitive = false }
                 modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.9-neoforge") { isTransitive = false }
                 modCompileOnly("com.unascribed:ears-api:1.4.6")
                 modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
-				modCompileOnly("maven.modrinth:vanity:xWfEA0yC") // compile only cuz accessories
+                modCompileOnly("maven.modrinth:vanity:xWfEA0yC") // compile only cuz accessories
 
                 modImplementation("maven.modrinth:create:6.0.10+mc1.21.1") { isTransitive = false }
                 modImplementation("maven.modrinth:lodestonelib:1.8.2") { isTransitive = false }
                 modImplementation("maven.modrinth:malum:1.8.2") { isTransitive = false }
                 modImplementation("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
-				modRuntimeOnly("maven.modrinth:ae2:19.2.12") { isTransitive = false }
-				modRuntimeOnly("maven.modrinth:guideme:21.1.13") { isTransitive = false }
-				modRuntimeOnly("curse.maven:xycraft-653786:5601037") { isTransitive = false }
-				modRuntimeOnly("curse.maven:xycraft-machines-653791:5601045") { isTransitive = false }
-				modRuntimeOnly("curse.maven:xycraft-world-653789:5601038") { isTransitive = false }
+                modRuntimeOnly("maven.modrinth:ae2:19.2.12") { isTransitive = false }
+                modRuntimeOnly("maven.modrinth:guideme:21.1.13") { isTransitive = false }
+                modRuntimeOnly("curse.maven:xycraft-653786:5601037") { isTransitive = false }
+                modRuntimeOnly("curse.maven:xycraft-machines-653791:5601045") { isTransitive = false }
+                modRuntimeOnly("curse.maven:xycraft-world-653789:5601038") { isTransitive = false }
                 //modRuntimeOnly("maven.modrinth:mmmmmmmmmmmm:neoforge_1.21-2.0.8")  { isTransitive = false }
                 //modRuntimeOnly("maven.modrinth:moonlight:1.21-2.20.3-neoforge")  { isTransitive = false }
-				modRuntimeOnly("maven.modrinth:jei:zRGLFYRx") // cuz xycraft >:(
+                modRuntimeOnly("maven.modrinth:jei:zRGLFYRx") // cuz xycraft >:(
                 //modRuntimeOnly("dev.ryanhcode.sable:sable-neoforge-1.21.1:1.2.2") { isTransitive = false }
                 //modRuntimeOnly("maven.modrinth:enchiridion:0.2.0+1.21.1-neoforge") { isTransitive = false }
                 //modRuntimeOnly("maven.modrinth:owo-lib:0.12.15.5-beta.1+1.21") { isTransitive = false }
@@ -218,55 +220,74 @@ cloche {
     }
 }
 
+checkstyle {
+    toolVersion = "13.5.0"
+}
+
+spotless {
+    format("misc") {
+        target("*.gradle.kts", ".gitattributes", ".gitignore")
+
+        trimTrailingWhitespace()
+        leadingTabsToSpaces()
+        endWithNewline()
+    }
+
+    java {
+        eclipse().configFile("config/format.xml")
+        formatAnnotations()
+    }
+}
+
 publishing {
-	publications {
-		create<MavenPublication>("maven") {
-			val modId = cloche.metadata.modId.get()
-			from(components["java"])
+    publications {
+        create<MavenPublication>("maven") {
+            val modId = cloche.metadata.modId.get()
+            from(components["java"])
 
-			pom {
-				name.set("Pastel")
-				url.set("https://github.com/terrarium-earth/$modId")
+            pom {
+                name.set("Pastel")
+                url.set("https://github.com/terrarium-earth/$modId")
 
-				scm {
-					connection.set("git:https://github.com/terrarium-earth/$modId.git")
-					developerConnection.set("git:https://github.com/terrarium-earth/$modId.git")
-					url.set("https://github.com/terrarium-earth/$modId")
-				}
+                scm {
+                    connection.set("git:https://github.com/terrarium-earth/$modId.git")
+                    developerConnection.set("git:https://github.com/terrarium-earth/$modId.git")
+                    url.set("https://github.com/terrarium-earth/$modId")
+                }
 
-				licenses {
-					license {
-						name.set("LGPL-3.0")
-					}
-				}
-			}
-		}
-	}
-	repositories {
-		maven {
-			setUrl("https://maven.resourcefulbees.com/repository/terrarium/")
-			credentials {
-				username = System.getenv("MAVEN_USER")
-				password = System.getenv("MAVEN_PASS")
-			}
-		}
-	}
+                licenses {
+                    license {
+                        name.set("LGPL-3.0")
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            setUrl("https://maven.resourcefulbees.com/repository/terrarium/")
+            credentials {
+                username = System.getenv("MAVEN_USER")
+                password = System.getenv("MAVEN_PASS")
+            }
+        }
+    }
 }
 
 
 resourcefulGradle {
-	templates {
-		register("embed") {
+    templates {
+        register("embed") {
 
-			source.set(file("templates/embed.json.template"))
-			injectedValues.set(mapOf(
-				"minecraft" to "1.21.1", // TODO: ask Ash (awawawa) how to fix this
-				"version" to System.getenv("VERSION"),
-				"changelog" to StringEscapeUtils.escapeJava(System.getenv("CHANGELOG")),
+            source.set(file("templates/embed.json.template"))
+            injectedValues.set(mapOf(
+                "minecraft" to "1.21.1", // TODO: ask Ash (awawawa) how to fix this
+                "version" to System.getenv("VERSION"),
+                "changelog" to StringEscapeUtils.escapeJava(System.getenv("CHANGELOG")),
                 "version" to System.getenv("VERSION"),
                 "modrinth_link" to System.getenv("MODRINTH_RELEASE_URL"),
                 "curseforge_link" to System.getenv("CURSEFORGE_RELEASE_URL"),
-			))
-		}
-	}
+            ))
+        }
+    }
 }
