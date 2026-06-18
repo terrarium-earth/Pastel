@@ -1,0 +1,162 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "pastel:glistering_melon_stem",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "0"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 3.0,
+                "p": 0.03333333
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "pastel:glistering_melon_stem",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "1"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 3.0,
+                "p": 0.6666667
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "pastel:glistering_melon_stem",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "2"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 3.0,
+                "p": 0.1
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "pastel:glistering_melon_stem",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "3"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 3.0,
+                "p": 0.1333333
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "pastel:glistering_melon_stem",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "4"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 3.0,
+                "p": 0.1666666
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "pastel:glistering_melon_stem",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "5"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 3.0,
+                "p": 0.2
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "pastel:glistering_melon_stem",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "6"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 3.0,
+                "p": 0.23333333
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "pastel:glistering_melon_stem",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "7"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 3.0,
+                "p": 0.26666665
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "pastel:glistering_melon_seeds"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "pastel:blocks/glistering_melon_stem"
+}

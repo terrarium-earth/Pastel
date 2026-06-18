@@ -1,0 +1,72 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "pastel:tall_yellow_dragonjag",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "dead": "false",
+            "half": "lower"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "offsetY": 1,
+          "predicate": {
+            "block": {
+              "blocks": "pastel:tall_yellow_dragonjag",
+              "state": {
+                "dead": "false",
+                "half": "upper"
+              }
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:small_yellow_dragonjag"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "pastel:tall_yellow_dragonjag",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "dead": "false",
+            "half": "upper"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "offsetY": -1,
+          "predicate": {
+            "block": {
+              "blocks": "pastel:tall_yellow_dragonjag",
+              "state": {
+                "dead": "false",
+                "half": "lower"
+              }
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:small_yellow_dragonjag"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "pastel:blocks/tall_yellow_dragonjag"
+}

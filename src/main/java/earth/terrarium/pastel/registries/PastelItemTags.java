@@ -15,6 +15,7 @@ public class PastelItemTags {
     // "c" namespace
     public static final TagKey<Item> SKULLS = common("skulls");
     public static final TagKey<Item> FRUITS = common("foods/fruit");
+    public static final TagKey<Item> SHEARS = common("tools/shear");
 
     // "pastel" namespace
     public static final TagKey<Item> COOKBOOKS = of("cookbooks");
@@ -41,6 +42,7 @@ public class PastelItemTags {
     public static final TagKey<Item> TEA_TABLE_DRINKS = of("tea_table_drinks");
     public static final TagKey<Item> METAL_ARMOR = of("metal_armor");
     public static final TagKey<Item> CRYSTAL_EMPOWER_BLACKLIST = of("crystal_empower_blacklist");
+    public static final TagKey<Item> WORKSTAFFS = of("workstaffs");
 
     public static final TagKey<Item> PRODUCTIVITY_EXCLUDED = of("productivity_excluded");
 

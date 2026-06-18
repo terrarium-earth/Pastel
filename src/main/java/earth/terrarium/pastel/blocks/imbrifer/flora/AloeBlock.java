@@ -28,7 +28,7 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
 
     public static final MapCodec<AloeBlock> CODEC = simpleCodec(AloeBlock::new);
 
-    protected static final IntegerProperty AGE = BlockStateProperties.AGE_4;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_4;
     protected static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 9.0, 12.0);
     protected static final double GROW_CHANCE = 0.4;
     protected static final int MAX_LIGHT_LEVEL = 10;

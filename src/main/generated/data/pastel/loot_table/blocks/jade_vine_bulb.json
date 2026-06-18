@@ -1,0 +1,85 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "pastel:jade_vine_bulb",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "dead": "false"
+              }
+            }
+          ],
+          "name": "pastel:germinated_jade_vine_bulb"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "pastel:jade_vine_bulb",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "dead": "true"
+              }
+            }
+          ],
+          "name": "pastel:hibernating_jade_vine_bulb"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "pastel:jade_vine_bulb",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "dead": "true"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            },
+            {
+              "enchantment": "pastel:resonance",
+              "formula": "minecraft:uniform_bonus_count",
+              "function": "minecraft:apply_bonus",
+              "parameters": {
+                "bonusMultiplier": 2
+              }
+            }
+          ],
+          "name": "pastel:jade_jelly"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "pastel:blocks/jade_vine_bulb"
+}

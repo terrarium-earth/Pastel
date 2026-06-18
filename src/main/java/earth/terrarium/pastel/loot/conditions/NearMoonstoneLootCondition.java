@@ -6,6 +6,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelLootConditions;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -13,8 +14,10 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Optional;
 import java.util.Set;
 
 public record NearMoonstoneLootCondition(int searchRadius) implements LootItemCondition {
@@ -42,6 +45,10 @@ public record NearMoonstoneLootCondition(int searchRadius) implements LootItemCo
             }
         }
         return false;
+    }
+
+    public static LootItemCondition.Builder nearMoonstone(int radius) {
+        return () -> new NearMoonstoneLootCondition(radius);
     }
 
     @Override
