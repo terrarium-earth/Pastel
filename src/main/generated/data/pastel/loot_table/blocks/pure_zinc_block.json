@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:pure_zinc_block"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "pastel:blocks/pure_zinc_block"
+}

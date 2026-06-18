@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:polished_bone_ash_pillar"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "pastel:blocks/polished_bone_ash_pillar"
+}

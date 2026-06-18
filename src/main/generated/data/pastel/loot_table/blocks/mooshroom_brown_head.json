@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:mooshroom_brown_head"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "pastel:blocks/mooshroom_brown_head"
+}

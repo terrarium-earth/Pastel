@@ -528,7 +528,7 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> BUDDING_TOPAZ = register(blockWithItem(
         "budding_topaz", () -> new PastelBuddingBlock(
             gemstoneBlock(MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK).pushReaction(PushReaction.DESTROY)
-                                                                                  .randomTicks(),
+                                                                                  .randomTicks().noLootTable(),
             PastelBlocks.SMALL_TOPAZ_BUD.get(), PastelBlocks.MEDIUM_TOPAZ_BUD.get(), PastelBlocks.LARGE_TOPAZ_BUD.get(),
             PastelBlocks.TOPAZ_CLUSTER.get(), PastelSounds.BLOCK_TOPAZ_BLOCK_HIT, PastelSounds.BLOCK_TOPAZ_BLOCK_CHIME
         ), InkColors.CYAN
@@ -568,7 +568,7 @@ public class PastelBlocks {
         "budding_citrine", () -> new PastelBuddingBlock(
             gemstoneBlock(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK).pushReaction(
                                                                                           PushReaction.DESTROY)
-                                                                                      .randomTicks(),
+                                                                                      .randomTicks().noLootTable(),
             PastelBlocks.SMALL_CITRINE_BUD.get(), PastelBlocks.MEDIUM_CITRINE_BUD.get(),
             PastelBlocks.LARGE_CITRINE_BUD.get(), PastelBlocks.CITRINE_CLUSTER.get(),
             PastelSounds.BLOCK_CITRINE_BLOCK_HIT, PastelSounds.BLOCK_CITRINE_BLOCK_CHIME
@@ -607,7 +607,7 @@ public class PastelBlocks {
     ));
     public static final DeferredBlock<Block> BUDDING_ONYX = register(blockWithItem(
         "budding_onyx", () -> new PastelBuddingBlock(
-            gemstoneBlock(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK).pushReaction(PushReaction.DESTROY)
+            gemstoneBlock(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK).noLootTable().pushReaction(PushReaction.DESTROY)
                                                                                   .randomTicks(),
             PastelBlocks.SMALL_ONYX_BUD.get(), PastelBlocks.MEDIUM_ONYX_BUD.get(), PastelBlocks.LARGE_ONYX_BUD.get(),
             PastelBlocks.ONYX_CLUSTER.get(), PastelSounds.BLOCK_ONYX_BLOCK_HIT, PastelSounds.BLOCK_ONYX_BLOCK_CHIME
@@ -646,7 +646,7 @@ public class PastelBlocks {
     ));
     public static final DeferredBlock<Block> BUDDING_MOONSTONE = register(blockWithItem(
         "budding_moonstone", () -> new PastelBuddingBlock(
-            gemstoneBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK).pushReaction(PushReaction.DESTROY)
+            gemstoneBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK).noLootTable().pushReaction(PushReaction.DESTROY)
                                                                                 .randomTicks(),
             PastelBlocks.SMALL_MOONSTONE_BUD.get(), PastelBlocks.MEDIUM_MOONSTONE_BUD.get(),
             PastelBlocks.LARGE_MOONSTONE_BUD.get(), PastelBlocks.MOONSTONE_CLUSTER.get(),
@@ -1098,7 +1098,7 @@ public class PastelBlocks {
     ));
 
     public static final DeferredBlock<Block> DRAGONBONE = register(blockWithItem(
-        "dragonbone", () -> new DragonboneBlock(Properties.ofFullCopy(BONE_BLOCK)
+        "dragonbone", () -> new DragonboneBlock(Properties.ofFullCopy(BONE_BLOCK).noLootTable()
                                                           .strength(-1.0F, 22.0F)
                                                           .pushReaction(PushReaction.BLOCK)), InkColors.GREEN
     ));
@@ -1191,7 +1191,7 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> BLACK_MATERIA = register(blockWithItem(
         "black_materia", () -> new BlackMateriaBlock(settings(
             MapColor.TERRACOTTA_BLACK, SoundType.SAND, 0.0F).instrument(NoteBlockInstrument.SNARE)
-                                                            .randomTicks()), InkColors.GRAY
+                                                            .randomTicks().noLootTable()), InkColors.GRAY
     ));
     public static final DeferredBlock<Block> HORNSLAKE = register(blockWithItem(
         "hornslake", () -> new Block(
@@ -1199,20 +1199,20 @@ public class PastelBlocks {
         InkColors.GRAY
     ));
     public static final DeferredBlock<Block> SAG_LEAF = register(block(
-        "sag_leaf", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS)
+        "sag_leaf", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS).noLootTable()
                                                               .mapColor(MapColor.TERRACOTTA_BLACK))
     ));
     public static final DeferredBlock<Block> SAG_BUBBLE = register(block(
-        "sag_bubble", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS)
+        "sag_bubble", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS).noLootTable()
                                                                 .mapColor(MapColor.TERRACOTTA_BLACK))
     ));
     public static final DeferredBlock<Block> SMALL_SAG_BUBBLE = register(block(
-        "small_sag_bubble", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS)
+        "small_sag_bubble", () -> new BlackSludgePlantBlock(Properties.ofFullCopy(SHORT_GRASS).noLootTable()
                                                                       .mapColor(MapColor.TERRACOTTA_BLACK))
     ));
 
     public static final DeferredBlock<Block> PRIMORDIAL_FIRE = register(block(
-        "primordial_fire", () -> new PrimordialFireBlock(Properties.ofFullCopy(FIRE)
+        "primordial_fire", () -> new PrimordialFireBlock(Properties.ofFullCopy(FIRE).noLootTable()
                                                                    .mapColor(MapColor.COLOR_PURPLE)
                                                                    .lightLevel((state) -> 10))
     ));
@@ -1777,7 +1777,7 @@ public class PastelBlocks {
     ));
 
     public static final DeferredBlock<Block> PRESENT = register(blockWithItem(
-        "present", () -> new PresentBlock(Properties.ofFullCopy(WHITE_WOOL)), block -> new PresentBlockItem(
+        "present", () -> new PresentBlock(Properties.ofFullCopy(WHITE_WOOL).noLootTable()), block -> new PresentBlockItem(
             block, IS.of(1)
                      .component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)
         ), InkColors.LIGHT_GRAY
@@ -1789,10 +1789,10 @@ public class PastelBlocks {
     ));
 
     public static final DeferredBlock<Block> BLOCK_FLOODER = register(
-        block("block_flooder", () -> new BlockFlooderBlock(settings(MapColor.CLAY, SoundType.ROOTED_DIRT, 0.0F))));
+        block("block_flooder", () -> new BlockFlooderBlock(settings(MapColor.CLAY, SoundType.ROOTED_DIRT, 0.0F).noLootTable())));
     public static final DeferredBlock<Block> BOTTOMLESS_BUNDLE = register(blockWithItem(
                                                                               "bottomless_bundle",
-                                                                              () -> new BottomlessBundleBlock(settings(MapColor.ICE, SoundType.WOOL, 1.0F).noOcclusion()
+                                                                              () -> new BottomlessBundleBlock(settings(MapColor.ICE, SoundType.WOOL, 1.0F).noOcclusion().noLootTable()
                                                                                                                                                                                .pushReaction(
                                                                                                                                                                                    PushReaction.DESTROY)),
                                                                               block -> new BottomlessBundleItem(block
@@ -1822,14 +1822,13 @@ public class PastelBlocks {
                                                                                     PastelBlockSoundGroups.SHIMMERSTONE_LIGHT)
                                                                                 .instabreak()
                                                                                 .noCollission()
-                                                                                .noLootTable()
                                                                                 .pushReaction(PushReaction.DESTROY))
     ));
 
     public static final DeferredBlock<Block> TEMPORARY_PLATFORM = register(block(
         "temporary_platform", () -> new TemporaryPlatformBlock(
             Properties.ofFullCopy(PastelBlocks.ETHEREAL_PLATFORM.get())
-                      .instabreak())
+                      .instabreak().noLootTable())
     ));
 
     private static Properties decay(
@@ -1855,7 +1854,7 @@ public class PastelBlocks {
             decay(MapColor.COLOR_BLACK, SoundType.STONE, 100.0F, 3600000.0F, PushReaction.BLOCK))
     ));
     public static final DeferredBlock<Block> DECAY_AWAY = register(block(
-        "decay_away", () -> new DecayAwayBlock(Properties.ofFullCopy(DIRT)
+        "decay_away", () -> new DecayAwayBlock(Properties.ofFullCopy(DIRT).noLootTable()
                                                          .pushReaction(PushReaction.DESTROY))
     ));
 
@@ -2701,7 +2700,7 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> WEEPING_GALA_FRONDS = register(block(
         "weeping_gala_fronds", () -> new WeepingGalaFrondsBlock(
-            Properties.ofFullCopy(PastelBlocks.WEEPING_GALA_LEAVES.get())
+            Properties.ofFullCopy(PastelBlocks.WEEPING_GALA_LEAVES.get()).noLootTable()
                       .noCollission())
     ));
     public static final DeferredBlock<Block> WEEPING_GALA_FRONDS_PLANT = register(block(
@@ -3169,7 +3168,7 @@ public class PastelBlocks {
     }
 
     public static final DeferredBlock<Block> JADE_VINE_ROOTS = register(block(
-        "jade_vine_roots", () -> new JadeVineRootsBlock(jadeVine().randomTicks()
+        "jade_vine_roots", () -> new JadeVineRootsBlock(jadeVine().randomTicks().noLootTable()
                                                                   .lightLevel(
                                                                       (state) -> state.getValue(JadeVineRootsBlock.DEAD)
                                                                                  ? 0 : 4))
@@ -3288,7 +3287,7 @@ public class PastelBlocks {
     ));
     public static final DeferredBlock<Block> BUDDING_AZURITE = register(block(
         "budding_azurite", () -> new BuddingAzuriteBlock(
-            gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5).randomTicks())
+            gemstone(MapColor.COLOR_BLUE, PastelBlockSoundGroups.ONYX_CLUSTER, 5).noLootTable().randomTicks())
     ));
     public static final DeferredBlock<Block> AZURITE_BLOCK = register(blockWithItem(
         "azurite_block", () -> new PastelFacingBlock(Properties.ofFullCopy(LAPIS_BLOCK)
@@ -3506,7 +3505,7 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> MEMORY = register(blockWithItem(
         "memory", () -> new MemoryBlock(settings(MapColor.NONE, SoundType.AMETHYST, 0.0F).isViewBlocking(
-                                                                                             PastelBlocks::never)
+                                                                                             PastelBlocks::never).noLootTable()
                                                                                          .noOcclusion()
                                                                                          .randomTicks()),
         block -> new MemoryItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY
@@ -3700,7 +3699,7 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> FROSTED_DEEPSLATE = register(
         blockWithItem("frosted_deepslate", () -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE)), InkColors.BLUE));
     public static final DeferredBlock<Block> SNOWGRAVE = register(
-        block("snowgrave", () -> new SnowgraveBlock(Properties.ofFullCopy(Blocks.ICE))));
+        block("snowgrave", () -> new SnowgraveBlock(Properties.ofFullCopy(Blocks.ICE).noLootTable())));
 
     public static final DeferredBlock<Block> DEEPSLATE_TOPAZ_ORE = register(blockWithItem(
         "deepslate_topaz_ore",
@@ -4741,7 +4740,7 @@ public class PastelBlocks {
 
     private static Properties shootingStar() {
         return BlockBehaviour.Properties.ofFullCopy(STONE)
-                                        .noOcclusion();
+                                        .noOcclusion().noLootTable();
     }
 
     public static final DeferredBlock<Block> GLISTERING_SHOOTING_STAR = register(blockWithItem(
