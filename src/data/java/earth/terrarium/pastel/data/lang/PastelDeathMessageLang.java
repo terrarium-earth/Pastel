@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.data.lang;
 
 import earth.terrarium.pastel.data.PastelLanguageProvider;
-import earth.terrarium.pastel.registries.PastelDamageTypes;
 
 public class PastelDeathMessageLang {
     public static void addTranslations(PastelLanguageProvider provider) {

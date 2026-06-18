@@ -1,26 +1,43 @@
 package earth.terrarium.pastel.data.models.block;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.blocks.*;
+import earth.terrarium.pastel.blocks.CrackedEndPortalFrameBlock;
+import earth.terrarium.pastel.blocks.DeeperDownPortalBlock;
+import earth.terrarium.pastel.blocks.PrimordialFireBlock;
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleBlock;
-import earth.terrarium.pastel.blocks.decay.*;
+import earth.terrarium.pastel.blocks.decay.DecayBlock;
 import earth.terrarium.pastel.blocks.present.PresentBlock;
-import earth.terrarium.pastel.blocks.redstone.*;
+import earth.terrarium.pastel.blocks.redstone.EnderGlassBlock;
+import earth.terrarium.pastel.blocks.redstone.RedstoneCalculatorBlock;
+import earth.terrarium.pastel.blocks.redstone.RedstoneTimerBlock;
+import earth.terrarium.pastel.blocks.redstone.RedstoneTransceiverBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.client.*;
+import earth.terrarium.pastel.registries.client.PastelModels;
+import earth.terrarium.pastel.registries.client.PastelTextureKeys;
+import earth.terrarium.pastel.registries.client.PastelTextureMaps;
+import earth.terrarium.pastel.registries.client.PastelTexturedModels;
+import earth.terrarium.pastel.registries.client.PastelTextures;
 import net.minecraft.core.Direction;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.blockstates.*;
-import net.minecraft.data.models.model.*;
+import net.minecraft.data.models.blockstates.Condition;
+import net.minecraft.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.data.models.blockstates.PropertyDispatch;
+import net.minecraft.data.models.blockstates.VariantProperties;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-import static net.minecraft.world.level.block.Blocks.*;
+import static net.minecraft.world.level.block.Blocks.REDSTONE_TORCH;
 
 public class FunctionalBlockModels {
     public static void generateBlockModels(BlockModelGenerators generators) {

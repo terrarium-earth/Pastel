@@ -4,7 +4,7 @@ import earth.terrarium.pastel.blocks.decoration.DiagonalBlock;
 import earth.terrarium.pastel.blocks.decoration.FlexLanternBlock;
 import earth.terrarium.pastel.blocks.imbrifer.WeepingGalaFrondsTipBlock;
 import earth.terrarium.pastel.data.PastelModelHelper;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.client.PastelModels;
 import earth.terrarium.pastel.registries.client.PastelTextureMaps;
 import earth.terrarium.pastel.registries.client.PastelTexturedModels;
@@ -17,7 +17,7 @@ import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.registries.DeferredBlock;
 

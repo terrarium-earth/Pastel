@@ -3,7 +3,6 @@ package earth.terrarium.pastel.blocks.mob_head;
 import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;

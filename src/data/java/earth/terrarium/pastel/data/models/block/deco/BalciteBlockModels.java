@@ -10,7 +10,7 @@ import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Blocks;
 
 import static net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK;
 

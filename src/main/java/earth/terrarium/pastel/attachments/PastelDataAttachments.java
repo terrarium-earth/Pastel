@@ -1,7 +1,18 @@
 package earth.terrarium.pastel.attachments;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.attachments.data.*;
+import earth.terrarium.pastel.attachments.data.CitrineJumpsAttachment;
+import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
+import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
+import earth.terrarium.pastel.attachments.data.HookshotData;
+import earth.terrarium.pastel.attachments.data.InertiaData;
+import earth.terrarium.pastel.attachments.data.JeopardantBonusData;
+import earth.terrarium.pastel.attachments.data.JumpCooldownAttachment;
+import earth.terrarium.pastel.attachments.data.LastKillData;
+import earth.terrarium.pastel.attachments.data.MiscPlayerData;
+import earth.terrarium.pastel.attachments.data.PrimordialFireData;
+import earth.terrarium.pastel.attachments.data.SpectacleData;
+import earth.terrarium.pastel.attachments.data.WhipFollowupStrikesAttachment;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeData;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;

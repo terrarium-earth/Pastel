@@ -7,11 +7,8 @@ import earth.terrarium.pastel.blocks.conditional.CloakedOreBlock;
 import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -24,8 +21,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 public class AzureCrystalBlock extends CloakedOreBlock {

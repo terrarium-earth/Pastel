@@ -6,7 +6,6 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.progression.PastelCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;

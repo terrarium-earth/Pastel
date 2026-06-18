@@ -5,7 +5,11 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
+import net.minecraft.advancements.critereon.ItemEnchantmentsPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.ItemSubPredicates;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -27,7 +31,12 @@ import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableConditio
 import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 public class ColoredBlockLootTables extends BlockLootSubProvider {
     private final Registry<Block> blockRegistry;

@@ -5,7 +5,6 @@ import earth.terrarium.pastel.api.item.HasColorGradient;
 import earth.terrarium.pastel.attachments.data.HookshotData;
 import earth.terrarium.pastel.entity.entity.WireHookEntity;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +18,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class WireHookItem extends Item implements HasColorGradient {
 

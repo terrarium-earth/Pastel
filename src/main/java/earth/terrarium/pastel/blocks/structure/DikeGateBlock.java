@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.api.block.WardDisruptableBlock;
+import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;

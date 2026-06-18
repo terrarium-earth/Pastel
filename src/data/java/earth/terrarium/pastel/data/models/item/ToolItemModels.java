@@ -5,7 +5,7 @@ import earth.terrarium.pastel.data.models.item.tools.CurioItemModels;
 import earth.terrarium.pastel.data.models.item.tools.MagicToolItemModels;
 import earth.terrarium.pastel.data.models.item.tools.MiningToolItemModels;
 import earth.terrarium.pastel.data.models.item.tools.WeaponArmorItemModels;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.data.models.ItemModelGenerators;
 
 public class ToolItemModels {

@@ -1,12 +1,20 @@
 package earth.terrarium.pastel.data;
 
-import earth.terrarium.pastel.data.loot.block.*;
+import earth.terrarium.pastel.data.loot.block.BalciteBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.ColoredBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.CraftingBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.DecoBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.FunctionalBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.HeadBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.PlantBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.ResourceBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.StoneLikeBlockLootTables;
+import earth.terrarium.pastel.data.loot.block.WoodLikeBlockLootTables;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;

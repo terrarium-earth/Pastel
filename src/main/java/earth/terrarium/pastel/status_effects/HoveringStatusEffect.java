@@ -2,9 +2,7 @@ package earth.terrarium.pastel.status_effects;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 
 public class HoveringStatusEffect extends MobEffect {
 

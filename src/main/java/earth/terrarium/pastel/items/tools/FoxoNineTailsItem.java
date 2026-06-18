@@ -2,7 +2,6 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
-import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.sounds.SoundSource;

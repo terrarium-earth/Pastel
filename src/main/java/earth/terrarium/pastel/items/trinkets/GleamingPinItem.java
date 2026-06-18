@@ -4,7 +4,6 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;

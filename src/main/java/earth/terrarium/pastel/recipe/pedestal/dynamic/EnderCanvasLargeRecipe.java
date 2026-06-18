@@ -2,23 +2,22 @@ package earth.terrarium.pastel.recipe.pedestal.dynamic;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
-import earth.terrarium.pastel.components.EnderSpliceComponent;
 import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
-import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.recipe.pedestal.RawShapedPedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
 import java.util.Optional;

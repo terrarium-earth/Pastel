@@ -2,7 +2,11 @@ package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.block.WardDisruptableBlock;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelMobEffects;
+import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;

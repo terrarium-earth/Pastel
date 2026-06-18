@@ -42,18 +42,23 @@ public class ZigZagParticle extends TextureSheetParticle {
             switch (level.random.nextInt(6)) {
                 case 1: {
                     setParticleSpeed(xd, zd, yd);
+                    break;
                 }
                 case 2: {
                     setParticleSpeed(zd, yd, xd);
+                    break;
                 }
                 case 3: {
                     setParticleSpeed(zd, xd, yd);
+                    break;
                 }
                 case 4: {
                     setParticleSpeed(yd, xd, zd);
+                    break;
                 }
                 default: {
                     setParticleSpeed(yd, zd, xd);
+                    break;
                 }
             }
         }

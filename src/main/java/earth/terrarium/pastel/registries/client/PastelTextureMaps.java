@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.registries.client;
 
-import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

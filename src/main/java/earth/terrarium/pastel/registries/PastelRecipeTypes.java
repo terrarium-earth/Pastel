@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
 import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
+import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
 import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;

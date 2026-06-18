@@ -8,7 +8,6 @@ import earth.terrarium.pastel.api.block.RedstonePoweredBlock;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalStartCraftingParticlePayload;
-import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;

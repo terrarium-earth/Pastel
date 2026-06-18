@@ -4,18 +4,13 @@ import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CrystalSpikeFeature extends Feature<BlockStateFeatureConfig> {
 

@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;

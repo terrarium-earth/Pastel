@@ -35,7 +35,6 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.util.Optional;
 import java.util.UUID;
 

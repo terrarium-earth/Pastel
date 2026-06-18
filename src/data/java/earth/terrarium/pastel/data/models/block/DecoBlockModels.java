@@ -16,9 +16,14 @@ import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
-import net.minecraft.data.models.model.*;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplate;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -27,7 +32,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static net.minecraft.world.level.block.Blocks.*;
+import static net.minecraft.world.level.block.Blocks.GLASS;
+import static net.minecraft.world.level.block.Blocks.POLISHED_ANDESITE;
+import static net.minecraft.world.level.block.Blocks.POLISHED_DIORITE;
+import static net.minecraft.world.level.block.Blocks.POLISHED_GRANITE;
+import static net.minecraft.world.level.block.Blocks.SNOW;
+import static net.minecraft.world.level.block.Blocks.TINTED_GLASS;
 
 public class DecoBlockModels {
 

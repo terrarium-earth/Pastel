@@ -1,8 +1,6 @@
 package earth.terrarium.pastel.worldgen.features;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.core.SectionPos;
-import net.minecraft.world.level.chunk.BulkSectionAccess;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 

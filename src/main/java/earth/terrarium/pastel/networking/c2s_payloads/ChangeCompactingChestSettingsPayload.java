@@ -2,8 +2,8 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.blocks.chests.CompactingChestBlockEntity;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
-import earth.terrarium.pastel.inventories.CompactionCraftingMode;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
+import earth.terrarium.pastel.inventories.CompactionCraftingMode;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

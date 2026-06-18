@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.items.misc;
 
 import earth.terrarium.pastel.helpers.level.BlockReference;
+import earth.terrarium.pastel.items.ItemWithTooltip;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import earth.terrarium.pastel.items.ItemWithTooltip;
 import net.minecraft.world.item.context.UseOnContext;
 
 import java.util.Optional;

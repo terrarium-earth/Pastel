@@ -2,7 +2,11 @@ package earth.terrarium.pastel.blocks.fluid;
 
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluidTags;
+import earth.terrarium.pastel.registries.PastelFluids;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;

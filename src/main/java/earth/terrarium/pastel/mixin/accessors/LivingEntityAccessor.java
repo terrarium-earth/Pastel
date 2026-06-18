@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.mixin.accessors;
 
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import org.spongepowered.asm.mixin.Mixin;

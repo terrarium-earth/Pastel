@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
-import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStarDispenserBehavior;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
 import earth.terrarium.pastel.items.tools.PrimordialLighterItem;
@@ -9,7 +8,6 @@ import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;
 import net.minecraft.core.dispenser.ShulkerBoxDispenseBehavior;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
 
 public class PastelDispenserBehaviors {

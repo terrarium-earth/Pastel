@@ -26,7 +26,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-import java.awt.*;
+import java.awt.Color;
 
 public abstract class BidentBaseEntity extends ThrownTrident {
 

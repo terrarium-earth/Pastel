@@ -1,10 +1,8 @@
 package earth.terrarium.pastel.items.magic_items;
 
-import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
-import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
 import earth.terrarium.pastel.components.FlowingStaffComponent;
 import earth.terrarium.pastel.components.StoredBlockEntityComponent;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
@@ -15,11 +13,9 @@ import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,7 +38,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.neoforged.api.distmarker.Dist;
@@ -51,7 +46,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Flow;
 
 public class FlowingStaffItem extends BuildingStaffItem {
     public static final int INK_COST_PER_BLOCK = 1;

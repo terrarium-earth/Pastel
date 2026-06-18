@@ -2,7 +2,6 @@ package earth.terrarium.pastel.attachments.data.azure_dike;
 
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 
 public interface DikeShieldData {
 

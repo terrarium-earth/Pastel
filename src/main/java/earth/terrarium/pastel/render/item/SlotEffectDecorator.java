@@ -108,10 +108,12 @@ public class SlotEffectDecorator implements IItemDecorator {
                 break;
             }
             case FULL_PACKAGE:
+                g.fillGradient(x, y, x + 16, y + 16, transColor, transColor | (alpha << 24));
+                g.renderOutline(x, y, 16, 16, color);
+                break;
             case PULSE: {
                 g.fillGradient(x, y, x + 16, y + 16, transColor, transColor | (alpha << 24));
-                if (type == SlotBackgroundEffect.SlotEffect.PULSE)
-                    break;
+                break;
             }
             case BORDER:
                 g.renderOutline(x, y, 16, 16, color);

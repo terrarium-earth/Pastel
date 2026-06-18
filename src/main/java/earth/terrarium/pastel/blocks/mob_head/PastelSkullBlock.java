@@ -1,7 +1,5 @@
 package earth.terrarium.pastel.blocks.mob_head;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.EnumHashBiMap;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.helpers.Support;

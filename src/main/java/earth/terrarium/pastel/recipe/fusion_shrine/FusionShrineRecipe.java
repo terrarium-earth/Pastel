@@ -176,7 +176,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     /**
      * Returns a boolean depending on if any of the recipe conditions are met.
      * These can always be true, be a specific day or moon phase, weather, a command, biome, etc.
-     * <p></>
+     * <p></p>
      * ME WHEN I CALL STREAM#ANYMATCH WHEN AN EMPTY SET SHOULD RETURN TRUE ~ Azzyypaaras
      */
     public boolean areConditionMetCurrently(ServerLevel world, BlockPos pos) {

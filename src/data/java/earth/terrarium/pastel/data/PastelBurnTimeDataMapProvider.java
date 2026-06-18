@@ -1,12 +1,13 @@
 package earth.terrarium.pastel.data;
 
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.data.*;
-import net.neoforged.neoforge.common.data.*;
-import net.neoforged.neoforge.registries.datamaps.builtin.*;
+import earth.terrarium.pastel.registries.PastelItems;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.DataMapProvider;
+import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
+import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
 
 public class PastelBurnTimeDataMapProvider extends DataMapProvider {
 

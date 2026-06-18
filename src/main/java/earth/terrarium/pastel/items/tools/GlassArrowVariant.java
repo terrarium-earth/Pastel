@@ -17,7 +17,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.apache.commons.lang3.function.TriConsumer;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class GlassArrowVariant {
 

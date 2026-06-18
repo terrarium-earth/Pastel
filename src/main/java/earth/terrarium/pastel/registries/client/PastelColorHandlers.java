@@ -2,7 +2,6 @@ package earth.terrarium.pastel.registries.client;
 
 import earth.terrarium.pastel.blocks.decoration.CushionBlock;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.BlockItem;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 

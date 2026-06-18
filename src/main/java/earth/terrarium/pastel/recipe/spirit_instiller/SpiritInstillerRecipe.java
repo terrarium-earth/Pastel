@@ -5,7 +5,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
-import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
@@ -27,7 +26,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -36,7 +34,6 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipeInput<SpiritInstillerBlockEntity>> {
 

@@ -1,7 +1,13 @@
 package earth.terrarium.pastel.networking;
 
 import earth.terrarium.pastel.attachments.HardcoreDeathTracker;
-import earth.terrarium.pastel.attachments.data.*;
+import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
+import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
+import earth.terrarium.pastel.attachments.data.InertiaData;
+import earth.terrarium.pastel.attachments.data.LastKillData;
+import earth.terrarium.pastel.attachments.data.MiscPlayerData;
+import earth.terrarium.pastel.attachments.data.PrimordialFireData;
+import earth.terrarium.pastel.attachments.data.SpectacleData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeData;
 import earth.terrarium.pastel.networking.s2c_payloads.BlackHoleChestStatusUpdatePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.ColorTransmissionPayload;

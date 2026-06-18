@@ -2,7 +2,6 @@ package earth.terrarium.pastel.compat;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
-import earth.terrarium.pastel.compat.botania.BotaniaCompat;
 import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.compat.exclusions_lib.ExclusionsLibCompat;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;

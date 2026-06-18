@@ -1,11 +1,41 @@
 package earth.terrarium.pastel.data;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.data.lang.*;
+import earth.terrarium.pastel.data.lang.PastelAdvancementLang;
+import earth.terrarium.pastel.data.lang.PastelAttributeLang;
+import earth.terrarium.pastel.data.lang.PastelBiomeLang;
+import earth.terrarium.pastel.data.lang.PastelBlockLang;
+import earth.terrarium.pastel.data.lang.PastelCommandLang;
+import earth.terrarium.pastel.data.lang.PastelContainerLang;
+import earth.terrarium.pastel.data.lang.PastelCuriosLang;
+import earth.terrarium.pastel.data.lang.PastelDeathMessageLang;
+import earth.terrarium.pastel.data.lang.PastelDimensionLang;
+import earth.terrarium.pastel.data.lang.PastelEffectLang;
+import earth.terrarium.pastel.data.lang.PastelEnchantmentLang;
+import earth.terrarium.pastel.data.lang.PastelEntityLang;
+import earth.terrarium.pastel.data.lang.PastelFluidTypeLang;
+import earth.terrarium.pastel.data.lang.PastelGuiLang;
+import earth.terrarium.pastel.data.lang.PastelGuidebookLang;
+import earth.terrarium.pastel.data.lang.PastelInkLang;
+import earth.terrarium.pastel.data.lang.PastelItemGroupLang;
+import earth.terrarium.pastel.data.lang.PastelItemLang;
+import earth.terrarium.pastel.data.lang.PastelJukeboxSongLang;
+import earth.terrarium.pastel.data.lang.PastelMultiblockLang;
+import earth.terrarium.pastel.data.lang.PastelOptionLang;
+import earth.terrarium.pastel.data.lang.PastelREIReagentLang;
+import earth.terrarium.pastel.data.lang.PastelRecipeGroupLang;
+import earth.terrarium.pastel.data.lang.PastelRecipeLang;
+import earth.terrarium.pastel.data.lang.PastelSignTextLang;
+import earth.terrarium.pastel.data.lang.PastelSpecialLang;
+import earth.terrarium.pastel.data.lang.PastelStructureLang;
+import earth.terrarium.pastel.data.lang.PastelSubtitleLang;
+import earth.terrarium.pastel.data.lang.PastelTagLang;
+import earth.terrarium.pastel.data.lang.PastelToastLang;
+import earth.terrarium.pastel.data.lang.PastelTodoUnusedLang;
+import earth.terrarium.pastel.data.lang.PastelTooltipAndLoreLang;
+import earth.terrarium.pastel.data.lang.PastelVanillaChangeLang;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
-
-import java.util.Arrays;
 
 public class PastelLanguageProvider extends LanguageProvider {
     public PastelLanguageProvider(PackOutput output) {

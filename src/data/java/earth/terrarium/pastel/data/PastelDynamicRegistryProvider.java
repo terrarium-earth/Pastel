@@ -2,7 +2,8 @@ package earth.terrarium.pastel.data;
 
 import earth.terrarium.pastel.data.dynamicregistries.EnchantmentRegistry;
 import earth.terrarium.pastel.data.dynamicregistries.ResonanceProcessorsRegistry;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelPlacedFeatures;
+import earth.terrarium.pastel.registries.PastelRegistryKeys;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;

@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.data.loot.block;
 
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
 import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.loot.conditions.NearMoonstoneLootCondition;
@@ -8,7 +7,11 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
+import net.minecraft.advancements.critereon.ItemEnchantmentsPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.ItemSubPredicates;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -31,10 +34,19 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.*;
-import net.minecraft.world.level.storage.loot.providers.number.*;
+import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ResourceBlockLootTables extends BlockLootSubProvider {
     private final Holder<Enchantment> fortune, resonance;

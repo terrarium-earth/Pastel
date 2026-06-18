@@ -7,7 +7,6 @@ import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
-import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;

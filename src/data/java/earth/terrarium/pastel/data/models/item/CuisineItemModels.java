@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.data.models.item;
 
 import earth.terrarium.pastel.data.PastelModelHelper;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.data.models.ItemModelGenerators;
 
 import static net.minecraft.world.item.Items.GOLDEN_CARROT;

@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class PotionWorkshopScreen extends AbstractContainerScreen<PotionWorkshopScreenHandler> {
 

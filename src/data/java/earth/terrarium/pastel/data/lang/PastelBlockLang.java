@@ -1,16 +1,11 @@
 package earth.terrarium.pastel.data.lang;
 
-import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.data.PastelLanguageProvider;
 import earth.terrarium.pastel.data.lang.blocks.compat.AlloyForgeryBlockLang;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItems;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 public class PastelBlockLang {
     public static void addTranslations(PastelLanguageProvider provider) {

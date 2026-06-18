@@ -1,10 +1,8 @@
 package earth.terrarium.pastel.data.dynamicregistries;
 
-import earth.terrarium.pastel.data.PastelEnchantmentTagsProvider;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItemTags;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.registries.Registries;

@@ -1,18 +1,15 @@
 package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.components.ExchangingStaffComponent;
-import earth.terrarium.pastel.components.PaintbrushComponent;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSounds;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 import static earth.terrarium.pastel.items.magic_items.ExchangeStaffItem.MAX_RANGE;

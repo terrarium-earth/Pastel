@@ -3,7 +3,6 @@ package earth.terrarium.pastel.loot.modifiers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.entity.LizardEntity;

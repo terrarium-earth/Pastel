@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.data.loot.block;
 
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.HolderLookup;

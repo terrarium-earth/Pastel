@@ -19,7 +19,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class BidentMirrorImageEntity extends BidentBaseEntity {
     public BidentMirrorImageEntity(Level world) {

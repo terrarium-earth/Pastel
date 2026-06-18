@@ -3,7 +3,14 @@ package earth.terrarium.pastel.data.models;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
 import earth.terrarium.pastel.compat.create.CreateCompat;
-import earth.terrarium.pastel.data.models.item.*;
+import earth.terrarium.pastel.data.models.item.CuisineItemModels;
+import earth.terrarium.pastel.data.models.item.DecorationItemModels;
+import earth.terrarium.pastel.data.models.item.InstrumentItemModels;
+import earth.terrarium.pastel.data.models.item.NaturalBlockItemModels;
+import earth.terrarium.pastel.data.models.item.ResourceItemModels;
+import earth.terrarium.pastel.data.models.item.TechnicalItemModels;
+import earth.terrarium.pastel.data.models.item.ToolItemModels;
+import earth.terrarium.pastel.data.models.item.VanillaItemGroupItemModels;
 import net.minecraft.data.models.ItemModelGenerators;
 
 public class PastelItemModels {

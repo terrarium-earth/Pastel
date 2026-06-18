@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.mixin;
 
-import com.simibubi.create.content.kinetics.crafter.MechanicalCrafterBlockEntity;
 import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.world.Container;

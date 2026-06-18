@@ -2,7 +2,6 @@ package earth.terrarium.pastel.components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sun.jna.platform.win32.WinDef;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;

@@ -1,45 +1,8 @@
 package earth.terrarium.pastel.data.models.item;
 
-import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.blocks.gravity.FloatItem;
-import earth.terrarium.pastel.blocks.jade_vines.GerminatedJadeVineBulbItem;
 import earth.terrarium.pastel.data.PastelModelHelper;
-import earth.terrarium.pastel.items.ItemWithLoomPattern;
-import earth.terrarium.pastel.items.ItemWithTooltip;
-import earth.terrarium.pastel.items.MidnightAberrationItem;
-import earth.terrarium.pastel.items.PigmentItem;
-import earth.terrarium.pastel.items.conditional.GemstonePowderItem;
-import earth.terrarium.pastel.items.conditional.StormStoneItem;
-import earth.terrarium.pastel.items.misc.AetherVestigesItem;
-import earth.terrarium.pastel.items.misc.AshItem;
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.core.registries.BuiltInRegistries;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.SimpleFluidContent;
-import net.neoforged.neoforge.registries.DeferredItem;
-
-import static net.minecraft.world.item.Items.*;
-import static net.minecraft.world.item.Items.BLACK_DYE;
-import static net.minecraft.world.item.Items.BLUE_DYE;
-import static net.minecraft.world.item.Items.BROWN_DYE;
-import static net.minecraft.world.item.Items.CYAN_DYE;
-import static net.minecraft.world.item.Items.GRAY_DYE;
-import static net.minecraft.world.item.Items.GREEN_DYE;
-import static net.minecraft.world.item.Items.LIGHT_BLUE_DYE;
-import static net.minecraft.world.item.Items.LIGHT_GRAY_DYE;
-import static net.minecraft.world.item.Items.LIME_DYE;
-import static net.minecraft.world.item.Items.PINK_DYE;
-import static net.minecraft.world.item.Items.PURPLE_DYE;
-import static net.minecraft.world.item.Items.RED_DYE;
-import static net.minecraft.world.item.Items.YELLOW_DYE;
 
 public class ResourceItemModels {
     public static void generateItemModels(ItemModelGenerators generators) {

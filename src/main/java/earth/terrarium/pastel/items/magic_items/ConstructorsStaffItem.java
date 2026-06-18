@@ -5,7 +5,6 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.level.BuildingHelper;
-import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -30,7 +29,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 import oshi.util.tuples.Triplet;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ConstructorsStaffItem extends BuildingStaffItem {
 

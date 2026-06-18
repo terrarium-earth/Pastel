@@ -1,18 +1,12 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.attachments.PastelDataAttachments;
 import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
 import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelDamageTypes;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;

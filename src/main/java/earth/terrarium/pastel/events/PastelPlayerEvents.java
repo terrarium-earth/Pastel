@@ -25,7 +25,12 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingSwapItemsEvent;
-import net.neoforged.neoforge.event.entity.player.*;
+import net.neoforged.neoforge.event.entity.player.CanContinueSleepingEvent;
+import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class PastelPlayerEvents {

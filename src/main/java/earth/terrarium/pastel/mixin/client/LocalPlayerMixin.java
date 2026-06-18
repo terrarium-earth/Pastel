@@ -4,19 +4,10 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import earth.terrarium.pastel.attachments.data.ConsumptionRingData;
 import earth.terrarium.pastel.items.armor.CrystalArmorItem;
-import earth.terrarium.pastel.items.trinkets.ConsumptionRingItem;
-import net.minecraft.client.ClientRecipeBook;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.stats.StatsCounter;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodData;
 import net.neoforged.neoforge.attachment.AttachmentHolder;
-import net.neoforged.neoforge.attachment.AttachmentType;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(

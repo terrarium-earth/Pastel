@@ -3,10 +3,7 @@ package earth.terrarium.pastel.components;
 import com.mojang.authlib.GameProfile;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -19,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public record EnderSpliceComponent(
     Optional<Vec3> pos,
