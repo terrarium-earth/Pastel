@@ -19,6 +19,7 @@ public class ExclusionsLibCompat {
     public static class AlwaysFalseBlockPredicate implements BlockPredicate {
 
         public static AlwaysFalseBlockPredicate instance = new AlwaysFalseBlockPredicate();
+
         public static final MapCodec<AlwaysFalseBlockPredicate> CODEC = MapCodec.unit(() -> instance);
 
         private AlwaysFalseBlockPredicate() {
@@ -33,8 +34,11 @@ public class ExclusionsLibCompat {
         }
     }
 
-    public static final DeferredRegister<BlockPredicateType<?>> REGISTRY = DeferredRegister.create(
-        BuiltInRegistries.BLOCK_PREDICATE_TYPE, PastelIntegrationPacks.EXCLUSIONS_LIB_ID);
+    public static final DeferredRegister<BlockPredicateType<?>> REGISTRY = DeferredRegister
+        .create(
+            BuiltInRegistries.BLOCK_PREDICATE_TYPE,
+            PastelIntegrationPacks.EXCLUSIONS_LIB_ID
+        );
 
     public static void registerNotPresent(IEventBus bus) {
         registerBlockPredicate("overlaps_structure", AlwaysFalseBlockPredicate.CODEC);

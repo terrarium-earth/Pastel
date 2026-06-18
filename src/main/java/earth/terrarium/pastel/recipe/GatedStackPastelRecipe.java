@@ -13,14 +13,19 @@ import java.util.Optional;
 public abstract class GatedStackPastelRecipe<C extends RecipeInput> extends GatedPastelRecipe<C> {
 
     protected GatedStackPastelRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier) {
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier
+    ) {
         super(group, secret, requiredAdvancementIdentifier);
     }
 
     public abstract List<IngredientStack> getIngredientStacks();
 
     protected boolean matchIngredientStacksExclusively(
-        RecipeInput recipeInput, List<IngredientStack> ingredientStacks) {
+        RecipeInput recipeInput,
+        List<IngredientStack> ingredientStacks
+    ) {
         // does the recipe fit into that inventory in the first place?
         if (recipeInput.size() < ingredientStacks.size()) {
             return false;
@@ -28,7 +33,11 @@ public abstract class GatedStackPastelRecipe<C extends RecipeInput> extends Gate
 
         // collect all non-empty stacks
         List<ItemStack> nonEmptyStacks = new ArrayList<>();
-        for (int i = 0; i < recipeInput.size(); i++) {
+        for (
+            int i = 0;
+            i < recipeInput.size();
+            i++
+        ) {
             ItemStack stack = recipeInput.getItem(i);
             if (!stack.isEmpty()) {
                 nonEmptyStacks.add(stack);
@@ -40,11 +49,17 @@ public abstract class GatedStackPastelRecipe<C extends RecipeInput> extends Gate
         }
 
         // match each IngredientStack exclusively
-        ObjectArraySet<IngredientStack> ingredients = ObjectArraySet.of(
-            ingredientStacks.toArray(new IngredientStack[0]));
-        for (ItemStack stack : nonEmptyStacks) {
+        ObjectArraySet<IngredientStack> ingredients = ObjectArraySet
+            .of(
+                ingredientStacks.toArray(new IngredientStack[0])
+            );
+        for (
+            ItemStack stack : nonEmptyStacks
+        ) {
             IngredientStack foundStack = null;
-            for (IngredientStack ingredientStack : ingredients) {
+            for (
+                IngredientStack ingredientStack : ingredients
+            ) {
                 if (ingredientStack.test(stack)) {
                     foundStack = ingredientStack;
                     break;
@@ -63,11 +78,17 @@ public abstract class GatedStackPastelRecipe<C extends RecipeInput> extends Gate
     }
 
     protected boolean matchIngredientStacksExclusively(
-        RecipeInput recipeInput, List<IngredientStack> ingredients, int[] slots) {
+        RecipeInput recipeInput,
+        List<IngredientStack> ingredients,
+        int[] slots
+    ) {
         int inputStackCount = 0;
-        for (int slot : slots) {
-            if (!recipeInput.getItem(slot)
-                            .isEmpty()) {
+        for (
+            int slot : slots
+        ) {
+            if (!recipeInput
+                .getItem(slot)
+                .isEmpty()) {
                 inputStackCount++;
             }
         }
@@ -75,9 +96,13 @@ public abstract class GatedStackPastelRecipe<C extends RecipeInput> extends Gate
             return false;
         }
 
-        for (IngredientStack ingredient : ingredients) {
+        for (
+            IngredientStack ingredient : ingredients
+        ) {
             boolean found = false;
-            for (int slot : slots) {
+            for (
+                int slot : slots
+            ) {
                 if (ingredient.test(recipeInput.getItem(slot))) {
                     found = true;
                     break;

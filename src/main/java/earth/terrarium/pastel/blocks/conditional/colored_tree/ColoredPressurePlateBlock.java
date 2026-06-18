@@ -10,6 +10,7 @@ import java.util.Map;
 public class ColoredPressurePlateBlock extends PressurePlateBlock {
 
     private static final Map<InkColor, ColoredPressurePlateBlock> BLOCKS = new Object2ObjectArrayMap<>();
+
     protected final InkColor color;
 
     public ColoredPressurePlateBlock(Properties settings, InkColor color) {

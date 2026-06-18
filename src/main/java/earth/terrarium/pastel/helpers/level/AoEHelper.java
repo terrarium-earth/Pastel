@@ -57,7 +57,12 @@ public class AoEHelper {
     private static boolean recursive = false;
 
     private static void removeBlocksInIteration(
-        Player player, ItemStack stack, Level world, BlockPos centerPos, Vec3i startDelta, Vec3i endDelta,
+        Player player,
+        ItemStack stack,
+        Level world,
+        BlockPos centerPos,
+        Vec3i startDelta,
+        Vec3i endDelta,
         Predicate<BlockState> filter
     ) {
         if (recursive) {
@@ -66,7 +71,9 @@ public class AoEHelper {
 
         recursive = true;
         try {
-            for (BlockPos blockPos : BlockPos.betweenClosed(centerPos.offset(startDelta), centerPos.offset(endDelta))) {
+            for (
+                BlockPos blockPos : BlockPos.betweenClosed(centerPos.offset(startDelta), centerPos.offset(endDelta))
+            ) {
                 if (!blockPos.equals(centerPos)) {
                     breakBlockWithDrops(player, stack, world, blockPos, filter);
                 }
@@ -77,7 +84,12 @@ public class AoEHelper {
     }
 
     public static void breakBlocksAround(
-        Player player, ItemStack stack, BlockPos pos, int radius, @Nullable Predicate<BlockState> predicate) {
+        Player player,
+        ItemStack stack,
+        BlockPos pos,
+        int radius,
+        @Nullable Predicate<BlockState> predicate
+    ) {
         if (radius <= 0) {
             return;
         }
@@ -98,26 +110,38 @@ public class AoEHelper {
             return;
         }
 
-        for (BlockPos blockPos : BlockPos.withinManhattan(pos, radius, radius, radius)) {
+        for (
+            BlockPos blockPos : BlockPos.withinManhattan(pos, radius, radius, radius)
+        ) {
             breakBlockWithDrops(player, stack, world, blockPos, minableBlocksPredicate);
         }
     }
 
     public static void breakBlockWithDrops(
-        Player player, ItemStack stack, Level world, BlockPos pos, Predicate<BlockState> filter) {
-        ChunkPos chunkPos = world.getChunk(pos)
-                                 .getPos();
+        Player player,
+        ItemStack stack,
+        Level world,
+        BlockPos pos,
+        Predicate<BlockState> filter
+    ) {
+        ChunkPos chunkPos = world
+            .getChunk(pos)
+            .getPos();
         if (world.hasChunk(chunkPos.x, chunkPos.z)) {
             BlockState blockstate = world.getBlockState(pos);
-            if (!world.isClientSide && !blockstate.isAir() && blockstate.getDestroyProgress(player, world, pos) > 0 &&
-                filter.test(blockstate)) {
+            if (!world.isClientSide && !blockstate.isAir() && blockstate
+                .getDestroyProgress(player, world, pos) > 0 && filter.test(blockstate)) {
                 ItemStack save = player.getMainHandItem();
                 player.setItemInHand(InteractionHand.MAIN_HAND, stack);
-                ((ServerPlayer) player).connection.send(
-                    new ClientboundLevelEventPacket(
-                        LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(blockstate),
-                        false
-                    ));
+                ((ServerPlayer) player).connection
+                    .send(
+                        new ClientboundLevelEventPacket(
+                            LevelEvent.PARTICLES_DESTROY_BLOCK,
+                            pos,
+                            Block.getId(blockstate),
+                            false
+                        )
+                    );
                 ((ServerPlayer) player).gameMode.destroyBlock(pos);
                 player.setItemInHand(InteractionHand.MAIN_HAND, save);
             }

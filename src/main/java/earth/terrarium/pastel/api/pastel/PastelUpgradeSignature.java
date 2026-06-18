@@ -9,23 +9,46 @@ import net.minecraft.world.level.Level;
 public final class PastelUpgradeSignature {
 
     public static final String INNER_RING_BASE_PATH = "textures/block/pastel_node_inner_ring_";
+
     public static final String OUTER_RING_BASE_PATH = "textures/block/pastel_node_outer_ring_";
+
     public static final String REDSTONE_RING_BASE_PATH = "textures/block/pastel_node_redstone_ring_";
 
     public final Item upgradeItem;
+
     public final String name;
+
     public final ResourceLocation outerRing, innerRing;
+
     public final int stack, speed, slotRows;
+
     public final float stackMult, speedMult;
+
     public final boolean light, priority, triggerTransfer, lamp, sensor;
+
     public final Category category;
+
     public final RedstoneStateModifier preProcessor;
+
     public final RedstoneStateModifier postProcessor;
 
     private PastelUpgradeSignature(
-        Item upgradeItem, String name, ResourceLocation outerRing, ResourceLocation innerRing, int stack, int speed,
-        int slotRows, float stackMult, float speedMult, boolean light, boolean priority, boolean triggerTransfer,
-        boolean lamp, boolean sensor, Category category, RedstoneStateModifier preProcessor,
+        Item upgradeItem,
+        String name,
+        ResourceLocation outerRing,
+        ResourceLocation innerRing,
+        int stack,
+        int speed,
+        int slotRows,
+        float stackMult,
+        float speedMult,
+        boolean light,
+        boolean priority,
+        boolean triggerTransfer,
+        boolean lamp,
+        boolean sensor,
+        Category category,
+        RedstoneStateModifier preProcessor,
         RedstoneStateModifier postProcessor
     ) {
         this.upgradeItem = upgradeItem;
@@ -61,13 +84,21 @@ public final class PastelUpgradeSignature {
 
     public static final class Builder {
         private final Item upgradeItem;
+
         private final Category category;
+
         private final String namespace;
+
         private String name, outerRing, innerRing;
+
         private int stackMod, speedMod, slotRowMod;
+
         private float stackMult = 1, speedMult = 1;
+
         private boolean light, priority, triggerTransfer, lamp, sensor;
+
         private RedstoneStateModifier preProcessor = RedstoneStateModifier.PASS;
+
         private RedstoneStateModifier postProcessor = RedstoneStateModifier.PASS;
 
         public Builder(Item upgradeItem, Category category, String namespace) {

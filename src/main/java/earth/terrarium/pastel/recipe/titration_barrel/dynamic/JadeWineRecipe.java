@@ -29,18 +29,31 @@ import java.util.Optional;
 public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/food/jade_wine");
+
     public static final int MIN_FERMENTATION_TIME_HOURS = 24;
+
     public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(PastelItems.JADE_WINE.get(), 4);
+
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-        add(IngredientStack.ofItems(PastelItems.GERMINATED_JADE_VINE_BULB.get()));
-        add(IngredientStack.ofItems(PastelItems.JADE_PETALS.get(), 3));
-    }};
+
+    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
+        {
+            add(IngredientStack.ofItems(PastelItems.GERMINATED_JADE_VINE_BULB.get()));
+            add(IngredientStack.ofItems(PastelItems.JADE_PETALS.get(), 3));
+        }
+    };
 
     public JadeWineRecipe() {
         super(
-            "", false, Optional.of(UNLOCK_IDENTIFIER), INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER),
-            OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, new FermentationData(0.075F, 0.01F, List.of())
+            "",
+            false,
+            Optional.of(UNLOCK_IDENTIFIER),
+            INGREDIENT_STACKS,
+            FluidIngredient.of(Fluids.WATER),
+            OUTPUT_STACK,
+            TAPPING_ITEM,
+            MIN_FERMENTATION_TIME_HOURS,
+            new FermentationData(0.075F, 0.01F, List.of())
         );
     }
 
@@ -108,17 +121,23 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
     public boolean matches(FluidRecipeInput<FluidTank> recipeInput, Level world) {
         boolean bulbsFound = false;
 
-        for (int i = 0; i < recipeInput.size(); i++) {
+        for (
+            int i = 0;
+            i < recipeInput.size();
+            i++
+        ) {
             ItemStack stack = recipeInput.getItem(i);
             if (stack.isEmpty()) {
                 continue;
             }
             if (stack.is(PastelItems.GERMINATED_JADE_VINE_BULB.get())) {
                 bulbsFound = true;
-            } else if (!stack.is(PastelItems.JADE_PETALS.get()) && !stack.is(
-                PastelItems.MOONSTRUCK_NECTAR.get())) {
-                return false;
-            }
+            } else if (!stack.is(PastelItems.JADE_PETALS.get()) && !stack
+                .is(
+                    PastelItems.MOONSTRUCK_NECTAR.get()
+                )) {
+                    return false;
+                }
         }
 
         return bulbsFound;

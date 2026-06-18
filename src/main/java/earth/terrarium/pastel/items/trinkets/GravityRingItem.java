@@ -20,21 +20,27 @@ public abstract class GravityRingItem extends InkDrainTrinketItem implements Gra
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        SlotContext slotContext,
+        ResourceLocation id,
+        ItemStack stack
+    ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
 
         FixedSingleInkStorage inkStorage = getEnergyStorage(stack);
         long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
         double knockbackResistance = getBonus(storedInk) / 10D;
         if (knockbackResistance != 0) {
-            modifiers.put(
-                Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(
-                    getAttributeID(),
-                    negativeGravity() ? -knockbackResistance
-                                      : knockbackResistance,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
-            );
+            modifiers
+                .put(
+                    Attributes.KNOCKBACK_RESISTANCE,
+                    new AttributeModifier(
+                        getAttributeID(),
+                        negativeGravity()
+                            ? -knockbackResistance
+                            : knockbackResistance,
+                        AttributeModifier.Operation.ADD_VALUE
+                    )
+                );
         }
 
         return modifiers;
@@ -48,8 +54,11 @@ public abstract class GravityRingItem extends InkDrainTrinketItem implements Gra
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         super.curioTick(slotContext, stack);
         applyGravity(
-            stack, slotContext.entity()
-                              .level(), slotContext.entity()
+            stack,
+            slotContext
+                .entity()
+                .level(),
+            slotContext.entity()
         );
     }
 

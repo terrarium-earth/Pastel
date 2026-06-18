@@ -36,19 +36,23 @@ public class MemoryBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     public static final MapCodec<MemoryBlock> CODEC = simpleCodec(MemoryBlock::new);
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
     protected static final VoxelShape SHAPE = Block.box(4.0D, 2.0D, 4.0D, 12.0D, 14.0D, 12.0D);
 
     public MemoryBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(WATERLOGGED, false));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(WATERLOGGED, false)
+            );
     }
 
     @Override
     public MapCodec<? extends MemoryBlock> codec() {
         return CODEC;
     }
-
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
@@ -60,8 +64,7 @@ public class MemoryBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         return RenderShape.MODEL;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new MemoryBlockEntity(pos, state);
     }
@@ -72,7 +75,12 @@ public class MemoryBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     }
 
     public void setPlacedBy(
-        @NotNull Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        @NotNull Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof MemoryBlockEntity memoryBlockEntity) {
             memoryBlockEntity.setData(placer, itemStack);
@@ -91,10 +99,12 @@ public class MemoryBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     @Override
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext ctx) {
-        FluidState fluidState = ctx.getLevel()
-                                   .getFluidState(ctx.getClickedPos());
-        return this.defaultBlockState()
-                   .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        FluidState fluidState = ctx
+            .getLevel()
+            .getFluidState(ctx.getClickedPos());
+        return this
+            .defaultBlockState()
+            .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     // drop the memory when broken
@@ -115,7 +125,11 @@ public class MemoryBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     @Override
     public BlockState updateShape(
-        @NotNull BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        @NotNull BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (state.getValue(WATERLOGGED)) {

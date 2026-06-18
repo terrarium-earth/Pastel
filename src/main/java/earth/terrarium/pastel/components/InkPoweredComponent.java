@@ -13,19 +13,26 @@ public record InkPoweredComponent(List<InkPoweredStatusEffectInstance> effects) 
 
     public static final InkPoweredComponent DEFAULT = new InkPoweredComponent(List.of());
 
-    public static final Codec<InkPoweredComponent> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                               InkPoweredStatusEffectInstance.CODEC.listOf()
-                                                                                                                                   .fieldOf("effects")
-                                                                                                                                   .forGetter(InkPoweredComponent::effects)
-                                                                                           )
-                                                                                           .apply(
-                                                                                               i,
-                                                                                               InkPoweredComponent::new
-                                                                                           ));
+    public static final Codec<InkPoweredComponent> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    InkPoweredStatusEffectInstance.CODEC
+                        .listOf()
+                        .fieldOf("effects")
+                        .forGetter(InkPoweredComponent::effects)
+                )
+                .apply(
+                    i,
+                    InkPoweredComponent::new
+                )
+        );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, InkPoweredComponent> STREAM_CODEC = StreamCodec.composite(
-        InkPoweredStatusEffectInstance.STREAM_CODEC.apply(ByteBufCodecs.list()), InkPoweredComponent::effects,
-        InkPoweredComponent::new
-    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, InkPoweredComponent> STREAM_CODEC = StreamCodec
+        .composite(
+            InkPoweredStatusEffectInstance.STREAM_CODEC.apply(ByteBufCodecs.list()),
+            InkPoweredComponent::effects,
+            InkPoweredComponent::new
+        );
 
 }

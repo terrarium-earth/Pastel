@@ -8,15 +8,22 @@ import net.minecraft.nbt.Tag;
 // TODO: migrate to net.minecraft.world.tick ?
 public final class TickLooper {
 
-    public static final Codec<TickLooper> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                      Codec.INT.fieldOf("max")
-                                                                                               .forGetter(TickLooper::getMaxTick),
-                                                                                      Codec.INT.fieldOf("current")
-                                                                                               .forGetter(TickLooper::getTick)
-                                                                                  )
-                                                                                  .apply(i, TickLooper::new));
+    public static final Codec<TickLooper> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    Codec.INT
+                        .fieldOf("max")
+                        .forGetter(TickLooper::getMaxTick),
+                    Codec.INT
+                        .fieldOf("current")
+                        .forGetter(TickLooper::getTick)
+                )
+                .apply(i, TickLooper::new)
+        );
 
     private final int maxTick;
+
     private int currentTick;
 
     public TickLooper(int maxTick) {

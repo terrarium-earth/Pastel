@@ -20,10 +20,12 @@ public class ResourceBlockModels {
         PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.DRAGONBONE, TexturedModel.COLUMN);
         PastelModelHelper.BLOCK.axisRotated(generators, PastelBlocks.CRACKED_DRAGONBONE, TexturedModel.COLUMN);
 
-        PastelModelHelper.BLOCK.defaultWestHorizontalFacing(
-            generators, PastelBlocks.STUCK_STORM_STONE,
-            ModelLocationUtils::getModelLocation
-        );
+        PastelModelHelper.BLOCK
+            .defaultWestHorizontalFacing(
+                generators,
+                PastelBlocks.STUCK_STORM_STONE,
+                ModelLocationUtils::getModelLocation
+            );
 
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.FROSTBITE_CRYSTAL);
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.BLAZING_CRYSTAL);

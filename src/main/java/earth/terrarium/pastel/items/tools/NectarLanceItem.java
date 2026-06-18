@@ -26,14 +26,25 @@ import org.jetbrains.annotations.Nullable;
 
 public class NectarLanceItem extends LightGreatswordItem implements SlotBackgroundEffect {
     public NectarLanceItem(
-        Tier material, int attackDamage, float attackSpeed, float crit, float reach, int barColor,
-        ColorGradient lungeGradient, Properties settings
+        Tier material,
+        int attackDamage,
+        float attackSpeed,
+        float crit,
+        float reach,
+        int barColor,
+        ColorGradient lungeGradient,
+        Properties settings
     ) {
         super(material, attackDamage, attackSpeed, crit, reach, barColor, lungeGradient, settings);
     }
 
     public NectarLanceItem(
-        Tier material, int attackDamage, float attackSpeed, float crit, float reach, int barColor,
+        Tier material,
+        int attackDamage,
+        float attackSpeed,
+        float crit,
+        float reach,
+        int barColor,
         Properties settings
     ) {
         super(material, attackDamage, attackSpeed, crit, reach, barColor, settings);
@@ -66,12 +77,19 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 
     @Override
     protected void applyLungeHitEffects(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        DamageSource magicDamage = attacker.damageSources()
-                                           .magic();
+        DamageSource magicDamage = attacker
+            .damageSources()
+            .magic();
         if (!(attacker.level() instanceof ServerLevel serverWorld))
             return;
-        float base = EnchantmentHelper.modifyDamage(
-            serverWorld, stack, target, magicDamage, (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE));
+        float base = EnchantmentHelper
+            .modifyDamage(
+                serverWorld,
+                stack,
+                target,
+                magicDamage,
+                (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE)
+            );
         if (target.hasEffect(MobEffects.POISON)) {
             var effect = target.getEffect(MobEffects.POISON);
             if (target.removeEffect(MobEffects.POISON)) {
@@ -94,23 +112,35 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
             var scaling = SleepStatusEffect.getSleepScaling(target);
             if (scaling > 0) {
                 target.hurt(PastelDamageTypes.sleep(target.level(), target), scaling);
-                target.playSound(
-                    PastelSounds.DEEP_CRYSTAL_RING, 0.5F, 0.8F + target.getRandom()
-                                                                            .nextFloat() * 0.4F
-                );
+                target
+                    .playSound(
+                        PastelSounds.DEEP_CRYSTAL_RING,
+                        0.5F,
+                        0.8F + target
+                            .getRandom()
+                            .nextFloat() * 0.4F
+                    );
             }
         } else {
-            var stolenEffect = target.getActiveEffects()
-                                     .stream()
-                                     .filter(instance -> instance.getEffect()
-                                                                 .value()
-                                                                 .isBeneficial())
-                                     .filter(instance -> !instance.isInfiniteDuration())
-                                     .filter(instance -> !MobEffectHelper.resistsRemoval(instance))
-                                     .findFirst();
+            var stolenEffect = target
+                .getActiveEffects()
+                .stream()
+                .filter(
+                    instance -> instance
+                        .getEffect()
+                        .value()
+                        .isBeneficial()
+                )
+                .filter(instance -> !instance.isInfiniteDuration())
+                .filter(instance -> !MobEffectHelper.resistsRemoval(instance))
+                .findFirst();
 
-            if (stolenEffect.isEmpty() || !target.removeEffect(stolenEffect.get()
-                                                                           .getEffect()))
+            if (stolenEffect.isEmpty() || !target
+                .removeEffect(
+                    stolenEffect
+                        .get()
+                        .getEffect()
+                ))
                 return;
 
             var effect = stolenEffect.get();
@@ -120,22 +150,33 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
             var takenAmp = 0;
 
             if (attacker.hasEffect(effect.getEffect()))
-                takenAmp += attacker.getEffect(effect.getEffect())
-                                    .getAmplifier();
+                takenAmp += attacker
+                    .getEffect(effect.getEffect())
+                    .getAmplifier();
 
             attacker.addEffect(new MobEffectInstance(effect.getEffect(), takenDuration, takenAmp));
 
             if (amp > 0)
-                target.addEffect(
-                    new MobEffectInstance(
-                        effect.getEffect(), duration, amp - 1, effect.isAmbient(), effect.isVisible(),
-                        effect.showIcon()
-                    ));
+                target
+                    .addEffect(
+                        new MobEffectInstance(
+                            effect.getEffect(),
+                            duration,
+                            amp - 1,
+                            effect.isAmbient(),
+                            effect.isVisible(),
+                            effect.showIcon()
+                        )
+                    );
 
-            target.playSound(
-                PastelSounds.SOFT_HUM, 0.275F, 0.8F + target.getRandom()
-                                                                 .nextFloat() * 0.4F
-            );
+            target
+                .playSound(
+                    PastelSounds.SOFT_HUM,
+                    0.275F,
+                    0.8F + target
+                        .getRandom()
+                        .nextFloat() * 0.4F
+                );
         }
     }
 
@@ -143,21 +184,28 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
         if (!(target instanceof LivingEntity livingEntity))
             return false;
 
-        if (!player.getMainHandItem()
-                   .is(PastelItems.NECTAR_LANCE.get()))
+        if (!player
+            .getMainHandItem()
+            .is(PastelItems.NECTAR_LANCE.get()))
             return false;
 
         if (livingEntity.isSleeping())
             return true;
 
         var scaling = SleepStatusEffect.getSleepScaling(livingEntity);
-        return scaling > 0 && livingEntity.getRandom()
-                                          .nextFloat() <= scaling / 3F;
+        return scaling > 0 && livingEntity
+            .getRandom()
+            .nextFloat() <= scaling / 3F;
     }
 
     private static void applyDoTProc(
-        DamageSource type, float baseDamage, float damageScaling, LivingEntity target, MobEffectInstance effect,
-        boolean canKill, boolean logScaling
+        DamageSource type,
+        float baseDamage,
+        float damageScaling,
+        LivingEntity target,
+        MobEffectInstance effect,
+        boolean canKill,
+        boolean logScaling
     ) {
         var duration = effect.getDuration() / 20F;
         var level = effect.getAmplifier() + 1;
@@ -175,12 +223,15 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
         }
 
         target.hurt(type, damage);
-        target.playSound(
-            PastelSounds.DEEP_CRYSTAL_RING, 1.25F, 0.9F + target.getRandom()
-                                                                     .nextFloat() * 0.2F
-        );
+        target
+            .playSound(
+                PastelSounds.DEEP_CRYSTAL_RING,
+                1.25F,
+                0.9F + target
+                    .getRandom()
+                    .nextFloat() * 0.2F
+            );
     }
-
 
     @Override
     public SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {

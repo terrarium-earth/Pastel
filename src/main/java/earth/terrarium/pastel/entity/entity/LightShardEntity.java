@@ -17,33 +17,52 @@ import java.util.function.Supplier;
 public class LightShardEntity extends LightShardBaseEntity {
 
     private static final ResourceLocation[] SPRITES;
+
     private final int spriteId;
 
     public LightShardEntity(EntityType<? extends Projectile> entityType, Level world) {
         super(entityType, world);
         scaleOffset /= 1.5F;
-        spriteId = world.getRandom()
-                        .nextInt(4);
+        spriteId = world
+            .getRandom()
+            .nextInt(4);
     }
 
     public LightShardEntity(Level world, LivingEntity owner, float damageMod, float lifeSpanTicks) {
         super(PastelEntityTypes.LIGHT_SHARD.get(), world, owner, 48, damageMod, lifeSpanTicks);
         scaleOffset /= 1.5F;
-        spriteId = world.getRandom()
-                        .nextInt(4);
+        spriteId = world
+            .getRandom()
+            .nextInt(4);
     }
 
     public static void summonBarrage(
-        Level world, @Nullable LivingEntity user, @Nullable LivingEntity target,
-        Predicate<LivingEntity> targetPredicate, Vec3 position, IntProvider count
+        Level world,
+        @Nullable LivingEntity user,
+        @Nullable LivingEntity target,
+        Predicate<LivingEntity> targetPredicate,
+        Vec3 position,
+        IntProvider count
     ) {
         summonBarrage(
-            world, user, position, target, targetPredicate, count, () -> new LightShardEntity(world, user, 0.5F, 200));
+            world,
+            user,
+            position,
+            target,
+            targetPredicate,
+            count,
+            () -> new LightShardEntity(world, user, 0.5F, 200)
+        );
     }
 
     public static void summonBarrage(
-        Level world, @Nullable LivingEntity user, Vec3 position, @Nullable LivingEntity target,
-        Predicate<LivingEntity> targetPredicate, IntProvider count, Supplier<LightShardBaseEntity> supplier
+        Level world,
+        @Nullable LivingEntity user,
+        Vec3 position,
+        @Nullable LivingEntity target,
+        Predicate<LivingEntity> targetPredicate,
+        IntProvider count,
+        Supplier<LightShardBaseEntity> supplier
     ) {
         summonBarrageInternal(world, user, supplier, target, targetPredicate, position, count);
     }

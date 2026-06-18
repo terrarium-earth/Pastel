@@ -27,8 +27,11 @@ import java.util.List;
 public class GleamingPinItem extends PastelTrinketItem {
 
     public static final int BASE_RANGE = 12;
+
     public static final int RANGE_BONUS_PER_LEVEL_OF_PIERCING = 4;
+
     public static final int EFFECT_DURATION = 240;
+
     public static final long COOLDOWN_TICKS = 160;
 
     public GleamingPinItem(Properties settings) {
@@ -36,34 +39,61 @@ public class GleamingPinItem extends PastelTrinketItem {
     }
 
     public static void doGleamingPinEffect(
-        @NotNull Player player, @NotNull ServerLevel world, ItemStack gleamingPinStack) {
-        world.playSound(
-            null, player.getX(), player.getY(), player.getZ(), PastelSounds.RADIANCE_PIN_TRIGGER,
-            SoundSource.PLAYERS, 0.4F, 0.9F + world.getRandom()
-                                                   .nextFloat() * 0.2F
-        );
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-            world, player.position()
-                         .add(
-                             0, 0.75, 0), PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, 100, new Vec3(0, 0.5, 0),
-            new Vec3(2.5, 0.1, 2.5)
-        );
+        @NotNull Player player,
+        @NotNull ServerLevel world,
+        ItemStack gleamingPinStack
+    ) {
+        world
+            .playSound(
+                null,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                PastelSounds.RADIANCE_PIN_TRIGGER,
+                SoundSource.PLAYERS,
+                0.4F,
+                0.9F + world
+                    .getRandom()
+                    .nextFloat() * 0.2F
+            );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                world,
+                player
+                    .position()
+                    .add(
+                        0,
+                        0.75,
+                        0
+                    ),
+                PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE,
+                100,
+                new Vec3(0, 0.5, 0),
+                new Vec3(2.5, 0.1, 2.5)
+            );
 
-        world.getEntities(
-                 player, player.getBoundingBox()
-                               .inflate(getEffectRange(world, gleamingPinStack)),
-                 EntitySelector.LIVING_ENTITY_STILL_ALIVE
-             )
-             .forEach((entity) -> {
-                 if (entity instanceof LivingEntity livingEntity) {
-                     livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, EFFECT_DURATION, 0, true, true));
-                 }
-             });
+        world
+            .getEntities(
+                player,
+                player
+                    .getBoundingBox()
+                    .inflate(getEffectRange(world, gleamingPinStack)),
+                EntitySelector.LIVING_ENTITY_STILL_ALIVE
+            )
+            .forEach((entity) -> {
+                if (entity instanceof LivingEntity livingEntity) {
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, EFFECT_DURATION, 0, true, true));
+                }
+            });
     }
 
     public static int getEffectRange(ServerLevel world, ItemStack stack) {
-        return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_PIERCING * Ench.getLevel(
-            world.registryAccess(), Enchantments.PIERCING, stack);
+        return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_PIERCING * Ench
+            .getLevel(
+                world.registryAccess(),
+                Enchantments.PIERCING,
+                stack
+            );
     }
 
     @Override

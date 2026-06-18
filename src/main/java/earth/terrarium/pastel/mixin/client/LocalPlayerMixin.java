@@ -19,19 +19,26 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(LocalPlayer.class)
+@Mixin(
+    LocalPlayer.class
+)
 public abstract class LocalPlayerMixin extends AttachmentHolder {
 
-    @WrapOperation(method = "hasEnoughFoodToStartSprinting",
-                   at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;getFoodLevel()I"))
+    @WrapOperation(
+        method = "hasEnoughFoodToStartSprinting", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;getFoodLevel()I"
+        )
+    )
     public int sprintWithVampireRing(FoodData instance, Operation<Integer> original) {
         var hasRing = this.getData(ConsumptionRingData.ATTACHMENT);
         return hasRing ? 10 : original.call(instance);
     }
 
-    @WrapOperation(method = "aiStep",
-                   at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;onGround()Z",
-                            ordinal = 3))
+    @WrapOperation(
+        method = "aiStep", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;onGround()Z", ordinal = 3
+        )
+    )
     private boolean doubleJump(LocalPlayer instance, Operation<Boolean> original) {
         boolean actuallyOnGround = original.call(instance);
         return CrystalArmorItem.doubleJump(instance, actuallyOnGround);

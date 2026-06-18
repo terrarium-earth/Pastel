@@ -34,19 +34,26 @@ public class FusionShrineCraftingCriterion extends SimpleCriterionTrigger<Fusion
         MinMaxBounds.Ints experienceRange
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        ItemPredicate.CODEC.listOf()
-                                                                                                                           .optionalFieldOf("items", List.of())
-                                                                                                                           .forGetter(Conditions::itemPredicates),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("gained_experience", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::experienceRange)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        ItemPredicate.CODEC
+                            .listOf()
+                            .optionalFieldOf("items", List.of())
+                            .forGetter(Conditions::itemPredicates),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("gained_experience", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::experienceRange)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(ItemStack itemStack, int experience) {
             if (this.experienceRange.matches(experience)) {

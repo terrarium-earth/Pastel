@@ -29,8 +29,10 @@ public class RainRippleParticle extends TextureSheetParticle {
         quadSize = 0.2F + random.nextFloat() * 0.1F;
         alphaMult = 0.75F + random.nextFloat() * 0.25F;
         alpha = alphaMult;
-        var waterColor = ColorHelper.colorIntToVec(
-            BiomeColors.getAverageWaterColor(level, BlockPos.containing(x, y, z)));
+        var waterColor = ColorHelper
+            .colorIntToVec(
+                BiomeColors.getAverageWaterColor(level, BlockPos.containing(x, y, z))
+            );
         rCol = waterColor.x;
         gCol = waterColor.y;
         bCol = waterColor.z;
@@ -59,13 +61,23 @@ public class RainRippleParticle extends TextureSheetParticle {
         float h = (float) (Mth.lerp(tickDelta, this.zo, this.z) - vec3d.z());
 
         var effWidth = Mth.lerp(tickDelta, lastWidth, width);
-        Vector3f[] vector3fs = new Vector3f[]{
-            new Vector3f(-effWidth, 0, -effWidth), new Vector3f(
-            -effWidth, 0, effWidth), new Vector3f(effWidth, 0, effWidth), new Vector3f(effWidth, 0, -effWidth)
+        Vector3f[] vector3fs = new Vector3f[] {
+            new Vector3f(-effWidth, 0, -effWidth),
+            new Vector3f(
+                -effWidth,
+                0,
+                effWidth
+            ),
+            new Vector3f(effWidth, 0, effWidth),
+            new Vector3f(effWidth, 0, -effWidth)
         };
         float i = this.getQuadSize(tickDelta);
 
-        for (int j = 0; j < 4; ++j) {
+        for (
+            int j = 0;
+            j < 4;
+            ++j
+        ) {
             Vector3f vector3f = vector3fs[j];
             vector3f.mul(i);
             vector3f.add(f, g, h);
@@ -76,22 +88,26 @@ public class RainRippleParticle extends TextureSheetParticle {
         float m = this.getV0();
         float n = this.getV1();
         int o = this.getLightColor(tickDelta);
-        vertexConsumer.addVertex(vector3fs[0].x(), vector3fs[0].y(), vector3fs[0].z())
-                      .setUv(l, n)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(o);
-        vertexConsumer.addVertex(vector3fs[1].x(), vector3fs[1].y(), vector3fs[1].z())
-                      .setUv(l, m)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(o);
-        vertexConsumer.addVertex(vector3fs[2].x(), vector3fs[2].y(), vector3fs[2].z())
-                      .setUv(k, m)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(o);
-        vertexConsumer.addVertex(vector3fs[3].x(), vector3fs[3].y(), vector3fs[3].z())
-                      .setUv(k, n)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(o);
+        vertexConsumer
+            .addVertex(vector3fs[0].x(), vector3fs[0].y(), vector3fs[0].z())
+            .setUv(l, n)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(o);
+        vertexConsumer
+            .addVertex(vector3fs[1].x(), vector3fs[1].y(), vector3fs[1].z())
+            .setUv(l, m)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(o);
+        vertexConsumer
+            .addVertex(vector3fs[2].x(), vector3fs[2].y(), vector3fs[2].z())
+            .setUv(k, m)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(o);
+        vertexConsumer
+            .addVertex(vector3fs[3].x(), vector3fs[3].y(), vector3fs[3].z())
+            .setUv(k, n)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(o);
     }
 
     @Override
@@ -99,7 +115,9 @@ public class RainRippleParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -109,8 +127,14 @@ public class RainRippleParticle extends TextureSheetParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new RainRippleParticle(clientWorld, d, e, f, spriteProvider);
         }

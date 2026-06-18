@@ -65,19 +65,36 @@ import java.util.function.BiConsumer;
 public class PreservationTurretEntity extends AbstractGolem implements Enemy, VibrationSystem {
 
     protected static final int DETECTION_RANGE = 16;
+
     protected static final float DAMAGE = 4.0F;
 
     private static final ResourceLocation COVERED_ARMOR_BONUS_ID = PastelCommon.locate("covered_armor");
-    private static final ResourceLocation COVERED_TOUGHNESS_BONUS_ID = PastelCommon.locate("covered_toughness");
-    protected static final AttributeModifier COVERED_ARMOR_BONUS = new AttributeModifier(
-        COVERED_ARMOR_BONUS_ID, 20.0, AttributeModifier.Operation.ADD_VALUE);
-    protected static final AttributeModifier COVERED_TOUGHNESS_BONUS = new AttributeModifier(
-        COVERED_TOUGHNESS_BONUS_ID, 6.0, AttributeModifier.Operation.ADD_VALUE);
 
-    protected static final EntityDataAccessor<Direction> ATTACHED_FACE = SynchedEntityData.defineId(
-        PreservationTurretEntity.class, EntityDataSerializers.DIRECTION);
-    protected static final EntityDataAccessor<Byte> PEEK_AMOUNT = SynchedEntityData.defineId(
-        PreservationTurretEntity.class, EntityDataSerializers.BYTE);
+    private static final ResourceLocation COVERED_TOUGHNESS_BONUS_ID = PastelCommon.locate("covered_toughness");
+
+    protected static final AttributeModifier COVERED_ARMOR_BONUS = new AttributeModifier(
+        COVERED_ARMOR_BONUS_ID,
+        20.0,
+        AttributeModifier.Operation.ADD_VALUE
+    );
+
+    protected static final AttributeModifier COVERED_TOUGHNESS_BONUS = new AttributeModifier(
+        COVERED_TOUGHNESS_BONUS_ID,
+        6.0,
+        AttributeModifier.Operation.ADD_VALUE
+    );
+
+    protected static final EntityDataAccessor<Direction> ATTACHED_FACE = SynchedEntityData
+        .defineId(
+            PreservationTurretEntity.class,
+            EntityDataSerializers.DIRECTION
+        );
+
+    protected static final EntityDataAccessor<Byte> PEEK_AMOUNT = SynchedEntityData
+        .defineId(
+            PreservationTurretEntity.class,
+            EntityDataSerializers.BYTE
+        );
 
     protected static final Vector3f SOUTH_VECTOR = Util.make(() -> {
         Vec3i vec3i = Direction.SOUTH.getNormal();
@@ -86,13 +103,18 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
     protected final TargetingConditions TARGET_PREDICATE = TargetingConditions.forCombat();
 
-    protected final DynamicGameEventListener<VibrationSystem.Listener> gameEventHandler
-        = new DynamicGameEventListener<>(new VibrationSystem.Listener(this));
+    protected final DynamicGameEventListener<VibrationSystem.Listener> gameEventHandler = new DynamicGameEventListener<>(
+        new VibrationSystem.Listener(this)
+    );
+
     protected final VibrationSystem.User vibrationCallback = new VibrationsCallback(this);
+
     protected VibrationSystem.Data vibrationListenerData = new VibrationSystem.Data();
 
     protected float prevOpenProgress;
+
     protected float openProgress;
+
     protected @Nullable BlockPos prevAttachedBlock;
 
     public PreservationTurretEntity(EntityType<? extends PreservationTurretEntity> entityType, Level world) {
@@ -109,8 +131,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        if (effect.getEffect()
-                  .is(PastelMobEffectTags.SOPORIFIC))
+        if (effect
+            .getEffect()
+            .is(PastelMobEffectTags.SOPORIFIC))
             return false;
 
         return super.canBeAffected(effect);
@@ -138,8 +161,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return this.isClosed() ? PastelSounds.ENTITY_PRESERVATION_TURRET_HURT_CLOSED
-                               : PastelSounds.ENTITY_PRESERVATION_TURRET_HURT;
+        return this.isClosed()
+            ? PastelSounds.ENTITY_PRESERVATION_TURRET_HURT_CLOSED
+            : PastelSounds.ENTITY_PRESERVATION_TURRET_HURT;
     }
 
     @Override
@@ -150,8 +174,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
     }
 
     public static AttributeSupplier.Builder createGuardianTurretAttributes() {
-        return Mob.createMobAttributes()
-                  .add(Attributes.MAX_HEALTH, 60.0);
+        return Mob
+            .createMobAttributes()
+            .add(Attributes.MAX_HEALTH, 60.0);
     }
 
     @Override
@@ -162,10 +187,13 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
-        nbt.putByte(
-            "AttachFace", (byte) this.getAttachedFace()
-                                     .get3DDataValue()
-        );
+        nbt
+            .putByte(
+                "AttachFace",
+                (byte) this
+                    .getAttachedFace()
+                    .get3DDataValue()
+            );
         nbt.putByte("Peek", this.entityData.get(PEEK_AMOUNT));
 
         //DataResult<NbtElement> dataResult = Vibrations.ListenerData.CODEC.encodeStart(NbtOps.INSTANCE, this
@@ -179,14 +207,14 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
         this.setAttachedFace(Direction.from3DDataValue(nbt.getByte("AttachFace")));
         this.entityData.set(PEEK_AMOUNT, nbt.getByte("Peek"));
 
-		/* If that is preserved the turrets do not target entities when loaded through structures (game event listener
-		 does not update chunk section?)
-		if (nbt.contains("listener", NbtElement.COMPOUND_TYPE)) {
-			DataResult<ListenerData> result = ListenerData.CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, nbt.getCompound
-			("listener")));
-			result.result().ifPresent(listenerData -> PreservationTurretEntity.this.vibrationListenerData =
-			listenerData);
-		}*/
+        /* If that is preserved the turrets do not target entities when loaded through structures (game event listener
+         does not update chunk section?)
+        if (nbt.contains("listener", NbtElement.COMPOUND_TYPE)) {
+        	DataResult<ListenerData> result = ListenerData.CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, nbt.getCompound
+        	("listener")));
+        	result.result().ifPresent(listenerData -> PreservationTurretEntity.this.vibrationListenerData =
+        	listenerData);
+        }*/
     }
 
     @Override
@@ -214,9 +242,13 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
             VibrationSystem.Ticker.tick(serverWorld, this.getVibrationData(), this.getVibrationUser());
         }
 
-        if (!this.level()
-                 .isClientSide() && !this.isPassenger() && !this.canStay(
-            this.blockPosition(), this.getAttachedFace())) {
+        if (!this
+            .level()
+            .isClientSide() && !this.isPassenger() && !this
+                .canStay(
+                    this.blockPosition(),
+                    this.getAttachedFace()
+                )) {
             Direction direction = this.findAttachSide(this.blockPosition());
             if (direction != null) {
                 this.setAttachedFace(direction);
@@ -255,8 +287,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
     @Override
     public boolean startRiding(Entity entity, boolean force) {
-        if (this.level()
-                .isClientSide()) {
+        if (this
+            .level()
+            .isClientSide()) {
             this.prevAttachedBlock = null;
         }
 
@@ -267,8 +300,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
     @Override
     public void stopRiding() {
         super.stopRiding();
-        if (this.level()
-                .isClientSide()) {
+        if (this
+            .level()
+            .isClientSide()) {
             this.prevAttachedBlock = this.blockPosition();
         }
 
@@ -278,7 +312,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(
-        ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType spawnReason,
+        ServerLevelAccessor world,
+        DifficultyInstance difficulty,
+        MobSpawnType spawnReason,
         @Nullable SpawnGroupData entityData
     ) {
         this.setYRot(0.0F);
@@ -301,8 +337,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
             if (!blockPos2.equals(blockPos)) {
                 this.entityData.set(PEEK_AMOUNT, (byte) 0);
                 this.hasImpulse = true;
-                if (this.level()
-                        .isClientSide() && !this.isPassenger() && !blockPos2.equals(this.prevAttachedBlock)) {
+                if (this
+                    .level()
+                    .isClientSide() && !this.isPassenger() && !blockPos2.equals(this.prevAttachedBlock)) {
                     this.prevAttachedBlock = blockPos;
                     this.xOld = this.getX();
                     this.yOld = this.getY();
@@ -313,9 +350,10 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
         }
     }
 
-    @Nullable
-    protected Direction findAttachSide(BlockPos pos) {
-        for (Direction direction : Direction.values()) {
+    @Nullable protected Direction findAttachSide(BlockPos pos) {
+        for (
+            Direction direction : Direction.values()
+        ) {
             if (this.canStay(pos, direction)) {
                 return direction;
             }
@@ -328,19 +366,22 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
             return false;
         } else {
             Direction direction2 = direction.getOpposite();
-            if (!this.level()
-                     .loadedAndEntityCanStandOnFace(pos.relative(direction), this, direction2)) {
+            if (!this
+                .level()
+                .loadedAndEntityCanStandOnFace(pos.relative(direction), this, direction2)) {
                 return false;
             } else {
-                return this.level()
-                           .noCollision(this, getBoundingBox());
+                return this
+                    .level()
+                    .noCollision(this, getBoundingBox());
             }
         }
     }
 
     private boolean isInvalidPosition(BlockPos pos) {
-        BlockState blockState = this.level()
-                                    .getBlockState(pos);
+        BlockState blockState = this
+            .level()
+            .getBlockState(pos);
         if (blockState.isAir()) {
             return false;
         } else {
@@ -395,16 +436,21 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
     }
 
     void setPeekAmount(int peekAmount) {
-        if (!this.level()
-                 .isClientSide()) {
-            this.getAttribute(Attributes.ARMOR)
+        if (!this
+            .level()
+            .isClientSide()) {
+            this
+                .getAttribute(Attributes.ARMOR)
                 .removeModifier(COVERED_ARMOR_BONUS);
-            this.getAttribute(Attributes.ARMOR_TOUGHNESS)
+            this
+                .getAttribute(Attributes.ARMOR_TOUGHNESS)
                 .removeModifier(COVERED_TOUGHNESS_BONUS);
             if (peekAmount == 0) {
-                this.getAttribute(Attributes.ARMOR)
+                this
+                    .getAttribute(Attributes.ARMOR)
                     .addPermanentModifier(COVERED_ARMOR_BONUS);
-                this.getAttribute(Attributes.ARMOR_TOUGHNESS)
+                this
+                    .getAttribute(Attributes.ARMOR_TOUGHNESS)
                     .addPermanentModifier(COVERED_TOUGHNESS_BONUS);
                 this.playSound(PastelSounds.ENTITY_PRESERVATION_TURRET_CLOSE, 1.0F, 1.0F);
                 this.gameEvent(GameEvent.CONTAINER_CLOSE);
@@ -454,16 +500,21 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
         // they only have a very limited vertical field of sight
         // a valid strategy would be to sneak to their top / bottom, since they can't shoot there
-        return distance < 26
-               && (Math.abs(this.getEyeY() - entity.getEyeY()) < distance / 2 || Math.abs(
-            this.getEyeY() - entity.getY()) < distance / 2)
-               && this.level()
-                      .clip(
-                          new ClipContext(
-                              thisEyePos, entityEyePos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE,
-                              this
-                          ))
-                      .getType() == net.minecraft.world.phys.HitResult.Type.MISS;
+        return distance < 26 && (Math.abs(this.getEyeY() - entity.getEyeY()) < distance / 2 || Math
+            .abs(
+                this.getEyeY() - entity.getY()
+            ) < distance / 2) && this
+                .level()
+                .clip(
+                    new ClipContext(
+                        thisEyePos,
+                        entityEyePos,
+                        ClipContext.Block.COLLIDER,
+                        ClipContext.Fluid.NONE,
+                        this
+                    )
+                )
+                .getType() == net.minecraft.world.phys.HitResult.Type.MISS;
     }
 
     @Override
@@ -471,19 +522,17 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
         return 0.0F;
     }
 
-    @Contract("null->false")
+    @Contract(
+        "null->false"
+    )
     public boolean isValidTarget(@Nullable Entity entity) {
-        return entity instanceof LivingEntity livingEntity
-               && this.level() == entity.level()
-               && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)
-               && !this.isAlliedTo(entity)
-               && livingEntity.getType() != EntityType.ARMOR_STAND
-               && livingEntity.getType() != PastelEntityTypes.PRESERVATION_TURRET.get()
-               && !livingEntity.isInvulnerable()
-               && !livingEntity.isDeadOrDying()
-               && this.level()
-                      .getWorldBorder()
-                      .isWithinBounds(livingEntity.getBoundingBox());
+        return entity instanceof LivingEntity livingEntity && this.level() == entity
+            .level() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) && !this.isAlliedTo(entity) && livingEntity
+                .getType() != EntityType.ARMOR_STAND && livingEntity.getType() != PastelEntityTypes.PRESERVATION_TURRET
+                    .get() && !livingEntity.isInvulnerable() && !livingEntity.isDeadOrDying() && this
+                        .level()
+                        .getWorldBorder()
+                        .isWithinBounds(livingEntity.getBoundingBox());
     }
 
     private class TurretLookControl extends LookControl {
@@ -497,8 +546,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
         @Override
         protected Optional<Float> getYRotD() {
-            Direction attachedDirection = PreservationTurretEntity.this.getAttachedFace()
-                                                                       .getOpposite();
+            Direction attachedDirection = PreservationTurretEntity.this
+                .getAttachedFace()
+                .getOpposite();
             Vector3f southVectorCopy = new Vector3f(PreservationTurretEntity.SOUTH_VECTOR);
             southVectorCopy.rotate(attachedDirection.getRotation());
             Vec3i vec3i = attachedDirection.getNormal();
@@ -510,8 +560,12 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
             Vector3f vec3f3 = new Vector3f((float) xOffset, (float) yOffset, (float) zOffset);
             float g = vec3f2.dot(vec3f3);
             float h = southVectorCopy.dot(vec3f3);
-            return !(Math.abs(g) > 1.0E-5F) && !(Math.abs(h) > 1.0E-5F) ? Optional.empty() : Optional.of(
-                (float) (Mth.atan2((-g), h) * 57.2957763671875));
+            return !(Math.abs(g) > 1.0E-5F) && !(Math.abs(h) > 1.0E-5F)
+                ? Optional.empty()
+                : Optional
+                    .of(
+                        (float) (Mth.atan2((-g), h) * 57.2957763671875)
+                    );
         }
 
         @Override
@@ -534,8 +588,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
             LivingEntity target = PreservationTurretEntity.this.getTarget();
 
             if (target != null) {
-                PreservationTurretEntity.this.getLookControl()
-                                             .setLookAt(target, 2.0F, 2.0F);
+                PreservationTurretEntity.this
+                    .getLookControl()
+                    .setLookAt(target, 2.0F, 2.0F);
 
                 if (!PreservationTurretEntity.this.hasLineOfSight(target)) {
                     PreservationTurretEntity.this.setTarget(null);
@@ -543,16 +598,21 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
                 }
             }
 
-            return target != null
-                   && target.isAlive()
-                   && PreservationTurretEntity.this.openProgress == 1.0 && TARGET_PREDICATE.test(
-                PreservationTurretEntity.this, PreservationTurretEntity.this.getTarget());
+            return target != null && target
+                .isAlive() && PreservationTurretEntity.this.openProgress == 1.0 && TARGET_PREDICATE
+                    .test(
+                        PreservationTurretEntity.this,
+                        PreservationTurretEntity.this.getTarget()
+                    );
         }
 
         @Override
         public boolean canContinueToUse() {
-            return super.canContinueToUse() && TARGET_PREDICATE.test(
-                PreservationTurretEntity.this, PreservationTurretEntity.this.getTarget());
+            return super.canContinueToUse() && TARGET_PREDICATE
+                .test(
+                    PreservationTurretEntity.this,
+                    PreservationTurretEntity.this.getTarget()
+                );
         }
 
         @Override
@@ -562,8 +622,9 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
         @Override
         public void tick() {
-            if (PreservationTurretEntity.this.level()
-                                             .getDifficulty() != Difficulty.PEACEFUL) {
+            if (PreservationTurretEntity.this
+                .level()
+                .getDifficulty() != Difficulty.PEACEFUL) {
                 LivingEntity target = PreservationTurretEntity.this.getTarget();
                 if (target == null) {
                     return;
@@ -573,20 +634,27 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
                     return;
                 }
 
-                target.hurt(
-                    level().damageSources()
-                           .mobAttack(PreservationTurretEntity.this), DAMAGE
-                );
-                PreservationTurretEntity.this.playSound(
-                    PastelSounds.ENTITY_PRESERVATION_TURRET_SHOOT, 2.0F, 1.0F + 0.2F *
-                                                                                     (PreservationTurretEntity.this.random.nextFloat() -
-                                                                                      PreservationTurretEntity.this.random.nextFloat())
-                );
-                target.playSound(
-                    PastelSounds.ENTITY_PRESERVATION_TURRET_SHOOT, 1.0F, 0.5F + 0.2F *
-                                                                                     (PreservationTurretEntity.this.random.nextFloat() -
-                                                                                      PreservationTurretEntity.this.random.nextFloat())
-                );
+                target
+                    .hurt(
+                        level()
+                            .damageSources()
+                            .mobAttack(PreservationTurretEntity.this),
+                        DAMAGE
+                    );
+                PreservationTurretEntity.this
+                    .playSound(
+                        PastelSounds.ENTITY_PRESERVATION_TURRET_SHOOT,
+                        2.0F,
+                        1.0F + 0.2F * (PreservationTurretEntity.this.random
+                            .nextFloat() - PreservationTurretEntity.this.random.nextFloat())
+                    );
+                target
+                    .playSound(
+                        PastelSounds.ENTITY_PRESERVATION_TURRET_SHOOT,
+                        1.0F,
+                        0.5F + 0.2F * (PreservationTurretEntity.this.random
+                            .nextFloat() - PreservationTurretEntity.this.random.nextFloat())
+                    );
 
                 super.tick();
             }
@@ -613,25 +681,31 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 
         @Override
         public boolean canReceiveVibration(
-            ServerLevel world, BlockPos pos, Holder<GameEvent> event, GameEvent.Context emitter) {
-            return !PreservationTurretEntity.this.isRemoved()
-                   && !PreservationTurretEntity.this.isDeadOrDying()
-                   && !PreservationTurretEntity.this.isNoAi()
-                   && world.getWorldBorder()
-                           .isWithinBounds(pos)
-                   && PreservationTurretEntity.this.level() == world
-                   && emitter.sourceEntity() instanceof LivingEntity livingEntity
-                   && PreservationTurretEntity.this.isValidTarget(livingEntity);
+            ServerLevel world,
+            BlockPos pos,
+            Holder<GameEvent> event,
+            GameEvent.Context emitter
+        ) {
+            return !PreservationTurretEntity.this.isRemoved() && !PreservationTurretEntity.this
+                .isDeadOrDying() && !PreservationTurretEntity.this.isNoAi() && world
+                    .getWorldBorder()
+                    .isWithinBounds(pos) && PreservationTurretEntity.this.level() == world && emitter
+                        .sourceEntity() instanceof LivingEntity livingEntity && PreservationTurretEntity.this
+                            .isValidTarget(livingEntity);
         }
 
         @Override
         public void onReceiveVibration(
-            ServerLevel world, BlockPos pos, Holder<GameEvent> event, @Nullable Entity sourceEntity,
-            @Nullable Entity target, float distance
+            ServerLevel world,
+            BlockPos pos,
+            Holder<GameEvent> event,
+            @Nullable Entity sourceEntity,
+            @Nullable Entity target,
+            float distance
         ) {
-            if (!PreservationTurretEntity.this.isDeadOrDying()
-                && sourceEntity instanceof LivingEntity livingEntity
-                && TARGET_PREDICATE.test(PreservationTurretEntity.this, livingEntity)) {
+            if (!PreservationTurretEntity.this
+                .isDeadOrDying() && sourceEntity instanceof LivingEntity livingEntity && TARGET_PREDICATE
+                    .test(PreservationTurretEntity.this, livingEntity)) {
 
                 PreservationTurretEntity.this.setTarget(livingEntity);
                 PreservationTurretEntity.this.setPeekAmount(100);

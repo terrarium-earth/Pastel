@@ -58,20 +58,34 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
-    implements PlayerOwned, ContainerWrapper, InkStorageBlockEntity<TotalCappedInkStorage>, SidedCapabilityProvider {
+    implements
+    PlayerOwned,
+    ContainerWrapper,
+    InkStorageBlockEntity<TotalCappedInkStorage>,
+    SidedCapabilityProvider {
 
     public static final int INVENTORY_SIZE = 2; // input & output slots
+
     public static final int INPUT_SLOT_ID = 0;
+
     public static final int OUTPUT_SLOT_ID = 1;
+
     public static final long TICKS_PER_CONVERSION = 6;
+
     public static final long STORAGE_AMOUNT = 64 * 64 * 64 * 100;
 
     public FriendlyStackHandler inventory = new FriendlyStackHandler(2);
+
     protected TotalCappedInkStorage inkStorage;
+
     protected boolean paused;
+
     protected boolean inkDirty;
+
     protected @Nullable InkConvertingRecipe cachedRecipe;
+
     protected Optional<Holder<InkColor>> selectedColor = Optional.empty();
+
     private UUID ownerUUID;
 
     public ColorPickerBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -86,7 +100,9 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
         this.inkStorage = new TotalCappedInkStorage(STORAGE_AMOUNT, Map.of());
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void tick(Level world, BlockPos pos, BlockState state, ColorPickerBlockEntity picker) {
         if (!world.isClientSide) {
             picker.inkDirty = false;
@@ -115,26 +131,40 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
         assert level != null;
         var stack = inventory.getStackInSlot(0);
 
-        return Math.round(Mth.clampedLerp(
-            TICKS_PER_CONVERSION, 1,
-            (float) stack.getCount() / stack.getMaxStackSize()
-        ));
+        return Math
+            .round(
+                Mth
+                    .clampedLerp(
+                        TICKS_PER_CONVERSION,
+                        1,
+                        (float) stack.getCount() / stack.getMaxStackSize()
+                    )
+            );
     }
 
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
         super.loadAdditional(nbt, registryLookup);
         inventory.load(nbt.getCompound("Inventory"), registryLookup);
-        CodecHelper.fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage"))
-                   .ifPresent(storage -> this.inkStorage = new TotalCappedInkStorage(
-                       storage.maxEnergyTotal(),
-                       storage.storedEnergy()
-                   ));
+        CodecHelper
+            .fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage"))
+            .ifPresent(
+                storage -> this.inkStorage = new TotalCappedInkStorage(
+                    storage.maxEnergyTotal(),
+                    storage.storedEnergy()
+                )
+            );
         this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
         if (nbt.contains("SelectedColor", Tag.TAG_STRING)) {
-            this.selectedColor = Optional.of(PastelRegistries.INK_COLOR.wrapAsHolder(
-                InkColor.ofIdString(nbt.getString("SelectedColor"))
-                        .get()));
+            this.selectedColor = Optional
+                .of(
+                    PastelRegistries.INK_COLOR
+                        .wrapAsHolder(
+                            InkColor
+                                .ofIdString(nbt.getString("SelectedColor"))
+                                .get()
+                        )
+                );
         } else {
             this.selectedColor = Optional.empty();
         }
@@ -174,17 +204,22 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
     @Override
     protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
         return new ColorPickerScreenHandler(
-            syncId, playerInventory, new ColorPickerScreenHandler.ScreenOpeningData(
-            this.worldPosition,
-            this.selectedColor
-        )
+            syncId,
+            playerInventory,
+            new ColorPickerScreenHandler.ScreenOpeningData(
+                this.worldPosition,
+                this.selectedColor
+            )
         );
     }
 
     @Override
     public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
-        ColorPickerScreenHandler.ScreenOpeningData.STREAM_CODEC.encode(
-            buffer, new ColorPickerScreenHandler.ScreenOpeningData(this.worldPosition, this.selectedColor));
+        ColorPickerScreenHandler.ScreenOpeningData.STREAM_CODEC
+            .encode(
+                buffer,
+                new ColorPickerScreenHandler.ScreenOpeningData(this.worldPosition, this.selectedColor)
+            );
     }
 
     @Override
@@ -247,24 +282,31 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
             InkColor inkColor = recipe.getInkColor();
             long amount = recipe.getInkAmount();
             if (amount <= this.inkStorage.getRoom(inkColor)) {
-                inventory.getStackInSlot(INPUT_SLOT_ID)
-                         .shrink(1);
+                inventory
+                    .getStackInSlot(INPUT_SLOT_ID)
+                    .shrink(1);
                 this.inkStorage.addEnergy(inkColor, amount);
 
                 if (PastelCommon.CONFIG.BlockSoundVolume > 0) {
-                    world.playSound(
-                        null, worldPosition, PastelSounds.COLOR_PICKER_PROCESSING, SoundSource.BLOCKS,
-                        PastelCommon.CONFIG.BlockSoundVolume / 3, 1.0F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            worldPosition,
+                            PastelSounds.COLOR_PICKER_PROCESSING,
+                            SoundSource.BLOCKS,
+                            PastelCommon.CONFIG.BlockSoundVolume / 3,
+                            1.0F
+                        );
                 }
-                PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                    world,
-                    new Vec3(worldPosition.getX() + 0.5, worldPosition.getY() + 0.7, worldPosition.getZ() + 0.5),
-                    ColoredFluidRisingParticleEffect.of(inkColor.getColorInt()),
-                    5,
-                    new Vec3(0.22, 0.0, 0.22),
-                    new Vec3(0.0, 0.1, 0.0)
-                );
+                PlayParticleWithRandomOffsetAndVelocityPayload
+                    .playParticleWithRandomOffsetAndVelocity(
+                        world,
+                        new Vec3(worldPosition.getX() + 0.5, worldPosition.getY() + 0.7, worldPosition.getZ() + 0.5),
+                        ColoredFluidRisingParticleEffect.of(inkColor.getColorInt()),
+                        5,
+                        new Vec3(0.22, 0.0, 0.22),
+                        new Vec3(0.0, 0.1, 0.0)
+                    );
 
                 return true;
             }
@@ -282,23 +324,31 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
 
         // does the cached recipe match?
         if (this.cachedRecipe != null) {
-            if (this.cachedRecipe.getIngredients()
-                                 .get(INPUT_SLOT_ID)
-                                 .test(inputStack)) {
+            if (this.cachedRecipe
+                .getIngredients()
+                .get(INPUT_SLOT_ID)
+                .test(inputStack)) {
                 return this.cachedRecipe;
             }
         }
 
         // search matching recipe
-        Optional<RecipeHolder<InkConvertingRecipe>> recipe = world.getRecipeManager()
-                                                                  .getRecipeFor(
-                                                                      PastelRecipeTypes.INK_CONVERTING,
-                                                                      new SingleRecipeInput(inventory.getStackInSlot(
-                                                                          INPUT_SLOT_ID)), world
-                                                                  );
+        Optional<RecipeHolder<InkConvertingRecipe>> recipe = world
+            .getRecipeManager()
+            .getRecipeFor(
+                PastelRecipeTypes.INK_CONVERTING,
+                new SingleRecipeInput(
+                    inventory
+                        .getStackInSlot(
+                            INPUT_SLOT_ID
+                        )
+                ),
+                world
+            );
         if (recipe.isPresent()) {
-            this.cachedRecipe = recipe.get()
-                                      .value();
+            this.cachedRecipe = recipe
+                .get()
+                .value();
             return this.cachedRecipe;
         } else {
             this.cachedRecipe = null;
@@ -319,13 +369,19 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
             }
 
             if (this.selectedColor.isEmpty()) {
-                for (InkColor color : InkColors.all()) {
+                for (
+                    InkColor color : InkColors.all()
+                ) {
                     transferredAmount += tryTransferInk(owner, stack, itemStorage, color);
                 }
             } else {
                 transferredAmount = tryTransferInk(
-                    owner, stack, itemStorage, this.selectedColor.get()
-                                                                 .value()
+                    owner,
+                    stack,
+                    itemStorage,
+                    this.selectedColor
+                        .get()
+                        .value()
                 );
             }
 
@@ -363,18 +419,20 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
         return nbtCompound;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
     public void updateInClientWorld() {
         if (level != null) {
-            level.sendBlockUpdated(
-                worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition),
-                Block.UPDATE_INVISIBLE
-            );
+            level
+                .sendBlockUpdated(
+                    worldPosition,
+                    level.getBlockState(worldPosition),
+                    level.getBlockState(worldPosition),
+                    Block.UPDATE_INVISIBLE
+                );
         }
     }
 

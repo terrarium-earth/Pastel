@@ -16,7 +16,7 @@ public interface EntityColorProcessor<E extends Entity> {
      * @param dyeColor The color to color the entity in
      * @param player   The player that dyed the entity
      * @return if the coloring was successful (true if colored, false when failed, like the entity already being that
-     * color)
+     *         color)
      */
     boolean colorEntity(E entity, Optional<DyeColor> dyeColor, @Nullable Player player);
 

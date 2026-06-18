@@ -46,8 +46,9 @@ public class FrenzyStatusEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         long lastKillTick = LastKillData.getLastKillTick(entity);
-        long worldTime = entity.level()
-                               .getGameTime();
+        long worldTime = entity
+            .level()
+            .getGameTime();
         long lastKillTickDifference = worldTime - lastKillTick;
         boolean scoredKillInTime = lastKillTick >= 0 && lastKillTickDifference < REQUIRE_KILL_EVERY_X_TICKS;
 
@@ -71,16 +72,24 @@ public class FrenzyStatusEffect extends MobEffect {
         AttributeMap attributes = entity.getAttributes();
         if (attributes != null) {
             createModifiers(
-                amplifier, (entry, modifier) -> {
+                amplifier,
+                (entry, modifier) -> {
                     AttributeInstance entityInstance = attributes.getInstance(entry);
                     if (entityInstance != null) {
                         AttributeModifier appliedModifier = entityInstance.getModifier(modifier.id());
                         double newBaseValue = appliedModifier == null ? modifier.amount() : appliedModifier.amount();
-                        double newValue = this.adjustModifierAmount(
-                            newBaseValue, modifier.amount(), amplifier, increase);
+                        double newValue = this
+                            .adjustModifierAmount(
+                                newBaseValue,
+                                modifier.amount(),
+                                amplifier,
+                                increase
+                            );
                         entityInstance.removeModifier(modifier);
-                        entityInstance.addPermanentModifier(
-                            new AttributeModifier(modifier.id(), newValue, modifier.operation()));
+                        entityInstance
+                            .addPermanentModifier(
+                                new AttributeModifier(modifier.id(), newValue, modifier.operation())
+                            );
                         entityInstance.getValue();
                     }
                 }

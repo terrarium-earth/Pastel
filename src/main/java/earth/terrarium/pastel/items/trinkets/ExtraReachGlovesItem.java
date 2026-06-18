@@ -25,38 +25,55 @@ public class ExtraReachGlovesItem extends InkDrainTrinketItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.gloves_of_dawns_grasp.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.gloves_of_dawns_grasp.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
         super.appendHoverText(stack, context, tooltip, type);
     }
 
-    public static ResourceLocation BLOCK_INTERACTION_ATTRIBUTE_ID = PastelCommon.locate(
-        "gloves_of_dawns_grasp_block_interaction");
-    public static ResourceLocation ENTITY_INTERACTION_ATTRIBUTE_ID = PastelCommon.locate(
-        "gloves_of_dawns_grasp_entity_interaction");
+    public static ResourceLocation BLOCK_INTERACTION_ATTRIBUTE_ID = PastelCommon
+        .locate(
+            "gloves_of_dawns_grasp_block_interaction"
+        );
+
+    public static ResourceLocation ENTITY_INTERACTION_ATTRIBUTE_ID = PastelCommon
+        .locate(
+            "gloves_of_dawns_grasp_entity_interaction"
+        );
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        SlotContext slotContext,
+        ResourceLocation id,
+        ItemStack stack
+    ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
 
         FixedSingleInkStorage inkStorage = getEnergyStorage(stack);
         long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
         double extraReach = getExtraReach(storedInk);
         if (extraReach != 0) {
-            modifiers.put(
-                Attributes.BLOCK_INTERACTION_RANGE, new AttributeModifier(
-                    BLOCK_INTERACTION_ATTRIBUTE_ID, extraReach,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
-            );
-            modifiers.put(
-                Attributes.ENTITY_INTERACTION_RANGE,
-                new AttributeModifier(
-                    ENTITY_INTERACTION_ATTRIBUTE_ID, extraReach / 6,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
-            );
+            modifiers
+                .put(
+                    Attributes.BLOCK_INTERACTION_RANGE,
+                    new AttributeModifier(
+                        BLOCK_INTERACTION_ATTRIBUTE_ID,
+                        extraReach,
+                        AttributeModifier.Operation.ADD_VALUE
+                    )
+                );
+            modifiers
+                .put(
+                    Attributes.ENTITY_INTERACTION_RANGE,
+                    new AttributeModifier(
+                        ENTITY_INTERACTION_ATTRIBUTE_ID,
+                        extraReach / 6,
+                        AttributeModifier.Operation.ADD_VALUE
+                    )
+                );
         }
 
         return modifiers;

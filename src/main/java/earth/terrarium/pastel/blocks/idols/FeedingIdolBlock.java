@@ -25,6 +25,7 @@ import java.util.List;
 public class FeedingIdolBlock extends IdolBlock {
 
     protected static final int LOVE_TICKS = 600;
+
     protected final int range;
 
     public FeedingIdolBlock(Properties settings, ParticleOptions particleEffect, int range) {
@@ -40,14 +41,23 @@ public class FeedingIdolBlock extends IdolBlock {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(Component.translatable("block.pastel.feeding_idol.tooltip", this.range));
     }
 
     @Override
     public boolean trigger(
-        ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side) {
+        ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    ) {
         int boxSize = range + range;
 
         // Query entities once and reuse below. Otherwise, it will get computationally expensive
@@ -56,10 +66,13 @@ public class FeedingIdolBlock extends IdolBlock {
         List<ItemEntity> itemEntities = world.getEntitiesOfClass(ItemEntity.class, box);
 
         // put grown animals in love
-        for (Animal animalEntity : animalEntities) {
-            if (animalEntity.getAge() == 0 &&
-                !animalEntity.isInLove()) { // getBreedingAge() automatically checks for !isChild()
-                for (ItemEntity itemEntity : itemEntities) {
+        for (
+            Animal animalEntity : animalEntities
+        ) {
+            if (animalEntity.getAge() == 0 && !animalEntity.isInLove()) { // getBreedingAge() automatically checks for !isChild()
+                for (
+                    ItemEntity itemEntity : itemEntities
+                ) {
                     ItemStack stack = itemEntity.getItem();
                     if (animalEntity.isFood(stack)) {
                         InWorldInteractionHelper.decrementAndSpawnRemainder(itemEntity, 1);
@@ -72,9 +85,13 @@ public class FeedingIdolBlock extends IdolBlock {
         }
 
         // use remaining items to grow up animals
-        for (Animal animalEntity : animalEntities) {
+        for (
+            Animal animalEntity : animalEntities
+        ) {
             if (animalEntity.isBaby()) {
-                for (ItemEntity itemEntity : itemEntities) {
+                for (
+                    ItemEntity itemEntity : itemEntities
+                ) {
                     ItemStack stack = itemEntity.getItem();
                     if (animalEntity.isFood(stack)) {
                         InWorldInteractionHelper.decrementAndSpawnRemainder(itemEntity, 1);

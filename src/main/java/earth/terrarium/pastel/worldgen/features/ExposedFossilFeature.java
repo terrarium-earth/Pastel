@@ -33,7 +33,9 @@ public class ExposedFossilFeature extends Feature<FossilFeatureConfiguration> {
     }
 
     @Override
-    @SuppressWarnings("resource")
+    @SuppressWarnings(
+        "resource"
+    )
     public boolean place(FeaturePlaceContext<FossilFeatureConfiguration> context) {
         RandomSource random = context.random();
         WorldGenLevel structureWorldAccess = context.level();
@@ -41,44 +43,72 @@ public class ExposedFossilFeature extends Feature<FossilFeatureConfiguration> {
         Rotation blockRotation = Rotation.getRandom(random);
         FossilFeatureConfiguration fossilFeatureConfig = context.config();
         int fossilStructuresCount = random.nextInt(fossilFeatureConfig.fossilStructures.size());
-        StructureTemplateManager structureTemplateManager = structureWorldAccess.getLevel()
-                                                                                .getServer()
-                                                                                .getStructureManager();
-        StructureTemplate structureTemplate = structureTemplateManager.getOrCreate(
-            fossilFeatureConfig.fossilStructures.get(fossilStructuresCount));
-        StructureTemplate structureTemplate2 = structureTemplateManager.getOrCreate(
-            fossilFeatureConfig.overlayStructures.get(fossilStructuresCount));
+        StructureTemplateManager structureTemplateManager = structureWorldAccess
+            .getLevel()
+            .getServer()
+            .getStructureManager();
+        StructureTemplate structureTemplate = structureTemplateManager
+            .getOrCreate(
+                fossilFeatureConfig.fossilStructures.get(fossilStructuresCount)
+            );
+        StructureTemplate structureTemplate2 = structureTemplateManager
+            .getOrCreate(
+                fossilFeatureConfig.overlayStructures.get(fossilStructuresCount)
+            );
         ChunkPos originChunkPos = new ChunkPos(origin);
         BoundingBox blockBox = new BoundingBox(
-            originChunkPos.getMinBlockX() - 16, structureWorldAccess.getMinBuildHeight(),
-            originChunkPos.getMinBlockZ() - 16, originChunkPos.getMaxBlockX() + 16,
-            structureWorldAccess.getMaxBuildHeight(), originChunkPos.getMaxBlockZ() + 16
+            originChunkPos.getMinBlockX() - 16,
+            structureWorldAccess.getMinBuildHeight(),
+            originChunkPos.getMinBlockZ() - 16,
+            originChunkPos.getMaxBlockX() + 16,
+            structureWorldAccess.getMaxBuildHeight(),
+            originChunkPos.getMaxBlockZ() + 16
         );
-        StructurePlaceSettings structurePlacementData = (new StructurePlaceSettings()).setRotation(blockRotation)
-                                                                                      .setBoundingBox(blockBox)
-                                                                                      .setRandom(random);
+        StructurePlaceSettings structurePlacementData = (new StructurePlaceSettings())
+            .setRotation(blockRotation)
+            .setBoundingBox(blockBox)
+            .setRandom(random);
         Vec3i rotatedSize = structureTemplate.getSize(blockRotation);
         BlockPos afterOffsetPos = origin.offset(-rotatedSize.getX() / 2, 0, -rotatedSize.getZ() / 2);
 
-        BlockPos transformedPos = structureTemplate.getZeroPositionWithTransform(
-            afterOffsetPos, Mirror.NONE, blockRotation);
+        BlockPos transformedPos = structureTemplate
+            .getZeroPositionWithTransform(
+                afterOffsetPos,
+                Mirror.NONE,
+                blockRotation
+            );
         if (getEmptyCorners(
-            structureWorldAccess, structureTemplate.getBoundingBox(structurePlacementData, transformedPos)) >
-            fossilFeatureConfig.maxEmptyCornersAllowed) {
+            structureWorldAccess,
+            structureTemplate.getBoundingBox(structurePlacementData, transformedPos)
+        ) > fossilFeatureConfig.maxEmptyCornersAllowed) {
             return false;
         } else {
             structurePlacementData.clearProcessors();
             List<StructureProcessor> processors = (fossilFeatureConfig.fossilProcessors.value()).list();
             Objects.requireNonNull(structurePlacementData);
             processors.forEach(structurePlacementData::addProcessor);
-            structureTemplate.placeInWorld(
-                structureWorldAccess, transformedPos, transformedPos, structurePlacementData, random, 4);
+            structureTemplate
+                .placeInWorld(
+                    structureWorldAccess,
+                    transformedPos,
+                    transformedPos,
+                    structurePlacementData,
+                    random,
+                    4
+                );
             structurePlacementData.clearProcessors();
             processors = (fossilFeatureConfig.overlayProcessors.value()).list();
             Objects.requireNonNull(structurePlacementData);
             processors.forEach(structurePlacementData::addProcessor);
-            structureTemplate2.placeInWorld(
-                structureWorldAccess, transformedPos, transformedPos, structurePlacementData, random, 4);
+            structureTemplate2
+                .placeInWorld(
+                    structureWorldAccess,
+                    transformedPos,
+                    transformedPos,
+                    structurePlacementData,
+                    random,
+                    4
+                );
             return true;
         }
     }

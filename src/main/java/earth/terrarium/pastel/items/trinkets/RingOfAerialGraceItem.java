@@ -20,10 +20,18 @@ public class RingOfAerialGraceItem extends GravityRingItem implements Gravitable
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.ring_of_aetherial_grace.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.ring_of_aetherial_grace.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.ring_of_aetherial_grace.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.ring_of_aetherial_grace.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     public static ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("ring_of_aetherial_grace_gravity");

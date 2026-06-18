@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 
 public class PastelLevels {
     public static final ResourceLocation DIMENSION_ID = PastelCommon.locate("imbrifer");
+
     public static final ResourceKey<Level> DIMENSION_KEY = ResourceKey.create(Registries.DIMENSION, DIMENSION_ID);
 
     public static void register() {

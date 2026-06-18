@@ -44,23 +44,34 @@ public class NephriteBlossomStemBlock extends BushBlock {
     }
 
     public static BlockState getStemVariant(boolean top) {
-        return PastelBlocks.NEPHRITE_BLOSSOM_STEM.get()
-                                                 .defaultBlockState()
-                                                 .setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM);
+        return PastelBlocks.NEPHRITE_BLOSSOM_STEM
+            .get()
+            .defaultBlockState()
+            .setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM);
     }
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (handStack.is(Tags.Items.TOOLS_SHEAR) && state.getValue(STEM_PART) == StemComponent.BASE) {
             BlockState newState = state.setValue(STEM_PART, StemComponent.STEM);
             world.setBlockAndUpdate(pos, newState);
-            player.playNotifySound(
-                SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1, 0.9F + player.getRandom()
-                                                                                 .nextFloat() * 0.2F
-            );
+            player
+                .playNotifySound(
+                    SoundEvents.MOOSHROOM_SHEAR,
+                    SoundSource.BLOCKS,
+                    1,
+                    0.9F + player
+                        .getRandom()
+                        .nextFloat() * 0.2F
+                );
             handStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
             world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(newState));
 
@@ -70,8 +81,7 @@ public class NephriteBlossomStemBlock extends BushBlock {
         return super.useItemOn(handStack, state, world, pos, player, hand, hit);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         var world = ctx.getLevel();
         var pos = ctx.getClickedPos();
@@ -100,7 +110,11 @@ public class NephriteBlossomStemBlock extends BushBlock {
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (!state.canSurvive(world, pos)) {

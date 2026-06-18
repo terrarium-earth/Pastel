@@ -55,19 +55,35 @@ import java.util.function.Predicate;
 public class FloatBlockEntity extends Entity {
 
     private static final float MAX_DAMAGE = 8.0F;
+
     private static final float DAMAGE_PER_FALLEN_BLOCK = 0.5F;
 
-    private static final EntityDataAccessor<BlockPos> ORIGIN = SynchedEntityData.defineId(
-        FloatBlockEntity.class, EntityDataSerializers.BLOCK_POS);
-    private static final EntityDataAccessor<Long> LAUNCH_TIME = SynchedEntityData.defineId(
-        FloatBlockEntity.class, EntityDataSerializers.LONG);
-    private static final EntityDataAccessor<Float> GRAVITY_MODIFIER = SynchedEntityData.defineId(
-        FloatBlockEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<BlockPos> ORIGIN = SynchedEntityData
+        .defineId(
+            FloatBlockEntity.class,
+            EntityDataSerializers.BLOCK_POS
+        );
+
+    private static final EntityDataAccessor<Long> LAUNCH_TIME = SynchedEntityData
+        .defineId(
+            FloatBlockEntity.class,
+            EntityDataSerializers.LONG
+        );
+
+    private static final EntityDataAccessor<Float> GRAVITY_MODIFIER = SynchedEntityData
+        .defineId(
+            FloatBlockEntity.class,
+            EntityDataSerializers.FLOAT
+        );
 
     public int moveTime;
+
     protected CompoundTag blockEntityData;
+
     protected BlockState blockState = Blocks.STONE.defaultBlockState();
+
     protected boolean canSetBlock = true;
+
     protected boolean collides;
 
     public FloatBlockEntity(EntityType<? extends FloatBlockEntity> entityType, Level world) {
@@ -76,7 +92,11 @@ public class FloatBlockEntity extends Entity {
     }
 
     public FloatBlockEntity(
-        EntityType<? extends FloatBlockEntity> entityType, Level world, double x, double y, double z,
+        EntityType<? extends FloatBlockEntity> entityType,
+        Level world,
+        double x,
+        double y,
+        double z,
         BlockState blockState
     ) {
         this(entityType, world);
@@ -127,11 +147,11 @@ public class FloatBlockEntity extends Entity {
         return box.move(position().subtract(new Vec3(0.5, 0, 0.5)));
     }
 
-
     @Override
     public void tick() {
-        if (this.getBlockState()
-                .isAir()) {
+        if (this
+            .getBlockState()
+            .isAir()) {
             this.discard();
             return;
         }
@@ -141,24 +161,37 @@ public class FloatBlockEntity extends Entity {
         if (this.moveTime++ == 0) {
             BlockPos blockPos = this.blockPosition();
             Block block = this.blockState.getBlock();
-            if (this.level()
-                    .getBlockState(blockPos)
-                    .is(block)) {
-                this.level()
+            if (this
+                .level()
+                .getBlockState(blockPos)
+                .is(block)) {
+                this
+                    .level()
                     .removeBlock(blockPos, false);
             }
         }
 
         if (!this.isNoGravity()) {
-            this.moveDist = (float) this.position()
-                                        .y() - this.getOrigin()
-                                                   .getY();
+            this.moveDist = (float) this
+                .position()
+                .y() - this
+                    .getOrigin()
+                    .getY();
             long launchTime = level().getGameTime() - getLaunchTime();
-            double additionalYVelocity = launchTime > 100 ? this.getDefaultGravity() / 10 : Math.min(
-                Math.sin((Math.PI * launchTime) / 100D), 1) * (this.getDefaultGravity() / 10);
+            double additionalYVelocity = launchTime > 100
+                ? this.getDefaultGravity() / 10
+                : Math
+                    .min(
+                        Math.sin((Math.PI * launchTime) / 100D),
+                        1
+                    ) * (this.getDefaultGravity() / 10);
             this.push(0.0D, additionalYVelocity, 0.0D);
-            this.setDeltaMovement(this.getDeltaMovement()
-                                      .scale(0.98D));
+            this
+                .setDeltaMovement(
+                    this
+                        .getDeltaMovement()
+                        .scale(0.98D)
+                );
 
             // recalculate fall damage
             if (!level().isClientSide) {
@@ -172,11 +205,12 @@ public class FloatBlockEntity extends Entity {
         if (!this.level().isClientSide) {
             if (this.verticalCollision) {
                 trySetBlock();
-            } else if (this.tickCount > 100 && this.level()
-                                                   .isOutsideBuildHeight(this.blockPosition())) {
-                this.dropAsItem();
-                this.discard();
-            }
+            } else if (this.tickCount > 100 && this
+                .level()
+                .isOutsideBuildHeight(this.blockPosition())) {
+                    this.dropAsItem();
+                    this.discard();
+                }
         }
     }
 
@@ -197,15 +231,18 @@ public class FloatBlockEntity extends Entity {
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         if (player.isShiftKeyDown()) {
-            if (this.level()
-                    .isClientSide()) {
+            if (this
+                .level()
+                .isClientSide()) {
                 return InteractionResult.SUCCESS;
             } else {
-                Item item = this.blockState.getBlock()
-                                           .asItem();
+                Item item = this.blockState
+                    .getBlock()
+                    .asItem();
                 if (item != null) {
-                    player.getInventory()
-                          .placeItemBackInInventory(item.getDefaultInstance());
+                    player
+                        .getInventory()
+                        .placeItemBackInInventory(item.getDefaultInstance());
                 }
                 this.discard();
                 return InteractionResult.CONSUME;
@@ -216,9 +253,10 @@ public class FloatBlockEntity extends Entity {
 
     @Override
     public ItemStack getPickResult() {
-        return this.blockState.getBlock()
-                              .asItem()
-                              .getDefaultInstance();
+        return this.blockState
+            .getBlock()
+            .asItem()
+            .getDefaultInstance();
     }
 
     /**
@@ -238,12 +276,18 @@ public class FloatBlockEntity extends Entity {
             if (damage > 0) {
                 // since the player position is tracked at its head and item entities are laying directly on the
                 // ground, we have to use a relatively big bounding box here
-                Predicate<Entity> predicate = EntitySelector.NO_CREATIVE_OR_SPECTATOR.and(
-                    entity -> entity.isAlive() && (entity instanceof LivingEntity || entity instanceof ItemEntity));
-                this.level()
+                Predicate<Entity> predicate = EntitySelector.NO_CREATIVE_OR_SPECTATOR
+                    .and(
+                        entity -> entity.isAlive() && (entity instanceof LivingEntity || entity instanceof ItemEntity)
+                    );
+                this
+                    .level()
                     .getEntities(
-                        this, this.getBoundingBox()
-                                  .inflate(0.5), predicate
+                        this,
+                        this
+                            .getBoundingBox()
+                            .inflate(0.5),
+                        predicate
                     )
                     .forEach((entity) -> {
                         if (entity instanceof ItemEntity itemEntity) {
@@ -268,10 +312,13 @@ public class FloatBlockEntity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compound) {
-        this.blockState = NbtUtils.readBlockState(
-            this.level()
-                .holderLookup(Registries.BLOCK), compound.getCompound("BlockState")
-        );
+        this.blockState = NbtUtils
+            .readBlockState(
+                this
+                    .level()
+                    .holderLookup(Registries.BLOCK),
+                compound.getCompound("BlockState")
+            );
         this.moveTime = compound.getInt("Time");
         if (compound.contains("BlockEntityData", 10)) this.blockEntityData = compound.getCompound("BlockEntityData");
         if (this.blockState.isAir()) this.blockState = Blocks.STONE.defaultBlockState();
@@ -296,32 +343,40 @@ public class FloatBlockEntity extends Entity {
 
     public void trySetBlock() {
         BlockPos blockPos = this.blockPosition();
-        BlockState blockState = this.level()
-                                    .getBlockState(blockPos);
-        boolean canReplace = blockState.canBeReplaced(
-            new DirectionalPlaceContext(this.level(), blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
+        BlockState blockState = this
+            .level()
+            .getBlockState(blockPos);
+        boolean canReplace = blockState
+            .canBeReplaced(
+                new DirectionalPlaceContext(this.level(), blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN)
+            );
         boolean canPlace = this.blockState.canSurvive(this.level(), blockPos);
 
         if (!this.canSetBlock || !canPlace || !canReplace) {
             return;
         }
 
-        if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED) && this.level()
-                                                                                 .getFluidState(blockPos)
-                                                                                 .getType() == Fluids.WATER) {
+        if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED) && this
+            .level()
+            .getFluidState(blockPos)
+            .getType() == Fluids.WATER) {
             this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, true);
         }
 
-        if (this.level()
-                .setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
+        if (this
+            .level()
+            .setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
             this.discard();
             if (this.blockEntityData != null && this.blockState.hasBlockEntity()) {
-                BlockEntity blockEntity = this.level()
-                                              .getBlockEntity(blockPos);
+                BlockEntity blockEntity = this
+                    .level()
+                    .getBlockEntity(blockPos);
                 if (blockEntity != null) {
                     var registryLookup = level().registryAccess();
                     CompoundTag compoundTag = blockEntity.saveWithoutMetadata(registryLookup);
-                    for (String keyName : this.blockEntityData.getAllKeys()) {
+                    for (
+                        String keyName : this.blockEntityData.getAllKeys()
+                    ) {
                         Tag tag = this.blockEntityData.get(keyName);
                         if (tag != null && !"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {
                             compoundTag.put(keyName, tag.copy());
@@ -343,42 +398,47 @@ public class FloatBlockEntity extends Entity {
         Level world = this.level();
         AABB collissionBox = getBoundingBox().inflate(0, 2D, 0);
 
-        for (Entity entity : world.getEntities(this, collissionBox)) {
+        for (
+            Entity entity : world.getEntities(this, collissionBox)
+        ) {
             if (entity instanceof FloatBlockEntity other && isPaltaeriaStratineCollision(other)) {
                 world.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, Level.ExplosionInteraction.NONE);
 
-                ItemStack collisionStack = PastelBlocks.HOVERBLOCK.get()
-                                                                   .asItem()
-                                                                   .getDefaultInstance();
+                ItemStack collisionStack = PastelBlocks.HOVERBLOCK
+                    .get()
+                    .asItem()
+                    .getDefaultInstance();
                 ItemEntity itemEntity = new ItemEntity(world, this.getX(), this.getY(), this.getZ(), collisionStack);
-                itemEntity.push(
-                    0.1 - world.random.nextFloat() * 0.2, 0.1 - world.random.nextFloat() * 0.2,
-                    0.1 - world.random.nextFloat() * 0.2
-                );
+                itemEntity
+                    .push(
+                        0.1 - world.random.nextFloat() * 0.2,
+                        0.1 - world.random.nextFloat() * 0.2,
+                        0.1 - world.random.nextFloat() * 0.2
+                    );
                 world.addFreshEntity(itemEntity);
 
                 this.discard();
                 other.discard();
-            } else if (entity.isPushable() && entity.getPistonPushReaction() != PushReaction.IGNORE &&
-                       entity.getBoundingBox()
-                             .intersects(collissionBox)) {
-                entity.move(MoverType.SHULKER_BOX, this.getDeltaMovement());
-                entity.setOnGround(true);
-                entity.fallDistance = 0F;
+            } else if (entity.isPushable() && entity.getPistonPushReaction() != PushReaction.IGNORE && entity
+                .getBoundingBox()
+                .intersects(collissionBox)) {
+                    entity.move(MoverType.SHULKER_BOX, this.getDeltaMovement());
+                    entity.setOnGround(true);
+                    entity.fallDistance = 0F;
 
-                this.onEntityCollision(entity);
-            }
+                    this.onEntityCollision(entity);
+                }
         }
     }
 
     public boolean isPaltaeriaStratineCollision(FloatBlockEntity other) {
         Block thisBlock = this.blockState.getBlock();
-        Block otherBlock = other.getBlockState()
-                                .getBlock();
-        return
-            thisBlock == PastelBlocks.PALTAERIA_FLOATBLOCK.get() && otherBlock == PastelBlocks.STRATINE_FLOATBLOCK.get()
-            || thisBlock == PastelBlocks.STRATINE_FLOATBLOCK.get() &&
-               otherBlock == PastelBlocks.PALTAERIA_FLOATBLOCK.get();
+        Block otherBlock = other
+            .getBlockState()
+            .getBlock();
+        return thisBlock == PastelBlocks.PALTAERIA_FLOATBLOCK.get() && otherBlock == PastelBlocks.STRATINE_FLOATBLOCK
+            .get() || thisBlock == PastelBlocks.STRATINE_FLOATBLOCK
+                .get() && otherBlock == PastelBlocks.PALTAERIA_FLOATBLOCK.get();
     }
 
     /**
@@ -388,9 +448,10 @@ public class FloatBlockEntity extends Entity {
         if (this.isRemoved()) return;
 
         this.discard();
-        if (this.level()
-                .getGameRules()
-                .getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+        if (this
+            .level()
+            .getGameRules()
+            .getBoolean(GameRules.RULE_DOENTITYDROPS)) {
             Block.dropResources(this.blockState, this.level(), this.blockPosition());
         }
 

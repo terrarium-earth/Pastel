@@ -48,7 +48,11 @@ public class JadeVineBulbBlock extends Block implements JadeVine, NaturesStaffTr
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (!state.canSurvive(world, pos)) {
@@ -71,8 +75,9 @@ public class JadeVineBulbBlock extends Block implements JadeVine, NaturesStaffTr
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return PastelItems.GERMINATED_JADE_VINE_BULB.get()
-                                                    .getDefaultInstance();
+        return PastelItems.GERMINATED_JADE_VINE_BULB
+            .get()
+            .getDefaultInstance();
     }
 
     @Override
@@ -82,8 +87,9 @@ public class JadeVineBulbBlock extends Block implements JadeVine, NaturesStaffTr
 
     @Override
     public boolean canSurvive(@NotNull BlockState state, LevelReader world, BlockPos pos) {
-        return world.getBlockState(pos.above())
-                    .getBlock() instanceof JadeVineRootsBlock;
+        return world
+            .getBlockState(pos.above())
+            .getBlock() instanceof JadeVineRootsBlock;
     }
 
     @Override

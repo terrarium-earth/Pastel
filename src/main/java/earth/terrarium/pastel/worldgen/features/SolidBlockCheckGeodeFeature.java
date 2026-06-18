@@ -24,7 +24,9 @@ public class SolidBlockCheckGeodeFeature extends GeodeFeature {
         WorldGenLevel world = context.level();
         BlockPos sourcePos = context.origin();
         int distance = (int) context.config().geodeLayerSettings.outerLayer;
-        for (Direction direction : Direction.values()) {
+        for (
+            Direction direction : Direction.values()
+        ) {
             BlockPos offsetPos = sourcePos.relative(direction, distance);
             BlockState blockStateAtPos = world.getBlockState(offsetPos);
 

@@ -22,7 +22,9 @@ public class PureRedstoneBlock extends PoweredBlock {
     public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
         super.onPlace(state, world, pos, oldState, notify);
 
-        for (Direction direction : Direction.values()) {
+        for (
+            Direction direction : Direction.values()
+        ) {
             world.updateNeighborsAt(pos.relative(direction), this);
         }
     }
@@ -31,7 +33,9 @@ public class PureRedstoneBlock extends PoweredBlock {
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
         super.onRemove(state, world, pos, newState, moved);
 
-        for (Direction direction : Direction.values()) {
+        for (
+            Direction direction : Direction.values()
+        ) {
             world.updateNeighborsAt(pos.relative(direction), this);
         }
     }

@@ -17,7 +17,11 @@ public abstract class SingleItemCraftingRecipe extends CustomRecipe {
     public boolean matches(CraftingInput input, Level world) {
         boolean matchingItemFound = false;
 
-        for (int slot = 0; slot < input.size(); ++slot) {
+        for (
+            int slot = 0;
+            slot < input.size();
+            ++slot
+        ) {
             ItemStack itemStack = input.getItem(slot);
             if (itemStack.isEmpty()) {
                 continue;
@@ -36,7 +40,11 @@ public abstract class SingleItemCraftingRecipe extends CustomRecipe {
     @Override
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider registryLookup) {
         ItemStack stack;
-        for (int slot = 0; slot < input.size(); ++slot) {
+        for (
+            int slot = 0;
+            slot < input.size();
+            ++slot
+        ) {
             stack = input.getItem(slot);
             if (!stack.isEmpty()) {
                 return assemble(stack.copy());

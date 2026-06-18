@@ -20,35 +20,67 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Mixin(WitherBoss.class)
+@Mixin(
+    WitherBoss.class
+)
 public abstract class WitherEntityMixin extends LivingEntity {
 
     protected WitherEntityMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;setExtendedLifetime()V"),
-            method = "dropCustomDeathLoot", locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(
+        at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;setExtendedLifetime()V"
+        ), method = "dropCustomDeathLoot", locals = LocalCapture.CAPTURE_FAILSOFT
+    )
     private void spawnEntity(
-        ServerLevel world, DamageSource source, boolean causedByPlayer, CallbackInfo ci, ItemEntity itemEntity) {
+        ServerLevel world,
+        DamageSource source,
+        boolean causedByPlayer,
+        CallbackInfo ci,
+        ItemEntity itemEntity
+    ) {
         Entity attackerEntity = source.getEntity();
         if (attackerEntity instanceof LivingEntity livingAttacker) {
-            int cloversFavorLevel = Ench.getLevel(
-                world.registryAccess(), PastelEnchantments.CLOVERS_FAVOR, livingAttacker.getMainHandItem());
+            int cloversFavorLevel = Ench
+                .getLevel(
+                    world.registryAccess(),
+                    PastelEnchantments.CLOVERS_FAVOR,
+                    livingAttacker.getMainHandItem()
+                );
             if (cloversFavorLevel > 0) {
                 int additionalCount = (int) (cloversFavorLevel / 2.0F + world.random.nextFloat() * cloversFavorLevel);
-                itemEntity.getItem()
-                          .setCount(itemEntity.getItem()
-                                              .getCount() + additionalCount);
+                itemEntity
+                    .getItem()
+                    .setCount(
+                        itemEntity
+                            .getItem()
+                            .getCount() + additionalCount
+                    );
             }
         }
     }
 
-    @ModifyReturnValue(method = "addEffect", at = @At("TAIL"))
+    @ModifyReturnValue(
+        method = "addEffect", at = @At(
+            "TAIL"
+        )
+    )
     private boolean allowWitherNaps(
-        boolean original, @Local(argsOnly = true) MobEffectInstance effect, @Local(argsOnly = true) Entity source) {
-        if (effect.getEffect()
-                  .is(PastelMobEffectTags.SOPORIFIC)) {
+        boolean original,
+        @Local(
+            argsOnly = true
+        )
+        MobEffectInstance effect,
+        @Local(
+            argsOnly = true
+        )
+        Entity source
+    ) {
+        if (effect
+            .getEffect()
+            .is(PastelMobEffectTags.SOPORIFIC)) {
             return super.addEffect(effect, source);
         }
         return original;

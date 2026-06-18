@@ -29,8 +29,11 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
     public static final MapCodec<AloeBlock> CODEC = simpleCodec(AloeBlock::new);
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_4;
+
     protected static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 9.0, 12.0);
+
     protected static final double GROW_CHANCE = 0.4;
+
     protected static final int MAX_LIGHT_LEVEL = 10;
 
     public AloeBlock(Properties settings) {
@@ -79,13 +82,21 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
             int age = state.getValue(AGE);
             if (age < BlockStateProperties.MAX_AGE_4) {
                 world.setBlockAndUpdate(pos, state.setValue(AGE, age + 1));
-                world.playSound(
-                    null, pos, state.getSoundType()
-                                    .getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F
-                );
+                world
+                    .playSound(
+                        null,
+                        pos,
+                        state
+                            .getSoundType()
+                            .getPlaceSound(),
+                        SoundSource.BLOCKS,
+                        1.0F,
+                        1.0F
+                    );
 
-                if (world.getBlockState(pos.below())
-                         .is(PastelBlockTags.ALOE_CONVERTED)) {
+                if (world
+                    .getBlockState(pos.below())
+                    .is(PastelBlockTags.ALOE_CONVERTED)) {
                     world.setBlockAndUpdate(pos.below(), Blocks.SAND.defaultBlockState());
                 }
             }
@@ -101,20 +112,34 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         int age = state.getValue(AGE);
         if (age > 1) {
             if (world.isClientSide) {
                 return InteractionResult.SUCCESS;
             } else {
                 world.setBlockAndUpdate(pos, state.setValue(AGE, age - 1));
-                player.getInventory()
-                      .placeItemBackInInventory(this.asItem()
-                                                    .getDefaultInstance());
-                world.playSound(
-                    null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F,
-                    0.9F + world.random.nextFloat() * 0.2F
-                );
+                player
+                    .getInventory()
+                    .placeItemBackInInventory(
+                        this
+                            .asItem()
+                            .getDefaultInstance()
+                    );
+                world
+                    .playSound(
+                        null,
+                        pos,
+                        SoundEvents.ITEM_PICKUP,
+                        SoundSource.BLOCKS,
+                        1.0F,
+                        0.9F + world.random.nextFloat() * 0.2F
+                    );
                 return InteractionResult.CONSUME;
             }
         }

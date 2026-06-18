@@ -34,7 +34,9 @@ public class InkProjectileKillingCriterion extends SimpleCriterionTrigger<InkPro
         List<LootContext> list = Lists.newArrayList();
         Set<EntityType<?>> set = Sets.newHashSet();
 
-        for (Entity entity : piercingKilledEntities) {
+        for (
+            Entity entity : piercingKilledEntities
+        ) {
             set.add(entity.getType());
             list.add(EntityPredicate.createContext(player, entity));
         }
@@ -48,25 +50,34 @@ public class InkProjectileKillingCriterion extends SimpleCriterionTrigger<InkPro
         Ints uniqueEntities
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        ContextAwarePredicate.CODEC.listOf()
-                                                                                                                                   .optionalFieldOf("victims", List.of())
-                                                                                                                                   .forGetter(Conditions::victims),
-                                                                                                        Ints.CODEC.optionalFieldOf("unique_entity_types", Ints.ANY)
-                                                                                                                  .forGetter(Conditions::uniqueEntities)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        ContextAwarePredicate.CODEC
+                            .listOf()
+                            .optionalFieldOf("victims", List.of())
+                            .forGetter(Conditions::victims),
+                        Ints.CODEC
+                            .optionalFieldOf("unique_entity_types", Ints.ANY)
+                            .forGetter(Conditions::uniqueEntities)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(Collection<LootContext> victimContexts, int uniqueEntityTypeCount) {
             if (!this.victims.isEmpty()) {
                 List<LootContext> list = Lists.newArrayList(victimContexts);
 
-                for (ContextAwarePredicate extended : this.victims) {
+                for (
+                    ContextAwarePredicate extended : this.victims
+                ) {
                     boolean bl = false;
 
                     Iterator<LootContext> iterator = list.iterator();

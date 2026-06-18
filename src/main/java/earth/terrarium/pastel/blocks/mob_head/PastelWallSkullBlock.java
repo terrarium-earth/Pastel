@@ -21,17 +21,23 @@ import java.util.Collection;
 
 public class PastelWallSkullBlock extends WallSkullBlock {
 
-    public static final MapCodec<PastelWallSkullBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                     PastelSkullType.CODEC.fieldOf("kind")
-                                                                                                                          .forGetter(b -> b.skullType),
-                                                                                                     propertiesCodec()
-                                                                                                 )
-                                                                                                 .apply(
-                                                                                                     i,
-                                                                                                     PastelWallSkullBlock::new
-                                                                                                 ));
+    public static final MapCodec<PastelWallSkullBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    PastelSkullType.CODEC
+                        .fieldOf("kind")
+                        .forGetter(b -> b.skullType),
+                    propertiesCodec()
+                )
+                .apply(
+                    i,
+                    PastelWallSkullBlock::new
+                )
+        );
 
     public static BiMap<PastelSkullType, Block> MOB_WALL_HEADS = EnumHashBiMap.create(PastelSkullType.class);
+
     private final PastelSkullType skullType;
 
     public PastelWallSkullBlock(PastelSkullType skullType, Properties settings) {
@@ -49,7 +55,9 @@ public class PastelWallSkullBlock extends WallSkullBlock {
         return PastelWallSkullBlock.MOB_WALL_HEADS.get(skullType);
     }
 
-    @Contract(pure = true)
+    @Contract(
+        pure = true
+    )
     public static @NotNull Collection<Block> getMobWallHeads() {
         return PastelWallSkullBlock.MOB_WALL_HEADS.values();
     }
@@ -60,9 +68,11 @@ public class PastelWallSkullBlock extends WallSkullBlock {
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return null;
     }
 

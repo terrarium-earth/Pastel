@@ -33,15 +33,16 @@ public class FabricationChestBlock extends PastelChestBlock {
     }
 
     @Override
-    @Nullable
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    @Nullable public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new FabricationChestBlockEntity(pos, state);
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return createTickerHelper(type, PastelBlockEntities.FABRICATION_CHEST.get(), FabricationChestBlockEntity::tick);
     }
 

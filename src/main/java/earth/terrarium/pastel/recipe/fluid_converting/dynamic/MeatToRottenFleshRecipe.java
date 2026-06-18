@@ -18,10 +18,14 @@ public class MeatToRottenFleshRecipe extends DragonrotConvertingRecipe {
     }
 
     private static Ingredient getMeatsIngredient() {
-        return Ingredient.of(BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.MEAT)
-                                                   .stream()
-                                                   .filter(item -> item.value() == Items.ROTTEN_FLESH)
-                                                   .map(ItemStack::new));
+        return Ingredient
+            .of(
+                BuiltInRegistries.ITEM
+                    .getOrCreateTag(ItemTags.MEAT)
+                    .stream()
+                    .filter(item -> item.value() == Items.ROTTEN_FLESH)
+                    .map(ItemStack::new)
+            );
     }
 
     @Override

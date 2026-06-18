@@ -36,8 +36,11 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
     protected static final int INVENTORY_SIZE = 6;
 
     private UUID lastInteractedPlayer;
+
     protected Vec3i controllerOffset = new Vec3i(2, 2, 2);
+
     protected List<Item> requiredItems = new ArrayList<>();
+
     protected List<Vec3i> otherRoundelOffsets = new ArrayList<>();
 
     public PreservationRoundelBlockEntity(BlockPos pos, BlockState state) {
@@ -50,7 +53,9 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
         super.loadAdditional(nbt, registryLookup);
         this.requiredItems = new ArrayList<>();
         if (nbt.contains("RequiredItems", Tag.TAG_LIST)) {
-            for (Tag e : nbt.getList("RequiredItems", Tag.TAG_STRING)) {
+            for (
+                Tag e : nbt.getList("RequiredItems", Tag.TAG_STRING)
+            ) {
                 Item item = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(e.getAsString()));
                 if (item != Items.AIR) {
                     this.requiredItems.add(item);
@@ -64,7 +69,9 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
         }
         otherRoundelOffsets = new ArrayList<>();
         if (nbt.contains("OtherRoundelOffsets", Tag.TAG_LIST)) {
-            for (Tag e : nbt.getList("OtherRoundelOffsets", Tag.TAG_INT_ARRAY)) {
+            for (
+                Tag e : nbt.getList("OtherRoundelOffsets", Tag.TAG_INT_ARRAY)
+            ) {
                 int[] intArray = ((IntArrayTag) e).getAsIntArray();
                 otherRoundelOffsets.add(new Vec3i(intArray[0], intArray[1], intArray[2]));
             }
@@ -76,23 +83,38 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
         super.saveAdditional(nbt, registryLookup);
         if (!this.requiredItems.isEmpty()) {
             ListTag itemList = new ListTag();
-            for (Item requiredItem : this.requiredItems) {
-                itemList.add(StringTag.valueOf(BuiltInRegistries.ITEM.getKey(requiredItem)
-                                                                     .toString()));
+            for (
+                Item requiredItem : this.requiredItems
+            ) {
+                itemList
+                    .add(
+                        StringTag
+                            .valueOf(
+                                BuiltInRegistries.ITEM
+                                    .getKey(requiredItem)
+                                    .toString()
+                            )
+                    );
             }
             nbt.put("RequiredItems", itemList);
         }
         if (this.controllerOffset != null) {
-            nbt.putIntArray(
-                "ControllerOffset", new int[]{
-                    this.controllerOffset.getX(), this.controllerOffset.getY(), this.controllerOffset.getZ()
-                }
-            );
+            nbt
+                .putIntArray(
+                    "ControllerOffset",
+                    new int[] {
+                        this.controllerOffset.getX(), this.controllerOffset.getY(), this.controllerOffset.getZ()
+                    }
+                );
         }
         if (!this.otherRoundelOffsets.isEmpty()) {
             ListTag offsetList = new ListTag();
-            for (Vec3i offset : this.otherRoundelOffsets) {
-                offsetList.add(new IntArrayTag(new int[]{offset.getX(), offset.getY(), offset.getZ()}));
+            for (
+                Vec3i offset : this.otherRoundelOffsets
+            ) {
+                offsetList.add(new IntArrayTag(new int[] {
+                    offset.getX(), offset.getY(), offset.getZ()
+                }));
             }
             nbt.put("OtherRoundelOffsets", offsetList);
         }
@@ -105,11 +127,17 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
 
     public void inventoryChanged() {
         if (level instanceof ServerLevel && controllerOffset != null && inventoryAndConnectedOnesMatchRequirement()) {
-            BlockEntity blockEntity = level.getBlockEntity(
-                Support.directionalOffset(
-                    this.worldPosition, this.controllerOffset, level.getBlockState(this.worldPosition)
-                                                                    .getValue(PreservationControllerBlock.FACING)
-                ));
+            BlockEntity blockEntity = level
+                .getBlockEntity(
+                    Support
+                        .directionalOffset(
+                            this.worldPosition,
+                            this.controllerOffset,
+                            level
+                                .getBlockState(this.worldPosition)
+                                .getValue(PreservationControllerBlock.FACING)
+                        )
+                );
             if (blockEntity instanceof PreservationControllerBlockEntity controller) {
                 // grant advancement
                 controller.openExit();
@@ -122,14 +150,21 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
             return false;
         }
 
-
-        for (Vec3i otherRoundelOffset : this.otherRoundelOffsets) {
-            BlockPos otherRoundelPos = Support.directionalOffset(
-                this.worldPosition, otherRoundelOffset, level.getBlockState(this.worldPosition)
-                                                             .getValue(PreservationControllerBlock.FACING)
-            );
-            if (level.getBlockEntity(
-                otherRoundelPos) instanceof PreservationRoundelBlockEntity preservationRoundelBlockEntity) {
+        for (
+            Vec3i otherRoundelOffset : this.otherRoundelOffsets
+        ) {
+            BlockPos otherRoundelPos = Support
+                .directionalOffset(
+                    this.worldPosition,
+                    otherRoundelOffset,
+                    level
+                        .getBlockState(this.worldPosition)
+                        .getValue(PreservationControllerBlock.FACING)
+                );
+            if (level
+                .getBlockEntity(
+                    otherRoundelPos
+                ) instanceof PreservationRoundelBlockEntity preservationRoundelBlockEntity) {
                 if (!preservationRoundelBlockEntity.inventoryMatchesRequirement()) {
                     return false;
                 }
@@ -146,11 +181,19 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
 
         List<Item> requirements = new ArrayList<>(this.requiredItems);
 
-        for (int i = 0; i < getContainerSize(); i++) {
+        for (
+            int i = 0;
+            i < getContainerSize();
+            i++
+        ) {
             ItemStack slotStack = getItem(i);
             if (!slotStack.isEmpty()) {
                 int usedCount = 0;
-                for (int j = 0; j < requirements.size(); j++) {
+                for (
+                    int j = 0;
+                    j < requirements.size();
+                    j++
+                ) {
                     if (slotStack.is(requirements.get(j))) {
                         requirements.remove(j);
                         j--;
@@ -167,10 +210,15 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
         }
 
         if (requirements.isEmpty() && level != null) {
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                (ServerLevel) level, Vec3.atCenterOf(worldPosition), ParticleTypes.HAPPY_VILLAGER, 10,
-                new Vec3(0.25, 0.5, 0.25), new Vec3(0.1, 0.1, 0.1)
-            );
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    (ServerLevel) level,
+                    Vec3.atCenterOf(worldPosition),
+                    ParticleTypes.HAPPY_VILLAGER,
+                    10,
+                    new Vec3(0.25, 0.5, 0.25),
+                    new Vec3(0.1, 0.1, 0.1)
+                );
             level.playSound(null, worldPosition, PastelSounds.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);
             return true;
         }

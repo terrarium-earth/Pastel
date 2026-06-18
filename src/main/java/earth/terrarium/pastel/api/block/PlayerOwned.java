@@ -11,9 +11,10 @@ public interface PlayerOwned {
 
     static Player getPlayerEntityIfOnline(UUID ownerUUID) {
         if (ownerUUID != null && PastelCommon.getSidedServer() != null) {
-            return PastelCommon.getSidedServer()
-                               .getPlayerList()
-                               .getPlayer(ownerUUID);
+            return PastelCommon
+                .getSidedServer()
+                .getPlayerList()
+                .getPlayer(ownerUUID);
         }
         return null;
     }
@@ -27,17 +28,18 @@ public interface PlayerOwned {
     }
 
     default boolean isOwner(Player playerEntity) {
-        return playerEntity.getUUID()
-                           .equals(getOwnerUUID());
+        return playerEntity
+            .getUUID()
+            .equals(getOwnerUUID());
     }
 
-    @Nullable
-    default Player getOwnerIfOnline() {
+    @Nullable default Player getOwnerIfOnline() {
         UUID ownerUUID = this.getOwnerUUID();
         if (ownerUUID != null && PastelCommon.getSidedServer() != null) {
-            return PastelCommon.getSidedServer()
-                               .getPlayerList()
-                               .getPlayer(ownerUUID);
+            return PastelCommon
+                .getSidedServer()
+                .getPlayerList()
+                .getPlayer(ownerUUID);
         }
         return null;
     }

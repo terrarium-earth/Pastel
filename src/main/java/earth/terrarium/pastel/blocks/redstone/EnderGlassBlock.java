@@ -20,13 +20,19 @@ public class EnderGlassBlock extends Block {
 
     public static final MapCodec<EnderGlassBlock> CODEC = simpleCodec(EnderGlassBlock::new);
 
-    public static final EnumProperty<TransparencyState> TRANSPARENCY_STATE = EnumProperty.create(
-        "transparency_state", TransparencyState.class);
+    public static final EnumProperty<TransparencyState> TRANSPARENCY_STATE = EnumProperty
+        .create(
+            "transparency_state",
+            TransparencyState.class
+        );
 
     public EnderGlassBlock(Properties settings) {
         super(settings);
-        registerDefaultState(getStateDefinition().any()
-                                                 .setValue(TRANSPARENCY_STATE, TransparencyState.SOLID));
+        registerDefaultState(
+            getStateDefinition()
+                .any()
+                .setValue(TRANSPARENCY_STATE, TransparencyState.SOLID)
+        );
     }
 
     @Override
@@ -41,8 +47,8 @@ public class EnderGlassBlock extends Block {
 
     @Override
     public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
-        return (state.getValue(EnderGlassBlock.TRANSPARENCY_STATE) != TransparencyState.SOLID) && stateFrom.is(this) ||
-               super.skipRendering(state, stateFrom, direction);
+        return (state.getValue(EnderGlassBlock.TRANSPARENCY_STATE) != TransparencyState.SOLID) && stateFrom
+            .is(this) || super.skipRendering(state, stateFrom, direction);
     }
 
     @Override
@@ -100,25 +106,36 @@ public class EnderGlassBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        int power = ctx.getLevel()
-                       .getBestNeighborSignal(ctx.getClickedPos());
-        return this.defaultBlockState()
-                   .setValue(TRANSPARENCY_STATE, getStateForRedstonePower(power));
+        int power = ctx
+            .getLevel()
+            .getBestNeighborSignal(ctx.getClickedPos());
+        return this
+            .defaultBlockState()
+            .setValue(TRANSPARENCY_STATE, getStateForRedstonePower(power));
     }
 
     @Override
     public void neighborChanged(
-        BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Block block,
+        BlockPos fromPos,
+        boolean notify
+    ) {
         if (!world.isClientSide) {
             BlockState fromPosBlockState = world.getBlockState(fromPos);
             if (fromPosBlockState.getBlock() instanceof EnderGlassBlock) {
                 TransparencyState sourceTransparencyState = fromPosBlockState.getValue(TRANSPARENCY_STATE);
 
                 if (sourceTransparencyState != state.getValue(TRANSPARENCY_STATE)) {
-                    world.setBlockAndUpdate(
-                        pos, world.getBlockState(pos)
-                                  .setValue(TRANSPARENCY_STATE, sourceTransparencyState)
-                    );
+                    world
+                        .setBlockAndUpdate(
+                            pos,
+                            world
+                                .getBlockState(pos)
+                                .setValue(TRANSPARENCY_STATE, sourceTransparencyState)
+                        );
                 }
             } else {
                 if (fromPosBlockState.isAir() || fromPosBlockState.isSignalSource()) {

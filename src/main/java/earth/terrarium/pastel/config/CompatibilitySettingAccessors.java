@@ -9,6 +9,7 @@ public class CompatibilitySettingAccessors {
     public static final CompatibilitySettingAccessors INSTANCE;
 
     private final Set<String> compatModIds = new HashSet<>();
+
     private final Map<Class<?>, Map<String, Map<String, Object>>> settings = new HashMap<>();
 
     private CompatibilitySettingAccessors() {

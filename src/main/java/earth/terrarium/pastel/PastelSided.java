@@ -10,8 +10,9 @@ public class PastelSided {
      * Bouncer
      */
     public static MinecraftServer getClientServer() {
-        return Minecraft.getInstance()
-                        .getSingleplayerServer();
+        return Minecraft
+            .getInstance()
+            .getSingleplayerServer();
     }
 
     public static void clearToastManager() {

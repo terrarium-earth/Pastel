@@ -8,13 +8,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(TemptGoal.class)
+@Mixin(
+    TemptGoal.class
+)
 public class TemptGoalMixin {
 
-    @Inject(at = @At("HEAD"), method = "shouldFollow", cancellable = true)
+    @Inject(
+        at = @At(
+            "HEAD"
+        ), method = "shouldFollow", cancellable = true
+    )
     private void isTemptedBy(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity.isUsingItem() && entity.getUseItem()
-                                          .getItem() instanceof NaturesStaffItem) {
+        if (entity.isUsingItem() && entity
+            .getUseItem()
+            .getItem() instanceof NaturesStaffItem) {
             cir.setReturnValue(true);
         }
     }

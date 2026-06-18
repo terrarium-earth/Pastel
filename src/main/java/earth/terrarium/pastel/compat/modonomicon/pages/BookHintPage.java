@@ -17,11 +17,18 @@ import net.minecraft.util.GsonHelper;
 public class BookHintPage extends BookTextPage {
 
     private final ResourceLocation completionAdvancement;
+
     private final IngredientStack cost;
 
     public BookHintPage(
-        BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator,
-        String anchor, BookCondition condition, ResourceLocation completionAdvancement, IngredientStack cost
+        BookTextHolder title,
+        BookTextHolder text,
+        boolean useMarkdownInTitle,
+        boolean showTitleSeparator,
+        String anchor,
+        BookCondition condition,
+        ResourceLocation completionAdvancement,
+        IngredientStack cost
     ) {
         super(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition);
         this.completionAdvancement = completionAdvancement;
@@ -35,18 +42,27 @@ public class BookHintPage extends BookTextPage {
         var text = BookGsonHelper.getAsBookTextHolder(json, "text", BookTextHolder.EMPTY, provider);
         var anchor = GsonHelper.getAsString(json, "anchor", "");
         var condition = json.has("condition")
-                        ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
-                        : new BookNoneCondition();
+            ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
+            : new BookNoneCondition();
         var completionAdvancement = ResourceLocation.tryParse(GsonHelper.getAsString(json, "completion_advancement"));
         IngredientStack cost = IngredientStack.EMPTY;
         if (json.has("cost")) {
             var ingredient = GsonHelper.getAsJsonObject(json, "cost");
-            cost = IngredientStack.CODEC.parse(provider.createSerializationContext(JsonOps.INSTANCE), ingredient)
-                                        .result()
-                                        .orElse(cost);
+            cost = IngredientStack.CODEC
+                .parse(provider.createSerializationContext(JsonOps.INSTANCE), ingredient)
+                .result()
+                .orElse(cost);
         }
         return new BookHintPage(
-            title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, completionAdvancement, cost);
+            title,
+            text,
+            useMarkdownInTitle,
+            showTitleSeparator,
+            anchor,
+            condition,
+            completionAdvancement,
+            cost
+        );
     }
 
     public static BookHintPage fromNetwork(RegistryFriendlyByteBuf buffer) {
@@ -59,7 +75,15 @@ public class BookHintPage extends BookTextPage {
         var completionAdvancement = buffer.readResourceLocation();
         var cost = IngredientStack.STREAM_CODEC.decode(buffer);
         return new BookHintPage(
-            title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, completionAdvancement, cost);
+            title,
+            text,
+            useMarkdownInTitle,
+            showTitleSeparator,
+            anchor,
+            condition,
+            completionAdvancement,
+            cost
+        );
     }
 
     public ResourceLocation getCompletionAdvancement() {

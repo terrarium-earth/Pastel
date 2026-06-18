@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class PotionWorkshopCraftingCriterion
-    extends SimpleCriterionTrigger<PotionWorkshopCraftingCriterion.Conditions> {
+    extends
+    SimpleCriterionTrigger<PotionWorkshopCraftingCriterion.Conditions> {
 
     public static final ResourceLocation ID = PastelCommon.locate("crafted_with_potion_workshop");
 
@@ -33,17 +34,23 @@ public class PotionWorkshopCraftingCriterion
         List<ItemPredicate> itemPredicates
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        ItemPredicate.CODEC.listOf()
-                                                                                                                           .optionalFieldOf("items", List.of())
-                                                                                                                           .forGetter(Conditions::itemPredicates)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        ItemPredicate.CODEC
+                            .listOf()
+                            .optionalFieldOf("items", List.of())
+                            .forGetter(Conditions::itemPredicates)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(ItemStack itemStack) {
             List<ItemPredicate> list = new ObjectArrayList<>(this.itemPredicates);

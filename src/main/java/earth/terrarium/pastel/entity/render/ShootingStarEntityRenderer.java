@@ -19,7 +19,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ShootingStarEntityRenderer extends EntityRenderer<ShootingStarEntity> {
 
     public ShootingStarEntityRenderer(EntityRendererProvider.Context context) {
@@ -30,29 +32,45 @@ public class ShootingStarEntityRenderer extends EntityRenderer<ShootingStarEntit
 
     @Override
     public void render(
-        ShootingStarEntity shootingStarEntity, float yaw, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light
+        ShootingStarEntity shootingStarEntity,
+        float yaw,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int light
     ) {
-        BlockState blockState = shootingStarEntity.getShootingStarType()
-                                                  .getBlock()
-                                                  .defaultBlockState();
+        BlockState blockState = shootingStarEntity
+            .getShootingStarType()
+            .getBlock()
+            .defaultBlockState();
 
         if (blockState.getRenderShape() == RenderShape.MODEL) {
             Level world = shootingStarEntity.level();
 
-            if (blockState != world.getBlockState(BlockPos.containing(shootingStarEntity.position())) &&
-                blockState.getRenderShape() != RenderShape.INVISIBLE) {
+            if (blockState != world.getBlockState(BlockPos.containing(shootingStarEntity.position())) && blockState
+                .getRenderShape() != RenderShape.INVISIBLE) {
                 poseStack.pushPose();
 
-                BlockPos blockpos = BlockPos.containing(
-                    shootingStarEntity.getX(), shootingStarEntity.getBoundingBox().maxY, shootingStarEntity.getZ());
+                BlockPos blockpos = BlockPos
+                    .containing(
+                        shootingStarEntity.getX(),
+                        shootingStarEntity.getBoundingBox().maxY,
+                        shootingStarEntity.getZ()
+                    );
                 poseStack.translate(-0.5, 0.0, -0.5);
-                BlockRenderDispatcher blockRenderManager = Minecraft.getInstance()
-                                                                    .getBlockRenderer();
-                blockRenderManager.renderSingleBlock(
-                    blockState, poseStack, vertexConsumerProvider, light, OverlayTexture.NO_OVERLAY, ModelData.EMPTY,
-                    RenderType.CUTOUT
-                );
+                BlockRenderDispatcher blockRenderManager = Minecraft
+                    .getInstance()
+                    .getBlockRenderer();
+                blockRenderManager
+                    .renderSingleBlock(
+                        blockState,
+                        poseStack,
+                        vertexConsumerProvider,
+                        light,
+                        OverlayTexture.NO_OVERLAY,
+                        ModelData.EMPTY,
+                        RenderType.CUTOUT
+                    );
                 //blockRenderManager.getModelRenderer().tesselateBlock(world, blockRenderManager.getBlockModel
                 // (blockState), blockState, blockpos, poseStack, vertexConsumerProvider.getBuffer
                 // (ItemBlockRenderTypes.getMovingBlockRenderType(blockState)), false, world.random, blockState

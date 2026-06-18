@@ -12,11 +12,20 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ColoredExplosionParticle extends HugeExplosionParticle {
 
     protected ColoredExplosionParticle(
-        ClientLevel world, double x, double y, double z, double d, SpriteSet spriteProvider, float red, float green,
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        double d,
+        SpriteSet spriteProvider,
+        float red,
+        float green,
         float blue
     ) {
         super(world, x, y, z, d, spriteProvider);
@@ -31,7 +40,9 @@ public class ColoredExplosionParticle extends HugeExplosionParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<ColoredExplosionParticleEffect> {
 
         private final SpriteSet spriteProvider;
@@ -42,12 +53,27 @@ public class ColoredExplosionParticle extends HugeExplosionParticle {
 
         @Override
         public @Nullable Particle createParticle(
-            ColoredExplosionParticleEffect parameters, ClientLevel world, double x, double y, double z,
-            double velocityX, double velocityY, double velocityZ
+            ColoredExplosionParticleEffect parameters,
+            ClientLevel world,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             Vector3f color = parameters.getColor();
             return new ColoredExplosionParticle(
-                world, x, y, z, velocityX, this.spriteProvider, color.x, color.y, color.z);
+                world,
+                x,
+                y,
+                z,
+                velocityX,
+                this.spriteProvider,
+                color.x,
+                color.y,
+                color.z
+            );
         }
     }
 

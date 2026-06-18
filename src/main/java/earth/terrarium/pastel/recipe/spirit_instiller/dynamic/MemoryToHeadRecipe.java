@@ -26,12 +26,21 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 
     public MemoryToHeadRecipe() {
         super(
-            "", false, Optional.of(PastelCommon.locate("unlocks/memory_to_head")),
-            IngredientStack.ofItems(PastelBlocks.MEMORY.get()
-                                                       .asItem()),
+            "",
+            false,
+            Optional.of(PastelCommon.locate("unlocks/memory_to_head")),
+            IngredientStack
+                .ofItems(
+                    PastelBlocks.MEMORY
+                        .get()
+                        .asItem()
+                ),
             IngredientStack.ofItems(PastelItems.VEGETAL.get(), 4),
             IngredientStack.ofItems(PastelItems.QUITOXIC_POWDER.get(), 4),
-            new ItemStack(Blocks.ZOMBIE_HEAD), 200, 1, true
+            new ItemStack(Blocks.ZOMBIE_HEAD),
+            200,
+            1,
+            true
         );
     }
 
@@ -43,8 +52,9 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
     @Override
     public boolean matches(InstanceRecipeInput input, Level world) {
         if (bowlMatches(input))
-            return input.getItem(CENTER)
-                        .is(PastelBlocks.MEMORY.asItem());
+            return input
+                .getItem(CENTER)
+                .is(PastelBlocks.MEMORY.asItem());
 
         return false;
     }
@@ -63,12 +73,18 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
             if (proposed.isPresent())
                 resultStack = new ItemStack(proposed.get());
 
-            entity.get()
-                  .discard();
+            entity
+                .get()
+                .discard();
         }
 
         spawnXPAndGrantAdvancements(
-            resultStack, spiritInstillerBlockEntity, spiritInstillerBlockEntity.getUpgradeHolder(), world, pos);
+            resultStack,
+            spiritInstillerBlockEntity,
+            spiritInstillerBlockEntity.getUpgradeHolder(),
+            world,
+            pos
+        );
         return resultStack;
     }
 
@@ -77,9 +93,13 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
         ItemStack instillerStack = inventory.getItem(0);
 
         var entity = MemoryBlockEntity.hatchEntity((ServerLevel) level, BlockPos.ZERO, instillerStack);
-        return entity.filter(e -> TreasureHunterModifier.tryGetHead(e)
-                                                        .isPresent())
-                     .isPresent();
+        return entity
+            .filter(
+                e -> TreasureHunterModifier
+                    .tryGetHead(e)
+                    .isPresent()
+            )
+            .isPresent();
 
     }
 

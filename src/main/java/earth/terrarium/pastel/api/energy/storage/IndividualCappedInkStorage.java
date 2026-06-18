@@ -17,9 +17,11 @@ import static earth.terrarium.pastel.helpers.Support.getShortenedNumberString;
 public class IndividualCappedInkStorage implements InkStorage {
 
     protected final long maxEnergyPerColor;
+
     protected final Map<InkColor, Long> storedEnergy = new Object2LongArrayMap<>();
+
     protected long currentTotal;
-        // This is a cache for quick lookup. Can be recalculated anytime using the values in storedEnergy.
+    // This is a cache for quick lookup. Can be recalculated anytime using the values in storedEnergy.
 
     // support all ink colors
     public IndividualCappedInkStorage(long maxEnergyPerColor) {
@@ -31,7 +33,9 @@ public class IndividualCappedInkStorage implements InkStorage {
         this.maxEnergyPerColor = maxEnergyPerColor;
         this.currentTotal = 0;
 
-        for (InkColor color : supportedColors) {
+        for (
+            InkColor color : supportedColors
+        ) {
             this.storedEnergy.put(color, 0L);
         }
     }
@@ -40,7 +44,9 @@ public class IndividualCappedInkStorage implements InkStorage {
         this.maxEnergyPerColor = maxEnergyPerColor;
         this.storedEnergy.putAll(colors);
 
-        for (Map.Entry<InkColor, Long> color : colors.entrySet()) {
+        for (
+            Map.Entry<InkColor, Long> color : colors.entrySet()
+        ) {
             this.storedEnergy.put(color.getKey(), color.getValue());
             this.currentTotal += color.getValue();
         }
@@ -131,15 +137,23 @@ public class IndividualCappedInkStorage implements InkStorage {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void addTooltip(List<Component> tooltip) {
-        tooltip.add(Component.translatable(
-            "item.pastel.ink_storage.stores_ink_per_type",
-            getShortenedNumberString(maxEnergyPerColor)
-        ));
+        tooltip
+            .add(
+                Component
+                    .translatable(
+                        "item.pastel.ink_storage.stores_ink_per_type",
+                        getShortenedNumberString(maxEnergyPerColor)
+                    )
+            );
 
         // we are iterating them this way to preserve the ordering
-        for (InkColor color : PastelRegistries.INK_COLOR) {
+        for (
+            InkColor color : PastelRegistries.INK_COLOR
+        ) {
             long amount = this.storedEnergy.getOrDefault(color, 0L);
             if (amount > 0) {
                 InkStorage.addInkStoreBulletTooltip(tooltip, color, amount);
@@ -155,7 +169,9 @@ public class IndividualCappedInkStorage implements InkStorage {
     @Override
     public void fillCompletely() {
         this.currentTotal = 0;
-        for (InkColor color : this.storedEnergy.keySet()) {
+        for (
+            InkColor color : this.storedEnergy.keySet()
+        ) {
             storedEnergy.put(color, this.maxEnergyPerColor);
             this.currentTotal += this.maxEnergyPerColor;
         }

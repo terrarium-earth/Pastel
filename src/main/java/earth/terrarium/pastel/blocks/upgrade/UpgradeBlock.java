@@ -31,47 +31,54 @@ import java.util.List;
 public class UpgradeBlock extends BaseEntityBlock {
 
     protected static final VoxelShape SHAPE_UP = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
+
     private static final List<Block> upgradeBlocks = new ArrayList<>();
+
     // Positions to check on place / destroy to upgrade those blocks upgrade counts
-    private final List<Vec3i> possibleUpgradeBlockOffsets = new ArrayList<>() {{
-        // Pedestal
-        add(new Vec3i(3, -2, 3));
-        add(new Vec3i(-3, -2, 3));
-        add(new Vec3i(3, -2, -3));
-        add(new Vec3i(-3, -2, -3));
+    private final List<Vec3i> possibleUpgradeBlockOffsets = new ArrayList<>() {
+        {
+            // Pedestal
+            add(new Vec3i(3, -2, 3));
+            add(new Vec3i(-3, -2, 3));
+            add(new Vec3i(3, -2, -3));
+            add(new Vec3i(-3, -2, -3));
 
-        // Fusion Shrine
-        add(new Vec3i(2, 0, 2));
-        add(new Vec3i(-2, 0, 2));
-        add(new Vec3i(2, 0, -2));
-        add(new Vec3i(-2, 0, -2));
+            // Fusion Shrine
+            add(new Vec3i(2, 0, 2));
+            add(new Vec3i(-2, 0, 2));
+            add(new Vec3i(2, 0, -2));
+            add(new Vec3i(-2, 0, -2));
 
-        // Enchanter
-        add(new Vec3i(3, 0, 3));
-        add(new Vec3i(-3, 0, 3));
-        add(new Vec3i(3, 0, -3));
-        add(new Vec3i(-3, 0, -3));
+            // Enchanter
+            add(new Vec3i(3, 0, 3));
+            add(new Vec3i(-3, 0, 3));
+            add(new Vec3i(3, 0, -3));
+            add(new Vec3i(-3, 0, -3));
 
-        // Spirit Instiller
-        add(new Vec3i(4, -1, 4));
-        add(new Vec3i(-4, -1, 4));
-        add(new Vec3i(4, -1, -4));
-        add(new Vec3i(-4, -1, -4));
+            // Spirit Instiller
+            add(new Vec3i(4, -1, 4));
+            add(new Vec3i(-4, -1, 4));
+            add(new Vec3i(4, -1, -4));
+            add(new Vec3i(-4, -1, -4));
 
-        // Cinderhearth
-        add(new Vec3i(1, -1, 2));
-        add(new Vec3i(-1, -1, 2));
-        add(new Vec3i(1, -1, -2));
-        add(new Vec3i(-1, -1, -2));
-        add(new Vec3i(2, -1, 1));
-        add(new Vec3i(-2, -1, 1));
-        add(new Vec3i(2, -1, -1));
-        add(new Vec3i(-2, -1, -1));
-    }};
+            // Cinderhearth
+            add(new Vec3i(1, -1, 2));
+            add(new Vec3i(-1, -1, 2));
+            add(new Vec3i(1, -1, -2));
+            add(new Vec3i(-1, -1, -2));
+            add(new Vec3i(2, -1, 1));
+            add(new Vec3i(-2, -1, 1));
+            add(new Vec3i(2, -1, -1));
+            add(new Vec3i(-2, -1, -1));
+        }
+    };
+
     // Like: The further the player progresses,
     // the higher are the chances for good mods?
     private final Upgradeable.UpgradeType upgradeType;
+
     private final int upgradeMod;
+
     private final int effectColor;
 
     public UpgradeBlock(Properties settings, Upgradeable.UpgradeType upgradeType, int upgradeMod, int effectColor) {
@@ -124,7 +131,9 @@ public class UpgradeBlock extends BaseEntityBlock {
      * and triggers it to update its upgrades
      */
     private void updateConnectedUpgradeBlock(@NotNull ServerLevel world, @NotNull BlockPos pos) {
-        for (Vec3i possibleUpgradeBlockOffset : possibleUpgradeBlockOffsets) {
+        for (
+            Vec3i possibleUpgradeBlockOffset : possibleUpgradeBlockOffsets
+        ) {
             BlockPos currentPos = pos.offset(possibleUpgradeBlockOffset);
             BlockEntity blockEntity = world.getBlockEntity(currentPos);
             if (blockEntity instanceof Upgradeable upgradeable) {
@@ -136,24 +145,36 @@ public class UpgradeBlock extends BaseEntityBlock {
 
     private void playConnectedParticles(@NotNull ServerLevel world, @NotNull BlockPos pos, BlockPos currentPos) {
         int particleColor = getEffectColor();
-        world.playSound(
-            null, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, PastelSounds.CRAFTING_DING,
-            SoundSource.BLOCKS, 1.0F, 1.0F
-        );
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-            world, Vec3.atCenterOf(pos),
-            ColoredSparkleRisingParticleEffect.of(particleColor),
-            10, new Vec3(0.5, 0.5, 0.5),
-            new Vec3(0.1, 0.1, 0.1)
-        );
-        ColorTransmissionPayload.playColorTransmissionParticle(
-            world,
-            new ColoredTransmission(
-                new Vec3(pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D),
-                new BlockPositionSource(currentPos), 6,
-                particleColor
-            )
-        );
+        world
+            .playSound(
+                null,
+                pos.getX() + 0.5D,
+                pos.getY() + 1.0D,
+                pos.getZ() + 0.5D,
+                PastelSounds.CRAFTING_DING,
+                SoundSource.BLOCKS,
+                1.0F,
+                1.0F
+            );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                world,
+                Vec3.atCenterOf(pos),
+                ColoredSparkleRisingParticleEffect.of(particleColor),
+                10,
+                new Vec3(0.5, 0.5, 0.5),
+                new Vec3(0.1, 0.1, 0.1)
+            );
+        ColorTransmissionPayload
+            .playColorTransmissionParticle(
+                world,
+                new ColoredTransmission(
+                    new Vec3(pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D),
+                    new BlockPositionSource(currentPos),
+                    6,
+                    particleColor
+                )
+            );
     }
 
     private int getEffectColor() {
@@ -173,8 +194,7 @@ public class UpgradeBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new UpgradeBlockEntity(pos, state);
     }

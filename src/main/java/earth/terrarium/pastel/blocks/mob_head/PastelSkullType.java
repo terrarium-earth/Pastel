@@ -92,7 +92,8 @@ public enum PastelSkullType implements SkullBlock.Type {
     SHULKER_YELLOW(() -> EntityType.SHULKER, SoundEvents.SHULKER_AMBIENT.getLocation()),
     SILVERFISH(() -> EntityType.SILVERFISH, SoundEvents.SILVERFISH_AMBIENT.getLocation()),
     SKELETON_HORSE(
-        () -> EntityType.SKELETON_HORSE, SoundEvents.SKELETON_HORSE_AMBIENT.getLocation(),
+        () -> EntityType.SKELETON_HORSE,
+        SoundEvents.SKELETON_HORSE_AMBIENT.getLocation(),
         PastelSkullType.SKULL_TRANSLATION_KEY
     ),
     SLIME(() -> EntityType.SLIME, SoundEvents.SLIME_SQUISH.getLocation()),
@@ -143,17 +144,21 @@ public enum PastelSkullType implements SkullBlock.Type {
     LIZARD_WHITE(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
     LIZARD_YELLOW(PastelEntityTypes.LIZARD, PastelSounds.ENTITY_LIZARD_AMBIENT.getLocation()),
     PRESERVATION_TURRET(
-        PastelEntityTypes.PRESERVATION_TURRET, PastelSounds.ENTITY_PRESERVATION_TURRET_AMBIENT.getLocation());
+        PastelEntityTypes.PRESERVATION_TURRET,
+        PastelSounds.ENTITY_PRESERVATION_TURRET_AMBIENT.getLocation()
+    );
 
     public static final Codec<PastelSkullType> CODEC = StringRepresentable.fromEnum(PastelSkullType::values);
 
     private final Supplier<? extends EntityType<?>> entityType;
+
     private final ResourceLocation noteBlockSound;
+
     private final String headTranslationKey;
 
     public static final String HEAD_TRANSLATION_KEY = "pastel.entity.head";
-    public static final String SKULL_TRANSLATION_KEY = "pastel.entity.skull";
 
+    public static final String SKULL_TRANSLATION_KEY = "pastel.entity.skull";
 
     PastelSkullType(Supplier<? extends EntityType<?>> entityType, ResourceLocation noteBlockSound) {
         this.entityType = entityType;
@@ -162,13 +167,18 @@ public enum PastelSkullType implements SkullBlock.Type {
     }
 
     PastelSkullType(
-        Supplier<? extends EntityType<?>> entityType, ResourceLocation noteBlockSound, String headTranslationKey) {
+        Supplier<? extends EntityType<?>> entityType,
+        ResourceLocation noteBlockSound,
+        String headTranslationKey
+    ) {
         this.entityType = entityType;
         this.noteBlockSound = noteBlockSound;
         this.headTranslationKey = headTranslationKey;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(
+        "unchecked"
+    )
     public Supplier<EntityType<?>> getEntityType() {
         return (Supplier<EntityType<?>>) this.entityType;
     }

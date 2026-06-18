@@ -44,8 +44,11 @@ import java.util.List;
 public class BottomlessBundleBlock extends BaseEntityBlock {
 
     public static final MapCodec<BottomlessBundleBlock> CODEC = simpleCodec(BottomlessBundleBlock::new);
+
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
+
     public static final BooleanProperty LOCKED = BlockStateProperties.LOCKED;
+
     public static final int MAX_ROTATIONS = RotationSegment.getMaxSegmentIndex() + 1;
 
     protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -65,8 +68,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
         return SHAPE;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new BottomlessBundleBlockEntity(pos, state);
     }
@@ -83,67 +85,104 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack stack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (!world.isClientSide) {
             if (player.isShiftKeyDown()) {
-                world.getBlockEntity(pos, PastelBlockEntities.BOTTOMLESS_BUNDLE.get())
-                     .ifPresent((bundle) -> {
-                         long amount = bundle.getStoredAmount();
-                         ItemStack ref = bundle.storage.getStackInSlot(0);
-                         long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bundle.powerLevel);
-                         if (ref.isEmpty()) {
-                             player.displayClientMessage(
-                                 Component.translatable("item.pastel.bottomless_bundle.tooltip.empty"), true);
-                         } else {
-                             player.displayClientMessage(
-                                 Component.translatable(
-                                              "item.pastel.bottomless_bundle.tooltip.count_of", amount,
-                                              maxStoredAmount
-                                          )
-                                          .append(ref.getItem()
-                                                     .getDescription()), true
-                             );
-                         }
-                     });
+                world
+                    .getBlockEntity(pos, PastelBlockEntities.BOTTOMLESS_BUNDLE.get())
+                    .ifPresent((bundle) -> {
+                        long amount = bundle.getStoredAmount();
+                        ItemStack ref = bundle.storage.getStackInSlot(0);
+                        long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bundle.powerLevel);
+                        if (ref.isEmpty()) {
+                            player
+                                .displayClientMessage(
+                                    Component.translatable("item.pastel.bottomless_bundle.tooltip.empty"),
+                                    true
+                                );
+                        } else {
+                            player
+                                .displayClientMessage(
+                                    Component
+                                        .translatable(
+                                            "item.pastel.bottomless_bundle.tooltip.count_of",
+                                            amount,
+                                            maxStoredAmount
+                                        )
+                                        .append(
+                                            ref
+                                                .getItem()
+                                                .getDescription()
+                                        ),
+                                    true
+                                );
+                        }
+                    });
             } else {
-                world.getBlockEntity(pos, PastelBlockEntities.BOTTOMLESS_BUNDLE.get())
-                     .ifPresent((bottomlessBundleBlockEntity) -> {
-                         var storage = bottomlessBundleBlockEntity.storage;
-                         ItemStack ref = storage.getStackInSlot(0);
+                world
+                    .getBlockEntity(pos, PastelBlockEntities.BOTTOMLESS_BUNDLE.get())
+                    .ifPresent((bottomlessBundleBlockEntity) -> {
+                        var storage = bottomlessBundleBlockEntity.storage;
+                        ItemStack ref = storage.getStackInSlot(0);
 
-                         if (ItemStack.isSameItemSameComponents(ref, stack) || ref.isEmpty()) {
-                             // insert
-                             if (!stack.isEmpty() && stack.getItem()
-                                                          .canFitInsideContainerItems()) {
-                                 stack.setCount(storage.insertItem(0, stack, false)
-                                                       .getCount());
-                                 world.playSound(
-                                     null, pos, SoundEvents.BUNDLE_INSERT, SoundSource.BLOCKS, 0.8F, 0.8F +
-                                                                                                     world.getRandom()
-                                                                                                          .nextFloat() *
-                                                                                                     0.4F
-                                 );
-                             }
-                         } else {
-                             // extract
-                             var extracted = storage.extractItem(
-                                 0, ref.getItem()
-                                       .getMaxStackSize(ref), false
-                             );
-                             player.getInventory()
-                                   .placeItemBackInInventory(extracted);
-                             world.playSound(
-                                 null, pos, SoundEvents.BUNDLE_REMOVE_ONE, SoundSource.BLOCKS, 0.8F, 0.8F +
-                                                                                                     world.getRandom()
-                                                                                                          .nextFloat() *
-                                                                                                     0.4F
-                             );
-                         }
+                        if (ItemStack.isSameItemSameComponents(ref, stack) || ref.isEmpty()) {
+                            // insert
+                            if (!stack.isEmpty() && stack
+                                .getItem()
+                                .canFitInsideContainerItems()) {
+                                stack
+                                    .setCount(
+                                        storage
+                                            .insertItem(0, stack, false)
+                                            .getCount()
+                                    );
+                                world
+                                    .playSound(
+                                        null,
+                                        pos,
+                                        SoundEvents.BUNDLE_INSERT,
+                                        SoundSource.BLOCKS,
+                                        0.8F,
+                                        0.8F + world
+                                            .getRandom()
+                                            .nextFloat() * 0.4F
+                                    );
+                            }
+                        } else {
+                            // extract
+                            var extracted = storage
+                                .extractItem(
+                                    0,
+                                    ref
+                                        .getItem()
+                                        .getMaxStackSize(ref),
+                                    false
+                                );
+                            player
+                                .getInventory()
+                                .placeItemBackInInventory(extracted);
+                            world
+                                .playSound(
+                                    null,
+                                    pos,
+                                    SoundEvents.BUNDLE_REMOVE_ONE,
+                                    SoundSource.BLOCKS,
+                                    0.8F,
+                                    0.8F + world
+                                        .getRandom()
+                                        .nextFloat() * 0.4F
+                                );
+                        }
 
-                         bottomlessBundleBlockEntity.setChanged();
-                     });
+                        bottomlessBundleBlockEntity.setChanged();
+                    });
             }
             return ItemInteractionResult.CONSUME;
         }
@@ -152,9 +191,10 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return PastelBlocks.BOTTOMLESS_BUNDLE.get()
-                                             .asItem()
-                                             .getDefaultInstance();
+        return PastelBlocks.BOTTOMLESS_BUNDLE
+            .get()
+            .asItem()
+            .getDefaultInstance();
     }
 
     @Override
@@ -176,8 +216,9 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
     public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof BottomlessBundleBlockEntity bundle) {
-            float curr = bundle.storage.getStackInSlot(0)
-                                       .getCount();
+            float curr = bundle.storage
+                .getStackInSlot(0)
+                .getCount();
             float max = BottomlessBundleItem.getMaxStoredAmount(bundle.powerLevel);
             return Mth.floor(curr / max * 14.0f) + curr > 0 ? 1 : 0;
         }
@@ -198,16 +239,21 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return super.getStateForPlacement(ctx)
-                    .setValue(ROTATION, RotationSegment.convertToSegment(ctx.getRotation()))
-                    .setValue(
-                        LOCKED, ctx.getItemInHand()
-                                   .has(DataComponents.LOCK)
-                    );
+            .setValue(ROTATION, RotationSegment.convertToSegment(ctx.getRotation()))
+            .setValue(
+                LOCKED,
+                ctx
+                    .getItemInHand()
+                    .has(DataComponents.LOCK)
+            );
     }
 
     protected BlockState rotate(BlockState state, Rotation rotation) {
-        return (BlockState) state.setValue(
-            ROTATION, rotation.rotate((Integer) state.getValue(ROTATION), MAX_ROTATIONS));
+        return (BlockState) state
+            .setValue(
+                ROTATION,
+                rotation.rotate((Integer) state.getValue(ROTATION), MAX_ROTATIONS)
+            );
     }
 
     protected BlockState mirror(BlockState state, Mirror mirror) {

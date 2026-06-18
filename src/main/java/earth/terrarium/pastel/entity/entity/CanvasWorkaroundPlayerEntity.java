@@ -13,14 +13,18 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class CanvasWorkaroundPlayerEntity extends RemotePlayer {
     public PlayerInfo playerInfo;
+
     public GameProfile profile;
+
     public CanvasWorkaroundPlayerEntity(ClientLevel clientLevel, GameProfile gameProfile) {
         super(clientLevel, gameProfile);
         profile = gameProfile;
-        playerInfo = new PlayerInfo(profile,false);
+        playerInfo = new PlayerInfo(profile, false);
     }
 
     @Override
@@ -34,9 +38,12 @@ public class CanvasWorkaroundPlayerEntity extends RemotePlayer {
 
     @Override
     public PlayerSkin getSkin() {
-        if(Iterables.getFirst(profile.getProperties().get("textures"), null)==null){
-            var profileResponse=Minecraft.getInstance().getMinecraftSessionService().fetchProfile(profile.getId(),true);
-            if(profileResponse!=null)profile=profileResponse.profile();
+        if (Iterables.getFirst(profile.getProperties().get("textures"), null) == null) {
+            var profileResponse = Minecraft
+                .getInstance()
+                .getMinecraftSessionService()
+                .fetchProfile(profile.getId(), true);
+            if (profileResponse != null) profile = profileResponse.profile();
         }
         return super.getSkin();
     }

@@ -42,22 +42,27 @@ public class FirestarterIdolBlock extends IdolBlock {
     // Block: The Block to burn
     // BlockState: The BlockState when Block is getting burnt
     // Float: The chance to burn
-    public static final Map<Block, Tuple<BlockState, Float>> BURNING_MAP = new HashMap<>() {{
-        put(Blocks.RED_MUSHROOM, new Tuple<>(Blocks.CRIMSON_FUNGUS.defaultBlockState(), 0.2F));
-        put(Blocks.BROWN_MUSHROOM, new Tuple<>(Blocks.WARPED_FUNGUS.defaultBlockState(), 0.2F));
-        put(Blocks.SAND, new Tuple<>(Blocks.RED_SAND.defaultBlockState(), 1.0F));
-        put(Blocks.SNOW, new Tuple<>(Blocks.AIR.defaultBlockState(), 1.0F));
-        put(Blocks.GRASS_BLOCK, new Tuple<>(Blocks.DIRT.defaultBlockState(), 0.05F));
-        put(Blocks.CALCITE, new Tuple<>(Blocks.BASALT.defaultBlockState(), 0.5F));
-        put(Blocks.NETHERRACK, new Tuple<>(Blocks.MAGMA_BLOCK.defaultBlockState(), 0.25F));
-        put(Blocks.MAGMA_BLOCK, new Tuple<>(Blocks.LAVA.defaultBlockState(), 0.5F));
-        put(
-            PastelBlocks.FROSTBITE_CRYSTAL.get(), new Tuple<>(
-                PastelBlocks.BLAZING_CRYSTAL.get()
-                                            .defaultBlockState(), 0.5F
-            )
-        );
-    }};
+    public static final Map<Block, Tuple<BlockState, Float>> BURNING_MAP = new HashMap<>() {
+        {
+            put(Blocks.RED_MUSHROOM, new Tuple<>(Blocks.CRIMSON_FUNGUS.defaultBlockState(), 0.2F));
+            put(Blocks.BROWN_MUSHROOM, new Tuple<>(Blocks.WARPED_FUNGUS.defaultBlockState(), 0.2F));
+            put(Blocks.SAND, new Tuple<>(Blocks.RED_SAND.defaultBlockState(), 1.0F));
+            put(Blocks.SNOW, new Tuple<>(Blocks.AIR.defaultBlockState(), 1.0F));
+            put(Blocks.GRASS_BLOCK, new Tuple<>(Blocks.DIRT.defaultBlockState(), 0.05F));
+            put(Blocks.CALCITE, new Tuple<>(Blocks.BASALT.defaultBlockState(), 0.5F));
+            put(Blocks.NETHERRACK, new Tuple<>(Blocks.MAGMA_BLOCK.defaultBlockState(), 0.25F));
+            put(Blocks.MAGMA_BLOCK, new Tuple<>(Blocks.LAVA.defaultBlockState(), 0.5F));
+            put(
+                PastelBlocks.FROSTBITE_CRYSTAL.get(),
+                new Tuple<>(
+                    PastelBlocks.BLAZING_CRYSTAL
+                        .get()
+                        .defaultBlockState(),
+                    0.5F
+                )
+            );
+        }
+    };
 
     public FirestarterIdolBlock(Properties settings, ParticleOptions particleEffect) {
         super(settings, particleEffect);
@@ -71,26 +76,38 @@ public class FirestarterIdolBlock extends IdolBlock {
 
     public static void addBlockSmeltingRecipes(@NotNull MinecraftServer server) {
         RegistryAccess manager = server.registryAccess();
-        for (var recipe : server.getRecipeManager()
-                                .getAllRecipesFor(RecipeType.SMELTING)) {
-            ItemStack outputStack = recipe.value()
-                                          .getResultItem(manager);
-            if (outputStack.getItem() instanceof BlockItem outputBlockItem &&
-                outputBlockItem.getBlock() != Blocks.AIR) {
-                NonNullList<Ingredient> ingredients = recipe.value()
-                                                            .getIngredients();
+        for (
+            var recipe : server
+                .getRecipeManager()
+                .getAllRecipesFor(RecipeType.SMELTING)
+        ) {
+            ItemStack outputStack = recipe
+                .value()
+                .getResultItem(manager);
+            if (outputStack.getItem() instanceof BlockItem outputBlockItem && outputBlockItem
+                .getBlock() != Blocks.AIR) {
+                NonNullList<Ingredient> ingredients = recipe
+                    .value()
+                    .getIngredients();
                 if (!ingredients.isEmpty()) {
-                    ItemStack[] inputStacks = ingredients.get(0)
-                                                         .getItems();
-                    for (ItemStack inputStack : inputStacks) {
-                        if (inputStack.getItem() instanceof BlockItem inputBlockItem &&
-                            inputBlockItem.getBlock() != Blocks.AIR) {
-                            BURNING_MAP.put(
-                                inputBlockItem.getBlock(), new Tuple<>(
-                                    outputBlockItem.getBlock()
-                                                   .defaultBlockState(), 1.0F
-                                )
-                            );
+                    ItemStack[] inputStacks = ingredients
+                        .get(0)
+                        .getItems();
+                    for (
+                        ItemStack inputStack : inputStacks
+                    ) {
+                        if (inputStack.getItem() instanceof BlockItem inputBlockItem && inputBlockItem
+                            .getBlock() != Blocks.AIR) {
+                            BURNING_MAP
+                                .put(
+                                    inputBlockItem.getBlock(),
+                                    new Tuple<>(
+                                        outputBlockItem
+                                            .getBlock()
+                                            .defaultBlockState(),
+                                        1.0F
+                                    )
+                                );
                         }
                     }
                 }
@@ -100,8 +117,10 @@ public class FirestarterIdolBlock extends IdolBlock {
 
     public static boolean causeFire(@NotNull ServerLevel world, BlockPos blockPos, Direction side) {
         BlockState blockState = world.getBlockState(blockPos);
-        if (CampfireBlock.canLight(blockState) || CandleBlock.canLight(blockState) || CandleCakeBlock.canLight(
-            blockState)) {
+        if (CampfireBlock.canLight(blockState) || CandleBlock.canLight(blockState) || CandleCakeBlock
+            .canLight(
+                blockState
+            )) {
             // light lightable blocks
             world.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, true), 11);
             world.gameEvent(null, GameEvent.BLOCK_PLACE, blockPos);
@@ -132,14 +151,27 @@ public class FirestarterIdolBlock extends IdolBlock {
 
     @Override
     public boolean trigger(
-        ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side) {
-        for (Direction direction : Direction.values()) {
+        ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    ) {
+        for (
+            Direction direction : Direction.values()
+        ) {
             if (causeFire(world, blockPos.relative(direction), direction)) {
-                world.playSound(
-                    null, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.getRandom()
-                                                                                                  .nextFloat() * 0.4F +
-                                                                                             0.8F
-                );
+                world
+                    .playSound(
+                        null,
+                        blockPos,
+                        SoundEvents.FLINTANDSTEEL_USE,
+                        SoundSource.BLOCKS,
+                        1.0F,
+                        world
+                            .getRandom()
+                            .nextFloat() * 0.4F + 0.8F
+                    );
             }
         }
         return true;
@@ -147,7 +179,11 @@ public class FirestarterIdolBlock extends IdolBlock {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(Component.translatable("block.pastel.firestarter_idol.tooltip"));
     }

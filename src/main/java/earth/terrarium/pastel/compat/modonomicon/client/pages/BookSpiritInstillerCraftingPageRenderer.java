@@ -17,13 +17,18 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class BookSpiritInstillerCraftingPageRenderer
-    extends BookGatedRecipePageRenderer<SpiritInstillerRecipe, BookGatedRecipePage<SpiritInstillerRecipe>> {
+    extends
+    BookGatedRecipePageRenderer<SpiritInstillerRecipe, BookGatedRecipePage<SpiritInstillerRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/modonomicon/spirit_instiller.png");
-    private static final ItemStack ITEM_BOWL_STACK = PastelBlocks.ITEM_BOWL_CALCITE.get()
-                                                                                   .asItem()
-                                                                                   .getDefaultInstance();
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/modonomicon/spirit_instiller.png"
+        );
+
+    private static final ItemStack ITEM_BOWL_STACK = PastelBlocks.ITEM_BOWL_CALCITE
+        .get()
+        .asItem()
+        .getDefaultInstance();
 
     public BookSpiritInstillerCraftingPageRenderer(BookGatedRecipePage<SpiritInstillerRecipe> page) {
         super(page);
@@ -36,8 +41,13 @@ public class BookSpiritInstillerCraftingPageRenderer
 
     @Override
     protected void drawRecipe(
-        GuiGraphics drawContext, RecipeHolder<SpiritInstillerRecipe> recipeEntry, int recipeX, int recipeY, int mouseX,
-        int mouseY, boolean second
+        GuiGraphics drawContext,
+        RecipeHolder<SpiritInstillerRecipe> recipeEntry,
+        int recipeX,
+        int recipeY,
+        int mouseX,
+        int mouseY,
+        boolean second
     ) {
         SpiritInstillerRecipe recipe = recipeEntry.value();
         Level world = Minecraft.getInstance().level;
@@ -50,12 +60,36 @@ public class BookSpiritInstillerCraftingPageRenderer
 
         // the ingredients
         List<IngredientStack> ingredients = recipe.getIngredientStacks();
-        ModonomiconHelper.renderIngredientStack(
-            drawContext, parentScreen, recipeX + 3, recipeY + 8, mouseX, mouseY, ingredients.get(1)); // left
-        ModonomiconHelper.renderIngredientStack(
-            drawContext, parentScreen, recipeX + 23, recipeY + 11, mouseX, mouseY, ingredients.get(0)); // center
-        ModonomiconHelper.renderIngredientStack(
-            drawContext, parentScreen, recipeX + 44, recipeY + 8, mouseX, mouseY, ingredients.get(2)); // right
+        ModonomiconHelper
+            .renderIngredientStack(
+                drawContext,
+                parentScreen,
+                recipeX + 3,
+                recipeY + 8,
+                mouseX,
+                mouseY,
+                ingredients.get(1)
+            ); // left
+        ModonomiconHelper
+            .renderIngredientStack(
+                drawContext,
+                parentScreen,
+                recipeX + 23,
+                recipeY + 11,
+                mouseX,
+                mouseY,
+                ingredients.get(0)
+            ); // center
+        ModonomiconHelper
+            .renderIngredientStack(
+                drawContext,
+                parentScreen,
+                recipeX + 44,
+                recipeY + 8,
+                mouseX,
+                mouseY,
+                ingredients.get(2)
+            ); // right
 
         // spirit instiller
         parentScreen.renderItemStack(drawContext, recipeX + 23, recipeY + 25, mouseX, mouseY, recipe.getToastSymbol());
@@ -65,8 +99,15 @@ public class BookSpiritInstillerCraftingPageRenderer
         parentScreen.renderItemStack(drawContext, recipeX + 44, recipeY + 25, mouseX, mouseY, ITEM_BOWL_STACK);
 
         // the output
-        parentScreen.renderItemStack(
-            drawContext, recipeX + 79, recipeY + 8, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
+        parentScreen
+            .renderItemStack(
+                drawContext,
+                recipeX + 79,
+                recipeY + 8,
+                mouseX,
+                mouseY,
+                recipe.getResultItem(world.registryAccess())
+            );
     }
 
 }

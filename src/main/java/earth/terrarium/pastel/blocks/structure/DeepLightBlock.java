@@ -24,11 +24,11 @@ public class DeepLightBlock extends HorizontalDirectionalBlock implements Entity
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(FACING, ctx.getHorizontalDirection());
+        return this
+            .defaultBlockState()
+            .setValue(FACING, ctx.getHorizontalDirection());
     }
 
     @Override
@@ -36,8 +36,7 @@ public class DeepLightBlock extends HorizontalDirectionalBlock implements Entity
         builder.add(FACING);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new DeepLightBlockEntity(pos, state);
     }

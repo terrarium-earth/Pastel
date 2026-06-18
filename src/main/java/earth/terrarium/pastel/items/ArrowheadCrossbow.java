@@ -7,7 +7,9 @@ import net.minecraft.world.item.ItemStack;
  * crossbow
  * Additionally you can individualize a few properties to match your liking
  */
-@Deprecated(forRemoval = true)
+@Deprecated(
+    forRemoval = true
+)
 public interface ArrowheadCrossbow {
 
     /**

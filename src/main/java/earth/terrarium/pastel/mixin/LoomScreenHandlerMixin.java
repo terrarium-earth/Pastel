@@ -18,7 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(LoomMenu.class)
+@Mixin(
+    LoomMenu.class
+)
 public abstract class LoomScreenHandlerMixin extends AbstractContainerMenu {
 
     @Shadow
@@ -33,8 +35,11 @@ public abstract class LoomScreenHandlerMixin extends AbstractContainerMenu {
         super(null, 0);
     }
 
-    @Inject(method = "getSelectablePatterns(Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;", at = @At("HEAD"),
-            cancellable = true)
+    @Inject(
+        method = "getSelectablePatterns(Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;", at = @At(
+            "HEAD"
+        ), cancellable = true
+    )
     private void getPatternsFor(ItemStack stack, CallbackInfoReturnable<List<Holder<BannerPattern>>> cir) {
         if (stack.getItem() instanceof LoomPatternProvider loomPatternProvider) {
             cir.setReturnValue(LoomPatternProvider.getPatterns(patternGetter, loomPatternProvider));
@@ -42,18 +47,14 @@ public abstract class LoomScreenHandlerMixin extends AbstractContainerMenu {
     }
 
     @Inject(
-        method = "quickMoveStack",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;",
-            ordinal = 0,
-            shift = At.Shift.BEFORE
-        ),
-        cancellable = true
+        method = "quickMoveStack", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;", ordinal = 0, shift = At.Shift.BEFORE
+        ), cancellable = true
     )
     private void attemptPatternItemTransfer(Player player, int slotIdx, CallbackInfoReturnable<ItemStack> info) {
-        ItemStack stack = this.slots.get(slotIdx)
-                                    .getItem();
+        ItemStack stack = this.slots
+            .get(slotIdx)
+            .getItem();
 
         if (stack.getItem() instanceof LoomPatternProvider) {
             if (!this.moveItemStackTo(stack, this.patternSlot.index, this.patternSlot.index + 1, false)) {

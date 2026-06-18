@@ -26,26 +26,34 @@ public class AnvilCrusher {
 
         SingleRecipeInput inventory = new SingleRecipeInput(thisItemStack);
 
-        Optional<RecipeHolder<AnvilCrushingRecipe>> optionalAnvilCrushingRecipe = world.getRecipeManager()
-                                                                                       .getRecipeFor(
-                                                                                           PastelRecipeTypes.ANVIL_CRUSHING,
-                                                                                           inventory, world
-                                                                                       );
+        Optional<RecipeHolder<AnvilCrushingRecipe>> optionalAnvilCrushingRecipe = world
+            .getRecipeManager()
+            .getRecipeFor(
+                PastelRecipeTypes.ANVIL_CRUSHING,
+                inventory,
+                world
+            );
         if (optionalAnvilCrushingRecipe.isPresent()) {
             // Item can be crafted via anvil. Do anvil crafting
-            AnvilCrushingRecipe recipe = optionalAnvilCrushingRecipe.get()
-                                                                    .value();
+            AnvilCrushingRecipe recipe = optionalAnvilCrushingRecipe
+                .get()
+                .value();
 
-            int itemStackAmount = itemEntity.getItem()
-                                            .getCount();
-            int crushingInputAmount = Math.min(
-                itemStackAmount, (int) (recipe.getCrushedItemsPerPointOfDamage() * damageAmount));
+            int itemStackAmount = itemEntity
+                .getItem()
+                .getCount();
+            int crushingInputAmount = Math
+                .min(
+                    itemStackAmount,
+                    (int) (recipe.getCrushedItemsPerPointOfDamage() * damageAmount)
+                );
 
             if (crushingInputAmount > 0) {
                 Vec3 position = itemEntity.position();
 
-                ItemStack crushingOutput = recipe.getResultItem(world.registryAccess())
-                                                 .copy();
+                ItemStack crushingOutput = recipe
+                    .getResultItem(world.registryAccess())
+                    .copy();
                 Vec3 pos = itemEntity.position();
 
                 // Remove the input amount from the source stack
@@ -57,10 +65,16 @@ public class AnvilCrusher {
                     itemEntity.remove(Entity.RemovalReason.DISCARDED);
                 }
 
-                MultiblockCrafter.spawnItemStackAsEntitySplitViaMaxCount(
-                    world, pos, crushingOutput, crushingOutput.getCount() * crushingInputAmount, Vec3.ZERO, false,
-                    null
-                );
+                MultiblockCrafter
+                    .spawnItemStackAsEntitySplitViaMaxCount(
+                        world,
+                        pos,
+                        crushingOutput,
+                        crushingOutput.getCount() * crushingInputAmount,
+                        Vec3.ZERO,
+                        false,
+                        null
+                    );
 
                 // Spawn XP depending on how much is crafted, but at least 1
                 float craftingXPFloat = recipe.getExperience() * crushingInputAmount;
@@ -68,25 +82,45 @@ public class AnvilCrusher {
 
                 if (craftingXP > 0) {
                     ExperienceOrb experienceOrbEntity = new ExperienceOrb(
-                        world, position.x, position.y, position.z, craftingXP);
+                        world,
+                        position.x,
+                        position.y,
+                        position.z,
+                        craftingXP
+                    );
                     world.addFreshEntity(experienceOrbEntity);
                 }
 
                 // Play sound
                 SoundEvent soundEvent = recipe.getSoundEvent();
                 if (soundEvent != null) {
-                    float randomVolume = 1.0F + world.getRandom()
-                                                     .nextFloat() * 0.2F;
-                    float randomPitch = 0.9F + world.getRandom()
-                                                    .nextFloat() * 0.2F;
-                    world.playSound(
-                        null, position.x, position.y, position.z, soundEvent, SoundSource.PLAYERS, randomVolume,
-                        randomPitch
-                    );
+                    float randomVolume = 1.0F + world
+                        .getRandom()
+                        .nextFloat() * 0.2F;
+                    float randomPitch = 0.9F + world
+                        .getRandom()
+                        .nextFloat() * 0.2F;
+                    world
+                        .playSound(
+                            null,
+                            position.x,
+                            position.y,
+                            position.z,
+                            soundEvent,
+                            SoundSource.PLAYERS,
+                            randomVolume,
+                            randomPitch
+                        );
                 }
 
-                PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-                    (ServerLevel) world, position, recipe.getParticleEffect(), recipe.getParticleCount(), Vec3.ZERO);
+                PlayParticleWithExactVelocityPayload
+                    .playParticleWithExactVelocity(
+                        (ServerLevel) world,
+                        position,
+                        recipe.getParticleEffect(),
+                        recipe.getParticleCount(),
+                        Vec3.ZERO
+                    );
             }
         }
     }

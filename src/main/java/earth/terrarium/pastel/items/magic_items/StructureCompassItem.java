@@ -31,7 +31,12 @@ public class StructureCompassItem extends CompassItem {
 
     @Override
     public void inventoryTick(
-        @NotNull ItemStack stack, @NotNull Level world, Entity entity, int slot, boolean selected) {
+        @NotNull ItemStack stack,
+        @NotNull Level world,
+        Entity entity,
+        int slot,
+        boolean selected
+    ) {
         if (!world.isClientSide && world.getGameTime() % 200 == 0) {
             locateStructure(stack, world, entity);
         }
@@ -47,14 +52,22 @@ public class StructureCompassItem extends CompassItem {
     }
 
     public @Nullable Pair<BlockPos, Holder<Structure>> locateStructure(
-        @NotNull ServerLevel world, @NotNull BlockPos pos) {
-        Optional<HolderSet.Named<Structure>> registryEntryList = PastelStructureTags.entriesOf(
-            world, locatedStructures);
-        return registryEntryList.map(registryEntries ->
-                                         world.getChunkSource()
-                                              .getGenerator()
-                                              .findNearestMapStructure(world, registryEntries, pos, 100, false))
-                                .orElse(null);
+        @NotNull ServerLevel world,
+        @NotNull BlockPos pos
+    ) {
+        Optional<HolderSet.Named<Structure>> registryEntryList = PastelStructureTags
+            .entriesOf(
+                world,
+                locatedStructures
+            );
+        return registryEntryList
+            .map(
+                registryEntries -> world
+                    .getChunkSource()
+                    .getGenerator()
+                    .findNearestMapStructure(world, registryEntries, pos, 100, false)
+            )
+            .orElse(null);
     }
 
     public static @Nullable GlobalPos getStructurePos(ItemStack stack) {

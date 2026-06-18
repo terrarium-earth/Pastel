@@ -39,56 +39,86 @@ public record PotionRecipeEffect(
     InkColor inkColor,
     int inkCost
 ) {
-    public static MapCodec<PotionRecipeEffect> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                             Codec.BOOL.optionalFieldOf("applicable_to_potions", true)
-                                                                                                       .forGetter(PotionRecipeEffect::applicableToPotions),
-                                                                                             Codec.BOOL.optionalFieldOf("applicable_to_tipped_arrows", true)
-                                                                                                       .forGetter(PotionRecipeEffect::applicableToTippedArrows),
-                                                                                             Codec.BOOL.optionalFieldOf("applicable_to_potion_fillabes", true)
-                                                                                                       .forGetter(PotionRecipeEffect::applicableToPotionFillabes),
-                                                                                             Codec.BOOL.optionalFieldOf("applicable_to_weapons", true)
-                                                                                                       .forGetter(PotionRecipeEffect::applicableToWeapons),
-                                                                                             Codec.INT.optionalFieldOf("base_duration_ticks", 1600)
-                                                                                                      .forGetter(PotionRecipeEffect::baseDurationTicks),
-                                                                                             Codec.FLOAT.optionalFieldOf("base_yield", (float) PotionWorkshopBrewingRecipe.BASE_POTION_COUNT_ON_BREWING)
-                                                                                                        .forGetter(PotionRecipeEffect::baseYield),
-                                                                                             Codec.INT.optionalFieldOf("potency_hard_cap", -1)
-                                                                                                      .forGetter(PotionRecipeEffect::potencyHardCap),
-                                                                                             Codec.FLOAT.optionalFieldOf("potency_modifier", 1f)
-                                                                                                        .forGetter(PotionRecipeEffect::potencyModifier),
-                                                                                             BuiltInRegistries.MOB_EFFECT.holderByNameCodec()
-                                                                                                                         .fieldOf("effect")
-                                                                                                                         .forGetter(PotionRecipeEffect::statusEffect),
-                                                                                             InkColor.CODEC.fieldOf(
-                                                                                                 "ink_color")
-                                                                                                           .forGetter(PotionRecipeEffect::inkColor),
-                                                                                             Codec.INT.fieldOf(
-                                                                                                 "ink_cost")
-                                                                                                      .forGetter(PotionRecipeEffect::inkCost)
-                                                                                         )
-                                                                                         .apply(
-                                                                                             i,
-                                                                                             PotionRecipeEffect::new
-                                                                                         ));
+    public static MapCodec<PotionRecipeEffect> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    Codec.BOOL
+                        .optionalFieldOf("applicable_to_potions", true)
+                        .forGetter(PotionRecipeEffect::applicableToPotions),
+                    Codec.BOOL
+                        .optionalFieldOf("applicable_to_tipped_arrows", true)
+                        .forGetter(PotionRecipeEffect::applicableToTippedArrows),
+                    Codec.BOOL
+                        .optionalFieldOf("applicable_to_potion_fillabes", true)
+                        .forGetter(PotionRecipeEffect::applicableToPotionFillabes),
+                    Codec.BOOL
+                        .optionalFieldOf("applicable_to_weapons", true)
+                        .forGetter(PotionRecipeEffect::applicableToWeapons),
+                    Codec.INT
+                        .optionalFieldOf("base_duration_ticks", 1600)
+                        .forGetter(PotionRecipeEffect::baseDurationTicks),
+                    Codec.FLOAT
+                        .optionalFieldOf("base_yield", (float) PotionWorkshopBrewingRecipe.BASE_POTION_COUNT_ON_BREWING)
+                        .forGetter(PotionRecipeEffect::baseYield),
+                    Codec.INT
+                        .optionalFieldOf("potency_hard_cap", -1)
+                        .forGetter(PotionRecipeEffect::potencyHardCap),
+                    Codec.FLOAT
+                        .optionalFieldOf("potency_modifier", 1f)
+                        .forGetter(PotionRecipeEffect::potencyModifier),
+                    BuiltInRegistries.MOB_EFFECT
+                        .holderByNameCodec()
+                        .fieldOf("effect")
+                        .forGetter(PotionRecipeEffect::statusEffect),
+                    InkColor.CODEC
+                        .fieldOf(
+                            "ink_color"
+                        )
+                        .forGetter(PotionRecipeEffect::inkColor),
+                    Codec.INT
+                        .fieldOf(
+                            "ink_cost"
+                        )
+                        .forGetter(PotionRecipeEffect::inkCost)
+                )
+                .apply(
+                    i,
+                    PotionRecipeEffect::new
+                )
+        );
 
-    public static StreamCodec<RegistryFriendlyByteBuf, PotionRecipeEffect> STREAM_CODEC = PacketCodecHelper.tuple(
-        ByteBufCodecs.BOOL, PotionRecipeEffect::applicableToPotions,
-        ByteBufCodecs.BOOL, PotionRecipeEffect::applicableToTippedArrows,
-        ByteBufCodecs.BOOL, PotionRecipeEffect::applicableToPotionFillabes,
-        ByteBufCodecs.BOOL, PotionRecipeEffect::applicableToWeapons,
-        ByteBufCodecs.VAR_INT, PotionRecipeEffect::baseDurationTicks,
-        ByteBufCodecs.FLOAT, PotionRecipeEffect::baseYield,
-        ByteBufCodecs.VAR_INT, PotionRecipeEffect::potencyHardCap,
-        ByteBufCodecs.FLOAT, PotionRecipeEffect::potencyModifier,
-        ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT), PotionRecipeEffect::statusEffect,
-        InkColor.STREAM_CODEC, PotionRecipeEffect::inkColor,
-        ByteBufCodecs.VAR_INT, PotionRecipeEffect::inkCost,
-        PotionRecipeEffect::new
-    );
+    public static StreamCodec<RegistryFriendlyByteBuf, PotionRecipeEffect> STREAM_CODEC = PacketCodecHelper
+        .tuple(
+            ByteBufCodecs.BOOL,
+            PotionRecipeEffect::applicableToPotions,
+            ByteBufCodecs.BOOL,
+            PotionRecipeEffect::applicableToTippedArrows,
+            ByteBufCodecs.BOOL,
+            PotionRecipeEffect::applicableToPotionFillabes,
+            ByteBufCodecs.BOOL,
+            PotionRecipeEffect::applicableToWeapons,
+            ByteBufCodecs.VAR_INT,
+            PotionRecipeEffect::baseDurationTicks,
+            ByteBufCodecs.FLOAT,
+            PotionRecipeEffect::baseYield,
+            ByteBufCodecs.VAR_INT,
+            PotionRecipeEffect::potencyHardCap,
+            ByteBufCodecs.FLOAT,
+            PotionRecipeEffect::potencyModifier,
+            ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT),
+            PotionRecipeEffect::statusEffect,
+            InkColor.STREAM_CODEC,
+            PotionRecipeEffect::inkColor,
+            ByteBufCodecs.VAR_INT,
+            PotionRecipeEffect::inkCost,
+            PotionRecipeEffect::new
+        );
 
     public static PotionRecipeEffect read(JsonObject jsonObject) {
-        return CodecHelper.fromJson(CODEC.codec(), jsonObject)
-                          .orElseThrow();
+        return CodecHelper
+            .fromJson(CODEC.codec(), jsonObject)
+            .orElseThrow();
     }
 
     public void write(RegistryFriendlyByteBuf buf) {
@@ -100,11 +130,14 @@ public record PotionRecipeEffect(
     }
 
     public @Nullable InkPoweredStatusEffectInstance getStatusEffectInstance(
-        @NotNull PotionMod potionMod, RandomSource random) {
+        @NotNull PotionMod potionMod,
+        RandomSource random
+    ) {
         float potency = potionMod.flatPotencyBonus();
         int durationTicks = baseDurationTicks() + potionMod.flatDurationBonusTicks();
-        switch (statusEffect().value()
-                              .getCategory()) {
+        switch (statusEffect()
+            .value()
+            .getCategory()) {
             case BENEFICIAL -> {
                 potency += potionMod.flatPotencyBonusPositiveEffects();
                 durationTicks += potionMod.flatDurationBonusPositiveEffects();
@@ -116,8 +149,9 @@ public record PotionRecipeEffect(
             default -> {
             }
         }
-        durationTicks = statusEffect().value()
-                                      .isInstantenous() ? 1 : (int) (durationTicks * potionMod.durationMultiplier());
+        durationTicks = statusEffect()
+            .value()
+            .isInstantenous() ? 1 : (int) (durationTicks * potionMod.durationMultiplier());
 
         if (potencyModifier() == 0.0F) {
             potency = 0; // effects that only have 1 level, like night vision
@@ -144,13 +178,24 @@ public record PotionRecipeEffect(
             int effectColor = potionMod.getColor(random);
             return new InkPoweredStatusEffectInstance(
                 new MobEffectInstance(
-                    statusEffect, durationTicks, (int) potency, !potionMod.flags()
-                                                                          .noParticles(),
-                                      !potionMod.flags()
-                                                .noParticles()
-                ), new InkCost(inkColor(), inkCost()), effectColor, potionMod.flags()
-                                                                             .unidentifiable(), potionMod.flags()
-                                                                                                         .incurable()
+                    statusEffect,
+                    durationTicks,
+                    (int) potency,
+                    !potionMod
+                        .flags()
+                        .noParticles(),
+                    !potionMod
+                        .flags()
+                        .noParticles()
+                ),
+                new InkCost(inkColor(), inkCost()),
+                effectColor,
+                potionMod
+                    .flags()
+                    .unidentifiable(),
+                potionMod
+                    .flags()
+                    .incurable()
             );
         } else {
             // the effect is so borked that the effect would be too weak
@@ -160,12 +205,14 @@ public record PotionRecipeEffect(
 
     public boolean isApplicableTo(ItemStack baseIngredient, PotionMod potionMod) {
         if (baseIngredient.is(Items.ARROW)) { // arrows require lingering potions as base
-            return applicableToTippedArrows && potionMod.flags()
-                                                        .makeSplashing() && potionMod.flags()
-                                                                                     .makeLingering();
+            return applicableToTippedArrows && potionMod
+                .flags()
+                .makeSplashing() && potionMod
+                    .flags()
+                    .makeLingering();
         } else if (baseIngredient.getItem() instanceof InkPoweredPotionFillable inkPoweredPotionFillable) {
-            return applicableToPotionFillabes && !inkPoweredPotionFillable.isFull(baseIngredient) ||
-                   applicableToWeapons && inkPoweredPotionFillable.isWeapon();
+            return applicableToPotionFillabes && !inkPoweredPotionFillable
+                .isFull(baseIngredient) || applicableToWeapons && inkPoweredPotionFillable.isWeapon();
         } else {
             return applicableToPotions;
         }

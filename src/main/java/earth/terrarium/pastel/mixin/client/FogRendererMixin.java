@@ -12,14 +12,28 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(FogRenderer.class)
+@Mixin(
+    FogRenderer.class
+)
 public class FogRendererMixin {
 
-    @Inject(method = "setupColor", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(FF)F", ordinal = 0))
+    @Inject(
+        method = "setupColor", at = @At(
+            value = "INVOKE", target = "Ljava/lang/Math;min(FF)F", ordinal = 0
+        )
+    )
     private static void modifyNightVisionEffect(
-        Camera activeRenderInfo, float partialTicks, ClientLevel level, int renderDistanceChunks,
-        float bossColorModifier, CallbackInfo ci, @Local(name = "f7") LocalFloatRef potency
-        ) {
+        Camera activeRenderInfo,
+        float partialTicks,
+        ClientLevel level,
+        int renderDistanceChunks,
+        float bossColorModifier,
+        CallbackInfo ci,
+        @Local(
+            name = "f7"
+        )
+        LocalFloatRef potency
+    ) {
 
         var player = Minecraft.getInstance().player;
         if (player == null || !SpectacleData.isActive(player))

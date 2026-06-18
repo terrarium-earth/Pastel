@@ -34,15 +34,16 @@ public class BlackHoleChestBlock extends PastelChestBlock {
     }
 
     @Override
-    @Nullable
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    @Nullable public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new BlackHoleChestBlockEntity(pos, state);
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return createTickerHelper(type, PastelBlockEntities.BLACK_HOLE_CHEST.get(), BlackHoleChestBlockEntity::tick);
     }
 
@@ -57,10 +58,10 @@ public class BlackHoleChestBlock extends PastelChestBlock {
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
+    @Nullable public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
         return blockEntity instanceof BlackHoleChestBlockEntity blackHoleChestBlockEntity
-               ? blackHoleChestBlockEntity.getEventListener() : null;
+            ? blackHoleChestBlockEntity.getEventListener()
+            : null;
     }
 
     @Override

@@ -35,21 +35,41 @@ public class LagoonRodItem extends PastelFishingRodItem implements Preenchanted 
 
     @Override
     public void spawnBobber(
-        Player user, Level world, int luckOfTheSeaLevel, int waitTimeReductionTicks, int exuberanceLevel,
-        int bigCatchLevel, int serendipityReelLevel, boolean inventoryInsertion, boolean shouldSmeltDrops
+        Player user,
+        Level world,
+        int luckOfTheSeaLevel,
+        int waitTimeReductionTicks,
+        int exuberanceLevel,
+        int bigCatchLevel,
+        int serendipityReelLevel,
+        boolean inventoryInsertion,
+        boolean shouldSmeltDrops
     ) {
-        world.addFreshEntity(
-            new LagoonFishingBobberEntity(
-                user, world, luckOfTheSeaLevel, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel,
-                serendipityReelLevel, inventoryInsertion, shouldSmeltDrops
-            ));
+        world
+            .addFreshEntity(
+                new LagoonFishingBobberEntity(
+                    user,
+                    world,
+                    luckOfTheSeaLevel,
+                    waitTimeReductionTicks,
+                    exuberanceLevel,
+                    bigCatchLevel,
+                    serendipityReelLevel,
+                    inventoryInsertion,
+                    shouldSmeltDrops
+                )
+            );
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.lagoon_rod.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.lagoon_rod.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
 }

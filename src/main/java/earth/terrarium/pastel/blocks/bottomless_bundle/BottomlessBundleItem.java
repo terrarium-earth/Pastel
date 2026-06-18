@@ -91,13 +91,15 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
     }
 
     public static ItemReference getStoredReference(ItemStack bundle) {
-        return ItemStorage.load(bundle)
-                          .getReference();
+        return ItemStorage
+            .load(bundle)
+            .getReference();
     }
 
     public static long getStoredAmount(ItemStack bundle) {
-        return ItemStorage.load(bundle)
-                          .getCount();
+        return ItemStorage
+            .load(bundle)
+            .getCount();
     }
 
     @Override
@@ -128,8 +130,9 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        if (context.getPlayer()
-                   .isShiftKeyDown())
+        if (context
+            .getPlayer()
+            .isShiftKeyDown())
             return super.useOn(context);
         return InteractionResult.PASS;
     }
@@ -149,38 +152,65 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
         boolean locked = isLocked(stack);
         long storedAmount = getStoredAmount(stack);
         if (storedAmount == 0) {
-            tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.empty")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.bottomless_bundle.tooltip.empty")
+                        .withStyle(ChatFormatting.GRAY)
+                );
             if (locked) {
-                tooltip.add(
-                    Component.translatable("item.pastel.bottomless_bundle.tooltip.locked")
-                             .withStyle(ChatFormatting.GRAY));
+                tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.bottomless_bundle.tooltip.locked")
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
         } else {
             var variant = getStoredReference(stack);
-            var powerLevel = context.registries()
-                                    .lookup(Registries.ENCHANTMENT)
-                                    .flatMap(impl -> impl.get(Enchantments.POWER))
-                                    .map(ench -> EnchantmentHelper.getItemEnchantmentLevel(ench, stack))
-                                    .orElse(0);
-            String totalStacks = Support.getShortenedNumberString(storedAmount / (float) variant.asItem()
-                                                                                                .getDefaultMaxStackSize());
-            tooltip.add(Component.translatable(
-                                     "item.pastel.bottomless_bundle.tooltip.count", storedAmount,
-                                     getMaxStoredAmount(powerLevel), totalStacks
-                                 )
-                                 .withStyle(ChatFormatting.GRAY));
+            var powerLevel = context
+                .registries()
+                .lookup(Registries.ENCHANTMENT)
+                .flatMap(impl -> impl.get(Enchantments.POWER))
+                .map(ench -> EnchantmentHelper.getItemEnchantmentLevel(ench, stack))
+                .orElse(0);
+            String totalStacks = Support
+                .getShortenedNumberString(
+                    storedAmount / (float) variant
+                        .asItem()
+                        .getDefaultMaxStackSize()
+                );
+            tooltip
+                .add(
+                    Component
+                        .translatable(
+                            "item.pastel.bottomless_bundle.tooltip.count",
+                            storedAmount,
+                            getMaxStoredAmount(powerLevel),
+                            totalStacks
+                        )
+                        .withStyle(ChatFormatting.GRAY)
+                );
             if (locked) {
-                tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.locked")
-                                     .withStyle(ChatFormatting.GRAY));
+                tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.bottomless_bundle.tooltip.locked")
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             } else {
-                tooltip.add(Component.translatable(
-                                         "item.pastel.bottomless_bundle.tooltip.enter_inventory",
-                                         variant.asItem()
-                                                .getDescription()
-                                                .getString()
-                                     )
-                                     .withStyle(ChatFormatting.GRAY));
+                tooltip
+                    .add(
+                        Component
+                            .translatable(
+                                "item.pastel.bottomless_bundle.tooltip.enter_inventory",
+                                variant
+                                    .asItem()
+                                    .getDescription()
+                                    .getString()
+                            )
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
         }
         if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.DELETES_OVERFLOW)) {
@@ -190,13 +220,18 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
 
     @Override
     public void onDestroyed(ItemEntity entity) {
-        var storage = entity.getItem()
-                            .get(PastelDataComponentTypes.ITEM_STORAGE);
+        var storage = entity
+            .getItem()
+            .get(PastelDataComponentTypes.ITEM_STORAGE);
         if (storage != null) {
-            entity.getItem()
-                  .set(PastelDataComponentTypes.ITEM_STORAGE, ItemStorage.Component.DEFAULT);
-            ItemUtils.onContainerDestroyed(
-                entity, () -> new ItemStorage.IterableView(new ItemStorage(storage.reference(), storage.count())));
+            entity
+                .getItem()
+                .set(PastelDataComponentTypes.ITEM_STORAGE, ItemStorage.Component.DEFAULT);
+            ItemUtils
+                .onContainerDestroyed(
+                    entity,
+                    () -> new ItemStorage.IterableView(new ItemStorage(storage.reference(), storage.count()))
+                );
         }
     }
 
@@ -219,16 +254,17 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
                 storage.increment(remainder.getCount());
 
             }
-        } else if (slotStack.getItem()
-                            .canFitInsideContainerItems()) {
-            var inserted = storage.insert(slotStack);
-            if (inserted > 0) {
-                this.playInsertSound(player);
-                slotStack.shrink(inserted);
-            } else {
-                return false;
+        } else if (slotStack
+            .getItem()
+            .canFitInsideContainerItems()) {
+                var inserted = storage.insert(slotStack);
+                if (inserted > 0) {
+                    this.playInsertSound(player);
+                    slotStack.shrink(inserted);
+                } else {
+                    return false;
+                }
             }
-        }
 
         storage.save(bundle);
         return true;
@@ -239,7 +275,11 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
      */
     @Override
     public boolean overrideOtherStackedOnMe(
-        ItemStack bundle, ItemStack otherStack, Slot slot, ClickAction clickType, Player player,
+        ItemStack bundle,
+        ItemStack otherStack,
+        Slot slot,
+        ClickAction clickType,
+        Player player,
         SlotAccess cursorStackReference
     ) {
         if (bundle.getCount() != 1 || clickType != ClickAction.SECONDARY || !slot.allowModification(player)) {
@@ -284,7 +324,6 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
         }
     }
 
-
     @Override
     public boolean accepts(Optional<ItemStack> listener, ItemStack proposal) {
         assert listener.isPresent();
@@ -318,38 +357,51 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
     }
 
     private void playRemoveOneSound(Entity entity) {
-        entity.playSound(
-            SoundEvents.BUNDLE_REMOVE_ONE, 0.8F,
-            0.8F + entity.level()
-                         .getRandom()
-                         .nextFloat() * 0.4F
-        );
+        entity
+            .playSound(
+                SoundEvents.BUNDLE_REMOVE_ONE,
+                0.8F,
+                0.8F + entity
+                    .level()
+                    .getRandom()
+                    .nextFloat() * 0.4F
+            );
     }
 
     private void playInsertSound(Entity entity) {
-        entity.playSound(
-            SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + entity.level()
-                                                          .getRandom()
-                                                          .nextFloat() * 0.4F
-        );
+        entity
+            .playSound(
+                SoundEvents.BUNDLE_INSERT,
+                0.8F,
+                0.8F + entity
+                    .level()
+                    .getRandom()
+                    .nextFloat() * 0.4F
+            );
     }
 
     private void playDropContentsSound(Entity entity) {
-        entity.playSound(
-            SoundEvents.BUNDLE_DROP_CONTENTS, 0.8F,
-            0.8F + entity.level()
-                         .getRandom()
-                         .nextFloat() * 0.4F
-        );
+        entity
+            .playSound(
+                SoundEvents.BUNDLE_DROP_CONTENTS,
+                0.8F,
+                0.8F + entity
+                    .level()
+                    .getRandom()
+                    .nextFloat() * 0.4F
+            );
     }
 
     private void playZipSound(Entity entity, float basePitch) {
-        entity.playSound(
-            PastelSounds.BOTTOMLESS_BUNDLE_ZIP, 0.8F,
-            basePitch + entity.level()
-                              .getRandom()
-                              .nextFloat() * 0.4F
-        );
+        entity
+            .playSound(
+                PastelSounds.BOTTOMLESS_BUNDLE_ZIP,
+                0.8F,
+                basePitch + entity
+                    .level()
+                    .getRandom()
+                    .nextFloat() * 0.4F
+            );
     }
 
     @Override
@@ -369,32 +421,50 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
         if (PastelCommon.getRegistryAccess() == null)
             return MAX_STORED_AMOUNT_BASE;
 
-        return getMaxStoredAmount(PastelCommon.getRegistryAccess()
-                                              .lookup(Registries.ENCHANTMENT)
-                                              .flatMap(impl -> impl.get(Enchantments.POWER))
-                                              .map(ench -> EnchantmentHelper.getItemEnchantmentLevel(ench, holder))
-                                              .orElse(0));
+        return getMaxStoredAmount(
+            PastelCommon
+                .getRegistryAccess()
+                .lookup(Registries.ENCHANTMENT)
+                .flatMap(impl -> impl.get(Enchantments.POWER))
+                .map(ench -> EnchantmentHelper.getItemEnchantmentLevel(ench, holder))
+                .orElse(0)
+        );
     }
 
     public static class BottomlessBundlePlacementDispenserBehavior extends OptionalDispenseItemBehavior {
 
         @Override
-        @SuppressWarnings("resource")
+        @SuppressWarnings(
+            "resource"
+        )
         protected ItemStack execute(BlockSource pointer, ItemStack stack) {
             this.setSuccess(false);
             if (stack.getItem() instanceof BottomlessBundleItem bottomlessBundleItem) {
-                Direction direction = pointer.state()
-                                             .getValue(DispenserBlock.FACING);
-                BlockPos blockPos = pointer.pos()
-                                           .relative(direction);
-                Direction direction2 = pointer.level()
-                                              .isEmptyBlock(blockPos.below()) ? direction : Direction.UP;
+                Direction direction = pointer
+                    .state()
+                    .getValue(DispenserBlock.FACING);
+                BlockPos blockPos = pointer
+                    .pos()
+                    .relative(direction);
+                Direction direction2 = pointer
+                    .level()
+                    .isEmptyBlock(blockPos.below()) ? direction : Direction.UP;
 
                 try {
-                    this.setSuccess(bottomlessBundleItem.place(
-                                                            new DirectionalPlaceContext(pointer.level(), blockPos,
-                                                                                        direction, stack, direction2))
-                                                        .consumesAction());
+                    this
+                        .setSuccess(
+                            bottomlessBundleItem
+                                .place(
+                                    new DirectionalPlaceContext(
+                                        pointer.level(),
+                                        blockPos,
+                                        direction,
+                                        stack,
+                                        direction2
+                                    )
+                                )
+                                .consumesAction()
+                        );
                 } catch (Exception e) {
                     PastelCommon.logError("Error trying to place bottomless bundle at " + blockPos + " : " + e);
                 }
@@ -404,21 +474,29 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
 
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Renderer implements DynamicItemRenderer {
         public Renderer() {
         }
 
         @Override
         public void render(
-            ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded,
-            PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay
+            ItemRenderer renderer,
+            ItemStack stack,
+            ItemDisplayContext mode,
+            boolean leftHanded,
+            PoseStack matrices,
+            MultiBufferSource vertexConsumers,
+            int light,
+            int overlay
         ) {
-            if (mode != ItemDisplayContext.GUI
-                || getStoredAmount(stack) <= 0)
+            if (mode != ItemDisplayContext.GUI || getStoredAmount(stack) <= 0)
                 return;
-            var bundledStack = ItemStorage.load(stack)
-                                          .stack(1);
+            var bundledStack = ItemStorage
+                .load(stack)
+                .stack(1);
             Minecraft client = Minecraft.getInstance();
             BakedModel bundledModel = renderer.getModel(bundledStack, client.level, client.player, 0);
 
@@ -432,8 +510,10 @@ public class BottomlessBundleItem extends BlockItem implements ItemPickupListene
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER) || enchantment.is(
-            PastelEnchantments.VOIDING);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER) || enchantment
+            .is(
+                PastelEnchantments.VOIDING
+            );
     }
 
 }

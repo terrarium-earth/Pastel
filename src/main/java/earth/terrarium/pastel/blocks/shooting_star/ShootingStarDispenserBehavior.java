@@ -14,18 +14,22 @@ public class ShootingStarDispenserBehavior extends DefaultDispenseItemBehavior {
 
     @Override
     public ItemStack execute(@NotNull BlockSource pointer, @NotNull ItemStack stack) {
-        Direction direction = pointer.state()
-                                     .getValue(DispenserBlock.FACING);
+        Direction direction = pointer
+            .state()
+            .getValue(DispenserBlock.FACING);
 
         Level world = pointer.level();
         ShootingStarItem shootingStarItem = ((ShootingStarItem) stack.getItem());
         Vec3 spawnPos = new Vec3(
-            pointer.pos()
-                   .getX() + direction.getStepX() * 1.125D, pointer.pos()
-                                                                   .getY() + direction.getStepY() * 1.13D, pointer.pos()
-                                                                                                                  .getZ() +
-                                                                                                           direction.getStepZ() *
-                                                                                                           1.125D
+            pointer
+                .pos()
+                .getX() + direction.getStepX() * 1.125D,
+            pointer
+                .pos()
+                .getY() + direction.getStepY() * 1.13D,
+            pointer
+                .pos()
+                .getZ() + direction.getStepZ() * 1.125D
         );
         ShootingStarEntity shootingStarEntity = shootingStarItem.getEntityForStack(world, spawnPos, stack);
         shootingStarEntity.setYRot(direction.toYRot());

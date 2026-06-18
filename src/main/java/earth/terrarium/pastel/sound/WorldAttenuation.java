@@ -26,17 +26,18 @@ public class WorldAttenuation {
         if (Minecraft.getInstance().level != null)
             time = level.getGameTime();
 
-
-        return Cache.peek(time)
-                    .orElse(Cache.swap(Data.create(), time));
+        return Cache
+            .peek(time)
+            .orElse(Cache.swap(Data.create(), time));
     }
 
     public static void tick(Level level, Entity camera, boolean active) {
         if (!active)
             return;
 
-        var camPos = BlockPos.containing(camera.position())
-                             .above();
+        var camPos = BlockPos
+            .containing(camera.position())
+            .above();
         var center = camPos.above(2);
 
         int checked = 0;
@@ -46,7 +47,9 @@ public class WorldAttenuation {
         var volumetrics = new Vec3(0, 0, 0);
 
         // We shift up a few blocks because the ground is often the ground
-        for (BlockPos check : BlockPos.randomInCube(level.getRandom(), 32, center, 9)) {
+        for (
+            BlockPos check : BlockPos.randomInCube(level.getRandom(), 32, center, 9)
+        ) {
             var volumetry = 1.0;
 
             if (!level.isInWorldBounds(check))
@@ -54,15 +57,20 @@ public class WorldAttenuation {
 
             checked++;
 
-            if (!level.getFluidState(check)
-                      .isEmpty()) {
+            if (!level
+                .getFluidState(check)
+                .isEmpty()) {
                 volBlocking += 2F;
                 pitchMods += 1;
                 occlusion += 0.5F;
-                volumetrics.add(check.subtract(center)
-                                     .getCenter()
-                                     .normalize()
-                                     .scale(0.25));
+                volumetrics
+                    .add(
+                        check
+                            .subtract(center)
+                            .getCenter()
+                            .normalize()
+                            .scale(0.25)
+                    );
                 continue;
             }
 
@@ -84,30 +92,39 @@ public class WorldAttenuation {
                 occlusion += (float) Math.min(hardness / Math.sqrt(check.distSqr(center)) / 2, 5F);
             }
 
-            volumetrics = volumetrics.add(check.subtract(center)
-                                               .getCenter()
-                                               .normalize()
-                                               .scale(volumetry));
+            volumetrics = volumetrics
+                .add(
+                    check
+                        .subtract(center)
+                        .getCenter()
+                        .normalize()
+                        .scale(volumetry)
+                );
         }
 
         volumetrics = volumetrics.scale(1.0 / checked);
 
-        if (!level.getFluidState(camPos)
-                  .isEmpty()) {
+        if (!level
+            .getFluidState(camPos)
+            .isEmpty()) {
             pitchMods = checked * 0.75F;
             volBlocking *= 1.2F;
             occlusion = pitchMods;
         }
 
-        if (level.getBiome(camPos)
-                 .is(PastelBiomes.BLACK_LANGAST) || level.getBiome(camPos)
-                                                         .is(PastelBiomes.DEEP_BARRENS))
+        if (level
+            .getBiome(camPos)
+            .is(PastelBiomes.BLACK_LANGAST) || level
+                .getBiome(camPos)
+                .is(PastelBiomes.DEEP_BARRENS))
             occlusion += checked / 2F;
 
         Tracked.VOLUME.remember(volBlocking, checked);
         Tracked.PITCH.remember(pitchMods, checked);
         Tracked.OCCLUSION.remember(occlusion, checked);
-        for (Direction.Axis axis : Direction.Axis.values()) {
+        for (
+            Direction.Axis axis : Direction.Axis.values()
+        ) {
             Tracked.remember(axis, (float) volumetrics.get(axis));
         }
     }
@@ -177,8 +194,9 @@ public class WorldAttenuation {
         }
 
         private void remember(float volBlocking, int checked) {
-            ATTENUATION_DATA.get(this)
-                            .add(1 - Math.clamp(volBlocking / checked, 0, 1));
+            ATTENUATION_DATA
+                .get(this)
+                .add(1 - Math.clamp(volBlocking / checked, 0, 1));
         }
 
         private static void remember(Direction.Axis axis, float val) {
@@ -187,15 +205,18 @@ public class WorldAttenuation {
                 case Y -> Y;
                 case Z -> Z;
             };
-            ATTENUATION_DATA.get(tracked)
-                            .add(val);
+            ATTENUATION_DATA
+                .get(tracked)
+                .add(val);
         }
 
         private float get() {
             var dataFlow = ATTENUATION_DATA.get(this);
 
             var averageAttenuation = 0F;
-            for (Float attenuation : dataFlow) {
+            for (
+                Float attenuation : dataFlow
+            ) {
                 if (attenuation.isNaN()) {
                     averageAttenuation += 1F;
                     continue;
@@ -209,7 +230,9 @@ public class WorldAttenuation {
     }
 
     static {
-        for (Tracked tracked : Tracked.values()) {
+        for (
+            Tracked tracked : Tracked.values()
+        ) {
             ATTENUATION_DATA.put(tracked, EvictingQueue.create(tracked.size));
         }
     }

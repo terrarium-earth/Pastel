@@ -25,8 +25,12 @@ public class ExtraMiningSpeedRingItem extends InkDrainTrinketItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.ring_of_pursuit.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.ring_of_pursuit.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
         super.appendHoverText(stack, context, tooltip, type);
     }
 
@@ -34,7 +38,10 @@ public class ExtraMiningSpeedRingItem extends InkDrainTrinketItem {
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        SlotContext slotContext,
+        ResourceLocation id,
+        ItemStack stack
+    ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
         ;
 
@@ -42,12 +49,15 @@ public class ExtraMiningSpeedRingItem extends InkDrainTrinketItem {
         long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
         double miningSpeedMod = getExtraMiningSpeed(storedInk);
         if (miningSpeedMod != 0) {
-            modifiers.put(
-                Attributes.MINING_EFFICIENCY, new AttributeModifier(
-                    MINING_SPEED_ATTRIBUTE_ID, miningSpeedMod,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
-            );
+            modifiers
+                .put(
+                    Attributes.MINING_EFFICIENCY,
+                    new AttributeModifier(
+                        MINING_SPEED_ATTRIBUTE_ID,
+                        miningSpeedMod,
+                        AttributeModifier.Operation.ADD_VALUE
+                    )
+                );
         }
 
         return modifiers;

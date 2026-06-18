@@ -18,71 +18,112 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<CrystallarieumRecipe> {
-    private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/modonomicon/crystallarieum.png");
+    private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/modonomicon/crystallarieum.png"
+        );
 
     public CrystallarieumEmiRecipeGated(CrystallarieumRecipe recipe) {
         super(PastelEmiRecipeCategories.CRYSTALLARIEUM, recipe, 124, 100);
-        inputs = List.of(
-            EmiIngredient.of(recipe.getIngredientStack()),
-            EmiStack.of(recipe.getGrowthStages()
-                              .getFirst()
-                              .getBlock())
-        );
-        outputs = Stream.concat(
-                            Stream.concat(
-                                      Stream.of(recipe.getResultItem(getRegistryManager())),
-                                      recipe.getAdditionalResults()
-                                            .stream()
-                                  )
-                                  .map(EmiStack::of),
-                            recipe.getGrowthStages()
-                                  .stream()
-                                  .map(s -> EmiStack.of(s.getBlock()))
-                                  .filter(s -> !s.isEmpty())
-                        )
-                        .toList();
+        inputs = List
+            .of(
+                EmiIngredient.of(recipe.getIngredientStack()),
+                EmiStack
+                    .of(
+                        recipe
+                            .getGrowthStages()
+                            .getFirst()
+                            .getBlock()
+                    )
+            );
+        outputs = Stream
+            .concat(
+                Stream
+                    .concat(
+                        Stream.of(recipe.getResultItem(getRegistryManager())),
+                        recipe
+                            .getAdditionalResults()
+                            .stream()
+                    )
+                    .map(EmiStack::of),
+                recipe
+                    .getGrowthStages()
+                    .stream()
+                    .map(s -> EmiStack.of(s.getBlock()))
+                    .filter(s -> !s.isEmpty())
+            )
+            .toList();
     }
 
     @Override
     public void addUnlockedWidgets(WidgetHolder widgets) {
         widgets.addSlot(inputs.getFirst(), 0, 0);
-        widgets.addSlot(
-            EmiStack.of(recipe.getFluidMedium()
-                              .getFluid()), 0, 18
-        );
+        widgets
+            .addSlot(
+                EmiStack
+                    .of(
+                        recipe
+                            .getFluidMedium()
+                            .getFluid()
+                    ),
+                0,
+                18
+            );
 
-        widgets.addSlot(
-                   EmiStack.of(
-                       ((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor())), 20, 18
-               )
-               .drawBack(false);
+        widgets
+            .addSlot(
+                EmiStack
+                    .of(
+                        ((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor())
+                    ),
+                20,
+                18
+            )
+            .drawBack(false);
 
         widgets.addFillingArrow(40, 9, recipe.getSecondsPerGrowthStage() * 1000);
 
-        List<EmiStack> states = recipe.getGrowthStages()
-                                      .stream()
-                                      .map(s -> EmiStack.of(s.getBlock()))
-                                      .toList();
+        List<EmiStack> states = recipe
+            .getGrowthStages()
+            .stream()
+            .map(s -> EmiStack.of(s.getBlock()))
+            .toList();
         Iterator<EmiStack> it = states.iterator();
         widgets.addSlot(it.next(), 20, 0);
         int x = 66;
         while (it.hasNext()) {
-            widgets.addSlot(it.next(), x, 8)
-                   .recipeContext(this);
+            widgets
+                .addSlot(it.next(), x, 8)
+                .recipeContext(this);
             x += 20;
         }
 
         // catalysts
         widgets.addText(Component.translatable("container.pastel.rei.crystallarieum.catalyst"), 0, 42, 0x3f3f3f, false);
-        widgets.addText(
-            Component.translatable("container.pastel.rei.crystallarieum.accelerator"), 0, 58, 0x3f3f3f, false);
-        widgets.addText(
-            Component.translatable("container.pastel.rei.crystallarieum.ink_consumption"), 0, 68, 0x3f3f3f, false);
+        widgets
+            .addText(
+                Component.translatable("container.pastel.rei.crystallarieum.accelerator"),
+                0,
+                58,
+                0x3f3f3f,
+                false
+            );
+        widgets
+            .addText(
+                Component.translatable("container.pastel.rei.crystallarieum.ink_consumption"),
+                0,
+                68,
+                0x3f3f3f,
+                false
+            );
         widgets.addText(Component.translatable("container.pastel.rei.crystallarieum.used_up"), 0, 78, 0x3f3f3f, false);
 
         List<CrystallarieumCatalyst> catalysts = recipe.getCatalysts();
-        for (int i = 0; i < catalysts.size(); i++) {
+        for (
+            int i = 0;
+            i < catalysts.size();
+            i++
+        ) {
             CrystallarieumCatalyst catalyst = catalysts.get(i);
             int xOff = 46 + 18 * i;
             widgets.addSlot(EmiIngredient.of(catalyst.ingredient()), xOff, 38);
@@ -133,19 +174,31 @@ public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<Crystal
         }
 
         if (recipe.growsWithoutCatalyst()) {
-            widgets.addText(
-                Component.translatable(
-                    "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional",
-                    recipe.getSecondsPerGrowthStage()
-                ), 0, 90, 0x3f3f3f, false
-            );
+            widgets
+                .addText(
+                    Component
+                        .translatable(
+                            "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional",
+                            recipe.getSecondsPerGrowthStage()
+                        ),
+                    0,
+                    90,
+                    0x3f3f3f,
+                    false
+                );
         } else {
-            widgets.addText(
-                Component.translatable(
-                    "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds",
-                    recipe.getSecondsPerGrowthStage()
-                ), 0, 90, 0x3f3f3f, false
-            );
+            widgets
+                .addText(
+                    Component
+                        .translatable(
+                            "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds",
+                            recipe.getSecondsPerGrowthStage()
+                        ),
+                    0,
+                    90,
+                    0x3f3f3f,
+                    false
+                );
         }
     }
 

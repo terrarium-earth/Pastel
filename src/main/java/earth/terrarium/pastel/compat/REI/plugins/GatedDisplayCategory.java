@@ -14,18 +14,30 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public abstract class GatedDisplayCategory<T extends GatedRecipeDisplay> implements DisplayCategory<T> {
 
-    public static final Component HIDDEN_LINE_1 = Component.translatable(
-        "container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_1");
-    public static final Component HIDDEN_LINE_2 = Component.translatable(
-        "container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_2");
+    public static final Component HIDDEN_LINE_1 = Component
+        .translatable(
+            "container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_1"
+        );
 
-    public static final Component SECRET = Component.translatable(
-        "container.pastel.rei.pedestal_crafting.secret_recipe");
-    public static final Component SECRET_HINT = Component.translatable(
-        "container.pastel.rei.pedestal_crafting.secret_recipe.hint");
+    public static final Component HIDDEN_LINE_2 = Component
+        .translatable(
+            "container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_2"
+        );
+
+    public static final Component SECRET = Component
+        .translatable(
+            "container.pastel.rei.pedestal_crafting.secret_recipe"
+        );
+
+    public static final Component SECRET_HINT = Component
+        .translatable(
+            "container.pastel.rei.pedestal_crafting.secret_recipe.hint"
+        );
 
     @Override
     public List<Widget> setupDisplay(@NotNull T display, @NotNull Rectangle bounds) {
@@ -37,35 +49,58 @@ public abstract class GatedDisplayCategory<T extends GatedRecipeDisplay> impleme
         if (display.isUnlocked()) {
             if (display.isSecret()) {
                 if (display.getSecretHintText() == null) {
-                    widgets.add(Widgets.createLabel(new Point(bounds.getCenterX(), bounds.getCenterY() - 9), SECRET)
-                                       .centered()
-                                       .color(0x3f3f3f)
-                                       .noShadow());
+                    widgets
+                        .add(
+                            Widgets
+                                .createLabel(new Point(bounds.getCenterX(), bounds.getCenterY() - 9), SECRET)
+                                .centered()
+                                .color(0x3f3f3f)
+                                .noShadow()
+                        );
                 } else {
-                    widgets.add(Widgets.createLabel(
-                                           new Point(bounds.getCenterX(), bounds.getCenterY() - 9), SECRET_HINT)
-                                       .centered()
-                                       .color(0x3f3f3f)
-                                       .noShadow());
-                    widgets.add(Widgets.createLabel(
-                                           new Point(bounds.getCenterX(), bounds.getCenterY() + 1),
-                                           display.getSecretHintText())
-                                       .centered()
-                                       .color(0x3f3f3f)
-                                       .noShadow());
+                    widgets
+                        .add(
+                            Widgets
+                                .createLabel(
+                                    new Point(bounds.getCenterX(), bounds.getCenterY() - 9),
+                                    SECRET_HINT
+                                )
+                                .centered()
+                                .color(0x3f3f3f)
+                                .noShadow()
+                        );
+                    widgets
+                        .add(
+                            Widgets
+                                .createLabel(
+                                    new Point(bounds.getCenterX(), bounds.getCenterY() + 1),
+                                    display.getSecretHintText()
+                                )
+                                .centered()
+                                .color(0x3f3f3f)
+                                .noShadow()
+                        );
                 }
             } else {
                 setupWidgets(startPoint, bounds, widgets, display);
             }
         } else {
-            widgets.add(Widgets.createLabel(new Point(bounds.getCenterX(), bounds.getCenterY() - 9), HIDDEN_LINE_1)
-                               .centered()
-                               .color(0x3f3f3f)
-                               .noShadow());
-            widgets.add(Widgets.createLabel(new Point(bounds.getCenterX(), bounds.getCenterY() + 1), HIDDEN_LINE_2)
-                               .centered()
-                               .color(0x3f3f3f)
-                               .noShadow());
+            widgets
+                .add(
+                    Widgets
+                        .createLabel(new Point(bounds.getCenterX(), bounds.getCenterY() - 9), HIDDEN_LINE_1)
+                        .centered()
+                        .color(0x3f3f3f)
+                        .noShadow()
+                );
+            widgets
+                .add(
+                    Widgets
+                        .createLabel(new Point(bounds.getCenterX(), bounds.getCenterY() + 1), HIDDEN_LINE_2)
+                        .centered()
+                        .color(0x3f3f3f)
+                        .noShadow()
+                );
         }
 
         return widgets;

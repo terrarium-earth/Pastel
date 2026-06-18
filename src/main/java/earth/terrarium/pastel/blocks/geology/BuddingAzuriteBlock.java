@@ -46,22 +46,29 @@ public class BuddingAzuriteBlock extends Block implements WardDisruptableBlock {
             Direction direction = UPDATE_SHAPE_ORDER[random.nextInt(UPDATE_SHAPE_ORDER.length)];
             BlockPos blockPos = pos.relative(direction);
             BlockState blockState = level.getBlockState(blockPos);
-            if (level.getBlockState(blockPos)
-                     .canBeReplaced()) {
-                level.setBlockAndUpdate(
-                    blockPos, PastelBlocks.AZURE_OUTCROP.get()
-                                                        .defaultBlockState()
-                                                        .setValue(AmethystClusterBlock.FACING, direction)
-                );
-            } else if (blockState.is(PastelBlocks.AZURE_OUTCROP)) {
-                var stage = AzuriteOutcropBlock.SpirePart.closerToBase(
-                    blockState.getValue(AzuriteOutcropBlock.SPIRE_PART));
-                if (stage != null) {
-                    level.setBlock(
-                        blockPos, blockState.setValue(AzuriteOutcropBlock.SPIRE_PART, stage),
-                        Block.UPDATE_SUPPRESS_DROPS |
-                        Block.UPDATE_ALL
+            if (level
+                .getBlockState(blockPos)
+                .canBeReplaced()) {
+                level
+                    .setBlockAndUpdate(
+                        blockPos,
+                        PastelBlocks.AZURE_OUTCROP
+                            .get()
+                            .defaultBlockState()
+                            .setValue(AmethystClusterBlock.FACING, direction)
                     );
+            } else if (blockState.is(PastelBlocks.AZURE_OUTCROP)) {
+                var stage = AzuriteOutcropBlock.SpirePart
+                    .closerToBase(
+                        blockState.getValue(AzuriteOutcropBlock.SPIRE_PART)
+                    );
+                if (stage != null) {
+                    level
+                        .setBlock(
+                            blockPos,
+                            blockState.setValue(AzuriteOutcropBlock.SPIRE_PART, stage),
+                            Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL
+                        );
                     level.updateNeighborsAt(pos, this);
                 }
             }

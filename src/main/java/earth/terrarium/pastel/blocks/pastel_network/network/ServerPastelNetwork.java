@@ -36,33 +36,48 @@ import java.util.stream.Collectors;
 
 public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 
-    public static final Codec<ServerPastelNetwork> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                               Level.RESOURCE_KEY_CODEC.xmap(
-                                                                                                        k -> PastelCommon.getSidedServer()
-                                                                                                                         .getLevel(k), Level::dimension
-                                                                                                    )
-                                                                                                                       .fieldOf("world")
-                                                                                                                       .forGetter(b -> b.world),
-                                                                                               UUIDUtil.STRING_CODEC.fieldOf("uuid")
-                                                                                                                    .forGetter(ServerPastelNetwork::getUUID),
-                                                                                               Codec.INT.fieldOf(
-                                                                                                   "color")
-                                                                                                        .forGetter(ServerPastelNetwork::getColor),
-                                                                                               TickLooper.CODEC.fieldOf("looper")
-                                                                                                               .forGetter(b -> b.transferLooper)
-                                                                                           )
-                                                                                           .apply(
-                                                                                               i,
-                                                                                               ServerPastelNetwork::new
-                                                                                           ));
+    public static final Codec<ServerPastelNetwork> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    Level.RESOURCE_KEY_CODEC
+                        .xmap(
+                            k -> PastelCommon
+                                .getSidedServer()
+                                .getLevel(k),
+                            Level::dimension
+                        )
+                        .fieldOf("world")
+                        .forGetter(b -> b.world),
+                    UUIDUtil.STRING_CODEC
+                        .fieldOf("uuid")
+                        .forGetter(ServerPastelNetwork::getUUID),
+                    Codec.INT
+                        .fieldOf(
+                            "color"
+                        )
+                        .forGetter(ServerPastelNetwork::getColor),
+                    TickLooper.CODEC
+                        .fieldOf("looper")
+                        .forGetter(b -> b.transferLooper)
+                )
+                .apply(
+                    i,
+                    ServerPastelNetwork::new
+                )
+        );
 
     protected final Map<PastelNodeType, Set<PastelNodeBlockEntity>> loadedNodes = new ConcurrentHashMap<>();
+
     protected final Set<PastelNodeBlockEntity> priorityNodes = new HashSet<>();
+
     protected final Set<PastelNodeBlockEntity> highPriorityNodes = new HashSet<>();
 
     // new transfers are checked for every 10 ticks
     private final TickLooper transferLooper;
+
     protected final SchedulerMap<PastelTransmission> transmissions;
+
     protected final PastelTransmissionLogic transmissionLogic;
 
     public ServerPastelNetwork(ServerLevel world, UUID uuid, int color) {
@@ -80,18 +95,24 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         this.transmissions = new SchedulerMap<>();
         this.transmissionLogic = new PastelTransmissionLogic(this);
 
-        for (PastelNodeType type : PastelNodeType.values()) {
+        for (
+            PastelNodeType type : PastelNodeType.values()
+        ) {
             this.loadedNodes.put(type, new HashSet<>());
         }
-        for (var entry : transmissions) {
-            entry.getKey()
-                 .setNetwork(this);
+        for (
+            var entry : transmissions
+        ) {
+            entry
+                .getKey()
+                .setNetwork(this);
         }
     }
 
     private boolean addLoadedNode(PastelNodeBlockEntity node) {
-        return !this.loadedNodes.get(node.getNodeType())
-                                .add(node);
+        return !this.loadedNodes
+            .get(node.getNodeType())
+            .add(node);
     }
 
     public void initializeNode(PastelNodeBlockEntity node) {
@@ -116,43 +137,42 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 
     @Override
     public String getNodeDebugText() {
-        return super.getNodeDebugText() +
-               " - Prov: " +
-               getLoadedNodes(PastelNodeType.PROVIDER).size() +
-               " - Send: " +
-               getLoadedNodes(PastelNodeType.SENDER).size() +
-               " - Gath: " +
-               getLoadedNodes(PastelNodeType.GATHER).size() +
-               " - Stor: " +
-               getLoadedNodes(PastelNodeType.STORAGE).size() +
-               " - Buff: " +
-               getLoadedNodes(PastelNodeType.BUFFER).size() +
-               " - Conn: " +
-               getLoadedNodes(PastelNodeType.CONNECTION).size();
+        return super.getNodeDebugText() + " - Prov: " + getLoadedNodes(PastelNodeType.PROVIDER)
+            .size() + " - Send: " + getLoadedNodes(PastelNodeType.SENDER).size() + " - Gath: " + getLoadedNodes(
+                PastelNodeType.GATHER
+            ).size() + " - Stor: " + getLoadedNodes(PastelNodeType.STORAGE).size() + " - Buff: " + getLoadedNodes(
+                PastelNodeType.BUFFER
+            ).size() + " - Conn: " + getLoadedNodes(PastelNodeType.CONNECTION).size();
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder(this.uuid.toString());
-        for (PastelNodeType type : PastelNodeType.values()) {
-            builder.append("-")
-                   .append(getLoadedNodes(type).size());
+        for (
+            PastelNodeType type : PastelNodeType.values()
+        ) {
+            builder
+                .append("-")
+                .append(getLoadedNodes(type).size());
         }
         return builder.toString();
     }
 
     protected @Nullable PastelNodeBlockEntity getLoadedNodeAt(BlockPos blockPos) {
-        if (!this.graph.vertexSet()
-                       .contains(blockPos)) {
+        if (!this.graph
+            .vertexSet()
+            .contains(blockPos)) {
             return null; // the network might have been disconnected while the transfer was underway
         }
-        if (!this.getLevel()
-                 .hasChunkAt(blockPos)) {
+        if (!this
+            .getLevel()
+            .hasChunkAt(blockPos)) {
             return null; // hmmmm
         }
 
-        BlockEntity blockEntity = this.getLevel()
-                                      .getBlockEntity(blockPos);
+        BlockEntity blockEntity = this
+            .getLevel()
+            .getBlockEntity(blockPos);
         if (blockEntity instanceof PastelNodeBlockEntity pastelNodeBlockEntity) {
             return pastelNodeBlockEntity;
         }
@@ -174,15 +194,17 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         var nodeType = this.loadedNodes.get(type);
 
         if (priority == NodePriority.MODERATE) {
-            return nodeType.stream()
-                           .filter(priorityNodes::contains)
-                           .collect(Collectors.toSet());
+            return nodeType
+                .stream()
+                .filter(priorityNodes::contains)
+                .collect(Collectors.toSet());
         }
 
         if (priority == NodePriority.HIGH) {
-            return nodeType.stream()
-                           .filter(highPriorityNodes::contains)
-                           .collect(Collectors.toSet());
+            return nodeType
+                .stream()
+                .filter(highPriorityNodes::contains)
+                .collect(Collectors.toSet());
         }
 
         return nodeType;
@@ -191,8 +213,9 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
     protected void addNode(PastelNodeBlockEntity node) {
         //If this node already has a vertex, then all we are doing it is loading it
         if (graph.containsVertex(node.getBlockPos())) {
-            loadedNodes.get(node.getNodeType())
-                       .add(node);
+            loadedNodes
+                .get(node.getNodeType())
+                .add(node);
 
         } else {
             if (addLoadedNode(node))
@@ -219,15 +242,22 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         Set<BlockPos> vertices = this.graph.vertexSet();
 
         // if our network now has 1 or less nodes we don't really have a network anymore
-        if (this.graph.vertexSet()
-                      .size() < 2) {
-            for (BlockPos vertex : vertices) {
-                Optional<PastelNodeBlockEntity> be = world.getBlockEntity(
-                    vertex, PastelBlockEntities.PASTEL_NODE.get());
+        if (this.graph
+            .vertexSet()
+            .size() < 2) {
+            for (
+                BlockPos vertex : vertices
+            ) {
+                Optional<PastelNodeBlockEntity> be = world
+                    .getBlockEntity(
+                        vertex,
+                        PastelBlockEntities.PASTEL_NODE.get()
+                    );
                 be.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.setNetworkUUID(null));
             }
-            Pastel.getServerInstance()
-                  .removeNetwork(this.getUUID());
+            Pastel
+                .getServerInstance()
+                .removeNetwork(this.getUUID());
         }
 
         // if our network is still big enough, check if all vertices are still interconnected
@@ -246,7 +276,9 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         int biggestSetSize = 0;
         Set<BlockPos> biggestSet = null;
         List<Set<BlockPos>> smallerSets = new ArrayList<>();
-        for (Set<BlockPos> set : connectedSets) {
+        for (
+            Set<BlockPos> set : connectedSets
+        ) {
             int size = set.size();
             if (size > biggestSetSize) {
                 biggestSetSize = size;
@@ -263,9 +295,14 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
             // the network was split into something you can't even call a network anymore
             // fast fail => remove the network entirely
 
-            for (BlockPos pos : this.graph.vertexSet()) {
-                Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(
-                    pos, PastelBlockEntities.PASTEL_NODE.get());
+            for (
+                BlockPos pos : this.graph.vertexSet()
+            ) {
+                Optional<PastelNodeBlockEntity> blockEntity = world
+                    .getBlockEntity(
+                        pos,
+                        PastelBlockEntities.PASTEL_NODE.get()
+                    );
                 blockEntity.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.setNetworkUUID(null));
             }
 
@@ -275,19 +312,25 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 
         Set<PastelNodeBlockEntity> disconnectedBEs = new ObjectOpenHashSet<>();
         // we keep the first entry as our leftover network, hence we start at (1)
-        for (Set<BlockPos> smallerSet : smallerSets) {
+        for (
+            Set<BlockPos> smallerSet : smallerSets
+        ) {
             // is it a single lone node?
             // => remove from network, do not create a new one just for that one
             boolean isSingleNode = smallerSet.size() == 1;
             if (isSingleNode) {
-                Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(
-                    smallerSet.stream()
-                              .findAny()
-                              .get(), PastelBlockEntities.PASTEL_NODE.get()
-                );
+                Optional<PastelNodeBlockEntity> blockEntity = world
+                    .getBlockEntity(
+                        smallerSet
+                            .stream()
+                            .findAny()
+                            .get(),
+                        PastelBlockEntities.PASTEL_NODE.get()
+                    );
                 if (blockEntity.isPresent()) {
-                    blockEntity.get()
-                               .setNetworkUUID(null);
+                    blockEntity
+                        .get()
+                        .setNetworkUUID(null);
                     disconnectedBEs.add(blockEntity.get());
                 }
                 continue;
@@ -297,9 +340,14 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
             // => collect all nodes and pick a network UUID
             PastelNodeBlockEntity initialNode = null;
             Set<PastelNodeBlockEntity> blockEntities = new ObjectArraySet<>();
-            for (BlockPos pos : smallerSet) {
-                Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(
-                    pos, PastelBlockEntities.PASTEL_NODE.get());
+            for (
+                BlockPos pos : smallerSet
+            ) {
+                Optional<PastelNodeBlockEntity> blockEntity = world
+                    .getBlockEntity(
+                        pos,
+                        PastelBlockEntities.PASTEL_NODE.get()
+                    );
                 if (blockEntity.isPresent()) {
                     disconnectedBEs.add(blockEntity.get());
                     blockEntities.add(blockEntity.get());
@@ -310,11 +358,16 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
             }
 
             // and create a network for that group
-            ServerPastelNetwork newNetwork = Pastel.getServerInstance()
-                                                   .createNetwork(world, initialNode);
+            ServerPastelNetwork newNetwork = Pastel
+                .getServerInstance()
+                .createNetwork(world, initialNode);
             Map<BlockPos, BlockPos> edges = new Object2ObjectArrayMap<>();
-            for (BlockPos disconnectedNode : smallerSet) {
-                for (DefaultEdge edge : this.graph.edgesOf(disconnectedNode)) {
+            for (
+                BlockPos disconnectedNode : smallerSet
+            ) {
+                for (
+                    DefaultEdge edge : this.graph.edgesOf(disconnectedNode)
+                ) {
                     edges.put(this.graph.getEdgeSource(edge), this.graph.getEdgeTarget(edge));
                 }
                 var couldBeANode = getLevel().getBlockEntity(disconnectedNode, PastelBlockEntities.PASTEL_NODE.get());
@@ -324,12 +377,16 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
                     pastelNode.setNetworkUUID(newNetwork.getUUID());
                 }
             }
-            for (Map.Entry<BlockPos, BlockPos> edge : edges.entrySet()) {
+            for (
+                Map.Entry<BlockPos, BlockPos> edge : edges.entrySet()
+            ) {
                 newNetwork.addEdge(edge.getKey(), edge.getValue());
             }
         }
 
-        for (PastelNodeBlockEntity p : disconnectedBEs) {
+        for (
+            PastelNodeBlockEntity p : disconnectedBEs
+        ) {
             this.removeNode(p, NodeRemovalReason.REMOVED);
         }
 
@@ -338,32 +395,47 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
     }
 
     public void incorporate(
-        ServerPastelNetwork networkToIncorporate, PastelNodeBlockEntity node, PastelNodeBlockEntity otherNode) {
-        for (Map.Entry<PastelNodeType, Set<PastelNodeBlockEntity>> nodesToIncorporate :
-            networkToIncorporate.loadedNodes.entrySet()) {
-            for (PastelNodeBlockEntity nodeToIncorporate : nodesToIncorporate.getValue()) {
+        ServerPastelNetwork networkToIncorporate,
+        PastelNodeBlockEntity node,
+        PastelNodeBlockEntity otherNode
+    ) {
+        for (
+            Map.Entry<PastelNodeType, Set<PastelNodeBlockEntity>> nodesToIncorporate : networkToIncorporate.loadedNodes
+                .entrySet()
+        ) {
+            for (
+                PastelNodeBlockEntity nodeToIncorporate : nodesToIncorporate.getValue()
+            ) {
                 addNode(nodeToIncorporate);
             }
         }
-        networkToIncorporate.graph.vertexSet()
-                                  .forEach(pos -> {
-                                      if (this.world.getBlockEntity(pos) instanceof PastelNodeBlockEntity switchNode) {
-                                          switchNode.setNetworkUUID(this.uuid);
-                                      }
-                                      graph.addVertex(pos);
-                                  });
-        networkToIncorporate.graph.edgeSet()
-                                  .forEach(edge -> {
-                                      graph.addEdge(
-                                          networkToIncorporate.getGraph()
-                                                              .getEdgeSource(edge), networkToIncorporate.getGraph()
-                                                                                                        .getEdgeTarget(
-                                                                                                            edge)
-                                      );
-                                  });
+        networkToIncorporate.graph
+            .vertexSet()
+            .forEach(pos -> {
+                if (this.world.getBlockEntity(pos) instanceof PastelNodeBlockEntity switchNode) {
+                    switchNode.setNetworkUUID(this.uuid);
+                }
+                graph.addVertex(pos);
+            });
+        networkToIncorporate.graph
+            .edgeSet()
+            .forEach(edge -> {
+                graph
+                    .addEdge(
+                        networkToIncorporate
+                            .getGraph()
+                            .getEdgeSource(edge),
+                        networkToIncorporate
+                            .getGraph()
+                            .getEdgeTarget(
+                                edge
+                            )
+                    );
+            });
 
-        Pastel.getServerInstance()
-              .removeNetwork(networkToIncorporate.getUUID());
+        Pastel
+            .getServerInstance()
+            .removeNetwork(networkToIncorporate.getUUID());
         addNode(node);
         addNode(otherNode);
         addEdge(node, otherNode);
@@ -378,10 +450,12 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         }
 
         Optional<ServerPastelNetwork> otherNetwork = otherNode.getServerNetwork();
-        if (otherNetwork.isEmpty() || !network.get()
-                                              .equals(otherNetwork.get())) {
+        if (otherNetwork.isEmpty() || !network
+            .get()
+            .equals(otherNetwork.get())) {
             throw new IllegalArgumentException(
-                "Can't remove an edge between nodes in different networks - how did you even do this");
+                "Can't remove an edge between nodes in different networks - how did you even do this"
+            );
         }
 
         boolean success = graph.removeEdge(node.getBlockPos(), otherNode.getBlockPos()) != null;
@@ -403,8 +477,9 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
         if (reason != NodeRemovalReason.UNLOADED)
             graph.removeVertex(node.getBlockPos());
 
-        this.loadedNodes.get(node.getNodeType())
-                        .remove(node);
+        this.loadedNodes
+            .get(node.getNodeType())
+            .remove(node);
         removePriorityNode(node, node.getPriority());
 
         if (reason.checksForNetworkSplit) {
@@ -434,8 +509,9 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
             throw new IllegalStateException("Attempted to connect a node to itself");
         }
 
-        if (network.get()
-                   .hasEdge(existingNode.getBlockPos(), newNode.getBlockPos())) {
+        if (network
+            .get()
+            .hasEdge(existingNode.getBlockPos(), newNode.getBlockPos())) {
             throw new IllegalStateException("Attempted to add an edge that already exists");
         }
 
@@ -481,8 +557,9 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
     private void tickNodeEffects() {
         List<PastelNodeBlockEntity> nodeSync = new ArrayList<>();
 
-
-        for (Map.Entry<PastelTransmission, Integer> transPair : transmissions) {
+        for (
+            Map.Entry<PastelTransmission, Integer> transPair : transmissions
+        ) {
             var transmission = transPair.getKey();
             var remainingTravelTime = transPair.getValue();
             var nodes = transmission.getNodePositions();
@@ -494,8 +571,10 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
             double progress = travelTime - remainingTravelTime;
 
             if (progress != 0 && progress % transmission.getVertexTime() == 0) {
-                var node = world.getBlockEntity(
-                    nodes.get((int) Math.round((nodes.size() - 1) * progress / travelTime)));
+                var node = world
+                    .getBlockEntity(
+                        nodes.get((int) Math.round((nodes.size() - 1) * progress / travelTime))
+                    );
 
                 if (!(node instanceof PastelNodeBlockEntity pastelNode))
                     continue;

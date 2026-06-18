@@ -14,10 +14,13 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class EnderSpliceChargingSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final Player player;
+
     private boolean done;
 
     public EnderSpliceChargingSoundInstance(Player player) {
@@ -43,9 +46,9 @@ public class EnderSpliceChargingSoundInstance extends AbstractSoundInstance impl
 
     @Override
     public void tick() {
-        if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 47 ||
-            !player.getUseItem()
-                   .is(PastelItems.ENDER_SPLICE.get())) {
+        if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 47 || !player
+            .getUseItem()
+            .is(PastelItems.ENDER_SPLICE.get())) {
             this.setDone();
         } else {
             this.x = this.player.getX();
@@ -61,17 +64,22 @@ public class EnderSpliceChargingSoundInstance extends AbstractSoundInstance impl
         Vec3 pos = player.position();
         RandomSource random = world.random;
 
-        for (int i = 0; i < 10; i++) {
-            player.getCommandSenderWorld()
-                  .addParticle(
-                      ParticleTypes.PORTAL,
-                      pos.x,
-                      pos.y + 1,
-                      pos.z,
-                      random.nextDouble() * 1.6D - 0.8D,
-                      random.nextDouble() * 1.6D - 0.8D,
-                      random.nextDouble() * 1.6D - 0.8D
-                  );
+        for (
+            int i = 0;
+            i < 10;
+            i++
+        ) {
+            player
+                .getCommandSenderWorld()
+                .addParticle(
+                    ParticleTypes.PORTAL,
+                    pos.x,
+                    pos.y + 1,
+                    pos.z,
+                    random.nextDouble() * 1.6D - 0.8D,
+                    random.nextDouble() * 1.6D - 0.8D,
+                    random.nextDouble() * 1.6D - 0.8D
+                );
         }
     }
 

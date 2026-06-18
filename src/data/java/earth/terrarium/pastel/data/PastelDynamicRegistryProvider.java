@@ -9,15 +9,16 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class PastelDynamicRegistryProvider {
     public static RegistrySetBuilder createRegistryBuilders() {
-        return new RegistrySetBuilder().add(
-                                           PastelRegistryKeys.RESONANCE_PROCESSOR,
-                                           ResonanceProcessorsRegistry::registerResonanceProcessors
-                                       )
-                                       .add(
-                                           NeoForgeRegistries.Keys.BIOME_MODIFIERS,
-                                           PastelPlacedFeatures::addBiomeModifications
-                                       )
-                                       .add(Registries.ENCHANTMENT, EnchantmentRegistry::registerEnchantments);
+        return new RegistrySetBuilder()
+            .add(
+                PastelRegistryKeys.RESONANCE_PROCESSOR,
+                ResonanceProcessorsRegistry::registerResonanceProcessors
+            )
+            .add(
+                NeoForgeRegistries.Keys.BIOME_MODIFIERS,
+                PastelPlacedFeatures::addBiomeModifications
+            )
+            .add(Registries.ENCHANTMENT, EnchantmentRegistry::registerEnchantments);
     }
 
 }

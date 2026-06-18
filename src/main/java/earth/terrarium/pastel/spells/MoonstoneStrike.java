@@ -31,18 +31,32 @@ import java.util.Map;
 public class MoonstoneStrike {
 
     private final Level world;
+
     private final double x;
+
     private final double y;
+
     private final double z;
+
     public final @Nullable Entity entity;
+
     public final float power;
+
     public final float knockbackMod;
+
     private final DamageSource damageSource;
+
     protected final Map<Player, Vec3> affectedPlayers;
 
     public MoonstoneStrike(
-        Level world, @Nullable Entity entity, @Nullable DamageSource damageSource, double x, double y, double z,
-        float power, float knockbackMod
+        Level world,
+        @Nullable Entity entity,
+        @Nullable DamageSource damageSource,
+        double x,
+        double y,
+        double z,
+        float power,
+        float knockbackMod
     ) {
         this.affectedPlayers = Maps.newHashMap();
         this.world = world;
@@ -56,26 +70,63 @@ public class MoonstoneStrike {
     }
 
     public static void create(
-        Level world, Entity entity, @Nullable DamageSource damageSource, double x, double y, double z, float power, float pitch) {
+        Level world,
+        Entity entity,
+        @Nullable DamageSource damageSource,
+        double x,
+        double y,
+        double z,
+        float power,
+        float pitch
+    ) {
         create(world, entity, damageSource, x, y, z, power, power, pitch);
     }
 
     public static void create(
-        Level world, Entity entity, @Nullable DamageSource damageSource, double x, double y, double z, float power,
-        float knockbackMod, float pitch
+        Level world,
+        Entity entity,
+        @Nullable DamageSource damageSource,
+        double x,
+        double y,
+        double z,
+        float power,
+        float knockbackMod,
+        float pitch
     ) {
         MoonstoneStrike moonstoneStrike = new MoonstoneStrike(
-            world, entity, damageSource, x, y, z, power, knockbackMod);
+            world,
+            entity,
+            damageSource,
+            x,
+            y,
+            z,
+            power,
+            knockbackMod
+        );
 
         if (world.isClientSide) {
-            world.playLocalSound(
-                x, y, z, PastelSounds.MOONSTONE_STRIKE, SoundSource.BLOCKS, 4.0F,
-                pitch, false
-            );
-            world.playLocalSound(
-                x, y, z, PastelSounds.SOFT_HUM, SoundSource.BLOCKS, 0.5F,
-                pitch, false
-            );
+            world
+                .playLocalSound(
+                    x,
+                    y,
+                    z,
+                    PastelSounds.MOONSTONE_STRIKE,
+                    SoundSource.BLOCKS,
+                    4.0F,
+                    pitch,
+                    false
+                );
+            world
+                .playLocalSound(
+                    x,
+                    y,
+                    z,
+                    PastelSounds.SOFT_HUM,
+                    SoundSource.BLOCKS,
+                    0.5F,
+                    pitch,
+                    false
+                );
             world.addParticle(PastelParticleTypes.MOONSTONE_STRIKE, x, y, z, 1.0, 0.0, 0.0);
         } else {
             moonstoneStrike.damageAndKnockbackEntities();
@@ -124,7 +175,9 @@ public class MoonstoneStrike {
         int maxZ = Mth.floor(this.z + (double) reach + 1.0);
         Vec3 center = new Vec3(this.x, this.y, this.z);
 
-        for (Entity entity : world.getEntities(this.entity, new AABB(minX, minY, minZ, maxX, maxY, maxZ))) {
+        for (
+            Entity entity : world.getEntities(this.entity, new AABB(minX, minY, minZ, maxX, maxY, maxZ))
+        ) {
             //TODO: Can we convert this into an explosion subclass?
             if (!entity.ignoreExplosion(null)) {
                 double unitDist = Math.sqrt(entity.distanceToSqr(center)) / (double) reach;
@@ -142,26 +195,33 @@ public class MoonstoneStrike {
                         dz /= dLen;
 
                         double scaledExposure = (1.0F - unitDist) * Explosion.getSeenPercent(center, entity);
-                        entity.hurt(
-                            this.damageSource,
-                            (float) ((scaledExposure * scaledExposure + scaledExposure) / 2.0 * 7.0 * reach + 1.0)
-                        );
+                        entity
+                            .hurt(
+                                this.damageSource,
+                                (float) ((scaledExposure * scaledExposure + scaledExposure) / 2.0 * 7.0 * reach + 1.0)
+                            );
 
                         double knockback = scaledExposure * this.knockbackMod;
                         if (entity instanceof LivingEntity livingEntity) {
-                            knockback *= 1.0 - livingEntity.getAttributeValue(
-                                Attributes.EXPLOSION_KNOCKBACK_RESISTANCE);
+                            knockback *= 1.0 - livingEntity
+                                .getAttributeValue(
+                                    Attributes.EXPLOSION_KNOCKBACK_RESISTANCE
+                                );
                         }
 
                         dx *= knockback;
                         dy *= knockback;
                         dz *= knockback;
                         Vec3 impact = new Vec3(dx, dy, dz);
-                        entity.setDeltaMovement(entity.getDeltaMovement()
-                                                      .add(impact));
+                        entity
+                            .setDeltaMovement(
+                                entity
+                                    .getDeltaMovement()
+                                    .add(impact)
+                            );
                         if (entity instanceof Player playerEntity) {
-                            if (!playerEntity.isSpectator() &&
-                                (!playerEntity.isCreative() || !playerEntity.getAbilities().flying)) {
+                            if (!playerEntity.isSpectator() && (!playerEntity.isCreative() || !playerEntity
+                                .getAbilities().flying)) {
                                 this.affectedPlayers.put(playerEntity, impact);
                             }
                         }
@@ -176,8 +236,15 @@ public class MoonstoneStrike {
     public void affectWorld() {
         LivingEntity cause = getCausingEntity();
         int range = Math.max(2, (int) this.power / 2);
-        for (BlockPos pos : BlockPos.withinManhattan(
-            BlockPos.containing(this.x, this.y, this.z), range, range, range)) {
+        for (
+            BlockPos pos : BlockPos
+                .withinManhattan(
+                    BlockPos.containing(this.x, this.y, this.z),
+                    range,
+                    range,
+                    range
+                )
+        ) {
             BlockState blockState = world.getBlockState(pos);
             Block block = blockState.getBlock();
             if (block instanceof MoonstoneStrikeableBlock moonstoneStrikeableBlock) {
@@ -189,10 +256,10 @@ public class MoonstoneStrike {
     public @Nullable LivingEntity getCausingEntity() {
         if (this.entity instanceof LivingEntity livingEntity) {
             return livingEntity;
-        } else if (this.entity instanceof Projectile projectileEntity &&
-                   projectileEntity.getOwner() instanceof LivingEntity livingEntity) {
-            return livingEntity;
-        }
+        } else if (this.entity instanceof Projectile projectileEntity && projectileEntity
+            .getOwner() instanceof LivingEntity livingEntity) {
+                return livingEntity;
+            }
         return null;
     }
 

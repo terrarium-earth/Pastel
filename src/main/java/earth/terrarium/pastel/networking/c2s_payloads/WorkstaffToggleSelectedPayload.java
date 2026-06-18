@@ -14,11 +14,13 @@ import net.neoforged.neoforge.network.handling.IPayloadHandler;
 public record WorkstaffToggleSelectedPayload(int index) implements CustomPacketPayload {
 
     public static final Type<WorkstaffToggleSelectedPayload> ID = PastelC2SPackets.makeId("workstaff_toggle_selected");
-    public static final StreamCodec<RegistryFriendlyByteBuf, WorkstaffToggleSelectedPayload> CODEC
-        = StreamCodec.composite(
-        ByteBufCodecs.INT, WorkstaffToggleSelectedPayload::index,
-        WorkstaffToggleSelectedPayload::new
-    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, WorkstaffToggleSelectedPayload> CODEC = StreamCodec
+        .composite(
+            ByteBufCodecs.INT,
+            WorkstaffToggleSelectedPayload::index,
+            WorkstaffToggleSelectedPayload::new
+        );
 
     @Override
     public Type<? extends CustomPacketPayload> type() {

@@ -9,6 +9,7 @@ import java.util.Map;
 public class ColoredFenceBlock extends FenceBlock {
 
     private static final Map<InkColor, ColoredFenceBlock> BLOCKS = new Object2ObjectArrayMap<>();
+
     protected final InkColor color;
 
     public ColoredFenceBlock(Properties settings, InkColor color) {

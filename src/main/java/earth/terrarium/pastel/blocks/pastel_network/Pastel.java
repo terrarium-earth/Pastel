@@ -11,11 +11,16 @@ import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 
 public class Pastel {
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     private static ClientPastelNetworkManager clientManager;
+
     private static ServerPastelNetworkManager serverManager;
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static ClientPastelNetworkManager getClientInstance() {
         if (clientManager == null) {
             clientManager = new ClientPastelNetworkManager();
@@ -25,8 +30,12 @@ public class Pastel {
 
     public static ServerPastelNetworkManager getServerInstance() {
         if (serverManager == null && PastelCommon.getSidedServer() != null) {
-            serverManager = ServerPastelNetworkManager.get(PastelCommon.getSidedServer()
-                                                                       .overworld());
+            serverManager = ServerPastelNetworkManager
+                .get(
+                    PastelCommon
+                        .getSidedServer()
+                        .overworld()
+                );
         }
         return serverManager;
     }
@@ -39,7 +48,9 @@ public class Pastel {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static void clearClientInstance() {
         getClientInstance().clearContent();
         EarlyRenderingParticleContainer.clear();

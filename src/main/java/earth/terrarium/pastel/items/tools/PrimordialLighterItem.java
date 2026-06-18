@@ -34,15 +34,21 @@ public class PrimordialLighterItem extends FlintAndSteelItem implements Creative
         protected ItemStack execute(BlockSource pointer, ItemStack stack) {
             var world = pointer.level();
             this.setSuccess(true);
-            Direction direction = pointer.state()
-                                         .getValue(DispenserBlock.FACING);
-            BlockPos blockPos = pointer.pos()
-                                       .relative(direction);
+            Direction direction = pointer
+                .state()
+                .getValue(DispenserBlock.FACING);
+            BlockPos blockPos = pointer
+                .pos()
+                .relative(direction);
             if (PrimordialFireBlock.tryPlacePrimordialFire(world, blockPos, direction)) {
-                stack.hurtAndBreak(
-                    1, world, null, item -> {
-                    }
-                );
+                stack
+                    .hurtAndBreak(
+                        1,
+                        world,
+                        null,
+                        item -> {
+                        }
+                    );
                 this.setSuccess(true);
             } else {
                 this.setSuccess(false);
@@ -58,8 +64,12 @@ public class PrimordialLighterItem extends FlintAndSteelItem implements Creative
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.primordial_lighter.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.primordial_lighter.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
         CreativeOnlyItem.appendTooltip(tooltip);
     }
 
@@ -71,13 +81,19 @@ public class PrimordialLighterItem extends FlintAndSteelItem implements Creative
         BlockPos blockOnSide = pos.relative(context.getClickedFace());
 
         if (PrimordialFireBlock.canBePlacedAt(world, blockOnSide, context.getHorizontalDirection())) {
-            world.playSound(
-                player, blockOnSide, PastelSounds.ITEM_PRIMORDIAL_LIGHTER_USE, SoundSource.BLOCKS, 1.0F,
-                world.getRandom()
-                     .nextFloat() * 0.4F + 0.8F
-            );
-            BlockState primordialFireState
-                = ((PrimordialFireBlock) PastelBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, blockOnSide);
+            world
+                .playSound(
+                    player,
+                    blockOnSide,
+                    PastelSounds.ITEM_PRIMORDIAL_LIGHTER_USE,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    world
+                        .getRandom()
+                        .nextFloat() * 0.4F + 0.8F
+                );
+            BlockState primordialFireState = ((PrimordialFireBlock) PastelBlocks.PRIMORDIAL_FIRE.get())
+                .getStateForPosition(world, blockOnSide);
             world.setBlock(blockOnSide, primordialFireState, 11);
             world.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
 

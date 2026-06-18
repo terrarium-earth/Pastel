@@ -23,7 +23,12 @@ public class BedrockArmorItem extends ArmorItem implements Preenchanted {
 
     @Override
     public @Nullable ResourceLocation getArmorTexture(
-        ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        ItemStack stack,
+        Entity entity,
+        EquipmentSlot slot,
+        ArmorMaterial.Layer layer,
+        boolean innerModel
+    ) {
         return PastelCommon.locate("textures/armor/bedrock_armor_main.png");
     }
 

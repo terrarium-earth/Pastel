@@ -30,8 +30,11 @@ import java.awt.*;
 
 public abstract class BidentBaseEntity extends ThrownTrident {
 
-    protected static final EntityDataAccessor<ItemStack> STACK = SynchedEntityData.defineId(
-        BidentBaseEntity.class, EntityDataSerializers.ITEM_STACK);
+    protected static final EntityDataAccessor<ItemStack> STACK = SynchedEntityData
+        .defineId(
+            BidentBaseEntity.class,
+            EntityDataSerializers.ITEM_STACK
+        );
 
     public BidentBaseEntity(EntityType<? extends ThrownTrident> entityType, Level world) {
         super(entityType, world);
@@ -47,12 +50,14 @@ public abstract class BidentBaseEntity extends ThrownTrident {
     public void setPickupItemStack(ItemStack stack) {
         setTrackedStack(stack.copy());
         super.setPickupItemStack(stack);
-        this.entityData.set(
-            TridentEntityAccessor.getLoyalty(),
-            (byte) Ench.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack)
-        );
+        this.entityData
+            .set(
+                TridentEntityAccessor.getLoyalty(),
+                (byte) Ench.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack)
+            );
         this.entityData.set(TridentEntityAccessor.getEnchanted(), stack.hasFoil());
     }
+
 //
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
@@ -84,18 +89,23 @@ public abstract class BidentBaseEntity extends ThrownTrident {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void onClientRemoval() {
         super.onClientRemoval();
         TrailRender render = getTrail();
         if (render != null) {
-            TrailLeftoverHandler.addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
+            TrailLeftoverHandler
+                .addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
             shouldRenderTrail = false;
         }
     }
 
     private boolean shouldRenderTrail = true;
+
     private TrailRender trail;
+
     public ColorGradient getGradient() {
         return new ColorGradient(
             new Color(0xCCFFF4),
@@ -108,8 +118,13 @@ public abstract class BidentBaseEntity extends ThrownTrident {
             return null;
         }
         if (trail == null) {
-            trail = new TrailRender(position(), 20, 20, 0.15f, PastelCommon.locate("textures/misc/trail/trail.png"),
-                                    RenderTypeHandler::transparent
+            trail = new TrailRender(
+                position(),
+                20,
+                20,
+                0.15f,
+                PastelCommon.locate("textures/misc/trail/trail.png"),
+                RenderTypeHandler::transparent
             ).setShrink(true).startTicking();
         }
         return trail;

@@ -12,16 +12,20 @@ import net.minecraft.world.item.ItemStack;
 public class ParticleSpawnerScreenHandler extends AbstractContainerMenu {
 
     protected final Player player;
+
     protected ParticleSpawnerBlockEntity blockEntity;
 
     public ParticleSpawnerScreenHandler(int syncId, Inventory inventory, RegistryFriendlyByteBuf buf) {
         this(
-            syncId, inventory, inventory.player.level()
-                                               .getBlockEntity(
-                                                   BlockPos.STREAM_CODEC.decode(buf),
-                                                   PastelBlockEntities.PARTICLE_SPAWNER.get()
-                                               )
-                                               .orElseThrow()
+            syncId,
+            inventory,
+            inventory.player
+                .level()
+                .getBlockEntity(
+                    BlockPos.STREAM_CODEC.decode(buf),
+                    PastelBlockEntities.PARTICLE_SPAWNER.get()
+                )
+                .orElseThrow()
         );
     }
 

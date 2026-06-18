@@ -14,25 +14,44 @@ import net.minecraft.world.item.UseAnim;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(PlayerRenderer.class)
+@Mixin(
+    PlayerRenderer.class
+)
 public class PlayerEntityRendererMixin {
 
-    @ModifyExpressionValue(method = "getArmPose", at = @At(value = "INVOKE",
-                                                           target = "Lnet/minecraft/world/item/ItemStack;" +
-                                                                    "getUseAnimation()" +
-                                                                    "Lnet/minecraft/world/item/UseAnim;"))
+    @ModifyExpressionValue(
+        method = "getArmPose", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;" + "getUseAnimation()" + "Lnet/minecraft/world/item/UseAnim;"
+        )
+    )
     private static UseAnim modifyUseAction(
-        UseAnim original, @Local ItemStack itemStack, @Local(argsOnly = true) AbstractClientPlayer player) {
+        UseAnim original,
+        @Local
+        ItemStack itemStack,
+        @Local(
+            argsOnly = true
+        )
+        AbstractClientPlayer player
+    ) {
         if (itemStack.getItem() == PastelItems.NIGHT_SALTS.get()) {
             return UseAnim.TOOT_HORN;
         }
         return original;
     }
 
-    @ModifyReturnValue(method = "getArmPose", at = @At(value = "RETURN", ordinal = 1))
+    @ModifyReturnValue(
+        method = "getArmPose", at = @At(
+            value = "RETURN", ordinal = 1
+        )
+    )
     private static HumanoidModel.ArmPose cumAction(
-        HumanoidModel.ArmPose original, @Local ItemStack itemStack,
-        @Local(argsOnly = true) AbstractClientPlayer player
+        HumanoidModel.ArmPose original,
+        @Local
+        ItemStack itemStack,
+        @Local(
+            argsOnly = true
+        )
+        AbstractClientPlayer player
     ) {
         if (itemStack.getItem() instanceof LightGreatswordItem) {
             return HumanoidModel.ArmPose.CROSSBOW_HOLD;
@@ -41,11 +60,21 @@ public class PlayerEntityRendererMixin {
         return original;
     }
 
-    @ModifyReturnValue(method = "getArmPose", at = @At(value = "TAIL"))
+    @ModifyReturnValue(
+        method = "getArmPose", at = @At(
+            value = "TAIL"
+        )
+    )
     private static HumanoidModel.ArmPose lungeAction(
-        HumanoidModel.ArmPose original, @Local(argsOnly = true) AbstractClientPlayer player) {
-        if (MiscPlayerData.get(player)
-                          .isLunging()) {
+        HumanoidModel.ArmPose original,
+        @Local(
+            argsOnly = true
+        )
+        AbstractClientPlayer player
+    ) {
+        if (MiscPlayerData
+            .get(player)
+            .isLunging()) {
             return HumanoidModel.ArmPose.BOW_AND_ARROW;
         }
 

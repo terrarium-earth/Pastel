@@ -15,8 +15,11 @@ import java.util.List;
 public class JadeWineItem extends BeverageItem {
 
     public JadeWineItem(Properties settings) {
-        super(settings.component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
-                      .component(PastelDataComponentTypes.JADE_WINE, JadeWineComponent.DEFAULT));
+        super(
+            settings
+                .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
+                .component(PastelDataComponentTypes.JADE_WINE, JadeWineComponent.DEFAULT)
+        );
     }
 
     @Override
@@ -24,12 +27,24 @@ public class JadeWineItem extends BeverageItem {
         super.appendHoverText(stack, context, tooltip, type);
         if (FermentedItem.isPreviewStack(stack)) {
             String translationKey = getDescriptionId();
-            tooltip.add(Component.translatable(translationKey + ".tooltip.preview")
-                                 .withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable(translationKey + ".tooltip.preview2")
-                                 .withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable("item.pastel.tooltip.could_use_some_sweetener")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable(translationKey + ".tooltip.preview")
+                        .withStyle(ChatFormatting.GRAY)
+                );
+            tooltip
+                .add(
+                    Component
+                        .translatable(translationKey + ".tooltip.preview2")
+                        .withStyle(ChatFormatting.GRAY)
+                );
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.tooltip.could_use_some_sweetener")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         }
     }
 

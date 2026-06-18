@@ -21,12 +21,16 @@ import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import java.util.List;
 
 public class BookTitrationBarrelFermentingPageRenderer
-    extends BookGatedRecipePageRenderer<TitrationBarrelRecipe, BookGatedRecipePage<TitrationBarrelRecipe>> {
+    extends
+    BookGatedRecipePageRenderer<TitrationBarrelRecipe, BookGatedRecipePage<TitrationBarrelRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/modonomicon/titration_barrel.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/modonomicon/titration_barrel.png"
+        );
 
     private final BookTextHolder durationText1;
+
     private final BookTextHolder durationText2;
 
     public BookTitrationBarrelFermentingPageRenderer(BookGatedRecipePage<TitrationBarrelRecipe> page) {
@@ -35,23 +39,45 @@ public class BookTitrationBarrelFermentingPageRenderer
         RecipeHolder<TitrationBarrelRecipe> recipe1 = page.getRecipe1();
         RecipeHolder<TitrationBarrelRecipe> recipe2 = page.getRecipe2();
 
-        ResourceLocation font = BookDataManager.Client.get()
-                                                      .safeFont(this.page.getBook()
-                                                                         .getFont());
-        durationText1 = recipe1 == null ? null : new BookTextHolder(TitrationBarrelRecipe.getDurationText(
-                                                                                             recipe1.value()
-                                                                                                    .getMinFermentationTimeHours(), recipe1.value()
-                                                                                                                                           .getFermentationData()
-                                                                                         )
-                                                                                         .withStyle(
-                                                                                             s -> s.withFont(font)));
-        durationText2 = recipe2 == null ? null : new BookTextHolder(TitrationBarrelRecipe.getDurationText(
-                                                                                             recipe2.value()
-                                                                                                    .getMinFermentationTimeHours(), recipe2.value()
-                                                                                                                                           .getFermentationData()
-                                                                                         )
-                                                                                         .withStyle(
-                                                                                             s -> s.withFont(font)));
+        ResourceLocation font = BookDataManager.Client
+            .get()
+            .safeFont(
+                this.page
+                    .getBook()
+                    .getFont()
+            );
+        durationText1 = recipe1 == null
+            ? null
+            : new BookTextHolder(
+                TitrationBarrelRecipe
+                    .getDurationText(
+                        recipe1
+                            .value()
+                            .getMinFermentationTimeHours(),
+                        recipe1
+                            .value()
+                            .getFermentationData()
+                    )
+                    .withStyle(
+                        s -> s.withFont(font)
+                    )
+            );
+        durationText2 = recipe2 == null
+            ? null
+            : new BookTextHolder(
+                TitrationBarrelRecipe
+                    .getDurationText(
+                        recipe2
+                            .value()
+                            .getMinFermentationTimeHours(),
+                        recipe2
+                            .value()
+                            .getFermentationData()
+                    )
+                    .withStyle(
+                        s -> s.withFont(font)
+                    )
+            );
     }
 
     @Override
@@ -61,8 +87,13 @@ public class BookTitrationBarrelFermentingPageRenderer
 
     @Override
     protected void drawRecipe(
-        GuiGraphics drawContext, RecipeHolder<TitrationBarrelRecipe> recipeEntry, int recipeX, int recipeY, int mouseX,
-        int mouseY, boolean second
+        GuiGraphics drawContext,
+        RecipeHolder<TitrationBarrelRecipe> recipeEntry,
+        int recipeX,
+        int recipeY,
+        int mouseX,
+        int mouseY,
+        boolean second
     ) {
         TitrationBarrelRecipe recipe = recipeEntry.value();
         Level world = Minecraft.getInstance().level;
@@ -86,7 +117,11 @@ public class BookTitrationBarrelFermentingPageRenderer
         int ingredientSizeWithFluid = usesFluid ? ingredientSize + 1 : ingredientSize;
         int startX = recipeX + Math.max(-5, 15 - ingredientSizeWithFluid * 10);
         int startY = recipeY + (ingredientSizeWithFluid > 3 ? 0 : 10);
-        for (int i = 0; i < ingredientSizeWithFluid; i++) {
+        for (
+            int i = 0;
+            i < ingredientSizeWithFluid;
+            i++
+        ) {
             IngredientStack currentIngredient = i == ingredientSize ? bucketStack : ingredients.get(i);
             int yOffset;
             int xOffset;
@@ -97,26 +132,62 @@ public class BookTitrationBarrelFermentingPageRenderer
                 xOffset = (i - 3) * 18;
                 yOffset = 18;
             }
-            ModonomiconHelper.renderIngredientStack(
-                drawContext, parentScreen, startX + xOffset, startY + yOffset, mouseX, mouseY, currentIngredient);
+            ModonomiconHelper
+                .renderIngredientStack(
+                    drawContext,
+                    parentScreen,
+                    startX + xOffset,
+                    startY + yOffset,
+                    mouseX,
+                    mouseY,
+                    currentIngredient
+                );
         }
 
         // the titration barrel / tapping ingredient
         if (recipe.getTappingItem() == Items.AIR) {
-            parentScreen.renderItemStack(
-                drawContext, recipeX + 54, recipeY + 20, mouseX, mouseY, recipe.getToastSymbol());
+            parentScreen
+                .renderItemStack(
+                    drawContext,
+                    recipeX + 54,
+                    recipeY + 20,
+                    mouseX,
+                    mouseY,
+                    recipe.getToastSymbol()
+                );
         } else {
-            parentScreen.renderItemStack(
-                drawContext, recipeX + 50, recipeY + 20, mouseX, mouseY, recipe.getToastSymbol());
-            parentScreen.renderItemStack(
-                drawContext, recipeX + 60, recipeY + 20, mouseX, mouseY, recipe.getTappingItem()
-                                                                               .getDefaultInstance()
-            );
+            parentScreen
+                .renderItemStack(
+                    drawContext,
+                    recipeX + 50,
+                    recipeY + 20,
+                    mouseX,
+                    mouseY,
+                    recipe.getToastSymbol()
+                );
+            parentScreen
+                .renderItemStack(
+                    drawContext,
+                    recipeX + 60,
+                    recipeY + 20,
+                    mouseX,
+                    mouseY,
+                    recipe
+                        .getTappingItem()
+                        .getDefaultInstance()
+                );
         }
 
         // the output
-        parentScreen.renderItemStack(
-            drawContext, recipeX + 78, recipeY + 10, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
+        parentScreen
+            .renderItemStack(
+                drawContext,
+                recipeX + 78,
+                recipeY + 10,
+                mouseX,
+                mouseY,
+                recipe.getResultItem(world.registryAccess())
+            );
 
         // the duration
         if (!second && durationText1 != null) {

@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 public class HoveringStatusEffect extends MobEffect {
 
     public boolean hadGravity = true;
+
     public HoveringStatusEffect(MobEffectCategory statusEffectCategory, int color) {
         super(statusEffectCategory, color);
     }
@@ -16,7 +17,7 @@ public class HoveringStatusEffect extends MobEffect {
     @Override
     public void onEffectAdded(LivingEntity livingEntity, int amplifier) {
         super.onEffectAdded(livingEntity, amplifier);
-        if(livingEntity.isNoGravity()) {
+        if (livingEntity.isNoGravity()) {
             this.hadGravity = false;
         }
         livingEntity.setNoGravity(true);

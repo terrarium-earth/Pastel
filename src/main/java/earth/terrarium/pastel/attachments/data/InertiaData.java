@@ -16,16 +16,20 @@ import java.util.Optional;
 
 public class InertiaData {
 
-    public static final AttachmentType<InertiaData> ATTACHMENT =
-        AttachmentType.builder(h -> new InertiaData((Player) h))
-                      .build();
+    public static final AttachmentType<InertiaData> ATTACHMENT = AttachmentType
+        .builder(h -> new InertiaData((Player) h))
+        .build();
 
     private static final int CAP = 12 * 3;
+
     private final Player holder;
 
     private Optional<Block> currentTarget = Optional.empty();
+
     private int stacks = 0;
+
     private float strength, lastStrength;
+
     private long minedTimeStamp;
 
     public InertiaData(Player holder) {
@@ -51,8 +55,9 @@ public class InertiaData {
             currentTarget = Optional.of(state.getBlock());
         }
 
-        if (currentTarget.map(state::is)
-                         .orElse(false)) {
+        if (currentTarget
+            .map(state::is)
+            .orElse(false)) {
             if (stacks < CAP + Math.pow(inertia, 1.5) + 2)
                 stacks += (inertia - 1) / 2 + 1;
         } else if (stacks > 0) {
@@ -70,8 +75,9 @@ public class InertiaData {
     }
 
     private void tickInner(Player player) {
-        var time = player.level()
-                         .getGameTime();
+        var time = player
+            .level()
+            .getGameTime();
         if (time - 10 > minedTimeStamp && stacks > 0) {
             stacks--;
 
@@ -93,11 +99,14 @@ public class InertiaData {
 
     public record Payload(float strength, long timeStamp) implements CustomPacketPayload {
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
-            ByteBufCodecs.FLOAT, Payload::strength,
-            ByteBufCodecs.VAR_LONG, Payload::timeStamp,
-            Payload::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.FLOAT,
+                Payload::strength,
+                ByteBufCodecs.VAR_LONG,
+                Payload::timeStamp,
+                Payload::new
+            );
 
         public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("inertia");
 
@@ -107,8 +116,9 @@ public class InertiaData {
         }
 
         public static void execute(Payload payload, IPayloadContext context) {
-            var data = context.player()
-                              .getData(ATTACHMENT);
+            var data = context
+                .player()
+                .getData(ATTACHMENT);
             data.strength = payload.strength;
             data.minedTimeStamp = payload.timeStamp();
         }

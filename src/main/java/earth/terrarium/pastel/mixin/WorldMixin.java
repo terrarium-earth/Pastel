@@ -16,7 +16,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(Level.class)
+@Mixin(
+    Level.class
+)
 public abstract class WorldMixin {
 
     @Shadow
@@ -25,20 +27,30 @@ public abstract class WorldMixin {
 
     // using a mixin additional to net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents,
     // since the fabric api event does not trigger for indirect breaks, like via projectile
-    @Inject(method = "destroyBlock", at = @At(value = "INVOKE",
-                                              target = "Lnet/minecraft/world/level/Level;getFluidState" +
-                                                       "(Lnet/minecraft/core/BlockPos;)" +
-                                                       "Lnet/minecraft/world/level/material/FluidState;"))
+    @Inject(
+        method = "destroyBlock", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getFluidState" + "(Lnet/minecraft/core/BlockPos;)" + "Lnet/minecraft/world/level/material/FluidState;"
+        )
+    )
     public void breakBlock(
-        BlockPos pos, boolean drop, Entity breakingEntity, int maxUpdateDepth, CallbackInfoReturnable<Boolean> cir,
-        @Local BlockState state
+        BlockPos pos,
+        boolean drop,
+        Entity breakingEntity,
+        int maxUpdateDepth,
+        CallbackInfoReturnable<Boolean> cir,
+        @Local
+        BlockState state
     ) {
         if (breakingEntity instanceof ServerPlayer serverPlayerEntity) {
             PastelCriteria.BLOCK_BROKEN.trigger(serverPlayerEntity, state);
         }
     }
 
-    @Inject(method = "isRainingAt", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "isRainingAt", at = @At(
+            "HEAD"
+        ), cancellable = true
+    )
     public void forcePermanentRain(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         var biome = biomeManager.getBiome(pos);
         if (biome.is(PastelBiomes.DEEP_DRIPSTONE_CAVES) || biome.is(PastelBiomes.DRAGONROT_SWAMP))

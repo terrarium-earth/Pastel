@@ -17,7 +17,9 @@ import net.minecraft.world.level.biome.Biome;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class HowlingSpireEffects {
 
     public static int spireTicks, lastSpireTicks;
@@ -25,11 +27,16 @@ public class HowlingSpireEffects {
     private static boolean initialized = false;
 
     private static final long ASH_UPDATE_INTERVAL = 1600;
+
     private static final double BASE_ASH_VELOCITY = 0.25;
+
     private static double targetAshVelocity = 0.215, lastAshVelocity = 0.215, ashScaleA = 20000, ashScaleB = 2200,
         ashScaleC = 200;
+
     private static int ashSwitchTicks = 50, ashSpawns;
+
     private static Direction.Axis ashAxis = Direction.Axis.X;
+
     private static Minecraft client = Minecraft.getInstance();
 
     public static void clientTick(ClientLevel world, Entity cameraEntity, Holder<Biome> biome) {
@@ -99,41 +106,57 @@ public class HowlingSpireEffects {
     }
 
     private static void spawnHowlingSpiresAsh(
-        Entity cameraEntity, int maxAsh, RandomSource random, ClientLevel clientWorld, Holder<Biome> biome) {
+        Entity cameraEntity,
+        int maxAsh,
+        RandomSource random,
+        ClientLevel clientWorld,
+        Holder<Biome> biome
+    ) {
         var camera = cameraEntity.position();
         var renderDistance = getRenderRadius();
         var maxSpawnDistance = Math.min(96, renderDistance) * 2;
 
-        for (int i = 0; i < maxAsh; i++) {
+        for (
+            int i = 0;
+            i < maxAsh;
+            i++
+        ) {
             var x = camera.x() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
             var y = camera.y() + random.nextInt(64) - 32;
             var z = camera.z() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
             var pos = new BlockPos((int) x, (int) y, (int) z);
 
-            if (clientWorld.getBlockState(pos)
-                           .isAir()) {
+            if (clientWorld
+                .getBlockState(pos)
+                .isAir()) {
                 clientWorld.addParticle(PastelParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
             }
         }
 
         maxSpawnDistance /= 2;
 
-        for (int i = 0; i < maxAsh; i++) {
+        for (
+            int i = 0;
+            i < maxAsh;
+            i++
+        ) {
             var x = camera.x() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
             var y = camera.y() + random.nextInt(29) - 8;
             var z = camera.z() + random.nextInt(maxSpawnDistance) - maxSpawnDistance / 2F;
             var pos = new BlockPos((int) x, (int) y, (int) z);
 
-            if (clientWorld.getBlockState(pos)
-                           .isAir()) {
+            if (clientWorld
+                .getBlockState(pos)
+                .isAir()) {
                 clientWorld.addParticle(PastelParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
             }
         }
     }
 
     public static int getRenderRadius() {
-        return (client.options.renderDistance()
-                              .get() + 1) * 16;
+        return (client.options
+            .renderDistance()
+            .get() + 1) * 16;
     }
 
 }

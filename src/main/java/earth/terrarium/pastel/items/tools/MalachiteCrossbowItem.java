@@ -18,8 +18,10 @@ import java.util.function.Predicate;
 
 public class MalachiteCrossbowItem extends CrossbowItem implements Preenchanted, ArrowheadCrossbow {
 
-    public static final Predicate<ItemStack> PROJECTILES = (stack) -> stack.is(ItemTags.ARROWS) || stack.is(
-        PastelItemTags.GLASS_ARROWS);
+    public static final Predicate<ItemStack> PROJECTILES = (stack) -> stack.is(ItemTags.ARROWS) || stack
+        .is(
+            PastelItemTags.GLASS_ARROWS
+        );
 
     public MalachiteCrossbowItem(Properties settings) {
         super(settings);
@@ -31,15 +33,17 @@ public class MalachiteCrossbowItem extends CrossbowItem implements Preenchanted,
     }
 
     public static ItemStack getFirstProjectile(ItemStack crossbow) {
-        var projectiles = crossbow.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)
-                                  .getItems();
+        var projectiles = crossbow
+            .getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)
+            .getItems();
         return projectiles.isEmpty() ? ItemStack.EMPTY : projectiles.getFirst();
     }
 
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
-        return PastelToolMaterial.MALACHITE.getRepairIngredient()
-                                           .test(ingredient) || super.isValidRepairItem(stack, ingredient);
+        return PastelToolMaterial.MALACHITE
+            .getRepairIngredient()
+            .test(ingredient) || super.isValidRepairItem(stack, ingredient);
     }
 
     @Override

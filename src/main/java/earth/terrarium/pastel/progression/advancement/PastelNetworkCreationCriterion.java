@@ -18,18 +18,31 @@ public class PastelNetworkCreationCriterion extends SimpleCriterionTrigger<Paste
     public static final ResourceLocation ID = PastelCommon.locate("pastel_network_creation");
 
     public void trigger(ServerPlayer player, ServerPastelNetwork network) {
-        this.trigger(
-            player, (conditions) -> conditions.matches(
-                network.getLoadedNodes(PastelNodeType.CONNECTION)
-                       .size(), network.getLoadedNodes(PastelNodeType.PROVIDER)
-                                       .size(),
-                network.getLoadedNodes(PastelNodeType.STORAGE)
-                       .size(), network.getLoadedNodes(PastelNodeType.SENDER)
-                                       .size(), network.getLoadedNodes(PastelNodeType.GATHER)
-                                                       .size(), network.getLoadedNodes(PastelNodeType.BUFFER)
-                                                                       .size()
-            )
-        );
+        this
+            .trigger(
+                player,
+                (conditions) -> conditions
+                    .matches(
+                        network
+                            .getLoadedNodes(PastelNodeType.CONNECTION)
+                            .size(),
+                        network
+                            .getLoadedNodes(PastelNodeType.PROVIDER)
+                            .size(),
+                        network
+                            .getLoadedNodes(PastelNodeType.STORAGE)
+                            .size(),
+                        network
+                            .getLoadedNodes(PastelNodeType.SENDER)
+                            .size(),
+                        network
+                            .getLoadedNodes(PastelNodeType.GATHER)
+                            .size(),
+                        network
+                            .getLoadedNodes(PastelNodeType.BUFFER)
+                            .size()
+                    )
+            );
     }
 
     @Override
@@ -48,39 +61,56 @@ public class PastelNetworkCreationCriterion extends SimpleCriterionTrigger<Paste
         MinMaxBounds.Ints bufferNodes
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("total_nodes", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::totalNodes),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("connection_nodes", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::connectionNodes),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("provider_nodes", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::providerNodes),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("storage_nodes", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::storageNodes),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("sender_nodes", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::senderNodes),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("gather_nodes", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::gatherNodes),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("buffer_nodes", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::bufferNodes)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
-
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("total_nodes", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::totalNodes),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("connection_nodes", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::connectionNodes),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("provider_nodes", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::providerNodes),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("storage_nodes", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::storageNodes),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("sender_nodes", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::senderNodes),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("gather_nodes", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::gatherNodes),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("buffer_nodes", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::bufferNodes)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(
-            int connectionNodes, int providerNodes, int storageNodes, int senderNodes, int gatherNodes,
+            int connectionNodes,
+            int providerNodes,
+            int storageNodes,
+            int senderNodes,
+            int gatherNodes,
             int bufferNodes
         ) {
-            return this.totalNodes.matches(
-                connectionNodes + providerNodes + storageNodes + senderNodes + gatherNodes) &&
-                   this.connectionNodes.matches(connectionNodes) && this.providerNodes.matches(providerNodes) &&
-                   this.storageNodes.matches(storageNodes) && this.senderNodes.matches(senderNodes) &&
-                   this.gatherNodes.matches(gatherNodes) && this.bufferNodes.matches(bufferNodes);
+            return this.totalNodes
+                .matches(
+                    connectionNodes + providerNodes + storageNodes + senderNodes + gatherNodes
+                ) && this.connectionNodes.matches(connectionNodes) && this.providerNodes
+                    .matches(providerNodes) && this.storageNodes.matches(storageNodes) && this.senderNodes
+                        .matches(senderNodes) && this.gatherNodes.matches(gatherNodes) && this.bufferNodes
+                            .matches(bufferNodes);
         }
 
     }

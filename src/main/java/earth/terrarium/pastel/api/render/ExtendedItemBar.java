@@ -17,19 +17,31 @@ public interface ExtendedItemBar {
         return true;
     }
 
-    @NotNull
-    BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index);
+    @NotNull BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index);
 
     record BarSignature(
-        int xPos, int yPos, int length, int fill, int fillHeight, int fillColor, boolean drawBackground,
-        int backgroundHeight, int backgroundColor
+        int xPos,
+        int yPos,
+        int length,
+        int fill,
+        int fillHeight,
+        int fillColor,
+        boolean drawBackground,
+        int backgroundHeight,
+        int backgroundColor
     ) {
         public BarSignature(int xPos, int yPos, int length, int fill, int fillHeight, int fillColor) {
             this(xPos, yPos, length, fill, fillHeight, fillColor, false, 0, 0);
         }
 
         public BarSignature(
-            int xPos, int yPos, int length, int fill, int fillHeight, int fillColor, int backgroundHeight,
+            int xPos,
+            int yPos,
+            int length,
+            int fill,
+            int fillHeight,
+            int fillColor,
+            int backgroundHeight,
             int backgroundColor
         ) {
             this(xPos, yPos, length, fill, fillHeight, fillColor, true, backgroundHeight, backgroundColor);

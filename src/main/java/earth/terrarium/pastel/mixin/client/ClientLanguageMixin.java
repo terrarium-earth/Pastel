@@ -18,7 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Mixin(ClientLanguage.class)
+@Mixin(
+    ClientLanguage.class
+)
 public class ClientLanguageMixin {
 
     @Mutable
@@ -26,8 +28,17 @@ public class ClientLanguageMixin {
     @Final
     private Map<String, String> storage;
 
-    @Inject(method = "Lnet/minecraft/client/resources/language/ClientLanguage;<init>(Ljava/util/Map;ZLjava/util/Map;)V", at = @At("TAIL"))
-    private void addTranslations(Map<String,String> translations, boolean rightToLeft, Map<String, Component> componentStorage, CallbackInfo ci) {
+    @Inject(
+        method = "Lnet/minecraft/client/resources/language/ClientLanguage;<init>(Ljava/util/Map;ZLjava/util/Map;)V", at = @At(
+            "TAIL"
+        )
+    )
+    private void addTranslations(
+        Map<String, String> translations,
+        boolean rightToLeft,
+        Map<String, Component> componentStorage,
+        CallbackInfo ci
+    ) {
         Calendar calendar = Calendar.getInstance();
         if (calendar.get(Calendar.MONTH) != Calendar.APRIL || calendar.get(Calendar.DAY_OF_MONTH) != 1) return;
 
@@ -41,8 +52,8 @@ public class ClientLanguageMixin {
         builder.put("item.pastel.shimmerstone_gem", "Stimmerstone Gem");
         builder.put("block.pastel.shimmerstone_block", "Block of Stimmerstone");
         builder.put("block.pastel.amethyst_glass_arrow", "Chlorophyte Bullet");
-        builder.put("pastel.tooltip.crystal_armor_empowered","+あたし");
-        builder.put("item.pastel.celestial_pocketwatch","Luna Dial");
+        builder.put("pastel.tooltip.crystal_armor_empowered", "+あたし");
+        builder.put("item.pastel.celestial_pocketwatch", "Luna Dial");
 
         builder.put("item.pastel.mermaids_gem", translations.get("item.pastel.storm_stone"));
         builder.put("item.pastel.storm_stone", translations.get("item.pastel.mermaids_gem"));
@@ -50,23 +61,25 @@ public class ClientLanguageMixin {
         this.storage = builder;
     }
 
-    @Unique
-    private static String getCrystallarieuaeuieueum() {
-        List<String> possibilities = new ArrayList<>() {{
-            add("Crystallarieum");
-            add("Crystallareium");
-            add("Crystallerium");
-            add("Crystallarium");
-            add("Crystallium");
-            add("Crystalleium");
-            add("Crystallum");
-            add("Crystallarieium");
-            add("Christalerium");
-        }};
-        char c = Minecraft.getInstance()
-                          .getUser()
-                          .getName()
-                          .toCharArray()[0];
+    @Unique private static String getCrystallarieuaeuieueum() {
+        List<String> possibilities = new ArrayList<>() {
+            {
+                add("Crystallarieum");
+                add("Crystallareium");
+                add("Crystallerium");
+                add("Crystallarium");
+                add("Crystallium");
+                add("Crystalleium");
+                add("Crystallum");
+                add("Crystallarieium");
+                add("Christalerium");
+            }
+        };
+        char c = Minecraft
+            .getInstance()
+            .getUser()
+            .getName()
+            .toCharArray()[0];
         return possibilities.get((int) c % possibilities.size());
     }
 

@@ -32,8 +32,11 @@ public interface POIMemorized {
 
     default void readPOIPosFromNbt(CompoundTag nbt) {
         if (nbt.contains(POI_POS_KEY)) {
-            setPOIPos(NbtUtils.readBlockPos(nbt, POI_POS_KEY)
-                              .orElse(null));
+            setPOIPos(
+                NbtUtils
+                    .readBlockPos(nbt, POI_POS_KEY)
+                    .orElse(null)
+            );
         }
     }
 
@@ -42,21 +45,30 @@ public interface POIMemorized {
         if (poiPos == null) {
             return false;
         }
-        Optional<Holder<PoiType>> type = world.getPoiManager()
-                                              .getType(poiPos);
-        return type.map(pointOfInterestTypeRegistryEntry -> pointOfInterestTypeRegistryEntry.is(
-                       PastelPointOfInterestTypeTags.LIZARD_DENS))
-                   .orElse(false);
+        Optional<Holder<PoiType>> type = world
+            .getPoiManager()
+            .getType(poiPos);
+        return type
+            .map(
+                pointOfInterestTypeRegistryEntry -> pointOfInterestTypeRegistryEntry
+                    .is(
+                        PastelPointOfInterestTypeTags.LIZARD_DENS
+                    )
+            )
+            .orElse(false);
     }
 
     default @Nullable BlockPos findNearestPOI(ServerLevel world, BlockPos pos, int maxDistance) {
         PoiManager pointOfInterestStorage = world.getPoiManager();
 
-        return pointOfInterestStorage.findClosest(
-                                         (poiType) -> poiType.is(getPOITag()),
-                                         pos, maxDistance, PoiManager.Occupancy.ANY
-                                     )
-                                     .orElse(null);
+        return pointOfInterestStorage
+            .findClosest(
+                (poiType) -> poiType.is(getPOITag()),
+                pos,
+                maxDistance,
+                PoiManager.Occupancy.ANY
+            )
+            .orElse(null);
     }
 
 }

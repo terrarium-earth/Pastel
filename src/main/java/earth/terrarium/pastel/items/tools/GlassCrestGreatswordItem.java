@@ -43,32 +43,50 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class GlassCrestGreatswordItem extends GreatswordItem
-    implements SplitDamageHandler, ExtendedItemBar, SlotBackgroundEffect, InkPowered {
+    implements
+    SplitDamageHandler,
+    ExtendedItemBar,
+    SlotBackgroundEffect,
+    InkPowered {
 
     private static final InkCost GROUND_SLAM_COST = new InkCost(InkColors.WHITE, 25);
+
     public static final float MAGIC_DAMAGE_SHARE = 0.25F;
+
     public final int GROUND_SLAM_CHARGE_TICKS = 32;
 
     public GlassCrestGreatswordItem(
-        Tier material, int attackDamage, float attackSpeed, float extraReach, Properties settings) {
+        Tier material,
+        int attackDamage,
+        float attackSpeed,
+        float extraReach,
+        Properties settings
+    ) {
         super(material, attackDamage, attackSpeed, extraReach, settings);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable(
-            "item.pastel.glass_crest_ultra_greatsword.tooltip",
-            (int) (MAGIC_DAMAGE_SHARE * 100)
-        ));
+        tooltip
+            .add(
+                Component
+                    .translatable(
+                        "item.pastel.glass_crest_ultra_greatsword.tooltip",
+                        (int) (MAGIC_DAMAGE_SHARE * 100)
+                    )
+            );
         tooltip.add(Component.translatable("item.pastel.glass_crest_ultra_greatsword.tooltip2"));
         addInkPoweredTooltip(tooltip);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        if (getGroundSlamStrength(world.registryAccess(), user.getItemInHand(hand)) > 0 && InkPowered.tryDrainEnergy(
-            user, GROUND_SLAM_COST)) {
+        if (getGroundSlamStrength(world.registryAccess(), user.getItemInHand(hand)) > 0 && InkPowered
+            .tryDrainEnergy(
+                user,
+                GROUND_SLAM_COST
+            )) {
             if (world.isClientSide) {
                 startSoundInstance(user);
             }
@@ -92,12 +110,21 @@ public class GlassCrestGreatswordItem extends GreatswordItem
         super.onUseTick(world, user, stack, remainingUseTicks);
         if (world.isClientSide) {
             RandomSource random = world.random;
-            for (int i = 0; i < (GROUND_SLAM_CHARGE_TICKS - remainingUseTicks) / 8; i++) {
-                world.addParticle(
-                    ParticleTypes.INSTANT_EFFECT,
-                    user.getRandomX(1.0), user.getY(), user.getRandomZ(1.0),
-                    random.nextDouble() * 5.0D - 2.5D, random.nextDouble() * 1.2D, random.nextDouble() * 5.0D - 2.5D
-                );
+            for (
+                int i = 0;
+                i < (GROUND_SLAM_CHARGE_TICKS - remainingUseTicks) / 8;
+                i++
+            ) {
+                world
+                    .addParticle(
+                        ParticleTypes.INSTANT_EFFECT,
+                        user.getRandomX(1.0),
+                        user.getY(),
+                        user.getRandomZ(1.0),
+                        random.nextDouble() * 5.0D - 2.5D,
+                        random.nextDouble() * 1.2D,
+                        random.nextDouble() * 5.0D - 2.5D
+                    );
             }
         }
     }
@@ -121,32 +148,59 @@ public class GlassCrestGreatswordItem extends GreatswordItem
 
     public void performGroundSlam(Level level, Vec3 pos, LivingEntity attacker, float strength) {
         level.gameEvent(attacker, GameEvent.HIT_GROUND, BlockPos.containing(pos.x, pos.y, pos.z));
-        MoonstoneStrike.create(
-            level, attacker, null, attacker.getX(), attacker.getY(), attacker.getZ(), strength, 1.75F,
-            Support.varFloat(level.random, 0.2F) - 0.1F);
-        level.playSound(null, attacker.blockPosition(), PastelSounds.GROUND_SLAM, SoundSource.PLAYERS, 1.1F, Support.varFloatCentered(level.random, 0.1F));
+        MoonstoneStrike
+            .create(
+                level,
+                attacker,
+                null,
+                attacker.getX(),
+                attacker.getY(),
+                attacker.getZ(),
+                strength,
+                1.75F,
+                Support.varFloat(level.random, 0.2F) - 0.1F
+            );
+        level
+            .playSound(
+                null,
+                attacker.blockPosition(),
+                PastelSounds.GROUND_SLAM,
+                SoundSource.PLAYERS,
+                1.1F,
+                Support.varFloatCentered(level.random, 0.1F)
+            );
 
         if (attacker instanceof ServerPlayer serverPlayer) {
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void startSoundInstance(Player user) {
-        Minecraft.getInstance()
-                 .getSoundManager()
-                 .play(new GreatswordChargingSoundInstance(user, this.GROUND_SLAM_CHARGE_TICKS));
+        Minecraft
+            .getInstance()
+            .getSoundManager()
+            .play(new GreatswordChargingSoundInstance(user, this.GROUND_SLAM_CHARGE_TICKS));
     }
 
     @Override
     public DamageComposition getDamageComposition(
-        LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
+        LivingEntity attacker,
+        LivingEntity target,
+        ItemStack stack,
+        float damage
+    ) {
         DamageComposition composition = new DamageComposition();
         composition.addPlayerOrEntity(attacker, damage * (1 - MAGIC_DAMAGE_SHARE));
-        composition.add(
-            attacker.damageSources()
-                    .magic(), damage * MAGIC_DAMAGE_SHARE
-        );
+        composition
+            .add(
+                attacker
+                    .damageSources()
+                    .magic(),
+                damage * MAGIC_DAMAGE_SHARE
+            );
         return composition;
     }
 
@@ -183,9 +237,10 @@ public class GlassCrestGreatswordItem extends GreatswordItem
         if (activeStack != stack)
             return ExtendedItemBar.PASS;
 
-
-        var progress = Math.round(
-            Mth.clampedLerp(0, 13, ((float) player.getTicksUsingItem() / GROUND_SLAM_CHARGE_TICKS)));
+        var progress = Math
+            .round(
+                Mth.clampedLerp(0, 13, ((float) player.getTicksUsingItem() / GROUND_SLAM_CHARGE_TICKS))
+            );
         return new BarSignature(2, 13, 13, progress, 1, 0xFFFFFFFF, 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
     }
 

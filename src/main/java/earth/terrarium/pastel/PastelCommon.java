@@ -100,13 +100,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Mod(PastelCommon.MOD_ID)
+@Mod(
+    PastelCommon.MOD_ID
+)
 public class PastelCommon {
 
     public static final String MOD_ID = "pastel";
 
     public static final Logger LOGGER = LoggerFactory.getLogger("pastel");
+
     public static final Map<ResourceLocation, TagKey<Item>> CACHED_ITEM_TAG_MAP = new HashMap<>();
+
     public static PastelConfig CONFIG;
 
     public static void logInfo(String message) {
@@ -143,8 +147,9 @@ public class PastelCommon {
         //Set up config
         logInfo("Loading config file...");
         AutoConfig.register(PastelConfig.class, JanksonConfigSerializer::new);
-        CONFIG = AutoConfig.getConfigHolder(PastelConfig.class)
-                           .getConfig();
+        CONFIG = AutoConfig
+            .getConfigHolder(PastelConfig.class)
+            .getConfig();
         logInfo("Finished loading config file.");
     }
 
@@ -247,7 +252,6 @@ public class PastelCommon {
         PastelItemSubPredicateTypes.register(pastelBus);
         PastelEntitySubPredicateTypes.register(pastelBus);
 
-
         logInfo("Registering Entities...");
         PastelTrackedDataHandlers.register(pastelBus);
         PastelEntityTypes.register(pastelBus);
@@ -265,13 +269,15 @@ public class PastelCommon {
         logInfo("Registering Networking Packets...");
         pastelBus.addListener(PastelC2SPackets::register);
 
-        pastelBus.addListener(
-            RegisterPayloadHandlersEvent.class, (event) -> {
-                PayloadRegistrar registrar = event.registrar("1");
+        pastelBus
+            .addListener(
+                RegisterPayloadHandlersEvent.class,
+                (event) -> {
+                    PayloadRegistrar registrar = event.registrar("1");
 
-                PastelS2CPackets.register(registrar);
-            }
-        );
+                    PastelS2CPackets.register(registrar);
+                }
+            );
 
         logInfo("Registering Data Loaders...");
         NeoForge.EVENT_BUS.addListener(PastelCommon::registerReloadListeners);
@@ -291,7 +297,6 @@ public class PastelCommon {
         // These need to be done after deferred registries are done registering
         // They do not use the Registry system but depend on some registries
         pastelBus.addListener(PastelCommon::registerDispenserLikeBehaviors);
-
 
         logInfo("Registering Resource Conditions...");
         PastelResourceConditions.register(pastelBus);
@@ -319,11 +324,13 @@ public class PastelCommon {
 
         new PastelClient(pastelBus, container);
 
-        VersionChangeHelper.registerPlayerListener(
-            MOD_ID, (modId, from, to, player) -> {
-                DatabankUtils.recheckAdvancements(player);
-            }
-        );
+        VersionChangeHelper
+            .registerPlayerListener(
+                MOD_ID,
+                (modId, from, to, player) -> {
+                    DatabankUtils.recheckAdvancements(player);
+                }
+            );
     }
 
     private static void registerReloadListeners(AddReloadListenerEvent event) {
@@ -344,22 +351,24 @@ public class PastelCommon {
      * since PastelCommon.getSidedServer() is null
      */
     public static Optional<RecipeManager> getRecipeManager(@Nullable Level world) {
-        return Optional.ofNullable(world)
-                       .map(Level::getRecipeManager)
-                       .or(() -> Optional.ofNullable(PastelCommon.getSidedServer())
-                                         .map(MinecraftServer::getRecipeManager));
+        return Optional
+            .ofNullable(world)
+            .map(Level::getRecipeManager)
+            .or(
+                () -> Optional
+                    .ofNullable(PastelCommon.getSidedServer())
+                    .map(MinecraftServer::getRecipeManager)
+            );
     }
 
-    @Nullable
-    public static RegistryAccess getRegistryAccess() {
+    @Nullable public static RegistryAccess getRegistryAccess() {
         if (getSidedServer() == null)
             return null;
 
         return getSidedServer().registryAccess();
     }
 
-    @Nullable
-    public static MinecraftServer getSidedServer() {
+    @Nullable public static MinecraftServer getSidedServer() {
         if (FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
             return ServerLifecycleHooks.getCurrentServer();
         } else {
@@ -370,23 +379,27 @@ public class PastelCommon {
     // you'd think this would be simple. you would be wrong. imbrifer is the overworld but down, same with melochites
     // and the presruin dimension
     public static boolean isSameDimension(Level level1, Level level2) {
-        return level1.dimension()
-                     .equals(level2.dimension())
-               || level1.dimension()
-                        .equals(PastelLevels.DIMENSION_KEY) && level2.dimension()
-                                                                     .equals(Level.OVERWORLD)
-               || level1.dimension()
-                        .equals(Level.OVERWORLD) && level2.dimension()
-                                                          .equals(PastelLevels.DIMENSION_KEY);
+        return level1
+            .dimension()
+            .equals(level2.dimension()) || level1
+                .dimension()
+                .equals(PastelLevels.DIMENSION_KEY) && level2
+                    .dimension()
+                    .equals(Level.OVERWORLD) || level1
+                        .dimension()
+                        .equals(Level.OVERWORLD) && level2
+                            .dimension()
+                            .equals(PastelLevels.DIMENSION_KEY);
     }
 
     public static boolean isSameDimension(Level level, String resourceLoc) {
         ResourceLocation resourceLocation = ResourceLocation.parse(resourceLoc);
-        return level.dimension()
-                    .location() == resourceLocation ||
-               resourceLoc.equals("minecraft:overworld") && level.dimension()
-                                                                 .equals(PastelLevels.DIMENSION_KEY) ||
-               resourceLoc.equals("pastel:imbrifer") && level.dimension()
-                                                             .equals(Level.OVERWORLD);
+        return level
+            .dimension()
+            .location() == resourceLocation || resourceLoc.equals("minecraft:overworld") && level
+                .dimension()
+                .equals(PastelLevels.DIMENSION_KEY) || resourceLoc.equals("pastel:imbrifer") && level
+                    .dimension()
+                    .equals(Level.OVERWORLD);
     }
 }

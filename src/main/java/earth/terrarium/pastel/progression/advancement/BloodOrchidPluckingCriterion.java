@@ -25,13 +25,18 @@ public class BloodOrchidPluckingCriterion extends SimpleCriterionTrigger<BloodOr
     }
 
     public record Conditions(Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance {
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
-                                                                                                                                         .forGetter(Conditions::player)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        BloodOrchidPluckingCriterion.Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        EntityPredicate.ADVANCEMENT_CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player)
+                    )
+                    .apply(
+                        instance,
+                        BloodOrchidPluckingCriterion.Conditions::new
+                    )
+            );
     }
 }

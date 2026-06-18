@@ -16,14 +16,24 @@ public class CraftingBlockLootTables extends BlockLootSubProvider {
         super(Set.of(), FeatureFlags.DEFAULT_FLAGS, registries);
     }
 
-    private static final List<Block> dropSelfBlocks = List.of(
-        PastelBlocks.PEDESTAL_BASIC_AMETHYST.get(), PastelBlocks.PEDESTAL_BASIC_TOPAZ.get(),
-        PastelBlocks.PEDESTAL_BASIC_CITRINE.get(),
-        PastelBlocks.PEDESTAL_ALL_BASIC.get(), PastelBlocks.PEDESTAL_ONYX.get(), PastelBlocks.PEDESTAL_MOONSTONE.get(),
-        PastelBlocks.FUSION_SHRINE_CALCITE.get(), PastelBlocks.FUSION_SHRINE_BASALT.get(), PastelBlocks.ENCHANTER.get(),
-        PastelBlocks.POTION_WORKSHOP.get(), PastelBlocks.SPIRIT_INSTILLER.get(), PastelBlocks.CRYSTALLARIEUM.get(),
-        PastelBlocks.CINDERHEARTH.get(), PastelBlocks.COLOR_PICKER.get(), PastelBlocks.TITRATION_BARREL.get()
-    );
+    private static final List<Block> dropSelfBlocks = List
+        .of(
+            PastelBlocks.PEDESTAL_BASIC_AMETHYST.get(),
+            PastelBlocks.PEDESTAL_BASIC_TOPAZ.get(),
+            PastelBlocks.PEDESTAL_BASIC_CITRINE.get(),
+            PastelBlocks.PEDESTAL_ALL_BASIC.get(),
+            PastelBlocks.PEDESTAL_ONYX.get(),
+            PastelBlocks.PEDESTAL_MOONSTONE.get(),
+            PastelBlocks.FUSION_SHRINE_CALCITE.get(),
+            PastelBlocks.FUSION_SHRINE_BASALT.get(),
+            PastelBlocks.ENCHANTER.get(),
+            PastelBlocks.POTION_WORKSHOP.get(),
+            PastelBlocks.SPIRIT_INSTILLER.get(),
+            PastelBlocks.CRYSTALLARIEUM.get(),
+            PastelBlocks.CINDERHEARTH.get(),
+            PastelBlocks.COLOR_PICKER.get(),
+            PastelBlocks.TITRATION_BARREL.get()
+        );
 
     @Override
     protected Iterable<Block> getKnownBlocks() {

@@ -10,14 +10,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class EggLayingWoolyPigEntityRenderer
-    extends MobRenderer<EggLayingWoolyPigEntity, EggLayingWoolyPigEntityModel> {
+    extends
+    MobRenderer<EggLayingWoolyPigEntity, EggLayingWoolyPigEntityModel> {
 
-    public static final ResourceLocation TEXTURE = PastelCommon.locate(
-        "textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig.png");
-    public static final ResourceLocation TEXTURE_BLINKING = PastelCommon.locate(
-        "textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig_blink.png");
+    public static final ResourceLocation TEXTURE = PastelCommon
+        .locate(
+            "textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig.png"
+        );
+
+    public static final ResourceLocation TEXTURE_BLINKING = PastelCommon
+        .locate(
+            "textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig_blink.png"
+        );
 
     public EggLayingWoolyPigEntityRenderer(EntityRendererProvider.Context context) {
         super(context, new EggLayingWoolyPigEntityModel(context.bakeLayer(PastelModelLayers.WOOLY_PIG)), 0.6F);
@@ -26,9 +34,11 @@ public class EggLayingWoolyPigEntityRenderer
 
     @Override
     public ResourceLocation getTextureLocation(EggLayingWoolyPigEntity entity) {
-        return (entity.getId() - entity.level()
-                                       .getGameTime()) % 120 == 0 ? TEXTURE_BLINKING
-                                                                  : TEXTURE; // based on the entities' id, so not all
+        return (entity.getId() - entity
+            .level()
+            .getGameTime()) % 120 == 0
+                ? TEXTURE_BLINKING
+                : TEXTURE; // based on the entities' id, so not all
         // blink at the same time
     }
 

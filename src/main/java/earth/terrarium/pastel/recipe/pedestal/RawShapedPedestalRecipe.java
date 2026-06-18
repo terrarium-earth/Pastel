@@ -21,31 +21,44 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class RawShapedPedestalRecipe {
-    public static final MapCodec<RawShapedPedestalRecipe> CODEC = RawShapedPedestalRecipe.Data.CODEC.flatXmap(
-        RawShapedPedestalRecipe::fromData,
-        (recipe) -> recipe.data.map(DataResult::success)
-                               .orElseGet(() -> DataResult.error(() -> "Cannot encode unpacked recipe"))
-    );
+    public static final MapCodec<RawShapedPedestalRecipe> CODEC = RawShapedPedestalRecipe.Data.CODEC
+        .flatXmap(
+            RawShapedPedestalRecipe::fromData,
+            (recipe) -> recipe.data
+                .map(DataResult::success)
+                .orElseGet(() -> DataResult.error(() -> "Cannot encode unpacked recipe"))
+        );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, RawShapedPedestalRecipe> STREAM_CODEC
-        = StreamCodec.ofMember(RawShapedPedestalRecipe::writeToBuf, RawShapedPedestalRecipe::readFromBuf);
+    public static final StreamCodec<RegistryFriendlyByteBuf, RawShapedPedestalRecipe> STREAM_CODEC = StreamCodec
+        .ofMember(RawShapedPedestalRecipe::writeToBuf, RawShapedPedestalRecipe::readFromBuf);
 
     private final int width;
+
     private final int height;
+
     private final NonNullList<IngredientStack> ingredients;
+
     private final Optional<Data> data;
+
     private final int ingredientCount;
+
     private final boolean symmetrical;
 
     public RawShapedPedestalRecipe(
-        int width, int height, NonNullList<IngredientStack> ingredients, Optional<Data> data) {
+        int width,
+        int height,
+        NonNullList<IngredientStack> ingredients,
+        Optional<Data> data
+    ) {
         this.width = width;
         this.height = height;
         this.ingredients = ingredients;
         this.data = data;
         int i = 0;
 
-        for (IngredientStack ingredient : ingredients) {
+        for (
+            IngredientStack ingredient : ingredients
+        ) {
             if (!ingredient.isEmpty()) {
                 ++i;
             }
@@ -71,15 +84,25 @@ public class RawShapedPedestalRecipe {
         NonNullList<IngredientStack> defaultedList = NonNullList.withSize(i * j, IngredientStack.EMPTY);
         CharSet charSet = new CharArraySet(data.key.keySet());
 
-        for (int k = 0; k < strings.length; ++k) {
+        for (
+            int k = 0;
+            k < strings.length;
+            ++k
+        ) {
             String string = strings[k];
 
-            for (int l = 0; l < string.length(); ++l) {
+            for (
+                int l = 0;
+                l < string.length();
+                ++l
+            ) {
                 char c = string.charAt(l);
                 IngredientStack ingredient = c == ' ' ? IngredientStack.EMPTY : data.key.get(c);
                 if (ingredient == null) {
-                    return DataResult.error(
-                        () -> "Pattern references symbol '" + c + "' but it's not defined in the key");
+                    return DataResult
+                        .error(
+                            () -> "Pattern references symbol '" + c + "' but it's not defined in the key"
+                        );
                 }
 
                 charSet.remove(c);
@@ -100,7 +123,11 @@ public class RawShapedPedestalRecipe {
         int k = 0;
         int l = 0;
 
-        for (int m = 0; m < pattern.size(); ++m) {
+        for (
+            int m = 0;
+            m < pattern.size();
+            ++m
+        ) {
             String string = pattern.get(m);
             i = Math.min(i, findFirstSymbol(string));
             int n = findLastSymbol(string);
@@ -121,7 +148,11 @@ public class RawShapedPedestalRecipe {
         } else {
             String[] strings = new String[pattern.size() - l - k];
 
-            for (int o = 0; o < strings.length; ++o) {
+            for (
+                int o = 0;
+                o < strings.length;
+                ++o
+            ) {
                 strings[o] = (pattern.get(o + k)).substring(i, j + 1);
             }
 
@@ -131,13 +162,21 @@ public class RawShapedPedestalRecipe {
 
     private static int findFirstSymbol(String line) {
         int i;
-        for (i = 0; i < line.length() && line.charAt(i) == ' '; ++i) ;
+        for (
+            i = 0;
+            i < line.length() && line.charAt(i) == ' ';
+            ++i
+        );
         return i;
     }
 
     private static int findLastSymbol(String line) {
         int i;
-        for (i = line.length() - 1; i >= 0 && line.charAt(i) == ' '; --i) ;
+        for (
+            i = line.length() - 1;
+            i >= 0 && line.charAt(i) == ' ';
+            --i
+        );
         return i;
     }
 
@@ -157,8 +196,16 @@ public class RawShapedPedestalRecipe {
     }
 
     public boolean matches(CraftingInput input, boolean mirrored) {
-        for (int i = 0; i < this.height; ++i) {
-            for (int j = 0; j < this.width; ++j) {
+        for (
+            int i = 0;
+            i < this.height;
+            ++i
+        ) {
+            for (
+                int j = 0;
+                j < this.width;
+                ++j
+            ) {
                 IngredientStack ingredient;
                 if (mirrored) {
                     ingredient = this.ingredients.get(this.width - j - 1 + i * this.width);
@@ -180,7 +227,9 @@ public class RawShapedPedestalRecipe {
         buf.writeVarInt(this.width);
         buf.writeVarInt(this.height);
 
-        for (IngredientStack ingredient : this.ingredients) {
+        for (
+            IngredientStack ingredient : this.ingredients
+        ) {
             IngredientStack.STREAM_CODEC.encode(buf, ingredient);
         }
 
@@ -208,47 +257,62 @@ public class RawShapedPedestalRecipe {
 
     public record Data(Map<Character, IngredientStack> key, List<String> pattern) {
 
-        private static final Codec<List<String>> PATTERN_CODEC = Codec.STRING.listOf()
-                                                                             .comapFlatMap(
-                                                                                 (pattern) -> {
-                                                                                     if (pattern.isEmpty())
-                                                                                         return DataResult.error(
-                                                                                             () -> "Invalid pattern: " +
-                                                                                                   "empty pattern not" +
-                                                                                                   " allowed");
-                                                                                     int i = pattern.getFirst()
-                                                                                                    .length();
-                                                                                     for (String string : pattern)
-                                                                                         if (i != string.length())
-                                                                                             return DataResult.error(
-                                                                                                 () -> "Invalid " +
-                                                                                                       "pattern: each" +
-                                                                                                       " row must be " +
-                                                                                                       "the same " +
-                                                                                                       "width");
-                                                                                     return DataResult.success(pattern);
-                                                                                 }, Function.identity()
-                                                                             );
+        private static final Codec<List<String>> PATTERN_CODEC = Codec.STRING
+            .listOf()
+            .comapFlatMap(
+                (pattern) -> {
+                    if (pattern.isEmpty())
+                        return DataResult
+                            .error(
+                                () -> "Invalid pattern: " + "empty pattern not" + " allowed"
+                            );
+                    int i = pattern
+                        .getFirst()
+                        .length();
+                    for (
+                        String string : pattern
+                    )
+                        if (i != string.length())
+                            return DataResult
+                                .error(
+                                    () -> "Invalid " + "pattern: each" + " row must be " + "the same " + "width"
+                                );
+                    return DataResult.success(pattern);
+                },
+                Function.identity()
+            );
 
-        private static final Codec<Character> KEY_ENTRY_CODEC = Codec.STRING.comapFlatMap(
-            keyEntry -> {
-                if (keyEntry.length() != 1)
-                    return DataResult.error(
-                        () -> "Invalid key entry: '" + keyEntry + "' is an invalid symbol (must be 1 character only).");
-                return " ".equals(keyEntry) ? DataResult.error(() -> "Invalid key entry: ' ' is a reserved symbol.")
-                                            : DataResult.success(keyEntry.charAt(0));
-            }, String::valueOf
-        );
+        private static final Codec<Character> KEY_ENTRY_CODEC = Codec.STRING
+            .comapFlatMap(
+                keyEntry -> {
+                    if (keyEntry.length() != 1)
+                        return DataResult
+                            .error(
+                                () -> "Invalid key entry: '" + keyEntry + "' is an invalid symbol (must be 1 character only)."
+                            );
+                    return " ".equals(keyEntry)
+                        ? DataResult.error(() -> "Invalid key entry: ' ' is a reserved symbol.")
+                        : DataResult.success(keyEntry.charAt(0));
+                },
+                String::valueOf
+            );
 
-        public static final MapCodec<Data> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                         ExtraCodecs.strictUnboundedMap(KEY_ENTRY_CODEC, IngredientStack.CODEC)
-                                                                                                    .fieldOf("key")
-                                                                                                    .forGetter((data) -> data.key),
-                                                                                         PATTERN_CODEC.fieldOf(
-                                                                                             "pattern")
-                                                                                                      .forGetter((data) -> data.pattern)
-                                                                                     )
-                                                                                     .apply(i, Data::new));
+        public static final MapCodec<Data> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        ExtraCodecs
+                            .strictUnboundedMap(KEY_ENTRY_CODEC, IngredientStack.CODEC)
+                            .fieldOf("key")
+                            .forGetter((data) -> data.key),
+                        PATTERN_CODEC
+                            .fieldOf(
+                                "pattern"
+                            )
+                            .forGetter((data) -> data.pattern)
+                    )
+                    .apply(i, Data::new)
+            );
 
     }
 

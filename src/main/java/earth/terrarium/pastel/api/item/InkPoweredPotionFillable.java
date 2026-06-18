@@ -21,11 +21,15 @@ public interface InkPoweredPotionFillable {
     // calculated once and then stored in the items nbt for quick lookup and nicer modifiability
     // via commands or special loot (so ones found in dungeon chests can be cheaper!)
     default long adjustFinalCostFor(@NotNull InkPoweredStatusEffectInstance instance) {
-        return (long) Math.pow(
-            instance.getInkCost()
-                    .cost(), 1 + instance.getStatusEffectInstance()
-                                         .getAmplifier()
-        );
+        return (long) Math
+            .pow(
+                instance
+                    .getInkCost()
+                    .cost(),
+                1 + instance
+                    .getStatusEffectInstance()
+                    .getAmplifier()
+            );
     }
 
     // saving
@@ -34,15 +38,21 @@ public interface InkPoweredPotionFillable {
             // by default, values are immutable, so we need to copy the values to an arraylist to be able to add
             // stuff to it
             List<InkPoweredStatusEffectInstance> existingEffects = new ArrayList<>(
-                InkPoweredStatusEffectInstance.getEffects(potionFillableStack));
+                InkPoweredStatusEffectInstance.getEffects(potionFillableStack)
+            );
             int maxCount = maxEffectCount();
             int maxAmplifier = maxEffectAmplifier();
-            for (InkPoweredStatusEffectInstance newEffect : newEffects) {
+            for (
+                InkPoweredStatusEffectInstance newEffect : newEffects
+            ) {
                 MobEffectInstance statusEffectInstance = newEffect.getStatusEffectInstance();
                 if (statusEffectInstance.getAmplifier() > maxAmplifier) {
                     statusEffectInstance = new MobEffectInstance(
-                        statusEffectInstance.getEffect(), statusEffectInstance.getDuration(), maxAmplifier,
-                        statusEffectInstance.isAmbient(), statusEffectInstance.isVisible()
+                        statusEffectInstance.getEffect(),
+                        statusEffectInstance.getDuration(),
+                        maxAmplifier,
+                        statusEffectInstance.isAmbient(),
+                        statusEffectInstance.isVisible()
                     );
                 }
                 if (existingEffects.size() == maxCount) {
@@ -51,11 +61,16 @@ public interface InkPoweredPotionFillable {
 
                 // calculate the final cost of this effect and add it
                 InkCost adjustedCost = new InkCost(
-                    newEffect.getInkCost()
-                             .color(), adjustFinalCostFor(newEffect)
+                    newEffect
+                        .getInkCost()
+                        .color(),
+                    adjustFinalCostFor(newEffect)
                 );
                 InkPoweredStatusEffectInstance modifiedInstance = new InkPoweredStatusEffectInstance(
-                    statusEffectInstance, adjustedCost, newEffect.getColor(), newEffect.isUnidentifiable(),
+                    statusEffectInstance,
+                    adjustedCost,
+                    newEffect.getColor(),
+                    newEffect.isUnidentifiable(),
                     newEffect.isIncurable()
                 );
                 existingEffects.add(modifiedInstance);
@@ -71,20 +86,23 @@ public interface InkPoweredPotionFillable {
 
     @Deprecated
     default List<MobEffectInstance> getVanillaEffects(ItemStack stack) {
-        return InkPoweredStatusEffectInstance.getEffects(stack)
-                                             .stream()
-                                             .map(InkPoweredStatusEffectInstance::getStatusEffectInstance)
-                                             .toList();
+        return InkPoweredStatusEffectInstance
+            .getEffects(stack)
+            .stream()
+            .map(InkPoweredStatusEffectInstance::getStatusEffectInstance)
+            .toList();
     }
 
     default boolean isFull(ItemStack itemStack) {
-        return InkPoweredStatusEffectInstance.getEffects(itemStack)
-                                             .size() >= maxEffectCount();
+        return InkPoweredStatusEffectInstance
+            .getEffects(itemStack)
+            .size() >= maxEffectCount();
     }
 
     default boolean isAtLeastPartiallyFilled(ItemStack itemStack) {
-        return !InkPoweredStatusEffectInstance.getEffects(itemStack)
-                                              .isEmpty();
+        return !InkPoweredStatusEffectInstance
+            .getEffects(itemStack)
+            .isEmpty();
     }
 
     default void clearEffects(ItemStack itemStack) {
@@ -92,7 +110,10 @@ public interface InkPoweredPotionFillable {
     }
 
     default void appendPotionFillableTooltip(
-        ItemStack stack, List<Component> tooltip, MutableComponent attributeModifierText, boolean showDuration,
+        ItemStack stack,
+        List<Component> tooltip,
+        MutableComponent attributeModifierText,
+        boolean showDuration,
         float tickRate
     ) {
         List<InkPoweredStatusEffectInstance> effects = InkPoweredStatusEffectInstance.getEffects(stack);
@@ -103,11 +124,17 @@ public interface InkPoweredPotionFillable {
             if (maxEffectCount == 1) {
                 tooltip.add(Component.translatable("item.pastel.potion_pendant.tooltip_not_full_one"));
             } else {
-                tooltip.add(
-                    Component.translatable("item.pastel.potion_pendant.tooltip_not_full_count", maxEffectCount));
+                tooltip
+                    .add(
+                        Component.translatable("item.pastel.potion_pendant.tooltip_not_full_count", maxEffectCount)
+                    );
             }
-            tooltip.add(Component.translatable("item.pastel.potion_pendant.tooltip_max_level")
-                                 .append(Component.translatable("enchantment.level." + (maxEffectAmplifier() + 1))));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.potion_pendant.tooltip_max_level")
+                        .append(Component.translatable("enchantment.level." + (maxEffectAmplifier() + 1)))
+                );
         }
     }
 

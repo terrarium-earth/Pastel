@@ -32,9 +32,14 @@ public class AshBlock extends Block {
 
     @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        entity.causeFallDamage(fallDistance, 0.2F, world.damageSources()
-                                                        .fall()
-        );
+        entity
+            .causeFallDamage(
+                fallDistance,
+                0.2F,
+                world
+                    .damageSources()
+                    .fall()
+            );
     }
 
 }

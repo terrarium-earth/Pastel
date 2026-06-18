@@ -17,13 +17,17 @@ import org.jetbrains.annotations.Nullable;
 
 public class AzuriteOutcropBlock extends Block {
     public static final EnumProperty<SpirePart> SPIRE_PART = EnumProperty.create("spire_part", SpirePart.class);
+
     public static final DirectionProperty FACING = AmethystClusterBlock.FACING;
 
     public AzuriteOutcropBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any()
-                                            .setValue(FACING, Direction.UP)
-                                            .setValue(SPIRE_PART, SpirePart.TIP));
+        registerDefaultState(
+            stateDefinition
+                .any()
+                .setValue(FACING, Direction.UP)
+                .setValue(SPIRE_PART, SpirePart.TIP)
+        );
     }
 
     @Override
@@ -33,18 +37,29 @@ public class AzuriteOutcropBlock extends Block {
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return stateDefinition.any()
-                              .setValue(SPIRE_PART, SpirePart.TIP)
-                              .setValue(FACING, context.getClickedFace());
+        return stateDefinition
+            .any()
+            .setValue(SPIRE_PART, SpirePart.TIP)
+            .setValue(FACING, context.getClickedFace());
     }
 
     @Override
     protected void neighborChanged(
-        BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        BlockState state,
+        Level level,
+        BlockPos pos,
+        Block neighborBlock,
+        BlockPos neighborPos,
+        boolean movedByPiston
+    ) {
         var offset = neighborPos.subtract(pos);
         var dir = Direction.fromDelta(offset.getX(), offset.getY(), offset.getZ());
-        if (dir == null || !dir.equals(state.getValue(FACING)) && !dir.equals(state.getValue(FACING)
-                                                                                   .getOpposite())) return;
+        if (dir == null || !dir.equals(state.getValue(FACING)) && !dir
+            .equals(
+                state
+                    .getValue(FACING)
+                    .getOpposite()
+            )) return;
         var neighborState = level.getBlockState(neighborPos);
         neighborBlock = neighborState.getBlock();
         var downstream = dir.equals(state.getValue(FACING));
@@ -53,31 +68,53 @@ public class AzuriteOutcropBlock extends Block {
                 // the block supporting us has just become something other than us
                 level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
             } else {
-                var supported = neighborState.is(this) ? SpirePart.closerToTip(level.getBlockState(neighborPos)
-                                                                                    .getValue(SPIRE_PART)) : null;
+                var supported = neighborState.is(this)
+                    ? SpirePart
+                        .closerToTip(
+                            level
+                                .getBlockState(neighborPos)
+                                .getValue(SPIRE_PART)
+                        )
+                    : null;
                 if (supported == null && !neighborState.is(PastelBlocks.BUDDING_AZURITE)) {
                     level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                 } else if (supported != state.getValue(SPIRE_PART)) {
                     if (supported != null) {
-                        level.setBlock(
-                            pos, state.setValue(SPIRE_PART, supported), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
+                        level
+                            .setBlock(
+                                pos,
+                                state.setValue(SPIRE_PART, supported),
+                                Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL
+                            );
                     }
                 }
             }
         } else {
-            if (!state.is(neighborBlock) && state.getValue(SPIRE_PART)
-                                                 .ordinal() < 2) {
+            if (!state.is(neighborBlock) && state
+                .getValue(SPIRE_PART)
+                .ordinal() < 2) {
                 // we're not a tip, and the block we're supporting is no longer one of us
-                level.setBlock(
-                    pos, state.setValue(SPIRE_PART, SpirePart.TIP), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
+                level
+                    .setBlock(
+                        pos,
+                        state.setValue(SPIRE_PART, SpirePart.TIP),
+                        Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL
+                    );
             } else if (state.is(neighborBlock)) {
                 // the block we're supporting has updated while still being one of us
-                var part = SpirePart.closerToBase(level.getBlockState(neighborPos)
-                                                       .getValue(SPIRE_PART));
-                if (part != null) {
-                    level.setBlock(
-                        pos, state.setValue(SPIRE_PART, part), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL
+                var part = SpirePart
+                    .closerToBase(
+                        level
+                            .getBlockState(neighborPos)
+                            .getValue(SPIRE_PART)
                     );
+                if (part != null) {
+                    level
+                        .setBlock(
+                            pos,
+                            state.setValue(SPIRE_PART, part),
+                            Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL
+                        );
                     var nextPos = pos.relative(state.getValue(FACING));
                     var nextState = level.getBlockState(nextPos);
                     if (nextState.canBeReplaced()) {
@@ -89,25 +126,32 @@ public class AzuriteOutcropBlock extends Block {
                 }
             }
         }
-        if (level.getBlockState(pos).is(PastelBlocks.AZURE_OUTCROP) && level.getBlockState(pos)
-                 .getValue(SPIRE_PART) != SpirePart.TIP && level.getBlockState(pos.relative(state.getValue(FACING)))
-                                                                .canBeReplaced()) {
+        if (level.getBlockState(pos).is(PastelBlocks.AZURE_OUTCROP) && level
+            .getBlockState(pos)
+            .getValue(SPIRE_PART) != SpirePart.TIP && level
+                .getBlockState(pos.relative(state.getValue(FACING)))
+                .canBeReplaced()) {
             // we've just done all the update code, and at the end of it we're not a tip but we don't have one—make one!
             var nextPos = pos.relative(state.getValue(FACING));
             var blockState = level.getBlockState(pos);
-            var part = SpirePart.closerToTip(blockState
-                                                 .getValue(SPIRE_PART));
-            if (part != null) {
-                level.setBlockAndUpdate(
-                    nextPos, defaultBlockState().setValue(FACING, blockState.getValue(FACING))
-                                                .setValue(SPIRE_PART, part)
+            var part = SpirePart
+                .closerToTip(
+                    blockState
+                        .getValue(SPIRE_PART)
                 );
+            if (part != null) {
+                level
+                    .setBlockAndUpdate(
+                        nextPos,
+                        defaultBlockState()
+                            .setValue(FACING, blockState.getValue(FACING))
+                            .setValue(SPIRE_PART, part)
+                    );
                 level.updateNeighborsAt(pos, this);
             }
 
         }
     }
-
 
     public enum SpirePart implements StringRepresentable {
         BASE("base"),

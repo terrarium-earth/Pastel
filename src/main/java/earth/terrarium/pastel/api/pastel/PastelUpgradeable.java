@@ -21,8 +21,9 @@ public interface PastelUpgradeable {
         if (upgrade.category.isRedstone())
             return;
 
-        if (previousUpgrades.stream()
-                            .anyMatch(u -> u.category.compoundsWith(upgrade.category))) {
+        if (previousUpgrades
+            .stream()
+            .anyMatch(u -> u.category.compoundsWith(upgrade.category))) {
             applyCompounding(upgrade);
         } else {
             applySimple(upgrade);

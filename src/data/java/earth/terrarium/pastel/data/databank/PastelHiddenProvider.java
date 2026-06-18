@@ -41,7 +41,8 @@ import java.util.function.Consumer;
 public class PastelHiddenProvider extends HiddenDatagenProvider {
 
     public PastelHiddenProvider(
-        PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+        PackOutput output,
+        CompletableFuture<HolderLookup.Provider> lookupProvider,
         @Nullable ExistingFileHelper existingFileHelper
     ) {
         super(output, lookupProvider, PastelCommon.MOD_ID, existingFileHelper);
@@ -56,50 +57,80 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         allColors((color) -> addStrippedLog(ColoredStrippedLogBlock.byColor(color)));
         allColors((color) -> addStrippedWood(ColoredStrippedWoodBlock.byColor(color)));
         allColors((color) -> addPottedSapling(PottedColoredSaplingBlock.byColor(color)));
-        allColors((color) -> hideItem(
-            PigmentItem.byColor(color), PigmentItem.byColor(color).hiddenAs,
-            PastelAdvancements.CRAFT_COLORED_SAPLING
-        ));
+        allColors(
+            (color) -> hideItem(
+                PigmentItem.byColor(color),
+                PigmentItem.byColor(color).hiddenAs,
+                PastelAdvancements.CRAFT_COLORED_SAPLING
+            )
+        );
 
         hideBlockWithItem(
-            PastelBlocks.RADIATING_ENDER.get(), Blocks.COBBLESTONE,
+            PastelBlocks.RADIATING_ENDER.get(),
+            Blocks.COBBLESTONE,
             PastelAdvancements.Milestones.REVEAL_RADIATING_ENDER
         );
         hideBlockWithItem(
-            PastelBlocks.FOUR_LEAF_CLOVER.get(), PastelBlocks.CLOVER.get(),
+            PastelBlocks.FOUR_LEAF_CLOVER.get(),
+            PastelBlocks.CLOVER.get(),
             PastelAdvancements.Milestones.REVEAL_FOUR_LEAF_CLOVER
         );
         hideBlockWithItem(
-            PastelBlocks.AMARANTH_BUSHEL.get(), Blocks.FERN, PastelAdvancements.Milestones.REVEAL_AMARANTH);
+            PastelBlocks.AMARANTH_BUSHEL.get(),
+            Blocks.FERN,
+            PastelAdvancements.Milestones.REVEAL_AMARANTH
+        );
         hideBlockWithItem(
-            PastelBlocks.RESONANT_LILY.get(), Blocks.WHITE_TULIP, PastelAdvancements.Midgame.COLLECT_RESONANT_LILY);
+            PastelBlocks.RESONANT_LILY.get(),
+            Blocks.WHITE_TULIP,
+            PastelAdvancements.Midgame.COLLECT_RESONANT_LILY
+        );
         hideBlockWithItem(
-            PastelBlocks.DRAGONBONE.get(), Blocks.BONE_BLOCK, PastelAdvancements.Milestones.REVEAL_DRAGONBONE);
+            PastelBlocks.DRAGONBONE.get(),
+            Blocks.BONE_BLOCK,
+            PastelAdvancements.Milestones.REVEAL_DRAGONBONE
+        );
         hideBlockWithItem(
-            PastelBlocks.STRATINE_ORE.get(), Blocks.NETHERRACK, PastelAdvancements.Milestones.REVEAL_STRATINE);
+            PastelBlocks.STRATINE_ORE.get(),
+            Blocks.NETHERRACK,
+            PastelAdvancements.Milestones.REVEAL_STRATINE
+        );
         hideBlockWithItem(
-            PastelBlocks.PALTAERIA_ORE.get(), Blocks.END_STONE, PastelAdvancements.Milestones.REVEAL_PALTAERIA);
+            PastelBlocks.PALTAERIA_ORE.get(),
+            Blocks.END_STONE,
+            PastelAdvancements.Milestones.REVEAL_PALTAERIA
+        );
 
         hideBlock(
-            PastelBlocks.BLOOD_ORCHID.get(), Blocks.RED_TULIP, PastelAdvancements.Midgame.COLLECT_BLOOD_ORCHID_PETAL);
-        hideBlock(
-            PastelBlocks.POTTED_BLOOD_ORCHID.get(), Blocks.POTTED_RED_TULIP,
+            PastelBlocks.BLOOD_ORCHID.get(),
+            Blocks.RED_TULIP,
             PastelAdvancements.Midgame.COLLECT_BLOOD_ORCHID_PETAL
         );
         hideBlock(
-            PastelBlocks.MERMAIDS_BRUSH.get(), Blocks.SEAGRASS, PastelAdvancements.Milestones.REVEAL_MERMAIDS_BRUSH);
+            PastelBlocks.POTTED_BLOOD_ORCHID.get(),
+            Blocks.POTTED_RED_TULIP,
+            PastelAdvancements.Midgame.COLLECT_BLOOD_ORCHID_PETAL
+        );
         hideBlock(
-            PastelBlocks.POTTED_AMARANTH_BUSHEL.get(), Blocks.POTTED_FERN,
+            PastelBlocks.MERMAIDS_BRUSH.get(),
+            Blocks.SEAGRASS,
+            PastelAdvancements.Milestones.REVEAL_MERMAIDS_BRUSH
+        );
+        hideBlock(
+            PastelBlocks.POTTED_AMARANTH_BUSHEL.get(),
+            Blocks.POTTED_FERN,
             PastelAdvancements.Milestones.REVEAL_AMARANTH
         );
         hideBlock(PastelBlocks.STUCK_STORM_STONE.get(), Blocks.AIR, PastelAdvancements.Milestones.REVEAL_STORM_STONES);
         hideBlock(
-            PastelBlocks.POTTED_RESONANT_LILY.get(), Blocks.POTTED_WHITE_TULIP,
+            PastelBlocks.POTTED_RESONANT_LILY.get(),
+            Blocks.POTTED_WHITE_TULIP,
             PastelAdvancements.Midgame.COLLECT_RESONANT_LILY
         );
 
         hideItem(
-            PastelBlocks.BLOOD_ORCHID.asItem(), Blocks.RED_TULIP.asItem(),
+            PastelBlocks.BLOOD_ORCHID.asItem(),
+            Blocks.RED_TULIP.asItem(),
             PastelAdvancements.Midgame.COLLECT_BLOOD_ORCHID_PETAL
         );
         hideItem(PastelItems.AMARANTH_GRAINS.get(), Items.LARGE_FERN, PastelAdvancements.Milestones.REVEAL_AMARANTH);
@@ -109,23 +140,35 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         hideItem(PastelItems.NEOLITH.get(), Items.GUNPOWDER, PastelAdvancements.Midgame.CRAFT_BOTTLE_OF_FAILING);
         hideItem(PastelItems.BEDROCK_DUST.get(), Items.GUNPOWDER, PastelAdvancements.Midgame.BREAK_DECAYED_BEDROCK);
         hideItem(
-            PastelItems.SHIMMERSTONE_GEM.get(), Items.YELLOW_DYE, PastelAdvancements.Milestones.REVEAL_SHIMMERSTONE);
+            PastelItems.SHIMMERSTONE_GEM.get(),
+            Items.YELLOW_DYE,
+            PastelAdvancements.Milestones.REVEAL_SHIMMERSTONE
+        );
         hideItem(PastelItems.RAW_AZURITE.get(), Items.BLUE_DYE, PastelAdvancements.Milestones.REVEAL_AZURITE);
         hideItem(PastelItems.STARDUST.get(), Items.PURPLE_DYE, PastelAdvancements.Milestones.UNLOCK_SHOOTING_STARS);
         hideItem(
-            PastelItems.JADE_PETALS.get(), Items.LIME_DYE,
+            PastelItems.JADE_PETALS.get(),
+            Items.LIME_DYE,
             PastelAdvancements.Midgame.BUILD_SPIRIT_INSTILLER_STRUCTURE
         );
         hideItem(
-            PastelItems.STAR_FRAGMENT.get(), Items.PURPLE_DYE, PastelAdvancements.Milestones.UNLOCK_SHOOTING_STARS);
+            PastelItems.STAR_FRAGMENT.get(),
+            Items.PURPLE_DYE,
+            PastelAdvancements.Milestones.UNLOCK_SHOOTING_STARS
+        );
         hideItem(
-            PastelItems.QUITOXIC_POWDER.get(), Items.PURPLE_DYE, PastelAdvancements.Milestones.REVEAL_QUITOXIC_REEDS);
+            PastelItems.QUITOXIC_POWDER.get(),
+            Items.PURPLE_DYE,
+            PastelAdvancements.Milestones.REVEAL_QUITOXIC_REEDS
+        );
         hideItem(
-            PastelItems.GERMINATED_JADE_VINE_BULB.get(), Items.LIME_DYE,
+            PastelItems.GERMINATED_JADE_VINE_BULB.get(),
+            Items.LIME_DYE,
             PastelAdvancements.Hidden.COLLECT_HIBERNATING_JADE_VINE_BULB
         );
         hideItem(
-            PastelItems.BLOOD_ORCHID_PETAL.get(), Items.RED_DYE,
+            PastelItems.BLOOD_ORCHID_PETAL.get(),
+            Items.RED_DYE,
             PastelAdvancements.Milestones.REVEAL_BLOOD_ORCHID_PETALS
         );
         hideItem(PastelItems.PURE_AZURITE.get(), Items.BLUE_DYE, PastelAdvancements.Milestones.REVEAL_AZURITE);
@@ -135,15 +178,18 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         hideItem(PastelItems.RAW_BLOODSTONE.get(), Items.RED_DYE, PastelAdvancements.PLUCK_RESPLENDENT_FEATHER);
         hideItem(PastelItems.PURE_BLOODSTONE.get(), Items.RED_DYE, PastelAdvancements.PLUCK_RESPLENDENT_FEATHER);
         hideItem(
-            PastelItems.DOWNSTONE_FRAGMENTS.get(), Items.LIGHT_GRAY_DYE,
+            PastelItems.DOWNSTONE_FRAGMENTS.get(),
+            Items.LIGHT_GRAY_DYE,
             PastelAdvancements.Lategame.FIND_EXCAVATION_SITE
         );
         hideItem(
-            PastelItems.RESONANCE_SHARD.get(), Items.LIGHT_BLUE_DYE,
+            PastelItems.RESONANCE_SHARD.get(),
+            Items.LIGHT_BLUE_DYE,
             PastelAdvancements.Lategame.STRIKE_UP_HUMMINGSTONE_HYMN
         );
         hideItem(
-            PastelItems.NECTARDEW_BURGEON.get(), PastelItems.NIGHTDEW_SPROUT.get(),
+            PastelItems.NECTARDEW_BURGEON.get(),
+            PastelItems.NIGHTDEW_SPROUT.get(),
             PastelAdvancements.Lategame.COLLECT_NECTARDEW
         );
         hideItem(PastelItems.MYCEYLON.get(), Items.ORANGE_DYE, PastelAdvancements.Lategame.COLLECT_MYCEYLON);
@@ -151,19 +197,28 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         hideItem(PastelItems.FROSTBITE_ESSENCE.get(), Items.LIGHT_BLUE_DYE, PastelAdvancements.Midgame.PASTEL_MIDGAME);
         hideItem(PastelItems.MOONSTONE_CORE.get(), Items.WHITE_DYE, PastelAdvancements.Lategame.FIND_FORGOTTEN_CITY);
         hideItem(
-            PastelItems.MIDNIGHT_CHIP.get(), Items.GRAY_DYE, PastelAdvancements.Midgame.CREATE_MIDNIGHT_ABERRATION);
+            PastelItems.MIDNIGHT_CHIP.get(),
+            Items.GRAY_DYE,
+            PastelAdvancements.Midgame.CREATE_MIDNIGHT_ABERRATION
+        );
         hideItem(PastelItems.BISMUTH_FLAKE.get(), Items.CYAN_DYE, PastelAdvancements.Midgame.ENTER_DIMENSION);
         hideItem(PastelItems.BISMUTH_CRYSTAL.get(), Items.CYAN_DYE, PastelAdvancements.Midgame.ENTER_DIMENSION);
         hideItem(PastelItems.RAW_MALACHITE.get(), Items.GREEN_DYE, PastelAdvancements.Milestones.REVEAL_MALACHITE);
         hideItem(PastelItems.PURE_MALACHITE.get(), Items.GREEN_DYE, PastelAdvancements.Milestones.REVEAL_MALACHITE);
         hideItem(PastelItems.TOPAZ_POWDER.get(), Items.CYAN_DYE, PastelAdvancements.Hidden.CollectShards.TOPAZ);
         hideItem(
-            PastelItems.AMETHYST_POWDER.get(), Items.MAGENTA_DYE, PastelAdvancements.Hidden.CollectShards.AMETHYST);
+            PastelItems.AMETHYST_POWDER.get(),
+            Items.MAGENTA_DYE,
+            PastelAdvancements.Hidden.CollectShards.AMETHYST
+        );
         hideItem(PastelItems.CITRINE_POWDER.get(), Items.YELLOW_DYE, PastelAdvancements.Hidden.CollectShards.CITRINE);
         hideItem(PastelItems.ONYX_POWDER.get(), Items.BLACK_DYE, PastelAdvancements.CREATE_ONYX_SHARD);
         hideItem(PastelItems.MOONSTONE_POWDER.get(), Items.WHITE_DYE, PastelAdvancements.Lategame.COLLECT_MOONSTONE);
         hideItem(
-            PastelItems.ONYX_SHARD.get(), Items.BLACK_DYE, PastelAdvancements.COLLECT_ALL_BASIC_PIGMENTS_BESIDES_BROWN);
+            PastelItems.ONYX_SHARD.get(),
+            Items.BLACK_DYE,
+            PastelAdvancements.COLLECT_ALL_BASIC_PIGMENTS_BESIDES_BROWN
+        );
         hideItem(PastelItems.MOONSTONE_SHARD.get(), Items.WHITE_DYE, PastelAdvancements.Midgame.BREAK_DECAYED_BEDROCK);
         hideItem(PastelItems.STRATINE_FRAGMENTS.get(), Items.RED_DYE, PastelAdvancements.Milestones.REVEAL_STRATINE);
         hideItem(PastelItems.STRATINE_GEM.get(), Items.RED_DYE, PastelAdvancements.Milestones.REVEAL_STRATINE);
@@ -171,7 +226,8 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         hideItem(PastelItems.PALTAERIA_GEM.get(), Items.CYAN_DYE, PastelAdvancements.Lategame.CRAFT_RESONANT_TOOL);
 
         createQuitoxicReeds(
-            PastelBlocks.QUITOXIC_REEDS.get(), Blocks.SUGAR_CANE.asItem(),
+            PastelBlocks.QUITOXIC_REEDS.get(),
+            Blocks.SUGAR_CANE.asItem(),
             PastelAdvancements.Milestones.REVEAL_QUITOXIC_REEDS
         );
 
@@ -180,73 +236,98 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
         hideBlock(PastelBlocks.BUDDING_AZURITE.get(), Blocks.DEEPSLATE, PastelAdvancements.Milestones.REVEAL_AZURITE);
 
         hideBlock(
-            PastelBlocks.VIRIDIAN_CRYSTAL.get(), PastelBlocks.BLACKSLAG.get(), PastelAdvancements.Milestones.REVEAL_MALACHITE
+            PastelBlocks.VIRIDIAN_CRYSTAL.get(),
+            PastelBlocks.BLACKSLAG.get(),
+            PastelAdvancements.Milestones.REVEAL_MALACHITE
         );
         hideOre(
-            PastelBlocks.SHIMMERSTONE_ORE.get(), PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get(),null,
+            PastelBlocks.SHIMMERSTONE_ORE.get(),
+            PastelBlocks.DEEPSLATE_SHIMMERSTONE_ORE.get(),
+            null,
             PastelAdvancements.Milestones.REVEAL_SHIMMERSTONE
         );
         hideOre(
-            PastelBlocks.TOPAZ_ORE.get(), PastelBlocks.DEEPSLATE_TOPAZ_ORE.get(),
-            PastelBlocks.BLACKSLAG_TOPAZ_ORE.get(), PastelAdvancements.Hidden.CollectShards.TOPAZ
+            PastelBlocks.TOPAZ_ORE.get(),
+            PastelBlocks.DEEPSLATE_TOPAZ_ORE.get(),
+            PastelBlocks.BLACKSLAG_TOPAZ_ORE.get(),
+            PastelAdvancements.Hidden.CollectShards.TOPAZ
         );
         hideOre(
-            PastelBlocks.AMETHYST_ORE.get(), PastelBlocks.DEEPSLATE_AMETHYST_ORE.get(),
-            PastelBlocks.BLACKSLAG_AMETHYST_ORE.get(), PastelAdvancements.Hidden.CollectShards.AMETHYST
+            PastelBlocks.AMETHYST_ORE.get(),
+            PastelBlocks.DEEPSLATE_AMETHYST_ORE.get(),
+            PastelBlocks.BLACKSLAG_AMETHYST_ORE.get(),
+            PastelAdvancements.Hidden.CollectShards.AMETHYST
         );
         hideOre(
-            PastelBlocks.CITRINE_ORE.get(), PastelBlocks.DEEPSLATE_CITRINE_ORE.get(),
-            PastelBlocks.BLACKSLAG_CITRINE_ORE.get(), PastelAdvancements.Hidden.CollectShards.CITRINE
+            PastelBlocks.CITRINE_ORE.get(),
+            PastelBlocks.DEEPSLATE_CITRINE_ORE.get(),
+            PastelBlocks.BLACKSLAG_CITRINE_ORE.get(),
+            PastelAdvancements.Hidden.CollectShards.CITRINE
         );
         hideOre(
-            PastelBlocks.ONYX_ORE.get(), PastelBlocks.DEEPSLATE_ONYX_ORE.get(), PastelBlocks.BLACKSLAG_ONYX_ORE.get(),
+            PastelBlocks.ONYX_ORE.get(),
+            PastelBlocks.DEEPSLATE_ONYX_ORE.get(),
+            PastelBlocks.BLACKSLAG_ONYX_ORE.get(),
             PastelAdvancements.CREATE_ONYX_SHARD
         );
         hideOre(
-            PastelBlocks.MOONSTONE_ORE.get(), PastelBlocks.DEEPSLATE_MOONSTONE_ORE.get(),
-            PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get(), PastelAdvancements.Lategame.COLLECT_MOONSTONE
+            PastelBlocks.MOONSTONE_ORE.get(),
+            PastelBlocks.DEEPSLATE_MOONSTONE_ORE.get(),
+            PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get(),
+            PastelAdvancements.Lategame.COLLECT_MOONSTONE
         );
 
         hideItemWithNameOverride(
-            PastelItems.MIDNIGHT_ABERRATION.get(), PastelItems.SPECTRAL_SHARD.get(),
+            PastelItems.MIDNIGHT_ABERRATION.get(),
+            PastelItems.SPECTRAL_SHARD.get(),
             PastelAdvancements.Midgame.CREATE_MIDNIGHT_ABERRATION,
             Component.translatable("item.pastel.midnight_aberration.cloaked")
         );
     }
 
     public String getName(Block block) {
-        return BuiltInRegistries.BLOCK.getKey(block)
-                                      .getPath();
+        return BuiltInRegistries.BLOCK
+            .getKey(block)
+            .getPath();
     }
 
     public String getName(Item item) {
-        return BuiltInRegistries.ITEM.getKey(item)
-                                     .getPath();
+        return BuiltInRegistries.ITEM
+            .getKey(item)
+            .getPath();
     }
 
     //Maybe rename this into something more general? Not sure what to change it to though
     private void createQuitoxicReeds(Block block, Item itemHiddenAs, ResourceLocation advancement) {
         BlockHiddenType.BlockHiddenOverride waterOverride = createOverride(
-            StatePropertiesPredicate.Builder.properties()
-                                            .hasProperty(FluidLogging.ANY_INCLUDING_NONE, "water")
-                                            .build()
-                                            .orElseThrow(), Blocks.WATER
+            StatePropertiesPredicate.Builder
+                .properties()
+                .hasProperty(FluidLogging.ANY_INCLUDING_NONE, "water")
+                .build()
+                .orElseThrow(),
+            Blocks.WATER
         );
         BlockHiddenType.BlockHiddenOverride crystalOverride = createOverride(
-            StatePropertiesPredicate.Builder.properties()
-                                            .hasProperty(FluidLogging.ANY_INCLUDING_NONE, "liquid_crystal")
-                                            .build()
-                                            .orElseThrow(), PastelBlocks.LIQUID_CRYSTAL.get()
+            StatePropertiesPredicate.Builder
+                .properties()
+                .hasProperty(FluidLogging.ANY_INCLUDING_NONE, "liquid_crystal")
+                .build()
+                .orElseThrow(),
+            PastelBlocks.LIQUID_CRYSTAL.get()
         );
         createHidden(
-            PastelCommon.locate("blocks/" + getName(block)), addOverride(
+            PastelCommon.locate("blocks/" + getName(block)),
+            addOverride(
                 addOverride(
                     setOriginalLootCondition(
                         createBlockInstance(block, Blocks.AIR),
                         new NotCondition(new ActualPlayerCondition())
-                    ), waterOverride
-                ), crystalOverride
-            ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+                    ),
+                    waterOverride
+                ),
+                crystalOverride
+            ),
+            createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
         hideItem(block.asItem(), itemHiddenAs, advancement);
     }
@@ -270,27 +351,41 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
 
     public void hideBlock(Block block, Block hiddenAs, ResourceLocation advancement) {
         createHidden(
-            PastelCommon.locate("blocks/" + getName(block)), setOriginalLootCondition(
+            PastelCommon.locate("blocks/" + getName(block)),
+            setOriginalLootCondition(
                 setNameOverride(
-                    createBlockInstance(block, hiddenAs), Component.translatable(hiddenAs.getDescriptionId())
-                                                                   .append(
-                                                                       Component.translatable("pastel.cloaked.suffix"))
-                ), new NotCondition(new ActualPlayerCondition())
-            ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+                    createBlockInstance(block, hiddenAs),
+                    Component
+                        .translatable(hiddenAs.getDescriptionId())
+                        .append(
+                            Component.translatable("pastel.cloaked.suffix")
+                        )
+                ),
+                new NotCondition(new ActualPlayerCondition())
+            ),
+            createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
     }
 
     public void hideItem(Item item, Item hiddenAs, ResourceLocation advancement) {
         createHidden(
-            PastelCommon.locate("items/" + getName(item)), setNameOverride(
-                createItemInstance(item, hiddenAs), Component.translatable(hiddenAs.getDescriptionId())
-                                                             .append(Component.translatable("pastel.cloaked.suffix"))
-            ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+            PastelCommon.locate("items/" + getName(item)),
+            setNameOverride(
+                createItemInstance(item, hiddenAs),
+                Component
+                    .translatable(hiddenAs.getDescriptionId())
+                    .append(Component.translatable("pastel.cloaked.suffix"))
+            ),
+            createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
         );
     }
 
     public void hideItemWithNameOverride(
-        Item item, Item hiddenAs, ResourceLocation advancement, Component nameOverride) {
+        Item item,
+        Item hiddenAs,
+        ResourceLocation advancement,
+        Component nameOverride
+    ) {
         createHidden(
             PastelCommon.locate("items/" + getName(item)),
             setNameOverride(createItemInstance(item, hiddenAs), nameOverride),
@@ -299,7 +394,9 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
     }
 
     public void allColors(Consumer<InkColor> consumer) {
-        for (InkColor i : InkColors.all()) {
+        for (
+            InkColor i : InkColors.all()
+        ) {
             consumer.accept(i);
         }
     }
@@ -309,20 +406,32 @@ public class PastelHiddenProvider extends HiddenDatagenProvider {
             String name = getName(block);
             ResourceLocation advancement = ColoredTree.getTreeCloakAdvancementIdentifier(part, tree.getColor());
             createHidden(
-                PastelCommon.locate("blocks/" + directory + "/" + name), setOriginalLootCondition(
+                PastelCommon.locate("blocks/" + directory + "/" + name),
+                setOriginalLootCondition(
                     setNameOverride(
-                        createBlockInstance(block, hiddenAs), Component.translatable(hiddenAs.getDescriptionId())
-                                                                       .append(Component.translatable(
-                                                                           "pastel.cloaked.suffix"))
-                    ), new NotCondition(new ActualPlayerCondition())
-                ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+                        createBlockInstance(block, hiddenAs),
+                        Component
+                            .translatable(hiddenAs.getDescriptionId())
+                            .append(
+                                Component
+                                    .translatable(
+                                        "pastel.cloaked.suffix"
+                                    )
+                            )
+                    ),
+                    new NotCondition(new ActualPlayerCondition())
+                ),
+                createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
             );
             createHidden(
-                PastelCommon.locate("items/" + directory + "/" + name), setNameOverride(
+                PastelCommon.locate("items/" + directory + "/" + name),
+                setNameOverride(
                     createItemInstance(block.asItem(), hiddenAs.asItem()),
-                    Component.translatable(hiddenAs.getDescriptionId())
-                             .append(Component.translatable("pastel.cloaked.suffix"))
-                ), createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
+                    Component
+                        .translatable(hiddenAs.getDescriptionId())
+                        .append(Component.translatable("pastel.cloaked.suffix"))
+                ),
+                createAdvancementCondition(ResourceKey.create(Registries.ADVANCEMENT, advancement))
             );
         }
     }

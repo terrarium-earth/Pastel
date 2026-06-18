@@ -15,6 +15,7 @@ import java.util.Optional;
 public class PastelStructureTags {
 
     public static final TagKey<Structure> MYSTERIOUS_COMPASS_LOCATED = of("mysterious_compass_located");
+
     public static final TagKey<Structure> UNLOCATABLE = of("unlocatable");
 
     private static TagKey<Structure> of(String id) {
@@ -22,21 +23,26 @@ public class PastelStructureTags {
     }
 
     public static Optional<HolderSet.Named<Structure>> entriesOf(Level world, TagKey<Structure> tag) {
-        Registry<Structure> registry = world.registryAccess()
-                                            .registryOrThrow(Registries.STRUCTURE);
+        Registry<Structure> registry = world
+            .registryAccess()
+            .registryOrThrow(Registries.STRUCTURE);
         return registry.getTag(tag);
     }
 
     public static boolean isIn(Level world, ResourceLocation id, TagKey<Structure> tag) {
-        Registry<Structure> registry = world.registryAccess()
-                                            .registryOrThrow(Registries.STRUCTURE);
+        Registry<Structure> registry = world
+            .registryAccess()
+            .registryOrThrow(Registries.STRUCTURE);
         Structure structure = registry.get(id);
         Optional<HolderSet.Named<Structure>> tagEntries = entriesOf(world, tag);
 
         if (tagEntries.isPresent()) {
-            for (Holder<Structure> entry : tagEntries.get()) {
-                if (entry.value()
-                         .equals(structure)) {
+            for (
+                Holder<Structure> entry : tagEntries.get()
+            ) {
+                if (entry
+                    .value()
+                    .equals(structure)) {
                     return true;
                 }
             }

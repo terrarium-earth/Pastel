@@ -15,13 +15,21 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Optional;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class TransmissionParticle extends TextureSheetParticle {
 
     private final PositionSource positionSource;
 
     public TransmissionParticle(
-        ClientLevel world, double x, double y, double z, PositionSource positionSource, int arrivalInTicks) {
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        PositionSource positionSource,
+        int arrivalInTicks
+    ) {
         super(world, x, y, z);
         this.quadSize = 0.3F;
         this.alpha = 0.7F;
@@ -57,7 +65,9 @@ public class TransmissionParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<TransmissionParticleEffect> {
         private final SpriteSet spriteProvider;
 
@@ -66,11 +76,23 @@ public class TransmissionParticle extends TextureSheetParticle {
         }
 
         public Particle createParticle(
-            TransmissionParticleEffect particleEffect, ClientLevel world, double x, double y, double z, double g,
-            double h, double i
+            TransmissionParticleEffect particleEffect,
+            ClientLevel world,
+            double x,
+            double y,
+            double z,
+            double g,
+            double h,
+            double i
         ) {
             TransmissionParticle particle = new TransmissionParticle(
-                world, x, y, z, particleEffect.getDestination(), particleEffect.getArrivalInTicks());
+                world,
+                x,
+                y,
+                z,
+                particleEffect.getDestination(),
+                particleEffect.getArrivalInTicks()
+            );
             particle.pickSprite(this.spriteProvider);
             return particle;
         }

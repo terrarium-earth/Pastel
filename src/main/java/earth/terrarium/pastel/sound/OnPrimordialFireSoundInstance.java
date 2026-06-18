@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 public class OnPrimordialFireSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final Player player;
+
     private int fadeInTicks;
 
     public OnPrimordialFireSoundInstance(Player player) {

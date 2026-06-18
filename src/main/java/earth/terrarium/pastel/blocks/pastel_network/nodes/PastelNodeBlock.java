@@ -59,36 +59,47 @@ import java.util.Optional;
 
 public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, ColorableBlock {
 
-    public static final MapCodec<PastelNodeBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                propertiesCodec(),
-                                                                                                StringRepresentable.fromEnum(PastelNodeType::values)
-                                                                                                                   .fieldOf("node_type")
-                                                                                                                   .forGetter(b -> b.pastelNodeType)
-                                                                                            )
-                                                                                            .apply(
-                                                                                                i,
-                                                                                                PastelNodeBlock::new
-                                                                                            ));
+    public static final MapCodec<PastelNodeBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    propertiesCodec(),
+                    StringRepresentable
+                        .fromEnum(PastelNodeType::values)
+                        .fieldOf("node_type")
+                        .forGetter(b -> b.pastelNodeType)
+                )
+                .apply(
+                    i,
+                    PastelNodeBlock::new
+                )
+        );
 
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
     public static final BooleanProperty REDSTONE_EMITTING = BlockStateProperties.POWERED;
 
-    public static final Map<Direction, VoxelShape> SHAPES = new HashMap<>() {{
-        put(Direction.UP, Block.box(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D));
-        put(Direction.DOWN, Block.box(5.0D, 12.0D, 5.0D, 11.0D, 16.0D, 11.0D));
-        put(Direction.NORTH, Block.box(5.0D, 5.0D, 12.0D, 11.0D, 11.0D, 16.0D));
-        put(Direction.SOUTH, Block.box(5.0D, 5.0D, 0.0D, 11.0D, 11.0D, 4.0D));
-        put(Direction.EAST, Block.box(0.0D, 5.0D, 5.0D, 4.0D, 11.0D, 11.0D));
-        put(Direction.WEST, Block.box(12.0D, 5.0D, 5.0D, 16.0D, 11.0D, 11.0D));
-    }};
+    public static final Map<Direction, VoxelShape> SHAPES = new HashMap<>() {
+        {
+            put(Direction.UP, Block.box(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D));
+            put(Direction.DOWN, Block.box(5.0D, 12.0D, 5.0D, 11.0D, 16.0D, 11.0D));
+            put(Direction.NORTH, Block.box(5.0D, 5.0D, 12.0D, 11.0D, 11.0D, 16.0D));
+            put(Direction.SOUTH, Block.box(5.0D, 5.0D, 0.0D, 11.0D, 11.0D, 4.0D));
+            put(Direction.EAST, Block.box(0.0D, 5.0D, 5.0D, 4.0D, 11.0D, 11.0D));
+            put(Direction.WEST, Block.box(12.0D, 5.0D, 5.0D, 16.0D, 11.0D, 11.0D));
+        }
+    };
 
     protected final PastelNodeType pastelNodeType;
 
     public PastelNodeBlock(Properties settings, PastelNodeType pastelNodeType) {
         super(settings.lightLevel(s -> s.getValue(LIT) ? 13 : 0));
         this.pastelNodeType = pastelNodeType;
-        registerDefaultState(defaultBlockState().setValue(LIT, false)
-                                                .setValue(REDSTONE_EMITTING, false));
+        registerDefaultState(
+            defaultBlockState()
+                .setValue(LIT, false)
+                .setValue(REDSTONE_EMITTING, false)
+        );
     }
 
     @Override
@@ -103,11 +114,13 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        Direction targetDirection = state.getValue(FACING)
-                                         .getOpposite();
+        Direction targetDirection = state
+            .getValue(FACING)
+            .getOpposite();
         BlockPos targetPos = pos.relative(targetDirection);
-        return world.getBlockState(targetPos)
-                    .isSolid();
+        return world
+            .getBlockState(targetPos)
+            .isSolid();
     }
 
     @Override
@@ -116,12 +129,15 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
             PastelNodeBlockEntity blockEntity = getBlockEntity(world, pos);
             if (blockEntity != null) {
                 blockEntity.onBroken();
-                blockEntity.getOuterRing()
-                           .ifPresent(r -> popResource(world, pos, r.upgradeItem.getDefaultInstance()));
-                blockEntity.getInnerRing()
-                           .ifPresent(r -> popResource(world, pos, r.upgradeItem.getDefaultInstance()));
-                blockEntity.getRedstoneRing()
-                           .ifPresent(r -> popResource(world, pos, r.upgradeItem.getDefaultInstance()));
+                blockEntity
+                    .getOuterRing()
+                    .ifPresent(r -> popResource(world, pos, r.upgradeItem.getDefaultInstance()));
+                blockEntity
+                    .getInnerRing()
+                    .ifPresent(r -> popResource(world, pos, r.upgradeItem.getDefaultInstance()));
+                blockEntity
+                    .getRedstoneRing()
+                    .ifPresent(r -> popResource(world, pos, r.upgradeItem.getDefaultInstance()));
             }
         }
         super.onRemove(state, world, pos, newState, moved);
@@ -130,39 +146,63 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         Direction direction = ctx.getClickedFace();
-        BlockState blockState = ctx.getLevel()
-                                   .getBlockState(ctx.getClickedPos()
-                                                     .relative(direction.getOpposite()));
-        return blockState.is(this) && blockState.getValue(FACING) == direction ? this.defaultBlockState()
-                                                                                     .setValue(
-                                                                                         FACING,
-                                                                                         direction.getOpposite()
-                                                                                     ) : this.defaultBlockState()
-                                                                                             .setValue(
-                                                                                                 FACING, direction);
+        BlockState blockState = ctx
+            .getLevel()
+            .getBlockState(
+                ctx
+                    .getClickedPos()
+                    .relative(direction.getOpposite())
+            );
+        return blockState.is(this) && blockState.getValue(FACING) == direction
+            ? this
+                .defaultBlockState()
+                .setValue(
+                    FACING,
+                    direction.getOpposite()
+                )
+            : this
+                .defaultBlockState()
+                .setValue(
+                    FACING,
+                    direction
+                );
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return ((w, p, s, b) -> PastelNodeBlockEntity.tick(w, p, s, (PastelNodeBlockEntity) b));
     }
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         super.setPlacedBy(world, pos, state, placer, itemStack);
     }
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.addAll(this.pastelNodeType.getTooltips());
-        tooltip.add(
-            Component.translatable("block.pastel.pastel_network_nodes.tooltip.range", PastelNodeBlockEntity.RANGE)
-                     .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("block.pastel.pastel_network_nodes.tooltip.range", PastelNodeBlockEntity.RANGE)
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
@@ -173,7 +213,11 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         return !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : state;
@@ -181,7 +225,12 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack stack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         @Nullable PastelNodeBlockEntity blockEntity = getBlockEntity(world, pos);
@@ -195,8 +244,9 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
                     var removed = blockEntity.tryRemoveUpgrade();
                     if (!removed.isEmpty()) {
                         if (!player.getAbilities().instabuild) {
-                            player.getInventory()
-                                  .placeItemBackInInventory(removed);
+                            player
+                                .getInventory()
+                                .placeItemBackInInventory(removed);
                         }
                         blockEntity.updateUpgrades();
                         blockEntity.setChanged();
@@ -211,28 +261,36 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
         } else if (player.isCreative() && stack.is(PastelItems.PAINTBRUSH.get())) {
             sendDebugMessage(world, pos, player, blockEntity);
             return ItemInteractionResult.sidedSuccess(world.isClientSide());
-        } else if (DatabankUtils.hasAdvancement(player, PastelAdvancements.Milestones.UNLOCK_PASTEL_NODE_UPGRADING) &&
-                   stack.is(PastelItemTags.PASTEL_NODE_UPGRADES)) {
-            if (!world.isClientSide() && blockEntity.tryInteractRings(stack, pastelNodeType)) {
-                PastelCriteria.PASTEL_NODE_UPGRADING.trigger((ServerPlayer) player, stack);
-                if (!player.getAbilities().instabuild)
-                    stack.shrink(1);
-                blockEntity.updateUpgrades();
-                blockEntity.setChanged();
-                blockEntity.updateInClientWorld();
-            }
+        } else if (DatabankUtils
+            .hasAdvancement(player, PastelAdvancements.Milestones.UNLOCK_PASTEL_NODE_UPGRADING) && stack
+                .is(PastelItemTags.PASTEL_NODE_UPGRADES)) {
+                    if (!world.isClientSide() && blockEntity.tryInteractRings(stack, pastelNodeType)) {
+                        PastelCriteria.PASTEL_NODE_UPGRADING.trigger((ServerPlayer) player, stack);
+                        if (!player.getAbilities().instabuild)
+                            stack.shrink(1);
+                        blockEntity.updateUpgrades();
+                        blockEntity.setChanged();
+                        blockEntity.updateInClientWorld();
+                    }
 
-            world.playLocalSound(
-                pos, PastelSounds.MEDIUM_CRYSTAL_RING, SoundSource.BLOCKS, 0.25F, 0.9F + world.getRandom()
-                                                                                              .nextFloat() * 0.2F, true
-            );
-            return ItemInteractionResult.sidedSuccess(world.isClientSide());
-        } else if (this.pastelNodeType.usesFilters()) {
-            if (!world.isClientSide) {
-                player.openMenu(blockEntity);
-            }
-            return ItemInteractionResult.sidedSuccess(world.isClientSide());
-        }
+                    world
+                        .playLocalSound(
+                            pos,
+                            PastelSounds.MEDIUM_CRYSTAL_RING,
+                            SoundSource.BLOCKS,
+                            0.25F,
+                            0.9F + world
+                                .getRandom()
+                                .nextFloat() * 0.2F,
+                            true
+                        );
+                    return ItemInteractionResult.sidedSuccess(world.isClientSide());
+                } else if (this.pastelNodeType.usesFilters()) {
+                    if (!world.isClientSide) {
+                        player.openMenu(blockEntity);
+                    }
+                    return ItemInteractionResult.sidedSuccess(world.isClientSide());
+                }
 
         return super.useItemOn(stack, state, world, pos, player, hand, hit);
     }
@@ -254,20 +312,34 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
 
     private static void sendDebugMessage(Level world, BlockPos pos, Player player, PastelNodeBlockEntity blockEntity) {
         if (blockEntity != null) {
-            Optional<? extends PastelNetwork<?>> network = blockEntity.networkUUID.isPresent() ? Pastel.getInstance(
-                                                                                                           world.isClientSide)
-                                                                                                       .getNetwork(
-                                                                                                           blockEntity.networkUUID.get())
-                                                                                               : Optional.empty();
+            Optional<? extends PastelNetwork<?>> network = blockEntity.networkUUID.isPresent()
+                ? Pastel
+                    .getInstance(
+                        world.isClientSide
+                    )
+                    .getNetwork(
+                        blockEntity.networkUUID.get()
+                    )
+                : Optional.empty();
             String prefix = world.isClientSide ? "C (" : "S (";
             Optional<DyeColor> color = blockEntity.getColor();
-            String colorString = color.isEmpty() ? "<uncolored>" : color.get()
-                                                                        .toString();
+            String colorString = color.isEmpty()
+                ? "<uncolored>"
+                : color
+                    .get()
+                    .toString();
             if (network.isEmpty()) {
                 player.sendSystemMessage(Component.literal(prefix + colorString + "): No connected network :("));
             } else {
-                player.sendSystemMessage(Component.literal(prefix + colorString + "): " + network.get()
-                                                                                                 .getNodeDebugText()));
+                player
+                    .sendSystemMessage(
+                        Component
+                            .literal(
+                                prefix + colorString + "): " + network
+                                    .get()
+                                    .getNodeDebugText()
+                            )
+                    );
             }
         }
     }
@@ -285,8 +357,7 @@ public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, C
         return null;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PastelNodeBlockEntity(pos, state);
     }

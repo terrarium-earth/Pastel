@@ -30,30 +30,38 @@ import java.util.List;
 public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgroundEffect {
 
     public static final int COOLDOWN_DURATION_TICKS = 10;
+
     public static final InkCost PROJECTILE_COST = new InkCost(InkColors.WHITE, 50);
-        // TODO: make pricier once ink networking is in
+    // TODO: make pricier once ink networking is in
 
     public GlassCrestWorkstaffItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
 
     public static boolean canShoot(ItemStack stack) {
-        return stack.getOrDefault(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT)
-                    .canShoot();
+        return stack
+            .getOrDefault(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT)
+            .canShoot();
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player user, InteractionHand hand) {
         InteractionResultHolder<ItemStack> result = super.use(level, user, hand);
-        if (!result.getResult()
-                   .consumesAction()) {
+        if (!result
+            .getResult()
+            .consumesAction()) {
             ItemStack stack = user.getItemInHand(hand);
             if (canShoot(stack) && InkPowered.tryDrainEnergy(user, PROJECTILE_COST)) {
-                user.getCooldowns()
+                user
+                    .getCooldowns()
                     .addCooldown(this, COOLDOWN_DURATION_TICKS);
 
-                user.playSound(PastelSounds.CAST_RADIANCE, 0.5F, Support.varFloat(level.random,0.2F)
-                );
+                user
+                    .playSound(
+                        PastelSounds.CAST_RADIANCE,
+                        0.5F,
+                        Support.varFloat(level.random, 0.2F)
+                    );
                 MiningProjectileEntity.shoot(level, user, user.getItemInHand(hand));
 
                 stack.hurtAndBreak(2, user, EquipmentSlot.MAINHAND);
@@ -71,11 +79,19 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
         super.appendHoverText(stack, context, tooltip, type);
 
         if (canShoot(stack)) {
-            tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.projectile")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.workstaff.tooltip.projectile")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         } else {
-            tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.projectiles_disabled")
-                                 .withStyle(ChatFormatting.DARK_RED));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.workstaff.tooltip.projectiles_disabled")
+                        .withStyle(ChatFormatting.DARK_RED)
+                );
         }
     }
 
@@ -88,8 +104,9 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
     @Override
     public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
         if (player != null) {
-            var lookup = player.level()
-                               .registryAccess();
+            var lookup = player
+                .level()
+                .registryAccess();
             var resonance = Ench.hasEnchantment(lookup, PastelEnchantments.RESONANCE, stack);
             var silkTouch = Ench.hasEnchantment(lookup, Enchantments.SILK_TOUCH, stack);
             var fortune = Ench.hasEnchantment(lookup, Enchantments.FORTUNE, stack);

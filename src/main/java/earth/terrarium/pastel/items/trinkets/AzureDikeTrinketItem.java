@@ -30,7 +30,9 @@ public abstract class AzureDikeTrinketItem extends PastelTrinketItem implements 
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(Component.translatable("item.pastel.azure_dike_provider.tooltip", maxAzureDike(stack)));

@@ -15,7 +15,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class PastelDamageTypeTagsProvider extends DamageTypeTagsProvider {
     public PastelDamageTypeTagsProvider(
-        PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider,
+        PackOutput packOutput,
+        CompletableFuture<HolderLookup.Provider> lookupProvider,
         @Nullable ExistingFileHelper existingFileHelper
     ) {
         super(packOutput, lookupProvider, PastelCommon.MOD_ID, existingFileHelper);

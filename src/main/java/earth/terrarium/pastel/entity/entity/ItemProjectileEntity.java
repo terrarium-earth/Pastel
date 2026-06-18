@@ -41,25 +41,36 @@ public class ItemProjectileEntity extends ThrowableItemProjectile {
             if (behavior != null) {
                 HitResult.Type type = hitResult.getType();
                 if (type == HitResult.Type.ENTITY) {
-                    this.level()
+                    this
+                        .level()
                         .gameEvent(
-                            GameEvent.PROJECTILE_LAND, hitResult.getLocation(), GameEvent.Context.of(this, null));
+                            GameEvent.PROJECTILE_LAND,
+                            hitResult.getLocation(),
+                            GameEvent.Context.of(this, null)
+                        );
                     behavior.onEntityHit(this, stack, getOwner(), (EntityHitResult) hitResult);
                 } else if (type == HitResult.Type.BLOCK) {
                     BlockHitResult blockHitResult = (BlockHitResult) hitResult;
                     BlockPos blockPos = blockHitResult.getBlockPos();
-                    this.level()
+                    this
+                        .level()
                         .gameEvent(
-                            GameEvent.PROJECTILE_LAND, blockPos, GameEvent.Context.of(
-                                this, this.level()
-                                          .getBlockState(blockPos)
-                            )
+                            GameEvent.PROJECTILE_LAND,
+                            blockPos,
+                            GameEvent.Context
+                                .of(
+                                    this,
+                                    this
+                                        .level()
+                                        .getBlockState(blockPos)
+                                )
                         );
                     stack = behavior.onBlockHit(this, stack, getOwner(), (BlockHitResult) hitResult);
                 }
             }
 
-            this.level()
+            this
+                .level()
                 .broadcastEntityEvent(this, EntityEvent.DEATH);
 
             if (!stack.isEmpty()) {
@@ -77,12 +88,20 @@ public class ItemProjectileEntity extends ThrowableItemProjectile {
     public void handleEntityEvent(byte status) {
         if (status == EntityEvent.DEATH) {
             ItemStack itemStack = this.getItem();
-            ParticleOptions particleEffect = (itemStack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL
-                                                                  : new ItemParticleOption(
-                                                                      ParticleTypes.ITEM, itemStack));
+            ParticleOptions particleEffect = (itemStack.isEmpty()
+                ? ParticleTypes.ITEM_SNOWBALL
+                : new ItemParticleOption(
+                    ParticleTypes.ITEM,
+                    itemStack
+                ));
 
-            for (int i = 0; i < 8; ++i) {
-                this.level()
+            for (
+                int i = 0;
+                i < 8;
+                ++i
+            ) {
+                this
+                    .level()
                     .addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
             }
         }

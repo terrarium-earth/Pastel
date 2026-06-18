@@ -21,7 +21,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ItemEntity.class)
+@Mixin(
+    ItemEntity.class
+)
 public abstract class ItemEntityMixin {
 
     @Shadow
@@ -33,11 +35,21 @@ public abstract class ItemEntityMixin {
     @Shadow
     public abstract boolean hurt(DamageSource source, float amount);
 
-    @Inject(at = @At("TAIL"),
-            method = "<init>(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/item/ItemStack;DDD)V")
+    @Inject(
+        at = @At(
+            "TAIL"
+        ), method = "<init>(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/item/ItemStack;DDD)V"
+    )
     public void ItemEntity(
-        Level world, double x, double y, double z, ItemStack stack, double velocityX, double velocityY,
-        double velocityZ, CallbackInfo ci
+        Level world,
+        double x,
+        double y,
+        double z,
+        ItemStack stack,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
+        CallbackInfo ci
     ) {
         // item stacks that are enchanted with damage proof should never despawn
         if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
@@ -45,21 +57,28 @@ public abstract class ItemEntityMixin {
         }
     }
 
-    @Inject(at = @At("TAIL"), method = "tick()V")
+    @Inject(
+        at = @At(
+            "TAIL"
+        ), method = "tick()V"
+    )
     public void tick(CallbackInfo ci) {
         // protect steadfast enchanted item stacks from the void by letting them float above it
         ItemEntity thisItemEntity = ((ItemEntity) (Object) this);
-        if (!thisItemEntity.isNoGravity() && thisItemEntity.level()
-                                                           .getGameTime() % 8 == 0) {
-            int worldMinY = thisItemEntity.level()
-                                          .getMinBuildHeight();
-            if (!thisItemEntity.onGround()
-                && thisItemEntity.position()
-                                 .y() < worldMinY + 2
-                && EnchantmentHelper.hasTag(thisItemEntity.getItem(), PastelEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
+        if (!thisItemEntity.isNoGravity() && thisItemEntity
+            .level()
+            .getGameTime() % 8 == 0) {
+            int worldMinY = thisItemEntity
+                .level()
+                .getMinBuildHeight();
+            if (!thisItemEntity.onGround() && thisItemEntity
+                .position()
+                .y() < worldMinY + 2 && EnchantmentHelper
+                    .hasTag(thisItemEntity.getItem(), PastelEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
 
-                if (thisItemEntity.position()
-                                  .y() < worldMinY + 1) {
+                if (thisItemEntity
+                    .position()
+                    .y() < worldMinY + 1) {
                     thisItemEntity.setPos(thisItemEntity.position().x, worldMinY + 1, thisItemEntity.position().z);
                 }
 
@@ -68,24 +87,40 @@ public abstract class ItemEntityMixin {
             }
         }
 
-        if (thisItemEntity.getItem()
-                          .getItem() instanceof TickAwareItem tickingItem) {
+        if (thisItemEntity
+            .getItem()
+            .getItem() instanceof TickAwareItem tickingItem) {
             tickingItem.onItemEntityTicked(thisItemEntity);
         }
     }
 
-    @Inject(at = @At("HEAD"), method = "hurt")
+    @Inject(
+        at = @At(
+            "HEAD"
+        ), method = "hurt"
+    )
     public void spectrumItemStackDamageActions(
-        DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        if (amount > 0 && this.getItem()
-                              .getItem() instanceof DamageAwareItem damageAwareItem) {
+        DamageSource source,
+        float amount,
+        CallbackInfoReturnable<Boolean> callbackInfoReturnable
+    ) {
+        if (amount > 0 && this
+            .getItem()
+            .getItem() instanceof DamageAwareItem damageAwareItem) {
             damageAwareItem.onItemEntityDamaged(source, amount, (ItemEntity) (Object) this);
         }
     }
 
-    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "hurt", at = @At(
+            "HEAD"
+        ), cancellable = true
+    )
     private void isDamageProof(
-        DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+        DamageSource source,
+        float amount,
+        CallbackInfoReturnable<Boolean> callbackInfoReturnable
+    ) {
         ItemEntity thisItemEntity = (ItemEntity) (Object) this;
         if (ItemDamageImmunity.isImmuneTo(thisItemEntity.getItem(), source)) {
             callbackInfoReturnable.setReturnValue(true);
@@ -99,14 +134,22 @@ public abstract class ItemEntityMixin {
         }
     }
 
-    @Inject(method = "fireImmune", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "fireImmune", at = @At(
+            "HEAD"
+        ), cancellable = true
+    )
     private void isFireProof(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         if (ItemDamageImmunity.isImmuneTo(((ItemEntity) (Object) this).getItem(), DamageTypeTags.IS_FIRE)) {
             callbackInfoReturnable.setReturnValue(true);
         }
     }
 
-    @Inject(method = "tick()V", at = @At("TAIL"))
+    @Inject(
+        method = "tick()V", at = @At(
+            "TAIL"
+        )
+    )
     public void doGravityEffects(CallbackInfo ci) {
         ItemEntity itemEntity = ((ItemEntity) (Object) this);
 

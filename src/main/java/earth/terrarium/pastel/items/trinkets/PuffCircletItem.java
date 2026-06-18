@@ -10,6 +10,7 @@ import java.util.List;
 public class PuffCircletItem extends AzureDikeTrinketItem {
 
     public static final float PROJECTILE_DEFLECTION_COST = 4;
+
     public static final float FALL_DAMAGE_NEGATING_COST = 2;
 
     public PuffCircletItem(Properties settings, ResourceLocation unlockIdentifier) {

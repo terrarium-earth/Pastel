@@ -24,8 +24,7 @@ public class DiagonalBlock extends Block {
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         var state = super.getStateForPlacement(ctx);
         var player = ctx.getPlayer();

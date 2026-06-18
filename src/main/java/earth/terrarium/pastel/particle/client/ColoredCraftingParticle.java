@@ -13,12 +13,22 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ColoredCraftingParticle extends TextureSheetParticle {
 
     protected ColoredCraftingParticle(
-        ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
-        float red, float green, float blue
+        ClientLevel clientWorld,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
+        float red,
+        float green,
+        float blue
     ) {
         super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
         this.gravity = 0.0F;
@@ -54,7 +64,9 @@ public class ColoredCraftingParticle extends TextureSheetParticle {
         return j | k << 16;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<ColoredCraftingParticleEffect> {
 
         private final SpriteSet spriteProvider;
@@ -65,12 +77,28 @@ public class ColoredCraftingParticle extends TextureSheetParticle {
 
         @Override
         public @Nullable Particle createParticle(
-            ColoredCraftingParticleEffect parameters, ClientLevel world, double x, double y, double z, double velocityX,
-            double velocityY, double velocityZ
+            ColoredCraftingParticleEffect parameters,
+            ClientLevel world,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             Vector3f color = parameters.getColor();
             ColoredCraftingParticle coloredCraftingParticle = new ColoredCraftingParticle(
-                world, x, y, z, velocityX, velocityY, velocityZ, color.x, color.y, color.z);
+                world,
+                x,
+                y,
+                z,
+                velocityX,
+                velocityY,
+                velocityZ,
+                color.x,
+                color.y,
+                color.z
+            );
             coloredCraftingParticle.setLifetime((int) (8.0D / (world.random.nextDouble() * 0.8D + 0.2D)));
             coloredCraftingParticle.pickSprite(this.spriteProvider);
             return coloredCraftingParticle;

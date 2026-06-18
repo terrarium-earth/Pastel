@@ -31,17 +31,23 @@ public class HeartboundChestBlock extends PastelChestBlock {
     }
 
     @Override
-    @Nullable
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    @Nullable public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new HeartboundChestBlockEntity(pos, state);
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? createTickerHelper(
-            type, PastelBlockEntities.HEARTBOUND_CHEST.get(), HeartboundChestBlockEntity::clientTick) : null;
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? createTickerHelper(
+                type,
+                PastelBlockEntities.HEARTBOUND_CHEST.get(),
+                HeartboundChestBlockEntity::clientTick
+            )
+            : null;
     }
 
     @Override
@@ -122,6 +128,5 @@ public class HeartboundChestBlock extends PastelChestBlock {
     public float defaultDestroyTime() {
         return -1;
     }
-
 
 }

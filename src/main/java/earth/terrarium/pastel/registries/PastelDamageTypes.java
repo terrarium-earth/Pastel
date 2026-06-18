@@ -18,49 +18,128 @@ import static earth.terrarium.pastel.PastelCommon.locate;
 // Make a custom damage source if you want a custom message, otherwise return a damage source with the type you want
 public class PastelDamageTypes {
 
-    public static final ResourceKey<DamageType> BRISTLE_SPROUTS = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("bristle_sprouts"));
-    public static final ResourceKey<DamageType> DARK_STAKE = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("dark_stake")
-    );
-    public static final ResourceKey<DamageType> DEADLY_POISON = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("deadly_poison"));
+    public static final ResourceKey<DamageType> BRISTLE_SPROUTS = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("bristle_sprouts")
+        );
+
+    public static final ResourceKey<DamageType> DARK_STAKE = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("dark_stake")
+        );
+
+    public static final ResourceKey<DamageType> DEADLY_POISON = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("deadly_poison")
+        );
+
     public static final ResourceKey<DamageType> DECAY = ResourceKey.create(Registries.DAMAGE_TYPE, locate("decay"));
-    public static final ResourceKey<DamageType> DIKE_GATE = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("dike_gate"));
-    public static final ResourceKey<DamageType> DRAGONROT = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("dragonrot"));
-    public static final ResourceKey<DamageType> ELECTRIC = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("electric"));
-    public static final ResourceKey<DamageType> EVISCERATION = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("evisceration"));
-    public static final ResourceKey<DamageType> FLOATBLOCK = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("floatblock"));
-    public static final ResourceKey<DamageType> IMPALING = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("impaling"));
-    public static final ResourceKey<DamageType> INCANDESCENCE = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("incandescence")); // explosions with that type cause Primordial Fire
-    public static final ResourceKey<DamageType> INK_PROJECTILE = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("ink_projectile"));
-    public static final ResourceKey<DamageType> IRRADIANCE = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("irradiance"));
-    public static final ResourceKey<DamageType> KINDLING_COUGH = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("kindling_cough"));
-    public static final ResourceKey<DamageType> MIDNIGHT_SOLUTION = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("midnight_solution"));
-    public static final ResourceKey<DamageType> MOONSTONE_STRIKE = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("moonstone_strike"));
-    public static final ResourceKey<DamageType> PRIMORDIAL_FIRE = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("primordial_fire"));
+
+    public static final ResourceKey<DamageType> DIKE_GATE = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("dike_gate")
+        );
+
+    public static final ResourceKey<DamageType> DRAGONROT = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("dragonrot")
+        );
+
+    public static final ResourceKey<DamageType> ELECTRIC = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("electric")
+        );
+
+    public static final ResourceKey<DamageType> EVISCERATION = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("evisceration")
+        );
+
+    public static final ResourceKey<DamageType> FLOATBLOCK = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("floatblock")
+        );
+
+    public static final ResourceKey<DamageType> IMPALING = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("impaling")
+        );
+
+    public static final ResourceKey<DamageType> INCANDESCENCE = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("incandescence")
+        ); // explosions with that type cause Primordial Fire
+
+    public static final ResourceKey<DamageType> INK_PROJECTILE = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("ink_projectile")
+        );
+
+    public static final ResourceKey<DamageType> IRRADIANCE = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("irradiance")
+        );
+
+    public static final ResourceKey<DamageType> KINDLING_COUGH = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("kindling_cough")
+        );
+
+    public static final ResourceKey<DamageType> MIDNIGHT_SOLUTION = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("midnight_solution")
+        );
+
+    public static final ResourceKey<DamageType> MOONSTONE_STRIKE = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("moonstone_strike")
+        );
+
+    public static final ResourceKey<DamageType> PRIMORDIAL_FIRE = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("primordial_fire")
+        );
+
     public static final ResourceKey<DamageType> RIPPING = ResourceKey.create(Registries.DAMAGE_TYPE, locate("ripping"));
-    public static final ResourceKey<DamageType> SET_HEALTH = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("set_health"));
-    public static final ResourceKey<DamageType> SHOOTING_STAR = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("shooting_star"));
+
+    public static final ResourceKey<DamageType> SET_HEALTH = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("set_health")
+        );
+
+    public static final ResourceKey<DamageType> SHOOTING_STAR = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("shooting_star")
+        );
+
     public static final ResourceKey<DamageType> SLEEP = ResourceKey.create(Registries.DAMAGE_TYPE, locate("sleep"));
-    public static final ResourceKey<DamageType> SNAPPING_IVY = ResourceKey.create(
-        Registries.DAMAGE_TYPE, locate("snapping_ivy"));
-    public static final ResourceKey<DamageType> LACERATING = ResourceKey.create(Registries.DAMAGE_TYPE, locate("lacerating"));
+
+    public static final ResourceKey<DamageType> SNAPPING_IVY = ResourceKey
+        .create(
+            Registries.DAMAGE_TYPE,
+            locate("snapping_ivy")
+        );
+
+    public static final ResourceKey<DamageType> LACERATING = ResourceKey
+        .create(Registries.DAMAGE_TYPE, locate("lacerating"));
 
     public static DamageSource sleep(Level world, @Nullable LivingEntity attacker) {
         return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(SLEEP), attacker);
@@ -76,7 +155,10 @@ public class PastelDamageTypes {
 
     public static DamageSource inkProjectile(InkProjectileEntity projectile, @Nullable Entity attacker) {
         return new DamageSource(
-            projectile.damageSources().damageTypes.getHolderOrThrow(INK_PROJECTILE), projectile, attacker);
+            projectile.damageSources().damageTypes.getHolderOrThrow(INK_PROJECTILE),
+            projectile,
+            attacker
+        );
     }
 
     public static DamageSource moonstoneStrike(Level world, @Nullable MoonstoneStrike moonstoneStrike) {
@@ -103,7 +185,7 @@ public class PastelDamageTypes {
         return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(EVISCERATION), attacker);
     }
 
-    public static DamageSource electric(Level world){
+    public static DamageSource electric(Level world) {
         return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(ELECTRIC));
     }
 
@@ -131,7 +213,7 @@ public class PastelDamageTypes {
         return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(MIDNIGHT_SOLUTION));
     }
 
-    public static DamageSource darkStake(Level world){
+    public static DamageSource darkStake(Level world) {
         return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(DARK_STAKE));
     }
 
@@ -186,8 +268,10 @@ public class PastelDamageTypes {
 
         public MoonstoneStrikeDamageSource(MoonstoneStrike moonstoneStrike) {
             super(
-                moonstoneStrike.getDamageSource()
-                               .typeHolder(), moonstoneStrike.getCausingEntity()
+                moonstoneStrike
+                    .getDamageSource()
+                    .typeHolder(),
+                moonstoneStrike.getCausingEntity()
             );
         }
     }

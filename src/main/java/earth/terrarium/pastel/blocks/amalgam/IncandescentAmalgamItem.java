@@ -35,14 +35,26 @@ public class IncandescentAmalgamItem extends BlockItem implements DamageAwareIte
         user.hurt(PastelDamageTypes.incandescence(world), 500.0F);
 
         float explosionPower = getExplosionPower(stack, false);
-        world.explode(
-            user, PastelDamageTypes.incandescence(world), new EntityBasedExplosionDamageCalculator(user), user.getX(),
-            user.getEyeY(), user.getZ(), explosionPower, true, Level.ExplosionInteraction.BLOCK
-        );
+        world
+            .explode(
+                user,
+                PastelDamageTypes.incandescence(world),
+                new EntityBasedExplosionDamageCalculator(user),
+                user.getX(),
+                user.getEyeY(),
+                user.getZ(),
+                explosionPower,
+                true,
+                Level.ExplosionInteraction.BLOCK
+            );
 
         if (user.isAlive() && user instanceof ServerPlayer serverPlayerEntity && !serverPlayerEntity.isCreative()) {
-            Support.grantAdvancementCriterion(
-                serverPlayerEntity, "survive_drinking_incandescent_amalgam", "survived_drinking_incandescent_amalgam");
+            Support
+                .grantAdvancementCriterion(
+                    serverPlayerEntity,
+                    "survive_drinking_incandescent_amalgam",
+                    "survived_drinking_incandescent_amalgam"
+                );
         }
 
         return stack;
@@ -51,14 +63,25 @@ public class IncandescentAmalgamItem extends BlockItem implements DamageAwareIte
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("block.pastel.incandescent_amalgam.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(
-            Component.translatable("block.pastel.incandescent_amalgam.tooltip_power", getExplosionPower(stack, false))
-                     .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("block.pastel.incandescent_amalgam.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("block.pastel.incandescent_amalgam.tooltip_power", getExplosionPower(stack, false))
+                    .withStyle(ChatFormatting.GRAY)
+            );
         if (FermentedItem.isPreviewStack(stack))
-            tooltip.add(Component.translatable("block.pastel.incandescent_amalgam.tooltip.preview")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("block.pastel.incandescent_amalgam.tooltip.preview")
+                        .withStyle(ChatFormatting.GRAY)
+                );
     }
 
     @Override
@@ -69,16 +92,24 @@ public class IncandescentAmalgamItem extends BlockItem implements DamageAwareIte
 
         float explosionPower = getExplosionPower(stack, true);
         var world = itemEntity.level();
-        world.explode(
-            itemEntity, PastelDamageTypes.incandescence(world, itemEntity),
-            new EntityBasedExplosionDamageCalculator(itemEntity), itemEntity.getX(), itemEntity.getY(),
-            itemEntity.getZ(), explosionPower, true, Level.ExplosionInteraction.BLOCK
-        );
+        world
+            .explode(
+                itemEntity,
+                PastelDamageTypes.incandescence(world, itemEntity),
+                new EntityBasedExplosionDamageCalculator(itemEntity),
+                itemEntity.getX(),
+                itemEntity.getY(),
+                itemEntity.getZ(),
+                explosionPower,
+                true,
+                Level.ExplosionInteraction.BLOCK
+            );
     }
 
     public float getExplosionPower(ItemStack stack, boolean useCount) {
-        float alcPercent = stack.getOrDefault(PastelDataComponentTypes.BEVERAGE, BeverageComponent.DEFAULT)
-                                .alcoholPercent();
+        float alcPercent = stack
+            .getOrDefault(PastelDataComponentTypes.BEVERAGE, BeverageComponent.DEFAULT)
+            .alcoholPercent();
         return alcPercent <= 0 ? 6 : alcPercent * (useCount ? 0.875F + (stack.getCount() / 8F) : 1);
     }
 

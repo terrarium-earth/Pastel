@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack;
 
 public class DisabledSlot extends Slot {
 
-
     public DisabledSlot(Container inventory, int index, int x, int y) {
         super(inventory, index, x, y);
     }

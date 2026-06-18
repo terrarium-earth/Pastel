@@ -24,18 +24,31 @@ import net.minecraft.world.phys.Vec3;
 public class LightGreatswordItem extends ParryingSwordItem implements SplitDamageHandler, HasColorGradient {
 
     private final ColorGradient lungeGradient;
+
     private final int barColor;
 
     public LightGreatswordItem(
-        Tier material, int attackDamage, float attackSpeed, float crit, float reach, int barColor, ColorGradient lungeGradient,
+        Tier material,
+        int attackDamage,
+        float attackSpeed,
+        float crit,
+        float reach,
+        int barColor,
+        ColorGradient lungeGradient,
         Properties settings
     ) {
         super(material, attackDamage, attackSpeed, crit, reach, settings);
         this.barColor = barColor;
         this.lungeGradient = lungeGradient;
     }
+
     public LightGreatswordItem(
-        Tier material, int attackDamage, float attackSpeed, float crit, float reach, int barColor,
+        Tier material,
+        int attackDamage,
+        float attackSpeed,
+        float crit,
+        float reach,
+        int barColor,
         Properties settings
     ) {
         this(material, attackDamage, attackSpeed, crit, reach, barColor, null, settings);
@@ -65,20 +78,30 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
             return;
 
         var maxShieldTime = getMaxShieldingTime(user, stack);
-        if (!player.onGround() && maxShieldTime - remainingUseTicks > 5 && !MiscPlayerData.get(player)
-                                                                                          .isParrying()) {
+        if (!player.onGround() && maxShieldTime - remainingUseTicks > 5 && !MiscPlayerData
+            .get(player)
+            .isParrying()) {
 
             var chargeDir = Vec3.directionFromRotation(player.getXRot(), player.getYRot());
             float chargeStrength = Math.min((float) (maxShieldTime - remainingUseTicks) / maxShieldTime + 0.2F, 1F);
 
-            player.push(chargeDir.normalize()
-                                 .scale(getLungeSpeed() * chargeStrength));
-            player.playSound(
-                PastelSounds.LUNGE, 2F, 0.8F + player.getRandom()
-                                                          .nextFloat() * 0.2F
-            );
-            MiscPlayerData.get(player)
-                          .initiateLungeState(this);
+            player
+                .push(
+                    chargeDir
+                        .normalize()
+                        .scale(getLungeSpeed() * chargeStrength)
+                );
+            player
+                .playSound(
+                    PastelSounds.LUNGE,
+                    2F,
+                    0.8F + player
+                        .getRandom()
+                        .nextFloat() * 0.2F
+                );
+            MiscPlayerData
+                .get(player)
+                .initiateLungeState(this);
         }
     }
 
@@ -96,24 +119,34 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
             return;
 
         var effect = target.isInvertedHealAndHarm() ? MobEffects.REGENERATION : MobEffects.POISON;
-        int sharpness = Ench.getLevel(
-            target.level()
-                  .registryAccess(), Enchantments.SHARPNESS, stack
-        );
+        int sharpness = Ench
+            .getLevel(
+                target
+                    .level()
+                    .registryAccess(),
+                Enchantments.SHARPNESS,
+                stack
+            );
         target.addEffect(new MobEffectInstance(effect, 20 * (5 + sharpness), 1));
     }
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof Player player) {
-            if (MiscPlayerData.get(player)
-                              .isLunging()) {
-                MiscPlayerData.get(player)
-                              .endLunge();
-                target.playSound(
-                    PastelSounds.LUNGE_CRIT, 1F, 0.9F + target.getRandom()
-                                                                   .nextFloat() * 0.2F
-                );
+            if (MiscPlayerData
+                .get(player)
+                .isLunging()) {
+                MiscPlayerData
+                    .get(player)
+                    .endLunge();
+                target
+                    .playSound(
+                        PastelSounds.LUNGE_CRIT,
+                        1F,
+                        0.9F + target
+                            .getRandom()
+                            .nextFloat() * 0.2F
+                    );
                 applyLungeHitEffects(stack, target, attacker);
             }
         }
@@ -122,12 +155,17 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 
     @Override
     public DamageComposition getDamageComposition(
-        LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
+        LivingEntity attacker,
+        LivingEntity target,
+        ItemStack stack,
+        float damage
+    ) {
         var composition = new DamageComposition();
         var source = composition.getPlayerOrEntity(attacker);
 
-        if (attacker instanceof Player player && MiscPlayerData.get(player)
-                                                               .isLunging()) {
+        if (attacker instanceof Player player && MiscPlayerData
+            .get(player)
+            .isLunging()) {
             source = PastelDamageTypes.impaling(player.level(), player);
         }
 
@@ -137,8 +175,9 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 
     @Override
     public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-        return entity instanceof Player player && MiscPlayerData.get(player)
-                                                                .isLunging();
+        return entity instanceof Player player && MiscPlayerData
+            .get(player)
+            .isLunging();
     }
 
     @Override

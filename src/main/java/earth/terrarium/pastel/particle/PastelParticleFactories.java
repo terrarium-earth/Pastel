@@ -44,102 +44,176 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
 // See ParticleManager for vanilla
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PastelParticleFactories {
 
     public static void register(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(PastelParticleTypes.COLORED_CRAFTING, ColoredCraftingParticle.Factory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.COLORED_FLUID_RISING, FixedVelocityParticle.ColoredFluidRisingFactory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.COLORED_SPARKLE_RISING, FixedVelocityParticle.ColoredSparkleRisingFactory::new);
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.COLORED_FLUID_RISING,
+                FixedVelocityParticle.ColoredFluidRisingFactory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.COLORED_SPARKLE_RISING,
+                FixedVelocityParticle.ColoredSparkleRisingFactory::new
+            );
         event.registerSpriteSet(PastelParticleTypes.COLORED_EXPLOSION, ColoredExplosionParticle.Factory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.COLORED_FALLING_SPORE_BLOSSOM, ColoredBlockLeakParticle.Factory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.COLORED_SPORE_BLOSSOM_AIR, ColoredWaterSuspendParticle.Factory::new);
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.COLORED_FALLING_SPORE_BLOSSOM,
+                ColoredBlockLeakParticle.Factory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.COLORED_SPORE_BLOSSOM_AIR,
+                ColoredWaterSuspendParticle.Factory::new
+            );
 
-        event.registerSpriteSet(
-            PastelParticleTypes.ITEM_TRANSMISSION,
-            provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
-                TransmissionParticle particle = new TransmissionParticle(
-                    world, x, y, z, parameters.getDestination(), parameters.getArrivalInTicks());
-                particle.pickSprite(provider);
-                return particle;
-            }
-        );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.ITEM_TRANSMISSION,
+                provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
+                    TransmissionParticle particle = new TransmissionParticle(
+                        world,
+                        x,
+                        y,
+                        z,
+                        parameters.getDestination(),
+                        parameters.getArrivalInTicks()
+                    );
+                    particle.pickSprite(provider);
+                    return particle;
+                }
+            );
 
-        event.registerSpriteSet(
-            PastelParticleTypes.EXPERIENCE_TRANSMISSION,
-            provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
-                TransmissionParticle particle = new TransmissionParticle(
-                    world, x, y, z, parameters.getDestination(), parameters.getArrivalInTicks());
-                particle.pickSprite(provider);
-                return particle;
-            }
-        );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.EXPERIENCE_TRANSMISSION,
+                provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
+                    TransmissionParticle particle = new TransmissionParticle(
+                        world,
+                        x,
+                        y,
+                        z,
+                        parameters.getDestination(),
+                        parameters.getArrivalInTicks()
+                    );
+                    particle.pickSprite(provider);
+                    return particle;
+                }
+            );
 
-        event.registerSpriteSet(
-            PastelParticleTypes.WIRELESS_REDSTONE_TRANSMISSION,
-            provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
-                TransmissionParticle particle = new TransmissionParticle(
-                    world, x, y, z, parameters.getDestination(), parameters.getArrivalInTicks());
-                particle.pickSprite(provider);
-                return particle;
-            }
-        );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.WIRELESS_REDSTONE_TRANSMISSION,
+                provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
+                    TransmissionParticle particle = new TransmissionParticle(
+                        world,
+                        x,
+                        y,
+                        z,
+                        parameters.getDestination(),
+                        parameters.getArrivalInTicks()
+                    );
+                    particle.pickSprite(provider);
+                    return particle;
+                }
+            );
 
-        event.registerSpriteSet(
-            PastelParticleTypes.COLORED_TRANSMISSION,
-            provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
-                ColoredTransmissionParticle particle = new ColoredTransmissionParticle(
-                    world, x, y, z, parameters.getDestination(), parameters.getArrivalInTicks(), parameters.getColor());
-                particle.pickSprite(provider);
-                return particle;
-            }
-        );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.COLORED_TRANSMISSION,
+                provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
+                    ColoredTransmissionParticle particle = new ColoredTransmissionParticle(
+                        world,
+                        x,
+                        y,
+                        z,
+                        parameters.getDestination(),
+                        parameters.getArrivalInTicks(),
+                        parameters.getColor()
+                    );
+                    particle.pickSprite(provider);
+                    return particle;
+                }
+            );
 
-        event.registerSpriteSet(
-            PastelParticleTypes.BLOCK_POS_EVENT_TRANSMISSION,
-            provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
-                TransmissionParticle particle = new TransmissionParticle(
-                    world, x, y, z, parameters.getDestination(), parameters.getArrivalInTicks());
-                particle.pickSprite(provider);
-                return particle;
-            }
-        );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.BLOCK_POS_EVENT_TRANSMISSION,
+                provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
+                    TransmissionParticle particle = new TransmissionParticle(
+                        world,
+                        x,
+                        y,
+                        z,
+                        parameters.getDestination(),
+                        parameters.getArrivalInTicks()
+                    );
+                    particle.pickSprite(provider);
+                    return particle;
+                }
+            );
 
-        event.registerSpriteSet(
-            PastelParticleTypes.PASTEL_TRANSMISSION,
-            provider -> (pastelTransmissionParticleEffect, world, x, y, z, velocityX, velocityY, velocityZ) -> {
-                PastelTransmissionParticle particle = new PastelTransmissionParticle(
-                    Minecraft.getInstance()
-                             .getItemRenderer(), world, x, y, z, pastelTransmissionParticleEffect.nodePositions(),
-                    pastelTransmissionParticleEffect.stack(), pastelTransmissionParticleEffect.travelTime(),
-                    pastelTransmissionParticleEffect.color()
-                );
-                particle.pickSprite(provider);
-                float[] color = PastelRenderHelper.unpackNormalizedColor(pastelTransmissionParticleEffect.color());
-                particle.setColor(color[1], color[2], color[3]);
-                return particle;
-            }
-        );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.PASTEL_TRANSMISSION,
+                provider -> (pastelTransmissionParticleEffect, world, x, y, z, velocityX, velocityY, velocityZ) -> {
+                    PastelTransmissionParticle particle = new PastelTransmissionParticle(
+                        Minecraft
+                            .getInstance()
+                            .getItemRenderer(),
+                        world,
+                        x,
+                        y,
+                        z,
+                        pastelTransmissionParticleEffect.nodePositions(),
+                        pastelTransmissionParticleEffect.stack(),
+                        pastelTransmissionParticleEffect.travelTime(),
+                        pastelTransmissionParticleEffect.color()
+                    );
+                    particle.pickSprite(provider);
+                    float[] color = PastelRenderHelper.unpackNormalizedColor(pastelTransmissionParticleEffect.color());
+                    particle.setColor(color[1], color[2], color[3]);
+                    return particle;
+                }
+            );
 
         event.registerSpriteSet(PastelParticleTypes.HUMMINGSTONE_TRANSMISSION, TransmissionParticle.Factory::new);
 
-        event.registerSpriteSet(
-            PastelParticleTypes.MOONSTONE_STRIKE,
-            provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
-                MoonstoneStrikeParticle.Factory factory = new MoonstoneStrikeParticle.Factory();
-                return factory.createParticle(
-                    PastelParticleTypes.MOONSTONE_STRIKE, world, x, y, z, velocityX, velocityY, velocityZ);
-            }
-        );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.MOONSTONE_STRIKE,
+                provider -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
+                    MoonstoneStrikeParticle.Factory factory = new MoonstoneStrikeParticle.Factory();
+                    return factory
+                        .createParticle(
+                            PastelParticleTypes.MOONSTONE_STRIKE,
+                            world,
+                            x,
+                            y,
+                            z,
+                            velocityX,
+                            velocityY,
+                            velocityZ
+                        );
+                }
+            );
 
-        event.registerSpriteSet(
-            PastelParticleTypes.PRIMORDIAL_COSY_SMOKE, LargePrimordialSmokeParticle.CosySmokeFactory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.PRIMORDIAL_SIGNAL_SMOKE, LargePrimordialSmokeParticle.SignalSmokeFactory::new);
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.PRIMORDIAL_COSY_SMOKE,
+                LargePrimordialSmokeParticle.CosySmokeFactory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.PRIMORDIAL_SIGNAL_SMOKE,
+                LargePrimordialSmokeParticle.SignalSmokeFactory::new
+            );
         event.registerSpriteSet(PastelParticleTypes.PRIMORDIAL_SMOKE, PrimordialSmokeParticle.Factory::new);
         event.registerSpriteSet(PastelParticleTypes.PRIMORDIAL_FLAME, FlameParticle.Provider::new);
         event.registerSpriteSet(PastelParticleTypes.PRIMORDIAL_FLAME_SMALL, FlameParticle.SmallFlameProvider::new);
@@ -180,36 +254,57 @@ public class PastelParticleFactories {
 
         // Fluid Dripping
         event.registerSpriteSet(PastelParticleTypes.DRIPPING_HUMUS, PastelBlockLeakParticles.DrippingHumusFactory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.DRIPPING_LIQUID_CRYSTAL, PastelBlockLeakParticles.DrippingLiquidCrystalFactory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.DRIPPING_MIDNIGHT_SOLUTION,
-            PastelBlockLeakParticles.DrippingMidnightSolutionFactory::new
-        );
-        event.registerSpriteSet(
-            PastelParticleTypes.DRIPPING_DRAGONROT, PastelBlockLeakParticles.DrippingDragonrotFactory::new);
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.DRIPPING_LIQUID_CRYSTAL,
+                PastelBlockLeakParticles.DrippingLiquidCrystalFactory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.DRIPPING_MIDNIGHT_SOLUTION,
+                PastelBlockLeakParticles.DrippingMidnightSolutionFactory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.DRIPPING_DRAGONROT,
+                PastelBlockLeakParticles.DrippingDragonrotFactory::new
+            );
 
         // Fluid Falling
         event.registerSpriteSet(PastelParticleTypes.FALLING_HUMUS, PastelBlockLeakParticles.FallingHumusFactory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.FALLING_LIQUID_CRYSTAL, PastelBlockLeakParticles.FallingLiquidCrystalFactory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.FALLING_MIDNIGHT_SOLUTION,
-            PastelBlockLeakParticles.FallingMidnightSolutionFactory::new
-        );
-        event.registerSpriteSet(
-            PastelParticleTypes.FALLING_DRAGONROT, PastelBlockLeakParticles.FallingDragonrotFactory::new);
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.FALLING_LIQUID_CRYSTAL,
+                PastelBlockLeakParticles.FallingLiquidCrystalFactory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.FALLING_MIDNIGHT_SOLUTION,
+                PastelBlockLeakParticles.FallingMidnightSolutionFactory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.FALLING_DRAGONROT,
+                PastelBlockLeakParticles.FallingDragonrotFactory::new
+            );
 
         // Fluid Landing
         event.registerSpriteSet(PastelParticleTypes.LANDING_HUMUS, PastelBlockLeakParticles.LandingHumusFactory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.LANDING_LIQUID_CRYSTAL, PastelBlockLeakParticles.LandingLiquidCrystalFactory::new);
-        event.registerSpriteSet(
-            PastelParticleTypes.LANDING_MIDNIGHT_SOLUTION,
-            PastelBlockLeakParticles.LandingMidnightSolutionFactory::new
-        );
-        event.registerSpriteSet(
-            PastelParticleTypes.LANDING_DRAGONROT, PastelBlockLeakParticles.LandingDragonrotFactory::new);
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.LANDING_LIQUID_CRYSTAL,
+                PastelBlockLeakParticles.LandingLiquidCrystalFactory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.LANDING_MIDNIGHT_SOLUTION,
+                PastelBlockLeakParticles.LandingMidnightSolutionFactory::new
+            );
+        event
+            .registerSpriteSet(
+                PastelParticleTypes.LANDING_DRAGONROT,
+                PastelBlockLeakParticles.LandingDragonrotFactory::new
+            );
 
         // Fluid Fishing
         event.registerSpriteSet(PastelParticleTypes.LAVA_FISHING, WakeParticle.Provider::new);
@@ -236,7 +331,13 @@ public class PastelParticleFactories {
     }
 
     public static TextureSheetParticle createFallingSporeBlossom(
-        SimpleParticleType type, ClientLevel world, double x, double y, double z, double velocityX, double velocityY,
+        SimpleParticleType type,
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
         double velocityZ
     ) {
         int i = (int) (64.0F / Mth.randomBetween(world.getRandom(), 0.1F, 0.9F));
@@ -245,6 +346,5 @@ public class PastelParticleFactories {
         (blockLeakParticle).setColor(0.32F, 0.5F, 0.22F);
         return blockLeakParticle;
     }
-
 
 }

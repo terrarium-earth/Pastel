@@ -60,31 +60,54 @@ public interface FilterConfigurable {
             .stream()
             .anyMatch(filterItem -> {
 
-                if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem.asStack()
-                                                                              .is(PastelItemTags.TAG_FILTERING_ITEMS))
+                if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem
+                    .asStack()
+                    .is(PastelItemTags.TAG_FILTERING_ITEMS))
                     return filterItem.permits(itemStack);
 
-                var name = StringUtils.trim(filterItem.asStack()
-                                                      .getHoverName()
-                                                      .getString());
+                var name = StringUtils
+                    .trim(
+                        filterItem
+                            .asStack()
+                            .getHoverName()
+                            .getString()
+                    );
 
                 // This is to allow nbt filtering without item / tag filtering.
-                if (StringUtils.equalsAnyIgnoreCase(
-                    name, "*", "any", "all", "everything", "c:*", "c:any", "c:all", "c:everything"))
+                if (StringUtils
+                    .equalsAnyIgnoreCase(
+                        name,
+                        "*",
+                        "any",
+                        "all",
+                        "everything",
+                        "c:*",
+                        "c:any",
+                        "c:all",
+                        "c:everything"
+                    ))
                     return true;
 
-                var id = ResourceLocation.tryParse(
-                    StringUtils.remove(name, '#')); // let's be nice and remove any pound signs
+                var id = ResourceLocation
+                    .tryParse(
+                        StringUtils.remove(name, '#')
+                    ); // let's be nice and remove any pound signs
                 if (id == null)
                     return false;
 
-                var tag = PastelCommon.CACHED_ITEM_TAG_MAP.computeIfAbsent(
-                    id, tagId -> BuiltInRegistries.ITEM.getTagNames()
-                                                       .filter(t -> t.location()
-                                                                     .equals(tagId))
-                                                       .findFirst()
-                                                       .orElse(null)
-                );
+                var tag = PastelCommon.CACHED_ITEM_TAG_MAP
+                    .computeIfAbsent(
+                        id,
+                        tagId -> BuiltInRegistries.ITEM
+                            .getTagNames()
+                            .filter(
+                                t -> t
+                                    .location()
+                                    .equals(tagId)
+                            )
+                            .findFirst()
+                            .orElse(null)
+                    );
 
                 if (tag == null)
                     return false;
@@ -97,17 +120,24 @@ public interface FilterConfigurable {
         var innerTag = new CompoundTag();
         var list = new ListTag();
 
-        for (int i = 0; i < filterItems.size(); i++) {
+        for (
+            int i = 0;
+            i < filterItems.size();
+            i++
+        ) {
             var ref = filterItems.get(i);
             if (ref.isEmpty())
                 continue;
 
             var refTag = new CompoundTag();
             refTag.putInt("Slot", i);
-            refTag.put(
-                "Ref", ItemReference.CODEC.encodeStart(lookup.createSerializationContext(NbtOps.INSTANCE), ref)
-                                          .getOrThrow()
-            );
+            refTag
+                .put(
+                    "Ref",
+                    ItemReference.CODEC
+                        .encodeStart(lookup.createSerializationContext(NbtOps.INSTANCE), ref)
+                        .getOrThrow()
+                );
             list.add(refTag);
         }
 
@@ -123,53 +153,85 @@ public interface FilterConfigurable {
 
         var innerTag = tag.getCompound(FILTER_KEY);
         var list = innerTag.getList("Filters", Tag.TAG_COMPOUND);
-        for (int i = 0; i < list.size(); i++) {
+        for (
+            int i = 0;
+            i < list.size();
+            i++
+        ) {
             var refTag = list.getCompound(i);
             var slot = refTag.getInt("Slot");
             if (slot <= filterItems.size())
-                filterItems.set(
-                    slot, ItemReference.CODEC.decode(
-                                           lookup.createSerializationContext(NbtOps.INSTANCE), refTag.getCompound(
-                                               "Ref"))
-                                             .getOrThrow()
-                                             .getFirst()
-                );
+                filterItems
+                    .set(
+                        slot,
+                        ItemReference.CODEC
+                            .decode(
+                                lookup.createSerializationContext(NbtOps.INSTANCE),
+                                refTag
+                                    .getCompound(
+                                        "Ref"
+                                    )
+                            )
+                            .getOrThrow()
+                            .getFirst()
+                    );
         }
     }
 
     static Container getFilterInventoryFromDataClicker(ExtendedData data, ShadowSlotClicker clicker) {
-        var size = data.filterItems()
-                       .size();
+        var size = data
+            .filterItems()
+            .size();
         Container inventory = new FilterInventory(clicker, size);
-        for (int i = 0; i < size; i++) {
-            inventory.setItem(
-                i, data.filterItems()
-                       .get(i)
-                       .asStack()
-            );
+        for (
+            int i = 0;
+            i < size;
+            i++
+        ) {
+            inventory
+                .setItem(
+                    i,
+                    data
+                        .filterItems()
+                        .get(i)
+                        .asStack()
+                );
         }
         return inventory;
     }
 
     static Container getFilterInventoryFromExtendedData(
-        int syncId, @NotNull Inventory playerInventory, ExtendedData data, @NotNull AbstractContainerMenu handler) {
+        int syncId,
+        @NotNull Inventory playerInventory,
+        ExtendedData data,
+        @NotNull AbstractContainerMenu handler
+    ) {
         final var clicker = new ShadowSlotClicker.FromHandler(handler, playerInventory.player, syncId);
         return getFilterInventoryFromDataClicker(data, clicker);
     }
 
     static Container getFilterInventoryFromItemsClicker(List<ItemReference> items, ShadowSlotClicker clicker) {
         Container inventory = new FilterInventory(clicker, items.size());
-        for (int i = 0; i < items.size(); i++) {
-            inventory.setItem(
-                i, items.get(i)
+        for (
+            int i = 0;
+            i < items.size();
+            i++
+        ) {
+            inventory
+                .setItem(
+                    i,
+                    items
+                        .get(i)
                         .asStack()
-            );
+                );
         }
         return inventory;
     }
 
     static Container getFilterInventoryFromItemsHandler(
-        int syncId, @NotNull Inventory playerInventory, List<ItemReference> items,
+        int syncId,
+        @NotNull Inventory playerInventory,
+        List<ItemReference> items,
         @NotNull AbstractContainerMenu thisHandler
     ) {
         final var clicker = new ShadowSlotClicker.FromHandler(thisHandler, playerInventory.player, syncId);
@@ -187,7 +249,9 @@ public interface FilterConfigurable {
 
         class FromHandler implements ShadowSlotClicker {
             public final @NotNull AbstractContainerMenu handler;
+
             public final @NotNull Player player;
+
             public final int syncId;
 
             public FromHandler(@NotNull AbstractContainerMenu screenHandler, @NotNull Player player, int syncId) {
@@ -202,8 +266,9 @@ public interface FilterConfigurable {
                 if (!shadowSlot.onClicked(shadowStack, ClickAction.PRIMARY, player)) return;
 
                 // Sync with server
-                if (player.level()
-                          .isClientSide()) {
+                if (player
+                    .level()
+                    .isClientSide()) {
                     PacketDistributor.sendToServer(new SetShadowSlotPayload(syncId, slot.index, shadowStack));
                 }
             }
@@ -231,13 +296,21 @@ public interface FilterConfigurable {
 
     static void writeScreenOpeningData(RegistryFriendlyByteBuf buf, FilterConfigurable configurable) {
         writeScreenOpeningData(
-            buf, configurable.getItemFilters(), configurable.getFilterRows(), configurable.getSlotsPerRow(),
+            buf,
+            configurable.getItemFilters(),
+            configurable.getFilterRows(),
+            configurable.getSlotsPerRow(),
             configurable.getDrawnSlots()
         );
     }
 
     static void writeScreenOpeningData(
-        RegistryFriendlyByteBuf buf, List<ItemReference> filterItems, int rows, int slotsPerRow, int drawnSlots) {
+        RegistryFriendlyByteBuf buf,
+        List<ItemReference> filterItems,
+        int rows,
+        int slotsPerRow,
+        int drawnSlots
+    ) {
         buf.writeInt(filterItems.size());
         var nbt = new CompoundTag();
         writeFilterNbt(nbt, filterItems, buf.registryAccess());
@@ -249,7 +322,9 @@ public interface FilterConfigurable {
 
     default boolean hasEmptyFilter() {
         var filters = getItemFilters();
-        for (ItemReference filter : filters) {
+        for (
+            ItemReference filter : filters
+        ) {
             if (!filter.isEmpty())
                 return false;
         }
@@ -259,18 +334,25 @@ public interface FilterConfigurable {
     record ExtendedData(List<ItemReference> filterItems, int rows, int slotsPerRow, int drawnSlots) {
         public ExtendedData(FilterConfigurable configurable) {
             this(
-                configurable.getItemFilters(), configurable.getFilterRows(), configurable.getSlotsPerRow(),
+                configurable.getItemFilters(),
+                configurable.getFilterRows(),
+                configurable.getSlotsPerRow(),
                 configurable.getDrawnSlots()
             );
         }
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, ExtendedData> STREAM_CODEC = StreamCodec.composite(
-            ItemReference.STREAM_CODEC.apply(ByteBufCodecs.list()), ExtendedData::filterItems,
-            ByteBufCodecs.VAR_INT, ExtendedData::rows,
-            ByteBufCodecs.VAR_INT, ExtendedData::slotsPerRow,
-            ByteBufCodecs.VAR_INT, ExtendedData::drawnSlots,
-            ExtendedData::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, ExtendedData> STREAM_CODEC = StreamCodec
+            .composite(
+                ItemReference.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                ExtendedData::filterItems,
+                ByteBufCodecs.VAR_INT,
+                ExtendedData::rows,
+                ByteBufCodecs.VAR_INT,
+                ExtendedData::slotsPerRow,
+                ByteBufCodecs.VAR_INT,
+                ExtendedData::drawnSlots,
+                ExtendedData::new
+            );
 
     }
 
@@ -278,19 +360,24 @@ public interface FilterConfigurable {
 
         public ExtendedDataWithPos(BlockPos pos, FilterConfigurable configurable) {
             this(
-                pos, new ExtendedData(
-                    configurable.getItemFilters(), configurable.getFilterRows(),
-                    configurable.getSlotsPerRow(), configurable.getDrawnSlots()
+                pos,
+                new ExtendedData(
+                    configurable.getItemFilters(),
+                    configurable.getFilterRows(),
+                    configurable.getSlotsPerRow(),
+                    configurable.getDrawnSlots()
                 )
             );
         }
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, ExtendedDataWithPos> STREAM_CODEC
-            = StreamCodec.composite(
-            BlockPos.STREAM_CODEC, c -> c.pos,
-            ExtendedData.STREAM_CODEC, c -> c.data,
-            ExtendedDataWithPos::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, ExtendedDataWithPos> STREAM_CODEC = StreamCodec
+            .composite(
+                BlockPos.STREAM_CODEC,
+                c -> c.pos,
+                ExtendedData.STREAM_CODEC,
+                c -> c.data,
+                ExtendedDataWithPos::new
+            );
 
     }
 

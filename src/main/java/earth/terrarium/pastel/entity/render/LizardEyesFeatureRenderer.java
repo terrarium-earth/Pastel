@@ -11,11 +11,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class LizardEyesFeatureRenderer<T extends LivingEntity> extends EyesLayer<T, LizardEntityModel<T>> {
 
-    private static final RenderType TEXTURE = RenderType.eyes(
-        PastelCommon.locate("textures/entity/lizard/lizard_eyes.png"));
+    private static final RenderType TEXTURE = RenderType
+        .eyes(
+            PastelCommon.locate("textures/entity/lizard/lizard_eyes.png")
+        );
 
     public LizardEyesFeatureRenderer(RenderLayerParent<T, LizardEntityModel<T>> featureRendererContext) {
         super(featureRendererContext);
@@ -23,14 +27,31 @@ public class LizardEyesFeatureRenderer<T extends LivingEntity> extends EyesLayer
 
     @Override
     public void render(
-        PoseStack matrices, MultiBufferSource vertexConsumers, int light, T entity, float limbAngle, float limbDistance,
-        float tickDelta, float animationProgress, float headYaw, float headPitch
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        T entity,
+        float limbAngle,
+        float limbDistance,
+        float tickDelta,
+        float animationProgress,
+        float headYaw,
+        float headPitch
     ) {
-        if ((entity.getId() - entity.level()
-                                    .getGameTime() % 120) != 0) {
+        if ((entity.getId() - entity
+            .level()
+            .getGameTime() % 120) != 0) {
             super.render(
-                matrices, vertexConsumers, light, entity, limbAngle, limbDistance, tickDelta, animationProgress,
-                headYaw, headPitch
+                matrices,
+                vertexConsumers,
+                light,
+                entity,
+                limbAngle,
+                limbDistance,
+                tickDelta,
+                animationProgress,
+                headYaw,
+                headPitch
             );
         }
     }

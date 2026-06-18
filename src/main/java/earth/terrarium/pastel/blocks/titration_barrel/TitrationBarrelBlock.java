@@ -55,8 +55,9 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 
         @Override
         public String getSerializedName() {
-            return this.toString()
-                       .toLowerCase(Locale.ROOT);
+            return this
+                .toString()
+                .toLowerCase(Locale.ROOT);
         }
     }
 
@@ -64,9 +65,13 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 
     public TitrationBarrelBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(FACING, Direction.NORTH)
-                                                      .setValue(BARREL_STATE, BarrelState.EMPTY));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(FACING, Direction.NORTH)
+                    .setValue(BARREL_STATE, BarrelState.EMPTY)
+            );
     }
 
     @Override
@@ -74,8 +79,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new TitrationBarrelBlockEntity(pos, state);
     }
@@ -87,7 +91,12 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (world.isClientSide) {
@@ -108,43 +117,60 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
                             // or seal it with a piece of colored wood
                             if (handStack.isEmpty()) {
                                 int itemCount = InventoryHelper.countItemsInInventory(barrelEntity.inventory);
-                                Fluid fluid = barrelEntity.tank.getFluid()
-                                                               .getFluid();
+                                Fluid fluid = barrelEntity.tank
+                                    .getFluid()
+                                    .getFluid();
                                 if (fluid == Fluids.EMPTY) {
                                     if (itemCount == TitrationBarrelBlockEntity.MAX_ITEM_COUNT) {
-                                        player.displayClientMessage(
-                                            Component.translatable(
-                                                "block.pastel.titration_barrel.content_count_without_fluid_full",
-                                                itemCount
-                                            ), true
-                                        );
+                                        player
+                                            .displayClientMessage(
+                                                Component
+                                                    .translatable(
+                                                        "block.pastel.titration_barrel.content_count_without_fluid_full",
+                                                        itemCount
+                                                    ),
+                                                true
+                                            );
                                     } else {
-                                        player.displayClientMessage(
-                                            Component.translatable(
-                                                "block.pastel.titration_barrel.content_count_without_fluid", itemCount),
-                                            true
-                                        );
+                                        player
+                                            .displayClientMessage(
+                                                Component
+                                                    .translatable(
+                                                        "block.pastel.titration_barrel.content_count_without_fluid",
+                                                        itemCount
+                                                    ),
+                                                true
+                                            );
                                     }
                                 } else {
-                                    String fluidName = fluid.defaultFluidState()
-                                                            .createLegacyBlock()
-                                                            .getBlock()
-                                                            .getName()
-                                                            .getString();
+                                    String fluidName = fluid
+                                        .defaultFluidState()
+                                        .createLegacyBlock()
+                                        .getBlock()
+                                        .getName()
+                                        .getString();
                                     if (itemCount == TitrationBarrelBlockEntity.MAX_ITEM_COUNT) {
-                                        player.displayClientMessage(
-                                            Component.translatable(
-                                                "block.pastel.titration_barrel.content_count_with_fluid_full",
-                                                fluidName, itemCount
-                                            ), true
-                                        );
+                                        player
+                                            .displayClientMessage(
+                                                Component
+                                                    .translatable(
+                                                        "block.pastel.titration_barrel.content_count_with_fluid_full",
+                                                        fluidName,
+                                                        itemCount
+                                                    ),
+                                                true
+                                            );
                                     } else {
-                                        player.displayClientMessage(
-                                            Component.translatable(
-                                                "block.pastel.titration_barrel.content_count_with_fluid", fluidName,
-                                                itemCount
-                                            ), true
-                                        );
+                                        player
+                                            .displayClientMessage(
+                                                Component
+                                                    .translatable(
+                                                        "block.pastel.titration_barrel.content_count_with_fluid",
+                                                        fluidName,
+                                                        itemCount
+                                                    ),
+                                                true
+                                            );
                                     }
                                 }
                             } else {
@@ -155,49 +181,66 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
                                         }
                                         sealBarrel(world, pos, state, barrelEntity, player);
                                     } else {
-                                        player.displayClientMessage(
-                                            Component.translatable("block.pastel.titration_barrel.invalid_recipe"),
-                                            true
-                                        );
+                                        player
+                                            .displayClientMessage(
+                                                Component.translatable("block.pastel.titration_barrel.invalid_recipe"),
+                                                true
+                                            );
                                     }
                                     return ItemInteractionResult.CONSUME;
                                 }
 
-
                                 if (FluidUtil.interactWithFluidHandler(player, hand, barrelEntity.tank)) {
                                     if (!barrelEntity.tank.isEmpty()) {
-                                        if (state.getValue(BARREL_STATE) == TitrationBarrelBlock.BarrelState.FILLED &&
-                                            barrelEntity.tank.isEmpty()) {
-                                            world.setBlockAndUpdate(
-                                                pos, state.setValue(
-                                                    BARREL_STATE,
-                                                    TitrationBarrelBlock.BarrelState.EMPTY
-                                                )
-                                            );
+                                        if (state
+                                            .getValue(
+                                                BARREL_STATE
+                                            ) == TitrationBarrelBlock.BarrelState.FILLED && barrelEntity.tank
+                                                .isEmpty()) {
+                                            world
+                                                .setBlockAndUpdate(
+                                                    pos,
+                                                    state
+                                                        .setValue(
+                                                            BARREL_STATE,
+                                                            TitrationBarrelBlock.BarrelState.EMPTY
+                                                        )
+                                                );
                                         }
                                     } else {
                                         if (state.getValue(BARREL_STATE) == TitrationBarrelBlock.BarrelState.EMPTY) {
-                                            world.setBlockAndUpdate(
-                                                pos, state.setValue(
-                                                    BARREL_STATE,
-                                                    TitrationBarrelBlock.BarrelState.FILLED
-                                                )
-                                            );
+                                            world
+                                                .setBlockAndUpdate(
+                                                    pos,
+                                                    state
+                                                        .setValue(
+                                                            BARREL_STATE,
+                                                            TitrationBarrelBlock.BarrelState.FILLED
+                                                        )
+                                                );
                                         }
                                     }
                                     return ItemInteractionResult.CONSUME;
                                 }
 
                                 int countBefore = handStack.getCount();
-                                ItemStack leftoverStack
-                                    = InventoryHelper.addToInventoryUpToSingleStackWithMaxTotalCount(
-                                    handStack, barrelEntity.inventory, TitrationBarrelBlockEntity.MAX_ITEM_COUNT);
+                                ItemStack leftoverStack = InventoryHelper
+                                    .addToInventoryUpToSingleStackWithMaxTotalCount(
+                                        handStack,
+                                        barrelEntity.inventory,
+                                        TitrationBarrelBlockEntity.MAX_ITEM_COUNT
+                                    );
                                 player.setItemInHand(hand, leftoverStack);
                                 if (countBefore != leftoverStack.getCount()) {
-                                    world.playSound(
-                                        null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.8F,
-                                        0.8F + world.random.nextFloat() * 0.6F
-                                    );
+                                    world
+                                        .playSound(
+                                            null,
+                                            pos,
+                                            SoundEvents.ITEM_PICKUP,
+                                            SoundSource.BLOCKS,
+                                            0.8F,
+                                            0.8F + world.random.nextFloat() * 0.6F
+                                        );
                                     if (barrelState == BarrelState.EMPTY) {
                                         world.setBlockAndUpdate(pos, state.setValue(BARREL_STATE, BarrelState.FILLED));
                                     } else {
@@ -213,29 +256,45 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
                         // or open it with a shift-click
                         var recipe = barrelEntity.getRecipeForInventory(world);
                         if (recipe.isPresent()) {
-                            if (player.isCreative() && player.getMainHandItem()
-                                                             .is(PastelItems.PAINTBRUSH.get())) {
-                                player.displayClientMessage(
-                                    Component.translatable("block.pastel.titration_barrel.debug_added_day"), true);
+                            if (player.isCreative() && player
+                                .getMainHandItem()
+                                .is(PastelItems.PAINTBRUSH.get())) {
+                                player
+                                    .displayClientMessage(
+                                        Component.translatable("block.pastel.titration_barrel.debug_added_day"),
+                                        true
+                                    );
                                 barrelEntity.addOneDayOfSealTime();
-                                world.playSound(
-                                    null, pos, PastelSounds.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                world
+                                    .playSound(
+                                        null,
+                                        pos,
+                                        PastelSounds.NEW_RECIPE,
+                                        SoundSource.BLOCKS,
+                                        1.0F,
+                                        1.0F
+                                    );
                             }
 
                             // funky check to allow shenanigans when sealing it when changing the computer's clock to
                             // the past
                             long sealSeconds = barrelEntity.getSealSeconds();
-                            if (sealSeconds >= 0 && !recipe.get()
-                                                           .value()
-                                                           .isFermentingLongEnoughToTap(
-                                                               barrelEntity.getSealSeconds())) {
-                                player.displayClientMessage(
-                                    Component.translatable(
-                                        "block.pastel.titration_barrel.not_yet_ready",
-                                        barrelEntity.getSealMinecraftDays(),
-                                        barrelEntity.getSealRealDays()
-                                    ), true
-                                );
+                            if (sealSeconds >= 0 && !recipe
+                                .get()
+                                .value()
+                                .isFermentingLongEnoughToTap(
+                                    barrelEntity.getSealSeconds()
+                                )) {
+                                player
+                                    .displayClientMessage(
+                                        Component
+                                            .translatable(
+                                                "block.pastel.titration_barrel.not_yet_ready",
+                                                barrelEntity.getSealMinecraftDays(),
+                                                barrelEntity.getSealRealDays()
+                                            ),
+                                        true
+                                    );
                                 break;
                             }
                         }
@@ -243,50 +302,67 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
                         if (player.isShiftKeyDown()) {
                             unsealBarrel(world, pos, state, barrelEntity);
                         } else {
-                            player.displayClientMessage(
-                                Component.translatable(
-                                    "block.pastel.titration_barrel.days_of_sealing_before_opened",
-                                    barrelEntity.getSealMinecraftDays(),
-                                    barrelEntity.getSealRealDays()
-                                ), true
-                            );
+                            player
+                                .displayClientMessage(
+                                    Component
+                                        .translatable(
+                                            "block.pastel.titration_barrel.days_of_sealing_before_opened",
+                                            barrelEntity.getSealMinecraftDays(),
+                                            barrelEntity.getSealRealDays()
+                                        ),
+                                    true
+                                );
                         }
                     }
                     case TAPPED -> {
                         // player is able to extract content until it is empty
                         // reverting it to the empty state again
                         if (player.isShiftKeyDown()) {
-                            Optional<RecipeHolder<ITitrationBarrelRecipe>> recipe = world.getRecipeManager()
-                                                                                         .getRecipeFor(
-                                                                                             PastelRecipeTypes.TITRATION_BARREL,
-                                                                                             barrelEntity.getRecipeInput(),
-                                                                                             world
-                                                                                         );
+                            Optional<RecipeHolder<ITitrationBarrelRecipe>> recipe = world
+                                .getRecipeManager()
+                                .getRecipeFor(
+                                    PastelRecipeTypes.TITRATION_BARREL,
+                                    barrelEntity.getRecipeInput(),
+                                    world
+                                );
                             if (recipe.isPresent()) {
-                                player.displayClientMessage(
-                                    Component.translatable(
-                                        "block.pastel.titration_barrel" +
-                                        ".days_of_sealing_after_opened_with_extractable_amount",
-                                        recipe.get()
-                                              .value()
-                                              .assemble(barrelEntity.getRecipeInput(), world.registryAccess())
-                                              .getHoverName()
-                                              .getString(), barrelEntity.getSealMinecraftDays(),
-                                        barrelEntity.getSealRealDays()
-                                    ), true
-                                );
+                                player
+                                    .displayClientMessage(
+                                        Component
+                                            .translatable(
+                                                "block.pastel.titration_barrel" + ".days_of_sealing_after_opened_with_extractable_amount",
+                                                recipe
+                                                    .get()
+                                                    .value()
+                                                    .assemble(barrelEntity.getRecipeInput(), world.registryAccess())
+                                                    .getHoverName()
+                                                    .getString(),
+                                                barrelEntity.getSealMinecraftDays(),
+                                                barrelEntity.getSealRealDays()
+                                            ),
+                                        true
+                                    );
                             } else {
-                                player.displayClientMessage(
-                                    Component.translatable("block.pastel.titration_barrel.invalid_recipe_when_tapping"),
-                                    true
-                                );
+                                player
+                                    .displayClientMessage(
+                                        Component
+                                            .translatable("block.pastel.titration_barrel.invalid_recipe_when_tapping"),
+                                        true
+                                    );
                             }
                         } else {
-                            ItemStack harvestedStack = barrelEntity.tryHarvest(
-                                world, pos, state, player.getItemInHand(hand), player);
+                            ItemStack harvestedStack = barrelEntity
+                                .tryHarvest(
+                                    world,
+                                    pos,
+                                    state,
+                                    player.getItemInHand(hand),
+                                    player
+                                );
                             if (!harvestedStack.isEmpty()) {
-                                player.getInventory()
-                                      .placeItemBackInInventory(harvestedStack);
+                                player
+                                    .getInventory()
+                                    .placeItemBackInInventory(harvestedStack);
                                 world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F, 1.0F);
                             }
                         }
@@ -299,11 +375,17 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
     }
 
     private void tryExtractLastStack(
-        BlockState state, Level world, BlockPos pos, Player player, TitrationBarrelBlockEntity barrelEntity) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        TitrationBarrelBlockEntity barrelEntity
+    ) {
         Optional<ItemStack> stack = InventoryHelper.extractLastStack(barrelEntity.getInventory());
         if (stack.isPresent()) {
-            player.getInventory()
-                  .placeItemBackInInventory(stack.get());
+            player
+                .getInventory()
+                .placeItemBackInInventory(stack.get());
             barrelEntity.setChanged();
             if (barrelEntity.inventory.isEmpty() && barrelEntity.tank.isEmpty()) {
                 world.setBlockAndUpdate(pos, state.setValue(BARREL_STATE, BarrelState.EMPTY));
@@ -317,7 +399,12 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
     }
 
     private void sealBarrel(
-        Level world, BlockPos pos, BlockState state, TitrationBarrelBlockEntity barrelEntity, Player player) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        TitrationBarrelBlockEntity barrelEntity,
+        Player player
+    ) {
         // give recipe remainders
         barrelEntity.giveRecipeRemainders(player);
 
@@ -335,27 +422,34 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        BlockState state = this.defaultBlockState()
-                               .setValue(
-                                   FACING, ctx.getHorizontalDirection()
-                                              .getOpposite()
-                               );
+        BlockState state = this
+            .defaultBlockState()
+            .setValue(
+                FACING,
+                ctx
+                    .getHorizontalDirection()
+                    .getOpposite()
+            );
 
-        var comp = ctx.getItemInHand()
-                      .get(DataComponents.BLOCK_ENTITY_DATA);
+        var comp = ctx
+            .getItemInHand()
+            .get(DataComponents.BLOCK_ENTITY_DATA);
         if (comp != null) {
             var nbt = comp.copyTag();
-            boolean inventoryEmpty = nbt.getList("Inventory", Tag.TAG_COMPOUND)
-                                        .isEmpty();
+            boolean inventoryEmpty = nbt
+                .getList("Inventory", Tag.TAG_COMPOUND)
+                .isEmpty();
             long fluidAmount = nbt.getLong("FluidAmount");
             long sealTime = nbt.contains("SealTime", Tag.TAG_LONG) ? nbt.getLong("SealTime") : -1;
             long tapTime = nbt.contains("TapTime", Tag.TAG_LONG) ? nbt.getLong("TapTime") : -1;
 
             BarrelState barrelState = tapTime > -1
-                                      ? BarrelState.TAPPED : sealTime > -1
-                                                             ? BarrelState.SEALED : inventoryEmpty && fluidAmount == 0
-                                                                                    ? BarrelState.EMPTY
-                                                                                    : BarrelState.FILLED;
+                ? BarrelState.TAPPED
+                : sealTime > -1
+                    ? BarrelState.SEALED
+                    : inventoryEmpty && fluidAmount == 0
+                        ? BarrelState.EMPTY
+                        : BarrelState.FILLED;
             state = state.setValue(BARREL_STATE, barrelState);
         }
 
@@ -394,21 +488,25 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
                     return 15;
                 }
                 case TAPPED -> {
-                    Biome biome = world.getBiome(pos)
-                                       .value();
+                    Biome biome = world
+                        .getBiome(pos)
+                        .value();
                     Optional<RecipeHolder<ITitrationBarrelRecipe>> recipe = blockEntity.getRecipeForInventory(world);
                     if (recipe.isEmpty()) return 0;
 
                     float curr = blockEntity.extractedBottles;
-                    float max = recipe.get()
-                                      .value()
-                                      .getOutputCountAfterAngelsShare(
-                                          world, biome.getBaseTemperature(), blockEntity.getSealSeconds());
+                    float max = recipe
+                        .get()
+                        .value()
+                        .getOutputCountAfterAngelsShare(
+                            world,
+                            biome.getBaseTemperature(),
+                            blockEntity.getSealSeconds()
+                        );
 
                     return Mth.floor((1.0f - curr / max) * 15.0f);
                 }
             }
-
 
         }
 

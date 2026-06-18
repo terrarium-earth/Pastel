@@ -35,15 +35,31 @@ import java.util.List;
 public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem, EquipAwareItem {
 
     private static final AttributeModifier GEM_LEGGINGS_KB_RESIST = new AttributeModifier(
-        PastelCommon.locate("gem_armor_kb_resist"), 0.5f, AttributeModifier.Operation.ADD_VALUE);
+        PastelCommon.locate("gem_armor_kb_resist"),
+        0.5f,
+        AttributeModifier.Operation.ADD_VALUE
+    );
+
     public static final AttributeModifier GEM_BOOTS_SPEED = new AttributeModifier(
-        PastelCommon.locate("gem_armor_speed"), 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        PastelCommon.locate("gem_armor_speed"),
+        0.25,
+        AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+    );
 
     private static final AttributeModifier GEM_SET_KB_IMMUNITY = new AttributeModifier(
-        PastelCommon.locate("gem_armor_setbonus_kb_immunity"), 0.5f, AttributeModifier.Operation.ADD_VALUE);
+        PastelCommon.locate("gem_armor_setbonus_kb_immunity"),
+        0.5f,
+        AttributeModifier.Operation.ADD_VALUE
+    );
+
     public static final AttributeModifier GEM_SET_SPEED = new AttributeModifier(
-        PastelCommon.locate("gem_armor_setbonus_speed"), 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        PastelCommon.locate("gem_armor_setbonus_speed"),
+        0.25,
+        AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+    );
+
     public static final int ENCHANTMENT_BONUS = 1;
+
     public static final int JUMP_COOLDOWN = 7;
 
     public CrystalArmorItem(Holder<ArmorMaterial> material, ArmorItem.Type type, Properties settings) {
@@ -51,9 +67,12 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     }
 
     public boolean isWearingFullSet(LivingEntity bearer) {
-        for (var slot : List.of(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)) {
-            if (!(bearer.getItemBySlot(slot)
-                        .getItem() instanceof CrystalArmorItem)) return false;
+        for (
+            var slot : List.of(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
+        ) {
+            if (!(bearer
+                .getItemBySlot(slot)
+                .getItem() instanceof CrystalArmorItem)) return false;
         }
         return true;
     }
@@ -61,8 +80,9 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     public void tick(LivingEntity bearer, ItemStack stack) {
         // this needs to happen on the client as well apparently
 
-        if (bearer.level()
-                  .isClientSide()) {
+        if (bearer
+            .level()
+            .isClientSide()) {
             if (type.equals(Type.BOOTS) && bearer instanceof Player player) {
                 if (player.onGround()) {
                     var jumps = player.getData(CitrineJumpsAttachment.ATTACHMENT);
@@ -76,15 +96,26 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         }
 
         // why are you like this
-        if(!bearer.getItemBySlot(EquipmentSlot.HEAD).is(PastelItems.ONYX_HELMET) && stack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED))
+        if (!bearer.getItemBySlot(EquipmentSlot.HEAD).is(PastelItems.ONYX_HELMET) && stack
+            .has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED))
             removeEmpowered(stack);
 
         if (type.equals(Type.HELMET)) {
-            for (EquipmentSlot slot : List.of(
-                EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)) {
+            for (
+                EquipmentSlot slot : List
+                    .of(
+                        EquipmentSlot.HEAD,
+                        EquipmentSlot.CHEST,
+                        EquipmentSlot.LEGS,
+                        EquipmentSlot.FEET
+                    )
+            ) {
                 ItemStack equippedStack = bearer.getItemBySlot(slot);
-                if (equippedStack.getItem() instanceof CrystalArmorItem && equippedStack.getOrDefault(
-                    PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0) < ENCHANTMENT_BONUS) {
+                if (equippedStack.getItem() instanceof CrystalArmorItem && equippedStack
+                    .getOrDefault(
+                        PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED,
+                        0
+                    ) < ENCHANTMENT_BONUS) {
                     ItemStack oldStack = stack.copy();
                     CrystalArmorItem.addEmpowered(equippedStack);
                     bearer.onEquipItem(slot, oldStack, stack);
@@ -94,11 +125,16 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
             if (isWearingFullSet(bearer)) {
                 // set bonus time :3
                 var slots = List.of(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
-                for (EquipmentSlot slot : slots) {
+                for (
+                    EquipmentSlot slot : slots
+                ) {
                     var heldStack = bearer.getItemBySlot(slot);
                     var oldStack = heldStack.copy();
-                    if (!heldStack.is(Items.AIR) && heldStack.getOrDefault(
-                        PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0) < ENCHANTMENT_BONUS) {
+                    if (!heldStack.is(Items.AIR) && heldStack
+                        .getOrDefault(
+                            PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED,
+                            0
+                        ) < ENCHANTMENT_BONUS) {
                         CrystalArmorItem.addEmpowered(heldStack);
                         bearer.onEquipItem(slot, oldStack, heldStack);
                     }
@@ -113,10 +149,11 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         }
 
         // Works out to a quarter of regen 1, or half of regen 1 with the set bonus
-        if (type.equals(Type.CHESTPLATE) && (bearer.level()
-                                                   .getGameTime() % 100 == 0 || (isWearingFullSet(bearer) &&
-                                                                                 bearer.level()
-                                                                                       .getGameTime() % 50 == 0))) {
+        if (type.equals(Type.CHESTPLATE) && (bearer
+            .level()
+            .getGameTime() % 100 == 0 || (isWearingFullSet(bearer) && bearer
+                .level()
+                .getGameTime() % 50 == 0))) {
             bearer.heal(1.0f);
             shortenNegativeStatusEffects(bearer, 25);
         }
@@ -136,9 +173,11 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
     }
 
     public void onEquipChange(LivingEntity entity, ItemStack stack, EquipmentSlot slot, boolean unequip) {
-        if(!unequip) return;
+        if (!unequip) return;
         if (type == Type.HELMET) {
-            for (var equippedStack : entity.getAllSlots()) {
+            for (
+                var equippedStack : entity.getAllSlots()
+            ) {
                 if (equippedStack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED))
                     CrystalArmorItem.removeEmpowered(stack);
             }
@@ -151,13 +190,17 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         var kb_resist = entity.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
         var speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
         if (speed != null && speed.hasModifier(GEM_SET_SPEED.id())) speed.removeModifier(GEM_SET_SPEED.id());
-        if (kb_resist != null && kb_resist.hasModifier(GEM_SET_KB_IMMUNITY.id())) kb_resist.removeModifier(
-            GEM_SET_KB_IMMUNITY.id());
+        if (kb_resist != null && kb_resist.hasModifier(GEM_SET_KB_IMMUNITY.id())) kb_resist
+            .removeModifier(
+                GEM_SET_KB_IMMUNITY.id()
+            );
     }
 
     @Override
     public void appendHoverText(
-        ItemStack stack, TooltipContext context, List<Component> tooltip,
+        ItemStack stack,
+        TooltipContext context,
+        List<Component> tooltip,
         TooltipFlag tooltipType
     ) {
         super.appendHoverText(stack, context, tooltip, tooltipType);
@@ -166,49 +209,83 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
 
     public void addTooltip(List<Component> tooltip, @NotNull ArmorItem.Type equipmentSlot) {
         switch (equipmentSlot) {
-            case HELMET -> tooltip.add(Component.translatable("item.pastel.onyx_helmet.tooltip")
-                                                .withStyle(ChatFormatting.DARK_BLUE));
-            case CHESTPLATE -> tooltip.add(Component.translatable("item.pastel.amethyst_chestplate.tooltip")
-                                                    .withColor(InkColors.MAGENTA.getTextColorInt()));
-            case LEGGINGS -> tooltip.add(Component.translatable("item.pastel.topaz_leggings.tooltip")
-                                                  .withColor(InkColors.CYAN.getTextColorInt()));
-            case BOOTS -> tooltip.add(Component.translatable("item.pastel.citrine_boots.tooltip")
-                                               .withColor(InkColors.YELLOW.getTextColorInt()));
+            case HELMET -> tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.onyx_helmet.tooltip")
+                        .withStyle(ChatFormatting.DARK_BLUE)
+                );
+            case CHESTPLATE -> tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.amethyst_chestplate.tooltip")
+                        .withColor(InkColors.MAGENTA.getTextColorInt())
+                );
+            case LEGGINGS -> tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.topaz_leggings.tooltip")
+                        .withColor(InkColors.CYAN.getTextColorInt())
+                );
+            case BOOTS -> tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.citrine_boots.tooltip")
+                        .withColor(InkColors.YELLOW.getTextColorInt())
+                );
         }
     }
 
     public static void addEmpowered(ItemStack stack) {
-        if(stack.is(PastelItemTags.CRYSTAL_EMPOWER_BLACKLIST))
+        if (stack.is(PastelItemTags.CRYSTAL_EMPOWER_BLACKLIST))
             return; // don't touch blacklisted items
-        if(stack.has(DataComponents.STORED_ENCHANTMENTS) || stack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS))
+        if (stack.has(DataComponents.STORED_ENCHANTMENTS) || stack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS))
             return; // we do not want to touch enchanted books or anything like enchanted books
-        if(!stack.has(DataComponents.ENCHANTMENTS) || stack.getMaxStackSize() != 1)
+        if (!stack.has(DataComponents.ENCHANTMENTS) || stack.getMaxStackSize() != 1)
             return; // we also only want to affect enchanted gear
         stack.set(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, ENCHANTMENT_BONUS);
         var enchantments = stack.get(DataComponents.ENCHANTMENTS);
         if (enchantments == null || enchantments.isEmpty()) return;
-        for (var enchantment : enchantments.keySet()) {
-            if (enchantments.getLevel(enchantment) > 0 && enchantment.value()
-                                                                     .getMaxLevel() > 1) Ench.addOrUpgradeEnchantment(
-                stack, enchantment, enchantments.getLevel(enchantment) + ENCHANTMENT_BONUS, true, true);
+        for (
+            var enchantment : enchantments.keySet()
+        ) {
+            if (enchantments.getLevel(enchantment) > 0 && enchantment
+                .value()
+                .getMaxLevel() > 1) Ench
+                    .addOrUpgradeEnchantment(
+                        stack,
+                        enchantment,
+                        enchantments.getLevel(enchantment) + ENCHANTMENT_BONUS,
+                        true,
+                        true
+                    );
         }
     }
 
     public static ItemStack removeEmpowered(ItemStack stack) {
-        if(stack.has(DataComponents.STORED_ENCHANTMENTS) || stack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS))
+        if (stack.has(DataComponents.STORED_ENCHANTMENTS) || stack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS))
             return stack; // we do not want to touch enchanted books or anything like enchanted books
         if (!stack.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)) return stack;
         var enchantments = stack.get(EnchantmentHelper.getComponentType(stack));
         if (enchantments != null && !enchantments.isEmpty()) {
             var newEnchants = new ItemEnchantments.Mutable(enchantments);
-            for (var enchantment : enchantments.keySet()) {
-                if (enchantment.value()
-                               .getMaxLevel() == 1) continue;
+            for (
+                var enchantment : enchantments.keySet()
+            ) {
+                if (enchantment
+                    .value()
+                    .getMaxLevel() == 1) continue;
                 int level = enchantments.getLevel(enchantment);
-                if (level < stack.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0)) newEnchants.set(
-                    enchantment, 0);
-                else newEnchants.set(
-                    enchantment, level - stack.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0));
+                if (level < stack.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0)) newEnchants
+                    .set(
+                        enchantment,
+                        0
+                    );
+                else newEnchants
+                    .set(
+                        enchantment,
+                        level - stack.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0)
+                    );
             }
             EnchantmentHelper.setEnchantments(stack, newEnchants.toImmutable());
         }
@@ -221,17 +298,26 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         Collection<Holder<MobEffect>> effectTypesToClear = new ArrayList<>();
 
         // remove them first, so hidden "stacked" effects are preserved
-        for (MobEffectInstance instance : entity.getActiveEffects()) {
-            if (instance.getEffect()
-                        .value()
-                        .getCategory() == MobEffectCategory.HARMFUL) {
+        for (
+            MobEffectInstance instance : entity.getActiveEffects()
+        ) {
+            if (instance
+                .getEffect()
+                .value()
+                .getCategory() == MobEffectCategory.HARMFUL) {
                 int newDurationTicks = instance.getDuration() - duration;
                 if (newDurationTicks > 0) {
-                    newEffects.add(
-                        new MobEffectInstance(
-                            instance.getEffect(), newDurationTicks, instance.getAmplifier(), instance.isAmbient(),
-                            instance.isVisible(), instance.showIcon()
-                        ));
+                    newEffects
+                        .add(
+                            new MobEffectInstance(
+                                instance.getEffect(),
+                                newDurationTicks,
+                                instance.getAmplifier(),
+                                instance.isAmbient(),
+                                instance.isVisible(),
+                                instance.showIcon()
+                            )
+                        );
                 }
                 if (!effectTypesToClear.contains(instance.getEffect())) {
                     effectTypesToClear.add(instance.getEffect());
@@ -245,7 +331,7 @@ public class CrystalArmorItem extends ArmorItem implements TickingEquipmentItem,
         var cooldown = instance.getData(JumpCooldownAttachment.ATTACHMENT);
         if (jumps <= 0 || actuallyOnGround || cooldown != 0 || !instance.input.jumping) return actuallyOnGround;
         instance.setData(CitrineJumpsAttachment.ATTACHMENT, jumps - 1);
-        instance.setData(JumpCooldownAttachment.ATTACHMENT,JUMP_COOLDOWN);
+        instance.setData(JumpCooldownAttachment.ATTACHMENT, JUMP_COOLDOWN);
         instance.jumpFromGround();
         return false;
     }

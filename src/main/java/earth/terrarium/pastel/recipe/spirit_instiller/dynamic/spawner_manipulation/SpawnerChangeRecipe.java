@@ -26,21 +26,36 @@ import java.util.Optional;
 public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 
     public SpawnerChangeRecipe(
-        IngredientStack ingredient, IngredientStack ingredient2,
+        IngredientStack ingredient,
+        IngredientStack ingredient2,
         Optional<ResourceLocation> requiredAdvancementIdentifier
     ) {
         super(
-            "spawner_manipulation", false, requiredAdvancementIdentifier,
-            IngredientStack.ofItems(Items.SPAWNER), ingredient, ingredient2,
-            Items.SPAWNER.getDefaultInstance(), 200, 0, true
+            "spawner_manipulation",
+            false,
+            requiredAdvancementIdentifier,
+            IngredientStack.ofItems(Items.SPAWNER),
+            ingredient,
+            ingredient2,
+            Items.SPAWNER.getDefaultInstance(),
+            200,
+            0,
+            true
         );
     }
 
     public SpawnerChangeRecipe(IngredientStack ingredient) {
         super(
-            "spawner_manipulation", false, Optional.of(PastelAdvancements.Milestones.UNLOCK_SPAWNER_MANIPULATION),
-            IngredientStack.ofItems(Items.SPAWNER), ingredient, IngredientStack.ofItems(PastelItems.VEGETAL.get(), 4),
-            Items.SPAWNER.getDefaultInstance(), 200, 0, true
+            "spawner_manipulation",
+            false,
+            Optional.of(PastelAdvancements.Milestones.UNLOCK_SPAWNER_MANIPULATION),
+            IngredientStack.ofItems(Items.SPAWNER),
+            ingredient,
+            IngredientStack.ofItems(PastelItems.VEGETAL.get(), 4),
+            Items.SPAWNER.getDefaultInstance(),
+            200,
+            0,
+            true
         );
     }
 
@@ -50,12 +65,15 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
         ItemStack resultStack = ItemStack.EMPTY;
         var world = spiritInstillerBlockEntity.getLevel();
         if (world == null) return ItemStack.EMPTY;
-        BlockEntity leftBowlBlockEntity = world.getBlockEntity(
-            SpiritInstillerBlockEntity.getItemBowlPos(spiritInstillerBlockEntity, false));
-        BlockEntity rightBowlBlockEntity = world.getBlockEntity(
-            SpiritInstillerBlockEntity.getItemBowlPos(spiritInstillerBlockEntity, true));
-        if (leftBowlBlockEntity instanceof ItemBowlBlockEntity leftBowl &&
-            rightBowlBlockEntity instanceof ItemBowlBlockEntity rightBowl) {
+        BlockEntity leftBowlBlockEntity = world
+            .getBlockEntity(
+                SpiritInstillerBlockEntity.getItemBowlPos(spiritInstillerBlockEntity, false)
+            );
+        BlockEntity rightBowlBlockEntity = world
+            .getBlockEntity(
+                SpiritInstillerBlockEntity.getItemBowlPos(spiritInstillerBlockEntity, true)
+            );
+        if (leftBowlBlockEntity instanceof ItemBowlBlockEntity leftBowl && rightBowlBlockEntity instanceof ItemBowlBlockEntity rightBowl) {
             BlockPos pos = spiritInstillerBlockEntity.getBlockPos();
 
             ItemStack firstBowlStack = leftBowl.getItem(0);
@@ -63,8 +81,9 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
             ItemStack spawnerStack = spiritInstillerBlockEntity.getItem(0);
 
             // TODO - Review
-            CompoundTag spawnerNbt = spawnerStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY)
-                                                 .copyTag();
+            CompoundTag spawnerNbt = spawnerStack
+                .getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY)
+                .copyTag();
 
             spawnerNbt = getSpawnerResultNbt(spawnerNbt, firstBowlStack, secondBowlStack);
 
@@ -75,23 +94,35 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
             resultStack.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(spawnerNbt));
 
             spawnXPAndGrantAdvancements(
-                resultStack, spiritInstillerBlockEntity, spiritInstillerBlockEntity.getUpgradeHolder(), world, pos);
+                resultStack,
+                spiritInstillerBlockEntity,
+                spiritInstillerBlockEntity.getUpgradeHolder(),
+                world,
+                pos
+            );
         }
         return resultStack;
     }
 
     @Override
     public boolean canCraftWithStacks(RecipeInput inventory, Level level) {
-        CustomData blockEntityComponent = inventory.getItem(0)
-                                                   .getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
+        CustomData blockEntityComponent = inventory
+            .getItem(0)
+            .getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
         return canCraftWithBlockEntityTag(blockEntityComponent, inventory.getItem(1), inventory.getItem(2));
     }
 
     public abstract boolean canCraftWithBlockEntityTag(
-        CustomData spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack);
+        CustomData spawnerBlockEntityNbt,
+        ItemStack leftBowlStack,
+        ItemStack rightBowlStack
+    );
 
     public abstract CompoundTag getSpawnerResultNbt(
-        CompoundTag spawnerBlockEntityNbt, ItemStack secondBowlStack, ItemStack centerStack);
+        CompoundTag spawnerBlockEntityNbt,
+        ItemStack secondBowlStack,
+        ItemStack centerStack
+    );
 
     public abstract Component getOutputLoreText();
 

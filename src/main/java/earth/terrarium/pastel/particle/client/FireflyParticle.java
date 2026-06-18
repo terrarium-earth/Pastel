@@ -17,12 +17,21 @@ public class FireflyParticle extends TextureSheetParticle {
     private final SpriteSet spriteProvider;
 
     private double lastVelX, lastVelZ;
+
     private int switchTicks = 10, blinkTicks = 11;
+
     private float r, g, b;
 
     protected FireflyParticle(
-        ClientLevel clientWorld, double d, double e, double f, double velocityX, double velocityY, double velocityZ,
-        float scaleMultiplier, SpriteSet spriteProvider
+        ClientLevel clientWorld,
+        double d,
+        double e,
+        double f,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
+        float scaleMultiplier,
+        SpriteSet spriteProvider
     ) {
         super(clientWorld, d, e, f, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
@@ -92,8 +101,9 @@ public class FireflyParticle extends TextureSheetParticle {
         if (switchTicks < 10)
             switchTicks++;
 
-        var water = !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z))
-                               .isEmpty();
+        var water = !this.level
+            .getFluidState(BlockPos.containing(this.x, this.y, this.z))
+            .isEmpty();
 
         if (age % 10 == 0 && random.nextBoolean()) {
             switchTicks = 0;
@@ -162,7 +172,9 @@ public class FireflyParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -171,8 +183,14 @@ public class FireflyParticle extends TextureSheetParticle {
         }
 
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new FireflyParticle(clientWorld, d, e, f, 0.0, 0.0, 0.0, 1.0F, this.spriteProvider);
         }

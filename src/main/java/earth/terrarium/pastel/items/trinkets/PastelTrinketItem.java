@@ -31,9 +31,10 @@ public abstract class PastelTrinketItem extends Item implements ICurioItem {
     }
 
     public static Optional<ItemStack> getFirstEquipped(LivingEntity entity, Item item) {
-        return CuriosApi.getCuriosInventory(entity)
-                        .flatMap(inventory -> inventory.findFirstCurio(item))
-                        .map(SlotResult::stack);
+        return CuriosApi
+            .getCuriosInventory(entity)
+            .flatMap(inventory -> inventory.findFirstCurio(item))
+            .map(SlotResult::stack);
     }
 
     public ResourceLocation getUnlockIdentifier() {

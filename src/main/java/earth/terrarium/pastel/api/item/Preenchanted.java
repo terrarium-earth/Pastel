@@ -18,18 +18,26 @@ public interface Preenchanted {
 
     static ItemEnchantments buildDefaultEnchantments(HolderLookup.Provider lookup, Preenchanted item) {
         ItemEnchantments.Mutable builder = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
-        for (Map.Entry<ResourceKey<Enchantment>, Integer> entry : item.getDefaultEnchantments()
-                                                                      .entrySet()) {
-            builder.set(
-                lookup.lookupOrThrow(Registries.ENCHANTMENT)
-                      .getOrThrow(entry.getKey()), entry.getValue()
-            );
+        for (
+            Map.Entry<ResourceKey<Enchantment>, Integer> entry : item
+                .getDefaultEnchantments()
+                .entrySet()
+        ) {
+            builder
+                .set(
+                    lookup
+                        .lookupOrThrow(Registries.ENCHANTMENT)
+                        .getOrThrow(entry.getKey()),
+                    entry.getValue()
+                );
         }
         return builder.toImmutable();
     }
 
     static @NotNull <T extends Item & Preenchanted> ItemStack getDefaultEnchantedStack(
-        HolderLookup.Provider lookup, T item) {
+        HolderLookup.Provider lookup,
+        T item
+    ) {
         ItemStack stack = new ItemStack(item);
         stack.set(DataComponents.ENCHANTMENTS, buildDefaultEnchantments(lookup, item));
         return stack;

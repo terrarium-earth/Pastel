@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class NaturesStaffConversionCriterion
-    extends SimpleCriterionTrigger<NaturesStaffConversionCriterion.Conditions> {
+    extends
+    SimpleCriterionTrigger<NaturesStaffConversionCriterion.Conditions> {
 
     public static final ResourceLocation ID = PastelCommon.locate("natures_staff_conversion");
 
@@ -37,24 +38,33 @@ public class NaturesStaffConversionCriterion
         StatePropertiesPredicate targetBlockState
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        BuiltInRegistries.BLOCK.byNameCodec()
-                                                                                                                               .optionalFieldOf("source_block")
-                                                                                                                               .forGetter(Conditions::sourceBlock),
-                                                                                                        StatePropertiesPredicate.CODEC.optionalFieldOf("source_state", new StatePropertiesPredicate(List.of()))
-                                                                                                                                      .forGetter(Conditions::sourceBlockState),
-                                                                                                        BuiltInRegistries.BLOCK.byNameCodec()
-                                                                                                                               .optionalFieldOf("target_block")
-                                                                                                                               .forGetter(Conditions::targetBlock),
-                                                                                                        StatePropertiesPredicate.CODEC.optionalFieldOf("target_state", new StatePropertiesPredicate(List.of()))
-                                                                                                                                      .forGetter(Conditions::targetBlockState)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        BuiltInRegistries.BLOCK
+                            .byNameCodec()
+                            .optionalFieldOf("source_block")
+                            .forGetter(Conditions::sourceBlock),
+                        StatePropertiesPredicate.CODEC
+                            .optionalFieldOf("source_state", new StatePropertiesPredicate(List.of()))
+                            .forGetter(Conditions::sourceBlockState),
+                        BuiltInRegistries.BLOCK
+                            .byNameCodec()
+                            .optionalFieldOf("target_block")
+                            .forGetter(Conditions::targetBlock),
+                        StatePropertiesPredicate.CODEC
+                            .optionalFieldOf("target_state", new StatePropertiesPredicate(List.of()))
+                            .forGetter(Conditions::targetBlockState)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(BlockState sourceBlockState, BlockState targetBlockState) {
             if (this.sourceBlock.isPresent() && !sourceBlockState.is(this.sourceBlock.get())) {

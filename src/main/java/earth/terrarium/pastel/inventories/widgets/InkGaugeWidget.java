@@ -20,17 +20,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableEntry {
 
     public final int x;
+
     public final int y;
+
     public final int width;
+
     public final int height;
+
     protected boolean focused;
+
     protected boolean hovered;
 
     protected final Screen screen;
+
     protected final InkStorageBlockEntity<?> blockEntity;
 
     public InkGaugeWidget(int x, int y, int width, int height, Screen screen, InkStorageBlockEntity<?> blockEntity) {
@@ -45,8 +53,7 @@ public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableE
 
     @Override
     public boolean isMouseOver(double mouseX, double mouseY) {
-        return mouseX >= (double) this.x && mouseX < (double) (this.x + this.width) && mouseY >= (double) this.y &&
-               mouseY < (double) (this.y + this.height);
+        return mouseX >= (double) this.x && mouseX < (double) (this.x + this.width) && mouseY >= (double) this.y && mouseY < (double) (this.y + this.height);
     }
 
     @Override
@@ -61,8 +68,7 @@ public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableE
 
     @Override
     public void render(GuiGraphics drawContext, int mouseX, int mouseY, float delta) {
-        this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width &&
-                       mouseY < this.y + this.height;
+        this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
     }
 
     @Override
@@ -78,9 +84,12 @@ public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableE
     public void drawMouseoverTooltip(GuiGraphics drawContext, int x, int y) {
         Minecraft client = Minecraft.getInstance();
         List<Component> tooltip = new ArrayList<>();
-        for (InkColor color : InkColors.all()) {
-            long amount = blockEntity.getEnergyStorage()
-                                     .getEnergy(color);
+        for (
+            InkColor color : InkColors.all()
+        ) {
+            long amount = blockEntity
+                .getEnergyStorage()
+                .getEnergy(color);
             if (amount > 0) {
                 InkStorage.addInkStoreBulletTooltip(tooltip, color, amount);
             }
@@ -94,8 +103,9 @@ public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableE
     }
 
     public void draw(GuiGraphics drawContext) {
-        long totalInk = blockEntity.getEnergyStorage()
-                                   .getCurrentTotal();
+        long totalInk = blockEntity
+            .getEnergyStorage()
+            .getCurrentTotal();
 
         if (totalInk > 0) {
             int centerX = x + width / 2;
@@ -103,9 +113,12 @@ public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableE
             int radius = 22;
 
             double startRad = -0.5 * Math.PI;
-            for (InkColor color : InkColors.all()) {
-                long currentInk = blockEntity.getEnergyStorage()
-                                             .getEnergy(color);
+            for (
+                InkColor color : InkColors.all()
+            ) {
+                long currentInk = blockEntity
+                    .getEnergyStorage()
+                    .getEnergy(color);
                 if (currentInk > 0) {
                     double thisPart = ((double) currentInk / (double) totalInk);
                     while (thisPart > 0) {
@@ -119,24 +132,32 @@ public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableE
                         int p3x = (int) (radius * Math.cos(endRad));
                         int p3y = (int) (radius * Math.sin(endRad));
 
-                        RenderHelper.fillTriangle(
-                            drawContext.pose(),
-                            centerX, centerY, // center point
-                            centerX + p3x, centerY + p3y, // end point
-                            centerX + p2x, centerY + p2y, // start point
-                            color.getColorVec()
-                        );
+                        RenderHelper
+                            .fillTriangle(
+                                drawContext.pose(),
+                                centerX,
+                                centerY, // center point
+                                centerX + p3x,
+                                centerY + p3y, // end point
+                                centerX + p2x,
+                                centerY + p2y, // start point
+                                color.getColorVec()
+                            );
 
                         double middleRad = startRad + curr * Math.PI;
                         int pmx = (int) (radius * Math.cos(middleRad));
                         int pmy = (int) (radius * Math.sin(middleRad));
-                        RenderHelper.fillTriangle(
-                            drawContext.pose(),
-                            centerX + p3x, centerY + p3y,
-                            centerX + pmx, centerY + pmy,
-                            centerX + p2x, centerY + p2y,
-                            color.getColorVec()
-                        );
+                        RenderHelper
+                            .fillTriangle(
+                                drawContext.pose(),
+                                centerX + p3x,
+                                centerY + p3y,
+                                centerX + pmx,
+                                centerY + pmy,
+                                centerX + p2x,
+                                centerY + p2y,
+                                color.getColorVec()
+                            );
 
                         startRad = endRad;
                     }

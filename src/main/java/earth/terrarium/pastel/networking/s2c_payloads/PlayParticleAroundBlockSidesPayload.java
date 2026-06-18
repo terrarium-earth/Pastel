@@ -22,29 +22,49 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import java.util.function.Predicate;
 
 public record PlayParticleAroundBlockSidesPayload(
-    BlockPos pos, int quantity, Vec3 velocity, ParticleOptions particle, Direction[] sides
+    BlockPos pos,
+    int quantity,
+    Vec3 velocity,
+    ParticleOptions particle,
+    Direction[] sides
 ) implements CustomPacketPayload {
 
-    public static final Type<PlayParticleAroundBlockSidesPayload> ID = PastelC2SPackets.makeId(
-        "play_particle_around_block_sides");
-    public static final StreamCodec<RegistryFriendlyByteBuf, PlayParticleAroundBlockSidesPayload> CODEC
-        = StreamCodec.composite(
-        BlockPos.STREAM_CODEC, PlayParticleAroundBlockSidesPayload::pos,
-        ByteBufCodecs.VAR_INT, PlayParticleAroundBlockSidesPayload::quantity,
-        PacketCodecHelper.VEC3D, PlayParticleAroundBlockSidesPayload::velocity,
-        ParticleTypes.STREAM_CODEC, PlayParticleAroundBlockSidesPayload::particle,
-        PacketCodecHelper.array(Direction.class, Direction.STREAM_CODEC), PlayParticleAroundBlockSidesPayload::sides,
-        PlayParticleAroundBlockSidesPayload::new
-    );
+    public static final Type<PlayParticleAroundBlockSidesPayload> ID = PastelC2SPackets
+        .makeId(
+            "play_particle_around_block_sides"
+        );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, PlayParticleAroundBlockSidesPayload> CODEC = StreamCodec
+        .composite(
+            BlockPos.STREAM_CODEC,
+            PlayParticleAroundBlockSidesPayload::pos,
+            ByteBufCodecs.VAR_INT,
+            PlayParticleAroundBlockSidesPayload::quantity,
+            PacketCodecHelper.VEC3D,
+            PlayParticleAroundBlockSidesPayload::velocity,
+            ParticleTypes.STREAM_CODEC,
+            PlayParticleAroundBlockSidesPayload::particle,
+            PacketCodecHelper.array(Direction.class, Direction.STREAM_CODEC),
+            PlayParticleAroundBlockSidesPayload::sides,
+            PlayParticleAroundBlockSidesPayload::new
+        );
 
     public static void playParticleAroundBlockSides(
-        ServerLevel level, int quantity, BlockPos pos, Vec3 velocity, ParticleOptions particleEffect,
-        Predicate<ServerPlayer> sendCheck, Direction... sides
+        ServerLevel level,
+        int quantity,
+        BlockPos pos,
+        Vec3 velocity,
+        ParticleOptions particleEffect,
+        Predicate<ServerPlayer> sendCheck,
+        Direction... sides
     ) {
         Packet<?> packet = new ClientboundCustomPayloadPacket(
-            new PlayParticleAroundBlockSidesPayload(pos, quantity, velocity, particleEffect, sides));
+            new PlayParticleAroundBlockSidesPayload(pos, quantity, velocity, particleEffect, sides)
+        );
 
-        for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(new ChunkPos(pos), false)) {
+        for (
+            ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(new ChunkPos(pos), false)
+        ) {
             if (sendCheck.test(player))
                 continue;
 
@@ -53,10 +73,17 @@ public record PlayParticleAroundBlockSidesPayload(
     }
 
     public static void execute(PlayParticleAroundBlockSidesPayload payload, IPayloadContext context) {
-        ParticleHelper.playParticleAroundBlockSides(
-            context.player()
-                   .level(), payload.particle, payload.pos, payload.sides, payload.quantity, payload.velocity
-        );
+        ParticleHelper
+            .playParticleAroundBlockSides(
+                context
+                    .player()
+                    .level(),
+                payload.particle,
+                payload.pos,
+                payload.sides,
+                payload.quantity,
+                payload.velocity
+            );
     }
 
     @Override

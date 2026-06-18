@@ -9,12 +9,17 @@ import net.minecraft.world.level.Level;
 public class CraftingTabletTooltipData implements TooltipComponent {
 
     private final ItemStack itemStack;
+
     private final Component description;
 
     public CraftingTabletTooltipData(Recipe<?> recipe, Level world) {
         this.itemStack = recipe.getResultItem(world.registryAccess());
-        this.description = Component.translatable(
-            "item.pastel.crafting_tablet.tooltip.recipe", this.itemStack.getCount(), this.itemStack.getHoverName());
+        this.description = Component
+            .translatable(
+                "item.pastel.crafting_tablet.tooltip.recipe",
+                this.itemStack.getCount(),
+                this.itemStack.getHoverName()
+            );
     }
 
     public ItemStack getItemStack() {

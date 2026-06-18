@@ -16,26 +16,40 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import java.util.Map;
 
 public record PlayPresentOpeningParticlesPayload(BlockPos presentPos, Map<Integer, Integer> colors)
-    implements CustomPacketPayload {
+    implements
+    CustomPacketPayload {
 
-    public static final Type<PlayPresentOpeningParticlesPayload> ID = PastelC2SPackets.makeId(
-        "play_present_opening_particles");
-    public static final StreamCodec<FriendlyByteBuf, PlayPresentOpeningParticlesPayload> CODEC = StreamCodec.composite(
-        BlockPos.STREAM_CODEC, PlayPresentOpeningParticlesPayload::presentPos,
-        ByteBufCodecs.map(Object2IntArrayMap::new, ByteBufCodecs.INT, ByteBufCodecs.INT),
-        PlayPresentOpeningParticlesPayload::colors,
-        PlayPresentOpeningParticlesPayload::new
-    );
+    public static final Type<PlayPresentOpeningParticlesPayload> ID = PastelC2SPackets
+        .makeId(
+            "play_present_opening_particles"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, PlayPresentOpeningParticlesPayload> CODEC = StreamCodec
+        .composite(
+            BlockPos.STREAM_CODEC,
+            PlayPresentOpeningParticlesPayload::presentPos,
+            ByteBufCodecs.map(Object2IntArrayMap::new, ByteBufCodecs.INT, ByteBufCodecs.INT),
+            PlayPresentOpeningParticlesPayload::colors,
+            PlayPresentOpeningParticlesPayload::new
+        );
 
     public static void playPresentOpeningParticles(
-        ServerLevel serverWorld, BlockPos presentPos, Map<Integer, Integer> colors) {
-        PacketDistributor.sendToPlayersTrackingChunk(
-            serverWorld, new ChunkPos(presentPos), new PlayPresentOpeningParticlesPayload(presentPos, colors));
+        ServerLevel serverWorld,
+        BlockPos presentPos,
+        Map<Integer, Integer> colors
+    ) {
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                serverWorld,
+                new ChunkPos(presentPos),
+                new PlayPresentOpeningParticlesPayload(presentPos, colors)
+            );
     }
 
     public static void execute(PlayPresentOpeningParticlesPayload payload, IPayloadContext context) {
-        var level = context.player()
-                           .level();
+        var level = context
+            .player()
+            .level();
         PresentBlock.spawnParticles(level, payload.presentPos, payload.colors);
     }
 

@@ -18,15 +18,24 @@ import java.util.Objects;
 public final class DataSignature<N extends Number> {
 
     private final Field reference;
+
     final FlowHandler<N> handler;
+
     final Interpolation interpolation;
+
     final Map<FlowState, KeyFrame<N>> stateHolder;
+
     final N initialValue;
+
     final KeyFrame<N> defaultKeyFrame;
 
     DataSignature(
-        Field reference, FlowHandler<N> handler, Interpolation interpolation, N initialValue,
-        @Nullable KeyFrame<N> defaultKeyFrame, Map<FlowState, KeyFrame<N>> holderData
+        Field reference,
+        FlowHandler<N> handler,
+        Interpolation interpolation,
+        N initialValue,
+        @Nullable KeyFrame<N> defaultKeyFrame,
+        Map<FlowState, KeyFrame<N>> holderData
     ) {
         this.reference = reference;
         this.handler = handler;
@@ -39,7 +48,9 @@ public final class DataSignature<N extends Number> {
 
     FlowData<N> instantiate() {
         var data = handler.createData(this);
-        for (FlowState flowState : stateHolder.keySet()) {
+        for (
+            FlowState flowState : stateHolder.keySet()
+        ) {
             data.addStateListener(flowState, stateHolder.get(flowState));
         }
         return data;
@@ -55,12 +66,18 @@ public final class DataSignature<N extends Number> {
         reference.setAccessible(false);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(
+        "unchecked"
+    )
     public static <N extends Number> DataSignature<N> dummy() {
         return DUMMY;
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings(
+        {
+            "rawtypes", "unchecked"
+    }
+    )
     private static final DataSignature DUMMY = new DataSignature(null, null, null, null, null, Collections.EMPTY_MAP);
 
 }

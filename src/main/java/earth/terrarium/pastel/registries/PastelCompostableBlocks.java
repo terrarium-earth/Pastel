@@ -14,16 +14,26 @@ import java.util.function.BiConsumer;
 public class PastelCompostableBlocks {
 
     private static final float LOW = 0.3F;
+
     private static final float MEDIUM = 0.5F;
+
     private static final float HIGH = 0.65F;
+
     private static final float HIGHER = 0.85F;
+
     private static final float ALWAYS = 1.0F;
 
     public static void register(DataMapProvider.Builder<Compostable, Item> builder) {
-        register((item, chance) -> builder.add(
-            item.asItem()
-                .builtInRegistryHolder(), new Compostable(chance), false
-        ));
+        register(
+            (item, chance) -> builder
+                .add(
+                    item
+                        .asItem()
+                        .builtInRegistryHolder(),
+                    new Compostable(chance),
+                    false
+                )
+        );
     }
 
     private static void register(BiConsumer<ItemLike, Float> add) {
@@ -89,7 +99,9 @@ public class PastelCompostableBlocks {
         add.accept(PastelBlocks.CHESTNUT_NOXCAP_BLOCK.get(), HIGHER);
         add.accept(PastelBlocks.CHESTNUT_NOXCAP_GILLS.get(), HIGHER);
 
-        for (InkColor color : InkColors.all()) {
+        for (
+            InkColor color : InkColors.all()
+        ) {
             add.accept(ColoredSaplingBlock.byColor(color), LOW);
             add.accept(ColoredLeavesBlock.byColor(color), LOW);
         }

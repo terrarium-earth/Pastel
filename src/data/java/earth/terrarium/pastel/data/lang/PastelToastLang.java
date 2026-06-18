@@ -22,20 +22,27 @@ public class PastelToastLang {
         provider.add("pastel.toast.lots_of_recipes_unlocked.title", "Many recipes unlocked:");
         provider.add("pastel.toast.message.block_coloring_unlocked.text", "Block Recoloring");
         provider.add("pastel.toast.message.block_coloring_unlocked.title", "New Paintbrush Ability:");
-        provider.add(
-            "pastel.toast.message.enchant_conflicting_enchantments_unlocked.text",
-            "Enchant Items regardless of conflicts"
-        );
+        provider
+            .add(
+                "pastel.toast.message.enchant_conflicting_enchantments_unlocked.text",
+                "Enchant Items regardless of conflicts"
+            );
         provider.add("pastel.toast.message.enchant_conflicting_enchantments_unlocked.title", "Enchanting Mastery");
-        provider.add(
-            "pastel.toast.message.fourth_potion_reagent_unlocked.text", "+1 Reagent Slot for the Potion Workshop");
+        provider
+            .add(
+                "pastel.toast.message.fourth_potion_reagent_unlocked.text",
+                "+1 Reagent Slot for the Potion Workshop"
+            );
         provider.add("pastel.toast.message.fourth_potion_reagent_unlocked.title", "Brewing Mastery");
         provider.add("pastel.toast.message.overchanting_unlocked.text", "Upgrades Enchantment even higher");
         provider.add("pastel.toast.message.overchanting_unlocked.title", "Studied Enchanter");
         provider.add("pastel.toast.message.ink_slinging_unlocked.text", "Ink Slinging");
         provider.add("pastel.toast.message.ink_slinging_unlocked.title", "New Paintbrush Ability:");
-        provider.add(
-            "pastel.toast.message.second_advancement_tree_unlocked.text", "You unlocked a new Advancement Tree");
+        provider
+            .add(
+                "pastel.toast.message.second_advancement_tree_unlocked.text",
+                "You unlocked a new Advancement Tree"
+            );
         provider.add("pastel.toast.message.second_advancement_tree_unlocked.title", "Chapter 2: Fall from Grace");
         provider.add("pastel.toast.message.shooting_stars_unlocked.text", "You received the grace of the night sky");
         provider.add("pastel.toast.message.shooting_stars_unlocked.title", "Blessing of the Stars");
@@ -47,8 +54,11 @@ public class PastelToastLang {
         provider.add("pastel.toast.message.get_denied_by_manxi.title", "Unwise.");
         provider.add("pastel.toast.message.vivisect_kindling.text", "What is wrong with you?");
         provider.add("pastel.toast.message.vivisect_kindling.title", "§lYou Monster...");
-        provider.add(
-            "pastel.toast.message.third_advancement_tree_unlocked.text", "You unlocked a new Advancement Tree");
+        provider
+            .add(
+                "pastel.toast.message.third_advancement_tree_unlocked.text",
+                "You unlocked a new Advancement Tree"
+            );
         provider.add("pastel.toast.message.third_advancement_tree_unlocked.title", "Chapter 3: Turn to Purity");
         provider.add("pastel.toast.midnight_solution_converting_recipe_unlocked.title", "New Midnight Sol. recipe:");
         provider.add("pastel.toast.midnight_solution_converting_recipes_unlocked.title", "New Midnight Sol. recipes:");

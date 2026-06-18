@@ -14,28 +14,44 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.ArrayList;
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ItemRoundelBlockEntityRenderer<T extends ItemRoundelBlockEntity> implements BlockEntityRenderer<T> {
 
     private static final float distance = 0.29F;
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public ItemRoundelBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
     @Override
     public void render(
-        ItemRoundelBlockEntity blockEntity, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light, int overlay
+        ItemRoundelBlockEntity blockEntity,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int light,
+        int overlay
     ) {
         if (!blockEntity.isEmpty()) {
             // the floating item stacks
             List<ItemStack> inventoryStacks = new ArrayList<>();
-            for (int i = 0; i < blockEntity.getContainerSize(); i++) {
+            for (
+                int i = 0;
+                i < blockEntity.getContainerSize();
+                i++
+            ) {
                 ItemStack stack = blockEntity.getItem(i);
                 if (!stack.isEmpty()) {
                     if (blockEntity.renderStacksAsIndividualItems()) {
-                        for (int j = 0; j < stack.getCount(); j++) {
+                        for (
+                            int j = 0;
+                            j < stack.getCount();
+                            j++
+                        ) {
                             inventoryStacks.add(stack);
                         }
                     } else {
@@ -44,29 +60,45 @@ public class ItemRoundelBlockEntityRenderer<T extends ItemRoundelBlockEntity> im
                 }
             }
 
-            float time = blockEntity.getLevel()
-                                    .getGameTime() % 24000 + tickDelta;
+            float time = blockEntity
+                .getLevel()
+                .getGameTime() % 24000 + tickDelta;
             double radiant = Math.toRadians(360.0F / inventoryStacks.size());
 
-            for (int i = 0; i < inventoryStacks.size(); i++) {
+            for (
+                int i = 0;
+                i < inventoryStacks.size();
+                i++
+            ) {
                 poseStack.pushPose();
 
                 double bob = Math.sin((time / 19) + i) * 0.075;
 
                 double currentRadiant = radiant * i + (radiant * (time / 16.0) / (8.0F / inventoryStacks.size()));
-                poseStack.translate(
-                    distance * Math.sin(currentRadiant) + 0.5, 0.3 + bob,
-                    distance * Math.cos(currentRadiant) + 0.5
-                ); // position offset
-                poseStack.mulPose(Axis.YP.rotationDegrees((float) (i * 360 / inventoryStacks.size()) +
-                                                          (time / 16 / 8 * 360))); // item stack rotation; takes 0..360
+                poseStack
+                    .translate(
+                        distance * Math.sin(currentRadiant) + 0.5,
+                        0.3 + bob,
+                        distance * Math.cos(currentRadiant) + 0.5
+                    ); // position offset
+                poseStack
+                    .mulPose(
+                        Axis.YP.rotationDegrees((float) (i * 360 / inventoryStacks.size()) + (time / 16 / 8 * 360))
+                    ); // item stack rotation; takes 0..360
 
-                Minecraft.getInstance()
-                         .getItemRenderer()
-                         .renderStatic(
-                             inventoryStacks.get(i), ItemDisplayContext.GROUND, light, overlay, poseStack,
-                             vertexConsumerProvider, blockEntity.getLevel(), 0
-                         );
+                Minecraft
+                    .getInstance()
+                    .getItemRenderer()
+                    .renderStatic(
+                        inventoryStacks.get(i),
+                        ItemDisplayContext.GROUND,
+                        light,
+                        overlay,
+                        poseStack,
+                        vertexConsumerProvider,
+                        blockEntity.getLevel(),
+                        0
+                    );
                 poseStack.popPose();
             }
         }

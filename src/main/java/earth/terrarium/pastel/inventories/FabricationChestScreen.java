@@ -10,8 +10,10 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class FabricationChestScreen extends AbstractContainerScreen<FabricationChestScreenHandler> {
 
-    public static final ResourceLocation BACKGROUND = PastelCommon.locate(
-        "textures/gui/container/fabrication_chest.png");
+    public static final ResourceLocation BACKGROUND = PastelCommon
+        .locate(
+            "textures/gui/container/fabrication_chest.png"
+        );
 
     public FabricationChestScreen(FabricationChestScreenHandler handler, Inventory playerInventory, Component title) {
         super(handler, playerInventory, title);
@@ -28,8 +30,15 @@ public class FabricationChestScreen extends AbstractContainerScreen<FabricationC
         int intInventoryY = 126;
 
         drawContext.drawString(this.font, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
-        drawContext.drawString(
-            this.font, this.playerInventoryTitle, inventoryX, intInventoryY, RenderHelper.GREEN_COLOR, false);
+        drawContext
+            .drawString(
+                this.font,
+                this.playerInventoryTitle,
+                inventoryX,
+                intInventoryY,
+                RenderHelper.GREEN_COLOR,
+                false
+            );
     }
 
     @Override

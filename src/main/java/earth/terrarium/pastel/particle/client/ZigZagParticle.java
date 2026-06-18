@@ -14,7 +14,14 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class ZigZagParticle extends TextureSheetParticle {
 
     protected ZigZagParticle(
-        ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        ClientLevel clientWorld,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ
+    ) {
         super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
 
         this.gravity = 0.0F;
@@ -72,7 +79,9 @@ public class ZigZagParticle extends TextureSheetParticle {
         return j | k << 16;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteProvider;
@@ -83,8 +92,14 @@ public class ZigZagParticle extends TextureSheetParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double x, double y, double z,
-            double velocityX, double velocityY, double velocityZ
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             ZigZagParticle craftingParticle = new ZigZagParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
             craftingParticle.setLifetime((int) (8.0D / (clientWorld.random.nextDouble() * 0.8D + 0.2D)));

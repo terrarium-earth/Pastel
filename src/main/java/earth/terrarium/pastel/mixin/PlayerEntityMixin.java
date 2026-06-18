@@ -34,7 +34,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(Player.class)
+@Mixin(
+    Player.class
+)
 public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEntityAccessor {
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, Level world) {
@@ -53,10 +55,13 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
     @Shadow
     protected abstract boolean canPlayerFitWithinBlocksAndEntitiesWhen(Pose pose);
 
-    @Unique
-    public PastelFishingBobberEntity fishingBobber;
+    @Unique public PastelFishingBobberEntity fishingBobber;
 
-    @Inject(method = "updateSwimming()V", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "updateSwimming()V", at = @At(
+            "HEAD"
+        ), cancellable = true
+    )
     public void updateSwimming(CallbackInfo ci) {
         if (PastelTrinketItem.hasEquipped(this, PastelItems.RING_OF_DENSER_STEPS.get())) {
             this.setSwimming(false);
@@ -64,53 +69,87 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         }
     }
 
-    @Inject(method = "hurt", at = @At(value = "INVOKE",
-                                      target = "Lnet/minecraft/world/entity/LivingEntity;hurt" +
-                                               "(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    @Inject(
+        method = "hurt", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt" + "(Lnet/minecraft/world/damagesource/DamageSource;F)Z"
+        )
+    )
     private void stopSleep(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (amount > 0) {
             Player entity = (Player) (Object) this;
-            MiscPlayerData.get(entity)
-                          .notifyHit();
+            MiscPlayerData
+                .get(entity)
+                .notifyHit();
         }
     }
 
-    @WrapOperation(method = "attack", at = @At(value = "INVOKE",
-                                               target = "net/minecraft/world/level/Level.playSound " +
-                                                        "(Lnet/minecraft/world/entity/player/Player;" +
-                                                        "DDDLnet/minecraft/sounds/SoundEvent;" +
-                                                        "Lnet/minecraft/sounds/SoundSource;FF)V",
-                                               ordinal = 2))
+    @WrapOperation(
+        method = "attack", at = @At(
+            value = "INVOKE", target = "net/minecraft/world/level/Level.playSound " + "(Lnet/minecraft/world/entity/player/Player;" + "DDDLnet/minecraft/sounds/SoundEvent;" + "Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 2
+        )
+    )
     protected void switchCritSound(
-        Level instance, Player except, double x, double y, double z, SoundEvent sound, SoundSource category,
-        float volume, float pitch, Operation<Void> original
+        Level instance,
+        Player except,
+        double x,
+        double y,
+        double z,
+        SoundEvent sound,
+        SoundSource category,
+        float volume,
+        float pitch,
+        Operation<Void> original
     ) {
         var player = (Player) (Object) this;
         var stack = this.getItemInHand(InteractionHand.MAIN_HAND);
         var component = MiscPlayerData.get(player);
         if (stack.getItem() instanceof LightGreatswordItem && component.isLunging()) {
-            original.call(
-                instance, except, x, y, z, PastelSounds.LUNGE_CRIT, category, 1F, 1F + random.nextFloat() * 0.2F);
+            original
+                .call(
+                    instance,
+                    except,
+                    x,
+                    y,
+                    z,
+                    PastelSounds.LUNGE_CRIT,
+                    category,
+                    1F,
+                    1F + random.nextFloat() * 0.2F
+                );
             return;
         }
         original.call(instance, except, x, y, z, sound, category, volume, pitch);
     }
 
-    @WrapOperation(method = "attack", at = @At(value = "INVOKE",
-                                               target = "net/minecraft/world/level/Level.playSound " +
-                                                        "(Lnet/minecraft/world/entity/player/Player;" +
-                                                        "DDDLnet/minecraft/sounds/SoundEvent;" +
-                                                        "Lnet/minecraft/sounds/SoundSource;FF)V",
-                                               ordinal = 1))
+    @WrapOperation(
+        method = "attack", at = @At(
+            value = "INVOKE", target = "net/minecraft/world/level/Level.playSound " + "(Lnet/minecraft/world/entity/player/Player;" + "DDDLnet/minecraft/sounds/SoundEvent;" + "Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 1
+        )
+    )
     protected void switchSweepSound(
-        Level instance, Player except, double x, double y, double z, SoundEvent sound, SoundSource category,
-        float volume, float pitch, Operation<Void> original
+        Level instance,
+        Player except,
+        double x,
+        double y,
+        double z,
+        SoundEvent sound,
+        SoundSource category,
+        float volume,
+        float pitch,
+        Operation<Void> original
     ) {
         var stack = this.getItemInHand(InteractionHand.MAIN_HAND);
         if (stack.getItem() == PastelItems.DRACONIC_TWINSWORD.get() && getChanneling(stack) > 0) {
-            this.level()
+            this
+                .level()
                 .playSound(
-                    except, x, y, z, PastelSounds.ELECTRIC_DISCHARGE, category, 0.75F,
+                    except,
+                    x,
+                    y,
+                    z,
+                    PastelSounds.ELECTRIC_DISCHARGE,
+                    category,
+                    0.75F,
                     0.9F + random.nextFloat() * 0.2F
                 );
             return;
@@ -118,12 +157,15 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         original.call(instance, except, x, y, z, sound, category, volume, pitch);
     }
 
-    @Unique
-    protected int getChanneling(ItemStack stack) {
+    @Unique protected int getChanneling(ItemStack stack) {
         return Ench.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
     }
 
-    @Inject(at = @At("TAIL"), method = "jumpFromGround")
+    @Inject(
+        at = @At(
+            "TAIL"
+        ), method = "jumpFromGround"
+    )
     protected void jumpAdvancementCriterion(CallbackInfo ci) {
 
         if ((Object) this instanceof ServerPlayer serverPlayerEntity) {
@@ -146,7 +188,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         return this.fishingBobber;
     }
 
-    @Inject(at = @At("HEAD"), method = "isHurt", cancellable = true)
+    @Inject(
+        at = @At(
+            "HEAD"
+        ), method = "isHurt", cancellable = true
+    )
     public void canFoodHeal(CallbackInfoReturnable<Boolean> cir) {
         Player player = (Player) (Object) this;
         if (player.hasEffect(PastelMobEffects.SCARRED)) {
@@ -154,22 +200,30 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         }
     }
 
-    @Inject(method = "stopSleepInBed", at = @At(value = "HEAD"))
+    @Inject(
+        method = "stopSleepInBed", at = @At(
+            value = "HEAD"
+        )
+    )
     public void applyWakeUpEffects(boolean skipSleepTimer, boolean updateSleepingPlayers, CallbackInfo ci) {
         var player = (Player) (Object) this;
-        if (!player.level()
-                   .isClientSide())
-            MiscPlayerData.get(player)
-                          .resetSleepingState(true);
+        if (!player
+            .level()
+            .isClientSide())
+            MiscPlayerData
+                .get(player)
+                .resetSleepingState(true);
     }
 
-    @WrapOperation(method = "updatePlayerPose", at = @At(value = "INVOKE",
-                                                         target = "Lnet/minecraft/world/entity/player/Player;setPose" +
-                                                                  "(Lnet/minecraft/world/entity/Pose;)V"))
+    @WrapOperation(
+        method = "updatePlayerPose", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setPose" + "(Lnet/minecraft/world/entity/Pose;)V"
+        )
+    )
     public void forceSwimmingState(Player instance, Pose entityPose, Operation<Void> original) {
         var component = MiscPlayerData.get(instance);
-        if ((component.shouldLieDown() || instance.hasEffect(PastelMobEffects.FATAL_SLUMBER)) &&
-            canPlayerFitWithinBlocksAndEntitiesWhen(Pose.SWIMMING)) {
+        if ((component.shouldLieDown() || instance
+            .hasEffect(PastelMobEffects.FATAL_SLUMBER)) && canPlayerFitWithinBlocksAndEntitiesWhen(Pose.SWIMMING)) {
             instance.setPose(Pose.SWIMMING);
             return;
         }

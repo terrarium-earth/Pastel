@@ -19,11 +19,15 @@ import java.util.Set;
 public class HumusConvertingRecipe extends FluidConvertingRecipe {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/humus");
+
     private static final Set<Item> outputItems = new HashSet<>();
 
     public HumusConvertingRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        @NotNull Ingredient inputIngredient, ItemStack outputItemStack
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        @NotNull Ingredient inputIngredient,
+        ItemStack outputItemStack
     ) {
         super(group, secret, requiredAdvancementIdentifier, inputIngredient, outputItemStack);
         outputItems.add(outputItemStack.getItem());

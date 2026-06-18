@@ -13,45 +13,83 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelFeatures {
 
-    private static final DeferredRegister<Feature<?>> REGISTER = DeferredRegister.create(
-        Registries.FEATURE, PastelCommon.MOD_ID);
+    private static final DeferredRegister<Feature<?>> REGISTER = DeferredRegister
+        .create(
+            Registries.FEATURE,
+            PastelCommon.MOD_ID
+        );
 
     public static Feature<WeightedRandomFeatureConfig> WEIGHTED_RANDOM_FEATURE = new WeightedRandomFeature(
-        WeightedRandomFeatureConfig.CODEC);
+        WeightedRandomFeatureConfig.CODEC
+    );
+
     public static Feature<GeodeConfiguration> AIR_CHECK_GEODE = new SolidBlockCheckGeodeFeature(
-        GeodeConfiguration.CODEC);
+        GeodeConfiguration.CODEC
+    );
+
     public static Feature<BlockStateFeatureConfig> AIR_EXPOSED_STATE = new AirExposedStateFeature(
-        BlockStateFeatureConfig.CODEC);
+        BlockStateFeatureConfig.CODEC
+    );
+
     public static Feature<OreConfiguration> AIR_EXPOSED_ORE = new AirExposedOreFeature(OreConfiguration.CODEC);
+
     public static Feature<BlockStateFeatureConfig> CRYSTAL_SPIKE = new CrystalSpikeFeature(
-        BlockStateFeatureConfig.CODEC);
+        BlockStateFeatureConfig.CODEC
+    );
+
     public static Feature<HyperspecificOutcropFeatureConfig> AZURE_OUTCROP = new HyperspecificOutcropFeature(
-        HyperspecificOutcropFeatureConfig.CODEC);
+        HyperspecificOutcropFeatureConfig.CODEC
+    );
+
     public static Feature<RandomBudsFeaturesConfig> RANDOM_BUDS = new RandomBudsFeature(RandomBudsFeaturesConfig.CODEC);
+
     public static Feature<OreConfiguration> AIR_CHECK_DISK = new AirCheckDiskFeature(OreConfiguration.CODEC);
+
     public static Feature<GilledFungusFeatureConfig> GILLED_FUNGUS = new GilledFungusFeature(
-        GilledFungusFeatureConfig.CODEC);
+        GilledFungusFeatureConfig.CODEC
+    );
+
     public static Feature<GilledFungusFeatureConfig> GIANT_GILLED_FUNGUS = new GiantGilledFungusFeature(
-        GilledFungusFeatureConfig.CODEC);
+        GilledFungusFeatureConfig.CODEC
+    );
+
     public static Feature<NephriteBlossomFeatureConfig> NEPHRITE_BLOSSOM = new NephriteBlossomFeature(
-        NephriteBlossomFeatureConfig.CODEC);
+        NephriteBlossomFeatureConfig.CODEC
+    );
+
     public static Feature<JadeiteLotusFeatureConfig> JADEITE_LOTUS = new JadeiteLotusFeature(
-        JadeiteLotusFeatureConfig.CODEC);
+        JadeiteLotusFeatureConfig.CODEC
+    );
+
     public static Feature<TriStateVineFeatureConfig> TRISTATE_VINE = new TriStateVineFeature(
-        TriStateVineFeatureConfig.CODEC);
+        TriStateVineFeatureConfig.CODEC
+    );
+
     public static Feature<BlockStateFeatureConfig> PILLAR = new PillarFeature(BlockStateFeatureConfig.CODEC);
+
     public static Feature<ColumnsFeatureConfig> COLUMNS = new ColumnsFeature(ColumnsFeatureConfig.CODEC);
+
     public static Feature<CrystalFormationFeatureFeatureConfig> BLOB = new CrystalFormationFeature(
-        CrystalFormationFeatureFeatureConfig.CODEC);
-    public static Feature<RandomBlockProximityPatchFeatureConfig> RANDOM_BLOCK_PROXIMITY_PATCH
-        = new RandomBlockProximityPatchFeature(RandomBlockProximityPatchFeatureConfig.CODEC);
+        CrystalFormationFeatureFeatureConfig.CODEC
+    );
+
+    public static Feature<RandomBlockProximityPatchFeatureConfig> RANDOM_BLOCK_PROXIMITY_PATCH = new RandomBlockProximityPatchFeature(
+        RandomBlockProximityPatchFeatureConfig.CODEC
+    );
+
     public static Feature<FossilFeatureConfiguration> EXPOSED_FOSSIL = new ExposedFossilFeature(
-        FossilFeatureConfiguration.CODEC);
+        FossilFeatureConfiguration.CODEC
+    );
+
     public static Feature<WallPatchFeatureConfig> WALL_PATCH = new WallPatchFeature(WallPatchFeatureConfig.CODEC);
+
     public static Feature<AshDunesFeatureConfig> ASH_DUNES = new AshDunesFeature(AshDunesFeatureConfig.CODEC);
 
     public static Feature<SnowgraveFeatureConfig> SNOWGRAVE = new SnowgraveFeature(SnowgraveFeatureConfig.CODEC);
-    public static Feature<VegetationPatchFeatureConfig> VEGETATION_PATCH = new VegetationPatchFeature(VegetationPatchFeatureConfig.CODEC);
+
+    public static Feature<VegetationPatchFeatureConfig> VEGETATION_PATCH = new VegetationPatchFeature(
+        VegetationPatchFeatureConfig.CODEC
+    );
 
     public static void register(IEventBus bus) {
         registerFeature("weighted_random_feature", WEIGHTED_RANDOM_FEATURE);

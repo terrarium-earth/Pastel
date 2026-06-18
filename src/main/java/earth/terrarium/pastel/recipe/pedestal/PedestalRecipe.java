@@ -35,21 +35,38 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("place_pedestal");
 
-    public static final int[] CRAFTING_GRID_SLOTS = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
+    public static final int[] CRAFTING_GRID_SLOTS = new int[] {
+        0, 1, 2, 3, 4, 5, 6, 7, 8
+    };
 
     protected final PedestalTier tier;
+
     protected final List<IngredientStack> inputs;
+
     protected final Map<GemstoneColor, Integer> powderInputs;
+
     protected final ItemStack output;
+
     protected final float experience;
+
     protected final int craftingTime;
+
     protected final boolean skipRecipeRemainders;
+
     protected final boolean noBenefitsFromYieldUpgrades;
 
     public PedestalRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        PedestalTier tier, List<IngredientStack> inputs, Map<GemstoneColor, Integer> powderInputs, ItemStack output,
-        float experience, int craftingTime, boolean skipRecipeRemainders, boolean noBenefitsFromYieldUpgrades
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        PedestalTier tier,
+        List<IngredientStack> inputs,
+        Map<GemstoneColor, Integer> powderInputs,
+        ItemStack output,
+        float experience,
+        int craftingTime,
+        boolean skipRecipeRemainders,
+        boolean noBenefitsFromYieldUpgrades
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -83,15 +100,26 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
         int moonstonePowderAmount = this.powderInputs.getOrDefault(PastelGemstoneColor.WHITE, 0);
 
         return ((topazPowderAmount == 0 || isStackAtLeast(
-            inv.getItem(9), PastelItems.TOPAZ_POWDER.get(), topazPowderAmount))
-                && (amethystPowderAmount == 0 || isStackAtLeast(
-            inv.getItem(10), PastelItems.AMETHYST_POWDER.get(), amethystPowderAmount))
-                && (citrinePowderAmount == 0 || isStackAtLeast(
-            inv.getItem(11), PastelItems.CITRINE_POWDER.get(), citrinePowderAmount))
-                && (onyxPowderAmount == 0 || isStackAtLeast(
-            inv.getItem(12), PastelItems.ONYX_POWDER.get(), onyxPowderAmount))
-                && (moonstonePowderAmount == 0 || isStackAtLeast(
-            inv.getItem(13), PastelItems.MOONSTONE_POWDER.get(), moonstonePowderAmount)));
+            inv.getItem(9),
+            PastelItems.TOPAZ_POWDER.get(),
+            topazPowderAmount
+        )) && (amethystPowderAmount == 0 || isStackAtLeast(
+            inv.getItem(10),
+            PastelItems.AMETHYST_POWDER.get(),
+            amethystPowderAmount
+        )) && (citrinePowderAmount == 0 || isStackAtLeast(
+            inv.getItem(11),
+            PastelItems.CITRINE_POWDER.get(),
+            citrinePowderAmount
+        )) && (onyxPowderAmount == 0 || isStackAtLeast(
+            inv.getItem(12),
+            PastelItems.ONYX_POWDER.get(),
+            onyxPowderAmount
+        )) && (moonstonePowderAmount == 0 || isStackAtLeast(
+            inv.getItem(13),
+            PastelItems.MOONSTONE_POWDER.get(),
+            moonstonePowderAmount
+        )));
     }
 
     private boolean isStackAtLeast(ItemStack sourceItemStack, Item item, int amount) {
@@ -152,19 +180,39 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
     public SoundEvent getSoundEvent(RandomSource random) {
         List<SoundEvent> choices = new ArrayList<>();
 
-        for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.MAGENTA, 0); i++) {
+        for (
+            int i = 0;
+            i < this.powderInputs.getOrDefault(PastelGemstoneColor.MAGENTA, 0);
+            i++
+        ) {
             choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_AMETHYST);
         }
-        for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.YELLOW, 0); i++) {
+        for (
+            int i = 0;
+            i < this.powderInputs.getOrDefault(PastelGemstoneColor.YELLOW, 0);
+            i++
+        ) {
             choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_CITRINE);
         }
-        for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.CYAN, 0); i++) {
+        for (
+            int i = 0;
+            i < this.powderInputs.getOrDefault(PastelGemstoneColor.CYAN, 0);
+            i++
+        ) {
             choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_TOPAZ);
         }
-        for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.BLACK, 0); i++) {
+        for (
+            int i = 0;
+            i < this.powderInputs.getOrDefault(PastelGemstoneColor.BLACK, 0);
+            i++
+        ) {
             choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_ONYX);
         }
-        for (int i = 0; i < this.powderInputs.getOrDefault(PastelGemstoneColor.WHITE, 0); i++) {
+        for (
+            int i = 0;
+            i < this.powderInputs.getOrDefault(PastelGemstoneColor.WHITE, 0);
+            i++
+        ) {
             choices.add(PastelSounds.PEDESTAL_CRAFTING_FINISHED_MOONSTONE);
         }
 
@@ -180,9 +228,12 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
         var inv = pedestal.getInventory();
 
         assert level != null;
-        for (GemstoneColor color : PastelGemstoneColor.values()) {
-            double efficiency = pedestal.getUpgradeHolder()
-                                        .getEffectiveValue(Upgradeable.UpgradeType.EFFICIENCY);
+        for (
+            GemstoneColor color : PastelGemstoneColor.values()
+        ) {
+            double efficiency = pedestal
+                .getUpgradeHolder()
+                .getEffectiveValue(Upgradeable.UpgradeType.EFFICIENCY);
             int drain = Support.chanceRound(getPowder(color) / efficiency, level.random);
 
             inv.extractItem(PedestalBlockEntity.powderSlot(color), drain, false);
@@ -199,21 +250,30 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
         if (remainder.isEmpty()) {
             invStack.shrink(count);
         } else {
-            if (inv.getStackInSlot(slot)
-                   .getCount() == count) {
+            if (inv
+                .getStackInSlot(slot)
+                .getCount() == count) {
                 inv.setStackInSlot(slot, remainder);
             } else {
                 inv.extractItem(slot, count, false);
 
                 ItemEntity itemEntity = new ItemEntity(
-                    pedestal.getLevel(), pedestal.getBlockPos()
-                                                 .getX() + 0.5, pedestal.getBlockPos()
-                                                                        .getY() + 1, pedestal.getBlockPos()
-                                                                                             .getZ() + 0.5, remainder
+                    pedestal.getLevel(),
+                    pedestal
+                        .getBlockPos()
+                        .getX() + 0.5,
+                    pedestal
+                        .getBlockPos()
+                        .getY() + 1,
+                    pedestal
+                        .getBlockPos()
+                        .getZ() + 0.5,
+                    remainder
                 );
                 itemEntity.push(0, 0.05, 0);
-                pedestal.getLevel()
-                        .addFreshEntity(itemEntity);
+                pedestal
+                    .getLevel()
+                    .addFreshEntity(itemEntity);
             }
         }
     }
@@ -225,8 +285,9 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
             return false;
         }
 
-        return pedestal.getTier()
-                       .ordinal() >= tier.ordinal();
+        return pedestal
+            .getTier()
+            .ordinal() >= tier.ordinal();
     }
 
     @Override
@@ -236,9 +297,9 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 
     @Override
     public boolean canPlayerCraft(Player playerEntity) {
-        return this.tier.hasUnlocked(playerEntity) &&
-               requiredAdvancementIdentifier.map(a -> DatabankUtils.hasAdvancement(playerEntity, a))
-                                            .orElse(true);
+        return this.tier.hasUnlocked(playerEntity) && requiredAdvancementIdentifier
+            .map(a -> DatabankUtils.hasAdvancement(playerEntity, a))
+            .orElse(true);
     }
 
     @Override

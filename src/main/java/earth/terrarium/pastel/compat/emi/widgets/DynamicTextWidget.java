@@ -12,13 +12,23 @@ import java.util.function.Function;
 public class DynamicTextWidget extends TextWidget {
 
     private static final Minecraft CLIENT = Minecraft.getInstance();
+
     private final Function<Minecraft, Tuple<FormattedCharSequence, Integer>> textSupplier;
 
     public DynamicTextWidget(
-        Function<Minecraft, Tuple<FormattedCharSequence, Integer>> textSupplier, int x, int y, boolean shadow) {
+        Function<Minecraft, Tuple<FormattedCharSequence, Integer>> textSupplier,
+        int x,
+        int y,
+        boolean shadow
+    ) {
         super(
-            textSupplier.apply(CLIENT)
-                        .getA(), x, y, 0, shadow
+            textSupplier
+                .apply(CLIENT)
+                .getA(),
+            x,
+            y,
+            0,
+            shadow
         );
         this.textSupplier = textSupplier;
     }
@@ -29,8 +39,9 @@ public class DynamicTextWidget extends TextWidget {
         context.push();
         int xOff = horizontalAlignment.offset(CLIENT.font.width(text));
         int yOff = verticalAlignment.offset(CLIENT.font.lineHeight);
-        context.matrices()
-               .translate(xOff, yOff, 300);
+        context
+            .matrices()
+            .translate(xOff, yOff, 300);
 
         var pair = textSupplier.apply(CLIENT);
 

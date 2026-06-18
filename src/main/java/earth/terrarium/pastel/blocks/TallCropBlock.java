@@ -34,16 +34,23 @@ import org.jetbrains.annotations.Nullable;
  * This class is fully usable on its own, but it is recommended to extend it.
  */
 public class TallCropBlock extends CropBlock {
-    public static final MapCodec<TallCropBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                                                                                            propertiesCodec(),
-                                                                                                            Codec.INT.fieldOf("last_single_block_age")
-                                                                                                                     .forGetter(TallCropBlock::getLastSingleBlockAge)
-                                                                                                        )
-                                                                                                        .apply(
-                                                                                                            instance,
-                                                                                                            TallCropBlock::new
-                                                                                                        ));
+    public static final MapCodec<TallCropBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            instance -> instance
+                .group(
+                    propertiesCodec(),
+                    Codec.INT
+                        .fieldOf("last_single_block_age")
+                        .forGetter(TallCropBlock::getLastSingleBlockAge)
+                )
+                .apply(
+                    instance,
+                    TallCropBlock::new
+                )
+        );
+
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+
     public final int lastSingleBlockAge;
 
     /**
@@ -88,9 +95,11 @@ public class TallCropBlock extends CropBlock {
     }
 
     private boolean canGrowUp(Level world, BlockPos pos, BlockState state, int age) {
-        return world.getBlockState(pos.above())
-                    .is(this) || world.getBlockState(pos.above())
-                                      .canBeReplaced();
+        return world
+            .getBlockState(pos.above())
+            .is(this) || world
+                .getBlockState(pos.above())
+                .canBeReplaced();
     }
 
     /**
@@ -102,7 +111,9 @@ public class TallCropBlock extends CropBlock {
      *                   attempts.
      *                   The more moisture, the more likely.
      */
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings(
+        "SameParameterValue"
+    )
     protected void tryGrow(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, float upperBound) {
         if (state.getValue(HALF) == DoubleBlockHalf.UPPER) return;
 
@@ -113,12 +124,18 @@ public class TallCropBlock extends CropBlock {
                 // More likely if there's more moisture
                 if (random.nextInt((int) (upperBound / moisture) + 1) == 0) {
                     if (age >= Block.UPDATE_CLIENTS) {
-                        if (world.getBlockState(pos.above())
-                                 .is(this) || world.getBlockState(pos.above())
-                                                   .canBeReplaced()) {
+                        if (world
+                            .getBlockState(pos.above())
+                            .is(this) || world
+                                .getBlockState(pos.above())
+                                .canBeReplaced()) {
                             world.setBlock(pos, this.getStateForAge(age + 1), Block.UPDATE_CLIENTS);
-                            world.setBlock(
-                                pos.above(), this.withAgeAndHalf(age + 1, DoubleBlockHalf.UPPER), Block.UPDATE_CLIENTS);
+                            world
+                                .setBlock(
+                                    pos.above(),
+                                    this.withAgeAndHalf(age + 1, DoubleBlockHalf.UPPER),
+                                    Block.UPDATE_CLIENTS
+                                );
                         }
                     } else {
                         world.setBlock(pos, this.getStateForAge(age + 1), Block.UPDATE_CLIENTS);
@@ -137,15 +154,17 @@ public class TallCropBlock extends CropBlock {
     }
 
     public BlockState withAgeAndHalf(int age, DoubleBlockHalf half) {
-        return this.defaultBlockState()
-                   .setValue(this.getAgeProperty(), age)
-                   .setValue(HALF, half);
+        return this
+            .defaultBlockState()
+            .setValue(this.getAgeProperty(), age)
+            .setValue(HALF, half);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HALF)
-               .add(AGE);
+        builder
+            .add(HALF)
+            .add(AGE);
     }
 
     @Override
@@ -155,8 +174,10 @@ public class TallCropBlock extends CropBlock {
             return this.mayPlaceOn(world.getBlockState(blockPos), world, blockPos);
         } else {
             BlockState blockState = world.getBlockState(pos.below());
-            return blockState.is(this) && blockState.getValue(HALF) == DoubleBlockHalf.LOWER && blockState.getValue(
-                AGE) > this.lastSingleBlockAge;
+            return blockState.is(this) && blockState.getValue(HALF) == DoubleBlockHalf.LOWER && blockState
+                .getValue(
+                    AGE
+                ) > this.lastSingleBlockAge;
         }
     }
 
@@ -171,49 +192,88 @@ public class TallCropBlock extends CropBlock {
             }
         } else {
             return super.getShape(
-                this.getStateForAge(state.getValue(AGE) - this.lastSingleBlockAge - 1), world, pos, context);
+                this.getStateForAge(state.getValue(AGE) - this.lastSingleBlockAge - 1),
+                world,
+                pos,
+                context
+            );
         }
     }
 
     // below code is (mostly) copied from TallPlantBlock
 
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
-        if (direction.getAxis() == Direction.Axis.Y &&
-            doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP)) {
-            return (state.getValue(AGE) <= lastSingleBlockAge || neighborState.is(this) && neighborState.getValue(
-                HALF) != doubleBlockHalf) ? state : Blocks.AIR.defaultBlockState();
+        if (direction
+            .getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP)) {
+            return (state.getValue(AGE) <= lastSingleBlockAge || neighborState.is(this) && neighborState
+                .getValue(
+                    HALF
+                ) != doubleBlockHalf) ? state : Blocks.AIR.defaultBlockState();
         } else {
-            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canSurvive(
-                world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(
-                state, direction, neighborState, world, pos, neighborPos);
+            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state
+                .canSurvive(
+                    world,
+                    pos
+                )
+                    ? Blocks.AIR.defaultBlockState()
+                    : super.updateShape(
+                        state,
+                        direction,
+                        neighborState,
+                        world,
+                        pos,
+                        neighborPos
+                    );
         }
     }
 
     @Override
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    @Nullable public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockPos blockPos = ctx.getClickedPos();
         Level world = ctx.getLevel();
-        return blockPos.getY() < world.getMaxBuildHeight() - 1 && world.getBlockState(blockPos.above())
-                                                                       .canBeReplaced(ctx) ? this.withAgeAndHalf(
-            0, DoubleBlockHalf.LOWER) : null;
+        return blockPos.getY() < world.getMaxBuildHeight() - 1 && world
+            .getBlockState(blockPos.above())
+            .canBeReplaced(ctx)
+                ? this
+                    .withAgeAndHalf(
+                        0,
+                        DoubleBlockHalf.LOWER
+                    )
+                : null;
     }
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         // Place the other half
         if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
-            world.setBlock(
-                pos.below(), this.withAgeAndHalf(state.getValue(AGE), DoubleBlockHalf.LOWER), Block.UPDATE_ALL);
+            world
+                .setBlock(
+                    pos.below(),
+                    this.withAgeAndHalf(state.getValue(AGE), DoubleBlockHalf.LOWER),
+                    Block.UPDATE_ALL
+                );
         } else {
             if (state.getValue(AGE) > this.lastSingleBlockAge) {
-                world.setBlock(
-                    pos.above(), this.withAgeAndHalf(state.getValue(AGE), DoubleBlockHalf.UPPER), Block.UPDATE_ALL);
+                world
+                    .setBlock(
+                        pos.above(),
+                        this.withAgeAndHalf(state.getValue(AGE), DoubleBlockHalf.UPPER),
+                        Block.UPDATE_ALL
+                    );
             }
         }
     }
@@ -226,9 +286,10 @@ public class TallCropBlock extends CropBlock {
                 if (!player.isCreative()) {
                     dropResources(state, world, downPos, null, player, player.getMainHandItem());
                 }
-                BlockState blockState2 = blockState.hasProperty(BlockStateProperties.WATERLOGGED) &&
-                                         blockState.getValue(BlockStateProperties.WATERLOGGED)
-                                         ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
+                BlockState blockState2 = blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState
+                    .getValue(BlockStateProperties.WATERLOGGED)
+                        ? Blocks.WATER.defaultBlockState()
+                        : Blocks.AIR.defaultBlockState();
                 world.setBlock(downPos, blockState2, Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
                 world.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, downPos, Block.getId(blockState));
             }
@@ -239,9 +300,10 @@ public class TallCropBlock extends CropBlock {
                 if (!player.isCreative()) {
                     dropResources(state, world, pos, null, player, player.getMainHandItem());
                 }
-                BlockState blockState2 = blockState.hasProperty(BlockStateProperties.WATERLOGGED) &&
-                                         blockState.getValue(BlockStateProperties.WATERLOGGED)
-                                         ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
+                BlockState blockState2 = blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState
+                    .getValue(BlockStateProperties.WATERLOGGED)
+                        ? Blocks.WATER.defaultBlockState()
+                        : Blocks.AIR.defaultBlockState();
                 world.setBlock(upPos, blockState2, Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
                 world.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, upPos, Block.getId(blockState));
             }
@@ -259,7 +321,11 @@ public class TallCropBlock extends CropBlock {
 
     @Override
     public void playerDestroy(
-        Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity,
+        Level world,
+        Player player,
+        BlockPos pos,
+        BlockState state,
+        @Nullable BlockEntity blockEntity,
         ItemStack stack
     ) {
         super.playerDestroy(world, player, pos, Blocks.AIR.defaultBlockState(), blockEntity, stack);

@@ -17,8 +17,11 @@ import java.util.stream.Collectors;
 public class PastelNetwork<W extends Level> {
 
     protected Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+
     protected final W world;
+
     protected final UUID uuid;
+
     protected int color;
 
     public enum NodePriority {
@@ -34,8 +37,9 @@ public class PastelNetwork<W extends Level> {
     }
 
     public int size() {
-        return graph.vertexSet()
-                    .size();
+        return graph
+            .vertexSet()
+            .size();
     }
 
     public W getLevel() {
@@ -87,8 +91,9 @@ public class PastelNetwork<W extends Level> {
         if (dyeColor.isEmpty())
             return;
 
-        var newColor = dyeColor.get()
-                               .getTextureDiffuseColor();
+        var newColor = dyeColor
+            .get()
+            .getTextureDiffuseColor();
 
         if (newColor == this.color)
             return;
@@ -116,7 +121,11 @@ public class PastelNetwork<W extends Level> {
         var vertices = new ArrayList<>(graph.vertexSet());
         var graphStorage = new CompoundTag();
         graphStorage.putInt("Size", vertices.size());
-        for (int i = 0; i < vertices.size(); i++) {
+        for (
+            int i = 0;
+            i < vertices.size();
+            i++
+        ) {
             var vertex = vertices.get(i);
 
             // Store the Vertex
@@ -124,13 +133,14 @@ public class PastelNetwork<W extends Level> {
 
             // Save the edges
             int currentVertex = i;
-            var edgeIndexes = graph.edgesOf(vertex)
-                                   .stream()
-                                   .map(graph::getEdgeTarget)
-                                   .mapToInt(vertices::indexOf)
-                                   .filter(v -> v != currentVertex)
-                                   .boxed()
-                                   .collect(Collectors.toList());
+            var edgeIndexes = graph
+                .edgesOf(vertex)
+                .stream()
+                .map(graph::getEdgeTarget)
+                .mapToInt(vertices::indexOf)
+                .filter(v -> v != currentVertex)
+                .boxed()
+                .collect(Collectors.toList());
 
             if (edgeIndexes.isEmpty())
                 continue;
@@ -148,18 +158,30 @@ public class PastelNetwork<W extends Level> {
 
         var size = nbt.getInt("Size");
         var vertices = new ArrayList<BlockPos>();
-        for (int i = 0; i < size; i++) {
+        for (
+            int i = 0;
+            i < size;
+            i++
+        ) {
             var vertex = BlockPos.of(nbt.getLong("Vertex" + i));
             vertices.add(vertex);
             graph.addVertex(vertex);
         }
 
-        for (int i = 0; i < size; i++) {
+        for (
+            int i = 0;
+            i < size;
+            i++
+        ) {
             if (!nbt.contains("EdgeIndexes" + i))
                 continue;
             var edgeIndexes = nbt.getIntArray("EdgeIndexes" + i);
             var source = vertices.get(edgeIndexes[0]);
-            for (int targetIndex = 1; targetIndex < edgeIndexes.length; targetIndex++) {
+            for (
+                int targetIndex = 1;
+                targetIndex < edgeIndexes.length;
+                targetIndex++
+            ) {
                 var target = vertices.get(edgeIndexes[targetIndex]);
                 if (!graph.containsEdge(source, target))
                     graph.addEdge(source, target);
@@ -170,14 +192,11 @@ public class PastelNetwork<W extends Level> {
     }
 
     public String getNodeDebugText() {
-        return "UUID: " +
-               uuid.toString() +
-               " - Edges: " +
-               graph.edgeSet()
-                    .size() +
-               " - Vertices: " +
-               graph.vertexSet()
-                    .size();
+        return "UUID: " + uuid.toString() + " - Edges: " + graph
+            .edgeSet()
+            .size() + " - Vertices: " + graph
+                .vertexSet()
+                .size();
     }
 
 }

@@ -11,18 +11,27 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class PotionWorkshopEmiRecipeGated extends GatedSpectrumEmiRecipe<PotionWorkshopRecipe> {
-    private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/container/potion_workshop_3_slots.png");
+    private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/container/potion_workshop_3_slots.png"
+        );
 
     public PotionWorkshopEmiRecipeGated(EmiRecipeCategory category, PotionWorkshopRecipe recipe) {
         super(category, recipe, 112, 66);
 
-        this.inputs = recipe.getIngredientStacks()
-                            .stream()
-                            .map(s -> EmiIngredient.of(s.getItems()
-                                                        .map(EmiStack::of)
-                                                        .toList()))
-                            .toList();
+        this.inputs = recipe
+            .getIngredientStacks()
+            .stream()
+            .map(
+                s -> EmiIngredient
+                    .of(
+                        s
+                            .getItems()
+                            .map(EmiStack::of)
+                            .toList()
+                    )
+            )
+            .toList();
     }
 
     @Override
@@ -33,8 +42,9 @@ public class PotionWorkshopEmiRecipeGated extends GatedSpectrumEmiRecipe<PotionW
         widgets.addSlot(inputs.get(3), 0, 24);
         widgets.addSlot(inputs.get(4), 36, 24);
 
-        widgets.addSlot(outputs.getFirst(), 94, 24)
-               .recipeContext(this);
+        widgets
+            .addSlot(outputs.getFirst(), 94, 24)
+            .recipeContext(this);
 
         // bubbles
         widgets.addTexture(BACKGROUND_TEXTURE, 21, 20, 11, 27, 176, 0);

@@ -31,23 +31,29 @@ public class AzureDikeChargeCriterion extends SimpleCriterionTrigger<AzureDikeCh
         MinMaxBounds.Ints rechargeRate,
         MinMaxBounds.Ints change
     ) implements SimpleCriterionTrigger.SimpleInstance {
-        public static final Codec<AzureDikeChargeCriterion.Conditions> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                                    EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
-                                                                     .forGetter(AzureDikeChargeCriterion.Conditions::player),
-                                    MinMaxBounds.Ints.CODEC.optionalFieldOf("charges", MinMaxBounds.Ints.ANY)
-                                                           .forGetter(AzureDikeChargeCriterion.Conditions::charges),
-                                    MinMaxBounds.Ints.CODEC.optionalFieldOf("recharge_rate", MinMaxBounds.Ints.ANY)
-                                                           .forGetter(AzureDikeChargeCriterion.Conditions::rechargeRate),
-                                    MinMaxBounds.Ints.CODEC.optionalFieldOf("change", MinMaxBounds.Ints.ANY)
-                                                           .forGetter(AzureDikeChargeCriterion.Conditions::change)
-                                )
-                                .apply(instance, AzureDikeChargeCriterion.Conditions::new));
+        public static final Codec<AzureDikeChargeCriterion.Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        EntityPredicate.ADVANCEMENT_CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(AzureDikeChargeCriterion.Conditions::player),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("charges", MinMaxBounds.Ints.ANY)
+                            .forGetter(AzureDikeChargeCriterion.Conditions::charges),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("recharge_rate", MinMaxBounds.Ints.ANY)
+                            .forGetter(AzureDikeChargeCriterion.Conditions::rechargeRate),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("change", MinMaxBounds.Ints.ANY)
+                            .forGetter(AzureDikeChargeCriterion.Conditions::change)
+                    )
+                    .apply(instance, AzureDikeChargeCriterion.Conditions::new)
+            );
 
         public boolean matches(float charges, int rechargeRate, float change) {
-            return this.charges.matches(Math.round(charges)) && this.rechargeRate.matches(rechargeRate) &&
-                   this.change.matches(Math.round(change));
+            return this.charges.matches(Math.round(charges)) && this.rechargeRate.matches(rechargeRate) && this.change
+                .matches(Math.round(change));
         }
     }
 }
-	

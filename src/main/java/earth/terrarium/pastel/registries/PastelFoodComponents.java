@@ -7,20 +7,28 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+    "unused"
+)
 public class PastelFoodComponents {
 
     // EAT TIMES
     // FoodComponent.DEFAULT_EAT_SECONDS is 1.6F seconds, snack is 0.8F
     private static final float TIME_BITE = 1.2F;
+
     private static final float TIME_HEARTY = 3.2F;
+
     private static final float TIME_FEAST = 4.8F;
 
     // SATURATION
     private static final float SAT_POOR = 0.2F;
+
     private static final float SAT_LOW = 0.6F;
+
     private static final float SAT_NORMAL = 1.2F;
+
     private static final float SAT_HUMUSD = 1.6F;
+
     private static final float SAT_SUPERNATURAL = 2.4F;
 
     public static final FoodProperties MOONSTRUCK_NECTAR = new FoodProperties.Builder()
@@ -50,19 +58,21 @@ public class PastelFoodComponents {
 
     public static final FoodProperties NIGHTDEW_SPROUT = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
         .nutrition(1)
-        .saturationModifier(SAT_POOR)).setEatSeconds(TIME_FEAST)
-                                      .alwaysEdible()
-                                      .effect(new MobEffectInstance(PastelMobEffects.CALMING, 200, 0), 0.5F)
-                                      .effect(new MobEffectInstance(PastelMobEffects.SOMNOLENCE, 200, 0), 0.5F)
-                                      .build();
+        .saturationModifier(SAT_POOR))
+        .setEatSeconds(TIME_FEAST)
+        .alwaysEdible()
+        .effect(new MobEffectInstance(PastelMobEffects.CALMING, 200, 0), 0.5F)
+        .effect(new MobEffectInstance(PastelMobEffects.SOMNOLENCE, 200, 0), 0.5F)
+        .build();
 
     public static final FoodProperties NECTARDEW_BURGEON = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
         .nutrition(1)
-        .saturationModifier(SAT_POOR)).setEatSeconds(TIME_FEAST)
-                                      .alwaysEdible()
-                                      .effect(new MobEffectInstance(PastelMobEffects.ETERNAL_SLUMBER, 6000), 0.95F)
-                                      .effect(new MobEffectInstance(PastelMobEffects.FATAL_SLUMBER, 100), 0.05F)
-                                      .build();
+        .saturationModifier(SAT_POOR))
+        .setEatSeconds(TIME_FEAST)
+        .alwaysEdible()
+        .effect(new MobEffectInstance(PastelMobEffects.ETERNAL_SLUMBER, 6000), 0.95F)
+        .effect(new MobEffectInstance(PastelMobEffects.FATAL_SLUMBER, 100), 0.05F)
+        .build();
 
     public static final FoodProperties STAR_CANDY = new FoodProperties.Builder()
         .nutrition(3)
@@ -102,13 +112,13 @@ public class PastelFoodComponents {
         .effect(new MobEffectInstance(PastelMobEffects.ANOTHER_ROLL, 1200), 1.0F)
         .build();
 
-    public static final FoodProperties TRIPLE_MEAT_POT_PIE
-        = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+    public static final FoodProperties TRIPLE_MEAT_POT_PIE = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
         .nutrition(20)
-        .saturationModifier(SAT_NORMAL)).setEatSeconds(TIME_FEAST)
-                                        .effect(new MobEffectInstance(MobEffects.REGENERATION, 100), 1.0F)
-                                        .effect(new MobEffectInstance(PastelMobEffects.NOURISHING, 12000, 1), 1.0F)
-                                        .build();
+        .saturationModifier(SAT_NORMAL))
+        .setEatSeconds(TIME_FEAST)
+        .effect(new MobEffectInstance(MobEffects.REGENERATION, 100), 1.0F)
+        .effect(new MobEffectInstance(PastelMobEffects.NOURISHING, 12000, 1), 1.0F)
+        .build();
 
     public static final FoodProperties GLISTERING_JELLY_TEA = new FoodProperties.Builder()
         .nutrition(4)
@@ -357,13 +367,13 @@ public class PastelFoodComponents {
         .effect(new MobEffectInstance(MobEffects.HARM, 0, 0), 0.6F)
         .build();
 
-    public static final FoodProperties TRIPLE_MEAT_POT_STEW
-        = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+    public static final FoodProperties TRIPLE_MEAT_POT_STEW = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
         .nutrition(20)
-        .saturationModifier(SAT_NORMAL)).setEatSeconds(TIME_FEAST)
-                                        .effect(new MobEffectInstance(MobEffects.REGENERATION, 100), 1.0F)
-                                        .effect(new MobEffectInstance(PastelMobEffects.NOURISHING, 12000, 1), 1.0F)
-                                        .build();
+        .saturationModifier(SAT_NORMAL))
+        .setEatSeconds(TIME_FEAST)
+        .effect(new MobEffectInstance(MobEffects.REGENERATION, 100), 1.0F)
+        .effect(new MobEffectInstance(PastelMobEffects.NOURISHING, 12000, 1), 1.0F)
+        .build();
 
     public static final FoodProperties WYRMSCALE_JELLY = new FoodProperties.Builder()
         .nutrition(6)
@@ -394,13 +404,15 @@ public class PastelFoodComponents {
         .effect(new MobEffectInstance(PastelMobEffects.NOURISHING, 2400), 1.0F)
         .build();
 
-    public static final FoodProperties CHAUVE_SOURIS_AU_VIN
-        = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+    public static final FoodProperties CHAUVE_SOURIS_AU_VIN = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
         .nutrition(20)
-        .saturationModifier(SAT_HUMUSD)).setEatSeconds(TIME_FEAST)
-                                        .effect(
-                                            new MobEffectInstance(PastelMobEffects.EFFECT_PROLONGING, 6000, 0), 1.0F)
-                                        .build();
+        .saturationModifier(SAT_HUMUSD))
+        .setEatSeconds(TIME_FEAST)
+        .effect(
+            new MobEffectInstance(PastelMobEffects.EFFECT_PROLONGING, 6000, 0),
+            1.0F
+        )
+        .build();
 
     public static final FoodProperties CRAWFISH = new FoodProperties.Builder()
         .nutrition(2)
@@ -459,10 +471,11 @@ public class PastelFoodComponents {
 
     public static final FoodProperties HARE_ROAST = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
         .nutrition(12)
-        .saturationModifier(SAT_HUMUSD)).setEatSeconds(TIME_HEARTY)
-                                        .effect(new MobEffectInstance(PastelMobEffects.NOURISHING, 1200, 1), 1.0F)
-                                        .effect(new MobEffectInstance(MobEffects.REGENERATION, 1200), 1)
-                                        .build();
+        .saturationModifier(SAT_HUMUSD))
+        .setEatSeconds(TIME_HEARTY)
+        .effect(new MobEffectInstance(PastelMobEffects.NOURISHING, 1200, 1), 1.0F)
+        .effect(new MobEffectInstance(MobEffects.REGENERATION, 1200), 1)
+        .build();
 
     public static final FoodProperties JUNKET = new FoodProperties.Builder()
         .nutrition(6)
@@ -507,9 +520,10 @@ public class PastelFoodComponents {
 
     public static final FoodProperties PEACHES_FLAMBE = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
         .nutrition(14)
-        .saturationModifier(SAT_HUMUSD)).setEatSeconds(TIME_HEARTY)
-                                        .effect(new MobEffectInstance(PastelMobEffects.TOUGHNESS, 3000, 5), 1.0F)
-                                        .build();
+        .saturationModifier(SAT_HUMUSD))
+        .setEatSeconds(TIME_HEARTY)
+        .effect(new MobEffectInstance(PastelMobEffects.TOUGHNESS, 3000, 5), 1.0F)
+        .build();
 
     public static final FoodProperties PEACH_CREAM = new FoodProperties.Builder()
         .nutrition(8)
@@ -540,9 +554,10 @@ public class PastelFoodComponents {
 
     public static final FoodProperties SEDATIVES = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
         .nutrition(2)
-        .saturationModifier(SAT_POOR)).setEatSeconds(TIME_HEARTY)
-                                      .effect(new MobEffectInstance(PastelMobEffects.STIFFNESS, 300, 4), 1.0F)
-                                      .build();
+        .saturationModifier(SAT_POOR))
+        .setEatSeconds(TIME_HEARTY)
+        .effect(new MobEffectInstance(PastelMobEffects.STIFFNESS, 300, 4), 1.0F)
+        .build();
 
     public static final FoodProperties SLUSHSLIDE = new FoodProperties.Builder()
         .nutrition(9)

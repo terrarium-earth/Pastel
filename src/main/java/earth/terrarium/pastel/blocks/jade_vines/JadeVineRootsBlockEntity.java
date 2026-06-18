@@ -23,7 +23,9 @@ import org.jetbrains.annotations.Nullable;
 public class JadeVineRootsBlockEntity extends BlockEntity {
 
     private BlockState fenceBlockState;
+
     private long lastGrowthTick = -1;
+
     private boolean wasExposedToSunlight = false;
 
     public JadeVineRootsBlockEntity(BlockPos pos, BlockState state) {
@@ -55,17 +57,21 @@ public class JadeVineRootsBlockEntity extends BlockEntity {
         nbt.putLong("LastGrowthTick", this.lastGrowthTick);
         nbt.putBoolean("WasExposedToSunlight", this.wasExposedToSunlight);
         if (this.fenceBlockState != null) {
-            nbt.putString(
-                "FenceBlockIdentifier", BuiltInRegistries.BLOCK.getKey(this.fenceBlockState.getBlock())
-                                                               .toString()
-            );
+            nbt
+                .putString(
+                    "FenceBlockIdentifier",
+                    BuiltInRegistries.BLOCK
+                        .getKey(this.fenceBlockState.getBlock())
+                        .toString()
+                );
         }
     }
 
     public boolean isLaterNight(@NotNull Level world) {
         long dayTime = world.getDayTime();
-        if (TimeHelper.getTimeOfDay(dayTime)
-                      .isNight()) { // timeOfDay % 24000 >= 13000 && timeOfDay % 24000 < 23000
+        if (TimeHelper
+            .getTimeOfDay(dayTime)
+            .isNight()) { // timeOfDay % 24000 >= 13000 && timeOfDay % 24000 < 23000
             return TimeHelper.getDay(dayTime + 1000) != TimeHelper.getDay(lastGrowthTick + 1000);
         }
         return false;
@@ -105,25 +111,30 @@ public class JadeVineRootsBlockEntity extends BlockEntity {
     public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
         CompoundTag nbtCompound = new CompoundTag();
         if (this.fenceBlockState != null) {
-            nbtCompound.putString(
-                "FenceBlockIdentifier", BuiltInRegistries.BLOCK.getKey(this.fenceBlockState.getBlock())
-                                                               .toString()
-            );
+            nbtCompound
+                .putString(
+                    "FenceBlockIdentifier",
+                    BuiltInRegistries.BLOCK
+                        .getKey(this.fenceBlockState.getBlock())
+                        .toString()
+                );
         }
         return nbtCompound;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
     public void updateInClientWorld() {
-        level.sendBlockUpdated(
-            worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition),
-            Block.UPDATE_INVISIBLE
-        );
+        level
+            .sendBlockUpdated(
+                worldPosition,
+                level.getBlockState(worldPosition),
+                level.getBlockState(worldPosition),
+                Block.UPDATE_INVISIBLE
+            );
     }
 
 }

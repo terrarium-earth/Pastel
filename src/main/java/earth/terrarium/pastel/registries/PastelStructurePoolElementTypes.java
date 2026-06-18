@@ -11,15 +11,20 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelStructurePoolElementTypes {
 
-    private static final DeferredRegister<StructurePoolElementType<?>> REGISTER = DeferredRegister.create(
-        Registries.STRUCTURE_POOL_ELEMENT, PastelCommon.MOD_ID);
+    private static final DeferredRegister<StructurePoolElementType<?>> REGISTER = DeferredRegister
+        .create(
+            Registries.STRUCTURE_POOL_ELEMENT,
+            PastelCommon.MOD_ID
+        );
 
     /**
      * WeightedPool element that replaces the jigsaw with a single block
      * that block supports state tags and block entity nbt
      */
     public static final StructurePoolElementType<SingleBlockPoolElement> SINGLE_BLOCK_ELEMENT = registerType(
-        "single_block_element", SingleBlockPoolElement.CODEC);
+        "single_block_element",
+        SingleBlockPoolElement.CODEC
+    );
 
     static <P extends StructurePoolElement> StructurePoolElementType<P> registerType(String id, MapCodec<P> codec) {
         StructurePoolElementType<P> type = () -> codec;

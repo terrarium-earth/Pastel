@@ -42,43 +42,78 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelCriteria {
 
-    private static final DeferredRegister<CriterionTrigger<?>> REGISTER = DeferredRegister.create(
-        Registries.TRIGGER_TYPE, PastelCommon.MOD_ID);
+    private static final DeferredRegister<CriterionTrigger<?>> REGISTER = DeferredRegister
+        .create(
+            Registries.TRIGGER_TYPE,
+            PastelCommon.MOD_ID
+        );
 
     public static PedestalCraftingCriterion PEDESTAL_CRAFTING = new PedestalCraftingCriterion();
+
     public static FusionShrineCraftingCriterion FUSION_SHRINE_CRAFTING = new FusionShrineCraftingCriterion();
+
     public static CompletedMultiblockCriterion COMPLETED_MULTIBLOCK = new CompletedMultiblockCriterion();
+
     public static BlockBrokenCriterion BLOCK_BROKEN = new BlockBrokenCriterion();
+
     public static LootFunctionTriggerCriterion LOOT_FUNCTION_TRIGGER = new LootFunctionTriggerCriterion();
+
     public static NaturesStaffConversionCriterion NATURES_STAFF_USE = new NaturesStaffConversionCriterion();
+
     public static EnchanterCraftingCriterion ENCHANTER_CRAFTING = new EnchanterCraftingCriterion();
+
     public static EnchanterEnchantingCriterion ENCHANTER_ENCHANTING = new EnchanterEnchantingCriterion();
+
     public static EnchantmentUpgradedCriterion ENCHANTER_UPGRADING = new EnchantmentUpgradedCriterion();
+
     public static AzureDikeChargeCriterion AZURE_DIKE_CHARGE = new AzureDikeChargeCriterion();
+
     public static TrinketChangeCriterion TRINKET_CHANGE = new TrinketChangeCriterion();
+
     public static PotionWorkshopBrewingCriterion POTION_WORKSHOP_BREWING = new PotionWorkshopBrewingCriterion();
+
     public static PotionWorkshopCraftingCriterion POTION_WORKSHOP_CRAFTING = new PotionWorkshopCraftingCriterion();
+
     public static TakeOffBeltJumpCriterion TAKEOFF_BELT_JUMP = new TakeOffBeltJumpCriterion();
+
     public static InkContainerInteractionCriterion INK_CONTAINER_INTERACTION = new InkContainerInteractionCriterion();
+
     public static JeopardantKillCriterion JEOPARDANT_KILL = new JeopardantKillCriterion();
+
     public static MemoryManifestingCriterion MEMORY_MANIFESTING = new MemoryManifestingCriterion();
+
     public static SpiritInstillerCraftingCriterion SPIRIT_INSTILLER_CRAFTING = new SpiritInstillerCraftingCriterion();
+
     public static SlimeSizingCriterion SLIME_SIZING = new SlimeSizingCriterion();
-    public static CrystalApothecaryCollectingCriterion CRYSTAL_APOTHECARY_COLLECTING
-        = new CrystalApothecaryCollectingCriterion();
+
+    public static CrystalApothecaryCollectingCriterion CRYSTAL_APOTHECARY_COLLECTING = new CrystalApothecaryCollectingCriterion();
+
     public static UpgradePlaceCriterion UPGRADE_PLACING = new UpgradePlaceCriterion();
+
     public static CrystallarieumGrownCriterion CRYSTALLARIEUM_GROWING = new CrystallarieumGrownCriterion();
+
     public static CinderhearthSmeltingCriterion CINDERHEARTH_SMELTING = new CinderhearthSmeltingCriterion();
+
     public static InkProjectileKillingCriterion KILLED_BY_INK_PROJECTILE = new InkProjectileKillingCriterion();
+
     public static PastelFishingRodHookedCriterion FISHING_ROD_HOOKED = new PastelFishingRodHookedCriterion();
+
     public static TitrationBarrelTappingCriterion TITRATION_BARREL_TAPPING = new TitrationBarrelTappingCriterion();
+
     public static BloodOrchidPluckingCriterion BLOOD_ORCHID_PLUCKING = new BloodOrchidPluckingCriterion();
+
     public static DivinityTickCriterion DIVINITY_TICK = new DivinityTickCriterion();
+
     public static PairedFoodEatenCriterion CONDITIONAL_FOOD_EATEN = new PairedFoodEatenCriterion();
+
     public static HummingstoneHymnCriterion CREATE_HUMMINGSTONE_HYMN = new HummingstoneHymnCriterion();
+
     public static PastelNetworkCreationCriterion PASTEL_NETWORK_CREATING = new PastelNetworkCreationCriterion();
+
     public static PastelNodeUpgradeCriterion PASTEL_NODE_UPGRADING = new PastelNodeUpgradeCriterion();
+
     public static PreservationCheckCriterion PRESERVATION_CHECK = new PreservationCheckCriterion();
+
     public static FluidDippingCriterion FLUID_DIPPING = new FluidDippingCriterion();
 
     public static void register(IEventBus bus) {

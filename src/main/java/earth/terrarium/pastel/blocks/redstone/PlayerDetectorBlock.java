@@ -33,7 +33,12 @@ public class PlayerDetectorBlock extends DetectorBlock implements EntityBlock {
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         if (!world.isClientSide && placer instanceof Player) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof PlayerDetectorBlockEntity) {
@@ -44,7 +49,12 @@ public class PlayerDetectorBlock extends DetectorBlock implements EntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -52,8 +62,11 @@ public class PlayerDetectorBlock extends DetectorBlock implements EntityBlock {
 
                 String ownerName = getOwnerName(world, pos);
                 if (ownerName != null && !ownerName.isBlank()) {
-                    player.displayClientMessage(
-                        Component.translatable("block.pastel.player_detector.owner", ownerName), true);
+                    player
+                        .displayClientMessage(
+                            Component.translatable("block.pastel.player_detector.owner", ownerName),
+                            true
+                        );
                 }
                 return InteractionResult.CONSUME;
             } else {
@@ -64,8 +77,12 @@ public class PlayerDetectorBlock extends DetectorBlock implements EntityBlock {
 
     @Override
     protected void updateState(BlockState state, Level world, BlockPos pos) {
-        List<Player> players = world.getEntities(
-            EntityType.PLAYER, getDetectionBox(pos), player -> player.isAlive() && !player.isSpectator());
+        List<Player> players = world
+            .getEntities(
+                EntityType.PLAYER,
+                getDetectionBox(pos),
+                player -> player.isAlive() && !player.isSpectator()
+            );
 
         int power = 0;
 
@@ -73,9 +90,12 @@ public class PlayerDetectorBlock extends DetectorBlock implements EntityBlock {
             power = 8;
             UUID ownerUUID = getOwnerUUID(world, pos);
             if (ownerUUID != null) {
-                for (Player playerEntity : players) {
-                    if (playerEntity.getUUID()
-                                    .equals(ownerUUID)) {
+                for (
+                    Player playerEntity : players
+                ) {
+                    if (playerEntity
+                        .getUUID()
+                        .equals(ownerUUID)) {
                         power = 15;
                         break;
                     }
@@ -110,8 +130,7 @@ public class PlayerDetectorBlock extends DetectorBlock implements EntityBlock {
         return null;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PlayerDetectorBlockEntity(pos, state);
     }

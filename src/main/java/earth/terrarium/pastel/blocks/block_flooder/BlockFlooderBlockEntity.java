@@ -15,9 +15,11 @@ import java.util.UUID;
 public class BlockFlooderBlockEntity extends BlockEntity {
 
     private Entity owner;
+
     private UUID ownerUUID;
 
     private BlockPos sourcePos;
+
     private BlockState targetBlockState = Blocks.AIR.defaultBlockState();
 
     public BlockFlooderBlockEntity(BlockPos pos, BlockState state) {
@@ -46,7 +48,10 @@ public class BlockFlooderBlockEntity extends BlockEntity {
         this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
         if (nbt.contains("SourcePositionX") && nbt.contains("SourcePositionY") && nbt.contains("SourcePositionZ")) {
             this.sourcePos = new BlockPos(
-                nbt.getInt("SourcePositionX"), nbt.getInt("SourcePositionY"), nbt.getInt("SourcePositionZ"));
+                nbt.getInt("SourcePositionX"),
+                nbt.getInt("SourcePositionY"),
+                nbt.getInt("SourcePositionZ")
+            );
         }
     }
 
@@ -61,7 +66,6 @@ public class BlockFlooderBlockEntity extends BlockEntity {
             nbt.putInt("SourcePositionZ", this.sourcePos.getZ());
         }
     }
-
 
     public BlockPos getSourcePos() {
         if (this.sourcePos == null) {

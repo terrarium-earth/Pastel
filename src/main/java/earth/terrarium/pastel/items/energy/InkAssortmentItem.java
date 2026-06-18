@@ -51,7 +51,9 @@ public class InkAssortmentItem extends Item implements InkStorageItem<Individual
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         getEnergyStorage(stack).addTooltip(tooltip);
@@ -70,10 +72,13 @@ public class InkAssortmentItem extends Item implements InkStorageItem<Individual
         if (player == null || storage.isEmpty())
             return ExtendedItemBar.PASS;
 
-        var time = player.level()
-                         .getGameTime() % 864000;
+        var time = player
+            .level()
+            .getGameTime() % 864000;
 
-        for (InkColor inkColor : PastelRegistries.INK_COLOR) {
+        for (
+            InkColor inkColor : PastelRegistries.INK_COLOR
+        ) {
             if (storage.getEnergy(inkColor) > 0)
                 colors.add(inkColor);
         }
@@ -82,21 +87,31 @@ public class InkAssortmentItem extends Item implements InkStorageItem<Individual
         if (colors.size() == 1) {
             var color = colors.getFirst();
             return new ExtendedItemBar.BarSignature(
-                1, 13, 14, progress, 1, ColorHelper.colorVecToRGB(color.getColorVec()) | 0xFF000000, 2,
+                1,
+                13,
+                14,
+                progress,
+                1,
+                ColorHelper.colorVecToRGB(color.getColorVec()) | 0xFF000000,
+                2,
                 DEFAULT_BACKGROUND_COLOR
             );
         }
 
-        var delta = Minecraft.getInstance()
-                             .getTimer()
-                             .getGameTimeDeltaPartialTick(false);
+        var delta = Minecraft
+            .getInstance()
+            .getTimer()
+            .getGameTimeDeltaPartialTick(false);
         var curColor = colors.get((int) (time % (30L * colors.size()) / 30));
         var nextColor = colors.get((int) ((time % (30L * colors.size()) / 30 + 1) % colors.size()));
 
-
         var blendFactor = (((float) time + delta) % 30) / 30F;
-        var blendedColor = ColorHelper.interpolate(
-            curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
+        var blendedColor = ColorHelper
+            .interpolate(
+                curColor.getTextColorVec(),
+                nextColor.getTextColorVec(),
+                blendFactor
+            );
 
         return new ExtendedItemBar.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
     }

@@ -74,9 +74,10 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
-        return PastelBlocks.MIDNIGHT_SOLUTION.get()
-                                             .defaultBlockState()
-                                             .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+        return PastelBlocks.MIDNIGHT_SOLUTION
+            .get()
+            .defaultBlockState()
+            .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
     }
 
     @Override
@@ -85,15 +86,24 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void animateTick(Level world, BlockPos pos, FluidState state, RandomSource random) {
         BlockPos topPos = pos.above();
         BlockState topState = world.getBlockState(topPos);
         if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(2000) == 0) {
-            world.playLocalSound(
-                pos.getX(), pos.getY(), pos.getZ(), PastelSounds.MIDNIGHT_SOLUTION_AMBIENT, SoundSource.BLOCKS,
-                0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false
-            );
+            world
+                .playLocalSound(
+                    pos.getX(),
+                    pos.getY(),
+                    pos.getZ(),
+                    PastelSounds.MIDNIGHT_SOLUTION_AMBIENT,
+                    SoundSource.BLOCKS,
+                    0.2F + random.nextFloat() * 0.2F,
+                    0.9F + random.nextFloat() * 0.15F,
+                    false
+                );
         }
     }
 
@@ -107,15 +117,22 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
         super.tick(world, pos, state);
 
         if (state.getOwnHeight() < 1.0) {
-            for (Direction direction : Direction.values()) {
+            for (
+                Direction direction : Direction.values()
+            ) {
                 if (MidnightSolutionFluidBlock.tryConvertNeighbor(world, pos.relative(direction))) {
                     break;
                 }
             }
         }
 
-        boolean converted = BlackMateriaBlock.spreadBlackMateria(
-            world, pos, world.random, MidnightSolutionFluidBlock.SPREAD_BLOCKSTATE);
+        boolean converted = BlackMateriaBlock
+            .spreadBlackMateria(
+                world,
+                pos,
+                world.random,
+                MidnightSolutionFluidBlock.SPREAD_BLOCKSTATE
+            );
         if (converted) {
             world.scheduleTick(pos, state.getType(), 400 + world.random.nextInt(800));
         }
@@ -136,7 +153,6 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
         return PastelParticleTypes.MIDNIGHT_SOLUTION_SPLASH;
     }
 
-
     @Override
     public void onEntityCollision(BlockState state, Level level, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, level, pos, entity);
@@ -146,8 +162,9 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
                 if (!livingEntity.isDeadOrDying() && level.getGameTime() % 20 == 0) {
                     var damageMult = 1F;
 
-                    if (level.getBiome(pos)
-                             .is(PastelBiomes.BLACK_LANGAST))
+                    if (level
+                        .getBiome(pos)
+                        .is(PastelBiomes.BLACK_LANGAST))
                         damageMult = 9F;
 
                     if (livingEntity.isEyeInFluid(PastelFluidTags.MIDNIGHT_SOLUTION)) {
@@ -157,8 +174,12 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
                         livingEntity.hurt(PastelDamageTypes.midnightSolution(level), damageMult);
                     }
                     if (livingEntity.isDeadOrDying()) {
-                        livingEntity.spawnAtLocation(PastelItems.MIDNIGHT_CHIP.get()
-                                                                              .getDefaultInstance());
+                        livingEntity
+                            .spawnAtLocation(
+                                PastelItems.MIDNIGHT_CHIP
+                                    .get()
+                                    .getDefaultInstance()
+                            );
                     }
                 }
             } else if (entity instanceof ItemEntity itemEntity && !itemEntity.hasPickUpDelay()) {
@@ -183,66 +204,86 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
         ItemEnchantments enchantments = EnchantmentHelper.getEnchantmentsForCrafting(itemStack);
         if (!enchantments.isEmpty()) {
             int randomEnchantmentIndex = world.random.nextInt(enchantments.size());
-            Object2IntMap.Entry<Holder<Enchantment>> entry = enchantments.entrySet()
-                                                                         .stream()
-                                                                         .toList()
-                                                                         .get(randomEnchantmentIndex);
+            Object2IntMap.Entry<Holder<Enchantment>> entry = enchantments
+                .entrySet()
+                .stream()
+                .toList()
+                .get(randomEnchantmentIndex);
             Tuple<ItemStack, Integer> result = Ench.removeEnchantments(itemStack, entry.getKey());
 
             if (result.getB() > 0) {
                 spawnXP(
-                    world, itemEntity,
+                    world,
+                    itemEntity,
                     Ench.getEnchantmentCost(entry.getKey(), entry.getIntValue(), itemStack.getEnchantmentValue())
                 );
                 itemEntity.setItem(result.getA());
                 itemEntity.setDefaultPickUpDelay();
             }
-        } else if (itemStack.is(PastelItems.ENCHANTMENT_CANVAS.get()) && itemStack.has(
-            PastelDataComponentTypes.CANVAS_ENCHANTMENTS)) {
-            ItemEnchantments canvas = itemStack.get(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
-            Item boundItem = BuiltInRegistries.ITEM.get(itemStack.get(PastelDataComponentTypes.BOUND_ITEM));
+        } else if (itemStack.is(PastelItems.ENCHANTMENT_CANVAS.get()) && itemStack
+            .has(
+                PastelDataComponentTypes.CANVAS_ENCHANTMENTS
+            )) {
+                ItemEnchantments canvas = itemStack.get(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
+                Item boundItem = BuiltInRegistries.ITEM.get(itemStack.get(PastelDataComponentTypes.BOUND_ITEM));
 
-            if (!canvas.isEmpty()) {
-                int randomEnchantmentIndex = world.random.nextInt(canvas.size());
-                Object2IntMap.Entry<Holder<Enchantment>> entry = canvas.entrySet()
-                                                                       .stream()
-                                                                       .toList()
-                                                                       .get(randomEnchantmentIndex);
+                if (!canvas.isEmpty()) {
+                    int randomEnchantmentIndex = world.random.nextInt(canvas.size());
+                    Object2IntMap.Entry<Holder<Enchantment>> entry = canvas
+                        .entrySet()
+                        .stream()
+                        .toList()
+                        .get(randomEnchantmentIndex);
 
-                var builder = new ItemEnchantments.Mutable(canvas);
-                builder.set(entry.getKey(), 0);
+                    var builder = new ItemEnchantments.Mutable(canvas);
+                    builder.set(entry.getKey(), 0);
 
-                spawnXP(world, itemEntity, Ench.getEnchantmentCost(entry.getKey(), entry.getIntValue(), 1));
+                    spawnXP(world, itemEntity, Ench.getEnchantmentCost(entry.getKey(), entry.getIntValue(), 1));
 
-                ItemEnchantments targetEnchants = builder.toImmutable();
-                if (targetEnchants.isEmpty()) {
-                    itemStack.remove(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
-                    itemStack.remove(PastelDataComponentTypes.BOUND_ITEM);
-                } else {
-                    itemStack.set(PastelDataComponentTypes.CANVAS_ENCHANTMENTS, targetEnchants);
+                    ItemEnchantments targetEnchants = builder.toImmutable();
+                    if (targetEnchants.isEmpty()) {
+                        itemStack.remove(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
+                        itemStack.remove(PastelDataComponentTypes.BOUND_ITEM);
+                    } else {
+                        itemStack.set(PastelDataComponentTypes.CANVAS_ENCHANTMENTS, targetEnchants);
+                    }
+                    itemEntity.setDefaultPickUpDelay();
                 }
-                itemEntity.setDefaultPickUpDelay();
             }
-        }
     }
 
     private static void spawnXP(Level world, ItemEntity itemEntity, int exp) {
         exp /= EXPERIENCE_DISENCHANT_RETURN_DIV;
         if (exp > 0) {
             ExperienceOrb experienceOrbEntity = new ExperienceOrb(
-                world, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), exp);
+                world,
+                itemEntity.getX(),
+                itemEntity.getY(),
+                itemEntity.getZ(),
+                exp
+            );
             world.addFreshEntity(experienceOrbEntity);
         }
-        world.playSound(
-            null, itemEntity.blockPosition(), SoundEvents.GRINDSTONE_USE, SoundSource.NEUTRAL, 1.0F, 0.9F +
-                                                                                                     world.getRandom()
-                                                                                                          .nextFloat() *
-                                                                                                     0.2F
-        );
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-            (ServerLevel) world, itemEntity.position(), ColoredSparkleRisingParticleEffect.GRAY, 10, Vec3.ZERO,
-            new Vec3(0.2, 0.4, 0.2)
-        );
+        world
+            .playSound(
+                null,
+                itemEntity.blockPosition(),
+                SoundEvents.GRINDSTONE_USE,
+                SoundSource.NEUTRAL,
+                1.0F,
+                0.9F + world
+                    .getRandom()
+                    .nextFloat() * 0.2F
+            );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                (ServerLevel) world,
+                itemEntity.position(),
+                ColoredSparkleRisingParticleEffect.GRAY,
+                10,
+                Vec3.ZERO,
+                new Vec3(0.2, 0.4, 0.2)
+            );
     }
 
     public static class Flowing extends MidnightSolutionFluid {

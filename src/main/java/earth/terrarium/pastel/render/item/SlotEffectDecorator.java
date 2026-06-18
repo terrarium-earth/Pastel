@@ -34,7 +34,11 @@ public class SlotEffectDecorator implements IItemDecorator {
 
         var rendered = false;
 
-        for (int i = 0; i < bar.barCount(stack); i++) {
+        for (
+            int i = 0;
+            i < bar.barCount(stack);
+            i++
+        ) {
             var signature = bar.getSignature(Minecraft.getInstance().player, stack, i);
 
             if (signature == ExtendedItemBar.PASS)
@@ -42,12 +46,24 @@ public class SlotEffectDecorator implements IItemDecorator {
 
             int k = x + signature.xPos();
             int l = y + signature.yPos();
-            g.fill(
-                RenderType.guiOverlay(), k, l, k + signature.length(), l + signature.backgroundHeight(),
-                signature.backgroundColor()
-            );
-            g.fill(
-                RenderType.guiOverlay(), k, l, k + signature.fill(), l + signature.fillHeight(), signature.fillColor());
+            g
+                .fill(
+                    RenderType.guiOverlay(),
+                    k,
+                    l,
+                    k + signature.length(),
+                    l + signature.backgroundHeight(),
+                    signature.backgroundColor()
+                );
+            g
+                .fill(
+                    RenderType.guiOverlay(),
+                    k,
+                    l,
+                    k + signature.fill(),
+                    l + signature.fillHeight(),
+                    signature.fillColor()
+                );
             rendered = true;
         }
 
@@ -55,20 +71,29 @@ public class SlotEffectDecorator implements IItemDecorator {
     }
 
     private static boolean renderBackground(
-        GuiGraphics g, ItemStack stack, int x, int y, SlotBackgroundEffect backgroundEffectProvider) {
+        GuiGraphics g,
+        ItemStack stack,
+        int x,
+        int y,
+        SlotBackgroundEffect backgroundEffectProvider
+    ) {
         var player = Minecraft.getInstance().player;
-        var delta = Minecraft.getInstance()
-                             .getTimer()
-                             .getGameTimeDeltaPartialTick(false);
+        var delta = Minecraft
+            .getInstance()
+            .getTimer()
+            .getGameTimeDeltaPartialTick(false);
 
         var type = backgroundEffectProvider.backgroundType(player, stack);
         var opacity = backgroundEffectProvider.getEffectOpacity(player, stack, delta);
-        var color = (backgroundEffectProvider.getBackgroundColor(player, stack, delta) & 0x00FFFFFF) | (Math.round(
-            opacity * 255) << 24);
+        var color = (backgroundEffectProvider.getBackgroundColor(player, stack, delta) & 0x00FFFFFF) | (Math
+            .round(
+                opacity * 255
+            ) << 24);
         var transColor = color & 0x00FFFFFF;
 
-        var time = Minecraft.getInstance().player.level()
-                                                 .getGameTime() % 864000;
+        var time = Minecraft.getInstance().player
+            .level()
+            .getGameTime() % 864000;
         var bounce = Math.sin((time + delta) / 20F) * 0.4F + 0.5F;
         var alpha = (int) Math.round(bounce * 255F);
 
@@ -99,8 +124,8 @@ public class SlotEffectDecorator implements IItemDecorator {
         if (stack.getItem() instanceof SlotBackgroundEffect prov)
             return prov;
 
-        else if (stack.getItem() instanceof BlockItem blockItem &&
-                 blockItem.getBlock() instanceof SlotBackgroundEffect prov)
+        else if (stack.getItem() instanceof BlockItem blockItem && blockItem
+            .getBlock() instanceof SlotBackgroundEffect prov)
             return prov;
 
         return null;

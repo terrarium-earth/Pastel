@@ -14,27 +14,45 @@ import net.minecraft.world.level.storage.loot.LootTable;
 public enum KindlingVariant implements StringRepresentable {
 
     DEFAULT(
-        "default", "textures/entity/kindling/kindling.png", "textures/entity/kindling/kindling_blink.png",
-        "textures/entity/kindling/kindling_angry.png", "textures/entity/kindling/kindling_clipped.png",
-        "textures/entity/kindling/kindling_blink_clipped.png", "textures/entity/kindling/kindling_angry_clipped.png",
+        "default",
+        "textures/entity/kindling/kindling.png",
+        "textures/entity/kindling/kindling_blink.png",
+        "textures/entity/kindling/kindling_angry.png",
+        "textures/entity/kindling/kindling_clipped.png",
+        "textures/entity/kindling/kindling_blink_clipped.png",
+        "textures/entity/kindling/kindling_angry_clipped.png",
         PastelLootTables.KINDLING_CLIPPING
     );
 
     public static Codec<KindlingVariant> CODEC = StringRepresentable.fromEnum(KindlingVariant::values);
 
     private final String name;
+
     private final ResourceLocation id;
+
     private final ResourceLocation defaultTexture;
+
     private final ResourceLocation blinkingTexture;
+
     private final ResourceLocation angryTexture;
+
     private final ResourceLocation clippedTexture;
+
     private final ResourceLocation blinkingClippedTexture;
+
     private final ResourceLocation angryClippedTexture;
+
     private final ResourceKey<LootTable> clippingLootTable;
 
     KindlingVariant(
-        String name, String defaultTexture, String blinkingTexture, String angryTexture, String clippedTexture,
-        String blinkingClippedTexture, String angryClippedTexture, ResourceKey<LootTable> clippingLootTable
+        String name,
+        String defaultTexture,
+        String blinkingTexture,
+        String angryTexture,
+        String clippedTexture,
+        String blinkingClippedTexture,
+        String angryClippedTexture,
+        ResourceKey<LootTable> clippingLootTable
     ) {
         this.name = name;
         this.id = PastelCommon.locate(name);

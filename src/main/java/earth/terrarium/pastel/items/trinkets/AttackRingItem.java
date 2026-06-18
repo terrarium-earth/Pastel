@@ -25,6 +25,7 @@ import java.util.List;
 public class AttackRingItem extends PastelTrinketItem {
 
     public static final ResourceLocation ATTACK_RING_DAMAGE_ID = PastelCommon.locate("jeopardant");
+
     public static final String ATTACK_RING_DAMAGE_NAME = "pastel:jeopardant";
 
     public AttackRingItem(Properties settings) {
@@ -35,8 +36,7 @@ public class AttackRingItem extends PastelTrinketItem {
         if (entity == null) {
             return 0;
         } else {
-            double mod = entity.getMaxHealth() / (entity.getHealth() * entity.getHealth() +
-                                                  1); // starting with 1 % damage at 14 health up to 300 % damage at
+            double mod = entity.getMaxHealth() / (entity.getHealth() * entity.getHealth() + 1); // starting with 1 % damage at 14 health up to 300 % damage at
             // 1/20 health
             return Math.max(0, 1 + Math.log10(mod));
         }
@@ -45,7 +45,7 @@ public class AttackRingItem extends PastelTrinketItem {
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         super.onEquip(slotContext, prevStack, stack);
-        slotContext.entity().setData(JeopardantBonusData.ATTACHMENT,true);
+        slotContext.entity().setData(JeopardantBonusData.ATTACHMENT, true);
     }
 
     @Override
@@ -53,25 +53,34 @@ public class AttackRingItem extends PastelTrinketItem {
         super.onUnequip(slotContext, newStack, stack);
         LivingEntity entity = slotContext.entity();
 
-        entity.setData(JeopardantBonusData.ATTACHMENT,false);
-        if (entity.getAttributes()
-                  .hasModifier(Attributes.ATTACK_DAMAGE, AttackRingItem.ATTACK_RING_DAMAGE_ID)) {
-            Multimap<Holder<Attribute>, AttributeModifier> map = Multimaps.newMultimap(
-                Maps.newLinkedHashMap(), ArrayList::new);
-            map.put(
-                Attributes.ATTACK_DAMAGE, new AttributeModifier(
-                    AttackRingItem.ATTACK_RING_DAMAGE_ID,
-                    AttackRingItem.getAttackModifierForEntity(entity),
-                    AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-                )
-            );
-            entity.getAttributes()
-                  .removeAttributeModifiers(map);
+        entity.setData(JeopardantBonusData.ATTACHMENT, false);
+        if (entity
+            .getAttributes()
+            .hasModifier(Attributes.ATTACK_DAMAGE, AttackRingItem.ATTACK_RING_DAMAGE_ID)) {
+            Multimap<Holder<Attribute>, AttributeModifier> map = Multimaps
+                .newMultimap(
+                    Maps.newLinkedHashMap(),
+                    ArrayList::new
+                );
+            map
+                .put(
+                    Attributes.ATTACK_DAMAGE,
+                    new AttributeModifier(
+                        AttackRingItem.ATTACK_RING_DAMAGE_ID,
+                        AttackRingItem.getAttackModifierForEntity(entity),
+                        AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                    )
+                );
+            entity
+                .getAttributes()
+                .removeAttributeModifiers(map);
         }
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         Minecraft client = Minecraft.getInstance();

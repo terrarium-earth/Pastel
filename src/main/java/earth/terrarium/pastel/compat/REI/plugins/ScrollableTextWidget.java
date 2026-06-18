@@ -17,10 +17,12 @@ import java.util.Objects;
 /**
  * Mostly a copy of REIs ScrollableTextWidget
  * But since that is private here a public implementation
- * <a href="https://github.com/shedaniel/RoughlyEnoughItems/blob/7.x-1.18/default-plugin/src/main/java/me/shedaniel/rei/plugin/client/categories/DefaultInformationCategory.java">REI</a>
+ * <a
+ * href="https://github.com/shedaniel/RoughlyEnoughItems/blob/7.x-1.18/default-plugin/src/main/java/me/shedaniel/rei/plugin/client/categories/DefaultInformationCategory.java">REI</a>
  */
 public class ScrollableTextWidget extends WidgetWithBounds {
     private final Rectangle bounds;
+
     private final List<FormattedCharSequence> texts;
 
     private final ScrollingContainer scrolling = new ScrollingContainer() {
@@ -33,7 +35,9 @@ public class ScrollableTextWidget extends WidgetWithBounds {
         @Override
         public int getMaxScrollHeight() {
             int i = 2;
-            for (FormattedCharSequence entry : texts) {
+            for (
+                FormattedCharSequence entry : texts
+            ) {
                 i += entry == null ? 4 : font.lineHeight;
             }
             return i;
@@ -84,21 +88,38 @@ public class ScrollableTextWidget extends WidgetWithBounds {
         Rectangle innerBounds = scrolling.getScissorBounds();
         ScissorsHandler.INSTANCE.scissor(innerBounds);
         int currentY = -scrolling.scrollAmountInt() + innerBounds.y;
-        for (FormattedCharSequence text : texts) {
+        for (
+            FormattedCharSequence text : texts
+        ) {
             if (text != null && currentY + font.lineHeight >= innerBounds.y && currentY <= innerBounds.getMaxY()) {
 
-                drawContext.drawString(font, text, innerBounds.x + 2, currentY + 2, REIRuntime.getInstance()
-                                                                                              .isDarkThemeEnabled()
-                                                                                    ? 0xFFBBBBBB : 0xFF090909, false
-                );
+                drawContext
+                    .drawString(
+                        font,
+                        text,
+                        innerBounds.x + 2,
+                        currentY + 2,
+                        REIRuntime
+                            .getInstance()
+                            .isDarkThemeEnabled()
+                                ? 0xFFBBBBBB
+                                : 0xFF090909,
+                        false
+                    );
             }
             currentY += text == null ? 4 : font.lineHeight;
         }
         ScissorsHandler.INSTANCE.removeLastScissor();
         ScissorsHandler.INSTANCE.scissor(scrolling.getBounds());
-        scrolling.renderScrollBar(drawContext, 0xff000000, 1, REIRuntime.getInstance()
-                                                                        .isDarkThemeEnabled() ? 0.8f : 1f
-        );
+        scrolling
+            .renderScrollBar(
+                drawContext,
+                0xff000000,
+                1,
+                REIRuntime
+                    .getInstance()
+                    .isDarkThemeEnabled() ? 0.8f : 1f
+            );
         ScissorsHandler.INSTANCE.removeLastScissor();
     }
 

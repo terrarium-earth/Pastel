@@ -26,7 +26,11 @@ public class ColorEverpromiseRibbonRecipe extends CustomRecipe {
         boolean ribbonFound = false;
         boolean pigmentFound = false;
 
-        for (int i = 0; i < input.size(); ++i) {
+        for (
+            int i = 0;
+            i < input.size();
+            ++i
+        ) {
             ItemStack itemStack = input.getItem(i);
             if (!itemStack.isEmpty()) {
                 if (itemStack.getItem() instanceof EverpromiseRibbonItem) {
@@ -58,8 +62,11 @@ public class ColorEverpromiseRibbonRecipe extends CustomRecipe {
         ItemStack ribbon = null;
         PigmentItem pigment = null;
 
-
-        for (int i = 0; i < input.size(); ++i) {
+        for (
+            int i = 0;
+            i < input.size();
+            ++i
+        ) {
             ItemStack stack = input.getItem(i);
             if (stack.getItem() instanceof EverpromiseRibbonItem) {
                 ribbon = stack;
@@ -78,10 +85,18 @@ public class ColorEverpromiseRibbonRecipe extends CustomRecipe {
 
         Component text = ribbon.getHoverName();
         if (text instanceof MutableComponent mutableText) {
-            TextColor newColor = TextColor.fromRgb(pigment.getInkColor()
-                                                          .getColorInt());
-            Component newName = mutableText.setStyle(mutableText.getStyle()
-                                                                .withColor(newColor));
+            TextColor newColor = TextColor
+                .fromRgb(
+                    pigment
+                        .getInkColor()
+                        .getColorInt()
+                );
+            Component newName = mutableText
+                .setStyle(
+                    mutableText
+                        .getStyle()
+                        .withColor(newColor)
+                );
             ribbon.set(DataComponents.CUSTOM_NAME, newName);
         }
 

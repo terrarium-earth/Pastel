@@ -26,8 +26,12 @@ public abstract class PastelFishingBobberEntityRenderer extends EntityRenderer<P
 
     @Override
     public void render(
-        PastelFishingBobberEntity fishingBobberEntity, float f, float g, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int i
+        PastelFishingBobberEntity fishingBobberEntity,
+        float f,
+        float g,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int i
     ) {
         Player playerEntity = fishingBobberEntity.getPlayerOwner();
         if (playerEntity != null) {
@@ -45,17 +49,30 @@ public abstract class PastelFishingBobberEntityRenderer extends EntityRenderer<P
             float h = playerEntity.getAttackAnim(g);
             float j = Mth.sin(Mth.sqrt(h) * 3.1415927F);
             Vec3 vec3d = this.getHandPos(playerEntity, j, g);
-            Vec3 vec3d2 = fishingBobberEntity.getPosition(g)
-                                             .add(0.0, 0.25, 0.0);
+            Vec3 vec3d2 = fishingBobberEntity
+                .getPosition(g)
+                .add(0.0, 0.25, 0.0);
             float k = (float) (vec3d.x - vec3d2.x);
             float l = (float) (vec3d.y - vec3d2.y);
             float m = (float) (vec3d.z - vec3d2.z);
             VertexConsumer vertexConsumer2 = vertexConsumerProvider.getBuffer(RenderType.lineStrip());
             PoseStack.Pose entry2 = poseStack.last();
 
-            for (int o = 0; o <= 16; ++o) {
+            for (
+                int o = 0;
+                o <= 16;
+                ++o
+            ) {
                 renderFishingLine(
-                    fishingBobberEntity, k, l, m, vertexConsumer2, entry2, percentage(o, 16), percentage(o + 1, 16));
+                    fishingBobberEntity,
+                    k,
+                    l,
+                    m,
+                    vertexConsumer2,
+                    entry2,
+                    percentage(o, 16),
+                    percentage(o + 1, 16)
+                );
             }
 
             poseStack.popPose();
@@ -70,17 +87,21 @@ public abstract class PastelFishingBobberEntityRenderer extends EntityRenderer<P
             i = -i;
         }
 
-        if (this.entityRenderDispatcher.options.getCameraType()
-                                               .isFirstPerson() && player == Minecraft.getInstance().player) {
-            double m = 960.0 / (double) this.entityRenderDispatcher.options.fov()
-                                                                           .get();
-            Vec3 vec3d = this.entityRenderDispatcher.camera.getNearPlane()
-                                                           .getPointOnPlane((float) i * 0.525F, -0.1F)
-                                                           .scale(m)
-                                                           .yRot(f * 0.5F)
-                                                           .xRot(-f * 0.7F);
-            return player.getEyePosition(tickDelta)
-                         .add(vec3d);
+        if (this.entityRenderDispatcher.options
+            .getCameraType()
+            .isFirstPerson() && player == Minecraft.getInstance().player) {
+            double m = 960.0 / (double) this.entityRenderDispatcher.options
+                .fov()
+                .get();
+            Vec3 vec3d = this.entityRenderDispatcher.camera
+                .getNearPlane()
+                .getPointOnPlane((float) i * 0.525F, -0.1F)
+                .scale(m)
+                .yRot(f * 0.5F)
+                .xRot(-f * 0.7F);
+            return player
+                .getEyePosition(tickDelta)
+                .add(vec3d);
         } else {
             float g = Mth.lerp(tickDelta, player.yBodyRotO, player.yBodyRot) * 0.017453292F;
             double d = Mth.sin(g);
@@ -89,8 +110,9 @@ public abstract class PastelFishingBobberEntityRenderer extends EntityRenderer<P
             double j = (double) i * 0.35 * (double) h;
             double k = 0.8 * (double) h;
             float l = player.isCrouching() ? -0.1875F : 0.0F;
-            return player.getEyePosition(tickDelta)
-                         .add(-e * j - d * k, (double) l - 0.45 * (double) h, -d * j + e * k);
+            return player
+                .getEyePosition(tickDelta)
+                .add(-e * j - d * k, (double) l - 0.45 * (double) h, -d * j + e * k);
         }
     }
 
@@ -99,17 +121,24 @@ public abstract class PastelFishingBobberEntityRenderer extends EntityRenderer<P
     }
 
     private static void vertex(VertexConsumer buffer, PoseStack.Pose matrix, int light, float x, int y, int u, int v) {
-        buffer.addVertex(matrix, x - 0.5F, (float) y - 0.5F, 0.0F)
-              .setColor(-1)
-              .setUv((float) u, (float) v)
-              .setOverlay(OverlayTexture.NO_OVERLAY)
-              .setLight(light)
-              .setNormal(matrix, 0.0F, 1.0F, 0.0F);
+        buffer
+            .addVertex(matrix, x - 0.5F, (float) y - 0.5F, 0.0F)
+            .setColor(-1)
+            .setUv((float) u, (float) v)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(light)
+            .setNormal(matrix, 0.0F, 1.0F, 0.0F);
     }
 
     private static void renderFishingLine(
-        PastelFishingBobberEntity bobber, float x, float y, float z, VertexConsumer buffer, PoseStack.Pose matrices,
-        float segmentStart, float segmentEnd
+        PastelFishingBobberEntity bobber,
+        float x,
+        float y,
+        float z,
+        VertexConsumer buffer,
+        PoseStack.Pose matrices,
+        float segmentStart,
+        float segmentEnd
     ) {
         float f = x * segmentStart;
         float g = y * (segmentStart * segmentStart + segmentStart) * 0.5F + 0.25F;
@@ -121,9 +150,10 @@ public abstract class PastelFishingBobberEntityRenderer extends EntityRenderer<P
         i /= l;
         j /= l;
         k /= l;
-        buffer.addVertex(matrices, f, g, h)
-              .setColor(bobber.getLineColor())
-              .setNormal(matrices, i, j, k);
+        buffer
+            .addVertex(matrices, f, g, h)
+            .setColor(bobber.getLineColor())
+            .setNormal(matrices, i, j, k);
     }
 
 }

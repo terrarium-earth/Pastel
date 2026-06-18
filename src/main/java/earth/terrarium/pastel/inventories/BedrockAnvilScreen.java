@@ -25,12 +25,17 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHandler> {
 
     private static final ResourceLocation TEXTURE = PastelCommon.locate("textures/gui/container/bedrock_anvil.png");
+
     private final Player player;
+
     private EditBox nameField;
+
     private EditBox loreField;
 
     public BedrockAnvilScreen(BedrockAnvilScreenHandler handler, Inventory inventory, Component title) {
@@ -49,7 +54,13 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         int j = (this.height - this.imageHeight) / 2;
 
         this.nameField = new EditBox(
-            this.font, i + 62, j + 24, 98, 12, Component.translatable("container.pastel.bedrock_anvil"));
+            this.font,
+            i + 62,
+            j + 24,
+            98,
+            12,
+            Component.translatable("container.pastel.bedrock_anvil")
+        );
         this.nameField.setTextColor(-1);
         this.nameField.setTextColorUneditable(-1);
         this.nameField.setBordered(false);
@@ -57,11 +68,21 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         this.nameField.setResponder(this::onRenamed);
         this.nameField.setValue("");
         this.addWidget(this.nameField);
-        this.nameField.setEditable((this.menu).getSlot(0)
-                                              .hasItem());
+        this.nameField
+            .setEditable(
+                (this.menu)
+                    .getSlot(0)
+                    .hasItem()
+            );
 
         this.loreField = new EditBox(
-            this.font, i + 45, j + 76, 116, 12, Component.translatable("container.pastel.bedrock_anvil.lore"));
+            this.font,
+            i + 45,
+            j + 76,
+            116,
+            12,
+            Component.translatable("container.pastel.bedrock_anvil.lore")
+        );
         this.loreField.setTextColor(-1);
         this.loreField.setTextColorUneditable(-1);
         this.loreField.setBordered(false);
@@ -69,8 +90,12 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         this.loreField.setResponder(this::onLoreChanged);
         this.loreField.setValue("");
         this.addWidget(this.loreField);
-        this.loreField.setEditable((this.menu).getSlot(0)
-                                              .hasItem());
+        this.loreField
+            .setEditable(
+                (this.menu)
+                    .getSlot(0)
+                    .hasItem()
+            );
 
         this.nameField.setEditable(false);
         this.loreField.setEditable(false);
@@ -98,9 +123,13 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         }
 
         GuiEventListener focused = this.getFocused();
-        return (focused == null || !focused.keyPressed(keyCode, scanCode, modifiers)) ||
-               focused instanceof EditBox textFieldWidget && textFieldWidget.canConsumeInput() || super.keyPressed(
-            keyCode, scanCode, modifiers);
+        return (focused == null || !focused
+            .keyPressed(keyCode, scanCode, modifiers)) || focused instanceof EditBox textFieldWidget && textFieldWidget
+                .canConsumeInput() || super.keyPressed(
+                    keyCode,
+                    scanCode,
+                    modifiers
+                );
 
     }
 
@@ -108,10 +137,15 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         Slot slot = this.menu.getSlot(0);
         if (slot.hasItem()) {
             String string = name;
-            if (!slot.getItem()
-                     .has(DataComponents.CUSTOM_NAME) && string.equals(slot.getItem()
-                                                                           .getHoverName()
-                                                                           .getString())) {
+            if (!slot
+                .getItem()
+                .has(DataComponents.CUSTOM_NAME) && string
+                    .equals(
+                        slot
+                            .getItem()
+                            .getHoverName()
+                            .getString()
+                    )) {
                 string = "";
             }
 
@@ -125,8 +159,10 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         Slot slot = this.menu.getSlot(0);
         if (slot.hasItem()) {
             String string = lore;
-            if (!LoreHelper.hasLore(slot.getItem()) && string.equals(
-                LoreHelper.getStringFromLoreTextArray(LoreHelper.getLoreList(slot.getItem())))) {
+            if (!LoreHelper.hasLore(slot.getItem()) && string
+                .equals(
+                    LoreHelper.getStringFromLoreTextArray(LoreHelper.getLoreList(slot.getItem()))
+                )) {
                 string = "";
             }
 
@@ -140,21 +176,31 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
     protected void renderLabels(GuiGraphics context, int mouseX, int mouseY) {
         super.renderLabels(context, mouseX, mouseY);
 
-        context.drawString(
-            font, Component.translatable("container.pastel.bedrock_anvil.lore"), inventoryLabelX, 76, 4210752, false);
+        context
+            .drawString(
+                font,
+                Component.translatable("container.pastel.bedrock_anvil.lore"),
+                inventoryLabelX,
+                76,
+                4210752,
+                false
+            );
 
         int levelCost = (this.menu).getLevelCost();
-        if (levelCost > 0 || this.menu.getSlot(2)
-                                      .hasItem()) {
+        if (levelCost > 0 || this.menu
+            .getSlot(2)
+            .hasItem()) {
             int textColor = 8453920;
             Component costText;
-            if (!menu.getSlot(2)
-                     .hasItem()) {
+            if (!menu
+                .getSlot(2)
+                .hasItem()) {
                 costText = null;
             } else {
                 costText = Component.translatable("container.repair.cost", levelCost);
-                if (!menu.getSlot(2)
-                         .mayPickup(this.player)) {
+                if (!menu
+                    .getSlot(2)
+                    .mayPickup(this.player)) {
                     textColor = 16736352;
                 }
             }
@@ -172,8 +218,9 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         super.renderBg(context, delta, mouseX, mouseY);
 
         // the text field backgrounds
-        boolean hasStack = menu.getSlot(0)
-                               .hasItem();
+        boolean hasStack = menu
+            .getSlot(0)
+            .hasItem();
         context.blit(TEXTURE, this.leftPos + 59, this.topPos + 20, 0, this.imageHeight + (hasStack ? 0 : 16), 110, 16);
         context.blit(TEXTURE, this.leftPos + 42, this.topPos + 72, 0, this.imageHeight + (hasStack ? 32 : 48), 127, 16);
     }
@@ -186,10 +233,13 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
 
     @Override
     protected void renderErrorIcon(GuiGraphics context, int x, int y) {
-        if ((this.menu.getSlot(0)
-                      .hasItem() || this.menu.getSlot(1)
-                                             .hasItem()) && !this.menu.getSlot(this.menu.getResultSlot())
-                                                                      .hasItem()) {
+        if ((this.menu
+            .getSlot(0)
+            .hasItem() || this.menu
+                .getSlot(1)
+                .hasItem()) && !this.menu
+                    .getSlot(this.menu.getResultSlot())
+                    .hasItem()) {
             context.blit(TEXTURE, x + 99, y + 45, this.imageWidth, 0, 28, 21);
         }
     }
@@ -200,19 +250,31 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         if (slotId == 0) {
             boolean stackEmpty = stack.isEmpty();
 
-            this.nameField.setValue(stack.isEmpty() ? "" : stack.getHoverName()
-                                                                .getString());
-            if (!(this.menu.getSlot(1)
-                           .getItem()
-                           .getItem() instanceof PigmentItem)) {
+            this.nameField
+                .setValue(
+                    stack.isEmpty()
+                        ? ""
+                        : stack
+                            .getHoverName()
+                            .getString()
+                );
+            if (!(this.menu
+                .getSlot(1)
+                .getItem()
+                .getItem() instanceof PigmentItem)) {
                 if (stack.getHoverName() instanceof MutableComponent mutableText) {
-                    if (mutableText.getStyle()
-                                   .getColor() == null) {
+                    if (mutableText
+                        .getStyle()
+                        .getColor() == null) {
                         this.nameField.setTextColor(-1);
                     } else {
-                        this.nameField.setTextColor(mutableText.getStyle()
-                                                               .getColor()
-                                                               .getValue());
+                        this.nameField
+                            .setTextColor(
+                                mutableText
+                                    .getStyle()
+                                    .getColor()
+                                    .getValue()
+                            );
                     }
                 } else {
                     this.nameField.setTextColor(-1);
@@ -222,8 +284,10 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
             this.nameField.setEditable(!stack.isEmpty());
             this.nameField.setCanLoseFocus(!stackEmpty);
 
-            this.loreField.setValue(
-                stackEmpty ? "" : LoreHelper.getStringFromLoreTextArray(LoreHelper.getLoreList(stack)));
+            this.loreField
+                .setValue(
+                    stackEmpty ? "" : LoreHelper.getStringFromLoreTextArray(LoreHelper.getLoreList(stack))
+                );
             this.loreField.setEditable(!stackEmpty);
             this.nameField.setCanLoseFocus(!stackEmpty);
 
@@ -231,19 +295,29 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
         }
         if (slotId == 1) {
             if (stack.getItem() instanceof PigmentItem pigmentItem) {
-                this.nameField.setTextColor(pigmentItem.getInkColor()
-                                                       .getColorInt());
+                this.nameField
+                    .setTextColor(
+                        pigmentItem
+                            .getInkColor()
+                            .getColorInt()
+                    );
             } else {
-                if (this.menu.getSlot(0)
-                             .getItem()
-                             .getHoverName() instanceof MutableComponent mutableText) {
-                    if (mutableText.getStyle()
-                                   .getColor() == null) {
+                if (this.menu
+                    .getSlot(0)
+                    .getItem()
+                    .getHoverName() instanceof MutableComponent mutableText) {
+                    if (mutableText
+                        .getStyle()
+                        .getColor() == null) {
                         this.nameField.setTextColor(-1);
                     } else {
-                        this.nameField.setTextColor(mutableText.getStyle()
-                                                               .getColor()
-                                                               .getValue());
+                        this.nameField
+                            .setTextColor(
+                                mutableText
+                                    .getStyle()
+                                    .getColor()
+                                    .getValue()
+                            );
                     }
                 } else {
                     this.nameField.setTextColor(-1);

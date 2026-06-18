@@ -11,10 +11,17 @@ import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record RenameItemInBedrockAnvilPayload(String name) implements CustomPacketPayload {
 
-    public static final Type<RenameItemInBedrockAnvilPayload> ID = PastelC2SPackets.makeId(
-        "rename_item_in_bedrock_anvil");
-    public static final StreamCodec<FriendlyByteBuf, RenameItemInBedrockAnvilPayload> CODEC = StreamCodec.composite(
-        ByteBufCodecs.STRING_UTF8, RenameItemInBedrockAnvilPayload::name, RenameItemInBedrockAnvilPayload::new);
+    public static final Type<RenameItemInBedrockAnvilPayload> ID = PastelC2SPackets
+        .makeId(
+            "rename_item_in_bedrock_anvil"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, RenameItemInBedrockAnvilPayload> CODEC = StreamCodec
+        .composite(
+            ByteBufCodecs.STRING_UTF8,
+            RenameItemInBedrockAnvilPayload::name,
+            RenameItemInBedrockAnvilPayload::new
+        );
 
     @Override
     public Type<? extends CustomPacketPayload> type() {

@@ -24,13 +24,20 @@ public class AzureDikeProvider {
         var azureDike = provider.getData(AzureDikeData.ATTACHMENT);
         var passedDamage = azureDike.absorbDamage(incomingDamage, effective);
         if (incomingDamage - passedDamage > 0.0001F) {
-            AttachmentUtil.syncToTracking(
-                new AzureDikeData.Payload(provider.getId(), azureDike), provider.level(), provider.blockPosition());
-            if (provider instanceof ServerPlayer player)
-                PastelCriteria.AZURE_DIKE_CHARGE.trigger(
-                    player, azureDike.getCurrentProtection(), azureDike.getTicksPerPointOfRecharge(),
-                    -(incomingDamage - passedDamage)
+            AttachmentUtil
+                .syncToTracking(
+                    new AzureDikeData.Payload(provider.getId(), azureDike),
+                    provider.level(),
+                    provider.blockPosition()
                 );
+            if (provider instanceof ServerPlayer player)
+                PastelCriteria.AZURE_DIKE_CHARGE
+                    .trigger(
+                        player,
+                        azureDike.getCurrentProtection(),
+                        azureDike.getTicksPerPointOfRecharge(),
+                        -(incomingDamage - passedDamage)
+                    );
         } else {
             // dike didn't do anything, so undo the armor calculation so it doesn't apply twice
             passedDamage = rawDamage;
@@ -43,13 +50,15 @@ public class AzureDikeProvider {
     }
 
     public static float getAzureDikeCharges(LivingEntity provider) {
-        return provider.getData(AzureDikeData.ATTACHMENT)
-                       .getCurrentProtection();
+        return provider
+            .getData(AzureDikeData.ATTACHMENT)
+            .getCurrentProtection();
     }
 
     public static float getMaxAzureDikeCharges(LivingEntity provider) {
-        return provider.getData(AzureDikeData.ATTACHMENT)
-                       .getMaxProtection();
+        return provider
+            .getData(AzureDikeData.ATTACHMENT)
+            .getMaxProtection();
     }
 
     public static AzureDikeData getAzureDikeComponent(LivingEntity provider) {

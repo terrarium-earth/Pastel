@@ -28,10 +28,18 @@ import java.util.Optional;
 
 public class SeatEntity extends Entity {
 
-    private static final EntityDataAccessor<Integer> EMPTY_TICKS = SynchedEntityData.defineId(
-        SeatEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Optional<BlockState>> CUSHION = SynchedEntityData.defineId(
-        SeatEntity.class, EntityDataSerializers.OPTIONAL_BLOCK_STATE);
+    private static final EntityDataAccessor<Integer> EMPTY_TICKS = SynchedEntityData
+        .defineId(
+            SeatEntity.class,
+            EntityDataSerializers.INT
+        );
+
+    private static final EntityDataAccessor<Optional<BlockState>> CUSHION = SynchedEntityData
+        .defineId(
+            SeatEntity.class,
+            EntityDataSerializers.OPTIONAL_BLOCK_STATE
+        );
+
     private double offset = 0;
 
     public SeatEntity(EntityType<?> type, Level world) {
@@ -47,9 +55,10 @@ public class SeatEntity extends Entity {
     public void tick() {
         super.tick();
 
-        var block = this.level()
-                        .getBlockState(blockPosition())
-                        .getBlock();
+        var block = this
+            .level()
+            .getBlockState(blockPosition())
+            .getBlock();
         var cushion = getCushion();
 
         if (cushion.isEmpty()) {
@@ -63,10 +72,13 @@ public class SeatEntity extends Entity {
             var iter = BlockPos.withinManhattan(blockPosition(), 1, 1, 1);
             var fail = true;
 
-            for (BlockPos pos : iter) {
-                var check = this.level()
-                                .getBlockState(pos)
-                                .getBlock();
+            for (
+                BlockPos pos : iter
+            ) {
+                var check = this
+                    .level()
+                    .getBlockState(pos)
+                    .getBlock();
                 if (state.is(check)) {
                     absMoveTo(pos.getX() + 0.5, pos.getY() + offset, pos.getZ() + 0.5);
                     fail = false;
@@ -119,10 +131,13 @@ public class SeatEntity extends Entity {
     protected void readAdditionalSaveData(CompoundTag nbt) {
         setEmptyTicks(nbt.getInt("emptyTicks"));
 
-        var state = NbtUtils.readBlockState(
-            this.level()
-                .holderLookup(Registries.BLOCK), nbt.getCompound("BlockState")
-        );
+        var state = NbtUtils
+            .readBlockState(
+                this
+                    .level()
+                    .holderLookup(Registries.BLOCK),
+                nbt.getCompound("BlockState")
+            );
         entityData.set(CUSHION, Optional.ofNullable(state.isAir() ? null : state));
 
         offset = nbt.getDouble("offset");
@@ -131,10 +146,16 @@ public class SeatEntity extends Entity {
     @Override
     protected void addAdditionalSaveData(CompoundTag nbt) {
         nbt.putInt("emptyTicks", getEmptyTicks());
-        nbt.put(
-            "BlockState", NbtUtils.writeBlockState(entityData.get(CUSHION)
-                                                             .orElse(Blocks.AIR.defaultBlockState()))
-        );
+        nbt
+            .put(
+                "BlockState",
+                NbtUtils
+                    .writeBlockState(
+                        entityData
+                            .get(CUSHION)
+                            .orElse(Blocks.AIR.defaultBlockState())
+                    )
+            );
         nbt.putDouble("offset", offset);
     }
 
@@ -155,20 +176,22 @@ public class SeatEntity extends Entity {
         super.move(movementType, movement);
     }
 
-    @Nullable
-    private Vec3 locateSafeDismountingPos(Vec3 offset, LivingEntity passenger) {
+    @Nullable private Vec3 locateSafeDismountingPos(Vec3 offset, LivingEntity passenger) {
         double x = this.getX() + offset.x;
         double y = this.getBoundingBox().minY + 0.5;
         double z = this.getZ() + offset.z;
         BlockPos.MutableBlockPos testPos = new BlockPos.MutableBlockPos();
 
-        for (Pose pose : passenger.getDismountPoses()) {
+        for (
+            Pose pose : passenger.getDismountPoses()
+        ) {
             testPos.set(x, y, z);
             double maxHeight = this.getBoundingBox().maxY + 0.75;
 
             while (true) {
-                double height = this.level()
-                                    .getBlockFloorHeight(testPos);
+                double height = this
+                    .level()
+                    .getBlockFloorHeight(testPos);
                 if ((double) testPos.getY() + height > maxHeight) {
                     break;
                 }
@@ -198,16 +221,20 @@ public class SeatEntity extends Entity {
 
     public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
         Vec3 vec3d = getCollisionHorizontalEscapeVector(
-            this.getBbWidth(), passenger.getBbWidth(), this.getYRot() + (passenger.getMainArm() == HumanoidArm.RIGHT
-                                                                         ? 90.0F : -90.0F)
+            this.getBbWidth(),
+            passenger.getBbWidth(),
+            this.getYRot() + (passenger.getMainArm() == HumanoidArm.RIGHT
+                ? 90.0F
+                : -90.0F)
         );
         Vec3 vec3d2 = this.locateSafeDismountingPos(vec3d, passenger);
         if (vec3d2 != null) {
             return vec3d2;
         } else {
             Vec3 vec3d3 = getCollisionHorizontalEscapeVector(
-                this.getBbWidth(), passenger.getBbWidth(), this.getYRot() +
-                                                           (passenger.getMainArm() == HumanoidArm.LEFT ? 90.0F : -90.0F)
+                this.getBbWidth(),
+                passenger.getBbWidth(),
+                this.getYRot() + (passenger.getMainArm() == HumanoidArm.LEFT ? 90.0F : -90.0F)
             );
             Vec3 vec3d4 = this.locateSafeDismountingPos(vec3d3, passenger);
             return vec3d4 != null ? vec3d4 : this.position();

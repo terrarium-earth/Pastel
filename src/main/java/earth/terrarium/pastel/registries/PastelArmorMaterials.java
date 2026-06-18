@@ -22,23 +22,29 @@ import static earth.terrarium.pastel.PastelCommon.locate;
 
 public class PastelArmorMaterials {
 
-    private static final DeferredRegister<ArmorMaterial> REGISTER = DeferredRegister.create(
-        Registries.ARMOR_MATERIAL, PastelCommon.MOD_ID);
+    private static final DeferredRegister<ArmorMaterial> REGISTER = DeferredRegister
+        .create(
+            Registries.ARMOR_MATERIAL,
+            PastelCommon.MOD_ID
+        );
 
     public static Holder<ArmorMaterial> CRYSTAL;
+
     public static Holder<ArmorMaterial> BEDROCK;
 
     public static void register(IEventBus bus) {
         CRYSTAL = register(
             "crystal",
-            Util.make(
-                new EnumMap<>(ArmorItem.Type.class), map -> {
-                    map.put(ArmorItem.Type.BOOTS, PastelCommon.CONFIG.CrystalArmorBootsProtection);
-                    map.put(ArmorItem.Type.LEGGINGS, PastelCommon.CONFIG.CrystalArmorLeggingsProtection);
-                    map.put(ArmorItem.Type.CHESTPLATE, PastelCommon.CONFIG.CrystalArmorChestplateProtection);
-                    map.put(ArmorItem.Type.HELMET, PastelCommon.CONFIG.CrystalArmorHelmetProtection);
-                }
-            ),
+            Util
+                .make(
+                    new EnumMap<>(ArmorItem.Type.class),
+                    map -> {
+                        map.put(ArmorItem.Type.BOOTS, PastelCommon.CONFIG.CrystalArmorBootsProtection);
+                        map.put(ArmorItem.Type.LEGGINGS, PastelCommon.CONFIG.CrystalArmorLeggingsProtection);
+                        map.put(ArmorItem.Type.CHESTPLATE, PastelCommon.CONFIG.CrystalArmorChestplateProtection);
+                        map.put(ArmorItem.Type.HELMET, PastelCommon.CONFIG.CrystalArmorHelmetProtection);
+                    }
+                ),
             15,
             BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.AMETHYST_BLOCK_CHIME),
             PastelCommon.CONFIG.CrystalArmorToughness,
@@ -48,14 +54,16 @@ public class PastelArmorMaterials {
 
         BEDROCK = register(
             "bedrock",
-            Util.make(
-                new EnumMap<>(ArmorItem.Type.class), map -> {
-                    map.put(ArmorItem.Type.BOOTS, PastelCommon.CONFIG.BedrockArmorBootsProtection);
-                    map.put(ArmorItem.Type.LEGGINGS, PastelCommon.CONFIG.BedrockArmorLeggingsProtection);
-                    map.put(ArmorItem.Type.CHESTPLATE, PastelCommon.CONFIG.BedrockArmorChestplateProtection);
-                    map.put(ArmorItem.Type.HELMET, PastelCommon.CONFIG.BedrockArmorHelmetProtection);
-                }
-            ),
+            Util
+                .make(
+                    new EnumMap<>(ArmorItem.Type.class),
+                    map -> {
+                        map.put(ArmorItem.Type.BOOTS, PastelCommon.CONFIG.BedrockArmorBootsProtection);
+                        map.put(ArmorItem.Type.LEGGINGS, PastelCommon.CONFIG.BedrockArmorLeggingsProtection);
+                        map.put(ArmorItem.Type.CHESTPLATE, PastelCommon.CONFIG.BedrockArmorChestplateProtection);
+                        map.put(ArmorItem.Type.HELMET, PastelCommon.CONFIG.BedrockArmorHelmetProtection);
+                    }
+                ),
             5,
             SoundEvents.ARMOR_EQUIP_NETHERITE,
             PastelCommon.CONFIG.BedrockArmorToughness,
@@ -79,17 +87,25 @@ public class PastelArmorMaterials {
 
         EnumMap<ArmorItem.Type, Integer> enumMap = new EnumMap<>(ArmorItem.Type.class);
 
-        for (ArmorItem.Type type : ArmorItem.Type.values()) {
+        for (
+            ArmorItem.Type type : ArmorItem.Type.values()
+        ) {
             enumMap.put(type, defense.get(type));
         }
 
-        return REGISTER.register(
-            id,
-            () -> new ArmorMaterial(
-                enumMap, enchantability, equipSound, Suppliers.memoize(repairIngredient::get), layers, toughness,
-                knockbackResistance
-            )
-        );
+        return REGISTER
+            .register(
+                id,
+                () -> new ArmorMaterial(
+                    enumMap,
+                    enchantability,
+                    equipSound,
+                    Suppliers.memoize(repairIngredient::get),
+                    layers,
+                    toughness,
+                    knockbackResistance
+                )
+            );
     }
 
 }

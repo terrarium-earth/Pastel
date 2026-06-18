@@ -12,6 +12,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 public class StrippingLootBlock extends Block implements StrippableDrop {
 
     private final Block sourceBlock;
+
     private final ResourceKey<LootTable> strippingLootTableKey;
 
     public StrippingLootBlock(Properties settings, Block sourceBlock, ResourceKey<LootTable> strippingLootTableKey) {

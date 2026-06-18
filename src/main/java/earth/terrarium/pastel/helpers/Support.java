@@ -73,8 +73,10 @@ public class Support {
     }
 
     public static float getBlockReachDistance(Player player) {
-        return (player.isCreative() ? 5.0F : 4.5F) + (float) player.getAttributeValue(
-            Attributes.BLOCK_INTERACTION_RANGE);
+        return (player.isCreative() ? 5.0F : 4.5F) + (float) player
+            .getAttributeValue(
+                Attributes.BLOCK_INTERACTION_RANGE
+            );
     }
 
     public static float refineDamage(float damage) {
@@ -84,7 +86,9 @@ public class Support {
     }
 
     public static final DecimalFormat DF = new DecimalFormat("0");
+
     public static final DecimalFormat DF1 = new DecimalFormat("0.0");
+
     public static final DecimalFormat DF2 = new DecimalFormat("0.00");
 
     static {
@@ -93,18 +97,25 @@ public class Support {
         DF2.setRoundingMode(RoundingMode.DOWN);
     }
 
-    @Nullable
-    @SuppressWarnings("unchecked")
+    @Nullable @SuppressWarnings(
+        "unchecked"
+    )
     public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> checkType(
-        BlockEntityType<A> givenType, BlockEntityType<E> expectedType, BlockEntityTicker<? super E> ticker) {
+        BlockEntityType<A> givenType,
+        BlockEntityType<E> expectedType,
+        BlockEntityTicker<? super E> ticker
+    ) {
         return expectedType == givenType ? (BlockEntityTicker<A>) ticker : null;
     }
 
     public static @NotNull Optional<TagKey<Block>> getFirstMatchingBlockTag(
-        @NotNull BlockState blockState, @NotNull List<TagKey<Block>> tags) {
-        return blockState.getTags()
-                         .filter(tags::contains)
-                         .findFirst();
+        @NotNull BlockState blockState,
+        @NotNull List<TagKey<Block>> tags
+    ) {
+        return blockState
+            .getTags()
+            .filter(tags::contains)
+            .findFirst();
     }
 
     public static String getWithOneDecimalAfterComma(float number) {
@@ -180,29 +191,56 @@ public class Support {
     }
 
     public static final int HH_RANGE = 20;
+
     public static final int H_RANGE = 16;
+
     public static final int M_RANGE = 12;
+
     public static final int L_RANGE = 8;
 
-    public static void areaCriterion(ServerLevel level, int radius, BlockPos center, Optional<ResourceLocation> prerequisite, Consumer<ServerPlayer> trigger) {
-        for (Entity proposal : level.getEntities(
-            null, AABB.ofSize(center.getCenter(), radius + 0.5, radius + 0.5, radius + 0.5))) {
+    public static void areaCriterion(
+        ServerLevel level,
+        int radius,
+        BlockPos center,
+        Optional<ResourceLocation> prerequisite,
+        Consumer<ServerPlayer> trigger
+    ) {
+        for (
+            Entity proposal : level
+                .getEntities(
+                    null,
+                    AABB.ofSize(center.getCenter(), radius + 0.5, radius + 0.5, radius + 0.5)
+                )
+        ) {
 
-            if (!(proposal instanceof ServerPlayer player) ||
-                prerequisite.map(a -> !DatabankUtils.hasAdvancement(player, a)).orElse(false))
+            if (!(proposal instanceof ServerPlayer player) || prerequisite
+                .map(a -> !DatabankUtils.hasAdvancement(player, a))
+                .orElse(false))
                 continue;
 
             trigger.accept(player);
         }
     }
 
-    public static void areaCriterion(ServerLevel level, int radius, BlockPos center, ResourceLocation prerequisite, Consumer<ServerPlayer> trigger) {
+    public static void areaCriterion(
+        ServerLevel level,
+        int radius,
+        BlockPos center,
+        ResourceLocation prerequisite,
+        Consumer<ServerPlayer> trigger
+    ) {
         areaCriterion(level, radius, center, Optional.of(prerequisite), trigger);
     }
 
     public static void mbCriterion(ServerLevel level, BlockPos center, Multiblock multiblock) {
-        Support.areaCriterion(level, Support.HH_RANGE, center, Optional.empty(), p ->
-            PastelCriteria.COMPLETED_MULTIBLOCK.trigger(p, multiblock));
+        Support
+            .areaCriterion(
+                level,
+                Support.HH_RANGE,
+                center,
+                Optional.empty(),
+                p -> PastelCriteria.COMPLETED_MULTIBLOCK.trigger(p, multiblock)
+            );
     }
 
     /**
@@ -214,7 +252,10 @@ public class Support {
      * @return the blockpos with forwardUpRight offset from origin when facing horizontalFacing
      */
     public static BlockPos directionalOffset(
-        BlockPos origin, Vec3i forwardUpRight, @NotNull Direction horizontalFacing) {
+        BlockPos origin,
+        Vec3i forwardUpRight,
+        @NotNull Direction horizontalFacing
+    ) {
         switch (horizontalFacing) {
             case NORTH -> {
                 return origin.offset(forwardUpRight.getZ(), forwardUpRight.getY(), -forwardUpRight.getX());
@@ -229,37 +270,48 @@ public class Support {
                 return origin.offset(-forwardUpRight.getX(), forwardUpRight.getY(), -forwardUpRight.getZ());
             }
             default -> {
-                PastelCommon.logWarning(
-                    "Called directionalOffset with facing" + horizontalFacing + " this is not supported.");
+                PastelCommon
+                    .logWarning(
+                        "Called directionalOffset with facing" + horizontalFacing + " this is not supported."
+                    );
                 return origin;
             }
         }
     }
 
     public static void grantAdvancementCriterion(
-        @NotNull ServerPlayer serverPlayerEntity, ResourceLocation advancementIdentifier, String criterion) {
+        @NotNull ServerPlayer serverPlayerEntity,
+        ResourceLocation advancementIdentifier,
+        String criterion
+    ) {
         if (serverPlayerEntity.getServer() == null) {
             return;
         }
-        ServerAdvancementManager sal = serverPlayerEntity.getServer()
-                                                         .getAdvancements();
+        ServerAdvancementManager sal = serverPlayerEntity
+            .getServer()
+            .getAdvancements();
         PlayerAdvancements tracker = serverPlayerEntity.getAdvancements();
 
         AdvancementHolder advancement = sal.get(advancementIdentifier);
         if (advancement == null) {
-            PastelCommon.logError(
-                "Trying to grant a criterion \"" + criterion + "\" for an advancement that does not exist: " +
-                advancementIdentifier);
+            PastelCommon
+                .logError(
+                    "Trying to grant a criterion \"" + criterion + "\" for an advancement that does not exist: " + advancementIdentifier
+                );
         } else {
-            if (!tracker.getOrStartProgress(advancement)
-                        .isDone()) {
+            if (!tracker
+                .getOrStartProgress(advancement)
+                .isDone()) {
                 tracker.award(advancement, criterion);
             }
         }
     }
 
     public static void grantAdvancementCriterion(
-        @NotNull ServerPlayer serverPlayerEntity, String advancementString, String criterion) {
+        @NotNull ServerPlayer serverPlayerEntity,
+        String advancementString,
+        String criterion
+    ) {
         grantAdvancementCriterion(serverPlayerEntity, PastelCommon.locate(advancementString), criterion);
     }
 
@@ -287,7 +339,9 @@ public class Support {
         }
     }
 
-    @Contract(pure = true)
+    @Contract(
+        pure = true
+    )
     public static Direction directionFromRotation(@NotNull Rotation blockRotation) {
         switch (blockRotation) {
             case NONE -> {
@@ -305,7 +359,9 @@ public class Support {
         }
     }
 
-    @Contract(pure = true)
+    @Contract(
+        pure = true
+    )
     public static Rotation rotationFromDirection(@NotNull Direction direction) {
         switch (direction) {
             case EAST -> {
@@ -324,20 +380,31 @@ public class Support {
     }
 
     public static Optional<BlockPos> getNexReplaceableBlockPosUpDown(Level world, BlockPos blockPos, int maxUpDown) {
-        if (world.getBlockState(blockPos)
-                 .canBeReplaced()) {
+        if (world
+            .getBlockState(blockPos)
+            .canBeReplaced()) {
             // search down
-            for (int i = 0; i < maxUpDown; i++) {
-                if (!world.getBlockState(blockPos.below(i + 1))
-                          .canBeReplaced()) {
+            for (
+                int i = 0;
+                i < maxUpDown;
+                i++
+            ) {
+                if (!world
+                    .getBlockState(blockPos.below(i + 1))
+                    .canBeReplaced()) {
                     return Optional.of(blockPos.below(i));
                 }
             }
         } else {
             // search up
-            for (int i = 1; i <= maxUpDown; i++) {
-                if (world.getBlockState(blockPos.above(i))
-                         .canBeReplaced()) {
+            for (
+                int i = 1;
+                i <= maxUpDown;
+                i++
+            ) {
+                if (world
+                    .getBlockState(blockPos.above(i))
+                    .canBeReplaced()) {
                     return Optional.of(blockPos.above(i));
                 }
             }
@@ -358,50 +425,64 @@ public class Support {
         if (false) {
             var man = server.getStructureManager();
             var sex = new FileToIdConverter("structure", ".nbt");
-            man.listTemplates()
-               .filter(l -> l.getNamespace()
-                             .equals(PastelCommon.MOD_ID))
-               .forEach(l -> {
-                   var opt = man.get(l);
-                   if (opt.isEmpty())
-                       return;
+            man
+                .listTemplates()
+                .filter(
+                    l -> l
+                        .getNamespace()
+                        .equals(PastelCommon.MOD_ID)
+                )
+                .forEach(l -> {
+                    var opt = man.get(l);
+                    if (opt.isEmpty())
+                        return;
 
-                   var res = server.getResourceManager();
-                   var loc = sex.idToFile(l);
-                   FileOutputStream write = null;
-                   try {
-                       var stream = new FastBufferedInputStream(res.open(loc));
-                       var structTag = NbtIo.readCompressed(stream, NbtAccounter.unlimitedHeap());
-                       replaceModId(structTag);
-                       var dev = server.getWorldPath(new LevelResource("dev"));
-                       var path = dev.resolve(loc.getPath());
-                       Files.createDirectories(path.getParent());
-                       write = new FileOutputStream(path.toFile());
-                       NbtIo.writeCompressed(structTag, write);
-                   } catch (Exception logged) {
-                       PastelCommon.LOGGER.error("piss", logged);
-                   }
-                   try {
-                       if (write != null) {
-                           write.close();
-                       }
-                   } catch (IOException e) {
-                       throw new RuntimeException(e);
-                   }
-               });
+                    var res = server.getResourceManager();
+                    var loc = sex.idToFile(l);
+                    FileOutputStream write = null;
+                    try {
+                        var stream = new FastBufferedInputStream(res.open(loc));
+                        var structTag = NbtIo.readCompressed(stream, NbtAccounter.unlimitedHeap());
+                        replaceModId(structTag);
+                        var dev = server.getWorldPath(new LevelResource("dev"));
+                        var path = dev.resolve(loc.getPath());
+                        Files.createDirectories(path.getParent());
+                        write = new FileOutputStream(path.toFile());
+                        NbtIo.writeCompressed(structTag, write);
+                    } catch (Exception logged) {
+                        PastelCommon.LOGGER.error("piss", logged);
+                    }
+                    try {
+                        if (write != null) {
+                            write.close();
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             migrationActioned = true;
         }
     }
 
     private static void replaceModId(ListTag tag) {
-        for (int i = 0; i < tag.size(); i++) {
+        for (
+            int i = 0;
+            i < tag.size();
+            i++
+        ) {
             Tag element = tag.get(i);
 
             if (element instanceof StringTag) {
-                tag.setTag(
-                    i, StringTag.valueOf(element.getAsString()
-                                                .replace("spectrum:", "pastel:"))
-                );
+                tag
+                    .setTag(
+                        i,
+                        StringTag
+                            .valueOf(
+                                element
+                                    .getAsString()
+                                    .replace("spectrum:", "pastel:")
+                            )
+                    );
             } else if (element instanceof CompoundTag compound) {
                 replaceModId(compound);
             } else if (element instanceof ListTag list) {
@@ -411,14 +492,19 @@ public class Support {
     }
 
     private static void replaceModId(CompoundTag tag) {
-        for (String key : tag.getAllKeys()) {
+        for (
+            String key : tag.getAllKeys()
+        ) {
             Tag element = tag.get(key);
 
             if (element instanceof StringTag) {
-                tag.putString(
-                    key, element.getAsString()
-                                .replace("spectrum:", "pastel:")
-                );
+                tag
+                    .putString(
+                        key,
+                        element
+                            .getAsString()
+                            .replace("spectrum:", "pastel:")
+                    );
             } else if (element instanceof CompoundTag compound) {
                 replaceModId(compound);
             } else if (element instanceof ListTag list) {

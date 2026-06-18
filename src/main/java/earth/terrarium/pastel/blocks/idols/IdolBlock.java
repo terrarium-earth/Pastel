@@ -30,13 +30,17 @@ import java.util.List;
 public abstract class IdolBlock extends Block {
 
     public static final BooleanProperty COOLDOWN = BooleanProperty.create("cooldown");
+
     public final ParticleOptions particleEffect;
 
     public IdolBlock(Properties settings, ParticleOptions particleEffect) {
         super(settings);
         this.particleEffect = particleEffect;
-        registerDefaultState(getStateDefinition().any()
-                                                 .setValue(COOLDOWN, false));
+        registerDefaultState(
+            getStateDefinition()
+                .any()
+                .setValue(COOLDOWN, false)
+        );
     }
 
     @Override
@@ -46,15 +50,28 @@ public abstract class IdolBlock extends Block {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("block.pastel.mob_block.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("block.pastel.mob_block.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (!world.isClientSide) {
             if (!hasCooldown(state) && trigger((ServerLevel) world, pos, state, player, hit.getDirection())) {
                 playTriggerParticles((ServerLevel) world, pos);
@@ -70,10 +87,13 @@ public abstract class IdolBlock extends Block {
     @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         super.tick(state, world, pos, random);
-        world.setBlockAndUpdate(
-            pos, world.getBlockState(pos)
-                      .setValue(COOLDOWN, false)
-        );
+        world
+            .setBlockAndUpdate(
+                pos,
+                world
+                    .getBlockState(pos)
+                    .setValue(COOLDOWN, false)
+            );
     }
 
     @Override
@@ -93,7 +113,12 @@ public abstract class IdolBlock extends Block {
         if (!world.isClientSide) {
             BlockPos hitPos = hit.getBlockPos();
             if (!hasCooldown(state) && trigger(
-                (ServerLevel) world, hitPos, state, projectile.getOwner(), hit.getDirection())) {
+                (ServerLevel) world,
+                hitPos,
+                state,
+                projectile.getOwner(),
+                hit.getDirection()
+            )) {
                 playTriggerParticles((ServerLevel) world, hit.getBlockPos());
                 playTriggerSound(world, hitPos);
                 triggerCooldown(world, hitPos);
@@ -102,13 +127,23 @@ public abstract class IdolBlock extends Block {
     }
 
     public abstract boolean trigger(
-        ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side);
+        ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    );
 
     public void playTriggerParticles(ServerLevel world, BlockPos blockPos) {
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-            world, new Vec3(blockPos.getX() + 0.5, blockPos.getY() + 0.2, blockPos.getZ() + 0.5), particleEffect, 10,
-            new Vec3(0.5, 0.5, 0.5), new Vec3(0.2, 0.08, 0.2)
-        );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                world,
+                new Vec3(blockPos.getX() + 0.5, blockPos.getY() + 0.2, blockPos.getZ() + 0.5),
+                particleEffect,
+                10,
+                new Vec3(0.5, 0.5, 0.5),
+                new Vec3(0.2, 0.08, 0.2)
+            );
     }
 
     public void playTriggerSound(Level world, BlockPos blockPos) {
@@ -120,10 +155,13 @@ public abstract class IdolBlock extends Block {
     }
 
     public void triggerCooldown(Level world, BlockPos pos) {
-        world.setBlockAndUpdate(
-            pos, world.getBlockState(pos)
-                      .setValue(COOLDOWN, true)
-        );
+        world
+            .setBlockAndUpdate(
+                pos,
+                world
+                    .getBlockState(pos)
+                    .setValue(COOLDOWN, true)
+            );
         world.scheduleTick(pos, this, getCooldownTicks());
     }
 

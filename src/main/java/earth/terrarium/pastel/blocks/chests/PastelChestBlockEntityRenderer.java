@@ -20,11 +20,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PastelChestBlockEntityRenderer<T extends BlockEntity & LidBlockEntity> implements BlockEntityRenderer<T> {
 
     protected final ModelPart singleChestLid;
+
     protected final ModelPart singleChestBase;
+
     protected final ModelPart singleChestLatch;
 
     public PastelChestBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
@@ -36,15 +40,24 @@ public class PastelChestBlockEntityRenderer<T extends BlockEntity & LidBlockEnti
 
     @Override
     public void render(
-        T entity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+        T entity,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay
+    ) {
         Level world = entity.getLevel();
         boolean bl = world != null;
-        BlockState blockState = bl ? entity.getBlockState() : PastelBlocks.HEARTBOUND_CHEST.get()
-                                                                                           .defaultBlockState()
-                                                                                           .setValue(
-                                                                                               ChestBlock.FACING,
-                                                                                               Direction.SOUTH
-                                                                                           );
+        BlockState blockState = bl
+            ? entity.getBlockState()
+            : PastelBlocks.HEARTBOUND_CHEST
+                .get()
+                .defaultBlockState()
+                .setValue(
+                    ChestBlock.FACING,
+                    Direction.SOUTH
+                );
 
         Block block = blockState.getBlock();
         if (block instanceof PastelChestBlock spectrumChestBlock) {
@@ -58,21 +71,35 @@ public class PastelChestBlockEntityRenderer<T extends BlockEntity & LidBlockEnti
             openFactor = 1.0F - openFactor;
             openFactor = 1.0F - openFactor * openFactor * openFactor;
 
-            VertexConsumer vertexConsumer = spectrumChestBlock.getTextureLocation()
-                                                              .buffer(vertexConsumers, RenderType::entityCutout);
+            VertexConsumer vertexConsumer = spectrumChestBlock
+                .getTextureLocation()
+                .buffer(vertexConsumers, RenderType::entityCutout);
 
-            this.render(
-                matrices, vertexConsumer, this.singleChestLid, this.singleChestLatch, this.singleChestBase, openFactor,
-                light, overlay
-            );
+            this
+                .render(
+                    matrices,
+                    vertexConsumer,
+                    this.singleChestLid,
+                    this.singleChestLatch,
+                    this.singleChestBase,
+                    openFactor,
+                    light,
+                    overlay
+                );
 
             matrices.popPose();
         }
     }
 
     private void render(
-        PoseStack matrices, VertexConsumer vertices, ModelPart lid, ModelPart latch, ModelPart base, float openFactor,
-        int light, int overlay
+        PoseStack matrices,
+        VertexConsumer vertices,
+        ModelPart lid,
+        ModelPart latch,
+        ModelPart base,
+        float openFactor,
+        int light,
+        int overlay
     ) {
         lid.xRot = -(openFactor * 1.5707964F);
         latch.xRot = lid.xRot;

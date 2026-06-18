@@ -50,11 +50,18 @@ public class TreasureChestBlock extends PastelChestBlock {
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? createTickerHelper(
-            type, PastelBlockEntities.PRESERVATION_CHEST.get(), TreasureChestBlockEntity::clientTick) : null;
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? createTickerHelper(
+                type,
+                PastelBlockEntities.PRESERVATION_CHEST.get(),
+                TreasureChestBlockEntity::clientTick
+            )
+            : null;
     }
 
     @Override

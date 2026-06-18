@@ -20,11 +20,15 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class ColorPickerScreen extends AbstractContainerScreen<ColorPickerScreenHandler>
-    implements Consumer<Optional<Holder<InkColor>>> {
+    implements
+    Consumer<Optional<Holder<InkColor>>> {
 
     protected final ResourceLocation BACKGROUND = PastelCommon.locate("textures/gui/container/color_picker.png");
+
     protected ColorSelectionWidget colorSelectionWidget;
+
     protected InkGaugeWidget inkGaugeWidget;
+
     protected StackedInkMeterWidget inkMeterWidget;
 
     public ColorPickerScreen(ColorPickerScreenHandler handler, Inventory playerInventory, Component title) {
@@ -40,10 +44,22 @@ public class ColorPickerScreen extends AbstractContainerScreen<ColorPickerScreen
         int startY = (this.height - this.imageHeight) / 2;
 
         this.colorSelectionWidget = new ColorSelectionWidget(
-            startX + 113, startY + 55, startX + 139, startY + 25, this, this.menu.getBlockEntity());
+            startX + 113,
+            startY + 55,
+            startX + 139,
+            startY + 25,
+            this,
+            this.menu.getBlockEntity()
+        );
         this.inkGaugeWidget = new InkGaugeWidget(startX + 54, startY + 21, 42, 42, this, this.menu.getBlockEntity());
         this.inkMeterWidget = new StackedInkMeterWidget(
-            startX + 100, startY + 21, 4, 40, this, this.menu.getBlockEntity());
+            startX + 100,
+            startY + 21,
+            4,
+            40,
+            this,
+            this.menu.getBlockEntity()
+        );
 
         this.colorSelectionWidget.setChangedListener(this);
 
@@ -58,10 +74,15 @@ public class ColorPickerScreen extends AbstractContainerScreen<ColorPickerScreen
         Component title = this.title;
 
         drawContext.drawString(this.font, title.getVisualOrderText(), titleX, titleY, RenderHelper.GREEN_COLOR, false);
-        drawContext.drawString(
-            this.font, this.playerInventoryTitle, ColorPickerScreenHandler.PLAYER_INVENTORY_START_X,
-            ColorPickerScreenHandler.PLAYER_INVENTORY_START_Y - 10, RenderHelper.GREEN_COLOR, false
-        );
+        drawContext
+            .drawString(
+                this.font,
+                this.playerInventoryTitle,
+                ColorPickerScreenHandler.PLAYER_INVENTORY_START_X,
+                ColorPickerScreenHandler.PLAYER_INVENTORY_START_Y - 10,
+                RenderHelper.GREEN_COLOR,
+                false
+            );
     }
 
     @Override

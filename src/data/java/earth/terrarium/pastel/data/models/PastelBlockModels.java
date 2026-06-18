@@ -9,7 +9,7 @@ import net.minecraft.data.models.ItemModelGenerators;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class PastelBlockModels {
-    public static void generateBlockModels(BlockModelGenerators generators){
+    public static void generateBlockModels(BlockModelGenerators generators) {
         CraftingBlockModels.generateBlockModels(generators);
         DecoBlockModels.generateBlockModels(generators);
         FluidBlockModels.generateBlockModels(generators);
@@ -19,16 +19,18 @@ public class PastelBlockModels {
         ResourceBlockModels.generateBlockModels(generators);
         StructureBlockModels.generateBlockModels(generators);
 
-        if(PastelIntegrationPacks.isIntegrationPackActive("ae2"))AE2Compat.generateBlockModels(generators);
-        if(PastelIntegrationPacks.isIntegrationPackActive("create")) CreateCompat.generateBlockModels(generators);
+        if (PastelIntegrationPacks.isIntegrationPackActive("ae2")) AE2Compat.generateBlockModels(generators);
+        if (PastelIntegrationPacks.isIntegrationPackActive("create")) CreateCompat.generateBlockModels(generators);
     }
-    public static void generateItemModels(ItemModelGenerators generators){
+
+    public static void generateItemModels(ItemModelGenerators generators) {
         DecoBlockModels.generateItemModels(generators);
         FunctionalBlockModels.generateItemModels(generators);
         PlantBlockModels.generateItemModels(generators);
         StructureBlockModels.generateItemModels(generators);
     }
+
     public static void setupRenderLayers(FMLClientSetupEvent event) {
 
-	}
+    }
 }

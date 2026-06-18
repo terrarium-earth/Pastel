@@ -35,22 +35,28 @@ public class DecayPlacerItem extends ItemNameBlockItem {
             if (itemPlacementContext != null) {
                 BlockPos blockPos = itemPlacementContext.getClickedPos();
 
-                BlockState placedBlockState = context.getLevel()
-                                                     .getBlockState(blockPos);
+                BlockState placedBlockState = context
+                    .getLevel()
+                    .getBlockState(blockPos);
                 if (placedBlockState.is(PastelBlockTags.DECAY)) {
-                    context.getLevel()
-                           .scheduleTick(
-                               blockPos, placedBlockState.getBlock(), 40 + world.random.nextInt(200),
-                               TickPriority.EXTREMELY_LOW
-                           );
+                    context
+                        .getLevel()
+                        .scheduleTick(
+                            blockPos,
+                            placedBlockState.getBlock(),
+                            40 + world.random.nextInt(200),
+                            TickPriority.EXTREMELY_LOW
+                        );
                 }
             }
         }
-        if (!world.isClientSide && actionResult.consumesAction() && context.getPlayer() != null && !context.getPlayer()
-                                                                                                           .isCreative()) {
-            context.getPlayer()
-                   .getInventory()
-                   .placeItemBackInInventory(Items.GLASS_BOTTLE.getDefaultInstance());
+        if (!world.isClientSide && actionResult.consumesAction() && context.getPlayer() != null && !context
+            .getPlayer()
+            .isCreative()) {
+            context
+                .getPlayer()
+                .getInventory()
+                .placeItemBackInInventory(Items.GLASS_BOTTLE.getDefaultInstance());
         }
         return actionResult;
     }

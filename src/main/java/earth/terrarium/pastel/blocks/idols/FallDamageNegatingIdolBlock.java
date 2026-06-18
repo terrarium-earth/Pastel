@@ -30,9 +30,15 @@ public class FallDamageNegatingIdolBlock extends IdolBlock {
 
     @Override
     public boolean trigger(
-        ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side) {
-        if (entity != null && entity.getDeltaMovement()
-                                    .y() < -0.01) {
+        ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    ) {
+        if (entity != null && entity
+            .getDeltaMovement()
+            .y() < -0.01) {
             entity.setDeltaMovement(0, 0.5, 0); // makes it feel bouncy
             entity.hurtMarked = true;
             entity.hasImpulse = true;
@@ -44,7 +50,11 @@ public class FallDamageNegatingIdolBlock extends IdolBlock {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(Component.translatable("block.pastel.fall_damage_negating_idol.tooltip"));
         tooltip.add(Component.translatable("block.pastel.fall_damage_negating_idol.tooltip2"));
@@ -53,10 +63,14 @@ public class FallDamageNegatingIdolBlock extends IdolBlock {
     @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
         if (!hasCooldown(state) && fallDistance > 3F) {
-            entity.causeFallDamage(
-                fallDistance, 0.0F, world.damageSources()
-                                         .fall()
-            );
+            entity
+                .causeFallDamage(
+                    fallDistance,
+                    0.0F,
+                    world
+                        .damageSources()
+                        .fall()
+                );
             if (!world.isClientSide) {
                 playTriggerParticles((ServerLevel) world, pos);
                 playTriggerSound(world, pos);

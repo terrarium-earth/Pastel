@@ -19,7 +19,9 @@ import java.util.function.Predicate;
 public class FriendlyStackHandler extends ItemStackHandler {
 
     private List<Consumer<Integer>> listeners;
+
     private final Int2IntMap limits = new Int2IntOpenHashMap();
+
     private int tempLimit = -1;
 
     public FriendlyStackHandler(int size) {
@@ -56,7 +58,11 @@ public class FriendlyStackHandler extends ItemStackHandler {
         if (newStacks.size() != stacks.size())
             throw new RuntimeException("Attempted to replace stack handler list with one of an unequal size!");
         stacks = newStacks;
-        for (int i = 0; i < getSlots(); i++) {
+        for (
+            int i = 0;
+            i < getSlots();
+            i++
+        ) {
             onContentsChanged(i);
         }
     }
@@ -70,7 +76,9 @@ public class FriendlyStackHandler extends ItemStackHandler {
     }
 
     public boolean isEmpty() {
-        for (ItemStack stack : stacks) {
+        for (
+            ItemStack stack : stacks
+        ) {
             if (!stack.isEmpty())
                 return false;
         }
@@ -79,7 +87,11 @@ public class FriendlyStackHandler extends ItemStackHandler {
 
     public void clear() {
         stacks.clear();
-        for (int i = 0; i < getSlots(); i++) {
+        for (
+            int i = 0;
+            i < getSlots();
+            i++
+        ) {
             onContentsChanged(i);
         }
     }
@@ -133,7 +145,11 @@ public class FriendlyStackHandler extends ItemStackHandler {
     }
 
     public boolean hasAnyMatching(Predicate<ItemStack> predicate) {
-        for (int i = 0; i < this.getSlots(); i++) {
+        for (
+            int i = 0;
+            i < this.getSlots();
+            i++
+        ) {
             var stack = this.getStackInSlot(i);
             if (predicate.test(stack)) {
                 return true;

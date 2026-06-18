@@ -16,7 +16,14 @@ public class SaneButtonWidget extends ButtonWidget implements WidgetTooltipHolde
     private BiFunction<Integer, Integer, List<ClientTooltipComponent>> tooltipSupplier = (mouseX, mouseY) -> List.of();
 
     public SaneButtonWidget(
-        int x, int y, int width, int height, int u, int v, ResourceLocation texture, BooleanSupplier isActive,
+        int x,
+        int y,
+        int width,
+        int height,
+        int u,
+        int v,
+        ResourceLocation texture,
+        BooleanSupplier isActive,
         ClickAction action
     ) {
         super(x, y, width, height, u, v, texture, isActive, action);

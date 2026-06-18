@@ -17,12 +17,17 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayAscensionAppliedEffectsPayload() implements CustomPacketPayload {
 
-    public static final Type<PlayAscensionAppliedEffectsPayload> ID = PastelC2SPackets.makeId(
-        "play_ascension_applied_effects");
-    public static final StreamCodec<FriendlyByteBuf, PlayAscensionAppliedEffectsPayload> CODEC = StreamCodec.of(
-        (buf, value) -> {
-        }, buf -> new PlayAscensionAppliedEffectsPayload()
-    );
+    public static final Type<PlayAscensionAppliedEffectsPayload> ID = PastelC2SPackets
+        .makeId(
+            "play_ascension_applied_effects"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, PlayAscensionAppliedEffectsPayload> CODEC = StreamCodec
+        .of(
+            (buf, value) -> {
+            },
+            buf -> new PlayAscensionAppliedEffectsPayload()
+        );
 
     public static void playAscensionAppliedEffects(ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, new PlayAscensionAppliedEffectsPayload());
@@ -32,14 +37,19 @@ public record PlayAscensionAppliedEffectsPayload() implements CustomPacketPayloa
         execute(context.player());
     }
 
-    @SuppressWarnings("resource")
-    @OnlyIn(Dist.CLIENT)
+    @SuppressWarnings(
+        "resource"
+    )
+    @OnlyIn(
+        Dist.CLIENT
+    )
     private static void execute(Player player) {
         var level = player.level();
         level.playSound(null, player.blockPosition(), PastelSounds.FADING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
-        Minecraft.getInstance()
-                 .getSoundManager()
-                 .play(new DivinitySoundInstance());
+        Minecraft
+            .getInstance()
+            .getSoundManager()
+            .play(new DivinitySoundInstance());
     }
 
     @Override

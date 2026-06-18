@@ -51,22 +51,33 @@ public class EnderCanvasItem extends HangingEntityItem {
             Level level = context.getLevel();
             EnderCanvasEntity result;
 
-            EnderSpliceComponent spliceComponent = stack.getOrDefault(
-                PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT);
-            EnderCanvasEntity.EnderCanvasVariant variant = stack.getOrDefault(
-                PastelDataComponentTypes.ENDER_CANVAS_VARIANT,
-                EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
-            );
+            EnderSpliceComponent spliceComponent = stack
+                .getOrDefault(
+                    PastelDataComponentTypes.ENDER_SPLICE,
+                    EnderSpliceComponent.DEFAULT
+                );
+            EnderCanvasEntity.EnderCanvasVariant variant = stack
+                .getOrDefault(
+                    PastelDataComponentTypes.ENDER_CANVAS_VARIANT,
+                    EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
+                );
 
-            if (spliceComponent.pos()
-                               .isEmpty() && spliceComponent.targetGameProfile()
-                                                            .isEmpty())
+            if (spliceComponent
+                .pos()
+                .isEmpty() && spliceComponent
+                    .targetGameProfile()
+                    .isEmpty())
                 return InteractionResult.PASS;
 
-            Optional<EnderCanvasEntity> canvasEntity = EnderCanvasEntity.createNew(
-                level, relative, clickedFace, spliceComponent, variant,
-                EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.DIMENSIONAL_TELEPORT)
-            );
+            Optional<EnderCanvasEntity> canvasEntity = EnderCanvasEntity
+                .createNew(
+                    level,
+                    relative,
+                    clickedFace,
+                    spliceComponent,
+                    variant,
+                    EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.DIMENSIONAL_TELEPORT)
+                );
 
             if (canvasEntity.isEmpty()) {
                 return InteractionResult.CONSUME;
@@ -89,35 +100,53 @@ public class EnderCanvasItem extends HangingEntityItem {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         var teleportTargetPos = getTeleportTargetPos(stack);
         if (teleportTargetPos.isPresent()) {
-            String dimensionDisplayString = Support.getReadableDimensionString(teleportTargetPos.get()
-                                                                                                .getA()
-                                                                                                .location()
-                                                                                                .toString());
-            Vec3 pos = teleportTargetPos.get()
-                                        .getB();
-            tooltip.add(
-                Component.translatable(
-                    stack.getOrDefault(
-                        PastelDataComponentTypes.ENDER_CANVAS_VARIANT,
-                        EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
-                    ) == EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
-                    ? "item.pastel.ender_canvas.tooltip.large_landscape"
-                    : "item.pastel.ender_canvas.tooltip.small_landscape", (int) pos.x, (int) pos.y, (int) pos.z,
-                    dimensionDisplayString
-                ));
+            String dimensionDisplayString = Support
+                .getReadableDimensionString(
+                    teleportTargetPos
+                        .get()
+                        .getA()
+                        .location()
+                        .toString()
+                );
+            Vec3 pos = teleportTargetPos
+                .get()
+                .getB();
+            tooltip
+                .add(
+                    Component
+                        .translatable(
+                            stack
+                                .getOrDefault(
+                                    PastelDataComponentTypes.ENDER_CANVAS_VARIANT,
+                                    EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
+                                ) == EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE
+                                    ? "item.pastel.ender_canvas.tooltip.large_landscape"
+                                    : "item.pastel.ender_canvas.tooltip.small_landscape",
+                            (int) pos.x,
+                            (int) pos.y,
+                            (int) pos.z,
+                            dimensionDisplayString
+                        )
+                );
         } else {
             Optional<UUID> teleportTargetPlayerUUID = getTeleportTargetPlayerUUID(stack);
             if (teleportTargetPlayerUUID.isPresent()) {
                 Optional<Component> teleportTargetPlayerName = getTeleportTargetPlayerName(stack);
                 if (teleportTargetPlayerName.isPresent()) {
-                    tooltip.add(Component.translatable(
-                        "item.pastel.ender_canvas.tooltip.portrait",
-                        teleportTargetPlayerName.get()
-                    ));
+                    tooltip
+                        .add(
+                            Component
+                                .translatable(
+                                    "item.pastel.ender_canvas.tooltip.portrait",
+                                    teleportTargetPlayerName.get()
+                                )
+                        );
                 } else {
                     tooltip.add(Component.translatable("item.pastel.ender_canvas.tooltip.portrait", "???"));
                 }
@@ -127,25 +156,35 @@ public class EnderCanvasItem extends HangingEntityItem {
 
     public Optional<Tuple<ResourceKey<Level>, Vec3>> getTeleportTargetPos(@NotNull ItemStack itemStack) {
         var component = itemStack.getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT);
-        if (component.pos()
-                     .isPresent() && component.dimension()
-                                              .isPresent()) return Optional.of(new Tuple<>(
-            component.dimension()
-                     .get(), component.pos()
-                                      .get()
-        ));
+        if (component
+            .pos()
+            .isPresent() && component
+                .dimension()
+                .isPresent()) return Optional
+                    .of(
+                        new Tuple<>(
+                            component
+                                .dimension()
+                                .get(),
+                            component
+                                .pos()
+                                .get()
+                        )
+                    );
         return Optional.empty();
     }
 
     public Optional<UUID> getTeleportTargetPlayerUUID(@NotNull ItemStack itemStack) {
-        return itemStack.getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT)
-                        .targetGameProfile()
-                        .map(GameProfile::getId);
+        return itemStack
+            .getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT)
+            .targetGameProfile()
+            .map(GameProfile::getId);
     }
 
     public Optional<Component> getTeleportTargetPlayerName(@NotNull ItemStack itemStack) {
-        return itemStack.getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT)
-                        .targetName();
+        return itemStack
+            .getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT)
+            .targetName();
     }
 
     @Override

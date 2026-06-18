@@ -11,7 +11,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class BeeHeadModel extends PastelSkullModel {
 
     public BeeHeadModel(ModelPart root) {
@@ -22,21 +24,23 @@ public class BeeHeadModel extends PastelSkullModel {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(0, 0)
-                           .addBox(-3.5F, -7.0F, -5.0F, 7.0F, 7.0F, 10.0F)
-                           .texOffs(2, 0)
-                           .addBox(-1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
-                           .texOffs(3, 3)
-                           .addBox(-1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
-                           .texOffs(3, 3)
-                           .addBox(1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
-                           .texOffs(2, 0)
-                           .addBox(1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F),
-            PartPose.ZERO
-        );
+        modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-3.5F, -7.0F, -5.0F, 7.0F, 7.0F, 10.0F)
+                    .texOffs(2, 0)
+                    .addBox(-1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
+                    .texOffs(3, 3)
+                    .addBox(-1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
+                    .texOffs(3, 3)
+                    .addBox(1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
+                    .texOffs(2, 0)
+                    .addBox(1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 64, 64);
     }

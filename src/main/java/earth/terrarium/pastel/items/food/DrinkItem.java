@@ -26,8 +26,9 @@ public class DrinkItem extends Item {
 
     public DrinkItem(Properties settings, String tooltip) {
         super(settings);
-        this.tooltip = Component.translatable(tooltip)
-                                .withStyle(ChatFormatting.GRAY);
+        this.tooltip = Component
+            .translatable(tooltip)
+            .withStyle(ChatFormatting.GRAY);
     }
 
     @Override
@@ -39,8 +40,9 @@ public class DrinkItem extends Item {
                 if (stack.isEmpty()) {
                     return new ItemStack(Items.GLASS_BOTTLE);
                 }
-                player.getInventory()
-                      .add(new ItemStack(Items.GLASS_BOTTLE));
+                player
+                    .getInventory()
+                    .add(new ItemStack(Items.GLASS_BOTTLE));
             }
         }
 

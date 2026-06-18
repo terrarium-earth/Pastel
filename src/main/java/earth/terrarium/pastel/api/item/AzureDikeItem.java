@@ -39,8 +39,11 @@ public interface AzureDikeItem {
                 float rechargeSpeedModifier = 1F;
                 float rechargeDelayAfterDamageModifier = 1F;
                 float maxAzureDikeMultiplier = 1F;
-                for (SlotResult slot : curiosInventory.get()
-                                                      .findCurios(stack -> stack.getItem() instanceof AzureDikeItem)) {
+                for (
+                    SlotResult slot : curiosInventory
+                        .get()
+                        .findCurios(stack -> stack.getItem() instanceof AzureDikeItem)
+                ) {
                     ItemStack stack = slot.stack();
                     AzureDikeItem azureDikeItem = (AzureDikeItem) stack.getItem();
                     maxAzureDike += azureDikeItem.maxAzureDike(stack);
@@ -49,15 +52,24 @@ public interface AzureDikeItem {
                     maxAzureDikeMultiplier += azureDikeItem.maxAzureDikeMultiplier(stack) - 1;
                 }
 
-                int ticksPerPointOfRecharge = (int) Math.max(
-                    1, AzureDikeData.BASE_RECHARGE_DELAY_TICKS / rechargeSpeedModifier);
-                int rechargeDelayTicksAfterGettingHit = (int) Math.max(
-                    1, AzureDikeData.BASE_RECHARGE_DELAY_TICKS_AFTER_DAMAGE / rechargeDelayAfterDamageModifier);
+                int ticksPerPointOfRecharge = (int) Math
+                    .max(
+                        1,
+                        AzureDikeData.BASE_RECHARGE_DELAY_TICKS / rechargeSpeedModifier
+                    );
+                int rechargeDelayTicksAfterGettingHit = (int) Math
+                    .max(
+                        1,
+                        AzureDikeData.BASE_RECHARGE_DELAY_TICKS_AFTER_DAMAGE / rechargeDelayAfterDamageModifier
+                    );
 
-                dikeData.set(
-                    Math.round((maxAzureDike * maxAzureDikeMultiplier)), ticksPerPointOfRecharge,
-                    rechargeDelayTicksAfterGettingHit, false
-                );
+                dikeData
+                    .set(
+                        Math.round((maxAzureDike * maxAzureDikeMultiplier)),
+                        ticksPerPointOfRecharge,
+                        rechargeDelayTicksAfterGettingHit,
+                        false
+                    );
                 ((AzureDikeData) dikeData).sync(user);
             }
         }

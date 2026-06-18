@@ -15,10 +15,13 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final long lastParticleTick;
+
     private boolean done;
 
     public TakeOffBeltSoundInstance() {
@@ -28,22 +31,27 @@ public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements T
         this.looping = false;
         this.delay = 0;
         this.volume = 0.4F;
-        this.lastParticleTick = player.level()
-                                      .getGameTime() + TakeOffBeltItem.CHARGE_TIME_TICKS * TakeOffBeltItem.MAX_CHARGES;
+        this.lastParticleTick = player
+            .level()
+            .getGameTime() + TakeOffBeltItem.CHARGE_TIME_TICKS * TakeOffBeltItem.MAX_CHARGES;
         this.x = player.getX();
         this.y = player.getY();
         this.z = player.getZ();
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static void startSoundInstance() {
         TakeOffBeltSoundInstance soundInstance = new TakeOffBeltSoundInstance();
-        if (!Minecraft.getInstance()
-                      .getSoundManager()
-                      .isActive(soundInstance)) {
-            Minecraft.getInstance()
-                     .getSoundManager()
-                     .play(soundInstance);
+        if (!Minecraft
+            .getInstance()
+            .getSoundManager()
+            .isActive(soundInstance)) {
+            Minecraft
+                .getInstance()
+                .getSoundManager()
+                .play(soundInstance);
         }
     }
 
@@ -68,8 +76,9 @@ public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements T
             this.y = ((float) player.getY());
             this.z = ((float) player.getZ());
 
-            if (player.level() != null && player.level()
-                                                .getGameTime() < lastParticleTick) {
+            if (player.level() != null && player
+                .level()
+                .getGameTime() < lastParticleTick) {
                 spawnParticles(player);
             } else {
                 this.volume = 0.0F;
@@ -82,16 +91,17 @@ public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements T
         RandomSource random = world.random;
 
         Vec3 pos = player.position();
-        player.getCommandSenderWorld()
-              .addParticle(
-                  ColoredCraftingParticleEffect.LIGHT_BLUE,
-                  pos.x + random.nextDouble() * 0.8 - 0.4,
-                  pos.y,
-                  pos.z + random.nextDouble() * 0.8 - 0.4,
-                  0,
-                  random.nextDouble() * 0.5,
-                  0
-              );
+        player
+            .getCommandSenderWorld()
+            .addParticle(
+                ColoredCraftingParticleEffect.LIGHT_BLUE,
+                pos.x + random.nextDouble() * 0.8 - 0.4,
+                pos.y,
+                pos.z + random.nextDouble() * 0.8 - 0.4,
+                0,
+                random.nextDouble() * 0.5,
+                0
+            );
     }
 
     protected final void setDone() {

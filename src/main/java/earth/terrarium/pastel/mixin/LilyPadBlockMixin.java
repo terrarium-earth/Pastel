@@ -11,15 +11,21 @@ import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(WaterlilyBlock.class)
+@Mixin(
+    WaterlilyBlock.class
+)
 public class LilyPadBlockMixin {
-    @ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "mayPlaceOn", at = @At(
+            "RETURN"
+        )
+    )
     public boolean extendLilyPlaceables(boolean original, BlockState floor, BlockGetter world, BlockPos pos) {
         if (original)
             return true;
         FluidState fluidState = world.getFluidState(pos);
         FluidState fluidState2 = world.getFluidState(pos.above());
-        return (fluidState.getType() == PastelFluids.HUMUS.get() ||
-                fluidState.getType() == PastelFluids.LIQUID_CRYSTAL.get()) && fluidState2.getType() == Fluids.EMPTY;
+        return (fluidState.getType() == PastelFluids.HUMUS.get() || fluidState.getType() == PastelFluids.LIQUID_CRYSTAL
+            .get()) && fluidState2.getType() == Fluids.EMPTY;
     }
 }

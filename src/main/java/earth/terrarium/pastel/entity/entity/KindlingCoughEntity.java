@@ -23,6 +23,7 @@ import net.minecraft.world.phys.Vec3;
 public class KindlingCoughEntity extends Projectile {
 
     protected static final float DAMAGE = 10.0F;
+
     protected static final int FIRE_TICKS_ON_HIT = 30;
 
     public KindlingCoughEntity(EntityType<? extends KindlingCoughEntity> entityType, Level world) {
@@ -32,11 +33,12 @@ public class KindlingCoughEntity extends Projectile {
     public KindlingCoughEntity(Level world, LivingEntity owner) {
         this(PastelEntityTypes.KINDLING_COUGH.get(), world);
         this.setOwner(owner);
-        this.setPos(
-            owner.getX() - (owner.getBbWidth() + 1.0F) * 0.5 * Mth.sin(owner.yBodyRot * 0.017453292F),
-            owner.getEyeY() - 0.1,
-            owner.getZ() + (owner.getBbWidth() + 1.0F) * 0.5 * (double) Mth.cos(owner.yBodyRot * 0.017453292F)
-        );
+        this
+            .setPos(
+                owner.getX() - (owner.getBbWidth() + 1.0F) * 0.5 * Mth.sin(owner.yBodyRot * 0.017453292F),
+                owner.getEyeY() - 0.1,
+                owner.getZ() + (owner.getBbWidth() + 1.0F) * 0.5 * (double) Mth.cos(owner.yBodyRot * 0.017453292F)
+            );
     }
 
     @Override
@@ -49,17 +51,22 @@ public class KindlingCoughEntity extends Projectile {
         double e = this.getY() + vec3d.y;
         double f = this.getZ() + vec3d.z;
         this.updateRotation();
-        if (this.level()
-                .getBlockStates(this.getBoundingBox())
-                .noneMatch(BlockBehaviour.BlockStateBase::isAir)) {
+        if (this
+            .level()
+            .getBlockStates(this.getBoundingBox())
+            .noneMatch(BlockBehaviour.BlockStateBase::isAir)) {
             this.discard();
         } else if (this.isInWaterOrBubble()) {
             this.discard();
         } else {
             this.setDeltaMovement(vec3d.scale(0.99));
             if (!this.isNoGravity()) {
-                this.setDeltaMovement(this.getDeltaMovement()
-                                          .add(0.0, -0.06, 0.0));
+                this
+                    .setDeltaMovement(
+                        this
+                            .getDeltaMovement()
+                            .add(0.0, -0.06, 0.0)
+                    );
             }
 
             this.setPos(d, e, f);
@@ -86,12 +93,17 @@ public class KindlingCoughEntity extends Projectile {
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
 
-        if (!this.level()
-                 .isClientSide()) {
-            PrimordialFireBlock.tryPlacePrimordialFire(
-                this.level(), blockHitResult.getBlockPos()
-                                            .relative(blockHitResult.getDirection()), blockHitResult.getDirection()
-            );
+        if (!this
+            .level()
+            .isClientSide()) {
+            PrimordialFireBlock
+                .tryPlacePrimordialFire(
+                    this.level(),
+                    blockHitResult
+                        .getBlockPos()
+                        .relative(blockHitResult.getDirection()),
+                    blockHitResult.getDirection()
+                );
             this.discard();
         }
     }
@@ -107,11 +119,21 @@ public class KindlingCoughEntity extends Projectile {
         double velY = packet.getYa();
         double velZ = packet.getZa();
 
-        for (int i = 0; i < 7; ++i) {
+        for (
+            int i = 0;
+            i < 7;
+            ++i
+        ) {
             double g = 0.4 + 0.1 * (double) i;
-            this.level()
+            this
+                .level()
                 .addParticle(
-                    PastelParticleTypes.PRIMORDIAL_FLAME, this.getX(), this.getY(), this.getZ(), velX * g, velY,
+                    PastelParticleTypes.PRIMORDIAL_FLAME,
+                    this.getX(),
+                    this.getY(),
+                    this.getZ(),
+                    velX * g,
+                    velY,
                     velZ * g
                 );
         }

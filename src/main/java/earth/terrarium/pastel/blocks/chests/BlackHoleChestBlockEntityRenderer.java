@@ -27,19 +27,34 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
-@SuppressWarnings({"unused", "FieldCanBeLocal"})
+@OnlyIn(
+    Dist.CLIENT
+)
+@SuppressWarnings(
+    {
+        "unused", "FieldCanBeLocal"
+}
+)
 public class BlackHoleChestBlockEntityRenderer implements BlockEntityRenderer<BlackHoleChestBlockEntity> {
 
     private static final Material defaultSprite = new Material(
-        InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/black_hole_chest"));
+        InventoryMenu.BLOCK_ATLAS,
+        PastelCommon.locate("block/black_hole_chest")
+    );
+
     private static final Material experienceSprite = new Material(
-        InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/black_hole_chest_experience"));
+        InventoryMenu.BLOCK_ATLAS,
+        PastelCommon.locate("block/black_hole_chest_experience")
+    );
 
     private final ModelPart root;
+
     private final ModelPart shell;
+
     private final ModelPart cap;
+
     private final ModelPart storage;
+
     private final ModelPart orb;
 
     public BlackHoleChestBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
@@ -54,62 +69,84 @@ public class BlackHoleChestBlockEntityRenderer implements BlockEntityRenderer<Bl
     public static @NotNull LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-        PartDefinition shell = modelPartData.addOrReplaceChild(
-            "shell", CubeListBuilder.create()
-                                    .texOffs(0, 0)
-                                    .addBox(-7.0F, -9.0F, -7.0F, 14.0F, 9.0F, 14.0F, new CubeDeformation(0.0F))
-                                    .texOffs(0, 39)
-                                    .addBox(-5.0F, -9.0F, -5.0F, 10.0F, 9.0F, 10.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 24.0F, 0.0F)
-        );
+        PartDefinition shell = modelPartData
+            .addOrReplaceChild(
+                "shell",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-7.0F, -9.0F, -7.0F, 14.0F, 9.0F, 14.0F, new CubeDeformation(0.0F))
+                    .texOffs(0, 39)
+                    .addBox(-5.0F, -9.0F, -5.0F, 10.0F, 9.0F, 10.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 24.0F, 0.0F)
+            );
 
-        PartDefinition cap = modelPartData.addOrReplaceChild(
-            "cap", CubeListBuilder.create()
-                                  .texOffs(40, 39)
-                                  .addBox(-5.0F, -6.0F, -5.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.0F))
-                                  .texOffs(82, 2)
-                                  .addBox(-4.0F, -5.0F, -4.0F, 8.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 24.0F, 0.0F)
-        );
+        PartDefinition cap = modelPartData
+            .addOrReplaceChild(
+                "cap",
+                CubeListBuilder
+                    .create()
+                    .texOffs(40, 39)
+                    .addBox(-5.0F, -6.0F, -5.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.0F))
+                    .texOffs(82, 2)
+                    .addBox(-4.0F, -5.0F, -4.0F, 8.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 24.0F, 0.0F)
+            );
 
-        PartDefinition storage = modelPartData.addOrReplaceChild(
-            "storage", CubeListBuilder.create()
-                                      .texOffs(42, 0)
-                                      .addBox(-5.0F, -2.0F, -5.0F, 10.0F, 2.0F, 10.0F, new CubeDeformation(0.0F))
-                                      .texOffs(56, 13)
-                                      .addBox(-4.0F, -2.0F, -4.0F, 8.0F, 2.0F, 8.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 24.0F, 0.0F)
-        );
+        PartDefinition storage = modelPartData
+            .addOrReplaceChild(
+                "storage",
+                CubeListBuilder
+                    .create()
+                    .texOffs(42, 0)
+                    .addBox(-5.0F, -2.0F, -5.0F, 10.0F, 2.0F, 10.0F, new CubeDeformation(0.0F))
+                    .texOffs(56, 13)
+                    .addBox(-4.0F, -2.0F, -4.0F, 8.0F, 2.0F, 8.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 24.0F, 0.0F)
+            );
 
-        PartDefinition orb = modelPartData.addOrReplaceChild(
-            "orb", CubeListBuilder.create()
-                                  .texOffs(0, 0)
-                                  .addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-                                  .texOffs(30, 39)
-                                  .addBox(-2.5F, -2.5F, -2.5F, 5.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 15.4F, 0.0F)
-        );
+        PartDefinition orb = modelPartData
+            .addOrReplaceChild(
+                "orb",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                    .texOffs(30, 39)
+                    .addBox(-2.5F, -2.5F, -2.5F, 5.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 15.4F, 0.0F)
+            );
         return LayerDefinition.create(modelData, 128, 128);
     }
 
     @Override
     public void render(
-        BlackHoleChestBlockEntity chest, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumers,
-        int light, int overlay
+        BlackHoleChestBlockEntity chest,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay
     ) {
         poseStack.pushPose();
 
         var sprite = chest.hasXPStorage() ? experienceSprite : defaultSprite;
 
         boolean bl = chest.getLevel() != null;
-        BlockState blockState = bl ? chest.getBlockState() : PastelBlocks.BLACK_HOLE_CHEST.get()
-                                                                                          .defaultBlockState()
-                                                                                          .setValue(
-                                                                                              ChestBlock.FACING,
-                                                                                              Direction.SOUTH
-                                                                                          );
-        float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING)
-                                                                        .toYRot() : 0;
+        BlockState blockState = bl
+            ? chest.getBlockState()
+            : PastelBlocks.BLACK_HOLE_CHEST
+                .get()
+                .defaultBlockState()
+                .setValue(
+                    ChestBlock.FACING,
+                    Direction.SOUTH
+                );
+        float f = blockState.hasProperty(ChestBlock.FACING)
+            ? blockState
+                .getValue(ChestBlock.FACING)
+                .toYRot()
+            : 0;
         poseStack.translate(0.5D, 1.5D, 0.5D);
         poseStack.mulPose(Axis.YP.rotationDegrees(-f));
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
@@ -175,15 +212,18 @@ public class BlackHoleChestBlockEntityRenderer implements BlockEntityRenderer<Bl
             orbLight = light;
         }
 
-        orb.visit(
-            poseStack, (matrix, path, index, cuboid) -> cuboid.compile(
-                poseStack.last(),
-                vertexConsumer,
-                index == 0 ? orbLight : light,
-                overlay,
-                -1
-            )
-        );
+        orb
+            .visit(
+                poseStack,
+                (matrix, path, index, cuboid) -> cuboid
+                    .compile(
+                        poseStack.last(),
+                        vertexConsumer,
+                        index == 0 ? orbLight : light,
+                        overlay,
+                        -1
+                    )
+            );
 
         poseStack.popPose();
     }

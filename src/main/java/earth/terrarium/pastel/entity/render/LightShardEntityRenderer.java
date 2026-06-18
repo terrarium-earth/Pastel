@@ -19,7 +19,9 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class LightShardEntityRenderer extends EntityRenderer<LightShardEntity> {
 
     public LightShardEntityRenderer(EntityRendererProvider.Context ctx) {
@@ -28,15 +30,23 @@ public class LightShardEntityRenderer extends EntityRenderer<LightShardEntity> {
 
     @Override
     public void render(
-        LightShardEntity shard, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
+        LightShardEntity shard,
+        float yaw,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
         int light
     ) {
         renderTrail(shard, tickDelta, matrices);
         matrices.pushPose();
 
         var age = shard.tickCount;
-        var alpha = Mth.clamp(
-            1 - Mth.lerp(tickDelta, shard.getVanishingProgress(age - 1), shard.getVanishingProgress(age)), 0F, 1F);
+        var alpha = Mth
+            .clamp(
+                1 - Mth.lerp(tickDelta, shard.getVanishingProgress(age - 1), shard.getVanishingProgress(age)),
+                0F,
+                1F
+            );
         var scaleFactor = Mth.sin((age + tickDelta) / 16F) / 10F + shard.getScaleOffset();
 
         var size = shard.getBoundingBox().getSize() / 2;
@@ -44,35 +54,41 @@ public class LightShardEntityRenderer extends EntityRenderer<LightShardEntity> {
         matrices.mulPose(this.entityRenderDispatcher.cameraOrientation());
         matrices.scale(scaleFactor, scaleFactor, scaleFactor);
 
-        VertexConsumer consumer = vertexConsumers.getBuffer(
-            RenderType.entityTranslucentCull(getTextureLocation(shard)));
+        VertexConsumer consumer = vertexConsumers
+            .getBuffer(
+                RenderType.entityTranslucentCull(getTextureLocation(shard))
+            );
         PoseStack.Pose matrix = matrices.last();
         Matrix4f positions = matrix.pose();
 
-        consumer.addVertex(positions, -0.5F, -0.5F, 0)
-                .setColor(1f, 1f, 1f, alpha)
-                .setUv(0, 1)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(LightTexture.FULL_BRIGHT)
-                .setNormal(matrix, 0, 1, 0);
-        consumer.addVertex(positions, 0.5F, -0.5F, 0)
-                .setColor(1f, 1f, 1f, alpha)
-                .setUv(1, 1)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(LightTexture.FULL_BRIGHT)
-                .setNormal(matrix, 0, 1, 0);
-        consumer.addVertex(positions, 0.5F, 0.5F, 0)
-                .setColor(1f, 1f, 1f, alpha)
-                .setUv(1, 0)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(LightTexture.FULL_BRIGHT)
-                .setNormal(matrix, 0, 1, 0);
-        consumer.addVertex(positions, -0.5F, 0.5F, 0)
-                .setColor(1f, 1f, 1f, alpha)
-                .setUv(0, 0)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(LightTexture.FULL_BRIGHT)
-                .setNormal(matrix, 0, 1, 0);
+        consumer
+            .addVertex(positions, -0.5F, -0.5F, 0)
+            .setColor(1f, 1f, 1f, alpha)
+            .setUv(0, 1)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(LightTexture.FULL_BRIGHT)
+            .setNormal(matrix, 0, 1, 0);
+        consumer
+            .addVertex(positions, 0.5F, -0.5F, 0)
+            .setColor(1f, 1f, 1f, alpha)
+            .setUv(1, 1)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(LightTexture.FULL_BRIGHT)
+            .setNormal(matrix, 0, 1, 0);
+        consumer
+            .addVertex(positions, 0.5F, 0.5F, 0)
+            .setColor(1f, 1f, 1f, alpha)
+            .setUv(1, 0)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(LightTexture.FULL_BRIGHT)
+            .setNormal(matrix, 0, 1, 0);
+        consumer
+            .addVertex(positions, -0.5F, 0.5F, 0)
+            .setColor(1f, 1f, 1f, alpha)
+            .setUv(0, 0)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(LightTexture.FULL_BRIGHT)
+            .setNormal(matrix, 0, 1, 0);
 
         matrices.popPose();
 
@@ -90,17 +106,22 @@ public class LightShardEntityRenderer extends EntityRenderer<LightShardEntity> {
         double d1 = Mth.lerp(tickDelta, shard.yOld, shard.getY());
         double d2 = Mth.lerp(tickDelta, shard.zOld, shard.getZ());
         Vec3 posOffset = new Vec3(d0, d1, d2).subtract(shard.position());
-        Vec3 pos = shard.position()
-                        .add(posOffset);
+        Vec3 pos = shard
+            .position()
+            .add(posOffset);
         matrices.translate(-pos.x, -pos.y, -pos.z);
         ;
-        trail.position = shard.getBoundingBox()
-                              .getCenter()
-                              .add(posOffset);
-        trail.render(
-            matrices, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT,
-            shard.getGradient()
-        );
+        trail.position = shard
+            .getBoundingBox()
+            .getCenter()
+            .add(posOffset);
+        trail
+            .render(
+                matrices,
+                RenderHandler.createBufferSource(),
+                LightTexture.FULL_BRIGHT,
+                shard.getGradient()
+            );
         matrices.popPose();
     }
 

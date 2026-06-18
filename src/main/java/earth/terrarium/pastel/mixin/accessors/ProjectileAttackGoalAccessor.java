@@ -5,10 +5,14 @@ import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(RangedAttackGoal.class)
+@Mixin(
+    RangedAttackGoal.class
+)
 public interface ProjectileAttackGoalAccessor {
 
-    @Accessor("target")
+    @Accessor(
+        "target"
+    )
     LivingEntity getProjectileAttackTarget();
 
 }

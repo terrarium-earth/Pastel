@@ -35,5 +35,4 @@ public class ImmunityStatusEffect extends MobEffect {
         MobEffectHelper.actionImmunity(entity, false);
     }
 
-
 }

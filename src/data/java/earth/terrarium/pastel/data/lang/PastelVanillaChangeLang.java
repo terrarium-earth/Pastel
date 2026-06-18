@@ -4,8 +4,11 @@ import earth.terrarium.pastel.data.PastelLanguageProvider;
 
 public class PastelVanillaChangeLang {
     public static void addTranslations(PastelLanguageProvider provider) {
-        provider.add(
-            "item.minecraft.lingering_potion.effect.pigment_potion", "Lingering §2P§3i§cg§6m§be§en§dt§f Potion");
+        provider
+            .add(
+                "item.minecraft.lingering_potion.effect.pigment_potion",
+                "Lingering §2P§3i§cg§6m§be§en§dt§f Potion"
+            );
         provider.add("item.minecraft.potion.effect.pigment_potion", "§2P§3i§cg§6m§be§en§dt§f Potion");
         provider.add("item.minecraft.splash_potion.effect.pigment_potion", "Splash §2P§3i§cg§6m§be§en§dt§f Potion");
         provider.add("item.minecraft.tipped_arrow.effect.pigment_potion", "§2P§3i§cg§6m§be§en§dt§f Dipped Arrow");

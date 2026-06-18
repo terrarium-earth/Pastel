@@ -41,12 +41,16 @@ public class HummingstoneBlock extends BaseEntityBlock {
     public static final MapCodec<HummingstoneBlock> CODEC = simpleCodec(HummingstoneBlock::new);
 
     public static final float CHANCE_TO_ECHO_HUM_EVENT = 0.08F;
+
     public static final BooleanProperty HUMMING = BooleanProperty.create("humming");
 
     public HummingstoneBlock(Properties settings) {
         super(settings);
-        registerDefaultState(this.stateDefinition.any()
-                                                 .setValue(HUMMING, false));
+        registerDefaultState(
+            this.stateDefinition
+                .any()
+                .setValue(HUMMING, false)
+        );
     }
 
     @Override
@@ -59,7 +63,9 @@ public class HummingstoneBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(state, world, pos, random);
@@ -74,16 +80,25 @@ public class HummingstoneBlock extends BaseEntityBlock {
             BlockPos blockPos = pos.relative(direction);
             BlockState blockState = world.getBlockState(blockPos);
             if (!state.canOcclude() || !blockState.isFaceSturdy(world, blockPos, direction.getOpposite())) {
-                double d = direction.getStepX() == 0 ? random.nextDouble()
-                                                     : 0.5D + (double) direction.getStepX() * 0.6D;
-                double e = direction.getStepY() == 0 ? random.nextDouble()
-                                                     : 0.5D + (double) direction.getStepY() * 0.6D;
-                double f = direction.getStepZ() == 0 ? random.nextDouble()
-                                                     : 0.5D + (double) direction.getStepZ() * 0.6D;
-                world.addParticle(
-                    ParticleTypes.NOTE, (double) pos.getX() + d, (double) pos.getY() + e, (double) pos.getZ() + f, 0.0D,
-                    0.05D, 0.0D
-                );
+                double d = direction.getStepX() == 0
+                    ? random.nextDouble()
+                    : 0.5D + (double) direction.getStepX() * 0.6D;
+                double e = direction.getStepY() == 0
+                    ? random.nextDouble()
+                    : 0.5D + (double) direction.getStepY() * 0.6D;
+                double f = direction.getStepZ() == 0
+                    ? random.nextDouble()
+                    : 0.5D + (double) direction.getStepZ() * 0.6D;
+                world
+                    .addParticle(
+                        ParticleTypes.NOTE,
+                        (double) pos.getX() + d,
+                        (double) pos.getY() + e,
+                        (double) pos.getZ() + f,
+                        0.0D,
+                        0.05D,
+                        0.0D
+                    );
             }
         }
 
@@ -91,10 +106,17 @@ public class HummingstoneBlock extends BaseEntityBlock {
         float r = random.nextFloat();
         if (r < 0.3F) {
             float pitch = 0.4F + 0.4F * pos.getX() % 8 + 0.4F * pos.getY() % 8 + 0.4F * pos.getZ() % 8;
-            world.playLocalSound(
-                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSounds.HUMMINGSTONE_HUM,
-                SoundSource.BLOCKS, 0.4F + random.nextFloat() * 0.1F, pitch, false
-            );
+            world
+                .playLocalSound(
+                    pos.getX() + 0.5,
+                    pos.getY() + 0.5,
+                    pos.getZ() + 0.5,
+                    PastelSounds.HUMMINGSTONE_HUM,
+                    SoundSource.BLOCKS,
+                    0.4F + random.nextFloat() * 0.1F,
+                    pitch,
+                    false
+                );
         }
     }
 
@@ -105,7 +127,12 @@ public class HummingstoneBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (!state.getValue(HUMMING)) {
             if (!world.isClientSide) {
                 startHumming(world, pos, state, player, false);
@@ -152,11 +179,18 @@ public class HummingstoneBlock extends BaseEntityBlock {
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : createTickerHelper(
-            type, PastelBlockEntities.HUMMINGSTONE.get(), HummingstoneBlockEntity::serverTick);
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? null
+            : createTickerHelper(
+                type,
+                PastelBlockEntities.HUMMINGSTONE.get(),
+                HummingstoneBlockEntity::serverTick
+            );
     }
 
     @Override
@@ -170,7 +204,12 @@ public class HummingstoneBlock extends BaseEntityBlock {
     }
 
     public static void startHumming(
-        Level world, BlockPos pos, BlockState state, @Nullable Entity entity, boolean causedByOtherHum) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable Entity entity,
+        boolean causedByOtherHum
+    ) {
         if (!(state.getBlock() instanceof HummingstoneBlock)) {
             return;
         }
@@ -186,45 +225,61 @@ public class HummingstoneBlock extends BaseEntityBlock {
 
     public static void stopHumming(Level world, BlockPos pos, BlockState state) {
         world.setBlockAndUpdate(pos, state.setValue(HUMMING, false));
-        world.playSound(
-            null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 0.5F,
-            0.5F + world.random.nextFloat() * 1.2F
-        );
+        world
+            .playSound(
+                null,
+                pos,
+                SoundEvents.AMETHYST_BLOCK_CHIME,
+                SoundSource.BLOCKS,
+                0.5F,
+                0.5F + world.random.nextFloat() * 1.2F
+            );
     }
 
     public static void onHymn(Level level, BlockPos pos, @Nullable Entity entity) {
-        if (!(level.getBlockState(pos)
-                   .getBlock() instanceof HummingstoneBlock)) {
+        if (!(level
+            .getBlockState(pos)
+            .getBlock() instanceof HummingstoneBlock)) {
             return;
         }
 
         level.gameEvent(entity, PastelGameEvents.HUMMINGSTONE_HYMN, pos);
-        level.playSound(
-            null, pos, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.BLOCKS, 1.25F,
-            0.5F + level.random.nextFloat() * 1.2F
-        );
+        level
+            .playSound(
+                null,
+                pos,
+                SoundEvents.AMETHYST_BLOCK_BREAK,
+                SoundSource.BLOCKS,
+                1.25F,
+                0.5F + level.random.nextFloat() * 1.2F
+            );
         level.destroyBlock(pos, false);
         popResource(
-            level, pos, PastelItems.RESONANCE_SHARD.get()
-                                                   .getDefaultInstance()
+            level,
+            pos,
+            PastelItems.RESONANCE_SHARD
+                .get()
+                .getDefaultInstance()
         );
 
         if (level instanceof ServerLevel sl)
-            Support.areaCriterion(
-                sl, Support.HH_RANGE, pos, PastelAdvancements.Midgame.ENTER_DIMENSION, p ->
-                    PastelCriteria.CREATE_HUMMINGSTONE_HYMN.trigger(p, sl, pos)
-            );
+            Support
+                .areaCriterion(
+                    sl,
+                    Support.HH_RANGE,
+                    pos,
+                    PastelAdvancements.Midgame.ENTER_DIMENSION,
+                    p -> PastelCriteria.CREATE_HUMMINGSTONE_HYMN.trigger(p, sl, pos)
+                );
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new HummingstoneBlockEntity(pos, state);
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
+    @Nullable public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
         if (blockEntity instanceof HummingstoneBlockEntity hummingstoneBlockEntity) {
             return hummingstoneBlockEntity.listener;
         }

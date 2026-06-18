@@ -19,7 +19,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class FloatBlockEntityRenderer extends EntityRenderer<FloatBlockEntity> {
     private final RandomSource random = RandomSource.create();
 
@@ -30,7 +32,11 @@ public class FloatBlockEntityRenderer extends EntityRenderer<FloatBlockEntity> {
 
     @Override
     public void render(
-        FloatBlockEntity entity, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
+        FloatBlockEntity entity,
+        float yaw,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
         int light
     ) {
         BlockState blockState = entity.getBlockState();
@@ -38,20 +44,31 @@ public class FloatBlockEntityRenderer extends EntityRenderer<FloatBlockEntity> {
         if (blockState.getRenderShape() == RenderShape.MODEL) {
             Level world = entity.level();
 
-            if (blockState != world.getBlockState(BlockPos.containing(entity.position())) &&
-                blockState.getRenderShape() != RenderShape.INVISIBLE) {
+            if (blockState != world.getBlockState(BlockPos.containing(entity.position())) && blockState
+                .getRenderShape() != RenderShape.INVISIBLE) {
                 matrices.pushPose();
                 BlockPos blockpos = BlockPos.containing(entity.getX(), entity.getBoundingBox().maxY, entity.getZ());
                 matrices.translate(-0.5, 0.0, -0.5);
-                BlockRenderDispatcher blockRenderManager = Minecraft.getInstance()
-                                                                    .getBlockRenderer();
-                blockRenderManager.getModelRenderer()
-                                  .tesselateBlock(
-                                      world, blockRenderManager.getBlockModel(blockState), blockState, blockpos,
-                                      matrices, vertexConsumers.getBuffer(
-                                          ItemBlockRenderTypes.getMovingBlockRenderType(blockState)), false, random,
-                                      blockState.getSeed(entity.getOrigin()), OverlayTexture.NO_OVERLAY
-                                  );
+                BlockRenderDispatcher blockRenderManager = Minecraft
+                    .getInstance()
+                    .getBlockRenderer();
+                blockRenderManager
+                    .getModelRenderer()
+                    .tesselateBlock(
+                        world,
+                        blockRenderManager.getBlockModel(blockState),
+                        blockState,
+                        blockpos,
+                        matrices,
+                        vertexConsumers
+                            .getBuffer(
+                                ItemBlockRenderTypes.getMovingBlockRenderType(blockState)
+                            ),
+                        false,
+                        random,
+                        blockState.getSeed(entity.getOrigin()),
+                        OverlayTexture.NO_OVERLAY
+                    );
                 matrices.popPose();
 
                 super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
@@ -59,7 +76,9 @@ public class FloatBlockEntityRenderer extends EntityRenderer<FloatBlockEntity> {
         }
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings(
+        "deprecation"
+    )
     @Override
     public ResourceLocation getTextureLocation(FloatBlockEntity entityIn) {
         return TextureAtlas.LOCATION_BLOCKS;

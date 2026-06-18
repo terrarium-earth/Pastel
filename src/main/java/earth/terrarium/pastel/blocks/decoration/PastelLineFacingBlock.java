@@ -19,8 +19,9 @@ public class PastelLineFacingBlock extends PastelFacingBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(FACING, ctx.getNearestLookingDirection());
+        return this
+            .defaultBlockState()
+            .setValue(FACING, ctx.getNearestLookingDirection());
     }
 
 }

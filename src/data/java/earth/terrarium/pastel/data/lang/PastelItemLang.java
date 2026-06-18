@@ -13,42 +13,46 @@ import static java.util.Map.entry;
 public class PastelItemLang {
 
     // Most of these either have apostrophes or other special characters that won't be in the registeredName
-    private static final Map<String, String> specialCasedItemTranslations = Map.ofEntries(
-        entry(PastelItems.ARTISANS_ATLAS.getRegisteredName(), "Artisan's Atlas"),
-        entry(PastelItems.ARTISTS_PALETTE.getRegisteredName(), "Artist's Palette"),
-        entry(PastelItems.BREWERS_HANDBOOK.getRegisteredName(), "Brewer's Handbook"),
-        entry(PastelItems.CONSTRUCTORS_STAFF.getRegisteredName(), "Constructor's Staff"),
-        entry(PastelItems.AETHER_GRACED_NECTAR_GLOVES.getRegisteredName(), "Aether-Graced Nectar Gloves"),
-        entry(PastelItems.FOX_O_NINE_TAILS.getRegisteredName(), "Fox o' Nine Tails"),
-        entry(PastelItems.GLOVES_OF_DAWNS_GRASP.getRegisteredName(), "Gloves of Dawn's Grasp"),
-        entry(PastelItems.GUIDEBOOK.getRegisteredName(), "Artist's Journal"),
-        entry(PastelItems.HEARTSINGERS_REWARD.getRegisteredName(), "Heartsinger's Reward"),
-        entry(PastelItems.MALACHITE_GLASS_ARROW.getRegisteredName(), "Glass Arrow"),
-        entry(PastelItems.MERMAIDS_GEM.getRegisteredName(), "Mermaid's Gem"),
-        entry(PastelItems.MERMAIDS_JAM.getRegisteredName(), "Mermaid's Jam"),
-        entry(PastelItems.MERMAIDS_POPCORN.getRegisteredName(), "Mermaid's Popcorn"),
-        entry(PastelItems.NATURES_STAFF.getRegisteredName(), "Nature's Staff"),
-        entry(PastelItems.NIGHTFALLS_BLADE.getRegisteredName(), "Nightfall's Blade"),
-        entry(PastelItems.OMNI_ACCELERATOR.getRegisteredName(), "Omni-Accelerator"),
-        entry(PastelItems.PEACHES_FLAMBE.getRegisteredName(), "Peaches Flambé"),
-        entry(PastelItems.PEDESTAL_TIER_1_STRUCTURE_PLACER.getRegisteredName(), "Pastel Focus Structure Placer"),
-        entry(PastelItems.PEDESTAL_TIER_2_STRUCTURE_PLACER.getRegisteredName(), "Pastel Temple Structure Placer"),
-        entry(PastelItems.PEDESTAL_TIER_3_STRUCTURE_PLACER.getRegisteredName(), "Pastel Palace Structure Placer"),
-        entry(PastelItems.POISONERS_HANDBOOK.getRegisteredName(), "Poisoner's Handbook"),
-        entry(PastelItems.SEVEN_LEAGUE_BOOTS.getRegisteredName(), "Seven-League Boots")
-    );
+    private static final Map<String, String> specialCasedItemTranslations = Map
+        .ofEntries(
+            entry(PastelItems.ARTISANS_ATLAS.getRegisteredName(), "Artisan's Atlas"),
+            entry(PastelItems.ARTISTS_PALETTE.getRegisteredName(), "Artist's Palette"),
+            entry(PastelItems.BREWERS_HANDBOOK.getRegisteredName(), "Brewer's Handbook"),
+            entry(PastelItems.CONSTRUCTORS_STAFF.getRegisteredName(), "Constructor's Staff"),
+            entry(PastelItems.AETHER_GRACED_NECTAR_GLOVES.getRegisteredName(), "Aether-Graced Nectar Gloves"),
+            entry(PastelItems.FOX_O_NINE_TAILS.getRegisteredName(), "Fox o' Nine Tails"),
+            entry(PastelItems.GLOVES_OF_DAWNS_GRASP.getRegisteredName(), "Gloves of Dawn's Grasp"),
+            entry(PastelItems.GUIDEBOOK.getRegisteredName(), "Artist's Journal"),
+            entry(PastelItems.HEARTSINGERS_REWARD.getRegisteredName(), "Heartsinger's Reward"),
+            entry(PastelItems.MALACHITE_GLASS_ARROW.getRegisteredName(), "Glass Arrow"),
+            entry(PastelItems.MERMAIDS_GEM.getRegisteredName(), "Mermaid's Gem"),
+            entry(PastelItems.MERMAIDS_JAM.getRegisteredName(), "Mermaid's Jam"),
+            entry(PastelItems.MERMAIDS_POPCORN.getRegisteredName(), "Mermaid's Popcorn"),
+            entry(PastelItems.NATURES_STAFF.getRegisteredName(), "Nature's Staff"),
+            entry(PastelItems.NIGHTFALLS_BLADE.getRegisteredName(), "Nightfall's Blade"),
+            entry(PastelItems.OMNI_ACCELERATOR.getRegisteredName(), "Omni-Accelerator"),
+            entry(PastelItems.PEACHES_FLAMBE.getRegisteredName(), "Peaches Flambé"),
+            entry(PastelItems.PEDESTAL_TIER_1_STRUCTURE_PLACER.getRegisteredName(), "Pastel Focus Structure Placer"),
+            entry(PastelItems.PEDESTAL_TIER_2_STRUCTURE_PLACER.getRegisteredName(), "Pastel Temple Structure Placer"),
+            entry(PastelItems.PEDESTAL_TIER_3_STRUCTURE_PLACER.getRegisteredName(), "Pastel Palace Structure Placer"),
+            entry(PastelItems.POISONERS_HANDBOOK.getRegisteredName(), "Poisoner's Handbook"),
+            entry(PastelItems.SEVEN_LEAGUE_BOOTS.getRegisteredName(), "Seven-League Boots")
+        );
 
     public static void addTranslations(PastelLanguageProvider provider) {
 
-        for (var item : PastelItems.ITEM_REGISTRAR.getEntries()) {
+        for (
+            var item : PastelItems.ITEM_REGISTRAR.getEntries()
+        ) {
             if (item.get() instanceof BlockItem && !(item.get() instanceof ItemNameBlockItem))
                 continue; // prevent duplicate keys
             if (specialCasedItemTranslations.containsKey(item.getRegisteredName())) {
                 provider.addItem(item, specialCasedItemTranslations.get(item.getRegisteredName()));
                 continue;
             }
-            var name = item.getRegisteredName()
-                           .substring(7);
+            var name = item
+                .getRegisteredName()
+                .substring(7);
             if (name.endsWith("_banner_pattern")) {
                 provider.addItem(item, "Banner Pattern");
                 continue;
@@ -58,8 +62,12 @@ public class PastelItemLang {
                 continue;
             }
 
-            var prettifiedName = PastelLanguageProvider.prettifyRegisteredName(item.getRegisteredName()
-                                                                                   .substring(7));
+            var prettifiedName = PastelLanguageProvider
+                .prettifyRegisteredName(
+                    item
+                        .getRegisteredName()
+                        .substring(7)
+                );
             provider.addItem(item, prettifiedName);
         }
 
@@ -74,36 +82,63 @@ public class PastelItemLang {
         provider.add("item.pastel.wire_hook.alias_2", "Grapple");
 
         // banner patterns (the formatter is determined to fuck this up)
-        for (Map.Entry<String, String> pattern : Map.ofEntries(
-                                                        Map.entry("amethyst_cluster", "Amethyst Cluster"), Map.entry(
-                                                            "amethyst_shard", "Amethyst Shard"),
-                                                        Map.entry("bedrock_dust", "Bedrock Dust"), Map.entry(
-                                                            "crafting_tablet", "Crafting Tablet"),
-                                                        Map.entry("four_leaf_clover", "Four-leafed Clover"),
-                                                        Map.entry("guidebook", "Colorful World"),
-                                                        Map.entry("jade_vine", "Jade Vine"), Map.entry("knowledge_gem"
-                                                            , "Knowledge Gem"),
-                                                        Map.entry("color_theory", "Color Theory"), Map.entry(
-                                                            "multitool", "Multitool"),
-                                                        Map.entry("neolith", "Neolith"), Map.entry("palette",
-                                                                                                   "Artistry"),
-                                                        Map.entry("pigment", "Pigment"),
-                                                        Map.entry("raw_azurite", "Azurite"), Map.entry("shimmer",
-                                                                                                       "Shimmer"),
-                                                        Map.entry("shimmerstone", "Shimmerstone"), Map.entry("vegetal"
-                                                            , "Vegetal"),
-                                                        Map.entry("astrologer", "Astrologer"), Map.entry("poisonbloom"
-                                                            , "Poisonbloom"),
-                                                        Map.entry("deep_light", "Deep Light")
-                                                    )
-                                                    .entrySet()) {
-            for (DyeColor color : DyeColor.values()) {
+        for (
+            Map.Entry<String, String> pattern : Map
+                .ofEntries(
+                    Map.entry("amethyst_cluster", "Amethyst Cluster"),
+                    Map
+                        .entry(
+                            "amethyst_shard",
+                            "Amethyst Shard"
+                        ),
+                    Map.entry("bedrock_dust", "Bedrock Dust"),
+                    Map
+                        .entry(
+                            "crafting_tablet",
+                            "Crafting Tablet"
+                        ),
+                    Map.entry("four_leaf_clover", "Four-leafed Clover"),
+                    Map.entry("guidebook", "Colorful World"),
+                    Map.entry("jade_vine", "Jade Vine"),
+                    Map.entry("knowledge_gem", "Knowledge Gem"),
+                    Map.entry("color_theory", "Color Theory"),
+                    Map
+                        .entry(
+                            "multitool",
+                            "Multitool"
+                        ),
+                    Map.entry("neolith", "Neolith"),
+                    Map
+                        .entry(
+                            "palette",
+                            "Artistry"
+                        ),
+                    Map.entry("pigment", "Pigment"),
+                    Map.entry("raw_azurite", "Azurite"),
+                    Map
+                        .entry(
+                            "shimmer",
+                            "Shimmer"
+                        ),
+                    Map.entry("shimmerstone", "Shimmerstone"),
+                    Map.entry("vegetal", "Vegetal"),
+                    Map.entry("astrologer", "Astrologer"),
+                    Map.entry("poisonbloom", "Poisonbloom"),
+                    Map.entry("deep_light", "Deep Light")
+                )
+                .entrySet()
+        ) {
+            for (
+                DyeColor color : DyeColor.values()
+            ) {
                 // evil oneliner go
-                provider.add(
-                    "block.minecraft.banner.pastel." + pattern.getKey() + "." + color.name()
-                                                                                     .toLowerCase(),
-                    PastelLanguageProvider.prettifyRegisteredName(color.getName()) + " " + pattern.getValue()
-                );
+                provider
+                    .add(
+                        "block.minecraft.banner.pastel." + pattern.getKey() + "." + color
+                            .name()
+                            .toLowerCase(),
+                        PastelLanguageProvider.prettifyRegisteredName(color.getName()) + " " + pattern.getValue()
+                    );
             }
         }
 
@@ -113,10 +148,11 @@ public class PastelItemLang {
         provider.add("item.pastel.topaz_leggings.tooltip", "Sturdy legs");
         provider.add("item.pastel.citrine_boots.tooltip", "Put a spring in your step");
 
-        provider.add(
-            "item.pastel.flowing_staff.tooltip.setcorners",
-            "Crouch-use to attune corners. Max of %s blocks on any axis"
-        );
+        provider
+            .add(
+                "item.pastel.flowing_staff.tooltip.setcorners",
+                "Crouch-use to attune corners. Max of %s blocks on any axis"
+            );
         provider.add("item.pastel.flowing_staff.tooltip.crouch", "Crouch to preview affected area");
         provider.add("item.pastel.flowing_staff.tooltip.use", "Use to place blocks randomly");
         provider.add("item.pastel.flowing_staff.tooltip.pos1", "First corner: [%s,%s,%s]");
@@ -132,14 +168,20 @@ public class PastelItemLang {
         provider.add("item.pastel.amethyst_glass_arrow.tooltip", "-aggressive homing-");
         provider.add("item.pastel.amethyst_shard_banner_pattern.desc", "Amethyst Shard");
         provider.add("item.pastel.aqua_regia.tooltip.preview", "Brew it with a combination of Bulbs & Petals");
-        provider.add(
-            "item.pastel.aqua_regia.tooltip.preview2", "Petals ferment slower than Bulbs, but reduce negative effects");
+        provider
+            .add(
+                "item.pastel.aqua_regia.tooltip.preview2",
+                "Petals ferment slower than Bulbs, but reduce negative effects"
+            );
         provider.add("item.pastel.tooltip.could_use_some_sweetener", "Could use some sweetener");
         provider.add("item.pastel.artisans_atlas.empty", "Use in a structure to locate others of its kind");
         provider.add("item.pastel.artisans_atlas.locates_structure", "Locates the closest ");
         provider.add("item.pastel.artisans_atlas.set_structure", "Now locates ");
-        provider.add(
-            "item.pastel.artisans_atlas.unlocatable", "The aura of this structure seems to be of a special kind");
+        provider
+            .add(
+                "item.pastel.artisans_atlas.unlocatable",
+                "The aura of this structure seems to be of a special kind"
+            );
         provider.add("item.pastel.artists_palette.tooltip", "§7Stores up to %d§7 of elemental Ink in total");
         provider.add("item.pastel.artists_palette.tooltip.mix_on_demand", "§7Mixes other types of Ink on demand");
         provider.add("item.pastel.ash_flakes.tooltip", "§O it's ash.");
@@ -148,13 +190,19 @@ public class PastelItemLang {
         provider.add("item.pastel.ashen_circlet.tooltip.cooldown_seconds", "%d§7 Seconds until recharged");
         provider.add("item.pastel.ashen_circlet.tooltip2", "§7grants better Vision and Speed in Lava");
         provider.add("item.pastel.azalea_tea.tooltip", "Lets you sleep through the day");
-        provider.add(
-            "item.pastel.azure_dike_belt.tooltip", "§7Greatly increases §9Azure Dike§7 recovery after getting hit");
+        provider
+            .add(
+                "item.pastel.azure_dike_belt.tooltip",
+                "§7Greatly increases §9Azure Dike§7 recovery after getting hit"
+            );
         provider.add("item.pastel.azure_dike_provider.tooltip", "§7Grants §a%d§7 units of §9Azure Dike");
         provider.add("item.pastel.azure_dike_ring.tooltip", "§7Increases §9Azure Dike§7 charging");
         provider.add("item.pastel.azuresque_dike_core.tooltip", "§7Empowers other sources of §9Azure Dike");
-        provider.add(
-            "item.pastel.azuresque_dike_core.tooltip2", "§7Increases §9Azure Dike§7 charging and recovery speed");
+        provider
+            .add(
+                "item.pastel.azuresque_dike_core.tooltip2",
+                "§7Increases §9Azure Dike§7 charging and recovery speed"
+            );
         provider.add("item.pastel.azuresque_dike_core.tooltip3", "§7Doubles damage that cannot be absorbed");
         provider.add("item.pastel.bedrock_fishing_rod.tooltip", "Able to fish even in the most aggressive of fluids");
         provider.add("item.pastel.bident.postToolTip.ap", " %d%% Armor Piercing");
@@ -174,23 +222,31 @@ public class PastelItemLang {
         provider.add("item.pastel.bottomless_bundle.tooltip.count", "%d / %d (%s stacks)");
         provider.add("item.pastel.bottomless_bundle.tooltip.count_of", "%d / %d of ");
         provider.add("item.pastel.bottomless_bundle.tooltip.empty", "Empty");
-        provider.add(
-            "item.pastel.bottomless_bundle.tooltip.enter_inventory", "%s that you pick up will get put in here");
+        provider
+            .add(
+                "item.pastel.bottomless_bundle.tooltip.enter_inventory",
+                "%s that you pick up will get put in here"
+            );
         provider.add("item.pastel.bottomless_bundle.tooltip.locked", "Locked (Crouch-Use to unlock)");
         provider.add("item.pastel.bottomless_bundle.tooltip.voiding", "§7Additional items will be §cvoided");
         provider.add("item.pastel.brewers_handbook.tooltip", "§6§oBrewer's Handbook, extended edition");
-        provider.add(
-            "item.pastel.celestial_pocketwatch.tooltip.use_blocked_fixed_time",
-            "Your clock seems dysfunctional in this strange dimension"
-        );
-        provider.add(
-            "item.pastel.celestial_pocketwatch.tooltip.use_blocked_gamerule",
-            "A great power prevents the use of your watch"
-        );
+        provider
+            .add(
+                "item.pastel.celestial_pocketwatch.tooltip.use_blocked_fixed_time",
+                "Your clock seems dysfunctional in this strange dimension"
+            );
+        provider
+            .add(
+                "item.pastel.celestial_pocketwatch.tooltip.use_blocked_gamerule",
+                "A great power prevents the use of your watch"
+            );
         provider.add("item.pastel.celestial_pocketwatch.tooltip.working", "Gives you reign over Day and Night");
         provider.add("item.pastel.cheong.tooltip", "A fruit-based sweetener");
-        provider.add(
-            "item.pastel.circlet_of_arrogance.tooltip", "§7Grants you immense stat boosts at great cost if you die");
+        provider
+            .add(
+                "item.pastel.circlet_of_arrogance.tooltip",
+                "§7Grants you immense stat boosts at great cost if you die"
+            );
         provider.add("item.pastel.citrine_glass_arrow.tooltip", "-infinite piercing-");
         provider.add("item.pastel.clotted_cream.tooltip", "Removes all Status Effects");
         provider.add("item.pastel.clotted_cream.tooltip2", "Creamy and sweet");
@@ -201,8 +257,11 @@ public class PastelItemLang {
         provider.add("item.pastel.cotton_cloud_boots.tooltip", "Creates soft clouds under your feet that enable you");
         provider.add("item.pastel.cotton_cloud_boots.tooltip2", "to walk in the air, as long as you are sprinting");
         provider.add("item.pastel.crafting_tablet.tooltip.crafting_recipe", "Press Use to Craft");
-        provider.add(
-            "item.pastel.crafting_tablet.tooltip.no_recipe", "Put items into the Crafting Grid to save a Recipe");
+        provider
+            .add(
+                "item.pastel.crafting_tablet.tooltip.no_recipe",
+                "Put items into the Crafting Grid to save a Recipe"
+            );
         provider.add("item.pastel.crafting_tablet.tooltip.pedestal_recipe", "Use in a Pedestal for Autocrafting");
         provider.add("item.pastel.crafting_tablet.tooltip.recipe", "%d %s");
         provider.add("item.pastel.crafting_tablet.tooltip.shift_to_view_gui", "Crouch-Use to open Crafting Grid");
@@ -220,37 +279,59 @@ public class PastelItemLang {
         provider.add("item.pastel.dreamflayer.tooltip.activated", "Overpowered. Crouch-Use to power down");
         provider.add("item.pastel.dreamflayer.tooltip.deactivated", "Crouch-Use to overpower (%s)");
         provider.add("item.pastel.enchantment_canvas.tooltip.bound_to", "§7Bound to ");
-        provider.add(
-            "item.pastel.enchantment_canvas.tooltip.not_bound", "§7Right click onto an item to swap Enchantments");
-        provider.add(
-            "item.pastel.enchantment_canvas.tooltip.not_bound2", "§7The Canvas will be bound to items of that type");
+        provider
+            .add(
+                "item.pastel.enchantment_canvas.tooltip.not_bound",
+                "§7Right click onto an item to swap Enchantments"
+            );
+        provider
+            .add(
+                "item.pastel.enchantment_canvas.tooltip.not_bound2",
+                "§7The Canvas will be bound to items of that type"
+            );
         provider.add("item.pastel.ender_splice.tooltip.bound_player", "§7Bound to %s§7. Use to teleport");
         provider.add("item.pastel.ender_splice.tooltip.bound_pos", "§7Bound to %d %d %d §7in %s§7. Use to teleport");
         provider.add("item.pastel.ender_splice.tooltip.unbound", "§7Use to bind to your current position");
-        provider.add(
-            "item.pastel.ender_splice.wrong_dimension",
-            "This Ender Splices energy is not strong enough to teleport you across dimensions"
-        );
+        provider
+            .add(
+                "item.pastel.ender_splice.wrong_dimension",
+                "This Ender Splices energy is not strong enough to teleport you across dimensions"
+            );
         provider.add("item.pastel.ender_canvas.tooltip.portrait", "§7Portrait of %s§7.");
         provider.add("item.pastel.ender_canvas.tooltip.large_landscape", "§7Landscape painting of %d %d %d §7in %s§7.");
-        provider.add(
-            "item.pastel.ender_canvas.tooltip.small_landscape", "§7Small landscape painting of %d %d %d §7in %s§7.");
+        provider
+            .add(
+                "item.pastel.ender_canvas.tooltip.small_landscape",
+                "§7Small landscape painting of %d %d %d §7in %s§7."
+            );
         provider.add("item.pastel.evernectar.tooltip", "You probably shouldn't drink this");
-        provider.add(
-            "item.pastel.everpromise_ribbon.tooltip", "Name it in an Anvil and color it using Pigment via Crafting");
-        provider.add(
-            "item.pastel.everpromise_ribbon.tooltip2", "then use it on an animal to promise it never ending affection");
+        provider
+            .add(
+                "item.pastel.everpromise_ribbon.tooltip",
+                "Name it in an Anvil and color it using Pigment via Crafting"
+            );
+        provider
+            .add(
+                "item.pastel.everpromise_ribbon.tooltip2",
+                "then use it on an animal to promise it never ending affection"
+            );
         provider.add("item.pastel.exchanging_staff.tooltip.range", "Exchanges blocks up to %s blocks around it");
         provider.add("item.pastel.exchanging_staff.tooltop.pickblock", " to adjust the range, up to a maximum of %s.");
         provider.add("item.pastel.exchanging_staff.tooltip.target", "Target: %s");
         provider.add("item.pastel.ferocious_glass_crest_bident.tooltip", "Does not require Water to §fRiptide§r");
-        provider.add(
-            "item.pastel.ferocious_glass_crest_bident.tooltip2", "Tap §fRiptide§r when §fRiptide§r to §fRiptide§r");
+        provider
+            .add(
+                "item.pastel.ferocious_glass_crest_bident.tooltip2",
+                "Tap §fRiptide§r when §fRiptide§r to §fRiptide§r"
+            );
         provider.add("item.pastel.ferocious_glass_crest_bident.tooltip3", "Damages creatures around you while flying");
         provider.add("item.pastel.fissure_plum.tooltip", "§onutty and aromatic");
         provider.add("item.pastel.fractal_glass_crest_bident.tooltip", "Will not leave your hands when thrown");
-        provider.add(
-            "item.pastel.fractal_glass_crest_bident.tooltip2", "Instead, creates a §fMirror Image§r of itself");
+        provider
+            .add(
+                "item.pastel.fractal_glass_crest_bident.tooltip2",
+                "Instead, creates a §fMirror Image§r of itself"
+            );
         provider.add("item.pastel.fractal_glass_crest_bident.tooltip3", "Shatters on impact");
         provider.add("item.pastel.freigeist.tooltip", "§4♥§r You wish you were an Angel? §4♡§r");
         provider.add("item.pastel.laurels_of_serenity.tooltip", "Reduces enemy aggression");
@@ -263,10 +344,11 @@ public class PastelItemLang {
         provider.add("item.pastel.gilded_book.tooltip.copy_enchantments2", "from any desired item onto this book");
         provider.add("item.pastel.gilded_book.tooltip.enchantability", "High Enchantability");
         provider.add("item.pastel.glass_crest_crossbow.message.charge", "%d%% Overcharge active");
-        provider.add(
-            "item.pastel.glass_crest_crossbow.tooltip.how_to_overcharge",
-            "§7Use while loaded and sneaking to §fOVERCHARGE"
-        );
+        provider
+            .add(
+                "item.pastel.glass_crest_crossbow.tooltip.how_to_overcharge",
+                "§7Use while loaded and sneaking to §fOVERCHARGE"
+            );
         provider.add("item.pastel.glass_crest_crossbow.tooltip.overcharged", "§7Overcharge: %d§7%%");
         provider.add("item.pastel.glass_crest_ultra_greatsword.tooltip", "§7Deals §f%d%%§7 of it's damage via Magic");
         provider.add("item.pastel.glass_crest_ultra_greatsword.tooltip2", "§7Charge to perform a ground slam");
@@ -280,8 +362,11 @@ public class PastelItemLang {
         provider.add("item.pastel.ring_of_consumption.tooltip", "Grants lifesteal, at the cost of hunger");
         provider.add("item.pastel.hibernating_jade_vine_bulb.tooltip", "Kind of... deadish?");
         provider.add("item.pastel.imbrifer_cookbook.tooltip", "§9§oCookbook of Imbrifer - Blue glass and Aqua regia");
-        provider.add(
-            "item.pastel.imperial_cookbook.tooltip", "§c§oFeeding an Imperator - Imperial recipes third edition");
+        provider
+            .add(
+                "item.pastel.imperial_cookbook.tooltip",
+                "§c§oFeeding an Imperator - Imperial recipes third edition"
+            );
         provider.add("item.pastel.infused_beverage.tooltip.age", "%d days aged - %d %% Alc.");
         provider.add("item.pastel.infused_beverage.tooltip.age_composite", "%d years, %d days aged - %d %% Alc.");
         provider.add("item.pastel.infused_beverage.tooltip.age_years", "%d years aged - %d %% Alc.");
@@ -341,13 +426,19 @@ public class PastelItemLang {
         provider.add("item.pastel.jade_wine.tooltip.bloominess", "%d %% Bloominess");
         provider.add("item.pastel.jade_wine.tooltip.bloominess_sweetened", "%d %% Bloominess - Sweetened");
         provider.add("item.pastel.jade_wine.tooltip.preview", "Brew it with a combination of Bulbs & Petals");
-        provider.add(
-            "item.pastel.jade_wine.tooltip.preview2", "Petals ferment slower than Bulbs but reduce negative effects");
+        provider
+            .add(
+                "item.pastel.jade_wine.tooltip.preview2",
+                "Petals ferment slower than Bulbs but reduce negative effects"
+            );
         provider.add("item.pastel.jeopardant.tooltip.damage", "§7Increased Damage on low HP (currently §a+%d%%§7)");
         provider.add("item.pastel.jeopardant.tooltip.damage_zero", "§7Increased Damage on low HP (currently §80%%§7)");
         provider.add("item.pastel.knowledge_gem.tooltip.stored_experience", "/ %d Experience stored");
-        provider.add(
-            "item.pastel.knowledge_gem.tooltip.use", "Use to drain, or crouch-use to store experience (%d/tick)");
+        provider
+            .add(
+                "item.pastel.knowledge_gem.tooltip.use",
+                "Use to drain, or crouch-use to store experience (%d/tick)"
+            );
         provider.add("item.pastel.lagoon_rod.tooltip", "The bobber indicates fishing in open waters");
         provider.add("item.pastel.least_black_lotus.tooltip", "Washed one too many times?");
         provider.add("item.pastel.color_theory_banner_pattern.desc", "Color Theory");
@@ -381,21 +472,29 @@ public class PastelItemLang {
         provider.add("item.pastel.mysterious_locket.tooltip_socketed", "Socketed with a §fMoonstone Core");
         provider.add("item.pastel.natures_staff.tooltip", "§7Uses §aVegetal§7 to grow all sorts of plants");
         provider.add("item.pastel.natures_staff.tooltip_lure", "§7Also lures in nearby animals");
-        provider.add(
-            "item.pastel.natures_staff.tooltip_with_chance", "§7Uses §aVegetal§7 to grow all sorts of plants (%d%%§7)");
-        provider.add(
-            "item.pastel.natures_staff.tooltip_with_ink", "§7Uses %s or §aVegetal§7 to grow all sorts of plants");
-        provider.add(
-            "item.pastel.natures_staff.tooltip_with_ink_and_chance",
-            "§7Uses %s or §aVegetal§7 to grow all sorts of plants (%d%%§7)"
-        );
+        provider
+            .add(
+                "item.pastel.natures_staff.tooltip_with_chance",
+                "§7Uses §aVegetal§7 to grow all sorts of plants (%d%%§7)"
+            );
+        provider
+            .add(
+                "item.pastel.natures_staff.tooltip_with_ink",
+                "§7Uses %s or §aVegetal§7 to grow all sorts of plants"
+            );
+        provider
+            .add(
+                "item.pastel.natures_staff.tooltip_with_ink_and_chance",
+                "§7Uses %s or §aVegetal§7 to grow all sorts of plants (%d%%§7)"
+            );
         provider.add("item.pastel.neat_ring.tooltip", "§7§oIt's neat");
         provider.add("item.pastel.nectardew_burgeon.tooltip", "§oExceedingly rare");
         provider.add("item.pastel.nectered_viognier.tooltip.preview", "Brew it with a combination of Bulbs & Peaches");
-        provider.add(
-            "item.pastel.nectered_viognier.tooltip.preview2",
-            "Peaches ferment slower than Bulbs, but reduce negative effects"
-        );
+        provider
+            .add(
+                "item.pastel.nectered_viognier.tooltip.preview2",
+                "Peaches ferment slower than Bulbs, but reduce negative effects"
+            );
         provider.add("item.pastel.night_salts.tooltip", "Break to sleep");
         provider.add("item.pastel.soothing_bouquet.tooltip", "Smell to sleep");
         provider.add("item.pastel.concealing_oils.tooltip", "Apply by right-clicking unto food in your inventory");
@@ -449,12 +548,16 @@ public class PastelItemLang {
         provider.add("item.pastel.potion.tooltip.invalid", "§5[?]");
         provider.add("item.pastel.potion.tooltip.incurable", "§5[Incurable]");
         provider.add("item.pastel.potion_pendant.tooltip_max_level", "§7Supports Effects up to level ");
-        provider.add(
-            "item.pastel.potion_pendant.tooltip_not_full_count",
-            "§7Fill with up to §f%d§7 Effects in the §fPotion Workshop"
-        );
-        provider.add(
-            "item.pastel.potion_pendant.tooltip_not_full_one", "§7Fill with an Effect in the §fPotion Workshop");
+        provider
+            .add(
+                "item.pastel.potion_pendant.tooltip_not_full_count",
+                "§7Fill with up to §f%d§7 Effects in the §fPotion Workshop"
+            );
+        provider
+            .add(
+                "item.pastel.potion_pendant.tooltip_not_full_one",
+                "§7Fill with an Effect in the §fPotion Workshop"
+            );
         provider.add("item.pastel.potion_pendant.when_worn", "When Worn:");
         provider.add("item.pastel.primordial_lighter.tooltip", "Sets the world on fire");
         provider.add("item.pastel.puff_circlet.tooltip", "§7Uses §9Azure Dike§7 to protect you");
@@ -474,8 +577,11 @@ public class PastelItemLang {
         provider.add("item.pastel.restoration_tea.tooltip_milk", "With Milk");
         provider.add("item.pastel.ring_of_aetherial_grace.tooltip", "Lowers your gravity, but increases knockback");
         provider.add("item.pastel.ring_of_aetherial_grace.tooltip2", "Enables you to walk on water");
-        provider.add(
-            "item.pastel.ring_of_denser_steps.tooltip", "Grants you knockback resistance, but increases your gravity");
+        provider
+            .add(
+                "item.pastel.ring_of_denser_steps.tooltip",
+                "Grants you knockback resistance, but increases your gravity"
+            );
         provider.add("item.pastel.ring_of_denser_steps.tooltip2", "Enables you to sprint underwater");
         provider.add("item.pastel.ring_of_pursuit.tooltip", "Increases your Mining Speed");
         provider.add("item.pastel.sedatives.tooltip", "Medicine for frayed minds");
@@ -499,15 +605,24 @@ public class PastelItemLang {
         provider.add("item.pastel.tooltip.explosives.remaining_slots", "Modifiers used: %d/%d");
         provider.add("item.pastel.tooltip.loom_pattern_available", "✿ Usable as Banner Pattern");
         provider.add("item.pastel.topaz_glass_arrow.tooltip", "-impaling knockback-");
-        provider.add(
-            "item.pastel.total_capped_simple_pigment_energy_storage.tooltip", "§7Stores up to %d§7 Ink in total");
+        provider
+            .add(
+                "item.pastel.total_capped_simple_pigment_energy_storage.tooltip",
+                "§7Stores up to %d§7 Ink in total"
+            );
         provider.add("item.pastel.totem_pendant.tooltip", "§7One-time Protection from Death");
         provider.add("item.pastel.upgrade_efficiency.tooltip", "Slight chance for ingredients to not get used up");
         provider.add("item.pastel.upgrade_efficiency2.tooltip", "Noticeable chance for ingredients to not get used up");
-        provider.add(
-            "item.pastel.upgrade_experience.tooltip", "Slightly increases experience gain / decreases consumption");
-        provider.add(
-            "item.pastel.upgrade_experience2.tooltip", "Greatly increases experience gain / decreases consumption");
+        provider
+            .add(
+                "item.pastel.upgrade_experience.tooltip",
+                "Slightly increases experience gain / decreases consumption"
+            );
+        provider
+            .add(
+                "item.pastel.upgrade_experience2.tooltip",
+                "Greatly increases experience gain / decreases consumption"
+            );
         provider.add("item.pastel.upgrade_speed.tooltip", "Slightly increases crafting speed");
         provider.add("item.pastel.upgrade_speed2.tooltip", "Noticeably increases crafting speed");
         provider.add("item.pastel.upgrade_speed3.tooltip", "Greatly increases crafting speed");
@@ -537,25 +652,35 @@ public class PastelItemLang {
         provider.add("item.pastel.workstaff.message.3x3", "Selected 3x3 mining mode");
         provider.add("item.pastel.workstaff.message.5x5", "Selected 5x5 mining mode");
         provider.add("item.pastel.workstaff.message.disabled_projectiles", "Disabled Projectiles");
-        provider.add(
-            "item.pastel.workstaff.message.disabled_right_click_actions", "Disabled Tilling, Stripping and Flattening");
+        provider
+            .add(
+                "item.pastel.workstaff.message.disabled_right_click_actions",
+                "Disabled Tilling, Stripping and Flattening"
+            );
         provider.add("item.pastel.workstaff.message.enabled_projectiles", "Enabled Projectiles");
-        provider.add(
-            "item.pastel.workstaff.message.enabled_right_click_actions", "Enabled Tilling, Stripping and Flattening");
+        provider
+            .add(
+                "item.pastel.workstaff.message.enabled_right_click_actions",
+                "Enabled Tilling, Stripping and Flattening"
+            );
         provider.add("item.pastel.workstaff.message.fortune", "Switched Enchantment to Fortune");
         provider.add("item.pastel.workstaff.message.resonance", "Switched Enchantment to Resonance");
         provider.add("item.pastel.workstaff.message.silk_touch", "Switched Enchantment to Silk Touch");
-        provider.add(
-            "item.pastel.workstaff.message.would_result_in_conflicting_enchantments",
-            "Switching enchantments would result in a conflict"
-        );
+        provider
+            .add(
+                "item.pastel.workstaff.message.would_result_in_conflicting_enchantments",
+                "Switching enchantments would result in a conflict"
+            );
         provider.add("item.pastel.workstaff.message.already_has_the_enchantment", "Enchantment is already present");
         provider.add("item.pastel.workstaff.tooltip.mining_range", "%dx%d area mining active (§fWhite Ink§r)");
         provider.add("item.pastel.workstaff.tooltip.projectile", "Ranged mining active (§fWhite Ink§r)");
         provider.add("item.pastel.workstaff.tooltip.projectiles_disabled", "Ranged Mining disabled");
         provider.add("item.pastel.workstaff.tooltip.right_click_actions", "Able to Till, Strip and Flatten");
-        provider.add(
-            "item.pastel.workstaff.tooltip.right_click_actions_disabled", "Tilling, Stripping and Flattening disabled");
+        provider
+            .add(
+                "item.pastel.workstaff.tooltip.right_click_actions_disabled",
+                "Tilling, Stripping and Flattening disabled"
+            );
         provider.add("item.pastel.workstaff", "Workstaff");
 
         provider.add("item.pastel.midnight_aberration.cloaked", "The Perfect Compound");

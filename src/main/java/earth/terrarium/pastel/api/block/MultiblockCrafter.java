@@ -22,18 +22,25 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
 
     Vec3 RECIPE_STACK_VELOCITY = new Vec3(0.0, 0.3, 0.0);
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(
+        "unchecked"
+    )
     static <T extends Recipe<?>> @Nullable T getRecipeFromNbt(
-        @Nullable Level world, CompoundTag nbt, Class<T> recipeClass) {
+        @Nullable Level world,
+        CompoundTag nbt,
+        Class<T> recipeClass
+    ) {
         if (nbt.contains("CurrentRecipe")) {
             String recipeString = nbt.getString("CurrentRecipe");
             if (!recipeString.isEmpty()) {
-                var recipe = PastelCommon.getRecipeManager(world)
-                                         .flatMap(m -> m.byKey(ResourceLocation.parse(recipeString)));
+                var recipe = PastelCommon
+                    .getRecipeManager(world)
+                    .flatMap(m -> m.byKey(ResourceLocation.parse(recipeString)));
 
                 if (recipe.isPresent() && recipeClass.isInstance(recipe.get())) {
-                    return (T) recipe.get()
-                                     .value();
+                    return (T) recipe
+                        .get()
+                        .value();
                 }
             }
         }
@@ -44,16 +51,20 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
         if (nbt.contains("CurrentRecipe")) {
             String recipeString = nbt.getString("CurrentRecipe");
             if (!recipeString.isEmpty()) {
-                return PastelCommon.getRecipeManager(world)
-                                   .flatMap(m -> m.byKey(ResourceLocation.parse(recipeString)))
-                                   .orElse(null);
+                return PastelCommon
+                    .getRecipeManager(world)
+                    .flatMap(m -> m.byKey(ResourceLocation.parse(recipeString)))
+                    .orElse(null);
             }
         }
         return null;
     }
 
     static @Nullable <R extends RecipeInput, T extends Recipe<R>> RecipeHolder<T> getRecipeEntryFromNbt(
-        @Nullable Level world, CompoundTag nbt, Class<T> clazz) {
+        @Nullable Level world,
+        CompoundTag nbt,
+        Class<T> clazz
+    ) {
         var entry = getRecipeEntryFromNbt(world, nbt);
         return entry == null ? null : new RecipeHolder<>(entry.id(), clazz.cast(entry.value()));
     }
@@ -65,19 +76,41 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
     static void spawnExperience(Level world, BlockPos blockPos, int amount) {
         if (amount > 0) {
             ExperienceOrb experienceOrbEntity = new ExperienceOrb(
-                world, blockPos.getX() + 0.5, blockPos.getY() + 1, blockPos.getZ() + 0.5, amount);
+                world,
+                blockPos.getX() + 0.5,
+                blockPos.getY() + 1,
+                blockPos.getZ() + 0.5,
+                amount
+            );
             world.addFreshEntity(experienceOrbEntity);
         }
     }
 
     static void spawnItemStackAsEntitySplitViaMaxCount(
-        Level world, BlockPos blockPos, ItemStack itemStack, int amount, Vec3 velocity) {
+        Level world,
+        BlockPos blockPos,
+        ItemStack itemStack,
+        int amount,
+        Vec3 velocity
+    ) {
         spawnItemStackAsEntitySplitViaMaxCount(
-            world, Vec3.atCenterOf(blockPos), itemStack, amount, velocity, true, null);
+            world,
+            Vec3.atCenterOf(blockPos),
+            itemStack,
+            amount,
+            velocity,
+            true,
+            null
+        );
     }
 
     static void spawnItemStackAsEntitySplitViaMaxCount(
-        Level world, Vec3 pos, ItemStack itemStack, int amount, Vec3 velocity, boolean neverDespawn,
+        Level world,
+        Vec3 pos,
+        ItemStack itemStack,
+        int amount,
+        Vec3 velocity,
+        boolean neverDespawn,
         @Nullable Entity owner
     ) {
         while (amount > 0) {
@@ -102,7 +135,12 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
 
     static void spawnOutputAsItemEntity(Level world, BlockPos pos, ItemStack outputItemStack) {
         ItemEntity itemEntity = new ItemEntity(
-            world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, outputItemStack);
+            world,
+            pos.getX() + 0.5,
+            pos.getY() + 1,
+            pos.getZ() + 0.5,
+            outputItemStack
+        );
         itemEntity.push(0, 0.1, 0);
         itemEntity.setExtendedLifetime();
         world.addFreshEntity(itemEntity);

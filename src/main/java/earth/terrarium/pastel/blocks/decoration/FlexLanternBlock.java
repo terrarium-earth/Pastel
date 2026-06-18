@@ -23,15 +23,21 @@ public class FlexLanternBlock extends DiagonalBlock implements SimpleWaterlogged
     public static final MapCodec<FlexLanternBlock> CODEC = simpleCodec(FlexLanternBlock::new);
 
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
+
     public static final BooleanProperty TALL = BooleanProperty.create("tall");
+
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
     public static final VoxelShape SHAPE_STANDING_SMALL, SHAPE_STANDING_TALL, SHAPE_HANGING_SMALL, SHAPE_HANGING_TALL;
 
     public FlexLanternBlock(Properties settings) {
         super(settings);
-        registerDefaultState(defaultBlockState().setValue(HANGING, false)
-                                                .setValue(TALL, true)
-                                                .setValue(WATERLOGGED, false));
+        registerDefaultState(
+            defaultBlockState()
+                .setValue(HANGING, false)
+                .setValue(TALL, true)
+                .setValue(WATERLOGGED, false)
+        );
     }
 
     @Override
@@ -48,9 +54,10 @@ public class FlexLanternBlock extends DiagonalBlock implements SimpleWaterlogged
             if (player != null && player.isShiftKeyDown()) {
                 state = state.setValue(TALL, false);
             }
-            if (ctx.getLevel()
-                   .getFluidState(ctx.getClickedPos())
-                   .getType() == Fluids.WATER) {
+            if (ctx
+                .getLevel()
+                .getFluidState(ctx.getClickedPos())
+                .getType() == Fluids.WATER) {
                 state = state.setValue(WATERLOGGED, true);
             }
 

@@ -8,7 +8,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PotionWorkshopBrewingCategory extends PotionWorkshopCategory<PotionWorkshopBrewingDisplay> {
 
     @Override

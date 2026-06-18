@@ -35,15 +35,19 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 
     @Override
     public boolean canCraftWithBlockEntityTag(
-        CustomData spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
+        CustomData spawnerBlockEntityNbt,
+        ItemStack firstBowlStack,
+        ItemStack secondBowlStack
+    ) {
         Optional<EntityType<?>> entityType = PastelSkullBlock.getEntityTypeOfSkullStack(firstBowlStack);
         entityType = entityType.isEmpty() ? PastelSkullBlock.getEntityTypeOfSkullStack(secondBowlStack) : entityType;
 
         if (entityType.isEmpty()) {
             return false;
         }
-        if (entityType.get()
-                      .is(PastelEntityTypeTags.SPAWNER_MANIPULATION_BLACKLISTED)) {
+        if (entityType
+            .get()
+            .is(PastelEntityTypeTags.SPAWNER_MANIPULATION_BLACKLISTED)) {
             return false;
         }
         if (spawnerBlockEntityNbt == null) {
@@ -51,14 +55,16 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
         }
 
         if (spawnerBlockEntityNbt.contains("SpawnData")) {
-            CompoundTag spawnData = spawnerBlockEntityNbt.copyTag()
-                                                         .getCompound("SpawnData");
+            CompoundTag spawnData = spawnerBlockEntityNbt
+                .copyTag()
+                .getCompound("SpawnData");
             if (spawnData.contains("entity")) {
                 CompoundTag entity = spawnData.getCompound("entity");
                 if (entity.contains("id")) {
                     ResourceLocation entityTypeIdentifier = BuiltInRegistries.ENTITY_TYPE.getKey(entityType.get());
-                    return !entityTypeIdentifier.toString()
-                                                .equals(entity.getString("id"));
+                    return !entityTypeIdentifier
+                        .toString()
+                        .equals(entity.getString("id"));
                 }
             }
         }
@@ -72,7 +78,10 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 
     @Override
     public CompoundTag getSpawnerResultNbt(
-        CompoundTag spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
+        CompoundTag spawnerBlockEntityNbt,
+        ItemStack firstBowlStack,
+        ItemStack secondBowlStack
+    ) {
         Optional<EntityType<?>> entityType = PastelSkullBlock.getEntityTypeOfSkullStack(firstBowlStack);
         entityType = entityType.isEmpty() ? PastelSkullBlock.getEntityTypeOfSkullStack(secondBowlStack) : entityType;
 
@@ -83,17 +92,17 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
         ResourceLocation entityTypeIdentifier = BuiltInRegistries.ENTITY_TYPE.getKey(entityType.get());
 
         // Default spawner tag:
-		/* BlockEntityTag: {
-			MaxNearbyEntities: 6s,
-			RequiredPlayerRange: 16s,
-			SpawnCount: 4s,
-			SpawnData: {entity: {id: "minecraft:xxx"}},
-			MaxSpawnDelay: 800s,
-			SpawnRange: 4s,
-			MinSpawnDelay: 200s,
-			SpawnPotentials: []
-		   }
-		 */
+        /* BlockEntityTag: {
+        	MaxNearbyEntities: 6s,
+        	RequiredPlayerRange: 16s,
+        	SpawnCount: 4s,
+        	SpawnData: {entity: {id: "minecraft:xxx"}},
+        	MaxSpawnDelay: 800s,
+        	SpawnRange: 4s,
+        	MinSpawnDelay: 200s,
+        	SpawnPotentials: []
+           }
+         */
 
         CompoundTag idCompound = new CompoundTag();
         idCompound.putString("id", entityTypeIdentifier.toString());

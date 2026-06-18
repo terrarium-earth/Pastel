@@ -34,22 +34,31 @@ public class JeopardantKillCriterion extends SimpleCriterionTrigger<JeopardantKi
         MinMaxBounds.Ints health
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("killed_entity", ContextAwarePredicate.create())
-                                                                                                                                   .forGetter(Conditions::killedEntity),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("health", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::health)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("killed_entity", ContextAwarePredicate.create())
+                            .forGetter(Conditions::killedEntity),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("health", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::health)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean test(ServerPlayer player, LootContext killedEntityContext) {
-            return this.killedEntity.matches(killedEntityContext) && this.health.matches(
-                Math.round(player.getHealth()));
+            return this.killedEntity.matches(killedEntityContext) && this.health
+                .matches(
+                    Math.round(player.getHealth())
+                );
         }
     }
 

@@ -6,7 +6,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ImbriferDimensionEffects extends DimensionSpecialEffects {
 
     public ImbriferDimensionEffects() {

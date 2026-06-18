@@ -9,11 +9,19 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class HardcoreParticle extends SimpleAnimatedParticle {
 
     HardcoreParticle(
-        ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
         SpriteSet spriteProvider
     ) {
         super(world, x, y, z, spriteProvider, 1.25F);
@@ -27,13 +35,19 @@ public class HardcoreParticle extends SimpleAnimatedParticle {
         if (this.random.nextInt(4) == 0) {
             this.setColor(0.0F, 0.0F, 0.0F);
         } else {
-            this.setColor(
-                0.2F + this.random.nextFloat() * 0.5F, this.random.nextFloat() * 0.2F, this.random.nextFloat() * 0.2F);
+            this
+                .setColor(
+                    0.2F + this.random.nextFloat() * 0.5F,
+                    this.random.nextFloat() * 0.2F,
+                    this.random.nextFloat() * 0.2F
+                );
         }
 
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -43,8 +57,14 @@ public class HardcoreParticle extends SimpleAnimatedParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new HardcoreParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }

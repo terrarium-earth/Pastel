@@ -29,23 +29,46 @@ public class MoltenRodItem extends PastelFishingRodItem {
 
     @Override
     public void spawnBobber(
-        Player user, Level world, int luckBonus, int waitTimeReductionTicks, int exuberanceLevel, int bigCatchLevel,
-        int serendipityReelLevel, boolean inventoryInsertion, boolean shouldSmeltDrops
+        Player user,
+        Level world,
+        int luckBonus,
+        int waitTimeReductionTicks,
+        int exuberanceLevel,
+        int bigCatchLevel,
+        int serendipityReelLevel,
+        boolean inventoryInsertion,
+        boolean shouldSmeltDrops
     ) {
-        world.addFreshEntity(
-            new MoltenFishingBobberEntity(
-                user, world, luckBonus, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel, serendipityReelLevel,
-                inventoryInsertion
-            ));
+        world
+            .addFreshEntity(
+                new MoltenFishingBobberEntity(
+                    user,
+                    world,
+                    luckBonus,
+                    waitTimeReductionTicks,
+                    exuberanceLevel,
+                    bigCatchLevel,
+                    serendipityReelLevel,
+                    inventoryInsertion
+                )
+            );
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.molten_rod.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.molten_rod.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.molten_rod.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.molten_rod.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
 }

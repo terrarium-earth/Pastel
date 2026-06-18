@@ -61,12 +61,18 @@ public class JadeiteLotusBulbBlock extends BushBlock implements BonemealableBloc
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        world.registryAccess()
-             .registryOrThrow(Registries.CONFIGURED_FEATURE)
-             .get(PastelConfiguredFeatures.JADEITE_LOTUS)
-             .place(world, world.getChunkSource()
-                                .getGenerator(), random, pos
-             );
+        world
+            .registryAccess()
+            .registryOrThrow(Registries.CONFIGURED_FEATURE)
+            .get(PastelConfiguredFeatures.JADEITE_LOTUS)
+            .place(
+                world,
+                world
+                    .getChunkSource()
+                    .getGenerator(),
+                random,
+                pos
+            );
     }
 
 }

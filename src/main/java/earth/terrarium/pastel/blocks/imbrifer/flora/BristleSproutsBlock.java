@@ -50,8 +50,9 @@ public class BristleSproutsBlock extends BushBlock implements BonemealableBlock 
 
     @Override
     public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && !entity.getType()
-                                                     .is(PastelEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
+        if (entity instanceof LivingEntity && !entity
+            .getType()
+            .is(PastelEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
             if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
                 double difX = Math.abs(entity.getX() - entity.xOld);
                 double difZ = Math.abs(entity.getZ() - entity.zOld);
@@ -74,13 +75,18 @@ public class BristleSproutsBlock extends BushBlock implements BonemealableBlock 
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        world.registryAccess()
-             .registryOrThrow(Registries.CONFIGURED_FEATURE)
-             .get(PastelConfiguredFeatures.BRISTLE_SPROUT_PATCH)
-             .place(
-                 world, world.getChunkSource()
-                             .getGenerator(), random, pos
-             );
+        world
+            .registryAccess()
+            .registryOrThrow(Registries.CONFIGURED_FEATURE)
+            .get(PastelConfiguredFeatures.BRISTLE_SPROUT_PATCH)
+            .place(
+                world,
+                world
+                    .getChunkSource()
+                    .getGenerator(),
+                random,
+                pos
+            );
     }
 
     @Override
@@ -95,7 +101,12 @@ public class BristleSproutsBlock extends BushBlock implements BonemealableBlock 
 
     @Override
     public @Nullable PathType getAdjacentBlockPathType(
-        BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
+        BlockState state,
+        BlockGetter level,
+        BlockPos pos,
+        @Nullable Mob mob,
+        PathType originalType
+    ) {
         return PathType.DAMAGE_OTHER;
     }
 }

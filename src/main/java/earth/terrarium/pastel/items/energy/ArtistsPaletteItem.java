@@ -30,7 +30,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ArtistsPaletteItem extends PastelTrinketItem
-    implements InkStorageItem<TotalCappedElementalMixingInkStorage>, LoomPatternProvider, ExtendedItemBar {
+    implements
+    InkStorageItem<TotalCappedElementalMixingInkStorage>,
+    LoomPatternProvider,
+    ExtendedItemBar {
 
     private final long maxEnergyTotal;
 
@@ -59,11 +62,17 @@ public class ArtistsPaletteItem extends PastelTrinketItem
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.pigment_palette.tooltip.target")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.pigment_palette.tooltip.target")
+                    .withStyle(ChatFormatting.GRAY)
+            );
         getEnergyStorage(stack).addTooltip(tooltip);
         addBannerPatternProviderTooltip(tooltip);
     }
@@ -78,7 +87,6 @@ public class ArtistsPaletteItem extends PastelTrinketItem
         return 1;
     }
 
-
     @Override
     public ExtendedItemBar.BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
         var storage = getEnergyStorage(stack);
@@ -87,10 +95,13 @@ public class ArtistsPaletteItem extends PastelTrinketItem
         if (player == null || storage.isEmpty())
             return ExtendedItemBar.PASS;
 
-        var time = player.level()
-                         .getGameTime() % 864000;
+        var time = player
+            .level()
+            .getGameTime() % 864000;
 
-        for (InkColor inkColor : InkColors.elementals()) {
+        for (
+            InkColor inkColor : InkColors.elementals()
+        ) {
             if (storage.getEnergy(inkColor) > 0)
                 colors.add(inkColor);
         }
@@ -99,22 +110,42 @@ public class ArtistsPaletteItem extends PastelTrinketItem
         if (colors.size() == 1) {
             var color = colors.getFirst();
             return new ExtendedItemBar.BarSignature(
-                1, 13, 14, progress, 1, color.getColorInt() | 0xFF000000, 2, DEFAULT_BACKGROUND_COLOR);
+                1,
+                13,
+                14,
+                progress,
+                1,
+                color.getColorInt() | 0xFF000000,
+                2,
+                DEFAULT_BACKGROUND_COLOR
+            );
         }
 
         if (colors.isEmpty()) return new ExtendedItemBar.BarSignature(
-            1, 13, 14, progress, 1, 0xFF000000, 2, DEFAULT_BACKGROUND_COLOR);
+            1,
+            13,
+            14,
+            progress,
+            1,
+            0xFF000000,
+            2,
+            DEFAULT_BACKGROUND_COLOR
+        );
 
-        var delta = Minecraft.getInstance()
-                             .getTimer()
-                             .getGameTimeDeltaPartialTick(false);
+        var delta = Minecraft
+            .getInstance()
+            .getTimer()
+            .getGameTimeDeltaPartialTick(false);
         var curColor = colors.get((int) (time % (30L * colors.size()) / 30));
         var nextColor = colors.get((int) ((time % (30L * colors.size()) / 30 + 1) % colors.size()));
 
-
         var blendFactor = (((float) time + delta) % 30) / 30F;
-        var blendedColor = ColorHelper.interpolate(
-            curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
+        var blendedColor = ColorHelper
+            .interpolate(
+                curColor.getTextColorVec(),
+                nextColor.getTextColorVec(),
+                blendFactor
+            );
 
         return new ExtendedItemBar.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
     }

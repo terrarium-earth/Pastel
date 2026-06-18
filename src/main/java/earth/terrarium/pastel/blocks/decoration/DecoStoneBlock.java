@@ -29,7 +29,9 @@ public class DecoStoneBlock extends Block {
     public static final MapCodec<DecoStoneBlock> CODEC = simpleCodec(DecoStoneBlock::new);
 
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+
     protected static final VoxelShape TOP_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 14.0D, 12.0D);
+
     protected static final VoxelShape BOTTOM_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 
     public DecoStoneBlock(Properties settings) {
@@ -60,38 +62,59 @@ public class DecoStoneBlock extends Block {
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
-        if (direction.getAxis() == Direction.Axis.Y &&
-            doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!neighborState.is(this) ||
-                                                                                        neighborState.getValue(HALF) ==
-                                                                                        doubleBlockHalf)) {
+        if (direction
+            .getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!neighborState
+                .is(this) || neighborState.getValue(HALF) == doubleBlockHalf)) {
             return Blocks.AIR.defaultBlockState();
         } else {
-            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canSurvive(
-                world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(
-                state, direction, neighborState, world, pos, neighborPos);
+            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state
+                .canSurvive(
+                    world,
+                    pos
+                )
+                    ? Blocks.AIR.defaultBlockState()
+                    : super.updateShape(
+                        state,
+                        direction,
+                        neighborState,
+                        world,
+                        pos,
+                        neighborPos
+                    );
         }
     }
 
     @Override
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    @Nullable public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockPos blockPos = ctx.getClickedPos();
         Level world = ctx.getLevel();
-        return blockPos.getY() < world.getMaxBuildHeight() - 1 && world.getBlockState(blockPos.above())
-                                                                       .canBeReplaced(ctx) ? super.getStateForPlacement(
-            ctx) : null;
+        return blockPos.getY() < world.getMaxBuildHeight() - 1 && world
+            .getBlockState(blockPos.above())
+            .canBeReplaced(ctx)
+                ? super.getStateForPlacement(
+                    ctx
+                )
+                : null;
     }
 
     @Override
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        world.setBlock(
-            pos.above(), this.defaultBlockState()
-                             .setValue(HALF, DoubleBlockHalf.UPPER), 3
-        );
+        world
+            .setBlock(
+                pos.above(),
+                this
+                    .defaultBlockState()
+                    .setValue(HALF, DoubleBlockHalf.UPPER),
+                3
+            );
     }
 
     @Override
@@ -119,7 +142,11 @@ public class DecoStoneBlock extends Block {
 
     @Override
     public void playerDestroy(
-        Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity,
+        Level world,
+        Player player,
+        BlockPos pos,
+        BlockState state,
+        @Nullable BlockEntity blockEntity,
         ItemStack stack
     ) {
         super.playerDestroy(world, player, pos, Blocks.AIR.defaultBlockState(), blockEntity, stack);
@@ -132,10 +159,14 @@ public class DecoStoneBlock extends Block {
 
     @Override
     public long getSeed(BlockState state, BlockPos pos) {
-        return Mth.getSeed(
-            pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1)
-                           .getY(), pos.getZ()
-        );
+        return Mth
+            .getSeed(
+                pos.getX(),
+                pos
+                    .below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1)
+                    .getY(),
+                pos.getZ()
+            );
     }
 
 }

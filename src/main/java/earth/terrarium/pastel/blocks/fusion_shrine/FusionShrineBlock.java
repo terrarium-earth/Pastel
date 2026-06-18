@@ -45,20 +45,29 @@ import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("UnstableApiUsage")
+@SuppressWarnings(
+    "UnstableApiUsage"
+)
 public class FusionShrineBlock extends InWorldInteractionBlock {
 
     public static final MapCodec<FusionShrineBlock> CODEC = simpleCodec(FusionShrineBlock::new);
 
-    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate(
-        "collect_all_basic_pigments_besides_brown");
+    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon
+        .locate(
+            "collect_all_basic_pigments_besides_brown"
+        );
+
     public static final IntegerProperty LIGHT_LEVEL = IntegerProperty.create("light_level", 0, 15);
+
     protected static final VoxelShape SHAPE;
 
     public FusionShrineBlock(Properties settings) {
         super(settings);
-        registerDefaultState(getStateDefinition().any()
-                                                 .setValue(LIGHT_LEVEL, 0));
+        registerDefaultState(
+            getStateDefinition()
+                .any()
+                .setValue(LIGHT_LEVEL, 0)
+        );
 
     }
 
@@ -76,16 +85,25 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
     }
 
     public static boolean verifySkyAccess(ServerLevel world, BlockPos shrinePos) {
-        if (world.getBlockState(shrinePos.above())
-                 .isRedstoneConductor(world, shrinePos.above())) {
+        if (world
+            .getBlockState(shrinePos.above())
+            .isRedstoneConductor(world, shrinePos.above())) {
             world.playSound(null, shrinePos, PastelSounds.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                world, shrinePos.above()
-                                .getCenter(), ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(
-                    0.1, 0.1,
-                    0.1
-                )
-            );
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    world,
+                    shrinePos
+                        .above()
+                        .getCenter(),
+                    ColoredSparkleRisingParticleEffect.RED,
+                    8,
+                    Vec3.ZERO,
+                    new Vec3(
+                        0.1,
+                        0.1,
+                        0.1
+                    )
+                );
             return false;
         }
 
@@ -94,7 +112,11 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
         // we search down until we find the shrine itself or a non-opaque block
         int topY = world.getHeight(Heightmap.Types.WORLD_SURFACE, shrinePos.getX(), shrinePos.getZ());
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(shrinePos.getX(), topY, shrinePos.getZ());
-        for (int y = topY; y > shrinePos.getY(); y--) {
+        for (
+            int y = topY;
+            y > shrinePos.getY();
+            y--
+        ) {
             mutablePos.setY(y - 1);
             BlockState posState = world.getBlockState(mutablePos);
             if (posState.getLightBlock(world, mutablePos) > 0) {
@@ -106,14 +128,23 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
             return true;
         }
 
-        PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-            world, new Vec3(shrinePos.getX() + 0.5, shrinePos.getY() + 1, shrinePos.getZ() + 0.5),
-            ColoredSparkleRisingParticleEffect.RED, 1, new Vec3(0, 0.5, 0)
-        );
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-            world, new Vec3(shrinePos.getX() + 0.5, topY - 0.5, shrinePos.getZ() + 0.5),
-            ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(0.1, 0.1, 0.1)
-        );
+        PlayParticleWithExactVelocityPayload
+            .playParticleWithExactVelocity(
+                world,
+                new Vec3(shrinePos.getX() + 0.5, shrinePos.getY() + 1, shrinePos.getZ() + 0.5),
+                ColoredSparkleRisingParticleEffect.RED,
+                1,
+                new Vec3(0, 0.5, 0)
+            );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                world,
+                new Vec3(shrinePos.getX() + 0.5, topY - 0.5, shrinePos.getZ() + 0.5),
+                ColoredSparkleRisingParticleEffect.RED,
+                8,
+                Vec3.ZERO,
+                new Vec3(0.1, 0.1, 0.1)
+            );
         world.playSound(null, shrinePos, PastelSounds.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
         return false;
     }
@@ -127,8 +158,13 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
                 Support.mbCriterion(sl, blockPos, multiblock);
         } else {
             if (level.isClientSide) {
-                ModonomiconHelper.renderMultiblock(
-                    multiblock, PastelMultiblocks.FUSION_SHRINE_TEXT, blockPos.below(2), Rotation.NONE);
+                ModonomiconHelper
+                    .renderMultiblock(
+                        multiblock,
+                        PastelMultiblocks.FUSION_SHRINE_TEXT,
+                        blockPos.below(2),
+                        Rotation.NONE
+                    );
             } else if (level.getBlockEntity(blockPos) instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
                 fusionShrineBlockEntity.scatterContents(level);
             }
@@ -142,8 +178,7 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
         builder.add(LIGHT_LEVEL);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new FusionShrineBlockEntity(pos, state);
     }
@@ -155,11 +190,18 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 
             int i = 0;
             float f = 0.0f;
-            for (int j = 0; j < inventory.getSlots(); ++j) {
+            for (
+                int j = 0;
+                j < inventory.getSlots();
+                ++j
+            ) {
                 ItemStack itemStack = blockEntity.getItem(j);
                 if (itemStack.isEmpty()) continue;
-                f += (float) itemStack.getCount() / (float) Math.min(
-                    blockEntity.getMaxStackSize(), itemStack.getMaxStackSize());
+                f += (float) itemStack.getCount() / (float) Math
+                    .min(
+                        blockEntity.getMaxStackSize(),
+                        itemStack.getMaxStackSize()
+                    );
                 ++i;
             }
 
@@ -206,7 +248,12 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (world.isClientSide) {
@@ -218,20 +265,32 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
             // if the structure is valid the player can put / retrieve items and fluids into the shrine
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof FusionShrineBlockEntity shrine && verifyStructure(
-                world, pos, (ServerPlayer) player)) {
+                world,
+                pos,
+                (ServerPlayer) player
+            )) {
                 shrine.setOwner(player);
 
                 if (FluidUtil.interactWithFluidHandler(player, hand, shrine.getTank())) {
                     shrine.inventoryChanged = true;
-                    shrine.setLightForFluid(
-                        pos, shrine.getTank()
-                                   .getFluid()
-                    );
+                    shrine
+                        .setLightForFluid(
+                            pos,
+                            shrine
+                                .getTank()
+                                .getFluid()
+                        );
                     shrine.updateInClientWorld();
                     return ItemInteractionResult.CONSUME;
                 }
                 if ((player.isShiftKeyDown() || handStack.isEmpty()) && retrieveLastStack(
-                    world, pos, player, hand, handStack, shrine)) {
+                    world,
+                    pos,
+                    player,
+                    hand,
+                    handStack,
+                    shrine
+                )) {
                     shrine.inventoryChanged = true;
                     return ItemInteractionResult.CONSUME;
                 }
@@ -250,13 +309,18 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
         return SHAPE;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return createTickerHelper(
-            type, PastelBlockEntities.FUSION_SHRINE.get(), world.isClientSide ? FusionShrineBlockEntity::clientTick
-                                                                              : FusionShrineBlockEntity::serverTick
+            type,
+            PastelBlockEntities.FUSION_SHRINE.get(),
+            world.isClientSide
+                ? FusionShrineBlockEntity::clientTick
+                : FusionShrineBlockEntity::serverTick
         );
     }
 

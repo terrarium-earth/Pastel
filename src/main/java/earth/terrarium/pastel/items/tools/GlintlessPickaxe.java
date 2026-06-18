@@ -15,9 +15,12 @@ public class GlintlessPickaxe extends PastelPickaxeItem {
     public boolean isFoil(ItemStack stack) {
         var defaults = getDefaultEnchantments();
         var comp = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
-        for (var entry : comp.entrySet()) {
-            var key = entry.getKey()
-                           .unwrapKey();
+        for (
+            var entry : comp.entrySet()
+        ) {
+            var key = entry
+                .getKey()
+                .unwrapKey();
             if (key.isEmpty()) continue;
             if (entry.getIntValue() > defaults.getOrDefault(key.get(), 0))
                 return true;

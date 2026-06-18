@@ -15,36 +15,53 @@ import java.util.List;
 
 public abstract class RecipeScaling {
 
-    public static final Codec<ScalingData> CODEC = RecordCodecBuilder.<ScalingData>create(i -> i.group(
-                                                                                                    PastelRegistries.RECIPE_SCALING.byNameCodec()
-                                                                                                                                   .fieldOf("type")
-                                                                                                                                   .forGetter(d -> d.type),
-                                                                                                    Codec.INT.optionalFieldOf("start", 0)
-                                                                                                             .forGetter(d -> d.start),
-                                                                                                    Codec.intRange(0,
-                                                                                                                   Integer.MAX_VALUE)
-                                                                                                         .optionalFieldOf("scaling_value", 0)
-                                                                                                         .forGetter(d -> d.scalingValue),
-                                                                                                    Codec.doubleRange(0.0, Double.MAX_VALUE)
-                                                                                                         .optionalFieldOf("scaling_factor", 1.0)
-                                                                                                         .forGetter(d -> d.scalingFactor),
-                                                                                                    Codec.INT.listOf(0, 255)
-                                                                                                             .optionalFieldOf("indexes", Collections.emptyList())
-                                                                                                             .forGetter(d -> d.indexes)
-                                                                                                )
-                                                                                                .apply(
-                                                                                                    i,
-                                                                                                    ScalingData::new
-                                                                                                ));
+    public static final Codec<ScalingData> CODEC = RecordCodecBuilder
+        .<ScalingData>create(
+            i -> i
+                .group(
+                    PastelRegistries.RECIPE_SCALING
+                        .byNameCodec()
+                        .fieldOf("type")
+                        .forGetter(d -> d.type),
+                    Codec.INT
+                        .optionalFieldOf("start", 0)
+                        .forGetter(d -> d.start),
+                    Codec
+                        .intRange(
+                            0,
+                            Integer.MAX_VALUE
+                        )
+                        .optionalFieldOf("scaling_value", 0)
+                        .forGetter(d -> d.scalingValue),
+                    Codec
+                        .doubleRange(0.0, Double.MAX_VALUE)
+                        .optionalFieldOf("scaling_factor", 1.0)
+                        .forGetter(d -> d.scalingFactor),
+                    Codec.INT
+                        .listOf(0, 255)
+                        .optionalFieldOf("indexes", Collections.emptyList())
+                        .forGetter(d -> d.indexes)
+                )
+                .apply(
+                    i,
+                    ScalingData::new
+                )
+        );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, ScalingData> STREAM_CODEC = StreamCodec.composite(
-        ByteBufCodecs.registry(PastelRegistryKeys.RECIPE_SCALING), d -> d.type,
-        ByteBufCodecs.VAR_INT, d -> d.start,
-        ByteBufCodecs.VAR_INT, d -> d.scalingValue,
-        ByteBufCodecs.DOUBLE, d -> d.scalingFactor,
-        ByteBufCodecs.VAR_INT.apply(ByteBufCodecs.list()), d -> d.indexes,
-        ScalingData::new
-    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, ScalingData> STREAM_CODEC = StreamCodec
+        .composite(
+            ByteBufCodecs.registry(PastelRegistryKeys.RECIPE_SCALING),
+            d -> d.type,
+            ByteBufCodecs.VAR_INT,
+            d -> d.start,
+            ByteBufCodecs.VAR_INT,
+            d -> d.scalingValue,
+            ByteBufCodecs.DOUBLE,
+            d -> d.scalingFactor,
+            ByteBufCodecs.VAR_INT.apply(ByteBufCodecs.list()),
+            d -> d.indexes,
+            ScalingData::new
+        );
 
     public static final RecipeScaling LINEAR = new RecipeScaling(PastelCommon.locate("linear")) {
         @Override
@@ -88,7 +105,11 @@ public abstract class RecipeScaling {
     }
 
     public record ScalingData(
-        RecipeScaling type, int start, int scalingValue, double scalingFactor, List<Integer> indexes
+        RecipeScaling type,
+        int start,
+        int scalingValue,
+        double scalingFactor,
+        List<Integer> indexes
     ) {
         public int apply(double scaling) {
             return type.getInputCount(scaling, this);

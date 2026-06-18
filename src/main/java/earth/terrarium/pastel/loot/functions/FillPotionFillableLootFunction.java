@@ -25,59 +25,102 @@ import java.util.List;
 
 public class FillPotionFillableLootFunction extends LootItemConditionalFunction {
 
-    public static final MapCodec<FillPotionFillableLootFunction> CODEC = RecordCodecBuilder.mapCodec(i -> commonFields(
-        i).and(
-              InkPoweredPotionTemplate.CODEC.forGetter(c -> c.template)
-          )
-          .apply(i, FillPotionFillableLootFunction::new));
+    public static final MapCodec<FillPotionFillableLootFunction> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> commonFields(
+                i
+            )
+                .and(
+                    InkPoweredPotionTemplate.CODEC.forGetter(c -> c.template)
+                )
+                .apply(i, FillPotionFillableLootFunction::new)
+        );
 
     public record InkPoweredPotionTemplate(
-        boolean ambient, boolean showParticles, NumberProvider duration,
-        List<Holder<MobEffect>> statusEffects, int color, NumberProvider amplifier,
-        List<InkColor> inkColors, NumberProvider inkCost, boolean unidentifiable, boolean incurable
+        boolean ambient,
+        boolean showParticles,
+        NumberProvider duration,
+        List<Holder<MobEffect>> statusEffects,
+        int color,
+        NumberProvider amplifier,
+        List<InkColor> inkColors,
+        NumberProvider inkCost,
+        boolean unidentifiable,
+        boolean incurable
     ) {
 
-        public static final MapCodec<InkPoweredPotionTemplate> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                             Codec.BOOL.optionalFieldOf("ambient", false)
-                                                                                                                       .forGetter(InkPoweredPotionTemplate::ambient),
-                                                                                                             Codec.BOOL.optionalFieldOf("show_particles", false)
-                                                                                                                       .forGetter(InkPoweredPotionTemplate::showParticles),
-                                                                                                             NumberProviders.CODEC.fieldOf("duration")
-                                                                                                                                  .forGetter(InkPoweredPotionTemplate::duration),
-                                                                                                             CodecHelper.singleOrList(BuiltInRegistries.MOB_EFFECT.holderByNameCodec())
-                                                                                                                        .fieldOf("status_effect")
-                                                                                                                        .forGetter(InkPoweredPotionTemplate::statusEffects),
-                                                                                                             Codec.INT.optionalFieldOf("color", -1)
-                                                                                                                      .forGetter(InkPoweredPotionTemplate::color),
-                                                                                                             NumberProviders.CODEC.fieldOf("amplifier")
-                                                                                                                                  .forGetter(InkPoweredPotionTemplate::amplifier),
-                                                                                                             CodecHelper.singleOrList(InkColor.CODEC)
-                                                                                                                        .fieldOf("ink_color")
-                                                                                                                        .forGetter(InkPoweredPotionTemplate::inkColors),
-                                                                                                             NumberProviders.CODEC.fieldOf("ink_cost")
-                                                                                                                                  .forGetter(InkPoweredPotionTemplate::inkCost),
-                                                                                                             Codec.BOOL.optionalFieldOf("unidentifiable", false)
-                                                                                                                       .forGetter(InkPoweredPotionTemplate::unidentifiable),
-                                                                                                             Codec.BOOL.optionalFieldOf("incurable", false)
-                                                                                                                       .forGetter(InkPoweredPotionTemplate::incurable)
-                                                                                                         )
-                                                                                                         .apply(
-                                                                                                             i,
-                                                                                                             InkPoweredPotionTemplate::new
-                                                                                                         ));
+        public static final MapCodec<InkPoweredPotionTemplate> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.BOOL
+                            .optionalFieldOf("ambient", false)
+                            .forGetter(InkPoweredPotionTemplate::ambient),
+                        Codec.BOOL
+                            .optionalFieldOf("show_particles", false)
+                            .forGetter(InkPoweredPotionTemplate::showParticles),
+                        NumberProviders.CODEC
+                            .fieldOf("duration")
+                            .forGetter(InkPoweredPotionTemplate::duration),
+                        CodecHelper
+                            .singleOrList(BuiltInRegistries.MOB_EFFECT.holderByNameCodec())
+                            .fieldOf("status_effect")
+                            .forGetter(InkPoweredPotionTemplate::statusEffects),
+                        Codec.INT
+                            .optionalFieldOf("color", -1)
+                            .forGetter(InkPoweredPotionTemplate::color),
+                        NumberProviders.CODEC
+                            .fieldOf("amplifier")
+                            .forGetter(InkPoweredPotionTemplate::amplifier),
+                        CodecHelper
+                            .singleOrList(InkColor.CODEC)
+                            .fieldOf("ink_color")
+                            .forGetter(InkPoweredPotionTemplate::inkColors),
+                        NumberProviders.CODEC
+                            .fieldOf("ink_cost")
+                            .forGetter(InkPoweredPotionTemplate::inkCost),
+                        Codec.BOOL
+                            .optionalFieldOf("unidentifiable", false)
+                            .forGetter(InkPoweredPotionTemplate::unidentifiable),
+                        Codec.BOOL
+                            .optionalFieldOf("incurable", false)
+                            .forGetter(InkPoweredPotionTemplate::incurable)
+                    )
+                    .apply(
+                        i,
+                        InkPoweredPotionTemplate::new
+                    )
+            );
 
         public InkPoweredStatusEffectInstance get(LootContext context) {
-            Holder<MobEffect> statusEffect = this.statusEffects.get(context.getRandom()
-                                                                           .nextInt(this.statusEffects.size()));
+            Holder<MobEffect> statusEffect = this.statusEffects
+                .get(
+                    context
+                        .getRandom()
+                        .nextInt(this.statusEffects.size())
+                );
             MobEffectInstance statusEffectInstance = new MobEffectInstance(
-                statusEffect, this.duration.getInt(context), this.amplifier.getInt(context), ambient, showParticles,
+                statusEffect,
+                this.duration.getInt(context),
+                this.amplifier.getInt(context),
+                ambient,
+                showParticles,
                 true
             );
-            InkColor inkColor = this.inkColors.get(context.getRandom()
-                                                          .nextInt(this.inkColors.size()));
+            InkColor inkColor = this.inkColors
+                .get(
+                    context
+                        .getRandom()
+                        .nextInt(this.inkColors.size())
+                );
             int cost = this.inkCost.getInt(context);
             return new InkPoweredStatusEffectInstance(
-                statusEffectInstance, new InkCost(inkColor, cost), this.color, this.unidentifiable, this.incurable);
+                statusEffectInstance,
+                new InkCost(inkColor, cost),
+                this.color,
+                this.unidentifiable,
+                this.incurable
+            );
         }
 
     }

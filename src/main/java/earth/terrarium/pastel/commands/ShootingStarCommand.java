@@ -17,33 +17,50 @@ import java.util.Collection;
 public class ShootingStarCommand {
 
     public static void register(LiteralCommandNode<CommandSourceStack> root) {
-        LiteralCommandNode<CommandSourceStack> spawnShootingStar = Commands.literal("spawn_shooting_star")
-                                                                           .requires(
-                                                                               (source) -> source.hasPermission(2))
-                                                                           .build();
-        ArgumentCommandNode<CommandSourceStack, EntitySelector> targets = Commands.argument(
-                                                                                      "targets",
-                                                                                      EntityArgument.players())
-                                                                                  .executes((context) -> execute(
-                                                                                      context.getSource(),
-                                                                                      EntityArgument.getPlayers(
-                                                                                          context,
-                                                                                          "targets"
-                                                                                      ), 1
-                                                                                  ))
-                                                                                  .build();
-        ArgumentCommandNode<CommandSourceStack, Integer> targetsAmount = Commands.argument(
-                                                                                     "amount",
-                                                                                     IntegerArgumentType.integer(1))
-                                                                                 .executes((context) -> execute(
-                                                                                     context.getSource(),
-                                                                                     EntityArgument.getPlayers(
-                                                                                         context,
-                                                                                         "targets"
-                                                                                     ), IntegerArgumentType.getInteger(
-                                                                                         context, "amount")
-                                                                                 ))
-                                                                                 .build();
+        LiteralCommandNode<CommandSourceStack> spawnShootingStar = Commands
+            .literal("spawn_shooting_star")
+            .requires(
+                (source) -> source.hasPermission(2)
+            )
+            .build();
+        ArgumentCommandNode<CommandSourceStack, EntitySelector> targets = Commands
+            .argument(
+                "targets",
+                EntityArgument.players()
+            )
+            .executes(
+                (context) -> execute(
+                    context.getSource(),
+                    EntityArgument
+                        .getPlayers(
+                            context,
+                            "targets"
+                        ),
+                    1
+                )
+            )
+            .build();
+        ArgumentCommandNode<CommandSourceStack, Integer> targetsAmount = Commands
+            .argument(
+                "amount",
+                IntegerArgumentType.integer(1)
+            )
+            .executes(
+                (context) -> execute(
+                    context.getSource(),
+                    EntityArgument
+                        .getPlayers(
+                            context,
+                            "targets"
+                        ),
+                    IntegerArgumentType
+                        .getInteger(
+                            context,
+                            "amount"
+                        )
+                )
+            )
+            .build();
 
         targets.addChild(targetsAmount);
         spawnShootingStar.addChild(targets);
@@ -51,8 +68,14 @@ public class ShootingStarCommand {
     }
 
     private static int execute(CommandSourceStack source, Collection<? extends ServerPlayer> targets, int amount) {
-        for (ServerPlayer entity : targets) {
-            for (int i = 0; i < amount; i++) {
+        for (
+            ServerPlayer entity : targets
+        ) {
+            for (
+                int i = 0;
+                i < amount;
+                i++
+            ) {
                 ShootingStarSpawner.spawnShootingStar((ServerLevel) entity.level(), entity);
             }
         }

@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface CreativeOnlyItem {
 
-    Component DESCRIPTION = Component.translatable("item.pastel.creative_only")
-                                     .withStyle(ChatFormatting.DARK_PURPLE);
+    Component DESCRIPTION = Component
+        .translatable("item.pastel.creative_only")
+        .withStyle(ChatFormatting.DARK_PURPLE);
 
     static void appendTooltip(List<Component> tooltip) {
         tooltip.add(DESCRIPTION);

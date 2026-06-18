@@ -11,7 +11,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 // Similar to FAPIs DynamicItemRenderer, except with a little more information.
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 @FunctionalInterface
 public interface DynamicItemRenderer {
 
@@ -30,8 +32,14 @@ public interface DynamicItemRenderer {
      * @param overlay         the overlay UV passed to {@link com.mojang.blaze3d.vertex.VertexConsumer#setOverlay(int)}
      */
     void render(
-        ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices,
-        MultiBufferSource vertexConsumers, int light, int overlay
+        ItemRenderer renderer,
+        ItemStack stack,
+        ItemDisplayContext mode,
+        boolean leftHanded,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay
     );
 
 }

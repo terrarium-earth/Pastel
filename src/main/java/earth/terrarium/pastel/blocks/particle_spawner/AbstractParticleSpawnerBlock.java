@@ -36,23 +36,34 @@ public abstract class AbstractParticleSpawnerBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new ParticleSpawnerBlockEntity(pos, state);
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? createTickerHelper(
-            type, PastelBlockEntities.PARTICLE_SPAWNER.get(), ParticleSpawnerBlockEntity::clientTick) : null;
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? createTickerHelper(
+                type,
+                PastelBlockEntities.PARTICLE_SPAWNER.get(),
+                ParticleSpawnerBlockEntity::clientTick
+            )
+            : null;
     }
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {

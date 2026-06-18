@@ -14,7 +14,9 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class MoonstoneStrikeParticle extends NoRenderParticle {
 
     private final static int MAX_AGE = 40;
@@ -33,12 +35,26 @@ public class MoonstoneStrikeParticle extends NoRenderParticle {
         var velocity = alt ? 0.5F : 0.375F;
         var rotation = Math.PI / 20F * age;
         var nextRotation = Math.PI / 20F * (age + 1);
-        ParticleHelper.playParticleWithRotation(
-            this.level, new Vec3(this.x, this.y, this.z), rotation, rotation, particle, VectorPattern.EIGHT, velocity);
-        ParticleHelper.playParticleWithRotation(
-            this.level, new Vec3(this.x, this.y, this.z), nextRotation, -nextRotation, particle, VectorPattern.EIGHT,
-            velocity
-        );
+        ParticleHelper
+            .playParticleWithRotation(
+                this.level,
+                new Vec3(this.x, this.y, this.z),
+                rotation,
+                rotation,
+                particle,
+                VectorPattern.EIGHT,
+                velocity
+            );
+        ParticleHelper
+            .playParticleWithRotation(
+                this.level,
+                new Vec3(this.x, this.y, this.z),
+                nextRotation,
+                -nextRotation,
+                particle,
+                VectorPattern.EIGHT,
+                velocity
+            );
 
         this.age += 2;
         if (this.age == MAX_AGE) {
@@ -46,15 +62,23 @@ public class MoonstoneStrikeParticle extends NoRenderParticle {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         public Factory() {
         }
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new MoonstoneStrikeParticle(clientWorld, d, e, f);
         }

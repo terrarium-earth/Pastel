@@ -7,9 +7,9 @@ public class PastelCuriosLang {
         provider.add("curios.identifier.pin", "Pin");
         provider.add("curios.identifier.pigment_palette", "Palette");
         provider.add("curios.modifiers.feet", "When worn as footwear:");
-        provider.add("curios.modifiers.not_crouching","When not crouching:");
-        provider.add("curios.modifiers.crouching","When crouching:");
-        provider.add("curios.modifiers.seven_league_boots_step_height","+%.2f Step Height");
-        provider.add("curios.modifiers.double_magnitude"," [+%.2f]");
+        provider.add("curios.modifiers.not_crouching", "When not crouching:");
+        provider.add("curios.modifiers.crouching", "When crouching:");
+        provider.add("curios.modifiers.seven_league_boots_step_height", "+%.2f Step Height");
+        provider.add("curios.modifiers.double_magnitude", " [+%.2f]");
     }
 }

@@ -10,10 +10,11 @@ import net.minecraft.world.level.gameevent.GameEvent;
 public class EventHelper {
 
     public static DyeColor getRedstoneEventDyeColor(GameEvent.ListenerInfo message) {
-        return message.context()
-                      .affectedState()
-                      .getOptionalValue(RedstoneTransceiverBlock.CHANNEL)
-                      .orElse(null);
+        return message
+            .context()
+            .affectedState()
+            .getOptionalValue(RedstoneTransceiverBlock.CHANNEL)
+            .orElse(null);
     }
 
     public static int getRedstoneEventPower(Level world, GameEvent.ListenerInfo message) {

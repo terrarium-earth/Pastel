@@ -11,11 +11,20 @@ import net.minecraft.util.RandomSource;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class VoidFogParticle extends TextureSheetParticle {
 
     protected VoidFogParticle(
-        ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        ClientLevel clientWorld,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ
+    ) {
         super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
         this.hasPhysics = true;
 
@@ -47,13 +56,26 @@ public class VoidFogParticle extends TextureSheetParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType parameters, ClientLevel clientWorld, double x, double y, double z, double velocityX,
-            double velocityY, double velocityZ
+            SimpleParticleType parameters,
+            ClientLevel clientWorld,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             RandomSource random = clientWorld.getRandom();
 
             VoidFogParticle particle = new VoidFogParticle(
-                clientWorld, x, y, z, 0, (random.nextDouble() - 0.5) * 0.05, 0);
+                clientWorld,
+                x,
+                y,
+                z,
+                0,
+                (random.nextDouble() - 0.5) * 0.05,
+                0
+            );
             particle.pickSprite(this.spriteProvider);
             return particle;
         }

@@ -47,8 +47,10 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 
     public static void setOwner(ItemStack itemStack, Player giver) {
         var profile = new GameProfile(
-            giver.getUUID(), giver.getName()
-                                  .getString()
+            giver.getUUID(),
+            giver
+                .getName()
+                .getString()
         );
         itemStack.set(DataComponents.PROFILE, new ResolvableProfile(profile));
     }
@@ -58,8 +60,9 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
     }
 
     public static boolean isEmpty(ItemStack itemStack) {
-        return itemStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)
-                        .isEmpty();
+        return itemStack
+            .getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)
+            .isEmpty();
     }
 
     public static boolean isWrapped(ItemStack itemStack) {
@@ -71,18 +74,34 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
     }
 
     public static void wrap(
-        ItemStack itemStack, PresentBlock.WrappingPaper wrappingPaper, Map<Integer, Integer> colors) {
-        itemStack.set(
-            PastelDataComponentTypes.WRAPPED_PRESENT, new WrappedPresentComponent(true, wrappingPaper, colors));
+        ItemStack itemStack,
+        PresentBlock.WrappingPaper wrappingPaper,
+        Map<Integer, Integer> colors
+    ) {
+        itemStack
+            .set(
+                PastelDataComponentTypes.WRAPPED_PRESENT,
+                new WrappedPresentComponent(true, wrappingPaper, colors)
+            );
     }
 
     @Override
     public boolean overrideOtherStackedOnMe(
-        ItemStack stack, ItemStack otherStack, Slot slot, ClickAction clickType, Player player,
+        ItemStack stack,
+        ItemStack otherStack,
+        Slot slot,
+        ClickAction clickType,
+        Player player,
         SlotAccess cursorStackReference
     ) {
         return !isCraftingInventory(slot) && super.overrideOtherStackedOnMe(
-            stack, otherStack, slot, clickType, player, cursorStackReference);
+            stack,
+            otherStack,
+            slot,
+            clickType,
+            player,
+            cursorStackReference
+        );
     }
 
     @Override
@@ -115,8 +134,9 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
     }
 
     public static Stream<ItemStack> getBundledStacks(ItemStack stack) {
-        return stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)
-                    .itemCopyStream();
+        return stack
+            .getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)
+            .itemCopyStream();
     }
 
     @Override
@@ -128,7 +148,11 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
         // TODO: Use BundleTooltipComponent and such instead
         var list = NonNullList.withSize(MAX_STORAGE_STACKS, ItemStack.EMPTY);
         var stacks = getBundledStacks(stack).toList();
-        for (int i = 0; i < stacks.size(); i++) {
+        for (
+            int i = 0;
+            i < stacks.size();
+            i++
+        ) {
             if (i >= list.size())
                 break;
 
@@ -143,30 +167,60 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
         if (wrapped) {
             var gifter = getOwner(stack);
             if (gifter.isPresent()) {
-                gifter.get()
-                      .name()
-                      .ifPresent(name -> tooltip.add(
-                          (Component.translatable("block.pastel.present.tooltip.wrapped.giver", name)
-                                    .withStyle(ChatFormatting.GRAY))));
+                gifter
+                    .get()
+                    .name()
+                    .ifPresent(
+                        name -> tooltip
+                            .add(
+                                (Component
+                                    .translatable("block.pastel.present.tooltip.wrapped.giver", name)
+                                    .withStyle(ChatFormatting.GRAY))
+                            )
+                    );
                 if (type.isAdvanced()) {
-                    gifter.get()
-                          .id()
-                          .ifPresent(id -> tooltip.add((Component.literal("UUID: " + id)
-                                                                 .withStyle(ChatFormatting.GRAY))));
+                    gifter
+                        .get()
+                        .id()
+                        .ifPresent(
+                            id -> tooltip
+                                .add(
+                                    (Component
+                                        .literal("UUID: " + id)
+                                        .withStyle(ChatFormatting.GRAY))
+                                )
+                        );
                 }
             } else {
-                tooltip.add((Component.translatable("block.pastel.present.tooltip.wrapped")
-                                      .withStyle(ChatFormatting.GRAY)));
+                tooltip
+                    .add(
+                        (Component
+                            .translatable("block.pastel.present.tooltip.wrapped")
+                            .withStyle(ChatFormatting.GRAY))
+                    );
             }
         } else {
-            tooltip.add((Component.translatable("block.pastel.present.tooltip.description")
-                                  .withStyle(ChatFormatting.GRAY)));
-            tooltip.add((Component.translatable("block.pastel.present.tooltip.description2")
-                                  .withStyle(ChatFormatting.GRAY)));
-            tooltip.add((Component.translatable(
-                "item.minecraft.bundle.fullness", getBundledStacks(stack).count(),
-                MAX_STORAGE_STACKS
-            )).withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    (Component
+                        .translatable("block.pastel.present.tooltip.description")
+                        .withStyle(ChatFormatting.GRAY))
+                );
+            tooltip
+                .add(
+                    (Component
+                        .translatable("block.pastel.present.tooltip.description2")
+                        .withStyle(ChatFormatting.GRAY))
+                );
+            tooltip
+                .add(
+                    (Component
+                        .translatable(
+                            "item.minecraft.bundle.fullness",
+                            getBundledStacks(stack).count(),
+                            MAX_STORAGE_STACKS
+                        )).withStyle(ChatFormatting.GRAY)
+                );
         }
     }
 

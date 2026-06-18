@@ -29,22 +29,32 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 public class AzureCrystalBlock extends CloakedOreBlock {
-    public static final MapCodec<AzureCrystalBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                                                                                              IntProvider.codec(0, 10)
-                                                                                                                         .fieldOf("experience")
-                                                                                                                         .forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getXpRange()), propertiesCodec()
-                                                                                                          )
-                                                                                                          .apply(
-                                                                                                              instance,
-                                                                                                              AzureCrystalBlock::new
-                                                                                                          ));
+    public static final MapCodec<AzureCrystalBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            instance -> instance
+                .group(
+                    IntProvider
+                        .codec(0, 10)
+                        .fieldOf("experience")
+                        .forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getXpRange()),
+                    propertiesCodec()
+                )
+                .apply(
+                    instance,
+                    AzureCrystalBlock::new
+                )
+        );
 
     public static final Property<Boolean> WARDED = BooleanProperty.create("warded");
 
     public AzureCrystalBlock(IntProvider experienceDropped, Properties settings) {
         super(experienceDropped, settings);
-        this.registerDefaultState(getStateDefinition().any()
-                                                      .setValue(WARDED, true));
+        this
+            .registerDefaultState(
+                getStateDefinition()
+                    .any()
+                    .setValue(WARDED, true)
+            );
     }
 
     @Override
@@ -56,8 +66,17 @@ public class AzureCrystalBlock extends CloakedOreBlock {
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
         super.stepOn(world, pos, state, entity);
         if (world.isClientSide() && !entity.isSteppingCarefully() && world.random.nextInt(3) == 0) {
-            ParticleHelper.playParticleAroundBlockSides(
-                world, PastelParticleTypes.AZURE_MOTE_SMALL, pos, new Direction[]{Direction.UP}, 1, Vec3.ZERO);
+            ParticleHelper
+                .playParticleAroundBlockSides(
+                    world,
+                    PastelParticleTypes.AZURE_MOTE_SMALL,
+                    pos,
+                    new Direction[] {
+                        Direction.UP
+                    },
+                    1,
+                    Vec3.ZERO
+                );
         }
     }
 
@@ -66,15 +85,33 @@ public class AzureCrystalBlock extends CloakedOreBlock {
         super.playerWillDestroy(world, pos, state, player);
 
         if (world.isClientSide() && BlockHiddenType.isVisibleClient(state)) {
-            ParticleHelper.playTriangulatedParticle(
-                world, PastelParticleTypes.AZURE_AURA, 1, false, Vec3.ZERO, 0, true, Vec3.atCenterOf(pos),
-                new Vec3(
-                    0, 0.08D + world.getRandom()
-                                    .nextDouble() * 0.04, 0
-                )
-            );
-            ParticleHelper.playParticleAroundBlockSides(
-                world, PastelParticleTypes.AZURE_MOTE_SMALL, pos, Direction.values(), 3, Vec3.ZERO);
+            ParticleHelper
+                .playTriangulatedParticle(
+                    world,
+                    PastelParticleTypes.AZURE_AURA,
+                    1,
+                    false,
+                    Vec3.ZERO,
+                    0,
+                    true,
+                    Vec3.atCenterOf(pos),
+                    new Vec3(
+                        0,
+                        0.08D + world
+                            .getRandom()
+                            .nextDouble() * 0.04,
+                        0
+                    )
+                );
+            ParticleHelper
+                .playParticleAroundBlockSides(
+                    world,
+                    PastelParticleTypes.AZURE_MOTE_SMALL,
+                    pos,
+                    Direction.values(),
+                    3,
+                    Vec3.ZERO
+                );
         }
 
         return state;
@@ -85,8 +122,15 @@ public class AzureCrystalBlock extends CloakedOreBlock {
         super.attack(state, world, pos, player);
 
         if (world.isClientSide() && BlockHiddenType.isVisible(state, player)) {
-            ParticleHelper.playParticleAroundBlockSides(
-                world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(), 1, Vec3.ZERO);
+            ParticleHelper
+                .playParticleAroundBlockSides(
+                    world,
+                    PastelParticleTypes.AZURE_MOTE,
+                    pos,
+                    Direction.values(),
+                    1,
+                    Vec3.ZERO
+                );
         }
     }
 
@@ -97,13 +141,14 @@ public class AzureCrystalBlock extends CloakedOreBlock {
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return getStateDefinition().any()
-                                   .setValue(WARDED, false);
+        return getStateDefinition()
+            .any()
+            .setValue(WARDED, false);
     }
 
     @Override
     protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
-        return state.getValue(WARDED)?0:super.getDestroyProgress(state, player, level, pos);
+        return state.getValue(WARDED) ? 0 : super.getDestroyProgress(state, player, level, pos);
     }
 
     @Override

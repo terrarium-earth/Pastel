@@ -12,7 +12,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class DrownedHeadModel extends PastelSkullModel {
 
     public DrownedHeadModel(ModelPart root) {
@@ -25,13 +27,15 @@ public class DrownedHeadModel extends PastelSkullModel {
         PartDefinition modelPartData = modelData.getRoot();
 
         CubeDeformation dilation = new CubeDeformation(0.01F);
-        modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(0, 0)
-                           .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation),
-            PartPose.ZERO
-        );
+        modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 64, 64);
     }

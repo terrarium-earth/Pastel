@@ -17,7 +17,11 @@ import net.minecraft.world.phys.EntityHitResult;
 public interface DamagingProjectileBehavior extends ItemProjectileBehavior {
     @Override
     default ItemStack onEntityHit(
-        ItemProjectileEntity projectile, ItemStack stack, Entity owner, EntityHitResult hitResult) {
+        ItemProjectileEntity projectile,
+        ItemStack stack,
+        Entity owner,
+        EntityHitResult hitResult
+    ) {
         Entity target = hitResult.getEntity();
 
         if (owner instanceof LivingEntity livingOwner) {
@@ -32,19 +36,30 @@ public interface DamagingProjectileBehavior extends ItemProjectileBehavior {
 
             if (target instanceof LivingEntity livingTarget) {
                 if (owner.level() instanceof ServerLevel serverWorld) {
-                    EnchantmentHelper.doPostAttackEffectsWithItemSource(
-                        serverWorld, target, livingTarget.getLastDamageSource(), stack);
+                    EnchantmentHelper
+                        .doPostAttackEffectsWithItemSource(
+                            serverWorld,
+                            target,
+                            livingTarget.getLastDamageSource(),
+                            stack
+                        );
                 }
-                if (target != owner && target instanceof Player && owner instanceof ServerPlayer serverPlayerOwner &&
-                    !projectile.isSilent()) {
-                    serverPlayerOwner.connection.send(
-                        new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
+                if (target != owner && target instanceof Player && owner instanceof ServerPlayer serverPlayerOwner && !projectile
+                    .isSilent()) {
+                    serverPlayerOwner.connection
+                        .send(
+                            new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F)
+                        );
                 }
-                projectile.playSound(
-                    PastelSounds.BLOCK_CITRINE_CLUSTER_HIT, 1.0F, 1.2F / (projectile.level()
-                                                                                         .getRandom()
-                                                                                         .nextFloat() * 0.2F + 0.9F)
-                );
+                projectile
+                    .playSound(
+                        PastelSounds.BLOCK_CITRINE_CLUSTER_HIT,
+                        1.0F,
+                        1.2F / (projectile
+                            .level()
+                            .getRandom()
+                            .nextFloat() * 0.2F + 0.9F)
+                    );
             }
         }
 
@@ -60,7 +75,11 @@ public interface DamagingProjectileBehavior extends ItemProjectileBehavior {
 
     @Override
     default ItemStack onBlockHit(
-        ItemProjectileEntity projectile, ItemStack stack, Entity owner, BlockHitResult hitResult) {
+        ItemProjectileEntity projectile,
+        ItemStack stack,
+        Entity owner,
+        BlockHitResult hitResult
+    ) {
         if (destroyItemOnHit()) {
             stack.shrink(1);
         }

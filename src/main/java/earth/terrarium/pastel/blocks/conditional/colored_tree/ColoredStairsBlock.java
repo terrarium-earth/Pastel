@@ -11,19 +11,26 @@ import java.util.Map;
 
 public class ColoredStairsBlock extends StairBlock {
 
-    public static final MapCodec<ColoredStairsBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                                                                                                 BlockState.CODEC.fieldOf("base_state")
-                                                                                                                                 .forGetter(b -> b.baseState),
-                                                                                                                 propertiesCodec(),
-                                                                                                                 InkColor.CODEC.fieldOf("color")
-                                                                                                                               .forGetter(ColoredStairsBlock::getColor)
-                                                                                                             )
-                                                                                                             .apply(
-                                                                                                                 instance,
-                                                                                                                 ColoredStairsBlock::new
-                                                                                                             ));
+    public static final MapCodec<ColoredStairsBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            instance -> instance
+                .group(
+                    BlockState.CODEC
+                        .fieldOf("base_state")
+                        .forGetter(b -> b.baseState),
+                    propertiesCodec(),
+                    InkColor.CODEC
+                        .fieldOf("color")
+                        .forGetter(ColoredStairsBlock::getColor)
+                )
+                .apply(
+                    instance,
+                    ColoredStairsBlock::new
+                )
+        );
 
     private static final Map<InkColor, ColoredStairsBlock> BLOCKS = new Object2ObjectArrayMap<>();
+
     protected final InkColor color;
 
     public ColoredStairsBlock(BlockState baseBlockState, Properties settings, InkColor color) {

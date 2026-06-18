@@ -10,11 +10,19 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@OnlyIn(Dist.CLIENT)
-@Mixin(AbstractClientPlayer.class)
+@OnlyIn(
+    Dist.CLIENT
+)
+@Mixin(
+    AbstractClientPlayer.class
+)
 public abstract class AbstractClientPlayerEntityMixin {
 
-    @ModifyReturnValue(method = "getFieldOfViewModifier", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "getFieldOfViewModifier", at = @At(
+            "RETURN"
+        )
+    )
     private float arrowhead$applyCustomBowZoom(float original) {
         AbstractClientPlayer thisPlayer = (AbstractClientPlayer) (Object) this;
         ItemStack activeStack = thisPlayer.getUseItem();

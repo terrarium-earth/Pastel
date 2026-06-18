@@ -29,17 +29,29 @@ import java.util.Optional;
 public class AnvilCrushingRecipe extends GatedPastelRecipe<SingleRecipeInput> {
 
     protected final Ingredient ingredient;
+
     protected final ItemStack result;
+
     protected final float crushedItemsPerPointOfDamage;
+
     protected final float experience;
+
     protected final Optional<ResourceLocation> particleEffectIdentifier;
+
     protected final int particleCount;
+
     protected final ResourceLocation soundEvent;
 
     public AnvilCrushingRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        Ingredient ingredient, ItemStack result, float crushedItemsPerPointOfDamage,
-        float experience, Optional<ResourceLocation> particleEffectIdentifier, int particleCount,
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        Ingredient ingredient,
+        ItemStack result,
+        float crushedItemsPerPointOfDamage,
+        float experience,
+        Optional<ResourceLocation> particleEffectIdentifier,
+        int particleCount,
         ResourceLocation soundEventIdentifier
     ) {
 
@@ -127,45 +139,68 @@ public class AnvilCrushingRecipe extends GatedPastelRecipe<SingleRecipeInput> {
 
     public static class Serializer implements RecipeSerializer<AnvilCrushingRecipe> {
 
-        private static final MapCodec<AnvilCrushingRecipe> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(
-                                    Codec.STRING.optionalFieldOf("group", "")
-                                                .forGetter(recipe -> recipe.group),
-                                    Codec.BOOL.optionalFieldOf("secret", false)
-                                              .forGetter(recipe -> recipe.secret),
-                                    ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                          .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                    Ingredient.CODEC_NONEMPTY.fieldOf("ingredient")
-                                                             .forGetter(recipe -> recipe.ingredient),
-                                    ItemStack.STRICT_CODEC.fieldOf("result")
-                                                          .forGetter(recipe -> recipe.result),
-                                    Codec.FLOAT.fieldOf("crushedItemsPerPointOfDamage")
-                                               .forGetter(recipe -> recipe.crushedItemsPerPointOfDamage),
-                                    Codec.FLOAT.fieldOf("experience")
-                                               .forGetter(recipe -> recipe.experience),
-                                    ResourceLocation.CODEC.optionalFieldOf("particleEffectIdentifier")
-                                                          .forGetter(recipe -> recipe.particleEffectIdentifier),
-                                    Codec.INT.optionalFieldOf("particleCount", 1)
-                                             .forGetter(recipe -> recipe.particleCount),
-                                    ResourceLocation.CODEC.fieldOf("soundEventIdentifier")
-                                                          .forGetter(recipe -> recipe.soundEvent)
-                                )
-                                .apply(instance, AnvilCrushingRecipe::new));
+        private static final MapCodec<AnvilCrushingRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                instance -> instance
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(recipe -> recipe.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(recipe -> recipe.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("ingredient")
+                            .forGetter(recipe -> recipe.ingredient),
+                        ItemStack.STRICT_CODEC
+                            .fieldOf("result")
+                            .forGetter(recipe -> recipe.result),
+                        Codec.FLOAT
+                            .fieldOf("crushedItemsPerPointOfDamage")
+                            .forGetter(recipe -> recipe.crushedItemsPerPointOfDamage),
+                        Codec.FLOAT
+                            .fieldOf("experience")
+                            .forGetter(recipe -> recipe.experience),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("particleEffectIdentifier")
+                            .forGetter(recipe -> recipe.particleEffectIdentifier),
+                        Codec.INT
+                            .optionalFieldOf("particleCount", 1)
+                            .forGetter(recipe -> recipe.particleCount),
+                        ResourceLocation.CODEC
+                            .fieldOf("soundEventIdentifier")
+                            .forGetter(recipe -> recipe.soundEvent)
+                    )
+                    .apply(instance, AnvilCrushingRecipe::new)
+            );
 
-        private static final StreamCodec<RegistryFriendlyByteBuf, AnvilCrushingRecipe> STREAM_CODEC
-            = PacketCodecHelper.tuple(
-            ByteBufCodecs.STRING_UTF8, c -> c.group,
-            ByteBufCodecs.BOOL, c -> c.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
-            Ingredient.CONTENTS_STREAM_CODEC, c -> c.ingredient,
-            ItemStack.STREAM_CODEC, c -> c.result,
-            ByteBufCodecs.FLOAT, c -> c.crushedItemsPerPointOfDamage,
-            ByteBufCodecs.FLOAT, c -> c.experience,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.particleEffectIdentifier,
-            ByteBufCodecs.VAR_INT, c -> c.particleCount,
-            ResourceLocation.STREAM_CODEC, c -> c.soundEvent,
-            AnvilCrushingRecipe::new
-        );
+        private static final StreamCodec<RegistryFriendlyByteBuf, AnvilCrushingRecipe> STREAM_CODEC = PacketCodecHelper
+            .tuple(
+                ByteBufCodecs.STRING_UTF8,
+                c -> c.group,
+                ByteBufCodecs.BOOL,
+                c -> c.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                c -> c.requiredAdvancementIdentifier,
+                Ingredient.CONTENTS_STREAM_CODEC,
+                c -> c.ingredient,
+                ItemStack.STREAM_CODEC,
+                c -> c.result,
+                ByteBufCodecs.FLOAT,
+                c -> c.crushedItemsPerPointOfDamage,
+                ByteBufCodecs.FLOAT,
+                c -> c.experience,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                c -> c.particleEffectIdentifier,
+                ByteBufCodecs.VAR_INT,
+                c -> c.particleCount,
+                ResourceLocation.STREAM_CODEC,
+                c -> c.soundEvent,
+                AnvilCrushingRecipe::new
+            );
 
         @Override
         public MapCodec<AnvilCrushingRecipe> codec() {

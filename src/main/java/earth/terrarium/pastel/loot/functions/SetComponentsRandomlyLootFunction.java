@@ -16,13 +16,17 @@ import java.util.List;
 
 public class SetComponentsRandomlyLootFunction extends LootItemConditionalFunction {
 
-    public static final MapCodec<SetComponentsRandomlyLootFunction> CODEC = RecordCodecBuilder.mapCodec(
-        i -> commonFields(i).and(
-                                DataComponentPatch.CODEC.listOf()
-                                                        .fieldOf("options")
-                                                        .forGetter(c -> c.options)
-                            )
-                            .apply(i, SetComponentsRandomlyLootFunction::new));
+    public static final MapCodec<SetComponentsRandomlyLootFunction> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> commonFields(i)
+                .and(
+                    DataComponentPatch.CODEC
+                        .listOf()
+                        .fieldOf("options")
+                        .forGetter(c -> c.options)
+                )
+                .apply(i, SetComponentsRandomlyLootFunction::new)
+        );
 
     private final List<DataComponentPatch> options;
 
@@ -40,8 +44,12 @@ public class SetComponentsRandomlyLootFunction extends LootItemConditionalFuncti
     public ItemStack run(ItemStack stack, LootContext context) {
         if (options.isEmpty()) return stack;
 
-        var changes = options.get(context.getRandom()
-                                         .nextInt(options.size()));
+        var changes = options
+            .get(
+                context
+                    .getRandom()
+                    .nextInt(options.size())
+            );
         stack.applyComponentsAndValidate(changes);
 
         return stack;

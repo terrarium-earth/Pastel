@@ -17,6 +17,7 @@ import java.util.function.Predicate;
 public class VectorCast {
 
     protected final Vec3 start, end;
+
     protected float radius;
 
     public VectorCast(Vec3 start, Vec3 end, float radius) {
@@ -26,7 +27,10 @@ public class VectorCast {
     }
 
     public List<CollisionResult<Entity>> castForEntities(
-        ServerLevel world, Predicate<Entity> preCollisionTestFiltering, Entity... except) {
+        ServerLevel world,
+        Predicate<Entity> preCollisionTestFiltering,
+        Entity... except
+    ) {
         var ray = getRelativeToOrigin(end);
         var casterBox = new AABB(start, end).inflate(ray.length() / 2);
 
@@ -34,16 +38,20 @@ public class VectorCast {
 
         var exceptSet = Arrays.asList(except);
 
-        return entities.stream()
-                       .filter(entity -> !exceptSet.contains(entity))
-                       .map(entity -> processEntity(ray, entity, world))
-                       .filter(Optional::isPresent)
-                       .map(Optional::get)
-                       .toList();
+        return entities
+            .stream()
+            .filter(entity -> !exceptSet.contains(entity))
+            .map(entity -> processEntity(ray, entity, world))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .toList();
     }
 
     public List<CollisionResult<BlockPos>> castForBlocks(
-        ServerLevel world, Entity except, BiPredicate<ServerLevel, BlockPos> preCollisionTestFiltering) {
+        ServerLevel world,
+        Entity except,
+        BiPredicate<ServerLevel, BlockPos> preCollisionTestFiltering
+    ) {
         var blockStart = BlockPos.containing(start);
         var blockEnd = BlockPos.containing(end);
         var ray = getRelativeToOrigin(end);
@@ -69,8 +77,9 @@ public class VectorCast {
 
         collider:
         {
-            var hitbox = entity.getBoundingBox()
-                               .inflate(radius);
+            var hitbox = entity
+                .getBoundingBox()
+                .inflate(radius);
 
             if (hitbox.contains(end)) {
                 closestPointToIntercept = end;
@@ -102,12 +111,17 @@ public class VectorCast {
         }
 
         if (hit) {
-            return Optional.of(new CollisionResult<>(
-                world, entity, entity instanceof LivingEntity
-                                                                    ? CollisionResult.CollisionType.LIVING
-                                                                    : CollisionResult.CollisionType.NON_LIVING,
-                                                     closestPointToIntercept
-            ));
+            return Optional
+                .of(
+                    new CollisionResult<>(
+                        world,
+                        entity,
+                        entity instanceof LivingEntity
+                            ? CollisionResult.CollisionType.LIVING
+                            : CollisionResult.CollisionType.NON_LIVING,
+                        closestPointToIntercept
+                    )
+                );
         }
 
         return Optional.empty();
@@ -150,8 +164,10 @@ public class VectorCast {
         }
 
         if (hit) {
-            return Optional.of(
-                new CollisionResult<>(world, pos, CollisionResult.CollisionType.BLOCK, closestPointToIntercept));
+            return Optional
+                .of(
+                    new CollisionResult<>(world, pos, CollisionResult.CollisionType.BLOCK, closestPointToIntercept)
+                );
         }
 
         return Optional.empty();
@@ -162,9 +178,9 @@ public class VectorCast {
     }
 
     public boolean blockContains(BlockPos pos, Vec3 point) {
-        return pos.getX() - radius <= point.x() && point.x() <= pos.getX() + 1 + radius &&
-               pos.getY() - radius <= point.y() && point.y() <= pos.getY() + 1 + radius &&
-               pos.getZ() - radius <= point.z() && point.z() <= pos.getZ() + 1 + radius;
+        return pos.getX() - radius <= point.x() && point.x() <= pos.getX() + 1 + radius && pos.getY() - radius <= point
+            .y() && point.y() <= pos.getY() + 1 + radius && pos.getZ() - radius <= point.z() && point.z() <= pos
+                .getZ() + 1 + radius;
     }
 
     public Orientation getOrientation() {

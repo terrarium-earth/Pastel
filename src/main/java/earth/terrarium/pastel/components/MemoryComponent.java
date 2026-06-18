@@ -7,38 +7,59 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 public record MemoryComponent(
-    int ticksToManifest, boolean spawnAsAdult, boolean brokenPromise, boolean unrecognizable
+    int ticksToManifest,
+    boolean spawnAsAdult,
+    boolean brokenPromise,
+    boolean unrecognizable
 ) {
 
     // zero or negative ticks to manifest: never hatch
 
     public static final MemoryComponent DEFAULT = new MemoryComponent(-1, false, false, false);
 
-    public static final Codec<MemoryComponent> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                           Codec.INT.optionalFieldOf(
-                                                                                               "ticks_to_manifest", -1)
-                                                                                                    .forGetter(MemoryComponent::ticksToManifest),
-                                                                                           Codec.BOOL.optionalFieldOf("spawn_as_adult", false)
-                                                                                                     .forGetter(MemoryComponent::spawnAsAdult),
-                                                                                           Codec.BOOL.optionalFieldOf("broken_promise", false)
-                                                                                                     .forGetter(MemoryComponent::brokenPromise),
-                                                                                           Codec.BOOL.optionalFieldOf("unrecognizable", false)
-                                                                                                     .forGetter(MemoryComponent::unrecognizable)
-                                                                                       )
-                                                                                       .apply(i, MemoryComponent::new));
+    public static final Codec<MemoryComponent> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    Codec.INT
+                        .optionalFieldOf(
+                            "ticks_to_manifest",
+                            -1
+                        )
+                        .forGetter(MemoryComponent::ticksToManifest),
+                    Codec.BOOL
+                        .optionalFieldOf("spawn_as_adult", false)
+                        .forGetter(MemoryComponent::spawnAsAdult),
+                    Codec.BOOL
+                        .optionalFieldOf("broken_promise", false)
+                        .forGetter(MemoryComponent::brokenPromise),
+                    Codec.BOOL
+                        .optionalFieldOf("unrecognizable", false)
+                        .forGetter(MemoryComponent::unrecognizable)
+                )
+                .apply(i, MemoryComponent::new)
+        );
 
-    public static final StreamCodec<ByteBuf, MemoryComponent> STREAM_CODEC = StreamCodec.composite(
-        ByteBufCodecs.VAR_INT, MemoryComponent::ticksToManifest,
-        ByteBufCodecs.BOOL, MemoryComponent::spawnAsAdult,
-        ByteBufCodecs.BOOL, MemoryComponent::brokenPromise,
-        ByteBufCodecs.BOOL, MemoryComponent::unrecognizable,
-        MemoryComponent::new
-    );
+    public static final StreamCodec<ByteBuf, MemoryComponent> STREAM_CODEC = StreamCodec
+        .composite(
+            ByteBufCodecs.VAR_INT,
+            MemoryComponent::ticksToManifest,
+            ByteBufCodecs.BOOL,
+            MemoryComponent::spawnAsAdult,
+            ByteBufCodecs.BOOL,
+            MemoryComponent::brokenPromise,
+            ByteBufCodecs.BOOL,
+            MemoryComponent::unrecognizable,
+            MemoryComponent::new
+        );
 
     public static class Builder {
         private int ticksToManifest;
+
         private boolean spawnAsAdult;
+
         private boolean brokenPromise;
+
         private boolean unrecognizable;
 
         public Builder(MemoryComponent component) {
@@ -70,7 +91,11 @@ public record MemoryComponent(
 
         public MemoryComponent build() {
             return new MemoryComponent(
-                this.ticksToManifest, this.spawnAsAdult, this.brokenPromise, this.unrecognizable);
+                this.ticksToManifest,
+                this.spawnAsAdult,
+                this.brokenPromise,
+                this.unrecognizable
+            );
         }
 
     }

@@ -25,8 +25,9 @@ public class JadeiteLotusFeature extends Feature<JadeiteLotusFeatureConfig> {
         var origin = context.origin();
         var random = context.random();
         var chunkGen = context.chunkGenerator();
-        var inverted = context.config()
-                              .inverted();
+        var inverted = context
+            .config()
+            .inverted();
 
         var floorState = world.getBlockState(inverted ? origin.below() : origin.above());
 
@@ -37,7 +38,11 @@ public class JadeiteLotusFeature extends Feature<JadeiteLotusFeatureConfig> {
         // limit growth to a few blocks above the ground
         var stemHeight = Math.round(Mth.normal(random, 8, 10F) + 5);
         BlockPos.MutableBlockPos mutablePos = origin.mutable();
-        for (int i = 0; i < stemHeight + 2; i++) {
+        for (
+            int i = 0;
+            i < stemHeight + 2;
+            i++
+        ) {
             if (inverted) { // growing up
                 mutablePos.move(Direction.UP);
                 if (mutablePos.getY() > chunkGen.getGenDepth() || !isReplaceable(world, mutablePos)) {
@@ -62,32 +67,47 @@ public class JadeiteLotusFeature extends Feature<JadeiteLotusFeatureConfig> {
     }
 
     private static boolean isReplaceable(LevelAccessor world, BlockPos pos) {
-        return world.getBlockState(pos)
-                    .canBeReplaced();
+        return world
+            .getBlockState(pos)
+            .canBeReplaced();
     }
 
     private void generateStem(LevelAccessor world, BlockPos origin, int stemHeight, boolean inverted) {
         var stemPointer = origin.mutable();
         var topStem = false;
 
-        for (int height = 0; height < stemHeight; height++) {
+        for (
+            int height = 0;
+            height < stemHeight;
+            height++
+        ) {
             if (height == 0) {
-                this.setBlock(
-                    world, stemPointer, PastelBlocks.JADEITE_LOTUS_STEM.get()
-                                                                       .defaultBlockState()
-                                                                       .setValue(
-                                                                           JadeiteLotusStemBlock.INVERTED, inverted)
-                );
+                this
+                    .setBlock(
+                        world,
+                        stemPointer,
+                        PastelBlocks.JADEITE_LOTUS_STEM
+                            .get()
+                            .defaultBlockState()
+                            .setValue(
+                                JadeiteLotusStemBlock.INVERTED,
+                                inverted
+                            )
+                    );
                 topStem = true;
             } else if (height == stemHeight - 1) {
-                this.setBlock(
-                    world, stemPointer, PastelBlocks.JADEITE_LOTUS_FLOWER.get()
-                                                                         .defaultBlockState()
-                                                                         .setValue(
-                                                                             JadeiteLotusFlowerBlock.FACING,
-                                                                             inverted ? Direction.UP : Direction.DOWN
-                                                                         )
-                );
+                this
+                    .setBlock(
+                        world,
+                        stemPointer,
+                        PastelBlocks.JADEITE_LOTUS_FLOWER
+                            .get()
+                            .defaultBlockState()
+                            .setValue(
+                                JadeiteLotusFlowerBlock.FACING,
+                                inverted ? Direction.UP : Direction.DOWN
+                            )
+                    );
             } else {
                 this.setBlock(world, stemPointer, JadeiteLotusStemBlock.getStemVariant(topStem, inverted));
                 topStem = !topStem;

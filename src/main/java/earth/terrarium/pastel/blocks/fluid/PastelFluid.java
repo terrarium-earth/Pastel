@@ -63,7 +63,12 @@ public abstract class PastelFluid extends FlowingFluid {
      */
     @Override
     protected boolean canBeReplacedWith(
-        FluidState fluidState, BlockGetter blockView, BlockPos blockPos, Fluid fluid, Direction direction) {
+        FluidState fluidState,
+        BlockGetter blockView,
+        BlockPos blockPos,
+        Fluid fluid,
+        Direction direction
+    ) {
         return false;
     }
 
@@ -113,27 +118,53 @@ public abstract class PastelFluid extends FlowingFluid {
                 if (level.random.nextInt(100) == 0) {
                     ItemStack itemStack = itemEntity.getItem();
                     FluidConvertingRecipe recipe = getConversionRecipeFor(getDippingRecipeType(), level, itemStack);
-                    if (recipe != null && !recipe.getResultItem(level.registryAccess())
-                                                 .is(itemStack.getItem())) { // do not try to convert items into
+                    if (recipe != null && !recipe
+                        .getResultItem(level.registryAccess())
+                        .is(itemStack.getItem())) { // do not try to convert items into
                         // itself for performance reasons
-                        level.playSound(
-                            null, itemEntity.blockPosition(), SoundEvents.WOOL_BREAK, SoundSource.NEUTRAL, 1.0F, 0.9F +
-                                                                                                                 level.getRandom()
-                                                                                                                      .nextFloat() *
-                                                                                                                 0.2F
-                        );
+                        level
+                            .playSound(
+                                null,
+                                itemEntity.blockPosition(),
+                                SoundEvents.WOOL_BREAK,
+                                SoundSource.NEUTRAL,
+                                1.0F,
+                                0.9F + level
+                                    .getRandom()
+                                    .nextFloat() * 0.2F
+                            );
 
                         ItemStack result = assemble(recipe, itemStack, level);
                         int count = result.getCount() * itemStack.getCount();
                         result.setCount(count);
 
-                        Support.areaCriterion((ServerLevel) level, Support.L_RANGE, pos, Optional.empty(), p ->
-                            PastelCriteria.FLUID_DIPPING.trigger(
-                                p, (ServerLevel) level, pos, itemStack, result));
+                        Support
+                            .areaCriterion(
+                                (ServerLevel) level,
+                                Support.L_RANGE,
+                                pos,
+                                Optional.empty(),
+                                p -> PastelCriteria.FLUID_DIPPING
+                                    .trigger(
+                                        p,
+                                        (ServerLevel) level,
+                                        pos,
+                                        itemStack,
+                                        result
+                                    )
+                            );
 
                         itemEntity.discard();
-                        MultiblockCrafter.spawnItemStackAsEntitySplitViaMaxCount(
-                            level, itemEntity.position(), result, count, Vec3.ZERO, false, itemEntity.getOwner());
+                        MultiblockCrafter
+                            .spawnItemStackAsEntitySplitViaMaxCount(
+                                level,
+                                itemEntity.position(),
+                                result,
+                                count,
+                                Vec3.ZERO,
+                                false,
+                                itemEntity.getOwner()
+                            );
                     }
                 }
             }
@@ -143,10 +174,14 @@ public abstract class PastelFluid extends FlowingFluid {
     public abstract RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType();
 
     public @Nullable <R extends FluidConvertingRecipe> R getConversionRecipeFor(
-        RecipeType<R> recipeType, @NotNull Level world, ItemStack itemStack) {
-        RecipeHolder<R> entry = world.getRecipeManager()
-                                     .getRecipeFor(recipeType, new SingleRecipeInput(itemStack), world)
-                                     .orElse(null);
+        RecipeType<R> recipeType,
+        @NotNull Level world,
+        ItemStack itemStack
+    ) {
+        RecipeHolder<R> entry = world
+            .getRecipeManager()
+            .getRecipeFor(recipeType, new SingleRecipeInput(itemStack), world)
+            .orElse(null);
         return entry == null ? null : entry.value();
     }
 

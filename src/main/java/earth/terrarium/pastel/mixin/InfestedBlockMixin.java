@@ -15,15 +15,27 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(InfestedBlock.class)
+@Mixin(
+    InfestedBlock.class
+)
 public abstract class InfestedBlockMixin {
 
     /*
      * Do not spawn silverfish when block is broken with Resonance Tool
      */
-    @Inject(at = @At("HEAD"), method = "spawnAfterBreak", cancellable = true)
+    @Inject(
+        at = @At(
+            "HEAD"
+        ), method = "spawnAfterBreak", cancellable = true
+    )
     public void onStacksDropped(
-        BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience, CallbackInfo ci) {
+        BlockState state,
+        ServerLevel world,
+        BlockPos pos,
+        ItemStack stack,
+        boolean dropExperience,
+        CallbackInfo ci
+    ) {
         if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.RESONANT_BLOCK_DROPS)) {
             ci.cancel();
         }
@@ -37,7 +49,12 @@ public abstract class InfestedBlockMixin {
                 silverfishEntity.kill();
 
                 ExperienceOrb experienceOrbEntity = new ExperienceOrb(
-                    world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 10);
+                    world,
+                    pos.getX() + 0.5D,
+                    pos.getY(),
+                    pos.getZ() + 0.5D,
+                    10
+                );
                 world.addFreshEntity(experienceOrbEntity);
             }
             ci.cancel();

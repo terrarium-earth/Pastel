@@ -25,11 +25,15 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
 
     private final ItemRenderer itemRenderer;
+
     private final float scale;
+
     private final float offset;
 
     public BidentEntityRenderer(EntityRendererProvider.Context context) {
@@ -50,8 +54,12 @@ public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
 
     @Override
     public void render(
-        BidentBaseEntity bidentBaseEntity, float yaw, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light
+        BidentBaseEntity bidentBaseEntity,
+        float yaw,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int light
     ) {
         TrailRender trail = bidentBaseEntity.getTrail();
         if (trail != null) {
@@ -60,23 +68,36 @@ public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
             double d1 = Mth.lerp(tickDelta, bidentBaseEntity.yOld, bidentBaseEntity.getY());
             double d2 = Mth.lerp(tickDelta, bidentBaseEntity.zOld, bidentBaseEntity.getZ());
             Vec3 posOffset = new Vec3(d0, d1, d2).subtract(bidentBaseEntity.position());
-            Vec3 pos = bidentBaseEntity.position()
-                                       .add(posOffset);
+            Vec3 pos = bidentBaseEntity
+                .position()
+                .add(posOffset);
             poseStack.translate(-pos.x, -pos.y, -pos.z);
             Quaternionf offsetRot = new Quaternionf()
-                .rotateY((float) Math.toRadians(
-                    Mth.lerp(tickDelta, bidentBaseEntity.yRotO, bidentBaseEntity.getYRot()) - 90.0F))
-                .rotateZ((float) Math.toRadians(
-                    -135 + Mth.lerp(tickDelta, bidentBaseEntity.xRotO, bidentBaseEntity.getXRot()) + 90.0F));
+                .rotateY(
+                    (float) Math
+                        .toRadians(
+                            Mth.lerp(tickDelta, bidentBaseEntity.yRotO, bidentBaseEntity.getYRot()) - 90.0F
+                        )
+                )
+                .rotateZ(
+                    (float) Math
+                        .toRadians(
+                            -135 + Mth.lerp(tickDelta, bidentBaseEntity.xRotO, bidentBaseEntity.getXRot()) + 90.0F
+                        )
+                );
             Vector3f offset = new Vector3f(0, this.offset, 0).rotate(offsetRot);
-            trail.position = bidentBaseEntity.getBoundingBox()
-                                             .getCenter()
-                                             .add(posOffset)
-                                             .add(offset.x, offset.y, offset.z);
-            trail.render(
-                poseStack, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT,
-                bidentBaseEntity.getGradient()
-            );
+            trail.position = bidentBaseEntity
+                .getBoundingBox()
+                .getCenter()
+                .add(posOffset)
+                .add(offset.x, offset.y, offset.z);
+            trail
+                .render(
+                    poseStack,
+                    RenderHandler.createBufferSource(),
+                    LightTexture.FULL_BRIGHT,
+                    bidentBaseEntity.getGradient()
+                );
             poseStack.popPose();
         }
 
@@ -86,28 +107,47 @@ public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
     }
 
     private void renderAsItemStack(
-        BidentBaseEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider,
-        int light, ItemStack itemStack
+        BidentBaseEntity entity,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int light,
+        ItemStack itemStack
     ) {
-        BakedModel bakedModel = this.itemRenderer.getModel(
-            itemStack, entity.level(), null, entity instanceof BidentMirrorImageEntity ? 80085 : 817210941);
+        BakedModel bakedModel = this.itemRenderer
+            .getModel(
+                itemStack,
+                entity.level(),
+                null,
+                entity instanceof BidentMirrorImageEntity ? 80085 : 817210941
+            );
 
         poseStack.pushPose();
-        poseStack.translate(
-            0, entity.makeBoundingBox()
-                     .getSize() / 2, 0
-        );
+        poseStack
+            .translate(
+                0,
+                entity
+                    .makeBoundingBox()
+                    .getSize() / 2,
+                0
+            );
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(tickDelta, entity.yRotO, entity.getYRot()) - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(-135 + Mth.lerp(tickDelta, entity.xRotO, entity.getXRot()) + 90.0F));
         poseStack.translate(0, offset, 0);
 
         poseStack.scale(scale, scale, scale);
 
-        this.itemRenderer.render(
-            itemStack, ItemDisplayContext.NONE, false, poseStack, vertexConsumerProvider,
-            entity instanceof BidentMirrorImageEntity ? LightTexture.FULL_BRIGHT : light, OverlayTexture.NO_OVERLAY,
-            bakedModel
-        );
+        this.itemRenderer
+            .render(
+                itemStack,
+                ItemDisplayContext.NONE,
+                false,
+                poseStack,
+                vertexConsumerProvider,
+                entity instanceof BidentMirrorImageEntity ? LightTexture.FULL_BRIGHT : light,
+                OverlayTexture.NO_OVERLAY,
+                bakedModel
+            );
 
         poseStack.popPose();
     }

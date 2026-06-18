@@ -9,8 +9,11 @@ import net.minecraft.world.item.ItemStack;
 
 public record SweetenedPredicate(boolean sweetened) implements SingleComponentItemPredicate<JadeWineComponent> {
 
-    public static final Codec<SweetenedPredicate> CODEC = Codec.BOOL.xmap(
-        SweetenedPredicate::new, SweetenedPredicate::sweetened);
+    public static final Codec<SweetenedPredicate> CODEC = Codec.BOOL
+        .xmap(
+            SweetenedPredicate::new,
+            SweetenedPredicate::sweetened
+        );
 
     @Override
     public DataComponentType<JadeWineComponent> componentType() {

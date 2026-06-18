@@ -35,6 +35,7 @@ import java.util.List;
 public class TakeOffBeltItem extends PastelTrinketItem {
 
     public static final int CHARGE_TIME_TICKS = 20;
+
     public static final int MAX_CHARGES = 8;
 
     private static final HashMap<LivingEntity, Long> sneakingTimes = new HashMap<>();
@@ -49,18 +50,25 @@ public class TakeOffBeltItem extends PastelTrinketItem {
 
     public static int getCurrentCharge(Player playerEntity) {
         if (sneakingTimes.containsKey(playerEntity)) {
-            return (int) (playerEntity.level()
-                                      .getGameTime() - sneakingTimes.get(playerEntity)) / CHARGE_TIME_TICKS;
+            return (int) (playerEntity
+                .level()
+                .getGameTime() - sneakingTimes.get(playerEntity)) / CHARGE_TIME_TICKS;
         }
         return 0;
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.takeoff_belt.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.takeoff_belt.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
@@ -75,42 +83,90 @@ public class TakeOffBeltItem extends PastelTrinketItem {
                     long sneakTicks = world.getGameTime() - sneakingTimes.get(entity);
                     if (sneakTicks % CHARGE_TIME_TICKS == 0) {
                         if (sneakTicks > CHARGE_TIME_TICKS * MAX_CHARGES) {
-                            world.playSound(
-                                null, entity.getX(), entity.getY(), entity.getZ(), PastelSounds.USE_FAIL,
-                                SoundSource.NEUTRAL, 4.0F, 1.05F
-                            );
-                            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                                (ServerLevel) world, entity.position(), ColoredCraftingParticleEffect.BLACK, 20,
-                                new Vec3(0, 0, 0), new Vec3(0.1, 0.05, 0.1)
-                            );
+                            world
+                                .playSound(
+                                    null,
+                                    entity.getX(),
+                                    entity.getY(),
+                                    entity.getZ(),
+                                    PastelSounds.USE_FAIL,
+                                    SoundSource.NEUTRAL,
+                                    4.0F,
+                                    1.05F
+                                );
+                            PlayParticleWithRandomOffsetAndVelocityPayload
+                                .playParticleWithRandomOffsetAndVelocity(
+                                    (ServerLevel) world,
+                                    entity.position(),
+                                    ColoredCraftingParticleEffect.BLACK,
+                                    20,
+                                    new Vec3(0, 0, 0),
+                                    new Vec3(0.1, 0.05, 0.1)
+                                );
                             entity.removeEffect(MobEffects.JUMP);
                         } else {
                             int sneakTimeMod = (int) sneakTicks / CHARGE_TIME_TICKS;
 
-                            world.playSound(
-                                null, entity.getX(), entity.getY(), entity.getZ(),
-                                PastelSounds.BLOCK_TOPAZ_BLOCK_HIT, SoundSource.NEUTRAL, 1.0F, 1.0F
-                            );
-                            for (Vec3 vec : VectorPattern.SIXTEEN.getVectors()) {
-                                PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-                                    (ServerLevel) world, entity.position(), PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE,
-                                    1, vec.scale(0.5)
+                            world
+                                .playSound(
+                                    null,
+                                    entity.getX(),
+                                    entity.getY(),
+                                    entity.getZ(),
+                                    PastelSounds.BLOCK_TOPAZ_BLOCK_HIT,
+                                    SoundSource.NEUTRAL,
+                                    1.0F,
+                                    1.0F
                                 );
+                            for (
+                                Vec3 vec : VectorPattern.SIXTEEN.getVectors()
+                            ) {
+                                PlayParticleWithExactVelocityPayload
+                                    .playParticleWithExactVelocity(
+                                        (ServerLevel) world,
+                                        entity.position(),
+                                        PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE,
+                                        1,
+                                        vec.scale(0.5)
+                                    );
                             }
 
-                            int powerEnchantmentLevel = Ench.getLevel(
-                                world.registryAccess(), Enchantments.POWER, stack);
-                            int featherFallingEnchantmentLevel = Ench.getLevel(
-                                world.registryAccess(), Enchantments.FEATHER_FALLING, stack);
-                            entity.addEffect(new MobEffectInstance(
-                                MobEffects.JUMP, CHARGE_TIME_TICKS, getJumpBoostAmplifier(
-                                sneakTimeMod, powerEnchantmentLevel), true, true
-                            ));
+                            int powerEnchantmentLevel = Ench
+                                .getLevel(
+                                    world.registryAccess(),
+                                    Enchantments.POWER,
+                                    stack
+                                );
+                            int featherFallingEnchantmentLevel = Ench
+                                .getLevel(
+                                    world.registryAccess(),
+                                    Enchantments.FEATHER_FALLING,
+                                    stack
+                                );
+                            entity
+                                .addEffect(
+                                    new MobEffectInstance(
+                                        MobEffects.JUMP,
+                                        CHARGE_TIME_TICKS,
+                                        getJumpBoostAmplifier(
+                                            sneakTimeMod,
+                                            powerEnchantmentLevel
+                                        ),
+                                        true,
+                                        true
+                                    )
+                                );
                             if (featherFallingEnchantmentLevel > 0) {
-                                entity.addEffect(new MobEffectInstance(
-                                    MobEffects.SLOW_FALLING, CHARGE_TIME_TICKS + featherFallingEnchantmentLevel * 20, 0,
-                                    true, true
-                                ));
+                                entity
+                                    .addEffect(
+                                        new MobEffectInstance(
+                                            MobEffects.SLOW_FALLING,
+                                            CHARGE_TIME_TICKS + featherFallingEnchantmentLevel * 20,
+                                            0,
+                                            true,
+                                            true
+                                        )
+                                    );
                             }
                         }
                     }
@@ -141,8 +197,10 @@ public class TakeOffBeltItem extends PastelTrinketItem {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER) || enchantment.is(
-            Enchantments.FEATHER_FALLING);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER) || enchantment
+            .is(
+                Enchantments.FEATHER_FALLING
+            );
     }
 
 }

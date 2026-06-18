@@ -69,7 +69,9 @@ public class AlternatePlayerOnlyGlassBlock extends TransparentBlock {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
         if (stateFrom.is(this) || stateFrom.getBlock() == alternateBlock) {
             return true;

@@ -21,8 +21,11 @@ public class RedstoneGravityBlock extends FallingBlock {
 
     public RedstoneGravityBlock(Properties settings) {
         super(settings);
-        registerDefaultState(getStateDefinition().any()
-                                                 .setValue(UNSTABLE, false));
+        registerDefaultState(
+            getStateDefinition()
+                .any()
+                .setValue(UNSTABLE, false)
+        );
     }
 
     @Override
@@ -35,14 +38,20 @@ public class RedstoneGravityBlock extends FallingBlock {
         stateManager.add(UNSTABLE);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState state = super.getStateForPlacement(ctx);
-        if (ctx.getLevel()
-               .getBestNeighborSignal(ctx.getClickedPos()) > 0 && isFree(ctx.getLevel()
-                                                                            .getBlockState(ctx.getClickedPos()
-                                                                                              .below()))) {
+        if (ctx
+            .getLevel()
+            .getBestNeighborSignal(ctx.getClickedPos()) > 0 && isFree(
+                ctx
+                    .getLevel()
+                    .getBlockState(
+                        ctx
+                            .getClickedPos()
+                            .below()
+                    )
+            )) {
             state.setValue(UNSTABLE, true);
         } else {
             state.setValue(UNSTABLE, false);
@@ -58,14 +67,22 @@ public class RedstoneGravityBlock extends FallingBlock {
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (state.getValue(UNSTABLE)) {
             propagate(world, pos);
-            world.setBlockAndUpdate(pos, world.getBlockState(pos)
-                                              .setValue(UNSTABLE, false)
-            );
+            world
+                .setBlockAndUpdate(
+                    pos,
+                    world
+                        .getBlockState(pos)
+                        .setValue(UNSTABLE, false)
+                );
             super.tick(state, world, pos, random); // fall, if not supported
         } else if (world.getBestNeighborSignal(pos) > 0) {
-            world.setBlockAndUpdate(pos, world.getBlockState(pos)
-                                              .setValue(UNSTABLE, true)
-            );
+            world
+                .setBlockAndUpdate(
+                    pos,
+                    world
+                        .getBlockState(pos)
+                        .setValue(UNSTABLE, true)
+                );
             propagate(world, pos);
         }
     }
@@ -74,14 +91,21 @@ public class RedstoneGravityBlock extends FallingBlock {
      * Set all RedstoneGravityBlocks next to it to unstable
      */
     protected void propagate(ServerLevel world, BlockPos pos) {
-        for (Direction dir : Direction.values()) {
+        for (
+            Direction dir : Direction.values()
+        ) {
             BlockPos offsetPos = pos.relative(dir);
             BlockState offsetBlockState = world.getBlockState(offsetPos);
             if (offsetBlockState.is(this) && !offsetBlockState.getValue(UNSTABLE) && isFree(
-                world.getBlockState(offsetPos.below()))) {
-                world.setBlockAndUpdate(offsetPos, world.getBlockState(offsetPos)
-                                                        .setValue(UNSTABLE, true)
-                );
+                world.getBlockState(offsetPos.below())
+            )) {
+                world
+                    .setBlockAndUpdate(
+                        offsetPos,
+                        world
+                            .getBlockState(offsetPos)
+                            .setValue(UNSTABLE, true)
+                    );
                 world.scheduleTick(pos, this, this.getDelayAfterPlace());
             }
         }

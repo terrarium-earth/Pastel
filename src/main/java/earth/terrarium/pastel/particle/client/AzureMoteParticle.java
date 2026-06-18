@@ -13,8 +13,15 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class AzureMoteParticle extends BloodflyParticle {
 
     protected AzureMoteParticle(
-        ClientLevel clientWorld, double d, double e, double f, double velocityX, double velocityY, double velocityZ,
-        float scaleMultiplier, SpriteSet spriteProvider
+        ClientLevel clientWorld,
+        double d,
+        double e,
+        double f,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
+        float scaleMultiplier,
+        SpriteSet spriteProvider
     ) {
         super(clientWorld, d, e, f, velocityX, velocityY, velocityZ, scaleMultiplier, spriteProvider);
         this.bCol = 1F;
@@ -33,7 +40,9 @@ public class AzureMoteParticle extends BloodflyParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -42,8 +51,14 @@ public class AzureMoteParticle extends BloodflyParticle {
         }
 
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new AzureMoteParticle(clientWorld, d, e, f, 0.0, 0.0, 0.0, 1.0F, this.spriteProvider);
         }

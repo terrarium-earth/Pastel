@@ -42,8 +42,12 @@ public class BlockFlooderProjectile extends ThrowableItemProjectile {
 
     private ParticleOptions getParticleParameters() {
         ItemStack itemStack = this.getItem();
-        return (itemStack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(
-            ParticleTypes.ITEM, itemStack));
+        return (itemStack.isEmpty()
+            ? ParticleTypes.ITEM_SNOWBALL
+            : new ItemParticleOption(
+                ParticleTypes.ITEM,
+                itemStack
+            ));
     }
 
     @Override
@@ -51,8 +55,13 @@ public class BlockFlooderProjectile extends ThrowableItemProjectile {
         if (status == 3) {
             ParticleOptions particleEffect = this.getParticleParameters();
 
-            for (int i = 0; i < 8; ++i) {
-                this.level()
+            for (
+                int i = 0;
+                i < 8;
+                ++i
+            ) {
+                this
+                    .level()
                     .addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
@@ -67,12 +76,15 @@ public class BlockFlooderProjectile extends ThrowableItemProjectile {
 
             if (hitResult.getType() == HitResult.Type.BLOCK) {
                 BlockPos landingPos = getCorrectedBlockPos(hitResult.getLocation());
-                if (BlockFlooderBlock.isReplaceableBlock(world, landingPos) &&
-                    this.getOwner() instanceof Player playerEntityOwner) {
-                    world.setBlockAndUpdate(
-                        landingPos, PastelBlocks.BLOCK_FLOODER.get()
-                                                              .defaultBlockState()
-                    );
+                if (BlockFlooderBlock.isReplaceableBlock(world, landingPos) && this
+                    .getOwner() instanceof Player playerEntityOwner) {
+                    world
+                        .setBlockAndUpdate(
+                            landingPos,
+                            PastelBlocks.BLOCK_FLOODER
+                                .get()
+                                .defaultBlockState()
+                        );
                     BlockEntity blockEntity = world.getBlockEntity(landingPos);
                     if (blockEntity instanceof BlockFlooderBlockEntity blockFlooderBlockEntity) {
                         blockFlooderBlockEntity.setOwnerUUID(playerEntityOwner.getUUID());
@@ -93,9 +105,10 @@ public class BlockFlooderProjectile extends ThrowableItemProjectile {
      */
     public BlockPos getCorrectedBlockPos(Vec3 hitPos) {
         BlockPos hitBlockPos = BlockPos.containing(hitPos);
-        if (this.level()
-                .getBlockState(hitBlockPos)
-                .isRedstoneConductor(this.level(), hitBlockPos)) {
+        if (this
+            .level()
+            .getBlockState(hitBlockPos)
+            .isRedstoneConductor(this.level(), hitBlockPos)) {
             if (hitPos.x() % 1 < 0.05) {
                 return hitBlockPos.offset(-1, 0, 0);
             }

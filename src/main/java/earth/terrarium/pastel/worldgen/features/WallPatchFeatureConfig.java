@@ -18,50 +18,75 @@ import java.util.List;
 
 public class WallPatchFeatureConfig implements FeatureConfiguration {
 
-    public static final Codec<WallPatchFeatureConfig> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-                                                                                                                  BuiltInRegistries.BLOCK.byNameCodec()
-                                                                                                                                         .fieldOf("block")
-                                                                                                                                         .forGetter((config) -> config.block),
-                                                                                                                  Codec.intRange(1, 64)
-                                                                                                                       .fieldOf("search_range")
-                                                                                                                       .orElse(10)
-                                                                                                                       .forGetter((config) -> config.searchRange),
-                                                                                                                  Codec.BOOL.fieldOf("can_place_on_floor")
-                                                                                                                            .orElse(false)
-                                                                                                                            .forGetter((config) -> config.placeOnFloor),
-                                                                                                                  Codec.BOOL.fieldOf("can_place_on_ceiling")
-                                                                                                                            .orElse(false)
-                                                                                                                            .forGetter((config) -> config.placeOnCeiling),
-                                                                                                                  Codec.BOOL.fieldOf("can_place_on_wall")
-                                                                                                                            .orElse(false)
-                                                                                                                            .forGetter((config) -> config.placeOnWalls),
-                                                                                                                  IntProvider.NON_NEGATIVE_CODEC.fieldOf("width")
-                                                                                                                                                .forGetter((config) -> config.width),
-                                                                                                                  IntProvider.NON_NEGATIVE_CODEC.fieldOf("height")
-                                                                                                                                                .forGetter((config) -> config.height),
-                                                                                                                  RegistryCodecs.homogeneousList(Registries.BLOCK)
-                                                                                                                                .fieldOf("can_be_placed_on")
-                                                                                                                                .forGetter((config) -> config.canPlaceOn)
-                                                                                                              )
-                                                                                                              .apply(
-                                                                                                                  instance,
-                                                                                                                  WallPatchFeatureConfig::new
-                                                                                                              )
-    );
+    public static final Codec<WallPatchFeatureConfig> CODEC = RecordCodecBuilder
+        .create(
+            (instance) -> instance
+                .group(
+                    BuiltInRegistries.BLOCK
+                        .byNameCodec()
+                        .fieldOf("block")
+                        .forGetter((config) -> config.block),
+                    Codec
+                        .intRange(1, 64)
+                        .fieldOf("search_range")
+                        .orElse(10)
+                        .forGetter((config) -> config.searchRange),
+                    Codec.BOOL
+                        .fieldOf("can_place_on_floor")
+                        .orElse(false)
+                        .forGetter((config) -> config.placeOnFloor),
+                    Codec.BOOL
+                        .fieldOf("can_place_on_ceiling")
+                        .orElse(false)
+                        .forGetter((config) -> config.placeOnCeiling),
+                    Codec.BOOL
+                        .fieldOf("can_place_on_wall")
+                        .orElse(false)
+                        .forGetter((config) -> config.placeOnWalls),
+                    IntProvider.NON_NEGATIVE_CODEC
+                        .fieldOf("width")
+                        .forGetter((config) -> config.width),
+                    IntProvider.NON_NEGATIVE_CODEC
+                        .fieldOf("height")
+                        .forGetter((config) -> config.height),
+                    RegistryCodecs
+                        .homogeneousList(Registries.BLOCK)
+                        .fieldOf("can_be_placed_on")
+                        .forGetter((config) -> config.canPlaceOn)
+                )
+                .apply(
+                    instance,
+                    WallPatchFeatureConfig::new
+                )
+        );
 
     public final Block block;
+
     public final int searchRange;
+
     public final boolean placeOnFloor;
+
     public final boolean placeOnCeiling;
+
     public final boolean placeOnWalls;
+
     public final IntProvider width;
+
     public final IntProvider height;
+
     public final HolderSet<Block> canPlaceOn;
+
     private final ObjectArrayList<Direction> directions;
 
     public WallPatchFeatureConfig(
-        Block block, Integer searchRange, Boolean placeOnFloor, Boolean placeOnCeiling, Boolean placeOnWalls,
-        IntProvider width, IntProvider height, HolderSet<Block> canPlaceOn
+        Block block,
+        Integer searchRange,
+        Boolean placeOnFloor,
+        Boolean placeOnCeiling,
+        Boolean placeOnWalls,
+        IntProvider width,
+        IntProvider height,
+        HolderSet<Block> canPlaceOn
     ) {
         this.block = block;
         this.searchRange = searchRange;
@@ -84,10 +109,13 @@ public class WallPatchFeatureConfig implements FeatureConfiguration {
     }
 
     public List<Direction> shuffleDirections(RandomSource random, Direction excluded) {
-        return Util.toShuffledList(
-            this.directions.stream()
-                           .filter((direction) -> direction != excluded), random
-        );
+        return Util
+            .toShuffledList(
+                this.directions
+                    .stream()
+                    .filter((direction) -> direction != excluded),
+                random
+            );
     }
 
     public List<Direction> shuffleDirections(RandomSource random) {

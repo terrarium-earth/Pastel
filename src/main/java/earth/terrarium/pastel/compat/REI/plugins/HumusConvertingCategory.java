@@ -9,7 +9,9 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class HumusConvertingCategory extends FluidConvertingCategory<HumusConvertingDisplay> {
 
     @Override

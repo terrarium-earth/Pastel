@@ -17,18 +17,26 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record PlayParticleWithExactVelocityPayload(Vec3 pos, ParticleOptions particle, int amount, Vec3 velocity)
-    implements CustomPacketPayload {
+    implements
+    CustomPacketPayload {
 
-    public static final Type<PlayParticleWithExactVelocityPayload> ID = PastelC2SPackets.makeId(
-        "play_particle_with_exact_velocity");
-    public static final StreamCodec<RegistryFriendlyByteBuf, PlayParticleWithExactVelocityPayload> CODEC
-        = StreamCodec.composite(
-        PacketCodecHelper.VEC3D, PlayParticleWithExactVelocityPayload::pos,
-        ParticleTypes.STREAM_CODEC, PlayParticleWithExactVelocityPayload::particle,
-        ByteBufCodecs.INT, PlayParticleWithExactVelocityPayload::amount,
-        PacketCodecHelper.VEC3D, PlayParticleWithExactVelocityPayload::velocity,
-        PlayParticleWithExactVelocityPayload::new
-    );
+    public static final Type<PlayParticleWithExactVelocityPayload> ID = PastelC2SPackets
+        .makeId(
+            "play_particle_with_exact_velocity"
+        );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, PlayParticleWithExactVelocityPayload> CODEC = StreamCodec
+        .composite(
+            PacketCodecHelper.VEC3D,
+            PlayParticleWithExactVelocityPayload::pos,
+            ParticleTypes.STREAM_CODEC,
+            PlayParticleWithExactVelocityPayload::particle,
+            ByteBufCodecs.INT,
+            PlayParticleWithExactVelocityPayload::amount,
+            PacketCodecHelper.VEC3D,
+            PlayParticleWithExactVelocityPayload::velocity,
+            PlayParticleWithExactVelocityPayload::new
+        );
 
     /**
      * Play particle effect
@@ -49,25 +57,43 @@ public record PlayParticleWithExactVelocityPayload(Vec3 pos, ParticleOptions par
      * @param particleEffect The particle effect to play
      */
     public static void playParticleWithExactVelocity(
-        ServerLevel world, @NotNull Vec3 position, @NotNull ParticleOptions particleEffect, int amount,
+        ServerLevel world,
+        @NotNull Vec3 position,
+        @NotNull ParticleOptions particleEffect,
+        int amount,
         @NotNull Vec3 velocity
     ) {
-        PacketDistributor.sendToPlayersTrackingChunk(
-            world, new ChunkPos(BlockPos.containing(position)),
-            new PlayParticleWithExactVelocityPayload(position, particleEffect, amount, velocity)
-        );
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                world,
+                new ChunkPos(BlockPos.containing(position)),
+                new PlayParticleWithExactVelocityPayload(position, particleEffect, amount, velocity)
+            );
     }
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings(
+        "resource"
+    )
     public static void execute(PlayParticleWithExactVelocityPayload payload, IPayloadContext context) {
-        var level = context.player()
-                           .level();
+        var level = context
+            .player()
+            .level();
 
-        for (int i = 0; i < payload.amount; i++) {
-            level.addParticle(
-                payload.particle, payload.pos.x(), payload.pos.y(), payload.pos.z(), payload.velocity.x(),
-                payload.velocity.y(), payload.velocity.z()
-            );
+        for (
+            int i = 0;
+            i < payload.amount;
+            i++
+        ) {
+            level
+                .addParticle(
+                    payload.particle,
+                    payload.pos.x(),
+                    payload.pos.y(),
+                    payload.pos.z(),
+                    payload.velocity.x(),
+                    payload.velocity.y(),
+                    payload.velocity.z()
+                );
         }
     }
 

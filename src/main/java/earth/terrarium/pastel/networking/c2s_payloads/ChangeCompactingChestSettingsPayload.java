@@ -13,14 +13,17 @@ import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record ChangeCompactingChestSettingsPayload(CompactionCraftingMode mode) implements CustomPacketPayload {
 
-    public static final CustomPacketPayload.Type<ChangeCompactingChestSettingsPayload> ID = PastelC2SPackets.makeId(
-        "change_compacting_chest_settings");
-    public static final StreamCodec<FriendlyByteBuf, ChangeCompactingChestSettingsPayload> CODEC
-        = StreamCodec.composite(
-        PacketCodecHelper.enumOf(CompactionCraftingMode::values),
-        ChangeCompactingChestSettingsPayload::mode,
-        ChangeCompactingChestSettingsPayload::new
-    );
+    public static final CustomPacketPayload.Type<ChangeCompactingChestSettingsPayload> ID = PastelC2SPackets
+        .makeId(
+            "change_compacting_chest_settings"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, ChangeCompactingChestSettingsPayload> CODEC = StreamCodec
+        .composite(
+            PacketCodecHelper.enumOf(CompactionCraftingMode::values),
+            ChangeCompactingChestSettingsPayload::mode,
+            ChangeCompactingChestSettingsPayload::new
+        );
 
     public static IPayloadHandler<ChangeCompactingChestSettingsPayload> getPayloadHandler() {
         return (payload, context) -> {

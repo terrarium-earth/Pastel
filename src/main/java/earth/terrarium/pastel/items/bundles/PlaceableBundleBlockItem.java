@@ -37,56 +37,78 @@ public class PlaceableBundleBlockItem extends BlockItem {
 
     @Override
     public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction clickType, Player player) {
-        return PastelItems.EXTENDED_BUNDLE_ITEM.get()
-                                               .overrideStackedOnOther(stack, slot, clickType, player);
+        return PastelItems.EXTENDED_BUNDLE_ITEM
+            .get()
+            .overrideStackedOnOther(stack, slot, clickType, player);
     }
 
     @Override
     public boolean overrideOtherStackedOnMe(
-        ItemStack stack, ItemStack otherStack, Slot slot, ClickAction clickType, Player player,
+        ItemStack stack,
+        ItemStack otherStack,
+        Slot slot,
+        ClickAction clickType,
+        Player player,
         SlotAccess cursorStackReference
     ) {
-        return PastelItems.EXTENDED_BUNDLE_ITEM.get()
-                                               .overrideOtherStackedOnMe(
-                                                   stack, otherStack, slot, clickType, player, cursorStackReference);
+        return PastelItems.EXTENDED_BUNDLE_ITEM
+            .get()
+            .overrideOtherStackedOnMe(
+                stack,
+                otherStack,
+                slot,
+                clickType,
+                player,
+                cursorStackReference
+            );
     }
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return PastelItems.EXTENDED_BUNDLE_ITEM.get()
-                                               .isBarVisible(stack);
+        return PastelItems.EXTENDED_BUNDLE_ITEM
+            .get()
+            .isBarVisible(stack);
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        return PastelItems.EXTENDED_BUNDLE_ITEM.get()
-                                               .getBarWidth(stack);
+        return PastelItems.EXTENDED_BUNDLE_ITEM
+            .get()
+            .getBarWidth(stack);
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return PastelItems.EXTENDED_BUNDLE_ITEM.get()
-                                               .getBarColor(stack);
+        return PastelItems.EXTENDED_BUNDLE_ITEM
+            .get()
+            .getBarColor(stack);
     }
 
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
-        return PastelItems.EXTENDED_BUNDLE_ITEM.get()
-                                               .getTooltipImage(stack);
+        return PastelItems.EXTENDED_BUNDLE_ITEM
+            .get()
+            .getTooltipImage(stack);
     }
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
-        PastelItems.EXTENDED_BUNDLE_ITEM.get()
-                                        .appendHoverText(stack, context, tooltip, type);
+        PastelItems.EXTENDED_BUNDLE_ITEM
+            .get()
+            .appendHoverText(stack, context, tooltip, type);
     }
 
     @Override
     public void onDestroyed(ItemEntity entity) {
-        PastelItems.EXTENDED_BUNDLE_ITEM.get()
-                                        .onDestroyed(entity);
+        PastelItems.EXTENDED_BUNDLE_ITEM
+            .get()
+            .onDestroyed(entity);
         super.onDestroyed(entity);
     }
 

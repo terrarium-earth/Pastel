@@ -25,14 +25,25 @@ public class StatusEffectDrinkItem extends DrinkItem {
         }
 
         if (!world.isClientSide) {
-            PotionContents potionContentsComponent = stack.getOrDefault(
-                DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+            PotionContents potionContentsComponent = stack
+                .getOrDefault(
+                    DataComponents.POTION_CONTENTS,
+                    PotionContents.EMPTY
+                );
             potionContentsComponent.forEachEffect((effect) -> {
-                if ((effect.getEffect()
-                           .value()).isInstantenous()) {
-                    (effect.getEffect()
-                           .value()).applyInstantenousEffect(
-                        playerEntity, playerEntity, user, effect.getAmplifier(), 1.0);
+                if ((effect
+                    .getEffect()
+                    .value()).isInstantenous()) {
+                    (effect
+                        .getEffect()
+                        .value())
+                        .applyInstantenousEffect(
+                            playerEntity,
+                            playerEntity,
+                            user,
+                            effect.getAmplifier(),
+                            1.0
+                        );
                 } else {
                     user.addEffect(effect);
                 }

@@ -7,7 +7,9 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.List;
 
-@Mixin(BundleContents.Mutable.class)
+@Mixin(
+    BundleContents.Mutable.class
+)
 public interface BundleContentsComponentBuilderAccessor {
 
     @Accessor

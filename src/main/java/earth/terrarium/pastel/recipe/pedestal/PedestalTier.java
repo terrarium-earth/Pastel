@@ -27,35 +27,50 @@ import java.util.Optional;
 
 public enum PedestalTier implements StringRepresentable {
     BASIC(
-        PastelAdvancements.PLACE_PEDESTAL, null,
-        new GemstoneColor[]{PastelGemstoneColor.CYAN, PastelGemstoneColor.MAGENTA, PastelGemstoneColor.YELLOW}
+        PastelAdvancements.PLACE_PEDESTAL,
+        null,
+        new GemstoneColor[] {
+            PastelGemstoneColor.CYAN, PastelGemstoneColor.MAGENTA, PastelGemstoneColor.YELLOW
+        }
     ),
 
     SIMPLE(
-        PastelAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE, PastelMultiblocks.PEDESTAL_SIMPLE,
-        new GemstoneColor[]{PastelGemstoneColor.CYAN, PastelGemstoneColor.MAGENTA, PastelGemstoneColor.YELLOW}
+        PastelAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE,
+        PastelMultiblocks.PEDESTAL_SIMPLE,
+        new GemstoneColor[] {
+            PastelGemstoneColor.CYAN, PastelGemstoneColor.MAGENTA, PastelGemstoneColor.YELLOW
+        }
     ),
 
     ADVANCED(
-        PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE, PastelMultiblocks.PEDESTAL_ADVANCED,
-        new GemstoneColor[]{
-            PastelGemstoneColor.CYAN, PastelGemstoneColor.MAGENTA,
-            PastelGemstoneColor.YELLOW, PastelGemstoneColor.BLACK
+        PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE,
+        PastelMultiblocks.PEDESTAL_ADVANCED,
+        new GemstoneColor[] {
+            PastelGemstoneColor.CYAN,
+            PastelGemstoneColor.MAGENTA,
+            PastelGemstoneColor.YELLOW,
+            PastelGemstoneColor.BLACK
         }
     ),
 
     COMPLEX(
-        PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE, PastelMultiblocks.PEDESTAL_COMPLEX,
+        PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE,
+        PastelMultiblocks.PEDESTAL_COMPLEX,
         PastelGemstoneColor.values()
     );
 
     public final ResourceLocation unlockAdvancementId;
+
     public final @Nullable ResourceLocation structure;
+
     private final GemstoneColor[] gemstoneColors;
 
     public static final Codec<PedestalTier> CODEC = StringRepresentable.fromEnum(PedestalTier::values);
-    public static final StreamCodec<ByteBuf, PedestalTier> STREAM_CODEC = PacketCodecHelper.enumOf(
-        PedestalTier::values);
+
+    public static final StreamCodec<ByteBuf, PedestalTier> STREAM_CODEC = PacketCodecHelper
+        .enumOf(
+            PedestalTier::values
+        );
 
     PedestalTier(ResourceLocation unlockAdvancementId, ResourceLocation structure, GemstoneColor[] gemstoneColors) {
         this.unlockAdvancementId = unlockAdvancementId;
@@ -63,17 +78,23 @@ public enum PedestalTier implements StringRepresentable {
         this.gemstoneColors = gemstoneColors;
     }
 
-    @Contract(pure = true)
+    @Contract(
+        pure = true
+    )
     public int getPowderSlotCount() {
         return this.gemstoneColors.length;
     }
 
-    @Contract(pure = true)
+    @Contract(
+        pure = true
+    )
     public GemstoneColor[] gemstoneColors() {
         return gemstoneColors;
     }
 
-    @Contract(pure = true)
+    @Contract(
+        pure = true
+    )
     public static Optional<PedestalTier> getHighestUnlockedRecipeTier(Player playerEntity) {
         if (DatabankUtils.hasAdvancement(playerEntity, COMPLEX.unlockAdvancementId)) {
             return Optional.of(PedestalTier.COMPLEX);
@@ -110,14 +131,19 @@ public enum PedestalTier implements StringRepresentable {
         Multiblock multiblock;
         var level = pedestal.getLevel();
         var pos = pedestal.getBlockPos();
-        var maxTier = pedestal.getVariant()
-                              .getRecipeTier();
+        var maxTier = pedestal
+            .getVariant()
+            .getRecipeTier();
 
         if (maxTier == BASIC)
             return BASIC;
 
         var tier = BASIC;
-        for (int i = 1; i <= maxTier.ordinal(); i++) {
+        for (
+            int i = 1;
+            i <= maxTier.ordinal();
+            i++
+        ) {
             var proposal = values()[i];
             multiblock = getStructureFor(player, proposal);
 
@@ -133,9 +159,11 @@ public enum PedestalTier implements StringRepresentable {
     }
 
     private static Multiblock getStructureFor(Optional<Player> player, PedestalTier proposal) {
-        if (player.isPresent() && proposal == COMPLEX &&
-            !DatabankUtils.hasAdvancement(
-                player.get(), PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE)) {
+        if (player.isPresent() && proposal == COMPLEX && !DatabankUtils
+            .hasAdvancement(
+                player.get(),
+                PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE
+            )) {
 
             return PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE);
         }

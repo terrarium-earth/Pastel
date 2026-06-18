@@ -19,7 +19,9 @@ public enum LizardFrillVariant implements StringRepresentable {
     public static Codec<LizardFrillVariant> CODEC = StringRepresentable.fromEnum(LizardFrillVariant::values);
 
     private final String name;
+
     private final ResourceLocation id;
+
     private final ResourceLocation texture;
 
     LizardFrillVariant(String name, String texture) {

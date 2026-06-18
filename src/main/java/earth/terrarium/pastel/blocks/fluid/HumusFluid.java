@@ -49,9 +49,10 @@ public abstract class HumusFluid extends PastelFluid {
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
-        return PastelBlocks.HUMUS.get()
-                                 .defaultBlockState()
-                                 .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+        return PastelBlocks.HUMUS
+            .get()
+            .defaultBlockState()
+            .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
     }
 
     @Override
@@ -60,15 +61,24 @@ public abstract class HumusFluid extends PastelFluid {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void animateTick(Level world, BlockPos pos, FluidState state, RandomSource random) {
         BlockPos topPos = pos.above();
         BlockState topState = world.getBlockState(topPos);
         if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(1000) == 0) {
-            world.playLocalSound(
-                pos.getX(), pos.getY(), pos.getZ(), PastelSounds.HUMUS_AMBIENT, SoundSource.BLOCKS,
-                0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false
-            );
+            world
+                .playLocalSound(
+                    pos.getX(),
+                    pos.getY(),
+                    pos.getZ(),
+                    PastelSounds.HUMUS_AMBIENT,
+                    SoundSource.BLOCKS,
+                    0.2F + random.nextFloat() * 0.2F,
+                    0.9F + random.nextFloat() * 0.15F,
+                    false
+                );
         }
     }
 
@@ -113,8 +123,8 @@ public abstract class HumusFluid extends PastelFluid {
         if (!level.isClientSide && entity instanceof LivingEntity livingEntity) {
             // the entity is hurt at air == -20 and then reset to air = 0
             // this way the entity loses its breath way faster, but gets damaged just as slow afterwards
-            if (livingEntity.isEyeInFluid(PastelFluidTags.HUMUS) && level.getGameTime() % 2 == 0 &&
-                livingEntity.getAirSupply() > 0) {
+            if (livingEntity.isEyeInFluid(PastelFluidTags.HUMUS) && level.getGameTime() % 2 == 0 && livingEntity
+                .getAirSupply() > 0) {
                 livingEntity.setAirSupply(livingEntity.getAirSupply() - 1);
             }
 

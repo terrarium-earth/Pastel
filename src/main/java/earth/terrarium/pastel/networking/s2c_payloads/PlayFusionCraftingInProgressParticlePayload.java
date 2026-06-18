@@ -14,24 +14,35 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayFusionCraftingInProgressParticlePayload(BlockPos pos) implements CustomPacketPayload {
 
-    public static final Type<PlayFusionCraftingInProgressParticlePayload> ID = PastelC2SPackets.makeId(
-        "play_fusion_crafting_in_progress_particle");
-    public static final StreamCodec<FriendlyByteBuf, PlayFusionCraftingInProgressParticlePayload> CODEC
-        = StreamCodec.composite(
-        BlockPos.STREAM_CODEC, PlayFusionCraftingInProgressParticlePayload::pos,
-        PlayFusionCraftingInProgressParticlePayload::new
-    );
+    public static final Type<PlayFusionCraftingInProgressParticlePayload> ID = PastelC2SPackets
+        .makeId(
+            "play_fusion_crafting_in_progress_particle"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, PlayFusionCraftingInProgressParticlePayload> CODEC = StreamCodec
+        .composite(
+            BlockPos.STREAM_CODEC,
+            PlayFusionCraftingInProgressParticlePayload::pos,
+            PlayFusionCraftingInProgressParticlePayload::new
+        );
 
     public static void sendPlayFusionCraftingInProgressParticles(ServerLevel world, BlockPos pos) {
-        PacketDistributor.sendToPlayersTrackingChunk(
-            world, new ChunkPos(pos), new PlayFusionCraftingInProgressParticlePayload(pos));
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                world,
+                new ChunkPos(pos),
+                new PlayFusionCraftingInProgressParticlePayload(pos)
+            );
     }
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings(
+        "resource"
+    )
     public static void execute(PlayFusionCraftingInProgressParticlePayload payload, IPayloadContext context) {
-        BlockEntity blockEntity = context.player()
-                                         .level()
-                                         .getBlockEntity(payload.pos);
+        BlockEntity blockEntity = context
+            .player()
+            .level()
+            .getBlockEntity(payload.pos);
         if (blockEntity instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
             fusionShrineBlockEntity.spawnCraftingParticles();
         }

@@ -45,14 +45,22 @@ public class PriscillentSpectaclesItem extends PastelTrinketItem implements InkP
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         if (InkPowered.canUseClient()) {
-            tooltip.add(Component.translatable(
-                "item.pastel.priscillent_spectacles.tooltip_with_ink", SpectacleData.INK_COST.color()
-                                                                            .getColoredInkName()
-            ));
+            tooltip
+                .add(
+                    Component
+                        .translatable(
+                            "item.pastel.priscillent_spectacles.tooltip_with_ink",
+                            SpectacleData.INK_COST
+                                .color()
+                                .getColoredInkName()
+                        )
+                );
         } else {
             tooltip.add(Component.translatable("item.pastel.priscillent_spectacles.tooltip"));
         }
@@ -70,14 +78,22 @@ public class PriscillentSpectaclesItem extends PastelTrinketItem implements InkP
 
     @Override
     public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
-        if (player == null || PastelTrinketItem.getFirstEquipped(player, PastelItems.PRISCILLENT_SPECTACLES.get())
-                                               .map(s -> s != stack).orElse(true))
+        if (player == null || PastelTrinketItem
+            .getFirstEquipped(player, PastelItems.PRISCILLENT_SPECTACLES.get())
+            .map(s -> s != stack)
+            .orElse(true))
             return ExtendedItemBar.PASS;
 
         var data = player.getData(SpectacleData.ATTACHMENT);
-        var progress = (int) Math.floor(Mth.clampedLerp(
-            0, 13, data.getRemainingDuration()
-        ));
+        var progress = (int) Math
+            .floor(
+                Mth
+                    .clampedLerp(
+                        0,
+                        13,
+                        data.getRemainingDuration()
+                    )
+            );
         return new BarSignature(2, 13, 13, progress, 1, 0xFFffd67d, 2, 0xFF0b0525);
     }
 }

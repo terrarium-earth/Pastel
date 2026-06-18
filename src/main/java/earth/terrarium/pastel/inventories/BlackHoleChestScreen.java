@@ -10,8 +10,10 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class BlackHoleChestScreen extends AbstractContainerScreen<BlackHoleChestScreenHandler> {
 
-    public static final ResourceLocation BACKGROUND = PastelCommon.locate(
-        "textures/gui/container/black_hole_chest.png");
+    public static final ResourceLocation BACKGROUND = PastelCommon
+        .locate(
+            "textures/gui/container/black_hole_chest.png"
+        );
 
     public BlackHoleChestScreen(BlackHoleChestScreenHandler handler, Inventory playerInventory, Component title) {
         super(handler, playerInventory, title);
@@ -28,8 +30,15 @@ public class BlackHoleChestScreen extends AbstractContainerScreen<BlackHoleChest
         int intInventoryY = 102;
 
         drawContext.drawString(this.font, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
-        drawContext.drawString(
-            this.font, this.playerInventoryTitle, inventoryX, intInventoryY, RenderHelper.GREEN_COLOR, false);
+        drawContext
+            .drawString(
+                this.font,
+                this.playerInventoryTitle,
+                inventoryX,
+                intInventoryY,
+                RenderHelper.GREEN_COLOR,
+                false
+            );
     }
 
     @Override
@@ -45,12 +54,12 @@ public class BlackHoleChestScreen extends AbstractContainerScreen<BlackHoleChest
         super.render(drawContext, mouseX, mouseY, delta);
 
         // TODO: that should probably not be dummied out? o.O
-		/*if(mouseX > x+153 && mouseX < x+153+16 && mouseY > y+5 && mouseY < y+5+16) {
-			this.renderTooltip(matrices, Text.translatable("block.spectrum.compacting_chest.toggle_crafting_mode"),
-			mouseX, mouseY);
-		} else {
-		
-		}*/
+        /*if(mouseX > x+153 && mouseX < x+153+16 && mouseY > y+5 && mouseY < y+5+16) {
+        	this.renderTooltip(matrices, Text.translatable("block.spectrum.compacting_chest.toggle_crafting_mode"),
+        	mouseX, mouseY);
+        } else {
+        
+        }*/
         renderTooltip(drawContext, mouseX, mouseY);
     }
 

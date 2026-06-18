@@ -32,6 +32,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 public class AmphoraBlockEntity extends RandomizableContainerBlockEntity implements SidedCapabilityProvider {
 
     private NonNullList<ItemStack> inventory;
+
     private final ContainerOpenersCounter stateManager;
 
     public AmphoraBlockEntity(BlockPos pos, BlockState state) {
@@ -53,7 +54,12 @@ public class AmphoraBlockEntity extends RandomizableContainerBlockEntity impleme
 
             @Override
             protected void openerCountChanged(
-                Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+                Level world,
+                BlockPos pos,
+                BlockState state,
+                int oldViewerCount,
+                int newViewerCount
+            ) {
             }
 
             @Override
@@ -107,8 +113,13 @@ public class AmphoraBlockEntity extends RandomizableContainerBlockEntity impleme
 
     @Override
     protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-        return GenericPastelContainerScreenHandler.createGeneric9x6(
-            syncId, playerInventory, this, ScreenBackgroundVariant.EARLYGAME);
+        return GenericPastelContainerScreenHandler
+            .createGeneric9x6(
+                syncId,
+                playerInventory,
+                this,
+                ScreenBackgroundVariant.EARLYGAME
+            );
     }
 
     @Override
@@ -144,8 +155,17 @@ public class AmphoraBlockEntity extends RandomizableContainerBlockEntity impleme
         double d = (double) this.worldPosition.getX() + 0.5 + (double) vec3i.getX() / 2.0;
         double e = (double) this.worldPosition.getY() + 0.5 + (double) vec3i.getY() / 2.0;
         double f = (double) this.worldPosition.getZ() + 0.5 + (double) vec3i.getZ() / 2.0;
-        this.level.playSound(
-            null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+        this.level
+            .playSound(
+                null,
+                d,
+                e,
+                f,
+                soundEvent,
+                SoundSource.BLOCKS,
+                0.5F,
+                this.level.random.nextFloat() * 0.1F + 0.9F
+            );
     }
 
     @Override

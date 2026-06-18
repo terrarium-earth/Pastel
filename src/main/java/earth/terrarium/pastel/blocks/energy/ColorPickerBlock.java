@@ -55,10 +55,18 @@ public class ColorPickerBlock extends HorizontalDirectionalBlock implements Enti
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("block.pastel.color_picker.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("block.pastel.color_picker.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
@@ -83,24 +91,40 @@ public class ColorPickerBlock extends HorizontalDirectionalBlock implements Enti
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(
-                       FACING, ctx.getHorizontalDirection()
-                                  .getOpposite()
-                   );
+        return this
+            .defaultBlockState()
+            .setValue(
+                FACING,
+                ctx
+                    .getHorizontalDirection()
+                    .getOpposite()
+            );
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : Support.checkType(
-            type, PastelBlockEntities.COLOR_PICKER.get(), ColorPickerBlockEntity::tick);
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? null
+            : Support
+                .checkType(
+                    type,
+                    PastelBlockEntities.COLOR_PICKER.get(),
+                    ColorPickerBlockEntity::tick
+                );
     }
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -127,7 +151,11 @@ public class ColorPickerBlock extends HorizontalDirectionalBlock implements Enti
         if (world.getBlockEntity(pos) instanceof ColorPickerBlockEntity blockEntity) {
             int i = 0;
             float f = 0.0f;
-            for (int j = 0; j < blockEntity.inventory.getSlots(); ++j) {
+            for (
+                int j = 0;
+                j < blockEntity.inventory.getSlots();
+                ++j
+            ) {
                 ItemStack itemStack = blockEntity.inventory.getStackInSlot(j);
                 if (itemStack.isEmpty()) continue;
                 f += (float) itemStack.getCount() / (float) itemStack.getMaxStackSize();

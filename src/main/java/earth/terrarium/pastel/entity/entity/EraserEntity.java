@@ -58,12 +58,16 @@ import java.util.Optional;
 
 public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bucketable {
 
-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(
-        EraserEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData
+        .defineId(
+            EraserEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
 
     private @Nullable MobEffectInstance effectOnHit;
 
     private @Nullable EraserEntity leader;
+
     private int groupSize = 1;
 
     public EraserEntity(EntityType<? extends EraserEntity> entityType, Level world) {
@@ -71,10 +75,11 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
     }
 
     public static AttributeSupplier.Builder createEraserAttributes() {
-        return Monster.createMonsterAttributes()
-                      .add(Attributes.MAX_HEALTH, 20.0)
-                      .add(Attributes.MOVEMENT_SPEED, 0.3)
-                      .add(Attributes.FOLLOW_RANGE, 28.0);
+        return Monster
+            .createMonsterAttributes()
+            .add(Attributes.MAX_HEALTH, 20.0)
+            .add(Attributes.MOVEMENT_SPEED, 0.3)
+            .add(Attributes.FOLLOW_RANGE, 28.0);
     }
 
     @Override
@@ -115,7 +120,9 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(
-        ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType spawnReason,
+        ServerLevelAccessor world,
+        DifficultyInstance difficulty,
+        MobSpawnType spawnReason,
         @Nullable SpawnGroupData entityData
     ) {
         RandomSource random = world.getRandom();
@@ -185,7 +192,8 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
     @Override
     public void moveTowardLeader() {
         if (this.hasLeader()) {
-            this.getNavigation()
+            this
+                .getNavigation()
                 .moveTo(this.leader, 1.0);
         }
     }
@@ -244,8 +252,9 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 
     public MobEffectInstance getRandomOnHitEffect() {
         Level world = this.level();
-        Difficulty difficulty = this.level()
-                                    .getDifficulty();
+        Difficulty difficulty = this
+            .level()
+            .getDifficulty();
 
         Holder<MobEffect> statusEffect;
         int amplifier = 0;
@@ -294,7 +303,10 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
     // Bucketable.tryBucket() has a dedicated check for WATER_BUCKET in there
     // since we are bucketing with Fluids.EMPTY we have to use a custom implementation
     static <T extends LivingEntity & Bucketable> Optional<InteractionResult> bucketMobPickup(
-        Player player, InteractionHand hand, T entity) {
+        Player player,
+        InteractionHand hand,
+        T entity
+    ) {
         ItemStack handStack = player.getItemInHand(hand);
         if (handStack.getItem() == Items.BUCKET && entity.isAlive()) {
             entity.playSound(entity.getPickupSound(), 1.0F, 1.0F);
@@ -335,14 +347,18 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
     }
 
     @Override
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings(
+        "deprecation"
+    )
     public void saveToBucketTag(ItemStack stack) {
         Bucketable.saveDefaultDataToBucketTag(this, stack);
         CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, this::putEffectOnHit);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings(
+        "deprecation"
+    )
     public void loadFromBucketTag(CompoundTag nbt) {
         Bucketable.loadDefaultDataFromBucketTag(this, nbt);
         readEffectOnHit(nbt);
@@ -360,6 +376,7 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 
     public static class SwarmingSpiderData extends SpiderEffectsGroupData {
         public Holder<MobEffect> effect;
+
         public int amplifier = 0;
 
         public SwarmingSpiderData() {

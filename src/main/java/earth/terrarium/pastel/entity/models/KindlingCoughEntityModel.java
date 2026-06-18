@@ -10,7 +10,9 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class KindlingCoughEntityModel extends HierarchicalModel<KindlingCoughEntity> {
 
     private final ModelPart root;
@@ -22,24 +24,32 @@ public class KindlingCoughEntityModel extends HierarchicalModel<KindlingCoughEnt
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
 
-        modelData.getRoot()
-                 .addOrReplaceChild(
-                     "main", CubeListBuilder.create()
-                                            .texOffs(0, 0)
-                                            .addBox(-4.0F, 0.0F, 0.0F, 2.0F, 2.0F, 2.0F)
-                                            .addBox(0.0F, -4.0F, 0.0F, 2.0F, 2.0F, 2.0F)
-                                            .addBox(0.0F, 0.0F, -4.0F, 2.0F, 2.0F, 2.0F)
-                                            .addBox(0.0F, 0.0F, 0.0F, 2.0F, 2.0F, 2.0F)
-                                            .addBox(2.0F, 0.0F, 0.0F, 2.0F, 2.0F, 2.0F)
-                                            .addBox(0.0F, 2.0F, 0.0F, 2.0F, 2.0F, 2.0F)
-                                            .addBox(0.0F, 0.0F, 2.0F, 2.0F, 2.0F, 2.0F), PartPose.ZERO
-                 );
+        modelData
+            .getRoot()
+            .addOrReplaceChild(
+                "main",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-4.0F, 0.0F, 0.0F, 2.0F, 2.0F, 2.0F)
+                    .addBox(0.0F, -4.0F, 0.0F, 2.0F, 2.0F, 2.0F)
+                    .addBox(0.0F, 0.0F, -4.0F, 2.0F, 2.0F, 2.0F)
+                    .addBox(0.0F, 0.0F, 0.0F, 2.0F, 2.0F, 2.0F)
+                    .addBox(2.0F, 0.0F, 0.0F, 2.0F, 2.0F, 2.0F)
+                    .addBox(0.0F, 2.0F, 0.0F, 2.0F, 2.0F, 2.0F)
+                    .addBox(0.0F, 0.0F, 2.0F, 2.0F, 2.0F, 2.0F),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 64, 32);
     }
 
     public void setupAnim(
-        KindlingCoughEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw,
+        KindlingCoughEntity entity,
+        float limbAngle,
+        float limbDistance,
+        float animationProgress,
+        float headYaw,
         float headPitch
     ) {
     }

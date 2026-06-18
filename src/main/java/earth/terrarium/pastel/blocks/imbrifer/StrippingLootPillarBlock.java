@@ -18,10 +18,14 @@ import org.jetbrains.annotations.Nullable;
 public class StrippingLootPillarBlock extends RotatedPillarBlock implements StrippableDrop {
 
     private final Block sourceBlock;
+
     private final ResourceKey<LootTable> strippingLootTableKey;
 
     public StrippingLootPillarBlock(
-        Properties settings, Block sourceBlock, ResourceKey<LootTable> strippingLootTableKey) {
+        Properties settings,
+        Block sourceBlock,
+        ResourceKey<LootTable> strippingLootTableKey
+    ) {
         super(settings);
         this.sourceBlock = sourceBlock;
         this.strippingLootTableKey = strippingLootTableKey;
@@ -51,13 +55,18 @@ public class StrippingLootPillarBlock extends RotatedPillarBlock implements Stri
 
     @Override
     public @Nullable BlockState getToolModifiedState(
-        BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
+        BlockState state,
+        UseOnContext context,
+        ItemAbility itemAbility,
+        boolean simulate
+    ) {
         ItemStack itemStack = context.getItemInHand();
         if (!itemStack.canPerformAction(itemAbility)) {
             return null;
         } else if (ItemAbilities.AXE_STRIP == itemAbility) {
-            return sourceBlock.defaultBlockState()
-                              .setValue(AXIS, state.getValue(AXIS));
+            return sourceBlock
+                .defaultBlockState()
+                .setValue(AXIS, state.getValue(AXIS));
         }
         return null;
     }

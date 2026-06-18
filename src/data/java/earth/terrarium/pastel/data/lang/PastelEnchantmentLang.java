@@ -26,10 +26,11 @@ public class PastelEnchantmentLang {
         provider.add("enchantment.pastel.indestructible", "Indestructible");
         provider.add("enchantment.pastel.indestructible.desc", "Makes the tool fully unbreakable");
         provider.add("enchantment.pastel.inertia", "Inertia");
-        provider.add(
-            "enchantment.pastel.inertia.desc",
-            "Decreased mining speed. Increases with each mined block of the same type"
-        );
+        provider
+            .add(
+                "enchantment.pastel.inertia.desc",
+                "Decreased mining speed. Increases with each mined block of the same type"
+            );
         provider.add("enchantment.pastel.inexorable", "Inexorable");
         provider.add("enchantment.pastel.inexorable.desc", "Prevents tool and movement slowdown effects");
         provider.add("enchantment.pastel.inventory_insertion", "Inventory Insertion");
@@ -39,17 +40,19 @@ public class PastelEnchantmentLang {
         provider.add("enchantment.pastel.razing", "Razing");
         provider.add("enchantment.pastel.razing.desc", "Higher mining speed the harder a block is to break");
         provider.add("enchantment.pastel.resonance", "Resonance");
-        provider.add(
-            "enchantment.pastel.resonance.desc",
-            "Uses gentle vibrations to allow some blocks to either drop themselves or preserve special properties"
-        );
+        provider
+            .add(
+                "enchantment.pastel.resonance.desc",
+                "Uses gentle vibrations to allow some blocks to either drop themselves or preserve special properties"
+            );
         provider.add("enchantment.pastel.serendipity_reel", "Serendipity Reel");
         provider.add("enchantment.pastel.serendipity_reel.desc", "Chance to reel in double loot");
         provider.add("enchantment.pastel.steadfast", "Steadfast");
-        provider.add(
-            "enchantment.pastel.steadfast.desc",
-            "When on the ground, immune to most forms of damage, despawning and the void"
-        );
+        provider
+            .add(
+                "enchantment.pastel.steadfast.desc",
+                "When on the ground, immune to most forms of damage, despawning and the void"
+            );
         provider.add("enchantment.pastel.tight_grip", "Tight Grip");
         provider.add("enchantment.pastel.tight_grip.desc", "Decreased attack cooldown");
         provider.add("enchantment.pastel.treasure_hunter", "Treasure Hunter");

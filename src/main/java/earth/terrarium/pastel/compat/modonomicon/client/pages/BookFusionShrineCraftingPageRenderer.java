@@ -18,10 +18,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class BookFusionShrineCraftingPageRenderer
-    extends BookGatedRecipePageRenderer<FusionShrineRecipe, BookGatedRecipePage<FusionShrineRecipe>> {
+    extends
+    BookGatedRecipePageRenderer<FusionShrineRecipe, BookGatedRecipePage<FusionShrineRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/modonomicon/fusion_shrine.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/modonomicon/fusion_shrine.png"
+        );
 
     public BookFusionShrineCraftingPageRenderer(BookGatedRecipePage<FusionShrineRecipe> page) {
         super(page);
@@ -34,8 +37,13 @@ public class BookFusionShrineCraftingPageRenderer
 
     @Override
     protected void drawRecipe(
-        GuiGraphics drawContext, RecipeHolder<FusionShrineRecipe> recipeEntry, int recipeX, int recipeY, int mouseX,
-        int mouseY, boolean second
+        GuiGraphics drawContext,
+        RecipeHolder<FusionShrineRecipe> recipeEntry,
+        int recipeX,
+        int recipeY,
+        int mouseX,
+        int mouseY,
+        boolean second
     ) {
         FusionShrineRecipe recipe = recipeEntry.value();
         Level world = Minecraft.getInstance().level;
@@ -49,26 +57,67 @@ public class BookFusionShrineCraftingPageRenderer
         // the ingredients
         List<IngredientStack> ingredients = recipe.getIngredientStacks();
         int startX = Math.max(-10, 30 - ingredients.size() * 8);
-        for (int i = 0; i < ingredients.size(); i++) {
-            ModonomiconHelper.renderIngredientStack(
-                drawContext, parentScreen, recipeX + startX + i * 16, recipeY + 3, mouseX, mouseY, ingredients.get(i));
+        for (
+            int i = 0;
+            i < ingredients.size();
+            i++
+        ) {
+            ModonomiconHelper
+                .renderIngredientStack(
+                    drawContext,
+                    parentScreen,
+                    recipeX + startX + i * 16,
+                    recipeY + 3,
+                    mouseX,
+                    mouseY,
+                    ingredients.get(i)
+                );
         }
 
-        if (!recipe.getFluid()
-                   .isEmpty()) {
+        if (!recipe
+            .getFluid()
+            .isEmpty()) {
             @NotNull Ingredient fluidIngredient = FluidRendering.fluidBucketIngredient(recipe.getFluid());
-            parentScreen.renderItemStack(
-                drawContext, recipeX + 14, recipeY + 31, mouseX, mouseY, recipe.getToastSymbol()); // the shrine
-            parentScreen.renderIngredient(
-                drawContext, recipeX + 30, recipeY + 31, mouseX, mouseY, fluidIngredient); // the fluid
+            parentScreen
+                .renderItemStack(
+                    drawContext,
+                    recipeX + 14,
+                    recipeY + 31,
+                    mouseX,
+                    mouseY,
+                    recipe.getToastSymbol()
+                ); // the shrine
+            parentScreen
+                .renderIngredient(
+                    drawContext,
+                    recipeX + 30,
+                    recipeY + 31,
+                    mouseX,
+                    mouseY,
+                    fluidIngredient
+                ); // the fluid
         } else {
-            parentScreen.renderItemStack(
-                drawContext, recipeX + 22, recipeY + 31, mouseX, mouseY, recipe.getToastSymbol()); // the shrine
+            parentScreen
+                .renderItemStack(
+                    drawContext,
+                    recipeX + 22,
+                    recipeY + 31,
+                    mouseX,
+                    mouseY,
+                    recipe.getToastSymbol()
+                ); // the shrine
         }
 
         // the output
-        parentScreen.renderItemStack(
-            drawContext, recipeX + 78, recipeY + 31, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
+        parentScreen
+            .renderItemStack(
+                drawContext,
+                recipeX + 78,
+                recipeY + 31,
+                mouseX,
+                mouseY,
+                recipe.getResultItem(world.registryAccess())
+            );
     }
 
 }

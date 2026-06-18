@@ -23,13 +23,26 @@ import java.util.Optional;
 public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRecipe {
 
     public SweetenableTitrationBarrelRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        List<IngredientStack> inputStacks, FluidIngredient fluid, ItemStack outputItemStack, Item tappingItem,
-        int minFermentationTimeHours, FermentationData fermentationData
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        List<IngredientStack> inputStacks,
+        FluidIngredient fluid,
+        ItemStack outputItemStack,
+        Item tappingItem,
+        int minFermentationTimeHours,
+        FermentationData fermentationData
     ) {
         super(
-            group, secret, requiredAdvancementIdentifier, inputStacks, fluid, outputItemStack, tappingItem,
-            minFermentationTimeHours, fermentationData
+            group,
+            secret,
+            requiredAdvancementIdentifier,
+            inputStacks,
+            fluid,
+            outputItemStack,
+            tappingItem,
+            minFermentationTimeHours,
+            fermentationData
         );
     }
 
@@ -41,7 +54,13 @@ public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRe
     protected abstract List<MobEffectInstance> getEffects(boolean nectar, double bloominess, double alcPercent);
 
     protected ItemStack tapWith(
-        int bulbCount, int petalCount, boolean nectar, float thickness, long secondsFermented, float downfall) {
+        int bulbCount,
+        int petalCount,
+        boolean nectar,
+        float thickness,
+        long secondsFermented,
+        float downfall
+    ) {
         double bloominess = getBloominess(bulbCount, petalCount);
         float ageIngameDays = TimeHelper.minecraftDaysFromSeconds(secondsFermented);
         if (nectar) {
@@ -49,19 +68,24 @@ public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRe
         }
         double alcPercent = getAlcPercentWithBloominess(ageIngameDays, downfall, bloominess, thickness);
         if (alcPercent >= 100) {
-            return PastelItems.CHRYSOCOLLA.get()
-                                          .getDefaultInstance();
+            return PastelItems.CHRYSOCOLLA
+                .get()
+                .getDefaultInstance();
         } else {
             List<MobEffectInstance> effects = getEffects(nectar, bloominess, alcPercent);
 
             ItemStack outputStack = outputItemStack.copy();
             outputStack.setCount(1);
-            outputStack.set(
-                PastelDataComponentTypes.BEVERAGE,
-                new BeverageComponent((long) ageIngameDays, (int) alcPercent, thickness)
-            );
-            outputStack.set(
-                DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), effects));
+            outputStack
+                .set(
+                    PastelDataComponentTypes.BEVERAGE,
+                    new BeverageComponent((long) ageIngameDays, (int) alcPercent, thickness)
+                );
+            outputStack
+                .set(
+                    DataComponents.POTION_CONTENTS,
+                    new PotionContents(Optional.empty(), Optional.empty(), effects)
+                );
             outputStack.set(PastelDataComponentTypes.JADE_WINE, new JadeWineComponent((float) bloominess, nectar));
             return outputStack;
         }
@@ -87,11 +111,16 @@ public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRe
     // another detail: the more rainy the weather (downfall) the more water evaporates
     // compared to alcohol, making the drink stronger / weaker in return
     protected double getAlcPercentWithBloominess(
-        float ageIngameDays, float downfall, double bloominess, double thickness) {
-        return Support.logBase(
-            1 + this.fermentationData.fermentationSpeedMod() + bloominess / 64,
-            ageIngameDays * (0.5 + thickness / 2) * (0.5D + downfall / 2D)
-        );
+        float ageIngameDays,
+        float downfall,
+        double bloominess,
+        double thickness
+    ) {
+        return Support
+            .logBase(
+                1 + this.fermentationData.fermentationSpeedMod() + bloominess / 64,
+                ageIngameDays * (0.5 + thickness / 2) * (0.5D + downfall / 2D)
+            );
     }
 
 }

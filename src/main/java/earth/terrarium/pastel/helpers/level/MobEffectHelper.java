@@ -22,7 +22,10 @@ public class MobEffectHelper {
     }
 
     public record StatusEffectBackground(
-        ResourceLocation guiLarge, ResourceLocation guiSmall, ResourceLocation hudDefault, ResourceLocation hudAmbient
+        ResourceLocation guiLarge,
+        ResourceLocation guiSmall,
+        ResourceLocation hudDefault,
+        ResourceLocation hudAmbient
     ) {
 
         public StatusEffectBackground(String name) {
@@ -45,11 +48,16 @@ public class MobEffectHelper {
     }
 
     private static final StatusEffectBackground DIVINITY = new StatusEffectBackground("divinity");
+
     private static final StatusEffectBackground INCURABLE = new StatusEffectBackground("incurable");
+
     private static final StatusEffectBackground NIGHT_ALCHEMY = new StatusEffectBackground("night_alchemy");
 
     public static ResourceLocation getTextureLocation(
-        ResourceLocation original, MobEffectInstance effect, RenderType renderType) {
+        ResourceLocation original,
+        MobEffectInstance effect,
+        RenderType renderType
+    ) {
         var type = effect.getEffect();
 
         if (type == PastelMobEffects.DIVINITY)
@@ -71,8 +79,9 @@ public class MobEffectHelper {
         if (type.is(PastelMobEffectTags.CANNOT_BE_INCURABLE))
             return false; // We are merciful
 
-        return instance.getCures()
-                       .contains(PastelMobEffects.Cures.INCURABLE);
+        return instance
+            .getCures()
+            .contains(PastelMobEffects.Cures.INCURABLE);
     }
 
     /**
@@ -96,9 +105,12 @@ public class MobEffectHelper {
         var immunity = entity.getEffect(PastelMobEffects.IMMUNITY);
 
         assert immunity != null;
-        for (MobEffectInstance proposal : entity.getActiveEffects()) {
-            if (proposal.getEffect()
-                        .is(PastelMobEffectTags.BYPASSES_IMMUNITY))
+        for (
+            MobEffectInstance proposal : entity.getActiveEffects()
+        ) {
+            if (proposal
+                .getEffect()
+                .is(PastelMobEffectTags.BYPASSES_IMMUNITY))
                 continue;
 
             if (ignoreIncurable && resistsRemoval(proposal))

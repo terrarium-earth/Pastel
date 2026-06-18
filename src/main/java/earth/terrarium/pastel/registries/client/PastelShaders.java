@@ -13,10 +13,12 @@ import java.util.Optional;
 
 public class PastelShaders {
 
-    public static final ResourceLocation COLOR_GRADING_ID = PastelCommon.locate("shaders/post/imbrifer_color_grading.json");
+    public static final ResourceLocation COLOR_GRADING_ID = PastelCommon
+        .locate("shaders/post/imbrifer_color_grading.json");
+
     public static Optional<PostChain> colorGradingPostProcess = Optional.empty();
 
-    private static final String[] COLOR_GRADING_UNIFORMS = new String[]{
+    private static final String[] COLOR_GRADING_UNIFORMS = new String[] {
         "Saturation", "Rubedo", "ColorTemperature", "DesaturateThreshold", "BloomThreshold"
     };
 
@@ -24,29 +26,42 @@ public class PastelShaders {
         PostChain post = null;
         try {
             post = new PostChain(
-                client.getTextureManager(), client.getResourceManager(), client.getMainRenderTarget(), id);
+                client.getTextureManager(),
+                client.getResourceManager(),
+                client.getMainRenderTarget(),
+                id
+            );
         } catch (IOException e) {
             PastelCommon.LOGGER.error("Failed to load post-process shader [{}]", COLOR_GRADING_ID);
             PastelCommon.LOGGER.error("", e);
         }
 
         if (post != null)
-            post.resize(
-                client.getWindow()
-                      .getWidth(), client.getWindow()
-                                         .getHeight()
-            );
+            post
+                .resize(
+                    client
+                        .getWindow()
+                        .getWidth(),
+                    client
+                        .getWindow()
+                        .getHeight()
+                );
 
         return Optional.ofNullable(post);
     }
 
     public static void updateDimensionShaders(ClientLevel world) {
-        if (!world.dimension()
-                  .equals(PastelLevels.DIMENSION_KEY))
+        if (!world
+            .dimension()
+            .equals(PastelLevels.DIMENSION_KEY))
             return;
 
         colorGradingPostProcess.ifPresent(pps -> {
-            for (int i = 0; i < 5; i++) {
+            for (
+                int i = 0;
+                i < 5;
+                i++
+            ) {
                 pps.setUniform(COLOR_GRADING_UNIFORMS[i], ColorGrading.GRADING_OUT[i]);
             }
         });
@@ -54,8 +69,9 @@ public class PastelShaders {
 
     public static void clearDimensionShaders() {
         if (colorGradingPostProcess.isPresent()) {
-            colorGradingPostProcess.get()
-                                   .close();
+            colorGradingPostProcess
+                .get()
+                .close();
             colorGradingPostProcess = Optional.empty();
         }
     }

@@ -31,12 +31,15 @@ public class BlackslagBlock extends RotatedPillarBlock implements BonemealableBl
 
     @Override
     public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
-        if (!world.getBlockState(pos.above())
-                  .propagatesSkylightDown(world, pos)) {
+        if (!world
+            .getBlockState(pos.above())
+            .propagatesSkylightDown(world, pos)) {
             return false;
         }
 
-        for (BlockPos currPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+        for (
+            BlockPos currPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))
+        ) {
             BlockState currState = world.getBlockState(currPos);
             if (currState.is(PastelBlockTags.SPREADS_TO_BLACKSLAG)) {
                 return true;
@@ -48,7 +51,11 @@ public class BlackslagBlock extends RotatedPillarBlock implements BonemealableBl
 
     @Override
     public boolean isBonemealSuccess(
-        Level world, net.minecraft.util.RandomSource random, BlockPos pos, BlockState state) {
+        Level world,
+        net.minecraft.util.RandomSource random,
+        BlockPos pos,
+        BlockState state
+    ) {
         return true;
     }
 
@@ -57,7 +64,9 @@ public class BlackslagBlock extends RotatedPillarBlock implements BonemealableBl
         List<BlockState> nextStates = new ArrayList<>();
 
         // search for all valid neighboring blocks and choose a weighted random one
-        for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+        for (
+            BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))
+        ) {
             BlockState blockState = world.getBlockState(blockPos);
             if (blockState.is(PastelBlockTags.SPREADS_TO_BLACKSLAG)) {
                 nextStates.add(blockState);

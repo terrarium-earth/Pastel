@@ -56,14 +56,21 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
-    implements PlayerOwned, Upgradeable, SidedCapabilityProvider {
+    implements
+    PlayerOwned,
+    Upgradeable,
+    SidedCapabilityProvider {
 
     protected static final int INVENTORY_SIZE = 7;
 
     private UUID ownerUUID;
+
     private UpgradeHolder upgrades;
+
     private RecipeHolder<FusionShrineRecipe> currentRecipe;
+
     private int craftingTime;
+
     private int craftingTimeTotal;
 
     boolean inventoryChanged = true;
@@ -78,31 +85,52 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
         });
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void clientTick(
-        @NotNull Level world, BlockPos blockPos, BlockState blockState,
+        @NotNull Level world,
+        BlockPos blockPos,
+        BlockState blockState,
         FusionShrineBlockEntity fusionShrineBlockEntity
     ) {
         if (!fusionShrineBlockEntity.isEmpty()) {
-            int randomSlot = world.getRandom()
-                                  .nextInt(fusionShrineBlockEntity.getContainerSize());
+            int randomSlot = world
+                .getRandom()
+                .nextInt(fusionShrineBlockEntity.getContainerSize());
             ItemStack randomStack = fusionShrineBlockEntity.getItem(randomSlot);
             if (!randomStack.isEmpty()) {
                 Optional<InkColor> optionalItemColor = ColorRegistry.ITEM_COLORS.getMapping(randomStack.getItem());
                 if (optionalItemColor.isPresent()) {
-                    ParticleOptions particleEffect = ColoredCraftingParticleEffect.of(optionalItemColor.get()
-                                                                                                       .getColorInt());
+                    ParticleOptions particleEffect = ColoredCraftingParticleEffect
+                        .of(
+                            optionalItemColor
+                                .get()
+                                .getColorInt()
+                        );
 
                     int particleAmount = (int) StrictMath.ceil(randomStack.getCount() / 8.0F);
-                    for (int i = 0; i < particleAmount; i++) {
-                        float randomX = 3.0F - world.getRandom()
-                                                    .nextFloat() * 7;
-                        float randomZ = 3.0F - world.getRandom()
-                                                    .nextFloat() * 7;
-                        world.addParticle(
-                            particleEffect, blockPos.getX() + randomX, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D,
-                            0.0D, 0.0D
-                        );
+                    for (
+                        int i = 0;
+                        i < particleAmount;
+                        i++
+                    ) {
+                        float randomX = 3.0F - world
+                            .getRandom()
+                            .nextFloat() * 7;
+                        float randomZ = 3.0F - world
+                            .getRandom()
+                            .nextFloat() * 7;
+                        world
+                            .addParticle(
+                                particleEffect,
+                                blockPos.getX() + randomX,
+                                blockPos.getY(),
+                                blockPos.getZ() + randomZ,
+                                0.0D,
+                                0.0D,
+                                0.0D
+                            );
                     }
                 }
             }
@@ -113,45 +141,76 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
         BlockPos blockPos = getBlockPos();
         var recipe = this.currentRecipe;
         if (recipe != null && level != null) {
-            Fluid fluid = tank.getFluid()
-                              .getFluid();
+            Fluid fluid = tank
+                .getFluid()
+                .getFluid();
             Optional<InkColor> optionalFluidColor = ColorRegistry.FLUID_COLORS.getMapping(fluid);
             if (optionalFluidColor.isPresent()) {
-                ParticleOptions particleEffect = ColoredFluidRisingParticleEffect.of(optionalFluidColor.get()
-                                                                                                       .getColorInt());
+                ParticleOptions particleEffect = ColoredFluidRisingParticleEffect
+                    .of(
+                        optionalFluidColor
+                            .get()
+                            .getColorInt()
+                    );
 
-                float randomX = 0.1F + level.getRandom()
-                                            .nextFloat() * 0.8F;
-                float randomZ = 0.1F + level.getRandom()
-                                            .nextFloat() * 0.8F;
-                level.addParticle(
-                    particleEffect, blockPos.getX() + randomX, blockPos.getY() + 1, blockPos.getZ() + randomZ, 0.0D,
-                    0.1D, 0.0D
-                );
+                float randomX = 0.1F + level
+                    .getRandom()
+                    .nextFloat() * 0.8F;
+                float randomZ = 0.1F + level
+                    .getRandom()
+                    .nextFloat() * 0.8F;
+                level
+                    .addParticle(
+                        particleEffect,
+                        blockPos.getX() + randomX,
+                        blockPos.getY() + 1,
+                        blockPos.getZ() + randomZ,
+                        0.0D,
+                        0.1D,
+                        0.0D
+                    );
             }
         }
     }
 
     public void scatterContents(@NotNull Level world) {
-        PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-            (ServerLevel) world, Vec3.atCenterOf(this.getBlockPos()), ColoredCraftingParticleEffect.RED, 1,
-            new Vec3(0, -0.5, 0)
-        );
-        world.playSound(
-            null, this.getBlockPos(), PastelSounds.CRAFTING_ABORTED, SoundSource.BLOCKS,
-            0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F
-        );
-        world.playSound(
-            null, this.getBlockPos(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
-            0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F
-        );
+        PlayParticleWithExactVelocityPayload
+            .playParticleWithExactVelocity(
+                (ServerLevel) world,
+                Vec3.atCenterOf(this.getBlockPos()),
+                ColoredCraftingParticleEffect.RED,
+                1,
+                new Vec3(0, -0.5, 0)
+            );
+        world
+            .playSound(
+                null,
+                this.getBlockPos(),
+                PastelSounds.CRAFTING_ABORTED,
+                SoundSource.BLOCKS,
+                0.9F + world.random.nextFloat() * 0.2F,
+                0.9F + world.random.nextFloat() * 0.2F
+            );
+        world
+            .playSound(
+                null,
+                this.getBlockPos(),
+                SoundEvents.ITEM_PICKUP,
+                SoundSource.BLOCKS,
+                0.9F + world.random.nextFloat() * 0.2F,
+                0.5F + world.random.nextFloat() * 0.2F
+            );
         FusionShrineBlock.scatterContents(world, this.getBlockPos());
         inventoryChanged = true;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void serverTick(
-        @NotNull Level world, BlockPos blockPos, BlockState blockState,
+        @NotNull Level world,
+        BlockPos blockPos,
+        BlockState blockState,
         FusionShrineBlockEntity fusionShrineBlockEntity
     ) {
         if (fusionShrineBlockEntity.upgrades == null) {
@@ -165,13 +224,19 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
             if (!Objects.equals(fusionShrineBlockEntity.currentRecipe, previousRecipe)) {
                 fusionShrineBlockEntity.craftingTime = 0;
                 if (fusionShrineBlockEntity.currentRecipe == null) {
-                    PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance(
-                        (ServerLevel) world, fusionShrineBlockEntity.worldPosition);
+                    PlayBlockBoundSoundInstancePayload
+                        .sendCancelBlockBoundSoundInstance(
+                            (ServerLevel) world,
+                            fusionShrineBlockEntity.worldPosition
+                        );
                 } else {
-                    fusionShrineBlockEntity.craftingTimeTotal = (int) Math.ceil(
-                        fusionShrineBlockEntity.currentRecipe.value()
-                                                             .getCraftingTime() /
-                        fusionShrineBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
+                    fusionShrineBlockEntity.craftingTimeTotal = (int) Math
+                        .ceil(
+                            fusionShrineBlockEntity.currentRecipe
+                                .value()
+                                .getCraftingTime() / fusionShrineBlockEntity.upgrades
+                                    .getEffectiveValue(Upgradeable.UpgradeType.SPEED)
+                        );
                 }
 
                 fusionShrineBlockEntity.updateInClientWorld();
@@ -190,15 +255,17 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
         if (fusionShrineBlockEntity.craftingTime % 60 == 0) {
             Player lastInteractedPlayer = fusionShrineBlockEntity.getOwnerIfOnline();
 
-            boolean recipeConditionsMet = recipe.value()
-                                                .canPlayerCraft(lastInteractedPlayer) && recipe.value()
-                                                                                               .areConditionMetCurrently(
-                                                                                                   (ServerLevel) world,
-                                                                                                   blockPos
-                                                                                               );
+            boolean recipeConditionsMet = recipe
+                .value()
+                .canPlayerCraft(lastInteractedPlayer) && recipe
+                    .value()
+                    .areConditionMetCurrently(
+                        (ServerLevel) world,
+                        blockPos
+                    );
             boolean structureComplete = FusionShrineBlock.verifyStructure(world, blockPos, null);
-            boolean structureCompleteWithSky = FusionShrineBlock.verifySkyAccess((ServerLevel) world, blockPos) &&
-                                               structureComplete;
+            boolean structureCompleteWithSky = FusionShrineBlock
+                .verifySkyAccess((ServerLevel) world, blockPos) && structureComplete;
 
             if (!recipeConditionsMet || !structureCompleteWithSky) {
                 if (!structureCompleteWithSky) {
@@ -213,18 +280,23 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
         ++fusionShrineBlockEntity.craftingTime;
 
         if (fusionShrineBlockEntity.craftingTime == 1 && fusionShrineBlockEntity.craftingTimeTotal > 1) {
-            PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
-                PastelSounds.FUSION_SHRINE_CRAFTING, (ServerLevel) world, fusionShrineBlockEntity.getBlockPos(),
-                fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime, 1f
-            );
+            PlayBlockBoundSoundInstancePayload
+                .sendPlayBlockBoundSoundInstance(
+                    PastelSounds.FUSION_SHRINE_CRAFTING,
+                    (ServerLevel) world,
+                    fusionShrineBlockEntity.getBlockPos(),
+                    fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime,
+                    1f
+                );
         }
 
         // play the current crafting effect
-        FusionShrineRecipeWorldEffect effect = recipe.value()
-                                                     .getWorldEffectForTick(
-                                                         fusionShrineBlockEntity.craftingTime,
-                                                         fusionShrineBlockEntity.craftingTimeTotal
-                                                     );
+        FusionShrineRecipeWorldEffect effect = recipe
+            .value()
+            .getWorldEffectForTick(
+                fusionShrineBlockEntity.craftingTime,
+                fusionShrineBlockEntity.craftingTimeTotal
+            );
         if (effect != null) {
             effect.trigger((ServerLevel) world, blockPos);
         }
@@ -234,50 +306,70 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
             craft(world, blockPos, fusionShrineBlockEntity, recipe);
             fusionShrineBlockEntity.inventoryChanged = true;
         } else {
-            PlayFusionCraftingInProgressParticlePayload.sendPlayFusionCraftingInProgressParticles(
-                (ServerLevel) world, blockPos);
+            PlayFusionCraftingInProgressParticlePayload
+                .sendPlayFusionCraftingInProgressParticles(
+                    (ServerLevel) world,
+                    blockPos
+                );
         }
         fusionShrineBlockEntity.setChanged();
     }
 
-    @Nullable
-    private static RecipeHolder<FusionShrineRecipe> calculateRecipe(
-        @NotNull Level world, FusionShrineBlockEntity fusionShrineBlockEntity) {
+    @Nullable private static RecipeHolder<FusionShrineRecipe> calculateRecipe(
+        @NotNull Level world,
+        FusionShrineBlockEntity fusionShrineBlockEntity
+    ) {
         if (fusionShrineBlockEntity.currentRecipe != null) {
-            if (fusionShrineBlockEntity.currentRecipe.value()
-                                                     .matches(fusionShrineBlockEntity.getRecipeInput(), world)) {
+            if (fusionShrineBlockEntity.currentRecipe
+                .value()
+                .matches(fusionShrineBlockEntity.getRecipeInput(), world)) {
                 return fusionShrineBlockEntity.currentRecipe;
             }
         }
-        return world.getRecipeManager()
-                    .getRecipeFor(PastelRecipeTypes.FUSION_SHRINE, fusionShrineBlockEntity.getRecipeInput(), world)
-                    .orElse(null);
+        return world
+            .getRecipeManager()
+            .getRecipeFor(PastelRecipeTypes.FUSION_SHRINE, fusionShrineBlockEntity.getRecipeInput(), world)
+            .orElse(null);
     }
 
     private static void craft(
-        Level world, BlockPos blockPos, FusionShrineBlockEntity fusionShrineBlockEntity,
+        Level world,
+        BlockPos blockPos,
+        FusionShrineBlockEntity fusionShrineBlockEntity,
         RecipeHolder<FusionShrineRecipe> recipe
     ) {
-        recipe.value()
-              .craft(world, fusionShrineBlockEntity);
+        recipe
+            .value()
+            .craft(world, fusionShrineBlockEntity);
 
-        if (recipe.value()
-                  .shouldPlayCraftingFinishedEffects()) {
-            PlayFusionCraftingFinishedParticlePayload.sendPlayFusionCraftingFinishedParticles(
-                world, blockPos, recipe.value()
-                                       .assemble(
-                                           fusionShrineBlockEntity.getRecipeInput(), world.registryAccess())
-            );
+        if (recipe
+            .value()
+            .shouldPlayCraftingFinishedEffects()) {
+            PlayFusionCraftingFinishedParticlePayload
+                .sendPlayFusionCraftingFinishedParticles(
+                    world,
+                    blockPos,
+                    recipe
+                        .value()
+                        .assemble(
+                            fusionShrineBlockEntity.getRecipeInput(),
+                            world.registryAccess()
+                        )
+                );
             fusionShrineBlockEntity.playSound(PastelSounds.FUSION_SHRINE_CRAFTING_FINISHED, 1.4F);
         }
 
         scatterContents(world, blockPos.above(), fusionShrineBlockEntity); // drop remaining items
 
         fusionShrineBlockEntity.tank.setFluid(FluidStack.EMPTY);
-        world.setBlock(
-            blockPos, world.getBlockState(blockPos)
-                           .setValue(FusionShrineBlock.LIGHT_LEVEL, 0), 3
-        );
+        world
+            .setBlock(
+                blockPos,
+                world
+                    .getBlockState(blockPos)
+                    .setValue(FusionShrineBlock.LIGHT_LEVEL, 0),
+                3
+            );
     }
 
     @Override
@@ -287,10 +379,13 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
 
     public static void scatterContents(Level world, BlockPos pos, FusionShrineBlockEntity blockEntity) {
         Containers.dropContents(world, pos, blockEntity.inventory.getInternalList());
-        world.updateNeighbourForOutputSignal(
-            pos, world.getBlockState(pos)
-                      .getBlock()
-        );
+        world
+            .updateNeighbourForOutputSignal(
+                pos,
+                world
+                    .getBlockState(pos)
+                    .getBlock()
+            );
     }
 
     @Override
@@ -323,20 +418,30 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
         }
         PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
         if (this.currentRecipe != null) {
-            nbt.putString(
-                "CurrentRecipe", this.currentRecipe.id()
-                                                   .toString()
-            );
+            nbt
+                .putString(
+                    "CurrentRecipe",
+                    this.currentRecipe
+                        .id()
+                        .toString()
+                );
         }
     }
 
     public void playSound(SoundEvent soundEvent, float volume) {
         if (level != null) {
             RandomSource random = level.random;
-            level.playSound(
-                null, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), soundEvent, SoundSource.BLOCKS,
-                volume, 0.9F + random.nextFloat() * 0.15F
-            );
+            level
+                .playSound(
+                    null,
+                    worldPosition.getX(),
+                    worldPosition.getY(),
+                    worldPosition.getZ(),
+                    soundEvent,
+                    SoundSource.BLOCKS,
+                    volume,
+                    0.9F + random.nextFloat() * 0.15F
+                );
         }
     }
 
@@ -346,10 +451,16 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
         if (owner != null) {
             PastelCriteria.FUSION_SHRINE_CRAFTING.trigger(owner, stack, experience);
         }
-        if (level instanceof ServerLevel sl){
-            Support.areaCriterion(sl, Support.H_RANGE, getBlockPos(), required, p ->
-                PastelCriteria.FUSION_SHRINE_CRAFTING.trigger(p, stack, experience));
-            }
+        if (level instanceof ServerLevel sl) {
+            Support
+                .areaCriterion(
+                    sl,
+                    Support.H_RANGE,
+                    getBlockPos(),
+                    required,
+                    p -> PastelCriteria.FUSION_SHRINE_CRAFTING.trigger(p, stack, experience)
+                );
+        }
     }
 
     public @NotNull FluidTank getTank() {
@@ -359,10 +470,14 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
     void setLightForFluid(BlockPos blockPos, FluidStack fluid) {
         if (level == null) return;
         int fluidLight = PastelMiscEvents.getFluidLuminance(fluid);
-        level.setBlock(
-            blockPos, level.getBlockState(blockPos)
-                           .setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight), Block.UPDATE_ALL
-        );
+        level
+            .setBlock(
+                blockPos,
+                level
+                    .getBlockState(blockPos)
+                    .setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight),
+                Block.UPDATE_ALL
+            );
     }
 
     public FluidRecipeInput<FluidTank> getRecipeInput() {
@@ -398,8 +513,9 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
 
     @Override
     public IItemHandler exposeItemHandlers(Direction dir) {
-        if (dir.getAxis()
-               .isHorizontal()) {
+        if (dir
+            .getAxis()
+            .isHorizontal()) {
             return new StackHandlerView(inventory).disableInsertion();
         }
 

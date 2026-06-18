@@ -55,19 +55,40 @@ import java.util.Set;
 
 public class DraconicTwinswordEntity extends BidentBaseEntity {
 
-    private static final EntityDataAccessor<Boolean> HIT = SynchedEntityData.defineId(
-        DraconicTwinswordEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> PROPELLED = SynchedEntityData.defineId(
-        DraconicTwinswordEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> REBOUND = SynchedEntityData.defineId(
-        DraconicTwinswordEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Integer> MAX_PIERCE = SynchedEntityData.defineId(
-        DraconicTwinswordEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> HIT = SynchedEntityData
+        .defineId(
+            DraconicTwinswordEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
+
+    private static final EntityDataAccessor<Boolean> PROPELLED = SynchedEntityData
+        .defineId(
+            DraconicTwinswordEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
+
+    private static final EntityDataAccessor<Boolean> REBOUND = SynchedEntityData
+        .defineId(
+            DraconicTwinswordEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
+
+    private static final EntityDataAccessor<Integer> MAX_PIERCE = SynchedEntityData
+        .defineId(
+            DraconicTwinswordEntity.class,
+            EntityDataSerializers.INT
+        );
+
     private static final EntityDimensions initialSize = EntityDimensions.scalable(1.5F, 1.5F);
+
     private static final EntityDimensions shortSize = EntityDimensions.scalable(1F, 1F);
+
     private static final EntityDimensions tallSize = EntityDimensions.scalable(1F, 1.8F);
+
     private final Set<Entity> piercedEntities = new HashSet<>();
+
     private int travelingTicks = 0, jiggleTicks = 20, jiggleIntensity = 8;
+
     private float damageMult = 1, velMult = 1;
 
     public DraconicTwinswordEntity(Level world) {
@@ -111,7 +132,9 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
                 setYRot(yRotO + jiggleIntensity * intensity * (random.nextInt(3) - 1));
             }
 
-            for (Entity thornCandidate : level().getEntities(this, makeBoundingBox(), this::canHitEntity)) {
+            for (
+                Entity thornCandidate : level().getEntities(this, makeBoundingBox(), this::canHitEntity)
+            ) {
                 if (entityData.get(HIT)) {
                     if (!(thornCandidate instanceof ItemEntity) && thornCandidate.hurt(damageSources().thorns(this), 4))
                         playSound(SoundEvents.THORNS_HIT, 1, 0.9F + random.nextFloat() * 0.2F);
@@ -255,8 +278,12 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
         applyChannelingAOE(channeling, damage, attacked, damageSource);
         applyInertiaEffects(stack);
 
-        this.setDeltaMovement(this.getDeltaMovement()
-                                  .multiply(-1, -1, -1));
+        this
+            .setDeltaMovement(
+                this
+                    .getDeltaMovement()
+                    .multiply(-1, -1, -1)
+            );
         travelingTicks = 0;
 
         setPropelled(false);
@@ -285,13 +312,16 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
         var damageSource = PastelDamageTypes.impaling(level(), this, getOwner());
 
         var slime = state.is(Blocks.SLIME_BLOCK);
-        var bounce = (state.is(Blocks.SLIME_BLOCK) || state.getDestroySpeed(level(), pos) >= 25F) && !state.is(
-            BlockTags.PLANKS) && !state.is(BlockTags.DIRT);
+        var bounce = (state.is(Blocks.SLIME_BLOCK) || state.getDestroySpeed(level(), pos) >= 25F) && !state
+            .is(
+                BlockTags.PLANKS
+            ) && !state.is(BlockTags.DIRT);
         var boost = getDeltaMovement().length() < 1 || slime ? 1.4 : 0.9;
 
         if (isPropelled() && bounce && getDeltaMovement().lengthSqr() > 1) {
-            switch (blockHitResult.getDirection()
-                                  .getAxis()) {
+            switch (blockHitResult
+                .getDirection()
+                .getAxis()) {
                 case X -> setDeltaMovement(getDeltaMovement().multiply(-boost, boost, boost));
                 case Y -> setDeltaMovement(getDeltaMovement().multiply(boost, -boost, boost));
                 case Z -> setDeltaMovement(getDeltaMovement().multiply(boost, boost, -boost));
@@ -335,17 +365,28 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
             var entities = level().getEntities(this, hitbox);
             float spreadingDamage = damage * (1 - 1F / (channeling + 2F));
             var anyHit = false;
-            for (Entity entity : entities) {
+            for (
+                Entity entity : entities
+            ) {
                 if (entity instanceof LivingEntity living && living != except && living != getOwner()) {
                     if (living.hurt(damageSource, spreadingDamage / (Math.max(entity.distanceTo(this) / 2F, 1)))) {
-                        for (int i = 0; i < 8; i++) {
-                            world.sendParticles(
-                                ParticleTypes.ENCHANTED_HIT,
-                                living.getRandomX(1.25),
-                                living.getY() + living.getBbHeight() * random.nextFloat(),
-                                living.getRandomZ(1.25),
-                                1 + random.nextInt(2), 0, random.nextFloat() / 6F, 0, 0
-                            );
+                        for (
+                            int i = 0;
+                            i < 8;
+                            i++
+                        ) {
+                            world
+                                .sendParticles(
+                                    ParticleTypes.ENCHANTED_HIT,
+                                    living.getRandomX(1.25),
+                                    living.getY() + living.getBbHeight() * random.nextFloat(),
+                                    living.getRandomZ(1.25),
+                                    1 + random.nextInt(2),
+                                    0,
+                                    random.nextFloat() / 6F,
+                                    0,
+                                    0
+                                );
                         }
                         anyHit = true;
                     }
@@ -353,56 +394,84 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
             }
 
             if (anyHit) {
-                for (int i = 0; i < 10 * channeling; i++) {
-                    world.sendParticles(
-                        ParticleTypes.GLOW,
-                        getRandomX(1),
-                        getY() + getBbHeight() * random.nextFloat(),
-                        getRandomZ(1),
-                        1 + random.nextInt(2), 0, random.nextFloat() + 0.25F, 0, 0
-                    );
+                for (
+                    int i = 0;
+                    i < 10 * channeling;
+                    i++
+                ) {
+                    world
+                        .sendParticles(
+                            ParticleTypes.GLOW,
+                            getRandomX(1),
+                            getY() + getBbHeight() * random.nextFloat(),
+                            getRandomZ(1),
+                            1 + random.nextInt(2),
+                            0,
+                            random.nextFloat() + 0.25F,
+                            0,
+                            0
+                        );
                 }
 
-                world.playSeededSound(
-                    null, position().x, position().y, position().z, PastelSounds.ELECTRIC_DISCHARGE,
-                    SoundSource.PLAYERS, 1F, 0.6F + random.nextFloat() * 0.2F, 0
-                );
+                world
+                    .playSeededSound(
+                        null,
+                        position().x,
+                        position().y,
+                        position().z,
+                        PastelSounds.ELECTRIC_DISCHARGE,
+                        SoundSource.PLAYERS,
+                        1F,
+                        0.6F + random.nextFloat() * 0.2F,
+                        0
+                    );
             }
         }
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     protected EntityHitResult findHitEntity(Vec3 currentPosition, Vec3 nextPosition) {
-        return ProjectileUtil.getEntityHitResult(
-            this.level(), this, currentPosition, nextPosition, this.getBoundingBox()
-                                                                   .expandTowards(this.getDeltaMovement())
-                                                                   .inflate(1.0), this::canHitEntity
-        );
+        return ProjectileUtil
+            .getEntityHitResult(
+                this.level(),
+                this,
+                currentPosition,
+                nextPosition,
+                this
+                    .getBoundingBox()
+                    .expandTowards(this.getDeltaMovement())
+                    .inflate(1.0),
+                this::canHitEntity
+            );
     }
 
     private float getDamage(ItemStack stack) {
         //TODO can we use a built in function for this?
         var damage = new MutableDouble(0);
-        var key = Attributes.ATTACK_DAMAGE.unwrapKey()
-                                          .orElse(null);
-        var base = Attributes.ATTACK_DAMAGE.value()
-                                           .getDefaultValue();
+        var key = Attributes.ATTACK_DAMAGE
+            .unwrapKey()
+            .orElse(null);
+        var base = Attributes.ATTACK_DAMAGE
+            .value()
+            .getDefaultValue();
         var modifiers = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
-        modifiers.forEach(
-            EquipmentSlot.MAINHAND, (attribute, modifier) -> {
-                if (attribute.is(key)) {
-                    var value = modifier.amount();
-                    damage.addAndGet(switch (modifier.operation()) {
-                        case ADD_VALUE -> value;
-                        case ADD_MULTIPLIED_BASE -> value * base;
-                        case ADD_MULTIPLIED_TOTAL -> value * damage.getValue();
-                    });
+        modifiers
+            .forEach(
+                EquipmentSlot.MAINHAND,
+                (attribute, modifier) -> {
+                    if (attribute.is(key)) {
+                        var value = modifier.amount();
+                        damage.addAndGet(switch (modifier.operation()) {
+                            case ADD_VALUE -> value;
+                            case ADD_MULTIPLIED_BASE -> value * base;
+                            case ADD_MULTIPLIED_TOTAL -> value * damage.getValue();
+                        });
+                    }
                 }
-            }
-        );
-        return damage.getValue()
-                     .floatValue();
+            );
+        return damage
+            .getValue()
+            .floatValue();
     }
 
     @Override
@@ -435,9 +504,13 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 
         yMod = Math.max(0.0725, yMod * (1 - (heightDif * 0.024)));
 
-        this.setDeltaMovement(velocity.multiply(xMod, yMod, xMod)
-                                      .scale(finalMult)
-                                      .add(0, 0.3, 0));
+        this
+            .setDeltaMovement(
+                velocity
+                    .multiply(xMod, yMod, xMod)
+                    .scale(finalMult)
+                    .add(0, 0.3, 0)
+            );
         this.setYRot(-getYRot());
         this.setXRot(-getXRot());
         this.hurtMarked = true;
@@ -512,8 +585,9 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 
         var rootStack = DraconicTwinswordItem.findThrownStack(player, uuid);
         if (!rootStack.isEmpty()) {
-            if (this.level()
-                    .isClientSide())
+            if (this
+                .level()
+                .isClientSide())
                 return true;
 
             SlotReservingItem.free(rootStack);
@@ -527,17 +601,16 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
         return false;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public ItemEntity spawnAtLocation(ItemStack stack) {
         return null;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public ItemEntity spawnAtLocation(ItemStack stack, float yOffset) {
         return null;
     }
+
     @Override
     public ColorGradient getGradient() {
         return new ColorGradient(

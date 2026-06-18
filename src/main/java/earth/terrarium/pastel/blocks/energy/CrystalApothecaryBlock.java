@@ -42,18 +42,25 @@ public class CrystalApothecaryBlock extends BaseEntityBlock {
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CrystalApothecaryBlockEntity(pos, state);
     }
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("block.pastel.crystal_apothecary.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("block.pastel.crystal_apothecary.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
@@ -69,7 +76,12 @@ public class CrystalApothecaryBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -108,18 +120,23 @@ public class CrystalApothecaryBlock extends BaseEntityBlock {
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return createTickerHelper(
-            type, PastelBlockEntities.CRYSTAL_APOTHECARY.get(), CrystalApothecaryBlockEntity::tick);
+            type,
+            PastelBlockEntities.CRYSTAL_APOTHECARY.get(),
+            CrystalApothecaryBlockEntity::tick
+        );
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
+    @Nullable public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
         return blockEntity instanceof CrystalApothecaryBlockEntity crystalApothecaryBlockEntity
-               ? crystalApothecaryBlockEntity.getEventListener() : null;
+            ? crystalApothecaryBlockEntity.getEventListener()
+            : null;
     }
 
 }

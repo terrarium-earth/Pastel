@@ -20,22 +20,31 @@ import java.util.regex.Pattern;
 
 public class ColorHelper {
 
-    public static final Codec<Integer> CODEC = Codec.withAlternative(Codec.INT, Codec.STRING.comapFlatMap(
-        CodecHelper.throwable(ColorHelper::fromString), ColorHelper::toString)
-    );
+    public static final Codec<Integer> CODEC = Codec
+        .withAlternative(
+            Codec.INT,
+            Codec.STRING
+                .comapFlatMap(
+                    CodecHelper.throwable(ColorHelper::fromString),
+                    ColorHelper::toString
+                )
+        );
 
     /**
      * A list of the first 16 dye colors
      * In case a mod extends the DyeColor enum
      */
-    public static List<DyeColor> VANILLA_DYE_COLORS = Arrays.stream(DyeColor.values())
-                                                            .filter(dyeColor -> dyeColor.getId() < 16)
-                                                            .toList();
+    public static List<DyeColor> VANILLA_DYE_COLORS = Arrays
+        .stream(DyeColor.values())
+        .filter(dyeColor -> dyeColor.getId() < 16)
+        .toList();
+
     public static final Vector3f WASH = new Vector3f(1F, 1F, 1F);
 
     public static Vector3f getRGBVec(DyeColor dyeColor) {
-        return InkColor.ofDyeColor(dyeColor)
-                       .getColorVec();
+        return InkColor
+            .ofDyeColor(dyeColor)
+            .getColorVec();
     }
 
     public static int getInt(DyeColor dyeColor) {
@@ -43,8 +52,10 @@ public class ColorHelper {
         return new Color(vec.x(), vec.y(), vec.z()).getRGB() & 0x00FFFFFF;
     }
 
-    private static final Pattern PARSE_PATTERN = Pattern.compile(
-        "#([0-9a-fA-F]{2})(?:([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})?)?");
+    private static final Pattern PARSE_PATTERN = Pattern
+        .compile(
+            "#([0-9a-fA-F]{2})(?:([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})?)?"
+        );
 
     private int parseHex(String str) {
         return Integer.valueOf(str, 16);
@@ -76,13 +87,14 @@ public class ColorHelper {
     }
 
     public static String toString(int color) {
-        return String.format(
-            "#%X%X%X%X",
-            net.minecraft.util.FastColor.ARGB32.alpha(color),
-            net.minecraft.util.FastColor.ARGB32.red(color),
-            net.minecraft.util.FastColor.ARGB32.green(color),
-            net.minecraft.util.FastColor.ARGB32.blue(color)
-        );
+        return String
+            .format(
+                "#%X%X%X%X",
+                net.minecraft.util.FastColor.ARGB32.alpha(color),
+                net.minecraft.util.FastColor.ARGB32.red(color),
+                net.minecraft.util.FastColor.ARGB32.green(color),
+                net.minecraft.util.FastColor.ARGB32.blue(color)
+            );
     }
 
     /**
@@ -92,12 +104,12 @@ public class ColorHelper {
      * @return the color
      */
     public static int getRandomColor(int seed) {
-        return Color.getHSBColor((float) seed / Integer.MAX_VALUE, 0.7F, 0.9F)
-                    .getRGB();
+        return Color
+            .getHSBColor((float) seed / Integer.MAX_VALUE, 0.7F, 0.9F)
+            .getRGB();
     }
 
-    @NotNull
-    public static Vector3f colorIntToVec(int color) {
+    @NotNull public static Vector3f colorIntToVec(int color) {
         Color colorObj = new Color(color);
         float[] argb = new float[4];
         colorObj.getColorComponents(argb);
@@ -115,8 +127,9 @@ public class ColorHelper {
             if (item instanceof DyeItem dyeItem) {
                 return Optional.of(dyeItem.getDyeColor());
             } else if (item instanceof PigmentItem pigmentItem) {
-                return pigmentItem.getInkColor()
-                                  .getDyeColor();
+                return pigmentItem
+                    .getInkColor()
+                    .getDyeColor();
             }
         }
         return Optional.empty();

@@ -27,6 +27,7 @@ import java.util.List;
 public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implements SlotBackgroundEffect {
 
     public static final int HARMFUL_EFFECT_COST = 5;
+
     public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon.locate("nectar_gloves_sleep");
 
     public AetherGracedNectarGlovesItem(Properties settings, ResourceLocation unlockIdentifier) {
@@ -47,28 +48,31 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        SlotContext slotContext,
+        ResourceLocation id,
+        ItemStack stack
+    ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
-        modifiers.put(
-            PastelEntityAttributes.MENTAL_PRESENCE,
-            new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, -1F, AttributeModifier.Operation.ADD_VALUE)
-        );
+        modifiers
+            .put(
+                PastelEntityAttributes.MENTAL_PRESENCE,
+                new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, -1F, AttributeModifier.Operation.ADD_VALUE)
+            );
         return modifiers;
     }
 
     public static boolean testEffectFor(LivingEntity entity, Holder<MobEffect> effect) {
-        if (effect.value()
-                  .isBeneficial())
+        if (effect
+            .value()
+            .isBeneficial())
             return false;
 
         if (effect.is(PastelMobEffectTags.BYPASSES_NECTAR_GLOVES))
             return false;
 
-        return hasEquipped(entity, PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value()
-                                                                                            .getCategory() ==
-                                                                                      MobEffectCategory.HARMFUL ||
-                                                                                      effect ==
-                                                                                      PastelMobEffects.FRENZY);
+        return hasEquipped(entity, PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect
+            .value()
+            .getCategory() == MobEffectCategory.HARMFUL || effect == PastelMobEffects.FRENZY);
     }
 
     public static boolean tryBlockEffect(LivingEntity entity, int cost) {

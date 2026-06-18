@@ -56,7 +56,12 @@ public class EnderDropperBlock extends DispenserBlock {
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         if (placer instanceof ServerPlayer serverPlayer) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof EnderDropperBlockEntity dropperEntity) {
@@ -68,7 +73,12 @@ public class EnderDropperBlock extends DispenserBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -82,18 +92,31 @@ public class EnderDropperBlock extends DispenserBlock {
                 if (enderDropperBlockEntity.isOwner(player)) {
                     PlayerEnderChestContainer enderChestInventory = player.getEnderChestInventory();
 
-                    player.openMenu(new SimpleMenuProvider(
-                        (i, playerInventory, playerEntity) -> GenericPastelContainerScreenHandler.createGeneric9x3(
-                            i, playerInventory, enderChestInventory, ScreenBackgroundVariant.EARLYGAME),
-                        enderDropperBlockEntity.getDefaultName()
-                    ));
+                    player
+                        .openMenu(
+                            new SimpleMenuProvider(
+                                (i, playerInventory, playerEntity) -> GenericPastelContainerScreenHandler
+                                    .createGeneric9x3(
+                                        i,
+                                        playerInventory,
+                                        enderChestInventory,
+                                        ScreenBackgroundVariant.EARLYGAME
+                                    ),
+                                enderDropperBlockEntity.getDefaultName()
+                            )
+                        );
 
                     PiglinAi.angerNearbyPiglins(player, true);
                 } else {
-                    player.displayClientMessage(
-                        Component.translatable(
-                            "block.pastel.ender_dropper_with_owner", enderDropperBlockEntity.getOwnerName()), true
-                    );
+                    player
+                        .displayClientMessage(
+                            Component
+                                .translatable(
+                                    "block.pastel.ender_dropper_with_owner",
+                                    enderDropperBlockEntity.getOwnerName()
+                                ),
+                            true
+                        );
                 }
             }
             return InteractionResult.CONSUME;
@@ -102,8 +125,9 @@ public class EnderDropperBlock extends DispenserBlock {
 
     @Override
     protected void dispenseFrom(ServerLevel level, BlockState state, BlockPos pos) {
-        EnderDropperBlockEntity dropper = level.getBlockEntity(pos, PastelBlockEntities.ENDER_DROPPER.get())
-                                               .orElse(null);
+        EnderDropperBlockEntity dropper = level
+            .getBlockEntity(pos, PastelBlockEntities.ENDER_DROPPER.get())
+            .orElse(null);
         if (dropper == null) {
             return;
         }
@@ -115,15 +139,21 @@ public class EnderDropperBlock extends DispenserBlock {
         } else {
             ItemStack itemStack = dropper.getItem(i);
             if (!itemStack.isEmpty()) {
-                Direction direction = level.getBlockState(pos)
-                                           .getValue(FACING);
-                if (level.getBlockState(pos.relative(direction))
-                         .isAir()) {
+                Direction direction = level
+                    .getBlockState(pos)
+                    .getValue(FACING);
+                if (level
+                    .getBlockState(pos.relative(direction))
+                    .isAir()) {
                     ItemStack itemStack3 = BEHAVIOR.dispense(blockPointer, itemStack);
                     dropper.setItem(i, itemStack3);
                 } else {
-                    var handler = level.getCapability(
-                        Capabilities.ItemHandler.BLOCK, pos.relative(direction), direction.getOpposite());
+                    var handler = level
+                        .getCapability(
+                            Capabilities.ItemHandler.BLOCK,
+                            pos.relative(direction),
+                            direction.getOpposite()
+                        );
                     if (handler != null) {
 
                         assert dropper.getOwnerIfOnline() != null;

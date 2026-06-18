@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.sound;
 
-
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.status_effects.AscensionStatusEffect;
@@ -13,11 +12,15 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class DivinitySoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private static int instances = 0;
+
     private int time = 0;
+
     private boolean done;
 
     public DivinitySoundInstance() {
@@ -26,9 +29,10 @@ public class DivinitySoundInstance extends AbstractSoundInstance implements Tick
         this.delay = 0;
         this.volume = 0.8F;
         instances++;
-        Minecraft.getInstance()
-                 .getSoundManager()
-                 .stop(null, SoundSource.MUSIC);
+        Minecraft
+            .getInstance()
+            .getSoundManager()
+            .stop(null, SoundSource.MUSIC);
     }
 
     @Override
@@ -51,8 +55,10 @@ public class DivinitySoundInstance extends AbstractSoundInstance implements Tick
             this.volume = 0.5F + ((float) time / AscensionStatusEffect.MUSIC_INTRO_TICKS) * 0.2F;
         }
         Player player = client.player;
-        if (instances > 1 || player == null || !(player.hasEffect(PastelMobEffects.ASCENSION) || player.hasEffect(
-            PastelMobEffects.DIVINITY))) {
+        if (instances > 1 || player == null || !(player.hasEffect(PastelMobEffects.ASCENSION) || player
+            .hasEffect(
+                PastelMobEffects.DIVINITY
+            ))) {
             this.setDone();
         } else {
             this.x = ((float) player.getX());

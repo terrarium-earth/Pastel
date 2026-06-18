@@ -34,47 +34,87 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
 
         var spreadProvider = config.nodeSpread();
         var strengthProvider = config.emitterStrength();
-        var nodeQuantity = config.nodeQuantity()
-                                 .sample(random);
-        var cutoutQuantity = config.cutoutQuantity()
-                                   .sample(random);
+        var nodeQuantity = config
+            .nodeQuantity()
+            .sample(random);
+        var cutoutQuantity = config
+            .cutoutQuantity()
+            .sample(random);
         var decay = config.emitterDecayModifier();
         List<Emitter> emitters = new ArrayList<>();
 
-        for (int i = 0; i < nodeQuantity; i++) {
+        for (
+            int i = 0;
+            i < nodeQuantity;
+            i++
+        ) {
             generateEmitter(
-                origin, false, bias, spreadProvider, random, world, emitters, strengthProvider.sample(random));
+                origin,
+                false,
+                bias,
+                spreadProvider,
+                random,
+                world,
+                emitters,
+                strengthProvider.sample(random)
+            );
         }
 
         if (emitters.isEmpty()) {
             return false;
         }
 
-        for (int i = 0; i < cutoutQuantity; i++) {
+        for (
+            int i = 0;
+            i < cutoutQuantity;
+            i++
+        ) {
             generateEmitter(
-                origin, true, bias, spreadProvider, random, world, emitters, strengthProvider.sample(random) / 1.667F);
+                origin,
+                true,
+                bias,
+                spreadProvider,
+                random,
+                world,
+                emitters,
+                strengthProvider.sample(random) / 1.667F
+            );
         }
 
         emitters.add(new Emitter(origin.mutable(), strengthProvider.sample(random), false));
         var placementArea = spreadProvider.getMaxValue() + Math.round(strengthProvider.getMaxValue() / decay);
-        var iterator = BlockPos.withinManhattan(origin, placementArea, 0, placementArea)
-                               .iterator();
+        var iterator = BlockPos
+            .withinManhattan(origin, placementArea, 0, placementArea)
+            .iterator();
         var anyPlaced = false;
 
         while (iterator.hasNext()) {
-            var placementPos = iterator.next()
-                                       .mutable();
+            var placementPos = iterator
+                .next()
+                .mutable();
             var originalY = placementPos.getY();
 
-            if (!world.getBlockState(placementPos)
-                      .is(PastelBlocks.ASH_PILE.get()) && !canPlaceAt(world, placementPos) && !adjustPlacementHeight(
-                world, placementPos, placementArea / 3))
+            if (!world
+                .getBlockState(placementPos)
+                .is(PastelBlocks.ASH_PILE.get()) && !canPlaceAt(world, placementPos) && !adjustPlacementHeight(
+                    world,
+                    placementPos,
+                    placementArea / 3
+                ))
                 continue;
 
-            var height = Math.round(getStrengthAt(
-                placementPos, origin, emitters, originalY, placementArea, decay,
-                config.emitterCutoutModifier()
-            ));
+            var height = Math
+                .round(
+                    getStrengthAt(
+                        placementPos,
+                        origin,
+                        emitters,
+                        originalY,
+                        placementArea,
+                        decay,
+                        config.emitterCutoutModifier()
+                    )
+                );
 
             if (height <= 0)
                 continue;
@@ -87,31 +127,42 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
     }
 
     private static void generateEmitter(
-        BlockPos origin, boolean cutout, boolean bias, IntProvider spreadProvider, RandomSource random,
-        WorldGenLevel world, List<Emitter> emitters, float strength
+        BlockPos origin,
+        boolean cutout,
+        boolean bias,
+        IntProvider spreadProvider,
+        RandomSource random,
+        WorldGenLevel world,
+        List<Emitter> emitters,
+        float strength
     ) {
-        var potentialNode = origin.offset(
-                                      Math.round(spreadProvider.sample(random) * (random.nextBoolean() ? 1 : -1) * (bias ? 0.667F : 1F)), 0,
-                                      Math.round(spreadProvider.sample(random) * (random.nextBoolean() ? 1 : -1) * (!bias ? 0.667F : 1F))
-                                  )
-                                  .mutable();
+        var potentialNode = origin
+            .offset(
+                Math.round(spreadProvider.sample(random) * (random.nextBoolean() ? 1 : -1) * (bias ? 0.667F : 1F)),
+                0,
+                Math.round(spreadProvider.sample(random) * (random.nextBoolean() ? 1 : -1) * (!bias ? 0.667F : 1F))
+            )
+            .mutable();
 
-        if (world.getBlockState(potentialNode)
-                 .isAir()
-            && world.getBlockState(potentialNode.offset(0, -1, 0))
-                    .isAir()
-            && !world.getBlockState(potentialNode.offset(0, -2, 0))
-                     .isAir()) {
+        if (world
+            .getBlockState(potentialNode)
+            .isAir() && world
+                .getBlockState(potentialNode.offset(0, -1, 0))
+                .isAir() && !world
+                    .getBlockState(potentialNode.offset(0, -2, 0))
+                    .isAir()) {
             emitters.add(new Emitter(potentialNode.move(0, -1, 0), strength, cutout));
             return;
         }
 
-        while (!world.getBlockState(potentialNode)
-                     .isAir()) {
+        while (!world
+            .getBlockState(potentialNode)
+            .isAir()) {
             potentialNode.move(0, 1, 0);
 
-            if (world.getBlockState(potentialNode)
-                     .isAir()) {
+            if (world
+                .getBlockState(potentialNode)
+                .isAir()) {
                 emitters.add(new Emitter(potentialNode, strength, cutout));
                 break;
             } else if (potentialNode.getY() - origin.getY() > spreadProvider.getMaxValue() / 2) {
@@ -160,25 +211,38 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
     private void placeAshBlock(WorldGenLevel world, BlockPos.MutableBlockPos pos, int height) {
         if (height == 8) {
             setBlock(
-                world, pos, PastelBlocks.ASH.get()
-                                            .defaultBlockState()
+                world,
+                pos,
+                PastelBlocks.ASH
+                    .get()
+                    .defaultBlockState()
             );
         } else {
             setBlock(
-                world, pos, PastelBlocks.ASH_PILE.get()
-                                                 .defaultBlockState()
-                                                 .setValue(LAYERS, height)
+                world,
+                pos,
+                PastelBlocks.ASH_PILE
+                    .get()
+                    .defaultBlockState()
+                    .setValue(LAYERS, height)
             );
         }
     }
 
     private float getStrengthAt(
-        BlockPos pos, BlockPos origin, List<Emitter> emitters, int originalY, float maxArea, float decay,
+        BlockPos pos,
+        BlockPos origin,
+        List<Emitter> emitters,
+        int originalY,
+        float maxArea,
+        float decay,
         float cutoutDecay
     ) {
         float strength = 0F;
 
-        for (Emitter emitter : emitters) {
+        for (
+            Emitter emitter : emitters
+        ) {
             if (emitter.cutout) {
                 var cutoutStrength = (float) Math.sqrt(pos.distSqr(emitter.pos));
                 cutoutStrength *= -cutoutDecay;
@@ -204,18 +268,24 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
     private boolean adjustPlacementHeight(WorldGenLevel world, BlockPos.MutableBlockPos pos, int maxShifts) {
         var foundValidSpace = false;
 
-        for (int shifts = 1; shifts < maxShifts + 1; shifts++) {
+        for (
+            int shifts = 1;
+            shifts < maxShifts + 1;
+            shifts++
+        ) {
             var upPos = pos.offset(0, shifts, 0);
-            if (canPlaceAt(world, upPos) || world.getBlockState(pos)
-                                                 .is(PastelBlocks.ASH_PILE.get())) {
+            if (canPlaceAt(world, upPos) || world
+                .getBlockState(pos)
+                .is(PastelBlocks.ASH_PILE.get())) {
                 pos.move(0, shifts, 0);
                 foundValidSpace = true;
                 break;
             }
 
             var downPos = pos.offset(0, -shifts, 0);
-            if (canPlaceAt(world, downPos) || world.getBlockState(pos)
-                                                   .is(PastelBlocks.ASH_PILE.get())) {
+            if (canPlaceAt(world, downPos) || world
+                .getBlockState(pos)
+                .is(PastelBlocks.ASH_PILE.get())) {
                 pos.move(0, -shifts, 0);
                 foundValidSpace = true;
                 break;
@@ -226,16 +296,17 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
     }
 
     private static boolean canPlaceAt(WorldGenLevel world, BlockPos pos) {
-        return (world.isEmptyBlock(pos) || world.getBlockState(pos)
-                                                .is(PastelBlocks.VARIA_SPROUT.get())) && PastelBlocks.ASH_PILE.get()
-                                                                                                              .defaultBlockState()
-                                                                                                              .canSurvive(
-                                                                                                                  world,
-                                                                                                                  pos
-                                                                                                              );
+        return (world.isEmptyBlock(pos) || world
+            .getBlockState(pos)
+            .is(PastelBlocks.VARIA_SPROUT.get())) && PastelBlocks.ASH_PILE
+                .get()
+                .defaultBlockState()
+                .canSurvive(
+                    world,
+                    pos
+                );
     }
 
     private record Emitter(BlockPos.MutableBlockPos pos, float strength, boolean cutout) {
     }
 }
-

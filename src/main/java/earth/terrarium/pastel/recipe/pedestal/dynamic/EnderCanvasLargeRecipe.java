@@ -27,26 +27,42 @@ public class EnderCanvasLargeRecipe extends ShapedPedestalRecipe {
 
     public EnderCanvasLargeRecipe() {
         super(
-            "", false, Optional.of(PastelAdvancements.Unlocks.Items.ENDER_SPLICE), PedestalTier.ADVANCED,
-            new RawShapedPedestalRecipe(3, 3, generateInputs(), Optional.empty()), Map.of(
-                PastelGemstoneColor.MAGENTA, 0, PastelGemstoneColor.CYAN, 0, PastelGemstoneColor.YELLOW, 0),
-            PastelItems.ENDER_CANVAS.get().getDefaultInstance(), 0.0F, 20, true, true
+            "",
+            false,
+            Optional.of(PastelAdvancements.Unlocks.Items.ENDER_SPLICE),
+            PedestalTier.ADVANCED,
+            new RawShapedPedestalRecipe(3, 3, generateInputs(), Optional.empty()),
+            Map
+                .of(
+                    PastelGemstoneColor.MAGENTA,
+                    0,
+                    PastelGemstoneColor.CYAN,
+                    0,
+                    PastelGemstoneColor.YELLOW,
+                    0
+                ),
+            PastelItems.ENDER_CANVAS.get().getDefaultInstance(),
+            0.0F,
+            20,
+            true,
+            true
         );
     }
 
     private static NonNullList<IngredientStack> generateInputs() {
-        return NonNullList.of(
-            IngredientStack.EMPTY,
-            IngredientStack.ofItems(Items.STICK),
-            IngredientStack.ofTag(ItemTags.WOOL),
-            IngredientStack.ofItems(Items.STICK),
-            IngredientStack.ofTag(ItemTags.WOOL),
-            IngredientStack.ofItems(PastelItems.ENDER_CANVAS.get()),
-            IngredientStack.ofTag(ItemTags.WOOL),
-            IngredientStack.ofItems(Items.STICK),
-            IngredientStack.ofTag(ItemTags.WOOL),
-            IngredientStack.ofItems(Items.STICK)
-        );
+        return NonNullList
+            .of(
+                IngredientStack.EMPTY,
+                IngredientStack.ofItems(Items.STICK),
+                IngredientStack.ofTag(ItemTags.WOOL),
+                IngredientStack.ofItems(Items.STICK),
+                IngredientStack.ofTag(ItemTags.WOOL),
+                IngredientStack.ofItems(PastelItems.ENDER_CANVAS.get()),
+                IngredientStack.ofTag(ItemTags.WOOL),
+                IngredientStack.ofItems(Items.STICK),
+                IngredientStack.ofTag(ItemTags.WOOL),
+                IngredientStack.ofItems(Items.STICK)
+            );
     }
 
     @Override
@@ -59,9 +75,9 @@ public class EnderCanvasLargeRecipe extends ShapedPedestalRecipe {
 
     @Override
     public boolean matches(PedestalRecipeInput inv, Level world) {
-        return super.matches(inv, world) && inv.getItem(4)
-                                               .get(PastelDataComponentTypes.ENDER_CANVAS_VARIANT) ==
-                                            EnderCanvasEntity.EnderCanvasVariant.LANDSCAPESMALL;
+        return super.matches(inv, world) && inv
+            .getItem(4)
+            .get(PastelDataComponentTypes.ENDER_CANVAS_VARIANT) == EnderCanvasEntity.EnderCanvasVariant.LANDSCAPESMALL;
     }
 
     @Override

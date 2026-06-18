@@ -23,11 +23,15 @@ import java.util.Optional;
 public abstract class FluidConvertingRecipe extends GatedPastelRecipe<RecipeInput> {
 
     protected final Ingredient input;
+
     protected final ItemStack output;
 
     public FluidConvertingRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        @NotNull Ingredient input, ItemStack output
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        @NotNull Ingredient input,
+        ItemStack output
     ) {
         super(group, secret, requiredAdvancementIdentifier);
         this.input = input;
@@ -64,31 +68,47 @@ public abstract class FluidConvertingRecipe extends GatedPastelRecipe<RecipeInpu
     public static class Serializer<T extends FluidConvertingRecipe> implements RecipeSerializer<T> {
 
         private final MapCodec<T> codec;
+
         private final StreamCodec<RegistryFriendlyByteBuf, T> packetCodec;
 
         public Serializer(Function5<String, Boolean, Optional<ResourceLocation>, Ingredient, ItemStack, T> factory) {
-            codec = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                          Codec.STRING.optionalFieldOf("group", "")
-                                                                      .forGetter(recipe -> recipe.group),
-                                                          Codec.BOOL.optionalFieldOf("secret", false)
-                                                                    .forGetter(recipe -> recipe.secret),
-                                                          ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                                          Ingredient.CODEC_NONEMPTY.fieldOf("ingredient")
-                                                                                   .forGetter(recipe -> recipe.input),
-                                                          ItemStack.CODEC.fieldOf("result")
-                                                                         .forGetter(recipe -> recipe.output)
-                                                      )
-                                                      .apply(i, factory));
+            codec = RecordCodecBuilder
+                .mapCodec(
+                    i -> i
+                        .group(
+                            Codec.STRING
+                                .optionalFieldOf("group", "")
+                                .forGetter(recipe -> recipe.group),
+                            Codec.BOOL
+                                .optionalFieldOf("secret", false)
+                                .forGetter(recipe -> recipe.secret),
+                            ResourceLocation.CODEC
+                                .optionalFieldOf("required_advancement")
+                                .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                            Ingredient.CODEC_NONEMPTY
+                                .fieldOf("ingredient")
+                                .forGetter(recipe -> recipe.input),
+                            ItemStack.CODEC
+                                .fieldOf("result")
+                                .forGetter(recipe -> recipe.output)
+                        )
+                        .apply(i, factory)
+                );
 
-            packetCodec = StreamCodec.composite(
-                ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
-                ByteBufCodecs.BOOL, recipe -> recipe.secret,
-                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-                Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.input,
-                ItemStack.STREAM_CODEC, recipe -> recipe.output,
-                factory
-            );
+            packetCodec = StreamCodec
+                .composite(
+                    ByteBufCodecs.STRING_UTF8,
+                    recipe -> recipe.group,
+                    ByteBufCodecs.BOOL,
+                    recipe -> recipe.secret,
+                    ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                    recipe -> recipe.requiredAdvancementIdentifier,
+                    Ingredient.CONTENTS_STREAM_CODEC,
+                    recipe -> recipe.input,
+                    ItemStack.STREAM_CODEC,
+                    recipe -> recipe.output,
+                    factory
+                );
         }
 
         @Override

@@ -7,15 +7,18 @@ import net.minecraft.world.InteractionResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class REIOverlayDecider implements OverlayDecider {
 
     public static final OverlayDecider INSTANCE = new REIOverlayDecider();
 
     @Override
     public <R extends Screen> boolean isHandingScreen(Class<R> screen) {
-        return screen.getPackageName()
-                     .startsWith("de.dafuqs.pastel");
+        return screen
+            .getPackageName()
+            .startsWith("de.dafuqs.pastel");
     }
 
     @Override

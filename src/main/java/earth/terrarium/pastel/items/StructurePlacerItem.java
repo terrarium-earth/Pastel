@@ -26,14 +26,20 @@ public class StructurePlacerItem extends Item implements CreativeOnlyItem {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        if (context.getPlayer() != null && context.getPlayer()
-                                                  .isCreative()) {
+        if (context.getPlayer() != null && context
+            .getPlayer()
+            .isCreative()) {
             Multiblock multiblock = PastelMultiblocks.get(multiBlockIdentifier);
             if (multiblock != null) {
                 Rotation blockRotation = Support.rotationFromDirection(context.getHorizontalDirection());
-                multiblock.place(context.getLevel(), context.getClickedPos()
-                                                            .above(), blockRotation
-                );
+                multiblock
+                    .place(
+                        context.getLevel(),
+                        context
+                            .getClickedPos()
+                            .above(),
+                        blockRotation
+                    );
                 return InteractionResult.CONSUME;
             }
         }

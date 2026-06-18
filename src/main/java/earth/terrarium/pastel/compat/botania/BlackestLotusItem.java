@@ -33,12 +33,16 @@ public class BlackestLotusItem extends Item implements ManaDissolvable {
         if (!itemEntity.level().isClientSide) {
             manaPool.receiveMana(manaPool.getMaxMana());
             EntityHelper.shrinkItem(itemEntity);
-            XplatAbstractions.INSTANCE.sendToTracking(
-                itemEntity, new BotaniaEffectPacket(
-                    EffectType.BLACK_LOTUS_DISSOLVE, pos.getX(), pos.getY() + 0.5,
-                    pos.getZ()
-                )
-            );
+            XplatAbstractions.INSTANCE
+                .sendToTracking(
+                    itemEntity,
+                    new BotaniaEffectPacket(
+                        EffectType.BLACK_LOTUS_DISSOLVE,
+                        pos.getX(),
+                        pos.getY() + 0.5,
+                        pos.getZ()
+                    )
+                );
         }
 
         itemEntity.playSound(BotaniaSounds.blackLotus, 1F, 0.25F);
@@ -53,8 +57,12 @@ public class BlackestLotusItem extends Item implements ManaDissolvable {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
 
-        tooltip.add(Component.translatable("item.pastel.blackest_lotus.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.blackest_lotus.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
 }

@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.loot.modifiers;
 
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -44,51 +43,78 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+    "deprecation"
+)
 public class TreasureHunterModifier extends LootModifier {
 
     private static final Map<Holder<EntityType<?>>, HeadProvider> SPECIAL_CASES = new HashMap<>();
 
-    public static final MapCodec<TreasureHunterModifier> CODEC = RecordCodecBuilder.mapCodec(i ->
-                                                                                                 LootModifier.codecStart(
-                                                                                                                 i)
-                                                                                                             .and(
-                                                                                                                 i.group(
-                                                                                                                     TagKey.codec(
-                                                                                                                               Registries.ENTITY_TYPE)
-                                                                                                                           .fieldOf(
-                                                                                                                               "special")
-                                                                                                                           .forGetter(
-                                                                                                                               m -> m.special),
-                                                                                                                     TagKey.codec(
-                                                                                                                               Registries.ENTITY_TYPE)
-                                                                                                                           .optionalFieldOf(
-                                                                                                                               "exempt")
-                                                                                                                           .forGetter(
-                                                                                                                               m -> m.exempt),
-                                                                                                                     Codec.FLOAT.fieldOf(
-                                                                                                                              "chance")
-                                                                                                                                .forGetter(
-                                                                                                                                    m -> m.chance),
-                                                                                                                     Codec.FLOAT.fieldOf(
-                                                                                                                              "special_chance")
-                                                                                                                                .forGetter(
-                                                                                                                                    m -> m.specialChance)
-                                                                                                                 )
-                                                                                                             )
-                                                                                                             .apply(
-                                                                                                                 i,
-                                                                                                                 TreasureHunterModifier::new
-                                                                                                             ));
+    public static final MapCodec<TreasureHunterModifier> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> LootModifier
+                .codecStart(
+                    i
+                )
+                .and(
+                    i
+                        .group(
+                            TagKey
+                                .codec(
+                                    Registries.ENTITY_TYPE
+                                )
+                                .fieldOf(
+                                    "special"
+                                )
+                                .forGetter(
+                                    m -> m.special
+                                ),
+                            TagKey
+                                .codec(
+                                    Registries.ENTITY_TYPE
+                                )
+                                .optionalFieldOf(
+                                    "exempt"
+                                )
+                                .forGetter(
+                                    m -> m.exempt
+                                ),
+                            Codec.FLOAT
+                                .fieldOf(
+                                    "chance"
+                                )
+                                .forGetter(
+                                    m -> m.chance
+                                ),
+                            Codec.FLOAT
+                                .fieldOf(
+                                    "special_chance"
+                                )
+                                .forGetter(
+                                    m -> m.specialChance
+                                )
+                        )
+                )
+                .apply(
+                    i,
+                    TreasureHunterModifier::new
+                )
+        );
 
     private final float chance;
+
     private final float specialChance;
+
     private final TagKey<EntityType<?>> special;
+
     private final Optional<TagKey<EntityType<?>>> exempt;
 
     protected TreasureHunterModifier(
-        LootItemCondition[] conditionsIn, TagKey<EntityType<?>> special, Optional<TagKey<EntityType<?>>> exempt,
-        float chance, float specialChance
+        LootItemCondition[] conditionsIn,
+        TagKey<EntityType<?>> special,
+        Optional<TagKey<EntityType<?>>> exempt,
+        float chance,
+        float specialChance
     ) {
         super(conditionsIn);
         this.chance = chance;
@@ -106,13 +132,18 @@ public class TreasureHunterModifier extends LootModifier {
         if (target == null)
             return original;
 
-        if (exempt.map(e -> target.getType()
-                                  .is(e))
-                  .orElse(false))
+        if (exempt
+            .map(
+                e -> target
+                    .getType()
+                    .is(e)
+            )
+            .orElse(false))
             return original;
 
-        if (target.getType()
-                  .is(special))
+        if (target
+            .getType()
+            .is(special))
             scalingChance = specialChance;
 
         var type = lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE);
@@ -125,10 +156,14 @@ public class TreasureHunterModifier extends LootModifier {
         if (weapon == null)
             return original;
 
-        var level = Ench.getLevel(
-            lootContext.getLevel()
-                       .registryAccess(), PastelEnchantments.TREASURE_HUNTER, weapon
-        );
+        var level = Ench
+            .getLevel(
+                lootContext
+                    .getLevel()
+                    .registryAccess(),
+                PastelEnchantments.TREASURE_HUNTER,
+                weapon
+            );
         var head = tryGetHead(target);
 
         if (!shouldDrop(head, scalingChance, level, lootContext.getRandom()))
@@ -145,24 +180,35 @@ public class TreasureHunterModifier extends LootModifier {
     }
 
     public static Optional<Item> tryGetHead(Entity target) {
-        var typeHolder = target.getType()
-                               .builtInRegistryHolder();
+        var typeHolder = target
+            .getType()
+            .builtInRegistryHolder();
 
         if (SPECIAL_CASES.containsKey(typeHolder))
-            return Optional.of(SPECIAL_CASES.get(typeHolder)
-                                            .get(target)
-                                            .asItem());
+            return Optional
+                .of(
+                    SPECIAL_CASES
+                        .get(typeHolder)
+                        .get(target)
+                        .asItem()
+                );
 
-        for (int i = 0; i < 2; i++) {
-            var rawId = typeHolder.key()
-                                  .location()
-                                  .toString();
+        for (
+            int i = 0;
+            i < 2;
+            i++
+        ) {
+            var rawId = typeHolder
+                .key()
+                .location()
+                .toString();
             ;
 
             if (i == 1) {
-                rawId = "pastel:" + typeHolder.key()
-                                              .location()
-                                              .getPath();
+                rawId = "pastel:" + typeHolder
+                    .key()
+                    .location()
+                    .getPath();
             }
 
             var head = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(rawId + "_head"));
@@ -192,118 +238,131 @@ public class TreasureHunterModifier extends LootModifier {
     }
 
     static {
-        SPECIAL_CASES.put(
-            EntityType.FOX.builtInRegistryHolder(), (entity) ->
-                switch (((Fox) entity).getVariant()) {
+        SPECIAL_CASES
+            .put(
+                EntityType.FOX.builtInRegistryHolder(),
+                (entity) -> switch (((Fox) entity).getVariant()) {
                     case RED -> PastelBlocks.MOB_HEADS.get(PastelSkullType.FOX).get();
                     case SNOW -> PastelBlocks.MOB_HEADS.get(PastelSkullType.FOX_ARCTIC).get();
                 }
-        );
+            );
 
-        SPECIAL_CASES.put(
-            EntityType.MOOSHROOM.builtInRegistryHolder(), (entity) ->
-                switch (((MushroomCow) entity).getVariant()) {
+        SPECIAL_CASES
+            .put(
+                EntityType.MOOSHROOM.builtInRegistryHolder(),
+                (entity) -> switch (((MushroomCow) entity).getVariant()) {
                     case RED -> PastelBlocks.MOB_HEADS.get(PastelSkullType.MOOSHROOM_RED).get();
                     case BROWN -> PastelBlocks.MOB_HEADS.get(PastelSkullType.MOOSHROOM_BROWN).get();
                 }
-        );
+            );
 
-        SPECIAL_CASES.put(
-            EntityType.AXOLOTL.builtInRegistryHolder(), (entity) ->
-                switch (((Axolotl) entity).getVariant()) {
+        SPECIAL_CASES
+            .put(
+                EntityType.AXOLOTL.builtInRegistryHolder(),
+                (entity) -> switch (((Axolotl) entity).getVariant()) {
                     case LUCY -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_LEUCISTIC).get();
                     case WILD -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_WILD).get();
                     case GOLD -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_GOLD).get();
                     case CYAN -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_CYAN).get();
                     case BLUE -> PastelBlocks.MOB_HEADS.get(PastelSkullType.AXOLOTL_BLUE).get();
                 }
-        );
+            );
 
-        SPECIAL_CASES.put(
-            EntityType.ENDER_DRAGON.builtInRegistryHolder(), (entity) -> Blocks.DRAGON_HEAD
-        );
+        SPECIAL_CASES
+            .put(
+                EntityType.ENDER_DRAGON.builtInRegistryHolder(),
+                (entity) -> Blocks.DRAGON_HEAD
+            );
 
-        SPECIAL_CASES.put(
-            EntityType.PARROT.builtInRegistryHolder(), (entity) ->
-                switch (((Parrot) entity).getVariant()) {
+        SPECIAL_CASES
+            .put(
+                EntityType.PARROT.builtInRegistryHolder(),
+                (entity) -> switch (((Parrot) entity).getVariant()) {
                     case RED_BLUE -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_RED).get();
                     case BLUE -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_BLUE).get();
                     case GREEN -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_GREEN).get();
                     case YELLOW_BLUE -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_CYAN).get();
                     case GRAY -> PastelBlocks.MOB_HEADS.get(PastelSkullType.PARROT_GRAY).get();
                 }
-        );
+            );
 
-        SPECIAL_CASES.put(
-            EntityType.FROG.builtInRegistryHolder(), (entity) -> {
-                var variant = ((Frog) entity).getVariant();
+        SPECIAL_CASES
+            .put(
+                EntityType.FROG.builtInRegistryHolder(),
+                (entity) -> {
+                    var variant = ((Frog) entity).getVariant();
 
-                if (variant.is(FrogVariant.COLD))
-                    return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_COLD).get();
-                else if (variant.is(FrogVariant.WARM))
-                    return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_WARM).get();
-                else
-                    return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_TEMPERATE).get();
-            }
-        );
+                    if (variant.is(FrogVariant.COLD))
+                        return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_COLD).get();
+                    else if (variant.is(FrogVariant.WARM))
+                        return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_WARM).get();
+                    else
+                        return PastelBlocks.MOB_HEADS.get(PastelSkullType.FROG_TEMPERATE).get();
+                }
+            );
 
-        SPECIAL_CASES.put(
-            EntityType.SHULKER.builtInRegistryHolder(), entity -> {
-                var color = ((Shulker) entity).getVariant();
-                var type = PastelSkullType.SHULKER;
+        SPECIAL_CASES
+            .put(
+                EntityType.SHULKER.builtInRegistryHolder(),
+                entity -> {
+                    var color = ((Shulker) entity).getVariant();
+                    var type = PastelSkullType.SHULKER;
 
-                if (color.isEmpty())
+                    if (color.isEmpty())
+                        return PastelBlocks.MOB_HEADS.get(type).get();
+
+                    type = switch (color.get()) {
+                        case WHITE -> PastelSkullType.SHULKER_WHITE;
+                        case ORANGE -> PastelSkullType.SHULKER_ORANGE;
+                        case MAGENTA -> PastelSkullType.SHULKER_MAGENTA;
+                        case LIGHT_BLUE -> PastelSkullType.SHULKER_LIGHT_BLUE;
+                        case YELLOW -> PastelSkullType.SHULKER_YELLOW;
+                        case LIME -> PastelSkullType.SHULKER_LIME;
+                        case PINK -> PastelSkullType.SHULKER_PINK;
+                        case GRAY -> PastelSkullType.SHULKER_GRAY;
+                        case LIGHT_GRAY -> PastelSkullType.SHULKER_LIGHT_GRAY;
+                        case CYAN -> PastelSkullType.SHULKER_CYAN;
+                        case PURPLE -> PastelSkullType.SHULKER_PURPLE;
+                        case BLUE -> PastelSkullType.SHULKER_BLUE;
+                        case BROWN -> PastelSkullType.SHULKER_BROWN;
+                        case GREEN -> PastelSkullType.SHULKER_GREEN;
+                        case RED -> PastelSkullType.SHULKER_RED;
+                        case BLACK -> PastelSkullType.SHULKER_BLACK;
+                    };
                     return PastelBlocks.MOB_HEADS.get(type).get();
+                }
+            );
 
-                type = switch (color.get()) {
-                    case WHITE -> PastelSkullType.SHULKER_WHITE;
-                    case ORANGE -> PastelSkullType.SHULKER_ORANGE;
-                    case MAGENTA -> PastelSkullType.SHULKER_MAGENTA;
-                    case LIGHT_BLUE -> PastelSkullType.SHULKER_LIGHT_BLUE;
-                    case YELLOW -> PastelSkullType.SHULKER_YELLOW;
-                    case LIME -> PastelSkullType.SHULKER_LIME;
-                    case PINK -> PastelSkullType.SHULKER_PINK;
-                    case GRAY -> PastelSkullType.SHULKER_GRAY;
-                    case LIGHT_GRAY -> PastelSkullType.SHULKER_LIGHT_GRAY;
-                    case CYAN -> PastelSkullType.SHULKER_CYAN;
-                    case PURPLE -> PastelSkullType.SHULKER_PURPLE;
-                    case BLUE -> PastelSkullType.SHULKER_BLUE;
-                    case BROWN -> PastelSkullType.SHULKER_BROWN;
-                    case GREEN -> PastelSkullType.SHULKER_GREEN;
-                    case RED -> PastelSkullType.SHULKER_RED;
-                    case BLACK -> PastelSkullType.SHULKER_BLACK;
-                };
-                return PastelBlocks.MOB_HEADS.get(type).get();
-            }
-        );
+        SPECIAL_CASES
+            .put(
+                PastelEntityTypes.LIZARD,
+                entity -> {
+                    var color = ((LizardEntity) entity).getColor();
+                    var type = PastelSkullType.LIZARD_WHITE;
 
-        SPECIAL_CASES.put(
-            PastelEntityTypes.LIZARD, entity -> {
-                var color = ((LizardEntity) entity).getColor();
-                var type = PastelSkullType.LIZARD_WHITE;
-
-                type = switch (color.getDyeColor()
-                                    .get()) {
-                    case WHITE -> PastelSkullType.LIZARD_WHITE;
-                    case ORANGE -> PastelSkullType.LIZARD_ORANGE;
-                    case MAGENTA -> PastelSkullType.LIZARD_MAGENTA;
-                    case LIGHT_BLUE -> PastelSkullType.LIZARD_LIGHT_BLUE;
-                    case YELLOW -> PastelSkullType.LIZARD_YELLOW;
-                    case LIME -> PastelSkullType.LIZARD_LIME;
-                    case PINK -> PastelSkullType.LIZARD_PINK;
-                    case GRAY -> PastelSkullType.LIZARD_GRAY;
-                    case LIGHT_GRAY -> PastelSkullType.LIZARD_LIGHT_GRAY;
-                    case CYAN -> PastelSkullType.LIZARD_CYAN;
-                    case PURPLE -> PastelSkullType.LIZARD_PURPLE;
-                    case BLUE -> PastelSkullType.LIZARD_BLUE;
-                    case BROWN -> PastelSkullType.LIZARD_BROWN;
-                    case GREEN -> PastelSkullType.LIZARD_GREEN;
-                    case RED -> PastelSkullType.LIZARD_RED;
-                    case BLACK -> PastelSkullType.LIZARD_BLACK;
-                };
-                return PastelBlocks.MOB_HEADS.get(type).get();
-            }
-        );
+                    type = switch (color
+                        .getDyeColor()
+                        .get()) {
+                        case WHITE -> PastelSkullType.LIZARD_WHITE;
+                        case ORANGE -> PastelSkullType.LIZARD_ORANGE;
+                        case MAGENTA -> PastelSkullType.LIZARD_MAGENTA;
+                        case LIGHT_BLUE -> PastelSkullType.LIZARD_LIGHT_BLUE;
+                        case YELLOW -> PastelSkullType.LIZARD_YELLOW;
+                        case LIME -> PastelSkullType.LIZARD_LIME;
+                        case PINK -> PastelSkullType.LIZARD_PINK;
+                        case GRAY -> PastelSkullType.LIZARD_GRAY;
+                        case LIGHT_GRAY -> PastelSkullType.LIZARD_LIGHT_GRAY;
+                        case CYAN -> PastelSkullType.LIZARD_CYAN;
+                        case PURPLE -> PastelSkullType.LIZARD_PURPLE;
+                        case BLUE -> PastelSkullType.LIZARD_BLUE;
+                        case BROWN -> PastelSkullType.LIZARD_BROWN;
+                        case GREEN -> PastelSkullType.LIZARD_GREEN;
+                        case RED -> PastelSkullType.LIZARD_RED;
+                        case BLACK -> PastelSkullType.LIZARD_BLACK;
+                    };
+                    return PastelBlocks.MOB_HEADS.get(type).get();
+                }
+            );
     }
 
     @FunctionalInterface

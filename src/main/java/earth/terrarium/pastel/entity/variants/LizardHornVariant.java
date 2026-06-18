@@ -20,7 +20,9 @@ public enum LizardHornVariant implements StringRepresentable {
     public static Codec<LizardHornVariant> CODEC = StringRepresentable.fromEnum(LizardHornVariant::values);
 
     private final String name;
+
     private final ResourceLocation id;
+
     private final ResourceLocation texture;
 
     LizardHornVariant(String name, String texture) {

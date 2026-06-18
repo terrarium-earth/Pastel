@@ -39,11 +39,17 @@ public class CrackedEndPortalFrameBlock extends Block {
     public static final MapCodec<CrackedEndPortalFrameBlock> CODEC = simpleCodec(CrackedEndPortalFrameBlock::new);
 
     public static final BooleanProperty FACING_VERTICAL;
+
     public static final EnumProperty<EndPortalFrameEye> EYE_TYPE;
+
     protected static final VoxelShape FRAME_SHAPE;
+
     protected static final VoxelShape EYE_SHAPE;
+
     protected static final VoxelShape FRAME_WITH_EYE_SHAPE;
+
     private static BlockPattern COMPLETED_FRAME;
+
     private static BlockPattern END_PORTAL;
 
     static {
@@ -61,32 +67,48 @@ public class CrackedEndPortalFrameBlock extends Block {
 
     public CrackedEndPortalFrameBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(FACING_VERTICAL, false)
-                                                      .setValue(EYE_TYPE, EndPortalFrameEye.NONE));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(FACING_VERTICAL, false)
+                    .setValue(EYE_TYPE, EndPortalFrameEye.NONE)
+            );
     }
 
     public static void checkAndFillEndPortal(Level world, BlockPos blockPos) {
-        BlockPattern.BlockPatternMatch result = CrackedEndPortalFrameBlock.getCompletedFramePattern()
-                                                                          .find(world, blockPos);
+        BlockPattern.BlockPatternMatch result = CrackedEndPortalFrameBlock
+            .getCompletedFramePattern()
+            .find(world, blockPos);
         if (result != null) {
             // since the custom portal does not have
             // fixed directions we can estimate the
             // portal position based on some simple checks instead
-            BlockPos portalTopLeft = result.getFrontTopLeft()
-                                           .offset(-3, 0, -3);
-            if (world.getBlockState(portalTopLeft.offset(7, 0, 0))
-                     .getBlock()
-                     .equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())) {
+            BlockPos portalTopLeft = result
+                .getFrontTopLeft()
+                .offset(-3, 0, -3);
+            if (world
+                .getBlockState(portalTopLeft.offset(7, 0, 0))
+                .getBlock()
+                .equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())) {
                 portalTopLeft = portalTopLeft.offset(4, 0, 0);
-            } else if (world.getBlockState(portalTopLeft.offset(0, 0, 7))
-                            .getBlock()
-                            .equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())) {
-                portalTopLeft = portalTopLeft.offset(0, 0, 4);
-            }
+            } else if (world
+                .getBlockState(portalTopLeft.offset(0, 0, 7))
+                .getBlock()
+                .equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())) {
+                    portalTopLeft = portalTopLeft.offset(0, 0, 4);
+                }
 
-            for (int i = 0; i < 3; ++i) {
-                for (int j = 0; j < 3; ++j) {
+            for (
+                int i = 0;
+                i < 3;
+                ++i
+            ) {
+                for (
+                    int j = 0;
+                    j < 3;
+                    ++j
+                ) {
                     world.setBlock(portalTopLeft.offset(i, 0, j), Blocks.END_PORTAL.defaultBlockState(), 2);
                 }
             }
@@ -96,26 +118,38 @@ public class CrackedEndPortalFrameBlock extends Block {
     }
 
     public static void destroyPortals(Level world, BlockPos blockPos) {
-        BlockPattern.BlockPatternMatch result = CrackedEndPortalFrameBlock.getActiveEndPortalPattern()
-                                                                          .find(world, blockPos);
+        BlockPattern.BlockPatternMatch result = CrackedEndPortalFrameBlock
+            .getActiveEndPortalPattern()
+            .find(world, blockPos);
         if (result != null) {
             // since the custom portal does not have
             // fixed directions we can estimate the
             // portal position based on some simple checks instead
-            BlockPos portalTopLeft = result.getFrontTopLeft()
-                                           .offset(-3, 0, -3);
-            Block b1 = world.getBlockState(portalTopLeft.offset(7, 0, 0))
-                            .getBlock();
-            Block b2 = world.getBlockState(portalTopLeft.offset(0, 0, 7))
-                            .getBlock();
+            BlockPos portalTopLeft = result
+                .getFrontTopLeft()
+                .offset(-3, 0, -3);
+            Block b1 = world
+                .getBlockState(portalTopLeft.offset(7, 0, 0))
+                .getBlock();
+            Block b2 = world
+                .getBlockState(portalTopLeft.offset(0, 0, 7))
+                .getBlock();
             if (b1.equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()) || b1.equals(Blocks.END_PORTAL_FRAME)) {
                 portalTopLeft = portalTopLeft.offset(4, 0, 0);
             } else if (b2.equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()) || b2.equals(Blocks.END_PORTAL_FRAME)) {
                 portalTopLeft = portalTopLeft.offset(0, 0, 4);
             }
 
-            for (int i = 0; i < 3; ++i) {
-                for (int j = 0; j < 3; ++j) {
+            for (
+                int i = 0;
+                i < 3;
+                ++i
+            ) {
+                for (
+                    int j = 0;
+                    j < 3;
+                    ++j
+                ) {
                     world.setBlock(portalTopLeft.offset(i, 0, j), Blocks.AIR.defaultBlockState(), 2);
                 }
             }
@@ -126,144 +160,229 @@ public class CrackedEndPortalFrameBlock extends Block {
 
     public static BlockPattern getCompletedFramePattern() {
         if (COMPLETED_FRAME == null) {
-            COMPLETED_FRAME = BlockPatternBuilder.start()
-                                                 .aisle("?vvv?", ">???<", ">???<", ">???<", "?^^^?")
-                                                 .where('?', BlockInWorld.hasState(BlockStatePredicate.ANY))
-                                                 .where(
-                                                     '^', BlockInWorld.hasState(
-                                                         BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-                                                                            .where(
-                                                                                EndPortalFrameBlock.HAS_EYE,
-                                                                                Predicates.equalTo(true)
-                                                                            )
-                                                                            .where(
-                                                                                EndPortalFrameBlock.FACING,
-                                                                                Predicates.equalTo(Direction.SOUTH)
-                                                                            )
-                                                                            .or(BlockStatePredicate.forBlock(
-                                                                                                       PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
-                                                                                                   .where(
-                                                                                                       EYE_TYPE,
-                                                                                                       Predicates.equalTo(
-                                                                                                           EndPortalFrameEye.WITH_EYE_OF_ENDER)
-                                                                                                   )
-                                                                                                   .where(
-                                                                                                       FACING_VERTICAL,
-                                                                                                       Predicates.equalTo(
-                                                                                                           false)
-                                                                                                   )))
-                                                 )
-                                                 .where(
-                                                     '>', BlockInWorld.hasState(
-                                                         BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-                                                                            .where(
-                                                                                EndPortalFrameBlock.HAS_EYE,
-                                                                                Predicates.equalTo(true)
-                                                                            )
-                                                                            .where(
-                                                                                EndPortalFrameBlock.FACING,
-                                                                                Predicates.equalTo(Direction.WEST)
-                                                                            )
-                                                                            .or(BlockStatePredicate.forBlock(
-                                                                                                       PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
-                                                                                                   .where(
-                                                                                                       EYE_TYPE,
-                                                                                                       Predicates.equalTo(
-                                                                                                           EndPortalFrameEye.WITH_EYE_OF_ENDER)
-                                                                                                   )
-                                                                                                   .where(
-                                                                                                       FACING_VERTICAL,
-                                                                                                       Predicates.equalTo(
-                                                                                                           true)
-                                                                                                   )))
-                                                 )
-                                                 .where(
-                                                     'v', BlockInWorld.hasState(
-                                                         BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-                                                                            .where(
-                                                                                EndPortalFrameBlock.HAS_EYE,
-                                                                                Predicates.equalTo(true)
-                                                                            )
-                                                                            .where(
-                                                                                EndPortalFrameBlock.FACING,
-                                                                                Predicates.equalTo(Direction.NORTH)
-                                                                            )
-                                                                            .or(BlockStatePredicate.forBlock(
-                                                                                                       PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
-                                                                                                   .where(
-                                                                                                       EYE_TYPE,
-                                                                                                       Predicates.equalTo(
-                                                                                                           EndPortalFrameEye.WITH_EYE_OF_ENDER)
-                                                                                                   )
-                                                                                                   .where(
-                                                                                                       FACING_VERTICAL,
-                                                                                                       Predicates.equalTo(
-                                                                                                           false)
-                                                                                                   )))
-                                                 )
-                                                 .where(
-                                                     '<', BlockInWorld.hasState(
-                                                         BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-                                                                            .where(
-                                                                                EndPortalFrameBlock.HAS_EYE,
-                                                                                Predicates.equalTo(true)
-                                                                            )
-                                                                            .where(
-                                                                                EndPortalFrameBlock.FACING,
-                                                                                Predicates.equalTo(Direction.EAST)
-                                                                            )
-                                                                            .or(BlockStatePredicate.forBlock(
-                                                                                                       PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
-                                                                                                   .where(
-                                                                                                       EYE_TYPE,
-                                                                                                       Predicates.equalTo(
-                                                                                                           EndPortalFrameEye.WITH_EYE_OF_ENDER)
-                                                                                                   )
-                                                                                                   .where(
-                                                                                                       FACING_VERTICAL,
-                                                                                                       Predicates.equalTo(
-                                                                                                           true)
-                                                                                                   )))
-                                                 )
-                                                 .build();
+            COMPLETED_FRAME = BlockPatternBuilder
+                .start()
+                .aisle("?vvv?", ">???<", ">???<", ">???<", "?^^^?")
+                .where('?', BlockInWorld.hasState(BlockStatePredicate.ANY))
+                .where(
+                    '^',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate
+                                .forBlock(Blocks.END_PORTAL_FRAME)
+                                .where(
+                                    EndPortalFrameBlock.HAS_EYE,
+                                    Predicates.equalTo(true)
+                                )
+                                .where(
+                                    EndPortalFrameBlock.FACING,
+                                    Predicates.equalTo(Direction.SOUTH)
+                                )
+                                .or(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
+                                        )
+                                        .where(
+                                            EYE_TYPE,
+                                            Predicates
+                                                .equalTo(
+                                                    EndPortalFrameEye.WITH_EYE_OF_ENDER
+                                                )
+                                        )
+                                        .where(
+                                            FACING_VERTICAL,
+                                            Predicates
+                                                .equalTo(
+                                                    false
+                                                )
+                                        )
+                                )
+                        )
+                )
+                .where(
+                    '>',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate
+                                .forBlock(Blocks.END_PORTAL_FRAME)
+                                .where(
+                                    EndPortalFrameBlock.HAS_EYE,
+                                    Predicates.equalTo(true)
+                                )
+                                .where(
+                                    EndPortalFrameBlock.FACING,
+                                    Predicates.equalTo(Direction.WEST)
+                                )
+                                .or(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
+                                        )
+                                        .where(
+                                            EYE_TYPE,
+                                            Predicates
+                                                .equalTo(
+                                                    EndPortalFrameEye.WITH_EYE_OF_ENDER
+                                                )
+                                        )
+                                        .where(
+                                            FACING_VERTICAL,
+                                            Predicates
+                                                .equalTo(
+                                                    true
+                                                )
+                                        )
+                                )
+                        )
+                )
+                .where(
+                    'v',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate
+                                .forBlock(Blocks.END_PORTAL_FRAME)
+                                .where(
+                                    EndPortalFrameBlock.HAS_EYE,
+                                    Predicates.equalTo(true)
+                                )
+                                .where(
+                                    EndPortalFrameBlock.FACING,
+                                    Predicates.equalTo(Direction.NORTH)
+                                )
+                                .or(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
+                                        )
+                                        .where(
+                                            EYE_TYPE,
+                                            Predicates
+                                                .equalTo(
+                                                    EndPortalFrameEye.WITH_EYE_OF_ENDER
+                                                )
+                                        )
+                                        .where(
+                                            FACING_VERTICAL,
+                                            Predicates
+                                                .equalTo(
+                                                    false
+                                                )
+                                        )
+                                )
+                        )
+                )
+                .where(
+                    '<',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate
+                                .forBlock(Blocks.END_PORTAL_FRAME)
+                                .where(
+                                    EndPortalFrameBlock.HAS_EYE,
+                                    Predicates.equalTo(true)
+                                )
+                                .where(
+                                    EndPortalFrameBlock.FACING,
+                                    Predicates.equalTo(Direction.EAST)
+                                )
+                                .or(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
+                                        )
+                                        .where(
+                                            EYE_TYPE,
+                                            Predicates
+                                                .equalTo(
+                                                    EndPortalFrameEye.WITH_EYE_OF_ENDER
+                                                )
+                                        )
+                                        .where(
+                                            FACING_VERTICAL,
+                                            Predicates
+                                                .equalTo(
+                                                    true
+                                                )
+                                        )
+                                )
+                        )
+                )
+                .build();
         }
         return COMPLETED_FRAME;
     }
 
     public static BlockPattern getActiveEndPortalPattern() {
         if (END_PORTAL == null) {
-            END_PORTAL = BlockPatternBuilder.start()
-                                            .aisle("?vvv?", ">ppp<", ">ppp<", ">ppp<", "?^^^?")
-                                            .where('?', BlockInWorld.hasState(BlockStatePredicate.ANY))
-                                            .where(
-                                                '^', BlockInWorld.hasState(
-                                                    BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-                                                                       .or(BlockStatePredicate.forBlock(
-                                                                           PastelBlocks.CRACKED_END_PORTAL_FRAME.get())))
-                                            )
-                                            .where(
-                                                '>', BlockInWorld.hasState(
-                                                    BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-                                                                       .or(BlockStatePredicate.forBlock(
-                                                                           PastelBlocks.CRACKED_END_PORTAL_FRAME.get())))
-                                            )
-                                            .where(
-                                                'v', BlockInWorld.hasState(
-                                                    BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-                                                                       .or(BlockStatePredicate.forBlock(
-                                                                           PastelBlocks.CRACKED_END_PORTAL_FRAME.get())))
-                                            )
-                                            .where(
-                                                '<', BlockInWorld.hasState(
-                                                    BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-                                                                       .or(BlockStatePredicate.forBlock(
-                                                                           PastelBlocks.CRACKED_END_PORTAL_FRAME.get())))
-                                            )
-                                            .where(
-                                                'p', BlockInWorld.hasState(
-                                                    BlockStatePredicate.forBlock(Blocks.END_PORTAL))
-                                            )
-                                            .build();
+            END_PORTAL = BlockPatternBuilder
+                .start()
+                .aisle("?vvv?", ">ppp<", ">ppp<", ">ppp<", "?^^^?")
+                .where('?', BlockInWorld.hasState(BlockStatePredicate.ANY))
+                .where(
+                    '^',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate
+                                .forBlock(Blocks.END_PORTAL_FRAME)
+                                .or(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
+                                        )
+                                )
+                        )
+                )
+                .where(
+                    '>',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate
+                                .forBlock(Blocks.END_PORTAL_FRAME)
+                                .or(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
+                                        )
+                                )
+                        )
+                )
+                .where(
+                    'v',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate
+                                .forBlock(Blocks.END_PORTAL_FRAME)
+                                .or(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
+                                        )
+                                )
+                        )
+                )
+                .where(
+                    '<',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate
+                                .forBlock(Blocks.END_PORTAL_FRAME)
+                                .or(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
+                                        )
+                                )
+                        )
+                )
+                .where(
+                    'p',
+                    BlockInWorld
+                        .hasState(
+                            BlockStatePredicate.forBlock(Blocks.END_PORTAL)
+                        )
+                )
+                .build();
         }
         return END_PORTAL;
     }
@@ -275,17 +394,19 @@ public class CrackedEndPortalFrameBlock extends Block {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return state.getValue(EYE_TYPE)
-                    .hasEye() ? FRAME_WITH_EYE_SHAPE : FRAME_SHAPE;
+        return state
+            .getValue(EYE_TYPE)
+            .hasEye() ? FRAME_WITH_EYE_SHAPE : FRAME_SHAPE;
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         Direction facing = ctx.getHorizontalDirection();
         boolean facingVertical = facing.equals(Direction.EAST) || facing.equals(Direction.WEST);
-        return (this.defaultBlockState()
-                    .setValue(FACING_VERTICAL, facingVertical)
-                    .setValue(EYE_TYPE, EndPortalFrameEye.NONE));
+        return (this
+            .defaultBlockState()
+            .setValue(FACING_VERTICAL, facingVertical)
+            .setValue(EYE_TYPE, EndPortalFrameEye.NONE));
     }
 
     @Override
@@ -315,24 +436,27 @@ public class CrackedEndPortalFrameBlock extends Block {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
-        return state.getValue(EYE_TYPE)
-                    .getRedstonePower();
+        return state
+            .getValue(EYE_TYPE)
+            .getRedstonePower();
     }
 
     @Override
     @Deprecated
     public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
         // when placed via perturbed eye => fuse
-        if (state.getValue(EYE_TYPE)
-                 .hasExplosions()) {
+        if (state
+            .getValue(EYE_TYPE)
+            .hasExplosions()) {
             world.scheduleTick(pos, this, 40);
         }
     }
 
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        if (state.getValue(EYE_TYPE)
-                 .hasExplosions()) {
+        if (state
+            .getValue(EYE_TYPE)
+            .hasExplosions()) {
             double d = (double) pos.getX() + random.nextDouble();
             double e = (double) pos.getY() + 1.05D;
             double f = (double) pos.getZ() + random.nextDouble();
@@ -343,30 +467,49 @@ public class CrackedEndPortalFrameBlock extends Block {
     @Override
     @Deprecated
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (state.getValue(EYE_TYPE)
-                 .hasExplosions()) {
+        if (state
+            .getValue(EYE_TYPE)
+            .hasExplosions()) {
             // 10% chance to break portal
             float randomFloat = random.nextFloat();
             if (randomFloat < 0.05) {
-                world.explode(
-                    null, null, new ExplosionDamageCalculator() {
-                        @Override
-                        public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
-                            return false;
-                        }
-                    }, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4, false, Level.ExplosionInteraction.BLOCK
-                );
+                world
+                    .explode(
+                        null,
+                        null,
+                        new ExplosionDamageCalculator() {
+                            @Override
+                            public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
+                                return false;
+                            }
+                        },
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.5,
+                        pos.getZ() + 0.5,
+                        4,
+                        false,
+                        Level.ExplosionInteraction.BLOCK
+                    );
                 destroyPortals(world, pos);
                 world.destroyBlock(pos, true);
             } else if (randomFloat < 0.2) {
-                world.explode(
-                    null, null, new ExplosionDamageCalculator() {
-                        @Override
-                        public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
-                            return false;
-                        }
-                    }, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3, false, Level.ExplosionInteraction.BLOCK
-                );
+                world
+                    .explode(
+                        null,
+                        null,
+                        new ExplosionDamageCalculator() {
+                            @Override
+                            public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
+                                return false;
+                            }
+                        },
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.5,
+                        pos.getZ() + 0.5,
+                        3,
+                        false,
+                        Level.ExplosionInteraction.BLOCK
+                    );
             } else {
                 double d = (double) pos.getX() + random.nextDouble();
                 double e = (double) pos.getY() + 0.8D;
@@ -384,8 +527,11 @@ public class CrackedEndPortalFrameBlock extends Block {
         WITH_PERTURBED_EYE("cracker", true, true, 8);
 
         private final String name;
+
         private final boolean hasEye;
+
         private final boolean hasExplosions; // TIL `volatile` is a keyword in java
+
         private final int redstonePower;
 
         EndPortalFrameEye(String name, boolean hasEye, boolean hasExplosions, int redstonePower) {

@@ -16,8 +16,9 @@ public class NourishingStatusEffect extends MobEffect {
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         Level world = entity.level();
         if (!world.isClientSide && entity instanceof Player playerEntity) {
-            playerEntity.getFoodData()
-                        .eat(1, 0.25F);
+            playerEntity
+                .getFoodData()
+                .eat(1, 0.25F);
         }
         return super.applyEffectTick(entity, amplifier);
     }

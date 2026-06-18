@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
-
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
@@ -13,6 +12,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
     protected static final int DEFAULT_MAX_ENTITIES = 6;
+
     protected static final int MAX_MAX_ENTITIES = 40;
 
     public SpawnerMaxNearbyEntitiesChangeRecipe() {
@@ -21,13 +21,17 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
 
     @Override
     public boolean canCraftWithBlockEntityTag(
-        CustomData spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
+        CustomData spawnerBlockEntityNbt,
+        ItemStack leftBowlStack,
+        ItemStack rightBowlStack
+    ) {
         if (spawnerBlockEntityNbt == null) {
             return true;
         }
         if (spawnerBlockEntityNbt.contains("MaxNearbyEntities")) {
-            return spawnerBlockEntityNbt.copyTag()
-                                        .getShort("MaxNearbyEntities") < MAX_MAX_ENTITIES;
+            return spawnerBlockEntityNbt
+                .copyTag()
+                .getShort("MaxNearbyEntities") < MAX_MAX_ENTITIES;
         }
         return true;
     }
@@ -42,22 +46,24 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
         return Component.translatable("recipe.pastel.spawner.lore.increased_max_nearby_entities");
     }
 
-
     @Override
     public CompoundTag getSpawnerResultNbt(
-        CompoundTag spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
+        CompoundTag spawnerBlockEntityNbt,
+        ItemStack firstBowlStack,
+        ItemStack secondBowlStack
+    ) {
         // Default spawner tag:
-		/* BlockEntityTag: {
-			MaxNearbyEntities: 6s,
-			RequiredPlayerRange: 16s,
-			SpawnCount: 4s,
-			SpawnData: {entity: {id: "minecraft:xxx"}},
-			MaxSpawnDelay: 800s,
-			SpawnRange: 4s,
-			MinSpawnDelay: 200s,
-			SpawnPotentials: []
-		   }
-		 */
+        /* BlockEntityTag: {
+        	MaxNearbyEntities: 6s,
+        	RequiredPlayerRange: 16s,
+        	SpawnCount: 4s,
+        	SpawnData: {entity: {id: "minecraft:xxx"}},
+        	MaxSpawnDelay: 800s,
+        	SpawnRange: 4s,
+        	MinSpawnDelay: 200s,
+        	SpawnPotentials: []
+           }
+         */
 
         short maxNearbyEntities = DEFAULT_MAX_ENTITIES;
         if (spawnerBlockEntityNbt.contains("MaxNearbyEntities", Tag.TAG_SHORT)) {

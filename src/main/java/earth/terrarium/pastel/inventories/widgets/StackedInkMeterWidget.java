@@ -20,21 +20,35 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.List;
 import java.util.Optional;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class StackedInkMeterWidget implements Renderable, GuiEventListener, NarratableEntry {
 
     public final int x;
+
     public final int y;
+
     public final int width;
+
     public final int height;
+
     protected boolean hovered;
+
     protected boolean focused;
 
     protected final Screen screen;
+
     protected final InkStorageBlockEntity<?> blockEntity;
 
     public StackedInkMeterWidget(
-        int x, int y, int width, int height, Screen screen, InkStorageBlockEntity<?> blockEntity) {
+        int x,
+        int y,
+        int width,
+        int height,
+        Screen screen,
+        InkStorageBlockEntity<?> blockEntity
+    ) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -46,8 +60,7 @@ public class StackedInkMeterWidget implements Renderable, GuiEventListener, Narr
 
     @Override
     public boolean isMouseOver(double mouseX, double mouseY) {
-        return mouseX >= (double) this.x && mouseX < (double) (this.x + this.width) && mouseY >= (double) this.y &&
-               mouseY < (double) (this.y + this.height);
+        return mouseX >= (double) this.x && mouseX < (double) (this.x + this.width) && mouseY >= (double) this.y && mouseY < (double) (this.y + this.height);
     }
 
     @Override
@@ -62,8 +75,7 @@ public class StackedInkMeterWidget implements Renderable, GuiEventListener, Narr
 
     @Override
     public void render(GuiGraphics drawContext, int mouseX, int mouseY, float delta) {
-        this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width &&
-                       mouseY < this.y + this.height;
+        this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
     }
 
     @Override
@@ -82,14 +94,22 @@ public class StackedInkMeterWidget implements Renderable, GuiEventListener, Narr
         long currentTotal = inkStorage.getCurrentTotal();
         String readableCurrentTotalString = Support.getShortenedNumberString(currentTotal);
         String percent = Support.getSensiblePercentString(inkStorage.getCurrentTotal(), (inkStorage.getMaxTotal()));
-        drawContext.renderTooltip(
-            client.font, List.of(
-                Component.translatable(
-                    "pastel.tooltip.ink_powered.percent_filled", readableCurrentTotalString,
-                    percent
-                )),
-            Optional.empty(), x, y
-        );
+        drawContext
+            .renderTooltip(
+                client.font,
+                List
+                    .of(
+                        Component
+                            .translatable(
+                                "pastel.tooltip.ink_powered.percent_filled",
+                                readableCurrentTotalString,
+                                percent
+                            )
+                    ),
+                Optional.empty(),
+                x,
+                y
+            );
     }
 
     public void draw(GuiGraphics drawContext) {
@@ -100,15 +120,22 @@ public class StackedInkMeterWidget implements Renderable, GuiEventListener, Narr
             long maxTotal = inkStorage.getMaxTotal();
 
             int currentHeight = this.y + this.height;
-            for (InkColor color : InkColors.all()) {
+            for (
+                InkColor color : InkColors.all()
+            ) {
                 long amount = inkStorage.getEnergy(color);
                 if (amount > 0) {
                     int height = Math.round(((float) amount / (float) maxTotal * this.height));
                     if (height > 0) {
-                        RenderHelper.fillQuad(
-                            drawContext.pose(), this.x, currentHeight - height, height, this.width,
-                            color.getColorVec()
-                        );
+                        RenderHelper
+                            .fillQuad(
+                                drawContext.pose(),
+                                this.x,
+                                currentHeight - height,
+                                height,
+                                this.width,
+                                color.getColorVec()
+                            );
                     }
                     currentHeight -= height;
                 }

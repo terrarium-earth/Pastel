@@ -10,7 +10,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class PastelCompostableDataMapProvider extends DataMapProvider {
     public PastelCompostableDataMapProvider(
-        PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        PackOutput packOutput,
+        CompletableFuture<HolderLookup.Provider> lookupProvider
+    ) {
         super(packOutput, lookupProvider);
     }
 

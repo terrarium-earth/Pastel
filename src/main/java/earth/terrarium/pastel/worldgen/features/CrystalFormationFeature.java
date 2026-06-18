@@ -29,31 +29,44 @@ public class CrystalFormationFeature extends Feature<CrystalFormationFeatureFeat
             CrystalFormationFeatureFeatureConfig config = context.config();
 
             boolean upwards = false;
-            if (config.canGrowUpwards() && structureWorldAccess.getBlockState(blockPos.below())
-                                                               .is(config.canStartOnBlocks())) {
+            if (config.canGrowUpwards() && structureWorldAccess
+                .getBlockState(blockPos.below())
+                .is(config.canStartOnBlocks())) {
                 upwards = true;
-            } else if (!config.canGrowDownwards() || !structureWorldAccess.getBlockState(blockPos.above())
-                                                                          .is(config.canStartOnBlocks())) {
-                return false;
-            }
+            } else if (!config.canGrowDownwards() || !structureWorldAccess
+                .getBlockState(blockPos.above())
+                .is(config.canStartOnBlocks())) {
+                    return false;
+                }
 
             BlockStateProvider stateProvider = config.blockStateProvider();
-            int iterations = config.iterationCountProvider()
-                                   .sample(random);
+            int iterations = config
+                .iterationCountProvider()
+                .sample(random);
 
             structureWorldAccess.setBlock(blockPos, stateProvider.getState(random, blockPos), 2);
 
-            for (int i = 0; i < iterations; ++i) {
-                BlockPos offsetPos = blockPos.offset(
-                    random.nextInt(8) - random.nextInt(8), upwards ? random.nextInt(12) : -random.nextInt(12),
-                    random.nextInt(8) - random.nextInt(8)
-                );
-                if (structureWorldAccess.getBlockState(offsetPos)
-                                        .isAir()) {
+            for (
+                int i = 0;
+                i < iterations;
+                ++i
+            ) {
+                BlockPos offsetPos = blockPos
+                    .offset(
+                        random.nextInt(8) - random.nextInt(8),
+                        upwards ? random.nextInt(12) : -random.nextInt(12),
+                        random.nextInt(8) - random.nextInt(8)
+                    );
+                if (structureWorldAccess
+                    .getBlockState(offsetPos)
+                    .isAir()) {
                     int directionTries = 0;
-                    for (Direction direction : Direction.values()) {
-                        if (structureWorldAccess.getBlockState(offsetPos.relative(direction))
-                                                .is(config.canExtendOnBlocks())) {
+                    for (
+                        Direction direction : Direction.values()
+                    ) {
+                        if (structureWorldAccess
+                            .getBlockState(offsetPos.relative(direction))
+                            .is(config.canExtendOnBlocks())) {
                             ++directionTries;
                         }
                         if (directionTries > 1) {

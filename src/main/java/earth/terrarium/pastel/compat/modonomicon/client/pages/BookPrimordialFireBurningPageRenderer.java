@@ -12,12 +12,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 
-public class BookPrimordialFireBurningPageRenderer<R extends PrimordialFireBurningRecipe,
-    T extends BookGatedRecipePage<R>>
-    extends BookGatedRecipePageRenderer<R, T> {
+public class BookPrimordialFireBurningPageRenderer<R extends PrimordialFireBurningRecipe, T extends BookGatedRecipePage<R>>
+    extends
+    BookGatedRecipePageRenderer<R, T> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/modonomicon/primordial_fire.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/modonomicon/primordial_fire.png"
+        );
 
     public BookPrimordialFireBurningPageRenderer(T page) {
         super(page);
@@ -30,7 +32,12 @@ public class BookPrimordialFireBurningPageRenderer<R extends PrimordialFireBurni
 
     @Override
     protected void drawRecipe(
-        GuiGraphics drawContext, RecipeHolder<R> recipeEntry, int recipeX, int recipeY, int mouseX, int mouseY,
+        GuiGraphics drawContext,
+        RecipeHolder<R> recipeEntry,
+        int recipeX,
+        int recipeY,
+        int mouseX,
+        int mouseY,
         boolean second
     ) {
         R recipe = recipeEntry.value();
@@ -47,8 +54,15 @@ public class BookPrimordialFireBurningPageRenderer<R extends PrimordialFireBurni
         parentScreen.renderIngredient(drawContext, recipeX + 16, recipeY + 8, mouseX, mouseY, ingredients.getFirst());
 
         // the output
-        parentScreen.renderItemStack(
-            drawContext, recipeX + 51, recipeY + 8, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
+        parentScreen
+            .renderItemStack(
+                drawContext,
+                recipeX + 51,
+                recipeY + 8,
+                mouseX,
+                mouseY,
+                recipe.getResultItem(world.registryAccess())
+            );
     }
 
 }

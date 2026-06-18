@@ -15,20 +15,27 @@ import java.util.UUID;
 public record PastelNetworkRemovedPayload(UUID networkUUID) implements CustomPacketPayload {
 
     public static final Type<PastelNetworkRemovedPayload> ID = PastelC2SPackets.makeId("pastel_network_removed");
-    public static final StreamCodec<FriendlyByteBuf, PastelNetworkRemovedPayload> CODEC = StreamCodec.composite(
-        UUIDUtil.STREAM_CODEC, PastelNetworkRemovedPayload::networkUUID,
-        PastelNetworkRemovedPayload::new
-    );
+
+    public static final StreamCodec<FriendlyByteBuf, PastelNetworkRemovedPayload> CODEC = StreamCodec
+        .composite(
+            UUIDUtil.STREAM_CODEC,
+            PastelNetworkRemovedPayload::networkUUID,
+            PastelNetworkRemovedPayload::new
+        );
 
     public static void send(ServerPastelNetwork network) {
-        PacketDistributor.sendToPlayersInDimension(
-            network.getLevel(), new PastelNetworkRemovedPayload(network.getUUID()));
+        PacketDistributor
+            .sendToPlayersInDimension(
+                network.getLevel(),
+                new PastelNetworkRemovedPayload(network.getUUID())
+            );
     }
 
     public static void execute(PastelNetworkRemovedPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            Pastel.getClientInstance()
-                  .removeNetwork(payload.networkUUID);
+            Pastel
+                .getClientInstance()
+                .removeNetwork(payload.networkUUID);
         });
     }
 

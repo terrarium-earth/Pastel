@@ -10,17 +10,28 @@ import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+    "unused"
+)
 public class PastelItemSubPredicateTypes {
 
-    private static final DeferredRegister<ItemSubPredicate.Type<?>> REGISTRAR = DeferredRegister.create(
-        Registries.ITEM_SUB_PREDICATE_TYPE, PastelCommon.MOD_ID);
+    private static final DeferredRegister<ItemSubPredicate.Type<?>> REGISTRAR = DeferredRegister
+        .create(
+            Registries.ITEM_SUB_PREDICATE_TYPE,
+            PastelCommon.MOD_ID
+        );
 
     public static ItemSubPredicate.Type<SweetenedPredicate> SWEETENED = register("sweetened", SweetenedPredicate.CODEC);
+
     public static ItemSubPredicate.Type<InfusedBeveragePredicate> INFUSED_BEVERAGE = register(
-        "infused_beverage", InfusedBeveragePredicate.CODEC);
+        "infused_beverage",
+        InfusedBeveragePredicate.CODEC
+    );
+
     public static ItemSubPredicate.Type<BottomlessStackPredicate> BOTTOMLESS_STACK = register(
-        "bottomless_stack", BottomlessStackPredicate.CODEC);
+        "bottomless_stack",
+        BottomlessStackPredicate.CODEC
+    );
 
     private static <T extends ItemSubPredicate> ItemSubPredicate.Type<T> register(String id, Codec<T> codec) {
         var type = new ItemSubPredicate.Type<>(codec);

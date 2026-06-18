@@ -22,7 +22,11 @@ public class RepairAnythingRecipe extends CustomRecipe {
         boolean nectarFound = false;
         boolean itemFound = false;
 
-        for (int j = 0; j < input.size(); ++j) {
+        for (
+            int j = 0;
+            j < input.size();
+            ++j
+        ) {
             ItemStack itemStack = input.getItem(j);
             if (!itemStack.isEmpty()) {
                 if (itemStack.getItem() == PastelItems.MOONSTRUCK_NECTAR.get()) {
@@ -30,13 +34,15 @@ public class RepairAnythingRecipe extends CustomRecipe {
                         return false;
                     }
                     nectarFound = true;
-                } else if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(
-                    PastelItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
-                    if (itemFound) {
-                        return false;
+                } else if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack
+                    .is(
+                        PastelItemTags.INDESTRUCTIBLE_BLACKLISTED
+                    )) {
+                        if (itemFound) {
+                            return false;
+                        }
+                        itemFound = true;
                     }
-                    itemFound = true;
-                }
             }
         }
 
@@ -46,15 +52,21 @@ public class RepairAnythingRecipe extends CustomRecipe {
     @Override
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider registryLookup) {
         ItemStack itemStack = ItemStack.EMPTY;
-        for (int j = 0; j < input.size(); ++j) {
+        for (
+            int j = 0;
+            j < input.size();
+            ++j
+        ) {
             itemStack = input.getItem(j);
             if (!itemStack.isEmpty() && itemStack.getItem() != PastelItems.MOONSTRUCK_NECTAR.get()) {
                 break;
             }
         }
 
-        if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(
-            PastelItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
+        if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack
+            .is(
+                PastelItemTags.INDESTRUCTIBLE_BLACKLISTED
+            )) {
             ItemStack returnStack = itemStack.copy();
             int damage = returnStack.getDamageValue();
             int maxDamage = returnStack.getMaxDamage();

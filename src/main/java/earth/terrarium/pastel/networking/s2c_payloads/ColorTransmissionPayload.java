@@ -16,32 +16,55 @@ import org.jetbrains.annotations.NotNull;
 public record ColorTransmissionPayload(BlockPos pos, ColoredTransmission transmission) implements CustomPacketPayload {
 
     public static final Type<ColorTransmissionPayload> ID = PastelC2SPackets.makeId("color_transmission");
-    public static final StreamCodec<RegistryFriendlyByteBuf, ColorTransmissionPayload> CODEC = StreamCodec.composite(
-        BlockPos.STREAM_CODEC, ColorTransmissionPayload::pos,
-        ColoredTransmission.STREAM_CODEC, ColorTransmissionPayload::transmission,
-        ColorTransmissionPayload::new
-    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, ColorTransmissionPayload> CODEC = StreamCodec
+        .composite(
+            BlockPos.STREAM_CODEC,
+            ColorTransmissionPayload::pos,
+            ColoredTransmission.STREAM_CODEC,
+            ColorTransmissionPayload::transmission,
+            ColorTransmissionPayload::new
+        );
 
     public static void playColorTransmissionParticle(ServerLevel world, @NotNull ColoredTransmission transmission) {
         var pos = BlockPos.containing(transmission.getOrigin());
-        PacketDistributor.sendToPlayersTrackingChunk(
-            world, new ChunkPos(pos), new ColorTransmissionPayload(pos, transmission));
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                world,
+                new ChunkPos(pos),
+                new ColorTransmissionPayload(pos, transmission)
+            );
     }
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings(
+        "resource"
+    )
     public static void execute(ColorTransmissionPayload payload, IPayloadContext context) {
-        var level = context.player()
-                           .level();
+        var level = context
+            .player()
+            .level();
         ColoredTransmission transmission = payload.transmission;
-        level.addAlwaysVisibleParticle(
-            new ColoredTransmissionParticleEffect(
-                transmission.getDestination(), transmission.getArrivalInTicks(),
-                transmission.getDyeColor()
-            ), true, transmission.getOrigin()
-                                 .x(), transmission.getOrigin()
-                                                   .y(), transmission.getOrigin()
-                                                                     .z(), 0.0D, 0.0D, 0.0D
-        );
+        level
+            .addAlwaysVisibleParticle(
+                new ColoredTransmissionParticleEffect(
+                    transmission.getDestination(),
+                    transmission.getArrivalInTicks(),
+                    transmission.getDyeColor()
+                ),
+                true,
+                transmission
+                    .getOrigin()
+                    .x(),
+                transmission
+                    .getOrigin()
+                    .y(),
+                transmission
+                    .getOrigin()
+                    .z(),
+                0.0D,
+                0.0D,
+                0.0D
+            );
     }
 
     @Override

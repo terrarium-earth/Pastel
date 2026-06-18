@@ -10,11 +10,19 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class LargePrimordialSmokeParticle extends TextureSheetParticle {
 
     LargePrimordialSmokeParticle(
-        ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
         boolean signal
     ) {
         super(world, x, y, z);
@@ -54,7 +62,9 @@ public class LargePrimordialSmokeParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class SignalSmokeFactory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -63,8 +73,14 @@ public class LargePrimordialSmokeParticle extends TextureSheetParticle {
         }
 
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             var campfireSmokeParticle = new LargePrimordialSmokeParticle(clientWorld, d, e, f, g, h, i, true);
             campfireSmokeParticle.setAlpha(0.95F);
@@ -73,7 +89,9 @@ public class LargePrimordialSmokeParticle extends TextureSheetParticle {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class CosySmokeFactory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -82,8 +100,14 @@ public class LargePrimordialSmokeParticle extends TextureSheetParticle {
         }
 
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             var campfireSmokeParticle = new LargePrimordialSmokeParticle(clientWorld, d, e, f, g, h, i, false);
             campfireSmokeParticle.setAlpha(0.9F);

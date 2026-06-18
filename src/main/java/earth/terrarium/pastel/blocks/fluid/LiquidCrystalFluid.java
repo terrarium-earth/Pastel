@@ -55,9 +55,10 @@ public abstract class LiquidCrystalFluid extends PastelFluid {
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
-        return PastelBlocks.LIQUID_CRYSTAL.get()
-                                          .defaultBlockState()
-                                          .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+        return PastelBlocks.LIQUID_CRYSTAL
+            .get()
+            .defaultBlockState()
+            .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
     }
 
     @Override
@@ -66,15 +67,24 @@ public abstract class LiquidCrystalFluid extends PastelFluid {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void animateTick(Level world, BlockPos pos, FluidState state, RandomSource random) {
         BlockPos topPos = pos.above();
         BlockState topState = world.getBlockState(topPos);
         if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(1000) == 0) {
-            world.playLocalSound(
-                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSounds.LIQUID_CRYSTAL_AMBIENT,
-                SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false
-            );
+            world
+                .playLocalSound(
+                    pos.getX() + 0.5,
+                    pos.getY() + 0.5,
+                    pos.getZ() + 0.5,
+                    PastelSounds.LIQUID_CRYSTAL_AMBIENT,
+                    SoundSource.BLOCKS,
+                    0.2F + random.nextFloat() * 0.2F,
+                    0.9F + random.nextFloat() * 0.15F,
+                    false
+                );
         }
     }
 
@@ -88,10 +98,15 @@ public abstract class LiquidCrystalFluid extends PastelFluid {
         // if liquid crystal collides with a flower of any kind:
         // drop a resonant lily instead
         if (state.is(BlockTags.FLOWERS)) {
-            Block.dropResources(
-                PastelBlocks.RESONANT_LILY.get()
-                                          .defaultBlockState(), world, pos, null
-            );
+            Block
+                .dropResources(
+                    PastelBlocks.RESONANT_LILY
+                        .get()
+                        .defaultBlockState(),
+                    world,
+                    pos,
+                    null
+                );
         } else {
             super.beforeDestroyingBlock(world, pos, state);
         }

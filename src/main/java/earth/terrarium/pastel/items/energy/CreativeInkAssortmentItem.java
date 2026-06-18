@@ -26,7 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreativeInkAssortmentItem extends Item
-    implements InkStorageItem<CreativeInkStorage>, CreativeOnlyItem, SlotBackgroundEffect {
+    implements
+    InkStorageItem<CreativeInkStorage>,
+    CreativeOnlyItem,
+    SlotBackgroundEffect {
 
     public CreativeInkAssortmentItem(Properties settings) {
         super(settings);
@@ -38,8 +41,9 @@ public class CreativeInkAssortmentItem extends Item
         if (!world.isClientSide) {
             BlockEntity blockEntity = world.getBlockEntity(context.getClickedPos());
             if (blockEntity instanceof InkStorageBlockEntity<?> inkStorageBlockEntity) {
-                inkStorageBlockEntity.getEnergyStorage()
-                                     .fillCompletely();
+                inkStorageBlockEntity
+                    .getEnergyStorage()
+                    .fillCompletely();
                 inkStorageBlockEntity.setInkDirty();
                 blockEntity.setChanged();
             }
@@ -68,7 +72,9 @@ public class CreativeInkAssortmentItem extends Item
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         CreativeOnlyItem.appendTooltip(tooltip);
@@ -87,10 +93,13 @@ public class CreativeInkAssortmentItem extends Item
         if (player == null)
             return 0;
 
-        var time = player.level()
-                         .getGameTime() % 864000;
+        var time = player
+            .level()
+            .getGameTime() % 864000;
 
-        for (InkColor inkColor : PastelRegistries.INK_COLOR) {
+        for (
+            InkColor inkColor : PastelRegistries.INK_COLOR
+        ) {
             colors.add(inkColor);
         }
 

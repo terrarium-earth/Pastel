@@ -16,9 +16,13 @@ import java.util.HashMap;
 public final class FlowData<N extends Number> {
 
     private final DataSignature<N> signature;
+
     private final boolean valueTarget;
+
     private final HashMap<FlowState, KeyFrame<N>> stateListeners = new HashMap<>();
+
     private N value;
+
     private KeyFrame<N> nextKeyFrame, pastKeyFrame;
 
     private FlowData(DataSignature<N> signature, boolean valueTarget) {
@@ -75,10 +79,14 @@ public final class FlowData<N extends Number> {
     }
 
     public void update(float tickDelta, float interpDelta, long time) {
-        value = signature.handler.interpolate(
-            signature.interpolation, pastKeyFrame.at(tickDelta, time), nextKeyFrame.at(tickDelta, time), interpDelta,
-            time
-        );
+        value = signature.handler
+            .interpolate(
+                signature.interpolation,
+                pastKeyFrame.at(tickDelta, time),
+                nextKeyFrame.at(tickDelta, time),
+                interpDelta,
+                time
+            );
     }
 
     public FlowHandler<N> getHandler() {

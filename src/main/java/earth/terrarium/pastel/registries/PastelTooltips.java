@@ -42,8 +42,12 @@ public class PastelTooltips {
         BlockItemStateProperties stateComponent = components.get(DataComponents.BLOCK_STATE);
         if (stateComponent != null && !stateComponent.isEmpty()) {
             if (Boolean.TRUE.equals(stateComponent.get(SculkShriekerBlock.CAN_SUMMON))) {
-                lines.add(Component.translatable("pastel.tooltip.able_to_summon_warden")
-                                   .withStyle(ChatFormatting.GRAY));
+                lines
+                    .add(
+                        Component
+                            .translatable("pastel.tooltip.able_to_summon_warden")
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
         }
     }
@@ -53,20 +57,29 @@ public class PastelTooltips {
         if (dataComponent == null) {
             return;
         }
-        CompoundTag blockEntityTag = dataComponent.getUnsafe()
-                                                  .getCompound("BlockEntityTag");
+        CompoundTag blockEntityTag = dataComponent
+            .getUnsafe()
+            .getCompound("BlockEntityTag");
         addSignText(lines, SignText.DIRECT_CODEC.parse(NbtOps.INSTANCE, blockEntityTag.getCompound("front_text")));
         addSignText(lines, SignText.DIRECT_CODEC.parse(NbtOps.INSTANCE, blockEntityTag.getCompound("back_text")));
     }
 
     private static void addSignText(List<Component> lines, DataResult<SignText> signText) {
-        if (signText.result()
-                    .isPresent()) {
-            SignText st = signText.result()
-                                  .get();
-            Style style = Style.EMPTY.withColor(st.getColor()
-                                                  .getTextColor());
-            for (Component text : st.getMessages(false)) {
+        if (signText
+            .result()
+            .isPresent()) {
+            SignText st = signText
+                .result()
+                .get();
+            Style style = Style.EMPTY
+                .withColor(
+                    st
+                        .getColor()
+                        .getTextColor()
+                );
+            for (
+                Component text : st.getMessages(false)
+            ) {
                 lines.addAll(text.toFlatList(style));
             }
         }
@@ -89,29 +102,52 @@ public class PastelTooltips {
             short maxNearbyEntities = blockEntityTag.getShort("MaxNearbyEntities");
 
             if (spawnCount > 0) {
-                lines.add(Component.translatable("item.pastel.spawner.tooltip.spawn_count", spawnCount)
-                                   .withStyle(ChatFormatting.GRAY));
+                lines
+                    .add(
+                        Component
+                            .translatable("item.pastel.spawner.tooltip.spawn_count", spawnCount)
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
             if (minSpawnDelay > 0) {
-                lines.add(Component.translatable("item.pastel.spawner.tooltip.min_spawn_delay", minSpawnDelay)
-                                   .withStyle(ChatFormatting.GRAY));
+                lines
+                    .add(
+                        Component
+                            .translatable("item.pastel.spawner.tooltip.min_spawn_delay", minSpawnDelay)
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
             if (maxSpawnDelay > 0) {
-                lines.add(Component.translatable("item.pastel.spawner.tooltip.max_spawn_delay", maxSpawnDelay)
-                                   .withStyle(ChatFormatting.GRAY));
+                lines
+                    .add(
+                        Component
+                            .translatable("item.pastel.spawner.tooltip.max_spawn_delay", maxSpawnDelay)
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
             if (spawnRange > 0) {
-                lines.add(Component.translatable("item.pastel.spawner.tooltip.spawn_range", spawnRange)
-                                   .withStyle(ChatFormatting.GRAY));
+                lines
+                    .add(
+                        Component
+                            .translatable("item.pastel.spawner.tooltip.spawn_range", spawnRange)
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
             if (requiredPlayerRange > 0) {
-                lines.add(
-                    Component.translatable("item.pastel.spawner.tooltip.required_player_range", requiredPlayerRange)
-                             .withStyle(ChatFormatting.GRAY));
+                lines
+                    .add(
+                        Component
+                            .translatable("item.pastel.spawner.tooltip.required_player_range", requiredPlayerRange)
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
             if (maxNearbyEntities > 0) {
-                lines.add(Component.translatable("item.pastel.spawner.tooltip.max_nearby_entities", maxNearbyEntities)
-                                   .withStyle(ChatFormatting.GRAY));
+                lines
+                    .add(
+                        Component
+                            .translatable("item.pastel.spawner.tooltip.max_nearby_entities", maxNearbyEntities)
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
         } catch (Exception e) {
             lines.add(Component.translatable("item.pastel.spawner.tooltip.unknown_mob"));

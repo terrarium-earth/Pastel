@@ -20,46 +20,70 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelScreenHandlerTypes {
 
-    private static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(
-        Registries.MENU, PastelCommon.MOD_ID);
+    private static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister
+        .create(
+            Registries.MENU,
+            PastelCommon.MOD_ID
+        );
 
     public static MenuType<PaintbrushScreenHandler> PAINTBRUSH;
+
     public static MenuType<WorkstaffScreenHandler> WORKSTAFF;
 
     public static MenuType<PedestalScreenHandler> PEDESTAL;
+
     public static MenuType<CraftingTabletScreenHandler> CRAFTING_TABLET;
+
     public static MenuType<FabricationChestScreenHandler> FABRICATION_CHEST;
+
     public static MenuType<BedrockAnvilScreenHandler> BEDROCK_ANVIL;
+
     public static MenuType<ParticleSpawnerScreenHandler> PARTICLE_SPAWNER;
+
     public static MenuType<CompactingChestScreenHandler> COMPACTING_CHEST;
+
     public static MenuType<BlackHoleChestScreenHandler> BLACK_HOLE_CHEST;
+
     public static MenuType<PotionWorkshopScreenHandler> POTION_WORKSHOP;
+
     public static MenuType<ColorPickerScreenHandler> COLOR_PICKER;
+
     public static MenuType<CinderhearthScreenHandler> CINDERHEARTH;
+
     public static MenuType<FilteringScreenHandler> FILTERING;
+
     public static MenuType<BagOfHoldingScreenHandler> BAG_OF_HOLDING;
 
     public static MenuType<GenericPastelContainerScreenHandler> GENERIC_TIER1_9X3;
+
     public static MenuType<GenericPastelContainerScreenHandler> GENERIC_TIER2_9X3;
+
     public static MenuType<GenericPastelContainerScreenHandler> GENERIC_TIER3_9X3;
 
     public static MenuType<GenericPastelContainerScreenHandler> GENERIC_TIER1_9X6;
+
     public static MenuType<GenericPastelContainerScreenHandler> GENERIC_TIER2_9X6;
+
     public static MenuType<GenericPastelContainerScreenHandler> GENERIC_TIER3_9X6;
 
     public static MenuType<Pastel3x3ContainerScreenHandler> GENERIC_TIER1_3X3;
+
     public static MenuType<Pastel3x3ContainerScreenHandler> GENERIC_TIER2_3X3;
+
     public static MenuType<Pastel3x3ContainerScreenHandler> GENERIC_TIER3_3X3;
 
     public static <T extends AbstractContainerMenu> MenuType<T> registerSimple(
-        ResourceLocation id, MenuType.MenuSupplier<T> factory) {
+        ResourceLocation id,
+        MenuType.MenuSupplier<T> factory
+    ) {
         MenuType<T> type = new MenuType<>(factory, FeatureFlags.VANILLA_SET);
         REGISTER.register(id.getPath(), () -> type);
         return type;
     }
 
     public static <T extends AbstractContainerMenu, D> MenuType<T> registerExtended(
-        ResourceLocation id, IContainerFactory<T> factory,
+        ResourceLocation id,
+        IContainerFactory<T> factory,
         StreamCodec<? super RegistryFriendlyByteBuf, D> packetCodec
     ) {
         var type = IMenuTypeExtension.create(factory);
@@ -72,55 +96,88 @@ public class PastelScreenHandlerTypes {
         WORKSTAFF = registerSimple(PastelScreenHandlerIDs.WORKSTAFF, WorkstaffScreenHandler::new);
 
         PEDESTAL = registerExtended(
-            PastelScreenHandlerIDs.PEDESTAL, PedestalScreenHandler::new,
+            PastelScreenHandlerIDs.PEDESTAL,
+            PedestalScreenHandler::new,
             PedestalScreenHandler.ScreenOpeningData.STREAM_CODEC
         );
         PARTICLE_SPAWNER = registerExtended(
-            PastelScreenHandlerIDs.PARTICLE_SPAWNER, ParticleSpawnerScreenHandler::new, BlockPos.STREAM_CODEC);
+            PastelScreenHandlerIDs.PARTICLE_SPAWNER,
+            ParticleSpawnerScreenHandler::new,
+            BlockPos.STREAM_CODEC
+        );
         COMPACTING_CHEST = registerExtended(
-            PastelScreenHandlerIDs.COMPACTING_CHEST, CompactingChestScreenHandler::new, BlockPos.STREAM_CODEC);
+            PastelScreenHandlerIDs.COMPACTING_CHEST,
+            CompactingChestScreenHandler::new,
+            BlockPos.STREAM_CODEC
+        );
         BLACK_HOLE_CHEST = registerExtended(
-            PastelScreenHandlerIDs.BLACK_HOLE_CHEST, BlackHoleChestScreenHandler::new,
+            PastelScreenHandlerIDs.BLACK_HOLE_CHEST,
+            BlackHoleChestScreenHandler::new,
             FilterConfigurable.ExtendedDataWithPos.STREAM_CODEC
         );
         COLOR_PICKER = registerExtended(
-            PastelScreenHandlerIDs.COLOR_PICKER, ColorPickerScreenHandler::new,
+            PastelScreenHandlerIDs.COLOR_PICKER,
+            ColorPickerScreenHandler::new,
             ColorPickerScreenHandler.ScreenOpeningData.STREAM_CODEC
         );
         CINDERHEARTH = registerExtended(
-            PastelScreenHandlerIDs.CINDERHEARTH, CinderhearthScreenHandler::new, BlockPos.STREAM_CODEC);
+            PastelScreenHandlerIDs.CINDERHEARTH,
+            CinderhearthScreenHandler::new,
+            BlockPos.STREAM_CODEC
+        );
         FILTERING = registerExtended(
-            PastelScreenHandlerIDs.FILTERING, FilteringScreenHandler::new,
+            PastelScreenHandlerIDs.FILTERING,
+            FilteringScreenHandler::new,
             FilterConfigurable.ExtendedData.STREAM_CODEC
         );
         BAG_OF_HOLDING = registerSimple(PastelScreenHandlerIDs.BAG_OF_HOLDING, BagOfHoldingScreenHandler::new);
 
         CRAFTING_TABLET = registerSimple(PastelScreenHandlerIDs.CRAFTING_TABLET, CraftingTabletScreenHandler::new);
         FABRICATION_CHEST = registerSimple(
-            PastelScreenHandlerIDs.FABRICATION_CHEST, FabricationChestScreenHandler::new);
+            PastelScreenHandlerIDs.FABRICATION_CHEST,
+            FabricationChestScreenHandler::new
+        );
         BEDROCK_ANVIL = registerSimple(PastelScreenHandlerIDs.BEDROCK_ANVIL, BedrockAnvilScreenHandler::new);
         POTION_WORKSHOP = registerSimple(PastelScreenHandlerIDs.POTION_WORKSHOP, PotionWorkshopScreenHandler::new);
 
         GENERIC_TIER1_9X3 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER1_9x3, GenericPastelContainerScreenHandler::createGeneric9x3_Tier1);
+            PastelScreenHandlerIDs.GENERIC_TIER1_9x3,
+            GenericPastelContainerScreenHandler::createGeneric9x3_Tier1
+        );
         GENERIC_TIER2_9X3 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER2_9x3, GenericPastelContainerScreenHandler::createGeneric9x3_Tier2);
+            PastelScreenHandlerIDs.GENERIC_TIER2_9x3,
+            GenericPastelContainerScreenHandler::createGeneric9x3_Tier2
+        );
         GENERIC_TIER3_9X3 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER3_9x3, GenericPastelContainerScreenHandler::createGeneric9x3_Tier3);
+            PastelScreenHandlerIDs.GENERIC_TIER3_9x3,
+            GenericPastelContainerScreenHandler::createGeneric9x3_Tier3
+        );
 
         GENERIC_TIER1_9X6 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER1_9x6, GenericPastelContainerScreenHandler::createGeneric9x6_Tier1);
+            PastelScreenHandlerIDs.GENERIC_TIER1_9x6,
+            GenericPastelContainerScreenHandler::createGeneric9x6_Tier1
+        );
         GENERIC_TIER2_9X6 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER2_9x6, GenericPastelContainerScreenHandler::createGeneric9x6_Tier2);
+            PastelScreenHandlerIDs.GENERIC_TIER2_9x6,
+            GenericPastelContainerScreenHandler::createGeneric9x6_Tier2
+        );
         GENERIC_TIER3_9X6 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER3_9x6, GenericPastelContainerScreenHandler::createGeneric9x6_Tier3);
+            PastelScreenHandlerIDs.GENERIC_TIER3_9x6,
+            GenericPastelContainerScreenHandler::createGeneric9x6_Tier3
+        );
 
         GENERIC_TIER1_3X3 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER1_3X3, Pastel3x3ContainerScreenHandler::createTier1);
+            PastelScreenHandlerIDs.GENERIC_TIER1_3X3,
+            Pastel3x3ContainerScreenHandler::createTier1
+        );
         GENERIC_TIER2_3X3 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER2_3X3, Pastel3x3ContainerScreenHandler::createTier2);
+            PastelScreenHandlerIDs.GENERIC_TIER2_3X3,
+            Pastel3x3ContainerScreenHandler::createTier2
+        );
         GENERIC_TIER3_3X3 = registerSimple(
-            PastelScreenHandlerIDs.GENERIC_TIER3_3X3, Pastel3x3ContainerScreenHandler::createTier3);
+            PastelScreenHandlerIDs.GENERIC_TIER3_3X3,
+            Pastel3x3ContainerScreenHandler::createTier3
+        );
         REGISTER.register(bus);
     }
 

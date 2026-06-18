@@ -11,8 +11,9 @@ public interface MergeableItem {
     boolean canMerge(ServerPlayer player, ItemStack parent, ItemStack other);
 
     default boolean verify(ItemStack parent, ItemStack other) {
-        if (!parent.getEnchantments()
-                   .equals(other.getEnchantments()))
+        if (!parent
+            .getEnchantments()
+            .equals(other.getEnchantments()))
             return false;
 
         var comp = parent.get(PastelDataComponentTypes.PAIRED_ITEM);

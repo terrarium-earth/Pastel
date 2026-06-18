@@ -16,6 +16,7 @@ public enum CapeType {
     NONE(null, false);
 
     public final ResourceLocation capePath;
+
     public final boolean render;
 
     CapeType(ResourceLocation capePath, boolean render) {

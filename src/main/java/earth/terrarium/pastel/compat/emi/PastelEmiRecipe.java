@@ -16,106 +16,124 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class PastelEmiRecipe implements EmiRecipe {
-	public static final Component HIDDEN_LINE_1 = Component.translatable("container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_1");
-	public static final Component HIDDEN_LINE_2 = Component.translatable("container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_2");
-	public final EmiRecipeCategory category;
-	public final ResourceLocation recipeTypeUnlockIdentifier, recipeIdentifier;
-	public final int width, height;
-	public List<EmiIngredient> inputs = List.of();
-	public List<EmiStack> outputs = List.of();
+    public static final Component HIDDEN_LINE_1 = Component
+        .translatable("container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_1");
 
-	public PastelEmiRecipe(EmiRecipeCategory category, ResourceLocation recipeTypeUnlockIdentifier, ResourceLocation recipeIdentifier, int width, int height) {
-		this.category = category;
-		this.recipeTypeUnlockIdentifier = recipeTypeUnlockIdentifier;
-		this.recipeIdentifier = recipeIdentifier;
-		this.width = width;
-		this.height = height;
-	}
+    public static final Component HIDDEN_LINE_2 = Component
+        .translatable("container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_2");
 
-	public RegistryAccess getRegistryManager() {
-		return Minecraft.getInstance().level.registryAccess();
-	}
+    public final EmiRecipeCategory category;
 
-	public boolean isUnlocked() {
-		return recipeTypeUnlockIdentifier == null || hasAdvancement(recipeTypeUnlockIdentifier);
-	}
+    public final ResourceLocation recipeTypeUnlockIdentifier, recipeIdentifier;
 
-	public boolean hasAdvancement(ResourceLocation advancement) {
-		Minecraft client = Minecraft.getInstance();
-		return DatabankUtils.hasAdvancement(client.player, advancement);
-	}
+    public final int width, height;
 
-	protected static Component getCraftingTimeText(int time) {
-		if (time == 20) {
-			return Component.translatable("container.pastel.rei.crafting_time_one_second", 1);
-		} else {
-			return Component.translatable("container.pastel.rei.crafting_time", (time / 20));
-		}
-	}
+    public List<EmiIngredient> inputs = List.of();
 
-	protected static Component getCraftingTimeText(int time, float experience) {
-		// special handling for "1 second". Looks nicer
-		if (time == 20) {
-			return Component.translatable("container.pastel.rei.crafting_time_one_second_and_xp", 1, experience);
-		} else {
-			return Component.translatable("container.pastel.rei.crafting_time_and_xp", (time / 20), experience);
-		}
-	}
+    public List<EmiStack> outputs = List.of();
 
-	public abstract void addUnlockedWidgets(WidgetHolder widgets);
+    public PastelEmiRecipe(
+        EmiRecipeCategory category,
+        ResourceLocation recipeTypeUnlockIdentifier,
+        ResourceLocation recipeIdentifier,
+        int width,
+        int height
+    ) {
+        this.category = category;
+        this.recipeTypeUnlockIdentifier = recipeTypeUnlockIdentifier;
+        this.recipeIdentifier = recipeIdentifier;
+        this.width = width;
+        this.height = height;
+    }
 
-	@Override
-	public EmiRecipeCategory getCategory() {
-		return category;
-	}
+    public RegistryAccess getRegistryManager() {
+        return Minecraft.getInstance().level.registryAccess();
+    }
 
-	@Override
-	public @Nullable ResourceLocation getId() {
-		return recipeIdentifier;
-	}
+    public boolean isUnlocked() {
+        return recipeTypeUnlockIdentifier == null || hasAdvancement(recipeTypeUnlockIdentifier);
+    }
 
-	@Override
-	public List<EmiIngredient> getInputs() {
-		return inputs;
-	}
+    public boolean hasAdvancement(ResourceLocation advancement) {
+        Minecraft client = Minecraft.getInstance();
+        return DatabankUtils.hasAdvancement(client.player, advancement);
+    }
 
-	@Override
-	public List<EmiStack> getOutputs() {
-		return outputs;
-	}
+    protected static Component getCraftingTimeText(int time) {
+        if (time == 20) {
+            return Component.translatable("container.pastel.rei.crafting_time_one_second", 1);
+        } else {
+            return Component.translatable("container.pastel.rei.crafting_time", (time / 20));
+        }
+    }
 
-	@Override
-	public int getDisplayWidth() {
-		if (isUnlocked()) {
-			return width;
-		} else {
-			Minecraft client = Minecraft.getInstance();
-			return Math.max(client.font.width(HIDDEN_LINE_1), client.font.width(HIDDEN_LINE_2)) + 8;
-		}
-	}
+    protected static Component getCraftingTimeText(int time, float experience) {
+        // special handling for "1 second". Looks nicer
+        if (time == 20) {
+            return Component.translatable("container.pastel.rei.crafting_time_one_second_and_xp", 1, experience);
+        } else {
+            return Component.translatable("container.pastel.rei.crafting_time_and_xp", (time / 20), experience);
+        }
+    }
 
-	@Override
-	public int getDisplayHeight() {
-		if (isUnlocked()) {
-			return height;
-		} else {
-			return 32;
-		}
-	}
+    public abstract void addUnlockedWidgets(WidgetHolder widgets);
 
-	@Override
-	public void addWidgets(WidgetHolder widgets) {
-		if (!isUnlocked()) {
-			widgets.addText(HIDDEN_LINE_1, getDisplayWidth() / 2, getDisplayHeight() / 2 - 8, 0x3f3f3f, false).horizontalAlign(Alignment.CENTER);
-			widgets.addText(HIDDEN_LINE_2, getDisplayWidth() / 2, getDisplayHeight() / 2 + 2, 0x3f3f3f, false).horizontalAlign(Alignment.CENTER);
-		} else {
-			addUnlockedWidgets(widgets);
-		}
-	}
+    @Override
+    public EmiRecipeCategory getCategory() {
+        return category;
+    }
 
-	@Override
-	public boolean supportsRecipeTree() {
-		return EmiRecipe.super.supportsRecipeTree() && isUnlocked();
-	}
+    @Override
+    public @Nullable ResourceLocation getId() {
+        return recipeIdentifier;
+    }
+
+    @Override
+    public List<EmiIngredient> getInputs() {
+        return inputs;
+    }
+
+    @Override
+    public List<EmiStack> getOutputs() {
+        return outputs;
+    }
+
+    @Override
+    public int getDisplayWidth() {
+        if (isUnlocked()) {
+            return width;
+        } else {
+            Minecraft client = Minecraft.getInstance();
+            return Math.max(client.font.width(HIDDEN_LINE_1), client.font.width(HIDDEN_LINE_2)) + 8;
+        }
+    }
+
+    @Override
+    public int getDisplayHeight() {
+        if (isUnlocked()) {
+            return height;
+        } else {
+            return 32;
+        }
+    }
+
+    @Override
+    public void addWidgets(WidgetHolder widgets) {
+        if (!isUnlocked()) {
+            widgets
+                .addText(HIDDEN_LINE_1, getDisplayWidth() / 2, getDisplayHeight() / 2 - 8, 0x3f3f3f, false)
+                .horizontalAlign(Alignment.CENTER);
+            widgets
+                .addText(HIDDEN_LINE_2, getDisplayWidth() / 2, getDisplayHeight() / 2 + 2, 0x3f3f3f, false)
+                .horizontalAlign(Alignment.CENTER);
+        } else {
+            addUnlockedWidgets(widgets);
+        }
+    }
+
+    @Override
+    public boolean supportsRecipeTree() {
+        return EmiRecipe.super.supportsRecipeTree() && isUnlocked();
+    }
 
 }

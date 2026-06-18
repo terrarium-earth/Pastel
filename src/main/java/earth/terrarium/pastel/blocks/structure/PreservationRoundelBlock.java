@@ -46,7 +46,12 @@ public class PreservationRoundelBlock extends ItemRoundelBlock {
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (world.isClientSide) {
@@ -58,16 +63,23 @@ public class PreservationRoundelBlock extends ItemRoundelBlock {
                     retrieveLastStack(world, pos, player, hand, handStack, itemRoundelBlockEntity);
                 } else {
                     int countBefore = handStack.getCount();
-                    ItemStack leftoverStack = InventoryHelper.addToInventoryUpToSingleStackWithMaxTotalCount(
-                        handStack, itemRoundelBlockEntity.getInventory(),
-                        PreservationRoundelBlockEntity.INVENTORY_SIZE
-                    );
+                    ItemStack leftoverStack = InventoryHelper
+                        .addToInventoryUpToSingleStackWithMaxTotalCount(
+                            handStack,
+                            itemRoundelBlockEntity.getInventory(),
+                            PreservationRoundelBlockEntity.INVENTORY_SIZE
+                        );
                     player.setItemInHand(hand, leftoverStack);
                     if (countBefore != leftoverStack.getCount()) {
-                        world.playSound(
-                            null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.8F,
-                            0.8F + world.random.nextFloat() * 0.6F
-                        );
+                        world
+                            .playSound(
+                                null,
+                                pos,
+                                SoundEvents.ITEM_PICKUP,
+                                SoundSource.BLOCKS,
+                                0.8F,
+                                0.8F + world.random.nextFloat() * 0.6F
+                            );
                     }
                 }
                 blockEntity.setChanged();
@@ -76,7 +88,6 @@ public class PreservationRoundelBlock extends ItemRoundelBlock {
             return ItemInteractionResult.CONSUME;
         }
     }
-
 
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {

@@ -42,12 +42,19 @@ public class HumusFluidBlock extends PastelFluidBlock {
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(state, world, pos, random);
-        if (!world.getBlockState(pos.above())
-                  .isRedstoneConductor(world, pos.above()) && random.nextFloat() < 0.03F) {
-            world.addParticle(
-                PastelParticleTypes.HUMUS_POP, pos.getX() + random.nextDouble(), pos.getY() + 1,
-                pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0
-            );
+        if (!world
+            .getBlockState(pos.above())
+            .isRedstoneConductor(world, pos.above()) && random.nextFloat() < 0.03F) {
+            world
+                .addParticle(
+                    PastelParticleTypes.HUMUS_POP,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + 1,
+                    pos.getZ() + random.nextDouble(),
+                    0,
+                    random.nextDouble() * 0.1,
+                    0
+                );
         }
     }
 
@@ -57,7 +64,10 @@ public class HumusFluidBlock extends PastelFluidBlock {
     }
 
     public @Nullable BlockState handleFluidCollision(
-        Level world, @NotNull FluidState state, @NotNull FluidState otherState) {
+        Level world,
+        @NotNull FluidState state,
+        @NotNull FluidState otherState
+    ) {
         if (otherState.is(FluidTags.WATER)) {
             return Blocks.DIRT.defaultBlockState();
         }
@@ -74,7 +84,12 @@ public class HumusFluidBlock extends PastelFluidBlock {
 
     @Override
     public @Nullable PathType getAdjacentBlockPathType(
-        BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
+        BlockState state,
+        BlockGetter level,
+        BlockPos pos,
+        @Nullable Mob mob,
+        PathType originalType
+    ) {
         return PathType.WATER_BORDER;
     }
 }

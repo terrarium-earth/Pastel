@@ -22,19 +22,32 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class FallingAshParticle extends TextureSheetParticle {
 
     private static final Vec3 VERTICAL = new Vec3(0, 1, 0);
+
     private static final float GRAVITY = 0.15F;
+
     private static double targetVelocity = 0.215, ashScaleA = 20000, ashScaleB = 2200, ashScaleC = 200;
+
     private static Direction.Axis primaryAxis = Direction.Axis.X;
+
     private static Direction.Axis lastAxis = primaryAxis;
+
     private final float rotateFactor, lightness;
+
     private final int simInterval = PastelCommon.CONFIG.WindSimInterval, simOffset;
+
     private int slowTicks, axisTicks = 0;
 
     private static final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-        // to prevent us from having to create lots of BlockPos objects per (render) tick
+    // to prevent us from having to create lots of BlockPos objects per (render) tick
 
     protected FallingAshParticle(
-        ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
+        ClientLevel clientWorld,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
         SpriteSet spriteProvider
     ) {
         super(clientWorld, x, y, z);
@@ -59,9 +72,10 @@ public class FallingAshParticle extends TextureSheetParticle {
     public void tick() {
         pos.set(x, y, z);
 
-        var camPos = Minecraft.getInstance()
-                              .getCameraEntity()
-                              .position();
+        var camPos = Minecraft
+            .getInstance()
+            .getCameraEntity()
+            .position();
         var distance = Math.sqrt(camPos.distanceToSqr(x, y, z));
         if (distance > HowlingSpireEffects.getRenderRadius() - 1) {
             remove();
@@ -69,13 +83,14 @@ public class FallingAshParticle extends TextureSheetParticle {
         }
 
         this.oRoll = this.roll;
-        var water = !this.level.getFluidState(pos)
-                               .isEmpty();
+        var water = !this.level
+            .getFluidState(pos)
+            .isEmpty();
         var time = level.getGameTime() % 432000;
 
-        if ((age + 2 < lifetime)
-            && level.getBiome(pos)
-                    .is(PastelBiomes.HOWLING_SPIRES)) {
+        if ((age + 2 < lifetime) && level
+            .getBiome(pos)
+            .is(PastelBiomes.HOWLING_SPIRES)) {
             age++;
         }
 
@@ -123,7 +138,6 @@ public class FallingAshParticle extends TextureSheetParticle {
 
         adjustAlpha(water);
 
-
         if (verifySimConfig(time) && Math.abs(xd) + Math.abs(zd) > 0.125) {
             applyAirflowTransforms();
         }
@@ -137,17 +151,22 @@ public class FallingAshParticle extends TextureSheetParticle {
     private void adjustGravityForLift() {
         var height = 0F;
         var groundFound = false;
-        for (; height < 20; ++height) {
+        for (
+            ; height < 20;
+            ++height
+        ) {
             pos.move(Direction.DOWN);
-            if (!level.getFluidState(pos)
-                      .isEmpty()) {
+            if (!level
+                .getFluidState(pos)
+                .isEmpty()) {
                 gravity = 0F;
                 return;
-            } else if (level.getBlockState(pos)
-                            .isFaceSturdy(level, pos, Direction.UP)) {
-                groundFound = true;
-                break;
-            }
+            } else if (level
+                .getBlockState(pos)
+                .isFaceSturdy(level, pos, Direction.UP)) {
+                    groundFound = true;
+                    break;
+                }
         }
 
         height += (float) (y - (int) y);
@@ -177,30 +196,45 @@ public class FallingAshParticle extends TextureSheetParticle {
         var direction = velocity.normalize();
         var movementNormal = direction.cross(VERTICAL);
 
-        for (int i = 0; i <= 6; i++) {
+        for (
+            int i = 0;
+            i <= 6;
+            i++
+        ) {
             var deflection = -0.0125F * (1 - (i / 24F)) * lightness * simInterval;
-            var shift = velocity.scale(i)
-                                .add(x, y, z);
+            var shift = velocity
+                .scale(i)
+                .add(x, y, z);
             var maxDist = 6 - i;
-            for (int orthogonal = 1; orthogonal <= maxDist; orthogonal++) {
-                var leftShift = movementNormal.scale(orthogonal)
-                                              .add(shift);
-                var rightShift = movementNormal.scale(-orthogonal)
-                                               .add(shift);
+            for (
+                int orthogonal = 1;
+                orthogonal <= maxDist;
+                orthogonal++
+            ) {
+                var leftShift = movementNormal
+                    .scale(orthogonal)
+                    .add(shift);
+                var rightShift = movementNormal
+                    .scale(-orthogonal)
+                    .add(shift);
                 var leftPos = new BlockPos((int) leftShift.x, (int) leftShift.y, (int) leftShift.z);
                 var rightPos = new BlockPos((int) rightShift.x, (int) rightShift.y, (int) rightShift.z);
 
-                if (level.getBlockState(leftPos)
-                         .isRedstoneConductor(level, leftPos)) {
-                    var collisionDirection = leftShift.subtract(x, y, z)
-                                                      .normalize();
+                if (level
+                    .getBlockState(leftPos)
+                    .isRedstoneConductor(level, leftPos)) {
+                    var collisionDirection = leftShift
+                        .subtract(x, y, z)
+                        .normalize();
                     xd += collisionDirection.x * deflection;
                     zd += collisionDirection.z * deflection;
                 }
-                if (level.getBlockState(rightPos)
-                         .isRedstoneConductor(level, rightPos)) {
-                    var collisionDirection = rightShift.subtract(x, y, z)
-                                                       .normalize();
+                if (level
+                    .getBlockState(rightPos)
+                    .isRedstoneConductor(level, rightPos)) {
+                    var collisionDirection = rightShift
+                        .subtract(x, y, z)
+                        .normalize();
                     xd += collisionDirection.x * deflection;
                     zd += collisionDirection.z * deflection;
                 }
@@ -284,7 +318,9 @@ public class FallingAshParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -294,8 +330,14 @@ public class FallingAshParticle extends TextureSheetParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new FallingAshParticle(clientWorld, d, e, f, g, h, i, spriteProvider);
         }

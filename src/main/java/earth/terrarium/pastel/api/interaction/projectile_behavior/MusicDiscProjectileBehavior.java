@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 public record MusicDiscProjectileBehavior() implements DamagingProjectileBehavior {
     public static final MusicDiscProjectileBehavior INSTANCE = new MusicDiscProjectileBehavior();
+
     public static final ProjectileBehaviorType<MusicDiscProjectileBehavior> TYPE = new ProjectileBehaviorType<>(
         PastelCommon.ofPastel("music_disc"),
         MapCodec.unit(INSTANCE)
@@ -26,15 +27,22 @@ public record MusicDiscProjectileBehavior() implements DamagingProjectileBehavio
 
     @Override
     public boolean dealDamage(ThrowableItemProjectile projectile, Entity owner, Entity target) {
-        return target.hurt(
-            target.damageSources()
-                  .thrown(projectile, owner), 6f
-        );
+        return target
+            .hurt(
+                target
+                    .damageSources()
+                    .thrown(projectile, owner),
+                6f
+            );
     }
 
     @Override
     public ItemStack onBlockHit(
-        ItemProjectileEntity projectile, ItemStack stack, @Nullable Entity owner, BlockHitResult hitResult) {
+        ItemProjectileEntity projectile,
+        ItemStack stack,
+        @Nullable Entity owner,
+        BlockHitResult hitResult
+    ) {
         Level world = projectile.level();
         BlockEntity blockEntity = world.getBlockEntity(hitResult.getBlockPos());
         if (blockEntity instanceof JukeboxBlockEntity jukeboxBlockEntity && !blockEntity.isRemoved()) {

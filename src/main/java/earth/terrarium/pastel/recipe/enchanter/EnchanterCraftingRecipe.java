@@ -36,17 +36,28 @@ public class EnchanterCraftingRecipe extends EnchanterRecipe {
 
     //TODO: these should be migrated to IngredientStacks
     protected final List<Ingredient> inputs; // first input is the center, all others around clockwise
+
     protected final ItemStack output;
 
     protected final int requiredExperience;
+
     protected final int craftingTime;
+
     protected final boolean noDiscounts;
+
     // copy all modified components from the first stack in the ingredients to the output stack
     protected final boolean copyComponents;
 
     public EnchanterCraftingRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier, List<Ingredient> inputs,
-        ItemStack output, int craftingTime, int requiredExperience, boolean noDiscounts, boolean copyComponents
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        List<Ingredient> inputs,
+        ItemStack output,
+        int craftingTime,
+        int requiredExperience,
+        boolean noDiscounts,
+        boolean copyComponents
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -63,14 +74,19 @@ public class EnchanterCraftingRecipe extends EnchanterRecipe {
     @Override
     public boolean matches(RecipeInput inv, Level level) {
         var center = inv.getItem(EnchanterBlockEntity.CENTER);
-        var availableXp = Optional.ofNullable(inv.getItem(EnchanterBlockEntity.XP_STORAGE)
-                                                 .getCapability(PastelCapabilities.Misc.XP, level.registryAccess()))
-                                  .map(ExperienceHandler::getStoredAmount)
-                                  .orElse(0);
+        var availableXp = Optional
+            .ofNullable(
+                inv
+                    .getItem(EnchanterBlockEntity.XP_STORAGE)
+                    .getCapability(PastelCapabilities.Misc.XP, level.registryAccess())
+            )
+            .map(ExperienceHandler::getStoredAmount)
+            .orElse(0);
 
         // the item on the enchanter
-        if (!inputs.getFirst()
-                   .test(center)) {
+        if (!inputs
+            .getFirst()
+            .test(center)) {
             return false;
         }
 
@@ -79,8 +95,14 @@ public class EnchanterCraftingRecipe extends EnchanterRecipe {
         }
 
         var matches = new HashSet<Integer>();
-        for (Ingredient ingredient : inputs.subList(1, 9)) {
-            for (int slot = 1; slot < 9; slot++) {
+        for (
+            Ingredient ingredient : inputs.subList(1, 9)
+        ) {
+            for (
+                int slot = 1;
+                slot < 9;
+                slot++
+            ) {
                 if (matches.contains(slot))
                     continue;
 
@@ -98,8 +120,9 @@ public class EnchanterCraftingRecipe extends EnchanterRecipe {
     @Override
     public ItemStack assemble(RecipeInput inv, HolderLookup.Provider drm) {
         if (this.copyComponents) {
-            return inv.getItem(0)
-                      .transmuteCopy(output.getItem(), output.getCount());
+            return inv
+                .getItem(0)
+                .transmuteCopy(output.getItem(), output.getCount());
         }
         return output.copy();
     }
@@ -111,12 +134,19 @@ public class EnchanterCraftingRecipe extends EnchanterRecipe {
         var output = 1D;
 
         if (!noDiscounts) {
-            output = 1 / enchanter.getUpgrades()
-                                  .getEffectiveValue(Upgradeable.UpgradeType.EFFICIENCY);
+            output = 1 / enchanter
+                .getUpgrades()
+                .getEffectiveValue(Upgradeable.UpgradeType.EFFICIENCY);
         }
 
-        for (Ingredient ingredient : inputs.subList(1, 9)) {
-            for (int slot = 1; slot < 9; slot++) {
+        for (
+            Ingredient ingredient : inputs.subList(1, 9)
+        ) {
+            for (
+                int slot = 1;
+                slot < 9;
+                slot++
+            ) {
                 if (actioned.contains(slot))
                     continue;
 
@@ -130,9 +160,13 @@ public class EnchanterCraftingRecipe extends EnchanterRecipe {
             }
         }
 
-        Optional.ofNullable(inv.getStackInSlot(EnchanterBlockEntity.XP_STORAGE)
-                               .getCapability(PastelCapabilities.Misc.XP, lookup))
-                .map(storage -> storage.extract(requiredExperience, false));
+        Optional
+            .ofNullable(
+                inv
+                    .getStackInSlot(EnchanterBlockEntity.XP_STORAGE)
+                    .getCapability(PastelCapabilities.Misc.XP, lookup)
+            )
+            .map(storage -> storage.extract(requiredExperience, false));
     }
 
     @Override
@@ -191,45 +225,67 @@ public class EnchanterCraftingRecipe extends EnchanterRecipe {
 
     public static class Serializer implements RecipeSerializer<EnchanterCraftingRecipe> {
 
-        public static final MapCodec<EnchanterCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                            Codec.STRING.optionalFieldOf("group", "")
-                                                                                                                        .forGetter(recipe -> recipe.group),
-                                                                                                            Codec.BOOL.optionalFieldOf("secret", false)
-                                                                                                                      .forGetter(recipe -> recipe.secret),
-                                                                                                            ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                                                                  .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                                                                                            Ingredient.CODEC_NONEMPTY.listOf()
-                                                                                                                                     .optionalFieldOf("ingredients", List.of())
-                                                                                                                                     .forGetter(recipe -> recipe.inputs),
-                                                                                                            ItemStack.CODEC.fieldOf("result")
-                                                                                                                           .forGetter(recipe -> recipe.output),
-                                                                                                            Codec.INT.optionalFieldOf("required_experience", 0)
-                                                                                                                     .forGetter(recipe -> recipe.requiredExperience),
-                                                                                                            Codec.INT.optionalFieldOf("time", 200)
-                                                                                                                     .forGetter(recipe -> recipe.craftingTime),
-                                                                                                            Codec.BOOL.optionalFieldOf("disable_yield_and_efficiency_upgrades", false)
-                                                                                                                      .forGetter(recipe -> recipe.noDiscounts),
-                                                                                                            Codec.BOOL.optionalFieldOf("copy_components", false)
-                                                                                                                      .forGetter(recipe -> recipe.copyComponents)
-                                                                                                        )
-                                                                                                        .apply(
-                                                                                                            i,
-                                                                                                            EnchanterCraftingRecipe::new
-                                                                                                        ));
+        public static final MapCodec<EnchanterCraftingRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(recipe -> recipe.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(recipe -> recipe.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                        Ingredient.CODEC_NONEMPTY
+                            .listOf()
+                            .optionalFieldOf("ingredients", List.of())
+                            .forGetter(recipe -> recipe.inputs),
+                        ItemStack.CODEC
+                            .fieldOf("result")
+                            .forGetter(recipe -> recipe.output),
+                        Codec.INT
+                            .optionalFieldOf("required_experience", 0)
+                            .forGetter(recipe -> recipe.requiredExperience),
+                        Codec.INT
+                            .optionalFieldOf("time", 200)
+                            .forGetter(recipe -> recipe.craftingTime),
+                        Codec.BOOL
+                            .optionalFieldOf("disable_yield_and_efficiency_upgrades", false)
+                            .forGetter(recipe -> recipe.noDiscounts),
+                        Codec.BOOL
+                            .optionalFieldOf("copy_components", false)
+                            .forGetter(recipe -> recipe.copyComponents)
+                    )
+                    .apply(
+                        i,
+                        EnchanterCraftingRecipe::new
+                    )
+            );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, EnchanterCraftingRecipe> STREAM_CODEC
-            = PacketCodecHelper.tuple(
-            ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
-            ByteBufCodecs.BOOL, recipe -> recipe.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-            Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.inputs,
-            ItemStack.STREAM_CODEC, recipe -> recipe.output,
-            ByteBufCodecs.VAR_INT, recipe -> recipe.requiredExperience,
-            ByteBufCodecs.VAR_INT, recipe -> recipe.craftingTime,
-            ByteBufCodecs.BOOL, recipe -> recipe.noDiscounts,
-            ByteBufCodecs.BOOL, recipe -> recipe.copyComponents,
-            EnchanterCraftingRecipe::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, EnchanterCraftingRecipe> STREAM_CODEC = PacketCodecHelper
+            .tuple(
+                ByteBufCodecs.STRING_UTF8,
+                recipe -> recipe.group,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                recipe -> recipe.requiredAdvancementIdentifier,
+                Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
+                recipe -> recipe.inputs,
+                ItemStack.STREAM_CODEC,
+                recipe -> recipe.output,
+                ByteBufCodecs.VAR_INT,
+                recipe -> recipe.requiredExperience,
+                ByteBufCodecs.VAR_INT,
+                recipe -> recipe.craftingTime,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.noDiscounts,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.copyComponents,
+                EnchanterCraftingRecipe::new
+            );
 
         @Override
         public MapCodec<EnchanterCraftingRecipe> codec() {

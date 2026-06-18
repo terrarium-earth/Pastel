@@ -14,7 +14,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class EggLayingWoolyPigWoolEntityModel extends EntityModel<EggLayingWoolyPigEntity> {
 
     private final ModelPart torso;
@@ -28,19 +30,26 @@ public class EggLayingWoolyPigWoolEntityModel extends EntityModel<EggLayingWooly
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(
-            "torso", CubeListBuilder.create()
-                                    .texOffs(0, 0)
-                                    .addBox(-6.5F, -15.5F, -9.5F, 13.0F, 13.0F, 19.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 24.0F, 0.0F)
-        );
+        modelPartData
+            .addOrReplaceChild(
+                "torso",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-6.5F, -15.5F, -9.5F, 13.0F, 13.0F, 19.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 24.0F, 0.0F)
+            );
 
         return LayerDefinition.create(modelData, 128, 128);
     }
 
     @Override
     public void setupAnim(
-        EggLayingWoolyPigEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+        EggLayingWoolyPigEntity entity,
+        float limbSwing,
+        float limbSwingAmount,
+        float ageInTicks,
+        float netHeadYaw,
         float headPitch
     ) {
 

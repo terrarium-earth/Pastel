@@ -23,11 +23,16 @@ import java.util.List;
 public class StatusEffectIdolBlock extends IdolBlock {
 
     protected final Holder<MobEffect> statusEffect;
+
     protected final int amplifier;
+
     protected final int duration;
 
     public StatusEffectIdolBlock(
-        Properties settings, ParticleOptions particleEffect, Holder<MobEffect> statusEffect, int amplifier,
+        Properties settings,
+        ParticleOptions particleEffect,
+        Holder<MobEffect> statusEffect,
+        int amplifier,
         int duration
     ) {
         super(settings, particleEffect);
@@ -44,17 +49,32 @@ public class StatusEffectIdolBlock extends IdolBlock {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable(
-            "block.pastel.potion_effect_idol.tooltip", this.statusEffect.value()
-                                                                        .getDisplayName()
-        ));
+        tooltip
+            .add(
+                Component
+                    .translatable(
+                        "block.pastel.potion_effect_idol.tooltip",
+                        this.statusEffect
+                            .value()
+                            .getDisplayName()
+                    )
+            );
     }
 
     @Override
     public boolean trigger(
-        ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side) {
+        ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    ) {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.addEffect(new MobEffectInstance(statusEffect, duration, amplifier, true, true));
 

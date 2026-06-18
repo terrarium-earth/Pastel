@@ -10,8 +10,8 @@ public class ClearPotionFillableRecipe extends SingleItemCraftingRecipe {
 
     @Override
     public boolean matches(Level world, ItemStack stack) {
-        return stack.getItem() instanceof InkPoweredPotionFillable inkPoweredPotionFillable &&
-               inkPoweredPotionFillable.isAtLeastPartiallyFilled(stack);
+        return stack.getItem() instanceof InkPoweredPotionFillable inkPoweredPotionFillable && inkPoweredPotionFillable
+            .isAtLeastPartiallyFilled(stack);
     }
 
     @Override

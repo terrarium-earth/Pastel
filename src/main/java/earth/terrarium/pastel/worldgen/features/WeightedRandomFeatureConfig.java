@@ -7,14 +7,19 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public record WeightedRandomFeatureConfig(SimpleWeightedRandomList<PlacedFeature> features)
-    implements FeatureConfiguration {
+    implements
+    FeatureConfiguration {
 
-    public static final Codec<WeightedRandomFeatureConfig> CODEC = RecordCodecBuilder.create(
-        (instance) -> instance.group(
-                                  SimpleWeightedRandomList.wrappedCodec(PlacedFeature.DIRECT_CODEC)
-                                                          .fieldOf("features")
-                                                          .forGetter((weightedRandomFeatureConfig) -> weightedRandomFeatureConfig.features)
-                              )
-                              .apply(instance, WeightedRandomFeatureConfig::new));
+    public static final Codec<WeightedRandomFeatureConfig> CODEC = RecordCodecBuilder
+        .create(
+            (instance) -> instance
+                .group(
+                    SimpleWeightedRandomList
+                        .wrappedCodec(PlacedFeature.DIRECT_CODEC)
+                        .fieldOf("features")
+                        .forGetter((weightedRandomFeatureConfig) -> weightedRandomFeatureConfig.features)
+                )
+                .apply(instance, WeightedRandomFeatureConfig::new)
+        );
 
 }

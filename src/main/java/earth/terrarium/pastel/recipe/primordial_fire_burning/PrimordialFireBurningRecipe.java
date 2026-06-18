@@ -41,10 +41,14 @@ public class PrimordialFireBurningRecipe extends GatedPastelRecipe<RecipeInput> 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("lategame/collect_doombloom_seed");
 
     protected final Ingredient input;
+
     protected final ItemStack output;
 
     public PrimordialFireBurningRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier, Ingredient input,
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        Ingredient input,
         ItemStack output
     ) {
         super(group, secret, requiredAdvancementIdentifier);
@@ -108,15 +112,17 @@ public class PrimordialFireBurningRecipe extends GatedPastelRecipe<RecipeInput> 
     }
 
     public static PrimordialFireBurningRecipe getRecipeFor(@NotNull Level world, ItemStack stack) {
-        return world.getRecipeManager()
-                    .getRecipeFor(PastelRecipeTypes.PRIMORDIAL_FIRE_BURNING, new SingleRecipeInput(stack), world)
-                    .map(RecipeHolder::value)
-                    .orElse(null);
+        return world
+            .getRecipeManager()
+            .getRecipeFor(PastelRecipeTypes.PRIMORDIAL_FIRE_BURNING, new SingleRecipeInput(stack), world)
+            .map(RecipeHolder::value)
+            .orElse(null);
     }
 
     public static boolean processBlock(Level world, BlockPos pos, BlockState state) {
-        Item item = state.getBlock()
-                         .asItem();
+        Item item = state
+            .getBlock()
+            .asItem();
         if (item == Items.AIR) {
             return false;
         }
@@ -126,18 +132,26 @@ public class PrimordialFireBurningRecipe extends GatedPastelRecipe<RecipeInput> 
             return false;
         }
 
-        ItemStack output = recipe.assemble(
-            new SingleRecipeInput(state.getBlock()
-                                       .asItem()
-                                       .getDefaultInstance()), world.registryAccess()
-        );
+        ItemStack output = recipe
+            .assemble(
+                new SingleRecipeInput(
+                    state
+                        .getBlock()
+                        .asItem()
+                        .getDefaultInstance()
+                ),
+                world.registryAccess()
+            );
 
         world.playSound(null, pos, PastelSounds.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.7F, 1.0F);
         if (output.getItem() instanceof BlockItem blockItem) {
-            world.setBlockAndUpdate(
-                pos, blockItem.getBlock()
-                              .defaultBlockState()
-            );
+            world
+                .setBlockAndUpdate(
+                    pos,
+                    blockItem
+                        .getBlock()
+                        .defaultBlockState()
+                );
         } else {
             world.removeBlock(pos, false);
             FireproofItemEntity.scatter(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, output);
@@ -156,50 +170,70 @@ public class PrimordialFireBurningRecipe extends GatedPastelRecipe<RecipeInput> 
         }
 
         int inputCount = inputStack.getCount();
-        ItemStack outputStack = recipe.assemble(new SingleRecipeInput(inputStack), world.registryAccess())
-                                      .copy();
+        ItemStack outputStack = recipe
+            .assemble(new SingleRecipeInput(inputStack), world.registryAccess())
+            .copy();
         outputStack.setCount(outputStack.getCount() * inputCount);
 
         inputStack.setCount(0);
         itemEntity.discard();
 
         FireproofItemEntity.scatter(world, pos.x(), pos.y(), pos.z(), outputStack);
-        world.playSound(
-            null, itemEntity.blockPosition(), PastelSounds.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.7F,
-            1.0F
-        );
+        world
+            .playSound(
+                null,
+                itemEntity.blockPosition(),
+                PastelSounds.PRIMORDIAL_FIRE_CRACKLE,
+                SoundSource.BLOCKS,
+                0.7F,
+                1.0F
+            );
 
         return true;
     }
 
     public static class Serializer implements RecipeSerializer<PrimordialFireBurningRecipe> {
 
-        public static final MapCodec<PrimordialFireBurningRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                                Codec.STRING.optionalFieldOf("group", "")
-                                                                                                                            .forGetter(recipe -> recipe.group),
-                                                                                                                Codec.BOOL.optionalFieldOf("secret", false)
-                                                                                                                          .forGetter(recipe -> recipe.secret),
-                                                                                                                ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                                                                      .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                                                                                                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient")
-                                                                                                                                         .forGetter(recipe -> recipe.input),
-                                                                                                                ItemStack.STRICT_CODEC.fieldOf("result")
-                                                                                                                                      .forGetter(recipe -> recipe.output)
-                                                                                                            )
-                                                                                                            .apply(
-                                                                                                                i,
-                                                                                                                PrimordialFireBurningRecipe::new
-                                                                                                            ));
+        public static final MapCodec<PrimordialFireBurningRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(recipe -> recipe.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(recipe -> recipe.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("ingredient")
+                            .forGetter(recipe -> recipe.input),
+                        ItemStack.STRICT_CODEC
+                            .fieldOf("result")
+                            .forGetter(recipe -> recipe.output)
+                    )
+                    .apply(
+                        i,
+                        PrimordialFireBurningRecipe::new
+                    )
+            );
 
-        private static final StreamCodec<RegistryFriendlyByteBuf, PrimordialFireBurningRecipe> STREAM_CODEC
-            = StreamCodec.composite(
-            ByteBufCodecs.STRING_UTF8, c -> c.group,
-            ByteBufCodecs.BOOL, c -> c.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
-            Ingredient.CONTENTS_STREAM_CODEC, c -> c.input,
-            ItemStack.STREAM_CODEC, c -> c.output,
-            PrimordialFireBurningRecipe::new
-        );
+        private static final StreamCodec<RegistryFriendlyByteBuf, PrimordialFireBurningRecipe> STREAM_CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.STRING_UTF8,
+                c -> c.group,
+                ByteBufCodecs.BOOL,
+                c -> c.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                c -> c.requiredAdvancementIdentifier,
+                Ingredient.CONTENTS_STREAM_CODEC,
+                c -> c.input,
+                ItemStack.STREAM_CODEC,
+                c -> c.output,
+                PrimordialFireBurningRecipe::new
+            );
 
         @Override
         public MapCodec<PrimordialFireBurningRecipe> codec() {

@@ -62,12 +62,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Stack;
 
-@Mixin(LivingEntity.class)
+@Mixin(
+    LivingEntity.class
+)
 public abstract class LivingEntityMixin {
 
     @Shadow
-    @Nullable
-    protected Player lastHurtByPlayer;
+    @Nullable protected Player lastHurtByPlayer;
 
     @Shadow
     public abstract boolean hasEffect(Holder<MobEffect> effect);
@@ -76,8 +77,7 @@ public abstract class LivingEntityMixin {
     public abstract ItemStack getMainHandItem();
 
     @Shadow
-    @Nullable
-    public abstract MobEffectInstance getEffect(Holder<MobEffect> effect);
+    @Nullable public abstract MobEffectInstance getEffect(Holder<MobEffect> effect);
 
     @Shadow
     public abstract void readAdditionalSaveData(CompoundTag nbt);
@@ -107,41 +107,55 @@ public abstract class LivingEntityMixin {
     protected Stack<DamageContainer> damageContainers;
 
     @WrapOperation(
-        method = "updateInvisibilityStatus()V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hasEffect(Lnet/minecraft/core/Holder;)Z")
+        method = "updateInvisibilityStatus()V", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hasEffect(Lnet/minecraft/core/Holder;)Z"
+        )
     )
-    private boolean trueInvis(LivingEntity instance, Holder<MobEffect> effect, Operation<Boolean> original){
+    private boolean trueInvis(LivingEntity instance, Holder<MobEffect> effect, Operation<Boolean> original) {
         return instance.hasEffect(PastelMobEffects.TRUE_INVISIBILITY) || original.call(instance, effect);
     }
 
-    @Inject(method = "createLivingAttributes", require = 1, allow = 1, at = @At("RETURN"))
+    @Inject(
+        method = "createLivingAttributes", require = 1, allow = 1, at = @At(
+            "RETURN"
+        )
+    )
     private static void addAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> cir) {
-        cir.getReturnValue()
-           .add(PastelEntityAttributes.MENTAL_PRESENCE);
+        cir
+            .getReturnValue()
+            .add(PastelEntityAttributes.MENTAL_PRESENCE);
     }
 
-    @ModifyArg(method = "dropExperience", at = @At(value = "INVOKE",
-                                                   target = "Lnet/minecraft/world/entity/ExperienceOrb;award" +
-                                                            "(Lnet/minecraft/server/level/ServerLevel;" +
-                                                            "Lnet/minecraft/world/phys/Vec3;I)V"), index = 2)
+    @ModifyArg(
+        method = "dropExperience", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/entity/ExperienceOrb;award" + "(Lnet/minecraft/server/level/ServerLevel;" + "Lnet/minecraft/world/phys/Vec3;I)V"
+        ), index = 2
+    )
     protected int applyExuberance(int originalXP) {
         return (int) (originalXP * getExuberanceMod(this.lastHurtByPlayer));
     }
 
-    @Unique
-    private float getExuberanceMod(Player attackingPlayer) {
+    @Unique private float getExuberanceMod(Player attackingPlayer) {
         if (attackingPlayer != null) {
-            int exuberanceLevel = Ench.getEquipmentLevel(
-                attackingPlayer.level()
-                               .registryAccess(), PastelEnchantments.EXUBERANCE, attackingPlayer
-            );
+            int exuberanceLevel = Ench
+                .getEquipmentLevel(
+                    attackingPlayer
+                        .level()
+                        .registryAccess(),
+                    PastelEnchantments.EXUBERANCE,
+                    attackingPlayer
+                );
             return 1.0F + exuberanceLevel * PastelCommon.CONFIG.ExuberanceBonusExperiencePercentPerLevel;
         } else {
             return 1.0F;
         }
     }
 
-    @WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(DD)D", ordinal = 0))
+    @WrapOperation(
+        method = "travel", at = @At(
+            value = "INVOKE", target = "Ljava/lang/Math;min(DD)D", ordinal = 0
+        )
+    )
     private double noSlowFallingSlowdown(double gravity, double slowdown, Operation<Double> original) {
         if (InexorableHelper.isArmorActive((LivingEntity) (Object) this)) {
             return gravity;
@@ -149,15 +163,23 @@ public abstract class LivingEntityMixin {
         return original.call(gravity, slowdown);
     }
 
-    @Inject(method = "travel",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;shouldDiscardFriction()Z"))
-    private void travel(CallbackInfo ci, @Local(ordinal = 1) LocalFloatRef f) {
+    @Inject(
+        method = "travel", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;shouldDiscardFriction()Z"
+        )
+    )
+    private void travel(CallbackInfo ci, @Local(
+        ordinal = 1
+    )
+    LocalFloatRef f) {
         var entity = (LivingEntity) (Object) this;
         var override = false;
         var friction = -1F;
 
-        if (SlotReservingItem.isReservingSlot(this.getMainHandItem()) || SlotReservingItem.isReservingSlot(
-            this.getOffhandItem())) {
+        if (SlotReservingItem.isReservingSlot(this.getMainHandItem()) || SlotReservingItem
+            .isReservingSlot(
+                this.getOffhandItem()
+            )) {
             if (!(entity).onGround()) {
                 friction = 0.945F;
                 override = true;
@@ -167,38 +189,46 @@ public abstract class LivingEntityMixin {
         if (!entity.onGround()) {
             var optionalTrinket = PastelTrinketItem.getFirstEquipped(entity, PastelItems.RING_OF_AETHERIAL_GRACE.get());
             if (optionalTrinket.isPresent()) {
-                var inkStorage = PastelItems.RING_OF_AETHERIAL_GRACE.get()
-                                                                    .getEnergyStorage(optionalTrinket.get());
+                var inkStorage = PastelItems.RING_OF_AETHERIAL_GRACE
+                    .get()
+                    .getEnergyStorage(optionalTrinket.get());
                 var storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
-                friction = (float) Math.max(
-                    friction, f.get() +
-                              (((RingOfAerialGraceItem) PastelItems.RING_OF_AETHERIAL_GRACE.get()).getBonus(
-                                  storedInk) / 150F)
-                );
+                friction = (float) Math
+                    .max(
+                        friction,
+                        f.get() + (((RingOfAerialGraceItem) PastelItems.RING_OF_AETHERIAL_GRACE.get())
+                            .getBonus(
+                                storedInk
+                            ) / 150F)
+                    );
                 override = true;
             }
         }
 
         if (entity instanceof Player player) {
             if (override) {
-                friction += MiscPlayerData.get(player)
-                                          .getFrictionModifiers();
+                friction += MiscPlayerData
+                    .get(player)
+                    .getFrictionModifiers();
             } else {
-                friction = Math.min(
-                    f.get() + MiscPlayerData.get(player)
-                                            .getFrictionModifiers(), 0.99F
-                );
+                friction = Math
+                    .min(
+                        f.get() + MiscPlayerData
+                            .get(player)
+                            .getFrictionModifiers(),
+                        0.99F
+                    );
             }
         }
 
         if (friction >= 0) f.set(Math.min(friction, 0.99F));
     }
 
-    @ModifyExpressionValue(method = "travel", at = @At(value = "INVOKE",
-                                                       target = "Lnet/minecraft/world/level/block/state/BlockState;" +
-                                                                "getFriction(Lnet/minecraft/world/level/LevelReader;" +
-                                                                "Lnet/minecraft/core/BlockPos;" +
-                                                                "Lnet/minecraft/world/entity/Entity;)F"))
+    @ModifyExpressionValue(
+        method = "travel", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;" + "getFriction(Lnet/minecraft/world/level/LevelReader;" + "Lnet/minecraft/core/BlockPos;" + "Lnet/minecraft/world/entity/Entity;)F"
+        )
+    )
     private float increaseSlipperiness(float original) {
         var entity = (LivingEntity) (Object) this;
         var random = entity.getRandom();
@@ -215,7 +245,11 @@ public abstract class LivingEntityMixin {
         return original;
     }
 
-    @ModifyReturnValue(method = "canStandOnFluid", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "canStandOnFluid", at = @At(
+            "RETURN"
+        )
+    )
     private boolean modifyFluidWalking(boolean original) {
         var entity = (LivingEntity) (Object) this;
 
@@ -226,7 +260,8 @@ public abstract class LivingEntityMixin {
             // however, getFluidTypeHeight uses FluidState#getHeight, which gives source blocks a height of 8.0/9.0
             double fractionalHeight = (fluidHeight + feetPos) % 1;
             if (fractionalHeight < 0) fractionalHeight++;
-            double collisionHeight = fractionalHeight * FluidState.AMOUNT_MAX / 16.0 + Math.floor(fluidHeight + feetPos);
+            double collisionHeight = fractionalHeight * FluidState.AMOUNT_MAX / 16.0 + Math
+                .floor(fluidHeight + feetPos);
 
             return feetPos > collisionHeight - 1.0E-5F;
         }
@@ -234,41 +269,61 @@ public abstract class LivingEntityMixin {
         return original;
     }
 
-    @ModifyExpressionValue(method = "isBlocking", at = @At(value = "INVOKE",
-                                                           target = "Lnet/minecraft/world/item/Item;getUseDuration" +
-                                                                    "(Lnet/minecraft/world/item/ItemStack;" +
-                                                                    "Lnet/minecraft/world/entity/LivingEntity;)I"))
+    @ModifyExpressionValue(
+        method = "isBlocking", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/Item;getUseDuration" + "(Lnet/minecraft/world/item/ItemStack;" + "Lnet/minecraft/world/entity/LivingEntity;)I"
+        )
+    )
     private int allowInstantBlockForParryingSwords(int original) {
         if (useItem.getItem() instanceof ParryingSwordItem) return Integer.MAX_VALUE;
 
         return original;
     }
 
-    @WrapOperation(method = "handleEntityEvent", at = @At(value = "INVOKE",
-                                                          target = "net/minecraft/world/entity/LivingEntity.playSound" +
-                                                                   " (Lnet/minecraft/sounds/SoundEvent;FF)V",
-                                                          ordinal = 1))
+    @WrapOperation(
+        method = "handleEntityEvent", at = @At(
+            value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.playSound" + " (Lnet/minecraft/sounds/SoundEvent;FF)V", ordinal = 1
+        )
+    )
     private void swapBlockSound(
-        LivingEntity instance, SoundEvent soundEvent, float v, float p,
+        LivingEntity instance,
+        SoundEvent soundEvent,
+        float v,
+        float p,
         Operation<Void> original
     ) {
-        if (!(instance.getUseItem()
-                      .getItem() instanceof ParryingSwordItem parryingSword)) {
+        if (!(instance
+            .getUseItem()
+            .getItem() instanceof ParryingSwordItem parryingSword)) {
             original.call(instance, soundEvent, v, p);
             return;
         }
 
         if (instance.getTicksUsingItem() <= parryingSword.getPerfectParryWindow(instance, instance.getUseItem())) {
-            original.call(
-                instance, PastelSounds.PERFECT_PARRY, 1.75F, 0.9F + instance.level().random.nextFloat() * 0.3F);
-            original.call(
-                instance, PastelSounds.SWORD_BLOCK, 0.667F, 0.5F + instance.level().random.nextFloat() * 0.3F);
+            original
+                .call(
+                    instance,
+                    PastelSounds.PERFECT_PARRY,
+                    1.75F,
+                    0.9F + instance.level().random.nextFloat() * 0.3F
+                );
+            original
+                .call(
+                    instance,
+                    PastelSounds.SWORD_BLOCK,
+                    0.667F,
+                    0.5F + instance.level().random.nextFloat() * 0.3F
+                );
         } else {
             original.call(instance, PastelSounds.SWORD_BLOCK, 1.0F, 0.8F + instance.level().random.nextFloat() * 0.4F);
         }
     }
 
-    @ModifyReturnValue(method = "onClimbable", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "onClimbable", at = @At(
+            "RETURN"
+        )
+    )
     private boolean hookshotClimb(boolean original) {
         if (original) return true;
 
@@ -281,9 +336,12 @@ public abstract class LivingEntityMixin {
             var yDif = Math.abs(hook.getY() - player.getEyeY());
             if (yDif > 3 + Mth.EPSILON) return false;
 
-            for (Direction dir : Direction.values()) {
-                if (dir.getAxis()
-                       .isVertical()) continue;
+            for (
+                Direction dir : Direction.values()
+            ) {
+                if (dir
+                    .getAxis()
+                    .isVertical()) continue;
 
                 return player.horizontalCollision;
             }
@@ -292,12 +350,15 @@ public abstract class LivingEntityMixin {
         return false;
     }
 
-    @Inject(method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;" +
-                     "Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEatEffect" +
-                                                "(Lnet/minecraft/world/food/FoodProperties;)V"))
+    @Inject(
+        method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;" + "Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEatEffect" + "(Lnet/minecraft/world/food/FoodProperties;)V"
+        )
+    )
     private void applyConcealedEffects(
-        Level world, ItemStack stack, FoodProperties foodComponent,
+        Level world,
+        ItemStack stack,
+        FoodProperties foodComponent,
         CallbackInfoReturnable<ItemStack> cir
     ) {
         var oilEffect = stack.get(PastelDataComponentTypes.CONCEALED_EFFECT);
@@ -307,7 +368,11 @@ public abstract class LivingEntityMixin {
     /**
      * We do not force player sleeping because that would do funny things to the sleep cycle
      */
-    @ModifyReturnValue(method = "isSleeping", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "isSleeping", at = @At(
+            "RETURN"
+        )
+    )
     private boolean forceSleepingState(boolean original) {
         if (original) return true;
 
@@ -317,7 +382,11 @@ public abstract class LivingEntityMixin {
         return false;
     }
 
-    @ModifyVariable(method = "setSprinting(Z)V", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(
+        method = "setSprinting(Z)V", at = @At(
+            "HEAD"
+        ), argsOnly = true
+    )
     private boolean setSprinting(boolean sprinting) {
         var entity = (LivingEntity) (Object) this;
         if (sprinting && entity.hasEffect(PastelMobEffects.SCARRED)) {
@@ -326,11 +395,15 @@ public abstract class LivingEntityMixin {
         return sprinting;
     }
 
-    @Inject(method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;" +
-                     "Lnet/minecraft/world/food/FoodProperties;)" + "Lnet/minecraft/world/item/ItemStack;",
-            at = @At(value = "HEAD"))
+    @Inject(
+        method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;" + "Lnet/minecraft/world/food/FoodProperties;)" + "Lnet/minecraft/world/item/ItemStack;", at = @At(
+            value = "HEAD"
+        )
+    )
     private void conditionalFood(
-        Level world, ItemStack stack, FoodProperties foodProperties,
+        Level world,
+        ItemStack stack,
+        FoodProperties foodProperties,
         CallbackInfoReturnable<ItemStack> cir
     ) {
         PairedFoodComponent component = stack.get(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT);
@@ -339,22 +412,32 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",
-            at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
+    @Inject(
+        method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z", at = @At(
+            value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"
+        )
+    )
     private void addStatusEffect(MobEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
         if (EffectProlongingStatusEffect.canBeExtended(effect.getEffect())) {
             MobEffectInstance effectProlongingInstance = this.getEffect(PastelMobEffects.EFFECT_PROLONGING);
             if (effectProlongingInstance != null) {
-                ((MobEffectInstanceInjector) effect).setDuration(
-                    EffectProlongingStatusEffect.getExtendedDuration(
-                        effect.getDuration(),
-                        effectProlongingInstance.getAmplifier()
-                    ));
+                ((MobEffectInstanceInjector) effect)
+                    .setDuration(
+                        EffectProlongingStatusEffect
+                            .getExtendedDuration(
+                                effect.getDuration(),
+                                effectProlongingInstance.getAmplifier()
+                            )
+                    );
             }
         }
     }
 
-    @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "dropAllDeathLoot", at = @At(
+            "HEAD"
+        ), cancellable = true
+    )
     protected void drop(ServerLevel world, DamageSource damageSource, CallbackInfo ci) {
         LivingEntity thisEntity = (LivingEntity) (Object) this;
 
@@ -366,56 +449,85 @@ public abstract class LivingEntityMixin {
 
             Vec3 entityPos = thisEntity.position();
             ItemEntity itemEntity = new ItemEntity(
-                thisEntity.level(), entityPos.x(), entityPos.y(), entityPos.z(), memoryStack);
-            thisEntity.level()
-                      .addFreshEntity(itemEntity);
+                thisEntity.level(),
+                entityPos.x(),
+                entityPos.y(),
+                entityPos.z(),
+                memoryStack
+            );
+            thisEntity
+                .level()
+                .addFreshEntity(itemEntity);
 
             ci.cancel();
         }
     }
 
-    @Inject(method = "aiStep", at = @At("TAIL"))
+    @Inject(
+        method = "aiStep", at = @At(
+            "TAIL"
+        )
+    )
     protected void whip(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        if(entity.level().getGameTime()%2 != 0) return;
+        if (entity.level().getGameTime() % 2 != 0) return;
         if (entity.hasData(WhipFollowupStrikesAttachment.ATTACHMENT)) {
             var whippings = entity.getData(WhipFollowupStrikesAttachment.ATTACHMENT);
-            if(whippings == 1)
+            if (whippings == 1)
                 entity.removeData(WhipFollowupStrikesAttachment.ATTACHMENT);
             else
                 entity.setData(WhipFollowupStrikesAttachment.ATTACHMENT, whippings - 1);
-            entity.level().playSound(null, entity.blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
+            entity
+                .level()
+                .playSound(
+                    null,
+                    entity.blockPosition(),
+                    SoundEvents.PLAYER_ATTACK_SWEEP,
+                    SoundSource.PLAYERS,
+                    1.0F,
+                    1.0F
+                );
             entity.hurt(PastelDamageTypes.lacerating(entity.level(), entity.getLastAttacker()), 0.5f); // each one doesn't hurt. much.
-            if(entity.getLastAttacker() instanceof Player player)
+            if (entity.getLastAttacker() instanceof Player player)
                 player.magicCrit(entity);
             var delta = entity.getDeltaMovement();
-            if(entity.hasEffect(PastelMobEffects.HOVERING))
+            if (entity.hasEffect(PastelMobEffects.HOVERING))
                 entity.setDeltaMovement(delta.x, 0, delta.z); // otherwise they go to the moon
         }
     }
 
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(
+        method = "tick", at = @At(
+            "TAIL"
+        )
+    )
     protected void applyInexorableEffects(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        if (entity.level() != null && entity.level()
-                                            .getGameTime() % 20 == 0) {
+        if (entity.level() != null && entity
+            .level()
+            .getGameTime() % 20 == 0) {
             InexorableHelper.checkAndRemoveSlowdownModifiers(entity);
         }
     }
 
-    @WrapOperation(at = @At(value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.actuallyHurt" +
-                                                       "(Lnet/minecraft/world/damagesource/DamageSource;F)V"),
-                   method = "hurt")
+    @WrapOperation(
+        at = @At(
+            value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.actuallyHurt" + "(Lnet/minecraft/world/damagesource/DamageSource;F)V"
+        ), method = "hurt"
+    )
     private void applyDike(LivingEntity instance, DamageSource source, float amount, Operation<Void> original) {
         if (source.is(PastelDamageTypeTags.BYPASSES_DIKE)) {
             original.call(instance, source, amount);
             return;
         }
         var container = this.damageContainers.peek();
-        var passedDamage = AzureDikeProvider.absorbDamage(
-            instance, container.getNewDamage(), instance.getDamageAfterArmorAbsorb(source, container.getNewDamage()),
-            source.is(PastelDamageTypeTags.DISRUPTS_WARDS)
-        );
+        var passedDamage = AzureDikeProvider
+            .absorbDamage(
+                instance,
+                container.getNewDamage(),
+                instance.getDamageAfterArmorAbsorb(source, container.getNewDamage()),
+                source.is(PastelDamageTypeTags.DISRUPTS_WARDS)
+            );
         container.setNewDamage(passedDamage);
         instance.actuallyHurt(source, passedDamage);
     }

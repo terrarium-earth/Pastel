@@ -25,22 +25,30 @@ public class CompletedMultiblockCriterion extends SimpleCriterionTrigger<Complet
     }
 
     public record Conditions(Optional<ContextAwarePredicate> player, Optional<ResourceLocation> identifier)
-        implements SimpleCriterionTrigger.SimpleInstance {
+        implements
+        SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        ResourceLocation.CODEC.optionalFieldOf("multiblock_identifier")
-                                                                                                                              .forGetter(Conditions::identifier)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("multiblock_identifier")
+                            .forGetter(Conditions::identifier)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(Multiblock multiblock) {
-            return identifier.isEmpty() || multiblock.getId()
-                                                     .equals(identifier.get());
+            return identifier.isEmpty() || multiblock
+                .getId()
+                .equals(identifier.get());
         }
     }
 

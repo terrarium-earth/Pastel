@@ -30,14 +30,20 @@ import org.jetbrains.annotations.Nullable;
 public class AmphoraBlock extends BaseEntityBlock {
 
     public static final MapCodec<AmphoraBlock> CODEC = simpleCodec(AmphoraBlock::new);
+
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
+
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 
     public AmphoraBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(FACING, Direction.NORTH)
-                                                      .setValue(OPEN, false));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(FACING, Direction.NORTH)
+                    .setValue(OPEN, false)
+            );
     }
 
     @Override
@@ -47,7 +53,12 @@ public class AmphoraBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -69,8 +80,7 @@ public class AmphoraBlock extends BaseEntityBlock {
     }
 
     @Override
-    @Nullable
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    @Nullable public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new AmphoraBlockEntity(pos, state);
     }
 
@@ -114,11 +124,14 @@ public class AmphoraBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(
-                       FACING, ctx.getNearestLookingDirection()
-                                  .getOpposite()
-                   );
+        return this
+            .defaultBlockState()
+            .setValue(
+                FACING,
+                ctx
+                    .getNearestLookingDirection()
+                    .getOpposite()
+            );
     }
 
 }

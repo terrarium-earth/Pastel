@@ -31,23 +31,32 @@ import java.util.List;
 
 public class SingleBlockPoolElement extends StructurePoolElement {
 
-    public static final MapCodec<SingleBlockPoolElement> CODEC = RecordCodecBuilder.mapCodec(
-        (instance) -> instance.group(
-                                  BlockState.CODEC.fieldOf("block")
-                                                  .forGetter((pool) -> pool.state),
-                                  CompoundTag.CODEC.fieldOf("nbt")
-                                                   .forGetter((pool) -> pool.blockNbt),
-                                  projectionCodec()
-                              )
-                              .apply(instance, SingleBlockPoolElement::new));
+    public static final MapCodec<SingleBlockPoolElement> CODEC = RecordCodecBuilder
+        .mapCodec(
+            (instance) -> instance
+                .group(
+                    BlockState.CODEC
+                        .fieldOf("block")
+                        .forGetter((pool) -> pool.state),
+                    CompoundTag.CODEC
+                        .fieldOf("nbt")
+                        .forGetter((pool) -> pool.blockNbt),
+                    projectionCodec()
+                )
+                .apply(instance, SingleBlockPoolElement::new)
+        );
 
     protected final BlockState state;
+
     protected final CompoundTag blockNbt;
 
     private static final CompoundTag jigsawNbt = createDefaultJigsawNbt();
 
     protected SingleBlockPoolElement(
-        BlockState state, CompoundTag blockNbt, StructureTemplatePool.Projection projection) {
+        BlockState state,
+        CompoundTag blockNbt,
+        StructureTemplatePool.Projection projection
+    ) {
         super(projection);
         this.state = state;
         this.blockNbt = blockNbt;
@@ -70,31 +79,60 @@ public class SingleBlockPoolElement extends StructurePoolElement {
 
     @Override
     public List<StructureTemplate.StructureBlockInfo> getShuffledJigsawBlocks(
-        StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation, RandomSource random) {
-        return List.of(new StructureTemplate.StructureBlockInfo(
-            pos, Blocks.JIGSAW.defaultBlockState()
-                              .setValue(
-                                  JigsawBlock.ORIENTATION, FrontAndTop.fromFrontAndTop(
-                                      Direction.DOWN, Direction.SOUTH)
-                              ), jigsawNbt
-        ));
+        StructureTemplateManager structureTemplateManager,
+        BlockPos pos,
+        Rotation rotation,
+        RandomSource random
+    ) {
+        return List
+            .of(
+                new StructureTemplate.StructureBlockInfo(
+                    pos,
+                    Blocks.JIGSAW
+                        .defaultBlockState()
+                        .setValue(
+                            JigsawBlock.ORIENTATION,
+                            FrontAndTop
+                                .fromFrontAndTop(
+                                    Direction.DOWN,
+                                    Direction.SOUTH
+                                )
+                        ),
+                    jigsawNbt
+                )
+            );
     }
 
     @Override
     public BoundingBox getBoundingBox(
-        StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation) {
+        StructureTemplateManager structureTemplateManager,
+        BlockPos pos,
+        Rotation rotation
+    ) {
         Vec3i start = this.getSize(structureTemplateManager, rotation);
         return new BoundingBox(
-            pos.getX(), pos.getY(), pos.getZ(), pos.getX() + start.getX(), pos.getY() + start.getY(),
+            pos.getX(),
+            pos.getY(),
+            pos.getZ(),
+            pos.getX() + start.getX(),
+            pos.getY() + start.getY(),
             pos.getZ() + start.getZ()
         );
     }
 
     @Override
     public boolean place(
-        StructureTemplateManager structureTemplateManager, WorldGenLevel world, StructureManager structureAccessor,
-        ChunkGenerator chunkGenerator, BlockPos pos, BlockPos pivot, Rotation rotation, BoundingBox box,
-        RandomSource random, LiquidSettings liquidSettings, boolean keepJigsaws
+        StructureTemplateManager structureTemplateManager,
+        WorldGenLevel world,
+        StructureManager structureAccessor,
+        ChunkGenerator chunkGenerator,
+        BlockPos pos,
+        BlockPos pivot,
+        Rotation rotation,
+        BoundingBox box,
+        RandomSource random,
+        LiquidSettings liquidSettings,
+        boolean keepJigsaws
     ) {
         if (keepJigsaws) {
             return true;

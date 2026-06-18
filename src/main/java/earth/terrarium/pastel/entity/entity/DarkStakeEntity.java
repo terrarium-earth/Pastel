@@ -35,12 +35,14 @@ import static earth.terrarium.pastel.blocks.geology.AzureCrystalBlock.WARDED;
 
 public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
     public static final int EFFECT_RADIUS = 10;
+
     private double baseDamage = 2.0f;
+
     private int life = 0;
-    @Nullable
-    private UUID ownerUUID;
-    @Nullable
-    private Entity cachedOwner;
+
+    @Nullable private UUID ownerUUID;
+
+    @Nullable private Entity cachedOwner;
 
     @Override
     public double getBaseDamage() {
@@ -81,18 +83,24 @@ public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        BlockPos.betweenClosedStream(new AABB(result.getBlockPos()).inflate(EFFECT_RADIUS))
-                .forEach(pos -> {
-                    var state = level().getBlockState(pos);
-                    if (state.getBlock() instanceof WardDisruptableBlock disruptableBlock)
-                        disruptableBlock.onWardDisrupt(pos, state, level(), this);
-                    else if (state.is(PastelBlockTags.WARD_DISRUPTABLE) &&
-                             this.level() instanceof ServerLevel serverLevel) serverLevel.setBlock(
-                        pos, state.setValue(
-                            WARDED, false),
-                        Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_SUPPRESS_DROPS
-                    );
-                });
+        BlockPos
+            .betweenClosedStream(new AABB(result.getBlockPos()).inflate(EFFECT_RADIUS))
+            .forEach(pos -> {
+                var state = level().getBlockState(pos);
+                if (state.getBlock() instanceof WardDisruptableBlock disruptableBlock)
+                    disruptableBlock.onWardDisrupt(pos, state, level(), this);
+                else if (state.is(PastelBlockTags.WARD_DISRUPTABLE) && this.level() instanceof ServerLevel serverLevel)
+                    serverLevel
+                        .setBlock(
+                            pos,
+                            state
+                                .setValue(
+                                    WARDED,
+                                    false
+                                ),
+                            Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_SUPPRESS_DROPS
+                        );
+            });
     }
 
     @Override
@@ -113,8 +121,7 @@ public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
         return PastelItems.DARK_STAKE.toStack(1);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public Entity getOwner() {
         if (this.cachedOwner != null && !this.cachedOwner.isRemoved()) {
             return this.cachedOwner;
@@ -130,12 +137,14 @@ public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        float f = (float) this.getDeltaMovement()
-                              .length();
+        float f = (float) this
+            .getDeltaMovement()
+            .length();
         double d0 = this.baseDamage;
         Entity entity1 = this.getOwner();
-        DamageSource damagesource = this.damageSources()
-                                        .source(PastelDamageTypes.DARK_STAKE, entity1, this);
+        DamageSource damagesource = this
+            .damageSources()
+            .source(PastelDamageTypes.DARK_STAKE, entity1, this);
 
         int j = Mth.ceil(Mth.clamp((double) f * d0, 0.0, 2.147483647E9));
 
@@ -170,15 +179,22 @@ public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
 
                 this.doKnockback(livingentity, damagesource);
                 if (this.level() instanceof ServerLevel serverlevel1) {
-                    EnchantmentHelper.doPostAttackEffectsWithItemSource(
-                        serverlevel1, livingentity, damagesource, this.getWeaponItem());
+                    EnchantmentHelper
+                        .doPostAttackEffectsWithItemSource(
+                            serverlevel1,
+                            livingentity,
+                            damagesource,
+                            this.getWeaponItem()
+                        );
                 }
 
                 this.doPostHurtEffects(livingentity);
-                if (livingentity != entity1 && livingentity instanceof Player && entity1 instanceof ServerPlayer &&
-                    !this.isSilent()) {
-                    ((ServerPlayer) entity1).connection.send(
-                        new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
+                if (livingentity != entity1 && livingentity instanceof Player && entity1 instanceof ServerPlayer && !this
+                    .isSilent()) {
+                    ((ServerPlayer) entity1).connection
+                        .send(
+                            new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F)
+                        );
                 }
             }
 
@@ -187,10 +203,15 @@ public class DarkStakeEntity extends AbstractArrow implements ItemSupplier {
         } else {
             entity.setRemainingFireTicks(i);
             this.deflect(ProjectileDeflection.REVERSE, entity, this.getOwner(), false);
-            this.setDeltaMovement(this.getDeltaMovement()
-                                      .scale(0.2));
-            if (!this.level().isClientSide && this.getDeltaMovement()
-                                                  .lengthSqr() < 1.0E-7) {
+            this
+                .setDeltaMovement(
+                    this
+                        .getDeltaMovement()
+                        .scale(0.2)
+                );
+            if (!this.level().isClientSide && this
+                .getDeltaMovement()
+                .lengthSqr() < 1.0E-7) {
                 if (this.pickup == AbstractArrow.Pickup.ALLOWED) {
                     this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }

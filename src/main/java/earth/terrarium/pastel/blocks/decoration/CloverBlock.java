@@ -48,12 +48,18 @@ public class CloverBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        world.registryAccess()
-             .registryOrThrow(Registries.CONFIGURED_FEATURE)
-             .get(PastelConfiguredFeatures.CLOVER_PATCH)
-             .place(world, world.getChunkSource()
-                                .getGenerator(), random, pos
-             );
+        world
+            .registryAccess()
+            .registryOrThrow(Registries.CONFIGURED_FEATURE)
+            .get(PastelConfiguredFeatures.CLOVER_PATCH)
+            .place(
+                world,
+                world
+                    .getChunkSource()
+                    .getGenerator(),
+                random,
+                pos
+            );
     }
 
 }

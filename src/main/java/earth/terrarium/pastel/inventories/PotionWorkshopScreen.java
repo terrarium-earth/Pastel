@@ -15,11 +15,19 @@ import java.awt.*;
 
 public class PotionWorkshopScreen extends AbstractContainerScreen<PotionWorkshopScreenHandler> {
 
-    public static final ResourceLocation BACKGROUND_3_SLOTS = PastelCommon.locate(
-        "textures/gui/container/potion_workshop_3_slots.png");
-    public static final ResourceLocation BACKGROUND_4_SLOTS = PastelCommon.locate(
-        "textures/gui/container/potion_workshop_4_slots.png");
-    private static final int[] BUBBLE_PROGRESS = new int[]{0, 4, 8, 11, 13, 17, 20, 24, 26, 30, 33, 36, 41};
+    public static final ResourceLocation BACKGROUND_3_SLOTS = PastelCommon
+        .locate(
+            "textures/gui/container/potion_workshop_3_slots.png"
+        );
+
+    public static final ResourceLocation BACKGROUND_4_SLOTS = PastelCommon
+        .locate(
+            "textures/gui/container/potion_workshop_4_slots.png"
+        );
+
+    private static final int[] BUBBLE_PROGRESS = new int[] {
+        0, 4, 8, 11, 13, 17, 20, 24, 26, 30, 33, 36, 41
+    };
 
     private final ResourceLocation background;
 
@@ -27,8 +35,11 @@ public class PotionWorkshopScreen extends AbstractContainerScreen<PotionWorkshop
         super(handler, playerInventory, title);
         this.imageHeight = 202;
 
-        if (DatabankUtils.hasAdvancement(
-            playerInventory.player, PastelAdvancements.Milestones.UNLOCK_FOURTH_POTION_WORKSHOP_REAGENT_SLOT)) {
+        if (DatabankUtils
+            .hasAdvancement(
+                playerInventory.player,
+                PastelAdvancements.Milestones.UNLOCK_FOURTH_POTION_WORKSHOP_REAGENT_SLOT
+            )) {
             background = BACKGROUND_4_SLOTS;
         } else {
             background = BACKGROUND_3_SLOTS;
@@ -45,8 +56,15 @@ public class PotionWorkshopScreen extends AbstractContainerScreen<PotionWorkshop
         int playerInventoryY = 109;
 
         drawContext.drawString(this.font, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
-        drawContext.drawString(
-            this.font, this.playerInventoryTitle, playerInventoryX, playerInventoryY, RenderHelper.GREEN_COLOR, false);
+        drawContext
+            .drawString(
+                this.font,
+                this.playerInventoryTitle,
+                playerInventoryX,
+                playerInventoryY,
+                RenderHelper.GREEN_COLOR,
+                false
+            );
     }
 
     @Override
@@ -62,8 +80,16 @@ public class PotionWorkshopScreen extends AbstractContainerScreen<PotionWorkshop
             // the rising bubbles
             int progress = BUBBLE_PROGRESS[brewTime / 2 % 13];
             if (progress > 0) {
-                drawContext.blit(
-                    background, startX + 29, startY + 39 + 43 - progress, 176, 40 - progress, 11, progress);
+                drawContext
+                    .blit(
+                        background,
+                        startX + 29,
+                        startY + 39 + 43 - progress,
+                        176,
+                        40 - progress,
+                        11,
+                        progress
+                    );
             }
 
             int maxBrewTime = (this.menu).getMaxBrewTime();

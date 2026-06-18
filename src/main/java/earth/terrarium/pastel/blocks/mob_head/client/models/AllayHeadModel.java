@@ -12,7 +12,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class AllayHeadModel extends PastelSkullModel {
 
     public AllayHeadModel(ModelPart root) {
@@ -23,13 +25,15 @@ public class AllayHeadModel extends PastelSkullModel {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(0, 0)
-                           .addBox(-2.5F, -5.0F, -2.5F, 5.0F, 5.0F, 5.0F, CubeDeformation.NONE),
-            PartPose.ZERO
-        );
+        modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-2.5F, -5.0F, -2.5F, 5.0F, 5.0F, 5.0F, CubeDeformation.NONE),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 32, 32);
     }

@@ -14,12 +14,33 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class QuartzFluffParticle extends BaseAshSmokeParticle {
 
     protected QuartzFluffParticle(
-        ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
-        float scaleMultiplier, SpriteSet spriteProvider
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
+        float scaleMultiplier,
+        SpriteSet spriteProvider
     ) {
         super(
-            world, x, y, z, 0.0725F, -0.1F, 0.0725F, velocityX, velocityY, velocityZ, scaleMultiplier, spriteProvider,
-            1F, 0, 0.08F, false
+            world,
+            x,
+            y,
+            z,
+            0.0725F,
+            -0.1F,
+            0.0725F,
+            velocityX,
+            velocityY,
+            velocityZ,
+            scaleMultiplier,
+            spriteProvider,
+            1F,
+            0,
+            0.08F,
+            false
         );
         alpha = 0;
         this.lifetime = 15 + world.random.nextInt(16);
@@ -61,7 +82,9 @@ public class QuartzFluffParticle extends BaseAshSmokeParticle {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -70,8 +93,14 @@ public class QuartzFluffParticle extends BaseAshSmokeParticle {
         }
 
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new QuartzFluffParticle(clientWorld, d, e, f, 0.0, 0.0, 0.0, 1.0F, this.spriteProvider);
         }

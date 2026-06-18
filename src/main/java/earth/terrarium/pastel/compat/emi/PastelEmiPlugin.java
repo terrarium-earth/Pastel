@@ -74,19 +74,25 @@ public class PastelEmiPlugin implements EmiPlugin {
         registerDragDropHandlers(registry);
     }
 
-    @SuppressWarnings("UnstableApiUsage")
+    @SuppressWarnings(
+        "UnstableApiUsage"
+    )
     public void registerDragDropHandlers(EmiRegistry registry) {
         // Registering here since this is a trivial solution.
         var handlerOne = new EmiDragDropHandler.SlotBased<>(
-            (_ignored, slot) -> slot instanceof ShadowSlot &&
-                                slot.container instanceof FilterConfigurable.FilterInventory,
+            (
+                _ignored,
+                slot
+            ) -> slot instanceof ShadowSlot && slot.container instanceof FilterConfigurable.FilterInventory,
             (screen, slot, ingredient) -> {
                 if (ingredient instanceof ItemEmiStack stack)
-                    ((FilterConfigurable.FilterInventory) slot.container).getClicker()
-                                                                         .clickShadowSlot(
-                                                                             screen.getMenu().containerId, slot,
-                                                                             stack.getItemStack()
-                                                                         );
+                    ((FilterConfigurable.FilterInventory) slot.container)
+                        .getClicker()
+                        .clickShadowSlot(
+                            screen.getMenu().containerId,
+                            slot,
+                            stack.getItemStack()
+                        );
             }
         );
 
@@ -95,9 +101,12 @@ public class PastelEmiPlugin implements EmiPlugin {
     }
 
     // Variant erasure BS
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(
+        "unchecked"
+    )
     private void registerDragDropHandler(
-        EmiRegistry registry, Class<? extends AbstractContainerScreen<?>> clazz,
+        EmiRegistry registry,
+        Class<? extends AbstractContainerScreen<?>> clazz,
         EmiDragDropHandler<AbstractContainerScreen<?>> handler
     ) {
         registry.addDragDropHandler((Class<AbstractContainerScreen<?>>) clazz, handler);
@@ -126,14 +135,18 @@ public class PastelEmiPlugin implements EmiPlugin {
         registry.addCategory(PastelEmiRecipeCategories.TITRATION_BARREL);
         registry.addCategory(PastelEmiRecipeCategories.PRIMORDIAL_FIRE_BURNING);
 
-        EmiIngredient pedestals = EmiIngredient.of(List.of(
-            EmiStack.of(PastelBlocks.PEDESTAL_BASIC_TOPAZ.get()),
-            EmiStack.of(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get()),
-            EmiStack.of(PastelBlocks.PEDESTAL_BASIC_CITRINE.get()),
-            EmiStack.of(PastelBlocks.PEDESTAL_ALL_BASIC.get()),
-            EmiStack.of(PastelBlocks.PEDESTAL_ONYX.get()),
-            EmiStack.of(PastelBlocks.PEDESTAL_MOONSTONE.get())
-        ));
+        EmiIngredient pedestals = EmiIngredient
+            .of(
+                List
+                    .of(
+                        EmiStack.of(PastelBlocks.PEDESTAL_BASIC_TOPAZ.get()),
+                        EmiStack.of(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get()),
+                        EmiStack.of(PastelBlocks.PEDESTAL_BASIC_CITRINE.get()),
+                        EmiStack.of(PastelBlocks.PEDESTAL_ALL_BASIC.get()),
+                        EmiStack.of(PastelBlocks.PEDESTAL_ONYX.get()),
+                        EmiStack.of(PastelBlocks.PEDESTAL_MOONSTONE.get())
+                    )
+            );
         registry.addWorkstation(PastelEmiRecipeCategories.PEDESTAL_CRAFTING, pedestals);
         if (PastelCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
             registry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, pedestals);
@@ -144,53 +157,106 @@ public class PastelEmiPlugin implements EmiPlugin {
         registry.addWorkstation(VanillaEmiRecipeCategories.BLASTING, EmiStack.of(PastelBlocks.CINDERHEARTH.get()));
 
         registry.addWorkstation(PastelEmiRecipeCategories.ANVIL_CRUSHING, EmiStack.of(Blocks.ANVIL));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.ANVIL_CRUSHING, EmiStack.of(PastelBlocks.BEDROCK_ANVIL.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.ANVIL_CRUSHING, EmiStack.of(PastelBlocks.STRATINE_FLOATBLOCK.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.ANVIL_CRUSHING, EmiStack.of(PastelBlocks.PALTAERIA_FLOATBLOCK.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.FUSION_SHRINE, EmiStack.of(PastelBlocks.FUSION_SHRINE_BASALT.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.FUSION_SHRINE, EmiStack.of(PastelBlocks.FUSION_SHRINE_CALCITE.get()));
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.ANVIL_CRUSHING,
+                EmiStack.of(PastelBlocks.BEDROCK_ANVIL.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.ANVIL_CRUSHING,
+                EmiStack.of(PastelBlocks.STRATINE_FLOATBLOCK.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.ANVIL_CRUSHING,
+                EmiStack.of(PastelBlocks.PALTAERIA_FLOATBLOCK.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.FUSION_SHRINE,
+                EmiStack.of(PastelBlocks.FUSION_SHRINE_BASALT.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.FUSION_SHRINE,
+                EmiStack.of(PastelBlocks.FUSION_SHRINE_CALCITE.get())
+            );
         registry.addWorkstation(PastelEmiRecipeCategories.NATURES_STAFF, EmiStack.of(PastelItems.NATURES_STAFF.get()));
         registry.addWorkstation(PastelEmiRecipeCategories.HEATING, EmiStack.of(PastelBlocks.BLAZE_IDOL.get()));
         registry.addWorkstation(PastelEmiRecipeCategories.FREEZING, EmiStack.of(PastelBlocks.POLAR_BEAR_IDOL.get()));
         registry.addWorkstation(PastelEmiRecipeCategories.ENCHANTER, EmiStack.of(PastelBlocks.ENCHANTER.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.ENCHANTMENT_UPGRADE, EmiStack.of(PastelBlocks.ENCHANTER.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.HUMUS_CONVERTING, EmiStack.of(PastelItems.HUMUS_BUCKET.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.LIQUID_CRYSTAL_CONVERTING, EmiStack.of(PastelItems.LIQUID_CRYSTAL_BUCKET.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.MIDNIGHT_SOLUTION_CONVERTING,
-            EmiStack.of(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get())
-        );
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.DRAGONROT_CONVERTING, EmiStack.of(PastelItems.DRAGONROT_BUCKET.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.SPIRIT_INSTILLER, EmiStack.of(PastelBlocks.SPIRIT_INSTILLER.get()));
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.ENCHANTMENT_UPGRADE,
+                EmiStack.of(PastelBlocks.ENCHANTER.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.HUMUS_CONVERTING,
+                EmiStack.of(PastelItems.HUMUS_BUCKET.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.LIQUID_CRYSTAL_CONVERTING,
+                EmiStack.of(PastelItems.LIQUID_CRYSTAL_BUCKET.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.MIDNIGHT_SOLUTION_CONVERTING,
+                EmiStack.of(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.DRAGONROT_CONVERTING,
+                EmiStack.of(PastelItems.DRAGONROT_BUCKET.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.SPIRIT_INSTILLER,
+                EmiStack.of(PastelBlocks.SPIRIT_INSTILLER.get())
+            );
         registry.addWorkstation(PastelEmiRecipeCategories.INK_CONVERTING, EmiStack.of(PastelBlocks.COLOR_PICKER.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.CRYSTALLARIEUM, EmiStack.of(PastelBlocks.CRYSTALLARIEUM.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.POTION_WORKSHOP_BREWING, EmiStack.of(PastelBlocks.POTION_WORKSHOP.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.POTION_WORKSHOP_CRAFTING, EmiStack.of(PastelBlocks.POTION_WORKSHOP.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.POTION_WORKSHOP_REACTING, EmiStack.of(PastelBlocks.POTION_WORKSHOP.get()));
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.CRYSTALLARIEUM,
+                EmiStack.of(PastelBlocks.CRYSTALLARIEUM.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.POTION_WORKSHOP_BREWING,
+                EmiStack.of(PastelBlocks.POTION_WORKSHOP.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.POTION_WORKSHOP_CRAFTING,
+                EmiStack.of(PastelBlocks.POTION_WORKSHOP.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.POTION_WORKSHOP_REACTING,
+                EmiStack.of(PastelBlocks.POTION_WORKSHOP.get())
+            );
         registry.addWorkstation(PastelEmiRecipeCategories.CINDERHEARTH, EmiStack.of(PastelBlocks.CINDERHEARTH.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.TITRATION_BARREL, EmiStack.of(PastelBlocks.TITRATION_BARREL.get()));
-        registry.addWorkstation(
-            PastelEmiRecipeCategories.PRIMORDIAL_FIRE_BURNING, EmiIngredient.of(
-                List.of(
-                    EmiStack.of(PastelItems.DOOMBLOOM_SEED.get()), EmiStack.of(PastelItems.PRIMORDIAL_LIGHTER.get()),
-                    EmiStack.of(PastelBlocks.INCANDESCENT_AMALGAM.get()), EmiStack.of(PastelItems.PIPE_BOMB.get())
-                ))
-        );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.TITRATION_BARREL,
+                EmiStack.of(PastelBlocks.TITRATION_BARREL.get())
+            );
+        registry
+            .addWorkstation(
+                PastelEmiRecipeCategories.PRIMORDIAL_FIRE_BURNING,
+                EmiIngredient
+                    .of(
+                        List
+                            .of(
+                                EmiStack.of(PastelItems.DOOMBLOOM_SEED.get()),
+                                EmiStack.of(PastelItems.PRIMORDIAL_LIGHTER.get()),
+                                EmiStack.of(PastelBlocks.INCANDESCENT_AMALGAM.get()),
+                                EmiStack.of(PastelItems.PIPE_BOMB.get())
+                            )
+                    )
+            );
     }
 
     public void registerRecipes(EmiRegistry registry) {
@@ -204,37 +270,45 @@ public class PastelEmiPlugin implements EmiPlugin {
         addAll(registry, PastelRecipeTypes.PEDESTAL, PedestalCraftingEmiRecipeGated::new);
         addAll(registry, PastelRecipeTypes.FUSION_SHRINE, FusionShrineEmiRecipeGated::new);
         addAll(
-            registry, PastelRecipeTypes.ENCHANTER,
+            registry,
+            PastelRecipeTypes.ENCHANTER,
             r -> new EnchanterEmiRecipeGated(PastelEmiRecipeCategories.ENCHANTER, r)
         );
         addAll(
-            registry, PastelRecipeTypes.ENCHANTMENT_UPGRADE,
+            registry,
+            PastelRecipeTypes.ENCHANTMENT_UPGRADE,
             r -> new EnchantmentUpgradeEmiRecipeGated(PastelEmiRecipeCategories.ENCHANTMENT_UPGRADE, r)
         );
         addAll(
-            registry, PastelRecipeTypes.POTION_WORKSHOP_BREWING,
+            registry,
+            PastelRecipeTypes.POTION_WORKSHOP_BREWING,
             r -> new PotionWorkshopEmiRecipeGated(PastelEmiRecipeCategories.POTION_WORKSHOP_BREWING, r)
         );
         addAll(
-            registry, PastelRecipeTypes.POTION_WORKSHOP_CRAFTING,
+            registry,
+            PastelRecipeTypes.POTION_WORKSHOP_CRAFTING,
             r -> new PotionWorkshopEmiRecipeGated(PastelEmiRecipeCategories.POTION_WORKSHOP_CRAFTING, r)
         );
         addAll(registry, PastelRecipeTypes.POTION_WORKSHOP_REACTING, PotionWorkshopReactingEmiRecipe::new);
         addAll(registry, PastelRecipeTypes.SPIRIT_INSTILLING, SpiritInstillingEmiRecipeGated::new);
         addAll(
-            registry, PastelRecipeTypes.HUMUS_CONVERTING,
+            registry,
+            PastelRecipeTypes.HUMUS_CONVERTING,
             r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.HUMUS_CONVERTING, r)
         );
         addAll(
-            registry, PastelRecipeTypes.LIQUID_CRYSTAL_CONVERTING,
+            registry,
+            PastelRecipeTypes.LIQUID_CRYSTAL_CONVERTING,
             r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.LIQUID_CRYSTAL_CONVERTING, r)
         );
         addAll(
-            registry, PastelRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING,
+            registry,
+            PastelRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING,
             r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.MIDNIGHT_SOLUTION_CONVERTING, r)
         );
         addAll(
-            registry, PastelRecipeTypes.DRAGONROT_CONVERTING,
+            registry,
+            PastelRecipeTypes.DRAGONROT_CONVERTING,
             r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.DRAGONROT_CONVERTING, r)
         );
         addAll(registry, PastelRecipeTypes.INK_CONVERTING, InkConvertingEmiRecipeGated::new);
@@ -245,9 +319,13 @@ public class PastelEmiPlugin implements EmiPlugin {
 
         FreezingIdolBlock.FREEZING_STATE_MAP.forEach((key, value) -> {
             EmiStack in = EmiStack.of(key.getBlock());
-            EmiStack out = EmiStack.of(value.getA()
-                                            .getBlock())
-                                   .setChance(value.getB());
+            EmiStack out = EmiStack
+                .of(
+                    value
+                        .getA()
+                        .getBlock()
+                )
+                .setChance(value.getB());
             if (in.isEmpty() || out.isEmpty()) {
                 return;
             }
@@ -255,39 +333,65 @@ public class PastelEmiPlugin implements EmiPlugin {
                 "freezing",
                 key.getBlock()
             ); // The synthetic IDs generated here assume there will never be multiple conversions of the same block
-            // with different states
-            registry.addRecipe(new BlockToBlockWithChanceEmiRecipe(
-                PastelEmiRecipeCategories.FREEZING, id, in, out,
-                PastelAdvancements.Unlocks.Blocks.IDOLS
-            ));
+                                                                          // with different states
+            registry
+                .addRecipe(
+                    new BlockToBlockWithChanceEmiRecipe(
+                        PastelEmiRecipeCategories.FREEZING,
+                        id,
+                        in,
+                        out,
+                        PastelAdvancements.Unlocks.Blocks.IDOLS
+                    )
+                );
         });
         FreezingIdolBlock.FREEZING_MAP.forEach((key, value) -> {
             EmiStack in = EmiStack.of(key);
-            EmiStack out = EmiStack.of(value.getA()
-                                            .getBlock())
-                                   .setChance(value.getB());
+            EmiStack out = EmiStack
+                .of(
+                    value
+                        .getA()
+                        .getBlock()
+                )
+                .setChance(value.getB());
             if (in.isEmpty() || out.isEmpty()) {
                 return;
             }
             ResourceLocation id = syntheticId("freezing", key);
-            registry.addRecipe(new BlockToBlockWithChanceEmiRecipe(
-                PastelEmiRecipeCategories.FREEZING, id, in, out,
-                PastelAdvancements.Unlocks.Blocks.IDOLS
-            ));
+            registry
+                .addRecipe(
+                    new BlockToBlockWithChanceEmiRecipe(
+                        PastelEmiRecipeCategories.FREEZING,
+                        id,
+                        in,
+                        out,
+                        PastelAdvancements.Unlocks.Blocks.IDOLS
+                    )
+                );
         });
         FirestarterIdolBlock.BURNING_MAP.forEach((key, value) -> {
             EmiStack in = EmiStack.of(key);
-            EmiStack out = EmiStack.of(value.getA()
-                                            .getBlock())
-                                   .setChance(value.getB());
+            EmiStack out = EmiStack
+                .of(
+                    value
+                        .getA()
+                        .getBlock()
+                )
+                .setChance(value.getB());
             if (in.isEmpty() || out.isEmpty()) {
                 return;
             }
             ResourceLocation id = syntheticId("heating", key);
-            registry.addRecipe(new BlockToBlockWithChanceEmiRecipe(
-                PastelEmiRecipeCategories.HEATING, id, in, out,
-                PastelAdvancements.Unlocks.Blocks.IDOLS
-            ));
+            registry
+                .addRecipe(
+                    new BlockToBlockWithChanceEmiRecipe(
+                        PastelEmiRecipeCategories.HEATING,
+                        id,
+                        in,
+                        out,
+                        PastelAdvancements.Unlocks.Blocks.IDOLS
+                    )
+                );
         });
         NaturesStaffConversionDataLoader.CONVERSIONS.forEach((key, value) -> {
             EmiStack in = EmiStack.of(key);
@@ -296,10 +400,16 @@ public class PastelEmiPlugin implements EmiPlugin {
                 return;
             }
             ResourceLocation id = syntheticId("natures_staff", key);
-            registry.addRecipe(new BlockToBlockWithChanceEmiRecipe(
-                PastelEmiRecipeCategories.NATURES_STAFF, id, in, out,
-                PastelAdvancements.Unlocks.Items.NATURES_STAFF
-            ));
+            registry
+                .addRecipe(
+                    new BlockToBlockWithChanceEmiRecipe(
+                        PastelEmiRecipeCategories.NATURES_STAFF,
+                        id,
+                        in,
+                        out,
+                        PastelAdvancements.Unlocks.Items.NATURES_STAFF
+                    )
+                );
         });
 
         //WorldInteractionRecipe
@@ -309,161 +419,226 @@ public class PastelEmiPlugin implements EmiPlugin {
         EmiStack liquidCrystal = EmiStack.of(PastelFluids.LIQUID_CRYSTAL.get(), FluidUnit.BUCKET);
         EmiStack midnightSolution = EmiStack.of(PastelFluids.MIDNIGHT_SOLUTION.get(), FluidUnit.BUCKET);
         EmiStack mud = EmiStack.of(PastelFluids.HUMUS.get(), FluidUnit.BUCKET);
-        EmiStack waterCatalyst = water.copy()
-                                      .setRemainder(water);
-        EmiStack lavaCatalyst = lava.copy()
-                                    .setRemainder(lava);
-        EmiStack dragonrotCatalyst = dragonrot.copy()
-                                              .setRemainder(dragonrot);
-        EmiStack liquidCrystalCatalyst = liquidCrystal.copy()
-                                                      .setRemainder(liquidCrystal);
-        EmiStack midnightSolutionCatalyst = midnightSolution.copy()
-                                                            .setRemainder(midnightSolution);
-        EmiStack mudCatalyst = mud.copy()
-                                  .setRemainder(mud);
+        EmiStack waterCatalyst = water
+            .copy()
+            .setRemainder(water);
+        EmiStack lavaCatalyst = lava
+            .copy()
+            .setRemainder(lava);
+        EmiStack dragonrotCatalyst = dragonrot
+            .copy()
+            .setRemainder(dragonrot);
+        EmiStack liquidCrystalCatalyst = liquidCrystal
+            .copy()
+            .setRemainder(liquidCrystal);
+        EmiStack midnightSolutionCatalyst = midnightSolution
+            .copy()
+            .setRemainder(midnightSolution);
+        EmiStack mudCatalyst = mud
+            .copy()
+            .setRemainder(mud);
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId(
-                                                            "world/fluid_interaction", PastelBlocks.SLUSH.get()))
-                                                        .leftInput(dragonrotCatalyst)
-                                                        .rightInput(waterCatalyst, false)
-                                                        .output(EmiStack.of(PastelBlocks.SLUSH.get()))
-                                                        .requiredAdvancement(
-                                                            DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(
+                    syntheticId(
+                        "world/fluid_interaction",
+                        PastelBlocks.SLUSH.get()
+                    )
+                )
+                .leftInput(dragonrotCatalyst)
+                .rightInput(waterCatalyst, false)
+                .output(EmiStack.of(PastelBlocks.SLUSH.get()))
+                .requiredAdvancement(
+                    DragonrotConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId("world/fluid_interaction", Blocks.BLACKSTONE))
-                                                        .leftInput(dragonrotCatalyst)
-                                                        .rightInput(lavaCatalyst, false)
-                                                        .output(EmiStack.of(Blocks.BLACKSTONE))
-                                                        .requiredAdvancement(
-                                                            DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(syntheticId("world/fluid_interaction", Blocks.BLACKSTONE))
+                .leftInput(dragonrotCatalyst)
+                .rightInput(lavaCatalyst, false)
+                .output(EmiStack.of(Blocks.BLACKSTONE))
+                .requiredAdvancement(
+                    DragonrotConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId("world/fluid_interaction", Blocks.COARSE_DIRT))
-                                                        .leftInput(dragonrotCatalyst)
-                                                        .rightInput(mudCatalyst, false)
-                                                        .output(EmiStack.of(Blocks.COARSE_DIRT))
-                                                        .requiredAdvancement(
-                                                            DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(syntheticId("world/fluid_interaction", Blocks.COARSE_DIRT))
+                .leftInput(dragonrotCatalyst)
+                .rightInput(mudCatalyst, false)
+                .output(EmiStack.of(Blocks.COARSE_DIRT))
+                .requiredAdvancement(
+                    DragonrotConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId(
-                                                            "world/fluid_interaction", PastelBlocks.FLAYED_EARTH.get()))
-                                                        .leftInput(dragonrotCatalyst)
-                                                        .rightInput(liquidCrystalCatalyst, false)
-                                                        .output(EmiStack.of(PastelBlocks.FLAYED_EARTH.get()))
-                                                        .requiredAdvancement(
-                                                            DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .requiredAdvancement(
-                                                            LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(
+                    syntheticId(
+                        "world/fluid_interaction",
+                        PastelBlocks.FLAYED_EARTH.get()
+                    )
+                )
+                .leftInput(dragonrotCatalyst)
+                .rightInput(liquidCrystalCatalyst, false)
+                .output(EmiStack.of(PastelBlocks.FLAYED_EARTH.get()))
+                .requiredAdvancement(
+                    DragonrotConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .requiredAdvancement(
+                    LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId(
-                                                            "world/fluid_interaction", PastelBlocks.HORNSLAKE.get()))
-                                                        .leftInput(dragonrotCatalyst)
-                                                        .rightInput(midnightSolutionCatalyst, false)
-                                                        .output(EmiStack.of(PastelBlocks.HORNSLAKE.get()))
-                                                        .requiredAdvancement(
-                                                            DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .requiredAdvancement(
-                                                            MidnightSolutionConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(
+                    syntheticId(
+                        "world/fluid_interaction",
+                        PastelBlocks.HORNSLAKE.get()
+                    )
+                )
+                .leftInput(dragonrotCatalyst)
+                .rightInput(midnightSolutionCatalyst, false)
+                .output(EmiStack.of(PastelBlocks.HORNSLAKE.get()))
+                .requiredAdvancement(
+                    DragonrotConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .requiredAdvancement(
+                    MidnightSolutionConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId(
-                                                            "world/fluid_interaction",
-                                                            PastelBlocks.FROSTBITE_CRYSTAL.get()
-                                                        ))
-                                                        .leftInput(liquidCrystal)
-                                                        .rightInput(waterCatalyst, false)
-                                                        .output(EmiStack.of(PastelBlocks.FROSTBITE_CRYSTAL.get()))
-                                                        .requiredAdvancement(
-                                                            LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(
+                    syntheticId(
+                        "world/fluid_interaction",
+                        PastelBlocks.FROSTBITE_CRYSTAL.get()
+                    )
+                )
+                .leftInput(liquidCrystal)
+                .rightInput(waterCatalyst, false)
+                .output(EmiStack.of(PastelBlocks.FROSTBITE_CRYSTAL.get()))
+                .requiredAdvancement(
+                    LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId("world/fluid_interaction", Blocks.CALCITE))
-                                                        .leftInput(liquidCrystalCatalyst)
-                                                        .rightInput(waterCatalyst, false)
-                                                        .output(EmiStack.of(Blocks.CALCITE))
-                                                        .requiredAdvancement(
-                                                            LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(syntheticId("world/fluid_interaction", Blocks.CALCITE))
+                .leftInput(liquidCrystalCatalyst)
+                .rightInput(waterCatalyst, false)
+                .output(EmiStack.of(Blocks.CALCITE))
+                .requiredAdvancement(
+                    LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId(
-                                                            "world/fluid_interaction",
-                                                            PastelBlocks.BLAZING_CRYSTAL.get()
-                                                        ))
-                                                        .leftInput(liquidCrystal)
-                                                        .rightInput(lavaCatalyst, false)
-                                                        .output(EmiStack.of(PastelBlocks.BLAZING_CRYSTAL.get()))
-                                                        .requiredAdvancement(
-                                                            LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(
+                    syntheticId(
+                        "world/fluid_interaction",
+                        PastelBlocks.BLAZING_CRYSTAL.get()
+                    )
+                )
+                .leftInput(liquidCrystal)
+                .rightInput(lavaCatalyst, false)
+                .output(EmiStack.of(PastelBlocks.BLAZING_CRYSTAL.get()))
+                .requiredAdvancement(
+                    LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId(
-                                                            "world/fluid_interaction", Blocks.COBBLED_DEEPSLATE))
-                                                        .leftInput(liquidCrystalCatalyst)
-                                                        .rightInput(lavaCatalyst, false)
-                                                        .output(EmiStack.of(Blocks.COBBLED_DEEPSLATE))
-                                                        .requiredAdvancement(
-                                                            LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(
+                    syntheticId(
+                        "world/fluid_interaction",
+                        Blocks.COBBLED_DEEPSLATE
+                    )
+                )
+                .leftInput(liquidCrystalCatalyst)
+                .rightInput(lavaCatalyst, false)
+                .output(EmiStack.of(Blocks.COBBLED_DEEPSLATE))
+                .requiredAdvancement(
+                    LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId("world/fluid_interaction", Blocks.CLAY))
-                                                        .leftInput(liquidCrystalCatalyst)
-                                                        .rightInput(mudCatalyst, false)
-                                                        .output(EmiStack.of(Blocks.CLAY))
-                                                        .requiredAdvancement(
-                                                            LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(syntheticId("world/fluid_interaction", Blocks.CLAY))
+                .leftInput(liquidCrystalCatalyst)
+                .rightInput(mudCatalyst, false)
+                .output(EmiStack.of(Blocks.CLAY))
+                .requiredAdvancement(
+                    LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId("world/fluid_interaction", Blocks.TERRACOTTA))
-                                                        .leftInput(midnightSolutionCatalyst)
-                                                        .rightInput(lavaCatalyst, false)
-                                                        .output(EmiStack.of(Blocks.TERRACOTTA))
-                                                        .requiredAdvancement(
-                                                            MidnightSolutionConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(syntheticId("world/fluid_interaction", Blocks.TERRACOTTA))
+                .leftInput(midnightSolutionCatalyst)
+                .rightInput(lavaCatalyst, false)
+                .output(EmiStack.of(Blocks.TERRACOTTA))
+                .requiredAdvancement(
+                    MidnightSolutionConvertingRecipe.UNLOCK_IDENTIFIER
+                )
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId("world/fluid_interaction", Blocks.DIRT))
-                                                        .leftInput(mudCatalyst)
-                                                        .rightInput(waterCatalyst, false)
-                                                        .output(EmiStack.of(Blocks.DIRT))
-                                                        .requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(syntheticId("world/fluid_interaction", Blocks.DIRT))
+                .leftInput(mudCatalyst)
+                .rightInput(waterCatalyst, false)
+                .output(EmiStack.of(Blocks.DIRT))
+                .requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
+                .build()
         );
         addRecipeSafe(
-            registry, () -> PastelWorldInteractionRecipe.customBuilder()
-                                                        .id(syntheticId("world/fluid_interaction", Blocks.MUD))
-                                                        .leftInput(mudCatalyst)
-                                                        .rightInput(lavaCatalyst, false)
-                                                        .output(EmiStack.of(Blocks.MUD))
-                                                        .requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
-                                                        .build()
+            registry,
+            () -> PastelWorldInteractionRecipe
+                .customBuilder()
+                .id(syntheticId("world/fluid_interaction", Blocks.MUD))
+                .leftInput(mudCatalyst)
+                .rightInput(lavaCatalyst, false)
+                .output(EmiStack.of(Blocks.MUD))
+                .requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
+                .build()
         );
     }
 
@@ -482,9 +657,15 @@ public class PastelEmiPlugin implements EmiPlugin {
     }
 
     public <C extends RecipeInput, T extends Recipe<C>> void addAll(
-        EmiRegistry registry, RecipeType<T> type, Function<T, EmiRecipe> constructor) {
-        for (RecipeHolder<T> entry : registry.getRecipeManager()
-                                             .getAllRecipesFor(type)) {
+        EmiRegistry registry,
+        RecipeType<T> type,
+        Function<T, EmiRecipe> constructor
+    ) {
+        for (
+            RecipeHolder<T> entry : registry
+                .getRecipeManager()
+                .getAllRecipesFor(type)
+        ) {
             T recipe = entry.value();
             registry.addRecipe(constructor.apply(recipe));
         }

@@ -30,10 +30,13 @@ import java.util.stream.Collectors;
 public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWithName {
 
     private final VoxelShape INSIDE_SHAPE = Block.box(2.0D, 11.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+
     private final VoxelShape ABOVE_SHAPE = Block.box(0.0D, 16.0D, 0.0D, 16.0D, 32.0D, 16.0D);
+
     private final VoxelShape INPUT_AREA_SHAPE = Shapes.or(INSIDE_SHAPE, ABOVE_SHAPE);
 
     private UUID ownerUUID;
+
     private String ownerName;
 
     private int transferCooldown;
@@ -43,19 +46,34 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
     }
 
     public static void onEntityCollided(BlockPos pos, Entity entity, EnderHopperBlockEntity enderHopperBlockEntity) {
-        if (entity instanceof ItemEntity itemEntity && Shapes.joinIsNotEmpty(
-            Shapes.create(entity.getBoundingBox()
-                                .move(
-                                    (-pos.getX()), (-pos.getY()), (-pos.getZ()))),
-            enderHopperBlockEntity.getInputAreaShape(), BooleanOp.AND
-        )) {
+        if (entity instanceof ItemEntity itemEntity && Shapes
+            .joinIsNotEmpty(
+                Shapes
+                    .create(
+                        entity
+                            .getBoundingBox()
+                            .move(
+                                (-pos.getX()),
+                                (-pos.getY()),
+                                (-pos.getZ())
+                            )
+                    ),
+                enderHopperBlockEntity.getInputAreaShape(),
+                BooleanOp.AND
+            )) {
             insertIntoEnderChest(enderHopperBlockEntity, itemEntity);
         }
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void serverTick(
-        Level world, BlockPos pos, BlockState state, EnderHopperBlockEntity enderHopperBlockEntity) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        EnderHopperBlockEntity enderHopperBlockEntity
+    ) {
         --enderHopperBlockEntity.transferCooldown;
         if (!enderHopperBlockEntity.needsCooldown()) {
             enderHopperBlockEntity.setCooldown(0);
@@ -68,7 +86,9 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
                 // otherwise, search for item stacks
                 List<ItemEntity> entities = getInputItemEntities(world, enderHopperBlockEntity);
 
-                for (ItemEntity entity : entities) {
+                for (
+                    ItemEntity entity : entities
+                ) {
                     insertIntoEnderChest(enderHopperBlockEntity, entity);
                 }
             }
@@ -77,31 +97,46 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
     }
 
     public static List<ItemEntity> getInputItemEntities(Level world, EnderHopperBlockEntity enderHopperBlockEntity) {
-        return enderHopperBlockEntity.getInputAreaShape()
-                                     .toAabbs()
-                                     .stream()
-                                     .flatMap((box) -> world.getEntitiesOfClass(
-                                                                ItemEntity.class, box.move(
-                                                                    enderHopperBlockEntity.getHopperX() - 0.5D,
-                                                                    enderHopperBlockEntity.getHopperY() - 0.5D,
-                                                                    enderHopperBlockEntity.getHopperZ() - 0.5D
-                                                                ), EntitySelector.ENTITY_STILL_ALIVE
-                                                            )
-                                                            .stream())
-                                     .collect(Collectors.toList());
+        return enderHopperBlockEntity
+            .getInputAreaShape()
+            .toAabbs()
+            .stream()
+            .flatMap(
+                (box) -> world
+                    .getEntitiesOfClass(
+                        ItemEntity.class,
+                        box
+                            .move(
+                                enderHopperBlockEntity.getHopperX() - 0.5D,
+                                enderHopperBlockEntity.getHopperY() - 0.5D,
+                                enderHopperBlockEntity.getHopperZ() - 0.5D
+                            ),
+                        EntitySelector.ENTITY_STILL_ALIVE
+                    )
+                    .stream()
+            )
+            .collect(Collectors.toList());
     }
 
     private static void insertIntoEnderChest(
-        EnderHopperBlockEntity enderHopperBlockEntity, IItemHandlerModifiable sourceInventory) {
+        EnderHopperBlockEntity enderHopperBlockEntity,
+        IItemHandlerModifiable sourceInventory
+    ) {
         UUID ownerUUID = enderHopperBlockEntity.getOwnerUUID();
         if (ownerUUID != null) {
             Player playerEntity = enderHopperBlockEntity.getOwnerIfOnline();
             if (playerEntity != null) {
-                for (int i = 0; i < sourceInventory.getSlots(); i++) {
-                    ItemStack sourceItemStack = sourceInventory.getStackInSlot(i)
-                                                               .copy();
-                    if (!sourceItemStack.isEmpty() && !sourceInventory.extractItem(i, 99, true)
-                                                                      .isEmpty()) {
+                for (
+                    int i = 0;
+                    i < sourceInventory.getSlots();
+                    i++
+                ) {
+                    ItemStack sourceItemStack = sourceInventory
+                        .getStackInSlot(i)
+                        .copy();
+                    if (!sourceItemStack.isEmpty() && !sourceInventory
+                        .extractItem(i, 99, true)
+                        .isEmpty()) {
                         ItemStack remainderStack = addToEnderInventory(sourceItemStack, playerEntity, false);
 
                         sourceInventory.setStackInSlot(i, remainderStack);
@@ -137,7 +172,11 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
     public static ItemStack addToEnderInventory(ItemStack additionStack, Player playerEntity, boolean test) {
         PlayerEnderChestContainer enderChestInventory = playerEntity.getEnderChestInventory();
 
-        for (int i = 0; i < enderChestInventory.getContainerSize(); i++) {
+        for (
+            int i = 0;
+            i < enderChestInventory.getContainerSize();
+            i++
+        ) {
             ItemStack currentStack = enderChestInventory.getItem(i);
             boolean doneStuff = false;
             if (currentStack.isEmpty()) {
@@ -158,8 +197,9 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
 
                 if (canAcceptCount > 0) {
                     if (!test) {
-                        enderChestInventory.getItem(i)
-                                           .grow(Math.min(additionStack.getCount(), canAcceptCount));
+                        enderChestInventory
+                            .getItem(i)
+                            .grow(Math.min(additionStack.getCount(), canAcceptCount));
                     }
                     if (canAcceptCount >= additionStack.getCount()) {
                         additionStack.setCount(0);
@@ -231,8 +271,9 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
     @Override
     public void setOwner(Player playerEntity) {
         this.ownerUUID = playerEntity.getUUID();
-        this.ownerName = playerEntity.getName()
-                                     .getString();
+        this.ownerName = playerEntity
+            .getName()
+            .getString();
         setChanged();
     }
 

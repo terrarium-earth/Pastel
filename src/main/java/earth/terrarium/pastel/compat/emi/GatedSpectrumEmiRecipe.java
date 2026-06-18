@@ -13,10 +13,15 @@ import java.util.List;
 
 public abstract class GatedSpectrumEmiRecipe<T extends GatedRecipe<?>> extends PastelEmiRecipe {
 
-    public static final Component SECRET = Component.translatable(
-        "container.pastel.rei.pedestal_crafting.secret_recipe");
-    public static final Component SECRET_HINT = Component.translatable(
-        "container.pastel.rei.pedestal_crafting.secret_recipe.hint");
+    public static final Component SECRET = Component
+        .translatable(
+            "container.pastel.rei.pedestal_crafting.secret_recipe"
+        );
+
+    public static final Component SECRET_HINT = Component
+        .translatable(
+            "container.pastel.rei.pedestal_crafting.secret_recipe.hint"
+        );
 
     public final @Nullable Component secretHintText;
 
@@ -46,13 +51,16 @@ public abstract class GatedSpectrumEmiRecipe<T extends GatedRecipe<?>> extends P
     public void addWidgets(WidgetHolder widgets) {
         if (recipe.isSecret() && isUnlocked()) {
             if (secretHintText == null) {
-                widgets.addText(SECRET, getDisplayWidth() / 2, getDisplayHeight() / 2, 0x3f3f3f, false)
-                       .horizontalAlign(TextWidget.Alignment.CENTER);
+                widgets
+                    .addText(SECRET, getDisplayWidth() / 2, getDisplayHeight() / 2, 0x3f3f3f, false)
+                    .horizontalAlign(TextWidget.Alignment.CENTER);
             } else {
-                widgets.addText(SECRET_HINT, getDisplayWidth() / 2, getDisplayHeight() / 2 - 8, 0x3f3f3f, false)
-                       .horizontalAlign(TextWidget.Alignment.CENTER);
-                widgets.addText(secretHintText, getDisplayWidth() / 2, getDisplayHeight() / 2 + 2, 0x3f3f3f, false)
-                       .horizontalAlign(TextWidget.Alignment.CENTER);
+                widgets
+                    .addText(SECRET_HINT, getDisplayWidth() / 2, getDisplayHeight() / 2 - 8, 0x3f3f3f, false)
+                    .horizontalAlign(TextWidget.Alignment.CENTER);
+                widgets
+                    .addText(secretHintText, getDisplayWidth() / 2, getDisplayHeight() / 2 + 2, 0x3f3f3f, false)
+                    .horizontalAlign(TextWidget.Alignment.CENTER);
             }
         } else {
             super.addWidgets(widgets);

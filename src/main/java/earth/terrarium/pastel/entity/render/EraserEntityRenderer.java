@@ -10,7 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class EraserEntityRenderer extends MobRenderer<EraserEntity, EraserEntityModel> {
 
     public static final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/eraser/eraser_base.png");

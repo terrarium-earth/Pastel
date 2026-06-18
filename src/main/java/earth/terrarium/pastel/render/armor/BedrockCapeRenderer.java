@@ -36,7 +36,9 @@ public class BedrockCapeRenderer {
             return;
         }
 
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings(
+            "unchecked"
+        )
         var humanoidRenderer = (LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>>) livingRenderer;
 
         humanoidRenderer.addLayer(new BedrockCapeLayer<>(humanoidRenderer));
@@ -46,13 +48,17 @@ public class BedrockCapeRenderer {
      * Registers the bedrock cloth and cape layers on humanoid entities
      */
     public static void registerLayers(EntityRenderersEvent.AddLayers event) {
-        for (PlayerSkin.Model skin : event.getSkins()) {
+        for (
+            PlayerSkin.Model skin : event.getSkins()
+        ) {
             EntityRenderer<? extends Player> renderer = event.getSkin(skin);
 
             registerCapeLayer(renderer);
         }
 
-        for (EntityType<?> entityType : event.getEntityTypes()) {
+        for (
+            EntityType<?> entityType : event.getEntityTypes()
+        ) {
             EntityRenderer<?> renderer = event.getRenderer(entityType);
 
             registerCapeLayer(renderer);
@@ -60,7 +66,8 @@ public class BedrockCapeRenderer {
     }
 
     private static class BedrockCapeLayer<T extends LivingEntity, M extends HumanoidModel<T>>
-        extends RenderLayer<T, M> {
+        extends
+        RenderLayer<T, M> {
 
         public BedrockCapeLayer(RenderLayerParent<T, M> renderer) {
             super(renderer);
@@ -68,8 +75,15 @@ public class BedrockCapeRenderer {
 
         @Override
         public void render(
-            PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, LivingEntity livingEntity,
-            float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw,
+            PoseStack poseStack,
+            MultiBufferSource bufferSource,
+            int packedLight,
+            LivingEntity livingEntity,
+            float limbSwing,
+            float limbSwingAmount,
+            float partialTick,
+            float ageInTicks,
+            float netHeadYaw,
             float headPitch
         ) {
             // Check for the chestplate, and begin rendering the cape if equipped
@@ -82,8 +96,10 @@ public class BedrockCapeRenderer {
             var capeRotations = BedrockArmorModel.computeFrontClothRotation(livingEntity, partialTick);
             float capeZOffset = capeRotations.getB();
 
-            VertexConsumer vertexConsumer = bufferSource.getBuffer(
-                RenderType.entitySolid(PastelModelLayers.BEDROCK_ARMOR_MAIN_ID));
+            VertexConsumer vertexConsumer = bufferSource
+                .getBuffer(
+                    RenderType.entitySolid(PastelModelLayers.BEDROCK_ARMOR_MAIN_ID)
+                );
             poseStack.pushPose();
             poseStack.translate(0, 0.5, 0);
             poseStack.mulPose(Axis.XP.rotationDegrees(Mth.clamp(capeRotations.getA(), -25, 0)));

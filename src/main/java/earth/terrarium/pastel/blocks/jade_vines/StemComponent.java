@@ -8,7 +8,6 @@ public enum StemComponent implements StringRepresentable {
     STEM("stem"),
     STEMALT("stemalt");
 
-
     public static final EnumProperty<StemComponent> PROPERTY = EnumProperty.create("part", StemComponent.class);
 
     public final String identifier;

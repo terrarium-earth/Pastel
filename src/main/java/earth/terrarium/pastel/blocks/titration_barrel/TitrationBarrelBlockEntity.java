@@ -47,8 +47,11 @@ import static earth.terrarium.pastel.blocks.titration_barrel.TitrationBarrelBloc
 public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTankInventory, SidedCapabilityProvider {
 
     protected static final int INVENTORY_SIZE = 5;
+
     public static final int MAX_ITEM_COUNT = 64;
+
     protected FriendlyStackHandler inventory;
+
     protected FluidTank tank = new FluidTank(1000);
 
     @Override
@@ -63,9 +66,11 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 
     // Times in milliseconds using the Date class
     protected long sealTime = -1;
+
     protected long tapTime = -1;
 
     protected String recipe;
+
     protected int extractedBottles = 0;
 
     public TitrationBarrelBlockEntity(BlockPos pos, BlockState state) {
@@ -90,8 +95,9 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
         tank.readFromNBT(registryLookup, nbt);
         this.sealTime = nbt.contains("SealTime", Tag.TAG_LONG) ? nbt.getLong("SealTime") : -1;
         this.tapTime = nbt.contains("TapTime", Tag.TAG_LONG) ? nbt.getLong("TapTime") : -1;
-        this.extractedBottles = nbt.contains("ExtractedBottles", Tag.TAG_ANY_NUMERIC) ? nbt.getInt("ExtractedBottles")
-                                                                                      : 0;
+        this.extractedBottles = nbt.contains("ExtractedBottles", Tag.TAG_ANY_NUMERIC)
+            ? nbt.getInt("ExtractedBottles")
+            : 0;
     }
 
     public void seal() {
@@ -109,7 +115,8 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
         this.tapTime = -1;
         tank.setFluid(FluidStack.EMPTY);
         this.extractedBottles = 0;
-        this.getInventory()
+        this
+            .getInventory()
             .getInternalList()
             .clear();
 
@@ -145,8 +152,9 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
     }
 
     private boolean isEmpty(float temperature, int extractedBottles, ITitrationBarrelRecipe recipe) {
-        if (level == null || !recipe.getFluidInput()
-                                    .test(getTank().getFluid())) {
+        if (level == null || !recipe
+            .getFluidInput()
+            .test(getTank().getFluid())) {
             return true;
         }
         return extractedBottles >= recipe.getOutputCountAfterAngelsShare(this.level, temperature, getSealSeconds());
@@ -158,10 +166,16 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
     }
 
     public ItemStack tryHarvest(
-        Level world, BlockPos blockPos, BlockState blockState, ItemStack handStack, @Nullable Player player) {
+        Level world,
+        BlockPos blockPos,
+        BlockState blockState,
+        ItemStack handStack,
+        @Nullable Player player
+    ) {
         ItemStack harvestedStack = ItemStack.EMPTY;
-        Biome biome = world.getBiome(blockPos)
-                           .value();
+        Biome biome = world
+            .getBiome(blockPos)
+            .value();
 
         boolean shouldReset = false;
         Component message = null;
@@ -178,14 +192,16 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
             }
             shouldReset = true;
         } else {
-            ITitrationBarrelRecipe recipe = optionalRecipe.get()
-                                                          .value();
+            ITitrationBarrelRecipe recipe = optionalRecipe
+                .get()
+                .value();
 
             long secondsFermented = (this.tapTime - this.sealTime) / 1000;
             var output = recipe.getOutputCountAfterAngelsShare(world, biome.getBaseTemperature(), secondsFermented);
 
-            if (recipe.getFluidInput()
-                      .test(tank.getFluid())) {
+            if (recipe
+                .getFluidInput()
+                .test(tank.getFluid())) {
                 if (recipe.canPlayerCraft(player)) {
                     boolean canTap = true;
                     Item tappingItem = recipe.getTappingItem();
@@ -194,14 +210,16 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
                             output = Math.min(output, handStack.getCount());
                             handStack.shrink(output);
                         } else {
-                            message = Component.translatable("block.pastel.titration_barrel.tapping_item_required")
-                                               .append(tappingItem.getDescription());
+                            message = Component
+                                .translatable("block.pastel.titration_barrel.tapping_item_required")
+                                .append(tappingItem.getDescription());
                             canTap = false;
                         }
                     }
                     if (canTap) {
-                        float downfall = ((BiomeAccessor) (Object) biome).getClimateSettings()
-                                                                         .downfall();
+                        float downfall = ((BiomeAccessor) (Object) biome)
+                            .getClimateSettings()
+                            .downfall();
                         harvestedStack = recipe.getTitrationResult(this.inventory, secondsFermented, downfall);
                         harvestedStack.setCount(output);
 
@@ -223,9 +241,20 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 
         if (level instanceof ServerLevel sl) {
             var finalHarvestedStack = harvestedStack;
-            Support.areaCriterion(sl, Support.M_RANGE, blockPos, optionalRecipe.flatMap(r -> r.value().advancementID()), p ->
-                PastelCriteria.TITRATION_BARREL_TAPPING.trigger(
-                    p, finalHarvestedStack, daysSealed, inventoryCount));
+            Support
+                .areaCriterion(
+                    sl,
+                    Support.M_RANGE,
+                    blockPos,
+                    optionalRecipe.flatMap(r -> r.value().advancementID()),
+                    p -> PastelCriteria.TITRATION_BARREL_TAPPING
+                        .trigger(
+                            p,
+                            finalHarvestedStack,
+                            daysSealed,
+                            inventoryCount
+                        )
+                );
         }
 
         if (player != null && message != null) {
@@ -242,8 +271,9 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
     }
 
     public Optional<RecipeHolder<ITitrationBarrelRecipe>> getRecipeForInventory(Level world) {
-        return world.getRecipeManager()
-                    .getRecipeFor(PastelRecipeTypes.TITRATION_BARREL, getRecipeInput(), world);
+        return world
+            .getRecipeManager()
+            .getRecipeFor(PastelRecipeTypes.TITRATION_BARREL, getRecipeInput(), world);
     }
 
     public FluidRecipeInput<FluidTank> getRecipeInput() {
@@ -251,11 +281,14 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
     }
 
     public void giveRecipeRemainders(Player player) {
-        for (ItemStack stack : getInventory().getInternalList()) {
+        for (
+            ItemStack stack : getInventory().getInternalList()
+        ) {
             ItemStack remainder = stack.getCraftingRemainingItem();
             if (!remainder.isEmpty()) {
-                player.getInventory()
-                      .placeItemBackInInventory(remainder);
+                player
+                    .getInventory()
+                    .placeItemBackInInventory(remainder);
             }
         }
     }
@@ -268,14 +301,14 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 
         if (level != null) {
             Optional<RecipeHolder<ITitrationBarrelRecipe>> optionalRecipe = getRecipeForInventory(level);
-            return optionalRecipe.isPresent()
-                   && optionalRecipe.get()
-                                    .value()
-                                    .canPlayerCraft(player)
-                   && optionalRecipe.get()
-                                    .value()
-                                    .getFluidInput()
-                                    .test(tank.getFluid());
+            return optionalRecipe.isPresent() && optionalRecipe
+                .get()
+                .value()
+                .canPlayerCraft(player) && optionalRecipe
+                    .get()
+                    .value()
+                    .getFluidInput()
+                    .test(tank.getFluid());
         }
 
         return false;
@@ -283,13 +316,15 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 
     @Override
     public IItemHandler exposeItemHandlers(Direction dir) {
-        return new StackHandlerView(inventory).disableExtraction()
-                                              .disableInsertion();
+        return new StackHandlerView(inventory)
+            .disableExtraction()
+            .disableInsertion();
     }
 
     @Override
     public IFluidHandler exposeFluidHandlers(Direction dir) {
-        return new FluidHandlerView(tank).disableExtraction()
-                                         .disableInsertion();
+        return new FluidHandlerView(tank)
+            .disableExtraction()
+            .disableInsertion();
     }
 }

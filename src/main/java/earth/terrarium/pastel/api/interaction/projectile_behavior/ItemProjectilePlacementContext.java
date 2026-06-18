@@ -11,7 +11,10 @@ public class ItemProjectilePlacementContext extends BlockPlaceContext {
     ItemProjectileEntity itemProjectileEntity;
 
     public ItemProjectilePlacementContext(
-        Level world, ItemProjectileEntity itemProjectileEntity, BlockHitResult blockHitResult) {
+        Level world,
+        ItemProjectileEntity itemProjectileEntity,
+        BlockHitResult blockHitResult
+    ) {
         super(world, null, InteractionHand.MAIN_HAND, itemProjectileEntity.getItem(), blockHitResult);
         this.itemProjectileEntity = itemProjectileEntity;
     }
@@ -33,7 +36,10 @@ public class ItemProjectilePlacementContext extends BlockPlaceContext {
             Direction direction = this.getClickedFace();
 
             int i;
-            for (i = 0; i < directions.length && directions[i] != direction.getOpposite(); )
+            for (
+                i = 0;
+                i < directions.length && directions[i] != direction.getOpposite();
+            )
                 i++;
 
             if (i > 0) {

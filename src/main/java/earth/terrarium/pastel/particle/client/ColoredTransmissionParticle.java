@@ -7,11 +7,20 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ColoredTransmissionParticle extends TransmissionParticle {
 
     public ColoredTransmissionParticle(
-        ClientLevel world, double x, double y, double z, PositionSource positionSource, int maxAge, int color) {
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        PositionSource positionSource,
+        int maxAge,
+        int color
+    ) {
         super(world, x, y, z, positionSource, maxAge);
 
         Vector3f colorVec = ColorHelper.colorIntToVec(color);

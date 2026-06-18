@@ -45,47 +45,67 @@ import java.util.Map;
 import java.util.UUID;
 
 public class DragonTalonItem extends MalachiteBidentItem
-    implements MergeableItem, SlotReservingItem, SlotBackgroundEffect {
+    implements
+    MergeableItem,
+    SlotReservingItem,
+    SlotBackgroundEffect {
 
     private final ItemAttributeModifiers modifiers;
 
     public DragonTalonItem(Tier toolMaterial, double damage, double extraReach, Item.Properties settings) {
         super(settings, 0, 0, 0, 0);
-        this.modifiers = ItemAttributeModifiers.builder()
-                                               .add(
-                                                   Attributes.ATTACK_DAMAGE,
-                                                   new AttributeModifier(
-                                                       BASE_ATTACK_DAMAGE_ID,
-                                                       damage + toolMaterial.getAttackDamageBonus(),
-                                                       AttributeModifier.Operation.ADD_VALUE
-                                                   ), EquipmentSlotGroup.MAINHAND
-                                               )
-                                               .add(
-                                                   Attributes.ATTACK_SPEED,
-                                                   new AttributeModifier(
-                                                       BASE_ATTACK_SPEED_ID, -2.0,
-                                                       AttributeModifier.Operation.ADD_VALUE
-                                                   ), EquipmentSlotGroup.MAINHAND
-                                               )
-                                               .add(
-                                                   Attributes.ENTITY_INTERACTION_RANGE,
-                                                   new AttributeModifier(
-                                                       PastelEntityAttributes.REACH_MODIFIER_ID,
-                                                       extraReach,
-                                                       AttributeModifier.Operation.ADD_VALUE
-                                                   ), EquipmentSlotGroup.MAINHAND
-                                               )
-                                               .build();
+        this.modifiers = ItemAttributeModifiers
+            .builder()
+            .add(
+                Attributes.ATTACK_DAMAGE,
+                new AttributeModifier(
+                    BASE_ATTACK_DAMAGE_ID,
+                    damage + toolMaterial.getAttackDamageBonus(),
+                    AttributeModifier.Operation.ADD_VALUE
+                ),
+                EquipmentSlotGroup.MAINHAND
+            )
+            .add(
+                Attributes.ATTACK_SPEED,
+                new AttributeModifier(
+                    BASE_ATTACK_SPEED_ID,
+                    -2.0,
+                    AttributeModifier.Operation.ADD_VALUE
+                ),
+                EquipmentSlotGroup.MAINHAND
+            )
+            .add(
+                Attributes.ENTITY_INTERACTION_RANGE,
+                new AttributeModifier(
+                    PastelEntityAttributes.REACH_MODIFIER_ID,
+                    extraReach,
+                    AttributeModifier.Operation.ADD_VALUE
+                ),
+                EquipmentSlotGroup.MAINHAND
+            )
+            .build();
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.dragon_talon.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.dragon_talon.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.dragon_talon.tooltip3")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.dragon_talon.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.dragon_talon.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.dragon_talon.tooltip3")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
@@ -99,8 +119,15 @@ public class DragonTalonItem extends MalachiteBidentItem
         needleEntity.setPickupItemStack(stack);
         needleEntity.setOwner(playerEntity);
         needleEntity.absMoveTo(playerEntity.getX(), playerEntity.getEyeY() - 0.1, playerEntity.getZ());
-        needleEntity.shootFromRotation(
-            playerEntity, playerEntity.getXRot(), playerEntity.getYRot(), 0.0F, getThrowSpeed(stack), 1.0F);
+        needleEntity
+            .shootFromRotation(
+                playerEntity,
+                playerEntity.getXRot(),
+                playerEntity.getYRot(),
+                0.0F,
+                getThrowSpeed(stack),
+                1.0F
+            );
         needleEntity.hasImpulse = true;
         needleEntity.hurtMarked = true;
         needleEntity.pickup = AbstractArrow.Pickup.ALLOWED;
@@ -124,8 +151,9 @@ public class DragonTalonItem extends MalachiteBidentItem
 
         if (SlotReservingItem.isReservingSlot(firstHalf) || SlotReservingItem.isReservingSlot(secondHalf)) {
             durability += player.getAbilities().instabuild ? 0 : 500;
-            player.getCooldowns()
-                  .addCooldown(result.getItem(), 400);
+            player
+                .getCooldowns()
+                .addCooldown(result.getItem(), 400);
         }
         result.setDamageValue(Math.min(durability, firstHalf.getMaxDamage() - 1));
 
@@ -158,8 +186,9 @@ public class DragonTalonItem extends MalachiteBidentItem
 
     @Override
     public boolean canMerge(ServerPlayer player, ItemStack parent, ItemStack other) {
-        if (player.getCooldowns()
-                  .isOnCooldown(parent.getItem()))
+        if (player
+            .getCooldowns()
+            .isOnCooldown(parent.getItem()))
             return false;
         return (parent.getItem() == other.getItem() && verify(parent, other));
     }
@@ -173,15 +202,24 @@ public class DragonTalonItem extends MalachiteBidentItem
 
     @Override
     public void playSound(ServerPlayer player) {
-        player.playNotifySound(
-            PastelSounds.METALLIC_UNSHEATHE, SoundSource.PLAYERS, 0.5F, 0.8F + player.getRandom()
-                                                                                          .nextFloat() * 0.4F
-        );
+        player
+            .playNotifySound(
+                PastelSounds.METALLIC_UNSHEATHE,
+                SoundSource.PLAYERS,
+                0.5F,
+                0.8F + player
+                    .getRandom()
+                    .nextFloat() * 0.4F
+            );
     }
 
     public static ItemStack findThrownStack(Player player, UUID id) {
         var inventory = player.getInventory();
-        for (int i = 0; i < inventory.getContainerSize(); i++) {
+        for (
+            int i = 0;
+            i < inventory.getContainerSize();
+            i++
+        ) {
             var stack = inventory.getItem(i);
             if (SlotReservingItem.isReserver(stack, id)) {
                 return stack;
@@ -193,8 +231,9 @@ public class DragonTalonItem extends MalachiteBidentItem
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
         if (entity instanceof Player player) {
-            if (player.getCooldowns()
-                      .isOnCooldown(stack.getItem()) || SlotReservingItem.isReservingSlot(stack)) {
+            if (player
+                .getCooldowns()
+                .isOnCooldown(stack.getItem()) || SlotReservingItem.isReservingSlot(stack)) {
                 stack.remove(DataComponents.ATTRIBUTE_MODIFIERS);
             } else {
                 stack.set(DataComponents.ATTRIBUTE_MODIFIERS, modifiers);
@@ -204,7 +243,11 @@ public class DragonTalonItem extends MalachiteBidentItem
 
     @Override
     public DamageComposition getDamageComposition(
-        LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
+        LivingEntity attacker,
+        LivingEntity target,
+        ItemStack stack,
+        float damage
+    ) {
         var composition = new DamageComposition();
         composition.add(PastelDamageTypes.evisceration(attacker.level(), attacker), damage);
         return composition;
@@ -232,12 +275,16 @@ public class DragonTalonItem extends MalachiteBidentItem
 
     @Override
     public void expandTooltipPostStats(
-        ItemStack stack, @Nullable Player player, List<Component> tooltip, TooltipContext context) {
+        ItemStack stack,
+        @Nullable Player player,
+        List<Component> tooltip,
+        TooltipContext context
+    ) {
     }
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.CHANNELING) ||
-               enchantment.is(Enchantments.PIERCING) || enchantment.is(PastelEnchantments.INERTIA);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.CHANNELING) || enchantment
+            .is(Enchantments.PIERCING) || enchantment.is(PastelEnchantments.INERTIA);
     }
 }

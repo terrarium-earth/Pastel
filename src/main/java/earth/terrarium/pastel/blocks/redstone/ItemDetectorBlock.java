@@ -31,7 +31,9 @@ public class ItemDetectorBlock extends DetectorBlock {
         int power;
         if (items.size() > 0) {
             int amount = 0;
-            for (ItemEntity itementity : items) {
+            for (
+                ItemEntity itementity : items
+            ) {
                 ItemStack itemStack = itementity.getItem();
                 amount += itemStack.getCount();
                 if (amount >= 64) {

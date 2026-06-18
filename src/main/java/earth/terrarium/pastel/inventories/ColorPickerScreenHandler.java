@@ -26,20 +26,24 @@ import java.util.Optional;
 public class ColorPickerScreenHandler extends AbstractContainerMenu implements InkColorSelectedPacketReceiver {
 
     public record ScreenOpeningData(BlockPos pos, Optional<Holder<InkColor>> inkColor) {
-        public static final StreamCodec<RegistryFriendlyByteBuf, ScreenOpeningData> STREAM_CODEC
-            = StreamCodec.composite(
-            BlockPos.STREAM_CODEC, ScreenOpeningData::pos,
-            ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(PastelRegistryKeys.INK_COLOR)),
-            ScreenOpeningData::inkColor,
-            ScreenOpeningData::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, ScreenOpeningData> STREAM_CODEC = StreamCodec
+            .composite(
+                BlockPos.STREAM_CODEC,
+                ScreenOpeningData::pos,
+                ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(PastelRegistryKeys.INK_COLOR)),
+                ScreenOpeningData::inkColor,
+                ScreenOpeningData::new
+            );
     }
 
     public static final int PLAYER_INVENTORY_START_X = 8;
+
     public static final int PLAYER_INVENTORY_START_Y = 84;
 
     protected final Level world;
+
     public final ServerPlayer player;
+
     protected ColorPickerBlockEntity blockEntity;
 
     @Override
@@ -47,8 +51,12 @@ public class ColorPickerScreenHandler extends AbstractContainerMenu implements I
         super.broadcastChanges();
 
         if (this.player != null && this.blockEntity.getInkDirty()) {
-            UpdateBlockEntityInkPayload.updateBlockEntityInk(
-                blockEntity.getBlockPos(), blockEntity.getEnergyStorage(), player);
+            UpdateBlockEntityInkPayload
+                .updateBlockEntityInk(
+                    blockEntity.getBlockPos(),
+                    blockEntity.getEnergyStorage(),
+                    player
+                );
         }
     }
 
@@ -58,15 +66,23 @@ public class ColorPickerScreenHandler extends AbstractContainerMenu implements I
 
     public ColorPickerScreenHandler(int syncId, Inventory playerInventory, ScreenOpeningData data) {
         this(
-            syncId, playerInventory, playerInventory.player.level()
-                                                           .getBlockEntity(
-                                                               data.pos(), PastelBlockEntities.COLOR_PICKER.get())
-                                                           .orElseThrow(), data.inkColor()
+            syncId,
+            playerInventory,
+            playerInventory.player
+                .level()
+                .getBlockEntity(
+                    data.pos(),
+                    PastelBlockEntities.COLOR_PICKER.get()
+                )
+                .orElseThrow(),
+            data.inkColor()
         );
     }
 
     public ColorPickerScreenHandler(
-        int syncId, Inventory playerInventory, ColorPickerBlockEntity blockEntity,
+        int syncId,
+        Inventory playerInventory,
+        ColorPickerBlockEntity blockEntity,
         Optional<Holder<InkColor>> selectedColor
     ) {
         super(PastelScreenHandlerTypes.COLOR_PICKER, syncId);
@@ -85,24 +101,47 @@ public class ColorPickerScreenHandler extends AbstractContainerMenu implements I
         this.addSlot(new InkStorageSlot(blockEntity, 1, 133, 33));
 
         // player inventory
-        for (int j = 0; j < 3; ++j) {
-            for (int k = 0; k < 9; ++k) {
-                this.addSlot(new Slot(
-                    playerInventory, k + j * 9 + 9, PLAYER_INVENTORY_START_X + k * 18,
-                                      PLAYER_INVENTORY_START_Y + j * 18
-                ));
+        for (
+            int j = 0;
+            j < 3;
+            ++j
+        ) {
+            for (
+                int k = 0;
+                k < 9;
+                ++k
+            ) {
+                this
+                    .addSlot(
+                        new Slot(
+                            playerInventory,
+                            k + j * 9 + 9,
+                            PLAYER_INVENTORY_START_X + k * 18,
+                            PLAYER_INVENTORY_START_Y + j * 18
+                        )
+                    );
             }
         }
 
         // player hotbar
-        for (int j = 0; j < 9; ++j) {
-            this.addSlot(
-                new Slot(playerInventory, j, PLAYER_INVENTORY_START_X + j * 18, PLAYER_INVENTORY_START_Y + 58));
+        for (
+            int j = 0;
+            j < 9;
+            ++j
+        ) {
+            this
+                .addSlot(
+                    new Slot(playerInventory, j, PLAYER_INVENTORY_START_X + j * 18, PLAYER_INVENTORY_START_Y + 58)
+                );
         }
 
         if (this.player != null) {
-            UpdateBlockEntityInkPayload.updateBlockEntityInk(
-                blockEntity.getBlockPos(), this.blockEntity.getEnergyStorage(), player);
+            UpdateBlockEntityInkPayload
+                .updateBlockEntityInk(
+                    blockEntity.getBlockPos(),
+                    this.blockEntity.getEnergyStorage(),
+                    player
+                );
         }
     }
 

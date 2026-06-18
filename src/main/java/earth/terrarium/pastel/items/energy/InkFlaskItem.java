@@ -23,7 +23,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class InkFlaskItem extends Item
-    implements InkStorageItem<SingleInkStorage>, LoomPatternProvider, ExtendedItemBar {
+    implements
+    InkStorageItem<SingleInkStorage>,
+    LoomPatternProvider,
+    ExtendedItemBar {
 
     private final long maxEnergy;
 
@@ -41,8 +44,11 @@ public class InkFlaskItem extends Item
     public SingleInkStorage getEnergyStorage(ItemStack itemStack) {
         var storage = itemStack.get(PastelDataComponentTypes.INK_STORAGE);
         if (storage != null)
-            for (var entry : storage.storedEnergy()
-                                    .entrySet())
+            for (
+                var entry : storage
+                    .storedEnergy()
+                    .entrySet()
+            )
                 return new SingleInkStorage(storage.maxEnergyTotal(), entry.getKey(), entry.getValue());
         return new SingleInkStorage(this.maxEnergy);
     }
@@ -54,7 +60,9 @@ public class InkFlaskItem extends Item
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         getEnergyStorage(stack).addTooltip(tooltip);
@@ -90,6 +98,14 @@ public class InkFlaskItem extends Item
         var color = storage.getStoredColor();
         var progress = Support.getSensiblePercent(storage.getCurrentTotal(), storage.getMaxTotal(), 14);
         return new BarSignature(
-            1, 13, 14, progress, 1, color.getColorInt(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
+            1,
+            13,
+            14,
+            progress,
+            1,
+            color.getColorInt(),
+            2,
+            ExtendedItemBar.DEFAULT_BACKGROUND_COLOR
+        );
     }
 }

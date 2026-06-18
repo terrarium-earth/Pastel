@@ -42,14 +42,19 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
     public static final MapCodec<RedstoneTransceiverBlock> CODEC = simpleCodec(RedstoneTransceiverBlock::new);
 
     public static final BooleanProperty SENDER = BooleanProperty.create("sender");
+
     public static final EnumProperty<DyeColor> CHANNEL = EnumProperty.create("channel", DyeColor.class);
 
     public RedstoneTransceiverBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(FACING, Direction.NORTH)
-                                                      .setValue(SENDER, true)
-                                                      .setValue(CHANNEL, DyeColor.RED));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(FACING, Direction.NORTH)
+                    .setValue(SENDER, true)
+                    .setValue(CHANNEL, DyeColor.RED)
+            );
     }
 
     @Override
@@ -57,8 +62,7 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new RedstoneTransceiverBlockEntity(pos, state);
     }
@@ -70,7 +74,12 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, @NotNull Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        @NotNull Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (world.isClientSide) {
@@ -88,11 +97,25 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
         world.setBlock(blockPos, newState, Block.UPDATE_CLIENTS);
 
         if (newState.getValue(SENDER)) {
-            world.playSound(
-                null, blockPos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 0.9F);
+            world
+                .playSound(
+                    null,
+                    blockPos,
+                    PastelSounds.REDSTONE_MECHANISM_TRIGGER,
+                    SoundSource.BLOCKS,
+                    0.3F,
+                    0.9F
+                );
         } else {
-            world.playSound(
-                null, blockPos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 1.1F);
+            world
+                .playSound(
+                    null,
+                    blockPos,
+                    PastelSounds.REDSTONE_MECHANISM_TRIGGER,
+                    SoundSource.BLOCKS,
+                    0.3F,
+                    1.1F
+                );
         }
         checkTickOnNeighbor(world, blockPos, newState);
     }
@@ -107,10 +130,10 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
+    @Nullable public <T extends BlockEntity> GameEventListener getListener(ServerLevel world, T blockEntity) {
         return blockEntity instanceof RedstoneTransceiverBlockEntity
-               ? ((RedstoneTransceiverBlockEntity) blockEntity).getEventListener() : null;
+            ? ((RedstoneTransceiverBlockEntity) blockEntity).getEventListener()
+            : null;
     }
 
     @Override
@@ -140,7 +163,8 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
     protected int getOutputSignal(@NotNull BlockGetter world, BlockPos pos, BlockState state) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         return blockEntity instanceof RedstoneTransceiverBlockEntity
-               ? ((RedstoneTransceiverBlockEntity) blockEntity).getCurrentSignal() : 0;
+            ? ((RedstoneTransceiverBlockEntity) blockEntity).getCurrentSignal()
+            : 0;
     }
 
     @Override
@@ -152,11 +176,19 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : Support.checkType(
-            type, PastelBlockEntities.REDSTONE_TRANSCEIVER.get(), RedstoneTransceiverBlockEntity::serverTick);
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? null
+            : Support
+                .checkType(
+                    type,
+                    PastelBlockEntities.REDSTONE_TRANSCEIVER.get(),
+                    RedstoneTransceiverBlockEntity::serverTick
+                );
     }
 
     @Override
@@ -177,17 +209,24 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
         if (getColor(world, pos) == color) {
             return false;
         }
-        world.setBlockAndUpdate(
-            pos, world.getBlockState(pos)
-                      .setValue(CHANNEL, color.get())
-        );
+        world
+            .setBlockAndUpdate(
+                pos,
+                world
+                    .getBlockState(pos)
+                    .setValue(CHANNEL, color.get())
+            );
         return true;
     }
 
     @Override
     public Optional<DyeColor> getColor(Level world, BlockPos pos) {
-        return Optional.of(world.getBlockState(pos)
-                                .getValue(CHANNEL));
+        return Optional
+            .of(
+                world
+                    .getBlockState(pos)
+                    .getValue(CHANNEL)
+            );
     }
 
 }

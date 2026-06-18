@@ -15,14 +15,19 @@ import java.util.Optional;
 
 public record ShulkerPredicate(Optional<DyeColor> color) implements EntitySubPredicate {
 
-    public static final MapCodec<ShulkerPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                                                                                                                 DyeColor.CODEC.optionalFieldOf("color")
-                                                                                                                               .forGetter(ShulkerPredicate::color)
-                                                                                                             )
-                                                                                                             .apply(
-                                                                                                                 instance,
-                                                                                                                 ShulkerPredicate::new
-                                                                                                             ));
+    public static final MapCodec<ShulkerPredicate> CODEC = RecordCodecBuilder
+        .mapCodec(
+            (instance) -> instance
+                .group(
+                    DyeColor.CODEC
+                        .optionalFieldOf("color")
+                        .forGetter(ShulkerPredicate::color)
+                )
+                .apply(
+                    instance,
+                    ShulkerPredicate::new
+                )
+        );
 
     @Override
     public boolean matches(Entity entity, ServerLevel world, @Nullable Vec3 pos) {

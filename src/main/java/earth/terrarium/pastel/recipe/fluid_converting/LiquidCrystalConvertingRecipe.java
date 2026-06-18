@@ -19,11 +19,15 @@ import java.util.Set;
 public class LiquidCrystalConvertingRecipe extends FluidConvertingRecipe {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("midgame/enter_liquid_crystal");
+
     private static final Set<Item> outputItems = new HashSet<>();
 
     public LiquidCrystalConvertingRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        @NotNull Ingredient inputIngredient, ItemStack outputItemStack
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        @NotNull Ingredient inputIngredient,
+        ItemStack outputItemStack
     ) {
         super(group, secret, requiredAdvancementIdentifier, inputIngredient, outputItemStack);
         outputItems.add(outputItemStack.getItem());

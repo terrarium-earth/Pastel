@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 public class WorkstaffScreenHandler extends QuickNavigationGridScreenHandler {
 
     private final Player player;
+
     private final ItemStack workstaffStack;
 
     public WorkstaffScreenHandler(int syncId, Inventory playerInventory) {
@@ -22,7 +23,9 @@ public class WorkstaffScreenHandler extends QuickNavigationGridScreenHandler {
 
     @Override
     public boolean stillValid(Player player) {
-        for (ItemStack itemStack : player.getHandSlots()) {
+        for (
+            ItemStack itemStack : player.getHandSlots()
+        ) {
             if (itemStack == workstaffStack) {
                 return true;
             }

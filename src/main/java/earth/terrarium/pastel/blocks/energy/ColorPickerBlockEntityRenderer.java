@@ -11,17 +11,25 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ColorPickerBlockEntityRenderer<T extends ColorPickerBlockEntity> implements BlockEntityRenderer<T> {
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public ColorPickerBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
     @Override
     public void render(
-        ColorPickerBlockEntity blockEntity, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light, int overlay
+        ColorPickerBlockEntity blockEntity,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int light,
+        int overlay
     ) {
         Minecraft client = Minecraft.getInstance();
         // The item on top
@@ -33,31 +41,46 @@ public class ColorPickerBlockEntityRenderer<T extends ColorPickerBlockEntity> im
             poseStack.translate(0.5, 0.7, 0.6);
             poseStack.mulPose(Axis.XP.rotationDegrees(270));
             poseStack.mulPose(Axis.YP.rotationDegrees(180));
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         stack, ItemDisplayContext.GROUND, light, overlay, poseStack, vertexConsumerProvider,
-                         blockEntity.getLevel(), 0
-                     );
+            Minecraft
+                .getInstance()
+                .getItemRenderer()
+                .renderStatic(
+                    stack,
+                    ItemDisplayContext.GROUND,
+                    light,
+                    overlay,
+                    poseStack,
+                    vertexConsumerProvider,
+                    blockEntity.getLevel(),
+                    0
+                );
             poseStack.popPose();
         }
         // floating in air
         if (!stack2.isEmpty()) {
             poseStack.pushPose();
 
-            float time = blockEntity.getLevel()
-                                    .getGameTime() % 50000 + tickDelta;
+            float time = blockEntity
+                .getLevel()
+                .getGameTime() % 50000 + tickDelta;
             double height = Math.sin((time) / 8.0) / 6.0; // item height
 
             poseStack.translate(0.5, 1.0 + height, 0.5);
             poseStack.mulPose(client.getBlockEntityRenderDispatcher().camera.rotation());
             poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         stack2, ItemDisplayContext.GROUND, light, overlay, poseStack, vertexConsumerProvider,
-                         blockEntity.getLevel(), 0
-                     );
+            Minecraft
+                .getInstance()
+                .getItemRenderer()
+                .renderStatic(
+                    stack2,
+                    ItemDisplayContext.GROUND,
+                    light,
+                    overlay,
+                    poseStack,
+                    vertexConsumerProvider,
+                    blockEntity.getLevel(),
+                    0
+                );
             poseStack.popPose();
         }
     }

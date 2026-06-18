@@ -9,8 +9,11 @@ public class PastelContainerLang {
         provider.add("container.pastel.bedrock_anvil.tooltip", "Indestructible. Free renaming, unlimited");
         provider.add("container.pastel.bedrock_anvil.tooltip2", "repair cap & able to add Lore to Items");
         provider.add("container.pastel.bedrock_anvil.tooltip3", "Add pigment to items to color their name");
-        provider.add(
-            "container.pastel.modonomicon.crystallarieum.catalyst", "Catalysts -\nGro.Speed:\nInk Drain:\nDepletion:");
+        provider
+            .add(
+                "container.pastel.modonomicon.crystallarieum.catalyst",
+                "Catalysts -\nGro.Speed:\nInk Drain:\nDepletion:"
+            );
 
         provider.add("container.pastel.rei.anvil_crushing.high_force_required", "High force required");
         provider.add("container.pastel.rei.anvil_crushing.low_force_required", "Low force required");
@@ -28,10 +31,11 @@ public class PastelContainerLang {
         provider.add("container.pastel.rei.crystallarieum.ink_consumption", "Ink Drain:");
         provider.add("container.pastel.rei.crystallarieum.used_up", "Depletion:");
         provider.add("container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds", "%f seconds per stage");
-        provider.add(
-            "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional",
-            "%f sec - catalyst opt."
-        );
+        provider
+            .add(
+                "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional",
+                "%f sec - catalyst opt."
+            );
         provider.add("container.pastel.rei.crystallarieum.requires_catalyst", "Requires Catalyst");
         provider.add("container.pastel.rei.dragonrot_converting.title", "Dragonrot Dipping");
         provider.add("container.pastel.rei.enchanter_recipe", "Enchanter Recipe");

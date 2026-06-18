@@ -17,12 +17,17 @@ public class WeaponArmorItemModels {
         PastelModelHelper.ITEM.simple(generators, PastelItems.ONYX_GLASS_ARROW);
         PastelModelHelper.ITEM.simple(generators, PastelItems.MOONSTONE_GLASS_ARROW);
 
-        PastelModelHelper.ITEM.handheld(generators,PastelItems.DARK_STAKE);
+        PastelModelHelper.ITEM.handheld(generators, PastelItems.DARK_STAKE);
 
-        PastelModelHelper.registerLayeredItemModel(
-            generators, PastelItems.NIGHTFALLS_BLADE.get(), PastelModels.HANDHELD_THREE_LAYERS, "", "_tint",
-            "_overlay"
-        );
+        PastelModelHelper
+            .registerLayeredItemModel(
+                generators,
+                PastelItems.NIGHTFALLS_BLADE.get(),
+                PastelModels.HANDHELD_THREE_LAYERS,
+                "",
+                "_tint",
+                "_overlay"
+            );
 
         PastelModelHelper.ITEM.simple(generators, PastelItems.BEDROCK_HELMET);
         PastelModelHelper.ITEM.simple(generators, PastelItems.BEDROCK_CHESTPLATE);

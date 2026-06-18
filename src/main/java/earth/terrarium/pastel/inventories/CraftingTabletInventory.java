@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 public class CraftingTabletInventory extends TransientCraftingContainer {
 
     private final NonNullList<ItemStack> gemAndOutputStacks;
+
     private final AbstractContainerMenu handler;
 
     public CraftingTabletInventory(AbstractContainerMenu handler) {

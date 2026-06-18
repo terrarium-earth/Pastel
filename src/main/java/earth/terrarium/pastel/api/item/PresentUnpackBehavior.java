@@ -17,6 +17,11 @@ public interface PresentUnpackBehavior {
      * @return the resulting stack after unpacking. Can be the original stack, ItemStack.AIR, or a new stack altogether
      */
     ItemStack onPresentUnpack(
-        ItemStack stack, PresentBlockEntity presentBlockEntity, ServerLevel world, BlockPos pos, RandomSource random);
+        ItemStack stack,
+        PresentBlockEntity presentBlockEntity,
+        ServerLevel world,
+        BlockPos pos,
+        RandomSource random
+    );
 
 }

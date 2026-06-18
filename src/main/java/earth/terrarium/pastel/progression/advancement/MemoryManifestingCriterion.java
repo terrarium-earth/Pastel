@@ -32,16 +32,22 @@ public class MemoryManifestingCriterion extends SimpleCriterionTrigger<MemoryMan
         ContextAwarePredicate manifestedEntity
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("manifested_entity", ContextAwarePredicate.create())
-                                                                                                                                         .forGetter(Conditions::manifestedEntity)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        EntityPredicate.ADVANCEMENT_CODEC
+                            .optionalFieldOf("manifested_entity", ContextAwarePredicate.create())
+                            .forGetter(Conditions::manifestedEntity)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(LootContext context) {
             return this.manifestedEntity.matches(context);

@@ -21,6 +21,7 @@ import java.util.Set;
 public class DivinityStatusEffect extends MobEffect {
 
     public static final int CIRCLET_AMPLIFIER = 0;
+
     public static final int ASCENSION_AMPLIFIER = 1;
 
     public DivinityStatusEffect(MobEffectCategory statusEffectCategory, int color) {
@@ -30,10 +31,15 @@ public class DivinityStatusEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         Level world = entity.level();
-        if (amplifier > CIRCLET_AMPLIFIER &&
-            world.isClientSide) { // the circlet gives divinity 0, not showing effects; the ascension one does
-            ParticleHelper.playParticleWithPatternAndVelocityClient(
-                entity.level(), entity.position(), ColoredCraftingParticleEffect.RED, VectorPattern.EIGHT, 0.2);
+        if (amplifier > CIRCLET_AMPLIFIER && world.isClientSide) { // the circlet gives divinity 0, not showing effects; the ascension one does
+            ParticleHelper
+                .playParticleWithPatternAndVelocityClient(
+                    entity.level(),
+                    entity.position(),
+                    ColoredCraftingParticleEffect.RED,
+                    VectorPattern.EIGHT,
+                    0.2
+                );
         }
         boolean doEffects = 40 >> amplifier == 0;
         if (entity instanceof Player player) {
@@ -41,8 +47,9 @@ public class DivinityStatusEffect extends MobEffect {
                 PastelCriteria.DIVINITY_TICK.trigger((ServerPlayer) player);
             }
             if (doEffects) {
-                player.getFoodData()
-                      .eat(1 + amplifier, 0.25F);
+                player
+                    .getFoodData()
+                    .eat(1 + amplifier, 0.25F);
             }
         }
 

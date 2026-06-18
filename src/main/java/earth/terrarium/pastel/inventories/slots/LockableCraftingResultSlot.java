@@ -10,7 +10,13 @@ public class LockableCraftingResultSlot extends ResultSlot {
     boolean locked;
 
     public LockableCraftingResultSlot(
-        Container craftingResultInventory, int index, int x, int y, Player player, TransientCraftingContainer input) {
+        Container craftingResultInventory,
+        int index,
+        int x,
+        int y,
+        Player player,
+        TransientCraftingContainer input
+    ) {
         super(player, input, craftingResultInventory, index, x, y);
         this.locked = false;
     }

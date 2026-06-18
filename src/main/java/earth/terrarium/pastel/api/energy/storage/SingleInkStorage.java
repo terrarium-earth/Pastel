@@ -13,7 +13,9 @@ import static earth.terrarium.pastel.helpers.Support.getShortenedNumberString;
 public class SingleInkStorage implements InkStorage {
 
     protected final long maxEnergy;
+
     protected InkColor storedColor;
+
     protected long storedEnergy;
 
     /**
@@ -98,7 +100,9 @@ public class SingleInkStorage implements InkStorage {
     @Override
     @Deprecated
     public void setEnergy(Map<InkColor, Long> colors, long total) {
-        for (Map.Entry<InkColor, Long> color : colors.entrySet()) {
+        for (
+            Map.Entry<InkColor, Long> color : colors.entrySet()
+        ) {
             long value = color.getValue();
             if (value > 0) {
                 this.storedColor = color.getKey();
@@ -134,10 +138,14 @@ public class SingleInkStorage implements InkStorage {
 
     @Override
     public void addTooltip(List<Component> tooltip) {
-        tooltip.add(Component.translatable(
-            "item.pastel.ink_storage.stores_up_to_ink_per_type",
-            getShortenedNumberString(this.maxEnergy)
-        ));
+        tooltip
+            .add(
+                Component
+                    .translatable(
+                        "item.pastel.ink_storage.stores_up_to_ink_per_type",
+                        getShortenedNumberString(this.maxEnergy)
+                    )
+            );
         if (this.storedEnergy > 0) {
             InkStorage.addInkStoreBulletTooltip(tooltip, this.storedColor, this.storedEnergy);
         }

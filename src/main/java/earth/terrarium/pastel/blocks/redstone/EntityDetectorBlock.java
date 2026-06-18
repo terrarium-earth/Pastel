@@ -24,8 +24,12 @@ public class EntityDetectorBlock extends DetectorBlock {
 
     @Override
     protected void updateState(BlockState state, Level world, BlockPos pos) {
-        List<LivingEntity> entities = world.getEntities(
-            EntityTypeTest.forClass(LivingEntity.class), getDetectionBox(pos), LivingEntity::isAlive);
+        List<LivingEntity> entities = world
+            .getEntities(
+                EntityTypeTest.forClass(LivingEntity.class),
+                getDetectionBox(pos),
+                LivingEntity::isAlive
+            );
 
         int power = Math.min(entities.size(), 15);
 

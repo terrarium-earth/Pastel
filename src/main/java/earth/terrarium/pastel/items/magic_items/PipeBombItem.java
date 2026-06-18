@@ -54,11 +54,14 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
         return ItemUtils.startUsingInstantly(world, user, hand);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void startSoundInstance(Player user) {
-        Minecraft.getInstance()
-                 .getSoundManager()
-                 .play(new PipeBombChargingSoundInstance(user));
+        Minecraft
+            .getInstance()
+            .getSoundManager()
+            .play(new PipeBombChargingSoundInstance(user));
     }
 
     @Override
@@ -103,26 +106,51 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
         Entity owner = tryGetOwner(stack, world);
 
         if (target != null)
-            target.hurt(
-                PastelDamageTypes.incandescence(world, owner instanceof LivingEntity living ? living : null), 200F);
-        world.explode(
-            null, PastelDamageTypes.incandescence(world), new ExplosionDamageCalculator(), pos.x(), pos.y(), pos.z(),
-            7.5F, true, Level.ExplosionInteraction.NONE
-        );
+            target
+                .hurt(
+                    PastelDamageTypes.incandescence(world, owner instanceof LivingEntity living ? living : null),
+                    200F
+                );
+        world
+            .explode(
+                null,
+                PastelDamageTypes.incandescence(world),
+                new ExplosionDamageCalculator(),
+                pos.x(),
+                pos.y(),
+                pos.z(),
+                7.5F,
+                true,
+                Level.ExplosionInteraction.NONE
+            );
     }
 
     public Entity tryGetOwner(ItemStack stack, ServerLevel world) {
         var profile = stack.get(DataComponents.PROFILE);
-        if (profile == null || profile.id()
-                                      .isEmpty())
+        if (profile == null || profile
+            .id()
+            .isEmpty())
             return null;
-        return world.getEntity(profile.id()
-                                      .get());
+        return world
+            .getEntity(
+                profile
+                    .id()
+                    .get()
+            );
     }
 
     public static void prime(ItemStack stack, Level world, Vec3 pos, @Nullable Entity user) {
-        world.playSound(
-            null, pos.x(), pos.y(), pos.z(), PastelSounds.INCANDESCENT_ARM, SoundSource.PLAYERS, 2F, 0.9F);
+        world
+            .playSound(
+                null,
+                pos.x(),
+                pos.y(),
+                pos.z(),
+                PastelSounds.INCANDESCENT_ARM,
+                SoundSource.PLAYERS,
+                2F,
+                0.9F
+            );
         stack.set(PastelDataComponentTypes.TIMESTAMP, world.getGameTime());
         if (user instanceof Player player) {
             stack.set(DataComponents.PROFILE, new ResolvableProfile(player.getGameProfile()));
@@ -156,12 +184,24 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.pipe_bomb.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.pipe_bomb.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.pipe_bomb.tooltip3")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.pipe_bomb.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.pipe_bomb.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.pipe_bomb.tooltip3")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
 }

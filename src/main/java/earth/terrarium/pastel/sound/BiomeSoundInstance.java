@@ -16,21 +16,28 @@ import org.jetbrains.annotations.Nullable;
 
 public class BiomeSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
-    @Nullable
-    public static BiomeSoundInstance WIND_HIGH = null;
-    @Nullable
-    public static BiomeSoundInstance WIND_LOW = null;
-    @Nullable
-    public static BiomeSoundInstance SHOWER = null;
-    @Nullable
-    public static BiomeSoundInstance LAMENTS = null;
+    @Nullable public static BiomeSoundInstance WIND_HIGH = null;
+
+    @Nullable public static BiomeSoundInstance WIND_LOW = null;
+
+    @Nullable public static BiomeSoundInstance SHOWER = null;
+
+    @Nullable public static BiomeSoundInstance LAMENTS = null;
+
     private static boolean clear = true;
+
     private final Minecraft client = Minecraft.getInstance();
+
     private static final int MAX_DURATION = 80;
+
     private final ResourceKey<Biome> biome;
+
     private final float volumeMod;
+
     private int biomeTicks = 1;
+
     private final boolean deepPitch;
+
     private boolean finished;
 
     protected BiomeSoundInstance(ResourceKey<Biome> biome, SoundEvent sound, float volumeMod, boolean altMod) {
@@ -55,8 +62,9 @@ public class BiomeSoundInstance extends AbstractSoundInstance implements Tickabl
 
         var world = camera.level();
 
-        if (world.getBiome(camera.blockPosition())
-                 .is(biome) && biomeTicks < MAX_DURATION) {
+        if (world
+            .getBiome(camera.blockPosition())
+            .is(biome) && biomeTicks < MAX_DURATION) {
             biomeTicks++;
         } else if (biomeTicks > 0) {
             biomeTicks--;
@@ -121,34 +129,51 @@ public class BiomeSoundInstance extends AbstractSoundInstance implements Tickabl
         if (biome.is(PastelBiomes.HOWLING_SPIRES)) {
             if (WIND_HIGH == null) {
                 WIND_HIGH = new BiomeSoundInstance(
-                    PastelBiomes.HOWLING_SPIRES, PastelSounds.HOWLING_WIND_HIGH, 0.45F, false);
-                client.getSoundManager()
-                      .play(WIND_HIGH);
+                    PastelBiomes.HOWLING_SPIRES,
+                    PastelSounds.HOWLING_WIND_HIGH,
+                    0.45F,
+                    false
+                );
+                client
+                    .getSoundManager()
+                    .play(WIND_HIGH);
             }
 
             if (WIND_LOW == null) {
                 WIND_LOW = new BiomeSoundInstance(
-                    PastelBiomes.HOWLING_SPIRES, PastelSounds.HOWLING_WIND_LOW, 1.3F, true);
-                client.getSoundManager()
-                      .play(WIND_LOW);
+                    PastelBiomes.HOWLING_SPIRES,
+                    PastelSounds.HOWLING_WIND_LOW,
+                    1.3F,
+                    true
+                );
+                client
+                    .getSoundManager()
+                    .play(WIND_LOW);
             }
         } else if (biome.is(PastelBiomes.DEEP_DRIPSTONE_CAVES)) {
             if (SHOWER == null) {
                 SHOWER = new BiomeSoundInstance(
-                    PastelBiomes.DEEP_DRIPSTONE_CAVES, PastelSounds.SHOWER, 0.425F, false);
-                client.getSoundManager()
-                      .play(SHOWER);
+                    PastelBiomes.DEEP_DRIPSTONE_CAVES,
+                    PastelSounds.SHOWER,
+                    0.425F,
+                    false
+                );
+                client
+                    .getSoundManager()
+                    .play(SHOWER);
             }
         } else if (biome.is(PastelBiomes.DRAGONROT_SWAMP)) {
             if (LAMENTS == null) {
                 LAMENTS = new BiomeSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSounds.LAMENTS, 1F, true);
-                client.getSoundManager()
-                      .play(LAMENTS);
+                client
+                    .getSoundManager()
+                    .play(LAMENTS);
             }
             if (SHOWER == null) {
                 SHOWER = new BiomeSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSounds.SHOWER, 1F, false);
-                client.getSoundManager()
-                      .play(SHOWER);
+                client
+                    .getSoundManager()
+                    .play(SHOWER);
             }
         }
     }

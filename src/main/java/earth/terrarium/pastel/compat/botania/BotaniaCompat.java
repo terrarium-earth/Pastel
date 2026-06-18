@@ -26,17 +26,24 @@ import java.util.List;
 
 import static earth.terrarium.pastel.registries.PastelItems.item;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+    "unused"
+)
 public class BotaniaCompat extends PastelIntegrationPacks.ModIntegrationPack {
-    public static void generateItemModels(ItemModelGenerators generators){
-        PastelModelHelper.ITEM.simple(generators,LEAST_BLACK_LOTUS);
-        PastelModelHelper.ITEM.simple(generators,BLACKEST_LOTUS);
+    public static void generateItemModels(ItemModelGenerators generators) {
+        PastelModelHelper.ITEM.simple(generators, LEAST_BLACK_LOTUS);
+        PastelModelHelper.ITEM.simple(generators, BLACKEST_LOTUS);
     }
 
-    public static DeferredItem<Item> LEAST_BLACK_LOTUS = PastelItems.register(
-        item("least_black_lotus", () -> new LeastBlackLotusItem(new Item.Properties()), InkColors.BLACK));
-    public static DeferredItem<Item> BLACKEST_LOTUS = PastelItems.register(
-        item("blackest_lotus", () -> new BlackestLotusItem(new Item.Properties()), InkColors.BLACK));
+    public static DeferredItem<Item> LEAST_BLACK_LOTUS = PastelItems
+        .register(
+            item("least_black_lotus", () -> new LeastBlackLotusItem(new Item.Properties()), InkColors.BLACK)
+        );
+
+    public static DeferredItem<Item> BLACKEST_LOTUS = PastelItems
+        .register(
+            item("blackest_lotus", () -> new BlackestLotusItem(new Item.Properties()), InkColors.BLACK)
+        );
 
     private static void onServerStarted(ServerStartedEvent event) {
         ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.overgrowthSeed, InkColors.LIME);
@@ -46,40 +53,43 @@ public class BotaniaCompat extends PastelIntegrationPacks.ModIntegrationPack {
     }
 
     private static void onRegisterCaps(RegisterCapabilitiesEvent event) {
-        event.registerItem(
-            ItemProvider.CAPABILITY, (ignored, ignored2) -> new ItemProvider() {
-                @Override
-                public int getItemCount(Player player, ItemStack stack, Item requestedItem) {
-                    if (requestedItem instanceof BlockItem blockItem) {
-                        Block storedBlock = BlackHoleTalismanItem.getBlock(stack);
-                        if (blockItem.getBlock() == storedBlock) {
-                            return BlackHoleTalismanItem.getBlockCount(stack);
+        event
+            .registerItem(
+                ItemProvider.CAPABILITY,
+                (ignored, ignored2) -> new ItemProvider() {
+                    @Override
+                    public int getItemCount(Player player, ItemStack stack, Item requestedItem) {
+                        if (requestedItem instanceof BlockItem blockItem) {
+                            Block storedBlock = BlackHoleTalismanItem.getBlock(stack);
+                            if (blockItem.getBlock() == storedBlock) {
+                                return BlackHoleTalismanItem.getBlockCount(stack);
+                            }
                         }
+                        return 0;
                     }
-                    return 0;
-                }
 
-                @Override
-                public List<Item> getContainedItems(Player player, ItemStack stack) {
-                    Block storedBlock = BlackHoleTalismanItem.getBlock(stack);
-                    return storedBlock==null?List.of():List.of(storedBlock.asItem());
-                }
-
-                @Override
-                public int provideItems(Player player, ItemStack stack, Item requestedItem, int amount) {
-                    if (requestedItem instanceof BlockItem blockItem) {
+                    @Override
+                    public List<Item> getContainedItems(Player player, ItemStack stack) {
                         Block storedBlock = BlackHoleTalismanItem.getBlock(stack);
-                        if (blockItem.getBlock() == storedBlock) {
-                            int storedAmount = BlackHoleTalismanItem.getBlockCount(stack);
-                            int amountToRemove = Math.min(storedAmount, amount);
-                            BlackHoleTalismanItem.setCount(stack, storedAmount - amountToRemove);
-                            return amountToRemove;
-                        }
+                        return storedBlock == null ? List.of() : List.of(storedBlock.asItem());
                     }
-                    return 0;
-                }
-            }, BotaniaItems.blackHoleTalisman
-        );
+
+                    @Override
+                    public int provideItems(Player player, ItemStack stack, Item requestedItem, int amount) {
+                        if (requestedItem instanceof BlockItem blockItem) {
+                            Block storedBlock = BlackHoleTalismanItem.getBlock(stack);
+                            if (blockItem.getBlock() == storedBlock) {
+                                int storedAmount = BlackHoleTalismanItem.getBlockCount(stack);
+                                int amountToRemove = Math.min(storedAmount, amount);
+                                BlackHoleTalismanItem.setCount(stack, storedAmount - amountToRemove);
+                                return amountToRemove;
+                            }
+                        }
+                        return 0;
+                    }
+                },
+                BotaniaItems.blackHoleTalisman
+            );
     }
 
     @Override
@@ -87,13 +97,16 @@ public class BotaniaCompat extends PastelIntegrationPacks.ModIntegrationPack {
 
         // registering it late, since Botania might not have been initialized yet
         NeoForge.EVENT_BUS.addListener(BotaniaCompat::onServerStarted);
-        ModLoadingContext.get()
-                         .getActiveContainer()
-                         .getEventBus()
-                         .addListener(BotaniaCompat::onRegisterCaps);
+        ModLoadingContext
+            .get()
+            .getActiveContainer()
+            .getEventBus()
+            .addListener(BotaniaCompat::onRegisterCaps);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     @Override
     public void registerClient() {
 

@@ -27,13 +27,17 @@ public class LifeDrainStatusEffect extends MobEffect {
 
         AttributeInstance instance = entity.getAttribute(Attributes.MAX_HEALTH);
         if (instance != null) {
-            var dragon = entity.getType()
-                               .is(PastelEntityTypeTags.DRACONIC);
+            var dragon = entity
+                .getType()
+                .is(PastelEntityTypeTags.DRACONIC);
             AttributeModifier currentMod = instance.getModifier(ATTRIBUTE_ID);
             if (currentMod != null) {
                 instance.removeModifier(currentMod);
                 AttributeModifier newModifier = new AttributeModifier(
-                    ATTRIBUTE_ID, currentMod.amount() - (dragon ? 2 : 1), AttributeModifier.Operation.ADD_VALUE);
+                    ATTRIBUTE_ID,
+                    currentMod.amount() - (dragon ? 2 : 1),
+                    AttributeModifier.Operation.ADD_VALUE
+                );
                 instance.addPermanentModifier(newModifier);
                 instance.getValue(); // recalculate final value
                 if (entity.getHealth() > entity.getMaxHealth()) {

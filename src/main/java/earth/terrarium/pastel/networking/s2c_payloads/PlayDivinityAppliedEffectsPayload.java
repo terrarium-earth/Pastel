@@ -21,12 +21,17 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayDivinityAppliedEffectsPayload() implements CustomPacketPayload {
 
-    public static final Type<PlayDivinityAppliedEffectsPayload> ID = PastelC2SPackets.makeId(
-        "play_divinity_applied_effects");
-    public static final StreamCodec<FriendlyByteBuf, PlayDivinityAppliedEffectsPayload> CODEC = StreamCodec.of(
-        (buf, value) -> {
-        }, buf -> new PlayDivinityAppliedEffectsPayload()
-    );
+    public static final Type<PlayDivinityAppliedEffectsPayload> ID = PastelC2SPackets
+        .makeId(
+            "play_divinity_applied_effects"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, PlayDivinityAppliedEffectsPayload> CODEC = StreamCodec
+        .of(
+            (buf, value) -> {
+            },
+            buf -> new PlayDivinityAppliedEffectsPayload()
+        );
 
     public static void playDivinityAppliedEffects(ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, new PlayDivinityAppliedEffectsPayload());
@@ -36,19 +41,44 @@ public record PlayDivinityAppliedEffectsPayload() implements CustomPacketPayload
         execute(context.player());
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     private static void execute(Player player) {
         var level = player.level();
         var client = Minecraft.getInstance();
         client.particleEngine.createTrackingEmitter(player, PastelParticleTypes.DIVINITY, 30);
-        client.gameRenderer.displayItemActivation(PastelItems.DIVINATION_HEART.get()
-                                                                              .getDefaultInstance());
-        level.playSound(
-            null, player.blockPosition(), PastelSounds.FAILING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
-        ParticleHelper.playParticleWithPatternAndVelocityClient(
-            level, player.position(), ColoredCraftingParticleEffect.WHITE, VectorPattern.SIXTEEN, 0.4);
-        ParticleHelper.playParticleWithPatternAndVelocityClient(
-            level, player.position(), ColoredCraftingParticleEffect.RED, VectorPattern.SIXTEEN, 0.4);
+        client.gameRenderer
+            .displayItemActivation(
+                PastelItems.DIVINATION_HEART
+                    .get()
+                    .getDefaultInstance()
+            );
+        level
+            .playSound(
+                null,
+                player.blockPosition(),
+                PastelSounds.FAILING_PLACED,
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F
+            );
+        ParticleHelper
+            .playParticleWithPatternAndVelocityClient(
+                level,
+                player.position(),
+                ColoredCraftingParticleEffect.WHITE,
+                VectorPattern.SIXTEEN,
+                0.4
+            );
+        ParticleHelper
+            .playParticleWithPatternAndVelocityClient(
+                level,
+                player.position(),
+                ColoredCraftingParticleEffect.RED,
+                VectorPattern.SIXTEEN,
+                0.4
+            );
     }
 
     @Override

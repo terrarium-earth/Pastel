@@ -24,8 +24,9 @@ public class StackableStewItem extends Item {
             }
 
             if (playerEntity != null) {
-                playerEntity.getInventory()
-                            .add(new ItemStack(Items.BOWL));
+                playerEntity
+                    .getInventory()
+                    .add(new ItemStack(Items.BOWL));
             }
         }
 

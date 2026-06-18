@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
-
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
@@ -13,6 +12,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
     protected static final int DEFAULT_SPAWN_COUNT = 4;
+
     protected static final int MAX_SPAWN_COUNT = 16;
 
     public SpawnerSpawnCountChangeRecipe() {
@@ -21,13 +21,17 @@ public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
 
     @Override
     public boolean canCraftWithBlockEntityTag(
-        CustomData spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
+        CustomData spawnerBlockEntityNbt,
+        ItemStack leftBowlStack,
+        ItemStack rightBowlStack
+    ) {
         if (spawnerBlockEntityNbt == null) {
             return true;
         }
         if (spawnerBlockEntityNbt.contains("SpawnCount")) {
-            return spawnerBlockEntityNbt.copyTag()
-                                        .getShort("SpawnCount") < MAX_SPAWN_COUNT;
+            return spawnerBlockEntityNbt
+                .copyTag()
+                .getShort("SpawnCount") < MAX_SPAWN_COUNT;
         }
         return true;
     }
@@ -44,19 +48,22 @@ public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
 
     @Override
     public CompoundTag getSpawnerResultNbt(
-        CompoundTag spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
+        CompoundTag spawnerBlockEntityNbt,
+        ItemStack firstBowlStack,
+        ItemStack secondBowlStack
+    ) {
         // Default spawner tag:
-		/* BlockEntityTag: {
-			MaxNearbyEntities: 6s,
-			RequiredPlayerRange: 16s,
-			SpawnCount: 4s,
-			SpawnData: {entity: {id: "minecraft:xxx"}},
-			MaxSpawnDelay: 800s,
-			SpawnRange: 4s,
-			MinSpawnDelay: 200s,
-			SpawnPotentials: []
-		   }
-		 */
+        /* BlockEntityTag: {
+        	MaxNearbyEntities: 6s,
+        	RequiredPlayerRange: 16s,
+        	SpawnCount: 4s,
+        	SpawnData: {entity: {id: "minecraft:xxx"}},
+        	MaxSpawnDelay: 800s,
+        	SpawnRange: 4s,
+        	MinSpawnDelay: 200s,
+        	SpawnPotentials: []
+           }
+         */
 
         short spawnCount = DEFAULT_SPAWN_COUNT;
         if (spawnerBlockEntityNbt.contains("SpawnCount", Tag.TAG_SHORT)) {

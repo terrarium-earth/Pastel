@@ -36,10 +36,12 @@ public class SleepStatusEffect extends MobEffect {
             return Float.MAX_VALUE;
 
         float scaling;
-        if (entity instanceof Player player && player.level()
-                                                     .isClientSide()) {
-            scaling = (float) MiscPlayerData.get(player)
-                                            .getLastSyncedSleepPotency();
+        if (entity instanceof Player player && player
+            .level()
+            .isClientSide()) {
+            scaling = (float) MiscPlayerData
+                .get(player)
+                .getLastSyncedSleepPotency();
         } else {
             scaling = (float) entity.getAttributeValue(PastelEntityAttributes.MENTAL_PRESENCE);
         }
@@ -71,8 +73,11 @@ public class SleepStatusEffect extends MobEffect {
      * @return -1 = false
      */
     public static float getGeneralSleepResistanceIfEntityHasSoporificEffect(LivingEntity entity) {
-        if (!isConstruct(entity.getType()) && PastelMobEffectTags.hasEffectWithTag(
-            entity, PastelMobEffectTags.SOPORIFIC)) {
+        if (!isConstruct(entity.getType()) && PastelMobEffectTags
+            .hasEffectWithTag(
+                entity,
+                PastelMobEffectTags.SOPORIFIC
+            )) {
             return getSleepResistance(entity.getEffect(getStrongestSleepEffect(entity)), entity);
         }
         return -1F;

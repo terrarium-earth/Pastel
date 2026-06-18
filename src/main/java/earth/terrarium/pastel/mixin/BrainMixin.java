@@ -13,7 +13,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Brain.class)
+@Mixin(
+    Brain.class
+)
 public abstract class BrainMixin<E extends LivingEntity> {
 
     @Shadow
@@ -22,7 +24,11 @@ public abstract class BrainMixin<E extends LivingEntity> {
     @Shadow
     public abstract <U> void eraseMemory(MemoryModuleType<U> type);
 
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "tick", at = @At(
+            "HEAD"
+        ), cancellable = true
+    )
     public void slowDownBrainTicks(ServerLevel world, E entity, CallbackInfo ci) {
         if (entity.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelMobEffects.FATAL_SLUMBER)) {
             ci.cancel();
@@ -34,12 +40,14 @@ public abstract class BrainMixin<E extends LivingEntity> {
             return;
 
         var scaling = SleepStatusEffect.getSleepScaling(entity);
-        if (scaling <= 0 || entity.getRandom()
-                                  .nextFloat() > Math.min(scaling * 0.05, 0.3))
+        if (scaling <= 0 || entity
+            .getRandom()
+            .nextFloat() > Math.min(scaling * 0.05, 0.3))
             return;
 
-        if (entity.getRandom()
-                  .nextFloat() < scaling * 0.5) {
+        if (entity
+            .getRandom()
+            .nextFloat() < scaling * 0.5) {
             eraseMemory(MemoryModuleType.ANGRY_AT);
             setActiveActivityIfPossible(Activity.REST);
         }

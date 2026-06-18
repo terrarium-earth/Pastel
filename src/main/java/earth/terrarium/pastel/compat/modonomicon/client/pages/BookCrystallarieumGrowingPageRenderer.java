@@ -23,56 +23,75 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Iterator;
 
 public class BookCrystallarieumGrowingPageRenderer
-    extends BookGatedRecipePageRenderer<CrystallarieumRecipe, BookGatedRecipePage<CrystallarieumRecipe>> {
+    extends
+    BookGatedRecipePageRenderer<CrystallarieumRecipe, BookGatedRecipePage<CrystallarieumRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/modonomicon/crystallarieum.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/modonomicon/crystallarieum.png"
+        );
 
     private static BookTextHolder catalystText;
+
     private BookTextHolder craftingTimeText1 = null;
+
     private BookTextHolder craftingTimeText2 = null;
 
     public BookCrystallarieumGrowingPageRenderer(BookGatedRecipePage<CrystallarieumRecipe> page) {
         super(page);
 
-        ResourceLocation font = BookDataManager.Client.get()
-                                                      .safeFont(this.page.getBook()
-                                                                         .getFont());
+        ResourceLocation font = BookDataManager.Client
+            .get()
+            .safeFont(
+                this.page
+                    .getBook()
+                    .getFont()
+            );
 
         if (catalystText == null) {
             catalystText = new BookTextHolder(
-                Component.translatable("container.pastel.modonomicon.crystallarieum.catalyst")
-                         .withStyle(s -> s.withFont(font)));
+                Component
+                    .translatable("container.pastel.modonomicon.crystallarieum.catalyst")
+                    .withStyle(s -> s.withFont(font))
+            );
         }
 
         if (page.getRecipe1() != null) {
-            craftingTimeText1 = new BookTextHolder(Component.translatable(
-                                                                page.getRecipe1()
-                                                                    .value()
-                                                                    .growsWithoutCatalyst()
-                                                                ? "container.pastel.rei.crystallarieum" +
-                                                                  ".crafting_time_per_stage_seconds_catalyst_optional"
-                                                                : "container.pastel.rei.crystallarieum" +
-                                                                  ".crafting_time_per_stage_seconds", page.getRecipe1()
-                                                                                                                                             .value()
-                                                                                                                                             .getSecondsPerGrowthStage()
-                                                            )
-                                                            .withStyle(s -> s.withFont(font)));
+            craftingTimeText1 = new BookTextHolder(
+                Component
+                    .translatable(
+                        page
+                            .getRecipe1()
+                            .value()
+                            .growsWithoutCatalyst()
+                                ? "container.pastel.rei.crystallarieum" + ".crafting_time_per_stage_seconds_catalyst_optional"
+                                : "container.pastel.rei.crystallarieum" + ".crafting_time_per_stage_seconds",
+                        page
+                            .getRecipe1()
+                            .value()
+                            .getSecondsPerGrowthStage()
+                    )
+                    .withStyle(s -> s.withFont(font))
+            );
         }
 
         if (page.getRecipe2() != null) {
-            craftingTimeText2 = new BookTextHolder(Component.translatable(
-                                                                page.getRecipe2()
-                                                                    .value()
-                                                                    .growsWithoutCatalyst()
-                                                                ? "container.pastel.rei.crystallarieum" +
-                                                                  ".crafting_time_per_stage_seconds_catalyst_optional"
-                                                                : "container.pastel.rei.crystallarieum" +
-                                                                  ".crafting_time_per_stage_seconds", page.getRecipe2()
-                                                                                                                                             .value()
-                                                                                                                                             .getSecondsPerGrowthStage()
-                                                            )
-                                                            .withStyle(s -> s.withFont(font)));
+            craftingTimeText2 = new BookTextHolder(
+                Component
+                    .translatable(
+                        page
+                            .getRecipe2()
+                            .value()
+                            .growsWithoutCatalyst()
+                                ? "container.pastel.rei.crystallarieum" + ".crafting_time_per_stage_seconds_catalyst_optional"
+                                : "container.pastel.rei.crystallarieum" + ".crafting_time_per_stage_seconds",
+                        page
+                            .getRecipe2()
+                            .value()
+                            .getSecondsPerGrowthStage()
+                    )
+                    .withStyle(s -> s.withFont(font))
+            );
         }
     }
 
@@ -83,8 +102,13 @@ public class BookCrystallarieumGrowingPageRenderer
 
     @Override
     protected void drawRecipe(
-        GuiGraphics drawContext, RecipeHolder<CrystallarieumRecipe> recipeEntry, int recipeX, int recipeY, int mouseX,
-        int mouseY, boolean second
+        GuiGraphics drawContext,
+        RecipeHolder<CrystallarieumRecipe> recipeEntry,
+        int recipeX,
+        int recipeY,
+        int mouseX,
+        int mouseY,
+        boolean second
     ) {
         CrystallarieumRecipe recipe = recipeEntry.value();
         Level world = Minecraft.getInstance().level;
@@ -100,54 +124,100 @@ public class BookCrystallarieumGrowingPageRenderer
         int offsetPerReagent = 18;
         Ingredient ingredient = recipe.getIngredientStack();
         parentScreen.renderIngredient(drawContext, recipeX + startX, recipeY + 5, mouseX, mouseY, ingredient);
-        parentScreen.renderFluidStack(
-            drawContext, recipeX + startX - offsetPerReagent - 4, recipeY + 5, mouseX, mouseY,
-            new NeoFluidHolder(recipe.getFluidMedium())
-        );
-        drawContext.blit(
-            BACKGROUND_TEXTURE, recipeX + startX - offsetPerReagent - 7, recipeY + 1, 0, 0, 53, 25, 128, 128);
-
+        parentScreen
+            .renderFluidStack(
+                drawContext,
+                recipeX + startX - offsetPerReagent - 4,
+                recipeY + 5,
+                mouseX,
+                mouseY,
+                new NeoFluidHolder(recipe.getFluidMedium())
+            );
+        drawContext
+            .blit(
+                BACKGROUND_TEXTURE,
+                recipeX + startX - offsetPerReagent - 7,
+                recipeY + 1,
+                0,
+                0,
+                53,
+                25,
+                128,
+                128
+            );
 
         // growth stages
-        Iterator<BlockState> it = recipe.getGrowthStages()
-                                        .iterator();
+        Iterator<BlockState> it = recipe
+            .getGrowthStages()
+            .iterator();
         BlockState growthState = it.next();
-        parentScreen.renderItemStack(
-            drawContext, recipeX + startX + offsetPerReagent, recipeY - 1, mouseX, mouseY, growthState.getBlock()
-                                                                                                      .asItem()
-                                                                                                      .getDefaultInstance()
-        );
+        parentScreen
+            .renderItemStack(
+                drawContext,
+                recipeX + startX + offsetPerReagent,
+                recipeY - 1,
+                mouseX,
+                mouseY,
+                growthState
+                    .getBlock()
+                    .asItem()
+                    .getDefaultInstance()
+            );
         int x = 0;
         while (it.hasNext()) {
-            parentScreen.renderItemStack(
-                drawContext, recipeX + 62 + offsetPerReagent * x, recipeY + 4, mouseX, mouseY, it.next()
-                                                                                                 .getBlock()
-                                                                                                 .asItem()
-                                                                                                 .getDefaultInstance()
-            );
+            parentScreen
+                .renderItemStack(
+                    drawContext,
+                    recipeX + 62 + offsetPerReagent * x,
+                    recipeY + 4,
+                    mouseX,
+                    mouseY,
+                    it
+                        .next()
+                        .getBlock()
+                        .asItem()
+                        .getDefaultInstance()
+                );
             x++;
         }
 
         // crystallarieum
-        parentScreen.renderItemStack(
-            drawContext, recipeX + startX + offsetPerReagent, recipeY + 8, mouseX, mouseY,
-            ((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor())
-        );
+        parentScreen
+            .renderItemStack(
+                drawContext,
+                recipeX + startX + offsetPerReagent,
+                recipeY + 8,
+                mouseX,
+                mouseY,
+                ((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor())
+            );
 
         // catalyst text
         renderBookTextHolder(drawContext, catalystText, 0, 42, BookEntryScreen.PAGE_WIDTH);
         renderBookTextHolder(
-            drawContext, second ? craftingTimeText2 : craftingTimeText1, 0, 82, BookEntryScreen.PAGE_WIDTH);
+            drawContext,
+            second ? craftingTimeText2 : craftingTimeText1,
+            0,
+            82,
+            BookEntryScreen.PAGE_WIDTH
+        );
 
         // the catalysts
         x = 0;
         recipeY += 4;
-        for (CrystallarieumCatalyst catalyst : recipe.getCatalysts()) {
+        for (
+            CrystallarieumCatalyst catalyst : recipe.getCatalysts()
+        ) {
             int offsetX = recipeX + startX + offsetPerReagent * x;
-            parentScreen.renderIngredient(
-                drawContext, recipeX + startX + offsetPerReagent * x, recipeY + 27, mouseX, mouseY,
-                catalyst.ingredient()
-            );
+            parentScreen
+                .renderIngredient(
+                    drawContext,
+                    recipeX + startX + offsetPerReagent * x,
+                    recipeY + 27,
+                    mouseX,
+                    mouseY,
+                    catalyst.ingredient()
+                );
 
             RenderSystem.enableBlend();
             int offset = 0;

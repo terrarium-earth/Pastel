@@ -19,7 +19,8 @@ public class MultiToolItem extends DiggerItem {
 
     public MultiToolItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
         super(
-            material, PastelBlockTags.MULTITOOL_MINEABLE,
+            material,
+            PastelBlockTags.MULTITOOL_MINEABLE,
             settings.attributes(DiggerItem.createAttributes(material, attackDamage, attackSpeed))
         );
     }
@@ -55,11 +56,19 @@ public class MultiToolItem extends DiggerItem {
         super.appendHoverText(stack, context, tooltip, type);
 
         if (itemAbilitiesEnabled(stack)) {
-            tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.right_click_actions")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.workstaff.tooltip.right_click_actions")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         } else {
-            tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.right_click_actions_disabled")
-                                 .withStyle(ChatFormatting.DARK_RED));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.workstaff.tooltip.right_click_actions_disabled")
+                        .withStyle(ChatFormatting.DARK_RED)
+                );
         }
     }
 
@@ -69,7 +78,9 @@ public class MultiToolItem extends DiggerItem {
 
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
-        return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility) || ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(
-            itemAbility) || ItemAbilities.DEFAULT_HOE_ACTIONS.contains(itemAbility);
+        return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility) || ItemAbilities.DEFAULT_SHOVEL_ACTIONS
+            .contains(
+                itemAbility
+            ) || ItemAbilities.DEFAULT_HOE_ACTIONS.contains(itemAbility);
     }
 }

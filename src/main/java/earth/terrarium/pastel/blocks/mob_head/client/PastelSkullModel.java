@@ -9,7 +9,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PastelSkullModel extends SkullModelBase {
 
     protected static final float ROTATION_VEC = (float) Math.PI / 180.0F;
@@ -22,7 +24,11 @@ public class PastelSkullModel extends SkullModelBase {
     }
 
     public void render(
-        PoseStack matrices, VertexConsumer vertices, MultiBufferSource vertexConsumerProvider, int light, int overlay,
+        PoseStack matrices,
+        VertexConsumer vertices,
+        MultiBufferSource vertexConsumerProvider,
+        int light,
+        int overlay,
         int color
     ) {
         float scale = getScale();

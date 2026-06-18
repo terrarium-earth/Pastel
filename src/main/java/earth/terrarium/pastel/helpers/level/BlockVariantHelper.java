@@ -19,11 +19,27 @@ public class BlockVariantHelper {
 
     // cache for cursedBlockColorVariant()
     private static final Map<Block, Map<DyeColor, Block>> coloredStates = new HashMap<>();
+
     // ordered color strings so "light_" variants match before non-light
-    private static final List<String> COLOR_STRINGS = List.of(
-        "light_blue", "light_gray", "white", "orange", "magenta", "yellow", "lime", "pink", "gray", "cyan", "purple",
-        "blue", "brown", "green", "red", "black"
-    );
+    private static final List<String> COLOR_STRINGS = List
+        .of(
+            "light_blue",
+            "light_gray",
+            "white",
+            "orange",
+            "magenta",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+        );
 
     public static BlockState getCursedBlockColorVariant(Level world, BlockPos blockPos, DyeColor newColor) {
         BlockEntity blockEntity = world.getBlockEntity(blockPos);
@@ -33,8 +49,8 @@ public class BlockVariantHelper {
 
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (blockState.is(PastelBlockTags.INK_EFFECT_BLACKLISTED) || blockState.getDestroySpeed(world, blockPos) ==
-                                                                     -1) {
+        if (blockState.is(PastelBlockTags.INK_EFFECT_BLACKLISTED) || blockState
+            .getDestroySpeed(world, blockPos) == -1) {
             return Blocks.AIR.defaultBlockState();
         }
 
@@ -50,11 +66,15 @@ public class BlockVariantHelper {
         ResourceLocation identifier = BuiltInRegistries.BLOCK.getKey(block);
 
         String newPath = null;
-        for (String colorString : COLOR_STRINGS) {
-            if (identifier.getPath()
-                          .contains(colorString)) {
-                newPath = identifier.getPath()
-                                    .replace(colorString, newColor.toString());
+        for (
+            String colorString : COLOR_STRINGS
+        ) {
+            if (identifier
+                .getPath()
+                .contains(colorString)) {
+                newPath = identifier
+                    .getPath()
+                    .replace(colorString, newColor.toString());
                 break;
             }
         }
@@ -82,24 +102,26 @@ public class BlockVariantHelper {
     }
 
     // cache for getCursedRepairedBlockVariant()
-    private static final Map<Block, Block> repairedStates = new HashMap<>() {{
-        put(Blocks.CRACKED_DEEPSLATE_BRICKS, Blocks.DEEPSLATE_BRICKS);
-        put(Blocks.CRACKED_DEEPSLATE_TILES, Blocks.DEEPSLATE_TILES);
-        put(Blocks.CRACKED_NETHER_BRICKS, Blocks.NETHER_BRICKS);
-        put(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE_BRICKS);
-        put(Blocks.CRACKED_STONE_BRICKS, Blocks.STONE_BRICKS);
-        put(Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_STONE_BRICKS);
+    private static final Map<Block, Block> repairedStates = new HashMap<>() {
+        {
+            put(Blocks.CRACKED_DEEPSLATE_BRICKS, Blocks.DEEPSLATE_BRICKS);
+            put(Blocks.CRACKED_DEEPSLATE_TILES, Blocks.DEEPSLATE_TILES);
+            put(Blocks.CRACKED_NETHER_BRICKS, Blocks.NETHER_BRICKS);
+            put(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE_BRICKS);
+            put(Blocks.CRACKED_STONE_BRICKS, Blocks.STONE_BRICKS);
+            put(Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_STONE_BRICKS);
 
-        put(Blocks.DAMAGED_ANVIL, Blocks.CHIPPED_ANVIL);
-        put(Blocks.CHIPPED_ANVIL, Blocks.ANVIL);
+            put(Blocks.DAMAGED_ANVIL, Blocks.CHIPPED_ANVIL);
+            put(Blocks.CHIPPED_ANVIL, Blocks.ANVIL);
 
-        put(Blocks.EXPOSED_COPPER, Blocks.COPPER_BLOCK);
-        put(Blocks.WEATHERED_COPPER, Blocks.EXPOSED_COPPER);
-        put(Blocks.OXIDIZED_COPPER, Blocks.WEATHERED_COPPER);
-        put(Blocks.EXPOSED_CUT_COPPER, Blocks.CUT_COPPER);
-        put(Blocks.WEATHERED_CUT_COPPER, Blocks.EXPOSED_CUT_COPPER);
-        put(Blocks.OXIDIZED_CUT_COPPER, Blocks.WEATHERED_CUT_COPPER);
-    }};
+            put(Blocks.EXPOSED_COPPER, Blocks.COPPER_BLOCK);
+            put(Blocks.WEATHERED_COPPER, Blocks.EXPOSED_COPPER);
+            put(Blocks.OXIDIZED_COPPER, Blocks.WEATHERED_COPPER);
+            put(Blocks.EXPOSED_CUT_COPPER, Blocks.CUT_COPPER);
+            put(Blocks.WEATHERED_CUT_COPPER, Blocks.EXPOSED_CUT_COPPER);
+            put(Blocks.OXIDIZED_CUT_COPPER, Blocks.WEATHERED_CUT_COPPER);
+        }
+    };
 
     public static Block getCursedRepairedBlockVariant(Level world, BlockPos blockPos) {
         BlockEntity blockEntity = world.getBlockEntity(blockPos);

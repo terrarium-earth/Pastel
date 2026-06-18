@@ -13,14 +13,18 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ColoredBlockLeakParticle extends DripParticle {
 
     public ColoredBlockLeakParticle(ClientLevel world, double x, double y, double z, Fluid fluid) {
         super(world, x, y, z, fluid);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<ColoredFallingSporeBlossomParticleEffect> {
 
         private final SpriteSet spriteProvider;
@@ -31,8 +35,14 @@ public class ColoredBlockLeakParticle extends DripParticle {
 
         @Override
         public TextureSheetParticle createParticle(
-            ColoredFallingSporeBlossomParticleEffect parameters, ClientLevel world, double x, double y, double z,
-            double velocityX, double velocityY, double velocityZ
+            ColoredFallingSporeBlossomParticleEffect parameters,
+            ClientLevel world,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             Vector3f color = parameters.getColor();
             int i = (int) (64.0F / Mth.randomBetween(world.getRandom(), 0.1F, 0.9F));

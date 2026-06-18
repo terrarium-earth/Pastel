@@ -19,24 +19,31 @@ public class ItemEntityEventQueue extends EventQueue<ItemEntityEventQueue.EventE
 
     @Override
     public void acceptEvent(Level world, GameEvent.ListenerInfo event, Vec3 sourcePos) {
-        if (world instanceof ServerLevel && event.context()
-                                                 .sourceEntity() instanceof ItemEntity itemEntity) {
+        if (world instanceof ServerLevel && event
+            .context()
+            .sourceEntity() instanceof ItemEntity itemEntity) {
             Vec3 pos = event.source();
             EventEntry eventEntry = new EventEntry(event.gameEvent(), itemEntity, Mth.floor(pos.distanceTo(sourcePos)));
             int delay = eventEntry.distance * 2;
             this.schedule(eventEntry, delay);
-            TypedTransmissionPayload.playTransmissionParticle(
-                (ServerLevel) world, new TypedTransmission(
-                    pos, this.positionSource, delay,
-                    TypedTransmission.Variant.ITEM
-                )
-            );
+            TypedTransmissionPayload
+                .playTransmissionParticle(
+                    (ServerLevel) world,
+                    new TypedTransmission(
+                        pos,
+                        this.positionSource,
+                        delay,
+                        TypedTransmission.Variant.ITEM
+                    )
+                );
         }
     }
 
     public static class EventEntry {
         public final Holder<GameEvent> event;
+
         public final ItemEntity itemEntity;
+
         public final int distance;
 
         public EventEntry(Holder<GameEvent> event, ItemEntity itemEntity, int distance) {

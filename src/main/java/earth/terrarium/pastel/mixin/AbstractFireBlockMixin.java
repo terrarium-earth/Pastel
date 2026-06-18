@@ -12,18 +12,28 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BaseFireBlock.class)
+@Mixin(
+    BaseFireBlock.class
+)
 public abstract class AbstractFireBlockMixin {
 
-    @Inject(at = @At("HEAD"), method = "getState", cancellable = true)
+    @Inject(
+        at = @At(
+            "HEAD"
+        ), method = "getState", cancellable = true
+    )
     private static void getFireState(BlockGetter world, BlockPos pos, CallbackInfoReturnable<BlockState> cir) {
         BlockPos blockpos = pos.below();
         BlockState blockstate = world.getBlockState(blockpos);
-        if (blockstate.is(PastelBlockTags.PRIMORDIAL_FIRE_BASE_BLOCKS) ||
-            PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG) {
+        if (blockstate
+            .is(
+                PastelBlockTags.PRIMORDIAL_FIRE_BASE_BLOCKS
+            ) || PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG) {
             PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG = false;
-            cir.setReturnValue(
-                ((PrimordialFireBlock) PastelBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, pos));
+            cir
+                .setReturnValue(
+                    ((PrimordialFireBlock) PastelBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, pos)
+                );
         }
     }
 

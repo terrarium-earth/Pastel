@@ -35,24 +35,28 @@ public class ItemBowlBlock extends InWorldInteractionBlock {
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D);
 
     // Positions to check on place / destroy to upgrade those blocks upgrade counts
-    private final List<Vec3i> possibleEnchanterOffsets = new ArrayList<>() {{
-        add(new Vec3i(5, 0, 3));
-        add(new Vec3i(-5, 0, -3));
-        add(new Vec3i(-3, 0, 5));
-        add(new Vec3i(-3, 0, -5));
-        add(new Vec3i(3, 0, 5));
-        add(new Vec3i(3, 0, -5));
-        add(new Vec3i(5, 0, 3));
-        add(new Vec3i(5, 0, -3));
-    }};
+    private final List<Vec3i> possibleEnchanterOffsets = new ArrayList<>() {
+        {
+            add(new Vec3i(5, 0, 3));
+            add(new Vec3i(-5, 0, -3));
+            add(new Vec3i(-3, 0, 5));
+            add(new Vec3i(-3, 0, -5));
+            add(new Vec3i(3, 0, 5));
+            add(new Vec3i(3, 0, -5));
+            add(new Vec3i(5, 0, 3));
+            add(new Vec3i(5, 0, -3));
+        }
+    };
 
     // Positions to check on place / destroy to upgrade those blocks upgrade counts
-    private final List<Vec3i> possibleSpiritInstillerOffsets = new ArrayList<>() {{
-        add(new Vec3i(0, -1, 2));
-        add(new Vec3i(0, -1, -2));
-        add(new Vec3i(2, -1, 0));
-        add(new Vec3i(-2, -1, 0));
-    }};
+    private final List<Vec3i> possibleSpiritInstillerOffsets = new ArrayList<>() {
+        {
+            add(new Vec3i(0, -1, 2));
+            add(new Vec3i(0, -1, -2));
+            add(new Vec3i(2, -1, 0));
+            add(new Vec3i(-2, -1, 0));
+        }
+    };
 
     public ItemBowlBlock(Properties settings) {
         super(settings);
@@ -68,12 +72,19 @@ public class ItemBowlBlock extends InWorldInteractionBlock {
         return new ItemBowlBlockEntity(pos, state);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? createTickerHelper(
-            type, PastelBlockEntities.ITEM_BOWL.get(), ItemBowlBlockEntity::clientTick) : null;
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? createTickerHelper(
+                type,
+                PastelBlockEntities.ITEM_BOWL.get(),
+                ItemBowlBlockEntity::clientTick
+            )
+            : null;
     }
 
     @Override
@@ -93,7 +104,9 @@ public class ItemBowlBlock extends InWorldInteractionBlock {
      * recipe
      */
     private void updateConnectedMultiBlocks(@NotNull Level world, @NotNull BlockPos pos) {
-        for (Vec3i possibleUpgradeBlockOffset : possibleEnchanterOffsets) {
+        for (
+            Vec3i possibleUpgradeBlockOffset : possibleEnchanterOffsets
+        ) {
             BlockPos currentPos = pos.offset(possibleUpgradeBlockOffset);
             BlockEntity blockEntity = world.getBlockEntity(currentPos);
             if (blockEntity instanceof EnchanterBlockEntity enchanterBlockEntity) {
@@ -102,7 +115,9 @@ public class ItemBowlBlock extends InWorldInteractionBlock {
             }
         }
 
-        for (Vec3i possibleUpgradeBlockOffset : possibleSpiritInstillerOffsets) {
+        for (
+            Vec3i possibleUpgradeBlockOffset : possibleSpiritInstillerOffsets
+        ) {
             BlockPos currentPos = pos.offset(possibleUpgradeBlockOffset);
             BlockEntity blockEntity = world.getBlockEntity(currentPos);
             if (blockEntity instanceof SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
@@ -114,7 +129,12 @@ public class ItemBowlBlock extends InWorldInteractionBlock {
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         BlockEntity blockEntity = world.getBlockEntity(pos);

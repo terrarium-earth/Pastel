@@ -34,8 +34,11 @@ public interface InkStorage extends Clearable {
      */
     static long transferInk(@NotNull InkStorage source, @NotNull InkStorage destination) {
         long transferred = 0;
-        for (InkColor inkColor : source.getEnergy()
-                                       .keySet()) {
+        for (
+            InkColor inkColor : source
+                .getEnergy()
+                .keySet()
+        ) {
             transferred += transferInk(source, destination, inkColor);
         }
         return transferred;
@@ -62,8 +65,11 @@ public interface InkStorage extends Clearable {
             if (destinationRoom > 0) {
                 long destinationAmount = destination.getEnergy(color);
                 if (sourceAmount > destinationAmount + 1) {
-                    long transferAmount = Math.max(
-                        1, (sourceAmount - destinationAmount) / 32); // the constant here is simulating pressure flow
+                    long transferAmount = Math
+                        .max(
+                            1,
+                            (sourceAmount - destinationAmount) / 32
+                        ); // the constant here is simulating pressure flow
                     transferAmount = Math.min(transferAmount, Math.min(sourceAmount, destinationRoom));
                     destination.addEnergy(color, transferAmount);
                     source.drainEnergy(color, transferAmount);
@@ -87,7 +93,11 @@ public interface InkStorage extends Clearable {
      */
     @Deprecated
     static long transferInk(
-        @NotNull InkStorage source, @NotNull InkStorage destination, @NotNull InkColor color, long amount) {
+        @NotNull InkStorage source,
+        @NotNull InkStorage destination,
+        @NotNull InkColor color,
+        long amount
+    ) {
         if (!destination.accepts(color)) {
             return 0;
         }
@@ -172,7 +182,9 @@ public interface InkStorage extends Clearable {
     static @NotNull Map<InkColor, Long> readEnergy(CompoundTag compound) {
         Map<InkColor, Long> energy = new HashMap<>();
         if (compound != null) {
-            for (String key : compound.getAllKeys()) {
+            for (
+                String key : compound.getAllKeys()
+            ) {
                 InkColor inkColor = PastelRegistries.INK_COLOR.get(PastelCommon.locate(key));
                 if (inkColor == null) { // TODO: needed? Fallback to a default color?
                     continue;
@@ -186,24 +198,35 @@ public interface InkStorage extends Clearable {
 
     static @NotNull CompoundTag writeEnergy(Map<InkColor, Long> storedEnergy) {
         CompoundTag energy = new CompoundTag();
-        for (Map.Entry<InkColor, Long> color : storedEnergy.entrySet()) {
-            energy.putLong(
-                color.getKey()
-                     .getID()
-                     .toString(), color.getValue()
-            );
+        for (
+            Map.Entry<InkColor, Long> color : storedEnergy.entrySet()
+        ) {
+            energy
+                .putLong(
+                    color
+                        .getKey()
+                        .getID()
+                        .toString(),
+                    color.getValue()
+                );
         }
         return energy;
     }
 
     static void addInkStoreBulletTooltip(List<Component> tooltip, InkColor color, long amount) {
         MutableComponent inkName = color.getColoredInkName();
-        tooltip.add(Component.translatable(
-                                 "pastel.tooltip.ink_powered.bullet_amount",
-                                 Component.literal(getShortenedNumberString(amount))
-                                          .withStyle(ChatFormatting.WHITE), inkName
-                             )
-                             .setStyle(inkName.getStyle()));
+        tooltip
+            .add(
+                Component
+                    .translatable(
+                        "pastel.tooltip.ink_powered.bullet_amount",
+                        Component
+                            .literal(getShortenedNumberString(amount))
+                            .withStyle(ChatFormatting.WHITE),
+                        inkName
+                    )
+                    .setStyle(inkName.getStyle())
+            );
     }
 
 }

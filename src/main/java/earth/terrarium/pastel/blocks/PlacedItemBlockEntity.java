@@ -17,6 +17,7 @@ import java.util.UUID;
 public class PlacedItemBlockEntity extends BlockEntity implements PlayerOwned {
 
     protected ItemStack stack = ItemStack.EMPTY;
+
     protected UUID ownerUUID;
 
     public PlacedItemBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -30,8 +31,9 @@ public class PlacedItemBlockEntity extends BlockEntity implements PlayerOwned {
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
         super.loadAdditional(nbt, registryLookup);
-        this.stack = ItemStack.parse(registryLookup, nbt.getCompound("stack"))
-                              .orElse(ItemStack.EMPTY);
+        this.stack = ItemStack
+            .parse(registryLookup, nbt.getCompound("stack"))
+            .orElse(ItemStack.EMPTY);
         this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
     }
 

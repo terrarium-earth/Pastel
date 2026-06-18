@@ -18,7 +18,6 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
-
 /**
  * Once Neoforge gets something equivalent we are nuking this shit
  */
@@ -26,19 +25,26 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
 
     private static final ItemReference EMPTY = ItemReference.of(Items.AIR);
 
-    public static final Codec<ItemReference> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                         BuiltInRegistries.ITEM.byNameCodec()
-                                                                                                               .fieldOf("reference")
-                                                                                                               .forGetter(ref -> ref.reference),
-                                                                                         DataComponentPatch.CODEC.fieldOf("components")
-                                                                                                                 .forGetter(ref -> ref.components.asPatch())
-                                                                                     )
-                                                                                     .apply(i, ItemReference::new)
-    );
+    public static final Codec<ItemReference> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    BuiltInRegistries.ITEM
+                        .byNameCodec()
+                        .fieldOf("reference")
+                        .forGetter(ref -> ref.reference),
+                    DataComponentPatch.CODEC
+                        .fieldOf("components")
+                        .forGetter(ref -> ref.components.asPatch())
+                )
+                .apply(i, ItemReference::new)
+        );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ItemReference> STREAM_CODEC = new StreamCodec<>() {
-        private static final StreamCodec<RegistryFriendlyByteBuf, Item> ITEM_CODEC = ByteBufCodecs.registry(
-            Registries.ITEM);
+        private static final StreamCodec<RegistryFriendlyByteBuf, Item> ITEM_CODEC = ByteBufCodecs
+            .registry(
+                Registries.ITEM
+            );
 
         public ItemReference decode(RegistryFriendlyByteBuf buf) {
             var reference = ITEM_CODEC.decode(buf);
@@ -53,6 +59,7 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
     };
 
     public final Item reference;
+
     private final PatchedDataComponentMap components;
 
     private ItemReference(Item reference) {
@@ -126,8 +133,9 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
     }
 
     public boolean isEmpty() {
-        return reference.asItem()
-                        .equals(Items.AIR);
+        return reference
+            .asItem()
+            .equals(Items.AIR);
     }
 
     @Override

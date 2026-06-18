@@ -58,29 +58,36 @@ public class EnchanterBlock extends InWorldInteractionBlock {
             }
         } else {
             if (level.isClientSide) {
-                ModonomiconHelper.renderMultiblock(
-                    PastelMultiblocks.get(PastelMultiblocks.ENCHANTER), PastelMultiblocks.ENCHANTER_TEXT,
-                    blockPos.below(4), Rotation.NONE
-                );
+                ModonomiconHelper
+                    .renderMultiblock(
+                        PastelMultiblocks.get(PastelMultiblocks.ENCHANTER),
+                        PastelMultiblocks.ENCHANTER_TEXT,
+                        blockPos.below(4),
+                        Rotation.NONE
+                    );
             }
         }
 
         return valid;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new EnchanterBlockEntity(pos, state);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return createTickerHelper(
-            type, PastelBlockEntities.ENCHANTER.get(), world.isClientSide ? EnchanterBlockEntity::clientTick
-                                                                          : EnchanterBlockEntity::serverTick
+            type,
+            PastelBlockEntities.ENCHANTER.get(),
+            world.isClientSide
+                ? EnchanterBlockEntity::clientTick
+                : EnchanterBlockEntity::serverTick
         );
     }
 
@@ -93,7 +100,12 @@ public class EnchanterBlock extends InWorldInteractionBlock {
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level level,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (level.isClientSide) {
@@ -108,7 +120,11 @@ public class EnchanterBlock extends InWorldInteractionBlock {
 
                     if (player.isShiftKeyDown() || handStack.isEmpty()) {
                         // sneaking or empty hand: remove items
-                        for (int i = 0; i < EnchanterBlockEntity.XP_STORAGE + 1; i++) {
+                        for (
+                            int i = 0;
+                            i < EnchanterBlockEntity.XP_STORAGE + 1;
+                            i++
+                        ) {
                             if (retrieveStack(level, pos, player, hand, handStack, enchanterBlockEntity, i)) {
                                 enchanterBlockEntity.setItemFacingDirection(player.getDirection());
                                 enchanterBlockEntity.setOwner(player);

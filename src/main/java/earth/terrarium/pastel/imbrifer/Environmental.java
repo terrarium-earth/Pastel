@@ -17,19 +17,27 @@ import java.util.function.Supplier;
 public class Environmental {
 
     private static final InterpMemory<float[]> GRADING_QUEUE = new InterpMemory<>();
+
     private static final InterpMemory<float[]> ENV_QUEUE = new InterpMemory<>();
+
     private static final InterpMemory<EnvironmentalOverride> OVERRIDE_QUEUE = new InterpMemory<>();
 
     private static final Minecraft client = Minecraft.getInstance();
-    private static final Supplier<Float> delta = () -> client.getTimer()
-                                                             .getGameTimeDeltaPartialTick(false);
+
+    private static final Supplier<Float> delta = () -> client
+        .getTimer()
+        .getGameTimeDeltaPartialTick(false);
+
     private static long envLoop, overLoop;
+
     private static long over;
+
     private static boolean overActive;
 
     public static void tick(Entity entity) {
-        var blending = client.options.biomeBlendRadius()
-                                     .get();
+        var blending = client.options
+            .biomeBlendRadius()
+            .get();
         var level = client.level;
 
         assert level != null;
@@ -66,11 +74,18 @@ public class Environmental {
     private static void updateBiomeData(BlockPos center, int blendingRadius) {
         if (blendingRadius <= 0) {
             var biome = findBiome(center);
-            processAndAcceptEnv(center, EnvDataLoader.DATA.getOrDefault(biome, EnvironmentalData.NOOP)
-                                                          .asArray()
+            processAndAcceptEnv(
+                center,
+                EnvDataLoader.DATA
+                    .getOrDefault(biome, EnvironmentalData.NOOP)
+                    .asArray()
             );
-            GRADING_QUEUE.accept(ColorGradingLoader.DATA.getOrDefault(biome, ColorGrading.DEFAULT)
-                                                        .asArray());
+            GRADING_QUEUE
+                .accept(
+                    ColorGradingLoader.DATA
+                        .getOrDefault(biome, ColorGrading.DEFAULT)
+                        .asArray()
+                );
             return;
         }
 
@@ -78,9 +93,12 @@ public class Environmental {
         var gradingStack = new InterpolationStack(5);
 
         var cursor = new Cursor3D(
-            center.getX() - blendingRadius, center.getY() - blendingRadius,
-            center.getZ() - blendingRadius, center.getX() + blendingRadius,
-            center.getY() + blendingRadius, center.getZ() + blendingRadius
+            center.getX() - blendingRadius,
+            center.getY() - blendingRadius,
+            center.getZ() - blendingRadius,
+            center.getX() + blendingRadius,
+            center.getY() + blendingRadius,
+            center.getZ() + blendingRadius
         );
 
         var test = new BlockPos.MutableBlockPos();
@@ -88,10 +106,18 @@ public class Environmental {
             test.set(cursor.nextX(), cursor.nextY(), cursor.nextZ());
 
             var biome = findBiome(test);
-            envStack.insert(EnvDataLoader.DATA.getOrDefault(biome, EnvironmentalData.NOOP)
-                                              .asArray());
-            gradingStack.insert(ColorGradingLoader.DATA.getOrDefault(biome, ColorGrading.DEFAULT)
-                                                       .asArray());
+            envStack
+                .insert(
+                    EnvDataLoader.DATA
+                        .getOrDefault(biome, EnvironmentalData.NOOP)
+                        .asArray()
+                );
+            gradingStack
+                .insert(
+                    ColorGradingLoader.DATA
+                        .getOrDefault(biome, ColorGrading.DEFAULT)
+                        .asArray()
+                );
         }
 
         processAndAcceptEnv(center, envStack.get());
@@ -130,13 +156,18 @@ public class Environmental {
             return EnvironmentalData.NOOP;
 
         var interpolated = new float[4];
-        for (int i = 0; i < interpolated.length; i++) {
+        for (
+            int i = 0;
+            i < interpolated.length;
+            i++
+        ) {
             interpolated[i] = Mth.lerp((envLoop + delta.get()) / 3F, ENV_QUEUE.last()[i], ENV_QUEUE.current()[i]);
         }
 
         var delta = overDelta();
-        var override = processOverrides().dataOverride()
-                                         .asArray();
+        var override = processOverrides()
+            .dataOverride()
+            .asArray();
         interpolated[0] += Math.clamp(Mth.lerp(delta, 0, override[0]), -1, 1);
         interpolated[1] += Mth.lerp(delta, 0, override[1]);
         interpolated[2] += Mth.lerp(delta, 0, override[2]);
@@ -153,10 +184,12 @@ public class Environmental {
     // We got C# at home
     public static void applyColor(float[] out) {
         var override = processOverrides();
-        var color = override.color()
-                            .colorMod();
-        var blend = override.color()
-                            .blend();
+        var color = override
+            .color()
+            .colorMod();
+        var blend = override
+            .color()
+            .blend();
         var delta = overDelta();
 
         out[0] = Mth.lerp(delta * blend, out[0], color.x);
@@ -165,9 +198,7 @@ public class Environmental {
     }
 
     private static float overDelta() {
-        var mutation = overActive ?
-                       over + delta.get() :
-                       over - delta.get();
+        var mutation = overActive ? over + delta.get() : over - delta.get();
 
         return Math.clamp(mutation / 20F, 0, 1);
     }
@@ -176,17 +207,25 @@ public class Environmental {
         if (!OVERRIDE_QUEUE.ready())
             return EnvironmentalOverride.INACTIVE;
 
-        var cur = OVERRIDE_QUEUE.current()
-                                .asArray();
-        var last = OVERRIDE_QUEUE.last()
-                                 .asArray();
+        var cur = OVERRIDE_QUEUE
+            .current()
+            .asArray();
+        var last = OVERRIDE_QUEUE
+            .last()
+            .asArray();
 
         var interpolated = new float[8];
-        for (int i = 0; i < cur.length; i++) {
-            interpolated[i] = Mth.lerp(
-                (overLoop + delta.get()) / 4F,
-                last[i], cur[i]
-            );
+        for (
+            int i = 0;
+            i < cur.length;
+            i++
+        ) {
+            interpolated[i] = Mth
+                .lerp(
+                    (overLoop + delta.get()) / 4F,
+                    last[i],
+                    cur[i]
+                );
         }
 
         return EnvironmentalOverride.fromArray(interpolated);
@@ -206,13 +245,15 @@ public class Environmental {
 
     private static ResourceKey<Biome> findBiome(BlockPos pos) {
         assert client.level != null;
-        return client.level.getBiome(pos)
-                           .getKey();
+        return client.level
+            .getBiome(pos)
+            .getKey();
     }
 
     private static class InterpolationStack {
 
         private float[] stack;
+
         private int insets;
 
         public InterpolationStack(int size) {
@@ -220,7 +261,11 @@ public class Environmental {
         }
 
         public void insert(float[] inset) {
-            for (int i = 0; i < inset.length; i++) {
+            for (
+                int i = 0;
+                i < inset.length;
+                i++
+            ) {
                 stack[i] += inset[i];
             }
 
@@ -235,7 +280,11 @@ public class Environmental {
         public float[] get() {
             var result = new float[stack.length];
 
-            for (int i = 0; i < stack.length; i++) {
+            for (
+                int i = 0;
+                i < stack.length;
+                i++
+            ) {
                 result[i] = stack[i] / insets;
             }
 
@@ -247,8 +296,9 @@ public class Environmental {
         if (client.level == null)
             return State.INACTIVE;
 
-        if (client.level.dimension()
-                        .equals(PastelLevels.DIMENSION_KEY))
+        if (client.level
+            .dimension()
+            .equals(PastelLevels.DIMENSION_KEY))
             return State.ACTIVE;
 
         if (overActive || over > 0)

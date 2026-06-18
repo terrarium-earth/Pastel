@@ -28,8 +28,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PreservationBlockDetectorBlockEntity extends BlockEntity implements CommandSource {
 
     protected @Nullable BlockState detectedState; // detect this block. Null: any block
+
     protected @Nullable BlockState changeIntoState;
-        // change into this once triggered. Null: stay as is (can be used again and again)
+
+    // change into this once triggered. Null: stay as is (can be used again and again)
     protected List<String> commands = List.of(); // get executed in order. First command that fails ends the chain
 
     public PreservationBlockDetectorBlockEntity(BlockPos pos, BlockState state) {
@@ -47,7 +49,9 @@ public class PreservationBlockDetectorBlockEntity extends BlockEntity implements
         }
         if (!this.commands.isEmpty()) {
             ListTag commandList = new ListTag();
-            for (String s : this.commands) {
+            for (
+                String s : this.commands
+            ) {
                 commandList.add(StringTag.valueOf(s));
             }
             nbt.put("commands", commandList);
@@ -61,33 +65,47 @@ public class PreservationBlockDetectorBlockEntity extends BlockEntity implements
         this.changeIntoState = null;
         this.detectedState = null;
         if (nbt.contains("commands", Tag.TAG_LIST)) {
-            for (Tag e : nbt.getList("commands", Tag.TAG_STRING)) {
+            for (
+                Tag e : nbt.getList("commands", Tag.TAG_STRING)
+            ) {
                 this.commands.add(e.getAsString());
             }
         }
         if (nbt.contains("change_into_state", Tag.TAG_STRING)) {
             try {
-                this.changeIntoState = BlockStateParser.parseForBlock(
-                                                           BuiltInRegistries.BLOCK.asLookup(), nbt.getString(
-                                                               "change_into_state"), false)
-                                                       .blockState();
+                this.changeIntoState = BlockStateParser
+                    .parseForBlock(
+                        BuiltInRegistries.BLOCK.asLookup(),
+                        nbt
+                            .getString(
+                                "change_into_state"
+                            ),
+                        false
+                    )
+                    .blockState();
             } catch (CommandSyntaxException ignored) {
             }
         }
         if (nbt.contains("detected_state", Tag.TAG_STRING)) {
             try {
-                this.detectedState = BlockStateParser.parseForBlock(
-                                                         BuiltInRegistries.BLOCK.asLookup(), nbt.getString(
-                                                             "detected_state"), false)
-                                                     .blockState();
+                this.detectedState = BlockStateParser
+                    .parseForBlock(
+                        BuiltInRegistries.BLOCK.asLookup(),
+                        nbt
+                            .getString(
+                                "detected_state"
+                            ),
+                        false
+                    )
+                    .blockState();
             } catch (CommandSyntaxException ignored) {
             }
         }
     }
 
     public void triggerForNeighbor(BlockState state) {
-        if ((this.detectedState == null || state.equals(this.detectedState)) &&
-            this.getLevel() instanceof ServerLevel serverWorld) {
+        if ((this.detectedState == null || state.equals(this.detectedState)) && this
+            .getLevel() instanceof ServerLevel serverWorld) {
             this.execute(serverWorld);
         }
     }
@@ -97,18 +115,29 @@ public class PreservationBlockDetectorBlockEntity extends BlockEntity implements
         AtomicBoolean failed = new AtomicBoolean(false);
         if (!this.commands.isEmpty()) {
             CommandSourceStack serverCommandSource = new CommandSourceStack(
-                this, Vec3.atCenterOf(PreservationBlockDetectorBlockEntity.this.worldPosition), Vec2.ZERO, serverWorld,
-                2, "PreservationBlockDetector", this.getLevel()
-                                                    .getBlockState(this.worldPosition)
-                                                    .getBlock()
-                                                    .getName(), minecraftServer, null
+                this,
+                Vec3.atCenterOf(PreservationBlockDetectorBlockEntity.this.worldPosition),
+                Vec2.ZERO,
+                serverWorld,
+                2,
+                "PreservationBlockDetector",
+                this
+                    .getLevel()
+                    .getBlockState(this.worldPosition)
+                    .getBlock()
+                    .getName(),
+                minecraftServer,
+                null
             )
                 .withCallback((success, returnValue) -> {
                     if (returnValue < 1) failed.set(true);
                 });
-            for (String command : this.commands) {
-                minecraftServer.getCommands()
-                               .performPrefixedCommand(serverCommandSource, command);
+            for (
+                String command : this.commands
+            ) {
+                minecraftServer
+                    .getCommands()
+                    .performPrefixedCommand(serverCommandSource, command);
                 if (failed.get()) {
                     break;
                 }

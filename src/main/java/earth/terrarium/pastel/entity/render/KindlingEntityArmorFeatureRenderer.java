@@ -22,40 +22,66 @@ import net.minecraft.world.item.component.DyedItemColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class KindlingEntityArmorFeatureRenderer extends RenderLayer<KindlingEntity, KindlingEntityModel> {
 
-    public static final ResourceLocation TEXTURE_DIAMOND = PastelCommon.locate(
-        "textures/entity/kindling/armor/diamond.png");
+    public static final ResourceLocation TEXTURE_DIAMOND = PastelCommon
+        .locate(
+            "textures/entity/kindling/armor/diamond.png"
+        );
+
     public static final ResourceLocation TEXTURE_GOLD = PastelCommon.locate("textures/entity/kindling/armor/gold.png");
+
     public static final ResourceLocation TEXTURE_IRON = PastelCommon.locate("textures/entity/kindling/armor/iron.png");
-    public static final ResourceLocation TEXTURE_LEATHER = PastelCommon.locate(
-        "textures/entity/kindling/armor/leather.png");
+
+    public static final ResourceLocation TEXTURE_LEATHER = PastelCommon
+        .locate(
+            "textures/entity/kindling/armor/leather.png"
+        );
 
     private final KindlingEntityModel model;
 
     public KindlingEntityArmorFeatureRenderer(
-        RenderLayerParent<KindlingEntity, KindlingEntityModel> context, EntityModelSet loader) {
+        RenderLayerParent<KindlingEntity, KindlingEntityModel> context,
+        EntityModelSet loader
+    ) {
         super(context);
         this.model = new KindlingEntityModel(loader.bakeLayer(PastelModelLayers.KINDLING_ARMOR));
     }
 
     @Override
     public void render(
-        PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int i, KindlingEntity kindlingEntity, float f,
-        float g, float h, float j, float k, float l
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int i,
+        KindlingEntity kindlingEntity,
+        float f,
+        float g,
+        float h,
+        float j,
+        float k,
+        float l
     ) {
         ItemStack itemStack = kindlingEntity.getBodyArmorItem();
 
         if (itemStack.getItem() instanceof AnimalArmorItem armorItem) {
-            this.getParentModel()
+            this
+                .getParentModel()
                 .copyPropertiesTo(this.model);
             this.model.prepareMobModel(kindlingEntity, f, g, h);
             this.model.setupAnim(kindlingEntity, f, g, j, k, l);
-            var color = itemStack.is(ItemTags.DYEABLE) ? FastColor.ARGB32.opaque(
-                DyedItemColor.getOrDefault(itemStack, DyedItemColor.LEATHER_COLOR)) : -1;
-            VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(
-                RenderType.entityCutoutNoCull(getTextureForArmor(armorItem)));
+            var color = itemStack.is(ItemTags.DYEABLE)
+                ? FastColor.ARGB32
+                    .opaque(
+                        DyedItemColor.getOrDefault(itemStack, DyedItemColor.LEATHER_COLOR)
+                    )
+                : -1;
+            VertexConsumer vertexConsumer = vertexConsumerProvider
+                .getBuffer(
+                    RenderType.entityCutoutNoCull(getTextureForArmor(armorItem))
+                );
             this.model.renderToBuffer(poseStack, vertexConsumer, i, OverlayTexture.NO_OVERLAY, color);
         }
     }

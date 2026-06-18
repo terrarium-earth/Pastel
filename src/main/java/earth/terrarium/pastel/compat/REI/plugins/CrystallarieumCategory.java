@@ -24,11 +24,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumDisplay> {
 
-    public final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/modonomicon/crystallarieum.png");
+    public final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/modonomicon/crystallarieum.png"
+        );
 
     @Override
     public CategoryIdentifier<CrystallarieumDisplay> getCategoryIdentifier() {
@@ -47,129 +51,232 @@ public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumD
 
     @Override
     public void setupWidgets(
-        Point startPoint, Rectangle bounds, List<Widget> widgets, @NotNull CrystallarieumDisplay display) {
+        Point startPoint,
+        Rectangle bounds,
+        List<Widget> widgets,
+        @NotNull CrystallarieumDisplay display
+    ) {
         // input
-        EntryIngredient input = display.getInputEntries()
-                                       .get(0);
-        widgets.add(Widgets.createSlot(new Point(startPoint.x - 2, startPoint.y + 1 + 8))
-                           .markInput()
-                           .entries(input));
+        EntryIngredient input = display
+            .getInputEntries()
+            .get(0);
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x - 2, startPoint.y + 1 + 8))
+                    .markInput()
+                    .entries(input)
+            );
 
         // crystallarieum
-        ItemStack crystallarieumStack = ((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get()).asStackWithColor(
-            display.inkColor);
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 20, startPoint.y + 3 + 16))
-                           .entries(EntryIngredients.of(crystallarieumStack))
-                           .disableBackground());
+        ItemStack crystallarieumStack = ((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get())
+            .asStackWithColor(
+                display.inkColor
+            );
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 20, startPoint.y + 3 + 16))
+                    .entries(EntryIngredients.of(crystallarieumStack))
+                    .disableBackground()
+            );
 
         // output arrow
-        widgets.add(Widgets.createArrow(new Point(startPoint.x + 39, startPoint.y + 1 + 8))
-                           .animationDurationTicks(display.secondsPerStage));
+        widgets
+            .add(
+                Widgets
+                    .createArrow(new Point(startPoint.x + 39, startPoint.y + 1 + 8))
+                    .animationDurationTicks(display.secondsPerStage)
+            );
 
         // growth stages
         Iterator<EntryIngredient> it = display.growthStages.iterator();
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 20, startPoint.y + 3))
-                           .markInput()
-                           .entries(it.next()));
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 20, startPoint.y + 3))
+                    .markInput()
+                    .entries(it.next())
+            );
         int x = 0;
         while (it.hasNext()) {
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 66 + x * 20, startPoint.y + 1 + 8))
-                               .markInput()
-                               .entries(it.next()));
+            widgets
+                .add(
+                    Widgets
+                        .createSlot(new Point(startPoint.x + 66 + x * 20, startPoint.y + 1 + 8))
+                        .markInput()
+                        .entries(it.next())
+                );
             x++;
         }
 
         // catalysts
-        widgets.add(Widgets.createLabel(
-                               new Point(startPoint.x, startPoint.y + 1 + 42),
-                               Component.translatable("container.pastel.rei.crystallarieum.catalyst")
-                           )
-                           .leftAligned()
-                           .color(0x3f3f3f)
-                           .noShadow());
-        widgets.add(Widgets.createLabel(
-                               new Point(startPoint.x, startPoint.y + 1 + 58),
-                               Component.translatable("container.pastel.rei.crystallarieum.accelerator")
-                           )
-                           .leftAligned()
-                           .color(0x3f3f3f)
-                           .noShadow());
-        widgets.add(Widgets.createLabel(
-                               new Point(startPoint.x, startPoint.y + 1 + 68),
-                               Component.translatable("container.pastel.rei.crystallarieum.ink_consumption")
-                           )
-                           .leftAligned()
-                           .color(0x3f3f3f)
-                           .noShadow());
-        widgets.add(Widgets.createLabel(
-                               new Point(startPoint.x, startPoint.y + 1 + 78),
-                               Component.translatable("container.pastel.rei.crystallarieum.used_up")
-                           )
-                           .leftAligned()
-                           .color(0x3f3f3f)
-                           .noShadow());
+        widgets
+            .add(
+                Widgets
+                    .createLabel(
+                        new Point(startPoint.x, startPoint.y + 1 + 42),
+                        Component.translatable("container.pastel.rei.crystallarieum.catalyst")
+                    )
+                    .leftAligned()
+                    .color(0x3f3f3f)
+                    .noShadow()
+            );
+        widgets
+            .add(
+                Widgets
+                    .createLabel(
+                        new Point(startPoint.x, startPoint.y + 1 + 58),
+                        Component.translatable("container.pastel.rei.crystallarieum.accelerator")
+                    )
+                    .leftAligned()
+                    .color(0x3f3f3f)
+                    .noShadow()
+            );
+        widgets
+            .add(
+                Widgets
+                    .createLabel(
+                        new Point(startPoint.x, startPoint.y + 1 + 68),
+                        Component.translatable("container.pastel.rei.crystallarieum.ink_consumption")
+                    )
+                    .leftAligned()
+                    .color(0x3f3f3f)
+                    .noShadow()
+            );
+        widgets
+            .add(
+                Widgets
+                    .createLabel(
+                        new Point(startPoint.x, startPoint.y + 1 + 78),
+                        Component.translatable("container.pastel.rei.crystallarieum.used_up")
+                    )
+                    .leftAligned()
+                    .color(0x3f3f3f)
+                    .noShadow()
+            );
 
         int i = 0;
         int startX = 46;
         int offsetPerReagent = 18;
-        for (CrystallarieumCatalyst catalyst : display.catalysts) {
+        for (
+            CrystallarieumCatalyst catalyst : display.catalysts
+        ) {
             int offsetX = startPoint.x + startX + offsetPerReagent * i;
-            widgets.add(Widgets.createSlot(new Point(offsetX, startPoint.y + 1 + 38))
-                               .markInput()
-                               .entries(EntryIngredients.ofIngredient(catalyst.ingredient())));
+            widgets
+                .add(
+                    Widgets
+                        .createSlot(new Point(offsetX, startPoint.y + 1 + 38))
+                        .markInput()
+                        .entries(EntryIngredients.ofIngredient(catalyst.ingredient()))
+                );
 
             float growthAcceleration = catalyst.growthAccelerationMod();
-            int offsetU = growthAcceleration == 1 ? 97 : growthAcceleration >= 6 ? 85 : growthAcceleration > 1 ? 67 :
-                                                                                        growthAcceleration <= 0.25 ? 79
-                                                                                                                   : 73;
-            widgets.add(
-                Widgets.createTexturedWidget(
-                    BACKGROUND_TEXTURE, offsetX + 5, startPoint.y + 1 + 59, offsetU, 0, 6, 6,
-                    128, 128
-                ));
+            int offsetU = growthAcceleration == 1
+                ? 97
+                : growthAcceleration >= 6
+                    ? 85
+                    : growthAcceleration > 1
+                        ? 67
+                        : growthAcceleration <= 0.25
+                            ? 79
+                            : 73;
+            widgets
+                .add(
+                    Widgets
+                        .createTexturedWidget(
+                            BACKGROUND_TEXTURE,
+                            offsetX + 5,
+                            startPoint.y + 1 + 59,
+                            offsetU,
+                            0,
+                            6,
+                            6,
+                            128,
+                            128
+                        )
+                );
 
             float inkConsumption = catalyst.inkConsumptionMod();
-            offsetU = inkConsumption == 1 ? 97 : inkConsumption >= 8 ? 85 : inkConsumption > 1 ? 67
-                                                                                               : inkConsumption <= 0.25
-                                                                                                 ? 79 : 73;
-            widgets.add(
-                Widgets.createTexturedWidget(
-                    BACKGROUND_TEXTURE, offsetX + 5, startPoint.y + 1 + 69, offsetU, 6, 6, 6,
-                    128, 128
-                ));
+            offsetU = inkConsumption == 1
+                ? 97
+                : inkConsumption >= 8
+                    ? 85
+                    : inkConsumption > 1
+                        ? 67
+                        : inkConsumption <= 0.25
+                            ? 79
+                            : 73;
+            widgets
+                .add(
+                    Widgets
+                        .createTexturedWidget(
+                            BACKGROUND_TEXTURE,
+                            offsetX + 5,
+                            startPoint.y + 1 + 69,
+                            offsetU,
+                            6,
+                            6,
+                            6,
+                            128,
+                            128
+                        )
+                );
 
             float consumeChance = catalyst.consumeChancePerSecond();
             offsetU = consumeChance == 0 ? 97 : consumeChance >= 0.2 ? 85 : consumeChance >= 0.05 ? 67 : 91;
-            widgets.add(
-                Widgets.createTexturedWidget(
-                    BACKGROUND_TEXTURE, offsetX + 5, startPoint.y + 1 + 79, offsetU, 6, 6, 6,
-                    128, 128
-                ));
+            widgets
+                .add(
+                    Widgets
+                        .createTexturedWidget(
+                            BACKGROUND_TEXTURE,
+                            offsetX + 5,
+                            startPoint.y + 1 + 79,
+                            offsetU,
+                            6,
+                            6,
+                            6,
+                            128,
+                            128
+                        )
+                );
 
             i++;
         }
 
         // description texts
         if (display.growsWithoutCatalyst) {
-            widgets.add(Widgets.createLabel(
-                                   new Point(startPoint.x, startPoint.y + 1 + 90), Component.translatable(
-                                       "container.pastel.rei.crystallarieum" +
-                                       ".crafting_time_per_stage_seconds_catalyst_optional",
-                                       display.secondsPerStage
-                                   )
-                               )
-                               .leftAligned()
-                               .color(0x3f3f3f)
-                               .noShadow());
+            widgets
+                .add(
+                    Widgets
+                        .createLabel(
+                            new Point(startPoint.x, startPoint.y + 1 + 90),
+                            Component
+                                .translatable(
+                                    "container.pastel.rei.crystallarieum" + ".crafting_time_per_stage_seconds_catalyst_optional",
+                                    display.secondsPerStage
+                                )
+                        )
+                        .leftAligned()
+                        .color(0x3f3f3f)
+                        .noShadow()
+                );
         } else {
-            widgets.add(Widgets.createLabel(
-                                   new Point(startPoint.x, startPoint.y + 1 + 90), Component.translatable(
-                                       "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds",
-                                       display.secondsPerStage)
-                               )
-                               .leftAligned()
-                               .color(0x3f3f3f)
-                               .noShadow());
+            widgets
+                .add(
+                    Widgets
+                        .createLabel(
+                            new Point(startPoint.x, startPoint.y + 1 + 90),
+                            Component
+                                .translatable(
+                                    "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds",
+                                    display.secondsPerStage
+                                )
+                        )
+                        .leftAligned()
+                        .color(0x3f3f3f)
+                        .noShadow()
+                );
         }
     }
 

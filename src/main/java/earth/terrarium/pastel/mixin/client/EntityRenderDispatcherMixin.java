@@ -22,7 +22,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(EntityRenderDispatcher.class)
+@Mixin(
+    EntityRenderDispatcher.class
+)
 public abstract class EntityRenderDispatcherMixin {
 
     @Shadow
@@ -30,41 +32,64 @@ public abstract class EntityRenderDispatcherMixin {
 
     @Shadow
     private static void fireVertex(
-        PoseStack.Pose entry, VertexConsumer vertices, float x, float y, float z, float u, float v) {
+        PoseStack.Pose entry,
+        VertexConsumer vertices,
+        float x,
+        float y,
+        float z,
+        float u,
+        float v
+    ) {
     }
 
-    @Inject(method = "renderFlame", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(
+        method = "renderFlame", at = @At(
+            value = "HEAD"
+        ), cancellable = true
+    )
     public void render(
-        PoseStack matrices, MultiBufferSource vertexConsumers, Entity entity, Quaternionf rotation, CallbackInfo ci) {
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        Entity entity,
+        Quaternionf rotation,
+        CallbackInfo ci
+    ) {
         if (entity instanceof LivingEntity livingEntity && PrimordialFireData.isOnPrimordialFire(livingEntity)) {
             ci.cancel();
         }
     }
 
-
-    @Inject(method = "render", at = @At(value = "INVOKE",
-                                        target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;render" +
-                                                 "(Lnet/minecraft/world/entity/Entity;" +
-                                                 "FFLcom/mojang/blaze3d/vertex/PoseStack;" +
-                                                 "Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
-                                        shift = At.Shift.AFTER))
+    @Inject(
+        method = "render", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;render" + "(Lnet/minecraft/world/entity/Entity;" + "FFLcom/mojang/blaze3d/vertex/PoseStack;" + "Lnet/minecraft/client/renderer/MultiBufferSource;I)V", shift = At.Shift.AFTER
+        )
+    )
     public <E extends Entity> void render(
-        E entity, double x, double y, double z, float yaw, float tickDelta, PoseStack matrices,
-        MultiBufferSource vertexConsumers, int light, CallbackInfo ci
+        E entity,
+        double x,
+        double y,
+        double z,
+        float yaw,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        CallbackInfo ci
     ) {
         if (entity instanceof LivingEntity livingEntity && PrimordialFireData.isOnPrimordialFire(livingEntity)) {
             renderPrimordialFire(matrices, vertexConsumers, entity);
         }
     }
 
-    @Unique
-    private void renderPrimordialFire(PoseStack matrices, MultiBufferSource vertexConsumers, Entity entity) {
-        TextureAtlasSprite sprite = Minecraft.getInstance()
-                                             .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
-                                             .apply(PastelCommon.locate("block/primordial_fire_0"));
-        TextureAtlasSprite sprite2 = Minecraft.getInstance()
-                                              .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
-                                              .apply(PastelCommon.locate("block/primordial_fire_1"));
+    @Unique private void renderPrimordialFire(PoseStack matrices, MultiBufferSource vertexConsumers, Entity entity) {
+        TextureAtlasSprite sprite = Minecraft
+            .getInstance()
+            .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+            .apply(PastelCommon.locate("block/primordial_fire_0"));
+        TextureAtlasSprite sprite2 = Minecraft
+            .getInstance()
+            .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+            .apply(PastelCommon.locate("block/primordial_fire_1"));
         matrices.pushPose();
         float f = entity.getBbWidth() * 1.4F;
         matrices.scale(f, f, f);
@@ -77,7 +102,11 @@ public abstract class EntityRenderDispatcherMixin {
         int l = 0;
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(Sheets.cutoutBlockSheet());
 
-        for (PoseStack.Pose entry = matrices.last(); i > 0.0F; ++l) {
+        for (
+            PoseStack.Pose entry = matrices.last();
+            i > 0.0F;
+            ++l
+        ) {
             TextureAtlasSprite sprite3 = l % 2 == 0 ? sprite : sprite2;
             float m = sprite3.getU0();
             float n = sprite3.getV0();
@@ -101,6 +130,5 @@ public abstract class EntityRenderDispatcherMixin {
 
         matrices.popPose();
     }
-
 
 }

@@ -11,23 +11,32 @@ import net.minecraft.world.level.LocalMobCapCalculator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(LocalMobCapCalculator.class)
+@Mixin(
+    LocalMobCapCalculator.class
+)
 public class SpawnDensityCapperMixin {
 
-    @WrapOperation(method = "canSpawn", at = @At(value = "INVOKE",
-                                                 target = "Lnet/minecraft/world/level" +
-                                                          "/LocalMobCapCalculator$MobCounts;canSpawn" +
-                                                          "(Lnet/minecraft/world/entity/MobCategory;)Z"))
+    @WrapOperation(
+        method = "canSpawn", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/level" + "/LocalMobCapCalculator$MobCounts;canSpawn" + "(Lnet/minecraft/world/entity/MobCategory;)Z"
+        )
+    )
     public boolean reduceSpawnCap(
-        LocalMobCapCalculator.MobCounts instance, MobCategory spawnGroup, Operation<Boolean> original,
-        @Local LocalMobCapCalculator.MobCounts densityCap, @Local ServerPlayer serverPlayerEntity
+        LocalMobCapCalculator.MobCounts instance,
+        MobCategory spawnGroup,
+        Operation<Boolean> original,
+        @Local
+        LocalMobCapCalculator.MobCounts densityCap,
+        @Local
+        ServerPlayer serverPlayerEntity
     ) {
         var calming = serverPlayerEntity.getEffect(PastelMobEffects.CALMING);
 
         if (calming != null) {
-            return densityCap == null || ((DensityCapAccessor) densityCap).getCounts()
-                                                                          .getOrDefault(spawnGroup, 0) <
-                                         spawnGroup.getMaxInstancesPerChunk() - ((calming.getAmplifier() + 1) * 2.5);
+            return densityCap == null || ((DensityCapAccessor) densityCap)
+                .getCounts()
+                .getOrDefault(spawnGroup, 0) < spawnGroup.getMaxInstancesPerChunk() - ((calming
+                    .getAmplifier() + 1) * 2.5);
         }
 
         return original.call(instance, spawnGroup);

@@ -17,37 +17,39 @@ import java.util.List;
 import java.util.Optional;
 
 public class FusionShrineDisplay extends PastelDisplay {
-	
-	protected final float experience;
-	protected final int craftingTime;
-	protected final Optional<Component> description;
-	
-	public FusionShrineDisplay(@NotNull RecipeHolder<FusionShrineRecipe> recipe) {
-		super(recipe, buildIngredients(recipe.value()), recipe.value().getResultItem(BasicDisplay.registryAccess()));
-		this.experience = recipe.value().getExperience();
-		this.craftingTime = recipe.value().getCraftingTime();
-		this.description = recipe.value().getDescription();
-	}
-	
-	private static List<EntryIngredient> buildIngredients(FusionShrineRecipe recipe) {
-		List<EntryIngredient> inputs = REIHelper.toEntryIngredients(recipe.getIngredientStacks());
-		inputs.add(0, REIHelper.ofFluidIngredient(recipe.getFluid()));
-		return inputs;
-	}
-	
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return PastelPlugins.FUSION_SHRINE;
-	}
-	
-	@Override
+
+    protected final float experience;
+
+    protected final int craftingTime;
+
+    protected final Optional<Component> description;
+
+    public FusionShrineDisplay(@NotNull RecipeHolder<FusionShrineRecipe> recipe) {
+        super(recipe, buildIngredients(recipe.value()), recipe.value().getResultItem(BasicDisplay.registryAccess()));
+        this.experience = recipe.value().getExperience();
+        this.craftingTime = recipe.value().getCraftingTime();
+        this.description = recipe.value().getDescription();
+    }
+
+    private static List<EntryIngredient> buildIngredients(FusionShrineRecipe recipe) {
+        List<EntryIngredient> inputs = REIHelper.toEntryIngredients(recipe.getIngredientStacks());
+        inputs.add(0, REIHelper.ofFluidIngredient(recipe.getFluid()));
+        return inputs;
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return PastelPlugins.FUSION_SHRINE;
+    }
+
+    @Override
     public boolean isUnlocked() {
-		Minecraft client = Minecraft.getInstance();
-		return DatabankUtils.hasAdvancement(client.player, FusionShrineRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
-	}
-	
-	public Optional<Component> getDescription() {
-		return this.description;
-	}
-	
+        Minecraft client = Minecraft.getInstance();
+        return DatabankUtils.hasAdvancement(client.player, FusionShrineRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
+    }
+
+    public Optional<Component> getDescription() {
+        return this.description;
+    }
+
 }

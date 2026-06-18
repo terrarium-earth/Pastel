@@ -10,8 +10,11 @@ import org.jetbrains.annotations.Nullable;
 public class BookLinkPageRenderer extends BookTextPageRenderer {
 
     private static final int BUTTON_HEIGHT = Button.DEFAULT_HEIGHT;
+
     private static final int BUTTON_WIDTH = BookEntryScreen.PAGE_WIDTH - 12;
+
     private static final int BUTTON_X = 2;
+
     private static final int BUTTON_Y = BookEntryScreen.PAGE_HEIGHT - BUTTON_HEIGHT - 3;
 
     public BookLinkPageRenderer(BookLinkPage page) {
@@ -24,26 +27,30 @@ public class BookLinkPageRenderer extends BookTextPageRenderer {
 
         super.onBeginDisplayPage(parentScreen, left, top);
 
-        addButton(Button.builder(
-                            linkPage.getLinkText()
-                                    .getComponent(), (b) -> {
-                            }
-                        )
-                        .size(BUTTON_WIDTH, BUTTON_HEIGHT)
-                        .pos(BUTTON_X, BUTTON_Y)
-                        .build());
+        addButton(
+            Button
+                .builder(
+                    linkPage
+                        .getLinkText()
+                        .getComponent(),
+                    (b) -> {
+                    }
+                )
+                .size(BUTTON_WIDTH, BUTTON_HEIGHT)
+                .pos(BUTTON_X, BUTTON_Y)
+                .build()
+        );
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public Style getClickedComponentStyleAt(double pMouseX, double pMouseY) {
         if (!(page instanceof BookLinkPage linkPage)) return null;
 
-        if (pMouseX >= BUTTON_X && pMouseY >= BUTTON_Y && pMouseX < BUTTON_X + BUTTON_WIDTH &&
-            pMouseY < BUTTON_Y + BUTTON_HEIGHT) {
-            return linkPage.getLinkText()
-                           .getComponent()
-                           .getStyle();
+        if (pMouseX >= BUTTON_X && pMouseY >= BUTTON_Y && pMouseX < BUTTON_X + BUTTON_WIDTH && pMouseY < BUTTON_Y + BUTTON_HEIGHT) {
+            return linkPage
+                .getLinkText()
+                .getComponent()
+                .getStyle();
         }
 
         return super.getClickedComponentStyleAt(pMouseX, pMouseY);

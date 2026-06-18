@@ -21,7 +21,7 @@ public class PastelTooltipAndLoreLang {
         provider.add("pastel.tooltip.ink_powered.prefix", "Consumes the following ink:");
         provider.add("pastel.tooltip.ink_powered.stored", "Stored:");
         provider.add("pastel.tooltip.ink_powered.unselect_color", "Unselect Color");
-        provider.add("pastel.tooltip.crystal_armor_empowered","+I");
+        provider.add("pastel.tooltip.crystal_armor_empowered", "+I");
         provider.add("pastel.tooltip.press_shift_for_controls", "Press Shift to view controls");
         provider.add("pastel.tooltip.press_shift_for_more", "Press Shift to view additional stats");
 

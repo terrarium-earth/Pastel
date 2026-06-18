@@ -11,11 +11,15 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PotionWorkshopReactingCategory extends GatedItemInformationPageCategory {
 
-    public static final EntryStack<ItemStack> POTION_WORKSHOP_ENTRY = EntryStacks.of(
-        PastelBlocks.POTION_WORKSHOP.get());
+    public static final EntryStack<ItemStack> POTION_WORKSHOP_ENTRY = EntryStacks
+        .of(
+            PastelBlocks.POTION_WORKSHOP.get()
+        );
 
     @Override
     public Renderer getIcon() {

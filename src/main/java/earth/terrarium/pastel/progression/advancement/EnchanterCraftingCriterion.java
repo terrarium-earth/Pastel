@@ -32,18 +32,27 @@ public class EnchanterCraftingCriterion extends SimpleCriterionTrigger<Enchanter
         MinMaxBounds.Ints spentExperience
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<EnchanterCraftingCriterion.Conditions> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                                    ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                               .forGetter(Conditions::player),
-                                    ItemPredicate.CODEC.optionalFieldOf("item", ItemPredicate.Builder.item()
-                                                                                                     .build()
-                                                 )
-                                                       .forGetter(Conditions::itemPredicate),
-                                    MinMaxBounds.Ints.CODEC.optionalFieldOf("spent_experience", MinMaxBounds.Ints.ANY)
-                                                           .forGetter(Conditions::spentExperience)
-                                )
-                                .apply(instance, EnchanterCraftingCriterion.Conditions::new));
+        public static final Codec<EnchanterCraftingCriterion.Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf(
+                                "item",
+                                ItemPredicate.Builder
+                                    .item()
+                                    .build()
+                            )
+                            .forGetter(Conditions::itemPredicate),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("spent_experience", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::spentExperience)
+                    )
+                    .apply(instance, EnchanterCraftingCriterion.Conditions::new)
+            );
 
         public boolean matches(ItemStack stack, int spentExperience) {
             if (!this.itemPredicate.test(stack)) {

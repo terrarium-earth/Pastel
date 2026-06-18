@@ -12,7 +12,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class SheepHeadModel extends PastelSkullModel {
 
     public SheepHeadModel(ModelPart root) {
@@ -23,13 +25,23 @@ public class SheepHeadModel extends PastelSkullModel {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(PartNames.HEAD, CubeListBuilder.create()
-                                                                       .texOffs(0, 0)
-                                                                       .addBox(
-                                                                           -3.0F, -6.0F, -4.0F, 6.0F, 6.0F, 8.0F,
-                                                                           new CubeDeformation(0.6F)
-                                                                       ), PartPose.ZERO
-        );
+        modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(
+                        -3.0F,
+                        -6.0F,
+                        -4.0F,
+                        6.0F,
+                        6.0F,
+                        8.0F,
+                        new CubeDeformation(0.6F)
+                    ),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 64, 32);
     }

@@ -11,8 +11,10 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class CompactingChestScreen extends AbstractContainerScreen<CompactingChestScreenHandler> {
 
-    public static final ResourceLocation BACKGROUND = PastelCommon.locate(
-        "textures/gui/container/compacting_chest.png");
+    public static final ResourceLocation BACKGROUND = PastelCommon
+        .locate(
+            "textures/gui/container/compacting_chest.png"
+        );
 
     public CompactingChestScreen(CompactingChestScreenHandler handler, Inventory playerInventory, Component title) {
         super(handler, playerInventory, title);
@@ -31,10 +33,11 @@ public class CompactingChestScreen extends AbstractContainerScreen<CompactingChe
         int x = (this.width - this.imageWidth) / 2 + 3;
         int y = (this.height - this.imageHeight) / 2 + 3;
 
-        Button craftingModeButton = Button.builder(Component.literal("Mode"), this::craftingModeButtonPressed)
-                                          .size(16, 16)
-                                          .pos(x + 154, y + 6)
-                                          .build();
+        Button craftingModeButton = Button
+            .builder(Component.literal("Mode"), this::craftingModeButtonPressed)
+            .size(16, 16)
+            .pos(x + 154, y + 6)
+            .build();
         //new ButtonWidget(x + 154, y + 6, 16, 16, Text.literal("Mode"), this::craftingModeButtonPressed);
         addWidget(craftingModeButton);
     }
@@ -53,8 +56,15 @@ public class CompactingChestScreen extends AbstractContainerScreen<CompactingChe
         int intInventoryY = 83;
 
         drawContext.drawString(this.font, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
-        drawContext.drawString(
-            this.font, this.playerInventoryTitle, inventoryX, intInventoryY, RenderHelper.GREEN_COLOR, false);
+        drawContext
+            .drawString(
+                this.font,
+                this.playerInventoryTitle,
+                inventoryX,
+                intInventoryY,
+                RenderHelper.GREEN_COLOR,
+                false
+            );
     }
 
     @Override
@@ -64,10 +74,18 @@ public class CompactingChestScreen extends AbstractContainerScreen<CompactingChe
         drawContext.blit(BACKGROUND, x, y, 0, 0, imageWidth, imageHeight);
 
         // the selected crafting mode
-        drawContext.blit(
-            BACKGROUND, x + 154, y + 6, 176, 16 * menu.getCraftingMode()
-                                                      .ordinal(), 16, 16
-        );
+        drawContext
+            .blit(
+                BACKGROUND,
+                x + 154,
+                y + 6,
+                176,
+                16 * menu
+                    .getCraftingMode()
+                    .ordinal(),
+                16,
+                16
+            );
     }
 
     @Override
@@ -76,10 +94,13 @@ public class CompactingChestScreen extends AbstractContainerScreen<CompactingChe
         super.render(drawContext, mouseX, mouseY, delta);
 
         if (mouseX > leftPos + 153 && mouseX < leftPos + 153 + 16 && mouseY > topPos + 5 && mouseY < topPos + 5 + 16) {
-            drawContext.renderTooltip(
-                this.font, Component.translatable("block.pastel.compacting_chest.toggle_crafting_mode"), mouseX,
-                mouseY
-            );
+            drawContext
+                .renderTooltip(
+                    this.font,
+                    Component.translatable("block.pastel.compacting_chest.toggle_crafting_mode"),
+                    mouseX,
+                    mouseY
+                );
         } else {
             renderTooltip(drawContext, mouseX, mouseY);
         }

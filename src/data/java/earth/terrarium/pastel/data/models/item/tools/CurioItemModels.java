@@ -35,8 +35,15 @@ public class CurioItemModels {
         PastelModelHelper.ITEM.simple(generators, PastelItems.ARTISTS_PALETTE);
         PastelModelHelper.ITEM.simple(generators, PastelItems.GLEAMING_PIN);
         PastelModelHelper.ITEM.layered(generators, PastelItems.LESSER_POTION_PENDANT, "_base", "_overlay");
-        PastelModelHelper.ITEM.layered(
-            generators, PastelItems.GREATER_POTION_PENDANT, "_base", "_overlay_1", "_overlay_2", "_overlay_3");
+        PastelModelHelper.ITEM
+            .layered(
+                generators,
+                PastelItems.GREATER_POTION_PENDANT,
+                "_base",
+                "_overlay_1",
+                "_overlay_2",
+                "_overlay_3"
+            );
         PastelModelHelper.ITEM.simple(generators, PastelItems.WEEPING_CIRCLET);
         PastelModelHelper.ITEM.simple(generators, PastelItems.PUFF_CIRCLET);
         PastelModelHelper.ITEM.simple(generators, PastelItems.WHISPY_CIRCLET);

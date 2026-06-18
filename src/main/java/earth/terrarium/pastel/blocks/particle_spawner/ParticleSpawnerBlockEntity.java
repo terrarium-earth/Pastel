@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 public class ParticleSpawnerBlockEntity extends BlockEntity implements MenuProvider {
 
     protected ParticleSpawnerConfiguration configuration;
+
     protected boolean initialized = false;
 
     public ParticleSpawnerBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -35,7 +36,10 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements MenuProvi
     }
 
     public ParticleSpawnerBlockEntity(
-        BlockEntityType<ParticleSpawnerBlockEntity> blockEntityType, BlockPos blockPos, BlockState blockState) {
+        BlockEntityType<ParticleSpawnerBlockEntity> blockEntityType,
+        BlockPos blockPos,
+        BlockState blockState
+    ) {
         super(blockEntityType, blockPos, blockState);
 
         this.configuration = new ParticleSpawnerConfiguration(
@@ -56,11 +60,13 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements MenuProvi
         );
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void clientTick(Level world, BlockPos pos, BlockState state, ParticleSpawnerBlockEntity blockEntity) {
         BlockState blockState = world.getBlockState(pos);
-        if (blockState.getBlock() instanceof AbstractParticleSpawnerBlock particleSpawnerBlock &&
-            particleSpawnerBlock.shouldSpawnParticles(world, pos)) {
+        if (blockState.getBlock() instanceof AbstractParticleSpawnerBlock particleSpawnerBlock && particleSpawnerBlock
+            .shouldSpawnParticles(world, pos)) {
             blockEntity.configuration.spawnParticles(world, pos);
         }
     }
@@ -73,46 +79,52 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements MenuProvi
         return nbtCompound;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
     public void updateInClientWorld() {
         if (level != null) {
-            level.sendBlockUpdated(
-                worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition),
-                Block.UPDATE_INVISIBLE
-            );
+            level
+                .sendBlockUpdated(
+                    worldPosition,
+                    level.getBlockState(worldPosition),
+                    level.getBlockState(worldPosition),
+                    Block.UPDATE_INVISIBLE
+                );
         }
     }
 
     @Override
     public void saveAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
         super.saveAdditional(tag, registryLookup);
-        tag.put(
-            "particle_config", ParticleSpawnerConfiguration.CODEC.encodeStart(NbtOps.INSTANCE, this.configuration)
-                                                                 .result()
-                                                                 .orElse(new CompoundTag())
-        );
+        tag
+            .put(
+                "particle_config",
+                ParticleSpawnerConfiguration.CODEC
+                    .encodeStart(NbtOps.INSTANCE, this.configuration)
+                    .result()
+                    .orElse(new CompoundTag())
+            );
     }
 
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
         super.loadAdditional(tag, registryLookup);
         this.initialized = false;
-        var config = ParticleSpawnerConfiguration.CODEC.decode(NbtOps.INSTANCE, tag.getCompound("particle_config"))
-                                                       .result();
+        var config = ParticleSpawnerConfiguration.CODEC
+            .decode(NbtOps.INSTANCE, tag.getCompound("particle_config"))
+            .result();
         if (config.isPresent()) {
-            this.configuration = config.get()
-                                       .getFirst();
+            this.configuration = config
+                .get()
+                .getFirst();
             this.initialized = true;
         }
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
         return new ParticleSpawnerScreenHandler(syncId, inv, this);
     }

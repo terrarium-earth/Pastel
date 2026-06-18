@@ -25,9 +25,11 @@ import org.jetbrains.annotations.Nullable;
 public abstract class InWorldInteractionBlockEntity extends BlockEntity implements RandomizableContainer {
 
     private final int inventorySize;
+
     protected final FriendlyStackHandler inventory;
-    @Nullable
-    protected ResourceKey<LootTable> lootTable;
+
+    @Nullable protected ResourceKey<LootTable> lootTable;
+
     protected long lootTableSeed;
 
     public InWorldInteractionBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int inventorySize) {
@@ -39,8 +41,9 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
     // interaction methods
     public void updateInClientWorld() {
         if (level instanceof ServerLevel serverWorld)
-            serverWorld.getChunkSource()
-                       .blockChanged(worldPosition);
+            serverWorld
+                .getChunkSource()
+                .blockChanged(worldPosition);
     }
 
     public FriendlyStackHandler getInventory() {
@@ -58,8 +61,9 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
         super.loadAdditional(nbt, registryLookup);
-        this.inventory.getInternalList()
-                      .clear();
+        this.inventory
+            .getInternalList()
+            .clear();
         if (!this.tryLoadLootTable(nbt)) {
             inventory.load(nbt, registryLookup);
         }
@@ -76,14 +80,14 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
     @Override
     public void unpackLootTable(@Nullable Player player) {
         if (lootTableSeed == 0 && level != null)
-            lootTableSeed = level.getRandom()
-                                 .nextLong();
+            lootTableSeed = level
+                .getRandom()
+                .nextLong();
         RandomizableContainer.super.unpackLootTable(player);
         this.setChanged();
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
@@ -122,8 +126,11 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
     protected void collectImplicitComponents(DataComponentMap.Builder componentMapBuilder) {
         super.collectImplicitComponents(componentMapBuilder);
         if (this.lootTable != null) {
-            componentMapBuilder.set(
-                DataComponents.CONTAINER_LOOT, new SeededContainerLoot(this.lootTable, this.lootTableSeed));
+            componentMapBuilder
+                .set(
+                    DataComponents.CONTAINER_LOOT,
+                    new SeededContainerLoot(this.lootTable, this.lootTableSeed)
+                );
         }
     }
 
@@ -144,11 +151,14 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
 
     @Override
     public boolean isEmpty() {
-        if (inventory.getInternalList()
-                     .isEmpty())
+        if (inventory
+            .getInternalList()
+            .isEmpty())
             return true;
 
-        for (ItemStack stack : inventory.getInternalList()) {
+        for (
+            ItemStack stack : inventory.getInternalList()
+        ) {
             if (!stack.isEmpty())
                 return false;
         }
@@ -172,7 +182,8 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
 
     @Override
     public void clearContent() {
-        inventory.getInternalList()
-                 .clear();
+        inventory
+            .getInternalList()
+            .clear();
     }
 }

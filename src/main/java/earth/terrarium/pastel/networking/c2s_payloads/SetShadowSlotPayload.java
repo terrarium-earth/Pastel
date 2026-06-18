@@ -14,17 +14,23 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record SetShadowSlotPayload(
-    int screenHandlerSyncId, int slotId,
+    int screenHandlerSyncId,
+    int slotId,
     ItemStack shadowStack
 ) implements CustomPacketPayload {
 
     public static final Type<SetShadowSlotPayload> ID = PastelC2SPackets.makeId("set_shadow_slot");
-    public static final StreamCodec<RegistryFriendlyByteBuf, SetShadowSlotPayload> CODEC = StreamCodec.composite(
-        ByteBufCodecs.INT, SetShadowSlotPayload::screenHandlerSyncId,
-        ByteBufCodecs.INT, SetShadowSlotPayload::slotId,
-        ItemStack.STREAM_CODEC, SetShadowSlotPayload::shadowStack,
-        SetShadowSlotPayload::new
-    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, SetShadowSlotPayload> CODEC = StreamCodec
+        .composite(
+            ByteBufCodecs.INT,
+            SetShadowSlotPayload::screenHandlerSyncId,
+            ByteBufCodecs.INT,
+            SetShadowSlotPayload::slotId,
+            ItemStack.STREAM_CODEC,
+            SetShadowSlotPayload::shadowStack,
+            SetShadowSlotPayload::new
+        );
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
@@ -41,13 +47,13 @@ public record SetShadowSlotPayload(
             }
 
             Slot slot = screenHandler.getSlot(payload.slotId);
-            if (slot == null || !(slot instanceof ShadowSlot) ||
-                !(slot.container instanceof FilterConfigurable.FilterInventory filterInventory)) {
+            if (slot == null || !(slot instanceof ShadowSlot) || !(slot.container instanceof FilterConfigurable.FilterInventory filterInventory)) {
                 return;
             }
 
-            filterInventory.getClicker()
-                           .clickShadowSlot(screenHandler.containerId, slot, payload.shadowStack());
+            filterInventory
+                .getClicker()
+                .clickShadowSlot(screenHandler.containerId, slot, payload.shadowStack());
         };
     }
 

@@ -14,10 +14,13 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class EggLayingWoolyPigHatEntityModel extends EntityModel<EggLayingWoolyPigEntity> {
 
     private final ModelPart torso;
+
     private final ModelPart head;
 
     public EggLayingWoolyPigHatEntityModel(ModelPart root) {
@@ -29,15 +32,22 @@ public class EggLayingWoolyPigHatEntityModel extends EntityModel<EggLayingWoolyP
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-        PartDefinition torso = modelPartData.addOrReplaceChild(
-            "torso", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+        PartDefinition torso = modelPartData
+            .addOrReplaceChild(
+                "torso",
+                CubeListBuilder.create(),
+                PartPose.offset(0.0F, 24.0F, 0.0F)
+            );
 
-        torso.addOrReplaceChild(
-            "head", CubeListBuilder.create()
-                                   .texOffs(45, 0)
-                                   .addBox(-5.02F, -7.0F, -7.0F, 10.0F, 7.0F, 10.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, -13.0F, -7.0F)
-        );
+        torso
+            .addOrReplaceChild(
+                "head",
+                CubeListBuilder
+                    .create()
+                    .texOffs(45, 0)
+                    .addBox(-5.02F, -7.0F, -7.0F, 10.0F, 7.0F, 10.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -13.0F, -7.0F)
+            );
 
         return LayerDefinition.create(modelData, 128, 128);
     }
@@ -53,7 +63,11 @@ public class EggLayingWoolyPigHatEntityModel extends EntityModel<EggLayingWoolyP
 
     @Override
     public void setupAnim(
-        EggLayingWoolyPigEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+        EggLayingWoolyPigEntity entity,
+        float limbSwing,
+        float limbSwingAmount,
+        float ageInTicks,
+        float netHeadYaw,
         float headPitch
     ) {
         this.head.xRot = this.headPitchModifier;

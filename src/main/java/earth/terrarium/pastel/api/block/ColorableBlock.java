@@ -32,7 +32,12 @@ public interface ColorableBlock {
     }
 
     default boolean tryColorUsingStackInHand(
-        ItemStack handStack, Level world, BlockPos pos, Player player, InteractionHand hand) {
+        ItemStack handStack,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand
+    ) {
         Optional<DyeColor> itemInHandColor = ColorHelper.getDyeColorOfItemStack(handStack);
         if (itemInHandColor.isPresent()) {
             if (color(world, pos, itemInHandColor, player)) {

@@ -27,8 +27,9 @@ public class PhantomFrameEntity extends ItemFrame {
 
     @Override
     public boolean isInvisible() {
-        if (this.getItem()
-                .isEmpty()) {
+        if (this
+            .getItem()
+            .isEmpty()) {
             return super.isInvisible();
         } else {
             return true;
@@ -43,13 +44,20 @@ public class PhantomFrameEntity extends ItemFrame {
     @Override
     public void setItem(ItemStack value, boolean update) {
         super.setItem(value, update);
-        if (update && this.isAlive() && !this.level()
-                                             .isClientSide()) {
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                (ServerLevel) this.level(), position(), ParticleTypes.END_ROD, 10, new Vec3(0, 0, 0),
-                new Vec3(0.1, 0.1, 0.1)
-            );
-            this.level()
+        if (update && this.isAlive() && !this
+            .level()
+            .isClientSide()) {
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    (ServerLevel) this.level(),
+                    position(),
+                    ParticleTypes.END_ROD,
+                    10,
+                    new Vec3(0, 0, 0),
+                    new Vec3(0.1, 0.1, 0.1)
+                );
+            this
+                .level()
                 .playSound(null, this, PastelSounds.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
         }
     }
@@ -57,21 +65,29 @@ public class PhantomFrameEntity extends ItemFrame {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         boolean success = super.hurt(source, amount);
-        if (success && this.isAlive() && !this.level()
-                                              .isClientSide()) {
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                (ServerLevel) this.level(), position(), ParticleTypes.END_ROD, 10, new Vec3(0, 0, 0),
-                new Vec3(0.1, 0.1, 0.1)
-            );
-            this.level()
+        if (success && this.isAlive() && !this
+            .level()
+            .isClientSide()) {
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    (ServerLevel) this.level(),
+                    position(),
+                    ParticleTypes.END_ROD,
+                    10,
+                    new Vec3(0, 0, 0),
+                    new Vec3(0.1, 0.1, 0.1)
+                );
+            this
+                .level()
                 .playSound(null, this, PastelSounds.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
         }
         return success;
     }
 
     public boolean isRedstonePowered() {
-        return this.level()
-                   .getBestNeighborSignal(this.blockPosition()) > 0;
+        return this
+            .level()
+            .getBestNeighborSignal(this.blockPosition()) > 0;
     }
 
     public boolean shouldRenderAtMaxLight() {

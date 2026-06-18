@@ -40,41 +40,64 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttackAwareItem, EquipAwareItem,
+public class WhipItem extends SwordItem implements
+    ExtendedItemBar,
+    EntityAttackAwareItem,
+    EquipAwareItem,
     SplitDamageHandler {
     public static final ResourceLocation FERVOR_ATK_SPEED = PastelCommon.locate("fervor_atk_speed");
+
     protected final int maxFervor, fervorOnHit, minFervorForEffects;
+
     protected final float maxFervorSpeed;
 
     public WhipItem(
-        Tier tier, int attackDamage, float attackSpeed, float reach, int maxFervor, int fervorOnHit,
-        int minFervorForEffects, float maxFervorSpeed, Properties properties
+        Tier tier,
+        int attackDamage,
+        float attackSpeed,
+        float reach,
+        int maxFervor,
+        int fervorOnHit,
+        int minFervorForEffects,
+        float maxFervorSpeed,
+        Properties properties
     ) {
-        super(tier, properties.attributes(ItemAttributeModifiers.builder()
-                                                              .add(
-                                                                  Attributes.ATTACK_DAMAGE,
-                                                                  new AttributeModifier(
-                                                                      BASE_ATTACK_DAMAGE_ID,
-                                                                      attackDamage,
-                                                                      AttributeModifier.Operation.ADD_VALUE
-                                                                  ), EquipmentSlotGroup.MAINHAND
-                                                              )
-                                                              .add(
-                                                                  Attributes.ATTACK_SPEED,
-                                                                  new AttributeModifier(
-                                                                      BASE_ATTACK_SPEED_ID,
-                                                                      attackSpeed,
-                                                                      AttributeModifier.Operation.ADD_VALUE
-                                                                  ), EquipmentSlotGroup.MAINHAND
-                                                              )
-                                                              .add(
-                                                                  Attributes.ENTITY_INTERACTION_RANGE,
-                                                                  new AttributeModifier(
-                                                                      PastelEntityAttributes.REACH_MODIFIER_ID, reach,
-                                                                      AttributeModifier.Operation.ADD_VALUE
-                                                                  ), EquipmentSlotGroup.MAINHAND
-                                                              )
-                                                              .build()));
+        super(
+            tier,
+            properties
+                .attributes(
+                    ItemAttributeModifiers
+                        .builder()
+                        .add(
+                            Attributes.ATTACK_DAMAGE,
+                            new AttributeModifier(
+                                BASE_ATTACK_DAMAGE_ID,
+                                attackDamage,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .add(
+                            Attributes.ATTACK_SPEED,
+                            new AttributeModifier(
+                                BASE_ATTACK_SPEED_ID,
+                                attackSpeed,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .add(
+                            Attributes.ENTITY_INTERACTION_RANGE,
+                            new AttributeModifier(
+                                PastelEntityAttributes.REACH_MODIFIER_ID,
+                                reach,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .build()
+                )
+        );
         this.maxFervor = maxFervor;
         this.fervorOnHit = fervorOnHit;
         this.minFervorForEffects = minFervorForEffects;
@@ -83,8 +106,9 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
 
     @Override
     public AABB getSweepHitBox(ItemStack stack, Player player, Entity target) {
-        return target.getBoundingBox()
-                     .inflate(5.0, 0.25, 5.0); // it's a whip
+        return target
+            .getBoundingBox()
+            .inflate(5.0, 0.25, 5.0); // it's a whip
     }
 
     public static void incrementFervor(ItemStack stack, int fervor) {
@@ -93,17 +117,21 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
     }
 
     public static void checkFervorReset(ItemStack stack) {
-        if(stack.getOrDefault(PastelDataComponentTypes.FERVOR_RESET, false)){
+        if (stack.getOrDefault(PastelDataComponentTypes.FERVOR_RESET, false)) {
             stack.set(PastelDataComponentTypes.FERVOR_RESET, false);
             stack.set(PastelDataComponentTypes.FERVOR, 0);
         }
     }
-    
+
     @Override
     public void appendHoverText(
-        ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        ItemStack stack,
+        TooltipContext context,
+        List<Component> tooltipComponents,
+        TooltipFlag tooltipFlag
+    ) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        if(EffectiveSide.get().isClient()) {
+        if (EffectiveSide.get().isClient()) {
             tooltipComponents.add(Component.translatable("item.pastel.whip.tooltip"));
             tooltipComponents.add(Component.translatable("item.pastel.whip.tooltip1"));
             tooltipComponents.add(Component.translatable("item.pastel.whip.tooltip2"));
@@ -128,33 +156,45 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         var stack = player.getItemInHand(usedHand);
         var fervor = stack
-                           .getOrDefault(PastelDataComponentTypes.FERVOR, 0);
+            .getOrDefault(PastelDataComponentTypes.FERVOR, 0);
         checkFervorReset(stack);
         if (fervor < 0) { // we're using it while we're already charged up and full of fervor; apply buffs to self
             stack
-                  .set(PastelDataComponentTypes.FERVOR, 0);
+                .set(PastelDataComponentTypes.FERVOR, 0);
             healOrBuff(player, player, -fervor);
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
         }
         if (fervor < this.minFervorForEffects) return super.use(
-            level, player, usedHand); // not negative fervor, not enough for overcharge; do nothing
+            level,
+            player,
+            usedHand
+        ); // not negative fervor, not enough for overcharge; do nothing
         level.playSound(null, player.blockPosition(), PastelSounds.WHIP_FERVOR_EXPEND, SoundSource.PLAYERS, 1.0F, 1.0F);
         stack
-              .set(PastelDataComponentTypes.FERVOR, -fervor); // this is how we handle 'consuming' devotion
+            .set(PastelDataComponentTypes.FERVOR, -fervor); // this is how we handle 'consuming' devotion
         return InteractionResultHolder.consume(stack);
     }
 
     public void healOrBuff(Player user, LivingEntity target, int fervor) {
-        user.level()
+        user
+            .level()
             .playSound(null, target.blockPosition(), PastelSounds.GLASS_SHIMMER, SoundSource.PLAYERS, 1.0F, 1.0F);
         float heal_mult = user.is(target) ? 0.5f : 1f; // half potency when using it on yourself
         target.heal(fervor * heal_mult); // pretty basic. override this for the fancy whip™
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, Mth.floor(200 * heal_mult * ((float) fervor / maxFervor)))); // up to 5 seconds of speed to yourself, 10 seconds to another. as a treat
+        target
+            .addEffect(
+                new MobEffectInstance(
+                    MobEffects.MOVEMENT_SPEED,
+                    Mth.floor(200 * heal_mult * ((float) fervor / maxFervor))
+                )
+            ); // up to 5 seconds of speed to yourself, 10 seconds to another. as a treat
     }
 
     @Override
     public InteractionResult interactLivingEntity(
-        ItemStack stack, Player player, LivingEntity interactionTarget,
+        ItemStack stack,
+        Player player,
+        LivingEntity interactionTarget,
         InteractionHand usedHand
     ) {
         checkFervorReset(stack);
@@ -170,11 +210,22 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
     @Override
     public @NotNull BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
         var fervor = stack.getOrDefault(PastelDataComponentTypes.FERVOR, 0);
-        if(fervor == 0) return ExtendedItemBar.PASS;
-        var progress = Math.round(
-            Mth.clampedLerp(0, 13, (float) fervor / maxFervor));
+        if (fervor == 0) return ExtendedItemBar.PASS;
+        var progress = Math
+            .round(
+                Mth.clampedLerp(0, 13, (float) fervor / maxFervor)
+            );
         var vanillaBarRendered = stack.isDamageableItem() && stack.getOrDefault(DataComponents.DAMAGE, 0) != 0;
-        return new BarSignature(2, vanillaBarRendered ? 11 : 13, 13, progress, 1, 0xFFDE3163, 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
+        return new BarSignature(
+            2,
+            vanillaBarRendered ? 11 : 13,
+            13,
+            progress,
+            1,
+            0xFFDE3163,
+            2,
+            ExtendedItemBar.DEFAULT_BACKGROUND_COLOR
+        );
     }
 
 //    @Override
@@ -184,7 +235,10 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
 
     @Override
     public void onEntityDamage(
-        ItemStack stack, LivingEntity target, LivingEntity attacker, DamageSource source,
+        ItemStack stack,
+        LivingEntity target,
+        LivingEntity attacker,
+        DamageSource source,
         float amount
     ) {
         if (amount <= 0f) return;
@@ -199,11 +253,22 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
             if (atk_spd != null) {
                 var mod = (float) newFervor / maxFervor * maxFervorSpeed;
                 atk_spd.removeModifier(FERVOR_ATK_SPEED);
-                atk_spd.addTransientModifier(
-                    new AttributeModifier(FERVOR_ATK_SPEED, mod, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                atk_spd
+                    .addTransientModifier(
+                        new AttributeModifier(FERVOR_ATK_SPEED, mod, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+                    );
             }
-            if(newFervor == maxFervor){
-                attacker.level().playSound(null, attacker.blockPosition(), PastelSounds.WHIP_FERVOR_PEAK, SoundSource.PLAYERS, 1.0f, 1.0f);
+            if (newFervor == maxFervor) {
+                attacker
+                    .level()
+                    .playSound(
+                        null,
+                        attacker.blockPosition(),
+                        PastelSounds.WHIP_FERVOR_PEAK,
+                        SoundSource.PLAYERS,
+                        1.0f,
+                        1.0f
+                    );
             }
         }
     }
@@ -223,8 +288,14 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
                 var mod = (float) stack.getOrDefault(PastelDataComponentTypes.FERVOR, 0) / maxFervor * maxFervorSpeed;
                 if (mod > 0) {
                     atk_spd.removeModifier(FERVOR_ATK_SPEED);
-                    atk_spd.addTransientModifier(
-                        new AttributeModifier(FERVOR_ATK_SPEED, mod, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                    atk_spd
+                        .addTransientModifier(
+                            new AttributeModifier(
+                                FERVOR_ATK_SPEED,
+                                mod,
+                                AttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            )
+                        );
                 }
             }
         }
@@ -232,7 +303,11 @@ public class WhipItem extends SwordItem implements ExtendedItemBar, EntityAttack
 
     @Override
     public DamageComposition getDamageComposition(
-        LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
+        LivingEntity attacker,
+        LivingEntity target,
+        ItemStack stack,
+        float damage
+    ) {
         var composition = new DamageComposition();
         composition.add(PastelDamageTypes.lacerating(target.level(), attacker), damage);
         return composition;

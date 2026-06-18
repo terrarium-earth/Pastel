@@ -5,7 +5,9 @@ import net.minecraft.world.level.block.DropExperienceBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(DropExperienceBlock.class)
+@Mixin(
+    DropExperienceBlock.class
+)
 public interface ExperienceDroppingBlockAccessor {
 
     @Accessor

@@ -13,28 +13,43 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 
 public class FrondsDecorator extends TreeDecorator {
 
-    public static final MapCodec<FrondsDecorator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                                                                                              Codec.FLOAT.fieldOf("chance")
-                                                                                                                         .forGetter(FrondsDecorator::getChance),
-                                                                                                              BlockStateProvider.CODEC.fieldOf("middle_block")
-                                                                                                                                      .forGetter(FrondsDecorator::getMiddleBlock),
-                                                                                                              BlockStateProvider.CODEC.fieldOf("last_block")
-                                                                                                                                      .forGetter(FrondsDecorator::getBottomBlock),
-                                                                                                              IntProvider.POSITIVE_CODEC.fieldOf("length")
-                                                                                                                                        .forGetter(FrondsDecorator::getLengthProvider)
-                                                                                                          )
-                                                                                                          .apply(
-                                                                                                              instance,
-                                                                                                              FrondsDecorator::new
-                                                                                                          ));
+    public static final MapCodec<FrondsDecorator> CODEC = RecordCodecBuilder
+        .mapCodec(
+            instance -> instance
+                .group(
+                    Codec.FLOAT
+                        .fieldOf("chance")
+                        .forGetter(FrondsDecorator::getChance),
+                    BlockStateProvider.CODEC
+                        .fieldOf("middle_block")
+                        .forGetter(FrondsDecorator::getMiddleBlock),
+                    BlockStateProvider.CODEC
+                        .fieldOf("last_block")
+                        .forGetter(FrondsDecorator::getBottomBlock),
+                    IntProvider.POSITIVE_CODEC
+                        .fieldOf("length")
+                        .forGetter(FrondsDecorator::getLengthProvider)
+                )
+                .apply(
+                    instance,
+                    FrondsDecorator::new
+                )
+        );
 
     public final float chance;
+
     public final BlockStateProvider middleBlock;
+
     public final BlockStateProvider bottomBlock;
+
     public final IntProvider lengthProvider;
 
     public FrondsDecorator(
-        float chance, BlockStateProvider middleBlock, BlockStateProvider bottomBlock, IntProvider lengthProvider) {
+        float chance,
+        BlockStateProvider middleBlock,
+        BlockStateProvider bottomBlock,
+        IntProvider lengthProvider
+    ) {
         this.chance = chance;
         this.middleBlock = middleBlock;
         this.bottomBlock = bottomBlock;
@@ -67,7 +82,9 @@ public class FrondsDecorator extends TreeDecorator {
         RandomSource random = generator.random();
 
         BlockPos.MutableBlockPos mutable;
-        for (BlockPos pos : generator.leaves()) {
+        for (
+            BlockPos pos : generator.leaves()
+        ) {
             if (!generator.isAir(pos.below())) {
                 continue;
             }

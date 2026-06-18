@@ -5,12 +5,17 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.JukeboxSong;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+    "unused"
+)
 public class PastelJukeboxSongs {
 
     public static final ResourceKey<JukeboxSong> CREDITS = of("credits");
+
     public static final ResourceKey<JukeboxSong> DISCOVERY = of("discovery");
+
     public static final ResourceKey<JukeboxSong> DIVINITY = of("divinity");
+
     public static final ResourceKey<JukeboxSong> MEMORIAL = of("memorial");
 
     private static ResourceKey<JukeboxSong> of(String id) {

@@ -26,8 +26,11 @@ public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implement
 
     public ParticleSpawnerBlock(Properties settings) {
         super(settings);
-        registerDefaultState(getStateDefinition().any()
-                                                 .setValue(BlockStateProperties.POWERED, false));
+        registerDefaultState(
+            getStateDefinition()
+                .any()
+                .setValue(BlockStateProperties.POWERED, false)
+        );
     }
 
     @Override
@@ -37,10 +40,18 @@ public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implement
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("block.pastel.particle_spawner.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("block.pastel.particle_spawner.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
@@ -50,7 +61,13 @@ public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implement
 
     @Override
     public void neighborChanged(
-        BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Block block,
+        BlockPos fromPos,
+        boolean notify
+    ) {
         if (!world.isClientSide) {
             if (this.checkGettingPowered(world, pos)) {
                 this.power(world, pos);
@@ -63,8 +80,9 @@ public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implement
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState placementState = this.defaultBlockState();
-        if (ctx.getLevel()
-               .getBestNeighborSignal(ctx.getClickedPos()) > 0) {
+        if (ctx
+            .getLevel()
+            .getBestNeighborSignal(ctx.getClickedPos()) > 0) {
             placementState = placementState.setValue(BlockStateProperties.POWERED, true);
         }
         return placementState;
@@ -72,9 +90,10 @@ public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implement
 
     @Override
     public boolean shouldSpawnParticles(Level world, BlockPos pos) {
-        return world.getBlockState(pos)
-                    .getValue(BlockStateProperties.POWERED)
-                    .equals(true);
+        return world
+            .getBlockState(pos)
+            .getValue(BlockStateProperties.POWERED)
+            .equals(true);
     }
 
 }

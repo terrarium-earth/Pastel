@@ -25,6 +25,7 @@ import java.util.function.Predicate;
 public class MiningProjectileEntity extends MagicProjectileEntity {
 
     private static final int MINING_RANGE = 1;
+
     private ItemStack toolStack = ItemStack.EMPTY;
 
     public MiningProjectileEntity(EntityType<MiningProjectileEntity> type, Level world) {
@@ -62,11 +63,21 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
     }
 
     private void spawnParticles(int amount) {
-        for (int j = 0; j < amount; ++j) {
-            this.level()
+        for (
+            int j = 0;
+            j < amount;
+            ++j
+        ) {
+            this
+                .level()
                 .addParticle(
-                    ColoredCraftingParticleEffect.WHITE, this.getRandomX(0.5D), this.getRandomY(),
-                    this.getRandomZ(0.5D), 0, 0, 0
+                    ColoredCraftingParticleEffect.WHITE,
+                    this.getRandomX(0.5D),
+                    this.getRandomY(),
+                    this.getRandomZ(0.5D),
+                    0,
+                    0,
+                    0
                 );
         }
     }
@@ -79,8 +90,17 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
     }
 
     private void strike() {
-        MoonstoneStrike.create(this.level(), this, null, this.getX(), this.getY(), this.getZ(), 1,
-                               Support.varFloatCentered(random, 0.3F) - 0.1F);
+        MoonstoneStrike
+            .create(
+                this.level(),
+                this,
+                null,
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                1,
+                Support.varFloatCentered(random, 0.3F) - 0.1F
+            );
     }
 
     @Override
@@ -99,8 +119,14 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
                 int efficiencyLevel = Ench.getLevel(level().registryAccess(), Enchantments.EFFICIENCY, this.toolStack);
                 return hardness <= 6 + (suitable ? 4 + efficiencyLevel : 0);
             };
-            AoEHelper.breakBlocksAround(
-                player, this.toolStack, blockHitResult.getBlockPos(), MINING_RANGE, minablePredicate);
+            AoEHelper
+                .breakBlocksAround(
+                    player,
+                    this.toolStack,
+                    blockHitResult.getBlockPos(),
+                    MINING_RANGE,
+                    minablePredicate
+                );
         }
 
         this.discard();

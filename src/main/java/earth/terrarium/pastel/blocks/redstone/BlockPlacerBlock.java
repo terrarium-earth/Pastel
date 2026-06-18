@@ -47,7 +47,12 @@ public class BlockPlacerBlock extends RedstoneInteractionBlock implements Entity
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -59,11 +64,15 @@ public class BlockPlacerBlock extends RedstoneInteractionBlock implements Entity
     }
 
     protected void dispense(ServerLevel world, BlockState state, BlockPos pos) {
-        BlockPlacerBlockEntity blockEntity = world.getBlockEntity(pos, PastelBlockEntities.BLOCK_PLACER.get())
-                                                  .orElse(null);
+        BlockPlacerBlockEntity blockEntity = world
+            .getBlockEntity(pos, PastelBlockEntities.BLOCK_PLACER.get())
+            .orElse(null);
         if (blockEntity == null) {
-            PastelCommon.LOGGER.warn(
-                "Ignoring block place attempt for Block Player without matching block entity at {}", pos);
+            PastelCommon.LOGGER
+                .warn(
+                    "Ignoring block place attempt for Block Player without matching block entity at {}",
+                    pos
+                );
         } else {
             BlockSource pointer = new BlockSource(world, pos, state, blockEntity);
             int slot = blockEntity.getRandomSlot(world.random);
@@ -83,11 +92,13 @@ public class BlockPlacerBlock extends RedstoneInteractionBlock implements Entity
     protected void tryPlace(@NotNull ItemStack stack, BlockSource pointer) {
         Level world = pointer.level();
         if (stack.getItem() instanceof BlockItem blockItem) {
-            Direction facing = pointer.state()
-                                      .getValue(BlockPlacerBlock.ORIENTATION)
-                                      .front();
-            BlockPos placementPos = pointer.pos()
-                                           .relative(facing);
+            Direction facing = pointer
+                .state()
+                .getValue(BlockPlacerBlock.ORIENTATION)
+                .front();
+            BlockPos placementPos = pointer
+                .pos()
+                .relative(facing);
             Direction placementDirection = world.isEmptyBlock(placementPos.below()) ? facing : Direction.UP;
 
             if (!GenericClaimModsCompat.canPlaceBlock(world, placementPos, null)) {
@@ -95,20 +106,28 @@ public class BlockPlacerBlock extends RedstoneInteractionBlock implements Entity
             }
 
             try {
-                blockItem.place(
-                    new BlockPlacerPlacementContext(world, placementPos, facing, stack, placementDirection));
+                blockItem
+                    .place(
+                        new BlockPlacerPlacementContext(world, placementPos, facing, stack, placementDirection)
+                    );
                 world.levelEvent(LevelEvent.SOUND_DISPENSER_DISPENSE, pointer.pos(), 0);
-                world.levelEvent(
-                    LevelEvent.PARTICLES_SHOOT_SMOKE, pointer.pos(), pointer.state()
-                                                                            .getValue(BlockPlacerBlock.ORIENTATION)
-                                                                            .front()
-                                                                            .get3DDataValue()
-                );
+                world
+                    .levelEvent(
+                        LevelEvent.PARTICLES_SHOOT_SMOKE,
+                        pointer.pos(),
+                        pointer
+                            .state()
+                            .getValue(BlockPlacerBlock.ORIENTATION)
+                            .front()
+                            .get3DDataValue()
+                    );
                 world.gameEvent(null, GameEvent.BLOCK_PLACE, placementPos);
             } catch (Exception e) {
-                PastelCommon.logError(
-                    "Block Placer encountered an error placing a block at " + placementPos + " when placing " +
-                    BuiltInRegistries.ITEM.getKey(blockItem));
+                PastelCommon
+                    .logError(
+                        "Block Placer encountered an error placing a block at " + placementPos + " when placing " + BuiltInRegistries.ITEM
+                            .getKey(blockItem)
+                    );
                 e.printStackTrace();
             }
         } else {
@@ -119,7 +138,13 @@ public class BlockPlacerBlock extends RedstoneInteractionBlock implements Entity
 
     @Override
     public void neighborChanged(
-        BlockState state, Level world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Block sourceBlock,
+        BlockPos sourcePos,
+        boolean notify
+    ) {
         boolean bl = world.hasNeighborSignal(pos) || world.hasNeighborSignal(pos.above());
         boolean bl2 = state.getValue(TRIGGERED);
         if (bl && !bl2) {
@@ -154,7 +179,12 @@ public class BlockPlacerBlock extends RedstoneInteractionBlock implements Entity
     public static final class BlockPlacerPlacementContext extends DirectionalPlaceContext {
 
         public BlockPlacerPlacementContext(
-            Level world, BlockPos pos, Direction facing, ItemStack stack, Direction side) {
+            Level world,
+            BlockPos pos,
+            Direction facing,
+            ItemStack stack,
+            Direction side
+        ) {
             super(world, pos, facing, stack, side);
         }
 

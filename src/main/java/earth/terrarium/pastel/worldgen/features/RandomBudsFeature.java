@@ -33,11 +33,18 @@ public class RandomBudsFeature extends Feature<RandomBudsFeaturesConfig> {
         int j = randomBudsFeaturesConfig.xzSpread + 1;
         int k = randomBudsFeaturesConfig.ySpread + 1;
 
-        for (int l = 0; l < randomBudsFeaturesConfig.tries; ++l) {
-            mutable.setWithOffset(
-                blockPos, random.nextInt(j) - random.nextInt(j), random.nextInt(k) - random.nextInt(k),
-                random.nextInt(j) - random.nextInt(j)
-            );
+        for (
+            int l = 0;
+            l < randomBudsFeaturesConfig.tries;
+            ++l
+        ) {
+            mutable
+                .setWithOffset(
+                    blockPos,
+                    random.nextInt(j) - random.nextInt(j),
+                    random.nextInt(k) - random.nextInt(k),
+                    random.nextInt(j) - random.nextInt(j)
+                );
             List<Direction> directions = shuffleDirections(randomBudsFeaturesConfig, random);
             BlockState state = structureWorldAccess.getBlockState(mutable);
             boolean waterlogged = false;
@@ -55,8 +62,12 @@ public class RandomBudsFeature extends Feature<RandomBudsFeaturesConfig> {
     }
 
     public static boolean generate(
-        WorldGenLevel world, BlockPos pos, RandomBudsFeaturesConfig config, RandomSource random,
-        List<Direction> directions, boolean waterlogged
+        WorldGenLevel world,
+        BlockPos pos,
+        RandomBudsFeaturesConfig config,
+        RandomSource random,
+        List<Direction> directions,
+        boolean waterlogged
     ) {
         BlockPos.MutableBlockPos mutablePos = pos.mutable();
 
@@ -71,14 +82,16 @@ public class RandomBudsFeature extends Feature<RandomBudsFeaturesConfig> {
             blockState = world.getBlockState(mutablePos.setWithOffset(pos, direction));
         } while (!blockState.is(config.canPlaceOn));
 
-        BlockState stateToPlace = config.blocks.get(random.nextInt(config.blocks.size()))
-                                               .defaultBlockState()
-                                               .setValue(BlockStateProperties.FACING, direction.getOpposite())
-                                               .setValue(BlockStateProperties.WATERLOGGED, waterlogged);
+        BlockState stateToPlace = config.blocks
+            .get(random.nextInt(config.blocks.size()))
+            .defaultBlockState()
+            .setValue(BlockStateProperties.FACING, direction.getOpposite())
+            .setValue(BlockStateProperties.WATERLOGGED, waterlogged);
         if (stateToPlace.canSurvive(world, pos)) {
             world.setBlock(pos, stateToPlace, 3);
-            world.getChunk(pos)
-                 .markPosForPostprocessing(pos);
+            world
+                .getChunk(pos)
+                .markPosForPostprocessing(pos);
             return true;
         }
         return false;

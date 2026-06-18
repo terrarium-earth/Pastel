@@ -26,15 +26,16 @@ public class CompactingChestBlock extends PastelChestBlock {
     }
 
     @Override
-    @Nullable
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    @Nullable public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CompactingChestBlockEntity(pos, state);
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return createTickerHelper(type, PastelBlockEntities.COMPACTING_CHEST.get(), CompactingChestBlockEntity::tick);
     }
 

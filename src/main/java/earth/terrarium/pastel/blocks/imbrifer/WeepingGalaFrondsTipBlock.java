@@ -31,6 +31,7 @@ import java.util.List;
 public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
 
     public static final MapCodec<WeepingGalaFrondsTipBlock> CODEC = simpleCodec(WeepingGalaFrondsTipBlock::new);
+
     public static final EnumProperty<Form> FORM = EnumProperty.create("form", Form.class);
 
     public WeepingGalaFrondsTipBlock(Properties settings) {
@@ -58,12 +59,26 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
                 reference.setProperty(FORM, Form.RESIN);
                 reference.update(world);
             } else {
-                for (ItemStack rareStack : getResinStacks(
-                    state, world, pos, ItemStack.EMPTY, PastelLootTables.WEEPING_GALA_SPRIG_RESIN)) {
+                for (
+                    ItemStack rareStack : getResinStacks(
+                        state,
+                        world,
+                        pos,
+                        ItemStack.EMPTY,
+                        PastelLootTables.WEEPING_GALA_SPRIG_RESIN
+                    )
+                ) {
                     popResource(world, pos, rareStack);
                 }
-                world.playSound(
-                    null, pos, SoundEvents.BEEHIVE_DRIP, SoundSource.BLOCKS, 1, 0.9F + random.nextFloat() * 0.2F);
+                world
+                    .playSound(
+                        null,
+                        pos,
+                        SoundEvents.BEEHIVE_DRIP,
+                        SoundSource.BLOCKS,
+                        1,
+                        0.9F + random.nextFloat() * 0.2F
+                    );
                 reference.setProperty(FORM, Form.SPRIG);
                 reference.update(world);
             }
@@ -72,21 +87,38 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         var reference = BlockReference.of(state, pos);
         if (reference.getProperty(FORM) == Form.RESIN) {
             if (!world.isClientSide()) {
-                for (ItemStack rareStack : getResinStacks(
-                    state, (ServerLevel) world, pos, player.getMainHandItem(),
-                    PastelLootTables.WEEPING_GALA_SPRIG_RESIN
-                )) {
+                for (
+                    ItemStack rareStack : getResinStacks(
+                        state,
+                        (ServerLevel) world,
+                        pos,
+                        player.getMainHandItem(),
+                        PastelLootTables.WEEPING_GALA_SPRIG_RESIN
+                    )
+                ) {
                     popResource(world, pos, rareStack);
                 }
             }
-            world.playSound(
-                null, pos, SoundEvents.BEEHIVE_SHEAR, SoundSource.BLOCKS, 1, 0.9F + world.getRandom()
-                                                                                         .nextFloat() * 0.2F
-            );
+            world
+                .playSound(
+                    null,
+                    pos,
+                    SoundEvents.BEEHIVE_SHEAR,
+                    SoundSource.BLOCKS,
+                    1,
+                    0.9F + world
+                        .getRandom()
+                        .nextFloat() * 0.2F
+                );
             reference.setProperty(FORM, Form.SPRIG);
             reference.update(world);
 
@@ -97,15 +129,21 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
     }
 
     public static List<ItemStack> getResinStacks(
-        BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, ResourceKey<LootTable> lootTableKey) {
+        BlockState state,
+        ServerLevel world,
+        BlockPos pos,
+        ItemStack stack,
+        ResourceKey<LootTable> lootTableKey
+    ) {
         var builder = (new LootParams.Builder(world))
             .withParameter(LootContextParams.BLOCK_STATE, state)
             .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
             .withParameter(LootContextParams.TOOL, stack);
 
-        LootTable lootTable = world.getServer()
-                                   .reloadableRegistries()
-                                   .getLootTable(lootTableKey);
+        LootTable lootTable = world
+            .getServer()
+            .reloadableRegistries()
+            .getLootTable(lootTableKey);
         return lootTable.getRandomItems(builder.create(LootContextParamSets.BLOCK));
     }
 
@@ -120,6 +158,7 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
         RESIN("resin", 12);
 
         private final String name;
+
         private final int luminance;
 
         Form(String name, int luminance) {

@@ -10,12 +10,17 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class GreatswordChargingSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final Player player;
+
     private boolean done;
+
     private int ticks;
+
     private final int groundSlamChargeTicks;
 
     public GreatswordChargingSoundInstance(Player player, int groundSlamChargeTicks) {
@@ -47,8 +52,9 @@ public class GreatswordChargingSoundInstance extends AbstractSoundInstance imple
         // If ticks > groundSlamChargeTicks, the ground slam was handled already and the effect does not need get
         // cancelled
         if (this.ticks <= this.groundSlamChargeTicks) {
-            if (player == null || !player.isUsingItem() || !(player.getMainHandItem()
-                                                                   .getItem() instanceof GreatswordItem)) {
+            if (player == null || !player.isUsingItem() || !(player
+                .getMainHandItem()
+                .getItem() instanceof GreatswordItem)) {
                 this.setDone();
             }
         }

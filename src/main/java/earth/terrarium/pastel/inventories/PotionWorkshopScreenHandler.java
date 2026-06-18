@@ -22,7 +22,9 @@ import net.minecraft.world.level.Level;
 public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
 
     protected final Level world;
+
     private final Container inventory;
+
     private final ContainerData propertyDelegate;
 
     public PotionWorkshopScreenHandler(int syncId, Inventory playerInventory) {
@@ -30,24 +32,37 @@ public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
     }
 
     public PotionWorkshopScreenHandler(
-        int syncId, Inventory playerInventory, PotionWorkshopBlockEntity potionWorkshopBlockEntity,
+        int syncId,
+        Inventory playerInventory,
+        PotionWorkshopBlockEntity potionWorkshopBlockEntity,
         ContainerData propertyDelegate
     ) {
         this(
-            PastelScreenHandlerTypes.POTION_WORKSHOP, syncId, playerInventory, potionWorkshopBlockEntity,
+            PastelScreenHandlerTypes.POTION_WORKSHOP,
+            syncId,
+            playerInventory,
+            potionWorkshopBlockEntity,
             propertyDelegate
         );
     }
 
     public PotionWorkshopScreenHandler(MenuType<?> type, int i, Inventory playerInventory) {
         this(
-            type, i, playerInventory, new SimpleContainer(PotionWorkshopBlockEntity.INVENTORY_SIZE),
+            type,
+            i,
+            playerInventory,
+            new SimpleContainer(PotionWorkshopBlockEntity.INVENTORY_SIZE),
             new SimpleContainerData(3)
         );
     }
 
     protected PotionWorkshopScreenHandler(
-        MenuType<?> type, int syncId, Inventory playerInventory, Container inventory, ContainerData propertyDelegate) {
+        MenuType<?> type,
+        int syncId,
+        Inventory playerInventory,
+        Container inventory,
+        ContainerData propertyDelegate
+    ) {
         super(type, syncId);
         this.inventory = inventory;
         this.world = playerInventory.player.level();
@@ -71,8 +86,11 @@ public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
         this.addSlot(new Slot(inventory, 4, 41, 42));
 
         // reagent slots
-        if (DatabankUtils.hasAdvancement(
-            playerInventory.player, PastelAdvancements.Milestones.UNLOCK_FOURTH_POTION_WORKSHOP_REAGENT_SLOT)) {
+        if (DatabankUtils
+            .hasAdvancement(
+                playerInventory.player,
+                PastelAdvancements.Milestones.UNLOCK_FOURTH_POTION_WORKSHOP_REAGENT_SLOT
+            )) {
             this.addSlot(new ReagentSlot(inventory, 5, 51, 19));
             this.addSlot(new ReagentSlot(inventory, 6, 74, 19));
             this.addSlot(new ReagentSlot(inventory, 7, 97, 19));
@@ -85,21 +103,41 @@ public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
         }
 
         // output inventory
-        for (int j = 0; j < 2; ++j) {
-            for (int k = 0; k < 6; ++k) {
+        for (
+            int j = 0;
+            j < 2;
+            ++j
+        ) {
+            for (
+                int k = 0;
+                k < 6;
+                ++k
+            ) {
                 this.addSlot(new Slot(inventory, 9 + k + j * 6, 62 + k * 18, 67 + j * 18));
             }
         }
 
         // player inventory
-        for (int j = 0; j < 3; ++j) {
-            for (int k = 0; k < 9; ++k) {
+        for (
+            int j = 0;
+            j < 3;
+            ++j
+        ) {
+            for (
+                int k = 0;
+                k < 9;
+                ++k
+            ) {
                 this.addSlot(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 120 + j * 18));
             }
         }
 
         // player hotbar
-        for (int j = 0; j < 9; ++j) {
+        for (
+            int j = 0;
+            j < 9;
+            ++j
+        ) {
             this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 178));
         }
     }
@@ -119,32 +157,45 @@ public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
             slotStackCopy = slotStack.copy();
             if (index < PotionWorkshopBlockEntity.FIRST_INVENTORY_SLOT) {
                 // workshop (not output inv)
-                if (!this.moveItemStackTo(
-                    slotStack, PotionWorkshopBlockEntity.FIRST_INVENTORY_SLOT + 12, this.slots.size(), false)) {
+                if (!this
+                    .moveItemStackTo(
+                        slotStack,
+                        PotionWorkshopBlockEntity.FIRST_INVENTORY_SLOT + 12,
+                        this.slots.size(),
+                        false
+                    )) {
                     return ItemStack.EMPTY;
                 }
             } else if (index < PotionWorkshopBlockEntity.FIRST_INVENTORY_SLOT + 12) {
                 // workshop (output inv)
-                if (!this.moveItemStackTo(
-                    slotStack, PotionWorkshopBlockEntity.FIRST_INVENTORY_SLOT + 12, this.slots.size(), false)) {
+                if (!this
+                    .moveItemStackTo(
+                        slotStack,
+                        PotionWorkshopBlockEntity.FIRST_INVENTORY_SLOT + 12,
+                        this.slots.size(),
+                        false
+                    )) {
                     return ItemStack.EMPTY;
                 }
                 // from player inv
                 // is reagent?
-            } else if (!this.moveItemStackTo(
-                slotStack, PotionWorkshopBlockEntity.FIRST_REAGENT_SLOT, PotionWorkshopBlockEntity.FIRST_INVENTORY_SLOT,
-                false
-            )) {
-                if (!slotStack.isEmpty()) {
-                    this.moveItemStackTo(slotStack, 0, PotionWorkshopBlockEntity.FIRST_REAGENT_SLOT, false);
+            } else if (!this
+                .moveItemStackTo(
+                    slotStack,
+                    PotionWorkshopBlockEntity.FIRST_REAGENT_SLOT,
+                    PotionWorkshopBlockEntity.FIRST_INVENTORY_SLOT,
+                    false
+                )) {
+                    if (!slotStack.isEmpty()) {
+                        this.moveItemStackTo(slotStack, 0, PotionWorkshopBlockEntity.FIRST_REAGENT_SLOT, false);
+                    }
+                    return ItemStack.EMPTY;
+                    // others
+                } else if (slotStack.isEmpty()) {
+                    slot.setByPlayer(ItemStack.EMPTY);
+                } else {
+                    slot.setChanged();
                 }
-                return ItemStack.EMPTY;
-                // others
-            } else if (slotStack.isEmpty()) {
-                slot.setByPlayer(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
         }
         return slotStackCopy;
     }

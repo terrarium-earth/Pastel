@@ -10,14 +10,25 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class CraftingTabletScreen extends AbstractContainerScreen<CraftingTabletScreenHandler> {
 
-    public static final ResourceLocation BACKGROUND1 = PastelCommon.locate(
-        "textures/gui/container/crafting_tablet1.png");
-    public static final ResourceLocation BACKGROUND2 = PastelCommon.locate(
-        "textures/gui/container/crafting_tablet2.png");
-    public static final ResourceLocation BACKGROUND3 = PastelCommon.locate(
-        "textures/gui/container/crafting_tablet3.png");
-    public static final ResourceLocation BACKGROUND4 = PastelCommon.locate(
-        "textures/gui/container/crafting_tablet4.png");
+    public static final ResourceLocation BACKGROUND1 = PastelCommon
+        .locate(
+            "textures/gui/container/crafting_tablet1.png"
+        );
+
+    public static final ResourceLocation BACKGROUND2 = PastelCommon
+        .locate(
+            "textures/gui/container/crafting_tablet2.png"
+        );
+
+    public static final ResourceLocation BACKGROUND3 = PastelCommon
+        .locate(
+            "textures/gui/container/crafting_tablet3.png"
+        );
+
+    public static final ResourceLocation BACKGROUND4 = PastelCommon
+        .locate(
+            "textures/gui/container/crafting_tablet4.png"
+        );
 
     protected ResourceLocation backgroundTexture;
 
@@ -26,10 +37,12 @@ public class CraftingTabletScreen extends AbstractContainerScreen<CraftingTablet
         this.imageHeight = 194;
 
         backgroundTexture = BACKGROUND1;
-        if (handler.getTier()
-                   .isPresent()) {
-            switch (handler.getTier()
-                           .get()) {
+        if (handler
+            .getTier()
+            .isPresent()) {
+            switch (handler
+                .getTier()
+                .get()) {
                 case COMPLEX -> backgroundTexture = BACKGROUND4;
                 case ADVANCED -> backgroundTexture = BACKGROUND3;
                 case SIMPLE -> backgroundTexture = BACKGROUND2;
@@ -49,8 +62,15 @@ public class CraftingTabletScreen extends AbstractContainerScreen<CraftingTablet
         int intInventoryY = 100;
 
         drawContext.drawString(this.font, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
-        drawContext.drawString(
-            this.font, this.playerInventoryTitle, inventoryX, intInventoryY, RenderHelper.GREEN_COLOR, false);
+        drawContext
+            .drawString(
+                this.font,
+                this.playerInventoryTitle,
+                inventoryX,
+                intInventoryY,
+                RenderHelper.GREEN_COLOR,
+                false
+            );
     }
 
     @Override

@@ -25,18 +25,24 @@ import java.util.Stack;
 public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
 
     public static final int TEXT_COLOR = 0xEEEEEE;
-    public static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(
-        PastelCommon.MOD_ID, "textures/gui/quick_navigation.png");
+
+    public static final ResourceLocation BACKGROUND = ResourceLocation
+        .fromNamespaceAndPath(
+            PastelCommon.MOD_ID,
+            "textures/gui/quick_navigation.png"
+        );
 
     protected static final Component CONTROLS_TEXT_1 = Component.translatable("gui.pastel.quick_navigation.controls1");
+
     protected static final Component CONTROLS_TEXT_2 = Component.translatable("gui.pastel.quick_navigation.controls2");
 
-    private static final List<Tuple<Integer, Integer>> SQUARE_OFFSETS = List.of(
-        new Tuple<>(-20, -80),
-        new Tuple<>(40, -20),
-        new Tuple<>(-20, 40),
-        new Tuple<>(-80, -20)
-    );
+    private static final List<Tuple<Integer, Integer>> SQUARE_OFFSETS = List
+        .of(
+            new Tuple<>(-20, -80),
+            new Tuple<>(40, -20),
+            new Tuple<>(-20, 40),
+            new Tuple<>(-80, -20)
+        );
 
     public enum GUISelection {
         UP,
@@ -50,13 +56,20 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
     public static class Grid {
 
         private final GridEntry centerEntry;
+
         private final GridEntry topEntry;
+
         private final GridEntry rightEntry;
+
         private final GridEntry bottomEntry;
+
         private final GridEntry leftEntry;
 
         public Grid(
-            GridEntry centerEntry, GridEntry topEntry, GridEntry rightEntry, GridEntry bottomEntry,
+            GridEntry centerEntry,
+            GridEntry topEntry,
+            GridEntry rightEntry,
+            GridEntry bottomEntry,
             GridEntry leftEntry
         ) {
             this.centerEntry = centerEntry;
@@ -80,51 +93,99 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
         void drawForeground(Screen screen, GuiGraphics drawContext, int startX, int startY) {
             centerEntry.drawSmallForeground(screen, drawContext, startX - 15, startY - 15);
 
-            topEntry.drawBigForeground(
-                screen, drawContext, startX + SQUARE_OFFSETS.get(0)
-                                                            .getA(), startY + SQUARE_OFFSETS.get(0)
-                                                                                            .getB()
-            );
-            rightEntry.drawBigForeground(
-                screen, drawContext, startX + SQUARE_OFFSETS.get(1)
-                                                            .getA(), startY + SQUARE_OFFSETS.get(1)
-                                                                                            .getB()
-            );
-            bottomEntry.drawBigForeground(
-                screen, drawContext, startX + SQUARE_OFFSETS.get(2)
-                                                            .getA(), startY + SQUARE_OFFSETS.get(2)
-                                                                                            .getB()
-            );
-            leftEntry.drawBigForeground(
-                screen, drawContext, startX + SQUARE_OFFSETS.get(3)
-                                                            .getA(), startY + SQUARE_OFFSETS.get(3)
-                                                                                            .getB()
-            );
+            topEntry
+                .drawBigForeground(
+                    screen,
+                    drawContext,
+                    startX + SQUARE_OFFSETS
+                        .get(0)
+                        .getA(),
+                    startY + SQUARE_OFFSETS
+                        .get(0)
+                        .getB()
+                );
+            rightEntry
+                .drawBigForeground(
+                    screen,
+                    drawContext,
+                    startX + SQUARE_OFFSETS
+                        .get(1)
+                        .getA(),
+                    startY + SQUARE_OFFSETS
+                        .get(1)
+                        .getB()
+                );
+            bottomEntry
+                .drawBigForeground(
+                    screen,
+                    drawContext,
+                    startX + SQUARE_OFFSETS
+                        .get(2)
+                        .getA(),
+                    startY + SQUARE_OFFSETS
+                        .get(2)
+                        .getB()
+                );
+            leftEntry
+                .drawBigForeground(
+                    screen,
+                    drawContext,
+                    startX + SQUARE_OFFSETS
+                        .get(3)
+                        .getA(),
+                    startY + SQUARE_OFFSETS
+                        .get(3)
+                        .getB()
+                );
         }
 
         void drawBackground(Screen screen, GuiGraphics drawContext, int startX, int startY) {
             centerEntry.drawSmallBackground(screen, drawContext, startX - 15, startY - 15);
 
-            topEntry.drawBigBackground(
-                screen, drawContext, startX + SQUARE_OFFSETS.get(0)
-                                                            .getA(), startY + SQUARE_OFFSETS.get(0)
-                                                                                            .getB()
-            );
-            rightEntry.drawBigBackground(
-                screen, drawContext, startX + SQUARE_OFFSETS.get(1)
-                                                            .getA(), startY + SQUARE_OFFSETS.get(1)
-                                                                                            .getB()
-            );
-            bottomEntry.drawBigBackground(
-                screen, drawContext, startX + SQUARE_OFFSETS.get(2)
-                                                            .getA(), startY + SQUARE_OFFSETS.get(2)
-                                                                                            .getB()
-            );
-            leftEntry.drawBigBackground(
-                screen, drawContext, startX + SQUARE_OFFSETS.get(3)
-                                                            .getA(), startY + SQUARE_OFFSETS.get(3)
-                                                                                            .getB()
-            );
+            topEntry
+                .drawBigBackground(
+                    screen,
+                    drawContext,
+                    startX + SQUARE_OFFSETS
+                        .get(0)
+                        .getA(),
+                    startY + SQUARE_OFFSETS
+                        .get(0)
+                        .getB()
+                );
+            rightEntry
+                .drawBigBackground(
+                    screen,
+                    drawContext,
+                    startX + SQUARE_OFFSETS
+                        .get(1)
+                        .getA(),
+                    startY + SQUARE_OFFSETS
+                        .get(1)
+                        .getB()
+                );
+            bottomEntry
+                .drawBigBackground(
+                    screen,
+                    drawContext,
+                    startX + SQUARE_OFFSETS
+                        .get(2)
+                        .getA(),
+                    startY + SQUARE_OFFSETS
+                        .get(2)
+                        .getB()
+                );
+            leftEntry
+                .drawBigBackground(
+                    screen,
+                    drawContext,
+                    startX + SQUARE_OFFSETS
+                        .get(3)
+                        .getA(),
+                    startY + SQUARE_OFFSETS
+                        .get(3)
+                        .getB()
+                );
         }
 
     }
@@ -132,7 +193,9 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
     public abstract static class GridEntry {
 
         public static final GridEntry CLOSE = GridEntry.empty(QuickNavigationGridScreen::onClose);
+
         public static final GridEntry BACK = GridEntry.empty(QuickNavigationGridScreen::back);
+
         public static final GridEntry EMPTY = GridEntry.empty(null);
 
         public interface GridEntryCallback {
@@ -140,6 +203,7 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
         }
 
         protected final Component text;
+
         protected final @Nullable GridEntryCallback onClickCallback;
 
         protected GridEntry(Component text, @Nullable GridEntry.GridEntryCallback onClickCallback) {
@@ -152,7 +216,11 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
         }
 
         public static GridEntry textured(
-            int textureStartX, int textureStartY, Component text, @Nullable GridEntryCallback callback) {
+            int textureStartX,
+            int textureStartY,
+            Component text,
+            @Nullable GridEntryCallback callback
+        ) {
             return new TexturedGridEntry(textureStartX, textureStartY, text, callback);
         }
 
@@ -242,10 +310,15 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
     public static class TexturedGridEntry extends GridEntry {
 
         protected final int textureStartX;
+
         protected final int textureStartY;
 
         private TexturedGridEntry(
-            int textureStartX, int textureStartY, @Nullable Component text, GridEntry.GridEntryCallback callback) {
+            int textureStartX,
+            int textureStartY,
+            @Nullable Component text,
+            GridEntry.GridEntryCallback callback
+        ) {
             super(text, callback);
             this.textureStartX = textureStartX;
             this.textureStartY = textureStartY;
@@ -268,6 +341,7 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
     public static class TextGridEntry extends GridEntry {
 
         protected final Component innerText;
+
         protected final int innerHalfTextWidth;
 
         private TextGridEntry(Component innerText, @Nullable Component text, GridEntry.GridEntryCallback callback) {
@@ -321,10 +395,15 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
     }
 
     private void back() {
-        minecraft.level.playSound(
-            null, minecraft.player.blockPosition(), PastelSounds.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F,
-            1.0F
-        );
+        minecraft.level
+            .playSound(
+                null,
+                minecraft.player.blockPosition(),
+                PastelSounds.PAINTBRUSH_SWITCH,
+                SoundSource.NEUTRAL,
+                0.5F,
+                1.0F
+            );
         if (gridStack.size() == 1) {
             minecraft.player.closeContainer();
         } else {
@@ -333,10 +412,15 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
     }
 
     protected void selectGrid(Grid grid) {
-        minecraft.level.playSound(
-            null, minecraft.player.blockPosition(), PastelSounds.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F,
-            1.0F
-        );
+        minecraft.level
+            .playSound(
+                null,
+                minecraft.player.blockPosition(),
+                PastelSounds.PAINTBRUSH_SWITCH,
+                SoundSource.NEUTRAL,
+                0.5F,
+                1.0F
+            );
         gridStack.push(grid);
     }
 
@@ -370,16 +454,17 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
             mouseY = mouseY - topPos;
 
             int centerElementSize = gridStack.size() == 1 ? 5 : 14;
-            if (mouseX >= startX - centerElementSize && mouseX <= startX + centerElementSize &&
-                mouseY >= startY - centerElementSize && mouseY <= startY + centerElementSize) {
+            if (mouseX >= startX - centerElementSize && mouseX <= startX + centerElementSize && mouseY >= startY - centerElementSize && mouseY <= startY + centerElementSize) {
                 current().navigate(GUISelection.SELECT, this);
                 return true;
             }
 
             int offsetID = 0;
-            for (Tuple<Integer, Integer> offset : SQUARE_OFFSETS) {
-                if (mouseX >= startX + offset.getA() && mouseX <= startX + offset.getA() + 32 &&
-                    mouseY >= startY + offset.getB() && mouseY <= startY + offset.getB() + 32) {
+            for (
+                Tuple<Integer, Integer> offset : SQUARE_OFFSETS
+            ) {
+                if (mouseX >= startX + offset.getA() && mouseX <= startX + offset
+                    .getA() + 32 && mouseY >= startY + offset.getB() && mouseY <= startY + offset.getB() + 32) {
                     switch (offsetID) {
                         case 0 -> {
                             current().navigate(GUISelection.UP, this);

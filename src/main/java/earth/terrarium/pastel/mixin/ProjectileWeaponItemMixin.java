@@ -9,14 +9,26 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ProjectileWeaponItem.class)
+@Mixin(
+    ProjectileWeaponItem.class
+)
 public class ProjectileWeaponItemMixin {
 
-    @WrapOperation(method = "shoot", at = @At(value = "INVOKE",
-                                              target = "Lnet/minecraft/world/item/ProjectileWeaponItem;shootProjectile(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/projectile/Projectile;IFFFLnet/minecraft/world/entity/LivingEntity;)V"))
+    @WrapOperation(
+        method = "shoot", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/ProjectileWeaponItem;shootProjectile(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/projectile/Projectile;IFFFLnet/minecraft/world/entity/LivingEntity;)V"
+        )
+    )
     private void cancelInaccuracy(
-        ProjectileWeaponItem instance, LivingEntity shooter, Projectile projectile, int i, float velocity, float inaccuracy, float angle,
-        LivingEntity target, Operation<Void> original
+        ProjectileWeaponItem instance,
+        LivingEntity shooter,
+        Projectile projectile,
+        int i,
+        float velocity,
+        float inaccuracy,
+        float angle,
+        LivingEntity target,
+        Operation<Void> original
     ) {
         if (projectile instanceof GlassArrowEntity arrow) {
             var finalV = velocity * arrow.getVariant().getAttributes().speed();

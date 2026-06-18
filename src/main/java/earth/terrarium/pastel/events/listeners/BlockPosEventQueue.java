@@ -22,24 +22,35 @@ public class BlockPosEventQueue extends EventQueue<BlockPosEventQueue.EventEntry
         if (world instanceof ServerLevel) {
             Vec3 emitterPos = event.source();
             EventEntry eventEntry = new EventEntry(
-                event.gameEvent(), BlockPos.containing(emitterPos.x, emitterPos.y, emitterPos.z), Mth.floor(
-                event.source()
-                     .distanceTo(sourcePos))
+                event.gameEvent(),
+                BlockPos.containing(emitterPos.x, emitterPos.y, emitterPos.z),
+                Mth
+                    .floor(
+                        event
+                            .source()
+                            .distanceTo(sourcePos)
+                    )
             );
             int delay = eventEntry.distance * 2;
             this.schedule(eventEntry, delay);
-            TypedTransmissionPayload.playTransmissionParticle(
-                (ServerLevel) world, new TypedTransmission(
-                    emitterPos, this.positionSource, delay,
-                    TypedTransmission.Variant.BLOCK_POS
-                )
-            );
+            TypedTransmissionPayload
+                .playTransmissionParticle(
+                    (ServerLevel) world,
+                    new TypedTransmission(
+                        emitterPos,
+                        this.positionSource,
+                        delay,
+                        TypedTransmission.Variant.BLOCK_POS
+                    )
+                );
         }
     }
 
     public static class EventEntry {
         public final Holder<GameEvent> gameEvent;
+
         public final BlockPos eventSourceBlockPos;
+
         public final int distance;
 
         public EventEntry(Holder<GameEvent> gameEvent, BlockPos eventSourceBlockPos, int distance) {

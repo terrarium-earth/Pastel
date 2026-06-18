@@ -11,22 +11,30 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPacketListener.class)
+@Mixin(
+    ClientPacketListener.class
+)
 public class ClientPlayNetworkHandlerMixin {
 
-    @Inject(method = "handleUpdateMobEffect", at = @At(value = "INVOKE",
-                                                       target = "Lnet/minecraft/world/entity/LivingEntity;" +
-                                                                "forceAddEffect(Lnet/minecraft/world/effect" +
-                                                                "/MobEffectInstance;" +
-                                                                "Lnet/minecraft/world/entity/Entity;)V"))
+    @Inject(
+        method = "handleUpdateMobEffect", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;" + "forceAddEffect(Lnet/minecraft/world/effect" + "/MobEffectInstance;" + "Lnet/minecraft/world/entity/Entity;)V"
+        )
+    )
     public void readAndApplyIncurableFlag(
-        ClientboundUpdateMobEffectPacket packet, CallbackInfo ci, @Local MobEffectInstance effect) {
+        ClientboundUpdateMobEffectPacket packet,
+        CallbackInfo ci,
+        @Local
+        MobEffectInstance effect
+    ) {
         if (((ClientboundUpdateMobEffectPacketInjector) packet).isIncurable()) {
-            effect.getCures()
-                  .add(PastelMobEffects.Cures.INCURABLE);
+            effect
+                .getCures()
+                .add(PastelMobEffects.Cures.INCURABLE);
         } else {
-            effect.getCures()
-                  .remove(PastelMobEffects.Cures.INCURABLE);
+            effect
+                .getCures()
+                .remove(PastelMobEffects.Cures.INCURABLE);
         }
     }
 

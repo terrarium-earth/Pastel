@@ -12,6 +12,7 @@ public class PastelClusterBlock extends AmethystClusterBlock {
         CLUSTER(7, 3);
 
         public final int height;
+
         public final int xzOffset;
 
         GrowthStage(int height, int xzOffset) {

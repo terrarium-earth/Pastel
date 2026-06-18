@@ -45,25 +45,33 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CrystallarieumBlockEntity(pos, state);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return createTickerHelper(
-            type, PastelBlockEntities.CRYSTALLARIEUM.get(), world.isClientSide ? CrystallarieumBlockEntity::clientTick
-                                                                               : CrystallarieumBlockEntity::serverTick
+            type,
+            PastelBlockEntities.CRYSTALLARIEUM.get(),
+            world.isClientSide
+                ? CrystallarieumBlockEntity::clientTick
+                : CrystallarieumBlockEntity::serverTick
         );
     }
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (!world.isClientSide() && direction == Direction.UP) {
@@ -81,10 +89,16 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof CrystallarieumBlockEntity crystallarieumBlockEntity) {
                 ItemStack stack = itemEntity.getItem();
-                crystallarieumBlockEntity.acceptStack(
-                    stack, false, itemEntity.getOwner() != null ? itemEntity.getOwner()
-                                                                            .getUUID() : null
-                );
+                crystallarieumBlockEntity
+                    .acceptStack(
+                        stack,
+                        false,
+                        itemEntity.getOwner() != null
+                            ? itemEntity
+                                .getOwner()
+                                .getUUID()
+                            : null
+                    );
             }
         } else {
             super.fallOn(world, state, pos, entity, fallDistance);
@@ -93,7 +107,12 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack stack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (!world.isClientSide) {
@@ -104,7 +123,14 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
                 if (player.isShiftKeyDown() || stack.isEmpty()) {
                     // sneaking or empty hand: remove items
                     if (retrieveStack(world, pos, player, hand, stack, crystal, 1) || retrieveStack(
-                        world, pos, player, hand, stack, crystal, 0)) {
+                        world,
+                        pos,
+                        player,
+                        hand,
+                        stack,
+                        crystal,
+                        0
+                    )) {
                         crystal.inventoryChanged();
                         crystal.setOwner(player);
                     }
@@ -118,17 +144,30 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
                     // hand is full and inventory is empty: add
                     // hand is full and inventory already contains item: exchange them
                     else if (stack.getItem() instanceof InkStorageItem<?> inkStorageItem) {
-                        if (inkStorageItem.getDrainability()
-                                          .canDrain(false) && exchangeStack(
-                            world, pos, player, hand, stack, crystal,
-                            CrystallarieumBlockEntity.INK_STORAGE_STACK_SLOT_ID
-                        )) {
+                        if (inkStorageItem
+                            .getDrainability()
+                            .canDrain(false) && exchangeStack(
+                                world,
+                                pos,
+                                player,
+                                hand,
+                                stack,
+                                crystal,
+                                CrystallarieumBlockEntity.INK_STORAGE_STACK_SLOT_ID
+                            )) {
                             crystal.inventoryChanged();
                             crystal.setOwner(player);
                         }
                     } else {
                         if (exchangeStack(
-                            world, pos, player, hand, stack, crystal, CrystallarieumBlockEntity.CATALYST_SLOT_ID)) {
+                            world,
+                            pos,
+                            player,
+                            hand,
+                            stack,
+                            crystal,
+                            CrystallarieumBlockEntity.CATALYST_SLOT_ID
+                        )) {
                             crystal.inventoryChanged();
                             crystal.setOwner(player);
                         }
@@ -148,7 +187,11 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         var color = stack.get(PastelDataComponentTypes.INK_COLOR);
         if (color != null)

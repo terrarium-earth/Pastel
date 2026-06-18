@@ -31,8 +31,13 @@ import java.util.function.Predicate;
 public class LightMineEntity extends LightShardBaseEntity {
 
     private static final int NO_POTION_COLOR = -1;
-    private static final EntityDataAccessor<Integer> COLOR = SynchedEntityData.defineId(
-        LightMineEntity.class, EntityDataSerializers.INT);
+
+    private static final EntityDataAccessor<Integer> COLOR = SynchedEntityData
+        .defineId(
+            LightMineEntity.class,
+            EntityDataSerializers.INT
+        );
+
     private boolean colorSet;
 
     protected final Set<MobEffectInstance> effects = Sets.newHashSet();
@@ -46,15 +51,26 @@ public class LightMineEntity extends LightShardBaseEntity {
     }
 
     public static void summonBarrage(
-        Level world, @Nullable LivingEntity user, @Nullable LivingEntity target,
-        Predicate<LivingEntity> targetPredicate, List<MobEffectInstance> effects, Vec3 position, IntProvider count
+        Level world,
+        @Nullable LivingEntity user,
+        @Nullable LivingEntity target,
+        Predicate<LivingEntity> targetPredicate,
+        List<MobEffectInstance> effects,
+        Vec3 position,
+        IntProvider count
     ) {
         summonBarrageInternal(
-            world, user, () -> {
+            world,
+            user,
+            () -> {
                 LightMineEntity mine = new LightMineEntity(world, user, 8, 1.0F, 800);
                 mine.setEffects(effects);
                 return mine;
-            }, target, targetPredicate, position, count
+            },
+            target,
+            targetPredicate,
+            position,
+            count
         );
     }
 
@@ -84,10 +100,15 @@ public class LightMineEntity extends LightShardBaseEntity {
             nbt.putInt("Color", this.getColor());
         }
         if (!this.effects.isEmpty()) {
-            CodecHelper.writeNbt(
-                nbt, "custom_potion_effects", MobEffectInstance.CODEC.listOf(), this.effects.stream()
-                                                                                            .toList()
-            );
+            CodecHelper
+                .writeNbt(
+                    nbt,
+                    "custom_potion_effects",
+                    MobEffectInstance.CODEC.listOf(),
+                    this.effects
+                        .stream()
+                        .toList()
+                );
         }
     }
 
@@ -95,8 +116,10 @@ public class LightMineEntity extends LightShardBaseEntity {
     protected void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
 
-        this.setEffects(
-            CodecHelper.fromNbt(MobEffectInstance.CODEC.listOf(), nbt.get("custom_potion_effects"), List.of()));
+        this
+            .setEffects(
+                CodecHelper.fromNbt(MobEffectInstance.CODEC.listOf(), nbt.get("custom_potion_effects"), List.of())
+            );
 
         if (nbt.contains("Color", Tag.TAG_ANY_NUMERIC)) {
             this.setColor(nbt.getInt("Color"));
@@ -124,8 +147,9 @@ public class LightMineEntity extends LightShardBaseEntity {
     @Override
     public void tick() {
         super.tick();
-        if (this.level()
-                .isClientSide() && this.tickCount % 4 == 0) {
+        if (this
+            .level()
+            .isClientSide() && this.tickCount % 4 == 0) {
             this.spawnParticles();
         }
     }
@@ -133,10 +157,16 @@ public class LightMineEntity extends LightShardBaseEntity {
     private void spawnParticles() {
         if (!this.effects.isEmpty()) {
             int color = this.getColor();
-            this.level()
+            this
+                .level()
                 .addParticle(
-                    ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, color), this.getRandomX(0.5),
-                    this.getRandomY(), this.getRandomZ(0.5), 0.0, 0.0, 0.0
+                    ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, color),
+                    this.getRandomX(0.5),
+                    this.getRandomY(),
+                    this.getRandomZ(0.5),
+                    0.0,
+                    0.0,
+                    0.0
                 );
         }
     }
@@ -151,14 +181,17 @@ public class LightMineEntity extends LightShardBaseEntity {
         MobEffectInstance statusEffectInstance;
         while (var3.hasNext()) {
             statusEffectInstance = var3.next();
-            attacked.addEffect(
-                new MobEffectInstance(
-                    statusEffectInstance.getEffect(),
-                    Math.max(statusEffectInstance.getDuration() / 8, 1),
-                    statusEffectInstance.getAmplifier(), statusEffectInstance.isAmbient(),
-                    statusEffectInstance.isVisible()
-                ), attacker
-            );
+            attacked
+                .addEffect(
+                    new MobEffectInstance(
+                        statusEffectInstance.getEffect(),
+                        Math.max(statusEffectInstance.getDuration() / 8, 1),
+                        statusEffectInstance.getAmplifier(),
+                        statusEffectInstance.isAmbient(),
+                        statusEffectInstance.isVisible()
+                    ),
+                    attacker
+                );
         }
         if (!this.effects.isEmpty()) {
             var3 = this.effects.iterator();

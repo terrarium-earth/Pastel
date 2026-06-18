@@ -30,7 +30,10 @@ public class NotCondition extends BookCondition {
     }
 
     public static NotCondition fromJson(
-        ResourceLocation conditionParentId, JsonObject json, HolderLookup.Provider provider) {
+        ResourceLocation conditionParentId,
+        JsonObject json,
+        HolderLookup.Provider provider
+    ) {
         BookCondition child;
         var j = GsonHelper.getAsJsonObject(json, "child");
         if (!j.isJsonObject()) {

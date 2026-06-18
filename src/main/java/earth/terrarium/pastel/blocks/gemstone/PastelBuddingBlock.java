@@ -15,14 +15,23 @@ import net.minecraft.world.level.material.Fluids;
 public class PastelBuddingBlock extends PastelGemstoneBlock {
 
     private static final Direction[] DIRECTIONS = Direction.values();
+
     private final Block smallBlock;
+
     private final Block mediumBlock;
+
     private final Block largeBlock;
+
     private final Block clusterBlock;
 
     public PastelBuddingBlock(
-        Properties settings, Block smallBlock, Block mediumBlock, Block largeBlock, Block clusterBlock,
-        SoundEvent hitSoundEvent, SoundEvent chimeSoundEvent
+        Properties settings,
+        Block smallBlock,
+        Block mediumBlock,
+        Block largeBlock,
+        Block clusterBlock,
+        SoundEvent hitSoundEvent,
+        SoundEvent chimeSoundEvent
     ) {
         super(settings, hitSoundEvent, chimeSoundEvent);
 
@@ -56,14 +65,19 @@ public class PastelBuddingBlock extends PastelGemstoneBlock {
             }
 
             if (block != null) {
-                world.setBlockAndUpdate(
-                    blockPos, block.defaultBlockState()
-                                   .setValue(AmethystClusterBlock.FACING, direction)
-                                   .setValue(
-                                       AmethystClusterBlock.WATERLOGGED, blockState.getFluidState()
-                                                                                   .getType() == Fluids.WATER
-                                   )
-                );
+                world
+                    .setBlockAndUpdate(
+                        blockPos,
+                        block
+                            .defaultBlockState()
+                            .setValue(AmethystClusterBlock.FACING, direction)
+                            .setValue(
+                                AmethystClusterBlock.WATERLOGGED,
+                                blockState
+                                    .getFluidState()
+                                    .getType() == Fluids.WATER
+                            )
+                    );
             }
         }
     }

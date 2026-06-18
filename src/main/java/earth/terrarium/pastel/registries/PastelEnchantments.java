@@ -9,7 +9,9 @@ import java.util.List;
 
 import static earth.terrarium.pastel.PastelCommon.locate;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+    "unused"
+)
 public class PastelEnchantments {
 
     public static List<ResourceKey<Enchantment>> PASTEL_ENCHANTMENTS = new ArrayList<>();

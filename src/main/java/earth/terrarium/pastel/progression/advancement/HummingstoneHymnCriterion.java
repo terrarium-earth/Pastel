@@ -31,21 +31,33 @@ public class HummingstoneHymnCriterion extends SimpleCriterionTrigger<Hummingsto
         LocationPredicate locationPredicate
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<HummingstoneHymnCriterion.Conditions> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                                    ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                               .forGetter(HummingstoneHymnCriterion.Conditions::player),
-                                    LocationPredicate.CODEC.optionalFieldOf(
-                                                         "location", LocationPredicate.Builder.location()
-                                                                                              .build()
-                                                     )
-                                                           .forGetter(Conditions::locationPredicate)
-                                )
-                                .apply(instance, Conditions::new));
+        public static final Codec<HummingstoneHymnCriterion.Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(HummingstoneHymnCriterion.Conditions::player),
+                        LocationPredicate.CODEC
+                            .optionalFieldOf(
+                                "location",
+                                LocationPredicate.Builder
+                                    .location()
+                                    .build()
+                            )
+                            .forGetter(Conditions::locationPredicate)
+                    )
+                    .apply(instance, Conditions::new)
+            );
 
         public boolean matches(ServerLevel world, BlockPos pos) {
-            return this.locationPredicate.matches(
-                world, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5);
+            return this.locationPredicate
+                .matches(
+                    world,
+                    (double) pos.getX() + 0.5,
+                    (double) pos.getY() + 0.5,
+                    (double) pos.getZ() + 0.5
+                );
         }
 
     }

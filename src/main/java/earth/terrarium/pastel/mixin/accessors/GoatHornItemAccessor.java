@@ -9,7 +9,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.Optional;
 
-@Mixin(InstrumentItem.class)
+@Mixin(
+    InstrumentItem.class
+)
 public interface GoatHornItemAccessor {
 
     @Invoker

@@ -16,9 +16,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class PastelBedBlock extends BedBlock {
 
     protected static final VoxelShape TOP_SHAPE = Block.box(0.0, 3.0, 0.0, 16.0, 11.0, 16.0);
+
     protected static final VoxelShape NORTH_SHAPE = Shapes.or(TOP_SHAPE, LEG_NORTH_WEST, LEG_NORTH_EAST);
+
     protected static final VoxelShape SOUTH_SHAPE = Shapes.or(TOP_SHAPE, LEG_SOUTH_WEST, LEG_SOUTH_EAST);
+
     protected static final VoxelShape WEST_SHAPE = Shapes.or(TOP_SHAPE, LEG_NORTH_WEST, LEG_SOUTH_WEST);
+
     protected static final VoxelShape EAST_SHAPE = Shapes.or(TOP_SHAPE, LEG_NORTH_EAST, LEG_SOUTH_EAST);
 
     public PastelBedBlock(DyeColor color, Properties settings) {

@@ -19,18 +19,26 @@ import org.joml.Quaternionf;
 public class EnchanterBlockEntityRenderer implements BlockEntityRenderer<EnchanterBlockEntity> {
 
     protected static final double ITEM_STACK_RENDER_HEIGHT = 0.95F;
+
     protected static EntityRenderDispatcher dispatcher;
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public EnchanterBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
-        dispatcher = Minecraft.getInstance()
-                              .getEntityRenderDispatcher();
+        dispatcher = Minecraft
+            .getInstance()
+            .getEntityRenderDispatcher();
     }
 
     @Override
     public void render(
-        EnchanterBlockEntity blockEntity, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light, int overlay
+        EnchanterBlockEntity blockEntity,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int light,
+        int overlay
     ) {
         // The item lying on top of the enchanter
         ItemStack stack = blockEntity.getItem(0);
@@ -64,24 +72,33 @@ public class EnchanterBlockEntityRenderer implements BlockEntityRenderer<Enchant
                 }
             }
 
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         stack, ItemDisplayContext.GROUND, light, overlay, poseStack, vertexConsumerProvider,
-                         blockEntity.getLevel(), 0
-                     );
+            Minecraft
+                .getInstance()
+                .getItemRenderer()
+                .renderStatic(
+                    stack,
+                    ItemDisplayContext.GROUND,
+                    light,
+                    overlay,
+                    poseStack,
+                    vertexConsumerProvider,
+                    blockEntity.getLevel(),
+                    0
+                );
             poseStack.popPose();
         }
 
         // The Experience Item rendered in the air
         ItemStack experienceItemStack = blockEntity.getItem(1);
         if (!experienceItemStack.isEmpty()) {
-            float t = (blockEntity.getLevel()
-                                  .getGameTime() % 50000) + tickDelta;
+            float t = (blockEntity
+                .getLevel()
+                .getGameTime() % 50000) + tickDelta;
 
             final Vec3 cameraPos = dispatcher.camera.getPosition();
-            var refPos = blockEntity.getBlockPos()
-                                    .getCenter();
+            var refPos = blockEntity
+                .getBlockPos()
+                .getCenter();
             var xOffset = refPos.x - cameraPos.x;
             var zOffset = refPos.z - cameraPos.z;
 
@@ -94,12 +111,19 @@ public class EnchanterBlockEntityRenderer implements BlockEntityRenderer<Enchant
             if (cameraPos.closerThan(refPos, 9))
                 poseStack.mulPose(Axis.YP.rotationDegrees(Math.clamp(0F, 360F, (t * 10) % 1800)));
 
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         experienceItemStack, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT,
-                         overlay, poseStack, vertexConsumerProvider, blockEntity.getLevel(), 0
-                     );
+            Minecraft
+                .getInstance()
+                .getItemRenderer()
+                .renderStatic(
+                    experienceItemStack,
+                    ItemDisplayContext.FIXED,
+                    LightTexture.FULL_BRIGHT,
+                    overlay,
+                    poseStack,
+                    vertexConsumerProvider,
+                    blockEntity.getLevel(),
+                    0
+                );
 
             poseStack.popPose();
         }

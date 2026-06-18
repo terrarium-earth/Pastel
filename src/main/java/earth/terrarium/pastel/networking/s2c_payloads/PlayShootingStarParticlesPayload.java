@@ -15,34 +15,49 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record PlayShootingStarParticlesPayload(Vec3 shootingStarPos, ShootingStar.Variant variant)
-    implements CustomPacketPayload {
+    implements
+    CustomPacketPayload {
 
-    public static final Type<PlayShootingStarParticlesPayload> ID = PastelC2SPackets.makeId(
-        "play_shooting_star_particles");
-    public static final StreamCodec<FriendlyByteBuf, PlayShootingStarParticlesPayload> CODEC = StreamCodec.composite(
-        PacketCodecHelper.VEC3D, PlayShootingStarParticlesPayload::shootingStarPos,
-        ShootingStar.Variant.STREAM_CODEC, PlayShootingStarParticlesPayload::variant,
-        PlayShootingStarParticlesPayload::new
-    );
+    public static final Type<PlayShootingStarParticlesPayload> ID = PastelC2SPackets
+        .makeId(
+            "play_shooting_star_particles"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, PlayShootingStarParticlesPayload> CODEC = StreamCodec
+        .composite(
+            PacketCodecHelper.VEC3D,
+            PlayShootingStarParticlesPayload::shootingStarPos,
+            ShootingStar.Variant.STREAM_CODEC,
+            PlayShootingStarParticlesPayload::variant,
+            PlayShootingStarParticlesPayload::new
+        );
 
     public static void sendPlayShootingStarParticles(@NotNull ShootingStarEntity shootingStarEntity) {
-        PacketDistributor.sendToPlayersTrackingChunk(
-            (ServerLevel) shootingStarEntity.level(), new ChunkPos(shootingStarEntity.blockPosition()),
-            new PlayShootingStarParticlesPayload(
-                shootingStarEntity.position(),
-                shootingStarEntity.getShootingStarType()
-            )
-        );
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                (ServerLevel) shootingStarEntity.level(),
+                new ChunkPos(shootingStarEntity.blockPosition()),
+                new PlayShootingStarParticlesPayload(
+                    shootingStarEntity.position(),
+                    shootingStarEntity.getShootingStarType()
+                )
+            );
     }
 
     public static void execute(PlayShootingStarParticlesPayload payload, IPayloadContext context) {
-        var level = context.player()
-                           .level();
+        var level = context
+            .player()
+            .level();
 
-        ShootingStarEntity.playHitParticles(
-            level, payload.shootingStarPos.x, payload.shootingStarPos.y, payload.shootingStarPos.z, payload.variant,
-            25
-        );
+        ShootingStarEntity
+            .playHitParticles(
+                level,
+                payload.shootingStarPos.x,
+                payload.shootingStarPos.y,
+                payload.shootingStarPos.z,
+                payload.variant,
+                25
+            );
     }
 
     @Override

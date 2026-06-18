@@ -27,7 +27,10 @@ import java.util.List;
 import java.util.Map;
 
 public class InkDrainTrinketItem extends PastelTrinketItem
-    implements InkStorageItem<FixedSingleInkStorage>, ExtendedItemBar, SlotBackgroundEffect {
+    implements
+    InkStorageItem<FixedSingleInkStorage>,
+    ExtendedItemBar,
+    SlotBackgroundEffect {
 
     /**
      * TODO: set to the original value again, once ink networking is in. Currently the original max value cannot be
@@ -37,6 +40,7 @@ public class InkDrainTrinketItem extends PastelTrinketItem
      * lmao trueee ~ Azzyypaaras.
      */
     public static final int MAX_INK = 3276800; // 1677721600;
+
     public final InkColor inkColor;
 
     public static final Map<InkColor, Item> BY_COLOR = new HashMap<>();
@@ -59,8 +63,12 @@ public class InkDrainTrinketItem extends PastelTrinketItem
         long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
 
         if (storedInk >= MAX_INK) {
-            tooltip.add(Component.translatable("pastel.tooltip.ink_drain.tooltip.maxed_out")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("pastel.tooltip.ink_drain.tooltip.maxed_out")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         } else {
             long nextStepInk;
             int pow = 0;
@@ -69,13 +77,19 @@ public class InkDrainTrinketItem extends PastelTrinketItem
                 pow++;
             } while (storedInk >= nextStepInk);
 
-            tooltip.add(Component.translatable(
-                                     "pastel.tooltip.ink_drain.tooltip.ink_for_next_step", storedInk,
-                                     inkStorage.getStoredColor()
-                                               .getColoredInkName(),
-                                     Support.getShortenedNumberString(nextStepInk - storedInk)
-                                 )
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable(
+                            "pastel.tooltip.ink_drain.tooltip.ink_for_next_step",
+                            storedInk,
+                            inkStorage
+                                .getStoredColor()
+                                .getColoredInkName(),
+                            Support.getShortenedNumberString(nextStepInk - storedInk)
+                        )
+                        .withStyle(ChatFormatting.GRAY)
+                );
         }
     }
 
@@ -103,8 +117,11 @@ public class InkDrainTrinketItem extends PastelTrinketItem
     public FixedSingleInkStorage getEnergyStorage(ItemStack itemStack) {
         var storage = itemStack.get(PastelDataComponentTypes.INK_STORAGE);
         if (storage != null)
-            for (var entry : storage.storedEnergy()
-                                    .entrySet())
+            for (
+                var entry : storage
+                    .storedEnergy()
+                    .entrySet()
+            )
                 return new FixedSingleInkStorage(storage.maxEnergyTotal(), entry.getKey(), entry.getValue());
         return new FixedSingleInkStorage(MAX_INK, inkColor);
     }
@@ -112,10 +129,14 @@ public class InkDrainTrinketItem extends PastelTrinketItem
     @Override
     public void setEnergyStorage(ItemStack itemStack, InkStorage storage) {
         itemStack.set(PastelDataComponentTypes.INK_STORAGE, new InkStorageComponent(storage));
-        itemStack.set(
-            DataComponents.RARITY, storage.isFull() ? Rarity.EPIC : super.getDefaultInstance()
-                                                                         .get(DataComponents.RARITY)
-        );
+        itemStack
+            .set(
+                DataComponents.RARITY,
+                storage.isFull()
+                    ? Rarity.EPIC
+                    : super.getDefaultInstance()
+                        .get(DataComponents.RARITY)
+            );
     }
 
     @Override
@@ -136,14 +157,24 @@ public class InkDrainTrinketItem extends PastelTrinketItem
     @Override
     public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
         var inkTank = getEnergyStorage(stack);
-        var progress = (int) Math.round(
-            Mth.clampedLerp(0, 14, Math.log(inkTank.getEnergy(inkColor) / 100.0f) / Math.log(8) / 5.0F));
+        var progress = (int) Math
+            .round(
+                Mth.clampedLerp(0, 14, Math.log(inkTank.getEnergy(inkColor) / 100.0f) / Math.log(8) / 5.0F)
+            );
 
         if (progress == 0 || progress == 14)
             return PASS;
 
         return new BarSignature(
-            1, 13, 14, progress, 1, inkColor.getTextColorInt(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
+            1,
+            13,
+            14,
+            progress,
+            1,
+            inkColor.getTextColorInt(),
+            2,
+            ExtendedItemBar.DEFAULT_BACKGROUND_COLOR
+        );
     }
 
     @Override

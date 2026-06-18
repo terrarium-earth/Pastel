@@ -29,15 +29,19 @@ public abstract class PlacedItemBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PlacedItemBlockEntity(pos, state);
     }
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack stack
+    ) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof PlacedItemBlockEntity placedItemBlockEntity) {
             ItemStack placedStack = stack.copy();
@@ -53,9 +57,10 @@ public abstract class PlacedItemBlock extends BaseEntityBlock {
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         Optional<PlacedItemBlockEntity> blockEntity = world.getBlockEntity(pos, PastelBlockEntities.PLACED_ITEM.get());
         if (blockEntity.isPresent()) {
-            return blockEntity.get()
-                              .getStack()
-                              .copy();
+            return blockEntity
+                .get()
+                .getStack()
+                .copy();
         }
         return ItemStack.EMPTY;
     }

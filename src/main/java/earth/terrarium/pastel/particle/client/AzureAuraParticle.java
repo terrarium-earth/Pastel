@@ -16,14 +16,24 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class AzureAuraParticle extends RisingParticle {
 
     private final float alphaMult;
+
     private float length;
 
     protected AzureAuraParticle(
-        ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        ClientLevel clientWorld,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ
+    ) {
         super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
         this.lifetime = 160 + random.nextInt(140);
         this.quadSize = 0.3F;
@@ -61,13 +71,13 @@ public class AzureAuraParticle extends RisingParticle {
 
         if (ageFade < alphaMult) {
             alpha = Math.min(alpha, ageFade);
-        } else if (!level.getBlockState(pos)
-                         .propagatesSkylightDown(level, pos)) {
-            alpha = Mth.clamp(alpha - 0.06F, alphaMult / 10, alphaMult);
-        } else {
-            alpha = Mth.clamp(alpha + 0.0325F, 0F, alphaMult);
-        }
-
+        } else if (!level
+            .getBlockState(pos)
+            .propagatesSkylightDown(level, pos)) {
+                alpha = Mth.clamp(alpha - 0.06F, alphaMult / 10, alphaMult);
+            } else {
+                alpha = Mth.clamp(alpha + 0.0325F, 0F, alphaMult);
+            }
 
         if (alpha < 0.01F) {
             remove();
@@ -102,22 +112,26 @@ public class AzureAuraParticle extends RisingParticle {
         final float minV = this.getV0();
         final float maxV = this.getV1();
         final int brightness = this.getLightColor(tickDelta);
-        vertexConsumer.addVertex(negX, negY, posZ)
-                      .setUv(maxU, maxV)
-                      .setColor(this.rCol, this.gCol, this.bCol, 0)
-                      .setLight(brightness);
-        vertexConsumer.addVertex(negX, posY, posZ)
-                      .setUv(maxU, minV)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(brightness);
-        vertexConsumer.addVertex(posX, posY, negZ)
-                      .setUv(minU, minV)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(brightness);
-        vertexConsumer.addVertex(posX, negY, negZ)
-                      .setUv(minU, maxV)
-                      .setColor(this.rCol, this.gCol, this.bCol, 0)
-                      .setLight(brightness);
+        vertexConsumer
+            .addVertex(negX, negY, posZ)
+            .setUv(maxU, maxV)
+            .setColor(this.rCol, this.gCol, this.bCol, 0)
+            .setLight(brightness);
+        vertexConsumer
+            .addVertex(negX, posY, posZ)
+            .setUv(maxU, minV)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(brightness);
+        vertexConsumer
+            .addVertex(posX, posY, negZ)
+            .setUv(minU, minV)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(brightness);
+        vertexConsumer
+            .addVertex(posX, negY, negZ)
+            .setUv(minU, maxV)
+            .setColor(this.rCol, this.gCol, this.bCol, 0)
+            .setLight(brightness);
     }
 
     @Override
@@ -140,8 +154,14 @@ public class AzureAuraParticle extends RisingParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType parameters, ClientLevel clientWorld, double x, double y, double z, double velocityX,
-            double velocityY, double velocityZ
+            SimpleParticleType parameters,
+            ClientLevel clientWorld,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             AzureAuraParticle particle = new AzureAuraParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
             particle.pickSprite(this.spriteProvider);

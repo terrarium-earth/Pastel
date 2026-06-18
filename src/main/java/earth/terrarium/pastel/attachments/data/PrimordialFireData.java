@@ -33,25 +33,32 @@ import java.util.Optional;
 
 public class PrimordialFireData {
 
-    public static final AttachmentType<Long> ATTACHMENT =
-        AttachmentType.builder(() -> 0L)
-                      .serialize(Codec.LONG)
-                      .build();
+    public static final AttachmentType<Long> ATTACHMENT = AttachmentType
+        .builder(() -> 0L)
+        .serialize(Codec.LONG)
+        .build();
 
     // 1% of max health as damage every tick as a base.
     public static final float BASE_PERCENT_DAMAGE = 0.01F;
 
     // Base damage reduction applied by fire resistance
     public static final float FIRE_RESISTANCE_DAMAGE_RESISTANCE = 0.25F;
+
     // Per-level damage reduction added by fire prot. Caps at 50%
     public static final float FIRE_PROT_DAMAGE_RESISTANCE = 0.05F;
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static OnPrimordialFireSoundInstance soundInstance;
 
     private static void sync(LivingEntity entity) {
-        AttachmentUtil.syncToTracking(
-            new Payload(entity.getId(), entity.getData(ATTACHMENT)), entity.level(), entity.blockPosition());
+        AttachmentUtil
+            .syncToTracking(
+                new Payload(entity.getId(), entity.getData(ATTACHMENT)),
+                entity.level(),
+                entity.blockPosition()
+            );
     }
 
     public static void setPrimordialFireTicks(LivingEntity entity, long ticks) {
@@ -60,10 +67,14 @@ public class PrimordialFireData {
     }
 
     public static void addPrimordialFireTicks(LivingEntity entity, int ticks) {
-        int i = Ench.getEquipmentLevel(
-            entity.level()
-                  .registryAccess(), Enchantments.FIRE_PROTECTION, entity
-        );
+        int i = Ench
+            .getEquipmentLevel(
+                entity
+                    .level()
+                    .registryAccess(),
+                Enchantments.FIRE_PROTECTION,
+                entity
+            );
         if (i > 0) {
             ticks -= Mth.floor(ticks * i * 0.15F);
         }
@@ -92,25 +103,26 @@ public class PrimordialFireData {
             return;
 
         //Immune creatures get spared. If we ever add any.
-        if (entity.getType()
-                  .is(PastelEntityTypeTags.PRIMORDIAL_FIRE_IMMUNE)) {
+        if (entity
+            .getType()
+            .is(PastelEntityTypeTags.PRIMORDIAL_FIRE_IMMUNE)) {
             entity.setData(ATTACHMENT, 0L);
             return;
         }
 
         if (!isAffectingConstruct(entity)) {
             var damageScaling = getDamageHealthScaling(entity);
-            entity.hurt(
-                PastelDamageTypes.primordialFire(entity.level()),
-                AzureDikeProvider.absorbDamage(entity, damageScaling * entity.getMaxHealth())
-            );
+            entity
+                .hurt(
+                    PastelDamageTypes.primordialFire(entity.level()),
+                    AzureDikeProvider.absorbDamage(entity, damageScaling * entity.getMaxHealth())
+                );
         }
         //Primordial fire is so strong because it rends the soul. No soul = just slightly spicier fire
         //Constructs have no soul, thus you get 2 dps and no more
         else if (entity.tickCount % 10 == 0) {
             entity.hurt(PastelDamageTypes.primordialFire(entity.level()), 1);
         }
-
 
         primordialFireTicks -= entity.getFluidHeight(FluidTags.WATER) > 0 ? 3 : 1;
         // was on fire, but is not any longer
@@ -122,8 +134,9 @@ public class PrimordialFireData {
     }
 
     public static boolean isAffectingConstruct(LivingEntity entity) {
-        return entity.getType()
-                     .is(PastelEntityTypeTags.SOULLESS);
+        return entity
+            .getType()
+            .is(PastelEntityTypeTags.SOULLESS);
     }
 
     /**
@@ -134,8 +147,9 @@ public class PrimordialFireData {
 
         //Bosses have great and exceptional souls that can resist a lot more.
         //95% less damage to them before reductions and caps
-        if (entity.getType()
-                  .is(Tags.EntityTypes.BOSSES))
+        if (entity
+            .getType()
+            .is(Tags.EntityTypes.BOSSES))
             baseDamage /= 20F;
 
         return baseDamage * getDamagePenalties(entity) * getDamageBonuses(entity);
@@ -143,15 +157,22 @@ public class PrimordialFireData {
 
     public static float getDamagePenalties(LivingEntity entity) {
         //fire prot has a cap of 50% DR, requiring fire protection 10 on an armor piece
-        float fireProt = Math.min(
-            FIRE_PROT_DAMAGE_RESISTANCE * Ench.getEquipmentLevel(
-                entity.level()
-                      .registryAccess(), Enchantments.FIRE_PROTECTION, entity
-            ), 0.5F
-        );
-        int fireResLevel = Optional.ofNullable(entity.getEffect(MobEffects.FIRE_RESISTANCE))
-                                   .map(MobEffectInstance::getAmplifier)
-                                   .orElse(-1) + 1;
+        float fireProt = Math
+            .min(
+                FIRE_PROT_DAMAGE_RESISTANCE * Ench
+                    .getEquipmentLevel(
+                        entity
+                            .level()
+                            .registryAccess(),
+                        Enchantments.FIRE_PROTECTION,
+                        entity
+                    ),
+                0.5F
+            );
+        int fireResLevel = Optional
+            .ofNullable(entity.getEffect(MobEffects.FIRE_RESISTANCE))
+            .map(MobEffectInstance::getAmplifier)
+            .orElse(-1) + 1;
         float fireRes = 0;
 
         // flat 25% for a start on fire res
@@ -159,7 +180,11 @@ public class PrimordialFireData {
             fireRes = FIRE_RESISTANCE_DAMAGE_RESISTANCE;
 
         //Fire resistance has diminishing returns
-        for (int i = 1; i < fireResLevel; i++) {
+        for (
+            int i = 1;
+            i < fireResLevel;
+            i++
+        ) {
             fireRes += (float) (0.05 * (i) + (0.25F * Math.pow(0.5F, i)));
         }
 
@@ -179,16 +204,19 @@ public class PrimordialFireData {
         return 1F;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static void clientTick(LivingEntity entity) {
         var primordialFireTicks = entity.getData(ATTACHMENT);
 
         if (primordialFireTicks > 0) {
             if (entity.equals(Minecraft.getInstance().player) && primordialFireTicks > 2 && soundInstance == null) {
                 soundInstance = new OnPrimordialFireSoundInstance((Player) entity);
-                Minecraft.getInstance()
-                         .getSoundManager()
-                         .play(soundInstance);
+                Minecraft
+                    .getInstance()
+                    .getSoundManager()
+                    .play(soundInstance);
             }
 
             double fluidHeight = entity.getFluidHeight(FluidTags.WATER);
@@ -198,23 +226,39 @@ public class PrimordialFireData {
                 RandomSource random = world.random;
                 Vec3 pos = entity.position();
 
-                for (int i = 0; i < 2; i++) {
-                    world.addParticle(
-                        ParticleTypes.BUBBLE_POP, entity.getRandomX(1),
-                        pos.y() + Math.min(fluidHeight, entity.getBbHeight()) * random.nextFloat(),
-                        entity.getRandomZ(1), 0.0, 0.04, 0.0
-                    );
-                    world.addParticle(
-                        ParticleTypes.SMOKE, entity.getRandomX(1),
-                        pos.y() + Math.min(fluidHeight, entity.getBbHeight()) * random.nextFloat(),
-                        entity.getRandomZ(1), 0.0, 0.04, 0.0
-                    );
+                for (
+                    int i = 0;
+                    i < 2;
+                    i++
+                ) {
+                    world
+                        .addParticle(
+                            ParticleTypes.BUBBLE_POP,
+                            entity.getRandomX(1),
+                            pos.y() + Math.min(fluidHeight, entity.getBbHeight()) * random.nextFloat(),
+                            entity.getRandomZ(1),
+                            0.0,
+                            0.04,
+                            0.0
+                        );
+                    world
+                        .addParticle(
+                            ParticleTypes.SMOKE,
+                            entity.getRandomX(1),
+                            pos.y() + Math.min(fluidHeight, entity.getBbHeight()) * random.nextFloat(),
+                            entity.getRandomZ(1),
+                            0.0,
+                            0.04,
+                            0.0
+                        );
                 }
                 if (world.random.nextInt(12) == 0) {
-                    entity.playSound(
-                        SoundEvents.FIRE_EXTINGUISH, 0.2F + random.nextFloat() * 0.2F,
-                        0.9F + random.nextFloat() * 0.15F
-                    );
+                    entity
+                        .playSound(
+                            SoundEvents.FIRE_EXTINGUISH,
+                            0.2F + random.nextFloat() * 0.2F,
+                            0.9F + random.nextFloat() * 0.15F
+                        );
                 }
             }
         } else if (entity.equals(Minecraft.getInstance().player) && soundInstance != null) {
@@ -224,19 +268,24 @@ public class PrimordialFireData {
 
     public record Payload(int entityId, long burnTicks) implements CustomPacketPayload {
 
-        public static final StreamCodec<FriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
-            ByteBufCodecs.INT, Payload::entityId,
-            ByteBufCodecs.VAR_LONG, Payload::burnTicks,
-            Payload::new
-        );
+        public static final StreamCodec<FriendlyByteBuf, Payload> CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.INT,
+                Payload::entityId,
+                ByteBufCodecs.VAR_LONG,
+                Payload::burnTicks,
+                Payload::new
+            );
 
         public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("primfire");
 
         public static void execute(Payload payload, IPayloadContext context) {
-            var level = context.player()
-                               .level();
-            Optional.ofNullable(level.getEntity(payload.entityId))
-                    .ifPresent(e -> e.setData(ATTACHMENT, payload.burnTicks));
+            var level = context
+                .player()
+                .level();
+            Optional
+                .ofNullable(level.getEntity(payload.entityId))
+                .ifPresent(e -> e.setData(ATTACHMENT, payload.burnTicks));
         }
 
         @Override

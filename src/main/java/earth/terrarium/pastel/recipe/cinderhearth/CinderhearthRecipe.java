@@ -34,13 +34,21 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/cinderhearth");
 
     protected final IngredientStack ingredient;
+
     protected final int time;
+
     protected final float experience;
+
     protected final List<Tuple<ItemStack, Float>> resultsWithChance;
 
     public CinderhearthRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        IngredientStack ingredient, int time, float experience, List<Tuple<ItemStack, Float>> resultsWithChance
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        IngredientStack ingredient,
+        int time,
+        float experience,
+        List<Tuple<ItemStack, Float>> resultsWithChance
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -70,8 +78,9 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider registryLookup) {
-        return resultsWithChance.getFirst()
-                                .getA();
+        return resultsWithChance
+            .getFirst()
+            .getA();
     }
 
     @Override
@@ -114,14 +123,15 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
 
     public List<ItemStack> getRolledOutputs(RandomSource random, float yieldMod) {
         List<ItemStack> output = new ArrayList<>();
-        for (Tuple<ItemStack, Float> possibleOutput : resultsWithChance) {
+        for (
+            Tuple<ItemStack, Float> possibleOutput : resultsWithChance
+        ) {
             float chance = possibleOutput.getB();
             if (chance >= 1.0 || random.nextFloat() < chance * yieldMod) {
                 ItemStack currentOutputStack = possibleOutput.getA();
                 if (yieldMod > 1) {
                     int totalCount = Support.chanceRound(currentOutputStack.getCount() * yieldMod, random);
-                    while (totalCount >
-                           0) { // if the rolled count exceeds the max stack size we need to split them (unstackable
+                    while (totalCount > 0) { // if the rolled count exceeds the max stack size we need to split them (unstackable
                         // items, counts > 64, ...)
                         int count = Math.min(totalCount, currentOutputStack.getMaxStackSize());
                         ItemStack outputStack = currentOutputStack.copy();
@@ -139,7 +149,9 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
 
     public List<ItemStack> getPossibleOutputs() {
         List<ItemStack> outputs = new ArrayList<>();
-        for (Tuple<ItemStack, Float> pair : resultsWithChance) {
+        for (
+            Tuple<ItemStack, Float> pair : resultsWithChance
+        ) {
             outputs.add(pair.getA());
         }
         return outputs;
@@ -151,49 +163,70 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
 
     public static class Serializer implements RecipeSerializer<CinderhearthRecipe> {
 
-        public static final MapCodec<CinderhearthRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                       Codec.STRING.optionalFieldOf("group", "")
-                                                                                                                   .forGetter(recipe -> recipe.group),
-                                                                                                       Codec.BOOL.optionalFieldOf("secret", false)
-                                                                                                                 .forGetter(recipe -> recipe.secret),
-                                                                                                       ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                                                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                                                                                       IngredientStack.CODEC.fieldOf("ingredient")
-                                                                                                                            .forGetter(recipe -> recipe.ingredient),
-                                                                                                       Codec.INT.fieldOf("time")
-                                                                                                                .forGetter(recipe -> recipe.time),
-                                                                                                       Codec.FLOAT.optionalFieldOf("experience", 0f)
-                                                                                                                  .forGetter(recipe -> recipe.experience),
-                                                                                                       Codec.withAlternative(
-                                                                                                                ItemStack.CODEC.xmap(stack -> new Tuple<>(stack, 1.0f), Tuple::getA),
-                                                                                                                CodecHelper.mapPair(
-                                                                                                                               ItemStack.CODEC.fieldOf("result"),
-                                                                                                                               Codec.FLOAT.optionalFieldOf("chance", 1.0f)
-                                                                                                                           )
-                                                                                                                           .codec()
-                                                                                                            )
-                                                                                                            .listOf()
-                                                                                                            .fieldOf(
-                                                                                                                "results")
-                                                                                                            .forGetter(recipe -> recipe.resultsWithChance)
-                                                                                                   )
-                                                                                                   .apply(
-                                                                                                       i,
-                                                                                                       CinderhearthRecipe::new
-                                                                                                   ));
+        public static final MapCodec<CinderhearthRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(recipe -> recipe.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(recipe -> recipe.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                        IngredientStack.CODEC
+                            .fieldOf("ingredient")
+                            .forGetter(recipe -> recipe.ingredient),
+                        Codec.INT
+                            .fieldOf("time")
+                            .forGetter(recipe -> recipe.time),
+                        Codec.FLOAT
+                            .optionalFieldOf("experience", 0f)
+                            .forGetter(recipe -> recipe.experience),
+                        Codec
+                            .withAlternative(
+                                ItemStack.CODEC.xmap(stack -> new Tuple<>(stack, 1.0f), Tuple::getA),
+                                CodecHelper
+                                    .mapPair(
+                                        ItemStack.CODEC.fieldOf("result"),
+                                        Codec.FLOAT.optionalFieldOf("chance", 1.0f)
+                                    )
+                                    .codec()
+                            )
+                            .listOf()
+                            .fieldOf(
+                                "results"
+                            )
+                            .forGetter(recipe -> recipe.resultsWithChance)
+                    )
+                    .apply(
+                        i,
+                        CinderhearthRecipe::new
+                    )
+            );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, CinderhearthRecipe> STREAM_CODEC
-            = PacketCodecHelper.tuple(
-            ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
-            ByteBufCodecs.BOOL, recipe -> recipe.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-            IngredientStack.STREAM_CODEC, recipe -> recipe.ingredient,
-            ByteBufCodecs.VAR_INT, recipe -> recipe.time,
-            ByteBufCodecs.FLOAT, recipe -> recipe.experience,
-            PacketCodecHelper.pair(ItemStack.STREAM_CODEC, ByteBufCodecs.FLOAT)
-                             .apply(ByteBufCodecs.list()), recipe -> recipe.resultsWithChance,
-            CinderhearthRecipe::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, CinderhearthRecipe> STREAM_CODEC = PacketCodecHelper
+            .tuple(
+                ByteBufCodecs.STRING_UTF8,
+                recipe -> recipe.group,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                recipe -> recipe.requiredAdvancementIdentifier,
+                IngredientStack.STREAM_CODEC,
+                recipe -> recipe.ingredient,
+                ByteBufCodecs.VAR_INT,
+                recipe -> recipe.time,
+                ByteBufCodecs.FLOAT,
+                recipe -> recipe.experience,
+                PacketCodecHelper
+                    .pair(ItemStack.STREAM_CODEC, ByteBufCodecs.FLOAT)
+                    .apply(ByteBufCodecs.list()),
+                recipe -> recipe.resultsWithChance,
+                CinderhearthRecipe::new
+            );
 
         @Override
         public MapCodec<CinderhearthRecipe> codec() {

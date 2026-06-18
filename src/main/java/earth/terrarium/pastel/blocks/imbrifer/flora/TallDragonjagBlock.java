@@ -27,33 +27,49 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TallDragonjagBlock extends DoublePlantBlock
-    implements Dragonjag, BonemealableBlock, NaturesStaffTriggered {
+    implements
+    Dragonjag,
+    BonemealableBlock,
+    NaturesStaffTriggered {
 
-    public static final MapCodec<TallDragonjagBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                   propertiesCodec(),
-                                                                                                   Dragonjag.Variant.CODEC.fieldOf("variant")
-                                                                                                                          .forGetter(TallDragonjagBlock::getVariant)
-                                                                                               )
-                                                                                               .apply(
-                                                                                                   i,
-                                                                                                   TallDragonjagBlock::new
-                                                                                               ));
+    public static final MapCodec<TallDragonjagBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    propertiesCodec(),
+                    Dragonjag.Variant.CODEC
+                        .fieldOf("variant")
+                        .forGetter(TallDragonjagBlock::getVariant)
+                )
+                .apply(
+                    i,
+                    TallDragonjagBlock::new
+                )
+        );
 
     protected static final VoxelShape SHAPE_UPPER = Block.box(2.0, 0.0, 2.0, 14.0, 7.0, 14.0);
+
     protected static final VoxelShape SHAPE_UPPER_DEAD = Block.box(2.0, 0.0, 2.0, 10.0, 3.0, 14.0);
+
     protected static final VoxelShape SHAPE_LOWER = Block.box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
 
     public static final BooleanProperty DEAD = BooleanProperty.create("dead");
+
     protected static final Map<Dragonjag.Variant, TallDragonjagBlock> VARIANTS = new HashMap<>();
+
     protected final Dragonjag.Variant variant;
 
     public TallDragonjagBlock(Properties settings, Dragonjag.Variant variant) {
         super(settings);
         this.variant = variant;
         VARIANTS.put(variant, this);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(HALF, DoubleBlockHalf.LOWER)
-                                                      .setValue(DEAD, false));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(HALF, DoubleBlockHalf.LOWER)
+                    .setValue(DEAD, false)
+            );
     }
 
     @Override
@@ -76,8 +92,9 @@ public class TallDragonjagBlock extends DoublePlantBlock
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return SmallDragonjagBlock.getBlockForVariant(this.variant)
-                                  .getCloneItemStack(world, pos, state);
+        return SmallDragonjagBlock
+            .getBlockForVariant(this.variant)
+            .getCloneItemStack(world, pos, state);
     }
 
     @Override
@@ -106,12 +123,18 @@ public class TallDragonjagBlock extends DoublePlantBlock
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        boolean success = world.registryAccess()
-                               .registryOrThrow(Registries.CONFIGURED_FEATURE)
-                               .get(PastelConfiguredFeatures.DRAGONJAGS.get(variant))
-                               .place(world, world.getChunkSource()
-                                                  .getGenerator(), random, pos
-                               );
+        boolean success = world
+            .registryAccess()
+            .registryOrThrow(Registries.CONFIGURED_FEATURE)
+            .get(PastelConfiguredFeatures.DRAGONJAGS.get(variant))
+            .place(
+                world,
+                world
+                    .getChunkSource()
+                    .getGenerator(),
+                random,
+                pos
+            );
 
         if (success) {
             setDead(world, pos, state, true);

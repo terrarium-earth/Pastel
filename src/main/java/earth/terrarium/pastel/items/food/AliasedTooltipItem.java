@@ -23,15 +23,18 @@ public class AliasedTooltipItem extends ItemNameBlockItem {
 
     public AliasedTooltipItem(Block block, Properties settings, String[] tooltips) {
         super(block, settings);
-        Arrays.stream(tooltips)
-              .map(Component::translatable)
-              .forEach(tooltipTexts::add);
+        Arrays
+            .stream(tooltips)
+            .map(Component::translatable)
+            .forEach(tooltipTexts::add);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        for (MutableComponent text : this.tooltipTexts) {
+        for (
+            MutableComponent text : this.tooltipTexts
+        ) {
             tooltip.add(text.withStyle(ChatFormatting.GRAY));
         }
     }

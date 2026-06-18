@@ -17,21 +17,33 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class CompactingChestScreenHandler extends AbstractContainerMenu {
 
     private final ContainerData propertyDelegate;
+
     private final CompactingChestBlockEntity blockEntity;
+
     protected final int ROWS = 3;
 
     public CompactingChestScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
         this(
-            syncId, playerInventory, (CompactingChestBlockEntity) playerInventory.player.level()
-                                                                                        .getBlockEntity(
-                                                                                            BlockPos.STREAM_CODEC.decode(
-                                                                                                buf)),
+            syncId,
+            playerInventory,
+            (CompactingChestBlockEntity) playerInventory.player
+                .level()
+                .getBlockEntity(
+                    BlockPos.STREAM_CODEC
+                        .decode(
+                            buf
+                        )
+                ),
             new SimpleContainerData(1)
         );
     }
 
     public CompactingChestScreenHandler(
-        int syncId, Inventory playerInventory, CompactingChestBlockEntity blockEntity, ContainerData propertyDelegate) {
+        int syncId,
+        Inventory playerInventory,
+        CompactingChestBlockEntity blockEntity,
+        ContainerData propertyDelegate
+    ) {
         super(PastelScreenHandlerTypes.COMPACTING_CHEST, syncId);
 
         this.blockEntity = blockEntity;
@@ -44,19 +56,39 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 
         int j;
         int k;
-        for (j = 0; j < ROWS; ++j) {
-            for (k = 0; k < 9; ++k) {
+        for (
+            j = 0;
+            j < ROWS;
+            ++j
+        ) {
+            for (
+                k = 0;
+                k < 9;
+                ++k
+            ) {
                 this.addSlot(new Slot(blockEntity, k + j * 9, 8 + k * 18, 26 + j * 18));
             }
         }
 
-        for (j = 0; j < 3; ++j) {
-            for (k = 0; k < 9; ++k) {
+        for (
+            j = 0;
+            j < 3;
+            ++j
+        ) {
+            for (
+                k = 0;
+                k < 9;
+                ++k
+            ) {
                 this.addSlot(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 112 + j * 18 + i));
             }
         }
 
-        for (j = 0; j < 9; ++j) {
+        for (
+            j = 0;
+            j < 9;
+            ++j
+        ) {
             this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 170 + i));
         }
 
@@ -93,18 +125,22 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
     }
 
     public void toggleMode() {
-        this.propertyDelegate.set(
-            0, getCraftingMode().next()
-                                .ordinal()
-        );
+        this.propertyDelegate
+            .set(
+                0,
+                getCraftingMode()
+                    .next()
+                    .ordinal()
+            );
         broadcastChanges();
     }
 
     @Override
     public void broadcastChanges() {
         super.broadcastChanges();
-        if (blockEntity.getLevel()
-                       .isClientSide())
+        if (blockEntity
+            .getLevel()
+            .isClientSide())
             PacketDistributor.sendToServer(new ChangeCompactingChestSettingsPayload(getCraftingMode()));
         blockEntity.applySettings(getCraftingMode());
     }

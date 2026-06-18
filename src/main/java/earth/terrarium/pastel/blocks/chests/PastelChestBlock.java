@@ -35,6 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public abstract class PastelChestBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+
     protected static final VoxelShape CHEST_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
 
     protected PastelChestBlock(Properties settings) {
@@ -44,16 +45,25 @@ public abstract class PastelChestBlock extends BaseEntityBlock {
 
     public static boolean isChestBlocked(LevelAccessor world, BlockPos pos) {
         var up = pos.above();
-        if (world.getBlockState(up)
-                 .isRedstoneConductor(world, up))
+        if (world
+            .getBlockState(up)
+            .isRedstoneConductor(world, up))
             return true;
 
-        for (var catEntity : world.getEntitiesOfClass(
-            Cat.class, new AABB(
-                pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2,
-                pos.getZ() + 1
-            )
-        )) {
+        for (
+            var catEntity : world
+                .getEntitiesOfClass(
+                    Cat.class,
+                    new AABB(
+                        pos.getX(),
+                        pos.getY() + 1,
+                        pos.getZ(),
+                        pos.getX() + 1,
+                        pos.getY() + 2,
+                        pos.getZ() + 1
+                    )
+                )
+        ) {
             if (catEntity.isInSittingPose()) {
                 return true;
             }
@@ -64,7 +74,12 @@ public abstract class PastelChestBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -127,7 +142,11 @@ public abstract class PastelChestBlock extends BaseEntityBlock {
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
@@ -145,10 +164,12 @@ public abstract class PastelChestBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        Direction direction = ctx.getHorizontalDirection()
-                                 .getOpposite();
-        return this.defaultBlockState()
-                   .setValue(FACING, direction);
+        Direction direction = ctx
+            .getHorizontalDirection()
+            .getOpposite();
+        return this
+            .defaultBlockState()
+            .setValue(FACING, direction);
     }
 
     public Material getTextureLocation() {

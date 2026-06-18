@@ -6,7 +6,11 @@ import net.minecraft.util.Mth;
 
 public class MalumCompat {
     public static int getSoulWardRows(LocalPlayer player) {
-        return Mth.ceil(player.getData(MalumAttachmentTypes.SOUL_WARD)
-                                                          .getSoulWard() / 30);
+        return Mth
+            .ceil(
+                player
+                    .getData(MalumAttachmentTypes.SOUL_WARD)
+                    .getSoulWard() / 30
+            );
     }
 }

@@ -29,15 +29,22 @@ public class RedstoneCalculatorBlock extends DiodeBlock implements EntityBlock {
 
     public static final MapCodec<RedstoneCalculatorBlock> CODEC = simpleCodec(RedstoneCalculatorBlock::new);
 
-    public static final EnumProperty<CalculationMode> CALCULATION_MODE = EnumProperty.create(
-        "calculation_mode", CalculationMode.class);
+    public static final EnumProperty<CalculationMode> CALCULATION_MODE = EnumProperty
+        .create(
+            "calculation_mode",
+            CalculationMode.class
+        );
 
     public RedstoneCalculatorBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(FACING, Direction.NORTH)
-                                                      .setValue(POWERED, false)
-                                                      .setValue(CALCULATION_MODE, CalculationMode.ADDITION));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(FACING, Direction.NORTH)
+                    .setValue(POWERED, false)
+                    .setValue(CALCULATION_MODE, CalculationMode.ADDITION)
+            );
     }
 
     @Override
@@ -62,24 +69,33 @@ public class RedstoneCalculatorBlock extends DiodeBlock implements EntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (!player.getAbilities().mayBuild) {
             return InteractionResult.PASS;
         } else {
             BlockState newModeState = state.cycle(CALCULATION_MODE);
             world.setBlock(pos, newModeState, Block.UPDATE_ALL);
-            float pitch = 0.5F + state.getValue(CALCULATION_MODE)
-                                      .ordinal() * 0.05F;
+            float pitch = 0.5F + state
+                .getValue(CALCULATION_MODE)
+                .ordinal() * 0.05F;
             world.playSound(player, pos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
             if (player instanceof ServerPlayer serverPlayerEntity) {
                 // since this triggers both on server and client side: just send the
                 // message once, client side is enough, since it is pretty irrelevant on the server
-                serverPlayerEntity.displayClientMessage(
-                    Component.translatable("block.pastel.redstone_calculator.mode_set")
-                             .append(
-                                 Component.translatable(newModeState.getValue(CALCULATION_MODE).localizationString)),
-                    true
-                );
+                serverPlayerEntity
+                    .displayClientMessage(
+                        Component
+                            .translatable("block.pastel.redstone_calculator.mode_set")
+                            .append(
+                                Component.translatable(newModeState.getValue(CALCULATION_MODE).localizationString)
+                            ),
+                        true
+                    );
             }
 
             this.update(world, pos, state);
@@ -117,16 +133,21 @@ public class RedstoneCalculatorBlock extends DiodeBlock implements EntityBlock {
 
     @Override
     protected void checkTickOnNeighbor(Level world, BlockPos pos, BlockState state) {
-        if (!world.getBlockTicks()
-                  .willTickThisTick(pos, this)) {
-            int previousSignal = world.getBlockEntity(
-                pos) instanceof RedstoneCalculatorBlockEntity redstoneCalculatorBlockEntity
-                                 ? redstoneCalculatorBlockEntity.getOutputSignal() : 0;
+        if (!world
+            .getBlockTicks()
+            .willTickThisTick(pos, this)) {
+            int previousSignal = world
+                .getBlockEntity(
+                    pos
+                ) instanceof RedstoneCalculatorBlockEntity redstoneCalculatorBlockEntity
+                    ? redstoneCalculatorBlockEntity.getOutputSignal()
+                    : 0;
             int newSignal = this.calculateOutputSignal(world, pos, state);
 
             if (newSignal != previousSignal) {
-                TickPriority tickPriority = this.shouldPrioritize(world, pos, state) ? TickPriority.HIGH
-                                                                                     : TickPriority.NORMAL;
+                TickPriority tickPriority = this.shouldPrioritize(world, pos, state)
+                    ? TickPriority.HIGH
+                    : TickPriority.NORMAL;
                 world.scheduleTick(pos, this, getDelay(state), tickPriority);
             }
         }
@@ -172,7 +193,8 @@ public class RedstoneCalculatorBlock extends DiodeBlock implements EntityBlock {
     @Override
     protected int getOutputSignal(@NotNull BlockGetter world, BlockPos pos, BlockState state) {
         return world.getBlockEntity(pos) instanceof RedstoneCalculatorBlockEntity redstoneCalculatorBlockEntity
-               ? redstoneCalculatorBlockEntity.getOutputSignal() : 0;
+            ? redstoneCalculatorBlockEntity.getOutputSignal()
+            : 0;
     }
 
     public enum CalculationMode implements StringRepresentable {
@@ -185,6 +207,7 @@ public class RedstoneCalculatorBlock extends DiodeBlock implements EntityBlock {
         MAX("max", "block.pastel.redstone_calculator.mode.max");
 
         public final String localizationString;
+
         private final String name;
 
         CalculationMode(String name, String localizationString) {

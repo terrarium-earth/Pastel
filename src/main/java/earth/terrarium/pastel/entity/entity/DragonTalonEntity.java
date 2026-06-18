@@ -47,8 +47,11 @@ import java.util.Optional;
 
 public class DragonTalonEntity extends BidentBaseEntity {
 
-    private static final EntityDataAccessor<Boolean> HIT = SynchedEntityData.defineId(
-        DragonTalonEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> HIT = SynchedEntityData
+        .defineId(
+            DragonTalonEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
 
     public DragonTalonEntity(Level world) {
         this(PastelEntityTypes.DRAGON_TALON.get(), world);
@@ -64,8 +67,9 @@ public class DragonTalonEntity extends BidentBaseEntity {
         var state = level().getBlockState(pos);
 
         if (state.is(Blocks.SLIME_BLOCK) && getDeltaMovement().lengthSqr() > 1) {
-            switch (blockHitResult.getDirection()
-                                  .getAxis()) {
+            switch (blockHitResult
+                .getDirection()
+                .getAxis()) {
                 case X -> setDeltaMovement(getDeltaMovement().multiply(-1, 1, 1));
                 case Y -> setDeltaMovement(getDeltaMovement().multiply(1, -1, 1));
                 case Z -> setDeltaMovement(getDeltaMovement().multiply(1, 1, -1));
@@ -108,8 +112,12 @@ public class DragonTalonEntity extends BidentBaseEntity {
 
         ((TridentEntityAccessor) this).setDealtDamage(true);
         recall();
-        this.setDeltaMovement(this.getDeltaMovement()
-                                  .multiply(-0.01, -0.1, -0.01));
+        this
+            .setDeltaMovement(
+                this
+                    .getDeltaMovement()
+                    .multiply(-0.01, -0.1, -0.01)
+            );
         float g = 1.0F;
 
         this.playSound(PastelSounds.IMPALING_HIT, g, 1.0F);
@@ -118,25 +126,30 @@ public class DragonTalonEntity extends BidentBaseEntity {
     private float getDamage(ItemStack stack) {
         //TODO can we use a built in function for this?
         var damage = new MutableDouble(0);
-        var key = Attributes.ATTACK_DAMAGE.unwrapKey()
-                                          .orElse(null);
-        var base = Attributes.ATTACK_DAMAGE.value()
-                                           .getDefaultValue();
+        var key = Attributes.ATTACK_DAMAGE
+            .unwrapKey()
+            .orElse(null);
+        var base = Attributes.ATTACK_DAMAGE
+            .value()
+            .getDefaultValue();
         var modifiers = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
-        modifiers.forEach(
-            EquipmentSlot.MAINHAND, (attribute, modifier) -> {
-                if (attribute.is(key)) {
-                    var value = modifier.amount();
-                    damage.addAndGet(switch (modifier.operation()) {
-                        case ADD_VALUE -> value;
-                        case ADD_MULTIPLIED_BASE -> value * base;
-                        case ADD_MULTIPLIED_TOTAL -> value * damage.getValue();
-                    });
+        modifiers
+            .forEach(
+                EquipmentSlot.MAINHAND,
+                (attribute, modifier) -> {
+                    if (attribute.is(key)) {
+                        var value = modifier.amount();
+                        damage.addAndGet(switch (modifier.operation()) {
+                            case ADD_VALUE -> value;
+                            case ADD_MULTIPLIED_BASE -> value * base;
+                            case ADD_MULTIPLIED_TOTAL -> value * damage.getValue();
+                        });
+                    }
                 }
-            }
-        );
-        return damage.getValue()
-                     .floatValue();
+            );
+        return damage
+            .getValue()
+            .floatValue();
     }
 
     @Override
@@ -148,10 +161,14 @@ public class DragonTalonEntity extends BidentBaseEntity {
         var difMod = 4F;
         var airborne = !owner.onGround();
         var sneaking = owner.isShiftKeyDown();
-        var inertia = Ench.getLevel(
-            owner.level()
-                 .registryAccess(), PastelEnchantments.INERTIA, getTrackedStack()
-        );
+        var inertia = Ench
+            .getLevel(
+                owner
+                    .level()
+                    .registryAccess(),
+                PastelEnchantments.INERTIA,
+                getTrackedStack()
+            );
 
         if (sneaking)
             difMod *= 3;
@@ -186,23 +203,40 @@ public class DragonTalonEntity extends BidentBaseEntity {
             yoink(owner, position(), 0.125, 0.165);
         }
 
-        if (Ench.hasEnchantment(level().registryAccess(), Enchantments.CHANNELING, getTrackedStack()) &&
-            owner != null) {
+        if (Ench
+            .hasEnchantment(level().registryAccess(), Enchantments.CHANNELING, getTrackedStack()) && owner != null) {
             if (level() instanceof ServerLevel world) {
-                for (int i = 0; i < 10; i++) {
-                    world.sendParticles(
-                        ParticleTypes.GLOW,
-                        getRandomX(1),
-                        getY() + getBbHeight() * random.nextFloat(),
-                        getRandomZ(1),
-                        1 + random.nextInt(2), 0, random.nextFloat() + 0.25F, 0, 0
-                    );
+                for (
+                    int i = 0;
+                    i < 10;
+                    i++
+                ) {
+                    world
+                        .sendParticles(
+                            ParticleTypes.GLOW,
+                            getRandomX(1),
+                            getY() + getBbHeight() * random.nextFloat(),
+                            getRandomZ(1),
+                            1 + random.nextInt(2),
+                            0,
+                            random.nextFloat() + 0.25F,
+                            0,
+                            0
+                        );
                 }
 
-                world.playSeededSound(
-                    null, position().x, position().y, position().z, PastelSounds.ELECTRIC_DISCHARGE,
-                    SoundSource.AMBIENT, 1F, 0.6F + random.nextFloat() * 0.2F, 0
-                );
+                world
+                    .playSeededSound(
+                        null,
+                        position().x,
+                        position().y,
+                        position().z,
+                        PastelSounds.ELECTRIC_DISCHARGE,
+                        SoundSource.AMBIENT,
+                        1F,
+                        0.6F + random.nextFloat() * 0.2F,
+                        0
+                    );
             }
             remove(RemovalReason.DISCARDED);
             return;
@@ -226,12 +260,14 @@ public class DragonTalonEntity extends BidentBaseEntity {
         var bonusMod = 1f;
 
         if (yoinked instanceof LivingEntity livingYoink) {
-            bonusMod /= Optional.ofNullable(livingYoink.getEffect(PastelMobEffects.DENSITY))
-                                .map(effect -> effect.getAmplifier() + 2)
-                                .orElse(1);
-            bonusMod *= Optional.ofNullable(livingYoink.getEffect(PastelMobEffects.LIGHTWEIGHT))
-                                .map(effect -> (effect.getAmplifier() + 2) / 1.5F)
-                                .orElse(1F);
+            bonusMod /= Optional
+                .ofNullable(livingYoink.getEffect(PastelMobEffects.DENSITY))
+                .map(effect -> effect.getAmplifier() + 2)
+                .orElse(1);
+            bonusMod *= Optional
+                .ofNullable(livingYoink.getEffect(PastelMobEffects.LIGHTWEIGHT))
+                .map(effect -> (effect.getAmplifier() + 2) / 1.5F)
+                .orElse(1F);
         }
 
         if (!yoinked.onGround()) {
@@ -247,8 +283,12 @@ public class DragonTalonEntity extends BidentBaseEntity {
         if (yoinked == getOwner() && yoinkPos.y > targetPos.y && !sneaking)
             yMod = 0;
 
-        yoinked.setDeltaMovement(velocity.multiply(xMod, yMod, xMod)
-                                         .add(0, sneaking ? 0 : 0.25, 0));
+        yoinked
+            .setDeltaMovement(
+                velocity
+                    .multiply(xMod, yMod, xMod)
+                    .add(0, sneaking ? 0 : 0.25, 0)
+            );
         yoinked.fallDistance = 0F;
         yoinked.hurtMarked = true;
         yoinked.hasImpulse = true;
@@ -319,17 +359,16 @@ public class DragonTalonEntity extends BidentBaseEntity {
         return false;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public ItemEntity spawnAtLocation(ItemStack stack) {
         return null;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public ItemEntity spawnAtLocation(ItemStack stack, float yOffset) {
         return null;
     }
+
     @Override
     public ColorGradient getGradient() {
         return new ColorGradient(

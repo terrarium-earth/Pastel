@@ -18,10 +18,15 @@ import java.util.List;
 public class KnockbackIdolBlock extends IdolBlock {
 
     protected final float horizontalKnockback;
+
     protected final float verticalKnockback;
 
     public KnockbackIdolBlock(
-        Properties settings, ParticleOptions particleEffect, float horizontalKnockback, float verticalKnockback) {
+        Properties settings,
+        ParticleOptions particleEffect,
+        float horizontalKnockback,
+        float verticalKnockback
+    ) {
         super(settings, particleEffect);
         this.horizontalKnockback = horizontalKnockback;
         this.verticalKnockback = verticalKnockback;
@@ -35,7 +40,12 @@ public class KnockbackIdolBlock extends IdolBlock {
 
     @Override
     public boolean trigger(
-        ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side) {
+        ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    ) {
         if (entity != null) {
             switch (side) {
                 case NORTH -> {
@@ -70,7 +80,11 @@ public class KnockbackIdolBlock extends IdolBlock {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(Component.translatable("block.pastel.knockback_idol.tooltip"));
     }

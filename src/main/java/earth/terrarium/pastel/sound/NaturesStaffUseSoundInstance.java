@@ -10,10 +10,13 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final Player player;
+
     private boolean done;
 
     public NaturesStaffUseSoundInstance(Player player) {
@@ -42,8 +45,9 @@ public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implemen
         if (volume < 1.3)
             volume += 0.05F;
 
-        if (player == null || !player.isUsingItem() || !player.getUseItem()
-                                                              .is(PastelItems.NATURES_STAFF.get())) {
+        if (player == null || !player.isUsingItem() || !player
+            .getUseItem()
+            .is(PastelItems.NATURES_STAFF.get())) {
             this.setDone();
         } else {
             this.x = ((float) this.player.getX());

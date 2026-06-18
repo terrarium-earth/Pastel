@@ -16,25 +16,34 @@ public class ProjectorBlockEntityRenderer implements BlockEntityRenderer<Project
 
     protected static EntityRenderDispatcher dispatcher;
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public ProjectorBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
-        dispatcher = Minecraft.getInstance()
-                              .getEntityRenderDispatcher();
+        dispatcher = Minecraft
+            .getInstance()
+            .getEntityRenderDispatcher();
     }
 
     @Override
     public void render(
-        ProjectorBlockEntity entity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light,
+        ProjectorBlockEntity entity,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
         int overlay
     ) {
-        float time = entity.getLevel()
-                           .getGameTime() % 24000 + tickDelta;
+        float time = entity
+            .getLevel()
+            .getGameTime() % 24000 + tickDelta;
         double bob = Math.sin((time / 19)) * 0.075 * entity.bobMultiplier;
 
         matrices.pushPose();
         matrices.translate(0.5D, entity.heightOffset + bob, 0.5D);
-        var center = Vec3.atLowerCornerOf(entity.getBlockPos())
-                         .add(0.5, 0, 0.5);
+        var center = Vec3
+            .atLowerCornerOf(entity.getBlockPos())
+            .add(0.5, 0, 0.5);
         var xOffset = center.x() - dispatcher.camera.getPosition().x;
         var zOffset = center.z() - dispatcher.camera.getPosition().z;
         matrices.mulPose(Axis.YP.rotation((float) Mth.atan2(xOffset, zOffset)));

@@ -28,45 +28,70 @@ public class PotionWorkshopBrewingCriterion extends SimpleCriterionTrigger<Potio
 
     public static final ResourceLocation ID = PastelCommon.locate("potion_workshop_brewing");
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings(
+        "deprecation"
+    )
     public void trigger(ServerPlayer player, ItemStack itemStack, int brewedCount) {
-        this.trigger(
-            player, conditions -> {
-                List<MobEffectInstance> effects;
-                if (itemStack.getItem() instanceof InkPoweredPotionFillable inkPoweredPotionFillable) {
-                    effects = inkPoweredPotionFillable.getVanillaEffects(itemStack);
-                } else {
-                    PotionContents potionComponent = itemStack.getOrDefault(
-                        DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
-                    effects = potionComponent.customEffects();
-                }
-
-                int highestAmplifier = 0;
-                int longestDuration = 0;
-                for (MobEffectInstance instance : effects) {
-                    if (instance.getAmplifier() > highestAmplifier) {
-                        highestAmplifier = instance.getAmplifier();
+        this
+            .trigger(
+                player,
+                conditions -> {
+                    List<MobEffectInstance> effects;
+                    if (itemStack.getItem() instanceof InkPoweredPotionFillable inkPoweredPotionFillable) {
+                        effects = inkPoweredPotionFillable.getVanillaEffects(itemStack);
+                    } else {
+                        PotionContents potionComponent = itemStack
+                            .getOrDefault(
+                                DataComponents.POTION_CONTENTS,
+                                PotionContents.EMPTY
+                            );
+                        effects = potionComponent.customEffects();
                     }
-                    if (instance.getDuration() > longestDuration) {
-                        longestDuration = instance.getDuration();
-                    }
-                }
 
-                List<MobEffect> uniqueEffects = new ArrayList<>();
-                for (MobEffectInstance instance : effects) {
-                    if (!uniqueEffects.contains(instance.getEffect()
-                                                        .value())) {
-                        uniqueEffects.add(instance.getEffect()
-                                                  .value());
+                    int highestAmplifier = 0;
+                    int longestDuration = 0;
+                    for (
+                        MobEffectInstance instance : effects
+                    ) {
+                        if (instance.getAmplifier() > highestAmplifier) {
+                            highestAmplifier = instance.getAmplifier();
+                        }
+                        if (instance.getDuration() > longestDuration) {
+                            longestDuration = instance.getDuration();
+                        }
                     }
-                }
 
-                return conditions.matches(
-                    itemStack, effects, brewedCount, highestAmplifier, longestDuration, effects.size(),
-                    uniqueEffects.size()
-                );
-            }
-        );
+                    List<MobEffect> uniqueEffects = new ArrayList<>();
+                    for (
+                        MobEffectInstance instance : effects
+                    ) {
+                        if (!uniqueEffects
+                            .contains(
+                                instance
+                                    .getEffect()
+                                    .value()
+                            )) {
+                            uniqueEffects
+                                .add(
+                                    instance
+                                        .getEffect()
+                                        .value()
+                                );
+                        }
+                    }
+
+                    return conditions
+                        .matches(
+                            itemStack,
+                            effects,
+                            brewedCount,
+                            highestAmplifier,
+                            longestDuration,
+                            effects.size(),
+                            uniqueEffects.size()
+                        );
+                }
+            );
     }
 
     @Override
@@ -85,44 +110,63 @@ public class PotionWorkshopBrewingCriterion extends SimpleCriterionTrigger<Potio
         MinMaxBounds.Ints uniqueEffectCountRange
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        ItemPredicate.CODEC.optionalFieldOf(
-                                                                                                                         "item", ItemPredicate.Builder.item()
-                                                                                                                                                      .build()
-                                                                                                                     )
-                                                                                                                           .forGetter(Conditions::itemPredicate),
-                                                                                                        MobEffectsPredicate.CODEC.optionalFieldOf("effects", new MobEffectsPredicate(Map.of()))
-                                                                                                                                 .forGetter(Conditions::statusEffectsPredicate),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("brewed_count", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::brewedCountRange),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("highest_amplifier", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::maxAmplifierRange),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("longest_duration", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::maxDurationRange),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("effect_count", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::effectCountRange),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("unique_effect_count", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::uniqueEffectCountRange)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf(
+                                "item",
+                                ItemPredicate.Builder
+                                    .item()
+                                    .build()
+                            )
+                            .forGetter(Conditions::itemPredicate),
+                        MobEffectsPredicate.CODEC
+                            .optionalFieldOf("effects", new MobEffectsPredicate(Map.of()))
+                            .forGetter(Conditions::statusEffectsPredicate),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("brewed_count", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::brewedCountRange),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("highest_amplifier", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::maxAmplifierRange),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("longest_duration", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::maxDurationRange),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("effect_count", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::effectCountRange),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("unique_effect_count", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::uniqueEffectCountRange)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(
-            ItemStack stack, List<MobEffectInstance> effects, int brewedCount, int maxAmplifier, int maxDuration,
-            int effectCount, int uniqueEffectCount
+            ItemStack stack,
+            List<MobEffectInstance> effects,
+            int brewedCount,
+            int maxAmplifier,
+            int maxDuration,
+            int effectCount,
+            int uniqueEffectCount
         ) {
-            if (this.brewedCountRange.matches(brewedCount) &&
-                this.maxAmplifierRange.matches(maxAmplifier) &&
-                this.maxDurationRange.matches(maxDuration) &&
-                this.effectCountRange.matches(effectCount) &&
-                this.uniqueEffectCountRange.matches(uniqueEffectCount) &&
-                this.itemPredicate.test(stack)) {
+            if (this.brewedCountRange.matches(brewedCount) && this.maxAmplifierRange
+                .matches(maxAmplifier) && this.maxDurationRange.matches(maxDuration) && this.effectCountRange
+                    .matches(effectCount) && this.uniqueEffectCountRange
+                        .matches(uniqueEffectCount) && this.itemPredicate.test(stack)) {
                 Map<Holder<MobEffect>, MobEffectInstance> effectMap = new HashMap<>();
-                for (MobEffectInstance instance : effects) {
+                for (
+                    MobEffectInstance instance : effects
+                ) {
                     if (!effectMap.containsKey(instance.getEffect())) {
                         effectMap.put(instance.getEffect(), instance);
                     }

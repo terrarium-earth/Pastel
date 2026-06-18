@@ -10,25 +10,29 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 public abstract class FluidConvertingDisplay extends PastelDisplay {
-	
-	public <T extends FluidConvertingRecipe> FluidConvertingDisplay(RecipeHolder<T> recipe) {
-		super(recipe, recipe.value().getIngredients().getFirst(), recipe.value().getResultItem(BasicDisplay.registryAccess()));
-	}
-	
-	public final EntryIngredient getIn() {
-		return getInputEntries().getFirst();
-	}
-	
-	public final EntryIngredient getOut() {
-		return getOutputEntries().getFirst();
-	}
-	
-	@Override
+
+    public <T extends FluidConvertingRecipe> FluidConvertingDisplay(RecipeHolder<T> recipe) {
+        super(
+            recipe,
+            recipe.value().getIngredients().getFirst(),
+            recipe.value().getResultItem(BasicDisplay.registryAccess())
+        );
+    }
+
+    public final EntryIngredient getIn() {
+        return getInputEntries().getFirst();
+    }
+
+    public final EntryIngredient getOut() {
+        return getOutputEntries().getFirst();
+    }
+
+    @Override
     public boolean isUnlocked() {
-		Minecraft client = Minecraft.getInstance();
-		return DatabankUtils.hasAdvancement(client.player, getUnlockIdentifier()) && super.isUnlocked();
-	}
-	
-	public abstract ResourceLocation getUnlockIdentifier();
-	
+        Minecraft client = Minecraft.getInstance();
+        return DatabankUtils.hasAdvancement(client.player, getUnlockIdentifier()) && super.isUnlocked();
+    }
+
+    public abstract ResourceLocation getUnlockIdentifier();
+
 }

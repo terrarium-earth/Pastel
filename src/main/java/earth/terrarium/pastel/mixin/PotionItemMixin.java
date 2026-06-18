@@ -8,10 +8,16 @@ import net.minecraft.world.item.PotionItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(PotionItem.class)
+@Mixin(
+    PotionItem.class
+)
 public abstract class PotionItemMixin {
 
-    @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "getUseDuration", at = @At(
+            "RETURN"
+        )
+    )
     private int modifyDrinkTime(int drinkTime, ItemStack stack) {
         CustomPotionDataComponent component = stack.get(PastelDataComponentTypes.CUSTOM_POTION_DATA);
         if (component != null) {

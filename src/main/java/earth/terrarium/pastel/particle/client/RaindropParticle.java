@@ -25,6 +25,7 @@ import org.joml.Vector3f;
 public class RaindropParticle extends TextureSheetParticle {
 
     private static final Vec3 VERTICAL = new Vec3(0, 1, 0);
+
     private static final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
     //private final int simInterval = PastelCommon.CONFIG.WindSimInterval, simOffset;
 
@@ -54,12 +55,13 @@ public class RaindropParticle extends TextureSheetParticle {
             spawnDroplets(0.85F, 4, false);
             remove();
             return;
-        } else if (!level.getFluidState(pos)
-                         .isEmpty()) {
-            spawnDroplets(0.625F, 7, true);
-            remove();
-            return;
-        }
+        } else if (!level
+            .getFluidState(pos)
+            .isEmpty()) {
+                spawnDroplets(0.625F, 7, true);
+                remove();
+                return;
+            }
 
         adjustAlpha();
         super.tick();
@@ -77,7 +79,11 @@ public class RaindropParticle extends TextureSheetParticle {
 
         if (isAlive()) {
             var spawns = random.nextInt(drops) + 1;
-            for (int i = 0; i < spawns; i++) {
+            for (
+                int i = 0;
+                i < spawns;
+                i++
+            ) {
                 var xVel = random.nextFloat() * 0.8 - 0.4F;
                 var zVel = random.nextFloat() * 0.8 - 0.4F;
                 level.addParticle(PastelParticleTypes.RAIN_SPLASH, x, spawnY, z, xVel * velMult, 0, zVel * velMult);
@@ -110,13 +116,19 @@ public class RaindropParticle extends TextureSheetParticle {
 
         Quaternionf quaternionf = Axis.YP.rotation((float) Mth.atan2(xOffset, zOffset));
 
-        Vector3f[] vector3fs = new Vector3f[]{
-            new Vector3f(-0.75F, -1.75F, 0.0F), new Vector3f(-0.75F, 1.75F, 0.0F), new Vector3f(0.75F, 1.75F, 0.0F),
+        Vector3f[] vector3fs = new Vector3f[] {
+            new Vector3f(-0.75F, -1.75F, 0.0F),
+            new Vector3f(-0.75F, 1.75F, 0.0F),
+            new Vector3f(0.75F, 1.75F, 0.0F),
             new Vector3f(0.75F, -1.75F, 0.0F)
         };
         float i = this.getQuadSize(tickDelta);
 
-        for (int j = 0; j < 4; ++j) {
+        for (
+            int j = 0;
+            j < 4;
+            ++j
+        ) {
             Vector3f vector3f = vector3fs[j];
             vector3f.rotate(quaternionf);
             vector3f.mul(i);
@@ -128,22 +140,26 @@ public class RaindropParticle extends TextureSheetParticle {
         float m = this.getV0();
         float n = this.getV1();
         int o = this.getLightColor(tickDelta);
-        vertexConsumer.addVertex(vector3fs[0].x(), vector3fs[0].y(), vector3fs[0].z())
-                      .setUv(l, n)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(o);
-        vertexConsumer.addVertex(vector3fs[1].x(), vector3fs[1].y(), vector3fs[1].z())
-                      .setUv(l, m)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(o);
-        vertexConsumer.addVertex(vector3fs[2].x(), vector3fs[2].y(), vector3fs[2].z())
-                      .setUv(k, m)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(o);
-        vertexConsumer.addVertex(vector3fs[3].x(), vector3fs[3].y(), vector3fs[3].z())
-                      .setUv(k, n)
-                      .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-                      .setLight(o);
+        vertexConsumer
+            .addVertex(vector3fs[0].x(), vector3fs[0].y(), vector3fs[0].z())
+            .setUv(l, n)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(o);
+        vertexConsumer
+            .addVertex(vector3fs[1].x(), vector3fs[1].y(), vector3fs[1].z())
+            .setUv(l, m)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(o);
+        vertexConsumer
+            .addVertex(vector3fs[2].x(), vector3fs[2].y(), vector3fs[2].z())
+            .setUv(k, m)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(o);
+        vertexConsumer
+            .addVertex(vector3fs[3].x(), vector3fs[3].y(), vector3fs[3].z())
+            .setUv(k, n)
+            .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
+            .setLight(o);
     }
 
     @Override
@@ -151,7 +167,9 @@ public class RaindropParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -161,8 +179,14 @@ public class RaindropParticle extends TextureSheetParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new RaindropParticle(clientWorld, d, e, f, spriteProvider);
         }

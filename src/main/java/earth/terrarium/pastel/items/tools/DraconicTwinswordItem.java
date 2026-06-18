@@ -44,9 +44,15 @@ import java.util.Map;
 import java.util.UUID;
 
 public class DraconicTwinswordItem extends SwordItem
-    implements SplittableItem, SlotReservingItem, Preenchanted, ExtendedItemBar, SlotBackgroundEffect {
+    implements
+    SplittableItem,
+    SlotReservingItem,
+    Preenchanted,
+    ExtendedItemBar,
+    SlotBackgroundEffect {
 
     public static final float MAX_CHARGE_TIME = 60;
+
     private final ItemAttributeModifiers modifiers;
 
     public DraconicTwinswordItem(Tier toolMaterial, int attackDamage, float attackSpeed, Properties settings) {
@@ -65,8 +71,15 @@ public class DraconicTwinswordItem extends SwordItem
 
         world.addFreshEntity(twinsword);
 
-        world.playSound(
-            null, twinsword, SoundEvents.TRIDENT_THROW.value(), SoundSource.PLAYERS, 0.5F + strength / 2, 1.0F);
+        world
+            .playSound(
+                null,
+                twinsword,
+                SoundEvents.TRIDENT_THROW.value(),
+                SoundSource.PLAYERS,
+                0.5F + strength / 2,
+                1.0F
+            );
         SlotReservingItem.reserve(stack, twinsword.getUUID());
 
         if (!world.isClientSide())
@@ -75,9 +88,12 @@ public class DraconicTwinswordItem extends SwordItem
         super.releaseUsing(stack, world, user, remainingUseTicks);
     }
 
-    @NotNull
-    private static DraconicTwinswordEntity initiateTwinswordEntity(
-        ItemStack stack, Level world, LivingEntity user, float strength) {
+    @NotNull private static DraconicTwinswordEntity initiateTwinswordEntity(
+        ItemStack stack,
+        Level world,
+        LivingEntity user,
+        float strength
+    ) {
         var twinsword = new DraconicTwinswordEntity(world);
         twinsword.setOwner(user);
         twinsword.setPickupItemStack(stack);
@@ -115,19 +131,32 @@ public class DraconicTwinswordItem extends SwordItem
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.draconic_twinsword.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.draconic_twinsword.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.draconic_twinsword.tooltip3")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.draconic_twinsword.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.draconic_twinsword.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.draconic_twinsword.tooltip3")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
         if (entity instanceof Player player) {
-            if (player.getCooldowns()
-                      .isOnCooldown(stack.getItem()) || SlotReservingItem.isReservingSlot(stack)) {
+            if (player
+                .getCooldowns()
+                .isOnCooldown(stack.getItem()) || SlotReservingItem.isReservingSlot(stack)) {
                 stack.remove(DataComponents.ATTRIBUTE_MODIFIERS);
             } else {
                 stack.set(DataComponents.ATTRIBUTE_MODIFIERS, modifiers);
@@ -147,8 +176,9 @@ public class DraconicTwinswordItem extends SwordItem
 
         if (SlotReservingItem.isReservingSlot(parent)) {
             durability += player.getAbilities().instabuild ? 0 : 500;
-            player.getCooldowns()
-                  .addCooldown(result.getItem(), 400);
+            player
+                .getCooldowns()
+                .addCooldown(result.getItem(), 400);
         }
 
         result.applyComponents(parent.getComponents());
@@ -162,29 +192,41 @@ public class DraconicTwinswordItem extends SwordItem
 
     @Override
     public boolean canSplit(ServerPlayer player, InteractionHand occupiedHand, ItemStack stack) {
-        if (player.getCooldowns()
-                  .isOnCooldown(stack.getItem()))
+        if (player
+            .getCooldowns()
+            .isOnCooldown(stack.getItem()))
             return false;
 
         return switch (occupiedHand) {
-            case MAIN_HAND -> player.getItemInHand(InteractionHand.OFF_HAND)
-                                    .isEmpty();
-            case OFF_HAND -> player.getItemInHand(InteractionHand.MAIN_HAND)
-                                   .isEmpty();
+            case MAIN_HAND -> player
+                .getItemInHand(InteractionHand.OFF_HAND)
+                .isEmpty();
+            case OFF_HAND -> player
+                .getItemInHand(InteractionHand.MAIN_HAND)
+                .isEmpty();
         };
     }
 
     @Override
     public void playSound(ServerPlayer player) {
-        player.playNotifySound(
-            PastelSounds.METALLIC_UNSHEATHE, SoundSource.PLAYERS, 0.5F, 0.8F + player.getRandom()
-                                                                                          .nextFloat() * 0.4F
-        );
+        player
+            .playNotifySound(
+                PastelSounds.METALLIC_UNSHEATHE,
+                SoundSource.PLAYERS,
+                0.5F,
+                0.8F + player
+                    .getRandom()
+                    .nextFloat() * 0.4F
+            );
     }
 
     public static ItemStack findThrownStack(Player player, UUID id) {
         var inventory = player.getInventory();
-        for (int i = 0; i < inventory.getContainerSize(); i++) {
+        for (
+            int i = 0;
+            i < inventory.getContainerSize();
+            i++
+        ) {
             var stack = inventory.getItem(i);
             if (SlotReservingItem.isReserver(stack, id)) {
                 return stack;
@@ -205,8 +247,10 @@ public class DraconicTwinswordItem extends SwordItem
 
     @Override
     public boolean allowVanillaDurabilityBarRendering(@Nullable Player player, ItemStack stack) {
-        if (player == null || SlotReservingItem.isReservingSlot(stack) || player.getItemInHand(
-            player.getUsedItemHand()) != stack)
+        if (player == null || SlotReservingItem.isReservingSlot(stack) || player
+            .getItemInHand(
+                player.getUsedItemHand()
+            ) != stack)
             return true;
 
         return !player.isUsingItem();
@@ -223,7 +267,15 @@ public class DraconicTwinswordItem extends SwordItem
 
         var progress = Math.round(Mth.clampedLerp(0, 13, ((float) player.getTicksUsingItem() / MAX_CHARGE_TIME)));
         return new BarSignature(
-            2, 13, 13, progress, 1, InkColors.YELLOW_COLOR, 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
+            2,
+            13,
+            13,
+            progress,
+            1,
+            InkColors.YELLOW_COLOR,
+            2,
+            ExtendedItemBar.DEFAULT_BACKGROUND_COLOR
+        );
     }
 
     @Override
@@ -238,8 +290,8 @@ public class DraconicTwinswordItem extends SwordItem
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.CHANNELING) ||
-               enchantment.is(Enchantments.PIERCING) || enchantment.is(PastelEnchantments.INERTIA);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.CHANNELING) || enchantment
+            .is(Enchantments.PIERCING) || enchantment.is(PastelEnchantments.INERTIA);
     }
 
     // I will become back my money
@@ -249,7 +301,6 @@ public class DraconicTwinswordItem extends SwordItem
         var channeling = Ench.getLevel(player.registryAccess(), Enchantments.CHANNELING, stack) + 1;
         var size = channeling * 2 + 0.5;
         box = box.inflate(size, channeling * 0.4, size);
-
 
         //if (living.canBeSeenAsEnemy()) {
         //	for (int i = 0; i < 5; i++) {
@@ -262,6 +313,5 @@ public class DraconicTwinswordItem extends SwordItem
         //}
         return box;
     }
-
 
 }

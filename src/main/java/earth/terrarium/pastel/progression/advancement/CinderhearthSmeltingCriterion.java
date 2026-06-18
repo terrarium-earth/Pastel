@@ -21,7 +21,10 @@ public class CinderhearthSmeltingCriterion extends SimpleCriterionTrigger<Cinder
     public static final ResourceLocation ID = PastelCommon.locate("cinderhearth_smelting");
 
     public void trigger(
-        ServerPlayer player, ItemStack input, List<ItemStack> outputs, int experience,
+        ServerPlayer player,
+        ItemStack input,
+        List<ItemStack> outputs,
+        int experience,
         Upgradeable.UpgradeHolder upgrades
     ) {
         this.trigger(player, (conditions) -> conditions.matches(input, outputs, experience, upgrades));
@@ -43,37 +46,57 @@ public class CinderhearthSmeltingCriterion extends SimpleCriterionTrigger<Cinder
         MinMaxBounds.Ints experienceMultiplier
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
-                                                                                                                                         .forGetter(CinderhearthSmeltingCriterion.Conditions::player),
-                                                                                                        ItemPredicate.CODEC.optionalFieldOf(
-                                                                                                                         "input", ItemPredicate.Builder.item()
-                                                                                                                                                       .build()
-                                                                                                                     )
-                                                                                                                           .forGetter(Conditions::input),
-                                                                                                        ItemPredicate.CODEC.optionalFieldOf(
-                                                                                                                         "output", ItemPredicate.Builder.item()
-                                                                                                                                                        .build()
-                                                                                                                     )
-                                                                                                                           .forGetter(Conditions::output),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("gained_experience", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::gainedExperience),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("speed_multiplier", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::speedMultiplier),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("yield_multiplier", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::yieldMultiplier),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("efficiency_multiplier", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::efficiencyMultiplier),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("experience_multiplier", MinMaxBounds.Ints.ANY)
-                                                                                                                               .forGetter(Conditions::experienceMultiplier)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        CinderhearthSmeltingCriterion.Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        EntityPredicate.ADVANCEMENT_CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(CinderhearthSmeltingCriterion.Conditions::player),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf(
+                                "input",
+                                ItemPredicate.Builder
+                                    .item()
+                                    .build()
+                            )
+                            .forGetter(Conditions::input),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf(
+                                "output",
+                                ItemPredicate.Builder
+                                    .item()
+                                    .build()
+                            )
+                            .forGetter(Conditions::output),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("gained_experience", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::gainedExperience),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("speed_multiplier", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::speedMultiplier),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("yield_multiplier", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::yieldMultiplier),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("efficiency_multiplier", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::efficiencyMultiplier),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("experience_multiplier", MinMaxBounds.Ints.ANY)
+                            .forGetter(Conditions::experienceMultiplier)
+                    )
+                    .apply(
+                        instance,
+                        CinderhearthSmeltingCriterion.Conditions::new
+                    )
+            );
 
         public boolean matches(
-            ItemStack input, List<ItemStack> outputs, int experience, Upgradeable.UpgradeHolder upgrades) {
+            ItemStack input,
+            List<ItemStack> outputs,
+            int experience,
+            Upgradeable.UpgradeHolder upgrades
+        ) {
             if (!this.input.test(input)) {
                 return false;
             }
@@ -92,11 +115,17 @@ public class CinderhearthSmeltingCriterion extends SimpleCriterionTrigger<Cinder
             if (!this.experienceMultiplier.matches(upgrades.getRawValue(Upgradeable.UpgradeType.EXPERIENCE))) {
                 return false;
             }
-            if (this.output.equals(ItemPredicate.Builder.item()
-                                                        .build())) {
+            if (this.output
+                .equals(
+                    ItemPredicate.Builder
+                        .item()
+                        .build()
+                )) {
                 return true; // empty output predicate
             }
-            for (ItemStack output : outputs) {
+            for (
+                ItemStack output : outputs
+            ) {
                 if (this.output.test(output)) {
                     return true;
                 }

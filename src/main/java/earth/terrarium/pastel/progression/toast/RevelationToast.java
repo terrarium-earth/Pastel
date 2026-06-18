@@ -20,12 +20,17 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.Iterator;
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class RevelationToast implements Toast {
 
     private final ResourceLocation TEXTURE = PastelCommon.locate("textures/gui/toasts.png");
+
     private final ItemStack itemStack;
+
     private final SoundEvent soundEvent;
+
     private boolean soundPlayed;
 
     public RevelationToast(ItemStack itemStack, SoundEvent soundEvent) {
@@ -35,8 +40,9 @@ public class RevelationToast implements Toast {
     }
 
     public static void showRevelationToast(Minecraft client, ItemStack itemStack, SoundEvent soundEvent) {
-        client.getToasts()
-              .addToast(new RevelationToast(itemStack, soundEvent));
+        client
+            .getToasts()
+            .addToast(new RevelationToast(itemStack, soundEvent));
     }
 
     @Override
@@ -53,24 +59,36 @@ public class RevelationToast implements Toast {
         int l;
         long toastTimeMilliseconds = PastelCommon.CONFIG.ToastTimeMilliseconds;
         if (startTime < toastTimeMilliseconds / 2) {
-            l = Mth.floor(Mth.clamp((float) (toastTimeMilliseconds / 2 - startTime) / 300.0F, 0.0F, 1.0F) * 255.0F) <<
-                24 | 67108864;
+            l = Mth
+                .floor(
+                    Mth.clamp((float) (toastTimeMilliseconds / 2 - startTime) / 300.0F, 0.0F, 1.0F) * 255.0F
+                ) << 24 | 67108864;
             int halfHeight = this.height() / 2;
             int titleSize = wrappedTitle.size();
             int m = halfHeight - titleSize * 9 / 2;
 
-            for (Iterator<FormattedCharSequence> it = wrappedTitle.iterator(); it.hasNext(); m += 9) {
+            for (
+                Iterator<FormattedCharSequence> it = wrappedTitle.iterator();
+                it.hasNext();
+                m += 9
+            ) {
                 FormattedCharSequence orderedText = it.next();
                 drawContext.drawString(textRenderer, orderedText, 30, m, RenderHelper.GREEN_COLOR | l, false);
             }
         } else {
-            l = Mth.floor(Mth.clamp((float) (startTime - toastTimeMilliseconds / 2) / 300.0F, 0.0F, 1.0F) * 252.0F) <<
-                24 | 67108864;
+            l = Mth
+                .floor(
+                    Mth.clamp((float) (startTime - toastTimeMilliseconds / 2) / 300.0F, 0.0F, 1.0F) * 252.0F
+                ) << 24 | 67108864;
             int halfHeight = this.height() / 2;
             int textSize = wrappedText.size();
             int m = halfHeight - textSize * 9 / 2;
 
-            for (Iterator<FormattedCharSequence> var12 = wrappedText.iterator(); var12.hasNext(); m += 9) {
+            for (
+                Iterator<FormattedCharSequence> var12 = wrappedText.iterator();
+                var12.hasNext();
+                m += 9
+            ) {
                 FormattedCharSequence orderedText = var12.next();
                 drawContext.drawString(textRenderer, orderedText, 30, m, l, false);
             }
@@ -79,9 +97,10 @@ public class RevelationToast implements Toast {
         if (!this.soundPlayed && startTime > 0L) {
             this.soundPlayed = true;
             if (this.soundEvent != null) {
-                manager.getMinecraft()
-                       .getSoundManager()
-                       .play(SimpleSoundInstance.forUI(this.soundEvent, 1.0F, 0.6F));
+                manager
+                    .getMinecraft()
+                    .getSoundManager()
+                    .play(SimpleSoundInstance.forUI(this.soundEvent, 1.0F, 0.6F));
             }
         }
 

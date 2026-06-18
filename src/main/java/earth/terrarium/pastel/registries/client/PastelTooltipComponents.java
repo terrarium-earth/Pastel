@@ -10,7 +10,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PastelTooltipComponents {
 
     public static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {

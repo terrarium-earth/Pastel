@@ -11,10 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.UUID;
 
-
 public class PlayerDetectorBlockEntity extends BlockEntity implements PlayerOwned {
 
     private UUID ownerUUID;
+
     private String ownerName;
 
     public PlayerDetectorBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -61,8 +61,9 @@ public class PlayerDetectorBlockEntity extends BlockEntity implements PlayerOwne
     @Override
     public void setOwner(Player playerEntity) {
         this.ownerUUID = playerEntity.getUUID();
-        this.ownerName = playerEntity.getName()
-                                     .getString();
+        this.ownerName = playerEntity
+            .getName()
+            .getString();
         setChanged();
     }
 

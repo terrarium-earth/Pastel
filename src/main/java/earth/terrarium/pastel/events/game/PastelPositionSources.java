@@ -12,19 +12,28 @@ import java.util.function.Supplier;
 
 public class PastelPositionSources {
 
-    private static final DeferredRegister<PositionSourceType<?>> REGISTER = DeferredRegister.create(
-        Registries.POSITION_SOURCE_TYPE, PastelCommon.MOD_ID);
+    private static final DeferredRegister<PositionSourceType<?>> REGISTER = DeferredRegister
+        .create(
+            Registries.POSITION_SOURCE_TYPE,
+            PastelCommon.MOD_ID
+        );
 
     public static Holder<PositionSourceType<ExactPositionSource>> EXACT = register(
-        "exact", ExactPositionSource.Type::new);
+        "exact",
+        ExactPositionSource.Type::new
+    );
 
     public static void register(IEventBus bus) {
         REGISTER.register(bus);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(
+        "unchecked"
+    )
     static <S extends PositionSourceType<T>, T extends PositionSource> Holder<S> register(
-        String id, Supplier<S> positionSourceType) {
+        String id,
+        Supplier<S> positionSourceType
+    ) {
         return (Holder<S>) REGISTER.register(id, positionSourceType);
     }
 

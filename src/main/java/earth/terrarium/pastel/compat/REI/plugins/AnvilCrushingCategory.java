@@ -21,11 +21,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class AnvilCrushingCategory extends GatedDisplayCategory<AnvilCrushingDisplay> {
 
-    private final static ResourceLocation WALL_TEXTURE = PastelCommon.locate(
-        "textures/gui/container/anvil_crushing.png");
+    private final static ResourceLocation WALL_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/container/anvil_crushing.png"
+        );
+
     private final static EntryIngredient ANVIL = EntryIngredients.of(Items.ANVIL);
 
     @Override
@@ -45,7 +50,11 @@ public class AnvilCrushingCategory extends GatedDisplayCategory<AnvilCrushingDis
 
     @Override
     public void setupWidgets(
-        Point startPoint, Rectangle bounds, List<Widget> widgets, @NotNull AnvilCrushingDisplay display) {
+        Point startPoint,
+        Rectangle bounds,
+        List<Widget> widgets,
+        @NotNull AnvilCrushingDisplay display
+    ) {
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 50, startPoint.y - 8 + 23)));
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 95, startPoint.y - 8 + 24)));
 
@@ -53,17 +62,29 @@ public class AnvilCrushingCategory extends GatedDisplayCategory<AnvilCrushingDis
         List<EntryIngredient> output = display.getOutputEntries();
 
         // input and output slots
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 20, startPoint.y - 8 + 18))
-                           .entries(ANVIL)
-                           .disableBackground()
-                           .notInteractable());
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 20, startPoint.y - 8 + 40))
-                           .markInput()
-                           .entries(input.get(0)));
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 95, startPoint.y - 8 + 23))
-                           .markOutput()
-                           .disableBackground()
-                           .entries(output.get(0)));
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 20, startPoint.y - 8 + 18))
+                    .entries(ANVIL)
+                    .disableBackground()
+                    .notInteractable()
+            );
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 20, startPoint.y - 8 + 40))
+                    .markInput()
+                    .entries(input.get(0))
+            );
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 95, startPoint.y - 8 + 23))
+                    .markOutput()
+                    .disableBackground()
+                    .entries(output.get(0))
+            );
 
         // dirt  wall										  destinationX	 destinationY   sourceX, sourceY, width,
         // height
@@ -73,13 +94,17 @@ public class AnvilCrushingCategory extends GatedDisplayCategory<AnvilCrushingDis
         widgets.add(Widgets.createTexturedWidget(WALL_TEXTURE, startPoint.x + 20, startPoint.y - 8 + 8, 16, 0, 16, 16));
 
         // xp text
-        widgets.add(Widgets.createLabel(
-                               new Point(startPoint.x + 84, startPoint.y - 8 + 48),
-                               Component.translatable("container.pastel.rei.anvil_crushing.plus_xp", display.experience)
-                           )
-                           .leftAligned()
-                           .color(0x3f3f3f)
-                           .noShadow());
+        widgets
+            .add(
+                Widgets
+                    .createLabel(
+                        new Point(startPoint.x + 84, startPoint.y - 8 + 48),
+                        Component.translatable("container.pastel.rei.anvil_crushing.plus_xp", display.experience)
+                    )
+                    .leftAligned()
+                    .color(0x3f3f3f)
+                    .noShadow()
+            );
 
         // the tooltip text
         Component text;
@@ -90,10 +115,14 @@ public class AnvilCrushingCategory extends GatedDisplayCategory<AnvilCrushingDis
         } else {
             text = Component.translatable("container.pastel.rei.anvil_crushing.high_force_required");
         }
-        widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y - 10 + 64), text)
-                           .leftAligned()
-                           .color(0x3f3f3f)
-                           .noShadow());
+        widgets
+            .add(
+                Widgets
+                    .createLabel(new Point(startPoint.x, startPoint.y - 10 + 64), text)
+                    .leftAligned()
+                    .color(0x3f3f3f)
+                    .noShadow()
+            );
     }
 
     @Override

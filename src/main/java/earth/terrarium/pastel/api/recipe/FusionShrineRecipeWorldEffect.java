@@ -22,22 +22,25 @@ import net.minecraft.world.phys.Vec3;
  */
 public interface FusionShrineRecipeWorldEffect {
 
-    Codec<FusionShrineRecipeWorldEffect> CODEC = Codec.STRING.xmap(
-        FusionShrineRecipeWorldEffect::fromString,
-        effect -> effect instanceof CommandRecipeWorldEffect command
-                  ? command.command
-                  : String.valueOf(PastelRegistries.WORLD_EFFECT.getKey(effect))
-    );
+    Codec<FusionShrineRecipeWorldEffect> CODEC = Codec.STRING
+        .xmap(
+            FusionShrineRecipeWorldEffect::fromString,
+            effect -> effect instanceof CommandRecipeWorldEffect command
+                ? command.command
+                : String.valueOf(PastelRegistries.WORLD_EFFECT.getKey(effect))
+        );
 
-    StreamCodec<ByteBuf, FusionShrineRecipeWorldEffect> STREAM_CODEC = ByteBufCodecs.STRING_UTF8.map(
-        FusionShrineRecipeWorldEffect::fromString,
-        effect -> effect instanceof CommandRecipeWorldEffect command
-                  ? command.command
-                  : String.valueOf(PastelRegistries.WORLD_EFFECT.getKey(effect))
-    );
+    StreamCodec<ByteBuf, FusionShrineRecipeWorldEffect> STREAM_CODEC = ByteBufCodecs.STRING_UTF8
+        .map(
+            FusionShrineRecipeWorldEffect::fromString,
+            effect -> effect instanceof CommandRecipeWorldEffect command
+                ? command.command
+                : String.valueOf(PastelRegistries.WORLD_EFFECT.getKey(effect))
+        );
 
     FusionShrineRecipeWorldEffect NOTHING = register(
-        "nothing", new FusionShrineRecipeWorldEffect.SingleTimeRecipeWorldEffect() {
+        "nothing",
+        new FusionShrineRecipeWorldEffect.SingleTimeRecipeWorldEffect() {
             @Override
             public void trigger(ServerLevel world, BlockPos pos) {
             }
@@ -118,12 +121,22 @@ public interface FusionShrineRecipeWorldEffect {
         public void trigger(ServerLevel world, BlockPos pos) {
             MinecraftServer minecraftServer = world.getServer();
             CommandSourceStack serverCommandSource = new CommandSourceStack(
-                this, Vec3.atCenterOf(pos), Vec2.ZERO, world, 2, "FusionShrine", world.getBlockState(pos)
-                                                                                      .getBlock()
-                                                                                      .getName(), minecraftServer, null
+                this,
+                Vec3.atCenterOf(pos),
+                Vec2.ZERO,
+                world,
+                2,
+                "FusionShrine",
+                world
+                    .getBlockState(pos)
+                    .getBlock()
+                    .getName(),
+                minecraftServer,
+                null
             );
-            minecraftServer.getCommands()
-                           .performPrefixedCommand(serverCommandSource, command);
+            minecraftServer
+                .getCommands()
+                .performPrefixedCommand(serverCommandSource, command);
         }
 
         @Override

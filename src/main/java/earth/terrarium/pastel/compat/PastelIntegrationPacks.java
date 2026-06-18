@@ -19,7 +19,6 @@ public class PastelIntegrationPacks {
 
     protected static final Map<String, ModIntegrationPack> INTEGRATION_PACKS = new HashMap<>();
 
-
     public abstract static class ModIntegrationPack {
         public abstract void register();
 
@@ -27,8 +26,9 @@ public class PastelIntegrationPacks {
     }
 
     protected static void registerIntegrationPack(String modId, Supplier<ModIntegrationPack> container) {
-        if (!PastelCommon.CONFIG.IntegrationPacksToSkipLoading.contains(modId) && ModList.get()
-                                                                                         .isLoaded(modId)) {
+        if (!PastelCommon.CONFIG.IntegrationPacksToSkipLoading.contains(modId) && ModList
+            .get()
+            .isLoaded(modId)) {
             var pack = container.get();
 
             INTEGRATION_PACKS.put(modId, pack);
@@ -37,20 +37,30 @@ public class PastelIntegrationPacks {
     }
 
     public static final String AE2_ID = "ae2";
+
     public static final String TRAVELERS_BACKPACK_ID = "travelersbackpack";
+
     public static final String BOTANIA_ID = "botania";
+
     public static final String MODONOMICON_ID = "modonomicon";
+
     public static final String MALUM_ID = "malum";
+
     public static final String CREATE_ID = "create";
+
     public static final String FARMERSDELIGHT_ID = "farmersdelight";
+
     public static final String EXCLUSIONS_LIB_ID = "exclusions_lib";
 
-    @SuppressWarnings("Convert2MethodRef")
+    @SuppressWarnings(
+        "Convert2MethodRef"
+    )
     public static void register(IEventBus bus) {
         registerIntegrationPack(MODONOMICON_ID, () -> new ModonomiconCompat());
 
-        if (!ModList.get()
-                    .isLoaded(EXCLUSIONS_LIB_ID)) {
+        if (!ModList
+            .get()
+            .isLoaded(EXCLUSIONS_LIB_ID)) {
             ExclusionsLibCompat.registerNotPresent(bus);
         }
 
@@ -64,7 +74,9 @@ public class PastelIntegrationPacks {
     }
 
     public static void registerClient() {
-        for (ModIntegrationPack container : INTEGRATION_PACKS.values()) {
+        for (
+            ModIntegrationPack container : INTEGRATION_PACKS.values()
+        ) {
             container.registerClient();
         }
     }

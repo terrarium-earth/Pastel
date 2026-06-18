@@ -11,7 +11,9 @@ public interface Containerlike extends WorldlyContainer {
 
     @Override
     default int[] getSlotsForFace(Direction side) {
-        return new int[]{0};
+        return new int[] {
+            0
+        };
     }
 
     @Override

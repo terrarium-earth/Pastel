@@ -27,6 +27,7 @@ public class NightdewBlock extends TriStateVineBlock {
     public static final MapCodec<NightdewBlock> CODEC = simpleCodec(NightdewBlock::new);
 
     public static final float BASE_BURGEON_CHANCE = 2000;
+
     public static final float MAX_BURGEON_CHANCE = 250;
 
     public NightdewBlock(Properties settings) {
@@ -45,24 +46,40 @@ public class NightdewBlock extends TriStateVineBlock {
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return PastelItems.NIGHTDEW_SPROUT.get()
-                                          .getDefaultInstance();
+        return PastelItems.NIGHTDEW_SPROUT
+            .get()
+            .getDefaultInstance();
     }
 
     @Override
     public void spawnAfterBreak(
-        BlockState state, ServerLevel world, BlockPos pos, ItemStack tool, boolean dropExperience) {
+        BlockState state,
+        ServerLevel world,
+        BlockPos pos,
+        ItemStack tool,
+        boolean dropExperience
+    ) {
         var random = world.getRandom();
 
-        var sleepingEntities = Math.min(
-            world.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(20), LivingEntity::isSleeping)
-                 .size() / 20F, 1F
-        );
+        var sleepingEntities = Math
+            .min(
+                world
+                    .getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(20), LivingEntity::isSleeping)
+                    .size() / 20F,
+                1F
+            );
         var dropChance = Mth.clampedLerp(BASE_BURGEON_CHANCE, MAX_BURGEON_CHANCE, sleepingEntities);
 
         if (random.nextFloat() < 1 / dropChance)
-            for (ItemStack rareStack : getRareStacks(
-                state, world, pos, tool, PastelLootTables.NIGHTDEW_VINE_RARE_DROP)) {
+            for (
+                ItemStack rareStack : getRareStacks(
+                    state,
+                    world,
+                    pos,
+                    tool,
+                    PastelLootTables.NIGHTDEW_VINE_RARE_DROP
+                )
+            ) {
                 popResource(world, pos, rareStack);
             }
     }
@@ -73,15 +90,21 @@ public class NightdewBlock extends TriStateVineBlock {
     }
 
     public static List<ItemStack> getRareStacks(
-        BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, ResourceKey<LootTable> lootTableKey) {
+        BlockState state,
+        ServerLevel world,
+        BlockPos pos,
+        ItemStack stack,
+        ResourceKey<LootTable> lootTableKey
+    ) {
         var builder = (new LootParams.Builder(world))
             .withParameter(LootContextParams.BLOCK_STATE, state)
             .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
             .withParameter(LootContextParams.TOOL, stack);
 
-        LootTable lootTable = world.getServer()
-                                   .reloadableRegistries()
-                                   .getLootTable(lootTableKey);
+        LootTable lootTable = world
+            .getServer()
+            .reloadableRegistries()
+            .getLootTable(lootTableKey);
         return lootTable.getRandomItems(builder.create(LootContextParamSets.BLOCK));
     }
 }

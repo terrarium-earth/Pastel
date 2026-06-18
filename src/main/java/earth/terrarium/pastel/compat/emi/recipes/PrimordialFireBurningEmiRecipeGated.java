@@ -16,10 +16,11 @@ public class PrimordialFireBurningEmiRecipeGated extends GatedSpectrumEmiRecipe<
 
     public PrimordialFireBurningEmiRecipeGated(PrimordialFireBurningRecipe recipe) {
         super(PastelEmiRecipeCategories.PRIMORDIAL_FIRE_BURNING, recipe, 80, 35);
-        this.inputs = recipe.getIngredients()
-                            .stream()
-                            .map(EmiIngredient::of)
-                            .toList();
+        this.inputs = recipe
+            .getIngredients()
+            .stream()
+            .map(EmiIngredient::of)
+            .toList();
     }
 
     @Override
@@ -27,9 +28,10 @@ public class PrimordialFireBurningEmiRecipeGated extends GatedSpectrumEmiRecipe<
         widgets.addSlot(inputs.getFirst(), 0, 0);
         widgets.add(new AnimatedTexturedWidget(FIRE_TEXTURE, 1, 19, 16, 176, 1000));
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 24, 9);
-        widgets.addSlot(outputs.getFirst(), 54, 4)
-               .large(true)
-               .recipeContext(this);
+        widgets
+            .addSlot(outputs.getFirst(), 54, 4)
+            .large(true)
+            .recipeContext(this);
     }
 
 }

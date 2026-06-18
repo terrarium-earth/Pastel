@@ -11,7 +11,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class CowHeadModel extends PastelSkullModel {
 
     public CowHeadModel(ModelPart root) {
@@ -22,17 +24,19 @@ public class CowHeadModel extends PastelSkullModel {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(0, 0)
-                           .addBox(-4.0F, -8.0F, -3.0F, 8.0F, 8.0F, 6.0F)
-                           .texOffs(22, 0)
-                           .addBox(PartNames.RIGHT_HORN, -5.0F, -9.0F, -1.0F, 1.0F, 3.0F, 1.0F)
-                           .texOffs(22, 0)
-                           .addBox(PartNames.LEFT_HORN, 4.0F, -9.0F, -1.0F, 1.0F, 3.0F, 1.0F),
-            PartPose.ZERO
-        );
+        modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-4.0F, -8.0F, -3.0F, 8.0F, 8.0F, 6.0F)
+                    .texOffs(22, 0)
+                    .addBox(PartNames.RIGHT_HORN, -5.0F, -9.0F, -1.0F, 1.0F, 3.0F, 1.0F)
+                    .texOffs(22, 0)
+                    .addBox(PartNames.LEFT_HORN, 4.0F, -9.0F, -1.0F, 1.0F, 3.0F, 1.0F),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 64, 32);
     }

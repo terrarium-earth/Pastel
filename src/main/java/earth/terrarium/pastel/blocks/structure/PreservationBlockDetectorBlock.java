@@ -16,12 +16,17 @@ import org.jetbrains.annotations.Nullable;
 public class PreservationBlockDetectorBlock extends PastelFacingBlock implements EntityBlock, GameMasterBlock {
 
     public static final MapCodec<PreservationBlockDetectorBlock> CODEC = simpleCodec(
-        PreservationBlockDetectorBlock::new);
+        PreservationBlockDetectorBlock::new
+    );
 
     public PreservationBlockDetectorBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(FACING, Direction.SOUTH));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(FACING, Direction.SOUTH)
+            );
     }
 
     @Override
@@ -36,11 +41,17 @@ public class PreservationBlockDetectorBlock extends PastelFacingBlock implements
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
-        if (state.getValue(FACING) == direction && world.getBlockEntity(
-            pos) instanceof PreservationBlockDetectorBlockEntity blockEntity) {
+        if (state.getValue(FACING) == direction && world
+            .getBlockEntity(
+                pos
+            ) instanceof PreservationBlockDetectorBlockEntity blockEntity) {
             blockEntity.triggerForNeighbor(neighborState);
         }
         return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
@@ -48,16 +59,18 @@ public class PreservationBlockDetectorBlock extends PastelFacingBlock implements
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(
-                       FACING, ctx.getNearestLookingDirection()
-                                  .getOpposite()
-                                  .getOpposite()
-                   );
+        return this
+            .defaultBlockState()
+            .setValue(
+                FACING,
+                ctx
+                    .getNearestLookingDirection()
+                    .getOpposite()
+                    .getOpposite()
+            );
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PreservationBlockDetectorBlockEntity(pos, state);
     }

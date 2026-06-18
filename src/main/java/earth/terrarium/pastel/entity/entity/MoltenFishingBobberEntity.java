@@ -25,12 +25,26 @@ public class MoltenFishingBobberEntity extends PastelFishingBobberEntity {
     }
 
     public MoltenFishingBobberEntity(
-        Player thrower, Level world, int luckBonus, int waitTimeReductionTicks, int exuberanceLevel, int bigCatchLevel,
-        int serendipityReelLevel, boolean inventoryInsertion
+        Player thrower,
+        Level world,
+        int luckBonus,
+        int waitTimeReductionTicks,
+        int exuberanceLevel,
+        int bigCatchLevel,
+        int serendipityReelLevel,
+        boolean inventoryInsertion
     ) {
         super(
-            PastelEntityTypes.MOLTEN_FISHING_BOBBER.get(), thrower, world, luckBonus, waitTimeReductionTicks,
-            exuberanceLevel, bigCatchLevel, serendipityReelLevel, inventoryInsertion, true
+            PastelEntityTypes.MOLTEN_FISHING_BOBBER.get(),
+            thrower,
+            world,
+            luckBonus,
+            waitTimeReductionTicks,
+            exuberanceLevel,
+            bigCatchLevel,
+            serendipityReelLevel,
+            inventoryInsertion,
+            true
         );
     }
 

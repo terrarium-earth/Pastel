@@ -14,6 +14,7 @@ import java.util.Map;
 public class ColoredLightBlock extends RedstoneLampBlock {
 
     private static final Map<InkColor, ColoredLightBlock> LIGHTS = new Object2ObjectArrayMap<>();
+
     protected final InkColor color;
 
     public ColoredLightBlock(Properties settings, InkColor color) {

@@ -17,8 +17,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@OnlyIn(Dist.CLIENT)
-@Mixin(ItemInHandRenderer.class)
+@OnlyIn(
+    Dist.CLIENT
+)
+@Mixin(
+    ItemInHandRenderer.class
+)
 public abstract class HeldItemRendererMixin {
 
     @Shadow
@@ -33,12 +37,15 @@ public abstract class HeldItemRendererMixin {
         throw new AssertionError();
     }
 
-    @Inject(method = "evaluateWhichHandsToRender",
-            at = @At(value = "INVOKE",
-                     target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"),
-            cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(
+        method = "evaluateWhichHandsToRender", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
+        ), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD
+    )
     private static void arrowhead$getHandRenderType(
-        LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir, ItemStack itemStack,
+        LocalPlayer player,
+        CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir,
+        ItemStack itemStack,
         ItemStack itemStack2
     ) {
         Item item1 = itemStack.getItem();
@@ -50,18 +57,24 @@ public abstract class HeldItemRendererMixin {
         } else if (player.isUsingItem()) {
             cir.setReturnValue(HeldItemRendererMixin.selectionUsingItemWhileHoldingBowLike(player));
         } else {
-            cir.setReturnValue(
-                isChargedCrossbow(itemStack) ? ItemInHandRenderer.HandRenderSelection.RENDER_MAIN_HAND_ONLY
-                                             : ItemInHandRenderer.HandRenderSelection.RENDER_BOTH_HANDS);
+            cir
+                .setReturnValue(
+                    isChargedCrossbow(itemStack)
+                        ? ItemInHandRenderer.HandRenderSelection.RENDER_MAIN_HAND_ONLY
+                        : ItemInHandRenderer.HandRenderSelection.RENDER_BOTH_HANDS
+                );
         }
     }
 
-    @Inject(method = "selectionUsingItemWhileHoldingBowLike",
-            at = @At(value = "INVOKE",
-                     target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"),
-            cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(
+        method = "selectionUsingItemWhileHoldingBowLike", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
+        ), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD
+    )
     private static void arrowhead$getUsingItemHandRenderType(
-        LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir, ItemStack activeStack,
+        LocalPlayer player,
+        CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir,
+        ItemStack activeStack,
         InteractionHand activeHand
     ) {
         ItemStack itemStack = player.getUseItem();
@@ -71,9 +84,11 @@ public abstract class HeldItemRendererMixin {
         }
     }
 
-    @Inject(method = "isChargedCrossbow",
-            at = @At(value = "HEAD"),
-            cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(
+        method = "isChargedCrossbow", at = @At(
+            value = "HEAD"
+        ), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD
+    )
     private static void arrowhead$isChargedCrossbow(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (stack.getItem() instanceof ArrowheadCrossbow && CrossbowItem.isCharged(stack)) {
             cir.setReturnValue(true);

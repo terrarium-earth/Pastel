@@ -16,14 +16,27 @@ import java.util.List;
 public class ModonomiconHelper {
 
     public static void renderIngredientStack(
-        GuiGraphics drawContext, BookEntryScreen parentScreen, int x, int y, int mouseX, int mouseY,
+        GuiGraphics drawContext,
+        BookEntryScreen parentScreen,
+        int x,
+        int y,
+        int mouseX,
+        int mouseY,
         IngredientStack ingredientStack
     ) {
-        List<ItemStack> stacks = ingredientStack.getItems()
-                                                .toList();
+        List<ItemStack> stacks = ingredientStack
+            .getItems()
+            .toList();
         if (!stacks.isEmpty()) {
-            parentScreen.renderItemStack(
-                drawContext, x, y, mouseX, mouseY, stacks.get(parentScreen.getTicksInBook() / 20 % stacks.size()));
+            parentScreen
+                .renderItemStack(
+                    drawContext,
+                    x,
+                    y,
+                    mouseX,
+                    mouseY,
+                    stacks.get(parentScreen.getTicksInBook() / 20 % stacks.size())
+                );
         }
     }
 

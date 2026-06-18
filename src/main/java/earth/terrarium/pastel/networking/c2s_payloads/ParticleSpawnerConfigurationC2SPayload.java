@@ -17,14 +17,17 @@ public record ParticleSpawnerConfigurationC2SPayload(
     ParticleSpawnerConfiguration configuration
 ) implements CustomPacketPayload {
 
-    public static final CustomPacketPayload.Type<ParticleSpawnerConfigurationC2SPayload> ID = PastelC2SPackets.makeId(
-        "change_particle_spawner_settings");
-    public static final StreamCodec<FriendlyByteBuf, ParticleSpawnerConfigurationC2SPayload> CODEC
-        = StreamCodec.composite(
-        ParticleSpawnerConfiguration.STREAM_CODEC,
-        ParticleSpawnerConfigurationC2SPayload::configuration,
-        ParticleSpawnerConfigurationC2SPayload::new
-    );
+    public static final CustomPacketPayload.Type<ParticleSpawnerConfigurationC2SPayload> ID = PastelC2SPackets
+        .makeId(
+            "change_particle_spawner_settings"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, ParticleSpawnerConfigurationC2SPayload> CODEC = StreamCodec
+        .composite(
+            ParticleSpawnerConfiguration.STREAM_CODEC,
+            ParticleSpawnerConfigurationC2SPayload::configuration,
+            ParticleSpawnerConfigurationC2SPayload::new
+        );
 
     public static IPayloadHandler<ParticleSpawnerConfigurationC2SPayload> getPayloadHandler() {
         return (packet, context) -> {
@@ -37,15 +40,21 @@ public record ParticleSpawnerConfigurationC2SPayload(
 
                     // ...and distribute it to all clients again
                     // Iterate over all players tracking a position in the world and send the packet to each player
-                    PacketDistributor.sendToPlayersTrackingChunk(
-                        (ServerLevel) context.player()
-                                             .level(), new ChunkPos(particleSpawnerScreenHandler.getBlockEntity()
-                                                                                                .getBlockPos()),
-                        new ParticleSpawnerConfigurationS2CPayload(
-                            blockEntity.getBlockPos(),
-                            blockEntity.getConfiguration()
-                        )
-                    );
+                    PacketDistributor
+                        .sendToPlayersTrackingChunk(
+                            (ServerLevel) context
+                                .player()
+                                .level(),
+                            new ChunkPos(
+                                particleSpawnerScreenHandler
+                                    .getBlockEntity()
+                                    .getBlockPos()
+                            ),
+                            new ParticleSpawnerConfigurationS2CPayload(
+                                blockEntity.getBlockPos(),
+                                blockEntity.getConfiguration()
+                            )
+                        );
                 }
             }
         };

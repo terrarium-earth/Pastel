@@ -15,10 +15,15 @@ import java.util.Objects;
 public class AnimatedTexturedWidget extends BurningFire {
 
     private final Rectangle bounds;
+
     private final ResourceLocation texture;
+
     private final int animationCount;
+
     private final int textureWidth;
+
     private final int textureHeight;
+
     private double animationDurationMS = -1;
 
     public AnimatedTexturedWidget(ResourceLocation texture, Rectangle bounds, int textureWidth, int textureHeight) {
@@ -46,10 +51,22 @@ public class AnimatedTexturedWidget extends BurningFire {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         if (getAnimationDuration() > 0) {
-            int index = Mth.ceil(
-                (System.currentTimeMillis() / (animationDurationMS / animationCount) % animationCount));
-            graphics.blit(
-                texture, getX(), getY(), 0, index * 16, textureWidth, textureWidth, textureWidth, textureHeight);
+            int index = Mth
+                .ceil(
+                    (System.currentTimeMillis() / (animationDurationMS / animationCount) % animationCount)
+                );
+            graphics
+                .blit(
+                    texture,
+                    getX(),
+                    getY(),
+                    0,
+                    index * 16,
+                    textureWidth,
+                    textureWidth,
+                    textureWidth,
+                    textureHeight
+                );
         } else {
             graphics.blit(texture, getX(), getY(), 0, 0, textureWidth, textureWidth, textureWidth, textureHeight);
         }

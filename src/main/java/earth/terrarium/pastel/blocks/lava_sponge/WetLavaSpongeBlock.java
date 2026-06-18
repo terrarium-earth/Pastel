@@ -31,8 +31,9 @@ public class WetLavaSpongeBlock extends WetSpongeBlock {
     // faster than fire (30+ 0-10)
     // even more in the nether
     private static int getRandomTickTime(Level world) {
-        if (world.dimensionType()
-                 .ultraWarm()) {
+        if (world
+            .dimensionType()
+            .ultraWarm()) {
             return 10 + world.random.nextInt(5);
         } else {
             return 20 + world.random.nextInt(10);
@@ -43,8 +44,9 @@ public class WetLavaSpongeBlock extends WetSpongeBlock {
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         world.scheduleTick(pos, this, getRandomTickTime(world));
 
-        if (world.getGameRules()
-                 .getBoolean(GameRules.RULE_DOFIRETICK)) {
+        if (world
+            .getGameRules()
+            .getBoolean(GameRules.RULE_DOFIRETICK)) {
             int xOffset = 2 - random.nextInt(5);
             int yOffset = 1 - random.nextInt(3);
             int zOffset = 2 - random.nextInt(5);
@@ -62,7 +64,9 @@ public class WetLavaSpongeBlock extends WetSpongeBlock {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         Direction direction = Direction.getRandom(random);
         if (direction != Direction.UP) {

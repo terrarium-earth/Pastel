@@ -17,8 +17,11 @@ import java.util.List;
 
 public class PastelResourceConditions {
 
-    public static final DeferredRegister<MapCodec<? extends ICondition>> REGISTER = DeferredRegister.create(
-        NeoForgeRegistries.CONDITION_SERIALIZERS, PastelCommon.MOD_ID);
+    public static final DeferredRegister<MapCodec<? extends ICondition>> REGISTER = DeferredRegister
+        .create(
+            NeoForgeRegistries.CONDITION_SERIALIZERS,
+            PastelCommon.MOD_ID
+        );
 
     public static void register(IEventBus modEventBus) {
         REGISTER.register("enchantments_exist", () -> EnchantmentsExistResourceCondition.CODEC);
@@ -28,16 +31,21 @@ public class PastelResourceConditions {
     }
 
     public record EnchantmentsExistResourceCondition(List<ResourceKey<Enchantment>> enchantments)
-        implements ICondition {
+        implements
+        ICondition {
 
-        public static MapCodec<EnchantmentsExistResourceCondition> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(
-                                    ResourceKey.codec(Registries.ENCHANTMENT)
-                                               .listOf()
-                                               .fieldOf("values")
-                                               .forGetter(EnchantmentsExistResourceCondition::enchantments)
-                                )
-                                .apply(instance, EnchantmentsExistResourceCondition::new));
+        public static MapCodec<EnchantmentsExistResourceCondition> CODEC = RecordCodecBuilder
+            .mapCodec(
+                instance -> instance
+                    .group(
+                        ResourceKey
+                            .codec(Registries.ENCHANTMENT)
+                            .listOf()
+                            .fieldOf("values")
+                            .forGetter(EnchantmentsExistResourceCondition::enchantments)
+                    )
+                    .apply(instance, EnchantmentsExistResourceCondition::new)
+            );
 
         @Override
         public MapCodec<? extends ICondition> codec() {
@@ -52,12 +60,16 @@ public class PastelResourceConditions {
 
     public record IntegrationPackActiveResourceCondition(String integrationPack) implements ICondition {
 
-        public static MapCodec<IntegrationPackActiveResourceCondition> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(
-                                    Codec.STRING.fieldOf("integration_pack")
-                                                .forGetter(IntegrationPackActiveResourceCondition::integrationPack)
-                                )
-                                .apply(instance, IntegrationPackActiveResourceCondition::new));
+        public static MapCodec<IntegrationPackActiveResourceCondition> CODEC = RecordCodecBuilder
+            .mapCodec(
+                instance -> instance
+                    .group(
+                        Codec.STRING
+                            .fieldOf("integration_pack")
+                            .forGetter(IntegrationPackActiveResourceCondition::integrationPack)
+                    )
+                    .apply(instance, IntegrationPackActiveResourceCondition::new)
+            );
 
         @Override
         public MapCodec<? extends ICondition> codec() {

@@ -12,11 +12,20 @@ import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class LitParticle extends RisingParticle {
 
     protected LitParticle(
-        ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        ClientLevel clientWorld,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ
+    ) {
         super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
         this.quadSize = (random.nextFloat() * 0.25F + 0.325F) / 4F;
         this.lifetime = (int) Math.round(random.triangle(25, 15));
@@ -63,8 +72,14 @@ public class LitParticle extends RisingParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType parameters, ClientLevel clientWorld, double x, double y, double z, double velocityX,
-            double velocityY, double velocityZ
+            SimpleParticleType parameters,
+            ClientLevel clientWorld,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             LitParticle particle = new LitParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
             particle.pickSprite(this.spriteProvider);

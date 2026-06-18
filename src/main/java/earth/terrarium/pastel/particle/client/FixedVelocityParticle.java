@@ -14,11 +14,20 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class FixedVelocityParticle extends TextureSheetParticle {
 
     protected FixedVelocityParticle(
-        ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        ClientLevel clientWorld,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ
+    ) {
         super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
         this.gravity = 0.0F;
         this.speedUpWhenYMotionIsBlocked = true;
@@ -51,7 +60,9 @@ public class FixedVelocityParticle extends TextureSheetParticle {
         return j | k << 16;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteProvider;
@@ -62,18 +73,33 @@ public class FixedVelocityParticle extends TextureSheetParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double x, double y, double z,
-            double velocityX, double velocityY, double velocityZ
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             FixedVelocityParticle craftingParticle = new FixedVelocityParticle(
-                clientWorld, x, y, z, velocityX, velocityY, velocityZ);
+                clientWorld,
+                x,
+                y,
+                z,
+                velocityX,
+                velocityY,
+                velocityZ
+            );
             craftingParticle.setLifetime((int) (8.0D / (clientWorld.random.nextDouble() * 0.8D + 0.2D)));
             craftingParticle.pickSprite(this.spriteProvider);
             return craftingParticle;
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class ColoredFluidRisingFactory implements ParticleProvider<ColoredFluidRisingParticleEffect> {
 
         private final SpriteSet spriteProvider;
@@ -84,8 +110,14 @@ public class FixedVelocityParticle extends TextureSheetParticle {
 
         @Override
         public Particle createParticle(
-            ColoredFluidRisingParticleEffect particleEffect, ClientLevel world, double x, double y, double z,
-            double velocityX, double velocityY, double velocityZ
+            ColoredFluidRisingParticleEffect particleEffect,
+            ClientLevel world,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             FixedVelocityParticle particle = new FixedVelocityParticle(world, x, y, z, velocityX, velocityY, velocityZ);
             particle.setLifetime((int) (8.0D / (world.random.nextDouble() * 0.8D + 0.2D)));
@@ -98,7 +130,9 @@ public class FixedVelocityParticle extends TextureSheetParticle {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class ColoredSparkleRisingFactory implements ParticleProvider<ColoredSparkleRisingParticleEffect> {
 
         private final SpriteSet spriteProvider;
@@ -109,8 +143,14 @@ public class FixedVelocityParticle extends TextureSheetParticle {
 
         @Override
         public Particle createParticle(
-            ColoredSparkleRisingParticleEffect particleEffect, ClientLevel world, double x, double y, double z,
-            double velocityX, double velocityY, double velocityZ
+            ColoredSparkleRisingParticleEffect particleEffect,
+            ClientLevel world,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             FixedVelocityParticle particle = new FixedVelocityParticle(world, x, y, z, velocityX, velocityY, velocityZ);
             particle.setLifetime((int) (8.0D / (world.random.nextDouble() * 0.8D + 0.2D)));

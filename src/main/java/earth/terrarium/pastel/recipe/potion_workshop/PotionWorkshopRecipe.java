@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.potion_workshop;
 
-
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
@@ -26,19 +25,30 @@ import java.util.Optional;
 public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<RecipeInput> {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/potion_workshop");
-    public static final int[] INGREDIENT_SLOTS = new int[]{2, 3, 4};
+
+    public static final int[] INGREDIENT_SLOTS = new int[] {
+        2, 3, 4
+    };
 
     protected final int craftingTime;
+
     protected final int color;
 
     protected final IngredientStack ingredient1;
+
     protected final IngredientStack ingredient2;
+
     protected final IngredientStack ingredient3;
 
     public PotionWorkshopRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier, int craftingTime,
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        int craftingTime,
         int color,
-        IngredientStack ingredient1, IngredientStack ingredient2, IngredientStack ingredient3
+        IngredientStack ingredient1,
+        IngredientStack ingredient2,
+        IngredientStack ingredient3
     ) {
         super(group, secret, requiredAdvancementIdentifier);
         this.color = color;
@@ -68,8 +78,9 @@ public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<Recipe
 
     @Override
     public boolean matches(@NotNull RecipeInput inv, Level world) {
-        if (inv.size() > 4 && inv.getItem(0)
-                                 .is(PastelItems.MERMAIDS_GEM.get()) && isValidBaseIngredient(inv.getItem(1))) {
+        if (inv.size() > 4 && inv
+            .getItem(0)
+            .is(PastelItems.MERMAIDS_GEM.get()) && isValidBaseIngredient(inv.getItem(1))) {
 
             if (usesReagents()) {
                 if (!areStacksInReagentSlotsAllReagents(inv)) return false;
@@ -85,7 +96,9 @@ public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<Recipe
     }
 
     private boolean areStacksInReagentSlotsAllReagents(@NotNull RecipeInput inv) {
-        for (int i : PotionWorkshopBlockEntity.REAGENT_SLOTS) {
+        for (
+            int i : PotionWorkshopBlockEntity.REAGENT_SLOTS
+        ) {
             ItemStack itemStack = inv.getItem(i);
             if (!itemStack.isEmpty() && !PotionWorkshopReactingRecipe.isReagent(itemStack.getItem())) {
                 return false;
@@ -95,9 +108,12 @@ public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<Recipe
     }
 
     private boolean areReagentSlotsEmpty(@NotNull RecipeInput inv) {
-        for (int i : PotionWorkshopBlockEntity.REAGENT_SLOTS) {
-            if (!inv.getItem(i)
-                    .isEmpty()) {
+        for (
+            int i : PotionWorkshopBlockEntity.REAGENT_SLOTS
+        ) {
+            if (!inv
+                .getItem(i)
+                .isEmpty()) {
                 return false;
             }
         }
@@ -113,9 +129,10 @@ public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<Recipe
 
     @Override
     public ItemStack getToastSymbol() {
-        return PastelBlocks.POTION_WORKSHOP.get()
-                                           .asItem()
-                                           .getDefaultInstance();
+        return PastelBlocks.POTION_WORKSHOP
+            .get()
+            .asItem()
+            .getDefaultInstance();
     }
 
     public int getCraftingTime() {

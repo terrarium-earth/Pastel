@@ -32,12 +32,14 @@ public class PastelTransmissionLogic {
     }
 
     public static final int DEFAULT_MAX_TRANSFER_AMOUNT = 1;
+
     public static final int DEFAULT_TRANSFER_TICKS_PER_NODE = 30;
+
     private final ServerPastelNetwork network;
 
     private DijkstraShortestPath<BlockPos, DefaultEdge> dijkstra;
-    private Map<BlockPos, Map<BlockPos, GraphPath<BlockPos, DefaultEdge>>> pathCache = new HashMap<>();
 
+    private Map<BlockPos, Map<BlockPos, GraphPath<BlockPos, DefaultEdge>>> pathCache = new HashMap<>();
 
     public PastelTransmissionLogic(ServerPastelNetwork network) {
         this.network = network;
@@ -49,7 +51,10 @@ public class PastelTransmissionLogic {
     }
 
     public @Nullable GraphPath<BlockPos, DefaultEdge> getPath(
-        Graph<BlockPos, DefaultEdge> graph, PastelNodeBlockEntity source, PastelNodeBlockEntity destination) {
+        Graph<BlockPos, DefaultEdge> graph,
+        PastelNodeBlockEntity source,
+        PastelNodeBlockEntity destination
+    ) {
         if (this.dijkstra == null) {
             this.dijkstra = new DijkstraShortestPath<>(graph);
         }
@@ -63,12 +68,15 @@ public class PastelTransmissionLogic {
         }
 
         // calculate and cache
-        ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = this.dijkstra.getPaths(
-            source.getBlockPos());
+        ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = this.dijkstra
+            .getPaths(
+                source.getBlockPos()
+            );
         GraphPath<BlockPos, DefaultEdge> path = paths.getPath(destination.getBlockPos());
         if (this.pathCache.containsKey(source.getBlockPos())) {
-            this.pathCache.get(source.getBlockPos())
-                          .put(destination.getBlockPos(), path);
+            this.pathCache
+                .get(source.getBlockPos())
+                .put(destination.getBlockPos(), path);
         } else {
             Map<BlockPos, GraphPath<BlockPos, DefaultEdge>> newMap = new HashMap<>();
             newMap.put(destination.getBlockPos(), path);
@@ -92,10 +100,14 @@ public class PastelTransmissionLogic {
     }
 
     private void transferBetween(
-        PastelNodeType sourceType, PastelNodeType destinationType, TransferMode transferMode,
+        PastelNodeType sourceType,
+        PastelNodeType destinationType,
+        TransferMode transferMode,
         PastelNetwork.NodePriority priority
     ) {
-        for (PastelNodeBlockEntity sourceNode : this.network.getLoadedNodes(sourceType, priority)) {
+        for (
+            PastelNodeBlockEntity sourceNode : this.network.getLoadedNodes(sourceType, priority)
+        ) {
             if (!sourceNode.canTransfer()) {
                 continue;
             }
@@ -108,8 +120,14 @@ public class PastelTransmissionLogic {
     }
 
     private void tryTransferToType(
-        PastelNodeBlockEntity sourceNode, IItemHandler sourceHandler, PastelNodeType type, TransferMode transferMode) {
-        for (PastelNodeBlockEntity targetNode : this.network.getLoadedNodes(type, PastelNetwork.NodePriority.GENERIC)) {
+        PastelNodeBlockEntity sourceNode,
+        IItemHandler sourceHandler,
+        PastelNodeType type,
+        TransferMode transferMode
+    ) {
+        for (
+            PastelNodeBlockEntity targetNode : this.network.getLoadedNodes(type, PastelNetwork.NodePriority.GENERIC)
+        ) {
             if (!targetNode.canTransfer()) {
                 continue;
             }
@@ -125,20 +143,28 @@ public class PastelTransmissionLogic {
     }
 
     private boolean transferBetween(
-        PastelNodeBlockEntity sourceNode, IItemHandler sourceStorage, PastelNodeBlockEntity destinationNode,
-        IItemHandler destinationStorage, TransferMode transferMode
+        PastelNodeBlockEntity sourceNode,
+        IItemHandler sourceStorage,
+        PastelNodeBlockEntity destinationNode,
+        IItemHandler destinationStorage,
+        TransferMode transferMode
     ) {
         long totalAvailableStorage = -destinationNode.getItemCountUnderway();
-        for (int d = 0; d < destinationStorage.getSlots(); d++) {
+        for (
+            int d = 0;
+            d < destinationStorage.getSlots();
+            d++
+        ) {
             var stack = destinationStorage.getStackInSlot(d);
 
             if (stack.isEmpty()) {
                 totalAvailableStorage += destinationStorage.getSlotLimit(d);
-            }
-            else {
-                totalAvailableStorage += Math.min(
-                        destinationStorage.getSlotLimit(d), stack.getMaxStackSize())
-                        - stack.getCount();
+            } else {
+                totalAvailableStorage += Math
+                    .min(
+                        destinationStorage.getSlotLimit(d),
+                        stack.getMaxStackSize()
+                    ) - stack.getCount();
             }
         }
 
@@ -147,7 +173,11 @@ public class PastelTransmissionLogic {
 
         Predicate<ItemStack> filter = sourceNode.getTransferFilterTo(destinationNode);
         var proposals = new HashMap<ItemEntry, Long>();
-        for (int s = 0; s < sourceStorage.getSlots(); s++) {
+        for (
+            int s = 0;
+            s < sourceStorage.getSlots();
+            s++
+        ) {
             var stack = sourceStorage.extractItem(s, DEFAULT_MAX_TRANSFER_AMOUNT, true); // Simulate extraction
 
             if (stack.isEmpty()) // We don't consider empty stacks..... duh
@@ -160,38 +190,64 @@ public class PastelTransmissionLogic {
             proposals.put(entry, proposals.getOrDefault(entry, 0L) + entry.stack.getCount());
         }
 
-        for (ItemEntry proposal : proposals.keySet()) {
-            var proposedAmount = Math.min(
-                Math.min(proposals.get(proposal), sourceNode.getMaxTransferredAmount()), totalAvailableStorage);
+        for (
+            ItemEntry proposal : proposals.keySet()
+        ) {
+            var proposedAmount = Math
+                .min(
+                    Math.min(proposals.get(proposal), sourceNode.getMaxTransferredAmount()),
+                    totalAvailableStorage
+                );
 
             if (proposedAmount == 0)
                 continue;
 
             var proposedStack = proposal.stack.copyWithCount((int) proposedAmount);
-            var simulatedAmount = proposedAmount - ItemHandlerHelper.insertItemStacked(
-                                                                        destinationStorage, proposedStack, true)
-                                                                    .getCount();
-            simulatedAmount = Math.min(
-                simulatedAmount, InventoryHelper.getStackCountInInventory(sourceStorage, proposedStack));
+            var simulatedAmount = proposedAmount - ItemHandlerHelper
+                .insertItemStacked(
+                    destinationStorage,
+                    proposedStack,
+                    true
+                )
+                .getCount();
+            simulatedAmount = Math
+                .min(
+                    simulatedAmount,
+                    InventoryHelper.getStackCountInInventory(sourceStorage, proposedStack)
+                );
 
             if (simulatedAmount == 0) //If this is 0 then we failed to move anything in simulation
                 continue;
 
             var trans = createTransmissionOnValidPath(
-                sourceNode, destinationNode, proposedStack, simulatedAmount, sourceNode.getTransferTime());
+                sourceNode,
+                destinationNode,
+                proposedStack,
+                simulatedAmount,
+                sourceNode.getTransferTime()
+            );
             if (trans.isPresent()) {
-                InventoryHelper.extractFromInventory(
-                    sourceStorage, ItemReference.of(proposedStack),
-                    (int) simulatedAmount
-                ); // We only extract if a transmission was created
-                network.addTransmission(
-                    trans.get(), trans.get()
-                                      .getTransmissionDuration()
-                );
-                PastelTransmissionPayload.sendPastelTransmissionParticle(
-                    this.network, trans.get()
-                                       .getTransmissionDuration(), trans.get()
-                );
+                InventoryHelper
+                    .extractFromInventory(
+                        sourceStorage,
+                        ItemReference.of(proposedStack),
+                        (int) simulatedAmount
+                    ); // We only extract if a transmission was created
+                network
+                    .addTransmission(
+                        trans.get(),
+                        trans
+                            .get()
+                            .getTransmissionDuration()
+                    );
+                PastelTransmissionPayload
+                    .sendPastelTransmissionParticle(
+                        this.network,
+                        trans
+                            .get()
+                            .getTransmissionDuration(),
+                        trans.get()
+                    );
 
                 if (transferMode == TransferMode.PULL) {
                     destinationNode.markTransferred();
@@ -210,7 +266,10 @@ public class PastelTransmissionLogic {
     }
 
     public Optional<PastelTransmission> createTransmissionOnValidPath(
-        PastelNodeBlockEntity source, PastelNodeBlockEntity destination, ItemStack variant, long amount,
+        PastelNodeBlockEntity source,
+        PastelNodeBlockEntity destination,
+        ItemStack variant,
+        long amount,
         int vertexTime
     ) {
         GraphPath<BlockPos, DefaultEdge> graphPath = getPath(this.network.getGraph(), source, destination);

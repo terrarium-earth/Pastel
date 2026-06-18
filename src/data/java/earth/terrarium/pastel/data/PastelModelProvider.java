@@ -7,7 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 
-public class PastelModelProvider extends AbstractModelProvider{
+public class PastelModelProvider extends AbstractModelProvider {
 
     public PastelModelProvider(PackOutput output) {
         super(output, PastelCommon.MOD_ID);

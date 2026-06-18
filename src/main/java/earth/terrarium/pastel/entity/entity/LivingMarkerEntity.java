@@ -104,7 +104,8 @@ public class LivingMarkerEntity extends LivingEntity {
     @Override
     protected void addPassenger(Entity passenger) {
         throw new IllegalStateException(
-            "Living Marker: should never addPassenger without checking couldAcceptPassenger()");
+            "Living Marker: should never addPassenger without checking couldAcceptPassenger()"
+        );
     }
 
 }

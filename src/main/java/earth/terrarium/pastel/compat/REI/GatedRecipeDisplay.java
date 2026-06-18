@@ -10,7 +10,6 @@ public interface GatedRecipeDisplay extends Display {
 
     boolean isSecret();
 
-    @Nullable
-    Component getSecretHintText();
+    @Nullable Component getSecretHintText();
 
 }

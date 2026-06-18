@@ -9,7 +9,9 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PresentTooltipComponent implements PastelTooltipComponent {
 
     private final List<ItemStack> itemStacks;
@@ -32,7 +34,11 @@ public class PresentTooltipComponent implements PastelTooltipComponent {
     public void renderImage(Font textRenderer, int x, int y, GuiGraphics context) {
         int n = x + 1;
         int o = y + 1;
-        for (int i = 0; i < this.itemStacks.size(); i++) {
+        for (
+            int i = 0;
+            i < this.itemStacks.size();
+            i++
+        ) {
             PastelTooltipComponent.drawSlot(context, n + i * 18, o, i, this.itemStacks.get(i), textRenderer);
         }
         PastelTooltipComponent.drawOutline(context, x, y, this.itemStacks.size(), 1);

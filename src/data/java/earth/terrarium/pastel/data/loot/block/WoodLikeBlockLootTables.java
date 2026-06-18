@@ -22,9 +22,13 @@ import java.util.Set;
 
 public class WoodLikeBlockLootTables extends BlockLootSubProvider {
     private final Registry<Block> blocks;
+
     private final List<Block> dropSelfBlocks = new ArrayList<>();
+
     private final List<Block> pottedPlantBlocks = new ArrayList<>();
+
     private final List<Block> slabBlocks = new ArrayList<>();
+
     private final List<Block> doorBlocks = new ArrayList<>();
 
     public WoodLikeBlockLootTables(HolderLookup.Provider registries) {
@@ -35,13 +39,18 @@ public class WoodLikeBlockLootTables extends BlockLootSubProvider {
 
     private void populateBlockLists() {
         List<String> variants = List.of("slate_", "ebony_", "ivory_", "chestnut_", "weeping_gala_");
-        List<String> genericDropSelfBlockTypes = List.of("planks", "stairs", "fence", "fence_gate", "trapdoor", "button", "pressure_plate");
-        for (String variant : variants) {
+        List<String> genericDropSelfBlockTypes = List
+            .of("planks", "stairs", "fence", "fence_gate", "trapdoor", "button", "pressure_plate");
+        for (
+            String variant : variants
+        ) {
             String shroomOrSprig = (Objects.equals(variant, "weeping_gala_")) ? "sprig" : "noxshroom";
             String noxwoodOrNothing = (Objects.equals(variant, "weeping_gala_")) ? "" : "noxwood_";
             pottedPlantBlocks.add(blocks.get(PastelCommon.locate("potted_" + variant + shroomOrSprig)));
             dropSelfBlocks.add(blocks.get(PastelCommon.locate(variant + shroomOrSprig)));
-            for (String blockType : genericDropSelfBlockTypes) {
+            for (
+                String blockType : genericDropSelfBlockTypes
+            ) {
                 dropSelfBlocks.add(blocks.get(PastelCommon.locate(variant + noxwoodOrNothing + blockType)));
             }
             slabBlocks.add(blocks.get(PastelCommon.locate(variant + noxwoodOrNothing + "slab")));
@@ -86,8 +95,57 @@ public class WoodLikeBlockLootTables extends BlockLootSubProvider {
         slabBlocks.forEach(block -> add(block, createSlabItemTable(block)));
         doorBlocks.forEach(block -> add(block, createDoorTable(block)));
 
-        add( // PERHAPS, THIS IS HELL.
-                PastelBlocks.WEEPING_GALA_FRONDS_PLANT.get(), LootTable.lootTable().withPool(LootPool.lootPool().when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(PastelBlocks.WEEPING_GALA_FRONDS_PLANT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WeepingGalaFrondsTipBlock.FORM, WeepingGalaFrondsTipBlock.Form.RESIN))).add(LootItem.lootTableItem(PastelItems.MILKY_RESIN)).add(LootItem.lootTableItem(PastelBlocks.WEEPING_GALA_SPRIG))).withPool(LootPool.lootPool().when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(PastelBlocks.WEEPING_GALA_FRONDS_PLANT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WeepingGalaFrondsTipBlock.FORM, WeepingGalaFrondsTipBlock.Form.SPRIG))).add(LootItem.lootTableItem(PastelBlocks.WEEPING_GALA_SPRIG))));
-        add(PastelBlocks.WEEPING_GALA_LEAVES.get(), createLeavesDrops(PastelBlocks.WEEPING_GALA_LEAVES.get(), PastelBlocks.WEEPING_GALA_SPRIG.get(), 0.05f, 0.0625f, 0.083333336f, 0.1f));
+        add(
+            // PERHAPS, THIS IS HELL.
+            PastelBlocks.WEEPING_GALA_FRONDS_PLANT.get(),
+            LootTable
+                .lootTable()
+                .withPool(
+                    LootPool
+                        .lootPool()
+                        .when(
+                            LootItemBlockStatePropertyCondition
+                                .hasBlockStateProperties(PastelBlocks.WEEPING_GALA_FRONDS_PLANT.get())
+                                .setProperties(
+                                    StatePropertiesPredicate.Builder
+                                        .properties()
+                                        .hasProperty(
+                                            WeepingGalaFrondsTipBlock.FORM,
+                                            WeepingGalaFrondsTipBlock.Form.RESIN
+                                        )
+                                )
+                        )
+                        .add(LootItem.lootTableItem(PastelItems.MILKY_RESIN))
+                        .add(LootItem.lootTableItem(PastelBlocks.WEEPING_GALA_SPRIG))
+                )
+                .withPool(
+                    LootPool
+                        .lootPool()
+                        .when(
+                            LootItemBlockStatePropertyCondition
+                                .hasBlockStateProperties(PastelBlocks.WEEPING_GALA_FRONDS_PLANT.get())
+                                .setProperties(
+                                    StatePropertiesPredicate.Builder
+                                        .properties()
+                                        .hasProperty(
+                                            WeepingGalaFrondsTipBlock.FORM,
+                                            WeepingGalaFrondsTipBlock.Form.SPRIG
+                                        )
+                                )
+                        )
+                        .add(LootItem.lootTableItem(PastelBlocks.WEEPING_GALA_SPRIG))
+                )
+        );
+        add(
+            PastelBlocks.WEEPING_GALA_LEAVES.get(),
+            createLeavesDrops(
+                PastelBlocks.WEEPING_GALA_LEAVES.get(),
+                PastelBlocks.WEEPING_GALA_SPRIG.get(),
+                0.05f,
+                0.0625f,
+                0.083333336f,
+                0.1f
+            )
+        );
     }
 }

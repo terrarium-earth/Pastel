@@ -29,30 +29,54 @@ import java.util.Optional;
 
 public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 
-    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate(
-        "hidden/collect_cookbooks/imbrifer_cookbook");
+    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon
+        .locate(
+            "hidden/collect_cookbooks/imbrifer_cookbook"
+        );
+
     public static final int MIN_FERMENTATION_TIME_HOURS = 24;
+
     public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(PastelItems.AQUA_REGIA.get(), 4);
+
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-        add(IngredientStack.ofItems(PastelBlocks.JADEITE_LOTUS_BULB.get()
-                                                                   .asItem()));
-        add(IngredientStack.ofItems(PastelItems.JADEITE_PETALS.get(), 3));
-    }};
+
+    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
+        {
+            add(
+                IngredientStack
+                    .ofItems(
+                        PastelBlocks.JADEITE_LOTUS_BULB
+                            .get()
+                            .asItem()
+                    )
+            );
+            add(IngredientStack.ofItems(PastelItems.JADEITE_PETALS.get(), 3));
+        }
+    };
 
     public AquaRegiaRecipe() {
         super(
-            "", false, Optional.of(UNLOCK_IDENTIFIER), INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER),
-            OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, new FermentationData(0.2F, 0.01F, List.of())
+            "",
+            false,
+            Optional.of(UNLOCK_IDENTIFIER),
+            INGREDIENT_STACKS,
+            FluidIngredient.of(Fluids.WATER),
+            OUTPUT_STACK,
+            TAPPING_ITEM,
+            MIN_FERMENTATION_TIME_HOURS,
+            new FermentationData(0.2F, 0.01F, List.of())
         );
     }
 
     @Override
     public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
-        int bulbCount = InventoryHelper.getItemCountInInventory(
-            inventory, PastelBlocks.JADEITE_LOTUS_BULB.get()
-                                                      .asItem()
-        );
+        int bulbCount = InventoryHelper
+            .getItemCountInInventory(
+                inventory,
+                PastelBlocks.JADEITE_LOTUS_BULB
+                    .get()
+                    .asItem()
+            );
         int petalCount = InventoryHelper.getItemCountInInventory(inventory, PastelItems.JADEITE_PETALS.get());
         boolean nectar = InventoryHelper.getItemCountInInventory(inventory, PastelItems.MOONSTRUCK_NECTAR.get()) > 0;
 
@@ -72,8 +96,10 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
             effectDuration *= 1.5;
         }
         if (alcPercent >= 35) {
-            effects.add(
-                new MobEffectInstance(PastelMobEffects.EFFECT_PROLONGING, effectDuration, (int) (alcPercent / 12)));
+            effects
+                .add(
+                    new MobEffectInstance(PastelMobEffects.EFFECT_PROLONGING, effectDuration, (int) (alcPercent / 12))
+                );
             effectDuration *= 2;
         }
         if (alcPercent >= 30) {
@@ -117,13 +143,21 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
     public boolean matches(FluidRecipeInput<FluidTank> recipeInput, Level world) {
         boolean bulbsFound = false;
 
-        for (int i = 0; i < recipeInput.size(); i++) {
+        for (
+            int i = 0;
+            i < recipeInput.size();
+            i++
+        ) {
             ItemStack stack = recipeInput.getItem(i);
             if (stack.isEmpty()) {
                 continue;
             }
-            if (stack.is(PastelBlocks.JADEITE_LOTUS_BULB.get()
-                                                        .asItem())) {
+            if (stack
+                .is(
+                    PastelBlocks.JADEITE_LOTUS_BULB
+                        .get()
+                        .asItem()
+                )) {
                 bulbsFound = true;
             } else if (!stack.is(PastelItems.JADEITE_PETALS.get()) && !stack.is(PastelItems.MOONSTRUCK_NECTAR.get())) {
                 return false;

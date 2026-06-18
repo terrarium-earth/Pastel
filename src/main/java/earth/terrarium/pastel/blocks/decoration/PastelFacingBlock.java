@@ -27,16 +27,26 @@ public class PastelFacingBlock extends DirectionalBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         Direction direction = ctx.getClickedFace();
-        BlockState blockState = ctx.getLevel()
-                                   .getBlockState(ctx.getClickedPos()
-                                                     .relative(direction.getOpposite()));
-        return blockState.is(this) && blockState.getValue(FACING) == direction ? this.defaultBlockState()
-                                                                                     .setValue(
-                                                                                         FACING,
-                                                                                         direction.getOpposite()
-                                                                                     ) : this.defaultBlockState()
-                                                                                             .setValue(
-                                                                                                 FACING, direction);
+        BlockState blockState = ctx
+            .getLevel()
+            .getBlockState(
+                ctx
+                    .getClickedPos()
+                    .relative(direction.getOpposite())
+            );
+        return blockState.is(this) && blockState.getValue(FACING) == direction
+            ? this
+                .defaultBlockState()
+                .setValue(
+                    FACING,
+                    direction.getOpposite()
+                )
+            : this
+                .defaultBlockState()
+                .setValue(
+                    FACING,
+                    direction
+                );
     }
 
     @Override

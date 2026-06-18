@@ -14,7 +14,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Slot.class)
+@Mixin(
+    Slot.class
+)
 public abstract class SlotMixin {
     @Shadow
     public abstract ItemStack getItem();
@@ -23,9 +25,13 @@ public abstract class SlotMixin {
     @Final
     public Container container;
 
-    @Inject(method = "setChanged", at = @At("HEAD"))
+    @Inject(
+        method = "setChanged", at = @At(
+            "HEAD"
+        )
+    )
     private void setChangedMixin(CallbackInfo ci) {
-        if(this.container instanceof Inventory) return;
+        if (this.container instanceof Inventory) return;
         var item = this.getItem();
         if (item.has(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED)) CrystalArmorItem.removeEmpowered(item);
     }

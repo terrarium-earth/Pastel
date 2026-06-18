@@ -11,12 +11,20 @@ import org.jetbrains.annotations.NotNull;
 
 public class Pastel3x3ContainerScreen extends AbstractContainerScreen<Pastel3x3ContainerScreenHandler> {
 
-    private static final ResourceLocation TIER_1_TEXTURE_3x3 = PastelCommon.locate(
-        "textures/gui/container/generic_3x3_tier_1.png");
-    private static final ResourceLocation TIER_2_TEXTURE_3x3 = PastelCommon.locate(
-        "textures/gui/container/generic_3x3_tier_2.png");
-    private static final ResourceLocation TIER_3_TEXTURE_3x3 = PastelCommon.locate(
-        "textures/gui/container/generic_3x3_tier_3.png");
+    private static final ResourceLocation TIER_1_TEXTURE_3x3 = PastelCommon
+        .locate(
+            "textures/gui/container/generic_3x3_tier_1.png"
+        );
+
+    private static final ResourceLocation TIER_2_TEXTURE_3x3 = PastelCommon
+        .locate(
+            "textures/gui/container/generic_3x3_tier_2.png"
+        );
+
+    private static final ResourceLocation TIER_3_TEXTURE_3x3 = PastelCommon
+        .locate(
+            "textures/gui/container/generic_3x3_tier_3.png"
+        );
 
     private final ResourceLocation backgroundTexture;
 
@@ -49,7 +57,9 @@ public class Pastel3x3ContainerScreen extends AbstractContainerScreen<Pastel3x3C
         drawContext.blit(backgroundTexture, i, j, 0, 0, this.imageWidth, this.imageHeight);
     }
 
-    @Contract(pure = true)
+    @Contract(
+        pure = true
+    )
     private ResourceLocation getBackground(@NotNull ScreenBackgroundVariant tier) {
         switch (tier) {
             case EARLYGAME -> {

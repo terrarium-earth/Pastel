@@ -23,18 +23,22 @@ public class BagOfHoldingItem extends Item {
 
         PlayerEnderChestContainer enderChestInventory = user.getEnderChestInventory();
         if (enderChestInventory != null) {
-            user.openMenu(new SimpleMenuProvider(
-                (syncId, inventory, playerx) -> new BagOfHoldingScreenHandler(
-                    syncId, playerx.getInventory(),
-                                                                              playerx.getEnderChestInventory()
-                ), Component.translatable("container.enderchest")
-            ));
+            user
+                .openMenu(
+                    new SimpleMenuProvider(
+                        (syncId, inventory, playerx) -> new BagOfHoldingScreenHandler(
+                            syncId,
+                            playerx.getInventory(),
+                            playerx.getEnderChestInventory()
+                        ),
+                        Component.translatable("container.enderchest")
+                    )
+                );
 
             return InteractionResultHolder.consume(itemStack);
         } else {
             return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide);
         }
     }
-
 
 }

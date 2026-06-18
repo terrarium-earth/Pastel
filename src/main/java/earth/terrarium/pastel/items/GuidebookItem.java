@@ -29,11 +29,12 @@ import java.util.UUID;
 public class GuidebookItem extends Item implements LoomPatternProvider {
 
     public static final ResourceLocation GUIDEBOOK_ID = PastelCommon.locate("guidebook");
+
     public static final BookAddress GUIDEBOOK_ADDRESS = BookAddress.defaultFor(GUIDEBOOK_ID);
 
     public static final ResourceLocation CUISINE_CATEGORY_ID = PastelCommon.locate("cuisine");
-    public static final ResourceLocation DIMENSION_CATEGORY_ID = PastelCommon.locate("dimension");
 
+    public static final ResourceLocation DIMENSION_CATEGORY_ID = PastelCommon.locate("dimension");
 
     public static BookAddress addressOf(ResourceLocation category, ResourceLocation entryId) {
         return BookAddress.of(GUIDEBOOK_ID, category, entryId, 0);
@@ -42,7 +43,6 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
     public GuidebookItem(Properties settings) {
         super(settings);
     }
-
 
     private static final Set<UUID> alreadyReprocessedPlayers = new HashSet<>();
 
@@ -59,24 +59,35 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
 
         PlayerAdvancements tracker = serverPlayerEntity.getAdvancements();
 
-        for (var advancement : serverPlayerEntity.getServer()
-                                                 .getAdvancements()
-                                                 .getAllAdvancements()) {
+        for (
+            var advancement : serverPlayerEntity
+                .getServer()
+                .getAdvancements()
+                .getAllAdvancements()
+        ) {
             var hasAdvancement = tracker.getOrStartProgress(advancement);
             if (!hasAdvancement.isDone()) {
-                for (var criterionEntry : advancement.value()
-                                                     .criteria()
-                                                     .entrySet()) {
-                    var conditions = criterionEntry.getValue()
-                                                   .triggerInstance();
+                for (
+                    var criterionEntry : advancement
+                        .value()
+                        .criteria()
+                        .entrySet()
+                ) {
+                    var conditions = criterionEntry
+                        .getValue()
+                        .triggerInstance();
                     if (conditions instanceof HasAdvancementCriteria.HasAdvancementCriteriaInstance hasAdvancementConditions) {
-                        var advancementCriterionAdvancement = PastelCommon.getSidedServer()
-                                                                          .getAdvancements()
-                                                                          .get(
-                                                                              hasAdvancementConditions.advancement());
+                        var advancementCriterionAdvancement = PastelCommon
+                            .getSidedServer()
+                            .getAdvancements()
+                            .get(
+                                hasAdvancementConditions.advancement()
+                            );
                         if (advancementCriterionAdvancement != null) {
-                            var hasAdvancementCriterionAdvancement = tracker.getOrStartProgress(
-                                advancementCriterionAdvancement);
+                            var hasAdvancementCriterionAdvancement = tracker
+                                .getOrStartProgress(
+                                    advancementCriterionAdvancement
+                                );
                             if (hasAdvancementCriterionAdvancement.isDone()) {
                                 tracker.award(advancement, criterionEntry.getKey());
                             }
@@ -104,13 +115,15 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
     }
 
     public void openGuidebook() {
-        BookGuiManager.get()
-                      .openBook(GUIDEBOOK_ADDRESS);
+        BookGuiManager
+            .get()
+            .openBook(GUIDEBOOK_ADDRESS);
     }
 
     public void openGuidebook(BookAddress address) {
-        BookGuiManager.get()
-                      .openBook(address);
+        BookGuiManager
+            .get()
+            .openBook(address);
     }
 
     @Override

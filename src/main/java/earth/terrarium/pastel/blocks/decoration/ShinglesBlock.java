@@ -14,8 +14,12 @@ public class ShinglesBlock extends HorizontalDirectionalBlock {
 
     public ShinglesBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(FACING, Direction.NORTH));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(FACING, Direction.NORTH)
+            );
     }
 
     @Override
@@ -25,8 +29,9 @@ public class ShinglesBlock extends HorizontalDirectionalBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(FACING, ctx.getHorizontalDirection());
+        return this
+            .defaultBlockState()
+            .setValue(FACING, ctx.getHorizontalDirection());
     }
 
     @Override

@@ -21,33 +21,52 @@ import java.util.List;
 
 public class DropSelfResonanceProcessor extends ResonanceProcessor {
 
-    public static final MapCodec<DropSelfResonanceProcessor> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                           BrokenBlockPredicate.CODEC.fieldOf("block")
-                                                                                                                                     .validate(block -> block.test(Blocks.AIR.defaultBlockState()) ? DataResult.error(
-                                                                                                                                         () -> "Registering a Resonance Drop that matches on everything!")
-                                                                                                                                                                                                   : DataResult.success(
-                                                                                                                                                                                                       block))
-                                                                                                                                     .forGetter(c -> c.blockPredicate),
-                                                                                                           Codec.STRING.listOf()
-                                                                                                                       .optionalFieldOf("state_properties_to_copy", List.of())
-                                                                                                                       .forGetter(c -> c.statePropertiesToCopy),
-                                                                                                           Codec.STRING.listOf()
-                                                                                                                       .optionalFieldOf("nbt_to_copy", List.of())
-                                                                                                                       .forGetter(c -> c.nbtToCopy),
-                                                                                                           Codec.BOOL.optionalFieldOf("include_default_state_properties", false)
-                                                                                                                     .forGetter(c -> c.includeDefaultStateProperties)
-                                                                                                       )
-                                                                                                       .apply(
-                                                                                                           i,
-                                                                                                           DropSelfResonanceProcessor::new
-                                                                                                       ));
+    public static final MapCodec<DropSelfResonanceProcessor> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    BrokenBlockPredicate.CODEC
+                        .fieldOf("block")
+                        .validate(
+                            block -> block.test(Blocks.AIR.defaultBlockState())
+                                ? DataResult
+                                    .error(
+                                        () -> "Registering a Resonance Drop that matches on everything!"
+                                    )
+                                : DataResult
+                                    .success(
+                                        block
+                                    )
+                        )
+                        .forGetter(c -> c.blockPredicate),
+                    Codec.STRING
+                        .listOf()
+                        .optionalFieldOf("state_properties_to_copy", List.of())
+                        .forGetter(c -> c.statePropertiesToCopy),
+                    Codec.STRING
+                        .listOf()
+                        .optionalFieldOf("nbt_to_copy", List.of())
+                        .forGetter(c -> c.nbtToCopy),
+                    Codec.BOOL
+                        .optionalFieldOf("include_default_state_properties", false)
+                        .forGetter(c -> c.includeDefaultStateProperties)
+                )
+                .apply(
+                    i,
+                    DropSelfResonanceProcessor::new
+                )
+        );
 
     public List<String> statePropertiesToCopy;
+
     public List<String> nbtToCopy;
+
     public boolean includeDefaultStateProperties;
 
     public DropSelfResonanceProcessor(
-        BrokenBlockPredicate blockTarget, List<String> statePropertiesToCopy, List<String> nbtToCopy,
+        BrokenBlockPredicate blockTarget,
+        List<String> statePropertiesToCopy,
+        List<String> nbtToCopy,
         boolean includeDefaultStateProperties
     ) {
         super(blockTarget);
@@ -68,12 +87,17 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
 
     public void copyBlockStateTags(BlockState minedState, ItemStack convertedStack) {
         BlockItemStateProperties component = BlockItemStateProperties.EMPTY;
-        for (Property<?> blockProperty : minedState.getProperties()) {
+        for (
+            Property<?> blockProperty : minedState.getProperties()
+        ) {
             if (statePropertiesToCopy.contains(blockProperty.getName())) {
-                if (!includeDefaultStateProperties && minedState.getBlock()
-                                                                .defaultBlockState()
-                                                                .getValue(blockProperty) == minedState.getValue(
-                    blockProperty)) {
+                if (!includeDefaultStateProperties && minedState
+                    .getBlock()
+                    .defaultBlockState()
+                    .getValue(blockProperty) == minedState
+                        .getValue(
+                            blockProperty
+                        )) {
                     // do not copy if the value matches the default to make it stack with others
                     continue;
                 }
@@ -87,9 +111,15 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
     public void copyNbt(BlockEntity blockEntity, ItemStack convertedStack) {
         CompoundTag newNbt = new CompoundTag();
 
-        CompoundTag BlockEntityNbt = blockEntity.saveCustomAndMetadata(blockEntity.getLevel()
-                                                                                  .registryAccess());
-        for (String s : nbtToCopy) {
+        CompoundTag BlockEntityNbt = blockEntity
+            .saveCustomAndMetadata(
+                blockEntity
+                    .getLevel()
+                    .registryAccess()
+            );
+        for (
+            String s : nbtToCopy
+        ) {
             if (BlockEntityNbt.contains(s)) {
                 newNbt.put(s, BlockEntityNbt.get(s));
             }
@@ -101,9 +131,10 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
     }
 
     private void dropSelf(BlockState minedState, BlockEntity blockEntity, List<ItemStack> droppedStacks) {
-        ItemStack selfStack = minedState.getBlock()
-                                        .asItem()
-                                        .getDefaultInstance();
+        ItemStack selfStack = minedState
+            .getBlock()
+            .asItem()
+            .getDefaultInstance();
 
         if (!statePropertiesToCopy.isEmpty()) {
             copyBlockStateTags(minedState, selfStack);
@@ -126,8 +157,11 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
 
     public static class Builder {
         private final BrokenBlockPredicate blockTarget;
+
         private final List<String> nbtToCopy = new ArrayList<>();
+
         private final List<String> statePropertiesToCopy = new ArrayList<>();
+
         private boolean includeDefaultStateProperties = false;
 
         private Builder(BrokenBlockPredicate blockTarget) {
@@ -151,7 +185,11 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
 
         public DropSelfResonanceProcessor build() {
             return new DropSelfResonanceProcessor(
-                blockTarget, statePropertiesToCopy, nbtToCopy, includeDefaultStateProperties);
+                blockTarget,
+                statePropertiesToCopy,
+                nbtToCopy,
+                includeDefaultStateProperties
+            );
         }
 
     }

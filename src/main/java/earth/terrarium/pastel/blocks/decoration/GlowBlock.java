@@ -13,15 +13,22 @@ import java.util.Map;
 
 public class GlowBlock extends Block {
 
-    public static final MapCodec<GlowBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                          propertiesCodec(),
-                                                                                          InkColor.CODEC.fieldOf(
-                                                                                              "color")
-                                                                                                        .forGetter(GlowBlock::getColor)
-                                                                                      )
-                                                                                      .apply(i, GlowBlock::new));
+    public static final MapCodec<GlowBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    propertiesCodec(),
+                    InkColor.CODEC
+                        .fieldOf(
+                            "color"
+                        )
+                        .forGetter(GlowBlock::getColor)
+                )
+                .apply(i, GlowBlock::new)
+        );
 
     private static final Map<InkColor, GlowBlock> GLOWBLOCKS = new Object2ObjectArrayMap<>();
+
     protected final InkColor color;
 
     public GlowBlock(Properties settings, InkColor color) {

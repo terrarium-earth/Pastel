@@ -7,10 +7,16 @@ import net.minecraft.world.entity.animal.Fox;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(Fox.class)
+@Mixin(
+    Fox.class
+)
 public class FoxEntityMixin {
 
-    @ModifyReturnValue(method = "isSleeping()Z", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "isSleeping()Z", at = @At(
+            "RETURN"
+        )
+    )
     public boolean forceFoxSleepingState(boolean original) {
         if (original)
             return true;

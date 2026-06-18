@@ -14,14 +14,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
-@Mixin(FishingHookPredicate.class)
+@Mixin(
+    FishingHookPredicate.class
+)
 public abstract class FishingHookPredicateMixin {
 
     @Shadow
     @Final
     private Optional<Boolean> inOpenWater;
 
-    @Inject(method = "matches", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(
+        method = "matches", at = @At(
+            value = "HEAD"
+        ), cancellable = true
+    )
     public void test(Entity entity, ServerLevel world, Vec3 pos, CallbackInfoReturnable<Boolean> cir) {
         if (entity instanceof PastelFishingBobberEntity spectrumFishingBobberEntity) {
             if (this.inOpenWater.isEmpty()) {

@@ -67,6 +67,7 @@ import static earth.terrarium.pastel.blocks.TallCropBlock.HALF;
 public class NaturesStaffItem extends Item implements InkPowered {
 
     public static final ItemStack ITEM_COST = new ItemStack(PastelItems.VEGETAL.get(), 1);
+
     public static final InkCost INK_COST = new InkCost(InkColors.LIME, 20);
 
     public NaturesStaffItem(Properties settings) {
@@ -74,27 +75,42 @@ public class NaturesStaffItem extends Item implements InkPowered {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
 
         int efficiencyLevel = Ench.getLevel(context.registries(), Enchantments.EFFICIENCY, stack);
         if (efficiencyLevel == 0) {
             if (InkPowered.canUseClient()) {
-                tooltip.add(Component.translatable(
-                    "item.pastel.natures_staff.tooltip_with_ink", INK_COST.color()
-                                                                          .getColoredInkName()
-                ));
+                tooltip
+                    .add(
+                        Component
+                            .translatable(
+                                "item.pastel.natures_staff.tooltip_with_ink",
+                                INK_COST
+                                    .color()
+                                    .getColoredInkName()
+                            )
+                    );
             } else {
                 tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip"));
             }
         } else {
             int chancePercent = (int) (getInkCostMod(context.registries(), stack) * 100);
             if (InkPowered.canUseClient()) {
-                tooltip.add(Component.translatable(
-                    "item.pastel.natures_staff.tooltip_with_ink_and_chance", INK_COST.color()
-                                                                                     .getColoredInkName(), chancePercent
-                ));
+                tooltip
+                    .add(
+                        Component
+                            .translatable(
+                                "item.pastel.natures_staff.tooltip_with_ink_and_chance",
+                                INK_COST
+                                    .color()
+                                    .getColoredInkName(),
+                                chancePercent
+                            )
+                    );
             } else {
                 tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip_with_chance", chancePercent));
             }
@@ -114,11 +130,14 @@ public class NaturesStaffItem extends Item implements InkPowered {
         return super.use(world, user, hand);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void startSoundInstance(Player user) {
-        Minecraft.getInstance()
-                 .getSoundManager()
-                 .play(new NaturesStaffUseSoundInstance(user));
+        Minecraft
+            .getInstance()
+            .getSoundManager()
+            .play(new NaturesStaffUseSoundInstance(user));
     }
 
     @Override
@@ -148,10 +167,15 @@ public class NaturesStaffItem extends Item implements InkPowered {
         if (!world.isClientSide) {
             HitResult hitResult = Support.playerBlockInteractionRaycast(world, user, player);
             if (hitResult.getType() == HitResult.Type.BLOCK) {
-                useOn(new UseOnContext(
-                    world, player, player.getUsedItemHand(), player.getItemInHand(player.getUsedItemHand()),
-                    (BlockHitResult) hitResult
-                ));
+                useOn(
+                    new UseOnContext(
+                        world,
+                        player,
+                        player.getUsedItemHand(),
+                        player.getItemInHand(player.getUsedItemHand()),
+                        (BlockHitResult) hitResult
+                    )
+                );
             }
         }
     }
@@ -197,15 +221,18 @@ public class NaturesStaffItem extends Item implements InkPowered {
                 boolean success = false;
                 BlockState sourceState = world.getBlockState(blockPos);
 
-                if (sourceState.getBlock() instanceof NaturesStaffTriggered naturesStaffTriggered &&
-                    naturesStaffTriggered.canUseNaturesStaff(world, blockPos, sourceState)) {
+                if (sourceState
+                    .getBlock() instanceof NaturesStaffTriggered naturesStaffTriggered && naturesStaffTriggered
+                        .canUseNaturesStaff(world, blockPos, sourceState)) {
                     if (naturesStaffTriggered.onNaturesStaffUse(world, blockPos, sourceState, player)) {
                         success = true;
                     }
                 } else {
                     // loaded as convertible? => convert
-                    BlockState destinationState = NaturesStaffConversionDataLoader.getConvertedBlockState(
-                        sourceState.getBlock());
+                    BlockState destinationState = NaturesStaffConversionDataLoader
+                        .getConvertedBlockState(
+                            sourceState.getBlock()
+                        );
                     if (destinationState != null) {
                         if (destinationState.getBlock() instanceof SimpleWaterloggedBlock) {
                             if (touchesWater(world, blockPos)) {
@@ -223,60 +250,85 @@ public class NaturesStaffItem extends Item implements InkPowered {
                         int i = 0;
                         BlockState state;
                         do {
-                            state = world.getBlockState(context.getClickedPos()
-                                                               .above(i));
+                            state = world
+                                .getBlockState(
+                                    context
+                                        .getClickedPos()
+                                        .above(i)
+                                );
                             i++;
                         } while (state.is(sourceState.getBlock()));
 
-                        BlockPos targetPos = context.getClickedPos()
-                                                    .above(i - 1);
+                        BlockPos targetPos = context
+                            .getClickedPos()
+                            .above(i - 1);
                         if (tryPlaceBlock(sourceState, world, targetPos, Direction.DOWN, Direction.UP)) {
                             success = true;
                         }
                     } else if (sourceState.is(PastelBlockTags.NATURES_STAFF_SPREADABLE)) {
                         RandomSource random = world.getRandom();
 
-                        for (int i = 0; i < 5; i++) {
-                            BlockPos randomOffsetPos = blockPos.offset(
-                                random.nextIntBetweenInclusive(-3, 3), random.nextIntBetweenInclusive(-3, 3),
-                                random.nextIntBetweenInclusive(-3, 3)
-                            );
+                        for (
+                            int i = 0;
+                            i < 5;
+                            i++
+                        ) {
+                            BlockPos randomOffsetPos = blockPos
+                                .offset(
+                                    random.nextIntBetweenInclusive(-3, 3),
+                                    random.nextIntBetweenInclusive(-3, 3),
+                                    random.nextIntBetweenInclusive(-3, 3)
+                                );
                             if (tryPlaceBlock(
-                                sourceState, world, randomOffsetPos, Direction.getRandom(random),
+                                sourceState,
+                                world,
+                                randomOffsetPos,
+                                Direction.getRandom(random),
                                 Direction.getRandom(random)
                             )) {
                                 success = true;
                                 break;
                             }
                         }
-                    } else if (sourceState.isRandomlyTicking() && sourceState.is(
-                        PastelBlockTags.NATURES_STAFF_TICKABLE)) {
-                        // random tickable and whitelisted? => tick
-                        // without whitelist we would be able to tick budding blocks, ...
+                    } else if (sourceState.isRandomlyTicking() && sourceState
+                        .is(
+                            PastelBlockTags.NATURES_STAFF_TICKABLE
+                        )) {
+                            // random tickable and whitelisted? => tick
+                            // without whitelist we would be able to tick budding blocks, ...
 
-                        if (world instanceof ServerLevel) {
-                            sourceState.randomTick((ServerLevel) world, blockPos, world.random);
-                        }
-                        success = true;
-                    } else if (world instanceof ServerLevel level && tryHarvest(
-                        sourceState, blockPos, player, level, new BlockHitResult(
-                            context.getClickLocation(), context.getClickedFace(), blockPos, context.isInside()),
-                        context.getItemInHand()
-                    )) {
-                        success = true;
-                    } else if (BoneMealItem.growCrop(Items.BONE_MEAL.getDefaultInstance(), world, blockPos)) {
-                        // fertilizable => grow!
-                        success = true;
-                    } else {
-                        if (sourceState.isFaceSturdy(world, blockPos, context.getClickedFace()) &&
-                            BoneMealItem.growWaterPlant(
-                                Items.BONE_MEAL.getDefaultInstance(), world,
-                                blockPos.relative(context.getClickedFace()),
-                                context.getClickedFace()
-                            )) {
+                            if (world instanceof ServerLevel) {
+                                sourceState.randomTick((ServerLevel) world, blockPos, world.random);
+                            }
                             success = true;
+                        } else if (world instanceof ServerLevel level && tryHarvest(
+                            sourceState,
+                            blockPos,
+                            player,
+                            level,
+                            new BlockHitResult(
+                                context.getClickLocation(),
+                                context.getClickedFace(),
+                                blockPos,
+                                context.isInside()
+                            ),
+                            context.getItemInHand()
+                        )) {
+                            success = true;
+                        } else if (BoneMealItem.growCrop(Items.BONE_MEAL.getDefaultInstance(), world, blockPos)) {
+                            // fertilizable => grow!
+                            success = true;
+                        } else {
+                            if (sourceState.isFaceSturdy(world, blockPos, context.getClickedFace()) && BoneMealItem
+                                .growWaterPlant(
+                                    Items.BONE_MEAL.getDefaultInstance(),
+                                    world,
+                                    blockPos.relative(context.getClickedFace()),
+                                    context.getClickedFace()
+                                )) {
+                                success = true;
+                            }
                         }
-                    }
                 }
 
                 if (success) {
@@ -292,7 +344,11 @@ public class NaturesStaffItem extends Item implements InkPowered {
     }
 
     private boolean tryHarvest(
-        BlockState state, BlockPos pos, ServerPlayer player, ServerLevel level, BlockHitResult hitResult,
+        BlockState state,
+        BlockPos pos,
+        ServerPlayer player,
+        ServerLevel level,
+        BlockHitResult hitResult,
         ItemStack naturesStaff
     ) {
         boolean growable = false;
@@ -307,8 +363,12 @@ public class NaturesStaffItem extends Item implements InkPowered {
                 pos = pos.below();
                 state = level.getBlockState(pos);
                 hitResult = new BlockHitResult(
-                    hitResult.getLocation()
-                             .relative(Direction.DOWN, 1), hitResult.getDirection(), pos, hitResult.isInside()
+                    hitResult
+                        .getLocation()
+                        .relative(Direction.DOWN, 1),
+                    hitResult.getDirection(),
+                    pos,
+                    hitResult.isInside()
                 );
                 block = state.getBlock();
             }
@@ -327,24 +387,31 @@ public class NaturesStaffItem extends Item implements InkPowered {
         if (level.isClientSide() || growable || !state.is(PastelBlockTags.NATURES_STAFF_HARVEST_WHITELIST))
             return false;
 
-
         // this allows us to benefit from fortune
-        var drops = state.getDrops(new LootParams.Builder(level).withParameter(
-                                                                    LootContextParams.ORIGIN, new Vec3(
-                                                                        pos.getX(),
-                                                                        pos.getY(),
-                                                                        pos.getZ()
-                                                                    )
-                                                                )
-                                                                .withParameter(LootContextParams.BLOCK_STATE, state)
-                                                                .withParameter(LootContextParams.THIS_ENTITY, player)
-                                                                .withParameter(LootContextParams.TOOL, naturesStaff));
+        var drops = state
+            .getDrops(
+                new LootParams.Builder(level)
+                    .withParameter(
+                        LootContextParams.ORIGIN,
+                        new Vec3(
+                            pos.getX(),
+                            pos.getY(),
+                            pos.getZ()
+                        )
+                    )
+                    .withParameter(LootContextParams.BLOCK_STATE, state)
+                    .withParameter(LootContextParams.THIS_ENTITY, player)
+                    .withParameter(LootContextParams.TOOL, naturesStaff)
+            );
 
         BlockState restoreTo = block.defaultBlockState();
         // preserve the direction of orientable blocks
         if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-            restoreTo = restoreTo.setValue(
-                BlockStateProperties.HORIZONTAL_FACING, state.getValue(BlockStateProperties.HORIZONTAL_FACING));
+            restoreTo = restoreTo
+                .setValue(
+                    BlockStateProperties.HORIZONTAL_FACING,
+                    state.getValue(BlockStateProperties.HORIZONTAL_FACING)
+                );
         }
 
         // vanilla crops like wheat use this state instead
@@ -356,20 +423,30 @@ public class NaturesStaffItem extends Item implements InkPowered {
         if (tall > 0)
             level.setBlockAndUpdate(pos.above(), Blocks.AIR.defaultBlockState());
         ItemStack seeds = state.getCloneItemStack(hitResult, level, pos, player);
-        for (ItemStack drop : drops) {
+        for (
+            ItemStack drop : drops
+        ) {
             if (drop.is(seeds.getItem())) drop.shrink(1);
             if (drop.isEmpty()) continue;
             Containers.dropItemStack(level, player.getX(), player.getY(), player.getZ(), drop);
         }
 
-        var enchantments = level.registryAccess()
-                                .lookup(Registries.ENCHANTMENT);
+        var enchantments = level
+            .registryAccess()
+            .lookup(Registries.ENCHANTMENT);
         if (enchantments.isPresent()) {
-            var silk = enchantments.get()
-                                   .get(Enchantments.SILK_TOUCH);
-            if (silk.isPresent() && block instanceof DoomBloomBlock && naturesStaff.getEnchantmentLevel(Holder.direct(
-                silk.get()
-                    .value())) < 1) {
+            var silk = enchantments
+                .get()
+                .get(Enchantments.SILK_TOUCH);
+            if (silk.isPresent() && block instanceof DoomBloomBlock && naturesStaff
+                .getEnchantmentLevel(
+                    Holder
+                        .direct(
+                            silk
+                                .get()
+                                .value()
+                        )
+                ) < 1) {
                 DoomBloomBlock.explode(level, pos, state);
             }
         }
@@ -378,20 +455,30 @@ public class NaturesStaffItem extends Item implements InkPowered {
     }
 
     private boolean tryPlaceBlock(BlockState blockState, Level world, BlockPos pos, Direction facing, Direction side) {
-        BlockState targetState = blockState.getBlock()
-                                           .getStateForPlacement(
-                                               new DirectionalPlaceContext(world, pos, facing, ItemStack.EMPTY, side));
-        if (targetState != null && world.getBlockState(pos)
-                                        .canBeReplaced() && !world.isOutsideBuildHeight(pos.getY()) &&
-            targetState.canSurvive(world, pos)) {
+        BlockState targetState = blockState
+            .getBlock()
+            .getStateForPlacement(
+                new DirectionalPlaceContext(world, pos, facing, ItemStack.EMPTY, side)
+            );
+        if (targetState != null && world
+            .getBlockState(pos)
+            .canBeReplaced() && !world.isOutsideBuildHeight(pos.getY()) && targetState.canSurvive(world, pos)) {
             world.setBlockAndUpdate(pos, targetState);
 
             world.levelEvent(null, LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(targetState));
-            world.playSound(
-                null, pos, targetState.getSoundType()
-                                      .getPlaceSound(), SoundSource.PLAYERS, 1.0F, 0.9F + world.getRandom()
-                                                                                               .nextFloat() * 0.2F
-            );
+            world
+                .playSound(
+                    null,
+                    pos,
+                    targetState
+                        .getSoundType()
+                        .getPlaceSound(),
+                    SoundSource.PLAYERS,
+                    1.0F,
+                    0.9F + world
+                        .getRandom()
+                        .nextFloat() * 0.2F
+                );
             world.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, pos, 15);
             return true;
         }
@@ -399,28 +486,35 @@ public class NaturesStaffItem extends Item implements InkPowered {
     }
 
     private static boolean touchesWater(Level world, BlockPos blockPos) {
-        return world.getFluidState(blockPos.north())
-                    .is(FluidTags.WATER) || world.getFluidState(blockPos.east())
-                                                 .is(FluidTags.WATER) || world.getFluidState(blockPos.south())
-                                                                              .is(FluidTags.WATER) ||
-               world.getFluidState(blockPos.west())
-                    .is(FluidTags.WATER);
+        return world
+            .getFluidState(blockPos.north())
+            .is(FluidTags.WATER) || world
+                .getFluidState(blockPos.east())
+                .is(FluidTags.WATER) || world
+                    .getFluidState(blockPos.south())
+                    .is(FluidTags.WATER) || world
+                        .getFluidState(blockPos.west())
+                        .is(FluidTags.WATER);
     }
 
     private static void spawnParticlesAndEffect(Level world, BlockPos blockPos) {
         BlockState blockState = world.getBlockState(blockPos);
         if (blockState.is(PastelBlockTags.NATURES_STAFF_STACKABLE)) {
             int i = 0;
-            while (world.getBlockState(blockPos.above(i))
-                        .is(blockState.getBlock())) {
+            while (world
+                .getBlockState(blockPos.above(i))
+                .is(blockState.getBlock())) {
                 world.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, blockPos.above(i), 15);
                 i++;
             }
             world.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, blockPos, 15);
             BoneMealItem.addGrowthParticles(world, blockPos.above(i + 1), 5);
             for (
-                int j = 1; world.getBlockState(blockPos.below(j))
-                                .is(blockState.getBlock()); j++
+                int j = 1;
+                world
+                    .getBlockState(blockPos.below(j))
+                    .is(blockState.getBlock());
+                j++
             ) {
                 world.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, blockPos.below(j), 15);
             }
@@ -432,41 +526,61 @@ public class NaturesStaffItem extends Item implements InkPowered {
     private boolean payForUse(Player player, ItemStack stack) {
         boolean paid = player.isCreative(); // free for creative players
         if (!paid) { // try pay with ink
-            paid = InkPowered.tryDrainEnergy(
-                player, INK_COST, getInkCostMod(
-                    player.level()
-                          .registryAccess(), stack
-                )
-            );
+            paid = InkPowered
+                .tryDrainEnergy(
+                    player,
+                    INK_COST,
+                    getInkCostMod(
+                        player
+                            .level()
+                            .registryAccess(),
+                        stack
+                    )
+                );
         }
-        if (!paid && player.getInventory()
-                           .contains(ITEM_COST)) {  // try pay with item
-            int efficiencyLevel = Ench.getLevel(
-                player.level()
-                      .registryAccess(), Enchantments.EFFICIENCY, stack
-            );
+        if (!paid && player
+            .getInventory()
+            .contains(ITEM_COST)) {  // try pay with item
+            int efficiencyLevel = Ench
+                .getLevel(
+                    player
+                        .level()
+                        .registryAccess(),
+                    Enchantments.EFFICIENCY,
+                    stack
+                );
             if (efficiencyLevel == 0) {
                 paid = InventoryHelper.removeFromInventoryWithRemainders(player, ITEM_COST);
             } else {
-                paid = player.getRandom()
-                             .nextFloat() > (2.0 / (2 + efficiencyLevel)) ||
-                       InventoryHelper.removeFromInventoryWithRemainders(player, ITEM_COST);
+                paid = player
+                    .getRandom()
+                    .nextFloat() > (2.0 / (2 + efficiencyLevel)) || InventoryHelper
+                        .removeFromInventoryWithRemainders(player, ITEM_COST);
             }
         }
         return paid;
     }
 
     private static boolean canUse(Player player) {
-        return player.isCreative() || InkPowered.hasAvailableInk(player, INK_COST) || player.getInventory()
-                                                                                            .contains(ITEM_COST);
+        return player.isCreative() || InkPowered.hasAvailableInk(player, INK_COST) || player
+            .getInventory()
+            .contains(ITEM_COST);
     }
 
     private void playDenySound(@NotNull Level world, @NotNull Player playerEntity) {
-        world.playSound(
-            null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), PastelSounds.USE_FAIL,
-            SoundSource.PLAYERS, 1.0F, 0.8F + playerEntity.getRandom()
-                                                          .nextFloat() * 0.4F
-        );
+        world
+            .playSound(
+                null,
+                playerEntity.getX(),
+                playerEntity.getY(),
+                playerEntity.getZ(),
+                PastelSounds.USE_FAIL,
+                SoundSource.PLAYERS,
+                1.0F,
+                0.8F + playerEntity
+                    .getRandom()
+                    .nextFloat() * 0.4F
+            );
     }
 
     @Override
@@ -486,8 +600,8 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY) ||
-               enchantment.is(Enchantments.FORTUNE) || enchantment.is(Enchantments.SILK_TOUCH);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY) || enchantment
+            .is(Enchantments.FORTUNE) || enchantment.is(Enchantments.SILK_TOUCH);
     }
 
 }

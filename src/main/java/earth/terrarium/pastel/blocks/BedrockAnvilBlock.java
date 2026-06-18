@@ -42,24 +42,43 @@ public class BedrockAnvilBlock extends AnvilBlock {
     }
 
     @Override
-    @Nullable
-    public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
+    @Nullable public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
         return new SimpleMenuProvider(
             (syncId, inventory, player) -> new BedrockAnvilScreenHandler(
-            syncId, inventory, ContainerLevelAccess.create(world, pos)), TITLE
+                syncId,
+                inventory,
+                ContainerLevelAccess.create(world, pos)
+            ),
+            TITLE
         );
     }
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("container.pastel.bedrock_anvil.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("container.pastel.bedrock_anvil.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("container.pastel.bedrock_anvil.tooltip3")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("container.pastel.bedrock_anvil.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("container.pastel.bedrock_anvil.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("container.pastel.bedrock_anvil.tooltip3")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
 }

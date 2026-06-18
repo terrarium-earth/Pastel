@@ -17,8 +17,12 @@ public class CardinalFacingBlock extends Block {
 
     public CardinalFacingBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(CARDINAL_FACING, false));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(CARDINAL_FACING, false)
+            );
     }
 
     @Override
@@ -30,8 +34,9 @@ public class CardinalFacingBlock extends Block {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         Direction facing = ctx.getHorizontalDirection();
         boolean facingVertical = facing.equals(Direction.EAST) || facing.equals(Direction.WEST);
-        return this.defaultBlockState()
-                   .setValue(CARDINAL_FACING, facingVertical);
+        return this
+            .defaultBlockState()
+            .setValue(CARDINAL_FACING, facingVertical);
     }
 
     @Override

@@ -10,8 +10,8 @@ public class ClearCraftingTabletRecipe extends SingleItemCraftingRecipe {
 
     @Override
     public boolean matches(Level world, ItemStack stack) {
-        return stack.getItem() instanceof CraftingTabletItem && CraftingTabletItem.getStoredRecipe(world, stack) !=
-                                                                null;
+        return stack.getItem() instanceof CraftingTabletItem && CraftingTabletItem
+            .getStoredRecipe(world, stack) != null;
     }
 
     @Override

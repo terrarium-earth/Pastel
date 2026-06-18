@@ -28,10 +28,14 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
 
-    private final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/projectile/arrow/white_glass_arrow.png");
+    private final ResourceLocation TEXTURE = PastelCommon
+        .locate("textures/entity/projectile/arrow/white_glass_arrow.png");
+
     private final Model model;
 
     public GlassArrowEntityRenderer(EntityRendererProvider.Context context) {
@@ -41,8 +45,12 @@ public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
 
     @Override
     public void render(
-        GlassArrowEntity arrow, float yaw, float tickDelta, PoseStack poseStack,
-        MultiBufferSource buffers, int light
+        GlassArrowEntity arrow,
+        float yaw,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource buffers,
+        int light
     ) {
         renderType(arrow, tickDelta, poseStack, buffers);
         super.render(arrow, yaw, tickDelta, poseStack, buffers, light);
@@ -54,7 +62,10 @@ public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
     }
 
     private void renderType(
-        GlassArrowEntity arrow, float tickDelta, PoseStack poseStack, MultiBufferSource consumers
+        GlassArrowEntity arrow,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource consumers
     ) {
 
         var trail = arrow.getTrail();
@@ -64,17 +75,22 @@ public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
             double d1 = Mth.lerp(tickDelta, arrow.yOld, arrow.getY());
             double d2 = Mth.lerp(tickDelta, arrow.zOld, arrow.getZ());
             Vec3 posOffset = new Vec3(d0, d1, d2).subtract(arrow.position());
-            Vec3 pos = arrow.position()
-                                       .add(posOffset);
+            Vec3 pos = arrow
+                .position()
+                .add(posOffset);
             poseStack.translate(-pos.x, -pos.y, -pos.z);
 
-            trail.position = arrow.getBoundingBox()
-                                             .getCenter()
-                                             .add(posOffset);
-            trail.render(
-                poseStack, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT,
-                arrow.getGradient()
-            );
+            trail.position = arrow
+                .getBoundingBox()
+                .getCenter()
+                .add(posOffset);
+            trail
+                .render(
+                    poseStack,
+                    RenderHandler.createBufferSource(),
+                    LightTexture.FULL_BRIGHT,
+                    arrow.getGradient()
+                );
 
             poseStack.popPose();
         }
@@ -83,14 +99,22 @@ public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
         poseStack.translate(0, -1.25F, 0);
 
         var buffer = consumers.getBuffer(RenderType.entityCutout(getTextureLocation(arrow)));
-        model.main.setRotation(
-            (float) Math.toRadians(Mth.lerp(tickDelta, arrow.xRotO, arrow.getXRot()) + 90F),
-            (float) Math.toRadians(Mth.lerp(tickDelta, arrow.yRotO, arrow.getYRot()) - 180),
-            0
-        );
+        model.main
+            .setRotation(
+                (float) Math.toRadians(Mth.lerp(tickDelta, arrow.xRotO, arrow.getXRot()) + 90F),
+                (float) Math.toRadians(Mth.lerp(tickDelta, arrow.yRotO, arrow.getYRot()) - 180),
+                0
+            );
 
         var alpha = 1 - Math.min(arrow.getInGroundTime() / 20F, 1);
-        model.renderToBuffer(poseStack, buffer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, FastColor.ARGB32.colorFromFloat(alpha, 1, 1, 1));
+        model
+            .renderToBuffer(
+                poseStack,
+                buffer,
+                LightTexture.FULL_BRIGHT,
+                OverlayTexture.NO_OVERLAY,
+                FastColor.ARGB32.colorFromFloat(alpha, 1, 1, 1)
+            );
         poseStack.popPose();
     }
 
@@ -110,21 +134,55 @@ public class GlassArrowEntityRenderer extends EntityRenderer<GlassArrowEntity> {
             MeshDefinition meshdefinition = new MeshDefinition();
             PartDefinition partdefinition = meshdefinition.getRoot();
 
-            PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create(), PartPose.offsetAndRotation(0.5F, 24.0F, 2.0F, 1.5708F, 0.0F, -1.5708F));
+            PartDefinition bone = partdefinition
+                .addOrReplaceChild(
+                    "bone",
+                    CubeListBuilder.create(),
+                    PartPose.offsetAndRotation(0.5F, 24.0F, 2.0F, 1.5708F, 0.0F, -1.5708F)
+                );
 
-            PartDefinition face_r1 = bone.addOrReplaceChild("face_r1", CubeListBuilder.create().texOffs(1, 0).addBox(-2.5F, -12.0F, 0.0F, 5.0F, 24.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
+            PartDefinition face_r1 = bone
+                .addOrReplaceChild(
+                    "face_r1",
+                    CubeListBuilder
+                        .create()
+                        .texOffs(1, 0)
+                        .addBox(-2.5F, -12.0F, 0.0F, 5.0F, 24.0F, 0.0F, new CubeDeformation(0.0F)),
+                    PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F)
+                );
 
-            PartDefinition face_r2 = bone.addOrReplaceChild("face_r2", CubeListBuilder.create().texOffs(1, 0).addBox(-2.5F, -12.0F, 0.0F, 5.0F, 24.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
+            PartDefinition face_r2 = bone
+                .addOrReplaceChild(
+                    "face_r2",
+                    CubeListBuilder
+                        .create()
+                        .texOffs(1, 0)
+                        .addBox(-2.5F, -12.0F, 0.0F, 5.0F, 24.0F, 0.0F, new CubeDeformation(0.0F)),
+                    PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.7854F, 0.0F)
+                );
 
             return LayerDefinition.create(meshdefinition, 32, 32);
         }
 
         @Override
-        public void setupAnim(GlassArrowEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
+        public void setupAnim(
+            GlassArrowEntity entity,
+            float limbSwing,
+            float limbSwingAmount,
+            float ageInTicks,
+            float netHeadYaw,
+            float headPitch
+        ) {
+        }
 
         @Override
         public void renderToBuffer(
-            PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+            PoseStack poseStack,
+            VertexConsumer buffer,
+            int packedLight,
+            int packedOverlay,
+            int color
+        ) {
             main.render(poseStack, buffer, packedLight, packedOverlay, color);
         }
     }

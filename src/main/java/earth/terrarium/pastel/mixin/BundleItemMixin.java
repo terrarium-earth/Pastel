@@ -10,25 +10,37 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(BundleItem.class)
+@Mixin(
+    BundleItem.class
+)
 public class BundleItemMixin {
 
-    @ModifyVariable(method = "overrideStackedOnOther", at = @At(value = "STORE"))
+    @ModifyVariable(
+        method = "overrideStackedOnOther", at = @At(
+            value = "STORE"
+        )
+    )
     private BundleContents.Mutable onStackClicked$replaceBuilder(BundleContents.Mutable builder, ItemStack stack) {
         return getBuilder(stack);
     }
 
-    @ModifyVariable(method = "overrideOtherStackedOnMe", at = @At(value = "STORE"))
+    @ModifyVariable(
+        method = "overrideOtherStackedOnMe", at = @At(
+            value = "STORE"
+        )
+    )
     private BundleContents.Mutable onClicked$replaceBuilder(BundleContents.Mutable builder, ItemStack stack) {
         return getBuilder(stack);
     }
 
-    @Unique
-    private static BundleContents.Mutable getBuilder(ItemStack stack) {
+    @Unique private static BundleContents.Mutable getBuilder(ItemStack stack) {
         var component = stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
         if (stack.getItem() instanceof ExtendedBundleItem)
             return new ExtendedBundleItem.ComponentBuilder(
-                component, ExtendedBundleItem.getMaxOccupancy(stack), ExtendedBundleItem.getMaxStacks(stack));
+                component,
+                ExtendedBundleItem.getMaxOccupancy(stack),
+                ExtendedBundleItem.getMaxStacks(stack)
+            );
         return new BundleContents.Mutable(component);
     }
 }

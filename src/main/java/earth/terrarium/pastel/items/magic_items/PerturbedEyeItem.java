@@ -40,35 +40,38 @@ public class PerturbedEyeItem extends Item {
                 if (blockState.is(Blocks.END_PORTAL_FRAME)) {
                     Direction direction = blockState.getValue(EndPortalFrameBlock.FACING);
                     facingVertical = direction.equals(Direction.EAST) || direction.equals(Direction.WEST);
-                    targetBlockState = PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
-                                                                            .defaultBlockState()
-                                                                            .setValue(
-                                                                                CrackedEndPortalFrameBlock.EYE_TYPE,
-                                                                                CrackedEndPortalFrameBlock.EndPortalFrameEye.VANILLA_WITH_PERTURBED_EYE
-                                                                            )
-                                                                            .setValue(
-                                                                                CrackedEndPortalFrameBlock.FACING_VERTICAL,
-                                                                                facingVertical
-                                                                            );
+                    targetBlockState = PastelBlocks.CRACKED_END_PORTAL_FRAME
+                        .get()
+                        .defaultBlockState()
+                        .setValue(
+                            CrackedEndPortalFrameBlock.EYE_TYPE,
+                            CrackedEndPortalFrameBlock.EndPortalFrameEye.VANILLA_WITH_PERTURBED_EYE
+                        )
+                        .setValue(
+                            CrackedEndPortalFrameBlock.FACING_VERTICAL,
+                            facingVertical
+                        );
                 } else {
                     facingVertical = blockState.getValue(CrackedEndPortalFrameBlock.FACING_VERTICAL);
-                    targetBlockState = PastelBlocks.CRACKED_END_PORTAL_FRAME.get()
-                                                                            .defaultBlockState()
-                                                                            .setValue(
-                                                                                CrackedEndPortalFrameBlock.EYE_TYPE,
-                                                                                CrackedEndPortalFrameBlock.EndPortalFrameEye.WITH_PERTURBED_EYE
-                                                                            )
-                                                                            .setValue(
-                                                                                CrackedEndPortalFrameBlock.FACING_VERTICAL,
-                                                                                facingVertical
-                                                                            );
+                    targetBlockState = PastelBlocks.CRACKED_END_PORTAL_FRAME
+                        .get()
+                        .defaultBlockState()
+                        .setValue(
+                            CrackedEndPortalFrameBlock.EYE_TYPE,
+                            CrackedEndPortalFrameBlock.EndPortalFrameEye.WITH_PERTURBED_EYE
+                        )
+                        .setValue(
+                            CrackedEndPortalFrameBlock.FACING_VERTICAL,
+                            facingVertical
+                        );
                 }
 
                 Block.pushEntitiesUp(blockState, targetBlockState, world, blockPos);
                 world.setBlock(blockPos, targetBlockState, 2);
                 world.updateNeighbourForOutputSignal(blockPos, Blocks.END_PORTAL_FRAME);
-                context.getItemInHand()
-                       .shrink(1);
+                context
+                    .getItemInHand()
+                    .shrink(1);
                 world.levelEvent(LevelEvent.END_PORTAL_FRAME_FILL, blockPos, 0);
 
                 return InteractionResult.CONSUME;
@@ -80,8 +83,12 @@ public class PerturbedEyeItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.perturbed_eye.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.perturbed_eye.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
 }

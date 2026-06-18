@@ -16,9 +16,16 @@ import org.jetbrains.annotations.Nullable;
 public class ActionableBlockEntity extends BlockEntity {
 
     protected FriendlyStackHandler inventory;
+
     private final int invSize;
 
-    public ActionableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState, int size, boolean listen) {
+    public ActionableBlockEntity(
+        BlockEntityType<?> type,
+        BlockPos pos,
+        BlockState blockState,
+        int size,
+        boolean listen
+    ) {
         super(type, pos, blockState);
         this.invSize = size;
 
@@ -35,7 +42,7 @@ public class ActionableBlockEntity extends BlockEntity {
     }
 
     public void inventoryChanged() {
-        assert level!=null;
+        assert level != null;
         if (level.isClientSide())
             return;
 

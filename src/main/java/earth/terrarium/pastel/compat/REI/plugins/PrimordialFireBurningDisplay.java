@@ -13,13 +13,25 @@ import java.util.Collections;
 public class PrimordialFireBurningDisplay extends PastelDisplay {
 
     public PrimordialFireBurningDisplay(RecipeHolder<PrimordialFireBurningRecipe> recipe) {
-        super(recipe, recipe.value()
-                            .getIngredients()
-                            .stream()
-                            .map(EntryIngredients::ofIngredient)
-                            .toList(), Collections.singletonList(EntryIngredients.of(recipe.value()
-                                                                                           .getResultItem(
-                                                                                               BasicDisplay.registryAccess())))
+        super(
+            recipe,
+            recipe
+                .value()
+                .getIngredients()
+                .stream()
+                .map(EntryIngredients::ofIngredient)
+                .toList(),
+            Collections
+                .singletonList(
+                    EntryIngredients
+                        .of(
+                            recipe
+                                .value()
+                                .getResultItem(
+                                    BasicDisplay.registryAccess()
+                                )
+                        )
+                )
         );
     }
 

@@ -21,7 +21,10 @@ public class FadingBlock extends DecayBlock {
 
     public FadingBlock(Properties settings) {
         super(
-            settings, PastelCommon.CONFIG.FadingDecayTickRate, PastelCommon.CONFIG.FadingCanDestroyBlockEntities, 1,
+            settings,
+            PastelCommon.CONFIG.FadingDecayTickRate,
+            PastelCommon.CONFIG.FadingCanDestroyBlockEntities,
+            1,
             1F
         );
     }
@@ -33,31 +36,55 @@ public class FadingBlock extends DecayBlock {
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         super.setPlacedBy(world, pos, state, placer, itemStack);
 
         if (!world.isClientSide) {
             world.playSound(null, pos, PastelSounds.FADING_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
         } else {
             RandomSource random = world.getRandom();
-            world.addParticle(
-                ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                ((-1.0F + random.nextFloat() * 2.0F) / 12.0F), 0.05, ((-1.0F + random.nextFloat() * 2.0F) / 12.0F)
-            );
-
-            for (int i = 0; i < 10; i++) {
-                world.addParticle(
-                    ColoredCraftingParticleEffect.GRAY, pos.getX() + random.nextFloat(), pos.getY() + 1,
-                    pos.getZ() + random.nextFloat(), ((-1.0F + random.nextFloat() * 2.0F) / 12.0F), 0.05,
+            world
+                .addParticle(
+                    ParticleTypes.POOF,
+                    pos.getX() + 0.5,
+                    pos.getY() + 0.5,
+                    pos.getZ() + 0.5,
+                    ((-1.0F + random.nextFloat() * 2.0F) / 12.0F),
+                    0.05,
                     ((-1.0F + random.nextFloat() * 2.0F) / 12.0F)
                 );
+
+            for (
+                int i = 0;
+                i < 10;
+                i++
+            ) {
+                world
+                    .addParticle(
+                        ColoredCraftingParticleEffect.GRAY,
+                        pos.getX() + random.nextFloat(),
+                        pos.getY() + 1,
+                        pos.getZ() + random.nextFloat(),
+                        ((-1.0F + random.nextFloat() * 2.0F) / 12.0F),
+                        0.05,
+                        ((-1.0F + random.nextFloat() * 2.0F) / 12.0F)
+                    );
             }
         }
     }
 
     @Override
     protected @Nullable BlockState getSpreadState(
-        BlockState stateToSpreadFrom, BlockState stateToSpreadTo, Level world, BlockPos stateToSpreadToPos) {
+        BlockState stateToSpreadFrom,
+        BlockState stateToSpreadTo,
+        Level world,
+        BlockPos stateToSpreadToPos
+    ) {
         if (stateToSpreadTo.is(PastelBlockTags.FADING_SPECIAL_CONVERSIONS)) {
             return stateToSpreadFrom.setValue(CONVERSION, Conversion.SPECIAL);
         } else if (stateToSpreadTo.is(PastelBlockTags.FADING_CONVERSIONS)) {

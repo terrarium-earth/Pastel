@@ -51,8 +51,11 @@ public interface PackEntity<T extends Mob & PackEntity<T>> {
     class FollowClanLeaderGoal<E extends Mob & PackEntity<E>> extends Goal {
 
         private static final int MIN_SEARCH_DELAY = 200;
+
         private final E entity;
+
         private int moveDelay;
+
         private int checkSurroundingDelay;
 
         public FollowClanLeaderGoal(E entity) {
@@ -61,8 +64,11 @@ public interface PackEntity<T extends Mob & PackEntity<T>> {
         }
 
         protected int getSurroundingSearchDelay(E fish) {
-            return reducedTickDelay(MIN_SEARCH_DELAY + fish.getRandom()
-                                                           .nextInt(MIN_SEARCH_DELAY) % 20);
+            return reducedTickDelay(
+                MIN_SEARCH_DELAY + fish
+                    .getRandom()
+                    .nextInt(MIN_SEARCH_DELAY) % 20
+            );
         }
 
         @Override
@@ -81,37 +87,47 @@ public interface PackEntity<T extends Mob & PackEntity<T>> {
             }
         }
 
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings(
+            "unchecked"
+        )
         private void createNewPack() {
-            List<E> possiblePackmates = this.entity.level()
-                                                   .getEntitiesOfClass(
-                                                       (Class<E>) this.entity.getClass(), this.entity.getBoundingBox()
-                                                                                                     .inflate(
-                                                                                                         8.0, 8.0, 8.0),
-                                                       (Predicate<LivingEntity>) livingEntity ->
-                                                           livingEntity instanceof PackEntity<?> packEntity &&
-                                                           (packEntity.canHaveMoreInGroup() || !packEntity.hasLeader())
-                                                   );
+            List<E> possiblePackmates = this.entity
+                .level()
+                .getEntitiesOfClass(
+                    (Class<E>) this.entity.getClass(),
+                    this.entity
+                        .getBoundingBox()
+                        .inflate(
+                            8.0,
+                            8.0,
+                            8.0
+                        ),
+                    (Predicate<LivingEntity>) livingEntity -> livingEntity instanceof PackEntity<?> packEntity && (packEntity
+                        .canHaveMoreInGroup() || !packEntity.hasLeader())
+                );
 
             // search for an existing leader with a non-full group
-            Optional<E> newLeader = possiblePackmates.stream()
-                                                     .filter(E::canHaveMoreInGroup)
-                                                     .findAny();
+            Optional<E> newLeader = possiblePackmates
+                .stream()
+                .filter(E::canHaveMoreInGroup)
+                .findAny();
 
             if (newLeader.isEmpty()) {
                 // promote a new creature to leader
-                newLeader = possiblePackmates.stream()
-                                             .filter(e -> !e.hasLeader())
-                                             .findAny();
+                newLeader = possiblePackmates
+                    .stream()
+                    .filter(e -> !e.hasLeader())
+                    .findAny();
             }
 
             if (newLeader.isPresent()) {
                 E leader = newLeader.get();
-                possiblePackmates.stream()
-                                 .filter((e) -> e != leader)
-                                 .filter((e) -> !e.hasLeader())
-                                 .limit(leader.getMaxGroupSize() - leader.getGroupSize())
-                                 .forEach((e) -> e.joinGroupOf(leader));
+                possiblePackmates
+                    .stream()
+                    .filter((e) -> e != leader)
+                    .filter((e) -> !e.hasLeader())
+                    .limit(leader.getMaxGroupSize() - leader.getGroupSize())
+                    .forEach((e) -> e.joinGroupOf(leader));
             }
         }
 

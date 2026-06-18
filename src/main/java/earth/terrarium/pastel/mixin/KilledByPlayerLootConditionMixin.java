@@ -10,11 +10,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(LootItemKilledByPlayerCondition.class)
+@Mixin(
+    LootItemKilledByPlayerCondition.class
+)
 public abstract class KilledByPlayerLootConditionMixin {
 
-    @Inject(method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z", at = @At(value = "RETURN"),
-            cancellable = true)
+    @Inject(
+        method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z", at = @At(
+            value = "RETURN"
+        ), cancellable = true
+    )
     private void testDropPlayerLoot(LootContext lootContext, CallbackInfoReturnable<Boolean> cir) {
         if (!cir.getReturnValue()) {
             DamageSource damageSource = lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE);

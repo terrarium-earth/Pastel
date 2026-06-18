@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 public class ToggleableItemColorProvider implements ItemColor {
 
     final ItemColor vanillaProvider;
+
     boolean shouldApply;
 
     public ToggleableItemColorProvider(ItemColor vanillaProvider) {

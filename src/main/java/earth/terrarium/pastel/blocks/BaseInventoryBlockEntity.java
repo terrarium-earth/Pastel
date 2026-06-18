@@ -22,8 +22,7 @@ import javax.annotation.Nullable;
 
 public abstract class BaseInventoryBlockEntity extends BlockEntity implements WorldlyContainer, MenuProvider, Nameable {
 
-    @Nullable
-    private Component name;
+    @Nullable private Component name;
 
     public BaseInventoryBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
@@ -39,8 +38,7 @@ public abstract class BaseInventoryBlockEntity extends BlockEntity implements Wo
         return this.getName();
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public Component getCustomName() {
         return this.name;
     }
@@ -63,8 +61,7 @@ public abstract class BaseInventoryBlockEntity extends BlockEntity implements Wo
         }
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
         return this.createMenu(containerId, playerInventory);
     }

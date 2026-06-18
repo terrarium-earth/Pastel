@@ -37,11 +37,22 @@ public class LightSpearEntity extends LightShardBaseEntity {
     }
 
     public static void summonBarrage(
-        Level world, @Nullable LivingEntity user, @Nullable LivingEntity target,
-        Predicate<LivingEntity> targetPredicate, Vec3 position, IntProvider count
+        Level world,
+        @Nullable LivingEntity user,
+        @Nullable LivingEntity target,
+        Predicate<LivingEntity> targetPredicate,
+        Vec3 position,
+        IntProvider count
     ) {
         summonBarrageInternal(
-            world, user, () -> new LightSpearEntity(world, user, 12.0F, 200), target, targetPredicate, position, count);
+            world,
+            user,
+            () -> new LightSpearEntity(world, user, 12.0F, 200),
+            target,
+            targetPredicate,
+            position,
+            count
+        );
     }
 
 }

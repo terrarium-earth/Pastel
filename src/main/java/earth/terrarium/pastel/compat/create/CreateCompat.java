@@ -34,7 +34,7 @@ import static earth.terrarium.pastel.registries.PastelItems.item;
 
 public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
 
-    public static void generateBlockModels(BlockModelGenerators generators){
+    public static void generateBlockModels(BlockModelGenerators generators) {
         PastelModelHelper.BLOCK.cluster(generators, SMALL_ZINC_BUD, ModelTemplates.CROSS);
         PastelModelHelper.BLOCK.cluster(generators, LARGE_ZINC_BUD, PastelModels.CRYSTALLARIEUM_FARMABLE);
         PastelModelHelper.BLOCK.cluster(generators, ZINC_CLUSTER, PastelModels.CRYSTALLARIEUM_FARMABLE);
@@ -42,43 +42,68 @@ public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
         PastelModelHelper.BLOCK.simple(generators, PURE_ZINC_BLOCK);
     }
 
-    public static void generateItemModels(ItemModelGenerators generators){
+    public static void generateItemModels(ItemModelGenerators generators) {
         PastelModelHelper.ITEM.cluster(generators, SMALL_ZINC_BUD, PastelClusterBlock.GrowthStage.SMALL);
         PastelModelHelper.ITEM.cluster(generators, LARGE_ZINC_BUD, PastelClusterBlock.GrowthStage.LARGE);
         PastelModelHelper.ITEM.cluster(generators, ZINC_CLUSTER, PastelClusterBlock.GrowthStage.CLUSTER);
-        PastelModelHelper.ITEM.simple(generators,PURE_ZINC);
+        PastelModelHelper.ITEM.simple(generators, PURE_ZINC);
     }
-    public static DeferredBlock<Block> SMALL_ZINC_BUD = PastelBlocks.register(blockWithItem(
-        "small_zinc_bud", () -> new PastelClusterBlock(
-            BlockBehaviour.Properties.of()
-                                     .pushReaction(PushReaction.DESTROY)
-                                     .destroyTime(1.0f)
-                                     .mapColor(Blocks.LIGHT_GRAY_CONCRETE.defaultMapColor())
-                                     .requiresCorrectToolForDrops()
-                                     .noOcclusion(), PastelClusterBlock.GrowthStage.SMALL
-        ), InkColors.BROWN
-    ));
-    public static DeferredBlock<Block> LARGE_ZINC_BUD = PastelBlocks.register(blockWithItem(
-        "large_zinc_bud",
-        () -> new PastelClusterBlock(
-            BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()),
-            PastelClusterBlock.GrowthStage.LARGE
-        ), InkColors.BROWN
-    ));
-    public static DeferredBlock<Block> ZINC_CLUSTER = PastelBlocks.register(blockWithItem(
-        "zinc_cluster",
-        () -> new PastelClusterBlock(
-            BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()),
-            PastelClusterBlock.GrowthStage.CLUSTER
-        ), InkColors.BROWN
-    ));
-    public static DeferredBlock<Block> PURE_ZINC_BLOCK = PastelBlocks.register(blockWithItem(
-        "pure_zinc_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),
-        InkColors.BROWN
-    ));
 
-    public static DeferredItem<Item> PURE_ZINC = PastelItems.register(
-        item("pure_zinc", () -> new Item(IS.of()), InkColors.BROWN));
+    public static DeferredBlock<Block> SMALL_ZINC_BUD = PastelBlocks
+        .register(
+            blockWithItem(
+                "small_zinc_bud",
+                () -> new PastelClusterBlock(
+                    BlockBehaviour.Properties
+                        .of()
+                        .pushReaction(PushReaction.DESTROY)
+                        .destroyTime(1.0f)
+                        .mapColor(Blocks.LIGHT_GRAY_CONCRETE.defaultMapColor())
+                        .requiresCorrectToolForDrops()
+                        .noOcclusion(),
+                    PastelClusterBlock.GrowthStage.SMALL
+                ),
+                InkColors.BROWN
+            )
+        );
+
+    public static DeferredBlock<Block> LARGE_ZINC_BUD = PastelBlocks
+        .register(
+            blockWithItem(
+                "large_zinc_bud",
+                () -> new PastelClusterBlock(
+                    BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()),
+                    PastelClusterBlock.GrowthStage.LARGE
+                ),
+                InkColors.BROWN
+            )
+        );
+
+    public static DeferredBlock<Block> ZINC_CLUSTER = PastelBlocks
+        .register(
+            blockWithItem(
+                "zinc_cluster",
+                () -> new PastelClusterBlock(
+                    BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()),
+                    PastelClusterBlock.GrowthStage.CLUSTER
+                ),
+                InkColors.BROWN
+            )
+        );
+
+    public static DeferredBlock<Block> PURE_ZINC_BLOCK = PastelBlocks
+        .register(
+            blockWithItem(
+                "pure_zinc_block",
+                () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),
+                InkColors.BROWN
+            )
+        );
+
+    public static DeferredItem<Item> PURE_ZINC = PastelItems
+        .register(
+            item("pure_zinc", () -> new Item(IS.of()), InkColors.BROWN)
+        );
 
     @Override
     public void register() {
@@ -101,7 +126,10 @@ public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
     // NOTE: firstFluid and secondFluid are assumed to be not null without checking,
     // since the default Create event handlers for pipe collisions would throw a NullPointerException otherwise.
     private static BlockState handleBidirectionalCollision(
-        Level world, @NotNull Fluid firstFluid, @NotNull Fluid secondFluid) {
+        Level world,
+        @NotNull Fluid firstFluid,
+        @NotNull Fluid secondFluid
+    ) {
         final FluidState firstState = firstFluid.defaultFluidState();
         final FluidState secondState = secondFluid.defaultFluidState();
 
@@ -114,14 +142,17 @@ public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
     }
 
     private static BlockState spectrumFluidCollision(Level world, FluidState state, FluidState otherState) {
-        if (state.createLegacyBlock()
-                 .getBlock() instanceof PastelFluidBlock spectrumFluid)
+        if (state
+            .createLegacyBlock()
+            .getBlock() instanceof PastelFluidBlock spectrumFluid)
             return spectrumFluid.handleFluidCollision(world, state, otherState);
         return null;
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void registerClient() {
     }
 

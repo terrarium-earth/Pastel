@@ -25,8 +25,12 @@ public class ExtraHealthRingItem extends InkDrainTrinketItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.heartsingers_reward.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.heartsingers_reward.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
         super.appendHoverText(stack, context, tooltip, type);
     }
 
@@ -34,7 +38,10 @@ public class ExtraHealthRingItem extends InkDrainTrinketItem {
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        SlotContext slotContext,
+        ResourceLocation id,
+        ItemStack stack
+    ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
         ;
 
@@ -42,10 +49,11 @@ public class ExtraHealthRingItem extends InkDrainTrinketItem {
         long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
         int extraHearts = getExtraHearts(storedInk);
         if (extraHearts != 0) {
-            modifiers.put(
-                Attributes.MAX_HEALTH,
-                new AttributeModifier(HEALTH_ATTRIBUTE_ID, extraHearts, AttributeModifier.Operation.ADD_VALUE)
-            );
+            modifiers
+                .put(
+                    Attributes.MAX_HEALTH,
+                    new AttributeModifier(HEALTH_ATTRIBUTE_ID, extraHearts, AttributeModifier.Operation.ADD_VALUE)
+                );
         }
 
         return modifiers;

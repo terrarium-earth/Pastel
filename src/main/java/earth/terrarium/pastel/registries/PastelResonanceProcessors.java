@@ -4,7 +4,9 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.interaction.ResonanceProcessor;
 import net.minecraft.resources.ResourceKey;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+    "unused"
+)
 public class PastelResonanceProcessors {
 
     public static final ResourceKey<ResonanceProcessor> PURE_RESONANCES_FROM_ORE = of("pure_resonances_from_ore");
@@ -42,6 +44,5 @@ public class PastelResonanceProcessors {
     public static ResourceKey<ResonanceProcessor> of(String id) {
         return ResourceKey.create(PastelRegistryKeys.RESONANCE_PROCESSOR, PastelCommon.locate(id));
     }
-
 
 }

@@ -29,12 +29,18 @@ public class ShootingStarItem extends BlockItem implements ShootingStar {
     }
 
     public static @NotNull ItemStack getWithRemainingHits(
-        @NotNull ShootingStarItem shootingStarItem, int remainingHits, boolean hardened) {
+        @NotNull ShootingStarItem shootingStarItem,
+        int remainingHits,
+        boolean hardened
+    ) {
         return getWithRemainingHits(shootingStarItem.getDefaultInstance(), remainingHits, hardened);
     }
 
     public static @NotNull ItemStack getWithRemainingHits(
-        @NotNull ItemStack stack, int remainingHits, boolean hardened) {
+        @NotNull ItemStack stack,
+        int remainingHits,
+        boolean hardened
+    ) {
         ShootingStarComponent component = new ShootingStarComponent(remainingHits, hardened);
         stack.set(PastelDataComponentTypes.SHOOTING_STAR, component);
         return stack;
@@ -42,8 +48,9 @@ public class ShootingStarItem extends BlockItem implements ShootingStar {
 
     @Override
     public InteractionResult useOn(@NotNull UseOnContext context) {
-        if (context.getPlayer()
-                   .isShiftKeyDown()) {
+        if (context
+            .getPlayer()
+            .isShiftKeyDown()) {
             // place as block
             return super.useOn(context);
         } else {
@@ -74,18 +81,29 @@ public class ShootingStarItem extends BlockItem implements ShootingStar {
         }
     }
 
-    @NotNull
-    public ShootingStarEntity getEntityForStack(@NotNull Level world, Vec3 pos, ItemStack stack) {
+    @NotNull public ShootingStarEntity getEntityForStack(@NotNull Level world, Vec3 pos, ItemStack stack) {
         return new ShootingStarEntity(
-            world, pos.x, pos.y, pos.z, this.shootingStarType, true, getRemainingHits(stack), isHardened(stack));
+            world,
+            pos.x,
+            pos.y,
+            pos.z,
+            this.shootingStarType,
+            true,
+            getRemainingHits(stack),
+            isHardened(stack)
+        );
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         if (isHardened(stack)) {
-            tooltip.add(Component.translatable("item.pastel.shooting_star.tooltip.hardened")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.shooting_star.tooltip.hardened")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         }
     }
 
@@ -94,18 +112,23 @@ public class ShootingStarItem extends BlockItem implements ShootingStar {
     }
 
     public static boolean isHardened(ItemStack stack) {
-        return stack.getOrDefault(PastelDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT)
-                    .hardened();
+        return stack
+            .getOrDefault(PastelDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT)
+            .hardened();
     }
 
     public static int getRemainingHits(@NotNull ItemStack stack) {
-        return stack.getOrDefault(PastelDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT)
-                    .remainingHits();
+        return stack
+            .getOrDefault(PastelDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT)
+            .remainingHits();
     }
 
     public static void setHardened(ItemStack stack) {
-        ShootingStarComponent component = stack.getOrDefault(
-            PastelDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT);
+        ShootingStarComponent component = stack
+            .getOrDefault(
+                PastelDataComponentTypes.SHOOTING_STAR,
+                ShootingStarComponent.DEFAULT
+            );
         if (component == null) {
             component = new ShootingStarComponent(ShootingStarComponent.DEFAULT.remainingHits(), true);
         } else {

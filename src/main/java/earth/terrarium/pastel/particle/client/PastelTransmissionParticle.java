@@ -28,17 +28,29 @@ import org.joml.Quaternionf;
 import java.util.ArrayList;
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PastelTransmissionParticle extends TransmissionParticle implements EarlyRenderingParticle {
 
     private final ItemRenderer itemRenderer;
+
     private final List<Vec3> travelPositions;
+
     private final ItemStack itemStack;
+
     private final ParticleOptions particleEffect;
 
     public PastelTransmissionParticle(
-        ItemRenderer itemRenderer, ClientLevel world, double x, double y, double z, List<BlockPos> travelPositions,
-        ItemStack stack, int travelTime, int networkColor
+        ItemRenderer itemRenderer,
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        List<BlockPos> travelPositions,
+        ItemStack stack,
+        int travelTime,
+        int networkColor
     ) {
         super(world, x, y, z, new BlockPositionSource(travelPositions.get(travelPositions.size() - 1)), travelTime);
 
@@ -48,17 +60,25 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         this.particleEffect = new DustParticleOptions(ColorHelper.colorIntToVec(networkColor), 0.8F);
 
         this.travelPositions = new ArrayList<>();
-        for (BlockPos p : travelPositions) {
+        for (
+            BlockPos p : travelPositions
+        ) {
             this.travelPositions.add(Vec3.atCenterOf(p));
         }
 
         // spawning sound & particles
         Vec3 startPos = this.travelPositions.get(0);
-        world.playLocalSound(
-            startPos.x(), startPos.y() + 0.25, startPos.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
-            0.15F * PastelCommon.CONFIG.BlockSoundVolume + world.random.nextFloat() / 10F,
-            0.8F + world.random.nextFloat() * 0.3F, true
-        );
+        world
+            .playLocalSound(
+                startPos.x(),
+                startPos.y() + 0.25,
+                startPos.z(),
+                SoundEvents.ITEM_PICKUP,
+                SoundSource.BLOCKS,
+                0.15F * PastelCommon.CONFIG.BlockSoundVolume + world.random.nextFloat() / 10F,
+                0.8F + world.random.nextFloat() * 0.3F,
+                true
+            );
         world.addParticle(ParticleTypes.BUBBLE_POP, startPos.x(), startPos.y() + 0.25, startPos.z(), 0, 0, 0);
     }
 
@@ -70,13 +90,27 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         float travelPercent = (float) this.age / this.lifetime;
         if (travelPercent >= 1.0F) {
             Vec3 destination = this.travelPositions.get(vertexCount);
-            level.playLocalSound(
-                destination.x(), destination.y() + 0.25, destination.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
-                0.1F * PastelCommon.CONFIG.BlockSoundVolume + random.nextFloat() / 10F,
-                0.6F + level.random.nextFloat() * 0.3F, true
-            );
-            level.addParticle(
-                ParticleTypes.BUBBLE_POP, destination.x(), destination.y() + 0.25, destination.z(), 0, 0, 0);
+            level
+                .playLocalSound(
+                    destination.x(),
+                    destination.y() + 0.25,
+                    destination.z(),
+                    SoundEvents.ITEM_PICKUP,
+                    SoundSource.BLOCKS,
+                    0.1F * PastelCommon.CONFIG.BlockSoundVolume + random.nextFloat() / 10F,
+                    0.6F + level.random.nextFloat() * 0.3F,
+                    true
+                );
+            level
+                .addParticle(
+                    ParticleTypes.BUBBLE_POP,
+                    destination.x(),
+                    destination.y() + 0.25,
+                    destination.z(),
+                    0,
+                    0,
+                    0
+                );
             this.remove();
             return;
         }
@@ -104,7 +138,9 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
 
     @Override
     public void renderAsEntity(
-        final PoseStack poseStack, final MultiBufferSource vertexConsumers, final Camera camera,
+        final PoseStack poseStack,
+        final MultiBufferSource vertexConsumers,
+        final Camera camera,
         final float tickDelta
     ) {
         final Vec3 cameraPos = camera.getPosition();
@@ -123,10 +159,17 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         poseStack.mulPose(rot);
         //poseStack.scale(0.65F, 0.65F, 0.65F);
         poseStack.translate(0, -0.15, 0);
-        itemRenderer.renderStatic(
-            itemStack, ItemDisplayContext.GROUND, light, OverlayTexture.NO_OVERLAY, poseStack, vertexConsumers, level,
-            0
-        );
+        itemRenderer
+            .renderStatic(
+                itemStack,
+                ItemDisplayContext.GROUND,
+                light,
+                OverlayTexture.NO_OVERLAY,
+                poseStack,
+                vertexConsumers,
+                level,
+                0
+            );
 
         poseStack.popPose();
     }

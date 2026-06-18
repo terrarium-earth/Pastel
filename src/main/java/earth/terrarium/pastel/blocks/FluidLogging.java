@@ -35,6 +35,7 @@ public class FluidLogging {
         LIQUID_CRYSTAL("liquid_crystal", LiquidCrystalFluidBlock.LUMINANCE);
 
         private final String name;
+
         private final int luminance;
 
         State(String name, int luminance) {
@@ -50,8 +51,9 @@ public class FluidLogging {
         public FluidState getFluidState() {
             switch (this) {
                 case LIQUID_CRYSTAL -> {
-                    return PastelFluids.LIQUID_CRYSTAL.get()
-                                                      .getSource(false);
+                    return PastelFluids.LIQUID_CRYSTAL
+                        .get()
+                        .getSource(false);
                 }
                 case WATER -> {
                     return Fluids.WATER.getSource(false);
@@ -77,13 +79,15 @@ public class FluidLogging {
         }
 
         public boolean isOf(Fluid fluid) {
-            return this.getFluidState()
-                       .is(fluid);
+            return this
+                .getFluidState()
+                .is(fluid);
         }
 
         public boolean isIn(TagKey<Fluid> fluidTag) {
-            return this.getFluidState()
-                       .is(fluidTag);
+            return this
+                .getFluidState()
+                .is(fluidTag);
         }
 
         @Override
@@ -93,17 +97,30 @@ public class FluidLogging {
 
         public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
             if (this == State.LIQUID_CRYSTAL) {
-                PastelFluids.LIQUID_CRYSTAL.get()
-                                           .onEntityCollision(state, world, pos, entity);
+                PastelFluids.LIQUID_CRYSTAL
+                    .get()
+                    .onEntityCollision(state, world, pos, entity);
             }
         }
     }
 
     public static final EnumProperty<State> ANY_INCLUDING_NONE = EnumProperty.create("fluid_logged", State.class);
-    public static final EnumProperty<State> ANY_EXCLUDING_NONE = EnumProperty.create(
-        "fluid_logged", State.class, State.WATER, State.LIQUID_CRYSTAL);
-    public static final EnumProperty<State> NONE_AND_CRYSTAL = EnumProperty.create(
-        "fluid_logged", State.class, State.NOT_LOGGED, State.LIQUID_CRYSTAL);
+
+    public static final EnumProperty<State> ANY_EXCLUDING_NONE = EnumProperty
+        .create(
+            "fluid_logged",
+            State.class,
+            State.WATER,
+            State.LIQUID_CRYSTAL
+        );
+
+    public static final EnumProperty<State> NONE_AND_CRYSTAL = EnumProperty
+        .create(
+            "fluid_logged",
+            State.class,
+            State.NOT_LOGGED,
+            State.LIQUID_CRYSTAL
+        );
 
     public interface PastelFluidLoggable extends PastelFluidDrainable, PastelFluidFillable {
 
@@ -113,9 +130,16 @@ public class FluidLogging {
 
         @Override
         default boolean canPlaceLiquid(
-            @Nullable Player player, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
-            return state.getValue(ANY_INCLUDING_NONE) == State.NOT_LOGGED &&
-                   (fluid == Fluids.WATER || fluid == PastelFluids.LIQUID_CRYSTAL.get());
+            @Nullable Player player,
+            BlockGetter world,
+            BlockPos pos,
+            BlockState state,
+            Fluid fluid
+        ) {
+            return state
+                .getValue(
+                    ANY_INCLUDING_NONE
+                ) == State.NOT_LOGGED && (fluid == Fluids.WATER || fluid == PastelFluids.LIQUID_CRYSTAL.get());
         }
 
         @Override
@@ -124,16 +148,24 @@ public class FluidLogging {
                 if (!world.isClientSide()) {
                     if (fluidState.getType() == Fluids.WATER) {
                         world.setBlock(pos, state.setValue(ANY_INCLUDING_NONE, State.WATER), Block.UPDATE_ALL);
-                        world.scheduleTick(
-                            pos, fluidState.getType(), fluidState.getType()
-                                                                 .getTickDelay(world)
-                        );
+                        world
+                            .scheduleTick(
+                                pos,
+                                fluidState.getType(),
+                                fluidState
+                                    .getType()
+                                    .getTickDelay(world)
+                            );
                     } else if (fluidState.getType() == PastelFluids.LIQUID_CRYSTAL.get()) {
                         world.setBlock(pos, state.setValue(ANY_INCLUDING_NONE, State.LIQUID_CRYSTAL), Block.UPDATE_ALL);
-                        world.scheduleTick(
-                            pos, fluidState.getType(), fluidState.getType()
-                                                                 .getTickDelay(world)
-                        );
+                        world
+                            .scheduleTick(
+                                pos,
+                                fluidState.getType(),
+                                fluidState
+                                    .getType()
+                                    .getTickDelay(world)
+                            );
                     }
                 }
 

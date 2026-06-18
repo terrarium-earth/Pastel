@@ -71,22 +71,34 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings(
+    "unchecked"
+)
 public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
-    implements MultiblockCrafter, SidedCapabilityProvider {
+    implements
+    MultiblockCrafter,
+    SidedCapabilityProvider {
 
     public static final String ITEM_TRANS = "container.pastel.rei.enchantment_upgrade.required_item_count";
+
     public static final String LEVEL_TRANS = "container.pastel.rei.enchantment_upgrade.level";
+
     public static final String OVERCHANTING_TOOLTIP = "container.pastel.rei.enchantment_upgrade.tooltip";
+
     public static final String CYCLING = "container.pastel.rei.enchantment_upgrade.button";
 
     public static final List<Vec3i> OFFSETS;
+
     public static final int CENTER = 0;
+
     public static final int XP_STORAGE = 1;
 
     protected UUID ownerUUID;
+
     protected boolean conflictEnchanting;
+
     protected boolean overenchanting;
+
     private boolean wasCrafting;
 
     protected FriendlyStackHandler inputs;
@@ -94,12 +106,14 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
     private UpgradeHolder upgrades;
 
     private Optional<RecipeHolder<? extends EnchanterRecipe>> cachedRecipe = Optional.empty();
+
     private Optional<EnchantingData> enchData = Optional.empty();
+
     private int craftingTime;
+
     private EnchanterMode mode = EnchanterMode.IDLE;
 
-    @Nullable
-    private Direction itemFacing; // for rendering the item on the enchanter only
+    @Nullable private Direction itemFacing; // for rendering the item on the enchanter only
 
     public EnchanterBlockEntity(BlockPos pos, BlockState state) {
         super(PastelBlockEntities.ENCHANTER.get(), pos, state, XP_STORAGE + 1);
@@ -125,19 +139,26 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         wasCrafting = true;
         craftingTime -= upgrades.getSpeedDelta(level.getRandom());
         if (level.getGameTime() % 12 == 0)
-            level.playSound(
-                null, worldPosition, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS,
-                0.8F * PastelCommon.CONFIG.BlockSoundVolume, 0.8F + level.getRandom()
-                                                                         .nextFloat() * 0.4F
-            );
+            level
+                .playSound(
+                    null,
+                    worldPosition,
+                    SoundEvents.EXPERIENCE_ORB_PICKUP,
+                    SoundSource.BLOCKS,
+                    0.8F * PastelCommon.CONFIG.BlockSoundVolume,
+                    0.8F + level
+                        .getRandom()
+                        .nextFloat() * 0.4F
+                );
 
         if (craftingTime > 0) {
             return;
         }
 
         if (mode.recipeBased) {
-            var recipe = cachedRecipe.get()
-                                     .value();
+            var recipe = cachedRecipe
+                .get()
+                .value();
             finalizeCrafting(recipe);
         } else {
             finalizeEnchanting();
@@ -153,10 +174,16 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
             float randomX = 0.2F + random.nextFloat() * 0.6F;
             float randomZ = 0.2F + random.nextFloat() * 0.6F;
             float randomY = -0.1F + random.nextFloat() * 0.4F;
-            level.addParticle(
-                ColoredCraftingParticleEffect.LIME, worldPosition.getX() + randomX,
-                worldPosition.getY() + 2.5 + randomY, worldPosition.getZ() + randomZ, 0.0D, -0.1D, 0.0D
-            );
+            level
+                .addParticle(
+                    ColoredCraftingParticleEffect.LIME,
+                    worldPosition.getX() + randomX,
+                    worldPosition.getY() + 2.5 + randomY,
+                    worldPosition.getZ() + randomZ,
+                    0.0D,
+                    -0.1D,
+                    0.0D
+                );
 
         }
 
@@ -172,44 +199,64 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         recipe.consumeIngredients(this, level.registryAccess(), scaling);
 
         if (!recipe.noDiscounts())
-            output.setCount(Support.chanceRound(
-                output.getCount()
-                * upgrades.getEffectiveValue(UpgradeType.YIELD), level.random
-            ));
+            output
+                .setCount(
+                    Support
+                        .chanceRound(
+                            output.getCount() * upgrades.getEffectiveValue(UpgradeType.YIELD),
+                            level.random
+                        )
+                );
 
         var center = getCenterStack();
         if (center.getCount() > 1) {
-            MultiblockCrafter.spawnItemStackAsEntitySplitViaMaxCount(
-                level, worldPosition, output,
-                output.getCount(), MultiblockCrafter.RECIPE_STACK_VELOCITY
-            );
+            MultiblockCrafter
+                .spawnItemStackAsEntitySplitViaMaxCount(
+                    level,
+                    worldPosition,
+                    output,
+                    output.getCount(),
+                    MultiblockCrafter.RECIPE_STACK_VELOCITY
+                );
             center.shrink(1);
         } else {
             inputs.setStackInSlot(CENTER, output);
         }
 
-
         var required = recipe.requiredAdvancementIdentifier;
         if (mode == EnchanterMode.CRAFTING) {
             assert recipe instanceof EnchanterCraftingRecipe;
-            Support.areaCriterion(
-                (ServerLevel) level, Support.H_RANGE + 2, getBlockPos(), required, p ->
-                    PastelCriteria.ENCHANTER_CRAFTING.trigger(
-                        p, output, ((EnchanterCraftingRecipe) recipe)
-                            .getRequiredExperience()
-                    )
-            );
-
+            Support
+                .areaCriterion(
+                    (ServerLevel) level,
+                    Support.H_RANGE + 2,
+                    getBlockPos(),
+                    required,
+                    p -> PastelCriteria.ENCHANTER_CRAFTING
+                        .trigger(
+                            p,
+                            output,
+                            ((EnchanterCraftingRecipe) recipe)
+                                .getRequiredExperience()
+                        )
+                );
 
         } else
-            Support.areaCriterion(
-                (ServerLevel) level, Support.H_RANGE + 2, getBlockPos(), required, p ->
-                    PastelCriteria.ENCHANTER_UPGRADING.trigger(
-                        p, EnchantmentHelper.getEnchantmentsForCrafting(output),
-                        ((EnchantmentUpgradeRecipe) recipe).getXpScaling()
-                                                           .apply(scaling)
-                    )
-            );
+            Support
+                .areaCriterion(
+                    (ServerLevel) level,
+                    Support.H_RANGE + 2,
+                    getBlockPos(),
+                    required,
+                    p -> PastelCriteria.ENCHANTER_UPGRADING
+                        .trigger(
+                            p,
+                            EnchantmentHelper.getEnchantmentsForCrafting(output),
+                            ((EnchantmentUpgradeRecipe) recipe)
+                                .getXpScaling()
+                                .apply(scaling)
+                        )
+                );
 
         finalize(PastelSounds.ENCHANTER_FINISH);
     }
@@ -219,35 +266,41 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
             throw new IllegalStateException("Enchantment finalization reached with empty enchantment data? (what?)");
 
         var data = enchData.get();
-        var target = !getCenterStack().is(PastelItemTags.ENCHANTABLE_BOOKS) ?
-                     getCenterStack() : Items.ENCHANTED_BOOK.getDefaultInstance();
+        var target = !getCenterStack().is(PastelItemTags.ENCHANTABLE_BOOKS)
+            ? getCenterStack()
+            : Items.ENCHANTED_BOOK.getDefaultInstance();
 
         // We force both as at this point the operation has been decided on.
-        data.enchantments.forEach((holder, lv) ->
-                                      Ench.addOrUpgradeEnchantment(target, holder, lv, true, true));
+        data.enchantments.forEach((holder, lv) -> Ench.addOrUpgradeEnchantment(target, holder, lv, true, true));
 
         inputs.setStackInSlot(CENTER, target);
         getXpStorage().ifPresent(h -> h.extract(data.xpCost, false));
         finalize(SoundEvents.ENCHANTMENT_TABLE_USE);
 
         updateVanillaStats(target, data.xpCost);
-        Support.areaCriterion(
-            (ServerLevel) level, Support.H_RANGE + 2, getBlockPos(), Optional.empty(), p ->
-                PastelCriteria.ENCHANTER_ENCHANTING.trigger(p, target, data.xpCost)
-        );
+        Support
+            .areaCriterion(
+                (ServerLevel) level,
+                Support.H_RANGE + 2,
+                getBlockPos(),
+                Optional.empty(),
+                p -> PastelCriteria.ENCHANTER_ENCHANTING.trigger(p, target, data.xpCost)
+            );
     }
 
     private void updateRecipeAndMode() {
         if (findRecipe(PastelRecipeTypes.ENCHANTER)) {
             assert cachedRecipe.isPresent();
-            craftingTime = cachedRecipe.get()
-                                       .value()
-                                       .getCraftingTime(1);
+            craftingTime = cachedRecipe
+                .get()
+                .value()
+                .getCraftingTime(1);
             mode = EnchanterMode.CRAFTING;
             enchData = Optional.empty();
         } else if (findRecipe(PastelRecipeTypes.ENCHANTMENT_UPGRADE)) {
-            var recipe = (EnchantmentUpgradeRecipe) cachedRecipe.get()
-                                                                .value();
+            var recipe = (EnchantmentUpgradeRecipe) cachedRecipe
+                .get()
+                .value();
             if (!canUpgrade(recipe)) {
                 clearRecipe();
             } else {
@@ -265,10 +318,14 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         }
 
         if (craftingTime > 0 && !wasCrafting)
-            PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
-                PastelSounds.ENCHANTER_WORKING,
-                (ServerLevel) level, worldPosition, Integer.MAX_VALUE, 1f
-            );
+            PlayBlockBoundSoundInstancePayload
+                .sendPlayBlockBoundSoundInstance(
+                    PastelSounds.ENCHANTER_WORKING,
+                    (ServerLevel) level,
+                    worldPosition,
+                    Integer.MAX_VALUE,
+                    1f
+                );
     }
 
     private boolean findEnchantingData() {
@@ -280,7 +337,11 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         var gilded = center.is(PastelItems.GILDED_BOOK);
         var enchants = new Object2IntArrayMap<Holder<Enchantment>>();
 
-        for (int slot = XP_STORAGE + 1; slot < 10; slot++) {
+        for (
+            int slot = XP_STORAGE + 1;
+            slot < 10;
+            slot++
+        ) {
             var stack = inputs.getStackInSlot(slot);
             var isBook = stack.is(Items.ENCHANTED_BOOK);
             if (stack.isEmpty())
@@ -289,8 +350,16 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
             if (!gilded && !isBook)
                 continue; // Only gilded books can draw from arbitrary items
 
-            enchants.putAll(
-                Ench.getUsableEnchants(stack, center, center.is(PastelItemTags.ENCHANTABLE_BOOKS), conflictEnchanting));
+            enchants
+                .putAll(
+                    Ench
+                        .getUsableEnchants(
+                            stack,
+                            center,
+                            center.is(PastelItemTags.ENCHANTABLE_BOOKS),
+                            conflictEnchanting
+                        )
+                );
 
             if (gilded && !enchants.isEmpty())
                 break; // Gilded book draws only from the first thing available
@@ -301,7 +370,9 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
 
         var cost = 0;
         var enchantability = center.getEnchantmentValue();
-        for (Object2IntMap.Entry<Holder<Enchantment>> entry : enchants.object2IntEntrySet()) {
+        for (
+            Object2IntMap.Entry<Holder<Enchantment>> entry : enchants.object2IntEntrySet()
+        ) {
             cost += Ench.getEnchantmentCost(entry.getKey(), entry.getIntValue(), enchantability);
         }
 
@@ -309,9 +380,12 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
             cost *= 2;
 
         int finalCost = cost;
-        if (!getXpStorage().map(s -> s
-                                         .extract(finalCost, true) == finalCost)
-                           .orElse(false))
+        if (!getXpStorage()
+            .map(
+                s -> s
+                    .extract(finalCost, true) == finalCost
+            )
+            .orElse(false))
             return false;
 
         enchData = Optional.of(new EnchantingData(enchants, cost));
@@ -354,17 +428,25 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
     }
 
     private void finalize(SoundEvent sound) {
-        level.playSound(
-            null, worldPosition,
-            sound, SoundSource.BLOCKS, 1.334F, Support.varFloatCentered(level.random, 0.25F)
-        );
+        level
+            .playSound(
+                null,
+                worldPosition,
+                sound,
+                SoundSource.BLOCKS,
+                1.334F,
+                Support.varFloatCentered(level.random, 0.25F)
+            );
 
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-            (ServerLevel) level,
-            worldPosition.getCenter(),
-            ColoredSparkleRisingParticleEffect.LIME, 75, new Vec3(0.5D, 0.5D, 0.5D),
-            new Vec3(0.1D, -0.1D, 0.1D)
-        );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                (ServerLevel) level,
+                worldPosition.getCenter(),
+                ColoredSparkleRisingParticleEffect.LIME,
+                75,
+                new Vec3(0.5D, 0.5D, 0.5D),
+                new Vec3(0.1D, -0.1D, 0.1D)
+            );
 
         updateRecipeAndMode();
         syncInventories();
@@ -381,7 +463,9 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
 
     private void spawnCraftingOrbs() {
         assert level != null;
-        for (Vec3i offset : OFFSETS) {
+        for (
+            Vec3i offset : OFFSETS
+        ) {
             if (level.getBlockEntity(worldPosition.offset(offset)) instanceof ItemBowlBlockEntity bowl)
                 bowl.spawnOrbParticles(worldPosition.getCenter());
         }
@@ -397,16 +481,20 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
 
     private boolean findRecipe(RecipeType<? extends EnchanterRecipe> type) {
         assert level != null;
-        cachedRecipe = (Optional<RecipeHolder<? extends EnchanterRecipe>>) (Object) level.getRecipeManager()
-                                                                                         .getRecipeFor(
-                                                                                             type,
-                                                                                             new SimpleRecipeInput(
-                                                                                                 inputs), level
-                                                                                         );
+        cachedRecipe = (Optional<RecipeHolder<? extends EnchanterRecipe>>) (Object) level
+            .getRecipeManager()
+            .getRecipeFor(
+                type,
+                new SimpleRecipeInput(
+                    inputs
+                ),
+                level
+            );
 
-        if (cachedRecipe.isPresent() && !cachedRecipe.get()
-                                                     .value()
-                                                     .canPlayerCraft(getOwnerIfOnline())) {
+        if (cachedRecipe.isPresent() && !cachedRecipe
+            .get()
+            .value()
+            .canPlayerCraft(getOwnerIfOnline())) {
             cachedRecipe = Optional.empty();
         }
 
@@ -423,12 +511,18 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         if (level == null || level.isClientSide())
             return;
 
-        inventory.getInternalList()
-                 .set(CENTER, getCenterStack());
-        inventory.getInternalList()
-                 .set(XP_STORAGE, getXPStack());
+        inventory
+            .getInternalList()
+            .set(CENTER, getCenterStack());
+        inventory
+            .getInternalList()
+            .set(XP_STORAGE, getXPStack());
 
-        for (int slot = 2; slot < inputs.getSlots(); slot++) {
+        for (
+            int slot = 2;
+            slot < inputs.getSlots();
+            slot++
+        ) {
             setItemBowlStack(inputs.getStackInSlot(slot), level, bowlPos(slot));
         }
 
@@ -443,7 +537,11 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         inputs.setStackInSlot(CENTER, getItem(CENTER));
         inputs.setStackInSlot(XP_STORAGE, getItem(XP_STORAGE));
 
-        for (int slot = 2; slot < inputs.getSlots(); slot++) {
+        for (
+            int slot = 2;
+            slot < inputs.getSlots();
+            slot++
+        ) {
             inputs.setStackInSlot(slot, getItemBowlStack(level, bowlPos(slot)));
         }
 
@@ -463,13 +561,19 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         this.inputs = new FriendlyStackHandler(10);
         inputs.deserializeNBT(registryLookup, nbt.getCompound("inventory"));
         if (nbt.contains("item_facing", Tag.TAG_STRING)) {
-            this.itemFacing = Direction.valueOf(nbt.getString("item_facing")
-                                                   .toUpperCase(Locale.ROOT));
+            this.itemFacing = Direction
+                .valueOf(
+                    nbt
+                        .getString("item_facing")
+                        .toUpperCase(Locale.ROOT)
+                );
         }
         this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
 
-        cachedRecipe = (Optional<RecipeHolder<? extends EnchanterRecipe>>) (Object) Optional.ofNullable(
-            MultiblockCrafter.getRecipeEntryFromNbt(level, nbt));
+        cachedRecipe = (Optional<RecipeHolder<? extends EnchanterRecipe>>) (Object) Optional
+            .ofNullable(
+                MultiblockCrafter.getRecipeEntryFromNbt(level, nbt)
+            );
 
         if (nbt.contains("Upgrades", Tag.TAG_LIST)) {
             this.upgrades = UpgradeHolder.fromNbt(nbt.getList("Upgrades", Tag.TAG_COMPOUND));
@@ -487,10 +591,13 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         nbt.putBoolean("owner_overEnchants", this.overenchanting);
         nbt.put("inventory", inputs.serializeNBT(registryLookup));
         if (this.itemFacing != null) {
-            nbt.putString(
-                "item_facing", this.itemFacing.toString()
-                                              .toUpperCase(Locale.ROOT)
-            );
+            nbt
+                .putString(
+                    "item_facing",
+                    this.itemFacing
+                        .toString()
+                        .toUpperCase(Locale.ROOT)
+                );
         }
         if (this.upgrades != null) {
             nbt.put("Upgrades", this.upgrades.toNbt());
@@ -498,19 +605,28 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
 
         PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
 
-        cachedRecipe.ifPresent(recipeHolder -> nbt.putString(
-            "CurrentRecipe", recipeHolder.id()
-                                         .toString()
-        ));
+        cachedRecipe
+            .ifPresent(
+                recipeHolder -> nbt
+                    .putString(
+                        "CurrentRecipe",
+                        recipeHolder
+                            .id()
+                            .toString()
+                    )
+            );
     }
 
     @Override
     public void updateInClientWorld() {
         if (level != null)
-            level.sendBlockUpdated(
-                worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition),
-                Block.UPDATE_INVISIBLE
-            );
+            level
+                .sendBlockUpdated(
+                    worldPosition,
+                    level.getBlockState(worldPosition),
+                    level.getBlockState(worldPosition),
+                    Block.UPDATE_INVISIBLE
+                );
     }
 
     public Direction getItemFacingDirection() {
@@ -546,10 +662,17 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
 
     public void playSound(SoundEvent soundEvent, float volume) {
         if (level == null) return;
-        level.playSound(
-            null, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), soundEvent, SoundSource.BLOCKS,
-            volume, 0.9F + level.random.nextFloat() * 0.15F
-        );
+        level
+            .playSound(
+                null,
+                worldPosition.getX(),
+                worldPosition.getY(),
+                worldPosition.getZ(),
+                soundEvent,
+                SoundSource.BLOCKS,
+                volume,
+                0.9F + level.random.nextFloat() * 0.15F
+            );
     }
 
     // PLAYER OWNED
@@ -563,10 +686,16 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
     @Override
     public void setOwner(Player playerEntity) {
         this.ownerUUID = playerEntity.getUUID();
-        this.conflictEnchanting = DatabankUtils.hasAdvancement(
-            playerEntity, PastelAdvancements.Milestones.UNLOCK_CONFLICTED_ENCHANTING_WITH_ENCHANTER);
-        this.overenchanting = DatabankUtils.hasAdvancement(
-            playerEntity, PastelAdvancements.Milestones.UNLOCK_OVERENCHANTING_WITH_ENCHANTER);
+        this.conflictEnchanting = DatabankUtils
+            .hasAdvancement(
+                playerEntity,
+                PastelAdvancements.Milestones.UNLOCK_CONFLICTED_ENCHANTING_WITH_ENCHANTER
+            );
+        this.overenchanting = DatabankUtils
+            .hasAdvancement(
+                playerEntity,
+                PastelAdvancements.Milestones.UNLOCK_OVERENCHANTING_WITH_ENCHANTER
+            );
         setChanged();
     }
 
@@ -618,15 +747,17 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
     }
 
     static {
-        OFFSETS = new ArrayList<>() {{
-            add(new Vec3i(5, 0, -3));
-            add(new Vec3i(5, 0, 3));
-            add(new Vec3i(3, 0, 5));
-            add(new Vec3i(-3, 0, 5));
-            add(new Vec3i(-5, 0, 3));
-            add(new Vec3i(-5, 0, -3));
-            add(new Vec3i(-3, 0, -5));
-            add(new Vec3i(3, 0, -5));
-        }};
+        OFFSETS = new ArrayList<>() {
+            {
+                add(new Vec3i(5, 0, -3));
+                add(new Vec3i(5, 0, 3));
+                add(new Vec3i(3, 0, 5));
+                add(new Vec3i(-3, 0, 5));
+                add(new Vec3i(-5, 0, 3));
+                add(new Vec3i(-5, 0, -3));
+                add(new Vec3i(-3, 0, -5));
+                add(new Vec3i(3, 0, -5));
+            }
+        };
     }
 }

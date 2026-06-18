@@ -27,18 +27,25 @@ import java.util.List;
 public class RadiancePinItem extends PastelTrinketItem {
 
     public static final int CHECK_EVERY_X_TICKS = 20;
+
     public static final int MAX_LIGHT_LEVEL = 7;
-    public static final BlockState LIGHT_BLOCK_STATE = PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get()
-                                                                                        .defaultBlockState()
-                                                                                        .setValue(LightBlock.LEVEL, 15);
-    public static final BlockState LIGHT_BLOCK_STATE_WATER = PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT.get()
-                                                                                              .defaultBlockState()
-                                                                                              .setValue(
-                                                                                                  LightBlock.LEVEL, 15)
-                                                                                              .setValue(
-                                                                                                  LightBlock.WATERLOGGED,
-                                                                                                  true
-                                                                                              );
+
+    public static final BlockState LIGHT_BLOCK_STATE = PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT
+        .get()
+        .defaultBlockState()
+        .setValue(LightBlock.LEVEL, 15);
+
+    public static final BlockState LIGHT_BLOCK_STATE_WATER = PastelBlocks.TEMPORAL_SHIMMERSTONE_LIGHT
+        .get()
+        .defaultBlockState()
+        .setValue(
+            LightBlock.LEVEL,
+            15
+        )
+        .setValue(
+            LightBlock.WATERLOGGED,
+            true
+        );
 
     public RadiancePinItem(Properties settings) {
         super(settings, PastelCommon.locate("unlocks/trinkets/radiance_pin"));
@@ -47,8 +54,12 @@ public class RadiancePinItem extends PastelTrinketItem {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.radiance_pin.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.radiance_pin.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
@@ -84,24 +95,32 @@ public class RadiancePinItem extends PastelTrinketItem {
                 }
                 if (placed) {
                     sendSmallLightCreatedParticle((ServerLevel) world, pos);
-                    world.playSound(
-                        null, entity.getX() + 0.5, entity.getY() + 0.5, entity.getZ() + 0.5,
-                        PastelSounds.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 0.08F,
-                        0.9F + world.random.nextFloat() * 0.2F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            entity.getX() + 0.5,
+                            entity.getY() + 0.5,
+                            entity.getZ() + 0.5,
+                            PastelSounds.RADIANCE_STAFF_PLACE,
+                            SoundSource.PLAYERS,
+                            0.08F,
+                            0.9F + world.random.nextFloat() * 0.2F
+                        );
                 }
             }
         }
     }
 
     public static void sendSmallLightCreatedParticle(ServerLevel world, BlockPos blockPos) {
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-            world, Vec3.atCenterOf(blockPos),
-            PastelParticleTypes.SHIMMERSTONE_SPARKLE,
-            4,
-            Vec3.ZERO,
-            new Vec3(0.1, 0.1, 0.1)
-        );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                world,
+                Vec3.atCenterOf(blockPos),
+                PastelParticleTypes.SHIMMERSTONE_SPARKLE,
+                4,
+                Vec3.ZERO,
+                new Vec3(0.1, 0.1, 0.1)
+            );
     }
 
 }

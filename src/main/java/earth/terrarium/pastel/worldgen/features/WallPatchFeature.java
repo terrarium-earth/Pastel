@@ -36,9 +36,15 @@ public class WallPatchFeature extends Feature<WallPatchFeatureConfig> {
             } else {
                 BlockPos.MutableBlockPos mutable = blockPos.mutable();
 
-                for (Direction direction : shuffledDirections) {
+                for (
+                    Direction direction : shuffledDirections
+                ) {
                     mutable.set(blockPos);
-                    for (int i = 0; i < config.searchRange; ++i) {
+                    for (
+                        int i = 0;
+                        i < config.searchRange;
+                        ++i
+                    ) {
                         mutable.setWithOffset(blockPos, direction);
                         BlockState blockState = structureWorldAccess.getBlockState(mutable);
                         if (!isAirOrWater(blockState) && !blockState.is(config.block)) {
@@ -55,21 +61,33 @@ public class WallPatchFeature extends Feature<WallPatchFeatureConfig> {
     }
 
     public static boolean generate(
-        WorldGenLevel world, BlockPos pos, WallPatchFeatureConfig config, RandomSource random) {
+        WorldGenLevel world,
+        BlockPos pos,
+        WallPatchFeatureConfig config,
+        RandomSource random
+    ) {
         BlockPos.MutableBlockPos mutable = pos.mutable();
 
         BlockState posState;
         Direction direction;
         boolean success = false;
 
-        for (BlockPos currPos : BlockPos.withinManhattan(
-            pos, config.width.sample(random), config.height.sample(random), config.width.sample(random))) {
+        for (
+            BlockPos currPos : BlockPos
+                .withinManhattan(
+                    pos,
+                    config.width.sample(random),
+                    config.height.sample(random),
+                    config.width.sample(random)
+                )
+        ) {
             if (!isAirOrWater(world.getBlockState(currPos))) {
                 continue;
             }
 
-            Iterator<Direction> directionIterator = config.shuffleDirections(random)
-                                                          .iterator();
+            Iterator<Direction> directionIterator = config
+                .shuffleDirections(random)
+                .iterator();
             boolean canBePlaced = false;
             do {
                 direction = directionIterator.next();

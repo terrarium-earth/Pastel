@@ -17,12 +17,17 @@ public class TotemPendantItem extends PastelTrinketItem {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.totem_pendant.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.totem_pendant.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
-
 
 }

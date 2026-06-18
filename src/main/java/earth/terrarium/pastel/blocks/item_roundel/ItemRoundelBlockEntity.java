@@ -20,7 +20,9 @@ public class ItemRoundelBlockEntity extends InWorldInteractionBlockEntity implem
     }
 
     public ItemRoundelBlockEntity(
-        BlockEntityType<? extends ItemRoundelBlockEntity> blockEntityType, BlockPos pos, BlockState state,
+        BlockEntityType<? extends ItemRoundelBlockEntity> blockEntityType,
+        BlockPos pos,
+        BlockState state,
         int inventorySize
     ) {
         super(blockEntityType, pos, state, inventorySize);

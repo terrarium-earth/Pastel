@@ -6,7 +6,9 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 public class FluidHandlerView implements IFluidHandler {
 
     private final IFluidHandler delegator;
+
     private boolean supportsInsertion = true;
+
     private boolean supportsExtraction = true;
 
     public FluidHandlerView(IFluidHandler delegator) {

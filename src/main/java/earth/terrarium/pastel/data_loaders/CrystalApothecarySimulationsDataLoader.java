@@ -27,35 +27,47 @@ import java.util.Optional;
 public class CrystalApothecarySimulationsDataLoader extends SimpleJsonResourceReloadListener {
 
     public static final String ID = "crystal_apothecary_simulation";
+
     public static final CrystalApothecarySimulationsDataLoader INSTANCE = new CrystalApothecarySimulationsDataLoader();
 
     public static final HashMap<Block, SimulatedBlockGrowthEntry> COMPENSATIONS = new HashMap<>();
 
     public record SimulatedBlockGrowthEntry(
-        Collection<Block> validNeighbors, int ticksForCompensationLootPerValidNeighbor, ItemStack compensatedStack
+        Collection<Block> validNeighbors,
+        int ticksForCompensationLootPerValidNeighbor,
+        ItemStack compensatedStack
     ) {
 
-        public static final Codec<SimulatedBlockGrowthEntry> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                                         BuiltInRegistries.BLOCK.byNameCodec()
-                                                                                                                                .listOf()
-                                                                                                                                .xmap(
-                                                                                                                                    list -> (Collection<Block>) list, set -> set.stream()
-                                                                                                                                                                                .toList()
-                                                                                                                                )
-                                                                                                                                .fieldOf("valid_neighbor_blocks")
-                                                                                                                                .forGetter(c -> c.validNeighbors),
-                                                                                                         Codec.INT.optionalFieldOf("ticks_for_compensation_loot_per_valid_neighbor", 10000)
-                                                                                                                  .forGetter(c -> c.ticksForCompensationLootPerValidNeighbor),
-                                                                                                         ItemStack.CODEC.fieldOf("compensated_loot")
-                                                                                                                        .forGetter(c -> c.compensatedStack)
-                                                                                                     )
-                                                                                                     .apply(
-                                                                                                         i,
-                                                                                                         SimulatedBlockGrowthEntry::new
-                                                                                                     ));
+        public static final Codec<SimulatedBlockGrowthEntry> CODEC = RecordCodecBuilder
+            .create(
+                i -> i
+                    .group(
+                        BuiltInRegistries.BLOCK
+                            .byNameCodec()
+                            .listOf()
+                            .xmap(
+                                list -> (Collection<Block>) list,
+                                set -> set
+                                    .stream()
+                                    .toList()
+                            )
+                            .fieldOf("valid_neighbor_blocks")
+                            .forGetter(c -> c.validNeighbors),
+                        Codec.INT
+                            .optionalFieldOf("ticks_for_compensation_loot_per_valid_neighbor", 10000)
+                            .forGetter(c -> c.ticksForCompensationLootPerValidNeighbor),
+                        ItemStack.CODEC
+                            .fieldOf("compensated_loot")
+                            .forGetter(c -> c.compensatedStack)
+                    )
+                    .apply(
+                        i,
+                        SimulatedBlockGrowthEntry::new
+                    )
+            );
 
-        public static final Codec<Optional<SimulatedBlockGrowthEntry>> CONDITIONAL_CODEC
-            = ConditionalOps.createConditionalCodec(CODEC);
+        public static final Codec<Optional<SimulatedBlockGrowthEntry>> CONDITIONAL_CODEC = ConditionalOps
+            .createConditionalCodec(CODEC);
     }
 
     private CrystalApothecarySimulationsDataLoader() {
@@ -64,7 +76,10 @@ public class CrystalApothecarySimulationsDataLoader extends SimpleJsonResourceRe
 
     @Override
     protected void apply(
-        Map<ResourceLocation, JsonElement> prepared, ResourceManager manager, ProfilerFiller profiler) {
+        Map<ResourceLocation, JsonElement> prepared,
+        ResourceManager manager,
+        ProfilerFiller profiler
+    ) {
         COMPENSATIONS.clear();
         RegistryOps<JsonElement> registryops = makeConditionalOps();
 
@@ -72,39 +87,57 @@ public class CrystalApothecarySimulationsDataLoader extends SimpleJsonResourceRe
             JsonObject object = jsonElement.getAsJsonObject();
             var entry = SimulatedBlockGrowthEntry.CONDITIONAL_CODEC.parse(registryops, object);
 
-            if (entry.error()
-                     .isPresent() || entry.result()
-                                          .isEmpty()) {
-                PastelCommon.logError("Crystal Apothecary Simulation error for " + identifier + ": " + entry.error()
-                                                                                                            .get() +
-                                      ". Ignoring that one.");
+            if (entry
+                .error()
+                .isPresent() || entry
+                    .result()
+                    .isEmpty()) {
+                PastelCommon
+                    .logError(
+                        "Crystal Apothecary Simulation error for " + identifier + ": " + entry
+                            .error()
+                            .get() + ". Ignoring that one."
+                    );
                 return;
             }
 
-            if (entry.result()
-                     .get()
-                     .isEmpty())
+            if (entry
+                .result()
+                .get()
+                .isEmpty())
                 return;
 
-            DataResult<Block> buddingBlock = BuiltInRegistries.BLOCK.byNameCodec()
-                                                                    .decode(
-                                                                        JsonOps.INSTANCE, object.get("budding_block"))
-                                                                    .map(Pair::getFirst);
-            if (buddingBlock.error()
-                            .isPresent() || buddingBlock.result()
-                                                        .isEmpty()) {
-                PastelCommon.logError("Crystal apothecary simulation error for " + identifier + ": " +
-                                      buddingBlock.error()
-                                                  .get() + ". Ignoring that one.");
+            DataResult<Block> buddingBlock = BuiltInRegistries.BLOCK
+                .byNameCodec()
+                .decode(
+                    JsonOps.INSTANCE,
+                    object.get("budding_block")
+                )
+                .map(Pair::getFirst);
+            if (buddingBlock
+                .error()
+                .isPresent() || buddingBlock
+                    .result()
+                    .isEmpty()) {
+                PastelCommon
+                    .logError(
+                        "Crystal apothecary simulation error for " + identifier + ": " + buddingBlock
+                            .error()
+                            .get() + ". Ignoring that one."
+                    );
                 return;
             }
 
-            COMPENSATIONS.put(
-                buddingBlock.result()
-                            .get(), entry.result()
-                                         .get()
-                                         .get()
-            );
+            COMPENSATIONS
+                .put(
+                    buddingBlock
+                        .result()
+                        .get(),
+                    entry
+                        .result()
+                        .get()
+                        .get()
+                );
         });
     }
 

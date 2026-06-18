@@ -12,10 +12,15 @@ import java.util.List;
 public class PedestalBlockItem extends BlockItem {
 
     private final PedestalVariant pedestalVariant;
+
     private final Component tooltipText;
 
     public PedestalBlockItem(
-        Block block, Properties settings, PedestalVariant pedestalVariant, String tooltipTextString) {
+        Block block,
+        Properties settings,
+        PedestalVariant pedestalVariant,
+        String tooltipTextString
+    ) {
         super(block, settings);
         this.pedestalVariant = pedestalVariant;
         this.tooltipText = Component.translatable(tooltipTextString);

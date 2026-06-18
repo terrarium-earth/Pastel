@@ -13,7 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Optional;
 
 public class CrystalApothecaryCollectingCriterion
-    extends SimpleCriterionTrigger<CrystalApothecaryCollectingCriterion.Conditions> {
+    extends
+    SimpleCriterionTrigger<CrystalApothecaryCollectingCriterion.Conditions> {
 
     public static final ResourceLocation ID = PastelCommon.locate("collect_using_crystal_apothecary");
 
@@ -31,16 +32,24 @@ public class CrystalApothecaryCollectingCriterion
         ItemPredicate item
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<CrystalApothecaryCollectingCriterion.Conditions> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                                    ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                               .forGetter(CrystalApothecaryCollectingCriterion.Conditions::player),
-                                    ItemPredicate.CODEC.optionalFieldOf("item", ItemPredicate.Builder.item()
-                                                                                                     .build()
-                                                 )
-                                                       .forGetter(CrystalApothecaryCollectingCriterion.Conditions::item)
-                                )
-                                .apply(instance, CrystalApothecaryCollectingCriterion.Conditions::new));
+        public static final Codec<CrystalApothecaryCollectingCriterion.Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(CrystalApothecaryCollectingCriterion.Conditions::player),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf(
+                                "item",
+                                ItemPredicate.Builder
+                                    .item()
+                                    .build()
+                            )
+                            .forGetter(CrystalApothecaryCollectingCriterion.Conditions::item)
+                    )
+                    .apply(instance, CrystalApothecaryCollectingCriterion.Conditions::new)
+            );
 
         public boolean matches(ItemStack stack) {
             return this.item.test(stack);

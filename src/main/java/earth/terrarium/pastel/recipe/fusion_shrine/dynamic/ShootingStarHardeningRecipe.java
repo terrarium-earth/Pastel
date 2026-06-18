@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.fusion_shrine.dynamic;
 
-
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
@@ -26,23 +25,38 @@ import java.util.Optional;
 public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("collect_all_shooting_star_variants");
-    public static final Component DESCRIPTION = Component.translatable(
-        "pastel.recipe.fusion_shrine.explanation.shooting_star_hardening");
+
+    public static final Component DESCRIPTION = Component
+        .translatable(
+            "pastel.recipe.fusion_shrine.explanation.shooting_star_hardening"
+        );
 
     public ShootingStarHardeningRecipe() {
         super(
-            "", false, Optional.of(UNLOCK_IDENTIFIER),
+            "",
+            false,
+            Optional.of(UNLOCK_IDENTIFIER),
             List.of(IngredientStack.ofTag(PastelItemTags.SHOOTING_STARS), IngredientStack.ofItems(Items.DIAMOND)),
-            FluidIngredient.of(Fluids.WATER), getHardenedShootingStar(),
-            5, 100, true, true, true, new ArrayList<>(), FusionShrineRecipeWorldEffect.NOTHING, new ArrayList<>(),
-            FusionShrineRecipeWorldEffect.NOTHING, DESCRIPTION
+            FluidIngredient.of(Fluids.WATER),
+            getHardenedShootingStar(),
+            5,
+            100,
+            true,
+            true,
+            true,
+            new ArrayList<>(),
+            FusionShrineRecipeWorldEffect.NOTHING,
+            new ArrayList<>(),
+            FusionShrineRecipeWorldEffect.NOTHING,
+            DESCRIPTION
         );
     }
 
     private static ItemStack getHardenedShootingStar() {
-        ItemStack stack = PastelBlocks.GLISTERING_SHOOTING_STAR.get()
-                                                               .asItem()
-                                                               .getDefaultInstance();
+        ItemStack stack = PastelBlocks.GLISTERING_SHOOTING_STAR
+            .get()
+            .asItem()
+            .getDefaultInstance();
         ShootingStarItem.setHardened(stack);
         return stack;
     }
@@ -57,7 +71,11 @@ public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
         ItemStack shootingStarStack = ItemStack.EMPTY;
         ItemStack diamondStack = ItemStack.EMPTY;
 
-        for (int j = 0; j < fusionShrineBlockEntity.getContainerSize(); ++j) {
+        for (
+            int j = 0;
+            j < fusionShrineBlockEntity.getContainerSize();
+            ++j
+        ) {
             ItemStack itemStack = fusionShrineBlockEntity.getItem(j);
             if (!itemStack.isEmpty()) {
                 if (itemStack.getItem() instanceof ShootingStarItem) {

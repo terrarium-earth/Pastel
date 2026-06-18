@@ -98,30 +98,62 @@ import java.util.UUID;
 
 public class KindlingEntity extends AbstractHorse implements RangedAttackMob, NeutralMob, Shearable {
 
-    protected static final EntityDataAccessor<KindlingVariant> VARIANT = SynchedEntityData.defineId(
-        KindlingEntity.class, PastelTrackedDataHandlers.KINDLING_VARIANT);
+    protected static final EntityDataAccessor<KindlingVariant> VARIANT = SynchedEntityData
+        .defineId(
+            KindlingEntity.class,
+            PastelTrackedDataHandlers.KINDLING_VARIANT
+        );
+
     protected static final Ingredient FOOD = Ingredient.of(PastelItemTags.KINDLING_FOOD);
 
     private static final UniformInt ANGER_TIME_RANGE = TimeUtil.rangeOfSeconds(30, 59);
-    private static final EntityDataAccessor<Integer> ANGER = SynchedEntityData.defineId(
-        KindlingEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> CLIPPED = SynchedEntityData.defineId(
-        KindlingEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> CHILL = SynchedEntityData.defineId(
-        KindlingEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> EEPY_SNEEZE = SynchedEntityData.defineId(
-        KindlingEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> PLAYING = SynchedEntityData.defineId(
-        KindlingEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> INCITED = SynchedEntityData.defineId(
-        KindlingEntity.class, EntityDataSerializers.BOOLEAN);
+
+    private static final EntityDataAccessor<Integer> ANGER = SynchedEntityData
+        .defineId(
+            KindlingEntity.class,
+            EntityDataSerializers.INT
+        );
+
+    private static final EntityDataAccessor<Integer> CLIPPED = SynchedEntityData
+        .defineId(
+            KindlingEntity.class,
+            EntityDataSerializers.INT
+        );
+
+    private static final EntityDataAccessor<Integer> CHILL = SynchedEntityData
+        .defineId(
+            KindlingEntity.class,
+            EntityDataSerializers.INT
+        );
+
+    private static final EntityDataAccessor<Integer> EEPY_SNEEZE = SynchedEntityData
+        .defineId(
+            KindlingEntity.class,
+            EntityDataSerializers.INT
+        );
+
+    private static final EntityDataAccessor<Boolean> PLAYING = SynchedEntityData
+        .defineId(
+            KindlingEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
+
+    private static final EntityDataAccessor<Boolean> INCITED = SynchedEntityData
+        .defineId(
+            KindlingEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
 
     protected @Nullable UUID angryAt;
 
     public AnimationState standingAnimationState = new AnimationState();
+
     public AnimationState walkingAnimationState = new AnimationState();
+
     public AnimationState standingAngryAnimationState = new AnimationState();
+
     public AnimationState walkingAngryAnimationState = new AnimationState();
+
     public AnimationState glidingAnimationState = new AnimationState();
 
     public KindlingEntity(EntityType<? extends KindlingEntity> entityType, Level world) {
@@ -133,20 +165,23 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
     }
 
     public static AttributeSupplier.Builder createKindlingAttributes() {
-        return Mob.createMobAttributes()
-                  .add(Attributes.MAX_HEALTH, 100.0D)
-                  .add(Attributes.ARMOR, 25.0D)
-                  .add(Attributes.ARMOR_TOUGHNESS, 12.0D)
-                  .add(AdditionalEntityAttributes.MAGIC_PROTECTION, 6.0D)
-                  .add(Attributes.MOVEMENT_SPEED, 0.6D)
-                  .add(Attributes.ATTACK_DAMAGE, 25F)
-                  .add(Attributes.ATTACK_KNOCKBACK, 1.5F)
-                  .add(Attributes.JUMP_STRENGTH, 2.4D);
+        return Mob
+            .createMobAttributes()
+            .add(Attributes.MAX_HEALTH, 100.0D)
+            .add(Attributes.ARMOR, 25.0D)
+            .add(Attributes.ARMOR_TOUGHNESS, 12.0D)
+            .add(AdditionalEntityAttributes.MAGIC_PROTECTION, 6.0D)
+            .add(Attributes.MOVEMENT_SPEED, 0.6D)
+            .add(Attributes.ATTACK_DAMAGE, 25F)
+            .add(Attributes.ATTACK_KNOCKBACK, 1.5F)
+            .add(Attributes.JUMP_STRENGTH, 2.4D);
     }
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(
-        ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType spawnReason,
+        ServerLevelAccessor world,
+        DifficultyInstance difficulty,
+        MobSpawnType spawnReason,
         @Nullable SpawnGroupData entityData
     ) {
         this.setPose(Pose.STANDING);
@@ -221,8 +256,9 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
         this.addPersistentAngerSaveData(nbt);
-        Optional.ofNullable(PastelRegistries.KINDLING_VARIANT.getKey(this.getKindlingVariant()))
-                .ifPresent(id -> nbt.putString("variant", id.toString()));
+        Optional
+            .ofNullable(PastelRegistries.KINDLING_VARIANT.getKey(this.getKindlingVariant()))
+            .ifPresent(id -> nbt.putString("variant", id.toString()));
         nbt.putInt("chillTime", getChillTime());
         nbt.putInt("eepyTime", getEepyTime());
         nbt.putBoolean("playing", isPlaying());
@@ -233,8 +269,10 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
         super.readAdditionalSaveData(nbt);
         this.readPersistentAngerSaveData(this.level(), nbt);
 
-        KindlingVariant variant = PastelRegistries.KINDLING_VARIANT.get(
-            ResourceLocation.tryParse(nbt.getString("variant")));
+        KindlingVariant variant = PastelRegistries.KINDLING_VARIANT
+            .get(
+                ResourceLocation.tryParse(nbt.getString("variant"))
+            );
         this.setKindlingVariant(variant == null ? KindlingVariant.DEFAULT : variant);
 
         setChillTime(nbt.getInt("chillTime"));
@@ -249,14 +287,18 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
         return FOOD.test(stack);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-        KindlingEntity baby = PastelEntityTypes.KINDLING.get()
-                                                        .create(world);
+        KindlingEntity baby = PastelEntityTypes.KINDLING
+            .get()
+            .create(world);
         if (baby != null) {
-            baby.setKindlingVariant(
-                this.random.nextBoolean() ? this.getKindlingVariant() : ((KindlingEntity) entity).getKindlingVariant());
+            baby
+                .setKindlingVariant(
+                    this.random.nextBoolean()
+                        ? this.getKindlingVariant()
+                        : ((KindlingEntity) entity).getKindlingVariant()
+                );
         }
         return baby;
     }
@@ -277,8 +319,8 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
     }
 
     public boolean isBodyArmorItem(ItemStack item) {
-        return item.getItem() instanceof AnimalArmorItem animalArmorItem &&
-               animalArmorItem.getBodyType() == AnimalArmorItem.BodyType.EQUESTRIAN;
+        return item.getItem() instanceof AnimalArmorItem animalArmorItem && animalArmorItem
+            .getBodyType() == AnimalArmorItem.BodyType.EQUESTRIAN;
     }
 
     @Override
@@ -351,8 +393,9 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
     protected void customServerAiStep() {
         super.customServerAiStep();
 
-        if (!this.level()
-                 .isClientSide()) {
+        if (!this
+            .level()
+            .isClientSide()) {
             this.updatePersistentAnger((ServerLevel) this.level(), false);
             this.setClipped(this.getClipTime() - 1);
             this.setChillTime(this.getChillTime() - 1);
@@ -385,7 +428,12 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 
     @Override
     public boolean shouldBlockExplode(
-        Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float explosionPower) {
+        Explosion explosion,
+        BlockGetter world,
+        BlockPos pos,
+        BlockState state,
+        float explosionPower
+    ) {
         return super.shouldBlockExplode(explosion, world, pos, state, explosionPower);
     }
 
@@ -393,49 +441,95 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
         var world = level();
 
         world.addParticle(ParticleTypes.EXPLOSION_EMITTER, getX(), getY(), getZ(), 1.0, 0.0, 0.0);
-        world.explode(
-            this, PastelDamageTypes.incandescence(world), null, getX(), getY(), getZ(), 10F * blastMod, true,
-            Level.ExplosionInteraction.MOB
-        );
+        world
+            .explode(
+                this,
+                PastelDamageTypes.incandescence(world),
+                null,
+                getX(),
+                getY(),
+                getZ(),
+                10F * blastMod,
+                true,
+                Level.ExplosionInteraction.MOB
+            );
         playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE, 2F, 0.5F);
         playSound(PastelSounds.DEEP_CRYSTAL_RING, 2F, 0.334F);
         playSound(SoundEvents.ENDER_DRAGON_AMBIENT, 1F, 2F);
 
-        ((ServerLevel) world).getPlayers(p -> p.distanceTo(this) < 64)
-                             .forEach(p -> {
-                                 Support.grantAdvancementCriterion(p, "ascend_kindling", "he_explarded");
-                             });
+        ((ServerLevel) world)
+            .getPlayers(p -> p.distanceTo(this) < 64)
+            .forEach(p -> {
+                Support.grantAdvancementCriterion(p, "ascend_kindling", "he_explarded");
+            });
 
-        for (int i = 0; i < 5; i++) {
-            ((ServerLevel) world).sendParticles(
-                ParticleTypes.DRAGON_BREATH, getRandomX(1.5), getY() + random.nextDouble(), getRandomZ(1.5),
-                random.nextInt(6) + 1, 0, random.nextFloat() / 3, 0, 0
-            );
-            ((ServerLevel) world).sendParticles(
-                ParticleTypes.END_ROD, getRandomX(1.5), getY() + random.nextDouble(), getRandomZ(1.5),
-                random.nextInt(6) + 1, 0, random.nextFloat() / 3, 0, 0
-            );
+        for (
+            int i = 0;
+            i < 5;
+            i++
+        ) {
+            ((ServerLevel) world)
+                .sendParticles(
+                    ParticleTypes.DRAGON_BREATH,
+                    getRandomX(1.5),
+                    getY() + random.nextDouble(),
+                    getRandomZ(1.5),
+                    random.nextInt(6) + 1,
+                    0,
+                    random.nextFloat() / 3,
+                    0,
+                    0
+                );
+            ((ServerLevel) world)
+                .sendParticles(
+                    ParticleTypes.END_ROD,
+                    getRandomX(1.5),
+                    getY() + random.nextDouble(),
+                    getRandomZ(1.5),
+                    random.nextInt(6) + 1,
+                    0,
+                    random.nextFloat() / 3,
+                    0,
+                    0
+                );
         }
 
-        for (BlockPos transmutePos : BlockPos.withinManhattan(
-            blockPosition(), 12 * blastMod, 6 * blastMod, 12 * blastMod)) {
+        for (
+            BlockPos transmutePos : BlockPos
+                .withinManhattan(
+                    blockPosition(),
+                    12 * blastMod,
+                    6 * blastMod,
+                    12 * blastMod
+                )
+        ) {
             var distance = Math.sqrt(transmutePos.distSqr(blockPosition()));
             if (distance <= 6 * blastMod || random.nextFloat() < 1 / ((distance - 6) / 3)) {
                 var candidate = world.getBlockState(transmutePos);
 
                 // Do not the bedrock nor the claims
-                if (candidate.getDestroySpeed(world, transmutePos) < 0 || !GenericClaimModsCompat.canBreak(
-                    world, transmutePos, this))
+                if (candidate.getDestroySpeed(world, transmutePos) < 0 || !GenericClaimModsCompat
+                    .canBreak(
+                        world,
+                        transmutePos,
+                        this
+                    ))
                     continue;
 
                 if (candidate.isAir()) {
                     if (random.nextFloat() < 0.125F) {
-                        ((ServerLevel) world).sendParticles(
-                            ParticleTypes.DRAGON_BREATH, transmutePos.getX() + random.nextDouble(),
-                            transmutePos.getY() + random.nextDouble(), transmutePos.getZ() + random.nextDouble(),
-                            random.nextInt(3) + 1, random.nextFloat() / 5 - 0.1, random.nextFloat() / 5 - 0.1,
-                            random.nextFloat() / 5 - 0.1, 0
-                        );
+                        ((ServerLevel) world)
+                            .sendParticles(
+                                ParticleTypes.DRAGON_BREATH,
+                                transmutePos.getX() + random.nextDouble(),
+                                transmutePos.getY() + random.nextDouble(),
+                                transmutePos.getZ() + random.nextDouble(),
+                                random.nextInt(3) + 1,
+                                random.nextFloat() / 5 - 0.1,
+                                random.nextFloat() / 5 - 0.1,
+                                random.nextFloat() / 5 - 0.1,
+                                0
+                            );
                     }
                     continue;
                 }
@@ -444,8 +538,9 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
                     continue;
                 }
 
-                if (candidate.getFluidState()
-                             .is(FluidTags.WATER)) {
+                if (candidate
+                    .getFluidState()
+                    .is(FluidTags.WATER)) {
                     continue;
                 }
 
@@ -466,10 +561,13 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
                 }
 
                 if (candidate.is(PastelBlockTags.BASE_STONE_IMBRIFER)) {
-                    world.setBlockAndUpdate(
-                        transmutePos, PastelBlocks.BLACK_MATERIA.get()
-                                                                .defaultBlockState()
-                    );
+                    world
+                        .setBlockAndUpdate(
+                            transmutePos,
+                            PastelBlocks.BLACK_MATERIA
+                                .get()
+                                .defaultBlockState()
+                        );
                     continue;
                 }
 
@@ -514,8 +612,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
             this.setDeltaMovement(velocity.multiply(1.0, 0.6, 1.0));
         }
         if (onGround || this.fallDistance < 0.2) {
-            boolean isMoving = this.getX() - this.xo != 0 ||
-                               this.getZ() - this.zo != 0; // pretty ugly, but also triggers when being ridden
+            boolean isMoving = this.getX() - this.xo != 0 || this.getZ() - this.zo != 0; // pretty ugly, but also triggers when being ridden
             if (getRemainingPersistentAngerTime() > 0) {
                 this.setPose(isMoving ? Pose.EMERGING : Pose.ROARING);
             } else {
@@ -546,8 +643,9 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
         ItemStack handStack = player.getMainHandItem();
         if (this.readyForShearing() && handStack.is(Tags.Items.TOOLS_SHEAR)) {
 
-            if (!this.level()
-                     .isClientSide()) {
+            if (!this
+                .level()
+                .isClientSide()) {
                 setTarget(player);
                 takeRevenge(player.getUUID());
                 this.makeMad();
@@ -559,8 +657,12 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
                 }
             }
 
-            return InteractionResult.sidedSuccess(this.level()
-                                                      .isClientSide());
+            return InteractionResult
+                .sidedSuccess(
+                    this
+                        .level()
+                        .isClientSide()
+                );
         }
 
         boolean bl = !this.isBaby() && this.isTamed() && player.isSecondaryUseActive();
@@ -586,11 +688,14 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 
     @Override
     public void shear(SoundSource shearedSoundCategory) {
-        this.level()
+        this
+            .level()
             .playSound(null, this, SoundEvents.SHEEP_SHEAR, shearedSoundCategory, 1.0f, 1.0f);
 
         setClipped(4800); // 4 minutes
-        for (ItemStack clippedStack : getClippedStacks((ServerLevel) this.level())) {
+        for (
+            ItemStack clippedStack : getClippedStacks((ServerLevel) this.level())
+        ) {
             spawnAtLocation(clippedStack, 0.3F);
         }
     }
@@ -610,10 +715,16 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
         }
 
         if (this.isBaby()) {
-            this.level()
+            this
+                .level()
                 .addParticle(
-                    ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0), this.getRandomY() + 0.5, this.getRandomZ(1.0),
-                    0.0, 0.0, 0.0
+                    ParticleTypes.HAPPY_VILLAGER,
+                    this.getRandomX(1.0),
+                    this.getRandomY() + 0.5,
+                    this.getRandomZ(1.0),
+                    0.0,
+                    0.0,
+                    0.0
                 );
             if (!this.level().isClientSide) {
                 this.ageUp(20);
@@ -643,12 +754,14 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
     public void updatePersistentAnger(ServerLevel world, boolean angerPersistent) {
         LivingEntity livingEntity = this.getTarget();
         UUID uUID = this.getPersistentAngerTarget();
-        if ((livingEntity == null || livingEntity.isDeadOrDying()) && uUID != null && world.getEntity(
-            uUID) instanceof Mob) {
+        if ((livingEntity == null || livingEntity.isDeadOrDying()) && uUID != null && world
+            .getEntity(
+                uUID
+            ) instanceof Mob) {
             this.stopBeingAngry();
         } else {
-            if (this.getRemainingPersistentAngerTime() > 0 &&
-                (livingEntity == null || livingEntity.getType() != EntityType.PLAYER || !angerPersistent)) {
+            if (this.getRemainingPersistentAngerTime() > 0 && (livingEntity == null || livingEntity
+                .getType() != EntityType.PLAYER || !angerPersistent)) {
                 this.setRemainingPersistentAngerTime(this.getRemainingPersistentAngerTime() - 1);
                 if (this.getRemainingPersistentAngerTime() == 0) {
                     this.stopBeingAngry();
@@ -659,15 +772,20 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
     }
 
     public List<ItemStack> getClippedStacks(ServerLevel world) {
-        LootTable lootTable = world.getServer()
-                                   .reloadableRegistries()
-                                   .getLootTable(this.getKindlingVariant()
-                                                     .getClippingLootTable());
-        return lootTable.getRandomItems(
-            new LootParams.Builder(world)
-                .withParameter(LootContextParams.THIS_ENTITY, KindlingEntity.this)
-                .create(LootContextParamSets.PIGLIN_BARTER)
-        );
+        LootTable lootTable = world
+            .getServer()
+            .reloadableRegistries()
+            .getLootTable(
+                this
+                    .getKindlingVariant()
+                    .getClippingLootTable()
+            );
+        return lootTable
+            .getRandomItems(
+                new LootParams.Builder(world)
+                    .withParameter(LootContextParams.THIS_ENTITY, KindlingEntity.this)
+                    .create(LootContextParamSets.PIGLIN_BARTER)
+            );
     }
 
     protected void coughAt(LivingEntity target) {
@@ -679,13 +797,16 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
         kindlingCoughEntity.shoot(d, e + g, f, 1.5F, 10.0F);
 
         if (!this.isSilent()) {
-            this.playSound(
-                PastelSounds.ENTITY_KINDLING_SHOOT, 1.0F,
-                1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F
-            );
+            this
+                .playSound(
+                    PastelSounds.ENTITY_KINDLING_SHOOT,
+                    1.0F,
+                    1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F
+                );
         }
 
-        this.level()
+        this
+            .level()
             .addFreshEntity(kindlingCoughEntity);
     }
 
@@ -761,8 +882,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
         startPersistentAngerTimer();
     }
 
-    public
-    @Override void startPersistentAngerTimer() {
+    public @Override void startPersistentAngerTimer() {
         this.setRemainingPersistentAngerTime(ANGER_TIME_RANGE.sample(this.random));
     }
 
@@ -778,8 +898,8 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 
     @Override
     public boolean canMate(Animal other) {
-        return other != this && other instanceof KindlingEntity otherKindling && this.canParent() &&
-               otherKindling.canParent();
+        return other != this && other instanceof KindlingEntity otherKindling && this.canParent() && otherKindling
+            .canParent();
     }
 
     protected class CoughRevengeGoal extends HurtByTargetGoal {
@@ -823,8 +943,10 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
             var angryAt = kindling.getPersistentAngerTarget();
             if (angryAt == null)
                 return false;
-            return super.canUse() && kindling.isAngry() && !isPlaying() && KindlingEntity.this.distanceTo(
-                this.mob.getTarget()) < 5F;
+            return super.canUse() && kindling.isAngry() && !isPlaying() && KindlingEntity.this
+                .distanceTo(
+                    this.mob.getTarget()
+                ) < 5F;
         }
 
         @Override
@@ -902,8 +1024,9 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
                     return false;
             }
 
-            if (isIncited() || (this.randomInterval > 0 && this.mob.getRandom()
-                                                                   .nextInt(this.randomInterval) != 0)) {
+            if (isIncited() || (this.randomInterval > 0 && this.mob
+                .getRandom()
+                .nextInt(this.randomInterval) != 0)) {
                 this.findTarget();
 
                 if (this.target != null) {
@@ -924,7 +1047,11 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
     protected class CancellableProjectileAttackGoal extends RangedAttackGoal {
 
         public CancellableProjectileAttackGoal(
-            RangedAttackMob mob, double mobSpeed, int intervalTicks, float maxShootRange) {
+            RangedAttackMob mob,
+            double mobSpeed,
+            int intervalTicks,
+            float maxShootRange
+        ) {
             super(mob, mobSpeed, intervalTicks, maxShootRange);
         }
 

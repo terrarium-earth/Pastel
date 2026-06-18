@@ -10,14 +10,19 @@ import java.util.Optional;
 // TODO - Review
 public record ColorPredicate(Optional<InkColor> color) {
 
-    public static final Codec<ColorPredicate> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        InkColor.CODEC.optionalFieldOf("color")
-                                                                                                                      .forGetter(ColorPredicate::color)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        ColorPredicate::new
-                                                                                                    ));
+    public static final Codec<ColorPredicate> CODEC = RecordCodecBuilder
+        .create(
+            instance -> instance
+                .group(
+                    InkColor.CODEC
+                        .optionalFieldOf("color")
+                        .forGetter(ColorPredicate::color)
+                )
+                .apply(
+                    instance,
+                    ColorPredicate::new
+                )
+        );
 
     public static final ColorPredicate ANY;
 
@@ -29,14 +34,14 @@ public record ColorPredicate(Optional<InkColor> color) {
         if (this == ANY || color == null) {
             return true;
         }
-        return this.color.isPresent() && this.color.get()
-                                                   .equals(color);
+        return this.color.isPresent() && this.color
+            .get()
+            .equals(color);
     }
 
     public static class Builder {
 
-        @Nullable
-        private InkColor color;
+        @Nullable private InkColor color;
 
         private Builder() {
             this.color = null;

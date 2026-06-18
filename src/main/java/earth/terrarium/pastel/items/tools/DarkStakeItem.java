@@ -31,8 +31,9 @@ public class DarkStakeItem extends Item implements ProjectileItem, SplitDamageHa
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         super.postHurtEnemy(stack, target, attacker);
-        attacker.level()
-                .playSound(null, attacker.blockPosition(), PastelSounds.SHATTER_HEAVY, SoundSource.PLAYERS, 2f, 1f);
+        attacker
+            .level()
+            .playSound(null, attacker.blockPosition(), PastelSounds.SHATTER_HEAVY, SoundSource.PLAYERS, 2f, 1f);
         stack.shrink(1);
     }
 
@@ -50,7 +51,11 @@ public class DarkStakeItem extends Item implements ProjectileItem, SplitDamageHa
 
     @Override
     public SplitDamageHandler.DamageComposition getDamageComposition(
-        LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
+        LivingEntity attacker,
+        LivingEntity target,
+        ItemStack stack,
+        float damage
+    ) {
         var composition = new SplitDamageHandler.DamageComposition();
         composition.add(PastelDamageTypes.darkStake(attacker.level()), damage);
         return composition;

@@ -13,10 +13,12 @@ public interface WardDisruptableBlock {
     /**
      * Triggered when a Dark Stake is activated near a block
      *
-     * @param pos       The position of the affected block
-     * @param state     The blockstate of the affected block
-     * @param level     The level of the affected block
-     * @param trigger   The entity that triggered the ward disruption (i.e., the Dark Stake). If you want the player that threw it, use getOwner
+     * @param pos     The position of the affected block
+     * @param state   The blockstate of the affected block
+     * @param level   The level of the affected block
+     * @param trigger The entity that triggered the ward disruption (i.e., the Dark Stake). If you want the player that
+     *                threw it, use getOwner
      */
-    default void onWardDisrupt(BlockPos pos, BlockState state, Level level, Entity trigger) {}
+    default void onWardDisrupt(BlockPos pos, BlockState state, Level level, Entity trigger) {
+    }
 }

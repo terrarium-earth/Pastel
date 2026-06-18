@@ -27,36 +27,53 @@ public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
         PastelModelHelper.BLOCK.predefinedItemModel(generators, FLUIX_CLUSTER);
     }
 
-    public static void generateItemModels(ItemModelGenerators generators){
+    public static void generateItemModels(ItemModelGenerators generators) {
         PastelModelHelper.ITEM.cluster(generators, SMALL_FLUIX_BUD, PastelClusterBlock.GrowthStage.SMALL);
         PastelModelHelper.ITEM.cluster(generators, LARGE_FLUIX_BUD, PastelClusterBlock.GrowthStage.LARGE);
         PastelModelHelper.ITEM.cluster(generators, FLUIX_CLUSTER, PastelClusterBlock.GrowthStage.CLUSTER);
     }
 
-    public static DeferredBlock<Block> SMALL_FLUIX_BUD = PastelBlocks.register(blockWithItem(
-        "small_fluix_bud", () -> new PastelClusterBlock(
-            BlockBehaviour.Properties.of()
-                                     .pushReaction(PushReaction.DESTROY)
-                                     .destroyTime(1.0f)
-                                     .mapColor(Blocks.PURPLE_CONCRETE.defaultMapColor())
-                                     .requiresCorrectToolForDrops()
-                                     .noOcclusion(), PastelClusterBlock.GrowthStage.SMALL
-        ), InkColors.YELLOW
-    ));
-    public static DeferredBlock<Block> LARGE_FLUIX_BUD = PastelBlocks.register(blockWithItem(
-        "large_fluix_bud",
-        () -> new PastelClusterBlock(
-            BlockBehaviour.Properties.ofFullCopy(SMALL_FLUIX_BUD.get()),
-            PastelClusterBlock.GrowthStage.LARGE
-        ), InkColors.YELLOW
-    ));
-    public static DeferredBlock<Block> FLUIX_CLUSTER = PastelBlocks.register(blockWithItem(
-        "fluix_cluster",
-        () -> new PastelClusterBlock(
-            BlockBehaviour.Properties.ofFullCopy(SMALL_FLUIX_BUD.get()),
-            PastelClusterBlock.GrowthStage.CLUSTER
-        ), InkColors.YELLOW
-    ));
+    public static DeferredBlock<Block> SMALL_FLUIX_BUD = PastelBlocks
+        .register(
+            blockWithItem(
+                "small_fluix_bud",
+                () -> new PastelClusterBlock(
+                    BlockBehaviour.Properties
+                        .of()
+                        .pushReaction(PushReaction.DESTROY)
+                        .destroyTime(1.0f)
+                        .mapColor(Blocks.PURPLE_CONCRETE.defaultMapColor())
+                        .requiresCorrectToolForDrops()
+                        .noOcclusion(),
+                    PastelClusterBlock.GrowthStage.SMALL
+                ),
+                InkColors.YELLOW
+            )
+        );
+
+    public static DeferredBlock<Block> LARGE_FLUIX_BUD = PastelBlocks
+        .register(
+            blockWithItem(
+                "large_fluix_bud",
+                () -> new PastelClusterBlock(
+                    BlockBehaviour.Properties.ofFullCopy(SMALL_FLUIX_BUD.get()),
+                    PastelClusterBlock.GrowthStage.LARGE
+                ),
+                InkColors.YELLOW
+            )
+        );
+
+    public static DeferredBlock<Block> FLUIX_CLUSTER = PastelBlocks
+        .register(
+            blockWithItem(
+                "fluix_cluster",
+                () -> new PastelClusterBlock(
+                    BlockBehaviour.Properties.ofFullCopy(SMALL_FLUIX_BUD.get()),
+                    PastelClusterBlock.GrowthStage.CLUSTER
+                ),
+                InkColors.YELLOW
+            )
+        );
 
     @Override
     public void register() {
@@ -64,7 +81,9 @@ public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
 
     // todo
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void registerClient() {
     }
 }

@@ -48,8 +48,12 @@ public class DreamGateBlock extends DikeGateBlock {
                 var sleep = SleepStatusEffect.getGeneralSleepResistanceIfEntityHasSoporificEffect(livingEntity);
                 if (sleep != -1) {
                     if (entity instanceof ServerPlayer player) {
-                        Support.grantAdvancementCriterion(
-                            player, "lategame/enter_strange_preservation_ruin", "enter_dream_gate");
+                        Support
+                            .grantAdvancementCriterion(
+                                player,
+                                "lategame/enter_strange_preservation_ruin",
+                                "enter_dream_gate"
+                            );
                     }
 
                     return Shapes.empty();
@@ -69,10 +73,15 @@ public class DreamGateBlock extends DikeGateBlock {
             var sleep = SleepStatusEffect.getGeneralSleepResistanceIfEntityHasSoporificEffect(livingEntity);
             if (sleep == -1 && serverWorld.getGameTime() % 5 == 0) {
                 entity.hurt(PastelDamageTypes.sleep(serverWorld, null), 2);
-                PlayParticleWithExactVelocityPayload.playParticles(
-                    serverWorld, pos, PastelParticleTypes.AZURE_DIKE_RUNES, 10);
-                if (entity instanceof ServerPlayer serverPlayerEntity &&
-                    (!decreasedSounds || ((ServerLevel) world).getGameTime() % 10 == 0)) {
+                PlayParticleWithExactVelocityPayload
+                    .playParticles(
+                        serverWorld,
+                        pos,
+                        PastelParticleTypes.AZURE_DIKE_RUNES,
+                        10
+                    );
+                if (entity instanceof ServerPlayer serverPlayerEntity && (!decreasedSounds || ((ServerLevel) world)
+                    .getGameTime() % 10 == 0)) {
                     serverPlayerEntity.playNotifySound(PastelSounds.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
                 }
             }

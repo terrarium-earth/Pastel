@@ -34,12 +34,19 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
     @Override
     public void tick() {
         super.tick();
-        if (this.level()
-                .isClientSide()) {
-            this.level()
+        if (this
+            .level()
+            .isClientSide()) {
+            this
+                .level()
                 .addParticle(
-                    PastelParticleTypes.MIRROR_IMAGE, this.getRandomX(0.5), this.getRandomY(), this.getRandomZ(0.5), 0,
-                    0, 0
+                    PastelParticleTypes.MIRROR_IMAGE,
+                    this.getRandomX(0.5),
+                    this.getRandomY(),
+                    this.getRandomZ(0.5),
+                    0,
+                    0,
+                    0
                 );
         }
     }
@@ -48,16 +55,28 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
     protected void onHitEntity(EntityHitResult entityHitResult) {
         super.onHitEntity(entityHitResult);
         Level world = this.level();
-        world.playSound(
-            null, entityHitResult.getEntity()
-                                 .blockPosition(), PastelSounds.MEDIUM_CRYSTAL_RING, SoundSource.PLAYERS, 1.334F,
-            0.9F + random.nextFloat() * 0.334F
-        );
-        world.playSound(
-            null, entityHitResult.getEntity()
-                                 .blockPosition(), PastelSounds.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F,
-            1.0F + random.nextFloat() * 0.2F
-        );
+        world
+            .playSound(
+                null,
+                entityHitResult
+                    .getEntity()
+                    .blockPosition(),
+                PastelSounds.MEDIUM_CRYSTAL_RING,
+                SoundSource.PLAYERS,
+                1.334F,
+                0.9F + random.nextFloat() * 0.334F
+            );
+        world
+            .playSound(
+                null,
+                entityHitResult
+                    .getEntity()
+                    .blockPosition(),
+                PastelSounds.SHATTER_HEAVY,
+                SoundSource.PLAYERS,
+                0.75F,
+                1.0F + random.nextFloat() * 0.2F
+            );
 
         if (!world.isClientSide) {
             processHit(entityHitResult.getEntity(), 1F);
@@ -69,8 +88,15 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
         Level world = this.level();
-        world.playSound(
-            null, blockHitResult.getBlockPos(), PastelSounds.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F, 1.0F);
+        world
+            .playSound(
+                null,
+                blockHitResult.getBlockPos(),
+                PastelSounds.SHATTER_HEAVY,
+                SoundSource.PLAYERS,
+                0.75F,
+                1.0F
+            );
 
         if (!world.isClientSide) {
             processHit(null, 0.667F);
@@ -86,13 +112,18 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
         var world = this.level();
         var user = getOwner() instanceof LivingEntity livingOwner ? livingOwner : null;
 
-        LightShardEntity.summonBarrage(
-            world, user, this.position(), target instanceof LivingEntity lv ? lv : null
-            , le -> le.getType()
-                      .getCategory() == MobCategory.MONSTER
-            , UniformInt.of(5, 8 + 2 * efficiency),
-            () -> new LightShardEntity(world, user, effectMult * power, 200 + 40 * efficiency / effectMult)
-        );
+        LightShardEntity
+            .summonBarrage(
+                world,
+                user,
+                this.position(),
+                target instanceof LivingEntity lv ? lv : null,
+                le -> le
+                    .getType()
+                    .getCategory() == MobCategory.MONSTER,
+                UniformInt.of(5, 8 + 2 * efficiency),
+                () -> new LightShardEntity(world, user, effectMult * power, 200 + 40 * efficiency / effectMult)
+            );
     }
 
     @Override

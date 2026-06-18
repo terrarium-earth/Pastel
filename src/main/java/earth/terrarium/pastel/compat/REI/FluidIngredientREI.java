@@ -25,7 +25,9 @@ public class FluidIngredientREI {
         var stacks = ingredient.getStacks();
         EntryIngredient.Builder builder = EntryIngredient.builder(stacks.length);
 
-        for (var stack : stacks) {
+        for (
+            var stack : stacks
+        ) {
             builder.add(EntryStacks.of(FluidStack.create(stack.getFluid(), stack.getAmount())));
         }
 

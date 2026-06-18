@@ -31,19 +31,29 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.textures.FluidSpriteCache;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEntity> implements BlockEntityRenderer<T> {
 
     private static final Material SPRITE = new Material(
-        InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/crystallarieum"));
+        InventoryMenu.BLOCK_ATLAS,
+        PastelCommon.locate("block/crystallarieum")
+    );
 
     private final ModelPart active;
+
     private final ModelPart inactive;
+
     private final ModelPart halo;
+
     private final ModelPart echo;
+
     private final ModelPart upperecho;
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public CrystallarieumBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
         var root = getTexturedModelData().bakeRoot();
         this.active = root.getChild("active");
@@ -55,8 +65,12 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
 
     @Override
     public void render(
-        CrystallarieumBlockEntity crystal, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
-        int light, int overlay
+        CrystallarieumBlockEntity crystal,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay
     ) {
         if (crystal.animator == null)
             return;
@@ -74,30 +88,54 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
             var renderData = IClientFluidTypeExtensions.of(fluid.getFluid());
             TextureAtlasSprite sprite = FluidSpriteCache.getSprite(renderData.getStillTexture(fluid));
 
-            var pos = crystal.getBlockPos()
-                             .above();
-            var luminance = fluid.getFluidType()
-                                 .getLightLevel(fluid);
-            var skylight = crystal.getLevel()
-                                  .getBrightness(LightLayer.BLOCK, pos);
-            var glow = LightTexture.pack(
-                Math.max(luminance, skylight), crystal.getLevel()
-                                                      .getBrightness(LightLayer.SKY, pos)
-            );
+            var pos = crystal
+                .getBlockPos()
+                .above();
+            var luminance = fluid
+                .getFluidType()
+                .getLightLevel(fluid);
+            var skylight = crystal
+                .getLevel()
+                .getBrightness(LightLayer.BLOCK, pos);
+            var glow = LightTexture
+                .pack(
+                    Math.max(luminance, skylight),
+                    crystal
+                        .getLevel()
+                        .getBrightness(LightLayer.SKY, pos)
+                );
 
             var full = crystal.tank.getFluidAmount() == 1000;
             var y = full ? 0.975F : 0.94F;
             var rim = full ? 1 : 2;
 
-            int[] colors = FluidRendering.unpackColor(renderData.getTintColor(
-                fluid.getFluid()
-                     .defaultFluidState(), crystal.getLevel(), crystal.getBlockPos()
-            ));
-            FluidRendering.renderFluid(
-                vertexConsumers.getBuffer(RenderType.translucent()), matrices.last()
-                                                                             .pose(), sprite, glow, overlay, rim,
-                16 - rim, y, rim, 16 - rim, colors
-            );
+            int[] colors = FluidRendering
+                .unpackColor(
+                    renderData
+                        .getTintColor(
+                            fluid
+                                .getFluid()
+                                .defaultFluidState(),
+                            crystal.getLevel(),
+                            crystal.getBlockPos()
+                        )
+                );
+            FluidRendering
+                .renderFluid(
+                    vertexConsumers.getBuffer(RenderType.translucent()),
+                    matrices
+                        .last()
+                        .pose(),
+                    sprite,
+                    glow,
+                    overlay,
+                    rim,
+                    16 - rim,
+                    y,
+                    rim,
+                    16 - rim,
+                    colors
+                );
 
             matrices.popPose();
 
@@ -111,21 +149,30 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
     }
 
     private void renderHalo(
-        CrystallarieumBlockEntity crystal, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
-        int light, int overlay, VertexConsumer vertices
+        CrystallarieumBlockEntity crystal,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay,
+        VertexConsumer vertices
     ) {
         matrices.pushPose();
         matrices.translate(0.5D, 1.5D, 0.5D);
         matrices.mulPose(Axis.XP.rotationDegrees(180));
 
         var ink = InkColors.WHITE;
-        var time = crystal.getLevel() != null ? crystal.getLevel()
-                                                       .getGameTime() % 1000000 : 0;
+        var time = crystal.getLevel() != null
+            ? crystal
+                .getLevel()
+                .getGameTime() % 1000000
+            : 0;
         var bounce = (Math.sin((time + tickDelta) / 23) + 1) * crystal._bounce.get() / 2F;
 
         if (crystal.currentRecipe != null) {
-            ink = crystal.currentRecipe.value()
-                                       .getInkColor();
+            ink = crystal.currentRecipe
+                .value()
+                .getInkColor();
             active.render(matrices, vertices, LightTexture.FULL_BRIGHT, overlay, ink.getColorInt());
         } else {
             inactive.render(matrices, vertices, light, overlay);
@@ -147,12 +194,19 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
             matrices.scale(0.65F, 0.65F, 0.65F);
             matrices.mulPose(Axis.XP.rotationDegrees(180));
             matrices.translate(0, 0.975 + bounce / 3, 0);
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         inkStorageStack, ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers,
-                         crystal.getLevel(), 0
-                     );
+            Minecraft
+                .getInstance()
+                .getItemRenderer()
+                .renderStatic(
+                    inkStorageStack,
+                    ItemDisplayContext.GROUND,
+                    light,
+                    overlay,
+                    matrices,
+                    vertexConsumers,
+                    crystal.getLevel(),
+                    0
+                );
 
         }
 
@@ -160,8 +214,12 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
     }
 
     private static void renderCatalysts(
-        CrystallarieumBlockEntity crystal, PoseStack matrices, MultiBufferSource vertexConsumers, int light,
-        int overlay, ItemStack catalystStack
+        CrystallarieumBlockEntity crystal,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay,
+        ItemStack catalystStack
     ) {
         matrices.pushPose();
         var stack = (int) Math.ceil(catalystStack.getCount() / 17.0);
@@ -170,23 +228,41 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
         matrices.mulPose(Axis.YP.rotationDegrees(180));
         matrices.mulPose(Axis.ZP.rotationDegrees(70));
         if (stack == 1) {
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         catalystStack, ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers,
-                         crystal.getLevel(), 0
-                     );
+            Minecraft
+                .getInstance()
+                .getItemRenderer()
+                .renderStatic(
+                    catalystStack,
+                    ItemDisplayContext.GROUND,
+                    light,
+                    overlay,
+                    matrices,
+                    vertexConsumers,
+                    crystal.getLevel(),
+                    0
+                );
             matrices.popPose();
             return;
         }
 
-        for (int i = 0; i < stack; i++) {
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         catalystStack, ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers,
-                         crystal.getLevel(), 0
-                     );
+        for (
+            int i = 0;
+            i < stack;
+            i++
+        ) {
+            Minecraft
+                .getInstance()
+                .getItemRenderer()
+                .renderStatic(
+                    catalystStack,
+                    ItemDisplayContext.GROUND,
+                    light,
+                    overlay,
+                    matrices,
+                    vertexConsumers,
+                    crystal.getLevel(),
+                    0
+                );
             matrices.translate(0, 0, -0.0225);
             matrices.mulPose(Axis.ZP.rotationDegrees(53));
         }
@@ -202,59 +278,127 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-        PartDefinition active = modelPartData.addOrReplaceChild(
-            "active", CubeListBuilder.create()
-                                     .texOffs(40, 34)
-                                     .addBox(
-                                         -5.0F, -3.0F, -5.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 22.0F, 0.0F)
-        );
+        PartDefinition active = modelPartData
+            .addOrReplaceChild(
+                "active",
+                CubeListBuilder
+                    .create()
+                    .texOffs(40, 34)
+                    .addBox(
+                        -5.0F,
+                        -3.0F,
+                        -5.0F,
+                        10.0F,
+                        4.0F,
+                        10.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, 22.0F, 0.0F)
+            );
 
-        PartDefinition inactive = modelPartData.addOrReplaceChild(
-            "inactive", CubeListBuilder.create()
-                                       .texOffs(80, 34)
-                                       .addBox(
-                                           -5.0F, -3.0F, -5.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 22.0F, 0.0F)
-        );
+        PartDefinition inactive = modelPartData
+            .addOrReplaceChild(
+                "inactive",
+                CubeListBuilder
+                    .create()
+                    .texOffs(80, 34)
+                    .addBox(
+                        -5.0F,
+                        -3.0F,
+                        -5.0F,
+                        10.0F,
+                        4.0F,
+                        10.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, 22.0F, 0.0F)
+            );
 
-        PartDefinition halo = modelPartData.addOrReplaceChild(
-            "halo", CubeListBuilder.create()
-                                   .texOffs(77, 48)
-                                   .addBox(
-                                       -8.5F, 1.0F, -8.5F, 17.0F, 0.0F, 17.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, -9.0F, 0.0F)
-        );
+        PartDefinition halo = modelPartData
+            .addOrReplaceChild(
+                "halo",
+                CubeListBuilder
+                    .create()
+                    .texOffs(77, 48)
+                    .addBox(
+                        -8.5F,
+                        1.0F,
+                        -8.5F,
+                        17.0F,
+                        0.0F,
+                        17.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, -9.0F, 0.0F)
+            );
 
-        PartDefinition diamond_r1 = halo.addOrReplaceChild(
-            "diamond_r1", CubeListBuilder.create()
-                                         .texOffs(80, 65)
-                                         .addBox(
-                                             -7.5F, 0.0F, -7.5F, 15.0F, 0.0F, 15.0F, new CubeDeformation(0.0F)),
-            PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, -0.7854F, 0.0F)
-        );
+        PartDefinition diamond_r1 = halo
+            .addOrReplaceChild(
+                "diamond_r1",
+                CubeListBuilder
+                    .create()
+                    .texOffs(80, 65)
+                    .addBox(
+                        -7.5F,
+                        0.0F,
+                        -7.5F,
+                        15.0F,
+                        0.0F,
+                        15.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, -0.7854F, 0.0F)
+            );
 
-        PartDefinition echo = halo.addOrReplaceChild(
-            "echo", CubeListBuilder.create(), PartPose.offset(0.0F, 0.5F, 0.0F));
+        PartDefinition echo = halo
+            .addOrReplaceChild(
+                "echo",
+                CubeListBuilder.create(),
+                PartPose.offset(0.0F, 0.5F, 0.0F)
+            );
 
-        PartDefinition echoring_r1 = echo.addOrReplaceChild(
-            "echoring_r1", CubeListBuilder.create()
-                                          .texOffs(80, 80)
-                                          .addBox(
-                                              -7.5F, 0.0F, -7.5F, 15.0F, 0.0F, 15.0F, new CubeDeformation(0.0F)),
-            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F)
-        );
+        PartDefinition echoring_r1 = echo
+            .addOrReplaceChild(
+                "echoring_r1",
+                CubeListBuilder
+                    .create()
+                    .texOffs(80, 80)
+                    .addBox(
+                        -7.5F,
+                        0.0F,
+                        -7.5F,
+                        15.0F,
+                        0.0F,
+                        15.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F)
+            );
 
-        PartDefinition upperecho = echo.addOrReplaceChild(
-            "upperecho", CubeListBuilder.create(), PartPose.offset(0.0F, -0.5F, 0.0F));
+        PartDefinition upperecho = echo
+            .addOrReplaceChild(
+                "upperecho",
+                CubeListBuilder.create(),
+                PartPose.offset(0.0F, -0.5F, 0.0F)
+            );
 
-        PartDefinition echoring_r2 = upperecho.addOrReplaceChild(
-            "echoring_r2", CubeListBuilder.create()
-                                          .texOffs(80, 95)
-                                          .addBox(
-                                              -7.5F, 0.0F, -7.5F, 15.0F, 0.0F, 15.0F, new CubeDeformation(0.0F)),
-            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F)
-        );
+        PartDefinition echoring_r2 = upperecho
+            .addOrReplaceChild(
+                "echoring_r2",
+                CubeListBuilder
+                    .create()
+                    .texOffs(80, 95)
+                    .addBox(
+                        -7.5F,
+                        0.0F,
+                        -7.5F,
+                        15.0F,
+                        0.0F,
+                        15.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F)
+            );
         return LayerDefinition.create(modelData, 128, 128);
     }
 }

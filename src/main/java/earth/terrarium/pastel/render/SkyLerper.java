@@ -8,10 +8,15 @@ public class SkyLerper {
     public static final int ANIMATION_TICKS = 40;
 
     private DimensionType activeDimensionType = null;
+
     private long sourceDayTime = -1; // -1 when not active
+
     private float sourceTimeDelta;
+
     private long targetDayTime;
+
     private int elapsedTicks;
+
     private long lastWorldTime;
 
     public static float easeQuart(float num) {
@@ -55,8 +60,12 @@ public class SkyLerper {
 
     private long getLerp(float tickDelta) {
         float delta = (this.elapsedTicks + tickDelta) / (float) ANIMATION_TICKS;
-        return (long) Mth.lerp(
-            easeQuart(delta), this.sourceDayTime + this.sourceTimeDelta, this.targetDayTime + tickDelta);
+        return (long) Mth
+            .lerp(
+                easeQuart(delta),
+                this.sourceDayTime + this.sourceTimeDelta,
+                this.targetDayTime + tickDelta
+            );
     }
 
 }

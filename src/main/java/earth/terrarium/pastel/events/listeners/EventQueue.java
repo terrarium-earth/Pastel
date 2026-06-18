@@ -16,8 +16,11 @@ import java.util.Optional;
 public abstract class EventQueue<D> implements GameEventListener {
 
     protected final PositionSource positionSource;
+
     protected final int range;
+
     protected final EventQueue.Callback<D> callback;
+
     protected final Map<D, Integer> eventQueue;
 
     public EventQueue(PositionSource positionSource, int range, EventQueue.Callback<D> listener) {
@@ -28,7 +31,9 @@ public abstract class EventQueue<D> implements GameEventListener {
     }
 
     public void tick(Level world) {
-        for (D key : new HashSet<>(eventQueue.keySet())) {
+        for (
+            D key : new HashSet<>(eventQueue.keySet())
+        ) {
             Integer tickCounter = eventQueue.get(key);
             if (tickCounter >= 1) {
                 eventQueue.put(key, tickCounter - 1);
@@ -55,25 +60,42 @@ public abstract class EventQueue<D> implements GameEventListener {
 
     @Override
     public boolean handleGameEvent(
-        ServerLevel world, Holder<GameEvent> event, GameEvent.Context emitter, Vec3 emitterPos) {
+        ServerLevel world,
+        Holder<GameEvent> event,
+        GameEvent.Context emitter,
+        Vec3 emitterPos
+    ) {
         Optional<Vec3> positionSourcePosOptional = this.positionSource.getPosition(world);
         if (positionSourcePosOptional.isEmpty()) {
             return false;
         } else {
-            if (!this.callback.canAcceptEvent(
-                world, this, new GameEvent.ListenerInfo(
-                    event, emitterPos, emitter, this,
+            if (!this.callback
+                .canAcceptEvent(
+                    world,
+                    this,
+                    new GameEvent.ListenerInfo(
+                        event,
+                        emitterPos,
+                        emitter,
+                        this,
+                        positionSourcePosOptional.get()
+                    ),
                     positionSourcePosOptional.get()
-                ), positionSourcePosOptional.get()
-            )) {
+                )) {
                 return false;
             } else {
-                this.acceptEvent(
-                    world, new GameEvent.ListenerInfo(
-                        event, emitterPos, emitter, this,
+                this
+                    .acceptEvent(
+                        world,
+                        new GameEvent.ListenerInfo(
+                            event,
+                            emitterPos,
+                            emitter,
+                            this,
+                            positionSourcePosOptional.get()
+                        ),
                         positionSourcePosOptional.get()
-                    ), positionSourcePosOptional.get()
-                );
+                    );
                 return true;
             }
         }

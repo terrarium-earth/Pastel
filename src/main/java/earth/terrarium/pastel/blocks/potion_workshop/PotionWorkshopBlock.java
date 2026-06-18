@@ -60,12 +60,20 @@ public class PotionWorkshopBlock extends HorizontalDirectionalBlock implements E
         return false;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : Support.checkType(
-            type, PastelBlockEntities.POTION_WORKSHOP.get(), PotionWorkshopBlockEntity::tick);
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? null
+            : Support
+                .checkType(
+                    type,
+                    PastelBlockEntities.POTION_WORKSHOP.get(),
+                    PotionWorkshopBlockEntity::tick
+                );
     }
 
     @Override
@@ -83,13 +91,15 @@ public class PotionWorkshopBlock extends HorizontalDirectionalBlock implements E
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return defaultBlockState().setValue(
-            FACING, ctx.getHorizontalDirection()
-                       .getOpposite()
-        );
+        return defaultBlockState()
+            .setValue(
+                FACING,
+                ctx
+                    .getHorizontalDirection()
+                    .getOpposite()
+            );
     }
 
     @Override
@@ -100,7 +110,12 @@ public class PotionWorkshopBlock extends HorizontalDirectionalBlock implements E
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {

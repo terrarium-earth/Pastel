@@ -20,8 +20,13 @@ import java.util.List;
 
 public class NephriteBlossomFeature extends Feature<NephriteBlossomFeatureConfig> {
 
-    private static final List<Direction> VALID_DIRS = List.of(
-        Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST);
+    private static final List<Direction> VALID_DIRS = List
+        .of(
+            Direction.NORTH,
+            Direction.EAST,
+            Direction.SOUTH,
+            Direction.WEST
+        );
 
     public NephriteBlossomFeature(Codec<NephriteBlossomFeatureConfig> configCodec) {
         super(configCodec);
@@ -33,8 +38,9 @@ public class NephriteBlossomFeature extends Feature<NephriteBlossomFeatureConfig
         var origin = context.origin();
         var random = context.random();
         var floor = world.getBlockState(origin.below());
-        var flowering = context.config()
-                               .flowering();
+        var flowering = context
+            .config()
+            .flowering();
 
         if (!floor.is(BlockTags.DIRT))
             return false;
@@ -44,7 +50,11 @@ public class NephriteBlossomFeature extends Feature<NephriteBlossomFeatureConfig
         int maxY = origin.getY() + stemHeight + leafHeight;
 
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-        for (int i = origin.getY(); i < maxY; i++) {
+        for (
+            int i = origin.getY();
+            i < maxY;
+            i++
+        ) {
             pos.set(origin.getX(), i, origin.getZ());
             if (!isReplaceable(world, pos)) {
                 return false;
@@ -61,13 +71,21 @@ public class NephriteBlossomFeature extends Feature<NephriteBlossomFeatureConfig
         var stemPointer = origin.mutable();
         var topStem = false;
 
-        for (int height = 0; height < stemHeight; height++) {
+        for (
+            int height = 0;
+            height < stemHeight;
+            height++
+        ) {
 
             if (height == 0) {
-                this.setBlock(
-                    world, stemPointer, PastelBlocks.NEPHRITE_BLOSSOM_STEM.get()
-                                                                          .defaultBlockState()
-                );
+                this
+                    .setBlock(
+                        world,
+                        stemPointer,
+                        PastelBlocks.NEPHRITE_BLOSSOM_STEM
+                            .get()
+                            .defaultBlockState()
+                    );
                 topStem = true;
             } else if (isReplaceable(world, stemPointer)) {
                 this.setBlock(world, stemPointer, NephriteBlossomStemBlock.getStemVariant(topStem));
@@ -78,13 +96,28 @@ public class NephriteBlossomFeature extends Feature<NephriteBlossomFeatureConfig
     }
 
     private void genereateLeaves(
-        LevelAccessor world, BlockPos origin, RandomSource random, int stemHeight, int leafHeight, boolean flowering) {
-        var leafPointer = origin.mutable()
-                                .move(0, stemHeight, 0);
+        LevelAccessor world,
+        BlockPos origin,
+        RandomSource random,
+        int stemHeight,
+        int leafHeight,
+        boolean flowering
+    ) {
+        var leafPointer = origin
+            .mutable()
+            .move(0, stemHeight, 0);
         var leafDirection = Direction.Plane.HORIZONTAL.getRandomDirection(random);
 
-        for (int i = 0; i < leafHeight; i++) {
-            for (int leaf = 0; leaf < 4; leaf++) {
+        for (
+            int i = 0;
+            i < leafHeight;
+            i++
+        ) {
+            for (
+                int leaf = 0;
+                leaf < 4;
+                leaf++
+            ) {
                 leafPointer.move(leafDirection);
                 setBlockStateWithoutUpdatingNeighbors(world, leafPointer, getLeafState(random, flowering));
                 leafDirection = cycleDirections(leafDirection, 1);
@@ -92,7 +125,11 @@ public class NephriteBlossomFeature extends Feature<NephriteBlossomFeatureConfig
 
             if (i != 0 && i != leafHeight - 1) {
                 leafDirection = leafDirection.getOpposite();
-                for (int leaf = 0; leaf < 4; leaf++) {
+                for (
+                    int leaf = 0;
+                    leaf < 4;
+                    leaf++
+                ) {
                     leafPointer.move(leafDirection);
                     setBlockStateWithoutUpdatingNeighbors(world, leafPointer, getLeafState(random, flowering));
                     leafDirection = cycleDirections(leafDirection, 1);
@@ -113,9 +150,10 @@ public class NephriteBlossomFeature extends Feature<NephriteBlossomFeatureConfig
     }
 
     private BlockState getLeafState(RandomSource random, boolean allowFlowering) {
-        var state = PastelBlocks.NEPHRITE_BLOSSOM_LEAVES.get()
-                                                        .defaultBlockState()
-                                                        .setValue(NephriteBlossomLeavesBlock.DISTANCE, 1);
+        var state = PastelBlocks.NEPHRITE_BLOSSOM_LEAVES
+            .get()
+            .defaultBlockState()
+            .setValue(NephriteBlossomLeavesBlock.DISTANCE, 1);
         if (!allowFlowering) {
             return state;
         }

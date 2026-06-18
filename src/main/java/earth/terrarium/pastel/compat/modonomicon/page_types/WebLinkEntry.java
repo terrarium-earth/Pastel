@@ -22,7 +22,11 @@ public class WebLinkEntry extends BookEntry {
     private final String url;
 
     public WebLinkEntry(
-        ResourceLocation id, BookEntryData data, ResourceLocation commandToRunOnFirstReadId, String url) {
+        ResourceLocation id,
+        BookEntryData data,
+        ResourceLocation commandToRunOnFirstReadId,
+        String url
+    ) {
         super(id, data, commandToRunOnFirstReadId);
         this.url = url;
     }
@@ -60,12 +64,18 @@ public class WebLinkEntry extends BookEntry {
     }
 
     public static WebLinkEntry fromJson(
-        ResourceLocation id, JsonObject json, boolean autoAddReadConditions, HolderLookup.Provider wrapperLookup) {
+        ResourceLocation id,
+        JsonObject json,
+        boolean autoAddReadConditions,
+        HolderLookup.Provider wrapperLookup
+    ) {
         BookEntry.BookEntryData data = BookEntryData.fromJson(id, json, autoAddReadConditions, wrapperLookup);
         ResourceLocation commandToRunOnFirstReadId = null;
         if (json.has("command_to_run_on_first_read")) {
-            commandToRunOnFirstReadId = ResourceLocation.parse(
-                GsonHelper.getAsString(json, "command_to_run_on_first_read"));
+            commandToRunOnFirstReadId = ResourceLocation
+                .parse(
+                    GsonHelper.getAsString(json, "command_to_run_on_first_read")
+                );
         }
         String url = GsonHelper.getAsString(json, "url");
         return new WebLinkEntry(id, data, commandToRunOnFirstReadId, url);

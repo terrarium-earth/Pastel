@@ -38,20 +38,28 @@ import java.util.Set;
 public class ArtisansAtlasState extends MapItemSavedData {
 
     private final MapStateAccessor accessor;
+
     private Set<BlockPos> targets;
+
     private BlockPos displayedCenter;
+
     private ResourceLocation targetId;
-    @Nullable
-    private Vec3i displayDelta;
-    @Nullable
-    private StructureLocatorAsync locator;
+
+    @Nullable private Vec3i displayDelta;
+
+    @Nullable private StructureLocatorAsync locator;
 
     public ArtisansAtlasState(byte scale, boolean locked, ResourceKey<Level> dimension) {
         this(0, 0, scale, false, false, locked, dimension);
     }
 
     public ArtisansAtlasState(
-        double centerX, double centerZ, byte scale, boolean showIcons, boolean unlimitedTracking, boolean locked,
+        double centerX,
+        double centerZ,
+        byte scale,
+        boolean showIcons,
+        boolean unlimitedTracking,
+        boolean locked,
         ResourceKey<Level> dimension
     ) {
         super((int) centerX, (int) centerZ, scale, showIcons, unlimitedTracking, locked, dimension);
@@ -63,8 +71,14 @@ public class ArtisansAtlasState extends MapItemSavedData {
     }
 
     public ArtisansAtlasState(
-        double centerX, double centerZ, byte scale, boolean showIcons, boolean unlimitedTracking, boolean locked,
-        ResourceKey<Level> dimension, CompoundTag nbt
+        double centerX,
+        double centerZ,
+        byte scale,
+        boolean showIcons,
+        boolean unlimitedTracking,
+        boolean locked,
+        ResourceKey<Level> dimension,
+        CompoundTag nbt
     ) {
         this((int) centerX, (int) centerZ, scale, showIcons, unlimitedTracking, locked, dimension);
 
@@ -77,26 +91,35 @@ public class ArtisansAtlasState extends MapItemSavedData {
             this.targetId = null;
         }
 
-        int xDisplay = nbt.contains("displayX", Tag.TAG_ANY_NUMERIC) ? nbt.getInt("displayX")
-                                                                     : this.displayedCenter.getX();
-        int zDisplay = nbt.contains("displayZ", Tag.TAG_ANY_NUMERIC) ? nbt.getInt("displayZ")
-                                                                     : this.displayedCenter.getZ();
+        int xDisplay = nbt.contains("displayX", Tag.TAG_ANY_NUMERIC)
+            ? nbt.getInt("displayX")
+            : this.displayedCenter.getX();
+        int zDisplay = nbt.contains("displayZ", Tag.TAG_ANY_NUMERIC)
+            ? nbt.getInt("displayZ")
+            : this.displayedCenter.getZ();
         this.displayedCenter = new BlockPos(xDisplay, 0, zDisplay);
 
         this.targets = new HashSet<>(CodecHelper.fromNbt(BlockPos.CODEC.listOf(), nbt.get("targets"), List.of()));
     }
 
     public static @Nullable Pair<ResourceLocation, StructureStart> locateAnyStructureAtBlock(
-        ServerLevel world, BlockPos pos) {
-        Registry<Structure> registry = world.registryAccess()
-                                            .registry(Registries.STRUCTURE)
-                                            .orElse(null);
+        ServerLevel world,
+        BlockPos pos
+    ) {
+        Registry<Structure> registry = world
+            .registryAccess()
+            .registry(Registries.STRUCTURE)
+            .orElse(null);
         if (registry != null) {
-            for (Structure structure : registry.stream()
-                                               .toList()) {
+            for (
+                Structure structure : registry
+                    .stream()
+                    .toList()
+            ) {
                 ResourceLocation id = registry.getKey(structure);
-                StructureStart start = world.structureManager()
-                                            .getStructureWithPieceAt(pos, structure);
+                StructureStart start = world
+                    .structureManager()
+                    .getStructureWithPieceAt(pos, structure);
                 if (start != StructureStart.INVALID_START && id != null) {
                     return new Pair<>(id, start);
                 }
@@ -117,10 +140,15 @@ public class ArtisansAtlasState extends MapItemSavedData {
         if (this.targetId != null)
             nbt.putString("targetId", targetId.toString());
 
-        CodecHelper.writeNbt(
-            nbt, "targets", BlockPos.CODEC.listOf(), targets.stream()
-                                                            .toList()
-        );
+        CodecHelper
+            .writeNbt(
+                nbt,
+                "targets",
+                BlockPos.CODEC.listOf(),
+                targets
+                    .stream()
+                    .toList()
+            );
 
         return nbt;
     }
@@ -128,8 +156,12 @@ public class ArtisansAtlasState extends MapItemSavedData {
     @Override
     public MapItemSavedData scaled() {
         return createFresh(
-            this.centerX, this.centerZ, (byte) Mth.clamp(this.scale + 1, 0, 4), accessor.getTrackingPosition(),
-            accessor.getUnlimitedTracking(), this.dimension
+            this.centerX,
+            this.centerZ,
+            (byte) Mth.clamp(this.scale + 1, 0, 4),
+            accessor.getTrackingPosition(),
+            accessor.getUnlimitedTracking(),
+            this.dimension
         );
     }
 
@@ -139,25 +171,36 @@ public class ArtisansAtlasState extends MapItemSavedData {
             if (this.locator == null && this.targetId != null && player.level() instanceof ServerLevel world)
                 startLocator(world);
 
-            this.displayDelta = player.blockPosition()
-                                      .subtract(this.displayedCenter);
+            this.displayDelta = player
+                .blockPosition()
+                .subtract(this.displayedCenter);
         } else {
             this.displayedCenter = player.blockPosition();
         }
 
-        this.accessor.getDecorations()
-                     .clear();
+        this.accessor
+            .getDecorations()
+            .clear();
 
         super.tickCarriedBy(player, stack);
 
-        for (BlockPos target : this.targets)
+        for (
+            BlockPos target : this.targets
+        )
             addTargetIcon(player.level(), target);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings(
+        "deprecation"
+    )
     public void addDecoration(
-        Holder<MapDecorationType> type, @Nullable LevelAccessor world, String key, double x, double z, double rotation,
+        Holder<MapDecorationType> type,
+        @Nullable LevelAccessor world,
+        String key,
+        double x,
+        double z,
+        double rotation,
         @Nullable Component text
     ) {
         int scale = 1 << this.scale;
@@ -174,8 +217,9 @@ public class ArtisansAtlasState extends MapItemSavedData {
         rotation += rotation < 0.0 ? -8.0 : 8.0;
         byte rotationByte = (byte) (rotation * 16.0 / 360.0);
         if (this.dimension == Level.NETHER && world != null) {
-            int light = (int) (world.getLevelData()
-                                    .getDayTime() / 10L);
+            int light = (int) (world
+                .getLevelData()
+                .getDayTime() / 10L);
             rotationByte = (byte) (light * light * 34187121 + light * 121 >> 15 & 15);
         }
 
@@ -223,16 +267,19 @@ public class ArtisansAtlasState extends MapItemSavedData {
         MapDecoration icon = new MapDecoration(type, pixelX, pixelZ, rotationByte, Optional.ofNullable(text));
         ((MapDecorationInjector) (Object) (icon)).setScale(scaleByte);
 
-        MapDecoration previousIcon = accessor.getDecorations()
-                                             .put(key, icon);
+        MapDecoration previousIcon = accessor
+            .getDecorations()
+            .put(key, icon);
         if (!icon.equals(previousIcon)) {
-            if (previousIcon != null && previousIcon.type()
-                                                    .value()
-                                                    .trackCount())
+            if (previousIcon != null && previousIcon
+                .type()
+                .value()
+                .trackCount())
                 accessor.setTrackedDecorationCount(accessor.getTrackedDecorationCount() - 1);
 
-            if (type.value()
-                    .trackCount())
+            if (type
+                .value()
+                .trackCount())
                 accessor.setTrackedDecorationCount(accessor.getTrackedDecorationCount() + 1);
 
             accessor.invokeSetDecorationsDirty();
@@ -256,19 +303,29 @@ public class ArtisansAtlasState extends MapItemSavedData {
 
             String key = marker.getId();
 
-            if (accessor.getBannerMarkers()
-                        .remove(key, marker)) {
+            if (accessor
+                .getBannerMarkers()
+                .remove(key, marker)) {
                 accessor.invokeRemoveDecoration(marker.getId());
                 return true;
             }
 
             if (!this.isTrackedCountOverLimit(256)) {
-                accessor.getBannerMarkers()
-                        .put(key, marker);
-                this.addDecoration(
-                    marker.getDecoration(), world, key, x, z, 180.0, marker.name()
-                                                                           .orElse(null)
-                );
+                accessor
+                    .getBannerMarkers()
+                    .put(key, marker);
+                this
+                    .addDecoration(
+                        marker.getDecoration(),
+                        world,
+                        key,
+                        x,
+                        z,
+                        180.0,
+                        marker
+                            .name()
+                            .orElse(null)
+                    );
                 return true;
             }
         }
@@ -279,7 +336,14 @@ public class ArtisansAtlasState extends MapItemSavedData {
     private void addTargetIcon(LevelAccessor world, BlockPos target) {
         if (target != null) {
             addDecoration(
-                MapDecorationTypes.TARGET_POINT, world, getTargetKey(target), target.getX(), target.getZ(), 180, null);
+                MapDecorationTypes.TARGET_POINT,
+                world,
+                getTargetKey(target),
+                target.getX(),
+                target.getZ(),
+                180,
+                null
+            );
         }
     }
 
@@ -316,8 +380,7 @@ public class ArtisansAtlasState extends MapItemSavedData {
         return this.targetId;
     }
 
-    @Nullable
-    public Vec3i getDisplayDelta() {
+    @Nullable public Vec3i getDisplayDelta() {
         return this.displayDelta;
     }
 
@@ -326,7 +389,10 @@ public class ArtisansAtlasState extends MapItemSavedData {
             int sampleSize = 1 << this.scale;
 
             Vec3i remainder = new Vec3i(
-                this.displayDelta.getX() % sampleSize, 0, this.displayDelta.getZ() % sampleSize);
+                this.displayDelta.getX() % sampleSize,
+                0,
+                this.displayDelta.getZ() % sampleSize
+            );
             Vec3i delta = this.displayDelta.subtract(remainder);
             this.displayedCenter = this.displayedCenter.offset(delta);
             this.displayDelta = remainder;

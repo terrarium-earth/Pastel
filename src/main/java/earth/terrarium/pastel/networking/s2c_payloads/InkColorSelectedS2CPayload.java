@@ -19,11 +19,13 @@ import java.util.Optional;
 public record InkColorSelectedS2CPayload(Optional<Holder<InkColor>> inkColor) implements CustomPacketPayload {
 
     public static final Type<InkColorSelectedS2CPayload> ID = PastelC2SPackets.makeId("ink_color_selected");
-    public static final StreamCodec<RegistryFriendlyByteBuf, InkColorSelectedS2CPayload> CODEC = StreamCodec.composite(
-        ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(PastelRegistries.INK_COLOR.key())),
-        InkColorSelectedS2CPayload::inkColor,
-        InkColorSelectedS2CPayload::new
-    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, InkColorSelectedS2CPayload> CODEC = StreamCodec
+        .composite(
+            ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(PastelRegistries.INK_COLOR.key())),
+            InkColorSelectedS2CPayload::inkColor,
+            InkColorSelectedS2CPayload::new
+        );
 
     public static void sendInkColorSelected(Optional<Holder<InkColor>> inkColor, ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, new InkColorSelectedS2CPayload(inkColor));

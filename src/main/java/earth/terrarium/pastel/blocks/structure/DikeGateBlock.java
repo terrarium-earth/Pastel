@@ -76,7 +76,10 @@ public class DikeGateBlock extends TransparentBlock implements WardDisruptableBl
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
         BlockHitResult hit
     ) {
         punishEntityWithoutAzureDike(world, pos, player, false);
@@ -97,9 +100,14 @@ public class DikeGateBlock extends TransparentBlock implements WardDisruptableBl
 
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        Iterator<Direction> directions = Util.shuffledCopy(Direction.values(), random)
-                                             .iterator();
-        for (int i = 0; i < 2; i++) {
+        Iterator<Direction> directions = Util
+            .shuffledCopy(Direction.values(), random)
+            .iterator();
+        for (
+            int i = 0;
+            i < 2;
+            i++
+        ) {
             Direction direction = directions.next();
             BlockPos blockPos = pos.relative(direction);
             BlockState blockState = world.getBlockState(blockPos);
@@ -107,36 +115,62 @@ public class DikeGateBlock extends TransparentBlock implements WardDisruptableBl
                 double d = direction.getStepX() == 0 ? random.nextDouble() : 0.5 + direction.getStepX() * 0.6;
                 double e = direction.getStepY() == 0 ? random.nextDouble() : 0.5 + direction.getStepY() * 0.6;
                 double f = direction.getStepZ() == 0 ? random.nextDouble() : 0.5 + direction.getStepZ() * 0.6;
-                world.addParticle(
-                    PastelParticleTypes.AZURE_DIKE_RUNES, pos.getX() + d, pos.getY() + e, pos.getZ() + f, 0.0, 0.025,
-                    0.0
-                );
+                world
+                    .addParticle(
+                        PastelParticleTypes.AZURE_DIKE_RUNES,
+                        pos.getX() + d,
+                        pos.getY() + e,
+                        pos.getZ() + f,
+                        0.0,
+                        0.025,
+                        0.0
+                    );
             }
         }
     }
 
     public void onWardDisrupt(BlockPos pos, BlockState state, Level level, Entity trigger) {
         var random = level.getRandom();
-        for (int i = 0; i < 4; i++) {
-            level.addParticle(
-                PastelParticleTypes.AZURE_DIKE_RUNES, trigger.position()
-                                                             .x(), trigger.position()
-                                                                          .y(), trigger.position()
-                                                                                       .z(), random.nextDouble()*(random.nextBoolean()?-1:1),
-                random.nextDouble()*(random.nextBoolean()?-1:1), random.nextDouble()*(random.nextBoolean()?-1:1)
-            );
+        for (
+            int i = 0;
+            i < 4;
+            i++
+        ) {
+            level
+                .addParticle(
+                    PastelParticleTypes.AZURE_DIKE_RUNES,
+                    trigger
+                        .position()
+                        .x(),
+                    trigger
+                        .position()
+                        .y(),
+                    trigger
+                        .position()
+                        .z(),
+                    random.nextDouble() * (random.nextBoolean() ? -1 : 1),
+                    random.nextDouble() * (random.nextBoolean() ? -1 : 1),
+                    random.nextDouble() * (random.nextBoolean() ? -1 : 1)
+                );
         }
         if (level.isClientSide() || !(level instanceof ServerLevel serverLevel)) return;
-        var advancement = serverLevel.getServer()
-                                     .getAdvancements()
-                                     .get(PastelAdvancements.Midgame.USE_DARK_STAKE_ON_DIKE_GATE);
+        var advancement = serverLevel
+            .getServer()
+            .getAdvancements()
+            .get(PastelAdvancements.Midgame.USE_DARK_STAKE_ON_DIKE_GATE);
         if (advancement == null) return;
-        Support.areaCriterion(
-            serverLevel, 16, pos, PastelAdvancements.Unlocks.Equipment.DARK_STAKES, (player) -> {
-                player.getAdvancements()
-                      .award(advancement, "vampirephobia");
-            }
-        );
+        Support
+            .areaCriterion(
+                serverLevel,
+                16,
+                pos,
+                PastelAdvancements.Unlocks.Equipment.DARK_STAKES,
+                (player) -> {
+                    player
+                        .getAdvancements()
+                        .award(advancement, "vampirephobia");
+                }
+            );
     }
 
     public void punishEntityWithoutAzureDike(BlockGetter world, BlockPos pos, Entity entity, boolean decreasedSounds) {
@@ -144,10 +178,15 @@ public class DikeGateBlock extends TransparentBlock implements WardDisruptableBl
             int charges = (int) Math.ceil(AzureDikeProvider.getAzureDikeCharges(livingEntity));
             if (charges == 0) {
                 entity.hurt(PastelDamageTypes.dike(serverWorld), 1);
-                PlayParticleWithExactVelocityPayload.playParticles(
-                    serverWorld, pos, PastelParticleTypes.AZURE_DIKE_RUNES, 10);
-                if (entity instanceof ServerPlayer serverPlayerEntity &&
-                    (!decreasedSounds || ((ServerLevel) world).getGameTime() % 10 == 0)) {
+                PlayParticleWithExactVelocityPayload
+                    .playParticles(
+                        serverWorld,
+                        pos,
+                        PastelParticleTypes.AZURE_DIKE_RUNES,
+                        10
+                    );
+                if (entity instanceof ServerPlayer serverPlayerEntity && (!decreasedSounds || ((ServerLevel) world)
+                    .getGameTime() % 10 == 0)) {
                     serverPlayerEntity.playNotifySound(PastelSounds.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
                 }
             }

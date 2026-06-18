@@ -20,20 +20,27 @@ import java.util.List;
 public class PastelLoadConditions {
 
     public record PastelTagsPopulatedResourceCondition(ResourceLocation registry, List<ResourceLocation> tags)
-        implements ICondition {
-        public static final MapCodec<PastelTagsPopulatedResourceCondition> CODEC = RecordCodecBuilder.mapCodec(
-            (instance) -> {
-                return instance.group(
-                                   ResourceLocation.CODEC.fieldOf("registry")
-                                                         .orElse(
-                                                             Registries.ITEM.location())
-                                                         .forGetter(PastelTagsPopulatedResourceCondition::registry),
-                                   ResourceLocation.CODEC.listOf()
-                                                         .fieldOf("values")
-                                                         .forGetter(PastelTagsPopulatedResourceCondition::tags)
-                               )
-                               .apply(instance, PastelTagsPopulatedResourceCondition::new);
-            });
+        implements
+        ICondition {
+        public static final MapCodec<PastelTagsPopulatedResourceCondition> CODEC = RecordCodecBuilder
+            .mapCodec(
+                (instance) -> {
+                    return instance
+                        .group(
+                            ResourceLocation.CODEC
+                                .fieldOf("registry")
+                                .orElse(
+                                    Registries.ITEM.location()
+                                )
+                                .forGetter(PastelTagsPopulatedResourceCondition::registry),
+                            ResourceLocation.CODEC
+                                .listOf()
+                                .fieldOf("values")
+                                .forGetter(PastelTagsPopulatedResourceCondition::tags)
+                        )
+                        .apply(instance, PastelTagsPopulatedResourceCondition::new);
+                }
+            );
 
         @Override
         public boolean test(IContext context) {
@@ -46,10 +53,15 @@ public class PastelLoadConditions {
         }
 
         public static boolean tagsPopulated(
-            IContext context, ResourceLocation registryId, List<ResourceLocation> tags) {
+            IContext context,
+            ResourceLocation registryId,
+            List<ResourceLocation> tags
+        ) {
             ResourceKey<Registry<Registry<?>>> registryKey = ResourceKey.createRegistryKey(registryId);
 
-            for (ResourceLocation tag : tags) {
+            for (
+                ResourceLocation tag : tags
+            ) {
                 TagKey<Registry<?>> tagKey = TagKey.create(registryKey, tag);
                 Collection<Holder<Registry<?>>> entries = context.getTag(tagKey);
 
@@ -71,8 +83,11 @@ public class PastelLoadConditions {
     }
 
     public static void register(IEventBus modEventBus) {
-        DeferredRegister<MapCodec<? extends ICondition>> register = DeferredRegister.create(
-            NeoForgeRegistries.CONDITION_SERIALIZERS, PastelCommon.MOD_ID);
+        DeferredRegister<MapCodec<? extends ICondition>> register = DeferredRegister
+            .create(
+                NeoForgeRegistries.CONDITION_SERIALIZERS,
+                PastelCommon.MOD_ID
+            );
 
         register.register("tags_populated", () -> PastelTagsPopulatedResourceCondition.CODEC);
 

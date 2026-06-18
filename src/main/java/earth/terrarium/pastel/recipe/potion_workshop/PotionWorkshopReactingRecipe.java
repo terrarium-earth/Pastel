@@ -33,15 +33,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class PotionWorkshopReactingRecipe extends GatedPastelRecipe<RecipeInput>
-    implements DescriptiveGatedRecipe<RecipeInput> {
+    implements
+    DescriptiveGatedRecipe<RecipeInput> {
 
     protected static final HashMap<Item, List<PotionMod>> reagents = new HashMap<>();
 
     protected final Item item;
+
     protected final List<PotionMod> modifiers;
 
     public PotionWorkshopReactingRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier, Item item,
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        Item item,
         List<PotionMod> modifiers
     ) {
         super(group, secret, requiredAdvancementIdentifier);
@@ -75,9 +80,10 @@ public class PotionWorkshopReactingRecipe extends GatedPastelRecipe<RecipeInput>
 
     @Override
     public ItemStack getToastSymbol() {
-        return PastelBlocks.POTION_WORKSHOP.get()
-                                           .asItem()
-                                           .getDefaultInstance();
+        return PastelBlocks.POTION_WORKSHOP
+            .get()
+            .asItem()
+            .getDefaultInstance();
     }
 
     @Override
@@ -110,8 +116,10 @@ public class PotionWorkshopReactingRecipe extends GatedPastelRecipe<RecipeInput>
     @Override
     public Component getDescription() {
         ResourceLocation identifier = BuiltInRegistries.ITEM.getKey(this.item);
-        return Component.translatable(
-            "pastel.rei.potion_workshop_reacting." + identifier.getNamespace() + "." + identifier.getPath());
+        return Component
+            .translatable(
+                "pastel.rei.potion_workshop_reacting." + identifier.getNamespace() + "." + identifier.getPath()
+            );
     }
 
     @Override
@@ -133,34 +141,48 @@ public class PotionWorkshopReactingRecipe extends GatedPastelRecipe<RecipeInput>
 
     public static class Serializer implements RecipeSerializer<PotionWorkshopReactingRecipe> {
 
-        public static final MapCodec<PotionWorkshopReactingRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                                 Codec.STRING.optionalFieldOf("group", "")
-                                                                                                                             .forGetter(c -> c.group),
-                                                                                                                 Codec.BOOL.optionalFieldOf("secret", false)
-                                                                                                                           .forGetter(c -> c.secret),
-                                                                                                                 ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                                                                       .forGetter(c -> c.requiredAdvancementIdentifier),
-                                                                                                                 BuiltInRegistries.ITEM.byNameCodec()
-                                                                                                                                       .fieldOf("item")
-                                                                                                                                       .forGetter(c -> c.item),
-                                                                                                                 CodecHelper.singleOrList(PotionMod.CODEC)
-                                                                                                                            .fieldOf("modifiers")
-                                                                                                                            .forGetter(c -> c.modifiers)
-                                                                                                             )
-                                                                                                             .apply(
-                                                                                                                 i,
-                                                                                                                 PotionWorkshopReactingRecipe::new
-                                                                                                             ));
+        public static final MapCodec<PotionWorkshopReactingRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(c -> c.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(c -> c.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(c -> c.requiredAdvancementIdentifier),
+                        BuiltInRegistries.ITEM
+                            .byNameCodec()
+                            .fieldOf("item")
+                            .forGetter(c -> c.item),
+                        CodecHelper
+                            .singleOrList(PotionMod.CODEC)
+                            .fieldOf("modifiers")
+                            .forGetter(c -> c.modifiers)
+                    )
+                    .apply(
+                        i,
+                        PotionWorkshopReactingRecipe::new
+                    )
+            );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, PotionWorkshopReactingRecipe> STREAM_CODEC
-            = StreamCodec.composite(
-            ByteBufCodecs.STRING_UTF8, c -> c.group,
-            ByteBufCodecs.BOOL, c -> c.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
-            ByteBufCodecs.registry(Registries.ITEM), c -> c.item,
-            PotionMod.STREAM_CODEC.apply(ByteBufCodecs.list()), c -> c.modifiers,
-            PotionWorkshopReactingRecipe::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, PotionWorkshopReactingRecipe> STREAM_CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.STRING_UTF8,
+                c -> c.group,
+                ByteBufCodecs.BOOL,
+                c -> c.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                c -> c.requiredAdvancementIdentifier,
+                ByteBufCodecs.registry(Registries.ITEM),
+                c -> c.item,
+                PotionMod.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                c -> c.modifiers,
+                PotionWorkshopReactingRecipe::new
+            );
 
         @Override
         public MapCodec<PotionWorkshopReactingRecipe> codec() {

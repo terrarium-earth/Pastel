@@ -19,51 +19,92 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 
 public record PastelTransmissionPayload(int networkColor, int travelTime, PastelTransmission transmission)
-    implements CustomPacketPayload {
+    implements
+    CustomPacketPayload {
 
     public static final Type<PastelTransmissionPayload> ID = PastelC2SPackets.makeId("pastel_transmission");
-    public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmissionPayload> CODEC = StreamCodec.composite(
-        ByteBufCodecs.INT, PastelTransmissionPayload::networkColor,
-        ByteBufCodecs.INT, PastelTransmissionPayload::travelTime,
-        PastelTransmission.STREAM_CODEC, PastelTransmissionPayload::transmission,
-        PastelTransmissionPayload::new
-    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmissionPayload> CODEC = StreamCodec
+        .composite(
+            ByteBufCodecs.INT,
+            PastelTransmissionPayload::networkColor,
+            ByteBufCodecs.INT,
+            PastelTransmissionPayload::travelTime,
+            PastelTransmission.STREAM_CODEC,
+            PastelTransmissionPayload::transmission,
+            PastelTransmissionPayload::new
+        );
 
     public static void sendPastelTransmissionParticle(
-        ServerPastelNetwork network, int travelTime, @NotNull PastelTransmission transmission) {
+        ServerPastelNetwork network,
+        int travelTime,
+        @NotNull PastelTransmission transmission
+    ) {
         Packet<?> packet = new ClientboundCustomPayloadPacket(
-            new PastelTransmissionPayload(network.getColor(), travelTime, transmission));
+            new PastelTransmissionPayload(network.getColor(), travelTime, transmission)
+        );
         var targetPlayers = new HashSet<ServerPlayer>();
-        targetPlayers.addAll(network.getLevel()
-                                    .getChunkSource().chunkMap.getPlayers(
-                new ChunkPos(transmission.getNodePositions()
-                                         .getFirst()), false
-            ));
-        targetPlayers.addAll(network.getLevel()
-                                    .getChunkSource().chunkMap.getPlayers(
-                new ChunkPos(transmission.getNodePositions()
-                                         .getLast()), false
-            ));
+        targetPlayers
+            .addAll(
+                network
+                    .getLevel()
+                    .getChunkSource().chunkMap
+                    .getPlayers(
+                        new ChunkPos(
+                            transmission
+                                .getNodePositions()
+                                .getFirst()
+                        ),
+                        false
+                    )
+            );
+        targetPlayers
+            .addAll(
+                network
+                    .getLevel()
+                    .getChunkSource().chunkMap
+                    .getPlayers(
+                        new ChunkPos(
+                            transmission
+                                .getNodePositions()
+                                .getLast()
+                        ),
+                        false
+                    )
+            );
 
-        for (ServerPlayer player : targetPlayers) {
+        for (
+            ServerPlayer player : targetPlayers
+        ) {
             player.connection.send(packet);
         }
     }
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings(
+        "resource"
+    )
     public static void execute(PastelTransmissionPayload payload, IPayloadContext context) {
         int color = payload.networkColor();
         int travelTime = payload.travelTime();
         PastelTransmission transmission = payload.transmission;
         BlockPos spawnPos = transmission.getStartPos();
-        context.player()
-               .level()
-               .addParticle(
-                   new PastelTransmissionParticleEffect(
-                       transmission.getNodePositions(), transmission.getStack(),
-                       travelTime, color
-                   ), spawnPos.getX() + 0.5, spawnPos.getY() + 0.5, spawnPos.getZ() + 0.5, 0, 0, 0
-               );
+        context
+            .player()
+            .level()
+            .addParticle(
+                new PastelTransmissionParticleEffect(
+                    transmission.getNodePositions(),
+                    transmission.getStack(),
+                    travelTime,
+                    color
+                ),
+                spawnPos.getX() + 0.5,
+                spawnPos.getY() + 0.5,
+                spawnPos.getZ() + 0.5,
+                0,
+                0,
+                0
+            );
     }
 
     @Override

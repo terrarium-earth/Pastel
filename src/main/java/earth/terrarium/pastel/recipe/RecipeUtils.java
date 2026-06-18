@@ -17,9 +17,10 @@ import net.minecraft.world.level.block.state.BlockState;
 public class RecipeUtils {
 
     public static ItemStack itemStackWithNbtFromJson(JsonObject json) {
-        Item item = BuiltInRegistries.ITEM.byNameCodec()
-                                          .parse(JsonOps.INSTANCE, json)
-                                          .getOrThrow();
+        Item item = BuiltInRegistries.ITEM
+            .byNameCodec()
+            .parse(JsonOps.INSTANCE, json)
+            .getOrThrow();
         if (json.has("data")) {
             throw new JsonParseException("Disallowed data tag found");
         } else {
@@ -40,8 +41,9 @@ public class RecipeUtils {
     }
 
     public static BlockState blockStateFromString(String string) throws CommandSyntaxException {
-        return BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), new StringReader(string), true)
-                               .blockState();
+        return BlockStateParser
+            .parseForBlock(BuiltInRegistries.BLOCK.asLookup(), new StringReader(string), true)
+            .blockState();
     }
 
     public static DataResult<BlockState> blockStateDataFromString(String string) {
@@ -56,34 +58,34 @@ public class RecipeUtils {
         return BlockStateParser.serialize(state);
     }
 
-	/* TODO - Remove
-	public static List<IngredientStack> createIngredientStackPatternMatrix(String[] pattern, Map<String,
-	IngredientStack> symbols, int width, int height) {
-		List<IngredientStack> list = DefaultedList.ofSize(width * height, IngredientStack.EMPTY);
-		Set<String> set = Sets.newHashSet(symbols.keySet());
-		set.remove(" ");
-
-		for (int i = 0; i < pattern.length; ++i) {
-			for (int j = 0; j < pattern[i].length(); ++j) {
-				String string = pattern[i].substring(j, j + 1);
-				var ingredient = symbols.get(string);
-				if (ingredient == null) {
-					throw new JsonSyntaxException("Pattern references symbol '" + string + "' but it's not defined in
-					the key");
-				}
-
-				set.remove(string);
-				list.set(j + width * i, ingredient);
-			}
-		}
-
-		if (!set.isEmpty()) {
-			throw new JsonSyntaxException("Key defines symbols that aren't used in pattern: " + set);
-		} else {
-			return list;
-		}
-	}
-
-	 */
+    /* TODO - Remove
+    public static List<IngredientStack> createIngredientStackPatternMatrix(String[] pattern, Map<String,
+    IngredientStack> symbols, int width, int height) {
+    	List<IngredientStack> list = DefaultedList.ofSize(width * height, IngredientStack.EMPTY);
+    	Set<String> set = Sets.newHashSet(symbols.keySet());
+    	set.remove(" ");
+    
+    	for (int i = 0; i < pattern.length; ++i) {
+    		for (int j = 0; j < pattern[i].length(); ++j) {
+    			String string = pattern[i].substring(j, j + 1);
+    			var ingredient = symbols.get(string);
+    			if (ingredient == null) {
+    				throw new JsonSyntaxException("Pattern references symbol '" + string + "' but it's not defined in
+    				the key");
+    			}
+    
+    			set.remove(string);
+    			list.set(j + width * i, ingredient);
+    		}
+    	}
+    
+    	if (!set.isEmpty()) {
+    		throw new JsonSyntaxException("Key defines symbols that aren't used in pattern: " + set);
+    	} else {
+    		return list;
+    	}
+    }
+    
+     */
 
 }

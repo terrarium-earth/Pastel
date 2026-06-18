@@ -26,13 +26,20 @@ import net.minecraft.world.level.block.Rotation;
 public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<SpiritInstillerBlockEntity> {
 
     private static final Material SPRITE = new Material(
-        InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/spirit_instiller"));
+        InventoryMenu.BLOCK_ATLAS,
+        PastelCommon.locate("block/spirit_instiller")
+    );
+
     protected final double ITEM_STACK_RENDER_HEIGHT = 0.95F;
 
     private final ModelPart head;
+
     private final ModelPart spectralblossom;
+
     private final ModelPart geode;
+
     private final ModelPart calcite;
+
     private final ModelPart innergeode;
 
     public SpiritInstillerBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
@@ -46,14 +53,19 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
 
     @Override
     public void render(
-        SpiritInstillerBlockEntity instiller, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
-        int light, int overlay
+        SpiritInstillerBlockEntity instiller,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay
     ) {
         if (instiller.animator == null)
             return;
 
-        var time = instiller.getLevel()
-                            .getGameTime() % 1000000;
+        var time = instiller
+            .getLevel()
+            .getGameTime() % 1000000;
         instiller.animator.animate(tickDelta, time);
 
         // The item lying on top of the spirit instiller
@@ -75,12 +87,19 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
                 matrices.mulPose(Axis.YP.rotationDegrees((float) (rotation - Math.toDegrees(instiller.platform))));
                 matrices.mulPose(Axis.XP.rotationDegrees(90));
                 matrices.translate(-0.0, -0.1, 0.0);
-                Minecraft.getInstance()
-                         .getItemRenderer()
-                         .renderStatic(
-                             stack, ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers,
-                             instiller.getLevel(), 0
-                         );
+                Minecraft
+                    .getInstance()
+                    .getItemRenderer()
+                    .renderStatic(
+                        stack,
+                        ItemDisplayContext.GROUND,
+                        light,
+                        overlay,
+                        matrices,
+                        vertexConsumers,
+                        instiller.getLevel(),
+                        0
+                    );
                 matrices.popPose();
             }
 
@@ -125,43 +144,90 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-        PartDefinition head = modelPartData.addOrReplaceChild(
-            "head", CubeListBuilder.create(), PartPose.offset(0.0F, 9.5F, 0.0F));
+        PartDefinition head = modelPartData
+            .addOrReplaceChild(
+                "head",
+                CubeListBuilder.create(),
+                PartPose.offset(0.0F, 9.5F, 0.0F)
+            );
 
-        head.addOrReplaceChild(
-            "pedestal_r1", CubeListBuilder.create()
-                                          .texOffs(43, 38)
-                                          .addBox(
-                                              -7.5F, -1.5F, -7.5F, 15.0F, 3.0F, 15.0F, new CubeDeformation(0.0F)),
-            PartPose.offsetAndRotation(0.0F, -0.025F, 0.0F, 0.0F, -0.7854F, 0.0F)
-        );
-        modelPartData.addOrReplaceChild(
-            "spectralblossom", CubeListBuilder.create()
-                                              .texOffs(58, 24)
-                                              .addBox(
-                                                  -6.5F, -6.5F, 0.0F, 13.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, -25.0F, 0.0F)
-        );
-        PartDefinition geode = modelPartData.addOrReplaceChild(
-            "geode", CubeListBuilder.create()
-                                    .texOffs(0, 24)
-                                    .addBox(
-                                        -14.5F, -14.5F, 0.0F, 29.0F, 29.0F, 0.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, -25.0F, 0.0F)
-        );
-        PartDefinition calcite = geode.addOrReplaceChild(
-            "calcite", CubeListBuilder.create()
-                                      .texOffs(0, 56)
-                                      .addBox(-12.5F, -12.5F, 1.0F, 25.0F, 25.0F, 0.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 0.0F, 0.25F)
-        );
-        calcite.addOrReplaceChild(
-            "innergeode", CubeListBuilder.create()
-                                         .texOffs(50, 56)
-                                         .addBox(
-                                             -10.5F, -10.5F, 3.0F, 21.0F, 21.0F, 0.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 0.0F, -0.75F)
-        );
+        head
+            .addOrReplaceChild(
+                "pedestal_r1",
+                CubeListBuilder
+                    .create()
+                    .texOffs(43, 38)
+                    .addBox(
+                        -7.5F,
+                        -1.5F,
+                        -7.5F,
+                        15.0F,
+                        3.0F,
+                        15.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offsetAndRotation(0.0F, -0.025F, 0.0F, 0.0F, -0.7854F, 0.0F)
+            );
+        modelPartData
+            .addOrReplaceChild(
+                "spectralblossom",
+                CubeListBuilder
+                    .create()
+                    .texOffs(58, 24)
+                    .addBox(
+                        -6.5F,
+                        -6.5F,
+                        0.0F,
+                        13.0F,
+                        13.0F,
+                        0.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, -25.0F, 0.0F)
+            );
+        PartDefinition geode = modelPartData
+            .addOrReplaceChild(
+                "geode",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 24)
+                    .addBox(
+                        -14.5F,
+                        -14.5F,
+                        0.0F,
+                        29.0F,
+                        29.0F,
+                        0.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, -25.0F, 0.0F)
+            );
+        PartDefinition calcite = geode
+            .addOrReplaceChild(
+                "calcite",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 56)
+                    .addBox(-12.5F, -12.5F, 1.0F, 25.0F, 25.0F, 0.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 0.0F, 0.25F)
+            );
+        calcite
+            .addOrReplaceChild(
+                "innergeode",
+                CubeListBuilder
+                    .create()
+                    .texOffs(50, 56)
+                    .addBox(
+                        -10.5F,
+                        -10.5F,
+                        3.0F,
+                        21.0F,
+                        21.0F,
+                        0.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, 0.0F, -0.75F)
+            );
         return LayerDefinition.create(modelData, 128, 128);
     }
 }

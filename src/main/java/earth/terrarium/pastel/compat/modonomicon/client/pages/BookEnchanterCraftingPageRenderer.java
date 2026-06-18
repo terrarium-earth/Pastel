@@ -16,10 +16,13 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 
 public class BookEnchanterCraftingPageRenderer
-    extends BookGatedRecipePageRenderer<EnchanterCraftingRecipe, BookGatedRecipePage<EnchanterCraftingRecipe>> {
+    extends
+    BookGatedRecipePageRenderer<EnchanterCraftingRecipe, BookGatedRecipePage<EnchanterCraftingRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/modonomicon/enchanter_crafting.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/modonomicon/enchanter_crafting.png"
+        );
 
     public BookEnchanterCraftingPageRenderer(BookGatedRecipePage<EnchanterCraftingRecipe> page) {
         super(page);
@@ -32,8 +35,13 @@ public class BookEnchanterCraftingPageRenderer
 
     @Override
     protected void drawRecipe(
-        GuiGraphics drawContext, RecipeHolder<EnchanterCraftingRecipe> recipeEntry, int recipeX, int recipeY,
-        int mouseX, int mouseY, boolean second
+        GuiGraphics drawContext,
+        RecipeHolder<EnchanterCraftingRecipe> recipeEntry,
+        int recipeX,
+        int recipeY,
+        int mouseX,
+        int mouseY,
+        boolean second
     ) {
         EnchanterCraftingRecipe recipe = recipeEntry.value();
         Level world = Minecraft.getInstance().level;
@@ -63,18 +71,35 @@ public class BookEnchanterCraftingPageRenderer
         parentScreen.renderIngredient(drawContext, ingredientX + 28, recipeY + 28, mouseX, mouseY, ingredients.get(0));
 
         // Knowledge Gem and Enchanter
-        ItemStack knowledgeDropStackWithXP = KnowledgeGemItem.getKnowledgeDropStackWithXP(
-            recipe.getRequiredExperience(), true);
+        ItemStack knowledgeDropStackWithXP = KnowledgeGemItem
+            .getKnowledgeDropStackWithXP(
+                recipe.getRequiredExperience(),
+                true
+            );
         parentScreen.renderItemStack(drawContext, recipeX + 81, recipeY + 9, mouseX, mouseY, knowledgeDropStackWithXP);
-        parentScreen.renderItemStack(
-            drawContext, recipeX + 81, recipeY + 46, mouseX, mouseY, PastelBlocks.ENCHANTER.get()
-                                                                                           .asItem()
-                                                                                           .getDefaultInstance()
-        );
+        parentScreen
+            .renderItemStack(
+                drawContext,
+                recipeX + 81,
+                recipeY + 46,
+                mouseX,
+                mouseY,
+                PastelBlocks.ENCHANTER
+                    .get()
+                    .asItem()
+                    .getDefaultInstance()
+            );
 
         // the output
-        parentScreen.renderItemStack(
-            drawContext, recipeX + 81, recipeY + 31, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));
+        parentScreen
+            .renderItemStack(
+                drawContext,
+                recipeX + 81,
+                recipeY + 31,
+                mouseX,
+                mouseY,
+                recipe.getResultItem(world.registryAccess())
+            );
     }
 
 }

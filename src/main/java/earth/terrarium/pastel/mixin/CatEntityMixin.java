@@ -22,40 +22,53 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Locale;
 
-@Mixin(Cat.class)
+@Mixin(
+    Cat.class
+)
 public abstract class CatEntityMixin extends TamableAnimal {
 
     protected CatEntityMixin(EntityType<? extends TamableAnimal> entityType, Level world) {
         super(entityType, world);
     }
 
-    @Inject(at = @At("HEAD"), method = "mobInteract")
+    @Inject(
+        at = @At(
+            "HEAD"
+        ), method = "mobInteract"
+    )
     private void feedKitten(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack itemStack = player.getItemInHand(hand);
         Item item = itemStack.getItem();
 
-        if (this.level()
-                .isClientSide()) return;
+        if (this
+            .level()
+            .isClientSide()) return;
         if (!this.hasCustomName()) return;
 
         assert this.getCustomName() != null;
-        String customName = this.getCustomName()
-                                .getString()
-                                .toUpperCase(Locale.ROOT);
+        String customName = this
+            .getCustomName()
+            .getString()
+            .toUpperCase(Locale.ROOT);
 
         boolean howMany = customName.equals("AAA") || customName.equals("AAA ❣");
         if (player instanceof ServerPlayer serverPlayerEntity) {
             if (item.equals(PastelItems.STRATINE_GEM.get()) && this.hasEffect(MobEffects.LEVITATION) && howMany) {
-                Support.grantAdvancementCriterion(
-                    serverPlayerEntity, ResourceLocation.fromNamespaceAndPath("pastel", "midgame/become_enlightened"),
-                    "confirmed"
-                );
+                Support
+                    .grantAdvancementCriterion(
+                        serverPlayerEntity,
+                        ResourceLocation.fromNamespaceAndPath("pastel", "midgame/become_enlightened"),
+                        "confirmed"
+                    );
                 this.removeEffect(MobEffects.LEVITATION);
-                this.addEffect(new MobEffectInstance(
-                    MobEffects.SLOW_FALLING,
-                    600,
-                    1
-                ));
+                this
+                    .addEffect(
+                        new MobEffectInstance(
+                            MobEffects.SLOW_FALLING,
+                            600,
+                            1
+                        )
+                    );
             }
         }
     }

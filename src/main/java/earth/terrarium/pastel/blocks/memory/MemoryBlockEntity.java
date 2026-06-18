@@ -39,17 +39,21 @@ import java.util.UUID;
 public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
 
     protected ItemStack memoryItemStack = ItemStack.EMPTY; // zero or negative values: never hatch
+
     protected UUID ownerUUID;
 
     //  color rendering cache
     private int tint1 = -1;
+
     private int tint2 = -1;
 
     public MemoryBlockEntity(BlockPos pos, BlockState state) {
         super(PastelBlockEntities.MEMORY.get(), pos, state);
     }
 
-    @Contract("_ -> new")
+    @Contract(
+        "_ -> new"
+    )
     public static @NotNull Tuple<Integer, Integer> getEggColorsForEntity(EntityType<?> entityType) {
         SpawnEggItem spawnEggItem = SpawnEggItem.byId(entityType);
         if (spawnEggItem != null) {
@@ -81,8 +85,9 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
         }
 
         if (livingEntity != null && livingEntity.level() instanceof ServerLevel serverWorld)
-            serverWorld.getChunkSource()
-                       .blockChanged(worldPosition);
+            serverWorld
+                .getChunkSource()
+                .blockChanged(worldPosition);
 
         this.setChanged();
     }
@@ -118,12 +123,22 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
                     Optional<EntityType<?>> entityTypeOptional = MemoryItem.getEntityType(this.memoryItemStack);
                     if (entityTypeOptional.isPresent()) {
                         MemoryItem.setTicksToManifest(this.memoryItemStack, newTicksToManifest);
-                        PlayMemoryManifestingParticlesPayload.playMemoryManifestingParticles(
-                            world, blockPos, entityTypeOptional.get(), 3);
-                        world.playSound(
-                            null, this.worldPosition, PastelSounds.BLOCK_MEMORY_ADVANCE, SoundSource.BLOCKS, 0.7F,
-                            0.9F + world.random.nextFloat() * 0.2F
-                        );
+                        PlayMemoryManifestingParticlesPayload
+                            .playMemoryManifestingParticles(
+                                world,
+                                blockPos,
+                                entityTypeOptional.get(),
+                                3
+                            );
+                        world
+                            .playSound(
+                                null,
+                                this.worldPosition,
+                                PastelSounds.BLOCK_MEMORY_ADVANCE,
+                                SoundSource.BLOCKS,
+                                0.7F,
+                                0.9F + world.random.nextFloat() * 0.2F
+                            );
                         this.setChanged();
                     }
                 }
@@ -136,10 +151,16 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
     }
 
     public static boolean manifest(
-        @NotNull ServerLevel level, BlockPos blockPos, ItemStack memoryItemStack, @Nullable UUID ownerUUID) {
+        @NotNull ServerLevel level,
+        BlockPos blockPos,
+        ItemStack memoryItemStack,
+        @Nullable UUID ownerUUID
+    ) {
         BlockState blockState = level.getBlockState(blockPos);
-        if (blockState.getBlock() instanceof SimpleWaterloggedBlock && blockState.getValue(
-            BlockStateProperties.WATERLOGGED)) {
+        if (blockState.getBlock() instanceof SimpleWaterloggedBlock && blockState
+            .getValue(
+                BlockStateProperties.WATERLOGGED
+            )) {
             level.setBlockAndUpdate(blockPos, Blocks.WATER.defaultBlockState());
         } else {
             level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
@@ -150,8 +171,13 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
         if (hatchedEntityOptional.isPresent()) {
             Entity hatchedEntity = hatchedEntityOptional.get();
 
-            PlayMemoryManifestingParticlesPayload.playMemoryManifestingParticles(
-                level, blockPos, hatchedEntity.getType(), 10);
+            PlayMemoryManifestingParticlesPayload
+                .playMemoryManifestingParticles(
+                    level,
+                    blockPos,
+                    hatchedEntity.getType(),
+                    10
+                );
 
             if (hatchedEntity instanceof Mob hatchedMobEntity) {
                 hatchedMobEntity.setPersistenceRequired();
@@ -162,10 +188,15 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
                 EntityHelper.addPlayerTrust(hatchedEntity, ownerUUID);
             }
 
-
             if (level instanceof ServerLevel sl)
-                Support.areaCriterion(sl, Support.HH_RANGE, blockPos, PastelCommon.locate("unlocks/blocks/memories"), p ->
-                    PastelCriteria.MEMORY_MANIFESTING.trigger(p, hatchedEntity));
+                Support
+                    .areaCriterion(
+                        sl,
+                        Support.HH_RANGE,
+                        blockPos,
+                        PastelCommon.locate("unlocks/blocks/memories"),
+                        p -> PastelCriteria.MEMORY_MANIFESTING.trigger(p, hatchedEntity)
+                    );
 
             return true;
         }
@@ -200,19 +231,28 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
     }
 
     public static Optional<Entity> hatchEntity(ServerLevel world, BlockPos blockPos, ItemStack memoryItemStack) {
-        return Optional.ofNullable(memoryItemStack.get(PastelDataComponentTypes.MEMORY))
-                       .flatMap(memory -> MemoryItem.getEntityType(memoryItemStack)
-                                                    .map(entityType -> {
-                                                        // alignPosition: center the mob in the center of the blockPos
-                                                        Entity entity = entityType.spawn(
-                                                            world, memoryItemStack, null, blockPos,
-                                                            MobSpawnType.SPAWN_EGG, true, false
-                                                        );
-                                                        if (entity instanceof Mob mobEntity && !memory.spawnAsAdult())
-                                                            mobEntity.setBaby(true);
-                                                        return entity;
-                                                    })
-                       );
+        return Optional
+            .ofNullable(memoryItemStack.get(PastelDataComponentTypes.MEMORY))
+            .flatMap(
+                memory -> MemoryItem
+                    .getEntityType(memoryItemStack)
+                    .map(entityType -> {
+                        // alignPosition: center the mob in the center of the blockPos
+                        Entity entity = entityType
+                            .spawn(
+                                world,
+                                memoryItemStack,
+                                null,
+                                blockPos,
+                                MobSpawnType.SPAWN_EGG,
+                                true,
+                                false
+                            );
+                        if (entity instanceof Mob mobEntity && !memory.spawnAsAdult())
+                            mobEntity.setBaby(true);
+                        return entity;
+                    })
+            );
     }
 
     @Override

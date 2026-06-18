@@ -25,17 +25,23 @@ import java.util.Optional;
  */
 public record BrokenBlockPredicate(Optional<HolderSet<Block>> blocks, Optional<StatePropertiesPredicate> state) {
 
-    public static final Codec<BrokenBlockPredicate> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                                RegistryCodecs.homogeneousList(Registries.BLOCK)
-                                                                                                              .optionalFieldOf("blocks")
-                                                                                                              .forGetter(BrokenBlockPredicate::blocks),
-                                                                                                StatePropertiesPredicate.CODEC.optionalFieldOf("state")
-                                                                                                                              .forGetter(BrokenBlockPredicate::state)
-                                                                                            )
-                                                                                            .apply(
-                                                                                                i,
-                                                                                                BrokenBlockPredicate::new
-                                                                                            ));
+    public static final Codec<BrokenBlockPredicate> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    RegistryCodecs
+                        .homogeneousList(Registries.BLOCK)
+                        .optionalFieldOf("blocks")
+                        .forGetter(BrokenBlockPredicate::blocks),
+                    StatePropertiesPredicate.CODEC
+                        .optionalFieldOf("state")
+                        .forGetter(BrokenBlockPredicate::state)
+                )
+                .apply(
+                    i,
+                    BrokenBlockPredicate::new
+                )
+        );
 
     public boolean test(BlockState state) {
         if (this.blocks.isPresent() && !state.is(this.blocks.get())) {
@@ -47,6 +53,7 @@ public record BrokenBlockPredicate(Optional<HolderSet<Block>> blocks, Optional<S
 
     public static class Builder {
         private Optional<HolderSet<Block>> blocks = Optional.empty();
+
         private Optional<StatePropertiesPredicate> state = Optional.empty();
 
         private Builder() {
@@ -63,15 +70,18 @@ public record BrokenBlockPredicate(Optional<HolderSet<Block>> blocks, Optional<S
 
         public BrokenBlockPredicate.Builder blocks(Iterable<Block> blocks) {
             List<Holder<Block>> blockEntries = new ArrayList<>();
-            for (Block block : blocks)
+            for (
+                Block block : blocks
+            )
                 blockEntries.add(BuiltInRegistries.BLOCK.wrapAsHolder(block));
             this.blocks = Optional.of(HolderSet.direct(blockEntries));
             return this;
         }
 
         public BrokenBlockPredicate.Builder tag(TagKey<Block> tag) {
-            this.blocks = BuiltInRegistries.BLOCK.getTag(tag)
-                                                 .map(l -> l);
+            this.blocks = BuiltInRegistries.BLOCK
+                .getTag(tag)
+                .map(l -> l);
             return this;
         }
 

@@ -84,7 +84,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PastelClientEvents {
 
     private static boolean postProcessWasOn = PastelCommon.CONFIG.PostProcess;
@@ -150,21 +152,29 @@ public class PastelClientEvents {
 
         slotEffect(PastelItems.AETHER_GRACED_NECTAR_GLOVES, e);
         slotEffect(PastelItems.PRISCILLENT_SPECTACLES, e);
-        InkDrainTrinketItem.BY_COLOR.values()
-                                    .forEach(i -> slotEffect(i, e));
+        InkDrainTrinketItem.BY_COLOR
+            .values()
+            .forEach(i -> slotEffect(i, e));
     }
 
     private static void handlePickBlock(ClientTickEvent.Post event) {
         var instance = Minecraft.getInstance();
-        if(instance.player == null) return;
-        while(instance.options.keyPickItem.consumeClick()){
+        if (instance.player == null) return;
+        while (instance.options.keyPickItem.consumeClick()) {
             var heldItem = instance.player.getItemInHand(InteractionHand.MAIN_HAND);
             if (heldItem.is(PastelItems.PAINTBRUSH)) {
                 var component = heldItem.getOrDefault(PastelDataComponentTypes.PAINTBRUSH, PaintbrushComponent.DEFAULT);
-                PacketDistributor.sendToServer(new PaintbrushModeSwitchPayload(component.mode()
-                                                                                        .ordinal()));
-            } else if(heldItem.is(PastelItems.EXCHANGING_STAFF)){
-                var component = heldItem.getOrDefault(PastelDataComponentTypes.EXCHANGING_STAFF, ExchangingStaffComponent.DEFAULT);
+                PacketDistributor
+                    .sendToServer(
+                        new PaintbrushModeSwitchPayload(
+                            component
+                                .mode()
+                                .ordinal()
+                        )
+                    );
+            } else if (heldItem.is(PastelItems.EXCHANGING_STAFF)) {
+                var component = heldItem
+                    .getOrDefault(PastelDataComponentTypes.EXCHANGING_STAFF, ExchangingStaffComponent.DEFAULT);
                 PacketDistributor.sendToServer(new ExchangingStaffAdjustPayload(component.range()));
             }
         }
@@ -213,7 +223,9 @@ public class PastelClientEvents {
             blue *= darkening;
         }
 
-        var colors = new float[]{red, green, blue};
+        var colors = new float[] {
+            red, green, blue
+        };
         Environmental.applyColor(colors);
         event.setRed(colors[0]);
         event.setGreen(colors[1]);
@@ -222,18 +234,24 @@ public class PastelClientEvents {
 
     private static void onLogin(ClientPlayerNetworkEvent.LoggingIn event) {
         var player = event.getPlayer();
-        if (player.level()
-                  .dimension()
-                  .equals(PastelLevels.DIMENSION_KEY) && PastelCommon.CONFIG.PostProcess) {
+        if (player
+            .level()
+            .dimension()
+            .equals(PastelLevels.DIMENSION_KEY) && PastelCommon.CONFIG.PostProcess) {
             initializeColorGrading(Minecraft.getInstance());
         }
     }
 
     private static void addResourcePacks(AddPackFindersEvent event) {
-        event.addPackFinders(
-            PastelCommon.locate("pastel_style_amethyst"), PackType.CLIENT_RESOURCES,
-            Component.literal("Pastel-Style Amethyst"), PackSource.BUILT_IN, false, Pack.Position.TOP
-        );
+        event
+            .addPackFinders(
+                PastelCommon.locate("pastel_style_amethyst"),
+                PackType.CLIENT_RESOURCES,
+                Component.literal("Pastel-Style Amethyst"),
+                PackSource.BUILT_IN,
+                false,
+                Pack.Position.TOP
+            );
     }
 
     private static void onEntityTick(EntityTickEvent.Post event) {
@@ -256,10 +274,15 @@ public class PastelClientEvents {
             return;
         }
 
-        var inDim = level.dimension()
-                         .equals(PastelLevels.DIMENSION_KEY);
-        Holder<Biome> biome = level.getBiome(client.getCameraEntity()
-                                                   .blockPosition());
+        var inDim = level
+            .dimension()
+            .equals(PastelLevels.DIMENSION_KEY);
+        Holder<Biome> biome = level
+            .getBiome(
+                client
+                    .getCameraEntity()
+                    .blockPosition()
+            );
 
         HowlingSpireEffects.clientTick(level, cameraEntity, biome);
         Environmental.tick(cameraEntity);
@@ -283,15 +306,23 @@ public class PastelClientEvents {
         var lines = event.getTooltipElements();
 
         if (stack.has(DataComponents.FOOD)) {
-            if (BuiltInRegistries.ITEM.getKey(stack.getItem())
-                                      .getNamespace()
-                                      .equals(PastelCommon.MOD_ID)) {
+            if (BuiltInRegistries.ITEM
+                .getKey(stack.getItem())
+                .getNamespace()
+                .equals(PastelCommon.MOD_ID)) {
                 TooltipHelper.addFoodComponentEffectTooltip(stack, lines, Item.TooltipContext.EMPTY.tickRate());
             }
         }
         if (stack.is(PastelItemTags.COMING_SOON_TOOLTIP)) {
-            lines.add(Either.left(Component.translatable("pastel.tooltip.coming_soon")
-                                           .withStyle(ChatFormatting.RED)));
+            lines
+                .add(
+                    Either
+                        .left(
+                            Component
+                                .translatable("pastel.tooltip.coming_soon")
+                                .withStyle(ChatFormatting.RED)
+                        )
+                );
         }
     }
 
@@ -307,20 +338,31 @@ public class PastelClientEvents {
 
         Minecraft client = Minecraft.getInstance();
         if (client.player != null) {
-            for (ItemStack handStack : client.player.getHandSlots()) {
+            for (
+                ItemStack handStack : client.player.getHandSlots()
+            ) {
                 Item handItem = handStack.getItem();
                 if (handItem instanceof ConstructorsStaffItem) {
                     shouldCancel = renderPlacementStaffOutline(
-                        event.getPoseStack(), camera, camera.getPosition().x,
-                        camera.getPosition().y, camera.getPosition().z,
-                        event.getMultiBufferSource(), target
+                        event.getPoseStack(),
+                        camera,
+                        camera.getPosition().x,
+                        camera.getPosition().y,
+                        camera.getPosition().z,
+                        event.getMultiBufferSource(),
+                        target
                     );
                     break;
                 } else if (handItem instanceof ExchangeStaffItem) {
                     shouldCancel = renderExchangeStaffOutline(
-                        event.getPoseStack(), camera, camera.getPosition().x,
-                        camera.getPosition().y, camera.getPosition().z,
-                        event.getMultiBufferSource(), handStack, target
+                        event.getPoseStack(),
+                        camera,
+                        camera.getPosition().x,
+                        camera.getPosition().y,
+                        camera.getPosition().z,
+                        event.getMultiBufferSource(),
+                        handStack,
+                        target
                     );
                     break;
                 }
@@ -337,21 +379,29 @@ public class PastelClientEvents {
             HudRenderers.clearItemStackOverlay();
         } else {
             Minecraft minecraft = Minecraft.getInstance();
-            MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers()
-                                                                   .bufferSource();
+            MultiBufferSource.BufferSource bufferSource = minecraft
+                .renderBuffers()
+                .bufferSource();
 
             if (stage == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
-                ((ExtendedParticleManager) minecraft.particleEngine).render(
-                    event.getPoseStack(), bufferSource, event.getCamera(), event.getPartialTick()
-                                                                                .getGameTimeDeltaTicks()
-                );
+                ((ExtendedParticleManager) minecraft.particleEngine)
+                    .render(
+                        event.getPoseStack(),
+                        bufferSource,
+                        event.getCamera(),
+                        event
+                            .getPartialTick()
+                            .getGameTimeDeltaTicks()
+                    );
             } else if (stage == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
-                Entity focusedEntity = event.getCamera()
-                                            .getEntity();
+                Entity focusedEntity = event
+                    .getCamera()
+                    .getEntity();
 
                 if (focusedEntity instanceof LivingEntity) {
-                    Pastel.getClientInstance()
-                          .renderLines(minecraft.level, event.getPoseStack(), bufferSource, event.getCamera());
+                    Pastel
+                        .getClientInstance()
+                        .renderLines(minecraft.level, event.getPoseStack(), bufferSource, event.getCamera());
                 }
             }
         }
@@ -363,9 +413,12 @@ public class PastelClientEvents {
         if (stage == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level == null) return;
-            for (Player i : mc.level.players()) {
-                i.getData(MiscPlayerData.ATTACHMENT)
-                 .renderAdditional(event);
+            for (
+                Player i : mc.level.players()
+            ) {
+                i
+                    .getData(MiscPlayerData.ATTACHMENT)
+                    .renderAdditional(event);
             }
         }
     }
@@ -390,14 +443,22 @@ public class PastelClientEvents {
 
     private static void initializeColorGrading(Minecraft client) {
         if (PastelShaders.colorGradingPostProcess.isEmpty()) {
-            PastelShaders.colorGradingPostProcess = PastelShaders.loadPostProcess(
-                client, PastelShaders.COLOR_GRADING_ID);
+            PastelShaders.colorGradingPostProcess = PastelShaders
+                .loadPostProcess(
+                    client,
+                    PastelShaders.COLOR_GRADING_ID
+                );
         }
     }
 
     private static boolean renderPlacementStaffOutline(
-        PoseStack matrices, Camera camera, double d, double e, double f,
-        MultiBufferSource consumers, @NotNull BlockHitResult hitResult
+        PoseStack matrices,
+        Camera camera,
+        double d,
+        double e,
+        double f,
+        MultiBufferSource consumers,
+        @NotNull BlockHitResult hitResult
     ) {
         Minecraft client = Minecraft.getInstance();
         ClientLevel world = client.level;
@@ -407,9 +468,15 @@ public class PastelClientEvents {
         BlockPos lookingAtPos = hitResult.getBlockPos();
         BlockState lookingAtState = world.getBlockState(lookingAtPos);
 
-        if (player.getMainHandItem()
-                  .getItem() instanceof BuildingStaffItem staff && (player.isCreative() || staff.canInteractWith(
-            lookingAtState, world, lookingAtPos, player))) {
+        if (player
+            .getMainHandItem()
+            .getItem() instanceof BuildingStaffItem staff && (player.isCreative() || staff
+                .canInteractWith(
+                    lookingAtState,
+                    world,
+                    lookingAtPos,
+                    player
+                ))) {
             Block lookingAtBlock = lookingAtState.getBlock();
             Item item = lookingAtBlock.asItem();
             VoxelShape shape = Shapes.empty();
@@ -418,13 +485,19 @@ public class PastelClientEvents {
                 int itemCountInInventory = Integer.MAX_VALUE;
                 long inkLimit = Long.MAX_VALUE;
                 if (!player.isCreative()) {
-                    Triplet<Block, Item, Integer> inventoryItemAndCount
-                        = BuildingHelper.getBuildingItemCountInInventoryIncludingSimilars(
-                        player, lookingAtBlock, Integer.MAX_VALUE);
+                    Triplet<Block, Item, Integer> inventoryItemAndCount = BuildingHelper
+                        .getBuildingItemCountInInventoryIncludingSimilars(
+                            player,
+                            lookingAtBlock,
+                            Integer.MAX_VALUE
+                        );
                     item = inventoryItemAndCount.getB();
                     itemCountInInventory = inventoryItemAndCount.getC();
-                    inkLimit = InkPowered.getAvailableInk(player, ConstructorsStaffItem.USED_COLOR) /
-                               ConstructorsStaffItem.INK_COST_PER_BLOCK;
+                    inkLimit = InkPowered
+                        .getAvailableInk(
+                            player,
+                            ConstructorsStaffItem.USED_COLOR
+                        ) / ConstructorsStaffItem.INK_COST_PER_BLOCK;
                 }
 
                 boolean sneaking = player.isShiftKeyDown();
@@ -434,33 +507,52 @@ public class PastelClientEvents {
                     HudRenderers.setItemStackToRender(new ItemStack(item), 1, true);
                 } else {
                     long usableCount = Math.min(itemCountInInventory, inkLimit);
-                    List<BlockPos> positions = BuildingHelper.calculateBuildingStaffSelection(
-                        world, lookingAtPos, hitResult.getDirection(), usableCount,
-                        ConstructorsStaffItem.getRange(player), !sneaking
-                    );
+                    List<BlockPos> positions = BuildingHelper
+                        .calculateBuildingStaffSelection(
+                            world,
+                            lookingAtPos,
+                            hitResult.getDirection(),
+                            usableCount,
+                            ConstructorsStaffItem.getRange(player),
+                            !sneaking
+                        );
                     if (!positions.isEmpty()) {
-                        for (BlockPos newPosition : positions) {
-                            if (world.getWorldBorder()
-                                     .isWithinBounds(newPosition)) {
+                        for (
+                            BlockPos newPosition : positions
+                        ) {
+                            if (world
+                                .getWorldBorder()
+                                .isWithinBounds(newPosition)) {
                                 BlockPos testPos = lookingAtPos.subtract(newPosition);
-                                shape = Shapes.or(
-                                    shape, lookingAtState.getShape(
-                                                             world, lookingAtPos,
-                                                             CollisionContext.of(camera.getEntity())
-                                                         )
-                                                         .move(-testPos.getX(), -testPos.getY(), -testPos.getZ())
-                                );
+                                shape = Shapes
+                                    .or(
+                                        shape,
+                                        lookingAtState
+                                            .getShape(
+                                                world,
+                                                lookingAtPos,
+                                                CollisionContext.of(camera.getEntity())
+                                            )
+                                            .move(-testPos.getX(), -testPos.getY(), -testPos.getZ())
+                                    );
                             }
                         }
 
                         HudRenderers.setItemStackToRender(new ItemStack(item), positions.size(), false);
                         VertexConsumer linesBuffer = consumers.getBuffer(RenderType.lines());
-                        WorldRendererAccessor.invokeRenderShape(
-                            matrices, linesBuffer, shape,
-                            (double) lookingAtPos.getX() - d,
-                            (double) lookingAtPos.getY() - e,
-                            (double) lookingAtPos.getZ() - f, 0.0F, 0.0F, 0.0F, 0.4F
-                        );
+                        WorldRendererAccessor
+                            .invokeRenderShape(
+                                matrices,
+                                linesBuffer,
+                                shape,
+                                (double) lookingAtPos.getX() - d,
+                                (double) lookingAtPos.getY() - e,
+                                (double) lookingAtPos.getZ() - f,
+                                0.0F,
+                                0.0F,
+                                0.0F,
+                                0.4F
+                            );
                         return true;
                     }
                 }
@@ -471,8 +563,13 @@ public class PastelClientEvents {
     }
 
     private static boolean renderExchangeStaffOutline(
-        PoseStack matrices, Camera camera, double d, double e, double f,
-        MultiBufferSource consumers, ItemStack exchangeStaffItemStack,
+        PoseStack matrices,
+        Camera camera,
+        double d,
+        double e,
+        double f,
+        MultiBufferSource consumers,
+        ItemStack exchangeStaffItemStack,
         BlockHitResult hitResult
     ) {
         Minecraft client = Minecraft.getInstance();
@@ -484,14 +581,21 @@ public class PastelClientEvents {
 
         if (player == null) return false;
 
-        if (player.getMainHandItem()
-                  .getItem() instanceof BuildingStaffItem staff && (player.isCreative() || staff.canInteractWith(
-            lookingAtState, level, lookingAtPos, player))) {
+        if (player
+            .getMainHandItem()
+            .getItem() instanceof BuildingStaffItem staff && (player.isCreative() || staff
+                .canInteractWith(
+                    lookingAtState,
+                    level,
+                    lookingAtPos,
+                    player
+                ))) {
             Block lookingAtBlock = lookingAtState.getBlock();
             Optional<Block> exchangeBlock = ExchangeStaffItem.getStoredBlock(exchangeStaffItemStack);
             if (exchangeBlock.isPresent() && exchangeBlock.get() != lookingAtBlock) {
-                Item exchangeBlockItem = exchangeBlock.get()
-                                                      .asItem();
+                Item exchangeBlockItem = exchangeBlock
+                    .get()
+                    .asItem();
                 VoxelShape shape = Shapes.empty();
 
                 if (exchangeBlockItem != Items.AIR) {
@@ -501,18 +605,28 @@ public class PastelClientEvents {
                         Inventory playerInventory = player.getInventory();
                         itemCountInInventory = playerInventory.countItem(exchangeBlockItem);
                         for (
-                            int i = 0; i < player.getInventory()
-                                                 .getContainerSize(); i++
+                            int i = 0;
+                            i < player
+                                .getInventory()
+                                .getContainerSize();
+                            i++
                         ) {
                             var currentStack = playerInventory.getItem(i);
                             ItemProvider itemProvider = currentStack.getCapability(ItemProvider.CAPABILITY);
                             if (itemProvider != null) {
-                                itemCountInInventory += itemProvider.getItemCount(
-                                    player, currentStack, exchangeBlockItem);
+                                itemCountInInventory += itemProvider
+                                    .getItemCount(
+                                        player,
+                                        currentStack,
+                                        exchangeBlockItem
+                                    );
                             }
                         }
-                        inkLimit = InkPowered.getAvailableInk(player, ExchangeStaffItem.USED_COLOR) /
-                                   ExchangeStaffItem.INK_COST_PER_BLOCK;
+                        inkLimit = InkPowered
+                            .getAvailableInk(
+                                player,
+                                ExchangeStaffItem.USED_COLOR
+                            ) / ExchangeStaffItem.INK_COST_PER_BLOCK;
                     }
 
                     if (itemCountInInventory == 0) {
@@ -521,28 +635,49 @@ public class PastelClientEvents {
                         HudRenderers.setItemStackToRender(new ItemStack(exchangeBlockItem), 1, true);
                     } else {
                         long usableCount = Math.min(itemCountInInventory, inkLimit);
-                        List<BlockPos> positions = BuildingHelper.getConnectedBlocks(
-                            level, lookingAtPos, usableCount, ExchangeStaffItem.getRange(player.getMainHandItem()));
-                        for (BlockPos newPosition : positions) {
-                            if (level.getWorldBorder()
-                                     .isWithinBounds(newPosition)) {
+                        List<BlockPos> positions = BuildingHelper
+                            .getConnectedBlocks(
+                                level,
+                                lookingAtPos,
+                                usableCount,
+                                ExchangeStaffItem.getRange(player.getMainHandItem())
+                            );
+                        for (
+                            BlockPos newPosition : positions
+                        ) {
+                            if (level
+                                .getWorldBorder()
+                                .isWithinBounds(newPosition)) {
                                 BlockPos testPos = lookingAtPos.subtract(newPosition);
-                                shape = Shapes.or(
-                                    shape, lookingAtState.getShape(
-                                                             level, lookingAtPos,
-                                                             CollisionContext.of(camera.getEntity())
-                                                         )
-                                                         .move(-testPos.getX(), -testPos.getY(), -testPos.getZ())
-                                );
+                                shape = Shapes
+                                    .or(
+                                        shape,
+                                        lookingAtState
+                                            .getShape(
+                                                level,
+                                                lookingAtPos,
+                                                CollisionContext.of(camera.getEntity())
+                                            )
+                                            .move(-testPos.getX(), -testPos.getY(), -testPos.getZ())
+                                    );
                             }
                         }
 
                         HudRenderers.setItemStackToRender(new ItemStack(exchangeBlockItem), positions.size(), false);
                         VertexConsumer linesBuffer = consumers.getBuffer(RenderType.lines());
-                        WorldRendererAccessor.invokeRenderShape(
-                            matrices, linesBuffer, shape, (double) lookingAtPos.getX() - d,
-                            (double) lookingAtPos.getY() - e, (double) lookingAtPos.getZ() - f, 0.0F, 0.0F, 0.0F, 0.4F
-                        );
+                        WorldRendererAccessor
+                            .invokeRenderShape(
+                                matrices,
+                                linesBuffer,
+                                shape,
+                                (double) lookingAtPos.getX() - d,
+                                (double) lookingAtPos.getY() - e,
+                                (double) lookingAtPos.getZ() - f,
+                                0.0F,
+                                0.0F,
+                                0.0F,
+                                0.4F
+                            );
                         return true;
                     }
                 }

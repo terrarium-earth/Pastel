@@ -18,229 +18,354 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 public class ColoredBlockModels {
     public static void generateColoredLightBlockModel(BlockModelGenerators generators, DeferredBlock<Block> block) {
         ResourceLocation off = TexturedModel.CUBE.create(block.get(), generators.modelOutput);
-        ResourceLocation on = PastelModels.COLORED_LAMP_ON.createWithSuffix(
-            block.get(), "_on", PastelTextureMaps.innerOuter(
-                block.get(), "_on", block.get(), "_outer"),
-            generators.modelOutput
-        );
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block.get())
-                                                                .with(PastelModelHelper.createBooleanModelMap(
-                                                                    BlockStateProperties.LIT, on, off)));
+        ResourceLocation on = PastelModels.COLORED_LAMP_ON
+            .createWithSuffix(
+                block.get(),
+                "_on",
+                PastelTextureMaps
+                    .innerOuter(
+                        block.get(),
+                        "_on",
+                        block.get(),
+                        "_outer"
+                    ),
+                generators.modelOutput
+            );
+        generators.blockStateOutput
+            .accept(
+                MultiVariantGenerator
+                    .multiVariant(block.get())
+                    .with(
+                        PastelModelHelper
+                            .createBooleanModelMap(
+                                BlockStateProperties.LIT,
+                                on,
+                                off
+                            )
+                    )
+            );
     }
 
     public static void generateColoredSporeBlossomBlockModel(
-        BlockModelGenerators generators, DeferredBlock<Block> block) {
-        PastelModelHelper.BLOCK.singleton(
-            generators, block,
-            TexturedModel.createDefault(
-                b -> PastelTextureMaps.flowerParticle(b, "", b, ""), PastelModels.SPORE_BLOSSOM)
-        );
+        BlockModelGenerators generators,
+        DeferredBlock<Block> block
+    ) {
+        PastelModelHelper.BLOCK
+            .singleton(
+                generators,
+                block,
+                TexturedModel
+                    .createDefault(
+                        b -> PastelTextureMaps.flowerParticle(b, "", b, ""),
+                        PastelModels.SPORE_BLOSSOM
+                    )
+            );
     }
 
     public static void generateBlockModels(BlockModelGenerators generators) {
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.BLACK_PLANKS.get()).stairs(PastelBlocks.BLACK_STAIRS.get())
-                                                                                .pressurePlate(
-                                                                                    PastelBlocks.BLACK_PRESSURE_PLATE.get())
-                                                                                .fence(PastelBlocks.BLACK_FENCE.get())
-                                                                                .fenceGate(
-                                                                                    PastelBlocks.BLACK_FENCE_GATE.get())
-                                                                                .button(PastelBlocks.BLACK_BUTTON.get())
-                                                                                .slab(PastelBlocks.BLACK_SLAB.get())
-                                                                                .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.BLUE_PLANKS.get()).stairs(PastelBlocks.BLUE_STAIRS.get())
-                                                                               .pressurePlate(
-                                                                                   PastelBlocks.BLUE_PRESSURE_PLATE.get())
-                                                                               .fence(PastelBlocks.BLUE_FENCE.get())
-                                                                               .fenceGate(
-                                                                                   PastelBlocks.BLUE_FENCE_GATE.get())
-                                                                               .button(PastelBlocks.BLUE_BUTTON.get())
-                                                                               .slab(PastelBlocks.BLUE_SLAB.get())
-                                                                               .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.BROWN_PLANKS.get()).stairs(PastelBlocks.BROWN_STAIRS.get())
-                                                                                .pressurePlate(
-                                                                                    PastelBlocks.BROWN_PRESSURE_PLATE.get())
-                                                                                .fence(PastelBlocks.BROWN_FENCE.get())
-                                                                                .fenceGate(
-                                                                                    PastelBlocks.BROWN_FENCE_GATE.get())
-                                                                                .button(PastelBlocks.BROWN_BUTTON.get())
-                                                                                .slab(PastelBlocks.BROWN_SLAB.get())
-                                                                                .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.CYAN_PLANKS.get()).stairs(PastelBlocks.CYAN_STAIRS.get())
-                                                                               .pressurePlate(
-                                                                                   PastelBlocks.CYAN_PRESSURE_PLATE.get())
-                                                                               .fence(PastelBlocks.CYAN_FENCE.get())
-                                                                               .fenceGate(
-                                                                                   PastelBlocks.CYAN_FENCE_GATE.get())
-                                                                               .button(PastelBlocks.CYAN_BUTTON.get())
-                                                                               .slab(PastelBlocks.CYAN_SLAB.get())
-                                                                               .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.GRAY_PLANKS.get()).stairs(PastelBlocks.GRAY_STAIRS.get())
-                                                                               .pressurePlate(
-                                                                                   PastelBlocks.GRAY_PRESSURE_PLATE.get())
-                                                                               .fence(PastelBlocks.GRAY_FENCE.get())
-                                                                               .fenceGate(
-                                                                                   PastelBlocks.GRAY_FENCE_GATE.get())
-                                                                               .button(PastelBlocks.GRAY_BUTTON.get())
-                                                                               .slab(PastelBlocks.GRAY_SLAB.get())
-                                                                               .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.GREEN_PLANKS.get()).stairs(PastelBlocks.GREEN_STAIRS.get())
-                                                                                .pressurePlate(
-                                                                                    PastelBlocks.GREEN_PRESSURE_PLATE.get())
-                                                                                .fence(PastelBlocks.GREEN_FENCE.get())
-                                                                                .fenceGate(
-                                                                                    PastelBlocks.GREEN_FENCE_GATE.get())
-                                                                                .button(PastelBlocks.GREEN_BUTTON.get())
-                                                                                .slab(PastelBlocks.GREEN_SLAB.get())
-                                                                                .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.LIGHT_BLUE_PLANKS.get()).stairs(
-                                                                                         PastelBlocks.LIGHT_BLUE_STAIRS.get())
-                                                                                     .pressurePlate(
-                                                                                         PastelBlocks.LIGHT_BLUE_PRESSURE_PLATE.get())
-                                                                                     .fence(
-                                                                                         PastelBlocks.LIGHT_BLUE_FENCE.get())
-                                                                                     .fenceGate(
-                                                                                         PastelBlocks.LIGHT_BLUE_FENCE_GATE.get())
-                                                                                     .button(
-                                                                                         PastelBlocks.LIGHT_BLUE_BUTTON.get())
-                                                                                     .slab(
-                                                                                         PastelBlocks.LIGHT_BLUE_SLAB.get())
-                                                                                     .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.LIGHT_GRAY_PLANKS.get()).stairs(
-                                                                                         PastelBlocks.LIGHT_GRAY_STAIRS.get())
-                                                                                     .pressurePlate(
-                                                                                         PastelBlocks.LIGHT_GRAY_PRESSURE_PLATE.get())
-                                                                                     .fence(
-                                                                                         PastelBlocks.LIGHT_GRAY_FENCE.get())
-                                                                                     .fenceGate(
-                                                                                         PastelBlocks.LIGHT_GRAY_FENCE_GATE.get())
-                                                                                     .button(
-                                                                                         PastelBlocks.LIGHT_GRAY_BUTTON.get())
-                                                                                     .slab(
-                                                                                         PastelBlocks.LIGHT_GRAY_SLAB.get())
-                                                                                     .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.LIME_PLANKS.get()).stairs(PastelBlocks.LIME_STAIRS.get())
-                                                                               .pressurePlate(
-                                                                                   PastelBlocks.LIME_PRESSURE_PLATE.get())
-                                                                               .fence(PastelBlocks.LIME_FENCE.get())
-                                                                               .fenceGate(
-                                                                                   PastelBlocks.LIME_FENCE_GATE.get())
-                                                                               .button(PastelBlocks.LIME_BUTTON.get())
-                                                                               .slab(PastelBlocks.LIME_SLAB.get())
-                                                                               .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.MAGENTA_PLANKS.get()).stairs(
-                                                                                      PastelBlocks.MAGENTA_STAIRS.get())
-                                                                                  .pressurePlate(
-                                                                                      PastelBlocks.MAGENTA_PRESSURE_PLATE.get())
-                                                                                  .fence(
-                                                                                      PastelBlocks.MAGENTA_FENCE.get())
-                                                                                  .fenceGate(
-                                                                                      PastelBlocks.MAGENTA_FENCE_GATE.get())
-                                                                                  .button(
-                                                                                      PastelBlocks.MAGENTA_BUTTON.get())
-                                                                                  .slab(PastelBlocks.MAGENTA_SLAB.get())
-                                                                                  .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.ORANGE_PLANKS.get()).stairs(
-                                                                                     PastelBlocks.ORANGE_STAIRS.get())
-                                                                                 .pressurePlate(
-                                                                                     PastelBlocks.ORANGE_PRESSURE_PLATE.get())
-                                                                                 .fence(PastelBlocks.ORANGE_FENCE.get())
-                                                                                 .fenceGate(
-                                                                                     PastelBlocks.ORANGE_FENCE_GATE.get())
-                                                                                 .button(
-                                                                                     PastelBlocks.ORANGE_BUTTON.get())
-                                                                                 .slab(PastelBlocks.ORANGE_SLAB.get())
-                                                                                 .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.PINK_PLANKS.get()).stairs(PastelBlocks.PINK_STAIRS.get())
-                                                                               .pressurePlate(
-                                                                                   PastelBlocks.PINK_PRESSURE_PLATE.get())
-                                                                               .fence(PastelBlocks.PINK_FENCE.get())
-                                                                               .fenceGate(
-                                                                                   PastelBlocks.PINK_FENCE_GATE.get())
-                                                                               .button(PastelBlocks.PINK_BUTTON.get())
-                                                                               .slab(PastelBlocks.PINK_SLAB.get())
-                                                                               .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.PURPLE_PLANKS.get()).stairs(
-                                                                                     PastelBlocks.PURPLE_STAIRS.get())
-                                                                                 .pressurePlate(
-                                                                                     PastelBlocks.PURPLE_PRESSURE_PLATE.get())
-                                                                                 .fence(PastelBlocks.PURPLE_FENCE.get())
-                                                                                 .fenceGate(
-                                                                                     PastelBlocks.PURPLE_FENCE_GATE.get())
-                                                                                 .button(
-                                                                                     PastelBlocks.PURPLE_BUTTON.get())
-                                                                                 .slab(PastelBlocks.PURPLE_SLAB.get())
-                                                                                 .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.RED_PLANKS.get()).stairs(PastelBlocks.RED_STAIRS.get())
-                                                                              .pressurePlate(
-                                                                                  PastelBlocks.RED_PRESSURE_PLATE.get())
-                                                                              .fence(PastelBlocks.RED_FENCE.get())
-                                                                              .fenceGate(
-                                                                                  PastelBlocks.RED_FENCE_GATE.get())
-                                                                              .button(PastelBlocks.RED_BUTTON.get())
-                                                                              .slab(PastelBlocks.RED_SLAB.get())
-                                                                              .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.WHITE_PLANKS.get()).stairs(PastelBlocks.WHITE_STAIRS.get())
-                                                                                .pressurePlate(
-                                                                                    PastelBlocks.WHITE_PRESSURE_PLATE.get())
-                                                                                .fence(PastelBlocks.WHITE_FENCE.get())
-                                                                                .fenceGate(
-                                                                                    PastelBlocks.WHITE_FENCE_GATE.get())
-                                                                                .button(PastelBlocks.WHITE_BUTTON.get())
-                                                                                .slab(PastelBlocks.WHITE_SLAB.get())
-                                                                                .getFamily()
-        );
-        PastelModelHelper.registerBlockFamily(
-            generators, new BlockFamily.Builder(PastelBlocks.YELLOW_PLANKS.get()).stairs(
-                                                                                     PastelBlocks.YELLOW_STAIRS.get())
-                                                                                 .pressurePlate(
-                                                                                     PastelBlocks.YELLOW_PRESSURE_PLATE.get())
-                                                                                 .fence(PastelBlocks.YELLOW_FENCE.get())
-                                                                                 .fenceGate(
-                                                                                     PastelBlocks.YELLOW_FENCE_GATE.get())
-                                                                                 .button(
-                                                                                     PastelBlocks.YELLOW_BUTTON.get())
-                                                                                 .slab(PastelBlocks.YELLOW_SLAB.get())
-                                                                                 .getFamily()
-        );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.BLACK_PLANKS.get())
+                    .stairs(PastelBlocks.BLACK_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.BLACK_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.BLACK_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.BLACK_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.BLACK_BUTTON.get())
+                    .slab(PastelBlocks.BLACK_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.BLUE_PLANKS.get())
+                    .stairs(PastelBlocks.BLUE_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.BLUE_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.BLUE_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.BLUE_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.BLUE_BUTTON.get())
+                    .slab(PastelBlocks.BLUE_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.BROWN_PLANKS.get())
+                    .stairs(PastelBlocks.BROWN_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.BROWN_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.BROWN_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.BROWN_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.BROWN_BUTTON.get())
+                    .slab(PastelBlocks.BROWN_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.CYAN_PLANKS.get())
+                    .stairs(PastelBlocks.CYAN_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.CYAN_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.CYAN_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.CYAN_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.CYAN_BUTTON.get())
+                    .slab(PastelBlocks.CYAN_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.GRAY_PLANKS.get())
+                    .stairs(PastelBlocks.GRAY_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.GRAY_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.GRAY_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.GRAY_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.GRAY_BUTTON.get())
+                    .slab(PastelBlocks.GRAY_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.GREEN_PLANKS.get())
+                    .stairs(PastelBlocks.GREEN_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.GREEN_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.GREEN_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.GREEN_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.GREEN_BUTTON.get())
+                    .slab(PastelBlocks.GREEN_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.LIGHT_BLUE_PLANKS.get())
+                    .stairs(
+                        PastelBlocks.LIGHT_BLUE_STAIRS.get()
+                    )
+                    .pressurePlate(
+                        PastelBlocks.LIGHT_BLUE_PRESSURE_PLATE.get()
+                    )
+                    .fence(
+                        PastelBlocks.LIGHT_BLUE_FENCE.get()
+                    )
+                    .fenceGate(
+                        PastelBlocks.LIGHT_BLUE_FENCE_GATE.get()
+                    )
+                    .button(
+                        PastelBlocks.LIGHT_BLUE_BUTTON.get()
+                    )
+                    .slab(
+                        PastelBlocks.LIGHT_BLUE_SLAB.get()
+                    )
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.LIGHT_GRAY_PLANKS.get())
+                    .stairs(
+                        PastelBlocks.LIGHT_GRAY_STAIRS.get()
+                    )
+                    .pressurePlate(
+                        PastelBlocks.LIGHT_GRAY_PRESSURE_PLATE.get()
+                    )
+                    .fence(
+                        PastelBlocks.LIGHT_GRAY_FENCE.get()
+                    )
+                    .fenceGate(
+                        PastelBlocks.LIGHT_GRAY_FENCE_GATE.get()
+                    )
+                    .button(
+                        PastelBlocks.LIGHT_GRAY_BUTTON.get()
+                    )
+                    .slab(
+                        PastelBlocks.LIGHT_GRAY_SLAB.get()
+                    )
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.LIME_PLANKS.get())
+                    .stairs(PastelBlocks.LIME_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.LIME_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.LIME_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.LIME_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.LIME_BUTTON.get())
+                    .slab(PastelBlocks.LIME_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.MAGENTA_PLANKS.get())
+                    .stairs(
+                        PastelBlocks.MAGENTA_STAIRS.get()
+                    )
+                    .pressurePlate(
+                        PastelBlocks.MAGENTA_PRESSURE_PLATE.get()
+                    )
+                    .fence(
+                        PastelBlocks.MAGENTA_FENCE.get()
+                    )
+                    .fenceGate(
+                        PastelBlocks.MAGENTA_FENCE_GATE.get()
+                    )
+                    .button(
+                        PastelBlocks.MAGENTA_BUTTON.get()
+                    )
+                    .slab(PastelBlocks.MAGENTA_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.ORANGE_PLANKS.get())
+                    .stairs(
+                        PastelBlocks.ORANGE_STAIRS.get()
+                    )
+                    .pressurePlate(
+                        PastelBlocks.ORANGE_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.ORANGE_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.ORANGE_FENCE_GATE.get()
+                    )
+                    .button(
+                        PastelBlocks.ORANGE_BUTTON.get()
+                    )
+                    .slab(PastelBlocks.ORANGE_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.PINK_PLANKS.get())
+                    .stairs(PastelBlocks.PINK_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.PINK_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.PINK_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.PINK_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.PINK_BUTTON.get())
+                    .slab(PastelBlocks.PINK_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.PURPLE_PLANKS.get())
+                    .stairs(
+                        PastelBlocks.PURPLE_STAIRS.get()
+                    )
+                    .pressurePlate(
+                        PastelBlocks.PURPLE_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.PURPLE_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.PURPLE_FENCE_GATE.get()
+                    )
+                    .button(
+                        PastelBlocks.PURPLE_BUTTON.get()
+                    )
+                    .slab(PastelBlocks.PURPLE_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.RED_PLANKS.get())
+                    .stairs(PastelBlocks.RED_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.RED_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.RED_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.RED_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.RED_BUTTON.get())
+                    .slab(PastelBlocks.RED_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.WHITE_PLANKS.get())
+                    .stairs(PastelBlocks.WHITE_STAIRS.get())
+                    .pressurePlate(
+                        PastelBlocks.WHITE_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.WHITE_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.WHITE_FENCE_GATE.get()
+                    )
+                    .button(PastelBlocks.WHITE_BUTTON.get())
+                    .slab(PastelBlocks.WHITE_SLAB.get())
+                    .getFamily()
+            );
+        PastelModelHelper
+            .registerBlockFamily(
+                generators,
+                new BlockFamily.Builder(PastelBlocks.YELLOW_PLANKS.get())
+                    .stairs(
+                        PastelBlocks.YELLOW_STAIRS.get()
+                    )
+                    .pressurePlate(
+                        PastelBlocks.YELLOW_PRESSURE_PLATE.get()
+                    )
+                    .fence(PastelBlocks.YELLOW_FENCE.get())
+                    .fenceGate(
+                        PastelBlocks.YELLOW_FENCE_GATE.get()
+                    )
+                    .button(
+                        PastelBlocks.YELLOW_BUTTON.get()
+                    )
+                    .slab(PastelBlocks.YELLOW_SLAB.get())
+                    .getFamily()
+            );
 
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.WHITE_CUSHION, PastelTexturedModels.TINTED_CUSHION);
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.ORANGE_CUSHION, PastelTexturedModels.TINTED_CUSHION);
-        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.MAGENTA_CUSHION, PastelTexturedModels.TINTED_CUSHION);
-        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.LIGHT_BLUE_CUSHION, PastelTexturedModels.TINTED_CUSHION);
+        PastelModelHelper.BLOCK
+            .singleton(generators, PastelBlocks.MAGENTA_CUSHION, PastelTexturedModels.TINTED_CUSHION);
+        PastelModelHelper.BLOCK
+            .singleton(generators, PastelBlocks.LIGHT_BLUE_CUSHION, PastelTexturedModels.TINTED_CUSHION);
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.YELLOW_CUSHION, PastelTexturedModels.TINTED_CUSHION);
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.LIME_CUSHION, PastelTexturedModels.TINTED_CUSHION);
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.PINK_CUSHION, PastelTexturedModels.TINTED_CUSHION);
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.GRAY_CUSHION, PastelTexturedModels.TINTED_CUSHION);
-        PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.LIGHT_GRAY_CUSHION, PastelTexturedModels.TINTED_CUSHION);
+        PastelModelHelper.BLOCK
+            .singleton(generators, PastelBlocks.LIGHT_GRAY_CUSHION, PastelTexturedModels.TINTED_CUSHION);
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.CYAN_CUSHION, PastelTexturedModels.TINTED_CUSHION);
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.PURPLE_CUSHION, PastelTexturedModels.TINTED_CUSHION);
         PastelModelHelper.BLOCK.singleton(generators, PastelBlocks.BLUE_CUSHION, PastelTexturedModels.TINTED_CUSHION);
@@ -265,7 +390,6 @@ public class ColoredBlockModels {
         PastelModelHelper.BLOCK.cross(generators, PastelBlocks.RED_SAPLING);
         PastelModelHelper.BLOCK.cross(generators, PastelBlocks.WHITE_SAPLING);
         PastelModelHelper.BLOCK.cross(generators, PastelBlocks.YELLOW_SAPLING);
-
 
         PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_BLACK_SAPLING, false);
         PastelModelHelper.BLOCK.pottedPlant(generators, PastelBlocks.POTTED_BLUE_SAPLING, false);
@@ -341,8 +465,10 @@ public class ColoredBlockModels {
         PastelModelHelper.BLOCK.wood(generators, PastelBlocks.STRIPPED_CYAN_WOOD, PastelBlocks.STRIPPED_CYAN_LOG);
         PastelModelHelper.BLOCK.wood(generators, PastelBlocks.STRIPPED_GRAY_WOOD, PastelBlocks.STRIPPED_GRAY_LOG);
         PastelModelHelper.BLOCK.wood(generators, PastelBlocks.STRIPPED_GREEN_WOOD, PastelBlocks.STRIPPED_GREEN_LOG);
-        PastelModelHelper.BLOCK.wood(generators, PastelBlocks.STRIPPED_LIGHT_BLUE_WOOD, PastelBlocks.STRIPPED_LIGHT_BLUE_LOG);
-        PastelModelHelper.BLOCK.wood(generators, PastelBlocks.STRIPPED_LIGHT_GRAY_WOOD, PastelBlocks.STRIPPED_LIGHT_GRAY_LOG);
+        PastelModelHelper.BLOCK
+            .wood(generators, PastelBlocks.STRIPPED_LIGHT_BLUE_WOOD, PastelBlocks.STRIPPED_LIGHT_BLUE_LOG);
+        PastelModelHelper.BLOCK
+            .wood(generators, PastelBlocks.STRIPPED_LIGHT_GRAY_WOOD, PastelBlocks.STRIPPED_LIGHT_GRAY_LOG);
         PastelModelHelper.BLOCK.wood(generators, PastelBlocks.STRIPPED_LIME_WOOD, PastelBlocks.STRIPPED_LIME_LOG);
         PastelModelHelper.BLOCK.wood(generators, PastelBlocks.STRIPPED_MAGENTA_WOOD, PastelBlocks.STRIPPED_MAGENTA_LOG);
         PastelModelHelper.BLOCK.wood(generators, PastelBlocks.STRIPPED_ORANGE_WOOD, PastelBlocks.STRIPPED_ORANGE_LOG);
@@ -403,13 +529,26 @@ public class ColoredBlockModels {
         generateColoredLightBlockModel(generators, PastelBlocks.WHITE_LAMP);
         generateColoredLightBlockModel(generators, PastelBlocks.YELLOW_LAMP);
 
-        PastelModelHelper.BLOCK.simple(
-            generators, PastelBlocks.BLACK_BLOCK, PastelBlocks.BLUE_BLOCK, PastelBlocks.BROWN_BLOCK,
-            PastelBlocks.CYAN_BLOCK, PastelBlocks.GRAY_BLOCK, PastelBlocks.GREEN_BLOCK, PastelBlocks.LIGHT_BLUE_BLOCK,
-            PastelBlocks.LIGHT_GRAY_BLOCK, PastelBlocks.LIME_BLOCK, PastelBlocks.MAGENTA_BLOCK,
-            PastelBlocks.ORANGE_BLOCK, PastelBlocks.PINK_BLOCK, PastelBlocks.PURPLE_BLOCK, PastelBlocks.RED_BLOCK,
-            PastelBlocks.WHITE_BLOCK, PastelBlocks.YELLOW_BLOCK
-        );
+        PastelModelHelper.BLOCK
+            .simple(
+                generators,
+                PastelBlocks.BLACK_BLOCK,
+                PastelBlocks.BLUE_BLOCK,
+                PastelBlocks.BROWN_BLOCK,
+                PastelBlocks.CYAN_BLOCK,
+                PastelBlocks.GRAY_BLOCK,
+                PastelBlocks.GREEN_BLOCK,
+                PastelBlocks.LIGHT_BLUE_BLOCK,
+                PastelBlocks.LIGHT_GRAY_BLOCK,
+                PastelBlocks.LIME_BLOCK,
+                PastelBlocks.MAGENTA_BLOCK,
+                PastelBlocks.ORANGE_BLOCK,
+                PastelBlocks.PINK_BLOCK,
+                PastelBlocks.PURPLE_BLOCK,
+                PastelBlocks.RED_BLOCK,
+                PastelBlocks.WHITE_BLOCK,
+                PastelBlocks.YELLOW_BLOCK
+            );
 
         generateColoredSporeBlossomBlockModel(generators, PastelBlocks.BLACK_SPORE_BLOSSOM);
         generateColoredSporeBlossomBlockModel(generators, PastelBlocks.BLUE_SPORE_BLOSSOM);

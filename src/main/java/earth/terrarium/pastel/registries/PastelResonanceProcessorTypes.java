@@ -10,8 +10,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelResonanceProcessorTypes {
 
-    private static final DeferredRegister<MapCodec<? extends ResonanceProcessor>> REGISTER = DeferredRegister.create(
-        PastelRegistries.RESONANCE_PROCESSOR_TYPE, PastelCommon.MOD_ID);
+    private static final DeferredRegister<MapCodec<? extends ResonanceProcessor>> REGISTER = DeferredRegister
+        .create(
+            PastelRegistries.RESONANCE_PROCESSOR_TYPE,
+            PastelCommon.MOD_ID
+        );
 
     public static void register(String id, MapCodec<? extends ResonanceProcessor> target) {
         REGISTER.register(id, () -> target);

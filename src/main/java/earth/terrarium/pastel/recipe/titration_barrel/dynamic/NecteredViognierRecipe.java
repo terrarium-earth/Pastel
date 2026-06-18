@@ -29,31 +29,54 @@ import java.util.Optional;
 
 public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 
-    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate(
-        "hidden/collect_cookbooks/imperial_cookbook");
+    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon
+        .locate(
+            "hidden/collect_cookbooks/imperial_cookbook"
+        );
 
     public static final int MIN_FERMENTATION_TIME_HOURS = 24;
+
     public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(PastelItems.NECTERED_VIOGNIER.get(), 4);
+
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-        add(IngredientStack.ofItems(PastelBlocks.NEPHRITE_BLOSSOM_BULB.get()
-                                                                      .asItem()));
-        add(IngredientStack.ofItems(PastelItems.GLASS_PEACH.get(), 4));
-    }};
+
+    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
+        {
+            add(
+                IngredientStack
+                    .ofItems(
+                        PastelBlocks.NEPHRITE_BLOSSOM_BULB
+                            .get()
+                            .asItem()
+                    )
+            );
+            add(IngredientStack.ofItems(PastelItems.GLASS_PEACH.get(), 4));
+        }
+    };
 
     public NecteredViognierRecipe() {
         super(
-            "", false, Optional.of(UNLOCK_IDENTIFIER), INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER),
-            OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, new FermentationData(0.15F, 0.01F, List.of())
+            "",
+            false,
+            Optional.of(UNLOCK_IDENTIFIER),
+            INGREDIENT_STACKS,
+            FluidIngredient.of(Fluids.WATER),
+            OUTPUT_STACK,
+            TAPPING_ITEM,
+            MIN_FERMENTATION_TIME_HOURS,
+            new FermentationData(0.15F, 0.01F, List.of())
         );
     }
 
     @Override
     public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
-        int bulbCount = InventoryHelper.getItemCountInInventory(
-            inventory, PastelBlocks.NEPHRITE_BLOSSOM_BULB.get()
-                                                         .asItem()
-        );
+        int bulbCount = InventoryHelper
+            .getItemCountInInventory(
+                inventory,
+                PastelBlocks.NEPHRITE_BLOSSOM_BULB
+                    .get()
+                    .asItem()
+            );
         int petalCount = InventoryHelper.getItemCountInInventory(inventory, PastelItems.GLASS_PEACH.get());
         boolean nectar = InventoryHelper.getItemCountInInventory(inventory, PastelItems.MOONSTRUCK_NECTAR.get()) > 0;
 
@@ -68,8 +91,10 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
         //TODO should this be a float, and only casted to int at the end?
         int effectDuration = (int) (150 * Math.round(alcPercent / 10));
         if (alcPercent >= 35) {
-            effects.add(
-                new MobEffectInstance(PastelMobEffects.MAGIC_ANNULATION, effectDuration, (int) (alcPercent / 10)));
+            effects
+                .add(
+                    new MobEffectInstance(PastelMobEffects.MAGIC_ANNULATION, effectDuration, (int) (alcPercent / 10))
+                );
         }
         if (alcPercent >= 35) {
             effects.add(new MobEffectInstance(PastelMobEffects.TOUGHNESS, effectDuration, (int) (alcPercent / 10)));
@@ -116,13 +141,21 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
     public boolean matches(FluidRecipeInput<FluidTank> recipeInput, Level world) {
         boolean bulbsFound = false;
 
-        for (int i = 0; i < recipeInput.size(); i++) {
+        for (
+            int i = 0;
+            i < recipeInput.size();
+            i++
+        ) {
             ItemStack stack = recipeInput.getItem(i);
             if (stack.isEmpty()) {
                 continue;
             }
-            if (stack.is(PastelBlocks.NEPHRITE_BLOSSOM_BULB.get()
-                                                           .asItem())) {
+            if (stack
+                .is(
+                    PastelBlocks.NEPHRITE_BLOSSOM_BULB
+                        .get()
+                        .asItem()
+                )) {
                 bulbsFound = true;
             } else if (!stack.is(PastelItems.GLASS_PEACH.get()) && !stack.is(PastelItems.MOONSTRUCK_NECTAR.get())) {
                 return false;

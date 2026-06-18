@@ -20,37 +20,55 @@ import java.util.*;
 
 public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
 
-    public static final MapCodec<ModifyDropsResonanceProcessor> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                              BrokenBlockPredicate.CODEC.fieldOf("block")
-                                                                                                                                        .validate(block -> block.test(Blocks.AIR.defaultBlockState()) ? DataResult.error(
-                                                                                                                                            () -> "Registering a Resonance Drop that matches on everything!")
-                                                                                                                                                                                                      : DataResult.success(
-                                                                                                                                                                                                          block))
-                                                                                                                                        .forGetter(c -> c.blockPredicate),
-                                                                                                              Codec.mapPair(Ingredient.CODEC_NONEMPTY.fieldOf("input"), BuiltInRegistries.ITEM.byNameCodec()
-                                                                                                                                                                                              .fieldOf("output")
-                                                                                                                   )
-                                                                                                                   .codec()
-                                                                                                                   .listOf()
-                                                                                                                   .xmap(
-                                                                                                                       pairs -> pairs.stream()
-                                                                                                                                     .collect(
-                                                                                                                                         () -> (Map<Ingredient, Item>) new HashMap<Ingredient, Item>(),
-                                                                                                                                         (map, pair) -> map.put(pair.getFirst(), pair.getSecond()),
-                                                                                                                                         (map1, map2) -> map1.putAll(map2)
-                                                                                                                                     ),
-                                                                                                                       map -> map.entrySet()
-                                                                                                                                 .stream()
-                                                                                                                                 .map(entry -> new Pair<>(entry.getKey(), entry.getValue()))
-                                                                                                                                 .toList()
-                                                                                                                   )
-                                                                                                                   .optionalFieldOf("modify_drops", Map.of())
-                                                                                                                   .forGetter(c -> c.modifiedDrops)
-                                                                                                          )
-                                                                                                          .apply(
-                                                                                                              i,
-                                                                                                              ModifyDropsResonanceProcessor::new
-                                                                                                          ));
+    public static final MapCodec<ModifyDropsResonanceProcessor> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    BrokenBlockPredicate.CODEC
+                        .fieldOf("block")
+                        .validate(
+                            block -> block.test(Blocks.AIR.defaultBlockState())
+                                ? DataResult
+                                    .error(
+                                        () -> "Registering a Resonance Drop that matches on everything!"
+                                    )
+                                : DataResult
+                                    .success(
+                                        block
+                                    )
+                        )
+                        .forGetter(c -> c.blockPredicate),
+                    Codec
+                        .mapPair(
+                            Ingredient.CODEC_NONEMPTY.fieldOf("input"),
+                            BuiltInRegistries.ITEM
+                                .byNameCodec()
+                                .fieldOf("output")
+                        )
+                        .codec()
+                        .listOf()
+                        .xmap(
+                            pairs -> pairs
+                                .stream()
+                                .collect(
+                                    () -> (Map<Ingredient, Item>) new HashMap<Ingredient, Item>(),
+                                    (map, pair) -> map.put(pair.getFirst(), pair.getSecond()),
+                                    (map1, map2) -> map1.putAll(map2)
+                                ),
+                            map -> map
+                                .entrySet()
+                                .stream()
+                                .map(entry -> new Pair<>(entry.getKey(), entry.getValue()))
+                                .toList()
+                        )
+                        .optionalFieldOf("modify_drops", Map.of())
+                        .forGetter(c -> c.modifiedDrops)
+                )
+                .apply(
+                    i,
+                    ModifyDropsResonanceProcessor::new
+                )
+        );
 
     public Map<Ingredient, Item> modifiedDrops;
 
@@ -70,14 +88,18 @@ public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
 
     private void modifyDrops(List<ItemStack> droppedStacks) {
         ListIterator<ItemStack> it = droppedStacks.listIterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             ItemStack stack = it.next();
-            for (Map.Entry<Ingredient, Item> modifiedDrop : modifiedDrops.entrySet()) {
-                if (modifiedDrop.getKey()
-                                .test(stack)) {
+            for (
+                Map.Entry<Ingredient, Item> modifiedDrop : modifiedDrops.entrySet()
+            ) {
+                if (modifiedDrop
+                    .getKey()
+                    .test(stack)) {
                     ItemStack convertedStack;
-                    convertedStack = modifiedDrop.getValue()
-                                                 .getDefaultInstance();
+                    convertedStack = modifiedDrop
+                        .getValue()
+                        .getDefaultInstance();
                     convertedStack.setCount(stack.getCount());
 
                     it.set(convertedStack);
@@ -97,6 +119,7 @@ public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
 
     public static class Builder {
         private final BrokenBlockPredicate blockTarget;
+
         private final List<Map.Entry<Ingredient, Item>> modifiedDrops = new ArrayList<>();
 
         private Builder(BrokenBlockPredicate blockTarget) {

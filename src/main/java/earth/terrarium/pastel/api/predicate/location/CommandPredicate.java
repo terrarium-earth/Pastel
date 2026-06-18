@@ -17,23 +17,39 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public record CommandPredicate(String command) implements CommandSource {
 
-    public static final Codec<CommandPredicate> CODEC = Codec.STRING.xmap(
-        CommandPredicate::new, CommandPredicate::command);
-    public static final StreamCodec<ByteBuf, CommandPredicate> STREAM_CODEC = ByteBufCodecs.STRING_UTF8.map(
-        CommandPredicate::new, CommandPredicate::command);
+    public static final Codec<CommandPredicate> CODEC = Codec.STRING
+        .xmap(
+            CommandPredicate::new,
+            CommandPredicate::command
+        );
+
+    public static final StreamCodec<ByteBuf, CommandPredicate> STREAM_CODEC = ByteBufCodecs.STRING_UTF8
+        .map(
+            CommandPredicate::new,
+            CommandPredicate::command
+        );
 
     public boolean test(ServerLevel world, BlockPos pos) {
         AtomicBoolean passed = new AtomicBoolean(false);
         MinecraftServer minecraftServer = world.getServer();
         CommandSourceStack serverCommandSource = new CommandSourceStack(
-            this, Vec3.atCenterOf(pos), Vec2.ZERO, world, 2, "SpectrumCommandWorldCondition", world.getBlockState(pos)
-                                                                                                   .getBlock()
-                                                                                                   .getName(),
-            minecraftServer, null
+            this,
+            Vec3.atCenterOf(pos),
+            Vec2.ZERO,
+            world,
+            2,
+            "SpectrumCommandWorldCondition",
+            world
+                .getBlockState(pos)
+                .getBlock()
+                .getName(),
+            minecraftServer,
+            null
         )
             .withCallback((successful, returnValue) -> passed.set(returnValue > 0));
-        minecraftServer.getCommands()
-                       .performPrefixedCommand(serverCommandSource, command);
+        minecraftServer
+            .getCommands()
+            .performPrefixedCommand(serverCommandSource, command);
         return passed.get();
     }
 

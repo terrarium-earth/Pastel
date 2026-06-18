@@ -28,13 +28,24 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        if (!InkPoweredPotionFillable.getEffects(stack)
-                                     .isEmpty())
-            tooltip.add(Component.translatable("item.pastel.concealing_oils.tooltip")
-                                 .withStyle(s -> s.applyFormat(ChatFormatting.GRAY)
-                                                  .withItalic(true)));
+        if (!InkPoweredPotionFillable
+            .getEffects(stack)
+            .isEmpty())
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.concealing_oils.tooltip")
+                        .withStyle(
+                            s -> s
+                                .applyFormat(ChatFormatting.GRAY)
+                                .withItalic(true)
+                        )
+                );
         appendPotionFillableTooltip(
-            stack, tooltip, Component.translatable("item.pastel.concealing_oils.when_poisoned"), true,
+            stack,
+            tooltip,
+            Component.translatable("item.pastel.concealing_oils.when_poisoned"),
+            true,
             context.tickRate()
         );
     }
@@ -68,23 +79,34 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
         if (foodStack.has(PastelDataComponentTypes.CONCEALED_EFFECT))
             return false;
 
-        var effect = InkPoweredPotionFillable.getEffects(oilsStack)
-                                             .getFirst();
-        if (!InkPowered.tryDrainEnergy(
-            user, effect.getInkCost()
-                        .color(), effect.getInkCost()
-                                        .cost()
-        ))
+        var effect = InkPoweredPotionFillable
+            .getEffects(oilsStack)
+            .getFirst();
+        if (!InkPowered
+            .tryDrainEnergy(
+                user,
+                effect
+                    .getInkCost()
+                    .color(),
+                effect
+                    .getInkCost()
+                    .cost()
+            ))
             return false;
 
         var foodComponent = foodStack.get(DataComponents.FOOD);
-        if (foodComponent != null &&
-            foodComponent
-                .effects()
-                .stream()
-                .map(FoodProperties.PossibleEffect::effect)
-                .anyMatch(e -> e.is(effect.getStatusEffectInstance()
-                                          .getEffect())))
+        if (foodComponent != null && foodComponent
+            .effects()
+            .stream()
+            .map(FoodProperties.PossibleEffect::effect)
+            .anyMatch(
+                e -> e
+                    .is(
+                        effect
+                            .getStatusEffectInstance()
+                            .getEffect()
+                    )
+            ))
             return false;
 
         foodStack.set(DataComponents.PROFILE, new ResolvableProfile(user.getGameProfile()));

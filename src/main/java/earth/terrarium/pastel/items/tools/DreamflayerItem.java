@@ -37,10 +37,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class DreamflayerItem extends SwordItem
-    implements InkPowered, ActivatableItem, SplitDamageHandler, SlotBackgroundEffect {
+    implements
+    InkPowered,
+    ActivatableItem,
+    SplitDamageHandler,
+    SlotBackgroundEffect {
 
     public static final InkColor USED_COLOR = InkColors.RED;
+
     public static final long INK_COST_FOR_ACTIVATION = 200L;
+
     public static final long INK_COST_PER_SECOND = 20L;
 
     /**
@@ -52,6 +58,7 @@ public class DreamflayerItem extends SwordItem
     public static final float ARMOR_DIFFERENCE_DAMAGE_MULTIPLIER = 2.5F;
 
     private final float baseAttackDamage;
+
     private final float baseAttackSpeed;
 
     public DreamflayerItem(Tier toolMaterial, int attackDamage, float attackSpeed, Properties settings) {
@@ -61,8 +68,9 @@ public class DreamflayerItem extends SwordItem
     }
 
     public static float getDamageAfterModifier(float amount, LivingEntity attacker, LivingEntity target) {
-        float damageMultiplier = (target.getArmorValue() + DreamflayerItem.ARMOR_DIFFERENCE_DAMAGE_MULTIPLIER) /
-                                 (attacker.getArmorValue() + DreamflayerItem.ARMOR_DIFFERENCE_DAMAGE_MULTIPLIER);
+        float damageMultiplier = (target
+            .getArmorValue() + DreamflayerItem.ARMOR_DIFFERENCE_DAMAGE_MULTIPLIER) / (attacker
+                .getArmorValue() + DreamflayerItem.ARMOR_DIFFERENCE_DAMAGE_MULTIPLIER);
         return amount * damageMultiplier;
     }
 
@@ -79,25 +87,46 @@ public class DreamflayerItem extends SwordItem
             if (isActivated) {
                 setActivated(stack, false);
                 if (!world.isClientSide) {
-                    world.playSound(
-                        null, user.getX(), user.getY(), user.getZ(), PastelSounds.DREAMFLAYER_DEACTIVATE,
-                        SoundSource.PLAYERS, 1.0F, 1F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            user.getX(),
+                            user.getY(),
+                            user.getZ(),
+                            PastelSounds.DREAMFLAYER_DEACTIVATE,
+                            SoundSource.PLAYERS,
+                            1.0F,
+                            1F
+                        );
                 }
             } else {
                 if (InkPowered.tryDrainEnergy(user, USED_COLOR, INK_COST_FOR_ACTIVATION)) {
                     setActivated(stack, true);
                     if (!world.isClientSide) {
-                        world.playSound(
-                            null, user.getX(), user.getY(), user.getZ(), PastelSounds.DREAMFLAYER_ACTIVATE,
-                            SoundSource.PLAYERS, 1.0F, 1F
-                        );
+                        world
+                            .playSound(
+                                null,
+                                user.getX(),
+                                user.getY(),
+                                user.getZ(),
+                                PastelSounds.DREAMFLAYER_ACTIVATE,
+                                SoundSource.PLAYERS,
+                                1.0F,
+                                1F
+                            );
                     }
                 } else if (!world.isClientSide) {
-                    world.playSound(
-                        null, user.getX(), user.getY(), user.getZ(), PastelSounds.DREAMFLAYER_DEACTIVATE,
-                        SoundSource.PLAYERS, 1.0F, 1F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            user.getX(),
+                            user.getY(),
+                            user.getZ(),
+                            PastelSounds.DREAMFLAYER_DEACTIVATE,
+                            SoundSource.PLAYERS,
+                            1.0F,
+                            1F
+                        );
                 }
             }
 
@@ -114,21 +143,37 @@ public class DreamflayerItem extends SwordItem
         if (world.isClientSide) {
             if (ActivatableItem.isActivated(stack)) {
                 Vec3 pos = entity.position();
-                world.addParticle(
-                    ColoredCraftingParticleEffect.RED,
-                    entity.getRandomX(1.0), pos.y() + 1.05D, entity.getRandomZ(1.0),
-                    0.0D, 0.1D, 0.0D
-                );
+                world
+                    .addParticle(
+                        ColoredCraftingParticleEffect.RED,
+                        entity.getRandomX(1.0),
+                        pos.y() + 1.05D,
+                        entity.getRandomZ(1.0),
+                        0.0D,
+                        0.1D,
+                        0.0D
+                    );
             }
         } else {
             if (world.getGameTime() % 20 == 0 && ActivatableItem.isActivated(stack)) {
-                if (entity instanceof ServerPlayer player && !InkPowered.tryDrainEnergy(
-                    player, USED_COLOR, INK_COST_PER_SECOND)) {
+                if (entity instanceof ServerPlayer player && !InkPowered
+                    .tryDrainEnergy(
+                        player,
+                        USED_COLOR,
+                        INK_COST_PER_SECOND
+                    )) {
                     setActivated(stack, false);
-                    world.playSound(
-                        null, entity.getX(), entity.getY(), entity.getZ(), PastelSounds.DREAMFLAYER_DEACTIVATE,
-                        SoundSource.PLAYERS, 0.8F, 1F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            entity.getX(),
+                            entity.getY(),
+                            entity.getZ(),
+                            PastelSounds.DREAMFLAYER_DEACTIVATE,
+                            SoundSource.PLAYERS,
+                            0.8F,
+                            1F
+                        );
                 }
             }
         }
@@ -137,17 +182,32 @@ public class DreamflayerItem extends SwordItem
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.dreamflayer.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.dreamflayer.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.dreamflayer.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.dreamflayer.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
         if (ActivatableItem.isActivated(stack)) {
-            tooltip.add(Component.translatable("item.pastel.dreamflayer.tooltip.activated")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.dreamflayer.tooltip.activated")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         } else {
-            tooltip.add(
-                Component.translatable("item.pastel.dreamflayer.tooltip.deactivated", USED_COLOR.getColoredInkName())
-                         .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.dreamflayer.tooltip.deactivated", USED_COLOR.getColoredInkName())
+                        .withStyle(ChatFormatting.GRAY)
+                );
         }
     }
 
@@ -164,32 +224,47 @@ public class DreamflayerItem extends SwordItem
         if (ActivatableItem.isActivated(stack) != active) {
             float damage = baseAttackDamage * (active ? 1.5f : 1f);
             float speed = baseAttackSpeed * (active ? 0.75f : 1f);
-            stack.update(
-                DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY, comp -> {
-                    var builder = ItemAttributeModifiers.builder();
-                    for (var entry : comp.modifiers()) {
-                        if (entry.modifier()
-                                 .is(BASE_ATTACK_DAMAGE_ID))
-                            builder.add(
-                                Attributes.ATTACK_DAMAGE, new AttributeModifier(
-                                    BASE_ATTACK_DAMAGE_ID, damage,
-                                    AttributeModifier.Operation.ADD_VALUE
-                                ), EquipmentSlotGroup.MAINHAND
-                            );
-                        else if (entry.modifier()
-                                 .is(BASE_ATTACK_SPEED_ID))
-                            builder.add(
-                                Attributes.ATTACK_SPEED, new AttributeModifier(
-                                    BASE_ATTACK_SPEED_ID, speed,
-                                    AttributeModifier.Operation.ADD_VALUE
-                                ), EquipmentSlotGroup.MAINHAND
-                            );
-                        else
-                            builder.add(entry.attribute(), entry.modifier(), entry.slot());
+            stack
+                .update(
+                    DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.EMPTY,
+                    comp -> {
+                        var builder = ItemAttributeModifiers.builder();
+                        for (
+                            var entry : comp.modifiers()
+                        ) {
+                            if (entry
+                                .modifier()
+                                .is(BASE_ATTACK_DAMAGE_ID))
+                                builder
+                                    .add(
+                                        Attributes.ATTACK_DAMAGE,
+                                        new AttributeModifier(
+                                            BASE_ATTACK_DAMAGE_ID,
+                                            damage,
+                                            AttributeModifier.Operation.ADD_VALUE
+                                        ),
+                                        EquipmentSlotGroup.MAINHAND
+                                    );
+                            else if (entry
+                                .modifier()
+                                .is(BASE_ATTACK_SPEED_ID))
+                                builder
+                                    .add(
+                                        Attributes.ATTACK_SPEED,
+                                        new AttributeModifier(
+                                            BASE_ATTACK_SPEED_ID,
+                                            speed,
+                                            AttributeModifier.Operation.ADD_VALUE
+                                        ),
+                                        EquipmentSlotGroup.MAINHAND
+                                    );
+                            else
+                                builder.add(entry.attribute(), entry.modifier(), entry.slot());
+                        }
+                        return builder.build();
                     }
-                    return builder.build();
-                }
-            );
+                );
             ActivatableItem.setActivated(stack, active);
         }
     }
@@ -199,7 +274,9 @@ public class DreamflayerItem extends SwordItem
         return List.of(USED_COLOR);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     @Override
     public void addInkPoweredTooltip(List<Component> tooltip) {
         InkPowered.super.addInkPoweredTooltip(tooltip);
@@ -207,23 +284,33 @@ public class DreamflayerItem extends SwordItem
 
     @Override
     public DamageComposition getDamageComposition(
-        LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
+        LivingEntity attacker,
+        LivingEntity target,
+        ItemStack stack,
+        float damage
+    ) {
         float newDamage = getDamageAfterModifier(damage, attacker, target);
 
         DamageComposition composition = new DamageComposition();
         if (ActivatableItem.isActivated(stack)) {
             composition.addPlayerOrEntity(attacker, newDamage * 0.5F);
-            composition.add(
-                attacker.damageSources()
-                        .magic(), newDamage * 0.25F
-            );
+            composition
+                .add(
+                    attacker
+                        .damageSources()
+                        .magic(),
+                    newDamage * 0.25F
+                );
             composition.add(PastelDamageTypes.setHealth(attacker.level(), attacker), newDamage * 0.25F);
         } else {
             composition.addPlayerOrEntity(attacker, newDamage * 0.75F);
-            composition.add(
-                attacker.damageSources()
-                        .magic(), newDamage * 0.25F
-            );
+            composition
+                .add(
+                    attacker
+                        .damageSources()
+                        .magic(),
+                    newDamage * 0.25F
+                );
         }
         return composition;
     }

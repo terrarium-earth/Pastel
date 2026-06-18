@@ -20,7 +20,10 @@ public class NaturesStaffConversionsDisplay extends BasicDisplay implements Gate
     private final @Nullable ResourceLocation requiredAdvancementIdentifier;
 
     public NaturesStaffConversionsDisplay(
-        EntryStack<?> in, EntryStack<?> out, @Nullable ResourceLocation requiredAdvancementIdentifier) {
+        EntryStack<?> in,
+        EntryStack<?> out,
+        @Nullable ResourceLocation requiredAdvancementIdentifier
+    ) {
         super(Collections.singletonList(EntryIngredient.of(in)), Collections.singletonList(EntryIngredient.of(out)));
         this.requiredAdvancementIdentifier = requiredAdvancementIdentifier;
     }
@@ -33,8 +36,8 @@ public class NaturesStaffConversionsDisplay extends BasicDisplay implements Gate
     @Override
     public boolean isUnlocked() {
         Minecraft client = Minecraft.getInstance();
-        return DatabankUtils.hasAdvancement(client.player, this.requiredAdvancementIdentifier)
-               && DatabankUtils.hasAdvancement(client.player, PastelAdvancements.Unlocks.Items.NATURES_STAFF);
+        return DatabankUtils.hasAdvancement(client.player, this.requiredAdvancementIdentifier) && DatabankUtils
+            .hasAdvancement(client.player, PastelAdvancements.Unlocks.Items.NATURES_STAFF);
     }
 
     @Override

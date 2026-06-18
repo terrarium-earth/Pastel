@@ -57,9 +57,10 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
         if (world != null) {
             var id = itemStack.get(PastelDataComponentTypes.STORED_RECIPE);
             if (id != null)
-                return world.getRecipeManager()
-                            .byKey(id)
-                            .orElse(null);
+                return world
+                    .getRecipeManager()
+                    .byKey(id)
+                    .orElse(null);
         }
         return null;
     }
@@ -96,12 +97,16 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
     public MenuProvider createScreenHandlerFactory(Level world, ServerPlayer serverPlayerEntity, ItemStack itemStack) {
         return new SimpleMenuProvider(
             (syncId, inventory, player) -> new CraftingTabletScreenHandler(
-                syncId, inventory,
-                                                                           ContainerLevelAccess.create(
-                                                                               world,
-                                                                               serverPlayerEntity.blockPosition()
-                                                                           ), itemStack
-            ), TITLE
+                syncId,
+                inventory,
+                ContainerLevelAccess
+                    .create(
+                        world,
+                        serverPlayerEntity.blockPosition()
+                    ),
+                itemStack
+            ),
+            TITLE
         );
     }
 
@@ -115,18 +120,29 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
         }
 
         if (InventoryHelper.hasInInventory(ingredients, playerInventory)) {
-            List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(
-                ingredients, playerInventory);
+            List<ItemStack> remainders = InventoryHelper
+                .removeFromInventoryWithRemainders(
+                    ingredients,
+                    playerInventory
+                );
 
-            ItemStack craftingResult = recipe.getResultItem(serverPlayerEntity.level()
-                                                                              .registryAccess())
-                                             .copy();
-            serverPlayerEntity.getInventory()
-                              .placeItemBackInInventory(craftingResult);
+            ItemStack craftingResult = recipe
+                .getResultItem(
+                    serverPlayerEntity
+                        .level()
+                        .registryAccess()
+                )
+                .copy();
+            serverPlayerEntity
+                .getInventory()
+                .placeItemBackInInventory(craftingResult);
 
-            for (ItemStack remainder : remainders) {
-                serverPlayerEntity.getInventory()
-                                  .placeItemBackInInventory(remainder);
+            for (
+                ItemStack remainder : remainders
+            ) {
+                serverPlayerEntity
+                    .getInventory()
+                    .placeItemBackInInventory(remainder);
             }
             return true;
         }
@@ -134,30 +150,50 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         var recipe = getStoredRecipe(Minecraft.getInstance().level, stack);
         if (recipe == null) {
-            tooltip.add(Component.translatable("item.pastel.crafting_tablet.tooltip.no_recipe")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.crafting_tablet.tooltip.no_recipe")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         } else {
             if (recipe.value() instanceof PedestalRecipe) {
-                tooltip.add(Component.translatable("item.pastel.crafting_tablet.tooltip.pedestal_recipe")
-                                     .withStyle(ChatFormatting.GRAY));
+                tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.crafting_tablet.tooltip.pedestal_recipe")
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             } else {
-                tooltip.add(Component.translatable("item.pastel.crafting_tablet.tooltip.crafting_recipe")
-                                     .withStyle(ChatFormatting.GRAY));
+                tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.crafting_tablet.tooltip.crafting_recipe")
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
-            tooltip.add(Component.translatable("item.pastel.crafting_tablet.tooltip.shift_to_view_gui")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.crafting_tablet.tooltip.shift_to_view_gui")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         }
 
         addBannerPatternProviderTooltip(tooltip);
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
         Minecraft client = Minecraft.getInstance();
         var storedRecipe = CraftingTabletItem.getStoredRecipe(client.level, stack);

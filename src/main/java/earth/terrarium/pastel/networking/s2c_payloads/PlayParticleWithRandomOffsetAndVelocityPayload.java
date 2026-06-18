@@ -18,20 +18,32 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record PlayParticleWithRandomOffsetAndVelocityPayload(
-    Vec3 pos, ParticleOptions effect, int amount, Vec3 randomOffset, Vec3 randomVelocity
+    Vec3 pos,
+    ParticleOptions effect,
+    int amount,
+    Vec3 randomOffset,
+    Vec3 randomVelocity
 ) implements CustomPacketPayload {
 
-    public static final Type<PlayParticleWithRandomOffsetAndVelocityPayload> ID = PastelC2SPackets.makeId(
-        "play_particle_with_random_offset_and_velocity");
-    public static final StreamCodec<RegistryFriendlyByteBuf, PlayParticleWithRandomOffsetAndVelocityPayload> CODEC
-        = StreamCodec.composite(
-        PacketCodecHelper.VEC3D, PlayParticleWithRandomOffsetAndVelocityPayload::pos,
-        ParticleTypes.STREAM_CODEC, PlayParticleWithRandomOffsetAndVelocityPayload::effect,
-        ByteBufCodecs.INT, PlayParticleWithRandomOffsetAndVelocityPayload::amount,
-        PacketCodecHelper.VEC3D, PlayParticleWithRandomOffsetAndVelocityPayload::randomOffset,
-        PacketCodecHelper.VEC3D, PlayParticleWithRandomOffsetAndVelocityPayload::randomVelocity,
-        PlayParticleWithRandomOffsetAndVelocityPayload::new
-    );
+    public static final Type<PlayParticleWithRandomOffsetAndVelocityPayload> ID = PastelC2SPackets
+        .makeId(
+            "play_particle_with_random_offset_and_velocity"
+        );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, PlayParticleWithRandomOffsetAndVelocityPayload> CODEC = StreamCodec
+        .composite(
+            PacketCodecHelper.VEC3D,
+            PlayParticleWithRandomOffsetAndVelocityPayload::pos,
+            ParticleTypes.STREAM_CODEC,
+            PlayParticleWithRandomOffsetAndVelocityPayload::effect,
+            ByteBufCodecs.INT,
+            PlayParticleWithRandomOffsetAndVelocityPayload::amount,
+            PacketCodecHelper.VEC3D,
+            PlayParticleWithRandomOffsetAndVelocityPayload::randomOffset,
+            PacketCodecHelper.VEC3D,
+            PlayParticleWithRandomOffsetAndVelocityPayload::randomVelocity,
+            PlayParticleWithRandomOffsetAndVelocityPayload::new
+        );
 
     /**
      * Play particle effect
@@ -41,29 +53,45 @@ public record PlayParticleWithRandomOffsetAndVelocityPayload(
      * @param particleEffect The particle effect to play
      */
     public static void playParticleWithRandomOffsetAndVelocity(
-        ServerLevel world, Vec3 position, @NotNull ParticleOptions particleEffect, int amount, Vec3 randomOffset,
+        ServerLevel world,
+        Vec3 position,
+        @NotNull ParticleOptions particleEffect,
+        int amount,
+        Vec3 randomOffset,
         Vec3 randomVelocity
     ) {
-        PacketDistributor.sendToPlayersTrackingChunk(
-            world, new ChunkPos(BlockPos.containing(position)),
-            new PlayParticleWithRandomOffsetAndVelocityPayload(
-                position, particleEffect, amount, randomOffset,
-                randomVelocity
-            )
-        );
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                world,
+                new ChunkPos(BlockPos.containing(position)),
+                new PlayParticleWithRandomOffsetAndVelocityPayload(
+                    position,
+                    particleEffect,
+                    amount,
+                    randomOffset,
+                    randomVelocity
+                )
+            );
     }
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings(
+        "resource"
+    )
     public static void execute(PlayParticleWithRandomOffsetAndVelocityPayload payload, IPayloadContext context) {
-        var level = context.player()
-                           .level();
+        var level = context
+            .player()
+            .level();
         RandomSource random = level.getRandom();
 
         Vec3 pos = payload.pos;
         Vec3 randomOffset = payload.randomOffset;
         Vec3 randomVelocity = payload.randomVelocity;
 
-        for (int i = 0; i < payload.amount; i++) {
+        for (
+            int i = 0;
+            i < payload.amount;
+            i++
+        ) {
             double randomOffsetX = randomOffset.x - random.nextDouble() * randomOffset.x * 2;
             double randomOffsetY = randomOffset.y - random.nextDouble() * randomOffset.y * 2;
             double randomOffsetZ = randomOffset.z - random.nextDouble() * randomOffset.z * 2;
@@ -71,11 +99,16 @@ public record PlayParticleWithRandomOffsetAndVelocityPayload(
             double randomVelocityY = randomVelocity.y - random.nextDouble() * randomVelocity.y * 2;
             double randomVelocityZ = randomVelocity.z - random.nextDouble() * randomVelocity.z * 2;
 
-            level.addParticle(
-                payload.effect,
-                pos.x() + randomOffsetX, pos.y() + randomOffsetY, pos.z() + randomOffsetZ,
-                randomVelocityX, randomVelocityY, randomVelocityZ
-            );
+            level
+                .addParticle(
+                    payload.effect,
+                    pos.x() + randomOffsetX,
+                    pos.y() + randomOffsetY,
+                    pos.z() + randomOffsetZ,
+                    randomVelocityX,
+                    randomVelocityY,
+                    randomVelocityZ
+                );
         }
     }
 

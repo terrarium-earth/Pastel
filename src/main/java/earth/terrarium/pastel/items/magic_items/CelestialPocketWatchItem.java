@@ -31,6 +31,7 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
     // Since the watch can be triggered from an item frame, too
     // and item frames can turn items in 8 directions this fits real fine
     public static final int TIME_STEP_TICKS = 24000 / 8;
+
     public static final InkCost COST = new InkCost(InkColors.MAGENTA, 1000);
 
     enum TimeToggleResult {
@@ -54,8 +55,15 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
 
         if (!world.isClientSide) {
             if (!tryAdvanceTime((ServerLevel) world, (ServerPlayer) user)) {
-                world.playSound(
-                    null, user.blockPosition(), PastelSounds.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
+                world
+                    .playSound(
+                        null,
+                        user.blockPosition(),
+                        PastelSounds.USE_FAIL,
+                        SoundSource.PLAYERS,
+                        1.0F,
+                        1.0F
+                    );
             }
 
             return InteractionResultHolder.consume(itemStack);
@@ -65,16 +73,27 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
 
     public static boolean tryAdvanceTime(ServerLevel world, ServerPlayer user) {
         switch (canAdvanceTime(world)) {
-            case FAILED_GAME_RULE -> user.displayClientMessage(
-                Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_gamerule"), true);
-            case FAILED_FIXED_TIME -> user.displayClientMessage(
-                Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_fixed_time"), true);
+            case FAILED_GAME_RULE -> user
+                .displayClientMessage(
+                    Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_gamerule"),
+                    true
+                );
+            case FAILED_FIXED_TIME -> user
+                .displayClientMessage(
+                    Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_fixed_time"),
+                    true
+                );
             case SUCCESS -> {
                 if (InkPowered.tryDrainEnergy(user, COST)) {
-                    world.playSound(
-                        null, user.blockPosition(), PastelSounds.CELESTIAL_POCKET_WATCH_TICKING,
-                        SoundSource.PLAYERS, 1.0F, 1.0F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            user.blockPosition(),
+                            PastelSounds.CELESTIAL_POCKET_WATCH_TICKING,
+                            SoundSource.PLAYERS,
+                            1.0F,
+                            1.0F
+                        );
                     advanceTime(world, TIME_STEP_TICKS);
                 }
                 return true;
@@ -85,11 +104,13 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
 
     // the clocks use is blocked if the world has a fixed daylight cycle, or gamerule doDayLightCycle is set to false
     private static TimeToggleResult canAdvanceTime(@NotNull Level world) {
-        GameRules.BooleanValue doDaylightCycleRule = world.getGameRules()
-                                                          .getRule(GameRules.RULE_DAYLIGHT);
+        GameRules.BooleanValue doDaylightCycleRule = world
+            .getGameRules()
+            .getRule(GameRules.RULE_DAYLIGHT);
         if (doDaylightCycleRule.get()) {
-            if (world.dimensionType()
-                     .hasFixedTime()) {
+            if (world
+                .dimensionType()
+                .hasFixedTime()) {
                 return TimeToggleResult.FAILED_FIXED_TIME;
             } else {
                 return TimeToggleResult.SUCCESS;
@@ -106,21 +127,33 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
 
         var world = Minecraft.getInstance().level;
         if (world != null) {
             switch (canAdvanceTime(world)) {
-                case FAILED_GAME_RULE -> tooltip.add(
-                    Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_gamerule")
-                             .withStyle(ChatFormatting.GRAY));
-                case FAILED_FIXED_TIME -> tooltip.add(
-                    Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_fixed_time")
-                             .withStyle(ChatFormatting.GRAY));
-                case SUCCESS -> tooltip.add(Component.translatable("item.pastel.celestial_pocketwatch.tooltip.working")
-                                                     .withStyle(ChatFormatting.GRAY));
+                case FAILED_GAME_RULE -> tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_gamerule")
+                            .withStyle(ChatFormatting.GRAY)
+                    );
+                case FAILED_FIXED_TIME -> tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_fixed_time")
+                            .withStyle(ChatFormatting.GRAY)
+                    );
+                case SUCCESS -> tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.celestial_pocketwatch.tooltip.working")
+                            .withStyle(ChatFormatting.GRAY)
+                    );
             }
         }
 

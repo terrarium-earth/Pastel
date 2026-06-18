@@ -45,11 +45,15 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
             float ageIngameDays = TimeHelper.minecraftDaysFromSeconds(secondsFermented);
             List<MobEffectInstance> statusEffects = List.of(new MobEffectInstance(MobEffects.INVISIBILITY, 3600, 0));
 
-            var stack = PastelItems.SUSPICIOUS_BREW.get()
-                                                   .getDefaultInstance();
+            var stack = PastelItems.SUSPICIOUS_BREW
+                .get()
+                .getDefaultInstance();
             stack.set(PastelDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, 0, 0));
-            stack.set(
-                DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), statusEffects));
+            stack
+                .set(
+                    DataComponents.POTION_CONTENTS,
+                    new PotionContents(Optional.empty(), Optional.empty(), statusEffects)
+                );
             LoreHelper.setLore(stack, Component.translatable("lore.pastel.time_travel_tap"));
             return stack;
         }
@@ -86,8 +90,8 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
     // the higher the temperature in the biome is, the more evaporates
     // making colder biomes more desirable
     default float getAngelsShareResultCountMod(long secondsFermented, float temperature) {
-        return Math.max(0.1F, temperature / 10F) * TimeHelper.minecraftDaysFromSeconds(secondsFermented) *
-               getAngelsSharePerMcDay();
+        return Math.max(0.1F, temperature / 10F) * TimeHelper
+            .minecraftDaysFromSeconds(secondsFermented) * getAngelsSharePerMcDay();
     }
 
     @Override
@@ -97,9 +101,10 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
 
     @Override
     default ItemStack getToastSymbol() {
-        return PastelBlocks.TITRATION_BARREL.get()
-                                            .asItem()
-                                            .getDefaultInstance();
+        return PastelBlocks.TITRATION_BARREL
+            .get()
+            .asItem()
+            .getDefaultInstance();
     }
 
     @Override

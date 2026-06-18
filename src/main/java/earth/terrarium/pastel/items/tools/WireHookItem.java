@@ -39,8 +39,7 @@ public class WireHookItem extends Item implements HasColorGradient {
         var data = HookshotData.get(player);
         if (data.isAlreadyHooked()) {
             recallHook(level, player, data);
-        }
-        else {
+        } else {
             if (!level.isClientSide()) {
                 var hook = new WireHookEntity(player, stack, level);
                 var vel = 2 + hook.hookshotLevel(Enchantments.EFFICIENCY) / 4F;
@@ -53,8 +52,13 @@ public class WireHookItem extends Item implements HasColorGradient {
     }
 
     private static void recallHook(Level level, Player player, HookshotData data) {
-        player.playNotifySound(PastelSounds.USE_FAIL, SoundSource.PLAYERS, 0.5F,
-                               Support.varFloatCentered(player.getRandom(), 0.1F));
+        player
+            .playNotifySound(
+                PastelSounds.USE_FAIL,
+                SoundSource.PLAYERS,
+                0.5F,
+                Support.varFloatCentered(player.getRandom(), 0.1F)
+            );
 
         var hook = data.getHookEntity(level);
         if (hook instanceof WireHookEntity wireHook)
@@ -75,9 +79,7 @@ public class WireHookItem extends Item implements HasColorGradient {
         if (super.supportsEnchantment(stack, enchantment))
             return true;
 
-        return enchantment.is(Enchantments.EFFICIENCY)
-            || enchantment.is(Enchantments.POWER)
-            || enchantment.is(Enchantments.FEATHER_FALLING)
-            || enchantment.is(Enchantments.PIERCING);
+        return enchantment.is(Enchantments.EFFICIENCY) || enchantment.is(Enchantments.POWER) || enchantment
+            .is(Enchantments.FEATHER_FALLING) || enchantment.is(Enchantments.PIERCING);
     }
 }

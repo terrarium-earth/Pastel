@@ -6,22 +6,33 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 public record EnvironmentalData(float darkening, float brightMult, float fogNear, float fogFar) {
 
     public static final EnvironmentalData NOOP = new EnvironmentalData(0F, 1F, 1F, 1F);
-    public static final Codec<EnvironmentalData> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                             Codec.FLOAT.fieldOf(
-                                                                                                 "darkening")
-                                                                                                        .forGetter(EnvironmentalData::darkening),
-                                                                                             Codec.FLOAT.fieldOf(
-                                                                                                 "bright_mult")
-                                                                                                        .forGetter(EnvironmentalData::brightMult),
-                                                                                             Codec.FLOAT.fieldOf("near")
-                                                                                                        .forGetter(EnvironmentalData::fogNear),
-                                                                                             Codec.FLOAT.fieldOf("far")
-                                                                                                        .forGetter(EnvironmentalData::fogFar)
-                                                                                         )
-                                                                                         .apply(
-                                                                                             i,
-                                                                                             EnvironmentalData::new
-                                                                                         ));
+
+    public static final Codec<EnvironmentalData> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    Codec.FLOAT
+                        .fieldOf(
+                            "darkening"
+                        )
+                        .forGetter(EnvironmentalData::darkening),
+                    Codec.FLOAT
+                        .fieldOf(
+                            "bright_mult"
+                        )
+                        .forGetter(EnvironmentalData::brightMult),
+                    Codec.FLOAT
+                        .fieldOf("near")
+                        .forGetter(EnvironmentalData::fogNear),
+                    Codec.FLOAT
+                        .fieldOf("far")
+                        .forGetter(EnvironmentalData::fogFar)
+                )
+                .apply(
+                    i,
+                    EnvironmentalData::new
+                )
+        );
 
     public EnvironmentalData(float fogFar, float fogNear) {
         this(NOOP.darkening, NOOP.brightMult, fogFar, fogNear);
@@ -32,7 +43,7 @@ public record EnvironmentalData(float darkening, float brightMult, float fogNear
     }
 
     public float[] asArray() {
-        return new float[]{
+        return new float[] {
             darkening, brightMult, fogNear, fogFar
         };
     }

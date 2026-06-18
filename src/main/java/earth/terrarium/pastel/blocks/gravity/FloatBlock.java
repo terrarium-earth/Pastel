@@ -15,13 +15,19 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class FloatBlock extends FallingBlock {
 
-    public static final MapCodec<FloatBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                           propertiesCodec(),
-                                                                                           Codec.FLOAT.fieldOf(
-                                                                                               "gravity_mod")
-                                                                                                      .forGetter(FloatBlock::getGravityMod)
-                                                                                       )
-                                                                                       .apply(i, FloatBlock::new));
+    public static final MapCodec<FloatBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    propertiesCodec(),
+                    Codec.FLOAT
+                        .fieldOf(
+                            "gravity_mod"
+                        )
+                        .forGetter(FloatBlock::getGravityMod)
+                )
+                .apply(i, FloatBlock::new)
+        );
 
     private final float gravityMod;
 
@@ -46,7 +52,11 @@ public class FloatBlock extends FallingBlock {
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState facingState, LevelAccessor world, BlockPos blockPos,
+        BlockState state,
+        Direction direction,
+        BlockState facingState,
+        LevelAccessor world,
+        BlockPos blockPos,
         BlockPos facingPos
     ) {
         world.scheduleTick(blockPos, this, this.getDelayAfterPlace());

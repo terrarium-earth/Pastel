@@ -31,21 +31,28 @@ public class PylonBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<PylonBlock> CODEC = simpleCodec(PylonBlock::new);
 
     public static final EnumProperty<Section> SECTION = EnumProperty.create("section", Section.class);
+
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
+
     public static final BooleanProperty PEDESTAL = BooleanProperty.create("pedestal");
+
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final Map<Direction.Axis, VoxelShape> PYLON_SHAPES;
+
     public static final Map<Direction, VoxelShape> PEDESTAL_SHAPES;
 
     public PylonBlock(Properties settings) {
         super(settings);
 
-        registerDefaultState(getStateDefinition().any()
-                                                 .setValue(WATERLOGGED, false)
-                                                 .setValue(SECTION, Section.FOOT)
-                                                 .setValue(FACING, Direction.UP)
-                                                 .setValue(PEDESTAL, false));
+        registerDefaultState(
+            getStateDefinition()
+                .any()
+                .setValue(WATERLOGGED, false)
+                .setValue(SECTION, Section.FOOT)
+                .setValue(FACING, Direction.UP)
+                .setValue(PEDESTAL, false)
+        );
     }
 
     @Override
@@ -53,8 +60,7 @@ public class PylonBlock extends Block implements SimpleWaterloggedBlock {
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         var world = ctx.getLevel();
         var pos = ctx.getClickedPos();
@@ -67,12 +73,14 @@ public class PylonBlock extends Block implements SimpleWaterloggedBlock {
 
         Section placedSection = shifting ? Section.BODY : Section.HEAD;
 
-        FluidState fluidState = ctx.getLevel()
-                                   .getFluidState(ctx.getClickedPos());
+        FluidState fluidState = ctx
+            .getLevel()
+            .getFluidState(ctx.getClickedPos());
         state = state.setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
 
-        var placementDirection = ctx.getClickedFace()
-                                    .getOpposite();
+        var placementDirection = ctx
+            .getClickedFace()
+            .getOpposite();
         state = state.setValue(FACING, placementDirection.getOpposite());
 
         var floorPos = pos.relative(placementDirection);
@@ -89,7 +97,10 @@ public class PylonBlock extends Block implements SimpleWaterloggedBlock {
                 if (floorFacing == placementDirection.getOpposite()) {
                     var floorSection = floorState.getValue(SECTION);
                     var newFloor = updatePylonBelow(
-                        world.getBlockState(floorPos.relative(placementDirection)), floorState, floorSection);
+                        world.getBlockState(floorPos.relative(placementDirection)),
+                        floorState,
+                        floorSection
+                    );
                     world.setBlockAndUpdate(floorPos, newFloor);
                 }
 
@@ -99,8 +110,9 @@ public class PylonBlock extends Block implements SimpleWaterloggedBlock {
         }
 
         if (floorState.isFaceSturdy(world, floorPos, placementDirection.getOpposite(), SupportType.CENTER))
-            state = state.setValue(PEDESTAL, !shifting)
-                         .setValue(SECTION, placedSection);
+            state = state
+                .setValue(PEDESTAL, !shifting)
+                .setValue(SECTION, placedSection);
 
         return state;
     }

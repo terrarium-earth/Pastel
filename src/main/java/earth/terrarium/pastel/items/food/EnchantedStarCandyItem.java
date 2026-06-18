@@ -27,8 +27,9 @@ public class EnchantedStarCandyItem extends Item {
             WhispyCircletItem.removeNegativeStatusEffects(user);
         }
         if (user instanceof Player player) {
-            player.getFoodData()
-                  .eat(1000, 1.0F);
+            player
+                .getFoodData()
+                .eat(1000, 1.0F);
         }
         return itemStack;
     }
@@ -36,10 +37,18 @@ public class EnchantedStarCandyItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.enchanted_star_candy.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.enchanted_star_candy.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.enchanted_star_candy.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.enchanted_star_candy.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override

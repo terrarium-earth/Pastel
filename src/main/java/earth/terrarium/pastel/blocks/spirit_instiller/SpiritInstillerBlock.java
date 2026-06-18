@@ -51,7 +51,9 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
     }
 
     public static boolean verifyStructure(
-        Level level, @NotNull BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity,
+        Level level,
+        @NotNull BlockPos blockPos,
+        @Nullable ServerPlayer serverPlayerEntity,
         @NotNull SpiritInstillerBlockEntity instiller
     ) {
         Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.SPIRIT_INSTILLER);
@@ -62,11 +64,19 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
         // try all 4 rotations
         int offset = -4;
         Rotation checkRotation = lastBlockRotation;
-        for (int i = 0; i < Rotation.values().length; i++) {
-            valid = multiblock.validate(
-                level, blockPos.below(1)
-                               .relative(Support.directionFromRotation(checkRotation), offset), checkRotation
-            );
+        for (
+            int i = 0;
+            i < Rotation.values().length;
+            i++
+        ) {
+            valid = multiblock
+                .validate(
+                    level,
+                    blockPos
+                        .below(1)
+                        .relative(Support.directionFromRotation(checkRotation), offset),
+                    checkRotation
+                );
             if (valid) {
                 if (i != 0) {
                     instiller.setMultiblockRotation(checkRotation);
@@ -86,16 +96,20 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
             if (level.isClientSide) {
                 Multiblock currentMultiBlock = MultiblockPreviewRenderer.getMultiblock();
                 if (currentMultiBlock == multiblock) {
-                    lastBlockRotation = Rotation.values()[(MultiblockPreviewRenderer.getFacingRotation()
-                                                                                    .ordinal() + 1) %
-                                                          Rotation.values().length]; // cycle rotation
+                    lastBlockRotation = Rotation.values()[(MultiblockPreviewRenderer
+                        .getFacingRotation()
+                        .ordinal() + 1) % Rotation.values().length]; // cycle rotation
                     instiller.setMultiblockRotation(lastBlockRotation);
                 }
-                ModonomiconHelper.renderMultiblock(
-                    PastelMultiblocks.get(PastelMultiblocks.SPIRIT_INSTILLER), PastelMultiblocks.SPIRIT_INSTILLER_TEXT,
-                    blockPos.below(2)
-                            .relative(Support.directionFromRotation(lastBlockRotation), offset), lastBlockRotation
-                );
+                ModonomiconHelper
+                    .renderMultiblock(
+                        PastelMultiblocks.get(PastelMultiblocks.SPIRIT_INSTILLER),
+                        PastelMultiblocks.SPIRIT_INSTILLER_TEXT,
+                        blockPos
+                            .below(2)
+                            .relative(Support.directionFromRotation(lastBlockRotation), offset),
+                        lastBlockRotation
+                    );
             } else {
                 scatterContents(level, blockPos);
             }
@@ -104,18 +118,20 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
         return valid;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new SpiritInstillerBlockEntity(pos, state);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return createTickerHelper(
-            type, PastelBlockEntities.SPIRIT_INSTILLER.get(),
+            type,
+            PastelBlockEntities.SPIRIT_INSTILLER.get(),
             world.isClientSide ? SpiritInstillerBlockEntity::clientTick : SpiritInstillerBlockEntity::serverTick
         );
     }
@@ -134,7 +150,12 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         BlockEntity blockEntity = world.getBlockEntity(pos);

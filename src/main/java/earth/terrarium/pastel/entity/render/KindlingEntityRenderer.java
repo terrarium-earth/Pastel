@@ -15,25 +15,34 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class KindlingEntityRenderer extends MobRenderer<KindlingEntity, KindlingEntityModel> {
 
     public static final ResourceLocation SADDLE_TEXTURE = PastelCommon.locate("textures/entity/kindling/saddle.png");
 
     public KindlingEntityRenderer(EntityRendererProvider.Context context) {
         super(context, new KindlingEntityModel(context.bakeLayer(PastelModelLayers.KINDLING)), 0.7F);
-        this.addLayer(
-            new SaddleLayer<>(
-                this, new KindlingEntityModel(context.bakeLayer(PastelModelLayers.KINDLING_SADDLE)),
-                SADDLE_TEXTURE
-            ));
+        this
+            .addLayer(
+                new SaddleLayer<>(
+                    this,
+                    new KindlingEntityModel(context.bakeLayer(PastelModelLayers.KINDLING_SADDLE)),
+                    SADDLE_TEXTURE
+                )
+            );
         this.addLayer(new KindlingEntityArmorFeatureRenderer(this, context.getModelSet()));
     }
 
     @Override
     public void render(
-        KindlingEntity entity, float yaw, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light
+        KindlingEntity entity,
+        float yaw,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int light
     ) {
         super.render(entity, yaw, tickDelta, poseStack, vertexConsumerProvider, light);
     }
@@ -46,9 +55,9 @@ public class KindlingEntityRenderer extends MobRenderer<KindlingEntity, Kindling
             return isClipped ? variant.getAngryClippedTexture() : variant.getAngryTexture();
         }
 
-        boolean isBlinking = (entity.getId() - entity.level()
-                                                     .getGameTime()) % 120 ==
-                             0; // based on the entities' id, so not all blink at the same time
+        boolean isBlinking = (entity.getId() - entity
+            .level()
+            .getGameTime()) % 120 == 0; // based on the entities' id, so not all blink at the same time
         if (isClipped) {
             return isBlinking ? variant.getBlinkingClippedTexture() : variant.getClippedTexture();
         }

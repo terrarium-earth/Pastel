@@ -6,7 +6,12 @@ import earth.terrarium.pastel.blocks.geology.SnowgraveBlock;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
 public record SnowgraveFeatureConfig(SnowgraveBlock.FrozenMob variant) implements FeatureConfiguration {
-    public static final Codec<SnowgraveFeatureConfig> CODEC = RecordCodecBuilder.create(i->i.group(
-        SnowgraveBlock.FrozenMob.CODEC.fieldOf("variant").forGetter(SnowgraveFeatureConfig::variant)
-    ).apply(i,SnowgraveFeatureConfig::new));
+    public static final Codec<SnowgraveFeatureConfig> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    SnowgraveBlock.FrozenMob.CODEC.fieldOf("variant").forGetter(SnowgraveFeatureConfig::variant)
+                )
+                .apply(i, SnowgraveFeatureConfig::new)
+        );
 }

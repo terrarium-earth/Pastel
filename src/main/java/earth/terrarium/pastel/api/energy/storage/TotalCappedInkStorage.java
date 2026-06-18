@@ -17,16 +17,20 @@ import static earth.terrarium.pastel.helpers.Support.getShortenedNumberString;
 public class TotalCappedInkStorage implements InkStorage {
 
     protected final long maxEnergyTotal;
+
     protected final Map<InkColor, Long> storedEnergy = new Object2LongArrayMap<>();
+
     protected long currentTotal;
-        // This is a cache for quick lookup. Can be recalculated anytime using the values in storedEnergy.
+    // This is a cache for quick lookup. Can be recalculated anytime using the values in storedEnergy.
 
     public TotalCappedInkStorage(long maxEnergyTotal, Map<InkColor, Long> energy) {
         this.maxEnergyTotal = maxEnergyTotal;
 
         this.currentTotal = 0;
         this.storedEnergy.putAll(energy);
-        for (Map.Entry<InkColor, Long> color : energy.entrySet()) {
+        for (
+            Map.Entry<InkColor, Long> color : energy.entrySet()
+        ) {
             this.currentTotal += color.getValue();
         }
     }
@@ -120,7 +124,9 @@ public class TotalCappedInkStorage implements InkStorage {
 
         int inkColorCount = PastelRegistries.INK_COLOR.size();
         long energyPerColor = this.maxEnergyTotal / inkColorCount;
-        for (InkColor color : InkColors.all()) {
+        for (
+            InkColor color : InkColors.all()
+        ) {
             this.storedEnergy.put(color, energyPerColor);
         }
         this.currentTotal = energyPerColor * inkColorCount; // in case rounding is weird
@@ -133,18 +139,26 @@ public class TotalCappedInkStorage implements InkStorage {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void addTooltip(List<Component> tooltip) {
-        tooltip.add(Component.translatable(
-            "item.pastel.total_capped_simple_pigment_energy_storage.tooltip",
-            getShortenedNumberString(maxEnergyTotal)
-        ));
+        tooltip
+            .add(
+                Component
+                    .translatable(
+                        "item.pastel.total_capped_simple_pigment_energy_storage.tooltip",
+                        getShortenedNumberString(maxEnergyTotal)
+                    )
+            );
         addInkContentTooltip(tooltip);
     }
 
     protected void addInkContentTooltip(List<Component> tooltip) {
         // we are iterating them this way to preserve the ordering in which they were registered
-        for (InkColor color : PastelRegistries.INK_COLOR) {
+        for (
+            InkColor color : PastelRegistries.INK_COLOR
+        ) {
             long amount = this.storedEnergy.getOrDefault(color, 0L);
             if (amount > 0) {
                 InkStorage.addInkStoreBulletTooltip(tooltip, color, amount);

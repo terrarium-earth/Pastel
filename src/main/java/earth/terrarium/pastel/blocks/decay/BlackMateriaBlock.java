@@ -26,12 +26,16 @@ public class BlackMateriaBlock extends FallingBlock {
     public static final int PROPAGATION_TRIES = 3;
 
     public static final int MAX_AGE = BlockStateProperties.MAX_AGE_3;
+
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
     public BlackMateriaBlock(Properties settings) {
         super(settings);
-        registerDefaultState(this.stateDefinition.any()
-                                                 .setValue(BlockStateProperties.AGE_3, BlockStateProperties.MAX_AGE_3));
+        registerDefaultState(
+            this.stateDefinition
+                .any()
+                .setValue(BlockStateProperties.AGE_3, BlockStateProperties.MAX_AGE_3)
+        );
     }
 
     @Override
@@ -41,7 +45,11 @@ public class BlackMateriaBlock extends FallingBlock {
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (direction == Direction.DOWN) {
@@ -52,17 +60,28 @@ public class BlackMateriaBlock extends FallingBlock {
 
     public static boolean spreadBlackMateria(Level world, BlockPos pos, RandomSource random, BlockState targetState) {
         boolean replacedAny = false;
-        for (int i = 0; i < PROPAGATION_TRIES; i++) {
+        for (
+            int i = 0;
+            i < PROPAGATION_TRIES;
+            i++
+        ) {
             Direction randomDirection = Direction.getRandom(random);
             BlockPos neighborPos = pos.relative(randomDirection);
             BlockState neighborBlockState = world.getBlockState(neighborPos);
-            if (!(neighborBlockState.getBlock() instanceof BlackMateriaBlock) && neighborBlockState.is(
-                PastelBlockTags.BLACK_MATERIA_CONVERSIONS)) {
+            if (!(neighborBlockState.getBlock() instanceof BlackMateriaBlock) && neighborBlockState
+                .is(
+                    PastelBlockTags.BLACK_MATERIA_CONVERSIONS
+                )) {
                 world.setBlockAndUpdate(neighborPos, targetState);
-                world.playSound(
-                    null, neighborPos, SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F,
-                    0.9F + random.nextFloat() * 0.2F
-                );
+                world
+                    .playSound(
+                        null,
+                        neighborPos,
+                        SoundEvents.GRAVEL_PLACE,
+                        SoundSource.BLOCKS,
+                        1.0F,
+                        0.9F + random.nextFloat() * 0.2F
+                    );
                 replacedAny = true;
             }
         }

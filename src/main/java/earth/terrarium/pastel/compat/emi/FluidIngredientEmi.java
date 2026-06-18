@@ -18,8 +18,12 @@ public class FluidIngredientEmi {
         // Semi-redundant: the sole caller of this *checks if input is empty*.
         if (ingredient.isEmpty()) return EmiStack.EMPTY;
 
-        return EmiIngredient.of(Arrays.stream(ingredient.getStacks())
-                                      .map(stack -> EmiStack.of(stack.getFluid(), stack.getAmount()))
-                                      .toList());
+        return EmiIngredient
+            .of(
+                Arrays
+                    .stream(ingredient.getStacks())
+                    .map(stack -> EmiStack.of(stack.getFluid(), stack.getAmount()))
+                    .toList()
+            );
     }
 }

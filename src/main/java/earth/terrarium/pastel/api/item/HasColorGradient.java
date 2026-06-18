@@ -6,5 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public interface HasColorGradient {
     ResourceLocation LUNGE = PastelCommon.locate("lunge");
+
     ColorGradient getColorGradient(ResourceLocation gradient);
 }

@@ -21,24 +21,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Collection;
 import java.util.Optional;
 
-@Mixin(MapItemSavedData.HoldingPlayer.class)
+@Mixin(
+    MapItemSavedData.HoldingPlayer.class
+)
 public class MapStatePlayerUpdateTrackerMixin {
 
     @Shadow
     @Final
     public Player player;
 
-    @Inject(method = "nextUpdatePacket", at = @At(value = "NEW",
-                                                  target = "(Lnet/minecraft/world/level/saveddata/maps/MapId;" +
-                                                           "BZLjava/util/Collection;" +
-                                                           "Lnet/minecraft/world/level/saveddata/maps" +
-                                                           "/MapItemSavedData$MapPatch;)" +
-                                                           "Lnet/minecraft/network/protocol/game" +
-                                                           "/ClientboundMapItemDataPacket;"),
-            cancellable = true)
+    @Inject(
+        method = "nextUpdatePacket", at = @At(
+            value = "NEW", target = "(Lnet/minecraft/world/level/saveddata/maps/MapId;" + "BZLjava/util/Collection;" + "Lnet/minecraft/world/level/saveddata/maps" + "/MapItemSavedData$MapPatch;)" + "Lnet/minecraft/network/protocol/game" + "/ClientboundMapItemDataPacket;"
+        ), cancellable = true
+    )
     private void getArtisansAtlasPacket(
-        MapId mapId, CallbackInfoReturnable<Packet<?>> cir, @Local MapItemSavedData.MapPatch updateData,
-        @Local Collection<MapDecoration> icons
+        MapId mapId,
+        CallbackInfoReturnable<Packet<?>> cir,
+        @Local
+        MapItemSavedData.MapPatch updateData,
+        @Local
+        Collection<MapDecoration> icons
     ) {
         Level world = player.level();
         if (world != null && world.getMapData(mapId) instanceof ArtisansAtlasState state) {

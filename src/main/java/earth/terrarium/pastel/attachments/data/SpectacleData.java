@@ -23,17 +23,22 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class SpectacleData {
 
-    public static final AttachmentType<SpectacleData> ATTACHMENT =
-        AttachmentType.builder(h -> new SpectacleData((Player) h))
-                      .build();
+    public static final AttachmentType<SpectacleData> ATTACHMENT = AttachmentType
+        .builder(h -> new SpectacleData((Player) h))
+        .build();
 
     public static final InkCost INK_COST = new InkCost(InkColors.LIGHT_BLUE, 20);
+
     public static final ItemStack ITEM_COST = new ItemStack(Items.GLOW_INK_SAC, 1);
 
     private final Player holder;
+
     private long duration;
+
     private float potency;
+
     private boolean active;
+
     private boolean sessionStart = true;
 
     public SpectacleData(Player holder) {
@@ -45,8 +50,7 @@ public class SpectacleData {
 
         if (data.active && data.potency < 0.8F) {
             data.potency += 0.02F;
-        }
-        else if (!data.active && data.potency > 0) {
+        } else if (!data.active && data.potency > 0) {
             data.potency -= 0.04F;
         }
 
@@ -61,8 +65,9 @@ public class SpectacleData {
         }
 
         var level = holder.level();
-        var activate = level.getMaxLocalRawBrightness(holder.blockPosition()) < 8
-                       || level.dimension().equals(PastelLevels.DIMENSION_KEY);
+        var activate = level.getMaxLocalRawBrightness(holder.blockPosition()) < 8 || level
+            .dimension()
+            .equals(PastelLevels.DIMENSION_KEY);
 
         if (!updateDuration()) {
             activate = false;
@@ -84,8 +89,8 @@ public class SpectacleData {
 
         var paid = holder.isCreative();
         if (!paid) {
-            paid = InkPowered.tryDrainEnergy(holder, INK_COST)
-                   || InventoryHelper.removeFromInventoryWithRemainders(holder, ITEM_COST);
+            paid = InkPowered.tryDrainEnergy(holder, INK_COST) || InventoryHelper
+                .removeFromInventoryWithRemainders(holder, ITEM_COST);
         }
 
         if (!paid) {
@@ -93,10 +98,16 @@ public class SpectacleData {
         }
 
         duration = PastelCommon.CONFIG.GlowVisionGogglesDuration * 20L;
-        holder.level().playSound(
-            null, holder, PastelSounds.ITEM_ARMOR_EQUIP_GLOW_VISION, SoundSource.PLAYERS,
-            0.2F, 1.0F
-        );
+        holder
+            .level()
+            .playSound(
+                null,
+                holder,
+                PastelSounds.ITEM_ARMOR_EQUIP_GLOW_VISION,
+                SoundSource.PLAYERS,
+                0.2F,
+                1.0F
+            );
         return true;
     }
 
@@ -105,19 +116,21 @@ public class SpectacleData {
     }
 
     public static boolean isActive(Player player) {
-        return player.getData(ATTACHMENT).potency > 0 &&
-               PriscillentSpectaclesItem.hasEquipped(player, PastelItems.PRISCILLENT_SPECTACLES.get());
+        return player.getData(ATTACHMENT).potency > 0 && PriscillentSpectaclesItem
+            .hasEquipped(player, PastelItems.PRISCILLENT_SPECTACLES.get());
     }
 
     public float getPotency() {
         var finalPot = Math.clamp(potency - 0.15F, 0, 0.5F);
 
-        if (Environmental.isActive()
-                         .force()) {
+        if (Environmental
+            .isActive()
+            .force()) {
             finalPot /= 3F;
         }
-        finalPot *= 1F - Environmental.getEnvData()
-                                      .darkening();
+        finalPot *= 1F - Environmental
+            .getEnvData()
+            .darkening();
 
         return finalPot;
     }
@@ -132,11 +145,14 @@ public class SpectacleData {
 
     public record Payload(long duration, boolean active) implements CustomPacketPayload {
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
-            ByteBufCodecs.VAR_LONG, Payload::duration,
-            ByteBufCodecs.BOOL, Payload::active,
-            Payload::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.VAR_LONG,
+                Payload::duration,
+                ByteBufCodecs.BOOL,
+                Payload::active,
+                Payload::new
+            );
 
         public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("spectacle");
 
@@ -146,8 +162,9 @@ public class SpectacleData {
         }
 
         public static void execute(Payload payload, IPayloadContext context) {
-            var data = context.player()
-                              .getData(ATTACHMENT);
+            var data = context
+                .player()
+                .getData(ATTACHMENT);
 
             data.duration = payload.duration();
             data.active = payload.active();

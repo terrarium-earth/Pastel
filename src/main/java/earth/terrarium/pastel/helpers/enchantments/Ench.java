@@ -31,23 +31,42 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Ench {
 
     public static Tuple<Boolean, ItemStack> addOrUpgradeEnchantment(
-        HolderLookup.Provider registryLookup, ItemStack stack, ResourceKey<Enchantment> enchantmentKey, int level,
-        boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts
+        HolderLookup.Provider registryLookup,
+        ItemStack stack,
+        ResourceKey<Enchantment> enchantmentKey,
+        int level,
+        boolean forceEvenIfNotApplicable,
+        boolean allowEnchantmentConflicts
     ) {
         return getEntry(registryLookup, enchantmentKey)
-            .map(entry -> addOrUpgradeEnchantment(
-                stack, entry, level, forceEvenIfNotApplicable,
-                allowEnchantmentConflicts
-            ))
+            .map(
+                entry -> addOrUpgradeEnchantment(
+                    stack,
+                    entry,
+                    level,
+                    forceEvenIfNotApplicable,
+                    allowEnchantmentConflicts
+                )
+            )
             .orElse(new Tuple<>(false, stack));
     }
 
     public static Optional<ItemStack> addOrUpgradeEnchantmentOpt(
-        HolderLookup.Provider registryLookup, ItemStack stack, ResourceKey<Enchantment> enchantmentKey, int level,
-        boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts
+        HolderLookup.Provider registryLookup,
+        ItemStack stack,
+        ResourceKey<Enchantment> enchantmentKey,
+        int level,
+        boolean forceEvenIfNotApplicable,
+        boolean allowEnchantmentConflicts
     ) {
         Tuple<Boolean, ItemStack> result = addOrUpgradeEnchantment(
-            registryLookup, stack, enchantmentKey, level, forceEvenIfNotApplicable, allowEnchantmentConflicts);
+            registryLookup,
+            stack,
+            enchantmentKey,
+            level,
+            forceEvenIfNotApplicable,
+            allowEnchantmentConflicts
+        );
         return result.getA() ? Optional.empty() : Optional.of(result.getB());
     }
 
@@ -63,14 +82,20 @@ public class Ench {
      * @return the enchanted stack and a boolean if the enchanting was successful
      */
     public static Tuple<Boolean, ItemStack> addOrUpgradeEnchantment(
-        ItemStack stack, Holder<Enchantment> enchantment, int level, boolean forceEvenIfNotApplicable,
+        ItemStack stack,
+        Holder<Enchantment> enchantment,
+        int level,
+        boolean forceEvenIfNotApplicable,
         boolean allowEnchantmentConflicts
     ) {
         boolean isAcceptable = stack.supportsEnchantment(enchantment) || forceEvenIfNotApplicable;
-        boolean isConflicting = !allowEnchantmentConflicts && !EnchantmentHelper.isEnchantmentCompatible(
-            stack.getEnchantments()
-                 .keySet(), enchantment
-        );
+        boolean isConflicting = !allowEnchantmentConflicts && !EnchantmentHelper
+            .isEnchantmentCompatible(
+                stack
+                    .getEnchantments()
+                    .keySet(),
+                enchantment
+            );
         boolean isEnchantedBook = stack.is(Items.ENCHANTED_BOOK) || Ench.isEnchantableBook(stack);
 
         // Can this enchant even go on that tool?
@@ -103,19 +128,27 @@ public class Ench {
     }
 
     public static Object2IntMap<Holder<Enchantment>> getUsableEnchants(
-        ItemStack source, ItemStack target, boolean permissive, boolean allowConflicts) {
+        ItemStack source,
+        ItemStack target,
+        boolean permissive,
+        boolean allowConflicts
+    ) {
         var enchants = new Object2IntArrayMap<Holder<Enchantment>>();
 
-        for (Object2IntMap.Entry<Holder<Enchantment>> entry : EnchantmentHelper.getEnchantmentsForCrafting(source)
-                                                                               .entrySet()) {
+        for (
+            Object2IntMap.Entry<Holder<Enchantment>> entry : EnchantmentHelper
+                .getEnchantmentsForCrafting(source)
+                .entrySet()
+        ) {
             var offering = entry.getKey();
             var level = entry.getIntValue();
 
             if (!permissive && !target.supportsEnchantment(offering))
                 continue;
 
-            if (EnchantmentHelper.getEnchantmentsForCrafting(target)
-                                 .getLevel(offering) >= level)
+            if (EnchantmentHelper
+                .getEnchantmentsForCrafting(target)
+                .getLevel(offering) >= level)
                 continue;
 
             if (!allowConflicts && !Ench.canCombineInto(target, offering))
@@ -139,9 +172,14 @@ public class Ench {
 
     public static ItemEnchantments collectHighestEnchantments(List<ItemStack> itemStacks) {
         var builder = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
-        for (ItemStack itemStack : itemStacks) {
-            for (var entry : EnchantmentHelper.getEnchantmentsForCrafting(itemStack)
-                                              .entrySet()) {
+        for (
+            ItemStack itemStack : itemStacks
+        ) {
+            for (
+                var entry : EnchantmentHelper
+                    .getEnchantmentsForCrafting(itemStack)
+                    .entrySet()
+            ) {
                 builder.upgrade(entry.getKey(), entry.getIntValue());
             }
         }
@@ -149,8 +187,9 @@ public class Ench {
     }
 
     public static boolean canCombineInto(ItemStack stack, Holder<Enchantment> offering) {
-        var existingEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(stack)
-                                                    .keySet();
+        var existingEnchantments = EnchantmentHelper
+            .getEnchantmentsForCrafting(stack)
+            .keySet();
         if (existingEnchantments.isEmpty())
             return true;
 
@@ -172,7 +211,8 @@ public class Ench {
 
     @SafeVarargs
     public static Tuple<ItemStack, Integer> removeEnchantments(
-        HolderLookup.Provider registryLookup, @NotNull ItemStack itemStack,
+        HolderLookup.Provider registryLookup,
+        @NotNull ItemStack itemStack,
         ResourceKey<Enchantment>... enchantmentKeys
     ) {
         if (!EnchantmentHelper.hasAnyEnchantments(itemStack)) {
@@ -185,20 +225,29 @@ public class Ench {
         }
 
         return removeEnchantments(
-            itemStack, Arrays.stream(enchantmentKeys)
-                             .map(key -> wrapper.get(key)
-                                                .orElse(null))
-                             .filter(Objects::nonNull)
-                             .toList()
+            itemStack,
+            Arrays
+                .stream(enchantmentKeys)
+                .map(
+                    key -> wrapper
+                        .get(key)
+                        .orElse(null)
+                )
+                .filter(Objects::nonNull)
+                .toList()
         );
     }
 
     @SafeVarargs
     public static Tuple<ItemStack, Integer> removeEnchantments(
-        @NotNull ItemStack itemStack, Holder<Enchantment>... enchantments) {
+        @NotNull ItemStack itemStack,
+        Holder<Enchantment>... enchantments
+    ) {
         return removeEnchantments(
-            itemStack, Arrays.stream(enchantments)
-                             .toList()
+            itemStack,
+            Arrays
+                .stream(enchantments)
+                .toList()
         );
     }
 
@@ -210,12 +259,15 @@ public class Ench {
      * @return The resulting stack & the count of enchants that were removed
      */
     public static <T extends Holder<Enchantment>> Tuple<ItemStack, Integer> removeEnchantments(
-        @NotNull ItemStack itemStack, List<T> enchantments) {
+        @NotNull ItemStack itemStack,
+        List<T> enchantments
+    ) {
         var removals = new AtomicInteger(0);
         var builder = new ItemEnchantments.Mutable(EnchantmentHelper.getEnchantmentsForCrafting(itemStack));
         enchantments.forEach(enchantment -> {
-            if (builder.keySet()
-                       .contains(enchantment)) {
+            if (builder
+                .keySet()
+                .contains(enchantment)) {
                 builder.set(enchantment, 0);
                 removals.getAndIncrement();
             }
@@ -231,11 +283,16 @@ public class Ench {
     }
 
     public static ItemStack getEnchantedStack(
-        HolderLookup.Provider lookup, Item item, Map<ResourceKey<Enchantment>, Integer> enchantments) {
+        HolderLookup.Provider lookup,
+        Item item,
+        Map<ResourceKey<Enchantment>, Integer> enchantments
+    ) {
         HolderLookup<Enchantment> wrapper = lookup.lookupOrThrow(Registries.ENCHANTMENT);
         ItemEnchantments.Mutable builder = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
 
-        for (Map.Entry<ResourceKey<Enchantment>, Integer> e : enchantments.entrySet()) {
+        for (
+            Map.Entry<ResourceKey<Enchantment>, Integer> e : enchantments.entrySet()
+        ) {
             builder.upgrade(wrapper.getOrThrow(e.getKey()), e.getValue());
         }
         ItemStack stack = item.getDefaultInstance();
@@ -245,7 +302,10 @@ public class Ench {
     }
 
     public static int getLevel(
-        HolderLookup.Provider registryLookup, ResourceKey<Enchantment> enchantment, ItemStack stack) {
+        HolderLookup.Provider registryLookup,
+        ResourceKey<Enchantment> enchantment,
+        ItemStack stack
+    ) {
         return getRegistry(registryLookup)
             .flatMap(impl -> impl.get(enchantment))
             .map(entry -> EnchantmentHelper.getItemEnchantmentLevel(entry, stack))
@@ -253,7 +313,10 @@ public class Ench {
     }
 
     public static boolean hasEnchantment(
-        HolderLookup.Provider registryLookup, ResourceKey<Enchantment> enchantment, ItemStack stack) {
+        HolderLookup.Provider registryLookup,
+        ResourceKey<Enchantment> enchantment,
+        ItemStack stack
+    ) {
         return getLevel(registryLookup, enchantment, stack) > 0;
     }
 
@@ -272,12 +335,16 @@ public class Ench {
     }
 
     public static int getEquipmentLevel(
-        HolderLookup.Provider lookup, ResourceKey<Enchantment> key, LivingEntity entity) {
+        HolderLookup.Provider lookup,
+        ResourceKey<Enchantment> key,
+        LivingEntity entity
+    ) {
         if (lookup == null)
             return 0;
 
-        return getEntry(lookup, key).map(e -> EnchantmentHelper.getEnchantmentLevel(e, entity))
-                                    .orElse(0);
+        return getEntry(lookup, key)
+            .map(e -> EnchantmentHelper.getEnchantmentLevel(e, entity))
+            .orElse(0);
     }
 
 }

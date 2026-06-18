@@ -21,13 +21,18 @@ public class GemstonePlayerOnlyGlassBlock extends GemstoneGlassBlock {
 
     public GemstonePlayerOnlyGlassBlock(Properties settings, GemstoneColor gemstoneColor) {
         super(settings, gemstoneColor);
-        this.codec = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                           propertiesCodec(),
-                                                           PastelRegistries.GEMSTONE_COLOR.byNameCodec()
-                                                                                          .fieldOf("color")
-                                                                                          .forGetter(b -> b.gemstoneColor)
-                                                       )
-                                                       .apply(i, GemstonePlayerOnlyGlassBlock::new));
+        this.codec = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        propertiesCodec(),
+                        PastelRegistries.GEMSTONE_COLOR
+                            .byNameCodec()
+                            .fieldOf("color")
+                            .forGetter(b -> b.gemstoneColor)
+                    )
+                    .apply(i, GemstonePlayerOnlyGlassBlock::new)
+            );
     }
 
     @Override

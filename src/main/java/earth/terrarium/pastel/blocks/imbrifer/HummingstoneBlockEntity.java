@@ -13,9 +13,11 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class HummingstoneBlockEntity extends BlockEntity
-    implements HummingstoneEventQueue.Callback<HummingstoneEventQueue.EventEntry> {
+    implements
+    HummingstoneEventQueue.Callback<HummingstoneEventQueue.EventEntry> {
 
     private static final int RANGE = 8;
+
     protected final HummingstoneEventQueue listener;
 
     public HummingstoneBlockEntity(BlockPos pos, BlockState state) {
@@ -23,17 +25,27 @@ public class HummingstoneBlockEntity extends BlockEntity
         this.listener = new HummingstoneEventQueue(new BlockPositionSource(this.worldPosition), RANGE, this);
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void serverTick(
-        @NotNull Level world, BlockPos pos, BlockState state, @NotNull HummingstoneBlockEntity blockEntity) {
+        @NotNull Level world,
+        BlockPos pos,
+        BlockState state,
+        @NotNull HummingstoneBlockEntity blockEntity
+    ) {
         blockEntity.listener.tick(world);
     }
 
     @Override
     public boolean canAcceptEvent(
-        Level world, GameEventListener listener, GameEvent.ListenerInfo message, Vec3 sourcePos) {
-        return !this.isRemoved() && (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HYMN ||
-                                     message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING);
+        Level world,
+        GameEventListener listener,
+        GameEvent.ListenerInfo message,
+        Vec3 sourcePos
+    ) {
+        return !this.isRemoved() && (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HYMN || message
+            .gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING);
     }
 
     @Override
@@ -41,15 +53,25 @@ public class HummingstoneBlockEntity extends BlockEntity
         GameEvent.ListenerInfo message = entry.message();
 
         if (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING) {
-            HummingstoneBlock.startHumming(
-                world, this.worldPosition, world.getBlockState(this.worldPosition), message.context()
-                                                                                           .sourceEntity(), true
-            );
+            HummingstoneBlock
+                .startHumming(
+                    world,
+                    this.worldPosition,
+                    world.getBlockState(this.worldPosition),
+                    message
+                        .context()
+                        .sourceEntity(),
+                    true
+                );
         } else if (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HYMN) {
-            HummingstoneBlock.onHymn(
-                world, this.worldPosition, message.context()
-                                                  .sourceEntity()
-            );
+            HummingstoneBlock
+                .onHymn(
+                    world,
+                    this.worldPosition,
+                    message
+                        .context()
+                        .sourceEntity()
+                );
         }
     }
 

@@ -12,11 +12,17 @@ import java.util.function.Supplier;
 
 public class PastelTreeDecoratorTypes {
 
-    private static final DeferredRegister<TreeDecoratorType<?>> REGISTER = DeferredRegister.create(
-        Registries.TREE_DECORATOR_TYPE, PastelCommon.MOD_ID);
+    private static final DeferredRegister<TreeDecoratorType<?>> REGISTER = DeferredRegister
+        .create(
+            Registries.TREE_DECORATOR_TYPE,
+            PastelCommon.MOD_ID
+        );
 
-    public static final Holder<TreeDecoratorType<?>> FRONDS = register("fronds", () -> new TreeDecoratorType<>(
-        FrondsDecorator.CODEC)
+    public static final Holder<TreeDecoratorType<?>> FRONDS = register(
+        "fronds",
+        () -> new TreeDecoratorType<>(
+            FrondsDecorator.CODEC
+        )
     );
 
     public static void register(IEventBus bus) {

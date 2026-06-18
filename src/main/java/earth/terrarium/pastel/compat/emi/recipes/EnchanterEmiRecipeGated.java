@@ -17,9 +17,13 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.stream.Stream;
 
 public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedPastelRecipe<?>> {
-    private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/container/enchanter.png");
+    private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/container/enchanter.png"
+        );
+
     private final Component description;
+
     private final int craftingTime;
 
     public EnchanterEmiRecipeGated(EmiRecipeCategory category, EnchanterCraftingRecipe recipe) {
@@ -27,15 +31,23 @@ public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedPastelR
         this.craftingTime = recipe.getCraftingTime(1);
         this.description = getCraftingTimeText(craftingTime);
 
-        this.inputs = recipe.getIngredients()
-                            .stream()
-                            .map(EmiIngredient::of)
-                            .toList();
-        inputs = Stream.concat(
-                           inputs.stream(), Stream.of(EmiStack.of(
-                               KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getRequiredExperience(), true)))
-                       )
-                       .toList();
+        this.inputs = recipe
+            .getIngredients()
+            .stream()
+            .map(EmiIngredient::of)
+            .toList();
+        inputs = Stream
+            .concat(
+                inputs.stream(),
+                Stream
+                    .of(
+                        EmiStack
+                            .of(
+                                KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getRequiredExperience(), true)
+                            )
+                    )
+            )
+            .toList();
     }
 
     @Override
@@ -44,8 +56,9 @@ public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedPastelR
 
         // Knowledge Gem and Enchanter
         widgets.addSlot(inputs.get(9), 111, 5);
-        widgets.addSlot(EmiStack.of(PastelBlocks.ENCHANTER.get()), 111, 51)
-               .drawBack(false);
+        widgets
+            .addSlot(EmiStack.of(PastelBlocks.ENCHANTER.get()), 111, 51)
+            .drawBack(false);
 
         // center input slot
         widgets.addSlot(inputs.get(0), 31, 31);
@@ -60,9 +73,10 @@ public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedPastelR
         widgets.addSlot(inputs.get(7), 0, 44);
         widgets.addSlot(inputs.get(8), 0, 18);
 
-        widgets.addSlot(outputs.getFirst(), 106, 26)
-               .large(true)
-               .recipeContext(this);
+        widgets
+            .addSlot(outputs.getFirst(), 106, 26)
+            .large(true)
+            .recipeContext(this);
 
         if (craftingTime != 0) {
             widgets.addFillingArrow(80, 31, craftingTime * 50);

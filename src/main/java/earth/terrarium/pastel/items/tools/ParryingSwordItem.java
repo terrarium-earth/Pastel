@@ -28,44 +28,61 @@ import org.jetbrains.annotations.Nullable;
 public abstract class ParryingSwordItem extends SwordItem implements ExtendedItemBar {
 
     public static final int DEFAULT_MAX_BLOCK_TIME = 40;
+
     public static final int DEFAULT_PERFECT_PARRY_WINDOW = 5;
 
     public ParryingSwordItem(
-        Tier material, int attackDamage, float attackSpeed, float crit, float reach, Properties settings) {
+        Tier material,
+        int attackDamage,
+        float attackSpeed,
+        float crit,
+        float reach,
+        Properties settings
+    ) {
         super(
-            material, settings.attributes(ItemAttributeModifiers.builder()
-                                                                .add(
-                                                                    Attributes.ATTACK_DAMAGE,
-                                                                    new AttributeModifier(
-                                                                        BASE_ATTACK_DAMAGE_ID,
-                                                                        material.getAttackDamageBonus() +
-                                                                        attackDamage,
-                                                                        AttributeModifier.Operation.ADD_VALUE
-                                                                    ), EquipmentSlotGroup.MAINHAND
-                                                                )
-                                                                .add(
-                                                                    Attributes.ATTACK_SPEED,
-                                                                    new AttributeModifier(
-                                                                        BASE_ATTACK_SPEED_ID,
-                                                                        attackSpeed,
-                                                                        AttributeModifier.Operation.ADD_VALUE
-                                                                    ), EquipmentSlotGroup.MAINHAND
-                                                                )
-                                                                .add(
-                                                                    AdditionalEntityAttributes.CRITICAL_BONUS_DAMAGE,
-                                                                    new AttributeModifier(
-                                                                        PastelEntityAttributes.CRIT_MODIFIER_ID, crit,
-                                                                        AttributeModifier.Operation.ADD_VALUE
-                                                                    ), EquipmentSlotGroup.MAINHAND
-                                                                )
-                                                                .add(
-                                                                    Attributes.ENTITY_INTERACTION_RANGE,
-                                                                    new AttributeModifier(
-                                                                        PastelEntityAttributes.REACH_MODIFIER_ID, reach,
-                                                                        AttributeModifier.Operation.ADD_VALUE
-                                                                    ), EquipmentSlotGroup.MAINHAND
-                                                                )
-                                                                .build())
+            material,
+            settings
+                .attributes(
+                    ItemAttributeModifiers
+                        .builder()
+                        .add(
+                            Attributes.ATTACK_DAMAGE,
+                            new AttributeModifier(
+                                BASE_ATTACK_DAMAGE_ID,
+                                material.getAttackDamageBonus() + attackDamage,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .add(
+                            Attributes.ATTACK_SPEED,
+                            new AttributeModifier(
+                                BASE_ATTACK_SPEED_ID,
+                                attackSpeed,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .add(
+                            AdditionalEntityAttributes.CRITICAL_BONUS_DAMAGE,
+                            new AttributeModifier(
+                                PastelEntityAttributes.CRIT_MODIFIER_ID,
+                                crit,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .add(
+                            Attributes.ENTITY_INTERACTION_RANGE,
+                            new AttributeModifier(
+                                PastelEntityAttributes.REACH_MODIFIER_ID,
+                                reach,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .build()
+                )
         );
     }
 
@@ -88,8 +105,9 @@ public abstract class ParryingSwordItem extends SwordItem implements ExtendedIte
 
     private void cooldownAndDamage(ItemStack stack, Player player, int usedTime) {
         if (usedTime > 1) {
-            player.getCooldowns()
-                  .addCooldown(this, Math.max(usedTime, 10));
+            player
+                .getCooldowns()
+                .addCooldown(this, Math.max(usedTime, 10));
         }
         stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
     }
@@ -100,7 +118,11 @@ public abstract class ParryingSwordItem extends SwordItem implements ExtendedIte
     }
 
     public abstract float getBlockingMultiplier(
-        DamageSource source, ItemStack stack, LivingEntity entity, int usedTime);
+        DamageSource source,
+        ItemStack stack,
+        LivingEntity entity,
+        int usedTime
+    );
 
     public boolean canPerfectParry(ItemStack stack, LivingEntity entity, int usedTime) {
         return usedTime <= getPerfectParryWindow(entity, stack);
@@ -130,7 +152,9 @@ public abstract class ParryingSwordItem extends SwordItem implements ExtendedIte
         return getUseDuration(stack, user);
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public int getPerfectParryWindow(LivingEntity user, ItemStack stack) {
         return DEFAULT_PERFECT_PARRY_WINDOW;
     }
@@ -156,9 +180,10 @@ public abstract class ParryingSwordItem extends SwordItem implements ExtendedIte
         if (activeStack != stack)
             return ExtendedItemBar.PASS;
 
-
-        var progress = Math.round(
-            Mth.clampedLerp(13, 0, ((float) player.getTicksUsingItem() / getMaxShieldingTime(player, stack))));
+        var progress = Math
+            .round(
+                Mth.clampedLerp(13, 0, ((float) player.getTicksUsingItem() / getMaxShieldingTime(player, stack)))
+            );
         return new BarSignature(2, 13, 13, progress, 1, getBarColor(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
     }
 

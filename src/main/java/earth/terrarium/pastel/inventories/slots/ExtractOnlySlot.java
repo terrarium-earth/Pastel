@@ -21,5 +21,4 @@ public class ExtractOnlySlot extends Slot {
         return true;
     }
 
-
 }

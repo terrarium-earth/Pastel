@@ -14,7 +14,9 @@ import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class LightSpearEntityRenderer extends EntityRenderer<LightShardBaseEntity> {
 
     public LightSpearEntityRenderer(EntityRendererProvider.Context ctx) {
@@ -23,14 +25,22 @@ public class LightSpearEntityRenderer extends EntityRenderer<LightShardBaseEntit
 
     @Override
     public void render(
-        LightShardBaseEntity shard, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
+        LightShardBaseEntity shard,
+        float yaw,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
         int light
     ) {
         matrices.pushPose();
 
         var age = shard.tickCount;
-        var alpha = Mth.clamp(
-            1 - Mth.lerp(tickDelta, shard.getVanishingProgress(age - 1), shard.getVanishingProgress(age)), 0F, 1F);
+        var alpha = Mth
+            .clamp(
+                1 - Mth.lerp(tickDelta, shard.getVanishingProgress(age - 1), shard.getVanishingProgress(age)),
+                0F,
+                1F
+            );
         var scaleFactor = Mth.sin((age + tickDelta) / 8F) / 6F + shard.getScaleOffset();
 
         matrices.mulPose(this.entityRenderDispatcher.cameraOrientation());
@@ -44,30 +54,34 @@ public class LightSpearEntityRenderer extends EntityRenderer<LightShardBaseEntit
         var matrix = matrices.last();
         var positions = matrix.pose();
 
-        consumer.addVertex(positions, 0, 0, 0)
-                .setColor(1f, 1f, 1f, alpha)
-                .setUv(0, 1)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(LightTexture.FULL_BRIGHT)
-                .setNormal(matrix, 0, 1, 0);
-        consumer.addVertex(positions, 1, 0, 0)
-                .setColor(1f, 1f, 1f, alpha)
-                .setUv(1, 1)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(LightTexture.FULL_BRIGHT)
-                .setNormal(matrix, 0, 1, 0);
-        consumer.addVertex(positions, 1, 1, 0)
-                .setColor(1f, 1f, 1f, alpha)
-                .setUv(1, 0)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(LightTexture.FULL_BRIGHT)
-                .setNormal(matrix, 0, 1, 0);
-        consumer.addVertex(positions, 0, 1, 0)
-                .setColor(1f, 1f, 1f, alpha)
-                .setUv(0, 0)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(LightTexture.FULL_BRIGHT)
-                .setNormal(matrix, 0, 1, 0);
+        consumer
+            .addVertex(positions, 0, 0, 0)
+            .setColor(1f, 1f, 1f, alpha)
+            .setUv(0, 1)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(LightTexture.FULL_BRIGHT)
+            .setNormal(matrix, 0, 1, 0);
+        consumer
+            .addVertex(positions, 1, 0, 0)
+            .setColor(1f, 1f, 1f, alpha)
+            .setUv(1, 1)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(LightTexture.FULL_BRIGHT)
+            .setNormal(matrix, 0, 1, 0);
+        consumer
+            .addVertex(positions, 1, 1, 0)
+            .setColor(1f, 1f, 1f, alpha)
+            .setUv(1, 0)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(LightTexture.FULL_BRIGHT)
+            .setNormal(matrix, 0, 1, 0);
+        consumer
+            .addVertex(positions, 0, 1, 0)
+            .setColor(1f, 1f, 1f, alpha)
+            .setUv(0, 0)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(LightTexture.FULL_BRIGHT)
+            .setNormal(matrix, 0, 1, 0);
 
         matrices.popPose();
 

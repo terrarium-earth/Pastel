@@ -16,19 +16,32 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import java.util.Optional;
 
 public record BlackHoleChestStatusUpdatePayload(
-    BlockPos pos, boolean isFull, boolean canStoreExperience, long storedExperience, long maxStoredExperience
+    BlockPos pos,
+    boolean isFull,
+    boolean canStoreExperience,
+    long storedExperience,
+    long maxStoredExperience
 ) implements CustomPacketPayload {
 
-    public static final Type<BlackHoleChestStatusUpdatePayload> ID = PastelC2SPackets.makeId(
-        "black_hole_chest_status_update");
-    public static final StreamCodec<FriendlyByteBuf, BlackHoleChestStatusUpdatePayload> CODEC = StreamCodec.composite(
-        BlockPos.STREAM_CODEC, BlackHoleChestStatusUpdatePayload::pos,
-        ByteBufCodecs.BOOL, BlackHoleChestStatusUpdatePayload::isFull,
-        ByteBufCodecs.BOOL, BlackHoleChestStatusUpdatePayload::canStoreExperience,
-        ByteBufCodecs.VAR_LONG, BlackHoleChestStatusUpdatePayload::storedExperience,
-        ByteBufCodecs.VAR_LONG, BlackHoleChestStatusUpdatePayload::maxStoredExperience,
-        BlackHoleChestStatusUpdatePayload::new
-    );
+    public static final Type<BlackHoleChestStatusUpdatePayload> ID = PastelC2SPackets
+        .makeId(
+            "black_hole_chest_status_update"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, BlackHoleChestStatusUpdatePayload> CODEC = StreamCodec
+        .composite(
+            BlockPos.STREAM_CODEC,
+            BlackHoleChestStatusUpdatePayload::pos,
+            ByteBufCodecs.BOOL,
+            BlackHoleChestStatusUpdatePayload::isFull,
+            ByteBufCodecs.BOOL,
+            BlackHoleChestStatusUpdatePayload::canStoreExperience,
+            ByteBufCodecs.VAR_LONG,
+            BlackHoleChestStatusUpdatePayload::storedExperience,
+            ByteBufCodecs.VAR_LONG,
+            BlackHoleChestStatusUpdatePayload::maxStoredExperience,
+            BlackHoleChestStatusUpdatePayload::new
+        );
 
     public static void sendBlackHoleChestUpdate(BlackHoleChestBlockEntity chest) {
         var xpStack = chest.getItem(BlackHoleChestBlockEntity.EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT);
@@ -38,28 +51,42 @@ public record BlackHoleChestStatusUpdatePayload(
 
         var storage = chest.getExperienceStorage();
         if (storage.isPresent()) {
-            storedXP = storage.get()
-                              .getStoredAmount();
-            maxStoredXP = storage.get()
-                                 .getCapacity();
+            storedXP = storage
+                .get()
+                .getStoredAmount();
+            maxStoredXP = storage
+                .get()
+                .getCapacity();
         }
 
-        PacketDistributor.sendToPlayersTrackingChunk(
-            (ServerLevel) chest.getLevel(), new ChunkPos(chest.getBlockPos()),
-            new BlackHoleChestStatusUpdatePayload(
-                chest.getBlockPos(), chest.isFullServer(),
-                chest.getExperienceStorage()
-                     .isPresent(), storedXP, maxStoredXP
-            )
-        );
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                (ServerLevel) chest.getLevel(),
+                new ChunkPos(chest.getBlockPos()),
+                new BlackHoleChestStatusUpdatePayload(
+                    chest.getBlockPos(),
+                    chest.isFullServer(),
+                    chest
+                        .getExperienceStorage()
+                        .isPresent(),
+                    storedXP,
+                    maxStoredXP
+                )
+            );
     }
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings(
+        "resource"
+    )
     public static void execute(BlackHoleChestStatusUpdatePayload payload, IPayloadContext context) {
-        var level = context.player()
-                           .level();
-        Optional<BlackHoleChestBlockEntity> entity = level.getBlockEntity(
-            payload.pos, PastelBlockEntities.BLACK_HOLE_CHEST.get());
+        var level = context
+            .player()
+            .level();
+        Optional<BlackHoleChestBlockEntity> entity = level
+            .getBlockEntity(
+                payload.pos,
+                PastelBlockEntities.BLACK_HOLE_CHEST.get()
+            );
         entity.ifPresent(chest -> {
             chest.setFull(payload.isFull);
             chest.setHasXPStorage(payload.canStoreExperience);

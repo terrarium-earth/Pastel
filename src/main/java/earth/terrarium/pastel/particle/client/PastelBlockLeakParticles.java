@@ -11,7 +11,9 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PastelBlockLeakParticles {
 
     public static class LandingHumusFactory implements ParticleProvider<SimpleParticleType> {
@@ -23,13 +25,28 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.DripLandParticle(
-                clientWorld, d, e, f, PastelFluids.HUMUS.get());
-            blockLeakParticle.setColor(
-                PastelFluids.HUMUS_COLOR_VEC.x(), PastelFluids.HUMUS_COLOR_VEC.y(), PastelFluids.HUMUS_COLOR_VEC.z());
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.HUMUS.get()
+            );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.HUMUS_COLOR_VEC.x(),
+                    PastelFluids.HUMUS_COLOR_VEC.y(),
+                    PastelFluids.HUMUS_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -44,13 +61,29 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.FallAndLandParticle(
-                clientWorld, d, e, f, PastelFluids.HUMUS.get(), PastelParticleTypes.LANDING_HUMUS);
-            blockLeakParticle.setColor(
-                PastelFluids.HUMUS_COLOR_VEC.x(), PastelFluids.HUMUS_COLOR_VEC.y(), PastelFluids.HUMUS_COLOR_VEC.z());
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.HUMUS.get(),
+                PastelParticleTypes.LANDING_HUMUS
+            );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.HUMUS_COLOR_VEC.x(),
+                    PastelFluids.HUMUS_COLOR_VEC.y(),
+                    PastelFluids.HUMUS_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -65,13 +98,29 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.DripHangParticle(
-                clientWorld, d, e, f, PastelFluids.HUMUS.get(), PastelParticleTypes.FALLING_HUMUS);
-            blockLeakParticle.setColor(
-                PastelFluids.HUMUS_COLOR_VEC.x(), PastelFluids.HUMUS_COLOR_VEC.y(), PastelFluids.HUMUS_COLOR_VEC.z());
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.HUMUS.get(),
+                PastelParticleTypes.FALLING_HUMUS
+            );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.HUMUS_COLOR_VEC.x(),
+                    PastelFluids.HUMUS_COLOR_VEC.y(),
+                    PastelFluids.HUMUS_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -86,15 +135,28 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.DripLandParticle(
-                clientWorld, d, e, f, PastelFluids.LIQUID_CRYSTAL.get());
-            blockLeakParticle.setColor(
-                PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.x(), PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.y(),
-                PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.z()
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.LIQUID_CRYSTAL.get()
             );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.x(),
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.y(),
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -109,15 +171,29 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.FallAndLandParticle(
-                clientWorld, d, e, f, PastelFluids.LIQUID_CRYSTAL.get(), PastelParticleTypes.LANDING_LIQUID_CRYSTAL);
-            blockLeakParticle.setColor(
-                PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.x(), PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.y(),
-                PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.z()
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.LIQUID_CRYSTAL.get(),
+                PastelParticleTypes.LANDING_LIQUID_CRYSTAL
             );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.x(),
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.y(),
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -132,15 +208,29 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.DripHangParticle(
-                clientWorld, d, e, f, PastelFluids.LIQUID_CRYSTAL.get(), PastelParticleTypes.FALLING_LIQUID_CRYSTAL);
-            blockLeakParticle.setColor(
-                PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.x(), PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.y(),
-                PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.z()
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.LIQUID_CRYSTAL.get(),
+                PastelParticleTypes.FALLING_LIQUID_CRYSTAL
             );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.x(),
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.y(),
+                    PastelFluids.LIQUID_CRYSTAL_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -155,15 +245,28 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.DripLandParticle(
-                clientWorld, d, e, f, PastelFluids.MIDNIGHT_SOLUTION.get());
-            blockLeakParticle.setColor(
-                PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.x(), PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.y(),
-                PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.z()
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.MIDNIGHT_SOLUTION.get()
             );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.x(),
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.y(),
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -178,17 +281,29 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.FallAndLandParticle(
-                clientWorld, d, e, f, PastelFluids.MIDNIGHT_SOLUTION.get(),
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.MIDNIGHT_SOLUTION.get(),
                 PastelParticleTypes.LANDING_MIDNIGHT_SOLUTION
             );
-            blockLeakParticle.setColor(
-                PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.x(), PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.y(),
-                PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.z()
-            );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.x(),
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.y(),
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -203,17 +318,29 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.DripHangParticle(
-                clientWorld, d, e, f, PastelFluids.MIDNIGHT_SOLUTION.get(),
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.MIDNIGHT_SOLUTION.get(),
                 PastelParticleTypes.FALLING_MIDNIGHT_SOLUTION
             );
-            blockLeakParticle.setColor(
-                PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.x(), PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.y(),
-                PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.z()
-            );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.x(),
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.y(),
+                    PastelFluids.MIDNIGHT_SOLUTION_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -228,15 +355,28 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.DripLandParticle(
-                clientWorld, d, e, f, PastelFluids.DRAGONROT.get());
-            blockLeakParticle.setColor(
-                PastelFluids.DRAGONROT_COLOR_VEC.x(), PastelFluids.DRAGONROT_COLOR_VEC.y(),
-                PastelFluids.DRAGONROT_COLOR_VEC.z()
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.DRAGONROT.get()
             );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.DRAGONROT_COLOR_VEC.x(),
+                    PastelFluids.DRAGONROT_COLOR_VEC.y(),
+                    PastelFluids.DRAGONROT_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -251,15 +391,29 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.FallAndLandParticle(
-                clientWorld, d, e, f, PastelFluids.DRAGONROT.get(), PastelParticleTypes.LANDING_DRAGONROT);
-            blockLeakParticle.setColor(
-                PastelFluids.DRAGONROT_COLOR_VEC.x(), PastelFluids.DRAGONROT_COLOR_VEC.y(),
-                PastelFluids.DRAGONROT_COLOR_VEC.z()
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.DRAGONROT.get(),
+                PastelParticleTypes.LANDING_DRAGONROT
             );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.DRAGONROT_COLOR_VEC.x(),
+                    PastelFluids.DRAGONROT_COLOR_VEC.y(),
+                    PastelFluids.DRAGONROT_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }
@@ -274,15 +428,29 @@ public class PastelBlockLeakParticles {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             DripParticle blockLeakParticle = new DripParticle.DripHangParticle(
-                clientWorld, d, e, f, PastelFluids.DRAGONROT.get(), PastelParticleTypes.FALLING_DRAGONROT);
-            blockLeakParticle.setColor(
-                PastelFluids.DRAGONROT_COLOR_VEC.x(), PastelFluids.DRAGONROT_COLOR_VEC.y(),
-                PastelFluids.DRAGONROT_COLOR_VEC.z()
+                clientWorld,
+                d,
+                e,
+                f,
+                PastelFluids.DRAGONROT.get(),
+                PastelParticleTypes.FALLING_DRAGONROT
             );
+            blockLeakParticle
+                .setColor(
+                    PastelFluids.DRAGONROT_COLOR_VEC.x(),
+                    PastelFluids.DRAGONROT_COLOR_VEC.y(),
+                    PastelFluids.DRAGONROT_COLOR_VEC.z()
+                );
             blockLeakParticle.pickSprite(this.spriteProvider);
             return blockLeakParticle;
         }

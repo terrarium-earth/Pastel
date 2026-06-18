@@ -50,10 +50,14 @@ import java.util.Optional;
 public class InkProjectileEntity extends MagicProjectileEntity {
 
     private static final int COLOR_SPLAT_RANGE = 2;
+
     private static final float DAMAGE = 4f;
 
-    private static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(
-        InkProjectileEntity.class, PastelTrackedDataHandlers.INK_COLOR);
+    private static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData
+        .defineId(
+            InkProjectileEntity.class,
+            PastelTrackedDataHandlers.INK_COLOR
+        );
 
     public InkProjectileEntity(EntityType<InkProjectileEntity> type, Level world) {
         super(type, world);
@@ -124,11 +128,21 @@ public class InkProjectileEntity extends MagicProjectileEntity {
     private void spawnParticles(int amount) {
         InkColor inkColor = this.getInkColor();
         if (amount > 0) {
-            for (int j = 0; j < amount; ++j) {
-                this.level()
+            for (
+                int j = 0;
+                j < amount;
+                ++j
+            ) {
+                this
+                    .level()
                     .addParticle(
-                        ColoredCraftingParticleEffect.of(inkColor.getColorInt()), this.getRandomX(0.5D),
-                        this.getRandomY(), this.getRandomZ(0.5D), 0, 0, 0
+                        ColoredCraftingParticleEffect.of(inkColor.getColorInt()),
+                        this.getRandomX(0.5D),
+                        this.getRandomY(),
+                        this.getRandomZ(0.5D),
+                        0,
+                        0,
+                        0
                     );
             }
         }
@@ -141,10 +155,15 @@ public class InkProjectileEntity extends MagicProjectileEntity {
         Entity target = entityHitResult.getEntity();
         Entity owner = this.getOwner();
 
-        if (EntityColorProcessorRegistry.colorEntity(
-            target, getInkColor().getDyeColor(), owner instanceof Player player ? player : null)) {
-            target.level()
-                  .playSound(null, target, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+        if (EntityColorProcessorRegistry
+            .colorEntity(
+                target,
+                getInkColor().getDyeColor(),
+                owner instanceof Player player ? player : null
+            )) {
+            target
+                .level()
+                .playSound(null, target, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
         }
 
         DamageSource damageSource;
@@ -166,10 +185,12 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 
                 this.onHit(livingTarget);
 
-                if (target != owner && target instanceof Player && owner instanceof ServerPlayer ownerPlayer &&
-                    !this.isSilent()) {
-                    ownerPlayer.connection.send(
-                        new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
+                if (target != owner && target instanceof Player && owner instanceof ServerPlayer ownerPlayer && !this
+                    .isSilent()) {
+                    ownerPlayer.connection
+                        .send(
+                            new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F)
+                        );
                 }
 
                 if (owner instanceof ServerPlayer ownerPlayer && !target.isAlive()) {
@@ -180,13 +201,19 @@ public class InkProjectileEntity extends MagicProjectileEntity {
             this.playSound(this.getHitSound(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
             this.discard();
         } else {
-            this.setDeltaMovement(this.getDeltaMovement()
-                                      .scale(-0.1D));
+            this
+                .setDeltaMovement(
+                    this
+                        .getDeltaMovement()
+                        .scale(-0.1D)
+                );
             this.setYRot(this.getYRot() + 180.0F);
             this.yRotO += 180.0F;
-            if (!this.level()
-                     .isClientSide() && this.getDeltaMovement()
-                                            .lengthSqr() < 1.0E-7D) {
+            if (!this
+                .level()
+                .isClientSide() && this
+                    .getDeltaMovement()
+                    .lengthSqr() < 1.0E-7D) {
                 this.discard();
             }
         }
@@ -196,21 +223,31 @@ public class InkProjectileEntity extends MagicProjectileEntity {
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
 
-        Vec3 vec3d = blockHitResult.getLocation()
-                                   .subtract(this.getX(), this.getY(), this.getZ());
+        Vec3 vec3d = blockHitResult
+            .getLocation()
+            .subtract(this.getX(), this.getY(), this.getZ());
         this.setDeltaMovement(vec3d);
-        Vec3 vec3d2 = vec3d.normalize()
-                           .scale(0.05);
+        Vec3 vec3d2 = vec3d
+            .normalize()
+            .scale(0.05);
         this.setPosRaw(this.getX() - vec3d2.x, this.getY() - vec3d2.y, this.getZ() - vec3d2.z);
         this.playSound(this.getHitSound(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
 
         InkColor inkColor = this.getInkColor();
-        for (BlockPos blockPos : BlockPos.withinManhattan(
-            blockHitResult.getBlockPos(), COLOR_SPLAT_RANGE, COLOR_SPLAT_RANGE, COLOR_SPLAT_RANGE)) {
+        for (
+            BlockPos blockPos : BlockPos
+                .withinManhattan(
+                    blockHitResult.getBlockPos(),
+                    COLOR_SPLAT_RANGE,
+                    COLOR_SPLAT_RANGE,
+                    COLOR_SPLAT_RANGE
+                )
+        ) {
             Optional<DyeColor> dyeColor = inkColor.getDyeColor();
-            if (this.level()
-                    .getBlockState(blockPos)
-                    .getBlock() instanceof ColorableBlock colorableBlock) {
+            if (this
+                .level()
+                .getBlockState(blockPos)
+                .getBlock() instanceof ColorableBlock colorableBlock) {
                 if (!GenericClaimModsCompat.canModify(this.level(), blockPos, this.getOwner())) {
                     continue;
                 }
@@ -218,10 +255,15 @@ public class InkProjectileEntity extends MagicProjectileEntity {
                 continue;
             }
             if (dyeColor.isPresent()) {
-                BlockState coloredBlockState = BlockVariantHelper.getCursedBlockColorVariant(
-                    this.level(), blockPos, dyeColor.get());
+                BlockState coloredBlockState = BlockVariantHelper
+                    .getCursedBlockColorVariant(
+                        this.level(),
+                        blockPos,
+                        dyeColor.get()
+                    );
                 if (!coloredBlockState.isAir()) {
-                    this.level()
+                    this
+                        .level()
                         .setBlockAndUpdate(blockPos, coloredBlockState);
                 }
             }
@@ -233,42 +275,45 @@ public class InkProjectileEntity extends MagicProjectileEntity {
     }
 
     protected void onHit(LivingEntity target) {
-        Vec3 vec3d = this.getDeltaMovement()
-                         .multiply(1.0D, 0.0D, 1.0D)
-                         .normalize()
-                         .scale((double) 3 * 0.6D);
+        Vec3 vec3d = this
+            .getDeltaMovement()
+            .multiply(1.0D, 0.0D, 1.0D)
+            .normalize()
+            .scale((double) 3 * 0.6D);
         if (vec3d.lengthSqr() > 0.0D) {
             target.push(vec3d.x, 0.1D, vec3d.z);
         }
 
         affectEntitiesInRange(this.getOwner());
-		
-		/*Iterator var3 = this.potion.getEffects().iterator();
-		
-		StatusEffectInstance statusEffectInstance;
-		while (var3.hasNext()) {
-			statusEffectInstance = (StatusEffectInstance) var3.next();
-			target.addStatusEffect(new StatusEffectInstance(statusEffectInstance.getEffectType(), Math.max
-			(statusEffectInstance.getDuration() / 8, 1), statusEffectInstance.getAmplifier(), statusEffectInstance
-			.isAmbient(), statusEffectInstance.shouldShowParticles()), entity);
-		}
-		
-		if (!this.effects.isEmpty()) {
-			var3 = this.effects.iterator();
-			
-			while (var3.hasNext()) {
-				statusEffectInstance = (StatusEffectInstance) var3.next();
-				target.addStatusEffect(statusEffectInstance, entity);
-			}
-		}*/
+
+        /*Iterator var3 = this.potion.getEffects().iterator();
+        
+        StatusEffectInstance statusEffectInstance;
+        while (var3.hasNext()) {
+        	statusEffectInstance = (StatusEffectInstance) var3.next();
+        	target.addStatusEffect(new StatusEffectInstance(statusEffectInstance.getEffectType(), Math.max
+        	(statusEffectInstance.getDuration() / 8, 1), statusEffectInstance.getAmplifier(), statusEffectInstance
+        	.isAmbient(), statusEffectInstance.shouldShowParticles()), entity);
+        }
+        
+        if (!this.effects.isEmpty()) {
+        	var3 = this.effects.iterator();
+        	
+        	while (var3.hasNext()) {
+        		statusEffectInstance = (StatusEffectInstance) var3.next();
+        		target.addStatusEffect(statusEffectInstance, entity);
+        	}
+        }*/
 
         this.discard();
     }
 
     public void affectEntitiesInRange(Entity attacker) {
-        this.level()
+        this
+            .level()
             .gameEvent(
-                this, GameEvent.PROJECTILE_LAND,
+                this,
+                GameEvent.PROJECTILE_LAND,
                 BlockPos.containing(this.position().x, this.position().y, this.position().z)
             );
 
@@ -283,20 +328,28 @@ public class InkProjectileEntity extends MagicProjectileEntity {
         int s = Mth.floor(posY + (double) q + 1.0D);
         int t = Mth.floor(posZ - (double) q - 1.0D);
         int u = Mth.floor(posZ + (double) q + 1.0D);
-        List<Entity> list = this.level()
-                                .getEntities(this, new AABB(k, r, t, l, s, u));
+        List<Entity> list = this
+            .level()
+            .getEntities(this, new AABB(k, r, t, l, s, u));
         Vec3 vec3d = new Vec3(posX, posY, posZ);
 
         Entity owner = this.getOwner();
-        for (Entity entity : list) {
+        for (
+            Entity entity : list
+        ) {
             if (!GenericClaimModsCompat.canInteract(this.level(), entity, attacker)) {
                 continue;
             }
 
-            if (EntityColorProcessorRegistry.colorEntity(
-                entity, getInkColor().getDyeColor(), owner instanceof Player player ? player : null)) {
-                entity.level()
-                      .playSound(null, entity, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+            if (EntityColorProcessorRegistry
+                .colorEntity(
+                    entity,
+                    getInkColor().getDyeColor(),
+                    owner instanceof Player player ? player : null
+                )) {
+                entity
+                    .level()
+                    .playSound(null, entity, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
 
             if (!entity.ignoreExplosion(null)) {
@@ -319,15 +372,23 @@ public class InkProjectileEntity extends MagicProjectileEntity {
                         //entity.damage(SpectrumDamageSources.inkProjectile(this, attacker), damage);
 
                         if (entity instanceof LivingEntity livingEntity) {
-                            int i = Ench.getEquipmentLevel(
-                                level().registryAccess(), Enchantments.BLAST_PROTECTION, livingEntity);
+                            int i = Ench
+                                .getEquipmentLevel(
+                                    level().registryAccess(),
+                                    Enchantments.BLAST_PROTECTION,
+                                    livingEntity
+                                );
                             if (i > 0) {
                                 velocity *= Mth.clamp(1.0 - (double) i * 0.15, 0.0, 1.0);
                             }
                         }
 
-                        entity.setDeltaMovement(entity.getDeltaMovement()
-                                                      .add(x * velocity, y * velocity, z * velocity));
+                        entity
+                            .setDeltaMovement(
+                                entity
+                                    .getDeltaMovement()
+                                    .add(x * velocity, y * velocity, z * velocity)
+                            );
                     }
                 }
             }
@@ -341,13 +402,31 @@ public class InkProjectileEntity extends MagicProjectileEntity {
         Vec3 targetPos = position();
         Vec3 velocity = getDeltaMovement();
 
-        world.addParticle(
-            ColoredExplosionParticleEffect.of(inkColor.getColorInt()), targetPos.x, targetPos.y, targetPos.z, 0, 0, 0);
-        for (int i = 0; i < 10; i++) {
-            world.addParticle(
-                ColoredCraftingParticleEffect.of(inkColor.getColorInt()), targetPos.x, targetPos.y, targetPos.z,
-                -velocity.x * 3, -velocity.y * 3, -velocity.z * 3
+        world
+            .addParticle(
+                ColoredExplosionParticleEffect.of(inkColor.getColorInt()),
+                targetPos.x,
+                targetPos.y,
+                targetPos.z,
+                0,
+                0,
+                0
             );
+        for (
+            int i = 0;
+            i < 10;
+            i++
+        ) {
+            world
+                .addParticle(
+                    ColoredCraftingParticleEffect.of(inkColor.getColorInt()),
+                    targetPos.x,
+                    targetPos.y,
+                    targetPos.z,
+                    -velocity.x * 3,
+                    -velocity.y * 3,
+                    -velocity.z * 3
+                );
         }
     }
 

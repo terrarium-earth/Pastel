@@ -21,12 +21,21 @@ public interface ItemPickupListener {
      */
     ItemStack receive(Optional<ItemStack> listener, ItemStack stack, Optional<Entity> taker);
 
-    static ItemStack receiveRecursive(IItemHandler inventory, int depthLimit, int depth,
-                                      ItemStack stack, Optional<Entity> taker) {
+    static ItemStack receiveRecursive(
+        IItemHandler inventory,
+        int depthLimit,
+        int depth,
+        ItemStack stack,
+        Optional<Entity> taker
+    ) {
 
         var tries = Math.min(inventory.getSlots(), 128);
 
-        for (int slot = 0; slot < tries; slot++) {
+        for (
+            int slot = 0;
+            slot < tries;
+            slot++
+        ) {
             if (stack.isEmpty())
                 return ItemStack.EMPTY;
 

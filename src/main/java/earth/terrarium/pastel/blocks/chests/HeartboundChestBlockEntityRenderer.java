@@ -23,16 +23,27 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
-@SuppressWarnings({"unused", "FieldCanBeLocal"})
+@OnlyIn(
+    Dist.CLIENT
+)
+@SuppressWarnings(
+    {
+        "unused", "FieldCanBeLocal"
+}
+)
 public class HeartboundChestBlockEntityRenderer implements BlockEntityRenderer<HeartboundChestBlockEntity> {
 
     private static final Material SPRITE = new Material(
-        InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/heartbound_chest"));
+        InventoryMenu.BLOCK_ATLAS,
+        PastelCommon.locate("block/heartbound_chest")
+    );
 
     private final ModelPart root;
+
     private final ModelPart bottomLock;
+
     private final ModelPart cap;
+
     private final ModelPart topLock;
 
     public HeartboundChestBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
@@ -46,57 +57,93 @@ public class HeartboundChestBlockEntityRenderer implements BlockEntityRenderer<H
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-        PartDefinition bottomlock = modelPartData.addOrReplaceChild(
-            "bottomlock", CubeListBuilder.create()
-                                         .texOffs(6, 5)
-                                         .addBox(1.5F, -1.0F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F))
-                                         .texOffs(0, 5)
-                                         .addBox(-3.5F, -1.0F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 14.0F, -7.5F)
-        );
+        PartDefinition bottomlock = modelPartData
+            .addOrReplaceChild(
+                "bottomlock",
+                CubeListBuilder
+                    .create()
+                    .texOffs(6, 5)
+                    .addBox(1.5F, -1.0F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F))
+                    .texOffs(0, 5)
+                    .addBox(-3.5F, -1.0F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 14.0F, -7.5F)
+            );
 
-        PartDefinition cap = modelPartData.addOrReplaceChild(
-            "cap", CubeListBuilder.create()
-                                  .texOffs(0, 0)
-                                  .addBox(
-                                      -7.5F, -5.0F, -14.5F, 15.0F, 5.0F, 15.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 15.0F, 7.0F)
-        );
+        PartDefinition cap = modelPartData
+            .addOrReplaceChild(
+                "cap",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(
+                        -7.5F,
+                        -5.0F,
+                        -14.5F,
+                        15.0F,
+                        5.0F,
+                        15.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, 15.0F, 7.0F)
+            );
 
-        PartDefinition toplock = cap.addOrReplaceChild(
-            "toplock", CubeListBuilder.create()
-                                      .texOffs(0, 0)
-                                      .addBox(
-                                          -1.5F, -2.0F, -0.5F, 3.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, -1.0F, -14.5F)
-        );
+        PartDefinition toplock = cap
+            .addOrReplaceChild(
+                "toplock",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(
+                        -1.5F,
+                        -2.0F,
+                        -0.5F,
+                        3.0F,
+                        4.0F,
+                        1.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, -1.0F, -14.5F)
+            );
 
-        PartDefinition bb_main = modelPartData.addOrReplaceChild(
-            "bb_main", CubeListBuilder.create()
-                                      .texOffs(0, 20)
-                                      .addBox(-7.0F, -10.0F, -7.0F, 14.0F, 10.0F, 14.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, 24.0F, 0.0F)
-        );
+        PartDefinition bb_main = modelPartData
+            .addOrReplaceChild(
+                "bb_main",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 20)
+                    .addBox(-7.0F, -10.0F, -7.0F, 14.0F, 10.0F, 14.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 24.0F, 0.0F)
+            );
         return LayerDefinition.create(modelData, 64, 64);
     }
 
     @Override
     public void render(
-        HeartboundChestBlockEntity chest, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
-        int light, int overlay
+        HeartboundChestBlockEntity chest,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay
     ) {
         matrices.pushPose();
         var vertexConsumer = SPRITE.buffer(vertexConsumers, RenderType::entitySolid);
 
         boolean bl = chest.getLevel() != null;
-        BlockState blockState = bl ? chest.getBlockState() : PastelBlocks.HEARTBOUND_CHEST.get()
-                                                                                          .defaultBlockState()
-                                                                                          .setValue(
-                                                                                              ChestBlock.FACING,
-                                                                                              Direction.SOUTH
-                                                                                          );
-        float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING)
-                                                                        .toYRot() : 0;
+        BlockState blockState = bl
+            ? chest.getBlockState()
+            : PastelBlocks.HEARTBOUND_CHEST
+                .get()
+                .defaultBlockState()
+                .setValue(
+                    ChestBlock.FACING,
+                    Direction.SOUTH
+                );
+        float f = blockState.hasProperty(ChestBlock.FACING)
+            ? blockState
+                .getValue(ChestBlock.FACING)
+                .toYRot()
+            : 0;
         matrices.translate(0.5D, 1.5D, 0.5D);
         matrices.mulPose(Axis.YP.rotationDegrees(-f));
         matrices.mulPose(Axis.XP.rotationDegrees(180));

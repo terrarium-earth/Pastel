@@ -14,7 +14,7 @@ public interface SlotWithOnClickAction {
      * @param type      the click type, either left or right click
      * @param player    the player, the held stack can be safely mutated
      * @return whether to consume the click event or not, returning false will have the event processed by items, and
-     * if left unconsumed will be processed by the screen handler
+     *         if left unconsumed will be processed by the screen handler
      */
     boolean onClicked(ItemStack heldStack, ClickAction type, Player player);
 

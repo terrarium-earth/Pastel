@@ -9,13 +9,18 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelGameEvents {
 
-    private static final DeferredRegister<GameEvent> REGISTER = DeferredRegister.create(
-        Registries.GAME_EVENT, PastelCommon.MOD_ID);
+    private static final DeferredRegister<GameEvent> REGISTER = DeferredRegister
+        .create(
+            Registries.GAME_EVENT,
+            PastelCommon.MOD_ID
+        );
 
     public static Holder<GameEvent> ENTITY_SPAWNED;
+
     public static Holder<GameEvent> BLOCK_CHANGED;
 
     public static Holder<GameEvent> HUMMINGSTONE_HUMMING;
+
     public static Holder<GameEvent> HUMMINGSTONE_HYMN;
 
     public static Holder<GameEvent> WIRELESS_REDSTONE_SIGNAL;

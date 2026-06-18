@@ -11,7 +11,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class SquidHeadModel extends PastelSkullModel {
 
     public SquidHeadModel(ModelPart root) {
@@ -22,13 +24,15 @@ public class SquidHeadModel extends PastelSkullModel {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(0, 0)
-                           .addBox(-6.0F, -16.0F, -6.0F, 12.0F, 16.0F, 12.0F),
-            PartPose.ZERO
-        );
+        modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-6.0F, -16.0F, -6.0F, 12.0F, 16.0F, 12.0F),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 64, 32);
     }

@@ -32,7 +32,10 @@ public class EnchantmentRegisteredCondition extends BookCondition {
     }
 
     public static EnchantmentRegisteredCondition fromJson(
-        ResourceLocation conditionParentId, JsonObject json, HolderLookup.Provider provider) {
+        ResourceLocation conditionParentId,
+        JsonObject json,
+        HolderLookup.Provider provider
+    ) {
         ResourceLocation enchantmentID = ResourceLocation.parse(GsonHelper.getAsString(json, "enchantment_id"));
         Component tooltip = tooltipFromJson(json, provider);
         return new EnchantmentRegisteredCondition(tooltip, ResourceKey.create(Registries.ENCHANTMENT, enchantmentID));
@@ -60,21 +63,30 @@ public class EnchantmentRegisteredCondition extends BookCondition {
 
     @Override
     public boolean test(BookConditionContext context, Player player) {
-        return Ench.getEntry(
-                       player.level()
-                             .registryAccess(), this.enchantmentKey
-                   )
-                   .isPresent();
+        return Ench
+            .getEntry(
+                player
+                    .level()
+                    .registryAccess(),
+                this.enchantmentKey
+            )
+            .isPresent();
     }
 
     @Override
     public List<Component> getTooltip(Player player, BookConditionContext context) {
         if (this.tooltip == null && context instanceof BookConditionEntryContext entryContext) {
-            this.tooltip = Component.translatable(
-                TOOLTIP, Component.translatable(entryContext.getBook()
-                                                            .getEntry(this.enchantmentKey.location())
-                                                            .getName())
-            );
+            this.tooltip = Component
+                .translatable(
+                    TOOLTIP,
+                    Component
+                        .translatable(
+                            entryContext
+                                .getBook()
+                                .getEntry(this.enchantmentKey.location())
+                                .getName()
+                        )
+                );
         }
         return super.getTooltip(player, context);
     }

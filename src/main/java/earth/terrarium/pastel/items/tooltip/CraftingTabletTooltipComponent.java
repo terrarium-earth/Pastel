@@ -10,16 +10,20 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Matrix4f;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class CraftingTabletTooltipComponent implements PastelTooltipComponent {
 
     private final ItemStack itemStack;
+
     private final FormattedCharSequence description;
 
     public CraftingTabletTooltipComponent(CraftingTabletTooltipData data) {
         this.itemStack = data.getItemStack();
-        this.description = data.getDescription()
-                               .getVisualOrderText();
+        this.description = data
+            .getDescription()
+            .getVisualOrderText();
     }
 
     @Override
@@ -42,11 +46,25 @@ public class CraftingTabletTooltipComponent implements PastelTooltipComponent {
 
     @Override
     public void renderText(
-        Font textRenderer, int x, int y, Matrix4f matrix4f, MultiBufferSource.BufferSource immediate) {
-        textRenderer.drawInBatch(
-            this.description, (float) x + 26, (float) y + 6, 11053224, true, matrix4f, immediate,
-            Font.DisplayMode.NORMAL, 0, 15728880
-        );
+        Font textRenderer,
+        int x,
+        int y,
+        Matrix4f matrix4f,
+        MultiBufferSource.BufferSource immediate
+    ) {
+        textRenderer
+            .drawInBatch(
+                this.description,
+                (float) x + 26,
+                (float) y + 6,
+                11053224,
+                true,
+                matrix4f,
+                immediate,
+                Font.DisplayMode.NORMAL,
+                0,
+                15728880
+            );
     }
 
 }

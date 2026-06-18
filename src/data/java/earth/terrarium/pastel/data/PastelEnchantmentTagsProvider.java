@@ -23,7 +23,8 @@ import static earth.terrarium.pastel.PastelCommon.locate;
 public class PastelEnchantmentTagsProvider extends EnchantmentTagsProvider {
 
     public PastelEnchantmentTagsProvider(
-        PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider,
+        PackOutput packOutput,
+        CompletableFuture<HolderLookup.Provider> lookupProvider,
         @Nullable ExistingFileHelper existingFileHelper
     ) {
         super(packOutput, lookupProvider, PastelCommon.MOD_ID, existingFileHelper);
@@ -32,12 +33,14 @@ public class PastelEnchantmentTagsProvider extends EnchantmentTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         var pastelEnchantmentTag = tag(PastelEnchantmentTags.PASTEL_ENCHANTMENT);
-        for(var key : PastelEnchantments.PASTEL_ENCHANTMENTS) pastelEnchantmentTag.add(key);
+        for (
+            var key : PastelEnchantments.PASTEL_ENCHANTMENTS
+        ) pastelEnchantmentTag.add(key);
 
         registerExclusiveSetTags();
     }
 
-    private void registerExclusiveSetTags(){
+    private void registerExclusiveSetTags() {
         tag(PastelEnchantmentTags.ExclusiveSet.CLOVERS_FAVOR)
             .add(Enchantments.LOOTING)
             .addOptional(ResourceLocation.parse("malum:spirit_plunder"));

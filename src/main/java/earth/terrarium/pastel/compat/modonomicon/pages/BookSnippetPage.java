@@ -15,17 +15,33 @@ import net.minecraft.util.GsonHelper;
 public class BookSnippetPage extends BookTextPage {
 
     private final ResourceLocation resourcePath;
+
     private final int resourceWidth;
+
     private final int resourceHeight;
+
     private final int textureX;
+
     private final int textureY;
+
     private final int textureWidth;
+
     private final int textureHeight;
 
     public BookSnippetPage(
-        BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator,
-        String anchor, BookCondition condition, ResourceLocation resourcePath, int resourceWidth, int resourceHeight,
-        int textureX, int textureY, int textureWidth, int textureHeight
+        BookTextHolder title,
+        BookTextHolder text,
+        boolean useMarkdownInTitle,
+        boolean showTitleSeparator,
+        String anchor,
+        BookCondition condition,
+        ResourceLocation resourcePath,
+        int resourceWidth,
+        int resourceHeight,
+        int textureX,
+        int textureY,
+        int textureWidth,
+        int textureHeight
     ) {
         super(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition);
         this.resourcePath = resourcePath;
@@ -44,8 +60,8 @@ public class BookSnippetPage extends BookTextPage {
         var text = BookGsonHelper.getAsBookTextHolder(json, "text", BookTextHolder.EMPTY, provider);
         var anchor = GsonHelper.getAsString(json, "anchor", "");
         var condition = json.has("condition")
-                        ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
-                        : new BookNoneCondition();
+            ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
+            : new BookNoneCondition();
         var resourcePath = ResourceLocation.tryParse(GsonHelper.getAsString(json, "resource_path"));
         var resourceWidth = GsonHelper.getAsInt(json, "resource_width");
         var resourceHeight = GsonHelper.getAsInt(json, "resource_height");
@@ -54,8 +70,19 @@ public class BookSnippetPage extends BookTextPage {
         var textureWidth = GsonHelper.getAsInt(json, "texture_width");
         var textureHeight = GsonHelper.getAsInt(json, "texture_height");
         return new BookSnippetPage(
-            title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, resourcePath, resourceWidth,
-            resourceHeight, textureX, textureY, textureWidth, textureHeight
+            title,
+            text,
+            useMarkdownInTitle,
+            showTitleSeparator,
+            anchor,
+            condition,
+            resourcePath,
+            resourceWidth,
+            resourceHeight,
+            textureX,
+            textureY,
+            textureWidth,
+            textureHeight
         );
     }
 
@@ -74,8 +101,19 @@ public class BookSnippetPage extends BookTextPage {
         var textureWidth = buffer.readVarInt();
         var textureHeight = buffer.readVarInt();
         return new BookSnippetPage(
-            title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, resourcePath, resourceWidth,
-            resourceHeight, textureX, textureY, textureWidth, textureHeight
+            title,
+            text,
+            useMarkdownInTitle,
+            showTitleSeparator,
+            anchor,
+            condition,
+            resourcePath,
+            resourceWidth,
+            resourceHeight,
+            textureX,
+            textureY,
+            textureWidth,
+            textureHeight
         );
     }
 
@@ -106,7 +144,6 @@ public class BookSnippetPage extends BookTextPage {
     public int getTextureHeight() {
         return textureHeight;
     }
-
 
     @Override
     public ResourceLocation getType() {

@@ -30,16 +30,24 @@ public class PastelNodeUpgradeCriterion extends SimpleCriterionTrigger<PastelNod
         ItemPredicate item
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<PastelNodeUpgradeCriterion.Conditions> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                                    ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                               .forGetter(PastelNodeUpgradeCriterion.Conditions::player),
-                                    ItemPredicate.CODEC.optionalFieldOf("upgrade", ItemPredicate.Builder.item()
-                                                                                                        .build()
-                                                 )
-                                                       .forGetter(PastelNodeUpgradeCriterion.Conditions::item)
-                                )
-                                .apply(instance, PastelNodeUpgradeCriterion.Conditions::new));
+        public static final Codec<PastelNodeUpgradeCriterion.Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(PastelNodeUpgradeCriterion.Conditions::player),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf(
+                                "upgrade",
+                                ItemPredicate.Builder
+                                    .item()
+                                    .build()
+                            )
+                            .forGetter(PastelNodeUpgradeCriterion.Conditions::item)
+                    )
+                    .apply(instance, PastelNodeUpgradeCriterion.Conditions::new)
+            );
 
         public boolean matches(ItemStack stack) {
             return this.item.test(stack);

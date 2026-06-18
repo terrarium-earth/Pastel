@@ -9,8 +9,11 @@ import net.neoforged.neoforge.capabilities.ItemCapability;
 import java.util.List;
 
 public interface ItemProvider {
-    ItemCapability<ItemProvider, Void> CAPABILITY = ItemCapability.createVoid(
-        PastelCommon.ofPastel("item_provider"), ItemProvider.class);
+    ItemCapability<ItemProvider, Void> CAPABILITY = ItemCapability
+        .createVoid(
+            PastelCommon.ofPastel("item_provider"),
+            ItemProvider.class
+        );
 
     int getItemCount(Player player, ItemStack stack, Item requestedItem);
 

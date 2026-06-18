@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.fusion_shrine;
 
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -48,27 +47,34 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("build_fusion_shrine");
 
     protected final List<IngredientStack> craftingInputs;
+
     protected final FluidIngredient fluid;
+
     protected final ItemStack output;
+
     protected final float experience;
+
     protected final int craftingTime;
+
     // since there are a few recipes that are basically compacting recipes
     // they could be crafted ingots>block and block>ingots back
     // In that case:
     // - the player should not get XP
     // - Yield upgrades disabled (item multiplication)
     protected final boolean yieldUpgradesDisabled;
+
     protected final boolean playCraftingFinishedEffects;
 
     protected final List<WorldConditionsPredicate> worldConditionsPredicates;
-    @NotNull
-    protected final FusionShrineRecipeWorldEffect startWorldEffect;
-    @NotNull
-    protected final List<FusionShrineRecipeWorldEffect> duringWorldEffects;
-    @NotNull
-    protected final FusionShrineRecipeWorldEffect finishWorldEffect;
-    @Nullable
-    protected final Component description;
+
+    @NotNull protected final FusionShrineRecipeWorldEffect startWorldEffect;
+
+    @NotNull protected final List<FusionShrineRecipeWorldEffect> duringWorldEffects;
+
+    @NotNull protected final FusionShrineRecipeWorldEffect finishWorldEffect;
+
+    @Nullable protected final Component description;
+
     // copy all components from the first stack in the ingredients to the output stack
     protected final boolean copyComponents;
 
@@ -176,8 +182,9 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     public boolean areConditionMetCurrently(ServerLevel world, BlockPos pos) {
         if (worldConditionsPredicates.isEmpty())
             return true;
-        return this.worldConditionsPredicates.stream()
-                                             .anyMatch(p -> p.test(world, pos));
+        return this.worldConditionsPredicates
+            .stream()
+            .anyMatch(p -> p.test(world, pos));
     }
 
     public FluidIngredient getFluid() {
@@ -245,14 +252,23 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
         int maxAmount = 1;
         ItemStack output = assemble(
             new FluidRecipeInput<>(
-                fusionShrineBlockEntity.getInventory()
-                                       .getInternalList(), fusionShrineBlockEntity.tank
-            ), world.registryAccess()
+                fusionShrineBlockEntity
+                    .getInventory()
+                    .getInternalList(),
+                fusionShrineBlockEntity.tank
+            ),
+            world.registryAccess()
         );
         if (!output.isEmpty()) {
             maxAmount = output.getMaxStackSize();
-            for (IngredientStack ingredientStack : getIngredientStacks()) {
-                for (int i = 0; i < fusionShrineBlockEntity.getContainerSize(); i++) {
+            for (
+                IngredientStack ingredientStack : getIngredientStacks()
+            ) {
+                for (
+                    int i = 0;
+                    i < fusionShrineBlockEntity.getContainerSize();
+                    i++
+                ) {
                     ItemStack currentStack = fusionShrineBlockEntity.getItem(i);
                     if (ingredientStack.test(currentStack)) {
                         if (firstStack.isEmpty()) {
@@ -267,22 +283,35 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
 
             memory = firstStack.copy();
             if (maxAmount > 0) {
-                double efficiencyModifier = fusionShrineBlockEntity.getUpgradeHolder()
-                                                                   .getEffectiveValue(
-                                                                       Upgradeable.UpgradeType.EFFICIENCY);
+                double efficiencyModifier = fusionShrineBlockEntity
+                    .getUpgradeHolder()
+                    .getEffectiveValue(
+                        Upgradeable.UpgradeType.EFFICIENCY
+                    );
                 decrementIngredients(world, fusionShrineBlockEntity, maxAmount, efficiencyModifier);
             }
         } else {
-            for (IngredientStack ingredientStack : getIngredientStacks()) {
-                double efficiencyModifier = fusionShrineBlockEntity.getUpgradeHolder()
-                                                                   .getEffectiveValue(
-                                                                       Upgradeable.UpgradeType.EFFICIENCY);
+            for (
+                IngredientStack ingredientStack : getIngredientStacks()
+            ) {
+                double efficiencyModifier = fusionShrineBlockEntity
+                    .getUpgradeHolder()
+                    .getEffectiveValue(
+                        Upgradeable.UpgradeType.EFFICIENCY
+                    );
 
-                for (int i = 0; i < fusionShrineBlockEntity.getContainerSize(); i++) {
+                for (
+                    int i = 0;
+                    i < fusionShrineBlockEntity.getContainerSize();
+                    i++
+                ) {
                     ItemStack currentStack = fusionShrineBlockEntity.getItem(i);
                     if (ingredientStack.test(currentStack)) {
-                        int reducedAmountAfterMod = Support.chanceRound(
-                            ingredientStack.getCount() / efficiencyModifier, world.random);
+                        int reducedAmountAfterMod = Support
+                            .chanceRound(
+                                ingredientStack.getCount() / efficiencyModifier,
+                                world.random
+                            );
                         currentStack.shrink(reducedAmountAfterMod);
                         break;
                     }
@@ -293,7 +322,9 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
         if (this.copyComponents) {
             var originalEnchantments = output.getEnchantments();
             output = memory.transmuteCopy(output.getItem(), output.getCount());
-            for (Holder<Enchantment> enchantment : originalEnchantments.keySet()) {
+            for (
+                Holder<Enchantment> enchantment : originalEnchantments.keySet()
+            ) {
                 output.enchant(enchantment, originalEnchantments.getLevel(enchantment));
             }
         }
@@ -302,14 +333,29 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     }
 
     private void decrementIngredients(
-        Level world, FusionShrineBlockEntity fusionShrineBlockEntity, int recipesCrafted, double efficiencyModifier) {
-        for (IngredientStack ingredientStack : getIngredientStacks()) {
-            for (int i = 0; i < fusionShrineBlockEntity.getContainerSize(); i++) {
+        Level world,
+        FusionShrineBlockEntity fusionShrineBlockEntity,
+        int recipesCrafted,
+        double efficiencyModifier
+    ) {
+        for (
+            IngredientStack ingredientStack : getIngredientStacks()
+        ) {
+            for (
+                int i = 0;
+                i < fusionShrineBlockEntity.getContainerSize();
+                i++
+            ) {
                 ItemStack currentStack = fusionShrineBlockEntity.getItem(i);
                 if (ingredientStack.test(currentStack)) {
                     int reducedAmount = recipesCrafted * ingredientStack.getCount();
-                    int reducedAmountAfterMod = efficiencyModifier == 1 ? reducedAmount : Support.chanceRound(
-                        reducedAmount / efficiencyModifier, world.random);
+                    int reducedAmountAfterMod = efficiencyModifier == 1
+                        ? reducedAmount
+                        : Support
+                            .chanceRound(
+                                reducedAmount / efficiencyModifier,
+                                world.random
+                            );
 
                     ItemStack currentRemainder = currentStack.getCraftingRemainingItem();
                     currentStack.shrink(reducedAmountAfterMod);
@@ -317,8 +363,12 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
                     if (!currentRemainder.isEmpty()) {
                         currentRemainder = currentRemainder.copy();
                         currentRemainder.setCount(reducedAmountAfterMod);
-                        InventoryHelper.smartAddToInventory(
-                            currentRemainder, fusionShrineBlockEntity.getInventory(), null);
+                        InventoryHelper
+                            .smartAddToInventory(
+                                currentRemainder,
+                                fusionShrineBlockEntity.getInventory(),
+                                null
+                            );
                     }
 
                     break;
@@ -328,21 +378,32 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     }
 
     protected void spawnCraftingResultAndXP(
-        @NotNull Level world, @NotNull FusionShrineBlockEntity fusionShrineBlockEntity, @NotNull ItemStack stack,
+        @NotNull Level world,
+        @NotNull FusionShrineBlockEntity fusionShrineBlockEntity,
+        @NotNull ItemStack stack,
         int recipeCount
     ) {
         int resultAmountBeforeMod = recipeCount * stack.getCount();
-        double yieldModifier = yieldUpgradesDisabled ? 1.0 : fusionShrineBlockEntity.getUpgradeHolder()
-                                                                                    .getEffectiveValue(
-                                                                                        Upgradeable.UpgradeType.YIELD);
+        double yieldModifier = yieldUpgradesDisabled
+            ? 1.0
+            : fusionShrineBlockEntity
+                .getUpgradeHolder()
+                .getEffectiveValue(
+                    Upgradeable.UpgradeType.YIELD
+                );
         int resultAmountAfterMod = Support.chanceRound(resultAmountBeforeMod * yieldModifier, world.random);
 
         int intExperience = Support.chanceRound(recipeCount * experience, world.random);
-        MultiblockCrafter.spawnItemStackAsEntitySplitViaMaxCount(
-            world, fusionShrineBlockEntity.getBlockPos()
-                                          .above(2), stack, resultAmountAfterMod,
-            MultiblockCrafter.RECIPE_STACK_VELOCITY
-        );
+        MultiblockCrafter
+            .spawnItemStackAsEntitySplitViaMaxCount(
+                world,
+                fusionShrineBlockEntity
+                    .getBlockPos()
+                    .above(2),
+                stack,
+                resultAmountAfterMod,
+                MultiblockCrafter.RECIPE_STACK_VELOCITY
+            );
 
         if (experience > 0) {
             MultiblockCrafter.spawnExperience(world, fusionShrineBlockEntity.getBlockPos(), intExperience);
@@ -358,69 +419,104 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
 
     public static class Serializer implements RecipeSerializer<FusionShrineRecipe> {
 
-        public static final MapCodec<FusionShrineRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                       Codec.STRING.optionalFieldOf("group", "")
-                                                                                                                   .forGetter(recipe -> recipe.group),
-                                                                                                       Codec.BOOL.optionalFieldOf("secret", false)
-                                                                                                                 .forGetter(recipe -> recipe.secret),
-                                                                                                       ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                                                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                                                                                       IngredientStack.CODEC.listOf(0, 7)
-                                                                                                                            .fieldOf("ingredients")
-                                                                                                                            .forGetter(recipe -> recipe.craftingInputs),
-                                                                                                       FluidIngredient.CODEC.optionalFieldOf("fluid", FluidIngredient.empty())
-                                                                                                                            .forGetter(recipe -> recipe.fluid),
-                                                                                                       ItemStack.CODEC.optionalFieldOf("result", ItemStack.EMPTY)
-                                                                                                                      .forGetter(recipe -> recipe.output),
-                                                                                                       Codec.FLOAT.optionalFieldOf("experience", 0f)
-                                                                                                                  .forGetter(recipe -> recipe.experience),
-                                                                                                       Codec.INT.optionalFieldOf("time", 200)
-                                                                                                                .forGetter(recipe -> recipe.craftingTime),
-                                                                                                       Codec.BOOL.optionalFieldOf("disable_yield_upgrades", false)
-                                                                                                                 .forGetter(recipe -> recipe.yieldUpgradesDisabled),
-                                                                                                       Codec.BOOL.optionalFieldOf("play_crafting_finished_effects", true)
-                                                                                                                 .forGetter(recipe -> recipe.playCraftingFinishedEffects),
-                                                                                                       Codec.BOOL.optionalFieldOf("copy_components", false)
-                                                                                                                 .forGetter(recipe -> recipe.copyComponents),
-                                                                                                       CodecHelper.singleOrList(WorldConditionsPredicate.CODEC)
-                                                                                                                  .optionalFieldOf("world_conditions", List.of())
-                                                                                                                  .forGetter(recipe -> recipe.worldConditionsPredicates),
-                                                                                                       FusionShrineRecipeWorldEffect.CODEC.fieldOf("start_crafting_effect")
-                                                                                                                                          .forGetter(recipe -> recipe.startWorldEffect),
-                                                                                                       FusionShrineRecipeWorldEffect.CODEC.listOf()
-                                                                                                                                          .optionalFieldOf("during_crafting_effects", List.of())
-                                                                                                                                          .forGetter(recipe -> recipe.duringWorldEffects),
-                                                                                                       FusionShrineRecipeWorldEffect.CODEC.fieldOf("finish_crafting_effect")
-                                                                                                                                          .forGetter(recipe -> recipe.finishWorldEffect),
-                                                                                                       ComponentSerialization.CODEC.optionalFieldOf("description", Component.empty())
-                                                                                                                                   .forGetter(recipe -> recipe.description)
-                                                                                                   )
-                                                                                                   .apply(
-                                                                                                       i,
-                                                                                                       FusionShrineRecipe::new
-                                                                                                   ));
+        public static final MapCodec<FusionShrineRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(recipe -> recipe.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(recipe -> recipe.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                        IngredientStack.CODEC
+                            .listOf(0, 7)
+                            .fieldOf("ingredients")
+                            .forGetter(recipe -> recipe.craftingInputs),
+                        FluidIngredient.CODEC
+                            .optionalFieldOf("fluid", FluidIngredient.empty())
+                            .forGetter(recipe -> recipe.fluid),
+                        ItemStack.CODEC
+                            .optionalFieldOf("result", ItemStack.EMPTY)
+                            .forGetter(recipe -> recipe.output),
+                        Codec.FLOAT
+                            .optionalFieldOf("experience", 0f)
+                            .forGetter(recipe -> recipe.experience),
+                        Codec.INT
+                            .optionalFieldOf("time", 200)
+                            .forGetter(recipe -> recipe.craftingTime),
+                        Codec.BOOL
+                            .optionalFieldOf("disable_yield_upgrades", false)
+                            .forGetter(recipe -> recipe.yieldUpgradesDisabled),
+                        Codec.BOOL
+                            .optionalFieldOf("play_crafting_finished_effects", true)
+                            .forGetter(recipe -> recipe.playCraftingFinishedEffects),
+                        Codec.BOOL
+                            .optionalFieldOf("copy_components", false)
+                            .forGetter(recipe -> recipe.copyComponents),
+                        CodecHelper
+                            .singleOrList(WorldConditionsPredicate.CODEC)
+                            .optionalFieldOf("world_conditions", List.of())
+                            .forGetter(recipe -> recipe.worldConditionsPredicates),
+                        FusionShrineRecipeWorldEffect.CODEC
+                            .fieldOf("start_crafting_effect")
+                            .forGetter(recipe -> recipe.startWorldEffect),
+                        FusionShrineRecipeWorldEffect.CODEC
+                            .listOf()
+                            .optionalFieldOf("during_crafting_effects", List.of())
+                            .forGetter(recipe -> recipe.duringWorldEffects),
+                        FusionShrineRecipeWorldEffect.CODEC
+                            .fieldOf("finish_crafting_effect")
+                            .forGetter(recipe -> recipe.finishWorldEffect),
+                        ComponentSerialization.CODEC
+                            .optionalFieldOf("description", Component.empty())
+                            .forGetter(recipe -> recipe.description)
+                    )
+                    .apply(
+                        i,
+                        FusionShrineRecipe::new
+                    )
+            );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, FusionShrineRecipe> STREAM_CODEC
-            = PacketCodecHelper.tuple(
-            ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
-            ByteBufCodecs.BOOL, recipe -> recipe.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-            IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list(7)), recipe -> recipe.craftingInputs,
-            FluidIngredient.STREAM_CODEC, recipe -> recipe.fluid,
-            ItemStack.OPTIONAL_STREAM_CODEC, recipe -> recipe.output,
-            ByteBufCodecs.FLOAT, recipe -> recipe.experience,
-            ByteBufCodecs.VAR_INT, recipe -> recipe.craftingTime,
-            ByteBufCodecs.BOOL, recipe -> recipe.yieldUpgradesDisabled,
-            ByteBufCodecs.BOOL, recipe -> recipe.playCraftingFinishedEffects,
-            ByteBufCodecs.BOOL, recipe -> recipe.copyComponents,
-            WorldConditionsPredicate.STREAM_CODEC.apply(ByteBufCodecs.list()),
-            recipe -> recipe.worldConditionsPredicates,
-            FusionShrineRecipeWorldEffect.STREAM_CODEC, recipe -> recipe.startWorldEffect,
-            FusionShrineRecipeWorldEffect.STREAM_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.duringWorldEffects,
-            FusionShrineRecipeWorldEffect.STREAM_CODEC, recipe -> recipe.finishWorldEffect,
-            ComponentSerialization.TRUSTED_CONTEXT_FREE_STREAM_CODEC, recipe -> recipe.description,
-            FusionShrineRecipe::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, FusionShrineRecipe> STREAM_CODEC = PacketCodecHelper
+            .tuple(
+                ByteBufCodecs.STRING_UTF8,
+                recipe -> recipe.group,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                recipe -> recipe.requiredAdvancementIdentifier,
+                IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list(7)),
+                recipe -> recipe.craftingInputs,
+                FluidIngredient.STREAM_CODEC,
+                recipe -> recipe.fluid,
+                ItemStack.OPTIONAL_STREAM_CODEC,
+                recipe -> recipe.output,
+                ByteBufCodecs.FLOAT,
+                recipe -> recipe.experience,
+                ByteBufCodecs.VAR_INT,
+                recipe -> recipe.craftingTime,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.yieldUpgradesDisabled,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.playCraftingFinishedEffects,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.copyComponents,
+                WorldConditionsPredicate.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                recipe -> recipe.worldConditionsPredicates,
+                FusionShrineRecipeWorldEffect.STREAM_CODEC,
+                recipe -> recipe.startWorldEffect,
+                FusionShrineRecipeWorldEffect.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                recipe -> recipe.duringWorldEffects,
+                FusionShrineRecipeWorldEffect.STREAM_CODEC,
+                recipe -> recipe.finishWorldEffect,
+                ComponentSerialization.TRUSTED_CONTEXT_FREE_STREAM_CODEC,
+                recipe -> recipe.description,
+                FusionShrineRecipe::new
+            );
 
         @Override
         public MapCodec<FusionShrineRecipe> codec() {

@@ -47,7 +47,11 @@ public class EnchantmentCanvasItem extends Item {
      */
     @Override
     public boolean overrideOtherStackedOnMe(
-        ItemStack stack, ItemStack otherStack, Slot slot, ClickAction clickType, Player player,
+        ItemStack stack,
+        ItemStack otherStack,
+        Slot slot,
+        ClickAction clickType,
+        Player player,
         SlotAccess cursorStackReference
     ) {
         if (clickType == ClickAction.SECONDARY && otherStack.getCount() == 1 && slot.allowModification(player)) {
@@ -62,14 +66,20 @@ public class EnchantmentCanvasItem extends Item {
     }
 
     public static boolean tryExchangeEnchantments(
-        ItemStack canvasStack, ItemStack targetStack, @Nullable Entity receiver) {
+        ItemStack canvasStack,
+        ItemStack targetStack,
+        @Nullable Entity receiver
+    ) {
         Optional<Item> itemLock = getItemBoundTo(canvasStack);
         if (itemLock.isPresent() && !targetStack.is(itemLock.get())) {
             return false;
         }
 
-        var canvasEnchantments = canvasStack.getOrDefault(
-            PastelDataComponentTypes.CANVAS_ENCHANTMENTS, ItemEnchantments.EMPTY);
+        var canvasEnchantments = canvasStack
+            .getOrDefault(
+                PastelDataComponentTypes.CANVAS_ENCHANTMENTS,
+                ItemEnchantments.EMPTY
+            );
         var targetEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(targetStack);
         if (canvasEnchantments.isEmpty() && targetEnchantments.isEmpty()) {
             return false;
@@ -90,8 +100,9 @@ public class EnchantmentCanvasItem extends Item {
 
         if (drop && receiver != null) {
             if (receiver instanceof Player player) {
-                player.getInventory()
-                      .placeItemBackInInventory(canvasStack);
+                player
+                    .getInventory()
+                    .placeItemBackInInventory(canvasStack);
             } else {
                 receiver.spawnAtLocation(canvasStack);
             }
@@ -101,20 +112,31 @@ public class EnchantmentCanvasItem extends Item {
     }
 
     private void playExchangeSound(Entity entity) {
-        entity.playSound(
-            SoundEvents.GRINDSTONE_USE, 0.8F, 0.8F + entity.level()
-                                                           .getRandom()
-                                                           .nextFloat() * 0.4F
-        );
+        entity
+            .playSound(
+                SoundEvents.GRINDSTONE_USE,
+                0.8F,
+                0.8F + entity
+                    .level()
+                    .getRandom()
+                    .nextFloat() * 0.4F
+            );
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         Optional<Item> boundItem = getItemBoundTo(stack);
         if (boundItem.isPresent()) {
-            tooltip.add(Component.translatable("item.pastel.enchantment_canvas.tooltip.bound_to")
-                                 .append(boundItem.get()
-                                                  .getDescription()));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.enchantment_canvas.tooltip.bound_to")
+                        .append(
+                            boundItem
+                                .get()
+                                .getDescription()
+                        )
+                );
         } else {
             tooltip.add(Component.translatable("item.pastel.enchantment_canvas.tooltip.not_bound"));
             tooltip.add(Component.translatable("item.pastel.enchantment_canvas.tooltip.not_bound2"));
@@ -122,8 +144,11 @@ public class EnchantmentCanvasItem extends Item {
     }
 
     private static void bindTo(ItemStack enchantmentExchangerStack, ItemStack targetStack) {
-        enchantmentExchangerStack.set(
-            PastelDataComponentTypes.BOUND_ITEM, BuiltInRegistries.ITEM.getKey(targetStack.getItem()));
+        enchantmentExchangerStack
+            .set(
+                PastelDataComponentTypes.BOUND_ITEM,
+                BuiltInRegistries.ITEM.getKey(targetStack.getItem())
+            );
     }
 
     private static Optional<Item> getItemBoundTo(ItemStack enchantmentExchangerStack) {

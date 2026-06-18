@@ -19,15 +19,18 @@ public class HeadBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return PastelBlocks.MOB_HEADS.values()
-                                     .stream()
-                                     .map(DeferredHolder::get)
-                                     .toList();
+        return PastelBlocks.MOB_HEADS
+            .values()
+            .stream()
+            .map(DeferredHolder::get)
+            .toList();
     }
 
     @Override
     protected void generate() {
-        for (DeferredBlock<Block> head : PastelBlocks.MOB_HEADS.values()) {
+        for (
+            DeferredBlock<Block> head : PastelBlocks.MOB_HEADS.values()
+        ) {
             dropSelf(head.get());
         }
     }

@@ -29,15 +29,22 @@ import java.util.Optional;
 public class InkConvertingRecipe extends GatedPastelRecipe<RecipeInput> {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("midgame/place_color_picker");
+
     protected static final List<Item> INPUT_ITEMS = new ArrayList<>();
 
     protected final Ingredient inputIngredient;
+
     protected final InkColor color;
+
     protected final long amount;
 
     public InkConvertingRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        Ingredient inputIngredient, InkColor color, long amount
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        Ingredient inputIngredient,
+        InkColor color,
+        long amount
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -45,7 +52,9 @@ public class InkConvertingRecipe extends GatedPastelRecipe<RecipeInput> {
         this.color = color;
         this.amount = amount;
 
-        for (ItemStack itemStack : inputIngredient.getItems()) {
+        for (
+            ItemStack itemStack : inputIngredient.getItems()
+        ) {
             Item item = itemStack.getItem();
             if (!INPUT_ITEMS.contains(item)) {
                 INPUT_ITEMS.add(item);
@@ -119,35 +128,51 @@ public class InkConvertingRecipe extends GatedPastelRecipe<RecipeInput> {
 
     public static class Serializer implements RecipeSerializer<InkConvertingRecipe> {
 
-        public static final MapCodec<InkConvertingRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                        Codec.STRING.optionalFieldOf("group", "")
-                                                                                                                    .forGetter(recipe -> recipe.group),
-                                                                                                        Codec.BOOL.optionalFieldOf("secret", false)
-                                                                                                                  .forGetter(recipe -> recipe.secret),
-                                                                                                        ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                                                              .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                                                                                        Ingredient.CODEC_NONEMPTY.fieldOf("ingredient")
-                                                                                                                                 .forGetter(recipe -> recipe.inputIngredient),
-                                                                                                        InkColor.CODEC.fieldOf("ink_color")
-                                                                                                                      .forGetter(recipe -> recipe.color),
-                                                                                                        Codec.LONG.fieldOf("amount")
-                                                                                                                  .forGetter(recipe -> recipe.amount)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        i,
-                                                                                                        InkConvertingRecipe::new
-                                                                                                    ));
+        public static final MapCodec<InkConvertingRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(recipe -> recipe.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(recipe -> recipe.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("ingredient")
+                            .forGetter(recipe -> recipe.inputIngredient),
+                        InkColor.CODEC
+                            .fieldOf("ink_color")
+                            .forGetter(recipe -> recipe.color),
+                        Codec.LONG
+                            .fieldOf("amount")
+                            .forGetter(recipe -> recipe.amount)
+                    )
+                    .apply(
+                        i,
+                        InkConvertingRecipe::new
+                    )
+            );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, InkConvertingRecipe> STREAM_CODEC
-            = StreamCodec.composite(
-            ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
-            ByteBufCodecs.BOOL, recipe -> recipe.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-            Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.inputIngredient,
-            InkColor.STREAM_CODEC, recipe -> recipe.color,
-            ByteBufCodecs.VAR_LONG, recipe -> recipe.amount,
-            InkConvertingRecipe::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, InkConvertingRecipe> STREAM_CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.STRING_UTF8,
+                recipe -> recipe.group,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                recipe -> recipe.requiredAdvancementIdentifier,
+                Ingredient.CONTENTS_STREAM_CODEC,
+                recipe -> recipe.inputIngredient,
+                InkColor.STREAM_CODEC,
+                recipe -> recipe.color,
+                ByteBufCodecs.VAR_LONG,
+                recipe -> recipe.amount,
+                InkConvertingRecipe::new
+            );
 
         @Override
         public MapCodec<InkConvertingRecipe> codec() {

@@ -41,11 +41,15 @@ import java.util.Optional;
 public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
 
     protected final Either<Holder<Enchantment>, ResourceKey<Enchantment>> either;
+
     protected final int levelCap;
+
     protected final Ingredient bulkItem;
+
     protected final RecipeScaling.ScalingData itemScaling, xpScaling;
 
     protected final NonNullList<Ingredient> inputs;
+
     protected final ItemStack output;
 
     public EnchantmentUpgradeRecipe(
@@ -68,16 +72,19 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
 
         NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
 
-        if (enchantmentEntry.left()
-                            .isPresent()) {
-            var enchantment = enchantmentEntry.left()
-                                              .get();
-            var baseMax = enchantment.value()
-                                     .getMaxLevel();
+        if (enchantmentEntry
+            .left()
+            .isPresent()) {
+            var enchantment = enchantmentEntry
+                .left()
+                .get();
+            var baseMax = enchantment
+                .value()
+                .getMaxLevel();
             if (levelCap < baseMax)
                 throw new JsonParseException(
-                    "Level Cap cannot be lower than the Enchantment's base level (levelCap " + levelCap +
-                    "< enchantment's" + baseMax + ")");
+                    "Level Cap cannot be lower than the Enchantment's base level (levelCap " + levelCap + "< enchantment's" + baseMax + ")"
+                );
 
             ItemStack ingredientStack = new ItemStack(Items.ENCHANTED_BOOK);
             ingredientStack.enchant(enchantment, levelCap - 1);
@@ -86,10 +93,13 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
             this.inputs = inputs;
 
             ItemStack outputStack = new ItemStack(Items.ENCHANTED_BOOK);
-            outputStack.enchant(
-                enchantmentEntry.left()
-                                .get(), levelCap
-            );
+            outputStack
+                .enchant(
+                    enchantmentEntry
+                        .left()
+                        .get(),
+                    levelCap
+                );
             this.output = outputStack;
         } else {
             this.inputs = NonNullList.create();
@@ -97,20 +107,22 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
         }
     }
 
-
     @Override
     public boolean matches(RecipeInput inv, Level level) {
         var center = inv.getItem(EnchanterBlockEntity.CENTER);
-        if (either.left()
-                  .isEmpty())
+        if (either
+            .left()
+            .isEmpty())
             throw new UnsupportedOperationException("Attempted to match a datagen enchantment upgrade");
 
-        var enchantment = either.left()
-                                .get();
+        var enchantment = either
+            .left()
+            .get();
 
         //Check if the book matches
-        if (!inputs.getFirst()
-                   .test(center)) {
+        if (!inputs
+            .getFirst()
+            .test(center)) {
             return false;
         }
 
@@ -121,24 +133,33 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
 
         var bookLevel = enchantments.getLevel(enchantment);
 
-        if (!enchantments.keySet()
-                         .contains(enchantment) || bookLevel >= levelCap) {
+        if (!enchantments
+            .keySet()
+            .contains(enchantment) || bookLevel >= levelCap) {
             return false;
         }
 
         // Check XP requirements
         var requiredXp = xpScaling.apply(bookLevel);
-        var availableXp = Optional.ofNullable(inv.getItem(EnchanterBlockEntity.XP_STORAGE)
-                                                 .getCapability(PastelCapabilities.Misc.XP, level.registryAccess()))
-                                  .map(ExperienceHandler::getStoredAmount)
-                                  .orElse(0);
+        var availableXp = Optional
+            .ofNullable(
+                inv
+                    .getItem(EnchanterBlockEntity.XP_STORAGE)
+                    .getCapability(PastelCapabilities.Misc.XP, level.registryAccess())
+            )
+            .map(ExperienceHandler::getStoredAmount)
+            .orElse(0);
 
         if (availableXp < requiredXp)
             return false;
 
         // Finally, check the ingredients
         int bulkInput = 0;
-        for (int i = 2; i < 10; i++) {
+        for (
+            int i = 2;
+            i < 10;
+            i++
+        ) {
             ItemStack currentStack = inv.getItem(i);
 
             if (!currentStack.isEmpty()) {
@@ -156,14 +177,16 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
 
     @Override
     public ItemStack assemble(RecipeInput inv, HolderLookup.Provider drm) {
-        var stack = inv.getItem(EnchanterBlockEntity.CENTER)
-                       .copy();
+        var stack = inv
+            .getItem(EnchanterBlockEntity.CENTER)
+            .copy();
 
         if (stack.isEmpty())
             return ItemStack.EMPTY;
 
-        var curLevel = stack.getOrDefault(DataComponents.STORED_ENCHANTMENTS, ItemEnchantments.EMPTY)
-                            .getLevel(getEnchantment());
+        var curLevel = stack
+            .getOrDefault(DataComponents.STORED_ENCHANTMENTS, ItemEnchantments.EMPTY)
+            .getLevel(getEnchantment());
         Ench.addOrUpgradeEnchantment(stack, getEnchantment(), curLevel + 1, false, false);
         return stack;
     }
@@ -177,19 +200,28 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
         var xpDrain = xpScaling.apply(scaling);
         var inv = enchanter.getInputs();
 
-        for (int i = 2; i < 10; i++) {
+        for (
+            int i = 2;
+            i < 10;
+            i++
+        ) {
             if (bulkItem.test(inv.getStackInSlot(i))) {
-                itemDrain -= inv.extractItem(i, itemDrain, false)
-                                .getCount();
+                itemDrain -= inv
+                    .extractItem(i, itemDrain, false)
+                    .getCount();
             }
 
             if (itemDrain == 0)
                 break;
         }
 
-        Optional.ofNullable(inv.getStackInSlot(EnchanterBlockEntity.XP_STORAGE)
-                               .getCapability(PastelCapabilities.Misc.XP, lookup))
-                .map(storage -> storage.extract(xpDrain, false));
+        Optional
+            .ofNullable(
+                inv
+                    .getStackInSlot(EnchanterBlockEntity.XP_STORAGE)
+                    .getCapability(PastelCapabilities.Misc.XP, lookup)
+            )
+            .map(storage -> storage.extract(xpDrain, false));
     }
 
     @Override
@@ -267,12 +299,14 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
     }
 
     public Holder<Enchantment> getEnchantment() {
-        if (either.left()
-                  .isEmpty()) {
+        if (either
+            .left()
+            .isEmpty()) {
             throw new UnsupportedOperationException("Attempted to match a datagen enchantment upgrade");
         }
-        return either.left()
-                     .get();
+        return either
+            .left()
+            .get();
     }
 
     public int getLevelCap() {
@@ -280,55 +314,76 @@ public class EnchantmentUpgradeRecipe extends EnchanterRecipe {
     }
 
     public boolean isInNormalRange(int level) {
-        if (either.left()
-                  .isEmpty()) {
+        if (either
+            .left()
+            .isEmpty()) {
             throw new UnsupportedOperationException("Attempted to match a datagen enchantment upgrade");
         }
-        return level < this.either.left()
-                                  .get()
-                                  .value()
-                                  .getMaxLevel();
+        return level < this.either
+            .left()
+            .get()
+            .value()
+            .getMaxLevel();
     }
 
     public static class Serializer implements RecipeSerializer<EnchantmentUpgradeRecipe> {
 
-        public static final MapCodec<EnchantmentUpgradeRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                             Codec.STRING.optionalFieldOf("group", "")
-                                                                                                                         .forGetter(recipe -> recipe.group),
-                                                                                                             Codec.BOOL.optionalFieldOf("secret", false)
-                                                                                                                       .forGetter(recipe -> recipe.secret),
-                                                                                                             ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                                                                   .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                                                                                             Codec.either(Enchantment.CODEC, ResourceKey.codec(Registries.ENCHANTMENT))
-                                                                                                                  .fieldOf("enchantment")
-                                                                                                                  .forGetter(c -> c.either),
-                                                                                                             Codec.INT.fieldOf("level_cap")
-                                                                                                                      .forGetter(recipe -> recipe.levelCap),
-                                                                                                             Ingredient.CODEC_NONEMPTY.fieldOf("bulk_item")
-                                                                                                                                      .forGetter(recipe -> recipe.bulkItem),
-                                                                                                             RecipeScaling.CODEC.fieldOf("xp_scaling")
-                                                                                                                                .forGetter(recipe -> recipe.xpScaling),
-                                                                                                             RecipeScaling.CODEC.fieldOf("item_scaling")
-                                                                                                                                .forGetter(recipe -> recipe.itemScaling)
-                                                                                                         )
-                                                                                                         .apply(
-                                                                                                             i,
-                                                                                                             EnchantmentUpgradeRecipe::new
-                                                                                                         ));
+        public static final MapCodec<EnchantmentUpgradeRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(recipe -> recipe.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(recipe -> recipe.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                        Codec
+                            .either(Enchantment.CODEC, ResourceKey.codec(Registries.ENCHANTMENT))
+                            .fieldOf("enchantment")
+                            .forGetter(c -> c.either),
+                        Codec.INT
+                            .fieldOf("level_cap")
+                            .forGetter(recipe -> recipe.levelCap),
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("bulk_item")
+                            .forGetter(recipe -> recipe.bulkItem),
+                        RecipeScaling.CODEC
+                            .fieldOf("xp_scaling")
+                            .forGetter(recipe -> recipe.xpScaling),
+                        RecipeScaling.CODEC
+                            .fieldOf("item_scaling")
+                            .forGetter(recipe -> recipe.itemScaling)
+                    )
+                    .apply(
+                        i,
+                        EnchantmentUpgradeRecipe::new
+                    )
+            );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, EnchantmentUpgradeRecipe> STREAM_CODEC
-            = PacketCodecHelper.tuple(
-            ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
-            ByteBufCodecs.BOOL, recipe -> recipe.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-            ByteBufCodecs.either(Enchantment.STREAM_CODEC, ResourceKey.streamCodec(Registries.ENCHANTMENT)),
-            c -> c.either,
-            ByteBufCodecs.VAR_INT, recipe -> recipe.levelCap,
-            Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.bulkItem,
-            RecipeScaling.STREAM_CODEC, recipe -> recipe.xpScaling,
-            RecipeScaling.STREAM_CODEC, recipe -> recipe.itemScaling,
-            EnchantmentUpgradeRecipe::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, EnchantmentUpgradeRecipe> STREAM_CODEC = PacketCodecHelper
+            .tuple(
+                ByteBufCodecs.STRING_UTF8,
+                recipe -> recipe.group,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                recipe -> recipe.requiredAdvancementIdentifier,
+                ByteBufCodecs.either(Enchantment.STREAM_CODEC, ResourceKey.streamCodec(Registries.ENCHANTMENT)),
+                c -> c.either,
+                ByteBufCodecs.VAR_INT,
+                recipe -> recipe.levelCap,
+                Ingredient.CONTENTS_STREAM_CODEC,
+                recipe -> recipe.bulkItem,
+                RecipeScaling.STREAM_CODEC,
+                recipe -> recipe.xpScaling,
+                RecipeScaling.STREAM_CODEC,
+                recipe -> recipe.itemScaling,
+                EnchantmentUpgradeRecipe::new
+            );
 
         @Override
         public MapCodec<EnchantmentUpgradeRecipe> codec() {

@@ -7,6 +7,7 @@ import java.util.Optional;
 public abstract class ColorRegistry<T> {
 
     public static ItemColors ITEM_COLORS;
+
     public static FluidColors FLUID_COLORS;
 
     public static void registerColorRegistries() {

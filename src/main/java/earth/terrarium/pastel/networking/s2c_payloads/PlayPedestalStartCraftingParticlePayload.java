@@ -13,19 +13,25 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayPedestalStartCraftingParticlePayload(BlockPos pedestalPos) implements CustomPacketPayload {
 
-    public static final Type<PlayPedestalStartCraftingParticlePayload> ID = PastelC2SPackets.makeId(
-        "play_pedestal_start_crafting_particle");
-    public static final StreamCodec<FriendlyByteBuf, PlayPedestalStartCraftingParticlePayload> CODEC
-        = StreamCodec.composite(
-        BlockPos.STREAM_CODEC, PlayPedestalStartCraftingParticlePayload::pedestalPos,
-        PlayPedestalStartCraftingParticlePayload::new
-    );
+    public static final Type<PlayPedestalStartCraftingParticlePayload> ID = PastelC2SPackets
+        .makeId(
+            "play_pedestal_start_crafting_particle"
+        );
+
+    public static final StreamCodec<FriendlyByteBuf, PlayPedestalStartCraftingParticlePayload> CODEC = StreamCodec
+        .composite(
+            BlockPos.STREAM_CODEC,
+            PlayPedestalStartCraftingParticlePayload::pedestalPos,
+            PlayPedestalStartCraftingParticlePayload::new
+        );
 
     public static void spawnPedestalStartCraftingParticles(PedestalBlockEntity pedestalBlockEntity) {
-        PacketDistributor.sendToPlayersTrackingChunk(
-            (ServerLevel) pedestalBlockEntity.getLevel(), new ChunkPos(pedestalBlockEntity.getBlockPos()),
-            new PlayPedestalStartCraftingParticlePayload(pedestalBlockEntity.getBlockPos())
-        );
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                (ServerLevel) pedestalBlockEntity.getLevel(),
+                new ChunkPos(pedestalBlockEntity.getBlockPos()),
+                new PlayPedestalStartCraftingParticlePayload(pedestalBlockEntity.getBlockPos())
+            );
     }
 
     public static void execute(PlayPedestalStartCraftingParticlePayload payload, IPayloadContext context) {

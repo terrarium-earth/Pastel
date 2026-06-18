@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 public class AscensionStatusEffect extends MobEffect {
 
     public static final int MUSIC_DURATION_TICKS = 288 * 20;
+
     public static final int MUSIC_INTRO_TICKS = 56 * 20; // 56 seconds
 
     private static boolean applyDivinity = false;
@@ -25,13 +26,23 @@ public class AscensionStatusEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity.level().isClientSide) {
-            ParticleHelper.playParticleWithPatternAndVelocityClient(
-                entity.level(), entity.position(), ColoredSparkleRisingParticleEffect.WHITE, VectorPattern.EIGHT, 0.2);
+            ParticleHelper
+                .playParticleWithPatternAndVelocityClient(
+                    entity.level(),
+                    entity.position(),
+                    ColoredSparkleRisingParticleEffect.WHITE,
+                    VectorPattern.EIGHT,
+                    0.2
+                );
         } else if (applyDivinity) {
-            entity.addEffect(new MobEffectInstance(
-                PastelMobEffects.DIVINITY, MUSIC_DURATION_TICKS - MUSIC_INTRO_TICKS,
-                                                   DivinityStatusEffect.ASCENSION_AMPLIFIER
-            ));
+            entity
+                .addEffect(
+                    new MobEffectInstance(
+                        PastelMobEffects.DIVINITY,
+                        MUSIC_DURATION_TICKS - MUSIC_INTRO_TICKS,
+                        DivinityStatusEffect.ASCENSION_AMPLIFIER
+                    )
+                );
             return false;
         }
         return super.applyEffectTick(entity, amplifier);

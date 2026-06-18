@@ -14,6 +14,7 @@ import java.util.Optional;
  */
 public class WeightedPool<E extends WeightedEntry> {
     private final int totalWeight;
+
     private final ImmutableList<E> entries;
 
     public WeightedPool(List<? extends E> entries) {
@@ -52,8 +53,8 @@ public class WeightedPool<E extends WeightedEntry> {
     }
 
     public static <E extends WeightedEntry> Codec<WeightedPool<E>> createCodec(Codec<E> entryCodec) {
-        return entryCodec.listOf()
-                         .xmap(WeightedPool::of, WeightedPool::getEntries);
+        return entryCodec
+            .listOf()
+            .xmap(WeightedPool::of, WeightedPool::getEntries);
     }
 }
-

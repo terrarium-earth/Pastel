@@ -33,9 +33,13 @@ import java.util.List;
 
 // right click ability: able to overload an already loaded arrow
 public class GlassCrestCrossbowItem extends MalachiteCrossbowItem
-    implements ExtendedItemBar, SlotBackgroundEffect, InkPowered {
+    implements
+    ExtendedItemBar,
+    SlotBackgroundEffect,
+    InkPowered {
 
     private static final InkCost OVERCHARGE_COST = new InkCost(InkColors.WHITE, 1000);
+
     private static final int OVERCHARGE_DURATION_MAX_TICKS = 20 * 6; // 6 seconds
 
     public GlassCrestCrossbowItem(Properties settings) {
@@ -50,8 +54,11 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
         ItemStack itemStack = user.getItemInHand(hand);
-        if (user.isShiftKeyDown() && isCharged(itemStack) && !isOvercharged(itemStack) && InkPowered.tryDrainEnergy(
-            user, OVERCHARGE_COST)) {
+        if (user.isShiftKeyDown() && isCharged(itemStack) && !isOvercharged(itemStack) && InkPowered
+            .tryDrainEnergy(
+                user,
+                OVERCHARGE_COST
+            )) {
             if (world.isClientSide) {
                 startSoundInstance(user);
             }
@@ -60,11 +67,14 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem
         return super.use(world, user, hand);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void startSoundInstance(Player user) {
-        Minecraft.getInstance()
-                 .getSoundManager()
-                 .play(new OverchargingSoundInstance(user));
+        Minecraft
+            .getInstance()
+            .getSoundManager()
+            .play(new OverchargingSoundInstance(user));
     }
 
     @Override
@@ -76,8 +86,15 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem
     public void onUseTick(Level world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (isCharged(stack) && remainingUseTicks <= 0) {
             if (remainingUseTicks % 4 == 0) {
-                world.playSound(
-                    null, user, PastelSounds.BLOCK_MOONSTONE_CLUSTER_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+                world
+                    .playSound(
+                        null,
+                        user,
+                        PastelSounds.BLOCK_MOONSTONE_CLUSTER_BREAK,
+                        SoundSource.PLAYERS,
+                        1.0F,
+                        1.0F
+                    );
             }
         } else {
             super.onUseTick(world, user, stack, remainingUseTicks);
@@ -92,12 +109,15 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem
                     float overcharge = 1 - (float) remainingUseTicks / OVERCHARGE_DURATION_MAX_TICKS;
                     overcharge(stack, overcharge);
                     if (user instanceof ServerPlayer serverPlayerEntity) {
-                        serverPlayerEntity.displayClientMessage(
-                            Component.translatable(
-                                "item.pastel.glass_crest_crossbow.message.charge",
-                                Support.DF.format(overcharge * 100)
-                            ), true
-                        );
+                        serverPlayerEntity
+                            .displayClientMessage(
+                                Component
+                                    .translatable(
+                                        "item.pastel.glass_crest_crossbow.message.charge",
+                                        Support.DF.format(overcharge * 100)
+                                    ),
+                                true
+                            );
                     }
                 }
             }
@@ -123,20 +143,30 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         float overcharge = getOvercharge(stack);
         if (overcharge == 0) {
-            tooltip.add(Component.translatable("item.pastel.glass_crest_crossbow.tooltip.how_to_overcharge")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.glass_crest_crossbow.tooltip.how_to_overcharge")
+                        .withStyle(ChatFormatting.GRAY)
+                );
             addInkPoweredTooltip(tooltip);
         } else {
-            tooltip.add(Component.translatable(
-                                     "item.pastel.glass_crest_crossbow.tooltip.overcharged",
-                                     Support.DF.format(overcharge * 100)
-                                 )
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable(
+                            "item.pastel.glass_crest_crossbow.tooltip.overcharged",
+                            Support.DF.format(overcharge * 100)
+                        )
+                        .withStyle(ChatFormatting.GRAY)
+                );
         }
     }
 
@@ -190,11 +220,17 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem
         if (!usage && !isOvercharged(stack))
             return PASS;
 
-        var progress = (int) Math.floor(Mth.clampedLerp(
-            0, 13, usage ? ((float) player.getTicksUsingItem() /
-                            OVERCHARGE_DURATION_MAX_TICKS)
-                         : getOvercharge(stack)
-        ));
+        var progress = (int) Math
+            .floor(
+                Mth
+                    .clampedLerp(
+                        0,
+                        13,
+                        usage
+                            ? ((float) player.getTicksUsingItem() / OVERCHARGE_DURATION_MAX_TICKS)
+                            : getOvercharge(stack)
+                    )
+            );
         return new BarSignature(2, 13, 13, progress, 1, 0xFFFFFFFF, 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
     }
 }

@@ -13,7 +13,10 @@ public class WeatheringStairsBlock extends StairBlock implements Weathering {
     private final Weathering.WeatheringLevel weatheringLevel;
 
     public WeatheringStairsBlock(
-        Weathering.WeatheringLevel weatheringLevel, BlockState baseBlockState, BlockBehaviour.Properties settings) {
+        Weathering.WeatheringLevel weatheringLevel,
+        BlockState baseBlockState,
+        BlockBehaviour.Properties settings
+    ) {
         super(baseBlockState, settings);
         this.weatheringLevel = weatheringLevel;
     }
@@ -33,8 +36,9 @@ public class WeatheringStairsBlock extends StairBlock implements Weathering {
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return Weathering.getIncreasedWeatheredBlock(state.getBlock())
-                         .isPresent();
+        return Weathering
+            .getIncreasedWeatheredBlock(state.getBlock())
+            .isPresent();
     }
 
     @Override

@@ -30,15 +30,20 @@ public class RedstoneTimerBlock extends DiodeBlock {
     public static final MapCodec<RedstoneTimerBlock> CODEC = simpleCodec(RedstoneTimerBlock::new);
 
     public static final EnumProperty<TimingStep> ACTIVE_TIME = EnumProperty.create("active_time", TimingStep.class);
+
     public static final EnumProperty<TimingStep> INACTIVE_TIME = EnumProperty.create("inactive_time", TimingStep.class);
 
     public RedstoneTimerBlock(BlockBehaviour.Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(FACING, Direction.NORTH)
-                                                      .setValue(POWERED, false)
-                                                      .setValue(ACTIVE_TIME, TimingStep.ONE_SECOND)
-                                                      .setValue(INACTIVE_TIME, TimingStep.ONE_SECOND));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(FACING, Direction.NORTH)
+                    .setValue(POWERED, false)
+                    .setValue(ACTIVE_TIME, TimingStep.ONE_SECOND)
+                    .setValue(INACTIVE_TIME, TimingStep.ONE_SECOND)
+            );
     }
 
     @Override
@@ -57,7 +62,12 @@ public class RedstoneTimerBlock extends DiodeBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, @NotNull Level world, BlockPos pos, @NotNull Player player, BlockHitResult hit) {
+        BlockState state,
+        @NotNull Level world,
+        BlockPos pos,
+        @NotNull Player player,
+        BlockHitResult hit
+    ) {
         if (!player.getAbilities().mayBuild) {
             return InteractionResult.PASS;
         } else {
@@ -81,8 +91,9 @@ public class RedstoneTimerBlock extends DiodeBlock {
         if (world instanceof ServerLevel serverWorld) {
             // remove currently scheduled ticks at the blocks position
             // and schedule new ticks
-            serverWorld.getBlockTicks()
-                       .clearArea(new BoundingBox(pos));
+            serverWorld
+                .getBlockTicks()
+                .clearArea(new BoundingBox(pos));
             serverWorld.scheduleTick(pos, state.getBlock(), getDelay(state));
         }
     }
@@ -97,15 +108,17 @@ public class RedstoneTimerBlock extends DiodeBlock {
 
     @Override
     protected int getInputSignal(Level world, BlockPos pos, BlockState state) {
-        return world.getBlockState(pos)
-                    .getValue(POWERED) ? 15 : 0;
+        return world
+            .getBlockState(pos)
+            .getValue(POWERED) ? 15 : 0;
     }
 
     @Override
     protected void checkTickOnNeighbor(Level world, BlockPos pos, BlockState state) {
         boolean bl = state.getValue(POWERED);
-        if (!world.getBlockTicks()
-                  .willTickThisTick(pos, this)) {
+        if (!world
+            .getBlockTicks()
+            .willTickThisTick(pos, this)) {
             TickPriority tickPriority = TickPriority.HIGH;
             if (this.shouldPrioritize(world, pos, state)) {
                 tickPriority = TickPriority.EXTREMELY_HIGH;
@@ -121,38 +134,67 @@ public class RedstoneTimerBlock extends DiodeBlock {
             BlockState blockState = world.getBlockState(pos);
             if (serverPlayerEntity.isShiftKeyDown()) {
                 // toggle inactive time
-                TimingStep newStep = blockState.getValue(INACTIVE_TIME)
-                                               .next();
-                serverPlayerEntity.displayClientMessage(
-                    Component.translatable("block.pastel.redstone_timer.setting.inactive")
-                             .append(Component.translatable(newStep.localizationString)), true
-                );
+                TimingStep newStep = blockState
+                    .getValue(INACTIVE_TIME)
+                    .next();
+                serverPlayerEntity
+                    .displayClientMessage(
+                        Component
+                            .translatable("block.pastel.redstone_timer.setting.inactive")
+                            .append(Component.translatable(newStep.localizationString)),
+                        true
+                    );
                 float pitch = 0.5F + newStep.ordinal() * 0.05F;
-                world.playSound(
-                    null, pos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
-                world.setBlockAndUpdate(
-                    pos, world.getBlockState(pos)
-                              .setValue(INACTIVE_TIME, newStep)
-                );
+                world
+                    .playSound(
+                        null,
+                        pos,
+                        PastelSounds.REDSTONE_MECHANISM_TRIGGER,
+                        SoundSource.BLOCKS,
+                        0.3F,
+                        pitch
+                    );
+                world
+                    .setBlockAndUpdate(
+                        pos,
+                        world
+                            .getBlockState(pos)
+                            .setValue(INACTIVE_TIME, newStep)
+                    );
             } else {
                 // toggle active time
-                TimingStep newStep = blockState.getValue(ACTIVE_TIME)
-                                               .next();
-                serverPlayerEntity.displayClientMessage(
-                    Component.translatable("block.pastel.redstone_timer.setting.active")
-                             .append(Component.translatable(newStep.localizationString)), true
-                );
+                TimingStep newStep = blockState
+                    .getValue(ACTIVE_TIME)
+                    .next();
+                serverPlayerEntity
+                    .displayClientMessage(
+                        Component
+                            .translatable("block.pastel.redstone_timer.setting.active")
+                            .append(Component.translatable(newStep.localizationString)),
+                        true
+                    );
                 float pitch = 0.5F + newStep.ordinal() * 0.05F;
-                world.playSound(
-                    null, pos, PastelSounds.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
-                world.setBlockAndUpdate(
-                    pos, world.getBlockState(pos)
-                              .setValue(ACTIVE_TIME, newStep)
-                );
+                world
+                    .playSound(
+                        null,
+                        pos,
+                        PastelSounds.REDSTONE_MECHANISM_TRIGGER,
+                        SoundSource.BLOCKS,
+                        0.3F,
+                        pitch
+                    );
+                world
+                    .setBlockAndUpdate(
+                        pos,
+                        world
+                            .getBlockState(pos)
+                            .setValue(ACTIVE_TIME, newStep)
+                    );
             }
 
-            world.getBlockTicks()
-                 .clearArea(new BoundingBox(pos)); // remove currently scheduled ticks at the blocks position
+            world
+                .getBlockTicks()
+                .clearArea(new BoundingBox(pos)); // remove currently scheduled ticks at the blocks position
             BlockState state = world.getBlockState(pos);
             checkTickOnNeighbor(world, pos, state);
         }
@@ -180,7 +222,9 @@ public class RedstoneTimerBlock extends DiodeBlock {
         TEN_MINUTES("ten_minutes", 60 * 20 * 10, "block.pastel.redstone_timer.setting.ten_minutes");
 
         public final int ticks;
+
         public final String localizationString;
+
         private final String name;
 
         TimingStep(String name, int ticks, String localizationString) {

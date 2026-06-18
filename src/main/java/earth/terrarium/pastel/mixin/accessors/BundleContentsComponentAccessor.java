@@ -6,7 +6,9 @@ import org.apache.commons.lang3.math.Fraction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(BundleContents.class)
+@Mixin(
+    BundleContents.class
+)
 public interface BundleContentsComponentAccessor {
 
     @Invoker

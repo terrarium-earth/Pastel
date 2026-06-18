@@ -31,6 +31,7 @@ import java.util.Set;
 public class WhispyCircletItem extends PastelTrinketItem {
 
     private final static int TRIGGER_EVERY_X_TICKS = 100;
+
     public final static int NEGATIVE_EFFECT_SHORTENING_TICKS = 200;
 
     public WhispyCircletItem(Properties settings) {
@@ -44,11 +45,16 @@ public class WhispyCircletItem extends PastelTrinketItem {
         }
 
         List<MobEffectInstance> negativeEffects = new ArrayList<>();
-        for (MobEffectInstance statusEffectInstance : currentEffects) {
+        for (
+            MobEffectInstance statusEffectInstance : currentEffects
+        ) {
             Holder<MobEffect> effect = statusEffectInstance.getEffect();
-            if (effect.value()
-                      .getCategory() == category && !effect.is(PastelMobEffectTags.SOPORIFIC) && !effect.is(
-                PastelMobEffectTags.BYPASSES_WHISPY_CIRCLET)) {
+            if (effect
+                .value()
+                .getCategory() == category && !effect.is(PastelMobEffectTags.SOPORIFIC) && !effect
+                    .is(
+                        PastelMobEffectTags.BYPASSES_WHISPY_CIRCLET
+                    )) {
                 negativeEffects.add(statusEffectInstance);
             }
         }
@@ -59,19 +65,27 @@ public class WhispyCircletItem extends PastelTrinketItem {
 
         Level world = entity.level();
         int randomIndex = world.random.nextInt(negativeEffects.size());
-        entity.removeEffect(negativeEffects.get(randomIndex)
-                                           .getEffect());
+        entity
+            .removeEffect(
+                negativeEffects
+                    .get(randomIndex)
+                    .getEffect()
+            );
     }
 
     public static void removeNegativeStatusEffects(@NotNull LivingEntity entity) {
         Set<Holder<MobEffect>> effectsToRemove = new HashSet<>();
-        for (var instance : entity.getActiveEffects()) {
+        for (
+            var instance : entity.getActiveEffects()
+        ) {
             if (affects(instance.getEffect())) {
                 effectsToRemove.add(instance.getEffect());
             }
         }
 
-        for (Holder<MobEffect> effect : effectsToRemove) {
+        for (
+            Holder<MobEffect> effect : effectsToRemove
+        ) {
             entity.removeEffect(effect);
         }
     }
@@ -81,15 +95,23 @@ public class WhispyCircletItem extends PastelTrinketItem {
         Collection<Holder<MobEffect>> effectTypesToClear = new ArrayList<>();
 
         // remove them first, so hidden "stacked" effects are preserved
-        for (MobEffectInstance instance : entity.getActiveEffects()) {
+        for (
+            MobEffectInstance instance : entity.getActiveEffects()
+        ) {
             if (affects(instance.getEffect())) {
                 int newDurationTicks = instance.getDuration() - duration;
                 if (newDurationTicks > 0) {
-                    newEffects.add(
-                        new MobEffectInstance(
-                            instance.getEffect(), newDurationTicks, instance.getAmplifier(), instance.isAmbient(),
-                            instance.isVisible(), instance.showIcon()
-                        ));
+                    newEffects
+                        .add(
+                            new MobEffectInstance(
+                                instance.getEffect(),
+                                newDurationTicks,
+                                instance.getAmplifier(),
+                                instance.isAmbient(),
+                                instance.isVisible(),
+                                instance.showIcon()
+                            )
+                        );
                 }
                 if (!effectTypesToClear.contains(instance.getEffect())) {
                     effectTypesToClear.add(instance.getEffect());
@@ -97,34 +119,54 @@ public class WhispyCircletItem extends PastelTrinketItem {
             }
         }
 
-        for (var effectTypeToClear : effectTypesToClear) {
+        for (
+            var effectTypeToClear : effectTypesToClear
+        ) {
             entity.removeEffect(effectTypeToClear);
         }
-        for (MobEffectInstance newEffect : newEffects) {
+        for (
+            MobEffectInstance newEffect : newEffects
+        ) {
             entity.addEffect(newEffect);
         }
     }
 
     public static boolean affects(Holder<MobEffect> effect) {
-        return effect.value()
-                     .getCategory() == MobEffectCategory.HARMFUL && !effect.is(
-            PastelMobEffectTags.BYPASSES_WHISPY_CIRCLET);
+        return effect
+            .value()
+            .getCategory() == MobEffectCategory.HARMFUL && !effect
+                .is(
+                    PastelMobEffectTags.BYPASSES_WHISPY_CIRCLET
+                );
     }
 
     public static void preventPhantomSpawns(@NotNull ServerPlayer serverPlayerEntity) {
-        serverPlayerEntity.getStats()
-                          .setValue(serverPlayerEntity, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), 0);
+        serverPlayerEntity
+            .getStats()
+            .setValue(serverPlayerEntity, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), 0);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.whispy_circlet.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.whispy_circlet.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.whispy_circlet.tooltip3")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.whispy_circlet.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.whispy_circlet.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.whispy_circlet.tooltip3")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
     @Override
@@ -134,8 +176,9 @@ public class WhispyCircletItem extends PastelTrinketItem {
 
         Level world = entity.level();
         if (!world.isClientSide) {
-            long time = entity.level()
-                              .getGameTime();
+            long time = entity
+                .level()
+                .getGameTime();
             if (time % TRIGGER_EVERY_X_TICKS == 0) {
                 shortenNegativeStatusEffects(entity, NEGATIVE_EFFECT_SHORTENING_TICKS);
             }
@@ -149,12 +192,16 @@ public class WhispyCircletItem extends PastelTrinketItem {
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        SlotContext slotContext,
+        ResourceLocation id,
+        ItemStack stack
+    ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
-        modifiers.put(
-            PastelEntityAttributes.MENTAL_PRESENCE,
-            new AttributeModifier(ATTRIBUTE_ID, 0.3, AttributeModifier.Operation.ADD_VALUE)
-        );
+        modifiers
+            .put(
+                PastelEntityAttributes.MENTAL_PRESENCE,
+                new AttributeModifier(ATTRIBUTE_ID, 0.3, AttributeModifier.Operation.ADD_VALUE)
+            );
         return modifiers;
     }
 

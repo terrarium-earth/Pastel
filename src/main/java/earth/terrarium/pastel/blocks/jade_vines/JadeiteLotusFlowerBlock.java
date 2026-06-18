@@ -22,10 +22,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class JadeiteLotusFlowerBlock extends PastelFacingBlock {
 
     protected static final VoxelShape SHAPE_UP = Block.box(0, 0, 0, 16, 8, 16);
+
     protected static final VoxelShape SHAPE_DOWN = Block.box(0, 8, 0, 16, 16, 16);
+
     protected static final VoxelShape SHAPE_NORTH = Block.box(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
+
     protected static final VoxelShape SHAPE_SOUTH = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
+
     protected static final VoxelShape SHAPE_EAST = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
+
     protected static final VoxelShape SHAPE_WEST = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
     public JadeiteLotusFlowerBlock(Properties settings) {
@@ -62,14 +67,19 @@ public class JadeiteLotusFlowerBlock extends PastelFacingBlock {
         var facing = state.getValue(FACING);
         var root = pos.relative(facing.getOpposite());
         var supportBlock = world.getBlockState(root);
-        return (facing.getAxis()
-                      .isVertical() && supportBlock.is(PastelBlocks.JADEITE_LOTUS_STEM.get())) ||
-               supportBlock.isFaceSturdy(world, root, facing, SupportType.CENTER);
+        return (facing
+            .getAxis()
+            .isVertical() && supportBlock.is(PastelBlocks.JADEITE_LOTUS_STEM.get())) || supportBlock
+                .isFaceSturdy(world, root, facing, SupportType.CENTER);
     }
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (!state.canSurvive(world, pos)) {
@@ -82,14 +92,24 @@ public class JadeiteLotusFlowerBlock extends PastelFacingBlock {
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         var amount = random.nextInt(18) + 9;
-        for (int i = 0; i < amount; i++) {
+        for (
+            int i = 0;
+            i < amount;
+            i++
+        ) {
             var xOffset = Mth.clamp(Mth.normal(random, 0.5F, 5.85F), -9F, 9F) + 0.5F;
             var yOffset = Mth.clamp(Mth.normal(random, 0.5F, 5.85F), -9F, 9F) + 0.5F;
             var zOffset = Mth.clamp(Mth.normal(random, 0.5F, 5.85F), -9F, 9F) + 0.5F;
-            world.addAlwaysVisibleParticle(
-                ParticleTypes.END_ROD, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset,
-                random.nextFloat() * 0.05 - 0.025, random.nextFloat() * 0.05 - 0.025, random.nextFloat() * 0.05 - 0.025
-            );
+            world
+                .addAlwaysVisibleParticle(
+                    ParticleTypes.END_ROD,
+                    pos.getX() + xOffset,
+                    pos.getY() + yOffset,
+                    pos.getZ() + zOffset,
+                    random.nextFloat() * 0.05 - 0.025,
+                    random.nextFloat() * 0.05 - 0.025,
+                    random.nextFloat() * 0.05 - 0.025
+                );
         }
     }
 

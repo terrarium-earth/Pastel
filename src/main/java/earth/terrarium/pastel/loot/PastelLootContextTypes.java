@@ -11,7 +11,8 @@ import java.util.function.Consumer;
 public class PastelLootContextTypes {
 
     public static final LootContextParamSet FISHING = register(
-        "fishing", (builder) -> {
+        "fishing",
+        (builder) -> {
             builder
                 .required(LootContextParams.ORIGIN) // the pos of the fishing bobber
                 .required(LootContextParams.TOOL) // the fishing rod

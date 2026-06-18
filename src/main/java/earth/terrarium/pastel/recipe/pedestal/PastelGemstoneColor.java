@@ -18,7 +18,9 @@ public enum PastelGemstoneColor implements GemstoneColor, StringRepresentable {
     WHITE("white", InkColors.WHITE, 4);
 
     private final int color;
+
     private final InkColor inkColor;
+
     private final int offset;
 
     PastelGemstoneColor(String name, InkColor color, int offset) {

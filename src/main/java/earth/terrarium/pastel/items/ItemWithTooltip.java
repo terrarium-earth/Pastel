@@ -22,15 +22,18 @@ public class ItemWithTooltip extends Item {
 
     public ItemWithTooltip(Properties settings, String[] tooltips) {
         super(settings);
-        Arrays.stream(tooltips)
-              .map(Component::translatable)
-              .forEach(tooltipTexts::add);
+        Arrays
+            .stream(tooltips)
+            .map(Component::translatable)
+            .forEach(tooltipTexts::add);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        for (MutableComponent text : this.tooltipTexts) {
+        for (
+            MutableComponent text : this.tooltipTexts
+        ) {
             tooltip.add(text.withStyle(ChatFormatting.GRAY));
         }
     }

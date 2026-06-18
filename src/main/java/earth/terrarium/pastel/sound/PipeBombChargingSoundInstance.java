@@ -14,10 +14,13 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PipeBombChargingSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final Player player;
+
     private boolean done;
 
     public PipeBombChargingSoundInstance(Player player) {
@@ -43,9 +46,9 @@ public class PipeBombChargingSoundInstance extends AbstractSoundInstance impleme
 
     @Override
     public void tick() {
-        if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 54 ||
-            !player.getUseItem()
-                   .is(PastelItems.PIPE_BOMB.get())) {
+        if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 54 || !player
+            .getUseItem()
+            .is(PastelItems.PIPE_BOMB.get())) {
             this.setDone();
         } else {
             this.x = this.player.getX();
@@ -61,17 +64,22 @@ public class PipeBombChargingSoundInstance extends AbstractSoundInstance impleme
         Vec3 pos = player.position();
         RandomSource random = world.random;
 
-        for (int i = 0; i < 2; i++) {
-            player.getCommandSenderWorld()
-                  .addParticle(
-                      PastelParticleTypes.PRIMORDIAL_FLAME,
-                      pos.x,
-                      pos.y + 1,
-                      pos.z,
-                      random.nextDouble() - 0.5D,
-                      random.nextDouble() - 0.5D,
-                      random.nextDouble() - 0.5D
-                  );
+        for (
+            int i = 0;
+            i < 2;
+            i++
+        ) {
+            player
+                .getCommandSenderWorld()
+                .addParticle(
+                    PastelParticleTypes.PRIMORDIAL_FLAME,
+                    pos.x,
+                    pos.y + 1,
+                    pos.z,
+                    random.nextDouble() - 0.5D,
+                    random.nextDouble() - 0.5D,
+                    random.nextDouble() - 0.5D
+                );
         }
     }
 

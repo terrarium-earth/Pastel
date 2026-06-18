@@ -38,8 +38,12 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
 
     public JadeVineRootsBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(DEAD, false));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(DEAD, false)
+            );
     }
 
     @Override
@@ -66,8 +70,9 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return PastelItems.GERMINATED_JADE_VINE_BULB.get()
-                                                    .getDefaultInstance();
+        return PastelItems.GERMINATED_JADE_VINE_BULB
+            .get()
+            .getDefaultInstance();
     }
 
     @Override
@@ -81,8 +86,12 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
         if (oldState.getBlock() instanceof FenceBlock) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof JadeVineRootsBlockEntity jadeVineRootsBlockEntity) {
-                jadeVineRootsBlockEntity.setFenceBlockState(oldState.getBlock()
-                                                                    .defaultBlockState());
+                jadeVineRootsBlockEntity
+                    .setFenceBlockState(
+                        oldState
+                            .getBlock()
+                            .defaultBlockState()
+                    );
             }
         }
     }
@@ -108,8 +117,7 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
         builder.add(DEAD);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new JadeVineRootsBlockEntity(pos, state);
     }
@@ -131,16 +139,26 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
             } else if (canGrow(world, pos)) {
                 if (world.random.nextBoolean() && tryGrowUpwards(state, world, pos)) {
                     rememberGrownTime(world, pos);
-                    world.playSound(
-                        null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 0.5F,
-                        0.9F + 0.2F * world.random.nextFloat() * 0.2F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            pos,
+                            SoundEvents.CROP_PLANTED,
+                            SoundSource.BLOCKS,
+                            0.5F,
+                            0.9F + 0.2F * world.random.nextFloat() * 0.2F
+                        );
                 } else if (tryGrowDownwards(world, pos)) {
                     rememberGrownTime(world, pos);
-                    world.playSound(
-                        null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 0.5F,
-                        0.9F + 0.2F * world.random.nextFloat() * 0.2F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            pos,
+                            SoundEvents.CROP_PLANTED,
+                            SoundSource.BLOCKS,
+                            0.5F,
+                            0.9F + 0.2F * world.random.nextFloat() * 0.2F
+                        );
                 } else {
                     int targetAge = age;
                     if (age == BlockStateProperties.MAX_AGE_7 - 1) {
@@ -159,10 +177,15 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
                     if (targetAge != age) {
                         boolean couldGrow = setPlantToAge(world, pos, targetAge);
                         if (couldGrow) {
-                            world.playSound(
-                                null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 0.5F,
-                                0.9F + 0.2F * world.random.nextFloat() * 0.2F
-                            );
+                            world
+                                .playSound(
+                                    null,
+                                    pos,
+                                    SoundEvents.CROP_PLANTED,
+                                    SoundSource.BLOCKS,
+                                    0.5F,
+                                    0.9F + 0.2F * world.random.nextFloat() * 0.2F
+                                );
                         }
                     }
                     rememberGrownTime(world, pos);
@@ -176,10 +199,15 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
         if (blockEntity instanceof JadeVineRootsBlockEntity jadeVineRootsBlockEntity) {
             if (jadeVineRootsBlockEntity.wasExposedToSunlight()) {
                 setDead(world, pos);
-                world.playSound(
-                    null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 0.5F,
-                    0.9F + 0.2F * world.random.nextFloat() * 0.2F
-                );
+                world
+                    .playSound(
+                        null,
+                        pos,
+                        SoundEvents.CROP_PLANTED,
+                        SoundSource.BLOCKS,
+                        0.5F,
+                        0.9F + 0.2F * world.random.nextFloat() * 0.2F
+                    );
             } else {
                 jadeVineRootsBlockEntity.setExposedToSunlight(true);
             }
@@ -228,8 +256,12 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
         BlockState plantState = world.getBlockState(plantPos);
         Block plantBlock = plantState.getBlock();
         if (plantBlock instanceof JadeVinePlantBlock jadeVinePlantBlock) {
-            if (jadeVinePlantBlock.setToAge(world, plantPos, age) && jadeVinePlantBlock.setToAge(
-                world, plantPos.below(), age) && jadeVinePlantBlock.setToAge(world, plantPos.below(2), age)) {
+            if (jadeVinePlantBlock.setToAge(world, plantPos, age) && jadeVinePlantBlock
+                .setToAge(
+                    world,
+                    plantPos.below(),
+                    age
+                ) && jadeVinePlantBlock.setToAge(world, plantPos.below(2), age)) {
                 anyGrown = true;
                 JadeVine.spawnParticlesServer(world, plantPos, 16);
                 JadeVine.spawnParticlesServer(world, plantPos.below(), 16);
@@ -242,10 +274,13 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
             }
         } else if (plantState.isAir() && age > 0) {
             // plant was destroyed? => grow a new bulb
-            world.setBlockAndUpdate(
-                plantPos, PastelBlocks.JADE_VINE_BULB.get()
-                                                     .defaultBlockState()
-            );
+            world
+                .setBlockAndUpdate(
+                    plantPos,
+                    PastelBlocks.JADE_VINE_BULB
+                        .get()
+                        .defaultBlockState()
+                );
             anyGrown = true;
             JadeVine.spawnParticlesServer(world, plantPos, 16);
         }
@@ -282,8 +317,9 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
 
     boolean tryGrowUpwards(@NotNull BlockState blockState, @NotNull Level world, @NotNull BlockPos blockPos) {
         blockPos = blockPos.above();
-        while (world.getBlockState(blockPos)
-                    .getBlock() instanceof JadeVineRootsBlock) {
+        while (world
+            .getBlockState(blockPos)
+            .getBlock() instanceof JadeVineRootsBlock) {
             // search up until no jade vines roots are hit anymore
             blockPos = blockPos.above();
         }
@@ -293,8 +329,12 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
             world.setBlockAndUpdate(blockPos, blockState);
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
             if (blockEntity instanceof JadeVineRootsBlockEntity jadeVineRootsBlockEntity) {
-                jadeVineRootsBlockEntity.setFenceBlockState(targetState.getBlock()
-                                                                       .defaultBlockState());
+                jadeVineRootsBlockEntity
+                    .setFenceBlockState(
+                        targetState
+                            .getBlock()
+                            .defaultBlockState()
+                    );
             }
             return true;
         }
@@ -303,8 +343,9 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
 
     boolean tryGrowDownwards(@NotNull Level world, @NotNull BlockPos blockPos) {
         blockPos = blockPos.below();
-        while (world.getBlockState(blockPos)
-                    .getBlock() instanceof JadeVineRootsBlock) {
+        while (world
+            .getBlockState(blockPos)
+            .getBlock() instanceof JadeVineRootsBlock) {
             // search down until no jade vines roots are hit anymore
             blockPos = blockPos.below();
         }
@@ -312,46 +353,63 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
         BlockState targetState = world.getBlockState(blockPos);
         if (targetState.getBlock() instanceof JadeVineBulbBlock) {
             // is there room to grow the whole plant?
-            if (world.getBlockState(blockPos.below())
-                     .isAir() && world.getBlockState(blockPos.below(2))
-                                      .isAir()) {
-                world.setBlockAndUpdate(
-                    blockPos, PastelBlocks.JADE_VINES.get()
-                                                     .defaultBlockState()
-                                                     .setValue(
-                                                         JadeVinePlantBlock.PART,
-                                                         JadeVinePlantBlock.JadeVinesPlantPart.BASE
-                                                     )
-                );
-                world.setBlockAndUpdate(
-                    blockPos.below(), PastelBlocks.JADE_VINES.get()
-                                                             .defaultBlockState()
-                                                             .setValue(
-                                                                 JadeVinePlantBlock.PART,
-                                                                 JadeVinePlantBlock.JadeVinesPlantPart.MIDDLE
-                                                             )
-                );
-                world.setBlockAndUpdate(
-                    blockPos.below(2), PastelBlocks.JADE_VINES.get()
-                                                              .defaultBlockState()
-                                                              .setValue(
-                                                                  JadeVinePlantBlock.PART,
-                                                                  JadeVinePlantBlock.JadeVinesPlantPart.TIP
-                                                              )
-                );
+            if (world
+                .getBlockState(blockPos.below())
+                .isAir() && world
+                    .getBlockState(blockPos.below(2))
+                    .isAir()) {
+                world
+                    .setBlockAndUpdate(
+                        blockPos,
+                        PastelBlocks.JADE_VINES
+                            .get()
+                            .defaultBlockState()
+                            .setValue(
+                                JadeVinePlantBlock.PART,
+                                JadeVinePlantBlock.JadeVinesPlantPart.BASE
+                            )
+                    );
+                world
+                    .setBlockAndUpdate(
+                        blockPos.below(),
+                        PastelBlocks.JADE_VINES
+                            .get()
+                            .defaultBlockState()
+                            .setValue(
+                                JadeVinePlantBlock.PART,
+                                JadeVinePlantBlock.JadeVinesPlantPart.MIDDLE
+                            )
+                    );
+                world
+                    .setBlockAndUpdate(
+                        blockPos.below(2),
+                        PastelBlocks.JADE_VINES
+                            .get()
+                            .defaultBlockState()
+                            .setValue(
+                                JadeVinePlantBlock.PART,
+                                JadeVinePlantBlock.JadeVinesPlantPart.TIP
+                            )
+                    );
                 return true;
             }
         } else if (targetState.isAir()) {
-            world.setBlockAndUpdate(
-                blockPos, PastelBlocks.JADE_VINE_BULB.get()
-                                                     .defaultBlockState()
-            );
+            world
+                .setBlockAndUpdate(
+                    blockPos,
+                    PastelBlocks.JADE_VINE_BULB
+                        .get()
+                        .defaultBlockState()
+                );
             return true;
         } else if (canBePlantedOn(targetState)) {
-            world.setBlockAndUpdate(
-                blockPos, PastelBlocks.JADE_VINE_ROOTS.get()
-                                                      .defaultBlockState()
-            );
+            world
+                .setBlockAndUpdate(
+                    blockPos,
+                    PastelBlocks.JADE_VINE_ROOTS
+                        .get()
+                        .defaultBlockState()
+                );
 
             long lastGrowTime = -1;
             BlockEntity currentBlockEntity = world.getBlockEntity(blockPos.above());
@@ -361,8 +419,12 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
 
             BlockEntity newBlockEntity = world.getBlockEntity(blockPos);
             if (newBlockEntity instanceof JadeVineRootsBlockEntity rootsBlockEntity) {
-                rootsBlockEntity.setFenceBlockState(targetState.getBlock()
-                                                               .defaultBlockState());
+                rootsBlockEntity
+                    .setFenceBlockState(
+                        targetState
+                            .getBlock()
+                            .defaultBlockState()
+                    );
                 if (lastGrowTime > 0) {
                     rootsBlockEntity.setLastGrownTime(lastGrowTime);
                 } else {
@@ -392,8 +454,9 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
     public BlockPos getLowestRootsPos(@NotNull Level world, @NotNull BlockPos blockPos) {
         int i = 0;
         do {
-            if (world.getBlockState(blockPos.below(i + 1))
-                     .getBlock() instanceof JadeVineRootsBlock) {
+            if (world
+                .getBlockState(blockPos.below(i + 1))
+                .getBlock() instanceof JadeVineRootsBlock) {
                 i++;
             } else {
                 break;

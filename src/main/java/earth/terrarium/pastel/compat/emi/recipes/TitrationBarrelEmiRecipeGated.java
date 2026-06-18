@@ -25,39 +25,58 @@ public class TitrationBarrelEmiRecipeGated extends GatedSpectrumEmiRecipe<ITitra
     public TitrationBarrelEmiRecipeGated(ITitrationBarrelRecipe recipe) {
         super(PastelEmiRecipeCategories.TITRATION_BARREL, recipe, 136, 50);
         inputs = new ArrayList<>();
-        if (!recipe.getFluidInput()
-                   .isEmpty()) {
+        if (!recipe
+            .getFluidInput()
+            .isEmpty()) {
             inputs.add(FluidIngredientEmi.into(recipe.getFluidInput()));
         }
-        inputs.addAll(recipe.getIngredientStacks()
-                            .stream()
-                            .map(s -> EmiIngredient.of(s.getItems()
-                                                        .map(EmiStack::of)
-                                                        .toList()))
-                            .toList());
+        inputs
+            .addAll(
+                recipe
+                    .getIngredientStacks()
+                    .stream()
+                    .map(
+                        s -> EmiIngredient
+                            .of(
+                                s
+                                    .getItems()
+                                    .map(EmiStack::of)
+                                    .toList()
+                            )
+                    )
+                    .toList()
+            );
 
         displayedStacks = buildFermentationOutputVariations(recipe);
     }
 
     private static List<EmiStack> buildFermentationOutputVariations(ITitrationBarrelRecipe recipe) {
-        if (recipe instanceof TitrationBarrelRecipe titrationBarrelRecipe &&
-            titrationBarrelRecipe.getFermentationData() != null) {
-            return titrationBarrelRecipe.getOutputVariations(
-                                            TitrationBarrelRecipe.FERMENTATION_DURATION_DISPLAY_TIME_MULTIPLIERS)
-                                        .stream()
-                                        .map(EmiStack::of)
-                                        .toList();
+        if (recipe instanceof TitrationBarrelRecipe titrationBarrelRecipe && titrationBarrelRecipe
+            .getFermentationData() != null) {
+            return titrationBarrelRecipe
+                .getOutputVariations(
+                    TitrationBarrelRecipe.FERMENTATION_DURATION_DISPLAY_TIME_MULTIPLIERS
+                )
+                .stream()
+                .map(EmiStack::of)
+                .toList();
         }
         return null;
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void addUnlockedWidgets(WidgetHolder widgets) {
         // input slots
         int startX = Math.max(10, 40 - inputs.size() * 10);
         int startY = (inputs.size() > 3 ? 0 : 10);
-        for (int i = 0; i < inputs.size(); i++) {
+        for (
+            int i = 0;
+            i < inputs.size();
+            i++
+        ) {
             int x = startX + (i % 3) * 20;
             int y = startY + (i / 3) * 20;
             widgets.addSlot(inputs.get(i), x, y);
@@ -72,21 +91,32 @@ public class TitrationBarrelEmiRecipeGated extends GatedSpectrumEmiRecipe<ITitra
         }
 
         if (displayedStacks == null) {
-            widgets.addSlot(outputs.getFirst(), 100, 5)
-                   .large(true)
-                   .recipeContext(this);
+            widgets
+                .addSlot(outputs.getFirst(), 100, 5)
+                .large(true)
+                .recipeContext(this);
         } else if (Minecraft.getInstance().level != null) {
-            widgets.addGeneratedSlot(
-                       random -> displayedStacks.get(
-                           (int) (Minecraft.getInstance().level.getGameTime() % displayedStacks.size())), 1, 100, 5
-                   )
-                   .large(true)
-                   .recipeContext(this);
+            widgets
+                .addGeneratedSlot(
+                    random -> displayedStacks
+                        .get(
+                            (int) (Minecraft.getInstance().level.getGameTime() % displayedStacks.size())
+                        ),
+                    1,
+                    100,
+                    5
+                )
+                .large(true)
+                .recipeContext(this);
         }
 
-        Component text = TitrationBarrelRecipe.getDurationText(
-            recipe.getMinFermentationTimeHours(), recipe.getFermentationData());
-        widgets.addText(text, width / 2, 40, 0x3f3f3f, false)
-               .horizontalAlign(Alignment.CENTER);
+        Component text = TitrationBarrelRecipe
+            .getDurationText(
+                recipe.getMinFermentationTimeHours(),
+                recipe.getFermentationData()
+            );
+        widgets
+            .addText(text, width / 2, 40, 0x3f3f3f, false)
+            .horizontalAlign(Alignment.CENTER);
     }
 }

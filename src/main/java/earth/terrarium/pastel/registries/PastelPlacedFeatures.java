@@ -31,77 +31,100 @@ public class PastelPlacedFeatures {
     }
 
     private static void addFeature(
-        BootstrapContext<BiomeModifier> bootstrap, TagKey<Biome> tag, GenerationStep.Decoration step,
+        BootstrapContext<BiomeModifier> bootstrap,
+        TagKey<Biome> tag,
+        GenerationStep.Decoration step,
         ResourceKey<PlacedFeature> placedFeature
     ) {
         var biomes = bootstrap
-                            .lookup(Registries.BIOME);
+            .lookup(Registries.BIOME);
 
-        biomes.get(tag)
-              .ifPresent(set -> addFeature(bootstrap, set, step, placedFeature));
+        biomes
+            .get(tag)
+            .ifPresent(set -> addFeature(bootstrap, set, step, placedFeature));
     }
 
     private static void addFeature(
-        BootstrapContext<BiomeModifier> bootstrap, HolderSet<Biome> biomeSet, GenerationStep.Decoration step,
+        BootstrapContext<BiomeModifier> bootstrap,
+        HolderSet<Biome> biomeSet,
+        GenerationStep.Decoration step,
         ResourceKey<PlacedFeature> placedFeature
     ) {
         var placedFeatures = bootstrap
-                                    .lookup(Registries.PLACED_FEATURE);
+            .lookup(Registries.PLACED_FEATURE);
 
         bootstrap
-               .register(
-                   ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, placedFeature.location()),
-                   new BiomeModifiers.AddFeaturesBiomeModifier(
-                       biomeSet,
-                       HolderSet.direct(placedFeatures.getOrThrow(placedFeature)),
-                       step
-                   )
-               );
+            .register(
+                ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, placedFeature.location()),
+                new BiomeModifiers.AddFeaturesBiomeModifier(
+                    biomeSet,
+                    HolderSet.direct(placedFeatures.getOrThrow(placedFeature)),
+                    step
+                )
+            );
     }
 
     // TODO Make this register only one modifier per biome tag
     public static void addBiomeModifications(BootstrapContext<BiomeModifier> bootstrap) {
         // Geodes
         addFeature(
-            bootstrap, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
+            bootstrap,
+            Tags.Biomes.IS_OVERWORLD,
+            GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("citrine_geode"))
         );
         addFeature(
-            bootstrap, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
+            bootstrap,
+            Tags.Biomes.IS_OVERWORLD,
+            GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("topaz_geode"))
         );
 
         // Ores
         addFeature(
-            bootstrap, Tags.Biomes.IS_OVERWORLD, GenerationStep.Decoration.UNDERGROUND_ORES,
+            bootstrap,
+            Tags.Biomes.IS_OVERWORLD,
+            GenerationStep.Decoration.UNDERGROUND_ORES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("shimmerstone_ore"))
         );
         addFeature(
-            bootstrap, Tags.Biomes.IS_NETHER, GenerationStep.Decoration.UNDERGROUND_ORES,
+            bootstrap,
+            Tags.Biomes.IS_NETHER,
+            GenerationStep.Decoration.UNDERGROUND_ORES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("stratine_ore"))
         );
         addFeature(
-            bootstrap, Tags.Biomes.IS_END, GenerationStep.Decoration.UNDERGROUND_ORES,
+            bootstrap,
+            Tags.Biomes.IS_END,
+            GenerationStep.Decoration.UNDERGROUND_ORES,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("paltaeria_ore"))
         );
 
         addFeature(
-            bootstrap, PastelBiomeTags.COLORED_TREES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap,
+            PastelBiomeTags.COLORED_TREES_GENERATING_IN,
+            GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("colored_tree_patch"))
         );
 
         // Plants
         addFeature(
-            bootstrap, PastelBiomeTags.MERMAIDS_BRUSHES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap,
+            PastelBiomeTags.MERMAIDS_BRUSHES_GENERATING_IN,
+            GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("mermaids_brushes"))
         );
         addFeature(
-            bootstrap, PastelBiomeTags.CLOVER_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap,
+            PastelBiomeTags.CLOVER_GENERATING_IN,
+            GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("clover_patch"))
         );
 
         addFeature(
-            bootstrap, PastelBiomeTags.QUITOXIC_REEDS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap,
+            PastelBiomeTags.QUITOXIC_REEDS_GENERATING_IN,
+            GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("quitoxic_reeds"))
         );
 
@@ -137,11 +160,15 @@ public class PastelPlacedFeatures {
 
         // Dragonbone in the Overworld
         addFeature(
-            bootstrap, PastelBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN, GenerationStep.Decoration.UNDERGROUND_DECORATION,
+            bootstrap,
+            PastelBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN,
+            GenerationStep.Decoration.UNDERGROUND_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("dragon_fossil_overworld_buried"))
         );
         addFeature(
-            bootstrap, PastelBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION,
+            bootstrap,
+            PastelBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN,
+            GenerationStep.Decoration.VEGETAL_DECORATION,
             ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("dragon_fossil_overworld_exposed"))
         );
     }

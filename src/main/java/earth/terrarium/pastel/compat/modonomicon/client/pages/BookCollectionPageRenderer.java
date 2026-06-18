@@ -27,7 +27,9 @@ public class BookCollectionPageRenderer extends BookTextPageRenderer {
         int column = -1;
         int firstNonFullRowIndex = (items.size()) / ENTRIES_PER_ROW;
         int unusedEntriesInLastRow = ENTRIES_PER_ROW - (items.size() % ENTRIES_PER_ROW);
-        for (ItemStack stack : items) {
+        for (
+            ItemStack stack : items
+        ) {
             column++;
             if (column == ENTRIES_PER_ROW) {
                 column = 0;
@@ -44,8 +46,12 @@ public class BookCollectionPageRenderer extends BookTextPageRenderer {
     @Override
     public int getTextY() {
         if (!(page instanceof BookCollectionPage collectionPage)) return super.getTextY();
-        return super.getTextY() + (int) Math.ceil(collectionPage.getItems()
-                                                                .size() / (float) ENTRIES_PER_ROW) * 18;
+        return super.getTextY() + (int) Math
+            .ceil(
+                collectionPage
+                    .getItems()
+                    .size() / (float) ENTRIES_PER_ROW
+            ) * 18;
     }
 
 }

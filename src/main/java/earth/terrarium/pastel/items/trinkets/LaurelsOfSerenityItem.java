@@ -26,19 +26,31 @@ public class LaurelsOfSerenityItem extends InkDrainTrinketItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.pastel.laurels_of_serenity.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.laurels_of_serenity.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
         super.appendHoverText(stack, context, tooltip, type);
     }
 
-    public static ResourceLocation DETECTION_RANGE_ATTRIBUTE_ID = PastelCommon.locate(
-        "laurels_of_serenity_detection_range");
-    public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon.locate(
-        "laurels_of_serenity_mental_presence");
+    public static ResourceLocation DETECTION_RANGE_ATTRIBUTE_ID = PastelCommon
+        .locate(
+            "laurels_of_serenity_detection_range"
+        );
+
+    public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon
+        .locate(
+            "laurels_of_serenity_mental_presence"
+        );
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
-        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        SlotContext slotContext,
+        ResourceLocation id,
+        ItemStack stack
+    ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
 
         FixedSingleInkStorage inkStorage = getEnergyStorage(stack);
@@ -49,23 +61,27 @@ public class LaurelsOfSerenityItem extends InkDrainTrinketItem {
             // made negative values be the 'good' variant (aka reducing the distance mobs need to be in to detect an
             // entity)
             // so it shows up red in tooltips. Hmmmm
-            modifiers.put(
-                AdditionalEntityAttributes.MOB_DETECTION_RANGE,
-                new AttributeModifier(
-                    DETECTION_RANGE_ATTRIBUTE_ID, -detectionRangeMod,
-                    AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-                )
-            );
+            modifiers
+                .put(
+                    AdditionalEntityAttributes.MOB_DETECTION_RANGE,
+                    new AttributeModifier(
+                        DETECTION_RANGE_ATTRIBUTE_ID,
+                        -detectionRangeMod,
+                        AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                    )
+                );
         }
         double sleepResistanceMod = getInducedSleepResistanceMod(storedInk);
         if (sleepResistanceMod != 0) {
-            modifiers.put(
-                PastelEntityAttributes.MENTAL_PRESENCE,
-                new AttributeModifier(
-                    MENTAL_PRESENCE_ATTRIBUTE_ID, sleepResistanceMod,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
-            );
+            modifiers
+                .put(
+                    PastelEntityAttributes.MENTAL_PRESENCE,
+                    new AttributeModifier(
+                        MENTAL_PRESENCE_ATTRIBUTE_ID,
+                        sleepResistanceMod,
+                        AttributeModifier.Operation.ADD_VALUE
+                    )
+                );
         }
 
         return modifiers;
@@ -75,8 +91,10 @@ public class LaurelsOfSerenityItem extends InkDrainTrinketItem {
         if (storedInk < 100) {
             return 0;
         } else {
-            return 0.15F * (int) (Math.log(storedInk / 100.0f) / Math.log(
-                8)); //TODO: reduce once the ink trinket cap is set back to 1.6 billion
+            return 0.15F * (int) (Math.log(storedInk / 100.0f) / Math
+                .log(
+                    8
+                )); //TODO: reduce once the ink trinket cap is set back to 1.6 billion
         }
     }
 
@@ -84,8 +102,10 @@ public class LaurelsOfSerenityItem extends InkDrainTrinketItem {
         if (storedInk < 100) {
             return 0;
         } else {
-            return 0.15F * (int) (Math.log(storedInk / 100.0f) / Math.log(
-                8)); //TODO: reduce once the ink trinket cap is set back to 1.6 billion
+            return 0.15F * (int) (Math.log(storedInk / 100.0f) / Math
+                .log(
+                    8
+                )); //TODO: reduce once the ink trinket cap is set back to 1.6 billion
         }
     }
 

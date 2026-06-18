@@ -86,23 +86,31 @@ public class PresentBlock extends BaseEntityBlock {
 
         @Override
         public String getSerializedName() {
-            return this.toString()
-                       .toLowerCase(Locale.ROOT);
+            return this
+                .toString()
+                .toLowerCase(Locale.ROOT);
         }
     }
 
     public static final int TICKS_PER_OPENING_STEP = 20;
+
     public static final int OPENING_STEPS = 6;
 
     public static final BooleanProperty OPENING = BooleanProperty.create("opening");
+
     public static final EnumProperty<WrappingPaper> VARIANT = EnumProperty.create("variant", WrappingPaper.class);
+
     protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
 
     public PresentBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(OPENING, false)
-                                                      .setValue(VARIANT, WrappingPaper.RED));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(OPENING, false)
+                    .setValue(VARIANT, WrappingPaper.RED)
+            );
     }
 
     @Override
@@ -128,18 +136,33 @@ public class PresentBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(
-        @NotNull Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        world.setBlockAndUpdate(
-            pos, state.setValue(
-                PresentBlock.VARIANT, PresentBlockItem.getWrapData(itemStack)
-                                                      .variant()
-            )
-        );
+        @NotNull Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
+        world
+            .setBlockAndUpdate(
+                pos,
+                state
+                    .setValue(
+                        PresentBlock.VARIANT,
+                        PresentBlockItem
+                            .getWrapData(itemStack)
+                            .variant()
+                    )
+            );
     }
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (!player.getAbilities().mayBuild) {
             return InteractionResult.PASS;
         } else {
@@ -155,15 +178,21 @@ public class PresentBlock extends BaseEntityBlock {
                         world.scheduleTick(pos, state.getBlock(), TICKS_PER_OPENING_STEP);
                     } else {
                         if (presentBlockEntity.getOwnerName() != null) {
-                            player.displayClientMessage(
-                                Component.translatable(
-                                    "block.pastel.present.tooltip.wrapped_placed.giver",
-                                    presentBlockEntity.getOwnerName()
-                                ), true
-                            );
+                            player
+                                .displayClientMessage(
+                                    Component
+                                        .translatable(
+                                            "block.pastel.present.tooltip.wrapped_placed.giver",
+                                            presentBlockEntity.getOwnerName()
+                                        ),
+                                    true
+                                );
                         } else {
-                            player.displayClientMessage(
-                                Component.translatable("block.pastel.present.tooltip.wrapped_placed"), true);
+                            player
+                                .displayClientMessage(
+                                    Component.translatable("block.pastel.present.tooltip.wrapped_placed"),
+                                    true
+                                );
                         }
 
                     }
@@ -193,20 +222,48 @@ public class PresentBlock extends BaseEntityBlock {
                     spawnParticles(world, pos, presentBlockEntity.getColors());
                     presentBlockEntity.triggerAdvancement();
                     if (presentBlockEntity.isEmpty()) {
-                        world.playSound(
-                            null, posVec.x, posVec.y, posVec.z, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F,
-                            0.8F
-                        );
-                        PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-                            world, posVec, ParticleTypes.SMOKE, 5, Vec3.ZERO);
+                        world
+                            .playSound(
+                                null,
+                                posVec.x,
+                                posVec.y,
+                                posVec.z,
+                                SoundEvents.FIRE_EXTINGUISH,
+                                SoundSource.BLOCKS,
+                                0.5F,
+                                0.8F
+                            );
+                        PlayParticleWithExactVelocityPayload
+                            .playParticleWithExactVelocity(
+                                world,
+                                posVec,
+                                ParticleTypes.SMOKE,
+                                5,
+                                Vec3.ZERO
+                            );
                     } else {
-                        world.playSound(
-                            null, posVec.x, posVec.y, posVec.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 0.5F,
-                            4.0F
-                        );
-                        PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-                            world, posVec, ParticleTypes.EXPLOSION, 1, Vec3.ZERO);
-                        for (ItemStack stack : presentBlockEntity.getStacks()) {
+                        world
+                            .playSound(
+                                null,
+                                posVec.x,
+                                posVec.y,
+                                posVec.z,
+                                SoundEvents.GENERIC_EXPLODE,
+                                SoundSource.BLOCKS,
+                                0.5F,
+                                4.0F
+                            );
+                        PlayParticleWithExactVelocityPayload
+                            .playParticleWithExactVelocity(
+                                world,
+                                posVec,
+                                ParticleTypes.EXPLOSION,
+                                1,
+                                Vec3.ZERO
+                            );
+                        for (
+                            ItemStack stack : presentBlockEntity.getStacks()
+                        ) {
                             @Nullable PresentUnpackBehavior behavior = getBehaviorFor(stack);
                             if (behavior != null) {
                                 stack = behavior.onPresentUnpack(stack, presentBlockEntity, world, pos, random);
@@ -219,10 +276,17 @@ public class PresentBlock extends BaseEntityBlock {
                     }
                     world.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                 } else {
-                    world.playSound(
-                        null, posVec.x, posVec.y, posVec.z, SoundEvents.SAND_PLACE, SoundSource.BLOCKS,
-                        0.8F + openingTick * 0.1F, 1.0F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            posVec.x,
+                            posVec.y,
+                            posVec.z,
+                            SoundEvents.SAND_PLACE,
+                            SoundSource.BLOCKS,
+                            0.8F + openingTick * 0.1F,
+                            1.0F
+                        );
                     spawnParticles(world, pos, presentBlockEntity.getColors());
                 }
             }
@@ -237,11 +301,14 @@ public class PresentBlock extends BaseEntityBlock {
         }
 
         if (colors.isEmpty()) {
-            int randomColor = DyeColor.byId(level.random.nextInt(DyeColor.values().length))
-                                      .getTextureDiffuseColor();
+            int randomColor = DyeColor
+                .byId(level.random.nextInt(DyeColor.values().length))
+                .getTextureDiffuseColor();
             spawnParticles(level, pos, randomColor, 15);
         } else {
-            for (Map.Entry<Integer, Integer> color : colors.entrySet()) {
+            for (
+                Map.Entry<Integer, Integer> color : colors.entrySet()
+            ) {
                 spawnParticles(level, pos, color.getKey(), color.getValue() * 10);
             }
         }
@@ -253,7 +320,11 @@ public class PresentBlock extends BaseEntityBlock {
         double posZ = pos.getZ() + 0.5;
         RandomSource random = world.random;
         Vector3f colorVec = ColorHelper.colorIntToVec(color);
-        for (int i = 0; i < amount; i++) {
+        for (
+            int i = 0;
+            i < amount;
+            i++
+        ) {
             double randX = 0.35 - random.nextFloat() * 0.7;
             double randY = random.nextFloat() * 0.7;
             double randZ = 0.35 - random.nextFloat() * 0.7;
@@ -261,13 +332,18 @@ public class PresentBlock extends BaseEntityBlock {
             int randomLifetime = 20 + random.nextInt(20);
 
             ParticleOptions particleEffect = new DynamicParticleEffect(
-                0.98F, colorVec, randomScale, randomLifetime, true, false);
+                0.98F,
+                colorVec,
+                randomScale,
+                randomLifetime,
+                true,
+                false
+            );
             world.addParticle(particleEffect, posX, posY, posZ, randX, randY, randZ);
         }
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PresentBlockEntity(pos, state);
     }

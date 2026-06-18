@@ -17,7 +17,8 @@ public class IndexedEntryWidget extends EntryWidget {
 
     @Override
     public EntryStack<?> getCurrentEntry() {
-        return getCyclingEntries().get()
-                                  .get(indexer.get());
+        return getCyclingEntries()
+            .get()
+            .get(indexer.get());
     }
 }

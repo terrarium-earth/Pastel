@@ -8,7 +8,7 @@ import net.minecraft.data.models.ItemModelGenerators;
 
 public class PastelItemModels {
     // these are named after the creative tabs so blame whoever sorted those
-    public static void generateItemModels(ItemModelGenerators generators){
+    public static void generateItemModels(ItemModelGenerators generators) {
         CuisineItemModels.generateItemModels(generators);
         DecorationItemModels.generateItemModels(generators);
         InstrumentItemModels.generateItemModels(generators);
@@ -18,7 +18,7 @@ public class PastelItemModels {
         ToolItemModels.generateItemModels(generators);
         VanillaItemGroupItemModels.generateItemModels(generators);
 
-        if(PastelIntegrationPacks.isIntegrationPackActive("ae2")) AE2Compat.generateItemModels(generators);
-        if(PastelIntegrationPacks.isIntegrationPackActive("create")) CreateCompat.generateItemModels(generators);
+        if (PastelIntegrationPacks.isIntegrationPackActive("ae2")) AE2Compat.generateItemModels(generators);
+        if (PastelIntegrationPacks.isIntegrationPackActive("create")) CreateCompat.generateItemModels(generators);
     }
 }

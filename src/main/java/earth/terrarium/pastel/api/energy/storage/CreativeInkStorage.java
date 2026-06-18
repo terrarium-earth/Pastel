@@ -11,11 +11,15 @@ import java.util.Map;
 
 public class CreativeInkStorage implements InkStorage {
 
-    private static final Map<InkColor, Long> STORAGE = new HashMap<>() {{
-        for (InkColor inkColor : InkColors.all()) {
-            put(inkColor, Long.MAX_VALUE);
+    private static final Map<InkColor, Long> STORAGE = new HashMap<>() {
+        {
+            for (
+                InkColor inkColor : InkColors.all()
+            ) {
+                put(inkColor, Long.MAX_VALUE);
+            }
         }
-    }};
+    };
 
     public CreativeInkStorage() {
         super();

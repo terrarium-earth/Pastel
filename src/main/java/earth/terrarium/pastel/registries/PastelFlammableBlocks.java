@@ -28,7 +28,9 @@ public class PastelFlammableBlocks {
         // ignite odds, burn odds
         add(PastelBlocks.CLOVER.get(), 60, 100);
 
-        for (InkColor color : InkColors.all()) {
+        for (
+            InkColor color : InkColors.all()
+        ) {
             add(ColoredLogBlock.byColor(color), 5, 5);
             add(ColoredWoodBlock.byColor(color), 5, 5);
             add(ColoredLeavesBlock.byColor(color), 30, 60);
@@ -76,7 +78,6 @@ public class PastelFlammableBlocks {
         add(PastelBlocks.SLATE_NOXWOOD_STAIRS.get(), 5, 20);
         add(PastelBlocks.SLATE_NOXWOOD_PILLAR.get(), 5, 20);
         add(PastelBlocks.SLATE_NOXWOOD_LIGHT.get(), 5, 20);
-
 
         add(PastelBlocks.EBONY_NOXCAP_STEM.get(), 5, 5);
         add(PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM.get(), 5, 5);

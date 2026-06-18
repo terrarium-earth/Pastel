@@ -11,20 +11,27 @@ import java.util.concurrent.*;
 public class PastelBurnTimeDataMapProvider extends DataMapProvider {
 
     protected PastelBurnTimeDataMapProvider(
-        PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        PackOutput packOutput,
+        CompletableFuture<HolderLookup.Provider> lookupProvider
+    ) {
         super(packOutput, lookupProvider);
     }
 
     @Override
     protected void gather(HolderLookup.Provider provider) {
         var builder = builder(NeoForgeDataMaps.FURNACE_FUELS);
-        PastelItems.BURN_TIMES.forEach((p) ->
-                                           builder.add(
-                                               p.getFirst()
-                                                .asItem()
-                                                .builtInRegistryHolder(), new FurnaceFuel(p.getSecond()), false
-                                           )
-        );
+        PastelItems.BURN_TIMES
+            .forEach(
+                (p) -> builder
+                    .add(
+                        p
+                            .getFirst()
+                            .asItem()
+                            .builtInRegistryHolder(),
+                        new FurnaceFuel(p.getSecond()),
+                        false
+                    )
+            );
     }
 
     @Override

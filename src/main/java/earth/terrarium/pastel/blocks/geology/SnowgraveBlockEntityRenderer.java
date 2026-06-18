@@ -20,15 +20,21 @@ public class SnowgraveBlockEntityRenderer implements BlockEntityRenderer<Snowgra
 
     @Override
     public void render(
-        SnowgraveBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource,
-        int packedLight, int packedOverlay
+        SnowgraveBlockEntity blockEntity,
+        float partialTick,
+        PoseStack poseStack,
+        MultiBufferSource bufferSource,
+        int packedLight,
+        int packedOverlay
     ) {
         // we only render once per feature
-        if (!blockEntity.getBlockState()
-                        .getValue(SnowgraveBlock.SHOULD_RENDER) || blockEntity.getLevel() == null)
+        if (!blockEntity
+            .getBlockState()
+            .getValue(SnowgraveBlock.SHOULD_RENDER) || blockEntity.getLevel() == null)
             return;
-        var variant = blockEntity.getBlockState()
-                                 .getValue(SnowgraveBlock.FROZEN_MOB);
+        var variant = blockEntity
+            .getBlockState()
+            .getValue(SnowgraveBlock.FROZEN_MOB);
         // we store a cached mob to render so we don't have to recreate one every render tick
         if (blockEntity.cachedMob == null) {
             switch (variant) {
@@ -41,9 +47,9 @@ public class SnowgraveBlockEntityRenderer implements BlockEntityRenderer<Snowgra
         var toRender = blockEntity.cachedMob;
         var offset = variant == SnowgraveBlock.FrozenMob.SPIDER ? 1 : 0.5;
         poseStack.pushPose();
-        poseStack.scale(0.9f,0.9f,0.9f);
-        poseStack.translate(offset/0.9,0, offset/0.9);
-        dispatcher.render(toRender,0,0,0,0,0,poseStack,bufferSource,packedLight);
+        poseStack.scale(0.9f, 0.9f, 0.9f);
+        poseStack.translate(offset / 0.9, 0, offset / 0.9);
+        dispatcher.render(toRender, 0, 0, 0, 0, 0, poseStack, bufferSource, packedLight);
         poseStack.popPose();
     }
 }

@@ -31,16 +31,22 @@ public class PairedFoodEatenCriterion extends SimpleCriterionTrigger<PairedFoodE
         Optional<ItemPredicate> pairedItem
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<PairedFoodEatenCriterion.Conditions> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                                    ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                               .forGetter(PairedFoodEatenCriterion.Conditions::player),
-                                    ItemPredicate.CODEC.optionalFieldOf("eaten_item")
-                                                       .forGetter(PairedFoodEatenCriterion.Conditions::eatenItem),
-                                    ItemPredicate.CODEC.optionalFieldOf("paired_item")
-                                                       .forGetter(PairedFoodEatenCriterion.Conditions::pairedItem)
-                                )
-                                .apply(instance, PairedFoodEatenCriterion.Conditions::new));
+        public static final Codec<PairedFoodEatenCriterion.Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(PairedFoodEatenCriterion.Conditions::player),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf("eaten_item")
+                            .forGetter(PairedFoodEatenCriterion.Conditions::eatenItem),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf("paired_item")
+                            .forGetter(PairedFoodEatenCriterion.Conditions::pairedItem)
+                    )
+                    .apply(instance, PairedFoodEatenCriterion.Conditions::new)
+            );
 
         public boolean matches(ItemStack eatenStack, ItemStack pairedStack) {
             if (eatenItem.isPresent() && !eatenItem.get().test(eatenStack))

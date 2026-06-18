@@ -20,7 +20,9 @@ import java.util.Map;
 public class EnvDataLoader extends SimpleJsonResourceReloadListener {
 
     public static final EnvDataLoader INSTANCE = new EnvDataLoader();
+
     public static final Map<ResourceKey<Biome>, EnvironmentalData> DATA = new HashMap<>();
+
     public static final String ID = "environmental_data";
 
     private static final Codec<ResourceKey<Biome>> KEY_CODEC = ResourceKey.codec(Registries.BIOME);
@@ -31,7 +33,10 @@ public class EnvDataLoader extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(
-        Map<ResourceLocation, JsonElement> files, ResourceManager resourceManager, ProfilerFiller profiler) {
+        Map<ResourceLocation, JsonElement> files,
+        ResourceManager resourceManager,
+        ProfilerFiller profiler
+    ) {
         DATA.clear();
 
         var ops = makeConditionalOps();
@@ -40,22 +45,26 @@ public class EnvDataLoader extends SimpleJsonResourceReloadListener {
 
             var biome = KEY_CODEC.parse(ops, parentObject.get("biome"));
 
-            if (biome.error()
-                     .isPresent()) {
+            if (biome
+                .error()
+                .isPresent()) {
                 error(path, biome);
                 return;
             }
 
             var data = EnvironmentalData.CODEC.parse(ops, parentObject.getAsJsonObject("environment"));
 
-            if (data.error()
-                    .isPresent()) {
+            if (data
+                .error()
+                .isPresent()) {
                 error(path, data);
             }
 
-            if (biome.result()
-                     .isEmpty() || data.result()
-                                       .isEmpty())
+            if (biome
+                .result()
+                .isEmpty() || data
+                    .result()
+                    .isEmpty())
                 return;
 
             DATA.put(biome.getOrThrow(), data.getOrThrow());
@@ -63,7 +72,11 @@ public class EnvDataLoader extends SimpleJsonResourceReloadListener {
     }
 
     private static void error(ResourceLocation path, DataResult<?> result) {
-        PastelCommon.logError("Env Data loading error [" + path + "]" + result.error()
-                                                                              .get());
+        PastelCommon
+            .logError(
+                "Env Data loading error [" + path + "]" + result
+                    .error()
+                    .get()
+            );
     }
 }

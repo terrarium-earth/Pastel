@@ -11,16 +11,22 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Optional;
 
 public record InfusedBeveragePredicate(Optional<String> variant)
-    implements SingleComponentItemPredicate<InfusedBeverageComponent> {
+    implements
+    SingleComponentItemPredicate<InfusedBeverageComponent> {
 
-    public static final Codec<InfusedBeveragePredicate> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                                    Codec.STRING.optionalFieldOf("variant")
-                                                                                                                .forGetter(c -> c.variant)
-                                                                                                )
-                                                                                                .apply(
-                                                                                                    i,
-                                                                                                    InfusedBeveragePredicate::new
-                                                                                                ));
+    public static final Codec<InfusedBeveragePredicate> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    Codec.STRING
+                        .optionalFieldOf("variant")
+                        .forGetter(c -> c.variant)
+                )
+                .apply(
+                    i,
+                    InfusedBeveragePredicate::new
+                )
+        );
 
     @Override
     public DataComponentType<InfusedBeverageComponent> componentType() {
@@ -29,7 +35,8 @@ public record InfusedBeveragePredicate(Optional<String> variant)
 
     @Override
     public boolean matches(ItemStack stack, InfusedBeverageComponent component) {
-        return variant.isEmpty() || component.variant()
-                                             .equals(variant.get());
+        return variant.isEmpty() || component
+            .variant()
+            .equals(variant.get());
     }
 }

@@ -20,11 +20,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class CushionBlock extends Block {
 
-
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 7, 16);
+
     public static final double SITTING_OFFSET = 5 / 16.0;
-    @Nullable
-    private final DyeColor color;
+
+    @Nullable private final DyeColor color;
 
     public CushionBlock(Properties settings, @Nullable DyeColor color) {
         super(settings);
@@ -33,7 +33,7 @@ public class CushionBlock extends Block {
 
     @Override
     public MapCodec<? extends CushionBlock> codec() {
-        return simpleCodec((properties)->new CushionBlock(properties,color));
+        return simpleCodec((properties) -> new CushionBlock(properties, color));
     }
 
     public void updateEntityAfterFallOn(BlockGetter world, Entity entity) {
@@ -58,7 +58,12 @@ public class CushionBlock extends Block {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         var seat = getOrCreateSeatEntity(world, pos, state);
 
         if (seat.getFirstPassenger() == null) {
@@ -94,8 +99,9 @@ public class CushionBlock extends Block {
 
         if (seats.isEmpty()) {
             seat = new SeatEntity(world, SITTING_OFFSET);
-            var seatPos = Vec3.atLowerCornerOf(pos)
-                              .add(0.5, SITTING_OFFSET, 0.5);
+            var seatPos = Vec3
+                .atLowerCornerOf(pos)
+                .add(0.5, SITTING_OFFSET, 0.5);
             seat.setPos(seatPos);
             seat.setCushion(state);
             world.addFreshEntity(seat);

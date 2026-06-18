@@ -32,17 +32,31 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
-@SuppressWarnings({"unused", "FieldCanBeLocal"})
+@OnlyIn(
+    Dist.CLIENT
+)
+@SuppressWarnings(
+    {
+        "unused", "FieldCanBeLocal"
+}
+)
 public class FabricationChestBlockEntityRenderer implements BlockEntityRenderer<FabricationChestBlockEntity> {
 
     private static final Material spriteIdentifier = new Material(
-        InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/fabrication_chest"));
+        InventoryMenu.BLOCK_ATLAS,
+        PastelCommon.locate("block/fabrication_chest")
+    );
+
     private final ModelPart rootNode;
+
     private final ModelPart root;
+
     private final ModelPart rim;
+
     private final ModelPart crafting_tablet;
+
     private final ModelPart assembly;
+
     private final ModelPart rings;
 
     public FabricationChestBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
@@ -58,63 +72,102 @@ public class FabricationChestBlockEntityRenderer implements BlockEntityRenderer<
     public static @NotNull LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-        PartDefinition root = modelPartData.addOrReplaceChild(
-            "root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+        PartDefinition root = modelPartData
+            .addOrReplaceChild(
+                "root",
+                CubeListBuilder.create(),
+                PartPose.offset(0.0F, 24.0F, 0.0F)
+            );
 
-        root.addOrReplaceChild(
-            "rim", CubeListBuilder.create()
-                                  .texOffs(0, 0)
-                                  .addBox(-8.0F, -3.0F, -8.0F, 16.0F, 4.0F, 16.0F, new CubeDeformation(0.0F))
-                                  .texOffs(52, 49)
-                                  .addBox(-6.0F, -3.0F, -6.0F, 12.0F, 4.0F, 12.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, -9.0F, 0.0F)
-        );
+        root
+            .addOrReplaceChild(
+                "rim",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-8.0F, -3.0F, -8.0F, 16.0F, 4.0F, 16.0F, new CubeDeformation(0.0F))
+                    .texOffs(52, 49)
+                    .addBox(-6.0F, -3.0F, -6.0F, 12.0F, 4.0F, 12.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -9.0F, 0.0F)
+            );
 
-        root.addOrReplaceChild(
-            "crafting_tablet", CubeListBuilder.create()
-                                              .texOffs(48, 0)
-                                              .addBox(
-                                                  -6.5F, 2.0F, -8.5F, 13.0F, 3.0F, 13.0F,
-                                                  new CubeDeformation(0.0F)
-                                              ), PartPose.offset(0.0F, -15.0F, 2.0F)
-        );
+        root
+            .addOrReplaceChild(
+                "crafting_tablet",
+                CubeListBuilder
+                    .create()
+                    .texOffs(48, 0)
+                    .addBox(
+                        -6.5F,
+                        2.0F,
+                        -8.5F,
+                        13.0F,
+                        3.0F,
+                        13.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, -15.0F, 2.0F)
+            );
 
-        root.addOrReplaceChild(
-            "assembly", CubeListBuilder.create()
-                                       .texOffs(0, 0)
-                                       .addBox(
-                                           -1.5F, -4.0F, -1.5F, 3.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, -6.0F, 0.0F)
-        );
+        root
+            .addOrReplaceChild(
+                "assembly",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(
+                        -1.5F,
+                        -4.0F,
+                        -1.5F,
+                        3.0F,
+                        8.0F,
+                        3.0F,
+                        new CubeDeformation(0.0F)
+                    ),
+                PartPose.offset(0.0F, -6.0F, 0.0F)
+            );
 
-        root.addOrReplaceChild(
-            "rings", CubeListBuilder.create()
-                                    .texOffs(-13, 60)
-                                    .addBox(-6.5F, 1.25F, -6.5F, 13.0F, 0.0F, 13.0F, new CubeDeformation(0.0F))
-                                    .texOffs(41, 65)
-                                    .addBox(-5.5F, -1.25F, -5.5F, 11.0F, 0.0F, 11.0F, new CubeDeformation(0.0F)),
-            PartPose.offset(0.0F, -17.25F, 0.0F)
-        );
+        root
+            .addOrReplaceChild(
+                "rings",
+                CubeListBuilder
+                    .create()
+                    .texOffs(-13, 60)
+                    .addBox(-6.5F, 1.25F, -6.5F, 13.0F, 0.0F, 13.0F, new CubeDeformation(0.0F))
+                    .texOffs(41, 65)
+                    .addBox(-5.5F, -1.25F, -5.5F, 11.0F, 0.0F, 11.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -17.25F, 0.0F)
+            );
         return LayerDefinition.create(modelData, 128, 128);
     }
 
     @Override
     public void render(
-        FabricationChestBlockEntity chest, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers,
-        int light, int overlay
+        FabricationChestBlockEntity chest,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay
     ) {
         Level world = chest.getLevel();
         boolean bl = world != null;
-        BlockState blockState = bl ? chest.getBlockState() : PastelBlocks.FABRICATION_CHEST.get()
-                                                                                           .defaultBlockState()
-                                                                                           .setValue(
-                                                                                               ChestBlock.FACING,
-                                                                                               Direction.SOUTH
-                                                                                           );
+        BlockState blockState = bl
+            ? chest.getBlockState()
+            : PastelBlocks.FABRICATION_CHEST
+                .get()
+                .defaultBlockState()
+                .setValue(
+                    ChestBlock.FACING,
+                    Direction.SOUTH
+                );
 
         matrices.pushPose();
-        float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING)
-                                                                        .toYRot() : 0;
+        float f = blockState.hasProperty(ChestBlock.FACING)
+            ? blockState
+                .getValue(ChestBlock.FACING)
+                .toYRot()
+            : 0;
         matrices.translate(0.5D, 1.5D, 0.5D);
         matrices.mulPose(Axis.YP.rotationDegrees(-f));
         matrices.mulPose(Axis.XP.rotationDegrees(180));
@@ -193,10 +246,14 @@ public class FabricationChestBlockEntityRenderer implements BlockEntityRenderer<
         }
 
         if (chest.alphaValue > 0.01F) {
-            rings.render(
-                matrices, vertexConsumer, LightTexture.FULL_BRIGHT, overlay,
-                FastColor.ARGB32.colorFromFloat(chest.alphaValue, 1, 1, 1)
-            );
+            rings
+                .render(
+                    matrices,
+                    vertexConsumer,
+                    LightTexture.FULL_BRIGHT,
+                    overlay,
+                    FastColor.ARGB32.colorFromFloat(chest.alphaValue, 1, 1, 1)
+                );
         }
 
         var outputs = chest.getRecipeOutputs();
@@ -212,29 +269,48 @@ public class FabricationChestBlockEntityRenderer implements BlockEntityRenderer<
         matrices.scale(0.8F, 0.8F, 0.8F);
 
         if (outputs.size() == 1) {
-            Minecraft.getInstance()
-                     .getItemRenderer()
-                     .renderStatic(
-                         null, outputs.getFirst(), ItemDisplayContext.GROUND, false, matrices, vertexConsumers, world,
-                         light, overlay, 0
-                     );
+            Minecraft
+                .getInstance()
+                .getItemRenderer()
+                .renderStatic(
+                    null,
+                    outputs.getFirst(),
+                    ItemDisplayContext.GROUND,
+                    false,
+                    matrices,
+                    vertexConsumers,
+                    world,
+                    light,
+                    overlay,
+                    0
+                );
         } else {
             var rotation = 360F / outputs.size();
-            for (ItemStack output : outputs) {
+            for (
+                ItemStack output : outputs
+            ) {
                 matrices.mulPose(Axis.YP.rotationDegrees(rotation));
                 matrices.translate(0.4F, 0, 0);
                 matrices.mulPose(Axis.YP.rotationDegrees(rings.yRot * 0.8F));
-                Minecraft.getInstance()
-                         .getItemRenderer()
-                         .renderStatic(
-                             null, output, ItemDisplayContext.GROUND, false, matrices, vertexConsumers, world, light,
-                             overlay, 0
-                         );
+                Minecraft
+                    .getInstance()
+                    .getItemRenderer()
+                    .renderStatic(
+                        null,
+                        output,
+                        ItemDisplayContext.GROUND,
+                        false,
+                        matrices,
+                        vertexConsumers,
+                        world,
+                        light,
+                        overlay,
+                        0
+                    );
                 matrices.mulPose(Axis.YP.rotationDegrees(-rings.yRot * 0.8F));
                 matrices.translate(-0.4F, 0, 0);
             }
         }
-
 
         matrices.popPose();
     }

@@ -24,27 +24,32 @@ public class PastelArmorRenderers {
     };
 
     public static void register(RegisterClientExtensionsEvent event) {
-        event.registerItem(
-            new IClientItemExtensions() {
-                private Map<EquipmentSlot, HumanoidModel<LivingEntity>> models = new Object2ObjectArrayMap<>();
+        event
+            .registerItem(
+                new IClientItemExtensions() {
+                    private Map<EquipmentSlot, HumanoidModel<LivingEntity>> models = new Object2ObjectArrayMap<>();
 
-                @Override
-                public HumanoidModel<?> getHumanoidArmorModel(
-                    LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot,
-                    HumanoidModel<?> original
-                ) {
-                    return models.computeIfAbsent(equipmentSlot, this::provideArmorModelForSlot);
-                }
+                    @Override
+                    public HumanoidModel<?> getHumanoidArmorModel(
+                        LivingEntity livingEntity,
+                        ItemStack itemStack,
+                        EquipmentSlot equipmentSlot,
+                        HumanoidModel<?> original
+                    ) {
+                        return models.computeIfAbsent(equipmentSlot, this::provideArmorModelForSlot);
+                    }
 
-                private HumanoidModel<LivingEntity> provideArmorModelForSlot(EquipmentSlot slot) {
-                    var models = Minecraft.getInstance()
-                                          .getEntityModels();
-                    var root = models.bakeLayer(PastelModelLayers.MAIN_BEDROCK_LAYER);
-                    return new BedrockArmorModel(root, slot);
-                }
+                    private HumanoidModel<LivingEntity> provideArmorModelForSlot(EquipmentSlot slot) {
+                        var models = Minecraft
+                            .getInstance()
+                            .getEntityModels();
+                        var root = models.bakeLayer(PastelModelLayers.MAIN_BEDROCK_LAYER);
+                        return new BedrockArmorModel(root, slot);
+                    }
 
-            }, BEDROCK_ARMOR
-        );
+                },
+                BEDROCK_ARMOR
+            );
     }
 
 }

@@ -105,62 +105,77 @@ public class PastelMiscEvents {
         ItemStack crossbow = shooter.getItemInHand(shooter.getUsedItemHand());
         Level level = shooter.level();
 
-        if (crossbow.getItem() != PastelItems.GLASS_CREST_CROSSBOW.get() || !GlassCrestCrossbowItem.isOvercharged(
-            crossbow)) {
+        if (crossbow.getItem() != PastelItems.GLASS_CREST_CROSSBOW.get() || !GlassCrestCrossbowItem
+            .isOvercharged(
+                crossbow
+            )) {
             return;
         }
 
-        Vec3 particleVelocity = projectile.getDeltaMovement()
-                                          .scale(0.05);
+        Vec3 particleVelocity = projectile
+            .getDeltaMovement()
+            .scale(0.05);
 
         if (GlassCrestCrossbowItem.getOvercharge(crossbow) > 0.99F) {
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                (ServerLevel) level,
-                projectile.position(),
-                ParticleTypes.SCRAPE,
-                5, Vec3.ZERO,
-                particleVelocity
-            );
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                (ServerLevel) level,
-                projectile.position(),
-                ParticleTypes.WAX_OFF,
-                5, Vec3.ZERO,
-                particleVelocity
-            );
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                (ServerLevel) level,
-                projectile.position(),
-                ParticleTypes.WAX_ON,
-                5, Vec3.ZERO,
-                particleVelocity
-            );
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                (ServerLevel) level,
-                projectile.position(),
-                ParticleTypes.GLOW,
-                5, Vec3.ZERO,
-                particleVelocity
-            );
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    (ServerLevel) level,
+                    projectile.position(),
+                    ParticleTypes.SCRAPE,
+                    5,
+                    Vec3.ZERO,
+                    particleVelocity
+                );
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    (ServerLevel) level,
+                    projectile.position(),
+                    ParticleTypes.WAX_OFF,
+                    5,
+                    Vec3.ZERO,
+                    particleVelocity
+                );
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    (ServerLevel) level,
+                    projectile.position(),
+                    ParticleTypes.WAX_ON,
+                    5,
+                    Vec3.ZERO,
+                    particleVelocity
+                );
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    (ServerLevel) level,
+                    projectile.position(),
+                    ParticleTypes.GLOW,
+                    5,
+                    Vec3.ZERO,
+                    particleVelocity
+                );
 
             if (shooter instanceof ServerPlayer serverPlayerEntity) {
-                Support.grantAdvancementCriterion(
-                    serverPlayerEntity, PastelCommon.locate("lategame/shoot_fully_overcharged_crossbow"),
-                    "shot_fully_overcharged_crossbow"
-                );
+                Support
+                    .grantAdvancementCriterion(
+                        serverPlayerEntity,
+                        PastelCommon.locate("lategame/shoot_fully_overcharged_crossbow"),
+                        "shot_fully_overcharged_crossbow"
+                    );
             }
             if (projectile instanceof AbstractArrow persistentProjectileEntity) {
                 persistentProjectileEntity.setBaseDamage(persistentProjectileEntity.getBaseDamage() * 1.5);
             }
         }
 
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-            (ServerLevel) level,
-            projectile.position(),
-            ParticleTypes.FIREWORK,
-            10, Vec3.ZERO,
-            particleVelocity
-        );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                (ServerLevel) level,
+                projectile.position(),
+                ParticleTypes.FIREWORK,
+                10,
+                Vec3.ZERO,
+                particleVelocity
+            );
 
         GlassCrestCrossbowItem.unOvercharge(crossbow);
     }
@@ -174,11 +189,19 @@ public class PastelMiscEvents {
         if (action != ItemAbilities.HOE_TILL || !tool.canPerformAction(action)) return;
 
         if (originalState.is(PastelBlocks.SLUSH.get()) || originalState.is(PastelBlocks.OVERGROWN_SLUSH.get())) {
-            event.setFinalState(PastelBlocks.TILLED_SLUSH.get()
-                                                         .defaultBlockState());
+            event
+                .setFinalState(
+                    PastelBlocks.TILLED_SLUSH
+                        .get()
+                        .defaultBlockState()
+                );
         } else if (originalState.is(PastelBlocks.SHALE_CLAY.get())) {
-            event.setFinalState(PastelBlocks.TILLED_SHALE_CLAY.get()
-                                                              .defaultBlockState());
+            event
+                .setFinalState(
+                    PastelBlocks.TILLED_SHALE_CLAY
+                        .get()
+                        .defaultBlockState()
+                );
         }
     }
 
@@ -216,8 +239,9 @@ public class PastelMiscEvents {
 
         if (level.isClientSide()) return;
 
-        if (!level.tickRateManager()
-                  .runsNormally()) {
+        if (!level
+            .tickRateManager()
+            .runsNormally()) {
             return;
         }
 
@@ -226,11 +250,16 @@ public class PastelMiscEvents {
         // but getting them in there would require some ugly mixins
 
         if (level.getGameTime() % 100 == 0) {
-            if (TimeHelper.getTimeOfDay(level)
-                          .isNight()) { // 90 chances in a night
-                if (PastelCommon.CONFIG.ShootingStarWorlds.contains(level.dimension()
-                                                                         .location()
-                                                                         .toString())) {
+            if (TimeHelper
+                .getTimeOfDay(level)
+                .isNight()) { // 90 chances in a night
+                if (PastelCommon.CONFIG.ShootingStarWorlds
+                    .contains(
+                        level
+                            .dimension()
+                            .location()
+                            .toString()
+                    )) {
                     ShootingStarSpawner.INSTANCE.tick((ServerLevel) level, true, true);
                 }
             }
@@ -240,31 +269,42 @@ public class PastelMiscEvents {
     private static void endServerTick(ServerTickEvent.Post event) {
         var server = event.getServer();
 
-        if (!server.tickRateManager()
-                   .runsNormally()) {
+        if (!server
+            .tickRateManager()
+            .runsNormally()) {
             return;
         }
 
         try {
-            Pastel.getServerInstance()
-                  .tick();
+            Pastel
+                .getServerInstance()
+                .tick();
         } catch (Exception e) {
             PastelCommon.logError("Error in the Pastel Network transmission loop.");
             e.printStackTrace();
         }
 
         PlayerList playerManager = server.getPlayerList();
-        for (ServerPlayer player : playerManager.getPlayers()) {
+        for (
+            ServerPlayer player : playerManager.getPlayers()
+        ) {
             Level level = player.level();
-            if (!player.isCreative() && !player.isSpectator() && level.dimension() == PastelLevels.DIMENSION_KEY &&
-                player.getY() > level.getMaxBuildHeight()) {
-                player.hurt(
-                    player.damageSources()
-                          .fellOutOfWorld(), 10.0F
-                );
+            if (!player.isCreative() && !player.isSpectator() && level
+                .dimension() == PastelLevels.DIMENSION_KEY && player.getY() > level.getMaxBuildHeight()) {
+                player
+                    .hurt(
+                        player
+                            .damageSources()
+                            .fellOutOfWorld(),
+                        10.0F
+                    );
                 if (player.isDeadOrDying()) {
-                    Support.grantAdvancementCriterion(
-                        player, "lategame/get_killed_while_out_of_imbrifer_bounds", "get_rekt");
+                    Support
+                        .grantAdvancementCriterion(
+                            player,
+                            "lategame/get_killed_while_out_of_imbrifer_bounds",
+                            "get_rekt"
+                        );
                 }
             }
         }
@@ -276,11 +316,12 @@ public class PastelMiscEvents {
         var entity = event.getTarget();
 
         ItemStack handStack = player.getItemInHand(hand);
-        if (handStack.getItem() instanceof PrioritizedEntityInteraction &&
-            entity instanceof LivingEntity livingEntity) {
+        if (handStack
+            .getItem() instanceof PrioritizedEntityInteraction && entity instanceof LivingEntity livingEntity) {
             event.setCancellationResult(handStack.interactLivingEntity(player, livingEntity, hand));
-            if (event.getCancellationResult()
-                     .indicateItemUse()) event.setCanceled(true);
+            if (event
+                .getCancellationResult()
+                .indicateItemUse()) event.setCanceled(true);
         }
     }
 
@@ -292,28 +333,42 @@ public class PastelMiscEvents {
         ItemStack handStack = player.getItemInHand(hand);
         if (handStack.getItem() instanceof PrioritizedBlockInteraction) {
             event.setCancellationResult(handStack.useOn(new UseOnContext(player, hand, hitResult)));
-            if (event.getCancellationResult()
-                     .indicateItemUse()) event.setCanceled(true);
+            if (event
+                .getCancellationResult()
+                .indicateItemUse()) event.setCanceled(true);
         }
     }
 
     private static final Set<BlockPos> AREA_TARGETS = new HashSet<>();
 
     private static void viridanShimmer(BlockEvent.EntityPlaceEvent event) {
-        if (!event.getPlacedBlock()
-                  .is(PastelBlockTags.VIRIDIAN_CRYSTAL_PURITY_SOURCES)) return;
-        var pos = event.getBlockSnapshot()
-                       .getPos();
+        if (!event
+            .getPlacedBlock()
+            .is(PastelBlockTags.VIRIDIAN_CRYSTAL_PURITY_SOURCES)) return;
+        var pos = event
+            .getBlockSnapshot()
+            .getPos();
         var level = event.getLevel();
         var random = level.getRandom();
-        for (BlockPos testPos : BlockPos.withinManhattan(pos, 10, 10, 10)) {
-            if (!level.isOutsideBuildHeight(testPos) && level.getBlockState(testPos)
-                                                             .is(PastelBlocks.VIRIDIAN_CRYSTAL)) {
+        for (
+            BlockPos testPos : BlockPos.withinManhattan(pos, 10, 10, 10)
+        ) {
+            if (!level.isOutsideBuildHeight(testPos) && level
+                .getBlockState(testPos)
+                .is(PastelBlocks.VIRIDIAN_CRYSTAL)) {
                 if (level instanceof ServerLevel serverLevel) // always true apparently
-                    serverLevel.sendParticles(
-                        PastelParticleTypes.LIGHT_TRAIL, testPos.getX(), testPos.getY(),
-                        testPos.getZ(), 4, 0.5, 0.5, 0.5, 0.1
-                    );
+                    serverLevel
+                        .sendParticles(
+                            PastelParticleTypes.LIGHT_TRAIL,
+                            testPos.getX(),
+                            testPos.getY(),
+                            testPos.getZ(),
+                            4,
+                            0.5,
+                            0.5,
+                            0.5,
+                            0.1
+                        );
             }
         }
     }
@@ -323,16 +378,17 @@ public class PastelMiscEvents {
 
         var original = event.getPos();
 
-        var hitResult = player.pick(player.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE),0,false);
+        var hitResult = player.pick(player.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE), 0, false);
         var direction = player.getNearestViewDirection();
-        if(hitResult.getType() == HitResult.Type.BLOCK){
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
             direction = ((BlockHitResult) hitResult).getDirection();
         }
 
         if (AREA_TARGETS.contains(original)) return; // No recursion
 
-        var cap = player.getMainHandItem()
-                        .getCapability(PastelCapabilities.Misc.MINING);
+        var cap = player
+            .getMainHandItem()
+            .getCapability(PastelCapabilities.Misc.MINING);
         if (cap == null) return;
 
         var aoe = cap.getMiningArea(player, player.getMainHandItem(), original);
@@ -352,23 +408,31 @@ public class PastelMiscEvents {
         };
 
         Predicate<BlockState> minableBlocksPredicate = state -> {
-            boolean suitableTool = !state.requiresCorrectToolForDrops() || event.getPlayer()
-                                                                                .getMainHandItem()
-                                                                                .isCorrectToolForDrops(state);
-            boolean suitableSpeed = event.getPlayer()
-                                         .getMainHandItem()
-                                         .getDestroySpeed(state) > 1;
+            boolean suitableTool = !state.requiresCorrectToolForDrops() || event
+                .getPlayer()
+                .getMainHandItem()
+                .isCorrectToolForDrops(state);
+            boolean suitableSpeed = event
+                .getPlayer()
+                .getMainHandItem()
+                .getDestroySpeed(state) > 1;
             return suitableTool && suitableSpeed;
         };
 
-        BlockPos.betweenClosedStream(start, end)
-                .filter(pos -> !pos.equals(original) && player.canInteractWithBlock(pos, 1.0 + reach) &&
-                               minableBlocksPredicate.test(event.getPlayer()
-                                                                .level()
-                                                                .getBlockState(pos)))
-                .peek(AREA_TARGETS::add)
-                .peek(player.gameMode::destroyBlock)
-                .forEach(AREA_TARGETS::remove);
+        BlockPos
+            .betweenClosedStream(start, end)
+            .filter(
+                pos -> !pos.equals(original) && player.canInteractWithBlock(pos, 1.0 + reach) && minableBlocksPredicate
+                    .test(
+                        event
+                            .getPlayer()
+                            .level()
+                            .getBlockState(pos)
+                    )
+            )
+            .peek(AREA_TARGETS::add)
+            .peek(player.gameMode::destroyBlock)
+            .forEach(AREA_TARGETS::remove);
     }
 
     private static void updateInertia(BlockEvent.BreakEvent event) {
@@ -377,15 +441,20 @@ public class PastelMiscEvents {
         var state = event.getState();
         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
 
-        RegistryAccess lookup = player.level()
-                                      .registryAccess();
+        RegistryAccess lookup = player
+            .level()
+            .registryAccess();
         var inertia = Ench.getLevel(lookup, PastelEnchantments.INERTIA, stack);
         if (inertia > 0) {
-            player.getData(InertiaData.ATTACHMENT)
-                  .record(
-                      state, player.level()
-                                   .getGameTime(), inertia
-                  );
+            player
+                .getData(InertiaData.ATTACHMENT)
+                .record(
+                    state,
+                    player
+                        .level()
+                        .getGameTime(),
+                    inertia
+                );
         }
 
         PastelCriteria.BLOCK_BROKEN.trigger(player, state);
@@ -411,31 +480,50 @@ public class PastelMiscEvents {
                 if (exchangeStaffItem.canInteractWith(targetBlockState, level, pos, player)) {
                     Optional<Block> storedBlock = ExchangeStaffItem.getStoredBlock(player.getMainHandItem());
 
-                    if (storedBlock.isPresent() && storedBlock.get() != targetBlockState.getBlock() && storedBlock.get()
-                                                                                                                  .asItem() !=
-                                                                                                       Items.AIR &&
-                        ExchangeStaffItem.exchange(
-                            level, pos, player, storedBlock.get(), player.getMainHandItem(), true, direction)) {
+                    if (storedBlock.isPresent() && storedBlock.get() != targetBlockState.getBlock() && storedBlock
+                        .get()
+                        .asItem() != Items.AIR && ExchangeStaffItem
+                            .exchange(
+                                level,
+                                pos,
+                                player,
+                                storedBlock.get(),
+                                player.getMainHandItem(),
+                                true,
+                                direction
+                            )) {
 
                         event.setCanceled(true);
                         return;
                     }
                     event.setCanceled(true);
                 }
-                level.playSound(
-                    null, player.blockPosition(), SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
+                level
+                    .playSound(
+                        null,
+                        player.blockPosition(),
+                        SoundEvents.DISPENSER_FAIL,
+                        SoundSource.PLAYERS,
+                        1.0F,
+                        1.0F
+                    );
             } else if (mainHandStack.getItem() instanceof TuningStampItem tuningStampItem) {
-                if (mainHandStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY)
-                                 .contains(TuningStampItem.DATA)) tuningStampItem.clearData(
-                    Optional.of(player), mainHandStack);
+                if (mainHandStack
+                    .getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY)
+                    .contains(TuningStampItem.DATA)) tuningStampItem
+                        .clearData(
+                            Optional.of(player),
+                            mainHandStack
+                        );
                 event.setCanceled(true);
             }
         }
     }
 
     public static int getFluidLuminance(FluidStack fluid) {
-        return fluid.getFluidType()
-                    .getLightLevel(fluid);
+        return fluid
+            .getFluidType()
+            .getLightLevel(fluid);
     }
 
     public static void sleepThroughDay(SleepFinishedTimeEvent event) {

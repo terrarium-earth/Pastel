@@ -10,8 +10,11 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class PastelDataAttachments {
 
-    private static final DeferredRegister<AttachmentType<?>> REGISTER = DeferredRegister.create(
-        NeoForgeRegistries.Keys.ATTACHMENT_TYPES, PastelCommon.MOD_ID);
+    private static final DeferredRegister<AttachmentType<?>> REGISTER = DeferredRegister
+        .create(
+            NeoForgeRegistries.Keys.ATTACHMENT_TYPES,
+            PastelCommon.MOD_ID
+        );
 
     public static void register(IEventBus bus) {
         REGISTER.register("primfire", () -> PrimordialFireData.ATTACHMENT);

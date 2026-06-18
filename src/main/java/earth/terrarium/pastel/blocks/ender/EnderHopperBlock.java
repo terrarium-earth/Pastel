@@ -42,11 +42,17 @@ public class EnderHopperBlock extends BaseEntityBlock {
     public static final MapCodec<EnderHopperBlock> CODEC = simpleCodec(EnderHopperBlock::new);
 
     private final VoxelShape TOP_SHAPE = box(0.0D, 10.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+
     private final VoxelShape MIDDLE_SHAPE = box(4.0D, 4.0D, 4.0D, 12.0D, 10.0D, 12.0D);
+
     private final VoxelShape OUTSIDE_SHAPE = Shapes.or(MIDDLE_SHAPE, TOP_SHAPE);
+
     private final VoxelShape INSIDE_SHAPE = box(2.0, 11.0, 2.0, 14.0, 16.0, 14.0);
+
     private final VoxelShape DEFAULT_SHAPE = Shapes.join(OUTSIDE_SHAPE, INSIDE_SHAPE, BooleanOp.ONLY_FIRST);
+
     private final VoxelShape DOWN_SHAPE = Shapes.or(DEFAULT_SHAPE, Block.box(6.0D, 0.0D, 6.0D, 10.0D, 4.0D, 10.0D));
+
     private final VoxelShape DOWN_RAYCAST_SHAPE = INSIDE_SHAPE;
 
     public EnderHopperBlock(Properties settings) {
@@ -65,7 +71,12 @@ public class EnderHopperBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         if (placer instanceof ServerPlayer) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof EnderHopperBlockEntity) {
@@ -86,16 +97,29 @@ public class EnderHopperBlock extends BaseEntityBlock {
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : createTickerHelper(
-            type, PastelBlockEntities.ENDER_HOPPER.get(), EnderHopperBlockEntity::serverTick);
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? null
+            : createTickerHelper(
+                type,
+                PastelBlockEntities.ENDER_HOPPER.get(),
+                EnderHopperBlockEntity::serverTick
+            );
     }
 
     @Override
     public void neighborChanged(
-        BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Block block,
+        BlockPos fromPos,
+        boolean notify
+    ) {
         this.updateEnabled(world, pos, state);
     }
 
@@ -137,7 +161,12 @@ public class EnderHopperBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -151,18 +180,31 @@ public class EnderHopperBlock extends BaseEntityBlock {
                 if (enderHopperBlockEntity.isOwner(player)) {
                     PlayerEnderChestContainer enderChestInventory = player.getEnderChestInventory();
 
-                    player.openMenu(new SimpleMenuProvider(
-                        (i, playerInventory, playerEntity) -> GenericPastelContainerScreenHandler.createGeneric9x3(
-                            i, playerInventory, enderChestInventory, ScreenBackgroundVariant.EARLYGAME),
-                        enderHopperBlockEntity.getContainerName()
-                    ));
+                    player
+                        .openMenu(
+                            new SimpleMenuProvider(
+                                (i, playerInventory, playerEntity) -> GenericPastelContainerScreenHandler
+                                    .createGeneric9x3(
+                                        i,
+                                        playerInventory,
+                                        enderChestInventory,
+                                        ScreenBackgroundVariant.EARLYGAME
+                                    ),
+                                enderHopperBlockEntity.getContainerName()
+                            )
+                        );
                     player.awardStat(Stats.OPEN_ENDERCHEST);
                     PiglinAi.angerNearbyPiglins(player, true);
                 } else {
-                    player.displayClientMessage(
-                        Component.translatable(
-                            "block.pastel.ender_hopper_with_owner", enderHopperBlockEntity.getOwnerName()), true
-                    );
+                    player
+                        .displayClientMessage(
+                            Component
+                                .translatable(
+                                    "block.pastel.ender_hopper_with_owner",
+                                    enderHopperBlockEntity.getOwnerName()
+                                ),
+                            true
+                        );
                 }
 
             }

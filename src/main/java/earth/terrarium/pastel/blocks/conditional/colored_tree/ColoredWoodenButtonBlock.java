@@ -10,6 +10,7 @@ import java.util.Map;
 public class ColoredWoodenButtonBlock extends ButtonBlock {
 
     private static final Map<InkColor, ColoredWoodenButtonBlock> BLOCKS = new Object2ObjectArrayMap<>();
+
     protected final InkColor color;
 
     public ColoredWoodenButtonBlock(Properties settings, InkColor color) {

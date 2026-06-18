@@ -21,7 +21,6 @@ public interface Stampable {
 
     String STAMPING_DATA_TAG = "pastel:stamping_data";
 
-
     /**
      * Creates a reference to a Stampable object.
      */
@@ -77,7 +76,6 @@ public interface Stampable {
         if (!nbt.contains("source"))
             return new Tuple<>(Optional.empty(), null);
 
-
         var pos = BlockPos.of(nbt.getLong("source"));
         var state = world.getBlockState(pos);
         reference = BlockReference.of(state, pos);
@@ -120,8 +118,11 @@ public interface Stampable {
 
         public StampData(@Nullable Entity stamper, BlockReference reference, Stampable source) {
             this(
-                Optional.ofNullable(stamper)
-                        .map(Entity::getUUID), reference, source
+                Optional
+                    .ofNullable(stamper)
+                    .map(Entity::getUUID),
+                reference,
+                source
             );
         }
 

@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.mixin.accessors;
 
-
 import net.minecraft.world.entity.animal.Fox;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,7 +7,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.UUID;
 
-@Mixin(Fox.class)
+@Mixin(
+    Fox.class
+)
 public interface FoxEntityAccessor {
 
     @Invoker

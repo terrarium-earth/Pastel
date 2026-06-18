@@ -15,18 +15,22 @@ import net.minecraft.world.level.block.DispenserBlock;
 public class PastelDispenserBehaviors {
 
     public static void register() {
-        DispenserBlock.registerBehavior(
-            PastelBlocks.BOTTOMLESS_BUNDLE.get(),
-            new BottomlessBundleItem.BottomlessBundlePlacementDispenserBehavior()
-        );
+        DispenserBlock
+            .registerBehavior(
+                PastelBlocks.BOTTOMLESS_BUNDLE.get(),
+                new BottomlessBundleItem.BottomlessBundlePlacementDispenserBehavior()
+            );
         DispenserBlock.registerBehavior(PastelItems.BEDROCK_SHEARS.get(), new ShearsDispenseItemBehavior());
 
         // Shooting Stars
         DispenserBlock.registerBehavior(PastelBlocks.COLORFUL_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
         DispenserBlock.registerBehavior(PastelBlocks.FIERY_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
         DispenserBlock.registerBehavior(PastelBlocks.GEMSTONE_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
-        DispenserBlock.registerBehavior(
-            PastelBlocks.GLISTERING_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
+        DispenserBlock
+            .registerBehavior(
+                PastelBlocks.GLISTERING_SHOOTING_STAR.get(),
+                new ShootingStarDispenserBehavior()
+            );
         DispenserBlock.registerBehavior(PastelBlocks.PRISTINE_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
 
         // Fluid Buckets
@@ -37,7 +41,9 @@ public class PastelDispenserBehaviors {
         DispenserBlock.registerBehavior(PastelItems.DRAGONROT_BUCKET.get(), fluidBucketBehavior);
 
         // Arrows
-        for (GlassArrowVariant variant : PastelRegistries.GLASS_ARROW_VARIANT) {
+        for (
+            GlassArrowVariant variant : PastelRegistries.GLASS_ARROW_VARIANT
+        ) {
             DispenserBlock.registerProjectileBehavior(variant.getArrow());
         }
 
@@ -51,7 +57,9 @@ public class PastelDispenserBehaviors {
 
         // Equipping Mob Heads
         DispenseItemBehavior armorEquipBehavior = DispenserBlock.DISPENSER_REGISTRY.get(Items.PLAYER_HEAD);
-        for (var skullBlock : PastelBlocks.MOB_HEADS.values()) {
+        for (
+            var skullBlock : PastelBlocks.MOB_HEADS.values()
+        ) {
             DispenserBlock.registerBehavior(skullBlock, armorEquipBehavior);
         }
 

@@ -21,7 +21,9 @@ public interface InkStorageBlockEntity<PStorage extends InkStorage> {
      * @return the effective upgrade value, or 1 if no upgrades of that type used or ink could not be drained
      */
     default float drainInkForUpgrades(
-        @NotNull Upgradeable upgradeable, @NotNull Upgradeable.UpgradeType upgradeType, @NotNull InkColor color,
+        @NotNull Upgradeable upgradeable,
+        @NotNull Upgradeable.UpgradeType upgradeType,
+        @NotNull InkColor color,
         boolean useEfficiency
     ) {
         Upgradeable.UpgradeHolder upgradeHolder = upgradeable.getUpgradeHolder();
@@ -29,8 +31,9 @@ public interface InkStorageBlockEntity<PStorage extends InkStorage> {
             return 1;
         }
 
-        long inkToDrain = useEfficiency ? upgradeHolder.getEffectiveCostUsingEfficiency(upgradeType)
-                                        : upgradeHolder.getEffectiveCost(upgradeType);
+        long inkToDrain = useEfficiency
+            ? upgradeHolder.getEffectiveCostUsingEfficiency(upgradeType)
+            : upgradeHolder.getEffectiveCost(upgradeType);
         if (getEnergyStorage().drainEnergy(color, inkToDrain) == inkToDrain) {
             setInkDirty();
             return upgradeHolder.getEffectiveValue(upgradeType);
@@ -46,12 +49,15 @@ public interface InkStorageBlockEntity<PStorage extends InkStorage> {
      * @return true if ink could be drained, false if not.
      */
     default boolean drainInkForUpgradesRequired(
-        @NotNull Upgradeable upgradeable, @NotNull Upgradeable.UpgradeType upgradeType, @NotNull InkColor color,
+        @NotNull Upgradeable upgradeable,
+        @NotNull Upgradeable.UpgradeType upgradeType,
+        @NotNull InkColor color,
         boolean useEfficiency
     ) {
         Upgradeable.UpgradeHolder upgradeHolder = upgradeable.getUpgradeHolder();
-        long inkToDrain = useEfficiency ? upgradeHolder.getEffectiveCostUsingEfficiency(upgradeType)
-                                        : upgradeHolder.getEffectiveCost(upgradeType);
+        long inkToDrain = useEfficiency
+            ? upgradeHolder.getEffectiveCostUsingEfficiency(upgradeType)
+            : upgradeHolder.getEffectiveCost(upgradeType);
         if (getEnergyStorage().drainEnergy(color, inkToDrain) == inkToDrain) {
             setInkDirty();
             return true;
@@ -60,7 +66,6 @@ public interface InkStorageBlockEntity<PStorage extends InkStorage> {
         setInkDirty();
         return false;
     }
-
 
     /**
      * Drains ink exponentially increased by the amount of upgrades used
@@ -68,9 +73,16 @@ public interface InkStorageBlockEntity<PStorage extends InkStorage> {
      * @return true if ink could be drained, false if not.
      */
     default boolean drainInkForUpgradesRequired(
-        @NotNull Upgradeable upgradeable, @NotNull InkColor color, long amount, boolean useEfficiency) {
-        long inkToDrain = useEfficiency ? upgradeable.getUpgradeHolder()
-                                                     .getEffectiveCostUsingEfficiency(amount) : amount;
+        @NotNull Upgradeable upgradeable,
+        @NotNull InkColor color,
+        long amount,
+        boolean useEfficiency
+    ) {
+        long inkToDrain = useEfficiency
+            ? upgradeable
+                .getUpgradeHolder()
+                .getEffectiveCostUsingEfficiency(amount)
+            : amount;
         if (getEnergyStorage().drainEnergy(color, inkToDrain) == inkToDrain) {
             setInkDirty();
             return true;
@@ -79,7 +91,6 @@ public interface InkStorageBlockEntity<PStorage extends InkStorage> {
         setInkDirty();
         return false;
     }
-
 
     void setInkDirty();
 

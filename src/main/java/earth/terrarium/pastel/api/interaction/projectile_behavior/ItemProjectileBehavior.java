@@ -17,20 +17,26 @@ import java.util.Map;
 // Todo: Convert to Registry
 public interface ItemProjectileBehavior {
     Map<ResourceLocation, ItemProjectileBehavior> CUSTOM_BEHAVIORS = new HashMap<>();
-    Codec<ItemProjectileBehavior> CODEC = ResourceLocation.CODEC.xmap(
-        CUSTOM_BEHAVIORS::get, behavior -> {
-            for (Map.Entry<ResourceLocation, ItemProjectileBehavior> entry : CUSTOM_BEHAVIORS.entrySet()) {
-                if (entry.getValue() == behavior) {
-                    return entry.getKey();
+
+    Codec<ItemProjectileBehavior> CODEC = ResourceLocation.CODEC
+        .xmap(
+            CUSTOM_BEHAVIORS::get,
+            behavior -> {
+                for (
+                    Map.Entry<ResourceLocation, ItemProjectileBehavior> entry : CUSTOM_BEHAVIORS.entrySet()
+                ) {
+                    if (entry.getValue() == behavior) {
+                        return entry.getKey();
+                    }
                 }
+                return PastelCommon.ofPastel("default");
             }
-            return PastelCommon.ofPastel("default");
-        }
-    );
+        );
 
     static ItemProjectileBehavior get(ItemStack stack) {
-        ItemProjectileBehavior behavior = stack.getItemHolder()
-                                               .getData(PastelDataMaps.PROJECTILE_BEHAVIOR);
+        ItemProjectileBehavior behavior = stack
+            .getItemHolder()
+            .getData(PastelDataMaps.PROJECTILE_BEHAVIOR);
         return behavior == null ? DefaultProjectileBehavior.INSTANCE : behavior;
     }
 
@@ -42,11 +48,16 @@ public interface ItemProjectileBehavior {
      * @param owner      The owner of the projectile
      * @param hitResult  The EntityHitResult. Contains the entity hit and position
      * @return The stack that should be dropped. If the stack has a count > 0, it automatically gets dropped at the
-     * position of the impact. If the item should get consumed, decrement the stack from the parameters and return it
-     * here
+     *         position of the impact. If the item should get consumed, decrement the stack from the parameters and
+     *         return it
+     *         here
      */
     ItemStack onEntityHit(
-        ItemProjectileEntity projectile, ItemStack stack, @Nullable Entity owner, EntityHitResult hitResult);
+        ItemProjectileEntity projectile,
+        ItemStack stack,
+        @Nullable Entity owner,
+        EntityHitResult hitResult
+    );
 
     /**
      * Invoked when the projectile hits a block
@@ -56,11 +67,16 @@ public interface ItemProjectileBehavior {
      * @param owner      The owner of the projectile
      * @param hitResult  The EntityHitResult. Contains the entity hit and position
      * @return The stack that should be dropped. If the stack has a count > 0, it automatically gets dropped at the
-     * position of the impact. If the item should get consumed, decrement the stack from the parameters and return it
-     * here
+     *         position of the impact. If the item should get consumed, decrement the stack from the parameters and
+     *         return it
+     *         here
      */
     ItemStack onBlockHit(
-        ItemProjectileEntity projectile, ItemStack stack, @Nullable Entity owner, BlockHitResult hitResult);
+        ItemProjectileEntity projectile,
+        ItemStack stack,
+        @Nullable Entity owner,
+        BlockHitResult hitResult
+    );
 
     /**
      * Projectile behavior type used for serialization to and from json

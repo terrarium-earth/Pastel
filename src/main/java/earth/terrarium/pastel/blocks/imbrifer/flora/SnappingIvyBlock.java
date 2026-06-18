@@ -41,16 +41,22 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
     public static final MapCodec<SnappingIvyBlock> CODEC = simpleCodec(SnappingIvyBlock::new);
 
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
+
     public static final BooleanProperty SNAPPED = BooleanProperty.create("snapped");
 
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0);
+
     protected static final Vec3 MOVEMENT_SLOWDOWN_VECTOR = new Vec3(0.5, 0.75, 0.5);
 
     public SnappingIvyBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(AXIS, Direction.Axis.X)
-                                                      .setValue(SNAPPED, false));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(AXIS, Direction.Axis.X)
+                    .setValue(SNAPPED, false)
+            );
     }
 
     @Override
@@ -85,13 +91,18 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        world.registryAccess()
-             .registryOrThrow(Registries.CONFIGURED_FEATURE)
-             .get(PastelConfiguredFeatures.SNAPPING_IVY_PATCH)
-             .place(
-                 world, world.getChunkSource()
-                             .getGenerator(), random, pos
-             );
+        world
+            .registryAccess()
+            .registryOrThrow(Registries.CONFIGURED_FEATURE)
+            .get(PastelConfiguredFeatures.SNAPPING_IVY_PATCH)
+            .place(
+                world,
+                world
+                    .getChunkSource()
+                    .getGenerator(),
+                random,
+                pos
+            );
     }
 
     @Override
@@ -101,11 +112,14 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(
-                       AXIS, ctx.getHorizontalDirection()
-                                .getAxis()
-                   );
+        return this
+            .defaultBlockState()
+            .setValue(
+                AXIS,
+                ctx
+                    .getHorizontalDirection()
+                    .getAxis()
+            );
     }
 
     @Override
@@ -127,8 +141,8 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
         if (!snapped && entity instanceof ItemEntity) {
             snap(state, world, pos, true);
         }
-        if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX &&
-            entity.getType() != EntityType.BEE) {
+        if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX && entity
+            .getType() != EntityType.BEE) {
             entity.makeStuckInBlock(state, MOVEMENT_SLOWDOWN_VECTOR);
             if (!snapped) {
                 entity.hurt(PastelDamageTypes.snappingIvy(world), 5.0F);
@@ -143,10 +157,15 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
         BlockState newState = state.setValue(SNAPPED, close);
         world.setBlock(pos, newState, Block.UPDATE_CLIENTS);
         world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(newState));
-        world.playSound(
-            null, pos, close ? SoundEvents.BIG_DRIPLEAF_TILT_DOWN : SoundEvents.BIG_DRIPLEAF_TILT_UP,
-            SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.8F, 1.2F)
-        );
+        world
+            .playSound(
+                null,
+                pos,
+                close ? SoundEvents.BIG_DRIPLEAF_TILT_DOWN : SoundEvents.BIG_DRIPLEAF_TILT_UP,
+                SoundSource.BLOCKS,
+                1.0F,
+                Mth.randomBetween(world.random, 0.8F, 1.2F)
+            );
     }
 
 }

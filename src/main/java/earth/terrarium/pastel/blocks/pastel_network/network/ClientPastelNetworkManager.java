@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLevel, ClientPastelNetwork>, Clearable {
 
     protected static final int MAX_RENDER_DISTANCE_SQUARED = 48 * 48;
@@ -28,9 +30,10 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLe
 
     @Override
     public Optional<? extends ClientPastelNetwork> getNetwork(UUID uuid) {
-        return networks.stream()
-                       .filter(n -> n.uuid.equals(uuid))
-                       .findFirst();
+        return networks
+            .stream()
+            .filter(n -> n.uuid.equals(uuid))
+            .findFirst();
     }
 
     @Override
@@ -45,21 +48,26 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLe
         final BlockPos blockPos = camera.getBlockPosition();
 
         long worldTime = level.getGameTime();
-        for (ClientPastelNetwork network : this.networks) {
-            if (network.getLevel()
-                       .dimensionType() != level.dimensionType()) continue;
+        for (
+            ClientPastelNetwork network : this.networks
+        ) {
+            if (network
+                .getLevel()
+                .dimensionType() != level.dimensionType()) continue;
 
             Graph<BlockPos, DefaultEdge> graph = network.getGraph();
             int color = network.getColor();
             float[] colors = PastelRenderHelper.unpackNormalizedColor(color);
 
-            for (DefaultEdge edge : graph.edgeSet()) {
+            for (
+                DefaultEdge edge : graph.edgeSet()
+            ) {
                 BlockPos source = graph.getEdgeSource(edge);
                 BlockPos target = graph.getEdgeTarget(edge);
 
                 // do not render lines that are far away to save a lot of fps
-                if (blockPos.distSqr(source) > MAX_RENDER_DISTANCE_SQUARED && blockPos.distSqr(target) >
-                                                                              MAX_RENDER_DISTANCE_SQUARED) {
+                if (blockPos.distSqr(source) > MAX_RENDER_DISTANCE_SQUARED && blockPos
+                    .distSqr(target) > MAX_RENDER_DISTANCE_SQUARED) {
                     continue;
                 }
 
@@ -84,7 +92,9 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLe
     @Override
     public void removeNetwork(UUID uuid) {
         ClientPastelNetwork foundNetwork = null;
-        for (ClientPastelNetwork network : this.networks) {
+        for (
+            ClientPastelNetwork network : this.networks
+        ) {
             if (network.uuid.equals(uuid)) {
                 foundNetwork = network;
                 break;

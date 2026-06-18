@@ -13,7 +13,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class LizardFrillsFeatureRenderer<T extends LizardEntity> extends RenderLayer<T, LizardEntityModel<T>> {
 
     public LizardFrillsFeatureRenderer(RenderLayerParent<T, LizardEntityModel<T>> context) {
@@ -22,16 +24,28 @@ public class LizardFrillsFeatureRenderer<T extends LizardEntity> extends RenderL
 
     @Override
     public void render(
-        PoseStack matrices, MultiBufferSource vertexConsumers, int light, T lizard, float limbAngle, float limbDistance,
-        float tickDelta, float animationProgress, float headYaw, float headPitch
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        T lizard,
+        float limbAngle,
+        float limbDistance,
+        float tickDelta,
+        float animationProgress,
+        float headYaw,
+        float headPitch
     ) {
         LizardFrillVariant frills = lizard.getFrills();
         if (frills != LizardFrillVariant.NONE) {
-            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(
-                PastelRenderLayers.GlowInTheDarkRenderLayer.get(frills.getTextureLocation()));
-            var color = lizard.getColor()
-                              .getColorInt();
-            this.getParentModel()
+            VertexConsumer vertexConsumer = vertexConsumers
+                .getBuffer(
+                    PastelRenderLayers.GlowInTheDarkRenderLayer.get(frills.getTextureLocation())
+                );
+            var color = lizard
+                .getColor()
+                .getColorInt();
+            this
+                .getParentModel()
                 .renderToBuffer(matrices, vertexConsumer, 15728640, OverlayTexture.NO_OVERLAY, color);
         }
     }

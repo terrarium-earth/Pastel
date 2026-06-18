@@ -27,10 +27,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 public class HeartboundChestBlockEntity extends PastelChestBlockEntity
-    implements WorldlyContainer, PlayerOwnedWithName, SidedCapabilityProvider {
+    implements
+    WorldlyContainer,
+    PlayerOwnedWithName,
+    SidedCapabilityProvider {
 
     private UUID ownerUUID;
+
     private String ownerName;
+
     private long lastNonOwnerOpenedTick;
 
     public HeartboundChestBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -51,7 +56,10 @@ public class HeartboundChestBlockEntity extends PastelChestBlockEntity
 
     @Override
     protected void onInvOpenOrClose(
-        Level world, BlockPos pos, BlockState state, int oldViewerCount,
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        int oldViewerCount,
         int newViewerCount
     ) {
         super.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
@@ -83,8 +91,13 @@ public class HeartboundChestBlockEntity extends PastelChestBlockEntity
 
     @Override
     protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-        return GenericPastelContainerScreenHandler.createGeneric9x6(
-            syncId, playerInventory, this, ScreenBackgroundVariant.EARLYGAME);
+        return GenericPastelContainerScreenHandler
+            .createGeneric9x6(
+                syncId,
+                playerInventory,
+                this,
+                ScreenBackgroundVariant.EARLYGAME
+            );
     }
 
     @Override
@@ -147,27 +160,36 @@ public class HeartboundChestBlockEntity extends PastelChestBlockEntity
     @Override
     public void setOwner(Player playerEntity) {
         this.ownerUUID = playerEntity.getUUID();
-        this.ownerName = playerEntity.getName()
-                                     .getString();
+        this.ownerName = playerEntity
+            .getName()
+            .getString();
         setChanged();
     }
 
     @Override
     public boolean canOpen(Player player) {
-        boolean isOwner = this.getOwnerUUID()
-                              .equals(player.getUUID());
+        boolean isOwner = this
+            .getOwnerUUID()
+            .equals(player.getUUID());
         PlayerTeam team = player.getTeam(); // todo: replace with our own teams feature when it exists
-        if (!isOwner && team != null) isOwner = team.getPlayers()
-                                                    .contains(this.ownerName);
+        if (!isOwner && team != null) isOwner = team
+            .getPlayers()
+            .contains(this.ownerName);
         if (!isOwner && this.getLevel() != null) {
-            this.lastNonOwnerOpenedTick = this.getLevel()
-                                              .getGameTime();
+            this.lastNonOwnerOpenedTick = this
+                .getLevel()
+                .getGameTime();
             updateRedstone(
-                this.worldPosition, this.getLevel()
-                                        .getBlockState(worldPosition)
+                this.worldPosition,
+                this
+                    .getLevel()
+                    .getBlockState(worldPosition)
             );
-            player.displayClientMessage(
-                Component.translatable("block.pastel.heartbound_chest.owner", this.ownerName), true);
+            player
+                .displayClientMessage(
+                    Component.translatable("block.pastel.heartbound_chest.owner", this.ownerName),
+                    true
+                );
         }
 
         return isOwner;
@@ -175,8 +197,9 @@ public class HeartboundChestBlockEntity extends PastelChestBlockEntity
 
     public boolean wasRecentlyTriedToOpenByNonOwner() {
         if (this.getLevel() != null) {
-            return this.lastNonOwnerOpenedTick > 0 && this.lastNonOwnerOpenedTick + 20 > this.getLevel()
-                                                                                             .getGameTime();
+            return this.lastNonOwnerOpenedTick > 0 && this.lastNonOwnerOpenedTick + 20 > this
+                .getLevel()
+                .getGameTime();
         }
         return false;
     }

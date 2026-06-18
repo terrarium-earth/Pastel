@@ -37,8 +37,11 @@ public interface GravitableItem {
                 }
 
                 if (world.getGameTime() % 20 == 0 && entity instanceof ServerPlayer serverPlayerEntity) {
-                    GravityAdvancementsManager.processAppliedGravityForAdvancements(
-                        serverPlayerEntity, additionalYVelocity);
+                    GravityAdvancementsManager
+                        .processAppliedGravityForAdvancements(
+                            serverPlayerEntity,
+                            additionalYVelocity
+                        );
                 }
 
                 return additionalYVelocity;
@@ -56,8 +59,9 @@ public interface GravitableItem {
             return;
         }
 
-        if (itemEntity.position()
-                      .y() > world.getMaxBuildHeight() + 200) {
+        if (itemEntity
+            .position()
+            .y() > world.getMaxBuildHeight() + 200) {
             itemEntity.discard();
         } else {
             // since an ItemEntity is much lighter than a player, we can x10 the gravity effect

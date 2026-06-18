@@ -51,20 +51,29 @@ import java.util.function.Supplier;
 
 public abstract class LightShardBaseEntity extends Projectile {
 
-    public static final Predicate<LivingEntity> EVERYTHING_TARGET = livingEntity ->
-        !(livingEntity instanceof Player player) || !player.isCreative();
+    public static final Predicate<LivingEntity> EVERYTHING_TARGET = livingEntity -> !(livingEntity instanceof Player player) || !player
+        .isCreative();
+
     public static final Predicate<LivingEntity> MONSTER_TARGET = livingEntity -> livingEntity instanceof Enemy;
 
     public static final IntProvider DEFAULT_COUNT_PROVIDER = UniformInt.of(7, 13);
-    private static final EntityDataAccessor<Integer> MAX_AGE = SynchedEntityData.defineId(
-        LightShardBaseEntity.class, EntityDataSerializers.INT);
+
+    private static final EntityDataAccessor<Integer> MAX_AGE = SynchedEntityData
+        .defineId(
+            LightShardBaseEntity.class,
+            EntityDataSerializers.INT
+        );
 
     public static final int DECELERATION_PHASE_LENGTH = 25;
 
     protected float scaleOffset, damage, detectionRange;
+
     protected Optional<UUID> target = Optional.empty();
+
     protected Optional<LivingEntity> targetEntity = Optional.empty();
+
     protected Vec3 initialVelocity = Vec3.ZERO;
+
     protected Predicate<LivingEntity> targetPredicate;
 
     public LightShardBaseEntity(EntityType<? extends Projectile> entityType, Level world) {
@@ -73,8 +82,12 @@ public abstract class LightShardBaseEntity extends Projectile {
     }
 
     public LightShardBaseEntity(
-        EntityType<? extends Projectile> entityType, Level world, LivingEntity owner, float detectionRange,
-        float damage, float lifeSpanTicks
+        EntityType<? extends Projectile> entityType,
+        Level world,
+        LivingEntity owner,
+        float detectionRange,
+        float damage,
+        float lifeSpanTicks
     ) {
         super(entityType, world);
 
@@ -103,10 +116,11 @@ public abstract class LightShardBaseEntity extends Projectile {
         super.tick();
 
         tickCount++;
-        if (!shouldRenderTrail && this.level()
-                .isClientSide() && tickCount > DECELERATION_PHASE_LENGTH - 1 && getDeltaMovement().length() > 0.075) {
-                shouldRenderTrail = true;
-                noCulling = true;
+        if (!shouldRenderTrail && this
+            .level()
+            .isClientSide() && tickCount > DECELERATION_PHASE_LENGTH - 1 && getDeltaMovement().length() > 0.075) {
+            shouldRenderTrail = true;
+            noCulling = true;
         }
 
         if (tickCount > getMaxAge()) {
@@ -164,14 +178,18 @@ public abstract class LightShardBaseEntity extends Projectile {
     }
 
     protected void findSuitableTargets(ServerLevel serverWorld) {
-        List<LivingEntity> potentialTargets = serverWorld.getEntitiesOfClass(
-            LivingEntity.class, AABB.ofSize(position(), detectionRange, detectionRange, detectionRange),
-            this.targetPredicate
-        );
+        List<LivingEntity> potentialTargets = serverWorld
+            .getEntitiesOfClass(
+                LivingEntity.class,
+                AABB.ofSize(position(), detectionRange, detectionRange, detectionRange),
+                this.targetPredicate
+            );
 
         Collections.shuffle(potentialTargets);
 
-        for (LivingEntity potentialTarget : potentialTargets) {
+        for (
+            LivingEntity potentialTarget : potentialTargets
+        ) {
             if (this.canSee(potentialTarget) && isValidTarget(potentialTarget)) {
                 setTarget(potentialTarget);
                 return;
@@ -183,16 +201,23 @@ public abstract class LightShardBaseEntity extends Projectile {
         if (entity.level() != this.level()) {
             return false;
         } else {
-            if (entity.position()
-                      .distanceTo(this.position()) > 128.0) {
+            if (entity
+                .position()
+                .distanceTo(this.position()) > 128.0) {
                 return false;
             } else {
-                return this.level()
-                           .clip(new ClipContext(
-                               this.position(), entity.position(), ClipContext.Block.COLLIDER,
-                               ClipContext.Fluid.NONE, this
-                           ))
-                           .getType() == net.minecraft.world.phys.HitResult.Type.MISS;
+                return this
+                    .level()
+                    .clip(
+                        new ClipContext(
+                            this.position(),
+                            entity.position(),
+                            ClipContext.Block.COLLIDER,
+                            ClipContext.Fluid.NONE,
+                            this
+                        )
+                    )
+                    .getType() == net.minecraft.world.phys.HitResult.Type.MISS;
             }
         }
     }
@@ -230,8 +255,9 @@ public abstract class LightShardBaseEntity extends Projectile {
 
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
-        if (!this.level()
-                 .isClientSide()) {
+        if (!this
+            .level()
+            .isClientSide()) {
             var hitEntity = entityHitResult.getEntity();
 
             if (!(hitEntity instanceof LivingEntity livingEntity)) {
@@ -247,22 +273,30 @@ public abstract class LightShardBaseEntity extends Projectile {
 
     protected void onHitEntity(LivingEntity attacked) {
         float finalDamage = damage * (random.nextFloat() + 0.5F) * (1 - getVanishingProgress(tickCount));
-        attacked.hurt(
-            PastelDamageTypes.irradiance(this.level(), getOwner() instanceof LivingEntity owner ? owner : null),
-            finalDamage
-        );
+        attacked
+            .hurt(
+                PastelDamageTypes.irradiance(this.level(), getOwner() instanceof LivingEntity owner ? owner : null),
+                finalDamage
+            );
 
         attacked.playSound(PastelSounds.SOFT_HUM, 1.334F, 0.9F + random.nextFloat());
-        attacked.playSound(
-            PastelSounds.CRYSTAL_STRIKE, random.nextFloat() * 0.4F + 0.2F, 0.8F + random.nextFloat());
+        attacked
+            .playSound(
+                PastelSounds.CRYSTAL_STRIKE,
+                random.nextFloat() * 0.4F + 0.2F,
+                0.8F + random.nextFloat()
+            );
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void onClientRemoval() {
         var render = getTrail();
         if (render != null) {
-            TrailLeftoverHandler.addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
+            TrailLeftoverHandler
+                .addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
             shouldRenderTrail = false;
         }
     }
@@ -272,19 +306,33 @@ public abstract class LightShardBaseEntity extends Projectile {
         super.remove(reason);
         var bound = random.nextInt(11);
         if (reason.shouldDestroy()) {
-            for (int i = 0; i < bound + 5; i++) {
+            for (
+                int i = 0;
+                i < bound + 5;
+                i++
+            ) {
                 if (random.nextFloat() < 0.665) {
-                    this.level()
+                    this
+                        .level()
                         .addAlwaysVisibleParticle(
-                            ColoredSparkleRisingParticleEffect.WHITE, true, getX(), getY(), getZ(),
+                            ColoredSparkleRisingParticleEffect.WHITE,
+                            true,
+                            getX(),
+                            getY(),
+                            getZ(),
                             random.nextFloat() * 0.25F - 0.125F,
                             random.nextFloat() * 0.25F - 0.125F,
                             random.nextFloat() * 0.25F - 0.125F
                         );
                 } else {
-                    this.level()
+                    this
+                        .level()
                         .addAlwaysVisibleParticle(
-                            PastelParticleTypes.SHOOTING_STAR, true, getX(), getY(), getZ(),
+                            PastelParticleTypes.SHOOTING_STAR,
+                            true,
+                            getX(),
+                            getY(),
+                            getZ(),
                             random.nextFloat() * 0.5F - 0.25F,
                             random.nextFloat() * 0.5F - 0.25F,
                             random.nextFloat() * 0.5F - 0.25F
@@ -295,27 +343,45 @@ public abstract class LightShardBaseEntity extends Projectile {
     }
 
     public static void summonBarrageInternal(
-        Level world, @Nullable LivingEntity user, Supplier<LightShardBaseEntity> supplier,
-        @Nullable LivingEntity target, Predicate<LivingEntity> targetPredicate, Vec3 pos, IntProvider count
+        Level world,
+        @Nullable LivingEntity user,
+        Supplier<LightShardBaseEntity> supplier,
+        @Nullable LivingEntity target,
+        Predicate<LivingEntity> targetPredicate,
+        Vec3 pos,
+        IntProvider count
     ) {
         var random = world.getRandom();
         var projectiles = count.sample(random);
 
-        world.playSound(
-            null, BlockPos.containing(pos), PastelSounds.GLASS_SHIMMER, SoundSource.AMBIENT, 1F,
-            0.9F + random.nextFloat() * 0.5F
-        );
+        world
+            .playSound(
+                null,
+                BlockPos.containing(pos),
+                PastelSounds.GLASS_SHIMMER,
+                SoundSource.AMBIENT,
+                1F,
+                0.9F + random.nextFloat() * 0.5F
+            );
 
-        for (int i = 0; i < projectiles; i++) {
+        for (
+            int i = 0;
+            i < projectiles;
+            i++
+        ) {
             // spawn the shard
             LightShardBaseEntity shard = supplier.get();
             shard.setPos(pos);
             var velocityY = 0.0;
             if (user != null && user.onGround()) {
                 velocityY = random.nextFloat() * 0.75;
-                shard.setInitialVelocity(
-                    new Vec3(random.nextFloat() * 2 - 1, velocityY, random.nextFloat() * 2 - 1).add(
-                        user.getDeltaMovement()));
+                shard
+                    .setInitialVelocity(
+                        new Vec3(random.nextFloat() * 2 - 1, velocityY, random.nextFloat() * 2 - 1)
+                            .add(
+                                user.getDeltaMovement()
+                            )
+                    );
             } else {
                 velocityY = random.nextFloat() - 0.5;
                 shard.setInitialVelocity(new Vec3(random.nextFloat() * 2 - 1, velocityY, random.nextFloat() * 2 - 1));
@@ -329,13 +395,21 @@ public abstract class LightShardBaseEntity extends Projectile {
             world.addFreshEntity(shard);
 
             // spawn particles
-            for (int j = 0; j < 3; j++) {
-                world.addParticle(
-                    PastelParticleTypes.SHOOTING_STAR, pos.x, pos.y, pos.z,
-                    random.nextFloat() * 0.8F - 0.4F,
-                    velocityY * 2,
-                    random.nextFloat() * 0.8F - 0.4F
-                );
+            for (
+                int j = 0;
+                j < 3;
+                j++
+            ) {
+                world
+                    .addParticle(
+                        PastelParticleTypes.SHOOTING_STAR,
+                        pos.x,
+                        pos.y,
+                        pos.z,
+                        random.nextFloat() * 0.8F - 0.4F,
+                        velocityY * 2,
+                        random.nextFloat() * 0.8F - 0.4F
+                    );
             }
         }
     }
@@ -358,7 +432,9 @@ public abstract class LightShardBaseEntity extends Projectile {
     }
 
     private boolean shouldRenderTrail;
+
     private TrailRender trail;
+
     public ColorGradient getGradient() {
         return new ColorGradient(
             new Color(0xFFFFFF),
@@ -371,8 +447,13 @@ public abstract class LightShardBaseEntity extends Projectile {
             return null;
         }
         if (trail == null) {
-            trail = new TrailRender(position(), 20, 20, 0.125f, PastelCommon.locate("textures/misc/trail/trail.png"),
-                                    RenderTypeHandler::transparent
+            trail = new TrailRender(
+                position(),
+                20,
+                20,
+                0.125f,
+                PastelCommon.locate("textures/misc/trail/trail.png"),
+                RenderTypeHandler::transparent
             ).setShrink(true).startTicking();
         }
         return trail;

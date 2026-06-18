@@ -37,7 +37,13 @@ public class GlassArrowItem extends ArrowItem {
     @Override
     public AbstractArrow asProjectile(Level world, Position pos, ItemStack stack, Direction direction) {
         GlassArrowEntity arrowEntity = new GlassArrowEntity(
-            world, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1), null);
+            world,
+            pos.x(),
+            pos.y(),
+            pos.z(),
+            stack.copyWithCount(1),
+            null
+        );
         arrowEntity.pickup = AbstractArrow.Pickup.DISALLOWED;
         arrowEntity.setVariant(variant);
         return arrowEntity;
@@ -47,8 +53,12 @@ public class GlassArrowItem extends ArrowItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         if (variant != GlassArrowVariant.MALACHITE) {
-            tooltip.add(Component.translatable(getDescriptionId() + ".tooltip")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable(getDescriptionId() + ".tooltip")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         }
     }
 

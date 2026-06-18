@@ -19,14 +19,27 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(BlockBehaviour.BlockStateBase.class)
+@Mixin(
+    BlockBehaviour.BlockStateBase.class
+)
 public abstract class AbstractBlockStateMixin {
 
-    @ModifyVariable(method = "spawnAfterBreak", at = @At("HEAD"), ordinal = 0, argsOnly = true)
+    @ModifyVariable(
+        method = "spawnAfterBreak", at = @At(
+            "HEAD"
+        ), ordinal = 0, argsOnly = true
+    )
     public boolean preventXPDropsWhenUsingResonance(
-        boolean dropExperience, ServerLevel world, BlockPos pos, ItemStack stack) {
-        if (ResonanceProcessor.preventNextXPDrop && EnchantmentHelper.hasTag(
-            stack, PastelEnchantmentTags.RESONANT_BLOCK_DROPS)) {
+        boolean dropExperience,
+        ServerLevel world,
+        BlockPos pos,
+        ItemStack stack
+    ) {
+        if (ResonanceProcessor.preventNextXPDrop && EnchantmentHelper
+            .hasTag(
+                stack,
+                PastelEnchantmentTags.RESONANT_BLOCK_DROPS
+            )) {
             ResonanceProcessor.preventNextXPDrop = false;
             return false;
         }
@@ -34,26 +47,37 @@ public abstract class AbstractBlockStateMixin {
     }
 
     // https://github.com/apace100/water-walking-fix
-    @ModifyReturnValue(method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", at = @At(
-        "RETURN"))
-    public VoxelShape getFluidloggedCollisionShape(VoxelShape original, BlockGetter level, BlockPos pos, CollisionContext context) {
+    @ModifyReturnValue(
+        method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", at = @At(
+            "RETURN"
+        )
+    )
+    public VoxelShape getFluidloggedCollisionShape(
+        VoxelShape original,
+        BlockGetter level,
+        BlockPos pos,
+        CollisionContext context
+    ) {
         FluidState fluidState = level.getFluidState(pos);
         int fluidLevel = fluidState.getAmount();
         if (fluidLevel == 0) return original;
         VoxelShape fluidShape = FLUID_LEVEL_SHAPES[fluidLevel];
 
         if (
-            context.isAbove(fluidShape, pos, true) &&
-            context.canStandOnFluid(level.getFluidState(pos.above()), fluidState)
+            context.isAbove(fluidShape, pos, true) && context
+                .canStandOnFluid(level.getFluidState(pos.above()), fluidState)
         ) return Shapes.or(original, fluidShape);
         return original;
     }
 
-    @Unique
-    private static final VoxelShape[] FLUID_LEVEL_SHAPES;
+    @Unique private static final VoxelShape[] FLUID_LEVEL_SHAPES;
     static {
         FLUID_LEVEL_SHAPES = new VoxelShape[16];
-        for (int i = 0; i <= 8; i++) {
+        for (
+            int i = 0;
+            i <= 8;
+            i++
+        ) {
             FLUID_LEVEL_SHAPES[i] = Block.box(0.0, 0.0, 0.0, 16.0, i, 16.0);
         }
     }

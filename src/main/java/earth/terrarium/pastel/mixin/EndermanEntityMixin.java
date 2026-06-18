@@ -16,18 +16,23 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(EnderMan.class)
+@Mixin(
+    EnderMan.class
+)
 public abstract class EndermanEntityMixin {
 
-    @Unique
-    private final BlockState carriedBlockState = PastelBlocks.RADIATING_ENDER.get()
-                                                                             .defaultBlockState();
+    @Unique private final BlockState carriedBlockState = PastelBlocks.RADIATING_ENDER
+        .get()
+        .defaultBlockState();
 
     @Shadow
-    @Nullable
-    public abstract BlockState getCarriedBlock();
+    @Nullable public abstract BlockState getCarriedBlock();
 
-    @Inject(at = @At("TAIL"), method = "<init>")
+    @Inject(
+        at = @At(
+            "TAIL"
+        ), method = "<init>"
+    )
     private void init(CallbackInfo info) {
         EnderMan endermanEntity = ((EnderMan) (Object) this);
         Level world = endermanEntity.getCommandSenderWorld();
@@ -35,8 +40,9 @@ public abstract class EndermanEntityMixin {
             RandomSource random = world.random;
 
             float chance;
-            if (world.dimension()
-                     .equals(Level.END)) {
+            if (world
+                .dimension()
+                .equals(Level.END)) {
                 chance = PastelCommon.CONFIG.EndermanHoldingEnderTreasureInEndChance;
             } else {
                 chance = PastelCommon.CONFIG.EndermanHoldingEnderTreasureChance;
@@ -50,10 +56,15 @@ public abstract class EndermanEntityMixin {
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "requiresCustomPersistence", cancellable = true)
+    @Inject(
+        at = @At(
+            "RETURN"
+        ), method = "requiresCustomPersistence", cancellable = true
+    )
     public void cannotDespawn(CallbackInfoReturnable<Boolean> cir) {
-        if (cir.getReturnValue() && this.getCarriedBlock() != null && this.getCarriedBlock()
-                                                                          .is(PastelBlocks.RADIATING_ENDER.get())) {
+        if (cir.getReturnValue() && this.getCarriedBlock() != null && this
+            .getCarriedBlock()
+            .is(PastelBlocks.RADIATING_ENDER.get())) {
             cir.setReturnValue(false);
         }
     }

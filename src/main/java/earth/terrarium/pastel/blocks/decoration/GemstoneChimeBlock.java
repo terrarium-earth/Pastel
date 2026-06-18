@@ -21,12 +21,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class GemstoneChimeBlock extends Block {
 
-    protected static final VoxelShape SHAPE = Shapes.or(
-        Block.box(5.0D, 3.0D, 5.0D, 11.0D, 13.0D, 11.0D),
-        Block.box(7.0D, 13.0D, 7.0D, 9.0D, 16.0D, 9.0D)
-    );
+    protected static final VoxelShape SHAPE = Shapes
+        .or(
+            Block.box(5.0D, 3.0D, 5.0D, 11.0D, 13.0D, 11.0D),
+            Block.box(7.0D, 13.0D, 7.0D, 9.0D, 16.0D, 9.0D)
+        );
 
     protected final SoundEvent soundEvent;
+
     protected final ParticleOptions particleEffect;
 
     public GemstoneChimeBlock(Properties settings, SoundEvent soundEvent, ParticleOptions particleEffect) {
@@ -45,19 +47,29 @@ public class GemstoneChimeBlock extends Block {
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(state, world, pos, random);
 
-        world.addParticle(
-            particleEffect,
-            pos.getX() + 0.25 + random.nextDouble() * 0.5,
-            pos.getY() + 0.15 + random.nextDouble() * 0.5,
-            pos.getZ() + 0.25 + random.nextDouble() * 0.5,
-            0, -0.02 - random.nextDouble() * 0.025, 0
-        );
+        world
+            .addParticle(
+                particleEffect,
+                pos.getX() + 0.25 + random.nextDouble() * 0.5,
+                pos.getY() + 0.15 + random.nextDouble() * 0.5,
+                pos.getZ() + 0.25 + random.nextDouble() * 0.5,
+                0,
+                -0.02 - random.nextDouble() * 0.025,
+                0
+            );
 
         if (random.nextFloat() < 0.2) {
-            world.playLocalSound(
-                pos.getX(), pos.getY(), pos.getZ(), soundEvent, SoundSource.BLOCKS, 0.7F + random.nextFloat() * 0.4F,
-                0.75F + random.nextFloat() * 0.5F, true
-            );
+            world
+                .playLocalSound(
+                    pos.getX(),
+                    pos.getY(),
+                    pos.getZ(),
+                    soundEvent,
+                    SoundSource.BLOCKS,
+                    0.7F + random.nextFloat() * 0.4F,
+                    0.75F + random.nextFloat() * 0.5F,
+                    true
+                );
         }
     }
 
@@ -74,14 +86,23 @@ public class GemstoneChimeBlock extends Block {
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
-        return direction == Direction.UP && !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState()
-                                                                          : super.updateShape(
-                                                                              state, direction, neighborState, world,
-                                                                              pos, neighborPos
-                                                                          );
+        return direction == Direction.UP && !state.canSurvive(world, pos)
+            ? Blocks.AIR.defaultBlockState()
+            : super.updateShape(
+                state,
+                direction,
+                neighborState,
+                world,
+                pos,
+                neighborPos
+            );
     }
 
     @Override

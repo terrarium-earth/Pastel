@@ -10,10 +10,13 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class HintRevelationSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final Player player;
+
     private boolean done;
 
     public HintRevelationSoundInstance(Player player) {
@@ -45,8 +48,9 @@ public class HintRevelationSoundInstance extends AbstractSoundInstance implement
             this.z = player.getZ();
         }
 
-        if (player == null || !player.getMainHandItem()
-                                     .is(PastelItems.GUIDEBOOK.get())) {
+        if (player == null || !player
+            .getMainHandItem()
+            .is(PastelItems.GUIDEBOOK.get())) {
             this.setDone();
         }
     }

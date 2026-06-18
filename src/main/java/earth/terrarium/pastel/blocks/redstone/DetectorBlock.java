@@ -24,7 +24,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public abstract class DetectorBlock extends Block {
 
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
+
     public static final BooleanProperty INVERTED = BlockStateProperties.INVERTED;
+
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
 
     protected static final double DETECTION_DIAMETER = 20.0D;
@@ -36,7 +38,12 @@ public abstract class DetectorBlock extends Block {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (player.mayBuild()) {
             if (world.isClientSide) {
                 return InteractionResult.SUCCESS;

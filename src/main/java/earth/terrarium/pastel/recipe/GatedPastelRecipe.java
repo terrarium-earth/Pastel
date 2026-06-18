@@ -11,11 +11,16 @@ import java.util.Optional;
 public abstract class GatedPastelRecipe<C extends RecipeInput> implements GatedRecipe<C> {
 
     public final String group;
+
     public final boolean secret;
+
     public final Optional<ResourceLocation> requiredAdvancementIdentifier;
 
     protected GatedPastelRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier) {
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier
+    ) {
         this.group = group;
         this.secret = secret;
         this.requiredAdvancementIdentifier = requiredAdvancementIdentifier;

@@ -9,7 +9,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.Map;
 
-@Mixin(MapItemSavedData.class)
+@Mixin(
+    MapItemSavedData.class
+)
 public interface MapStateAccessor {
 
     @Accessor

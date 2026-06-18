@@ -42,43 +42,60 @@ import java.util.UUID;
 /**
  * Because not every niche thing can have its own component
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings(
+    "unchecked"
+)
 public class MiscPlayerData {
 
-    public static final Codec<MiscPlayerData> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                          Codec.INT.fieldOf(
-                                                                                              "ticksBeforeSleep")
-                                                                                                   .forGetter(m -> m.ticksBeforeSleep),
-                                                                                          Codec.INT.fieldOf(
-                                                                                              "sleepingWindow")
-                                                                                                   .forGetter(m -> m.sleepingWindow),
-                                                                                          Codec.INT.fieldOf(
-                                                                                              "sleepInvincibility")
-                                                                                                   .forGetter(m -> m.sleepInvincibility),
-                                                                                          BuiltInRegistries.ITEM.byNameCodec()
-                                                                                                                .optionalFieldOf("sleepConsumable")
-                                                                                                                .forGetter(m -> (Optional<Item>) (Object) m.sleepConsumable)
-                                                                                      )
-                                                                                      .apply(
-                                                                                          i,
-                                                                                          MiscPlayerData::ofCodec
-                                                                                      ));
+    public static final Codec<MiscPlayerData> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    Codec.INT
+                        .fieldOf(
+                            "ticksBeforeSleep"
+                        )
+                        .forGetter(m -> m.ticksBeforeSleep),
+                    Codec.INT
+                        .fieldOf(
+                            "sleepingWindow"
+                        )
+                        .forGetter(m -> m.sleepingWindow),
+                    Codec.INT
+                        .fieldOf(
+                            "sleepInvincibility"
+                        )
+                        .forGetter(m -> m.sleepInvincibility),
+                    BuiltInRegistries.ITEM
+                        .byNameCodec()
+                        .optionalFieldOf("sleepConsumable")
+                        .forGetter(m -> (Optional<Item>) (Object) m.sleepConsumable)
+                )
+                .apply(
+                    i,
+                    MiscPlayerData::ofCodec
+                )
+        );
 
-    public static final AttachmentType<MiscPlayerData> ATTACHMENT =
-        AttachmentType.builder((holder) -> new MiscPlayerData((Player) holder))
-                      .serialize(CODEC)
-                      .build();
+    public static final AttachmentType<MiscPlayerData> ATTACHMENT = AttachmentType
+        .builder((holder) -> new MiscPlayerData((Player) holder))
+        .serialize(CODEC)
+        .build();
 
     private Player player;
 
     // Sleep
     private int ticksBeforeSleep = -1, sleepingWindow = -1, sleepInvincibility;
+
     private double lastSyncedSleepPotency = -2;
+
     private Optional<SleepAlteringItem> sleepConsumable = Optional.empty();
 
     // Sword mechanics
     private boolean isLunging, wasLunging, bHopWindow, perfectCounter;
+
     private Item lungeItem;
+
     private int parryTicks;
 
     public MiscPlayerData(@NotNull Player player) {
@@ -89,7 +106,11 @@ public class MiscPlayerData {
     }
 
     public static MiscPlayerData ofCodec(
-        int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable) {
+        int ticksBeforeSleep,
+        int sleepingWindow,
+        int sleepInvincibility,
+        Optional<Item> sleepConsumable
+    ) {
         var data = new MiscPlayerData();
         data.ticksBeforeSleep = ticksBeforeSleep;
         data.sleepingWindow = sleepingWindow;
@@ -100,10 +121,16 @@ public class MiscPlayerData {
     }
 
     private TrailRender lungeTrail;
+
     public TrailRender getLungeTrail() {
         if (lungeTrail == null) {
-            lungeTrail = new TrailRender(player.getBoundingBox().getCenter(), 10, 10, 0.2f, PastelCommon.locate("textures/misc/trail/trail.png"),
-                                    RenderTypeHandler::transparent
+            lungeTrail = new TrailRender(
+                player.getBoundingBox().getCenter(),
+                10,
+                10,
+                0.2f,
+                PastelCommon.locate("textures/misc/trail/trail.png"),
+                RenderTypeHandler::transparent
             ).setShrink(true);
         }
         return lungeTrail;
@@ -113,8 +140,9 @@ public class MiscPlayerData {
         tickSleep();
         tickSwordMechanics();
 
-        if (!player.level()
-                   .isClientSide()) {
+        if (!player
+            .level()
+            .isClientSide()) {
             var fortitude = player.getAttributeValue(PastelEntityAttributes.MENTAL_PRESENCE);
             if (lastSyncedSleepPotency != fortitude) {
                 lastSyncedSleepPotency = fortitude;
@@ -123,7 +151,9 @@ public class MiscPlayerData {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void renderAdditional(RenderLevelStageEvent event) {
         PoseStack poseStack = event.getPoseStack();
         float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
@@ -134,7 +164,12 @@ public class MiscPlayerData {
         if (lungeGradient != null) {
             TrailRender lungeTrail = getLungeTrail();
             poseStack.pushPose();
-            poseStack.translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
+            poseStack
+                .translate(
+                    -event.getCamera().getPosition().x,
+                    -event.getCamera().getPosition().y,
+                    -event.getCamera().getPosition().z
+                );
             double d0 = Mth.lerp(partialTick, player.xOld, player.getX());
             double d1 = Mth.lerp(partialTick, player.yOld, player.getY());
             double d2 = Mth.lerp(partialTick, player.zOld, player.getZ());
@@ -258,8 +293,9 @@ public class MiscPlayerData {
     }
 
     private void failSleep() {
-        if (!player.level()
-                   .isClientSide()) {
+        if (!player
+            .level()
+            .isClientSide()) {
             player.stopSleeping();
             resetSleepingState(true);
         }
@@ -306,12 +342,19 @@ public class MiscPlayerData {
     }
 
     public void sync() {
-        AttachmentUtil.syncToTracking(
-            new Payload(
-                player.getUUID(), ticksBeforeSleep, sleepingWindow, sleepInvincibility,
-                (Optional<Item>) (Object) sleepConsumable, new LungeData(isLunging, Optional.ofNullable(lungeItem))
-            ), player.level(), player.blockPosition()
-        );
+        AttachmentUtil
+            .syncToTracking(
+                new Payload(
+                    player.getUUID(),
+                    ticksBeforeSleep,
+                    sleepingWindow,
+                    sleepInvincibility,
+                    (Optional<Item>) (Object) sleepConsumable,
+                    new LungeData(isLunging, Optional.ofNullable(lungeItem))
+                ),
+                player.level(),
+                player.blockPosition()
+            );
     }
 
     public static MiscPlayerData get(@NotNull Player player) {
@@ -331,25 +374,38 @@ public class MiscPlayerData {
     }
 
     public record Payload(
-        UUID id, int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable, LungeData lungeData
+        UUID id,
+        int ticksBeforeSleep,
+        int sleepingWindow,
+        int sleepInvincibility,
+        Optional<Item> sleepConsumable,
+        LungeData lungeData
     ) implements CustomPacketPayload {
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
-            UUIDUtil.STREAM_CODEC, Payload::id,
-            ByteBufCodecs.INT, Payload::ticksBeforeSleep,
-            ByteBufCodecs.INT, Payload::sleepingWindow,
-            ByteBufCodecs.INT, Payload::sleepInvincibility,
-            ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)), Payload::sleepConsumable,
-            LungeData.CODEC, Payload::lungeData,
-            Payload::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec
+            .composite(
+                UUIDUtil.STREAM_CODEC,
+                Payload::id,
+                ByteBufCodecs.INT,
+                Payload::ticksBeforeSleep,
+                ByteBufCodecs.INT,
+                Payload::sleepingWindow,
+                ByteBufCodecs.INT,
+                Payload::sleepInvincibility,
+                ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)),
+                Payload::sleepConsumable,
+                LungeData.CODEC,
+                Payload::lungeData,
+                Payload::new
+            );
 
         public static final Type<Payload> TYPE = AttachmentUtil.create("player_misc");
 
         public static void execute(Payload payload, IPayloadContext context) {
-            var player = context.player()
-                                .level()
-                                .getPlayerByUUID(payload.id);
+            var player = context
+                .player()
+                .level()
+                .getPlayerByUUID(payload.id);
 
             if (player == null)
                 return;
@@ -368,11 +424,15 @@ public class MiscPlayerData {
             return TYPE;
         }
     }
+
     public record LungeData(boolean isLunging, Optional<Item> lungeItem) {
-        public static final StreamCodec<RegistryFriendlyByteBuf, LungeData> CODEC = StreamCodec.composite(
-            ByteBufCodecs.BOOL, LungeData::isLunging,
-            ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)), LungeData::lungeItem,
-            LungeData::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, LungeData> CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.BOOL,
+                LungeData::isLunging,
+                ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)),
+                LungeData::lungeItem,
+                LungeData::new
+            );
     }
 }

@@ -22,23 +22,30 @@ import java.util.Optional;
 
 public class InkColor {
 
-    public static final Codec<InkColor> CODEC = CodecHelper.SPECTRUM_DEFAULTED_IDENTIFIER.comapFlatMap(
-        id -> ofId(id).map(DataResult::success)
-                      .orElse(DataResult.error(() -> "Not a valid ink color: " + id)),
-        InkColor::getID
-    );
+    public static final Codec<InkColor> CODEC = CodecHelper.SPECTRUM_DEFAULTED_IDENTIFIER
+        .comapFlatMap(
+            id -> ofId(id)
+                .map(DataResult::success)
+                .orElse(DataResult.error(() -> "Not a valid ink color: " + id)),
+            InkColor::getID
+        );
 
-    public static final StreamCodec<ByteBuf, InkColor> STREAM_CODEC = ResourceLocation.STREAM_CODEC.map(
-        id -> ofId(id).orElseThrow(),
-        InkColor::getID
-    );
+    public static final StreamCodec<ByteBuf, InkColor> STREAM_CODEC = ResourceLocation.STREAM_CODEC
+        .map(
+            id -> ofId(id).orElseThrow(),
+            InkColor::getID
+        );
 
     protected static final Map<DyeColor, InkColor> DYE_TO_COLOR = new HashMap<>();
 
     protected final Optional<DyeColor> dyeColor;
+
     protected final int colorInt;
+
     protected final Vector3f colorVec;
+
     protected final int textColor;
+
     protected final Vector3f textColorVec;
 
     protected final ResourceLocation requiredAdvancement;
@@ -80,8 +87,9 @@ public class InkColor {
 
     @Override
     public String toString() {
-        return this.getID()
-                   .toString();
+        return this
+            .getID()
+            .toString();
     }
 
     @Override
@@ -99,8 +107,12 @@ public class InkColor {
     }
 
     public MutableComponent getName() {
-        return Component.translatable(this.getID()
-                                          .toLanguageKey("ink", "name"));
+        return Component
+            .translatable(
+                this
+                    .getID()
+                    .toLanguageKey("ink", "name")
+            );
     }
 
     public MutableComponent getColoredName() {
@@ -108,8 +120,9 @@ public class InkColor {
     }
 
     public MutableComponent getColoredInkName() {
-        return Component.translatable("ink.suffix", getName())
-                        .setStyle(Style.EMPTY.withColor(textColor));
+        return Component
+            .translatable("ink.suffix", getName())
+            .setStyle(Style.EMPTY.withColor(textColor));
     }
 
     public Vector3f getColorVec() {
@@ -137,8 +150,9 @@ public class InkColor {
     }
 
     public boolean isIn(TagKey<InkColor> tag) {
-        return PastelRegistries.INK_COLOR.wrapAsHolder(this)
-                                         .is(tag);
+        return PastelRegistries.INK_COLOR
+            .wrapAsHolder(this)
+            .is(tag);
     }
 
 }

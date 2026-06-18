@@ -13,14 +13,18 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 
 public class TranslucentSplashParticle extends WaterDropParticle {
 
     protected TranslucentSplashParticle(ClientLevel clientWorld, double d, double e, double f) {
         super(clientWorld, d, e, f);
-        var waterColor = ColorHelper.colorIntToVec(
-            BiomeColors.getAverageWaterColor(level, BlockPos.containing(x, y, z)));
+        var waterColor = ColorHelper
+            .colorIntToVec(
+                BiomeColors.getAverageWaterColor(level, BlockPos.containing(x, y, z))
+            );
         rCol = waterColor.x;
         gCol = waterColor.y;
         bCol = waterColor.z;
@@ -32,7 +36,9 @@ public class TranslucentSplashParticle extends WaterDropParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -41,8 +47,14 @@ public class TranslucentSplashParticle extends WaterDropParticle {
         }
 
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             WaterDropParticle rainSplashParticle = new TranslucentSplashParticle(clientWorld, d, e, f);
             rainSplashParticle.pickSprite(this.spriteProvider);

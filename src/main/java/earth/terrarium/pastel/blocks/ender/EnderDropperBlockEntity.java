@@ -28,6 +28,7 @@ import java.util.UUID;
 public class EnderDropperBlockEntity extends DispenserBlockEntity implements PlayerOwnedWithName {
 
     private UUID ownerUUID;
+
     private String ownerName;
 
     public EnderDropperBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -46,18 +47,22 @@ public class EnderDropperBlockEntity extends DispenserBlockEntity implements Pla
     @Override
     public int getRandomSlot(RandomSource random) {
         return getInventory().map(inventory -> {
-                                 int selectedIndex = -1;
-                                 int chance = 1;
+            int selectedIndex = -1;
+            int chance = 1;
 
-                                 for (int i = 0; i < inventory.getContainerSize(); i++) {
-                                     if (!(inventory.getItem(i)).isEmpty() && random.nextInt(chance++) == 0) {
-                                         selectedIndex = i;
-                                     }
-                                 }
+            for (
+                int i = 0;
+                i < inventory.getContainerSize();
+                i++
+            ) {
+                if (!(inventory.getItem(i)).isEmpty() && random.nextInt(chance++) == 0) {
+                    selectedIndex = i;
+                }
+            }
 
-                                 return selectedIndex;
-                             })
-                             .orElse(-1);
+            return selectedIndex;
+        })
+            .orElse(-1);
     }
 
     @Override
@@ -65,7 +70,11 @@ public class EnderDropperBlockEntity extends DispenserBlockEntity implements Pla
         getInventory().ifPresent(inventory -> {
             int i = this.getMaxStackSize(stack);
 
-            for (int j = 0; j < inventory.getContainerSize(); j++) {
+            for (
+                int j = 0;
+                j < inventory.getContainerSize();
+                j++
+            ) {
                 ItemStack itemStack = inventory.getItem(j);
                 if (itemStack.isEmpty() || ItemStack.isSameItemSameComponents(stack, itemStack)) {
                     int k = Math.min(stack.getCount(), i - itemStack.getCount());
@@ -89,8 +98,9 @@ public class EnderDropperBlockEntity extends DispenserBlockEntity implements Pla
 
     @Override
     public ItemStack getItem(int slot) {
-        return getInventory().map(i -> i.getItem(slot))
-                             .orElse(ItemStack.EMPTY);
+        return getInventory()
+            .map(i -> i.getItem(slot))
+            .orElse(ItemStack.EMPTY);
     }
 
     @Override
@@ -100,20 +110,23 @@ public class EnderDropperBlockEntity extends DispenserBlockEntity implements Pla
 
     @Override
     public ItemStack removeItemNoUpdate(int slot) {
-        return getInventory().map(i -> i.removeItemNoUpdate(slot))
-                             .orElse(ItemStack.EMPTY);
+        return getInventory()
+            .map(i -> i.removeItemNoUpdate(slot))
+            .orElse(ItemStack.EMPTY);
     }
 
     @Override
     public ItemStack removeItem(int slot, int amount) {
-        return getInventory().map(i -> i.removeItem(slot, amount))
-                             .orElse(ItemStack.EMPTY);
+        return getInventory()
+            .map(i -> i.removeItem(slot, amount))
+            .orElse(ItemStack.EMPTY);
     }
 
     @Override
     public boolean isEmpty() {
-        return getInventory().map(SimpleContainer::isEmpty)
-                             .orElse(true);
+        return getInventory()
+            .map(SimpleContainer::isEmpty)
+            .orElse(true);
     }
 
     @Override
@@ -141,8 +154,9 @@ public class EnderDropperBlockEntity extends DispenserBlockEntity implements Pla
     @Override
     public void setOwner(Player playerEntity) {
         this.ownerUUID = playerEntity.getUUID();
-        this.ownerName = playerEntity.getName()
-                                     .getString();
+        this.ownerName = playerEntity
+            .getName()
+            .getString();
         setChanged();
     }
 
@@ -162,32 +176,36 @@ public class EnderDropperBlockEntity extends DispenserBlockEntity implements Pla
 
     @Override
     protected NonNullList<ItemStack> getItems() {
-        return getInventory().map(SimpleContainer::getItems)
-                             .orElse(NonNullList.create());
+        return getInventory()
+            .map(SimpleContainer::getItems)
+            .orElse(NonNullList.create());
     }
 
     @Override
     protected void setItems(NonNullList<ItemStack> inventory) {
         getInventory().ifPresent(inv -> {
-            for (int i = 0; i < inventory.size(); i++)
+            for (
+                int i = 0;
+                i < inventory.size();
+                i++
+            )
                 inv.setItem(i, inventory.get(i));
         });
     }
 
     @Override
     public int getContainerSize() {
-        return getInventory().map(SimpleContainer::getContainerSize)
-                             .orElse(0);
+        return getInventory()
+            .map(SimpleContainer::getContainerSize)
+            .orElse(0);
     }
 
-    @Nullable
-    public ResourceKey<LootTable> getLootTable() {
+    @Nullable public ResourceKey<LootTable> getLootTable() {
         return null;
     }
 
     @Override
-    @Nullable
-    public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
+    @Nullable public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
         return null;
     }
 

@@ -9,7 +9,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.Stack;
 
-@Mixin(LivingEntity.class)
+@Mixin(
+    LivingEntity.class
+)
 public interface LivingEntityAccessor {
 
     @Accessor

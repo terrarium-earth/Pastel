@@ -20,8 +20,11 @@ import java.util.function.Function;
 public class FilteringScreenHandler extends AbstractContainerMenu {
 
     protected final Level world;
+
     protected FilterConfigurable.ExtendedData filterConfigurable;
+
     protected final Container filterInventory;
+
     protected final int rows, slotsPerRow, drawnSlots;
 
     public FilteringScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
@@ -30,21 +33,31 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
 
     public FilteringScreenHandler(int syncId, Inventory playerInventory, FilterConfigurable.ExtendedData data) {
         this(
-            PastelScreenHandlerTypes.FILTERING, syncId, playerInventory,
+            PastelScreenHandlerTypes.FILTERING,
+            syncId,
+            playerInventory,
             (handler) -> new Tuple<>(
-                FilterConfigurable.getFilterInventoryFromItemsHandler(
-                    syncId, playerInventory, data.filterItems(), handler), new Integer[]{
-                data.rows(),
-                data.slotsPerRow(),
-                data.drawnSlots()
-            }
+                FilterConfigurable
+                    .getFilterInventoryFromItemsHandler(
+                        syncId,
+                        playerInventory,
+                        data.filterItems(),
+                        handler
+                    ),
+                new Integer[] {
+                    data.rows(),
+                    data.slotsPerRow(),
+                    data.drawnSlots()
+                }
             )
         );
         this.filterConfigurable = data;
     }
 
     protected FilteringScreenHandler(
-        MenuType<?> type, int syncId, Inventory playerInventory,
+        MenuType<?> type,
+        int syncId,
+        Inventory playerInventory,
         Function<AbstractContainerMenu, Tuple<Container, Integer[]>> filterInventoryFactory
     ) {
         super(type, syncId);
@@ -63,14 +76,27 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
         {
             int startX = (176 / 2) - (slotsPerRow + 1) * 9;
             int index = 0;
-            for (int i = 0; i < rows; i++) {
-                for (int k = 0; k < slotsPerRow; ++k) {
+            for (
+                int i = 0;
+                i < rows;
+                i++
+            ) {
+                for (
+                    int k = 0;
+                    k < slotsPerRow;
+                    ++k
+                ) {
                     if (index == slotCount)
                         break slotDraw;
-                    this.addSlot(new FilterSlot(
-                        filterInventory, index, startX + k * 23,
-                                                18 + i * (FilteringScreen.STRIP_HEIGHT + 8)
-                    ));
+                    this
+                        .addSlot(
+                            new FilterSlot(
+                                filterInventory,
+                                index,
+                                startX + k * 23,
+                                18 + i * (FilteringScreen.STRIP_HEIGHT + 8)
+                            )
+                        );
                     index++;
                 }
             }
@@ -78,13 +104,25 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
 
         // player inventory slots
         int i = 52 + ((int) Math.round(nonObligatoryRows * 1.5) * FilteringScreen.STRIP_HEIGHT);
-        for (int j = 0; j < 3; ++j) {
-            for (int k = 0; k < 9; ++k) {
+        for (
+            int j = 0;
+            j < 3;
+            ++j
+        ) {
+            for (
+                int k = 0;
+                k < 9;
+                ++k
+            ) {
                 this.addSlot(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, j * 18 + i));
             }
         }
         // player hotbar
-        for (int j = 0; j < 9; ++j) {
+        for (
+            int j = 0;
+            j < 9;
+            ++j
+        ) {
             this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 58 + i));
         }
 
@@ -122,8 +160,9 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
         @Override
         public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
             if (!world.isClientSide && filterConfigurable != null) {
-                filterConfigurable.filterItems()
-                                  .set(getContainerSlot(), ItemReference.of(heldStack));
+                filterConfigurable
+                    .filterItems()
+                    .set(getContainerSlot(), ItemReference.of(heldStack));
             }
             return super.onClicked(heldStack, type, player);
         }

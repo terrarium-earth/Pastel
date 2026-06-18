@@ -71,24 +71,43 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
     }
 
     private void generateStem(
-        LevelAccessor world, RandomSource random, BlockPos origin, Block vineBlock, int stemHeight, float berryChance) {
+        LevelAccessor world,
+        RandomSource random,
+        BlockPos origin,
+        Block vineBlock,
+        int stemHeight,
+        float berryChance
+    ) {
         var stemPointer = origin.mutable();
-        var stemState = vineBlock.defaultBlockState().setValue(
-            TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.STALK);
+        var stemState = vineBlock
+            .defaultBlockState()
+            .setValue(
+                TriStateVineBlock.LIFE_STAGE,
+                TriStateVineBlock.LifeStage.STALK
+            );
 
-        for (int height = 0; height <= stemHeight; height++) {
+        for (
+            int height = 0;
+            height <= stemHeight;
+            height++
+        ) {
             if (height == stemHeight) {
                 if (berryChance > 0 && random.nextFloat() <= berryChance) {
-                    this.setBlock(
-                        world, stemPointer,
-                        stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE)
-                                 .setValue(BlockStateProperties.BERRIES, true)
-                    );
+                    this
+                        .setBlock(
+                            world,
+                            stemPointer,
+                            stemState
+                                .setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE)
+                                .setValue(BlockStateProperties.BERRIES, true)
+                        );
                 } else {
-                    this.setBlock(
-                        world, stemPointer,
-                        stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE)
-                    );
+                    this
+                        .setBlock(
+                            world,
+                            stemPointer,
+                            stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE)
+                        );
                 }
             } else {
                 if (berryChance > 0 && random.nextFloat() <= berryChance) {

@@ -13,22 +13,27 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.Map;
 import java.util.Queue;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class EarlyRenderingParticleContainer {
 
     private static final int MAX_PARTICLES = 16384;
-    private final static Map<ParticleRenderType, Queue<EarlyRenderingParticle>> particles
-        = new Object2ReferenceOpenHashMap<>();
+
+    private final static Map<ParticleRenderType, Queue<EarlyRenderingParticle>> particles = new Object2ReferenceOpenHashMap<>();
 
     public void add(final Particle particle) {
         if (particle instanceof EarlyRenderingParticle earlyRenderingParticle) {
-            particles.computeIfAbsent(particle.getRenderType(), sheet -> EvictingQueue.create(MAX_PARTICLES))
-                     .add(earlyRenderingParticle);
+            particles
+                .computeIfAbsent(particle.getRenderType(), sheet -> EvictingQueue.create(MAX_PARTICLES))
+                .add(earlyRenderingParticle);
         }
     }
 
     public void removeDead() {
-        for (final Queue<EarlyRenderingParticle> particles : particles.values()) {
+        for (
+            final Queue<EarlyRenderingParticle> particles : particles.values()
+        ) {
             particles.removeIf(particle -> !((Particle) particle).isAlive());
         }
     }
@@ -38,9 +43,17 @@ public class EarlyRenderingParticleContainer {
     }
 
     public void render(
-        final PoseStack matrices, final MultiBufferSource vertexConsumers, final Camera camera, final float tickDelta) {
-        for (final Queue<EarlyRenderingParticle> particles : particles.values()) {
-            for (final EarlyRenderingParticle particle : particles) {
+        final PoseStack matrices,
+        final MultiBufferSource vertexConsumers,
+        final Camera camera,
+        final float tickDelta
+    ) {
+        for (
+            final Queue<EarlyRenderingParticle> particles : particles.values()
+        ) {
+            for (
+                final EarlyRenderingParticle particle : particles
+            ) {
                 particle.renderAsEntity(matrices, vertexConsumers, camera, tickDelta);
             }
         }

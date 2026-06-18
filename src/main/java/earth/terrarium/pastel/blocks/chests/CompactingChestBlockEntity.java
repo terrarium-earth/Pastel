@@ -43,14 +43,16 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
 
     private static final FlowAnimator.Factory<CompactingChestBlockEntity> FACTORY;
 
-    @NotNull
-    private CompactionCraftingMode mode = CompactionCraftingMode.X3;
-    @NotNull
-    private Optional<CompactionRecipe> activeRecipe = Optional.empty();
+    @NotNull private CompactionCraftingMode mode = CompactionCraftingMode.X3;
+
+    @NotNull private Optional<CompactionRecipe> activeRecipe = Optional.empty();
+
     private boolean isOpen;
+
     public long craftingTimeStamp;
 
     protected FlowAnimator animator;
+
     protected FlowData<Float> _piston = FlowData.NULL(), _driver = FlowData.NULL(), _cap = FlowData.NULL();
 
     private final ContainerData propertyDelegate = new ContainerData() {
@@ -76,7 +78,9 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
         inventory.addListener(i -> setChanged());
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void tick(Level world, BlockPos pos, BlockState state, CompactingChestBlockEntity chest) {
         if (world.isClientSide())
             chest.updateAnimator();
@@ -116,12 +120,15 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
             return;
         }
 
-        var result = recipe.recipe().value()
-                           .getResultItem(level.registryAccess())
-                           .copy();
+        var result = recipe
+            .recipe()
+            .value()
+            .getResultItem(level.registryAccess())
+            .copy();
 
-        if (!ItemHandlerHelper.insertItemStacked(inventory, result, true)
-                              .isEmpty())
+        if (!ItemHandlerHelper
+            .insertItemStacked(inventory, result, true)
+            .isEmpty())
             return;
 
         ItemHandlerHelper.insertItemStacked(inventory, result, false);
@@ -131,17 +138,21 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
 
         if (level.getGameTime() % 5 == 0) {
             CompactingChestStatusUpdatePayload.sendCompactingChestStatusUpdate(this);
-            ((ServerLevel) level).getChunkSource()
-                                 .blockChanged(worldPosition);
+            ((ServerLevel) level)
+                .getChunkSource()
+                .blockChanged(worldPosition);
         }
     }
 
     private Optional<CompactionRecipe> findRecipe(CompactionCraftingMode mode, List<ItemStorage> available) {
         var compactionCache = mode.getCache();
-        for (ItemStorage storage : available) {
+        for (
+            ItemStorage storage : available
+        ) {
             if (storage.getCount() >= mode.getSize()) {
-                var inputStack = mode.createRecipeInput(storage.stack(1))
-                        .input();
+                var inputStack = mode
+                    .createRecipeInput(storage.stack(1))
+                    .input();
                 var inputRef = storage.getReference();
 
                 var cacheTry = compactionCache.get(inputRef);
@@ -155,9 +166,10 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
                         continue;
                 }
 
-                var recipe = level.getRecipeManager()
-                                  .getRecipeFor(RecipeType.CRAFTING, inputStack, level);
-                
+                var recipe = level
+                    .getRecipeManager()
+                    .getRecipeFor(RecipeType.CRAFTING, inputStack, level);
+
                 compactionCache.put(inputRef, recipe);
                 if (recipe.isPresent())
                     return recipe.map(r -> new CompactionRecipe(inputRef, r));
@@ -169,16 +181,32 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
     public void produceRunningEffects() {
         var random = level.getRandom();
         if (random.nextFloat() < 0.04F) {
-            level.playSound(
-                null, worldPosition, SoundEvents.REDSTONE_TORCH_BURNOUT, SoundSource.BLOCKS,
-                0.05F + random.nextFloat() * 0.1F, 0.334F + random.nextFloat() / 2F
-            );
-            for (int i = 0; i < 4 + random.nextInt(5); i++) {
-                ((ServerLevel) level).sendParticles(
-                    ParticleTypes.CLOUD, worldPosition.getX() + random.nextFloat(),
-                    worldPosition.getY() + 1 + random.nextFloat() * 0.667F, worldPosition.getZ() + random.nextFloat(),
-                    0, 0, random.nextFloat() / 20F + 0.02F, 0, 1
+            level
+                .playSound(
+                    null,
+                    worldPosition,
+                    SoundEvents.REDSTONE_TORCH_BURNOUT,
+                    SoundSource.BLOCKS,
+                    0.05F + random.nextFloat() * 0.1F,
+                    0.334F + random.nextFloat() / 2F
                 );
+            for (
+                int i = 0;
+                i < 4 + random.nextInt(5);
+                i++
+            ) {
+                ((ServerLevel) level)
+                    .sendParticles(
+                        ParticleTypes.CLOUD,
+                        worldPosition.getX() + random.nextFloat(),
+                        worldPosition.getY() + 1 + random.nextFloat() * 0.667F,
+                        worldPosition.getZ() + random.nextFloat(),
+                        0,
+                        0,
+                        random.nextFloat() / 20F + 0.02F,
+                        0,
+                        1
+                    );
             }
         }
     }
@@ -255,31 +283,35 @@ public class CompactingChestBlockEntity extends PastelChestBlockEntity {
         builder.stateInfo(FlowStates.ACTIVE, 20);
         builder.stateInfo(FlowStates.CLOSED, 14);
 
-        builder.handle("piston", FlowHandlers.FLOAT)
-               .initial(0F)
-               .loopback(FlowStates.CLOSED)
-               .forStates(14F, FlowStates.OPEN)
-               .forStates(KeyFrame.sine(0.1F, 5, 4), FlowStates.ACTIVE)
-               .interpolate(Interpolation.CUBIC_IN)
-               .push();
+        builder
+            .handle("piston", FlowHandlers.FLOAT)
+            .initial(0F)
+            .loopback(FlowStates.CLOSED)
+            .forStates(14F, FlowStates.OPEN)
+            .forStates(KeyFrame.sine(0.1F, 5, 4), FlowStates.ACTIVE)
+            .interpolate(Interpolation.CUBIC_IN)
+            .push();
 
-        builder.handle("driver", FlowHandlers.FLOAT)
-               .initial(0F)
-               .loopback(FlowStates.CLOSED)
-               .forStates(6F, FlowStates.OPEN)
-               .forStates(KeyFrame.sine(0.1F, 5, 5, 13), FlowStates.ACTIVE)
-               .interpolate(Interpolation.CUBIC_IN)
-               .push();
+        builder
+            .handle("driver", FlowHandlers.FLOAT)
+            .initial(0F)
+            .loopback(FlowStates.CLOSED)
+            .forStates(6F, FlowStates.OPEN)
+            .forStates(KeyFrame.sine(0.1F, 5, 5, 13), FlowStates.ACTIVE)
+            .interpolate(Interpolation.CUBIC_IN)
+            .push();
 
-        builder.handle("cap", FlowHandlers.FLOAT)
-               .initial(0F)
-               .loopback(FlowStates.CLOSED, FlowStates.ACTIVE)
-               .forStates(5F, FlowStates.OPEN)
-               .interpolate(Interpolation.CUBIC_IN)
-               .push();
+        builder
+            .handle("cap", FlowHandlers.FLOAT)
+            .initial(0F)
+            .loopback(FlowStates.CLOSED, FlowStates.ACTIVE)
+            .forStates(5F, FlowStates.OPEN)
+            .interpolate(Interpolation.CUBIC_IN)
+            .push();
 
         FACTORY = builder.build();
     }
 
-    private record CompactionRecipe(ItemReference inputRef, RecipeHolder<CraftingRecipe> recipe) {}
+    private record CompactionRecipe(ItemReference inputRef, RecipeHolder<CraftingRecipe> recipe) {
+    }
 }

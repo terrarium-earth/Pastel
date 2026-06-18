@@ -15,7 +15,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(LootItemRandomChanceWithEnchantedBonusCondition.class)
+@Mixin(
+    LootItemRandomChanceWithEnchantedBonusCondition.class
+)
 public abstract class RandomChanceWithEnchantedBonusLootConditionMixin {
 
     @Shadow
@@ -26,7 +28,11 @@ public abstract class RandomChanceWithEnchantedBonusLootConditionMixin {
     @Final
     private Holder<Enchantment> enchantment;
 
-    @ModifyReturnValue(at = @At("RETURN"), method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z")
+    @ModifyReturnValue(
+        at = @At(
+            "RETURN"
+        ), method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z"
+    )
     public boolean applyRareLootEnchantment(boolean original, LootContext context) {
         // if the result was to not drop a drop before reroll
         // gets more probable with each additional level of Clovers Favor
@@ -36,11 +42,16 @@ public abstract class RandomChanceWithEnchantedBonusLootConditionMixin {
                 int level = EnchantmentHelper.getEnchantmentLevel(this.enchantment, livingEntity);
                 if (level > 0) {
                     float enchantedChanceValue = this.enchantedChance.calculate(level);
-                    original = context.getRandom()
-                                      .nextFloat() < CloversFavorHelper.rollChance(enchantedChanceValue,
-                                                                                   context.getParamOrNull(
-                                                                                       LootContextParams.ATTACKING_ENTITY)
-                    );
+                    original = context
+                        .getRandom()
+                        .nextFloat() < CloversFavorHelper
+                            .rollChance(
+                                enchantedChanceValue,
+                                context
+                                    .getParamOrNull(
+                                        LootContextParams.ATTACKING_ENTITY
+                                    )
+                            );
                 }
             }
         }

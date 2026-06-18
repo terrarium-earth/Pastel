@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.capabilities.item;
 
-
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.HolderLookup;
@@ -13,10 +12,15 @@ import java.util.function.Predicate;
 public class StackHandlerView extends FriendlyStackHandler {
 
     protected final FriendlyStackHandler delegator;
+
     private final Int2ObjectMap<Predicate<ItemStack>> filters = new Int2ObjectArrayMap<>();
+
     private final int offset;
+
     private final int size;
+
     private boolean supportsInsertion = true;
+
     private boolean supportsExtraction = true;
 
     public StackHandlerView(FriendlyStackHandler delegator, int offset, int size) {
@@ -74,8 +78,9 @@ public class StackHandlerView extends FriendlyStackHandler {
         if (!supportsInsertion)
             return stack;
 
-        if (!filters.getOrDefault(slot, stck -> true)
-                    .test(stack))
+        if (!filters
+            .getOrDefault(slot, stck -> true)
+            .test(stack))
             return stack;
 
         return delegator.insertItem(slot + offset, stack, simulate);
@@ -109,7 +114,8 @@ public class StackHandlerView extends FriendlyStackHandler {
     @Override
     public void setInternalList(NonNullList<ItemStack> newStacks) {
         throw new UnsupportedOperationException(
-            "Attempted to change the internal list of a forwarded ItemStackHandler");
+            "Attempted to change the internal list of a forwarded ItemStackHandler"
+        );
     }
 
     @Override

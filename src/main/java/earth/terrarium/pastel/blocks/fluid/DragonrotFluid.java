@@ -59,9 +59,10 @@ public abstract class DragonrotFluid extends PastelFluid {
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
-        return PastelBlocks.DRAGONROT.get()
-                                     .defaultBlockState()
-                                     .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+        return PastelBlocks.DRAGONROT
+            .get()
+            .defaultBlockState()
+            .setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
     }
 
     @Override
@@ -70,52 +71,110 @@ public abstract class DragonrotFluid extends PastelFluid {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void animateTick(Level world, BlockPos pos, FluidState state, RandomSource random) {
         BlockPos topPos = pos.above();
         BlockState topState = world.getBlockState(topPos);
         if (topState.isAir() && random.nextInt(3) == 0) {
             float soundRandom = random.nextFloat();
             if (soundRandom < 0.0003F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HONEY_DRINK, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.65F + 0.25F, random.nextFloat() * 0.2F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.HONEY_DRINK,
+                        SoundSource.AMBIENT,
+                        random.nextFloat() * 0.65F + 0.25F,
+                        random.nextFloat() * 0.2F,
+                        false
+                    );
             } else if (soundRandom < 0.0006F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.4F + 0.25F, random.nextFloat() * 0.5F + 0.1F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.HONEY_BLOCK_SLIDE,
+                        SoundSource.AMBIENT,
+                        random.nextFloat() * 0.4F + 0.25F,
+                        random.nextFloat() * 0.5F + 0.1F,
+                        false
+                    );
             } else if (soundRandom < 0.0008F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.FROG_AMBIENT, SoundSource.AMBIENT,
-                    random.nextFloat() + 0.25F, random.nextFloat() * 0.3F + 0.01F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.FROG_AMBIENT,
+                        SoundSource.AMBIENT,
+                        random.nextFloat() + 0.25F,
+                        random.nextFloat() * 0.3F + 0.01F,
+                        false
+                    );
             } else if (soundRandom < 0.001F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.SCULK_BLOCK_PLACE, SoundSource.AMBIENT,
-                    random.nextFloat() + 0.25F, random.nextFloat() * 0.4F + 0.2F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.SCULK_BLOCK_PLACE,
+                        SoundSource.AMBIENT,
+                        random.nextFloat() + 0.25F,
+                        random.nextFloat() * 0.4F + 0.2F,
+                        false
+                    );
             } else if (soundRandom < 0.00148F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.PARROT_DEATH, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.334F + 0.1F, 1F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.PARROT_DEATH,
+                        SoundSource.AMBIENT,
+                        random.nextFloat() * 0.334F + 0.1F,
+                        1F,
+                        false
+                    );
             } else if (soundRandom < 0.00152F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.CAT_DEATH, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.334F + 0.1F, 1F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.CAT_DEATH,
+                        SoundSource.AMBIENT,
+                        random.nextFloat() * 0.334F + 0.1F,
+                        1F,
+                        false
+                    );
             } else if (soundRandom < 0.00156F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOLF_DEATH, SoundSource.AMBIENT,
-                    random.nextFloat() * 0.3F + 0.1F, 1F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.WOLF_DEATH,
+                        SoundSource.AMBIENT,
+                        random.nextFloat() * 0.3F + 0.1F,
+                        1F,
+                        false
+                    );
             } else if (soundRandom < 0.001564F) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.AMBIENT, 2F,
-                    0.1F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.SCULK_SHRIEKER_SHRIEK,
+                        SoundSource.AMBIENT,
+                        2F,
+                        0.1F,
+                        false
+                    );
             }
         }
     }
@@ -140,7 +199,6 @@ public abstract class DragonrotFluid extends PastelFluid {
         return PastelParticleTypes.DRAGONROT_SPLASH;
     }
 
-
     @Override
     public void onEntityCollision(BlockState state, Level level, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, level, pos, entity);
@@ -148,8 +206,9 @@ public abstract class DragonrotFluid extends PastelFluid {
         if (level instanceof ServerLevel serverWorld && entity instanceof LivingEntity livingEntity) {
             // just check every 20 ticks for performance
             if (!livingEntity.isDeadOrDying() && level.getGameTime() % 20 == 0 && !(livingEntity instanceof Enemy)) {
-                var dragon = entity.getType()
-                                   .is(PastelEntityTypeTags.DRACONIC);
+                var dragon = entity
+                    .getType()
+                    .is(PastelEntityTypeTags.DRACONIC);
                 var damage = dragon ? 30 : 6;
                 var ticks = dragon ? 20 : 5;
                 var cut = dragon ? 100 : 40;
@@ -166,13 +225,16 @@ public abstract class DragonrotFluid extends PastelFluid {
                     } else if (existingEffect.getDuration() < 500) {
                         ((MobEffectInstanceInjector) existingEffect).setDuration(300);
 
-                        serverWorld.getChunkSource()
-                                   .broadcastAndSend(
-                                       livingEntity, new ClientboundUpdateMobEffectPacket(
-                                           livingEntity.getId(),
-                                           existingEffect, true
-                                       )
-                                   );
+                        serverWorld
+                            .getChunkSource()
+                            .broadcastAndSend(
+                                livingEntity,
+                                new ClientboundUpdateMobEffectPacket(
+                                    livingEntity.getId(),
+                                    existingEffect,
+                                    true
+                                )
+                            );
                     }
 
                     existingEffect = livingEntity.getEffect(PastelMobEffects.DEADLY_POISON);
@@ -185,15 +247,20 @@ public abstract class DragonrotFluid extends PastelFluid {
                         if (existingEffect.getDuration() <= cut) {
                             livingEntity.removeEffect(PastelMobEffects.IMMUNITY);
                         } else {
-                            ((MobEffectInstanceInjector) existingEffect).setDuration(
-                                existingEffect.getDuration() - cut);
-                            serverWorld.getChunkSource()
-                                       .broadcastAndSend(
-                                           livingEntity, new ClientboundUpdateMobEffectPacket(
-                                               livingEntity.getId(),
-                                               existingEffect, true
-                                           )
-                                       );
+                            ((MobEffectInstanceInjector) existingEffect)
+                                .setDuration(
+                                    existingEffect.getDuration() - cut
+                                );
+                            serverWorld
+                                .getChunkSource()
+                                .broadcastAndSend(
+                                    livingEntity,
+                                    new ClientboundUpdateMobEffectPacket(
+                                        livingEntity.getId(),
+                                        existingEffect,
+                                        true
+                                    )
+                                );
                         }
                     }
 

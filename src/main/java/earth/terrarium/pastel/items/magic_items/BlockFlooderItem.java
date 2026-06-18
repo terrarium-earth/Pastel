@@ -25,11 +25,19 @@ public class BlockFlooderItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
         ItemStack itemStack = user.getItemInHand(hand);
-        world.playSound(
-            null, user.getX(), user.getY(), user.getZ(), PastelSounds.ENTITY_BLOCK_FLOODER_THROW,
-            SoundSource.NEUTRAL, 0.5F, 0.4F / (world.getRandom()
-                                                    .nextFloat() * 0.4F + 0.8F)
-        );
+        world
+            .playSound(
+                null,
+                user.getX(),
+                user.getY(),
+                user.getZ(),
+                PastelSounds.ENTITY_BLOCK_FLOODER_THROW,
+                SoundSource.NEUTRAL,
+                0.5F,
+                0.4F / (world
+                    .getRandom()
+                    .nextFloat() * 0.4F + 0.8F)
+            );
         if (!world.isClientSide) {
             BlockFlooderProjectile blockFlooderProjectile = new BlockFlooderProjectile(world, user);
             blockFlooderProjectile.setItem(itemStack);
@@ -48,14 +56,30 @@ public class BlockFlooderItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.block_flooder.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.block_flooder.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.block_flooder.tooltip3")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.block_flooder.tooltip4")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.block_flooder.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.block_flooder.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.block_flooder.tooltip3")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.block_flooder.tooltip4")
+                    .withStyle(ChatFormatting.GRAY)
+            );
     }
 
 }

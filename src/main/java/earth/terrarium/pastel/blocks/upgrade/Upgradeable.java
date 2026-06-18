@@ -46,7 +46,9 @@ public interface Upgradeable {
 
         public UpgradeHolder() {
             this.upgrades = new HashMap<>();
-            for (UpgradeType upgradeType : UpgradeType.values()) {
+            for (
+                UpgradeType upgradeType : UpgradeType.values()
+            ) {
                 this.upgrades.put(upgradeType, 0);
             }
         }
@@ -58,13 +60,18 @@ public interface Upgradeable {
         public ListTag toNbt() {
             ListTag nbtList = new ListTag();
             if (!upgrades.isEmpty()) {
-                for (Map.Entry<UpgradeType, Integer> upgrade : upgrades.entrySet()) {
+                for (
+                    Map.Entry<UpgradeType, Integer> upgrade : upgrades.entrySet()
+                ) {
                     if (upgrade.getValue() > 0) {
                         CompoundTag upgradeCompound = new CompoundTag();
-                        upgradeCompound.putString(
-                            "Variant", upgrade.getKey()
-                                              .toString()
-                        );
+                        upgradeCompound
+                            .putString(
+                                "Variant",
+                                upgrade
+                                    .getKey()
+                                    .toString()
+                            );
                         upgradeCompound.putFloat("Power", upgrade.getValue());
                         nbtList.add(upgradeCompound);
                     }
@@ -75,11 +82,17 @@ public interface Upgradeable {
 
         public static UpgradeHolder fromNbt(@NotNull ListTag nbtList) {
             Map<UpgradeType, Integer> map = new HashMap<>();
-            for (UpgradeType upgradeType : UpgradeType.values()) {
+            for (
+                UpgradeType upgradeType : UpgradeType.values()
+            ) {
                 map.put(upgradeType, 0);
             }
 
-            for (int i = 0; i < nbtList.size(); ++i) {
+            for (
+                int i = 0;
+                i < nbtList.size();
+                ++i
+            ) {
                 CompoundTag nbtCompound = nbtList.getCompound(i);
                 UpgradeType upgradeType = UpgradeType.valueOf(nbtCompound.getString("Variant"));
                 int upgradeMod = nbtCompound.getInt("Power");
@@ -122,7 +135,10 @@ public interface Upgradeable {
     }
 
     static @NotNull UpgradeHolder calculateUpgradeMods4(
-        Level world, @NotNull BlockPos blockPos, int offsetHorizontal, int offsetUp,
+        Level world,
+        @NotNull BlockPos blockPos,
+        int offsetHorizontal,
+        int offsetUp,
         @Nullable UUID advancementPlayerUUID
     ) {
         List<BlockPos> posList = new ArrayList<>();
@@ -135,16 +151,32 @@ public interface Upgradeable {
     }
 
     static @NotNull UpgradeHolder calculateUpgradeMods2(
-        Level world, BlockPos blockPos, @NotNull Rotation multiblockRotation, int offsetHorizontal, int offsetUp,
+        Level world,
+        BlockPos blockPos,
+        @NotNull Rotation multiblockRotation,
+        int offsetHorizontal,
+        int offsetUp,
         @Nullable UUID advancementPlayerUUID
     ) {
         return calculateUpgradeMods2(
-            world, blockPos, multiblockRotation, offsetHorizontal, offsetHorizontal, offsetUp, advancementPlayerUUID);
+            world,
+            blockPos,
+            multiblockRotation,
+            offsetHorizontal,
+            offsetHorizontal,
+            offsetUp,
+            advancementPlayerUUID
+        );
     }
 
     static @NotNull UpgradeHolder calculateUpgradeMods2(
-        Level world, BlockPos blockPos, @NotNull Rotation multiblockRotation, int offsetSide, int offsetBack,
-        int offsetUp, @Nullable UUID advancementPlayerUUID
+        Level world,
+        BlockPos blockPos,
+        @NotNull Rotation multiblockRotation,
+        int offsetSide,
+        int offsetBack,
+        int offsetUp,
+        @Nullable UUID advancementPlayerUUID
     ) {
         List<BlockPos> positions = new ArrayList<>();
         switch (multiblockRotation) {
@@ -170,17 +202,26 @@ public interface Upgradeable {
     }
 
     private static @NotNull UpgradeHolder calculateUpgrades(
-        Level world, BlockPos blockPos, @NotNull List<BlockPos> positions, @Nullable UUID advancementPlayerUUID) {
+        Level world,
+        BlockPos blockPos,
+        @NotNull List<BlockPos> positions,
+        @Nullable UUID advancementPlayerUUID
+    ) {
         // create a hash map of upgrade types and mods
         HashMap<UpgradeType, Integer> upgradeMods = new HashMap<>();
-        for (UpgradeType upgradeType : UpgradeType.values()) {
+        for (
+            UpgradeType upgradeType : UpgradeType.values()
+        ) {
             upgradeMods.put(upgradeType, 0);
         }
 
         int upgradeCount = 0;
-        for (BlockPos offsetPos : positions) {
-            Block block = world.getBlockState(offsetPos)
-                               .getBlock();
+        for (
+            BlockPos offsetPos : positions
+        ) {
+            Block block = world
+                .getBlockState(offsetPos)
+                .getBlock();
             if (block instanceof UpgradeBlock upgradeBlock) {
                 UpgradeType upgradeType = upgradeBlock.getUpgradeType();
                 int upgradeMod = upgradeBlock.getUpgradeMod();
@@ -192,8 +233,14 @@ public interface Upgradeable {
         if (advancementPlayerUUID != null && !world.isClientSide) {
             ServerPlayer player = (ServerPlayer) PlayerOwned.getPlayerEntityIfOnline(advancementPlayerUUID);
             if (player != null) {
-                PastelCriteria.UPGRADE_PLACING.trigger(
-                    player, (ServerLevel) world, blockPos, upgradeCount, upgradeMods);
+                PastelCriteria.UPGRADE_PLACING
+                    .trigger(
+                        player,
+                        (ServerLevel) world,
+                        blockPos,
+                        upgradeCount,
+                        upgradeMods
+                    );
             }
         }
 

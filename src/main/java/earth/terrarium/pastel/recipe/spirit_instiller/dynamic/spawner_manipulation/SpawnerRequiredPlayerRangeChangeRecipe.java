@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
-
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
@@ -13,6 +12,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe {
     protected static final int DEFAULT_DETECTION_RANGE = 16;
+
     protected static final int MAX_DETECTION_RANGE = 64;
 
     public SpawnerRequiredPlayerRangeChangeRecipe() {
@@ -21,13 +21,17 @@ public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe 
 
     @Override
     public boolean canCraftWithBlockEntityTag(
-        CustomData spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
+        CustomData spawnerBlockEntityNbt,
+        ItemStack leftBowlStack,
+        ItemStack rightBowlStack
+    ) {
         if (spawnerBlockEntityNbt == null) {
             return true;
         }
         if (spawnerBlockEntityNbt.contains("RequiredPlayerRange")) {
-            return spawnerBlockEntityNbt.copyTag()
-                                        .getShort("RequiredPlayerRange") < MAX_DETECTION_RANGE;
+            return spawnerBlockEntityNbt
+                .copyTag()
+                .getShort("RequiredPlayerRange") < MAX_DETECTION_RANGE;
         }
         return true;
     }
@@ -44,19 +48,22 @@ public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe 
 
     @Override
     public CompoundTag getSpawnerResultNbt(
-        CompoundTag spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
+        CompoundTag spawnerBlockEntityNbt,
+        ItemStack firstBowlStack,
+        ItemStack secondBowlStack
+    ) {
         // Default spawner tag:
-		/* BlockEntityTag: {
-			MaxNearbyEntities: 6s,
-			RequiredPlayerRange: 16s,
-			SpawnCount: 4s,
-			SpawnData: {entity: {id: "minecraft:xxx"}},
-			MaxSpawnDelay: 800s,
-			SpawnRange: 4s,
-			MinSpawnDelay: 200s,
-			SpawnPotentials: []
-		   }
-		 */
+        /* BlockEntityTag: {
+        	MaxNearbyEntities: 6s,
+        	RequiredPlayerRange: 16s,
+        	SpawnCount: 4s,
+        	SpawnData: {entity: {id: "minecraft:xxx"}},
+        	MaxSpawnDelay: 800s,
+        	SpawnRange: 4s,
+        	MinSpawnDelay: 200s,
+        	SpawnPotentials: []
+           }
+         */
 
         short requiredPlayerRange = DEFAULT_DETECTION_RANGE;
         if (spawnerBlockEntityNbt.contains("RequiredPlayerRange", Tag.TAG_SHORT)) {
@@ -68,8 +75,11 @@ public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe 
             newRequiredPlayerRange = (short) (requiredPlayerRange + 1);
         }
 
-        spawnerBlockEntityNbt.putShort(
-            "RequiredPlayerRange", (short) Math.min(MAX_DETECTION_RANGE, newRequiredPlayerRange));
+        spawnerBlockEntityNbt
+            .putShort(
+                "RequiredPlayerRange",
+                (short) Math.min(MAX_DETECTION_RANGE, newRequiredPlayerRange)
+            );
 
         return spawnerBlockEntityNbt;
     }

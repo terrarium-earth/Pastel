@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class ProjectorBlockEntity extends BlockEntity {
 
     final ResourceLocation texture;
+
     final float heightOffset, bobMultiplier, scaling;
 
     public ProjectorBlockEntity(BlockPos pos, BlockState state) {

@@ -10,15 +10,22 @@ import java.util.Map;
 
 public class PigmentBlock extends Block {
 
-    public static final MapCodec<PigmentBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                             propertiesCodec(),
-                                                                                             InkColor.CODEC.fieldOf(
-                                                                                                 "color")
-                                                                                                           .forGetter(PigmentBlock::getColor)
-                                                                                         )
-                                                                                         .apply(i, PigmentBlock::new));
+    public static final MapCodec<PigmentBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    propertiesCodec(),
+                    InkColor.CODEC
+                        .fieldOf(
+                            "color"
+                        )
+                        .forGetter(PigmentBlock::getColor)
+                )
+                .apply(i, PigmentBlock::new)
+        );
 
     private static final Map<InkColor, PigmentBlock> BLOCKS = new Object2ObjectArrayMap<>();
+
     protected final InkColor color;
 
     public PigmentBlock(Properties settings, InkColor color) {

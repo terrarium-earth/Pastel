@@ -52,13 +52,17 @@ public class DeeperDownPortalBlock extends Block {
 
     public static final MapCodec<DeeperDownPortalBlock> CODEC = simpleCodec(DeeperDownPortalBlock::new);
 
-    private final static ResourceLocation CREATE_PORTAL_ADVANCEMENT_IDENTIFIER = PastelCommon.locate(
-        "midgame/open_fissure");
+    private final static ResourceLocation CREATE_PORTAL_ADVANCEMENT_IDENTIFIER = PastelCommon
+        .locate(
+            "midgame/open_fissure"
+        );
+
     private final static String CREATE_PORTAL_ADVANCEMENT_CRITERION = "opened_fissure";
 
     public static final BooleanProperty FACING_UP = BlockStateProperties.UP;
 
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4D, 16.0D);
+
     protected static final VoxelShape SHAPE_UP = Block.box(0.0D, 4D, 0.0D, 16.0D, 16.0D, 16.0D);
 
     public DeeperDownPortalBlock(Properties settings) {
@@ -81,22 +85,42 @@ public class DeeperDownPortalBlock extends Block {
         super.onPlace(state, world, pos, oldState, notify);
 
         if (!world.isClientSide) { // that should be a given, but in modded you never know
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                (ServerLevel) world, Vec3.atCenterOf(pos), PastelParticleTypes.VOID_FOG, 30, new Vec3(0.5, 0.0, 0.5),
-                Vec3.ZERO
-            );
-            if (!hasNeighboringPortals(world, pos)) {
-                world.playSound(
-                    null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                    PastelSounds.FISSURE_OPEN, SoundSource.BLOCKS, 0.75F, 0.75F
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    (ServerLevel) world,
+                    Vec3.atCenterOf(pos),
+                    PastelParticleTypes.VOID_FOG,
+                    30,
+                    new Vec3(0.5, 0.0, 0.5),
+                    Vec3.ZERO
                 );
-
-                for (Player nearbyPlayer : world.getEntities(
-                    EntityType.PLAYER, AABB.ofSize(Vec3.atCenterOf(pos), 16D, 16D, 16D), LivingEntity::isAlive)) {
-                    Support.grantAdvancementCriterion(
-                        (ServerPlayer) nearbyPlayer, CREATE_PORTAL_ADVANCEMENT_IDENTIFIER,
-                        CREATE_PORTAL_ADVANCEMENT_CRITERION
+            if (!hasNeighboringPortals(world, pos)) {
+                world
+                    .playSound(
+                        null,
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.5,
+                        pos.getZ() + 0.5,
+                        PastelSounds.FISSURE_OPEN,
+                        SoundSource.BLOCKS,
+                        0.75F,
+                        0.75F
                     );
+
+                for (
+                    Player nearbyPlayer : world
+                        .getEntities(
+                            EntityType.PLAYER,
+                            AABB.ofSize(Vec3.atCenterOf(pos), 16D, 16D, 16D),
+                            LivingEntity::isAlive
+                        )
+                ) {
+                    Support
+                        .grantAdvancementCriterion(
+                            (ServerPlayer) nearbyPlayer,
+                            CREATE_PORTAL_ADVANCEMENT_IDENTIFIER,
+                            CREATE_PORTAL_ADVANCEMENT_CRITERION
+                        );
                 }
             }
         }
@@ -104,7 +128,12 @@ public class DeeperDownPortalBlock extends Block {
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (handStack.is(PastelItems.BEDROCK_DUST.get())) {
@@ -113,10 +142,17 @@ public class DeeperDownPortalBlock extends Block {
             } else {
                 BlockState placedState = Blocks.BEDROCK.defaultBlockState();
                 world.setBlockAndUpdate(pos, placedState);
-                world.playSound(
-                    null, pos, placedState.getSoundType()
-                                          .getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F
-                );
+                world
+                    .playSound(
+                        null,
+                        pos,
+                        placedState
+                            .getSoundType()
+                            .getPlaceSound(),
+                        SoundSource.BLOCKS,
+                        1.0F,
+                        1.0F
+                    );
                 return ItemInteractionResult.CONSUME;
             }
         }
@@ -125,9 +161,12 @@ public class DeeperDownPortalBlock extends Block {
     }
 
     private boolean hasNeighboringPortals(Level world, BlockPos pos) {
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            if (world.getBlockState(pos.relative(direction))
-                     .is(this)) {
+        for (
+            Direction direction : Direction.Plane.HORIZONTAL
+        ) {
+            if (world
+                .getBlockState(pos.relative(direction))
+                .is(this)) {
                 return true;
             }
         }
@@ -167,13 +206,17 @@ public class DeeperDownPortalBlock extends Block {
 
                 if (facingUp) {
                     BlockPos portalPos = new BlockPos(pos.getX(), world.getMinBuildHeight(), pos.getZ());
-                    if (!world.getBlockState(portalPos)
-                              .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
-                        world.setBlockAndUpdate(
-                            portalPos, PastelBlocks.IMBRIFER_PORTAL.get()
-                                                                      .defaultBlockState()
-                                                                      .setValue(FACING_UP, false)
-                        );
+                    if (!world
+                        .getBlockState(portalPos)
+                        .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
+                        world
+                            .setBlockAndUpdate(
+                                portalPos,
+                                PastelBlocks.IMBRIFER_PORTAL
+                                    .get()
+                                    .defaultBlockState()
+                                    .setValue(FACING_UP, false)
+                            );
                     }
 
                     if (entity instanceof Player) {
@@ -181,24 +224,37 @@ public class DeeperDownPortalBlock extends Block {
                     }
 
                     BlockPos targetPos = portalPos.above(2);
-                    entity.changeDimension(
-                        new DimensionTransition(
-                            serverWorld, Vec3.atCenterOf(targetPos), Vec3.ZERO, entity.getYRot(), entity.getXRot(),
-                            DimensionTransition.DO_NOTHING
-                        ));
+                    entity
+                        .changeDimension(
+                            new DimensionTransition(
+                                serverWorld,
+                                Vec3.atCenterOf(targetPos),
+                                Vec3.ZERO,
+                                entity.getYRot(),
+                                entity.getXRot(),
+                                DimensionTransition.DO_NOTHING
+                            )
+                        );
                     teleportToSafePosition(serverWorld, entity, targetPos, 3);
                 } else {
                     BlockPos portalPos = new BlockPos(
-                        pos.getX(), world.getMinBuildHeight() + world.dimensionType()
-                                                                     .logicalHeight() - 1, pos.getZ()
+                        pos.getX(),
+                        world.getMinBuildHeight() + world
+                            .dimensionType()
+                            .logicalHeight() - 1,
+                        pos.getZ()
                     );
-                    if (!world.getBlockState(portalPos)
-                              .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
-                        world.setBlockAndUpdate(
-                            portalPos, PastelBlocks.IMBRIFER_PORTAL.get()
-                                                                      .defaultBlockState()
-                                                                      .setValue(FACING_UP, true)
-                        );
+                    if (!world
+                        .getBlockState(portalPos)
+                        .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
+                        world
+                            .setBlockAndUpdate(
+                                portalPos,
+                                PastelBlocks.IMBRIFER_PORTAL
+                                    .get()
+                                    .defaultBlockState()
+                                    .setValue(FACING_UP, true)
+                            );
                     }
 
                     if (entity instanceof Player) {
@@ -206,11 +262,17 @@ public class DeeperDownPortalBlock extends Block {
                     }
 
                     BlockPos targetPos = portalPos.below(3);
-                    entity.changeDimension(
-                        new DimensionTransition(
-                            serverWorld, Vec3.atCenterOf(targetPos), Vec3.ZERO, entity.getYRot(), entity.getXRot(),
-                            DimensionTransition.DO_NOTHING
-                        ));
+                    entity
+                        .changeDimension(
+                            new DimensionTransition(
+                                serverWorld,
+                                Vec3.atCenterOf(targetPos),
+                                Vec3.ZERO,
+                                entity.getYRot(),
+                                entity.getXRot(),
+                                DimensionTransition.DO_NOTHING
+                            )
+                        );
                     teleportToSafePosition(serverWorld, entity, targetPos.below(), 5);
                 }
 
@@ -219,17 +281,22 @@ public class DeeperDownPortalBlock extends Block {
 
             if (currentWorldKey == Level.OVERWORLD) {
                 // => teleport to DD
-                ServerLevel targetWorld = serverWorld.getServer()
-                                                     .getLevel(PastelLevels.DIMENSION_KEY);
+                ServerLevel targetWorld = serverWorld
+                    .getServer()
+                    .getLevel(PastelLevels.DIMENSION_KEY);
                 if (targetWorld != null) {
                     BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMaxBuildHeight() - 1, pos.getZ());
-                    if (!targetWorld.getBlockState(portalPos)
-                                    .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
-                        targetWorld.setBlockAndUpdate(
-                            portalPos, PastelBlocks.IMBRIFER_PORTAL.get()
-                                                                      .defaultBlockState()
-                                                                      .setValue(FACING_UP, true)
-                        );
+                    if (!targetWorld
+                        .getBlockState(portalPos)
+                        .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
+                        targetWorld
+                            .setBlockAndUpdate(
+                                portalPos,
+                                PastelBlocks.IMBRIFER_PORTAL
+                                    .get()
+                                    .defaultBlockState()
+                                    .setValue(FACING_UP, true)
+                            );
                     }
 
                     if (entity instanceof Player) {
@@ -237,10 +304,17 @@ public class DeeperDownPortalBlock extends Block {
                     }
 
                     BlockPos targetPos = portalPos.below(3);
-                    entity.changeDimension(new DimensionTransition(
-                        targetWorld, Vec3.atCenterOf(targetPos), Vec3.ZERO, entity.getYRot(), entity.getXRot(),
-                        DimensionTransition.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET)
-                    ));
+                    entity
+                        .changeDimension(
+                            new DimensionTransition(
+                                targetWorld,
+                                Vec3.atCenterOf(targetPos),
+                                Vec3.ZERO,
+                                entity.getYRot(),
+                                entity.getXRot(),
+                                DimensionTransition.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET)
+                            )
+                        );
                     teleportToSafePosition(targetWorld, entity, targetPos.below(), 5);
 
                     return;
@@ -248,40 +322,62 @@ public class DeeperDownPortalBlock extends Block {
             }
 
             // => teleport to Overworld
-            ServerLevel targetWorld = serverWorld.getServer()
-                                                 .getLevel(Level.OVERWORLD);
+            ServerLevel targetWorld = serverWorld
+                .getServer()
+                .getLevel(Level.OVERWORLD);
             if (targetWorld != null) {
                 BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMinBuildHeight(), pos.getZ());
-                if (!targetWorld.getBlockState(portalPos)
-                                .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
-                    targetWorld.setBlockAndUpdate(
-                        portalPos, PastelBlocks.IMBRIFER_PORTAL.get()
-                                                                  .defaultBlockState()
-                                                                  .setValue(FACING_UP, false)
-                    );
+                if (!targetWorld
+                    .getBlockState(portalPos)
+                    .is(PastelBlocks.IMBRIFER_PORTAL.get())) {
+                    targetWorld
+                        .setBlockAndUpdate(
+                            portalPos,
+                            PastelBlocks.IMBRIFER_PORTAL
+                                .get()
+                                .defaultBlockState()
+                                .setValue(FACING_UP, false)
+                        );
                 }
                 makeRoomAround(targetWorld, portalPos, 4, 2, true, BlockTags.BASE_STONE_OVERWORLD);
 
                 BlockPos targetPos = portalPos.above(2);
-                entity.changeDimension(new DimensionTransition(
-                    targetWorld, Vec3.atCenterOf(targetPos), Vec3.ZERO, entity.getYRot(), entity.getXRot(),
-                    DimensionTransition.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET)
-                ));
+                entity
+                    .changeDimension(
+                        new DimensionTransition(
+                            targetWorld,
+                            Vec3.atCenterOf(targetPos),
+                            Vec3.ZERO,
+                            entity.getYRot(),
+                            entity.getXRot(),
+                            DimensionTransition.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET)
+                        )
+                    );
                 teleportToSafePosition(targetWorld, entity, targetPos, 3);
             }
         }
     }
 
     public void makeRoomAround(
-        Level world, BlockPos blockPos, int height, int maxWidth, boolean pointingUp, TagKey<Block> tagToClear) {
+        Level world,
+        BlockPos blockPos,
+        int height,
+        int maxWidth,
+        boolean pointingUp,
+        TagKey<Block> tagToClear
+    ) {
         BlockState state = world.getBlockState(blockPos);
-        if (state.getCollisionShape(world, blockPos)
-                 .isEmpty() && state.getCollisionShape(world, blockPos.above())
-                                    .isEmpty()) {
+        if (state
+            .getCollisionShape(world, blockPos)
+            .isEmpty() && state
+                .getCollisionShape(world, blockPos.above())
+                .isEmpty()) {
             return;
         }
 
-        for (BlockPos pos : iterateVerticalCone(blockPos, height, maxWidth, pointingUp)) {
+        for (
+            BlockPos pos : iterateVerticalCone(blockPos, height, maxWidth, pointingUp)
+        ) {
             if (world.getBlockEntity(pos) != null) {
                 continue;
             }
@@ -295,15 +391,22 @@ public class DeeperDownPortalBlock extends Block {
     }
 
     public static Iterable<BlockPos> iterateVerticalCone(
-        BlockPos center, int height, int maxWidth, boolean pointingUp) {
+        BlockPos center,
+        int height,
+        int maxWidth,
+        boolean pointingUp
+    ) {
         int x = center.getX();
         int y = center.getY();
         int z = center.getZ();
 
         return () -> new AbstractIterator<>() {
             int xOffset = 0;
+
             int yOffset = 0;
+
             int zOffset = 0;
+
             int currentMaxWidth = 0;
 
             private final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
@@ -332,13 +435,15 @@ public class DeeperDownPortalBlock extends Block {
     }
 
     public void teleportToSafePosition(Level world, Entity entity, BlockPos targetPos, int maxRadius) {
-        for (BlockPos bp : BlockPos.withinManhattan(targetPos, maxRadius, maxRadius, maxRadius)) {
+        for (
+            BlockPos bp : BlockPos.withinManhattan(targetPos, maxRadius, maxRadius, maxRadius)
+        ) {
             entity.setPos(Vec3.atBottomCenterOf(bp));
-            if (world.getBlockState(bp.below())
-                     .getCollisionShape(world, bp.below()) == Shapes.block()
-                && world.noCollision(entity)
-                && entity.getY() < (double) world.getMaxBuildHeight()
-                && entity.getY() > (double) world.getMinBuildHeight()) {
+            if (world
+                .getBlockState(bp.below())
+                .getCollisionShape(world, bp.below()) == Shapes.block() && world.noCollision(entity) && entity
+                    .getY() < (double) world.getMaxBuildHeight() && entity.getY() > (double) world
+                        .getMinBuildHeight()) {
 
                 entity.teleportTo(bp.getX() + 0.5, bp.getY() + 0.5, bp.getZ() + 0.5);
                 return;
@@ -352,7 +457,9 @@ public class DeeperDownPortalBlock extends Block {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (!state.getValue(DeeperDownPortalBlock.FACING_UP) || random.nextInt(8) == 0) {
             spawnVoidFogParticle(world, pos, random);

@@ -55,23 +55,38 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
     private final float armorPierce, protPierce;
 
     public MalachiteBidentItem(
-        Item.Properties settings, double attackSpeed, double damage, float armorPierce, float protPierce) {
-        super(settings.attributes(ItemAttributeModifiers.builder()
-                                                        .add(
-                                                            Attributes.ATTACK_DAMAGE,
-                                                            new AttributeModifier(
-                                                                BASE_ATTACK_DAMAGE_ID, damage,
-                                                                AttributeModifier.Operation.ADD_VALUE
-                                                            ), EquipmentSlotGroup.MAINHAND
-                                                        )
-                                                        .add(
-                                                            Attributes.ATTACK_SPEED,
-                                                            new AttributeModifier(
-                                                                BASE_ATTACK_SPEED_ID, attackSpeed,
-                                                                AttributeModifier.Operation.ADD_VALUE
-                                                            ), EquipmentSlotGroup.MAINHAND
-                                                        )
-                                                        .build()));
+        Item.Properties settings,
+        double attackSpeed,
+        double damage,
+        float armorPierce,
+        float protPierce
+    ) {
+        super(
+            settings
+                .attributes(
+                    ItemAttributeModifiers
+                        .builder()
+                        .add(
+                            Attributes.ATTACK_DAMAGE,
+                            new AttributeModifier(
+                                BASE_ATTACK_DAMAGE_ID,
+                                damage,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .add(
+                            Attributes.ATTACK_SPEED,
+                            new AttributeModifier(
+                                BASE_ATTACK_SPEED_ID,
+                                attackSpeed,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                        .build()
+                )
+        );
         this.armorPierce = armorPierce;
         this.protPierce = protPierce;
     }
@@ -110,8 +125,9 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
-        return PastelToolMaterial.MALACHITE.getRepairIngredient()
-                                           .test(ingredient) || super.isValidRepairItem(stack, ingredient);
+        return PastelToolMaterial.MALACHITE
+            .getRepairIngredient()
+            .test(ingredient) || super.isValidRepairItem(stack, ingredient);
     }
 
     public int getRiptideLevel(HolderLookup.Provider lookup, ItemStack stack) {
@@ -158,8 +174,15 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
         bidentBaseEntity.setPickupItemStack(stack);
         bidentBaseEntity.setOwner(playerEntity);
         bidentBaseEntity.absMoveTo(playerEntity.getX(), playerEntity.getEyeY() - 0.1, playerEntity.getZ());
-        bidentBaseEntity.shootFromRotation(
-            playerEntity, playerEntity.getXRot(), playerEntity.getYRot(), 0.0F, getThrowSpeed(stack), 1.0F);
+        bidentBaseEntity
+            .shootFromRotation(
+                playerEntity,
+                playerEntity.getXRot(),
+                playerEntity.getYRot(),
+                0.0F,
+                getThrowSpeed(stack),
+                1.0F
+            );
         if (!mirrorImage && playerEntity.getAbilities().instabuild) {
             bidentBaseEntity.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
         }
@@ -167,12 +190,19 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
         world.addFreshEntity(bidentBaseEntity);
         var soundEvent = SoundEvents.TRIDENT_THROW.value();
         if (mirrorImage) {
-            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                world, bidentBaseEntity.position(), PastelParticleTypes.MIRROR_IMAGE, 8, Vec3.ZERO, new Vec3(
-                    0.2, 0.2,
-                    0.2
-                )
-            );
+            PlayParticleWithRandomOffsetAndVelocityPayload
+                .playParticleWithRandomOffsetAndVelocity(
+                    world,
+                    bidentBaseEntity.position(),
+                    PastelParticleTypes.MIRROR_IMAGE,
+                    8,
+                    Vec3.ZERO,
+                    new Vec3(
+                        0.2,
+                        0.2,
+                        0.2
+                    )
+                );
             bidentBaseEntity.pickup = AbstractArrow.Pickup.DISALLOWED;
             soundEvent = PastelSounds.BIDENT_MIRROR_IMAGE_THROWN;
         } else if (playerEntity.getAbilities().instabuild) {
@@ -181,8 +211,9 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 
         world.playSound(null, playerEntity, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
         if (!playerEntity.getAbilities().instabuild && !mirrorImage) {
-            playerEntity.getInventory()
-                        .removeItem(stack);
+            playerEntity
+                .getInventory()
+                .removeItem(stack);
         }
     }
 
@@ -201,8 +232,12 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         if (isDisabled(stack))
-            tooltip.add(Component.translatable("item.pastel.bident.toolTip.disabled")
-                                 .withStyle(ChatFormatting.RED, ChatFormatting.ITALIC));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.bident.toolTip.disabled")
+                        .withStyle(ChatFormatting.RED, ChatFormatting.ITALIC)
+                );
     }
 
     @Override
@@ -220,8 +255,10 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 
     public boolean canStartRiptide(Player player, ItemStack stack) {
         return getRiptideLevel(
-            player.level()
-                  .registryAccess(), stack
+            player
+                .level()
+                .registryAccess(),
+            stack
         ) > 0 && player.isInWaterOrRain();
     }
 
@@ -241,7 +278,11 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 
     @Override
     public DamageComposition getDamageComposition(
-        LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
+        LivingEntity attacker,
+        LivingEntity target,
+        ItemStack stack,
+        float damage
+    ) {
         var composition = new DamageComposition();
         var source = composition.getPlayerOrEntity(attacker);
         composition.add(source, damage);
@@ -250,30 +291,52 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 
     @Override
     public void expandTooltipPostStats(
-        ItemStack stack, @Nullable Player player, List<Component> tooltip, TooltipContext context) {
+        ItemStack stack,
+        @Nullable Player player,
+        List<Component> tooltip,
+        TooltipContext context
+    ) {
         if (Screen.hasShiftDown()) {
-            tooltip.add(Component.translatable("item.pastel.bident.postToolTip.ap", armorPierce * 100)
-                                 .withStyle(ChatFormatting.DARK_GREEN));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.bident.postToolTip.ap", armorPierce * 100)
+                        .withStyle(ChatFormatting.DARK_GREEN)
+                );
 
             if (protPierce > 0) {
-                tooltip.add(Component.translatable("item.pastel.bident.postToolTip.pp", protPierce * 100)
-                                     .withStyle(ChatFormatting.DARK_GREEN));
+                tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.bident.postToolTip.pp", protPierce * 100)
+                            .withStyle(ChatFormatting.DARK_GREEN)
+                    );
             }
             if (canBeDisabled()) {
-                tooltip.add(Component.translatable("item.pastel.bident.postToolTip.disable")
-                                     .withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
+                tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.bident.postToolTip.disable")
+                            .withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC)
+                    );
             }
         } else {
-            tooltip.add(Component.translatable("pastel.tooltip.press_shift_for_more")
-                                 .withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
+            tooltip
+                .add(
+                    Component
+                        .translatable("pastel.tooltip.press_shift_for_more")
+                        .withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC)
+                );
         }
     }
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.SHARPNESS) ||
-               enchantment.is(Enchantments.SMITE) || enchantment.is(Enchantments.BANE_OF_ARTHROPODS) || enchantment.is(
-            Enchantments.LOOTING) || enchantment.is(PastelEnchantments.CLOVERS_FAVOR);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.SHARPNESS) || enchantment
+            .is(Enchantments.SMITE) || enchantment.is(Enchantments.BANE_OF_ARTHROPODS) || enchantment
+                .is(
+                    Enchantments.LOOTING
+                ) || enchantment.is(PastelEnchantments.CLOVERS_FAVOR);
     }
 
 }

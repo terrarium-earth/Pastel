@@ -44,22 +44,26 @@ import static earth.terrarium.pastel.registries.PastelBlocks.MOB_HEADS;
 
 public class PastelSkullBlock extends SkullBlock {
 
-    public static final MapCodec<PastelSkullBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                 PastelSkullType.CODEC.fieldOf("kind")
-                                                                                                                      .forGetter(b -> b.skullType),
-                                                                                                 propertiesCodec()
-                                                                                             )
-                                                                                             .apply(
-                                                                                                 i,
-                                                                                                 PastelSkullBlock::new
-                                                                                             ));
+    public static final MapCodec<PastelSkullBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    PastelSkullType.CODEC
+                        .fieldOf("kind")
+                        .forGetter(b -> b.skullType),
+                    propertiesCodec()
+                )
+                .apply(
+                    i,
+                    PastelSkullBlock::new
+                )
+        );
 
-    private static final Map<Supplier<EntityType<?>>, PastelSkullType> ENTITY_TYPE_TO_SKULL_TYPE
-        = new Object2ObjectOpenHashMap<>();
+    private static final Map<Supplier<EntityType<?>>, PastelSkullType> ENTITY_TYPE_TO_SKULL_TYPE = new Object2ObjectOpenHashMap<>();
+
     private final PastelSkullType skullType;
 
-    @Nullable
-    private static BlockPattern witherBossPattern;
+    @Nullable private static BlockPattern witherBossPattern;
 
     public PastelSkullBlock(PastelSkullType skullType, Properties settings) {
         super(skullType, settings);
@@ -80,22 +84,31 @@ public class PastelSkullBlock extends SkullBlock {
 
     @Override
     public MutableComponent getName() {
-        return Component.translatable(
-            getType().getHeadTranslationKey(), Component.translatable(getType().getEntityType()
-                                                                               .get()
-                                                                               .getDescriptionId())
-        );
+        return Component
+            .translatable(
+                getType().getHeadTranslationKey(),
+                Component
+                    .translatable(
+                        getType()
+                            .getEntityType()
+                            .get()
+                            .getDescriptionId()
+                    )
+            );
     }
 
     public static Optional<EntityType<?>> getEntityTypeOfSkullStack(ItemStack itemStack) {
         Item item = itemStack.getItem();
 
-        if (item instanceof BlockItem blockItem &&
-            blockItem.getBlock() instanceof SkullBlock skullBlock &&
-            skullBlock.getType() instanceof PastelSkullType type
+        if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof SkullBlock skullBlock && skullBlock
+            .getType() instanceof PastelSkullType type
         ) {
-            return Optional.of(type.getEntityType()
-                                   .get());
+            return Optional
+                .of(
+                    type
+                        .getEntityType()
+                        .get()
+                );
         }
 
         if (Items.CREEPER_HEAD == item) {
@@ -116,8 +129,12 @@ public class PastelSkullBlock extends SkullBlock {
 
     public static Optional<Block> getBlock(SkullBlock.Type skullType) {
         if (skullType instanceof PastelSkullType pastelSkullType) {
-            return Optional.of(MOB_HEADS.get(pastelSkullType)
-                                        .get());
+            return Optional
+                .of(
+                    MOB_HEADS
+                        .get(pastelSkullType)
+                        .get()
+                );
         }
         if (SkullBlock.Types.CREEPER == skullType) {
             return Optional.of(Blocks.CREEPER_HEAD);
@@ -153,41 +170,61 @@ public class PastelSkullBlock extends SkullBlock {
         return Optional.ofNullable(ENTITY_TYPE_TO_SKULL_TYPE.get(entityType));
     }
 
-    @Contract(pure = true)
+    @Contract(
+        pure = true
+    )
     public static @NotNull Collection<DeferredBlock<Block>> getMobHeads() {
         return MOB_HEADS.values();
     }
 
     private static BlockPattern getWitherSkullPattern() {
         if (witherBossPattern == null) {
-            getBlock(PastelSkullType.WITHER).ifPresent(b ->
-                                                           witherBossPattern = BlockPatternBuilder.start()
-                                                                                                  .aisle(
-                                                                                                      "^^^", "###",
-                                                                                                      "~#~"
-                                                                                                  )
-                                                                                                  .where(
-                                                                                                      '#',
-                                                                                                      (pos) -> pos.getState()
-                                                                                                                  .is(BlockTags.WITHER_SUMMON_BASE_BLOCKS)
-                                                                                                  )
-                                                                                                  .where(
-                                                                                                      '^',
-                                                                                                      BlockInWorld.hasState(
-                                                                                                          BlockStatePredicate.forBlock(
-                                                                                                                                 b)
-                                                                                                                             .or(BlockStatePredicate.forBlock(
-                                                                                                                                 PastelWallSkullBlock.getMobWallHead(
-                                                                                                                                     PastelSkullType.WITHER))))
-                                                                                                  )
-                                                                                                  .where(
-                                                                                                      '~',
-                                                                                                      BlockInWorld.hasState(
-                                                                                                          BlockStatePredicate.forBlock(
-                                                                                                              Blocks.AIR))
-                                                                                                  )
-                                                                                                  .build()
-            );
+            getBlock(PastelSkullType.WITHER)
+                .ifPresent(
+                    b -> witherBossPattern = BlockPatternBuilder
+                        .start()
+                        .aisle(
+                            "^^^",
+                            "###",
+                            "~#~"
+                        )
+                        .where(
+                            '#',
+                            (pos) -> pos
+                                .getState()
+                                .is(BlockTags.WITHER_SUMMON_BASE_BLOCKS)
+                        )
+                        .where(
+                            '^',
+                            BlockInWorld
+                                .hasState(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            b
+                                        )
+                                        .or(
+                                            BlockStatePredicate
+                                                .forBlock(
+                                                    PastelWallSkullBlock
+                                                        .getMobWallHead(
+                                                            PastelSkullType.WITHER
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                        .where(
+                            '~',
+                            BlockInWorld
+                                .hasState(
+                                    BlockStatePredicate
+                                        .forBlock(
+                                            Blocks.AIR
+                                        )
+                                )
+                        )
+                        .build()
+                );
         }
         return witherBossPattern;
     }
@@ -198,15 +235,22 @@ public class PastelSkullBlock extends SkullBlock {
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
+    @Nullable public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
         return null;
     }
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         super.setPlacedBy(world, pos, state, placer, itemStack);
 
         // Trigger advancement if a player builds a wither structure using wither skulls instead of wither skeleton
@@ -216,10 +260,12 @@ public class PastelSkullBlock extends SkullBlock {
                 BlockPattern blockPattern = getWitherSkullPattern();
                 BlockPattern.BlockPatternMatch result = blockPattern.find(world, pos);
                 if (result != null) {
-                    Support.grantAdvancementCriterion(
-                        serverPlayerEntity, "midgame/build_wither_using_wither_heads",
-                        "built_wither_using_wither_heads"
-                    );
+                    Support
+                        .grantAdvancementCriterion(
+                            serverPlayerEntity,
+                            "midgame/build_wither_using_wither_heads",
+                            "built_wither_using_wither_heads"
+                        );
                 }
             }
         }

@@ -18,31 +18,45 @@ import java.util.HashMap;
 import java.util.Map;
 
 public record UpdateBlockEntityInkPayload(BlockPos pos, Map<InkColor, Long> storage, long currentTotal)
-    implements CustomPacketPayload {
+    implements
+    CustomPacketPayload {
 
     public static final Type<UpdateBlockEntityInkPayload> ID = PastelC2SPackets.makeId("update_block_entity_ink");
-    public static final StreamCodec<FriendlyByteBuf, UpdateBlockEntityInkPayload> CODEC = StreamCodec.composite(
-        BlockPos.STREAM_CODEC, UpdateBlockEntityInkPayload::pos,
-        ByteBufCodecs.map(HashMap::new, InkColor.STREAM_CODEC, ByteBufCodecs.VAR_LONG),
-        UpdateBlockEntityInkPayload::storage,
-        ByteBufCodecs.VAR_LONG, UpdateBlockEntityInkPayload::currentTotal,
-        UpdateBlockEntityInkPayload::new
-    );
 
-    @SuppressWarnings("deprecation")
+    public static final StreamCodec<FriendlyByteBuf, UpdateBlockEntityInkPayload> CODEC = StreamCodec
+        .composite(
+            BlockPos.STREAM_CODEC,
+            UpdateBlockEntityInkPayload::pos,
+            ByteBufCodecs.map(HashMap::new, InkColor.STREAM_CODEC, ByteBufCodecs.VAR_LONG),
+            UpdateBlockEntityInkPayload::storage,
+            ByteBufCodecs.VAR_LONG,
+            UpdateBlockEntityInkPayload::currentTotal,
+            UpdateBlockEntityInkPayload::new
+        );
+
+    @SuppressWarnings(
+        "deprecation"
+    )
     public static void updateBlockEntityInk(BlockPos pos, InkStorage inkStorage, ServerPlayer player) {
-        PacketDistributor.sendToPlayer(
-            player, new UpdateBlockEntityInkPayload(pos, inkStorage.getEnergy(), inkStorage.getCurrentTotal()));
+        PacketDistributor
+            .sendToPlayer(
+                player,
+                new UpdateBlockEntityInkPayload(pos, inkStorage.getEnergy(), inkStorage.getCurrentTotal())
+            );
     }
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings(
+        "resource"
+    )
     public static void execute(UpdateBlockEntityInkPayload payload, IPayloadContext context) {
-        var level = context.player()
-                           .level();
+        var level = context
+            .player()
+            .level();
         BlockEntity blockEntity = level.getBlockEntity(payload.pos);
         if (blockEntity instanceof InkStorageBlockEntity<?> inkStorageBlockEntity) {
-            inkStorageBlockEntity.getEnergyStorage()
-                                 .setEnergy(payload.storage, payload.currentTotal);
+            inkStorageBlockEntity
+                .getEnergyStorage()
+                .setEnergy(payload.storage, payload.currentTotal);
         }
     }
 

@@ -32,27 +32,41 @@ import java.util.stream.IntStream;
 
 public class FabricationChestBlockEntity extends PastelChestBlockEntity implements WorldlyContainer {
 
-    public static final int[] CHEST_SLOTS = IntStream.rangeClosed(0, 26)
-                                                     .toArray();
-    public static final int[] RECIPE_SLOTS = IntStream.rangeClosed(27, 30)
-                                                      .toArray();
-    public static final int[] RESULT_SLOTS = IntStream.rangeClosed(31, 34)
-                                                      .toArray();
+    public static final int[] CHEST_SLOTS = IntStream
+        .rangeClosed(0, 26)
+        .toArray();
+
+    public static final int[] RECIPE_SLOTS = IntStream
+        .rangeClosed(27, 30)
+        .toArray();
+
+    public static final int[] RESULT_SLOTS = IntStream
+        .rangeClosed(31, 34)
+        .toArray();
+
     public static final int INVENTORY_SIZE = CHEST_SLOTS.length + RECIPE_SLOTS.length + RESULT_SLOTS.length;
+
     private List<ItemStack> cachedOutputs = new ArrayList<>(4);
+
     private int coolDownTicks = 0;
+
     private boolean isOpen, isFull, hasValidRecipes;
+
     private State state = State.CLOSED;
+
     float rimTarget, rimPos, lastRimTarget, tabletTarget, tabletPos, lastTabletTarget, assemblyTarget, assemblyPos,
         lastAssemblyTarget, ringTarget, ringPos, lastRingTarget, itemTarget, itemPos, lastItemTarget, alphaTarget,
         alphaValue, lastAlphaTarget, yawModTarget, yawMod, lastYawModTarget, yaw, lastYaw;
+
     long interpTicks, interpLength = 1, age;
 
     public FabricationChestBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(PastelBlockEntities.FABRICATION_CHEST.get(), blockPos, blockState);
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void tick(Level world, BlockPos pos, BlockState state, FabricationChestBlockEntity chest) {
         chest.age++;
         // TODO: that should run in `clientTick() instead` (same for other chests)
@@ -89,11 +103,15 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
             chest.lidAnimator.tickLid();
         } else {
             if (tickCooldown(chest)) {
-                for (int i = 0; i < 4; i++) {
+                for (
+                    int i = 0;
+                    i < 4;
+                    i++
+                ) {
                     ItemStack outputItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[i]);
                     ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[i]);
-                    if (!craftingTabletItemStack.isEmpty() &&
-                        (outputItemStack.isEmpty() || outputItemStack.getCount() < outputItemStack.getMaxStackSize())) {
+                    if (!craftingTabletItemStack.isEmpty() && (outputItemStack.isEmpty() || outputItemStack
+                        .getCount() < outputItemStack.getMaxStackSize())) {
                         boolean couldCraft = chest.tryCraft(chest, i);
                         if (couldCraft) {
                             chest.setCooldown(chest, 20);
@@ -146,15 +164,17 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
 
         var list = new ArrayList<ItemStack>();
 
-        for (int slot : RECIPE_SLOTS) {
+        for (
+            int slot : RECIPE_SLOTS
+        ) {
             var tablet = inventory.getStackInSlot(slot);
 
             if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
                 continue;
 
-            var recipe = CraftingTabletItem.getStoredRecipe(level, tablet)
-                                           .value();
-
+            var recipe = CraftingTabletItem
+                .getStoredRecipe(level, tablet)
+                .value();
 
             if (!isRecipeValid(recipe))
                 continue;
@@ -177,7 +197,11 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
             return hasValidRecipes;
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (
+            int i = 0;
+            i < 4;
+            i++
+        ) {
             ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
             if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
                 continue;
@@ -185,7 +209,9 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
             var storedRecipe = CraftingTabletItem.getStoredRecipe(level, tablet);
             var recipe = storedRecipe == null ? null : storedRecipe.value();
             if (isRecipeValid(recipe) && isRecipeCraftable(recipe) && canSlotFitCraftingOutput(
-                inventory.getStackInSlot(RESULT_SLOTS[i]), recipe))
+                inventory.getStackInSlot(RESULT_SLOTS[i]),
+                recipe
+            ))
                 return true;
         }
         return false;
@@ -210,15 +236,20 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
         if (craftingTabletItemStack.is(PastelItems.CRAFTING_TABLET.get())) {
             var recipe = CraftingTabletItem.getStoredRecipe(level, craftingTabletItemStack);
             if (recipe != null && isRecipeValid(recipe.value())) {
-                NonNullList<Ingredient> ingredients = recipe.value()
-                                                            .getIngredients();
-                ItemStack outputItemStack = recipe.value()
-                                                  .getResultItem(level.registryAccess());
+                NonNullList<Ingredient> ingredients = recipe
+                    .value()
+                    .getIngredients();
+                ItemStack outputItemStack = recipe
+                    .value()
+                    .getResultItem(level.registryAccess());
                 ItemStack currentItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[index]);
-                if (InventoryHelper.canCombineItemStacks(currentItemStack, outputItemStack) &&
-                    InventoryHelper.hasInInventory(ingredients, chest.inventory)) {
-                    List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(
-                        ingredients, chest.inventory);
+                if (InventoryHelper.canCombineItemStacks(currentItemStack, outputItemStack) && InventoryHelper
+                    .hasInInventory(ingredients, chest.inventory)) {
+                    List<ItemStack> remainders = InventoryHelper
+                        .removeFromInventoryWithRemainders(
+                            ingredients,
+                            chest.inventory
+                        );
 
                     if (currentItemStack.isEmpty()) {
                         chest.inventory.setStackInSlot(RESULT_SLOTS[index], outputItemStack.copy());
@@ -226,7 +257,9 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
                         currentItemStack.grow(outputItemStack.getCount());
                     }
 
-                    for (ItemStack remainder : remainders) {
+                    for (
+                        ItemStack remainder : remainders
+                    ) {
                         InventoryHelper.smartAddToInventory(remainder, chest.inventory, null);
                     }
                     return true;
@@ -327,7 +360,11 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
     public boolean isFull() {
         int invalids = 0;
 
-        for (int i = 0; i < 4; i++) {
+        for (
+            int i = 0;
+            i < 4;
+            i++
+        ) {
             ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
 
             if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
@@ -352,13 +389,19 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
     public boolean canSlotFitCraftingOutput(ItemStack slot, Recipe<?> recipe) {
         if (level == null)
             return false;
-        return slot.isEmpty() || slot.getCount() + recipe.getResultItem(level.registryAccess())
-                                                         .getCount() < slot.getMaxStackSize();
+        return slot.isEmpty() || slot.getCount() + recipe
+            .getResultItem(level.registryAccess())
+            .getCount() < slot.getMaxStackSize();
     }
 
     @Override
     protected void onInvOpenOrClose(
-        Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        int oldViewerCount,
+        int newViewerCount
+    ) {
         super.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
         updateFullState(true);
     }
@@ -387,8 +430,9 @@ public class FabricationChestBlockEntity extends PastelChestBlockEntity implemen
 
     @Override
     public IItemHandler exposeItemHandlers(Direction dir) {
-        if (dir.getAxis()
-               .isVertical()) {
+        if (dir
+            .getAxis()
+            .isVertical()) {
             return new StackHandlerView(inventory, RESULT_SLOTS[0], RESULT_SLOTS.length);
         }
 

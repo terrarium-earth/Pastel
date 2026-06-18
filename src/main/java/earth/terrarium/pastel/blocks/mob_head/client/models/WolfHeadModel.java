@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.blocks.mob_head.client.models;
 
-
 import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -12,7 +11,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class WolfHeadModel extends PastelSkullModel {
 
     public WolfHeadModel(ModelPart root) {
@@ -23,19 +24,21 @@ public class WolfHeadModel extends PastelSkullModel {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(0, 0)
-                           .addBox(-3.0F, -6.0F, -2.0F, 6.0F, 6.0F, 4.0F) // head
-                           .texOffs(0, 10)
-                           .addBox(-1.5F, -3.001F, -5.0F, 3.0F, 3.0F, 4.0F) // hose
-                           .texOffs(16, 14)
-                           .addBox(-3.0F, -8.0F, 0.0F, 2.0F, 2.0F, 1.0F) // right ear
-                           .texOffs(16, 14)
-                           .addBox(1.0F, -8.0F, 0.0F, 2.0F, 2.0F, 1.0F), // left ear
-            PartPose.ZERO
-        );
+        modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 0)
+                    .addBox(-3.0F, -6.0F, -2.0F, 6.0F, 6.0F, 4.0F) // head
+                    .texOffs(0, 10)
+                    .addBox(-1.5F, -3.001F, -5.0F, 3.0F, 3.0F, 4.0F) // hose
+                    .texOffs(16, 14)
+                    .addBox(-3.0F, -8.0F, 0.0F, 2.0F, 2.0F, 1.0F) // right ear
+                    .texOffs(16, 14)
+                    .addBox(1.0F, -8.0F, 0.0F, 2.0F, 2.0F, 1.0F), // left ear
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 64, 32);
     }

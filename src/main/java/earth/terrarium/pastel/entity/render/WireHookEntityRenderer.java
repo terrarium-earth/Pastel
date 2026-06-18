@@ -22,23 +22,36 @@ public class WireHookEntityRenderer extends EntityRenderer<WireHookEntity> {
 
     @Override
     public void render(
-        WireHookEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource,
+        WireHookEntity entity,
+        float entityYaw,
+        float partialTick,
+        PoseStack poseStack,
+        MultiBufferSource bufferSource,
         int packedLight
     ) {
         poseStack.pushPose();
         poseStack.scale(1.5F, 1.5F, 1.5F);
-        poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher()
-                                   .cameraOrientation());
+        poseStack
+            .mulPose(
+                Minecraft
+                    .getInstance()
+                    .getEntityRenderDispatcher()
+                    .cameraOrientation()
+            );
 
-        Minecraft.getInstance().getItemRenderer().renderStatic(PastelItems.CITRINE_GLASS_ARROW.get().getDefaultInstance(),
-                                                         ItemDisplayContext.GROUND,
-                                                               LightTexture.FULL_BRIGHT,
-                                                         OverlayTexture.NO_OVERLAY,
-                                                               poseStack,
-                                                               bufferSource,
-                                                               entity.level(),
-                                                               0
-        );
+        Minecraft
+            .getInstance()
+            .getItemRenderer()
+            .renderStatic(
+                PastelItems.CITRINE_GLASS_ARROW.get().getDefaultInstance(),
+                ItemDisplayContext.GROUND,
+                LightTexture.FULL_BRIGHT,
+                OverlayTexture.NO_OVERLAY,
+                poseStack,
+                bufferSource,
+                entity.level(),
+                0
+            );
 
         poseStack.popPose();
     }

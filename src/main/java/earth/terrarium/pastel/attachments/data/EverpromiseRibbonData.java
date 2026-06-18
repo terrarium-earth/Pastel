@@ -13,10 +13,10 @@ import java.util.Optional;
 
 public class EverpromiseRibbonData {
 
-    public static final AttachmentType<Boolean> ATTACHMENT =
-        AttachmentType.builder(() -> false)
-                      .serialize(Codec.BOOL)
-                      .build();
+    public static final AttachmentType<Boolean> ATTACHMENT = AttachmentType
+        .builder(() -> false)
+        .serialize(Codec.BOOL)
+        .build();
 
     public static void attachRibbon(LivingEntity livingEntity) {
         livingEntity.setData(ATTACHMENT, true);
@@ -28,19 +28,24 @@ public class EverpromiseRibbonData {
 
     public record Payload(int entityId, boolean ribbon) implements CustomPacketPayload {
 
-        public static final StreamCodec<FriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
-            ByteBufCodecs.INT, Payload::entityId,
-            ByteBufCodecs.BOOL, Payload::ribbon,
-            Payload::new
-        );
+        public static final StreamCodec<FriendlyByteBuf, Payload> CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.INT,
+                Payload::entityId,
+                ByteBufCodecs.BOOL,
+                Payload::ribbon,
+                Payload::new
+            );
 
         public static final Type<Payload> TYPE = AttachmentUtil.create("ribbon");
 
         public static void execute(Payload payload, IPayloadContext context) {
-            var level = context.player()
-                               .level();
-            Optional.ofNullable(level.getEntity(payload.entityId))
-                    .ifPresent(e -> e.setData(ATTACHMENT, payload.ribbon));
+            var level = context
+                .player()
+                .level();
+            Optional
+                .ofNullable(level.getEntity(payload.entityId))
+                .ifPresent(e -> e.setData(ATTACHMENT, payload.ribbon));
         }
 
         @Override

@@ -18,13 +18,18 @@ public class AirExposedStateFeature extends Feature<BlockStateFeatureConfig> {
     @Override
     public boolean place(FeaturePlaceContext<BlockStateFeatureConfig> context) {
         var pos = context.origin();
-        if (!context.level()
-                    .ensureCanWrite(pos) || !isAdjacentToAir(context.level()::getBlockState, pos)) return false;
-        context.level()
-               .setBlock(
-                   pos, context.config()
-                               .blockState(), 2
-               );
+        if (!context
+            .level()
+            .ensureCanWrite(pos) || !isAdjacentToAir(context.level()::getBlockState, pos)) return false;
+        context
+            .level()
+            .setBlock(
+                pos,
+                context
+                    .config()
+                    .blockState(),
+                2
+            );
         return true;
 
     }

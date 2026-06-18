@@ -17,75 +17,101 @@ public class OreBlockModels {
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.SHIMMERSTONE_BLOCK);
 
         // hell.
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AZURE_CRYSTAL.get())
-                                                                .with(
-                                                                    PropertyDispatch.property(AzureCrystalBlock.WARDED)
-                                                                                    .generate(
-                                                                                        (warded) -> PastelModelHelper.createModelVariant(
-                                                                                            PastelTexturedModels.cubeAll(
-                                                                                                                    b -> b,
-                                                                                                                    warded ? "_warded"
-                                                                                                                           : ""
-                                                                                                                )
-                                                                                                                .createWithSuffix(
-                                                                                                                    PastelBlocks.AZURE_CRYSTAL.get(),
-                                                                                                                    warded
-                                                                                                                    ?
-                                                                                                                    "_warded"
-                                                                                                                    :
-                                                                                                                    "",
-                                                                                                                    generators.modelOutput
-                                                                                                                )))));
+        generators.blockStateOutput
+            .accept(
+                MultiVariantGenerator
+                    .multiVariant(PastelBlocks.AZURE_CRYSTAL.get())
+                    .with(
+                        PropertyDispatch
+                            .property(AzureCrystalBlock.WARDED)
+                            .generate(
+                                (warded) -> PastelModelHelper
+                                    .createModelVariant(
+                                        PastelTexturedModels
+                                            .cubeAll(
+                                                b -> b,
+                                                warded
+                                                    ? "_warded"
+                                                    : ""
+                                            )
+                                            .createWithSuffix(
+                                                PastelBlocks.AZURE_CRYSTAL.get(),
+                                                warded
+                                                    ? "_warded"
+                                                    : "",
+                                                generators.modelOutput
+                                            )
+                                    )
+                            )
+                    )
+            );
         // i hate everything about this
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(PastelBlocks.AZURE_OUTCROP.get())
-                                                                .with(PropertyDispatch.property(
-                                                                                          AzuriteOutcropBlock.SPIRE_PART)
-                                                                                      .generate(
-                                                                                          (part) -> {
-                                                                                              switch (part) {
-                                                                                                  case BODY -> {
-                                                                                                      return PastelModelHelper.createModelVariant(
-                                                                                                          PastelTexturedModels.cross(
-                                                                                                                                  b -> b,
-                                                                                                                                  "_body"
-                                                                                                                              )
-                                                                                                                              .createWithSuffix(
-                                                                                                                                  PastelBlocks.AZURE_OUTCROP.get(),
-                                                                                                                                  "_body",
-                                                                                                                                  generators.modelOutput
-                                                                                                                              ));
-                                                                                                  }
-                                                                                                  case BASE -> {
-                                                                                                      return PastelModelHelper.createModelVariant(
-                                                                                                          PastelTexturedModels.cross(
-                                                                                                                                  b -> b,
-                                                                                                                                  "_base"
-                                                                                                                              )
-                                                                                                                              .createWithSuffix(
-                                                                                                                                  PastelBlocks.AZURE_OUTCROP.get(),
-                                                                                                                                  "_base",
-                                                                                                                                  generators.modelOutput
-                                                                                                                              ));
-                                                                                                  }
-                                                                                                  case TIP -> {
-                                                                                                      return PastelModelHelper.createModelVariant(
-                                                                                                          PastelTexturedModels.cross(
-                                                                                                                                  b -> b,
-                                                                                                                                  "_tip"
-                                                                                                                              )
-                                                                                                                              .createWithSuffix(
-                                                                                                                                  PastelBlocks.AZURE_OUTCROP.get(),
-                                                                                                                                  "_tip",
-                                                                                                                                  generators.modelOutput
-                                                                                                                              ));
-                                                                                                  }
-                                                                                              }
-                                                                                              return null;
-                                                                                          })));
+        generators.blockStateOutput
+            .accept(
+                MultiVariantGenerator
+                    .multiVariant(PastelBlocks.AZURE_OUTCROP.get())
+                    .with(
+                        PropertyDispatch
+                            .property(
+                                AzuriteOutcropBlock.SPIRE_PART
+                            )
+                            .generate(
+                                (part) -> {
+                                    switch (part) {
+                                        case BODY -> {
+                                            return PastelModelHelper
+                                                .createModelVariant(
+                                                    PastelTexturedModels
+                                                        .cross(
+                                                            b -> b,
+                                                            "_body"
+                                                        )
+                                                        .createWithSuffix(
+                                                            PastelBlocks.AZURE_OUTCROP.get(),
+                                                            "_body",
+                                                            generators.modelOutput
+                                                        )
+                                                );
+                                        }
+                                        case BASE -> {
+                                            return PastelModelHelper
+                                                .createModelVariant(
+                                                    PastelTexturedModels
+                                                        .cross(
+                                                            b -> b,
+                                                            "_base"
+                                                        )
+                                                        .createWithSuffix(
+                                                            PastelBlocks.AZURE_OUTCROP.get(),
+                                                            "_base",
+                                                            generators.modelOutput
+                                                        )
+                                                );
+                                        }
+                                        case TIP -> {
+                                            return PastelModelHelper
+                                                .createModelVariant(
+                                                    PastelTexturedModels
+                                                        .cross(
+                                                            b -> b,
+                                                            "_tip"
+                                                        )
+                                                        .createWithSuffix(
+                                                            PastelBlocks.AZURE_OUTCROP.get(),
+                                                            "_tip",
+                                                            generators.modelOutput
+                                                        )
+                                                );
+                                        }
+                                    }
+                                    return null;
+                                }
+                            )
+                    )
+            );
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.BUDDING_AZURITE);
 
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.VIRIDIAN_CRYSTAL);
-
 
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.STRATINE_ORE);
         PastelModelHelper.BLOCK.simple(generators, PastelBlocks.PALTAERIA_ORE);

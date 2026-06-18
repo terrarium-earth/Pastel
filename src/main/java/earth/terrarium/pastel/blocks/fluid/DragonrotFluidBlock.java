@@ -44,12 +44,19 @@ public class DragonrotFluidBlock extends PastelFluidBlock {
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(state, world, pos, random);
-        if (!world.getBlockState(pos.above())
-                  .isRedstoneConductor(world, pos.above()) && random.nextFloat() < 0.03F) {
-            world.addParticle(
-                PastelParticleTypes.DRAGONROT, pos.getX() + random.nextDouble(), pos.getY() + 1,
-                pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0
-            );
+        if (!world
+            .getBlockState(pos.above())
+            .isRedstoneConductor(world, pos.above()) && random.nextFloat() < 0.03F) {
+            world
+                .addParticle(
+                    PastelParticleTypes.DRAGONROT,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + 1,
+                    pos.getZ() + random.nextDouble(),
+                    0,
+                    random.nextDouble() * 0.1,
+                    0
+                );
         }
     }
 
@@ -59,20 +66,26 @@ public class DragonrotFluidBlock extends PastelFluidBlock {
     }
 
     public @Nullable BlockState handleFluidCollision(
-        Level world, @NotNull FluidState state, @NotNull FluidState otherState) {
+        Level world,
+        @NotNull FluidState state,
+        @NotNull FluidState otherState
+    ) {
         if (otherState.is(FluidTags.WATER)) {
-            return PastelBlocks.SLUSH.get()
-                                     .defaultBlockState();
+            return PastelBlocks.SLUSH
+                .get()
+                .defaultBlockState();
         } else if (otherState.is(FluidTags.LAVA)) {
             return Blocks.BLACKSTONE.defaultBlockState();
         } else if (otherState.is(PastelFluidTags.HUMUS)) {
             return Blocks.COARSE_DIRT.defaultBlockState();
         } else if (otherState.is(PastelFluidTags.LIQUID_CRYSTAL)) {
-            return PastelBlocks.FLAYED_EARTH.get()
-                                            .defaultBlockState();
+            return PastelBlocks.FLAYED_EARTH
+                .get()
+                .defaultBlockState();
         } else if (otherState.is(PastelFluidTags.MIDNIGHT_SOLUTION)) {
-            return PastelBlocks.HORNSLAKE.get()
-                                         .defaultBlockState();
+            return PastelBlocks.HORNSLAKE
+                .get()
+                .defaultBlockState();
         }
         return null;
     }
@@ -84,7 +97,12 @@ public class DragonrotFluidBlock extends PastelFluidBlock {
 
     @Override
     public @Nullable PathType getAdjacentBlockPathType(
-        BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
+        BlockState state,
+        BlockGetter level,
+        BlockPos pos,
+        @Nullable Mob mob,
+        PathType originalType
+    ) {
         return PathType.DAMAGE_OTHER;
     }
 }

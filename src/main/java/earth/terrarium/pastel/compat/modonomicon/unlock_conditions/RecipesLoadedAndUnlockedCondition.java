@@ -24,8 +24,7 @@ import java.util.Optional;
 
 public class RecipesLoadedAndUnlockedCondition extends BookCondition {
 
-    protected static final String TOOLTIP = "book.condition.tooltip." + PastelCommon.MOD_ID +
-                                            ".recipes_loaded_and_unlocked";
+    protected static final String TOOLTIP = "book.condition.tooltip." + PastelCommon.MOD_ID + ".recipes_loaded_and_unlocked";
 
     protected List<ResourceLocation> recipeIDs;
 
@@ -35,11 +34,16 @@ public class RecipesLoadedAndUnlockedCondition extends BookCondition {
     }
 
     public static RecipesLoadedAndUnlockedCondition fromJson(
-        ResourceLocation conditionParentId, JsonObject json, HolderLookup.Provider provider) {
+        ResourceLocation conditionParentId,
+        JsonObject json,
+        HolderLookup.Provider provider
+    ) {
         List<ResourceLocation> recipeIDs = new ArrayList<>();
 
         JsonArray array = GsonHelper.getAsJsonArray(json, "recipe_ids");
-        for (JsonElement element : array) {
+        for (
+            JsonElement element : array
+        ) {
             recipeIDs.add(ResourceLocation.parse(element.getAsString()));
         }
         Component tooltip = tooltipFromJson(json, provider);
@@ -50,7 +54,11 @@ public class RecipesLoadedAndUnlockedCondition extends BookCondition {
         Component tooltip = buffer.readBoolean() ? ComponentSerialization.STREAM_CODEC.decode(buffer) : null;
         int recipeCount = buffer.readInt();
         List<ResourceLocation> recipeIDs = new ArrayList<>();
-        for (int i = 0; i < recipeCount; i++) {
+        for (
+            int i = 0;
+            i < recipeCount;
+            i++
+        ) {
             recipeIDs.add(buffer.readResourceLocation());
         }
         return new RecipesLoadedAndUnlockedCondition(tooltip, recipeIDs);
@@ -68,20 +76,26 @@ public class RecipesLoadedAndUnlockedCondition extends BookCondition {
             ComponentSerialization.STREAM_CODEC.encode(buffer, this.tooltip);
         }
         buffer.writeInt(this.recipeIDs.size());
-        for (ResourceLocation identifier : this.recipeIDs) {
+        for (
+            ResourceLocation identifier : this.recipeIDs
+        ) {
             buffer.writeResourceLocation(identifier);
         }
     }
 
     @Override
     public boolean test(BookConditionContext context, Player player) {
-        for (ResourceLocation recipeID : this.recipeIDs) {
-            Optional<RecipeHolder<?>> optionalRecipe = player.level()
-                                                             .getRecipeManager()
-                                                             .byKey(recipeID);
+        for (
+            ResourceLocation recipeID : this.recipeIDs
+        ) {
+            Optional<RecipeHolder<?>> optionalRecipe = player
+                .level()
+                .getRecipeManager()
+                .byKey(recipeID);
             if (optionalRecipe.isPresent()) {
-                Recipe<?> recipe = optionalRecipe.get()
-                                                 .value();
+                Recipe<?> recipe = optionalRecipe
+                    .get()
+                    .value();
                 if (recipe instanceof GatedRecipe<?> gatedRecipe) {
                     if (gatedRecipe.canPlayerCraft(player)) {
                         return true;

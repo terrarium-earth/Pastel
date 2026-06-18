@@ -16,16 +16,23 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Objects;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class MagicProjectileSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final ResourceKey<Level> worldKey;
+
     private final MagicProjectileEntity projectile;
+
     private final int maxDurationTicks = 280;
 
     private int ticksPlayed = 0;
+
     private boolean done;
+
     private boolean playedExplosion;
+
     private float pitchMod;
 
     protected MagicProjectileSoundInstance(ResourceKey<Level> worldKey, MagicProjectileEntity projectile) {
@@ -45,14 +52,19 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
         pitchMod = Support.varFloatCentered(random, 0.1F);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static void startSoundInstance(MagicProjectileEntity projectile) {
         Minecraft client = Minecraft.getInstance();
         MagicProjectileSoundInstance newInstance = new MagicProjectileSoundInstance(
-            client.level.dimension(), projectile);
-        Minecraft.getInstance()
-                 .getSoundManager()
-                 .play(newInstance);
+            client.level.dimension(),
+            projectile
+        );
+        Minecraft
+            .getInstance()
+            .getSoundManager()
+            .play(newInstance);
     }
 
     @Override
@@ -75,13 +87,12 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
         this.z = this.projectile.getZ();
 
         var proximity = 1F - (float) projectile.position().distanceTo(client.cameraEntity.position()) / 48F;
-        volume =  Math.clamp(proximity, 0, 1);
+        volume = Math.clamp(proximity, 0, 1);
         pitch = 1 - (1F - proximity) / 100;
         pitch *= pitchMod;
 
-        if (ticksPlayed > maxDurationTicks
-            || !Objects.equals(this.worldKey, Minecraft.getInstance().level.dimension())
-            || projectile.isRemoved()) {
+        if (ticksPlayed > maxDurationTicks || !Objects
+            .equals(this.worldKey, Minecraft.getInstance().level.dimension()) || projectile.isRemoved()) {
 
             this.setDone();
         }

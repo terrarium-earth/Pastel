@@ -48,16 +48,22 @@ import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.Optional;
 
-
 public class GlassArrowEntity extends AbstractArrow {
 
     private static final String VARIANT_STRING = "variant";
+
     public static final float DAMAGE_MODIFIER = 1.5F;
-    private static final EntityDataAccessor<GlassArrowVariant> VARIANT = SynchedEntityData.defineId(
-        GlassArrowEntity.class, PastelTrackedDataHandlers.GLASS_ARROW_VARIANT);
+
+    private static final EntityDataAccessor<GlassArrowVariant> VARIANT = SynchedEntityData
+        .defineId(
+            GlassArrowEntity.class,
+            PastelTrackedDataHandlers.GLASS_ARROW_VARIANT
+        );
 
     private final IntOpenHashSet pierced = new IntOpenHashSet();
+
     private Optional<Entity> homingTarget = Optional.empty();
+
     private boolean laterHits = false;
 
     public GlassArrowEntity(EntityType<? extends GlassArrowEntity> entityType, Level world) {
@@ -77,9 +83,15 @@ public class GlassArrowEntity extends AbstractArrow {
         if (tickCount == 1 && getOwner() != null) {
             var volMod = (float) (Math.clamp(getDeltaMovement().length() / 6, 0, 0.75) + 0.325);
             float pitch = Support.varFloatCentered(random, 0.175F) + 0.2F;
-            level().playSound(null, this, PastelSounds.PIERCING_RADIANCE, SoundSource.PLAYERS, Support.varFloatCentered(random, 0.1F) * volMod,
-                              pitch
-            );
+            level()
+                .playSound(
+                    null,
+                    this,
+                    PastelSounds.PIERCING_RADIANCE,
+                    SoundSource.PLAYERS,
+                    Support.varFloatCentered(random, 0.1F) * volMod,
+                    pitch
+                );
             getOwner().playSound(PastelSounds.CAST_RADIANCE, 0.7F, pitch);
         }
 
@@ -127,21 +139,31 @@ public class GlassArrowEntity extends AbstractArrow {
         if (homingTarget.isPresent()) {
             if (!homingTarget.get().isAlive()) {
                 homingTarget = Optional.empty();
-            }
-            else {
+            } else {
                 return;
             }
         }
 
         var vision = getBoundingBox().expandTowards(getDeltaMovement().scale(5)).inflate(9);
-        homingTarget = level().getEntities(this, vision, this::canHomeTowards).stream().reduce(
-            (a, b) -> distanceTo(a) <= distanceTo(b) ? a : b
-        );
+        homingTarget = level()
+            .getEntities(this, vision, this::canHomeTowards)
+            .stream()
+            .reduce(
+                (a, b) -> distanceTo(a) <= distanceTo(b) ? a : b
+            );
     }
 
     private void handlePiercing(Vec3 backtrack) {
-        for (Entity proposal : level().getEntities(this, getBoundingBox()
-            .expandTowards(backtrack).inflate(1), this::canHitEntity)) {
+        for (
+            Entity proposal : level()
+                .getEntities(
+                    this,
+                    getBoundingBox()
+                        .expandTowards(backtrack)
+                        .inflate(1),
+                    this::canHitEntity
+                )
+        ) {
 
             var bounds = proposal.getBoundingBox().inflate(0.3F);
             if (bounds.clip(position(), position().add(backtrack)).isPresent()) {
@@ -202,7 +224,6 @@ public class GlassArrowEntity extends AbstractArrow {
 
         damage = Support.refineDamage((float) (damage * getDeltaMovement().length()));
 
-
         if (owner instanceof LivingEntity lvo)
             lvo.setLastHurtMob(target);
 
@@ -236,7 +257,8 @@ public class GlassArrowEntity extends AbstractArrow {
 
         doPostHurtEffects(target);
         if (target instanceof Player && owner instanceof ServerPlayer && !this.isSilent()) {
-            ((ServerPlayer) owner).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
+            ((ServerPlayer) owner).connection
+                .send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
         }
 
         if (getVariant().getAttributes().piercing())
@@ -260,8 +282,9 @@ public class GlassArrowEntity extends AbstractArrow {
     }
 
     public boolean activelyHoming() {
-        return getVariant().getAttributes()
-                           .homing() && homingTarget.isPresent();
+        return getVariant()
+            .getAttributes()
+            .homing() && homingTarget.isPresent();
     }
 
     private void postHit(HitResult hit) {
@@ -280,7 +303,8 @@ public class GlassArrowEntity extends AbstractArrow {
         }
 
         Vec3 additionalVelocity = new Vec3(
-            d * pullStrength, e * pullStrength + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08D,
+            d * pullStrength,
+            e * pullStrength + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08D,
             f * pullStrength
         ).scale(pullStrengthModifier);
         pulled.push(additionalVelocity.x, additionalVelocity.y, additionalVelocity.z);
@@ -288,8 +312,9 @@ public class GlassArrowEntity extends AbstractArrow {
 
     @Override
     protected ItemStack getDefaultPickupItem() {
-        return getVariant().getArrow()
-                           .getDefaultInstance();
+        return getVariant()
+            .getArrow()
+            .getDefaultInstance();
     }
 
     @Override
@@ -315,12 +340,15 @@ public class GlassArrowEntity extends AbstractArrow {
             return;
 
         double d0 = this.level() instanceof ServerLevel serverlevel
-        ? EnchantmentHelper.modifyKnockback(serverlevel, getWeaponItem(), target, source, modifier)
-        : 0.0F;
+            ? EnchantmentHelper.modifyKnockback(serverlevel, getWeaponItem(), target, source, modifier)
+            : 0.0F;
         if (d0 > 0.0) {
             double d1 = Math.max(0.0, 1.0 - target.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
-            Vec3 vec3 = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize()
-                            .scale(d0 * 0.6 * d1);
+            Vec3 vec3 = this
+                .getDeltaMovement()
+                .multiply(1.0, 0.0, 1.0)
+                .normalize()
+                .scale(d0 * 0.6 * d1);
             if (vec3.lengthSqr() > 0.0) {
                 target.push(vec3.x, 0.1, vec3.z);
             }
@@ -334,35 +362,45 @@ public class GlassArrowEntity extends AbstractArrow {
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
-        nbt.putString(
-            VARIANT_STRING, PastelRegistries.GLASS_ARROW_VARIANT.getKey(this.getVariant())
-                                                                .toString()
-        );
+        nbt
+            .putString(
+                VARIANT_STRING,
+                PastelRegistries.GLASS_ARROW_VARIANT
+                    .getKey(this.getVariant())
+                    .toString()
+            );
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
-        GlassArrowVariant variant = PastelRegistries.GLASS_ARROW_VARIANT.get(
-            ResourceLocation.tryParse(nbt.getString(VARIANT_STRING)));
+        GlassArrowVariant variant = PastelRegistries.GLASS_ARROW_VARIANT
+            .get(
+                ResourceLocation.tryParse(nbt.getString(VARIANT_STRING))
+            );
         if (variant != null) {
             this.setVariant(variant);
         }
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void onClientRemoval() {
         super.onClientRemoval();
         TrailRender render = getTrail();
         if (render != null) {
-            TrailLeftoverHandler.addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
+            TrailLeftoverHandler
+                .addTrail(render, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, getGradient());
             shouldRenderTrail = false;
         }
     }
 
     private boolean shouldRenderTrail = true;
+
     private TrailRender trail;
+
     public ColorGradient getGradient() {
         return getVariant().getGradient();
     }
@@ -372,12 +410,16 @@ public class GlassArrowEntity extends AbstractArrow {
             return null;
         }
         if (trail == null) {
-            trail = new TrailRender(position(), 60, 60, 0.15f, PastelCommon.locate("textures/misc/trail/trail.png"),
-                                    RenderTypeHandler::transparent
+            trail = new TrailRender(
+                position(),
+                60,
+                60,
+                0.15f,
+                PastelCommon.locate("textures/misc/trail/trail.png"),
+                RenderTypeHandler::transparent
             ).setShrink(true).startTicking();
         }
         return trail;
     }
-
 
 }

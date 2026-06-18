@@ -47,7 +47,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-@Mixin(ItemStack.class)
+@Mixin(
+    ItemStack.class
+)
 public abstract class ItemStackMixin {
 
     @Shadow
@@ -60,11 +62,14 @@ public abstract class ItemStackMixin {
     public abstract Item getItem();
 
     @Shadow
-    @Nullable
-    public abstract <T> T remove(DataComponentType<? extends T> type);
+    @Nullable public abstract <T> T remove(DataComponentType<? extends T> type);
 
     // Injecting into onStackClicked instead of onClicked because onStackClicked is called first
-    @Inject(at = @At("HEAD"), method = "overrideStackedOnOther", cancellable = true)
+    @Inject(
+        at = @At(
+            "HEAD"
+        ), method = "overrideStackedOnOther", cancellable = true
+    )
     public void onStackClicked(Slot slot, ClickAction clickType, Player player, CallbackInfoReturnable<Boolean> cir) {
         if (slot instanceof SlotWithOnClickAction slotWithOnClickAction) {
             if (slotWithOnClickAction.onClicked((ItemStack) (Object) this, clickType, player)) {
@@ -73,7 +78,11 @@ public abstract class ItemStackMixin {
         }
     }
 
-    @ModifyReturnValue(method = "isDamageableItem", at = @At(value = "RETURN"))
+    @ModifyReturnValue(
+        method = "isDamageableItem", at = @At(
+            value = "RETURN"
+        )
+    )
     public boolean applyIndestructibleEnchantment(boolean original) {
         var stack = (ItemStack) (Object) this;
 
@@ -82,9 +91,11 @@ public abstract class ItemStackMixin {
 
     // The enchantment table does not allow enchanting items that already have enchantments applied
     // This mixin changes items, that only got their DefaultEnchantments to still be enchantable
-    @Inject(method = "isEnchantable()Z",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/ItemEnchantments;isEmpty()Z"),
-            cancellable = true)
+    @Inject(
+        method = "isEnchantable()Z", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/ItemEnchantments;isEmpty()Z"
+        ), cancellable = true
+    )
     public void isEnchantable(CallbackInfoReturnable<Boolean> cir) {
         var stack = (ItemStack) (Object) this;
         if (this.getItem() instanceof Preenchanted preenchanted && preenchanted.onlyHasPreEnchantments(stack)) {
@@ -92,14 +103,18 @@ public abstract class ItemStackMixin {
         }
     }
 
-    @Inject(method = "getTooltipLines", at = @At(value = "INVOKE",
-                                                 target = "Lnet/minecraft/world/item/Item;appendHoverText" +
-                                                          "(Lnet/minecraft/world/item/ItemStack;" +
-                                                          "Lnet/minecraft/world/item/Item$TooltipContext;" +
-                                                          "Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V"))
+    @Inject(
+        method = "getTooltipLines", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/Item;appendHoverText" + "(Lnet/minecraft/world/item/ItemStack;" + "Lnet/minecraft/world/item/Item$TooltipContext;" + "Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V"
+        )
+    )
     public void playerTooltip(
-        Item.TooltipContext context, Player player, TooltipFlag type, CallbackInfoReturnable<List<Component>> cir,
-        @Local List<Component> tooltip
+        Item.TooltipContext context,
+        Player player,
+        TooltipFlag type,
+        CallbackInfoReturnable<List<Component>> cir,
+        @Local
+        List<Component> tooltip
     ) {
         var stack = (ItemStack) (Object) this;
         if (stack.getItem() instanceof TooltipExtensions expanded) {
@@ -107,27 +122,48 @@ public abstract class ItemStackMixin {
         }
     }
 
-    @Inject(method = "getTooltipLines",
-            at = @At(value = "INVOKE", target = "net/minecraft/world/item/TooltipFlag.isAdvanced ()Z",
-                     shift = At.Shift.BEFORE, ordinal = 1))
+    @Inject(
+        method = "getTooltipLines", at = @At(
+            value = "INVOKE", target = "net/minecraft/world/item/TooltipFlag.isAdvanced ()Z", shift = At.Shift.BEFORE, ordinal = 1
+        )
+    )
     public void expandTooltipPostDamage(
-        Item.TooltipContext context, Player player, TooltipFlag type, CallbackInfoReturnable<List<Component>> cir,
-        @Local List<Component> tooltip
+        Item.TooltipContext context,
+        Player player,
+        TooltipFlag type,
+        CallbackInfoReturnable<List<Component>> cir,
+        @Local
+        List<Component> tooltip
     ) {
         var stack = (ItemStack) (Object) this;
         var oilEffect = stack.get(PastelDataComponentTypes.CONCEALED_EFFECT);
         var profile = stack.get(DataComponents.PROFILE);
-        if (oilEffect != null && profile != null && player.getUUID()
-                                                          .equals(profile.id()
-                                                                         .orElse(null))) {
+        if (oilEffect != null && profile != null && player
+            .getUUID()
+            .equals(
+                profile
+                    .id()
+                    .orElse(null)
+            )) {
             var subText = new ArrayList<Component>();
             PotionContents.addPotionTooltip(List.of(oilEffect), subText::add, 1f, context.tickRate());
 
-            tooltip.add(Component.translatable("info.pastel.tooltip.adulterated.info")
-                                 .withStyle(s -> s.withColor(ConcealingOilsItem.POISONED_COLOUR)));
-            tooltip.add(Component.translatable("info.pastel.tooltip.adulterated.effect", subText.getFirst())
-                                 .withStyle(s -> s.withColor(ConcealingOilsItem.POISONED_COLOUR)
-                                                  .withItalic(true)));
+            tooltip
+                .add(
+                    Component
+                        .translatable("info.pastel.tooltip.adulterated.info")
+                        .withStyle(s -> s.withColor(ConcealingOilsItem.POISONED_COLOUR))
+                );
+            tooltip
+                .add(
+                    Component
+                        .translatable("info.pastel.tooltip.adulterated.effect", subText.getFirst())
+                        .withStyle(
+                            s -> s
+                                .withColor(ConcealingOilsItem.POISONED_COLOUR)
+                                .withItalic(true)
+                        )
+                );
         }
 
         if (stack.getItem() instanceof TooltipExtensions expanded) {
@@ -135,16 +171,18 @@ public abstract class ItemStackMixin {
         }
     }
 
-    @WrapOperation(method = "getTooltipLines", at = @At(value = "INVOKE",
-                                                        target = "Lnet/minecraft/world/item/ItemStack;addToTooltip" +
-                                                                 "(Lnet/minecraft/core/component/DataComponentType;" +
-                                                                 "Lnet/minecraft/world/item/Item$TooltipContext;" +
-                                                                 "Ljava/util/function/Consumer;" +
-                                                                 "Lnet/minecraft/world/item/TooltipFlag;)V",
-                                                        ordinal = 3))
+    @WrapOperation(
+        method = "getTooltipLines", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;addToTooltip" + "(Lnet/minecraft/core/component/DataComponentType;" + "Lnet/minecraft/world/item/Item$TooltipContext;" + "Ljava/util/function/Consumer;" + "Lnet/minecraft/world/item/TooltipFlag;)V", ordinal = 3
+        )
+    )
     private void getTooltipWithEmpower(
-        ItemStack instance, DataComponentType<ItemEnchantments> component, Item.TooltipContext context,
-        Consumer<Component> tooltipAdder, TooltipFlag tooltipFlag, Operation<Void> original
+        ItemStack instance,
+        DataComponentType<ItemEnchantments> component,
+        Item.TooltipContext context,
+        Consumer<Component> tooltipAdder,
+        TooltipFlag tooltipFlag,
+        Operation<Void> original
     ) {
         int empowerLevel = instance.getOrDefault(PastelDataComponentTypes.CRYSTAL_ARMOR_EMPOWERED, 0);
         if (empowerLevel == 0) {
@@ -154,35 +192,54 @@ public abstract class ItemStackMixin {
 
         ItemEnchantments itemEnchantments = (ItemEnchantments) instance.get(component);
         if (itemEnchantments != null) {
-            Component addComponent = Component.translatable("pastel.tooltip.crystal_armor_empowered")
-                                              .withStyle(ChatFormatting.DARK_BLUE);
+            Component addComponent = Component
+                .translatable("pastel.tooltip.crystal_armor_empowered")
+                .withStyle(ChatFormatting.DARK_BLUE);
             if (itemEnchantments.showInTooltip) {
                 HolderLookup.Provider registries = context.registries();
-                HolderSet<Enchantment> orderedEnchants = ItemEnchantments.getTagOrEmpty(
-                    registries, Registries.ENCHANTMENT, EnchantmentTags.TOOLTIP_ORDER);
-                for (Holder<Enchantment> orderedEnchantment : orderedEnchants) {
-                    var effectiveBoost = orderedEnchantment.value()
-                                                           .getMaxLevel() == 1 ? 0 : empowerLevel;
+                HolderSet<Enchantment> orderedEnchants = ItemEnchantments
+                    .getTagOrEmpty(
+                        registries,
+                        Registries.ENCHANTMENT,
+                        EnchantmentTags.TOOLTIP_ORDER
+                    );
+                for (
+                    Holder<Enchantment> orderedEnchantment : orderedEnchants
+                ) {
+                    var effectiveBoost = orderedEnchantment
+                        .value()
+                        .getMaxLevel() == 1 ? 0 : empowerLevel;
                     int level = itemEnchantments.enchantments.getInt(orderedEnchantment);
-                    if (level > 0 && Enchantment.getFullname(
-                        orderedEnchantment, level - effectiveBoost) instanceof MutableComponent mutableComponent) {
-                        tooltipAdder.accept(
-                            mutableComponent.append(effectiveBoost == 0 ? Component.empty() : addComponent));
+                    if (level > 0 && Enchantment
+                        .getFullname(
+                            orderedEnchantment,
+                            level - effectiveBoost
+                        ) instanceof MutableComponent mutableComponent) {
+                        tooltipAdder
+                            .accept(
+                                mutableComponent.append(effectiveBoost == 0 ? Component.empty() : addComponent)
+                            );
                     }
                 }
 
-                for (Object2IntMap.Entry<Holder<Enchantment>> enchantment :
-                    itemEnchantments.enchantments.object2IntEntrySet()) {
-                    var effectiveBoost = enchantment.getKey()
-                                                    .value()
-                                                    .getMaxLevel() == 1 ? 0 : empowerLevel;
+                for (
+                    Object2IntMap.Entry<Holder<Enchantment>> enchantment : itemEnchantments.enchantments
+                        .object2IntEntrySet()
+                ) {
+                    var effectiveBoost = enchantment
+                        .getKey()
+                        .value()
+                        .getMaxLevel() == 1 ? 0 : empowerLevel;
                     Holder<Enchantment> enchantmentKey = (Holder<Enchantment>) enchantment.getKey();
-                    if (!orderedEnchants.contains(enchantmentKey) && Enchantment.getFullname(
-                        (Holder<Enchantment>) enchantment.getKey(),
-                        enchantment.getIntValue() - effectiveBoost
-                    ) instanceof MutableComponent mutableComponent) {
-                        tooltipAdder.accept(
-                            mutableComponent.append(effectiveBoost == 0 ? Component.empty() : addComponent));
+                    if (!orderedEnchants.contains(enchantmentKey) && Enchantment
+                        .getFullname(
+                            (Holder<Enchantment>) enchantment.getKey(),
+                            enchantment.getIntValue() - effectiveBoost
+                        ) instanceof MutableComponent mutableComponent) {
+                        tooltipAdder
+                            .accept(
+                                mutableComponent.append(effectiveBoost == 0 ? Component.empty() : addComponent)
+                            );
                     }
                 }
             }

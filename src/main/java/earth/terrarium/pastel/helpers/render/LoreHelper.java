@@ -15,7 +15,9 @@ public class LoreHelper {
     public static @NotNull List<Component> getLoreTextArrayFromString(@NotNull String string) {
         List<Component> loreText = new ArrayList<>();
 
-        for (String split : string.split("\\\\n")) {
+        for (
+            String split : string.split("\\\\n")
+        ) {
             loreText.add(Component.literal(split));
         }
 
@@ -27,9 +29,17 @@ public class LoreHelper {
             return "";
         } else {
             StringBuilder loreString = new StringBuilder();
-            for (int i = 0; i < lore.size(); i++) {
-                loreString.append(lore.get(i)
-                                      .getString());
+            for (
+                int i = 0;
+                i < lore.size();
+                i++
+            ) {
+                loreString
+                    .append(
+                        lore
+                            .get(i)
+                            .getString()
+                    );
                 if (i != lore.size() - 1) {
                     loreString.append("\\n");
                 }
@@ -78,8 +88,9 @@ public class LoreHelper {
             if (component == null) {
                 return lore.isEmpty();
             }
-            return component.lines()
-                            .equals(lore);
+            return component
+                .lines()
+                .equals(lore);
         }
         return false;
     }

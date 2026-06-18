@@ -19,6 +19,7 @@ import java.util.List;
 public class CookbookItem extends Item {
 
     public BookAddress bookAddress;
+
     private final int toolTipColor;
 
     public CookbookItem(Properties settings, BookAddress bookAddress) {
@@ -41,9 +42,12 @@ public class CookbookItem extends Item {
             try {
                 openGuidebookPage(this.bookAddress);
             } catch (NullPointerException e) {
-                PastelCommon.logError(user.getName()
-                                          .getString() + " used a CookbookItem to open the guidebook page " +
-                                      this.bookAddress + " but it does not exist");
+                PastelCommon
+                    .logError(
+                        user
+                            .getName()
+                            .getString() + " used a CookbookItem to open the guidebook page " + this.bookAddress + " but it does not exist"
+                    );
             }
         }
 
@@ -60,13 +64,21 @@ public class CookbookItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         if (toolTipColor == -1) {
-            tooltip.add(Component.translatable(this.getDescriptionId() + ".tooltip")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable(this.getDescriptionId() + ".tooltip")
+                        .withStyle(ChatFormatting.GRAY)
+                );
             return;
         }
 
-        tooltip.add(Component.translatable(this.getDescriptionId() + ".tooltip")
-                             .withStyle(s -> s.withColor(toolTipColor)));
+        tooltip
+            .add(
+                Component
+                    .translatable(this.getDescriptionId() + ".tooltip")
+                    .withStyle(s -> s.withColor(toolTipColor))
+            );
     }
 
 }

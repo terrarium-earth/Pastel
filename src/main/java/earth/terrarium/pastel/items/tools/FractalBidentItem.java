@@ -26,7 +26,12 @@ public class FractalBidentItem extends MalachiteBidentItem implements SlotBackgr
     public static final InkCost MIRROR_IMAGE_COST = new InkCost(InkColors.WHITE, 25);
 
     public FractalBidentItem(
-        Item.Properties settings, double attackSpeed, double damage, float armorPierce, float protPierce) {
+        Item.Properties settings,
+        double attackSpeed,
+        double damage,
+        float armorPierce,
+        float protPierce
+    ) {
         super(settings, attackSpeed, damage, armorPierce, protPierce);
     }
 
@@ -48,12 +53,24 @@ public class FractalBidentItem extends MalachiteBidentItem implements SlotBackgr
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.fractal_glass_crest_bident.tooltip")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.fractal_glass_crest_bident.tooltip2")
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.pastel.fractal_glass_crest_bident.tooltip3")
-                             .withStyle(ChatFormatting.GRAY));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.fractal_glass_crest_bident.tooltip")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.fractal_glass_crest_bident.tooltip2")
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.fractal_glass_crest_bident.tooltip3")
+                    .withStyle(ChatFormatting.GRAY)
+            );
         addInkPoweredTooltip(tooltip);
     }
 
@@ -80,8 +97,8 @@ public class FractalBidentItem extends MalachiteBidentItem implements SlotBackgr
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY) ||
-               enchantment.is(Enchantments.POWER);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY) || enchantment
+            .is(Enchantments.POWER);
     }
 
 }

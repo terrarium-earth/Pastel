@@ -19,8 +19,11 @@ import org.jetbrains.annotations.NotNull;
 public interface JadeVine {
 
     BooleanProperty DEAD = BooleanProperty.create("dead");
+
     VoxelShape BULB_SHAPE = Block.box(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+
     VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+
     VoxelShape TIP_SHAPE = Block.box(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
     static void spawnBloomParticlesClient(Level world, BlockPos blockPos) {
@@ -51,9 +54,18 @@ public interface JadeVine {
     }
 
     static void spawnParticlesServer(ServerLevel world, BlockPos blockPos, int amount) {
-        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, Vec3.atCenterOf(
-            blockPos), PastelParticleTypes.JADE_VINES, amount, new Vec3(0.6, 0.6, 0.6), new Vec3(0.12, 0.12, 0.12)
-        );
+        PlayParticleWithRandomOffsetAndVelocityPayload
+            .playParticleWithRandomOffsetAndVelocity(
+                world,
+                Vec3
+                    .atCenterOf(
+                        blockPos
+                    ),
+                PastelParticleTypes.JADE_VINES,
+                amount,
+                new Vec3(0.6, 0.6, 0.6),
+                new Vec3(0.12, 0.12, 0.12)
+            );
     }
 
     static boolean isExposedToSunlight(@NotNull Level world, @NotNull BlockPos blockPos) {

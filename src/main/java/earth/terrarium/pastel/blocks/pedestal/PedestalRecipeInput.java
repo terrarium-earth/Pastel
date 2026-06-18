@@ -11,21 +11,26 @@ import java.util.List;
 
 public class PedestalRecipeInput implements RecipeInput {
 
-    private static final List<ItemStack> FULL_GEMSTONE_POWDER_STACKS = List.of(
-        new ItemStack(PastelItems.TOPAZ_POWDER.get(), 64),
-        new ItemStack(PastelItems.AMETHYST_POWDER.get(), 64),
-        new ItemStack(PastelItems.CITRINE_POWDER.get(), 64),
-        new ItemStack(PastelItems.ONYX_POWDER.get(), 64),
-        new ItemStack(PastelItems.MOONSTONE_POWDER.get(), 64)
-    );
+    private static final List<ItemStack> FULL_GEMSTONE_POWDER_STACKS = List
+        .of(
+            new ItemStack(PastelItems.TOPAZ_POWDER.get(), 64),
+            new ItemStack(PastelItems.AMETHYST_POWDER.get(), 64),
+            new ItemStack(PastelItems.CITRINE_POWDER.get(), 64),
+            new ItemStack(PastelItems.ONYX_POWDER.get(), 64),
+            new ItemStack(PastelItems.MOONSTONE_POWDER.get(), 64)
+        );
 
-    @Nullable
-    private final Player player;
+    @Nullable private final Player player;
+
     private final CraftingInput craftingGridInput;
+
     private final List<ItemStack> gemstonePowderStacks;
 
     public PedestalRecipeInput(
-        CraftingInput craftingGridInput, List<ItemStack> gemstonePowderStacks, @Nullable Player player) {
+        CraftingInput craftingGridInput,
+        List<ItemStack> gemstonePowderStacks,
+        @Nullable Player player
+    ) {
         this.player = player;
         this.craftingGridInput = craftingGridInput;
         this.gemstonePowderStacks = gemstonePowderStacks;
@@ -60,7 +65,11 @@ public class PedestalRecipeInput implements RecipeInput {
     public int[] getCraftingGridSlots() {
         int size = craftingGridInput.size();
         int[] slots = new int[size];
-        for (int i = 0; i < size; i++) {
+        for (
+            int i = 0;
+            i < size;
+            i++
+        ) {
             slots[i] = i;
         }
         return slots;

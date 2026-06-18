@@ -20,7 +20,12 @@ public class MysteriousCompassItem extends StructureCompassItem implements SlotB
 
     @Override
     public void inventoryTick(
-        @NotNull ItemStack stack, @NotNull Level world, Entity entity, int slot, boolean selected) {
+        @NotNull ItemStack stack,
+        @NotNull Level world,
+        Entity entity,
+        int slot,
+        boolean selected
+    ) {
         if (!world.isClientSide && world.getGameTime() % 200 == 0 && entity instanceof Player player)
             if (DatabankUtils.hasAdvancement(player, PastelAdvancements.Unlocks.MYSTERIOUS_LOCKET_SOCKETING)) {
                 locateStructure(stack, world, entity);

@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.events;
 
-
 import earth.terrarium.pastel.api.interaction.ResonanceProcessor;
 import earth.terrarium.pastel.api.item.ItemPickupListener;
 import earth.terrarium.pastel.helpers.enchantments.ExuberanceHelper;
@@ -40,12 +39,15 @@ public class PastelEnchantmentEvents {
     }
 
     private static void applyExuberance(BlockDropsEvent event) {
-        var access = event.getLevel()
-                          .registryAccess();
+        var access = event
+            .getLevel()
+            .registryAccess();
         var tool = event.getTool();
 
-        event.setDroppedExperience(
-            Math.round(event.getDroppedExperience() * ExuberanceHelper.getExuberanceMod(access, tool)));
+        event
+            .setDroppedExperience(
+                Math.round(event.getDroppedExperience() * ExuberanceHelper.getExuberanceMod(access, tool))
+            );
     }
 
     private static void inventoryInsertion(BlockDropsEvent event) {
@@ -60,7 +62,9 @@ public class PastelEnchantmentEvents {
             return;
 
         var removed = new ArrayList<ItemEntity>();
-        for (ItemEntity drop : event.getDrops()) {
+        for (
+            ItemEntity drop : event.getDrops()
+        ) {
             var stack = drop.getItem();
             var remainder = insertStack(breaker, handler, stack);
 
@@ -73,13 +77,23 @@ public class PastelEnchantmentEvents {
             break; // If the remainder is not empty then the player inv is full.
         }
 
-        removed.forEach(e -> event.getDrops()
-                                  .remove(e));
+        removed
+            .forEach(
+                e -> event
+                    .getDrops()
+                    .remove(e)
+            );
     }
 
     private static ItemStack insertStack(Entity taker, IItemHandler inventory, ItemStack stack) {
-        var rem = ItemPickupListener.receiveRecursive(inventory, 2, 0,
-                stack, Optional.ofNullable(taker));
+        var rem = ItemPickupListener
+            .receiveRecursive(
+                inventory,
+                2,
+                0,
+                stack,
+                Optional.ofNullable(taker)
+            );
 
         if (rem.isEmpty())
             return rem;
@@ -94,8 +108,8 @@ public class PastelEnchantmentEvents {
             return;
 
         modifyDrops(
-            event, (e, access, stacks) ->
-                FoundryHelper.applyFoundry(e.getLevel(), stacks)
+            event,
+            (e, access, stacks) -> FoundryHelper.applyFoundry(e.getLevel(), stacks)
         );
     }
 
@@ -106,7 +120,8 @@ public class PastelEnchantmentEvents {
             return;
 
         modifyDrops(
-            event, (e, access, stacks) -> {
+            event,
+            (e, access, stacks) -> {
                 ResonanceProcessor
                     .applyResonance(access, event.getState(), event.getBlockEntity(), stacks);
                 return stacks;
@@ -121,13 +136,22 @@ public class PastelEnchantmentEvents {
         if (!EnchantmentHelper.hasTag(tool, PastelEnchantmentTags.NO_BLOCK_DROPS))
             return;
 
-        event.getDrops()
-             .clear();
-        event.getLevel()
-             .sendParticles(
-                 ParticleTypes.SMOKE, pos.getX() + 0.5, pos.getY() + 0.5,
-                 pos.getZ() + 0.5, 10, 0.5, 0.5, 0.5, 0.05
-             );
+        event
+            .getDrops()
+            .clear();
+        event
+            .getLevel()
+            .sendParticles(
+                ParticleTypes.SMOKE,
+                pos.getX() + 0.5,
+                pos.getY() + 0.5,
+                pos.getZ() + 0.5,
+                10,
+                0.5,
+                0.5,
+                0.5,
+                0.05
+            );
     }
 
     private static void modifyDrops(BlockDropsEvent event, DropModifier modifier) {
@@ -136,7 +160,9 @@ public class PastelEnchantmentEvents {
         List<ItemStack> drops = new ArrayList<>();
         var pos = event.getPos();
 
-        for (ItemEntity entity : entities) {
+        for (
+            ItemEntity entity : entities
+        ) {
             drops.add(entity.getItem());
         }
         drops = modifier.apply(event, level.registryAccess(), drops);

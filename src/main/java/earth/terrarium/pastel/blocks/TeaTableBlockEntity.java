@@ -12,9 +12,12 @@ public class TeaTableBlockEntity extends BlockEntity {
         .addAnim(
             new DatabankAnimationReference(
                 "idle",
-                (state, anim) -> {},
-                (state, anim) -> {}));
-
+                (state, anim) -> {
+                },
+                (state, anim) -> {
+                }
+            )
+        );
 
     public TeaTableBlockEntity(BlockPos pos, BlockState blockState) {
         super(PastelBlockEntities.TEA_TABLE.get(), pos, blockState);

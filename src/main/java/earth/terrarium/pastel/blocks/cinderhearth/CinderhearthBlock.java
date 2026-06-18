@@ -55,23 +55,34 @@ public class CinderhearthBlock extends BaseEntityBlock {
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CinderhearthBlockEntity(pos, state);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : createTickerHelper(
-            type, PastelBlockEntities.CINDERHEARTH.get(), CinderhearthBlockEntity::serverTick);
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? null
+            : createTickerHelper(
+                type,
+                PastelBlockEntities.CINDERHEARTH.get(),
+                CinderhearthBlockEntity::serverTick
+            );
     }
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             verifyStructure(world, pos);
             return InteractionResult.SUCCESS;
@@ -79,8 +90,7 @@ public class CinderhearthBlock extends BaseEntityBlock {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof CinderhearthBlockEntity cinderhearthBlockEntity) {
                 cinderhearthBlockEntity.setOwner(player);
-                if (verifyStructure(world, pos) !=
-                    CinderhearthBlockEntity.CinderHearthStructureType.NONE) {
+                if (verifyStructure(world, pos) != CinderhearthBlockEntity.CinderHearthStructureType.NONE) {
                     player.openMenu(cinderhearthBlockEntity);
                 }
             }
@@ -90,11 +100,14 @@ public class CinderhearthBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(
-                       FACING, ctx.getHorizontalDirection()
-                                  .getOpposite()
-                   );
+        return this
+            .defaultBlockState()
+            .setValue(
+                FACING,
+                ctx
+                    .getHorizontalDirection()
+                    .getOpposite()
+            );
     }
 
     @Override
@@ -164,8 +177,17 @@ public class CinderhearthBlock extends BaseEntityBlock {
             var recipe = cinderhearthBlockEntity.getCurrentRecipeEntry();
             if (recipe != null) {
                 if (random.nextDouble() < 0.1D) {
-                    world.playLocalSound(
-                        d, e, f, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 0.8F, false);
+                    world
+                        .playLocalSound(
+                            d,
+                            e,
+                            f,
+                            SoundEvents.FURNACE_FIRE_CRACKLE,
+                            SoundSource.BLOCKS,
+                            1.0F,
+                            0.8F,
+                            false
+                        );
                 }
 
                 double g = 0.35D;
@@ -185,27 +207,44 @@ public class CinderhearthBlock extends BaseEntityBlock {
                 }
             }
             if (cinderhearthBlockEntity.structure == CinderhearthBlockEntity.CinderHearthStructureType.WITH_LAVA) {
-                for (int v = 0; v < 2; v++) {
+                for (
+                    int v = 0;
+                    v < 2;
+                    v++
+                ) {
                     double g3 = 1.5 - random.nextDouble() * 2.0;
                     double h3 = 1.5 - random.nextDouble() * 3.0;
                     double i3 = axis == Direction.Axis.X ? (double) direction.getStepX() * g3 : h3;
                     double k3 = axis == Direction.Axis.Z ? (double) direction.getStepZ() * g3 : h3;
-                    world.addParticle(
-                        ColoredCraftingParticleEffect.ORANGE, d + i3, pos.getY() - 1.2, f + k3, 0.0D, 0.1D, 0.0D);
+                    world
+                        .addParticle(
+                            ColoredCraftingParticleEffect.ORANGE,
+                            d + i3,
+                            pos.getY() - 1.2,
+                            f + k3,
+                            0.0D,
+                            0.1D,
+                            0.0D
+                        );
                 }
             }
         }
     }
 
     public static CinderhearthBlockEntity.CinderHearthStructureType verifyStructure(
-        Level level, @NotNull BlockPos blockPos) {
-        Rotation rotation = Support.rotationFromDirection(level.getBlockState(blockPos)
-                                                               .getValue(FACING)
-                                                               .getOpposite());
+        Level level,
+        @NotNull BlockPos blockPos
+    ) {
+        Rotation rotation = Support
+            .rotationFromDirection(
+                level
+                    .getBlockState(blockPos)
+                    .getValue(FACING)
+                    .getOpposite()
+            );
 
         Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.CINDERHEARTH);
-        CinderhearthBlockEntity.CinderHearthStructureType completedStructure
-            = CinderhearthBlockEntity.CinderHearthStructureType.NONE;
+        CinderhearthBlockEntity.CinderHearthStructureType completedStructure = CinderhearthBlockEntity.CinderHearthStructureType.NONE;
 
         if (multiblock.validate(level, blockPos.below(3), rotation)) {
             completedStructure = CinderhearthBlockEntity.CinderHearthStructureType.WITH_LAVA;
@@ -220,10 +259,13 @@ public class CinderhearthBlock extends BaseEntityBlock {
 
         if (level.isClientSide) {
             if (!structureValid) {
-                ModonomiconHelper.renderMultiblock(
-                    PastelMultiblocks.get(PastelMultiblocks.CINDERHEARTH), PastelMultiblocks.CINDERHEARTH_TEXT,
-                    blockPos.below(4), rotation
-                );
+                ModonomiconHelper
+                    .renderMultiblock(
+                        PastelMultiblocks.get(PastelMultiblocks.CINDERHEARTH),
+                        PastelMultiblocks.CINDERHEARTH_TEXT,
+                        blockPos.below(4),
+                        rotation
+                    );
             }
         } else if (structureValid && level instanceof ServerLevel sl) {
             Support.mbCriterion(sl, blockPos, multiblock);

@@ -32,7 +32,10 @@ public class HardcoreDeathTracker extends SavedData {
     private final List<UUID> playersThatDiedInHardcore = new ArrayList<>();
 
     private static final Factory<HardcoreDeathTracker> FACTORY = new Factory<>(
-        HardcoreDeathTracker::new, HardcoreDeathTracker::load);
+        HardcoreDeathTracker::new,
+        HardcoreDeathTracker::load
+    );
+
     private static HardcoreDeathTracker CLIENT_TRACKER;
 
     public static boolean isInHardcore(Player player) {
@@ -40,14 +43,19 @@ public class HardcoreDeathTracker extends SavedData {
     }
 
     private static void sync(ServerPlayer player) {
-        AttachmentUtil.syncToPlayer(
-            new SyncPayload(getInstance().save(new CompoundTag(), player.registryAccess())), player);
+        AttachmentUtil
+            .syncToPlayer(
+                new SyncPayload(getInstance().save(new CompoundTag(), player.registryAccess())),
+                player
+            );
     }
 
     public static void addHardcoreDeath(ServerLevel world, ServerPlayer player) {
         addHardcoreDeath(
-            world, player.getGameProfile()
-                         .getId()
+            world,
+            player
+                .getGameProfile()
+                .getId()
         );
         sync(player);
     }
@@ -57,8 +65,11 @@ public class HardcoreDeathTracker extends SavedData {
         if (server == null)
             return;
         removeHardcoreDeath(profile.getId());
-        sync(server.getPlayerList()
-                   .getPlayer(profile.getId()));
+        sync(
+            server
+                .getPlayerList()
+                .getPlayer(profile.getId())
+        );
     }
 
     public static boolean hasHardcoreDeath(GameProfile profile) {
@@ -71,10 +82,11 @@ public class HardcoreDeathTracker extends SavedData {
         if (!data.playersThatDiedInHardcore.contains(uuid)) {
             data.playersThatDiedInHardcore.add(uuid);
         }
-        world.getServer()
-             .getPlayerList()
-             .getPlayer(uuid)
-             .setGameMode(GameType.SPECTATOR);
+        world
+            .getServer()
+            .getPlayerList()
+            .getPlayer(uuid)
+            .setGameMode(GameType.SPECTATOR);
         data.setDirty();
     }
 
@@ -89,8 +101,7 @@ public class HardcoreDeathTracker extends SavedData {
         data.setDirty();
     }
 
-    @NotNull
-    public static HardcoreDeathTracker getInstance() {
+    @NotNull public static HardcoreDeathTracker getInstance() {
         if (FMLEnvironment.dist.isClient()) {
             if (CLIENT_TRACKER == null)
                 CLIENT_TRACKER = new HardcoreDeathTracker();
@@ -98,16 +109,19 @@ public class HardcoreDeathTracker extends SavedData {
             return CLIENT_TRACKER;
         }
 
-        return PastelCommon.getSidedServer()
-                           .overworld()
-                           .getDataStorage()
-                           .computeIfAbsent(FACTORY, PastelCommon.MOD_ID + ":hardcore_tracker");
+        return PastelCommon
+            .getSidedServer()
+            .overworld()
+            .getDataStorage()
+            .computeIfAbsent(FACTORY, PastelCommon.MOD_ID + ":hardcore_tracker");
     }
 
     @Override
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag uuidList = new ListTag();
-        for (UUID playerThatDiedInHardcore : playersThatDiedInHardcore) {
+        for (
+            UUID playerThatDiedInHardcore : playersThatDiedInHardcore
+        ) {
             uuidList.add(NbtUtils.createUUID(playerThatDiedInHardcore));
         }
         tag.put("HardcoreDeaths", uuidList);
@@ -122,7 +136,9 @@ public class HardcoreDeathTracker extends SavedData {
         var data = new HardcoreDeathTracker();
 
         ListTag uuidList = tag.getList("HardcoreDeaths", Tag.TAG_INT_ARRAY);
-        for (Tag listEntry : uuidList) {
+        for (
+            Tag listEntry : uuidList
+        ) {
             data.playersThatDiedInHardcore.add(NbtUtils.loadUUID(listEntry));
         }
 
@@ -134,17 +150,20 @@ public class HardcoreDeathTracker extends SavedData {
 
     public record SyncPayload(CompoundTag tag) implements CustomPacketPayload {
 
-        public static final StreamCodec<FriendlyByteBuf, SyncPayload> CODEC = StreamCodec.composite(
-            ByteBufCodecs.COMPOUND_TAG, SyncPayload::tag,
-            SyncPayload::new
-        );
+        public static final StreamCodec<FriendlyByteBuf, SyncPayload> CODEC = StreamCodec
+            .composite(
+                ByteBufCodecs.COMPOUND_TAG,
+                SyncPayload::tag,
+                SyncPayload::new
+            );
 
-        public static final CustomPacketPayload.Type<SyncPayload> TYPE = AttachmentUtil.create(
-            "hardcore_death_tracker");
+        public static final CustomPacketPayload.Type<SyncPayload> TYPE = AttachmentUtil
+            .create(
+                "hardcore_death_tracker"
+            );
 
         public static void execute(SyncPayload payload, IPayloadContext context) {
-            assert PastelCommon.getRegistryAccess() !=
-                   null; // Surely this cannot be null if we are receiving a packet, right?
+            assert PastelCommon.getRegistryAccess() != null; // Surely this cannot be null if we are receiving a packet, right?
             CLIENT_TRACKER = load(payload.tag, PastelCommon.getRegistryAccess());
         }
 

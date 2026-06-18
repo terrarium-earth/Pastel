@@ -22,13 +22,14 @@ import java.util.List;
 public class GrotesqueBlock extends HorizontalDirectionalBlock {
 
     private final VoxelShape shape;
-    protected final Component tooltipText;
 
+    protected final Component tooltipText;
 
     public GrotesqueBlock(Properties settings, double width, double height, String tooltipKey) {
         super(settings);
-        tooltipText = Component.translatable(tooltipKey)
-                               .withStyle(ChatFormatting.GRAY);
+        tooltipText = Component
+            .translatable(tooltipKey)
+            .withStyle(ChatFormatting.GRAY);
         var min = (16 - width) / 2;
         var max = width + min;
         shape = Block.box(min, 0, min, max, height, max);
@@ -40,19 +41,25 @@ public class GrotesqueBlock extends HorizontalDirectionalBlock {
         return null;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(
-                       FACING, ctx.getHorizontalDirection()
-                                  .getOpposite()
-                   );
+        return this
+            .defaultBlockState()
+            .setValue(
+                FACING,
+                ctx
+                    .getHorizontalDirection()
+                    .getOpposite()
+            );
     }
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(tooltipText);
     }

@@ -18,12 +18,22 @@ import java.util.List;
 public class InWorldInteractionHelper {
 
     public static boolean findAndDecreaseClosestItemEntityOfItem(
-        @NotNull ServerLevel world, Vec3 pos, Item item, int range) {
-        List<ItemEntity> itemEntities = world.getEntitiesOfClass(
-            ItemEntity.class, AABB.ofSize(pos, range, range, range));
-        for (ItemEntity itemEntity : itemEntities) {
-            if (itemEntity.getItem()
-                          .is(item)) {
+        @NotNull ServerLevel world,
+        Vec3 pos,
+        Item item,
+        int range
+    ) {
+        List<ItemEntity> itemEntities = world
+            .getEntitiesOfClass(
+                ItemEntity.class,
+                AABB.ofSize(pos, range, range, range)
+            );
+        for (
+            ItemEntity itemEntity : itemEntities
+        ) {
+            if (itemEntity
+                .getItem()
+                .is(item)) {
                 decrementAndSpawnRemainder(itemEntity, 1);
                 return true;
             }
@@ -32,11 +42,21 @@ public class InWorldInteractionHelper {
     }
 
     public static boolean findAndDecreaseClosestItemEntityOfItem(
-        @NotNull Level world, Vec3 pos, TagKey<Item> tag, int range, int count) {
-        List<ItemEntity> itemEntities = world.getEntitiesOfClass(
-            ItemEntity.class, AABB.ofSize(pos, range, range, range));
+        @NotNull Level world,
+        Vec3 pos,
+        TagKey<Item> tag,
+        int range,
+        int count
+    ) {
+        List<ItemEntity> itemEntities = world
+            .getEntitiesOfClass(
+                ItemEntity.class,
+                AABB.ofSize(pos, range, range, range)
+            );
         int foundCount = 0;
-        for (ItemEntity itemEntity : itemEntities) {
+        for (
+            ItemEntity itemEntity : itemEntities
+        ) {
             ItemStack stack = itemEntity.getItem();
             if (stack.is(tag)) {
                 foundCount += stack.getCount();
@@ -50,7 +70,9 @@ public class InWorldInteractionHelper {
             return false;
         }
 
-        for (ItemEntity itemEntity : itemEntities) {
+        for (
+            ItemEntity itemEntity : itemEntities
+        ) {
             ItemStack stack = itemEntity.getItem();
             if (stack.is(tag)) {
                 int decrementCount = Math.min(stack.getCount(), count);
@@ -65,11 +87,21 @@ public class InWorldInteractionHelper {
     }
 
     public static boolean findAndDecreaseClosestItemEntityOfItem(
-        @NotNull Level world, Vec3 pos, Item item, int range, int count) {
-        List<ItemEntity> itemEntities = world.getEntitiesOfClass(
-            ItemEntity.class, AABB.ofSize(pos, range, range, range));
+        @NotNull Level world,
+        Vec3 pos,
+        Item item,
+        int range,
+        int count
+    ) {
+        List<ItemEntity> itemEntities = world
+            .getEntitiesOfClass(
+                ItemEntity.class,
+                AABB.ofSize(pos, range, range, range)
+            );
         int foundCount = 0;
-        for (ItemEntity itemEntity : itemEntities) {
+        for (
+            ItemEntity itemEntity : itemEntities
+        ) {
             ItemStack stack = itemEntity.getItem();
             if (stack.is(item)) {
                 foundCount += stack.getCount();
@@ -83,7 +115,9 @@ public class InWorldInteractionHelper {
             return false;
         }
 
-        for (ItemEntity itemEntity : itemEntities) {
+        for (
+            ItemEntity itemEntity : itemEntities
+        ) {
             ItemStack stack = itemEntity.getItem();
             if (stack.is(item)) {
                 int decrementCount = Math.min(stack.getCount(), count);
@@ -99,19 +133,28 @@ public class InWorldInteractionHelper {
 
     public static void decrementAndSpawnRemainder(ItemEntity itemEntity, int amount) {
         ItemStack stack = itemEntity.getItem();
-        ItemStack remainder = stack.getItem() instanceof MobBucketItem ? Items.BUCKET.getDefaultInstance()
-                                                                       : stack.getCraftingRemainingItem(); // looking
+        ItemStack remainder = stack.getItem() instanceof MobBucketItem
+            ? Items.BUCKET.getDefaultInstance()
+            : stack.getCraftingRemainingItem(); // looking
         // at you, Mojang
         if (!remainder.isEmpty()) {
             remainder.setCount(amount);
             ItemEntity remainderEntity = new ItemEntity(
-                itemEntity.level(), itemEntity.position()
-                                              .x(), itemEntity.position()
-                                                              .y(), itemEntity.position()
-                                                                              .z(), remainder
+                itemEntity.level(),
+                itemEntity
+                    .position()
+                    .x(),
+                itemEntity
+                    .position()
+                    .y(),
+                itemEntity
+                    .position()
+                    .z(),
+                remainder
             );
-            itemEntity.level()
-                      .addFreshEntity(remainderEntity);
+            itemEntity
+                .level()
+                .addFreshEntity(remainderEntity);
         }
         stack.shrink(amount);
     }
@@ -126,6 +169,5 @@ public class InWorldInteractionHelper {
             amount -= stackSize;
         }
     }
-
 
 }

@@ -31,8 +31,11 @@ public class EtherealPlatformBlock extends TransparentBlock {
     public static final MapCodec<EtherealPlatformBlock> CODEC = simpleCodec(EtherealPlatformBlock::new);
 
     public static final int MAX_AGE = 5;
+
     public static final BooleanProperty EXTEND = BooleanProperty.create("extend");
+
     public static final IntegerProperty AGE = BlockStateProperties.AGE_5;
+
     protected static final VoxelShape SHAPE = Block.box(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
     public EtherealPlatformBlock(Properties settings) {
@@ -45,7 +48,9 @@ public class EtherealPlatformBlock extends TransparentBlock {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
         return state.getValue(AGE) == 0 || !(direction == Direction.UP);
     }
@@ -54,13 +59,20 @@ public class EtherealPlatformBlock extends TransparentBlock {
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
         if (state.getValue(AGE) != MAX_AGE) {
             world.setBlock(pos, state.setValue(AGE, MAX_AGE), 3);
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
+            for (
+                Direction direction : Direction.Plane.HORIZONTAL
+            ) {
                 BlockPos offsetPos = pos.relative(direction);
                 BlockState directionState = world.getBlockState(offsetPos);
                 if (directionState.getBlock() instanceof EtherealPlatformBlock) {
-                    world.setBlock(offsetPos, directionState.setValue(AGE, MAX_AGE - 1)
-                                                            .setValue(EXTEND, true), Block.UPDATE_CLIENTS
-                    );
+                    world
+                        .setBlock(
+                            offsetPos,
+                            directionState
+                                .setValue(AGE, MAX_AGE - 1)
+                                .setValue(EXTEND, true),
+                            Block.UPDATE_CLIENTS
+                        );
                     world.scheduleTick(offsetPos, this, 2);
                 }
             }
@@ -73,13 +85,20 @@ public class EtherealPlatformBlock extends TransparentBlock {
         int age = state.getValue(AGE);
         boolean extend = state.getValue(EXTEND);
         if (extend && age > 1) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
+            for (
+                Direction direction : Direction.Plane.HORIZONTAL
+            ) {
                 BlockPos offsetPos = pos.relative(direction);
                 BlockState directionState = world.getBlockState(offsetPos);
                 if (directionState.getBlock() instanceof EtherealPlatformBlock && age > directionState.getValue(AGE)) {
-                    world.setBlock(offsetPos, directionState.setValue(AGE, age - 1)
-                                                            .setValue(EXTEND, true), Block.UPDATE_CLIENTS
-                    );
+                    world
+                        .setBlock(
+                            offsetPos,
+                            directionState
+                                .setValue(AGE, age - 1)
+                                .setValue(EXTEND, true),
+                            Block.UPDATE_CLIENTS
+                        );
                     world.scheduleTick(offsetPos, this, 2);
                 }
             }
@@ -87,7 +106,9 @@ public class EtherealPlatformBlock extends TransparentBlock {
         } else if (!extend && this.increaseAge(state, world, pos)) {
             BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
-            for (Direction direction : Direction.values()) {
+            for (
+                Direction direction : Direction.values()
+            ) {
                 mutable.setWithOffset(pos, direction);
                 BlockState blockState = world.getBlockState(mutable);
                 if (blockState.is(this) && !this.increaseAge(blockState, world, mutable)) {
@@ -103,9 +124,14 @@ public class EtherealPlatformBlock extends TransparentBlock {
     private boolean increaseAge(BlockState state, Level world, BlockPos pos) {
         int i = state.getValue(AGE);
         if (i > 0) {
-            world.setBlock(pos, state.setValue(AGE, i - 1)
-                                     .setValue(EXTEND, false), Block.UPDATE_CLIENTS
-            );
+            world
+                .setBlock(
+                    pos,
+                    state
+                        .setValue(AGE, i - 1)
+                        .setValue(EXTEND, false),
+                    Block.UPDATE_CLIENTS
+                );
             return false;
         } else {
             return true;
@@ -135,16 +161,26 @@ public class EtherealPlatformBlock extends TransparentBlock {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         int age = state.getValue((AGE));
-        if ((world.isClientSide && Minecraft.getInstance().player.getMainHandItem()
-                                                                 .is(PastelBlocks.ETHEREAL_PLATFORM.get()
-                                                                                                   .asItem()))) {
+        if ((world.isClientSide && Minecraft.getInstance().player
+            .getMainHandItem()
+            .is(
+                PastelBlocks.ETHEREAL_PLATFORM
+                    .get()
+                    .asItem()
+            ))) {
             age = Math.max(age, 3);
         }
         if (age > 0) {
-            for (int i = 0; i < age; i++) {
+            for (
+                int i = 0;
+                i < age;
+                i++
+            ) {
                 double d = pos.getX() + random.nextFloat();
                 double e = pos.getY() + 1.01;
                 double f = pos.getZ() + random.nextFloat();

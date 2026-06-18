@@ -13,21 +13,30 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 
 public class PreservationControllerBlockEntityRenderer
-    implements BlockEntityRenderer<PreservationControllerBlockEntity> {
+    implements
+    BlockEntityRenderer<PreservationControllerBlockEntity> {
 
-    private static final ResourceLocation AETHER_CORE = PastelCommon.locate(
-        "textures/block/preservation_controller_aether.png");
+    private static final ResourceLocation AETHER_CORE = PastelCommon
+        .locate(
+            "textures/block/preservation_controller_aether.png"
+        );
+
     protected static EntityRenderDispatcher dispatcher;
 
     public PreservationControllerBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
-        dispatcher = Minecraft.getInstance()
-                              .getEntityRenderDispatcher();
+        dispatcher = Minecraft
+            .getInstance()
+            .getEntityRenderDispatcher();
     }
 
     @Override
     public void render(
-        PreservationControllerBlockEntity entity, float tickDelta, PoseStack matrices,
-        MultiBufferSource vertexConsumers, int light, int overlay
+        PreservationControllerBlockEntity entity,
+        float tickDelta,
+        PoseStack matrices,
+        MultiBufferSource vertexConsumers,
+        int light,
+        int overlay
     ) {
         matrices.pushPose();
         matrices.translate(0.5, 0.5, 0.5);
@@ -35,8 +44,9 @@ public class PreservationControllerBlockEntityRenderer
         matrices.mulPose(Axis.YP.rotationDegrees(180.0F));
         var buffer = vertexConsumers.getBuffer(RenderType.entityTranslucent(AETHER_CORE));
 
-        float time = entity.getLevel()
-                           .getGameTime() % 24000 + tickDelta;
+        float time = entity
+            .getLevel()
+            .getGameTime() % 24000 + tickDelta;
 
         matrices.mulPose(Axis.ZP.rotationDegrees(time / 1.5F));
         float pulse = (float) (Math.sin((time / 19)));

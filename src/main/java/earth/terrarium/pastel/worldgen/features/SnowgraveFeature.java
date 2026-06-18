@@ -17,67 +17,103 @@ public class SnowgraveFeature extends Feature<SnowgraveFeatureConfig> {
     @Override
     public boolean place(FeaturePlaceContext<SnowgraveFeatureConfig> context) {
         var origin = context.origin();
-        var variant = context.config()
-                             .variant();
+        var variant = context
+            .config()
+            .variant();
         var level = context.level();
-        if(!level.getBlockState(origin).is(PastelBlocks.FROSTED_DEEPSLATE)) return false;
+        if (!level.getBlockState(origin).is(PastelBlocks.FROSTED_DEEPSLATE)) return false;
         if (!checkSpace(variant, origin, level)) return false;
-        level.setBlock(
-            origin.above(), PastelBlocks.SNOWGRAVE.get()
-                                                  .defaultBlockState()
-                                                  .setValue(SnowgraveBlock.FROZEN_MOB, variant), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
-        );
+        level
+            .setBlock(
+                origin.above(),
+                PastelBlocks.SNOWGRAVE
+                    .get()
+                    .defaultBlockState()
+                    .setValue(SnowgraveBlock.FROZEN_MOB, variant),
+                Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
+            );
         if (variant == SnowgraveBlock.FrozenMob.SPIDER) {
-            level.setBlock(
-                origin.above()
-                      .south(), PastelBlocks.SNOWGRAVE.get()
-                                                      .defaultBlockState()
-                                                      .setValue(SnowgraveBlock.FROZEN_MOB, variant)
-                                                      .setValue(SnowgraveBlock.SHOULD_RENDER, false), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
-            );
-            level.setBlock(
-                origin.above()
-                      .east(), PastelBlocks.SNOWGRAVE.get()
-                                                     .defaultBlockState()
-                                                     .setValue(SnowgraveBlock.FROZEN_MOB, variant)
-                                                     .setValue(SnowgraveBlock.SHOULD_RENDER, false), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
-            );
-            level.setBlock(
-                origin.above()
-                      .south()
-                      .east(), PastelBlocks.SNOWGRAVE.get()
-                                                     .defaultBlockState()
-                                                     .setValue(SnowgraveBlock.FROZEN_MOB, variant)
-                                                     .setValue(SnowgraveBlock.SHOULD_RENDER, false), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
-            );
+            level
+                .setBlock(
+                    origin
+                        .above()
+                        .south(),
+                    PastelBlocks.SNOWGRAVE
+                        .get()
+                        .defaultBlockState()
+                        .setValue(SnowgraveBlock.FROZEN_MOB, variant)
+                        .setValue(SnowgraveBlock.SHOULD_RENDER, false),
+                    Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
+                );
+            level
+                .setBlock(
+                    origin
+                        .above()
+                        .east(),
+                    PastelBlocks.SNOWGRAVE
+                        .get()
+                        .defaultBlockState()
+                        .setValue(SnowgraveBlock.FROZEN_MOB, variant)
+                        .setValue(SnowgraveBlock.SHOULD_RENDER, false),
+                    Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
+                );
+            level
+                .setBlock(
+                    origin
+                        .above()
+                        .south()
+                        .east(),
+                    PastelBlocks.SNOWGRAVE
+                        .get()
+                        .defaultBlockState()
+                        .setValue(SnowgraveBlock.FROZEN_MOB, variant)
+                        .setValue(SnowgraveBlock.SHOULD_RENDER, false),
+                    Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
+                );
         } else {
-            level.setBlock(
-                origin.above()
-                      .above(), PastelBlocks.SNOWGRAVE.get()
-                                                      .defaultBlockState()
-                                                      .setValue(SnowgraveBlock.FROZEN_MOB, variant)
-                                                      .setValue(SnowgraveBlock.SHOULD_RENDER, false), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
-            );
+            level
+                .setBlock(
+                    origin
+                        .above()
+                        .above(),
+                    PastelBlocks.SNOWGRAVE
+                        .get()
+                        .defaultBlockState()
+                        .setValue(SnowgraveBlock.FROZEN_MOB, variant)
+                        .setValue(SnowgraveBlock.SHOULD_RENDER, false),
+                    Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_CLIENTS
+                );
         }
         return true;
     }
 
     private static boolean checkSpace(SnowgraveBlock.FrozenMob variant, BlockPos origin, WorldGenLevel level) {
         if (variant == SnowgraveBlock.FrozenMob.SPIDER) {
-            for (BlockPos testPos : BlockPos.betweenClosed(
-                origin.above(), origin.above()
-                                      .south()
-                                      .east()
-            )) {
-                if (!level.getBlockState(testPos)
-                          .canBeReplaced()) return false;
+            for (
+                BlockPos testPos : BlockPos
+                    .betweenClosed(
+                        origin.above(),
+                        origin
+                            .above()
+                            .south()
+                            .east()
+                    )
+            ) {
+                if (!level
+                    .getBlockState(testPos)
+                    .canBeReplaced()) return false;
             }
             return true;
         } else {
-            return level.getBlockState(origin.above())
-                        .canBeReplaced() && level.getBlockState(origin.above()
-                                                                      .above())
-                                                 .canBeReplaced();
+            return level
+                .getBlockState(origin.above())
+                .canBeReplaced() && level
+                    .getBlockState(
+                        origin
+                            .above()
+                            .above()
+                    )
+                    .canBeReplaced();
         }
     }
 }

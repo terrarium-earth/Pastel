@@ -15,13 +15,19 @@ import java.util.Map;
 public class ColoredSporeBlossomBlock extends SporeBlossomBlock {
 
     private static final Map<InkColor, ColoredSporeBlossomBlock> BLOSSOMS = new Object2ObjectArrayMap<>();
+
     protected final InkColor color;
 
     protected final ParticleOptions fallingParticleType;
+
     protected final ParticleOptions airParticleType;
 
     public ColoredSporeBlossomBlock(
-        Properties settings, InkColor color, ParticleOptions fallingParticleType, ParticleOptions airParticleType) {
+        Properties settings,
+        InkColor color,
+        ParticleOptions fallingParticleType,
+        ParticleOptions airParticleType
+    ) {
         super(settings);
         this.color = color;
         this.fallingParticleType = fallingParticleType;
@@ -54,15 +60,24 @@ public class ColoredSporeBlossomBlock extends SporeBlossomBlock {
         world.addParticle(this.fallingParticleType, d, e, f, 0.0D, 0.0D, 0.0D);
         BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
-        for (int l = 0; l < 14; ++l) {
+        for (
+            int l = 0;
+            l < 14;
+            ++l
+        ) {
             mutable.set(i + Mth.nextInt(random, -10, 10), j - random.nextInt(10), k + Mth.nextInt(random, -10, 10));
             BlockState blockState = world.getBlockState(mutable);
             if (!blockState.isCollisionShapeFullBlock(world, mutable)) {
-                world.addParticle(
-                    this.airParticleType, (double) mutable.getX() + random.nextDouble(),
-                    (double) mutable.getY() + random.nextDouble(), (double) mutable.getZ() + random.nextDouble(), 0.0D,
-                    0.0D, 0.0D
-                );
+                world
+                    .addParticle(
+                        this.airParticleType,
+                        (double) mutable.getX() + random.nextDouble(),
+                        (double) mutable.getY() + random.nextDouble(),
+                        (double) mutable.getZ() + random.nextDouble(),
+                        0.0D,
+                        0.0D,
+                        0.0D
+                    );
             }
         }
     }

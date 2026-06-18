@@ -34,18 +34,26 @@ public class LootFunctionTriggerCriterion extends SimpleCriterionTrigger<LootFun
         List<TagKey<Item>> ids
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        TagKey.codec(
-                                                                                                                  Registries.ITEM).listOf()
-                                                                                                                  .optionalFieldOf("tags", List.of())
-                                                                                                                  .forGetter(Conditions::ids)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        TagKey
+                            .codec(
+                                Registries.ITEM
+                            )
+                            .listOf()
+                            .optionalFieldOf("tags", List.of())
+                            .forGetter(Conditions::ids)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(ItemStack stack) {
             return this.ids.isEmpty() || ids.stream().anyMatch(stack::is);

@@ -19,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PrimordialFireBurningCategory extends GatedDisplayCategory<PrimordialFireBurningDisplay> {
 
     private final static ResourceLocation FIRE_TEXTURE = PastelCommon.locate("textures/block/primordial_fire_0.png");
@@ -41,23 +43,45 @@ public class PrimordialFireBurningCategory extends GatedDisplayCategory<Primordi
 
     @Override
     public void setupWidgets(
-        Point startPoint, Rectangle bounds, List<Widget> widgets, @NotNull PrimordialFireBurningDisplay display) {
+        Point startPoint,
+        Rectangle bounds,
+        List<Widget> widgets,
+        @NotNull PrimordialFireBurningDisplay display
+    ) {
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 81, startPoint.y + 9)));
-        widgets.add(
-            new AnimatedTexturedWidget(
-                FIRE_TEXTURE, new Rectangle(startPoint.x + 18, startPoint.y + 20, 0, 0), 16,
-                176
-            ).animationDurationMS(1000));
+        widgets
+            .add(
+                new AnimatedTexturedWidget(
+                    FIRE_TEXTURE,
+                    new Rectangle(startPoint.x + 18, startPoint.y + 20, 0, 0),
+                    16,
+                    176
+                ).animationDurationMS(1000)
+            );
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 41, startPoint.y + 8)));
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 78, startPoint.y + 9))
-                           .entries(display.getOutputEntries()
-                                           .get(0))
-                           .disableBackground()
-                           .markOutput());
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 18, startPoint.y + 1))
-                           .entries(display.getInputEntries()
-                                           .get(0))
-                           .markInput());
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 78, startPoint.y + 9))
+                    .entries(
+                        display
+                            .getOutputEntries()
+                            .get(0)
+                    )
+                    .disableBackground()
+                    .markOutput()
+            );
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 18, startPoint.y + 1))
+                    .entries(
+                        display
+                            .getInputEntries()
+                            .get(0)
+                    )
+                    .markInput()
+            );
     }
 
     @Override

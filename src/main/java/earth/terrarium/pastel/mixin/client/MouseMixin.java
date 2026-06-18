@@ -9,14 +9,19 @@ import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(MouseHandler.class)
+@Mixin(
+    MouseHandler.class
+)
 public class MouseMixin {
 
-    @SuppressWarnings("unchecked")
-    @ModifyExpressionValue(method = "turnPlayer", at = @At(value = "INVOKE",
-                                                           target = "net/minecraft/client/OptionInstance.get ()" +
-                                                                    "Ljava/lang/Object;",
-                                                           ordinal = 0))
+    @SuppressWarnings(
+        "unchecked"
+    )
+    @ModifyExpressionValue(
+        method = "turnPlayer", at = @At(
+            value = "INVOKE", target = "net/minecraft/client/OptionInstance.get ()" + "Ljava/lang/Object;", ordinal = 0
+        )
+    )
     public <T> T makeMouseSluggish(T original) {
         var sensitivity = (double) original;
         var player = Minecraft.getInstance().player;
@@ -33,8 +38,11 @@ public class MouseMixin {
     }
 
     // AHAHAHAH, I FINALLY FIGURED OUT HOW TO DO IT!
-    @ModifyExpressionValue(method = "turnPlayer", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD,
-                                                           target = "Lnet/minecraft/client/Options;smoothCamera:Z"))
+    @ModifyExpressionValue(
+        method = "turnPlayer", at = @At(
+            value = "FIELD", opcode = Opcodes.GETFIELD, target = "Lnet/minecraft/client/Options;smoothCamera:Z"
+        )
+    )
     public boolean forceSmoothCamera(boolean original) {
         var player = Minecraft.getInstance().player;
 

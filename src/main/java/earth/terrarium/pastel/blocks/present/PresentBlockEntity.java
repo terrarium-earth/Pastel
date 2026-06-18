@@ -30,6 +30,7 @@ import java.util.UUID;
 public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithName {
 
     private UUID openerUUID;
+
     protected int openingTicks = 0;
 
     public PresentBlockEntity(BlockPos pos, BlockState state) {
@@ -41,8 +42,12 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
         if (openerUUID != null) {
             Player opener = PlayerOwned.getPlayerEntityIfOnline(openerUUID);
             if (opener != null) {
-                Support.grantAdvancementCriterion(
-                    (ServerPlayer) opener, "gift_or_open_present", "gifted_or_opened_present");
+                Support
+                    .grantAdvancementCriterion(
+                        (ServerPlayer) opener,
+                        "gift_or_open_present",
+                        "gifted_or_opened_present"
+                    );
             }
         }
 
@@ -50,8 +55,12 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
         if (ownerUUID != null) {
             Player wrapper = PlayerOwned.getPlayerEntityIfOnline(ownerUUID);
             if (wrapper != null) {
-                Support.grantAdvancementCriterion(
-                    (ServerPlayer) wrapper, "gift_or_open_present", "gifted_or_opened_present");
+                Support
+                    .grantAdvancementCriterion(
+                        (ServerPlayer) wrapper,
+                        "gift_or_open_present",
+                        "gifted_or_opened_present"
+                    );
             }
         }
     }
@@ -87,14 +96,12 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
     }
 
     @Override
-    @Nullable
-    public UUID getOwnerUUID() {
+    @Nullable public UUID getOwnerUUID() {
         var profile = getOwner();
         return profile == null ? null : profile.id().orElse(null);
     }
 
-    @Nullable
-    public ResolvableProfile getOwner() {
+    @Nullable public ResolvableProfile getOwner() {
         return components().get(DataComponents.PROFILE);
     }
 
@@ -113,8 +120,10 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
             builder.remove(DataComponents.PROFILE);
         else {
             var profile = new GameProfile(
-                playerEntity.getUUID(), playerEntity.getName()
-                                                    .getString()
+                playerEntity.getUUID(),
+                playerEntity
+                    .getName()
+                    .getString()
             );
 
             builder.set(DataComponents.PROFILE, new ResolvableProfile(profile));
@@ -140,13 +149,18 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
     }
 
     public Map<Integer, Integer> getColors() {
-        return components().getOrDefault(PastelDataComponentTypes.WRAPPED_PRESENT, WrappedPresentComponent.DEFAULT).colors();
+        return components()
+            .getOrDefault(PastelDataComponentTypes.WRAPPED_PRESENT, WrappedPresentComponent.DEFAULT)
+            .colors();
     }
 
     public List<ItemStack> getStacks() {
         var contents = components().get(DataComponents.BUNDLE_CONTENTS);
-        return contents == null ? List.of() : contents.itemCopyStream()
-                                                      .toList();
+        return contents == null
+            ? List.of()
+            : contents
+                .itemCopyStream()
+                .toList();
     }
 
     public boolean isEmpty() {

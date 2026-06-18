@@ -23,12 +23,12 @@ public class ItemDamageImmunity {
     private static final Map<Item, List<TagKey<DamageType>>> damageSourceImmunities = new HashMap<>();
 
     public static void registerImmunity(ItemLike itemConvertible, TagKey<DamageType> damageTypeTag) {
-		/*
-		Item item = itemConvertible.asItem();
-		List<TagKey<DamageType>> current = damageSourceImmunities.getOrDefault(item, new ArrayList<>());
-		current.add(damageTypeTag);
-		damageSourceImmunities.put(item, current);
-		 */
+        /*
+        Item item = itemConvertible.asItem();
+        List<TagKey<DamageType>> current = damageSourceImmunities.getOrDefault(item, new ArrayList<>());
+        current.add(damageTypeTag);
+        damageSourceImmunities.put(item, current);
+         */
     }
 
     public static boolean isImmuneTo(ItemStack itemStack, DamageSource damageSource) {
@@ -44,7 +44,9 @@ public class ItemDamageImmunity {
         // is item immune to this specific kind of damage?
         Item item = itemStack.getItem();
         if (damageSourceImmunities.containsKey(item)) {
-            for (TagKey<DamageType> type : damageSourceImmunities.get(item)) {
+            for (
+                TagKey<DamageType> type : damageSourceImmunities.get(item)
+            ) {
                 if (damageSource.is(type)) {
                     return true;
                 }
@@ -57,7 +59,9 @@ public class ItemDamageImmunity {
     public static boolean isImmuneTo(ItemStack itemStack, TagKey<DamageType> damageTypeTag) {
         Item item = itemStack.getItem();
         if (damageSourceImmunities.containsKey(item)) {
-            for (TagKey<DamageType> type : damageSourceImmunities.get(item)) {
+            for (
+                TagKey<DamageType> type : damageSourceImmunities.get(item)
+            ) {
                 if (type.equals(damageTypeTag)) {
                     return true;
                 }

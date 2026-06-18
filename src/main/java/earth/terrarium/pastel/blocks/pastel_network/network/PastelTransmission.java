@@ -20,37 +20,57 @@ import java.util.List;
 
 public class PastelTransmission implements SchedulerMap.Callback {
 
-    public static final Codec<PastelTransmission> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                              BlockPos.CODEC.listOf()
-                                                                                                            .fieldOf(
-                                                                                                                "node_positions")
-                                                                                                            .forGetter(PastelTransmission::getNodePositions),
-                                                                                              ItemStack.CODEC.fieldOf("variant")
-                                                                                                             .forGetter(PastelTransmission::getStack),
-                                                                                              Codec.LONG.fieldOf(
-                                                                                                  "amount")
-                                                                                                        .forGetter(PastelTransmission::getAmount),
-                                                                                              Codec.INT.fieldOf(
-                                                                                                  "vertex_time")
-                                                                                                       .forGetter(PastelTransmission::getVertexTime)
-                                                                                          )
-                                                                                          .apply(
-                                                                                              i,
-                                                                                              PastelTransmission::new
-                                                                                          ));
+    public static final Codec<PastelTransmission> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    BlockPos.CODEC
+                        .listOf()
+                        .fieldOf(
+                            "node_positions"
+                        )
+                        .forGetter(PastelTransmission::getNodePositions),
+                    ItemStack.CODEC
+                        .fieldOf("variant")
+                        .forGetter(PastelTransmission::getStack),
+                    Codec.LONG
+                        .fieldOf(
+                            "amount"
+                        )
+                        .forGetter(PastelTransmission::getAmount),
+                    Codec.INT
+                        .fieldOf(
+                            "vertex_time"
+                        )
+                        .forGetter(PastelTransmission::getVertexTime)
+                )
+                .apply(
+                    i,
+                    PastelTransmission::new
+                )
+        );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmission> STREAM_CODEC = StreamCodec.composite(
-        BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), PastelTransmission::getNodePositions,
-        ItemStack.STREAM_CODEC, PastelTransmission::getStack,
-        ByteBufCodecs.VAR_LONG, PastelTransmission::getAmount,
-        ByteBufCodecs.VAR_INT, PastelTransmission::getVertexTime,
-        PastelTransmission::new
-    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmission> STREAM_CODEC = StreamCodec
+        .composite(
+            BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()),
+            PastelTransmission::getNodePositions,
+            ItemStack.STREAM_CODEC,
+            PastelTransmission::getStack,
+            ByteBufCodecs.VAR_LONG,
+            PastelTransmission::getAmount,
+            ByteBufCodecs.VAR_INT,
+            PastelTransmission::getVertexTime,
+            PastelTransmission::new
+        );
 
     private @Nullable ServerPastelNetwork network;
+
     private final List<BlockPos> nodePositions;
+
     private final ItemStack stack;
+
     private final long amount;
+
     private final int vertexTime;
 
     public PastelTransmission(List<BlockPos> nodePositions, ItemStack stack, long amount, int vertexTime) {
@@ -111,17 +131,26 @@ public class PastelTransmission implements SchedulerMap.Callback {
             var destinationHandler = destinationNode.getConnectedHandler();
             if (destinationHandler != null) {
                 inserted = amount;
-                inserted -= ItemHandlerHelper.insertItemStacked(
-                                                 destinationHandler, stack.copyWithCount((int) amount), false)
-                                             .getCount();
+                inserted -= ItemHandlerHelper
+                    .insertItemStacked(
+                        destinationHandler,
+                        stack.copyWithCount((int) amount),
+                        false
+                    )
+                    .getCount();
                 destinationNode.addItemCountUnderway(-amount);
             }
         }
         if (inserted != amount) {
-            InWorldInteractionHelper.scatter(
-                world, destinationPos.getX() + 0.5, destinationPos.getY() + 0.5, destinationPos.getZ() + 0.5, stack,
-                amount - inserted
-            );
+            InWorldInteractionHelper
+                .scatter(
+                    world,
+                    destinationPos.getX() + 0.5,
+                    destinationPos.getY() + 0.5,
+                    destinationPos.getZ() + 0.5,
+                    stack,
+                    amount - inserted
+                );
         }
     }
 

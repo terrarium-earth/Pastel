@@ -23,6 +23,7 @@ public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
     protected final Level world;
 
     protected BlackHoleChestBlockEntity blockEntity;
+
     protected Container filterInventory;
 
     public BlackHoleChestScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
@@ -30,23 +31,39 @@ public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
     }
 
     public BlackHoleChestScreenHandler(
-        int syncId, Inventory playerInventory, FilterConfigurable.ExtendedDataWithPos data) {
+        int syncId,
+        Inventory playerInventory,
+        FilterConfigurable.ExtendedDataWithPos data
+    ) {
         this(
-            syncId, playerInventory, playerInventory.player.level()
-                                                           .getBlockEntity(
-                                                               data.pos(), PastelBlockEntities.BLACK_HOLE_CHEST.get())
-                                                           .orElseThrow(), data.data()
+            syncId,
+            playerInventory,
+            playerInventory.player
+                .level()
+                .getBlockEntity(
+                    data.pos(),
+                    PastelBlockEntities.BLACK_HOLE_CHEST.get()
+                )
+                .orElseThrow(),
+            data.data()
         );
     }
 
     public BlackHoleChestScreenHandler(
-        int syncId, Inventory playerInventory, BlackHoleChestBlockEntity blockEntity,
+        int syncId,
+        Inventory playerInventory,
+        BlackHoleChestBlockEntity blockEntity,
         FilterConfigurable.ExtendedData data
     ) {
         super(PastelScreenHandlerTypes.BLACK_HOLE_CHEST, syncId);
         this.world = playerInventory.player.level();
-        this.filterInventory = FilterConfigurable.getFilterInventoryFromExtendedData(
-            syncId, playerInventory, data, this);
+        this.filterInventory = FilterConfigurable
+            .getFilterInventoryFromExtendedData(
+                syncId,
+                playerInventory,
+                data,
+                this
+            );
         this.blockEntity = blockEntity;
 
         checkContainerSize(blockEntity, BlackHoleChestBlockEntity.INVENTORY_SIZE);
@@ -57,33 +74,62 @@ public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
         // sucking chest slots
         int j;
         int k;
-        for (j = 0; j < ROWS; ++j) {
-            for (k = 0; k < 9; ++k) {
+        for (
+            j = 0;
+            j < ROWS;
+            ++j
+        ) {
+            for (
+                k = 0;
+                k < 9;
+                ++k
+            ) {
                 this.addSlot(new Slot(blockEntity, k + j * 9, 8 + k * 18, 26 + 16 + j * 18));
             }
         }
 
         // player inventory slots
-        for (j = 0; j < 3; ++j) {
-            for (k = 0; k < 9; ++k) {
+        for (
+            j = 0;
+            j < 3;
+            ++j
+        ) {
+            for (
+                k = 0;
+                k < 9;
+                ++k
+            ) {
                 this.addSlot(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 112 + 19 + j * 18 + i));
             }
         }
 
         // player hotbar
-        for (j = 0; j < 9; ++j) {
+        for (
+            j = 0;
+            j < 9;
+            ++j
+        ) {
             this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 170 + 19 + i));
         }
 
         // experience provider slot
-        this.addSlot(
-            new StackFilterSlot(
-                blockEntity, BlackHoleChestBlockEntity.EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT, 152, 18,
-                PastelItems.KNOWLEDGE_GEM.get()
-            ));
+        this
+            .addSlot(
+                new StackFilterSlot(
+                    blockEntity,
+                    BlackHoleChestBlockEntity.EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT,
+                    152,
+                    18,
+                    PastelItems.KNOWLEDGE_GEM.get()
+                )
+            );
 
         // filter slots
-        for (k = 0; k < BlackHoleChestBlockEntity.ITEM_FILTER_SLOT_COUNT; ++k) {
+        for (
+            k = 0;
+            k < BlackHoleChestBlockEntity.ITEM_FILTER_SLOT_COUNT;
+            ++k
+        ) {
             this.addSlot(new BlackHoleChestFilterSlot(filterInventory, k, 8 + k * 23, 18));
         }
     }

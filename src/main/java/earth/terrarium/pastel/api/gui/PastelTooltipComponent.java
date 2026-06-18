@@ -20,12 +20,20 @@ public interface PastelTooltipComponent extends ClientTooltipComponent {
         draw(context, x + columns * 18 + 1, y, Sprite.BORDER_CORNER_TOP);
 
         int j;
-        for (j = 0; j < columns; ++j) {
+        for (
+            j = 0;
+            j < columns;
+            ++j
+        ) {
             draw(context, x + 1 + j * 18, y, Sprite.BORDER_HORIZONTAL_TOP);
             draw(context, x + 1 + j * 18, y + rows * 20, Sprite.BORDER_HORIZONTAL_BOTTOM);
         }
 
-        for (j = 0; j < rows; ++j) {
+        for (
+            j = 0;
+            j < rows;
+            ++j
+        ) {
             draw(context, x, y + j * 20 + 1, Sprite.BORDER_VERTICAL);
             draw(context, x + columns * 18 + 1, y + j * 20 + 1, Sprite.BORDER_VERTICAL);
         }
@@ -52,7 +60,9 @@ public interface PastelTooltipComponent extends ClientTooltipComponent {
         context.blit(TEXTURE, x, y, sprite.u, sprite.v, sprite.width, sprite.height, 128, 128);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     enum Sprite {
         SLOT(0, 0, 18, 20),
         DOTTED_SLOT(18, 0, 18 + 18, 20),
@@ -64,8 +74,11 @@ public interface PastelTooltipComponent extends ClientTooltipComponent {
         BORDER_CORNER_BOTTOM(0, 60, 1, 1);
 
         public final int u;
+
         public final int v;
+
         public final int width;
+
         public final int height;
 
         Sprite(int u, int v, int width, int height) {

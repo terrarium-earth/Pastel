@@ -17,7 +17,9 @@ import java.util.Optional;
 public final class BlockReference {
 
     private BlockState state;
+
     private final Optional<WeakReference<BlockEntity>> be;
+
     public final BlockPos pos;
 
     private BlockReference(BlockState state, Optional<BlockEntity> be, BlockPos pos) {

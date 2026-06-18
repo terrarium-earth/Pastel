@@ -26,21 +26,32 @@ public class ShimmerstoneBlock extends Block {
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (random.nextBoolean()) {
-            for (Direction direction : Direction.values()) {
+            for (
+                Direction direction : Direction.values()
+            ) {
                 if (direction != Direction.DOWN) {
                     BlockPos blockPos = pos.relative(direction);
                     BlockState blockState = world.getBlockState(blockPos);
                     if (!state.canOcclude() || !blockState.isFaceSturdy(world, blockPos, direction.getOpposite())) {
-                        double d = direction.getStepX() == 0 ? random.nextDouble()
-                                                             : 0.5D + (double) direction.getStepX() * 0.6D;
-                        double e = direction.getStepY() == 0 ? random.nextDouble()
-                                                             : 0.5D + (double) direction.getStepY() * 0.6D;
-                        double f = direction.getStepZ() == 0 ? random.nextDouble()
-                                                             : 0.5D + (double) direction.getStepZ() * 0.6D;
-                        world.addParticle(
-                            PastelParticleTypes.SHIMMERSTONE_SPARKLE, (double) pos.getX() + d, (double) pos.getY() + e,
-                            (double) pos.getZ() + f, 0.0D, 0.05D, 0.0D
-                        );
+                        double d = direction.getStepX() == 0
+                            ? random.nextDouble()
+                            : 0.5D + (double) direction.getStepX() * 0.6D;
+                        double e = direction.getStepY() == 0
+                            ? random.nextDouble()
+                            : 0.5D + (double) direction.getStepY() * 0.6D;
+                        double f = direction.getStepZ() == 0
+                            ? random.nextDouble()
+                            : 0.5D + (double) direction.getStepZ() * 0.6D;
+                        world
+                            .addParticle(
+                                PastelParticleTypes.SHIMMERSTONE_SPARKLE,
+                                (double) pos.getX() + d,
+                                (double) pos.getY() + e,
+                                (double) pos.getZ() + f,
+                                0.0D,
+                                0.05D,
+                                0.0D
+                            );
                     }
                 }
             }

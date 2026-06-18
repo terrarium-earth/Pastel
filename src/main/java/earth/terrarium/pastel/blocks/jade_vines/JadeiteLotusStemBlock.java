@@ -36,12 +36,16 @@ public class JadeiteLotusStemBlock extends BushBlock {
     public static final MapCodec<JadeiteLotusStemBlock> CODEC = simpleCodec(JadeiteLotusStemBlock::new);
 
     public static final EnumProperty<StemComponent> STEM_PART = StemComponent.PROPERTY;
+
     public static final BooleanProperty INVERTED = BlockStateProperties.INVERTED;
 
     public JadeiteLotusStemBlock(Properties settings) {
         super(settings);
-        registerDefaultState(defaultBlockState().setValue(STEM_PART, StemComponent.BASE)
-                                                .setValue(INVERTED, false));
+        registerDefaultState(
+            defaultBlockState()
+                .setValue(STEM_PART, StemComponent.BASE)
+                .setValue(INVERTED, false)
+        );
     }
 
     @Override
@@ -50,24 +54,35 @@ public class JadeiteLotusStemBlock extends BushBlock {
     }
 
     public static BlockState getStemVariant(boolean top, boolean inverted) {
-        return PastelBlocks.JADEITE_LOTUS_STEM.get()
-                                              .defaultBlockState()
-                                              .setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM)
-                                              .setValue(INVERTED, inverted);
+        return PastelBlocks.JADEITE_LOTUS_STEM
+            .get()
+            .defaultBlockState()
+            .setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM)
+            .setValue(INVERTED, inverted);
     }
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         if (handStack.is(Tags.Items.TOOLS_SHEAR) && state.getValue(STEM_PART) == StemComponent.BASE) {
             BlockState newState = state.setValue(STEM_PART, StemComponent.STEM);
             world.setBlockAndUpdate(pos, newState);
-            player.playNotifySound(
-                SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1, 0.9F + player.getRandom()
-                                                                                 .nextFloat() * 0.2F
-            );
+            player
+                .playNotifySound(
+                    SoundEvents.MOOSHROOM_SHEAR,
+                    SoundSource.BLOCKS,
+                    1,
+                    0.9F + player
+                        .getRandom()
+                        .nextFloat() * 0.2F
+                );
             handStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
             world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(newState));
 
@@ -77,16 +92,16 @@ public class JadeiteLotusStemBlock extends BushBlock {
         return super.useItemOn(handStack, state, world, pos, player, hand, hit);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         var world = ctx.getLevel();
         var pos = ctx.getClickedPos();
         var floor = world.getBlockState(pos.above());
         var side = ctx.getClickedFace();
 
-        if (!side.getAxis()
-                 .isVertical())
+        if (!side
+            .getAxis()
+            .isVertical())
             return null;
 
         var inverted = side == Direction.UP;
@@ -121,13 +136,22 @@ public class JadeiteLotusStemBlock extends BushBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-        return floor.isFaceSturdy(world, pos, Direction.UP, SupportType.RIGID) || floor.isFaceSturdy(
-            world, pos, Direction.DOWN, SupportType.RIGID) || floor.is(this);
+        return floor.isFaceSturdy(world, pos, Direction.UP, SupportType.RIGID) || floor
+            .isFaceSturdy(
+                world,
+                pos,
+                Direction.DOWN,
+                SupportType.RIGID
+            ) || floor.is(this);
     }
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (!state.canSurvive(world, pos)) {

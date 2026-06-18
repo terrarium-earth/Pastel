@@ -22,10 +22,18 @@ public class SuspiciousBrewItem extends BeverageItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         if (FermentedItem.isPreviewStack(stack)) {
-            tooltip.add(Component.translatable("item.pastel.suspicious_brew.tooltip.preview")
-                                 .withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable("item.pastel.suspicious_brew.tooltip.preview2")
-                                 .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.suspicious_brew.tooltip.preview")
+                        .withStyle(ChatFormatting.GRAY)
+                );
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.suspicious_brew.tooltip.preview2")
+                        .withStyle(ChatFormatting.GRAY)
+                );
         }
     }
 

@@ -10,10 +10,12 @@ import java.util.Optional;
 
 public class FluidColors extends ColorRegistry<Fluid> {
 
-    private static final HashMap<Fluid, InkColor> COLORS = new HashMap<>() {{
-        put(Fluids.WATER, InkColors.BLUE);
-        put(Fluids.LAVA, InkColors.ORANGE);
-    }};
+    private static final HashMap<Fluid, InkColor> COLORS = new HashMap<>() {
+        {
+            put(Fluids.WATER, InkColors.BLUE);
+            put(Fluids.LAVA, InkColors.ORANGE);
+        }
+    };
 
     @Override
     public void registerColorMapping(Fluid fluid, InkColor color) {

@@ -24,10 +24,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(Entity.class)
+@Mixin(
+    Entity.class
+)
 public abstract class EntityMixin {
 
-    @ModifyVariable(method = "makeStuckInBlock", at = @At(value = "LOAD"), argsOnly = true)
+    @ModifyVariable(
+        method = "makeStuckInBlock", at = @At(
+            value = "LOAD"
+        ), argsOnly = true
+    )
     private Vec3 applyInexorableAntiBlockSlowdown(Vec3 multiplier) {
         var entity = (Entity) (Object) this;
         if (entity instanceof LivingEntity livingEntity && InexorableHelper.isArmorActive(livingEntity)) {
@@ -36,42 +42,62 @@ public abstract class EntityMixin {
         return multiplier;
     }
 
-    @Inject(method = "getBlockSpeedFactor", at = @At("RETURN"), cancellable = true)
+    @Inject(
+        method = "getBlockSpeedFactor", at = @At(
+            "RETURN"
+        ), cancellable = true
+    )
     private void applyInexorableAntiSlowdown(CallbackInfoReturnable<Float> cir) {
         var entity = (Entity) (Object) this;
-        if (cir.getReturnValue() < 1f && entity instanceof LivingEntity livingEntity && InexorableHelper.isArmorActive(livingEntity)) {
+        if (cir.getReturnValue() < 1f && entity instanceof LivingEntity livingEntity && InexorableHelper
+            .isArmorActive(livingEntity)) {
             cir.setReturnValue(1F);
         }
     }
 
     @Inject(
-        method = "spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;",
-        at = @At("HEAD"), cancellable = true)
+        method = "spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At(
+            "HEAD"
+        ), cancellable = true
+    )
     public void dropStack(ItemStack stack, CallbackInfoReturnable<ItemEntity> cir) {
         if ((Object) this instanceof LivingEntity thisLivingEntity) {
             if (thisLivingEntity.isDeadOrDying() && thisLivingEntity.getLastHurtByMob() instanceof Player killer) {
-                var hasInventoryInsertion = thisLivingEntity.level()
-                                                            .registryAccess()
-                                                            .lookup(Registries.ENCHANTMENT)
-                                                            .flatMap(impl -> impl.get(
-                                                                PastelEnchantments.INVENTORY_INSERTION))
-                                                            .map(e -> EnchantmentHelper.getEnchantmentLevel(e, killer) >
-                                                                      0)
-                                                            .orElse(false);
+                var hasInventoryInsertion = thisLivingEntity
+                    .level()
+                    .registryAccess()
+                    .lookup(Registries.ENCHANTMENT)
+                    .flatMap(
+                        impl -> impl
+                            .get(
+                                PastelEnchantments.INVENTORY_INSERTION
+                            )
+                    )
+                    .map(e -> EnchantmentHelper.getEnchantmentLevel(e, killer) > 0)
+                    .orElse(false);
                 if (hasInventoryInsertion) {
                     Item item = stack.getItem();
                     int count = stack.getCount();
 
-                    if (killer.getInventory()
-                              .add(stack)) {
-                        killer.level()
-                              .playSound(
-                                  null, killer.getX(), killer.getY(), killer.getZ(),
-                                  SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS,
-                                  0.2F, ((killer.getRandom()
-                                                .nextFloat() - killer.getRandom()
-                                                                     .nextFloat()) * 0.7F + 1.0F) * 2.0F
-                              );
+                    if (killer
+                        .getInventory()
+                        .add(stack)) {
+                        killer
+                            .level()
+                            .playSound(
+                                null,
+                                killer.getX(),
+                                killer.getY(),
+                                killer.getZ(),
+                                SoundEvents.ITEM_PICKUP,
+                                SoundSource.PLAYERS,
+                                0.2F,
+                                ((killer
+                                    .getRandom()
+                                    .nextFloat() - killer
+                                        .getRandom()
+                                        .nextFloat()) * 0.7F + 1.0F) * 2.0F
+                            );
 
                         if (stack.isEmpty()) {
                             killer.awardStat(Stats.ITEM_PICKED_UP.get(item), count);
@@ -84,21 +110,31 @@ public abstract class EntityMixin {
         }
     }
 
-    @ModifyReturnValue(method = "getPose", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "getPose", at = @At(
+            "RETURN"
+        )
+    )
     public Pose forceSleepPose(Pose original) {
         var entity = (Entity) (Object) this;
 
         if (!(entity instanceof LivingEntity living))
             return original;
 
-        if (!(entity instanceof Player) && (living.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || living.hasEffect(
-            PastelMobEffects.FATAL_SLUMBER)))
+        if (!(entity instanceof Player) && (living.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || living
+            .hasEffect(
+                PastelMobEffects.FATAL_SLUMBER
+            )))
             return Pose.SLEEPING;
 
         return original;
     }
 
-    @ModifyReturnValue(method = "isOnFire", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "isOnFire", at = @At(
+            "RETURN"
+        )
+    )
     public boolean considerPrimfireAsFire(boolean original) {
         var entity = (Entity) (Object) this;
 

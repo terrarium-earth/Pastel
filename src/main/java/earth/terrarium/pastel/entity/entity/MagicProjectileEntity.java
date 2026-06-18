@@ -27,7 +27,12 @@ public abstract class MagicProjectileEntity extends Projectile {
     }
 
     public MagicProjectileEntity(
-        EntityType<? extends MagicProjectileEntity> type, double x, double y, double z, Level world) {
+        EntityType<? extends MagicProjectileEntity> type,
+        double x,
+        double y,
+        double z,
+        Level world
+    ) {
         this(type, world);
         this.moveTo(x, y, z, this.getYRot(), this.getXRot());
         this.reapplyPosition();
@@ -58,11 +63,17 @@ public abstract class MagicProjectileEntity extends Projectile {
         Vec3 vec3d2;
         Vec3 thisPos = this.position();
         vec3d2 = thisPos.add(thisVelocity);
-        HitResult hitResult = this.level()
-                                  .clip(new ClipContext(
-                                      thisPos, vec3d2, ClipContext.Block.COLLIDER,
-                                      ClipContext.Fluid.NONE, this
-                                  ));
+        HitResult hitResult = this
+            .level()
+            .clip(
+                new ClipContext(
+                    thisPos,
+                    vec3d2,
+                    ClipContext.Block.COLLIDER,
+                    ClipContext.Fluid.NONE,
+                    this
+                )
+            );
         if ((hitResult).getType() != HitResult.Type.MISS) {
             vec3d2 = (hitResult).getLocation();
         }
@@ -76,8 +87,10 @@ public abstract class MagicProjectileEntity extends Projectile {
             if (hitResult.getType() == HitResult.Type.ENTITY) {
                 Entity entity = ((EntityHitResult) hitResult).getEntity();
                 Entity entity2 = this.getOwner();
-                if (entity instanceof Player && entity2 instanceof Player && !((Player) entity2).canHarmPlayer(
-                    (Player) entity)) {
+                if (entity instanceof Player && entity2 instanceof Player && !((Player) entity2)
+                    .canHarmPlayer(
+                        (Player) entity
+                    )) {
                     hitResult = null;
                 }
             }
@@ -108,11 +121,21 @@ public abstract class MagicProjectileEntity extends Projectile {
         this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
 
         if (this.isInWater()) {
-            for (int o = 0; o < 4; ++o) {
-                this.level()
+            for (
+                int o = 0;
+                o < 4;
+                ++o
+            ) {
+                this
+                    .level()
                     .addParticle(
-                        ParticleTypes.BUBBLE, h - velocityX * 0.25D, j - velocityY * 0.25D, k - velocityZ * 0.25D,
-                        velocityX, velocityY, velocityZ
+                        ParticleTypes.BUBBLE,
+                        h - velocityX * 0.25D,
+                        j - velocityY * 0.25D,
+                        k - velocityZ * 0.25D,
+                        velocityX,
+                        velocityY,
+                        velocityZ
                     );
             }
         }
@@ -130,8 +153,9 @@ public abstract class MagicProjectileEntity extends Projectile {
     }
 
     public boolean isNoClip() {
-        if (!this.level()
-                 .isClientSide()) {
+        if (!this
+            .level()
+            .isClientSide()) {
             return this.noPhysics;
         } else {
             return true;
@@ -142,13 +166,19 @@ public abstract class MagicProjectileEntity extends Projectile {
         return PastelSounds.INK_PROJECTILE_HIT;
     }
 
-    @Nullable
-    protected EntityHitResult getEntityCollision(Vec3 currentPosition, Vec3 nextPosition) {
-        return ProjectileUtil.getEntityHitResult(
-            this.level(), this, currentPosition, nextPosition, this.getBoundingBox()
-                                                                   .expandTowards(this.getDeltaMovement())
-                                                                   .inflate(1.0D), this::canHitEntity
-        );
+    @Nullable protected EntityHitResult getEntityCollision(Vec3 currentPosition, Vec3 nextPosition) {
+        return ProjectileUtil
+            .getEntityHitResult(
+                this.level(),
+                this,
+                currentPosition,
+                nextPosition,
+                this
+                    .getBoundingBox()
+                    .expandTowards(this.getDeltaMovement())
+                    .inflate(1.0D),
+                this::canHitEntity
+            );
     }
 
     public abstract InkColor getInkColor();

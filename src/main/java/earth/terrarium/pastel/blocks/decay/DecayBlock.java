@@ -60,12 +60,20 @@ public abstract class DecayBlock extends Block {
     public static final EnumProperty<Conversion> CONVERSION = EnumProperty.create("conversion", Conversion.class);
 
     protected final float spreadChance;
+
     protected final boolean canSpreadToBlockEntities;
+
     protected final float damageOnTouching;
+
     protected final int tier;
 
     public DecayBlock(
-        Properties settings, float spreadChance, boolean canSpreadToBlockEntities, int tier, float damageOnTouching) {
+        Properties settings,
+        float spreadChance,
+        boolean canSpreadToBlockEntities,
+        int tier,
+        float damageOnTouching
+    ) {
         super(settings);
         this.spreadChance = spreadChance;
         this.canSpreadToBlockEntities = canSpreadToBlockEntities;
@@ -81,11 +89,12 @@ public abstract class DecayBlock extends Block {
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
         if (entity instanceof LivingEntity livingEntity && !entity.fireImmune()) {
-            var frostWalker = world.registryAccess()
-                                   .lookup(Registries.ENCHANTMENT)
-                                   .flatMap(impl -> impl.get(Enchantments.FROST_WALKER))
-                                   .map(e -> EnchantmentHelper.getEnchantmentLevel(e, livingEntity))
-                                   .orElse(0);
+            var frostWalker = world
+                .registryAccess()
+                .lookup(Registries.ENCHANTMENT)
+                .flatMap(impl -> impl.get(Enchantments.FROST_WALKER))
+                .map(e -> EnchantmentHelper.getEnchantmentLevel(e, livingEntity))
+                .orElse(0);
             if (frostWalker == 0)
                 entity.hurt(PastelDamageTypes.decay(world), damageOnTouching);
         }
@@ -94,44 +103,67 @@ public abstract class DecayBlock extends Block {
 
     @Override
     public void setPlacedBy(
-        Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         super.setPlacedBy(world, pos, state, placer, itemStack);
 
         if (!world.isClientSide && PastelCommon.CONFIG.LogPlacingOfDecay && placer != null) {
-            PastelCommon.logInfo(state.getBlock()
-                                      .getName()
-                                      .getString() + " was placed in " + world.dimension()
-                                                                              .location() + " at " + pos.getX() + " " +
-                                 pos.getY() + " " + pos.getZ() + " by " + placer.getName());
+            PastelCommon
+                .logInfo(
+                    state
+                        .getBlock()
+                        .getName()
+                        .getString() + " was placed in " + world
+                            .dimension()
+                            .location() + " at " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " by " + placer
+                                .getName()
+                );
         }
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        if (state.getValue(CONVERSION)
-                 .equals(Conversion.SPECIAL)) {
-            world.addParticle(
-                new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + random.nextFloat(), pos.getY() + 1,
-                pos.getZ() + random.nextFloat(), 0.0D, 0.0D, 0.0D
-            );
+        if (state
+            .getValue(CONVERSION)
+            .equals(Conversion.SPECIAL)) {
+            world
+                .addParticle(
+                    new BlockParticleOption(ParticleTypes.BLOCK, state),
+                    pos.getX() + random.nextFloat(),
+                    pos.getY() + 1,
+                    pos.getZ() + random.nextFloat(),
+                    0.0D,
+                    0.0D,
+                    0.0D
+                );
         }
     }
 
     private boolean canSpreadTo(Level world, BlockPos targetBlockPos, BlockState stateAtTargetPos) {
-        if (PastelCommon.CONFIG.DecayIsStoppedByClaimMods && !GenericClaimModsCompat.canModify(
-            world, targetBlockPos, null)) {
+        if (PastelCommon.CONFIG.DecayIsStoppedByClaimMods && !GenericClaimModsCompat
+            .canModify(
+                world,
+                targetBlockPos,
+                null
+            )) {
             return false;
         }
 
-        return (this.canSpreadToBlockEntities || world.getBlockEntity(targetBlockPos) == null)
-               && (!(stateAtTargetPos.getBlock() instanceof DecayBlock decayBlock) || this.tier > decayBlock.tier)
-               // decay can convert decay of a lower tier
-               && (stateAtTargetPos.getBlock() == Blocks.BEDROCK || (stateAtTargetPos.getBlock()
-                                                                                     .defaultDestroyTime() > -1.0F &&
-                                                                     stateAtTargetPos.getBlock()
-                                                                                     .getExplosionResistance() <
-                                                                     10000.0F));
+        return (this.canSpreadToBlockEntities || world.getBlockEntity(targetBlockPos) == null) && (!(stateAtTargetPos
+            .getBlock() instanceof DecayBlock decayBlock) || this.tier > decayBlock.tier)
+        // decay can convert decay of a lower tier
+            && (stateAtTargetPos.getBlock() == Blocks.BEDROCK || (stateAtTargetPos
+                .getBlock()
+                .defaultDestroyTime() > -1.0F && stateAtTargetPos
+                    .getBlock()
+                    .getExplosionResistance() < 10000.0F));
     }
 
     /**
@@ -140,7 +172,13 @@ public abstract class DecayBlock extends Block {
      */
     @Override
     public void neighborChanged(
-        BlockState state, Level world, BlockPos pos, Block previousBlock, BlockPos fromPos, boolean notify) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Block previousBlock,
+        BlockPos fromPos,
+        boolean notify
+    ) {
         super.neighborChanged(state, world, pos, previousBlock, fromPos, notify);
 
         if (previousBlock == Blocks.AIR) {
@@ -180,7 +218,9 @@ public abstract class DecayBlock extends Block {
         List<Direction> directions = new ArrayList<>(List.of(Direction.values()));
         Collections.shuffle(directions);
 
-        for (Direction direction : directions) {
+        for (
+            Direction direction : directions
+        ) {
             if (trySpreadInDirection(world, state, pos, direction)) {
                 break;
             }
@@ -188,7 +228,11 @@ public abstract class DecayBlock extends Block {
     }
 
     protected boolean trySpreadInDirection(
-        @NotNull Level world, BlockState state, @NotNull BlockPos originPos, Direction direction) {
+        @NotNull Level world,
+        BlockState state,
+        @NotNull BlockPos originPos,
+        Direction direction
+    ) {
         BlockPos targetPos = originPos.relative(direction);
         BlockState targetBlockState = world.getBlockState(targetPos);
 
@@ -196,10 +240,17 @@ public abstract class DecayBlock extends Block {
             @Nullable BlockState spreadState = this.getSpreadState(state, targetBlockState, world, targetPos);
             if (spreadState != null) {
                 if (world.setBlockAndUpdate(targetPos, spreadState)) {
-                    world.playSound(
-                        null, targetPos, spreadState.getSoundType()
-                                                    .getPlaceSound(), SoundSource.BLOCKS, 0.5F, 1.0F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            targetPos,
+                            spreadState
+                                .getSoundType()
+                                .getPlaceSound(),
+                            SoundSource.BLOCKS,
+                            0.5F,
+                            1.0F
+                        );
                     return true;
                 }
             }
@@ -208,6 +259,10 @@ public abstract class DecayBlock extends Block {
     }
 
     protected abstract @Nullable BlockState getSpreadState(
-        BlockState stateToSpreadFrom, BlockState stateToSpreadTo, Level world, BlockPos stateToSpreadToPos);
+        BlockState stateToSpreadFrom,
+        BlockState stateToSpreadTo,
+        Level world,
+        BlockPos stateToSpreadToPos
+    );
 
 }

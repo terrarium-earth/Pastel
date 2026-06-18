@@ -20,47 +20,87 @@ import org.jetbrains.annotations.NotNull;
 
 // MaxDurationTicks of <1 means "stop playing"
 public record PlayBlockBoundSoundInstancePayload(
-    SoundEvent soundEvent, BlockPos pos, Holder<Block> block, int maxDurationTicks, float volume
+    SoundEvent soundEvent,
+    BlockPos pos,
+    Holder<Block> block,
+    int maxDurationTicks,
+    float volume
 ) implements CustomPacketPayload {
 
-    public static final Type<PlayBlockBoundSoundInstancePayload> ID = PastelC2SPackets.makeId(
-        "play_block_bound_sound_instance");
-    public static final StreamCodec<RegistryFriendlyByteBuf, PlayBlockBoundSoundInstancePayload> CODEC
-        = StreamCodec.composite(
-        SoundEvent.DIRECT_STREAM_CODEC, PlayBlockBoundSoundInstancePayload::soundEvent, BlockPos.STREAM_CODEC,
-        PlayBlockBoundSoundInstancePayload::pos, ByteBufCodecs.holderRegistry(Registries.BLOCK),
-        PlayBlockBoundSoundInstancePayload::block, ByteBufCodecs.INT,
-        PlayBlockBoundSoundInstancePayload::maxDurationTicks, ByteBufCodecs.FLOAT,
-        PlayBlockBoundSoundInstancePayload::volume, PlayBlockBoundSoundInstancePayload::new
-    );
+    public static final Type<PlayBlockBoundSoundInstancePayload> ID = PastelC2SPackets
+        .makeId(
+            "play_block_bound_sound_instance"
+        );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, PlayBlockBoundSoundInstancePayload> CODEC = StreamCodec
+        .composite(
+            SoundEvent.DIRECT_STREAM_CODEC,
+            PlayBlockBoundSoundInstancePayload::soundEvent,
+            BlockPos.STREAM_CODEC,
+            PlayBlockBoundSoundInstancePayload::pos,
+            ByteBufCodecs.holderRegistry(Registries.BLOCK),
+            PlayBlockBoundSoundInstancePayload::block,
+            ByteBufCodecs.INT,
+            PlayBlockBoundSoundInstancePayload::maxDurationTicks,
+            ByteBufCodecs.FLOAT,
+            PlayBlockBoundSoundInstancePayload::volume,
+            PlayBlockBoundSoundInstancePayload::new
+        );
 
     public static void sendPlayBlockBoundSoundInstance(
-        SoundEvent soundEvent, @NotNull ServerLevel world, BlockPos pos, int maxDurationTicks, float volume) {
-        PacketDistributor.sendToPlayersTrackingChunk(
-            world, new ChunkPos(pos), new PlayBlockBoundSoundInstancePayload(
-                soundEvent, pos, world.getBlockState(pos)
-                                      .getBlock()
-                                      .builtInRegistryHolder(), maxDurationTicks, volume
-            )
-        );
+        SoundEvent soundEvent,
+        @NotNull ServerLevel world,
+        BlockPos pos,
+        int maxDurationTicks,
+        float volume
+    ) {
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                world,
+                new ChunkPos(pos),
+                new PlayBlockBoundSoundInstancePayload(
+                    soundEvent,
+                    pos,
+                    world
+                        .getBlockState(pos)
+                        .getBlock()
+                        .builtInRegistryHolder(),
+                    maxDurationTicks,
+                    volume
+                )
+            );
     }
 
     public static void sendCancelBlockBoundSoundInstance(@NotNull ServerLevel world, BlockPos pos) {
-        PacketDistributor.sendToPlayersTrackingChunk(
-            world, new ChunkPos(pos), new PlayBlockBoundSoundInstancePayload(
-                SoundEvents.EMPTY, pos, world.getBlockState(pos)
-                                             .getBlock()
-                                             .builtInRegistryHolder(), -1, 0
-            )
-        );
+        PacketDistributor
+            .sendToPlayersTrackingChunk(
+                world,
+                new ChunkPos(pos),
+                new PlayBlockBoundSoundInstancePayload(
+                    SoundEvents.EMPTY,
+                    pos,
+                    world
+                        .getBlockState(pos)
+                        .getBlock()
+                        .builtInRegistryHolder(),
+                    -1,
+                    0
+                )
+            );
     }
 
     public static void execute(PlayBlockBoundSoundInstancePayload payload, IPayloadContext context) {
         if (payload.maxDurationTicks < 0) {
             CraftingBlockSoundInstance.stopPlayingOnPos(payload.pos);
         } else {
-            CraftingBlockSoundInstance.startSoundInstance(
-                payload.soundEvent, payload.pos, payload.block.value(), payload.maxDurationTicks, payload.volume);
+            CraftingBlockSoundInstance
+                .startSoundInstance(
+                    payload.soundEvent,
+                    payload.pos,
+                    payload.block.value(),
+                    payload.maxDurationTicks,
+                    payload.volume
+                );
         }
     }
 

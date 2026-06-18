@@ -18,8 +18,11 @@ import java.util.Set;
 public class FlowAnimator {
 
     final Map<FlowState, StateInfo> trackedStates;
+
     final Set<FlowData<?>> liveData = new HashSet<>();
+
     private @NotNull StateInfo info;
+
     int interpProgress;
 
     private FlowAnimator(Map<FlowState, StateInfo> trackedStates, @NotNull FlowState initialState) {
@@ -61,7 +64,9 @@ public class FlowAnimator {
 
     public static final class Builder<T> {
         private final List<DataSignature<?>> holder = new ArrayList<>();
+
         private final Map<FlowState, StateInfo> states = new HashMap<>();
+
         private final Class<T> clazz;
 
         public Builder(Class<T> clazz) {
@@ -98,11 +103,17 @@ public class FlowAnimator {
 
         public static final class DataBuilder<T, N extends Number> {
             private final Builder<T> builder;
+
             private final Map<FlowState, KeyFrame<N>> stateHolder = new HashMap<>();
+
             private final String reference;
+
             private final FlowHandler<N> handler;
+
             private Interpolation interpolation = Interpolation.LINEAR;
+
             private KeyFrame<N> defaultKeyFrame;
+
             private N initialValue;
 
             public DataBuilder(Builder<T> builder, String reference, FlowHandler<N> handler) {
@@ -132,7 +143,9 @@ public class FlowAnimator {
             }
 
             public DataBuilder<T, N> forStates(KeyFrame<N> keyFrame, FlowState... states) {
-                for (FlowState state : states) {
+                for (
+                    FlowState state : states
+                ) {
                     stateHolder.put(state, keyFrame);
                 }
                 return this;
@@ -159,8 +172,17 @@ public class FlowAnimator {
 
                 try {
                     var field = clazz.getDeclaredField(reference);
-                    builder.holder.add(
-                        new DataSignature<>(field, handler, interpolation, initialValue, defaultKeyFrame, stateHolder));
+                    builder.holder
+                        .add(
+                            new DataSignature<>(
+                                field,
+                                handler,
+                                interpolation,
+                                initialValue,
+                                defaultKeyFrame,
+                                stateHolder
+                            )
+                        );
                 } catch (NoSuchFieldException e) {
                     throw new NoSuchFieldError("Invalid animation target [" + reference + "] for " + clazz.getName());
                 }
@@ -174,11 +196,16 @@ public class FlowAnimator {
     public static final class Factory<T> {
 
         private final Map<FlowState, StateInfo> stateRegistrar;
+
         private final List<DataSignature<?>> larvalData;
+
         private final Class<T> targetClazz;
 
         private Factory(
-            Class<T> targetClazz, Map<FlowState, StateInfo> stateRegistrar, List<DataSignature<?>> larvalData) {
+            Class<T> targetClazz,
+            Map<FlowState, StateInfo> stateRegistrar,
+            List<DataSignature<?>> larvalData
+        ) {
             this.stateRegistrar = Collections.unmodifiableMap(stateRegistrar);
             this.larvalData = larvalData;
             this.targetClazz = targetClazz;
@@ -190,7 +217,9 @@ public class FlowAnimator {
 
             var animator = new FlowAnimator(stateRegistrar, initialState);
 
-            for (DataSignature<?> signature : larvalData) {
+            for (
+                DataSignature<?> signature : larvalData
+            ) {
                 try {
                     var data = signature.instantiate();
                     signature.link(data, instance);

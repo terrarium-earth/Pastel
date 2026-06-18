@@ -14,13 +14,17 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.openal.AL11;
 import org.lwjgl.openal.EXTEfx;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class PastelSourceEffects {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static int effect = -1;
+
     public static int filter = -1;
+
     public static int slot = -1;
 
     public static void updateSlots() {
@@ -40,8 +44,9 @@ public class PastelSourceEffects {
             return;
         }
 
-        if (client.level.dimension()
-                        .location() != PastelLevels.DIMENSION_ID) {
+        if (client.level
+            .dimension()
+            .location() != PastelLevels.DIMENSION_ID) {
             return;
         }
 
@@ -51,18 +56,19 @@ public class PastelSourceEffects {
 
         ResourceLocation identifier = soundInstance.getLocation();
 
-        if (identifier.getPath()
-                      .contains("ui.") ||
-            identifier.getPath()
-                      .contains("music.") ||
-            identifier.getPath()
-                      .contains("block.lava.pop") ||
-            identifier.getPath()
-                      .contains("weather.") ||
-            identifier.getPath()
-                      .startsWith("atmosfera") ||
-            identifier.getPath()
-                      .startsWith("dynmus")
+        if (identifier
+            .getPath()
+            .contains("ui.") || identifier
+                .getPath()
+                .contains("music.") || identifier
+                    .getPath()
+                    .contains("block.lava.pop") || identifier
+                        .getPath()
+                        .contains("weather.") || identifier
+                            .getPath()
+                            .startsWith("atmosfera") || identifier
+                                .getPath()
+                                .startsWith("dynmus")
         ) {
             return;
         }
@@ -91,19 +97,28 @@ public class PastelSourceEffects {
 
     private static void updateEffects(WorldAttenuation.Data data) {
         EXTEfx.alEffecti(effect, EXTEfx.AL_EFFECT_TYPE, EXTEfx.AL_EFFECT_REVERB);
-        EXTEfx.alEffectf(
-            effect, EXTEfx.AL_REVERB_DENSITY, Mth.clamp(
-                PastelCommon.CONFIG.DimensionReverbDensity * data.pitch(),
-                EXTEfx.AL_REVERB_MIN_DENSITY, EXTEfx.AL_REVERB_MAX_DENSITY
-            )
-        );
-        EXTEfx.alEffectf(
-            effect, EXTEfx.AL_REVERB_DECAY_TIME,
-            Mth.clamp(
-                PastelCommon.CONFIG.DimensionReverbDecayTime * Math.max(data.volume() * 1.65F, 0.2F),
-                EXTEfx.AL_REVERB_MIN_DECAY_TIME, EXTEfx.AL_REVERB_MAX_DECAY_TIME
-            )
-        );
+        EXTEfx
+            .alEffectf(
+                effect,
+                EXTEfx.AL_REVERB_DENSITY,
+                Mth
+                    .clamp(
+                        PastelCommon.CONFIG.DimensionReverbDensity * data.pitch(),
+                        EXTEfx.AL_REVERB_MIN_DENSITY,
+                        EXTEfx.AL_REVERB_MAX_DENSITY
+                    )
+            );
+        EXTEfx
+            .alEffectf(
+                effect,
+                EXTEfx.AL_REVERB_DECAY_TIME,
+                Mth
+                    .clamp(
+                        PastelCommon.CONFIG.DimensionReverbDecayTime * Math.max(data.volume() * 1.65F, 0.2F),
+                        EXTEfx.AL_REVERB_MIN_DECAY_TIME,
+                        EXTEfx.AL_REVERB_MAX_DECAY_TIME
+                    )
+            );
     }
 
     private static void updateFilters(WorldAttenuation.Data data) {

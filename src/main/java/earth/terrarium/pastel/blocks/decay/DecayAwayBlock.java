@@ -25,13 +25,19 @@ public class DecayAwayBlock extends Block {
 
     public static final MapCodec<DecayAwayBlock> CODEC = simpleCodec(DecayAwayBlock::new);
 
-    private static final EnumProperty<TargetConversion> TARGET_CONVERSION = EnumProperty.create(
-        "target_conversion", TargetConversion.class);
+    private static final EnumProperty<TargetConversion> TARGET_CONVERSION = EnumProperty
+        .create(
+            "target_conversion",
+            TargetConversion.class
+        );
 
     public DecayAwayBlock(Properties settings) {
         super(settings);
-        registerDefaultState(getStateDefinition().any()
-                                                 .setValue(TARGET_CONVERSION, TargetConversion.DEFAULT));
+        registerDefaultState(
+            getStateDefinition()
+                .any()
+                .setValue(TARGET_CONVERSION, TargetConversion.DEFAULT)
+        );
     }
 
     @Override
@@ -41,7 +47,12 @@ public class DecayAwayBlock extends Block {
 
     @Override
     public void setPlacedBy(
-        @NotNull Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        @NotNull Level world,
+        BlockPos pos,
+        BlockState state,
+        @Nullable LivingEntity placer,
+        ItemStack itemStack
+    ) {
         if (!world.isClientSide) {
             world.scheduleTick(pos, state.getBlock(), 4);
         }
@@ -57,16 +68,21 @@ public class DecayAwayBlock extends Block {
         super.tick(state, world, pos, random);
 
         // convert all neighboring decay blocks to this
-        for (BlockPos targetBlockPos : BlockPos.withinManhattan(pos, 1, 1, 1)) {
+        for (
+            BlockPos targetBlockPos : BlockPos.withinManhattan(pos, 1, 1, 1)
+        ) {
             BlockState currentBlockState = world.getBlockState(targetBlockPos);
             if (currentBlockState.is(PastelBlockTags.DECAY_AWAY_CURABLES)) {
                 world.setBlockAndUpdate(targetBlockPos, getTargetStateForCurable(currentBlockState));
                 world.scheduleTick(targetBlockPos, state.getBlock(), 8);
             } else if (currentBlockState.is(PastelBlockTags.DECAY_AWAY_REMOVABLES)) {
-                world.setBlockAndUpdate(
-                    targetBlockPos, this.defaultBlockState()
-                                        .setValue(TARGET_CONVERSION, TargetConversion.AIR)
-                );
+                world
+                    .setBlockAndUpdate(
+                        targetBlockPos,
+                        this
+                            .defaultBlockState()
+                            .setValue(TARGET_CONVERSION, TargetConversion.AIR)
+                    );
                 world.scheduleTick(targetBlockPos, state.getBlock(), 8);
             }
         }
@@ -81,16 +97,19 @@ public class DecayAwayBlock extends Block {
         if (blockState.getBlock() instanceof DecayBlock) {
             if (blockState.is(PastelBlocks.RUIN.get()) || blockState.is(PastelBlocks.FORFEITURE.get())) {
                 if (blockState.getValue(ForfeitureBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
-                    return this.defaultBlockState()
-                               .setValue(TARGET_CONVERSION, TargetConversion.BEDROCK);
+                    return this
+                        .defaultBlockState()
+                        .setValue(TARGET_CONVERSION, TargetConversion.BEDROCK);
                 }
             } else if (blockState.is(PastelBlocks.FAILING.get())) {
                 if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
-                    return this.defaultBlockState()
-                               .setValue(TARGET_CONVERSION, TargetConversion.OBSIDIAN);
+                    return this
+                        .defaultBlockState()
+                        .setValue(TARGET_CONVERSION, TargetConversion.OBSIDIAN);
                 } else if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.SPECIAL) {
-                    return this.defaultBlockState()
-                               .setValue(TARGET_CONVERSION, TargetConversion.CRYING_OBSIDIAN);
+                    return this
+                        .defaultBlockState()
+                        .setValue(TARGET_CONVERSION, TargetConversion.CRYING_OBSIDIAN);
                 }
             }
         }
@@ -105,6 +124,7 @@ public class DecayAwayBlock extends Block {
         AIR("air", Blocks.AIR.defaultBlockState());
 
         private final String name;
+
         private final BlockState targetState;
 
         TargetConversion(String name, BlockState targetState) {
@@ -124,15 +144,17 @@ public class DecayAwayBlock extends Block {
 
         public BlockState getTargetState(Level world) {
             if (this == DEFAULT) {
-                ResourceLocation identifier = world.dimensionType()
-                                                   .effectsLocation();
+                ResourceLocation identifier = world
+                    .dimensionType()
+                    .effectsLocation();
                 if (BuiltinDimensionTypes.NETHER_EFFECTS.equals(identifier)) {
                     return Blocks.NETHERRACK.defaultBlockState();
                 } else if (BuiltinDimensionTypes.END_EFFECTS.equals(identifier)) {
                     return Blocks.END_STONE.defaultBlockState();
                 } else if (PastelLevels.DIMENSION_ID.equals(identifier)) {
-                    return PastelBlocks.BLACKSLAG.get()
-                                                 .defaultBlockState();
+                    return PastelBlocks.BLACKSLAG
+                        .get()
+                        .defaultBlockState();
                 }
                 return Blocks.DIRT.defaultBlockState();
             }

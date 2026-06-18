@@ -34,20 +34,32 @@ public class CrystallarieumGrownCriterion extends SimpleCriterionTrigger<Crystal
         ItemPredicate catalystPredicate
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<CrystallarieumGrownCriterion.Conditions> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                                    ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                               .forGetter(CrystallarieumGrownCriterion.Conditions::player),
-                                    BlockPredicate.CODEC.optionalFieldOf("grown_block", BlockPredicate.Builder.block()
-                                                                                                              .build()
-                                                  )
-                                                        .forGetter(CrystallarieumGrownCriterion.Conditions::blockPredicate),
-                                    ItemPredicate.CODEC.optionalFieldOf("used_catalyst", ItemPredicate.Builder.item()
-                                                                                                              .build()
-                                                 )
-                                                       .forGetter(CrystallarieumGrownCriterion.Conditions::catalystPredicate)
-                                )
-                                .apply(instance, CrystallarieumGrownCriterion.Conditions::new));
+        public static final Codec<CrystallarieumGrownCriterion.Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(CrystallarieumGrownCriterion.Conditions::player),
+                        BlockPredicate.CODEC
+                            .optionalFieldOf(
+                                "grown_block",
+                                BlockPredicate.Builder
+                                    .block()
+                                    .build()
+                            )
+                            .forGetter(CrystallarieumGrownCriterion.Conditions::blockPredicate),
+                        ItemPredicate.CODEC
+                            .optionalFieldOf(
+                                "used_catalyst",
+                                ItemPredicate.Builder
+                                    .item()
+                                    .build()
+                            )
+                            .forGetter(CrystallarieumGrownCriterion.Conditions::catalystPredicate)
+                    )
+                    .apply(instance, CrystallarieumGrownCriterion.Conditions::new)
+            );
 
         public boolean matches(ServerLevel world, BlockPos blockPos, ItemStack catalystStack) {
             return this.blockPredicate.matches(world, blockPos) && this.catalystPredicate.test(catalystStack);

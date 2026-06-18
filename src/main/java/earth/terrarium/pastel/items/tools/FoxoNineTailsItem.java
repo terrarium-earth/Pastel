@@ -28,13 +28,13 @@ public class FoxoNineTailsItem extends WhipItem implements SlotBackgroundEffect 
     // buffing allies/self. also, duration scales half as hard with fervor since we get 2 on hit instead of 1
     @Override
     protected void applyDebuffs(LivingEntity attacker, LivingEntity target, int fervorExpended) {
-        if(fervorExpended < 16){
+        if (fervorExpended < 16) {
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, fervorExpended * 10, 0), attacker);
-        } else if (fervorExpended < 24){
+        } else if (fervorExpended < 24) {
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, fervorExpended * 10, 0), attacker);
             target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, fervorExpended * 10, 0), attacker);
             target.addEffect(new MobEffectInstance(PastelMobEffects.DEADLY_POISON, fervorExpended * 10, 0), attacker);
-        } else if(fervorExpended < 32){
+        } else if (fervorExpended < 32) {
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, fervorExpended * 10, 1), attacker);
             target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, fervorExpended * 10, 0), attacker);
             target.addEffect(new MobEffectInstance(PastelMobEffects.STIFFNESS, fervorExpended * 10, 0), attacker);
@@ -50,18 +50,27 @@ public class FoxoNineTailsItem extends WhipItem implements SlotBackgroundEffect 
 
     @Override
     public void healOrBuff(Player user, LivingEntity target, int fervor) {
-        user.level()
+        user
+            .level()
             .playSound(null, target.blockPosition(), PastelSounds.GLASS_SHIMMER, SoundSource.PLAYERS, 1.0F, 1.0F);
         int effect_divisor = user.is(target) ? 2 : 1; // half as effective when using it on yourself
-        if(fervor == this.maxFervor){ // max fervor gets you a buff cocktail!
+        if (fervor == this.maxFervor) { // max fervor gets you a buff cocktail!
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600 / effect_divisor, 1), user);
             target.addEffect(new MobEffectInstance(PastelMobEffects.SWIFTNESS, 600 / effect_divisor, 1), user);
             target.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600 / effect_divisor, 0), user); // strength is pretty strong even at low potency
         }
         // otherwise, you just get a heal and some speed if you're not already speedmaxxing
-        if(!target.hasEffect(MobEffects.MOVEMENT_SPEED))
-            target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, Mth.floor(
-            (float) 200 / effect_divisor * ((float) fervor / maxFervor))));
+        if (!target.hasEffect(MobEffects.MOVEMENT_SPEED))
+            target
+                .addEffect(
+                    new MobEffectInstance(
+                        MobEffects.MOVEMENT_SPEED,
+                        Mth
+                            .floor(
+                                (float) 200 / effect_divisor * ((float) fervor / maxFervor)
+                            )
+                    )
+                );
         target.heal((float) fervor / effect_divisor * 3.2f); // works out to 5 hearts to yourself, or 10 hearts to a friend, when spending max fervor
     }
 

@@ -13,7 +13,13 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 public class LightTrailParticle extends SimpleAnimatedParticle {
     protected LightTrailParticle(
-        ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
+        ClientLevel world,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
+        double velocityZ,
         SpriteSet spriteProvider
     ) {
         super(world, x, y, z, spriteProvider, 0);
@@ -30,16 +36,22 @@ public class LightTrailParticle extends SimpleAnimatedParticle {
     @Override
     public void tick() {
         super.tick();
-        var fadeProgress = Mth.clamp(
-            (age + Minecraft.getInstance()
-                            .getTimer()
-                            .getGameTimeDeltaPartialTick(false)) / lifetime, 0, 1
-        );
+        var fadeProgress = Mth
+            .clamp(
+                (age + Minecraft
+                    .getInstance()
+                    .getTimer()
+                    .getGameTimeDeltaPartialTick(false)) / lifetime,
+                0,
+                1
+            );
         setAlpha(Mth.lerp(fadeProgress, 0.8F, 0F));
         quadSize = Mth.lerp(fadeProgress, 0.2F, 0.1F);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -49,8 +61,14 @@ public class LightTrailParticle extends SimpleAnimatedParticle {
 
         @Override
         public Particle createParticle(
-            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
-            double h, double i
+            SimpleParticleType defaultParticleType,
+            ClientLevel clientWorld,
+            double d,
+            double e,
+            double f,
+            double g,
+            double h,
+            double i
         ) {
             return new LightTrailParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }

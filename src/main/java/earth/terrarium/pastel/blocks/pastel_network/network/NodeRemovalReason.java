@@ -7,6 +7,7 @@ public enum NodeRemovalReason {
     REMOVED(false, false);
 
     public final boolean destructive;
+
     public final boolean checksForNetworkSplit;
 
     NodeRemovalReason(boolean destructive, boolean checksForNetworkSplit) {

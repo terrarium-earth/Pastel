@@ -26,7 +26,9 @@ public class AshFloraBlock extends SpreadableFloraBlock {
     @Override
     protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
         return (floor.is(PastelBlockTags.ASH) || floor.is(PastelBlocks.ASHEN_BLACKSLAG.get()) || super.mayPlaceOn(
-            floor, world, pos))
-               && floor.isFaceSturdy(world, pos, Direction.UP);
+            floor,
+            world,
+            pos
+        )) && floor.isFaceSturdy(world, pos, Direction.UP);
     }
 }

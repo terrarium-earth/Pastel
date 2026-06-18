@@ -11,7 +11,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ShulkerHeadModel extends PastelSkullModel {
 
     public ShulkerHeadModel(ModelPart root) {
@@ -22,21 +24,25 @@ public class ShulkerHeadModel extends PastelSkullModel {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        PartDefinition base = modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(0, 28)
-                           .addBox(-8.0F, -8.0F, -8.0F, 16.0F, 8.0F, 16.0F),
-            PartPose.ZERO
-        );
+        PartDefinition base = modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 28)
+                    .addBox(-8.0F, -8.0F, -8.0F, 16.0F, 8.0F, 16.0F),
+                PartPose.ZERO
+            );
 
-        base.addOrReplaceChild(
-            "shulker_head",
-            CubeListBuilder.create()
-                           .texOffs(0, 52)
-                           .addBox(-3.0F, -7.0F, -3.0F, 6.0F, 6.0F, 6.0F),
-            PartPose.ZERO
-        );
+        base
+            .addOrReplaceChild(
+                "shulker_head",
+                CubeListBuilder
+                    .create()
+                    .texOffs(0, 52)
+                    .addBox(-3.0F, -7.0F, -3.0F, 6.0F, 6.0F, 6.0F),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 64, 64);
     }

@@ -48,8 +48,12 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
 
     public IncandescentAmalgamBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any()
-                                                      .setValue(WATERLOGGED, false));
+        this
+            .registerDefaultState(
+                this.stateDefinition
+                    .any()
+                    .setValue(WATERLOGGED, false)
+            );
     }
 
     @Override
@@ -69,7 +73,11 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
 
     @Override
     public BlockState updateShape(
-        @NotNull BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        @NotNull BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (state.getValue(WATERLOGGED)) {
@@ -80,10 +88,12 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
 
     @Override
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext ctx) {
-        FluidState fluidState = ctx.getLevel()
-                                   .getFluidState(ctx.getClickedPos());
-        return this.defaultBlockState()
-                   .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        FluidState fluidState = ctx
+            .getLevel()
+            .getFluidState(ctx.getClickedPos());
+        return this
+            .defaultBlockState()
+            .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @Override
@@ -102,17 +112,31 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
                 double posZ = (double) pos.getZ() + 0.25D + random.nextDouble() * 0.5D;
                 world.addParticle(ParticleTypes.LAVA, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
                 if (r == 0) {
-                    world.playLocalSound(
-                        posX, posY, posZ, SoundEvents.LAVA_POP, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F,
-                        0.9F + random.nextFloat() * 0.15F, false
-                    );
+                    world
+                        .playLocalSound(
+                            posX,
+                            posY,
+                            posZ,
+                            SoundEvents.LAVA_POP,
+                            SoundSource.BLOCKS,
+                            0.2F + random.nextFloat() * 0.2F,
+                            0.9F + random.nextFloat() * 0.15F,
+                            false
+                        );
                 }
             }
             if (random.nextInt(100) == 0) {
-                world.playLocalSound(
-                    pos.getX(), pos.getY(), pos.getZ(), SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS,
-                    0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false
-                );
+                world
+                    .playLocalSound(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        SoundEvents.FIRE_EXTINGUISH,
+                        SoundSource.BLOCKS,
+                        0.2F + random.nextFloat() * 0.2F,
+                        0.9F + random.nextFloat() * 0.15F,
+                        false
+                    );
             }
         }
     }
@@ -148,7 +172,13 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
 
     @Override
     public void neighborChanged(
-        BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Block block,
+        BlockPos fromPos,
+        boolean notify
+    ) {
         super.neighborChanged(state, world, pos, block, fromPos, notify);
         if (!state.getValue(WATERLOGGED) && world.random.nextInt(10) == 0) {
             explode(world, pos);
@@ -157,10 +187,11 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
 
     @Override
     public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-        if (!state.getValue(WATERLOGGED)
-            && !player.isCreative()
-            && !EnchantmentHelper.hasTag(
-            player.getItemInHand(player.getUsedItemHand()), PastelEnchantmentTags.PREVENTS_INCANDESCENT_EXPLOSION)) {
+        if (!state.getValue(WATERLOGGED) && !player.isCreative() && !EnchantmentHelper
+            .hasTag(
+                player.getItemInHand(player.getUsedItemHand()),
+                PastelEnchantmentTags.PREVENTS_INCANDESCENT_EXPLOSION
+            )) {
 
             explode(world, pos);
         }
@@ -185,15 +216,28 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
         if (stack.getItem() instanceof IncandescentAmalgamItem item) {
             power = item.getExplosionPower(stack, false);
         }
-        world.explode(
-            owner, PastelDamageTypes.incandescence(world, owner), new ExplosionDamageCalculator(), pos.getX() + 0.5,
-            pos.getY() + 0.5, pos.getZ() + 0.5, power, true, Level.ExplosionInteraction.BLOCK
-        );
+        world
+            .explode(
+                owner,
+                PastelDamageTypes.incandescence(world, owner),
+                new ExplosionDamageCalculator(),
+                pos.getX() + 0.5,
+                pos.getY() + 0.5,
+                pos.getZ() + 0.5,
+                power,
+                true,
+                Level.ExplosionInteraction.BLOCK
+            );
     }
 
     @Override
     protected void onExplosionHit(
-        BlockState state, Level world, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> stackMerger) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Explosion explosion,
+        BiConsumer<ItemStack, BlockPos> stackMerger
+    ) {
         explode(world, pos);
     }
 

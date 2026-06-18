@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class TitrationBarrelTappingCriterion
-    extends SimpleCriterionTrigger<TitrationBarrelTappingCriterion.Conditions> {
+    extends
+    SimpleCriterionTrigger<TitrationBarrelTappingCriterion.Conditions> {
 
     public static final ResourceLocation ID = PastelCommon.locate("titration_barrel_tapping");
 
@@ -36,21 +37,29 @@ public class TitrationBarrelTappingCriterion
         Optional<MinMaxBounds.Ints> ingredientCountRange
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                                                                                                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
-                                                                                                                                   .forGetter(Conditions::player),
-                                                                                                        ItemPredicate.CODEC.listOf()
-                                                                                                                           .optionalFieldOf("items")
-                                                                                                                           .forGetter(Conditions::tappedItemsPredicate),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("age_ingame_days")
-                                                                                                                               .forGetter(Conditions::ingameDaysAgeRange),
-                                                                                                        MinMaxBounds.Ints.CODEC.optionalFieldOf("ingredient_count")
-                                                                                                                               .forGetter(Conditions::ingredientCountRange)
-                                                                                                    )
-                                                                                                    .apply(
-                                                                                                        instance,
-                                                                                                        Conditions::new
-                                                                                                    ));
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder
+            .create(
+                instance -> instance
+                    .group(
+                        ContextAwarePredicate.CODEC
+                            .optionalFieldOf("player")
+                            .forGetter(Conditions::player),
+                        ItemPredicate.CODEC
+                            .listOf()
+                            .optionalFieldOf("items")
+                            .forGetter(Conditions::tappedItemsPredicate),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("age_ingame_days")
+                            .forGetter(Conditions::ingameDaysAgeRange),
+                        MinMaxBounds.Ints.CODEC
+                            .optionalFieldOf("ingredient_count")
+                            .forGetter(Conditions::ingredientCountRange)
+                    )
+                    .apply(
+                        instance,
+                        Conditions::new
+                    )
+            );
 
         public boolean matches(ItemStack itemStack, int ingameDaysAge, int ingredientCount) {
             if (this.ingameDaysAgeRange.isPresent() && !this.ingameDaysAgeRange.get().matches(ingameDaysAge))

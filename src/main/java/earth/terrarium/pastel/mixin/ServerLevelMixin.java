@@ -13,12 +13,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ServerLevel.class)
+@Mixin(
+    ServerLevel.class
+)
 public abstract class ServerLevelMixin {
 
-    @Shadow @Final private MinecraftServer server;
+    @Shadow
+    @Final
+    private MinecraftServer server;
 
-    @Inject(method = "onBlockStateChange", at = @At("HEAD"))
+    @Inject(
+        method = "onBlockStateChange", at = @At(
+            "HEAD"
+        )
+    )
     private void emitBlockChangedEvent(BlockPos pos, BlockState oldBlock, BlockState newBlock, CallbackInfo ci) {
         if (!this.server.isSameThread())
             return;

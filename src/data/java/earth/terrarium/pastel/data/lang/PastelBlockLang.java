@@ -14,9 +14,12 @@ import java.util.*;
 
 public class PastelBlockLang {
     public static void addTranslations(PastelLanguageProvider provider) {
-        for (var block : PastelBlocks.COMMON_REGISTRAR.getEntries()) {
-            String name = block.getRegisteredName()
-                               .substring(7);
+        for (
+            var block : PastelBlocks.COMMON_REGISTRAR.getEntries()
+        ) {
+            String name = block
+                .getRegisteredName()
+                .substring(7);
             // manxi gets special treatment. only partially because opening the structure files to change her id
             // would be annoying
             if (name.equals("manxi")) {
@@ -37,30 +40,36 @@ public class PastelBlockLang {
             // flowing liquids use their parent name
             if (name.startsWith("flowing_")) name = name.substring(7);
             // polished gem blocks don't have 'block' in the name
-            if (List.of(
-                        "polished_moonstone_block", "polished_onyx_block", "polished_amethyst_block",
-                        "polished_topaz_block",
-                        "polished_citrine_block"
-                    )
-                    .contains(name)) name = name.substring(0, name.length() - 6);
+            if (List
+                .of(
+                    "polished_moonstone_block",
+                    "polished_onyx_block",
+                    "polished_amethyst_block",
+                    "polished_topaz_block",
+                    "polished_citrine_block"
+                )
+                .contains(name)) name = name.substring(0, name.length() - 6);
             // the switcheroo
             if (name.startsWith("cushion_")) name = name.substring(8) + "_cushion";
             // handle storage blocks
             if (name.endsWith("_block") && !name.endsWith("_noxcap_block") && !name.equals("resplendent_block"))
                 name = "block_of_" + name.substring(0, name.length() - 6);
             // semi-permeable glass has a hyphen and is in a weird order
-            if (name.contains("semi_permeable")) name = "Semi-Permeable_" + name.replace("_semi_permeable", "")
-                                                                                .replace("semi_permeable", "");
+            if (name.contains("semi_permeable")) name = "Semi-Permeable_" + name
+                .replace("_semi_permeable", "")
+                .replace("semi_permeable", "");
             // upgrade names are also fairly unique
             if (name.startsWith("upgrade_")) continue;
             // avoid duplicate keys
             if (name.equals("primordial_wall_torch") || name.endsWith("_wall_head")) continue;
             // mob heads with variants need a little switcheroo
-            if (name.endsWith("head") && (name.startsWith("axolotl") || name.startsWith("shulker") || name.startsWith(
-                "lizard") || name.startsWith("frog") || name.startsWith("parrot") || name.startsWith("mooshroom") ||
-                                          name.startsWith("fox_arctic"))) {
+            if (name.endsWith("head") && (name.startsWith("axolotl") || name.startsWith("shulker") || name
+                .startsWith(
+                    "lizard"
+                ) || name.startsWith("frog") || name.startsWith("parrot") || name.startsWith("mooshroom") || name
+                    .startsWith("fox_arctic"))) {
                 var words = name.split("_");
-                if(Objects.equals(words[1], "light")){
+                if (Objects.equals(words[1], "light")) {
                     var tmp1 = words[0];
                     words[0] = words[1];
                     words[1] = words[2];
@@ -108,28 +117,43 @@ public class PastelBlockLang {
         provider.add("block.pastel.crystal_apothecary.owner", "%s's Crystal Apothecary");
         provider.add("block.pastel.crystal_apothecary.tooltip", "Place in a Geode to harvest Gemstone Shards");
 
-        provider.add(
-            "block.pastel.deep_light_chiseled_preservation_stone.puzzle0", "In Memory of a Nameless Astrologer");
-        provider.add(
-            "block.pastel.deep_light_chiseled_preservation_stone.puzzle1", "The thief. The teacher. The dreamer");
-        provider.add(
-            "block.pastel.deep_light_chiseled_preservation_stone.puzzle2",
-            "Twice graced with Aether, he sought deeper truth"
-        );
-        provider.add(
-            "block.pastel.deep_light_chiseled_preservation_stone.puzzle3",
-            "In pursuit of deep light, he sailed unto barren waters"
-        );
+        provider
+            .add(
+                "block.pastel.deep_light_chiseled_preservation_stone.puzzle0",
+                "In Memory of a Nameless Astrologer"
+            );
+        provider
+            .add(
+                "block.pastel.deep_light_chiseled_preservation_stone.puzzle1",
+                "The thief. The teacher. The dreamer"
+            );
+        provider
+            .add(
+                "block.pastel.deep_light_chiseled_preservation_stone.puzzle2",
+                "Twice graced with Aether, he sought deeper truth"
+            );
+        provider
+            .add(
+                "block.pastel.deep_light_chiseled_preservation_stone.puzzle3",
+                "In pursuit of deep light, he sailed unto barren waters"
+            );
         provider.add("block.pastel.deep_light_chiseled_preservation_stone.puzzle4", "Enlightenment.");
         provider.add("block.pastel.deep_light_chiseled_preservation_stone.puzzle5", "Dived too deep.");
-        provider.add(
-            "block.pastel.deep_light_chiseled_preservation_stone.puzzle6", "A soul lost unto the endless sea.");
-        provider.add(
-            "block.pastel.deep_light_chiseled_preservation_stone.puzzle7",
-            "Would you get too close to becoming lost just for truth?"
-        );
-        provider.add(
-            "block.pastel.deep_light_chiseled_preservation_stone.puzzle8", "Just to see that which is beyond sight?");
+        provider
+            .add(
+                "block.pastel.deep_light_chiseled_preservation_stone.puzzle6",
+                "A soul lost unto the endless sea."
+            );
+        provider
+            .add(
+                "block.pastel.deep_light_chiseled_preservation_stone.puzzle7",
+                "Would you get too close to becoming lost just for truth?"
+            );
+        provider
+            .add(
+                "block.pastel.deep_light_chiseled_preservation_stone.puzzle8",
+                "Just to see that which is beyond sight?"
+            );
         provider.add("block.pastel.echolocating_idol.tooltip", "§7Echolocates creatures in a %d block radius");
         provider.add("block.pastel.ender_dropper.owner", "%s's Ender Dropper");
         provider.add("block.pastel.ender_hopper.owner", "%s's Ender Hopper");
@@ -137,19 +161,28 @@ public class PastelBlockLang {
         provider.add("block.pastel.explosion_idol.tooltip", "§7Causes a %d§7 block large explosion");
         provider.add("block.pastel.fall_damage_negating_idol.tooltip", "§7Negates all fall damage when landing on it");
         provider.add("block.pastel.fall_damage_negating_idol.tooltip2", "§7Will also temporarily hold a fall");
-        provider.add(
-            "block.pastel.feeding_idol.tooltip", "§7Feeds animals in a range of %d§7 blocks using food on the ground");
+        provider
+            .add(
+                "block.pastel.feeding_idol.tooltip",
+                "§7Feeds animals in a range of %d§7 blocks using food on the ground"
+            );
         provider.add("block.pastel.freezing_idol.tooltip", "§7Freezes blocks around it");
         provider.add("block.pastel.gather_node.tooltip", "Gathers items from Sender, Provider and Storage Nodes");
         provider.add("block.pastel.heartbound_chest.owner", "%s's Heartbound Chest");
-        provider.add(
-            "block.pastel.incandescent_amalgam.tooltip", "§6⚠§r High yield magical explosive, handle with care");
+        provider
+            .add(
+                "block.pastel.incandescent_amalgam.tooltip",
+                "§6⚠§r High yield magical explosive, handle with care"
+            );
         provider.add("block.pastel.incandescent_amalgam.tooltip.preview", "Gets more explosive with age");
         provider.add("block.pastel.incandescent_amalgam.tooltip_power", "Explosion Power: %d");
         provider.add("block.pastel.insomnia_idol.tooltip", "§7Causes Insomnia");
         provider.add("block.pastel.knockback_idol.tooltip", "§7Causes knockback");
-        provider.add(
-            "block.pastel.line_teleporting_idol.tooltip", "§7Teleports you on top of the next block of this type ");
+        provider
+            .add(
+                "block.pastel.line_teleporting_idol.tooltip",
+                "§7Teleports you on top of the next block of this type "
+            );
         provider.add("block.pastel.line_teleporting_idol.tooltip2", "§7in a straight line within %d blocks");
         provider.add("block.pastel.milking_idol.tooltip", "§7Milks close-by creatures in a %d block radius");
         provider.add("block.pastel.milking_idol.tooltip2", "§7Requires §fBuckets§7 or §fBowls§7 close to the animals");
@@ -172,17 +205,26 @@ public class PastelBlockLang {
         provider.add("block.pastel.player_detector.owner", "%s's Player Detector");
         provider.add("block.pastel.potion_effect_idol.tooltip", "§7Triggers %s");
         provider.add("block.pastel.present.tooltip.description", "Click it on items to add them to the Present");
-        provider.add(
-            "block.pastel.present.tooltip.description2", "Then put it in a crafting grid and add Pigment to wrap");
+        provider
+            .add(
+                "block.pastel.present.tooltip.description2",
+                "Then put it in a crafting grid and add Pigment to wrap"
+            );
         provider.add("block.pastel.present.tooltip.wrapped", "Wrapped (place and sneak-use to open)");
         provider.add("block.pastel.present.tooltip.wrapped.giver", "Wrapped by %s (place and sneak-use to open)");
         provider.add("block.pastel.present.tooltip.wrapped_placed", "A present! Sneak-use to open");
-        provider.add(
-            "block.pastel.present.tooltip.wrapped_placed.giver", "A present wrapped by %s! (sneak-use to open)");
+        provider
+            .add(
+                "block.pastel.present.tooltip.wrapped_placed.giver",
+                "A present wrapped by %s! (sneak-use to open)"
+            );
         provider.add("block.pastel.projectile_idol.tooltip", "§7Shoots a %s");
         provider.add("block.pastel.provider_node.tooltip", "Supplies Gather Nodes with items");
-        provider.add(
-            "block.pastel.random_teleporting_idol.tooltip", "§7Teleports you up to %d blocks in a random direction");
+        provider
+            .add(
+                "block.pastel.random_teleporting_idol.tooltip",
+                "§7Teleports you up to %d blocks in a random direction"
+            );
         provider.add("block.pastel.redstone_calculator.mode.addition", "Addition");
         provider.add("block.pastel.redstone_calculator.mode.division", "Division");
         provider.add("block.pastel.redstone_calculator.mode.max", "Maximum");
@@ -204,60 +246,72 @@ public class PastelBlockLang {
         provider.add("block.pastel.slime_sizing_idol.tooltip", "§7Increases close-by Slime's sizes");
         provider.add("block.pastel.storage_node.tooltip", "Serves as storage for Sender and Gather Nodes");
         provider.add("block.pastel.tea_table_lonely_party", "I can't have a tea party without friends!");
-        provider.add(
-            "block.pastel.titration_barrel.content_count_with_fluid",
-            "Contains %s and %d items. Seal with a Colored Plank to start fermenting."
-        );
-        provider.add(
-            "block.pastel.titration_barrel.content_count_with_fluid_full",
-            "Contains %s and %d items (full). Seal with a Colored Plank to start fermenting."
-        );
-        provider.add(
-            "block.pastel.titration_barrel.content_count_without_fluid",
-            "Contains %d items and no liquid. Seal with a Colored Plank to start fermenting."
-        );
-        provider.add(
-            "block.pastel.titration_barrel.content_count_without_fluid_full",
-            "Contains %d items (full) and no fluid. Seal with a Colored Plank to start fermenting."
-        );
-        provider.add(
-            "block.pastel.titration_barrel.days_of_sealing_after_opened_with_extractable_amount",
-            "%s was fermenting for %d days (%s real days)"
-        );
-        provider.add(
-            "block.pastel.titration_barrel.days_of_sealing_before_opened",
-            "Sealed up %d days ago (%s real days). Sneak-Use to unseal"
-        );
-        provider.add(
-            "block.pastel.titration_barrel.debug_added_day",
-            "(Debug Function) Added a real life day of fermentation time"
-        );
+        provider
+            .add(
+                "block.pastel.titration_barrel.content_count_with_fluid",
+                "Contains %s and %d items. Seal with a Colored Plank to start fermenting."
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.content_count_with_fluid_full",
+                "Contains %s and %d items (full). Seal with a Colored Plank to start fermenting."
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.content_count_without_fluid",
+                "Contains %d items and no liquid. Seal with a Colored Plank to start fermenting."
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.content_count_without_fluid_full",
+                "Contains %d items (full) and no fluid. Seal with a Colored Plank to start fermenting."
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.days_of_sealing_after_opened_with_extractable_amount",
+                "%s was fermenting for %d days (%s real days)"
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.days_of_sealing_before_opened",
+                "Sealed up %d days ago (%s real days). Sneak-Use to unseal"
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.debug_added_day",
+                "(Debug Function) Added a real life day of fermentation time"
+            );
         provider.add("block.pastel.titration_barrel.empty_when_tapping", "It... was empty. Huh");
-        provider.add(
-            "block.pastel.titration_barrel.invalid_recipe",
-            "This does not seem like it would produce something useful..."
-        );
-        provider.add(
-            "block.pastel.titration_barrel.invalid_recipe_when_tapping",
-            "This barrel only contained an unusable mixture. Eww"
-        );
-        provider.add(
-            "block.pastel.titration_barrel.missing_liquid_when_tapping",
-            "It seems to have lacked liquid, so the content has gone bad. Pity"
-        );
-        provider.add(
-            "block.pastel.titration_barrel.not_yet_ready", "Sealed up %d days ago (%s real days). Not yet finished.");
-        provider.add(
-            "block.pastel.titration_barrel.recipe_not_unlocked",
-            "You have no idea what this is inside. Better leave it be."
-        );
+        provider
+            .add(
+                "block.pastel.titration_barrel.invalid_recipe",
+                "This does not seem like it would produce something useful..."
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.invalid_recipe_when_tapping",
+                "This barrel only contained an unusable mixture. Eww"
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.missing_liquid_when_tapping",
+                "It seems to have lacked liquid, so the content has gone bad. Pity"
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.not_yet_ready",
+                "Sealed up %d days ago (%s real days). Not yet finished."
+            );
+        provider
+            .add(
+                "block.pastel.titration_barrel.recipe_not_unlocked",
+                "You have no idea what this is inside. Better leave it be."
+            );
         provider.add("block.pastel.titration_barrel.tapping_item_required", "Tapping requires a ");
         provider.add("block.pastel.villager_converting_idol.tooltip", "§7Converts Villagers to Zombie Villagers");
-
 
         // this compat is weird
         AlloyForgeryBlockLang.addTranslations(provider);
     }
-
 
 }

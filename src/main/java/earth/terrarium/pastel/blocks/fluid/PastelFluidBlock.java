@@ -39,44 +39,74 @@ public abstract class PastelFluidBlock extends LiquidBlock {
 
     @Override
     public void neighborChanged(
-        BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Block block,
+        BlockPos fromPos,
+        boolean notify
+    ) {
         if (this.shouldSpreadLiquid(world, pos, state)) {
-            world.scheduleTick(
-                pos, state.getFluidState()
-                          .getType(), this.fluid.getTickDelay(world)
-            );
+            world
+                .scheduleTick(
+                    pos,
+                    state
+                        .getFluidState()
+                        .getType(),
+                    this.fluid.getTickDelay(world)
+                );
         }
     }
 
     @Override
     public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (world.dimensionType()
-                 .ultraWarm()) {
+        if (world
+            .dimensionType()
+            .ultraWarm()) {
             world.setBlockAndUpdate(pos, ultrawarmReplacementBlockState);
 
             int x = pos.getX();
             int y = pos.getY();
             int z = pos.getZ();
-            world.playSound(
-                null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F,
-                2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F
-            );
-
-            for (int l = 0; l < 8; ++l) {
-                world.addParticle(
-                    ParticleTypes.LARGE_SMOKE, (double) x + Math.random(), (double) y + Math.random(),
-                    (double) z + Math.random(), 0.0, 0.0, 0.0
+            world
+                .playSound(
+                    null,
+                    pos,
+                    SoundEvents.FIRE_EXTINGUISH,
+                    SoundSource.BLOCKS,
+                    0.5F,
+                    2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F
                 );
+
+            for (
+                int l = 0;
+                l < 8;
+                ++l
+            ) {
+                world
+                    .addParticle(
+                        ParticleTypes.LARGE_SMOKE,
+                        (double) x + Math.random(),
+                        (double) y + Math.random(),
+                        (double) z + Math.random(),
+                        0.0,
+                        0.0,
+                        0.0
+                    );
             }
 
             return;
         }
 
         if (this.shouldSpreadLiquid(world, pos, state)) {
-            world.scheduleTick(
-                pos, state.getFluidState()
-                          .getType(), this.fluid.getTickDelay(world)
-            );
+            world
+                .scheduleTick(
+                    pos,
+                    state
+                        .getFluidState()
+                        .getType(),
+                    this.fluid.getTickDelay(world)
+                );
         }
 
         super.onPlace(state, world, pos, oldState, notify);
@@ -90,7 +120,10 @@ public abstract class PastelFluidBlock extends LiquidBlock {
      * @implNote Triggers the extinguish sound if result is not null.
      */
     public abstract @Nullable BlockState handleFluidCollision(
-        Level world, @NotNull FluidState state, @NotNull FluidState otherState);
+        Level world,
+        @NotNull FluidState state,
+        @NotNull FluidState otherState
+    );
 
     public void fireExtinguishEvent(LevelAccessor world, BlockPos pos) {
         world.levelEvent(LevelEvent.LAVA_FIZZ, pos, 0);
@@ -109,7 +142,9 @@ public abstract class PastelFluidBlock extends LiquidBlock {
         final FluidState fluidState = state.getFluidState();
         if (fluidState == null || fluidState.isEmpty()) return true;
 
-        for (Direction direction : Direction.values()) {
+        for (
+            Direction direction : Direction.values()
+        ) {
             final FluidState otherState = world.getFluidState(pos.relative(direction));
             if (otherState == null || otherState.isEmpty()) continue;
 

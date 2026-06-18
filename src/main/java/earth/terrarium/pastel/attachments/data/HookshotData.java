@@ -15,23 +15,32 @@ import java.util.UUID;
 
 public class HookshotData {
 
-    public static final Codec<HookshotData> CODEC = RecordCodecBuilder.create(i -> i.group(
-        UUIDUtil.CODEC.optionalFieldOf("linked_hook").forGetter(h -> h.linkedHook)
-    ).apply(i, HookshotData::ofCodec));
+    public static final Codec<HookshotData> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    UUIDUtil.CODEC.optionalFieldOf("linked_hook").forGetter(h -> h.linkedHook)
+                )
+                .apply(i, HookshotData::ofCodec)
+        );
 
-    public static final AttachmentType<HookshotData> ATTACHMENT =
-        AttachmentType.builder(h -> new HookshotData((Player) h))
-            .serialize(CODEC).build();
+    public static final AttachmentType<HookshotData> ATTACHMENT = AttachmentType
+        .builder(h -> new HookshotData((Player) h))
+        .serialize(CODEC)
+        .build();
 
     private Optional<UUID> linkedHook = Optional.empty();
+
     private int hookId = -1;
+
     private Player holder;
 
     public HookshotData(Player holder) {
         this.holder = holder;
     }
 
-    private HookshotData() {}
+    private HookshotData() {
+    }
 
     public static HookshotData ofCodec(Optional<UUID> linkedHook) {
         var data = new HookshotData();

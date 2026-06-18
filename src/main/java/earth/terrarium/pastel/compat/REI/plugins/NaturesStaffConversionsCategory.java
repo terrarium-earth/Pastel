@@ -16,7 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class NaturesStaffConversionsCategory extends GatedDisplayCategory<NaturesStaffConversionsDisplay> {
 
     @Override
@@ -31,24 +33,43 @@ public class NaturesStaffConversionsCategory extends GatedDisplayCategory<Nature
 
     @Override
     public Component getTitle() {
-        return PastelItems.NATURES_STAFF.get()
-                                        .getDescription();
+        return PastelItems.NATURES_STAFF
+            .get()
+            .getDescription();
     }
 
     @Override
     public void setupWidgets(
-        Point startPoint, Rectangle bounds, List<Widget> widgets, @NotNull NaturesStaffConversionsDisplay display) {
+        Point startPoint,
+        Rectangle bounds,
+        List<Widget> widgets,
+        @NotNull NaturesStaffConversionsDisplay display
+    ) {
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 27, startPoint.y + 4)));
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 61, startPoint.y + 5)));
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 4, startPoint.y + 5))
-                           .entries(display.getInputEntries()
-                                           .get(0))
-                           .markInput());
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 61, startPoint.y + 5))
-                           .entries(display.getOutputEntries()
-                                           .get(0))
-                           .disableBackground()
-                           .markInput());
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 4, startPoint.y + 5))
+                    .entries(
+                        display
+                            .getInputEntries()
+                            .get(0)
+                    )
+                    .markInput()
+            );
+        widgets
+            .add(
+                Widgets
+                    .createSlot(new Point(startPoint.x + 61, startPoint.y + 5))
+                    .entries(
+                        display
+                            .getOutputEntries()
+                            .get(0)
+                    )
+                    .disableBackground()
+                    .markInput()
+            );
     }
 
     @Override

@@ -10,13 +10,17 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class BottomlessBundleTooltipComponent implements PastelTooltipComponent {
 
     private static final int MAX_DISPLAYED_SLOTS = 5;
+
     private final List<ItemStack> itemStacks;
 
     private final int displayedSlotCount;
+
     private final boolean drawDots;
 
     public BottomlessBundleTooltipComponent(ItemStorageTooltipData data) {
@@ -28,7 +32,11 @@ public class BottomlessBundleTooltipComponent implements PastelTooltipComponent 
         this.displayedSlotCount = Math.max(2, Math.min(MAX_DISPLAYED_SLOTS + 1, (int) Math.ceil(totalStacks) + 1));
 
         this.itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
-        for (int i = 0; i < Math.min(5, displayedSlotCount + 1); i++) {
+        for (
+            int i = 0;
+            i < Math.min(5, displayedSlotCount + 1);
+            i++
+        ) {
             var stackAmount = Math.min(Math.min(maxCount, amount - i * maxCount), Integer.MAX_VALUE);
             this.itemStacks.set(i, storage.stack((int) stackAmount));
         }
@@ -50,7 +58,11 @@ public class BottomlessBundleTooltipComponent implements PastelTooltipComponent 
         int n = x + 1;
         int o = y + 1;
 
-        for (int i = 0; i < Math.min(MAX_DISPLAYED_SLOTS + 1, displayedSlotCount); i++) {
+        for (
+            int i = 0;
+            i < Math.min(MAX_DISPLAYED_SLOTS + 1, displayedSlotCount);
+            i++
+        ) {
             if (i == displayedSlotCount - 1) {
                 if (displayedSlotCount == MAX_DISPLAYED_SLOTS + 1) {
                     if (drawDots) {

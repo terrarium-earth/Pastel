@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.api.item;
 
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -16,27 +15,43 @@ import java.util.Iterator;
  */
 public class ItemStorage {
 
-    public static final Codec<ItemStorage> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                       ItemReference.CODEC.fieldOf(
-                                                                                           "reference")
-                                                                                                          .forGetter(ItemStorage::getReference),
-                                                                                       Codec.LONG.fieldOf("count")
-                                                                                                 .forGetter(ItemStorage::getCount),
-                                                                                       Codec.LONG.optionalFieldOf(
-                                                                                           "limit", -1L)
-                                                                                                 .forGetter(ItemStorage::getLimit)
-                                                                                   )
-                                                                                   .apply(i, ItemStorage::new));
+    public static final Codec<ItemStorage> CODEC = RecordCodecBuilder
+        .create(
+            i -> i
+                .group(
+                    ItemReference.CODEC
+                        .fieldOf(
+                            "reference"
+                        )
+                        .forGetter(ItemStorage::getReference),
+                    Codec.LONG
+                        .fieldOf("count")
+                        .forGetter(ItemStorage::getCount),
+                    Codec.LONG
+                        .optionalFieldOf(
+                            "limit",
+                            -1L
+                        )
+                        .forGetter(ItemStorage::getLimit)
+                )
+                .apply(i, ItemStorage::new)
+        );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, ItemStorage> STREAM_CODEC = StreamCodec.composite(
-        ItemReference.STREAM_CODEC, ItemStorage::getReference,
-        ByteBufCodecs.VAR_LONG, ItemStorage::getCount,
-        ByteBufCodecs.VAR_LONG, ItemStorage::getLimit,
-        ItemStorage::new//
-    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, ItemStorage> STREAM_CODEC = StreamCodec
+        .composite(
+            ItemReference.STREAM_CODEC,
+            ItemStorage::getReference,
+            ByteBufCodecs.VAR_LONG,
+            ItemStorage::getCount,
+            ByteBufCodecs.VAR_LONG,
+            ItemStorage::getLimit,
+            ItemStorage::new//
+        );
 
     private ItemReference reference;
+
     private long count;
+
     private long limit = -1;
 
     public ItemStorage(ItemReference reference, long count, long limit) {
@@ -80,8 +95,9 @@ public class ItemStorage {
     }
 
     public int stackSize() {
-        return reference.asItem()
-                        .getMaxStackSize(stack(1));
+        return reference
+            .asItem()
+            .getMaxStackSize(stack(1));
     }
 
     public void increment(long increment) {
@@ -145,8 +161,11 @@ public class ItemStorage {
             return ItemStack.EMPTY;
 
         return new ItemStack(
-            reference.asItem()
-                     .builtInRegistryHolder(), count, reference.asPatch()
+            reference
+                .asItem()
+                .builtInRegistryHolder(),
+            count,
+            reference.asPatch()
         );
     }
 
@@ -196,9 +215,11 @@ public class ItemStorage {
 
     @Override
     public int hashCode() {
-        return 31 * (31 + reference.asItem()
-                                   .hashCode() + reference.getComponents()
-                                                          .hashCode());
+        return 31 * (31 + reference
+            .asItem()
+            .hashCode() + reference
+                .getComponents()
+                .hashCode());
     }
 
     public interface LimitCallback {
@@ -227,19 +248,29 @@ public class ItemStorage {
     public record Component(ItemReference reference, long count) {
         public static final Component DEFAULT = new Component(ItemReference.empty(), 0);
 
-        public static final Codec<Component> CODEC = RecordCodecBuilder.create(i -> i.group(
-                                                                                         ItemReference.CODEC.fieldOf(
-                                                                                             "reference")
-                                                                                                            .forGetter(Component::reference),
-                                                                                         Codec.LONG.fieldOf("count")
-                                                                                                   .forGetter(Component::count)
-                                                                                     )
-                                                                                     .apply(i, Component::new));
+        public static final Codec<Component> CODEC = RecordCodecBuilder
+            .create(
+                i -> i
+                    .group(
+                        ItemReference.CODEC
+                            .fieldOf(
+                                "reference"
+                            )
+                            .forGetter(Component::reference),
+                        Codec.LONG
+                            .fieldOf("count")
+                            .forGetter(Component::count)
+                    )
+                    .apply(i, Component::new)
+            );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, Component> STREAM_CODEC = StreamCodec.composite(
-            ItemReference.STREAM_CODEC, Component::reference,
-            ByteBufCodecs.VAR_LONG, Component::count,
-            Component::new
-        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, Component> STREAM_CODEC = StreamCodec
+            .composite(
+                ItemReference.STREAM_CODEC,
+                Component::reference,
+                ByteBufCodecs.VAR_LONG,
+                Component::count,
+                Component::new
+            );
     }
 }

@@ -55,10 +55,15 @@ import java.util.concurrent.Flow;
 
 public class FlowingStaffItem extends BuildingStaffItem {
     public static final int INK_COST_PER_BLOCK = 1;
+
     public static final int ADDITIONAL_INK_COST_PER_BLOCK_CONJURED = 2;
+
     public static final int INK_COST_FOR_CARRY = 50;
+
     public static final int RANGE = 10;
+
     public static final int TICKS_PER_ACTION = 2;
+
     public List<BlockPos> blockPosCache = new ArrayList<>();
 
     public FlowingStaffItem(Properties settings) {
@@ -71,47 +76,90 @@ public class FlowingStaffItem extends BuildingStaffItem {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         var data = stack.getOrDefault(PastelDataComponentTypes.FLOWING_STAFF, FlowingStaffComponent.DEFAULT);
         if (Ench.hasEnchantment(context.registries(), PastelEnchantments.RESONANCE, stack)) {
-            tooltip.add(data.blockName()
-                            .isPresent() ? Component.translatable("item.pastel.flowing_staff.tooltip.stored")
-                                                    .append(data.blockName()
-                                                                .get())
-                                         : Component.translatable("item.pastel.flowing_staff.tooltip.pickup"));
+            tooltip
+                .add(
+                    data
+                        .blockName()
+                        .isPresent()
+                            ? Component
+                                .translatable("item.pastel.flowing_staff.tooltip.stored")
+                                .append(
+                                    data
+                                        .blockName()
+                                        .get()
+                                )
+                            : Component.translatable("item.pastel.flowing_staff.tooltip.pickup")
+                );
         } else {
-            tooltip.add(Component.translatable("item.pastel.flowing_staff.tooltip.setcorners", RANGE)
-                                 .withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable("item.pastel.flowing_staff.tooltip.crouch")
-                                 .withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable("item.pastel.flowing_staff.tooltip.use")
-                                 .withStyle(ChatFormatting.GRAY));
-            if (data.pos1()
-                    .isPresent()) tooltip.add(Component.translatable(
-                                                           "item.pastel.flowing_staff.tooltip.pos1", data.pos1()
-                                                                                                         .get()
-                                                                                                         .getX(),
-                                                           data.pos1()
-                                                                                                                      .get()
-                                                                                                                      .getY(), data.pos1()
-                                                                                                                                   .get()
-                                                                                                                                   .getZ()
-                                                       )
-                                                       .withStyle(ChatFormatting.GRAY));
-            if (data.pos2()
-                    .isPresent()) tooltip.add(Component.translatable(
-                                                           "item.pastel.flowing_staff.tooltip.pos2", data.pos2()
-                                                                                                         .get()
-                                                                                                         .getX(),
-                                                           data.pos2()
-                                                                                                                      .get()
-                                                                                                                      .getY(), data.pos2()
-                                                                                                                                   .get()
-                                                                                                                                   .getZ()
-                                                       )
-                                                       .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.flowing_staff.tooltip.setcorners", RANGE)
+                        .withStyle(ChatFormatting.GRAY)
+                );
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.flowing_staff.tooltip.crouch")
+                        .withStyle(ChatFormatting.GRAY)
+                );
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.flowing_staff.tooltip.use")
+                        .withStyle(ChatFormatting.GRAY)
+                );
+            if (data
+                .pos1()
+                .isPresent()) tooltip
+                    .add(
+                        Component
+                            .translatable(
+                                "item.pastel.flowing_staff.tooltip.pos1",
+                                data
+                                    .pos1()
+                                    .get()
+                                    .getX(),
+                                data
+                                    .pos1()
+                                    .get()
+                                    .getY(),
+                                data
+                                    .pos1()
+                                    .get()
+                                    .getZ()
+                            )
+                            .withStyle(ChatFormatting.GRAY)
+                    );
+            if (data
+                .pos2()
+                .isPresent()) tooltip
+                    .add(
+                        Component
+                            .translatable(
+                                "item.pastel.flowing_staff.tooltip.pos2",
+                                data
+                                    .pos2()
+                                    .get()
+                                    .getX(),
+                                data
+                                    .pos2()
+                                    .get()
+                                    .getY(),
+                                data
+                                    .pos2()
+                                    .get()
+                                    .getZ()
+                            )
+                            .withStyle(ChatFormatting.GRAY)
+                    );
 
         }
         addInkPoweredTooltip(tooltip);
@@ -119,68 +167,97 @@ public class FlowingStaffItem extends BuildingStaffItem {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        if (context.getLevel()
-                   .isClientSide()) return InteractionResult.CONSUME;
+        if (context
+            .getLevel()
+            .isClientSide()) return InteractionResult.CONSUME;
         var player = context.getPlayer();
         if (!(player instanceof ServerPlayer serverPlayer)) return InteractionResult.CONSUME;
         var stack = context.getItemInHand();
         var data = stack.getOrDefault(PastelDataComponentTypes.FLOWING_STAFF, FlowingStaffComponent.DEFAULT);
-        if (Ench.hasEnchantment(
-            context.getLevel()
-                   .registryAccess(), PastelEnchantments.RESONANCE, stack
-        )) {
+        if (Ench
+            .hasEnchantment(
+                context
+                    .getLevel()
+                    .registryAccess(),
+                PastelEnchantments.RESONANCE,
+                stack
+            )) {
             var level = context.getLevel();
             if (!(level instanceof ServerLevel serverLevel)) return InteractionResult.CONSUME;
             var storedBlockData = stack.get(PastelDataComponentTypes.STORED_BLOCK_ENTITY);
             if (storedBlockData == null && serverPlayer.isCrouching()) {
                 // store a block
                 var pos = context.getClickedPos();
-                var bulokEntee = context.getLevel()
-                                        .getBlockEntity(pos);
+                var bulokEntee = context
+                    .getLevel()
+                    .getBlockEntity(pos);
                 var state = level.getBlockState(pos);
-                if (bulokEntee == null || state.getBlock()
-                                               .defaultDestroyTime() <= -1 || serverLevel.getBlockState(pos)
-                                                                                         .is(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST) ||
-                    !InkPowered.tryDrainEnergy(player, USED_COLOR, INK_COST_FOR_CARRY))
+                if (bulokEntee == null || state
+                    .getBlock()
+                    .defaultDestroyTime() <= -1 || serverLevel
+                        .getBlockState(pos)
+                        .is(PastelBlockTags.FLOWING_STAFF_MOVE_BLACKLIST) || !InkPowered
+                            .tryDrainEnergy(player, USED_COLOR, INK_COST_FOR_CARRY))
                     return InteractionResult.CONSUME;
-                stack.set(
-                    PastelDataComponentTypes.STORED_BLOCK_ENTITY,
-                    new StoredBlockEntityComponent(state, bulokEntee.saveCustomOnly(level.registryAccess()))
-                );
+                stack
+                    .set(
+                        PastelDataComponentTypes.STORED_BLOCK_ENTITY,
+                        new StoredBlockEntityComponent(state, bulokEntee.saveCustomOnly(level.registryAccess()))
+                    );
                 serverLevel.removeBlockEntity(pos);
-                var flowingData = stack.getOrDefault(
-                    PastelDataComponentTypes.FLOWING_STAFF, FlowingStaffComponent.DEFAULT);
-                stack.set(
-                    PastelDataComponentTypes.FLOWING_STAFF, new FlowingStaffComponent(
-                        flowingData.pos1(), flowingData.pos2(), flowingData.cornerSwitch(), Optional.of(state.getBlock()
-                                                                                                             .getName())
-                    )
-                );
-                serverLevel.setBlock(
-                    pos, Blocks.AIR.defaultBlockState(),
-                    Block.UPDATE_CLIENTS | Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_NEIGHBORS
-                );
+                var flowingData = stack
+                    .getOrDefault(
+                        PastelDataComponentTypes.FLOWING_STAFF,
+                        FlowingStaffComponent.DEFAULT
+                    );
+                stack
+                    .set(
+                        PastelDataComponentTypes.FLOWING_STAFF,
+                        new FlowingStaffComponent(
+                            flowingData.pos1(),
+                            flowingData.pos2(),
+                            flowingData.cornerSwitch(),
+                            Optional
+                                .of(
+                                    state
+                                        .getBlock()
+                                        .getName()
+                                )
+                        )
+                    );
+                serverLevel
+                    .setBlock(
+                        pos,
+                        Blocks.AIR.defaultBlockState(),
+                        Block.UPDATE_CLIENTS | Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_NEIGHBORS
+                    );
                 return InteractionResult.CONSUME;
             } else if (storedBlockData != null) {
                 // place a block
-                var pos = context.getClickedPos()
-                                 .relative(context.getClickedFace());
-                if (!serverLevel.getBlockState(pos)
-                                .canBeReplaced()) return InteractionResult.CONSUME;
+                var pos = context
+                    .getClickedPos()
+                    .relative(context.getClickedFace());
+                if (!serverLevel
+                    .getBlockState(pos)
+                    .canBeReplaced()) return InteractionResult.CONSUME;
                 var state = storedBlockData.state();
                 if (state.getBlock() instanceof EntityBlock entityBlock) {
                     if (state.hasProperty(ChestBlock.TYPE)) {
                         state = state.setValue(ChestBlock.TYPE, ChestType.SINGLE);
                     }
                     if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-                        state = state.setValue(
-                            BlockStateProperties.HORIZONTAL_FACING, player.getDirection()
-                                                                          .getOpposite()
-                        );
+                        state = state
+                            .setValue(
+                                BlockStateProperties.HORIZONTAL_FACING,
+                                player
+                                    .getDirection()
+                                    .getOpposite()
+                            );
                     }
                     serverLevel.setBlock(pos, state, Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
-                    state.getBlock()
-                         .setPlacedBy(level, pos, state, player, ItemStack.EMPTY);
+                    state
+                        .getBlock()
+                        .setPlacedBy(level, pos, state, player, ItemStack.EMPTY);
                     var blockEntity = entityBlock.newBlockEntity(pos, state);
                     if (blockEntity != null) {
                         blockEntity.loadCustomOnly(storedBlockData.blockEntityData(), level.registryAccess());
@@ -188,25 +265,46 @@ public class FlowingStaffItem extends BuildingStaffItem {
                     }
                 }
                 stack.remove(PastelDataComponentTypes.STORED_BLOCK_ENTITY);
-                var flowingData = stack.getOrDefault(
-                    PastelDataComponentTypes.FLOWING_STAFF, FlowingStaffComponent.DEFAULT);
-                stack.set(
-                    PastelDataComponentTypes.FLOWING_STAFF, new FlowingStaffComponent(
-                        flowingData.pos1(), flowingData.pos2(), flowingData.cornerSwitch(), Optional.empty())
-                );
+                var flowingData = stack
+                    .getOrDefault(
+                        PastelDataComponentTypes.FLOWING_STAFF,
+                        FlowingStaffComponent.DEFAULT
+                    );
+                stack
+                    .set(
+                        PastelDataComponentTypes.FLOWING_STAFF,
+                        new FlowingStaffComponent(
+                            flowingData.pos1(),
+                            flowingData.pos2(),
+                            flowingData.cornerSwitch(),
+                            Optional.empty()
+                        )
+                    );
                 return InteractionResult.CONSUME;
             }
         } else {
             if (serverPlayer.isCrouching()) {
                 // crouch rclick block: set corner, set next click to be the other corner
-                if (data.cornerSwitch()) stack.set(
-                    PastelDataComponentTypes.FLOWING_STAFF, new FlowingStaffComponent(
-                        data.pos1(), Optional.of(context.getClickedPos()), false, data.blockName())
-                );
-                else stack.set(
-                    PastelDataComponentTypes.FLOWING_STAFF,
-                    new FlowingStaffComponent(Optional.of(context.getClickedPos()), data.pos2(), true, data.blockName())
-                );
+                if (data.cornerSwitch()) stack
+                    .set(
+                        PastelDataComponentTypes.FLOWING_STAFF,
+                        new FlowingStaffComponent(
+                            data.pos1(),
+                            Optional.of(context.getClickedPos()),
+                            false,
+                            data.blockName()
+                        )
+                    );
+                else stack
+                    .set(
+                        PastelDataComponentTypes.FLOWING_STAFF,
+                        new FlowingStaffComponent(
+                            Optional.of(context.getClickedPos()),
+                            data.pos2(),
+                            true,
+                            data.blockName()
+                        )
+                    );
                 return InteractionResult.CONSUME;
             }
         }
@@ -220,35 +318,68 @@ public class FlowingStaffItem extends BuildingStaffItem {
         // if both positions are selected and we're holding it and sneaking, play some particles around the edges to
         // indicate the selected area
         var data = stack.getOrDefault(PastelDataComponentTypes.FLOWING_STAFF, FlowingStaffComponent.DEFAULT);
-        if (!isSelected || !(entity instanceof LocalPlayer player) || !player.input.shiftKeyDown || data.pos1()
-                                                                                                        .isEmpty() ||
-            data.pos2()
-                .isEmpty() || !level.isInWorldBounds(data.pos1()
-                                                         .get()) || !level.isInWorldBounds(data.pos2()
-                                                                                               .get()) || Math.abs(
-            data.pos1()
-                .get()
-                .getX() - data.pos2()
-                              .get()
-                              .getX()) > RANGE || Math.abs(data.pos1()
-                                                               .get()
-                                                               .getY() - data.pos2()
-                                                                             .get()
-                                                                             .getY()) > RANGE || Math.abs(data.pos1()
-                                                                                                              .get()
-                                                                                                              .getZ() -
-                                                                                                          data.pos2()
-                                                                                                              .get()
-                                                                                                              .getZ()) >
-                                                                                                 RANGE) return;
-        var pos1 = data.pos1()
-                       .get();
-        var pos2 = data.pos2()
-                       .get();
-        for (BlockPos pos : BlockPos.betweenClosed(pos1, pos2)) {
+        if (!isSelected || !(entity instanceof LocalPlayer player) || !player.input.shiftKeyDown || data
+            .pos1()
+            .isEmpty() || data
+                .pos2()
+                .isEmpty() || !level
+                    .isInWorldBounds(
+                        data
+                            .pos1()
+                            .get()
+                    ) || !level
+                        .isInWorldBounds(
+                            data
+                                .pos2()
+                                .get()
+                        ) || Math
+                            .abs(
+                                data
+                                    .pos1()
+                                    .get()
+                                    .getX() - data
+                                        .pos2()
+                                        .get()
+                                        .getX()
+                            ) > RANGE || Math
+                                .abs(
+                                    data
+                                        .pos1()
+                                        .get()
+                                        .getY() - data
+                                            .pos2()
+                                            .get()
+                                            .getY()
+                                ) > RANGE || Math
+                                    .abs(
+                                        data
+                                            .pos1()
+                                            .get()
+                                            .getZ() - data
+                                                .pos2()
+                                                .get()
+                                                .getZ()
+                                    ) > RANGE) return;
+        var pos1 = data
+            .pos1()
+            .get();
+        var pos2 = data
+            .pos2()
+            .get();
+        for (
+            BlockPos pos : BlockPos.betweenClosed(pos1, pos2)
+        ) {
             var centerPos = pos.getCenter();
-            level.addAlwaysVisibleParticle(
-                PastelParticleTypes.SHIMMERSTONE_SPARKLE, centerPos.x, centerPos.y, centerPos.z, 0, 0, 0);
+            level
+                .addAlwaysVisibleParticle(
+                    PastelParticleTypes.SHIMMERSTONE_SPARKLE,
+                    centerPos.x,
+                    centerPos.y,
+                    centerPos.z,
+                    0,
+                    0,
+                    0
+                );
         }
     }
 
@@ -262,16 +393,31 @@ public class FlowingStaffItem extends BuildingStaffItem {
             var pos1 = data.pos1();
             var pos2 = data.pos2();
             // rclick: do checks, then start filling
-            if (pos1.isEmpty() || pos2.isEmpty() || !level.isInWorldBounds(pos1.get()) || !level.isInWorldBounds(
-                pos2.get()) || Math.abs(pos1.get()
-                                            .getX() - pos2.get()
-                                                          .getX()) > RANGE || Math.abs(pos1.get()
-                                                                                           .getY() - pos2.get()
-                                                                                                         .getY()) >
-                                                                              RANGE || Math.abs(pos1.get()
-                                                                                                    .getZ() - pos2.get()
-                                                                                                                  .getZ()) >
-                                                                                       RANGE) {
+            if (pos1.isEmpty() || pos2.isEmpty() || !level.isInWorldBounds(pos1.get()) || !level
+                .isInWorldBounds(
+                    pos2.get()
+                ) || Math
+                    .abs(
+                        pos1
+                            .get()
+                            .getX() - pos2
+                                .get()
+                                .getX()
+                    ) > RANGE || Math
+                        .abs(
+                            pos1
+                                .get()
+                                .getY() - pos2
+                                    .get()
+                                    .getY()
+                        ) > RANGE || Math
+                            .abs(
+                                pos1
+                                    .get()
+                                    .getZ() - pos2
+                                        .get()
+                                        .getZ()
+                            ) > RANGE) {
                 level.playSound(null, player.blockPosition(), PastelSounds.USE_FAIL, SoundSource.PLAYERS, 1.0f, 1.0f);
                 return InteractionResultHolder.consume(stack);
             }
@@ -287,37 +433,52 @@ public class FlowingStaffItem extends BuildingStaffItem {
         // we've already done the preliminary checks, but we should make sure the player is still nearby and the data
         // hasn't been altered untowardly
         var data = stack.getOrDefault(PastelDataComponentTypes.FLOWING_STAFF, FlowingStaffComponent.DEFAULT);
-        if (data.pos1()
-                .isEmpty() || data.pos2()
-                                  .isEmpty() || !(livingEntity instanceof Player player)) {
+        if (data
+            .pos1()
+            .isEmpty() || data
+                .pos2()
+                .isEmpty() || !(livingEntity instanceof Player player)) {
             livingEntity.stopUsingItem();
             return;
         }
-        var pos1 = data.pos1()
-                       .get();
-        var pos2 = data.pos2()
-                       .get();
-        if (blockPosCache.size() >= BlockPos.betweenClosedStream(pos1, pos2)
-                                            .toList()
-                                            .size()) {
+        var pos1 = data
+            .pos1()
+            .get();
+        var pos2 = data
+            .pos2()
+            .get();
+        if (blockPosCache.size() >= BlockPos
+            .betweenClosedStream(pos1, pos2)
+            .toList()
+            .size()) {
             player.stopUsingItem();
             return;
         }
-        var otherHandStack = player.getItemInHand(player.getItemInHand(InteractionHand.MAIN_HAND)
-                                                        .equals(stack) ? InteractionHand.OFF_HAND
-                                                                       : InteractionHand.MAIN_HAND);
+        var otherHandStack = player
+            .getItemInHand(
+                player
+                    .getItemInHand(InteractionHand.MAIN_HAND)
+                    .equals(stack)
+                        ? InteractionHand.OFF_HAND
+                        : InteractionHand.MAIN_HAND
+            );
         var cost = INK_COST_PER_BLOCK;
         // because of this we know they have at least one block to place
         BlockItem itemToPlace = null;
         ItemProvider itemProvider = otherHandStack.getCapability(ItemProvider.CAPABILITY);
         if (itemProvider != null) {
             List<BlockItem> containedItems = new ArrayList<>();
-            itemProvider.getContainedItems(player, otherHandStack)
-                        .forEach((item) -> {
-                            if (item instanceof BlockItem blockItem) containedItems.add(blockItem);
-                        });
-            if (!containedItems.isEmpty()) itemToPlace = containedItems.get(player.getRandom()
-                                                                                  .nextInt(0, containedItems.size()));
+            itemProvider
+                .getContainedItems(player, otherHandStack)
+                .forEach((item) -> {
+                    if (item instanceof BlockItem blockItem) containedItems.add(blockItem);
+                });
+            if (!containedItems.isEmpty()) itemToPlace = containedItems
+                .get(
+                    player
+                        .getRandom()
+                        .nextInt(0, containedItems.size())
+                );
         } else if (otherHandStack.getItem() instanceof BlockItem blockItem) {
             itemToPlace = blockItem;
         }
@@ -337,23 +498,34 @@ public class FlowingStaffItem extends BuildingStaffItem {
         // select a pos to check...
         BlockPos pos;
         do {
-            pos = BlockPos.randomBetweenClosed(
-                              level.getRandom(), 1, Math.min(pos1.getX(), pos2.getX()), Math.min(pos1.getY(),
-                                                                                                 pos2.getY()),
-                              Math.min(pos1.getZ(), pos2.getZ()), Math.max(pos1.getX(), pos2.getX()),
-                              Math.max(pos1.getY(), pos2.getY()), Math.max(pos1.getZ(), pos2.getZ())
-                          )
-                          .iterator()
-                          .next();
+            pos = BlockPos
+                .randomBetweenClosed(
+                    level.getRandom(),
+                    1,
+                    Math.min(pos1.getX(), pos2.getX()),
+                    Math
+                        .min(
+                            pos1.getY(),
+                            pos2.getY()
+                        ),
+                    Math.min(pos1.getZ(), pos2.getZ()),
+                    Math.max(pos1.getX(), pos2.getX()),
+                    Math.max(pos1.getY(), pos2.getY()),
+                    Math.max(pos1.getZ(), pos2.getZ())
+                )
+                .iterator()
+                .next();
             if (blockPosCache.contains(pos)) pos = null;
-            else if (!level.getBlockState(pos)
-                           .canBeReplaced()) {
-                blockPosCache.add(pos);
-                pos = null;
-            }
-            if (blockPosCache.size() >= BlockPos.betweenClosedStream(pos1, pos2)
-                                                .toList()
-                                                .size()) {
+            else if (!level
+                .getBlockState(pos)
+                .canBeReplaced()) {
+                    blockPosCache.add(pos);
+                    pos = null;
+                }
+            if (blockPosCache.size() >= BlockPos
+                .betweenClosedStream(pos1, pos2)
+                .toList()
+                .size()) {
                 player.stopUsingItem();
                 return;
             }
@@ -362,16 +534,29 @@ public class FlowingStaffItem extends BuildingStaffItem {
         blockPosCache.add(pos);
         // ok, so we've now run a whole battery of checks, we know that they have an item to place, a pos to place it at
         // and aren't trying anything funny. time to actually do stuff
-        level.playSound(
-            null, player.blockPosition(), SoundEvents.AMETHYST_BLOCK_PLACE, SoundSource.PLAYERS, 1.0f, 1.0f);
+        level
+            .playSound(
+                null,
+                player.blockPosition(),
+                SoundEvents.AMETHYST_BLOCK_PLACE,
+                SoundSource.PLAYERS,
+                1.0f,
+                1.0f
+            );
         if (!level.isClientSide()) {
-            if (InkPowered.tryDrainEnergy(player, USED_COLOR, cost) &&
-                (cost != INK_COST_PER_BLOCK || InventoryHelper.removeFromInventoryWithRemainders(
-                    player, new ItemStack(itemToPlace, 1)))) {
-                level.setBlock(
-                    pos, itemToPlace.getBlock()
-                                    .defaultBlockState(), Block.UPDATE_NEIGHBORS | Block.UPDATE_CLIENTS
-                );
+            if (InkPowered.tryDrainEnergy(player, USED_COLOR, cost) && (cost != INK_COST_PER_BLOCK || InventoryHelper
+                .removeFromInventoryWithRemainders(
+                    player,
+                    new ItemStack(itemToPlace, 1)
+                ))) {
+                level
+                    .setBlock(
+                        pos,
+                        itemToPlace
+                            .getBlock()
+                            .defaultBlockState(),
+                        Block.UPDATE_NEIGHBORS | Block.UPDATE_CLIENTS
+                    );
             } else {
                 player.stopUsingItem();
             }

@@ -19,14 +19,19 @@ import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import java.util.List;
 
 public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement, IngredientStack payment)
-    implements CustomPacketPayload {
+    implements
+    CustomPacketPayload {
 
     public static final Type<GuidebookHintBoughtPayload> ID = PastelC2SPackets.makeId("guidebook_hint_bought");
-    public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookHintBoughtPayload> CODEC = StreamCodec.composite(
-        ResourceLocation.STREAM_CODEC, GuidebookHintBoughtPayload::completionAdvancement,
-        IngredientStack.STREAM_CODEC, GuidebookHintBoughtPayload::payment,
-        GuidebookHintBoughtPayload::new
-    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookHintBoughtPayload> CODEC = StreamCodec
+        .composite(
+            ResourceLocation.STREAM_CODEC,
+            GuidebookHintBoughtPayload::completionAdvancement,
+            IngredientStack.STREAM_CODEC,
+            GuidebookHintBoughtPayload::payment,
+            GuidebookHintBoughtPayload::new
+        );
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
@@ -36,19 +41,31 @@ public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement,
     public static IPayloadHandler<GuidebookHintBoughtPayload> getPayloadHandler() {
         return (payload, context) -> {
             ServerPlayer player = (ServerPlayer) context.player();
-            for (ItemStack remainder : InventoryHelper.removeIngredientStacksFromInventoryWithRemainders(
-                List.of(payload.payment()), new PlayerInvWrapper(player.getInventory()))) {
+            for (
+                ItemStack remainder : InventoryHelper
+                    .removeIngredientStacksFromInventoryWithRemainders(
+                        List.of(payload.payment()),
+                        new PlayerInvWrapper(player.getInventory())
+                    )
+            ) {
                 ItemHandlerHelper.insertItemStacked(new PlayerInvWrapper(player.getInventory()), remainder, false);
             }
 
             // give the player the hidden "used_tip" advancement and play a sound
             Support.grantAdvancementCriterion(player, "hidden/used_tip", "used_tip");
             Support.grantAdvancementCriterion(player, payload.completionAdvancement(), "hint_purchased");
-            player.level()
-                  .playSound(
-                      player, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP,
-                      SoundSource.PLAYERS, 1.0F, 1.0F
-                  );
+            player
+                .level()
+                .playSound(
+                    player,
+                    player.getX(),
+                    player.getY(),
+                    player.getZ(),
+                    SoundEvents.EXPERIENCE_ORB_PICKUP,
+                    SoundSource.PLAYERS,
+                    1.0F,
+                    1.0F
+                );
         };
     }
 

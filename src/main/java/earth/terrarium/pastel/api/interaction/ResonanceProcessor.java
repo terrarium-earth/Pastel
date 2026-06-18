@@ -16,11 +16,12 @@ public abstract class ResonanceProcessor {
 
     public static boolean preventNextXPDrop;
 
-    public static final Codec<ResonanceProcessor> CODEC = PastelRegistries.RESONANCE_PROCESSOR_TYPE.byNameCodec()
-                                                                                                   .dispatch(
-                                                                                                       ResonanceProcessor::getCodec,
-                                                                                                       codec -> codec
-                                                                                                   );
+    public static final Codec<ResonanceProcessor> CODEC = PastelRegistries.RESONANCE_PROCESSOR_TYPE
+        .byNameCodec()
+        .dispatch(
+            ResonanceProcessor::getCodec,
+            codec -> codec
+        );
 
     public BrokenBlockPredicate blockPredicate;
 
@@ -31,9 +32,14 @@ public abstract class ResonanceProcessor {
     public abstract boolean process(BlockState state, BlockEntity blockEntity, List<ItemStack> droppedStacks);
 
     public static void applyResonance(
-        RegistryAccess drm, BlockState minedState, BlockEntity blockEntity, List<ItemStack> droppedStacks) {
-        drm.registryOrThrow(PastelRegistryKeys.RESONANCE_PROCESSOR)
-           .forEach(entry -> entry.process(minedState, blockEntity, droppedStacks));
+        RegistryAccess drm,
+        BlockState minedState,
+        BlockEntity blockEntity,
+        List<ItemStack> droppedStacks
+    ) {
+        drm
+            .registryOrThrow(PastelRegistryKeys.RESONANCE_PROCESSOR)
+            .forEach(entry -> entry.process(minedState, blockEntity, droppedStacks));
     }
 
     public abstract MapCodec<? extends ResonanceProcessor> getCodec();

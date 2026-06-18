@@ -37,14 +37,16 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
         return CODEC;
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                   .setValue(
-                       FACING, ctx.getHorizontalDirection()
-                                  .getOpposite()
-                   );
+        return this
+            .defaultBlockState()
+            .setValue(
+                FACING,
+                ctx
+                    .getHorizontalDirection()
+                    .getOpposite()
+            );
     }
 
     @Override
@@ -54,7 +56,10 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
         BlockHitResult hit
     ) {
         var entity = world.getBlockEntity(pos);
@@ -64,9 +69,13 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
         if (manxi.hasTaken(player)) return InteractionResult.FAIL;
 
         world.playLocalSound(pos, SoundEvents.CHISELED_BOOKSHELF_PICKUP_ENCHANTED, SoundSource.BLOCKS, 1F, 1F, true);
-        player.getInventory()
-              .placeItemBackInInventory(PastelItems.POISONERS_HANDBOOK.get()
-                                                                      .getDefaultInstance());
+        player
+            .getInventory()
+            .placeItemBackInInventory(
+                PastelItems.POISONERS_HANDBOOK
+                    .get()
+                    .getDefaultInstance()
+            );
         manxi.markTaken(player);
 
         return InteractionResult.CONSUME;
@@ -75,10 +84,13 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
     @Override
     public void attack(BlockState state, Level world, BlockPos pos, Player player) {
         if (!world.isClientSide() && !player.getAbilities().instabuild) {
-            player.displayClientMessage(
-                Component.translatable("block.pastel.manxi.nope")
-                         .withStyle(s -> s.withColor(PastelMobEffects.ETERNAL_SLUMBER_COLOR)), true
-            );
+            player
+                .displayClientMessage(
+                    Component
+                        .translatable("block.pastel.manxi.nope")
+                        .withStyle(s -> s.withColor(PastelMobEffects.ETERNAL_SLUMBER_COLOR)),
+                    true
+                );
             world.playLocalSound(pos, PastelSounds.DEEP_CRYSTAL_RING, SoundSource.BLOCKS, 1, 1.5F, true);
             player.hurt(PastelDamageTypes.sleep(world, null), 6);
             player.knockback(2, player.getX() - (pos.getX() + 0.5), player.getZ() - (pos.getZ() + 0.5));
@@ -87,22 +99,24 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     @Override
     public void onWardDisrupt(BlockPos pos, BlockState state, Level level, Entity trigger) {
-        if (!level.isClientSide() && trigger instanceof Projectile projectile &&
-            projectile.getOwner() instanceof ServerPlayer player && level instanceof ServerLevel serverLevel) {
-            var advancement = serverLevel.getServer()
-                                         .getAdvancements()
-                                         .get(PastelAdvancements.Hidden.GET_DENIED_BY_MANXI);
+        if (!level.isClientSide() && trigger instanceof Projectile projectile && projectile
+            .getOwner() instanceof ServerPlayer player && level instanceof ServerLevel serverLevel) {
+            var advancement = serverLevel
+                .getServer()
+                .getAdvancements()
+                .get(PastelAdvancements.Hidden.GET_DENIED_BY_MANXI);
             if (advancement == null) return;
-            player.getAdvancements()
-                  .revoke(advancement, "rejected");
-            player.getAdvancements()
-                  .award(advancement, "rejected");
+            player
+                .getAdvancements()
+                .revoke(advancement, "rejected");
+            player
+                .getAdvancements()
+                .award(advancement, "rejected");
             player.hurt(PastelDamageTypes.sleep(level, null), 40);
         }
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PlayerTrackerBlockEntity(pos, state);
     }

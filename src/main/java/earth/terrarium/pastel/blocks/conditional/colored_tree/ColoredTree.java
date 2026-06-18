@@ -24,8 +24,9 @@ public interface ColoredTree {
             return PastelAdvancements.Milestones.REVEAL_COLORED_TREES_K;
         }
 
-        return treePart == TreePart.SAPLING ? PastelAdvancements.Milestones.REVEAL_COLORED_SAPLINGS_CMY
-                                            : PastelAdvancements.Milestones.REVEAL_COLORED_TREES_CMY;
+        return treePart == TreePart.SAPLING
+            ? PastelAdvancements.Milestones.REVEAL_COLORED_SAPLINGS_CMY
+            : PastelAdvancements.Milestones.REVEAL_COLORED_TREES_CMY;
     }
 
     InkColor getColor();

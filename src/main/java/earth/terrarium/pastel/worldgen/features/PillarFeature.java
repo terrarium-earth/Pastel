@@ -25,8 +25,9 @@ public class PillarFeature extends Feature<BlockStateFeatureConfig> {
         WorldGenLevel structureWorldAccess = context.level();
         RandomSource random = context.random();
         if (structureWorldAccess.isEmptyBlock(blockPos) && !structureWorldAccess.isEmptyBlock(blockPos.above())) {
-            BlockState blockState = context.config()
-                                           .blockState();
+            BlockState blockState = context
+                .config()
+                .blockState();
 
             BlockPos.MutableBlockPos mutable = blockPos.mutable();
             BlockPos.MutableBlockPos mutable2 = blockPos.mutable();
@@ -41,14 +42,34 @@ public class PillarFeature extends Feature<BlockStateFeatureConfig> {
                 }
 
                 structureWorldAccess.setBlock(mutable, blockState, 2);
-                bl = bl && this.stopOrPlace(
-                    structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.NORTH), blockState);
-                bl2 = bl2 && this.stopOrPlace(
-                    structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.SOUTH), blockState);
-                bl3 = bl3 && this.stopOrPlace(
-                    structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.WEST), blockState);
-                bl4 = bl4 && this.stopOrPlace(
-                    structureWorldAccess, random, mutable2.setWithOffset(mutable, Direction.EAST), blockState);
+                bl = bl && this
+                    .stopOrPlace(
+                        structureWorldAccess,
+                        random,
+                        mutable2.setWithOffset(mutable, Direction.NORTH),
+                        blockState
+                    );
+                bl2 = bl2 && this
+                    .stopOrPlace(
+                        structureWorldAccess,
+                        random,
+                        mutable2.setWithOffset(mutable, Direction.SOUTH),
+                        blockState
+                    );
+                bl3 = bl3 && this
+                    .stopOrPlace(
+                        structureWorldAccess,
+                        random,
+                        mutable2.setWithOffset(mutable, Direction.WEST),
+                        blockState
+                    );
+                bl4 = bl4 && this
+                    .stopOrPlace(
+                        structureWorldAccess,
+                        random,
+                        mutable2.setWithOffset(mutable, Direction.EAST),
+                        blockState
+                    );
                 mutable.move(Direction.DOWN);
             }
 
@@ -60,8 +81,16 @@ public class PillarFeature extends Feature<BlockStateFeatureConfig> {
             mutable.move(Direction.DOWN);
             BlockPos.MutableBlockPos mutable3 = new BlockPos.MutableBlockPos();
 
-            for (int x = -3; x < 4; ++x) {
-                for (int z = -3; z < 4; ++z) {
+            for (
+                int x = -3;
+                x < 4;
+                ++x
+            ) {
+                for (
+                    int z = -3;
+                    z < 4;
+                    ++z
+                ) {
                     int k = Mth.abs(x) * Mth.abs(z);
                     if (random.nextInt(10) < 10 - k) {
                         mutable3.set(mutable.offset(x, 0, z));
@@ -95,7 +124,11 @@ public class PillarFeature extends Feature<BlockStateFeatureConfig> {
     }
 
     private boolean stopOrPlace(
-        LevelAccessor world, @NotNull RandomSource random, BlockPos pos, BlockState blockState) {
+        LevelAccessor world,
+        @NotNull RandomSource random,
+        BlockPos pos,
+        BlockState blockState
+    ) {
         if (random.nextInt(10) != 0) {
             world.setBlock(pos, blockState, 2);
             return true;

@@ -13,12 +13,18 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PastelEntitySubPredicateTypes {
 
-    private static final DeferredRegister<MapCodec<? extends EntitySubPredicate>> REGISTER = DeferredRegister.create(
-        Registries.ENTITY_SUB_PREDICATE_TYPE, PastelCommon.MOD_ID);
+    private static final DeferredRegister<MapCodec<? extends EntitySubPredicate>> REGISTER = DeferredRegister
+        .create(
+            Registries.ENTITY_SUB_PREDICATE_TYPE,
+            PastelCommon.MOD_ID
+        );
 
     public static final MapCodec<EggLayingWoolyPigPredicate> EGG_LAYING_WOOLY_PIG = EggLayingWoolyPigPredicate.CODEC;
+
     public static final MapCodec<ShulkerPredicate> SHULKER = ShulkerPredicate.CODEC;
+
     public static final MapCodec<KindlingPredicate> KINDLING = KindlingPredicate.CODEC;
+
     public static final MapCodec<LizardPredicate> LIZARD = LizardPredicate.CODEC;
 
     public static void register(IEventBus bus) {

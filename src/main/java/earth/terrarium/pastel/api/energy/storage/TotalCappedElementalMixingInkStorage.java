@@ -46,8 +46,11 @@ public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage 
         }
 
         // check if we have enough
-        for (Map.Entry<InkColor, Float> entry : requiredElementals.get()
-                                                                  .entrySet()) {
+        for (
+            Map.Entry<InkColor, Float> entry : requiredElementals
+                .get()
+                .entrySet()
+        ) {
             long storedAmount = this.storedEnergy.get(entry.getKey());
             long requiredAmount = (int) Math.ceil(entry.getValue() * amount);
             if (storedAmount < requiredAmount) {
@@ -56,8 +59,11 @@ public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage 
         }
 
         // yes, we got stored enough. Drain
-        for (Map.Entry<InkColor, Float> entry : requiredElementals.get()
-                                                                  .entrySet()) {
+        for (
+            Map.Entry<InkColor, Float> entry : requiredElementals
+                .get()
+                .entrySet()
+        ) {
             long storedAmount = this.storedEnergy.get(entry.getKey());
             long requiredAmount = (int) Math.ceil(entry.getValue() * amount);
             this.currentTotal -= requiredAmount;
@@ -86,8 +92,11 @@ public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage 
 
         // calculate the max amount that can be drained over all colors
         float percentageAbleToDrain = 1.0F;
-        for (Map.Entry<InkColor, Float> entry : requiredElementals.get()
-                                                                  .entrySet()) {
+        for (
+            Map.Entry<InkColor, Float> entry : requiredElementals
+                .get()
+                .entrySet()
+        ) {
             long storedAmount = this.storedEnergy.get(entry.getKey());
             long requiredAmount = (int) Math.ceil(entry.getValue() * amount);
             if (storedAmount < requiredAmount) {
@@ -96,8 +105,11 @@ public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage 
         }
 
         // drain
-        for (Map.Entry<InkColor, Float> entry : requiredElementals.get()
-                                                                  .entrySet()) {
+        for (
+            Map.Entry<InkColor, Float> entry : requiredElementals
+                .get()
+                .entrySet()
+        ) {
             long storedAmount = this.storedEnergy.get(entry.getKey());
             long drainedAmount = (int) Math.ceil(entry.getValue() * amount * percentageAbleToDrain);
             this.storedEnergy.put(entry.getKey(), storedAmount - drainedAmount);
@@ -122,8 +134,11 @@ public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage 
             return 0;
         }
 
-        for (Map.Entry<InkColor, Float> entry : requiredElementals.get()
-                                                                  .entrySet()) {
+        for (
+            Map.Entry<InkColor, Float> entry : requiredElementals
+                .get()
+                .entrySet()
+        ) {
             long mixedAmount = (long) Math.floor(entry.getValue() * this.storedEnergy.get(entry.getKey()));
             maxAmount = Math.min(maxAmount, mixedAmount);
         }
@@ -142,7 +157,9 @@ public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage 
         }
 
         long energyPerColor = this.maxEnergyTotal / elementals.size();
-        for (InkColor color : elementals) {
+        for (
+            InkColor color : elementals
+        ) {
             this.storedEnergy.put(color, energyPerColor);
         }
         this.currentTotal = energyPerColor * elementals.size(); // in case rounding is weird
@@ -162,12 +179,18 @@ public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage 
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void addTooltip(List<Component> tooltip) {
-        tooltip.add(Component.translatable(
-            "item.pastel.artists_palette.tooltip",
-            getShortenedNumberString(this.maxEnergyTotal)
-        ));
+        tooltip
+            .add(
+                Component
+                    .translatable(
+                        "item.pastel.artists_palette.tooltip",
+                        getShortenedNumberString(this.maxEnergyTotal)
+                    )
+            );
         tooltip.add(Component.translatable("item.pastel.artists_palette.tooltip.mix_on_demand"));
         addInkContentTooltip(tooltip);
     }

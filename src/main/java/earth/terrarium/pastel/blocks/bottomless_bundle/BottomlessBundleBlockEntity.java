@@ -23,20 +23,24 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
     // Do not modify without syncing storage too!
     // Contents are synced from/into storage whenever needed [i.e. (de)serialization or setting/fetching bundle item]
     private ItemStack bundle;
+
     private ItemStorage innerStorage;
 
     // Cached to prevent incessant enchantment calls.
     // No need to write that back into the bundle stack.
     private boolean isVoiding;
+
     protected int powerLevel;
 
     public BottomlessBundleBlockEntity(BlockPos pos, BlockState state) {
         super(PastelBlockEntities.BOTTOMLESS_BUNDLE.get(), pos, state);
-        this.bundle = PastelBlocks.BOTTOMLESS_BUNDLE.get()
-                                                    .asItem()
-                                                    .getDefaultInstance();
-        innerStorage = ItemStorage.load(bundle)
-                                  .copy();
+        this.bundle = PastelBlocks.BOTTOMLESS_BUNDLE
+            .get()
+            .asItem()
+            .getDefaultInstance();
+        innerStorage = ItemStorage
+            .load(bundle)
+            .copy();
     }
 
     public IItemHandler storage = new IItemHandler() {
@@ -103,12 +107,18 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
         super.loadAdditional(nbt, registryLookup);
-        this.setBundleUnsynced(
-            ItemStack.parse(registryLookup, nbt.getCompound("Bundle"))
-                     .orElse(PastelBlocks.BOTTOMLESS_BUNDLE.get()
-                                                           .asItem()
-                                                           .getDefaultInstance()), registryLookup
-        );
+        this
+            .setBundleUnsynced(
+                ItemStack
+                    .parse(registryLookup, nbt.getCompound("Bundle"))
+                    .orElse(
+                        PastelBlocks.BOTTOMLESS_BUNDLE
+                            .get()
+                            .asItem()
+                            .getDefaultInstance()
+                    ),
+                registryLookup
+            );
         syncStorageWithBundle();
     }
 
@@ -116,13 +126,15 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
     // serialization, bundle stack set, bundle block break loot]
     private void syncBundleWithStorage() {
         assert this.level != null;
-        innerStorage.copy()
-                    .save(bundle);
+        innerStorage
+            .copy()
+            .save(bundle);
     }
 
     private void syncStorageWithBundle() {
-        innerStorage = ItemStorage.load(bundle)
-                                  .copy();
+        innerStorage = ItemStorage
+            .load(bundle)
+            .copy();
     }
 
     @Override
@@ -137,11 +149,19 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
             this.bundle = itemStack;
             // cache once, use many times
             this.isVoiding = EnchantmentHelper.hasTag(bundle, PastelEnchantmentTags.DELETES_OVERFLOW);
-            this.powerLevel = EnchantmentHelper.getItemEnchantmentLevel(registryLookup.lookup(Registries.ENCHANTMENT)
-                                                                                      .flatMap(impl -> impl.get(
-                                                                                          Enchantments.POWER))
-                                                                                      .orElse(null), itemStack
-            );
+            this.powerLevel = EnchantmentHelper
+                .getItemEnchantmentLevel(
+                    registryLookup
+                        .lookup(Registries.ENCHANTMENT)
+                        .flatMap(
+                            impl -> impl
+                                .get(
+                                    Enchantments.POWER
+                                )
+                        )
+                        .orElse(null),
+                    itemStack
+                );
             return true;
         }
         return false;
@@ -153,9 +173,10 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 
     public ItemStack retrieveBundle() {
         if (this.bundle.isEmpty()) {
-            return PastelBlocks.BOTTOMLESS_BUNDLE.get()
-                                                 .asItem()
-                                                 .getDefaultInstance();
+            return PastelBlocks.BOTTOMLESS_BUNDLE
+                .get()
+                .asItem()
+                .getDefaultInstance();
         } else {
             syncBundleWithStorage();
             return this.bundle;

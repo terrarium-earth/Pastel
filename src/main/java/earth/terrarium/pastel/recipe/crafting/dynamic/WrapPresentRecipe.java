@@ -32,18 +32,26 @@ public class WrapPresentRecipe extends CustomRecipe {
     @Override
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.withSize(1, Ingredient.EMPTY);
-        list.set(0, Ingredient.of(PastelBlocks.PRESENT.get()
-                                                      .asItem()
-                                                      .getDefaultInstance())
-        );
+        list
+            .set(
+                0,
+                Ingredient
+                    .of(
+                        PastelBlocks.PRESENT
+                            .get()
+                            .asItem()
+                            .getDefaultInstance()
+                    )
+            );
         return list;
     }
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider registryLookup) {
-        ItemStack stack = PastelBlocks.PRESENT.get()
-                                              .asItem()
-                                              .getDefaultInstance();
+        ItemStack stack = PastelBlocks.PRESENT
+            .get()
+            .asItem()
+            .getDefaultInstance();
         PresentBlockItem.wrap(stack, PresentBlock.WrappingPaper.RED, Map.of());
         return stack;
     }
@@ -53,7 +61,11 @@ public class WrapPresentRecipe extends CustomRecipe {
         boolean presentItemFound = false;
         boolean wrappingItemFound = false;
 
-        for (int j = 0; j < input.size(); ++j) {
+        for (
+            int j = 0;
+            j < input.size();
+            ++j
+        ) {
             ItemStack itemStack = input.getItem(j);
             if (!itemStack.isEmpty()) {
                 if (itemStack.getItem() instanceof PresentBlockItem) {
@@ -78,13 +90,18 @@ public class WrapPresentRecipe extends CustomRecipe {
         PresentBlock.WrappingPaper wrappingPaper = PresentBlock.WrappingPaper.RED;
         Map<Integer, Integer> colors = new HashMap<>();
 
-        for (int j = 0; j < input.size(); ++j) {
+        for (
+            int j = 0;
+            j < input.size();
+            ++j
+        ) {
             ItemStack stack = input.getItem(j);
             if (stack.getItem() instanceof PresentBlockItem) {
                 presentStack = stack.copy();
             } else if (stack.getItem() instanceof PigmentItem pigmentItem) {
-                int color = pigmentItem.getInkColor()
-                                       .getColorInt();
+                int color = pigmentItem
+                    .getInkColor()
+                    .getColorInt();
                 if (colors.containsKey(color)) {
                     colors.put(color, colors.get(color) + 1);
                 } else {

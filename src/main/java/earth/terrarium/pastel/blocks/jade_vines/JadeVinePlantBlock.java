@@ -50,12 +50,17 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
     public static final MapCodec<JadeVinePlantBlock> CODEC = simpleCodec(JadeVinePlantBlock::new);
 
     public static final EnumProperty<JadeVinesPlantPart> PART = EnumProperty.create("part", JadeVinesPlantPart.class);
+
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
 
     public JadeVinePlantBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState((this.stateDefinition.any()).setValue(PART, JadeVinesPlantPart.BASE)
-                                                              .setValue(AGE, 1));
+        this
+            .registerDefaultState(
+                (this.stateDefinition.any())
+                    .setValue(PART, JadeVinesPlantPart.BASE)
+                    .setValue(AGE, 1)
+            );
     }
 
     @Override
@@ -64,8 +69,13 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
     }
 
     public static List<ItemStack> getHarvestedStacks(
-        BlockState state, ServerLevel world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity,
-        ItemStack stack, ResourceKey<LootTable> lootTableIdentifier
+        BlockState state,
+        ServerLevel world,
+        BlockPos pos,
+        @Nullable BlockEntity blockEntity,
+        @Nullable Entity entity,
+        ItemStack stack,
+        ResourceKey<LootTable> lootTableIdentifier
     ) {
         var builder = (new LootParams.Builder(world))
             .withParameter(LootContextParams.BLOCK_STATE, state)
@@ -74,17 +84,20 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
             .withOptionalParameter(LootContextParams.THIS_ENTITY, entity)
             .withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockEntity);
 
-        LootTable lootTable = world.getServer()
-                                   .reloadableRegistries()
-                                   .getLootTable(lootTableIdentifier);
+        LootTable lootTable = world
+            .getServer()
+            .reloadableRegistries()
+            .getLootTable(lootTableIdentifier);
         return lootTable.getRandomItems(builder.create(LootContextParamSets.BLOCK));
     }
 
     static void setHarvested(@NotNull BlockState blockState, @NotNull ServerLevel world, @NotNull BlockPos blockPos) {
-        BlockPos rootsPos = blockState.getValue(PART)
-                                      .getLowestRootsPos(blockPos);
-        if (world.getBlockState(rootsPos)
-                 .getBlock() instanceof JadeVineRootsBlock jadeVineRootsBlock) {
+        BlockPos rootsPos = blockState
+            .getValue(PART)
+            .getLowestRootsPos(blockPos);
+        if (world
+            .getBlockState(rootsPos)
+            .getBlock() instanceof JadeVineRootsBlock jadeVineRootsBlock) {
             jadeVineRootsBlock.setPlantToAge(world, rootsPos, 1);
         }
     }
@@ -105,7 +118,11 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
 
     @Override
     public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos,
+        BlockState state,
+        Direction direction,
+        BlockState neighborState,
+        LevelAccessor world,
+        BlockPos pos,
         BlockPos neighborPos
     ) {
         if (!state.canSurvive(world, pos) || missingBottom(state, world.getBlockState(pos.below()))) {
@@ -132,7 +149,12 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
 
     @Override
     public ItemInteractionResult useItemOn(
-        ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+        ItemStack handStack,
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        InteractionHand hand,
         BlockHitResult hit
     ) {
         JadeVinesGrowthStage growthStage = JadeVinesGrowthStage.fromAge(state.getValue(AGE));
@@ -152,22 +174,33 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
                     setHarvested(state, (ServerLevel) world, pos);
 
                     List<ItemStack> harvestedStacks = getHarvestedStacks(
-                        state, (ServerLevel) world, pos, world.getBlockEntity(pos), player, handStack,
+                        state,
+                        (ServerLevel) world,
+                        pos,
+                        world.getBlockEntity(pos),
+                        player,
+                        handStack,
                         PastelLootTables.JADE_VINE_HARVESTING_NECTAR
                     );
-                    for (ItemStack harvestedStack : harvestedStacks) {
-                        player.getInventory()
-                              .placeItemBackInInventory(harvestedStack);
+                    for (
+                        ItemStack harvestedStack : harvestedStacks
+                    ) {
+                        player
+                            .getInventory()
+                            .placeItemBackInInventory(harvestedStack);
                     }
                     harvested = true;
                 }
             }
 
             if (!harvested) {
-                player.displayClientMessage(
-                    Component.translatable("message.pastel.needs_item_to_harvest")
-                             .append(Items.GLASS_BOTTLE.getDescription()), true
-                );
+                player
+                    .displayClientMessage(
+                        Component
+                            .translatable("message.pastel.needs_item_to_harvest")
+                            .append(Items.GLASS_BOTTLE.getDescription()),
+                        true
+                    );
             }
 
             return ItemInteractionResult.sidedSuccess(world.isClientSide);
@@ -176,12 +209,20 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
                 setHarvested(state, (ServerLevel) world, pos);
 
                 List<ItemStack> harvestedStacks = getHarvestedStacks(
-                    state, (ServerLevel) world, pos, world.getBlockEntity(pos), player, player.getMainHandItem(),
+                    state,
+                    (ServerLevel) world,
+                    pos,
+                    world.getBlockEntity(pos),
+                    player,
+                    player.getMainHandItem(),
                     PastelLootTables.JADE_VINE_HARVESTING_PETALS
                 );
-                for (ItemStack harvestedStack : harvestedStacks) {
-                    player.getInventory()
-                          .placeItemBackInInventory(harvestedStack);
+                for (
+                    ItemStack harvestedStack : harvestedStacks
+                ) {
+                    player
+                        .getInventory()
+                        .placeItemBackInInventory(harvestedStack);
                 }
             }
             return ItemInteractionResult.sidedSuccess(world.isClientSide);
@@ -192,8 +233,9 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return PastelItems.GERMINATED_JADE_VINE_BULB.get()
-                                                    .getDefaultInstance();
+        return PastelItems.GERMINATED_JADE_VINE_BULB
+            .get()
+            .getDefaultInstance();
     }
 
     @Override
@@ -246,7 +288,11 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
 
     @Override
     public void playerDestroy(
-        Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity,
+        Level world,
+        Player player,
+        BlockPos pos,
+        BlockState state,
+        @Nullable BlockEntity blockEntity,
         ItemStack stack
     ) {
         super.playerDestroy(world, player, pos, Blocks.AIR.defaultBlockState(), blockEntity, stack);
@@ -259,8 +305,9 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
 
     @Override
     public boolean onNaturesStaffUse(Level world, BlockPos pos, BlockState state, Player player) {
-        BlockPos rootsPos = state.getValue(PART)
-                                 .getLowestRootsPos(pos);
+        BlockPos rootsPos = state
+            .getValue(PART)
+            .getLowestRootsPos(pos);
         BlockState rootsState = world.getBlockState(rootsPos);
         if (rootsState.getBlock() instanceof JadeVineRootsBlock jadeVineRootsBlock) {
             jadeVineRootsBlock.onNaturesStaffUse(world, rootsPos, rootsState, player);
@@ -274,13 +321,17 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
         MIDDLE,
         TIP;
 
-        @Contract(pure = true)
+        @Contract(
+            pure = true
+        )
         public @NotNull String toString() {
             return this.getSerializedName();
         }
 
         @Override
-        @Contract(pure = true)
+        @Contract(
+            pure = true
+        )
         public @NotNull String getSerializedName() {
             return this == BASE ? "base" : this == MIDDLE ? "middle" : "tip";
         }

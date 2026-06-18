@@ -41,24 +41,41 @@ import java.util.UUID;
 public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipeInput<SpiritInstillerBlockEntity>> {
 
     public static final int CENTER = 0;
+
     public static final int FIRST = 1;
+
     public static final int SECOND = 2;
-    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate(
-        "midgame/build_spirit_instiller_structure");
+
+    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon
+        .locate(
+            "midgame/build_spirit_instiller_structure"
+        );
 
     protected final IngredientStack centerIngredient;
+
     protected final IngredientStack bowlIngredient1;
+
     protected final IngredientStack bowlIngredient2;
+
     protected final ItemStack output;
 
     protected final int craftingTime;
+
     protected final float experience;
+
     protected final boolean noBenefitsFromYieldAndEfficiencyUpgrades;
 
     public SpiritInstillerRecipe(
-        String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier,
-        IngredientStack centerIngredient, IngredientStack bowlIngredient1, IngredientStack bowlIngredient2,
-        ItemStack output, int craftingTime, float experience, boolean noBenefitsFromYieldAndEfficiencyUpgrades
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        IngredientStack centerIngredient,
+        IngredientStack bowlIngredient1,
+        IngredientStack bowlIngredient2,
+        ItemStack output,
+        int craftingTime,
+        float experience,
+        boolean noBenefitsFromYieldAndEfficiencyUpgrades
     ) {
 
         super(group, secret, requiredAdvancementIdentifier);
@@ -78,8 +95,9 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
     public boolean matches(InstanceRecipeInput input, Level world) {
         List<IngredientStack> ing = getIngredientStacks();
 
-        if (bowlMatches(input) && ing.getFirst()
-                                     .test(input.getItem(CENTER)))
+        if (bowlMatches(input) && ing
+            .getFirst()
+            .test(input.getItem(CENTER)))
             return canCraftWithStacks(input, world);
 
         return false;
@@ -87,14 +105,18 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 
     protected boolean bowlMatches(InstanceRecipeInput<?> input) {
         var ing = getIngredientStacks();
-        if (ing.get(FIRST)
-               .test(input.getItem(FIRST)) && ing.get(SECOND)
-                                                 .test(input.getItem(SECOND)))
+        if (ing
+            .get(FIRST)
+            .test(input.getItem(FIRST)) && ing
+                .get(SECOND)
+                .test(input.getItem(SECOND)))
             return true;
 
-        return ing.get(FIRST)
-                  .test(input.getItem(SECOND)) && ing.get(SECOND)
-                                                     .test(input.getItem(FIRST));
+        return ing
+            .get(FIRST)
+            .test(input.getItem(SECOND)) && ing
+                .get(SECOND)
+                .test(input.getItem(FIRST));
     }
 
     @Override
@@ -127,17 +149,27 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
         ItemStack resultStack = getResultItem(drm).copy();
 
         // Yield upgrade
-        if (!areYieldAndEfficiencyUpgradesDisabled() && upgradeHolder.getEffectiveValue(
-            Upgradeable.UpgradeType.YIELD) != 1.0) {
-            int resultCountMod = Support.chanceRound(
-                resultStack.getCount() * upgradeHolder.getEffectiveValue(Upgradeable.UpgradeType.YIELD), world.random);
+        if (!areYieldAndEfficiencyUpgradesDisabled() && upgradeHolder
+            .getEffectiveValue(
+                Upgradeable.UpgradeType.YIELD
+            ) != 1.0) {
+            int resultCountMod = Support
+                .chanceRound(
+                    resultStack.getCount() * upgradeHolder.getEffectiveValue(Upgradeable.UpgradeType.YIELD),
+                    world.random
+                );
             resultStack.setCount(resultCountMod);
         }
 
-        if (resultStack.is(PastelBlocks.MEMORY.get()
-                                              .asItem())) {
-            boolean makeUnrecognizable = spiritInstillerBlockEntity.getItem(0)
-                                                                   .is(PastelItemTags.MEMORY_BONDING_AGENTS_CONCEALABLE);
+        if (resultStack
+            .is(
+                PastelBlocks.MEMORY
+                    .get()
+                    .asItem()
+            )) {
+            boolean makeUnrecognizable = spiritInstillerBlockEntity
+                .getItem(0)
+                .is(PastelItemTags.MEMORY_BONDING_AGENTS_CONCEALABLE);
             if (makeUnrecognizable) {
                 MemoryItem.makeUnrecognizable(resultStack);
             }
@@ -150,8 +182,11 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 
     // Calculate and spawn experience
     protected void spawnXPAndGrantAdvancements(
-        ItemStack resultStack, SpiritInstillerBlockEntity instiller,
-        Upgradeable.UpgradeHolder upgradeHolder, Level world, BlockPos pos
+        ItemStack resultStack,
+        SpiritInstillerBlockEntity instiller,
+        Upgradeable.UpgradeHolder upgradeHolder,
+        Level world,
+        BlockPos pos
     ) {
         int awardedExperience = 0;
         if (getExperience() > 0) {
@@ -163,13 +198,27 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 
         // Run Advancement trigger
         grantPlayerSpiritInstillingAdvancementCriterion(
-            (ServerLevel) instiller.getLevel(), instiller.getBlockPos(), resultStack, awardedExperience);
+            (ServerLevel) instiller.getLevel(),
+            instiller.getBlockPos(),
+            resultStack,
+            awardedExperience
+        );
     }
 
     protected void grantPlayerSpiritInstillingAdvancementCriterion(
-        ServerLevel level, BlockPos pos, ItemStack resultStack, int experience) {
-        Support.areaCriterion(level, Support.H_RANGE, pos, requiredAdvancementIdentifier, p ->
-            PastelCriteria.SPIRIT_INSTILLER_CRAFTING.trigger(p, resultStack, experience));
+        ServerLevel level,
+        BlockPos pos,
+        ItemStack resultStack,
+        int experience
+    ) {
+        Support
+            .areaCriterion(
+                level,
+                Support.H_RANGE,
+                pos,
+                requiredAdvancementIdentifier,
+                p -> PastelCriteria.SPIRIT_INSTILLER_CRAFTING.trigger(p, resultStack, experience)
+            );
 
     }
 
@@ -216,47 +265,71 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 
     public static class Serializer implements RecipeSerializer<SpiritInstillerRecipe> {
 
-        public static final MapCodec<SpiritInstillerRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                          Codec.STRING.optionalFieldOf("group", "")
-                                                                                                                      .forGetter(recipe -> recipe.group),
-                                                                                                          Codec.BOOL.optionalFieldOf("secret", false)
-                                                                                                                    .forGetter(recipe -> recipe.secret),
-                                                                                                          ResourceLocation.CODEC.optionalFieldOf("required_advancement")
-                                                                                                                                .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                                                                                                          IngredientStack.CODEC.fieldOf("center_ingredient")
-                                                                                                                               .forGetter(recipe -> recipe.centerIngredient),
-                                                                                                          IngredientStack.CODEC.fieldOf("ingredient1")
-                                                                                                                               .forGetter(recipe -> recipe.bowlIngredient1),
-                                                                                                          IngredientStack.CODEC.fieldOf("ingredient2")
-                                                                                                                               .forGetter(recipe -> recipe.bowlIngredient2),
-                                                                                                          ItemStack.STRICT_CODEC.fieldOf("result")
-                                                                                                                                .forGetter(recipe -> recipe.output),
-                                                                                                          Codec.INT.optionalFieldOf("time", 200)
-                                                                                                                   .forGetter(recipe -> recipe.craftingTime),
-                                                                                                          Codec.FLOAT.optionalFieldOf("experience", 1.0f)
-                                                                                                                     .forGetter(recipe -> recipe.experience),
-                                                                                                          Codec.BOOL.optionalFieldOf("disable_yield_and_efficiency_upgrades", false)
-                                                                                                                    .forGetter(recipe -> recipe.noBenefitsFromYieldAndEfficiencyUpgrades)
-                                                                                                      )
-                                                                                                      .apply(
-                                                                                                          i,
-                                                                                                          SpiritInstillerRecipe::new
-                                                                                                      ));
+        public static final MapCodec<SpiritInstillerRecipe> CODEC = RecordCodecBuilder
+            .mapCodec(
+                i -> i
+                    .group(
+                        Codec.STRING
+                            .optionalFieldOf("group", "")
+                            .forGetter(recipe -> recipe.group),
+                        Codec.BOOL
+                            .optionalFieldOf("secret", false)
+                            .forGetter(recipe -> recipe.secret),
+                        ResourceLocation.CODEC
+                            .optionalFieldOf("required_advancement")
+                            .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+                        IngredientStack.CODEC
+                            .fieldOf("center_ingredient")
+                            .forGetter(recipe -> recipe.centerIngredient),
+                        IngredientStack.CODEC
+                            .fieldOf("ingredient1")
+                            .forGetter(recipe -> recipe.bowlIngredient1),
+                        IngredientStack.CODEC
+                            .fieldOf("ingredient2")
+                            .forGetter(recipe -> recipe.bowlIngredient2),
+                        ItemStack.STRICT_CODEC
+                            .fieldOf("result")
+                            .forGetter(recipe -> recipe.output),
+                        Codec.INT
+                            .optionalFieldOf("time", 200)
+                            .forGetter(recipe -> recipe.craftingTime),
+                        Codec.FLOAT
+                            .optionalFieldOf("experience", 1.0f)
+                            .forGetter(recipe -> recipe.experience),
+                        Codec.BOOL
+                            .optionalFieldOf("disable_yield_and_efficiency_upgrades", false)
+                            .forGetter(recipe -> recipe.noBenefitsFromYieldAndEfficiencyUpgrades)
+                    )
+                    .apply(
+                        i,
+                        SpiritInstillerRecipe::new
+                    )
+            );
 
-        private static final StreamCodec<RegistryFriendlyByteBuf, SpiritInstillerRecipe> STREAM_CODEC
-            = PacketCodecHelper.tuple(
-            ByteBufCodecs.STRING_UTF8, c -> c.group,
-            ByteBufCodecs.BOOL, c -> c.secret,
-            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
-            IngredientStack.STREAM_CODEC, c -> c.centerIngredient,
-            IngredientStack.STREAM_CODEC, c -> c.bowlIngredient1,
-            IngredientStack.STREAM_CODEC, c -> c.bowlIngredient2,
-            ItemStack.STREAM_CODEC, c -> c.output,
-            ByteBufCodecs.VAR_INT, recipe -> recipe.craftingTime,
-            ByteBufCodecs.FLOAT, recipe -> recipe.experience,
-            ByteBufCodecs.BOOL, recipe -> recipe.noBenefitsFromYieldAndEfficiencyUpgrades,
-            SpiritInstillerRecipe::new
-        );
+        private static final StreamCodec<RegistryFriendlyByteBuf, SpiritInstillerRecipe> STREAM_CODEC = PacketCodecHelper
+            .tuple(
+                ByteBufCodecs.STRING_UTF8,
+                c -> c.group,
+                ByteBufCodecs.BOOL,
+                c -> c.secret,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+                c -> c.requiredAdvancementIdentifier,
+                IngredientStack.STREAM_CODEC,
+                c -> c.centerIngredient,
+                IngredientStack.STREAM_CODEC,
+                c -> c.bowlIngredient1,
+                IngredientStack.STREAM_CODEC,
+                c -> c.bowlIngredient2,
+                ItemStack.STREAM_CODEC,
+                c -> c.output,
+                ByteBufCodecs.VAR_INT,
+                recipe -> recipe.craftingTime,
+                ByteBufCodecs.FLOAT,
+                recipe -> recipe.experience,
+                ByteBufCodecs.BOOL,
+                recipe -> recipe.noBenefitsFromYieldAndEfficiencyUpgrades,
+                SpiritInstillerRecipe::new
+            );
 
         @Override
         public MapCodec<SpiritInstillerRecipe> codec() {

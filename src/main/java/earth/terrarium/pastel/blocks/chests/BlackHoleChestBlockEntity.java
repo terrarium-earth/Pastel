@@ -55,28 +55,45 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
-    implements FilterConfigurable, WorldlyContainer, EventQueue.Callback<Object> {
+    implements
+    FilterConfigurable,
+    WorldlyContainer,
+    EventQueue.Callback<Object> {
 
     public static final int INVENTORY_SIZE = 28;
+
     public static final int ITEM_FILTER_SLOT_COUNT = 5;
+
     public static final int EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT = 27;
+
     private static final int RANGE = 12;
+
     private final ItemAndExperienceEventQueue itemAndExperienceEventQueue;
+
     private final NonNullList<ItemReference> filterItems;
+
     private State state = State.CLOSED_INACTIVE;
+
     private boolean isOpen, isFull, hasXPStorage, updateQueued;
+
     float storageTarget, storagePos, lastStorageTarget, capTarget, capPos, lastCapTarget, orbTarget, orbPos,
         lastOrbTarget, yawTarget, orbYaw, lastYawTarget;
+
     long interpTicks, interpLength = 1, age, storedXP, maxStoredXP;
 
     public BlackHoleChestBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(PastelBlockEntities.BLACK_HOLE_CHEST.get(), blockPos, blockState);
         this.itemAndExperienceEventQueue = new ItemAndExperienceEventQueue(
-            new BlockPositionSource(this.worldPosition), RANGE, this);
+            new BlockPositionSource(this.worldPosition),
+            RANGE,
+            this
+        );
         this.filterItems = NonNullList.withSize(ITEM_FILTER_SLOT_COUNT, ItemReference.empty());
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void tick(@NotNull Level world, BlockPos pos, BlockState state, BlackHoleChestBlockEntity chest) {
         chest.age++;
 
@@ -111,7 +128,7 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
             chest.itemAndExperienceEventQueue.tick(world);
             if (world.getGameTime() % 80 == 0 && !PastelChestBlock.isChestBlocked(world, pos)) {
                 searchForNearbyEntities(chest);
-                if(chest.updateQueued){
+                if (chest.updateQueued) {
                     world.updateNeighborsAt(pos, state.getBlock());
                     chest.updateQueued = false;
                 }
@@ -158,7 +175,11 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
     }
 
     public boolean isFull() {
-        for (int i = 0; i < inventory.getSlots() - 1; i++) {
+        for (
+            int i = 0;
+            i < inventory.getSlots() - 1;
+            i++
+        ) {
             var stack = inventory.getStackInSlot(i);
             if (stack.getCount() < stack.getMaxStackSize()) {
                 return false;
@@ -169,9 +190,9 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
             return true;
 
         var storage = getExperienceStorage();
-        return storage.map(experienceHandler ->
-                               experienceHandler.getStoredAmount() == experienceHandler.getCapacity())
-                      .orElse(true);
+        return storage
+            .map(experienceHandler -> experienceHandler.getStoredAmount() == experienceHandler.getCapacity())
+            .orElse(true);
 
     }
 
@@ -196,25 +217,40 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
         if (world == null)
             return;
 
-        List<ItemEntity> itemEntities = world.getEntities(
-            EntityType.ITEM, getBoxWithRadius(blockEntity.worldPosition, RANGE), Entity::isAlive);
-        for (ItemEntity itemEntity : itemEntities) {
-            if (itemEntity.isAlive() && !itemEntity.getItem()
-                                                   .isEmpty()) {
+        List<ItemEntity> itemEntities = world
+            .getEntities(
+                EntityType.ITEM,
+                getBoxWithRadius(blockEntity.worldPosition, RANGE),
+                Entity::isAlive
+            );
+        for (
+            ItemEntity itemEntity : itemEntities
+        ) {
+            if (itemEntity.isAlive() && !itemEntity
+                .getItem()
+                .isEmpty()) {
                 itemEntity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
             }
         }
 
-        List<ExperienceOrb> experienceOrbEntities = world.getEntities(
-            EntityType.EXPERIENCE_ORB, getBoxWithRadius(blockEntity.worldPosition, RANGE), Entity::isAlive);
-        for (ExperienceOrb experienceOrbEntity : experienceOrbEntities) {
+        List<ExperienceOrb> experienceOrbEntities = world
+            .getEntities(
+                EntityType.EXPERIENCE_ORB,
+                getBoxWithRadius(blockEntity.worldPosition, RANGE),
+                Entity::isAlive
+            );
+        for (
+            ExperienceOrb experienceOrbEntity : experienceOrbEntities
+        ) {
             if (experienceOrbEntity.isAlive()) {
                 experienceOrbEntity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
             }
         }
     }
 
-    @Contract("_, _ -> new")
+    @Contract(
+        "_, _ -> new"
+    )
     protected static @NotNull AABB getBoxWithRadius(BlockPos blockPos, int radius) {
         return AABB.ofSize(Vec3.atCenterOf(blockPos), radius, radius, radius);
     }
@@ -239,7 +275,12 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
 
     @Override
     protected void onInvOpenOrClose(
-        Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        int oldViewerCount,
+        int newViewerCount
+    ) {
         super.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
         updateFullState(true);
     }
@@ -269,12 +310,17 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
 
     @Override
     public boolean canAcceptEvent(
-        Level world, GameEventListener listener, GameEvent.ListenerInfo event, Vec3 sourcePos) {
+        Level world,
+        GameEventListener listener,
+        GameEvent.ListenerInfo event,
+        Vec3 sourcePos
+    ) {
         if (PastelChestBlock.isChestBlocked(world, this.worldPosition)) {
             return false;
         }
-        Entity entity = event.context()
-                             .sourceEntity();
+        Entity entity = event
+            .context()
+            .sourceEntity();
         if (entity instanceof ItemEntity) {
             return true;
         }
@@ -292,42 +338,61 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
             var storage = getExperienceStorage();
 
             if (storage.isPresent() && experienceOrbEntity != null && experienceOrbEntity.isAlive()) {
-                storage.get()
-                       .insert(experienceOrbEntity.getValue(), false);
+                storage
+                    .get()
+                    .insert(experienceOrbEntity.getValue(), false);
                 // overflow experience is void, to not lag the world on large farms
 
                 sendPlayExperienceOrbEntityAbsorbedParticle((ServerLevel) world, experienceOrbEntity);
-                world.playSound(
-                    null, experienceOrbEntity.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS,
-                    0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F
-                );
+                world
+                    .playSound(
+                        null,
+                        experienceOrbEntity.blockPosition(),
+                        SoundEvents.EXPERIENCE_ORB_PICKUP,
+                        SoundSource.BLOCKS,
+                        0.9F + world.random.nextFloat() * 0.2F,
+                        0.9F + world.random.nextFloat() * 0.2F
+                    );
                 experienceOrbEntity.remove(Entity.RemovalReason.DISCARDED);
             }
         } else if (entry instanceof ItemEntityEventQueue.EventEntry itemEntry) {
             ItemEntity itemEntity = itemEntry.itemEntity;
-            if (itemEntity != null && itemEntity.isAlive() &&
-                ((ItemEntityAccessor) itemEntity).getPickupDelay() != 32767 && filter(itemEntity.getItem())) {
-                int previousAmount = itemEntity.getItem()
-                                               .getCount();
-                ItemStack remainingStack = InventoryHelper.smartAddToInventory(
-                    itemEntity.getItem(),
-                    (IItemHandlerModifiable) exposeItemHandlers(Direction.UP), Direction.UP
-                );
+            if (itemEntity != null && itemEntity.isAlive() && ((ItemEntityAccessor) itemEntity)
+                .getPickupDelay() != 32767 && filter(itemEntity.getItem())) {
+                int previousAmount = itemEntity
+                    .getItem()
+                    .getCount();
+                ItemStack remainingStack = InventoryHelper
+                    .smartAddToInventory(
+                        itemEntity.getItem(),
+                        (IItemHandlerModifiable) exposeItemHandlers(Direction.UP),
+                        Direction.UP
+                    );
 
                 if (remainingStack.isEmpty()) {
                     sendPlayItemEntityAbsorbedParticle((ServerLevel) world, itemEntity);
-                    world.playSound(
-                        null, itemEntity.blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
-                        0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            itemEntity.blockPosition(),
+                            SoundEvents.ITEM_PICKUP,
+                            SoundSource.BLOCKS,
+                            0.9F + world.random.nextFloat() * 0.2F,
+                            0.9F + world.random.nextFloat() * 0.2F
+                        );
                     itemEntity.setItem(ItemStack.EMPTY);
                     itemEntity.discard();
                 } else if (remainingStack.getCount() != previousAmount) {
                     sendPlayItemEntityAbsorbedParticle((ServerLevel) world, itemEntity);
-                    world.playSound(
-                        null, itemEntity.blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
-                        0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            itemEntity.blockPosition(),
+                            SoundEvents.ITEM_PICKUP,
+                            SoundSource.BLOCKS,
+                            0.9F + world.random.nextFloat() * 0.2F,
+                            0.9F + world.random.nextFloat() * 0.2F
+                        );
                     itemEntity.setItem(remainingStack);
                 }
                 this.updateQueued = true;
@@ -336,20 +401,28 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
     }
 
     public static void sendPlayItemEntityAbsorbedParticle(ServerLevel world, @NotNull ItemEntity itemEntity) {
-        PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-            world, itemEntity.position(),
-            PastelParticleTypes.BLUE_BUBBLE_POP,
-            1, Vec3.ZERO
-        );
+        PlayParticleWithExactVelocityPayload
+            .playParticleWithExactVelocity(
+                world,
+                itemEntity.position(),
+                PastelParticleTypes.BLUE_BUBBLE_POP,
+                1,
+                Vec3.ZERO
+            );
     }
 
     public static void sendPlayExperienceOrbEntityAbsorbedParticle(
-        ServerLevel world, @NotNull ExperienceOrb experienceOrbEntity) {
-        PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
-            world, experienceOrbEntity.position(),
-            PastelParticleTypes.GREEN_BUBBLE_POP,
-            1, Vec3.ZERO
-        );
+        ServerLevel world,
+        @NotNull ExperienceOrb experienceOrbEntity
+    ) {
+        PlayParticleWithExactVelocityPayload
+            .playParticleWithExactVelocity(
+                world,
+                experienceOrbEntity.position(),
+                PastelParticleTypes.GREEN_BUBBLE_POP,
+                1,
+                Vec3.ZERO
+            );
     }
 
     @Override
@@ -389,14 +462,19 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity
 
     public Optional<ExperienceHandler> getExperienceStorage() {
         assert level != null;
-        return Optional.ofNullable(this.inventory.getStackInSlot(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT)
-                                                 .getCapability(PastelCapabilities.Misc.XP, level.registryAccess()));
+        return Optional
+            .ofNullable(
+                this.inventory
+                    .getStackInSlot(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT)
+                    .getCapability(PastelCapabilities.Misc.XP, level.registryAccess())
+            );
     }
 
     @Override
     public int[] getSlotsForFace(Direction side) {
-        return IntStream.rangeClosed(0, EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT - 1)
-                        .toArray();
+        return IntStream
+            .rangeClosed(0, EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT - 1)
+            .toArray();
     }
 
     @Override

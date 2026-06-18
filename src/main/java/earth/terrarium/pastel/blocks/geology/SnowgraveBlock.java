@@ -18,13 +18,17 @@ import org.jetbrains.annotations.Nullable;
 
 public class SnowgraveBlock extends Block implements EntityBlock {
     public static final EnumProperty<FrozenMob> FROZEN_MOB = EnumProperty.create("frozen_mob", FrozenMob.class);
+
     public static final BooleanProperty SHOULD_RENDER = BooleanProperty.create("should_render");
 
     public SnowgraveBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any()
-                                            .setValue(SHOULD_RENDER, true)
-                                            .setValue(FROZEN_MOB, FrozenMob.SKELETON));
+        registerDefaultState(
+            stateDefinition
+                .any()
+                .setValue(SHOULD_RENDER, true)
+                .setValue(FROZEN_MOB, FrozenMob.SKELETON)
+        );
     }
 
     @Override
@@ -60,11 +64,16 @@ public class SnowgraveBlock extends Block implements EntityBlock {
     @Override
     public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
         super.destroy(level, pos, state);
-        for (Direction dir1 : Direction.values()) {
+        for (
+            Direction dir1 : Direction.values()
+        ) {
             var newPos = pos.relative(dir1);
-            for (Direction dir2 : Direction.values()) {
-                if (level.getBlockState(newPos.relative(dir2))
-                         .is(PastelBlocks.SNOWGRAVE)) {
+            for (
+                Direction dir2 : Direction.values()
+            ) {
+                if (level
+                    .getBlockState(newPos.relative(dir2))
+                    .is(PastelBlocks.SNOWGRAVE)) {
                     level.setBlock(newPos.relative(dir2), Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
                 }
             }

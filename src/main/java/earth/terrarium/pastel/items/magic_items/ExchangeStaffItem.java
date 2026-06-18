@@ -50,6 +50,7 @@ import java.util.Optional;
 public class ExchangeStaffItem extends BuildingStaffItem {
 
     public static final int INK_COST_PER_BLOCK = 5;
+
     public static final int MAX_RANGE = 5;
 
     public ExchangeStaffItem(Properties settings) {
@@ -57,8 +58,9 @@ public class ExchangeStaffItem extends BuildingStaffItem {
     }
 
     public static int getRange(ItemStack stack) {
-        return stack.getOrDefault(PastelDataComponentTypes.EXCHANGING_STAFF, ExchangingStaffComponent.DEFAULT)
-                    .range();
+        return stack
+            .getOrDefault(PastelDataComponentTypes.EXCHANGING_STAFF, ExchangingStaffComponent.DEFAULT)
+            .range();
     }
 
     @Override
@@ -67,18 +69,31 @@ public class ExchangeStaffItem extends BuildingStaffItem {
     }
 
     public static boolean exchange(
-        Level world, BlockPos pos, @NotNull Player player, @NotNull Block targetBlock, ItemStack exchangeStaffItemStack,
+        Level world,
+        BlockPos pos,
+        @NotNull Player player,
+        @NotNull Block targetBlock,
+        ItemStack exchangeStaffItemStack,
         Direction side
     ) {
         return exchange(world, pos, player, targetBlock, exchangeStaffItemStack, false, side);
     }
 
     public static boolean exchange(
-        Level world, BlockPos pos, @NotNull Player player, @NotNull Block targetBlock, ItemStack exchangeStaffItemStack,
-        boolean single, Direction side
+        Level world,
+        BlockPos pos,
+        @NotNull Player player,
+        @NotNull Block targetBlock,
+        ItemStack exchangeStaffItemStack,
+        boolean single,
+        Direction side
     ) {
         Triplet<Block, Item, Integer> replaceData = countSuitableReplacementItems(
-            player, targetBlock, single, INK_COST_PER_BLOCK);
+            player,
+            targetBlock,
+            single,
+            INK_COST_PER_BLOCK
+        );
 
         long blocksToReplaceCount = replaceData.getC();
         if (blocksToReplaceCount == 0) {
@@ -88,8 +103,14 @@ public class ExchangeStaffItem extends BuildingStaffItem {
         Item consumedItem = replaceData.getB();
 
         int range = getRange(exchangeStaffItemStack);
-        List<BlockPos> targetPositions = BuildingHelper.getConnectedBlocks(
-            world, pos, blocksToReplaceCount, range, side);
+        List<BlockPos> targetPositions = BuildingHelper
+            .getConnectedBlocks(
+                world,
+                pos,
+                blocksToReplaceCount,
+                range,
+                side
+            );
         if (targetPositions.isEmpty()) {
             return false;
         }
@@ -98,38 +119,63 @@ public class ExchangeStaffItem extends BuildingStaffItem {
         if (!world.isClientSide) {
             List<ItemStack> stacks = new ArrayList<>();
             BlockState stateToPlace;
-            for (BlockPos targetPosition : targetPositions) {
+            for (
+                BlockPos targetPosition : targetPositions
+            ) {
 
                 // Require both place and break permissions in order to swap blocks
                 if (!GenericClaimModsCompat.canModify(world, pos, player)) continue;
 
                 if (!player.isCreative()) {
                     BlockState droppedStacks = world.getBlockState(targetPosition);
-                    stacks.addAll(Block.getDrops(
-                        droppedStacks, (ServerLevel) world, targetPosition, world.getBlockEntity(targetPosition),
-                        player, exchangeStaffItemStack
-                    ));
+                    stacks
+                        .addAll(
+                            Block
+                                .getDrops(
+                                    droppedStacks,
+                                    (ServerLevel) world,
+                                    targetPosition,
+                                    world.getBlockEntity(targetPosition),
+                                    player,
+                                    exchangeStaffItemStack
+                                )
+                        );
                 }
                 world.setBlockAndUpdate(targetPosition, Blocks.AIR.defaultBlockState());
 
-                stateToPlace = targetBlock.getStateForPlacement(new BuildingStaffPlacementContext(
-                    world, player,
-                    new BlockHitResult(Vec3.atBottomCenterOf(targetPosition), side, targetPosition, false)
-                ));
+                stateToPlace = targetBlock
+                    .getStateForPlacement(
+                        new BuildingStaffPlacementContext(
+                            world,
+                            player,
+                            new BlockHitResult(Vec3.atBottomCenterOf(targetPosition), side, targetPosition, false)
+                        )
+                    );
                 if (stateToPlace != null && stateToPlace.canSurvive(world, targetPosition)) {
                     if (blocksReplaced == 0) {
-                        world.playSound(
-                            null, player.blockPosition(), stateToPlace.getSoundType()
-                                                                      .getPlaceSound(), SoundSource.PLAYERS,
-                            stateToPlace.getSoundType()
-                                        .getVolume(), stateToPlace.getSoundType()
-                                                                  .getPitch()
-                        );
+                        world
+                            .playSound(
+                                null,
+                                player.blockPosition(),
+                                stateToPlace
+                                    .getSoundType()
+                                    .getPlaceSound(),
+                                SoundSource.PLAYERS,
+                                stateToPlace
+                                    .getSoundType()
+                                    .getVolume(),
+                                stateToPlace
+                                    .getSoundType()
+                                    .getPitch()
+                            );
                     }
 
                     if (!world.setBlockAndUpdate(targetPosition, stateToPlace)) {
                         ItemEntity itemEntity = new ItemEntity(
-                            world, targetPosition.getX(), targetPosition.getY(), targetPosition.getZ(),
+                            world,
+                            targetPosition.getX(),
+                            targetPosition.getY(),
+                            targetPosition.getZ(),
                             new ItemStack(consumedItem)
                         );
                         itemEntity.setTarget(player.getUUID());
@@ -142,11 +188,17 @@ public class ExchangeStaffItem extends BuildingStaffItem {
             }
 
             if (!player.isCreative()) {
-                InventoryHelper.removeFromInventoryWithRemainders(
-                    player, new ItemStack(consumedItem, targetPositions.size()));
-                for (ItemStack stack : stacks) {
-                    player.getInventory()
-                          .placeItemBackInInventory(stack);
+                InventoryHelper
+                    .removeFromInventoryWithRemainders(
+                        player,
+                        new ItemStack(consumedItem, targetPositions.size())
+                    );
+                for (
+                    ItemStack stack : stacks
+                ) {
+                    player
+                        .getInventory()
+                        .placeItemBackInInventory(stack);
                 }
                 InkPowered.tryDrainEnergy(player, USED_COLOR, (long) targetPositions.size() * INK_COST_PER_BLOCK);
             }
@@ -172,17 +224,33 @@ public class ExchangeStaffItem extends BuildingStaffItem {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
-        tooltip.add(Component.translatable("item.pastel.exchanging_staff.tooltip.range", getRange(stack))
-                             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("key.pickItem")
-                 .append(Component.translatable("item.pastel.exchanging_staff.tooltop.pickblock", MAX_RANGE))
-                 .withStyle(ChatFormatting.GRAY));
-        getStoredBlock(stack).ifPresent(block -> tooltip.add(
-            Component.translatable("item.pastel.exchanging_staff.tooltip.target", block.getName())
-                     .withStyle(ChatFormatting.GRAY)));
+        tooltip
+            .add(
+                Component
+                    .translatable("item.pastel.exchanging_staff.tooltip.range", getRange(stack))
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        tooltip
+            .add(
+                Component
+                    .translatable("key.pickItem")
+                    .append(Component.translatable("item.pastel.exchanging_staff.tooltop.pickblock", MAX_RANGE))
+                    .withStyle(ChatFormatting.GRAY)
+            );
+        getStoredBlock(stack)
+            .ifPresent(
+                block -> tooltip
+                    .add(
+                        Component
+                            .translatable("item.pastel.exchanging_staff.tooltip.target", block.getName())
+                            .withStyle(ChatFormatting.GRAY)
+                    )
+            );
         addInkPoweredTooltip(tooltip);
     }
 
@@ -213,29 +281,53 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 
                 Direction side = context.getClickedFace();
                 Vec3 sourcePos = new Vec3(
-                    context.getClickLocation()
-                           .x() + side.getStepX() * 0.1, context.getClickLocation()
-                                                                .y() + side.getStepY() * 0.1, context.getClickLocation()
-                                                                                                     .z() +
-                                                                                              side.getStepZ() * 0.1
+                    context
+                        .getClickLocation()
+                        .x() + side.getStepX() * 0.1,
+                    context
+                        .getClickLocation()
+                        .y() + side.getStepY() * 0.1,
+                    context
+                        .getClickLocation()
+                        .z() + side.getStepZ() * 0.1
                 );
-                PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
-                    serverWorld, sourcePos, PastelParticleTypes.SHIMMERSTONE_SPARKLE_SMALL, 15, Vec3.ZERO,
-                    new Vec3(
-                        0.25, 0.25, 0.25)
-                );
-                world.playSound(
-                    null, player.blockPosition(), PastelSounds.EXCHANGING_STAFF_SELECT, SoundSource.PLAYERS, 1.0F,
-                    1.0F
-                );
+                PlayParticleWithRandomOffsetAndVelocityPayload
+                    .playParticleWithRandomOffsetAndVelocity(
+                        serverWorld,
+                        sourcePos,
+                        PastelParticleTypes.SHIMMERSTONE_SPARKLE_SMALL,
+                        15,
+                        Vec3.ZERO,
+                        new Vec3(
+                            0.25,
+                            0.25,
+                            0.25
+                        )
+                    );
+                world
+                    .playSound(
+                        null,
+                        player.blockPosition(),
+                        PastelSounds.EXCHANGING_STAFF_SELECT,
+                        SoundSource.PLAYERS,
+                        1.0F,
+                        1.0F
+                    );
             }
             return InteractionResult.sidedSuccess(world.isClientSide);
         } else {
             // exchanging
             Optional<Block> storedBlock = getStoredBlock(staffStack);
-            if (storedBlock.isPresent() && storedBlock.get() != targetBlock && storedBlock.get()
-                                                                                          .asItem() != Items.AIR &&
-                exchange(world, pos, player, storedBlock.get(), staffStack, context.getClickedFace())) {
+            if (storedBlock.isPresent() && storedBlock.get() != targetBlock && storedBlock
+                .get()
+                .asItem() != Items.AIR && exchange(
+                    world,
+                    pos,
+                    player,
+                    storedBlock.get(),
+                    staffStack,
+                    context.getClickedFace()
+                )) {
 
                 return InteractionResult.sidedSuccess(world.isClientSide);
             }
@@ -262,8 +354,10 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.FORTUNE) || enchantment.is(
-            Enchantments.SILK_TOUCH) || enchantment.is(PastelEnchantments.RESONANCE);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.FORTUNE) || enchantment
+            .is(
+                Enchantments.SILK_TOUCH
+            ) || enchantment.is(PastelEnchantments.RESONANCE);
     }
 
 }

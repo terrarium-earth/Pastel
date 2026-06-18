@@ -35,6 +35,7 @@ import static earth.terrarium.pastel.helpers.interaction.InWorldInteractionHelpe
 public class MilkingIdolBlock extends IdolBlock {
 
     protected static final int BUCKET_SEARCH_RANGE = 7;
+
     protected final int milkingRange;
 
     public MilkingIdolBlock(Properties settings, ParticleOptions particleEffect, int milkingRange) {
@@ -50,19 +51,34 @@ public class MilkingIdolBlock extends IdolBlock {
 
     @Override
     public boolean trigger(
-        @NotNull ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side) {
+        @NotNull ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    ) {
         int boxSize = milkingRange + milkingRange;
 
         // Goats
-        List<Goat> goatEntities = world.getEntitiesOfClass(
-            Goat.class, AABB.ofSize(Vec3.atCenterOf(blockPos), boxSize, boxSize, boxSize));
-        for (Goat goatEntity : goatEntities) {
+        List<Goat> goatEntities = world
+            .getEntitiesOfClass(
+                Goat.class,
+                AABB.ofSize(Vec3.atCenterOf(blockPos), boxSize, boxSize, boxSize)
+            );
+        for (
+            Goat goatEntity : goatEntities
+        ) {
             if (!goatEntity.isBaby()) {
                 boolean emptyBucketFound = findAndDecreaseClosestItemEntityOfItem(
-                    world, goatEntity.position(), Items.BUCKET, BUCKET_SEARCH_RANGE);
+                    world,
+                    goatEntity.position(),
+                    Items.BUCKET,
+                    BUCKET_SEARCH_RANGE
+                );
                 if (emptyBucketFound) {
-                    SoundEvent soundEvent = goatEntity.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_MILK
-                                                                         : SoundEvents.GOAT_MILK;
+                    SoundEvent soundEvent = goatEntity.isScreamingGoat()
+                        ? SoundEvents.GOAT_SCREAMING_MILK
+                        : SoundEvents.GOAT_MILK;
                     world.playSound(null, goatEntity.blockPosition(), soundEvent, SoundSource.NEUTRAL, 1.0F, 1.0F);
                     spawnItemStackAtEntity(world, goatEntity, Items.MILK_BUCKET.getDefaultInstance());
                 }
@@ -70,44 +86,83 @@ public class MilkingIdolBlock extends IdolBlock {
         }
 
         // Cows (includes Mooshrooms)
-        List<Cow> cowEntities = world.getEntitiesOfClass(
-            Cow.class, AABB.ofSize(Vec3.atCenterOf(blockPos), boxSize, boxSize, boxSize));
-        for (Cow cowEntity : cowEntities) {
+        List<Cow> cowEntities = world
+            .getEntitiesOfClass(
+                Cow.class,
+                AABB.ofSize(Vec3.atCenterOf(blockPos), boxSize, boxSize, boxSize)
+            );
+        for (
+            Cow cowEntity : cowEntities
+        ) {
             if (!cowEntity.isBaby()) {
                 boolean emptyBucketFound = findAndDecreaseClosestItemEntityOfItem(
-                    world, cowEntity.position(), Items.BUCKET, BUCKET_SEARCH_RANGE);
+                    world,
+                    cowEntity.position(),
+                    Items.BUCKET,
+                    BUCKET_SEARCH_RANGE
+                );
                 if (emptyBucketFound) {
-                    world.playSound(
-                        null, cowEntity.blockPosition(), SoundEvents.COW_MILK, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                    world
+                        .playSound(
+                            null,
+                            cowEntity.blockPosition(),
+                            SoundEvents.COW_MILK,
+                            SoundSource.NEUTRAL,
+                            1.0F,
+                            1.0F
+                        );
                     spawnItemStackAtEntity(world, cowEntity, Items.MILK_BUCKET.getDefaultInstance());
                 }
             }
         }
 
         // Egg Laying Wooly Pigs
-        List<EggLayingWoolyPigEntity> eggLayingWoolyPigEntities = world.getEntitiesOfClass(
-            EggLayingWoolyPigEntity.class, AABB.ofSize(Vec3.atCenterOf(blockPos), boxSize, boxSize, boxSize));
-        for (EggLayingWoolyPigEntity eggLayingWoolyPigEntity : eggLayingWoolyPigEntities) {
+        List<EggLayingWoolyPigEntity> eggLayingWoolyPigEntities = world
+            .getEntitiesOfClass(
+                EggLayingWoolyPigEntity.class,
+                AABB.ofSize(Vec3.atCenterOf(blockPos), boxSize, boxSize, boxSize)
+            );
+        for (
+            EggLayingWoolyPigEntity eggLayingWoolyPigEntity : eggLayingWoolyPigEntities
+        ) {
             if (!eggLayingWoolyPigEntity.isBaby()) {
                 boolean emptyBucketFound = findAndDecreaseClosestItemEntityOfItem(
-                    world, eggLayingWoolyPigEntity.position(), Items.BUCKET, BUCKET_SEARCH_RANGE);
+                    world,
+                    eggLayingWoolyPigEntity.position(),
+                    Items.BUCKET,
+                    BUCKET_SEARCH_RANGE
+                );
                 if (emptyBucketFound) {
-                    world.playSound(
-                        null, eggLayingWoolyPigEntity.blockPosition(), SoundEvents.COW_MILK, SoundSource.NEUTRAL, 1.0F,
-                        1.0F
-                    );
+                    world
+                        .playSound(
+                            null,
+                            eggLayingWoolyPigEntity.blockPosition(),
+                            SoundEvents.COW_MILK,
+                            SoundSource.NEUTRAL,
+                            1.0F,
+                            1.0F
+                        );
                     spawnItemStackAtEntity(world, eggLayingWoolyPigEntity, Items.MILK_BUCKET.getDefaultInstance());
                 }
             }
         }
 
         // Mooshrooms (Mooshroom Stew / Suspicious Stew)
-        List<MushroomCow> mooshroomEntities = world.getEntitiesOfClass(
-            MushroomCow.class, AABB.ofSize(Vec3.atCenterOf(blockPos), boxSize, boxSize, boxSize));
-        for (MushroomCow mooshroomEntity : mooshroomEntities) {
+        List<MushroomCow> mooshroomEntities = world
+            .getEntitiesOfClass(
+                MushroomCow.class,
+                AABB.ofSize(Vec3.atCenterOf(blockPos), boxSize, boxSize, boxSize)
+            );
+        for (
+            MushroomCow mooshroomEntity : mooshroomEntities
+        ) {
             if (!mooshroomEntity.isBaby()) {
                 boolean emptyBowlFound = findAndDecreaseClosestItemEntityOfItem(
-                    world, mooshroomEntity.position(), Items.BOWL, BUCKET_SEARCH_RANGE);
+                    world,
+                    mooshroomEntity.position(),
+                    Items.BOWL,
+                    BUCKET_SEARCH_RANGE
+                );
                 if (emptyBowlFound) {
                     MooshroomEntityAccessor accessor = (MooshroomEntityAccessor) mooshroomEntity;
 
@@ -133,10 +188,17 @@ public class MilkingIdolBlock extends IdolBlock {
 
     private void spawnItemStackAtEntity(ServerLevel world, @NotNull LivingEntity livingEntity, ItemStack itemStack) {
         ItemEntity itemEntity = new ItemEntity(
-            world, livingEntity.position()
-                               .x(), livingEntity.position()
-                                                 .y() + 0.5, livingEntity.position()
-                                                                         .z(), itemStack
+            world,
+            livingEntity
+                .position()
+                .x(),
+            livingEntity
+                .position()
+                .y() + 0.5,
+            livingEntity
+                .position()
+                .z(),
+            itemStack
         );
         itemEntity.push(0, -0.2F, 0);
         world.addFreshEntity(itemEntity);
@@ -144,7 +206,11 @@ public class MilkingIdolBlock extends IdolBlock {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(Component.translatable("block.pastel.milking_idol.tooltip", this.milkingRange));
         tooltip.add(Component.translatable("block.pastel.milking_idol.tooltip2"));

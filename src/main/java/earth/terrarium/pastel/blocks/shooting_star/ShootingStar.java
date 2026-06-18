@@ -27,9 +27,11 @@ public interface ShootingStar {
         GEMSTONE("gemstone", PastelLootTables.GEMSTONE_SHOOTING_STAR);
 
         public static Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+
         public static final StreamCodec<ByteBuf, Variant> STREAM_CODEC = PacketCodecHelper.enumOf(Variant::values);
 
         private final String name;
+
         private final ResourceKey<LootTable> lootTable;
 
         Variant(String name, ResourceKey<LootTable> lootTable) {
@@ -64,9 +66,12 @@ public interface ShootingStar {
         public static Variant getType(String name) {
             Variant[] types = values();
 
-            for (Variant type : types) {
-                if (type.getName()
-                        .equals(name)) {
+            for (
+                Variant type : types
+            ) {
+                if (type
+                    .getName()
+                    .equals(name)) {
                     return type;
                 }
             }
@@ -74,7 +79,9 @@ public interface ShootingStar {
             return types[0];
         }
 
-        @Contract("_ -> new")
+        @Contract(
+            "_ -> new"
+        )
         public static @NotNull ResourceKey<LootTable> getLootTable(int index) {
             return values()[index].getLootTable();
         }
@@ -124,8 +131,10 @@ public interface ShootingStar {
                     }
                 }
                 case COLORFUL -> {
-                    return ColorHelper.getRGBVec(
-                        ColorHelper.VANILLA_DYE_COLORS.get(random.nextInt(ColorHelper.VANILLA_DYE_COLORS.size())));
+                    return ColorHelper
+                        .getRGBVec(
+                            ColorHelper.VANILLA_DYE_COLORS.get(random.nextInt(ColorHelper.VANILLA_DYE_COLORS.size()))
+                        );
                 }
                 case FIERY -> {
                     int r = random.nextInt(2);

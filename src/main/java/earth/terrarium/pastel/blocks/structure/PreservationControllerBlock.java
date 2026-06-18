@@ -40,7 +40,12 @@ public class PreservationControllerBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(
-        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        Player player,
+        BlockHitResult hit
+    ) {
         if (!world.isClientSide && player.isCreative()) { // for testing and building structures
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof PreservationControllerBlockEntity preservationControllerBlockEntity) {
@@ -56,28 +61,35 @@ public class PreservationControllerBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        Direction direction = ctx.getClickedFace()
-                                 .getOpposite();
-        if (direction == Direction.UP ||
-            direction == Direction.DOWN) { // those do not exist in Properties.HORIZONTAL_FACING
+        Direction direction = ctx
+            .getClickedFace()
+            .getOpposite();
+        if (direction == Direction.UP || direction == Direction.DOWN) { // those do not exist in Properties.HORIZONTAL_FACING
             direction = Direction.NORTH;
         }
-        return this.defaultBlockState()
-                   .setValue(FACING, direction);
+        return this
+            .defaultBlockState()
+            .setValue(FACING, direction);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PreservationControllerBlockEntity(pos, state);
     }
 
-    @Nullable
-    @Override
+    @Nullable @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : createTickerHelper(
-            type, PastelBlockEntities.PRESERVATION_CONTROLLER.get(), PreservationControllerBlockEntity::serverTick);
+        Level world,
+        BlockState state,
+        BlockEntityType<T> type
+    ) {
+        return world.isClientSide
+            ? null
+            : createTickerHelper(
+                type,
+                PastelBlockEntities.PRESERVATION_CONTROLLER.get(),
+                PreservationControllerBlockEntity::serverTick
+            );
     }
 
     @Override

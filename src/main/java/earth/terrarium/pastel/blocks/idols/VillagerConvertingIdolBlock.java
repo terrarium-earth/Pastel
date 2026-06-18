@@ -35,23 +35,39 @@ public class VillagerConvertingIdolBlock extends IdolBlock {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(Component.translatable("block.pastel.villager_converting_idol.tooltip"));
     }
 
     @Override
     public boolean trigger(
-        ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side) {
+        ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    ) {
         if (entity instanceof Villager villagerEntity) {
             ZombieVillager zombieVillagerEntity = villagerEntity.convertTo(EntityType.ZOMBIE_VILLAGER, false);
-            zombieVillagerEntity.finalizeSpawn(
-                world, world.getCurrentDifficultyAt(zombieVillagerEntity.blockPosition()), MobSpawnType.CONVERSION,
-                new Zombie.ZombieGroupData(false, true)
-            );
+            zombieVillagerEntity
+                .finalizeSpawn(
+                    world,
+                    world.getCurrentDifficultyAt(zombieVillagerEntity.blockPosition()),
+                    MobSpawnType.CONVERSION,
+                    new Zombie.ZombieGroupData(false, true)
+                );
             zombieVillagerEntity.setVillagerData(villagerEntity.getVillagerData());
-            zombieVillagerEntity.setGossips(villagerEntity.getGossips()
-                                                          .store(NbtOps.INSTANCE));
+            zombieVillagerEntity
+                .setGossips(
+                    villagerEntity
+                        .getGossips()
+                        .store(NbtOps.INSTANCE)
+                );
             zombieVillagerEntity.setTradeOffers(villagerEntity.getOffers());
             zombieVillagerEntity.setVillagerXp(villagerEntity.getVillagerXp());
 

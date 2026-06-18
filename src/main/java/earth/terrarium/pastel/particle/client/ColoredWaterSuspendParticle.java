@@ -14,17 +14,27 @@ import org.joml.Vector3f;
 
 import java.util.Optional;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class ColoredWaterSuspendParticle extends SuspendedParticle {
 
     public ColoredWaterSuspendParticle(
-        ClientLevel world, SpriteSet spriteProvider, double x, double y, double z, double velocityX, double velocityY,
+        ClientLevel world,
+        SpriteSet spriteProvider,
+        double x,
+        double y,
+        double z,
+        double velocityX,
+        double velocityY,
         double velocityZ
     ) {
         super(world, spriteProvider, x, y, z, velocityX, velocityY, velocityZ);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public static class Factory implements ParticleProvider<ColoredSporeBlossomAirParticleEffect> {
 
         private final SpriteSet spriteProvider;
@@ -35,13 +45,27 @@ public class ColoredWaterSuspendParticle extends SuspendedParticle {
 
         @Override
         public TextureSheetParticle createParticle(
-            ColoredSporeBlossomAirParticleEffect parameters, ClientLevel world, double x, double y, double z,
-            double velocityX, double velocityY, double velocityZ
+            ColoredSporeBlossomAirParticleEffect parameters,
+            ClientLevel world,
+            double x,
+            double y,
+            double z,
+            double velocityX,
+            double velocityY,
+            double velocityZ
         ) {
             Vector3f color = parameters.getColor();
 
             SuspendedParticle particle = new ColoredWaterSuspendParticle(
-                world, this.spriteProvider, x, y, z, 0.0, -0.800000011920929, 0.0) {
+                world,
+                this.spriteProvider,
+                x,
+                y,
+                z,
+                0.0,
+                -0.800000011920929,
+                0.0
+            ) {
                 public Optional<ParticleGroup> getParticleGroup() {
                     return Optional.of(ParticleGroup.SPORE_BLOSSOM);
                 }

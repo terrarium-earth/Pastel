@@ -13,19 +13,26 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class PastelGemstoneBlock extends AmethystBlock {
 
-    public static final MapCodec<PastelGemstoneBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                                                                                                    propertiesCodec(),
-                                                                                                    SoundEvent.DIRECT_CODEC.fieldOf("hit_sound_event")
-                                                                                                                           .forGetter(b -> b.hitSoundEvent),
-                                                                                                    SoundEvent.DIRECT_CODEC.fieldOf("chime_sound_event")
-                                                                                                                           .forGetter(b -> b.chimeSoundEvent)
-                                                                                                )
-                                                                                                .apply(
-                                                                                                    i,
-                                                                                                    PastelGemstoneBlock::new
-                                                                                                ));
+    public static final MapCodec<PastelGemstoneBlock> CODEC = RecordCodecBuilder
+        .mapCodec(
+            i -> i
+                .group(
+                    propertiesCodec(),
+                    SoundEvent.DIRECT_CODEC
+                        .fieldOf("hit_sound_event")
+                        .forGetter(b -> b.hitSoundEvent),
+                    SoundEvent.DIRECT_CODEC
+                        .fieldOf("chime_sound_event")
+                        .forGetter(b -> b.chimeSoundEvent)
+                )
+                .apply(
+                    i,
+                    PastelGemstoneBlock::new
+                )
+        );
 
     private final SoundEvent hitSoundEvent;
+
     private final SoundEvent chimeSoundEvent;
 
     public PastelGemstoneBlock(Properties settings, SoundEvent hitSoundEvent, SoundEvent chimeSoundEvent) {
@@ -43,10 +50,24 @@ public class PastelGemstoneBlock extends AmethystBlock {
     public void onProjectileHit(Level world, BlockState state, BlockHitResult hit, Projectile projectile) {
         if (!world.isClientSide) {
             BlockPos blockPos = hit.getBlockPos();
-            world.playSound(
-                null, blockPos, hitSoundEvent, SoundSource.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
-            world.playSound(
-                null, blockPos, chimeSoundEvent, SoundSource.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
+            world
+                .playSound(
+                    null,
+                    blockPos,
+                    hitSoundEvent,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    0.5F + world.random.nextFloat() * 1.2F
+                );
+            world
+                .playSound(
+                    null,
+                    blockPos,
+                    chimeSoundEvent,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    0.5F + world.random.nextFloat() * 1.2F
+                );
         }
     }
 

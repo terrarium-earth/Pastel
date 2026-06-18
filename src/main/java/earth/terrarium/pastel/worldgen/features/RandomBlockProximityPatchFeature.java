@@ -27,25 +27,35 @@ public class RandomBlockProximityPatchFeature extends Feature<RandomBlockProximi
         int xzSpreadPlus1 = randomPatchFeatureConfig.xzSpread() + 1;
         int ySpreadPlus1 = randomPatchFeatureConfig.ySpread() + 1;
 
-        for (int l = 0; l < randomPatchFeatureConfig.tries(); ++l) {
-            mutable.setWithOffset(
-                blockPos, random.nextInt(xzSpreadPlus1) - random.nextInt(xzSpreadPlus1),
-                random.nextInt(ySpreadPlus1) - random.nextInt(ySpreadPlus1),
-                random.nextInt(xzSpreadPlus1) - random.nextInt(xzSpreadPlus1)
-            );
+        for (
+            int l = 0;
+            l < randomPatchFeatureConfig.tries();
+            ++l
+        ) {
+            mutable
+                .setWithOffset(
+                    blockPos,
+                    random.nextInt(xzSpreadPlus1) - random.nextInt(xzSpreadPlus1),
+                    random.nextInt(ySpreadPlus1) - random.nextInt(ySpreadPlus1),
+                    random.nextInt(xzSpreadPlus1) - random.nextInt(xzSpreadPlus1)
+                );
             if (closeToBlock(
-                structureWorldAccess, mutable, randomPatchFeatureConfig.blockScanRange(),
+                structureWorldAccess,
+                mutable,
+                randomPatchFeatureConfig.blockScanRange(),
                 randomPatchFeatureConfig.blocksToCheckFor()
             )) {
-                if (randomPatchFeatureConfig.closeToBlockFeature()
-                                            .value()
-                                            .place(structureWorldAccess, context.chunkGenerator(), random, mutable)) {
+                if (randomPatchFeatureConfig
+                    .closeToBlockFeature()
+                    .value()
+                    .place(structureWorldAccess, context.chunkGenerator(), random, mutable)) {
                     ++placedFeatureCount;
                 }
             } else {
-                if (randomPatchFeatureConfig.fallbackFeature()
-                                            .value()
-                                            .place(structureWorldAccess, context.chunkGenerator(), random, mutable)) {
+                if (randomPatchFeatureConfig
+                    .fallbackFeature()
+                    .value()
+                    .place(structureWorldAccess, context.chunkGenerator(), random, mutable)) {
                     ++placedFeatureCount;
                 }
             }
@@ -56,10 +66,17 @@ public class RandomBlockProximityPatchFeature extends Feature<RandomBlockProximi
     }
 
     protected boolean closeToBlock(
-        WorldGenLevel world, BlockPos pos, int searchRange, HolderSet<Block> blocksToSearchFor) {
-        for (BlockPos currentPos : BlockPos.withinManhattan(pos, searchRange, searchRange, searchRange)) {
-            if (world.getBlockState(currentPos)
-                     .is(blocksToSearchFor)) {
+        WorldGenLevel world,
+        BlockPos pos,
+        int searchRange,
+        HolderSet<Block> blocksToSearchFor
+    ) {
+        for (
+            BlockPos currentPos : BlockPos.withinManhattan(pos, searchRange, searchRange, searchRange)
+        ) {
+            if (world
+                .getBlockState(currentPos)
+                .is(blocksToSearchFor)) {
                 return true;
             }
         }

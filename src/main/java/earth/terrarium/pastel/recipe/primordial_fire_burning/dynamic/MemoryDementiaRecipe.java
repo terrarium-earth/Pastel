@@ -19,22 +19,29 @@ public class MemoryDementiaRecipe extends PrimordialFireBurningRecipe {
 
     public MemoryDementiaRecipe() {
         super(
-            "", false, Optional.of(UNLOCK_IDENTIFIER),
-            Ingredient.of(
-                MemoryItem.getForEntityType(EntityType.BEE, 1), MemoryItem.getForEntityType(EntityType.FOX, 10),
-                MemoryItem.getForEntityType(EntityType.SKELETON, 5), MemoryItem.getForEntityType(EntityType.HUSK, 50),
-                MemoryItem.getForEntityType(EntityType.BLAZE, -1)
-            ),
-            PastelBlocks.MEMORY.get()
-                               .asItem()
-                               .getDefaultInstance()
+            "",
+            false,
+            Optional.of(UNLOCK_IDENTIFIER),
+            Ingredient
+                .of(
+                    MemoryItem.getForEntityType(EntityType.BEE, 1),
+                    MemoryItem.getForEntityType(EntityType.FOX, 10),
+                    MemoryItem.getForEntityType(EntityType.SKELETON, 5),
+                    MemoryItem.getForEntityType(EntityType.HUSK, 50),
+                    MemoryItem.getForEntityType(EntityType.BLAZE, -1)
+                ),
+            PastelBlocks.MEMORY
+                .get()
+                .asItem()
+                .getDefaultInstance()
         );
     }
 
     @Override
     public boolean matches(RecipeInput inv, Level world) {
-        return inv.getItem(0)
-                  .has(PastelDataComponentTypes.MEMORY);
+        return inv
+            .getItem(0)
+            .has(PastelDataComponentTypes.MEMORY);
     }
 
     @Override

@@ -37,16 +37,19 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
-//TODO: GET THIS LOOT CONTAINER SHIT OUT OF MY CHEST
+// TODO: GET THIS LOOT CONTAINER SHIT OUT OF MY CHEST
 @OnlyIn(
-    value = Dist.CLIENT,
-    _interface = LidBlockEntity.class
+    value = Dist.CLIENT, _interface = LidBlockEntity.class
 )
 public abstract class PastelChestBlockEntity extends RandomizableContainerBlockEntity
-    implements LidBlockEntity, SidedCapabilityProvider {
+    implements
+    LidBlockEntity,
+    SidedCapabilityProvider {
 
     public final ContainerOpenersCounter stateManager;
+
     protected final ChestLidController lidAnimator;
+
     protected FriendlyStackHandler inventory;
 
     protected PastelChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
@@ -69,7 +72,12 @@ public abstract class PastelChestBlockEntity extends RandomizableContainerBlockE
 
             @Override
             protected void openerCountChanged(
-                Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+                Level world,
+                BlockPos pos,
+                BlockState state,
+                int oldViewerCount,
+                int newViewerCount
+            ) {
                 onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
             }
 
@@ -94,19 +102,30 @@ public abstract class PastelChestBlockEntity extends RandomizableContainerBlockE
     }
 
     private static void playSound(Level world, BlockPos pos, SoundEvent soundEvent) {
-        world.playSound(
-            null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, soundEvent, SoundSource.BLOCKS, 0.5F,
-            world.random.nextFloat() * 0.1F + 0.9F
-        );
+        world
+            .playSound(
+                null,
+                pos.getX() + 0.5D,
+                pos.getY() + 0.5D,
+                pos.getZ() + 0.5D,
+                soundEvent,
+                SoundSource.BLOCKS,
+                0.5F,
+                world.random.nextFloat() * 0.1F + 0.9F
+            );
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings(
+        "unused"
+    )
     public static void clientTick(Level world, BlockPos pos, BlockState state, PastelChestBlockEntity blockEntity) {
         blockEntity.lidAnimator.tickLid();
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(
+        Dist.CLIENT
+    )
     public float getOpenNess(float tickDelta) {
         return this.lidAnimator.getOpenness(tickDelta);
     }
@@ -130,7 +149,12 @@ public abstract class PastelChestBlockEntity extends RandomizableContainerBlockE
     }
 
     protected void onInvOpenOrClose(
-        Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        Level world,
+        BlockPos pos,
+        BlockState state,
+        int oldViewerCount,
+        int newViewerCount
+    ) {
         Block block = state.getBlock();
         world.blockEvent(pos, block, 1, newViewerCount);
     }
@@ -192,8 +216,11 @@ public abstract class PastelChestBlockEntity extends RandomizableContainerBlockE
     @Override
     protected void collectImplicitComponents(DataComponentMap.Builder componentMapBuilder) {
         super.collectImplicitComponents(componentMapBuilder);
-        componentMapBuilder.set(
-            DataComponents.CONTAINER_LOOT, new SeededContainerLoot(this.lootTable, this.lootTableSeed));
+        componentMapBuilder
+            .set(
+                DataComponents.CONTAINER_LOOT,
+                new SeededContainerLoot(this.lootTable, this.lootTableSeed)
+            );
     }
 
     @Override

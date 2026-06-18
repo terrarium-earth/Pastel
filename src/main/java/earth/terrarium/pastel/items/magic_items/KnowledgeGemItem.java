@@ -93,12 +93,17 @@ public class KnowledgeGemItem extends Item implements LoomPatternProvider {
             storage.insert(inserted, false);
 
             if (remainingUseTicks % 4 == 0) {
-                world.playSound(
-                    null, user.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.3F, 0.8F +
-                                                                                                              world.getRandom()
-                                                                                                                   .nextFloat() *
-                                                                                                              0.4F
-                );
+                world
+                    .playSound(
+                        null,
+                        user.blockPosition(),
+                        SoundEvents.EXPERIENCE_ORB_PICKUP,
+                        SoundSource.PLAYERS,
+                        0.3F,
+                        0.8F + world
+                            .getRandom()
+                            .nextFloat() * 0.4F
+                    );
             }
         } else {
             // drain experience from gem; give to player
@@ -113,12 +118,17 @@ public class KnowledgeGemItem extends Item implements LoomPatternProvider {
             storage.extract(drain, false);
 
             if (remainingUseTicks % 4 == 0) {
-                world.playSound(
-                    null, user.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.3F, 0.8F +
-                                                                                                              world.getRandom()
-                                                                                                                   .nextFloat() *
-                                                                                                              0.4F
-                );
+                world
+                    .playSound(
+                        null,
+                        user.blockPosition(),
+                        SoundEvents.EXPERIENCE_ORB_PICKUP,
+                        SoundSource.PLAYERS,
+                        0.3F,
+                        0.8F + world
+                            .getRandom()
+                            .nextFloat() * 0.4F
+                    );
             }
         }
     }
@@ -141,26 +151,43 @@ public class KnowledgeGemItem extends Item implements LoomPatternProvider {
         }
 
         if (storedExperience == 0) {
-            tooltip.add(Component.literal("0 ")
-                                 .withStyle(ChatFormatting.DARK_GRAY)
-                                 .append(Component.translatable(
-                                                      "item.pastel.knowledge_gem.tooltip.stored_experience",
-                                                      maxExperience
-                                                  )
-                                                  .withStyle(ChatFormatting.GRAY)));
+            tooltip
+                .add(
+                    Component
+                        .literal("0 ")
+                        .withStyle(ChatFormatting.DARK_GRAY)
+                        .append(
+                            Component
+                                .translatable(
+                                    "item.pastel.knowledge_gem.tooltip.stored_experience",
+                                    maxExperience
+                                )
+                                .withStyle(ChatFormatting.GRAY)
+                        )
+                );
         } else {
-            tooltip.add(Component.literal(storedExperience + " ")
-                                 .withStyle(ChatFormatting.GREEN)
-                                 .append(Component.translatable(
-                                                      "item.pastel.knowledge_gem.tooltip.stored_experience",
-                                                      maxExperience
-                                                  )
-                                                  .withStyle(ChatFormatting.GRAY)));
+            tooltip
+                .add(
+                    Component
+                        .literal(storedExperience + " ")
+                        .withStyle(ChatFormatting.GREEN)
+                        .append(
+                            Component
+                                .translatable(
+                                    "item.pastel.knowledge_gem.tooltip.stored_experience",
+                                    maxExperience
+                                )
+                                .withStyle(ChatFormatting.GRAY)
+                        )
+                );
         }
         if (shouldDisplayUsageTooltip(stack)) {
-            tooltip.add(
-                Component.translatable("item.pastel.knowledge_gem.tooltip.use", getTransferRate(registries, stack))
-                         .withStyle(ChatFormatting.GRAY));
+            tooltip
+                .add(
+                    Component
+                        .translatable("item.pastel.knowledge_gem.tooltip.use", getTransferRate(registries, stack))
+                        .withStyle(ChatFormatting.GRAY)
+                );
             addBannerPatternProviderTooltip(tooltip);
         }
     }
@@ -197,19 +224,21 @@ public class KnowledgeGemItem extends Item implements LoomPatternProvider {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY) ||
-               enchantment.is(Enchantments.QUICK_CHARGE);
+        return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY) || enchantment
+            .is(Enchantments.QUICK_CHARGE);
     }
 
     public static class Wrapper implements ExperienceHandler {
 
         private final ItemStack holder;
+
         private final HolderLookup.Provider lookup;
 
         public Wrapper(ItemStack holder, HolderLookup.Provider lookup) {
             if (!(holder.getItem() instanceof KnowledgeGemItem))
                 throw new IllegalArgumentException(
-                    "Tried to make a knowledge gem wrapper for a non-knowledge gem stack");
+                    "Tried to make a knowledge gem wrapper for a non-knowledge gem stack"
+                );
 
             this.holder = holder;
             this.lookup = lookup;

@@ -30,10 +30,16 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 
     public HardcorePlayerRevivalRecipe() {
         super(
-            "", false, Optional.empty(),
-            IngredientStack.ofItems(Blocks.PLAYER_HEAD.asItem()), IngredientStack.ofItems(Items.TOTEM_OF_UNDYING),
+            "",
+            false,
+            Optional.empty(),
+            IngredientStack.ofItems(Blocks.PLAYER_HEAD.asItem()),
+            IngredientStack.ofItems(Items.TOTEM_OF_UNDYING),
             IngredientStack.ofItems(Items.ENCHANTED_GOLDEN_APPLE),
-            ItemStack.EMPTY, 1200, 100, true
+            ItemStack.EMPTY,
+            1200,
+            100,
+            true
         );
     }
 
@@ -47,13 +53,18 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
         SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
         GameProfile gameProfile = getSkullOwner(recipeInput.getItem(SpiritInstillerRecipe.CENTER));
         if (gameProfile != null && PastelCommon.getSidedServer() != null) {
-            ServerPlayer revivedPlayer = PastelCommon.getSidedServer()
-                                                     .getPlayerList()
-                                                     .getPlayerByName(gameProfile.getName());
+            ServerPlayer revivedPlayer = PastelCommon
+                .getSidedServer()
+                .getPlayerList()
+                .getPlayerByName(gameProfile.getName());
             if (revivedPlayer != null) {
                 HardcoreDeathTracker.removeHardcoreDeath(gameProfile);
-                revivedPlayer.setGameMode(PastelCommon.getSidedServer()
-                                                      .getDefaultGameType());
+                revivedPlayer
+                    .setGameMode(
+                        PastelCommon
+                            .getSidedServer()
+                            .getDefaultGameType()
+                    );
 
                 Rotation blockRotation = spiritInstillerBlockEntity.getMultiblockRotation();
                 float yaw = 0.0F;
@@ -65,10 +76,15 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
                 }
 
                 BlockPos pos = spiritInstillerBlockEntity.getBlockPos();
-                revivedPlayer.teleportTo(
-                    (ServerLevel) spiritInstillerBlockEntity.getLevel(), pos.getX(), pos.getY(), pos.getZ(),
-                    revivedPlayer.getYRot(), revivedPlayer.getXRot()
-                );
+                revivedPlayer
+                    .teleportTo(
+                        (ServerLevel) spiritInstillerBlockEntity.getLevel(),
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        revivedPlayer.getYRot(),
+                        revivedPlayer.getXRot()
+                    );
             }
         }
         return ItemStack.EMPTY;
@@ -83,10 +99,15 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
                 return false;
             }
 
-            PlayerList playerManager = PastelCommon.getSidedServer()
-                                                   .getPlayerList();
-            ServerPlayer playerToRevive = gameProfile.getId() == null ? playerManager.getPlayerByName(
-                gameProfile.getName()) : playerManager.getPlayer(gameProfile.getId());
+            PlayerList playerManager = PastelCommon
+                .getSidedServer()
+                .getPlayerList();
+            ServerPlayer playerToRevive = gameProfile.getId() == null
+                ? playerManager
+                    .getPlayerByName(
+                        gameProfile.getName()
+                    )
+                : playerManager.getPlayer(gameProfile.getId());
             return playerToRevive != null && HardcoreDeathTracker.hasHardcoreDeath(gameProfile);
         }
         return false;
@@ -97,8 +118,7 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
         return true;
     }
 
-    @Nullable
-    private GameProfile getSkullOwner(ItemStack instillerStack) {
+    @Nullable private GameProfile getSkullOwner(ItemStack instillerStack) {
         var profile = instillerStack.get(DataComponents.PROFILE);
         return profile == null ? null : profile.gameProfile();
     }

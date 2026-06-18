@@ -12,11 +12,16 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public abstract class EnchanterCategory<T extends EnchanterDisplay> extends GatedDisplayCategory<T> {
 
-    public final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate(
-        "textures/gui/container/enchanter.png");
+    public final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon
+        .locate(
+            "textures/gui/container/enchanter.png"
+        );
+
     public static final EntryIngredient ENCHANTER = EntryIngredients.of(PastelBlocks.ENCHANTER.get());
 
     @Override

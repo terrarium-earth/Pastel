@@ -47,6 +47,7 @@ public class TimeHelper {
         SUNRISE(23000, 24000);
 
         public final int from;
+
         public final int to;
 
         TimeOfDay(int from, int to) {

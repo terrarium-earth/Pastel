@@ -30,20 +30,32 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-
 public class WireHookEntity extends Projectile implements HookshotData.FrictionProvider {
 
     public static final float STIFFNESS = 0.5F;
 
-    protected static final EntityDataAccessor<Boolean> HOOKED = SynchedEntityData.defineId(
-        WireHookEntity.class, EntityDataSerializers.BOOLEAN);
-    protected static final EntityDataAccessor<Boolean> RECALLED = SynchedEntityData.defineId(
-        WireHookEntity.class, EntityDataSerializers.BOOLEAN);
-    protected static final EntityDataAccessor<ItemStack> HOOKSHOT = SynchedEntityData.defineId(
-            WireHookEntity.class, EntityDataSerializers.ITEM_STACK);
+    protected static final EntityDataAccessor<Boolean> HOOKED = SynchedEntityData
+        .defineId(
+            WireHookEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
+
+    protected static final EntityDataAccessor<Boolean> RECALLED = SynchedEntityData
+        .defineId(
+            WireHookEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
+
+    protected static final EntityDataAccessor<ItemStack> HOOKSHOT = SynchedEntityData
+        .defineId(
+            WireHookEntity.class,
+            EntityDataSerializers.ITEM_STACK
+        );
 
     private float neutral = -1F;
+
     private double lastRebound;
+
     private boolean grabbed;
 
     public WireHookEntity(EntityType<WireHookEntity> entityType, Level level) {
@@ -53,11 +65,15 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
     public WireHookEntity(Player shooter, ItemStack hookshot, Level level) {
         this(PastelEntityTypes.WIRE_HOOK.get(), level);
 
-        setPos(shooter.getX(),
-                shooter.getY() + shooter.getBbHeight() * 0.667,
-                shooter.getZ());
-        setRot(shooter.getYRot(),
-                shooter.getXRot());
+        setPos(
+            shooter.getX(),
+            shooter.getY() + shooter.getBbHeight() * 0.667,
+            shooter.getZ()
+        );
+        setRot(
+            shooter.getYRot(),
+            shooter.getXRot()
+        );
         setOwner(shooter);
         entityData.set(HOOKSHOT, hookshot.copy());
         HookshotData.get(shooter).setLinkedHook(this);
@@ -98,8 +114,7 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
         if (isHooked()) {
             updateEquilibrium(player, slack);
             springMove(player);
-        }
-        else {
+        } else {
             setOldPosAndRot();
             updateRotation();
             moveTo(position().add(getDeltaMovement()));
@@ -113,8 +128,7 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
 
             var returnVector = player.position().subtract(position()).normalize();
             var eff = hookshotLevel(Enchantments.EFFICIENCY);
-            setDeltaMovement(returnVector.scale(Math.min(Math.pow(slack / 3, 1.5), 4 + eff / 2F)
-                    + eff / 8F + 0.5));
+            setDeltaMovement(returnVector.scale(Math.min(Math.pow(slack / 3, 1.5), 4 + eff / 2F) + eff / 8F + 0.5));
         }
     }
 
@@ -150,8 +164,7 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
 
                 if (getOwner() != null)
                     neutral = getOwner().distanceTo(this) * 0.675F;
-            }
-            else {
+            } else {
                 playSound(PastelSounds.METAL_TAP);
             }
         }
@@ -164,8 +177,7 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
 
         if (player.isShiftKeyDown() && !nearLowerLimit(player, slack)) {
             neutral += chainSpeed();
-        }
-        else if(player.jumping && !nearUpperLimit(player, slack)) {
+        } else if (player.jumping && !nearUpperLimit(player, slack)) {
             neutral -= chainSpeed();
         }
     }
@@ -187,8 +199,10 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
         var rebound = reboundStrength(displacement);
         var stabilization = 1 - Math.min(Math.abs(rebound), 1);
 
-        var offset = player.position().multiply(1, 0, 1)
-                           .distanceTo(position().multiply(1, 0, 1)) / 1.5;
+        var offset = player
+            .position()
+            .multiply(1, 0, 1)
+            .distanceTo(position().multiply(1, 0, 1)) / 1.5;
 
         stabilization *= 1 - Math.clamp(offset, 0, 1);
         var vel = player.getDeltaMovement().multiply(1, 0, 1).length() * 4;
@@ -247,7 +261,7 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
             return true;
 
         var player = (Player) getOwner();
-        assert player!=null;
+        assert player != null;
         var data = HookshotData.get(player);
         if (data.getLinkedHook().map(id -> !id.equals(getUUID())).orElse(true)) {
             discard();
@@ -294,8 +308,7 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
 
         if (owner.jumping) {
             dir = dir.add(0, 0.5, 0);
-        }
-        else {
+        } else {
             dir = dir.add(0, 0.1, 0);
         }
 
@@ -327,8 +340,11 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
         super.readAdditionalSaveData(compound);
         entityData.set(HOOKED, compound.getBoolean("hooked"));
         entityData.set(RECALLED, compound.getBoolean("propelled"));
-        ItemStack.parse(registryAccess(), compound.getCompound("hookshot")).ifPresent(
-                s -> entityData.set(HOOKSHOT, s));
+        ItemStack
+            .parse(registryAccess(), compound.getCompound("hookshot"))
+            .ifPresent(
+                s -> entityData.set(HOOKSHOT, s)
+            );
         neutral = compound.getFloat("neutral");
         grabbed = compound.getBoolean("grabbed");
         lastRebound = compound.getDouble("lastRebound");

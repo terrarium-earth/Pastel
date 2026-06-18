@@ -16,6 +16,7 @@ import org.joml.Vector3f;
 public class MagicProjectileEntityRenderer extends EntityRenderer<MagicProjectileEntity> {
 
     private static final ResourceLocation TEXTURE = ResourceLocation.parse("textures/entity/experience_orb.png");
+
     private static final RenderType LAYER = RenderType.itemEntityTranslucentCull(TEXTURE);
 
     public MagicProjectileEntityRenderer(EntityRendererProvider.Context context) {
@@ -24,17 +25,25 @@ public class MagicProjectileEntityRenderer extends EntityRenderer<MagicProjectil
 
     @Override
     public void render(
-        MagicProjectileEntity magicProjectileEntity, float yaw, float tickDelta, PoseStack poseStack,
-        MultiBufferSource vertexConsumerProvider, int light
+        MagicProjectileEntity magicProjectileEntity,
+        float yaw,
+        float tickDelta,
+        PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider,
+        int light
     ) {
         poseStack.pushPose();
-        Vector3f starColor = magicProjectileEntity.getInkColor()
-                                                  .getColorVec();
+        Vector3f starColor = magicProjectileEntity
+            .getInkColor()
+            .getColorVec();
 
-        double time = (magicProjectileEntity.level()
-                                            .getGameTime() % 24000) + tickDelta + RandomSource.create(
-                                                                                                  magicProjectileEntity.getId())
-                                                                                              .nextInt(200);
+        double time = (magicProjectileEntity
+            .level()
+            .getGameTime() % 24000) + tickDelta + RandomSource
+                .create(
+                    magicProjectileEntity.getId()
+                )
+                .nextInt(200);
         float scale = 0.75F + 0.1F * (float) Math.sin(time / 10);
         poseStack.scale(scale, scale, scale);
 
@@ -61,15 +70,25 @@ public class MagicProjectileEntityRenderer extends EntityRenderer<MagicProjectil
     }
 
     private static void vertex(
-        VertexConsumer vertexConsumer, PoseStack.Pose matrix, Matrix4f positionMatrix, float x, float y, int red,
-        int green, int blue, float u, float v, int light
+        VertexConsumer vertexConsumer,
+        PoseStack.Pose matrix,
+        Matrix4f positionMatrix,
+        float x,
+        float y,
+        int red,
+        int green,
+        int blue,
+        float u,
+        float v,
+        int light
     ) {
-        vertexConsumer.addVertex(positionMatrix, x, y, 0.0F)
-                      .setColor(red, green, blue, 128)
-                      .setUv(u, v)
-                      .setOverlay(OverlayTexture.NO_OVERLAY)
-                      .setLight(light)
-                      .setNormal(matrix, 0.0F, 1.0F, 0.0F);
+        vertexConsumer
+            .addVertex(positionMatrix, x, y, 0.0F)
+            .setColor(red, green, blue, 128)
+            .setUv(u, v)
+            .setOverlay(OverlayTexture.NO_OVERLAY)
+            .setLight(light)
+            .setNormal(matrix, 0.0F, 1.0F, 0.0F);
     }
 
     @Override

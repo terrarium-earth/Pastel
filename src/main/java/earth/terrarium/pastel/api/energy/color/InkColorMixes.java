@@ -56,7 +56,9 @@ public class InkColorMixes {
         if (color1Elemental && color2Elemental) {
             List<InkColor> possibleOutcomes = new ArrayList<>();
 
-            for (Map.Entry<InkColor, Map<InkColor, Float>> entries : MIXES.entrySet()) {
+            for (
+                Map.Entry<InkColor, Map<InkColor, Float>> entries : MIXES.entrySet()
+            ) {
                 InkColor color = entries.getKey();
                 if (isMixedUsing(color, color1, color2)) {
                     possibleOutcomes.add(color);
@@ -76,6 +78,5 @@ public class InkColorMixes {
             return random.nextBoolean() ? color1 : color2;
         }
     }
-
 
 }

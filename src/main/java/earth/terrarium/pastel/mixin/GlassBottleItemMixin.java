@@ -23,86 +23,156 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BottleItem.class)
+@Mixin(
+    BottleItem.class
+)
 public abstract class GlassBottleItemMixin {
 
     @Shadow
     protected abstract ItemStack turnBottleIntoItem(ItemStack stack, Player player, ItemStack outputStack);
 
-    @Inject(method = "use",
-            at = @At(value = "INVOKE",
-                     target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"),
-            cancellable = true)
+    @Inject(
+        method = "use", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"
+        ), cancellable = true
+    )
     public void onUse(
-        Level world, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir,
-        @Local ItemStack handStack, @Local BlockPos blockPos
+        Level world,
+        Player user,
+        InteractionHand hand,
+        CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir,
+        @Local
+        ItemStack handStack,
+        @Local
+        BlockPos blockPos
     ) {
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (blockState.is(PastelBlocks.FADING.get())
-            && PastelCommon.CONFIG.CanBottleUpFading
-            && DatabankUtils.hasAdvancement(user, PastelAdvancements.Unlocks.Items.BOTTLE_OF_FADING)) {
+        if (blockState.is(PastelBlocks.FADING.get()) && PastelCommon.CONFIG.CanBottleUpFading && DatabankUtils
+            .hasAdvancement(user, PastelAdvancements.Unlocks.Items.BOTTLE_OF_FADING)) {
 
             world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-            world.playSound(
-                null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL,
-                1.0F, 1.0F
-            );
-            cir.setReturnValue(InteractionResultHolder.sidedSuccess(
-                this.turnBottleIntoItem(
-                    handStack, user, PastelItems.BOTTLE_OF_FADING.get()
-                                                                 .getDefaultInstance()
-                ), world.isClientSide()
-            ));
+            world
+                .playSound(
+                    null,
+                    user.getX(),
+                    user.getY(),
+                    user.getZ(),
+                    SoundEvents.BOTTLE_FILL_DRAGONBREATH,
+                    SoundSource.NEUTRAL,
+                    1.0F,
+                    1.0F
+                );
+            cir
+                .setReturnValue(
+                    InteractionResultHolder
+                        .sidedSuccess(
+                            this
+                                .turnBottleIntoItem(
+                                    handStack,
+                                    user,
+                                    PastelItems.BOTTLE_OF_FADING
+                                        .get()
+                                        .getDefaultInstance()
+                                ),
+                            world.isClientSide()
+                        )
+                );
 
-        } else if (blockState.is(PastelBlocks.FAILING.get())
-                   && PastelCommon.CONFIG.CanBottleUpFailing
-                   && DatabankUtils.hasAdvancement(user, PastelAdvancements.Unlocks.Items.BOTTLE_OF_FAILING)) {
+        } else if (blockState.is(PastelBlocks.FAILING.get()) && PastelCommon.CONFIG.CanBottleUpFailing && DatabankUtils
+            .hasAdvancement(user, PastelAdvancements.Unlocks.Items.BOTTLE_OF_FAILING)) {
 
-            world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-            world.playSound(
-                null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL,
-                1.0F, 1.0F
-            );
-            cir.setReturnValue(InteractionResultHolder.sidedSuccess(
-                this.turnBottleIntoItem(
-                    handStack, user, PastelItems.BOTTLE_OF_FAILING.get()
-                                                                  .getDefaultInstance()
-                ), world.isClientSide()
-            ));
+                world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                world
+                    .playSound(
+                        null,
+                        user.getX(),
+                        user.getY(),
+                        user.getZ(),
+                        SoundEvents.BOTTLE_FILL_DRAGONBREATH,
+                        SoundSource.NEUTRAL,
+                        1.0F,
+                        1.0F
+                    );
+                cir
+                    .setReturnValue(
+                        InteractionResultHolder
+                            .sidedSuccess(
+                                this
+                                    .turnBottleIntoItem(
+                                        handStack,
+                                        user,
+                                        PastelItems.BOTTLE_OF_FAILING
+                                            .get()
+                                            .getDefaultInstance()
+                                    ),
+                                world.isClientSide()
+                            )
+                    );
 
-        } else if (blockState.is(PastelBlocks.RUIN.get())
-                   && PastelCommon.CONFIG.CanBottleUpRuin
-                   && DatabankUtils.hasAdvancement(user, PastelAdvancements.Unlocks.Items.BOTTLE_OF_RUIN)) {
+            } else if (blockState.is(PastelBlocks.RUIN.get()) && PastelCommon.CONFIG.CanBottleUpRuin && DatabankUtils
+                .hasAdvancement(user, PastelAdvancements.Unlocks.Items.BOTTLE_OF_RUIN)) {
 
-            world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-            world.playSound(
-                null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL,
-                1.0F, 1.0F
-            );
-            cir.setReturnValue(InteractionResultHolder.sidedSuccess(
-                this.turnBottleIntoItem(
-                    handStack, user, PastelItems.BOTTLE_OF_RUIN.get()
-                                                               .getDefaultInstance()
-                ), world.isClientSide()
-            ));
+                    world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                    world
+                        .playSound(
+                            null,
+                            user.getX(),
+                            user.getY(),
+                            user.getZ(),
+                            SoundEvents.BOTTLE_FILL_DRAGONBREATH,
+                            SoundSource.NEUTRAL,
+                            1.0F,
+                            1.0F
+                        );
+                    cir
+                        .setReturnValue(
+                            InteractionResultHolder
+                                .sidedSuccess(
+                                    this
+                                        .turnBottleIntoItem(
+                                            handStack,
+                                            user,
+                                            PastelItems.BOTTLE_OF_RUIN
+                                                .get()
+                                                .getDefaultInstance()
+                                        ),
+                                    world.isClientSide()
+                                )
+                        );
 
-        } else if (blockState.is(PastelBlocks.FORFEITURE.get())
-                   && PastelCommon.CONFIG.CanBottleUpForfeiture
-                   && DatabankUtils.hasAdvancement(user, PastelAdvancements.Unlocks.Items.BOTTLE_OF_FORFEITURE)) {
+                } else if (blockState
+                    .is(PastelBlocks.FORFEITURE.get()) && PastelCommon.CONFIG.CanBottleUpForfeiture && DatabankUtils
+                        .hasAdvancement(user, PastelAdvancements.Unlocks.Items.BOTTLE_OF_FORFEITURE)) {
 
-            world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-            world.playSound(
-                null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL,
-                1.0F, 1.0F
-            );
-            cir.setReturnValue(InteractionResultHolder.sidedSuccess(
-                this.turnBottleIntoItem(
-                    handStack, user, PastelItems.BOTTLE_OF_FORFEITURE.get()
-                                                                     .getDefaultInstance()
-                ), world.isClientSide()
-            ));
-        }
+                            world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                            world
+                                .playSound(
+                                    null,
+                                    user.getX(),
+                                    user.getY(),
+                                    user.getZ(),
+                                    SoundEvents.BOTTLE_FILL_DRAGONBREATH,
+                                    SoundSource.NEUTRAL,
+                                    1.0F,
+                                    1.0F
+                                );
+                            cir
+                                .setReturnValue(
+                                    InteractionResultHolder
+                                        .sidedSuccess(
+                                            this
+                                                .turnBottleIntoItem(
+                                                    handStack,
+                                                    user,
+                                                    PastelItems.BOTTLE_OF_FORFEITURE
+                                                        .get()
+                                                        .getDefaultInstance()
+                                                ),
+                                            world.isClientSide()
+                                        )
+                                );
+                        }
     }
 
 }

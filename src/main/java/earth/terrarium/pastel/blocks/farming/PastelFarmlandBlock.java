@@ -59,18 +59,23 @@ public class PastelFarmlandBlock extends FarmBlock {
 
     @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        if (!world.isClientSide && world.random.nextFloat() < fallDistance - 1F
-            && entity instanceof LivingEntity
-            && (entity instanceof Player || world.getGameRules()
-                                                 .getBoolean(GameRules.RULE_MOBGRIEFING))
-            && entity.getBbWidth() * entity.getBbWidth() * entity.getBbHeight() > 0.512F) {
+        if (!world.isClientSide && world.random
+            .nextFloat() < fallDistance - 1F && entity instanceof LivingEntity && (entity instanceof Player || world
+                .getGameRules()
+                .getBoolean(GameRules.RULE_MOBGRIEFING)) && entity.getBbWidth() * entity.getBbWidth() * entity
+                    .getBbHeight() > 0.512F) {
 
             setBare(entity, state, world, pos);
         }
 
-        entity.causeFallDamage(fallDistance, 1.0F, world.damageSources()
-                                                        .fall()
-        );
+        entity
+            .causeFallDamage(
+                fallDistance,
+                1.0F,
+                world
+                    .damageSources()
+                    .fall()
+            );
     }
 
     public void setBare(@Nullable Entity entity, BlockState state, Level world, BlockPos pos) {
@@ -80,15 +85,19 @@ public class PastelFarmlandBlock extends FarmBlock {
     }
 
     public static boolean shouldMaintainFarmland(@NotNull BlockGetter world, @NotNull BlockPos pos) {
-        Block block = world.getBlockState(pos.above())
-                           .getBlock();
+        Block block = world
+            .getBlockState(pos.above())
+            .getBlock();
         return block instanceof CropBlock || block instanceof StemBlock || block instanceof AttachedStemBlock;
     }
 
     protected boolean isNearWater(LevelReader world, BlockPos pos) {
-        for (BlockPos testPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
-            if (world.getFluidState(testPos)
-                     .is(FluidTags.WATER)) {
+        for (
+            BlockPos testPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))
+        ) {
+            if (world
+                .getFluidState(testPos)
+                .is(FluidTags.WATER)) {
                 return true;
             }
         }

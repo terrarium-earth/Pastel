@@ -62,17 +62,30 @@ import org.jetbrains.annotations.Nullable;
 // funny little creatures always out for trouble
 public class LizardEntity extends TamableAnimal implements PackEntity<LizardEntity>, POIMemorized {
 
-    protected static final EntityDataAccessor<LizardFrillVariant> FRILL_VARIANT = SynchedEntityData.defineId(
-        LizardEntity.class, PastelTrackedDataHandlers.LIZARD_FRILL_VARIANT);
-    protected static final EntityDataAccessor<LizardHornVariant> HORN_VARIANT = SynchedEntityData.defineId(
-        LizardEntity.class, PastelTrackedDataHandlers.LIZARD_HORN_VARIANT);
-    protected static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(
-        LizardEntity.class, PastelTrackedDataHandlers.INK_COLOR);
+    protected static final EntityDataAccessor<LizardFrillVariant> FRILL_VARIANT = SynchedEntityData
+        .defineId(
+            LizardEntity.class,
+            PastelTrackedDataHandlers.LIZARD_FRILL_VARIANT
+        );
+
+    protected static final EntityDataAccessor<LizardHornVariant> HORN_VARIANT = SynchedEntityData
+        .defineId(
+            LizardEntity.class,
+            PastelTrackedDataHandlers.LIZARD_HORN_VARIANT
+        );
+
+    protected static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData
+        .defineId(
+            LizardEntity.class,
+            PastelTrackedDataHandlers.INK_COLOR
+        );
 
     protected @Nullable LizardEntity leader;
+
     protected int groupSize = 1;
 
     protected int ticksLeftToFindPOI;
+
     protected @Nullable BlockPos poiPos;
 
     public LizardEntity(EntityType<? extends LizardEntity> entityType, Level world) {
@@ -81,14 +94,15 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
     }
 
     public static AttributeSupplier.Builder createLizardAttributes() {
-        return Mob.createMobAttributes()
-                  .add(Attributes.MAX_HEALTH, 60.0D)
-                  .add(Attributes.ATTACK_DAMAGE, 16.0D)
-                  .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
-                  .add(Attributes.ARMOR, 6.0D)
-                  .add(Attributes.ARMOR_TOUGHNESS, 1.0D)
-                  .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                  .add(Attributes.FOLLOW_RANGE, 12.0D);
+        return Mob
+            .createMobAttributes()
+            .add(Attributes.MAX_HEALTH, 60.0D)
+            .add(Attributes.ATTACK_DAMAGE, 16.0D)
+            .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
+            .add(Attributes.ARMOR, 6.0D)
+            .add(Attributes.ARMOR_TOUGHNESS, 1.0D)
+            .add(Attributes.MOVEMENT_SPEED, 0.2D)
+            .add(Attributes.FOLLOW_RANGE, 12.0D);
     }
 
     @Override
@@ -105,23 +119,31 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
-        this.targetSelector.addGoal(
-            2, new NearestAttackableTargetGoal<>(
-                this, Player.class, true,
-                target -> !LizardEntity.this.isOwnedBy(target)
-            )
-        );
-        this.targetSelector.addGoal(
-            3, new NearestAttackableTargetGoal<>(
-                this, LivingEntity.class, true, // different clans attacking each other
-                target -> {
-                    if (target instanceof LizardEntity other) {
-                        return isDifferentPack(other);
+        this.targetSelector
+            .addGoal(
+                2,
+                new NearestAttackableTargetGoal<>(
+                    this,
+                    Player.class,
+                    true,
+                    target -> !LizardEntity.this.isOwnedBy(target)
+                )
+            );
+        this.targetSelector
+            .addGoal(
+                3,
+                new NearestAttackableTargetGoal<>(
+                    this,
+                    LivingEntity.class,
+                    true, // different clans attacking each other
+                    target -> {
+                        if (target instanceof LizardEntity other) {
+                            return isDifferentPack(other);
+                        }
+                        return !target.isBaby();
                     }
-                    return !target.isBaby();
-                }
-            )
-        );
+                )
+            );
     }
 
     @Override
@@ -152,25 +174,42 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(
-        ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType spawnReason,
+        ServerLevelAccessor world,
+        DifficultyInstance difficulty,
+        MobSpawnType spawnReason,
         @Nullable SpawnGroupData entityData
     ) {
         RandomSource random = world.getRandom();
-        this.setFrills(PastelRegistries.getRandomTagEntry(
-            PastelRegistries.LIZARD_FRILL_VARIANT,
-            LizardFrillVariant.SIMPLE.getReference(), random,
-            LizardFrillVariant.SIMPLE
-        ));
-        this.setHorns(PastelRegistries.getRandomTagEntry(
-            PastelRegistries.LIZARD_HORN_VARIANT,
-            LizardHornVariant.HORNY.getReference(), random,
-            LizardHornVariant.HORNY
-        ));
-        this.setColor(
-            PastelRegistries.getRandomTagEntry(
-                PastelRegistries.INK_COLOR, InkColorTags.ELEMENTAL_COLORS, random,
-                InkColors.MAGENTA
-            ));
+        this
+            .setFrills(
+                PastelRegistries
+                    .getRandomTagEntry(
+                        PastelRegistries.LIZARD_FRILL_VARIANT,
+                        LizardFrillVariant.SIMPLE.getReference(),
+                        random,
+                        LizardFrillVariant.SIMPLE
+                    )
+            );
+        this
+            .setHorns(
+                PastelRegistries
+                    .getRandomTagEntry(
+                        PastelRegistries.LIZARD_HORN_VARIANT,
+                        LizardHornVariant.HORNY.getReference(),
+                        random,
+                        LizardHornVariant.HORNY
+                    )
+            );
+        this
+            .setColor(
+                PastelRegistries
+                    .getRandomTagEntry(
+                        PastelRegistries.INK_COLOR,
+                        InkColorTags.ELEMENTAL_COLORS,
+                        random,
+                        InkColors.MAGENTA
+                    )
+            );
 
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData);
     }
@@ -178,19 +217,28 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
-        nbt.putString(
-            "color", this.getColor()
-                         .getID()
-                         .toString()
-        );
-        nbt.putString(
-            "frills", PastelRegistries.LIZARD_FRILL_VARIANT.getKey(this.getFrills())
-                                                           .toString()
-        );
-        nbt.putString(
-            "horns", PastelRegistries.LIZARD_HORN_VARIANT.getKey(this.getHorns())
-                                                         .toString()
-        );
+        nbt
+            .putString(
+                "color",
+                this
+                    .getColor()
+                    .getID()
+                    .toString()
+            );
+        nbt
+            .putString(
+                "frills",
+                PastelRegistries.LIZARD_FRILL_VARIANT
+                    .getKey(this.getFrills())
+                    .toString()
+            );
+        nbt
+            .putString(
+                "horns",
+                PastelRegistries.LIZARD_HORN_VARIANT
+                    .getKey(this.getHorns())
+                    .toString()
+            );
         writePOIPosToNbt(nbt);
     }
 
@@ -199,27 +247,52 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
         super.readAdditionalSaveData(nbt);
 
         InkColor color = PastelRegistries.INK_COLOR.get(ResourceLocation.tryParse(nbt.getString("color")));
-        this.setColor(color == null ? PastelRegistries.getRandomTagEntry(
-            PastelRegistries.INK_COLOR,
-            InkColorTags.ELEMENTAL_COLORS, this.random,
-            InkColors.CYAN
-        ) : color);
+        this
+            .setColor(
+                color == null
+                    ? PastelRegistries
+                        .getRandomTagEntry(
+                            PastelRegistries.INK_COLOR,
+                            InkColorTags.ELEMENTAL_COLORS,
+                            this.random,
+                            InkColors.CYAN
+                        )
+                    : color
+            );
 
-        LizardFrillVariant frills = PastelRegistries.LIZARD_FRILL_VARIANT.get(
-            ResourceLocation.tryParse(nbt.getString("frills")));
-        this.setFrills(frills == null ? PastelRegistries.getRandomTagEntry(
-            PastelRegistries.LIZARD_FRILL_VARIANT,
-            LizardFrillVariant.SIMPLE.getReference(),
-            this.random, LizardFrillVariant.SIMPLE
-        ) : frills);
+        LizardFrillVariant frills = PastelRegistries.LIZARD_FRILL_VARIANT
+            .get(
+                ResourceLocation.tryParse(nbt.getString("frills"))
+            );
+        this
+            .setFrills(
+                frills == null
+                    ? PastelRegistries
+                        .getRandomTagEntry(
+                            PastelRegistries.LIZARD_FRILL_VARIANT,
+                            LizardFrillVariant.SIMPLE.getReference(),
+                            this.random,
+                            LizardFrillVariant.SIMPLE
+                        )
+                    : frills
+            );
 
-        LizardHornVariant horns = PastelRegistries.LIZARD_HORN_VARIANT.get(
-            ResourceLocation.tryParse(nbt.getString("horns")));
-        this.setHorns(horns == null ? PastelRegistries.getRandomTagEntry(
-            PastelRegistries.LIZARD_HORN_VARIANT,
-            LizardHornVariant.HORNY.getReference(),
-            this.random, LizardHornVariant.HORNY
-        ) : horns);
+        LizardHornVariant horns = PastelRegistries.LIZARD_HORN_VARIANT
+            .get(
+                ResourceLocation.tryParse(nbt.getString("horns"))
+            );
+        this
+            .setHorns(
+                horns == null
+                    ? PastelRegistries
+                        .getRandomTagEntry(
+                            PastelRegistries.LIZARD_HORN_VARIANT,
+                            LizardHornVariant.HORNY.getReference(),
+                            this.random,
+                            LizardHornVariant.HORNY
+                        )
+                    : horns
+            );
 
         readPOIPosFromNbt(nbt);
     }
@@ -319,8 +392,9 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
     @Override
     public @Nullable AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
         LizardEntity other = (LizardEntity) entity;
-        LizardEntity child = PastelEntityTypes.LIZARD.get()
-                                                     .create(world);
+        LizardEntity child = PastelEntityTypes.LIZARD
+            .get()
+            .create(world);
         if (child != null) {
             child.setColor(getChildColor(this, other));
             child.setFrills(getChildFrills(this, other));
@@ -373,7 +447,8 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
     @Override
     public void moveTowardLeader() {
         if (this.hasLeader()) {
-            this.getNavigation()
+            this
+                .getNavigation()
                 .moveTo(this.leader, 1.0);
         }
     }
@@ -422,10 +497,16 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
     protected class ClanLeaderWanderAroundGoal extends RandomStrollGoal {
 
         int chanceToNavigateToPOI;
+
         int maxDistanceFromPOI;
 
         public ClanLeaderWanderAroundGoal(
-            PathfinderMob mob, double speed, int chance, int chanceToNavigateToPOI, int maxDistanceFromPOI) {
+            PathfinderMob mob,
+            double speed,
+            int chance,
+            int chanceToNavigateToPOI,
+            int maxDistanceFromPOI
+        ) {
             super(mob, speed, chance);
             this.chanceToNavigateToPOI = chanceToNavigateToPOI;
             this.maxDistanceFromPOI = maxDistanceFromPOI;
@@ -440,10 +521,10 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
         protected @Nullable Vec3 getPosition() {
             // when we are away from our poi (their den) there is a chance they navigate back to it, so they always
             // stay near
-            if (random.nextFloat() < this.chanceToNavigateToPOI
-                && LizardEntity.this.isPOIValid((ServerLevel) LizardEntity.this.level())
-                && !LizardEntity.this.blockPosition()
-                                     .closerThan(LizardEntity.this.poiPos, this.maxDistanceFromPOI)) {
+            if (random.nextFloat() < this.chanceToNavigateToPOI && LizardEntity.this
+                .isPOIValid((ServerLevel) LizardEntity.this.level()) && !LizardEntity.this
+                    .blockPosition()
+                    .closerThan(LizardEntity.this.poiPos, this.maxDistanceFromPOI)) {
 
                 return Vec3.atCenterOf(LizardEntity.this.poiPos);
             }
@@ -461,16 +542,20 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 
         @Override
         public boolean canUse() {
-            return LizardEntity.this.hasOthersInGroup()
-                   && LizardEntity.this.ticksLeftToFindPOI == 0
-                   && !LizardEntity.this.isPOIValid((ServerLevel) LizardEntity.this.level());
+            return LizardEntity.this
+                .hasOthersInGroup() && LizardEntity.this.ticksLeftToFindPOI == 0 && !LizardEntity.this
+                    .isPOIValid((ServerLevel) LizardEntity.this.level());
         }
 
         @Override
         public void start() {
             LizardEntity.this.ticksLeftToFindPOI = 200;
-            LizardEntity.this.poiPos = LizardEntity.this.findNearestPOI(
-                (ServerLevel) LizardEntity.this.level(), LizardEntity.this.blockPosition(), 40);
+            LizardEntity.this.poiPos = LizardEntity.this
+                .findNearestPOI(
+                    (ServerLevel) LizardEntity.this.level(),
+                    LizardEntity.this.blockPosition(),
+                    40
+                );
         }
 
     }

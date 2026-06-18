@@ -25,17 +25,25 @@ public class HummingstoneEventQueue extends EventQueue<HummingstoneEventQueue.Ev
         this.schedule(eventEntry, delay);
 
         if (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING) {
-            TypedTransmissionPayload.playTransmissionParticle(
-                (ServerLevel) world, new TypedTransmission(
-                    pos, this.positionSource, delay,
-                    TypedTransmission.Variant.HUMMINGSTONE
-                )
-            );
-            if (getQueuedEventCount() > 20) {
-                world.gameEvent(
-                    message.context()
-                           .sourceEntity(), PastelGameEvents.HUMMINGSTONE_HYMN, pos
+            TypedTransmissionPayload
+                .playTransmissionParticle(
+                    (ServerLevel) world,
+                    new TypedTransmission(
+                        pos,
+                        this.positionSource,
+                        delay,
+                        TypedTransmission.Variant.HUMMINGSTONE
+                    )
                 );
+            if (getQueuedEventCount() > 20) {
+                world
+                    .gameEvent(
+                        message
+                            .context()
+                            .sourceEntity(),
+                        PastelGameEvents.HUMMINGSTONE_HYMN,
+                        pos
+                    );
             }
         }
     }

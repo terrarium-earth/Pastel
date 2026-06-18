@@ -29,10 +29,13 @@ public class BlackslagVegetationBlock extends SnowyDirtBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (!canSurvive(state, world, pos)) {
-            world.setBlockAndUpdate(
-                pos, PastelBlocks.BLACKSLAG.get()
-                                           .defaultBlockState()
-            );
+            world
+                .setBlockAndUpdate(
+                    pos,
+                    PastelBlocks.BLACKSLAG
+                        .get()
+                        .defaultBlockState()
+                );
         }
     }
 
@@ -41,14 +44,23 @@ public class BlackslagVegetationBlock extends SnowyDirtBlock {
         BlockState blockState = world.getBlockState(blockPos);
         if (blockState.is(Blocks.SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) {
             return true;
-        } else if (blockState.getFluidState()
-                             .getAmount() == 8) {
-            return false;
-        } else {
-            int light = LightEngine.getLightBlockInto(
-                world, state, pos, blockState, blockPos, Direction.UP, blockState.getLightBlock(world, blockPos));
-            return light < world.getMaxLightLevel();
-        }
+        } else if (blockState
+            .getFluidState()
+            .getAmount() == 8) {
+                return false;
+            } else {
+                int light = LightEngine
+                    .getLightBlockInto(
+                        world,
+                        state,
+                        pos,
+                        blockState,
+                        blockPos,
+                        Direction.UP,
+                        blockState.getLightBlock(world, blockPos)
+                    );
+                return light < world.getMaxLightLevel();
+            }
     }
 
 }

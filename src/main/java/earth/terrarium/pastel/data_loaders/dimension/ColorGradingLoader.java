@@ -21,7 +21,9 @@ import java.util.Map;
 public class ColorGradingLoader extends SimpleJsonResourceReloadListener {
 
     public static final ColorGradingLoader INSTANCE = new ColorGradingLoader();
+
     public static final Map<ResourceKey<Biome>, ColorGrading> DATA = new HashMap<>();
+
     public static final String ID = "color_grading";
 
     private static final Codec<ResourceKey<Biome>> KEY_CODEC = ResourceKey.codec(Registries.BIOME);
@@ -32,7 +34,10 @@ public class ColorGradingLoader extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(
-        Map<ResourceLocation, JsonElement> files, ResourceManager resourceManager, ProfilerFiller profiler) {
+        Map<ResourceLocation, JsonElement> files,
+        ResourceManager resourceManager,
+        ProfilerFiller profiler
+    ) {
         DATA.clear();
 
         var ops = makeConditionalOps();
@@ -42,28 +47,33 @@ public class ColorGradingLoader extends SimpleJsonResourceReloadListener {
             var fallback = parentObject.get("default") != null;
             var biome = KEY_CODEC.parse(ops, parentObject.get("biome"));
 
-            if (biome.error()
-                     .isPresent() && !fallback) {
+            if (biome
+                .error()
+                .isPresent() && !fallback) {
                 error(path, biome);
                 return;
             }
 
             var data = ColorGrading.CODEC.parse(ops, parentObject.getAsJsonObject("color_grading"));
 
-            if (data.error()
-                    .isPresent()) {
+            if (data
+                .error()
+                .isPresent()) {
                 error(path, data);
             }
 
-            if (fallback && data.result()
-                                .isPresent()) {
+            if (fallback && data
+                .result()
+                .isPresent()) {
                 ColorGrading.DEFAULT = data.getOrThrow();
                 return;
             }
 
-            if (biome.result()
-                     .isEmpty() || data.result()
-                                       .isEmpty())
+            if (biome
+                .result()
+                .isEmpty() || data
+                    .result()
+                    .isEmpty())
                 return;
 
             DATA.put(biome.getOrThrow(), data.getOrThrow());
@@ -71,7 +81,11 @@ public class ColorGradingLoader extends SimpleJsonResourceReloadListener {
     }
 
     private static void error(ResourceLocation path, DataResult<?> result) {
-        PastelCommon.logError("Color Grading loading error [" + path + "]" + result.error()
-                                                                                   .get());
+        PastelCommon
+            .logError(
+                "Color Grading loading error [" + path + "]" + result
+                    .error()
+                    .get()
+            );
     }
 }

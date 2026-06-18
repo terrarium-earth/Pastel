@@ -32,12 +32,15 @@ public abstract class BuildingStaffItem extends Item implements PrioritizedBlock
     }
 
     public boolean canInteractWith(BlockState state, BlockGetter world, BlockPos pos, Player player) {
-        if (state.getBlock()
-                 .asItem() == Items.AIR) {
+        if (state
+            .getBlock()
+            .asItem() == Items.AIR) {
             return false;
         }
-        if (player == null || world.getBlockEntity(pos) != null || state.is(
-            PastelBlockTags.BUILDING_STAFFS_BLACKLISTED)) {
+        if (player == null || world.getBlockEntity(pos) != null || state
+            .is(
+                PastelBlockTags.BUILDING_STAFFS_BLACKLISTED
+            )) {
             return false;
         }
         if (player.isCreative()) {
@@ -52,7 +55,11 @@ public abstract class BuildingStaffItem extends Item implements PrioritizedBlock
      * @return The block to place, the blockItem to consume, the amount
      */
     protected static Triplet<Block, Item, Integer> countSuitableReplacementItems(
-        @NotNull Player player, @NotNull Block targetBlock, boolean single, int inkCostPerBlock) {
+        @NotNull Player player,
+        @NotNull Block targetBlock,
+        boolean single,
+        int inkCostPerBlock
+    ) {
         if (player.isCreative()) {
             return new Triplet<>(targetBlock, targetBlock.asItem(), single ? 1 : Integer.MAX_VALUE);
         }
@@ -71,7 +78,10 @@ public abstract class BuildingStaffItem extends Item implements PrioritizedBlock
     public static class BuildingStaffPlacementContext extends BlockPlaceContext {
 
         public BuildingStaffPlacementContext(
-            Level world, @Nullable Player playerEntity, BlockHitResult blockHitResult) {
+            Level world,
+            @Nullable Player playerEntity,
+            BlockHitResult blockHitResult
+        ) {
             super(world, playerEntity, InteractionHand.MAIN_HAND, ItemStack.EMPTY, blockHitResult);
         }
 

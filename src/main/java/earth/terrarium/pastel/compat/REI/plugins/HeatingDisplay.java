@@ -14,7 +14,8 @@ public class HeatingDisplay extends BlockToBlockWithChanceDisplay {
 
     public HeatingDisplay(EntryStack<?> in, EntryStack<?> out, float chance) {
         super(
-            Collections.singletonList(EntryIngredient.of(in)), Collections.singletonList(EntryIngredient.of(out)),
+            Collections.singletonList(EntryIngredient.of(in)),
+            Collections.singletonList(EntryIngredient.of(out)),
             chance
         );
     }

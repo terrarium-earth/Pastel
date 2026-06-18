@@ -43,13 +43,21 @@ public class PiglinTradeIdolBlock extends IdolBlock {
         Piglin piglin = new Piglin(EntityType.PIGLIN, world);
         piglin.setPosRaw(blockPos.getX(), blockPos.getY(), blockPos.getZ());
 
-        LootTable lootTable = world.getServer()
-                                   .reloadableRegistries()
-                                   .getLootTable(BuiltInLootTables.PIGLIN_BARTERING);
-        List<ItemStack> loot = lootTable.getRandomItems(new LootParams.Builder(world).withParameter(
-                                                                                         LootContextParams.THIS_ENTITY, piglin)
-                                                                                     .create(
-                                                                                         LootContextParamSets.PIGLIN_BARTER));
+        LootTable lootTable = world
+            .getServer()
+            .reloadableRegistries()
+            .getLootTable(BuiltInLootTables.PIGLIN_BARTERING);
+        List<ItemStack> loot = lootTable
+            .getRandomItems(
+                new LootParams.Builder(world)
+                    .withParameter(
+                        LootContextParams.THIS_ENTITY,
+                        piglin
+                    )
+                    .create(
+                        LootContextParamSets.PIGLIN_BARTER
+                    )
+            );
 
         piglin.discard();
 
@@ -58,7 +66,12 @@ public class PiglinTradeIdolBlock extends IdolBlock {
 
     @Override
     public boolean trigger(
-        ServerLevel world, BlockPos blockPos, BlockState state, @Nullable Entity entity, Direction side) {
+        ServerLevel world,
+        BlockPos blockPos,
+        BlockState state,
+        @Nullable Entity entity,
+        Direction side
+    ) {
         if (entity instanceof ItemEntity itemEntity) {
             ItemStack stack = itemEntity.getItem();
             if (stack.is(PiglinAi.BARTERING_ITEM)) {
@@ -73,7 +86,9 @@ public class PiglinTradeIdolBlock extends IdolBlock {
                 return true;
             }
         } else if (entity instanceof Player player) {
-            for (ItemStack handStack : player.getHandSlots()) {
+            for (
+                ItemStack handStack : player.getHandSlots()
+            ) {
                 if (handStack.is(PiglinAi.BARTERING_ITEM)) {
                     handStack.shrink(1);
 
@@ -87,9 +102,16 @@ public class PiglinTradeIdolBlock extends IdolBlock {
 
     private void outputLoot(ServerLevel world, BlockPos blockPos, Direction side) {
         Vec3 outputLocation = getOutputLocation(blockPos, side);
-        for (ItemStack barteredStack : getBarteredStacks(world, blockPos)) {
+        for (
+            ItemStack barteredStack : getBarteredStacks(world, blockPos)
+        ) {
             ItemEntity itemEntity = new ItemEntity(
-                world, outputLocation.x(), outputLocation.y(), outputLocation.z(), barteredStack);
+                world,
+                outputLocation.x(),
+                outputLocation.y(),
+                outputLocation.z(),
+                barteredStack
+            );
             itemEntity.push(side.getStepX() * 0.25, side.getStepY() * 0.25 + 0.03, side.getStepZ() * 0.25);
             world.addFreshEntity(itemEntity);
         }
@@ -97,7 +119,11 @@ public class PiglinTradeIdolBlock extends IdolBlock {
 
     @Override
     public void appendHoverText(
-        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        ItemStack stack,
+        Item.TooltipContext context,
+        List<Component> tooltip,
+        TooltipFlag type
+    ) {
         super.appendHoverText(stack, context, tooltip, type);
         tooltip.add(Component.translatable("block.pastel.piglin_trade_idol.tooltip"));
     }

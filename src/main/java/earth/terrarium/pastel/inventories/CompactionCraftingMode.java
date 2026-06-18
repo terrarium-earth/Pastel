@@ -13,16 +13,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
 public enum CompactionCraftingMode {
     X1(1, 1),
     X2(2, 2),
     X3(3, 3);
 
     private static final Map<CompactionCraftingMode, CompactionRecipeCache> CACHE = new EnumMap<>(
-        CompactionCraftingMode.class);
+        CompactionCraftingMode.class
+    );
 
     private final int width;
+
     private final int height;
 
     CompactionCraftingMode(int width, int height) {
@@ -49,7 +50,11 @@ public enum CompactionCraftingMode {
     public CraftingInput.Positioned createRecipeInput(ItemStack variant) {
         ItemStack stack = variant;
         List<ItemStack> inputs = new ArrayList<>(getSize());
-        for (int i = 0; i < getSize(); i++) {
+        for (
+            int i = 0;
+            i < getSize();
+            i++
+        ) {
             inputs.add(stack);
         }
         return CraftingInput.ofPositioned(width, height, inputs);
@@ -62,6 +67,7 @@ public enum CompactionCraftingMode {
     public static void clearCache() {
         CACHE.clear();
     }
+
     public static class CompactionRecipeCache {
         private final Map<ItemReference, Optional<RecipeHolder<CraftingRecipe>>> cache = new HashMap<>();
 
@@ -74,4 +80,3 @@ public enum CompactionCraftingMode {
         }
     }
 }
-

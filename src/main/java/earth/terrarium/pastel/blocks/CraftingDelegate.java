@@ -5,6 +5,7 @@ import net.minecraft.world.inventory.ContainerData;
 public class CraftingDelegate implements ContainerData {
 
     public int craftingTime;
+
     public int craftingTimeTotal;
 
     @Override

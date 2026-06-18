@@ -64,37 +64,72 @@ import java.util.Optional;
 // but most of FishingRod's methods are either private or are tricky to extend
 public abstract class PastelFishingBobberEntity extends Projectile {
     private static final Logger LOGGER = LogUtils.getLogger();
+
     private final RandomSource velocityRandom = RandomSource.create();
+
     private boolean caughtFish;
+
     private int outOfOpenFluidTicks;
+
     private static final int MAX_OUT_OF_OPEN_WATER_TICKS = 10;
-    private static final EntityDataAccessor<Integer> HOOK_ENTITY_ID = SynchedEntityData.defineId(
-        PastelFishingBobberEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> CAUGHT_FISH = SynchedEntityData.defineId(
-        PastelFishingBobberEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> ABLAZE = SynchedEntityData.defineId(
-        PastelFishingBobberEntity.class, EntityDataSerializers.BOOLEAN);
-        // needs to be synced to the client, so it can render on fire
+
+    private static final EntityDataAccessor<Integer> HOOK_ENTITY_ID = SynchedEntityData
+        .defineId(
+            PastelFishingBobberEntity.class,
+            EntityDataSerializers.INT
+        );
+
+    private static final EntityDataAccessor<Boolean> CAUGHT_FISH = SynchedEntityData
+        .defineId(
+            PastelFishingBobberEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
+
+    private static final EntityDataAccessor<Boolean> ABLAZE = SynchedEntityData
+        .defineId(
+            PastelFishingBobberEntity.class,
+            EntityDataSerializers.BOOLEAN
+        );
+
+    // needs to be synced to the client, so it can render on fire
     private int removalTimer;
+
     private int hookCountdown;
+
     private int waitCountdown;
+
     private int fishTravelCountdown;
+
     private float fishAngle;
+
     private boolean inOpenWater = true;
-    @Nullable
-    private Entity hookedEntity;
+
+    @Nullable private Entity hookedEntity;
+
     private PastelFishingBobberEntity.State state = PastelFishingBobberEntity.State.FLYING;
+
     protected final int luckBonus;
+
     protected final int waitTimeReductionTicks;
+
     protected final int exuberanceLevel;
+
     protected final int bigCatchLevel;
+
     protected final int serendipityReelLevel;
+
     protected final boolean inventoryInsertion;
 
     public PastelFishingBobberEntity(
-        EntityType<? extends PastelFishingBobberEntity> type, Level world,
-        int luckBonus, int waitTimeReductionTicks, int exuberanceLevel, int bigCatchLevel,
-        int serendipityReelLevel, boolean inventoryInsertion, boolean ablaze
+        EntityType<? extends PastelFishingBobberEntity> type,
+        Level world,
+        int luckBonus,
+        int waitTimeReductionTicks,
+        int exuberanceLevel,
+        int bigCatchLevel,
+        int serendipityReelLevel,
+        boolean inventoryInsertion,
+        boolean ablaze
     ) {
         super(type, world);
         this.noCulling = true;
@@ -104,7 +139,8 @@ public abstract class PastelFishingBobberEntity extends Projectile {
         this.bigCatchLevel = Math.max(0, bigCatchLevel);
         this.serendipityReelLevel = Math.max(0, serendipityReelLevel);
         this.inventoryInsertion = inventoryInsertion;
-        this.getEntityData()
+        this
+            .getEntityData()
             .set(ABLAZE, ablaze);
     }
 
@@ -113,13 +149,27 @@ public abstract class PastelFishingBobberEntity extends Projectile {
     }
 
     public PastelFishingBobberEntity(
-        EntityType<? extends PastelFishingBobberEntity> entityType, Player thrower, Level world,
-        int luckBonus, int waitTimeReductionTicks, int exuberanceLevel, int bigCatchLevel,
-        int serendipityReelLevel, boolean inventoryInsertion, boolean ablaze
+        EntityType<? extends PastelFishingBobberEntity> entityType,
+        Player thrower,
+        Level world,
+        int luckBonus,
+        int waitTimeReductionTicks,
+        int exuberanceLevel,
+        int bigCatchLevel,
+        int serendipityReelLevel,
+        boolean inventoryInsertion,
+        boolean ablaze
     ) {
         this(
-            entityType, world, luckBonus, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel, serendipityReelLevel,
-            inventoryInsertion, ablaze
+            entityType,
+            world,
+            luckBonus,
+            waitTimeReductionTicks,
+            exuberanceLevel,
+            bigCatchLevel,
+            serendipityReelLevel,
+            inventoryInsertion,
+            ablaze
         );
         this.setOwner(thrower);
         float f = thrower.getXRot();
@@ -134,11 +184,12 @@ public abstract class PastelFishingBobberEntity extends Projectile {
         this.moveTo(d, e, l, g, f);
         Vec3 vec3d = new Vec3(-i, Mth.clamp(-(k / j), -5.0F, 5.0F), -h);
         double m = vec3d.length();
-        vec3d = vec3d.multiply(
-            0.6 / m + this.random.triangle(0.5, 0.0103365),
-            0.6 / m + this.random.triangle(0.5, 0.0103365),
-            0.6 / m + this.random.triangle(0.5, 0.0103365)
-        );
+        vec3d = vec3d
+            .multiply(
+                0.6 / m + this.random.triangle(0.5, 0.0103365),
+                0.6 / m + this.random.triangle(0.5, 0.0103365),
+                0.6 / m + this.random.triangle(0.5, 0.0103365)
+            );
         this.setDeltaMovement(vec3d);
         //noinspection SuspiciousNameCombination
         this.setYRot((float) (Mth.atan2(vec3d.x, vec3d.z) * 180.0f / (float) Math.PI));
@@ -157,20 +208,27 @@ public abstract class PastelFishingBobberEntity extends Projectile {
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
         if (HOOK_ENTITY_ID.equals(data)) {
-            int i = this.getEntityData()
-                        .get(HOOK_ENTITY_ID);
-            this.hookedEntity = i > 0 ? this.level()
-                                            .getEntity(i - 1) : null;
+            int i = this
+                .getEntityData()
+                .get(HOOK_ENTITY_ID);
+            this.hookedEntity = i > 0
+                ? this
+                    .level()
+                    .getEntity(i - 1)
+                : null;
         }
 
         if (CAUGHT_FISH.equals(data)) {
-            this.caughtFish = this.getEntityData()
-                                  .get(CAUGHT_FISH);
+            this.caughtFish = this
+                .getEntityData()
+                .get(CAUGHT_FISH);
             if (this.caughtFish) {
-                this.setDeltaMovement(
-                    this.getDeltaMovement().x, -0.4F * Mth.nextFloat(this.velocityRandom, 0.6F, 1.0F),
-                    this.getDeltaMovement().z
-                );
+                this
+                    .setDeltaMovement(
+                        this.getDeltaMovement().x,
+                        -0.4F * Mth.nextFloat(this.velocityRandom, 0.6F, 1.0F),
+                        this.getDeltaMovement().z
+                    );
             }
         }
 
@@ -191,9 +249,14 @@ public abstract class PastelFishingBobberEntity extends Projectile {
 
     @Override
     public void tick() {
-        this.velocityRandom.setSeed(this.getUUID()
-                                        .getLeastSignificantBits() ^ this.level()
-                                                                         .getGameTime());
+        this.velocityRandom
+            .setSeed(
+                this
+                    .getUUID()
+                    .getLeastSignificantBits() ^ this
+                        .level()
+                        .getGameTime()
+            );
         super.tick();
         Player playerEntity = this.getPlayerOwner();
         if (playerEntity == null) {
@@ -211,11 +274,13 @@ public abstract class PastelFishingBobberEntity extends Projectile {
 
             float f = 0.0F;
             BlockPos blockPos = this.blockPosition();
-            FluidState fluidState = this.level()
-                                        .getFluidState(blockPos);
+            FluidState fluidState = this
+                .level()
+                .getFluidState(blockPos);
             boolean canFishInFluid = getFishingRod(
-                playerEntity).getItem() instanceof PastelFishingRodItem spectrumFishingRodItem &&
-                                     spectrumFishingRodItem.canFishIn(fluidState);
+                playerEntity
+            ).getItem() instanceof PastelFishingRodItem spectrumFishingRodItem && spectrumFishingRodItem
+                .canFishIn(fluidState);
             if (canFishInFluid) {
                 f = fluidState.getHeight(this.level(), blockPos);
             }
@@ -229,8 +294,12 @@ public abstract class PastelFishingBobberEntity extends Projectile {
                 }
 
                 if (bl) {
-                    this.setDeltaMovement(this.getDeltaMovement()
-                                              .multiply(0.3, 0.2, 0.3));
+                    this
+                        .setDeltaMovement(
+                            this
+                                .getDeltaMovement()
+                                .multiply(0.3, 0.2, 0.3)
+                        );
                     this.state = PastelFishingBobberEntity.State.BOBBING;
                     return;
                 }
@@ -239,11 +308,17 @@ public abstract class PastelFishingBobberEntity extends Projectile {
             } else {
                 if (this.state == PastelFishingBobberEntity.State.HOOKED_IN_ENTITY) {
                     if (this.hookedEntity != null) {
-                        if (!this.hookedEntity.isRemoved() && this.hookedEntity.level()
-                                                                               .dimension() == this.level()
-                                                                                                   .dimension()) {
-                            this.setPos(
-                                this.hookedEntity.getX(), this.hookedEntity.getY(0.8), this.hookedEntity.getZ());
+                        if (!this.hookedEntity.isRemoved() && this.hookedEntity
+                            .level()
+                            .dimension() == this
+                                .level()
+                                .dimension()) {
+                            this
+                                .setPos(
+                                    this.hookedEntity.getX(),
+                                    this.hookedEntity.getY(0.8),
+                                    this.hookedEntity.getZ()
+                                );
                             hookedEntityTick(this.hookedEntity);
                         } else {
                             this.updateHookedEntityId(null);
@@ -261,23 +336,33 @@ public abstract class PastelFishingBobberEntity extends Projectile {
                         d += Math.signum(d) * 0.1;
                     }
 
-                    this.setDeltaMovement(
-                        vec3d.x * 0.9, vec3d.y - d * (double) this.random.nextFloat() * 0.2, vec3d.z * 0.9);
+                    this
+                        .setDeltaMovement(
+                            vec3d.x * 0.9,
+                            vec3d.y - d * (double) this.random.nextFloat() * 0.2,
+                            vec3d.z * 0.9
+                        );
                     if (this.hookCountdown <= 0 && this.fishTravelCountdown <= 0) {
                         this.inOpenWater = true;
                     } else {
-                        this.inOpenWater = this.inOpenWater && this.outOfOpenFluidTicks < MAX_OUT_OF_OPEN_WATER_TICKS &&
-                                           this.isOpenOrWaterAround(blockPos);
+                        this.inOpenWater = this.inOpenWater && this.outOfOpenFluidTicks < MAX_OUT_OF_OPEN_WATER_TICKS && this
+                            .isOpenOrWaterAround(blockPos);
                     }
 
                     if (bl) {
                         this.outOfOpenFluidTicks = Math.max(0, this.outOfOpenFluidTicks - 1);
                         if (this.caughtFish) {
-                            this.setDeltaMovement(this.getDeltaMovement()
-                                                      .add(
-                                                          0.0, -0.1 * (double) this.velocityRandom.nextFloat() *
-                                                               (double) this.velocityRandom.nextFloat(), 0.0
-                                                      ));
+                            this
+                                .setDeltaMovement(
+                                    this
+                                        .getDeltaMovement()
+                                        .add(
+                                            0.0,
+                                            -0.1 * (double) this.velocityRandom
+                                                .nextFloat() * (double) this.velocityRandom.nextFloat(),
+                                            0.0
+                                        )
+                                );
                         }
 
                         if (!this.level().isClientSide) {
@@ -290,8 +375,12 @@ public abstract class PastelFishingBobberEntity extends Projectile {
             }
 
             if (!canFishInFluid) {
-                this.setDeltaMovement(this.getDeltaMovement()
-                                          .add(0.0, -0.03, 0.0));
+                this
+                    .setDeltaMovement(
+                        this
+                            .getDeltaMovement()
+                            .add(0.0, -0.03, 0.0)
+                    );
             }
 
             this.move(MoverType.SELF, this.getDeltaMovement());
@@ -301,8 +390,12 @@ public abstract class PastelFishingBobberEntity extends Projectile {
             }
 
             double e = 0.92;
-            this.setDeltaMovement(this.getDeltaMovement()
-                                      .scale(e));
+            this
+                .setDeltaMovement(
+                    this
+                        .getDeltaMovement()
+                        .scale(e)
+                );
             this.reapplyPosition();
         }
     }
@@ -341,14 +434,19 @@ public abstract class PastelFishingBobberEntity extends Projectile {
     @Override
     public void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
-        this.setDeltaMovement(this.getDeltaMovement()
-                                  .normalize()
-                                  .scale(blockHitResult.distanceTo(this)));
+        this
+            .setDeltaMovement(
+                this
+                    .getDeltaMovement()
+                    .normalize()
+                    .scale(blockHitResult.distanceTo(this))
+            );
     }
 
     public void updateHookedEntityId(@Nullable Entity entity) {
         this.hookedEntity = entity;
-        this.getEntityData()
+        this
+            .getEntityData()
             .set(HOOK_ENTITY_ID, entity == null ? 0 : entity.getId() + 1);
     }
 
@@ -356,13 +454,15 @@ public abstract class PastelFishingBobberEntity extends Projectile {
         ServerLevel serverWorld = (ServerLevel) this.level();
         int i = 1;
         BlockPos blockPos = pos.above();
-        if (this.random.nextFloat() < 0.25F && this.level()
-                                                   .isRainingAt(blockPos)) {
+        if (this.random.nextFloat() < 0.25F && this
+            .level()
+            .isRainingAt(blockPos)) {
             i++;
         }
 
-        if (this.random.nextFloat() < 0.5F && !this.level()
-                                                   .canSeeSky(blockPos)) {
+        if (this.random.nextFloat() < 0.5F && !this
+            .level()
+            .canSeeSky(blockPos)) {
             i--;
         }
 
@@ -371,7 +471,8 @@ public abstract class PastelFishingBobberEntity extends Projectile {
             if (this.hookCountdown <= 0) {
                 this.waitCountdown = 0;
                 this.fishTravelCountdown = 0;
-                this.getEntityData()
+                this
+                    .getEntityData()
                     .set(CAUGHT_FISH, false);
             }
         } else if (this.fishTravelCountdown > 0) {
@@ -397,21 +498,40 @@ public abstract class PastelFishingBobberEntity extends Projectile {
                     serverWorld.sendParticles(particles.getB(), d, e, j, 0, (-l), 0.01, k, 1.0);
                 }
             } else if (particles != null) {
-                this.playSound(
-                    SoundEvents.FISHING_BOBBER_SPLASH, 0.25F,
-                    1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F
-                );
+                this
+                    .playSound(
+                        SoundEvents.FISHING_BOBBER_SPLASH,
+                        0.25F,
+                        1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F
+                    );
                 double m = this.getY() + 0.5;
-                serverWorld.sendParticles(
-                    particles.getA(), this.getX(), m, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F),
-                    this.getBbWidth(), 0.0, this.getBbWidth(), 0.2F
-                );
-                serverWorld.sendParticles(
-                    particles.getB(), this.getX(), m, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F),
-                    this.getBbWidth(), 0.0, this.getBbWidth(), 0.2F
-                );
+                serverWorld
+                    .sendParticles(
+                        particles.getA(),
+                        this.getX(),
+                        m,
+                        this.getZ(),
+                        (int) (1.0F + this.getBbWidth() * 20.0F),
+                        this.getBbWidth(),
+                        0.0,
+                        this.getBbWidth(),
+                        0.2F
+                    );
+                serverWorld
+                    .sendParticles(
+                        particles.getB(),
+                        this.getX(),
+                        m,
+                        this.getZ(),
+                        (int) (1.0F + this.getBbWidth() * 20.0F),
+                        this.getBbWidth(),
+                        0.0,
+                        this.getBbWidth(),
+                        0.2F
+                    );
                 this.hookCountdown = Mth.nextInt(this.random, 20, 40);
-                this.getEntityData()
+                this
+                    .getEntityData()
                     .set(CAUGHT_FISH, true);
             }
         } else if (this.waitCountdown > 0) {
@@ -434,8 +554,18 @@ public abstract class PastelFishingBobberEntity extends Projectile {
                 BlockState blockState = serverWorld.getBlockState(BlockPos.containing(d, e - 1.0, j));
                 Tuple<SimpleParticleType, SimpleParticleType> particles = getFluidParticles(blockState);
                 if (particles != null) {
-                    serverWorld.sendParticles(
-                        particles.getA(), d, e, j, 2 + this.random.nextInt(2), 0.1F, 0.0, 0.1F, 0.0);
+                    serverWorld
+                        .sendParticles(
+                            particles.getA(),
+                            d,
+                            e,
+                            j,
+                            2 + this.random.nextInt(2),
+                            0.1F,
+                            0.0,
+                            0.1F,
+                            0.0
+                        );
                 }
             }
 
@@ -450,12 +580,12 @@ public abstract class PastelFishingBobberEntity extends Projectile {
         }
     }
 
-    @Nullable
-    private Tuple<SimpleParticleType, SimpleParticleType> getFluidParticles(BlockState blockState) {
+    @Nullable private Tuple<SimpleParticleType, SimpleParticleType> getFluidParticles(BlockState blockState) {
         Tuple<SimpleParticleType, SimpleParticleType> particles = null;
-        if (this.level()
-                .getBlockState(blockPosition())
-                .getBlock() instanceof PastelFluidBlock spectrumFluidBlock) {
+        if (this
+            .level()
+            .getBlockState(blockPosition())
+            .getBlock() instanceof PastelFluidBlock spectrumFluidBlock) {
             particles = spectrumFluidBlock.getFishingParticles();
         } else if (blockState.is(Blocks.LAVA)) {
             particles = new Tuple<>(ParticleTypes.FLAME, PastelParticleTypes.LAVA_FISHING);
@@ -468,9 +598,16 @@ public abstract class PastelFishingBobberEntity extends Projectile {
     public boolean isOpenOrWaterAround(BlockPos pos) {
         PastelFishingBobberEntity.PositionType positionType = PastelFishingBobberEntity.PositionType.INVALID;
 
-        for (int i = -1; i <= 2; i++) {
-            PastelFishingBobberEntity.PositionType positionType2 = this.getPositionType(
-                pos.offset(-2, i, -2), pos.offset(2, i, 2));
+        for (
+            int i = -1;
+            i <= 2;
+            i++
+        ) {
+            PastelFishingBobberEntity.PositionType positionType2 = this
+                .getPositionType(
+                    pos.offset(-2, i, -2),
+                    pos.offset(2, i, 2)
+                );
             switch (positionType2) {
                 case ABOVE_FLUID:
                     if (positionType == PastelFishingBobberEntity.PositionType.INVALID) {
@@ -493,23 +630,28 @@ public abstract class PastelFishingBobberEntity extends Projectile {
     }
 
     public PastelFishingBobberEntity.PositionType getPositionType(BlockPos start, BlockPos end) {
-        return BlockPos.betweenClosedStream(start, end)
-                       .map(this::getPositionType)
-                       .reduce((positionType, positionType2) -> positionType == positionType2 ? positionType
-                                                                                              :
-                                                                PastelFishingBobberEntity.PositionType.INVALID)
-                       .orElse(PastelFishingBobberEntity.PositionType.INVALID);
+        return BlockPos
+            .betweenClosedStream(start, end)
+            .map(this::getPositionType)
+            .reduce(
+                (positionType, positionType2) -> positionType == positionType2
+                    ? positionType
+                    : PastelFishingBobberEntity.PositionType.INVALID
+            )
+            .orElse(PastelFishingBobberEntity.PositionType.INVALID);
     }
 
     public PastelFishingBobberEntity.PositionType getPositionType(BlockPos pos) {
-        BlockState blockState = this.level()
-                                    .getBlockState(pos);
+        BlockState blockState = this
+            .level()
+            .getBlockState(pos);
         if (!blockState.isAir() && !blockState.is(Blocks.LILY_PAD)) {
             FluidState fluidState = blockState.getFluidState();
-            return !fluidState.isEmpty() && fluidState.isSource() && blockState.getCollisionShape(this.level(), pos)
-                                                                               .isEmpty()
-                   ? PastelFishingBobberEntity.PositionType.INSIDE_FLUID
-                   : PastelFishingBobberEntity.PositionType.INVALID;
+            return !fluidState.isEmpty() && fluidState.isSource() && blockState
+                .getCollisionShape(this.level(), pos)
+                .isEmpty()
+                    ? PastelFishingBobberEntity.PositionType.INSIDE_FLUID
+                    : PastelFishingBobberEntity.PositionType.INVALID;
         } else {
             return PastelFishingBobberEntity.PositionType.ABOVE_FLUID;
         }
@@ -529,21 +671,33 @@ public abstract class PastelFishingBobberEntity extends Projectile {
 
     public int use(ItemStack usedItem) {
         Player playerEntity = this.getPlayerOwner();
-        if (!this.level()
-                 .isClientSide() && playerEntity != null && !this.removeIfInvalid(playerEntity)) {
+        if (!this
+            .level()
+            .isClientSide() && playerEntity != null && !this.removeIfInvalid(playerEntity)) {
             int i = 0;
             if (this.hookedEntity != null) {
                 this.pullHookedEntity(this.hookedEntity);
 
-                PastelCriteria.FISHING_ROD_HOOKED.trigger(
-                    (ServerPlayer) playerEntity, usedItem, this, null, Collections.emptyList());
-                this.level()
+                PastelCriteria.FISHING_ROD_HOOKED
+                    .trigger(
+                        (ServerPlayer) playerEntity,
+                        usedItem,
+                        this,
+                        null,
+                        Collections.emptyList()
+                    );
+                this
+                    .level()
                     .broadcastEntityEvent(this, EntityEvent.FISHING_ROD_REEL_IN);
                 i = this.hookedEntity instanceof ItemEntity ? 3 : 5;
             } else if (this.hookCountdown > 0) {
                 if (!tryCatchEntity(usedItem, playerEntity, (ServerLevel) this.level(), this.blockPosition())) {
                     int lootAmount = random.nextIntBetweenInclusive(1, (int) Math.pow(2, 1 + serendipityReelLevel) - 1);
-                    for (int j = 0; j < lootAmount; j++) {
+                    for (
+                        int j = 0;
+                        j < lootAmount;
+                        j++
+                    ) {
                         catchLoot(usedItem, playerEntity);
                     }
                 }
@@ -564,10 +718,9 @@ public abstract class PastelFishingBobberEntity extends Projectile {
 
     @Override
     public void handleEntityEvent(byte status) {
-        if (status == EntityEvent.FISHING_ROD_REEL_IN
-            && this.level().isClientSide
-            && this.hookedEntity instanceof Player
-            && ((Player) this.hookedEntity).isLocalPlayer()) {
+        if (status == EntityEvent.FISHING_ROD_REEL_IN && this
+            .level().isClientSide && this.hookedEntity instanceof Player && ((Player) this.hookedEntity)
+                .isLocalPlayer()) {
             this.pullHookedEntity(this.hookedEntity);
         }
 
@@ -578,9 +731,16 @@ public abstract class PastelFishingBobberEntity extends Projectile {
         Entity entity2 = this.getOwner();
         if (entity2 != null) {
             Vec3 vec3d = (new Vec3(
-                entity2.getX() - this.getX(), entity2.getY() - this.getY(), entity2.getZ() - this.getZ())).scale(0.1);
-            entity.setDeltaMovement(entity.getDeltaMovement()
-                                          .add(vec3d));
+                entity2.getX() - this.getX(),
+                entity2.getY() - this.getY(),
+                entity2.getZ() - this.getZ()
+            )).scale(0.1);
+            entity
+                .setDeltaMovement(
+                    entity
+                        .getDeltaMovement()
+                        .add(vec3d)
+                );
         }
     }
 
@@ -613,14 +773,12 @@ public abstract class PastelFishingBobberEntity extends Projectile {
         }
     }
 
-    @Nullable
-    public Player getPlayerOwner() {
+    @Nullable public Player getPlayerOwner() {
         Entity entity = this.getOwner();
         return entity instanceof Player ? (Player) entity : null;
     }
 
-    @Nullable
-    public Entity getHookedEntity() {
+    @Nullable public Entity getHookedEntity() {
         return this.hookedEntity;
     }
 
@@ -640,12 +798,16 @@ public abstract class PastelFishingBobberEntity extends Projectile {
         super.recreateFromPacket(packet);
         if (this.getPlayerOwner() == null) {
             int entityData = packet.getData();
-            LOGGER.error(
-                "Failed to recreate fishing hook on client. {} (id: {}) is not a valid owner.", this.level()
-                                                                                                    .getEntity(
-                                                                                                        entityData),
-                entityData
-            );
+            LOGGER
+                .error(
+                    "Failed to recreate fishing hook on client. {} (id: {}) is not a valid owner.",
+                    this
+                        .level()
+                        .getEntity(
+                            entityData
+                        ),
+                    entityData
+                );
             this.kill();
         }
     }
@@ -673,29 +835,44 @@ public abstract class PastelFishingBobberEntity extends Projectile {
     }
 
     private boolean tryCatchEntity(ItemStack usedItem, Player playerEntity, ServerLevel world, BlockPos blockPos) {
-        Optional<EntityFishingEntity> caughtEntityType = EntityFishingDataLoader.tryCatchEntity(
-            world, blockPos, this.bigCatchLevel);
+        Optional<EntityFishingEntity> caughtEntityType = EntityFishingDataLoader
+            .tryCatchEntity(
+                world,
+                blockPos,
+                this.bigCatchLevel
+            );
         if (caughtEntityType.isPresent()) {
-            var entityType = caughtEntityType.get()
-                                             .entityType();
-            var nbt = CustomData.of(caughtEntityType.get()
-                                                    .nbt());
+            var entityType = caughtEntityType
+                .get()
+                .entityType();
+            var nbt = CustomData
+                .of(
+                    caughtEntityType
+                        .get()
+                        .nbt()
+                );
 
-            Entity entity = entityType.value()
-                                      .spawn(
-                                          world, ent -> EntityType.updateCustomEntityTag(world, playerEntity, ent, nbt),
-                                          blockPos, MobSpawnType.TRIGGERED, false, false
-                                      );
+            Entity entity = entityType
+                .value()
+                .spawn(
+                    world,
+                    ent -> EntityType.updateCustomEntityTag(world, playerEntity, ent, nbt),
+                    blockPos,
+                    MobSpawnType.TRIGGERED,
+                    false,
+                    false
+                );
             if (entity != null) {
                 double xDif = playerEntity.getX() - this.getX();
                 double yDif = playerEntity.getY() - this.getY();
                 double zDif = playerEntity.getZ() - this.getZ();
                 double velocityMod = 0.15D;
-                entity.push(
-                    xDif * velocityMod,
-                    yDif * velocityMod + Math.sqrt(Math.sqrt(xDif * xDif + yDif * yDif + zDif * zDif)) * 0.08D,
-                    zDif * velocityMod
-                );
+                entity
+                    .push(
+                        xDif * velocityMod,
+                        yDif * velocityMod + Math.sqrt(Math.sqrt(xDif * xDif + yDif * yDif + zDif * zDif)) * 0.08D,
+                        zDif * velocityMod
+                    );
 
                 if (isAblaze()) {
                     entity.igniteForSeconds(4);
@@ -705,8 +882,14 @@ public abstract class PastelFishingBobberEntity extends Projectile {
                     mobEntity.playAmbientSound();
                     mobEntity.spawnAnim();
                 }
-                PastelCriteria.FISHING_ROD_HOOKED.trigger(
-                    (ServerPlayer) playerEntity, usedItem, this, entity, List.of());
+                PastelCriteria.FISHING_ROD_HOOKED
+                    .trigger(
+                        (ServerPlayer) playerEntity,
+                        usedItem,
+                        this,
+                        entity,
+                        List.of()
+                    );
 
                 return true;
             }
@@ -725,14 +908,17 @@ public abstract class PastelFishingBobberEntity extends Projectile {
             .create(PastelLootContextTypes.FISHING);
 
         if (level().getServer() == null) return;
-        LootTable lootTable = this.level()
-                                  .getServer()
-                                  .reloadableRegistries()
-                                  .getLootTable(PastelLootTables.UNIVERSAL_FISHING);
+        LootTable lootTable = this
+            .level()
+            .getServer()
+            .reloadableRegistries()
+            .getLootTable(PastelLootTables.UNIVERSAL_FISHING);
         List<ItemStack> list = lootTable.getRandomItems(lootContextParameterSet);
         PastelCriteria.FISHING_ROD_HOOKED.trigger((ServerPlayer) playerEntity, usedItem, this, null, list);
 
-        for (ItemStack itemStack : list) {
+        for (
+            ItemStack itemStack : list
+        ) {
             if (itemStack.is(ItemTags.FISHES)) {
                 playerEntity.awardStat(Stats.FISH_CAUGHT, 1);
             }
@@ -743,50 +929,73 @@ public abstract class PastelFishingBobberEntity extends Projectile {
         }
 
         float exuberanceMod = ExuberanceHelper.getExuberanceMod(this.exuberanceLevel);
-        for (ItemStack itemStack : list) {
+        for (
+            ItemStack itemStack : list
+        ) {
             int experienceAmount = this.random.nextInt((int) (6 * exuberanceMod) + 1);
 
             if (this.inventoryInsertion) {
-                playerEntity.getInventory()
-                            .placeItemBackInInventory(itemStack);
+                playerEntity
+                    .getInventory()
+                    .placeItemBackInInventory(itemStack);
                 playerEntity.giveExperiencePoints(experienceAmount);
 
-                playerEntity.level()
-                            .playSound(
-                                null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(),
-                                SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS,
-                                0.2F, ((playerEntity.getRandom()
-                                                    .nextFloat() - playerEntity.getRandom()
-                                                                               .nextFloat()) * 0.7F + 1.0F) * 2.0F
-                            );
+                playerEntity
+                    .level()
+                    .playSound(
+                        null,
+                        playerEntity.getX(),
+                        playerEntity.getY(),
+                        playerEntity.getZ(),
+                        SoundEvents.ITEM_PICKUP,
+                        SoundSource.PLAYERS,
+                        0.2F,
+                        ((playerEntity
+                            .getRandom()
+                            .nextFloat() - playerEntity
+                                .getRandom()
+                                .nextFloat()) * 0.7F + 1.0F) * 2.0F
+                    );
             } else {
                 // fireproof item, so it does not burn when fishing in lava
                 ItemEntity itemEntity = new FireproofItemEntity(
-                    this.level(), this.getX(), this.getY(), this.getZ(), itemStack);
+                    this.level(),
+                    this.getX(),
+                    this.getY(),
+                    this.getZ(),
+                    itemStack
+                );
                 double d = playerEntity.getX() - this.getX();
                 double e = playerEntity.getY() - this.getY();
                 double f = playerEntity.getZ() - this.getZ();
                 double g = 0.1D;
                 itemEntity.setDeltaMovement(d * g, e * g + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08D, f * g);
-                this.level()
+                this
+                    .level()
                     .addFreshEntity(itemEntity);
 
                 // experience
                 if (experienceAmount > 0) {
-                    playerEntity.level()
-                                .addFreshEntity(new ExperienceOrb(
-                                    playerEntity.level(), playerEntity.getX(),
-                                    playerEntity.getY() + 0.5D,
-                                    playerEntity.getZ() + 0.5D, experienceAmount
-                                ));
+                    playerEntity
+                        .level()
+                        .addFreshEntity(
+                            new ExperienceOrb(
+                                playerEntity.level(),
+                                playerEntity.getX(),
+                                playerEntity.getY() + 0.5D,
+                                playerEntity.getZ() + 0.5D,
+                                experienceAmount
+                            )
+                        );
                 }
             }
         }
     }
 
     public boolean isAblaze() {
-        return this.getEntityData()
-                   .get(ABLAZE);
+        return this
+            .getEntityData()
+            .get(ABLAZE);
     }
 
     @Override

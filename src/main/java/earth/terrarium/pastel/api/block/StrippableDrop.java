@@ -30,14 +30,26 @@ public interface StrippableDrop {
     ResourceKey<LootTable> getStrippingLootTableKey();
 
     default boolean checkAndDropStrippedLoot(
-        BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
+        BlockState state,
+        Level world,
+        BlockPos pos,
+        BlockState newState,
+        boolean moved
+    ) {
         if (!moved && newState.is(getStrippedBlock())) {
             // we sadly don't have the entity or hand stack here, but oh well
             List<ItemStack> harvestedStacks = getStrippedStacks(
-                state, (ServerLevel) world, pos, world.getBlockEntity(pos), null, ItemStack.EMPTY,
+                state,
+                (ServerLevel) world,
+                pos,
+                world.getBlockEntity(pos),
+                null,
+                ItemStack.EMPTY,
                 getStrippingLootTableKey()
             );
-            for (ItemStack harvestedStack : harvestedStacks) {
+            for (
+                ItemStack harvestedStack : harvestedStacks
+            ) {
                 Containers.dropItemStack(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, harvestedStack);
             }
             return true;
@@ -46,8 +58,13 @@ public interface StrippableDrop {
     }
 
     static List<ItemStack> getStrippedStacks(
-        BlockState state, ServerLevel world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity,
-        ItemStack stack, ResourceKey<LootTable> lootTableKey
+        BlockState state,
+        ServerLevel world,
+        BlockPos pos,
+        @Nullable BlockEntity blockEntity,
+        @Nullable Entity entity,
+        ItemStack stack,
+        ResourceKey<LootTable> lootTableKey
     ) {
         var builder = (new LootParams.Builder(world))
             .withParameter(LootContextParams.BLOCK_STATE, state)
@@ -56,9 +73,10 @@ public interface StrippableDrop {
             .withOptionalParameter(LootContextParams.THIS_ENTITY, entity)
             .withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockEntity);
 
-        LootTable lootTable = world.getServer()
-                                   .reloadableRegistries()
-                                   .getLootTable(lootTableKey);
+        LootTable lootTable = world
+            .getServer()
+            .reloadableRegistries()
+            .getLootTable(lootTableKey);
         return lootTable.getRandomItems(builder.create(LootContextParamSets.BLOCK));
     }
 

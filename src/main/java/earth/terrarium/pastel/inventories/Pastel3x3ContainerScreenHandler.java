@@ -15,19 +15,29 @@ import org.jetbrains.annotations.NotNull;
 public class Pastel3x3ContainerScreenHandler extends AbstractContainerMenu {
 
     private final ScreenBackgroundVariant tier;
+
     private final Container inventory;
 
     public Pastel3x3ContainerScreenHandler(
-        int syncId, Inventory playerInventory, ScreenBackgroundVariant screenBackgroundVariant) {
+        int syncId,
+        Inventory playerInventory,
+        ScreenBackgroundVariant screenBackgroundVariant
+    ) {
         this(
-            PastelScreenHandlerTypes.GENERIC_TIER1_3X3, syncId, playerInventory, new SimpleContainer(9),
+            PastelScreenHandlerTypes.GENERIC_TIER1_3X3,
+            syncId,
+            playerInventory,
+            new SimpleContainer(9),
             screenBackgroundVariant
         );
     }
 
     public Pastel3x3ContainerScreenHandler(
-        MenuType<Pastel3x3ContainerScreenHandler> screenHandlerType, int syncId, Inventory playerInventory,
-        Container inventory, ScreenBackgroundVariant screenBackgroundVariant
+        MenuType<Pastel3x3ContainerScreenHandler> screenHandlerType,
+        int syncId,
+        Inventory playerInventory,
+        Container inventory,
+        ScreenBackgroundVariant screenBackgroundVariant
     ) {
         super(screenHandlerType, syncId);
         checkContainerSize(inventory, 9);
@@ -37,61 +47,111 @@ public class Pastel3x3ContainerScreenHandler extends AbstractContainerMenu {
 
         int m;
         int l;
-        for (m = 0; m < 3; ++m) {
-            for (l = 0; l < 3; ++l) {
+        for (
+            m = 0;
+            m < 3;
+            ++m
+        ) {
+            for (
+                l = 0;
+                l < 3;
+                ++l
+            ) {
                 this.addSlot(new Slot(inventory, l + m * 3, 62 + l * 18, 17 + m * 18));
             }
         }
 
-        for (m = 0; m < 3; ++m) {
-            for (l = 0; l < 9; ++l) {
+        for (
+            m = 0;
+            m < 3;
+            ++m
+        ) {
+            for (
+                l = 0;
+                l < 9;
+                ++l
+            ) {
                 this.addSlot(new Slot(playerInventory, l + m * 9 + 9, 8 + l * 18, 84 + m * 18));
             }
         }
 
-        for (m = 0; m < 9; ++m) {
+        for (
+            m = 0;
+            m < 9;
+            ++m
+        ) {
             this.addSlot(new Slot(playerInventory, m, 8 + m * 18, 142));
         }
     }
 
-    @Contract("_, _ -> new")
+    @Contract(
+        "_, _ -> new"
+    )
     public static @NotNull Pastel3x3ContainerScreenHandler createTier1(int syncId, Inventory playerInventory) {
         return new Pastel3x3ContainerScreenHandler(syncId, playerInventory, ScreenBackgroundVariant.EARLYGAME);
     }
 
-    @Contract("_, _, _ -> new")
+    @Contract(
+        "_, _, _ -> new"
+    )
     public static @NotNull AbstractContainerMenu createTier1(
-        int syncId, Inventory playerInventory, BlockPlacerBlockEntity blockEntity) {
+        int syncId,
+        Inventory playerInventory,
+        BlockPlacerBlockEntity blockEntity
+    ) {
         return new Pastel3x3ContainerScreenHandler(
-            PastelScreenHandlerTypes.GENERIC_TIER1_3X3, syncId, playerInventory, blockEntity,
+            PastelScreenHandlerTypes.GENERIC_TIER1_3X3,
+            syncId,
+            playerInventory,
+            blockEntity,
             ScreenBackgroundVariant.EARLYGAME
         );
     }
 
-    @Contract("_, _ -> new")
+    @Contract(
+        "_, _ -> new"
+    )
     public static @NotNull Pastel3x3ContainerScreenHandler createTier2(int syncId, Inventory playerInventory) {
         return new Pastel3x3ContainerScreenHandler(syncId, playerInventory, ScreenBackgroundVariant.MIDGAME);
     }
 
-    @Contract("_, _, _ -> new")
+    @Contract(
+        "_, _, _ -> new"
+    )
     public static @NotNull AbstractContainerMenu createTier2(
-        int syncId, Inventory playerInventory, BlockPlacerBlockEntity blockEntity) {
+        int syncId,
+        Inventory playerInventory,
+        BlockPlacerBlockEntity blockEntity
+    ) {
         return new Pastel3x3ContainerScreenHandler(
-            PastelScreenHandlerTypes.GENERIC_TIER1_3X3, syncId, playerInventory, blockEntity,
+            PastelScreenHandlerTypes.GENERIC_TIER1_3X3,
+            syncId,
+            playerInventory,
+            blockEntity,
             ScreenBackgroundVariant.MIDGAME
         );
     }
 
-    @Contract("_, _ -> new")
+    @Contract(
+        "_, _ -> new"
+    )
     public static @NotNull Pastel3x3ContainerScreenHandler createTier3(int syncId, Inventory playerInventory) {
         return new Pastel3x3ContainerScreenHandler(syncId, playerInventory, ScreenBackgroundVariant.LATEGAME);
     }
 
-    @Contract("_, _, _ -> new")
+    @Contract(
+        "_, _, _ -> new"
+    )
     public static @NotNull AbstractContainerMenu createTier3(
-        int syncId, Inventory playerInventory, BlockPlacerBlockEntity blockEntity) {
+        int syncId,
+        Inventory playerInventory,
+        BlockPlacerBlockEntity blockEntity
+    ) {
         return new Pastel3x3ContainerScreenHandler(
-            PastelScreenHandlerTypes.GENERIC_TIER1_3X3, syncId, playerInventory, blockEntity,
+            PastelScreenHandlerTypes.GENERIC_TIER1_3X3,
+            syncId,
+            playerInventory,
+            blockEntity,
             ScreenBackgroundVariant.LATEGAME
         );
     }

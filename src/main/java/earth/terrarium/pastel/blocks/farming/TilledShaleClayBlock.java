@@ -18,9 +18,14 @@ public class TilledShaleClayBlock extends ImmutableFarmlandBlock {
 
     @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        entity.causeFallDamage(fallDistance, 2.0F, world.damageSources()
-                                                        .fall()
-        );
+        entity
+            .causeFallDamage(
+                fallDistance,
+                2.0F,
+                world
+                    .damageSources()
+                    .fall()
+            );
     }
 
 }

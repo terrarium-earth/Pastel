@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class ToggleableBlockColorProvider implements BlockColor {
 
     final BlockColor vanillaProvider;
+
     boolean shouldApply;
 
     public ToggleableBlockColorProvider(BlockColor vanillaProvider) {

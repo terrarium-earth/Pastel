@@ -11,7 +11,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@OnlyIn(
+    Dist.CLIENT
+)
 public class TurtleHeadModel extends PastelSkullModel {
 
     public TurtleHeadModel(ModelPart root) {
@@ -22,13 +24,15 @@ public class TurtleHeadModel extends PastelSkullModel {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(
-            PartNames.HEAD,
-            CubeListBuilder.create()
-                           .texOffs(3, 0)
-                           .addBox(-3.0F, -5.0F, -3.0F, 6.0F, 5.0F, 6.0F),
-            PartPose.ZERO
-        );
+        modelPartData
+            .addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder
+                    .create()
+                    .texOffs(3, 0)
+                    .addBox(-3.0F, -5.0F, -3.0F, 6.0F, 5.0F, 6.0F),
+                PartPose.ZERO
+            );
 
         return LayerDefinition.create(modelData, 128, 64);
     }

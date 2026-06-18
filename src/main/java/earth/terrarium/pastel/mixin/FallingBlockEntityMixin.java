@@ -13,26 +13,44 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(FallingBlockEntity.class)
+@Mixin(
+    FallingBlockEntity.class
+)
 public class FallingBlockEntityMixin {
 
     /**
      * By default, falling blocks only damage living entities
      * This mixin runs a second check if we are dealing anvil damage and if yes, triggers anvil crushing
      */
-    @Inject(method = "causeFallDamage", at = @At(value = "INVOKE",
-                                                 target = "Lnet/minecraft/world/level/block/state/BlockState;is" +
-                                                          "(Lnet/minecraft/tags/TagKey;)Z"))
+    @Inject(
+        method = "causeFallDamage", at = @At(
+            value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is" + "(Lnet/minecraft/tags/TagKey;)Z"
+        )
+    )
     private void processAnvilCrushing(
-        float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir,
-        @Local(ordinal = 1) DamageSource damageSource2, @Local(ordinal = 2) float fallHurt
+        float fallDistance,
+        float damageMultiplier,
+        DamageSource damageSource,
+        CallbackInfoReturnable<Boolean> cir,
+        @Local(
+            ordinal = 1
+        )
+        DamageSource damageSource2,
+        @Local(
+            ordinal = 2
+        )
+        float fallHurt
     ) {
         if (damageSource2.is(DamageTypes.FALLING_ANVIL)) {
             FallingBlockEntity thisEntity = (FallingBlockEntity) (Object) this;
-            thisEntity.level()
-                      .getEntities(
-                          EntityTypeTest.forClass(ItemEntity.class), thisEntity.getBoundingBox(), Entity::isAlive)
-                      .forEach((entity) -> AnvilCrusher.crush(entity, fallHurt));
+            thisEntity
+                .level()
+                .getEntities(
+                    EntityTypeTest.forClass(ItemEntity.class),
+                    thisEntity.getBoundingBox(),
+                    Entity::isAlive
+                )
+                .forEach((entity) -> AnvilCrusher.crush(entity, fallHurt));
         }
     }
 

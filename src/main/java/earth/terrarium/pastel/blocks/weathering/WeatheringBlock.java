@@ -32,8 +32,9 @@ public class WeatheringBlock extends Block implements Weathering {
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return Weathering.getIncreasedWeatheredBlock(state.getBlock())
-                         .isPresent();
+        return Weathering
+            .getIncreasedWeatheredBlock(state.getBlock())
+            .isPresent();
     }
 
     @Override

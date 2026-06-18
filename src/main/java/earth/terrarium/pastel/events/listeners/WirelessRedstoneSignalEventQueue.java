@@ -13,7 +13,10 @@ import net.minecraft.world.phys.Vec3;
 public class WirelessRedstoneSignalEventQueue extends EventQueue<WirelessRedstoneSignalEventQueue.EventEntry> {
 
     public WirelessRedstoneSignalEventQueue(
-        PositionSource positionSource, int range, EventQueue.Callback<EventEntry> listener) {
+        PositionSource positionSource,
+        int range,
+        EventQueue.Callback<EventEntry> listener
+    ) {
         super(positionSource, range, listener);
     }
 
@@ -22,15 +25,21 @@ public class WirelessRedstoneSignalEventQueue extends EventQueue<WirelessRedston
         if (world instanceof ServerLevel && event.gameEvent() == PastelGameEvents.WIRELESS_REDSTONE_SIGNAL) {
             Vec3 pos = event.source();
             var eventEntry = new WirelessRedstoneSignalEventQueue.EventEntry(
-                event, Mth.floor(pos.distanceTo(sourcePos)));
+                event,
+                Mth.floor(pos.distanceTo(sourcePos))
+            );
             int delay = eventEntry.distance * 2;
             this.schedule(eventEntry, delay);
-            TypedTransmissionPayload.playTransmissionParticle(
-                (ServerLevel) world, new TypedTransmission(
-                    pos, this.positionSource, delay,
-                    TypedTransmission.Variant.REDSTONE
-                )
-            );
+            TypedTransmissionPayload
+                .playTransmissionParticle(
+                    (ServerLevel) world,
+                    new TypedTransmission(
+                        pos,
+                        this.positionSource,
+                        delay,
+                        TypedTransmission.Variant.REDSTONE
+                    )
+                );
         }
     }
 

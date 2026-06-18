@@ -13,12 +13,24 @@ import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin({CropBlock.class, StemBlock.class, AttachedStemBlock.class, PitcherCropBlock.class})
+@Mixin(
+    {
+        CropBlock.class, StemBlock.class, AttachedStemBlock.class, PitcherCropBlock.class
+}
+)
 public abstract class PlantOnCustomFarmlandMixin {
 
-    @ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method = "mayPlaceOn", at = @At(
+            "RETURN"
+        )
+    )
     public boolean canPlantOnTopOfCustomFarmland(
-        boolean original, @NotNull BlockState floor, BlockGetter world, BlockPos pos) {
+        boolean original,
+        @NotNull BlockState floor,
+        BlockGetter world,
+        BlockPos pos
+    ) {
         return original || floor.getBlock() instanceof PastelFarmlandBlock;
     }
 

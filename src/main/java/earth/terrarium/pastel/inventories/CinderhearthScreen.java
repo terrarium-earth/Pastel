@@ -40,10 +40,15 @@ public class CinderhearthScreen extends AbstractContainerScreen<CinderhearthScre
         Component title = this.title;
 
         drawContext.drawString(this.font, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
-        drawContext.drawString(
-            this.font, this.playerInventoryTitle, ColorPickerScreenHandler.PLAYER_INVENTORY_START_X,
-            ColorPickerScreenHandler.PLAYER_INVENTORY_START_Y - 10, RenderHelper.GREEN_COLOR, false
-        );
+        drawContext
+            .drawString(
+                this.font,
+                this.playerInventoryTitle,
+                ColorPickerScreenHandler.PLAYER_INVENTORY_START_X,
+                ColorPickerScreenHandler.PLAYER_INVENTORY_START_Y - 10,
+                RenderHelper.GREEN_COLOR,
+                false
+            );
     }
 
     @Override
@@ -59,9 +64,10 @@ public class CinderhearthScreen extends AbstractContainerScreen<CinderhearthScre
         int craftingTime = this.menu.getCraftingTime();
         int craftingTimeTotal = this.menu.getCraftingTimeTotal();
 
-        if (this.menu.getBlockEntity()
-                     .getEnergyStorage()
-                     .getEnergy(InkColors.ORANGE) > 0) {
+        if (this.menu
+            .getBlockEntity()
+            .getEnergyStorage()
+            .getEnergy(InkColors.ORANGE) > 0) {
             drawContext.blit(BACKGROUND, this.leftPos + 14, this.topPos + 62, 176, 14, 15, 2);
         }
 
@@ -70,8 +76,16 @@ public class CinderhearthScreen extends AbstractContainerScreen<CinderhearthScre
             drawContext.blit(BACKGROUND, this.leftPos + 15, this.topPos + 48, 176, 0, 14, 14);
 
             // the arrow
-            drawContext.blit(
-                BACKGROUND, this.leftPos + 35, this.topPos + 32, 176, 16, (craftingTime * 22) / craftingTimeTotal, 16);
+            drawContext
+                .blit(
+                    BACKGROUND,
+                    this.leftPos + 35,
+                    this.topPos + 32,
+                    176,
+                    16,
+                    (craftingTime * 22) / craftingTimeTotal,
+                    16
+                );
         }
 
     }
