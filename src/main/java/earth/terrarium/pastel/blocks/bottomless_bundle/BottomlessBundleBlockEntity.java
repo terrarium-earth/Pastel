@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.blocks.bottomless_bundle;
 
+import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
@@ -10,6 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -23,6 +25,8 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
     // Do not modify without syncing storage too!
     // Contents are synced from/into storage whenever needed [i.e. (de)serialization or setting/fetching bundle item]
     private ItemStack bundle;
+
+    private ItemReference lockedItem;
 
     private ItemStorage innerStorage;
 
@@ -41,6 +45,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
         innerStorage = ItemStorage
             .load(bundle)
             .copy();
+        lockedItem = innerStorage.getReference();
     }
 
     public IItemHandler storage = new IItemHandler() {
@@ -59,6 +64,9 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
             if (slot != 0)
                 return stack;
 
+            if (lockedItem != null && !lockedItem.permits(stack)) // if we've ever held an item while placed, don't
+                return stack;                                    // change what item we store - it gets annoying
+
             var change = innerStorage.insert(stack);
             var remainder = stack.copyWithCount(stack.getCount() - change);
 
@@ -69,6 +77,8 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
                 return remainder;
             }
 
+            if (change > 0 && lockedItem == null) // inserting into a placed empty bundle sets its lock item
+                lockedItem = innerStorage.getReference();
             setChanged();
             return isVoiding ? ItemStack.EMPTY : remainder;
         }
