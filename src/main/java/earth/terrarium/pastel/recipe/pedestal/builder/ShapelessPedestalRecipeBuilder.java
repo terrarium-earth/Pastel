@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,6 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
                 this.skipRemainders,
                 this.ignoreYieldUpgrades
         );
-        recipeOutput.accept(id, recipe, null);
+        recipeOutput.accept(id, recipe, null, this.conditions.toArray(ICondition[]::new));
     }
 }

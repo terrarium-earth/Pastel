@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.*;
 
@@ -64,6 +65,8 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
                         this.skipRemainders,
                         this.ignoreYieldUpgrades
                 );
-        recipeOutput.accept(id, realRecipe, null);
+
+
+        recipeOutput.accept(id, realRecipe, null, this.conditions.toArray(ICondition[]::new));
     }
 }
