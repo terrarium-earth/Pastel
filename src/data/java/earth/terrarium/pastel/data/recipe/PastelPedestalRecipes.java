@@ -10,6 +10,7 @@ import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorColle
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.recipe.pedestal.builder.PedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapedPedestalRecipeBuilder;
@@ -25,6 +26,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -38,6 +40,10 @@ import java.util.stream.Collectors;
 import static earth.terrarium.pastel.registries.PastelItems.*;
 
 public class PastelPedestalRecipes {
+    private static void generateRecipe(RecipeOutput ctx, String id, Recipe<?> recipe) {
+        ctx.accept(PastelCommon.locate(id), recipe, null);
+    }
+
     private static void generateRecipeFromBuilder(RecipeOutput ctx, String id, RecipeBuilder builder) {
         builder.save(ctx, PastelCommon.locate(id));
     }
@@ -97,23 +103,38 @@ public class PastelPedestalRecipes {
                     PedestalTier.COMPLEX
             );
 
+    private static String tierIdOf(PedestalTier tier) {
+        return switch (tier) {
+            case BASIC -> "tier1";
+            case SIMPLE -> "tier2";
+            case ADVANCED -> "tier3";
+            case COMPLEX -> "tier4";
+        };
+    }
+
     private static void generatePedestalRecipeWithSavedTier(
             RecipeOutput ctx,
             String id,
             PedestalTier tier,
             PedestalRecipeBuilder<?> builder
     ) {
-        String tierId =
-                switch (tier) {
-                    case BASIC -> "tier1";
-                    case SIMPLE -> "tier2";
-                    case ADVANCED -> "tier3";
-                    case COMPLEX -> "tier4";
-                };
+        String tierId = tierIdOf(tier);
         generateRecipeFromBuilder(
                 ctx,
                 "pedestal/" + tierId + "/" + id,
                 builder
+        );
+    }
+
+    private static void generateDynamicPedestalRecipe(
+            RecipeOutput ctx,
+            String id,
+            PedestalRecipe recipe
+    ) {
+        generateRecipe(
+                ctx,
+                "pedestal/" + tierIdOf(recipe.getTier()) + "/" + id,
+                recipe
         );
     }
 
@@ -126,46 +147,11 @@ public class PastelPedestalRecipes {
         generatePedestalRecipeWithSavedTier(ctx, id, builder.getTier(), builder);
     }
 
-
-
-
-
-
-
-
-
-
-
-    // named basic to remind myself that it always saves to the basic directory
-    private static void generateBasicGlassPane(RecipeOutput ctx, @Nullable String group, ResourceLocation unlock, int craftingTime, PedestalTier tier, DeferredBlock<Block> glass, DeferredBlock<Block> pane) {
-        generatePedestalRecipeWithSavedTier(
-                ctx,
-                "glass/" + pane.getId().getPath(),
-                PedestalTier.BASIC,
-                new ShapedPedestalRecipeBuilder(new ItemStack(pane.asItem(), 16))
-                        .group(group)
-                        .craftingTime(craftingTime)
-                        .tier(tier)
-                        .experience(0.1f)
-                        .requiredAdvancement(unlock)
-                        .pattern("GGG")
-                        .pattern("GGG")
-                        .key('G', glass.asItem())
-        );
-    }
-
-
-
-
-
-
-
-
-
-
-
     public static void generate(RecipeOutput ctx) {
         BasicRecipes.generate(ctx);
+        SimpleRecipes.generate(ctx);
+        AdvancedRecipes.generate(ctx);
+        ComplexRecipes.generate(ctx);
     }
 
 
@@ -202,7 +188,7 @@ public class PastelPedestalRecipes {
             generatePedestalRecipe(
                     ctx,
                     "arrows/malachite",
-                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelItems.MALACHITE_GLASS_ARROW.get(), 4))
+                    new ShapedPedestalRecipeBuilder(new ItemStack(MALACHITE_GLASS_ARROW.get(), 4))
                             .group("glass_arrows")
                             .craftingTime(200)
                             .tier(PedestalTier.BASIC)
@@ -210,7 +196,7 @@ public class PastelPedestalRecipes {
                             .pattern("M")
                             .pattern("S")
                             .pattern("F")
-                            .key('M', PastelItems.RAW_MALACHITE.get())
+                            .key('M', RAW_MALACHITE.get())
                             .key('S', Items.STICK)
                             .key('F', PastelItemTags.RESPLENDENT_FEATHERS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_ARROWS)
@@ -228,7 +214,7 @@ public class PastelPedestalRecipes {
         private static void generateCompactingRecipes(RecipeOutput ctx) {
 
             for (PastelGemstoneColor color : PastelGemstoneColor.values()) {
-                var unpacked = PastelItems.GEMSTONE_POWDERS.pick(color);
+                var unpacked = GEMSTONE_POWDERS.pick(color);
                 var packed = PastelBlocks.GEMSTONE_POWDER_BLOCKS.pick(color);
                 var unlock = BASE_SHARD_UNLOCKS.pick(color);
                 generateCompactingPair(ctx, unlock, unpacked, packed);
@@ -371,10 +357,9 @@ public class PastelPedestalRecipes {
 
         private static void generateBasicGlasses(RecipeOutput ctx) {
             PastelGemstoneColorCollection.zipApply(PastelGemstoneColorCollection.VALUES, PastelGemstoneColorCollection.GEMSTONE_NAMES, (color, name) -> {
-                generatePedestalRecipeWithSavedTier(
+                generateBasicRecipe(
                         ctx,
                         "glass/" + name + "_glass",
-                        PedestalTier.BASIC,
                         new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.GEMSTONE_GLASSES.pick(color), 8))
                                 .tier(PastelGemstoneColorCollection.MINIMUM_TIER.pick(color))
                                 .craftingTime(20)
@@ -436,10 +421,9 @@ public class PastelPedestalRecipes {
                 var pylon = PastelBlocks.PYLONS.pick(color);
                 var unlock = PastelAdvancements.Unlocks.Pylons.VALUES.pick(color);
 
-                generatePedestalRecipeWithSavedTier(
+                generateBasicRecipe(
                         ctx,
                         "pylons/" + PastelGemstoneColorCollection.GEMSTONE_NAMES.pick(color),
-                        PedestalTier.BASIC,
                         new ShapedPedestalRecipeBuilder(new ItemStack(pylon.asItem()))
                                 .group("pylons")
                                 .craftingTime(40)
@@ -467,6 +451,15 @@ public class PastelPedestalRecipes {
         }
 
         // basic generation utilities
+
+        private static void generateBasicRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
+            generatePedestalRecipeWithSavedTier(
+                    ctx,
+                    id,
+                    PedestalTier.BASIC,
+                    builder
+            );
+        }
 
         private static void generateCompactingPairWithGroup(RecipeOutput ctx, @Nullable String group, String subpath, String unpackName, ResourceLocation unlock, DeferredItem<?> unpacked, DeferredBlock<?> packed) {
             generatePedestalRecipe(
@@ -508,10 +501,9 @@ public class PastelPedestalRecipes {
 
         private static void generateDetectorRecipe(RecipeOutput ctx, PastelGemstoneColor color, ResourceLocation unlock, DeferredBlock<?> output) {
 
-            generatePedestalRecipeWithSavedTier(
+            generateBasicRecipe(
                     ctx,
                     "detectors/" + output.getId().getPath(),
-                    PedestalTier.BASIC,
                     new ShapedPedestalRecipeBuilder(new ItemStack(output.asItem()))
                             .tier(PastelGemstoneColorCollection.MINIMUM_TIER.pick(color))
                             .craftingTime(80)
@@ -521,7 +513,7 @@ public class PastelPedestalRecipes {
                             .pattern("CQC")
                             .pattern("SSS")
                             .key('B', Items.GLASS)
-                            .key('C', PastelItems.GEMSTONE_SHARDS.pick(color).value())
+                            .key('C', GEMSTONE_SHARDS.pick(color).value())
                             .key('Q', Items.QUARTZ)
                             .key('S', ItemTags.WOODEN_SLABS)
                             .requiredAdvancement(unlock)
@@ -530,10 +522,9 @@ public class PastelPedestalRecipes {
 
         private static void generateGemstoneLightsGroup(RecipeOutput ctx, DeferredBlock<Block> baseBlock, PastelGemstoneColorCollection<DeferredBlock<Block>> blocks) {
             PastelGemstoneColorCollection.zipApply(blocks, PastelGemstoneColorCollection.VALUES, (block, color) -> {
-                generatePedestalRecipeWithSavedTier(
+                generateBasicRecipe(
                         ctx,
                         "gemstone_lights/" + block.getId().getPath(),
-                        PedestalTier.BASIC,
                         new ShapedPedestalRecipeBuilder(new ItemStack(block.asItem(), 4))
                                 .group(PastelGemstoneColorCollection.GEMSTONE_NAMES.pick(color) + "_lights")
                                 .requiredAdvancement(PastelAdvancements.Unlocks.GemstoneLights.VALUES.pick(color))
@@ -559,10 +550,9 @@ public class PastelPedestalRecipes {
                 var cluster = PastelBlocks.GEMSTONE_CLUSTERS.pick(color);
                 var shard = GEMSTONE_SHARDS.pick(color);
 
-                generatePedestalRecipeWithSavedTier(
+                generateBasicRecipe(
                         ctx,
                         "runes/" + result.getId().getPath() + "_from_cluster",
-                        PedestalTier.BASIC,
                         new ShapedPedestalRecipeBuilder(new ItemStack(result.asItem(), 8))
                                 .group("gemstone_chiseled_blocks")
                                 .craftingTime(80)
@@ -577,10 +567,9 @@ public class PastelPedestalRecipes {
                                 .key('X', cluster.asItem())
                 );
 
-                generatePedestalRecipeWithSavedTier(
+                generateBasicRecipe(
                         ctx,
                         "runes/" + result.getId().getPath() + "_from_shards",
-                        PedestalTier.BASIC,
                         new ShapedPedestalRecipeBuilder(new ItemStack(result.asItem(), 1))
                                 .group("gemstone_chiseled_blocks")
                                 .craftingTime(80)
@@ -612,10 +601,9 @@ public class PastelPedestalRecipes {
 
             // note, for some reason all these are saved under the tier1 directory even though they have different tiers
             // depending on color progression
-            generatePedestalRecipeWithSavedTier(
+            generateBasicRecipe(
                     ctx,
                     "colored_lamps/" + color.getID().getPath(),
-                    PedestalTier.BASIC,
                     new ShapedPedestalRecipeBuilder(new ItemStack(result.asItem(), 2))
                             .group("colored_lamps")
                             .experience(0.5f)
@@ -637,7 +625,7 @@ public class PastelPedestalRecipes {
             generatePedestalRecipe(
                     ctx,
                     "arrows/" + PastelGemstoneColorCollection.GEMSTONE_NAMES.pick(color),
-                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelItems.GEMSTONE_GLASS_ARROWS.pick(color).get(), 2))
+                    new ShapedPedestalRecipeBuilder(new ItemStack(GEMSTONE_GLASS_ARROWS.pick(color).get(), 2))
                             .group("glass_arrows")
                             .craftingTime(200)
                             .tier(PedestalTier.BASIC)
@@ -645,9 +633,9 @@ public class PastelPedestalRecipes {
                             .experience(1.0f)
                             .pattern("AA")
                             .pattern("GB")
-                            .key('G', PastelItems.GEMSTONE_SHARDS.pick(color).value())
-                            .key('A', PastelItems.MALACHITE_GLASS_ARROW.get())
-                            .key('B', PastelItems.BISMUTH_FLAKE.get())
+                            .key('G', GEMSTONE_SHARDS.pick(color).value())
+                            .key('A', MALACHITE_GLASS_ARROW.get())
+                            .key('B', BISMUTH_FLAKE.get())
                             .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_ARROWS)
             );
         }
@@ -659,10 +647,9 @@ public class PastelPedestalRecipes {
             var sapling = PastelBlocks.COLORED_SAPLINGS.pick(color);
             var unlock = PastelAdvancements.Unlocks.ColoredSaplings.VALUES.pick(color);
 
-            generatePedestalRecipeWithSavedTier(
+            generateBasicRecipe(
                     ctx,
                     "saplings/" + PastelInkColorCollection.NAMES.pick(color),
-                    PedestalTier.BASIC,
                     new ShapedPedestalRecipeBuilder(new ItemStack(sapling.asItem()))
                             .group("colored_saplings")
                             .craftingTime(160)
@@ -679,6 +666,49 @@ public class PastelPedestalRecipes {
             );
         }
 
-
+        private static void generateBasicGlassPane(RecipeOutput ctx, @Nullable String group, ResourceLocation unlock, int craftingTime, PedestalTier tier, DeferredBlock<Block> glass, DeferredBlock<Block> pane) {
+            generateBasicRecipe(
+                    ctx,
+                    "glass/" + pane.getId().getPath(),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(pane.asItem(), 16))
+                            .group(group)
+                            .craftingTime(craftingTime)
+                            .tier(tier)
+                            .experience(0.1f)
+                            .requiredAdvancement(unlock)
+                            .pattern("GGG")
+                            .pattern("GGG")
+                            .key('G', glass.asItem())
+            );
+        }
     }
+
+    private static class SimpleRecipes {
+        static void generate(RecipeOutput ctx) {
+            // TODO: colored spore blossoms
+            // TODO: vanilla
+            // TODO: simple root
+        }
+    }
+
+    private static class AdvancedRecipes {
+        static void generate(RecipeOutput ctx) {
+            // TODO: gemstone chimes
+            // TODO: glowblocks
+            // TODO: idols
+            // TODO: pastel network
+            // TODO: semi permeable glass
+            // TODO: trinkets
+            // TODO: advanced root
+        }
+    }
+
+    private static class ComplexRecipes {
+        static void generate(RecipeOutput ctx) {
+            // TODO: vanilla
+            // TODO: complex root
+        }
+    }
+
+
 }
