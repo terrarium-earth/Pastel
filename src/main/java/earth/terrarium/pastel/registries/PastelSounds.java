@@ -1,9 +1,11 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColorCollection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -431,6 +433,15 @@ public class PastelSounds {
     public static final SoundEvent BLOCK_LARGE_MOONSTONE_BUD_PLACE = register("block.large_moonstone_bud.place");
 
     public static final SoundEvent BLOCK_MOONSTONE_BLOCK_CHIME = register("block.moonstone_block.chime");
+
+    public static final PastelGemstoneColorCollection<SoundEvent> GEMSTONE_CHIMES =
+            new PastelGemstoneColorCollection<>(
+                    BLOCK_TOPAZ_BLOCK_CHIME,
+                    SoundEvents.AMETHYST_BLOCK_CHIME,
+                    BLOCK_CITRINE_BLOCK_CHIME,
+                    BLOCK_ONYX_BLOCK_CHIME,
+                    BLOCK_MOONSTONE_BLOCK_CHIME
+            );
 
     public static final SoundEvent SPECTRAL_BLOCK_BREAK = register("block.spectral_block.break");
 

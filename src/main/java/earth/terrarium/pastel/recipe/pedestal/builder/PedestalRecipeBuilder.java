@@ -24,6 +24,11 @@ public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> 
         super(result);
     }
 
+    @Nullable
+    public PedestalTier getTier() {
+        return this.tier;
+    }
+
     // SERIOUSLY! Don't pass null!
     public C tier(PedestalTier tier) {
         Objects.requireNonNull(tier, "tier may not be null");

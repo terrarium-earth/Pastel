@@ -1,0 +1,35 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 3,
+    "pastel:cyan": 0,
+    "pastel:magenta": 1,
+    "pastel:white": 0,
+    "pastel:yellow": 2
+  },
+  "experience": 0.5,
+  "group": "colored_lamps",
+  "key": {
+    "P": {
+      "item": "pastel:brown_pigment"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PRP",
+    "SPS"
+  ],
+  "required_advancement": "pastel:unlocks/colored_lamps/brown_lamp",
+  "result": {
+    "count": 2,
+    "id": "pastel:brown_lamp"
+  },
+  "tier": "advanced",
+  "time": 40
+}

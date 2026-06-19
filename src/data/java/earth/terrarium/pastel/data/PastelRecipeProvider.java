@@ -1,22 +1,28 @@
 package earth.terrarium.pastel.data;
 
 import com.mojang.datafixers.util.Either;
+import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
+import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
+import earth.terrarium.pastel.api.item.GemstoneColor;
+import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.recipe.RecipeScaling;
 import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
 import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
-import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelFluids;
-import earth.terrarium.pastel.registries.PastelResourceConditions;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
+import earth.terrarium.pastel.recipe.pedestal.builder.ShapedPedestalRecipeBuilder;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceKey;
@@ -36,13 +42,16 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 import static earth.terrarium.pastel.registries.PastelEnchantments.BIG_CATCH;
 import static earth.terrarium.pastel.registries.PastelEnchantments.CLOVERS_FAVOR;
@@ -147,6 +156,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         generateCrystallarieumRecipes(recipeOutput);
         generateEnchantmentUpgradeRecipes(recipeOutput);
         generateHealingDegradingRecipes(recipeOutput);
+        generateShapedPedestalRecipes(recipeOutput);
     }
 
     private static final Map<Block, Block> HEALING_DEGRADING_PAIRS = Map
@@ -229,6 +239,130 @@ public class PastelRecipeProvider extends RecipeProvider {
                     .asItem()
                     .getDefaultInstance()
             )
+        );
+    }
+
+    private void generateArrowPedestalRecipes(RecipeOutput ctx) {
+        generateShapedPedestalRecipe(
+                ctx,
+                "arrows/malachite",
+                new ShapedPedestalRecipeBuilder(new ItemStack(PastelItems.MALACHITE_GLASS_ARROW.get(), 4))
+                        .group("glass_arrows")
+                        .craftingTime(200)
+                        .tier(PedestalTier.BASIC)
+                        .experience(1.0f)
+                        .pattern("M")
+                        .pattern("S")
+                        .pattern("F")
+                        .key('M', PastelItems.RAW_MALACHITE.get())
+                        .key('S', Items.STICK)
+                        .key('F', PastelItemTags.RESPLENDENT_FEATHERS)
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_ARROWS)
+        );
+
+        for (PastelGemstoneColor color : PastelGemstoneColor.values()) {
+            generateGemstoneArrowRecipe(ctx, color);
+        }
+    }
+
+    private GemstoneColor unsafeGemstoneColorFromInkColor(InkColor color) {
+        if (InkColors.CYAN == color) {
+            return PastelGemstoneColor.CYAN;
+        } else if (InkColors.MAGENTA == color) {
+            return PastelGemstoneColor.MAGENTA;
+        } else if (InkColors.YELLOW == color) {
+            return PastelGemstoneColor.YELLOW;
+        } else if (InkColors.BLACK == color) {
+            return PastelGemstoneColor.BLACK;
+        } else if (InkColors.WHITE == color) {
+            return PastelGemstoneColor.WHITE;
+        }
+        throw new IllegalArgumentException("Tried to get gemstone color from non-primary ink color");
+    }
+
+    private Map<GemstoneColor, Integer> getPowderMix(InkColor color, int total) {
+        return InkColorMixes.getColorsToMix(color).map(it ->
+                it.entrySet().stream().map(entry ->
+                        new Pair<>(unsafeGemstoneColorFromInkColor(entry.getKey()), (int)(entry.getValue() * total))
+                ).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond))
+        ).orElseGet(() -> Map.of(unsafeGemstoneColorFromInkColor(color), total));
+    }
+
+    private void saveColoredLamp(RecipeOutput ctx, InkColor color) {
+        DeferredBlock<?> result = PastelBlocks.COLORED_LAMPS.pick(color);
+        ResourceLocation unlock = PastelAdvancements.Unlocks.ColoredLamps.LAMPS.pick(color);
+        // this MAY be the worst java code i've written
+        // but IF THIS WAS SCALA this would be peak
+        Map<GemstoneColor, Integer> colorMix = getPowderMix(color, 6);
+
+        PedestalTier tier = PedestalTier.BASIC;
+
+        if (colorMix.containsKey(PastelGemstoneColor.WHITE)) {
+            tier = PedestalTier.COMPLEX;
+        } else if (colorMix.containsKey(PastelGemstoneColor.BLACK)) {
+            tier = PedestalTier.ADVANCED;
+        }
+
+
+        // note, for some reason all these are saved under the tier1 directory even though they have different tiers
+        // depending on color progression
+        generateShapedPedestalRecipeWithSavedTier(
+                ctx,
+                "colored_lamps/" + color.getID().getPath(),
+                PedestalTier.BASIC,
+                new ShapedPedestalRecipeBuilder(new ItemStack(result.asItem(), 2))
+                        .group("colored_lamps")
+                        .experience(0.5f)
+                        .craftingTime(40)
+                        .pattern("SPS")
+                        .pattern("PRP")
+                        .pattern("SPS")
+                        .key('R', Items.REDSTONE)
+                        .key('S', SHIMMERSTONE_GEM.get())
+                        .key('P', PigmentItem.byColor(color))
+                        .powderInput(PastelGemstoneColor.CYAN, colorMix.getOrDefault(PastelGemstoneColor.CYAN, 0))
+                        .powderInput(PastelGemstoneColor.MAGENTA, colorMix.getOrDefault(PastelGemstoneColor.MAGENTA, 0))
+                        .powderInput(PastelGemstoneColor.YELLOW, colorMix.getOrDefault(PastelGemstoneColor.YELLOW, 0))
+                        .powderInput(PastelGemstoneColor.BLACK, colorMix.getOrDefault(PastelGemstoneColor.BLACK, 0))
+                        .powderInput(PastelGemstoneColor.WHITE, colorMix.getOrDefault(PastelGemstoneColor.WHITE, 0))
+                        .tier(tier)
+                        .requiredAdvancement(unlock)
+        );
+
+    }
+
+    private void generateColoredLampPedestalRecipes(RecipeOutput ctx) {
+        InkColors.BUILTIN_COLORS.forEach(color -> saveColoredLamp(ctx, color));
+    }
+
+    private void generateShapedPedestalRecipes(RecipeOutput ctx) {
+        // # BASIC
+
+        // / ARROWS
+        generateArrowPedestalRecipes(ctx);
+
+        // / COLORED LAMPS
+        // - note, for some reason colored lamps are all saved in the tier1 directory even though they do have different tiers
+        generateColoredLampPedestalRecipes(ctx);
+
+    }
+
+    private void generateGemstoneArrowRecipe(RecipeOutput ctx, PastelGemstoneColor color) {
+        generateShapedPedestalRecipe(
+                ctx,
+                "arrows/" + PastelGemstoneColorCollection.GEMSTONE_NAMES.pick(color), // todo, get the name from the gemstone item?
+                new ShapedPedestalRecipeBuilder(new ItemStack(PastelItems.GEMSTONE_GLASS_ARROWS.pick(color).get(), 2))
+                        .group("glass_arrows")
+                        .craftingTime(200)
+                        .tier(PedestalTier.BASIC)
+                        .powderInput(color, 1)
+                        .experience(1.0f)
+                        .pattern("AA")
+                        .pattern("GB")
+                        .key('G', PastelItems.GEMSTONE_SHARDS.pick(color).value())
+                        .key('A', PastelItems.MALACHITE_GLASS_ARROW.get())
+                        .key('B', PastelItems.BISMUTH_FLAKE.get())
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_ARROWS)
         );
     }
 
@@ -1190,6 +1324,35 @@ public class PastelRecipeProvider extends RecipeProvider {
 
     }
 
+    private void generateShapedPedestalRecipeWithSavedTier(
+            RecipeOutput ctx,
+            String id,
+            PedestalTier tier,
+            ShapedPedestalRecipeBuilder builder
+    ) {
+        String tierId =
+                switch (tier) {
+                    case BASIC -> "tier1";
+                    case SIMPLE -> "tier2";
+                    case ADVANCED -> "tier3";
+                    case COMPLEX -> "tier4";
+                };
+        generateRecipeFromBuilder(
+                ctx,
+                "pedestal/" + tierId + "/" + id,
+                builder
+        );
+    }
+
+    private void generateShapedPedestalRecipe(
+            RecipeOutput ctx,
+            String id,
+            ShapedPedestalRecipeBuilder builder
+    ) {
+        Objects.requireNonNull(builder.getTier(), "tier must not be null when saving recipes!");
+        generateShapedPedestalRecipeWithSavedTier(ctx, id, builder.getTier(), builder);
+    }
+
     private void generateCrystallarieumRecipe(
         RecipeOutput ctx,
         String id,
@@ -1279,6 +1442,10 @@ public class PastelRecipeProvider extends RecipeProvider {
 
     private void generateRecipe(RecipeOutput ctx, String id, Recipe<?> recipe) {
         ctx.accept(PastelCommon.locate(id), recipe, null);
+    }
+
+    private void generateRecipeFromBuilder(RecipeOutput ctx, String id, RecipeBuilder builder) {
+        builder.save(ctx, PastelCommon.locate(id));
     }
 
 }

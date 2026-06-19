@@ -2,6 +2,7 @@ package earth.terrarium.pastel.particle.effect;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import earth.terrarium.pastel.api.color.InkColorCollection;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
@@ -15,49 +16,40 @@ import org.joml.Vector3f;
 
 public class ColoredCraftingParticleEffect implements ParticleOptions {
 
-    public static final ColoredCraftingParticleEffect BLACK = new ColoredCraftingParticleEffect(InkColors.BLACK_COLOR);
+    public static final InkColorCollection<ColoredCraftingParticleEffect> VALUES =
+            InkColorCollection.BUILTIN_COLORS.map(color -> new ColoredCraftingParticleEffect(color.getColorInt()));
 
-    public static final ColoredCraftingParticleEffect BLUE = new ColoredCraftingParticleEffect(InkColors.BLUE_COLOR);
+    public static final ColoredCraftingParticleEffect BLACK = VALUES.pick(InkColors.BLACK);
 
-    public static final ColoredCraftingParticleEffect BROWN = new ColoredCraftingParticleEffect(InkColors.BROWN_COLOR);
+    public static final ColoredCraftingParticleEffect BLUE = VALUES.pick(InkColors.BLUE);
 
-    public static final ColoredCraftingParticleEffect CYAN = new ColoredCraftingParticleEffect(InkColors.CYAN_COLOR);
+    public static final ColoredCraftingParticleEffect BROWN = VALUES.pick(InkColors.BROWN);
 
-    public static final ColoredCraftingParticleEffect GRAY = new ColoredCraftingParticleEffect(InkColors.GRAY_COLOR);
+    public static final ColoredCraftingParticleEffect CYAN = VALUES.pick(InkColors.CYAN);
 
-    public static final ColoredCraftingParticleEffect GREEN = new ColoredCraftingParticleEffect(InkColors.GREEN_COLOR);
+    public static final ColoredCraftingParticleEffect GRAY = VALUES.pick(InkColors.GRAY);
 
-    public static final ColoredCraftingParticleEffect LIGHT_BLUE = new ColoredCraftingParticleEffect(
-        InkColors.LIGHT_BLUE_COLOR
-    );
+    public static final ColoredCraftingParticleEffect GREEN = VALUES.pick(InkColors.GREEN);
 
-    public static final ColoredCraftingParticleEffect LIGHT_GRAY = new ColoredCraftingParticleEffect(
-        InkColors.LIGHT_GRAY_COLOR
-    );
+    public static final ColoredCraftingParticleEffect LIGHT_BLUE = VALUES.pick(InkColors.LIGHT_BLUE);
 
-    public static final ColoredCraftingParticleEffect LIME = new ColoredCraftingParticleEffect(InkColors.LIME_COLOR);
+    public static final ColoredCraftingParticleEffect LIGHT_GRAY = VALUES.pick(InkColors.LIGHT_GRAY);
 
-    public static final ColoredCraftingParticleEffect MAGENTA = new ColoredCraftingParticleEffect(
-        InkColors.MAGENTA_COLOR
-    );
+    public static final ColoredCraftingParticleEffect LIME = VALUES.pick(InkColors.LIME);
 
-    public static final ColoredCraftingParticleEffect ORANGE = new ColoredCraftingParticleEffect(
-        InkColors.ORANGE_COLOR
-    );
+    public static final ColoredCraftingParticleEffect MAGENTA = VALUES.pick(InkColors.MAGENTA);
 
-    public static final ColoredCraftingParticleEffect PINK = new ColoredCraftingParticleEffect(InkColors.PINK_COLOR);
+    public static final ColoredCraftingParticleEffect ORANGE = VALUES.pick(InkColors.ORANGE);
 
-    public static final ColoredCraftingParticleEffect PURPLE = new ColoredCraftingParticleEffect(
-        InkColors.PURPLE_COLOR
-    );
+    public static final ColoredCraftingParticleEffect PINK = VALUES.pick(InkColors.PINK);
 
-    public static final ColoredCraftingParticleEffect RED = new ColoredCraftingParticleEffect(InkColors.RED_COLOR);
+    public static final ColoredCraftingParticleEffect PURPLE = VALUES.pick(InkColors.PURPLE);
 
-    public static final ColoredCraftingParticleEffect WHITE = new ColoredCraftingParticleEffect(InkColors.WHITE_COLOR);
+    public static final ColoredCraftingParticleEffect RED = VALUES.pick(InkColors.RED);
 
-    public static final ColoredCraftingParticleEffect YELLOW = new ColoredCraftingParticleEffect(
-        InkColors.YELLOW_COLOR
-    );
+    public static final ColoredCraftingParticleEffect WHITE = VALUES.pick(InkColors.WHITE);
+
+    public static final ColoredCraftingParticleEffect YELLOW = VALUES.pick(InkColors.YELLOW);
 
     public static final MapCodec<ColoredCraftingParticleEffect> CODEC = RecordCodecBuilder
         .mapCodec(

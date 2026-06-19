@@ -2,6 +2,7 @@ package earth.terrarium.pastel.particle.effect;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import earth.terrarium.pastel.api.color.InkColorCollection;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
@@ -14,70 +15,41 @@ import net.minecraft.util.ExtraCodecs;
 import org.joml.Vector3f;
 
 public class ColoredSparkleRisingParticleEffect implements ParticleOptions {
+    public static final InkColorCollection<ColoredSparkleRisingParticleEffect> VALUES =
+            InkColorCollection.BUILTIN_COLORS.map(color -> new ColoredSparkleRisingParticleEffect(color.getColorInt()));
 
-    public static final ColoredSparkleRisingParticleEffect BLACK = new ColoredSparkleRisingParticleEffect(
-        InkColors.BLACK_COLOR
-    );
 
-    public static final ColoredSparkleRisingParticleEffect BLUE = new ColoredSparkleRisingParticleEffect(
-        InkColors.BLUE_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect BLACK = VALUES.pick(InkColors.BLACK);
 
-    public static final ColoredSparkleRisingParticleEffect BROWN = new ColoredSparkleRisingParticleEffect(
-        InkColors.BROWN_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect BLUE = VALUES.pick(InkColors.BLUE);
 
-    public static final ColoredSparkleRisingParticleEffect CYAN = new ColoredSparkleRisingParticleEffect(
-        InkColors.CYAN_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect BROWN = VALUES.pick(InkColors.BROWN);
 
-    public static final ColoredSparkleRisingParticleEffect GRAY = new ColoredSparkleRisingParticleEffect(
-        InkColors.GRAY_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect CYAN = VALUES.pick(InkColors.CYAN);
 
-    public static final ColoredSparkleRisingParticleEffect GREEN = new ColoredSparkleRisingParticleEffect(
-        InkColors.GREEN_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect GRAY = VALUES.pick(InkColors.GRAY);
 
-    public static final ColoredSparkleRisingParticleEffect LIGHT_BLUE = new ColoredSparkleRisingParticleEffect(
-        InkColors.LIGHT_BLUE_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect GREEN = VALUES.pick(InkColors.GREEN);
 
-    public static final ColoredSparkleRisingParticleEffect LIGHT_GRAY = new ColoredSparkleRisingParticleEffect(
-        InkColors.LIGHT_GRAY_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect LIGHT_BLUE = VALUES.pick(InkColors.LIGHT_BLUE);
 
-    public static final ColoredSparkleRisingParticleEffect LIME = new ColoredSparkleRisingParticleEffect(
-        InkColors.LIME_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect LIGHT_GRAY = VALUES.pick(InkColors.LIGHT_GRAY);
 
-    public static final ColoredSparkleRisingParticleEffect MAGENTA = new ColoredSparkleRisingParticleEffect(
-        InkColors.MAGENTA_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect LIME = VALUES.pick(InkColors.LIME);
 
-    public static final ColoredSparkleRisingParticleEffect ORANGE = new ColoredSparkleRisingParticleEffect(
-        InkColors.ORANGE_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect MAGENTA = VALUES.pick(InkColors.MAGENTA);
 
-    public static final ColoredSparkleRisingParticleEffect PINK = new ColoredSparkleRisingParticleEffect(
-        InkColors.PINK_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect ORANGE = VALUES.pick(InkColors.ORANGE);
 
-    public static final ColoredSparkleRisingParticleEffect PURPLE = new ColoredSparkleRisingParticleEffect(
-        InkColors.PURPLE_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect PINK = VALUES.pick(InkColors.PINK);
 
-    public static final ColoredSparkleRisingParticleEffect RED = new ColoredSparkleRisingParticleEffect(
-        InkColors.RED_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect PURPLE = VALUES.pick(InkColors.PURPLE);
 
-    public static final ColoredSparkleRisingParticleEffect WHITE = new ColoredSparkleRisingParticleEffect(
-        InkColors.WHITE_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect RED = VALUES.pick(InkColors.RED);
 
-    public static final ColoredSparkleRisingParticleEffect YELLOW = new ColoredSparkleRisingParticleEffect(
-        InkColors.YELLOW_COLOR
-    );
+    public static final ColoredSparkleRisingParticleEffect WHITE = VALUES.pick(InkColors.WHITE);
+
+    public static final ColoredSparkleRisingParticleEffect YELLOW = VALUES.pick(InkColors.YELLOW);
 
     public static final MapCodec<ColoredSparkleRisingParticleEffect> CODEC = RecordCodecBuilder
         .mapCodec(

@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 0,
+    "pastel:cyan": 0,
+    "pastel:magenta": 2,
+    "pastel:white": 0,
+    "pastel:yellow": 4
+  },
+  "experience": 0.5,
+  "group": "colored_lamps",
+  "key": {
+    "P": {
+      "item": "pastel:orange_pigment"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PRP",
+    "SPS"
+  ],
+  "required_advancement": "pastel:unlocks/colored_lamps/orange_lamp",
+  "result": {
+    "count": 2,
+    "id": "pastel:orange_lamp"
+  },
+  "time": 40
+}

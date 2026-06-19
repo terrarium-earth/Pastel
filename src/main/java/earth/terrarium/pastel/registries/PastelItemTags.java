@@ -72,6 +72,8 @@ public class PastelItemTags {
 
     public static final TagKey<Item> PRODUCTIVITY_EXCLUDED = of("productivity_excluded");
 
+    public static final TagKey<Item> RESPLENDENT_FEATHERS = of("resplendent_feathers");
+
     public static class EnchantableWith {
         public static final TagKey<Item> BIG_CATCH = getEnchantableTag(PastelEnchantments.BIG_CATCH);
 

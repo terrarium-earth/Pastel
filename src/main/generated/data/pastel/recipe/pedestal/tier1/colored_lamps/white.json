@@ -1,0 +1,35 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 0,
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:white": 6,
+    "pastel:yellow": 0
+  },
+  "experience": 0.5,
+  "group": "colored_lamps",
+  "key": {
+    "P": {
+      "item": "pastel:white_pigment"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PRP",
+    "SPS"
+  ],
+  "required_advancement": "pastel:unlocks/colored_lamps/white_lamp",
+  "result": {
+    "count": 2,
+    "id": "pastel:white_lamp"
+  },
+  "tier": "complex",
+  "time": 40
+}

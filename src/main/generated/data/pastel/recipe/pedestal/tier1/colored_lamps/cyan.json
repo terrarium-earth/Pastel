@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 0,
+    "pastel:cyan": 6,
+    "pastel:magenta": 0,
+    "pastel:white": 0,
+    "pastel:yellow": 0
+  },
+  "experience": 0.5,
+  "group": "colored_lamps",
+  "key": {
+    "P": {
+      "item": "pastel:cyan_pigment"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PRP",
+    "SPS"
+  ],
+  "required_advancement": "pastel:unlocks/colored_lamps/cyan_lamp",
+  "result": {
+    "count": 2,
+    "id": "pastel:cyan_lamp"
+  },
+  "time": 40
+}

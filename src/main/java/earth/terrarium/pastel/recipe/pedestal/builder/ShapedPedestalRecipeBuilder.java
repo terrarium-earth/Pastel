@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.*;
 
 public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<ShapedPedestalRecipeBuilder> {
-    private final List<String> rows = List.of();
+    private final List<String> rows = new ArrayList<>();
     private final Map<Character, IngredientStack> keyMap = new HashMap<>();
 
     public ShapedPedestalRecipeBuilder(ItemStack result) {

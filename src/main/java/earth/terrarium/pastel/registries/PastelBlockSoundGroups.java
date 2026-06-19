@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.registries;
 
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColorCollection;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 
@@ -209,6 +210,15 @@ public class PastelBlockSoundGroups {
         PastelSounds.BLOCK_MOONSTONE_CLUSTER_HIT,
         PastelSounds.BLOCK_MOONSTONE_CLUSTER_FALL
     );
+
+    public static final PastelGemstoneColorCollection<SoundType> GEMSTONE_CLUSTERS =
+        new PastelGemstoneColorCollection<>(
+                TOPAZ_CLUSTER,
+                SoundType.AMETHYST_CLUSTER,
+                CITRINE_CLUSTER,
+                ONYX_CLUSTER,
+                MOONSTONE_CLUSTER
+        );
 
     public static final SoundType SPECTRAL_BLOCK = new SoundType(
         1.0F,
