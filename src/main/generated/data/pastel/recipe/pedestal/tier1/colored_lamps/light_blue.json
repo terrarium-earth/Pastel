@@ -1,11 +1,8 @@
 {
   "type": "pastel:pedestal",
   "colors": {
-    "pastel:black": 0,
     "pastel:cyan": 4,
-    "pastel:magenta": 2,
-    "pastel:white": 0,
-    "pastel:yellow": 0
+    "pastel:magenta": 2
   },
   "experience": 0.5,
   "group": "colored_lamps",

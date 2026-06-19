@@ -1,10 +1,8 @@
 {
   "type": "pastel:pedestal",
   "colors": {
-    "pastel:black": 0,
     "pastel:cyan": 3,
     "pastel:magenta": 2,
-    "pastel:white": 0,
     "pastel:yellow": 1
   },
   "experience": 0.5,
