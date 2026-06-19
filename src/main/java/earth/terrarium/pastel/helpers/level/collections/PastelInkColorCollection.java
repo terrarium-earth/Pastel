@@ -1,6 +1,7 @@
-package earth.terrarium.pastel.api.energy.color;
+package earth.terrarium.pastel.helpers.level.collections;
 
-import earth.terrarium.pastel.api.collection.GroupedCollection;
+import earth.terrarium.pastel.api.energy.color.InkColor;
+import earth.terrarium.pastel.api.energy.color.InkColors;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;

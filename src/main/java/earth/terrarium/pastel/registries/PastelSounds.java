@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

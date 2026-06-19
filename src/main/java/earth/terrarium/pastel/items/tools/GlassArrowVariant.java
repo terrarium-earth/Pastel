@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.tools;
 import com.cmdpro.databank.misc.ColorGradient;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.GlassArrowEntity;
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.Registry;

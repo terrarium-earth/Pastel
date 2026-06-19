@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.energy.color.PastelInkColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

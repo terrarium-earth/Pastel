@@ -1,7 +1,8 @@
-package earth.terrarium.pastel.recipe.pedestal;
+package earth.terrarium.pastel.helpers.level.collections;
 
-import earth.terrarium.pastel.api.collection.GroupedCollection;
 import earth.terrarium.pastel.api.energy.color.InkColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;

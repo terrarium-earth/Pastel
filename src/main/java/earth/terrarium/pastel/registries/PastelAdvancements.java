@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.energy.color.PastelInkColorCollection;
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import net.minecraft.resources.ResourceLocation;
 
 @SuppressWarnings(

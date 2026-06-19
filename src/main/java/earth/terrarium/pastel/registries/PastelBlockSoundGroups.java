@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.registries;
 
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 

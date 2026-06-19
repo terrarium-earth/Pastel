@@ -1,16 +1,9 @@
-package earth.terrarium.pastel.api.collection;
+package earth.terrarium.pastel.helpers.level.collections;
 
-import earth.terrarium.pastel.api.energy.color.InkColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredItem;
-import org.apache.commons.lang3.function.TriFunction;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.*;
 
 public interface GroupedCollection {
