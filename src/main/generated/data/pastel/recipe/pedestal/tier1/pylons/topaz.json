@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2
+  },
+  "experience": 1.0,
+  "group": "pylons",
+  "key": {
+    "S": {
+      "item": "pastel:topaz_shard"
+    },
+    "X": {
+      "item": "pastel:polished_basalt"
+    },
+    "Y": {
+      "item": "pastel:polished_calcite"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SSS",
+    "XYX"
+  ],
+  "required_advancement": "pastel:unlocks/pylons/topaz_pylon",
+  "result": {
+    "count": 1,
+    "id": "pastel:topaz_pylon"
+  },
+  "time": 40
+}

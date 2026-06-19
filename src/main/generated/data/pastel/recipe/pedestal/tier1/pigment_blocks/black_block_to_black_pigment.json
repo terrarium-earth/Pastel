@@ -1,0 +1,17 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "pigment_compacting",
+  "ingredients": [
+    {
+      "item": "pastel:black_block"
+    }
+  ],
+  "required_advancement": "pastel:hidden/collect_pigment/black",
+  "result": {
+    "count": 9,
+    "id": "pastel:black_pigment"
+  },
+  "time": 20
+}

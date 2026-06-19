@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 3,
+    "pastel:magenta": 2,
+    "pastel:yellow": 1
+  },
+  "experience": 1.0,
+  "group": "colored_saplings",
+  "key": {
+    "D": {
+      "item": "minecraft:blue_dye"
+    },
+    "S": {
+      "tag": "minecraft:saplings"
+    },
+    "V": {
+      "item": "pastel:vegetal"
+    }
+  },
+  "pattern": [
+    "DDD",
+    "VSV",
+    "DDD"
+  ],
+  "required_advancement": "pastel:unlocks/colored_saplings/blue_sapling",
+  "result": {
+    "count": 1,
+    "id": "pastel:blue_sapling"
+  },
+  "time": 160
+}

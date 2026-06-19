@@ -56,6 +56,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 import static earth.terrarium.pastel.registries.PastelEnchantments.BIG_CATCH;
@@ -431,7 +432,7 @@ public class PastelRecipeProvider extends RecipeProvider {
             var pigment = PIGMENTS.pick(color);
             var unlock = PastelAdvancements.Hidden.CollectPigment.VALUES.pick(color);
 
-            generateCompactingPairWithGroup(ctx, "pigment_compacting", "pigment_blocks", unlock, pigment, pigmentBlock);
+            generateCompactingPairWithGroup(ctx, "pigment_compacting", "pigment_blocks", pigmentBlock.getId().getPath() + "_to_" + pigment.getId().getPath(), unlock, pigment, pigmentBlock);
         });
 
         // BASIC / PYLONS
@@ -728,7 +729,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         // These have been moved to `recipe/mod_integration/(mod)/pedestal/compacting`
 
         generateCompactingPair(ctx, PastelAdvancements.Midgame.COLLECT_AZURITE, PURE_AZURITE, PastelBlocks.AZURITE_BLOCK);
-        generateCompactingPair(ctx, PastelAdvancements.Midgame.BREAK_DECAYED_BEDROCK, BEDROCK_DUST, PastelBlocks.BEDROCK_DUST_BLOCK);
+        generateCompactingPair(ctx, "bedrock_dust_block_uncrafting", PastelAdvancements.Midgame.BREAK_DECAYED_BEDROCK, BEDROCK_DUST, PastelBlocks.BEDROCK_DUST_BLOCK);
         generateCompactingPair(ctx, PastelAdvancements.Lategame.COLLECT_BISMUTH_CRYSTAL, BISMUTH_CRYSTAL, PastelBlocks.BISMUTH_BLOCK);
         generateCompactingPair(ctx, PastelAdvancements.GROW_BLOODSTONE_IN_CRYSTALLARIEUM, PURE_BLOODSTONE, PastelBlocks.BLOODSTONE_BLOCK);
         generateCompactingPair(ctx, PastelAdvancements.Lategame.GROW_MALACHITE_IN_CRYSTALLARIEUM, PURE_MALACHITE, PastelBlocks.MALACHITE_BLOCK);
@@ -753,7 +754,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         generateCompactingPair(ctx, PastelAdvancements.COLLECT_VEGETAL, VEGETAL, PastelBlocks.VEGETAL_BLOCK);
     }
 
-    private void generateCompactingPairWithGroup(RecipeOutput ctx, @Nullable String group, String subpath, ResourceLocation unlock, DeferredItem<?> unpacked, DeferredBlock<?> packed) {
+    private void generateCompactingPairWithGroup(RecipeOutput ctx, @Nullable String group, String subpath, String unpackName, ResourceLocation unlock, DeferredItem<?> unpacked, DeferredBlock<?> packed) {
         generatePedestalRecipe(
                 ctx,
                 subpath + "/" + packed.getId().getPath(),
@@ -772,7 +773,7 @@ public class PastelRecipeProvider extends RecipeProvider {
 
         generatePedestalRecipe(
                 ctx,
-                subpath + "/" + unpacked.getId().getPath() + "_from_" + packed.getId().getPath(),
+                subpath + "/" + unpackName,
                 new ShapelessPedestalRecipeBuilder(new ItemStack(unpacked.get(), 9))
                         .group(group)
                         .craftingTime(20)
@@ -786,8 +787,11 @@ public class PastelRecipeProvider extends RecipeProvider {
 
 
 
+    private void generateCompactingPair(RecipeOutput ctx, String unpackedName, ResourceLocation unlock, DeferredItem<?> unpacked, DeferredBlock<?> packed) {
+        generateCompactingPairWithGroup(ctx, "compacting", "compacting", unpackedName, unlock, unpacked, packed);
+    }
     private <I extends Item, B extends Block> void generateCompactingPair(RecipeOutput ctx, ResourceLocation unlock, DeferredItem<I> unpacked, DeferredBlock<B> packed) {
-        generateCompactingPairWithGroup(ctx, "compacting", "compacting", unlock, unpacked, packed);
+        generateCompactingPairWithGroup(ctx, "compacting", "compacting", unpacked.getId().getPath() + "_from_" + packed.getId().getPath(), unlock, unpacked, packed);
     }
 
     private void generateGemstoneArrowRecipe(RecipeOutput ctx, PastelGemstoneColor color) {

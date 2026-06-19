@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 6
+  },
+  "experience": 1.0,
+  "group": "colored_saplings",
+  "key": {
+    "D": {
+      "item": "minecraft:magenta_dye"
+    },
+    "S": {
+      "tag": "minecraft:saplings"
+    },
+    "V": {
+      "item": "pastel:vegetal"
+    }
+  },
+  "pattern": [
+    "DDD",
+    "VSV",
+    "DDD"
+  ],
+  "required_advancement": "pastel:unlocks/colored_saplings/magenta_sapling",
+  "result": {
+    "count": 1,
+    "id": "pastel:magenta_sapling"
+  },
+  "time": 160
+}

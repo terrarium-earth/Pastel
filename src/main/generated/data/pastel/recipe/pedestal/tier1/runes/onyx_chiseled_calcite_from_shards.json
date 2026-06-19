@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1
+  },
+  "experience": 1.0,
+  "group": "gemstone_chiseled_blocks",
+  "key": {
+    "W": {
+      "item": "pastel:polished_calcite"
+    },
+    "X": {
+      "item": "pastel:onyx_shard"
+    }
+  },
+  "pattern": [
+    "WXW",
+    "XXX",
+    "WXW"
+  ],
+  "required_advancement": "pastel:create_onyx_shard",
+  "result": {
+    "count": 1,
+    "id": "pastel:onyx_chiseled_calcite"
+  },
+  "tier": "advanced",
+  "time": 80
+}

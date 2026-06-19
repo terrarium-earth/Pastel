@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "pigment_compacting",
+  "key": {
+    "A": {
+      "item": "pastel:black_pigment"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "required_advancement": "pastel:hidden/collect_pigment/black",
+  "result": {
+    "count": 1,
+    "id": "pastel:black_block"
+  },
+  "time": 20
+}

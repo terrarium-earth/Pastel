@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 2
+  },
+  "experience": 1.0,
+  "group": "pylons",
+  "key": {
+    "S": {
+      "item": "pastel:onyx_shard"
+    },
+    "X": {
+      "item": "pastel:polished_basalt"
+    },
+    "Y": {
+      "item": "pastel:polished_calcite"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SSS",
+    "XYX"
+  ],
+  "required_advancement": "pastel:unlocks/pylons/onyx_pylon",
+  "result": {
+    "count": 1,
+    "id": "pastel:onyx_pylon"
+  },
+  "tier": "advanced",
+  "time": 40
+}

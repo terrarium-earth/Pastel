@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 2
+  },
+  "experience": 1.0,
+  "group": "pylons",
+  "key": {
+    "S": {
+      "item": "pastel:moonstone_shard"
+    },
+    "X": {
+      "item": "pastel:polished_basalt"
+    },
+    "Y": {
+      "item": "pastel:polished_calcite"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SSS",
+    "XYX"
+  ],
+  "required_advancement": "pastel:unlocks/pylons/moonstone_pylon",
+  "result": {
+    "count": 1,
+    "id": "pastel:moonstone_pylon"
+  },
+  "tier": "complex",
+  "time": 40
+}
