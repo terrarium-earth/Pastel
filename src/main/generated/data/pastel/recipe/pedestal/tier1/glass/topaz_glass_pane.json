@@ -1,0 +1,21 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "group": "gemstone_glass",
+  "key": {
+    "G": {
+      "item": "pastel:topaz_glass"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "required_advancement": "pastel:hidden/collect_shards/topaz",
+  "result": {
+    "count": 16,
+    "id": "pastel:topaz_glass_pane"
+  },
+  "time": 20
+}

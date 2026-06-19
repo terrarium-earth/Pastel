@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "key": {
+    "A": {
+      "item": "pastel:bismuth_crystal"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "required_advancement": "pastel:lategame/collect_bismuth_crystal",
+  "result": {
+    "count": 1,
+    "id": "pastel:bismuth_block"
+  },
+  "time": 20
+}

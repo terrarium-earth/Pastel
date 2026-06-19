@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "pastel:citrine_shard"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "CQC",
+    "SSS"
+  ],
+  "required_advancement": "pastel:unlocks/redstone/weather_detector",
+  "result": {
+    "count": 1,
+    "id": "pastel:weather_detector"
+  },
+  "time": 80
+}

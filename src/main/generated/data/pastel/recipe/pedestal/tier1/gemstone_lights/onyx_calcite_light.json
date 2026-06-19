@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4
+  },
+  "experience": 0.3,
+  "group": "onyx_lights",
+  "key": {
+    "B": {
+      "item": "pastel:onyx_block"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_block"
+    },
+    "T": {
+      "item": "pastel:polished_calcite"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "BSB",
+    "TTT"
+  ],
+  "required_advancement": "pastel:unlocks/gemstone_lights/onyx",
+  "result": {
+    "count": 4,
+    "id": "pastel:onyx_calcite_light"
+  },
+  "tier": "advanced",
+  "time": 40
+}

@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4
+  },
+  "experience": 1.0,
+  "group": "gemstone_glass",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PPP",
+    "GPG"
+  ],
+  "required_advancement": "pastel:hidden/collect_shards/amethyst",
+  "result": {
+    "count": 8,
+    "id": "pastel:amethyst_glass"
+  },
+  "time": 20
+}

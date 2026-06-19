@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4
+  },
+  "experience": 0.3,
+  "group": "topaz_lights",
+  "key": {
+    "B": {
+      "item": "pastel:topaz_block"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_block"
+    },
+    "T": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "BSB",
+    "TTT"
+  ],
+  "required_advancement": "pastel:unlocks/gemstone_lights/topaz",
+  "result": {
+    "count": 4,
+    "id": "pastel:topaz_basalt_light"
+  },
+  "time": 40
+}

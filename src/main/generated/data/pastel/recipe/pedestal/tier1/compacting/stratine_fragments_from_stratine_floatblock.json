@@ -1,0 +1,17 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "ingredients": [
+    {
+      "item": "pastel:stratine_floatblock"
+    }
+  ],
+  "required_advancement": "pastel:midgame/carry_too_many_heavy_gravity_blocks",
+  "result": {
+    "count": 9,
+    "id": "pastel:stratine_fragments"
+  },
+  "time": 20
+}

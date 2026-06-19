@@ -5016,6 +5016,27 @@ public class PastelBlocks {
         )
     );
 
+    // Technically accurate!
+    public static final PastelInkColorCollection<DeferredBlock<Block>> CUSHIONS =
+            new PastelInkColorCollection<>(
+                    CYAN_CUSHION,
+                    LIGHT_BLUE_CUSHION,
+                    BLUE_CUSHION,
+                    PURPLE_CUSHION,
+                    MAGENTA_CUSHION,
+                    PINK_CUSHION,
+                    RED_CUSHION,
+                    ORANGE_CUSHION,
+                    YELLOW_CUSHION,
+                    LIME_CUSHION,
+                    GREEN_CUSHION,
+                    BROWN_CUSHION,
+                    BLACK_CUSHION,
+                    GRAY_CUSHION,
+                    LIGHT_GRAY_CUSHION,
+                    WHITE_CUSHION
+            );
+
     public static Properties basalMarble() {
         return settings(MapColor.COLOR_GRAY, SoundType.DRIPSTONE_BLOCK, 8.0F)
             .instrument(NoteBlockInstrument.BASEDRUM)

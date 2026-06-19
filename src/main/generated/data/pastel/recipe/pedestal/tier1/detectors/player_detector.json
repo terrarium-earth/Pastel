@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "pastel:onyx_shard"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "CQC",
+    "SSS"
+  ],
+  "required_advancement": "pastel:unlocks/redstone/player_detector",
+  "result": {
+    "count": 1,
+    "id": "pastel:player_detector"
+  },
+  "tier": "advanced",
+  "time": 80
+}

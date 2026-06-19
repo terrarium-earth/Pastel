@@ -1,0 +1,17 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "ingredients": [
+    {
+      "item": "pastel:shimmerstone_block"
+    }
+  ],
+  "required_advancement": "pastel:collect_shimmerstone",
+  "result": {
+    "count": 9,
+    "id": "pastel:shimmerstone_gem"
+  },
+  "time": 20
+}

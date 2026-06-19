@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "CQC",
+    "SSS"
+  ],
+  "required_advancement": "pastel:unlocks/redstone/block_light_detector",
+  "result": {
+    "count": 1,
+    "id": "pastel:block_light_detector"
+  },
+  "time": 80
+}

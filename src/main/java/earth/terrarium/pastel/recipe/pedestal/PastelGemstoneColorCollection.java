@@ -2,19 +2,14 @@ package earth.terrarium.pastel.recipe.pedestal;
 
 import earth.terrarium.pastel.api.collection.GroupedCollection;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.registries.PastelBlockSoundGroups;
-import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public record PastelGemstoneColorCollection<T>(
         T cyan,
@@ -22,7 +17,7 @@ public record PastelGemstoneColorCollection<T>(
         T yellow,
         T black,
         T white
-) {
+)  {
 
     public static final PastelGemstoneColorCollection<PastelGemstoneColor> VALUES =
             new PastelGemstoneColorCollection<>(
@@ -55,6 +50,15 @@ public record PastelGemstoneColorCollection<T>(
                     MapColor.SNOW
             );
 
+    public static final PastelGemstoneColorCollection<PedestalTier> MINIMUM_TIER =
+            new PastelGemstoneColorCollection<>(
+                    PedestalTier.BASIC,
+                    PedestalTier.BASIC,
+                    PedestalTier.BASIC,
+                    PedestalTier.ADVANCED,
+                    PedestalTier.COMPLEX
+            );
+
 
 
     public T pick(PastelGemstoneColor color) {
@@ -67,7 +71,15 @@ public record PastelGemstoneColorCollection<T>(
         };
     }
 
-    public <U> PastelGemstoneColorCollection<U> map(Function<T, U> mapper) {
+    public void forEach(Consumer<T> action) {
+        action.accept(this.cyan());
+        action.accept(this.magenta());
+        action.accept(this.yellow());
+        action.accept(this.black());
+        action.accept(this.white());
+    }
+
+    public <U> PastelGemstoneColorCollection<U> map(Function<? super T, ? extends U> mapper) {
         return new PastelGemstoneColorCollection<>(
                 mapper.apply(this.cyan),
                 mapper.apply(this.magenta),
@@ -89,6 +101,18 @@ public record PastelGemstoneColorCollection<T>(
                 operation.apply(first.black(), second.black()),
                 operation.apply(first.white(), second.white())
         );
+    }
+
+    public static <T, U> void zipApply(
+            PastelGemstoneColorCollection<T> first,
+            PastelGemstoneColorCollection<U> second,
+            BiConsumer<T, U> action
+    ) {
+        action.accept(first.cyan(), second.cyan());
+        action.accept(first.magenta(), second.magenta());
+        action.accept(first.yellow(), second.yellow());
+        action.accept(first.black(), second.black());
+        action.accept(first.white(), second.white());
     }
 
     public static <B extends Block, Id> PastelGemstoneColorCollection<DeferredBlock<Block>> registerBlocks(

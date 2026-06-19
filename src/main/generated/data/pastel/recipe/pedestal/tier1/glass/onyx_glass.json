@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4
+  },
+  "experience": 1.0,
+  "group": "gemstone_glass",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "pastel:onyx_shard"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PPP",
+    "GPG"
+  ],
+  "required_advancement": "pastel:create_onyx_shard",
+  "result": {
+    "count": 8,
+    "id": "pastel:onyx_glass"
+  },
+  "tier": "advanced",
+  "time": 20
+}

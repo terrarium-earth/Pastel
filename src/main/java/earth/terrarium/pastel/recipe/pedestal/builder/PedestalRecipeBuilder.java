@@ -56,6 +56,12 @@ public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> 
         return self();
     }
 
+    public C replacePowderInputsWith(Map<GemstoneColor, Integer> colors) {
+        this.powderInputs.clear();
+        this.powderInputs.putAll(colors);
+        return self();
+    }
+
     public C experience(float experience) {
         this.experience = experience;
         return self();

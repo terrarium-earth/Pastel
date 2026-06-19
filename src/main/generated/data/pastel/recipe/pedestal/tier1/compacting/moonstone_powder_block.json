@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "key": {
+    "A": {
+      "item": "pastel:moonstone_powder"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "required_advancement": "pastel:lategame/collect_moonstone",
+  "result": {
+    "count": 1,
+    "id": "pastel:moonstone_powder_block"
+  },
+  "time": 20
+}

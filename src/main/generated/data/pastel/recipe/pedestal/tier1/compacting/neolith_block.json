@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "key": {
+    "A": {
+      "item": "pastel:neolith"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "required_advancement": "pastel:midgame/collect_neolith",
+  "result": {
+    "count": 1,
+    "id": "pastel:neolith_block"
+  },
+  "time": 20
+}
