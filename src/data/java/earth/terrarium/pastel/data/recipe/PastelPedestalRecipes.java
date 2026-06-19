@@ -830,28 +830,281 @@ public class PastelPedestalRecipes {
 
     private static class SimpleRecipes {
         static void generate(RecipeOutput ctx) {
-            // TODO: colored spore blossoms
-            // TODO: vanilla
+            generateColoredSporeBlossoms(ctx);
+            generateVanilla(ctx);
             // TODO: simple root
+        }
+
+        private static void generateColoredSporeBlossoms(RecipeOutput ctx) {
+            PastelInkColorCollection.VALUES.forEach(color -> {
+                var name = PastelInkColorCollection.NAMES.pick(color);
+                var tier = MINIMUM_COLOR_TIER.pick(color).withMinimumTier(PedestalTier.SIMPLE);
+                var unlock = PastelAdvancements.Hidden.CollectPigment.VALUES.pick(color);
+                var pigment = PIGMENTS.pick(color);
+                var coloredSporeBlossom = PastelBlocks.COLORED_SPORE_BLOSSOMS.pick(color);
+                var mix = POWDER_MIXES_6.pick(color);
+                generateSimpleRecipe(
+                        ctx,
+                        "colored_spore_blossoms/" + name,
+                        new ShapedPedestalRecipeBuilder(new ItemStack(coloredSporeBlossom, 1))
+                                .group("colored_spore_blossoms")
+                                .craftingTime(80)
+                                .tier(tier)
+                                .replacePowderInputsWith(mix)
+                                .experience(0.5f)
+                                .pattern("PPP")
+                                .pattern("PSP")
+                                .pattern("PPP")
+                                .key('P', pigment.asItem())
+                                .key('S', Items.SPORE_BLOSSOM)
+                                .requiredAdvancement(unlock)
+                );
+            });
+        }
+
+        private static void generateVanilla(RecipeOutput ctx) {
+            generateSimpleRecipe(
+                    ctx,
+                    "vanilla/bell",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(Items.BELL, 1))
+                            .craftingTime(120)
+                            .tier(PedestalTier.SIMPLE)
+                            .powderInput(PastelGemstoneColor.YELLOW, 4)
+                            .experience(1.0f)
+                            .pattern("SSS")
+                            .pattern("GGG")
+                            .pattern("G G")
+                            .key('G', Items.GOLD_INGOT)
+                            .key('S', Items.STICK)
+                            .requiredAdvancement(PastelAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE)
+            );
+
+            generateSimpleRecipe(
+                    ctx,
+                    "vanilla/name_tag",
+                    new ShapelessPedestalRecipeBuilder(new ItemStack(Items.NAME_TAG, 1))
+                            .craftingTime(120)
+                            .tier(PedestalTier.SIMPLE)
+                            .powderInput(PastelGemstoneColor.MAGENTA, 2)
+                            .powderInput(PastelGemstoneColor.CYAN, 2)
+                            .experience(1.0f)
+                            .ingredient(Items.STRING)
+                            .ingredient(Items.PAPER)
+                            .ingredient(Items.PAPER)
+                            .ingredient(PastelBlocks.FOUR_LEAF_CLOVER.asItem())
+                            .requiredAdvancement(PastelAdvancements.COLLECT_FOUR_LEAF_CLOVER)
+            );
+        }
+
+        private static void generateSimpleRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
+            generatePedestalRecipeWithSavedTier(ctx, id, PedestalTier.SIMPLE, builder);
         }
     }
 
     private static class AdvancedRecipes {
         static void generate(RecipeOutput ctx) {
-            // TODO: gemstone chimes
-            // TODO: glowblocks
+            generateChimes(ctx);
+            generateGlowblocks(ctx);
             // TODO: idols
             // TODO: pastel network
-            // TODO: semi permeable glass
+            generateSemiPermeableGlasses(ctx);
             // TODO: trinkets
             // TODO: advanced root
+        }
+
+        private static void generateChimes(RecipeOutput ctx) {
+            PastelGemstoneColorCollection.VALUES.forEach(color -> {
+                var shard = GEMSTONE_SHARDS.pick(color);
+                var chime = PastelBlocks.CHIMES.pick(color);
+                var name = PastelGemstoneColorCollection.GEMSTONE_NAMES.pick(color);
+                var unlock = PastelAdvancements.Unlocks.GemstoneChimes.VALUES.pick(color);
+                var tier = PastelGemstoneColorCollection.MINIMUM_TIER.pick(color).withMinimumTier(PedestalTier.ADVANCED);
+                generateAdvancedRecipe(
+                        ctx,
+                        "gemstone_chimes/" + name,
+                        new ShapedPedestalRecipeBuilder(new ItemStack(chime, 1))
+                                .group("gemstone_chimes")
+                                .craftingTime(60)
+                                .tier(tier)
+                                .powderInput(color, 1)
+                                .experience(1.0f)
+                                .pattern(" Y ")
+                                .pattern("SGS")
+                                .pattern("PXP")
+                                .key('X', PastelBlocks.POLISHED_BASALT.asItem())
+                                .key('Y', PastelBlocks.POLISHED_CALCITE.asItem())
+                                .key('S', shard.value())
+                                .key('G', Items.STRING)
+                                .key('P', SHIMMERSTONE_GEM.asItem())
+                                .requiredAdvancement(unlock)
+                );
+            });
+        }
+
+        private static void generateGlowblocks(RecipeOutput ctx) {
+            PastelInkColorCollection.VALUES.forEach(color -> {
+                var pigment = PIGMENTS.pick(color);
+                var glowBlock = PastelBlocks.GLOWBLOCKS.pick(color);
+                var unlock = PastelAdvancements.Unlocks.Glowblocks.VALUES.pick(color);
+                var mix = POWDER_MIXES_6.pick(color);
+                var tier = MINIMUM_COLOR_TIER.pick(color).withMinimumTier(PedestalTier.ADVANCED);
+                var name = PastelInkColorCollection.NAMES.pick(color);
+                generateAdvancedRecipe(
+                        ctx,
+                        "glowblocks/" + name,
+                        new ShapedPedestalRecipeBuilder(new ItemStack(glowBlock, 4))
+                                .group("glowblocks")
+                                .craftingTime(200)
+                                .tier(tier)
+                                .replacePowderInputsWith(mix)
+                                .experience(1.0f)
+                                .pattern("PQP")
+                                .pattern("QPQ")
+                                .pattern("PQP")
+                                .key('P', pigment.asItem())
+                                .key('Q', QUITOXIC_POWDER.asItem())
+                                .requiredAdvancement(unlock)
+                );
+            });
+        }
+
+        private static void generateSemiPermeableGlasses(RecipeOutput ctx) {
+            generateAdvancedRecipe(
+                    ctx,
+                    "semi_permeable_glass/glass",
+
+                    sharedSemiPermeableGlass(Items.GLASS, Items.GLASS, PastelBlocks.SEMI_PERMEABLE_GLASS)
+                            .powderInput(PastelGemstoneColor.CYAN, 1)
+                            .powderInput(PastelGemstoneColor.MAGENTA, 1)
+                            .powderInput(PastelGemstoneColor.YELLOW, 1)
+            );
+
+            generateAdvancedRecipe(
+                    ctx,
+                    "semi_permeable_glass/tinted",
+                    sharedSemiPermeableGlass(ONYX_SHARD.asItem(), Items.TINTED_GLASS, PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS)
+                            .powderInput(PastelGemstoneColor.BLACK, 2)
+            );
+
+            generateAdvancedRecipe(
+                    ctx,
+                    "semi_permeable_glass/radiant",
+                    sharedSemiPermeableGlass(SHIMMERSTONE_GEM.asItem(), Items.GLASS, PastelBlocks.RADIANT_SEMI_PERMEABLE_GLASS)
+                            .powderInput(PastelGemstoneColor.MAGENTA, 4)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+
+            );
+
+            PastelGemstoneColorCollection.VALUES.forEach(color -> {
+               var result = PastelBlocks.GEMSTONE_SEMI_PERMEABLE_GLASSES.pick(color);
+               var tier = PastelGemstoneColorCollection.MINIMUM_TIER.pick(color).withMinimumTier(PedestalTier.ADVANCED);
+               var unlock =
+                       color == PastelGemstoneColor.WHITE
+                               ? PastelAdvancements.Unlocks.Blocks.MOONSTONE_SEMI_PERMEABLE_GLASS
+                               : PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE;
+               var shard = GEMSTONE_SHARDS.pick(color).value();
+               var name = PastelGemstoneColorCollection.GEMSTONE_NAMES.pick(color);
+               generateAdvancedRecipe(
+                       ctx,
+                       "semi_permeable_glass/" + name,
+                       sharedSemiPermeableGlass(shard, Items.GLASS, result)
+                               .powderInput(color, 8)
+                               .tier(tier)
+                               .requiredAdvancement(unlock)
+               );
+            });
+
+        }
+
+        private static ShapedPedestalRecipeBuilder sharedSemiPermeableGlass(Item center, Item glass, DeferredBlock<?> result) {
+            return new ShapedPedestalRecipeBuilder(new ItemStack(result.asItem(), 6))
+                    .group("semi_permeable_glass")
+                    .craftingTime(80)
+                    .experience(1.0f)
+                    .tier(PedestalTier.ADVANCED)
+                    .pattern("GPG")
+                    .pattern("PSP")
+                    .pattern("GPG")
+                    .key('S', center)
+                    .key('P', PURPLE_PIGMENT.asItem())
+                    .key('G', glass)
+                    .requiredAdvancement(PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE);
+        }
+
+        private static void generateAdvancedRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
+            generatePedestalRecipeWithSavedTier(ctx, id, PedestalTier.ADVANCED, builder);
         }
     }
 
     private static class ComplexRecipes {
         static void generate(RecipeOutput ctx) {
-            // TODO: vanilla
+            generateVanilla(ctx);
             // TODO: complex root
+        }
+
+        private static void generateVanilla(RecipeOutput ctx) {
+            generateComplexRecipe(
+                    ctx,
+                    "vanilla/elytra",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(Items.ELYTRA))
+                            .craftingTime(1200)
+                            .tier(PedestalTier.COMPLEX)
+                            .powderInput(PastelGemstoneColor.CYAN, 2)
+                            .powderInput(PastelGemstoneColor.WHITE, 8)
+                            .experience(4.0f)
+                            .pattern("CGC")
+                            .pattern("MPM")
+                            .pattern("MPM")
+                            .key('G', PALTAERIA_GEM.asItem())
+                            .key('P', PALTAERIA_FRAGMENTS.asItem())
+                            .key('M', Items.PHANTOM_MEMBRANE)
+                            .key('C', Items.POPPED_CHORUS_FRUIT)
+                            .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_PALTAERIA_GEM)
+            );
+
+            // "Heavy core is, in fact, another name for my ass" - Azzyy
+            // ^ these need to be preserved SOMEHOW
+            generateComplexRecipe(
+                    ctx,
+                    "vanilla/heavy_core",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(Items.HEAVY_CORE))
+                            .craftingTime(1200)
+                            .tier(PedestalTier.COMPLEX)
+                            .powderInput(PastelGemstoneColor.CYAN, 12)
+                            .powderInput(PastelGemstoneColor.WHITE, 4)
+                            .experience(3.0f)
+                            .pattern("MBM")
+                            .pattern("MSM")
+                            .pattern("MBM")
+                            .key('M', PastelBlocks.BASAL_MARBLE.asItem())
+                            .key('B', BISMUTH_CRYSTAL.asItem())
+                            .key('S', STRATINE_GEM.asItem())
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.HEAVY_CORE)
+            );
+
+            generateComplexRecipe(
+                    ctx,
+                    "vanilla/trident",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(Items.TRIDENT))
+                            .craftingTime(1200)
+                            .tier(PedestalTier.COMPLEX)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .powderInput(PastelGemstoneColor.CYAN, 4)
+                            .powderInput(PastelGemstoneColor.WHITE, 4)
+                            .experience(2.0f)
+                            .pattern(" PP")
+                            .pattern(" MP")
+                            .pattern("S  ")
+                            .key('M', MERMAIDS_GEM.asItem())
+                            .key('P', Items.PRISMARINE_SHARD)
+                            .key('S', Items.STICK)
+                            .requiredAdvancement(PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE)
+            );
+        }
+
+
+        private static void generateComplexRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
+            generatePedestalRecipeWithSavedTier(ctx, id, PedestalTier.COMPLEX, builder);
         }
     }
 

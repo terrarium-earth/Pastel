@@ -109,6 +109,13 @@ public enum PedestalTier implements StringRepresentable {
         return DatabankUtils.hasAdvancement(playerEntity, unlockAdvancementId);
     }
 
+    public PedestalTier withMinimumTier(PedestalTier tier) {
+        if (this.ordinal() < tier.ordinal()) {
+            return tier;
+        }
+        return this;
+    }
+
     public static Optional<PedestalTier> hasJustUnlockedANewRecipeTier(
         @NotNull ResourceLocation advancementIdentifier
     ) {

@@ -674,29 +674,20 @@ public class PastelAdvancements {
         }
 
         public static class GemstoneChimes {
-            public static final ResourceLocation ONYX_CHIME = PastelCommon.locate("unlocks/gemstone_chimes/onyx_chime");
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES =
+                    PastelGemstoneColorCollection.GEMSTONE_NAMES.map(it -> PastelCommon.locate("unlocks/gemstone_chimes/" + it + "_chime"));
 
-            public static final ResourceLocation TOPAZ_CHIME = PastelCommon
-                .locate(
-                    "unlocks/gemstone_chimes/topaz_chime"
-                );
+            public static final ResourceLocation ONYX_CHIME = VALUES.onyx();
+
+            public static final ResourceLocation TOPAZ_CHIME = VALUES.topaz();
 
             public static final ResourceLocation ANY_CHIME = PastelCommon.locate("unlocks/gemstone_chimes/any_chime");
 
-            public static final ResourceLocation MOONSTONE_CHIME = PastelCommon
-                .locate(
-                    "unlocks/gemstone_chimes/moonstone_chime"
-                );
+            public static final ResourceLocation MOONSTONE_CHIME = VALUES.moonstone();
 
-            public static final ResourceLocation AMETHYST_CHIME = PastelCommon
-                .locate(
-                    "unlocks/gemstone_chimes/amethyst_chime"
-                );
+            public static final ResourceLocation AMETHYST_CHIME = VALUES.amethyst();
 
-            public static final ResourceLocation CITRINE_CHIME = PastelCommon
-                .locate(
-                    "unlocks/gemstone_chimes/citrine_chime"
-                );
+            public static final ResourceLocation CITRINE_CHIME = VALUES.citrine();
         }
 
         public static class Enchantments {
