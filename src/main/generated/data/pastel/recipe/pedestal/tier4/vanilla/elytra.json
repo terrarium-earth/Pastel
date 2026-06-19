@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:white": 8
+  },
+  "experience": 4.0,
+  "key": {
+    "C": {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    "G": {
+      "item": "pastel:paltaeria_gem"
+    },
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "P": {
+      "item": "pastel:paltaeria_fragments"
+    }
+  },
+  "pattern": [
+    "CGC",
+    "MPM",
+    "MPM"
+  ],
+  "required_advancement": "pastel:hidden/collect_paltaeria_gem",
+  "result": {
+    "count": 1,
+    "id": "minecraft:elytra"
+  },
+  "tier": "complex",
+  "time": 1200
+}

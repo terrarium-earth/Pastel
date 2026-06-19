@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 8
+  },
+  "experience": 1.0,
+  "group": "semi_permeable_glass",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "pastel:purple_pigment"
+    },
+    "S": {
+      "item": "pastel:citrine_shard"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PSP",
+    "GPG"
+  ],
+  "required_advancement": "pastel:midgame/build_advanced_pedestal_structure",
+  "result": {
+    "count": 6,
+    "id": "pastel:citrine_semi_permeable_glass"
+  },
+  "tier": "advanced",
+  "time": 80
+}
