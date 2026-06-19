@@ -2500,6 +2500,15 @@ public class PastelBlocks {
         )
     );
 
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CHISELED_BASALTS =
+            new PastelGemstoneColorCollection<>(
+                    TOPAZ_CHISELED_BASALT,
+                    AMETHYST_CHISELED_BASALT,
+                    CITRINE_CHISELED_BASALT,
+                    ONYX_CHISELED_BASALT,
+                    MOONSTONE_CHISELED_BASALT
+            );
+
     public static final DeferredBlock<Block> CALCITE_STAIRS = register(
         blockWithItem(
             "calcite_stairs",
@@ -2823,6 +2832,15 @@ public class PastelBlocks {
             InkColors.WHITE
         )
     );
+
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CHISELED_CALCITES =
+        new PastelGemstoneColorCollection<>(
+                TOPAZ_CHISELED_CALCITE,
+                AMETHYST_CHISELED_CALCITE,
+                CITRINE_CHISELED_CALCITE,
+                ONYX_CHISELED_CALCITE,
+                MOONSTONE_CHISELED_CALCITE
+        );
 
     public static DeferredBlock<Block> registerGemstoneBlock(PastelGemstoneColor color, String name, Function<Properties, Block> blockFactory, Supplier<Properties> properties) {
         return register(
