@@ -2,7 +2,7 @@ package earth.terrarium.pastel.particle.effect;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.api.energy.color.InkColors;
+import earth.terrarium.pastel.api.energy.color.PastelInkColorCollection;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.particles.ParticleOptions;
@@ -15,57 +15,40 @@ import org.joml.Vector3f;
 
 public class ColoredExplosionParticleEffect implements ParticleOptions {
 
-    public static final ColoredExplosionParticleEffect BLACK = new ColoredExplosionParticleEffect(
-        InkColors.BLACK_COLOR
-    );
+    public static final PastelInkColorCollection<ColoredExplosionParticleEffect> VALUES =
+            PastelInkColorCollection.VALUES.map(color -> new ColoredExplosionParticleEffect(color.getColorInt()));
 
-    public static final ColoredExplosionParticleEffect BLUE = new ColoredExplosionParticleEffect(InkColors.BLUE_COLOR);
+    public static final ColoredExplosionParticleEffect BLACK = VALUES.black();
 
-    public static final ColoredExplosionParticleEffect BROWN = new ColoredExplosionParticleEffect(
-        InkColors.BROWN_COLOR
-    );
+    public static final ColoredExplosionParticleEffect BLUE = VALUES.blue();
 
-    public static final ColoredExplosionParticleEffect CYAN = new ColoredExplosionParticleEffect(InkColors.CYAN_COLOR);
+    public static final ColoredExplosionParticleEffect BROWN = VALUES.brown();
 
-    public static final ColoredExplosionParticleEffect GRAY = new ColoredExplosionParticleEffect(InkColors.GRAY_COLOR);
+    public static final ColoredExplosionParticleEffect CYAN = VALUES.cyan();
 
-    public static final ColoredExplosionParticleEffect GREEN = new ColoredExplosionParticleEffect(
-        InkColors.GREEN_COLOR
-    );
+    public static final ColoredExplosionParticleEffect GRAY = VALUES.gray();
 
-    public static final ColoredExplosionParticleEffect LIGHT_BLUE = new ColoredExplosionParticleEffect(
-        InkColors.LIGHT_BLUE_COLOR
-    );
+    public static final ColoredExplosionParticleEffect GREEN = VALUES.green();
 
-    public static final ColoredExplosionParticleEffect LIGHT_GRAY = new ColoredExplosionParticleEffect(
-        InkColors.LIGHT_GRAY_COLOR
-    );
+    public static final ColoredExplosionParticleEffect LIGHT_BLUE = VALUES.lightBlue();
 
-    public static final ColoredExplosionParticleEffect LIME = new ColoredExplosionParticleEffect(InkColors.LIME_COLOR);
+    public static final ColoredExplosionParticleEffect LIGHT_GRAY = VALUES.lightGray();
 
-    public static final ColoredExplosionParticleEffect MAGENTA = new ColoredExplosionParticleEffect(
-        InkColors.MAGENTA_COLOR
-    );
+    public static final ColoredExplosionParticleEffect LIME = VALUES.lime();
 
-    public static final ColoredExplosionParticleEffect ORANGE = new ColoredExplosionParticleEffect(
-        InkColors.ORANGE_COLOR
-    );
+    public static final ColoredExplosionParticleEffect MAGENTA = VALUES.magenta();
 
-    public static final ColoredExplosionParticleEffect PINK = new ColoredExplosionParticleEffect(InkColors.PINK_COLOR);
+    public static final ColoredExplosionParticleEffect ORANGE = VALUES.orange();
 
-    public static final ColoredExplosionParticleEffect PURPLE = new ColoredExplosionParticleEffect(
-        InkColors.PURPLE_COLOR
-    );
+    public static final ColoredExplosionParticleEffect PINK = VALUES.pink();
 
-    public static final ColoredExplosionParticleEffect RED = new ColoredExplosionParticleEffect(InkColors.RED_COLOR);
+    public static final ColoredExplosionParticleEffect PURPLE = VALUES.purple();
 
-    public static final ColoredExplosionParticleEffect WHITE = new ColoredExplosionParticleEffect(
-        InkColors.WHITE_COLOR
-    );
+    public static final ColoredExplosionParticleEffect RED = VALUES.red();
 
-    public static final ColoredExplosionParticleEffect YELLOW = new ColoredExplosionParticleEffect(
-        InkColors.YELLOW_COLOR
-    );
+    public static final ColoredExplosionParticleEffect WHITE = VALUES.white();
+
+    public static final ColoredExplosionParticleEffect YELLOW = VALUES.yellow();
 
     public static final MapCodec<ColoredExplosionParticleEffect> CODEC = RecordCodecBuilder
         .mapCodec(

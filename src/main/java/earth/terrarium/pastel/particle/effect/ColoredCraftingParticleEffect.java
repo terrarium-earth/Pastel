@@ -2,8 +2,8 @@ package earth.terrarium.pastel.particle.effect;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.api.color.InkColorCollection;
 import earth.terrarium.pastel.api.energy.color.InkColors;
+import earth.terrarium.pastel.api.energy.color.PastelInkColorCollection;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.particles.ParticleOptions;
@@ -16,8 +16,8 @@ import org.joml.Vector3f;
 
 public class ColoredCraftingParticleEffect implements ParticleOptions {
 
-    public static final InkColorCollection<ColoredCraftingParticleEffect> VALUES =
-            InkColorCollection.BUILTIN_COLORS.map(color -> new ColoredCraftingParticleEffect(color.getColorInt()));
+    public static final PastelInkColorCollection<ColoredCraftingParticleEffect> VALUES =
+            PastelInkColorCollection.VALUES.map(color -> new ColoredCraftingParticleEffect(color.getColorInt()));
 
     public static final ColoredCraftingParticleEffect BLACK = VALUES.pick(InkColors.BLACK);
 

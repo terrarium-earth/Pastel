@@ -290,7 +290,7 @@ public class PastelRecipeProvider extends RecipeProvider {
 
     private void saveColoredLamp(RecipeOutput ctx, InkColor color) {
         DeferredBlock<?> result = PastelBlocks.COLORED_LAMPS.pick(color);
-        ResourceLocation unlock = PastelAdvancements.Unlocks.ColoredLamps.LAMPS.pick(color);
+        ResourceLocation unlock = PastelAdvancements.Unlocks.ColoredLamps.VALUES.pick(color);
         // this MAY be the worst java code i've written
         // but IF THIS WAS SCALA this would be peak
         Map<GemstoneColor, Integer> colorMix = getPowderMix(color, 6);

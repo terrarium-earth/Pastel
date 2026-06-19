@@ -2,7 +2,7 @@ package earth.terrarium.pastel.particle.effect;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.api.energy.color.InkColors;
+import earth.terrarium.pastel.api.energy.color.PastelInkColorCollection;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.particles.ParticleOptions;
@@ -15,70 +15,40 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 public class ColoredFluidRisingParticleEffect implements ParticleOptions {
+    public static final PastelInkColorCollection<ColoredFluidRisingParticleEffect> VALUES =
+            PastelInkColorCollection.VALUES.map(color -> new ColoredFluidRisingParticleEffect(color.getColorInt()));
 
-    public static final ColoredFluidRisingParticleEffect BLACK = new ColoredFluidRisingParticleEffect(
-        InkColors.BLACK_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect BLACK = VALUES.black();
 
-    public static final ColoredFluidRisingParticleEffect BLUE = new ColoredFluidRisingParticleEffect(
-        InkColors.BLUE_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect BLUE = VALUES.blue();
 
-    public static final ColoredFluidRisingParticleEffect BROWN = new ColoredFluidRisingParticleEffect(
-        InkColors.BROWN_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect BROWN = VALUES.brown();
 
-    public static final ColoredFluidRisingParticleEffect CYAN = new ColoredFluidRisingParticleEffect(
-        InkColors.CYAN_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect CYAN = VALUES.cyan();
 
-    public static final ColoredFluidRisingParticleEffect GRAY = new ColoredFluidRisingParticleEffect(
-        InkColors.GRAY_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect GRAY = VALUES.gray();
 
-    public static final ColoredFluidRisingParticleEffect GREEN = new ColoredFluidRisingParticleEffect(
-        InkColors.GREEN_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect GREEN = VALUES.green();
 
-    public static final ColoredFluidRisingParticleEffect LIGHT_BLUE = new ColoredFluidRisingParticleEffect(
-        InkColors.LIGHT_BLUE_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect LIGHT_BLUE = VALUES.lightBlue();
 
-    public static final ColoredFluidRisingParticleEffect LIGHT_GRAY = new ColoredFluidRisingParticleEffect(
-        InkColors.LIGHT_GRAY_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect LIGHT_GRAY = VALUES.lightGray();
 
-    public static final ColoredFluidRisingParticleEffect LIME = new ColoredFluidRisingParticleEffect(
-        InkColors.LIME_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect LIME = VALUES.lime();
 
-    public static final ColoredFluidRisingParticleEffect MAGENTA = new ColoredFluidRisingParticleEffect(
-        InkColors.MAGENTA_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect MAGENTA = VALUES.magenta();
 
-    public static final ColoredFluidRisingParticleEffect ORANGE = new ColoredFluidRisingParticleEffect(
-        InkColors.ORANGE_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect ORANGE = VALUES.orange();
 
-    public static final ColoredFluidRisingParticleEffect PINK = new ColoredFluidRisingParticleEffect(
-        InkColors.PINK_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect PINK = VALUES.pink();
 
-    public static final ColoredFluidRisingParticleEffect PURPLE = new ColoredFluidRisingParticleEffect(
-        InkColors.PURPLE_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect PURPLE = VALUES.purple();
 
-    public static final ColoredFluidRisingParticleEffect RED = new ColoredFluidRisingParticleEffect(
-        InkColors.RED_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect RED = VALUES.red();
 
-    public static final ColoredFluidRisingParticleEffect WHITE = new ColoredFluidRisingParticleEffect(
-        InkColors.WHITE_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect WHITE = VALUES.white();
 
-    public static final ColoredFluidRisingParticleEffect YELLOW = new ColoredFluidRisingParticleEffect(
-        InkColors.YELLOW_COLOR
-    );
+    public static final ColoredFluidRisingParticleEffect YELLOW = VALUES.yellow();
 
     public static final MapCodec<ColoredFluidRisingParticleEffect> CODEC = RecordCodecBuilder
         .mapCodec(

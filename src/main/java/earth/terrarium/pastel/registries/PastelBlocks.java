@@ -2,10 +2,10 @@ package earth.terrarium.pastel.registries;
 
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.color.InkColorCollection;
 import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
+import earth.terrarium.pastel.api.energy.color.PastelInkColorCollection;
 import earth.terrarium.pastel.blocks.BedrockAnvilBlock;
 import earth.terrarium.pastel.blocks.BismuthBudBlock;
 import earth.terrarium.pastel.blocks.BlockWithTooltip;
@@ -242,6 +242,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Position;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.network.chat.Component;
@@ -328,13 +329,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
 import static earth.terrarium.pastel.PastelCommon.locate;
-import static net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK;
-import static net.minecraft.world.level.block.Blocks.AMETHYST_CLUSTER;
 import static net.minecraft.world.level.block.Blocks.ANCIENT_DEBRIS;
 import static net.minecraft.world.level.block.Blocks.ANVIL;
 import static net.minecraft.world.level.block.Blocks.ATTACHED_MELON_STEM;
@@ -676,7 +676,35 @@ public class PastelBlocks {
         return settings(mapColor, blockSoundGroup, 1.5F).requiresCorrectToolForDrops();
     }
 
+    private static DeferredBlock<Block> wrapVanillaBlock(Block vanilla) {
+        return DeferredBlock.createBlock(BuiltInRegistries.BLOCK.getResourceKey(vanilla).orElseThrow());
+    }
 
+    private static PastelGemstoneColorCollection<DeferredBlock<Block>> gemstoneGroupWithoutAmethyst(
+            Block vanilla,
+            PastelGemstoneColorCollection<String> ids,
+            Function<PastelGemstoneColor, Block> blockFactory
+    ) {
+        return new PastelGemstoneColorCollection<>(
+                register(blockWithItem(ids.topaz(), () -> blockFactory.apply(PastelGemstoneColor.CYAN), InkColors.CYAN)),
+                wrapVanillaBlock(vanilla),
+                register(blockWithItem(ids.citrine(), () -> blockFactory.apply(PastelGemstoneColor.YELLOW), InkColors.YELLOW)),
+                register(blockWithItem(ids.onyx(), () -> blockFactory.apply(PastelGemstoneColor.BLACK), InkColors.BLACK)),
+                register(blockWithItem(ids.moonstone(), () -> blockFactory.apply(PastelGemstoneColor.WHITE), InkColors.WHITE))
+        );
+    }
+
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_BLOCKS =
+            gemstoneGroupWithoutAmethyst(
+                    Blocks.AMETHYST_BLOCK,
+                    PastelGemstoneColorCollection.prefixWithGemstone("block"),
+                    color ->
+                            new PastelGemstoneBlock(
+                                    gemstoneBlock(PastelGemstoneColorCollection.MAP_COLORS.pick(color), PastelBlockSoundGroups.GEMSTONE_BLOCKS.pick(color)),
+                                    PastelSounds.GEMSTONE_BLOCK_HIT.pick(color),
+                                    PastelSounds.GEMSTONE_CHIMES.pick(color)
+                            )
+            );
 
     public static final DeferredBlock<Block> TOPAZ_CLUSTER = register(
         blockWithItem(
@@ -741,17 +769,7 @@ public class PastelBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> TOPAZ_BLOCK = register(
-        blockWithItem(
-            "topaz_block",
-            () -> new PastelGemstoneBlock(
-                gemstoneBlock(MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK),
-                PastelSounds.BLOCK_TOPAZ_BLOCK_HIT,
-                PastelSounds.BLOCK_TOPAZ_BLOCK_CHIME
-            ),
-            InkColors.CYAN
-        )
-    );
+    public static final DeferredBlock<Block> TOPAZ_BLOCK = GEMSTONE_BLOCKS.topaz();
 
     public static final DeferredBlock<Block> CITRINE_CLUSTER = register(
         blockWithItem(
@@ -818,17 +836,7 @@ public class PastelBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> CITRINE_BLOCK = register(
-        blockWithItem(
-            "citrine_block",
-            () -> new PastelGemstoneBlock(
-                gemstoneBlock(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK),
-                PastelSounds.BLOCK_CITRINE_BLOCK_HIT,
-                PastelSounds.BLOCK_CITRINE_BLOCK_CHIME
-            ),
-            InkColors.YELLOW
-        )
-    );
+    public static final DeferredBlock<Block> CITRINE_BLOCK = GEMSTONE_BLOCKS.citrine();
 
     public static final DeferredBlock<Block> ONYX_CLUSTER = register(
         blockWithItem(
@@ -893,17 +901,7 @@ public class PastelBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> ONYX_BLOCK = register(
-        blockWithItem(
-            "onyx_block",
-            () -> new PastelGemstoneBlock(
-                gemstoneBlock(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK),
-                PastelSounds.BLOCK_ONYX_BLOCK_HIT,
-                PastelSounds.BLOCK_ONYX_BLOCK_CHIME
-            ),
-            InkColors.BLACK
-        )
-    );
+    public static final DeferredBlock<Block> ONYX_BLOCK = GEMSTONE_BLOCKS.onyx();
 
     public static final DeferredBlock<Block> MOONSTONE_CLUSTER = register(
         blockWithItem(
@@ -968,104 +966,67 @@ public class PastelBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> MOONSTONE_BLOCK = register(
-        blockWithItem(
-            "moonstone_block",
-            () -> new PastelGemstoneBlock(
-                gemstoneBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK),
-                PastelSounds.BLOCK_MOONSTONE_BLOCK_HIT,
-                PastelSounds.BLOCK_MOONSTONE_BLOCK_CHIME
-            ),
-            InkColors.WHITE
-        )
-    );
+    public static final DeferredBlock<Block> MOONSTONE_BLOCK = GEMSTONE_BLOCKS.moonstone();
 
-    public static final DeferredBlock<Block> TOPAZ_POWDER_BLOCK = register(
-        blockWithItem(
-            "topaz_powder_block",
-            () -> new ColoredFallingBlock(
-                new ColorRGBA(DyeColor.CYAN.getFireworkColor()),
-                Properties
-                    .ofFullCopy(SAND)
-                    .mapColor(MapColor.COLOR_CYAN)
-            ),
-            InkColors.CYAN
-        )
-    );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_POWDER_BLOCKS =
+            PastelGemstoneColorCollection.registerBlocks(
+                    PastelGemstoneColorCollection.prefixWithGemstone("powder_block"),
+                    PastelBlocks::registerGemstoneBlock,
+                    (color, props) ->
+                            new ColoredFallingBlock(new ColorRGBA(color.getInkColor().getDyeColor().orElseThrow().getFireworkColor()), props),
+                    color -> Properties.ofFullCopy(SAND).mapColor(PastelGemstoneColorCollection.MAP_COLORS.pick(color))
+            );
 
-    public static final DeferredBlock<Block> AMETHYST_POWDER_BLOCK = register(
-        blockWithItem(
-            "amethyst_powder_block",
-            () -> new ColoredFallingBlock(
-                new ColorRGBA(DyeColor.MAGENTA.getFireworkColor()),
-                Properties
-                    .ofFullCopy(SAND)
-                    .mapColor(MapColor.COLOR_MAGENTA)
-            ),
-            InkColors.MAGENTA
-        )
-    );
+    public static final DeferredBlock<Block> TOPAZ_POWDER_BLOCK = GEMSTONE_POWDER_BLOCKS.topaz();
 
-    public static final DeferredBlock<Block> CITRINE_POWDER_BLOCK = register(
-        blockWithItem(
-            "citrine_powder_block",
-            () -> new ColoredFallingBlock(
-                new ColorRGBA(DyeColor.YELLOW.getFireworkColor()),
-                Properties
-                    .ofFullCopy(SAND)
-                    .mapColor(MapColor.COLOR_YELLOW)
-            ),
-            InkColors.YELLOW
-        )
-    );
+    public static final DeferredBlock<Block> AMETHYST_POWDER_BLOCK = GEMSTONE_POWDER_BLOCKS.amethyst();
 
-    public static final DeferredBlock<Block> ONYX_POWDER_BLOCK = register(
-        blockWithItem(
-            "onyx_powder_block",
-            () -> new ColoredFallingBlock(
-                new ColorRGBA(DyeColor.BLACK.getFireworkColor()),
-                Properties
-                    .ofFullCopy(SAND)
-                    .mapColor(MapColor.COLOR_BLACK)
-            ),
-            InkColors.BLACK
-        )
-    );
+    public static final DeferredBlock<Block> CITRINE_POWDER_BLOCK = GEMSTONE_POWDER_BLOCKS.citrine();
 
-    public static final DeferredBlock<Block> MOONSTONE_POWDER_BLOCK = register(
-        blockWithItem(
-            "moonstone_powder_block",
-            () -> new ColoredFallingBlock(
-                new ColorRGBA(DyeColor.WHITE.getFireworkColor()),
-                Properties
-                    .ofFullCopy(SAND)
-                    .mapColor(MapColor.SNOW)
-            ),
-            InkColors.WHITE
-        )
-    );
+    public static final DeferredBlock<Block> ONYX_POWDER_BLOCK = GEMSTONE_POWDER_BLOCKS.onyx();
+
+    public static final DeferredBlock<Block> MOONSTONE_POWDER_BLOCK = GEMSTONE_POWDER_BLOCKS.moonstone();
 
     // collections for gemstone blocks
 
-    // defined as a holder because of vanilla
-    public static final PastelGemstoneColorCollection<Holder<Block>> GEMSTONE_BLOCKS =
-            new PastelGemstoneColorCollection<>(
-                    TOPAZ_BLOCK,
-                    Blocks.AMETHYST_BLOCK.builtInRegistryHolder(),
-                    CITRINE_BLOCK,
-                    ONYX_BLOCK,
-                    MOONSTONE_BLOCK
-                    );
 
-    public static final PastelGemstoneColorCollection<Holder<Block>> GEMSTONE_CLUSTERS =
+    // This is wrapped like this instead of being generated is because i am NOT
+    // dealing with the luminance differences
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CLUSTERS =
             new PastelGemstoneColorCollection<>(
                     TOPAZ_CLUSTER,
-                    Blocks.AMETHYST_CLUSTER.builtInRegistryHolder(),
+                    wrapVanillaBlock(Blocks.AMETHYST_CLUSTER),
                     CITRINE_CLUSTER,
                     ONYX_CLUSTER,
                     MOONSTONE_CLUSTER
             );
 
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> SMALL_GEMSTONE_BUDS =
+            new PastelGemstoneColorCollection<>(
+                    SMALL_TOPAZ_BUD,
+                    wrapVanillaBlock(Blocks.SMALL_AMETHYST_BUD),
+                    SMALL_CITRINE_BUD,
+                    SMALL_ONYX_BUD,
+                    SMALL_MOONSTONE_BUD
+            );
+
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> MEDIUM_GEMSTONE_BUDS =
+            new PastelGemstoneColorCollection<>(
+                    MEDIUM_TOPAZ_BUD,
+                    wrapVanillaBlock(Blocks.MEDIUM_AMETHYST_BUD),
+                    MEDIUM_CITRINE_BUD,
+                    MEDIUM_ONYX_BUD,
+                    MEDIUM_MOONSTONE_BUD
+            );
+
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> LARGE_GEMSTONE_BUDS =
+            new PastelGemstoneColorCollection<>(
+                    LARGE_TOPAZ_BUD,
+                    wrapVanillaBlock(Blocks.LARGE_AMETHYST_BUD),
+                    LARGE_CITRINE_BUD,
+                    LARGE_ONYX_BUD,
+                    LARGE_MOONSTONE_BUD
+            );
 
     public static final DeferredBlock<Block> VEGETAL_BLOCK = register(
         burnable(
@@ -3367,62 +3328,64 @@ public class PastelBlocks {
         return color -> copyWithMapColor(baseBlock, color.getDyeColor().orElse(DyeColor.LIME).getMapColor());
     }
 
-    public static final InkColorCollection<DeferredBlock<Block>> COLORED_PLANKS =
-            InkColorCollection.registerBlocks(
-                    InkColorCollection.prefixWithColor("planks"),
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_PLANKS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("planks"),
                     PastelBlocks::registerColoredBlock,
                     (color, props) -> new ColoredPlankBlock(props, color),
                     bindColoredBlock(OAK_PLANKS)
             );
 
-    public static final InkColorCollection<DeferredBlock<Block>> COLORED_STAIRS =
-            InkColorCollection.registerBlocks(
-                    InkColorCollection.prefixWithColor("stairs"),
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_STAIRS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("stairs"),
                     PastelBlocks::registerColoredBlock,
                     (color, props) -> new ColoredStairsBlock(COLORED_PLANKS.pick(color).get().defaultBlockState(), props, color),
                     bindColoredBlock(OAK_STAIRS)
             );
 
-    public static final InkColorCollection<DeferredBlock<Block>> COLORED_PRESSURE_PLATES =
-            InkColorCollection.registerBlocks(
-                    InkColorCollection.prefixWithColor("pressure_plate"),
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_PRESSURE_PLATES =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("pressure_plate"),
                     PastelBlocks::registerColoredBlock,
                     (color, props) -> new ColoredPressurePlateBlock(props, color),
                     bindColoredBlock(OAK_PRESSURE_PLATE)
             );
 
-    public static final InkColorCollection<DeferredBlock<Block>> COLORED_FENCES =
-            InkColorCollection.registerBlocks(
-                    InkColorCollection.prefixWithColor("fence"),
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_FENCES =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("fence"),
                     PastelBlocks::registerColoredBlock,
                     (color, props) -> new ColoredFenceBlock(props, color),
                     bindColoredBlock(OAK_FENCE)
             );
 
-    public static final InkColorCollection<DeferredBlock<Block>> COLORED_FENCE_GATES =
-            InkColorCollection.registerBlocks(
-                    InkColorCollection.prefixWithColor("fence_gate"),
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_FENCE_GATES =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("fence_gate"),
                     PastelBlocks::registerColoredBlock,
                     (color, props) -> new ColoredFenceGateBlock(props, color),
                     bindColoredBlock(OAK_FENCE_GATE)
             );
 
-    public static final InkColorCollection<DeferredBlock<Block>> COLORED_BUTTONS =
-            InkColorCollection.registerBlocks(
-                    InkColorCollection.prefixWithColor("button"),
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_BUTTONS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("button"),
                     PastelBlocks::registerColoredBlock,
                     (color, props) -> new ColoredWoodenButtonBlock(props, color),
                     bindColoredBlock(OAK_BUTTON)
             );
 
-    public static final InkColorCollection<DeferredBlock<Block>> COLORED_SLABS =
-            InkColorCollection.registerBlocks(
-                    InkColorCollection.prefixWithColor("slab"),
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SLABS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("slab"),
                     PastelBlocks::registerColoredBlock,
                     (color, props) -> new ColoredSlabBlock(props, color),
                     bindColoredBlock(OAK_SLAB)
             );
 
+    // NOT going back by hand to convert all these to use the field access
+    // i used find and replace to change these in the first place
     public static final DeferredBlock<Block> BLACK_PLANKS = COLORED_PLANKS.pick(InkColors.BLACK);
 
     public static final DeferredBlock<Block> BLACK_STAIRS = COLORED_STAIRS.pick(InkColors.BLACK);
@@ -6838,45 +6801,23 @@ public class PastelBlocks {
         return settings(mapColor, soundGroup, 5.0F, 6.0F);
     }
 
-    public static final DeferredBlock<Block> POLISHED_TOPAZ_BLOCK = register(
-        blockWithItem(
-            "polished_topaz_block",
-            () -> new Block(polishedGemBlock(MapColor.COLOR_CYAN, PastelBlockSoundGroups.TOPAZ_BLOCK)),
-            InkColors.CYAN
-        )
-    );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> POLISHED_GEMSTONE_BLOCKS =
+        PastelGemstoneColorCollection.registerBlocks(
+                PastelGemstoneColorCollection.GEMSTONE_NAMES.map(it -> "polished_" + it + "_block"),
+                PastelBlocks::registerGemstoneBlock,
+                (color, props) -> new Block(props),
+                color -> polishedGemBlock(PastelGemstoneColorCollection.MAP_COLORS.pick(color), PastelBlockSoundGroups.GEMSTONE_BLOCKS.pick(color))
+        );
 
-    public static final DeferredBlock<Block> POLISHED_AMETHYST_BLOCK = register(
-        blockWithItem(
-            "polished_amethyst_block",
-            () -> new Block(polishedGemBlock(MapColor.COLOR_MAGENTA, SoundType.AMETHYST)),
-            InkColors.MAGENTA
-        )
-    );
+    public static final DeferredBlock<Block> POLISHED_TOPAZ_BLOCK = POLISHED_GEMSTONE_BLOCKS.topaz();
 
-    public static final DeferredBlock<Block> POLISHED_CITRINE_BLOCK = register(
-        blockWithItem(
-            "polished_citrine_block",
-            () -> new Block(polishedGemBlock(MapColor.COLOR_YELLOW, PastelBlockSoundGroups.CITRINE_BLOCK)),
-            InkColors.YELLOW
-        )
-    );
+    public static final DeferredBlock<Block> POLISHED_AMETHYST_BLOCK = POLISHED_GEMSTONE_BLOCKS.amethyst();
 
-    public static final DeferredBlock<Block> POLISHED_ONYX_BLOCK = register(
-        blockWithItem(
-            "polished_onyx_block",
-            () -> new Block(polishedGemBlock(MapColor.COLOR_BLACK, PastelBlockSoundGroups.ONYX_BLOCK)),
-            InkColors.BLACK
-        )
-    );
+    public static final DeferredBlock<Block> POLISHED_CITRINE_BLOCK = POLISHED_GEMSTONE_BLOCKS.citrine();
 
-    public static final DeferredBlock<Block> POLISHED_MOONSTONE_BLOCK = register(
-        blockWithItem(
-            "polished_moonstone_block",
-            () -> new Block(polishedGemBlock(MapColor.SNOW, PastelBlockSoundGroups.MOONSTONE_BLOCK)),
-            InkColors.WHITE
-        )
-    );
+    public static final DeferredBlock<Block> POLISHED_ONYX_BLOCK = POLISHED_GEMSTONE_BLOCKS.onyx();
+
+    public static final DeferredBlock<Block> POLISHED_MOONSTONE_BLOCK = POLISHED_GEMSTONE_BLOCKS.moonstone();
 
     private static BlockBehaviour.Properties deferredCopyWithMapColor(DeferredBlock<Block> baseBlock, MapColor color) {
         return BlockBehaviour.Properties
@@ -6971,101 +6912,45 @@ public class PastelBlocks {
         );
     }
 
-    public static final DeferredBlock<Block> BLACK_SAPLING = registerColoredSapling(
-        "black_sapling",
-        InkColors.BLACK,
-        PastelSaplingGenerators.BLACK_COLORED_SAPLING_GENERATOR
-    );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SAPLINGS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("sapling"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) -> new ColoredSaplingBlock(props, color, PastelSaplingGenerators.COLORED_SAPLING_GENERATORS.pick(color)),
+                    color -> copyWithMapColor(OAK_SAPLING, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
+            );
 
-    public static final DeferredBlock<Block> BLUE_SAPLING = registerColoredSapling(
-        "blue_sapling",
-        InkColors.BLUE,
-        PastelSaplingGenerators.BLUE_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> BLACK_SAPLING = COLORED_SAPLINGS.black();
 
-    public static final DeferredBlock<Block> BROWN_SAPLING = registerColoredSapling(
-        "brown_sapling",
-        InkColors.BROWN,
-        PastelSaplingGenerators.BROWN_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> BLUE_SAPLING = COLORED_SAPLINGS.blue();
 
-    public static final DeferredBlock<Block> CYAN_SAPLING = registerColoredSapling(
-        "cyan_sapling",
-        InkColors.CYAN,
-        PastelSaplingGenerators.CYAN_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> BROWN_SAPLING = COLORED_SAPLINGS.brown();
 
-    public static final DeferredBlock<Block> GRAY_SAPLING = registerColoredSapling(
-        "gray_sapling",
-        InkColors.GRAY,
-        PastelSaplingGenerators.GRAY_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> CYAN_SAPLING = COLORED_SAPLINGS.cyan();
 
-    public static final DeferredBlock<Block> GREEN_SAPLING = registerColoredSapling(
-        "green_sapling",
-        InkColors.GREEN,
-        PastelSaplingGenerators.GREEN_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> GRAY_SAPLING = COLORED_SAPLINGS.gray();
 
-    public static final DeferredBlock<Block> LIGHT_BLUE_SAPLING = registerColoredSapling(
-        "light_blue_sapling",
-        InkColors.LIGHT_BLUE,
-        PastelSaplingGenerators.LIGHT_BLUE_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> GREEN_SAPLING = COLORED_SAPLINGS.green();
 
-    public static final DeferredBlock<Block> LIGHT_GRAY_SAPLING = registerColoredSapling(
-        "light_gray_sapling",
-        InkColors.LIGHT_GRAY,
-        PastelSaplingGenerators.LIGHT_GRAY_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> LIGHT_BLUE_SAPLING = COLORED_SAPLINGS.lightBlue();
 
-    public static final DeferredBlock<Block> LIME_SAPLING = registerColoredSapling(
-        "lime_sapling",
-        InkColors.LIME,
-        PastelSaplingGenerators.LIME_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> LIGHT_GRAY_SAPLING = COLORED_SAPLINGS.lightGray();
 
-    public static final DeferredBlock<Block> MAGENTA_SAPLING = registerColoredSapling(
-        "magenta_sapling",
-        InkColors.MAGENTA,
-        PastelSaplingGenerators.MAGENTA_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> LIME_SAPLING = COLORED_SAPLINGS.lime();
 
-    public static final DeferredBlock<Block> ORANGE_SAPLING = registerColoredSapling(
-        "orange_sapling",
-        InkColors.ORANGE,
-        PastelSaplingGenerators.ORANGE_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> MAGENTA_SAPLING = COLORED_SAPLINGS.magenta();
 
-    public static final DeferredBlock<Block> PINK_SAPLING = registerColoredSapling(
-        "pink_sapling",
-        InkColors.PINK,
-        PastelSaplingGenerators.PINK_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> ORANGE_SAPLING = COLORED_SAPLINGS.orange();
 
-    public static final DeferredBlock<Block> PURPLE_SAPLING = registerColoredSapling(
-        "purple_sapling",
-        InkColors.PURPLE,
-        PastelSaplingGenerators.PURPLE_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> PINK_SAPLING = COLORED_SAPLINGS.pink();
 
-    public static final DeferredBlock<Block> RED_SAPLING = registerColoredSapling(
-        "red_sapling",
-        InkColors.RED,
-        PastelSaplingGenerators.RED_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> PURPLE_SAPLING = COLORED_SAPLINGS.purple();
 
-    public static final DeferredBlock<Block> WHITE_SAPLING = registerColoredSapling(
-        "white_sapling",
-        InkColors.WHITE,
-        PastelSaplingGenerators.WHITE_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> RED_SAPLING = COLORED_SAPLINGS.red();
 
-    public static final DeferredBlock<Block> YELLOW_SAPLING = registerColoredSapling(
-        "yellow_sapling",
-        InkColors.YELLOW,
-        PastelSaplingGenerators.YELLOW_COLORED_SAPLING_GENERATOR
-    );
+    public static final DeferredBlock<Block> WHITE_SAPLING = COLORED_SAPLINGS.white();
+
+    public static final DeferredBlock<Block> YELLOW_SAPLING = COLORED_SAPLINGS.yellow();
 
     public static DeferredBlock<Block> registerPottedColoredSapling(String name, DeferredBlock<Block> saplingBlock) {
         return register(
@@ -7080,85 +6965,45 @@ public class PastelBlocks {
         );
     }
 
-    public static final DeferredBlock<Block> POTTED_BLACK_SAPLING = registerPottedColoredSapling(
-        "potted_black_sapling",
-        PastelBlocks.BLACK_SAPLING
-    );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> POTTED_COLORED_SAPLINGS =
+        PastelInkColorCollection.registerBlocks(
+                PastelInkColorCollection.NAMES.map(name -> "potted_" + name + "_sapling"),
+                PastelBlocks::registerColoredBlock,
+                (color, props) -> new PottedColoredSaplingBlock(COLORED_SAPLINGS.pick(color).get(), props, color),
+                color -> pottedPlant()
+        );
 
-    public static final DeferredBlock<Block> POTTED_BLUE_SAPLING = registerPottedColoredSapling(
-        "potted_blue_sapling",
-        PastelBlocks.BLUE_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_BLACK_SAPLING = POTTED_COLORED_SAPLINGS.black();
 
-    public static final DeferredBlock<Block> POTTED_BROWN_SAPLING = registerPottedColoredSapling(
-        "potted_brown_sapling",
-        PastelBlocks.BROWN_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_BLUE_SAPLING = POTTED_COLORED_SAPLINGS.blue();
 
-    public static final DeferredBlock<Block> POTTED_CYAN_SAPLING = registerPottedColoredSapling(
-        "potted_cyan_sapling",
-        PastelBlocks.CYAN_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_BROWN_SAPLING = POTTED_COLORED_SAPLINGS.brown();
 
-    public static final DeferredBlock<Block> POTTED_GRAY_SAPLING = registerPottedColoredSapling(
-        "potted_gray_sapling",
-        PastelBlocks.GRAY_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_CYAN_SAPLING = POTTED_COLORED_SAPLINGS.cyan();
 
-    public static final DeferredBlock<Block> POTTED_GREEN_SAPLING = registerPottedColoredSapling(
-        "potted_green_sapling",
-        PastelBlocks.GREEN_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_GRAY_SAPLING = POTTED_COLORED_SAPLINGS.gray();
 
-    public static final DeferredBlock<Block> POTTED_LIGHT_BLUE_SAPLING = registerPottedColoredSapling(
-        "potted_light_blue_sapling",
-        PastelBlocks.LIGHT_BLUE_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_GREEN_SAPLING = POTTED_COLORED_SAPLINGS.green();
 
-    public static final DeferredBlock<Block> POTTED_LIGHT_GRAY_SAPLING = registerPottedColoredSapling(
-        "potted_light_gray_sapling",
-        PastelBlocks.LIGHT_GRAY_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_LIGHT_BLUE_SAPLING = POTTED_COLORED_SAPLINGS.lightBlue();
 
-    public static final DeferredBlock<Block> POTTED_LIME_SAPLING = registerPottedColoredSapling(
-        "potted_lime_sapling",
-        PastelBlocks.LIME_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_LIGHT_GRAY_SAPLING = POTTED_COLORED_SAPLINGS.lightGray();
 
-    public static final DeferredBlock<Block> POTTED_MAGENTA_SAPLING = registerPottedColoredSapling(
-        "potted_magenta_sapling",
-        PastelBlocks.MAGENTA_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_LIME_SAPLING = POTTED_COLORED_SAPLINGS.lime();
 
-    public static final DeferredBlock<Block> POTTED_ORANGE_SAPLING = registerPottedColoredSapling(
-        "potted_orange_sapling",
-        PastelBlocks.ORANGE_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_MAGENTA_SAPLING = POTTED_COLORED_SAPLINGS.magenta();
 
-    public static final DeferredBlock<Block> POTTED_PINK_SAPLING = registerPottedColoredSapling(
-        "potted_pink_sapling",
-        PastelBlocks.PINK_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_ORANGE_SAPLING = POTTED_COLORED_SAPLINGS.orange();
 
-    public static final DeferredBlock<Block> POTTED_PURPLE_SAPLING = registerPottedColoredSapling(
-        "potted_purple_sapling",
-        PastelBlocks.PURPLE_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_PINK_SAPLING = POTTED_COLORED_SAPLINGS.pink();
 
-    public static final DeferredBlock<Block> POTTED_RED_SAPLING = registerPottedColoredSapling(
-        "potted_red_sapling",
-        PastelBlocks.RED_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_PURPLE_SAPLING = POTTED_COLORED_SAPLINGS.purple();
 
-    public static final DeferredBlock<Block> POTTED_WHITE_SAPLING = registerPottedColoredSapling(
-        "potted_white_sapling",
-        PastelBlocks.WHITE_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_RED_SAPLING = POTTED_COLORED_SAPLINGS.red();
 
-    public static final DeferredBlock<Block> POTTED_YELLOW_SAPLING = registerPottedColoredSapling(
-        "potted_yellow_sapling",
-        PastelBlocks.YELLOW_SAPLING
-    );
+    public static final DeferredBlock<Block> POTTED_WHITE_SAPLING = POTTED_COLORED_SAPLINGS.white();
+
+    public static final DeferredBlock<Block> POTTED_YELLOW_SAPLING = POTTED_COLORED_SAPLINGS.yellow();
 
     public static DeferredBlock<Block> registerColoredStrippedLog(String name, InkColor color) {
         return register(
@@ -7179,85 +7024,45 @@ public class PastelBlocks {
         );
     }
 
-    public static final DeferredBlock<Block> STRIPPED_BLACK_LOG = registerColoredStrippedLog(
-        "stripped_black_log",
-        InkColors.BLACK
-    );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> STRIPPED_COLORED_LOGS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.NAMES.map(name -> "stripped_" + name + "_log"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) -> new ColoredStrippedLogBlock(props, color),
+                    color -> copyWithMapColor(STRIPPED_OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
+            );
 
-    public static final DeferredBlock<Block> STRIPPED_BLUE_LOG = registerColoredStrippedLog(
-        "stripped_blue_log",
-        InkColors.BLUE
-    );
+    public static final DeferredBlock<Block> STRIPPED_BLACK_LOG = STRIPPED_COLORED_LOGS.black();
 
-    public static final DeferredBlock<Block> STRIPPED_BROWN_LOG = registerColoredStrippedLog(
-        "stripped_brown_log",
-        InkColors.BROWN
-    );
+    public static final DeferredBlock<Block> STRIPPED_BLUE_LOG = STRIPPED_COLORED_LOGS.blue();
 
-    public static final DeferredBlock<Block> STRIPPED_CYAN_LOG = registerColoredStrippedLog(
-        "stripped_cyan_log",
-        InkColors.CYAN
-    );
+    public static final DeferredBlock<Block> STRIPPED_BROWN_LOG = STRIPPED_COLORED_LOGS.brown();
 
-    public static final DeferredBlock<Block> STRIPPED_GRAY_LOG = registerColoredStrippedLog(
-        "stripped_gray_log",
-        InkColors.GRAY
-    );
+    public static final DeferredBlock<Block> STRIPPED_CYAN_LOG = STRIPPED_COLORED_LOGS.cyan();
 
-    public static final DeferredBlock<Block> STRIPPED_GREEN_LOG = registerColoredStrippedLog(
-        "stripped_green_log",
-        InkColors.GREEN
-    );
+    public static final DeferredBlock<Block> STRIPPED_GRAY_LOG = STRIPPED_COLORED_LOGS.gray();
 
-    public static final DeferredBlock<Block> STRIPPED_LIGHT_BLUE_LOG = registerColoredStrippedLog(
-        "stripped_light_blue_log",
-        InkColors.LIGHT_BLUE
-    );
+    public static final DeferredBlock<Block> STRIPPED_GREEN_LOG = STRIPPED_COLORED_LOGS.green();
 
-    public static final DeferredBlock<Block> STRIPPED_LIGHT_GRAY_LOG = registerColoredStrippedLog(
-        "stripped_light_gray_log",
-        InkColors.LIGHT_GRAY
-    );
+    public static final DeferredBlock<Block> STRIPPED_LIGHT_BLUE_LOG = STRIPPED_COLORED_LOGS.lightBlue();
 
-    public static final DeferredBlock<Block> STRIPPED_LIME_LOG = registerColoredStrippedLog(
-        "stripped_lime_log",
-        InkColors.LIME
-    );
+    public static final DeferredBlock<Block> STRIPPED_LIGHT_GRAY_LOG = STRIPPED_COLORED_LOGS.lightGray();
 
-    public static final DeferredBlock<Block> STRIPPED_MAGENTA_LOG = registerColoredStrippedLog(
-        "stripped_magenta_log",
-        InkColors.MAGENTA
-    );
+    public static final DeferredBlock<Block> STRIPPED_LIME_LOG = STRIPPED_COLORED_LOGS.lime();
 
-    public static final DeferredBlock<Block> STRIPPED_ORANGE_LOG = registerColoredStrippedLog(
-        "stripped_orange_log",
-        InkColors.ORANGE
-    );
+    public static final DeferredBlock<Block> STRIPPED_MAGENTA_LOG = STRIPPED_COLORED_LOGS.magenta();
 
-    public static final DeferredBlock<Block> STRIPPED_PINK_LOG = registerColoredStrippedLog(
-        "stripped_pink_log",
-        InkColors.PINK
-    );
+    public static final DeferredBlock<Block> STRIPPED_ORANGE_LOG = STRIPPED_COLORED_LOGS.orange();
 
-    public static final DeferredBlock<Block> STRIPPED_PURPLE_LOG = registerColoredStrippedLog(
-        "stripped_purple_log",
-        InkColors.PURPLE
-    );
+    public static final DeferredBlock<Block> STRIPPED_PINK_LOG = STRIPPED_COLORED_LOGS.pink();
 
-    public static final DeferredBlock<Block> STRIPPED_RED_LOG = registerColoredStrippedLog(
-        "stripped_red_log",
-        InkColors.RED
-    );
+    public static final DeferredBlock<Block> STRIPPED_PURPLE_LOG = STRIPPED_COLORED_LOGS.purple();
 
-    public static final DeferredBlock<Block> STRIPPED_WHITE_LOG = registerColoredStrippedLog(
-        "stripped_white_log",
-        InkColors.WHITE
-    );
+    public static final DeferredBlock<Block> STRIPPED_RED_LOG = STRIPPED_COLORED_LOGS.red();
 
-    public static final DeferredBlock<Block> STRIPPED_YELLOW_LOG = registerColoredStrippedLog(
-        "stripped_yellow_log",
-        InkColors.YELLOW
-    );
+    public static final DeferredBlock<Block> STRIPPED_WHITE_LOG = STRIPPED_COLORED_LOGS.white();
+
+    public static final DeferredBlock<Block> STRIPPED_YELLOW_LOG = STRIPPED_COLORED_LOGS.yellow();
 
     public static DeferredBlock<Block> registerColoredLog(
         String name,
@@ -7283,476 +7088,229 @@ public class PastelBlocks {
         );
     }
 
-    public static final DeferredBlock<Block> BLACK_LOG = registerColoredLog(
-        "black_log",
-        InkColors.BLACK,
-        PastelBlocks.STRIPPED_BLACK_LOG
-    );
-
-    public static final DeferredBlock<Block> BLUE_LOG = registerColoredLog(
-        "blue_log",
-        InkColors.BLUE,
-        PastelBlocks.STRIPPED_BLUE_LOG
-    );
-
-    public static final DeferredBlock<Block> BROWN_LOG = registerColoredLog(
-        "brown_log",
-        InkColors.BROWN,
-        PastelBlocks.STRIPPED_BROWN_LOG
-    );
-
-    public static final DeferredBlock<Block> CYAN_LOG = registerColoredLog(
-        "cyan_log",
-        InkColors.CYAN,
-        PastelBlocks.STRIPPED_CYAN_LOG
-    );
-
-    public static final DeferredBlock<Block> GRAY_LOG = registerColoredLog(
-        "gray_log",
-        InkColors.GRAY,
-        PastelBlocks.STRIPPED_GRAY_LOG
-    );
-
-    public static final DeferredBlock<Block> GREEN_LOG = registerColoredLog(
-        "green_log",
-        InkColors.GREEN,
-        PastelBlocks.STRIPPED_GREEN_LOG
-    );
-
-    public static final DeferredBlock<Block> LIGHT_BLUE_LOG = registerColoredLog(
-        "light_blue_log",
-        InkColors.LIGHT_BLUE,
-        PastelBlocks.STRIPPED_LIGHT_BLUE_LOG
-    );
-
-    public static final DeferredBlock<Block> LIGHT_GRAY_LOG = registerColoredLog(
-        "light_gray_log",
-        InkColors.LIGHT_GRAY,
-        PastelBlocks.STRIPPED_LIGHT_GRAY_LOG
-    );
-
-    public static final DeferredBlock<Block> LIME_LOG = registerColoredLog(
-        "lime_log",
-        InkColors.LIME,
-        PastelBlocks.STRIPPED_LIME_LOG
-    );
-
-    public static final DeferredBlock<Block> MAGENTA_LOG = registerColoredLog(
-        "magenta_log",
-        InkColors.MAGENTA,
-        PastelBlocks.STRIPPED_MAGENTA_LOG
-    );
-
-    public static final DeferredBlock<Block> ORANGE_LOG = registerColoredLog(
-        "orange_log",
-        InkColors.ORANGE,
-        PastelBlocks.STRIPPED_ORANGE_LOG
-    );
-
-    public static final DeferredBlock<Block> PINK_LOG = registerColoredLog(
-        "pink_log",
-        InkColors.PINK,
-        PastelBlocks.STRIPPED_PINK_LOG
-    );
-
-    public static final DeferredBlock<Block> PURPLE_LOG = registerColoredLog(
-        "purple_log",
-        InkColors.PURPLE,
-        PastelBlocks.STRIPPED_PURPLE_LOG
-    );
-
-    public static final DeferredBlock<Block> RED_LOG = registerColoredLog(
-        "red_log",
-        InkColors.RED,
-        PastelBlocks.STRIPPED_RED_LOG
-    );
-
-    public static final DeferredBlock<Block> WHITE_LOG = registerColoredLog(
-        "white_log",
-        InkColors.WHITE,
-        PastelBlocks.STRIPPED_WHITE_LOG
-    );
-
-    public static final DeferredBlock<Block> YELLOW_LOG = registerColoredLog(
-        "yellow_log",
-        InkColors.YELLOW,
-        PastelBlocks.STRIPPED_YELLOW_LOG
-    );
-
-    public static DeferredBlock<Block> registerColoredStrippedWood(
-        String name,
-        DeferredBlock<Block> logBlock,
-        InkColor color
-    ) {
-        return register(
-            blockWithItem(
-                name,
-                () -> new ColoredStrippedWoodBlock(
-                    copyWithMapColor(
-                        STRIPPED_OAK_WOOD,
-                        logBlock
-                            .get()
-                            .defaultMapColor()
-                    ),
-                    color
-                ),
-                color
-            )
-        );
-    }
-
-    public static DeferredBlock<Block> registerColoredWood(String name, DeferredBlock<Block> logBlock, InkColor color) {
-        return register(
-            blockWithItem(
-                name,
-                () -> new ColoredWoodBlock(
-                    copyWithMapColor(
-                        OAK_WOOD,
-                        logBlock
-                            .get()
-                            .defaultMapColor()
-                    ),
-                    color
-                ),
-                color
-            )
-        );
-    }
-
-    public static final DeferredBlock<Block> BLACK_WOOD = registerColoredWood(
-        "black_wood",
-        PastelBlocks.BLACK_LOG,
-        InkColors.BLACK
-    );
-
-    public static final DeferredBlock<Block> BLUE_WOOD = registerColoredWood(
-        "blue_wood",
-        PastelBlocks.BLUE_LOG,
-        InkColors.BLUE
-    );
-
-    public static final DeferredBlock<Block> BROWN_WOOD = registerColoredWood(
-        "brown_wood",
-        PastelBlocks.BROWN_LOG,
-        InkColors.BROWN
-    );
-
-    public static final DeferredBlock<Block> CYAN_WOOD = registerColoredWood(
-        "cyan_wood",
-        PastelBlocks.CYAN_LOG,
-        InkColors.CYAN
-    );
-
-    public static final DeferredBlock<Block> GRAY_WOOD = registerColoredWood(
-        "gray_wood",
-        PastelBlocks.GRAY_LOG,
-        InkColors.GRAY
-    );
-
-    public static final DeferredBlock<Block> GREEN_WOOD = registerColoredWood(
-        "green_wood",
-        PastelBlocks.GREEN_LOG,
-        InkColors.GREEN
-    );
-
-    public static final DeferredBlock<Block> LIGHT_BLUE_WOOD = registerColoredWood(
-        "light_blue_wood",
-        PastelBlocks.LIGHT_BLUE_LOG,
-        InkColors.LIGHT_BLUE
-    );
-
-    public static final DeferredBlock<Block> LIGHT_GRAY_WOOD = registerColoredWood(
-        "light_gray_wood",
-        PastelBlocks.LIGHT_GRAY_LOG,
-        InkColors.LIGHT_GRAY
-    );
-
-    public static final DeferredBlock<Block> LIME_WOOD = registerColoredWood(
-        "lime_wood",
-        PastelBlocks.LIME_LOG,
-        InkColors.LIME
-    );
-
-    public static final DeferredBlock<Block> MAGENTA_WOOD = registerColoredWood(
-        "magenta_wood",
-        PastelBlocks.MAGENTA_LOG,
-        InkColors.MAGENTA
-    );
-
-    public static final DeferredBlock<Block> ORANGE_WOOD = registerColoredWood(
-        "orange_wood",
-        PastelBlocks.ORANGE_LOG,
-        InkColors.ORANGE
-    );
-
-    public static final DeferredBlock<Block> PINK_WOOD = registerColoredWood(
-        "pink_wood",
-        PastelBlocks.PINK_LOG,
-        InkColors.PINK
-    );
-
-    public static final DeferredBlock<Block> PURPLE_WOOD = registerColoredWood(
-        "purple_wood",
-        PastelBlocks.PURPLE_LOG,
-        InkColors.PURPLE
-    );
-
-    public static final DeferredBlock<Block> RED_WOOD = registerColoredWood(
-        "red_wood",
-        PastelBlocks.RED_LOG,
-        InkColors.RED
-    );
-
-    public static final DeferredBlock<Block> WHITE_WOOD = registerColoredWood(
-        "white_wood",
-        PastelBlocks.WHITE_LOG,
-        InkColors.WHITE
-    );
-
-    public static final DeferredBlock<Block> YELLOW_WOOD = registerColoredWood(
-        "yellow_wood",
-        PastelBlocks.YELLOW_LOG,
-        InkColors.YELLOW
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_BLACK_WOOD = registerColoredStrippedWood(
-        "stripped_black_wood",
-        PastelBlocks.STRIPPED_BLACK_LOG,
-        InkColors.BLACK
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_BLUE_WOOD = registerColoredStrippedWood(
-        "stripped_blue_wood",
-        PastelBlocks.STRIPPED_BLUE_LOG,
-        InkColors.BLUE
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_BROWN_WOOD = registerColoredStrippedWood(
-        "stripped_brown_wood",
-        PastelBlocks.STRIPPED_BROWN_LOG,
-        InkColors.BROWN
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_CYAN_WOOD = registerColoredStrippedWood(
-        "stripped_cyan_wood",
-        PastelBlocks.STRIPPED_CYAN_LOG,
-        InkColors.CYAN
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_GRAY_WOOD = registerColoredStrippedWood(
-        "stripped_gray_wood",
-        PastelBlocks.STRIPPED_GRAY_LOG,
-        InkColors.GRAY
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_GREEN_WOOD = registerColoredStrippedWood(
-        "stripped_green_wood",
-        PastelBlocks.STRIPPED_GREEN_LOG,
-        InkColors.GREEN
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_LIGHT_BLUE_WOOD = registerColoredStrippedWood(
-        "stripped_light_blue_wood",
-        PastelBlocks.STRIPPED_LIGHT_BLUE_LOG,
-        InkColors.LIGHT_BLUE
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_LIGHT_GRAY_WOOD = registerColoredStrippedWood(
-        "stripped_light_gray_wood",
-        PastelBlocks.STRIPPED_LIGHT_GRAY_LOG,
-        InkColors.LIGHT_GRAY
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_LIME_WOOD = registerColoredStrippedWood(
-        "stripped_lime_wood",
-        PastelBlocks.STRIPPED_LIME_LOG,
-        InkColors.LIME
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_MAGENTA_WOOD = registerColoredStrippedWood(
-        "stripped_magenta_wood",
-        PastelBlocks.STRIPPED_MAGENTA_LOG,
-        InkColors.MAGENTA
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_ORANGE_WOOD = registerColoredStrippedWood(
-        "stripped_orange_wood",
-        PastelBlocks.STRIPPED_ORANGE_LOG,
-        InkColors.ORANGE
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_PINK_WOOD = registerColoredStrippedWood(
-        "stripped_pink_wood",
-        PastelBlocks.STRIPPED_PINK_LOG,
-        InkColors.PINK
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_PURPLE_WOOD = registerColoredStrippedWood(
-        "stripped_purple_wood",
-        PastelBlocks.STRIPPED_PURPLE_LOG,
-        InkColors.PURPLE
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_RED_WOOD = registerColoredStrippedWood(
-        "stripped_red_wood",
-        PastelBlocks.STRIPPED_RED_LOG,
-        InkColors.RED
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_WHITE_WOOD = registerColoredStrippedWood(
-        "stripped_white_wood",
-        PastelBlocks.STRIPPED_WHITE_LOG,
-        InkColors.WHITE
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_YELLOW_WOOD = registerColoredStrippedWood(
-        "stripped_yellow_wood",
-        PastelBlocks.STRIPPED_YELLOW_LOG,
-        InkColors.YELLOW
-    );
-
-    public static DeferredBlock<Block> registerColoredLeaves(String name, InkColor color) {
-        return register(
-            blockWithItem(
-                name,
-                () -> new ColoredLeavesBlock(
-                    copyWithMapColor(
-                        OAK_LEAVES,
-                        color
-                            .getDyeColor()
-                            .orElse(DyeColor.LIME)
-                            .getMapColor()
-                    ),
-                    color
-                ),
-                color
-            )
-        );
-    }
-
-    public static final DeferredBlock<Block> BLACK_LEAVES = registerColoredLeaves("black_leaves", InkColors.BLACK);
-
-    public static final DeferredBlock<Block> BLUE_LEAVES = registerColoredLeaves("blue_leaves", InkColors.BLUE);
-
-    public static final DeferredBlock<Block> BROWN_LEAVES = registerColoredLeaves("brown_leaves", InkColors.BROWN);
-
-    public static final DeferredBlock<Block> CYAN_LEAVES = registerColoredLeaves("cyan_leaves", InkColors.CYAN);
-
-    public static final DeferredBlock<Block> GRAY_LEAVES = registerColoredLeaves("gray_leaves", InkColors.GRAY);
-
-    public static final DeferredBlock<Block> GREEN_LEAVES = registerColoredLeaves("green_leaves", InkColors.GREEN);
-
-    public static final DeferredBlock<Block> LIGHT_BLUE_LEAVES = registerColoredLeaves(
-        "light_blue_leaves",
-        InkColors.LIGHT_BLUE
-    );
-
-    public static final DeferredBlock<Block> LIGHT_GRAY_LEAVES = registerColoredLeaves(
-        "light_gray_leaves",
-        InkColors.LIGHT_GRAY
-    );
-
-    public static final DeferredBlock<Block> LIME_LEAVES = registerColoredLeaves("lime_leaves", InkColors.LIME);
-
-    public static final DeferredBlock<Block> MAGENTA_LEAVES = registerColoredLeaves(
-        "magenta_leaves",
-        InkColors.MAGENTA
-    );
-
-    public static final DeferredBlock<Block> ORANGE_LEAVES = registerColoredLeaves("orange_leaves", InkColors.ORANGE);
-
-    public static final DeferredBlock<Block> PINK_LEAVES = registerColoredLeaves("pink_leaves", InkColors.PINK);
-
-    public static final DeferredBlock<Block> PURPLE_LEAVES = registerColoredLeaves("purple_leaves", InkColors.PURPLE);
-
-    public static final DeferredBlock<Block> RED_LEAVES = registerColoredLeaves("red_leaves", InkColors.RED);
-
-    public static final DeferredBlock<Block> WHITE_LEAVES = registerColoredLeaves("white_leaves", InkColors.WHITE);
-
-    public static final DeferredBlock<Block> YELLOW_LEAVES = registerColoredLeaves("yellow_leaves", InkColors.YELLOW);
-
-    public static DeferredBlock<Block> registerGlowBlock(String name, InkColor color) {
-        return register(
-            blockWithItem(
-                name,
-                () -> new GlowBlock(
-                    settings(
-                        color
-                            .getDyeColor()
-                            .orElse(DyeColor.LIME)
-                            .getMapColor(),
-                        SoundType.BASALT,
-                        2.5F
-                    )
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LOGS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("log"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) -> new ColoredLogBlock(props, color, STRIPPED_COLORED_LOGS.pick(color).get()),
+                    color -> copyWithMapColor(OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
+            );
+
+    public static final DeferredBlock<Block> BLACK_LOG = COLORED_LOGS.black();
+
+    public static final DeferredBlock<Block> BLUE_LOG = COLORED_LOGS.blue();
+
+    public static final DeferredBlock<Block> BROWN_LOG = COLORED_LOGS.brown();
+
+    public static final DeferredBlock<Block> CYAN_LOG = COLORED_LOGS.cyan();
+
+    public static final DeferredBlock<Block> GRAY_LOG = COLORED_LOGS.gray();
+
+    public static final DeferredBlock<Block> GREEN_LOG = COLORED_LOGS.green();
+
+    public static final DeferredBlock<Block> LIGHT_BLUE_LOG = COLORED_LOGS.lightBlue();
+
+    public static final DeferredBlock<Block> LIGHT_GRAY_LOG = COLORED_LOGS.lightGray();
+
+    public static final DeferredBlock<Block> LIME_LOG = COLORED_LOGS.lime();
+
+    public static final DeferredBlock<Block> MAGENTA_LOG = COLORED_LOGS.magenta();
+
+    public static final DeferredBlock<Block> ORANGE_LOG = COLORED_LOGS.orange();
+
+    public static final DeferredBlock<Block> PINK_LOG = COLORED_LOGS.pink();
+
+    public static final DeferredBlock<Block> PURPLE_LOG = COLORED_LOGS.purple();
+
+    public static final DeferredBlock<Block> RED_LOG = COLORED_LOGS.red();
+
+    public static final DeferredBlock<Block> WHITE_LOG = COLORED_LOGS.white();
+
+    public static final DeferredBlock<Block> YELLOW_LOG = COLORED_LOGS.yellow();
+
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_WOODS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("wood"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) -> new ColoredWoodBlock(props, color),
+                    color -> copyWithMapColor(OAK_WOOD, color.getDyeColor().orElseThrow().getMapColor())
+            );
+
+    public static final DeferredBlock<Block> BLACK_WOOD = COLORED_WOODS.black();
+
+    public static final DeferredBlock<Block> BLUE_WOOD = COLORED_WOODS.blue();
+
+    public static final DeferredBlock<Block> BROWN_WOOD = COLORED_WOODS.brown();
+
+    public static final DeferredBlock<Block> CYAN_WOOD = COLORED_WOODS.cyan();
+
+    public static final DeferredBlock<Block> GRAY_WOOD = COLORED_WOODS.gray();
+
+    public static final DeferredBlock<Block> GREEN_WOOD = COLORED_WOODS.green();
+
+    public static final DeferredBlock<Block> LIGHT_BLUE_WOOD = COLORED_WOODS.lightBlue();
+
+    public static final DeferredBlock<Block> LIGHT_GRAY_WOOD = COLORED_WOODS.lightGray();
+
+    public static final DeferredBlock<Block> LIME_WOOD = COLORED_WOODS.lime();
+
+    public static final DeferredBlock<Block> MAGENTA_WOOD = COLORED_WOODS.magenta();
+
+    public static final DeferredBlock<Block> ORANGE_WOOD = COLORED_WOODS.orange();
+
+    public static final DeferredBlock<Block> PINK_WOOD = COLORED_WOODS.pink();
+
+    public static final DeferredBlock<Block> PURPLE_WOOD = COLORED_WOODS.purple();
+
+    public static final DeferredBlock<Block> RED_WOOD = COLORED_WOODS.red();
+
+    public static final DeferredBlock<Block> WHITE_WOOD = COLORED_WOODS.white();
+
+    public static final DeferredBlock<Block> YELLOW_WOOD = COLORED_WOODS.yellow();
+
+    public static final PastelInkColorCollection<DeferredBlock<Block>> STRIPPED_COLORED_WOODS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.NAMES.map(it -> "stripped_" + it + "_wood"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) -> new ColoredStrippedWoodBlock(props, color),
+                    color -> copyWithMapColor(STRIPPED_OAK_WOOD, color.getDyeColor().orElseThrow().getMapColor())
+            );
+
+    public static final DeferredBlock<Block> STRIPPED_BLACK_WOOD = STRIPPED_COLORED_WOODS.black();
+
+    public static final DeferredBlock<Block> STRIPPED_BLUE_WOOD = STRIPPED_COLORED_WOODS.blue();
+
+    public static final DeferredBlock<Block> STRIPPED_BROWN_WOOD = STRIPPED_COLORED_WOODS.brown();
+
+    public static final DeferredBlock<Block> STRIPPED_CYAN_WOOD = STRIPPED_COLORED_WOODS.cyan();
+
+    public static final DeferredBlock<Block> STRIPPED_GRAY_WOOD = STRIPPED_COLORED_WOODS.gray();
+
+    public static final DeferredBlock<Block> STRIPPED_GREEN_WOOD = STRIPPED_COLORED_WOODS.green();
+
+    public static final DeferredBlock<Block> STRIPPED_LIGHT_BLUE_WOOD = STRIPPED_COLORED_WOODS.lightBlue();
+
+    public static final DeferredBlock<Block> STRIPPED_LIGHT_GRAY_WOOD = STRIPPED_COLORED_WOODS.lightGray();
+
+    public static final DeferredBlock<Block> STRIPPED_LIME_WOOD = STRIPPED_COLORED_WOODS.lime();
+
+    public static final DeferredBlock<Block> STRIPPED_MAGENTA_WOOD = STRIPPED_COLORED_WOODS.magenta();
+
+    public static final DeferredBlock<Block> STRIPPED_ORANGE_WOOD = STRIPPED_COLORED_WOODS.orange();
+
+    public static final DeferredBlock<Block> STRIPPED_PINK_WOOD = STRIPPED_COLORED_WOODS.pink();
+
+    public static final DeferredBlock<Block> STRIPPED_PURPLE_WOOD = STRIPPED_COLORED_WOODS.purple();
+
+    public static final DeferredBlock<Block> STRIPPED_RED_WOOD = STRIPPED_COLORED_WOODS.red();
+
+    public static final DeferredBlock<Block> STRIPPED_WHITE_WOOD = STRIPPED_COLORED_WOODS.white();
+
+    public static final DeferredBlock<Block> STRIPPED_YELLOW_WOOD = STRIPPED_COLORED_WOODS.yellow();
+
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LEAVES =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("leaves"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) -> new ColoredLeavesBlock(props, color),
+                    color -> copyWithMapColor(OAK_LEAVES, color.getDyeColor().orElseThrow().getMapColor())
+            );
+
+    public static final DeferredBlock<Block> BLACK_LEAVES = COLORED_LEAVES.black();
+
+    public static final DeferredBlock<Block> BLUE_LEAVES = COLORED_LEAVES.blue();
+
+    public static final DeferredBlock<Block> BROWN_LEAVES = COLORED_LEAVES.brown();
+
+    public static final DeferredBlock<Block> CYAN_LEAVES = COLORED_LEAVES.cyan();
+
+    public static final DeferredBlock<Block> GRAY_LEAVES = COLORED_LEAVES.gray();
+
+    public static final DeferredBlock<Block> GREEN_LEAVES = COLORED_LEAVES.green();
+
+    public static final DeferredBlock<Block> LIGHT_BLUE_LEAVES = COLORED_LEAVES.lightBlue();
+
+    public static final DeferredBlock<Block> LIGHT_GRAY_LEAVES = COLORED_LEAVES.lightGray();
+
+    public static final DeferredBlock<Block> LIME_LEAVES = COLORED_LEAVES.lime();
+
+    public static final DeferredBlock<Block> MAGENTA_LEAVES = COLORED_LEAVES.magenta();
+
+    public static final DeferredBlock<Block> ORANGE_LEAVES = COLORED_LEAVES.orange();
+
+    public static final DeferredBlock<Block> PINK_LEAVES = COLORED_LEAVES.pink();
+
+    public static final DeferredBlock<Block> PURPLE_LEAVES = COLORED_LEAVES.purple();
+
+    public static final DeferredBlock<Block> RED_LEAVES = COLORED_LEAVES.red();
+
+    public static final DeferredBlock<Block> WHITE_LEAVES = COLORED_LEAVES.white();
+
+    public static final DeferredBlock<Block> YELLOW_LEAVES = COLORED_LEAVES.yellow();
+
+
+    public static final PastelInkColorCollection<DeferredBlock<Block>> GLOWBLOCKS =
+            PastelInkColorCollection.registerBlocks(
+                PastelInkColorCollection.prefixWithColor("glowblock"),
+                PastelBlocks::registerColoredBlock,
+                (color, props) -> new GlowBlock(props, color),
+                color ->
+                    settings(color.getDyeColor().orElseThrow().getMapColor(), SoundType.BASALT, 2.5f)
                         .requiresCorrectToolForDrops()
                         .lightLevel(state -> 1)
                         .hasPostProcess(PastelBlocks::always)
-                        .emissiveRendering(PastelBlocks::always),
-                    color
-                ),
-                color
-            )
-        );
-    }
+                        .emissiveRendering(PastelBlocks::always)
+            );
 
-    public static final DeferredBlock<Block> BLACK_GLOWBLOCK = registerGlowBlock("black_glowblock", InkColors.BLACK);
+    public static final DeferredBlock<Block> BLACK_GLOWBLOCK = GLOWBLOCKS.black();
 
-    public static final DeferredBlock<Block> BLUE_GLOWBLOCK = registerGlowBlock("blue_glowblock", InkColors.BLUE);
+    public static final DeferredBlock<Block> BLUE_GLOWBLOCK = GLOWBLOCKS.blue();
 
-    public static final DeferredBlock<Block> BROWN_GLOWBLOCK = registerGlowBlock("brown_glowblock", InkColors.BROWN);
+    public static final DeferredBlock<Block> BROWN_GLOWBLOCK = GLOWBLOCKS.brown();
 
-    public static final DeferredBlock<Block> CYAN_GLOWBLOCK = registerGlowBlock("cyan_glowblock", InkColors.CYAN);
+    public static final DeferredBlock<Block> CYAN_GLOWBLOCK = GLOWBLOCKS.cyan();
 
-    public static final DeferredBlock<Block> GRAY_GLOWBLOCK = registerGlowBlock("gray_glowblock", InkColors.GRAY);
+    public static final DeferredBlock<Block> GRAY_GLOWBLOCK = GLOWBLOCKS.gray();
 
-    public static final DeferredBlock<Block> GREEN_GLOWBLOCK = registerGlowBlock("green_glowblock", InkColors.GREEN);
+    public static final DeferredBlock<Block> GREEN_GLOWBLOCK = GLOWBLOCKS.green();
 
-    public static final DeferredBlock<Block> LIGHT_BLUE_GLOWBLOCK = registerGlowBlock(
-        "light_blue_glowblock",
-        InkColors.LIGHT_BLUE
-    );
+    public static final DeferredBlock<Block> LIGHT_BLUE_GLOWBLOCK = GLOWBLOCKS.lightBlue();
 
-    public static final DeferredBlock<Block> LIGHT_GRAY_GLOWBLOCK = registerGlowBlock(
-        "light_gray_glowblock",
-        InkColors.LIGHT_GRAY
-    );
+    public static final DeferredBlock<Block> LIGHT_GRAY_GLOWBLOCK = GLOWBLOCKS.lightGray();
 
-    public static final DeferredBlock<Block> LIME_GLOWBLOCK = registerGlowBlock("lime_glowblock", InkColors.LIME);
+    public static final DeferredBlock<Block> LIME_GLOWBLOCK = GLOWBLOCKS.lime();
 
-    public static final DeferredBlock<Block> MAGENTA_GLOWBLOCK = registerGlowBlock(
-        "magenta_glowblock",
-        InkColors.MAGENTA
-    );
+    public static final DeferredBlock<Block> MAGENTA_GLOWBLOCK = GLOWBLOCKS.magenta();
 
-    public static final DeferredBlock<Block> ORANGE_GLOWBLOCK = registerGlowBlock("orange_glowblock", InkColors.ORANGE);
+    public static final DeferredBlock<Block> ORANGE_GLOWBLOCK = GLOWBLOCKS.orange();
 
-    public static final DeferredBlock<Block> PINK_GLOWBLOCK = registerGlowBlock("pink_glowblock", InkColors.PINK);
+    public static final DeferredBlock<Block> PINK_GLOWBLOCK = GLOWBLOCKS.pink();
 
-    public static final DeferredBlock<Block> PURPLE_GLOWBLOCK = registerGlowBlock("purple_glowblock", InkColors.PURPLE);
+    public static final DeferredBlock<Block> PURPLE_GLOWBLOCK = GLOWBLOCKS.purple();
 
-    public static final DeferredBlock<Block> RED_GLOWBLOCK = registerGlowBlock("red_glowblock", InkColors.RED);
+    public static final DeferredBlock<Block> RED_GLOWBLOCK = GLOWBLOCKS.red();
 
-    public static final DeferredBlock<Block> WHITE_GLOWBLOCK = registerGlowBlock("white_glowblock", InkColors.WHITE);
+    public static final DeferredBlock<Block> WHITE_GLOWBLOCK = GLOWBLOCKS.white();
 
-    public static final DeferredBlock<Block> YELLOW_GLOWBLOCK = registerGlowBlock("yellow_glowblock", InkColors.YELLOW);
+    public static final DeferredBlock<Block> YELLOW_GLOWBLOCK = GLOWBLOCKS.yellow();
 
     public static DeferredBlock<Block> registerColoredBlock(
             InkColor color,
             String name,
             Function<BlockBehaviour.Properties, Block> constructor,
-            BlockBehaviour.Properties properties) {
+            Supplier<BlockBehaviour.Properties> properties) {
         return register(
                 blockWithItem(
                         name,
-                        () -> constructor.apply(properties),
+                        () -> constructor.apply(properties.get()),
                         color
                 )
         );
     }
 
-    public static final InkColorCollection<DeferredBlock<Block>> COLORED_LAMPS =
-            InkColorCollection.registerBlocks(
-                    InkColorCollection.prefixWithColor("lamp"),
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LAMPS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("lamp"),
                     PastelBlocks::registerColoredBlock,
                     (color, props) -> new ColoredLightBlock(props, color),
                     color ->
@@ -7798,202 +7356,93 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> YELLOW_LAMP = COLORED_LAMPS.pick(InkColors.YELLOW);
 
-    public static DeferredBlock<Block> registerPigmentBlock(String name, InkColor color) {
-        return register(
-            blockWithItem(
-                name,
-                () -> new PigmentBlock(
-                    settings(
-                        color
-                            .getDyeColor()
-                            .orElse(DyeColor.LIME)
-                            .getMapColor(),
-                        SoundType.WOOL,
-                        1.0F
-                    ),
-                    color
-                ),
-                color
-            )
-        );
-    }
 
-    public static final DeferredBlock<Block> BLACK_BLOCK = registerPigmentBlock("black_block", InkColors.BLACK);
+    public static final PastelInkColorCollection<DeferredBlock<Block>> PIGMENT_BLOCKS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("block"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) -> new PigmentBlock(props, color),
+                    color -> settings(color.getDyeColor().orElse(DyeColor.LIME).getMapColor(), SoundType.WOOL, 1.0F)
+            );
 
-    public static final DeferredBlock<Block> BLUE_BLOCK = registerPigmentBlock("blue_block", InkColors.BLUE);
+    public static final DeferredBlock<Block> BLACK_BLOCK = PIGMENT_BLOCKS.black();
 
-    public static final DeferredBlock<Block> BROWN_BLOCK = registerPigmentBlock("brown_block", InkColors.BROWN);
+    public static final DeferredBlock<Block> BLUE_BLOCK = PIGMENT_BLOCKS.blue();
 
-    public static final DeferredBlock<Block> CYAN_BLOCK = registerPigmentBlock("cyan_block", InkColors.CYAN);
+    public static final DeferredBlock<Block> BROWN_BLOCK = PIGMENT_BLOCKS.brown();
 
-    public static final DeferredBlock<Block> GRAY_BLOCK = registerPigmentBlock("gray_block", InkColors.GRAY);
+    public static final DeferredBlock<Block> CYAN_BLOCK = PIGMENT_BLOCKS.cyan();
 
-    public static final DeferredBlock<Block> GREEN_BLOCK = registerPigmentBlock("green_block", InkColors.GREEN);
+    public static final DeferredBlock<Block> GRAY_BLOCK = PIGMENT_BLOCKS.gray();
 
-    public static final DeferredBlock<Block> LIGHT_BLUE_BLOCK = registerPigmentBlock(
-        "light_blue_block",
-        InkColors.LIGHT_BLUE
-    );
+    public static final DeferredBlock<Block> GREEN_BLOCK = PIGMENT_BLOCKS.green();
 
-    public static final DeferredBlock<Block> LIGHT_GRAY_BLOCK = registerPigmentBlock(
-        "light_gray_block",
-        InkColors.LIGHT_GRAY
-    );
+    public static final DeferredBlock<Block> LIGHT_BLUE_BLOCK = PIGMENT_BLOCKS.lightBlue();
 
-    public static final DeferredBlock<Block> LIME_BLOCK = registerPigmentBlock("lime_block", InkColors.LIME);
+    public static final DeferredBlock<Block> LIGHT_GRAY_BLOCK = PIGMENT_BLOCKS.lightGray();
 
-    public static final DeferredBlock<Block> MAGENTA_BLOCK = registerPigmentBlock("magenta_block", InkColors.MAGENTA);
+    public static final DeferredBlock<Block> LIME_BLOCK = PIGMENT_BLOCKS.lime();
 
-    public static final DeferredBlock<Block> ORANGE_BLOCK = registerPigmentBlock("orange_block", InkColors.ORANGE);
+    public static final DeferredBlock<Block> MAGENTA_BLOCK = PIGMENT_BLOCKS.magenta();
 
-    public static final DeferredBlock<Block> PINK_BLOCK = registerPigmentBlock("pink_block", InkColors.PINK);
+    public static final DeferredBlock<Block> ORANGE_BLOCK = PIGMENT_BLOCKS.orange();
 
-    public static final DeferredBlock<Block> PURPLE_BLOCK = registerPigmentBlock("purple_block", InkColors.PURPLE);
+    public static final DeferredBlock<Block> PINK_BLOCK = PIGMENT_BLOCKS.pink();
 
-    public static final DeferredBlock<Block> RED_BLOCK = registerPigmentBlock("red_block", InkColors.RED);
+    public static final DeferredBlock<Block> PURPLE_BLOCK = PIGMENT_BLOCKS.purple();
 
-    public static final DeferredBlock<Block> WHITE_BLOCK = registerPigmentBlock("white_block", InkColors.WHITE);
+    public static final DeferredBlock<Block> RED_BLOCK = PIGMENT_BLOCKS.red();
 
-    public static final DeferredBlock<Block> YELLOW_BLOCK = registerPigmentBlock("yellow_block", InkColors.YELLOW);
+    public static final DeferredBlock<Block> WHITE_BLOCK = PIGMENT_BLOCKS.white();
 
-    public static DeferredBlock<Block> registerColoredSporeBlossomBlock(
-        String name,
-        InkColor color,
-        ColoredFallingSporeBlossomParticleEffect falling,
-        ColoredSporeBlossomAirParticleEffect air
-    ) {
-        return register(
-            blockWithItem(
-                name,
-                () -> new ColoredSporeBlossomBlock(
-                    Properties
-                        .ofFullCopy(SPORE_BLOSSOM)
-                        .mapColor(
-                            color
-                                .getDyeColor()
-                                .orElse(DyeColor.LIME)
-                                .getMapColor()
-                        ),
-                    color,
-                    falling,
-                    air
-                ),
-                color
-            )
-        );
-    }
+    public static final DeferredBlock<Block> YELLOW_BLOCK = PIGMENT_BLOCKS.yellow();
 
-    public static final DeferredBlock<Block> BLACK_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "black_spore_blossom",
-        InkColors.BLACK,
-        ColoredFallingSporeBlossomParticleEffect.BLACK,
-        ColoredSporeBlossomAirParticleEffect.BLACK
-    );
 
-    public static final DeferredBlock<Block> BLUE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "blue_spore_blossom",
-        InkColors.BLUE,
-        ColoredFallingSporeBlossomParticleEffect.BLUE,
-        ColoredSporeBlossomAirParticleEffect.BLUE
-    );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SPORE_BLOSSOMS =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("spore_blossom"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) ->
+                        new ColoredSporeBlossomBlock(
+                                props,
+                                color,
+                                ColoredFallingSporeBlossomParticleEffect.VALUES.pick(color),
+                                ColoredSporeBlossomAirParticleEffect.VALUES.pick(color)),
+                    color ->
+                        Properties.ofFullCopy(SPORE_BLOSSOM).mapColor(color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
+            );
 
-    public static final DeferredBlock<Block> BROWN_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "brown_spore_blossom",
-        InkColors.BROWN,
-        ColoredFallingSporeBlossomParticleEffect.BROWN,
-        ColoredSporeBlossomAirParticleEffect.BROWN
-    );
+    public static final DeferredBlock<Block> BLACK_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.black();
 
-    public static final DeferredBlock<Block> CYAN_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "cyan_spore_blossom",
-        InkColors.CYAN,
-        ColoredFallingSporeBlossomParticleEffect.CYAN,
-        ColoredSporeBlossomAirParticleEffect.CYAN
-    );
+    public static final DeferredBlock<Block> BLUE_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.blue();
 
-    public static final DeferredBlock<Block> GRAY_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "gray_spore_blossom",
-        InkColors.GRAY,
-        ColoredFallingSporeBlossomParticleEffect.GRAY,
-        ColoredSporeBlossomAirParticleEffect.GRAY
-    );
+    public static final DeferredBlock<Block> BROWN_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.brown();
 
-    public static final DeferredBlock<Block> GREEN_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "green_spore_blossom",
-        InkColors.GREEN,
-        ColoredFallingSporeBlossomParticleEffect.GREEN,
-        ColoredSporeBlossomAirParticleEffect.GREEN
-    );
+    public static final DeferredBlock<Block> CYAN_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.cyan();
 
-    public static final DeferredBlock<Block> LIGHT_BLUE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "light_blue_spore_blossom",
-        InkColors.LIGHT_BLUE,
-        ColoredFallingSporeBlossomParticleEffect.LIGHT_BLUE,
-        ColoredSporeBlossomAirParticleEffect.LIGHT_BLUE
-    );
+    public static final DeferredBlock<Block> GRAY_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.gray();
 
-    public static final DeferredBlock<Block> LIGHT_GRAY_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "light_gray_spore_blossom",
-        InkColors.LIGHT_GRAY,
-        ColoredFallingSporeBlossomParticleEffect.LIGHT_GRAY,
-        ColoredSporeBlossomAirParticleEffect.LIGHT_GRAY
-    );
+    public static final DeferredBlock<Block> GREEN_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.green();
 
-    public static final DeferredBlock<Block> LIME_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "lime_spore_blossom",
-        InkColors.LIME,
-        ColoredFallingSporeBlossomParticleEffect.LIME,
-        ColoredSporeBlossomAirParticleEffect.LIME
-    );
+    public static final DeferredBlock<Block> LIGHT_BLUE_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.lightBlue();
 
-    public static final DeferredBlock<Block> MAGENTA_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "magenta_spore_blossom",
-        InkColors.MAGENTA,
-        ColoredFallingSporeBlossomParticleEffect.MAGENTA,
-        ColoredSporeBlossomAirParticleEffect.MAGENTA
-    );
+    public static final DeferredBlock<Block> LIGHT_GRAY_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.lightGray();
 
-    public static final DeferredBlock<Block> ORANGE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "orange_spore_blossom",
-        InkColors.ORANGE,
-        ColoredFallingSporeBlossomParticleEffect.ORANGE,
-        ColoredSporeBlossomAirParticleEffect.ORANGE
-    );
+    public static final DeferredBlock<Block> LIME_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.lime();
 
-    public static final DeferredBlock<Block> PINK_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "pink_spore_blossom",
-        InkColors.PINK,
-        ColoredFallingSporeBlossomParticleEffect.PINK,
-        ColoredSporeBlossomAirParticleEffect.PINK
-    );
+    public static final DeferredBlock<Block> MAGENTA_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.magenta();
 
-    public static final DeferredBlock<Block> PURPLE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "purple_spore_blossom",
-        InkColors.PURPLE,
-        ColoredFallingSporeBlossomParticleEffect.PURPLE,
-        ColoredSporeBlossomAirParticleEffect.PURPLE
-    );
+    public static final DeferredBlock<Block> ORANGE_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.orange();
 
-    public static final DeferredBlock<Block> RED_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "red_spore_blossom",
-        InkColors.RED,
-        ColoredFallingSporeBlossomParticleEffect.RED,
-        ColoredSporeBlossomAirParticleEffect.RED
-    );
+    public static final DeferredBlock<Block> PINK_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.pink();
 
-    public static final DeferredBlock<Block> WHITE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "white_spore_blossom",
-        InkColors.WHITE,
-        ColoredFallingSporeBlossomParticleEffect.WHITE,
-        ColoredSporeBlossomAirParticleEffect.WHITE
-    );
+    public static final DeferredBlock<Block> PURPLE_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.purple();
 
-    public static final DeferredBlock<Block> YELLOW_SPORE_BLOSSOM = registerColoredSporeBlossomBlock(
-        "yellow_spore_blossom",
-        InkColors.YELLOW,
-        ColoredFallingSporeBlossomParticleEffect.YELLOW,
-        ColoredSporeBlossomAirParticleEffect.YELLOW
-    );
+    public static final DeferredBlock<Block> RED_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.red();
+
+    public static final DeferredBlock<Block> WHITE_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.white();
+
+    public static final DeferredBlock<Block> YELLOW_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.yellow();
 
     public static DeferredBlock<Block> registerShimmerstoneLight(
         String name,
@@ -8740,77 +8189,45 @@ public class PastelBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> BLACK_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("black_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.BLACK)
-    );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> CHISELED_PRESERVATION_STONES =
+            PastelInkColorCollection.registerBlocks(
+                    PastelInkColorCollection.prefixWithColor("chiseled_preservation_stone"),
+                    PastelBlocks::registerColoredBlock,
+                    (color, props) -> new Block(props),
+                    color -> preservationBlock()
+            );
 
-    public static final DeferredBlock<Block> BLUE_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("blue_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.BLUE)
-    );
+    public static final DeferredBlock<Block> BLACK_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.black();
 
-    public static final DeferredBlock<Block> BROWN_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("brown_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.BROWN)
-    );
+    public static final DeferredBlock<Block> BLUE_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.blue();
 
-    public static final DeferredBlock<Block> CYAN_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("cyan_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.CYAN)
-    );
+    public static final DeferredBlock<Block> BROWN_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.brown();
 
-    public static final DeferredBlock<Block> GRAY_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("gray_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.GRAY)
-    );
+    public static final DeferredBlock<Block> CYAN_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.cyan();
 
-    public static final DeferredBlock<Block> GREEN_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("green_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.GREEN)
-    );
+    public static final DeferredBlock<Block> GRAY_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.gray();
 
-    public static final DeferredBlock<Block> LIGHT_BLUE_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem(
-            "light_blue_chiseled_preservation_stone",
-            () -> new Block(preservationBlock()),
-            InkColors.LIGHT_BLUE
-        )
-    );
+    public static final DeferredBlock<Block> GREEN_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.green();
 
-    public static final DeferredBlock<Block> LIGHT_GRAY_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem(
-            "light_gray_chiseled_preservation_stone",
-            () -> new Block(preservationBlock()),
-            InkColors.LIGHT_GRAY
-        )
-    );
+    public static final DeferredBlock<Block> LIGHT_BLUE_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.lightBlue();
 
-    public static final DeferredBlock<Block> LIME_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("lime_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.LIME)
-    );
+    public static final DeferredBlock<Block> LIGHT_GRAY_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.lightGray();
 
-    public static final DeferredBlock<Block> MAGENTA_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("magenta_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.MAGENTA)
-    );
+    public static final DeferredBlock<Block> LIME_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.lime();
 
-    public static final DeferredBlock<Block> ORANGE_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("orange_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.ORANGE)
-    );
+    public static final DeferredBlock<Block> MAGENTA_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.magenta();
 
-    public static final DeferredBlock<Block> PINK_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("pink_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.PINK)
-    );
+    public static final DeferredBlock<Block> ORANGE_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.orange();
 
-    public static final DeferredBlock<Block> PURPLE_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("purple_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.PURPLE)
-    );
+    public static final DeferredBlock<Block> PINK_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.pink();
 
-    public static final DeferredBlock<Block> RED_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("red_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.RED)
-    );
+    public static final DeferredBlock<Block> PURPLE_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.purple();
 
-    public static final DeferredBlock<Block> WHITE_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("white_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.WHITE)
-    );
+    public static final DeferredBlock<Block> RED_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.red();
 
-    public static final DeferredBlock<Block> YELLOW_CHISELED_PRESERVATION_STONE = register(
-        blockWithItem("yellow_chiseled_preservation_stone", () -> new Block(preservationBlock()), InkColors.YELLOW)
-    );
+    public static final DeferredBlock<Block> WHITE_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.white();
+
+    public static final DeferredBlock<Block> YELLOW_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.yellow();
 
     public static final DeferredBlock<Block> PRESERVATION_GLASS = register(
         blockWithItem(

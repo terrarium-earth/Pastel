@@ -443,6 +443,15 @@ public class PastelSounds {
                     BLOCK_MOONSTONE_BLOCK_CHIME
             );
 
+    public static final PastelGemstoneColorCollection<SoundEvent> GEMSTONE_BLOCK_HIT =
+            new PastelGemstoneColorCollection<>(
+                    BLOCK_TOPAZ_BLOCK_HIT,
+                    SoundEvents.AMETHYST_BLOCK_HIT,
+                    BLOCK_CITRINE_BLOCK_HIT,
+                    BLOCK_ONYX_BLOCK_HIT,
+                    BLOCK_MOONSTONE_BLOCK_HIT
+            );
+
     public static final SoundEvent SPECTRAL_BLOCK_BREAK = register("block.spectral_block.break");
 
     public static final SoundEvent SPECTRAL_BLOCK_STEP = register("block.spectral_block.step");

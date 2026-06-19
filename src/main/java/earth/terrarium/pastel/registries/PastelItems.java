@@ -3,9 +3,9 @@ package earth.terrarium.pastel.registries;
 import com.cmdpro.databank.misc.ColorGradient;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.color.InkColorCollection;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
+import earth.terrarium.pastel.api.energy.color.PastelInkColorCollection;
 import earth.terrarium.pastel.api.item.CreativeOnlyItem;
 import earth.terrarium.pastel.blocks.gravity.FloatItem;
 import earth.terrarium.pastel.blocks.jade_vines.GerminatedJadeVineBulbItem;
@@ -147,7 +147,6 @@ import earth.terrarium.pastel.items.trinkets.TotemPendantItem;
 import earth.terrarium.pastel.items.trinkets.WeepingCircletItem;
 import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColorCollection;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -186,24 +185,8 @@ import java.util.function.Supplier;
 
 import static earth.terrarium.pastel.PastelCommon.CONFIG;
 import static earth.terrarium.pastel.PastelCommon.locate;
-import static net.minecraft.world.item.Items.BLACK_DYE;
-import static net.minecraft.world.item.Items.BLUE_DYE;
-import static net.minecraft.world.item.Items.BROWN_DYE;
 import static net.minecraft.world.item.Items.BUCKET;
-import static net.minecraft.world.item.Items.CYAN_DYE;
 import static net.minecraft.world.item.Items.GLASS_BOTTLE;
-import static net.minecraft.world.item.Items.GRAY_DYE;
-import static net.minecraft.world.item.Items.GREEN_DYE;
-import static net.minecraft.world.item.Items.LIGHT_BLUE_DYE;
-import static net.minecraft.world.item.Items.LIGHT_GRAY_DYE;
-import static net.minecraft.world.item.Items.LIME_DYE;
-import static net.minecraft.world.item.Items.MAGENTA_DYE;
-import static net.minecraft.world.item.Items.ORANGE_DYE;
-import static net.minecraft.world.item.Items.PINK_DYE;
-import static net.minecraft.world.item.Items.PURPLE_DYE;
-import static net.minecraft.world.item.Items.RED_DYE;
-import static net.minecraft.world.item.Items.WHITE_DYE;
-import static net.minecraft.world.item.Items.YELLOW_DYE;
 import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_DAMAGE_ID;
 import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_SPEED_ID;
 
@@ -340,14 +323,14 @@ public class PastelItems {
 
     public static DeferredItem<Item> registerPigment(String name, InkColor color) {
         return register(
-                item(name, () -> new PigmentItem(IS.of(), color, InkColorCollection.BUILTIN_DYES.pick(color)), color)
+                item(name, () -> new PigmentItem(IS.of(), color, PastelInkColorCollection.DYE_ITEMS.pick(color)), color)
         );
     }
 
     // Pigment
 
-    public static final InkColorCollection<DeferredItem<Item>> PIGMENTS =
-            InkColorCollection.registerItems(InkColorCollection.prefixWithColor("pigment"), PastelItems::registerPigment);
+    public static final PastelInkColorCollection<DeferredItem<Item>> PIGMENTS =
+            PastelInkColorCollection.registerItems(PastelInkColorCollection.prefixWithColor("pigment"), PastelItems::registerPigment);
 
     public static final DeferredItem<Item> WHITE_PIGMENT = PIGMENTS.pick(InkColors.WHITE);
 
