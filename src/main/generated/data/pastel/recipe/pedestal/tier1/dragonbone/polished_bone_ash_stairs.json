@@ -1,0 +1,21 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "bone_ash_blocks",
+  "key": {
+    "W": {
+      "item": "pastel:polished_bone_ash"
+    }
+  },
+  "pattern": [
+    "W  ",
+    "WW ",
+    "WWW"
+  ],
+  "required_advancement": "pastel:break_cracked_dragonbone",
+  "result": {
+    "count": 6,
+    "id": "pastel:polished_bone_ash_stairs"
+  }
+}

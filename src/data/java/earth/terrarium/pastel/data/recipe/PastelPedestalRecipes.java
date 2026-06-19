@@ -163,7 +163,7 @@ public class PastelPedestalRecipes {
             generateCrystalArmorRecipes(ctx);
             generateCushionRecipes(ctx);
             generateDetectorRecipes(ctx);
-            // TODO: dragonbone
+            generateDragonboneRecipes(ctx);
             // TODO: food
             generateGemstoneLightRecipes(ctx);
             generateBasicGlasses(ctx);
@@ -348,6 +348,99 @@ public class PastelPedestalRecipes {
             generateDetectorRecipe(ctx, PastelGemstoneColor.YELLOW, PastelAdvancements.Unlocks.Redstone.WEATHER_DETECTOR, PastelBlocks.WEATHER_DETECTOR);
             generateDetectorRecipe(ctx, PastelGemstoneColor.BLACK, PastelAdvancements.Unlocks.Redstone.PLAYER_DETECTOR, PastelBlocks.PLAYER_DETECTOR);
             generateDetectorRecipe(ctx, PastelGemstoneColor.WHITE, PastelAdvancements.Unlocks.Redstone.CREATURE_DETECTOR, PastelBlocks.CREATURE_DETECTOR);
+        }
+
+        private static void generateDragonboneRecipes(RecipeOutput ctx) {
+            // polished bone ash
+            generateBasicRecipe(
+                    ctx,
+                    "dragonbone/polished_bone_ash",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.POLISHED_BONE_ASH))
+                            .group("bone_ash_blocks")
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("###")
+                            .pattern("###")
+                            .pattern("###")
+                            .key('#', BONE_ASH.asItem())
+                            .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                            .ignoreYieldUpgrades(true)
+            );
+            generateBasicRecipe(
+                    ctx,
+                    "dragonbone/polished_bone_ash_pillar",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.POLISHED_BONE_ASH_PILLAR, 2))
+                            .group("bone_ash_blocks")
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("#")
+                            .pattern("#")
+                            .key('#', PastelBlocks.POLISHED_BONE_ASH.asItem())
+                            .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                            .ignoreYieldUpgrades(true)
+            );
+            generateDragonboneSlab(ctx, PastelBlocks.POLISHED_BONE_ASH_SLAB, PastelBlocks.POLISHED_BONE_ASH);
+            generateDragonboneStairs(ctx, PastelBlocks.POLISHED_BONE_ASH_STAIRS, PastelBlocks.POLISHED_BONE_ASH);
+            generateDragonboneWall(ctx, PastelBlocks.POLISHED_BONE_ASH_WALL, PastelBlocks.POLISHED_BONE_ASH);
+
+            // bone ash bricks
+            generateBasicRecipe(
+                    ctx,
+                    "dragonbone/bone_ash_bricks",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.BONE_ASH_BRICKS, 4))
+                            .group("bone_ash_blocks")
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("WW")
+                            .pattern("WW")
+                            .key('W', PastelBlocks.POLISHED_BONE_ASH.asItem())
+                            .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                            .ignoreYieldUpgrades(true)
+            );
+            generateDragonboneSlab(ctx, PastelBlocks.BONE_ASH_BRICK_SLAB, PastelBlocks.BONE_ASH_BRICKS);
+            generateDragonboneStairs(ctx, PastelBlocks.BONE_ASH_BRICK_STAIRS, PastelBlocks.BONE_ASH_BRICKS);
+            generateDragonboneWall(ctx, PastelBlocks.BONE_ASH_BRICK_WALL, PastelBlocks.BONE_ASH_BRICKS);
+
+            // bone ash tiles
+            generateBasicRecipe(
+                    ctx,
+                    "dragonbone/bone_ash_tiles",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.BONE_ASH_TILES, 4))
+                            .group("bone_ash_blocks")
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("WW")
+                            .pattern("WW")
+                            .key('W', PastelBlocks.BONE_ASH_BRICKS.asItem())
+                            .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                            .ignoreYieldUpgrades(true)
+            );
+            generateDragonboneSlab(ctx, PastelBlocks.BONE_ASH_TILE_SLAB, PastelBlocks.BONE_ASH_TILES);
+            generateDragonboneStairs(ctx, PastelBlocks.BONE_ASH_TILE_STAIRS, PastelBlocks.BONE_ASH_TILES);
+            generateDragonboneWall(ctx, PastelBlocks.BONE_ASH_TILE_WALL, PastelBlocks.BONE_ASH_TILES);
+
+            // shingles
+
+            generateBasicRecipe(
+                    ctx,
+                    "dragonbone/bone_ash_shingles",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.BONE_ASH_SHINGLES, 6))
+                            .group("bone_ash_blocks")
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("#  ")
+                            .pattern("#B ")
+                            .pattern("##B")
+                            .key('#', PastelBlocks.POLISHED_BONE_ASH.asItem())
+                            .key('B', DRAGONBONE_CHUNK.asItem())
+                            .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                            .ignoreYieldUpgrades(true)
+            );
         }
 
         private static void generateGemstoneLightRecipes(RecipeOutput ctx) {
@@ -679,6 +772,58 @@ public class PastelPedestalRecipes {
                             .pattern("GGG")
                             .pattern("GGG")
                             .key('G', glass.asItem())
+            );
+        }
+
+
+        private static void generateDragonboneSlab(RecipeOutput ctx, DeferredBlock<?> slab, DeferredBlock<?> baseBlock) {
+            generateBasicRecipe(
+                    ctx,
+                    "dragonbone/" + slab.getId().getPath(),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(slab.asItem(), 6))
+                            .group("bone_ash_blocks")
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("WWW")
+                            .key('W', baseBlock.asItem())
+                            .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                            .ignoreYieldUpgrades(true)
+            );
+        }
+
+        private static void generateDragonboneStairs(RecipeOutput ctx, DeferredBlock<?> stairs, DeferredBlock<?> baseBlock) {
+            generateBasicRecipe(
+                    ctx,
+                    "dragonbone/" + stairs.getId().getPath(),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(stairs.asItem(), 6))
+                            .group("bone_ash_blocks")
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("W  ")
+                            .pattern("WW ")
+                            .pattern("WWW")
+                            .key('W', baseBlock.asItem())
+                            .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                            .ignoreYieldUpgrades(true)
+            );
+        }
+
+        private static void generateDragonboneWall(RecipeOutput ctx, DeferredBlock<?> wall, DeferredBlock<?> baseBlock) {
+            generateBasicRecipe(
+                    ctx,
+                    "dragonbone/" + wall.getId().getPath(),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(wall.asItem(), 6))
+                            .group("bone_ash_blocks")
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("WWW")
+                            .pattern("WWW")
+                            .key('W', baseBlock.asItem())
+                            .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                            .ignoreYieldUpgrades(true)
             );
         }
     }
