@@ -6968,7 +6968,7 @@ public class PastelBlocks {
     public static final PastelInkColorCollection<DeferredBlock<Block>> POTTED_COLORED_SAPLINGS =
         PastelInkColorCollection.registerBlocks(
                 PastelInkColorCollection.NAMES.map(name -> "potted_" + name + "_sapling"),
-                PastelBlocks::registerColoredBlock,
+                PastelBlocks::registerColoredBlockNoItem,
                 (color, props) -> new PottedColoredSaplingBlock(COLORED_SAPLINGS.pick(color).get(), props, color),
                 color -> pottedPlant()
         );
@@ -7304,6 +7304,20 @@ public class PastelBlocks {
                         name,
                         () -> constructor.apply(properties.get()),
                         color
+                )
+        );
+    }
+
+
+    public static DeferredBlock<Block> registerColoredBlockNoItem(
+            InkColor color,
+            String name,
+            Function<BlockBehaviour.Properties, Block> constructor,
+            Supplier<BlockBehaviour.Properties> properties) {
+        return register(
+                block(
+                        name,
+                        () -> constructor.apply(properties.get())
                 )
         );
     }

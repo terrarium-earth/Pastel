@@ -10,7 +10,7 @@
       ],
       "translate": "block.minecraft.potted_oak_sapling"
     },
-    "original": "pastel:potted_blue_sapling"
+    "original": "minecraft:air"
   },
   "condition": {
     "type": "databank:advancement",
