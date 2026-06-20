@@ -25,6 +25,8 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+// TODO: consider rewriting this back to use a List<ItemSubPredicate> instead of a DataComponentPredicate
+// Some of our ingredient stacks don't really make sense to require a full component
 public class IngredientStack implements ICustomIngredient {
 
     public static final MapCodec<IngredientStack> MAP_CODEC = RecordCodecBuilder

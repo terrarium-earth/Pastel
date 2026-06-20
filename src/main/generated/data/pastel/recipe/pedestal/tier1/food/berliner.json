@@ -1,0 +1,42 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.2,
+  "key": {
+    "C": {
+      "item": "pastel:clotted_cream"
+    },
+    "E": {
+      "item": "pastel:amaranth_grains"
+    },
+    "S": {
+      "components": {
+        "pastel:infused_beverage": {
+          "color": 13723654,
+          "variant": "sawblade_holly_liquor"
+        }
+      },
+      "item": "pastel:infused_beverage",
+      "preview_components": {
+        "pastel:infused_beverage": {
+          "color": 13723654,
+          "variant": "sawblade_holly_liquor"
+        }
+      }
+    },
+    "X": {
+      "item": "pastel:fresh_chocolate"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "XSX",
+    "EEE"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2",
+  "result": {
+    "count": 1,
+    "id": "pastel:berliner"
+  },
+  "time": 80
+}

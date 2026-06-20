@@ -1,0 +1,44 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "B": {
+      "item": "minecraft:sweet_berries"
+    },
+    "C": {
+      "item": "pastel:fresh_chocolate"
+    },
+    "H": {
+      "item": "minecraft:honey_bottle"
+    },
+    "L": {
+      "components": {
+        "pastel:infused_beverage": {
+          "color": 16729462,
+          "variant": "berry_liquor"
+        }
+      },
+      "item": "pastel:infused_beverage",
+      "preview_components": {
+        "pastel:infused_beverage": {
+          "color": 16729462,
+          "variant": "berry_liquor"
+        }
+      }
+    },
+    "M": {
+      "item": "pastel:clotted_cream"
+    }
+  },
+  "pattern": [
+    "CHC",
+    "BLB",
+    "CMC"
+  ],
+  "result": {
+    "count": 4,
+    "id": "pastel:bodacious_berry_bar"
+  },
+  "time": 300
+}

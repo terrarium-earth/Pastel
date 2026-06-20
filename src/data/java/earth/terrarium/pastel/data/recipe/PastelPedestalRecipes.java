@@ -21,6 +21,7 @@ import earth.terrarium.pastel.recipe.pedestal.dynamic.StarCandyRecipe;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -134,9 +135,18 @@ public class PastelPedestalRecipes {
             String id,
             PedestalRecipe recipe
     ) {
+        generateDynamicPedestalRecipeWithSavedTier(ctx, id, recipe.getTier(), recipe);
+    }
+
+    private static void generateDynamicPedestalRecipeWithSavedTier(
+            RecipeOutput ctx,
+            String id,
+            PedestalTier tier,
+            PedestalRecipe recipe
+    ) {
         generateRecipe(
                 ctx,
-                "pedestal/" + tierIdOf(recipe.getTier()) + "/" + id,
+                "pedestal/" + tierIdOf(tier) + "/" + id,
                 recipe
         );
     }
@@ -156,6 +166,38 @@ public class PastelPedestalRecipes {
         AdvancedRecipes.generate(ctx);
         ComplexRecipes.generate(ctx);
     }
+
+    // can't think of a case in this setup where we don't want to force our saved tier
+
+    private static class PrefixHelperForcedTier {
+        private final String prefix;
+        private final PedestalTier defaultTier;
+        PrefixHelperForcedTier(String prefix, PedestalTier defaultTier) {
+            if (prefix.isEmpty()) {
+                this.prefix = "";
+            } else {
+                this.prefix = prefix + "/";
+            }
+            this.defaultTier = defaultTier;
+        }
+
+        public void generateRecipe(RecipeOutput ctx, String subId, PedestalRecipeBuilder<?> builder) {
+            generatePedestalRecipeWithSavedTier(ctx, prefix + subId, defaultTier, builder);
+        }
+
+
+        public void generateAutoNamedRecipe(RecipeOutput ctx, PedestalRecipeBuilder<?> builder) {
+            var id = BuiltInRegistries.ITEM.getKey(builder.getResult()).getPath();
+            generateRecipe(ctx, id, builder);
+        }
+
+        // cant auto name this without providers (haha, no.)
+        public void generateDynamicRecipe(RecipeOutput ctx, String subId, PedestalRecipe recipe) {
+            generateDynamicPedestalRecipeWithSavedTier(ctx, prefix + subId, defaultTier, recipe);
+        }
+
+    }
+
 
 
     private static class BasicRecipes {
@@ -447,81 +489,72 @@ public class PastelPedestalRecipes {
         }
 
         private static void generateFoodRecipes(RecipeOutput ctx) {
+            var prefixHelper = basicPrefixHelper("food");
+
             // Tarts
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/ashen_tart",
                     tartBase(ASHEN_TART.asItem(), Items.SWEET_BERRIES)
                             .powderInput(PastelGemstoneColor.CYAN, 2)
                             .powderInput(PastelGemstoneColor.YELLOW, 4)
             );
 
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/jaramel_tart",
                     tartBase(JARAMEL_TART.asItem(), Items.AIR)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
             );
-
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/puff_tart",
                     tartBase(PUFF_TART.asItem(), Items.DRAGON_BREATH)
                             .powderInput(PastelGemstoneColor.CYAN, 2)
                             .powderInput(PastelGemstoneColor.MAGENTA, 2)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
             );
 
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/salted_jaramel_tart",
                     tartBase(SALTED_JARAMEL_TART.asItem(), Items.GHAST_TEAR)
                             .secret(true)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
             );
 
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/weeping_tart",
                     tartBase(WEEPING_TART.asItem(), Items.KELP)
                             .powderInput(PastelGemstoneColor.CYAN, 4)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
             );
 
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/whispy_tart",
                     tartBase(WHISPY_TART.asItem(), NIGHTDEW_SPROUT.asItem())
                             .powderInput(PastelGemstoneColor.MAGENTA, 4)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
             );
 
             // Trifles
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/demon_trifle",
                     trifleBase(DEMON_TRIFLE.asItem(), BLOODBOIL_SYRUP.asItem())
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.DEMON_TRIFLE)
             );
 
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/jaramel_trifle",
                     trifleBase(JARAMEL_TRIFLE.asItem(), Items.AIR)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
             );
 
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/monster_trifle",
                     trifleBase(MONSTER_TRIFLE.asItem(), QUITOXIC_POWDER.asItem())
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
             );
 
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/salted_jaramel_trifle",
                     trifleBase(SALTED_JARAMEL_TRIFLE.asItem(), Items.GHAST_TEAR)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
                             .secret(true)
@@ -529,9 +562,8 @@ public class PastelPedestalRecipes {
 
             // AHHH THE MEATLOAF :sob:
 
-            generateBasicRecipe(
+            prefixHelper.generateAutoNamedRecipe(
                     ctx,
-                    "food/meatloaf",
                     new ShapedPedestalRecipeBuilder(new ItemStack(MEATLOAF.asItem()))
                             .craftingTime(160)
                             .tier(PedestalTier.BASIC)
@@ -543,18 +575,77 @@ public class PastelPedestalRecipes {
                             .key('A', Items.BEETROOT)
                             .key('M', MYCEYLON.asItem())
                             .key('H', Items.HONEY_BOTTLE)
-                            .key('J',
-                                    new IngredientStack(
-                                            Ingredient.of(INFUSED_BEVERAGE),
-                                            DataComponentPredicate.builder().expect(PastelDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.MALT_BEER).build(),
-                                            DataComponentPatch.builder().set(PastelDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.MALT_BEER).build(),
-                                            1
-                                    ))
+                            .key('J', infusedBeverageIngredient(InfusedBeverageComponent.MALT_BEER))
             );
 
+            prefixHelper.generateAutoNamedRecipe(
+                    ctx,
+                    new ShapedPedestalRecipeBuilder(new ItemStack(BAGNUN.asItem()))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("EBE")
+                            .pattern("JMJ")
+                            .pattern("AAA")
+                            .key('A', CRAWFISH.asItem())
+                            .key('B', CLOTTED_CREAM.asItem())
+                            .key('J', Tags.Items.MUSHROOMS)
+                            .key('M', JADE_WINE.asItem())
+                            .key('E', MYCEYLON.asItem())
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMBRIFER_COOKBOOK)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    ctx,
+                    new ShapedPedestalRecipeBuilder(new ItemStack(BANYASH.asItem()))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("JBJ")
+                            .pattern("EME")
+                            .pattern("AAA")
+                            .key('A',CRAWFISH.asItem())
+                            .key('J', Items.SWEET_BERRIES)
+                            .key('E', Tags.Items.MUSHROOMS)
+                            .key('B', PRICKLY_BAYLEAF.asItem())
+                            .key('M', infusedBeverageIngredient(InfusedBeverageComponent.RUM))
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_1)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    ctx,
+                    new ShapedPedestalRecipeBuilder(new ItemStack(BERLINER.asItem()))
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.2f)
+                            .pattern("CCC")
+                            .pattern("XSX")
+                            .pattern("EEE")
+                            .key('X', FRESH_CHOCOLATE.asItem())
+                            .key('E', AMARANTH_GRAINS.asItem())
+                            .key('C', CLOTTED_CREAM.asItem())
+                            .key('S', infusedBeverageIngredient(InfusedBeverageComponent.SAWBLADE_HOLLY_LIQUOR))
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_2)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    ctx,
+                    new ShapedPedestalRecipeBuilder(new ItemStack(BODACIOUS_BERRY_BAR.asItem(), 4))
+                            .craftingTime(300)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("CHC")
+                            .pattern("BLB") // bulby..................
+                            .pattern("CMC")
+                            .key('H', Items.HONEY_BOTTLE)
+                            .key('B', Items.SWEET_BERRIES)
+                            .key('M', CLOTTED_CREAM.asItem())
+                            .key('C', FRESH_CHOCOLATE.asItem())
+                            .key('L', infusedBeverageIngredient(InfusedBeverageComponent.BERRY_LIQUOR))
+            );
 
             // TODO: everything else LOL
-            generateDynamicPedestalRecipe(ctx, "food/star_candy", new StarCandyRecipe());
+            prefixHelper.generateDynamicRecipe(ctx, "star_candy", new StarCandyRecipe());
         }
 
         private static void generateGemstoneLightRecipes(RecipeOutput ctx) {
@@ -710,6 +801,20 @@ public class PastelPedestalRecipes {
                     id,
                     PedestalTier.BASIC,
                     builder
+            );
+        }
+
+        private static PrefixHelperForcedTier basicPrefixHelper(String prefix) {
+            return new PrefixHelperForcedTier(prefix, PedestalTier.BASIC);
+        }
+
+
+        private static IngredientStack infusedBeverageIngredient(InfusedBeverageComponent component) {
+            return new IngredientStack(
+                    Ingredient.of(INFUSED_BEVERAGE.asItem()),
+                    DataComponentPredicate.builder().expect(PastelDataComponentTypes.INFUSED_BEVERAGE, component).build(),
+                    DataComponentPatch.builder().set(PastelDataComponentTypes.INFUSED_BEVERAGE, component).build(),
+                    1
             );
         }
 

@@ -1,0 +1,45 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:crawfish"
+    },
+    "B": {
+      "item": "pastel:prickly_bayleaf"
+    },
+    "E": {
+      "tag": "c:mushrooms"
+    },
+    "J": {
+      "item": "minecraft:sweet_berries"
+    },
+    "M": {
+      "components": {
+        "pastel:infused_beverage": {
+          "color": 10505507,
+          "variant": "rum"
+        }
+      },
+      "item": "pastel:infused_beverage",
+      "preview_components": {
+        "pastel:infused_beverage": {
+          "color": 10505507,
+          "variant": "rum"
+        }
+      }
+    }
+  },
+  "pattern": [
+    "JBJ",
+    "EME",
+    "AAA"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1",
+  "result": {
+    "count": 1,
+    "id": "pastel:banyash"
+  },
+  "time": 160
+}
