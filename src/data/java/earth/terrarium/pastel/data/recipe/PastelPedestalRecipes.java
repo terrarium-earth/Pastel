@@ -6,6 +6,8 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GemstoneColor;
+import earth.terrarium.pastel.api.recipe.IngredientStack;
+import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.items.PigmentItem;
@@ -16,10 +18,9 @@ import earth.terrarium.pastel.recipe.pedestal.builder.PedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapedPedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapelessPedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.dynamic.StarCandyRecipe;
-import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItemTags;
-import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.*;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +28,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -523,6 +525,31 @@ public class PastelPedestalRecipes {
                     trifleBase(SALTED_JARAMEL_TRIFLE.asItem(), Items.GHAST_TEAR)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
                             .secret(true)
+            );
+
+            // AHHH THE MEATLOAF :sob:
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/meatloaf",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(MEATLOAF.asItem()))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("AHA")
+                            .pattern("EME")
+                            .pattern("JEJ")
+                            .key('E', LIZARD_MEAT.asItem())
+                            .key('A', Items.BEETROOT)
+                            .key('M', MYCEYLON.asItem())
+                            .key('H', Items.HONEY_BOTTLE)
+                            .key('J',
+                                    new IngredientStack(
+                                            Ingredient.of(INFUSED_BEVERAGE),
+                                            DataComponentPredicate.builder().expect(PastelDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.MALT_BEER).build(),
+                                            DataComponentPatch.builder().set(PastelDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.MALT_BEER).build(),
+                                            1
+                                    ))
             );
 
 

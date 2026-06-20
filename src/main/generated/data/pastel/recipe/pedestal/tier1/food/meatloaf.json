@@ -1,0 +1,44 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "minecraft:beetroot"
+    },
+    "E": {
+      "item": "pastel:lizard_meat"
+    },
+    "H": {
+      "item": "minecraft:honey_bottle"
+    },
+    "J": {
+      "components": {
+        "pastel:infused_beverage": {
+          "color": 8272724,
+          "variant": "malt_beer"
+        }
+      },
+      "item": "pastel:infused_beverage",
+      "preview_components": {
+        "pastel:infused_beverage": {
+          "color": 8272724,
+          "variant": "malt_beer"
+        }
+      }
+    },
+    "M": {
+      "item": "pastel:myceylon"
+    }
+  },
+  "pattern": [
+    "AHA",
+    "EME",
+    "JEJ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "pastel:meatloaf"
+  },
+  "time": 160
+}
