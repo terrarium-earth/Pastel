@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1,
+    "pastel:cyan": 1,
+    "pastel:magenta": 1,
+    "pastel:yellow": 1
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:experience_bottle"
+    },
+    "F": {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    "P": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "S": {
+      "item": "pastel:stratine_fragments"
+    }
+  },
+  "pattern": [
+    "FSF",
+    "PBP",
+    "FSF"
+  ],
+  "required_advancement": "pastel:unlocks/items/bottle_of_failing",
+  "result": {
+    "count": 1,
+    "id": "pastel:bottle_of_failing"
+  },
+  "tier": "advanced",
+  "time": 800
+}

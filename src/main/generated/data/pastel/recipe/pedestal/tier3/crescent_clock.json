@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "O": {
+      "item": "pastel:onyx_shard"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " O ",
+    "ORO",
+    " C "
+  ],
+  "required_advancement": "pastel:unlocks/items/crescent_clock",
+  "result": {
+    "count": 1,
+    "id": "pastel:crescent_clock"
+  },
+  "tier": "advanced",
+  "time": 400
+}

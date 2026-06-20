@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4,
+    "pastel:yellow": 2
+  },
+  "experience": 1.0,
+  "key": {
+    "C": {
+      "item": "pastel:midnight_chip"
+    },
+    "G": {
+      "item": "pastel:doombloom_seed"
+    },
+    "M": {
+      "item": "pastel:moonstone_core"
+    }
+  },
+  "pattern": [
+    "CGC",
+    "GMG",
+    "CGC"
+  ],
+  "required_advancement": "pastel:unlocks/items/pipe_bomb",
+  "result": {
+    "count": 1,
+    "id": "pastel:pipe_bomb"
+  },
+  "tier": "advanced",
+  "time": 400
+}

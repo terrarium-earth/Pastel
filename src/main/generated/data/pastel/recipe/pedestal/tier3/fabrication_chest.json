@@ -1,0 +1,38 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1,
+    "pastel:cyan": 4,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "pastel:stratine_fragments"
+    },
+    "P": {
+      "item": "pastel:polished_calcite"
+    },
+    "T": {
+      "item": "pastel:red_pigment"
+    }
+  },
+  "pattern": [
+    "CTC",
+    "PGP",
+    "BBB"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/fabrication_chest",
+  "result": {
+    "count": 1,
+    "id": "pastel:fabrication_chest"
+  },
+  "tier": "advanced",
+  "time": 1600
+}

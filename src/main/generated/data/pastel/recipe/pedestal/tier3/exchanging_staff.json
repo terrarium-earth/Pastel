@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1,
+    "pastel:cyan": 6,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "pastel:brown_pigment"
+    },
+    "P": {
+      "item": "pastel:hoverblock"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " BP",
+    " TB",
+    "T  "
+  ],
+  "required_advancement": "pastel:unlocks/items/exchanging_staff",
+  "result": {
+    "count": 1,
+    "id": "pastel:exchanging_staff"
+  },
+  "tier": "advanced",
+  "time": 1200
+}

@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4
+  },
+  "experience": 4.0,
+  "key": {
+    "C": {
+      "item": "pastel:midnight_chip"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "  C",
+    " S ",
+    "T  "
+  ],
+  "required_advancement": "pastel:unlocks/equipment/dark_stakes",
+  "result": {
+    "count": 4,
+    "id": "pastel:dark_stake"
+  },
+  "tier": "advanced",
+  "time": 80
+}

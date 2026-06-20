@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 2
+  },
+  "disable_yield_upgrades": true,
+  "experience": 0.5,
+  "key": {
+    "#": {
+      "item": "pastel:stratine_fragments"
+    },
+    "X": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "required_advancement": "pastel:hidden/collect_stratine_gem",
+  "result": {
+    "count": 1,
+    "id": "pastel:stratine_gem"
+  },
+  "tier": "advanced",
+  "time": 400
+}

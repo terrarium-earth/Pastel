@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "C": {
+      "item": "minecraft:chorus_fruit"
+    },
+    "E": {
+      "item": "pastel:neolith"
+    },
+    "P": {
+      "item": "pastel:cyan_pigment"
+    },
+    "T": {
+      "item": "pastel:radiating_ender"
+    }
+  },
+  "pattern": [
+    "PCP",
+    "ETE",
+    "PCP"
+  ],
+  "required_advancement": "pastel:unlocks/items/ender_splice",
+  "result": {
+    "count": 4,
+    "id": "pastel:ender_splice"
+  },
+  "tier": "advanced",
+  "time": 240
+}

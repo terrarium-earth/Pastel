@@ -1,0 +1,38 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1,
+    "pastel:magenta": 4,
+    "pastel:yellow": 4
+  },
+  "experience": 4.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "pastel:stratine_fragments"
+    },
+    "P": {
+      "item": "pastel:polished_calcite"
+    },
+    "Q": {
+      "item": "pastel:quitoxic_powder"
+    }
+  },
+  "pattern": [
+    "CQC",
+    "PGP",
+    "BBB"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/potion_workshop",
+  "result": {
+    "count": 1,
+    "id": "pastel:potion_workshop"
+  },
+  "tier": "advanced",
+  "time": 1200
+}

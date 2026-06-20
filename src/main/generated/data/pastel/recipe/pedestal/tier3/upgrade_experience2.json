@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 8,
+    "pastel:yellow": 4
+  },
+  "experience": 16.0,
+  "ingredients": [
+    {
+      "item": "pastel:upgrade_experience"
+    },
+    {
+      "item": "pastel:moonstone_shard"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/upgrades/upgrade_experience2",
+  "result": {
+    "count": 1,
+    "id": "pastel:upgrade_experience2"
+  },
+  "tier": "advanced",
+  "time": 3600
+}

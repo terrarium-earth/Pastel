@@ -1,0 +1,25 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {
+    "pastel:black": 8,
+    "pastel:cyan": 4,
+    "pastel:magenta": 8,
+    "pastel:yellow": 4
+  },
+  "experience": 4.0,
+  "ingredients": [
+    {
+      "item": "pastel:storm_stone"
+    },
+    {
+      "item": "pastel:upgrade_speed"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/upgrades/upgrade_speed2",
+  "result": {
+    "count": 1,
+    "id": "pastel:upgrade_speed2"
+  },
+  "tier": "advanced",
+  "time": 3600
+}

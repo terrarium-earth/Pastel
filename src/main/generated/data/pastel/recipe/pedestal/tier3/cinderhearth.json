@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 2,
+    "pastel:cyan": 4,
+    "pastel:magenta": 4,
+    "pastel:yellow": 8
+  },
+  "experience": 8.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "pastel:polished_calcite"
+    },
+    "F": {
+      "item": "pastel:stratine_fragments"
+    },
+    "G": {
+      "item": "pastel:stratine_gem"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CGC",
+    "BFB"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/cinderhearth",
+  "result": {
+    "count": 1,
+    "id": "pastel:cinderhearth"
+  },
+  "tier": "advanced",
+  "time": 600
+}

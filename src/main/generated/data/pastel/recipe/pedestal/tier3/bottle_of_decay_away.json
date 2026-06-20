@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 1,
+    "pastel:magenta": 1,
+    "pastel:yellow": 1
+  },
+  "key": {
+    "A": {
+      "item": "pastel:raw_azurite"
+    },
+    "B": {
+      "item": "minecraft:glass_bottle"
+    },
+    "G": {
+      "item": "pastel:green_pigment"
+    },
+    "N": {
+      "item": "pastel:neolith"
+    }
+  },
+  "pattern": [
+    "GAG",
+    "NBN",
+    "GAG"
+  ],
+  "required_advancement": "pastel:unlocks/items/bottle_of_decay_away",
+  "result": {
+    "count": 1,
+    "id": "pastel:bottle_of_decay_away"
+  },
+  "tier": "advanced"
+}

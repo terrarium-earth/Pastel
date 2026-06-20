@@ -1,0 +1,39 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1,
+    "pastel:cyan": 1,
+    "pastel:magenta": 1,
+    "pastel:yellow": 1
+  },
+  "experience": 1.0,
+  "key": {
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "M": {
+      "item": "pastel:mermaids_gem"
+    },
+    "P": {
+      "item": "pastel:pink_pigment"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    },
+    "Y": {
+      "item": "pastel:yellow_pigment"
+    }
+  },
+  "pattern": [
+    "PMP",
+    "SBS",
+    "YMY"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/liquid_crystal",
+  "result": {
+    "count": 1,
+    "id": "pastel:liquid_crystal_bucket"
+  },
+  "tier": "advanced",
+  "time": 240
+}

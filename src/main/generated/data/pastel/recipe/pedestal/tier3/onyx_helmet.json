@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4,
+    "pastel:cyan": 4,
+    "pastel:magenta": 4,
+    "pastel:yellow": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "C": {
+      "item": "pastel:liquid_crystal_bucket"
+    },
+    "O": {
+      "item": "pastel:onyx_shard"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "OCO"
+  ],
+  "required_advancement": "pastel:unlocks/equipment/onyx_helmet",
+  "result": {
+    "count": 1,
+    "id": "pastel:onyx_helmet"
+  },
+  "tier": "advanced",
+  "time": 400
+}

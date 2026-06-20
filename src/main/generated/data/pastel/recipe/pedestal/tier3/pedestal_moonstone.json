@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "experience": 16.0,
+  "key": {
+    "B": {
+      "item": "pastel:bismuth_flake"
+    },
+    "M": {
+      "item": "pastel:moonstone_shard"
+    },
+    "R": {
+      "item": "pastel:polished_onyx_block"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "BRB"
+  ],
+  "required_advancement": "pastel:lategame/collect_moonstone",
+  "result": {
+    "count": 1,
+    "id": "pastel:pedestal_moonstone"
+  },
+  "tier": "advanced"
+}

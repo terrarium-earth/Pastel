@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1,
+    "pastel:cyan": 2,
+    "pastel:magenta": 2,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "G": {
+      "item": "pastel:shimmerstone_gem"
+    },
+    "P": {
+      "item": "pastel:purple_pigment"
+    },
+    "S": {
+      "item": "pastel:stardust"
+    },
+    "Y": {
+      "item": "pastel:yellow_pigment"
+    }
+  },
+  "pattern": [
+    "YGY",
+    "SSS",
+    "PSP"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/ethereal_platform",
+  "result": {
+    "count": 8,
+    "id": "pastel:ethereal_platform"
+  },
+  "tier": "advanced",
+  "time": 600
+}

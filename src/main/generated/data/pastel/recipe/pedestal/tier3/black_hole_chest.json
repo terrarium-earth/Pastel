@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 2,
+    "pastel:cyan": 4,
+    "pastel:magenta": 8,
+    "pastel:yellow": 4
+  },
+  "experience": 4.0,
+  "key": {
+    "B": {
+      "item": "pastel:blue_pigment"
+    },
+    "S": {
+      "item": "pastel:stratine_gem"
+    },
+    "X": {
+      "item": "pastel:polished_calcite"
+    },
+    "Y": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "XSX",
+    "YYY"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/black_hole_chest",
+  "result": {
+    "count": 1,
+    "id": "pastel:black_hole_chest"
+  },
+  "tier": "advanced",
+  "time": 3600
+}
