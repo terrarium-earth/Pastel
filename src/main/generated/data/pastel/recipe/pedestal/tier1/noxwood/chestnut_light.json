@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "group": "noxwood_lights",
+  "key": {
+    "G": {
+      "item": "pastel:chestnut_noxcap_gills"
+    },
+    "S": {
+      "item": "pastel:chestnut_noxcap_stem"
+    },
+    "X": {
+      "item": "pastel:shimmerstone_block"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "GXG",
+    "SSS"
+  ],
+  "required_advancement": "pastel:lategame/collect_noxwood",
+  "result": {
+    "count": 4,
+    "id": "pastel:chestnut_noxwood_light"
+  },
+  "time": 80
+}

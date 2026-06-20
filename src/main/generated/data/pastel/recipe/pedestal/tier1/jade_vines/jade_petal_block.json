@@ -1,0 +1,21 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "jade_decorations",
+  "key": {
+    "X": {
+      "item": "pastel:jade_petals"
+    }
+  },
+  "pattern": [
+    "XX",
+    "XX"
+  ],
+  "required_advancement": "pastel:midgame/collect_jade_petals",
+  "result": {
+    "count": 1,
+    "id": "pastel:jade_petal_block"
+  },
+  "time": 40
+}

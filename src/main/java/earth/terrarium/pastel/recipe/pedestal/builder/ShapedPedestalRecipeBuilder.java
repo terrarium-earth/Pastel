@@ -53,7 +53,7 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
         RawShapedPedestalRecipe rawRecipe = RawShapedPedestalRecipe.create(keyMap, rows);
         ShapedPedestalRecipe realRecipe =
                 new ShapedPedestalRecipe(
-                        this.group != null ? this.group : "",
+                        this.group,
                         this.secret,
                         Optional.ofNullable(this.requiredAdvancementIdentifier),
                         this.tier,

@@ -42,7 +42,7 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         Objects.requireNonNull(tier, "tier must be defined before saving recipe!");
         var recipe = new ShapelessPedestalRecipe(
-                this.group != null ? this.group : "",
+                this.group,
                 this.secret,
                 Optional.ofNullable(this.requiredAdvancementIdentifier),
                 this.tier,

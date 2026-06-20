@@ -82,6 +82,14 @@ public class PastelItemTags {
 
     public static final TagKey<Item> DRINKABLE_SPIRITS = of("drinkable_spirits");
 
+    public static final TagKey<Item> CHESTNUT_NOXCAP_STEMS = of("chestnut_noxcap_stems");
+
+    public static final TagKey<Item> EBONY_NOXCAP_STEMS = of("ebony_noxcap_stems");
+
+    public static final TagKey<Item> IVORY_NOXCAP_STEMS = of("ivory_noxcap_stems");
+
+    public static final TagKey<Item> SLATE_NOXCAP_STEMS = of("slate_noxcap_stems");
+
     public static class EnchantableWith {
         public static final TagKey<Item> BIG_CATCH = getEnchantableTag(PastelEnchantments.BIG_CATCH);
 

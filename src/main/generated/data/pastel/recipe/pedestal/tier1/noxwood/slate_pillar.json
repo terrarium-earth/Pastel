@@ -1,0 +1,25 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "group": "noxwood_decorations",
+  "key": {
+    "C": {
+      "item": "pastel:slate_noxcap_block"
+    },
+    "S": {
+      "tag": "pastel:slate_noxcap_stems"
+    }
+  },
+  "pattern": [
+    "CC",
+    "SS",
+    "CC"
+  ],
+  "required_advancement": "pastel:lategame/collect_noxwood",
+  "result": {
+    "count": 2,
+    "id": "pastel:slate_noxwood_pillar"
+  },
+  "time": 80
+}

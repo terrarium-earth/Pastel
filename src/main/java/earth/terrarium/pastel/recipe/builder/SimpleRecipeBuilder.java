@@ -7,10 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // Adapted from the neoforge docs
 // <https://docs.neoforged.net/docs/1.21.1/resources/server/recipes/#data-generation>
@@ -18,8 +15,7 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
     protected final ItemStack result;
     protected final List<ICondition> conditions = new ArrayList<>();
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
-    @Nullable
-    protected String group;
+    protected String group = "";
 
     public SimpleRecipeBuilder(ItemStack result) {
         this.result = result;
@@ -42,7 +38,7 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
 
     @Override
     public C group(@Nullable String group) {
-        this.group = group;
+        this.group = Objects.requireNonNullElse(group, "");
         return self();
     }
 

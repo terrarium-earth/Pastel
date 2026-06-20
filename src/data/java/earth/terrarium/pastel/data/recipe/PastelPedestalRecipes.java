@@ -26,6 +26,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -187,7 +188,7 @@ public class PastelPedestalRecipes {
             generateFoodRecipes(rootHelper.subPrefix("food"));
             generateGemstoneLightRecipes(rootHelper.subPrefix("gemstone_lights"));
             generateBasicGlasses(rootHelper.subPrefix("glass"));
-            generateJadeiteRecipes(rootHelper.subPrefix("jedeite"));
+            generateJadeiteRecipes(rootHelper.subPrefix("jadeite"));
             generateJadeVinesRecipes(rootHelper.subPrefix("jade_vines"));
             generateNoxwoodRecipes(rootHelper.subPrefix("noxwood"));
             generatePigmentBlocks(rootHelper.subPrefix("pigment_blocks"));
@@ -886,19 +887,90 @@ public class PastelPedestalRecipes {
             generateBasicGlassPane(pfx, null, PastelAdvancements.Lategame.COLLECT_HUMMINGSTONE, 20, PedestalTier.BASIC, PastelBlocks.HUMMINGSTONE_GLASS, PastelBlocks.HUMMINGSTONE_GLASS_PANE);
         }
 
-        // TODO
         private static void generateJadeiteRecipes(PrefixHelper pfx) {
-
+            generateJadeLike(
+                    pfx,
+                    "jadeite_decorations",
+                    PastelAdvancements.Hidden.COLLECT_JADEITE,
+                    JADEITE_PETALS,
+                    PastelBlocks.JADEITE_PETAL_BLOCK,
+                    PastelBlocks.JADEITE_PETAL_CARPET
+            );
         }
 
-        // TODO
         private static void generateJadeVinesRecipes(PrefixHelper pfx) {
-
+            generateJadeLike(
+                    pfx,
+                    "jade_decorations",
+                    PastelAdvancements.Midgame.COLLECT_JADE_PETALS,
+                    JADE_PETALS,
+                    PastelBlocks.JADE_PETAL_BLOCK,
+                    PastelBlocks.JADE_PETAL_CARPET
+            );
         }
 
-        // TODO
+        // this is awful. maybe consider making an extended block family for noxwood items
         private static void generateNoxwoodRecipes(PrefixHelper pfx) {
-
+            generateNoxwoodFamily(
+                    pfx,
+                    Items.COPPER_INGOT,
+                    PastelBlocks.CHESTNUT_NOXWOOD_PLANKS,
+                    PastelBlocks.CHESTNUT_NOXWOOD_SLAB,
+                    PastelBlocks.CHESTNUT_NOXCAP_STEM,
+                    PastelBlocks.CHESTNUT_NOXCAP_GILLS,
+                    PastelBlocks.CHESTNUT_NOXCAP_BLOCK,
+                    PastelItemTags.CHESTNUT_NOXCAP_STEMS,
+                    PastelBlocks.CHESTNUT_NOXWOOD_AMPHORA,
+                    PastelBlocks.CHESTNUT_NOXWOOD_LAMP,
+                    PastelBlocks.CHESTNUT_NOXWOOD_LANTERN,
+                    PastelBlocks.CHESTNUT_NOXWOOD_LIGHT,
+                    PastelBlocks.CHESTNUT_NOXWOOD_PILLAR
+            );
+            generateNoxwoodFamily(
+                    pfx,
+                    Items.IRON_INGOT,
+                    PastelBlocks.EBONY_NOXWOOD_PLANKS,
+                    PastelBlocks.EBONY_NOXWOOD_SLAB,
+                    PastelBlocks.EBONY_NOXCAP_STEM,
+                    PastelBlocks.EBONY_NOXCAP_GILLS,
+                    PastelBlocks.EBONY_NOXCAP_BLOCK,
+                    PastelItemTags.EBONY_NOXCAP_STEMS,
+                    PastelBlocks.EBONY_NOXWOOD_AMPHORA,
+                    PastelBlocks.EBONY_NOXWOOD_LAMP,
+                    PastelBlocks.EBONY_NOXWOOD_LANTERN,
+                    PastelBlocks.EBONY_NOXWOOD_LIGHT,
+                    PastelBlocks.EBONY_NOXWOOD_PILLAR
+            );
+            generateNoxwoodFamily(
+                    pfx,
+                    Items.QUARTZ,
+                    PastelBlocks.IVORY_NOXWOOD_PLANKS,
+                    PastelBlocks.IVORY_NOXWOOD_SLAB,
+                    PastelBlocks.IVORY_NOXCAP_STEM,
+                    PastelBlocks.IVORY_NOXCAP_GILLS,
+                    PastelBlocks.IVORY_NOXCAP_BLOCK,
+                    PastelItemTags.IVORY_NOXCAP_STEMS,
+                    PastelBlocks.IVORY_NOXWOOD_AMPHORA,
+                    PastelBlocks.IVORY_NOXWOOD_LAMP,
+                    PastelBlocks.IVORY_NOXWOOD_LANTERN,
+                    PastelBlocks.IVORY_NOXWOOD_LIGHT,
+                    PastelBlocks.IVORY_NOXWOOD_PILLAR
+            );
+            generateNoxwoodFamily(
+                    pfx,
+                    Items.PRISMARINE_CRYSTALS,
+                    PastelBlocks.SLATE_NOXWOOD_PLANKS,
+                    PastelBlocks.SLATE_NOXWOOD_SLAB,
+                    PastelBlocks.SLATE_NOXCAP_STEM,
+                    PastelBlocks.SLATE_NOXCAP_GILLS,
+                    PastelBlocks.SLATE_NOXCAP_BLOCK,
+                    PastelItemTags.SLATE_NOXCAP_STEMS,
+                    PastelBlocks.SLATE_NOXWOOD_AMPHORA,
+                    PastelBlocks.SLATE_NOXWOOD_LAMP,
+                    PastelBlocks.SLATE_NOXWOOD_LANTERN,
+                    PastelBlocks.SLATE_NOXWOOD_LIGHT,
+                    PastelBlocks.SLATE_NOXWOOD_PILLAR
+            );
         }
 
         private static void generatePigmentBlocks(PrefixHelper pfx) {
@@ -1263,6 +1335,144 @@ public class PastelPedestalRecipes {
                             .key('D', dyeItem)
                             .key('V', VEGETAL.get())
                             .key('S', ItemTags.SAPLINGS)
+            );
+        }
+
+        private static void generateJadeLike(PrefixHelper pfx, String group, ResourceLocation unlock, DeferredItem<?> petals, DeferredBlock<?> block, DeferredBlock<?> carpet) {
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(block.asItem()))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("XX")
+                            .pattern("XX")
+                            .key('X', petals.asItem())
+                            .requiredAdvancement(unlock)
+                            .ignoreYieldUpgrades(true)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(carpet.asItem(), 3))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("XX")
+                            .key('X', block.asItem())
+                            .requiredAdvancement(unlock)
+            );
+
+            pfx.generateRecipe(
+                    petals.getId().getPath() + "_from_petal_block",
+                    new ShapelessPedestalRecipeBuilder(new ItemStack(JADEITE_PETALS.asItem(), 4))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .ingredient(block.asItem())
+                            .requiredAdvancement(unlock)
+                            .ignoreYieldUpgrades(true)
+            );
+        }
+
+        private static void generateNoxwoodFamily(
+                PrefixHelper pfx,
+                Item ingot,
+                DeferredBlock<?> planks,
+                DeferredBlock<?> slab,
+                DeferredBlock<?> stem,
+                DeferredBlock<?> gills,
+                DeferredBlock<?> block,
+                TagKey<Item> stems,
+                DeferredBlock<?> amphora,
+                DeferredBlock<?> lamp,
+                DeferredBlock<?> lantern,
+                DeferredBlock<?> light,
+                DeferredBlock<?> pillar
+
+                ) {
+            pfx.generateRecipe(
+                    amphora.getId().getPath().replace("_noxwood", ""),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(amphora.asItem()))
+                            .group("noxwood_amphoras")
+                            .craftingTime(240)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("SAS")
+                            .pattern("I I")
+                            .pattern("PSP")
+                            .key('S', slab.asItem())
+                            .key('P', planks.asItem())
+                            .key('I', ingot)
+                            .key('A', Items.PAPER)
+                            .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
+            );
+
+            pfx.generateRecipe(
+                    lamp.getId().getPath().replace("_noxwood", ""),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(lamp.asItem(), 2))
+                            .group("noxwood_lamps")
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .pattern("SSS")
+                            .pattern("GXG")
+                            .pattern("III")
+                            .key('S', stem.asItem())
+                            .key('G', gills.asItem())
+                            .key('I', ingot)
+                            .key('X', SHIMMERSTONE_GEM.asItem())
+                            .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
+            );
+
+            pfx.generateRecipe(
+                    lantern.getId().getPath().replace("_noxwood", ""),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(lantern.asItem()))
+                            .group("noxwood_lanterns")
+                            .craftingTime(240)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern(" S ")
+                            .pattern("GHG")
+                            .pattern("CIC")
+                            .key('S', slab.asItem())
+                            .key('G', gills.asItem())
+                            .key('C', block.asItem())
+                            .key('I', ingot)
+                            .key('H', SHIMMERSTONE_GEM.asItem())
+                            .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
+            );
+
+            pfx.generateRecipe(
+                    light.getId().getPath().replace("_noxwood", ""),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(light.asItem(), 4))
+                            .group("noxwood_lights")
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .pattern("SSS")
+                            .pattern("GXG")
+                            .pattern("SSS")
+                            .key('S', stem.asItem())
+                            .key('G', gills.asItem())
+                            .key('X', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
+                            .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
+            );
+
+            pfx.generateRecipe(
+                    pillar.getId().getPath().replace("_noxwood", ""),
+                    new ShapedPedestalRecipeBuilder(new ItemStack(pillar.asItem(), 2))
+                            .group("noxwood_decorations")
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .pattern("CC")
+                            .pattern("SS")
+                            .pattern("CC")
+                            .key('S', stems)
+                            .key('C', block.asItem())
+                            .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
             );
         }
 
