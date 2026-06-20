@@ -445,6 +445,87 @@ public class PastelPedestalRecipes {
         }
 
         private static void generateFoodRecipes(RecipeOutput ctx) {
+            // Tarts
+            generateBasicRecipe(
+                    ctx,
+                    "food/ashen_tart",
+                    tartBase(ASHEN_TART.asItem(), Items.SWEET_BERRIES)
+                            .powderInput(PastelGemstoneColor.CYAN, 2)
+                            .powderInput(PastelGemstoneColor.YELLOW, 4)
+            );
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/jaramel_tart",
+                    tartBase(JARAMEL_TART.asItem(), Items.AIR)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+            );
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/puff_tart",
+                    tartBase(PUFF_TART.asItem(), Items.DRAGON_BREATH)
+                            .powderInput(PastelGemstoneColor.CYAN, 2)
+                            .powderInput(PastelGemstoneColor.MAGENTA, 2)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+            );
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/salted_jaramel_tart",
+                    tartBase(SALTED_JARAMEL_TART.asItem(), Items.GHAST_TEAR)
+                            .secret(true)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+            );
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/weeping_tart",
+                    tartBase(WEEPING_TART.asItem(), Items.KELP)
+                            .powderInput(PastelGemstoneColor.CYAN, 4)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+            );
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/whispy_tart",
+                    tartBase(WHISPY_TART.asItem(), NIGHTDEW_SPROUT.asItem())
+                            .powderInput(PastelGemstoneColor.MAGENTA, 4)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+            );
+
+            // Trifles
+            generateBasicRecipe(
+                    ctx,
+                    "food/demon_trifle",
+                    trifleBase(DEMON_TRIFLE.asItem(), BLOODBOIL_SYRUP.asItem())
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Food.DEMON_TRIFLE)
+            );
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/jaramel_trifle",
+                    trifleBase(JARAMEL_TRIFLE.asItem(), Items.AIR)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+            );
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/monster_trifle",
+                    trifleBase(MONSTER_TRIFLE.asItem(), QUITOXIC_POWDER.asItem())
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+            );
+
+            generateBasicRecipe(
+                    ctx,
+                    "food/salted_jaramel_trifle",
+                    trifleBase(SALTED_JARAMEL_TRIFLE.asItem(), Items.GHAST_TEAR)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .secret(true)
+            );
+
+
             // TODO: everything else LOL
             generateDynamicPedestalRecipe(ctx, "food/star_candy", new StarCandyRecipe());
         }
@@ -603,6 +684,44 @@ public class PastelPedestalRecipes {
                     PedestalTier.BASIC,
                     builder
             );
+        }
+
+        private static ShapedPedestalRecipeBuilder tartBase(Item result, Item topping) {
+            String firstPattern = topping == Items.AIR ? "J J" : "JTJ";
+
+            var base = new ShapedPedestalRecipeBuilder(new ItemStack(result))
+                    .craftingTime(160)
+                    .tier(PedestalTier.BASIC)
+                    .experience(1.0f)
+                    .pattern(firstPattern)
+                    .pattern("EME")
+                    .pattern("AAA")
+                    .key('A', AMARANTH_GRAINS.asItem())
+                    .key('J', JARAMEL.asItem())
+                    .key('E', Tags.Items.EGGS)
+                    .key('M', Tags.Items.BUCKETS_MILK)
+                    .requiredAdvancement(PastelAdvancements.Unlocks.Food.TARTS);
+
+            return topping == Items.AIR ? base : base.key('T', topping);
+        }
+
+        private static ShapedPedestalRecipeBuilder trifleBase(Item result, Item topping) {
+            String firstPattern = topping == Items.AIR ? "J J" : "JTJ";
+
+            var base = new ShapedPedestalRecipeBuilder(new ItemStack(result))
+                    .craftingTime(160)
+                    .tier(PedestalTier.BASIC)
+                    .experience(1.0f)
+                    .pattern(firstPattern)
+                    .pattern("BEB")
+                    .pattern("AAA")
+                    .key('A', AMARANTH_GRAINS.asItem())
+                    .key('J', JARAMEL.asItem())
+                    .key('B', Items.BONE_MEAL)
+                    .key('E', Tags.Items.EGGS)
+                    .requiredAdvancement(PastelAdvancements.Unlocks.Food.TRIFLES);
+
+            return topping == Items.AIR ? base : base.key('T', topping);
         }
 
         private static void generateCompactingPairWithGroup(RecipeOutput ctx, @Nullable String group, String subpath, String unpackName, ResourceLocation unlock, DeferredItem<?> unpacked, DeferredBlock<?> packed) {

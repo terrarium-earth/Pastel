@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 2
+  },
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "E": {
+      "tag": "c:eggs"
+    },
+    "J": {
+      "item": "pastel:jaramel"
+    },
+    "M": {
+      "tag": "c:buckets/milk"
+    },
+    "T": {
+      "item": "minecraft:ghast_tear"
+    }
+  },
+  "pattern": [
+    "JTJ",
+    "EME",
+    "AAA"
+  ],
+  "required_advancement": "pastel:unlocks/food/tarts",
+  "result": {
+    "count": 1,
+    "id": "pastel:salted_jaramel_tart"
+  },
+  "secret": true,
+  "time": 160
+}
