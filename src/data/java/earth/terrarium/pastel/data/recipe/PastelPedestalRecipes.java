@@ -1045,12 +1045,14 @@ public class PastelPedestalRecipes {
 
     private static class SimpleRecipes {
         static void generate(RecipeOutput ctx) {
-            generateColoredSporeBlossoms(ctx);
-            generateVanilla(ctx);
-            generateRoot(ctx);
+            var rootHelper = rootPrefixHelper(ctx, PedestalTier.SIMPLE);
+
+            generateColoredSporeBlossoms(rootHelper.subPrefix("colored_spore_blossoms"));
+            generateVanilla(rootHelper.subPrefix("vanilla"));
+            generateRoot(rootHelper);
         }
 
-        private static void generateColoredSporeBlossoms(RecipeOutput ctx) {
+        private static void generateColoredSporeBlossoms(PrefixHelper pfx) {
             PastelInkColorCollection.VALUES.forEach(color -> {
                 var name = PastelInkColorCollection.NAMES.pick(color);
                 var tier = MINIMUM_COLOR_TIER.pick(color).withMinimumTier(PedestalTier.SIMPLE);
@@ -1058,9 +1060,8 @@ public class PastelPedestalRecipes {
                 var pigment = PIGMENTS.pick(color);
                 var coloredSporeBlossom = PastelBlocks.COLORED_SPORE_BLOSSOMS.pick(color);
                 var mix = POWDER_MIXES_6.pick(color);
-                generateSimpleRecipe(
-                        ctx,
-                        "colored_spore_blossoms/" + name,
+                pfx.generateRecipe(
+                        name,
                         new ShapedPedestalRecipeBuilder(new ItemStack(coloredSporeBlossom, 1))
                                 .group("colored_spore_blossoms")
                                 .craftingTime(80)
@@ -1077,10 +1078,8 @@ public class PastelPedestalRecipes {
             });
         }
 
-        private static void generateVanilla(RecipeOutput ctx) {
-            generateSimpleRecipe(
-                    ctx,
-                    "vanilla/bell",
+        private static void generateVanilla(PrefixHelper pfx) {
+            pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.BELL, 1))
                             .craftingTime(120)
                             .tier(PedestalTier.SIMPLE)
@@ -1094,9 +1093,7 @@ public class PastelPedestalRecipes {
                             .requiredAdvancement(PastelAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE)
             );
 
-            generateSimpleRecipe(
-                    ctx,
-                    "vanilla/name_tag",
+            pfx.generateAutoNamedRecipe(
                     new ShapelessPedestalRecipeBuilder(new ItemStack(Items.NAME_TAG, 1))
                             .craftingTime(120)
                             .tier(PedestalTier.SIMPLE)
@@ -1112,36 +1109,33 @@ public class PastelPedestalRecipes {
         }
 
         // TODO
-        private static void generateRoot(RecipeOutput ctx) {
+        private static void generateRoot(PrefixHelper pfx) {
 
-        }
-
-        private static void generateSimpleRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
-            generatePedestalRecipeWithSavedTier(ctx, id, PedestalTier.SIMPLE, builder);
         }
     }
 
     private static class AdvancedRecipes {
         static void generate(RecipeOutput ctx) {
-            generateChimes(ctx);
-            generateGlowblocks(ctx);
-            generateIdols(ctx);
-            generatePastelNetwork(ctx);
-            generateSemiPermeableGlasses(ctx);
-            generateTrinkets(ctx);
-            generateRoot(ctx);
+            var rootHelper = rootPrefixHelper(ctx, PedestalTier.ADVANCED);
+
+            generateChimes(rootHelper.subPrefix("gemstone_chimes"));
+            generateGlowblocks(rootHelper.subPrefix("glowblocks"));
+            generateIdols(rootHelper.subPrefix("idols"));
+            generatePastelNetwork(rootHelper.subPrefix("pastel_network"));
+            generateSemiPermeableGlasses(rootHelper.subPrefix("semi_permeable_glass"));
+            generateTrinkets(rootHelper.subPrefix("trinkets"));
+            generateRoot(rootHelper);
         }
 
-        private static void generateChimes(RecipeOutput ctx) {
+        private static void generateChimes(PrefixHelper pfx) {
             PastelGemstoneColorCollection.VALUES.forEach(color -> {
                 var shard = GEMSTONE_SHARDS.pick(color);
                 var chime = PastelBlocks.CHIMES.pick(color);
                 var name = PastelGemstoneColorCollection.GEMSTONE_NAMES.pick(color);
                 var unlock = PastelAdvancements.Unlocks.GemstoneChimes.VALUES.pick(color);
                 var tier = PastelGemstoneColorCollection.MINIMUM_TIER.pick(color).withMinimumTier(PedestalTier.ADVANCED);
-                generateAdvancedRecipe(
-                        ctx,
-                        "gemstone_chimes/" + name,
+                pfx.generateRecipe(
+                        name,
                         new ShapedPedestalRecipeBuilder(new ItemStack(chime, 1))
                                 .group("gemstone_chimes")
                                 .craftingTime(60)
@@ -1161,7 +1155,7 @@ public class PastelPedestalRecipes {
             });
         }
 
-        private static void generateGlowblocks(RecipeOutput ctx) {
+        private static void generateGlowblocks(PrefixHelper pfx) {
             PastelInkColorCollection.VALUES.forEach(color -> {
                 var pigment = PIGMENTS.pick(color);
                 var glowBlock = PastelBlocks.GLOWBLOCKS.pick(color);
@@ -1169,9 +1163,9 @@ public class PastelPedestalRecipes {
                 var mix = POWDER_MIXES_6.pick(color);
                 var tier = MINIMUM_COLOR_TIER.pick(color).withMinimumTier(PedestalTier.ADVANCED);
                 var name = PastelInkColorCollection.NAMES.pick(color);
-                generateAdvancedRecipe(
-                        ctx,
-                        "glowblocks/" + name,
+
+                pfx.generateRecipe(
+                        name,
                         new ShapedPedestalRecipeBuilder(new ItemStack(glowBlock, 4))
                                 .group("glowblocks")
                                 .craftingTime(200)
@@ -1189,36 +1183,32 @@ public class PastelPedestalRecipes {
         }
 
         // TODO
-        private static void generateIdols(RecipeOutput ctx) {
+        private static void generateIdols(PrefixHelper pfx) {
 
         }
 
         // TODO
-        private static void generatePastelNetwork(RecipeOutput ctx) {
+        private static void generatePastelNetwork(PrefixHelper pfx) {
 
         }
 
-        private static void generateSemiPermeableGlasses(RecipeOutput ctx) {
-            generateAdvancedRecipe(
-                    ctx,
-                    "semi_permeable_glass/glass",
-
+        private static void generateSemiPermeableGlasses(PrefixHelper pfx) {
+            pfx.generateRecipe(
+                    "glass",
                     sharedSemiPermeableGlass(Items.GLASS, Items.GLASS, PastelBlocks.SEMI_PERMEABLE_GLASS)
                             .powderInput(PastelGemstoneColor.CYAN, 1)
                             .powderInput(PastelGemstoneColor.MAGENTA, 1)
                             .powderInput(PastelGemstoneColor.YELLOW, 1)
             );
 
-            generateAdvancedRecipe(
-                    ctx,
-                    "semi_permeable_glass/tinted",
+            pfx.generateRecipe(
+                    "tinted",
                     sharedSemiPermeableGlass(ONYX_SHARD.asItem(), Items.TINTED_GLASS, PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS)
                             .powderInput(PastelGemstoneColor.BLACK, 2)
             );
 
-            generateAdvancedRecipe(
-                    ctx,
-                    "semi_permeable_glass/radiant",
+            pfx.generateRecipe(
+                    "radiant",
                     sharedSemiPermeableGlass(SHIMMERSTONE_GEM.asItem(), Items.GLASS, PastelBlocks.RADIANT_SEMI_PERMEABLE_GLASS)
                             .powderInput(PastelGemstoneColor.MAGENTA, 4)
                             .powderInput(PastelGemstoneColor.YELLOW, 2)
@@ -1234,9 +1224,8 @@ public class PastelPedestalRecipes {
                                : PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE;
                var shard = GEMSTONE_SHARDS.pick(color).value();
                var name = PastelGemstoneColorCollection.GEMSTONE_NAMES.pick(color);
-               generateAdvancedRecipe(
-                       ctx,
-                       "semi_permeable_glass/" + name,
+               pfx.generateRecipe(
+                       name,
                        sharedSemiPermeableGlass(shard, Items.GLASS, result)
                                .powderInput(color, 8)
                                .tier(tier)
@@ -1246,12 +1235,12 @@ public class PastelPedestalRecipes {
         }
 
         // TODO
-        private static void generateTrinkets(RecipeOutput ctx) {
+        private static void generateTrinkets(PrefixHelper pfx) {
 
         }
 
         // TODO
-        private static void generateRoot(RecipeOutput ctx) {
+        private static void generateRoot(PrefixHelper pfx) {
 
         }
 
@@ -1270,21 +1259,18 @@ public class PastelPedestalRecipes {
                     .requiredAdvancement(PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE);
         }
 
-        private static void generateAdvancedRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
-            generatePedestalRecipeWithSavedTier(ctx, id, PedestalTier.ADVANCED, builder);
-        }
     }
 
     private static class ComplexRecipes {
         static void generate(RecipeOutput ctx) {
-            generateVanilla(ctx);
-            generateRoot(ctx);
+            var rootHelper = rootPrefixHelper(ctx, PedestalTier.COMPLEX);
+
+            generateVanilla(rootHelper.subPrefix("vanilla"));
+            generateRoot(rootHelper);
         }
 
-        private static void generateVanilla(RecipeOutput ctx) {
-            generateComplexRecipe(
-                    ctx,
-                    "vanilla/elytra",
+        private static void generateVanilla(PrefixHelper pfx) {
+            pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.ELYTRA))
                             .craftingTime(1200)
                             .tier(PedestalTier.COMPLEX)
@@ -1303,9 +1289,7 @@ public class PastelPedestalRecipes {
 
             // "Heavy core is, in fact, another name for my ass" - Azzyy
             // ^ these need to be preserved SOMEHOW
-            generateComplexRecipe(
-                    ctx,
-                    "vanilla/heavy_core",
+            pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.HEAVY_CORE))
                             .craftingTime(1200)
                             .tier(PedestalTier.COMPLEX)
@@ -1321,9 +1305,7 @@ public class PastelPedestalRecipes {
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.HEAVY_CORE)
             );
 
-            generateComplexRecipe(
-                    ctx,
-                    "vanilla/trident",
+            pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.TRIDENT))
                             .craftingTime(1200)
                             .tier(PedestalTier.COMPLEX)
@@ -1342,14 +1324,11 @@ public class PastelPedestalRecipes {
         }
 
         // TODO
-        private static void generateRoot(RecipeOutput ctx) {
+        private static void generateRoot(PrefixHelper pfx) {
 
         }
 
 
-        private static void generateComplexRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
-            generatePedestalRecipeWithSavedTier(ctx, id, PedestalTier.COMPLEX, builder);
-        }
     }
 
 
