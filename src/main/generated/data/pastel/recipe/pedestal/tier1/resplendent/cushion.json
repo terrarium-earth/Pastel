@@ -1,0 +1,20 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "group": "resplendent_decorations",
+  "key": {
+    "F": {
+      "item": "pastel:resplendent_feather"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "FFF"
+  ],
+  "required_advancement": "pastel:pluck_resplendent_feather",
+  "result": {
+    "count": 1,
+    "id": "pastel:resplendent_cushion"
+  },
+  "time": 40
+}

@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 1
+  },
+  "experience": 0.5,
+  "group": "shimmerstone_lights",
+  "key": {
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    },
+    "T": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "TST",
+    "SSS",
+    "TST"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/shimmerstone_lights",
+  "result": {
+    "count": 4,
+    "id": "pastel:basalt_shimmerstone_light"
+  },
+  "time": 80
+}

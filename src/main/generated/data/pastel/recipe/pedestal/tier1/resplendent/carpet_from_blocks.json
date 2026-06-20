@@ -1,0 +1,19 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "group": "resplendent_decorations",
+  "key": {
+    "B": {
+      "item": "pastel:resplendent_block"
+    }
+  },
+  "pattern": [
+    "BB"
+  ],
+  "required_advancement": "pastel:pluck_resplendent_feather",
+  "result": {
+    "count": 4,
+    "id": "pastel:resplendent_carpet"
+  },
+  "time": 40
+}

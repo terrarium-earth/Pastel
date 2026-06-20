@@ -1,22 +1,19 @@
 package earth.terrarium.pastel.data.recipe;
 
-import com.mojang.datafixers.util.Pair;
-import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
+import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.items.tools.MoltenRodItem;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
-import earth.terrarium.pastel.recipe.pedestal.builder.PedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapedPedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapelessPedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.dynamic.StarCandyRecipe;
@@ -24,8 +21,6 @@ import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentPredicate;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -34,27 +29,19 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static earth.terrarium.pastel.registries.PastelItems.*;
 
 public class PastelPedestalRecipes {
-    private static void generateRecipe(RecipeOutput ctx, String id, Recipe<?> recipe) {
-        ctx.accept(PastelCommon.locate(id), recipe, null);
-    }
-
-    private static void generateRecipeFromBuilder(RecipeOutput ctx, String id, RecipeBuilder builder) {
-        builder.save(ctx, PastelCommon.locate(id));
-    }
 
     private static final PastelGemstoneColorCollection<ResourceLocation> BASE_SHARD_UNLOCKS =
             new PastelGemstoneColorCollection<>(
@@ -83,8 +70,8 @@ public class PastelPedestalRecipes {
     private static Map<GemstoneColor, Integer> getPowderMix(InkColor color, int total) {
         return InkColorMixes.getColorsToMix(color).map(it ->
                 it.entrySet().stream().map(entry ->
-                        new Pair<>(unsafeGemstoneColorFromInkColor(entry.getKey()), (int)(entry.getValue() * total))
-                ).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond))
+                        Map.entry(unsafeGemstoneColorFromInkColor(entry.getKey()), (int)(entry.getValue() * total))
+                ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
         ).orElseGet(() -> Map.of(unsafeGemstoneColorFromInkColor(color), total));
     }
 
@@ -120,49 +107,8 @@ public class PastelPedestalRecipes {
         };
     }
 
-    private static void generatePedestalRecipeWithSavedTier(
-            RecipeOutput ctx,
-            String id,
-            PedestalTier tier,
-            PedestalRecipeBuilder<?> builder
-    ) {
-        String tierId = tierIdOf(tier);
-        generateRecipeFromBuilder(
-                ctx,
-                "pedestal/" + tierId + "/" + id,
-                builder
-        );
-    }
 
-    private static void generateDynamicPedestalRecipe(
-            RecipeOutput ctx,
-            String id,
-            PedestalRecipe recipe
-    ) {
-        generateDynamicPedestalRecipeWithSavedTier(ctx, id, recipe.getTier(), recipe);
-    }
 
-    private static void generateDynamicPedestalRecipeWithSavedTier(
-            RecipeOutput ctx,
-            String id,
-            PedestalTier tier,
-            PedestalRecipe recipe
-    ) {
-        generateRecipe(
-                ctx,
-                "pedestal/" + tierIdOf(tier) + "/" + id,
-                recipe
-        );
-    }
-
-    private static void generatePedestalRecipe(
-            RecipeOutput ctx,
-            String id,
-            PedestalRecipeBuilder<?> builder
-    ) {
-        Objects.requireNonNull(builder.getTier(), "tier must not be null when saving recipes!");
-        generatePedestalRecipeWithSavedTier(ctx, id, builder.getTier(), builder);
-    }
 
     // Enchantments requires threading through a holder lookup
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
@@ -189,7 +135,7 @@ public class PastelPedestalRecipes {
             generateCushionRecipes(rootHelper.subPrefix("cushions"));
             generateDetectorRecipes(rootHelper.subPrefix("detectors"));
             generateDragonboneRecipes(rootHelper.subPrefix("dragonbone"));
-            generateFoodRecipes(rootHelper.subPrefix("food"));
+            generateFoodRecipes(rootHelper.subPrefix("food"), lookup);
             generateGemstoneLightRecipes(rootHelper.subPrefix("gemstone_lights"));
             generateBasicGlasses(rootHelper.subPrefix("glass"));
             generateJadeiteRecipes(rootHelper.subPrefix("jadeite"));
@@ -244,8 +190,6 @@ public class PastelPedestalRecipes {
                 generateCompactingPair(pfx, unlock, unpacked, packed);
             }
 
-            // NOTE: Any integration recipes aren't datagenned due to me not knowing how to add the conditions field
-            // These have been moved to `recipe/mod_integration/(mod)/pedestal/compacting`
 
             generateCompactingPair(pfx, PastelAdvancements.Midgame.COLLECT_AZURITE, PURE_AZURITE, PastelBlocks.AZURITE_BLOCK);
             generateCompactingPair(pfx, "bedrock_dust_block_uncrafting", PastelAdvancements.Midgame.BREAK_DECAYED_BEDROCK, BEDROCK_DUST, PastelBlocks.BEDROCK_DUST_BLOCK);
@@ -272,6 +216,17 @@ public class PastelPedestalRecipes {
             generateCompactingPair(pfx, PastelAdvancements.Hidden.COLLECT_STARDUST, STARDUST, PastelBlocks.STARDUST_BLOCK);
             generateCompactingPair(pfx, PastelAdvancements.Midgame.CARRY_TOO_MANY_HEAVY_GRAVITY_BLOCKS, STRATINE_FRAGMENTS, PastelBlocks.STRATINE_FLOATBLOCK);
             generateCompactingPair(pfx, PastelAdvancements.COLLECT_VEGETAL, VEGETAL, PastelBlocks.VEGETAL_BLOCK);
+
+            // CREATE INTEGRATION
+
+            var createPfx = pfx.modIntegration("create");
+            generateCompactingPair(
+                    createPfx,
+                    PastelAdvancements.Lategame.COLLECT_PURE_RESOURCE,
+                    CreateCompat.PURE_ZINC,
+                    CreateCompat.PURE_ZINC_BLOCK
+            );
+
         }
 
         private static void generateCrystalArmorRecipes(PrefixHelper pfx) {
@@ -450,7 +405,7 @@ public class PastelPedestalRecipes {
             );
         }
 
-        private static void generateFoodRecipes(PrefixHelper prefixHelper) {
+        private static void generateFoodRecipes(PrefixHelper prefixHelper, HolderLookup.Provider lookup) {
 
             // Tarts
             prefixHelper.generateAutoNamedRecipe(
@@ -838,7 +793,7 @@ public class PastelPedestalRecipes {
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.WYRMSCALE_JELLY)
             );
 
-            prefixHelper.generateDynamicRecipe("star_candy", new StarCandyRecipe());
+            prefixHelper.generateAutoNamedDynamicRecipe(lookup, new StarCandyRecipe());
         }
 
         private static void generateGemstoneLightRecipes(PrefixHelper pfx) {
@@ -1013,8 +968,88 @@ public class PastelPedestalRecipes {
             });
         }
 
-        // TODO
         private static void generateResplendentRecipes(PrefixHelper pfx) {
+            var block = PastelBlocks.RESPLENDENT_BLOCK;
+            var unlock = PastelAdvancements.PLUCK_RESPLENDENT_FEATHER;
+            var group = "resplendent_decorations";
+
+            pfx.generateRecipe(
+                    "bed",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.RESPLENDENT_BED.asItem()))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .pattern("FFF")
+                            .pattern("###")
+                            .key('F', block.asItem())
+                            .key('#', ItemTags.PLANKS)
+                            .requiredAdvancement(unlock)
+            );
+
+            pfx.generateRecipe(
+                    "block",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(block.asItem()))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("GG")
+                            .pattern("GG")
+                            .key('G', RESPLENDENT_FEATHER.asItem())
+                            .requiredAdvancement(unlock)
+                            .ignoreYieldUpgrades(true)
+            );
+
+            pfx.generateRecipe(
+                    "feathers_from_block",
+                    new ShapelessPedestalRecipeBuilder(new ItemStack(RESPLENDENT_FEATHER.asItem(), 4))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .ingredient(block.asItem())
+                            .requiredAdvancement(unlock)
+                            .ignoreYieldUpgrades(true)
+            );
+
+            pfx.generateRecipe(
+                    "carpet_from_blocks",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.RESPLENDENT_CARPET.asItem(), 4))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("BB")
+                            .key('B', block.asItem())
+                            .requiredAdvancement(unlock)
+            );
+
+            pfx.generateRecipe(
+                    "carpet_from_feathers",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.RESPLENDENT_CARPET.asItem(), 1))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("FF")
+                            .key('F', RESPLENDENT_FEATHER.asItem())
+                            .requiredAdvancement(unlock)
+            );
+
+            pfx.generateRecipe(
+                    "cushion",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.RESPLENDENT_CUSHION.asItem()))
+                            .group(group)
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.0f)
+                            .pattern("FFF")
+                            .pattern("FFF")
+                            .key('F', RESPLENDENT_FEATHER.asItem())
+                            .requiredAdvancement(unlock)
+            );
+
 
         }
 
@@ -1027,12 +1062,26 @@ public class PastelPedestalRecipes {
             PastelInkColorCollection.VALUES.forEach(color -> generateSapling(pfx, color));
         }
 
-        // TODO
         private static void generateShimmerstoneLightRecipes(PrefixHelper pfx) {
+            var defaultUnlock = PastelAdvancements.Unlocks.Blocks.SHIMMERSTONE_LIGHTS;
+
+            generateShimmerstoneLight(pfx, PastelBlocks.ANDESITE_SHIMMERSTONE_LIGHT, Items.POLISHED_ANDESITE, defaultUnlock);
+            generateShimmerstoneLight(pfx, PastelBlocks.BASALT_SHIMMERSTONE_LIGHT, PastelBlocks.POLISHED_BASALT.asItem(), defaultUnlock);
+            generateShimmerstoneLight(pfx, PastelBlocks.CALCITE_SHIMMERSTONE_LIGHT, PastelBlocks.POLISHED_CALCITE.asItem(), defaultUnlock);
+            generateShimmerstoneLight(pfx, PastelBlocks.DEEPSLATE_SHIMMERSTONE_LIGHT, Items.POLISHED_DEEPSLATE, defaultUnlock);
+            generateShimmerstoneLight(pfx, PastelBlocks.DIORITE_SHIMMERSTONE_LIGHT, Items.POLISHED_DIORITE, defaultUnlock);
+            generateShimmerstoneLight(pfx, PastelBlocks.GRANITE_SHIMMERSTONE_LIGHT, Items.POLISHED_GRANITE, defaultUnlock);
+            generateShimmerstoneLight(pfx, PastelBlocks.STONE_SHIMMERSTONE_LIGHT, Items.SMOOTH_STONE, defaultUnlock);
+
+            generateShimmerstoneLight(
+                    pfx,
+                    PastelBlocks.BLACKSLAG_SHIMMERSTONE_LIGHT,
+                    PastelBlocks.POLISHED_BLACKSLAG.asItem(),
+                    PastelAdvancements.Unlocks.Blocks.BLACKSLAG_SHIMMERSTONE_LIGHT
+            );
 
         }
 
-        // TODO
         private static void generateToolRecipes(PrefixHelper pfx, HolderLookup.Provider lookup) {
             // Actually this is a _benefit_ of datagen, no need to copy everything
             pfx.generateAutoNamedRecipe(
@@ -1211,15 +1260,26 @@ public class PastelPedestalRecipes {
 
         // basic generation utilities
 
-        private static void generateBasicRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
-            generatePedestalRecipeWithSavedTier(
-                    ctx,
-                    id,
-                    PedestalTier.BASIC,
-                    builder
+
+        private static void generateShimmerstoneLight(PrefixHelper pfx, DeferredBlock<?> result, Item stone, ResourceLocation unlock) {
+            var name = result.getId().getPath().replace("_shimmerstone_light", "");
+
+            pfx.generateRecipe(
+                    name,
+                    new ShapedPedestalRecipeBuilder(new ItemStack(result.asItem(), 4))
+                            .group("shimmerstone_lights")
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .powderInput(PastelGemstoneColor.YELLOW, 1)
+                            .experience(0.5f)
+                            .pattern("TST")
+                            .pattern("SSS")
+                            .pattern("TST")
+                            .key('S', SHIMMERSTONE_GEM.asItem())
+                            .key('T', stone)
+                            .requiredAdvancement(unlock)
             );
         }
-
 
         private static IngredientStack infusedBeverageIngredient(InfusedBeverageComponent component) {
             return new IngredientStack(

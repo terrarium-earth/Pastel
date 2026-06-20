@@ -46,4 +46,10 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
         this.conditions.add(condition);
         return self();
     }
+
+    public C neoConditions(ICondition... conditions) {
+        this.conditions.addAll(Arrays.stream(conditions).toList());
+        return self();
+    }
+
 }
