@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.5,
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "T": {
+      "item": "minecraft:tuff"
+    }
+  },
+  "pattern": [
+    " L ",
+    "L L",
+    "T T"
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/fanciful_gloves",
+  "result": {
+    "count": 1,
+    "id": "pastel:fanciful_gloves"
+  },
+  "tier": "advanced"
+}

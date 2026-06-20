@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.5,
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    " L ",
+    "L L",
+    "GL "
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/fanciful_belt",
+  "result": {
+    "count": 1,
+    "id": "pastel:fanciful_belt"
+  },
+  "tier": "advanced"
+}

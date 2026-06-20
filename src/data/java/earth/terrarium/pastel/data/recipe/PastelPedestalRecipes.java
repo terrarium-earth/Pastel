@@ -2424,9 +2424,70 @@ public class PastelPedestalRecipes {
             });
         }
 
-        // TODO
         private static void generateTrinkets(PrefixHelper pfx) {
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(FANCIFUL_BELT.asItem()))
+                            .craftingTime(200)
+                            .advanced()
+                            .experience(0.5f)
+                            .pattern(" L ")
+                            .pattern("L L")
+                            .pattern("GL ")
+                            .key('L', Items.LEATHER)
+                            .key('G', Items.GOLD_INGOT)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_BELT)
+            );
 
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(FANCIFUL_CIRCLET.asItem()))
+                            .craftingTime(200)
+                            .advanced()
+                            .experience(0.5f)
+                            .pattern(" L ")
+                            .pattern("L L")
+                            .pattern("QL ")
+                            .key('L', Items.TUFF)
+                            .key('Q', Items.QUARTZ)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_CIRCLET)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(FANCIFUL_GLOVES.asItem()))
+                            .craftingTime(200)
+                            .advanced()
+                            .experience(0.5f)
+                            .pattern(" L ")
+                            .pattern("L L")
+                            .pattern("T T")
+                            .key('T', Items.TUFF)
+                            .key('L', Items.LEATHER)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_GLOVES)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(FANCIFUL_PENDANT.asItem()))
+                            .craftingTime(200)
+                            .advanced()
+                            .experience(0.5f)
+                            .pattern(" G ")
+                            .pattern("G G")
+                            .pattern("LG ")
+                            .key('G', Items.GOLD_INGOT)
+                            .key('L', Items.LAPIS_LAZULI)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_PENDANT)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(FANCIFUL_TUFF_RING.asItem()))
+                            .craftingTime(200)
+                            .advanced()
+                            .experience(0.5f)
+                            .pattern(" L ")
+                            .pattern("L L")
+                            .pattern(" L ")
+                            .key('L', Items.TUFF)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_TUFF_RING)
+            );
         }
 
         // TODO: Everything else LOL
@@ -2586,7 +2647,6 @@ public class PastelPedestalRecipes {
             );
         }
 
-        // TODO
         private static void generateRoot(PrefixHelper pfx) {
             pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(new ItemStack(PALTAERIA_GEM.asItem()))
