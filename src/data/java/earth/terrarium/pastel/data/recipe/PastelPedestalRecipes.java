@@ -18,6 +18,8 @@ import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapedPedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapelessPedestalRecipeBuilder;
+import earth.terrarium.pastel.recipe.pedestal.dynamic.EnderCanvasLargeRecipe;
+import earth.terrarium.pastel.recipe.pedestal.dynamic.EnderCanvasRecipe;
 import earth.terrarium.pastel.recipe.pedestal.dynamic.StarCandyRecipe;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
@@ -2429,7 +2431,8 @@ public class PastelPedestalRecipes {
 
         // TODO
         private static void generateRoot(PrefixHelper pfx) {
-
+            pfx.generateDynamicRecipe("ender_canvas", new EnderCanvasRecipe());
+            pfx.generateDynamicRecipe("ender_canvas_large", new EnderCanvasLargeRecipe());
         }
 
         private static ShapedPedestalRecipeBuilder sharedSemiPermeableGlass(Item center, Item glass, DeferredBlock<?> result) {
