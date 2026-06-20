@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "group": "weeping_gala_deco",
+  "key": {
+    "G": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "pastel:weeping_gala_planks"
+    },
+    "X": {
+      "item": "pastel:shimmerstone_block"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "GXG",
+    "SSS"
+  ],
+  "required_advancement": "pastel:hidden/collect_weeping_gala",
+  "result": {
+    "count": 2,
+    "id": "pastel:weeping_gala_lamp"
+  },
+  "time": 80
+}

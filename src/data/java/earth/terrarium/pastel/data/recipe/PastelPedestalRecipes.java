@@ -1038,9 +1038,93 @@ public class PastelPedestalRecipes {
 
         }
 
-        // TODO
         private static void generateWeepingGalaRecipes(PrefixHelper pfx) {
+            final var unlock = PastelAdvancements.Hidden.COLLECT_WEEPING_GALA;
+            final var group = "weeping_gala_deco";
 
+            generateAmphora(
+                    pfx,
+                    Items.IRON_INGOT,
+                    "amphora",
+                    group,
+                    unlock,
+                    PastelBlocks.WEEPING_GALA_PLANKS,
+                    PastelBlocks.WEEPING_GALA_SLAB,
+                    PastelBlocks.WEEPING_GALA_AMPHORA
+            );
+
+            pfx.generateRecipe(
+                    "barrel",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.WEEPING_GALA_BARREL.asItem()))
+                            .group(group)
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("PSP")
+                            .pattern("P P")
+                            .pattern("PSP")
+                            .key('S', PastelBlocks.WEEPING_GALA_SLAB.asItem())
+                            .key('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
+                            .requiredAdvancement(unlock)
+            );
+
+            pfx.generateRecipe(
+                    "lamp",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.WEEPING_GALA_LAMP.asItem(), 2))
+                            .group(group)
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .pattern("SSS")
+                            .pattern("GXG")
+                            .pattern("SSS")
+                            .key('S', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
+                            .key('G', Items.REDSTONE)
+                            .key('X', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
+                            .requiredAdvancement(unlock)
+            );
+
+            pfx.generateRecipe(
+                    "lantern",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.WEEPING_GALA_LANTERN))
+                            .group(group)
+                            .craftingTime(240)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .pattern("S")
+                            .pattern("P")
+                            .key('S', SHIMMERSTONE_GEM.asItem())
+                            .key('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
+                            .requiredAdvancement(unlock)
+            );
+
+            pfx.generateRecipe(
+                    "light",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.WEEPING_GALA_LIGHT, 4))
+                            .group(group)
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .pattern("PPP")
+                            .pattern("SSS")
+                            .pattern("PPP")
+                            .key('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
+                            .key('S', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
+                            .requiredAdvancement(unlock)
+            );
+
+            pfx.generateRecipe(
+                    "pillar",
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.WEEPING_GALA_PILLAR, 2))
+                            .group(group)
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .pattern("#")
+                            .pattern("#")
+                            .key('#', PastelItemTags.WEEPING_GALA_LOGS)
+                            .requiredAdvancement(unlock)
+            );
         }
 
         // TODO
@@ -1376,6 +1460,34 @@ public class PastelPedestalRecipes {
             );
         }
 
+        private static void generateAmphora(
+                PrefixHelper pfx,
+                Item ingot,
+                String name,
+                String group,
+                ResourceLocation unlock,
+                DeferredBlock<?> planks,
+                DeferredBlock<?> slab,
+                DeferredBlock<?> amphora
+        ) {
+            pfx.generateRecipe(
+                    name,
+                    new ShapedPedestalRecipeBuilder(new ItemStack(amphora.asItem()))
+                            .group(group)
+                            .craftingTime(240)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("SAS")
+                            .pattern("I I")
+                            .pattern("PSP")
+                            .key('S', slab.asItem())
+                            .key('P', planks.asItem())
+                            .key('I', ingot)
+                            .key('A', Items.PAPER)
+                            .requiredAdvancement(unlock)
+            );
+        }
+
         private static void generateNoxwoodFamily(
                 PrefixHelper pfx,
                 Item ingot,
@@ -1392,21 +1504,18 @@ public class PastelPedestalRecipes {
                 DeferredBlock<?> pillar
 
                 ) {
-            pfx.generateRecipe(
-                    amphora.getId().getPath().replace("_noxwood", ""),
-                    new ShapedPedestalRecipeBuilder(new ItemStack(amphora.asItem()))
-                            .group("noxwood_amphoras")
-                            .craftingTime(240)
-                            .tier(PedestalTier.BASIC)
-                            .experience(1.0f)
-                            .pattern("SAS")
-                            .pattern("I I")
-                            .pattern("PSP")
-                            .key('S', slab.asItem())
-                            .key('P', planks.asItem())
-                            .key('I', ingot)
-                            .key('A', Items.PAPER)
-                            .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
+
+            String familyName = amphora.getId().getPath().replace("_noxwood_amphora", "");
+
+            generateAmphora(
+                    pfx,
+                    ingot,
+                   familyName + "_amphora",
+                    "noxwood_amphoras",
+                    PastelAdvancements.Lategame.COLLECT_NOXWOOD,
+                    planks,
+                    slab,
+                    amphora
             );
 
             pfx.generateRecipe(
