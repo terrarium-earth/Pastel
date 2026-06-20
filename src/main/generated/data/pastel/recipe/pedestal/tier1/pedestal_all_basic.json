@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "experience": 4.0,
+  "key": {
+    "C": {
+      "item": "pastel:topaz_shard"
+    },
+    "M": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "R": {
+      "item": "pastel:polished_calcite"
+    },
+    "Y": {
+      "item": "pastel:citrine_shard"
+    }
+  },
+  "pattern": [
+    "CMY",
+    "RRR"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/cmy_pedestal",
+  "result": {
+    "count": 1,
+    "id": "pastel:pedestal_all_basic"
+  }
+}

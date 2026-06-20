@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4
+  },
+  "experience": 0.5,
+  "key": {
+    "C": {
+      "tag": "pastel:colored_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "tag": "pastel:pigments"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "IPI",
+    "CCC"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel",
+  "result": {
+    "count": 1,
+    "id": "pastel:titration_barrel"
+  },
+  "time": 160
+}

@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:yellow": 2
+  },
+  "experience": 1.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "pastel:storm_stone"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "RSB",
+    "BBB"
+  ],
+  "required_advancement": "pastel:unlocks/redstone/block_detector",
+  "result": {
+    "count": 1,
+    "id": "pastel:block_detector"
+  }
+}

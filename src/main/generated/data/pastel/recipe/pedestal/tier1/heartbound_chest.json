@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 4
+  },
+  "experience": 1.0,
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "WGW",
+    "WWW"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/heartbound_chest",
+  "result": {
+    "count": 1,
+    "id": "pastel:heartbound_chest"
+  },
+  "time": 120
+}

@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "   ",
+    "SSS",
+    "P P"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/fusion_shrine",
+  "result": {
+    "count": 1,
+    "id": "pastel:tea_table"
+  },
+  "time": 240
+}

@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4
+  },
+  "experience": 0.5,
+  "key": {
+    "E": {
+      "item": "pastel:radiating_ender"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "pattern": [
+    " G ",
+    "GEG",
+    " G "
+  ],
+  "required_advancement": "pastel:unlocks/blocks/ender_glass",
+  "result": {
+    "count": 4,
+    "id": "pastel:ender_glass"
+  },
+  "time": 80
+}

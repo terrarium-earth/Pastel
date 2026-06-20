@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2
+  },
+  "experience": 1.0,
+  "key": {
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "C": {
+      "item": "minecraft:mud"
+    },
+    "D": {
+      "item": "minecraft:dirt"
+    },
+    "M": {
+      "item": "pastel:mermaids_gem"
+    }
+  },
+  "pattern": [
+    "DMD",
+    "CBC",
+    "DCD"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/humus",
+  "result": {
+    "count": 1,
+    "id": "pastel:humus_bucket"
+  },
+  "time": 240
+}

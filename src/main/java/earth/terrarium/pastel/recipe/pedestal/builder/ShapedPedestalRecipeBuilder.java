@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.*;
@@ -18,11 +19,6 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
 
     public ShapedPedestalRecipeBuilder(ItemStack result) {
         super(result);
-    }
-
-    @Override
-    public ShapedPedestalRecipeBuilder self() {
-        return this;
     }
 
     public ShapedPedestalRecipeBuilder pattern(String row) {
@@ -39,8 +35,8 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
         return this;
     }
 
-    public ShapedPedestalRecipeBuilder key(char key, Item item) {
-        return this.key(key, IngredientStack.ofItems(item));
+    public ShapedPedestalRecipeBuilder key(char key, ItemLike item) {
+        return this.key(key, IngredientStack.ofItems(item.asItem()));
     }
 
     public ShapedPedestalRecipeBuilder key(char key, TagKey<Item> tagKey) {

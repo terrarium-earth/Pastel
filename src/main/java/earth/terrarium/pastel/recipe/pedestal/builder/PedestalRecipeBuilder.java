@@ -2,6 +2,7 @@ package earth.terrarium.pastel.recipe.pedestal.builder;
 
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.recipe.builder.GatedRecipeBuilder;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.world.item.ItemStack;
 
@@ -36,6 +37,22 @@ public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> 
         return self();
     }
 
+    public C basic() {
+        return tier(PedestalTier.BASIC);
+    }
+
+    public C simple() {
+        return tier(PedestalTier.SIMPLE);
+    }
+
+    public C advanced() {
+        return tier(PedestalTier.ADVANCED);
+    }
+
+    public C complex() {
+        return tier(PedestalTier.COMPLEX);
+    }
+
     public C craftingTime(int craftingTime) {
         this.craftingTime = craftingTime;
         return self();
@@ -54,6 +71,26 @@ public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> 
     public C powderInput(GemstoneColor color, int amount) {
         this.powderInputs.put(color, amount);
         return self();
+    }
+
+    public C cyan(int cyan) {
+        return powderInput(PastelGemstoneColor.CYAN, cyan);
+    }
+
+    public C magenta(int magenta) {
+        return powderInput(PastelGemstoneColor.MAGENTA, magenta);
+    }
+
+    public C yellow(int yellow) {
+        return powderInput(PastelGemstoneColor.YELLOW, yellow);
+    }
+
+    public C black(int black) {
+        return powderInput(PastelGemstoneColor.BLACK, black);
+    }
+
+    public C white(int white) {
+        return powderInput(PastelGemstoneColor.WHITE, white);
     }
 
     public C replacePowderInputsWith(Map<GemstoneColor, Integer> colors) {

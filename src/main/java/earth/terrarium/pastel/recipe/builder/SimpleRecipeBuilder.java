@@ -23,7 +23,10 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
 
     // ??? Im a lobotimite who uses scala
     // If i was doing scala I'd just do `this.type`
-    protected abstract C self();
+    @SuppressWarnings("unchecked")
+    protected final C self() {
+        return (C)this;
+    }
 
     @Override
     public Item getResult() {

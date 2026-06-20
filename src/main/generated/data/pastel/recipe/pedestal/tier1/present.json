@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 1,
+    "pastel:yellow": 1
+  },
+  "experience": 1.0,
+  "key": {
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "PGP",
+    "PPP"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/present",
+  "result": {
+    "count": 1,
+    "id": "pastel:present"
+  }
+}

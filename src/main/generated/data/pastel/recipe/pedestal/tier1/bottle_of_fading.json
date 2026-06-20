@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:honey_bottle"
+    },
+    "C": {
+      "item": "minecraft:blaze_powder"
+    },
+    "F": {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "FSF",
+    "CBC",
+    "FSF"
+  ],
+  "required_advancement": "pastel:unlocks/items/bottle_of_fading",
+  "result": {
+    "count": 1,
+    "id": "pastel:bottle_of_fading"
+  },
+  "skip_recipe_remainders": true,
+  "time": 400
+}

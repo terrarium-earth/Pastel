@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:yellow": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:lava_bucket"
+    },
+    "C": {
+      "item": "minecraft:magma_cream"
+    },
+    "M": {
+      "item": "minecraft:magma_block"
+    }
+  },
+  "pattern": [
+    "CMC",
+    "MBM",
+    "CMC"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/lava_sponge",
+  "result": {
+    "count": 1,
+    "id": "pastel:lava_sponge"
+  },
+  "time": 800
+}

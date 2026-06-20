@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "R": {
+      "item": "minecraft:leather"
+    },
+    "S": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "pattern": [
+    "G G",
+    "SRS"
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/priscillent_spectacles",
+  "result": {
+    "count": 1,
+    "id": "pastel:priscillent_spectacles"
+  }
+}

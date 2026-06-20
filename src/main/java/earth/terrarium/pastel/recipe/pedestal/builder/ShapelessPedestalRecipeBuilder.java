@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.ArrayList;
@@ -22,16 +23,14 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
         super (result);
     }
 
-    @Override
-    public ShapelessPedestalRecipeBuilder self() { return this; }
 
     public ShapelessPedestalRecipeBuilder ingredient(IngredientStack stack) {
         ingredients.add(stack);
         return this;
     }
 
-    public ShapelessPedestalRecipeBuilder ingredient(Item item) {
-        return ingredient(IngredientStack.ofItems(item));
+    public ShapelessPedestalRecipeBuilder ingredient(ItemLike item) {
+        return ingredient(IngredientStack.ofItems(item.asItem()));
     }
 
     public ShapelessPedestalRecipeBuilder ingredient(TagKey<Item> tag) {
