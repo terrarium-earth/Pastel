@@ -2876,7 +2876,6 @@ public class PastelPedestalRecipes {
             );
         }
 
-        // TODO: Everything else LOL
         private static void generateRoot(PrefixHelper pfx) {
             pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(new ItemStack(ARTISANS_ATLAS.asItem()))
