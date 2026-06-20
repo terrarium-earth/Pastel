@@ -1,0 +1,38 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 4,
+    "pastel:yellow": 4
+  },
+  "experience": 6.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "pastel:cyan_pigment"
+    },
+    "M": {
+      "item": "pastel:magenta_pigment"
+    },
+    "P": {
+      "item": "pastel:polished_calcite"
+    },
+    "Y": {
+      "item": "pastel:yellow_pigment"
+    }
+  },
+  "pattern": [
+    "B B",
+    "CMY",
+    "PPP"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/color_picker",
+  "result": {
+    "count": 1,
+    "id": "pastel:color_picker"
+  },
+  "tier": "simple",
+  "time": 300
+}

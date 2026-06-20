@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 6,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "L": {
+      "item": "pastel:light_blue_pigment"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "T": {
+      "item": "pastel:stratine_fragments"
+    }
+  },
+  "pattern": [
+    " LT",
+    " SL",
+    "S  "
+  ],
+  "required_advancement": "pastel:unlocks/items/constructors_staff",
+  "result": {
+    "count": 1,
+    "id": "pastel:constructors_staff"
+  },
+  "tier": "simple",
+  "time": 1200
+}

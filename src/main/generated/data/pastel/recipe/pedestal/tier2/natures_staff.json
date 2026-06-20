@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 6,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "L": {
+      "item": "pastel:lime_pigment"
+    },
+    "M": {
+      "item": "minecraft:moss_block"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " LM",
+    " SL",
+    "S  "
+  ],
+  "required_advancement": "pastel:unlocks/items/natures_staff",
+  "result": {
+    "count": 1,
+    "id": "pastel:natures_staff"
+  },
+  "tier": "simple",
+  "time": 1200
+}

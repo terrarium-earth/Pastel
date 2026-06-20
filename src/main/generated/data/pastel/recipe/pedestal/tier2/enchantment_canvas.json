@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 8,
+    "pastel:magenta": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "A": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "B": {
+      "item": "minecraft:bamboo"
+    },
+    "P": {
+      "item": "pastel:purple_pigment"
+    }
+  },
+  "pattern": [
+    "PBP",
+    "BAB",
+    "PBP"
+  ],
+  "required_advancement": "pastel:unlocks/items/enchantment_canvas",
+  "result": {
+    "count": 1,
+    "id": "pastel:enchantment_canvas"
+  },
+  "tier": "simple",
+  "time": 40
+}

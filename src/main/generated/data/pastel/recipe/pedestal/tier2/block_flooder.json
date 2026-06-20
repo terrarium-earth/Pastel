@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 6,
+    "pastel:magenta": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "C": {
+      "item": "pastel:cyan_pigment"
+    },
+    "G": {
+      "item": "pastel:green_pigment"
+    },
+    "M": {
+      "item": "pastel:mermaids_gem"
+    }
+  },
+  "pattern": [
+    "GCG",
+    "CMC",
+    "GCG"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/block_flooder",
+  "result": {
+    "count": 4,
+    "id": "pastel:block_flooder"
+  },
+  "tier": "simple",
+  "time": 600
+}

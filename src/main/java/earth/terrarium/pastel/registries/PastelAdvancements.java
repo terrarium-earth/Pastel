@@ -578,6 +578,10 @@ public class PastelAdvancements {
                     "unlocks/items/exchanging_staff"
                 );
 
+            public static final ResourceLocation FLOWING_STAFF = PastelCommon.locate("unlocks/items/flowing_staff");
+
+            public static final ResourceLocation WIRE_HOOK = PastelCommon.locate("unlocks/items/wire_hook");
+
             public static final ResourceLocation CRAFTING_TABLET = PastelCommon.locate("unlocks/items/crafting_tablet");
 
             public static final ResourceLocation BAG_OF_HOLDING = PastelCommon.locate("unlocks/items/bag_of_holding");

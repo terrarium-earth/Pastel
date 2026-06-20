@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:yellow": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "tag": "c:storage_blocks/copper"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "G": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "CCG",
+    "CDC",
+    "BCC"
+  ],
+  "required_advancement": "pastel:unlocks/items/wire_hook",
+  "result": {
+    "count": 1,
+    "id": "pastel:wire_hook"
+  },
+  "tier": "simple",
+  "time": 1200
+}

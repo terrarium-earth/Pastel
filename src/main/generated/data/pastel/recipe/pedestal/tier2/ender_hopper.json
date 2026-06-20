@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "P": {
+      "item": "pastel:blue_pigment"
+    },
+    "S": {
+      "item": "pastel:radiating_ender"
+    }
+  },
+  "pattern": [
+    "BPB",
+    "BSB",
+    " B "
+  ],
+  "required_advancement": "pastel:unlocks/blocks/ender_blocks",
+  "result": {
+    "count": 1,
+    "id": "pastel:ender_hopper"
+  },
+  "tier": "simple",
+  "time": 1200
+}

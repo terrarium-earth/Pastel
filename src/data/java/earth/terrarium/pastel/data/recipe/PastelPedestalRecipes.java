@@ -1348,7 +1348,6 @@ public class PastelPedestalRecipes {
             );
         }
 
-        // TODO
         private static void generateRootRecipes(PrefixHelper pfx) {
             pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(new ItemStack(BAG_OF_HOLDING.asItem()))
@@ -2279,8 +2278,347 @@ public class PastelPedestalRecipes {
             );
         }
 
-        // TODO
         private static void generateRoot(PrefixHelper pfx) {
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(BLOCK_FLOODER.asItem(), 4))
+                            .craftingTime(600)
+                            .simple()
+                            .cyan(6)
+                            .magenta(2)
+                            .experience(2.0f)
+                            .pattern("GCG")
+                            .pattern("CMC")
+                            .pattern("GCG")
+                            .key('M', MERMAIDS_GEM)
+                            .key('C', CYAN_PIGMENT)
+                            .key('G', GREEN_PIGMENT)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.BLOCK_FLOODER)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.BOTTOMLESS_BUNDLE))
+                            .craftingTime(240)
+                            .simple()
+                            .cyan(8)
+                            .experience(2.0f)
+                            .pattern("QRQ")
+                            .pattern("RQR")
+                            .pattern("RRR")
+                            .key('Q', QUITOXIC_POWDER)
+                            .key('R', Items.RABBIT_HIDE)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.BOTTOMLESS_BUNDLE)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.COLOR_PICKER))
+                            .craftingTime(300)
+                            .simple()
+                            .cyan(4)
+                            .magenta(4)
+                            .yellow(4)
+                            .experience(6.0f)
+                            .pattern("B B")
+                            .pattern("CMY")
+                            .pattern("PPP")
+                            .key('C', CYAN_PIGMENT)
+                            .key('M', MAGENTA_PIGMENT)
+                            .key('Y', YELLOW_PIGMENT)
+                            .key('P', PastelBlocks.POLISHED_CALCITE)
+                            .key('B', PastelBlocks.POLISHED_BASALT)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.COLOR_PICKER)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(CONSTRUCTORS_STAFF.asItem()))
+                            .craftingTime(1200)
+                            .simple()
+                            .cyan(6)
+                            .yellow(2)
+                            .experience(2.0f)
+                            .pattern(" LT")
+                            .pattern(" SL")
+                            .pattern("S  ")
+                            .key('S', Items.STICK)
+                            .key('L', LIGHT_BLUE_PIGMENT)
+                            .key('T', STRATINE_FRAGMENTS)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.CONSTRUCTORS_STAFF)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(ENCHANTMENT_CANVAS.asItem()))
+                            .craftingTime(40)
+                            .simple()
+                            .cyan(8)
+                            .magenta(2)
+                            .experience(2.0f)
+                            .pattern("PBP")
+                            .pattern("BAB")
+                            .pattern("PBP")
+                            .key('A', Items.PHANTOM_MEMBRANE)
+                            .key('B', Items.BAMBOO)
+                            .key('P', PURPLE_PIGMENT)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.ENCHANTMENT_CANVAS)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.ENDER_DROPPER))
+                            .craftingTime(1200)
+                            .simple()
+                            .cyan(2)
+                            .magenta(4)
+                            .experience(2.0f)
+                            .pattern("BSB")
+                            .pattern("BPB")
+                            .pattern("BRB")
+                            .key('P', BLUE_PIGMENT)
+                            .key('S', PastelBlocks.RADIATING_ENDER)
+                            .key('B', Items.POLISHED_BLACKSTONE)
+                            .key('R', Items.REDSTONE)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.ENDER_BLOCKS)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.ENDER_HOPPER))
+                            .craftingTime(1200)
+                            .simple()
+                            .cyan(4)
+                            .magenta(2)
+                            .experience(2.0f)
+                            .pattern("BPB")
+                            .pattern("BSB")
+                            .pattern(" B ")
+                            .key('P', BLUE_PIGMENT)
+                            .key('S', PastelBlocks.RADIATING_ENDER)
+                            .key('B', Items.POLISHED_BLACKSTONE)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.ENDER_BLOCKS)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(FLOWING_STAFF.asItem()))
+                            .craftingTime(1200)
+                            .simple()
+                            .cyan(6)
+                            .yellow(2)
+                            .experience(2.0f)
+                            .pattern(" YP")
+                            .pattern(" SY")
+                            .pattern("S  ")
+                            .key('S', Items.STICK)
+                            .key('Y', YELLOW_PIGMENT)
+                            .key('P', PALTAERIA_FRAGMENTS)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.FLOWING_STAFF)
+            );
+
+            List.of(
+                    new Triplet<>(PastelBlocks.FUSION_SHRINE_BASALT, PastelBlocks.POLISHED_BASALT, PastelBlocks.POLISHED_CALCITE),
+                    new Triplet<>(PastelBlocks.FUSION_SHRINE_CALCITE, PastelBlocks.POLISHED_CALCITE, PastelBlocks.POLISHED_BASALT)
+            ).forEach(triplet -> {
+                var shrine = triplet.getA();
+                var primary = triplet.getB();
+                var secondary = triplet.getC();
+
+                pfx.generateAutoNamedRecipe(
+                        new ShapedPedestalRecipeBuilder(new ItemStack(shrine))
+                                .group("fusion_shrines")
+                                .craftingTime(600)
+                                .simple()
+                                .cyan(4)
+                                .magenta(4)
+                                .yellow(4)
+                                .experience(2.0f)
+                                .pattern("PCP")
+                                .pattern("SAS")
+                                .pattern("PTP")
+                                .key('T', PastelBlocks.POLISHED_TOPAZ_BLOCK)
+                                .key('A', PastelBlocks.POLISHED_AMETHYST_BLOCK)
+                                .key('C', PastelBlocks.POLISHED_CITRINE_BLOCK)
+                                .key('P', primary)
+                                .key('S', secondary)
+                                .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.FUSION_SHRINE)
+                                .ignoreYieldUpgrades(true)
+                );
+            });
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(INK_ASSORTMENT.asItem()))
+                            .craftingTime(600)
+                            .simple()
+                            .cyan(1)
+                            .magenta(1)
+                            .yellow(1)
+                            .experience(4.0f)
+                            .pattern("SCS")
+                            .pattern("PPP")
+                            .pattern("GGG")
+                            .key('P', PastelItemTags.PIGMENTS)
+                            .key('G', Items.GLASS)
+                            .key('C', PastelBlocks.FOUR_LEAF_CLOVER)
+                            .key('S', SHIMMERSTONE_GEM)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.INK_ASSORTMENT)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(INK_FLASK.asItem()))
+                            .craftingTime(300)
+                            .simple()
+                            .cyan(1)
+                            .magenta(1)
+                            .yellow(1)
+                            .experience(1.0f)
+                            .pattern("SGS")
+                            .pattern("GPG")
+                            .pattern("SGS")
+                            .key('P', PastelItemTags.PIGMENTS)
+                            .key('G', Items.GLASS)
+                            .key('S', SHIMMERSTONE_GEM)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.BASIC_INK_STORAGE_ITEMS)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.ITEM_ROUNDEL))
+                            .craftingTime(120)
+                            .simple()
+                            .cyan(2)
+                            .experience(1.0f)
+                            .pattern("BCB")
+                            .pattern("SCS")
+                            .pattern("BBB")
+                            .key('B', PastelBlocks.POLISHED_BASALT)
+                            .key('C', PastelBlocks.POLISHED_CALCITE)
+                            .key('S', SHIMMERSTONE_GEM)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.ITEM_ROUNDEL)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), MULTITOOL.get()))
+                            .craftingTime(600)
+                            .simple()
+                            .cyan(1)
+                            .magenta(1)
+                            .yellow(1)
+                            .experience(2.0f)
+                            .pattern("III")
+                            .pattern("IS ")
+                            .pattern(" S ")
+                            .key('S', Items.STICK)
+                            .key('I', Items.IRON_INGOT)
+                            .requiredAdvancement(PastelAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(NATURES_STAFF.asItem()))
+                            .craftingTime(1200)
+                            .simple()
+                            .magenta(6)
+                            .yellow(2)
+                            .experience(2.0f)
+                            .pattern(" LM")
+                            .pattern(" SL")
+                            .pattern("S  ")
+                            .key('S', Items.STICK)
+                            .key('M', Items.MOSS_BLOCK)
+                            .key('L', LIME_PIGMENT)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.NATURES_STAFF)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), OBLIVION_PICKAXE.get()))
+                            .craftingTime(1200)
+                            .simple()
+                            .cyan(2)
+                            .magenta(4)
+                            .experience(2.0f)
+                            .pattern("PQP")
+                            .pattern(" S ")
+                            .pattern(" S ")
+                            .key('S', Items.CALCITE)
+                            .key('Q', QUITOXIC_POWDER)
+                            .key('P', Items.PHANTOM_MEMBRANE)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.OBLIVION_PICKAXE)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.PARTICLE_SPAWNER))
+                            .craftingTime(300)
+                            .simple()
+                            .cyan(2)
+                            .magenta(6)
+                            .yellow(2)
+                            .experience(2.0f)
+                            .pattern("PSP")
+                            .pattern("PXP")
+                            .pattern("YRY")
+                            .key('P', PastelItemTags.PIGMENTS)
+                            .key('S', STAR_FRAGMENT)
+                            .key('X', PastelBlocks.POLISHED_CALCITE)
+                            .key('Y', PastelBlocks.POLISHED_BASALT)
+                            .key('R', Items.REDSTONE)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PARTICLE_SPAWNER)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.PEDESTAL_ONYX))
+                            .craftingTime(300)
+                            .simple()
+                            .experience(8.0f)
+                            .pattern("SOS")
+                            .pattern("RRR")
+                            .key('O', ONYX_SHARD)
+                            .key('S', SHIMMERSTONE_GEM)
+                            .key('R', Items.OBSIDIAN)
+                            .requiredAdvancement(PastelAdvancements.CREATE_ONYX_SHARD)
+                            .ignoreYieldUpgrades(true)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(RADIANCE_STAFF.asItem()))
+                            .craftingTime(1200)
+                            .simple()
+                            .yellow(8)
+                            .experience(2.0f)
+                            .pattern(" BG")
+                            .pattern(" SB")
+                            .pattern("S  ")
+                            .key('S', Items.STICK)
+                            .key('G', SHIMMERSTONE_GEM)
+                            .key('B', YELLOW_PIGMENT)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.RADIANCE_STAFF)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.REDSTONE_TRANSCEIVER, 2))
+                            .craftingTime(400)
+                            .simple()
+                            .cyan(2)
+                            .magenta(2)
+                            .yellow(2)
+                            .experience(1.0f)
+                            .pattern("TOR")
+                            .pattern("SSS")
+                            .key('O', ONYX_SHARD)
+                            .key('R', Items.REDSTONE)
+                            .key('T', Items.REDSTONE_TORCH)
+                            .key('S', Items.STONE)
+                            .requiredAdvancement(PastelAdvancements.CREATE_ONYX_SHARD)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(WIRE_HOOK.asItem()))
+                            .craftingTime(1200)
+                            .simple()
+                            .cyan(4)
+                            .yellow(4)
+                            .experience(2.0f)
+                            .pattern("CCG")
+                            .pattern("CDC")
+                            .pattern("BCC")
+                            .key('C', Items.CHAIN)
+                            .key('G', SHIMMERSTONE_GEM)
+                            .key('B', Tags.Items.STORAGE_BLOCKS_COPPER)
+                            .key('D', Tags.Items.GEMS_DIAMOND) // ?????
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Items.WIRE_HOOK)
+            );
+
 
         }
     }
