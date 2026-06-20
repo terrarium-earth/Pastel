@@ -15,6 +15,7 @@ import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.recipe.pedestal.builder.PedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapedPedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapelessPedestalRecipeBuilder;
+import earth.terrarium.pastel.recipe.pedestal.dynamic.StarCandyRecipe;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItemTags;
@@ -164,22 +165,22 @@ public class PastelPedestalRecipes {
             generateCushionRecipes(ctx);
             generateDetectorRecipes(ctx);
             generateDragonboneRecipes(ctx);
-            // TODO: food
+            generateFoodRecipes(ctx);
             generateGemstoneLightRecipes(ctx);
             generateBasicGlasses(ctx);
-            // TODO: jadeite
-            // TODO: jade vines
-            // TODO: noxwood
+            generateJadeiteRecipes(ctx);
+            generateJadeVinesRecipes(ctx);
+            generateNoxwoodRecipes(ctx);
             generatePigmentBlocks(ctx);
             generatePylons(ctx);
-            // TODO: resplendent
+            generateResplendentRecipes(ctx);
             generateRunes(ctx);
             generateSaplings(ctx);
-            // TODO: shimmerstone lights
-            // TODO: tools
-            // TODO: vanilla
-            // TODO: weeping gala
-            // TODO: root
+            generateShimmerstoneLightRecipes(ctx);
+            generateToolRecipes(ctx);
+            generateVanillaRecipes(ctx);
+            generateWeepingGalaRecipes(ctx);
+            generateRootRecipes(ctx);
         }
 
         // basic generation groups
@@ -443,6 +444,11 @@ public class PastelPedestalRecipes {
             );
         }
 
+        private static void generateFoodRecipes(RecipeOutput ctx) {
+            // TODO: everything else LOL
+            generateDynamicPedestalRecipe(ctx, "food/star_candy", new StarCandyRecipe());
+        }
+
         private static void generateGemstoneLightRecipes(RecipeOutput ctx) {
             generateGemstoneLightsGroup(ctx, PastelBlocks.POLISHED_BASALT, PastelBlocks.BASALT_GEMSTONE_LIGHTS);
             generateGemstoneLightsGroup(ctx, PastelBlocks.POLISHED_CALCITE, PastelBlocks.CALCITE_GEMSTONE_LIGHTS);
@@ -497,6 +503,21 @@ public class PastelPedestalRecipes {
             generateBasicGlassPane(ctx, null, PastelAdvancements.Lategame.COLLECT_HUMMINGSTONE, 20, PedestalTier.BASIC, PastelBlocks.HUMMINGSTONE_GLASS, PastelBlocks.HUMMINGSTONE_GLASS_PANE);
         }
 
+        // TODO
+        private static void generateJadeiteRecipes(RecipeOutput ctx) {
+
+        }
+
+        // TODO
+        private static void generateJadeVinesRecipes(RecipeOutput ctx) {
+
+        }
+
+        // TODO
+        private static void generateNoxwoodRecipes(RecipeOutput ctx) {
+
+        }
+
         private static void generatePigmentBlocks(RecipeOutput ctx) {
             PastelInkColorCollection.VALUES.forEach(color -> {
                 var pigmentBlock = PastelBlocks.PIGMENT_BLOCKS.pick(color);
@@ -534,6 +555,11 @@ public class PastelPedestalRecipes {
             });
         }
 
+        // TODO
+        private static void generateResplendentRecipes(RecipeOutput ctx) {
+
+        }
+
         private static void generateRunes(RecipeOutput ctx) {
             generateRunesGroup(ctx, PastelBlocks.POLISHED_BASALT, PastelBlocks.GEMSTONE_CHISELED_BASALTS);
             generateRunesGroup(ctx, PastelBlocks.POLISHED_CALCITE, PastelBlocks.GEMSTONE_CHISELED_CALCITES);
@@ -541,6 +567,31 @@ public class PastelPedestalRecipes {
 
         private static void generateSaplings(RecipeOutput ctx) {
             PastelInkColorCollection.VALUES.forEach(color -> generateSapling(ctx, color));
+        }
+
+        // TODO
+        private static void generateShimmerstoneLightRecipes(RecipeOutput ctx) {
+
+        }
+
+        // TODO
+        private static void generateToolRecipes(RecipeOutput ctx) {
+
+        }
+
+        // TODO
+        private static void generateVanillaRecipes(RecipeOutput ctx) {
+
+        }
+
+        // TODO
+        private static void generateWeepingGalaRecipes(RecipeOutput ctx) {
+
+        }
+
+        // TODO
+        private static void generateRootRecipes(RecipeOutput ctx) {
+
         }
 
         // basic generation utilities
@@ -832,7 +883,7 @@ public class PastelPedestalRecipes {
         static void generate(RecipeOutput ctx) {
             generateColoredSporeBlossoms(ctx);
             generateVanilla(ctx);
-            // TODO: simple root
+            generateRoot(ctx);
         }
 
         private static void generateColoredSporeBlossoms(RecipeOutput ctx) {
@@ -896,6 +947,11 @@ public class PastelPedestalRecipes {
             );
         }
 
+        // TODO
+        private static void generateRoot(RecipeOutput ctx) {
+
+        }
+
         private static void generateSimpleRecipe(RecipeOutput ctx, String id, PedestalRecipeBuilder<?> builder) {
             generatePedestalRecipeWithSavedTier(ctx, id, PedestalTier.SIMPLE, builder);
         }
@@ -905,11 +961,11 @@ public class PastelPedestalRecipes {
         static void generate(RecipeOutput ctx) {
             generateChimes(ctx);
             generateGlowblocks(ctx);
-            // TODO: idols
-            // TODO: pastel network
+            generateIdols(ctx);
+            generatePastelNetwork(ctx);
             generateSemiPermeableGlasses(ctx);
-            // TODO: trinkets
-            // TODO: advanced root
+            generateTrinkets(ctx);
+            generateRoot(ctx);
         }
 
         private static void generateChimes(RecipeOutput ctx) {
@@ -968,6 +1024,16 @@ public class PastelPedestalRecipes {
             });
         }
 
+        // TODO
+        private static void generateIdols(RecipeOutput ctx) {
+
+        }
+
+        // TODO
+        private static void generatePastelNetwork(RecipeOutput ctx) {
+
+        }
+
         private static void generateSemiPermeableGlasses(RecipeOutput ctx) {
             generateAdvancedRecipe(
                     ctx,
@@ -1013,6 +1079,15 @@ public class PastelPedestalRecipes {
                                .requiredAdvancement(unlock)
                );
             });
+        }
+
+        // TODO
+        private static void generateTrinkets(RecipeOutput ctx) {
+
+        }
+
+        // TODO
+        private static void generateRoot(RecipeOutput ctx) {
 
         }
 
@@ -1039,7 +1114,7 @@ public class PastelPedestalRecipes {
     private static class ComplexRecipes {
         static void generate(RecipeOutput ctx) {
             generateVanilla(ctx);
-            // TODO: complex root
+            generateRoot(ctx);
         }
 
         private static void generateVanilla(RecipeOutput ctx) {
@@ -1100,6 +1175,11 @@ public class PastelPedestalRecipes {
                             .key('S', Items.STICK)
                             .requiredAdvancement(PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE)
             );
+        }
+
+        // TODO
+        private static void generateRoot(RecipeOutput ctx) {
+
         }
 
 
