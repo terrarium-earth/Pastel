@@ -6,6 +6,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
@@ -34,12 +35,14 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
+import oshi.util.tuples.Pair;
 import oshi.util.tuples.Triplet;
 
 import java.util.List;
@@ -2347,9 +2350,29 @@ public class PastelPedestalRecipes {
             });
         }
 
-        // TODO
         private static void generateIdols(PrefixHelper pfx) {
-
+            HEAD_IDOL_PAIRS.forEach((head, idol) -> {
+                var name = idol.getId().getPath().replace("_idol", "");
+                pfx.generateRecipe(
+                        name,
+                        new ShapedPedestalRecipeBuilder(new ItemStack(idol))
+                                .group("idols")
+                                .craftingTime(200)
+                                .advanced()
+                                .magenta(4)
+                                .yellow(2)
+                                .black(1)
+                                .experience(2.0f)
+                                .pattern("SVS")
+                                .pattern("VHV")
+                                .pattern("QVQ")
+                                .key('H', head)
+                                .key('V', VEGETAL)
+                                .key('Q', QUITOXIC_POWDER)
+                                .key('S', STARDUST)
+                                .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.IDOLS)
+                );
+            });
         }
 
         // TODO
@@ -2423,6 +2446,78 @@ public class PastelPedestalRecipes {
                     .key('G', glass)
                     .requiredAdvancement(PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE);
         }
+
+        private static final Map<IngredientStack, DeferredBlock<?>> HEAD_IDOL_PAIRS =
+                Map.ofEntries(
+                        hPair(PastelItemTags.MobHeads.AXOLOTL_HEADS, PastelBlocks.AXOLOTL_IDOL),
+                        hPair(PastelSkullType.BAT, PastelBlocks.BAT_IDOL),
+                        hPair(PastelSkullType.BEE, PastelBlocks.BEE_IDOL),
+                        hPair(PastelSkullType.BLAZE, PastelBlocks.BLAZE_IDOL),
+                        hPair(PastelSkullType.CAT, PastelBlocks.CAT_IDOL),
+                        hPair(PastelSkullType.CHICKEN, PastelBlocks.CHICKEN_IDOL),
+                        hPair(PastelItemTags.MobHeads.BOVINE_HEADS, PastelBlocks.COW_IDOL),
+                        hPair(Items.CREEPER_HEAD, PastelBlocks.CREEPER_IDOL),
+                        hPair(Items.DRAGON_HEAD, PastelBlocks.ENDER_DRAGON_IDOL),
+                        hPair(PastelSkullType.ENDERMAN, PastelBlocks.ENDERMAN_IDOL),
+                        hPair(PastelSkullType.ENDERMITE, PastelBlocks.ENDERMITE_IDOL),
+                        hPair(PastelSkullType.EVOKER, PastelBlocks.EVOKER_IDOL),
+                        hPair(PastelItemTags.MobHeads.FISH_HEADS, PastelBlocks.FISH_IDOL),
+                        hPair(PastelItemTags.MobHeads.FOX_HEADS, PastelBlocks.FOX_IDOL),
+                        hPair(PastelSkullType.GHAST, PastelBlocks.GHAST_IDOL),
+                        hPair(PastelSkullType.GLOW_SQUID, PastelBlocks.GLOW_SQUID_IDOL),
+                        hPair(PastelSkullType.GOAT, PastelBlocks.GOAT_IDOL),
+                        hPair(PastelItemTags.MobHeads.GUARDIAN_HEADS, PastelBlocks.GUARDIAN_IDOL),
+                        hPair(PastelItemTags.MobHeads.EQUIDAE_HEADS, PastelBlocks.HORSE_IDOL),
+                        hPair(PastelSkullType.ILLUSIONER, PastelBlocks.ILLUSIONER_IDOL),
+                        hPair(PastelSkullType.OCELOT, PastelBlocks.OCELOT_IDOL),
+                        hPair(PastelItemTags.MobHeads.PARROT_HEADS, PastelBlocks.PARROT_IDOL),
+                        hPair(PastelSkullType.PHANTOM, PastelBlocks.PHANTOM_IDOL),
+                        hPair(PastelSkullType.PIG, PastelBlocks.PIG_IDOL),
+                        hPair(Items.PIGLIN_HEAD, PastelBlocks.PIGLIN_IDOL),
+                        hPair(PastelSkullType.POLAR_BEAR, PastelBlocks.POLAR_BEAR_IDOL),
+                        hPair(PastelSkullType.PUFFERFISH, PastelBlocks.PUFFERFISH_IDOL),
+                        hPair(PastelSkullType.RABBIT, PastelBlocks.RABBIT_IDOL),
+                        hPair(PastelSkullType.SHEEP, PastelBlocks.SHEEP_IDOL),
+                        hPair(PastelItemTags.MobHeads.SHULKER_HEADS, PastelBlocks.SHULKER_IDOL),
+                        hPair(PastelSkullType.SILVERFISH, PastelBlocks.SILVERFISH_IDOL),
+                        hPair(Items.SKELETON_SKULL, PastelBlocks.SKELETON_IDOL),
+                        hPair(PastelItemTags.MobHeads.SLIME_HEADS, PastelBlocks.SLIME_IDOL),
+                        hPair(PastelSkullType.SNOW_GOLEM, PastelBlocks.SNOW_GOLEM_IDOL),
+                        hPair(PastelItemTags.MobHeads.SPIDER_HEADS, PastelBlocks.SPIDER_IDOL),
+                        hPair(PastelSkullType.SQUID, PastelBlocks.SQUID_IDOL),
+                        hPair(PastelSkullType.STRAY, PastelBlocks.STRAY_IDOL),
+                        hPair(PastelSkullType.STRIDER, PastelBlocks.STRIDER_IDOL),
+                        hPair(PastelSkullType.TURTLE, PastelBlocks.TURTLE_IDOL),
+                        hPair(PastelSkullType.WITCH, PastelBlocks.WITCH_IDOL),
+                        hPair(PastelSkullType.WITHER, PastelBlocks.WITHER_IDOL),
+                        hPair(Items.WITHER_SKELETON_SKULL, PastelBlocks.WITHER_SKELETON_IDOL),
+                        hPair(PastelItemTags.MobHeads.ZOMBIE_HEADS, PastelBlocks.ZOMBIE_IDOL)
+                );
+
+        private static Map.Entry<IngredientStack, DeferredBlock<?>> hPair(PastelSkullType kind, DeferredBlock<?> block) {
+            return Map.entry(head(kind), block);
+        }
+
+        private static Map.Entry<IngredientStack, DeferredBlock<?>> hPair(ItemLike item, DeferredBlock<?> block) {
+            return Map.entry(IngredientStack.ofItems(item.asItem()), block);
+        }
+
+        private static Map.Entry<IngredientStack, DeferredBlock<?>> hPair(TagKey<Item> tag, DeferredBlock<?> block) {
+            return Map.entry(IngredientStack.ofTag(tag), block);
+        }
+
+        private static IngredientStack head(PastelSkullType kind) {
+            return IngredientStack.ofItems(PastelBlocks.MOB_HEADS.get(kind).asItem());
+        }
+
+        private static IngredientStack stack(ItemLike item) {
+            return IngredientStack.ofItems(item.asItem());
+        }
+
+        private static IngredientStack stack(TagKey<Item> tag) {
+            return IngredientStack.ofTag(tag);
+        }
+
 
     }
 

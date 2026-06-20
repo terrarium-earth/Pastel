@@ -92,6 +92,20 @@ public class PastelItemTags {
 
     public static final TagKey<Item> PIGMENTS = of("pigments");
 
+    public static class MobHeads {
+        public static final TagKey<Item> AXOLOTL_HEADS = getMobHeadKey("axolotl");
+        public static final TagKey<Item> FISH_HEADS = getMobHeadKey("fish");
+        public static final TagKey<Item> FOX_HEADS = getMobHeadKey("fox");
+        public static final TagKey<Item> GUARDIAN_HEADS = getMobHeadKey("guardian");
+        public static final TagKey<Item> BOVINE_HEADS = getMobHeadKey("bovine");
+        public static final TagKey<Item> EQUIDAE_HEADS = getMobHeadKey("equidae");
+        public static final TagKey<Item> PARROT_HEADS = getMobHeadKey("parrot");
+        public static final TagKey<Item> SHULKER_HEADS = getMobHeadKey("shulker");
+        public static final TagKey<Item> SLIME_HEADS = getMobHeadKey("slime");
+        public static final TagKey<Item> SPIDER_HEADS = getMobHeadKey("spider");
+        public static final TagKey<Item> ZOMBIE_HEADS = getMobHeadKey("zombie");
+    }
+
     public static class EnchantableWith {
         public static final TagKey<Item> BIG_CATCH = getEnchantableTag(PastelEnchantments.BIG_CATCH);
 
@@ -132,6 +146,10 @@ public class PastelItemTags {
         public static final TagKey<Item> TREASURE_HUNTER = getEnchantableTag(PastelEnchantments.TREASURE_HUNTER);
 
         public static final TagKey<Item> VOIDING = getEnchantableTag(PastelEnchantments.VOIDING);
+    }
+
+    private static TagKey<Item> getMobHeadKey(String mobName) {
+        return of("mob_heads/" + mobName + "_heads");
     }
 
     public static TagKey<Item> getEnchantableTag(ResourceKey<Enchantment> key) {

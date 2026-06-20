@@ -1,0 +1,35 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1,
+    "pastel:magenta": 4,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "group": "idols",
+  "key": {
+    "H": {
+      "tag": "pastel:mob_heads/spider_heads"
+    },
+    "Q": {
+      "item": "pastel:quitoxic_powder"
+    },
+    "S": {
+      "item": "pastel:stardust"
+    },
+    "V": {
+      "item": "pastel:vegetal"
+    }
+  },
+  "pattern": [
+    "SVS",
+    "VHV",
+    "QVQ"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/idols",
+  "result": {
+    "count": 1,
+    "id": "pastel:spider_idol"
+  },
+  "tier": "advanced"
+}
