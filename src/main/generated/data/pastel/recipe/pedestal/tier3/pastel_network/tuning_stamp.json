@@ -1,0 +1,37 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4,
+    "pastel:cyan": 1,
+    "pastel:magenta": 1,
+    "pastel:yellow": 1
+  },
+  "experience": 2.0,
+  "group": "pastel_network",
+  "key": {
+    "A": {
+      "item": "pastel:raw_azurite"
+    },
+    "G": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "I": {
+      "item": "minecraft:ink_sac"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " I ",
+    "GAI",
+    "SG "
+  ],
+  "required_advancement": "pastel:unlocks/blocks/pastel_network",
+  "result": {
+    "count": 1,
+    "id": "pastel:tuning_stamp"
+  },
+  "tier": "advanced",
+  "time": 80
+}

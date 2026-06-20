@@ -49,6 +49,7 @@ import oshi.util.tuples.Triplet;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static earth.terrarium.pastel.registries.PastelItems.*;
@@ -2377,9 +2378,47 @@ public class PastelPedestalRecipes {
             });
         }
 
-        // TODO
         private static void generatePastelNetwork(PrefixHelper pfx) {
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(TUNING_STAMP.asItem()))
+                            .group("pastel_network")
+                            .craftingTime(80)
+                            .advanced()
+                            .cyan(1)
+                            .magenta(1)
+                            .yellow(1)
+                            .black(4)
+                            .experience(2.0f)
+                            .pattern(" I ")
+                            .pattern("GAI") // Yes i am, how'd u know?
+                            .pattern("SG ")
+                            .key('S', Items.STICK)
+                            .key('G', Items.GLOW_INK_SAC)
+                            .key('I', Items.INK_SAC)
+                            .key('A', RAW_AZURITE)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PASTEL_NETWORK)
+            );
 
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.BUFFER_NODE))
+                            .group("pastel_network")
+                            .craftingTime(80)
+                            .advanced()
+                            .black(4)
+                            .experience(1.0f)
+                            .pattern(" S ")
+                            .pattern("SGS")
+                            .pattern(" S ")
+                            .key('S', Items.GLOW_INK_SAC)
+                            .key('G', PastelBlocks.GATHER_NODE)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PASTEL_NETWORK)
+            );
+
+            generateNodePair(pfx, null, new ItemStack(PastelBlocks.CONNECTION_NODE, 4));
+            generateNodePair(pfx, PastelGemstoneColor.BLACK, new ItemStack(PastelBlocks.GATHER_NODE));
+            generateNodePair(pfx, PastelGemstoneColor.MAGENTA, new ItemStack(PastelBlocks.PROVIDER_NODE));
+            generateNodePair(pfx, PastelGemstoneColor.YELLOW, new ItemStack(PastelBlocks.SENDER_NODE));
+            generateNodePair(pfx, PastelGemstoneColor.CYAN, new ItemStack(PastelBlocks.STORAGE_NODE));
         }
 
         private static void generateSemiPermeableGlasses(PrefixHelper pfx) {
@@ -2494,6 +2533,48 @@ public class PastelPedestalRecipes {
         private static void generateRoot(PrefixHelper pfx) {
             pfx.generateDynamicRecipe("ender_canvas", new EnderCanvasRecipe());
             pfx.generateDynamicRecipe("ender_canvas_large", new EnderCanvasLargeRecipe());
+        }
+
+        private static void generateNodePair(PrefixHelper pfx, @Nullable PastelGemstoneColor color, ItemStack baseStack) {
+            var center = color == null ? Items.QUARTZ : PastelItems.GEMSTONE_SHARDS.pick(color).value();
+            var refinedStack = baseStack.copyWithCount(baseStack.getCount() * 4);
+            var refinedName = Objects.requireNonNull(baseStack.getItemHolder().getKey()).location().getPath() + "_refined";
+            Map<GemstoneColor, Integer> mix =
+                    color == null ? Map.of() : Map.of(color, 1);
+
+            Map<GemstoneColor, Integer> refinedMix =
+                    color == null ? Map.of() : Map.of(color, 4);
+
+            pfx.generateAutoNamedRecipe(
+                    baseNode(baseStack)
+                            .key('S', center)
+                            .key('A', RAW_AZURITE)
+                            .replacePowderInputsWith(mix)
+                            .experience(1.0f)
+                            .group("pastel_network")
+            );
+
+            pfx.generateRecipe(
+                    refinedName,
+                    baseNode(refinedStack)
+                            .key('S', center)
+                            .key('A', PURE_AZURITE)
+                            .replacePowderInputsWith(refinedMix)
+                            .experience(4.0f)
+                            .group("pure_pastel_network")
+            );
+        }
+
+        private static ShapedPedestalRecipeBuilder baseNode(ItemStack result) {
+            return new ShapedPedestalRecipeBuilder(result)
+                    .craftingTime(80)
+                    .advanced()
+                    .pattern(" A ")
+                    .pattern("ASA")
+                    .pattern("YXY")
+                    .key('X', PastelBlocks.POLISHED_BASALT)
+                    .key('Y', PastelBlocks.POLISHED_CALCITE)
+                    .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PASTEL_NETWORK);
         }
 
         private static ShapedPedestalRecipeBuilder sharedSemiPermeableGlass(Item center, Item glass, DeferredBlock<?> result) {

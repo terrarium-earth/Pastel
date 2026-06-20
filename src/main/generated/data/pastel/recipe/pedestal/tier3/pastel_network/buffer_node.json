@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4
+  },
+  "experience": 1.0,
+  "group": "pastel_network",
+  "key": {
+    "G": {
+      "item": "pastel:gather_node"
+    },
+    "S": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SGS",
+    " S "
+  ],
+  "required_advancement": "pastel:unlocks/blocks/pastel_network",
+  "result": {
+    "count": 1,
+    "id": "pastel:buffer_node"
+  },
+  "tier": "advanced",
+  "time": 80
+}
