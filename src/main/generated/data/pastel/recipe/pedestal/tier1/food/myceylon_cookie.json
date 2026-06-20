@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "Y": {
+      "item": "pastel:myceylon"
+    }
+  },
+  "pattern": [
+    "AYA"
+  ],
+  "required_advancement": "pastel:unlocks/food/myceylon_pastries",
+  "result": {
+    "count": 8,
+    "id": "pastel:myceylon_cookie"
+  },
+  "time": 120
+}

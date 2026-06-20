@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.5,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "C": {
+      "item": "pastel:four_leaf_clover"
+    },
+    "M": {
+      "tag": "c:buckets/milk"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "AMA",
+    "AAA"
+  ],
+  "required_advancement": "pastel:unlocks/food/lucky_roll",
+  "result": {
+    "count": 2,
+    "id": "pastel:lucky_roll"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:glass_peach"
+    },
+    "E": {
+      "item": "pastel:jadeite_petals"
+    },
+    "F": {
+      "item": "pastel:lizard_meat"
+    },
+    "P": {
+      "item": "pastel:fresh_chocolate"
+    },
+    "V": {
+      "item": "pastel:jade_wine"
+    }
+  },
+  "pattern": [
+    "EEE",
+    "APA",
+    "FVF"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/imperial_cookbook",
+  "result": {
+    "count": 1,
+    "id": "pastel:chauve_souris_au_vin"
+  },
+  "time": 160
+}

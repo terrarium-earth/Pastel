@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.2,
+  "key": {
+    "C": {
+      "item": "pastel:clotted_cream"
+    },
+    "E": {
+      "item": "pastel:amaranth_grains"
+    },
+    "M": {
+      "item": "pastel:jade_wine"
+    },
+    "S": {
+      "item": "pastel:myceylon"
+    },
+    "X": {
+      "item": "pastel:jadeite_petals"
+    }
+  },
+  "pattern": [
+    "SXS",
+    "CMC",
+    "EEE"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2",
+  "result": {
+    "count": 2,
+    "id": "pastel:rabbit_cream_pie"
+  },
+  "time": 80
+}

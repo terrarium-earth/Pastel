@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "D": {
+      "item": "pastel:dragonbone_chunk"
+    },
+    "V": {
+      "tag": "c:foods/fruit"
+    },
+    "Y": {
+      "item": "pastel:prickly_bayleaf"
+    }
+  },
+  "pattern": [
+    "YYY",
+    "DDD",
+    "VBV"
+  ],
+  "required_advancement": "pastel:unlocks/food/wyrmscale_jelly",
+  "result": {
+    "count": 1,
+    "id": "pastel:wyrmscale_jelly"
+  },
+  "time": 120
+}

@@ -74,6 +74,14 @@ public class PastelItemTags {
 
     public static final TagKey<Item> RESPLENDENT_FEATHERS = of("resplendent_feathers");
 
+    public static final TagKey<Item> COMMON_MEATS = of("common_meats");
+
+    public static final TagKey<Item> WATER_MEATS = of("water_meats");
+
+    public static final TagKey<Item> LEAN_MEATS = of("lean_meats");
+
+    public static final TagKey<Item> DRINKABLE_SPIRITS = of("drinkable_spirits");
+
     public static class EnchantableWith {
         public static final TagKey<Item> BIG_CATCH = getEnchantableTag(PastelEnchantments.BIG_CATCH);
 

@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:peach_jam"
+    },
+    "E": {
+      "item": "pastel:clotted_cream"
+    },
+    "F": {
+      "item": "pastel:myceylon"
+    },
+    "K": {
+      "item": "pastel:incandescent_essence"
+    },
+    "P": {
+      "item": "pastel:glass_peach"
+    },
+    "V": {
+      "item": "pastel:nectered_viognier"
+    }
+  },
+  "pattern": [
+    "KVK",
+    "AEA",
+    "FPF"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/imperial_cookbook",
+  "result": {
+    "count": 1,
+    "id": "pastel:peaches_flambe"
+  },
+  "time": 160
+}

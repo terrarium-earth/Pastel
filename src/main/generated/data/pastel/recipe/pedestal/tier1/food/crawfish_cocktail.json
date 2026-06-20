@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:crawfish"
+    },
+    "B": {
+      "item": "pastel:glass_peach"
+    },
+    "E": {
+      "item": "pastel:incandescent_essence"
+    },
+    "J": {
+      "item": "pastel:myceylon"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BEJ"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/imbrifer_cookbook",
+  "result": {
+    "count": 3,
+    "id": "pastel:crawfish_cocktail"
+  },
+  "time": 160
+}

@@ -1,0 +1,45 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "minecraft:potato"
+    },
+    "E": {
+      "tag": "c:mushrooms"
+    },
+    "H": {
+      "item": "minecraft:cooked_rabbit"
+    },
+    "J": {
+      "item": "pastel:clotted_cream"
+    },
+    "M": {
+      "components": {
+        "pastel:infused_beverage": {
+          "color": 16762703,
+          "variant": "beer"
+        }
+      },
+      "item": "pastel:infused_beverage",
+      "preview_components": {
+        "pastel:infused_beverage": {
+          "color": 16762703,
+          "variant": "beer"
+        }
+      }
+    }
+  },
+  "pattern": [
+    "JJJ",
+    "EME",
+    "AHA"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1",
+  "result": {
+    "count": 1,
+    "id": "pastel:hare_roast"
+  },
+  "time": 160
+}

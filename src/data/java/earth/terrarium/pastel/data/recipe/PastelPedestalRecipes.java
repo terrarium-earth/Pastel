@@ -585,7 +585,254 @@ public class PastelPedestalRecipes {
                             .key('L', infusedBeverageIngredient(InfusedBeverageComponent.BERRY_LIQUOR))
             );
 
-            // TODO: everything else LOL
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(CHAUVE_SOURIS_AU_VIN.asItem()))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("EEE")
+                            .pattern("APA")
+                            .pattern("FVF")
+                            .key('V', JADE_WINE.asItem())
+                            .key('F', LIZARD_MEAT.asItem())
+                            .key('A', GLASS_PEACH.asItem())
+                            .key('E', JADEITE_PETALS.asItem())
+                            .key('P', FRESH_CHOCOLATE.asItem())
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMPERIAL_COOKBOOK)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(CRAWFISH_COCKTAIL.asItem(), 3))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("AAA")
+                            .pattern("BEJ")
+                            .key('A', CRAWFISH.asItem())
+                            .key('J', MYCEYLON.asItem())
+                            .key('E', INCANDESCENT_ESSENCE.asItem())
+                            .key('B', GLASS_PEACH.asItem())
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMBRIFER_COOKBOOK)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(CREAM_PASTRY.asItem(), 5))
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.2f)
+                            .pattern("ESE")
+                            .pattern("CCC")
+                            .pattern("EXE")
+                            .key('S', Items.HONEY_BOTTLE)
+                            .key('E', AMARANTH_GRAINS.asItem())
+                            .key('C', CLOTTED_CREAM.asItem())
+                            .key('X', Tags.Items.EGGS)
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_2)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(FISHCAKE.asItem(), 3))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("KAK")
+                            .pattern("AEA")
+                            .pattern("FFF")
+                            .key('A', CRAWFISH.asItem())
+                            .key('K', KOI.asItem())
+                            .key('F', Tags.Items.FOODS_RAW_FISH)
+                            .key('E', MYCEYLON.asItem())
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMBRIFER_COOKBOOK)
+            );
+
+            // hare roasts
+
+            hareRoast(prefixHelper, "hare_roast_beer", InfusedBeverageComponent.BEER);
+            hareRoast(prefixHelper, "hare_roast_malt", InfusedBeverageComponent.MALT_BEER);
+            hareRoast(prefixHelper, "hare_roast_porter", InfusedBeverageComponent.PORTER);
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(HONEY_PASTRY.asItem()))
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern(" H ")
+                            .pattern("SES")
+                            .pattern("AAA")
+                            .key('A', AMARANTH_GRAINS.asItem())
+                            .key('H', Items.HONEY_BOTTLE)
+                            .key('E', Tags.Items.EGGS)
+                            .key('S', Items.SUGAR)
+                            .requiredAdvancement(PastelAdvancements.COLLECT_AMARANTH_BUSHEL)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(LUCKY_ROLL.asItem(), 2))
+                            .craftingTime(200)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.5f)
+                            .pattern("SCS")
+                            .pattern("AMA")
+                            .pattern("AAA")
+                            .key('A', AMARANTH_GRAINS.asItem())
+                            .key('C', PastelBlocks.FOUR_LEAF_CLOVER.asItem())
+                            .key('M', Tags.Items.BUCKETS_MILK)
+                            .key('S', Items.SUGAR)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Food.LUCKY_ROLL)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapelessPedestalRecipeBuilder(new ItemStack(MEATLOAF_SANDWICH.asItem(), 4))
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.2f)
+                            .ingredient(MEATLOAF.asItem())
+                            .ingredient(Items.BREAD)
+                            .ingredient(CLOTTED_CREAM.asItem())
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_1)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(MELLOW_SHALLOT_SOUP.asItem(), 4))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern(" R ")
+                            .pattern("ABC")
+                            .pattern("JEJ")
+                            .key('A', GERMINATED_JADE_VINE_BULB.asItem())
+                            .key('B', PastelBlocks.JADEITE_LOTUS_BULB.asItem())
+                            .key('C', PastelBlocks.NEPHRITE_BLOSSOM_BULB.asItem())
+                            .key('J', FROSTBITE_ESSENCE.asItem())
+                            .key('E', MOONSTRUCK_NECTAR.asItem())
+                            .key('R', AQUA_REGIA.asItem())
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMBRIFER_COOKBOOK)
+            );
+
+            // mycelyon pies
+
+            myceylonPie(prefixHelper, MYCEYLON_APPLE_PIE.asItem(), Items.APPLE);
+            myceylonPie(prefixHelper, MYCEYLON_PUMPKIN_PIE.asItem(), Items.PUMPKIN);
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(MYCEYLON_COOKIE.asItem(), 8))
+                            .craftingTime(120)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("AYA")
+                            .key('Y', MYCEYLON.asItem())
+                            .key('A', AMARANTH_GRAINS.asItem())
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Food.MYCEYLON_PASTRIES)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(PEACHES_FLAMBE.asItem()))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("KVK")
+                            .pattern("AEA")
+                            .pattern("FPF")
+                            .key('V', NECTERED_VIOGNIER.asItem())
+                            .key('F', MYCEYLON.asItem())
+                            .key('K', INCANDESCENT_ESSENCE.asItem())
+                            .key('A', PEACH_JAM.asItem())
+                            .key('E', CLOTTED_CREAM.asItem())
+                            .key('P', GLASS_PEACH.asItem())
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMPERIAL_COOKBOOK)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(RABBIT_CREAM_PIE.asItem(), 2))
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.2f)
+                            .pattern("SXS")
+                            .pattern("CMC")
+                            .pattern("EEE")
+                            .key('S', MYCEYLON.asItem())
+                            .key('E', AMARANTH_GRAINS.asItem())
+                            .key('C', CLOTTED_CREAM.asItem())
+                            .key('X', JADEITE_PETALS.asItem())
+                            .key('M', JADE_WINE.asItem())
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_2)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapelessPedestalRecipeBuilder(new ItemStack(SCONE.asItem(), 2))
+                            .craftingTime(50)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .ingredient(AMARANTH_GRAINS.asItem())
+                            .ingredient(Tags.Items.EGGS)
+                            .ingredient(Items.SWEET_BERRIES)
+                            .ingredient(CLOTTED_CREAM.asItem())
+                            .requiredAdvancement(PastelAdvancements.COLLECT_AMARANTH_BUSHEL)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapelessPedestalRecipeBuilder(new ItemStack(SLUSHSLIDE.asItem(), 2))
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.2f)
+                            .ingredient(FRESH_CHOCOLATE.asItem())
+                            .ingredient(MYCEYLON.asItem())
+                            .ingredient(CLOTTED_CREAM.asItem())
+                            .ingredient(infusedBeverageIngredient(InfusedBeverageComponent.SAWBLADE_HOLLY_LIQUOR))
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_2)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(TRIPLE_MEAT_POT_PIE.asItem()))
+                            .craftingTime(120)
+                            .tier(PedestalTier.BASIC)
+                            .experience(4.0f)
+                            .pattern("ECE")
+                            .pattern("MFL")
+                            .pattern("AWA")
+                            .key('A', AMARANTH_GRAINS.asItem())
+                            .key('C', CLOTTED_CREAM.asItem())
+                            .key('M', PastelItemTags.COMMON_MEATS)
+                            .key('F', PastelItemTags.WATER_MEATS)
+                            .key('L', PastelItemTags.LEAN_MEATS)
+                            .key('E', Tags.Items.EGGS)
+                            .key('W', PastelItemTags.DRINKABLE_SPIRITS)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Food.TRIPLE_MEAT_POT_PIE)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(TRIPLE_MEAT_POT_STEW.asItem()))
+                            .craftingTime(120)
+                            .tier(PedestalTier.BASIC)
+                            .experience(4.0f)
+                            .pattern("PWP")
+                            .pattern("MFL")
+                            .pattern("CBC")
+                            .key('P', PRICKLY_BAYLEAF.asItem())
+                            .key('C', CLOTTED_CREAM.asItem())
+                            .key('M', PastelItemTags.COMMON_MEATS)
+                            .key('F', PastelItemTags.WATER_MEATS)
+                            .key('L', PastelItemTags.LEAN_MEATS)
+                            .key('W', PastelItemTags.DRINKABLE_SPIRITS)
+                            .key('B', Items.BOWL)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Food.TRIPLE_MEAT_POT_STEW)
+            );
+
+            prefixHelper.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(WYRMSCALE_JELLY.asItem()))
+                            .craftingTime(120)
+                            .tier(PedestalTier.BASIC)
+                            .experience(2.0f)
+                            .pattern("YYY")
+                            .pattern("DDD")
+                            .pattern("VBV")
+                            .key('Y', PRICKLY_BAYLEAF.asItem())
+                            .key('D', DRAGONBONE_CHUNK.asItem())
+                            .key('V', Tags.Items.FOODS_FRUIT)
+                            .key('B', Items.BOWL)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Food.WYRMSCALE_JELLY)
+            );
+
             prefixHelper.generateDynamicRecipe("star_candy", new StarCandyRecipe());
         }
 
@@ -786,6 +1033,43 @@ public class PastelPedestalRecipes {
                     .requiredAdvancement(PastelAdvancements.Unlocks.Food.TRIFLES);
 
             return topping == Items.AIR ? base : base.key('T', topping);
+        }
+
+        private static void myceylonPie(PrefixHelper pfx, Item result, Item thingie) {
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(result))
+                            .craftingTime(120)
+                            .tier(PedestalTier.BASIC)
+                            .experience(2.0f)
+                            .pattern("YPY")
+                            .pattern("SMS")
+                            .pattern("AAA")
+                            .key('Y', MYCEYLON.asItem())
+                            .key('M', Tags.Items.BUCKETS_MILK)
+                            .key('S', Items.SUGAR)
+                            .key('P', thingie)
+                            .key('A', AMARANTH_GRAINS.asItem())
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Food.MYCEYLON_PASTRIES)
+            );
+        }
+
+        private static void hareRoast(PrefixHelper ctx, String name, InfusedBeverageComponent beverage) {
+            ctx.generateRecipe(
+                    name,
+                    new ShapedPedestalRecipeBuilder(new ItemStack(HARE_ROAST.asItem()))
+                            .craftingTime(160)
+                            .tier(PedestalTier.BASIC)
+                            .experience(1.0f)
+                            .pattern("JJJ")
+                            .pattern("EME")
+                            .pattern("AHA")
+                            .key('E', Tags.Items.MUSHROOMS)
+                            .key('J', CLOTTED_CREAM.asItem())
+                            .key('A', Items.POTATO)
+                            .key('M', infusedBeverageIngredient(InfusedBeverageComponent.BEER))
+                            .key('H', Items.COOKED_RABBIT)
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_1)
+            );
         }
 
         // subpath no longer required as pfx will provide it

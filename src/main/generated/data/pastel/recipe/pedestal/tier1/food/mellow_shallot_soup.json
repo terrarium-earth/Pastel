@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:germinated_jade_vine_bulb"
+    },
+    "B": {
+      "item": "pastel:jadeite_lotus_bulb"
+    },
+    "C": {
+      "item": "pastel:nephrite_blossom_bulb"
+    },
+    "E": {
+      "item": "pastel:moonstruck_nectar"
+    },
+    "J": {
+      "item": "pastel:frostbite_essence"
+    },
+    "R": {
+      "item": "pastel:aqua_regia"
+    }
+  },
+  "pattern": [
+    " R ",
+    "ABC",
+    "JEJ"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/imbrifer_cookbook",
+  "result": {
+    "count": 4,
+    "id": "pastel:mellow_shallot_soup"
+  },
+  "time": 160
+}

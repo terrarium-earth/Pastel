@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:crawfish"
+    },
+    "E": {
+      "item": "pastel:myceylon"
+    },
+    "F": {
+      "tag": "c:foods/raw_fish"
+    },
+    "K": {
+      "item": "pastel:koi"
+    }
+  },
+  "pattern": [
+    "KAK",
+    "AEA",
+    "FFF"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/imbrifer_cookbook",
+  "result": {
+    "count": 3,
+    "id": "pastel:fishcake"
+  },
+  "time": 160
+}

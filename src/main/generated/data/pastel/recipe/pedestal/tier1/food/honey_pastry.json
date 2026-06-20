@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "E": {
+      "tag": "c:eggs"
+    },
+    "H": {
+      "item": "minecraft:honey_bottle"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    " H ",
+    "SES",
+    "AAA"
+  ],
+  "required_advancement": "pastel:collect_amaranth_bushel",
+  "result": {
+    "count": 1,
+    "id": "pastel:honey_pastry"
+  },
+  "time": 80
+}

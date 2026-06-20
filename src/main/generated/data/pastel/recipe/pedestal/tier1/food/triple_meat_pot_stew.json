@@ -1,0 +1,39 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 4.0,
+  "key": {
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "C": {
+      "item": "pastel:clotted_cream"
+    },
+    "F": {
+      "tag": "pastel:water_meats"
+    },
+    "L": {
+      "tag": "pastel:lean_meats"
+    },
+    "M": {
+      "tag": "pastel:common_meats"
+    },
+    "P": {
+      "item": "pastel:prickly_bayleaf"
+    },
+    "W": {
+      "tag": "pastel:drinkable_spirits"
+    }
+  },
+  "pattern": [
+    "PWP",
+    "MFL",
+    "CBC"
+  ],
+  "required_advancement": "pastel:unlocks/food/triple_meat_pot_stew",
+  "result": {
+    "count": 1,
+    "id": "pastel:triple_meat_pot_stew"
+  },
+  "time": 120
+}
