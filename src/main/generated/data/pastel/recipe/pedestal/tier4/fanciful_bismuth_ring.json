@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 8
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "pastel:bismuth_crystal"
+    }
+  },
+  "pattern": [
+    " B ",
+    "B B",
+    " B "
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/fanciful_bismuth_ring",
+  "result": {
+    "count": 1,
+    "id": "pastel:fanciful_bismuth_ring"
+  },
+  "tier": "complex",
+  "time": 800
+}

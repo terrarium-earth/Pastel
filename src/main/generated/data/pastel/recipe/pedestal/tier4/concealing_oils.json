@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 8,
+    "pastel:white": 8
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "pastel:pure_quartz"
+    },
+    "F": {
+      "item": "pastel:bismuth_flake"
+    },
+    "N": {
+      "item": "pastel:nightdew_sprout"
+    }
+  },
+  "pattern": [
+    " F ",
+    "BNB",
+    " F "
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/poisoners_handbook",
+  "result": {
+    "count": 1,
+    "id": "pastel:concealing_oils"
+  },
+  "tier": "complex",
+  "time": 800
+}

@@ -92,6 +92,8 @@ public class PastelItemTags {
 
     public static final TagKey<Item> PIGMENTS = of("pigments");
 
+    public static final TagKey<Item> PIGMENT_BLOCKS = of("pigment_blocks");
+
     public static class MobHeads {
         public static final TagKey<Item> AXOLOTL_HEADS = getMobHeadKey("axolotl");
         public static final TagKey<Item> FISH_HEADS = getMobHeadKey("fish");

@@ -1,0 +1,38 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 8,
+    "pastel:magenta": 16,
+    "pastel:white": 4
+  },
+  "experience": 8.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "pastel:polished_calcite"
+    },
+    "I": {
+      "item": "pastel:bismuth_crystal"
+    },
+    "L": {
+      "item": "minecraft:bucket"
+    },
+    "P": {
+      "tag": "pastel:pigment_blocks"
+    }
+  },
+  "pattern": [
+    "ILI",
+    "CPC",
+    "BPB"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/crystallarieum",
+  "result": {
+    "count": 1,
+    "id": "pastel:crystallarieum"
+  },
+  "tier": "complex",
+  "time": 1200
+}

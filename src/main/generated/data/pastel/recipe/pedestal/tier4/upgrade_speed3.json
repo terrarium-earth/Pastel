@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {
+    "pastel:white": 4
+  },
+  "experience": 4.0,
+  "ingredients": [
+    {
+      "item": "pastel:upgrade_speed2"
+    },
+    {
+      "item": "pastel:pure_iron"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/upgrades/upgrade_speed3",
+  "result": {
+    "count": 1,
+    "id": "pastel:upgrade_speed3"
+  },
+  "tier": "complex",
+  "time": 6000
+}

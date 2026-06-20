@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 16
+  },
+  "experience": 4.0,
+  "key": {
+    "C": {
+      "item": "pastel:stratine_gem"
+    },
+    "L": {
+      "item": "pastel:light_blue_pigment"
+    },
+    "P": {
+      "item": "pastel:paltaeria_gem"
+    },
+    "Y": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "LPL",
+    "CPC",
+    "YYY"
+  ],
+  "required_advancement": "pastel:unlocks/upgrades/upgrade_yield",
+  "result": {
+    "count": 1,
+    "id": "pastel:upgrade_yield"
+  },
+  "tier": "complex",
+  "time": 3600
+}

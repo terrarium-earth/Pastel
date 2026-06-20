@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 1,
+    "pastel:magenta": 1,
+    "pastel:white": 8,
+    "pastel:yellow": 1
+  },
+  "experience": 2.0,
+  "key": {
+    "M": {
+      "item": "pastel:pure_malachite"
+    },
+    "P": {
+      "item": "pastel:jadeite_petals"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "PS ",
+    "PSS",
+    "MPP"
+  ],
+  "required_advancement": "pastel:unlocks/items/everpromise_ribbon_recipe",
+  "result": {
+    "count": 1,
+    "id": "pastel:everpromise_ribbon"
+  },
+  "tier": "complex",
+  "time": 800
+}
