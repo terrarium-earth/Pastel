@@ -113,20 +113,20 @@ public class PastelPedestalRecipes {
     // Enchantments requires threading through a holder lookup
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
         BasicRecipes.generate(ctx, lookup);
-        SimpleRecipes.generate(ctx);
-        AdvancedRecipes.generate(ctx);
-        ComplexRecipes.generate(ctx);
+        SimpleRecipes.generate(ctx, lookup);
+        AdvancedRecipes.generate(ctx, lookup);
+        ComplexRecipes.generate(ctx, lookup);
     }
 
 
-    private static PrefixHelper rootPrefixHelper(RecipeOutput ctx, PedestalTier tier) {
+    private static PrefixHelper rootPrefixHelper(RecipeOutput ctx, HolderLookup.Provider lookup, PedestalTier tier) {
         String tierId = tierIdOf(tier);
-        return new PrefixHelper(ctx, "pedestal/" + tierId);
+        return new PrefixHelper(ctx, lookup, "pedestal/" + tierId);
     }
 
     private static class BasicRecipes {
         static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
-            var rootHelper = rootPrefixHelper(ctx, PedestalTier.BASIC);
+            var rootHelper = rootPrefixHelper(ctx, lookup, PedestalTier.BASIC);
 
             generateArrowRecipes(rootHelper.subPrefix("arrows"));
             generateColoredLampRecipes(rootHelper.subPrefix("colored_lamps"));
@@ -135,7 +135,7 @@ public class PastelPedestalRecipes {
             generateCushionRecipes(rootHelper.subPrefix("cushions"));
             generateDetectorRecipes(rootHelper.subPrefix("detectors"));
             generateDragonboneRecipes(rootHelper.subPrefix("dragonbone"));
-            generateFoodRecipes(rootHelper.subPrefix("food"), lookup);
+            generateFoodRecipes(rootHelper.subPrefix("food"));
             generateGemstoneLightRecipes(rootHelper.subPrefix("gemstone_lights"));
             generateBasicGlasses(rootHelper.subPrefix("glass"));
             generateJadeiteRecipes(rootHelper.subPrefix("jadeite"));
@@ -147,7 +147,7 @@ public class PastelPedestalRecipes {
             generateRunes(rootHelper.subPrefix("runes"));
             generateSaplings(rootHelper.subPrefix("saplings"));
             generateShimmerstoneLightRecipes(rootHelper.subPrefix("shimmerstone_lights"));
-            generateToolRecipes(rootHelper.subPrefix("tools"), lookup);
+            generateToolRecipes(rootHelper.subPrefix("tools"));
             generateVanillaRecipes(rootHelper.subPrefix("vanilla"));
             generateWeepingGalaRecipes(rootHelper.subPrefix("weeping_gala"));
             generateRootRecipes(rootHelper);
@@ -405,7 +405,7 @@ public class PastelPedestalRecipes {
             );
         }
 
-        private static void generateFoodRecipes(PrefixHelper prefixHelper, HolderLookup.Provider lookup) {
+        private static void generateFoodRecipes(PrefixHelper prefixHelper) {
 
             // Tarts
             prefixHelper.generateAutoNamedRecipe(
@@ -793,7 +793,7 @@ public class PastelPedestalRecipes {
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.WYRMSCALE_JELLY)
             );
 
-            prefixHelper.generateAutoNamedDynamicRecipe(lookup, new StarCandyRecipe());
+            prefixHelper.generateAutoNamedDynamicRecipe(new StarCandyRecipe());
         }
 
         private static void generateGemstoneLightRecipes(PrefixHelper pfx) {
@@ -1082,7 +1082,8 @@ public class PastelPedestalRecipes {
 
         }
 
-        private static void generateToolRecipes(PrefixHelper pfx, HolderLookup.Provider lookup) {
+        private static void generateToolRecipes(PrefixHelper pfx) {
+            var lookup = pfx.getLookup();
             // Actually this is a _benefit_ of datagen, no need to copy everything
             pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, LAGOON_ROD.get()))
@@ -1784,8 +1785,8 @@ public class PastelPedestalRecipes {
     }
 
     private static class SimpleRecipes {
-        static void generate(RecipeOutput ctx) {
-            var rootHelper = rootPrefixHelper(ctx, PedestalTier.SIMPLE);
+        static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
+            var rootHelper = rootPrefixHelper(ctx, lookup, PedestalTier.SIMPLE);
 
             generateColoredSporeBlossoms(rootHelper.subPrefix("colored_spore_blossoms"));
             generateVanilla(rootHelper.subPrefix("vanilla"));
@@ -1855,8 +1856,8 @@ public class PastelPedestalRecipes {
     }
 
     private static class AdvancedRecipes {
-        static void generate(RecipeOutput ctx) {
-            var rootHelper = rootPrefixHelper(ctx, PedestalTier.ADVANCED);
+        static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
+            var rootHelper = rootPrefixHelper(ctx, lookup, PedestalTier.ADVANCED);
 
             generateChimes(rootHelper.subPrefix("gemstone_chimes"));
             generateGlowblocks(rootHelper.subPrefix("glowblocks"));
@@ -2002,8 +2003,8 @@ public class PastelPedestalRecipes {
     }
 
     private static class ComplexRecipes {
-        static void generate(RecipeOutput ctx) {
-            var rootHelper = rootPrefixHelper(ctx, PedestalTier.COMPLEX);
+        static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
+            var rootHelper = rootPrefixHelper(ctx, lookup, PedestalTier.COMPLEX);
 
             generateVanilla(rootHelper.subPrefix("vanilla"));
             generateRoot(rootHelper);
