@@ -21,13 +21,17 @@ import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentPredicate;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -36,6 +40,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -1162,7 +1167,89 @@ public class PastelPedestalRecipes {
 
         // TODO
         private static void generateVanillaRecipes(PrefixHelper pfx) {
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(Items.BUNDLE))
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .powderInput(PastelGemstoneColor.CYAN, 4)
+                            .experience(2.0f)
+                            .pattern("S")
+                            .pattern("L")
+                            .key('S', Items.STRING)
+                            .key('L', Items.LEATHER)
+                            .requiredAdvancement(PastelAdvancements.Hidden.CollectShards.TOPAZ)
+            );
 
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(Items.COBWEB, 2))
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.25f)
+                            .pattern(" S ")
+                            .pattern("QAQ")
+                            .pattern(" S ")
+                            .key('S', Items.STRING)
+                            .key('A', Items.SPIDER_EYE)
+                            .key('Q', QUITOXIC_POWDER.asItem())
+                            .requiredAdvancement(PastelAdvancements.COLLECT_QUITOXIC_REEDS)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapelessPedestalRecipeBuilder(new ItemStack(Items.PACKED_MUD))
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .ingredient(Items.MUD)
+                            .ingredient(PastelBlocks.AMARANTH_BUSHEL.asItem())
+                            .requiredAdvancement(PastelAdvancements.COLLECT_AMARANTH_BUSHEL)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(new ItemStack(Items.SPECTRAL_ARROW, 2))
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.25f)
+                            .pattern(" S ")
+                            .pattern("SAS")
+                            .pattern(" S ")
+                            .key('A', Items.ARROW)
+                            .key('S', SHIMMERSTONE_GEM.asItem())
+                            .requiredAdvancement(PastelAdvancements.COLLECT_SHIMMERSTONE)
+            );
+
+            var tntStack = new ItemStack(Items.TNT, 2);
+            tntStack.applyComponents(
+                    DataComponentPatch.builder()
+                            .set(DataComponents.BLOCK_STATE, new BlockItemStateProperties(Map.of("unstable", "true")))
+                            .set(DataComponents.LORE, new ItemLore(List.of(Component.literal("unstable"))))
+                            .build());
+
+            pfx.generateRecipe(
+                    "unstable_tnt",
+                    new ShapedPedestalRecipeBuilder(tntStack)
+                            .craftingTime(80)
+                            .tier(PedestalTier.BASIC)
+                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .experience(2.0f)
+                            .pattern("QSQ")
+                            .pattern("SQS")
+                            .pattern("QSQ")
+                            .key('Q', QUITOXIC_POWDER.asItem())
+                            // could be replaced with the sand tag?
+                            .key('S', Items.SAND)
+                            .requiredAdvancement(PastelAdvancements.COLLECT_QUITOXIC_REEDS)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapelessPedestalRecipeBuilder(new ItemStack(Items.WRITABLE_BOOK))
+                            .craftingTime(40)
+                            .tier(PedestalTier.BASIC)
+                            .experience(0.1f)
+                            .ingredient(Items.BOOK)
+                            .ingredient(PastelItemTags.PIGMENTS)
+                            .ingredient(Items.FEATHER)
+                            .requiredAdvancement(PastelAdvancements.COLLECT_PIGMENT)
+            );
         }
 
         private static void generateWeepingGalaRecipes(PrefixHelper pfx) {

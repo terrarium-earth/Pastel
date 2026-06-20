@@ -90,6 +90,8 @@ public class PastelItemTags {
 
     public static final TagKey<Item> SLATE_NOXCAP_STEMS = of("slate_noxcap_stems");
 
+    public static final TagKey<Item> PIGMENTS = of("pigments");
+
     public static class EnchantableWith {
         public static final TagKey<Item> BIG_CATCH = getEnchantableTag(PastelEnchantments.BIG_CATCH);
 

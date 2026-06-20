@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "experience": 0.1,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "tag": "pastel:pigments"
+    },
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "required_advancement": "pastel:collect_pigment",
+  "result": {
+    "count": 1,
+    "id": "minecraft:writable_book"
+  },
+  "time": 40
+}

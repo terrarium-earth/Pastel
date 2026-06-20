@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "Q": {
+      "item": "pastel:quitoxic_powder"
+    },
+    "S": {
+      "item": "minecraft:sand"
+    }
+  },
+  "pattern": [
+    "QSQ",
+    "SQS",
+    "QSQ"
+  ],
+  "required_advancement": "pastel:collect_quitoxic_reeds",
+  "result": {
+    "components": {
+      "minecraft:block_state": {
+        "unstable": "true"
+      },
+      "minecraft:lore": [
+        "\"unstable\""
+      ]
+    },
+    "count": 2,
+    "id": "minecraft:tnt"
+  },
+  "time": 80
+}
