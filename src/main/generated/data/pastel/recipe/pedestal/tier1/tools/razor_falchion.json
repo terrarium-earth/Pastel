@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 8
+  },
+  "experience": 2.0,
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "S": {
+      "item": "minecraft:calcite"
+    }
+  },
+  "pattern": [
+    "A",
+    "A",
+    "S"
+  ],
+  "required_advancement": "pastel:unlocks/equipment/razor_falchion",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:looting": 3
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:razor_falchion"
+  },
+  "time": 600
+}

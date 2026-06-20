@@ -6,11 +6,13 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GemstoneColor;
+import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.items.PigmentItem;
+import earth.terrarium.pastel.items.tools.MoltenRodItem;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
@@ -19,6 +21,7 @@ import earth.terrarium.pastel.recipe.pedestal.builder.ShapedPedestalRecipeBuilde
 import earth.terrarium.pastel.recipe.pedestal.builder.ShapelessPedestalRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.dynamic.StarCandyRecipe;
 import earth.terrarium.pastel.registries.*;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -161,8 +164,9 @@ public class PastelPedestalRecipes {
         generatePedestalRecipeWithSavedTier(ctx, id, builder.getTier(), builder);
     }
 
-    public static void generate(RecipeOutput ctx) {
-        BasicRecipes.generate(ctx);
+    // Enchantments requires threading through a holder lookup
+    public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
+        BasicRecipes.generate(ctx, lookup);
         SimpleRecipes.generate(ctx);
         AdvancedRecipes.generate(ctx);
         ComplexRecipes.generate(ctx);
@@ -175,7 +179,7 @@ public class PastelPedestalRecipes {
     }
 
     private static class BasicRecipes {
-        static void generate(RecipeOutput ctx) {
+        static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
             var rootHelper = rootPrefixHelper(ctx, PedestalTier.BASIC);
 
             generateArrowRecipes(rootHelper.subPrefix("arrows"));
@@ -197,7 +201,7 @@ public class PastelPedestalRecipes {
             generateRunes(rootHelper.subPrefix("runes"));
             generateSaplings(rootHelper.subPrefix("saplings"));
             generateShimmerstoneLightRecipes(rootHelper.subPrefix("shimmerstone_lights"));
-            generateToolRecipes(rootHelper.subPrefix("tools"));
+            generateToolRecipes(rootHelper.subPrefix("tools"), lookup);
             generateVanillaRecipes(rootHelper.subPrefix("vanilla"));
             generateWeepingGalaRecipes(rootHelper.subPrefix("weeping_gala"));
             generateRootRecipes(rootHelper);
@@ -1029,8 +1033,81 @@ public class PastelPedestalRecipes {
         }
 
         // TODO
-        private static void generateToolRecipes(PrefixHelper pfx) {
+        private static void generateToolRecipes(PrefixHelper pfx, HolderLookup.Provider lookup) {
+            // Actually this is a _benefit_ of datagen, no need to copy everything
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, LAGOON_ROD.get()))
+                            .craftingTime(180)
+                            .tier(PedestalTier.BASIC)
+                            .powderInput(PastelGemstoneColor.CYAN, 1)
+                            .experience(0.5f)
+                            .pattern("  B")
+                            .pattern(" BS")
+                            .pattern("B M")
+                            .key('B', Items.SMOOTH_BASALT)
+                            .key('S', Items.STRING)
+                            .key('M', MERMAIDS_GEM.asItem())
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.LAGOON_ROD)
+            );
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, LUCKY_PICKAXE.get()))
+                            .craftingTime(600)
+                            .tier(PedestalTier.BASIC)
+                            .powderInput(PastelGemstoneColor.YELLOW, 8)
+                            .experience(2.0f)
+                            .pattern("CGC")
+                            .pattern(" S ")
+                            .pattern(" S ")
+                            .key('S', Items.SMOOTH_BASALT)
+                            .key('C', CITRINE_SHARD.asItem())
+                            .key('G', SHIMMERSTONE_GEM.asItem())
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.LUCKY_PICKAXE)
+            );
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, MOLTEN_ROD.get()))
+                            .craftingTime(800)
+                            .tier(PedestalTier.BASIC)
+                            .powderInput(PastelGemstoneColor.MAGENTA, 2)
+                            .powderInput(PastelGemstoneColor.YELLOW, 4)
+                            .experience(4.0f)
+                            .pattern(" PB")
+                            .pattern("PBS") // pbs kids! with shows such as sid the science kid!
+                            .pattern("B S")
+                            .key('P', ORANGE_PIGMENT.asItem())
+                            .key('B', Items.BLAZE_ROD)
+                            .key('S', Items.STRING)
+                            .requiredAdvancement(MoltenRodItem.UNLOCK_IDENTIFIER)
+            );
 
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, RAZOR_FALCHION.get()))
+                            .craftingTime(600)
+                            .tier(PedestalTier.BASIC)
+                            .powderInput(PastelGemstoneColor.MAGENTA, 8)
+                            .experience(2.0f)
+                            // The pattern was padded in the json but it didnt NEED to be so im just... not
+                            .pattern("A")
+                            .pattern("A")
+                            .pattern("S")
+                            .key('S', Items.CALCITE)
+                            .key('A', Items.AMETHYST_SHARD)
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.RAZOR_FALCHION)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, TENDER_PICKAXE.get()))
+                            .craftingTime(600)
+                            .tier(PedestalTier.BASIC)
+                            .powderInput(PastelGemstoneColor.CYAN, 8)
+                            .experience(2.0f)
+                            .pattern("TMT")
+                            .pattern(" S ")
+                            .pattern(" S ")
+                            .key('S', Items.SMOOTH_BASALT)
+                            .key('T', TOPAZ_SHARD.asItem())
+                            .key('M', MERMAIDS_GEM.asItem())
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.TENDER_PICKAXE)
+            );
         }
 
         // TODO

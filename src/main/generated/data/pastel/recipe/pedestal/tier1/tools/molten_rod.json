@@ -1,0 +1,37 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 2,
+    "pastel:yellow": 4
+  },
+  "experience": 4.0,
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "P": {
+      "item": "pastel:orange_pigment"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " PB",
+    "PBS",
+    "B S"
+  ],
+  "required_advancement": "pastel:unlocks/equipment/molten_rod",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "pastel:foundry": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:molten_rod"
+  },
+  "time": 800
+}

@@ -1,22 +1,28 @@
 package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.entity.entity.MoltenFishingBobberEntity;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelFluidTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 
 import java.util.List;
+import java.util.Map;
 
-public class MoltenRodItem extends PastelFishingRodItem {
+public class MoltenRodItem extends PastelFishingRodItem implements Preenchanted {
 
-    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/equipment/molten_rod");
+    public static final ResourceLocation UNLOCK_IDENTIFIER = PastelAdvancements.Unlocks.Equipment.MOLTEN_ROD;
 
     public MoltenRodItem(Properties settings) {
         super(settings);
@@ -71,4 +77,10 @@ public class MoltenRodItem extends PastelFishingRodItem {
             );
     }
 
+    @Override
+    public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
+        return Map.of(
+                PastelEnchantments.FOUNDRY, 1
+        );
+    }
 }

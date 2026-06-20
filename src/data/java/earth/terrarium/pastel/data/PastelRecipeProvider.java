@@ -96,11 +96,11 @@ public class PastelRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    public void buildRecipes(RecipeOutput recipeOutput) {
+    public void buildRecipes(RecipeOutput recipeOutput, HolderLookup.Provider lookup) {
         generateCrystallarieumRecipes(recipeOutput);
         generateEnchantmentUpgradeRecipes(recipeOutput);
         generateHealingDegradingRecipes(recipeOutput);
-        PastelPedestalRecipes.generate(recipeOutput);
+        PastelPedestalRecipes.generate(recipeOutput, lookup);
     }
 
 
