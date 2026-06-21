@@ -127,12 +127,9 @@ public class BookCinderhearthSmeltingPageRenderer
         renderTitle(drawContext, recipeY, second);
 
         // the ingredient
-        var ingredientStacks = recipe
-            .getIngredientStacks();
-
-        if (ingredientStacks.isEmpty()) return;
-
-        var ingredientStack = ingredientStacks.getFirst();
+        var ingredientStack = recipe
+            .getIngredientStacks()
+            .getFirst();
         parentScreen
             .renderIngredient(
                 drawContext,

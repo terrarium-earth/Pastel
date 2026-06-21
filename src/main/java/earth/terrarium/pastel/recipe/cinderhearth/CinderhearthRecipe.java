@@ -111,7 +111,7 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
 
     @Override
     public NonNullList<IngredientStack> getIngredientStacks() {
-        return NonNullList.of(this.ingredient);
+        return NonNullList.of(IngredientStack.EMPTY, this.ingredient);
     }
 
     public float getExperience() {
