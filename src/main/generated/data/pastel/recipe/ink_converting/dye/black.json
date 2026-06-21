@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 5,
+  "ingredient": {
+    "item": "minecraft:black_dye"
+  },
+  "ink_color": "pastel:black",
+  "required_advancement": "pastel:hidden/collect_pigment/black"
+}

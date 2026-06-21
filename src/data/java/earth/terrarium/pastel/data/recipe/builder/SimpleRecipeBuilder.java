@@ -13,7 +13,7 @@ import java.util.*;
 // <https://docs.neoforged.net/docs/1.21.1/resources/server/recipes/#data-generation>
 public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> implements RecipeBuilder {
     protected final ItemStack result;
-    protected final List<ICondition> conditions = new ArrayList<>();
+    private final List<ICondition> conditions = new ArrayList<>();
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     protected String group = "";
 
@@ -53,6 +53,10 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
     public C neoConditions(ICondition... conditions) {
         this.conditions.addAll(Arrays.stream(conditions).toList());
         return self();
+    }
+
+    protected ICondition[] conditions() {
+        return this.conditions.toArray(ICondition[]::new);
     }
 
 }

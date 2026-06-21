@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
+import earth.terrarium.pastel.data.recipe.InkConversionRecipes;
 import earth.terrarium.pastel.data.recipe.PastelPedestalRecipes;
 import earth.terrarium.pastel.recipe.RecipeScaling;
 import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
@@ -101,6 +102,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         generateEnchantmentUpgradeRecipes(recipeOutput);
         generateHealingDegradingRecipes(recipeOutput);
         PastelPedestalRecipes.generate(recipeOutput, lookup);
+        InkConversionRecipes.generate(recipeOutput, lookup);
     }
 
 

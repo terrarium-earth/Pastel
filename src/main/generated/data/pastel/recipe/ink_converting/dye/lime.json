@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 5,
+  "ingredient": {
+    "item": "minecraft:lime_dye"
+  },
+  "ink_color": "pastel:lime",
+  "required_advancement": "pastel:hidden/collect_pigment/lime"
+}

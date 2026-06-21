@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 5,
+  "ingredient": {
+    "item": "minecraft:gray_dye"
+  },
+  "ink_color": "pastel:gray",
+  "required_advancement": "pastel:hidden/collect_pigment/gray"
+}

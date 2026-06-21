@@ -65,6 +65,6 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
                 );
 
 
-        recipeOutput.accept(id, realRecipe, null, this.conditions.toArray(ICondition[]::new));
+        recipeOutput.accept(id, realRecipe, null, this.conditions());
     }
 }

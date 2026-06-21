@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 900,
+  "ingredient": {
+    "item": "pastel:lime_block"
+  },
+  "ink_color": "pastel:lime",
+  "required_advancement": "pastel:hidden/collect_pigment/lime"
+}

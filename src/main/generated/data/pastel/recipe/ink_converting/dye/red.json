@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 5,
+  "ingredient": {
+    "item": "minecraft:red_dye"
+  },
+  "ink_color": "pastel:red",
+  "required_advancement": "pastel:hidden/collect_pigment/red"
+}

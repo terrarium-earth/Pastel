@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 100,
+  "ingredient": {
+    "item": "pastel:red_pigment"
+  },
+  "ink_color": "pastel:red",
+  "required_advancement": "pastel:hidden/collect_pigment/red"
+}

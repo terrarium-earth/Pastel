@@ -61,6 +61,6 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
                 this.skipRemainders,
                 this.disableYieldUpgrades
         );
-        recipeOutput.accept(id, recipe, null, this.conditions.toArray(ICondition[]::new));
+        recipeOutput.accept(id, recipe, null, this.conditions());
     }
 }
