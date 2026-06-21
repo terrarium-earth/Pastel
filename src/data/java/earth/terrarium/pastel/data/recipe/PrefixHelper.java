@@ -1,9 +1,7 @@
 package earth.terrarium.pastel.data.recipe;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
-import earth.terrarium.pastel.recipe.pedestal.builder.PedestalRecipeBuilder;
+import earth.terrarium.pastel.data.recipe.builder.pedestal.PedestalRecipeBuilder;
 import earth.terrarium.pastel.registries.PastelResourceConditions;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -1,7 +1,7 @@
-package earth.terrarium.pastel.recipe.pedestal.builder;
+package earth.terrarium.pastel.data.recipe.builder.pedestal;
 
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.recipe.builder.GatedRecipeBuilder;
+import earth.terrarium.pastel.data.recipe.builder.GatedRecipeBuilder;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.world.item.ItemStack;

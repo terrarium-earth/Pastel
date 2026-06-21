@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.recipe.builder;
+package earth.terrarium.pastel.data.recipe.builder;
 
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;

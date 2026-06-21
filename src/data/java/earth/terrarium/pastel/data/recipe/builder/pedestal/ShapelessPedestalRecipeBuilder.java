@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.recipe.pedestal.builder;
+package earth.terrarium.pastel.data.recipe.builder.pedestal;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.recipe.pedestal.ShapelessPedestalRecipe;

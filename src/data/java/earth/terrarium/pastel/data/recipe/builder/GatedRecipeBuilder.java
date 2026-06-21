@@ -1,10 +1,9 @@
-package earth.terrarium.pastel.recipe.builder;
+package earth.terrarium.pastel.data.recipe.builder;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public abstract class GatedRecipeBuilder<C extends GatedRecipeBuilder<C>> extends SimpleRecipeBuilder<C> {
     protected boolean secret = false;
