@@ -92,7 +92,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
                 var stack = inv.getStackInSlot(slot);
 
                 if (!stack.isEmpty()) {
-                    decrementGridSlot(pedestal, slot, 1, stack);
+                    decrementGridSlot(pedestal, slot, stack);
                 }
             }
         }

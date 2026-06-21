@@ -243,21 +243,21 @@ public abstract class PedestalRecipe extends GatedPastelRecipe<PedestalRecipeInp
     }
 
     // This remainder handling is 100% going to break at some point but honestly idc rn
-    protected void decrementGridSlot(PedestalBlockEntity pedestal, int slot, int count, ItemStack invStack) {
+    protected void decrementGridSlot(PedestalBlockEntity pedestal, int slot, ItemStack invStack) {
         ItemStack remainder = this.skipRecipeRemainders() ? ItemStack.EMPTY : invStack.getCraftingRemainingItem();
-        remainder.setCount(count);
+        remainder.setCount(1);
         var inv = pedestal.getInventory();
 
         if (pedestal.getLevel() == null) return;
         if (remainder.isEmpty()) {
-            invStack.shrink(count);
+            invStack.shrink(1);
         } else {
             if (inv
                 .getStackInSlot(slot)
-                .getCount() == count) {
+                .getCount() == 1) {
                 inv.setStackInSlot(slot, remainder);
             } else {
-                inv.extractItem(slot, count, false);
+                inv.extractItem(slot, 1, false);
 
                 ItemEntity itemEntity = new ItemEntity(
                     pedestal.getLevel(),

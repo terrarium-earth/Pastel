@@ -93,7 +93,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
             ) {
                 ItemStack slotStack = inv.getStackInSlot(slot);
                 if (ingredient.test(slotStack)) {
-                    decrementGridSlot(pedestal, slot, 1, slotStack);
+                    decrementGridSlot(pedestal, slot, slotStack);
                     break;
                 }
             }
