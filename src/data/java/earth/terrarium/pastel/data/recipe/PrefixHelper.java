@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.data.recipe;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.data.recipe.builder.pedestal.PedestalRecipeBuilder;
 import earth.terrarium.pastel.registries.PastelResourceConditions;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,7 +33,7 @@ public class PrefixHelper {
     }
 
 
-    public void generateAutoNamedRecipe(PedestalRecipeBuilder<?> builder) {
+    public void generateAutoNamedRecipe(RecipeBuilder builder) {
         var id = BuiltInRegistries.ITEM.getKey(builder.getResult()).getPath();
         generateRecipe(id, builder);
     }
