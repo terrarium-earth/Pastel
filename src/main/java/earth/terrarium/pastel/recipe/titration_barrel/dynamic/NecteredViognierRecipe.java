@@ -10,6 +10,7 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -40,19 +41,16 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
-        {
-            add(
-                IngredientStack
-                    .ofItems(
-                        PastelBlocks.NEPHRITE_BLOSSOM_BULB
-                            .get()
-                            .asItem()
-                    )
-            );
-            add(IngredientStack.ofItems(PastelItems.GLASS_PEACH.get(), 4));
-        }
-    };
+    public static final NonNullList<IngredientStack> INGREDIENT_STACKS = NonNullList.of(
+            IngredientStack
+                .ofItems(
+                    PastelBlocks.NEPHRITE_BLOSSOM_BULB
+                        .get()
+                        .asItem()
+                ),
+            IngredientStack.ofItems(PastelItems.GLASS_PEACH.get(), 4)
+
+    );
 
     public NecteredViognierRecipe() {
         super(

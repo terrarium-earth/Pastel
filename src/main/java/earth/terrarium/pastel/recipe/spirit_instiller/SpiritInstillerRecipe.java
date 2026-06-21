@@ -127,7 +127,7 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
+    public NonNullList<IngredientStack> getIngredientStacks() {
         NonNullList<IngredientStack> defaultedList = NonNullList.create();
         defaultedList.add(this.centerIngredient);
         defaultedList.add(this.bowlIngredient1);

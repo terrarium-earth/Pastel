@@ -9,6 +9,7 @@ import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +37,7 @@ public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
             "",
             false,
             Optional.of(UNLOCK_IDENTIFIER),
-            List.of(IngredientStack.ofTag(PastelItemTags.SHOOTING_STARS), IngredientStack.ofItems(Items.DIAMOND)),
+            NonNullList.of(IngredientStack.ofTag(PastelItemTags.SHOOTING_STARS), IngredientStack.ofItems(Items.DIAMOND)),
             FluidIngredient.of(Fluids.WATER),
             getHardenedShootingStar(),
             5,

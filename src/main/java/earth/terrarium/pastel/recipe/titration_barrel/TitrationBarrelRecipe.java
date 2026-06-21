@@ -18,6 +18,7 @@ import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -55,7 +56,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
         }
     };
 
-    public final List<IngredientStack> inputStacks;
+    public final NonNullList<IngredientStack> inputStacks;
 
     public final ItemStack outputItemStack;
 
@@ -68,15 +69,15 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
     public final FermentationData fermentationData;
 
     public TitrationBarrelRecipe(
-        String group,
-        boolean secret,
-        Optional<ResourceLocation> requiredAdvancementIdentifier,
-        List<IngredientStack> inputStacks,
-        FluidIngredient fluid,
-        ItemStack outputItemStack,
-        Item tappingItem,
-        int minFermentationTimeHours,
-        FermentationData fermentationData
+            String group,
+            boolean secret,
+            Optional<ResourceLocation> requiredAdvancementIdentifier,
+            NonNullList<IngredientStack> inputStacks,
+            FluidIngredient fluid,
+            ItemStack outputItemStack,
+            Item tappingItem,
+            int minFermentationTimeHours,
+            FermentationData fermentationData
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -107,7 +108,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
+    public NonNullList<IngredientStack> getIngredientStacks() {
         return this.inputStacks;
     }
 
@@ -354,8 +355,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        IngredientStack.CODEC
-                            .listOf()
+                        NonNullList.codecOf(IngredientStack.CODEC)
                             .fieldOf("ingredients")
                             .forGetter(recipe -> recipe.inputStacks),
                         FluidIngredient.CODEC
@@ -389,7 +389,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                 c -> c.secret,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
                 c -> c.requiredAdvancementIdentifier,
-                IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                IngredientStack.STREAM_CODEC.apply(PacketCodecHelper.nonNullList()),
                 c -> c.inputStacks,
                 FluidIngredient.STREAM_CODEC,
                 c -> c.fluid,

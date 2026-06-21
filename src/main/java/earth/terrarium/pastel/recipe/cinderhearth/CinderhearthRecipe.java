@@ -13,6 +13,7 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -109,8 +110,8 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
-        return List.of(this.ingredient);
+    public NonNullList<IngredientStack> getIngredientStacks() {
+        return NonNullList.of(this.ingredient);
     }
 
     public float getExperience() {

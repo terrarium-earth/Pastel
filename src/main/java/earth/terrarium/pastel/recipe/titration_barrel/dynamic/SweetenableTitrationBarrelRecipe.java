@@ -9,6 +9,7 @@ import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,15 +24,15 @@ import java.util.Optional;
 public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRecipe {
 
     public SweetenableTitrationBarrelRecipe(
-        String group,
-        boolean secret,
-        Optional<ResourceLocation> requiredAdvancementIdentifier,
-        List<IngredientStack> inputStacks,
-        FluidIngredient fluid,
-        ItemStack outputItemStack,
-        Item tappingItem,
-        int minFermentationTimeHours,
-        FermentationData fermentationData
+            String group,
+            boolean secret,
+            Optional<ResourceLocation> requiredAdvancementIdentifier,
+            NonNullList<IngredientStack> inputStacks,
+            FluidIngredient fluid,
+            ItemStack outputItemStack,
+            Item tappingItem,
+            int minFermentationTimeHours,
+            FermentationData fermentationData
     ) {
         super(
             group,

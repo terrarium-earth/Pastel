@@ -21,6 +21,7 @@ import net.minecraft.advancements.critereon.LightPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
@@ -979,6 +980,14 @@ public class PacketCodecHelper {
                 codec16.encode(buf, from16.apply(value));
             }
         };
+    }
+
+    public static <B extends ByteBuf, C> StreamCodec.CodecOperation<B, C, NonNullList<C>> nonNullList() {
+        return (codec) -> ByteBufCodecs.<B, C>list().apply(codec).map(NonNullList::copyOf, Function.identity());
+    }
+
+    public static <B extends ByteBuf, C> StreamCodec.CodecOperation<B, C, NonNullList<C>> nonNullListOf(int maxSize) {
+        return (codec) -> ByteBufCodecs.<B, C>list(maxSize).apply(codec).map(NonNullList::copyOf, Function.identity());
     }
 
 }

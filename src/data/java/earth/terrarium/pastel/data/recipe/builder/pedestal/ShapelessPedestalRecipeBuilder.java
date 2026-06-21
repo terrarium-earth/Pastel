@@ -2,6 +2,7 @@ package earth.terrarium.pastel.data.recipe.builder.pedestal;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.recipe.pedestal.ShapelessPedestalRecipe;
+import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -45,7 +46,7 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
                 this.secret,
                 Optional.ofNullable(this.requiredAdvancementIdentifier),
                 this.tier,
-                this.ingredients,
+                NonNullList.copyOf(this.ingredients),
                 this.powderInputs,
                 this.result,
                 this.experience,

@@ -11,6 +11,7 @@ import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import earth.terrarium.pastel.registries.PastelRegistries;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -20,24 +21,23 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class ShapelessPedestalRecipe extends PedestalRecipe {
 
     public ShapelessPedestalRecipe(
-        String group,
-        boolean secret,
-        Optional<ResourceLocation> requiredAdvancementIdentifier,
-        PedestalTier tier,
-        List<IngredientStack> craftingInputs,
-        Map<GemstoneColor, Integer> gemstonePowderInputs,
-        ItemStack output,
-        float experience,
-        int craftingTime,
-        boolean skipRecipeRemainders,
-        boolean noBenefitsFromYieldUpgrades
+            String group,
+            boolean secret,
+            Optional<ResourceLocation> requiredAdvancementIdentifier,
+            PedestalTier tier,
+            NonNullList<IngredientStack> craftingInputs,
+            Map<GemstoneColor, Integer> gemstonePowderInputs,
+            ItemStack output,
+            float experience,
+            int craftingTime,
+            boolean skipRecipeRemainders,
+            boolean noBenefitsFromYieldUpgrades
     ) {
         super(
             group,
@@ -100,7 +100,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
                         PedestalTier.CODEC.optionalFieldOf("tier", PedestalTier.BASIC).forGetter(recipe -> recipe.tier),
-                        IngredientStack.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
+                        NonNullList.codecOf(IngredientStack.CODEC).fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
                         CodecHelper
                             .registryMap(PastelRegistries.GEMSTONE_COLOR, Codec.INT)
                             .fieldOf("colors")
@@ -128,7 +128,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
                 recipe -> recipe.requiredAdvancementIdentifier,
                 PedestalTier.STREAM_CODEC,
                 recipe -> recipe.tier,
-                IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                IngredientStack.STREAM_CODEC.apply(PacketCodecHelper.nonNullList()),
                 recipe -> recipe.inputs,
                 ByteBufCodecs
                     .map(

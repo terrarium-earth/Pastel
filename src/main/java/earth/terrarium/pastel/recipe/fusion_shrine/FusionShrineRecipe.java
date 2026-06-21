@@ -22,6 +22,7 @@ import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
@@ -46,7 +47,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("build_fusion_shrine");
 
-    protected final List<IngredientStack> craftingInputs;
+    protected final NonNullList<IngredientStack> craftingInputs;
 
     protected final FluidIngredient fluid;
 
@@ -79,22 +80,22 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     protected final boolean copyComponents;
 
     public FusionShrineRecipe(
-        String group,
-        boolean secret,
-        Optional<ResourceLocation> requiredAdvancementIdentifier,
-        List<IngredientStack> craftingInputs,
-        FluidIngredient fluid,
-        ItemStack output,
-        float experience,
-        int craftingTime,
-        boolean yieldUpgradesDisabled,
-        boolean playCraftingFinishedEffects,
-        boolean copyComponents,
-        List<WorldConditionsPredicate> worldConditionsPredicates,
-        @NotNull FusionShrineRecipeWorldEffect startWorldEffect,
-        @NotNull List<FusionShrineRecipeWorldEffect> duringWorldEffects,
-        @NotNull FusionShrineRecipeWorldEffect finishWorldEffect,
-        @Nullable Component description
+            String group,
+            boolean secret,
+            Optional<ResourceLocation> requiredAdvancementIdentifier,
+            NonNullList<IngredientStack> craftingInputs,
+            FluidIngredient fluid,
+            ItemStack output,
+            float experience,
+            int craftingTime,
+            boolean yieldUpgradesDisabled,
+            boolean playCraftingFinishedEffects,
+            boolean copyComponents,
+            List<WorldConditionsPredicate> worldConditionsPredicates,
+            @NotNull FusionShrineRecipeWorldEffect startWorldEffect,
+            @NotNull List<FusionShrineRecipeWorldEffect> duringWorldEffects,
+            @NotNull FusionShrineRecipeWorldEffect finishWorldEffect,
+            @Nullable Component description
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -165,7 +166,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
+    public NonNullList<IngredientStack> getIngredientStacks() {
         return this.craftingInputs;
     }
 
@@ -432,8 +433,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        IngredientStack.CODEC
-                            .listOf(0, 7)
+                        CodecHelper.nonNullListOfSize(IngredientStack.CODEC, 0, 7)
                             .fieldOf("ingredients")
                             .forGetter(recipe -> recipe.craftingInputs),
                         FluidIngredient.CODEC
@@ -489,7 +489,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
                 recipe -> recipe.secret,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
                 recipe -> recipe.requiredAdvancementIdentifier,
-                IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list(7)),
+                IngredientStack.STREAM_CODEC.apply(PacketCodecHelper.nonNullListOf(7)),
                 recipe -> recipe.craftingInputs,
                 FluidIngredient.STREAM_CODEC,
                 recipe -> recipe.fluid,

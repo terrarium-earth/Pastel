@@ -7,6 +7,7 @@ import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,12 +30,10 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 
     public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(PastelItems.MERMAIDS_JAM.get(), 4);
 
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
-        {
-            add(IngredientStack.ofTag(PastelItemTags.FRUITS, 8));
-            add(IngredientStack.ofItems(Items.SUGAR, 16));
-        }
-    };
+    public static final NonNullList<IngredientStack> INGREDIENT_STACKS = NonNullList.of(
+            IngredientStack.ofTag(PastelItemTags.FRUITS, 8),
+            IngredientStack.ofItems(Items.SUGAR, 16)
+    );
 
     public CheongRecipe() {
         super(

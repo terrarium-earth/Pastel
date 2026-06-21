@@ -15,6 +15,7 @@ import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
@@ -41,7 +43,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 
     protected final PedestalTier tier;
 
-    protected final List<IngredientStack> inputs;
+    protected final NonNullList<IngredientStack> inputs;
 
     protected final Map<GemstoneColor, Integer> powderInputs;
 
@@ -56,17 +58,17 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
     protected final boolean noBenefitsFromYieldUpgrades;
 
     public PedestalRecipe(
-        String group,
-        boolean secret,
-        Optional<ResourceLocation> requiredAdvancementIdentifier,
-        PedestalTier tier,
-        List<IngredientStack> inputs,
-        Map<GemstoneColor, Integer> powderInputs,
-        ItemStack output,
-        float experience,
-        int craftingTime,
-        boolean skipRecipeRemainders,
-        boolean noBenefitsFromYieldUpgrades
+            String group,
+            boolean secret,
+            Optional<ResourceLocation> requiredAdvancementIdentifier,
+            PedestalTier tier,
+            NonNullList<IngredientStack> inputs,
+            Map<GemstoneColor, Integer> powderInputs,
+            ItemStack output,
+            float experience,
+            int craftingTime,
+            boolean skipRecipeRemainders,
+            boolean noBenefitsFromYieldUpgrades
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -127,7 +129,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
+    public NonNullList<IngredientStack> getIngredientStacks() {
         return inputs;
     }
 

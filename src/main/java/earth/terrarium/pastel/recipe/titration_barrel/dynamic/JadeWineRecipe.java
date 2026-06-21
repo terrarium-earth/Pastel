@@ -9,6 +9,7 @@ import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -36,12 +37,11 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
-        {
-            add(IngredientStack.ofItems(PastelItems.GERMINATED_JADE_VINE_BULB.get()));
-            add(IngredientStack.ofItems(PastelItems.JADE_PETALS.get(), 3));
-        }
-    };
+    public static final NonNullList<IngredientStack> INGREDIENT_STACKS = NonNullList.of(
+            IngredientStack.ofItems(PastelItems.GERMINATED_JADE_VINE_BULB.get()),
+            IngredientStack.ofItems(PastelItems.JADE_PETALS.get(), 3)
+
+    );
 
     public JadeWineRecipe() {
         super(

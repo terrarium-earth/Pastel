@@ -2,6 +2,7 @@ package earth.terrarium.pastel.recipe;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -20,7 +21,7 @@ public abstract class GatedStackPastelRecipe<C extends RecipeInput> extends Gate
         super(group, secret, requiredAdvancementIdentifier);
     }
 
-    public abstract List<IngredientStack> getIngredientStacks();
+    public abstract NonNullList<IngredientStack> getIngredientStacks();
 
     protected boolean matchIngredientStacksExclusively(
         RecipeInput recipeInput,

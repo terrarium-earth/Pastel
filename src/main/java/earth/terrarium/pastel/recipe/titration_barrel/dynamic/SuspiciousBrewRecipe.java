@@ -13,6 +13,7 @@ import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.Holder;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -48,14 +49,12 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/food/suspicious_brew");
 
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
-        {
-            add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
-            add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
-            add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
-            add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
-        }
-    };
+    public static final NonNullList<IngredientStack> INGREDIENT_STACKS = NonNullList.of(
+        IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1),
+        IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1),
+        IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1),
+        IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1)
+    );
 
     public SuspiciousBrewRecipe() {
         super(
