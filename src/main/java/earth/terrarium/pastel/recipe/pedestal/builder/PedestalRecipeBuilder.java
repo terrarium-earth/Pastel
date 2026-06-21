@@ -6,17 +6,14 @@ import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.world.item.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> extends GatedRecipeBuilder<C> {
-    @Nullable
-    protected PedestalTier tier;
+    protected PedestalTier tier = PedestalTier.BASIC;
     protected int craftingTime = 200;
-    protected boolean ignoreYieldUpgrades = false;
+    protected boolean disableYieldUpgrades = false;
     protected boolean skipRemainders = false;
     protected final Map<GemstoneColor, Integer> powderInputs = new HashMap<>();
     protected float experience = 0.0f;
@@ -25,7 +22,6 @@ public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> 
         super(result);
     }
 
-    @Nullable
     public PedestalTier getTier() {
         return this.tier;
     }
@@ -58,8 +54,8 @@ public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> 
         return self();
     }
 
-    public C ignoreYieldUpgrades(boolean ignoreYieldUpgrades) {
-        this.ignoreYieldUpgrades = ignoreYieldUpgrades;
+    public C disableYieldUpgrades(boolean disableYieldUpgrades) {
+        this.disableYieldUpgrades = disableYieldUpgrades;
         return self();
     }
 
@@ -68,32 +64,32 @@ public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> 
         return self();
     }
 
-    public C powderInput(GemstoneColor color, int amount) {
+    public C color(GemstoneColor color, int amount) {
         this.powderInputs.put(color, amount);
         return self();
     }
 
     public C cyan(int cyan) {
-        return powderInput(PastelGemstoneColor.CYAN, cyan);
+        return color(PastelGemstoneColor.CYAN, cyan);
     }
 
     public C magenta(int magenta) {
-        return powderInput(PastelGemstoneColor.MAGENTA, magenta);
+        return color(PastelGemstoneColor.MAGENTA, magenta);
     }
 
     public C yellow(int yellow) {
-        return powderInput(PastelGemstoneColor.YELLOW, yellow);
+        return color(PastelGemstoneColor.YELLOW, yellow);
     }
 
     public C black(int black) {
-        return powderInput(PastelGemstoneColor.BLACK, black);
+        return color(PastelGemstoneColor.BLACK, black);
     }
 
     public C white(int white) {
-        return powderInput(PastelGemstoneColor.WHITE, white);
+        return color(PastelGemstoneColor.WHITE, white);
     }
 
-    public C replacePowderInputsWith(Map<GemstoneColor, Integer> colors) {
+    public C replaceColorsWith(Map<GemstoneColor, Integer> colors) {
         this.powderInputs.clear();
         this.powderInputs.putAll(colors);
         return self();

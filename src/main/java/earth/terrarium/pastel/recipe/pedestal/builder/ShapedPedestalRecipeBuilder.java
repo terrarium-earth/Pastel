@@ -30,17 +30,17 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
         return this;
     }
 
-    public ShapedPedestalRecipeBuilder key(char key, IngredientStack ingredient) {
+    public ShapedPedestalRecipeBuilder define(char key, IngredientStack ingredient) {
         keyMap.put(key, ingredient);
         return this;
     }
 
-    public ShapedPedestalRecipeBuilder key(char key, ItemLike item) {
-        return this.key(key, IngredientStack.ofItems(item.asItem()));
+    public ShapedPedestalRecipeBuilder define(char key, ItemLike item) {
+        return this.define(key, IngredientStack.ofItems(item.asItem()));
     }
 
-    public ShapedPedestalRecipeBuilder key(char key, TagKey<Item> tagKey) {
-        return this.key(key, IngredientStack.ofTag(tagKey));
+    public ShapedPedestalRecipeBuilder define(char key, TagKey<Item> tagKey) {
+        return this.define(key, IngredientStack.ofTag(tagKey));
     }
 
     @Override
@@ -59,7 +59,7 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
                         this.experience,
                         this.craftingTime,
                         this.skipRemainders,
-                        this.ignoreYieldUpgrades
+                        this.disableYieldUpgrades
                 );
 
 

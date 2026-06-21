@@ -8,7 +8,6 @@ import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
-import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
@@ -41,11 +40,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
-import oshi.util.tuples.Pair;
 import oshi.util.tuples.Triplet;
 
 import java.util.List;
@@ -188,9 +185,9 @@ public class PastelPedestalRecipes {
                             .pattern("M")
                             .pattern("S")
                             .pattern("F")
-                            .key('M', RAW_MALACHITE.get())
-                            .key('S', Items.STICK)
-                            .key('F', PastelItemTags.RESPLENDENT_FEATHERS)
+                            .define('M', RAW_MALACHITE.get())
+                            .define('S', Items.STICK)
+                            .define('F', PastelItemTags.RESPLENDENT_FEATHERS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_ARROWS)
             );
 
@@ -256,13 +253,13 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(AMETHYST_CHESTPLATE.get()))
                             .tier(PedestalTier.BASIC)
                             .craftingTime(400)
-                            .powderInput(PastelGemstoneColor.MAGENTA, 4)
+                            .color(PastelGemstoneColor.MAGENTA, 4)
                             .experience(2.0f)
                             .pattern("A A")
                             .pattern("ATA")
                             .pattern("AAA")
-                            .key('A', Items.AMETHYST_SHARD)
-                            .key('T', Items.GHAST_TEAR)
+                            .define('A', Items.AMETHYST_SHARD)
+                            .define('T', Items.GHAST_TEAR)
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectShards.AMETHYST)
             );
 
@@ -270,13 +267,13 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(CITRINE_BOOTS.get()))
                             .tier(PedestalTier.BASIC)
                             .craftingTime(400)
-                            .powderInput(PastelGemstoneColor.YELLOW, 4)
+                            .color(PastelGemstoneColor.YELLOW, 4)
                             .experience(2.0f)
                             .pattern("S S")
                             .pattern("C C")
                             .pattern("C C")
-                            .key('S', Items.SUGAR)
-                            .key('C', CITRINE_SHARD.get())
+                            .define('S', Items.SUGAR)
+                            .define('C', CITRINE_SHARD.get())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectShards.CITRINE)
             );
 
@@ -284,14 +281,14 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(TOPAZ_LEGGINGS.get()))
                             .tier(PedestalTier.BASIC)
                             .craftingTime(400)
-                            .powderInput(PastelGemstoneColor.CYAN, 4)
+                            .color(PastelGemstoneColor.CYAN, 4)
                             .experience(2.0f)
                             // is that a deepslate in your pants or are you just happy to see me?
                             .pattern("TTT")
                             .pattern("TDT")
                             .pattern("T T")
-                            .key('T', TOPAZ_SHARD.get())
-                            .key('D', Items.DEEPSLATE)
+                            .define('T', TOPAZ_SHARD.get())
+                            .define('D', Items.DEEPSLATE)
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectShards.TOPAZ)
             );
         }
@@ -327,8 +324,8 @@ public class PastelPedestalRecipes {
                                         .pattern("CCC")
                                         .pattern("FFF")
                                         .pattern("CCC")
-                                        .key('C', carpets.pick(color))
-                                        .key('F', Tags.Items.FEATHERS)
+                                        .define('C', carpets.pick(color))
+                                        .define('F', Tags.Items.FEATHERS)
                                         .requiredAdvancement(PastelAdvancements.CRAFT_USING_PEDESTAL)
                         );
                     }
@@ -355,9 +352,9 @@ public class PastelPedestalRecipes {
                             .pattern("###")
                             .pattern("###")
                             .pattern("###")
-                            .key('#', BONE_ASH.asItem())
+                            .define('#', BONE_ASH.asItem())
                             .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
             prefixHelper.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.POLISHED_BONE_ASH_PILLAR, 2))
@@ -367,9 +364,9 @@ public class PastelPedestalRecipes {
                             .experience(0.0f)
                             .pattern("#")
                             .pattern("#")
-                            .key('#', PastelBlocks.POLISHED_BONE_ASH.asItem())
+                            .define('#', PastelBlocks.POLISHED_BONE_ASH.asItem())
                             .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
             generateDragonboneSlab(prefixHelper, PastelBlocks.POLISHED_BONE_ASH_SLAB, PastelBlocks.POLISHED_BONE_ASH);
             generateDragonboneStairs(prefixHelper, PastelBlocks.POLISHED_BONE_ASH_STAIRS, PastelBlocks.POLISHED_BONE_ASH);
@@ -384,9 +381,9 @@ public class PastelPedestalRecipes {
                             .experience(0.0f)
                             .pattern("WW")
                             .pattern("WW")
-                            .key('W', PastelBlocks.POLISHED_BONE_ASH.asItem())
+                            .define('W', PastelBlocks.POLISHED_BONE_ASH.asItem())
                             .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
             generateDragonboneSlab(prefixHelper, PastelBlocks.BONE_ASH_BRICK_SLAB, PastelBlocks.BONE_ASH_BRICKS);
             generateDragonboneStairs(prefixHelper, PastelBlocks.BONE_ASH_BRICK_STAIRS, PastelBlocks.BONE_ASH_BRICKS);
@@ -401,9 +398,9 @@ public class PastelPedestalRecipes {
                             .experience(0.0f)
                             .pattern("WW")
                             .pattern("WW")
-                            .key('W', PastelBlocks.BONE_ASH_BRICKS.asItem())
+                            .define('W', PastelBlocks.BONE_ASH_BRICKS.asItem())
                             .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
             generateDragonboneSlab(prefixHelper, PastelBlocks.BONE_ASH_TILE_SLAB, PastelBlocks.BONE_ASH_TILES);
             generateDragonboneStairs(prefixHelper, PastelBlocks.BONE_ASH_TILE_STAIRS, PastelBlocks.BONE_ASH_TILES);
@@ -420,10 +417,10 @@ public class PastelPedestalRecipes {
                             .pattern("#  ")
                             .pattern("#B ")
                             .pattern("##B")
-                            .key('#', PastelBlocks.POLISHED_BONE_ASH.asItem())
-                            .key('B', DRAGONBONE_CHUNK.asItem())
+                            .define('#', PastelBlocks.POLISHED_BONE_ASH.asItem())
+                            .define('B', DRAGONBONE_CHUNK.asItem())
                             .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
         }
 
@@ -432,59 +429,59 @@ public class PastelPedestalRecipes {
             // Tarts
             prefixHelper.generateAutoNamedRecipe(
                     tartBase(ASHEN_TART.asItem(), Items.SWEET_BERRIES)
-                            .powderInput(PastelGemstoneColor.CYAN, 2)
-                            .powderInput(PastelGemstoneColor.YELLOW, 4)
+                            .color(PastelGemstoneColor.CYAN, 2)
+                            .color(PastelGemstoneColor.YELLOW, 4)
             );
 
             prefixHelper.generateAutoNamedRecipe(
                     tartBase(JARAMEL_TART.asItem(), Items.AIR)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
             );
             prefixHelper.generateAutoNamedRecipe(
                     tartBase(PUFF_TART.asItem(), Items.DRAGON_BREATH)
-                            .powderInput(PastelGemstoneColor.CYAN, 2)
-                            .powderInput(PastelGemstoneColor.MAGENTA, 2)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.CYAN, 2)
+                            .color(PastelGemstoneColor.MAGENTA, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
             );
 
             prefixHelper.generateAutoNamedRecipe(
                     tartBase(SALTED_JARAMEL_TART.asItem(), Items.GHAST_TEAR)
                             .secret(true)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
             );
 
             prefixHelper.generateAutoNamedRecipe(
                     tartBase(WEEPING_TART.asItem(), Items.KELP)
-                            .powderInput(PastelGemstoneColor.CYAN, 4)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.CYAN, 4)
+                            .color(PastelGemstoneColor.YELLOW, 2)
             );
 
             prefixHelper.generateAutoNamedRecipe(
                     tartBase(WHISPY_TART.asItem(), NIGHTDEW_SPROUT.asItem())
-                            .powderInput(PastelGemstoneColor.MAGENTA, 4)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.MAGENTA, 4)
+                            .color(PastelGemstoneColor.YELLOW, 2)
             );
 
             // Trifles
             prefixHelper.generateAutoNamedRecipe(
                     trifleBase(DEMON_TRIFLE.asItem(), BLOODBOIL_SYRUP.asItem())
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.DEMON_TRIFLE)
             );
 
             prefixHelper.generateAutoNamedRecipe(
                     trifleBase(JARAMEL_TRIFLE.asItem(), Items.AIR)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
             );
 
             prefixHelper.generateAutoNamedRecipe(
                     trifleBase(MONSTER_TRIFLE.asItem(), QUITOXIC_POWDER.asItem())
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
             );
 
             prefixHelper.generateAutoNamedRecipe(
                     trifleBase(SALTED_JARAMEL_TRIFLE.asItem(), Items.GHAST_TEAR)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
                             .secret(true)
             );
 
@@ -498,11 +495,11 @@ public class PastelPedestalRecipes {
                             .pattern("AHA")
                             .pattern("EME")
                             .pattern("JEJ")
-                            .key('E', LIZARD_MEAT.asItem())
-                            .key('A', Items.BEETROOT)
-                            .key('M', MYCEYLON.asItem())
-                            .key('H', Items.HONEY_BOTTLE)
-                            .key('J', infusedBeverageIngredient(InfusedBeverageComponent.MALT_BEER))
+                            .define('E', LIZARD_MEAT.asItem())
+                            .define('A', Items.BEETROOT)
+                            .define('M', MYCEYLON.asItem())
+                            .define('H', Items.HONEY_BOTTLE)
+                            .define('J', infusedBeverageIngredient(InfusedBeverageComponent.MALT_BEER))
             );
 
             prefixHelper.generateAutoNamedRecipe(
@@ -513,11 +510,11 @@ public class PastelPedestalRecipes {
                             .pattern("EBE")
                             .pattern("JMJ")
                             .pattern("AAA")
-                            .key('A', CRAWFISH.asItem())
-                            .key('B', CLOTTED_CREAM.asItem())
-                            .key('J', Tags.Items.MUSHROOMS)
-                            .key('M', JADE_WINE.asItem())
-                            .key('E', MYCEYLON.asItem())
+                            .define('A', CRAWFISH.asItem())
+                            .define('B', CLOTTED_CREAM.asItem())
+                            .define('J', Tags.Items.MUSHROOMS)
+                            .define('M', JADE_WINE.asItem())
+                            .define('E', MYCEYLON.asItem())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMBRIFER_COOKBOOK)
             );
 
@@ -529,11 +526,11 @@ public class PastelPedestalRecipes {
                             .pattern("JBJ")
                             .pattern("EME")
                             .pattern("AAA")
-                            .key('A',CRAWFISH.asItem())
-                            .key('J', Items.SWEET_BERRIES)
-                            .key('E', Tags.Items.MUSHROOMS)
-                            .key('B', PRICKLY_BAYLEAF.asItem())
-                            .key('M', infusedBeverageIngredient(InfusedBeverageComponent.RUM))
+                            .define('A',CRAWFISH.asItem())
+                            .define('J', Items.SWEET_BERRIES)
+                            .define('E', Tags.Items.MUSHROOMS)
+                            .define('B', PRICKLY_BAYLEAF.asItem())
+                            .define('M', infusedBeverageIngredient(InfusedBeverageComponent.RUM))
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_1)
             );
 
@@ -545,10 +542,10 @@ public class PastelPedestalRecipes {
                             .pattern("CCC")
                             .pattern("XSX")
                             .pattern("EEE")
-                            .key('X', FRESH_CHOCOLATE.asItem())
-                            .key('E', AMARANTH_GRAINS.asItem())
-                            .key('C', CLOTTED_CREAM.asItem())
-                            .key('S', infusedBeverageIngredient(InfusedBeverageComponent.SAWBLADE_HOLLY_LIQUOR))
+                            .define('X', FRESH_CHOCOLATE.asItem())
+                            .define('E', AMARANTH_GRAINS.asItem())
+                            .define('C', CLOTTED_CREAM.asItem())
+                            .define('S', infusedBeverageIngredient(InfusedBeverageComponent.SAWBLADE_HOLLY_LIQUOR))
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_2)
             );
 
@@ -560,11 +557,11 @@ public class PastelPedestalRecipes {
                             .pattern("CHC")
                             .pattern("BLB") // bulby..................
                             .pattern("CMC")
-                            .key('H', Items.HONEY_BOTTLE)
-                            .key('B', Items.SWEET_BERRIES)
-                            .key('M', CLOTTED_CREAM.asItem())
-                            .key('C', FRESH_CHOCOLATE.asItem())
-                            .key('L', infusedBeverageIngredient(InfusedBeverageComponent.BERRY_LIQUOR))
+                            .define('H', Items.HONEY_BOTTLE)
+                            .define('B', Items.SWEET_BERRIES)
+                            .define('M', CLOTTED_CREAM.asItem())
+                            .define('C', FRESH_CHOCOLATE.asItem())
+                            .define('L', infusedBeverageIngredient(InfusedBeverageComponent.BERRY_LIQUOR))
             );
 
             prefixHelper.generateAutoNamedRecipe(
@@ -575,11 +572,11 @@ public class PastelPedestalRecipes {
                             .pattern("EEE")
                             .pattern("APA")
                             .pattern("FVF")
-                            .key('V', JADE_WINE.asItem())
-                            .key('F', LIZARD_MEAT.asItem())
-                            .key('A', GLASS_PEACH.asItem())
-                            .key('E', JADEITE_PETALS.asItem())
-                            .key('P', FRESH_CHOCOLATE.asItem())
+                            .define('V', JADE_WINE.asItem())
+                            .define('F', LIZARD_MEAT.asItem())
+                            .define('A', GLASS_PEACH.asItem())
+                            .define('E', JADEITE_PETALS.asItem())
+                            .define('P', FRESH_CHOCOLATE.asItem())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMPERIAL_COOKBOOK)
             );
 
@@ -590,10 +587,10 @@ public class PastelPedestalRecipes {
                             .experience(1.0f)
                             .pattern("AAA")
                             .pattern("BEJ")
-                            .key('A', CRAWFISH.asItem())
-                            .key('J', MYCEYLON.asItem())
-                            .key('E', INCANDESCENT_ESSENCE.asItem())
-                            .key('B', GLASS_PEACH.asItem())
+                            .define('A', CRAWFISH.asItem())
+                            .define('J', MYCEYLON.asItem())
+                            .define('E', INCANDESCENT_ESSENCE.asItem())
+                            .define('B', GLASS_PEACH.asItem())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMBRIFER_COOKBOOK)
             );
 
@@ -605,10 +602,10 @@ public class PastelPedestalRecipes {
                             .pattern("ESE")
                             .pattern("CCC")
                             .pattern("EXE")
-                            .key('S', Items.HONEY_BOTTLE)
-                            .key('E', AMARANTH_GRAINS.asItem())
-                            .key('C', CLOTTED_CREAM.asItem())
-                            .key('X', Tags.Items.EGGS)
+                            .define('S', Items.HONEY_BOTTLE)
+                            .define('E', AMARANTH_GRAINS.asItem())
+                            .define('C', CLOTTED_CREAM.asItem())
+                            .define('X', Tags.Items.EGGS)
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_2)
             );
 
@@ -620,10 +617,10 @@ public class PastelPedestalRecipes {
                             .pattern("KAK")
                             .pattern("AEA")
                             .pattern("FFF")
-                            .key('A', CRAWFISH.asItem())
-                            .key('K', KOI.asItem())
-                            .key('F', Tags.Items.FOODS_RAW_FISH)
-                            .key('E', MYCEYLON.asItem())
+                            .define('A', CRAWFISH.asItem())
+                            .define('K', KOI.asItem())
+                            .define('F', Tags.Items.FOODS_RAW_FISH)
+                            .define('E', MYCEYLON.asItem())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMBRIFER_COOKBOOK)
             );
 
@@ -641,10 +638,10 @@ public class PastelPedestalRecipes {
                             .pattern(" H ")
                             .pattern("SES")
                             .pattern("AAA")
-                            .key('A', AMARANTH_GRAINS.asItem())
-                            .key('H', Items.HONEY_BOTTLE)
-                            .key('E', Tags.Items.EGGS)
-                            .key('S', Items.SUGAR)
+                            .define('A', AMARANTH_GRAINS.asItem())
+                            .define('H', Items.HONEY_BOTTLE)
+                            .define('E', Tags.Items.EGGS)
+                            .define('S', Items.SUGAR)
                             .requiredAdvancement(PastelAdvancements.COLLECT_AMARANTH_BUSHEL)
             );
 
@@ -656,10 +653,10 @@ public class PastelPedestalRecipes {
                             .pattern("SCS")
                             .pattern("AMA")
                             .pattern("AAA")
-                            .key('A', AMARANTH_GRAINS.asItem())
-                            .key('C', PastelBlocks.FOUR_LEAF_CLOVER.asItem())
-                            .key('M', Tags.Items.BUCKETS_MILK)
-                            .key('S', Items.SUGAR)
+                            .define('A', AMARANTH_GRAINS.asItem())
+                            .define('C', PastelBlocks.FOUR_LEAF_CLOVER.asItem())
+                            .define('M', Tags.Items.BUCKETS_MILK)
+                            .define('S', Items.SUGAR)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.LUCKY_ROLL)
             );
 
@@ -668,9 +665,9 @@ public class PastelPedestalRecipes {
                             .craftingTime(80)
                             .tier(PedestalTier.BASIC)
                             .experience(0.2f)
-                            .ingredient(MEATLOAF.asItem())
-                            .ingredient(Items.BREAD)
-                            .ingredient(CLOTTED_CREAM.asItem())
+                            .requires(MEATLOAF.asItem())
+                            .requires(Items.BREAD)
+                            .requires(CLOTTED_CREAM.asItem())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_1)
             );
 
@@ -682,12 +679,12 @@ public class PastelPedestalRecipes {
                             .pattern(" R ")
                             .pattern("ABC")
                             .pattern("JEJ")
-                            .key('A', GERMINATED_JADE_VINE_BULB.asItem())
-                            .key('B', PastelBlocks.JADEITE_LOTUS_BULB.asItem())
-                            .key('C', PastelBlocks.NEPHRITE_BLOSSOM_BULB.asItem())
-                            .key('J', FROSTBITE_ESSENCE.asItem())
-                            .key('E', MOONSTRUCK_NECTAR.asItem())
-                            .key('R', AQUA_REGIA.asItem())
+                            .define('A', GERMINATED_JADE_VINE_BULB.asItem())
+                            .define('B', PastelBlocks.JADEITE_LOTUS_BULB.asItem())
+                            .define('C', PastelBlocks.NEPHRITE_BLOSSOM_BULB.asItem())
+                            .define('J', FROSTBITE_ESSENCE.asItem())
+                            .define('E', MOONSTRUCK_NECTAR.asItem())
+                            .define('R', AQUA_REGIA.asItem())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMBRIFER_COOKBOOK)
             );
 
@@ -702,8 +699,8 @@ public class PastelPedestalRecipes {
                             .tier(PedestalTier.BASIC)
                             .experience(1.0f)
                             .pattern("AYA")
-                            .key('Y', MYCEYLON.asItem())
-                            .key('A', AMARANTH_GRAINS.asItem())
+                            .define('Y', MYCEYLON.asItem())
+                            .define('A', AMARANTH_GRAINS.asItem())
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.MYCEYLON_PASTRIES)
             );
 
@@ -715,12 +712,12 @@ public class PastelPedestalRecipes {
                             .pattern("KVK")
                             .pattern("AEA")
                             .pattern("FPF")
-                            .key('V', NECTERED_VIOGNIER.asItem())
-                            .key('F', MYCEYLON.asItem())
-                            .key('K', INCANDESCENT_ESSENCE.asItem())
-                            .key('A', PEACH_JAM.asItem())
-                            .key('E', CLOTTED_CREAM.asItem())
-                            .key('P', GLASS_PEACH.asItem())
+                            .define('V', NECTERED_VIOGNIER.asItem())
+                            .define('F', MYCEYLON.asItem())
+                            .define('K', INCANDESCENT_ESSENCE.asItem())
+                            .define('A', PEACH_JAM.asItem())
+                            .define('E', CLOTTED_CREAM.asItem())
+                            .define('P', GLASS_PEACH.asItem())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.IMPERIAL_COOKBOOK)
             );
 
@@ -732,11 +729,11 @@ public class PastelPedestalRecipes {
                             .pattern("SXS")
                             .pattern("CMC")
                             .pattern("EEE")
-                            .key('S', MYCEYLON.asItem())
-                            .key('E', AMARANTH_GRAINS.asItem())
-                            .key('C', CLOTTED_CREAM.asItem())
-                            .key('X', JADEITE_PETALS.asItem())
-                            .key('M', JADE_WINE.asItem())
+                            .define('S', MYCEYLON.asItem())
+                            .define('E', AMARANTH_GRAINS.asItem())
+                            .define('C', CLOTTED_CREAM.asItem())
+                            .define('X', JADEITE_PETALS.asItem())
+                            .define('M', JADE_WINE.asItem())
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_2)
             );
 
@@ -745,10 +742,10 @@ public class PastelPedestalRecipes {
                             .craftingTime(50)
                             .tier(PedestalTier.BASIC)
                             .experience(1.0f)
-                            .ingredient(AMARANTH_GRAINS.asItem())
-                            .ingredient(Tags.Items.EGGS)
-                            .ingredient(Items.SWEET_BERRIES)
-                            .ingredient(CLOTTED_CREAM.asItem())
+                            .requires(AMARANTH_GRAINS.asItem())
+                            .requires(Tags.Items.EGGS)
+                            .requires(Items.SWEET_BERRIES)
+                            .requires(CLOTTED_CREAM.asItem())
                             .requiredAdvancement(PastelAdvancements.COLLECT_AMARANTH_BUSHEL)
             );
 
@@ -757,10 +754,10 @@ public class PastelPedestalRecipes {
                             .craftingTime(80)
                             .tier(PedestalTier.BASIC)
                             .experience(0.2f)
-                            .ingredient(FRESH_CHOCOLATE.asItem())
-                            .ingredient(MYCEYLON.asItem())
-                            .ingredient(CLOTTED_CREAM.asItem())
-                            .ingredient(infusedBeverageIngredient(InfusedBeverageComponent.SAWBLADE_HOLLY_LIQUOR))
+                            .requires(FRESH_CHOCOLATE.asItem())
+                            .requires(MYCEYLON.asItem())
+                            .requires(CLOTTED_CREAM.asItem())
+                            .requires(infusedBeverageIngredient(InfusedBeverageComponent.SAWBLADE_HOLLY_LIQUOR))
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_2)
             );
 
@@ -772,13 +769,13 @@ public class PastelPedestalRecipes {
                             .pattern("ECE")
                             .pattern("MFL")
                             .pattern("AWA")
-                            .key('A', AMARANTH_GRAINS.asItem())
-                            .key('C', CLOTTED_CREAM.asItem())
-                            .key('M', PastelItemTags.COMMON_MEATS)
-                            .key('F', PastelItemTags.WATER_MEATS)
-                            .key('L', PastelItemTags.LEAN_MEATS)
-                            .key('E', Tags.Items.EGGS)
-                            .key('W', PastelItemTags.DRINKABLE_SPIRITS)
+                            .define('A', AMARANTH_GRAINS.asItem())
+                            .define('C', CLOTTED_CREAM.asItem())
+                            .define('M', PastelItemTags.COMMON_MEATS)
+                            .define('F', PastelItemTags.WATER_MEATS)
+                            .define('L', PastelItemTags.LEAN_MEATS)
+                            .define('E', Tags.Items.EGGS)
+                            .define('W', PastelItemTags.DRINKABLE_SPIRITS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.TRIPLE_MEAT_POT_PIE)
             );
 
@@ -790,13 +787,13 @@ public class PastelPedestalRecipes {
                             .pattern("PWP")
                             .pattern("MFL")
                             .pattern("CBC")
-                            .key('P', PRICKLY_BAYLEAF.asItem())
-                            .key('C', CLOTTED_CREAM.asItem())
-                            .key('M', PastelItemTags.COMMON_MEATS)
-                            .key('F', PastelItemTags.WATER_MEATS)
-                            .key('L', PastelItemTags.LEAN_MEATS)
-                            .key('W', PastelItemTags.DRINKABLE_SPIRITS)
-                            .key('B', Items.BOWL)
+                            .define('P', PRICKLY_BAYLEAF.asItem())
+                            .define('C', CLOTTED_CREAM.asItem())
+                            .define('M', PastelItemTags.COMMON_MEATS)
+                            .define('F', PastelItemTags.WATER_MEATS)
+                            .define('L', PastelItemTags.LEAN_MEATS)
+                            .define('W', PastelItemTags.DRINKABLE_SPIRITS)
+                            .define('B', Items.BOWL)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.TRIPLE_MEAT_POT_STEW)
             );
 
@@ -808,10 +805,10 @@ public class PastelPedestalRecipes {
                             .pattern("YYY")
                             .pattern("DDD")
                             .pattern("VBV")
-                            .key('Y', PRICKLY_BAYLEAF.asItem())
-                            .key('D', DRAGONBONE_CHUNK.asItem())
-                            .key('V', Tags.Items.FOODS_FRUIT)
-                            .key('B', Items.BOWL)
+                            .define('Y', PRICKLY_BAYLEAF.asItem())
+                            .define('D', DRAGONBONE_CHUNK.asItem())
+                            .define('V', Tags.Items.FOODS_FRUIT)
+                            .define('B', Items.BOWL)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.WYRMSCALE_JELLY)
             );
 
@@ -831,13 +828,13 @@ public class PastelPedestalRecipes {
                                 .craftingTime(20)
                                 .group("gemstone_glass")
                                 .requiredAdvancement(BASE_SHARD_UNLOCKS.pick(color))
-                                .powderInput(color, 4)
+                                .color(color, 4)
                                 .experience(1.0f)
                                 .pattern("GPG")
                                 .pattern("PPP")
                                 .pattern("GPG")
-                                .key('P', GEMSTONE_SHARDS.pick(color).value())
-                                .key('G', Items.GLASS)
+                                .define('P', GEMSTONE_SHARDS.pick(color).value())
+                                .define('G', Items.GLASS)
                 );
                 generateBasicGlassPane(
                         pfx,
@@ -853,15 +850,15 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(PastelBlocks.RADIANT_GLASS.asItem(), 2))
                             .tier(PedestalTier.BASIC)
                             .group("radiant_glass")
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
                             .experience(0.5f)
                             .craftingTime(80)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.RADIANT_GLASS)
                             .pattern(" S ")
                             .pattern("SGS")
                             .pattern(" S ")
-                            .key('G', Items.GLASS)
-                            .key('S', SHIMMERSTONE_GEM.get())
+                            .define('G', Items.GLASS)
+                            .define('S', SHIMMERSTONE_GEM.get())
             );
             generateBasicGlassPane(pfx, "radiant_glass", PastelAdvancements.Unlocks.Blocks.RADIANT_GLASS, 80, PedestalTier.BASIC, PastelBlocks.RADIANT_GLASS, PastelBlocks.RADIANT_GLASS_PANE);
 
@@ -977,14 +974,14 @@ public class PastelPedestalRecipes {
                                 .group("pylons")
                                 .craftingTime(40)
                                 .tier(tier)
-                                .powderInput(color, 2)
+                                .color(color, 2)
                                 .experience(1.0f)
                                 .pattern(" S ")
                                 .pattern("SSS")
                                 .pattern("XYX")
-                                .key('S', item.value())
-                                .key('X', PastelBlocks.POLISHED_BASALT.asItem())
-                                .key('Y', PastelBlocks.POLISHED_CALCITE.asItem())
+                                .define('S', item.value())
+                                .define('X', PastelBlocks.POLISHED_BASALT.asItem())
+                                .define('Y', PastelBlocks.POLISHED_CALCITE.asItem())
                                 .requiredAdvancement(unlock)
                 );
             });
@@ -1004,8 +1001,8 @@ public class PastelPedestalRecipes {
                             .experience(0.1f)
                             .pattern("FFF")
                             .pattern("###")
-                            .key('F', block.asItem())
-                            .key('#', ItemTags.PLANKS)
+                            .define('F', block.asItem())
+                            .define('#', ItemTags.PLANKS)
                             .requiredAdvancement(unlock)
             );
 
@@ -1018,9 +1015,9 @@ public class PastelPedestalRecipes {
                             .experience(0.0f)
                             .pattern("GG")
                             .pattern("GG")
-                            .key('G', RESPLENDENT_FEATHER.asItem())
+                            .define('G', RESPLENDENT_FEATHER.asItem())
                             .requiredAdvancement(unlock)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
 
             pfx.generateRecipe(
@@ -1030,9 +1027,9 @@ public class PastelPedestalRecipes {
                             .craftingTime(40)
                             .tier(PedestalTier.BASIC)
                             .experience(0.0f)
-                            .ingredient(block.asItem())
+                            .requires(block.asItem())
                             .requiredAdvancement(unlock)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
 
             pfx.generateRecipe(
@@ -1043,7 +1040,7 @@ public class PastelPedestalRecipes {
                             .tier(PedestalTier.BASIC)
                             .experience(0.0f)
                             .pattern("BB")
-                            .key('B', block.asItem())
+                            .define('B', block.asItem())
                             .requiredAdvancement(unlock)
             );
 
@@ -1055,7 +1052,7 @@ public class PastelPedestalRecipes {
                             .tier(PedestalTier.BASIC)
                             .experience(0.0f)
                             .pattern("FF")
-                            .key('F', RESPLENDENT_FEATHER.asItem())
+                            .define('F', RESPLENDENT_FEATHER.asItem())
                             .requiredAdvancement(unlock)
             );
 
@@ -1068,7 +1065,7 @@ public class PastelPedestalRecipes {
                             .experience(0.0f)
                             .pattern("FFF")
                             .pattern("FFF")
-                            .key('F', RESPLENDENT_FEATHER.asItem())
+                            .define('F', RESPLENDENT_FEATHER.asItem())
                             .requiredAdvancement(unlock)
             );
 
@@ -1111,43 +1108,43 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, LAGOON_ROD.get()))
                             .craftingTime(180)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(PastelGemstoneColor.CYAN, 1)
+                            .color(PastelGemstoneColor.CYAN, 1)
                             .experience(0.5f)
                             .pattern("  B")
                             .pattern(" BS")
                             .pattern("B M")
-                            .key('B', Items.SMOOTH_BASALT)
-                            .key('S', Items.STRING)
-                            .key('M', MERMAIDS_GEM.asItem())
+                            .define('B', Items.SMOOTH_BASALT)
+                            .define('S', Items.STRING)
+                            .define('M', MERMAIDS_GEM.asItem())
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.LAGOON_ROD)
             );
             pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, LUCKY_PICKAXE.get()))
                             .craftingTime(600)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(PastelGemstoneColor.YELLOW, 8)
+                            .color(PastelGemstoneColor.YELLOW, 8)
                             .experience(2.0f)
                             .pattern("CGC")
                             .pattern(" S ")
                             .pattern(" S ")
-                            .key('S', Items.SMOOTH_BASALT)
-                            .key('C', CITRINE_SHARD.asItem())
-                            .key('G', SHIMMERSTONE_GEM.asItem())
+                            .define('S', Items.SMOOTH_BASALT)
+                            .define('C', CITRINE_SHARD.asItem())
+                            .define('G', SHIMMERSTONE_GEM.asItem())
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.LUCKY_PICKAXE)
             );
             pfx.generateAutoNamedRecipe(
                     new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, MOLTEN_ROD.get()))
                             .craftingTime(800)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(PastelGemstoneColor.MAGENTA, 2)
-                            .powderInput(PastelGemstoneColor.YELLOW, 4)
+                            .color(PastelGemstoneColor.MAGENTA, 2)
+                            .color(PastelGemstoneColor.YELLOW, 4)
                             .experience(4.0f)
                             .pattern(" PB")
                             .pattern("PBS") // pbs kids! with shows such as sid the science kid!
                             .pattern("B S")
-                            .key('P', ORANGE_PIGMENT.asItem())
-                            .key('B', Items.BLAZE_ROD)
-                            .key('S', Items.STRING)
+                            .define('P', ORANGE_PIGMENT.asItem())
+                            .define('B', Items.BLAZE_ROD)
+                            .define('S', Items.STRING)
                             .requiredAdvancement(MoltenRodItem.UNLOCK_IDENTIFIER)
             );
 
@@ -1155,14 +1152,14 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, RAZOR_FALCHION.get()))
                             .craftingTime(600)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(PastelGemstoneColor.MAGENTA, 8)
+                            .color(PastelGemstoneColor.MAGENTA, 8)
                             .experience(2.0f)
                             // The pattern was padded in the json but it didnt NEED to be so im just... not
                             .pattern("A")
                             .pattern("A")
                             .pattern("S")
-                            .key('S', Items.CALCITE)
-                            .key('A', Items.AMETHYST_SHARD)
+                            .define('S', Items.CALCITE)
+                            .define('A', Items.AMETHYST_SHARD)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.RAZOR_FALCHION)
             );
 
@@ -1170,14 +1167,14 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(Preenchanted.getDefaultEnchantedStack(lookup, TENDER_PICKAXE.get()))
                             .craftingTime(600)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(PastelGemstoneColor.CYAN, 8)
+                            .color(PastelGemstoneColor.CYAN, 8)
                             .experience(2.0f)
                             .pattern("TMT")
                             .pattern(" S ")
                             .pattern(" S ")
-                            .key('S', Items.SMOOTH_BASALT)
-                            .key('T', TOPAZ_SHARD.asItem())
-                            .key('M', MERMAIDS_GEM.asItem())
+                            .define('S', Items.SMOOTH_BASALT)
+                            .define('T', TOPAZ_SHARD.asItem())
+                            .define('M', MERMAIDS_GEM.asItem())
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.TENDER_PICKAXE)
             );
         }
@@ -1187,12 +1184,12 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.BUNDLE))
                             .craftingTime(80)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(PastelGemstoneColor.CYAN, 4)
+                            .color(PastelGemstoneColor.CYAN, 4)
                             .experience(2.0f)
                             .pattern("S")
                             .pattern("L")
-                            .key('S', Items.STRING)
-                            .key('L', Items.LEATHER)
+                            .define('S', Items.STRING)
+                            .define('L', Items.LEATHER)
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectShards.TOPAZ)
             );
 
@@ -1204,9 +1201,9 @@ public class PastelPedestalRecipes {
                             .pattern(" S ")
                             .pattern("QAQ")
                             .pattern(" S ")
-                            .key('S', Items.STRING)
-                            .key('A', Items.SPIDER_EYE)
-                            .key('Q', QUITOXIC_POWDER.asItem())
+                            .define('S', Items.STRING)
+                            .define('A', Items.SPIDER_EYE)
+                            .define('Q', QUITOXIC_POWDER.asItem())
                             .requiredAdvancement(PastelAdvancements.COLLECT_QUITOXIC_REEDS)
             );
 
@@ -1215,8 +1212,8 @@ public class PastelPedestalRecipes {
                             .craftingTime(40)
                             .tier(PedestalTier.BASIC)
                             .experience(0.1f)
-                            .ingredient(Items.MUD)
-                            .ingredient(PastelBlocks.AMARANTH_BUSHEL.asItem())
+                            .requires(Items.MUD)
+                            .requires(PastelBlocks.AMARANTH_BUSHEL.asItem())
                             .requiredAdvancement(PastelAdvancements.COLLECT_AMARANTH_BUSHEL)
             );
 
@@ -1228,8 +1225,8 @@ public class PastelPedestalRecipes {
                             .pattern(" S ")
                             .pattern("SAS")
                             .pattern(" S ")
-                            .key('A', Items.ARROW)
-                            .key('S', SHIMMERSTONE_GEM.asItem())
+                            .define('A', Items.ARROW)
+                            .define('S', SHIMMERSTONE_GEM.asItem())
                             .requiredAdvancement(PastelAdvancements.COLLECT_SHIMMERSTONE)
             );
 
@@ -1245,14 +1242,14 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(tntStack)
                             .craftingTime(80)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.YELLOW, 2)
                             .experience(2.0f)
                             .pattern("QSQ")
                             .pattern("SQS")
                             .pattern("QSQ")
-                            .key('Q', QUITOXIC_POWDER.asItem())
+                            .define('Q', QUITOXIC_POWDER.asItem())
                             // could be replaced with the sand tag?
-                            .key('S', Items.SAND)
+                            .define('S', Items.SAND)
                             .requiredAdvancement(PastelAdvancements.COLLECT_QUITOXIC_REEDS)
             );
 
@@ -1261,9 +1258,9 @@ public class PastelPedestalRecipes {
                             .craftingTime(40)
                             .tier(PedestalTier.BASIC)
                             .experience(0.1f)
-                            .ingredient(Items.BOOK)
-                            .ingredient(PastelItemTags.PIGMENTS)
-                            .ingredient(Items.FEATHER)
+                            .requires(Items.BOOK)
+                            .requires(PastelItemTags.PIGMENTS)
+                            .requires(Items.FEATHER)
                             .requiredAdvancement(PastelAdvancements.COLLECT_PIGMENT)
             );
         }
@@ -1293,8 +1290,8 @@ public class PastelPedestalRecipes {
                             .pattern("PSP")
                             .pattern("P P")
                             .pattern("PSP")
-                            .key('S', PastelBlocks.WEEPING_GALA_SLAB.asItem())
-                            .key('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
+                            .define('S', PastelBlocks.WEEPING_GALA_SLAB.asItem())
+                            .define('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
                             .requiredAdvancement(unlock)
             );
 
@@ -1308,9 +1305,9 @@ public class PastelPedestalRecipes {
                             .pattern("SSS")
                             .pattern("GXG")
                             .pattern("SSS")
-                            .key('S', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
-                            .key('G', Items.REDSTONE)
-                            .key('X', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
+                            .define('S', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
+                            .define('G', Items.REDSTONE)
+                            .define('X', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
                             .requiredAdvancement(unlock)
             );
 
@@ -1323,8 +1320,8 @@ public class PastelPedestalRecipes {
                             .experience(0.1f)
                             .pattern("S")
                             .pattern("P")
-                            .key('S', SHIMMERSTONE_GEM.asItem())
-                            .key('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
+                            .define('S', SHIMMERSTONE_GEM.asItem())
+                            .define('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
                             .requiredAdvancement(unlock)
             );
 
@@ -1338,8 +1335,8 @@ public class PastelPedestalRecipes {
                             .pattern("PPP")
                             .pattern("SSS")
                             .pattern("PPP")
-                            .key('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
-                            .key('S', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
+                            .define('P', PastelBlocks.WEEPING_GALA_PLANKS.asItem())
+                            .define('S', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
                             .requiredAdvancement(unlock)
             );
 
@@ -1352,7 +1349,7 @@ public class PastelPedestalRecipes {
                             .experience(0.1f)
                             .pattern("#")
                             .pattern("#")
-                            .key('#', PastelItemTags.WEEPING_GALA_LOGS)
+                            .define('#', PastelItemTags.WEEPING_GALA_LOGS)
                             .requiredAdvancement(unlock)
             );
         }
@@ -1368,9 +1365,9 @@ public class PastelPedestalRecipes {
                             .pattern("OOO")
                             .pattern("TET")
                             .pattern("OOO")
-                            .key('O', Items.OBSIDIAN)
-                            .key('E', Items.ENDER_EYE)
-                            .key('T', PastelBlocks.RADIATING_ENDER)
+                            .define('O', Items.OBSIDIAN)
+                            .define('E', Items.ENDER_EYE)
+                            .define('T', PastelBlocks.RADIATING_ENDER)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.BAG_OF_HOLDING)
             );
 
@@ -1384,10 +1381,10 @@ public class PastelPedestalRecipes {
                             .pattern("CCC")
                             .pattern("RSB")
                             .pattern("BBB")
-                            .key('R', Items.REDSTONE)
-                            .key('S', STORM_STONE)
-                            .key('B', PastelBlocks.POLISHED_BASALT)
-                            .key('C', Items.COPPER_INGOT)
+                            .define('R', Items.REDSTONE)
+                            .define('S', STORM_STONE)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
+                            .define('C', Items.COPPER_INGOT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Redstone.BLOCK_DETECTOR)
             );
 
@@ -1400,10 +1397,10 @@ public class PastelPedestalRecipes {
                             .pattern("CCC")
                             .pattern("RTB")
                             .pattern("BBB")
-                            .key('R', Items.REDSTONE)
-                            .key('T', TOPAZ_SHARD)
-                            .key('B', PastelBlocks.POLISHED_CALCITE)
-                            .key('C', Items.COPPER_INGOT)
+                            .define('R', Items.REDSTONE)
+                            .define('T', TOPAZ_SHARD)
+                            .define('B', PastelBlocks.POLISHED_CALCITE)
+                            .define('C', Items.COPPER_INGOT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Redstone.BLOCK_PLACER)
             );
 
@@ -1416,10 +1413,10 @@ public class PastelPedestalRecipes {
                             .pattern("FSF")
                             .pattern("CBC")
                             .pattern("FSF")
-                            .key('S', SHIMMERSTONE_GEM)
-                            .key('F', Items.FERMENTED_SPIDER_EYE)
-                            .key('C', Items.BLAZE_POWDER)
-                            .key('B', Items.HONEY_BOTTLE)
+                            .define('S', SHIMMERSTONE_GEM)
+                            .define('F', Items.FERMENTED_SPIDER_EYE)
+                            .define('C', Items.BLAZE_POWDER)
+                            .define('B', Items.HONEY_BOTTLE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.BOTTLE_OF_FADING)
             );
 
@@ -1432,10 +1429,10 @@ public class PastelPedestalRecipes {
                             .pattern("CIC")
                             .pattern("T T")
                             .pattern("TBT")
-                            .key('C', Items.COPPER_INGOT)
-                            .key('B', Items.COPPER_BLOCK)
-                            .key('T', PastelBlocks.POLISHED_BASALT)
-                            .key('I', Items.IRON_INGOT)
+                            .define('C', Items.COPPER_INGOT)
+                            .define('B', Items.COPPER_BLOCK)
+                            .define('T', PastelBlocks.POLISHED_BASALT)
+                            .define('I', Items.IRON_INGOT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.COMPACTING_CHEST)
             );
 
@@ -1458,8 +1455,8 @@ public class PastelPedestalRecipes {
                                 .experience(0.1f)
                                 .pattern("AA")
                                 .pattern("BB")
-                                .key('A', first)
-                                .key('B', second)
+                                .define('A', first)
+                                .define('B', second)
                                 .requiredAdvancement(PastelAdvancements.Unlocks.Items.CRAFTING_TABLET)
                 );
             });
@@ -1473,8 +1470,8 @@ public class PastelPedestalRecipes {
                             .pattern(" G ")
                             .pattern("GEG")
                             .pattern(" G ")
-                            .key('E', PastelBlocks.RADIATING_ENDER)
-                            .key('G', Items.GLASS)
+                            .define('E', PastelBlocks.RADIATING_ENDER)
+                            .define('G', Items.GLASS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.ENDER_GLASS)
             );
 
@@ -1487,9 +1484,9 @@ public class PastelPedestalRecipes {
                             .pattern("VGV")
                             .pattern("GMG")
                             .pattern("VGV")
-                            .key('G', Items.GOLD_INGOT)
-                            .key('M', Items.MELON_SEEDS)
-                            .key('V', VEGETAL)
+                            .define('G', Items.GOLD_INGOT)
+                            .define('M', Items.MELON_SEEDS)
+                            .define('V', VEGETAL)
                             .requiredAdvancement(PastelAdvancements.COLLECT_VEGETAL)
             );
 
@@ -1503,10 +1500,10 @@ public class PastelPedestalRecipes {
                             .pattern("SSS")
                             .pattern("CLC")
                             .pattern("SFS")
-                            .key('L', Items.LEATHER)
-                            .key('S', Items.STICK)
-                            .key('C', SHIMMERSTONE_GEM)
-                            .key('F', Items.PHANTOM_MEMBRANE)
+                            .define('L', Items.LEATHER)
+                            .define('S', Items.STICK)
+                            .define('C', SHIMMERSTONE_GEM)
+                            .define('F', Items.PHANTOM_MEMBRANE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.PHANTOM_FRAMES)
             );
 
@@ -1520,11 +1517,11 @@ public class PastelPedestalRecipes {
                             .pattern("SGS")
                             .pattern("CLC")
                             .pattern("SFS")
-                            .key('L', Items.LEATHER)
-                            .key('S', Items.STICK)
-                            .key('C', SHIMMERSTONE_GEM)
-                            .key('F', Items.PHANTOM_MEMBRANE)
-                            .key('G', Items.GLOW_INK_SAC)
+                            .define('L', Items.LEATHER)
+                            .define('S', Items.STICK)
+                            .define('C', SHIMMERSTONE_GEM)
+                            .define('F', Items.PHANTOM_MEMBRANE)
+                            .define('G', Items.GLOW_INK_SAC)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.PHANTOM_FRAMES)
             );
 
@@ -1537,9 +1534,9 @@ public class PastelPedestalRecipes {
                             .pattern("PPP")
                             .pattern("WGW")
                             .pattern("WWW")
-                            .key('P', Items.PAPER)
-                            .key('W', ItemTags.PLANKS)
-                            .key('G', Items.GOLD_INGOT)
+                            .define('P', Items.PAPER)
+                            .define('W', ItemTags.PLANKS)
+                            .define('G', Items.GOLD_INGOT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.HEARTBOUND_CHEST)
             );
 
@@ -1552,10 +1549,10 @@ public class PastelPedestalRecipes {
                             .pattern("DMD")
                             .pattern("CBC")
                             .pattern("DCD")
-                            .key('D', Items.DIRT)
-                            .key('C', Items.MUD)
-                            .key('B', Items.BUCKET)
-                            .key('M', MERMAIDS_GEM)
+                            .define('D', Items.DIRT)
+                            .define('C', Items.MUD)
+                            .define('B', Items.BUCKET)
+                            .define('M', MERMAIDS_GEM)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.HUMUS)
             );
 
@@ -1569,9 +1566,9 @@ public class PastelPedestalRecipes {
                             .pattern("CMC")
                             .pattern("MBM")
                             .pattern("CMC")
-                            .key('B', Items.LAVA_BUCKET)
-                            .key('M', Items.MAGMA_BLOCK)
-                            .key('C', Items.MAGMA_CREAM)
+                            .define('B', Items.LAVA_BUCKET)
+                            .define('M', Items.MAGMA_BLOCK)
+                            .define('C', Items.MAGMA_CREAM)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.LAVA_SPONGE)
             );
 
@@ -1582,12 +1579,12 @@ public class PastelPedestalRecipes {
                             .experience(4.0f)
                             .pattern("CMY")
                             .pattern("RRR")
-                            .key('C', TOPAZ_SHARD)
-                            .key('M', Items.AMETHYST_SHARD)
-                            .key('Y', CITRINE_SHARD)
-                            .key('R', PastelBlocks.POLISHED_CALCITE)
+                            .define('C', TOPAZ_SHARD)
+                            .define('M', Items.AMETHYST_SHARD)
+                            .define('Y', CITRINE_SHARD)
+                            .define('R', PastelBlocks.POLISHED_CALCITE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.CMY_PEDESTAL)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
 
             pfx.generateAutoNamedRecipe(
@@ -1600,9 +1597,9 @@ public class PastelPedestalRecipes {
                             .pattern("SSS")
                             .pattern("PGP")
                             .pattern("PPP")
-                            .key('P', Items.PAPER)
-                            .key('S', SHIMMERSTONE_GEM)
-                            .key('G', Items.GUNPOWDER)
+                            .define('P', Items.PAPER)
+                            .define('S', SHIMMERSTONE_GEM)
+                            .define('G', Items.GUNPOWDER)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PRESENT)
             );
 
@@ -1614,9 +1611,9 @@ public class PastelPedestalRecipes {
                             .experience(2.0f)
                             .pattern("G G")
                             .pattern("SRS")
-                            .key('S', Items.GLOW_INK_SAC)
-                            .key('R', Items.LEATHER)
-                            .key('G', Items.GOLD_NUGGET)
+                            .define('S', Items.GLOW_INK_SAC)
+                            .define('R', Items.LEATHER)
+                            .define('G', Items.GOLD_NUGGET)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.PRISCILLENT_SPECTACLES)
             );
 
@@ -1628,10 +1625,10 @@ public class PastelPedestalRecipes {
                             .experience(1.0f)
                             .pattern("TCR")
                             .pattern("SSS")
-                            .key('C', CITRINE_SHARD)
-                            .key('R', Items.REDSTONE)
-                            .key('T', Items.REDSTONE_TORCH)
-                            .key('S', Items.STONE)
+                            .define('C', CITRINE_SHARD)
+                            .define('R', Items.REDSTONE)
+                            .define('T', Items.REDSTONE_TORCH)
+                            .define('S', Items.STONE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Redstone.REDSTONE_CALCULATOR)
             );
 
@@ -1643,10 +1640,10 @@ public class PastelPedestalRecipes {
                             .experience(1.0f)
                             .pattern("TAR")
                             .pattern("III")
-                            .key('A', Items.AMETHYST_SHARD)
-                            .key('R', Items.REDSTONE)
-                            .key('T', Items.REDSTONE_TORCH)
-                            .key('I', Items.COPPER_INGOT)
+                            .define('A', Items.AMETHYST_SHARD)
+                            .define('R', Items.REDSTONE)
+                            .define('T', Items.REDSTONE_TORCH)
+                            .define('I', Items.COPPER_INGOT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Redstone.REDSTONE_TIMER)
             );
 
@@ -1660,9 +1657,9 @@ public class PastelPedestalRecipes {
                             .pattern(" R ")
                             .pattern("RSR")
                             .pattern(" R ")
-                            .key('R', Items.REDSTONE)
+                            .define('R', Items.REDSTONE)
                             // replace with tag?
-                            .key('S', Items.SAND)
+                            .define('S', Items.SAND)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Redstone.REDSTONE_SAND)
             );
 
@@ -1674,8 +1671,8 @@ public class PastelPedestalRecipes {
                             .pattern("   ")
                             .pattern("SSS")
                             .pattern("P P")
-                            .key('P', ItemTags.PLANKS)
-                            .key('S', ItemTags.WOODEN_SLABS)
+                            .define('P', ItemTags.PLANKS)
+                            .define('S', ItemTags.WOODEN_SLABS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.FUSION_SHRINE)
             );
 
@@ -1688,9 +1685,9 @@ public class PastelPedestalRecipes {
                             .pattern("CCC")
                             .pattern("IPI")
                             .pattern("CCC")
-                            .key('C', PastelItemTags.COLORED_PLANKS)
-                            .key('P', PastelItemTags.PIGMENTS)
-                            .key('I', Items.IRON_INGOT)
+                            .define('C', PastelItemTags.COLORED_PLANKS)
+                            .define('P', PastelItemTags.PIGMENTS)
+                            .define('I', Items.IRON_INGOT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.TITRATION_BARREL)
             );
 
@@ -1709,13 +1706,13 @@ public class PastelPedestalRecipes {
                             .group("shimmerstone_lights")
                             .craftingTime(80)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(PastelGemstoneColor.YELLOW, 1)
+                            .color(PastelGemstoneColor.YELLOW, 1)
                             .experience(0.5f)
                             .pattern("TST")
                             .pattern("SSS")
                             .pattern("TST")
-                            .key('S', SHIMMERSTONE_GEM.asItem())
-                            .key('T', stone)
+                            .define('S', SHIMMERSTONE_GEM.asItem())
+                            .define('T', stone)
                             .requiredAdvancement(unlock)
             );
         }
@@ -1739,13 +1736,13 @@ public class PastelPedestalRecipes {
                     .pattern(firstPattern)
                     .pattern("EME")
                     .pattern("AAA")
-                    .key('A', AMARANTH_GRAINS.asItem())
-                    .key('J', JARAMEL.asItem())
-                    .key('E', Tags.Items.EGGS)
-                    .key('M', Tags.Items.BUCKETS_MILK)
+                    .define('A', AMARANTH_GRAINS.asItem())
+                    .define('J', JARAMEL.asItem())
+                    .define('E', Tags.Items.EGGS)
+                    .define('M', Tags.Items.BUCKETS_MILK)
                     .requiredAdvancement(PastelAdvancements.Unlocks.Food.TARTS);
 
-            return topping == Items.AIR ? base : base.key('T', topping);
+            return topping == Items.AIR ? base : base.define('T', topping);
         }
 
         private static ShapedPedestalRecipeBuilder trifleBase(Item result, Item topping) {
@@ -1758,13 +1755,13 @@ public class PastelPedestalRecipes {
                     .pattern(firstPattern)
                     .pattern("BEB")
                     .pattern("AAA")
-                    .key('A', AMARANTH_GRAINS.asItem())
-                    .key('J', JARAMEL.asItem())
-                    .key('B', Items.BONE_MEAL)
-                    .key('E', Tags.Items.EGGS)
+                    .define('A', AMARANTH_GRAINS.asItem())
+                    .define('J', JARAMEL.asItem())
+                    .define('B', Items.BONE_MEAL)
+                    .define('E', Tags.Items.EGGS)
                     .requiredAdvancement(PastelAdvancements.Unlocks.Food.TRIFLES);
 
-            return topping == Items.AIR ? base : base.key('T', topping);
+            return topping == Items.AIR ? base : base.define('T', topping);
         }
 
         private static void myceylonPie(PrefixHelper pfx, Item result, Item thingie) {
@@ -1776,11 +1773,11 @@ public class PastelPedestalRecipes {
                             .pattern("YPY")
                             .pattern("SMS")
                             .pattern("AAA")
-                            .key('Y', MYCEYLON.asItem())
-                            .key('M', Tags.Items.BUCKETS_MILK)
-                            .key('S', Items.SUGAR)
-                            .key('P', thingie)
-                            .key('A', AMARANTH_GRAINS.asItem())
+                            .define('Y', MYCEYLON.asItem())
+                            .define('M', Tags.Items.BUCKETS_MILK)
+                            .define('S', Items.SUGAR)
+                            .define('P', thingie)
+                            .define('A', AMARANTH_GRAINS.asItem())
                             .requiredAdvancement(PastelAdvancements.Unlocks.Food.MYCEYLON_PASTRIES)
             );
         }
@@ -1795,11 +1792,11 @@ public class PastelPedestalRecipes {
                             .pattern("JJJ")
                             .pattern("EME")
                             .pattern("AHA")
-                            .key('E', Tags.Items.MUSHROOMS)
-                            .key('J', CLOTTED_CREAM.asItem())
-                            .key('A', Items.POTATO)
-                            .key('M', infusedBeverageIngredient(InfusedBeverageComponent.BEER))
-                            .key('H', Items.COOKED_RABBIT)
+                            .define('E', Tags.Items.MUSHROOMS)
+                            .define('J', CLOTTED_CREAM.asItem())
+                            .define('A', Items.POTATO)
+                            .define('M', infusedBeverageIngredient(InfusedBeverageComponent.BEER))
+                            .define('H', Items.COOKED_RABBIT)
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.MELOCHITES_COOKBOOK_VOL_1)
             );
         }
@@ -1812,13 +1809,13 @@ public class PastelPedestalRecipes {
                             .group(group)
                             .craftingTime(20)
                             .tier(PedestalTier.BASIC)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
                             .experience(0.0f)
                             .requiredAdvancement(unlock)
                             .pattern("AAA")
                             .pattern("AAA")
                             .pattern("AAA")
-                            .key('A', unpacked.get())
+                            .define('A', unpacked.get())
             );
 
             pfx.generateRecipe(
@@ -1827,10 +1824,10 @@ public class PastelPedestalRecipes {
                             .group(group)
                             .craftingTime(20)
                             .tier(PedestalTier.BASIC)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
                             .experience(0.0f)
                             .requiredAdvancement(unlock)
-                            .ingredient(packed.asItem())
+                            .requires(packed.asItem())
             );
         }
 
@@ -1846,15 +1843,15 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(output.asItem()))
                             .tier(PastelGemstoneColorCollection.MINIMUM_TIER.pick(color))
                             .craftingTime(80)
-                            .powderInput(color, 4)
+                            .color(color, 4)
                             .experience(2.0f)
                             .pattern("BBB")
                             .pattern("CQC")
                             .pattern("SSS")
-                            .key('B', Items.GLASS)
-                            .key('C', GEMSTONE_SHARDS.pick(color).value())
-                            .key('Q', Items.QUARTZ)
-                            .key('S', ItemTags.WOODEN_SLABS)
+                            .define('B', Items.GLASS)
+                            .define('C', GEMSTONE_SHARDS.pick(color).value())
+                            .define('Q', Items.QUARTZ)
+                            .define('S', ItemTags.WOODEN_SLABS)
                             .requiredAdvancement(unlock)
             );
         }
@@ -1867,14 +1864,14 @@ public class PastelPedestalRecipes {
                                 .requiredAdvancement(PastelAdvancements.Unlocks.GemstoneLights.VALUES.pick(color))
                                 .craftingTime(40)
                                 .tier(PastelGemstoneColorCollection.MINIMUM_TIER.pick(color))
-                                .powderInput(color, 4)
+                                .color(color, 4)
                                 .experience(0.3f)
                                 .pattern("TTT")
                                 .pattern("BSB")
                                 .pattern("TTT")
-                                .key('T', baseBlock.asItem())
-                                .key('B', PastelBlocks.GEMSTONE_BLOCKS.pick(color).asItem())
-                                .key('S', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
+                                .define('T', baseBlock.asItem())
+                                .define('B', PastelBlocks.GEMSTONE_BLOCKS.pick(color).asItem())
+                                .define('S', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
                 );
             });
         }
@@ -1893,14 +1890,14 @@ public class PastelPedestalRecipes {
                                 .group("gemstone_chiseled_blocks")
                                 .craftingTime(80)
                                 .tier(tier)
-                                .powderInput(color, 4)
+                                .color(color, 4)
                                 .experience(1.0f)
                                 .requiredAdvancement(unlock)
                                 .pattern("WWW")
                                 .pattern("WXW")
                                 .pattern("WWW")
-                                .key('W', baseBlock.asItem())
-                                .key('X', cluster.asItem())
+                                .define('W', baseBlock.asItem())
+                                .define('X', cluster.asItem())
                 );
 
                 pfx.generateRecipe(
@@ -1909,14 +1906,14 @@ public class PastelPedestalRecipes {
                                 .group("gemstone_chiseled_blocks")
                                 .craftingTime(80)
                                 .tier(tier)
-                                .powderInput(color, 1)
+                                .color(color, 1)
                                 .experience(1.0f)
                                 .requiredAdvancement(unlock)
                                 .pattern("WXW")
                                 .pattern("XXX")
                                 .pattern("WXW")
-                                .key('W', baseBlock.asItem())
-                                .key('X', shard.value())
+                                .define('W', baseBlock.asItem())
+                                .define('X', shard.value())
                 );
             });
         }
@@ -1945,10 +1942,10 @@ public class PastelPedestalRecipes {
                             .pattern("SPS")
                             .pattern("PRP")
                             .pattern("SPS")
-                            .key('R', Items.REDSTONE)
-                            .key('S', SHIMMERSTONE_GEM.get())
-                            .key('P', PigmentItem.byColor(color))
-                            .replacePowderInputsWith(colorMix)
+                            .define('R', Items.REDSTONE)
+                            .define('S', SHIMMERSTONE_GEM.get())
+                            .define('P', PigmentItem.byColor(color))
+                            .replaceColorsWith(colorMix)
                             .tier(tier)
                             .requiredAdvancement(unlock)
             );
@@ -1962,13 +1959,13 @@ public class PastelPedestalRecipes {
                             .group("glass_arrows")
                             .craftingTime(200)
                             .tier(PedestalTier.BASIC)
-                            .powderInput(color, 1)
+                            .color(color, 1)
                             .experience(1.0f)
                             .pattern("AA")
                             .pattern("GB")
-                            .key('G', GEMSTONE_SHARDS.pick(color).value())
-                            .key('A', MALACHITE_GLASS_ARROW.get())
-                            .key('B', BISMUTH_FLAKE.get())
+                            .define('G', GEMSTONE_SHARDS.pick(color).value())
+                            .define('A', MALACHITE_GLASS_ARROW.get())
+                            .define('B', BISMUTH_FLAKE.get())
                             .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_ARROWS)
             );
         }
@@ -1986,15 +1983,15 @@ public class PastelPedestalRecipes {
                             .group("colored_saplings")
                             .craftingTime(160)
                             .tier(tier)
-                            .replacePowderInputsWith(mix)
+                            .replaceColorsWith(mix)
                             .experience(1.0f)
                             .requiredAdvancement(unlock)
                             .pattern("DDD")
                             .pattern("VSV")
                             .pattern("DDD")
-                            .key('D', dyeItem)
-                            .key('V', VEGETAL.get())
-                            .key('S', ItemTags.SAPLINGS)
+                            .define('D', dyeItem)
+                            .define('V', VEGETAL.get())
+                            .define('S', ItemTags.SAPLINGS)
             );
         }
 
@@ -2007,9 +2004,9 @@ public class PastelPedestalRecipes {
                             .experience(0.0f)
                             .pattern("XX")
                             .pattern("XX")
-                            .key('X', petals.asItem())
+                            .define('X', petals.asItem())
                             .requiredAdvancement(unlock)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
 
             pfx.generateAutoNamedRecipe(
@@ -2019,7 +2016,7 @@ public class PastelPedestalRecipes {
                             .tier(PedestalTier.BASIC)
                             .experience(0.0f)
                             .pattern("XX")
-                            .key('X', block.asItem())
+                            .define('X', block.asItem())
                             .requiredAdvancement(unlock)
             );
 
@@ -2030,9 +2027,9 @@ public class PastelPedestalRecipes {
                             .craftingTime(40)
                             .tier(PedestalTier.BASIC)
                             .experience(0.0f)
-                            .ingredient(block.asItem())
+                            .requires(block.asItem())
                             .requiredAdvancement(unlock)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
         }
 
@@ -2056,10 +2053,10 @@ public class PastelPedestalRecipes {
                             .pattern("SAS")
                             .pattern("I I")
                             .pattern("PSP")
-                            .key('S', slab.asItem())
-                            .key('P', planks.asItem())
-                            .key('I', ingot)
-                            .key('A', Items.PAPER)
+                            .define('S', slab.asItem())
+                            .define('P', planks.asItem())
+                            .define('I', ingot)
+                            .define('A', Items.PAPER)
                             .requiredAdvancement(unlock)
             );
         }
@@ -2104,10 +2101,10 @@ public class PastelPedestalRecipes {
                             .pattern("SSS")
                             .pattern("GXG")
                             .pattern("III")
-                            .key('S', stem.asItem())
-                            .key('G', gills.asItem())
-                            .key('I', ingot)
-                            .key('X', SHIMMERSTONE_GEM.asItem())
+                            .define('S', stem.asItem())
+                            .define('G', gills.asItem())
+                            .define('I', ingot)
+                            .define('X', SHIMMERSTONE_GEM.asItem())
                             .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
             );
 
@@ -2121,11 +2118,11 @@ public class PastelPedestalRecipes {
                             .pattern(" S ")
                             .pattern("GHG")
                             .pattern("CIC")
-                            .key('S', slab.asItem())
-                            .key('G', gills.asItem())
-                            .key('C', block.asItem())
-                            .key('I', ingot)
-                            .key('H', SHIMMERSTONE_GEM.asItem())
+                            .define('S', slab.asItem())
+                            .define('G', gills.asItem())
+                            .define('C', block.asItem())
+                            .define('I', ingot)
+                            .define('H', SHIMMERSTONE_GEM.asItem())
                             .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
             );
 
@@ -2139,9 +2136,9 @@ public class PastelPedestalRecipes {
                             .pattern("SSS")
                             .pattern("GXG")
                             .pattern("SSS")
-                            .key('S', stem.asItem())
-                            .key('G', gills.asItem())
-                            .key('X', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
+                            .define('S', stem.asItem())
+                            .define('G', gills.asItem())
+                            .define('X', PastelBlocks.SHIMMERSTONE_BLOCK.asItem())
                             .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
             );
 
@@ -2155,8 +2152,8 @@ public class PastelPedestalRecipes {
                             .pattern("CC")
                             .pattern("SS")
                             .pattern("CC")
-                            .key('S', stems)
-                            .key('C', block.asItem())
+                            .define('S', stems)
+                            .define('C', block.asItem())
                             .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_NOXWOOD)
             );
         }
@@ -2171,7 +2168,7 @@ public class PastelPedestalRecipes {
                             .requiredAdvancement(unlock)
                             .pattern("GGG")
                             .pattern("GGG")
-                            .key('G', glass.asItem())
+                            .define('G', glass.asItem())
             );
         }
 
@@ -2184,9 +2181,9 @@ public class PastelPedestalRecipes {
                             .tier(PedestalTier.BASIC)
                             .experience(0.0f)
                             .pattern("WWW")
-                            .key('W', baseBlock.asItem())
+                            .define('W', baseBlock.asItem())
                             .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
         }
 
@@ -2200,9 +2197,9 @@ public class PastelPedestalRecipes {
                             .pattern("W  ")
                             .pattern("WW ")
                             .pattern("WWW")
-                            .key('W', baseBlock.asItem())
+                            .define('W', baseBlock.asItem())
                             .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
         }
 
@@ -2215,9 +2212,9 @@ public class PastelPedestalRecipes {
                             .experience(0.0f)
                             .pattern("WWW")
                             .pattern("WWW")
-                            .key('W', baseBlock.asItem())
+                            .define('W', baseBlock.asItem())
                             .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
         }
     }
@@ -2245,13 +2242,13 @@ public class PastelPedestalRecipes {
                                 .group("colored_spore_blossoms")
                                 .craftingTime(80)
                                 .tier(tier)
-                                .replacePowderInputsWith(mix)
+                                .replaceColorsWith(mix)
                                 .experience(0.5f)
                                 .pattern("PPP")
                                 .pattern("PSP")
                                 .pattern("PPP")
-                                .key('P', pigment.asItem())
-                                .key('S', Items.SPORE_BLOSSOM)
+                                .define('P', pigment.asItem())
+                                .define('S', Items.SPORE_BLOSSOM)
                                 .requiredAdvancement(unlock)
                 );
             });
@@ -2262,13 +2259,13 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.BELL, 1))
                             .craftingTime(120)
                             .tier(PedestalTier.SIMPLE)
-                            .powderInput(PastelGemstoneColor.YELLOW, 4)
+                            .color(PastelGemstoneColor.YELLOW, 4)
                             .experience(1.0f)
                             .pattern("SSS")
                             .pattern("GGG")
                             .pattern("G G")
-                            .key('G', Items.GOLD_INGOT)
-                            .key('S', Items.STICK)
+                            .define('G', Items.GOLD_INGOT)
+                            .define('S', Items.STICK)
                             .requiredAdvancement(PastelAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE)
             );
 
@@ -2276,13 +2273,13 @@ public class PastelPedestalRecipes {
                     new ShapelessPedestalRecipeBuilder(new ItemStack(Items.NAME_TAG, 1))
                             .craftingTime(120)
                             .tier(PedestalTier.SIMPLE)
-                            .powderInput(PastelGemstoneColor.MAGENTA, 2)
-                            .powderInput(PastelGemstoneColor.CYAN, 2)
+                            .color(PastelGemstoneColor.MAGENTA, 2)
+                            .color(PastelGemstoneColor.CYAN, 2)
                             .experience(1.0f)
-                            .ingredient(Items.STRING)
-                            .ingredient(Items.PAPER)
-                            .ingredient(Items.PAPER)
-                            .ingredient(PastelBlocks.FOUR_LEAF_CLOVER.asItem())
+                            .requires(Items.STRING)
+                            .requires(Items.PAPER)
+                            .requires(Items.PAPER)
+                            .requires(PastelBlocks.FOUR_LEAF_CLOVER.asItem())
                             .requiredAdvancement(PastelAdvancements.COLLECT_FOUR_LEAF_CLOVER)
             );
         }
@@ -2298,9 +2295,9 @@ public class PastelPedestalRecipes {
                             .pattern("GCG")
                             .pattern("CMC")
                             .pattern("GCG")
-                            .key('M', MERMAIDS_GEM)
-                            .key('C', CYAN_PIGMENT)
-                            .key('G', GREEN_PIGMENT)
+                            .define('M', MERMAIDS_GEM)
+                            .define('C', CYAN_PIGMENT)
+                            .define('G', GREEN_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.BLOCK_FLOODER)
             );
 
@@ -2313,8 +2310,8 @@ public class PastelPedestalRecipes {
                             .pattern("QRQ")
                             .pattern("RQR")
                             .pattern("RRR")
-                            .key('Q', QUITOXIC_POWDER)
-                            .key('R', Items.RABBIT_HIDE)
+                            .define('Q', QUITOXIC_POWDER)
+                            .define('R', Items.RABBIT_HIDE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.BOTTOMLESS_BUNDLE)
             );
 
@@ -2329,11 +2326,11 @@ public class PastelPedestalRecipes {
                             .pattern("B B")
                             .pattern("CMY")
                             .pattern("PPP")
-                            .key('C', CYAN_PIGMENT)
-                            .key('M', MAGENTA_PIGMENT)
-                            .key('Y', YELLOW_PIGMENT)
-                            .key('P', PastelBlocks.POLISHED_CALCITE)
-                            .key('B', PastelBlocks.POLISHED_BASALT)
+                            .define('C', CYAN_PIGMENT)
+                            .define('M', MAGENTA_PIGMENT)
+                            .define('Y', YELLOW_PIGMENT)
+                            .define('P', PastelBlocks.POLISHED_CALCITE)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.COLOR_PICKER)
             );
 
@@ -2347,9 +2344,9 @@ public class PastelPedestalRecipes {
                             .pattern(" LT")
                             .pattern(" SL")
                             .pattern("S  ")
-                            .key('S', Items.STICK)
-                            .key('L', LIGHT_BLUE_PIGMENT)
-                            .key('T', STRATINE_FRAGMENTS)
+                            .define('S', Items.STICK)
+                            .define('L', LIGHT_BLUE_PIGMENT)
+                            .define('T', STRATINE_FRAGMENTS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.CONSTRUCTORS_STAFF)
             );
 
@@ -2363,9 +2360,9 @@ public class PastelPedestalRecipes {
                             .pattern("PBP")
                             .pattern("BAB")
                             .pattern("PBP")
-                            .key('A', Items.PHANTOM_MEMBRANE)
-                            .key('B', Items.BAMBOO)
-                            .key('P', PURPLE_PIGMENT)
+                            .define('A', Items.PHANTOM_MEMBRANE)
+                            .define('B', Items.BAMBOO)
+                            .define('P', PURPLE_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.ENCHANTMENT_CANVAS)
             );
 
@@ -2379,10 +2376,10 @@ public class PastelPedestalRecipes {
                             .pattern("BSB")
                             .pattern("BPB")
                             .pattern("BRB")
-                            .key('P', BLUE_PIGMENT)
-                            .key('S', PastelBlocks.RADIATING_ENDER)
-                            .key('B', Items.POLISHED_BLACKSTONE)
-                            .key('R', Items.REDSTONE)
+                            .define('P', BLUE_PIGMENT)
+                            .define('S', PastelBlocks.RADIATING_ENDER)
+                            .define('B', Items.POLISHED_BLACKSTONE)
+                            .define('R', Items.REDSTONE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.ENDER_BLOCKS)
             );
 
@@ -2396,9 +2393,9 @@ public class PastelPedestalRecipes {
                             .pattern("BPB")
                             .pattern("BSB")
                             .pattern(" B ")
-                            .key('P', BLUE_PIGMENT)
-                            .key('S', PastelBlocks.RADIATING_ENDER)
-                            .key('B', Items.POLISHED_BLACKSTONE)
+                            .define('P', BLUE_PIGMENT)
+                            .define('S', PastelBlocks.RADIATING_ENDER)
+                            .define('B', Items.POLISHED_BLACKSTONE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.ENDER_BLOCKS)
             );
 
@@ -2412,9 +2409,9 @@ public class PastelPedestalRecipes {
                             .pattern(" YP")
                             .pattern(" SY")
                             .pattern("S  ")
-                            .key('S', Items.STICK)
-                            .key('Y', YELLOW_PIGMENT)
-                            .key('P', PALTAERIA_FRAGMENTS)
+                            .define('S', Items.STICK)
+                            .define('Y', YELLOW_PIGMENT)
+                            .define('P', PALTAERIA_FRAGMENTS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.FLOWING_STAFF)
             );
 
@@ -2438,13 +2435,13 @@ public class PastelPedestalRecipes {
                                 .pattern("PCP")
                                 .pattern("SAS")
                                 .pattern("PTP")
-                                .key('T', PastelBlocks.POLISHED_TOPAZ_BLOCK)
-                                .key('A', PastelBlocks.POLISHED_AMETHYST_BLOCK)
-                                .key('C', PastelBlocks.POLISHED_CITRINE_BLOCK)
-                                .key('P', primary)
-                                .key('S', secondary)
+                                .define('T', PastelBlocks.POLISHED_TOPAZ_BLOCK)
+                                .define('A', PastelBlocks.POLISHED_AMETHYST_BLOCK)
+                                .define('C', PastelBlocks.POLISHED_CITRINE_BLOCK)
+                                .define('P', primary)
+                                .define('S', secondary)
                                 .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.FUSION_SHRINE)
-                                .ignoreYieldUpgrades(true)
+                                .disableYieldUpgrades(true)
                 );
             });
 
@@ -2459,10 +2456,10 @@ public class PastelPedestalRecipes {
                             .pattern("SCS")
                             .pattern("PPP")
                             .pattern("GGG")
-                            .key('P', PastelItemTags.PIGMENTS)
-                            .key('G', Items.GLASS)
-                            .key('C', PastelBlocks.FOUR_LEAF_CLOVER)
-                            .key('S', SHIMMERSTONE_GEM)
+                            .define('P', PastelItemTags.PIGMENTS)
+                            .define('G', Items.GLASS)
+                            .define('C', PastelBlocks.FOUR_LEAF_CLOVER)
+                            .define('S', SHIMMERSTONE_GEM)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.INK_ASSORTMENT)
             );
 
@@ -2477,9 +2474,9 @@ public class PastelPedestalRecipes {
                             .pattern("SGS")
                             .pattern("GPG")
                             .pattern("SGS")
-                            .key('P', PastelItemTags.PIGMENTS)
-                            .key('G', Items.GLASS)
-                            .key('S', SHIMMERSTONE_GEM)
+                            .define('P', PastelItemTags.PIGMENTS)
+                            .define('G', Items.GLASS)
+                            .define('S', SHIMMERSTONE_GEM)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.BASIC_INK_STORAGE_ITEMS)
             );
 
@@ -2492,9 +2489,9 @@ public class PastelPedestalRecipes {
                             .pattern("BCB")
                             .pattern("SCS")
                             .pattern("BBB")
-                            .key('B', PastelBlocks.POLISHED_BASALT)
-                            .key('C', PastelBlocks.POLISHED_CALCITE)
-                            .key('S', SHIMMERSTONE_GEM)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
+                            .define('C', PastelBlocks.POLISHED_CALCITE)
+                            .define('S', SHIMMERSTONE_GEM)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.ITEM_ROUNDEL)
             );
 
@@ -2509,8 +2506,8 @@ public class PastelPedestalRecipes {
                             .pattern("III")
                             .pattern("IS ")
                             .pattern(" S ")
-                            .key('S', Items.STICK)
-                            .key('I', Items.IRON_INGOT)
+                            .define('S', Items.STICK)
+                            .define('I', Items.IRON_INGOT)
                             .requiredAdvancement(PastelAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE)
             );
 
@@ -2524,9 +2521,9 @@ public class PastelPedestalRecipes {
                             .pattern(" LM")
                             .pattern(" SL")
                             .pattern("S  ")
-                            .key('S', Items.STICK)
-                            .key('M', Items.MOSS_BLOCK)
-                            .key('L', LIME_PIGMENT)
+                            .define('S', Items.STICK)
+                            .define('M', Items.MOSS_BLOCK)
+                            .define('L', LIME_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.NATURES_STAFF)
             );
 
@@ -2540,9 +2537,9 @@ public class PastelPedestalRecipes {
                             .pattern("PQP")
                             .pattern(" S ")
                             .pattern(" S ")
-                            .key('S', Items.CALCITE)
-                            .key('Q', QUITOXIC_POWDER)
-                            .key('P', Items.PHANTOM_MEMBRANE)
+                            .define('S', Items.CALCITE)
+                            .define('Q', QUITOXIC_POWDER)
+                            .define('P', Items.PHANTOM_MEMBRANE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.OBLIVION_PICKAXE)
             );
 
@@ -2557,11 +2554,11 @@ public class PastelPedestalRecipes {
                             .pattern("PSP")
                             .pattern("PXP")
                             .pattern("YRY")
-                            .key('P', PastelItemTags.PIGMENTS)
-                            .key('S', STAR_FRAGMENT)
-                            .key('X', PastelBlocks.POLISHED_CALCITE)
-                            .key('Y', PastelBlocks.POLISHED_BASALT)
-                            .key('R', Items.REDSTONE)
+                            .define('P', PastelItemTags.PIGMENTS)
+                            .define('S', STAR_FRAGMENT)
+                            .define('X', PastelBlocks.POLISHED_CALCITE)
+                            .define('Y', PastelBlocks.POLISHED_BASALT)
+                            .define('R', Items.REDSTONE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PARTICLE_SPAWNER)
             );
 
@@ -2572,11 +2569,11 @@ public class PastelPedestalRecipes {
                             .experience(8.0f)
                             .pattern("SOS")
                             .pattern("RRR")
-                            .key('O', ONYX_SHARD)
-                            .key('S', SHIMMERSTONE_GEM)
-                            .key('R', Items.OBSIDIAN)
+                            .define('O', ONYX_SHARD)
+                            .define('S', SHIMMERSTONE_GEM)
+                            .define('R', Items.OBSIDIAN)
                             .requiredAdvancement(PastelAdvancements.CREATE_ONYX_SHARD)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
 
             pfx.generateAutoNamedRecipe(
@@ -2588,9 +2585,9 @@ public class PastelPedestalRecipes {
                             .pattern(" BG")
                             .pattern(" SB")
                             .pattern("S  ")
-                            .key('S', Items.STICK)
-                            .key('G', SHIMMERSTONE_GEM)
-                            .key('B', YELLOW_PIGMENT)
+                            .define('S', Items.STICK)
+                            .define('G', SHIMMERSTONE_GEM)
+                            .define('B', YELLOW_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.RADIANCE_STAFF)
             );
 
@@ -2604,10 +2601,10 @@ public class PastelPedestalRecipes {
                             .experience(1.0f)
                             .pattern("TOR")
                             .pattern("SSS")
-                            .key('O', ONYX_SHARD)
-                            .key('R', Items.REDSTONE)
-                            .key('T', Items.REDSTONE_TORCH)
-                            .key('S', Items.STONE)
+                            .define('O', ONYX_SHARD)
+                            .define('R', Items.REDSTONE)
+                            .define('T', Items.REDSTONE_TORCH)
+                            .define('S', Items.STONE)
                             .requiredAdvancement(PastelAdvancements.CREATE_ONYX_SHARD)
             );
 
@@ -2621,10 +2618,10 @@ public class PastelPedestalRecipes {
                             .pattern("CCG")
                             .pattern("CDC")
                             .pattern("BCC")
-                            .key('C', Items.CHAIN)
-                            .key('G', SHIMMERSTONE_GEM)
-                            .key('B', Tags.Items.STORAGE_BLOCKS_COPPER)
-                            .key('D', Tags.Items.GEMS_DIAMOND) // ?????
+                            .define('C', Items.CHAIN)
+                            .define('G', SHIMMERSTONE_GEM)
+                            .define('B', Tags.Items.STORAGE_BLOCKS_COPPER)
+                            .define('D', Tags.Items.GEMS_DIAMOND) // ?????
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.WIRE_HOOK)
             );
 
@@ -2658,16 +2655,16 @@ public class PastelPedestalRecipes {
                                 .group("gemstone_chimes")
                                 .craftingTime(60)
                                 .tier(tier)
-                                .powderInput(color, 1)
+                                .color(color, 1)
                                 .experience(1.0f)
                                 .pattern(" Y ")
                                 .pattern("SGS")
                                 .pattern("PXP")
-                                .key('X', PastelBlocks.POLISHED_BASALT.asItem())
-                                .key('Y', PastelBlocks.POLISHED_CALCITE.asItem())
-                                .key('S', shard.value())
-                                .key('G', Items.STRING)
-                                .key('P', SHIMMERSTONE_GEM.asItem())
+                                .define('X', PastelBlocks.POLISHED_BASALT.asItem())
+                                .define('Y', PastelBlocks.POLISHED_CALCITE.asItem())
+                                .define('S', shard.value())
+                                .define('G', Items.STRING)
+                                .define('P', SHIMMERSTONE_GEM.asItem())
                                 .requiredAdvancement(unlock)
                 );
             });
@@ -2688,13 +2685,13 @@ public class PastelPedestalRecipes {
                                 .group("glowblocks")
                                 .craftingTime(200)
                                 .tier(tier)
-                                .replacePowderInputsWith(mix)
+                                .replaceColorsWith(mix)
                                 .experience(1.0f)
                                 .pattern("PQP")
                                 .pattern("QPQ")
                                 .pattern("PQP")
-                                .key('P', pigment.asItem())
-                                .key('Q', QUITOXIC_POWDER.asItem())
+                                .define('P', pigment.asItem())
+                                .define('Q', QUITOXIC_POWDER.asItem())
                                 .requiredAdvancement(unlock)
                 );
             });
@@ -2716,10 +2713,10 @@ public class PastelPedestalRecipes {
                                 .pattern("SVS")
                                 .pattern("VHV")
                                 .pattern("QVQ")
-                                .key('H', head)
-                                .key('V', VEGETAL)
-                                .key('Q', QUITOXIC_POWDER)
-                                .key('S', STARDUST)
+                                .define('H', head)
+                                .define('V', VEGETAL)
+                                .define('Q', QUITOXIC_POWDER)
+                                .define('S', STARDUST)
                                 .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.IDOLS)
                 );
             });
@@ -2739,10 +2736,10 @@ public class PastelPedestalRecipes {
                             .pattern(" I ")
                             .pattern("GAI") // Yes i am, how'd u know?
                             .pattern("SG ")
-                            .key('S', Items.STICK)
-                            .key('G', Items.GLOW_INK_SAC)
-                            .key('I', Items.INK_SAC)
-                            .key('A', RAW_AZURITE)
+                            .define('S', Items.STICK)
+                            .define('G', Items.GLOW_INK_SAC)
+                            .define('I', Items.INK_SAC)
+                            .define('A', RAW_AZURITE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PASTEL_NETWORK)
             );
 
@@ -2756,8 +2753,8 @@ public class PastelPedestalRecipes {
                             .pattern(" S ")
                             .pattern("SGS")
                             .pattern(" S ")
-                            .key('S', Items.GLOW_INK_SAC)
-                            .key('G', PastelBlocks.GATHER_NODE)
+                            .define('S', Items.GLOW_INK_SAC)
+                            .define('G', PastelBlocks.GATHER_NODE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PASTEL_NETWORK)
             );
 
@@ -2772,22 +2769,22 @@ public class PastelPedestalRecipes {
             pfx.generateRecipe(
                     "glass",
                     sharedSemiPermeableGlass(Items.GLASS, Items.GLASS, PastelBlocks.SEMI_PERMEABLE_GLASS)
-                            .powderInput(PastelGemstoneColor.CYAN, 1)
-                            .powderInput(PastelGemstoneColor.MAGENTA, 1)
-                            .powderInput(PastelGemstoneColor.YELLOW, 1)
+                            .color(PastelGemstoneColor.CYAN, 1)
+                            .color(PastelGemstoneColor.MAGENTA, 1)
+                            .color(PastelGemstoneColor.YELLOW, 1)
             );
 
             pfx.generateRecipe(
                     "tinted",
                     sharedSemiPermeableGlass(ONYX_SHARD.asItem(), Items.TINTED_GLASS, PastelBlocks.TINTED_SEMI_PERMEABLE_GLASS)
-                            .powderInput(PastelGemstoneColor.BLACK, 2)
+                            .color(PastelGemstoneColor.BLACK, 2)
             );
 
             pfx.generateRecipe(
                     "radiant",
                     sharedSemiPermeableGlass(SHIMMERSTONE_GEM.asItem(), Items.GLASS, PastelBlocks.RADIANT_SEMI_PERMEABLE_GLASS)
-                            .powderInput(PastelGemstoneColor.MAGENTA, 4)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.MAGENTA, 4)
+                            .color(PastelGemstoneColor.YELLOW, 2)
 
             );
 
@@ -2803,7 +2800,7 @@ public class PastelPedestalRecipes {
                pfx.generateRecipe(
                        name,
                        sharedSemiPermeableGlass(shard, Items.GLASS, result)
-                               .powderInput(color, 8)
+                               .color(color, 8)
                                .tier(tier)
                                .requiredAdvancement(unlock)
                );
@@ -2819,8 +2816,8 @@ public class PastelPedestalRecipes {
                             .pattern(" L ")
                             .pattern("L L")
                             .pattern("GL ")
-                            .key('L', Items.LEATHER)
-                            .key('G', Items.GOLD_INGOT)
+                            .define('L', Items.LEATHER)
+                            .define('G', Items.GOLD_INGOT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_BELT)
             );
 
@@ -2832,8 +2829,8 @@ public class PastelPedestalRecipes {
                             .pattern(" L ")
                             .pattern("L L")
                             .pattern("QL ")
-                            .key('L', Items.TUFF)
-                            .key('Q', Items.QUARTZ)
+                            .define('L', Items.TUFF)
+                            .define('Q', Items.QUARTZ)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_CIRCLET)
             );
 
@@ -2845,8 +2842,8 @@ public class PastelPedestalRecipes {
                             .pattern(" L ")
                             .pattern("L L")
                             .pattern("T T")
-                            .key('T', Items.TUFF)
-                            .key('L', Items.LEATHER)
+                            .define('T', Items.TUFF)
+                            .define('L', Items.LEATHER)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_GLOVES)
             );
 
@@ -2858,8 +2855,8 @@ public class PastelPedestalRecipes {
                             .pattern(" G ")
                             .pattern("G G")
                             .pattern("LG ")
-                            .key('G', Items.GOLD_INGOT)
-                            .key('L', Items.LAPIS_LAZULI)
+                            .define('G', Items.GOLD_INGOT)
+                            .define('L', Items.LAPIS_LAZULI)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_PENDANT)
             );
 
@@ -2871,7 +2868,7 @@ public class PastelPedestalRecipes {
                             .pattern(" L ")
                             .pattern("L L")
                             .pattern(" L ")
-                            .key('L', Items.TUFF)
+                            .define('L', Items.TUFF)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_TUFF_RING)
             );
         }
@@ -2887,9 +2884,9 @@ public class PastelPedestalRecipes {
                             .pattern("PPP")
                             .pattern("SCS")
                             .pattern("PPP")
-                            .key('C', PastelBlocks.FOUR_LEAF_CLOVER)
-                            .key('P', Items.PAPER)
-                            .key('S', STARDUST)
+                            .define('C', PastelBlocks.FOUR_LEAF_CLOVER)
+                            .define('P', Items.PAPER)
+                            .define('S', STARDUST)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.ARTISANS_ATLAS)
             );
             pfx.generateAutoNamedRecipe(
@@ -2904,10 +2901,10 @@ public class PastelPedestalRecipes {
                             .pattern("BBB")
                             .pattern("XSX")
                             .pattern("YYY")
-                            .key('B', BLUE_PIGMENT)
-                            .key('Y', PastelBlocks.POLISHED_BASALT)
-                            .key('X', PastelBlocks.POLISHED_CALCITE)
-                            .key('S', STRATINE_GEM)
+                            .define('B', BLUE_PIGMENT)
+                            .define('Y', PastelBlocks.POLISHED_BASALT)
+                            .define('X', PastelBlocks.POLISHED_CALCITE)
+                            .define('S', STRATINE_GEM)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.BLACK_HOLE_CHEST)
             );
 
@@ -2920,10 +2917,10 @@ public class PastelPedestalRecipes {
                             .pattern("CCC")
                             .pattern("RSB")
                             .pattern("BBB")
-                            .key('R', Items.REDSTONE)
-                            .key('S', STORM_STONE)
-                            .key('B', PastelBlocks.POLISHED_BONE_ASH)
-                            .key('C', PastelBlocks.PYRITE)
+                            .define('R', Items.REDSTONE)
+                            .define('S', STORM_STONE)
+                            .define('B', PastelBlocks.POLISHED_BONE_ASH)
+                            .define('C', PastelBlocks.PYRITE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Redstone.BLOCK_BREAKER)
             );
 
@@ -2937,10 +2934,10 @@ public class PastelPedestalRecipes {
                             .pattern("GAG")
                             .pattern("NBN")
                             .pattern("GAG")
-                            .key('B', Items.GLASS_BOTTLE)
-                            .key('N', NEOLITH)
-                            .key('A', RAW_AZURITE)
-                            .key('G', GREEN_PIGMENT)
+                            .define('B', Items.GLASS_BOTTLE)
+                            .define('N', NEOLITH)
+                            .define('A', RAW_AZURITE)
+                            .define('G', GREEN_PIGMENT)
                             .requiredAdvancement(itemUnlock(BOTTLE_OF_DECAY_AWAY))
             );
 
@@ -2956,10 +2953,10 @@ public class PastelPedestalRecipes {
                             .pattern("FSF")
                             .pattern("PBP")
                             .pattern("FSF")
-                            .key('S', STRATINE_FRAGMENTS)
-                            .key('F', Items.FERMENTED_SPIDER_EYE)
-                            .key('P', Items.PRISMARINE_CRYSTALS)
-                            .key('B', Items.EXPERIENCE_BOTTLE)
+                            .define('S', STRATINE_FRAGMENTS)
+                            .define('F', Items.FERMENTED_SPIDER_EYE)
+                            .define('P', Items.PRISMARINE_CRYSTALS)
+                            .define('B', Items.EXPERIENCE_BOTTLE)
                             .requiredAdvancement(itemUnlock(BOTTLE_OF_FAILING))
             );
 
@@ -2977,10 +2974,10 @@ public class PastelPedestalRecipes {
                             .pattern("FMF")
                             .pattern("ABA")
                             .pattern("FMF")
-                            .key('A', RAW_AZURITE)
-                            .key('F', Items.FERMENTED_SPIDER_EYE)
-                            .key('M', MIDNIGHT_CHIP)
-                            .key('B', Items.DRAGON_BREATH)
+                            .define('A', RAW_AZURITE)
+                            .define('F', Items.FERMENTED_SPIDER_EYE)
+                            .define('M', MIDNIGHT_CHIP)
+                            .define('B', Items.DRAGON_BREATH)
                             .requiredAdvancement(itemUnlock(BOTTLE_OF_RUIN))
             );
 
@@ -2996,10 +2993,10 @@ public class PastelPedestalRecipes {
                             .pattern(" C ")
                             .pattern("CGC")
                             .pattern("BFB")
-                            .key('C', PastelBlocks.POLISHED_CALCITE)
-                            .key('B', PastelBlocks.POLISHED_BASALT)
-                            .key('G', STRATINE_GEM)
-                            .key('F', STRATINE_FRAGMENTS)
+                            .define('C', PastelBlocks.POLISHED_CALCITE)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
+                            .define('G', STRATINE_GEM)
+                            .define('F', STRATINE_FRAGMENTS)
                             .requiredAdvancement(blockUnlock(PastelBlocks.CINDERHEARTH))
             );
 
@@ -3012,9 +3009,9 @@ public class PastelPedestalRecipes {
                             .pattern(" O ")
                             .pattern("ORO")
                             .pattern(" C ")
-                            .key('O', ONYX_SHARD)
-                            .key('C', Items.COPPER_INGOT)
-                            .key('R', Items.REDSTONE)
+                            .define('O', ONYX_SHARD)
+                            .define('C', Items.COPPER_INGOT)
+                            .define('R', Items.REDSTONE)
                             .requiredAdvancement(itemUnlock(CRESCENT_CLOCK))
             );
 
@@ -3027,9 +3024,9 @@ public class PastelPedestalRecipes {
                             .pattern(" L ")
                             .pattern("LBL")
                             .pattern("BCB")
-                            .key('L', STORM_STONE)
-                            .key('C', PastelBlocks.POLISHED_CALCITE)
-                            .key('B', PastelBlocks.POLISHED_BASALT)
+                            .define('L', STORM_STONE)
+                            .define('C', PastelBlocks.POLISHED_CALCITE)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
                             .requiredAdvancement(blockUnlock(PastelBlocks.CRYSTAL_APOTHECARY))
             );
 
@@ -3043,9 +3040,9 @@ public class PastelPedestalRecipes {
                             .pattern("  C")
                             .pattern(" S ")
                             .pattern("T  ")
-                            .key('C', MIDNIGHT_CHIP)
-                            .key('S', Items.STRING)
-                            .key('T', Items.STICK)
+                            .define('C', MIDNIGHT_CHIP)
+                            .define('S', Items.STRING)
+                            .define('T', Items.STICK)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.DARK_STAKES)
             );
 
@@ -3059,10 +3056,10 @@ public class PastelPedestalRecipes {
                             .pattern("SLS")
                             .pattern("BLB")
                             .pattern("BCB")
-                            .key('L', Items.LAPIS_BLOCK)
-                            .key('B', PastelBlocks.POLISHED_BASALT)
-                            .key('C', PastelBlocks.POLISHED_CALCITE)
-                            .key('S', STRATINE_FRAGMENTS)
+                            .define('L', Items.LAPIS_BLOCK)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
+                            .define('C', PastelBlocks.POLISHED_CALCITE)
+                            .define('S', STRATINE_FRAGMENTS)
                             .requiredAdvancement(blockUnlock(PastelBlocks.ENCHANTER))
             );
 
@@ -3076,10 +3073,10 @@ public class PastelPedestalRecipes {
                             .pattern("PCP")
                             .pattern("ETE")
                             .pattern("PCP")
-                            .key('T', PastelBlocks.RADIATING_ENDER)
-                            .key('C', Items.CHORUS_FRUIT)
-                            .key('E', NEOLITH)
-                            .key('P', CYAN_PIGMENT)
+                            .define('T', PastelBlocks.RADIATING_ENDER)
+                            .define('C', Items.CHORUS_FRUIT)
+                            .define('E', NEOLITH)
+                            .define('P', CYAN_PIGMENT)
                             .requiredAdvancement(itemUnlock(ENDER_SPLICE))
             );
 
@@ -3095,10 +3092,10 @@ public class PastelPedestalRecipes {
                             .pattern("YGY")
                             .pattern("SSS")
                             .pattern("PSP")
-                            .key('S', STARDUST)
-                            .key('G', SHIMMERSTONE_GEM)
-                            .key('Y', YELLOW_PIGMENT)
-                            .key('P', PURPLE_PIGMENT)
+                            .define('S', STARDUST)
+                            .define('G', SHIMMERSTONE_GEM)
+                            .define('Y', YELLOW_PIGMENT)
+                            .define('P', PURPLE_PIGMENT)
                             .requiredAdvancement(blockUnlock(PastelBlocks.ETHEREAL_PLATFORM))
             );
 
@@ -3113,9 +3110,9 @@ public class PastelPedestalRecipes {
                             .pattern(" BP")
                             .pattern(" TB")
                             .pattern("T  ")
-                            .key('T', Items.STICK)
-                            .key('B', BROWN_PIGMENT)
-                            .key('P', PastelBlocks.HOVERBLOCK)
+                            .define('T', Items.STICK)
+                            .define('B', BROWN_PIGMENT)
+                            .define('P', PastelBlocks.HOVERBLOCK)
                             .requiredAdvancement(itemUnlock(EXCHANGING_STAFF))
             );
 
@@ -3130,11 +3127,11 @@ public class PastelPedestalRecipes {
                             .pattern("CTC")
                             .pattern("PGP")
                             .pattern("BBB")
-                            .key('B', PastelBlocks.POLISHED_BASALT)
-                            .key('P', PastelBlocks.POLISHED_CALCITE)
-                            .key('C', Items.COPPER_INGOT)
-                            .key('G', STRATINE_FRAGMENTS)
-                            .key('T', RED_PIGMENT)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
+                            .define('P', PastelBlocks.POLISHED_CALCITE)
+                            .define('C', Items.COPPER_INGOT)
+                            .define('G', STRATINE_FRAGMENTS)
+                            .define('T', RED_PIGMENT)
                             .requiredAdvancement(blockUnlock(PastelBlocks.FABRICATION_CHEST))
             );
 
@@ -3152,8 +3149,8 @@ public class PastelPedestalRecipes {
                                 .pattern("S S")
                                 .pattern("XSX")
                                 .pattern("XXX")
-                                .key('X', block)
-                                .key('S', SHIMMERSTONE_GEM)
+                                .define('X', block)
+                                .define('S', SHIMMERSTONE_GEM)
                                 .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.ITEM_BOWL)
                 );
             });
@@ -3168,9 +3165,9 @@ public class PastelPedestalRecipes {
                             .pattern("GPG")
                             .pattern("PEP")
                             .pattern("GPG")
-                            .key('E', Items.EMERALD)
-                            .key('P', PURPLE_PIGMENT)
-                            .key('G', GREEN_PIGMENT)
+                            .define('E', Items.EMERALD)
+                            .define('P', PURPLE_PIGMENT)
+                            .define('G', GREEN_PIGMENT)
                             .requiredAdvancement(itemUnlock(KNOWLEDGE_GEM))
             );
 
@@ -3186,11 +3183,11 @@ public class PastelPedestalRecipes {
                             .pattern("PMP")
                             .pattern("SBS")
                             .pattern("YMY")
-                            .key('P', PINK_PIGMENT)
-                            .key('Y', YELLOW_PIGMENT)
-                            .key('B', Items.BUCKET)
-                            .key('S', SHIMMERSTONE_GEM)
-                            .key('M', MERMAIDS_GEM)
+                            .define('P', PINK_PIGMENT)
+                            .define('Y', YELLOW_PIGMENT)
+                            .define('B', Items.BUCKET)
+                            .define('S', SHIMMERSTONE_GEM)
+                            .define('M', MERMAIDS_GEM)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.LIQUID_CRYSTAL)
             );
 
@@ -3205,11 +3202,11 @@ public class PastelPedestalRecipes {
                             .pattern("GMG")
                             .pattern("STS")
                             .pattern("MCM")
-                            .key('M', PURE_MALACHITE)
-                            .key('S', Items.STRING)
-                            .key('T', Items.TRIPWIRE_HOOK)
-                            .key('G', PURE_GOLD)
-                            .key('C', MOONSTONE_CORE)
+                            .define('M', PURE_MALACHITE)
+                            .define('S', Items.STRING)
+                            .define('T', Items.TRIPWIRE_HOOK)
+                            .define('G', PURE_GOLD)
+                            .define('C', MOONSTONE_CORE)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.OMNI_ACCELERATOR)
             );
 
@@ -3224,8 +3221,8 @@ public class PastelPedestalRecipes {
                             .experience(2.0f)
                             .pattern("OOO")
                             .pattern("OCO")
-                            .key('O', ONYX_SHARD)
-                            .key('C', LIQUID_CRYSTAL_BUCKET)
+                            .define('O', ONYX_SHARD)
+                            .define('C', LIQUID_CRYSTAL_BUCKET)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.ONYX_HELMET)
             );
 
@@ -3236,11 +3233,11 @@ public class PastelPedestalRecipes {
                             .experience(16.0f)
                             .pattern("MMM")
                             .pattern("BRB")
-                            .key('M', MOONSTONE_SHARD)
-                            .key('B', BISMUTH_FLAKE)
-                            .key('R', PastelBlocks.POLISHED_ONYX_BLOCK)
+                            .define('M', MOONSTONE_SHARD)
+                            .define('B', BISMUTH_FLAKE)
+                            .define('R', PastelBlocks.POLISHED_ONYX_BLOCK)
                             .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_MOONSTONE)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
 
             pfx.generateAutoNamedRecipe(
@@ -3254,9 +3251,9 @@ public class PastelPedestalRecipes {
                             .pattern("CGC")
                             .pattern("GMG")
                             .pattern("CGC")
-                            .key('C', MIDNIGHT_CHIP)
-                            .key('G', DOOMBLOOM_SEED)
-                            .key('M', MOONSTONE_CORE)
+                            .define('C', MIDNIGHT_CHIP)
+                            .define('G', DOOMBLOOM_SEED)
+                            .define('M', MOONSTONE_CORE)
                             .requiredAdvancement(itemUnlock(PIPE_BOMB))
             );
 
@@ -3271,11 +3268,11 @@ public class PastelPedestalRecipes {
                             .pattern("CQC")
                             .pattern("PGP")
                             .pattern("BBB")
-                            .key('B', PastelBlocks.POLISHED_BASALT)
-                            .key('P', PastelBlocks.POLISHED_CALCITE)
-                            .key('C', Items.COPPER_INGOT)
-                            .key('G', STRATINE_FRAGMENTS)
-                            .key('Q', QUITOXIC_POWDER)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
+                            .define('P', PastelBlocks.POLISHED_CALCITE)
+                            .define('C', Items.COPPER_INGOT)
+                            .define('G', STRATINE_FRAGMENTS)
+                            .define('Q', QUITOXIC_POWDER)
                             .requiredAdvancement(blockUnlock(PastelBlocks.POTION_WORKSHOP))
             );
 
@@ -3288,9 +3285,9 @@ public class PastelPedestalRecipes {
                             .pattern("CCC")
                             .pattern(" B ")
                             .pattern("ACA")
-                            .key('B', PastelBlocks.POLISHED_BASALT)
-                            .key('C', PastelBlocks.POLISHED_CALCITE)
-                            .key('A', RAW_AZURITE)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
+                            .define('C', PastelBlocks.POLISHED_CALCITE)
+                            .define('A', RAW_AZURITE)
                             .requiredAdvancement(blockUnlock(PastelBlocks.SPIRIT_INSTILLER))
             );
 
@@ -3303,10 +3300,10 @@ public class PastelPedestalRecipes {
                             .pattern("###")
                             .pattern("#X#")
                             .pattern("###")
-                            .key('#', STRATINE_FRAGMENTS)
-                            .key('X', Items.EMERALD)
+                            .define('#', STRATINE_FRAGMENTS)
+                            .define('X', Items.EMERALD)
                             .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_STRATINE_GEM)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
 
             pfx.generateAutoNamedRecipe(
@@ -3321,9 +3318,9 @@ public class PastelPedestalRecipes {
                             .pattern("PMP")
                             .pattern("MEM")
                             .pattern("PMP")
-                            .key('E', PastelBlocks.RADIATING_ENDER)
-                            .key('M', MIDNIGHT_CHIP)
-                            .key('P', BLACK_PIGMENT)
+                            .define('E', PastelBlocks.RADIATING_ENDER)
+                            .define('M', MIDNIGHT_CHIP)
+                            .define('P', BLACK_PIGMENT)
                             .requiredAdvancement(blockUnlock(PastelBlocks.UNIVERSE_SPYHOLE))
             );
 
@@ -3339,12 +3336,12 @@ public class PastelPedestalRecipes {
                             .pattern("GLG")
                             .pattern("TAC")
                             .pattern("YYY")
-                            .key('Y', PastelBlocks.POLISHED_BASALT)
-                            .key('A', PastelBlocks.POLISHED_AMETHYST_BLOCK)
-                            .key('T', PastelBlocks.POLISHED_TOPAZ_BLOCK)
-                            .key('C', PastelBlocks.POLISHED_CITRINE_BLOCK)
-                            .key('L', RAW_AZURITE)
-                            .key('G', GREEN_PIGMENT)
+                            .define('Y', PastelBlocks.POLISHED_BASALT)
+                            .define('A', PastelBlocks.POLISHED_AMETHYST_BLOCK)
+                            .define('T', PastelBlocks.POLISHED_TOPAZ_BLOCK)
+                            .define('C', PastelBlocks.POLISHED_CITRINE_BLOCK)
+                            .define('L', RAW_AZURITE)
+                            .define('G', GREEN_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_EFFICIENCY)
             );
 
@@ -3359,11 +3356,11 @@ public class PastelPedestalRecipes {
                             .pattern("PLP")
                             .pattern("XEX")
                             .pattern("YYY")
-                            .key('E', Items.EMERALD_BLOCK)
-                            .key('X', PastelBlocks.POLISHED_CALCITE)
-                            .key('Y', PastelBlocks.POLISHED_BASALT)
-                            .key('L', STORM_STONE)
-                            .key('P', PURPLE_PIGMENT)
+                            .define('E', Items.EMERALD_BLOCK)
+                            .define('X', PastelBlocks.POLISHED_CALCITE)
+                            .define('Y', PastelBlocks.POLISHED_BASALT)
+                            .define('L', STORM_STONE)
+                            .define('P', PURPLE_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_EXPERIENCE)
             );
 
@@ -3375,8 +3372,8 @@ public class PastelPedestalRecipes {
                             .magenta(8)
                             .yellow(4)
                             .experience(16.0f)
-                            .ingredient(PastelBlocks.UPGRADE_EXPERIENCE)
-                            .ingredient(MOONSTONE_SHARD)
+                            .requires(PastelBlocks.UPGRADE_EXPERIENCE)
+                            .requires(MOONSTONE_SHARD)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_EXPERIENCE2)
             );
 
@@ -3392,12 +3389,12 @@ public class PastelPedestalRecipes {
                             .pattern("PAP")
                             .pattern("XTX")
                             .pattern("YCY")
-                            .key('X', PastelBlocks.POLISHED_CALCITE)
-                            .key('Y', PastelBlocks.POLISHED_BASALT)
-                            .key('A', Items.AMETHYST_BLOCK)
-                            .key('T', PastelBlocks.TOPAZ_BLOCK)
-                            .key('C', PastelBlocks.CITRINE_BLOCK)
-                            .key('P', MAGENTA_PIGMENT)
+                            .define('X', PastelBlocks.POLISHED_CALCITE)
+                            .define('Y', PastelBlocks.POLISHED_BASALT)
+                            .define('A', Items.AMETHYST_BLOCK)
+                            .define('T', PastelBlocks.TOPAZ_BLOCK)
+                            .define('C', PastelBlocks.CITRINE_BLOCK)
+                            .define('P', MAGENTA_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_SPEED)
             );
 
@@ -3410,8 +3407,8 @@ public class PastelPedestalRecipes {
                             .yellow(4)
                             .black(8)
                             .experience(4.0f)
-                            .ingredient(STORM_STONE)
-                            .ingredient(PastelBlocks.UPGRADE_SPEED)
+                            .requires(STORM_STONE)
+                            .requires(PastelBlocks.UPGRADE_SPEED)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_SPEED2)
             );
 
@@ -3433,9 +3430,9 @@ public class PastelPedestalRecipes {
 
             pfx.generateAutoNamedRecipe(
                     baseNode(baseStack)
-                            .key('S', center)
-                            .key('A', RAW_AZURITE)
-                            .replacePowderInputsWith(mix)
+                            .define('S', center)
+                            .define('A', RAW_AZURITE)
+                            .replaceColorsWith(mix)
                             .experience(1.0f)
                             .group("pastel_network")
             );
@@ -3443,9 +3440,9 @@ public class PastelPedestalRecipes {
             pfx.generateRecipe(
                     refinedName,
                     baseNode(refinedStack)
-                            .key('S', center)
-                            .key('A', PURE_AZURITE)
-                            .replacePowderInputsWith(refinedMix)
+                            .define('S', center)
+                            .define('A', PURE_AZURITE)
+                            .replaceColorsWith(refinedMix)
                             .experience(4.0f)
                             .group("pure_pastel_network")
             );
@@ -3458,8 +3455,8 @@ public class PastelPedestalRecipes {
                     .pattern(" A ")
                     .pattern("ASA")
                     .pattern("YXY")
-                    .key('X', PastelBlocks.POLISHED_BASALT)
-                    .key('Y', PastelBlocks.POLISHED_CALCITE)
+                    .define('X', PastelBlocks.POLISHED_BASALT)
+                    .define('Y', PastelBlocks.POLISHED_CALCITE)
                     .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.PASTEL_NETWORK);
         }
 
@@ -3473,9 +3470,9 @@ public class PastelPedestalRecipes {
                     .pattern("GPG")
                     .pattern("PSP")
                     .pattern("GPG")
-                    .key('S', center)
-                    .key('P', PURPLE_PIGMENT.asItem())
-                    .key('G', glass)
+                    .define('S', center)
+                    .define('P', PURPLE_PIGMENT.asItem())
+                    .define('G', glass)
                     .requiredAdvancement(PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE);
         }
 
@@ -3566,16 +3563,16 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.ELYTRA))
                             .craftingTime(1200)
                             .tier(PedestalTier.COMPLEX)
-                            .powderInput(PastelGemstoneColor.CYAN, 2)
-                            .powderInput(PastelGemstoneColor.WHITE, 8)
+                            .color(PastelGemstoneColor.CYAN, 2)
+                            .color(PastelGemstoneColor.WHITE, 8)
                             .experience(4.0f)
                             .pattern("CGC")
                             .pattern("MPM")
                             .pattern("MPM")
-                            .key('G', PALTAERIA_GEM.asItem())
-                            .key('P', PALTAERIA_FRAGMENTS.asItem())
-                            .key('M', Items.PHANTOM_MEMBRANE)
-                            .key('C', Items.POPPED_CHORUS_FRUIT)
+                            .define('G', PALTAERIA_GEM.asItem())
+                            .define('P', PALTAERIA_FRAGMENTS.asItem())
+                            .define('M', Items.PHANTOM_MEMBRANE)
+                            .define('C', Items.POPPED_CHORUS_FRUIT)
                             .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_PALTAERIA_GEM)
             );
 
@@ -3585,15 +3582,15 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.HEAVY_CORE))
                             .craftingTime(1200)
                             .tier(PedestalTier.COMPLEX)
-                            .powderInput(PastelGemstoneColor.CYAN, 12)
-                            .powderInput(PastelGemstoneColor.WHITE, 4)
+                            .color(PastelGemstoneColor.CYAN, 12)
+                            .color(PastelGemstoneColor.WHITE, 4)
                             .experience(3.0f)
                             .pattern("MBM")
                             .pattern("MSM")
                             .pattern("MBM")
-                            .key('M', PastelBlocks.BASAL_MARBLE.asItem())
-                            .key('B', BISMUTH_CRYSTAL.asItem())
-                            .key('S', STRATINE_GEM.asItem())
+                            .define('M', PastelBlocks.BASAL_MARBLE.asItem())
+                            .define('B', BISMUTH_CRYSTAL.asItem())
+                            .define('S', STRATINE_GEM.asItem())
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.HEAVY_CORE)
             );
 
@@ -3601,16 +3598,16 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(Items.TRIDENT))
                             .craftingTime(1200)
                             .tier(PedestalTier.COMPLEX)
-                            .powderInput(PastelGemstoneColor.YELLOW, 2)
-                            .powderInput(PastelGemstoneColor.CYAN, 4)
-                            .powderInput(PastelGemstoneColor.WHITE, 4)
+                            .color(PastelGemstoneColor.YELLOW, 2)
+                            .color(PastelGemstoneColor.CYAN, 4)
+                            .color(PastelGemstoneColor.WHITE, 4)
                             .experience(2.0f)
                             .pattern(" PP")
                             .pattern(" MP")
                             .pattern("S  ")
-                            .key('M', MERMAIDS_GEM.asItem())
-                            .key('P', Items.PRISMARINE_SHARD)
-                            .key('S', Items.STICK)
+                            .define('M', MERMAIDS_GEM.asItem())
+                            .define('P', Items.PRISMARINE_SHARD)
+                            .define('S', Items.STICK)
                             .requiredAdvancement(PastelAdvancements.Lategame.BUILD_COMPLEX_PEDESTAL_STRUCTURE)
             );
         }
@@ -3625,10 +3622,10 @@ public class PastelPedestalRecipes {
                             .pattern("###")
                             .pattern("#X#")
                             .pattern("###")
-                            .key('#', PALTAERIA_FRAGMENTS)
-                            .key('X', Items.DIAMOND)
+                            .define('#', PALTAERIA_FRAGMENTS)
+                            .define('X', Items.DIAMOND)
                             .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_PALTAERIA_GEM)
-                            .ignoreYieldUpgrades(true)
+                            .disableYieldUpgrades(true)
             );
 
             pfx.generateAutoNamedRecipe(
@@ -3641,9 +3638,9 @@ public class PastelPedestalRecipes {
                             .pattern("PAP")
                             .pattern("ACA")
                             .pattern("PAP")
-                            .key('A', Items.AMETHYST_SHARD)
-                            .key('C', PALTAERIA_GEM)
-                            .key('P', MAGENTA_PIGMENT)
+                            .define('A', Items.AMETHYST_SHARD)
+                            .define('C', PALTAERIA_GEM)
+                            .define('P', MAGENTA_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.CELESTIAL_POCKETWATCH)
             );
 
@@ -3657,9 +3654,9 @@ public class PastelPedestalRecipes {
                             .pattern(" F ")
                             .pattern("BNB")
                             .pattern(" F ")
-                            .key('B', PURE_QUARTZ)
-                            .key('F', BISMUTH_FLAKE)
-                            .key('N', NIGHTDEW_SPROUT)
+                            .define('B', PURE_QUARTZ)
+                            .define('F', BISMUTH_FLAKE)
+                            .define('N', NIGHTDEW_SPROUT)
                             .requiredAdvancement(PastelAdvancements.Hidden.CollectCookbooks.POISONERS_HANDBOOK)
             );
 
@@ -3674,11 +3671,11 @@ public class PastelPedestalRecipes {
                             .pattern("ILI")
                             .pattern("CPC")
                             .pattern("BPB")
-                            .key('I', BISMUTH_CRYSTAL)
-                            .key('C', PastelBlocks.POLISHED_CALCITE)
-                            .key('B', PastelBlocks.POLISHED_BASALT)
-                            .key('P', PastelItemTags.PIGMENT_BLOCKS)
-                            .key('L', Items.BUCKET)
+                            .define('I', BISMUTH_CRYSTAL)
+                            .define('C', PastelBlocks.POLISHED_CALCITE)
+                            .define('B', PastelBlocks.POLISHED_BASALT)
+                            .define('P', PastelItemTags.PIGMENT_BLOCKS)
+                            .define('L', Items.BUCKET)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.CRYSTALLARIEUM)
             );
 
@@ -3694,9 +3691,9 @@ public class PastelPedestalRecipes {
                             .pattern("PS ")
                             .pattern("PSS")
                             .pattern("MPP")
-                            .key('S', Items.STRING)
-                            .key('M', PURE_MALACHITE)
-                            .key('P', JADEITE_PETALS)
+                            .define('S', Items.STRING)
+                            .define('M', PURE_MALACHITE)
+                            .define('P', JADEITE_PETALS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.EVERPROMISE_RIBBON_RECIPE)
             );
 
@@ -3709,7 +3706,7 @@ public class PastelPedestalRecipes {
                             .pattern(" B ")
                             .pattern("B B")
                             .pattern(" B ")
-                            .key('B', BISMUTH_CRYSTAL)
+                            .define('B', BISMUTH_CRYSTAL)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.FANCIFUL_BISMUTH_RING)
             );
 
@@ -3723,9 +3720,9 @@ public class PastelPedestalRecipes {
                             .pattern("EPE")
                             .pattern("PRP") // PRPle guy.....
                             .pattern("EPE")
-                            .key('E', Items.ENDER_EYE)
-                            .key('R', PastelBlocks.RADIATING_ENDER)
-                            .key('P', PALTAERIA_GEM)
+                            .define('E', Items.ENDER_EYE)
+                            .define('R', PastelBlocks.RADIATING_ENDER)
+                            .define('P', PALTAERIA_GEM)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.PERTURBED_EYE)
             );
 
@@ -3739,9 +3736,9 @@ public class PastelPedestalRecipes {
                             .pattern(" JM")
                             .pattern(" DJ")
                             .pattern("D  ")
-                            .key('M', MOONSTONE_CORE)
-                            .key('D', DRAGONBONE_CHUNK)
-                            .key('J', JADEITE_PETALS)
+                            .define('M', MOONSTONE_CORE)
+                            .define('D', DRAGONBONE_CHUNK)
+                            .define('J', JADEITE_PETALS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Items.STAFF_OF_REMEMBRANCE)
             );
 
@@ -3751,8 +3748,8 @@ public class PastelPedestalRecipes {
                             .complex()
                             .white(32) // ?!?!?
                             .experience(4.0f)
-                            .ingredient(PastelBlocks.UPGRADE_EFFICIENCY)
-                            .ingredient(PURE_EMERALD)
+                            .requires(PastelBlocks.UPGRADE_EFFICIENCY)
+                            .requires(PURE_EMERALD)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_EFFICIENCY2)
             );
 
@@ -3762,8 +3759,8 @@ public class PastelPedestalRecipes {
                             .complex()
                             .white(4)
                             .experience(4.0f)
-                            .ingredient(PastelBlocks.UPGRADE_SPEED2)
-                            .ingredient(PURE_IRON)
+                            .requires(PastelBlocks.UPGRADE_SPEED2)
+                            .requires(PURE_IRON)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_SPEED3)
             );
 
@@ -3776,10 +3773,10 @@ public class PastelPedestalRecipes {
                             .pattern("LPL")
                             .pattern("CPC")
                             .pattern("YYY")
-                            .key('Y', PastelBlocks.POLISHED_BASALT)
-                            .key('P', PALTAERIA_GEM)
-                            .key('C', STRATINE_GEM)
-                            .key('L', LIGHT_BLUE_PIGMENT)
+                            .define('Y', PastelBlocks.POLISHED_BASALT)
+                            .define('P', PALTAERIA_GEM)
+                            .define('C', STRATINE_GEM)
+                            .define('L', LIGHT_BLUE_PIGMENT)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_YIELD)
             );
 
@@ -3789,8 +3786,8 @@ public class PastelPedestalRecipes {
                             .complex()
                             .white(32)
                             .experience(4.0f)
-                            .ingredient(PastelBlocks.UPGRADE_YIELD)
-                            .ingredient(PURE_DIAMOND)
+                            .requires(PastelBlocks.UPGRADE_YIELD)
+                            .requires(PURE_DIAMOND)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Upgrades.UPGRADE_YIELD2)
             );
 
@@ -3813,9 +3810,9 @@ public class PastelPedestalRecipes {
                             .pattern("MPM")
                             .pattern(" S ")
                             .pattern(" S ")
-                            .key('S', Items.SMOOTH_BASALT)
-                            .key('M', DRAGONBONE_CHUNK)
-                            .key('P', PastelItemTags.RESPLENDENT_FEATHERS)
+                            .define('S', Items.SMOOTH_BASALT)
+                            .define('M', DRAGONBONE_CHUNK)
+                            .define('P', PastelItemTags.RESPLENDENT_FEATHERS)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.DRAGONRENDING_PICKAXE)
             );
 
@@ -3829,9 +3826,9 @@ public class PastelPedestalRecipes {
                             .pattern("MPM")
                             .pattern(" S ")
                             .pattern(" S ")
-                            .key('S', Items.SMOOTH_BASALT)
-                            .key('M', MOONSTONE_SHARD)
-                            .key('P', RESONANCE_SHARD)
+                            .define('S', Items.SMOOTH_BASALT)
+                            .define('M', MOONSTONE_SHARD)
+                            .define('P', RESONANCE_SHARD)
                             .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.RESONANT_PICKAXE)
             );
         }

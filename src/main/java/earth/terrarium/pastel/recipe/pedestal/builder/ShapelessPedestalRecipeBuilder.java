@@ -24,17 +24,17 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
     }
 
 
-    public ShapelessPedestalRecipeBuilder ingredient(IngredientStack stack) {
+    public ShapelessPedestalRecipeBuilder requires(IngredientStack stack) {
         ingredients.add(stack);
         return this;
     }
 
-    public ShapelessPedestalRecipeBuilder ingredient(ItemLike item) {
-        return ingredient(IngredientStack.ofItems(item.asItem()));
+    public ShapelessPedestalRecipeBuilder requires(ItemLike item) {
+        return requires(IngredientStack.ofItems(item.asItem()));
     }
 
-    public ShapelessPedestalRecipeBuilder ingredient(TagKey<Item> tag) {
-        return ingredient(IngredientStack.ofTag(tag));
+    public ShapelessPedestalRecipeBuilder requires(TagKey<Item> tag) {
+        return requires(IngredientStack.ofTag(tag));
     }
 
     @Override
@@ -51,7 +51,7 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
                 this.experience,
                 this.craftingTime,
                 this.skipRemainders,
-                this.ignoreYieldUpgrades
+                this.disableYieldUpgrades
         );
         recipeOutput.accept(id, recipe, null, this.conditions.toArray(ICondition[]::new));
     }
