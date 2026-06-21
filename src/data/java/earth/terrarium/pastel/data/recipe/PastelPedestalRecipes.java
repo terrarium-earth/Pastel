@@ -23,6 +23,7 @@ import earth.terrarium.pastel.recipe.pedestal.dynamic.EnderCanvasRecipe;
 import earth.terrarium.pastel.recipe.pedestal.dynamic.StarCandyRecipe;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.core.component.DataComponents;
@@ -40,6 +41,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
@@ -1717,13 +1719,12 @@ public class PastelPedestalRecipes {
             );
         }
 
-        private static IngredientStack infusedBeverageIngredient(InfusedBeverageComponent component) {
-            return new IngredientStack(
-                    Ingredient.of(INFUSED_BEVERAGE.asItem()),
+        private static Ingredient infusedBeverageIngredient(InfusedBeverageComponent component) {
+            return new DataComponentIngredient(
+                    HolderSet.direct(INFUSED_BEVERAGE),
                     DataComponentPredicate.builder().expect(PastelDataComponentTypes.INFUSED_BEVERAGE, component).build(),
-                    DataComponentPatch.builder().set(PastelDataComponentTypes.INFUSED_BEVERAGE, component).build(),
-                    1
-            );
+                    false
+            ).toVanilla();
         }
 
         private static ShapedPedestalRecipeBuilder tartBase(Item result, Item topping) {
@@ -3476,7 +3477,7 @@ public class PastelPedestalRecipes {
                     .requiredAdvancement(PastelAdvancements.Midgame.BUILD_ADVANCED_PEDESTAL_STRUCTURE);
         }
 
-        private static final Map<IngredientStack, DeferredBlock<?>> HEAD_IDOL_PAIRS =
+        private static final Map<Ingredient, DeferredBlock<?>> HEAD_IDOL_PAIRS =
                 Map.ofEntries(
                         hPair(PastelItemTags.MobHeads.AXOLOTL_HEADS, PastelBlocks.AXOLOTL_IDOL),
                         hPair(PastelSkullType.BAT, PastelBlocks.BAT_IDOL),
@@ -3523,20 +3524,20 @@ public class PastelPedestalRecipes {
                         hPair(PastelItemTags.MobHeads.ZOMBIE_HEADS, PastelBlocks.ZOMBIE_IDOL)
                 );
 
-        private static Map.Entry<IngredientStack, DeferredBlock<?>> hPair(PastelSkullType kind, DeferredBlock<?> block) {
+        private static Map.Entry<Ingredient, DeferredBlock<?>> hPair(PastelSkullType kind, DeferredBlock<?> block) {
             return Map.entry(head(kind), block);
         }
 
-        private static Map.Entry<IngredientStack, DeferredBlock<?>> hPair(ItemLike item, DeferredBlock<?> block) {
-            return Map.entry(IngredientStack.ofItems(item.asItem()), block);
+        private static Map.Entry<Ingredient, DeferredBlock<?>> hPair(ItemLike item, DeferredBlock<?> block) {
+            return Map.entry(Ingredient.of(item.asItem()), block);
         }
 
-        private static Map.Entry<IngredientStack, DeferredBlock<?>> hPair(TagKey<Item> tag, DeferredBlock<?> block) {
-            return Map.entry(IngredientStack.ofTag(tag), block);
+        private static Map.Entry<Ingredient, DeferredBlock<?>> hPair(TagKey<Item> tag, DeferredBlock<?> block) {
+            return Map.entry(Ingredient.of(tag), block);
         }
 
-        private static IngredientStack head(PastelSkullType kind) {
-            return IngredientStack.ofItems(PastelBlocks.MOB_HEADS.get(kind).asItem());
+        private static Ingredient head(PastelSkullType kind) {
+            return Ingredient.of(PastelBlocks.MOB_HEADS.get(kind).asItem());
         }
 
         private static IngredientStack stack(ItemLike item) {

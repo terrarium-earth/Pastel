@@ -15,8 +15,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
@@ -29,14 +28,14 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 
     protected final int height;
 
-    protected final RawShapedPedestalRecipe rawShapedRecipe;
+    protected final ShapedRecipePattern rawShapedRecipe;
 
     public ShapedPedestalRecipe(
         String group,
         boolean secret,
         Optional<ResourceLocation> requiredAdvancementIdentifier,
         PedestalTier tier,
-        RawShapedPedestalRecipe rawShapedRecipe,
+        ShapedRecipePattern rawShapedRecipe,
         Map<GemstoneColor, Integer> gemstonePowderInputs,
         ItemStack output,
         float experience,
@@ -49,7 +48,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
             secret,
             requiredAdvancementIdentifier,
             tier,
-            rawShapedRecipe.getIngredients(),
+            rawShapedRecipe.ingredients(),
             gemstonePowderInputs,
             output,
             experience,
@@ -59,8 +58,8 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
         );
 
         this.rawShapedRecipe = rawShapedRecipe;
-        this.width = rawShapedRecipe.getWidth();
-        this.height = rawShapedRecipe.getHeight();
+        this.width = rawShapedRecipe.width();
+        this.height = rawShapedRecipe.height();
     }
 
     @Override
@@ -72,7 +71,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
     public void consumeIngredients(PedestalBlockEntity pedestal, PedestalRecipeInput input) {
         super.consumeIngredients(pedestal, input);
 
-        boolean mirrored = rawShapedRecipe.matches(input.getCraftingGridInput(), true);
+        boolean mirrored = rawShapedRecipe.matches(input.getCraftingGridInput());
         var inv = pedestal.getInventory();
         var positioned = CraftingInput.ofPositioned(3, 3, inv.getInternalList());
 
@@ -93,10 +92,16 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
                 var stack = inv.getStackInSlot(slot);
 
                 if (!stack.isEmpty()) {
-                    decrementGridSlot(pedestal, slot, ingredient.getCount(), stack);
+                    decrementGridSlot(pedestal, slot, 1, stack);
                 }
             }
         }
+    }
+
+    @Override
+    public boolean isIncomplete() {
+        var ingredients = this.getIngredients();
+        return ingredients.isEmpty() || ingredients.stream().filter(it -> !it.isEmpty()).anyMatch(Ingredient::hasNoItems);
     }
 
     @Override
@@ -131,7 +136,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
                         PedestalTier.CODEC.optionalFieldOf("tier", PedestalTier.BASIC).forGetter(recipe -> recipe.tier),
-                        RawShapedPedestalRecipe.CODEC.forGetter(recipe -> recipe.rawShapedRecipe),
+                        ShapedRecipePattern.MAP_CODEC.forGetter(recipe -> recipe.rawShapedRecipe),
                         CodecHelper
                             .registryMap(PastelRegistries.GEMSTONE_COLOR, Codec.INT)
                             .fieldOf("colors")
@@ -159,7 +164,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
                 recipe -> recipe.requiredAdvancementIdentifier,
                 PedestalTier.STREAM_CODEC,
                 recipe -> recipe.tier,
-                RawShapedPedestalRecipe.STREAM_CODEC,
+                ShapedRecipePattern.STREAM_CODEC,
                 recipe -> recipe.rawShapedRecipe,
                 ByteBufCodecs
                     .map(

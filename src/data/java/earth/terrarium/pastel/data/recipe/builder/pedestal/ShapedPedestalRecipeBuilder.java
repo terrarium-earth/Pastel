@@ -8,6 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
@@ -15,7 +17,7 @@ import java.util.*;
 
 public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<ShapedPedestalRecipeBuilder> {
     private final List<String> rows = new ArrayList<>();
-    private final Map<Character, IngredientStack> keyMap = new HashMap<>();
+    private final Map<Character, Ingredient> keyMap = new HashMap<>();
 
     public ShapedPedestalRecipeBuilder(ItemStack result) {
         super(result);
@@ -30,23 +32,23 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
         return this;
     }
 
-    public ShapedPedestalRecipeBuilder define(char key, IngredientStack ingredient) {
+    public ShapedPedestalRecipeBuilder define(char key, Ingredient ingredient) {
         keyMap.put(key, ingredient);
         return this;
     }
 
     public ShapedPedestalRecipeBuilder define(char key, ItemLike item) {
-        return this.define(key, IngredientStack.ofItems(item.asItem()));
+        return this.define(key, Ingredient.of(item.asItem()));
     }
 
     public ShapedPedestalRecipeBuilder define(char key, TagKey<Item> tagKey) {
-        return this.define(key, IngredientStack.ofTag(tagKey));
+        return this.define(key, Ingredient.of(tagKey));
     }
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         Objects.requireNonNull(this.tier, "tier must be defined before saving the recipe!");
-        RawShapedPedestalRecipe rawRecipe = RawShapedPedestalRecipe.create(keyMap, rows);
+        var rawRecipe = ShapedRecipePattern.of(keyMap, rows);
         ShapedPedestalRecipe realRecipe =
                 new ShapedPedestalRecipe(
                         this.group,

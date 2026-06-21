@@ -13,19 +13,14 @@
       "item": "pastel:clotted_cream"
     },
     {
+      "type": "neoforge:components",
       "components": {
         "pastel:infused_beverage": {
           "color": 13723654,
           "variant": "sawblade_holly_liquor"
         }
       },
-      "item": "pastel:infused_beverage",
-      "preview_components": {
-        "pastel:infused_beverage": {
-          "color": 13723654,
-          "variant": "sawblade_holly_liquor"
-        }
-      }
+      "items": "pastel:infused_beverage"
     }
   ],
   "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2",

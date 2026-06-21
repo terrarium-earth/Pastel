@@ -17,9 +17,12 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.util.RecipeMatcher;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -31,7 +34,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
             boolean secret,
             Optional<ResourceLocation> requiredAdvancementIdentifier,
             PedestalTier tier,
-            NonNullList<IngredientStack> craftingInputs,
+            NonNullList<Ingredient> craftingInputs,
             Map<GemstoneColor, Integer> gemstonePowderInputs,
             ItemStack output,
             float experience,
@@ -56,11 +59,20 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 
     @Override
     public boolean matches(PedestalRecipeInput recipeInput, Level world) {
-        return matchIngredientStacksExclusively(
-            recipeInput,
-            getIngredientStacks(),
-            recipeInput.getCraftingGridSlots()
-        ) && super.matches(recipeInput, world);
+        var input = recipeInput.getCraftingGridInput();
+        if (input.ingredientCount() != this.inputs.size()) {
+            return false;
+        } else {
+            var nonEmptyItems = new ArrayList<ItemStack>(input.ingredientCount());
+
+            for (ItemStack item : input.items()) {
+                if (!item.isEmpty()) {
+                    nonEmptyItems.add(item);
+                }
+            }
+
+            return RecipeMatcher.findMatches(nonEmptyItems, this.inputs) != null && super.matches(recipeInput, world);
+        }
     }
 
     @Override
@@ -77,11 +89,11 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
             int slot : CRAFTING_GRID_SLOTS
         ) {
             for (
-                IngredientStack ingredientStack : this.inputs
+                Ingredient ingredient : this.inputs
             ) {
                 ItemStack slotStack = inv.getStackInSlot(slot);
-                if (ingredientStack.test(slotStack)) {
-                    decrementGridSlot(pedestal, slot, ingredientStack.getCount(), slotStack);
+                if (ingredient.test(slotStack)) {
+                    decrementGridSlot(pedestal, slot, 1, slotStack);
                     break;
                 }
             }
@@ -100,7 +112,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
                         PedestalTier.CODEC.optionalFieldOf("tier", PedestalTier.BASIC).forGetter(recipe -> recipe.tier),
-                        NonNullList.codecOf(IngredientStack.CODEC).fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
+                        NonNullList.codecOf(Ingredient.CODEC).fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
                         CodecHelper
                             .registryMap(PastelRegistries.GEMSTONE_COLOR, Codec.INT)
                             .fieldOf("colors")
@@ -128,7 +140,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
                 recipe -> recipe.requiredAdvancementIdentifier,
                 PedestalTier.STREAM_CODEC,
                 recipe -> recipe.tier,
-                IngredientStack.STREAM_CODEC.apply(PacketCodecHelper.nonNullList()),
+                Ingredient.CONTENTS_STREAM_CODEC.apply(PacketCodecHelper.nonNullList()),
                 recipe -> recipe.inputs,
                 ByteBufCodecs
                     .map(

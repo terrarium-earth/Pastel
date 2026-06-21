@@ -8,8 +8,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<ShapelessPedestalRecipeBuilder> {
-    private final List<IngredientStack> ingredients = new ArrayList<>();
+    private final List<Ingredient> ingredients = new ArrayList<>();
 
 
     public ShapelessPedestalRecipeBuilder(ItemStack result) {
@@ -25,17 +27,22 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
     }
 
 
-    public ShapelessPedestalRecipeBuilder requires(IngredientStack stack) {
-        ingredients.add(stack);
+    public ShapelessPedestalRecipeBuilder requires(Ingredient ingredient) {
+        ingredients.add(ingredient);
+        return this;
+    }
+
+    public ShapelessPedestalRecipeBuilder requires(ICustomIngredient ingredient) {
+        ingredients.add(ingredient.toVanilla());
         return this;
     }
 
     public ShapelessPedestalRecipeBuilder requires(ItemLike item) {
-        return requires(IngredientStack.ofItems(item.asItem()));
+        return requires(Ingredient.of(item.asItem()));
     }
 
     public ShapelessPedestalRecipeBuilder requires(TagKey<Item> tag) {
-        return requires(IngredientStack.ofTag(tag));
+        return requires(Ingredient.of(tag));
     }
 
     @Override

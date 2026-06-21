@@ -15,6 +15,7 @@ import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +39,7 @@ public class PedestalCraftingEmiRecipeGated extends GatedSpectrumEmiRecipe<Pedes
         int powderSlotCount = recipe
             .getTier()
             .getPowderSlotCount();
-        List<IngredientStack> ingredients = recipe.getIngredientStacks();
+        List<Ingredient> ingredients = recipe.getIngredients();
         int ingredientCount = ingredients.size();
 
         List<EmiIngredient> list = NonNullList.withSize(9 + powderSlotCount, EmiStack.EMPTY);
@@ -57,7 +58,6 @@ public class PedestalCraftingEmiRecipeGated extends GatedSpectrumEmiRecipe<Pedes
                                 .stream(
                                     ingredients
                                         .get(i)
-                                        .getIngredient()
                                         .getItems()
                                 )
                                 .map(EmiStack::of)

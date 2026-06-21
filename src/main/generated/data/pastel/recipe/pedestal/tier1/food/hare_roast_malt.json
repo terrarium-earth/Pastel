@@ -16,19 +16,14 @@
       "item": "pastel:clotted_cream"
     },
     "M": {
+      "type": "neoforge:components",
       "components": {
         "pastel:infused_beverage": {
           "color": 16762703,
           "variant": "beer"
         }
       },
-      "item": "pastel:infused_beverage",
-      "preview_components": {
-        "pastel:infused_beverage": {
-          "color": 16762703,
-          "variant": "beer"
-        }
-      }
+      "items": "pastel:infused_beverage"
     }
   },
   "pattern": [

@@ -13,19 +13,14 @@
       "item": "minecraft:honey_bottle"
     },
     "L": {
+      "type": "neoforge:components",
       "components": {
         "pastel:infused_beverage": {
           "color": 16729462,
           "variant": "berry_liquor"
         }
       },
-      "item": "pastel:infused_beverage",
-      "preview_components": {
-        "pastel:infused_beverage": {
-          "color": 16729462,
-          "variant": "berry_liquor"
-        }
-      }
+      "items": "pastel:infused_beverage"
     },
     "M": {
       "item": "pastel:clotted_cream"

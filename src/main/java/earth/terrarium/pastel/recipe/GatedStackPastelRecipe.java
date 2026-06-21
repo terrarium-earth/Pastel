@@ -5,11 +5,15 @@ import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeInput;
+import net.neoforged.neoforge.common.crafting.ICustomIngredient;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public abstract class GatedStackPastelRecipe<C extends RecipeInput> extends GatedPastelRecipe<C> {
 
@@ -22,6 +26,11 @@ public abstract class GatedStackPastelRecipe<C extends RecipeInput> extends Gate
     }
 
     public abstract NonNullList<IngredientStack> getIngredientStacks();
+
+    @Override
+    public @NotNull NonNullList<Ingredient> getIngredients() {
+        return NonNullList.copyOf(getIngredientStacks().stream().map(ICustomIngredient::toVanilla).collect(Collectors.toList()));
+    }
 
     protected boolean matchIngredientStacksExclusively(
         RecipeInput recipeInput,

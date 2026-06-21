@@ -16,19 +16,14 @@
       "item": "minecraft:sweet_berries"
     },
     "M": {
+      "type": "neoforge:components",
       "components": {
         "pastel:infused_beverage": {
           "color": 10505507,
           "variant": "rum"
         }
       },
-      "item": "pastel:infused_beverage",
-      "preview_components": {
-        "pastel:infused_beverage": {
-          "color": 10505507,
-          "variant": "rum"
-        }
-      }
+      "items": "pastel:infused_beverage"
     }
   },
   "pattern": [

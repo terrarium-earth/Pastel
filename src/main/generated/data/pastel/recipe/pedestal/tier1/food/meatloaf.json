@@ -13,19 +13,14 @@
       "item": "minecraft:honey_bottle"
     },
     "J": {
+      "type": "neoforge:components",
       "components": {
         "pastel:infused_beverage": {
           "color": 8272724,
           "variant": "malt_beer"
         }
       },
-      "item": "pastel:infused_beverage",
-      "preview_components": {
-        "pastel:infused_beverage": {
-          "color": 8272724,
-          "variant": "malt_beer"
-        }
-      }
+      "items": "pastel:infused_beverage"
     },
     "M": {
       "item": "pastel:myceylon"

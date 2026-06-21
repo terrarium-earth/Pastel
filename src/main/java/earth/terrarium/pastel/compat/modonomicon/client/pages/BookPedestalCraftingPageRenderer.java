@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Contract;
@@ -134,15 +135,16 @@ public class BookPedestalCraftingPageRenderer
         }
 
         // the ingredients
-        List<IngredientStack> ingredients = recipe.getIngredientStacks();
+        List<Ingredient> ingredients = recipe.getIngredients();
         int wrap = recipe.getWidth();
         for (
             int i = 0;
             i < ingredients.size();
             i++
         ) {
+
             ModonomiconHelper
-                .renderIngredientStack(
+                .renderIngredient(
                     drawContext,
                     parentScreen,
                     recipeX + (i % wrap) * 19 + 3,

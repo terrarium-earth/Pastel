@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Rotation;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,6 +38,30 @@ public class ModonomiconHelper {
                     mouseY,
                     stacks.get(parentScreen.getTicksInBook() / 20 % stacks.size())
                 );
+        }
+    }
+
+    // probably a helper function _somewhere_ out there, but im not finding it LOL
+    public static void renderIngredient(
+            GuiGraphics drawContext,
+            BookEntryScreen parentScreen,
+            int x,
+            int y,
+            int mouseX,
+            int mouseY,
+            Ingredient ingredient
+    ) {
+        var stacks = ingredient.getItems();
+        if (stacks.length > 0) {
+            parentScreen
+                    .renderItemStack(
+                            drawContext,
+                            x,
+                            y,
+                            mouseX,
+                            mouseY,
+                            stacks[parentScreen.getTicksInBook() / 20 % stacks.length]
+                    );
         }
     }
 

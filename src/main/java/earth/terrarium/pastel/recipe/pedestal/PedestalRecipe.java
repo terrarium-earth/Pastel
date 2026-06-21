@@ -3,13 +3,12 @@ package earth.terrarium.pastel.recipe.pedestal;
 import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockItem;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
@@ -27,13 +26,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalRecipeInput> {
+public abstract class PedestalRecipe extends GatedPastelRecipe<PedestalRecipeInput> {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("place_pedestal");
 
@@ -43,7 +43,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 
     protected final PedestalTier tier;
 
-    protected final NonNullList<IngredientStack> inputs;
+    protected final NonNullList<Ingredient> inputs;
 
     protected final Map<GemstoneColor, Integer> powderInputs;
 
@@ -62,7 +62,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
             boolean secret,
             Optional<ResourceLocation> requiredAdvancementIdentifier,
             PedestalTier tier,
-            NonNullList<IngredientStack> inputs,
+            NonNullList<Ingredient> inputs,
             Map<GemstoneColor, Integer> powderInputs,
             ItemStack output,
             float experience,
@@ -82,6 +82,11 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
         this.noBenefitsFromYieldUpgrades = noBenefitsFromYieldUpgrades;
 
         registerInToastManager(getType(), this);
+    }
+
+    @Override
+    public @NotNull NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     /**
@@ -126,11 +131,6 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 
     private boolean isStackAtLeast(ItemStack sourceItemStack, Item item, int amount) {
         return sourceItemStack.is(item) && sourceItemStack.getCount() >= amount;
-    }
-
-    @Override
-    public NonNullList<IngredientStack> getIngredientStacks() {
-        return inputs;
     }
 
     @Override

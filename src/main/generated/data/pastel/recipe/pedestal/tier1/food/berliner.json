@@ -10,19 +10,14 @@
       "item": "pastel:amaranth_grains"
     },
     "S": {
+      "type": "neoforge:components",
       "components": {
         "pastel:infused_beverage": {
           "color": 13723654,
           "variant": "sawblade_holly_liquor"
         }
       },
-      "item": "pastel:infused_beverage",
-      "preview_components": {
-        "pastel:infused_beverage": {
-          "color": 13723654,
-          "variant": "sawblade_holly_liquor"
-        }
-      }
+      "items": "pastel:infused_beverage"
     },
     "X": {
       "item": "pastel:fresh_chocolate"
