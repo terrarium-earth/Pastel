@@ -1,0 +1,22 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.75,
+  "experience": 0.25,
+  "group": "bismuth_crushing",
+  "ingredient": [
+    {
+      "item": "pastel:small_bismuth_bud"
+    },
+    {
+      "item": "pastel:large_bismuth_bud"
+    }
+  ],
+  "particleCount": 10,
+  "particleEffectIdentifier": "minecraft:enchanted_hit",
+  "required_advancement": "pastel:lategame/collect_bismuth",
+  "result": {
+    "count": 1,
+    "id": "pastel:bismuth_flake"
+  },
+  "soundEventIdentifier": "minecraft:block.chain.break"
+}

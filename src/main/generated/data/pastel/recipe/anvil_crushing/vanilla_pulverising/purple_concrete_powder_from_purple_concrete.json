@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:purple_concrete"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:purple_concrete_powder"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

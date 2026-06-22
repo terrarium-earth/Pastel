@@ -1,0 +1,34 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "item": "minecraft:red_sandstone"
+    },
+    {
+      "item": "minecraft:red_sandstone_stairs"
+    },
+    {
+      "item": "minecraft:red_sandstone_wall"
+    },
+    {
+      "item": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "item": "minecraft:smooth_red_sandstone_stairs"
+    },
+    {
+      "item": "minecraft:cut_red_sandstone"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 4,
+    "id": "minecraft:red_sand"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

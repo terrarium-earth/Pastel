@@ -1,0 +1,13 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.2,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "pastel:rock_crystal"
+  },
+  "result": {
+    "count": 7,
+    "id": "minecraft:quartz"
+  },
+  "soundEventIdentifier": "minecraft:block.glass.break"
+}

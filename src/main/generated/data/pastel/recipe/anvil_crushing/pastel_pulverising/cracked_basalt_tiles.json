@@ -1,0 +1,15 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 0.0,
+  "group": "block_cracking",
+  "ingredient": {
+    "item": "pastel:basalt_tiles"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "pastel:cracked_basalt_tiles"
+  },
+  "soundEventIdentifier": "minecraft:block.deepslate.break"
+}

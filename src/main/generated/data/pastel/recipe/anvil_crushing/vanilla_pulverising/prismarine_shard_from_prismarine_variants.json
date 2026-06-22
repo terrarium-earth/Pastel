@@ -1,0 +1,25 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "minecraft:dark_prismarine"
+    },
+    {
+      "item": "minecraft:dark_prismarine_stairs"
+    },
+    {
+      "item": "minecraft:prismarine_bricks"
+    },
+    {
+      "item": "minecraft:prismarine_brick_stairs"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 2,
+    "id": "minecraft:prismarine_shard"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

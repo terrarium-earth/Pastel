@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.4,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:cracked_nether_bricks"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 4,
+    "id": "minecraft:nether_brick"
+  },
+  "soundEventIdentifier": "minecraft:block.nether_bricks.break"
+}

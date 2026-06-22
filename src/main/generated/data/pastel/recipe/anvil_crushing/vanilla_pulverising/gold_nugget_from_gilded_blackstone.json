@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.9,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:gilded_blackstone"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 4,
+    "id": "minecraft:gold_nugget"
+  },
+  "soundEventIdentifier": "minecraft:block.gilded_blackstone.break"
+}

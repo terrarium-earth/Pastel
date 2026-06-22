@@ -1,0 +1,22 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 2.0,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "minecraft:deepslate_bricks"
+    },
+    {
+      "item": "minecraft:deepslate_brick_stairs"
+    },
+    {
+      "item": "minecraft:deepslate_brick_wall"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:cracked_deepslate_bricks"
+  },
+  "soundEventIdentifier": "minecraft:block.deepslate_bricks.break"
+}

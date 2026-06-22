@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 4.0,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:snow_block"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 4,
+    "id": "minecraft:snowball"
+  },
+  "soundEventIdentifier": "minecraft:block.snow.break"
+}

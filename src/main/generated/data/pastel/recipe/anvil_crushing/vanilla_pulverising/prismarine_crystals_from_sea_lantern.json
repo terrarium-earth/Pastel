@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:sea_lantern"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 3,
+    "id": "minecraft:prismarine_crystals"
+  },
+  "soundEventIdentifier": "minecraft:block.glass.break"
+}

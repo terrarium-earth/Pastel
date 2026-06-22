@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 2.0,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:mossy_stone_brick_stairs"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:mossy_cobblestone_stairs"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

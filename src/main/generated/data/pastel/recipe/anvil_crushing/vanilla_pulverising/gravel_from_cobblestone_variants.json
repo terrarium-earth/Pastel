@@ -1,0 +1,28 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 2.0,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "minecraft:cobblestone"
+    },
+    {
+      "item": "minecraft:cobblestone_stairs"
+    },
+    {
+      "item": "minecraft:cobblestone_wall"
+    },
+    {
+      "item": "minecraft:infested_cobblestone"
+    },
+    {
+      "item": "minecraft:mossy_cobblestone"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:gravel"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

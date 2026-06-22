@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.8,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:cracked_deepslate_tiles"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:cobbled_deepslate"
+  },
+  "soundEventIdentifier": "minecraft:block.deepslate_tiles.break"
+}

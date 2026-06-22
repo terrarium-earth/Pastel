@@ -1,0 +1,22 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.5,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "minecraft:end_stone_bricks"
+    },
+    {
+      "item": "minecraft:end_stone_brick_stairs"
+    },
+    {
+      "item": "minecraft:end_stone_brick_wall"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:sand"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

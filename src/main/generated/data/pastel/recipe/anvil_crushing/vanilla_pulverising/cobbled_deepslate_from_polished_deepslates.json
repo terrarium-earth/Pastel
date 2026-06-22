@@ -1,0 +1,22 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.8,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "minecraft:polished_deepslate"
+    },
+    {
+      "item": "minecraft:polished_deepslate_stairs"
+    },
+    {
+      "item": "minecraft:polished_deepslate_wall"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:cobbled_deepslate"
+  },
+  "soundEventIdentifier": "minecraft:block.polished_deepslate.break"
+}

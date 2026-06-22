@@ -1,0 +1,19 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.5,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "minecraft:cracked_stone_bricks"
+    },
+    {
+      "item": "minecraft:infested_cracked_stone_bricks"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:cobblestone"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

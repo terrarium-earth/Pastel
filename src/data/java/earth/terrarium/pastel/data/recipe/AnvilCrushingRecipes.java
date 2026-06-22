@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Function13;
 import earth.terrarium.pastel.data.recipe.builder.anvil_crushing.AnvilCrushingRecipeBuilder;
 import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.VanillaColorCollections;
 import earth.terrarium.pastel.helpers.tuples.Tuple4;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.registries.PastelAdvancements;
@@ -25,11 +26,14 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
+import oshi.util.tuples.Pair;
 import oshi.util.tuples.Triplet;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Map;
 import static java.util.Map.entry;
 
@@ -40,6 +44,9 @@ public class AnvilCrushingRecipes {
         coloredLeaves(pfx.subPrefix("colored_leaves"));
         dye(pfx.subPrefix("dye"));
         gemstonePowder(pfx.subPrefix("gemstone_powder"));
+        vanillaPulverizing(pfx.subPrefix("vanilla_pulverising"));
+        pastelPulverizing(pfx.subPrefix("pastel_pulverising"));
+        bismuth(pfx.subPrefix("bismuth"));
     }
 
 
@@ -265,5 +272,370 @@ public class AnvilCrushingRecipes {
     private static void generateDye(PrefixHelper pfx, Item input, Item dye, int resultCount) {
         generateDye(pfx, input, dye, 2.0f, 0.0f, resultCount, null);
     }
+
+
+    private static final List<UncraftGroup> VANILLA_PULVERIZE_UNCRAFT =
+            List.of(
+                    new UncraftGroup(Items.RED_SAND, 1.0f, Map.of(
+                            4, new UncraftEntry("red_sandstones", List.of(
+                                    Items.CHISELED_RED_SANDSTONE,
+                                    Items.RED_SANDSTONE,
+                                    Items.RED_SANDSTONE_STAIRS,
+                                    Items.RED_SANDSTONE_WALL,
+                                    Items.SMOOTH_RED_SANDSTONE,
+                                    Items.SMOOTH_RED_SANDSTONE_STAIRS,
+                                    Items.CUT_RED_SANDSTONE
+                            )),
+                            2, new UncraftEntry("red_sandstone_slabs", List.of(
+                                    Items.RED_SANDSTONE_SLAB,
+                                    Items.SMOOTH_RED_SANDSTONE_SLAB,
+                                    Items.CUT_RED_SANDSTONE_SLAB
+                            ))
+                    )),
+
+                    new UncraftGroup(Items.SAND, 1.0f, Map.of(
+                        4, new UncraftEntry("sandstones", List.of(
+                                Items.CHISELED_SANDSTONE,
+                                Items.CUT_SANDSTONE,
+                                Items.SANDSTONE,
+                                Items.SANDSTONE_STAIRS,
+                                    Items.SANDSTONE_WALL,
+                                    Items.SMOOTH_SANDSTONE,
+                                    Items.SMOOTH_SANDSTONE_STAIRS
+                        )),
+                        2, new UncraftEntry("sandstone_slabs", List.of(
+                                // ??? mojang, you missed one
+                                Blocks.CUT_SANDSTONE_SLAB.asItem(),
+                                Items.SANDSTONE_SLAB,
+                                Items.SMOOTH_SANDSTONE_SLAB
+                            ))
+                    )),
+                    UncraftGroup.singleton(Items.SAND, 2.0f, SoundEvents.GRAVEL_BREAK, Items.GRAVEL, 1),
+                    UncraftGroup.singleton(Items.SAND, 1.5f, Items.END_STONE, 1),
+                    new UncraftGroup(Items.SAND, 0.5f, Map.of(
+                            1, new UncraftEntry("end_stone_bricks", List.of(
+                                    Items.END_STONE_BRICKS,
+                                    Items.END_STONE_BRICK_STAIRS,
+                                    Items.END_STONE_BRICK_WALL
+                            ))
+                    )),
+                    new UncraftGroup(Items.MOSSY_COBBLESTONE, 0.5f, Map.of(
+                            1, new UncraftEntry("mossy_stone_bricks", List.of(
+                                    Items.INFESTED_MOSSY_STONE_BRICKS,
+                                    Items.MOSSY_STONE_BRICKS
+                            ))
+                    )),
+                    new UncraftGroup(Items.MOSSY_COBBLESTONE, 2.0f, Map.of(
+                            1, new UncraftEntry("mossy_cobblestone_variants", List.of(
+                                    Items.MOSSY_COBBLESTONE_STAIRS,
+                                    Items.MOSSY_COBBLESTONE_WALL
+                            ))
+                    )),
+                    UncraftGroup.singleton(Items.MOSSY_COBBLESTONE_STAIRS, 2.0f, Items.MOSSY_STONE_BRICK_STAIRS, 1),
+                    UncraftGroup.singleton(Items.MOSSY_COBBLESTONE_WALL, 2.0f, Items.MOSSY_STONE_BRICK_WALL, 1),
+                    new UncraftGroup(Items.COBBLED_DEEPSLATE, 0.8f, SoundEvents.DEEPSLATE_BREAK, Map.of(
+                            1, new UncraftEntry("deepslates", List.of(
+                                    Items.DEEPSLATE,
+                                    Items.INFESTED_DEEPSLATE
+                            ))
+                    )),
+                    new UncraftGroup(Items.COBBLED_DEEPSLATE, 0.8f, SoundEvents.POLISHED_DEEPSLATE_BREAK, Map.of(
+                            1, new UncraftEntry("polished_deepslates", List.of(
+                                    Items.POLISHED_DEEPSLATE,
+                                    Items.POLISHED_DEEPSLATE_STAIRS,
+                                    Items.POLISHED_DEEPSLATE_WALL
+                            ))
+                    )),
+                    UncraftGroup.singleton(Items.COBBLED_DEEPSLATE, 0.8f, SoundEvents.DEEPSLATE_BRICKS_BREAK, Items.CRACKED_DEEPSLATE_BRICKS, 1),
+                    UncraftGroup.singleton(Items.COBBLED_DEEPSLATE, 0.8f, SoundEvents.DEEPSLATE_TILES_BREAK, Items.CRACKED_DEEPSLATE_TILES, 1),
+                    new UncraftGroup(Items.CRACKED_DEEPSLATE_BRICKS, 2.0f, SoundEvents.DEEPSLATE_BRICKS_BREAK, Map.of(
+                            1, new UncraftEntry("deepslate_bricks", List.of(
+                                    Items.DEEPSLATE_BRICKS,
+                                    Items.DEEPSLATE_BRICK_STAIRS,
+                                    Items.DEEPSLATE_BRICK_WALL
+                            ))
+                    )),
+                    new UncraftGroup(Items.CRACKED_DEEPSLATE_TILES, 2.0f, SoundEvents.DEEPSLATE_TILES_BREAK, Map.of(
+                            1, new UncraftEntry("deepslate_tiles", List.of(
+                                    Items.DEEPSLATE_TILES,
+                                    Items.DEEPSLATE_TILE_STAIRS,
+                                    Items.DEEPSLATE_TILE_WALL
+                            ))
+                    )),
+                    new UncraftGroup(Items.COBBLESTONE, 0.5f, Map.of(
+                            1, new UncraftEntry("cracked_stone_bricks", List.of(
+                                    Items.CRACKED_STONE_BRICKS,
+                                    Items.INFESTED_CRACKED_STONE_BRICKS
+                            ))
+                    )),
+                    new UncraftGroup(Items.COBBLESTONE, 1.0f, Map.of(
+                            // That's how i'd die if
+                            // I was in the 19th century v
+                            1, new UncraftEntry("stones", List.of(
+                                    Items.INFESTED_STONE,
+                                    Items.SMOOTH_STONE,
+                                    Items.STONE,
+                                    Items.STONE_STAIRS
+                            ))
+                    )),
+                    new UncraftGroup(Items.GRAVEL, 2.0f, Map.of(
+                            1, new UncraftEntry("cobblestone_variants", List.of(
+                                    Items.COBBLESTONE,
+                                    Items.COBBLESTONE_STAIRS,
+                                    Items.COBBLESTONE_WALL,
+                                    Items.INFESTED_COBBLESTONE,
+                                    Items.MOSSY_COBBLESTONE
+                            ))
+                    )),
+                    new UncraftGroup(Items.CRACKED_STONE_BRICKS, 0.5f, Map.of(
+                            1, new UncraftEntry("stone_bricks", List.of(
+                                    Items.CHISELED_STONE_BRICKS,
+                                    Items.INFESTED_CHISELED_STONE_BRICKS,
+                                    Items.INFESTED_STONE_BRICKS,
+                                    Items.STONE_BRICKS,
+                                    Items.STONE_BRICK_STAIRS,
+                                    Items.STONE_BRICK_WALL
+                            ))
+                    )),
+                    UncraftGroup.singleton(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS, 0.9f, Items.POLISHED_BLACKSTONE_BRICKS, 1),
+                    new UncraftGroup(Items.GRAVEL, 2.0f, Map.of(
+                            1, new UncraftEntry("cobblestones", List.of(
+                                    Items.COBBLESTONE,
+                                    Items.MOSSY_COBBLESTONE,
+                                    Items.INFESTED_COBBLESTONE,
+                                    Items.COBBLESTONE_WALL,
+                                    Items.COBBLESTONE_STAIRS
+                            ))
+                    )),
+                    new UncraftGroup(Items.CRACKED_NETHER_BRICKS, 0.4f, SoundEvents.NETHER_BRICKS_BREAK, Map.of(
+                            1, new UncraftEntry("nether_bricks", List.of(
+                                    Items.CHISELED_NETHER_BRICKS,
+                                    Items.NETHER_BRICK_FENCE,
+                                    Items.NETHER_BRICKS,
+                                    Items.NETHER_BRICK_STAIRS,
+                                    Items.NETHER_BRICK_WALL
+                            ))
+                    )),
+                    UncraftGroup.singleton(Items.QUARTZ, 2.0f, Items.QUARTZ_BLOCK, 2),
+                    new UncraftGroup(Items.QUARTZ, 0.8f, Map.of(
+                            2, new UncraftEntry("quartz_variants", List.of(
+                                  Items.QUARTZ_BRICKS,
+                                  Items.QUARTZ_PILLAR,
+                                  Items.QUARTZ_STAIRS,
+                                  Items.SMOOTH_QUARTZ,
+                                  Items.SMOOTH_QUARTZ_STAIRS,
+                                Items.CHISELED_QUARTZ_BLOCK
+                            )),
+                            1, new UncraftEntry("quartz_slabs", List.of(
+                                    Items.QUARTZ_SLAB,
+                                    Items.SMOOTH_QUARTZ_SLAB
+                            ))
+                    )),
+                    UncraftGroup.singleton(Items.NETHER_BRICK, 0.4f, SoundEvents.NETHER_BRICKS_BREAK, Items.CRACKED_NETHER_BRICKS, 4),
+                    UncraftGroup.singleton(Items.MELON_SEEDS, 3.0f, SoundEvents.WOOD_BREAK, Items.MELON, 8),
+                    UncraftGroup.singleton(Items.PUMPKIN_SEEDS, 3.0f, SoundEvents.WOOD_BREAK, Items.PUMPKIN, 8),
+                    UncraftGroup.singleton(Items.HONEYCOMB, 2.0f, SoundEvents.CORAL_BLOCK_BREAK, Items.HONEYCOMB_BLOCK, 4),
+                    UncraftGroup.singleton(Items.GOLD_NUGGET, 0.9f, SoundEvents.GILDED_BLACKSTONE_BREAK, Items.GILDED_BLACKSTONE, 4),
+                    UncraftGroup.singleton(Items.GLOWSTONE_DUST, 2.0f, SoundEvents.GLASS_BREAK, Items.GLOWSTONE, 4),
+                    UncraftGroup.singleton(Items.CLAY_BALL, 2.0f, SoundEvents.GRAVEL_BREAK, Items.CLAY, 4),
+                    UncraftGroup.singleton(Items.BONE_MEAL, 1.5f, SoundEvents.BONE_BLOCK_BREAK, Items.BONE_BLOCK, 9),
+                    UncraftGroup.singleton(Items.PRISMARINE_CRYSTALS, 1.0f, SoundEvents.GLASS_BREAK, Items.SEA_LANTERN, 3),
+                    new UncraftGroup(Items.PRISMARINE_SHARD, 1.0f, Map.of(
+                            2, new UncraftEntry("prismarine_variants", List.of(
+                                    Items.DARK_PRISMARINE,
+                                    Items.DARK_PRISMARINE_STAIRS,
+                                    Items.PRISMARINE_BRICKS,
+                                    Items.PRISMARINE_BRICK_STAIRS
+                            )),
+                            // "prismarine_slabs" would be a lie
+                            1, new UncraftEntry("half_prismarine_variants", List.of(
+                                    Items.PRISMARINE,
+                                    Items.DARK_PRISMARINE_SLAB,
+                                    Items.PRISMARINE_BRICK_SLAB,
+                                    Items.PRISMARINE_SLAB,
+                                    Items.PRISMARINE_STAIRS,
+                                    Items.PRISMARINE_WALL
+                            ))
+                    )),
+                    UncraftGroup.singleton(Items.RED_SAND, 4.0f, SoundEvents.NETHERRACK_BREAK, Items.NETHERRACK, 1),
+                    UncraftGroup.singleton(Items.SLIME_BALL, 4.0f, SoundEvents.SLIME_BLOCK_BREAK, Items.SLIME_BLOCK, 9) ,
+                    UncraftGroup.singleton(Items.SNOWBALL, 4.0f, SoundEvents.SNOW_BREAK, Items.SNOW_BLOCK, 4)
+
+            );
+
+    private record UncraftEntry(String name, List<Item> items) {}
+
+    private record UncraftGroup(Item dest, float ppd, SoundEvent event, Map<Integer, UncraftEntry> entries) {
+        UncraftGroup(Item dest, float ppd, Map<Integer, UncraftEntry> entries) {
+            this(dest, ppd, SoundEvents.STONE_BREAK, entries);
+        }
+
+        static UncraftGroup singleton(Item dest, float ppd, Item source, int count) {
+            var name = BuiltInRegistries.ITEM.getKey(source).getPath();
+            return new UncraftGroup(dest, ppd, Map.of(count, new UncraftEntry(name, List.of(source))));
+        }
+
+        static UncraftGroup singleton(Item dest, float ppd, SoundEvent event, Item source, int count) {
+            var name = BuiltInRegistries.ITEM.getKey(source).getPath();
+            return new UncraftGroup(dest, ppd, event, Map.of(count, new UncraftEntry(name, List.of(source))));
+        }
+
+    }
+
+    private static void vanillaPulverizing(PrefixHelper pfx) {
+        PastelInkColorCollection.zipApply(VanillaColorCollections.CONCRETE_ITEMS, VanillaColorCollections.CONCRETE_POWDER_ITEMS, (concrete, powder) -> {
+           pfx.generateRecipe(
+                   nameFromInAndOut(concrete, powder),
+                   AnvilCrushingRecipeBuilder.of(
+                           new ItemStack(powder, 1),
+                           Ingredient.of(concrete),
+                           1.0f,
+                           SoundEvents.STONE_BREAK
+                   )
+                           .particleEffect(ParticleTypes.CLOUD)
+                           .experience(0.0f)
+           );
+        });
+
+        VANILLA_PULVERIZE_UNCRAFT.forEach(group -> {
+            var destName = BuiltInRegistries.ITEM.getKey(group.dest).getPath();
+           group.entries.forEach((count, items) -> {
+               pfx.generateRecipe(
+                       destName + "_from_" + items.name,
+                       AnvilCrushingRecipeBuilder.of(
+                               new ItemStack(group.dest, count),
+                               Ingredient.of(items.items.toArray(Item[]::new)),
+                               group.ppd,
+                               group.event
+                       )
+                               .particleEffect(ParticleTypes.CLOUD)
+                               .experience(0.0f)
+               );
+           });
+        });
+    }
+
+    private static void pastelPulverizing(PrefixHelper pfx) {
+        pfx.generateRecipe(
+                "cobbled_blackslag_from_blackslags",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelBlocks.COBBLED_BLACKSLAG),
+                        Ingredient.of(PastelBlocks.BLACKSLAG, PastelBlocks.INFESTED_BLACKSLAG),
+                        0.8f,
+                        SoundEvents.DEEPSLATE_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.0f)
+                        .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_BLACKSLAG)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelBlocks.CRACKED_BLACKSLAG_BRICKS),
+                        Ingredient.of(PastelBlocks.BLACKSLAG_BRICKS),
+                        1.0f,
+                        SoundEvents.DEEPSLATE_BREAK
+                )
+                        .group("block_cracking")
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.0f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelBlocks.CRACKED_BLACKSLAG_TILES),
+                        Ingredient.of(PastelBlocks.BLACKSLAG_TILES),
+                        1.0f,
+                        SoundEvents.DEEPSLATE_BREAK
+                )
+                        .group("block_cracking")
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.0f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelBlocks.CRACKED_BASALT_BRICKS),
+                        Ingredient.of(PastelBlocks.BASALT_BRICKS),
+                        1.0f,
+                        SoundEvents.DEEPSLATE_BREAK
+                )
+                        .group("block_cracking")
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.0f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                                new ItemStack(PastelBlocks.CRACKED_BASALT_TILES),
+                                Ingredient.of(PastelBlocks.BASALT_TILES),
+                                1.0f,
+                                SoundEvents.DEEPSLATE_BREAK
+                        )
+                        .group("block_cracking")
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.0f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                                new ItemStack(PastelBlocks.CRACKED_CALCITE_BRICKS),
+                                Ingredient.of(PastelBlocks.CALCITE_BRICKS),
+                                1.0f,
+                                SoundEvents.DEEPSLATE_BREAK
+                        )
+                        .group("block_cracking")
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.0f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                                new ItemStack(PastelBlocks.CRACKED_CALCITE_TILES),
+                                Ingredient.of(PastelBlocks.CALCITE_TILES),
+                                1.0f,
+                                SoundEvents.DEEPSLATE_BREAK
+                        )
+                        .group("block_cracking")
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.0f)
+        );
+
+        pfx.generateRecipe(
+                "quartz_from_rock_crystal",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.QUARTZ, 7),
+                        Ingredient.of(PastelBlocks.ROCK_CRYSTAL),
+                        0.2f,
+                        SoundEvents.GLASS_BREAK
+                )
+        );
+    }
+
+    private static void bismuth(PrefixHelper pfx) {
+        bismuthRecipe(pfx, 1, Ingredient.of(PastelBlocks.SMALL_BISMUTH_BUD, PastelBlocks.LARGE_BISMUTH_BUD), "buds",  0.25f);
+        bismuthRecipe(pfx, 4, Ingredient.of(PastelBlocks.BISMUTH_CLUSTER), "cluster",  1.0f);
+        bismuthRecipe(pfx, 2, Ingredient.of(PastelItems.BISMUTH_CRYSTAL), "crystal", 1.0f);
+    }
+
+    private static void bismuthRecipe(PrefixHelper pfx, int count, Ingredient input, String fromName, float xp) {
+        var name = "bismuth_from_" + fromName;
+
+        pfx.generateRecipe(
+                name,
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.BISMUTH_FLAKE.asItem(), count),
+                        input,
+                        0.75f,
+                        SoundEvents.CHAIN_BREAK
+                )
+                        .experience(xp)
+                        .particleEffect(ParticleTypes.ENCHANTED_HIT)
+                        .particleCount(10)
+                        .group("bismuth_crushing")
+                        .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_BISMUTH)
+        );
+    }
+
 
 }
