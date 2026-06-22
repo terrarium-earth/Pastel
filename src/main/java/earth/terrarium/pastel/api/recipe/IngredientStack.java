@@ -25,8 +25,8 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-// TODO: consider rewriting this back to use a List<ItemSubPredicate> instead of a DataComponentPredicate
-// Some of our ingredient stacks don't really make sense to require a full component
+// Seems like the pedestal recipes were the only ones that _used_ the `components` and `preview` components, so an interm
+// solution of only supporting
 public class IngredientStack implements ICustomIngredient {
 
     public static final MapCodec<IngredientStack> MAP_CODEC = RecordCodecBuilder
@@ -36,12 +36,6 @@ public class IngredientStack implements ICustomIngredient {
                     MapCodec
                         .assumeMapUnsafe(Ingredient.CODEC_NONEMPTY)
                         .forGetter(IngredientStack::getIngredient),
-                    DataComponentPredicate.CODEC
-                        .optionalFieldOf("components", DataComponentPredicate.EMPTY)
-                        .forGetter(o -> o.componentPredicate),
-                    DataComponentPatch.CODEC
-                        .optionalFieldOf("preview_components", DataComponentPatch.EMPTY)
-                        .forGetter(o -> o.previewComponents),
                     Codec.INT
                         .optionalFieldOf("count", 1)
                         .forGetter(o -> o.count)
@@ -69,10 +63,6 @@ public class IngredientStack implements ICustomIngredient {
         .composite(
             Ingredient.CONTENTS_STREAM_CODEC,
             o -> o.ingredient,
-            DataComponentPredicate.STREAM_CODEC,
-            o -> o.componentPredicate,
-            DataComponentPatch.STREAM_CODEC,
-            o -> o.previewComponents,
             ByteBufCodecs.VAR_INT,
             o -> o.count,
             IngredientStack::new
@@ -82,9 +72,6 @@ public class IngredientStack implements ICustomIngredient {
 
     private final Ingredient ingredient;
 
-    private final DataComponentPredicate componentPredicate;
-
-    private final DataComponentPatch previewComponents;
 
     private final int count;
 
@@ -95,25 +82,19 @@ public class IngredientStack implements ICustomIngredient {
 
     public static final IngredientStack EMPTY = new IngredientStack(
         Ingredient.EMPTY,
-        DataComponentPredicate.EMPTY,
-        DataComponentPatch.EMPTY,
         0
     );
 
     public IngredientStack(
         Ingredient ingredient,
-        DataComponentPredicate componentPredicate,
-        DataComponentPatch previewComponents,
         int count
     ) {
         this.ingredient = ingredient;
-        this.componentPredicate = componentPredicate;
-        this.previewComponents = previewComponents;
         this.count = count;
     }
 
     private IngredientStack(Ingredient ingredient) {
-        this(ingredient, DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, 1);
+        this(ingredient, 1);
     }
 
     public int getCount() {
@@ -135,8 +116,6 @@ public class IngredientStack implements ICustomIngredient {
     public static IngredientStack ofItems(Item item, int count) {
         IngredientStack ingredientStack = new IngredientStack(
             Ingredient.of(item),
-            DataComponentPredicate.EMPTY,
-            DataComponentPatch.EMPTY,
             count
         );
         ingredientStack.item = item;
@@ -150,8 +129,6 @@ public class IngredientStack implements ICustomIngredient {
     public static IngredientStack ofTag(TagKey<Item> tag, int count) {
         IngredientStack ingredientStack = new IngredientStack(
             Ingredient.of(tag),
-            DataComponentPredicate.EMPTY,
-            DataComponentPatch.EMPTY,
             count
         );
         ingredientStack.tag = tag;
@@ -160,8 +137,7 @@ public class IngredientStack implements ICustomIngredient {
 
     @Override
     public boolean test(ItemStack itemStack) {
-        return this.ingredient.test(itemStack) && this.count <= itemStack.getCount() && this.componentPredicate
-            .test(itemStack.getComponents());
+        return this.ingredient.test(itemStack) && this.count <= itemStack.getCount();
     }
 
     @Override
@@ -172,7 +148,6 @@ public class IngredientStack implements ICustomIngredient {
             .stream(matchingStacks)
             .map(stack -> {
                 ItemStack itemStack = new ItemStack(stack.getItem(), count);
-                itemStack.applyComponentsAndValidate(previewComponents);
                 return itemStack;
             });
     }

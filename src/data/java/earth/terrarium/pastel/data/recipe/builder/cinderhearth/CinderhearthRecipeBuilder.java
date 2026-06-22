@@ -65,7 +65,7 @@ public final class CinderhearthRecipeBuilder extends GatedRecipeBuilder<Cinderhe
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        var badInput = new IngredientStack(input.ingredient(), DataComponentPredicate.EMPTY, DataComponentPatch.EMPTY, input.count());
+        var badInput = new IngredientStack(input.ingredient(), input.count());
         var recipe = new CinderhearthRecipe(
                 this.group,
                 this.secret,
