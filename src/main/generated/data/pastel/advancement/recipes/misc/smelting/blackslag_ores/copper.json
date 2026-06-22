@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_inputs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:blackslag_copper_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:smelting//blackslag_ores/copper"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_inputs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:smelting//blackslag_ores/copper"
+    ]
+  }
+}

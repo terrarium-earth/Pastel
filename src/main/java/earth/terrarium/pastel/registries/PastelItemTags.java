@@ -96,6 +96,20 @@ public class PastelItemTags {
 
     public static final TagKey<Item> SMELTS_TO_BONE_ASH = of("smelts_to_bone_ash");
 
+    public static final TagKey<Item> AMETHYST_ORES = of("amethyst_ores");
+
+    public static final TagKey<Item> AZURITE_ORES = of("azurite_ores");
+
+    public static final TagKey<Item> CITRINE_ORES = of("citrine_ores");
+
+    public static final TagKey<Item> MOONSTONE_ORES = of("moonstone_ores");
+
+    public static final TagKey<Item> ONYX_ORES = of("onyx_ores");
+
+    public static final TagKey<Item> SHIMMERSTONE_ORES = of("shimmerstone_ores");
+
+    public static final TagKey<Item> TOPAZ_ORES = of("topaz_ores");
+
     public static class MobHeads {
         public static final TagKey<Item> AXOLOTL_HEADS = getMobHeadKey("axolotl");
         public static final TagKey<Item> FISH_HEADS = getMobHeadKey("fish");

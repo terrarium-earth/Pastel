@@ -40,6 +40,14 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
         return id.getPath();
     }
 
+    public static String recipeName(RecipeBuilder recipe) {
+        if (recipe instanceof SimpleRecipeBuilder<?> builder) {
+            return builder.getDefaultName();
+        }
+        var id = BuiltInRegistries.ITEM.getKey(recipe.getResult());
+        return id.getPath();
+    }
+
     @Override
     public C unlockedBy(String name, Criterion<?> criterion) {
         this.criteria.put(name, criterion);

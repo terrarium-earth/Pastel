@@ -5,6 +5,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.data.recipe.CinderhearthRecipes;
+import earth.terrarium.pastel.data.recipe.CookingRecipes;
 import earth.terrarium.pastel.data.recipe.InkConversionRecipes;
 import earth.terrarium.pastel.data.recipe.PastelPedestalRecipes;
 import earth.terrarium.pastel.recipe.RecipeScaling;
@@ -14,6 +15,8 @@ import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import earth.terrarium.pastel.registries.*;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -21,6 +24,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -105,6 +109,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         PastelPedestalRecipes.generate(recipeOutput, lookup);
         InkConversionRecipes.generate(recipeOutput, lookup);
         CinderhearthRecipes.generate(recipeOutput, lookup);
+        CookingRecipes.generate(recipeOutput, lookup);
     }
 
 

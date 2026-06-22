@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_result": {
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:polished_basalt"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:blasting/polished_basalt_unsmelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_result"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:blasting/polished_basalt_unsmelting"
+    ]
+  }
+}
