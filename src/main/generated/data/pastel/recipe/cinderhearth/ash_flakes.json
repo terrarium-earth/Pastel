@@ -2,7 +2,10 @@
   "type": "pastel:cinderhearth",
   "experience": 4.0,
   "ingredient": {
-    "item": "pastel:slush"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:slush"
+    }
   },
   "required_advancement": "pastel:hidden/collect_ash_and_slush",
   "results": [

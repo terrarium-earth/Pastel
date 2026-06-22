@@ -3,7 +3,9 @@
   "experience": 0.6,
   "ingredient": {
     "count": 2,
-    "item": "pastel:amaranth_grains"
+    "ingredient": {
+      "item": "pastel:amaranth_grains"
+    }
   },
   "required_advancement": "pastel:collect_amaranth_bushel",
   "results": [

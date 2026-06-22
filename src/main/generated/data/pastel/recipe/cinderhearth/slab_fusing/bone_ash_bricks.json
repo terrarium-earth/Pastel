@@ -3,7 +3,9 @@
   "experience": 0.1,
   "ingredient": {
     "count": 2,
-    "item": "pastel:bone_ash_brick_slab"
+    "ingredient": {
+      "item": "pastel:bone_ash_brick_slab"
+    }
   },
   "required_advancement": "pastel:break_cracked_dragonbone",
   "results": [

@@ -2,7 +2,10 @@
   "type": "pastel:cinderhearth",
   "experience": 0.3,
   "ingredient": {
-    "tag": "minecraft:logs_that_burn"
+    "count": 1,
+    "ingredient": {
+      "tag": "minecraft:logs_that_burn"
+    }
   },
   "results": [
     {

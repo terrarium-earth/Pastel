@@ -26,7 +26,7 @@ public class CinderhearthDisplay extends PastelDisplay {
     public CinderhearthDisplay(@NotNull RecipeHolder<CinderhearthRecipe> recipe) {
         super(
             recipe,
-            REIHelper.toEntryIngredients(recipe.value().getIngredientStacks()),
+            REIHelper.toEntryIngredientsSized(recipe.value().getSizedIngredients()),
             List.of(EntryIngredients.ofItemStacks(recipe.value().getPossibleOutputs()))
         );
         this.outputsWithChance = recipe.value().getResultsWithChance();

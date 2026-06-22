@@ -3,7 +3,9 @@
   "experience": 0.1,
   "ingredient": {
     "count": 2,
-    "item": "pastel:blackslag_brick_slab"
+    "ingredient": {
+      "item": "pastel:blackslag_brick_slab"
+    }
   },
   "required_advancement": "pastel:midgame/enter_dimension",
   "results": [

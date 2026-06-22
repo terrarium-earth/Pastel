@@ -2,7 +2,10 @@
   "type": "pastel:cinderhearth",
   "experience": 4.0,
   "ingredient": {
-    "item": "pastel:dragonbone_chunk"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:dragonbone_chunk"
+    }
   },
   "required_advancement": "pastel:break_cracked_dragonbone",
   "results": [

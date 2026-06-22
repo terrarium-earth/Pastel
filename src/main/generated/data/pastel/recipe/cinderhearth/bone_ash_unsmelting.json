@@ -1,7 +1,10 @@
 {
   "type": "pastel:cinderhearth",
   "ingredient": {
-    "tag": "pastel:smelts_to_bone_ash"
+    "count": 1,
+    "ingredient": {
+      "tag": "pastel:smelts_to_bone_ash"
+    }
   },
   "required_advancement": "pastel:break_cracked_dragonbone",
   "results": [

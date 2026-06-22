@@ -4,6 +4,7 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,6 +20,21 @@ public class REIHelper {
             .stream()
             .map(REIHelper::ofIngredientStack)
             .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static List<EntryIngredient> toEntryIngredientsSized(List<SizedIngredient> sizedIngredients) {
+        return sizedIngredients
+                .stream()
+                .map(REIHelper::ofSizedIngredient)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static EntryIngredient ofSizedIngredient(@NotNull SizedIngredient sizedIngredient) {
+        return EntryIngredients
+                .ofItemStacks(
+                        Arrays.stream(sizedIngredient.getItems())
+                                .toList()
+                );
     }
 
     public static EntryIngredient ofIngredientStack(@NotNull IngredientStack ingredientStack) {

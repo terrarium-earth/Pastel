@@ -128,7 +128,7 @@ public class BookCinderhearthSmeltingPageRenderer
 
         // the ingredient
         var ingredientStack = recipe
-            .getIngredientStacks()
+            .getSizedIngredients()
             .getFirst();
         parentScreen
             .renderIngredient(
@@ -137,8 +137,8 @@ public class BookCinderhearthSmeltingPageRenderer
                 recipeY + 7,
                 mouseX,
                 mouseY,
-                ingredientStack.getIngredient(),
-                ingredientStack.getCount()
+                ingredientStack.ingredient(),
+                ingredientStack.count()
             );
 
         // cinderhearth

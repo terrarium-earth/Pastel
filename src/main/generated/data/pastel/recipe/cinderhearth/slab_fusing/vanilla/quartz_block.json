@@ -3,7 +3,9 @@
   "experience": 0.1,
   "ingredient": {
     "count": 2,
-    "item": "minecraft:quartz_slab"
+    "ingredient": {
+      "item": "minecraft:quartz_slab"
+    }
   },
   "results": [
     {

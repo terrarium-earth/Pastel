@@ -3,7 +3,9 @@
   "experience": 0.1,
   "ingredient": {
     "count": 2,
-    "item": "pastel:exposed_polished_shale_clay_slab"
+    "ingredient": {
+      "item": "pastel:exposed_polished_shale_clay_slab"
+    }
   },
   "required_advancement": "pastel:hidden/collect_shale_clay",
   "results": [

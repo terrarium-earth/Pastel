@@ -2,7 +2,10 @@
   "type": "pastel:cinderhearth",
   "experience": 0.2,
   "ingredient": {
-    "tag": "minecraft:coal_ores"
+    "count": 1,
+    "ingredient": {
+      "tag": "minecraft:coal_ores"
+    }
   },
   "results": [
     {
