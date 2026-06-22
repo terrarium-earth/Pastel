@@ -12,7 +12,9 @@
   },
   "experience": 0.0,
   "ingredients": [
-    "pastel:pure_globette_nether_block"
+    {
+      "item": "pastel:pure_globette_nether_block"
+    }
   ],
   "result": {
     "id": "pastel:pure_globette_nether",

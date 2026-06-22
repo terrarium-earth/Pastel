@@ -17,7 +17,7 @@
     "GGG"
   ],
   "key": {
-    "G": "pastel:pure_globette"
+    "G": { "item": "pastel:pure_globette" }
   },
   "result": {
     "id": "pastel:pure_globette_block",

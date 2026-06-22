@@ -17,10 +17,18 @@
     "SSS"
   ],
   "key": {
-    "L": "malum:astral_weave",
-    "S": "minecraft:stick",
-    "C": "pastel:shimmerstone_gem",
-    "G": "minecraft:glow_ink_sac"
+    "L": {
+      "item": "malum:astral_weave"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "pastel:shimmerstone_gem"
+    },
+    "G": {
+      "item": "minecraft:glow_ink_sac"
+    }
   },
   "result": {
     "id": "pastel:glow_phantom_frame",

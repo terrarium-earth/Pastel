@@ -1,7 +1,10 @@
 {
   "type": "pastel:cinderhearth",
   "ingredient": {
-    "item": "ae2:certus_quartz_dust"
+    "count": 1,
+    "ingredient": {
+      "item": "ae2:certus_quartz_dust"
+    }
   },
   "results": [
     {

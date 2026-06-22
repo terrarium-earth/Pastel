@@ -13,9 +13,15 @@
     "MPS"
   ],
   "key": {
-    "M": "minecraft:bone_meal",
-    "P": "#pastel:pigments",
-    "S": "#pastel:pigments"
+    "M": {
+      "item": "minecraft:bone_meal"
+    },
+    "P": {
+      "tag": "pastel:pigments"
+    },
+    "S": {
+      "tag": "#pastel:pigments"
+    }
   },
   "result": {
     "id": "botania:fertilizer",

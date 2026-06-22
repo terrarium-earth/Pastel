@@ -17,7 +17,7 @@
     "GGG"
   ],
   "key": {
-    "G": "pastel:pure_globette_nether"
+    "G": { "item": "pastel:pure_globette_nether" }
   },
   "result": {
     "id": "pastel:pure_globette_nether_block",

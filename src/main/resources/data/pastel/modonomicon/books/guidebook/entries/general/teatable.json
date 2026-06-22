@@ -34,7 +34,7 @@
     {
       "type": "pastel:pedestal_crafting",
       "title": "container.pastel.rei.pedestal_recipe",
-      "recipe_id": "pastel:pedestal/tier1/teatable",
+      "recipe_id": "pastel:pedestal/tier1/tea_table",
       "text": "book.pastel.guidebook.teatable.page2.text"
     },
     {

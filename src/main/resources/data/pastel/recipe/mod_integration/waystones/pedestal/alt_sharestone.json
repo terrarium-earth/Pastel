@@ -14,9 +14,9 @@
     "OOO"
   ],
   "key": {
-    "O": "minecraft:obsidian",
-    "S": "minecraft:stone_bricks",
-    "E": "pastel:radiating_ender"
+    "O": { "item": "minecraft:obsidian" },
+    "S": { "item": "minecraft:stone_bricks" },
+    "E": { "item": "pastel:radiating_ender" }
   },
   "result": {
     "id": "waystones:sharestone",

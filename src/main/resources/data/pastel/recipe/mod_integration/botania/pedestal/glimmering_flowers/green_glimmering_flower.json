@@ -13,8 +13,8 @@
     "PS"
   ],
   "key": {
-    "P": "botania:green_mystical_flower",
-    "S": "pastel:shimmerstone_gem"
+    "P": {"item": "botania:green_mystical_flower"},
+    "P": {"item": "pastel:shimmerstone_gem"}
   },
   "result": {
     "id": "botania:green_shiny_flower",

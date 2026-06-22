@@ -13,9 +13,9 @@
     "MPS"
   ],
   "key": {
-    "M": "#c:mushrooms",
-    "P": "pastel:purple_pigment",
-    "S": "pastel:shimmerstone_gem"
+    "M": {"tag": "c:mushrooms"},
+    "P": {"item": "pastel:purple_pigment"},
+    "S": {"item": "pastel:shimmerstone_gem"}
   },
   "result": {
     "id": "botania:purple_mushroom",
