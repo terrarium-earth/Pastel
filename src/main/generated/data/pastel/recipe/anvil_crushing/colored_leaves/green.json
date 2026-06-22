@@ -1,0 +1,16 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 0.01,
+  "ingredient": {
+    "item": "pastel:green_leaves"
+  },
+  "particleCount": 10,
+  "particleEffectIdentifier": "minecraft:enchanted_hit",
+  "required_advancement": "pastel:hidden/collect_pigment/green",
+  "result": {
+    "count": 1,
+    "id": "pastel:green_pigment"
+  },
+  "soundEventIdentifier": "minecraft:block.moss.break"
+}

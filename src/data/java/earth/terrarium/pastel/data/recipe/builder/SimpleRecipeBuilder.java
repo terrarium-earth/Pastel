@@ -3,9 +3,11 @@ package earth.terrarium.pastel.data.recipe.builder;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
 import javax.annotation.Nullable;
@@ -72,6 +74,10 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
 
     protected ICondition[] conditions() {
         return this.conditions.toArray(ICondition[]::new);
+    }
+
+    protected void saveHelper(RecipeOutput ctx, ResourceLocation id, Recipe<?> recipe) {
+        ctx.accept(id, recipe, null, this.conditions());
     }
 
 }

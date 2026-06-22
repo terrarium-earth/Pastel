@@ -4,10 +4,7 @@ import com.mojang.datafixers.util.Either;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.data.recipe.CinderhearthRecipes;
-import earth.terrarium.pastel.data.recipe.CookingRecipes;
-import earth.terrarium.pastel.data.recipe.InkConversionRecipes;
-import earth.terrarium.pastel.data.recipe.PastelPedestalRecipes;
+import earth.terrarium.pastel.data.recipe.*;
 import earth.terrarium.pastel.recipe.RecipeScaling;
 import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
 import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
@@ -110,6 +107,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         InkConversionRecipes.generate(recipeOutput, lookup);
         CinderhearthRecipes.generate(recipeOutput, lookup);
         CookingRecipes.generate(recipeOutput, lookup);
+        AnvilCrushingRecipes.generate(recipeOutput, lookup);
     }
 
 

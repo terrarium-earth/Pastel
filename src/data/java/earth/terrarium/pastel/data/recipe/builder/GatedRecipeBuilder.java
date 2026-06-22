@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public abstract class GatedRecipeBuilder<C extends GatedRecipeBuilder<C>> extends SimpleRecipeBuilder<C> {
     protected boolean secret = false;
@@ -22,5 +23,9 @@ public abstract class GatedRecipeBuilder<C extends GatedRecipeBuilder<C>> extend
     public C requiredAdvancement(@Nullable ResourceLocation requiredAdvancement) {
         this.requiredAdvancementIdentifier = requiredAdvancement;
         return self();
+    }
+
+    protected Optional<ResourceLocation> getRequiredAdvancement() {
+        return Optional.ofNullable(this.requiredAdvancementIdentifier);
     }
 }

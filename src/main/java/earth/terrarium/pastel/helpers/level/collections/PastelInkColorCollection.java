@@ -1,5 +1,8 @@
 package earth.terrarium.pastel.helpers.level.collections;
 
+import com.mojang.datafixers.kinds.App;
+import com.mojang.datafixers.kinds.Applicative;
+import com.mojang.datafixers.kinds.K1;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import net.minecraft.world.item.DyeColor;
@@ -10,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -31,7 +35,9 @@ public record PastelInkColorCollection<T>(
     T gray,
     T lightGray,
     T white
-) {
+) implements App<PastelInkColorCollection.Mu, T> {
+    public static final class Mu implements K1 {}
+
     public static final PastelInkColorCollection<InkColor> VALUES =
             new PastelInkColorCollection<>(
                     InkColors.CYAN,
@@ -77,6 +83,10 @@ public record PastelInkColorCollection<T>(
     public static final PastelInkColorCollection<DyeColor> DYE_COLORS =
             // should be safe because all builtins map to a dye
             VALUES.map(it -> it.getDyeColor().orElseThrow());
+
+    public static <T> PastelInkColorCollection<T> unbox(final App<Mu, T> box) {
+        return (PastelInkColorCollection<T>)box;
+    }
 
     public T pick(InkColor color) {
         if (color == InkColors.CYAN) {
@@ -134,7 +144,7 @@ public record PastelInkColorCollection<T>(
         action.accept(this.white());
     }
 
-    public <U> PastelInkColorCollection<U> map(Function<T, U> mapper) {
+    public <U> PastelInkColorCollection<U> map(Function<? super T, ? extends U> mapper) {
         return new PastelInkColorCollection<>(
                 mapper.apply(this.cyan()),
                 mapper.apply(this.lightBlue()),
@@ -179,6 +189,28 @@ public record PastelInkColorCollection<T>(
                 operation.apply(first.white(), second.white())
         );
     }
+    public static <T, U> void zipApply(
+            PastelInkColorCollection<T> first,
+            PastelInkColorCollection<U> second,
+            BiConsumer<T, U> operation
+    ) {
+        operation.accept(first.cyan(), second.cyan());
+        operation.accept(first.lightBlue(), second.lightBlue());
+        operation.accept(first.blue(), second.blue());
+        operation.accept(first.purple(), second.purple());
+        operation.accept(first.magenta(), second.magenta());
+        operation.accept(first.pink(), second.pink());
+        operation.accept(first.red(), second.red());
+        operation.accept(first.orange(), second.orange());
+        operation.accept(first.yellow(), second.yellow());
+        operation.accept(first.lime(), second.lime());
+        operation.accept(first.green(), second.green());
+        operation.accept(first.brown(), second.brown());
+        operation.accept(first.black(), second.black());
+        operation.accept(first.gray(), second.gray());
+        operation.accept(first.lightGray(), second.lightGray());
+        operation.accept(first.white(), second.white());
+    }
 
     public static PastelInkColorCollection<String> prefixWithColor(String baseId) {
         return NAMES.map(color -> color + "_" + baseId);
@@ -208,5 +240,34 @@ public record PastelInkColorCollection<T>(
         );
     }
 
+    // This may seem insane but its actually quite reasonable
+    public enum Instance implements Applicative<Mu, Instance.Mu> {
+        INSTANCE;
+
+        @Override
+        public <A> App<PastelInkColorCollection.Mu, A> point(A a) {
+            return new PastelInkColorCollection<>(
+                    a, a, a, a,
+                    a, a, a, a,
+                    a, a, a, a,
+                    a, a, a, a
+            );
+        }
+
+        @Override
+        public <A, R> Function<App<PastelInkColorCollection.Mu, A>, App<PastelInkColorCollection.Mu, R>> lift1(App<PastelInkColorCollection.Mu, Function<A, R>> function) {
+            return in -> {
+                var unboxed = unbox(in);
+                return zipMap(unbox(function), unboxed, Function::apply);
+            };
+        }
+
+        public static final class Mu implements Applicative.Mu {}
+
+        @Override
+        public <T, R> App<PastelInkColorCollection.Mu, R> map(final Function<? super T, ? extends R> func, final App<PastelInkColorCollection.Mu, T> ts) {
+            return unbox(ts).map(func);
+        }
+    }
 
 }
