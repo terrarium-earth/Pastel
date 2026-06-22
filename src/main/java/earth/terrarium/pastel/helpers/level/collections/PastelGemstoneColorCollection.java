@@ -1,5 +1,8 @@
 package earth.terrarium.pastel.helpers.level.collections;
 
+import com.mojang.datafixers.kinds.App;
+import com.mojang.datafixers.kinds.Applicative;
+import com.mojang.datafixers.kinds.K1;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
@@ -18,7 +21,13 @@ public record PastelGemstoneColorCollection<T>(
         T yellow,
         T black,
         T white
-)  {
+) implements App<PastelGemstoneColorCollection.Mu, T> {
+
+    public static final class Mu implements K1 {}
+
+    public static <T> PastelGemstoneColorCollection<T> unbox(final App<PastelGemstoneColorCollection.Mu, T> proofBox) {
+        return (PastelGemstoneColorCollection<T>) proofBox;
+    }
 
     public static final PastelGemstoneColorCollection<PastelGemstoneColor> VALUES =
             new PastelGemstoneColorCollection<>(
@@ -166,5 +175,32 @@ public record PastelGemstoneColorCollection<T>(
 
     public T moonstone() {
         return this.white();
+    }
+
+    public enum Instance implements Applicative<Mu, Instance.Mu> {
+        INSTANCE;
+
+        @Override
+        public <A> App<PastelGemstoneColorCollection.Mu, A> point(A a) {
+            return new PastelGemstoneColorCollection<>(
+                    a, a, a, a, a
+            );
+        }
+
+        @Override
+        public <A, R> Function<App<PastelGemstoneColorCollection.Mu, A>, App<PastelGemstoneColorCollection.Mu, R>> lift1(App<PastelGemstoneColorCollection.Mu, Function<A, R>> function) {
+            var unboxedF = unbox(function);
+            return input -> {
+                var unboxed = unbox(input);
+                return zipMap(unboxedF, unboxed, Function::apply);
+            };
+        }
+
+        @Override
+        public <T, R> App<PastelGemstoneColorCollection.Mu, R> map(Function<? super T, ? extends R> func, App<PastelGemstoneColorCollection.Mu, T> ts) {
+            return unbox(ts).map(func);
+        }
+
+        public static final class Mu implements Applicative.Mu {}
     }
 }

@@ -1,0 +1,16 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.6,
+  "experience": 0.4,
+  "group": "gemstone_crushing",
+  "ingredient": {
+    "item": "minecraft:large_amethyst_bud"
+  },
+  "particleEffectIdentifier": "minecraft:explosion",
+  "required_advancement": "pastel:hidden/collect_shards/amethyst",
+  "result": {
+    "count": 8,
+    "id": "pastel:amethyst_powder"
+  },
+  "soundEventIdentifier": "minecraft:block.large_amethyst_bud.break"
+}
