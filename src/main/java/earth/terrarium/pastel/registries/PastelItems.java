@@ -3,6 +3,7 @@ package earth.terrarium.pastel.registries;
 import com.cmdpro.databank.misc.ColorGradient;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
@@ -3409,8 +3410,16 @@ public class PastelItems {
             if (hasItem) throw new UnsupportedOperationException("Attempted to register two items with id " + id);
             hasItem = true;
             //ItemColors.ITEM_COLORS.registerColorMapping(holder.get(), color); TODO ?????
-            holder = ITEM_REGISTRAR.register(id.getPath(), itemFactory);
+            holder = ITEM_REGISTRAR.register(id.getPath(), injectColorIntoFactory(itemFactory, color));
             return this;
+        }
+
+        private static <T extends Item> Supplier<T> injectColorIntoFactory(Supplier<T> itemFactory, InkColor color) {
+            return () -> {
+                var item = itemFactory.get();
+                ItemColors.ITEM_COLORS.registerColorMapping(item, color);
+                return item;
+            };
         }
 
         public ItemRegistrar<T> withBurnTime(int burnTicks) {
