@@ -1,0 +1,17 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "item": "minecraft:deepslate_tile_slab"
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "minecraft:deepslate_tiles"
+      }
+    }
+  ],
+  "time": 100
+}

@@ -1,0 +1,17 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.5,
+  "ingredient": {
+    "item": "pastel:pure_iron"
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource",
+  "results": [
+    {
+      "result": {
+        "count": 2,
+        "id": "minecraft:iron_ingot"
+      }
+    }
+  ],
+  "time": 200
+}

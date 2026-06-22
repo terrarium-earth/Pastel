@@ -1,0 +1,17 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "item": "minecraft:polished_blackstone_brick_slab"
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "minecraft:polished_blackstone_bricks"
+      }
+    }
+  ],
+  "time": 100
+}

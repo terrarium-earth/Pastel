@@ -1,7 +1,9 @@
 package earth.terrarium.pastel.data.recipe.builder;
 
 import net.minecraft.advancements.Criterion;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.conditions.ICondition;
@@ -31,6 +33,11 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
     @Override
     public Item getResult() {
         return this.result.getItem();
+    }
+
+    public String getDefaultName() {
+        var id = BuiltInRegistries.ITEM.getKey(this.getResult());
+        return id.getPath();
     }
 
     @Override

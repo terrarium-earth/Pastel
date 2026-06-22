@@ -1,0 +1,16 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.6,
+  "ingredient": {
+    "item": "minecraft:clay_ball"
+  },
+  "results": [
+    {
+      "result": {
+        "count": 2,
+        "id": "minecraft:brick"
+      }
+    }
+  ],
+  "time": 100
+}

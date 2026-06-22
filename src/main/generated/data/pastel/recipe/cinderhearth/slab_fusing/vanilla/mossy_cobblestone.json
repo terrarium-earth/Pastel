@@ -1,0 +1,17 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "item": "minecraft:mossy_cobblestone_slab"
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "minecraft:mossy_cobblestone"
+      }
+    }
+  ],
+  "time": 100
+}

@@ -1,0 +1,23 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.2,
+  "ingredient": {
+    "tag": "minecraft:coal_ores"
+  },
+  "results": [
+    {
+      "result": {
+        "count": 4,
+        "id": "minecraft:coal"
+      }
+    },
+    {
+      "chance": 0.02,
+      "result": {
+        "count": 1,
+        "id": "minecraft:diamond"
+      }
+    }
+  ],
+  "time": 100
+}

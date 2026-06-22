@@ -1,0 +1,24 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.5,
+  "ingredient": {
+    "item": "pastel:pure_redstone"
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource",
+  "results": [
+    {
+      "result": {
+        "count": 4,
+        "id": "minecraft:redstone"
+      }
+    },
+    {
+      "chance": 0.5,
+      "result": {
+        "count": 1,
+        "id": "minecraft:redstone"
+      }
+    }
+  ],
+  "time": 200
+}

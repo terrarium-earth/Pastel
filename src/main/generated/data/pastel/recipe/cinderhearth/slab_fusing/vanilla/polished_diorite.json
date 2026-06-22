@@ -1,0 +1,17 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "item": "minecraft:polished_diorite_slab"
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "minecraft:polished_diorite"
+      }
+    }
+  ],
+  "time": 100
+}

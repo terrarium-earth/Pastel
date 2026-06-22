@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:integration_pack_active",
+      "integration_pack": "create"
+    }
+  ],
+  "type": "pastel:cinderhearth",
+  "experience": 0.5,
+  "ingredient": {
+    "item": "pastel:pure_zinc"
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource",
+  "results": [
+    {
+      "result": {
+        "count": 2,
+        "id": "create:zinc_ingot"
+      }
+    }
+  ],
+  "time": 200
+}

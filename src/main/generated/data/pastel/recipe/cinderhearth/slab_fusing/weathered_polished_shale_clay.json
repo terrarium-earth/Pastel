@@ -1,0 +1,18 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "item": "pastel:weathered_polished_shale_clay_slab"
+  },
+  "required_advancement": "pastel:hidden/collect_shale_clay",
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "pastel:weathered_polished_shale_clay"
+      }
+    }
+  ],
+  "time": 100
+}

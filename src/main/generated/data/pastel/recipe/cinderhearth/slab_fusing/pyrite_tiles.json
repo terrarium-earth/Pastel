@@ -1,0 +1,18 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "item": "pastel:pyrite_tile_slab"
+  },
+  "required_advancement": "pastel:hidden/collect_pyrite",
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "pastel:pyrite_tiles"
+      }
+    }
+  ],
+  "time": 100
+}

@@ -1,0 +1,17 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "item": "pastel:planed_calcite_slab"
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "pastel:planed_calcite"
+      }
+    }
+  ],
+  "time": 100
+}

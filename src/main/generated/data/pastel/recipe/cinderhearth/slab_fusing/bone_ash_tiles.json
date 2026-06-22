@@ -1,0 +1,18 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "item": "pastel:bone_ash_tile_slab"
+  },
+  "required_advancement": "pastel:break_cracked_dragonbone",
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "pastel:bone_ash_tiles"
+      }
+    }
+  ],
+  "time": 100
+}

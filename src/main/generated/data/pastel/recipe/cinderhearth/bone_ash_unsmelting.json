@@ -1,0 +1,16 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "tag": "pastel:smelts_to_bone_ash"
+  },
+  "required_advancement": "pastel:break_cracked_dragonbone",
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "pastel:polished_bone_ash"
+      }
+    }
+  ],
+  "time": 600
+}
