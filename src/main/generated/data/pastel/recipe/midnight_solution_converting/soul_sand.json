@@ -1,0 +1,10 @@
+{
+  "type": "pastel:midnight_solution_converting",
+  "ingredient": {
+    "tag": "minecraft:sand"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:soul_sand"
+  }
+}

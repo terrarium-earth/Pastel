@@ -1,0 +1,10 @@
+{
+  "type": "pastel:midnight_solution_converting",
+  "ingredient": {
+    "item": "pastel:enchanted_star_candy"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:star_candy"
+  }
+}

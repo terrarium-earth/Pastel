@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.WeatheringCopper;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 
 public class FluidConvertingRecipes {
@@ -122,6 +123,150 @@ public class FluidConvertingRecipes {
         copperOxidizing(pfx.subPrefix("copper"));
         shaleClayOxidizing(pfx.subPrefix("shale_clay"));
 
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.STONE),
+                        new ItemStack(Items.BLACKSTONE)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.RED_MUSHROOM),
+                        new ItemStack(Items.CRIMSON_FUNGUS)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.OBSIDIAN),
+                        new ItemStack(Items.CRYING_OBSIDIAN)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.GRAVEL),
+                        new ItemStack(Items.FLINT)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                // EVIL recipe
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(PastelItems.GILDED_BOOK),
+                        new ItemStack(Items.BOOK)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.GLOWSTONE_DUST),
+                        new ItemStack(Items.GUNPOWDER)
+                )
+        );
+
+        pfx.generateRecipe(
+                "golden_apple_disenchanting",
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.ENCHANTED_GOLDEN_APPLE),
+                        new ItemStack(Items.GOLDEN_APPLE)
+                )
+        );
+
+        pfx.generateRecipe(
+                "golden_carrot_disenchanting",
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(PastelItems.ENCHANTED_GOLDEN_CARROT),
+                        new ItemStack(Items.GOLDEN_CARROT)
+                )
+        );
+
+        // This is a new recipe, but I saw that the enchanted star candy was named, well,
+        // "enchanted star candy" and couldn't resist
+        pfx.generateRecipe(
+                "star_candy_disenchanting",
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(PastelItems.ENCHANTED_STAR_CANDY),
+                        new ItemStack(PastelItems.STAR_CANDY.asItem())
+                )
+                        .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_ENCHANTED_STAR_CANDY)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        DifferenceIngredient.of(
+                                Ingredient.of(Tags.Items.MUSIC_DISCS),
+                                Ingredient.of(Items.MUSIC_DISC_11)
+                        ),
+                        new ItemStack(Items.MUSIC_DISC_11)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.GOLD_ORE),
+                        new ItemStack(Items.NETHER_GOLD_ORE)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.COBBLESTONE),
+                        new ItemStack(Items.NETHERRACK)
+                )
+        );
+
+        pfx.generateRecipe(
+                "slimeball_from_clay_ball",
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.CLAY_BALL),
+                        new ItemStack(Items.SLIME_BALL)
+                )
+        );
+
+        pfx.generateRecipe(
+                "slimeball_from_dried_kelp_block",
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.DRIED_KELP_BLOCK),
+                        new ItemStack(Items.SLIME_BALL)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.CAMPFIRE),
+                        new ItemStack(Items.SOUL_CAMPFIRE)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(ItemTags.SAND),
+                        new ItemStack(Items.SOUL_SAND)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(ItemTags.DIRT),
+                        new ItemStack(Items.SOUL_SOIL)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(Items.BROWN_MUSHROOM),
+                        new ItemStack(Items.WARPED_FUNGUS)
+                )
+        );
+
+        pfx.generateAutoNamedRecipe(
+                FluidConvertingRecipeBuilder.midnightSolution(
+                        Ingredient.of(ItemTags.FLOWERS),
+                        new ItemStack(Items.WITHER_ROSE)
+                )
+        );
     }
 
     private static void copperOxidizing(PrefixHelper pfx) {

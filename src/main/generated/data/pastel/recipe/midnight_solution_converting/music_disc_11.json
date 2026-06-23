@@ -1,0 +1,16 @@
+{
+  "type": "pastel:midnight_solution_converting",
+  "ingredient": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "c:music_discs"
+    },
+    "subtracted": {
+      "item": "minecraft:music_disc_11"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:music_disc_11"
+  }
+}
