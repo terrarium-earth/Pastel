@@ -1,0 +1,15 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 2.0,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:blaze_rod"
+  },
+  "particleCount": 3,
+  "particleEffectIdentifier": "minecraft:lava",
+  "result": {
+    "count": 4,
+    "id": "minecraft:blaze_powder"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

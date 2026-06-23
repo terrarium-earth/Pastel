@@ -48,6 +48,7 @@ public class AnvilCrushingRecipes {
         pastelPulverizing(pfx.subPrefix("pastel_pulverising"));
         bismuth(pfx.subPrefix("bismuth"));
         cGrowables(pfx.subPrefix("crystallarieum_growables"));
+        vanillaItems(pfx.subPrefix("vanilla_items"));
     }
 
 
@@ -741,6 +742,133 @@ public class AnvilCrushingRecipes {
                             .particleEffect(ParticleTypes.EXPLOSION)
             );
         });
+    }
+
+    private static void vanillaItems(PrefixHelper pfx) {
+        pfx.generateRecipe(
+                "blaze_powder_from_blaze_rod",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.BLAZE_POWDER, 4),
+                        Ingredient.of(Items.BLAZE_ROD),
+                        2.0f,
+                        SoundEvents.STONE_BREAK
+                )
+                        .particleEffect(ParticleTypes.LAVA)
+                        .particleCount(3)
+                        .experience(0.0f)
+        );
+
+        pfx.generateRecipe(
+                "bone_meal_from_bone",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.BONE_MEAL, 4),
+                        Ingredient.of(Items.BONE),
+                        2.0f,
+                        SoundEvents.BONE_BLOCK_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.0f)
+        );
+
+        pfx.generateRecipe(
+                "diamonds_from_diamond_horse_armor",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.DIAMOND, 3),
+                        Ingredient.of(Items.DIAMOND_HORSE_ARMOR),
+                        0.05f,
+                        SoundEvents.METAL_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "gold_ingots_from_golden_horse_armor",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.GOLD_INGOT, 3),
+                        Ingredient.of(Items.GOLDEN_HORSE_ARMOR),
+                        0.2f,
+                        SoundEvents.METAL_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "gold_nuggets_from_glistering_melon",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.GOLD_NUGGET, 3),
+                        Ingredient.of(Items.GLISTERING_MELON_SLICE),
+                        3.0f,
+                        SoundEvents.WOOD_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "iron_ingots_from_iron_horse_armor",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.IRON_INGOT, 3),
+                        Ingredient.of(Items.IRON_HORSE_ARMOR),
+                        0.2f,
+                        SoundEvents.METAL_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "iron_nuggets_from_chain",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.IRON_NUGGET, 6),
+                        Ingredient.of(Items.CHAIN),
+                        0.2f,
+                        SoundEvents.METAL_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "leather_from_leather_horse_armor",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.LEATHER, 3),
+                        Ingredient.of(Items.LEATHER_HORSE_ARMOR),
+                        0.3f,
+                        SoundEvents.METAL_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "leather_from_saddle",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.LEATHER, 3),
+                        Ingredient.of(Items.SADDLE),
+                        0.3f,
+                        SoundEvents.METAL_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "sugar_from_sugar_cane",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.SUGAR, 2),
+                        Ingredient.of(Items.SUGAR_CANE),
+                        4.0f,
+                        SoundEvents.GRASS_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "wind_charge_from_breeze_rod",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.WIND_CHARGE, 8),
+                        Ingredient.of(Items.BREEZE_ROD),
+                        2.0f,
+                        SoundEvents.WIND_CHARGE_BURST.value()
+                )
+                        .particleEffect(ParticleTypes.GUST_EMITTER_SMALL)
+                        .particleCount(3)
+        );
     }
 
 }

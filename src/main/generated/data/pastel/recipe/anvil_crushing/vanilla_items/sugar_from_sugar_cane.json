@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 4.0,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:sugar_cane"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 2,
+    "id": "minecraft:sugar"
+  },
+  "soundEventIdentifier": "minecraft:block.grass.break"
+}
