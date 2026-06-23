@@ -1,0 +1,10 @@
+{
+  "type": "pastel:midnight_solution_converting",
+  "ingredient": {
+    "item": "minecraft:exposed_copper_door"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:weathered_copper_door"
+  }
+}

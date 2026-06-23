@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.data.recipe;
 
+import earth.terrarium.pastel.blocks.weathering.Weathering;
 import earth.terrarium.pastel.data.recipe.builder.fluid_converting.FluidConvertingRecipeBuilder;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -11,6 +12,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 
 public class FluidConvertingRecipes {
@@ -21,6 +23,7 @@ public class FluidConvertingRecipes {
         dragonrot(pfx.subPrefix("dragonrot_converting"));
         humus(pfx.subPrefix("humus_converting"));
         liquidCrystal(pfx.subPrefix("liquid_crystal_converting"));
+        midnightSolution(pfx.subPrefix("midnight_solution_converting"));
     }
 
     private static void dragonrot(PrefixHelper pfx) {
@@ -112,6 +115,40 @@ public class FluidConvertingRecipes {
                 )
                         .secret(true)
                         .requiredAdvancement(PastelAdvancements.Midgame.COLLECT_RESONANT_LILY)
+        );
+    }
+
+    private static void midnightSolution(PrefixHelper pfx) {
+        copperOxidizing(pfx.subPrefix("copper"));
+        shaleClayOxidizing(pfx.subPrefix("shale_clay"));
+
+    }
+
+    private static void copperOxidizing(PrefixHelper pfx) {
+        // TODO: Ideally, like create, we'd do something special at runtime to make this apply to ALL oxidizable blocks
+        // HOWEVER, because of our seperate classpath for datagen we can't actually do anything like that
+        // (not without breaking code seperation/sanity, at least)
+        // If we ever get around to doing something like, using create as a reference point is a good idea:
+        // https://github.com/Creators-of-Create/Create/blob/mc1.21.1/dev/src/main/java/com/simibubi/create/foundation/data/RuntimeDataGenerator.java
+        WeatheringCopper.NEXT_BY_BLOCK.get().forEach((block, nextBlock) -> {
+            pfx.generateAutoNamedRecipe(
+                    FluidConvertingRecipeBuilder.midnightSolution(
+                            Ingredient.of(block.asItem()),
+                            new ItemStack(nextBlock, 1)
+                    )
+            );
+        });
+    }
+
+    private static void shaleClayOxidizing(PrefixHelper pfx) {
+        Weathering.WEATHERING_LEVEL_INCREASES.get().forEach((block, nextBlock) ->
+                pfx.generateAutoNamedRecipe(
+                        FluidConvertingRecipeBuilder.midnightSolution(
+                                Ingredient.of(block.asItem()),
+                                new ItemStack(nextBlock, 1)
+                        )
+                                .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_SHALE_CLAY)
+                )
         );
     }
 }
