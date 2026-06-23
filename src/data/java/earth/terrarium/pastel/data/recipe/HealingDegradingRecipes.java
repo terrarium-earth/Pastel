@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.data.recipe;
 
-import earth.terrarium.pastel.data.recipe.builder.cantrip.DegradingRecipeBuilder;
-import earth.terrarium.pastel.data.recipe.builder.cantrip.HealingRecipeBuilder;
+import earth.terrarium.pastel.data.recipe.builder.cantrip.CantripRecipeBuilder;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -55,7 +54,7 @@ public class HealingDegradingRecipes {
             var goodName = BuiltInRegistries.BLOCK.getKey(good).getPath();
             degradePfx.generateRecipe(
                 badName + "_from_" + goodName,
-                    new DegradingRecipeBuilder(
+                    CantripRecipeBuilder.degrading(
                             Ingredient.of(good),
                             new ItemStack(bad, 1)
                     )
@@ -63,7 +62,7 @@ public class HealingDegradingRecipes {
 
             healingPfx.generateRecipe(
                     goodName + "_from_" + badName,
-                    new HealingRecipeBuilder(
+                    CantripRecipeBuilder.healing(
                             Ingredient.of(bad),
                             new ItemStack(good, 1)
                     )
