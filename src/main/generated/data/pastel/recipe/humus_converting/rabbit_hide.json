@@ -1,0 +1,10 @@
+{
+  "type": "pastel:humus_converting",
+  "ingredient": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:rabbit_hide"
+  }
+}

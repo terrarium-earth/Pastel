@@ -1,0 +1,16 @@
+{
+  "type": "pastel:dragonrot_converting",
+  "ingredient": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "minecraft:meat"
+    },
+    "subtracted": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:rotten_flesh"
+  }
+}

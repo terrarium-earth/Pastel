@@ -108,6 +108,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         CinderhearthRecipes.generate(recipeOutput, lookup);
         CookingRecipes.generate(recipeOutput, lookup);
         AnvilCrushingRecipes.generate(recipeOutput, lookup);
+        FluidConvertingRecipes.generate(recipeOutput, lookup);
     }
 
 

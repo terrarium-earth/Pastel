@@ -1,0 +1,11 @@
+{
+  "type": "pastel:dragonrot_converting",
+  "ingredient": {
+    "item": "pastel:bone_ash"
+  },
+  "required_advancement": "pastel:break_cracked_dragonbone",
+  "result": {
+    "count": 1,
+    "id": "pastel:ash_flakes"
+  }
+}
