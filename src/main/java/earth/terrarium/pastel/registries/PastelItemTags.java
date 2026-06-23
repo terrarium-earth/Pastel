@@ -19,6 +19,8 @@ public class PastelItemTags {
 
     public static final TagKey<Item> SHEARS = common("tools/shear");
 
+    public static final TagKey<Item> ICES = common("ices");
+
     // "pastel" namespace
     public static final TagKey<Item> COOKBOOKS = of("cookbooks");
 

@@ -7,10 +7,7 @@ import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection
 import earth.terrarium.pastel.helpers.level.collections.VanillaColorCollections;
 import earth.terrarium.pastel.helpers.tuples.Tuple4;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
-import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelSounds;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,6 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import oshi.util.tuples.Pair;
@@ -49,6 +47,7 @@ public class AnvilCrushingRecipes {
         bismuth(pfx.subPrefix("bismuth"));
         cGrowables(pfx.subPrefix("crystallarieum_growables"));
         vanillaItems(pfx.subPrefix("vanilla_items"));
+        root(pfx);
     }
 
 
@@ -869,6 +868,152 @@ public class AnvilCrushingRecipes {
                         .particleEffect(ParticleTypes.GUST_EMITTER_SMALL)
                         .particleCount(3)
         );
+    }
+
+    private static void root(PrefixHelper pfx) {
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.AMARANTH_GRAINS.asItem(), 2),
+                        Ingredient.of(PastelBlocks.AMARANTH_BUSHEL),
+                        2.0f,
+                        SoundEvents.MOSS_BREAK
+                )
+                        .requiredAdvancement(PastelAdvancements.COLLECT_AMARANTH_BUSHEL)
+                        .particleCount(10)
+                        .particleEffect(ParticleTypes.ENCHANTED_HIT)
+                        .experience(0.25f)
+        );
+
+        pfx.generateRecipe(
+                "bone_meal_from_dragonbone",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.BONE_MEAL, 32),
+                        Ingredient.of(PastelItems.DRAGONBONE_CHUNK),
+                        0.3f,
+                        SoundEvents.BONE_BLOCK_BREAK
+                )
+                        .requiredAdvancement(PastelAdvancements.BREAK_CRACKED_DRAGONBONE)
+                        .particleEffect(ParticleTypes.CLOUD)
+                        .experience(0.1f)
+        );
+
+        pfx.generateRecipe(
+                "frostbite_essence_from_frostbite_crystal",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.FROSTBITE_ESSENCE.asItem(), 16),
+                        Ingredient.of(PastelBlocks.FROSTBITE_CRYSTAL),
+                        1.5f,
+                        SoundEvents.GLASS_BREAK
+                )
+                        .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_FROSTBITE_CRYSTAL)
+                        .particleEffect(ParticleTypes.ENCHANTED_HIT)
+                        .particleCount(10)
+                        .experience(4.0f)
+        );
+
+
+        pfx.generateRecipe(
+                "frostbite_essence_from_ice",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.FROSTBITE_ESSENCE.asItem(), 1),
+                        Ingredient.of(PastelItemTags.ICES),
+                        1.5f,
+                        SoundEvents.GLASS_BREAK
+                )
+                        .particleEffect(ParticleTypes.ENCHANTED_HIT)
+                        .particleCount(10)
+                        .experience(0.25f)
+        );
+
+        pfx.generateRecipe(
+                "gold_nugget_from_glistering_melon",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(Items.GOLD_NUGGET, 12),
+                        Ingredient.of(PastelBlocks.GLISTERING_MELON),
+                        3.0f,
+                        SoundEvents.WOOD_BREAK
+                )
+                        .particleEffect(ParticleTypes.CLOUD)
+        );
+
+        pfx.generateRecipe(
+                "incandescent_essence_from_blazing_crystal",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.INCANDESCENT_ESSENCE.asItem(), 16),
+                        Ingredient.of(PastelBlocks.BLAZING_CRYSTAL),
+                        1.5f,
+                        SoundEvents.GLASS_BREAK
+                )
+                        .particleCount(10)
+                        .particleEffect(ParticleTypes.ENCHANTED_HIT)
+                        .experience(4.0f)
+                        .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_BLAZING_CRYSTAL)
+        );
+
+        pfx.generateRecipe(
+                "incandescent_esscene_from_magma_block",
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.INCANDESCENT_ESSENCE.asItem(), 1),
+                        Ingredient.of(Items.MAGMA_BLOCK),
+                        1.5f,
+                        SoundEvents.STONE_BREAK
+                )
+                        .particleCount(10)
+                        .particleEffect(ParticleTypes.ENCHANTED_HIT)
+                        .experience(0.25f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.PALTAERIA_FRAGMENTS.asItem(), 8),
+                        Ingredient.of(PastelItems.PALTAERIA_GEM),
+                        1f,
+                        SoundEvents.GLASS_BREAK
+                )
+                        .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_PALTAERIA_GEM)
+                        .particleEffect(ParticleTypes.ENCHANTED_HIT)
+                        .particleCount(10)
+                        .experience(0.5f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                                new ItemStack(PastelItems.STRATINE_FRAGMENTS.asItem(), 8),
+                                Ingredient.of(PastelItems.STRATINE_GEM),
+                                1f,
+                                SoundEvents.GLASS_BREAK
+                        )
+                        .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_STRATINE_GEM)
+                        .particleEffect(ParticleTypes.EXPLOSION)
+                        .experience(0.5f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.QUITOXIC_POWDER.asItem(), 4),
+                        Ingredient.of(PastelBlocks.QUITOXIC_REEDS),
+                        1.5f,
+                        SoundEvents.GRASS_BREAK
+                )
+                        .requiredAdvancement(PastelAdvancements.COLLECT_QUITOXIC_REEDS)
+                        .particleEffect(ParticleTypes.WITCH)
+                        .particleCount(10)
+                        .experience(0.4f)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                AnvilCrushingRecipeBuilder.of(
+                        new ItemStack(PastelItems.STAR_FRAGMENT.asItem(), 2),
+                        Ingredient.of(PastelItemTags.SHOOTING_STARS),
+                        0.3f,
+                        SoundEvents.STONE_BREAK
+                )
+                        .requiredAdvancement(PastelAdvancements.COLLECT_STAR_FRAGMENT)
+                        .experience(5.0f)
+                        .particleEffect(ParticleTypes.EXPLOSION)
+                        .particleCount(2)
+        );
+
     }
 
 }
