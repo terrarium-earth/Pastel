@@ -102,7 +102,7 @@ public class PastelRecipeProvider extends RecipeProvider {
     public void buildRecipes(RecipeOutput recipeOutput, HolderLookup.Provider lookup) {
         generateCrystallarieumRecipes(recipeOutput);
         generateEnchantmentUpgradeRecipes(recipeOutput);
-        generateHealingDegradingRecipes(recipeOutput);
+        HealingDegradingRecipes.generate(recipeOutput, lookup);
         PastelPedestalRecipes.generate(recipeOutput, lookup);
         InkConversionRecipes.generate(recipeOutput, lookup);
         CinderhearthRecipes.generate(recipeOutput, lookup);
@@ -110,90 +110,6 @@ public class PastelRecipeProvider extends RecipeProvider {
         AnvilCrushingRecipes.generate(recipeOutput, lookup);
     }
 
-
-
-    private static final Map<Block, Block> HEALING_DEGRADING_PAIRS = Map
-        .ofEntries(
-            entry(Blocks.SAND, Blocks.GRAVEL),
-            entry(Blocks.GRAVEL, Blocks.COBBLESTONE),
-            entry(Blocks.COBBLESTONE, Blocks.STONE),
-            entry(Blocks.STONE, Blocks.COBBLED_DEEPSLATE),
-            entry(Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE),
-
-            // further cobbleing
-            entry(Blocks.COBBLESTONE_SLAB, Blocks.STONE_SLAB),
-            entry(Blocks.COBBLESTONE_STAIRS, Blocks.STONE_STAIRS),
-
-            // cracked blocks
-            entry(Blocks.CRACKED_DEEPSLATE_BRICKS, Blocks.DEEPSLATE_BRICKS),
-            entry(Blocks.CRACKED_DEEPSLATE_TILES, Blocks.DEEPSLATE_TILES),
-            entry(Blocks.CRACKED_NETHER_BRICKS, Blocks.NETHER_BRICKS),
-            entry(Blocks.CRACKED_STONE_BRICKS, Blocks.STONE_BRICKS),
-            entry(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE_BRICKS),
-            entry(Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_STONE_BRICKS),
-            entry(PastelBlocks.CRACKED_BASALT_BRICKS.get(), PastelBlocks.BASALT_BRICKS.get()),
-            entry(PastelBlocks.CRACKED_BASALT_TILES.get(), PastelBlocks.BASALT_TILES.get()),
-            entry(PastelBlocks.CRACKED_BLACKSLAG_BRICKS.get(), PastelBlocks.BLACKSLAG_BRICKS.get()),
-//      entry(PastelBlocks.CRACKED_DRAGONBONE.get(), PastelBlocks.DRAGONBONE.get()), hahaha. no.
-            entry(PastelBlocks.CRACKED_CALCITE_BRICKS.get(), PastelBlocks.CALCITE_BRICKS.get()),
-            entry(PastelBlocks.CRACKED_CALCITE_TILES.get(), PastelBlocks.CALCITE_TILES.get())
-//      entry(PastelBlocks.CRACKED_END_PORTAL_FRAME.get(), Blocks.END_PORTAL_FRAME) // nope
-        );
-
-    private void generateHealingDegradingRecipes(RecipeOutput ctx) {
-        for (
-            var entry : HEALING_DEGRADING_PAIRS.entrySet()
-        ) {
-            generateHealingRecipe(
-                ctx,
-                entry
-                    .getKey()
-                    .getDescriptionId() + "_healing",
-                entry.getKey(),
-                entry.getValue()
-            );
-            generateDegradingRecipe(
-                ctx,
-                entry
-                    .getValue()
-                    .getDescriptionId() + "_degrading",
-                entry.getValue(),
-                entry.getKey()
-            );
-        }
-    }
-
-    private void generateHealingRecipe(RecipeOutput ctx, String id, ItemLike base, ItemLike result) {
-        generateRecipe(
-            ctx,
-            id,
-            new HealingRecipe(
-                "",
-                false,
-                Optional.empty(),
-                Ingredient.of(base),
-                result
-                    .asItem()
-                    .getDefaultInstance()
-            )
-        );
-    }
-
-    private void generateDegradingRecipe(RecipeOutput ctx, String id, ItemLike base, ItemLike result) {
-        generateRecipe(
-            ctx,
-            id,
-            new DegradingRecipe(
-                "",
-                false,
-                Optional.empty(),
-                Ingredient.of(base),
-                result
-                    .asItem()
-                    .getDefaultInstance()
-            )
-        );
-    }
 
     private void generateCrystallarieumRecipes(RecipeOutput ctx) {
         generateCrystallarieumRecipe(
