@@ -47,6 +47,7 @@ public class AnvilCrushingRecipes {
         vanillaPulverizing(pfx.subPrefix("vanilla_pulverising"));
         pastelPulverizing(pfx.subPrefix("pastel_pulverising"));
         bismuth(pfx.subPrefix("bismuth"));
+        cGrowables(pfx.subPrefix("crystallarieum_growables"));
     }
 
 
@@ -637,5 +638,109 @@ public class AnvilCrushingRecipes {
         );
     }
 
+
+    // I am NOT typing out "Crystallarieum"
+    private record CGrowables(
+            DeferredBlock<Block> smallBud,
+            DeferredBlock<Block> largeBud,
+            DeferredBlock<Block> cluster,
+            Item result,
+            int clusterCount,
+            String name) {
+        CGrowables(DeferredBlock<Block> smallBud,
+                   DeferredBlock<Block> largeBud,
+                   DeferredBlock<Block> cluster,
+                   Item result) {
+            this(smallBud, largeBud, cluster, result, 6, BuiltInRegistries.ITEM.getKey(result).getPath());
+        }
+        CGrowables(DeferredBlock<Block> smallBud,
+                   DeferredBlock<Block> largeBud,
+                   DeferredBlock<Block> cluster,
+                   Item result,
+                   String name) {
+            this(smallBud, largeBud, cluster, result, 6, name);
+        }
+        CGrowables(DeferredBlock<Block> smallBud,
+                   DeferredBlock<Block> largeBud,
+                   DeferredBlock<Block> cluster,
+                   Item result,
+                   int clusterCount) {
+            this(smallBud, largeBud, cluster, result, clusterCount, BuiltInRegistries.ITEM.getKey(result).getPath());
+        }
+    }
+
+    private static final List<CGrowables> CRYSTALLARIEUM_GROWABLES =
+            List.of(
+                    new CGrowables(PastelBlocks.SMALL_COAL_BUD, PastelBlocks.LARGE_COAL_BUD, PastelBlocks.COAL_CLUSTER, Items.COAL),
+                    new CGrowables(PastelBlocks.SMALL_COPPER_BUD, PastelBlocks.LARGE_COPPER_BUD, PastelBlocks.COPPER_CLUSTER, Items.COPPER_INGOT),
+                    new CGrowables(PastelBlocks.SMALL_DIAMOND_BUD, PastelBlocks.LARGE_DIAMOND_BUD, PastelBlocks.DIAMOND_CLUSTER, Items.DIAMOND),
+                    new CGrowables(PastelBlocks.SMALL_ECHO_BUD, PastelBlocks.LARGE_ECHO_BUD, PastelBlocks.ECHO_CLUSTER, Items.ECHO_SHARD),
+                    new CGrowables(PastelBlocks.SMALL_EMERALD_BUD, PastelBlocks.LARGE_EMERALD_BUD, PastelBlocks.EMERALD_CLUSTER, Items.EMERALD),
+                    // someone felt SPECIAL today, didn't they????
+                    new CGrowables(PastelBlocks.SMALL_GLOWSTONE_BUD, PastelBlocks.LARGE_GLOWSTONE_BUD, PastelBlocks.GLOWSTONE_CLUSTER, Items.GLOWSTONE_DUST, 12, "glowstone"),
+                    new CGrowables(PastelBlocks.SMALL_GOLD_BUD, PastelBlocks.LARGE_GOLD_BUD, PastelBlocks.GOLD_CLUSTER, Items.GOLD_INGOT),
+                    new CGrowables(PastelBlocks.SMALL_IRON_BUD, PastelBlocks.LARGE_IRON_BUD, PastelBlocks.IRON_CLUSTER, Items.IRON_INGOT),
+                    new CGrowables(PastelBlocks.SMALL_LAPIS_BUD, PastelBlocks.LARGE_LAPIS_BUD, PastelBlocks.LAPIS_CLUSTER, Items.LAPIS_LAZULI, "lapis"),
+                    new CGrowables(
+                            PastelBlocks.SMALL_NETHERITE_SCRAP_BUD,
+                            PastelBlocks.LARGE_NETHERITE_SCRAP_BUD,
+                            PastelBlocks.NETHERITE_SCRAP_CLUSTER,
+                            Items.NETHERITE_SCRAP),
+                    new CGrowables(
+                            PastelBlocks.SMALL_PRISMARINE_BUD,
+                            PastelBlocks.LARGE_PRISMARINE_BUD,
+                            PastelBlocks.PRISMARINE_CLUSTER,
+                            Items.PRISMARINE_CRYSTALS,
+                            "prismarine"
+                    ),
+                    new CGrowables(
+                            PastelBlocks.SMALL_QUARTZ_BUD,
+                            PastelBlocks.LARGE_QUARTZ_BUD,
+                            PastelBlocks.QUARTZ_CLUSTER,
+                            Items.QUARTZ
+                    ),
+                    new CGrowables(
+                            PastelBlocks.SMALL_REDSTONE_BUD,
+                            PastelBlocks.LARGE_REDSTONE_BUD,
+                            PastelBlocks.REDSTONE_CLUSTER,
+                            Items.REDSTONE
+                    )
+
+            );
+
+    private static void cGrowables(PrefixHelper pfx) {
+        // ATP just have a static final C = "crystallarieum"
+        final var groupName = "crystallarieum_growable_crushing";
+
+        CRYSTALLARIEUM_GROWABLES.forEach(growable -> {
+            pfx.generateRecipe(
+                growable.name + "_from_buds",
+                    AnvilCrushingRecipeBuilder.of(
+                            new ItemStack(growable.result),
+                            Ingredient.of(growable.smallBud, growable.largeBud),
+                            1.0f,
+                            SoundEvents.AMETHYST_CLUSTER_BREAK
+                    )
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.CRYSTALLARIEUM)
+                            .group(groupName)
+                            .experience(2.0f)
+                            .particleEffect(ParticleTypes.EXPLOSION)
+            );
+
+            pfx.generateRecipe(
+                    growable.name + "_from_cluster",
+                    AnvilCrushingRecipeBuilder.of(
+                            new ItemStack(growable.result, growable.clusterCount),
+                            Ingredient.of(growable.cluster),
+                            1.0f,
+                            SoundEvents.AMETHYST_CLUSTER_BREAK
+                    )
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.CRYSTALLARIEUM)
+                            .group(groupName)
+                            .experience(3.0f)
+                            .particleEffect(ParticleTypes.EXPLOSION)
+            );
+        });
+    }
 
 }
