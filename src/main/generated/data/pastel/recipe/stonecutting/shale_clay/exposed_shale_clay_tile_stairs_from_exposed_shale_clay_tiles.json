@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "pastel:exposed_shale_clay_tiles"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:exposed_shale_clay_tile_stairs"
+  }
+}

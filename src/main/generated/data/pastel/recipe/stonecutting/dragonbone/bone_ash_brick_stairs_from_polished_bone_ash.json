@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "pastel:polished_bone_ash"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:bone_ash_brick_stairs"
+  }
+}

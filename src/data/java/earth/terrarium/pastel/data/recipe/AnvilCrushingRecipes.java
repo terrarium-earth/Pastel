@@ -34,6 +34,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import static java.util.Map.entry;
+import static earth.terrarium.pastel.data.recipe.RecipeUtil.nameFromInAndOut;
 
 public class AnvilCrushingRecipes {
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
@@ -208,11 +209,7 @@ public class AnvilCrushingRecipes {
     }
 
 
-    private static String nameFromInAndOut(ItemLike input, ItemLike output) {
-        var inName = BuiltInRegistries.ITEM.getKey(input.asItem()).getPath();
-        var outName = BuiltInRegistries.ITEM.getKey(output.asItem()).getPath();
-        return outName + "_from_" + inName;
-    }
+
 
     private static final Map<Item, Item> SMALL_DYES =
             Map.ofEntries(

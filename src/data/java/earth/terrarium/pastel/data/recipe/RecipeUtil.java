@@ -3,6 +3,7 @@ package earth.terrarium.pastel.data.recipe;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.TagKey;
@@ -22,5 +23,11 @@ public abstract class RecipeUtil extends RecipeProvider {
 
     public RecipeUtil(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
+    }
+
+    public static String nameFromInAndOut(ItemLike input, ItemLike output) {
+        var inName = BuiltInRegistries.ITEM.getKey(input.asItem()).getPath();
+        var outName = BuiltInRegistries.ITEM.getKey(output.asItem()).getPath();
+        return outName + "_from_" + inName;
     }
 }

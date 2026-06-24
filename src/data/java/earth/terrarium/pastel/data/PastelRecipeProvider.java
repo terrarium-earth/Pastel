@@ -110,6 +110,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         AnvilCrushingRecipes.generate(recipeOutput, lookup);
         FluidConvertingRecipes.generate(recipeOutput, lookup);
         PrimordialFireBurningRecipes.generate(recipeOutput, lookup);
+        StonecutterRecipes.generate(recipeOutput, lookup);
     }
 
 
