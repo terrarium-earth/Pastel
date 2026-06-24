@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_input": {
+      "conditions": {
+        "advancement": "pastel:hidden/collect_basal_marble"
+      },
+      "trigger": "databank:has_advancement"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table//basal_marble/basal_marble_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_input"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table//basal_marble/basal_marble_stairs"
+    ]
+  }
+}

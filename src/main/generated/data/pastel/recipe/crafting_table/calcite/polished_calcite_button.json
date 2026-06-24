@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "pastel:polished_calcite"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "pastel:polished_calcite_button"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "item": "minecraft:stick"
+    },
+    "F": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "  R",
+    " F ",
+    "E  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "pastel:paintbrush"
+  }
+}

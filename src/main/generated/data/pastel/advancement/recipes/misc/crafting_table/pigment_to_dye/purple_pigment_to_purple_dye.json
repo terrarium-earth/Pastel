@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table//pigment_to_dye/purple_pigment_to_purple_dye"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "unlocked_pigment": {
+      "conditions": {
+        "advancement": "pastel:hidden/collect_pigment/purple"
+      },
+      "trigger": "databank:has_advancement"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "unlocked_pigment"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table//pigment_to_dye/purple_pigment_to_purple_dye"
+    ]
+  }
+}

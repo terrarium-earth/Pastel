@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "got_vegetal": {
+      "conditions": {
+        "advancement": "pastel:collect_vegetal"
+      },
+      "trigger": "databank:has_advancement"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/glistering_melon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "got_vegetal"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/glistering_melon"
+    ]
+  }
+}

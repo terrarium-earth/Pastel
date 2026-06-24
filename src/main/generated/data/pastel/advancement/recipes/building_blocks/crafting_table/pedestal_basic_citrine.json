@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "got_shard": {
+      "conditions": {
+        "advancement": "pastel:hidden/collect_shards/citrine"
+      },
+      "trigger": "databank:has_advancement"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/pedestal_basic_citrine"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "got_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/pedestal_basic_citrine"
+    ]
+  }
+}

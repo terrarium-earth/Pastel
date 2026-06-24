@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "pastel:topaz_shard"
+    },
+    "T": {
+      "tag": "minecraft:planks"
+    },
+    "W": {
+      "item": "minecraft:tuff"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "WTW",
+    "WTW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "pastel:pedestal_basic_topaz"
+  }
+}

@@ -112,6 +112,8 @@ public class PastelItemTags {
 
     public static final TagKey<Item> TOPAZ_ORES = of("topaz_ores");
 
+    public static final TagKey<Item> NOXSHROOMS = of("noxshrooms");
+
     public static class MobHeads {
         public static final TagKey<Item> AXOLOTL_HEADS = getMobHeadKey("axolotl");
         public static final TagKey<Item> FISH_HEADS = getMobHeadKey("fish");

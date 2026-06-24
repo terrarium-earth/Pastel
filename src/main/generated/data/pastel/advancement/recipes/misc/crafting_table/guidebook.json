@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/guidebook"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "started_progression": {
+      "conditions": {
+        "advancement": "pastel:pastel"
+      },
+      "trigger": "databank:has_advancement"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "started_progression"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/guidebook"
+    ]
+  }
+}

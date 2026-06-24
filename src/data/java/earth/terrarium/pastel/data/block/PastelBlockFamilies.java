@@ -65,6 +65,8 @@ public class PastelBlockFamilies {
                     .stairs(PastelBlocks.POLISHED_BLACKSLAG_STAIRS.get())
                     .slab(PastelBlocks.POLISHED_BLACKSLAG_SLAB.get())
                     .wall(PastelBlocks.POLISHED_BLACKSLAG_WALL.get())
+                    .button(PastelBlocks.POLISHED_BLACKSLAG_BUTTON.get())
+                    .pressurePlate(PastelBlocks.POLISHED_BLACKSLAG_PRESSURE_PLATE.get())
                     .getFamily()
     );
 
@@ -313,6 +315,19 @@ public class PastelBlockFamilies {
                     .stairs(PastelBlocks.PYRITE_TILE_STAIRS.get())
                     .slab(PastelBlocks.PYRITE_TILE_SLAB.get())
                     .wall(PastelBlocks.PYRITE_TILE_WALL.get())
+                    .getFamily()
+    );
+
+    public static final Supplier<BlockFamily> WEEPING_GALA = Suppliers.memoize(() ->
+            new BlockFamily.Builder(PastelBlocks.WEEPING_GALA_PLANKS.get())
+                    .button(PastelBlocks.WEEPING_GALA_BUTTON.get())
+                    .door(PastelBlocks.WEEPING_GALA_DOOR.get())
+                    .fence(PastelBlocks.WEEPING_GALA_FENCE.get())
+                    .fenceGate(PastelBlocks.WEEPING_GALA_FENCE_GATE.get())
+                    .pressurePlate(PastelBlocks.WEEPING_GALA_PRESSURE_PLATE.get())
+                    .slab(PastelBlocks.WEEPING_GALA_SLAB.get())
+                    .stairs(PastelBlocks.WEEPING_GALA_STAIRS.get())
+                    .trapdoor(PastelBlocks.WEEPING_GALA_TRAPDOOR.get())
                     .getFamily()
     );
 
