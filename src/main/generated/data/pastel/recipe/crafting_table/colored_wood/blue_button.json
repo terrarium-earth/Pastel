@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "pastel:blue_planks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "pastel:blue_button"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table//gem_blocks/onyx_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unlock": {
+      "conditions": {
+        "advancement": "pastel:create_onyx_shard"
+      },
+      "trigger": "databank:has_advancement"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table//gem_blocks/onyx_block"
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -113,6 +114,11 @@ public class PastelItemTags {
     public static final TagKey<Item> TOPAZ_ORES = of("topaz_ores");
 
     public static final TagKey<Item> NOXSHROOMS = of("noxshrooms");
+
+    public static class ColoredLogs {
+        public static final PastelInkColorCollection<TagKey<Item>> VALUES =
+                PastelInkColorCollection.NAMES.map(it -> of(it + "_logs"));
+    }
 
     public static class MobHeads {
         public static final TagKey<Item> AXOLOTL_HEADS = getMobHeadKey("axolotl");

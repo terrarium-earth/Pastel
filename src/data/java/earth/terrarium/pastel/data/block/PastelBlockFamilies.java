@@ -1,10 +1,17 @@
 package earth.terrarium.pastel.data.block;
 
 import com.google.common.base.Suppliers;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.function.Supplier;
 
@@ -318,7 +325,32 @@ public class PastelBlockFamilies {
                     .getFamily()
     );
 
-    public static final Supplier<BlockFamily> WEEPING_GALA = Suppliers.memoize(() ->
+    public record WoodFamily(
+            BlockFamily plankFamily,
+            Block log,
+            Block wood,
+            Block strippedLog,
+            Block strippedWood,
+            TagKey<Item> logs
+    ) {
+        public WoodFamily(
+                BlockFamily family,
+                DeferredBlock<Block> log,
+                DeferredBlock<Block> wood,
+                DeferredBlock<Block> strippedLog,
+                DeferredBlock<Block> strippedWood,
+                TagKey<Item> logs
+        ) {
+            this(family, log.get(), wood.get(), strippedLog.get(), strippedWood.get(), logs);
+        }
+
+
+        public Block planks() {
+            return plankFamily.getBaseBlock();
+        }
+    }
+
+    public static final Supplier<BlockFamily> WEEPING_GALA_PLANKS = Suppliers.memoize(() ->
             new BlockFamily.Builder(PastelBlocks.WEEPING_GALA_PLANKS.get())
                     .button(PastelBlocks.WEEPING_GALA_BUTTON.get())
                     .door(PastelBlocks.WEEPING_GALA_DOOR.get())
@@ -331,4 +363,158 @@ public class PastelBlockFamilies {
                     .getFamily()
     );
 
+    public static final Supplier<WoodFamily> WEEPING_GALA = Suppliers.memoize(() ->
+            new WoodFamily(
+                    WEEPING_GALA_PLANKS.get(),
+                    PastelBlocks.WEEPING_GALA_LOG.get(),
+                    PastelBlocks.WEEPING_GALA_WOOD.get(),
+                    PastelBlocks.STRIPPED_WEEPING_GALA_LOG.get(),
+                    PastelBlocks.STRIPPED_WEEPING_GALA_WOOD.get(),
+                    PastelItemTags.WEEPING_GALA_LOGS
+            )
+    );
+
+    public static final Supplier<PastelInkColorCollection<BlockFamily>> COLORED_PLANKS = Suppliers.memoize(() ->
+            PastelInkColorCollection.unbox(
+                PastelInkColorCollection.Instance.INSTANCE.apply7(
+                    PastelBlockFamilies::makeColoredFamily,
+                    PastelBlocks.COLORED_PLANKS,
+                    PastelBlocks.COLORED_BUTTONS,
+                    PastelBlocks.COLORED_FENCES,
+                    PastelBlocks.COLORED_FENCE_GATES,
+                    PastelBlocks.COLORED_PRESSURE_PLATES,
+                    PastelBlocks.COLORED_SLABS,
+                    PastelBlocks.COLORED_STAIRS
+                )
+            )
+    );
+
+    public static final Supplier<PastelInkColorCollection<WoodFamily>> COLORED_WOODS = Suppliers.memoize(() ->
+            PastelInkColorCollection.unbox(
+                    PastelInkColorCollection.Instance.INSTANCE.apply6(
+                            WoodFamily::new,
+                            COLORED_PLANKS.get(),
+                            PastelBlocks.COLORED_LOGS,
+                            PastelBlocks.COLORED_WOODS,
+                            PastelBlocks.STRIPPED_COLORED_LOGS,
+                            PastelBlocks.STRIPPED_COLORED_WOODS,
+                            PastelItemTags.ColoredLogs.VALUES
+                    )
+            )
+    );
+
+    private static BlockFamily makeColoredFamily(
+            DeferredBlock<Block> planks,
+            DeferredBlock<Block> button,
+            DeferredBlock<Block> fence,
+            DeferredBlock<Block> fenceGate,
+            DeferredBlock<Block> pressurePlate,
+            DeferredBlock<Block> slab,
+            DeferredBlock<Block> stairs
+    ) {
+        return new BlockFamily.Builder(planks.get())
+                .button(button.get())
+                .fence(fence.get())
+                .fenceGate(fenceGate.get())
+                .pressurePlate(pressurePlate.get())
+                .slab(slab.get())
+                .stairs(stairs.get())
+                .getFamily();
+    }
+
+    public static final Supplier<BlockFamily> CHESTNUT_PLANKS = Suppliers.memoize(() ->
+            new BlockFamily.Builder(PastelBlocks.CHESTNUT_NOXWOOD_PLANKS.get())
+                    .button(PastelBlocks.CHESTNUT_NOXWOOD_BUTTON.get())
+                    .door(PastelBlocks.CHESTNUT_NOXWOOD_DOOR.get())
+                    .fence(PastelBlocks.CHESTNUT_NOXWOOD_FENCE.get())
+                    .fenceGate(PastelBlocks.CHESTNUT_NOXWOOD_FENCE_GATE.get())
+                    .pressurePlate(PastelBlocks.CHESTNUT_NOXWOOD_PRESSURE_PLATE.get())
+                    .slab(PastelBlocks.CHESTNUT_NOXWOOD_SLAB.get())
+                    .stairs(PastelBlocks.CHESTNUT_NOXWOOD_STAIRS.get())
+                    .trapdoor(PastelBlocks.CHESTNUT_NOXWOOD_TRAPDOOR.get())
+                    .getFamily()
+    );
+
+    public static final Supplier<WoodFamily> CHESTNUT_NOXWOOD = Suppliers.memoize(() ->
+            new WoodFamily(
+                    CHESTNUT_PLANKS.get(),
+                    PastelBlocks.CHESTNUT_NOXCAP_STEM,
+                    PastelBlocks.CHESTNUT_NOXCAP_HYPHAE,
+                    PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM,
+                    PastelBlocks.STRIPPED_CHESTNUT_NOXCAP_HYPHAE,
+                    PastelItemTags.CHESTNUT_NOXCAP_STEMS
+            )
+    );
+
+    public static final Supplier<BlockFamily> EBONY_PLANKS = Suppliers.memoize(() ->
+            new BlockFamily.Builder(PastelBlocks.EBONY_NOXWOOD_PLANKS.get())
+                    .button(PastelBlocks.EBONY_NOXWOOD_BUTTON.get())
+                    .door(PastelBlocks.EBONY_NOXWOOD_DOOR.get())
+                    .fence(PastelBlocks.EBONY_NOXWOOD_FENCE.get())
+                    .fenceGate(PastelBlocks.EBONY_NOXWOOD_FENCE_GATE.get())
+                    .pressurePlate(PastelBlocks.EBONY_NOXWOOD_PRESSURE_PLATE.get())
+                    .slab(PastelBlocks.EBONY_NOXWOOD_SLAB.get())
+                    .stairs(PastelBlocks.EBONY_NOXWOOD_STAIRS.get())
+                    .trapdoor(PastelBlocks.EBONY_NOXWOOD_TRAPDOOR.get())
+                    .getFamily()
+    );
+
+    public static final Supplier<WoodFamily> EBONY_NOXWOOD = Suppliers.memoize(() ->
+            new WoodFamily(
+                    EBONY_PLANKS.get(),
+                    PastelBlocks.EBONY_NOXCAP_STEM,
+                    PastelBlocks.EBONY_NOXCAP_HYPHAE,
+                    PastelBlocks.STRIPPED_EBONY_NOXCAP_STEM,
+                    PastelBlocks.STRIPPED_EBONY_NOXCAP_HYPHAE,
+                    PastelItemTags.EBONY_NOXCAP_STEMS
+            )
+    );
+
+    public static final Supplier<BlockFamily> IVORY_PLANKS = Suppliers.memoize(() ->
+            new BlockFamily.Builder(PastelBlocks.IVORY_NOXWOOD_PLANKS.get())
+                    .button(PastelBlocks.IVORY_NOXWOOD_BUTTON.get())
+                    .door(PastelBlocks.IVORY_NOXWOOD_DOOR.get())
+                    .fence(PastelBlocks.IVORY_NOXWOOD_FENCE.get())
+                    .fenceGate(PastelBlocks.IVORY_NOXWOOD_FENCE_GATE.get())
+                    .pressurePlate(PastelBlocks.IVORY_NOXWOOD_PRESSURE_PLATE.get())
+                    .slab(PastelBlocks.IVORY_NOXWOOD_SLAB.get())
+                    .stairs(PastelBlocks.IVORY_NOXWOOD_STAIRS.get())
+                    .trapdoor(PastelBlocks.IVORY_NOXWOOD_TRAPDOOR.get())
+                    .getFamily()
+    );
+
+    public static final Supplier<WoodFamily> IVORY_NOXWOOD = Suppliers.memoize(() ->
+            new WoodFamily(
+                    IVORY_PLANKS.get(),
+                    PastelBlocks.IVORY_NOXCAP_STEM,
+                    PastelBlocks.IVORY_NOXCAP_HYPHAE,
+                    PastelBlocks.STRIPPED_IVORY_NOXCAP_STEM,
+                    PastelBlocks.STRIPPED_IVORY_NOXCAP_HYPHAE,
+                    PastelItemTags.IVORY_NOXCAP_STEMS
+            )
+    );
+
+    public static final Supplier<BlockFamily> SLATE_PLANKS = Suppliers.memoize(() ->
+            new BlockFamily.Builder(PastelBlocks.SLATE_NOXWOOD_PLANKS.get())
+                    .button(PastelBlocks.SLATE_NOXWOOD_BUTTON.get())
+                    .door(PastelBlocks.SLATE_NOXWOOD_DOOR.get())
+                    .fence(PastelBlocks.SLATE_NOXWOOD_FENCE.get())
+                    .fenceGate(PastelBlocks.SLATE_NOXWOOD_FENCE_GATE.get())
+                    .pressurePlate(PastelBlocks.SLATE_NOXWOOD_PRESSURE_PLATE.get())
+                    .slab(PastelBlocks.SLATE_NOXWOOD_SLAB.get())
+                    .stairs(PastelBlocks.SLATE_NOXWOOD_STAIRS.get())
+                    .trapdoor(PastelBlocks.SLATE_NOXWOOD_TRAPDOOR.get())
+                    .getFamily()
+    );
+
+    public static final Supplier<WoodFamily> SLATE_NOXWOOD = Suppliers.memoize(() ->
+            new WoodFamily(
+                    SLATE_PLANKS.get(),
+                    PastelBlocks.SLATE_NOXCAP_STEM,
+                    PastelBlocks.SLATE_NOXCAP_HYPHAE,
+                    PastelBlocks.STRIPPED_SLATE_NOXCAP_STEM,
+                    PastelBlocks.STRIPPED_SLATE_NOXCAP_HYPHAE,
+                    PastelItemTags.SLATE_NOXCAP_STEMS
+            )
+    );
 }

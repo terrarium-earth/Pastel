@@ -1,16 +1,15 @@
 package earth.terrarium.pastel.data.recipe;
 
-import com.cmdpro.databank.advancement.criteria.HasAdvancementCriteria;
-import com.cmdpro.databank.registry.CriteriaTriggerRegistry;
 import earth.terrarium.pastel.data.block.PastelBlockFamilies;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.recipe.crafting.dynamic.*;
-import earth.terrarium.pastel.recipe.pedestal.ShapelessPedestalRecipe;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.advancements.Criterion;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -24,6 +23,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class CraftingTableRecipes {
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
@@ -41,6 +43,10 @@ public class CraftingTableRecipes {
         balcite(pfx.subPrefix("basalt"), PastelBlockFamilies.BASALT_ALL.get());
 
         weepingGala(pfx.subPrefix("weeping_gala"));
+        coloredWood(pfx.subPrefix("colored_wood"));
+        ash(pfx.subPrefix("ash"));
+        noxwood(pfx.subPrefix("noxwood"));
+        gemBlocks(pfx.subPrefix("gem_blocks"));
 
         pfx.generateAutoNamedRecipe(
                 ShapedRecipeBuilder.shaped(RecipeCategory.MISC, PastelItems.GUIDEBOOK)
@@ -280,31 +286,136 @@ public class CraftingTableRecipes {
 
     private static void weepingGala(PrefixHelper pfx) {
         var unlock = RecipeUtil.hasAdvancement(PastelAdvancements.Hidden.COLLECT_WEEPING_GALA);
-        generateBasicFamily(pfx, unlock, PastelBlockFamilies.WEEPING_GALA.get());
+        generateWood(pfx, unlock, PastelBlockFamilies.WEEPING_GALA.get());
+    }
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, PastelBlocks.WEEPING_GALA_WOOD, 3)
-                        .pattern("##")
-                        .pattern("##")
-                        .define('#', PastelBlocks.WEEPING_GALA_LOG)
+    private static void coloredWood(PrefixHelper pfx) {
+        PastelInkColorCollection.zipApply(PastelAdvancements.Hidden.CollectPigment.VALUES, PastelBlockFamilies.COLORED_WOODS.get(), (unlockId, family) -> {
+            var unlock = RecipeUtil.hasAdvancement(unlockId);
+            generateWood(pfx, unlock, family);
+        });
+    }
+
+    private static void ash(PrefixHelper pfx) {
+        var unlock = RecipeUtil.hasAdvancement(PastelAdvancements.Hidden.COLLECT_ASH);
+        pfx.generateRecipe(
+                "ash_from_flakes",
+                ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, PastelItems.ASH_FLAKES, 4)
+                        .requires(PastelBlocks.ASH)
+                        .group("compacting")
                         .unlockedBy("has_unlock", unlock)
         );
 
         pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, PastelBlocks.STRIPPED_WEEPING_GALA_WOOD, 3)
-                        .pattern("##")
-                        .pattern("##")
-                        .define('#', PastelBlocks.STRIPPED_WEEPING_GALA_LOG)
+                ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, PastelBlocks.ASH_PILE, 6)
+                        .pattern("WWW")
+                        .define('W', PastelBlocks.ASH)
                         .unlockedBy("has_unlock", unlock)
         );
 
-        pfx.generateAutoNamedRecipe(
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, PastelBlocks.WEEPING_GALA_PLANKS, 4)
-                        .requires(PastelItemTags.WEEPING_GALA_LOGS)
+        pfx.generateRecipe(
+                "flakes_from_ash",
+                ShapedRecipeBuilder.shaped(RecipeCategory.MISC, PastelBlocks.ASH)
+                        .pattern("WW")
+                        .pattern("WW")
+                        .define('W', PastelItems.ASH_FLAKES)
                         .unlockedBy("has_unlock", unlock)
         );
     }
 
+    private static void noxwood(PrefixHelper pfx) {
+        var chestnut = PastelBlockFamilies.CHESTNUT_NOXWOOD.get();
+        var chestnutUnlock = RecipeUtil.has(chestnut.logs());
+        generateWood(pfx, chestnutUnlock, chestnut);
+
+        var ebony = PastelBlockFamilies.EBONY_NOXWOOD.get();
+        var ebonyUnlock = RecipeUtil.has(ebony.logs());
+        generateWood(pfx, ebonyUnlock, ebony);
+
+        var ivory = PastelBlockFamilies.IVORY_NOXWOOD.get();
+        var ivoryUnlock = RecipeUtil.has(ivory.logs());
+        generateWood(pfx, ivoryUnlock, ivory);
+
+        var slate = PastelBlockFamilies.SLATE_NOXWOOD.get();
+        var slateUnlock = RecipeUtil.has(slate.logs());
+        generateWood(pfx, slateUnlock, slate);
+    }
+
+    private static void gemBlocks(PrefixHelper pfx) {
+        var bind = new BindGemBlock(pfx);
+
+        PastelGemstoneColorCollection.zipApply4(
+                PastelItems.GEMSTONE_SHARDS,
+                PastelBlocks.GEMSTONE_BLOCKS,
+                PastelBlocks.POLISHED_GEMSTONE_BLOCKS,
+                PastelAdvancements.Hidden.CollectShards.VALUES,
+                bind::generate
+        );
+    }
+
+    private record BindGemBlock(PrefixHelper pfx) {
+        void generate(Holder<Item> shard, DeferredBlock<Block> gemBlock, DeferredBlock<Block> polished, ResourceLocation unlockId) {
+            var unlock = RecipeUtil.hasAdvancement(unlockId);
+            pfx.generateRecipe(
+                    RecipeUtil.nameFromInAndOut(polished, shard.value()),
+                    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, shard.value(), 9)
+                            .requires(polished)
+                            .group("compacting")
+                            .unlockedBy("has_unlock", unlock)
+            );
+
+            pfx.generateAutoNamedRecipe(
+                    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, polished)
+                            .pattern("###")
+                            .pattern("###")
+                            .pattern("###")
+                            .define('#', shard.value())
+                            .group("compacting")
+                            .unlockedBy("has_unlock", unlock)
+            );
+
+            // jank
+            if (gemBlock.get() != Blocks.AMETHYST_BLOCK) {
+                pfx.generateAutoNamedRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, gemBlock)
+                                .pattern("##")
+                                .pattern("##")
+                                .define('#', shard.value())
+                                .unlockedBy("has_unlock", unlock)
+                );
+            }
+        }
+    }
+
+
+
+    private static void generateWood(PrefixHelper pfx, Criterion<?> unlock, PastelBlockFamilies.WoodFamily woodFamily) {
+        generateBasicFamily(pfx, unlock, woodFamily.plankFamily());
+
+        pfx.generateAutoNamedRecipe(
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, woodFamily.wood(), 3)
+                        .pattern("##")
+                        .pattern("##")
+                        .define('#', woodFamily.log())
+                        .unlockedBy("has_unlock", unlock)
+                        .group("bark")
+        );
+
+        pfx.generateAutoNamedRecipe(
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, woodFamily.strippedWood(), 3)
+                        .pattern("##")
+                        .pattern("##")
+                        .define('#', woodFamily.strippedLog())
+                        .group("bark")
+                        .unlockedBy("has_unlock", unlock)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, woodFamily.planks(), 4)
+                        .requires(woodFamily.logs())
+                        .unlockedBy("has_unlock", unlock)
+        );
+    }
 
     private static void generateConverting(PrefixHelper pfx, ItemLike base, ItemLike next) {
         generateConverting(pfx, base, base, next);

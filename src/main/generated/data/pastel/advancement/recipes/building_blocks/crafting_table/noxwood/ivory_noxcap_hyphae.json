@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table//noxwood/ivory_noxcap_hyphae"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unlock": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:ivory_noxcap_stems"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table//noxwood/ivory_noxcap_hyphae"
+    ]
+  }
+}

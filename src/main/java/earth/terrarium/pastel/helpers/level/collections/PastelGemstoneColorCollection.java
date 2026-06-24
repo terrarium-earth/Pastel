@@ -3,7 +3,10 @@ package earth.terrarium.pastel.helpers.level.collections;
 import com.mojang.datafixers.kinds.App;
 import com.mojang.datafixers.kinds.Applicative;
 import com.mojang.datafixers.kinds.K1;
+import com.mojang.datafixers.util.Unit;
 import earth.terrarium.pastel.api.energy.color.InkColor;
+import earth.terrarium.pastel.helpers.functions.QuadConsumer;
+import earth.terrarium.pastel.helpers.functions.TriConsumer;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import net.minecraft.world.item.Item;
@@ -123,6 +126,34 @@ public record PastelGemstoneColorCollection<T>(
         action.accept(first.yellow(), second.yellow());
         action.accept(first.black(), second.black());
         action.accept(first.white(), second.white());
+    }
+
+    public static <T, U, V> void zipApply3(
+            PastelGemstoneColorCollection<T> first,
+            PastelGemstoneColorCollection<U> second,
+            PastelGemstoneColorCollection<V> third,
+            TriConsumer<T, U, V> action
+    ) {
+        Instance.INSTANCE.apply3((a, b, c) -> { action.accept(a, b, c); return Unit.INSTANCE; },
+                    first,
+                    second,
+                    third
+                );
+    }
+
+    public static <T, U, V, W> void zipApply4(
+            PastelGemstoneColorCollection<T> first,
+            PastelGemstoneColorCollection<U> second,
+            PastelGemstoneColorCollection<V> third,
+            PastelGemstoneColorCollection<W> fourth,
+            QuadConsumer<T, U, V, W> action
+    ) {
+        Instance.INSTANCE.apply4((a, b, c, d) -> { action.accept(a, b, c, d); return Unit.INSTANCE; },
+                first,
+                second,
+                third,
+                fourth
+        );
     }
 
     public static <B extends Block, Id> PastelGemstoneColorCollection<DeferredBlock<Block>> registerBlocks(

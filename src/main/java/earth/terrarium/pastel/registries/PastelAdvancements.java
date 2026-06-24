@@ -3,6 +3,7 @@ package earth.terrarium.pastel.registries;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import net.minecraft.resources.ResourceLocation;
 
 @SuppressWarnings(
@@ -1660,6 +1661,18 @@ public class PastelAdvancements {
             public static final ResourceLocation AMETHYST = PastelCommon.locate("hidden/collect_shards/amethyst");
 
             public static final ResourceLocation CITRINE = PastelCommon.locate("hidden/collect_shards/citrine");
+
+            // Even though this isn't technically correct, there are so many places
+            // that use these values as the "collect shard" advancement including onyx + moonstone
+            // that it's best to have them here so I can reuse them
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES =
+                    new PastelGemstoneColorCollection<>(
+                            TOPAZ,
+                            AMETHYST,
+                            CITRINE,
+                            CREATE_ONYX_SHARD,
+                            Lategame.COLLECT_MOONSTONE
+                    );
         }
 
         public static class StatusEffects {
