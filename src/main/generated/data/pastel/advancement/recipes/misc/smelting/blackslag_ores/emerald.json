@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:smelting//blackslag_ores/emerald"
+        "recipe": "pastel:smelting/blackslag_ores/emerald"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:smelting//blackslag_ores/emerald"
+      "pastel:smelting/blackslag_ores/emerald"
     ]
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:smelting//ore/paltaeria_ore"
+        "recipe": "pastel:smelting/ore/paltaeria_ore"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:smelting//ore/paltaeria_ore"
+      "pastel:smelting/ore/paltaeria_ore"
     ]
   }
 }

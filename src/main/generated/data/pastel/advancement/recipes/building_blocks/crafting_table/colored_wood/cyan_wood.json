@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//colored_wood/cyan_wood"
+        "recipe": "pastel:crafting_table/colored_wood/cyan_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//colored_wood/cyan_wood"
+      "pastel:crafting_table/colored_wood/cyan_wood"
     ]
   }
 }

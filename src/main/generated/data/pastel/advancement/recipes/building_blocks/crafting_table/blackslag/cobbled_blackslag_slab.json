@@ -9,7 +9,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//blackslag/cobbled_blackslag_slab"
+        "recipe": "pastel:crafting_table/blackslag/cobbled_blackslag_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//blackslag/cobbled_blackslag_slab"
+      "pastel:crafting_table/blackslag/cobbled_blackslag_slab"
     ]
   }
 }

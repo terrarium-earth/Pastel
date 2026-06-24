@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:blasting//ore/stratine_ore"
+        "recipe": "pastel:blasting/ore/stratine_ore"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:blasting//ore/stratine_ore"
+      "pastel:blasting/ore/stratine_ore"
     ]
   }
 }

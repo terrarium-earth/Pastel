@@ -9,7 +9,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//colored_wood/light_blue_pressure_plate"
+        "recipe": "pastel:crafting_table/colored_wood/light_blue_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//colored_wood/light_blue_pressure_plate"
+      "pastel:crafting_table/colored_wood/light_blue_pressure_plate"
     ]
   }
 }

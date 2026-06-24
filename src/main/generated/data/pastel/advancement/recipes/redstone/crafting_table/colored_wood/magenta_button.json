@@ -9,7 +9,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//colored_wood/magenta_button"
+        "recipe": "pastel:crafting_table/colored_wood/magenta_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//colored_wood/magenta_button"
+      "pastel:crafting_table/colored_wood/magenta_button"
     ]
   }
 }

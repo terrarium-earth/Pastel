@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//noxwood/stripped_chestnut_noxcap_hyphae"
+        "recipe": "pastel:crafting_table/noxwood/stripped_chestnut_noxcap_hyphae"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//noxwood/stripped_chestnut_noxcap_hyphae"
+      "pastel:crafting_table/noxwood/stripped_chestnut_noxcap_hyphae"
     ]
   }
 }

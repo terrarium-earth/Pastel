@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:smelting//ore/shimmerstone_ores"
+        "recipe": "pastel:smelting/ore/shimmerstone_ores"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:smelting//ore/shimmerstone_ores"
+      "pastel:smelting/ore/shimmerstone_ores"
     ]
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//calcite/notched_polished_calcite"
+        "recipe": "pastel:crafting_table/calcite/notched_polished_calcite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//calcite/notched_polished_calcite"
+      "pastel:crafting_table/calcite/notched_polished_calcite"
     ]
   }
 }

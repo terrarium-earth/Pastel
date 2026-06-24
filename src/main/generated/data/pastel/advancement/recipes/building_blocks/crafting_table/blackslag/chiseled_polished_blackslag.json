@@ -9,7 +9,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//blackslag/chiseled_polished_blackslag"
+        "recipe": "pastel:crafting_table/blackslag/chiseled_polished_blackslag"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//blackslag/chiseled_polished_blackslag"
+      "pastel:crafting_table/blackslag/chiseled_polished_blackslag"
     ]
   }
 }

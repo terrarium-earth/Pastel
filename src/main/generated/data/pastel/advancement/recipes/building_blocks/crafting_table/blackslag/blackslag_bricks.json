@@ -9,7 +9,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//blackslag/blackslag_bricks"
+        "recipe": "pastel:crafting_table/blackslag/blackslag_bricks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//blackslag/blackslag_bricks"
+      "pastel:crafting_table/blackslag/blackslag_bricks"
     ]
   }
 }

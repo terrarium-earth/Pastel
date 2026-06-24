@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//noxwood/chestnut_noxwood_planks"
+        "recipe": "pastel:crafting_table/noxwood/chestnut_noxwood_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//noxwood/chestnut_noxwood_planks"
+      "pastel:crafting_table/noxwood/chestnut_noxwood_planks"
     ]
   }
 }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//ash/ash_from_flakes"
+        "recipe": "pastel:crafting_table/ash/ash_from_flakes"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//ash/ash_from_flakes"
+      "pastel:crafting_table/ash/ash_from_flakes"
     ]
   }
 }

@@ -9,7 +9,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//basal_marble/basal_marble_brick_wall"
+        "recipe": "pastel:crafting_table/basal_marble/basal_marble_brick_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//basal_marble/basal_marble_brick_wall"
+      "pastel:crafting_table/basal_marble/basal_marble_brick_wall"
     ]
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//calcite/calcite_bricks"
+        "recipe": "pastel:crafting_table/calcite/calcite_bricks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//calcite/calcite_bricks"
+      "pastel:crafting_table/calcite/calcite_bricks"
     ]
   }
 }

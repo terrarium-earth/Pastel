@@ -59,7 +59,7 @@ public class PrefixHelper {
         if (this.prefix.isEmpty()) {
             return new PrefixHelper(this.ctx, this.lookup, name);
         } else {
-            return new PrefixHelper(this.ctx, this.lookup, this.prefix + "/" + name);
+            return new PrefixHelper(this.ctx, this.lookup, this.prefix + name);
         }
     }
 

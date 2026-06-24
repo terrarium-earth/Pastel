@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:blasting//blackslag_ores/lapis_lazuli"
+        "recipe": "pastel:blasting/blackslag_ores/lapis_lazuli"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:blasting//blackslag_ores/lapis_lazuli"
+      "pastel:blasting/blackslag_ores/lapis_lazuli"
     ]
   }
 }

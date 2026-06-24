@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//calcite/planed_calcite"
+        "recipe": "pastel:crafting_table/calcite/planed_calcite"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//calcite/planed_calcite"
+      "pastel:crafting_table/calcite/planed_calcite"
     ]
   }
 }

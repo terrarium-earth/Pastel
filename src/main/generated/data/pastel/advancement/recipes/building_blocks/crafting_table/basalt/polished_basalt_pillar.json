@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//basalt/polished_basalt_pillar"
+        "recipe": "pastel:crafting_table/basalt/polished_basalt_pillar"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//basalt/polished_basalt_pillar"
+      "pastel:crafting_table/basalt/polished_basalt_pillar"
     ]
   }
 }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//pigment_to_dye/pink_pigment_to_pink_dye"
+        "recipe": "pastel:crafting_table/pigment_to_dye/pink_pigment_to_pink_dye"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//pigment_to_dye/pink_pigment_to_pink_dye"
+      "pastel:crafting_table/pigment_to_dye/pink_pigment_to_pink_dye"
     ]
   }
 }

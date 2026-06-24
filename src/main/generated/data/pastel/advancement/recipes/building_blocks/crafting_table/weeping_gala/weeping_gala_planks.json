@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//weeping_gala/weeping_gala_planks"
+        "recipe": "pastel:crafting_table/weeping_gala/weeping_gala_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//weeping_gala/weeping_gala_planks"
+      "pastel:crafting_table/weeping_gala/weeping_gala_planks"
     ]
   }
 }

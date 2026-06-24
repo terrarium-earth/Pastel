@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//noxwood/ebony_noxwood_button"
+        "recipe": "pastel:crafting_table/noxwood/ebony_noxwood_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//noxwood/ebony_noxwood_button"
+      "pastel:crafting_table/noxwood/ebony_noxwood_button"
     ]
   }
 }

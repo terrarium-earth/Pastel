@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pastel:crafting_table//gem_blocks/polished_citrine_block"
+        "recipe": "pastel:crafting_table/gem_blocks/polished_citrine_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "pastel:crafting_table//gem_blocks/polished_citrine_block"
+      "pastel:crafting_table/gem_blocks/polished_citrine_block"
     ]
   }
 }
