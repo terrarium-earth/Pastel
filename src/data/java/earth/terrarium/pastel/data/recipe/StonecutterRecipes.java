@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class StonecutterRecipes {
         shaleClay(pfx.subPrefix("shale_clay"));
         blackslag(pfx.subPrefix("blackslag"));
         dragonbone(pfx.subPrefix("dragonbone"));
+        pyrite(pfx.subPrefix("pyrite"));
     }
 
 
@@ -50,12 +52,12 @@ public class StonecutterRecipes {
         );
     }
 
-    private static void generateStonecutter(PrefixHelper pfx, Item input, BlockFamily.Variant variant, Block block) {
+    private static void generateStonecutter(PrefixHelper pfx, ItemLike input, BlockFamily.Variant variant, ItemLike block) {
         var count = variant == BlockFamily.Variant.SLAB ? 2 : 1;
         generateStonecutter(pfx, input, count, block);
     }
 
-    private static void generateStonecutter(PrefixHelper pfx, Item input, int count, Block block) {
+    private static void generateStonecutter(PrefixHelper pfx, ItemLike input, int count, ItemLike block) {
         pfx.generateDynamicRecipe(
                 nameFromInAndOut(input, block),
                 new StonecutterRecipe("", Ingredient.of(input), new ItemStack(block, count))
@@ -180,5 +182,24 @@ public class StonecutterRecipes {
         SubFamilyGeneratorBind.generateFrom(pfx, PastelBlockFamilies.BLACKSLAG_TILES.get(), PastelBlocks.POLISHED_BLACKSLAG.asItem());
 
         generateStonecutter(pfx, PastelBlocks.POLISHED_BLACKSLAG.asItem(), 1, PastelBlocks.POLISHED_BLACKSLAG_PILLAR.get());
+    }
+
+    private static void pyrite(PrefixHelper pfx) {
+        FamilyGeneratorBind.generateFrom(pfx, PastelBlockFamilies.PYRITE.get());
+        // NOTE: The original datagenned files didn't include recipes directly from pyrite to tile stairs,slabs, or walls
+        // if you want to change that, just swap this to a `SubFamilyGeneratorBind.generateFrom` instead, and remove the following gen call
+        FamilyGeneratorBind.generateFrom(pfx, PastelBlockFamilies.PYRITE_TILES.get());
+        generateStonecutter(pfx, PastelBlocks.PYRITE, 1, PastelBlocks.PYRITE_TILES);
+
+        List.of(
+                PastelBlocks.PYRITE_PANELING,
+                PastelBlocks.PYRITE_PILE,
+                PastelBlocks.PYRITE_PLATING,
+                PastelBlocks.PYRITE_RELIEF,
+                PastelBlocks.PYRITE_STACK,
+                PastelBlocks.PYRITE_TUBING,
+                PastelBlocks.PYRITE_VENT
+        ).forEach(result -> generateStonecutter(pfx, PastelBlocks.PYRITE, 1, result));
+
     }
 }

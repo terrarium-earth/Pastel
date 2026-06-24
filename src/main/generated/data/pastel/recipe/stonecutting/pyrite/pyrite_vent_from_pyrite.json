@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "pastel:pyrite"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:pyrite_vent"
+  }
+}

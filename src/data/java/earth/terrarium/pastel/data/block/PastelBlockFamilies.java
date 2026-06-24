@@ -300,5 +300,20 @@ public class PastelBlockFamilies {
                     .getFamily()
     );
 
+    public static final Supplier<BlockFamily> PYRITE = Suppliers.memoize(() ->
+            new BlockFamily.Builder(PastelBlocks.PYRITE.get())
+                    .stairs(PastelBlocks.PYRITE_STAIRS.get())
+                    .slab(PastelBlocks.PYRITE_SLAB.get())
+                    .wall(PastelBlocks.PYRITE_WALL.get())
+                    .getFamily()
+    );
+
+    public static final Supplier<BlockFamily> PYRITE_TILES = Suppliers.memoize(() ->
+            new BlockFamily.Builder(PastelBlocks.PYRITE_TILES.get())
+                    .stairs(PastelBlocks.PYRITE_TILE_STAIRS.get())
+                    .slab(PastelBlocks.PYRITE_TILE_SLAB.get())
+                    .wall(PastelBlocks.PYRITE_TILE_WALL.get())
+                    .getFamily()
+    );
 
 }
