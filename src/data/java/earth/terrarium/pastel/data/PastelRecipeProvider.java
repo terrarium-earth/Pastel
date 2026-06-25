@@ -112,6 +112,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         PrimordialFireBurningRecipes.generate(recipeOutput, lookup);
         StonecutterRecipes.generate(recipeOutput, lookup);
         CraftingTableRecipes.generate(recipeOutput, lookup);
+        SpiritInstillerRecipes.generate(recipeOutput, lookup);
     }
 
 

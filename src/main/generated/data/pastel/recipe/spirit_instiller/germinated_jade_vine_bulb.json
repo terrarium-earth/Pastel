@@ -1,0 +1,20 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "item": "pastel:hibernating_jade_vine_bulb"
+  },
+  "experience": 20.0,
+  "ingredient1": {
+    "item": "pastel:liquid_crystal_bucket"
+  },
+  "ingredient2": {
+    "count": 16,
+    "item": "pastel:vegetal"
+  },
+  "required_advancement": "pastel:hidden/collect_hibernating_jade_vine_bulb",
+  "result": {
+    "count": 1,
+    "id": "pastel:germinated_jade_vine_bulb"
+  },
+  "time": 600
+}
