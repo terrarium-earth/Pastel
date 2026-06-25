@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "W": {
+      "item": "pastel:exposed_shale_clay_bricks"
+    }
+  },
+  "pattern": [
+    "WWW"
+  ],
+  "result": {
+    "count": 6,
+    "id": "pastel:exposed_shale_clay_brick_slab"
+  }
+}

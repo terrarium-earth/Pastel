@@ -47,6 +47,7 @@ public class CraftingTableRecipes {
         ash(pfx.subPrefix("ash"));
         noxwood(pfx.subPrefix("noxwood"));
         gemBlocks(pfx.subPrefix("gem_blocks"));
+        shaleClay(pfx.subPrefix("shale_clay"));
 
         pfx.generateAutoNamedRecipe(
                 ShapedRecipeBuilder.shaped(RecipeCategory.MISC, PastelItems.GUIDEBOOK)
@@ -387,6 +388,30 @@ public class CraftingTableRecipes {
         }
     }
 
+    private static void shaleClay(PrefixHelper pfx) {
+        var unlock = RecipeUtil.hasAdvancement(PastelAdvancements.Hidden.COLLECT_SHALE_CLAY);
+
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.POLISHED_SHALE_CLAY.get());
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.SHALE_CLAY_BRICKS.get());
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.SHALE_CLAY_TILES.get());
+
+        generateConverting(pfx, unlock, PastelBlocks.POLISHED_SHALE_CLAY, PastelBlocks.SHALE_CLAY_BRICKS);
+        generateConverting(pfx, unlock, PastelBlocks.SHALE_CLAY_BRICKS, PastelBlocks.SHALE_CLAY_TILES);
+
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.EXPOSED_POLISHED_SHALE_CLAY.get());
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.EXPOSED_SHALE_CLAY_BRICKS.get());
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.EXPOSED_SHALE_CLAY_TILES.get());
+
+        generateConverting(pfx, unlock, PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY, PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS);
+        generateConverting(pfx, unlock, PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS, PastelBlocks.EXPOSED_SHALE_CLAY_TILES);
+
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.WEATHERED_POLISHED_SHALE_CLAY.get());
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.WEATHERED_SHALE_CLAY_BRICKS.get());
+        generateBasicFamily(pfx, unlock, PastelBlockFamilies.WEATHERED_SHALE_CLAY_TILES.get());
+
+        generateConverting(pfx, unlock, PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY, PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS);
+        generateConverting(pfx, unlock, PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS, PastelBlocks.WEATHERED_SHALE_CLAY_TILES);
+    }
 
 
     private static void generateWood(PrefixHelper pfx, Criterion<?> unlock, PastelBlockFamilies.WoodFamily woodFamily) {

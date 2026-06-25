@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "W": {
+      "item": "pastel:weathered_polished_shale_clay"
+    }
+  },
+  "pattern": [
+    "WWW"
+  ],
+  "result": {
+    "count": 6,
+    "id": "pastel:weathered_polished_shale_clay_slab"
+  }
+}
