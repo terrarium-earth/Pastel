@@ -113,6 +113,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         StonecutterRecipes.generate(recipeOutput, lookup);
         CraftingTableRecipes.generate(recipeOutput, lookup);
         SpiritInstillerRecipes.generate(recipeOutput, lookup);
+        PotionWorkshopReactingRecipes.generate(recipeOutput, lookup);
     }
 
 

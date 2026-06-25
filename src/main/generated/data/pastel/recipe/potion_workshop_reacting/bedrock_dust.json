@@ -1,0 +1,12 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:bedrock_dust",
+  "modifiers": [
+    {
+      "duration_multiplier": 0.25,
+      "flat_yield_bonus": -1.0,
+      "potency_multiplier": 1.5
+    }
+  ],
+  "required_advancement": "pastel:midgame/break_decayed_bedrock"
+}
