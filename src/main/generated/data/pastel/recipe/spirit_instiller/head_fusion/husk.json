@@ -1,0 +1,22 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "item": "pastel:vegetal"
+  },
+  "experience": 4.0,
+  "group": "head_fusion",
+  "ingredient1": {
+    "item": "minecraft:zombie_head"
+  },
+  "ingredient2": {
+    "count": 4,
+    "item": "pastel:incandescent_essence"
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/incandescent_recipes",
+  "result": {
+    "count": 1,
+    "id": "pastel:husk_head"
+  },
+  "time": 800
+}

@@ -1,0 +1,21 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "item": "pastel:vegetal"
+  },
+  "experience": 4.0,
+  "group": "head_fusion",
+  "ingredient1": {
+    "item": "pastel:horse_head"
+  },
+  "ingredient2": {
+    "item": "minecraft:zombie_head"
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/basic_recipes",
+  "result": {
+    "count": 1,
+    "id": "pastel:zombie_horse_head"
+  },
+  "time": 800
+}

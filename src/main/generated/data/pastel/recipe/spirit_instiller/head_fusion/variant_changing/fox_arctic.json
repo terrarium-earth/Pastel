@@ -1,0 +1,22 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "item": "pastel:vegetal"
+  },
+  "experience": 4.0,
+  "group": "head_fusion",
+  "ingredient1": {
+    "item": "pastel:fox_head"
+  },
+  "ingredient2": {
+    "count": 4,
+    "item": "pastel:frostbite_essence"
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/frostbite_recipes",
+  "result": {
+    "count": 1,
+    "id": "pastel:fox_arctic_head"
+  },
+  "time": 800
+}

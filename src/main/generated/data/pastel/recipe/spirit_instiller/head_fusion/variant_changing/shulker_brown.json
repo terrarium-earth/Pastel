@@ -1,0 +1,20 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "item": "pastel:vegetal"
+  },
+  "experience": 4.0,
+  "group": "head_fusion",
+  "ingredient1": {
+    "tag": "pastel:mob_heads/shulker_heads"
+  },
+  "ingredient2": {
+    "item": "pastel:brown_pigment"
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/basic_recipes",
+  "result": {
+    "count": 1,
+    "id": "pastel:shulker_brown_head"
+  },
+  "time": 800
+}

@@ -1,0 +1,22 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "item": "pastel:vegetal"
+  },
+  "experience": 4.0,
+  "group": "head_fusion",
+  "ingredient1": {
+    "item": "minecraft:skeleton_skull"
+  },
+  "ingredient2": {
+    "count": 2,
+    "item": "minecraft:blaze_powder"
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/basic_recipes",
+  "result": {
+    "count": 1,
+    "id": "minecraft:wither_skeleton_skull"
+  },
+  "time": 800
+}

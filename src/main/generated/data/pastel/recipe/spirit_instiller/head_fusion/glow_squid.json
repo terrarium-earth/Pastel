@@ -1,0 +1,22 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "item": "pastel:vegetal"
+  },
+  "experience": 4.0,
+  "group": "head_fusion",
+  "ingredient1": {
+    "item": "pastel:squid_head"
+  },
+  "ingredient2": {
+    "count": 4,
+    "item": "pastel:shimmerstone_gem"
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/basic_recipes",
+  "result": {
+    "count": 1,
+    "id": "pastel:glow_squid_head"
+  },
+  "time": 800
+}

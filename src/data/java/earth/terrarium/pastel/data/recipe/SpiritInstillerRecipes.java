@@ -1,16 +1,22 @@
 package earth.terrarium.pastel.data.recipe;
 
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.data.recipe.builder.SpiritInstillerRecipeBuilder;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.HardcorePlayerRevivalRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.MemoryToHeadRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.*;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 public class SpiritInstillerRecipes {
@@ -20,6 +26,7 @@ public class SpiritInstillerRecipes {
         root(pfx);
         spawner(pfx.subPrefix("spawner"));
         secret(pfx.subPrefix("secret"));
+        headFusion(pfx.subPrefix("head_fusion"));
     }
 
     private static void secret(PrefixHelper pfx) {
@@ -153,4 +160,141 @@ public class SpiritInstillerRecipes {
                         .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.NECTAR_LANCE)
         );
     }
+
+    private static void headFusion(PrefixHelper pfx) {
+        var h = new HeadGenerator(pfx, 4);
+        h.generateHeadFusion(head(PastelSkullType.PHANTOM), SecondFusionIngredient.NIGHTDEW, head(PastelSkullType.GHAST));
+        h.generateHeadFusion(head(PastelSkullType.SQUID),SecondFusionIngredient.basic(PastelItems.SHIMMERSTONE_GEM, 4), head(PastelSkullType.GLOW_SQUID));
+        h.generateHeadFusion(Items.ZOMBIE_HEAD, SecondFusionIngredient.INCANDESCENT, head(PastelSkullType.HUSK));
+        h.generateHeadFusion(head(PastelSkullType.SLIME), SecondFusionIngredient.INCANDESCENT, head(PastelSkullType.MAGMA_CUBE));
+        h.generateHeadFusion(head(PastelSkullType.COW), SecondFusionIngredient.basic(Items.BROWN_MUSHROOM, 4), head(PastelSkullType.MOOSHROOM_BROWN));
+        h.generateHeadFusion(head(PastelSkullType.COW), SecondFusionIngredient.basic(Items.RED_MUSHROOM, 4), head(PastelSkullType.MOOSHROOM_RED));
+        h.generateHeadFusion(head(PastelSkullType.HORSE), SecondFusionIngredient.basic(head(PastelSkullType.DONKEY)), head(PastelSkullType.MULE));
+        h.generateHeadFusion(head(PastelSkullType.BAT), SecondFusionIngredient.NIGHTDEW, head(PastelSkullType.PHANTOM));
+        h.generateHeadFusion(head(PastelSkullType.PIG), SecondFusionIngredient.basic(head(PastelSkullType.PILLAGER)), Items.PIGLIN_HEAD);
+        h.generateHeadFusion(head(PastelSkullType.HORSE), SecondFusionIngredient.STORM_STORM, head(PastelSkullType.SKELETON_HORSE));
+        h.generateHeadFusion(Items.SKELETON_SKULL, SecondFusionIngredient.FROSTBITE, head(PastelSkullType.STRAY));
+        h.generateHeadFusion(head(PastelSkullType.CAMEL), SecondFusionIngredient.INCANDESCENT, head(PastelSkullType.STRIDER));
+        h.generateHeadFusion(head(PastelSkullType.VILLAGER), SecondFusionIngredient.STORM_STORM, head(PastelSkullType.WITCH));
+        h.generateHeadFusion(Items.SKELETON_SKULL, SecondFusionIngredient.basic(Items.BLAZE_POWDER, 2), Items.WITHER_SKELETON_SKULL);
+        h.generateHeadFusion(head(PastelSkullType.HOGLIN), SecondFusionIngredient.basic(Items.ZOMBIE_HEAD), head(PastelSkullType.ZOGLIN));
+        h.generateHeadFusion(head(PastelSkullType.HORSE), SecondFusionIngredient.basic(Items.ZOMBIE_HEAD), head(PastelSkullType.ZOMBIE_HORSE));
+        h.generateHeadFusion(head(PastelSkullType.VILLAGER), SecondFusionIngredient.basic(Items.ZOMBIE_HEAD), head(PastelSkullType.ZOMBIE_VILLAGER));
+        h.generateHeadFusion(Items.PIGLIN_HEAD, SecondFusionIngredient.basic(Items.ZOMBIE_HEAD), head(PastelSkullType.ZOMBIFIED_PIGLIN));
+
+        variantChangingHeadFusion(pfx.subPrefix("variant_changing"));
+    }
+
+    private record SecondFusionIngredient(
+            ResourceLocation unlock,
+            SizedIngredient ingredient
+
+    ) {
+        public static SecondFusionIngredient basic(ItemLike input, int count) {
+            return new SecondFusionIngredient(PastelAdvancements.Unlocks.HeadFusion.BASIC_RECIPES, SizedIngredient.of(input, count));
+        }
+
+        public static SecondFusionIngredient basic(ItemLike input) {
+            return basic(input, 1);
+        }
+
+
+        public static final SecondFusionIngredient NIGHTDEW = new SecondFusionIngredient(
+                PastelAdvancements.Unlocks.HeadFusion.NIGHTDEW_RECIPES,
+                SizedIngredient.of(PastelItems.NIGHTDEW_SPROUT, 2)
+        );
+
+        public static final SecondFusionIngredient INCANDESCENT = new SecondFusionIngredient(
+                PastelAdvancements.Unlocks.HeadFusion.INCANDESCENT_RECIPES,
+                SizedIngredient.of(PastelItems.INCANDESCENT_ESSENCE, 4)
+        );
+
+        public static final SecondFusionIngredient FROSTBITE = new SecondFusionIngredient(
+                PastelAdvancements.Unlocks.HeadFusion.FROSTBITE_RECIPES,
+                SizedIngredient.of(PastelItems.FROSTBITE_ESSENCE, 4)
+        );
+
+        public static final SecondFusionIngredient STORM_STORM = new SecondFusionIngredient(
+                PastelAdvancements.Unlocks.HeadFusion.STORM_STONE_RECIPES,
+                SizedIngredient.of(PastelItems.STORM_STONE, 4)
+        );
+    }
+
+    private static void variantChangingHeadFusion(PrefixHelper pfx) {
+        // Because God Hates Foxes, foxes are more expensive to convert
+        var foxHelper = new HeadGenerator(pfx, 4);
+        foxHelper.generateHeadFusion(head(PastelSkullType.FOX), SecondFusionIngredient.FROSTBITE, head(PastelSkullType.FOX_ARCTIC));
+        foxHelper.generateHeadFusion(head(PastelSkullType.FOX_ARCTIC), SecondFusionIngredient.INCANDESCENT, head(PastelSkullType.FOX));
+
+        var helper = new HeadGenerator(pfx, 1);
+        var pigments = PastelItems.PIGMENTS.map(SecondFusionIngredient::basic);
+
+        var axolotlTag = Ingredient.of(PastelItemTags.MobHeads.AXOLOTL_HEADS);
+        helper.generateHeadFusion(axolotlTag, pigments.blue(), head(PastelSkullType.AXOLOTL_BLUE));
+        // poop axolotl...........
+        helper.generateHeadFusion(axolotlTag, pigments.brown(), head(PastelSkullType.AXOLOTL_WILD));
+        helper.generateHeadFusion(axolotlTag, pigments.cyan(), head(PastelSkullType.AXOLOTL_CYAN));
+        helper.generateHeadFusion(axolotlTag, pigments.yellow(), head(PastelSkullType.AXOLOTL_GOLD));
+        helper.generateHeadFusion(axolotlTag, pigments.pink(), head(PastelSkullType.AXOLOTL_LEUCISTIC));
+
+        var parrotTag = Ingredient.of(PastelItemTags.MobHeads.PARROT_HEADS);
+        helper.generateHeadFusion(parrotTag, pigments.blue(), head(PastelSkullType.PARROT_BLUE));
+        helper.generateHeadFusion(parrotTag, pigments.cyan(), head(PastelSkullType.PARROT_CYAN));
+        helper.generateHeadFusion(parrotTag, pigments.gray(), head(PastelSkullType.PARROT_GRAY));
+        helper.generateHeadFusion(parrotTag, pigments.green(), head(PastelSkullType.PARROT_GREEN));
+        helper.generateHeadFusion(parrotTag, pigments.red(), head(PastelSkullType.PARROT_RED));
+
+        var shulkerTag = Ingredient.of(PastelItemTags.MobHeads.SHULKER_HEADS);
+        helper.generateHeadFusion(shulkerTag, pigments.black(), head(PastelSkullType.SHULKER_BLACK));
+        helper.generateHeadFusion(shulkerTag, pigments.blue(), head(PastelSkullType.SHULKER_BLUE));
+        helper.generateHeadFusion(shulkerTag, pigments.brown(), head(PastelSkullType.SHULKER_BROWN));
+        helper.generateHeadFusion(shulkerTag, pigments.cyan(), head(PastelSkullType.SHULKER_CYAN));
+        helper.generateHeadFusion(shulkerTag, pigments.gray(), head(PastelSkullType.SHULKER_GRAY));
+        helper.generateHeadFusion(shulkerTag, pigments.green(), head(PastelSkullType.SHULKER_GREEN));
+        helper.generateHeadFusion(shulkerTag, pigments.lightBlue(), head(PastelSkullType.SHULKER_LIGHT_BLUE));
+        helper.generateHeadFusion(shulkerTag, pigments.lightGray(), head(PastelSkullType.SHULKER_LIGHT_GRAY));
+        helper.generateHeadFusion(shulkerTag, pigments.lime(), head(PastelSkullType.SHULKER_LIME));
+        helper.generateHeadFusion(shulkerTag, pigments.magenta(), head(PastelSkullType.SHULKER_MAGENTA));
+        helper.generateHeadFusion(shulkerTag, pigments.orange(), head(PastelSkullType.SHULKER_ORANGE));
+        helper.generateHeadFusion(shulkerTag, pigments.pink(), head(PastelSkullType.SHULKER_PINK));
+        helper.generateHeadFusion(shulkerTag, pigments.purple(), head(PastelSkullType.SHULKER_PURPLE));
+        helper.generateHeadFusion(shulkerTag, pigments.red(), head(PastelSkullType.SHULKER_RED));
+        helper.generateHeadFusion(shulkerTag, pigments.white(), head(PastelSkullType.SHULKER_WHITE));
+        helper.generateHeadFusion(shulkerTag, pigments.yellow(), head(PastelSkullType.SHULKER_YELLOW));
+
+
+    }
+
+    private static ItemLike head(PastelSkullType kind) {
+        return PastelBlocks.MOB_HEADS.get(kind);
+    }
+
+    private record HeadGenerator(
+        PrefixHelper pfx,
+        int inputVegetal
+    ) {
+        public void generateHeadFusion(Ingredient head, SecondFusionIngredient second, ItemLike result) {
+
+            var headName = BuiltInRegistries.ITEM.getKey(result.asItem()).getPath().replace("_head", "").replace("_skull", "");
+
+            pfx.generateRecipe(
+                    headName,
+                    new SpiritInstillerRecipeBuilder(
+                            SizedIngredient.of(PastelItems.VEGETAL, inputVegetal),
+                            new SizedIngredient(head, 1),
+                            second.ingredient,
+                            new ItemStack(result)
+                    )
+                            .craftingTime(800)
+                            .experience(4.0f)
+                            .requiredAdvancement(second.unlock)
+                            .group("head_fusion")
+            );
+        }
+        public void generateHeadFusion(ItemLike head, SecondFusionIngredient second, ItemLike result) {
+            generateHeadFusion(Ingredient.of(head), second, result);
+        }
+    }
+
+
 }
