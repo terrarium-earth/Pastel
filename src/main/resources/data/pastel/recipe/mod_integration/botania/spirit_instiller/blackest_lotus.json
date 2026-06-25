@@ -3,14 +3,23 @@
   "time": 400,
   "experience": 8.0,
   "ingredient1": {
-    "item": "pastel:resonance_shard",
+    "ingredient": {
+      "item": "pastel:resonance_shard"
+    },
     "count": 4
   },
   "ingredient2": {
-    "item": "pastel:blood_orchid_petal",
+    "ingredient": {
+      "item": "pastel:blood_orchid_petal"
+    },
     "count": 16
   },
-  "center_ingredient": "botania:blacker_lotus",
+  "center_ingredient": {
+    "ingredient": {
+      "item": "botania:blacker_lotus"
+    },
+    "count": 1
+  },
   "result": {
     "id": "pastel:blackest_lotus"
   },

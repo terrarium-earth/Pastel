@@ -17,7 +17,7 @@
   ],
   "key": {
     "O": {
-      "item": "minecraft:obsidian",
+      "item": "minecraft:obsidian"
     },
     "W": {
       "item": "malum:warp_flux"
