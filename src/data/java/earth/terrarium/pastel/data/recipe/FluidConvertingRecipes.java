@@ -184,6 +184,7 @@ public class FluidConvertingRecipes {
 
         // This is a new recipe, but I saw that the enchanted star candy was named, well,
         // "enchanted star candy" and couldn't resist
+        /*
         pfx.generateRecipe(
                 "star_candy_disenchanting",
                 FluidConvertingRecipeBuilder.midnightSolution(
@@ -192,6 +193,8 @@ public class FluidConvertingRecipes {
                 )
                         .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_ENCHANTED_STAR_CANDY)
         );
+
+         */
 
         pfx.generateAutoNamedRecipe(
                 FluidConvertingRecipeBuilder.midnightSolution(
