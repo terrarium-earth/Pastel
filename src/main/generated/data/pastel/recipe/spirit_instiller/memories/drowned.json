@@ -1,0 +1,29 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "tag": "pastel:memory_bonding_agents"
+  },
+  "experience": 4.0,
+  "group": "memories",
+  "ingredient1": {
+    "item": "pastel:drowned_head"
+  },
+  "ingredient2": {
+    "item": "minecraft:water_bucket"
+  },
+  "required_advancement": "pastel:unlocks/blocks/memories",
+  "result": {
+    "components": {
+      "minecraft:entity_data": {
+        "id": "minecraft:drowned"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 16
+      }
+    },
+    "count": 1,
+    "id": "pastel:memory"
+  },
+  "time": 800
+}

@@ -1,0 +1,29 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "tag": "pastel:memory_bonding_agents"
+  },
+  "experience": 4.0,
+  "group": "memories",
+  "ingredient1": {
+    "item": "pastel:glow_squid_head"
+  },
+  "ingredient2": {
+    "item": "minecraft:water_bucket"
+  },
+  "required_advancement": "pastel:unlocks/blocks/memories",
+  "result": {
+    "components": {
+      "minecraft:entity_data": {
+        "id": "minecraft:glow_squid"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 8
+      }
+    },
+    "count": 1,
+    "id": "pastel:memory"
+  },
+  "time": 800
+}

@@ -1,0 +1,29 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "tag": "pastel:memory_bonding_agents"
+  },
+  "experience": 4.0,
+  "group": "memories",
+  "ingredient1": {
+    "item": "pastel:zombie_villager_head"
+  },
+  "ingredient2": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "required_advancement": "pastel:unlocks/blocks/memories",
+  "result": {
+    "components": {
+      "minecraft:entity_data": {
+        "id": "minecraft:zombie_villager"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 32
+      }
+    },
+    "count": 1,
+    "id": "pastel:memory"
+  },
+  "time": 800
+}

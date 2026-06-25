@@ -37,6 +37,8 @@ public class PastelItemTags {
 
     public static final TagKey<Item> ENCHANTABLE_BOOKS = of("enchantable_books");
 
+    public static final TagKey<Item> MEMORY_BONDING_AGENTS = of("memory_bonding_agents");
+
     public static final TagKey<Item> MEMORY_BONDING_AGENTS_CONCEALABLE = of("memory_bonding_agents_concealable");
 
     public static final TagKey<Item> INDESTRUCTIBLE_BLACKLISTED = of("indestructible_blacklisted");

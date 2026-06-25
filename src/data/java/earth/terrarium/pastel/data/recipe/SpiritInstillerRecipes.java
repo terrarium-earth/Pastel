@@ -1,23 +1,34 @@
 package earth.terrarium.pastel.data.recipe;
 
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
+import earth.terrarium.pastel.components.MemoryComponent;
 import earth.terrarium.pastel.data.recipe.builder.SpiritInstillerRecipeBuilder;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.HardcorePlayerRevivalRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.MemoryToHeadRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.*;
-import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItemTags;
-import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.FrogVariant;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
+
+import java.util.Locale;
 
 public class SpiritInstillerRecipes {
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
@@ -27,6 +38,7 @@ public class SpiritInstillerRecipes {
         spawner(pfx.subPrefix("spawner"));
         secret(pfx.subPrefix("secret"));
         headFusion(pfx.subPrefix("head_fusion"));
+        memories(pfx.subPrefix("memories"));
     }
 
     private static void secret(PrefixHelper pfx) {
@@ -293,6 +305,164 @@ public class SpiritInstillerRecipes {
         }
         public void generateHeadFusion(ItemLike head, SecondFusionIngredient second, ItemLike result) {
             generateHeadFusion(Ingredient.of(head), second, result);
+        }
+    }
+
+    private static void memories(PrefixHelper pfx) {
+        for (MemoryKind kind : MemoryKind.values()) {
+            var name = kind.name().toLowerCase(Locale.ROOT);
+            var patch =
+                    DataComponentPatch.builder()
+                        .set(DataComponents.ENTITY_DATA, CustomData.of(kind.extra))
+                        .set(PastelDataComponentTypes.MEMORY, new MemoryComponent.Builder(MemoryComponent.DEFAULT).ticksToManifest(kind.timeToManifest).build())
+                        .build();
+            pfx.generateRecipe(
+                    name,
+                    new SpiritInstillerRecipeBuilder(
+                            SizedIngredient.of(PastelItemTags.MEMORY_BONDING_AGENTS, 4),
+                            SizedIngredient.of(kind.head, 1),
+                            new SizedIngredient(kind.preferredItems,  1),
+                            new ItemStack(PastelBlocks.MEMORY.asItem().builtInRegistryHolder(), 1, patch)
+                    )
+                            .group("memories")
+                            .craftingTime(800)
+                            .experience(4.0f)
+                            // use memory via mobheads instead...?
+                            .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.MEMORIES)
+            );
+        }
+    }
+
+
+    private enum MemoryKind {
+        ALLAY(head(PastelSkullType.ALLAY), Ingredient.of(Items.AMETHYST_SHARD), 4, basic(EntityType.ALLAY)),
+        ARMADILLO(head(PastelSkullType.ARMADILLO), Ingredient.of(Items.SPIDER_EYE), 4, basic(EntityType.ARMADILLO)),
+        AXOLOTL_BLUE(head(PastelSkullType.AXOLOTL_BLUE), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(4)),
+        AXOLOTL_WILD(head(PastelSkullType.AXOLOTL_WILD), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(1)),
+        AXOLOTL_CYAN(head(PastelSkullType.AXOLOTL_CYAN), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(3)),
+        AXOLOTL_GOLD(head(PastelSkullType.AXOLOTL_GOLD), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(2)),
+        AXOLOTL_LEUCISTIC(head(PastelSkullType.AXOLOTL_LEUCISTIC), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(0)),
+        BAT(head(PastelSkullType.BAT), Ingredient.of(Items.GLOW_BERRIES), 8, basic(EntityType.BAT)),
+        BEE(head(PastelSkullType.BEE), Ingredient.of(Items.HONEYCOMB), 8, basic(EntityType.BEE)),
+        BLAZE(head(PastelSkullType.BLAZE), Ingredient.of(Items.BLAZE_ROD), 16, basic(EntityType.BLAZE)),
+        BOGGED(head(PastelSkullType.BOGGED), Ingredient.of(Tags.Items.MUSHROOMS), 16, basic(EntityType.BOGGED)),
+        BREEZE(head(PastelSkullType.BREEZE), Ingredient.of(Items.FEATHER), 16, basic(EntityType.BREEZE)),
+        CAMEL(head(PastelSkullType.CAMEL), Ingredient.of(Items.CACTUS), 8, basic(EntityType.CAMEL)),
+        CAT(head(PastelSkullType.CAT), Ingredient.of(Items.STRING), 4, basic(EntityType.CAT)),
+        CAVE_SPIDER(head(PastelSkullType.CAVE_SPIDER), Ingredient.of(Items.SPIDER_EYE), 16, basic(EntityType.CAVE_SPIDER)),
+        CHICKEN(head(PastelSkullType.CHICKEN), Ingredient.of(Items.WHEAT_SEEDS), 4, basic(EntityType.CHICKEN)),
+        COW(head(PastelSkullType.COW), Ingredient.of(Items.WHEAT), 4, basic(EntityType.COW)),
+        CREEPER(Items.CREEPER_HEAD, Ingredient.of(Items.GUNPOWDER), 16, basic(EntityType.CREEPER)),
+        DOLPHIN(head(PastelSkullType.DOLPHIN), Ingredient.of(ItemTags.FISHES), 4, basic(EntityType.DOLPHIN)),
+        DONKEY(head(PastelSkullType.DONKEY), Ingredient.of(Items.WHEAT), 4, basic(EntityType.DONKEY)),
+        DROWNED(head(PastelSkullType.DROWNED), Ingredient.of(Items.WATER_BUCKET), 16, basic(EntityType.DROWNED)),
+        // skip egg laying wooly pig as it has a seperate unlock...
+        // skip elder guardian
+        // skip ender dragon
+        ENDERMAN(head(PastelSkullType.ENDERMAN), Ingredient.of(Items.ENDER_PEARL), 16, basic(EntityType.ENDERMAN)),
+        ENDERMITE(head(PastelSkullType.ENDERMITE), Ingredient.of(Items.ENDER_PEARL), 16, basic(EntityType.ENDERMITE)),
+        ERASER(head(PastelSkullType.ERASER), Ingredient.of(Items.SPIDER_EYE), 16, basic(PastelEntityTypes.ERASER.get())),
+        EVOKER(head(PastelSkullType.EVOKER), Ingredient.of(Items.WATER_BUCKET), 16, basic(EntityType.EVOKER)),
+        FOX(head(PastelSkullType.FOX), Ingredient.of(ItemTags.FOX_FOOD), 8, fox("red")),
+        FOX_ARCTIC(head(PastelSkullType.FOX_ARCTIC), Ingredient.of(ItemTags.FOX_FOOD), 8, fox("snow")),
+        FROG_COLD(head(PastelSkullType.FROG_COLD), Ingredient.of(Items.SLIME_BALL), 4, frog(FrogVariant.COLD)),
+        FROG_TEMPERATE(head(PastelSkullType.FROG_TEMPERATE), Ingredient.of(Items.SLIME_BALL), 4, frog(FrogVariant.TEMPERATE)),
+        FROG_WARM(head(PastelSkullType.FROG_WARM), Ingredient.of(Items.SLIME_BALL), 4, frog(FrogVariant.WARM)),
+        GHAST(head(PastelSkullType.GHAST), Ingredient.of(Items.PHANTOM_MEMBRANE), 16, basic(EntityType.GHAST)),
+        GLOW_SQUID(head(PastelSkullType.GLOW_SQUID), Ingredient.of(Items.WATER_BUCKET), 8, basic(EntityType.GLOW_SQUID)),
+        GOAT(head(PastelSkullType.GOAT), Ingredient.of(Items.WHEAT), 8, basic(EntityType.GOAT)),
+        GUARDIAN(head(PastelSkullType.GUARDIAN), Ingredient.of(Items.PRISMARINE), 16, basic(EntityType.GUARDIAN)),
+        HOGLIN(head(PastelSkullType.HOGLIN), Ingredient.of(Items.CRIMSON_FUNGUS), 8, basic(EntityType.HOGLIN)),
+        HORSE(head(PastelSkullType.HORSE), Ingredient.of(Items.HAY_BLOCK), 4, basic(EntityType.HORSE)),
+        HUSK(head(PastelSkullType.HUSK), Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.HUSK)),
+        ILLUSIONER(head(PastelSkullType.ILLUSIONER), Ingredient.of(ItemTags.BANNERS), 16, basic(EntityType.ILLUSIONER)),
+        IRON_GOLEM(head(PastelSkullType.IRON_GOLEM), Ingredient.of(Items.IRON_BLOCK), 8, basic(EntityType.IRON_GOLEM)),
+        // kindling is also seperate...
+        // TODO Lizard
+        LLAMA(head(PastelSkullType.LLAMA), Ingredient.of(Items.HAY_BLOCK), 4, basic(EntityType.LLAMA)),
+        MAGMA_CUBE(head(PastelSkullType.MAGMA_CUBE), Ingredient.of(Items.MAGMA_CREAM), 16, basic(EntityType.MAGMA_CUBE)),
+        // TODO Mooshroom
+        MULE(head(PastelSkullType.MULE), Ingredient.of(Items.WHEAT), 4, basic(EntityType.MULE)),
+        OCELOT(head(PastelSkullType.OCELOT), Ingredient.of(Items.STRING), 4, basic(EntityType.OCELOT)),
+        PANDA(head(PastelSkullType.PANDA), Ingredient.of(Items.BAMBOO), 4, basic(EntityType.PANDA)),
+        // TODO parrots
+        PHANTOM(head(PastelSkullType.PHANTOM), Ingredient.of(Items.PHANTOM_MEMBRANE), 16, basic(EntityType.PHANTOM)),
+        PIG(head(PastelSkullType.PIG), Ingredient.of(Items.CARROT), 4, basic(EntityType.PIG)),
+        PIGLIN(Items.PIGLIN_HEAD, Ingredient.of(Items.GOLD_INGOT), 8, basic(EntityType.PIGLIN)),
+        PIGLIN_BRUTE(head(PastelSkullType.PIGLIN_BRUTE), Ingredient.of(Items.GOLD_BLOCK), 16, basic(EntityType.PIGLIN_BRUTE)),
+        PILLAGER(head(PastelSkullType.PILLAGER), Ingredient.of(Tags.Items.GEMS_EMERALD), 8, basic(EntityType.PILLAGER)),
+        POLAR_BEAR(head(PastelSkullType.POLAR_BEAR), Ingredient.of(ItemTags.FISHES), 8, basic(EntityType.POLAR_BEAR)),
+        PRESERVATION_TURRET(head(PastelSkullType.PRESERVATION_TURRET), Ingredient.of(PastelItems.MOONSTONE_SHARD), 16, basic(PastelEntityTypes.PRESERVATION_TURRET.get())),
+        PUFFERFISH(head(PastelSkullType.PUFFERFISH), Ingredient.of(Items.WATER_BUCKET), 4, basic(EntityType.PUFFERFISH)),
+        RABBIT(head(PastelSkullType.RABBIT), Ingredient.of(Items.CARROT), 4, basic(EntityType.RABBIT)),
+        RAVAGER(head(PastelSkullType.RAVAGER), Ingredient.of(ItemTags.BANNERS), 32, basic(EntityType.RAVAGER)),
+        SALMON(head(PastelSkullType.SALMON), Ingredient.of(Items.WATER_BUCKET), 4, basic(EntityType.SALMON)),
+        // SHEEP TODO (but it easy)
+        // TODO Shulkers
+        SILVERFISH(head(PastelSkullType.SILVERFISH), Ingredient.of(Items.STONE_BRICKS), 16, basic(EntityType.SILVERFISH)),
+        SKELETON(Items.SKELETON_SKULL, Ingredient.of(Items.BONE), 16, basic(EntityType.SKELETON)),
+        SKELETON_HORSE(head(PastelSkullType.SKELETON_HORSE), Ingredient.of(Items.HAY_BLOCK), 16, basic(EntityType.SKELETON_HORSE)),
+        SLIME(head(PastelSkullType.SLIME), Ingredient.of(Items.SLIME_BALL), 16, basic(EntityType.SLIME)),
+        // dont be sniffphobic
+        SNIFFER(head(PastelSkullType.SNIFFER), Ingredient.of(Items.TORCHFLOWER_SEEDS), 16, basic(EntityType.SNIFFER)),
+        SNOW_GOLEM(head(PastelSkullType.SNOW_GOLEM), Ingredient.of(Items.SNOWBALL), 8, basic(EntityType.SNOW_GOLEM)),
+        SPIDER(head(PastelSkullType.SPIDER), Ingredient.of(Items.SPIDER_EYE), 16, basic(EntityType.SPIDER)),
+        SQUID(head(PastelSkullType.SQUID), Ingredient.of(Items.WATER_BUCKET), 4, basic(EntityType.SQUID)),
+        STRAY(head(PastelSkullType.STRAY), Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.STRAY)),
+        STRIDER(head(PastelSkullType.STRIDER), Ingredient.of(Items.WARPED_FUNGUS), 8, basic(EntityType.STRIDER)),
+        TADPOLE(head(PastelSkullType.TADPOLE), Ingredient.of(Items.SLIME_BALL), 8, basic(EntityType.TADPOLE)),
+        TROPICAL_FISH(head(PastelSkullType.TROPICAL_FISH), Ingredient.of(Items.WATER_BUCKET), 8, basic(EntityType.TROPICAL_FISH)),
+        TURTLE(head(PastelSkullType.TURTLE), Ingredient.of(Items.SEAGRASS), 4, basic(EntityType.TURTLE)),
+        VEX(head(PastelSkullType.VEX), Ingredient.of(ItemTags.BANNERS), 16, basic(EntityType.VEX)),
+        VILLAGER(head(PastelSkullType.VILLAGER), Ingredient.of(Items.EMERALD), 32, basic(EntityType.VILLAGER)),
+        VINDICATOR(head(PastelSkullType.VINDICATOR), Ingredient.of(ItemTags.BANNERS), 16, basic(EntityType.VINDICATOR)),
+        WANDERING_TRADER(head(PastelSkullType.WANDERING_TRADER), Ingredient.of(Items.EMERALD), 4, basic(EntityType.WANDERING_TRADER)),
+        // skip warden in here
+        // skip wither
+        WITHER_SKELETON(Items.WITHER_SKELETON_SKULL, Ingredient.of(Items.COAL), 16, basic(EntityType.WITHER_SKELETON)),
+        WOLF(head(PastelSkullType.WOLF), Ingredient.of(Items.BONE), 8, basic(EntityType.WOLF)),
+        ZOGLIN(head(PastelSkullType.ZOGLIN), Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.ZOGLIN)),
+        ZOMBIE(Items.ZOMBIE_HEAD, Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.ZOMBIE)),
+        ZOMBIE_HORSE(head(PastelSkullType.ZOMBIE_HORSE), Ingredient.of(Items.HAY_BLOCK), 16, basic(EntityType.ZOMBIE_HORSE)),
+        ZOMBIE_VILLAGER(head(PastelSkullType.ZOMBIE_VILLAGER), Ingredient.of(Items.ROTTEN_FLESH), 32, basic(EntityType.ZOMBIE_VILLAGER)),
+        ZOMBIFIED_PIGLIN(head(PastelSkullType.ZOMBIFIED_PIGLIN), Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.ZOMBIFIED_PIGLIN))
+        ;
+
+        final Item head;
+        final Ingredient preferredItems;
+        final int timeToManifest;
+        final CompoundTag extra;
+
+        private MemoryKind(ItemLike head, Ingredient preferredItems, int timeToManifest, CompoundTag tag) {
+            this.head = head.asItem();
+            this.preferredItems = preferredItems;
+            this.timeToManifest = timeToManifest;
+            this.extra = tag;
+        }
+
+        private static CompoundTag basic(EntityType<?> kind) {
+            var id = EntityType.getKey(kind);
+            var tag = new CompoundTag();
+            tag.putString("id", id.toString());
+            return tag;
+        }
+        // ???
+        private static CompoundTag axolotl(int variant) {
+            var tag = basic(EntityType.AXOLOTL);
+            tag.putInt("Variant", variant);
+            return tag;
+        }
+
+        private static CompoundTag fox(String name) {
+            var tag = basic(EntityType.FOX);
+            tag.putString("Type", name);
+            return tag;
+        }
+
+        private static CompoundTag frog(ResourceKey<FrogVariant> variant) {
+            var tag = basic(EntityType.FROG);
+            tag.putString("variant", variant.location().toString());
+            return tag;
         }
     }
 
