@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.List;
 
@@ -59,9 +60,9 @@ public class BookSpiritInstillerCraftingPageRenderer
         renderTitle(drawContext, recipeY, second);
 
         // the ingredients
-        List<IngredientStack> ingredients = recipe.getIngredientStacks();
+        List<SizedIngredient> ingredients = recipe.getSizedIngredients();
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 3,
@@ -71,7 +72,7 @@ public class BookSpiritInstillerCraftingPageRenderer
                 ingredients.get(1)
             ); // left
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 23,
@@ -81,7 +82,7 @@ public class BookSpiritInstillerCraftingPageRenderer
                 ingredients.get(0)
             ); // center
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 44,

@@ -2,16 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "item": "pastel:vegetal"
+    "ingredient": {
+      "item": "pastel:vegetal"
+    }
   },
   "experience": 4.0,
   "group": "head_fusion",
   "ingredient1": {
-    "item": "pastel:horse_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:horse_head"
+    }
   },
   "ingredient2": {
     "count": 4,
-    "item": "pastel:storm_stone"
+    "ingredient": {
+      "item": "pastel:storm_stone"
+    }
   },
   "required_advancement": "pastel:unlocks/head_fusion/storm_stone_recipes",
   "result": {

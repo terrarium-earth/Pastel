@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "tag": "pastel:memory_bonding_agents"
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
   },
   "experience": 4.0,
   "group": "memories",
   "ingredient1": {
-    "item": "pastel:magma_cube_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:magma_cube_head"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:magma_cream"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:magma_cream"
+    }
   },
   "required_advancement": "pastel:unlocks/blocks/memories",
   "result": {

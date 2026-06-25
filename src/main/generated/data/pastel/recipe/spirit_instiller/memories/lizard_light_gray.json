@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "tag": "pastel:memory_bonding_agents"
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
   },
   "experience": 4.0,
   "group": "memories",
   "ingredient1": {
-    "item": "pastel:lizard_light_gray_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:lizard_light_gray_head"
+    }
   },
   "ingredient2": {
-    "tag": "c:foods/raw_meat"
+    "count": 1,
+    "ingredient": {
+      "tag": "c:foods/raw_meat"
+    }
   },
   "required_advancement": "pastel:unlocks/blocks/memories",
   "result": {

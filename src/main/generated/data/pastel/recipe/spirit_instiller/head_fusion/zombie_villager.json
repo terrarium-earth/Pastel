@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "item": "pastel:vegetal"
+    "ingredient": {
+      "item": "pastel:vegetal"
+    }
   },
   "experience": 4.0,
   "group": "head_fusion",
   "ingredient1": {
-    "item": "pastel:villager_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:villager_head"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:zombie_head"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:zombie_head"
+    }
   },
   "required_advancement": "pastel:unlocks/head_fusion/basic_recipes",
   "result": {

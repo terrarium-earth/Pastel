@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "tag": "pastel:memory_bonding_agents"
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
   },
   "experience": 4.0,
   "group": "memories",
   "ingredient1": {
-    "item": "pastel:hoglin_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:hoglin_head"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:crimson_fungus"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:crimson_fungus"
+    }
   },
   "required_advancement": "pastel:unlocks/blocks/memories",
   "result": {

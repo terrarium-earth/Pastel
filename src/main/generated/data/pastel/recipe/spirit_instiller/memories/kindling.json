@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "tag": "pastel:memory_bonding_agents"
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
   },
   "experience": 4.0,
   "group": "memories",
   "ingredient1": {
-    "item": "pastel:kindling_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:kindling_head"
+    }
   },
   "ingredient2": {
-    "tag": "pastel:kindling_food"
+    "count": 1,
+    "ingredient": {
+      "tag": "pastel:kindling_food"
+    }
   },
   "required_advancement": "pastel:unlocks/blocks/kindling_memory",
   "result": {

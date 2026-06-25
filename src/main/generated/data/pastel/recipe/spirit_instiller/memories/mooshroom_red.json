@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "tag": "pastel:memory_bonding_agents"
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
   },
   "experience": 4.0,
   "group": "memories",
   "ingredient1": {
-    "item": "pastel:mooshroom_red_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:mooshroom_red_head"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:red_mushroom"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:red_mushroom"
+    }
   },
   "required_advancement": "pastel:unlocks/blocks/memories",
   "result": {

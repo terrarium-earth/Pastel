@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "tag": "pastel:memory_bonding_agents"
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
   },
   "experience": 4.0,
   "group": "memories",
   "ingredient1": {
-    "item": "pastel:dolphin_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:dolphin_head"
+    }
   },
   "ingredient2": {
-    "tag": "minecraft:fishes"
+    "count": 1,
+    "ingredient": {
+      "tag": "minecraft:fishes"
+    }
   },
   "required_advancement": "pastel:unlocks/blocks/memories",
   "result": {

@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "tag": "pastel:memory_bonding_agents"
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
   },
   "experience": 4.0,
   "group": "memories",
   "ingredient1": {
-    "item": "minecraft:wither_skeleton_skull"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:wither_skeleton_skull"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:coal"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:coal"
+    }
   },
   "required_advancement": "pastel:unlocks/blocks/memories",
   "result": {

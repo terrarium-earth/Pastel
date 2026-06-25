@@ -20,21 +20,22 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.Optional;
 
 public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 
     public SpawnerChangeRecipe(
-        IngredientStack ingredient,
-        IngredientStack ingredient2,
+        SizedIngredient ingredient,
+        SizedIngredient ingredient2,
         Optional<ResourceLocation> requiredAdvancementIdentifier
     ) {
         super(
             "spawner_manipulation",
             false,
             requiredAdvancementIdentifier,
-            IngredientStack.ofItems(Items.SPAWNER),
+            SizedIngredient.of(Items.SPAWNER, 1),
             ingredient,
             ingredient2,
             Items.SPAWNER.getDefaultInstance(),
@@ -44,14 +45,14 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
         );
     }
 
-    public SpawnerChangeRecipe(IngredientStack ingredient) {
+    public SpawnerChangeRecipe(SizedIngredient ingredient) {
         super(
             "spawner_manipulation",
             false,
             Optional.of(PastelAdvancements.Milestones.UNLOCK_SPAWNER_MANIPULATION),
-            IngredientStack.ofItems(Items.SPAWNER),
+            SizedIngredient.of(Items.SPAWNER, 1),
             ingredient,
-            IngredientStack.ofItems(PastelItems.VEGETAL.get(), 4),
+            SizedIngredient.of(PastelItems.VEGETAL.get(), 4),
             Items.SPAWNER.getDefaultInstance(),
             200,
             0,

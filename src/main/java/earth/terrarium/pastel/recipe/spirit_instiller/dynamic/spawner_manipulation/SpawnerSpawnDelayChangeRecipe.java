@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 public class SpawnerSpawnDelayChangeRecipe extends SpawnerChangeRecipe {
 
@@ -23,7 +24,7 @@ public class SpawnerSpawnDelayChangeRecipe extends SpawnerChangeRecipe {
     protected static final float EXPONENT = 0.98F;
 
     public SpawnerSpawnDelayChangeRecipe() {
-        super(IngredientStack.ofItems(PastelItems.MIDNIGHT_CHIP.get(), 4));
+        super(SizedIngredient.of(PastelItems.MIDNIGHT_CHIP.get(), 4));
     }
 
     @Override

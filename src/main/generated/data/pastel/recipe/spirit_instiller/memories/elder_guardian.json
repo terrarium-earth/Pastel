@@ -2,15 +2,23 @@
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
     "count": 4,
-    "tag": "pastel:memory_bonding_agents"
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
   },
   "experience": 4.0,
   "group": "boss_memories",
   "ingredient1": {
-    "item": "pastel:elder_guardian_head"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:elder_guardian_head"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:prismarine"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:prismarine"
+    }
   },
   "required_advancement": "pastel:milestones/unlock_remembering_boss_memories",
   "result": {

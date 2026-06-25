@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Rotation;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -50,6 +51,29 @@ public class ModonomiconHelper {
             int mouseX,
             int mouseY,
             Ingredient ingredient
+    ) {
+        var stacks = ingredient.getItems();
+        if (stacks.length > 0) {
+            parentScreen
+                    .renderItemStack(
+                            drawContext,
+                            x,
+                            y,
+                            mouseX,
+                            mouseY,
+                            stacks[parentScreen.getTicksInBook() / 20 % stacks.length]
+                    );
+        }
+    }
+
+    public static void renderSizedIngredient(
+            GuiGraphics drawContext,
+            BookEntryScreen parentScreen,
+            int x,
+            int y,
+            int mouseX,
+            int mouseY,
+            SizedIngredient ingredient
     ) {
         var stacks = ingredient.getItems();
         if (stacks.length > 0) {

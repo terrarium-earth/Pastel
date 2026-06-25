@@ -15,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.Optional;
 
@@ -22,8 +23,8 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 
     public SpawnerCreatureChangeRecipe() {
         super(
-            IngredientStack.ofTag(PastelItemTags.SKULLS),
-            IngredientStack.ofItems(PastelItems.DOWNSTONE_FRAGMENTS.get(), 4),
+            SizedIngredient.of(PastelItemTags.SKULLS, 1),
+            SizedIngredient.of(PastelItems.DOWNSTONE_FRAGMENTS.get(), 4),
             Optional.of(PastelAdvancements.Milestones.UNLOCK_SPAWNER_CREATURE_CHANGE)
         );
     }

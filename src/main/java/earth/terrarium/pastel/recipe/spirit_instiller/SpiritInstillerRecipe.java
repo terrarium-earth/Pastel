@@ -12,6 +12,7 @@ import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.progression.PastelCriteria;
+import earth.terrarium.pastel.recipe.GatedSizedPastelRecipe;
 import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -31,11 +32,12 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.List;
 import java.util.Optional;
 
-public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipeInput<SpiritInstillerBlockEntity>> {
+public class SpiritInstillerRecipe extends GatedSizedPastelRecipe<InstanceRecipeInput<SpiritInstillerBlockEntity>> {
 
     public static final int CENTER = 0;
 
@@ -48,11 +50,11 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
             "midgame/build_spirit_instiller_structure"
         );
 
-    protected final IngredientStack centerIngredient;
+    protected final SizedIngredient centerIngredient;
 
-    protected final IngredientStack bowlIngredient1;
+    protected final SizedIngredient bowlIngredient1;
 
-    protected final IngredientStack bowlIngredient2;
+    protected final SizedIngredient bowlIngredient2;
 
     protected final ItemStack output;
 
@@ -66,9 +68,9 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
         String group,
         boolean secret,
         Optional<ResourceLocation> requiredAdvancementIdentifier,
-        IngredientStack centerIngredient,
-        IngredientStack bowlIngredient1,
-        IngredientStack bowlIngredient2,
+        SizedIngredient centerIngredient,
+        SizedIngredient bowlIngredient1,
+        SizedIngredient bowlIngredient2,
         ItemStack output,
         int craftingTime,
         float experience,
@@ -90,7 +92,7 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 
     @Override
     public boolean matches(InstanceRecipeInput input, Level world) {
-        List<IngredientStack> ing = getIngredientStacks();
+        List<SizedIngredient> ing = getSizedIngredients();
 
         if (bowlMatches(input) && ing
             .getFirst()
@@ -101,7 +103,7 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
     }
 
     protected boolean bowlMatches(InstanceRecipeInput<?> input) {
-        var ing = getIngredientStacks();
+        var ing = getSizedIngredients();
         if (ing
             .get(FIRST)
             .test(input.getItem(FIRST)) && ing
@@ -127,8 +129,8 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
     }
 
     @Override
-    public NonNullList<IngredientStack> getIngredientStacks() {
-        NonNullList<IngredientStack> defaultedList = NonNullList.create();
+    public NonNullList<SizedIngredient> getSizedIngredients() {
+        NonNullList<SizedIngredient> defaultedList = NonNullList.create();
         defaultedList.add(this.centerIngredient);
         defaultedList.add(this.bowlIngredient1);
         defaultedList.add(this.bowlIngredient2);
@@ -275,13 +277,13 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        IngredientStack.CODEC
+                        SizedIngredient.NESTED_CODEC
                             .fieldOf("center_ingredient")
                             .forGetter(recipe -> recipe.centerIngredient),
-                        IngredientStack.CODEC
+                        SizedIngredient.NESTED_CODEC
                             .fieldOf("ingredient1")
                             .forGetter(recipe -> recipe.bowlIngredient1),
-                        IngredientStack.CODEC
+                        SizedIngredient.NESTED_CODEC
                             .fieldOf("ingredient2")
                             .forGetter(recipe -> recipe.bowlIngredient2),
                         ItemStack.STRICT_CODEC
@@ -311,11 +313,11 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
                 c -> c.secret,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
                 c -> c.requiredAdvancementIdentifier,
-                IngredientStack.STREAM_CODEC,
+                SizedIngredient.STREAM_CODEC,
                 c -> c.centerIngredient,
-                IngredientStack.STREAM_CODEC,
+                SizedIngredient.STREAM_CODEC,
                 c -> c.bowlIngredient1,
-                IngredientStack.STREAM_CODEC,
+                SizedIngredient.STREAM_CODEC,
                 c -> c.bowlIngredient2,
                 ItemStack.STREAM_CODEC,
                 c -> c.output,

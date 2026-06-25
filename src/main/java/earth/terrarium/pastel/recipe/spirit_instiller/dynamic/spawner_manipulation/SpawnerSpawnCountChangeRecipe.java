@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
     protected static final int DEFAULT_SPAWN_COUNT = 4;
@@ -16,7 +17,7 @@ public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
     protected static final int MAX_SPAWN_COUNT = 16;
 
     public SpawnerSpawnCountChangeRecipe() {
-        super(IngredientStack.ofItems(PastelItems.NEOLITH.get(), 4));
+        super(SizedIngredient.of(PastelItems.NEOLITH.get(), 4));
     }
 
     @Override

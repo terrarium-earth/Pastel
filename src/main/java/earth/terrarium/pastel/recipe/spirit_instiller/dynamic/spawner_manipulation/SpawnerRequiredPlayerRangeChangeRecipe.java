@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe {
     protected static final int DEFAULT_DETECTION_RANGE = 16;
@@ -16,7 +17,7 @@ public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe 
     protected static final int MAX_DETECTION_RANGE = 64;
 
     public SpawnerRequiredPlayerRangeChangeRecipe() {
-        super(IngredientStack.ofItems(PastelItems.STRATINE_GEM.get(), 4));
+        super(SizedIngredient.of(PastelItems.STRATINE_GEM.get(), 4));
     }
 
     @Override

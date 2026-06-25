@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
     protected static final int DEFAULT_MAX_ENTITIES = 6;
@@ -16,7 +17,7 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
     protected static final int MAX_MAX_ENTITIES = 40;
 
     public SpawnerMaxNearbyEntitiesChangeRecipe() {
-        super(IngredientStack.ofItems(PastelItems.MERMAIDS_GEM.get(), 4));
+        super(SizedIngredient.of(PastelItems.MERMAIDS_GEM.get(), 4));
     }
 
     @Override

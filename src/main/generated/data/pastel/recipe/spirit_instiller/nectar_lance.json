@@ -1,14 +1,23 @@
 {
   "type": "pastel:spirit_instiller",
   "center_ingredient": {
-    "item": "pastel:knotted_sword"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:knotted_sword"
+    }
   },
   "experience": 16.0,
   "ingredient1": {
-    "item": "pastel:evernectar"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:evernectar"
+    }
   },
   "ingredient2": {
-    "item": "pastel:aether_vestiges"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:aether_vestiges"
+    }
   },
   "required_advancement": "pastel:unlocks/equipment/nectar_lance",
   "result": {
