@@ -1,0 +1,29 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "tag": "pastel:memory_bonding_agents"
+  },
+  "experience": 4.0,
+  "group": "boss_memories",
+  "ingredient1": {
+    "item": "pastel:warden_head"
+  },
+  "ingredient2": {
+    "item": "minecraft:sculk_catalyst"
+  },
+  "required_advancement": "pastel:milestones/unlock_remembering_boss_memories",
+  "result": {
+    "components": {
+      "minecraft:entity_data": {
+        "id": "minecraft:warden"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 64
+      }
+    },
+    "count": 1,
+    "id": "pastel:memory"
+  },
+  "time": 800
+}
