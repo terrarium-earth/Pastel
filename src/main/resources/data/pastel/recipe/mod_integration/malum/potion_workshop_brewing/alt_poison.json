@@ -5,7 +5,10 @@
     "count": 1,
     "ingredient": {"item": "minecraft:nether_wart"}
   },
-  "ingredient2": "malum:rotting_essence",
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {"item": "malum:rotting_essence"}
+  },
   "effect": "minecraft:poison",
   "base_duration_ticks": 900,
   "potency_modifier": 1.0,
