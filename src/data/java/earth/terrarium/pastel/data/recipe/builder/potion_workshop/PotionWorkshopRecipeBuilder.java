@@ -13,8 +13,7 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("unchecked")
 public abstract class PotionWorkshopRecipeBuilder<C extends PotionWorkshopRecipeBuilder<C>> extends GatedRecipeBuilder<C> {
-    protected int color = 0;
-    protected int craftingTime = 200;
+
 
     @Nullable
     protected SizedIngredient ingredient1 = null;
@@ -89,13 +88,7 @@ public abstract class PotionWorkshopRecipeBuilder<C extends PotionWorkshopRecipe
         return ingredient3(SizedIngredient.of(tag, count));
     }
 
-    public C craftingTime(int craftingTime) {
-        this.craftingTime = craftingTime;
-        return (C)this;
-    }
 
-    public C color(int color) {
-        this.color = color;
-        return (C)this;
-    }
+
+
 }

@@ -1,0 +1,15 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "applicable_to_potion_fillabes": false,
+  "base_duration_ticks": 0,
+  "effect": "minecraft:instant_health",
+  "group": "vanilla_potions",
+  "ingredient1": {
+    "item": "minecraft:nether_wart"
+  },
+  "ingredient2": {
+    "item": "minecraft:glistering_melon_slice"
+  },
+  "ink_color": "pastel:lime",
+  "ink_cost": 16
+}

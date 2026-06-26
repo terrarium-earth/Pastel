@@ -1,0 +1,18 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 1800,
+  "base_yield": 1.0,
+  "effect": "minecraft:resistance",
+  "group": "resistance_potions",
+  "ingredient1": {
+    "item": "minecraft:nether_wart"
+  },
+  "ingredient2": {
+    "item": "pastel:moonstone_shard"
+  },
+  "ink_color": "pastel:blue",
+  "ink_cost": 8,
+  "potency_hard_cap": 3,
+  "potency_modifier": 0.25,
+  "required_advancement": "pastel:unlocks/potions/resistance"
+}

@@ -1,0 +1,14 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 3600,
+  "effect": "minecraft:jump_boost",
+  "group": "vanilla_potions",
+  "ingredient1": {
+    "item": "minecraft:nether_wart"
+  },
+  "ingredient2": {
+    "item": "minecraft:rabbit_foot"
+  },
+  "ink_color": "pastel:yellow",
+  "ink_cost": 2
+}

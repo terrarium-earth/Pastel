@@ -1,0 +1,17 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 300,
+  "base_yield": 2.0,
+  "effect": "minecraft:regeneration",
+  "group": "vanilla_potions",
+  "ingredient1": {
+    "item": "minecraft:nether_wart"
+  },
+  "ingredient2": {
+    "item": "pastel:milky_resin"
+  },
+  "ink_color": "pastel:pink",
+  "ink_cost": 16,
+  "potency_modifier": 2.0,
+  "required_advancement": "pastel:hidden/collect_milky_resin"
+}

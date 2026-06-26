@@ -115,6 +115,7 @@ public class PastelRecipeProvider extends RecipeProvider {
         SpiritInstillerRecipes.generate(recipeOutput, lookup);
         PotionWorkshopReactingRecipes.generate(recipeOutput, lookup);
         PotionWorkshopCraftingRecipes.generate(recipeOutput, lookup);
+        PotionWorkshopBrewingRecipes.generate(recipeOutput, lookup);
     }
 
 

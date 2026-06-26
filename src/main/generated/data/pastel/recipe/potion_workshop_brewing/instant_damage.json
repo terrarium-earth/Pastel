@@ -1,0 +1,20 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "applicable_to_potion_fillabes": false,
+  "base_duration_ticks": 0,
+  "effect": "minecraft:instant_damage",
+  "group": "vanilla_potions",
+  "ingredient1": {
+    "item": "minecraft:nether_wart"
+  },
+  "ingredient2": {
+    "item": "minecraft:spider_eye"
+  },
+  "ingredient3": {
+    "item": "minecraft:fermented_spider_eye"
+  },
+  "ink_color": "pastel:black",
+  "ink_cost": 16,
+  "potency_hard_cap": 4,
+  "potency_modifier": 0.5
+}

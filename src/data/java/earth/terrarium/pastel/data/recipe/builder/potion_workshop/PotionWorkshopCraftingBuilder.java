@@ -14,6 +14,8 @@ public final class PotionWorkshopCraftingBuilder extends PotionWorkshopRecipeBui
     private final SizedIngredient baseIngredient;
     private boolean consumeBaseIngredient = true;
     private int requiredExperience = 0;
+    private int color = 0;
+    private int craftingTime = 200;
 
     public PotionWorkshopCraftingBuilder(
             SizedIngredient baseIngredient,
@@ -59,5 +61,15 @@ public final class PotionWorkshopCraftingBuilder extends PotionWorkshopRecipeBui
                         this.result
                 );
         saveHelper(recipeOutput, id, recipe);
+    }
+
+    public PotionWorkshopCraftingBuilder color(int color) {
+        this.color = color;
+        return this;
+    }
+
+    public PotionWorkshopCraftingBuilder craftingTime(int craftingTime) {
+        this.craftingTime = craftingTime;
+        return this;
     }
 }

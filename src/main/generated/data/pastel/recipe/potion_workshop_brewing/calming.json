@@ -1,0 +1,19 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 3600,
+  "effect": "pastel:calming",
+  "group": "sleep_potions",
+  "ingredient1": {
+    "item": "pastel:nightdew_sprout"
+  },
+  "ingredient2": {
+    "item": "pastel:moonstruck_nectar"
+  },
+  "ingredient3": {
+    "item": "pastel:frostbite_essence"
+  },
+  "ink_color": "pastel:purple",
+  "ink_cost": 4,
+  "potency_modifier": 1.5,
+  "required_advancement": "pastel:unlocks/potions/weak_sleep_effects"
+}

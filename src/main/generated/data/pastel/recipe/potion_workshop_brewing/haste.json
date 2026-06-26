@@ -1,0 +1,14 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 3600,
+  "effect": "minecraft:haste",
+  "ingredient1": {
+    "item": "minecraft:nether_wart"
+  },
+  "ingredient2": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "ink_color": "pastel:magenta",
+  "ink_cost": 4,
+  "required_advancement": "pastel:midgame/brew_potion_in_potion_workshop"
+}

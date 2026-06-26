@@ -1,0 +1,14 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 200,
+  "effect": "minecraft:levitation",
+  "ingredient1": {
+    "item": "minecraft:nether_wart"
+  },
+  "ingredient2": {
+    "item": "pastel:paltaeria_fragments"
+  },
+  "ink_color": "pastel:brown",
+  "ink_cost": 8,
+  "required_advancement": "pastel:unlocks/potions/levitation"
+}
