@@ -1,0 +1,17 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "item": "minecraft:bucket"
+  },
+  "color": 4268288,
+  "ingredient1": {
+    "item": "minecraft:dirt"
+  },
+  "ingredient2": {
+    "item": "minecraft:mud"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:humus_bucket"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "item": "minecraft:bucket"
+  },
+  "color": 14907183,
+  "ingredient1": {
+    "item": "pastel:light_gray_pigment"
+  },
+  "ingredient2": {
+    "item": "pastel:gray_pigment"
+  },
+  "ingredient3": {
+    "item": "pastel:bone_ash"
+  },
+  "required_advancement": "pastel:unlocks/blocks/dragonrot_bucket",
+  "result": {
+    "count": 1,
+    "id": "pastel:dragonrot_bucket"
+  }
+}

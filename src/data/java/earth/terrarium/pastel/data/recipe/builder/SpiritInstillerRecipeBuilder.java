@@ -41,9 +41,7 @@ public final class SpiritInstillerRecipeBuilder extends GatedRecipeBuilder<Spiri
         return this;
     }
 
-    private static IngredientStack stackFromSize(SizedIngredient ing) {
-        return new IngredientStack(ing.ingredient(), ing.count());
-    }
+
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {

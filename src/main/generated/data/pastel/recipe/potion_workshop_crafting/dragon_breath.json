@@ -1,0 +1,23 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "count": 3,
+    "item": "minecraft:glass_bottle"
+  },
+  "color": 13333666,
+  "ingredient1": {
+    "item": "pastel:knowledge_gem"
+  },
+  "ingredient2": {
+    "item": "minecraft:popped_chorus_fruit"
+  },
+  "ingredient3": {
+    "item": "pastel:raw_bloodstone"
+  },
+  "required_advancement": "pastel:unlocks/items/dragon_breath",
+  "required_experience": 300,
+  "result": {
+    "count": 3,
+    "id": "minecraft:dragon_breath"
+  }
+}

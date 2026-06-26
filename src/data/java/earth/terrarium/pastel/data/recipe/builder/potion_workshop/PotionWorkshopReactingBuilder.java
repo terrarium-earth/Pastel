@@ -297,6 +297,7 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
                             this.baseDurationTicks,
                             // unused in reacting?
                             3.0f,
+                            // also unused in reacting?
                             this.potencyHardCap,
                             this.potencyMod,
                             this.effect,

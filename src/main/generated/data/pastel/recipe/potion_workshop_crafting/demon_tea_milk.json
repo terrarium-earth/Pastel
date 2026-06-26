@@ -1,0 +1,21 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "item": "minecraft:glass_bottle"
+  },
+  "color": 10027008,
+  "ingredient1": {
+    "item": "pastel:jade_petals"
+  },
+  "ingredient2": {
+    "item": "pastel:bloodboil_syrup"
+  },
+  "required_advancement": "pastel:unlocks/food/demon_tea",
+  "result": {
+    "components": {
+      "pastel:with_milk": {}
+    },
+    "count": 1,
+    "id": "pastel:demon_tea"
+  }
+}

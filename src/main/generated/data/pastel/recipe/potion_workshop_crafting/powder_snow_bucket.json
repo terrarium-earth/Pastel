@@ -1,0 +1,17 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "item": "minecraft:bucket"
+  },
+  "color": 14217456,
+  "ingredient1": {
+    "item": "minecraft:snow_block"
+  },
+  "ingredient2": {
+    "item": "pastel:cyan_pigment"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:powder_snow_bucket"
+  }
+}
