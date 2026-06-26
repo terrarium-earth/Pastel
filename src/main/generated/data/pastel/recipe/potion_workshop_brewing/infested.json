@@ -4,10 +4,16 @@
   "effect": "minecraft:infested",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:stone"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:stone"
+    }
   },
   "ink_color": "pastel:lime",
   "ink_cost": 16,

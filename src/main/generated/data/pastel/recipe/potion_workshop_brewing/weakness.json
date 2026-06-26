@@ -4,10 +4,16 @@
   "effect": "minecraft:weakness",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:fermented_spider_eye"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:fermented_spider_eye"
+    }
   },
   "ink_color": "pastel:red",
   "ink_cost": 4

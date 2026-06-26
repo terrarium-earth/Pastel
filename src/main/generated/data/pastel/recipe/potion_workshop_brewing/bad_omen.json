@@ -5,13 +5,22 @@
   "base_yield": 1.0,
   "effect": "minecraft:bad_omen",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "pastel:bloodboil_syrup"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:bloodboil_syrup"
+    }
   },
   "ingredient3": {
-    "item": "pastel:midnight_aberration"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:midnight_aberration"
+    }
   },
   "ink_color": "pastel:black",
   "ink_cost": 64,

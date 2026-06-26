@@ -11,6 +11,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.List;
 
@@ -52,9 +53,9 @@ public class BookPotionWorkshopPageRenderer<T extends PotionWorkshopRecipe>
         renderTitle(drawContext, recipeY, second);
 
         // the ingredients
-        List<IngredientStack> ingredients = recipe.getIngredientStacks();
+        List<SizedIngredient> ingredients = recipe.getSizedIngredients();
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 20,
@@ -64,7 +65,7 @@ public class BookPotionWorkshopPageRenderer<T extends PotionWorkshopRecipe>
                 ingredients.get(0)
             );
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 58,
@@ -74,7 +75,7 @@ public class BookPotionWorkshopPageRenderer<T extends PotionWorkshopRecipe>
                 ingredients.get(1)
             );
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 20,
@@ -84,7 +85,7 @@ public class BookPotionWorkshopPageRenderer<T extends PotionWorkshopRecipe>
                 ingredients.get(2)
             );
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 3,
@@ -94,7 +95,7 @@ public class BookPotionWorkshopPageRenderer<T extends PotionWorkshopRecipe>
                 ingredients.get(3)
             );
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 37,

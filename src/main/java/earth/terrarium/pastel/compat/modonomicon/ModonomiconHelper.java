@@ -73,8 +73,11 @@ public class ModonomiconHelper {
             int y,
             int mouseX,
             int mouseY,
-            SizedIngredient ingredient
+            @Nullable SizedIngredient ingredient
     ) {
+        if (ingredient == null) {
+            return;
+        }
         var stacks = ingredient.getItems();
         if (stacks.length > 0) {
             parentScreen

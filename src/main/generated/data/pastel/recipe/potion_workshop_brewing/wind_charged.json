@@ -4,10 +4,16 @@
   "effect": "minecraft:wind_charged",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:breeze_rod"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:breeze_rod"
+    }
   },
   "ink_color": "pastel:yellow",
   "ink_cost": 8,

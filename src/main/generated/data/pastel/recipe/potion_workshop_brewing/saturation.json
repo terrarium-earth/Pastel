@@ -3,10 +3,16 @@
   "base_duration_ticks": 900,
   "effect": "pastel:nourishing",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "pastel:citrine_shard"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:citrine_shard"
+    }
   },
   "ink_color": "pastel:lime",
   "ink_cost": 8,

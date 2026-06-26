@@ -5,13 +5,22 @@
   "effect": "pastel:immunity",
   "group": "sleep_potions",
   "ingredient1": {
-    "item": "pastel:nectardew_burgeon"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:nectardew_burgeon"
+    }
   },
   "ingredient2": {
-    "item": "pastel:moonstruck_nectar"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:moonstruck_nectar"
+    }
   },
   "ingredient3": {
-    "item": "pastel:jade_jelly"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:jade_jelly"
+    }
   },
   "ink_color": "pastel:pink",
   "ink_cost": 64,

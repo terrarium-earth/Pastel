@@ -5,10 +5,16 @@
   "effect": "minecraft:regeneration",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "pastel:milky_resin"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:milky_resin"
+    }
   },
   "ink_color": "pastel:pink",
   "ink_cost": 16,

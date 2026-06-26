@@ -4,10 +4,16 @@
   "effect": "minecraft:night_vision",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:golden_carrot"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:golden_carrot"
+    }
   },
   "ink_color": "pastel:yellow",
   "ink_cost": 4,

@@ -4,10 +4,16 @@
   "effect": "minecraft:strength",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:blaze_powder"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:blaze_powder"
+    }
   },
   "ink_color": "pastel:red",
   "ink_cost": 4

@@ -4,10 +4,16 @@
   "effect": "minecraft:fire_resistance",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:magma_cream"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:magma_cream"
+    }
   },
   "ink_color": "pastel:orange",
   "ink_cost": 4,

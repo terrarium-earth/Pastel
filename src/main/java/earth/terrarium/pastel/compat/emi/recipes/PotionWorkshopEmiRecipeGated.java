@@ -9,6 +9,9 @@ import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
+
+import java.util.Arrays;
 
 public class PotionWorkshopEmiRecipeGated extends GatedSpectrumEmiRecipe<PotionWorkshopRecipe> {
     private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon
@@ -20,16 +23,11 @@ public class PotionWorkshopEmiRecipeGated extends GatedSpectrumEmiRecipe<PotionW
         super(category, recipe, 112, 66);
 
         this.inputs = recipe
-            .getIngredientStacks()
+            .getSizedIngredients()
             .stream()
             .map(
-                s -> EmiIngredient
-                    .of(
-                        s
-                            .getItems()
-                            .map(EmiStack::of)
-                            .toList()
-                    )
+                s ->
+                s == null ? EmiIngredient.of(Ingredient.EMPTY) : EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())
             )
             .toList();
     }

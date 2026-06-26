@@ -3,13 +3,22 @@
   "base_duration_ticks": 900,
   "effect": "minecraft:hunger",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "pastel:citrine_shard"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:citrine_shard"
+    }
   },
   "ingredient3": {
-    "item": "minecraft:fermented_spider_eye"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:fermented_spider_eye"
+    }
   },
   "ink_color": "pastel:lime",
   "ink_cost": 2,

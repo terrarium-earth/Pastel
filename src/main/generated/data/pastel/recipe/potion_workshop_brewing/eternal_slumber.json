@@ -6,13 +6,22 @@
   "effect": "pastel:eternal_slumber",
   "group": "sleep_potions",
   "ingredient1": {
-    "item": "pastel:nectardew_burgeon"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:nectardew_burgeon"
+    }
   },
   "ingredient2": {
-    "item": "pastel:jadeite_petals"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:jadeite_petals"
+    }
   },
   "ingredient3": {
-    "item": "pastel:resplendent_feather"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:resplendent_feather"
+    }
   },
   "ink_color": "pastel:purple",
   "ink_cost": 32,

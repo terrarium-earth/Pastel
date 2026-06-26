@@ -4,10 +4,16 @@
   "base_duration_ticks": 1800,
   "effect": "minecraft:absorption",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "pastel:onyx_shard"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:onyx_shard"
+    }
   },
   "ink_color": "pastel:blue",
   "ink_cost": 4,

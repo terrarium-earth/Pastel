@@ -3,10 +3,16 @@
   "base_duration_ticks": 1200,
   "effect": "pastel:toughness",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "pastel:glass_peach"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:glass_peach"
+    }
   },
   "ink_color": "pastel:pink",
   "ink_cost": 8,

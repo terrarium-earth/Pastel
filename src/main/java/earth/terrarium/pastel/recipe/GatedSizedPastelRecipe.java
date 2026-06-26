@@ -1,13 +1,11 @@
 package earth.terrarium.pastel.recipe;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeInput;
-import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +24,7 @@ public abstract class GatedSizedPastelRecipe<C extends RecipeInput> extends Gate
         super(group, secret, requiredAdvancementIdentifier);
     }
 
-    public abstract NonNullList<SizedIngredient> getSizedIngredients();
+    public abstract List<SizedIngredient> getSizedIngredients();
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {

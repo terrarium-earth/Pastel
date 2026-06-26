@@ -5,10 +5,16 @@
   "effect": "minecraft:instant_health",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:glistering_melon_slice"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glistering_melon_slice"
+    }
   },
   "ink_color": "pastel:lime",
   "ink_cost": 16

@@ -11,7 +11,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
-import javax.annotation.Nullable;
+import java.util.Optional;
 
 public final class PotionWorkshopBrewingBuilder extends PotionWorkshopRecipeBuilder<PotionWorkshopBrewingBuilder> {
     boolean applicableToPotions = true;
@@ -35,14 +35,6 @@ public final class PotionWorkshopBrewingBuilder extends PotionWorkshopRecipeBuil
         this.statusEffect = statusEffect;
         this.inkColor = inkColor;
         this.inkCost = inkCost;
-    }
-
-    private static IngredientStack stackFromSize(@Nullable SizedIngredient ing) {
-        if (ing == null) {
-            return IngredientStack.EMPTY;
-        } else {
-            return new IngredientStack(ing.ingredient(), ing.count());
-        }
     }
 
     public PotionWorkshopBrewingBuilder notApplicableToPotions() {
@@ -111,9 +103,9 @@ public final class PotionWorkshopBrewingBuilder extends PotionWorkshopRecipeBuil
                 this.getRequiredAdvancement(),
                 // nothing overrides the crafting time?
                 200,
-                stackFromSize(this.ingredient1),
-                stackFromSize(this.ingredient2),
-                stackFromSize(this.ingredient3),
+                this.ingredient1,
+                Optional.ofNullable(this.ingredient2),
+                Optional.ofNullable(this.ingredient3),
                 effect
         );
 

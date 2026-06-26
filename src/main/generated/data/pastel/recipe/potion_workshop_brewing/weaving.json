@@ -4,10 +4,16 @@
   "effect": "minecraft:weaving",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:cobweb"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:cobweb"
+    }
   },
   "ink_color": "pastel:blue",
   "ink_cost": 8,

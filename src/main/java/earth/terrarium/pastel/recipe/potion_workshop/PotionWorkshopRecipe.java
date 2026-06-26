@@ -3,6 +3,7 @@ package earth.terrarium.pastel.recipe.potion_workshop;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
+import earth.terrarium.pastel.recipe.GatedSizedPastelRecipe;
 import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<RecipeInput> {
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+public abstract class PotionWorkshopRecipe extends GatedSizedPastelRecipe<RecipeInput> {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/potion_workshop");
 
@@ -34,11 +37,11 @@ public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<Recipe
 
     protected final int color;
 
-    protected final IngredientStack ingredient1;
+    protected final SizedIngredient ingredient1;
 
-    protected final IngredientStack ingredient2;
+    protected final Optional<SizedIngredient> ingredient2;
 
-    protected final IngredientStack ingredient3;
+    protected final Optional<SizedIngredient> ingredient3;
 
     public PotionWorkshopRecipe(
         String group,
@@ -46,9 +49,9 @@ public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<Recipe
         Optional<ResourceLocation> requiredAdvancementIdentifier,
         int craftingTime,
         int color,
-        IngredientStack ingredient1,
-        IngredientStack ingredient2,
-        IngredientStack ingredient3
+        SizedIngredient ingredient1,
+        Optional<SizedIngredient> ingredient2,
+        Optional<SizedIngredient> ingredient3
     ) {
         super(group, secret, requiredAdvancementIdentifier);
         this.color = color;
@@ -58,22 +61,20 @@ public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<Recipe
         this.ingredient3 = ingredient3;
     }
 
-    public List<IngredientStack> getOtherIngredients() {
-        ArrayList<IngredientStack> ingredients = new ArrayList<>();
+    public List<SizedIngredient> getOtherIngredients() {
+        ArrayList<SizedIngredient> ingredients = new ArrayList<>();
         ingredients.add(ingredient1);
-        if (!ingredient2.isEmpty()) {
-            ingredients.add(ingredient2);
-            if (!ingredient3.isEmpty()) {
-                ingredients.add(ingredient3);
-            }
+        if (ingredient2.isPresent()) {
+            ingredients.add(ingredient2.get());
+            ingredient3.ifPresent(ingredients::add);
         }
         return ingredients;
     }
 
-    protected void addIngredientStacks(NonNullList<IngredientStack> ingredients) {
+    protected void addSizedIngredients(List<SizedIngredient> ingredients) {
         ingredients.add(this.ingredient1);
-        ingredients.add(this.ingredient2);
-        ingredients.add(this.ingredient3);
+        this.ingredient2.ifPresentOrElse(ingredients::add, () -> ingredients.add(null));
+        this.ingredient3.ifPresentOrElse(ingredients::add, () -> ingredients.add(null));
     }
 
     @Override

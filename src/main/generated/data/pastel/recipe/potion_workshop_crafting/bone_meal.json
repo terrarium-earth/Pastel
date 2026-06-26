@@ -1,18 +1,29 @@
 {
   "type": "pastel:potion_workshop_crafting",
   "base_ingredient": {
-    "item": "pastel:vegetal"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:vegetal"
+    }
   },
   "color": 15852761,
   "ingredient1": {
     "count": 2,
-    "item": "pastel:ash_flakes"
+    "ingredient": {
+      "item": "pastel:ash_flakes"
+    }
   },
   "ingredient2": {
-    "item": "pastel:fissure_plum"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:fissure_plum"
+    }
   },
   "ingredient3": {
-    "item": "pastel:milky_resin"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:milky_resin"
+    }
   },
   "required_advancement": "pastel:unlocks/resources/fertilizer",
   "result": {

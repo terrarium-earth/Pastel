@@ -3,13 +3,22 @@
   "base_duration_ticks": 600,
   "effect": "minecraft:darkness",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:echo_shard"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:echo_shard"
+    }
   },
   "ingredient3": {
-    "item": "minecraft:fermented_spider_eye"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:fermented_spider_eye"
+    }
   },
   "ink_color": "pastel:black",
   "ink_cost": 8,

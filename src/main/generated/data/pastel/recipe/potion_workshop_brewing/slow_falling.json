@@ -4,10 +4,16 @@
   "effect": "minecraft:slow_falling",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:phantom_membrane"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:phantom_membrane"
+    }
   },
   "ink_color": "pastel:brown",
   "ink_cost": 2,

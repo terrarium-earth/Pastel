@@ -7,13 +7,22 @@
   "effect": "pastel:fatal_slumber",
   "group": "sleep_potions",
   "ingredient1": {
-    "item": "pastel:nectardew_burgeon"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:nectardew_burgeon"
+    }
   },
   "ingredient2": {
-    "item": "pastel:evernectar"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:evernectar"
+    }
   },
   "ingredient3": {
-    "item": "pastel:moonstone_powder"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:moonstone_powder"
+    }
   },
   "ink_color": "pastel:purple",
   "ink_cost": 640,

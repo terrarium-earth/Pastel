@@ -3,13 +3,22 @@
   "base_duration_ticks": 300,
   "effect": "pastel:life_drain",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "pastel:downstone_fragments"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:downstone_fragments"
+    }
   },
   "ingredient3": {
-    "item": "minecraft:fermented_spider_eye"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:fermented_spider_eye"
+    }
   },
   "ink_color": "pastel:gray",
   "ink_cost": 16,

@@ -4,13 +4,22 @@
   "effect": "pastel:calming",
   "group": "sleep_potions",
   "ingredient1": {
-    "item": "pastel:nightdew_sprout"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:nightdew_sprout"
+    }
   },
   "ingredient2": {
-    "item": "pastel:moonstruck_nectar"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:moonstruck_nectar"
+    }
   },
   "ingredient3": {
-    "item": "pastel:frostbite_essence"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:frostbite_essence"
+    }
   },
   "ink_color": "pastel:purple",
   "ink_cost": 4,

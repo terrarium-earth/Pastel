@@ -3,10 +3,16 @@
   "base_duration_ticks": 6000,
   "effect": "pastel:scarred",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "pastel:bone_ash"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:bone_ash"
+    }
   },
   "ink_color": "pastel:gray",
   "ink_cost": 4,

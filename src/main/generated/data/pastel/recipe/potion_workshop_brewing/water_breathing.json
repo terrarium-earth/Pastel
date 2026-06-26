@@ -4,10 +4,16 @@
   "effect": "minecraft:water_breathing",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:pufferfish"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:pufferfish"
+    }
   },
   "ink_color": "pastel:pink",
   "ink_cost": 2,

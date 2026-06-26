@@ -4,13 +4,22 @@
   "effect": "minecraft:slowness",
   "group": "vanilla_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "minecraft:rabbit_foot"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:rabbit_foot"
+    }
   },
   "ingredient3": {
-    "item": "minecraft:fermented_spider_eye"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:fermented_spider_eye"
+    }
   },
   "ink_color": "pastel:magenta",
   "ink_cost": 2,

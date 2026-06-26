@@ -1,17 +1,29 @@
 {
   "type": "pastel:potion_workshop_crafting",
   "base_ingredient": {
-    "item": "minecraft:glass_bottle"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glass_bottle"
+    }
   },
   "color": 9568256,
   "ingredient1": {
-    "item": "pastel:blood_orchid_petal"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:blood_orchid_petal"
+    }
   },
   "ingredient2": {
-    "item": "pastel:quitoxic_powder"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:quitoxic_powder"
+    }
   },
   "ingredient3": {
-    "item": "minecraft:sugar"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:sugar"
+    }
   },
   "required_advancement": "pastel:midgame/collect_blood_orchid_petal",
   "result": {

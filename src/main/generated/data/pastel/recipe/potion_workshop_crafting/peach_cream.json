@@ -1,18 +1,30 @@
 {
   "type": "pastel:potion_workshop_crafting",
   "base_ingredient": {
-    "item": "minecraft:sugar"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:sugar"
+    }
   },
   "color": 16754073,
   "group": "deserts",
   "ingredient1": {
-    "item": "pastel:clotted_cream"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:clotted_cream"
+    }
   },
   "ingredient2": {
-    "item": "pastel:glass_peach"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:glass_peach"
+    }
   },
   "ingredient3": {
-    "item": "pastel:myceylon"
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:myceylon"
+    }
   },
   "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",
   "result": {

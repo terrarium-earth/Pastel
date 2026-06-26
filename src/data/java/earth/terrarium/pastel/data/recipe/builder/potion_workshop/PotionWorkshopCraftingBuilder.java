@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
-import javax.annotation.Nullable;
+import java.util.Optional;
 
 public final class PotionWorkshopCraftingBuilder extends PotionWorkshopRecipeBuilder<PotionWorkshopCraftingBuilder> {
     private final SizedIngredient baseIngredient;
@@ -23,14 +23,6 @@ public final class PotionWorkshopCraftingBuilder extends PotionWorkshopRecipeBui
     ) {
         super(result);
         this.baseIngredient = baseIngredient;
-    }
-
-    private static IngredientStack stackFromSize(@Nullable SizedIngredient ing) {
-        if (ing == null) {
-            return IngredientStack.EMPTY;
-        } else {
-            return new IngredientStack(ing.ingredient(), ing.count());
-        }
     }
 
     public PotionWorkshopCraftingBuilder dontConsumeBaseIngredient() {
@@ -52,10 +44,10 @@ public final class PotionWorkshopCraftingBuilder extends PotionWorkshopRecipeBui
                         this.getRequiredAdvancement(),
                         this.craftingTime,
                         this.color,
-                        stackFromSize(this.ingredient1),
-                        stackFromSize(this.ingredient2),
-                        stackFromSize(this.ingredient3),
-                        stackFromSize(baseIngredient),
+                        this.ingredient1,
+                        Optional.ofNullable(this.ingredient2),
+                        Optional.ofNullable(this.ingredient3),
+                        baseIngredient,
                         consumeBaseIngredient,
                         this.requiredExperience,
                         this.result
