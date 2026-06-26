@@ -2,10 +2,16 @@
   "type": "pastel:potion_workshop_brewing",
   "group": "hexcasting_potions",
   "ingredient1": {
-    "item": "minecraft:nether_wart"
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
   },
   "ingredient2": {
-    "item": "hexcasting:amethyst_dust"
+    "count": 1,
+    "ingredient": {
+      "item": "hexcasting:amethyst_dust"
+    }
   },
   "effect": "hexcasting:enlarge_grid",
   "base_duration_ticks": 3600,

@@ -1,11 +1,23 @@
 {
   "type": "pastel:potion_workshop_crafting",
-  "base_ingredient": "minecraft:honey_bottle",
+  "base_ingredient": {
+    "count": 1,
+    "ingredient": {"item": "minecraft:honey_bottle"}
+  },
   "use_up_base_ingredient": true,
   "color": 867887,
-  "ingredient1": "malum:rotting_essence",
-  "ingredient2": "malum:living_flesh",
-  "ingredient3": "minecraft:gunpowder",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {"item": "malum:rotting_essence"}
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {"item": "malum:living_flesh"}
+  },
+  "ingredient3": {
+    "count": 1,
+    "ingredient": {"item": "minecraft:gunpowder"}
+  },
   "result": {
     "id": "malum:splash_of_gluttony",
     "count": 3

@@ -108,6 +108,8 @@ public record InfusedBeverageComponent(String variant, int color) implements Too
 
     public static final InfusedBeverageComponent VODKA = new InfusedBeverageComponent("vodka", 14938088);
 
+    public static final InfusedBeverageComponent SAKE = new InfusedBeverageComponent("sake", 13751514);
+
     public static final Codec<InfusedBeverageComponent> CODEC = RecordCodecBuilder
         .create(
             i -> i

@@ -1,9 +1,13 @@
 {
   "type": "pastel:potion_workshop_brewing",
   "group": "the_bumblezone",
-  "ingredient1": "minecraft:nether_wart",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {"item": "minecraft:nether_wart"}
+  },
   "ingredient2": {
-    "item": "the_bumblezone:bee_stinger"
+    "count": 1,
+    "ingredient": {"item": "the_bumblezone:bee_stinger"}
   },
   "effect": "minecraft:poison",
   "base_duration_ticks": 1800,
