@@ -1,0 +1,55 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:density"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "minecraft:tuff"
+    },
+    {
+      "item": "pastel:stratine_fragments"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "minecraft:tuff"
+    },
+    {
+      "item": "pastel:stratine_fragments"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_trial",
+  "required_experience": 200,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "minecraft:density": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 600
+}

@@ -1,0 +1,55 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:soul_speed"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "minecraft:soul_soil"
+    },
+    {
+      "item": "pastel:paltaeria_fragments"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "minecraft:soul_soil"
+    },
+    {
+      "item": "pastel:paltaeria_fragments"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_treasure",
+  "required_experience": 500,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "minecraft:soul_speed": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 1200
+}

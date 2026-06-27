@@ -1,0 +1,39 @@
+{
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "pastel:shimmerstone_block"
+    },
+    {
+      "item": "pastel:shimmerstone_block"
+    },
+    {
+      "item": "pastel:pure_gold_block"
+    },
+    {
+      "item": "pastel:pure_gold_block"
+    },
+    {
+      "item": "pastel:shimmerstone_block"
+    },
+    {
+      "item": "pastel:shimmerstone_block"
+    },
+    {
+      "item": "pastel:pure_gold_block"
+    },
+    {
+      "item": "pastel:pure_gold_block"
+    }
+  ],
+  "required_advancement": "pastel:lategame/collect_pure_resource",
+  "required_experience": 100,
+  "result": {
+    "count": 1,
+    "id": "minecraft:enchanted_golden_apple"
+  },
+  "time": 600
+}

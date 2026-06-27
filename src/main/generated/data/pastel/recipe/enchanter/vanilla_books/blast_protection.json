@@ -1,0 +1,55 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:blast_protection"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "pastel:bedrock_dust"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "pastel:bedrock_dust"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_protection",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "minecraft:blast_protection": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

@@ -1,0 +1,55 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:vanishing_curse"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:gray_pigment"
+    },
+    {
+      "item": "pastel:gray_pigment"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "pastel:stratine_fragments"
+    },
+    {
+      "item": "pastel:gray_pigment"
+    },
+    {
+      "item": "pastel:gray_pigment"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "pastel:stratine_fragments"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_curses",
+  "required_experience": 250,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "minecraft:vanishing_curse": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 600
+}

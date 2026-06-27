@@ -1,0 +1,55 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:efficiency"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:yellow_pigment"
+    },
+    {
+      "item": "pastel:yellow_pigment"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "pastel:quitoxic_powder"
+    },
+    {
+      "item": "pastel:yellow_pigment"
+    },
+    {
+      "item": "pastel:yellow_pigment"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "pastel:quitoxic_powder"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_quitoxic",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "minecraft:efficiency": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}
