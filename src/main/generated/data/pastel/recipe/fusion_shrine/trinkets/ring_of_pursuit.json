@@ -7,19 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_bismuth_ring"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_bismuth_ring"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:incandescent_essence"
+      "ingredient": {
+        "item": "pastel:incandescent_essence"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:pyrite_chunk"
+      "ingredient": {
+        "item": "pastel:pyrite_chunk"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:magenta_pigment"
+      "ingredient": {
+        "item": "pastel:magenta_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/ring_of_pursuit",

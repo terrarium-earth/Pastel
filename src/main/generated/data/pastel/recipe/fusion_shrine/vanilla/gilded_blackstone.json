@@ -11,10 +11,16 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:blackstone"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:blackstone"
+      }
     },
     {
-      "item": "minecraft:gold_ingot"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      }
     }
   ],
   "result": {

@@ -9,19 +9,28 @@
   "group": "bedrock_tools",
   "ingredients": [
     {
-      "item": "minecraft:anvil"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:anvil"
+      }
     },
     {
       "count": 27,
-      "item": "pastel:bedrock_dust"
+      "ingredient": {
+        "item": "pastel:bedrock_dust"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:black_pigment"
+      "ingredient": {
+        "item": "pastel:black_pigment"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:onyx_powder"
+      "ingredient": {
+        "item": "pastel:onyx_powder"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/bedrock_tools",

@@ -12,13 +12,22 @@
   },
   "ingredients": [
     {
-      "item": "pastel:pure_malachite"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_malachite"
+      }
     },
     {
-      "item": "pastel:pure_azurite"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_azurite"
+      }
     },
     {
-      "item": "pastel:pure_bloodstone"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_bloodstone"
+      }
     }
   ],
   "required_advancement": "pastel:hidden/collect_every_pure_cmy_resource",

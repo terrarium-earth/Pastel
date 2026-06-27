@@ -9,23 +9,34 @@
   "group": "bedrock_armor",
   "ingredients": [
     {
-      "item": "minecraft:golden_boots"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:golden_boots"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:bedrock_dust"
+      "ingredient": {
+        "item": "pastel:bedrock_dust"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:black_pigment"
+      "ingredient": {
+        "item": "pastel:black_pigment"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:onyx_powder"
+      "ingredient": {
+        "item": "pastel:onyx_powder"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:stratine_fragments"
+      "ingredient": {
+        "item": "pastel:stratine_fragments"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/bedrock_tools",

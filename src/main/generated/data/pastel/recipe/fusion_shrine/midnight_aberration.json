@@ -17,19 +17,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:topaz_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:topaz_shard"
+      }
     },
     {
-      "item": "minecraft:amethyst_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:amethyst_shard"
+      }
     },
     {
-      "item": "pastel:citrine_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:citrine_shard"
+      }
     },
     {
-      "item": "pastel:onyx_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:onyx_shard"
+      }
     },
     {
-      "item": "pastel:neolith"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:neolith"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/midnight_aberration",

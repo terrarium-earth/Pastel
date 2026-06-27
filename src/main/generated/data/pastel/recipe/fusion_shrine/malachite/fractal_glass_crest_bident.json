@@ -8,26 +8,40 @@
   },
   "ingredients": [
     {
-      "item": "pastel:malachite_bident"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:malachite_bident"
+      }
     },
     {
-      "item": "pastel:moonstone_core"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstone_core"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:pure_prismarine"
+      "ingredient": {
+        "item": "pastel:pure_prismarine"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:echo_shard"
+      "ingredient": {
+        "item": "minecraft:echo_shard"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:mermaids_gem"
+      "ingredient": {
+        "item": "pastel:mermaids_gem"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:white_pigment"
+      "ingredient": {
+        "item": "pastel:white_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/malachite/fractal_glass_crest_bident",

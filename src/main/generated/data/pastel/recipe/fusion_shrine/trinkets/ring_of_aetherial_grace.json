@@ -7,18 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_bismuth_ring"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_bismuth_ring"
+      }
     },
     {
       "count": 8,
-      "item": "minecraft:popped_chorus_fruit"
+      "ingredient": {
+        "item": "minecraft:popped_chorus_fruit"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:paltaeria_fragments"
+      "ingredient": {
+        "item": "pastel:paltaeria_fragments"
+      }
     },
     {
-      "item": "pastel:paltaeria_gem"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:paltaeria_gem"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/ring_of_aetherial_grace",

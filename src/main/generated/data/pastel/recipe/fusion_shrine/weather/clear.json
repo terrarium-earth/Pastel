@@ -9,7 +9,10 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:sunflower"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sunflower"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/weather/clear",

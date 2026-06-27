@@ -15,6 +15,7 @@ import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
+import earth.terrarium.pastel.recipe.GatedSizedPastelRecipe;
 import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
@@ -35,6 +36,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
@@ -43,11 +45,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<FluidTank>> {
+public class FusionShrineRecipe extends GatedSizedPastelRecipe<FluidRecipeInput<FluidTank>> {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("build_fusion_shrine");
 
-    protected final NonNullList<IngredientStack> craftingInputs;
+    protected final NonNullList<SizedIngredient> craftingInputs;
 
     protected final FluidIngredient fluid;
 
@@ -83,7 +85,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
             String group,
             boolean secret,
             Optional<ResourceLocation> requiredAdvancementIdentifier,
-            NonNullList<IngredientStack> craftingInputs,
+            NonNullList<SizedIngredient> craftingInputs,
             FluidIngredient fluid,
             ItemStack output,
             float experience,
@@ -132,7 +134,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
                 return false;
             }
         }
-        return matchIngredientStacksExclusively(recipeInput, getIngredientStacks());
+        return matchIngredientStacksExclusively(recipeInput, getSizedIngredients());
     }
 
     @Override
@@ -166,7 +168,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
     }
 
     @Override
-    public NonNullList<IngredientStack> getIngredientStacks() {
+    public NonNullList<SizedIngredient> getSizedIngredients() {
         return this.craftingInputs;
     }
 
@@ -263,7 +265,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
         if (!output.isEmpty()) {
             maxAmount = output.getMaxStackSize();
             for (
-                IngredientStack ingredientStack : getIngredientStacks()
+                SizedIngredient ingredientStack : getSizedIngredients()
             ) {
                 for (
                     int i = 0;
@@ -275,7 +277,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
                         if (firstStack.isEmpty()) {
                             firstStack = currentStack;
                         }
-                        int ingredientStackAmount = ingredientStack.getCount();
+                        int ingredientStackAmount = ingredientStack.count();
                         maxAmount = Math.min(maxAmount, currentStack.getCount() / ingredientStackAmount);
                         break;
                     }
@@ -293,7 +295,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
             }
         } else {
             for (
-                IngredientStack ingredientStack : getIngredientStacks()
+                SizedIngredient ingredientStack : getSizedIngredients()
             ) {
                 double efficiencyModifier = fusionShrineBlockEntity
                     .getUpgradeHolder()
@@ -310,7 +312,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
                     if (ingredientStack.test(currentStack)) {
                         int reducedAmountAfterMod = Support
                             .chanceRound(
-                                ingredientStack.getCount() / efficiencyModifier,
+                                ingredientStack.count() / efficiencyModifier,
                                 world.random
                             );
                         currentStack.shrink(reducedAmountAfterMod);
@@ -340,7 +342,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
         double efficiencyModifier
     ) {
         for (
-            IngredientStack ingredientStack : getIngredientStacks()
+            SizedIngredient ingredientStack : getSizedIngredients()
         ) {
             for (
                 int i = 0;
@@ -349,7 +351,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
             ) {
                 ItemStack currentStack = fusionShrineBlockEntity.getItem(i);
                 if (ingredientStack.test(currentStack)) {
-                    int reducedAmount = recipesCrafted * ingredientStack.getCount();
+                    int reducedAmount = recipesCrafted * ingredientStack.count();
                     int reducedAmountAfterMod = efficiencyModifier == 1
                         ? reducedAmount
                         : Support
@@ -433,7 +435,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        CodecHelper.nonNullListOfSize(IngredientStack.CODEC, 0, 7)
+                        CodecHelper.nonNullListOfSize(SizedIngredient.NESTED_CODEC, 0, 7)
                             .fieldOf("ingredients")
                             .forGetter(recipe -> recipe.craftingInputs),
                         FluidIngredient.CODEC
@@ -489,7 +491,7 @@ public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<
                 recipe -> recipe.secret,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
                 recipe -> recipe.requiredAdvancementIdentifier,
-                IngredientStack.STREAM_CODEC.apply(PacketCodecHelper.nonNullListOf(7)),
+                SizedIngredient.STREAM_CODEC.apply(PacketCodecHelper.nonNullListOf(7)),
                 recipe -> recipe.craftingInputs,
                 FluidIngredient.STREAM_CODEC,
                 recipe -> recipe.fluid,

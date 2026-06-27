@@ -16,26 +16,40 @@
   },
   "ingredients": [
     {
-      "item": "pastel:dragon_talon"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:dragon_talon"
+      }
     },
     {
-      "item": "minecraft:netherite_sword"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:netherite_sword"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:gold_ingot"
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:quartz"
+      "ingredient": {
+        "item": "minecraft:quartz"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:moonstruck_nectar"
+      "ingredient": {
+        "item": "pastel:moonstruck_nectar"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:yellow_pigment"
+      "ingredient": {
+        "item": "pastel:yellow_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/draconic_twinsword",

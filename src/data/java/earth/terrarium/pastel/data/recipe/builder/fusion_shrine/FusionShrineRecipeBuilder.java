@@ -169,7 +169,7 @@ public final class FusionShrineRecipeBuilder extends GatedRecipeBuilder<FusionSh
                                 this.group,
                                 this.secret,
                                 daId,
-                                ingredients.stream().map(FusionShrineRecipeBuilder::sizedToStack).collect(Collectors.toCollection(NonNullList::create)),
+                                ingredients,
                                 this.fluid,
                                 this.result,
                                 this.experience,

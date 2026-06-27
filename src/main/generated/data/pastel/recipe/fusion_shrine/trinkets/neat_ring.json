@@ -16,18 +16,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_bismuth_ring"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_bismuth_ring"
+      }
     },
     {
       "count": 64,
-      "item": "pastel:pure_gold_block"
+      "ingredient": {
+        "item": "pastel:pure_gold_block"
+      }
     },
     {
       "count": 64,
-      "item": "pastel:moonstone_shard"
+      "ingredient": {
+        "item": "pastel:moonstone_shard"
+      }
     },
     {
-      "item": "pastel:resonant_lily"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:resonant_lily"
+      }
     }
   ],
   "play_crafting_finished_effects": false,

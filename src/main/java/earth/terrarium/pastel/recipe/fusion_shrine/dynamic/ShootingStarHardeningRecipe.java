@@ -17,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
             "",
             false,
             Optional.of(UNLOCK_IDENTIFIER),
-            NonNullList.of(IngredientStack.ofTag(PastelItemTags.SHOOTING_STARS), IngredientStack.ofItems(Items.DIAMOND)),
+            NonNullList.of(SizedIngredient.of(PastelItemTags.SHOOTING_STARS, 1), SizedIngredient.of(Items.DIAMOND, 1)),
             FluidIngredient.of(Fluids.WATER),
             getHardenedShootingStar(),
             5,

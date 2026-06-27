@@ -8,15 +8,21 @@
   "ingredients": [
     {
       "count": 4,
-      "tag": "minecraft:planks"
+      "ingredient": {
+        "tag": "minecraft:planks"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:raw_azurite"
+      "ingredient": {
+        "item": "pastel:raw_azurite"
+      }
     },
     {
       "count": 16,
-      "tag": "pastel:pigments"
+      "ingredient": {
+        "tag": "pastel:pigments"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/pigment_palette",

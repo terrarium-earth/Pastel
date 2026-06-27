@@ -16,22 +16,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:verdigris_lash"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:verdigris_lash"
+      }
     },
     {
       "count": 16,
-      "item": "minecraft:copper_ingot"
+      "ingredient": {
+        "item": "minecraft:copper_ingot"
+      }
     },
     {
       "count": 16,
-      "item": "minecraft:raw_gold"
+      "ingredient": {
+        "item": "minecraft:raw_gold"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:shimmerstone_gem"
+      "ingredient": {
+        "item": "pastel:shimmerstone_gem"
+      }
     },
     {
-      "item": "pastel:aether_vestiges"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:aether_vestiges"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/fox_o_nine_tails",

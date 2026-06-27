@@ -13,26 +13,40 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:iron_sword"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:iron_sword"
+      }
     },
     {
-      "item": "minecraft:diamond"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:diamond"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:nightdew_sprout"
+      "ingredient": {
+        "item": "pastel:nightdew_sprout"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:vegetal"
+      "ingredient": {
+        "item": "pastel:vegetal"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:quitoxic_powder"
+      "ingredient": {
+        "item": "pastel:quitoxic_powder"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:purple_pigment"
+      "ingredient": {
+        "item": "pastel:purple_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/knotted_sword",

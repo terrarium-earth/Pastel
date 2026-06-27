@@ -15,20 +15,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:cow_head"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:cow_head"
+      }
     },
     {
-      "item": "pastel:sheep_head"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:sheep_head"
+      }
     },
     {
-      "item": "pastel:pig_head"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pig_head"
+      }
     },
     {
-      "item": "pastel:chicken_head"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:chicken_head"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:vegetal"
+      "ingredient": {
+        "item": "pastel:vegetal"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/egg_laying_wooly_pig_head",

@@ -32,7 +32,7 @@ public class FusionShrineDisplay extends PastelDisplay {
     }
 
     private static List<EntryIngredient> buildIngredients(FusionShrineRecipe recipe) {
-        List<EntryIngredient> inputs = REIHelper.toEntryIngredients(recipe.getIngredientStacks());
+        List<EntryIngredient> inputs = REIHelper.toEntryIngredientsSized(recipe.getSizedIngredients());
         inputs.add(0, REIHelper.ofFluidIngredient(recipe.getFluid()));
         return inputs;
     }

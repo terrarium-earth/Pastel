@@ -7,18 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_belt"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_belt"
+      }
     },
     {
-      "item": "minecraft:rabbit_foot"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:rabbit_foot"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:storm_stone"
+      "ingredient": {
+        "item": "pastel:storm_stone"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:yellow_pigment"
+      "ingredient": {
+        "item": "pastel:yellow_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/takeoff_belt",

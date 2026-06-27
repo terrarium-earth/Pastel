@@ -7,17 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:leather_boots"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:leather_boots"
+      }
     },
     {
-      "item": "pastel:four_leaf_clover"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:four_leaf_clover"
+      }
     },
     {
-      "item": "minecraft:phantom_membrane"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:phantom_membrane"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:purple_pigment"
+      "ingredient": {
+        "item": "pastel:purple_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/seven_league_boots",

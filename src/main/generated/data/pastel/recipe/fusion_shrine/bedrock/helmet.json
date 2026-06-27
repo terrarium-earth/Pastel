@@ -9,23 +9,34 @@
   "group": "bedrock_armor",
   "ingredients": [
     {
-      "item": "minecraft:golden_helmet"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:golden_helmet"
+      }
     },
     {
       "count": 5,
-      "item": "pastel:bedrock_dust"
+      "ingredient": {
+        "item": "pastel:bedrock_dust"
+      }
     },
     {
       "count": 5,
-      "item": "pastel:black_pigment"
+      "ingredient": {
+        "item": "pastel:black_pigment"
+      }
     },
     {
       "count": 5,
-      "item": "pastel:onyx_powder"
+      "ingredient": {
+        "item": "pastel:onyx_powder"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:stratine_fragments"
+      "ingredient": {
+        "item": "pastel:stratine_fragments"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/bedrock_tools",

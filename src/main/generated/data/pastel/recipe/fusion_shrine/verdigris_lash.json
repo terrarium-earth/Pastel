@@ -15,23 +15,34 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:lead"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:lead"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:nightdew_sprout"
+      "ingredient": {
+        "item": "pastel:nightdew_sprout"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:vegetal"
+      "ingredient": {
+        "item": "pastel:vegetal"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:stardust"
+      "ingredient": {
+        "item": "pastel:stardust"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:frostbite_essence"
+      "ingredient": {
+        "item": "pastel:frostbite_essence"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/verdigris_lash",

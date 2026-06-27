@@ -7,19 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:leather_boots"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:leather_boots"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:stardust"
+      "ingredient": {
+        "item": "pastel:stardust"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:phantom_membrane"
+      "ingredient": {
+        "item": "minecraft:phantom_membrane"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:brown_pigment"
+      "ingredient": {
+        "item": "pastel:brown_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/cotton_cloud_boots",

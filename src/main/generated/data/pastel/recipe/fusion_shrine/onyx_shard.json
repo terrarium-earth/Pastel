@@ -15,13 +15,22 @@
   },
   "ingredients": [
     {
-      "item": "pastel:topaz_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:topaz_shard"
+      }
     },
     {
-      "item": "minecraft:amethyst_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:amethyst_shard"
+      }
     },
     {
-      "item": "pastel:citrine_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:citrine_shard"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/fusion_shrine",

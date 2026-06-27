@@ -7,21 +7,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_pendant"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_pendant"
+      }
     },
     {
-      "item": "minecraft:totem_of_undying"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:totem_of_undying"
+      }
     },
     {
-      "item": "pastel:moonstruck_nectar"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstruck_nectar"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:neolith"
+      "ingredient": {
+        "item": "pastel:neolith"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:blue_pigment"
+      "ingredient": {
+        "item": "pastel:blue_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/totem_pendant",

@@ -8,23 +8,34 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:crossbow"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:crossbow"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:pure_malachite"
+      "ingredient": {
+        "item": "pastel:pure_malachite"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:pure_quartz"
+      "ingredient": {
+        "item": "pastel:pure_quartz"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:paltaeria_fragments"
+      "ingredient": {
+        "item": "pastel:paltaeria_fragments"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:moonstone_powder"
+      "ingredient": {
+        "item": "pastel:moonstone_powder"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/malachite/malachite_tools",

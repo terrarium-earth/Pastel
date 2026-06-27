@@ -11,10 +11,16 @@
   },
   "ingredients": [
     {
-      "item": "pastel:pure_netherite_scrap"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_netherite_scrap"
+      }
     },
     {
-      "item": "pastel:pure_gold"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_gold"
+      }
     }
   ],
   "required_advancement": "pastel:lategame/collect_pure_resource",

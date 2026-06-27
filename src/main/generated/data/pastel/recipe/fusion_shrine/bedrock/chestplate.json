@@ -9,25 +9,40 @@
   "group": "bedrock_armor",
   "ingredients": [
     {
-      "item": "minecraft:golden_chestplate"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:golden_chestplate"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:bedrock_dust"
+      "ingredient": {
+        "item": "pastel:bedrock_dust"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:black_pigment"
+      "ingredient": {
+        "item": "pastel:black_pigment"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:onyx_powder"
+      "ingredient": {
+        "item": "pastel:onyx_powder"
+      }
     },
     {
-      "item": "pastel:stratine_gem"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:stratine_gem"
+      }
     },
     {
-      "item": "minecraft:rose_bush"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:rose_bush"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/bedrock_tools",

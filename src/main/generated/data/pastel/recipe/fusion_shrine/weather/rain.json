@@ -9,7 +9,10 @@
   },
   "ingredients": [
     {
-      "item": "pastel:mermaids_gem"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:mermaids_gem"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/weather/rain",

@@ -8,21 +8,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:malachite_ultra_greatsword"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:malachite_ultra_greatsword"
+      }
     },
     {
-      "item": "pastel:moonstone_core"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstone_core"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:pure_netherite_scrap"
+      "ingredient": {
+        "item": "pastel:pure_netherite_scrap"
+      }
     },
     {
-      "item": "minecraft:nether_star"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:nether_star"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:white_pigment"
+      "ingredient": {
+        "item": "pastel:white_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/malachite/glass_crest_ultra_greatsword",

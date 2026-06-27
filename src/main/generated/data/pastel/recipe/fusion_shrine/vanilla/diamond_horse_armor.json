@@ -9,19 +9,27 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "minecraft:diamond"
+      "ingredient": {
+        "item": "minecraft:diamond"
+      }
     },
     {
       "count": 6,
-      "item": "minecraft:leather"
+      "ingredient": {
+        "item": "minecraft:leather"
+      }
     },
     {
       "count": 2,
-      "tag": "minecraft:wool"
+      "ingredient": {
+        "tag": "minecraft:wool"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:topaz_shard"
+      "ingredient": {
+        "item": "pastel:topaz_shard"
+      }
     }
   ],
   "required_advancement": "pastel:create_onyx_shard",

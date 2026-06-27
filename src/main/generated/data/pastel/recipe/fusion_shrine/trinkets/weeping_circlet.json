@@ -7,22 +7,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_circlet"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_circlet"
+      }
     },
     {
-      "item": "minecraft:heart_of_the_sea"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:heart_of_the_sea"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:mermaids_gem"
+      "ingredient": {
+        "item": "pastel:mermaids_gem"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:copper_ingot"
+      "ingredient": {
+        "item": "minecraft:copper_ingot"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:light_blue_pigment"
+      "ingredient": {
+        "item": "pastel:light_blue_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/weeping_circlet",

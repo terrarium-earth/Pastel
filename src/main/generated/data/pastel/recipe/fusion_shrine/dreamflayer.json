@@ -16,30 +16,46 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:netherite_sword"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:netherite_sword"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:bismuth_crystal"
+      "ingredient": {
+        "item": "pastel:bismuth_crystal"
+      }
     },
     {
-      "item": "pastel:moonstruck_nectar"
-    },
-    {
-      "count": 4,
-      "item": "pastel:red_pigment"
-    },
-    {
-      "count": 4,
-      "item": "pastel:light_blue_pigment"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstruck_nectar"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:light_gray_pigment"
+      "ingredient": {
+        "item": "pastel:red_pigment"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:black_pigment"
+      "ingredient": {
+        "item": "pastel:light_blue_pigment"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:light_gray_pigment"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:black_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/dreamflayer",

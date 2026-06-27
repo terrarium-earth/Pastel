@@ -16,26 +16,40 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:netherite_sword"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:netherite_sword"
+      }
     },
     {
-      "item": "minecraft:netherite_sword"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:netherite_sword"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:raw_bloodstone"
+      "ingredient": {
+        "item": "pastel:raw_bloodstone"
+      }
     },
     {
       "count": 8,
-      "item": "minecraft:gold_ingot"
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:blood_orchid_petal"
+      "ingredient": {
+        "item": "pastel:blood_orchid_petal"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:yellow_pigment"
+      "ingredient": {
+        "item": "pastel:yellow_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/draconic_twinsword",

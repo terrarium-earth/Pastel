@@ -7,19 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_pendant"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_pendant"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:paltaeria_gem"
+      "ingredient": {
+        "item": "pastel:paltaeria_gem"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:glass"
+      "ingredient": {
+        "item": "minecraft:glass"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:pink_pigment"
+      "ingredient": {
+        "item": "pastel:pink_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/greater_potion_pendant",

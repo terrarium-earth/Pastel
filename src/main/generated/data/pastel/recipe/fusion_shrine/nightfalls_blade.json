@@ -13,27 +13,40 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:iron_sword"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:iron_sword"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:pyrite_chunk"
+      "ingredient": {
+        "item": "pastel:pyrite_chunk"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:pure_quartz"
+      "ingredient": {
+        "item": "pastel:pure_quartz"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:frostbite_essence"
+      "ingredient": {
+        "item": "pastel:frostbite_essence"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:red_pigment"
+      "ingredient": {
+        "item": "pastel:red_pigment"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:purple_pigment"
+      "ingredient": {
+        "item": "pastel:purple_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/nightfalls_blade",

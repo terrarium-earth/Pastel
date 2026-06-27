@@ -15,27 +15,40 @@
   },
   "ingredients": [
     {
-      "item": "pastel:nectardew_burgeon"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nectardew_burgeon"
+      }
     },
     {
       "count": 8,
-      "item": "minecraft:poppy"
+      "ingredient": {
+        "item": "minecraft:poppy"
+      }
     },
     {
       "count": 8,
-      "item": "minecraft:phantom_membrane"
+      "ingredient": {
+        "item": "minecraft:phantom_membrane"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:milky_resin"
+      "ingredient": {
+        "item": "pastel:milky_resin"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:pure_quartz"
+      "ingredient": {
+        "item": "pastel:pure_quartz"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:purple_pigment"
+      "ingredient": {
+        "item": "pastel:purple_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/equipment/soothing_bouquet",

@@ -14,13 +14,22 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:netherite_scrap"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:netherite_scrap"
+      }
     },
     {
-      "item": "minecraft:gold_ingot"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      }
     },
     {
-      "item": "pastel:midnight_aberration"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:midnight_aberration"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/resources/netherite_ingot",

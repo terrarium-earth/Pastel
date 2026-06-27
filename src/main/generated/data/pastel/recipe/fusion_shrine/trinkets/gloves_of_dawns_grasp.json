@@ -7,19 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_gloves"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_gloves"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:neolith"
+      "ingredient": {
+        "item": "pastel:neolith"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:light_blue_pigment"
+      "ingredient": {
+        "item": "pastel:light_blue_pigment"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:green_pigment"
+      "ingredient": {
+        "item": "pastel:green_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/gloves_of_dawns_grasp",

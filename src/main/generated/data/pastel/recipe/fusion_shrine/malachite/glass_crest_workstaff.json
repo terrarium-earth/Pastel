@@ -8,22 +8,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:malachite_workstaff"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:malachite_workstaff"
+      }
     },
     {
-      "item": "pastel:moonstone_core"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstone_core"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:pure_diamond"
+      "ingredient": {
+        "item": "pastel:pure_diamond"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:resonance_shard"
+      "ingredient": {
+        "item": "pastel:resonance_shard"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:white_pigment"
+      "ingredient": {
+        "item": "pastel:white_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/malachite/glass_crest_workstaff",

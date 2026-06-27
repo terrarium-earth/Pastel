@@ -7,18 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_circlet"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_circlet"
+      }
     },
     {
-      "item": "pastel:stratine_gem"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:stratine_gem"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:neolith"
+      "ingredient": {
+        "item": "pastel:neolith"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:orange_pigment"
+      "ingredient": {
+        "item": "pastel:orange_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/ashen_circlet",

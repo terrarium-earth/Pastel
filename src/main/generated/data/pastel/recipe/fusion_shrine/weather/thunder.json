@@ -13,7 +13,10 @@
   },
   "ingredients": [
     {
-      "item": "pastel:storm_stone"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:storm_stone"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/weather/thunder",

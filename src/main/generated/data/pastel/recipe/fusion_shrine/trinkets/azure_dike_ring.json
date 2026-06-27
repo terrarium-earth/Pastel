@@ -7,15 +7,22 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_tuff_ring"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_tuff_ring"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:raw_azurite"
+      "ingredient": {
+        "item": "pastel:raw_azurite"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:blue_pigment"
+      "ingredient": {
+        "item": "pastel:blue_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/azure_dike_ring",

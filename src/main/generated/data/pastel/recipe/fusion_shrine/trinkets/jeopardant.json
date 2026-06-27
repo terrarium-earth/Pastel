@@ -7,15 +7,22 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_tuff_ring"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_tuff_ring"
+      }
     },
     {
       "count": 6,
-      "item": "minecraft:lapis_lazuli"
+      "ingredient": {
+        "item": "minecraft:lapis_lazuli"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:red_pigment"
+      "ingredient": {
+        "item": "pastel:red_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/jeopardant",

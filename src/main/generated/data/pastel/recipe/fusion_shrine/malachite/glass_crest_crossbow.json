@@ -8,22 +8,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:malachite_crossbow"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:malachite_crossbow"
+      }
     },
     {
-      "item": "pastel:moonstone_core"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstone_core"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:pure_redstone"
+      "ingredient": {
+        "item": "pastel:pure_redstone"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:star_fragment"
+      "ingredient": {
+        "item": "pastel:star_fragment"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:white_pigment"
+      "ingredient": {
+        "item": "pastel:white_pigment"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/malachite/glass_crest_crossbow",

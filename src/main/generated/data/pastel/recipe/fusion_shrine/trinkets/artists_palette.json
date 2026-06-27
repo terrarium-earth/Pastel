@@ -8,14 +8,21 @@
   "ingredients": [
     {
       "count": 4,
-      "tag": "minecraft:planks"
+      "ingredient": {
+        "tag": "minecraft:planks"
+      }
     },
     {
       "count": 16,
-      "tag": "pastel:pigments"
+      "ingredient": {
+        "tag": "pastel:pigments"
+      }
     },
     {
-      "item": "pastel:spectral_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:spectral_shard"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/artists_palette",

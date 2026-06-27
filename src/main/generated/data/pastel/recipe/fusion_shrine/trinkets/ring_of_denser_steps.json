@@ -7,18 +7,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:fanciful_tuff_ring"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_tuff_ring"
+      }
     },
     {
       "count": 8,
-      "item": "minecraft:quartz"
+      "ingredient": {
+        "item": "minecraft:quartz"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:stratine_fragments"
+      "ingredient": {
+        "item": "pastel:stratine_fragments"
+      }
     },
     {
-      "item": "pastel:stratine_gem"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:stratine_gem"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/trinkets/ring_of_denser_steps",
