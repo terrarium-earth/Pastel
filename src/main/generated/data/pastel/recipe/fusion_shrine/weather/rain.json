@@ -1,0 +1,23 @@
+{
+  "type": "pastel:fusion_shrine",
+  "description": {
+    "translate": "pastel.recipe.fusion_shrine.explanation.weather_rain"
+  },
+  "finish_crafting_effect": "pastel:weather_rain",
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:mermaids_gem"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/weather/rain",
+  "start_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "time": 1600,
+  "world_conditions": [
+    {
+      "weather": "clear_sky"
+    }
+  ]
+}

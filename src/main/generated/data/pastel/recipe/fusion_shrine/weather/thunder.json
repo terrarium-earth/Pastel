@@ -1,0 +1,27 @@
+{
+  "type": "pastel:fusion_shrine",
+  "description": {
+    "translate": "pastel.recipe.fusion_shrine.explanation.weather_thunder"
+  },
+  "during_crafting_effects": [
+    "pastel:lightning_on_shrine",
+    "pastel:lightning_around_shrine"
+  ],
+  "finish_crafting_effect": "pastel:weather_thunder",
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:storm_stone"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/weather/thunder",
+  "start_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "time": 160,
+  "world_conditions": [
+    {
+      "weather": "not_thunder"
+    }
+  ]
+}

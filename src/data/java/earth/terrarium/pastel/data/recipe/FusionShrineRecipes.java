@@ -12,6 +12,7 @@ import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -24,6 +25,9 @@ import static earth.terrarium.pastel.registries.PastelFusionShrineWorldEffects.*
 public class FusionShrineRecipes {
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
         var pfx = new PrefixHelper(ctx, lookup, "fusion_shrine");
+
+        weather(pfx.subPrefix("weather"));
+        vanilla(pfx.subPrefix("vanilla"));
 
         pfx.generateDynamicRecipe(
                 "shooting_star_hardening",
@@ -323,5 +327,153 @@ public class FusionShrineRecipes {
                         .requires(STARDUST, 16)
                         .requires(FROSTBITE_ESSENCE, 8)
         );
+    }
+
+    private static void weather(PrefixHelper pfx) {
+        pfx.generateRecipe(
+                "clear",
+                new FusionShrineRecipeBuilder(
+                        Fluids.WATER,
+                        ItemStack.EMPTY
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Weather.CLEAR)
+                        .craftingTime(160)
+                        .experience(0.0f)
+                        .worldCondition()
+                        .weather(WeatherPredicate.RAIN)
+                        .submit()
+                        .startCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .finishCrafting(WEATHER_CLEAR)
+                        .translateDescription("pastel.recipe.fusion_shrine.explanation.weather_clear")
+                        .requires(Items.SUNFLOWER)
+        );
+
+        pfx.generateRecipe(
+                "rain",
+                new FusionShrineRecipeBuilder(
+                        Fluids.WATER,
+                        ItemStack.EMPTY
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Weather.RAIN)
+                        .craftingTime(1600)
+                        .experience(0.0f)
+                        .worldCondition()
+                        .weather(WeatherPredicate.CLEAR_SKY)
+                        .submit()
+                        .startCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .finishCrafting(WEATHER_RAIN)
+                        .translateDescription("pastel.recipe.fusion_shrine.explanation.weather_rain")
+                        .requires(MERMAIDS_GEM)
+        );
+
+        // where there's rain there's thunder (shits violently)
+        pfx.generateRecipe(
+                "thunder",
+                new FusionShrineRecipeBuilder(
+                        Fluids.WATER,
+                        ItemStack.EMPTY
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Weather.THUNDER)
+                        .craftingTime(160)
+                        .experience(0.0f)
+                        .worldCondition()
+                        .weather(WeatherPredicate.NOT_THUNDER)
+                        .submit()
+                        .startCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .duringCrafting(LIGHTNING_ON_SHRINE)
+                        .duringCrafting(LIGHTNING_AROUND_SHRINE)
+                        .finishCrafting(WEATHER_THUNDER)
+                        .translateDescription("pastel.recipe.fusion_shrine.explanation.weather_thunder")
+                        .requires(STORM_STONE)
+        );
+    }
+
+    private static void vanilla(PrefixHelper pfx) {
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        Fluids.WATER,
+                        new ItemStack(Items.DIAMOND_HORSE_ARMOR)
+                )
+                        .group("horse_armor")
+                        .requiredAdvancement(PastelAdvancements.CREATE_ONYX_SHARD)
+                        .craftingTime(200)
+                        .experience(1.0f)
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.DIAMOND, 6)
+                        .requires(Items.LEATHER, 6)
+                        .requires(ItemTags.WOOL, 2)
+                        .requires(TOPAZ_SHARD, 3)
+
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        Fluids.WATER,
+                        new ItemStack(Items.GOLDEN_HORSE_ARMOR)
+                )
+                        .group("horse_armor")
+                        .requiredAdvancement(PastelAdvancements.CREATE_ONYX_SHARD)
+                        .craftingTime(200)
+                        .experience(1.0f)
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.GOLD_INGOT, 6)
+                        .requires(Items.LEATHER, 6)
+                        .requires(ItemTags.WOOL, 2)
+                        .requires(CITRINE_SHARD, 3)
+
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        Fluids.LAVA,
+                        new ItemStack(Items.GILDED_BLACKSTONE)
+                )
+                        .craftingTime(200)
+                        .experience(0.25f)
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .padCraftEffect()
+                        .duringCrafting(VISUAL_EXPLOSIONS_ON_SHRINE)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.BLACKSTONE)
+                        .requires(Items.GOLD_INGOT)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        Fluids.LAVA,
+                        new ItemStack(Items.NETHERITE_INGOT)
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Resources.NETHERITE_INGOT)
+                        .craftingTime(1200)
+                        .experience(4.0f)
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .padCraftEffect()
+                        .duringCrafting(VISUAL_EXPLOSIONS_ON_SHRINE)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .translateDescription("pastel.recipe.fusion_shrine.explanation.netherite_ingot")
+                        .requires(Items.NETHERITE_SCRAP)
+                        .requires(Items.GOLD_INGOT)
+                        .requires(MIDNIGHT_ABERRATION)
+        );
+
+        pfx.generateRecipe(
+                "pure_netherite_ingot",
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.DRAGONROT.get(),
+                        new ItemStack(Items.NETHERITE_INGOT)
+                )
+                        .requiredAdvancement(PastelAdvancements.Lategame.COLLECT_PURE_RESOURCE)
+                        .craftingTime(1200)
+                        .experience(1.0f)
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .padCraftEffect()
+                        .duringCrafting(VISUAL_EXPLOSIONS_ON_SHRINE)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(PURE_NETHERITE_SCRAP)
+                        .requires(PURE_GOLD)
+        );
+
     }
 }
