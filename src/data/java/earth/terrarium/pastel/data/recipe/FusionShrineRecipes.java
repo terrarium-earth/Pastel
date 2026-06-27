@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.data.recipe;
 
+import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.predicate.location.MoonPhasePredicate;
 import earth.terrarium.pastel.api.predicate.location.WeatherPredicate;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
@@ -28,6 +29,7 @@ public class FusionShrineRecipes {
 
         weather(pfx.subPrefix("weather"));
         vanilla(pfx.subPrefix("vanilla"));
+        malachite(pfx.subPrefix("malachite"));
 
         pfx.generateDynamicRecipe(
                 "shooting_star_hardening",
@@ -474,6 +476,174 @@ public class FusionShrineRecipes {
                         .requires(PURE_NETHERITE_SCRAP)
                         .requires(PURE_GOLD)
         );
+    }
 
+    private static void malachite(PrefixHelper pfx) {
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), FEROCIOUS_GLASS_CREST_BIDENT.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.FEROCIOUS_GLASS_CREST_BIDENT)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(MALACHITE_BIDENT)
+                        .requires(MOONSTONE_CORE)
+                        .requires(PURE_PRISMARINE, 8)
+                        .requires(STORM_STONE, 4)
+                        .requires(MERMAIDS_GEM, 4)
+                        .requires(WHITE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), FRACTAL_GLASS_CREST_BIDENT.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.FRACTAL_GLASS_CREST_BIDENT)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(MALACHITE_BIDENT)
+                        .requires(MOONSTONE_CORE)
+                        .requires(PURE_PRISMARINE, 8)
+                        .requires(Items.ECHO_SHARD, 4)
+                        .requires(MERMAIDS_GEM, 4)
+                        .requires(WHITE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), GLASS_CREST_CROSSBOW.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_CREST_CROSSBOW)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(MALACHITE_CROSSBOW)
+                        .requires(MOONSTONE_CORE)
+                        .requires(PURE_REDSTONE, 8)
+                        .requires(STAR_FRAGMENT, 4)
+                        .requires(WHITE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), GLASS_CREST_ULTRA_GREATSWORD.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_CREST_ULTRA_GREATSWORD)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(MALACHITE_ULTRA_GREATSWORD)
+                        .requires(MOONSTONE_CORE)
+                        .requires(PURE_NETHERITE_SCRAP, 8)
+                        .requires(Items.NETHER_STAR)
+                        .requires(WHITE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), GLASS_CREST_WORKSTAFF.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.GLASS_CREST_WORKSTAFF)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(MALACHITE_WORKSTAFF)
+                        .requires(MOONSTONE_CORE)
+                        .requires(PURE_DIAMOND, 8)
+                        .requires(RESONANCE_SHARD, 4)
+                        .requires(WHITE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), MALACHITE_BIDENT.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.MALACHITE_TOOLS)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.TRIDENT)
+                        .requires(PURE_MALACHITE, 8)
+                        .requires(PURE_QUARTZ, 8)
+                        .requires(PALTAERIA_FRAGMENTS, 4)
+                        .requires(MOONSTONE_POWDER, 8)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), MALACHITE_CROSSBOW.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.MALACHITE_TOOLS)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.CROSSBOW)
+                        .requires(PURE_MALACHITE, 8)
+                        .requires(PURE_QUARTZ, 8)
+                        .requires(PALTAERIA_FRAGMENTS, 4)
+                        .requires(MOONSTONE_POWDER, 8)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), MALACHITE_ULTRA_GREATSWORD.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.MALACHITE_TOOLS)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.DIAMOND_SWORD)
+                        .requires(PURE_MALACHITE, 8)
+                        .requires(PURE_QUARTZ, 8)
+                        .requires(PALTAERIA_FRAGMENTS, 4)
+                        .requires(MOONSTONE_POWDER, 8)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), MALACHITE_WORKSTAFF.get())
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Malachite.MALACHITE_TOOLS)
+                        .craftingTime(1200)
+                        .experience(16.0f)
+                        // pray tell copy from what
+                        .copyComponents()
+                        .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.DIAMOND_PICKAXE)
+                        .requires(Items.DIAMOND_AXE)
+                        .requires(Items.DIAMOND_SHOVEL)
+                        .requires(PURE_MALACHITE, 8)
+                        .requires(PURE_QUARTZ, 8)
+                        .requires(PALTAERIA_FRAGMENTS, 4)
+                        .requires(MOONSTONE_POWDER, 8)
+        );
     }
 }

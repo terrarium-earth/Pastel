@@ -1,0 +1,42 @@
+{
+  "type": "pastel:fusion_shrine",
+  "copy_components": true,
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:malachite_ultra_greatsword"
+    },
+    {
+      "item": "pastel:moonstone_core"
+    },
+    {
+      "count": 8,
+      "item": "pastel:pure_netherite_scrap"
+    },
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "count": 16,
+      "item": "pastel:white_pigment"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/malachite/glass_crest_ultra_greatsword",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:sweeping_edge": 4
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:glass_crest_ultra_greatsword"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 1200
+}
