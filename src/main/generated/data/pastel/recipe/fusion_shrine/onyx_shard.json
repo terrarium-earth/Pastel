@@ -1,0 +1,40 @@
+{
+  "type": "pastel:fusion_shrine",
+  "description": {
+    "translate": "pastel.recipe.fusion_shrine.explanation.onyx_shard"
+  },
+  "during_crafting_effects": [
+    "pastel:visual_explosions_on_shrine",
+    "pastel:nothing",
+    "pastel:visual_explosions_on_shrine"
+  ],
+  "experience": 2.0,
+  "finish_crafting_effect": "pastel:lightning_on_shrine",
+  "fluid": {
+    "fluid": "minecraft:lava"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:topaz_shard"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "pastel:citrine_shard"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/blocks/fusion_shrine",
+  "result": {
+    "count": 1,
+    "id": "pastel:onyx_shard"
+  },
+  "start_crafting_effect": "pastel:weather_thunder_short",
+  "time": 480,
+  "world_conditions": [
+    {
+      "moon_phase": "new_moon",
+      "time_of_day": "midnight"
+    }
+  ]
+}

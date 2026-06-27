@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.data.recipe.builder;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -62,6 +63,7 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
         return self();
     }
 
+    @CanIgnoreReturnValue
     public C neoCondition(ICondition condition) {
         this.conditions.add(condition);
         return self();
@@ -76,8 +78,5 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
         return this.conditions.toArray(ICondition[]::new);
     }
 
-    protected void saveHelper(RecipeOutput ctx, ResourceLocation id, Recipe<?> recipe) {
-        ctx.accept(id, recipe, null, this.conditions());
-    }
 
 }

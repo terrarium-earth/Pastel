@@ -1,0 +1,53 @@
+{
+  "type": "pastel:fusion_shrine",
+  "description": {
+    "translate": "pastel.recipe.fusion_shrine.explanation.soothing_bouquet"
+  },
+  "during_crafting_effects": [
+    "pastel:nothing",
+    "pastel:visual_explosions_on_shrine",
+    "pastel:nothing"
+  ],
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:nothing",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:nectardew_burgeon"
+    },
+    {
+      "count": 8,
+      "item": "minecraft:poppy"
+    },
+    {
+      "count": 8,
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "count": 2,
+      "item": "pastel:milky_resin"
+    },
+    {
+      "count": 3,
+      "item": "pastel:pure_quartz"
+    },
+    {
+      "count": 3,
+      "item": "pastel:purple_pigment"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/equipment/soothing_bouquet",
+  "result": {
+    "count": 1,
+    "id": "pastel:soothing_bouquet"
+  },
+  "start_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "time": 1200,
+  "world_conditions": [
+    {
+      "time_of_day": "midnight"
+    }
+  ]
+}

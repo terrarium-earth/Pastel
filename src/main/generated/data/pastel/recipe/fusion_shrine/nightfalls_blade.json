@@ -1,0 +1,46 @@
+{
+  "type": "pastel:fusion_shrine",
+  "copy_components": true,
+  "during_crafting_effects": [
+    "pastel:nothing",
+    "pastel:visual_explosions_on_shrine",
+    "pastel:nothing"
+  ],
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:lightning_on_shrine",
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "count": 4,
+      "item": "pastel:pyrite_chunk"
+    },
+    {
+      "count": 2,
+      "item": "pastel:pure_quartz"
+    },
+    {
+      "count": 8,
+      "item": "pastel:frostbite_essence"
+    },
+    {
+      "count": 4,
+      "item": "pastel:red_pigment"
+    },
+    {
+      "count": 4,
+      "item": "pastel:purple_pigment"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/equipment/nightfalls_blade",
+  "result": {
+    "count": 1,
+    "id": "pastel:nightfalls_blade"
+  },
+  "start_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "time": 1200
+}

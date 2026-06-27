@@ -169,6 +169,10 @@ public class PastelAdvancements {
             public static final ResourceLocation CITRINE_BOOTS = PastelCommon.locate("unlocks/equipment/citrine_boots");
 
             public static final ResourceLocation DARK_STAKES = PastelCommon.locate("unlocks/equipment/dark_stakes");
+
+            public static final ResourceLocation FOX_O_NINE_TAILS = PastelCommon.locate("unlocks/equipment/fox_o_nine_tails");
+
+            public static final ResourceLocation VERDIGRIS_LASH = PastelCommon.locate("unlocks/equipment/verdigris_lash");
         }
 
         public static class Blocks {
