@@ -6,8 +6,8 @@
     "fluid": "pastel:dragonrot"
   },
   "ingredients": [
-    "pastel:pure_copper",
-    "pastel:pure_zinc"
+    { "ingredient": {"item": "pastel:pure_copper"}},
+    {"ingredient": {"item": "pastel:pure_zinc"}}
   ],
   "result": {
     "id": "create:brass_ingot",

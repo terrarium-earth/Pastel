@@ -5,10 +5,10 @@
   "fluid": "minecraft:water",
   "ingredients": [
     {
-      "item": "minecraft:amethyst_shard",
+      "ingredient": {"item": "minecraft:amethyst_shard"},
       "count": 8
     },
-    "pastel:storm_stone"
+    {"ingredient": {"item": "pastel:storm_stone"}}
   ],
   "result": {
     "id": "hexcasting:charged_amethyst",
