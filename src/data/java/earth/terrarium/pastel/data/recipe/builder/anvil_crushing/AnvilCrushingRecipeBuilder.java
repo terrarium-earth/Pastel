@@ -79,18 +79,19 @@ public final class AnvilCrushingRecipeBuilder extends GatedRecipeBuilder<AnvilCr
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        var recipe = new AnvilCrushingRecipe(
-                this.group,
-                this.secret,
-                this.getRequiredAdvancement(),
-                this.input,
-                this.result,
-                this.crushedItemsPerPointOfDamage,
-                this.experience,
-                Optional.ofNullable(this.particleEffectIdentifier),
-                this.particleCount,
-                this.soundEventIdentifier
+        this.saveHelperGated(recipeOutput, id, daId ->
+                new AnvilCrushingRecipe(
+                        this.group,
+                        this.secret,
+                        daId,
+                        this.input,
+                        this.result,
+                        this.crushedItemsPerPointOfDamage,
+                        this.experience,
+                        Optional.ofNullable(this.particleEffectIdentifier),
+                        this.particleCount,
+                        this.soundEventIdentifier
+                )
         );
-        this.saveHelper(recipeOutput, id, recipe);
     }
 }

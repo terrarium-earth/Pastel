@@ -37,15 +37,15 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        var recipe = new PotionWorkshopReactingRecipe(
-                this.group,
-                this.secret,
-                this.getRequiredAdvancement(),
-                this.item,
-                this.modifiers
+        saveHelperGated(recipeOutput, id, daId ->
+                new PotionWorkshopReactingRecipe(
+                        this.group,
+                        this.secret,
+                        daId,
+                        this.item,
+                        this.modifiers
+                )
         );
-
-        saveHelper(recipeOutput, id, recipe);
     }
 
     // NOTE: if this used scala (or even kotlin)

@@ -97,18 +97,19 @@ public final class PotionWorkshopBrewingBuilder extends PotionWorkshopRecipeBuil
                 inkColor,
                 inkCost
         );
-        var recipe = new PotionWorkshopBrewingRecipe(
-                this.group,
-                this.secret,
-                this.getRequiredAdvancement(),
-                // nothing overrides the crafting time?
-                200,
-                this.ingredient1,
-                Optional.ofNullable(this.ingredient2),
-                Optional.ofNullable(this.ingredient3),
-                effect
-        );
 
-        saveHelper(recipeOutput, id, recipe);
+        saveHelperGated(recipeOutput, id, daId ->
+                new PotionWorkshopBrewingRecipe(
+                        this.group,
+                        this.secret,
+                        daId,
+                        // nothing overrides the crafting time?
+                        200,
+                        this.ingredient1,
+                        Optional.ofNullable(this.ingredient2),
+                        Optional.ofNullable(this.ingredient3),
+                        effect
+                )
+        );
     }
 }

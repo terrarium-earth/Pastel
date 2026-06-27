@@ -108,19 +108,21 @@ public final class EnchanterCraftingRecipeBuilder extends GatedRecipeBuilder<Enc
             finalList.addAll(ingredientList);
         }
 
-
-        var recipe = new EnchanterCraftingRecipe(
-                this.group,
-                this.secret,
-                this.getRequiredAdvancement(),
-                finalList,
-                this.result,
-                this.craftingTime,
-                this.requiredExperience,
-                this.noDiscounts,
-                this.copyComponents
+        saveHelperGated(
+                recipeOutput,
+                id,
+                daId ->
+                        new EnchanterCraftingRecipe(
+                                this.group,
+                                this.secret,
+                                daId,
+                                finalList,
+                                this.result,
+                                this.craftingTime,
+                                this.requiredExperience,
+                                this.noDiscounts,
+                                this.copyComponents
+                        )
         );
-
-        saveHelper(recipeOutput, id, recipe);
     }
 }

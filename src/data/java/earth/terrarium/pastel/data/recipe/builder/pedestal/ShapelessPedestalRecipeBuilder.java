@@ -48,19 +48,24 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         Objects.requireNonNull(tier, "tier must be defined before saving recipe!");
-        var recipe = new ShapelessPedestalRecipe(
-                this.group,
-                this.secret,
-                Optional.ofNullable(this.requiredAdvancementIdentifier),
-                this.tier,
-                NonNullList.copyOf(this.ingredients),
-                this.powderInputs,
-                this.result,
-                this.experience,
-                this.craftingTime,
-                this.skipRemainders,
-                this.disableYieldUpgrades
+        saveHelperGated(
+                recipeOutput,
+                id,
+                daId ->
+                        new ShapelessPedestalRecipe(
+                                this.group,
+                                this.secret,
+                                daId,
+                                this.tier,
+                                NonNullList.copyOf(this.ingredients),
+                                this.powderInputs,
+                                this.result,
+                                this.experience,
+                                this.craftingTime,
+                                this.skipRemainders,
+                                this.disableYieldUpgrades
+                        )
+
         );
-        recipeOutput.accept(id, recipe, null, this.conditions());
     }
 }

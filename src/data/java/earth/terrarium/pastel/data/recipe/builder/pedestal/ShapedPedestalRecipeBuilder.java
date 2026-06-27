@@ -49,22 +49,24 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         Objects.requireNonNull(this.tier, "tier must be defined before saving the recipe!");
         var rawRecipe = ShapedRecipePattern.of(keyMap, rows);
-        ShapedPedestalRecipe realRecipe =
-                new ShapedPedestalRecipe(
-                        this.group,
-                        this.secret,
-                        Optional.ofNullable(this.requiredAdvancementIdentifier),
-                        this.tier,
-                        rawRecipe,
-                        this.powderInputs,
-                        this.result,
-                        this.experience,
-                        this.craftingTime,
-                        this.skipRemainders,
-                        this.disableYieldUpgrades
-                );
 
-
-        recipeOutput.accept(id, realRecipe, null, this.conditions());
+        saveHelperGated(
+                recipeOutput,
+                id,
+                daId ->
+                        new ShapedPedestalRecipe(
+                                this.group,
+                                this.secret,
+                                daId,
+                                this.tier,
+                                rawRecipe,
+                                this.powderInputs,
+                                this.result,
+                                this.experience,
+                                this.craftingTime,
+                                this.skipRemainders,
+                                this.disableYieldUpgrades
+                        )
+        );
     }
 }

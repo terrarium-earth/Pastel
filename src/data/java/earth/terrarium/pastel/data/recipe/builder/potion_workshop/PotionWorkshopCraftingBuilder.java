@@ -37,22 +37,25 @@ public final class PotionWorkshopCraftingBuilder extends PotionWorkshopRecipeBui
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        var recipe =
-                new PotionWorkshopCraftingRecipe(
-                        this.group,
-                        this.secret,
-                        this.getRequiredAdvancement(),
-                        this.craftingTime,
-                        this.color,
-                        this.ingredient1,
-                        Optional.ofNullable(this.ingredient2),
-                        Optional.ofNullable(this.ingredient3),
-                        baseIngredient,
-                        consumeBaseIngredient,
-                        this.requiredExperience,
-                        this.result
-                );
-        saveHelper(recipeOutput, id, recipe);
+        saveHelperGated(
+                recipeOutput,
+                id,
+                daId ->
+                        new PotionWorkshopCraftingRecipe(
+                                this.group,
+                                this.secret,
+                                daId,
+                                this.craftingTime,
+                                this.color,
+                                this.ingredient1,
+                                Optional.ofNullable(this.ingredient2),
+                                Optional.ofNullable(this.ingredient3),
+                                baseIngredient,
+                                consumeBaseIngredient,
+                                this.requiredExperience,
+                                this.result
+                        )
+        );
     }
 
     public PotionWorkshopCraftingBuilder color(int color) {

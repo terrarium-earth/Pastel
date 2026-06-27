@@ -45,18 +45,22 @@ public final class SpiritInstillerRecipeBuilder extends GatedRecipeBuilder<Spiri
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        var recipe = new SpiritInstillerRecipe(
-                this.group,
-                this.secret,
-                this.getRequiredAdvancement(),
-                this.centerIngredient,
-                this.firstIngredient,
-                this.secondIngredient,
-                this.result,
-                this.craftingTime,
-                this.experience,
-                this.noBenefitsFromYieldAndEfficiencyUpgrades
+        saveHelperGated(
+                recipeOutput,
+                id,
+                daId ->
+                        new SpiritInstillerRecipe(
+                                this.group,
+                                this.secret,
+                                daId,
+                                this.centerIngredient,
+                                this.firstIngredient,
+                                this.secondIngredient,
+                                this.result,
+                                this.craftingTime,
+                                this.experience,
+                                this.noBenefitsFromYieldAndEfficiencyUpgrades
+                        )
         );
-        recipeOutput.accept(id, recipe, null, this.conditions());
     }
 }

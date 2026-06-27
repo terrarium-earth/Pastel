@@ -25,14 +25,18 @@ public final class InkConvertingRecipeBuilder extends GatedRecipeBuilder<InkConv
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        var recipe = new InkConvertingRecipe(
-                this.group,
-                this.secret,
-                Optional.ofNullable(this.requiredAdvancementIdentifier),
-                this.input,
-                this.color,
-                this.amount
+        saveHelperGated(
+                recipeOutput,
+                id,
+                daId ->
+                        new InkConvertingRecipe(
+                                this.group,
+                                this.secret,
+                                daId,
+                                this.input,
+                                this.color,
+                                this.amount
+                        )
         );
-        recipeOutput.accept(id, recipe, null, this.conditions());
     }
 }

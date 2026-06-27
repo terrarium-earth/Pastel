@@ -65,16 +65,20 @@ public final class CinderhearthRecipeBuilder extends GatedRecipeBuilder<Cinderhe
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        var recipe = new CinderhearthRecipe(
-                this.group,
-                this.secret,
-                Optional.ofNullable(this.requiredAdvancementIdentifier),
-                this.input,
-                this.time,
-                this.experience,
-                this.resultsWithChance
-        );
 
-        recipeOutput.accept(id, recipe, null, this.conditions());
+        saveHelperGated(
+                recipeOutput,
+                id,
+                daId ->
+                        new CinderhearthRecipe(
+                                this.group,
+                                this.secret,
+                                daId,
+                                this.input,
+                                this.time,
+                                this.experience,
+                                this.resultsWithChance
+                        )
+        );
     }
 }
