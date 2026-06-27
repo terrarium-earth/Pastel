@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:inexorable"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:pure_bloodstone"
+    },
+    {
+      "item": "pastel:pure_copper"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:pure_bloodstone"
+    },
+    {
+      "item": "pastel:pure_copper"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/inexorable",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:inexorable": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

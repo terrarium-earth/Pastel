@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:pest_control"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "pastel:storm_stone"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "pastel:storm_stone"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/pest_control",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:pest_control": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

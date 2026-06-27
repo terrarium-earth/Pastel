@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:inventory_insertion"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/inventory_insertion",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:inventory_insertion": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

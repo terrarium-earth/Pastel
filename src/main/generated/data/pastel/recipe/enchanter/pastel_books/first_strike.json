@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:first_strike"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/first_strike",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:first_strike": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

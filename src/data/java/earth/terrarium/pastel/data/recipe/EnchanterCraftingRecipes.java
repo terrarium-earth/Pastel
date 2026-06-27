@@ -1,10 +1,7 @@
 package earth.terrarium.pastel.data.recipe;
 
 import earth.terrarium.pastel.data.recipe.builder.enchanter.EnchanterCraftingRecipeBuilder;
-import earth.terrarium.pastel.registries.PastelAdvancements;
-import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelResourceConditions;
+import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +17,7 @@ public class EnchanterCraftingRecipes {
         var pfx = new PrefixHelper(ctx, lookup, "enchanter");
 
         vanillaBooks(pfx.subPrefix("vanilla_books"));
+        pastelBooks(pfx.subPrefix("pastel_books"));
 
         pfx.generateAutoNamedRecipe(
             new EnchanterCraftingRecipeBuilder(
@@ -681,6 +679,273 @@ public class EnchanterCraftingRecipes {
                         .requires(YELLOW_PIGMENT)
                         .requires(Items.WIND_CHARGE)
                         .requires(PALTAERIA_FRAGMENTS)
+        );
+    }
+    private static void pastelBooks(PrefixHelper pfx) {
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.BIG_CATCH
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.BIG_CATCH)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(LIGHT_BLUE_PIGMENT)
+                        .requires(LIGHT_BLUE_PIGMENT)
+                        .requires(Items.HEART_OF_THE_SEA)
+                        .requires(MERMAIDS_GEM)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.CLOVERS_FAVOR
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.CLOVERS_FAVOR)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(LIGHT_BLUE_PIGMENT)
+                        .requires(LIGHT_BLUE_PIGMENT)
+                        .requires(Items.GOLD_INGOT)
+                        .requires(PastelBlocks.FOUR_LEAF_CLOVER)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.DISARMING
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.DISARMING)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(RED_PIGMENT)
+                        .requires(RED_PIGMENT)
+                        .requires(STORM_STONE)
+                        .requires(STRATINE_FRAGMENTS)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.EXUBERANCE
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.EXUBERANCE)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(PURPLE_PIGMENT)
+                        .requires(PURPLE_PIGMENT)
+                        .requires(Items.EXPERIENCE_BOTTLE)
+                        .requires(RAW_AZURITE)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.FIRST_STRIKE
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.FIRST_STRIKE)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(PINK_PIGMENT)
+                        .requires(PINK_PIGMENT)
+                        .requires(Items.FLINT)
+                        .requires(Items.GHAST_TEAR)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.FOUNDRY
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.FOUNDRY)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(ORANGE_PIGMENT)
+                        .requires(ORANGE_PIGMENT)
+                        .requires(Items.LAVA_BUCKET)
+                        .requires(STRATINE_GEM)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.IMPROVED_CRITICAL
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.IMPROVED_CRITICAL)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(BLACK_PIGMENT)
+                        .requires(BLACK_PIGMENT)
+                        .requires(Items.IRON_INGOT)
+                        .requires(Items.FLINT)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.INDESTRUCTIBLE
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.INDESTRUCTIBLE)
+                        .craftingTime(1000)
+                        .requiredExperience(1000)
+                        .requires(BLUE_PIGMENT)
+                        .requires(BLUE_PIGMENT)
+                        .requires(DOWNSTONE_FRAGMENTS)
+                        .requires(PURE_NETHERITE_SCRAP)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.INERTIA
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.INERTIA)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(BROWN_PIGMENT)
+                        .requires(BROWN_PIGMENT)
+                        .requires(Items.SUGAR)
+                        .requires(NEOLITH)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.INEXORABLE
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.INEXORABLE)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(WHITE_PIGMENT)
+                        .requires(WHITE_PIGMENT)
+                        .requires(PURE_BLOODSTONE)
+                        .requires(PURE_COPPER)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.INVENTORY_INSERTION
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.INVENTORY_INSERTION)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(BLUE_PIGMENT)
+                        .requires(BLUE_PIGMENT)
+                        .requires(Items.ENDER_PEARL)
+                        .requires(Items.GLOWSTONE_DUST)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.PEST_CONTROL
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.PEST_CONTROL)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(LIGHT_GRAY_PIGMENT)
+                        .requires(LIGHT_GRAY_PIGMENT)
+                        .requires(Items.SOUL_SAND)
+                        .requires(STORM_STONE)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.RAZING
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.RAZING_CRAFTING)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(GRAY_PIGMENT)
+                        .requires(GRAY_PIGMENT)
+                        .requires(BOTTLE_OF_RUIN)
+                        .requires(DRAGONBONE_CHUNK)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.RESONANCE
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.RESONANCE_CRAFTING)
+                        .craftingTime(400)
+                        .requiredExperience(800)
+                        .requires(WHITE_PIGMENT)
+                        .requires(WHITE_PIGMENT)
+                        .requires(PALTAERIA_FRAGMENTS)
+                        .requires(RESONANCE_SHARD)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.SERENDIPITY_REEL
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.SERENDIPITY_REEL)
+                        .craftingTime(1000)
+                        .requiredExperience(1000)
+                        .requires(LIGHT_BLUE_PIGMENT)
+                        .requires(LIGHT_BLUE_PIGMENT)
+                        .requires(BISMUTH_CRYSTAL)
+                        .requires(MERMAIDS_GEM)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.STEADFAST
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.STEADFAST)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(BLUE_PIGMENT)
+                        .requires(BLUE_PIGMENT)
+                        .requires(MOONSTRUCK_NECTAR)
+                        .requires(SHIMMERSTONE_GEM)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.TIGHT_GRIP
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.TIGHT_GRIP)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(YELLOW_PIGMENT)
+                        .requires(YELLOW_PIGMENT)
+                        .requires(Items.STRING)
+                        .requires(NEOLITH)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.TREASURE_HUNTER
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.TREASURE_HUNTER)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(LIGHT_BLUE_PIGMENT)
+                        .requires(LIGHT_BLUE_PIGMENT)
+                        .requires(STORM_STONE)
+                        .requires(Items.FLINT)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                EnchanterCraftingRecipeBuilder.forEnchantment(
+                        pfx.getLookup(),
+                        PastelEnchantments.VOIDING
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Enchantments.VOIDING_CRAFTING)
+                        .craftingTime(300)
+                        .requiredExperience(100)
+                        .requires(BLACK_PIGMENT)
+                        .requires(BLACK_PIGMENT)
+                        .requires(Items.CHORUS_FLOWER)
+                        .requires(Items.ENDER_PEARL)
         );
     }
 }

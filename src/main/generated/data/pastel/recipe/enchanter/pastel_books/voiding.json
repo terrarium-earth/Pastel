@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:voiding"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:black_pigment"
+    },
+    {
+      "item": "pastel:black_pigment"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "pastel:black_pigment"
+    },
+    {
+      "item": "pastel:black_pigment"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/voiding_crafting",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:voiding": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}
