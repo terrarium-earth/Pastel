@@ -4,6 +4,7 @@ import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.predicate.location.MoonPhasePredicate;
 import earth.terrarium.pastel.api.predicate.location.WeatherPredicate;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
+import earth.terrarium.pastel.blocks.fluid.PastelFluid;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.data.recipe.builder.fusion_shrine.FusionShrineRecipeBuilder;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
@@ -31,6 +32,7 @@ public class FusionShrineRecipes {
         vanilla(pfx.subPrefix("vanilla"));
         malachite(pfx.subPrefix("malachite"));
         bedrock(pfx.subPrefix("bedrock"));
+        trinkets(pfx.subPrefix("trinkets"));
 
         pfx.generateDynamicRecipe(
                 "shooting_star_hardening",
@@ -646,6 +648,439 @@ public class FusionShrineRecipes {
                         .requires(PALTAERIA_FRAGMENTS, 4)
                         .requires(MOONSTONE_POWDER, 8)
         );
+    }
+
+    private static void trinkets(PrefixHelper pfx) {
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        ARTISTS_PALETTE.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.ARTISTS_PALETTE)
+                        .craftingTime(2400)
+                        .experience(16.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(ItemTags.PLANKS, 4)
+                        .requires(PastelItemTags.PIGMENTS, 16)
+                        .requires(SPECTRAL_SHARD)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        PIGMENT_PALETTE.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.PIGMENT_PALETTE)
+                        .craftingTime(1800)
+                        .experience(8.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(ItemTags.PLANKS, 4)
+                        .requires(RAW_AZURITE, 4)
+                        .requires(PastelItemTags.PIGMENTS, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        ASHEN_CIRCLET.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.ASHEN_CIRCLET)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_CIRCLET)
+                        .requires(STRATINE_GEM)
+                        .requires(NEOLITH, 4)
+                        .requires(ORANGE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        AZURE_DIKE_BELT.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.AZURE_DIKE_BELT)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_BELT)
+                        .requires(RAW_AZURITE, 8)
+                        .requires(BLUE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        AZURE_DIKE_RING.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.AZURE_DIKE_RING)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_TUFF_RING)
+                        .requires(RAW_AZURITE, 8)
+                        .requires(BLUE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        AZURESQUE_DIKE_CORE.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.AZURESQUE_DIKE_CORE)
+                        .craftingTime(1200)
+                        .experience(20.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(DOWNSTONE_FRAGMENTS, 4)
+                        .requires(AETHER_VESTIGES)
+                        .requires(MOONSTONE_CORE)
+                        .requires(PURE_AZURITE, 16)
+                        .requires(BLUE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        CIRCLET_OF_ARROGANCE.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.CIRCLET_OF_ARROGANCE)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_CIRCLET)
+                        .requires(PURE_MALACHITE, 8)
+                        .requires(BLOOD_ORCHID_PETAL, 4)
+                        .requires(MOONSTONE_POWDER, 8)
+                        .requires(RED_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        COTTON_CLOUD_BOOTS.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.COTTON_CLOUD_BOOTS)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.LEATHER_BOOTS)
+                        .requires(STARDUST, 16)
+                        .requires(Items.PHANTOM_MEMBRANE, 4)
+                        .requires(BROWN_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        GLEAMING_PIN.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.GLEAMING_PIN)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(PastelBlocks.POLISHED_CALCITE, 4)
+                        .requires(STAR_FRAGMENT)
+                        .requires(STARDUST, 16)
+                        .requires(YELLOW_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        GLOVES_OF_DAWNS_GRASP.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.GLOVES_OF_DAWNS_GRASP)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_GLOVES)
+                        .requires(NEOLITH, 8)
+                        .requires(LIGHT_BLUE_PIGMENT, 16)
+                        .requires(GREEN_PIGMENT, 8)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        GREATER_POTION_PENDANT.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.GREATER_POTION_PENDANT)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_PENDANT)
+                        .requires(PALTAERIA_GEM, 3)
+                        .requires(Items.GLASS, 4)
+                        .requires(PINK_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        LESSER_POTION_PENDANT.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.LESSER_POTION_PENDANT)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_PENDANT)
+                        .requires(STRATINE_GEM)
+                        .requires(Items.GLASS, 4)
+                        .requires(PINK_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        HEARTSINGERS_REWARD.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.HEARTSINGERS_REWARD)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_TUFF_RING)
+                        .requires(PastelBlocks.FOUR_LEAF_CLOVER, 2)
+                        .requires(PINK_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        JEOPARDANT.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.JEOPARDANT)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_TUFF_RING)
+                        .requires(Items.LAPIS_LAZULI, 6)
+                        .requires(RED_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        LAURELS_OF_SERENITY.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.LAURELS_OF_SERENITY)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_PENDANT)
+                        .requires(NECTARDEW_BURGEON)
+                        .requires(NIGHTDEW_SPROUT, 3)
+                        .requires(STAR_FRAGMENT, 2)
+                        .requires(PURE_QUARTZ, 2)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        NEAT_RING.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.NEAT_RING)
+                        .craftingTime(12000)
+                        .experience(8.0f)
+                        .startCrafting(PLAY_GLASS_BREAKING_SOUND)
+                        .padCraftEffect()
+                        .duringCrafting(LIGHTNING_ON_SHRINE)
+                        .padCraftEffect()
+                        .duringCrafting(EXPLOSIONS_AND_LIGHTNING_AROUND_SHRINE)
+                        .duringCrafting(EXPLOSIONS_AND_LIGHTNING_AROUND_SHRINE)
+                        .duringCrafting(EXPLOSIONS_AND_LIGHTNING_AROUND_SHRINE)
+                        .padCraftEffect()
+                        .finishCrafting(RIDICULOUSLY_SQUEAKY_FART)
+                        .dontPlayFinishEffects()
+                        .requires(FANCIFUL_BISMUTH_RING)
+                        .requires(PastelBlocks.PURE_GOLD_BLOCK, 64)
+                        .requires(MOONSTONE_SHARD, 64)
+                        .requires(PastelBlocks.RESONANT_LILY)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        PUFF_CIRCLET.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.PUFF_CIRCLET)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_CIRCLET)
+                        .requires(PALTAERIA_GEM)
+                        .requires(Items.WIND_CHARGE, 8)
+                        .requires(PURE_AZURITE, 8)
+                        .requires(MOONSTONE_SHARD, 16)
+                        .requires(WHITE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        RADIANCE_PIN.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.RADIANCE_PIN)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(PastelBlocks.POLISHED_CALCITE, 4)
+                        .requires(STAR_FRAGMENT)
+                        .requires(SHIMMERSTONE_GEM, 16)
+                        .requires(BLUE_PIGMENT, 8)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        RING_OF_AETHERIAL_GRACE.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.RING_OF_AETHERIAL_GRACE)
+                        .craftingTime(1200)
+                        .experience(4.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_BISMUTH_RING)
+                        .requires(Items.POPPED_CHORUS_FRUIT, 8)
+                        .requires(PALTAERIA_FRAGMENTS, 8)
+                        .requires(PALTAERIA_GEM)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        RING_OF_CONSUMPTION.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.RING_OF_CONSUMPTION)
+                        .craftingTime(1200)
+                        .experience(4.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_BISMUTH_RING)
+                        .requires(MIDNIGHT_CHIP, 4)
+                        .requires(BLOOD_ORCHID_PETAL, 4)
+                        .requires(NIGHTDEW_SPROUT, 4)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        RING_OF_DENSER_STEPS.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.RING_OF_DENSER_STEPS)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_TUFF_RING)
+                        .requires(Items.QUARTZ, 8)
+                        .requires(STRATINE_FRAGMENTS, 8)
+                        .requires(STRATINE_GEM)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        RING_OF_PURSUIT.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.RING_OF_PURSUIT)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_BISMUTH_RING)
+                        .requires(INCANDESCENT_ESSENCE, 8)
+                        .requires(PYRITE_CHUNK, 4)
+                        .requires(MAGENTA_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        SEVEN_LEAGUE_BOOTS.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.SEVEN_LEAGUE_BOOTS)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(Items.LEATHER_BOOTS)
+                        .requires(PastelBlocks.FOUR_LEAF_CLOVER)
+                        .requires(Items.PHANTOM_MEMBRANE)
+                        .requires(PURPLE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        SHIELDGRASP_AMULET.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.SHIELDGRASP_AMULET)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_PENDANT)
+                        .requires(RAW_AZURITE, 8)
+                        .requires(BLUE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        TAKEOFF_BELT.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.TAKEOFF_BELT)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_BELT)
+                        .requires(Items.RABBIT_FOOT)
+                        .requires(STORM_STONE, 2)
+                        .requires(YELLOW_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        TOTEM_PENDANT.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.TOTEM_PENDANT)
+                        .craftingTime(600)
+                        .experience(4.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_PENDANT)
+                        .requires(Items.TOTEM_OF_UNDYING)
+                        .requires(MOONSTRUCK_NECTAR)
+                        .requires(NEOLITH, 2)
+                        .requires(BLUE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        WEEPING_CIRCLET.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.WEEPING_CIRCLET)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_CIRCLET)
+                        .requires(Items.HEART_OF_THE_SEA)
+                        .requires(MERMAIDS_GEM, 8)
+                        .requires(Items.COPPER_INGOT, 4)
+                        .requires(LIGHT_BLUE_PIGMENT, 16)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                new FusionShrineRecipeBuilder(
+                        PastelFluids.LIQUID_CRYSTAL.get(),
+                        WHISPY_CIRCLET.toStack()
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Trinkets.WHISPY_CIRCLET)
+                        .craftingTime(600)
+                        .experience(2.0f)
+                        .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(FANCIFUL_CIRCLET)
+                        .requires(NIGHTDEW_SPROUT, 2)
+                        .requires(Items.PHANTOM_MEMBRANE, 4)
+                        .requires(BROWN_PIGMENT, 16)
+        );
+
+
     }
 
     private static void bedrock(PrefixHelper pfx) {

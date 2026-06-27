@@ -1,0 +1,35 @@
+{
+  "type": "pastel:fusion_shrine",
+  "experience": 2.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:fanciful_circlet"
+    },
+    {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    {
+      "count": 8,
+      "item": "pastel:mermaids_gem"
+    },
+    {
+      "count": 4,
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "count": 16,
+      "item": "pastel:light_blue_pigment"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/weeping_circlet",
+  "result": {
+    "count": 1,
+    "id": "pastel:weeping_circlet"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 600
+}

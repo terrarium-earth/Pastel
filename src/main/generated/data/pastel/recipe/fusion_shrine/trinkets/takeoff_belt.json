@@ -1,0 +1,31 @@
+{
+  "type": "pastel:fusion_shrine",
+  "experience": 2.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:fanciful_belt"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "count": 2,
+      "item": "pastel:storm_stone"
+    },
+    {
+      "count": 16,
+      "item": "pastel:yellow_pigment"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/takeoff_belt",
+  "result": {
+    "count": 1,
+    "id": "pastel:takeoff_belt"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 600
+}

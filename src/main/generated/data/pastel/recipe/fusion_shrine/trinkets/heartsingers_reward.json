@@ -1,0 +1,28 @@
+{
+  "type": "pastel:fusion_shrine",
+  "experience": 2.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:fanciful_tuff_ring"
+    },
+    {
+      "count": 2,
+      "item": "pastel:four_leaf_clover"
+    },
+    {
+      "count": 16,
+      "item": "pastel:pink_pigment"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/heartsingers_reward",
+  "result": {
+    "count": 1,
+    "id": "pastel:heartsingers_reward"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 600
+}
