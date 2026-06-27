@@ -1,0 +1,49 @@
+{
+  "type": "pastel:fusion_shrine",
+  "copy_components": true,
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "group": "bedrock_tools",
+  "ingredients": [
+    {
+      "item": "minecraft:shears"
+    },
+    {
+      "count": 2,
+      "item": "pastel:bedrock_dust"
+    },
+    {
+      "count": 2,
+      "item": "pastel:black_pigment"
+    },
+    {
+      "count": 2,
+      "item": "pastel:onyx_powder"
+    },
+    {
+      "count": 2,
+      "item": "pastel:stratine_fragments"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:gold_ingot"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/equipment/bedrock_tools",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:efficiency": 6
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:bedrock_shears"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 1200
+}

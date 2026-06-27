@@ -4,7 +4,6 @@ import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.predicate.location.MoonPhasePredicate;
 import earth.terrarium.pastel.api.predicate.location.WeatherPredicate;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
-import earth.terrarium.pastel.blocks.fluid.PastelFluid;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.data.recipe.builder.fusion_shrine.FusionShrineRecipeBuilder;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
@@ -17,6 +16,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
@@ -30,6 +30,7 @@ public class FusionShrineRecipes {
         weather(pfx.subPrefix("weather"));
         vanilla(pfx.subPrefix("vanilla"));
         malachite(pfx.subPrefix("malachite"));
+        bedrock(pfx.subPrefix("bedrock"));
 
         pfx.generateDynamicRecipe(
                 "shooting_star_hardening",
@@ -645,5 +646,163 @@ public class FusionShrineRecipes {
                         .requires(PALTAERIA_FRAGMENTS, 4)
                         .requires(MOONSTONE_POWDER, 8)
         );
+    }
+
+    private static void bedrock(PrefixHelper pfx) {
+        pfx.generateRecipe(
+                "anvil",
+                startBedrock(PastelBlocks.BEDROCK_ANVIL.toStack(), false)
+                        .requires(Items.ANVIL)
+                        .requires(BEDROCK_DUST, 27)
+                        .requires(BLACK_PIGMENT, 3)
+                        .requires(ONYX_POWDER, 3)
+        );
+
+        bedrockTool(
+                pfx,
+                Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_AXE.get()),
+                Items.GOLDEN_AXE,
+                3
+        );
+
+        bedrockTool(
+                pfx,
+                Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_HOE.get()),
+                Items.GOLDEN_HOE,
+                2
+        );
+
+        bedrockTool(
+                pfx,
+                Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_PICKAXE.get()),
+                Items.GOLDEN_PICKAXE,
+                3
+        );
+
+        bedrockTool(
+                pfx,
+                Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_SHOVEL.get()),
+                Items.GOLDEN_SHOVEL,
+                1
+        );
+
+        bedrockTool(
+                pfx,
+                Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_SWORD.get()),
+                Items.GOLDEN_SWORD,
+                2
+        );
+
+        pfx.generateRecipe(
+                "boots",
+                bedrockShared(
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_BOOTS.get()),
+                        Items.GOLDEN_BOOTS, true, 4
+                )
+                        .requires(STRATINE_FRAGMENTS, 2)
+        );
+
+        pfx.generateRecipe(
+                "chestplate",
+                bedrockShared(
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_CHESTPLATE.get()),
+                        Items.GOLDEN_CHESTPLATE, true, 8
+                )
+                        .requires(STRATINE_GEM, 1)
+                        .requires(Items.ROSE_BUSH, 1)
+        );
+
+        pfx.generateRecipe(
+                "helmet",
+                bedrockShared(
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_HELMET.get()),
+                        Items.GOLDEN_HELMET, true, 5
+                )
+                        .requires(STRATINE_FRAGMENTS, 2)
+        );
+
+        pfx.generateRecipe(
+                "leggings",
+                bedrockShared(
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_LEGGINGS.get()),
+                        Items.GOLDEN_LEGGINGS, true, 7
+                )
+                        .requires(STRATINE_FRAGMENTS, 4)
+        );
+
+        pfx.generateRecipe(
+                "bow",
+                bedrockShared(
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_BOW.get()),
+                        Items.BOW, false, 4
+                )
+                        .requires(STRATINE_FRAGMENTS, 2)
+                        .requires(Items.GOLD_INGOT, 3)
+        );
+
+        pfx.generateRecipe(
+                "crossbow",
+                bedrockShared(
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_CROSSBOW.get()),
+                        Items.CROSSBOW, false, 5
+                )
+                        .requires(STRATINE_FRAGMENTS, 3)
+                        .requires(Items.GOLD_INGOT, 3)
+        );
+
+        pfx.generateRecipe(
+                "fishing_rod",
+                bedrockShared(
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_FISHING_ROD.get()),
+                        Items.FISHING_ROD, false, 3
+                )
+                        .requires(STRATINE_FRAGMENTS, 1)
+                        .requires(Items.GOLD_INGOT, 3)
+        );
+
+        pfx.generateRecipe(
+                "shears",
+                bedrockShared(
+                        Preenchanted.getDefaultEnchantedStack(pfx.getLookup(), BEDROCK_SHEARS.get()),
+                        Items.SHEARS, false, 2
+                )
+                        .requires(STRATINE_FRAGMENTS, 2)
+                        .requires(Items.GOLD_INGOT, 2)
+        );
+    }
+    // this seems to be the only "flavor" of bedrock stuff that has a pattern that allows fully saving without
+    // any hiccups
+    private static void bedrockTool(PrefixHelper pfx, ItemStack result, ItemLike base, int count) {
+        var name = result.getItemHolder().getKey().location().getPath().replace("bedrock_", "");
+        pfx.generateRecipe(
+                name,
+                bedrockShared(result, base, false, count)
+                        .requires(STRATINE_GEM, 1)
+                        .requires(STRATINE_FRAGMENTS, count)
+        );
+    }
+
+    private static FusionShrineRecipeBuilder bedrockShared(ItemStack result, ItemLike base, boolean isArmor, int count) {
+        return startBedrock(result, isArmor)
+                .requires(base)
+                .requires(BEDROCK_DUST, count)
+                .requires(BLACK_PIGMENT, count)
+                .requires(ONYX_POWDER, count);
+    }
+
+
+    private static FusionShrineRecipeBuilder startBedrock(ItemStack result, boolean isArmor) {
+        var group = isArmor ? "bedrock_armor" : "bedrock_tools";
+        return new FusionShrineRecipeBuilder(
+                PastelFluids.MIDNIGHT_SOLUTION.get(),
+                result
+        )
+                .group(group)
+                .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.BEDROCK_TOOLS)
+                .craftingTime(1200)
+                .experience(16.0f)
+                .copyComponents()
+                .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
+                .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE);
     }
 }

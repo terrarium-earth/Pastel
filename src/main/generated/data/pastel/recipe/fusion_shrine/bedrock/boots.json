@@ -1,0 +1,45 @@
+{
+  "type": "pastel:fusion_shrine",
+  "copy_components": true,
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "group": "bedrock_armor",
+  "ingredients": [
+    {
+      "item": "minecraft:golden_boots"
+    },
+    {
+      "count": 4,
+      "item": "pastel:bedrock_dust"
+    },
+    {
+      "count": 4,
+      "item": "pastel:black_pigment"
+    },
+    {
+      "count": 4,
+      "item": "pastel:onyx_powder"
+    },
+    {
+      "count": 2,
+      "item": "pastel:stratine_fragments"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/equipment/bedrock_tools",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:fire_protection": 5
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:bedrock_boots"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 1200
+}
