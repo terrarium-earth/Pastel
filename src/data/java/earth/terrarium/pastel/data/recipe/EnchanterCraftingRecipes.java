@@ -591,7 +591,9 @@ public class EnchanterCraftingRecipes {
                         .requires(PALTAERIA_FRAGMENTS)
         );
 
-        pfx.generateAutoNamedRecipe(
+        pfx.generateRecipe(
+                // NO EDGING ALLOWED!
+                "sweeping",
                 EnchanterCraftingRecipeBuilder.forEnchantment(
                         pfx.getLookup(),
                         Enchantments.SWEEPING_EDGE
