@@ -478,6 +478,7 @@ public class TitrationBarrelRecipes {
     // THE FINAL BOSS OF DATAGEN BECKONS...
     private static void infusedBeverages(PrefixHelper pfx) {
         liquors(pfx);
+        ciders(pfx);
 
         pfx.generateAutoNamedRecipe(
                 infusedCommon(Fluids.WATER, InfusedBeverageComponent.ADVOCAAT)
@@ -545,34 +546,6 @@ public class TitrationBarrelRecipes {
                         .requires(Items.WHEAT, 4)
                         .requires(Items.SWEET_BERRIES, 1)
                         .requires(Items.SUGAR_CANE, 1)
-        );
-
-        pfx.generateAutoNamedRecipe(
-                infusedCommon(
-                        Fluids.WATER,
-                        InfusedBeverageComponent.APPLE_CIDER
-                )
-                        .minFermentationTimeHours(12)
-                        .fermentationSpeedMod(1.25f)
-                        .statusEffect(MobEffects.MOVEMENT_SPEED, 9600)
-                            .simplePotencyEntry(0)
-                            .potencyAlc(1, 5)
-                            .potencyAlc(2, 8)
-                        .submit()
-                        .statusEffect(MobEffects.DAMAGE_BOOST, 9600)
-                            .potencyAlc(0, 3)
-                            .potencyAlc(1, 6)
-                        .submit()
-                        .statusEffect(MobEffects.WEAKNESS, 9600)
-                            .potencyThickness(0, 2)
-                            .potencyThickness(1, 3)
-                            .potencyThickness(2, 4)
-                        .submit()
-                        .statusEffect(MobEffects.CONFUSION, 600)
-                            .potencyThickness(0, 3)
-                            .potencyAlc(0, 9)
-                        .submit()
-                        .requires(Items.APPLE, 8)
         );
 
         pfx.generateAutoNamedRecipe(
@@ -671,33 +644,7 @@ public class TitrationBarrelRecipes {
                         .requires(Items.WHEAT, 6)
         );
 
-        pfx.generateAutoNamedRecipe(
-                infusedCommon(
-                        Fluids.WATER,
-                        InfusedBeverageComponent.BERRY_CIDER
-                )
-                        .minFermentationTimeHours(12)
-                        .fermentationSpeedMod(1.25f)
-                        .statusEffect(MobEffects.HEALTH_BOOST, 9600)
-                            .simplePotencyEntry(0)
-                            .potencyAlc(1, 5)
-                            .potencyAlc(2, 8)
-                        .submit()
-                        .statusEffect(MobEffects.DAMAGE_BOOST, 9600)
-                            .potencyAlc(0, 3)
-                            .potencyAlc(1, 6)
-                        .submit()
-                        .statusEffect(MobEffects.WEAKNESS, 9600)
-                            .potencyThickness(0, 2)
-                            .potencyThickness(1, 3)
-                            .potencyThickness(2, 4)
-                        .submit()
-                        .statusEffect(MobEffects.CONFUSION, 600)
-                            .potencyThickness(0, 3)
-                            .potencyAlc(0, 9)
-                        .submit()
-                        .requires(Items.SWEET_BERRIES, 8)
-        );
+
 
 
 
@@ -912,35 +859,81 @@ public class TitrationBarrelRecipes {
                         .requires(AMARANTH_GRAINS, 12)
         );
 
+
+    }
+
+    private static void ciders(PrefixHelper pfx) {
         pfx.generateAutoNamedRecipe(
-                infusedCommon(
+                cider(
                         Fluids.WATER,
-                        InfusedBeverageComponent.GLASS_PEACH_CIDER
+                        InfusedBeverageComponent.APPLE_CIDER,
+                        MobEffects.MOVEMENT_SPEED,
+                        MobEffects.DAMAGE_BOOST,
+                        MobEffects.WEAKNESS
+                )
+                        .requires(Items.APPLE, 8)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                cider(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.BERRY_CIDER,
+                        MobEffects.HEALTH_BOOST,
+                        MobEffects.DAMAGE_BOOST,
+                        MobEffects.WEAKNESS
+                )
+                        .requires(Items.SWEET_BERRIES, 8)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                cider(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.GLASS_PEACH_CIDER,
+                        PastelMobEffects.PROJECTILE_REBOUND,
+                        MobEffects.DAMAGE_BOOST,
+                        MobEffects.WEAKNESS
                 )
                         .requiredAdvancement(PastelAdvancements.Unlocks.Food.GLASS_PEACH_TITRATION)
-                        .minFermentationTimeHours(12)
-                        .fermentationSpeedMod(1.25f)
-                        .statusEffect(PastelMobEffects.PROJECTILE_REBOUND, 9600)
-                            .simplePotencyEntry(0)
-                            .potencyAlc(1, 5)
-                            .potencyAlc(2, 8)
-                        .submit()
-                        .statusEffect(MobEffects.DAMAGE_BOOST, 9600)
-                            .potencyAlc(0, 3)
-                            .potencyAlc(1, 6)
-                        .submit()
-                        .statusEffect(MobEffects.WEAKNESS, 9600)
-                            .scaleOnThickness(2, 2, 1)
-                        .submit()
-                        .statusEffect(MobEffects.CONFUSION, 600)
-                            .potencyAlc(0, 9)
-                            .potencyThickness(0, 3)
-                        .submit()
                         .requires(GLASS_PEACH, 8)
         );
 
+        pfx.generateAutoNamedRecipe(
+                cider(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.GLOW_BERRY_CIDER,
+                        PastelMobEffects.SWIFTNESS,
+                        MobEffects.DAMAGE_BOOST,
+                        MobEffects.WEAKNESS
+                )
+                        .statusEffect(MobEffects.GLOWING, 4800)
+                            .simplePotencyEntry(0)
+                        .submit()
+                        .requires(Items.GLOW_BERRIES, 8)
+        );
 
+        pfx.generateAutoNamedRecipe(
+                cider(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.PLUM_CIDER,
+                        MobEffects.MOVEMENT_SPEED,
+                        PastelMobEffects.SWIFTNESS,
+                        PastelMobEffects.VULNERABILITY
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Food.FISSURE_PLUM_TITRATION)
+                        .requires(FISSURE_PLUM, 8)
+        );
 
+        pfx.generateAutoNamedRecipe(
+                cider(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.SAWBLADE_HOLLY_CIDER,
+                        PastelMobEffects.TOUGHNESS,
+                        MobEffects.DAMAGE_BOOST,
+                        MobEffects.WEAKNESS
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Food.SAWBLADE_HOLLY_TITRATION)
+                        .requires(SAWBLADE_HOLLY_BERRY, 8)
+        );
     }
 
     private static void liquors(PrefixHelper pfx) {
@@ -1056,6 +1049,35 @@ public class TitrationBarrelRecipes {
                 .statusEffect(MobEffects.CONFUSION, 600)
                     .potencyThickness(0, 3)
                     .potencyAlc(0, 30)
+                .submit()
+                ;
+    }
+
+    private static TitrationBarrelRecipeBuilder cider(
+            Fluid fluid,
+            InfusedBeverageComponent component,
+            Holder<MobEffect> primaryEffect,
+            Holder<MobEffect> secondaryEffect,
+            Holder<MobEffect> negativeEffect
+    ) {
+        return infusedCommon(fluid, component)
+                .minFermentationTimeHours(12)
+                .fermentationSpeedMod(1.25f)
+                .statusEffect(primaryEffect, 9600)
+                    .simplePotencyEntry(0)
+                    .potencyAlc(1, 5)
+                    .potencyAlc(2, 8)
+                .submit()
+                .statusEffect(secondaryEffect, 9600)
+                    .potencyAlc(0, 3)
+                    .potencyAlc(1, 6)
+                .submit()
+                .statusEffect(negativeEffect, 9600)
+                    .scaleOnThickness(2, 2, 1)
+                .submit()
+                .statusEffect(MobEffects.CONFUSION, 600)
+                    .potencyAlc(0, 9)
+                    .potencyThickness(0, 3)
                 .submit()
                 ;
     }
