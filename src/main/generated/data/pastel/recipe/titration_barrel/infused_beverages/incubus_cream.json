@@ -1,0 +1,106 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "pastel:lava_gliding",
+        "potency": [
+          {},
+          {
+            "min_alc": 20.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 25.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 3
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:fire_resistance",
+        "potency": [
+          {
+            "min_alc": 25.0,
+            "min_thickness": 1.5
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:health_boost",
+        "potency": [
+          {
+            "min_alc": 28.0
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:slowness",
+        "potency": [
+          {
+            "min_thickness": 2.0
+          },
+          {
+            "min_thickness": 3.0,
+            "potency": 1
+          },
+          {
+            "min_thickness": 4.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:blindness",
+        "potency": [
+          {
+            "min_alc": 9.0
+          },
+          {
+            "min_thickness": 3.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.25
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 8,
+      "item": "minecraft:crimson_fungus"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "count": 4,
+      "item": "pastel:clotted_cream"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 14173082,
+        "variant": "incubus_cream"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "secret": true,
+  "tapping_item": "minecraft:glass_bottle"
+}

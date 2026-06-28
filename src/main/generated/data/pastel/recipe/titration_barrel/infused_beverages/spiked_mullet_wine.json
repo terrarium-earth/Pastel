@@ -1,0 +1,105 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "minecraft:speed",
+        "potency": [
+          {},
+          {
+            "min_alc": 20.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 2400,
+        "id": "pastel:immunity",
+        "potency": [
+          {
+            "min_alc": 22.0
+          }
+        ]
+      },
+      {
+        "base_duration": 2400,
+        "id": "minecraft:resistance",
+        "potency": [
+          {
+            "min_alc": 25.0
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:slowness",
+        "potency": [
+          {
+            "min_thickness": 2.0
+          },
+          {
+            "min_thickness": 3.0,
+            "potency": 1
+          },
+          {
+            "min_thickness": 4.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:blindness",
+        "potency": [
+          {
+            "min_alc": 9.0
+          },
+          {
+            "min_thickness": 3.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.25
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 6,
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "count": 4,
+      "item": "pastel:myceylon"
+    },
+    {
+      "count": 4,
+      "item": "pastel:prickly_bayleaf"
+    },
+    {
+      "count": 4,
+      "item": "minecraft:sugar"
+    }
+  ],
+  "min_fermentation_time_hours": 48,
+  "required_advancement": "pastel:unlocks/food/spiked_mullet_wine",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 10365209,
+        "variant": "spiked_mullet_wine"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

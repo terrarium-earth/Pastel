@@ -126,112 +126,35 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
         return this;
     }
 
-    public FermentationStatusEffectEntryBuilder statusEffect(MobEffect effect, int baseDuration) {
-        return new FermentationStatusEffectEntryBuilder(effect, baseDuration);
+    public FermentationStatusEffectEntryBuilderForBarrel statusEffect(MobEffect effect, int baseDuration) {
+        return new FermentationStatusEffectEntryBuilderForBarrel(effect, baseDuration);
     }
 
-    public FermentationStatusEffectEntryBuilder statusEffect(Holder<MobEffect> effect, int baseDuration) {
+    public FermentationStatusEffectEntryBuilderForBarrel statusEffect(Holder<MobEffect> effect, int baseDuration) {
         return statusEffect(effect.value(), baseDuration);
+    }
+
+    public TitrationBarrelRecipeBuilder acceptEffect(FermentationStatusEffectEntry entry) {
+        this.statusEffectEntries.add(entry);
+        return this;
     }
 
     private static IngredientStack sizedToStack(SizedIngredient sized) {
         return new IngredientStack(sized.ingredient(), sized.count());
     }
 
-    public final class FermentationStatusEffectEntryBuilder {
-        private final MobEffect statusEffect;
-        private final int baseDuration;
-        private final List<FermentationStatusEffectEntry.StatusEffectPotencyEntry> potencyEntries = new ArrayList<>();
+    public final class FermentationStatusEffectEntryBuilderForBarrel extends FermentationStatusEffectEntryBuilder<FermentationStatusEffectEntryBuilderForBarrel> {
 
-        public FermentationStatusEffectEntryBuilder(
+        public FermentationStatusEffectEntryBuilderForBarrel(
                 MobEffect statusEffect,
                 int baseDuration
         ) {
-            this.statusEffect = statusEffect;
-            this.baseDuration = baseDuration;
+            super(statusEffect, baseDuration);
         }
-
-        public FermentationStatusEffectEntryBuilder simplePotencyEntry(int potency) {
-            new FermentationStatusEffectPotencyEntryBuilder(potency).submit();
-            return this;
-        }
-
-        public FermentationStatusEffectPotencyEntryBuilder potencyEntry(int potency) {
-            return new FermentationStatusEffectPotencyEntryBuilder(potency);
-        }
-
-        public FermentationStatusEffectEntryBuilder scaleOnAlc(int maxLevel, float start, float perLevel) {
-            float p = start;
-            for (var x = 0; x <= maxLevel; x++, p += perLevel) {
-                potencyAlc(x, p);
-            }
-            return this;
-        }
-
-        public FermentationStatusEffectEntryBuilder scaleOnThickness(int maxLevel, float start, float perLevel) {
-            float p = start;
-            for (var x = 0; x <= maxLevel; x++, p += perLevel) {
-                potencyThickness(x, p);
-            }
-            return this;
-        }
-
-        public FermentationStatusEffectEntryBuilder potencyAlc(int potency, float minAlc) {
-            new FermentationStatusEffectPotencyEntryBuilder(potency).minAlc(minAlc).submit();
-            return this;
-        }
-
-        public FermentationStatusEffectEntryBuilder potencyThickness(int potency, float minThickness) {
-            new FermentationStatusEffectPotencyEntryBuilder(potency).minThickness(minThickness).submit();
-            return this;
-        }
-
-        public FermentationStatusEffectEntryBuilder potencyFull(int potency, float minAlc, float minThickness) {
-            this.potencyEntries.add(new FermentationStatusEffectEntry.StatusEffectPotencyEntry(minAlc, minThickness, potency));
-            return this;
-        }
-
 
         public TitrationBarrelRecipeBuilder submit() {
-            statusEffectEntries.add(new FermentationStatusEffectEntry(this.statusEffect, this.baseDuration, this.potencyEntries));
+            statusEffectEntries.add(this.build());
             return TitrationBarrelRecipeBuilder.this;
-        }
-
-        public final class FermentationStatusEffectPotencyEntryBuilder {
-            private float minAlc = 0.0f;
-            private float minThickness = 0.0f;
-            private final int potency;
-
-            public FermentationStatusEffectPotencyEntryBuilder(int potency) {
-                this.potency = potency;
-            }
-
-            public FermentationStatusEffectPotencyEntryBuilder minAlc(float value) {
-                this.minAlc = value;
-                return this;
-            }
-
-            public FermentationStatusEffectPotencyEntryBuilder minThickness(float value) {
-                this.minThickness = value;
-                return this;
-            }
-
-
-            public FermentationStatusEffectEntryBuilder scaledUntil(int maxLevels, float perLevelAlc, float perLevelThickness) {
-                float alc = this.minAlc;
-                float thickness = this.minThickness;
-                for (var x = this.potency; x <= maxLevels; x++, alc += perLevelAlc, thickness += perLevelThickness) {
-                    potencyEntries.add(new FermentationStatusEffectEntry.StatusEffectPotencyEntry(alc, thickness, x));
-                }
-
-                return FermentationStatusEffectEntryBuilder.this;
-            }
-
-
-            public FermentationStatusEffectEntryBuilder submit() {
-                potencyEntries.add(new FermentationStatusEffectEntry.StatusEffectPotencyEntry(this.minAlc, this.minThickness, this.potency));
-                return FermentationStatusEffectEntryBuilder.this;
-            }
         }
     }
 

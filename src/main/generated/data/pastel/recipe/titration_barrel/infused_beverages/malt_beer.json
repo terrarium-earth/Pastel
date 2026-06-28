@@ -1,0 +1,45 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "minecraft:haste",
+        "potency": []
+      },
+      {
+        "base_duration": 9600,
+        "id": "pastel:nourishing",
+        "potency": []
+      }
+    ],
+    "fermentation_speed_mod": 0.0
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 4,
+      "item": "minecraft:wheat"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:sugar"
+    }
+  ],
+  "min_fermentation_time_hours": 4,
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 8272724,
+        "variant": "malt_beer"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

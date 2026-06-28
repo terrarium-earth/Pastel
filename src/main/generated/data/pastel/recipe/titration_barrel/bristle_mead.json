@@ -67,10 +67,10 @@
         "id": "minecraft:blindness",
         "potency": [
           {
-            "min_thickness": 3.0
+            "min_alc": 30.0
           },
           {
-            "min_alc": 30.0
+            "min_thickness": 3.0
           }
         ]
       }
