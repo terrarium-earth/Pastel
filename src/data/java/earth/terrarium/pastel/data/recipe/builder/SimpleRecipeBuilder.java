@@ -39,8 +39,11 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
     }
 
     public String getDefaultName() {
-        var id = BuiltInRegistries.ITEM.getKey(this.getResult());
-        return id.getPath();
+        return nameFromResult(this.getResult());
+    }
+
+    public static String nameFromResult(Item result) {
+        return BuiltInRegistries.ITEM.getKey(result).getPath();
     }
 
     public static String recipeName(RecipeBuilder recipe) {

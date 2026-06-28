@@ -1,13 +1,18 @@
 package earth.terrarium.pastel.data.recipe;
 
 import earth.terrarium.pastel.blocks.fluid.PastelFluid;
+import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.data.recipe.builder.titration_barrel.TitrationBarrelRecipeBuilder;
 import earth.terrarium.pastel.recipe.titration_barrel.dynamic.*;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
@@ -15,13 +20,71 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
+import java.util.List;
+
 import static earth.terrarium.pastel.registries.PastelItems.*;
 
 public class TitrationBarrelRecipes {
     private static final String INFUSED_BEVERAGES = "infused_beverages";
 
+    private static final TagKey<Item> RICE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/rices"));
+
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
         var pfx = new PrefixHelper(ctx, lookup, "titration_barrel");
+
+        var sakePfx = new PrefixHelper(ctx, lookup, "mod_integration");
+
+        sakePfx.generateAutoNamedRecipe(
+                TitrationBarrelRecipeBuilder.infusedBeverage(
+                        FluidIngredient.empty(),
+                        InfusedBeverageComponent.SAKE,
+                        1
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.TITRATION_BARREL)
+                        .neoCondition(
+                                // ???
+                                new PastelLoadConditions.PastelTagsPopulatedResourceCondition(Registries.ITEM.location(),
+                                        List.of(RICE.location())
+                                )
+                        )
+                        .group(INFUSED_BEVERAGES)
+                        .minFermentationTimeHours(24)
+                        .tappingItem(Items.GLASS_BOTTLE)
+                        .fermentationSpeedMod(0.25f)
+                        .statusEffect(PastelMobEffects.LAVA_GLIDING, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyEntry(1)
+                                .minAlc(20)
+                            .submit()
+                            .potencyEntry(2)
+                                .minAlc(25)
+                            .submit()
+                            .potencyEntry(3)
+                                .minAlc(30)
+                            .submit()
+                        .submit()
+                        .statusEffect(MobEffects.MOVEMENT_SPEED, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyAlc(1, 20)
+                            .potencyAlc(2, 25)
+                            .potencyAlc(3, 30)
+                        .submit()
+                        .statusEffect(MobEffects.DAMAGE_BOOST, 9600)
+                            .potencyFull(0, 25, 1.5f)
+                            .potencyFull(1, 25, 2.0f)
+                            .potencyFull(2, 25, 2.5f)
+                        .submit()
+                        .statusEffect(MobEffects.MOVEMENT_SLOWDOWN, 9600)
+                            .potencyThickness(0, 2)
+                            .potencyThickness(1, 3)
+                            .potencyThickness(2, 4)
+                        .submit()
+                        .statusEffect(MobEffects.BLINDNESS, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 30)
+                        .submit()
+                        .requires(RICE, 8)
+        );
 
         special(pfx.subPrefix("special"));
 

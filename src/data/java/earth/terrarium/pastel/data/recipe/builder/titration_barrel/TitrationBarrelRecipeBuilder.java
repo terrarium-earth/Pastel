@@ -1,12 +1,16 @@
 package earth.terrarium.pastel.data.recipe.builder.titration_barrel;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
+import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.data.recipe.builder.GatedRecipeBuilder;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationStatusEffectEntry;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -27,6 +31,7 @@ import java.util.stream.Collectors;
 public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<TitrationBarrelRecipeBuilder> {
     private final NonNullList<SizedIngredient> ingredients = NonNullList.create();
     private final FluidIngredient fluid;
+    private final String defaultName;
     private Item item = Items.AIR;
     private int minFermentationTimeHours = 24;
     private float fermentationSpeedMod = 1f;
@@ -34,11 +39,20 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
     private final List<FermentationStatusEffectEntry> statusEffectEntries = new ArrayList<>();
 
     public TitrationBarrelRecipeBuilder(
+            String name,
             FluidIngredient fluid,
             ItemStack result
     ) {
         super(result);
         this.fluid = fluid;
+        this.defaultName = name;
+    }
+
+    public TitrationBarrelRecipeBuilder(
+            FluidIngredient fluid,
+            ItemStack result
+    ) {
+        this(nameFromResult(result.getItem()), fluid, result);
     }
 
     public TitrationBarrelRecipeBuilder(
@@ -46,6 +60,21 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
             ItemStack result
     ) {
         this(FluidIngredient.of(fluid), result);
+    }
+
+    @Override
+    public String getDefaultName() {
+        return this.defaultName;
+    }
+
+    public static TitrationBarrelRecipeBuilder infusedBeverage(Fluid fluid, InfusedBeverageComponent component, int count) {
+        return infusedBeverage(FluidIngredient.of(fluid), component, count);
+    }
+
+    public static TitrationBarrelRecipeBuilder infusedBeverage(FluidIngredient fluid, InfusedBeverageComponent component, int count) {
+        var stack = new ItemStack(PastelItems.INFUSED_BEVERAGE, count, DataComponentPatch.builder().set(PastelDataComponentTypes.INFUSED_BEVERAGE, component).build());
+
+        return new TitrationBarrelRecipeBuilder(component.variant(), fluid, stack);
     }
 
     public TitrationBarrelRecipeBuilder requires(SizedIngredient ingredient) {
@@ -129,6 +158,21 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
 
         public FermentationStatusEffectPotencyEntryBuilder potencyEntry(int potency) {
             return new FermentationStatusEffectPotencyEntryBuilder(potency);
+        }
+
+        public FermentationStatusEffectEntryBuilder potencyAlc(int potency, float minAlc) {
+            new FermentationStatusEffectPotencyEntryBuilder(potency).minAlc(minAlc).submit();
+            return this;
+        }
+
+        public FermentationStatusEffectEntryBuilder potencyThickness(int potency, float minThickness) {
+            new FermentationStatusEffectPotencyEntryBuilder(potency).minThickness(minThickness).submit();
+            return this;
+        }
+
+        public FermentationStatusEffectEntryBuilder potencyFull(int potency, float minAlc, float minThickness) {
+            this.potencyEntries.add(new FermentationStatusEffectEntry.StatusEffectPotencyEntry(minAlc, minThickness, potency));
+            return this;
         }
 
 
