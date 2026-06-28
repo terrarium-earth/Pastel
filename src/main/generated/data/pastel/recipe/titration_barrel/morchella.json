@@ -1,0 +1,121 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "pastel:nourishing"
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:night_vision",
+        "potency": [
+          {
+            "min_alc": 30.0
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "pastel:swiftness",
+        "potency": [
+          {
+            "min_alc": 12.0,
+            "min_thickness": 1.5
+          },
+          {
+            "min_alc": 15.0,
+            "min_thickness": 2.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 18.0,
+            "min_thickness": 2.5,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:haste",
+        "potency": [
+          {
+            "min_alc": 13.0,
+            "min_thickness": 1.5
+          },
+          {
+            "min_alc": 16.0,
+            "min_thickness": 2.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 19.0,
+            "min_thickness": 2.5,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "pastel:vulnerability",
+        "potency": [
+          {
+            "min_thickness": 2.0
+          },
+          {
+            "min_thickness": 3.0,
+            "potency": 1
+          },
+          {
+            "min_thickness": 4.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:nausea",
+        "potency": [
+          {
+            "min_thickness": 3.0
+          },
+          {
+            "min_alc": 22.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.5
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "count": 4,
+      "item": "pastel:incandescent_essence"
+    },
+    {
+      "count": 8,
+      "item": "pastel:myceylon"
+    },
+    {
+      "count": 4,
+      "item": "pastel:amaranth_grains"
+    },
+    {
+      "count": 2,
+      "tag": "c:mushrooms"
+    },
+    {
+      "count": 2,
+      "item": "pastel:jaramel"
+    }
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",
+  "result": {
+    "count": 4,
+    "id": "pastel:morchella"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

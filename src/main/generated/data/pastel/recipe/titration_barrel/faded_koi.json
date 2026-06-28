@@ -1,0 +1,22 @@
+{
+  "type": "pastel:titration_barrel",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 8,
+      "item": "pastel:koi"
+    },
+    {
+      "item": "pastel:bottle_of_fading"
+    }
+  ],
+  "min_fermentation_time_hours": 2,
+  "required_advancement": "pastel:hidden/collect_cookbooks/imperial_cookbook",
+  "result": {
+    "count": 4,
+    "id": "pastel:faded_koi"
+  },
+  "tapping_item": "pastel:aloe_leaf"
+}

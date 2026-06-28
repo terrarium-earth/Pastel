@@ -155,9 +155,7 @@ public final class FusionShrineRecipeBuilder extends GatedRecipeBuilder<FusionSh
         return this;
     }
 
-    private static IngredientStack sizedToStack(SizedIngredient sized) {
-        return new IngredientStack(sized.ingredient(), sized.count());
-    }
+
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {

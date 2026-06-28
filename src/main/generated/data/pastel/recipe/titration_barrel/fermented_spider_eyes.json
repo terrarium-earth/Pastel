@@ -1,0 +1,25 @@
+{
+  "type": "pastel:titration_barrel",
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "count": 2,
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:sugar"
+    }
+  ],
+  "min_fermentation_time_hours": 1,
+  "result": {
+    "count": 4,
+    "id": "minecraft:fermented_spider_eye"
+  }
+}

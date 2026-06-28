@@ -1,0 +1,27 @@
+{
+  "type": "pastel:titration_barrel",
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "ingredients": [
+    {
+      "count": 8,
+      "tag": "c:foods/raw_fish"
+    },
+    {
+      "count": 8,
+      "item": "pastel:prickly_bayleaf"
+    },
+    {
+      "item": "pastel:midnight_chip"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1",
+  "result": {
+    "count": 4,
+    "id": "pastel:surstromming"
+  }
+}
