@@ -160,6 +160,22 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
             return new FermentationStatusEffectPotencyEntryBuilder(potency);
         }
 
+        public FermentationStatusEffectEntryBuilder scaleOnAlc(int maxLevel, float start, float perLevel) {
+            float p = start;
+            for (var x = 0; x <= maxLevel; x++, p += perLevel) {
+                potencyAlc(x, p);
+            }
+            return this;
+        }
+
+        public FermentationStatusEffectEntryBuilder scaleOnThickness(int maxLevel, float start, float perLevel) {
+            float p = start;
+            for (var x = 0; x <= maxLevel; x++, p += perLevel) {
+                potencyThickness(x, p);
+            }
+            return this;
+        }
+
         public FermentationStatusEffectEntryBuilder potencyAlc(int potency, float minAlc) {
             new FermentationStatusEffectPotencyEntryBuilder(potency).minAlc(minAlc).submit();
             return this;
@@ -198,6 +214,17 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
             public FermentationStatusEffectPotencyEntryBuilder minThickness(float value) {
                 this.minThickness = value;
                 return this;
+            }
+
+
+            public FermentationStatusEffectEntryBuilder scaledUntil(int maxLevels, float perLevelAlc, float perLevelThickness) {
+                float alc = this.minAlc;
+                float thickness = this.minThickness;
+                for (var x = this.potency; x <= maxLevels; x++, alc += perLevelAlc, thickness += perLevelThickness) {
+                    potencyEntries.add(new FermentationStatusEffectEntry.StatusEffectPotencyEntry(alc, thickness, x));
+                }
+
+                return FermentationStatusEffectEntryBuilder.this;
             }
 
 

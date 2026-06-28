@@ -1,0 +1,106 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 3600,
+        "id": "minecraft:absorption",
+        "potency": [
+          {
+            "potency": 2
+          },
+          {
+            "min_alc": 80.0,
+            "potency": 3
+          },
+          {
+            "min_alc": 85.0,
+            "potency": 4
+          },
+          {
+            "min_alc": 90.0,
+            "potency": 5
+          },
+          {
+            "min_alc": 95.0,
+            "potency": 6
+          }
+        ]
+      },
+      {
+        "base_duration": 400,
+        "id": "minecraft:regeneration",
+        "potency": [
+          {},
+          {
+            "min_alc": 50.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 60.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 70.0,
+            "potency": 3
+          },
+          {
+            "min_alc": 80.0,
+            "potency": 4
+          },
+          {
+            "min_alc": 90.0,
+            "potency": 5
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:fire_resistance"
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:resistance",
+        "potency": [
+          {},
+          {
+            "min_alc": 75.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 85.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 95.0,
+            "potency": 3
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.075
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 4,
+      "item": "minecraft:enchanted_golden_apple"
+    }
+  ],
+  "min_fermentation_time_hours": 72,
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 16745539,
+        "variant": "enchanted_apple_cider"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

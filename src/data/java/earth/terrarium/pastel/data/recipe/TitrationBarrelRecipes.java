@@ -694,6 +694,161 @@ public class TitrationBarrelRecipes {
                         .submit()
                         .requires(Items.SWEET_BERRIES, 8)
         );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.BERRY_LIQUOR
+                )
+                        .minFermentationTimeHours(24)
+                        .fermentationSpeedMod(0.25f)
+                        .statusEffect(MobEffects.HEALTH_BOOST, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyEntry(1)
+                                .minAlc(20)
+                            .scaledUntil(3, 8, 0)
+                        .submit()
+                        .statusEffect(MobEffects.MOVEMENT_SPEED, 9600)
+                            // ???
+                            .potencyAlc(0, 25)
+                            .potencyEntry(1)
+                                .minAlc(25)
+                            .scaledUntil(3, 5, 0)
+                        .submit()
+                        .statusEffect(MobEffects.MOVEMENT_SLOWDOWN, 9600)
+                            .scaleOnThickness(2, 2, 1)
+                        .submit()
+                        .statusEffect(MobEffects.CONFUSION, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 30)
+                        .submit()
+                        .requires(Items.SWEET_BERRIES, 6)
+                        .requires(Items.SUGAR, 4)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.CAMOMILLESQUE
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Food.CAMOMILLESQUE)
+                        .minFermentationTimeHours(24)
+                        .fermentationSpeedMod(0.667f)
+                        .statusEffect(PastelMobEffects.CALMING, 12000)
+                            .scaleOnAlc(5, 0, 5)
+                        .submit()
+                        .statusEffect(MobEffects.MOVEMENT_SPEED, 12000)
+                            .potencyFull(0, 25, 1.25f)
+                        .submit()
+                        .statusEffect(MobEffects.WEAKNESS, 12000)
+                            .scaleOnThickness(2, 2, 1)
+                        .submit()
+                        .requires(Items.FLOWERING_AZALEA_LEAVES, 4)
+                        .requires(Items.HONEYCOMB)
+                        .requires(NIGHTDEW_SPROUT)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.DAMASSINE
+                )
+                        .minFermentationTimeHours(24)
+                        .fermentationSpeedMod(0.125f)
+                        .statusEffect(MobEffects.REGENERATION, 600)
+                            .simplePotencyEntry(0)
+                            .potencyEntry(1)
+                                .minAlc(35)
+                            .scaledUntil(4, 10, 0)
+                        .submit()
+                        .statusEffect(PastelMobEffects.SWIFTNESS, 9600)
+                            .potencyEntry(0)
+                                .minAlc(40)
+                                .minThickness(1.5f)
+                            .scaledUntil(2, 0, 0.5f)
+                        .submit()
+                        .statusEffect(MobEffects.FIRE_RESISTANCE, 9600)
+                            .potencyAlc(0, 60)
+                        .submit()
+                        .statusEffect(MobEffects.WEAKNESS, 9600)
+                            .scaleOnThickness(2, 2, 1)
+                        .submit()
+                        .statusEffect(MobEffects.POISON, 600)
+                            .potencyAlc(0, 60)
+                            .potencyThickness(0, 3)
+                        .submit()
+                        .requires(Items.BEETROOT, 8)
+                        .requires(CLOTTED_CREAM)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.ENCHANTED_APPLE_CIDER
+                )
+                        .minFermentationTimeHours(72)
+                        .fermentationSpeedMod(0.075f)
+                        .statusEffect(MobEffects.ABSORPTION, 3600)
+                            .simplePotencyEntry(2)
+                            .potencyEntry(3)
+                                .minAlc(80)
+                            .scaledUntil(6, 5, 0)
+                        .submit()
+                        .statusEffect(MobEffects.REGENERATION, 400)
+                            .simplePotencyEntry(0)
+                            .potencyEntry(1)
+                                .minAlc(50)
+                            .scaledUntil(5, 10, 0)
+                        .submit()
+                        .statusEffect(MobEffects.FIRE_RESISTANCE, 9600)
+                            .simplePotencyEntry(0)
+                        .submit()
+                        .statusEffect(MobEffects.DAMAGE_RESISTANCE, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyEntry(1)
+                                .minAlc(75)
+                            .scaledUntil(3, 10, 0)
+                        .submit()
+                        .requires(Items.ENCHANTED_GOLDEN_APPLE, 4)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.FRUIT_SHNAPS
+                )
+                        .requiredAdvancement(PastelAdvancements.Unlocks.Food.GLASS_PEACH_TITRATION)
+                        .minFermentationTimeHours(24)
+                        .fermentationSpeedMod(0.125f)
+                        .statusEffect(MobEffects.MOVEMENT_SPEED, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyEntry(1)
+                                .minAlc(35)
+                            .scaledUntil(4, 10, 0)
+                        .submit()
+                        .statusEffect(MobEffects.HEALTH_BOOST, 9600)
+                            .potencyEntry(0)
+                                .minAlc(40)
+                                .minThickness(1.5f)
+                            .scaledUntil(2, 0, 0.5f)
+                        .submit()
+                        .statusEffect(PastelMobEffects.TOUGHNESS, 9600)
+                            .potencyEntry(0)
+                                .minAlc(40)
+                                .minThickness(1.5f)
+                            .scaledUntil(2, 0, 0.5f)
+                        .submit()
+                        .statusEffect(MobEffects.WEAKNESS, 9600)
+                            .scaleOnThickness(2, 2, 1)
+                        .submit()
+                        .statusEffect(MobEffects.POISON, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 60)
+                        .submit()
+                        .requires(Items.APPLE, 4)
+                        .requires(GLASS_PEACH, 4)
+                        .requires(Items.SWEET_BERRIES, 2)
+        );
     }
 
     private static TitrationBarrelRecipeBuilder infusedCommon(@Nullable Fluid fluid, InfusedBeverageComponent component) {
