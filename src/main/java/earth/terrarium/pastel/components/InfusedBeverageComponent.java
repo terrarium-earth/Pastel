@@ -74,7 +74,7 @@ public record InfusedBeverageComponent(String variant, int color) implements Too
 
     public static final InfusedBeverageComponent MOONSHINE = new InfusedBeverageComponent("moonshine", 14151663);
 
-    public static final InfusedBeverageComponent MYCEYLON_APPLE_JUIDE = new InfusedBeverageComponent("myceylon_apple_juice", 12018987);
+    public static final InfusedBeverageComponent MYCEYLON_APPLE_JUICE = new InfusedBeverageComponent("myceylon_apple_juice", 12018987);
 
     public static final InfusedBeverageComponent MYCEYLON_LIQUOR = new InfusedBeverageComponent("myceylon_liquor", 16040760);
 
