@@ -1,0 +1,88 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "minecraft:speed",
+        "potency": [
+          {},
+          {
+            "min_alc": 5.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 8.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:strength",
+        "potency": [
+          {
+            "min_alc": 3.0
+          },
+          {
+            "min_alc": 6.0,
+            "potency": 1
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:weakness",
+        "potency": [
+          {
+            "min_thickness": 2.0
+          },
+          {
+            "min_thickness": 3.0,
+            "potency": 1
+          },
+          {
+            "min_thickness": 4.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:nausea",
+        "potency": [
+          {
+            "min_thickness": 3.0
+          },
+          {
+            "min_alc": 9.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 1.25
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 8,
+      "item": "minecraft:apple"
+    }
+  ],
+  "min_fermentation_time_hours": 12,
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 15032656,
+        "variant": "apple_cider"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

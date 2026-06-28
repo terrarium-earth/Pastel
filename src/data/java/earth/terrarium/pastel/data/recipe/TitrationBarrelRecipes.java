@@ -12,13 +12,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -87,6 +90,7 @@ public class TitrationBarrelRecipes {
         );
 
         special(pfx.subPrefix("special"));
+        infusedBeverages(pfx.subPrefix("infused_beverages"));
 
         pfx.generateAutoNamedRecipe(
                 new TitrationBarrelRecipeBuilder(
@@ -467,6 +471,241 @@ public class TitrationBarrelRecipes {
                         .requires(Tags.Items.MUSHROOMS, 2)
                         .requires(JARAMEL, 2)
         );
+    }
+
+    // THE FINAL BOSS OF DATAGEN BECKONS...
+    private static void infusedBeverages(PrefixHelper pfx) {
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(Fluids.WATER, InfusedBeverageComponent.ADVOCAAT)
+                        .minFermentationTimeHours(24)
+                        .fermentationSpeedMod(0.25f)
+                        .statusEffect(PastelMobEffects.NOURISHING, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyAlc(1, 20)
+                            .potencyAlc(2, 25)
+                            .potencyAlc(3, 30)
+                        .submit()
+                        .statusEffect(MobEffects.FIRE_RESISTANCE, 9600)
+                            .potencyFull(0, 25, 1.25f)
+                        .submit()
+                        // ???
+                        .statusEffect(MobEffects.SATURATION, 8)
+                            .potencyAlc(0, 28)
+                        .submit()
+                        .statusEffect(MobEffects.MOVEMENT_SLOWDOWN, 9600)
+                            .potencyThickness(0, 2)
+                            .potencyThickness(1, 3)
+                            .potencyThickness(2, 4)
+                        .submit()
+                        .statusEffect(MobEffects.BLINDNESS, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 30)
+                        .submit()
+                        .requires(Items.WHEAT, 4)
+                        .requires(CLOTTED_CREAM)
+                        .requires(Tags.Items.EGGS, 2)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.ALE
+                )
+                        .minFermentationTimeHours(4)
+                        .fermentationSpeedMod(1.25f)
+                        .statusEffect(MobEffects.HEALTH_BOOST, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyAlc(1, 5)
+                            .potencyAlc(2, 8)
+                        .submit()
+                        .statusEffect(PastelMobEffects.NOURISHING, 9600)
+                            .potencyAlc(0, 3)
+                            .potencyAlc(1, 6)
+                        .submit()
+                        // ???
+                        .statusEffect(MobEffects.SATURATION, 120)
+                            .potencyAlc(0, 7)
+                            .potencyAlc(1, 9)
+                            .potencyAlc(2, 11)
+                        .submit()
+                        // If experiencing stiffness for 4 or more hours, seek medical help immediately
+                        .statusEffect(PastelMobEffects.STIFFNESS, 600)
+                            .potencyThickness(0, 2)
+                            .potencyThickness(1, 3)
+                            .potencyThickness(2, 4)
+                        .submit()
+                        .statusEffect(MobEffects.CONFUSION, 600)
+                            .potencyAlc(0, 9)
+                            .potencyThickness(0, 3)
+                        .submit()
+                        .requires(Items.WHEAT, 4)
+                        .requires(Items.SWEET_BERRIES, 1)
+                        .requires(Items.SUGAR_CANE, 1)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.APPLE_CIDER
+                )
+                        .minFermentationTimeHours(12)
+                        .fermentationSpeedMod(1.25f)
+                        .statusEffect(MobEffects.MOVEMENT_SPEED, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyAlc(1, 5)
+                            .potencyAlc(2, 8)
+                        .submit()
+                        .statusEffect(MobEffects.DAMAGE_BOOST, 9600)
+                            .potencyAlc(0, 3)
+                            .potencyAlc(1, 6)
+                        .submit()
+                        .statusEffect(MobEffects.WEAKNESS, 9600)
+                            .potencyThickness(0, 2)
+                            .potencyThickness(1, 3)
+                            .potencyThickness(2, 4)
+                        .submit()
+                        .statusEffect(MobEffects.CONFUSION, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 9)
+                        .submit()
+                        .requires(Items.APPLE, 8)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.APPLE_LIQUOR
+                )
+                        .minFermentationTimeHours(24)
+                        .fermentationSpeedMod(0.25f)
+                        .statusEffect(MobEffects.MOVEMENT_SPEED, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyAlc(1, 16)
+                            .potencyAlc(2, 20)
+                            .potencyAlc(3, 24)
+                            .potencyAlc(4, 28)
+                            .potencyAlc(5, 32)
+                        .submit()
+                        .statusEffect(MobEffects.WEAKNESS, 9600)
+                            .potencyThickness(0, 2)
+                            .potencyThickness(1, 3)
+                            .potencyThickness(2, 4)
+                        .submit()
+                        .statusEffect(MobEffects.CONFUSION, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 30)
+                        .submit()
+                        .requires(Items.APPLE, 6)
+                        .requires(Items.SUGAR, 4)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.ARTEMISA
+                )
+                        .minFermentationTimeHours(24)
+                        .fermentationSpeedMod(0.25f)
+                        .statusEffect(MobEffects.REGENERATION, 800)
+                            .simplePotencyEntry(0)
+                            .potencyAlc(1, 20)
+                            .potencyAlc(2, 30)
+                        .submit()
+                        .statusEffect(MobEffects.MOVEMENT_SPEED, 9600)
+                            .potencyFull(0, 25, 1.5f)
+                            .potencyFull(1, 25, 2.0f)
+                            .potencyFull(2, 25, 2.5f)
+                        .submit()
+                        .statusEffect(MobEffects.LUCK, 9600)
+                            .potencyAlc(0, 28)
+                        .submit()
+                        // ???
+                        .statusEffect(MobEffects.MOVEMENT_SLOWDOWN, 9600)
+                            .potencyThickness(0, 2)
+                            .potencyThickness(1, 3)
+                            .potencyThickness(2, 4)
+                        .submit()
+                        .statusEffect(MobEffects.BLINDNESS, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 9)
+                        .submit()
+                        .requires(Items.SHORT_GRASS, 6)
+                        .requires(Items.FERN, 2)
+                        .requires(Items.SUGAR, 4)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.BEER
+                )
+                        .minFermentationTimeHours(4)
+                        .fermentationSpeedMod(1.25f)
+                        .statusEffect(MobEffects.DIG_SPEED, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyAlc(1, 5)
+                            .potencyAlc(2, 8)
+                        .submit()
+                        .statusEffect(PastelMobEffects.NOURISHING, 9600)
+                            .potencyAlc(0, 3)
+                            .potencyAlc(1, 6)
+                        .submit()
+                        .statusEffect(MobEffects.SATURATION, 120)
+                            .potencyAlc(0, 7)
+                            .potencyAlc(1, 9)
+                            .potencyAlc(2, 11)
+                        .submit()
+                        .statusEffect(PastelMobEffects.STIFFNESS, 600)
+                            .potencyThickness(0, 2)
+                            .potencyThickness(1, 3)
+                            .potencyThickness(2, 4)
+                        .submit()
+                        .statusEffect(MobEffects.CONFUSION, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 9)
+                        .submit()
+                        .requires(Items.WHEAT, 6)
+        );
+
+        pfx.generateAutoNamedRecipe(
+                infusedCommon(
+                        Fluids.WATER,
+                        InfusedBeverageComponent.BERRY_CIDER
+                )
+                        .minFermentationTimeHours(12)
+                        .fermentationSpeedMod(1.25f)
+                        .statusEffect(MobEffects.HEALTH_BOOST, 9600)
+                            .simplePotencyEntry(0)
+                            .potencyAlc(1, 5)
+                            .potencyAlc(2, 8)
+                        .submit()
+                        .statusEffect(MobEffects.DAMAGE_BOOST, 9600)
+                            .potencyAlc(0, 3)
+                            .potencyAlc(1, 6)
+                        .submit()
+                        .statusEffect(MobEffects.WEAKNESS, 9600)
+                            .potencyThickness(0, 2)
+                            .potencyThickness(1, 3)
+                            .potencyThickness(2, 4)
+                        .submit()
+                        .statusEffect(MobEffects.CONFUSION, 600)
+                            .potencyThickness(0, 3)
+                            .potencyAlc(0, 9)
+                        .submit()
+                        .requires(Items.SWEET_BERRIES, 8)
+        );
+    }
+
+    private static TitrationBarrelRecipeBuilder infusedCommon(@Nullable Fluid fluid, InfusedBeverageComponent component) {
+        var ingredient = fluid == null ? FluidIngredient.empty() : FluidIngredient.of(fluid);
+        return TitrationBarrelRecipeBuilder.infusedBeverage(
+                ingredient,
+                component,
+                4
+        )
+                .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.TITRATION_BARREL)
+                .group(INFUSED_BEVERAGES)
+                .tappingItem(Items.GLASS_BOTTLE);
     }
 
     private static void special(PrefixHelper pfx) {
