@@ -2,6 +2,7 @@ package earth.terrarium.pastel.data.recipe;
 
 import earth.terrarium.pastel.blocks.fluid.PastelFluid;
 import earth.terrarium.pastel.data.recipe.builder.titration_barrel.TitrationBarrelRecipeBuilder;
+import earth.terrarium.pastel.recipe.titration_barrel.dynamic.*;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -21,6 +22,8 @@ public class TitrationBarrelRecipes {
 
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
         var pfx = new PrefixHelper(ctx, lookup, "titration_barrel");
+
+        special(pfx.subPrefix("special"));
 
         pfx.generateAutoNamedRecipe(
                 new TitrationBarrelRecipeBuilder(
@@ -400,6 +403,33 @@ public class TitrationBarrelRecipes {
                         .requires(AMARANTH_GRAINS, 4)
                         .requires(Tags.Items.MUSHROOMS, 2)
                         .requires(JARAMEL, 2)
+        );
+    }
+
+    private static void special(PrefixHelper pfx) {
+        pfx.generateDynamicRecipe(
+                "aqua_regia",
+                new AquaRegiaRecipe()
+        );
+
+        pfx.generateDynamicRecipe(
+                "cheong",
+                new CheongRecipe()
+        );
+
+        pfx.generateDynamicRecipe(
+                "jade_wine",
+                new JadeWineRecipe()
+        );
+
+        pfx.generateDynamicRecipe(
+                "nectered_viognier",
+                new NecteredViognierRecipe()
+        );
+
+        pfx.generateDynamicRecipe(
+                "suspicious_brew",
+                new SuspiciousBrewRecipe()
         );
     }
 }
