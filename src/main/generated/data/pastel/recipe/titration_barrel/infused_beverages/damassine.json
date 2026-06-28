@@ -93,10 +93,15 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "minecraft:beetroot"
+      "ingredient": {
+        "item": "minecraft:beetroot"
+      }
     },
     {
-      "item": "pastel:clotted_cream"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:clotted_cream"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

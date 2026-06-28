@@ -6,10 +6,15 @@
   "ingredients": [
     {
       "count": 16,
-      "item": "pastel:sawblade_holly_berry"
+      "ingredient": {
+        "item": "pastel:sawblade_holly_berry"
+      }
     },
     {
-      "item": "pastel:aloe_leaf"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:aloe_leaf"
+      }
     }
   ],
   "min_fermentation_time_hours": 1,

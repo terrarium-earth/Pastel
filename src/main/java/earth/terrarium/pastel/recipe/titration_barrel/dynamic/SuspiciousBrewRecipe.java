@@ -31,6 +31,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.SuspiciousEffectHolder;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
@@ -49,11 +50,11 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/food/suspicious_brew");
 
-    public static final NonNullList<IngredientStack> INGREDIENT_STACKS = NonNullList.of(
-        IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1),
-        IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1),
-        IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1),
-        IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1)
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList.of(
+        SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+        SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+        SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+        SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1)
     );
 
     public SuspiciousBrewRecipe() {

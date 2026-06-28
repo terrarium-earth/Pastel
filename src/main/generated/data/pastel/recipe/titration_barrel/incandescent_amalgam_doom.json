@@ -10,23 +10,34 @@
   "group": "infused_beverages",
   "ingredients": [
     {
-      "tag": "pastel:drinkable_spirits"
+      "count": 1,
+      "ingredient": {
+        "tag": "pastel:drinkable_spirits"
+      }
     },
     {
       "count": 32,
-      "item": "pastel:incandescent_essence"
+      "ingredient": {
+        "item": "pastel:incandescent_essence"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:honeycomb"
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      }
     },
     {
       "count": 16,
-      "item": "pastel:quitoxic_powder"
+      "ingredient": {
+        "item": "pastel:quitoxic_powder"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:doombloom_seed"
+      "ingredient": {
+        "item": "pastel:doombloom_seed"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/items/incandescent_amalgam_doom",

@@ -93,7 +93,9 @@
   "ingredients": [
     {
       "count": 12,
-      "item": "minecraft:potato"
+      "ingredient": {
+        "item": "minecraft:potato"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

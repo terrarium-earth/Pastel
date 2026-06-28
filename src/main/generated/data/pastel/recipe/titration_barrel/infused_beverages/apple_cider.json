@@ -52,10 +52,10 @@
         "id": "minecraft:nausea",
         "potency": [
           {
-            "min_thickness": 3.0
+            "min_alc": 9.0
           },
           {
-            "min_alc": 9.0
+            "min_thickness": 3.0
           }
         ]
       }
@@ -69,7 +69,9 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "minecraft:apple"
+      "ingredient": {
+        "item": "minecraft:apple"
+      }
     }
   ],
   "min_fermentation_time_hours": 12,

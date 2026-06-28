@@ -7,23 +7,33 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "pastel:amaranth_grains"
+      "ingredient": {
+        "item": "pastel:amaranth_grains"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:onyx_powder"
+      "ingredient": {
+        "item": "pastel:onyx_powder"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:frostbite_essence"
+      "ingredient": {
+        "item": "pastel:frostbite_essence"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:bloodboil_syrup"
+      "ingredient": {
+        "item": "pastel:bloodboil_syrup"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:nether_wart"
+      "ingredient": {
+        "item": "minecraft:nether_wart"
+      }
     }
   ],
   "min_fermentation_time_hours": 48,

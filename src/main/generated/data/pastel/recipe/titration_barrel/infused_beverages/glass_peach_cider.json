@@ -69,7 +69,9 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "pastel:glass_peach"
+      "ingredient": {
+        "item": "pastel:glass_peach"
+      }
     }
   ],
   "min_fermentation_time_hours": 12,

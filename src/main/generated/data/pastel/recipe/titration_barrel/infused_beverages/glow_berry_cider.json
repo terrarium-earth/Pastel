@@ -73,7 +73,9 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "minecraft:glow_berries"
+      "ingredient": {
+        "item": "minecraft:glow_berries"
+      }
     }
   ],
   "min_fermentation_time_hours": 12,

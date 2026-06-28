@@ -66,13 +66,21 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:flowering_azalea_leaves"
+      "ingredient": {
+        "item": "minecraft:flowering_azalea_leaves"
+      }
     },
     {
-      "item": "minecraft:honeycomb"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      }
     },
     {
-      "item": "pastel:nightdew_sprout"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nightdew_sprout"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/food/camomillesque",

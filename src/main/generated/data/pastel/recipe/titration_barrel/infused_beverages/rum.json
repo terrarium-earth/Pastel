@@ -85,7 +85,9 @@
   "ingredients": [
     {
       "count": 12,
-      "item": "minecraft:sugar_cane"
+      "ingredient": {
+        "item": "minecraft:sugar_cane"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

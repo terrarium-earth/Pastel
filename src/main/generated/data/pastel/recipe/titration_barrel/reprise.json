@@ -9,11 +9,15 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:chorus_fruit"
+      "ingredient": {
+        "item": "minecraft:chorus_fruit"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:frostbite_essence"
+      "ingredient": {
+        "item": "pastel:frostbite_essence"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

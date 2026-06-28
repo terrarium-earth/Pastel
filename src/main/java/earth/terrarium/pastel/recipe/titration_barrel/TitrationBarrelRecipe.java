@@ -13,6 +13,7 @@ import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.items.food.beverages.BeverageItem;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
+import earth.terrarium.pastel.recipe.GatedSizedPastelRecipe;
 import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -35,6 +36,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +46,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInput<FluidTank>>
+public class TitrationBarrelRecipe extends GatedSizedPastelRecipe<FluidRecipeInput<FluidTank>>
     implements
     ITitrationBarrelRecipe {
 
@@ -56,7 +58,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
         }
     };
 
-    public final NonNullList<IngredientStack> inputStacks;
+    public final NonNullList<SizedIngredient> inputStacks;
 
     public final ItemStack outputItemStack;
 
@@ -72,7 +74,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
             String group,
             boolean secret,
             Optional<ResourceLocation> requiredAdvancementIdentifier,
-            NonNullList<IngredientStack> inputStacks,
+            NonNullList<SizedIngredient> inputStacks,
             FluidIngredient fluid,
             ItemStack outputItemStack,
             Item tappingItem,
@@ -104,11 +106,11 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                 return false;
             }
         }
-        return matchIngredientStacksExclusively(recipeInput, getIngredientStacks());
+        return matchIngredientStacksExclusively(recipeInput, getSizedIngredients());
     }
 
     @Override
-    public NonNullList<IngredientStack> getIngredientStacks() {
+    public NonNullList<SizedIngredient> getSizedIngredients() {
         return this.inputStacks;
     }
 
@@ -274,9 +276,9 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
     protected float getThickness(int contentCount) {
         int inputStacksCount = 0;
         for (
-            IngredientStack stack : inputStacks
+            SizedIngredient stack : inputStacks
         ) {
-            inputStacksCount += stack.getCount();
+            inputStacksCount += stack.count();
         }
         return contentCount / (float) inputStacksCount;
     }
@@ -355,7 +357,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        NonNullList.codecOf(IngredientStack.CODEC)
+                        NonNullList.codecOf(SizedIngredient.NESTED_CODEC)
                             .fieldOf("ingredients")
                             .forGetter(recipe -> recipe.inputStacks),
                         FluidIngredient.CODEC
@@ -389,7 +391,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                 c -> c.secret,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
                 c -> c.requiredAdvancementIdentifier,
-                IngredientStack.STREAM_CODEC.apply(PacketCodecHelper.nonNullList()),
+                SizedIngredient.STREAM_CODEC.apply(PacketCodecHelper.nonNullList()),
                 c -> c.inputStacks,
                 FluidIngredient.STREAM_CODEC,
                 c -> c.fluid,

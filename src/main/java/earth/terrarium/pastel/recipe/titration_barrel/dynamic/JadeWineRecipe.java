@@ -19,6 +19,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
@@ -37,9 +38,9 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 
-    public static final NonNullList<IngredientStack> INGREDIENT_STACKS = NonNullList.of(
-            IngredientStack.ofItems(PastelItems.GERMINATED_JADE_VINE_BULB.get()),
-            IngredientStack.ofItems(PastelItems.JADE_PETALS.get(), 3)
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList.of(
+            SizedIngredient.of(PastelItems.GERMINATED_JADE_VINE_BULB.get(), 1),
+            SizedIngredient.of(PastelItems.JADE_PETALS.get(), 3)
 
     );
 

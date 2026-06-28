@@ -105,7 +105,9 @@
   "ingredients": [
     {
       "count": 8,
-      "tag": "c:foods/rices"
+      "ingredient": {
+        "tag": "c:foods/rices"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

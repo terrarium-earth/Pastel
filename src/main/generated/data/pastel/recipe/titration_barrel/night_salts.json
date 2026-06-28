@@ -5,18 +5,28 @@
   },
   "ingredients": [
     {
-      "item": "pastel:nightdew_sprout"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nightdew_sprout"
+      }
     },
     {
       "count": 6,
-      "item": "minecraft:quartz"
+      "ingredient": {
+        "item": "minecraft:quartz"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:honeycomb"
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      }
     },
     {
-      "item": "pastel:onyx_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:onyx_shard"
+      }
     }
   ],
   "min_fermentation_time_hours": 1,

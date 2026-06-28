@@ -85,11 +85,15 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "minecraft:glow_berries"
+      "ingredient": {
+        "item": "minecraft:glow_berries"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

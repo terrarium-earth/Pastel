@@ -79,14 +79,21 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:wheat"
+      "ingredient": {
+        "item": "minecraft:wheat"
+      }
     },
     {
-      "item": "pastel:clotted_cream"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:clotted_cream"
+      }
     },
     {
       "count": 2,
-      "tag": "c:eggs"
+      "ingredient": {
+        "tag": "c:eggs"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

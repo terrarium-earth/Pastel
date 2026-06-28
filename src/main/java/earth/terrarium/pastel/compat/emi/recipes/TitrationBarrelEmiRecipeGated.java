@@ -16,6 +16,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TitrationBarrelEmiRecipeGated extends GatedSpectrumEmiRecipe<ITitrationBarrelRecipe> {
@@ -33,13 +34,12 @@ public class TitrationBarrelEmiRecipeGated extends GatedSpectrumEmiRecipe<ITitra
         inputs
             .addAll(
                 recipe
-                    .getIngredientStacks()
+                    .getSizedIngredients()
                     .stream()
                     .map(
                         s -> EmiIngredient
                             .of(
-                                s
-                                    .getItems()
+                                    Arrays.stream(s.getItems())
                                     .map(EmiStack::of)
                                     .toList()
                             )

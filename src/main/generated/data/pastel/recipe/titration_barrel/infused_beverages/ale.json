@@ -86,13 +86,21 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:wheat"
+      "ingredient": {
+        "item": "minecraft:wheat"
+      }
     },
     {
-      "item": "minecraft:sweet_berries"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sweet_berries"
+      }
     },
     {
-      "item": "minecraft:sugar_cane"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar_cane"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

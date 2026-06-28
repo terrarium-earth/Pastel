@@ -72,19 +72,27 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "minecraft:glow_berries"
+      "ingredient": {
+        "item": "minecraft:glow_berries"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:moonstone_powder"
+      "ingredient": {
+        "item": "pastel:moonstone_powder"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:stardust"
+      "ingredient": {
+        "item": "pastel:stardust"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:paltaeria_fragments"
+      "ingredient": {
+        "item": "pastel:paltaeria_fragments"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/food/moonshine",

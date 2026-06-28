@@ -87,7 +87,9 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:enchanted_golden_apple"
+      "ingredient": {
+        "item": "minecraft:enchanted_golden_apple"
+      }
     }
   ],
   "min_fermentation_time_hours": 72,

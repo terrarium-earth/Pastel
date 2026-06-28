@@ -83,19 +83,27 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:honey_bottle"
+      "ingredient": {
+        "item": "minecraft:honey_bottle"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:sawblade_holly_berry"
+      "ingredient": {
+        "item": "pastel:sawblade_holly_berry"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:bristle_sprouts"
+      "ingredient": {
+        "item": "pastel:bristle_sprouts"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:jaramel"
+      "ingredient": {
+        "item": "pastel:jaramel"
+      }
     }
   ],
   "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",

@@ -79,15 +79,21 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "minecraft:crimson_fungus"
+      "ingredient": {
+        "item": "minecraft:crimson_fungus"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:weeping_vines"
+      "ingredient": {
+        "item": "minecraft:weeping_vines"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:clotted_cream"
+      "ingredient": {
+        "item": "pastel:clotted_cream"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

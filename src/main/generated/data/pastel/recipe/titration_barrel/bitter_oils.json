@@ -5,21 +5,34 @@
   },
   "ingredients": [
     {
-      "item": "pastel:nectardew_burgeon"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nectardew_burgeon"
+      }
     },
     {
-      "item": "pastel:bloodboil_syrup"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:bloodboil_syrup"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:bedrock_dust"
+      "ingredient": {
+        "item": "pastel:bedrock_dust"
+      }
     },
     {
       "count": 3,
-      "item": "pastel:stratine_fragments"
+      "ingredient": {
+        "item": "pastel:stratine_fragments"
+      }
     },
     {
-      "item": "minecraft:echo_shard"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:echo_shard"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

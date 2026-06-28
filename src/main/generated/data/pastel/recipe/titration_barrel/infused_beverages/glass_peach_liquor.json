@@ -81,11 +81,15 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "pastel:glass_peach"
+      "ingredient": {
+        "item": "pastel:glass_peach"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/food/glass_peach_titration",

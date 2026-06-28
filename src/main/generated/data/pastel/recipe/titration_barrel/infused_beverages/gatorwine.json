@@ -113,21 +113,33 @@
   "ingredients": [
     {
       "count": 16,
-      "item": "pastel:citrine_powder"
+      "ingredient": {
+        "item": "pastel:citrine_powder"
+      }
     },
     {
       "count": 16,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     },
     {
-      "item": "pastel:storm_stone"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:storm_stone"
+      }
     },
     {
-      "item": "pastel:shimmerstone_gem"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:shimmerstone_gem"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:fissure_plum"
+      "ingredient": {
+        "item": "pastel:fissure_plum"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

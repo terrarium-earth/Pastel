@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
@@ -112,7 +113,7 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
         return PastelRecipeTypes.TITRATION_BARREL;
     }
 
-    List<IngredientStack> getIngredientStacks();
+    List<SizedIngredient> getSizedIngredients();
 
     int getMinFermentationTimeHours();
 

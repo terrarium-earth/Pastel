@@ -216,21 +216,33 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "pastel:fissure_plum"
+      "ingredient": {
+        "item": "pastel:fissure_plum"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:nightdew_sprout"
+      "ingredient": {
+        "item": "pastel:nightdew_sprout"
+      }
     },
     {
       "count": 8,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     },
     {
-      "item": "pastel:pure_coal"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_coal"
+      }
     },
     {
-      "item": "pastel:nectardew_burgeon"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nectardew_burgeon"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/food/nectardew_titration",

@@ -3,18 +3,27 @@
   "ingredients": [
     {
       "count": 4,
-      "tag": "minecraft:fishes"
+      "ingredient": {
+        "tag": "minecraft:fishes"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:fresh_chocolate"
+      "ingredient": {
+        "item": "pastel:fresh_chocolate"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     },
     {
-      "item": "pastel:clotted_cream"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:clotted_cream"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

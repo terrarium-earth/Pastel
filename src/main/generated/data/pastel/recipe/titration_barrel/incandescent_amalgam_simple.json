@@ -10,19 +10,28 @@
   "group": "infused_beverages",
   "ingredients": [
     {
-      "item": "pastel:pure_alcohol"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_alcohol"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:honeycomb"
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:quitoxic_powder"
+      "ingredient": {
+        "item": "pastel:quitoxic_powder"
+      }
     },
     {
       "count": 8,
-      "item": "minecraft:gunpowder"
+      "ingredient": {
+        "item": "minecraft:gunpowder"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/items/incandescent_amalgam",

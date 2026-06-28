@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.List;
@@ -106,13 +107,13 @@ public class BookTitrationBarrelFermentingPageRenderer
 
         FluidIngredient fluid = recipe.getFluidInput();
         boolean usesFluid = !fluid.isEmpty();
-        IngredientStack bucketStack = IngredientStack.EMPTY;
+        SizedIngredient bucketStack = null;
         if (usesFluid) {
-            bucketStack = IngredientStack.of(FluidRendering.fluidBucketIngredient(recipe.getFluidInput()));
+            bucketStack = new SizedIngredient(FluidRendering.fluidBucketIngredient(recipe.getFluidInput()), 1);
         }
 
         // the ingredients
-        List<IngredientStack> ingredients = recipe.getIngredientStacks();
+        List<SizedIngredient> ingredients = recipe.getSizedIngredients();
         int ingredientSize = ingredients.size();
         int ingredientSizeWithFluid = usesFluid ? ingredientSize + 1 : ingredientSize;
         int startX = recipeX + Math.max(-5, 15 - ingredientSizeWithFluid * 10);
@@ -122,7 +123,7 @@ public class BookTitrationBarrelFermentingPageRenderer
             i < ingredientSizeWithFluid;
             i++
         ) {
-            IngredientStack currentIngredient = i == ingredientSize ? bucketStack : ingredients.get(i);
+            SizedIngredient currentIngredient = i == ingredientSize ? bucketStack : ingredients.get(i);
             int yOffset;
             int xOffset;
             if (i < 3) {
@@ -133,7 +134,7 @@ public class BookTitrationBarrelFermentingPageRenderer
                 yOffset = 18;
             }
             ModonomiconHelper
-                .renderIngredientStack(
+                .renderSizedIngredient(
                     drawContext,
                     parentScreen,
                     startX + xOffset,

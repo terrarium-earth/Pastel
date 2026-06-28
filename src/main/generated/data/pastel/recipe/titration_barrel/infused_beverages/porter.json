@@ -86,14 +86,21 @@
   "ingredients": [
     {
       "count": 3,
-      "item": "minecraft:wheat"
+      "ingredient": {
+        "item": "minecraft:wheat"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:wheat_seeds"
+      "ingredient": {
+        "item": "minecraft:wheat_seeds"
+      }
     },
     {
-      "item": "minecraft:beetroot"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:beetroot"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

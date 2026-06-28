@@ -85,15 +85,21 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "minecraft:short_grass"
+      "ingredient": {
+        "item": "minecraft:short_grass"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:fern"
+      "ingredient": {
+        "item": "minecraft:fern"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

@@ -6,10 +6,15 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "pastel:koi"
+      "ingredient": {
+        "item": "pastel:koi"
+      }
     },
     {
-      "item": "pastel:bottle_of_fading"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:bottle_of_fading"
+      }
     }
   ],
   "min_fermentation_time_hours": 2,

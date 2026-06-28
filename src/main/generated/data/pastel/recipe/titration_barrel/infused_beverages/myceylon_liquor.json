@@ -81,11 +81,15 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "pastel:myceylon"
+      "ingredient": {
+        "item": "pastel:myceylon"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/food/myceylon_liquor",

@@ -85,7 +85,9 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:honey_bottle"
+      "ingredient": {
+        "item": "minecraft:honey_bottle"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

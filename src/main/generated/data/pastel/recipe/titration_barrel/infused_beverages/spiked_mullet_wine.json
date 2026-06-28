@@ -74,19 +74,27 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "minecraft:sweet_berries"
+      "ingredient": {
+        "item": "minecraft:sweet_berries"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:myceylon"
+      "ingredient": {
+        "item": "pastel:myceylon"
+      }
     },
     {
       "count": 4,
-      "item": "pastel:prickly_bayleaf"
+      "ingredient": {
+        "item": "pastel:prickly_bayleaf"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "min_fermentation_time_hours": 48,

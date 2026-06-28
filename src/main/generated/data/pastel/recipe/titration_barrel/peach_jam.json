@@ -6,18 +6,27 @@
   "ingredients": [
     {
       "count": 16,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:glass_peach"
+      "ingredient": {
+        "item": "pastel:glass_peach"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:jade_petals"
+      "ingredient": {
+        "item": "pastel:jade_petals"
+      }
     },
     {
-      "item": "pastel:blood_orchid_petal"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:blood_orchid_petal"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

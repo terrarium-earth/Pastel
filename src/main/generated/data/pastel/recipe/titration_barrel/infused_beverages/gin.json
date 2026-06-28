@@ -93,7 +93,9 @@
   "ingredients": [
     {
       "count": 12,
-      "item": "pastel:amaranth_grains"
+      "ingredient": {
+        "item": "pastel:amaranth_grains"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/food/gin",

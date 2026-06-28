@@ -86,7 +86,9 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "minecraft:wheat"
+      "ingredient": {
+        "item": "minecraft:wheat"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

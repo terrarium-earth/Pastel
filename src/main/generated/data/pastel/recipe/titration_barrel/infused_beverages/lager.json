@@ -86,10 +86,15 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "minecraft:wheat"
+      "ingredient": {
+        "item": "minecraft:wheat"
+      }
     },
     {
-      "item": "minecraft:honey_bottle"
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:honey_bottle"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

@@ -69,7 +69,9 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "pastel:fissure_plum"
+      "ingredient": {
+        "item": "pastel:fissure_plum"
+      }
     }
   ],
   "min_fermentation_time_hours": 12,

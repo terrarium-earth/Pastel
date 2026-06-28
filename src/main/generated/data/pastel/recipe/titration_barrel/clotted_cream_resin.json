@@ -2,11 +2,16 @@
   "type": "pastel:titration_barrel",
   "ingredients": [
     {
-      "item": "pastel:milky_resin"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:milky_resin"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "min_fermentation_time_hours": 1,

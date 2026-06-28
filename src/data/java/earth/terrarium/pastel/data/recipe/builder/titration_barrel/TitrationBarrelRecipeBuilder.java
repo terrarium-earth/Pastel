@@ -168,7 +168,7 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
                                 this.group,
                                 this.secret,
                                 daId,
-                                this.ingredients.stream().map(TitrationBarrelRecipeBuilder::sizedToStack).collect(Collectors.toCollection(NonNullList::create)),
+                                this.ingredients,
                                 this.fluid,
                                 this.result,
                                 this.item,

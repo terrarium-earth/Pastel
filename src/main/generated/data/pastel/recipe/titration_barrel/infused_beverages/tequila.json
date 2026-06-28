@@ -93,7 +93,9 @@
   "ingredients": [
     {
       "count": 12,
-      "item": "minecraft:cactus"
+      "ingredient": {
+        "item": "minecraft:cactus"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/blocks/titration_barrel",

@@ -69,7 +69,9 @@
   "ingredients": [
     {
       "count": 8,
-      "item": "pastel:sawblade_holly_berry"
+      "ingredient": {
+        "item": "pastel:sawblade_holly_berry"
+      }
     }
   ],
   "min_fermentation_time_hours": 12,

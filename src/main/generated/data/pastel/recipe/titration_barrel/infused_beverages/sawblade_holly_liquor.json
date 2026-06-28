@@ -81,11 +81,15 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "pastel:sawblade_holly_berry"
+      "ingredient": {
+        "item": "pastel:sawblade_holly_berry"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/food/sawblade_holly_titration",

@@ -22,11 +22,15 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:apple"
+      "ingredient": {
+        "item": "minecraft:apple"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:myceylon"
+      "ingredient": {
+        "item": "pastel:myceylon"
+      }
     }
   ],
   "min_fermentation_time_hours": 4,

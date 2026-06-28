@@ -81,11 +81,15 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "pastel:fissure_plum"
+      "ingredient": {
+        "item": "pastel:fissure_plum"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/food/fissure_plum_titration",

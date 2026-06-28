@@ -16,6 +16,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRe
             String group,
             boolean secret,
             Optional<ResourceLocation> requiredAdvancementIdentifier,
-            NonNullList<IngredientStack> inputStacks,
+            NonNullList<SizedIngredient> inputStacks,
             FluidIngredient fluid,
             ItemStack outputItemStack,
             Item tappingItem,

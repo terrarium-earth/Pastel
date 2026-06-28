@@ -6,23 +6,33 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "pastel:nectardew_burgeon"
+      "ingredient": {
+        "item": "pastel:nectardew_burgeon"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:pure_coal"
+      "ingredient": {
+        "item": "pastel:pure_coal"
+      }
     },
     {
       "count": 8,
-      "item": "pastel:frostbite_essence"
+      "ingredient": {
+        "item": "pastel:frostbite_essence"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:star_fragment"
+      "ingredient": {
+        "item": "pastel:star_fragment"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:quitoxic_powder"
+      "ingredient": {
+        "item": "pastel:quitoxic_powder"
+      }
     }
   ],
   "required_advancement": "pastel:hidden/collect_cookbooks/poisoners_handbook",

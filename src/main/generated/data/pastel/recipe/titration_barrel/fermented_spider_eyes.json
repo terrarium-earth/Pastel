@@ -6,15 +6,21 @@
   "ingredients": [
     {
       "count": 2,
-      "item": "minecraft:spider_eye"
+      "ingredient": {
+        "item": "minecraft:spider_eye"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:brown_mushroom"
+      "ingredient": {
+        "item": "minecraft:brown_mushroom"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "min_fermentation_time_hours": 1,

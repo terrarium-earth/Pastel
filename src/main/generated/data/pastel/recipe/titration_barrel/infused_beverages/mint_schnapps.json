@@ -93,18 +93,27 @@
   "ingredients": [
     {
       "count": 6,
-      "item": "minecraft:potato"
+      "ingredient": {
+        "item": "minecraft:potato"
+      }
     },
     {
       "count": 2,
-      "item": "pastel:mermaids_gem"
+      "ingredient": {
+        "item": "pastel:mermaids_gem"
+      }
     },
     {
-      "item": "pastel:four_leaf_clover"
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:four_leaf_clover"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:snowball"
+      "ingredient": {
+        "item": "minecraft:snowball"
+      }
     }
   ],
   "min_fermentation_time_hours": 48,

@@ -35,15 +35,21 @@
   "ingredients": [
     {
       "count": 2,
-      "item": "pastel:clover"
+      "ingredient": {
+        "item": "pastel:clover"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:birch_log"
+      "ingredient": {
+        "item": "minecraft:birch_log"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:sugar"
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "min_fermentation_time_hours": 6,
