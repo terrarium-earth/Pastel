@@ -3,11 +3,11 @@
   "group": "infused_beverages",
   "ingredients": [
     {
-      "item": "minecraft:honeycomb",
+      "ingredient": {"item": "minecraft:honeycomb"},
       "count": 2
     },
     {
-      "item": "the_bumblezone:honey_crystal_shards",
+      "ingredient": {"item": "the_bumblezone:honey_crystal_shards"},
       "count": 4
     }
   ],

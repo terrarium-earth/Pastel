@@ -2,10 +2,10 @@
   "type": "pastel:titration_barrel",
   "ingredients": [
     {
-      "item": "pastel:black_pigment",
+      "ingredient": {"item": "pastel:black_pigment"},
       "count": 4
     },
-    "pastel:amethyst_powder"
+    {"ingredient": {"item": "pastel:amethyst_powder"}}
   ],
   "min_fermentation_time_hours": 168,
   "result": {
