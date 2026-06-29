@@ -1,13 +1,11 @@
 package earth.terrarium.pastel.recipe.pedestal.dynamic;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.components.EnderSpliceComponent;
 import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
-import earth.terrarium.pastel.recipe.pedestal.RawShapedPedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;

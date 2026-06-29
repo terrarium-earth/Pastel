@@ -2,7 +2,6 @@ package earth.terrarium.pastel.recipe.titration_barrel;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;

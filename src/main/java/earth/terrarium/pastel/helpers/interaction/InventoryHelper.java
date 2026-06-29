@@ -3,7 +3,6 @@ package earth.terrarium.pastel.helpers.interaction;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.ItemStorage;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Tuple;
@@ -13,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -343,27 +343,27 @@ public class InventoryHelper {
     }
 
     // TODO: lots of code overlap with hasInInventory()
-    public static boolean hasIngredientStacksInInventory(
-        List<IngredientStack> ingredients,
-        IItemHandlerModifiable inventory
+    public static boolean hasSizedIngredientsInInventory(
+            List<SizedIngredient> ingredients,
+            IItemHandlerModifiable inventory
     ) {
         List<Ingredient> ingredientsToFind = new ArrayList<>();
         List<Integer> requiredIngredientAmounts = new ArrayList<>();
         for (
-            IngredientStack ingredient : ingredients
+                SizedIngredient ingredient : ingredients
         ) {
-            if (ingredient.isEmpty()) {
+            if (ingredient == null) {
                 continue;
             }
 
-            ingredientsToFind.add(ingredient.getIngredient());
-            requiredIngredientAmounts.add(ingredient.getCount());
+            ingredientsToFind.add(ingredient.ingredient());
+            requiredIngredientAmounts.add(ingredient.count());
         }
 
         for (
-            int i = 0;
-            i < inventory.getSlots();
-            i++
+                int i = 0;
+                i < inventory.getSlots();
+                i++
         ) {
             if (ingredientsToFind.isEmpty()) {
                 break;
@@ -372,13 +372,13 @@ public class InventoryHelper {
             if (!currentStack.isEmpty()) {
                 int amount = currentStack.getCount();
                 for (
-                    int j = 0;
-                    j < ingredientsToFind.size();
-                    j++
+                        int j = 0;
+                        j < ingredientsToFind.size();
+                        j++
                 ) {
                     if (ingredientsToFind
-                        .get(j)
-                        .test(currentStack)) {
+                            .get(j)
+                            .test(currentStack)) {
                         int ingredientCount = requiredIngredientAmounts.get(j);
                         if (amount >= ingredientCount) {
                             ingredientsToFind.remove(j);
@@ -532,29 +532,29 @@ public class InventoryHelper {
 
     // return are the recipe remainders
     // TODO lots of code overlap with removeFromInventoryWithRemainders()
-    public static List<ItemStack> removeIngredientStacksFromInventoryWithRemainders(
-        List<IngredientStack> ingredients,
-        IItemHandlerModifiable inventory
+    public static List<ItemStack> removeSizedIngredientsFromInventoryWithRemainders(
+            List<SizedIngredient> ingredients,
+            IItemHandlerModifiable inventory
     ) {
         List<ItemStack> remainders = new ArrayList<>();
 
         List<Ingredient> requiredIngredients = new ArrayList<>();
         List<Integer> requiredIngredientAmounts = new ArrayList<>();
         for (
-            IngredientStack ingredient : ingredients
+                SizedIngredient ingredient : ingredients
         ) {
-            if (ingredient.isEmpty()) {
+            if (ingredient == null) {
                 continue;
             }
 
-            requiredIngredients.add(ingredient.getIngredient());
-            requiredIngredientAmounts.add(ingredient.getCount());
+            requiredIngredients.add(ingredient.ingredient());
+            requiredIngredientAmounts.add(ingredient.count());
         }
 
         for (
-            int i = 0;
-            i < inventory.getSlots();
-            i++
+                int i = 0;
+                i < inventory.getSlots();
+                i++
         ) {
             if (requiredIngredients.isEmpty()) {
                 break;
@@ -563,14 +563,14 @@ public class InventoryHelper {
             ItemStack currentStack = inventory.getStackInSlot(i);
             if (!currentStack.isEmpty()) {
                 for (
-                    int j = 0;
-                    j < requiredIngredients.size();
-                    j++
+                        int j = 0;
+                        j < requiredIngredients.size();
+                        j++
                 ) {
                     int currentStackCount = currentStack.getCount();
                     if (requiredIngredients
-                        .get(j)
-                        .test(currentStack)) {
+                            .get(j)
+                            .test(currentStack)) {
                         int ingredientCount = requiredIngredientAmounts.get(j);
                         ItemStack remainder = currentStack.getCraftingRemainingItem();
                         if (currentStackCount >= ingredientCount) {

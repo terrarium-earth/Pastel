@@ -6,7 +6,6 @@ import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.item.Preenchanted;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
@@ -3540,13 +3539,6 @@ public class PastelPedestalRecipes {
             return Ingredient.of(PastelBlocks.MOB_HEADS.get(kind).asItem());
         }
 
-        private static IngredientStack stack(ItemLike item) {
-            return IngredientStack.ofItems(item.asItem());
-        }
-
-        private static IngredientStack stack(TagKey<Item> tag) {
-            return IngredientStack.ofTag(tag);
-        }
 
 
     }

@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;

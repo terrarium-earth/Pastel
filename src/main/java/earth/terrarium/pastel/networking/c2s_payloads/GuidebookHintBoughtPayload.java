@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.networking.c2s_payloads;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
@@ -12,13 +11,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.PlayerInvWrapper;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 import java.util.List;
 
-public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement, IngredientStack payment)
+public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement, SizedIngredient payment)
     implements
     CustomPacketPayload {
 
@@ -28,7 +28,7 @@ public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement,
         .composite(
             ResourceLocation.STREAM_CODEC,
             GuidebookHintBoughtPayload::completionAdvancement,
-            IngredientStack.STREAM_CODEC,
+            SizedIngredient.STREAM_CODEC,
             GuidebookHintBoughtPayload::payment,
             GuidebookHintBoughtPayload::new
         );
@@ -43,7 +43,7 @@ public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement,
             ServerPlayer player = (ServerPlayer) context.player();
             for (
                 ItemStack remainder : InventoryHelper
-                    .removeIngredientStacksFromInventoryWithRemainders(
+                    .removeSizedIngredientsFromInventoryWithRemainders(
                         List.of(payload.payment()),
                         new PlayerInvWrapper(player.getInventory())
                     )

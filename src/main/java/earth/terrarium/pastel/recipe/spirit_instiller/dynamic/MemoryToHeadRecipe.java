@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.loot.modifiers.TreasureHunterModifier;

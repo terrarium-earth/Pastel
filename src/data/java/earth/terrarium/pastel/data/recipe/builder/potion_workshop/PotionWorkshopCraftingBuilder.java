@@ -1,7 +1,5 @@
 package earth.terrarium.pastel.data.recipe.builder.potion_workshop;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.data.recipe.builder.SimpleRecipeBuilder;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopCraftingRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;

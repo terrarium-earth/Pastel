@@ -3,45 +3,15 @@ package earth.terrarium.pastel.compat.modonomicon;
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Rotation;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 public class ModonomiconHelper {
-
-    public static void renderIngredientStack(
-        GuiGraphics drawContext,
-        BookEntryScreen parentScreen,
-        int x,
-        int y,
-        int mouseX,
-        int mouseY,
-        IngredientStack ingredientStack
-    ) {
-        List<ItemStack> stacks = ingredientStack
-            .getItems()
-            .toList();
-        if (!stacks.isEmpty()) {
-            parentScreen
-                .renderItemStack(
-                    drawContext,
-                    x,
-                    y,
-                    mouseX,
-                    mouseY,
-                    stacks.get(parentScreen.getTicksInBook() / 20 % stacks.size())
-                );
-        }
-    }
-
     // probably a helper function _somewhere_ out there, but im not finding it LOL
     public static void renderIngredient(
             GuiGraphics drawContext,

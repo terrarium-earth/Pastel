@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;

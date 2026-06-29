@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.components.JadeWineComponent;
 import earth.terrarium.pastel.helpers.Support;

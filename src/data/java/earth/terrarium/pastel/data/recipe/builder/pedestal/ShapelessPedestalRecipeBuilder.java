@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.data.recipe.builder.pedestal;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.recipe.pedestal.ShapelessPedestalRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -10,13 +9,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<ShapelessPedestalRecipeBuilder> {
     private final List<Ingredient> ingredients = new ArrayList<>();

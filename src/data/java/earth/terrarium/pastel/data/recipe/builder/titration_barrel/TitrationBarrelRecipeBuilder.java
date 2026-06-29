@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.data.recipe.builder.titration_barrel;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.data.recipe.builder.GatedRecipeBuilder;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
@@ -137,10 +136,6 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
     public TitrationBarrelRecipeBuilder acceptEffect(FermentationStatusEffectEntry entry) {
         this.statusEffectEntries.add(entry);
         return this;
-    }
-
-    private static IngredientStack sizedToStack(SizedIngredient sized) {
-        return new IngredientStack(sized.ingredient(), sized.count());
     }
 
     public final class FermentationStatusEffectEntryBuilderForBarrel extends FermentationStatusEffectEntryBuilder<FermentationStatusEffectEntryBuilderForBarrel> {

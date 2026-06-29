@@ -3,7 +3,6 @@ package earth.terrarium.pastel.blocks.spirit_instiller;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlockEntity;
 import earth.terrarium.pastel.blocks.decoration.GemstoneChimeBlock;
 import earth.terrarium.pastel.blocks.item_bowl.ItemBowlBlockEntity;

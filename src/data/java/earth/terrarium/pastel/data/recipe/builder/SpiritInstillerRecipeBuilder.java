@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.data.recipe.builder;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;

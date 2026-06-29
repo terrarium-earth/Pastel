@@ -1,7 +1,5 @@
 package earth.terrarium.pastel.data.recipe.builder.pedestal;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.recipe.pedestal.RawShapedPedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.*;
 

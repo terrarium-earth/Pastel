@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.data.recipe.builder.potion_workshop;
 
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionRecipeEffect;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopBrewingRecipe;
 import net.minecraft.core.Holder;
@@ -9,7 +8,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.Optional;
 

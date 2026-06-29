@@ -1,10 +1,7 @@
 package earth.terrarium.pastel.data.recipe.builder.cinderhearth;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.data.recipe.builder.GatedRecipeBuilder;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
-import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -15,7 +12,6 @@ import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public final class CinderhearthRecipeBuilder extends GatedRecipeBuilder<CinderhearthRecipeBuilder> {
     private final SizedIngredient input;

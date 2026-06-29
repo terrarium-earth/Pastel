@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import com.cmdpro.databank.DatabankUtils;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopCraftingRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;

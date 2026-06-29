@@ -6,7 +6,6 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.TextWidget.Alignment;
 import dev.emi.emi.api.widget.WidgetHolder;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.inventories.PedestalScreen;

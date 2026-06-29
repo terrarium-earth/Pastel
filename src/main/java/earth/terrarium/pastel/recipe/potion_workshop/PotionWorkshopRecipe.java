@@ -1,15 +1,12 @@
 package earth.terrarium.pastel.recipe.potion_workshop;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
 import earth.terrarium.pastel.recipe.GatedSizedPastelRecipe;
-import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;

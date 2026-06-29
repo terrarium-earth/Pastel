@@ -1,11 +1,9 @@
 package earth.terrarium.pastel.recipe.pedestal.dynamic;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
-import earth.terrarium.pastel.recipe.pedestal.RawShapedPedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;

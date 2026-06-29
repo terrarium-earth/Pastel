@@ -3,7 +3,6 @@ package earth.terrarium.pastel.blocks.potion_workshop;
 import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;

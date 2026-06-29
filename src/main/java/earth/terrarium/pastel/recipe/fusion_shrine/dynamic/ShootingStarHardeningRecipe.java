@@ -2,7 +2,6 @@ package earth.terrarium.pastel.recipe.fusion_shrine.dynamic;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.fusion_shrine.FusionShrineBlockEntity;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStarItem;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;

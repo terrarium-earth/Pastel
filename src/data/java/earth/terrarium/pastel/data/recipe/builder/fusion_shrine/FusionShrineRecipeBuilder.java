@@ -2,7 +2,6 @@ package earth.terrarium.pastel.data.recipe.builder.fusion_shrine;
 
 import earth.terrarium.pastel.api.predicate.location.*;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.data.recipe.builder.GatedRecipeBuilder;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
