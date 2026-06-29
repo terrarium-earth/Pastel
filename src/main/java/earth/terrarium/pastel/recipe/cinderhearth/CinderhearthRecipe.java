@@ -191,10 +191,10 @@ public class CinderhearthRecipe extends GatedSizedPastelRecipe<SingleRecipeInput
                             .forGetter(recipe -> recipe.experience),
                         Codec
                             .withAlternative(
-                            CodecHelper
+                                CodecHelper
                                     .mapPair(
-                                            ItemStack.CODEC.fieldOf("result"),
-                                            Codec.FLOAT.optionalFieldOf("chance", 1.0f)
+                                        ItemStack.CODEC.fieldOf("result"),
+                                        Codec.FLOAT.optionalFieldOf("chance", 1.0f)
                                     )
                                     .codec(),
                                 ItemStack.CODEC.xmap(stack -> new Tuple<>(stack, 1.0f), Tuple::getA)

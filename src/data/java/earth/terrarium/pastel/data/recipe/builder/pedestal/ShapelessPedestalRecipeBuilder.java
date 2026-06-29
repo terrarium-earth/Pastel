@@ -18,11 +18,9 @@ import java.util.Objects;
 public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<ShapelessPedestalRecipeBuilder> {
     private final List<Ingredient> ingredients = new ArrayList<>();
 
-
     public ShapelessPedestalRecipeBuilder(ItemStack result) {
-        super (result);
+        super(result);
     }
-
 
     public ShapelessPedestalRecipeBuilder requires(Ingredient ingredient) {
         ingredients.add(ingredient);
@@ -46,22 +44,21 @@ public final class ShapelessPedestalRecipeBuilder extends PedestalRecipeBuilder<
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         Objects.requireNonNull(tier, "tier must be defined before saving recipe!");
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new ShapelessPedestalRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                this.tier,
-                                NonNullList.copyOf(this.ingredients),
-                                this.powderInputs,
-                                this.result,
-                                this.experience,
-                                this.craftingTime,
-                                this.skipRemainders,
-                                this.disableYieldUpgrades
-                        )
+            recipeOutput,
+            id,
+            daId -> new ShapelessPedestalRecipe(
+                this.group,
+                this.secret,
+                daId,
+                this.tier,
+                NonNullList.copyOf(this.ingredients),
+                this.powderInputs,
+                this.result,
+                this.experience,
+                this.craftingTime,
+                this.skipRemainders,
+                this.disableYieldUpgrades
+            )
 
         );
     }

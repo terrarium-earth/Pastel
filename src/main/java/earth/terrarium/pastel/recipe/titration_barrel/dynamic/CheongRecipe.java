@@ -15,9 +15,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 public class CheongRecipe extends TitrationBarrelRecipe {
@@ -30,10 +28,11 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 
     public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(PastelItems.MERMAIDS_JAM.get(), 4);
 
-    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList.of(
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList
+        .of(
             SizedIngredient.of(PastelItemTags.FRUITS, 8),
             SizedIngredient.of(Items.SUGAR, 16)
-    );
+        );
 
     public CheongRecipe() {
         super(

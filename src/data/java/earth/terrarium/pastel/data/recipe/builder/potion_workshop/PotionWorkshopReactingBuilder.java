@@ -19,6 +19,7 @@ import java.util.List;
 
 public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<PotionWorkshopReactingBuilder> {
     private final Item item;
+
     private final List<PotionMod> modifiers = new ArrayList<>();
 
     public PotionWorkshopReactingBuilder(Item item) {
@@ -37,14 +38,16 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        saveHelperGated(recipeOutput, id, daId ->
-                new PotionWorkshopReactingRecipe(
-                        this.group,
-                        this.secret,
-                        daId,
-                        this.item,
-                        this.modifiers
-                )
+        saveHelperGated(
+            recipeOutput,
+            id,
+            daId -> new PotionWorkshopReactingRecipe(
+                this.group,
+                this.secret,
+                daId,
+                this.item,
+                this.modifiers
+            )
         );
     }
 
@@ -82,16 +85,16 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
         int additionalDrinkDurationTicks = 0;
 
         PotionMod.PotionFlags flags = new PotionMod.PotionFlags(
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                List.of()
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            List.of()
         );
 
         PotionModBuilder() {
@@ -179,14 +182,23 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
 
         public class PotionFlagsBuilder {
             boolean makeSplashing = false;
+
             boolean makeLingering = false;
+
             boolean noParticles = false;
+
             boolean unidentifiable = false;
+
             boolean makeEffectsPositive = false;
+
             boolean potentDecreasingEffect = false;
+
             boolean negateDecreasingDuration = false;
+
             boolean randomColor = false;
+
             boolean incurable = false;
+
             final List<Tuple<PotionRecipeEffect, Float>> additionalEffects = new ArrayList<>();
 
             public PotionFlagsBuilder makeSplashing() {
@@ -236,21 +248,26 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
 
             public PotionModBuilder submit() {
                 flags = new PotionMod.PotionFlags(
-                        this.makeSplashing,
-                        this.makeLingering,
-                        this.noParticles,
-                        this.unidentifiable,
-                        this.makeEffectsPositive,
-                        this.potentDecreasingEffect,
-                        this.negateDecreasingDuration,
-                        this.randomColor,
-                        this.incurable,
-                        this.additionalEffects
+                    this.makeSplashing,
+                    this.makeLingering,
+                    this.noParticles,
+                    this.unidentifiable,
+                    this.makeEffectsPositive,
+                    this.potentDecreasingEffect,
+                    this.negateDecreasingDuration,
+                    this.randomColor,
+                    this.incurable,
+                    this.additionalEffects
                 );
                 return PotionModBuilder.this;
             }
 
-            public PotionRecipeEffectBuilder additionalEffect(Holder<MobEffect> effect, float chance, InkColor color, int inkCost) {
+            public PotionRecipeEffectBuilder additionalEffect(
+                Holder<MobEffect> effect,
+                float chance,
+                InkColor color,
+                int inkCost
+            ) {
                 return new PotionRecipeEffectBuilder(chance, color, inkCost, effect);
             }
 
@@ -258,11 +275,17 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
             // only used by nectardew burgeon?
             public class PotionRecipeEffectBuilder {
                 final float chance;
+
                 final InkColor color;
+
                 int baseDurationTicks = 1600;
+
                 final Holder<MobEffect> effect;
+
                 float potencyMod = 1.0f;
+
                 int potencyHardCap = -1;
+
                 final int inkCost;
 
                 PotionRecipeEffectBuilder(float chance, InkColor color, int inkCost, Holder<MobEffect> effect) {
@@ -290,19 +313,19 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
 
                 public PotionFlagsBuilder submit() {
                     var effect = new PotionRecipeEffect(
-                            true,
-                            true,
-                            true,
-                            true,
-                            this.baseDurationTicks,
-                            // unused in reacting?
-                            3.0f,
-                            // also unused in reacting?
-                            this.potencyHardCap,
-                            this.potencyMod,
-                            this.effect,
-                            this.color,
-                            this.inkCost
+                        true,
+                        true,
+                        true,
+                        true,
+                        this.baseDurationTicks,
+                        // unused in reacting?
+                        3.0f,
+                        // also unused in reacting?
+                        this.potencyHardCap,
+                        this.potencyMod,
+                        this.effect,
+                        this.color,
+                        this.inkCost
                     );
                     additionalEffects.add(new Tuple<>(effect, this.chance));
 
@@ -312,24 +335,27 @@ public final class PotionWorkshopReactingBuilder extends GatedRecipeBuilder<Poti
         }
 
         public PotionWorkshopReactingBuilder submit() {
-            modifiers.add(new PotionMod(
-                    flatDurationBonusTicks,
-                    flatPotencyBonus,
-                    durationMultiplier,
-                    potencyMultiplier,
-                    flatPotencyBonusPositiveEffects,
-                    flatPotencyBonusNegativeEffects,
-                    flatDurationBonusPositiveEffects,
-                    flatDurationBonusNegativeEffects,
-                    additionalRandomPositiveEffectCount,
-                    additionalRandomNegativeEffectCount,
-                    chanceToAddLastEffect,
-                    lastEffectDurationMultiplier,
-                    lastEffectPotencyMultiplier,
-                    yield,
-                    additionalDrinkDurationTicks,
-                    flags
-            ));
+            modifiers
+                .add(
+                    new PotionMod(
+                        flatDurationBonusTicks,
+                        flatPotencyBonus,
+                        durationMultiplier,
+                        potencyMultiplier,
+                        flatPotencyBonusPositiveEffects,
+                        flatPotencyBonusNegativeEffects,
+                        flatDurationBonusPositiveEffects,
+                        flatDurationBonusNegativeEffects,
+                        additionalRandomPositiveEffectCount,
+                        additionalRandomNegativeEffectCount,
+                        chanceToAddLastEffect,
+                        lastEffectDurationMultiplier,
+                        lastEffectPotencyMultiplier,
+                        yield,
+                        additionalDrinkDurationTicks,
+                        flags
+                    )
+                );
             return PotionWorkshopReactingBuilder.this;
         }
     }

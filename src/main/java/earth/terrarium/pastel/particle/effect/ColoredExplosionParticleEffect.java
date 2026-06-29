@@ -2,8 +2,8 @@ package earth.terrarium.pastel.particle.effect;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -15,8 +15,8 @@ import org.joml.Vector3f;
 
 public class ColoredExplosionParticleEffect implements ParticleOptions {
 
-    public static final PastelInkColorCollection<ColoredExplosionParticleEffect> VALUES =
-            PastelInkColorCollection.VALUES.map(color -> new ColoredExplosionParticleEffect(color.getColorInt()));
+    public static final PastelInkColorCollection<ColoredExplosionParticleEffect> VALUES = PastelInkColorCollection.VALUES
+        .map(color -> new ColoredExplosionParticleEffect(color.getColorInt()));
 
     public static final ColoredExplosionParticleEffect BLACK = VALUES.black();
 

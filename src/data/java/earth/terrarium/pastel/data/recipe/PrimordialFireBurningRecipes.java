@@ -19,62 +19,70 @@ public class PrimordialFireBurningRecipes {
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
         var pfx = new PrefixHelper(ctx, lookup, "primordial_fire_burning");
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "campfire_unsouling",
                 primordialFire(
-                        Ingredient.of(Items.SOUL_CAMPFIRE),
-                        new ItemStack(Items.CAMPFIRE)
+                    Ingredient.of(Items.SOUL_CAMPFIRE),
+                    new ItemStack(Items.CAMPFIRE)
                 )
-        );
+            );
 
-        pfx.generateAutoNamedRecipe(
+        pfx
+            .generateAutoNamedRecipe(
                 primordialFire(
-                        Ingredient.of(Items.TORCH),
-                        new ItemStack(PastelBlocks.PRIMORDIAL_TORCH)
+                    Ingredient.of(Items.TORCH),
+                    new ItemStack(PastelBlocks.PRIMORDIAL_TORCH)
                 )
-                        .secret(true)
-        );
+                    .secret(true)
+            );
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "soul_lantern_unsouling",
                 primordialFire(
-                        Ingredient.of(Items.SOUL_LANTERN),
-                        new ItemStack(Items.LANTERN)
+                    Ingredient.of(Items.SOUL_LANTERN),
+                    new ItemStack(Items.LANTERN)
                 )
-        );
+            );
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "soul_sand_unsouling",
                 primordialFire(
-                        Ingredient.of(Items.SOUL_SAND),
-                        new ItemStack(Items.SAND)
+                    Ingredient.of(Items.SOUL_SAND),
+                    new ItemStack(Items.SAND)
                 )
-        );
+            );
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "soul_soil_unsouling",
                 primordialFire(
-                        Ingredient.of(Items.SOUL_SOIL),
-                        new ItemStack(Items.DIRT)
+                    Ingredient.of(Items.SOUL_SOIL),
+                    new ItemStack(Items.DIRT)
                 )
-        );
+            );
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "torch_unsouling",
                 primordialFire(
-                        Ingredient.of(Items.SOUL_TORCH),
-                        new ItemStack(Items.TORCH)
+                    Ingredient.of(Items.SOUL_TORCH),
+                    new ItemStack(Items.TORCH)
                 )
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "enchanted_book_unsouling",
                 new EnchantedBookUnsoulingRecipe(lookup)
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "memory_dementia",
                 new MemoryDementiaRecipe()
-        );
+            );
     }
 }

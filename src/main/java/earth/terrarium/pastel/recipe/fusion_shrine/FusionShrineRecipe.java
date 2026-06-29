@@ -80,22 +80,22 @@ public class FusionShrineRecipe extends GatedSizedPastelRecipe<FluidRecipeInput<
     protected final boolean copyComponents;
 
     public FusionShrineRecipe(
-            String group,
-            boolean secret,
-            Optional<ResourceLocation> requiredAdvancementIdentifier,
-            NonNullList<SizedIngredient> craftingInputs,
-            FluidIngredient fluid,
-            ItemStack output,
-            float experience,
-            int craftingTime,
-            boolean yieldUpgradesDisabled,
-            boolean playCraftingFinishedEffects,
-            boolean copyComponents,
-            List<WorldConditionsPredicate> worldConditionsPredicates,
-            @NotNull FusionShrineRecipeWorldEffect startWorldEffect,
-            @NotNull List<FusionShrineRecipeWorldEffect> duringWorldEffects,
-            @NotNull FusionShrineRecipeWorldEffect finishWorldEffect,
-            @Nullable Component description
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        NonNullList<SizedIngredient> craftingInputs,
+        FluidIngredient fluid,
+        ItemStack output,
+        float experience,
+        int craftingTime,
+        boolean yieldUpgradesDisabled,
+        boolean playCraftingFinishedEffects,
+        boolean copyComponents,
+        List<WorldConditionsPredicate> worldConditionsPredicates,
+        @NotNull FusionShrineRecipeWorldEffect startWorldEffect,
+        @NotNull List<FusionShrineRecipeWorldEffect> duringWorldEffects,
+        @NotNull FusionShrineRecipeWorldEffect finishWorldEffect,
+        @Nullable Component description
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -433,7 +433,8 @@ public class FusionShrineRecipe extends GatedSizedPastelRecipe<FluidRecipeInput<
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        CodecHelper.nonNullListOfSize(SizedIngredient.NESTED_CODEC, 0, 7)
+                        CodecHelper
+                            .nonNullListOfSize(SizedIngredient.NESTED_CODEC, 0, 7)
                             .fieldOf("ingredients")
                             .forGetter(recipe -> recipe.craftingInputs),
                         FluidIngredient.CODEC

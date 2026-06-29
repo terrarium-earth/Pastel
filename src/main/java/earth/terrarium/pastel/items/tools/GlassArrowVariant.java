@@ -112,14 +112,13 @@ public class GlassArrowVariant {
 
     public static final GlassArrowVariant MOONSTONE = register("moonstone", MOO);
 
-    public static final PastelGemstoneColorCollection<GlassArrowVariant> VALUES =
-            new PastelGemstoneColorCollection<>(
-                    TOPAZ,
-                    AMETHYST,
-                    CITRINE,
-                    ONYX,
-                    MOONSTONE
-            );
+    public static final PastelGemstoneColorCollection<GlassArrowVariant> VALUES = new PastelGemstoneColorCollection<>(
+        TOPAZ,
+        AMETHYST,
+        CITRINE,
+        ONYX,
+        MOONSTONE
+    );
 
     public GlassArrowVariant(ResourceLocation texture, Attributes attributes) {
         this.texture = texture;

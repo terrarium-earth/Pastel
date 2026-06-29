@@ -6,15 +6,13 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.conditions.ICondition;
-
-import java.util.Optional;
 
 public final class InkConvertingRecipeBuilder extends GatedRecipeBuilder<InkConvertingRecipeBuilder> {
     private final InkColor color;
-    private final Ingredient input;
-    private final long amount;
 
+    private final Ingredient input;
+
+    private final long amount;
 
     public InkConvertingRecipeBuilder(InkColor color, Ingredient input, long amount) {
         super(ItemStack.EMPTY);
@@ -26,17 +24,16 @@ public final class InkConvertingRecipeBuilder extends GatedRecipeBuilder<InkConv
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new InkConvertingRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                this.input,
-                                this.color,
-                                this.amount
-                        )
+            recipeOutput,
+            id,
+            daId -> new InkConvertingRecipe(
+                this.group,
+                this.secret,
+                daId,
+                this.input,
+                this.color,
+                this.amount
+            )
         );
     }
 }

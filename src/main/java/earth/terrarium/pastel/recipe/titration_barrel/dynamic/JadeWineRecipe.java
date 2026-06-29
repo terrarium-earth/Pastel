@@ -37,11 +37,12 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 
-    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList.of(
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList
+        .of(
             SizedIngredient.of(PastelItems.GERMINATED_JADE_VINE_BULB.get(), 1),
             SizedIngredient.of(PastelItems.JADE_PETALS.get(), 3)
 
-    );
+        );
 
     public JadeWineRecipe() {
         super(

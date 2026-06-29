@@ -49,12 +49,13 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/food/suspicious_brew");
 
-    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList.of(
-        SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
-        SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
-        SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
-        SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1)
-    );
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList
+        .of(
+            SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+            SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+            SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+            SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1)
+        );
 
     public SuspiciousBrewRecipe() {
         super(

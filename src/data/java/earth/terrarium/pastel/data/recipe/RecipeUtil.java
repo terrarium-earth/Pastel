@@ -16,19 +16,21 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 // God is dead
 public abstract class RecipeUtil extends RecipeProvider {
     public static Criterion<InventoryChangeTrigger.TriggerInstance> has(ItemLike item) {
         return RecipeProvider.has(item);
     }
+
     public static Criterion<InventoryChangeTrigger.TriggerInstance> has(TagKey<Item> tag) {
         return RecipeProvider.has(tag);
     }
 
     public static Criterion<?> hasAdvancement(ResourceLocation id) {
-        return CriteriaTriggerRegistry.HAS_ADVANCEMENT.get().createCriterion(new HasAdvancementCriteria.HasAdvancementCriteriaInstance(Optional.empty(), id));
+        return CriteriaTriggerRegistry.HAS_ADVANCEMENT
+            .get()
+            .createCriterion(new HasAdvancementCriteria.HasAdvancementCriteriaInstance(Optional.empty(), id));
     }
 
     public RecipeUtil(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

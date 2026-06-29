@@ -1,6 +1,4 @@
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-@FieldsAreNonnullByDefault
+@ParametersAreNonnullByDefault @MethodsReturnNonnullByDefault @FieldsAreNonnullByDefault
 package earth.terrarium.pastel.data.recipe.builder.fusion_shrine;
 
 import net.minecraft.FieldsAreNonnullByDefault;

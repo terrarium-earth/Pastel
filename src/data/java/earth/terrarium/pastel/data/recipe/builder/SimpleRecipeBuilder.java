@@ -4,22 +4,27 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 // Adapted from the neoforge docs
 // <https://docs.neoforged.net/docs/1.21.1/resources/server/recipes/#data-generation>
 public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> implements RecipeBuilder {
     protected final ItemStack result;
+
     private final List<ICondition> conditions = new ArrayList<>();
+
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
+
     protected String group = "";
 
     public SimpleRecipeBuilder(ItemStack result) {
@@ -28,9 +33,11 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
 
     // ??? Im a lobotimite who uses scala
     // If i was doing scala I'd just do `this.type`
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(
+        "unchecked"
+    )
     protected final C self() {
-        return (C)this;
+        return (C) this;
     }
 
     @Override
@@ -80,6 +87,5 @@ public abstract class SimpleRecipeBuilder<C extends SimpleRecipeBuilder<C>> impl
     protected ICondition[] conditions() {
         return this.conditions.toArray(ICondition[]::new);
     }
-
 
 }

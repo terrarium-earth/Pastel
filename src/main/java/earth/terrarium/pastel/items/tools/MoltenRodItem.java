@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.items.tools;
 
-import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.entity.entity.MoltenFishingBobberEntity;
 import earth.terrarium.pastel.registries.PastelAdvancements;
@@ -79,8 +78,10 @@ public class MoltenRodItem extends PastelFishingRodItem implements Preenchanted 
 
     @Override
     public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-        return Map.of(
-                PastelEnchantments.FOUNDRY, 1
-        );
+        return Map
+            .of(
+                PastelEnchantments.FOUNDRY,
+                1
+            );
     }
 }

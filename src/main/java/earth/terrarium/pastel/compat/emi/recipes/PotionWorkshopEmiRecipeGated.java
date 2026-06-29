@@ -26,8 +26,9 @@ public class PotionWorkshopEmiRecipeGated extends GatedSpectrumEmiRecipe<PotionW
             .getSizedIngredients()
             .stream()
             .map(
-                s ->
-                s == null ? EmiIngredient.of(Ingredient.EMPTY) : EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())
+                s -> s == null
+                    ? EmiIngredient.of(Ingredient.EMPTY)
+                    : EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())
             )
             .toList();
     }

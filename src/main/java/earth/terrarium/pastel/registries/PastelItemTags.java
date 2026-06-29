@@ -118,21 +118,31 @@ public class PastelItemTags {
     public static final TagKey<Item> NOXSHROOMS = of("noxshrooms");
 
     public static class ColoredLogs {
-        public static final PastelInkColorCollection<TagKey<Item>> VALUES =
-                PastelInkColorCollection.NAMES.map(it -> of(it + "_logs"));
+        public static final PastelInkColorCollection<TagKey<Item>> VALUES = PastelInkColorCollection.NAMES
+            .map(it -> of(it + "_logs"));
     }
 
     public static class MobHeads {
         public static final TagKey<Item> AXOLOTL_HEADS = getMobHeadKey("axolotl");
+
         public static final TagKey<Item> FISH_HEADS = getMobHeadKey("fish");
+
         public static final TagKey<Item> FOX_HEADS = getMobHeadKey("fox");
+
         public static final TagKey<Item> GUARDIAN_HEADS = getMobHeadKey("guardian");
+
         public static final TagKey<Item> BOVINE_HEADS = getMobHeadKey("bovine");
+
         public static final TagKey<Item> EQUIDAE_HEADS = getMobHeadKey("equidae");
+
         public static final TagKey<Item> PARROT_HEADS = getMobHeadKey("parrot");
+
         public static final TagKey<Item> SHULKER_HEADS = getMobHeadKey("shulker");
+
         public static final TagKey<Item> SLIME_HEADS = getMobHeadKey("slime");
+
         public static final TagKey<Item> SPIDER_HEADS = getMobHeadKey("spider");
+
         public static final TagKey<Item> ZOMBIE_HEADS = getMobHeadKey("zombie");
     }
 

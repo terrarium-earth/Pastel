@@ -1,41 +1,41 @@
 package earth.terrarium.pastel.data.recipe.builder.potion_workshop;
 
 import earth.terrarium.pastel.data.recipe.builder.GatedRecipeBuilder;
-import earth.terrarium.pastel.data.recipe.builder.SimpleRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings("unchecked")
-public abstract class PotionWorkshopRecipeBuilder<C extends PotionWorkshopRecipeBuilder<C>> extends GatedRecipeBuilder<C> {
+@SuppressWarnings(
+    "unchecked"
+)
+public abstract class PotionWorkshopRecipeBuilder<C extends PotionWorkshopRecipeBuilder<C>> extends
+    GatedRecipeBuilder<C> {
 
+    @Nullable protected SizedIngredient ingredient1 = null;
 
-    @Nullable
-    protected SizedIngredient ingredient1 = null;
-    @Nullable
-    protected SizedIngredient ingredient2 = null;
-    @Nullable
-    protected SizedIngredient ingredient3 = null;
+    @Nullable protected SizedIngredient ingredient2 = null;
+
+    @Nullable protected SizedIngredient ingredient3 = null;
 
     public PotionWorkshopRecipeBuilder(
-            ItemStack result
+        ItemStack result
     ) {
         super(result);
     }
 
     public C ingredient1(SizedIngredient ingredient1) {
         this.ingredient1 = ingredient1;
-        return (C)this;
+        return (C) this;
     }
 
     public C ingredient1(ItemLike item) {
         return ingredient1(item, 1);
     }
+
     public C ingredient1(ItemLike item, int count) {
         return ingredient1(SizedIngredient.of(item, count));
     }
@@ -50,12 +50,13 @@ public abstract class PotionWorkshopRecipeBuilder<C extends PotionWorkshopRecipe
 
     public C ingredient2(SizedIngredient ingredient2) {
         this.ingredient2 = ingredient2;
-        return (C)this;
+        return (C) this;
     }
 
     public C ingredient2(ItemLike item) {
         return ingredient2(item, 1);
     }
+
     public C ingredient2(ItemLike item, int count) {
         return ingredient2(SizedIngredient.of(item, count));
     }
@@ -70,12 +71,13 @@ public abstract class PotionWorkshopRecipeBuilder<C extends PotionWorkshopRecipe
 
     public C ingredient3(SizedIngredient ingredient3) {
         this.ingredient3 = ingredient3;
-        return (C)this;
+        return (C) this;
     }
 
     public C ingredient3(ItemLike item) {
         return ingredient3(item, 1);
     }
+
     public C ingredient3(ItemLike item, int count) {
         return ingredient3(SizedIngredient.of(item, count));
     }
@@ -87,8 +89,5 @@ public abstract class PotionWorkshopRecipeBuilder<C extends PotionWorkshopRecipe
     public C ingredient3(TagKey<Item> tag, int count) {
         return ingredient3(SizedIngredient.of(tag, count));
     }
-
-
-
 
 }

@@ -3,7 +3,13 @@ package earth.terrarium.pastel.data.recipe;
 import earth.terrarium.pastel.data.block.PastelBlockFamilies;
 import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
-import earth.terrarium.pastel.recipe.crafting.dynamic.*;
+import earth.terrarium.pastel.recipe.crafting.dynamic.ClearCraftingTabletRecipe;
+import earth.terrarium.pastel.recipe.crafting.dynamic.ClearEnderSpliceRecipe;
+import earth.terrarium.pastel.recipe.crafting.dynamic.ClearInkRecipe;
+import earth.terrarium.pastel.recipe.crafting.dynamic.ClearPotionFillableRecipe;
+import earth.terrarium.pastel.recipe.crafting.dynamic.ColorEverpromiseRibbonRecipe;
+import earth.terrarium.pastel.recipe.crafting.dynamic.RepairAnythingRecipe;
+import earth.terrarium.pastel.recipe.crafting.dynamic.WrapPresentRecipe;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItemTags;
@@ -49,96 +55,133 @@ public class CraftingTableRecipes {
         gemBlocks(pfx.subPrefix("gem_blocks"));
         shaleClay(pfx.subPrefix("shale_clay"));
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.MISC, PastelItems.GUIDEBOOK)
-                        .pattern(" S ")
-                        .pattern("SBS")
-                        .pattern(" S ")
-                        .define('S', PastelItemTags.GEMSTONE_SHARDS)
-                        .define('B', Items.BOOK)
-                        .unlockedBy("started_progression", RecipeUtil.hasAdvancement(PastelAdvancements.PASTEL))
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.MISC, PastelItems.GUIDEBOOK)
+                    .pattern(" S ")
+                    .pattern("SBS")
+                    .pattern(" S ")
+                    .define('S', PastelItemTags.GEMSTONE_SHARDS)
+                    .define('B', Items.BOOK)
+                    .unlockedBy("started_progression", RecipeUtil.hasAdvancement(PastelAdvancements.PASTEL))
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.MUSHROOM_STEW)
-                        .requires(Ingredient.of(PastelItemTags.NOXSHROOMS), 2)
-                        .requires(Items.BOWL)
-                        .unlockedBy("collected_noxshroom", RecipeUtil.has(PastelItemTags.NOXSHROOMS))
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapelessRecipeBuilder
+                    .shapeless(RecipeCategory.FOOD, Items.MUSHROOM_STEW)
+                    .requires(Ingredient.of(PastelItemTags.NOXSHROOMS), 2)
+                    .requires(Items.BOWL)
+                    .unlockedBy("collected_noxshroom", RecipeUtil.has(PastelItemTags.NOXSHROOMS))
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, PastelBlocks.GLISTERING_MELON)
-                        .pattern("MMM")
-                        .pattern("MMM")
-                        .pattern("MMM")
-                        .define('M', Items.GLISTERING_MELON_SLICE)
-                        .unlockedBy("got_vegetal", RecipeUtil.hasAdvancement(PastelAdvancements.COLLECT_VEGETAL))
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.FOOD, PastelBlocks.GLISTERING_MELON)
+                    .pattern("MMM")
+                    .pattern("MMM")
+                    .pattern("MMM")
+                    .define('M', Items.GLISTERING_MELON_SLICE)
+                    .unlockedBy("got_vegetal", RecipeUtil.hasAdvancement(PastelAdvancements.COLLECT_VEGETAL))
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, PastelItems.PAINTBRUSH)
-                        .pattern("  R")
-                        .pattern(" F ")
-                        .pattern("E  ")
-                        .define('E', Items.STICK)
-                        .define('F', Items.COPPER_INGOT)
-                        .define('R', ItemTags.WOOL)
-                        .unlockedBy("placed_pedestal", RecipeUtil.hasAdvancement(PastelAdvancements.PLACE_PEDESTAL))
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.TOOLS, PastelItems.PAINTBRUSH)
+                    .pattern("  R")
+                    .pattern(" F ")
+                    .pattern("E  ")
+                    .define('E', Items.STICK)
+                    .define('F', Items.COPPER_INGOT)
+                    .define('R', ItemTags.WOOL)
+                    .unlockedBy("placed_pedestal", RecipeUtil.hasAdvancement(PastelAdvancements.PLACE_PEDESTAL))
+            );
 
-        basicPedestalVariant(pfx, Items.AMETHYST_SHARD, PastelBlocks.PEDESTAL_BASIC_AMETHYST, PastelAdvancements.Hidden.CollectShards.AMETHYST);
-        basicPedestalVariant(pfx, PastelItems.CITRINE_SHARD, PastelBlocks.PEDESTAL_BASIC_CITRINE, PastelAdvancements.Hidden.CollectShards.CITRINE);
-        basicPedestalVariant(pfx, PastelItems.TOPAZ_SHARD, PastelBlocks.PEDESTAL_BASIC_TOPAZ, PastelAdvancements.Hidden.CollectShards.TOPAZ);
+        basicPedestalVariant(
+            pfx,
+            Items.AMETHYST_SHARD,
+            PastelBlocks.PEDESTAL_BASIC_AMETHYST,
+            PastelAdvancements.Hidden.CollectShards.AMETHYST
+        );
+        basicPedestalVariant(
+            pfx,
+            PastelItems.CITRINE_SHARD,
+            PastelBlocks.PEDESTAL_BASIC_CITRINE,
+            PastelAdvancements.Hidden.CollectShards.CITRINE
+        );
+        basicPedestalVariant(
+            pfx,
+            PastelItems.TOPAZ_SHARD,
+            PastelBlocks.PEDESTAL_BASIC_TOPAZ,
+            PastelAdvancements.Hidden.CollectShards.TOPAZ
+        );
     }
 
-    private static void basicPedestalVariant(PrefixHelper pfx, ItemLike input, ItemLike result, ResourceLocation unlock) {
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result)
-                        .pattern("SSS")
-                        .pattern("WTW")
-                        .pattern("WTW")
-                        .define('S', input)
-                        .define('W', Items.TUFF)
-                        .define('T', ItemTags.PLANKS)
-                        .unlockedBy("got_shard", RecipeUtil.hasAdvancement(unlock))
-        );
+    private static void basicPedestalVariant(
+        PrefixHelper pfx,
+        ItemLike input,
+        ItemLike result,
+        ResourceLocation unlock
+    ) {
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, result)
+                    .pattern("SSS")
+                    .pattern("WTW")
+                    .pattern("WTW")
+                    .define('S', input)
+                    .define('W', Items.TUFF)
+                    .define('T', ItemTags.PLANKS)
+                    .unlockedBy("got_shard", RecipeUtil.hasAdvancement(unlock))
+            );
     }
 
     private static void special(PrefixHelper pfx) {
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "clear_crafting_tablet",
                 new ClearCraftingTabletRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "clear_ender_splice",
                 new ClearEnderSpliceRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "clear_ink",
                 new ClearInkRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "clear_potion_fillable",
                 new ClearPotionFillableRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "color_everpromise_ribbon",
                 new ColorEverpromiseRibbonRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "repair_anything",
                 new RepairAnythingRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "wrap_present",
                 new WrapPresentRecipe()
-        );
+            );
     }
 
     private static void pigmentToDye(PrefixHelper pfx) {
@@ -147,57 +190,75 @@ public class CraftingTableRecipes {
             var pigment = PastelItems.PIGMENTS.pick(color);
             var unlock = PastelAdvancements.Hidden.CollectPigment.VALUES.pick(color);
             var name = RecipeUtil.nameToInAndOut(pigment, dye);
-            pfx.generateRecipe(
+            pfx
+                .generateRecipe(
                     name,
-                    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, dye)
-                            .requires(pigment)
-                            .unlockedBy("unlocked_pigment", RecipeUtil.hasAdvancement(unlock))
-                            .group("pigment_to_dye")
-            );
+                    ShapelessRecipeBuilder
+                        .shapeless(RecipeCategory.MISC, dye)
+                        .requires(pigment)
+                        .unlockedBy("unlocked_pigment", RecipeUtil.hasAdvancement(unlock))
+                        .group("pigment_to_dye")
+                );
         });
     }
 
     private static void flora(PrefixHelper pfx) {
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "glow_dye_from_humming_bell",
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GLOW_INK_SAC, 2)
-                        .requires(PastelBlocks.HUMMING_BELL)
-                        // dunno the actual advancement so :shrug:
-                        .unlockedBy("unlocked_humming_bell", RecipeUtil.has(PastelBlocks.HUMMING_BELL))
-                        .group("flora_to_dye")
-        );
+                ShapelessRecipeBuilder
+                    .shapeless(RecipeCategory.MISC, Items.GLOW_INK_SAC, 2)
+                    .requires(PastelBlocks.HUMMING_BELL)
+                    // dunno the actual advancement so :shrug:
+                    .unlockedBy("unlocked_humming_bell", RecipeUtil.has(PastelBlocks.HUMMING_BELL))
+                    .group("flora_to_dye")
+            );
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "orange_dye_from_apricotti",
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.ORANGE_DYE, 2)
-                        .requires(PastelBlocks.APRICOTTI)
-                        .unlockedBy("unlocked_apricotti", RecipeUtil.has(PastelBlocks.APRICOTTI))
-                        .group("flora_to_dye")
-        );
+                ShapelessRecipeBuilder
+                    .shapeless(RecipeCategory.MISC, Items.ORANGE_DYE, 2)
+                    .requires(PastelBlocks.APRICOTTI)
+                    .unlockedBy("unlocked_apricotti", RecipeUtil.has(PastelBlocks.APRICOTTI))
+                    .group("flora_to_dye")
+            );
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "pink_dye_from_sweet_pea",
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PINK_DYE, 2)
-                        .requires(PastelBlocks.SWEET_PEA)
-                        .unlockedBy("unlocked_sweet_pea", RecipeUtil.has(PastelBlocks.SWEET_PEA))
-                        .group("flora_to_dye")
-        );
+                ShapelessRecipeBuilder
+                    .shapeless(RecipeCategory.MISC, Items.PINK_DYE, 2)
+                    .requires(PastelBlocks.SWEET_PEA)
+                    .unlockedBy("unlocked_sweet_pea", RecipeUtil.has(PastelBlocks.SWEET_PEA))
+                    .group("flora_to_dye")
+            );
     }
 
     private static void bannerPatterns(PrefixHelper pfx) {
-        pfx.generateAutoNamedRecipe(
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, PastelItems.AMETHYST_CLUSTER_BANNER_PATTERN)
-                        .requires(Items.PAPER)
-                        .requires(Items.AMETHYST_CLUSTER)
-                        .unlockedBy("has_amethyst", RecipeUtil.hasAdvancement(PastelAdvancements.Hidden.CollectShards.AMETHYST))
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapelessRecipeBuilder
+                    .shapeless(RecipeCategory.MISC, PastelItems.AMETHYST_CLUSTER_BANNER_PATTERN)
+                    .requires(Items.PAPER)
+                    .requires(Items.AMETHYST_CLUSTER)
+                    .unlockedBy(
+                        "has_amethyst",
+                        RecipeUtil.hasAdvancement(PastelAdvancements.Hidden.CollectShards.AMETHYST)
+                    )
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, PastelItems.AMETHYST_SHARD_BANNER_PATTERN)
-                        .requires(Items.PAPER)
-                        .requires(Items.AMETHYST_SHARD)
-                        .unlockedBy("has_amethyst", RecipeUtil.hasAdvancement(PastelAdvancements.Hidden.CollectShards.AMETHYST))
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapelessRecipeBuilder
+                    .shapeless(RecipeCategory.MISC, PastelItems.AMETHYST_SHARD_BANNER_PATTERN)
+                    .requires(Items.PAPER)
+                    .requires(Items.AMETHYST_SHARD)
+                    .unlockedBy(
+                        "has_amethyst",
+                        RecipeUtil.hasAdvancement(PastelAdvancements.Hidden.CollectShards.AMETHYST)
+                    )
+            );
     }
 
     private static void basalMarble(PrefixHelper pfx) {
@@ -230,14 +291,16 @@ public class CraftingTableRecipes {
         generateBasicFamily(pfx, unlock, PastelBlockFamilies.PYRITE.get());
         generateBasicFamily(pfx, unlock, PastelBlockFamilies.PYRITE_TILES.get());
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "pyrite_chunks_to_pyrite",
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, PastelBlocks.PYRITE)
-                        .pattern("##")
-                        .pattern("##")
-                        .define('#', PastelItems.PYRITE_CHUNK)
-                        .unlockedBy("has_input", unlock)
-        );
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, PastelBlocks.PYRITE)
+                    .pattern("##")
+                    .pattern("##")
+                    .define('#', PastelItems.PYRITE_CHUNK)
+                    .unlockedBy("has_input", unlock)
+            );
 
         // ???
         // generateConverting(pfx, PastelBlocks.PYRITE, Pastel);
@@ -252,34 +315,39 @@ public class CraftingTableRecipes {
         generateBasicFamily(pfx, unlock, family.vanilla());
         generateBasicFamily(pfx, unlock, family.polished());
 
-
         generatePillar(pfx, unlock, base, family.pillar());
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, family.notched(), 4)
-                        .pattern(" # ")
-                        .pattern("# #")
-                        .pattern(" # ")
-                        .define('#', base)
-                        .unlockedBy("has_input", unlock)
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, family.notched(), 4)
+                    .pattern(" # ")
+                    .pattern("# #")
+                    .pattern(" # ")
+                    .define('#', base)
+                    .unlockedBy("has_input", unlock)
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, family.crest(), 3)
-                        .pattern(" # ")
-                        .pattern("# #")
-                        .define('#', base)
-                        .unlockedBy("has_input", unlock)
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, family.crest(), 3)
+                    .pattern(" # ")
+                    .pattern("# #")
+                    .define('#', base)
+                    .unlockedBy("has_input", unlock)
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, family.planed().getBaseBlock(), 9)
-                        .pattern("###")
-                        .pattern("###")
-                        .pattern("###")
-                        .define('#', base)
-                        .unlockedBy("has_unlock", unlock)
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, family.planed().getBaseBlock(), 9)
+                    .pattern("###")
+                    .pattern("###")
+                    .pattern("###")
+                    .define('#', base)
+                    .unlockedBy("has_unlock", unlock)
+            );
 
         generateConverting(pfx, unlock, base, family.bricks().getBaseBlock());
         generateConverting(pfx, unlock, family.bricks().getBaseBlock(), family.tiles().getBaseBlock());
@@ -291,37 +359,48 @@ public class CraftingTableRecipes {
     }
 
     private static void coloredWood(PrefixHelper pfx) {
-        PastelInkColorCollection.zipApply(PastelAdvancements.Hidden.CollectPigment.VALUES, PastelBlockFamilies.COLORED_WOODS.get(), (unlockId, family) -> {
-            var unlock = RecipeUtil.hasAdvancement(unlockId);
-            generateWood(pfx, unlock, family);
-        });
+        PastelInkColorCollection
+            .zipApply(
+                PastelAdvancements.Hidden.CollectPigment.VALUES,
+                PastelBlockFamilies.COLORED_WOODS.get(),
+                (unlockId, family) -> {
+                    var unlock = RecipeUtil.hasAdvancement(unlockId);
+                    generateWood(pfx, unlock, family);
+                }
+            );
     }
 
     private static void ash(PrefixHelper pfx) {
         var unlock = RecipeUtil.hasAdvancement(PastelAdvancements.Hidden.COLLECT_ASH);
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "ash_from_flakes",
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, PastelItems.ASH_FLAKES, 4)
-                        .requires(PastelBlocks.ASH)
-                        .group("compacting")
-                        .unlockedBy("has_unlock", unlock)
-        );
+                ShapelessRecipeBuilder
+                    .shapeless(RecipeCategory.MISC, PastelItems.ASH_FLAKES, 4)
+                    .requires(PastelBlocks.ASH)
+                    .group("compacting")
+                    .unlockedBy("has_unlock", unlock)
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, PastelBlocks.ASH_PILE, 6)
-                        .pattern("WWW")
-                        .define('W', PastelBlocks.ASH)
-                        .unlockedBy("has_unlock", unlock)
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.DECORATIONS, PastelBlocks.ASH_PILE, 6)
+                    .pattern("WWW")
+                    .define('W', PastelBlocks.ASH)
+                    .unlockedBy("has_unlock", unlock)
+            );
 
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "flakes_from_ash",
-                ShapedRecipeBuilder.shaped(RecipeCategory.MISC, PastelBlocks.ASH)
-                        .pattern("WW")
-                        .pattern("WW")
-                        .define('W', PastelItems.ASH_FLAKES)
-                        .unlockedBy("has_unlock", unlock)
-        );
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.MISC, PastelBlocks.ASH)
+                    .pattern("WW")
+                    .pattern("WW")
+                    .define('W', PastelItems.ASH_FLAKES)
+                    .unlockedBy("has_unlock", unlock)
+            );
     }
 
     private static void noxwood(PrefixHelper pfx) {
@@ -345,45 +424,57 @@ public class CraftingTableRecipes {
     private static void gemBlocks(PrefixHelper pfx) {
         var bind = new BindGemBlock(pfx);
 
-        PastelGemstoneColorCollection.zipApply4(
+        PastelGemstoneColorCollection
+            .zipApply4(
                 PastelItems.GEMSTONE_SHARDS,
                 PastelBlocks.GEMSTONE_BLOCKS,
                 PastelBlocks.POLISHED_GEMSTONE_BLOCKS,
                 PastelAdvancements.Hidden.CollectShards.VALUES,
                 bind::generate
-        );
+            );
     }
 
     private record BindGemBlock(PrefixHelper pfx) {
-        void generate(Holder<Item> shard, DeferredBlock<Block> gemBlock, DeferredBlock<Block> polished, ResourceLocation unlockId) {
+        void generate(
+            Holder<Item> shard,
+            DeferredBlock<Block> gemBlock,
+            DeferredBlock<Block> polished,
+            ResourceLocation unlockId
+        ) {
             var unlock = RecipeUtil.hasAdvancement(unlockId);
-            pfx.generateRecipe(
+            pfx
+                .generateRecipe(
                     RecipeUtil.nameFromInAndOut(polished, shard.value()),
-                    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, shard.value(), 9)
-                            .requires(polished)
-                            .group("compacting")
-                            .unlockedBy("has_unlock", unlock)
-            );
+                    ShapelessRecipeBuilder
+                        .shapeless(RecipeCategory.MISC, shard.value(), 9)
+                        .requires(polished)
+                        .group("compacting")
+                        .unlockedBy("has_unlock", unlock)
+                );
 
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, polished)
-                            .pattern("###")
-                            .pattern("###")
-                            .pattern("###")
-                            .define('#', shard.value())
-                            .group("compacting")
-                            .unlockedBy("has_unlock", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.MISC, polished)
+                        .pattern("###")
+                        .pattern("###")
+                        .pattern("###")
+                        .define('#', shard.value())
+                        .group("compacting")
+                        .unlockedBy("has_unlock", unlock)
+                );
 
             // jank
             if (gemBlock.get() != Blocks.AMETHYST_BLOCK) {
-                pfx.generateAutoNamedRecipe(
-                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, gemBlock)
-                                .pattern("##")
-                                .pattern("##")
-                                .define('#', shard.value())
-                                .unlockedBy("has_unlock", unlock)
-                );
+                pfx
+                    .generateAutoNamedRecipe(
+                        ShapedRecipeBuilder
+                            .shaped(RecipeCategory.MISC, gemBlock)
+                            .pattern("##")
+                            .pattern("##")
+                            .define('#', shard.value())
+                            .unlockedBy("has_unlock", unlock)
+                    );
             }
         }
     }
@@ -402,44 +493,64 @@ public class CraftingTableRecipes {
         generateBasicFamily(pfx, unlock, PastelBlockFamilies.EXPOSED_SHALE_CLAY_BRICKS.get());
         generateBasicFamily(pfx, unlock, PastelBlockFamilies.EXPOSED_SHALE_CLAY_TILES.get());
 
-        generateConverting(pfx, unlock, PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY, PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS);
+        generateConverting(
+            pfx,
+            unlock,
+            PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY,
+            PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS
+        );
         generateConverting(pfx, unlock, PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS, PastelBlocks.EXPOSED_SHALE_CLAY_TILES);
 
         generateBasicFamily(pfx, unlock, PastelBlockFamilies.WEATHERED_POLISHED_SHALE_CLAY.get());
         generateBasicFamily(pfx, unlock, PastelBlockFamilies.WEATHERED_SHALE_CLAY_BRICKS.get());
         generateBasicFamily(pfx, unlock, PastelBlockFamilies.WEATHERED_SHALE_CLAY_TILES.get());
 
-        generateConverting(pfx, unlock, PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY, PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS);
-        generateConverting(pfx, unlock, PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS, PastelBlocks.WEATHERED_SHALE_CLAY_TILES);
+        generateConverting(
+            pfx,
+            unlock,
+            PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY,
+            PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS
+        );
+        generateConverting(
+            pfx,
+            unlock,
+            PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS,
+            PastelBlocks.WEATHERED_SHALE_CLAY_TILES
+        );
     }
-
 
     private static void generateWood(PrefixHelper pfx, Criterion<?> unlock, PastelBlockFamilies.WoodFamily woodFamily) {
         generateBasicFamily(pfx, unlock, woodFamily.plankFamily());
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, woodFamily.wood(), 3)
-                        .pattern("##")
-                        .pattern("##")
-                        .define('#', woodFamily.log())
-                        .unlockedBy("has_unlock", unlock)
-                        .group("bark")
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, woodFamily.wood(), 3)
+                    .pattern("##")
+                    .pattern("##")
+                    .define('#', woodFamily.log())
+                    .unlockedBy("has_unlock", unlock)
+                    .group("bark")
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, woodFamily.strippedWood(), 3)
-                        .pattern("##")
-                        .pattern("##")
-                        .define('#', woodFamily.strippedLog())
-                        .group("bark")
-                        .unlockedBy("has_unlock", unlock)
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, woodFamily.strippedWood(), 3)
+                    .pattern("##")
+                    .pattern("##")
+                    .define('#', woodFamily.strippedLog())
+                    .group("bark")
+                    .unlockedBy("has_unlock", unlock)
+            );
 
-        pfx.generateAutoNamedRecipe(
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, woodFamily.planks(), 4)
-                        .requires(woodFamily.logs())
-                        .unlockedBy("has_unlock", unlock)
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapelessRecipeBuilder
+                    .shapeless(RecipeCategory.BUILDING_BLOCKS, woodFamily.planks(), 4)
+                    .requires(woodFamily.logs())
+                    .unlockedBy("has_unlock", unlock)
+            );
     }
 
     private static void generateConverting(PrefixHelper pfx, ItemLike base, ItemLike next) {
@@ -451,23 +562,27 @@ public class CraftingTableRecipes {
     }
 
     private static void generateConverting(PrefixHelper pfx, Criterion<?> unlock, ItemLike base, ItemLike next) {
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, next, 4)
-                        .pattern("##")
-                        .pattern("##")
-                        .define('#', base)
-                        .unlockedBy("has_input", unlock)
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, next, 4)
+                    .pattern("##")
+                    .pattern("##")
+                    .define('#', base)
+                    .unlockedBy("has_input", unlock)
+            );
     }
 
     private static void generatePillar(PrefixHelper pfx, Criterion<?> unlock, ItemLike base, ItemLike pillar) {
-        pfx.generateAutoNamedRecipe(
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, pillar, 2)
-                        .pattern("#")
-                        .pattern("#")
-                        .define('#', base)
-                        .unlockedBy("has_input", unlock)
-        );
+        pfx
+            .generateAutoNamedRecipe(
+                ShapedRecipeBuilder
+                    .shaped(RecipeCategory.BUILDING_BLOCKS, pillar, 2)
+                    .pattern("#")
+                    .pattern("#")
+                    .define('#', base)
+                    .unlockedBy("has_input", unlock)
+            );
     }
 
     private static void generatePillar(PrefixHelper pfx, ItemLike base, ItemLike pillar) {
@@ -498,108 +613,128 @@ public class CraftingTableRecipes {
         var fenceGate = variants.getOrDefault(BlockFamily.Variant.FENCE_GATE, null);
 
         if (stairs != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, stairs, 6)
-                            .pattern("W  ")
-                            .pattern("WW ")
-                            .pattern("WWW")
-                            .define('W', base)
-                            .unlockedBy("has_input", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.BUILDING_BLOCKS, stairs, 6)
+                        .pattern("W  ")
+                        .pattern("WW ")
+                        .pattern("WWW")
+                        .define('W', base)
+                        .unlockedBy("has_input", unlock)
+                );
         }
 
         if (slab != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, slab, 6)
-                            .pattern("WWW")
-                            .define('W', base)
-                            .unlockedBy("has_input", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.BUILDING_BLOCKS, slab, 6)
+                        .pattern("WWW")
+                        .define('W', base)
+                        .unlockedBy("has_input", unlock)
+                );
         }
 
         if (wall != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, wall, 6)
-                            .pattern("WWW")
-                            .pattern("WWW")
-                            .define('W', base)
-                            .unlockedBy("has_input", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.BUILDING_BLOCKS, wall, 6)
+                        .pattern("WWW")
+                        .pattern("WWW")
+                        .define('W', base)
+                        .unlockedBy("has_input", unlock)
+                );
         }
 
         if (chiseled != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, chiseled, 5)
-                            .pattern(" # ")
-                            .pattern("###")
-                            .pattern(" # ")
-                            .define('#', base)
-                            .unlockedBy("has_input", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.BUILDING_BLOCKS, chiseled, 5)
+                        .pattern(" # ")
+                        .pattern("###")
+                        .pattern(" # ")
+                        .define('#', base)
+                        .unlockedBy("has_input", unlock)
+                );
         }
 
         if (pressurePlate != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, pressurePlate)
-                            .pattern("##")
-                            .define('#', base)
-                            .unlockedBy("has_input", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.REDSTONE, pressurePlate)
+                        .pattern("##")
+                        .define('#', base)
+                        .unlockedBy("has_input", unlock)
+                );
         }
 
         if (button != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, button)
-                            .requires(base)
-                            .unlockedBy("has_input", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapelessRecipeBuilder
+                        .shapeless(RecipeCategory.REDSTONE, button)
+                        .requires(base)
+                        .unlockedBy("has_input", unlock)
+                );
         }
 
         if (door != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, door, 3)
-                            .pattern("##")
-                            .pattern("##")
-                            .pattern("##")
-                            .define('#', base)
-                            .unlockedBy("has_unlock", unlock)
-                            .group("wooden_door")
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.REDSTONE, door, 3)
+                        .pattern("##")
+                        .pattern("##")
+                        .pattern("##")
+                        .define('#', base)
+                        .unlockedBy("has_unlock", unlock)
+                        .group("wooden_door")
+                );
         }
 
         if (trapdoor != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, trapdoor, 2)
-                            .pattern("###")
-                            .pattern("###")
-                            .define('#', base)
-                            .unlockedBy("has_unlock", unlock)
-                            .group("wooden_trapdoor")
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.REDSTONE, trapdoor, 2)
+                        .pattern("###")
+                        .pattern("###")
+                        .define('#', base)
+                        .unlockedBy("has_unlock", unlock)
+                        .group("wooden_trapdoor")
+                );
         }
 
         if (fence != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, fence, 3)
-                            .group("wooden_fence")
-                            .pattern("W#W")
-                            .pattern("W#W")
-                            .define('#', Items.STICK)
-                            .define('W', base)
-                            .unlockedBy("has_unlock", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.BUILDING_BLOCKS, fence, 3)
+                        .group("wooden_fence")
+                        .pattern("W#W")
+                        .pattern("W#W")
+                        .define('#', Items.STICK)
+                        .define('W', base)
+                        .unlockedBy("has_unlock", unlock)
+                );
         }
 
         if (fenceGate != null) {
-            pfx.generateAutoNamedRecipe(
-                    ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, fenceGate)
-                            .group("wooden_fence_gate")
-                            .pattern("#W#")
-                            .pattern("#W#")
-                            .define('#', Items.STICK)
-                            .define('W', base)
-                            .unlockedBy("has_unlock", unlock)
-            );
+            pfx
+                .generateAutoNamedRecipe(
+                    ShapedRecipeBuilder
+                        .shaped(RecipeCategory.REDSTONE, fenceGate)
+                        .group("wooden_fence_gate")
+                        .pattern("#W#")
+                        .pattern("#W#")
+                        .define('#', Items.STICK)
+                        .define('W', base)
+                        .unlockedBy("has_unlock", unlock)
+                );
         }
     }
 }

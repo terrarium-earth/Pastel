@@ -28,7 +28,8 @@ public abstract class GatedSizedPastelRecipe<C extends RecipeInput> extends Gate
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
-        return NonNullList.copyOf(getSizedIngredients().stream().map(SizedIngredient::ingredient).collect(Collectors.toList()));
+        return NonNullList
+            .copyOf(getSizedIngredients().stream().map(SizedIngredient::ingredient).collect(Collectors.toList()));
     }
 
     protected boolean matchIngredientStacksExclusively(

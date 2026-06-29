@@ -58,17 +58,17 @@ public abstract class PedestalRecipe extends GatedPastelRecipe<PedestalRecipeInp
     protected final boolean noBenefitsFromYieldUpgrades;
 
     public PedestalRecipe(
-            String group,
-            boolean secret,
-            Optional<ResourceLocation> requiredAdvancementIdentifier,
-            PedestalTier tier,
-            NonNullList<Ingredient> inputs,
-            Map<GemstoneColor, Integer> powderInputs,
-            ItemStack output,
-            float experience,
-            int craftingTime,
-            boolean skipRecipeRemainders,
-            boolean noBenefitsFromYieldUpgrades
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        PedestalTier tier,
+        NonNullList<Ingredient> inputs,
+        Map<GemstoneColor, Integer> powderInputs,
+        ItemStack output,
+        float experience,
+        int craftingTime,
+        boolean skipRecipeRemainders,
+        boolean noBenefitsFromYieldUpgrades
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 

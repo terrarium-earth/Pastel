@@ -7,9 +7,7 @@ import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Block;
 // import vazkii.botania.common.item.BotaniaItems;
 
 public class InkConversionRecipes {
@@ -33,7 +31,7 @@ public class InkConversionRecipes {
                 BotaniaItems.lightGrayPetal,
                 BotaniaItems.whitePetal
         );
-
+    
      */
 
     public static void generate(RecipeOutput ctx, HolderLookup.Provider lookup) {
@@ -47,31 +45,33 @@ public class InkConversionRecipes {
             var name = PastelInkColorCollection.NAMES.pick(color);
             var unlock = PastelAdvancements.Hidden.CollectPigment.VALUES.pick(color);
 
-
-            pfx.generateRecipe(
+            pfx
+                .generateRecipe(
                     "dye/" + name,
                     new InkConvertingRecipeBuilder(color, Ingredient.of(dye), 5)
-                            .requiredAdvancement(unlock)
-            );
+                        .requiredAdvancement(unlock)
+                );
 
-            pfx.generateRecipe(
+            pfx
+                .generateRecipe(
                     "pigment/" + name,
                     new InkConvertingRecipeBuilder(color, Ingredient.of(pigment), 100)
-                            .requiredAdvancement(unlock)
-            );
+                        .requiredAdvancement(unlock)
+                );
 
-            pfx.generateRecipe(
+            pfx
+                .generateRecipe(
                     "pigment_blocks/" + name,
                     new InkConvertingRecipeBuilder(color, Ingredient.of(pigmentBlock), 900)
-                            .requiredAdvancement(unlock)
-            );
+                        .requiredAdvancement(unlock)
+                );
 
             /*
             botaniaPrefix.generateRecipe(
                     "petal/" + name,
                     new InkConvertingRecipeBuilder(color, Ingredient.of(petal), 25)
             );
-
+            
              */
         });
 

@@ -12,10 +12,15 @@ import java.util.Objects;
 
 public abstract class PedestalRecipeBuilder<C extends PedestalRecipeBuilder<C>> extends GatedRecipeBuilder<C> {
     protected PedestalTier tier = PedestalTier.BASIC;
+
     protected int craftingTime = 200;
+
     protected boolean disableYieldUpgrades = false;
+
     protected boolean skipRemainders = false;
+
     protected final Map<GemstoneColor, Integer> powderInputs = new HashMap<>();
+
     protected float experience = 0.0f;
 
     public PedestalRecipeBuilder(ItemStack result) {

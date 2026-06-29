@@ -41,16 +41,18 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 
-    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList.of(
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList
+        .of(
             SizedIngredient
                 .of(
                     PastelBlocks.NEPHRITE_BLOSSOM_BULB
                         .get()
-                        .asItem(), 1
+                        .asItem(),
+                    1
                 ),
             SizedIngredient.of(PastelItems.GLASS_PEACH.get(), 4)
 
-    );
+        );
 
     public NecteredViognierRecipe() {
         super(

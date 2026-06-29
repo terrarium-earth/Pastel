@@ -24,15 +24,15 @@ import java.util.Optional;
 public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRecipe {
 
     public SweetenableTitrationBarrelRecipe(
-            String group,
-            boolean secret,
-            Optional<ResourceLocation> requiredAdvancementIdentifier,
-            NonNullList<SizedIngredient> inputStacks,
-            FluidIngredient fluid,
-            ItemStack outputItemStack,
-            Item tappingItem,
-            int minFermentationTimeHours,
-            FermentationData fermentationData
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        NonNullList<SizedIngredient> inputStacks,
+        FluidIngredient fluid,
+        ItemStack outputItemStack,
+        Item tappingItem,
+        int minFermentationTimeHours,
+        FermentationData fermentationData
     ) {
         super(
             group,

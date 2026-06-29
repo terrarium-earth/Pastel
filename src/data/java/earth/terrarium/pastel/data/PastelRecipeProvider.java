@@ -4,16 +4,31 @@ import com.mojang.datafixers.util.Either;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.data.recipe.*;
+import earth.terrarium.pastel.data.recipe.AnvilCrushingRecipes;
+import earth.terrarium.pastel.data.recipe.CinderhearthRecipes;
+import earth.terrarium.pastel.data.recipe.CookingRecipes;
+import earth.terrarium.pastel.data.recipe.CraftingTableRecipes;
+import earth.terrarium.pastel.data.recipe.EnchanterCraftingRecipes;
+import earth.terrarium.pastel.data.recipe.FluidConvertingRecipes;
+import earth.terrarium.pastel.data.recipe.FusionShrineRecipes;
+import earth.terrarium.pastel.data.recipe.HealingDegradingRecipes;
+import earth.terrarium.pastel.data.recipe.InkConversionRecipes;
+import earth.terrarium.pastel.data.recipe.PastelPedestalRecipes;
+import earth.terrarium.pastel.data.recipe.PotionWorkshopBrewingRecipes;
+import earth.terrarium.pastel.data.recipe.PotionWorkshopCraftingRecipes;
+import earth.terrarium.pastel.data.recipe.PotionWorkshopReactingRecipes;
+import earth.terrarium.pastel.data.recipe.PrimordialFireBurningRecipes;
+import earth.terrarium.pastel.data.recipe.SpiritInstillerRecipes;
+import earth.terrarium.pastel.data.recipe.StonecutterRecipes;
+import earth.terrarium.pastel.data.recipe.TitrationBarrelRecipes;
 import earth.terrarium.pastel.recipe.RecipeScaling;
-import earth.terrarium.pastel.recipe.cantrip.DegradingRecipe;
-import earth.terrarium.pastel.recipe.cantrip.HealingRecipe;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
-import earth.terrarium.pastel.registries.*;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluids;
+import earth.terrarium.pastel.registries.PastelResourceConditions;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -21,7 +36,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,7 +44,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -41,7 +54,6 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -56,8 +68,52 @@ import static earth.terrarium.pastel.registries.PastelEnchantments.RAZING;
 import static earth.terrarium.pastel.registries.PastelEnchantments.SERENDIPITY_REEL;
 import static earth.terrarium.pastel.registries.PastelEnchantments.TIGHT_GRIP;
 import static earth.terrarium.pastel.registries.PastelEnchantments.TREASURE_HUNTER;
-import static earth.terrarium.pastel.registries.PastelItems.*;
-import static java.util.Map.entry;
+import static earth.terrarium.pastel.registries.PastelItems.BEDROCK_DUST;
+import static earth.terrarium.pastel.registries.PastelItems.BISMUTH_CRYSTAL;
+import static earth.terrarium.pastel.registries.PastelItems.BISMUTH_FLAKE;
+import static earth.terrarium.pastel.registries.PastelItems.BLACK_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.BLUE_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.BROWN_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.CYAN_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.FROSTBITE_ESSENCE;
+import static earth.terrarium.pastel.registries.PastelItems.GRAY_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.INCANDESCENT_ESSENCE;
+import static earth.terrarium.pastel.registries.PastelItems.LIGHT_BLUE_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.LIGHT_GRAY_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.MERMAIDS_GEM;
+import static earth.terrarium.pastel.registries.PastelItems.MIDNIGHT_CHIP;
+import static earth.terrarium.pastel.registries.PastelItems.MOONSTONE_POWDER;
+import static earth.terrarium.pastel.registries.PastelItems.MOONSTONE_SHARD;
+import static earth.terrarium.pastel.registries.PastelItems.NEOLITH;
+import static earth.terrarium.pastel.registries.PastelItems.PINK_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_AZURITE;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_BLOODSTONE;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_COAL;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_COPPER;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_DIAMOND;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_ECHO;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_EMERALD;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_GLOWSTONE;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_GOLD;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_IRON;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_LAPIS;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_MALACHITE;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_NETHERITE_SCRAP;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_PRISMARINE;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_QUARTZ;
+import static earth.terrarium.pastel.registries.PastelItems.PURE_REDSTONE;
+import static earth.terrarium.pastel.registries.PastelItems.PURPLE_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.RAW_AZURITE;
+import static earth.terrarium.pastel.registries.PastelItems.RAW_BLOODSTONE;
+import static earth.terrarium.pastel.registries.PastelItems.RAW_MALACHITE;
+import static earth.terrarium.pastel.registries.PastelItems.RED_PIGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.SHIMMERSTONE_GEM;
+import static earth.terrarium.pastel.registries.PastelItems.STARDUST;
+import static earth.terrarium.pastel.registries.PastelItems.STAR_FRAGMENT;
+import static earth.terrarium.pastel.registries.PastelItems.STORM_STONE;
+import static earth.terrarium.pastel.registries.PastelItems.STRATINE_FRAGMENTS;
+import static earth.terrarium.pastel.registries.PastelItems.VEGETAL;
+import static earth.terrarium.pastel.registries.PastelItems.YELLOW_PIGMENT;
 import static net.minecraft.world.item.enchantment.Enchantments.BANE_OF_ARTHROPODS;
 import static net.minecraft.world.item.enchantment.Enchantments.BLAST_PROTECTION;
 import static net.minecraft.world.item.enchantment.Enchantments.BREACH;
@@ -120,7 +176,6 @@ public class PastelRecipeProvider extends RecipeProvider {
         FusionShrineRecipes.generate(recipeOutput, lookup);
         TitrationBarrelRecipes.generate(recipeOutput, lookup);
     }
-
 
     private void generateCrystallarieumRecipes(RecipeOutput ctx) {
         generateCrystallarieumRecipe(
@@ -1079,8 +1134,6 @@ public class PastelRecipeProvider extends RecipeProvider {
         );
 
     }
-
-
 
     private void generateCrystallarieumRecipe(
         RecipeOutput ctx,

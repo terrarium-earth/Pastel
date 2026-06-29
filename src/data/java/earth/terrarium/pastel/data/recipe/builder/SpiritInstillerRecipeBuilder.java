@@ -8,17 +8,23 @@ import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 public final class SpiritInstillerRecipeBuilder extends GatedRecipeBuilder<SpiritInstillerRecipeBuilder> {
     private final SizedIngredient firstIngredient;
+
     private final SizedIngredient secondIngredient;
+
     private final SizedIngredient centerIngredient;
+
     private int craftingTime = 200;
+
     private float experience = 1.0f;
+
     private boolean noBenefitsFromYieldAndEfficiencyUpgrades = false;
 
     public SpiritInstillerRecipeBuilder(
-            SizedIngredient center,
-            SizedIngredient first,
-            SizedIngredient second,
-            ItemStack result) {
+        SizedIngredient center,
+        SizedIngredient first,
+        SizedIngredient second,
+        ItemStack result
+    ) {
         super(result);
         this.firstIngredient = first;
         this.secondIngredient = second;
@@ -40,26 +46,23 @@ public final class SpiritInstillerRecipeBuilder extends GatedRecipeBuilder<Spiri
         return this;
     }
 
-
-
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new SpiritInstillerRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                this.centerIngredient,
-                                this.firstIngredient,
-                                this.secondIngredient,
-                                this.result,
-                                this.craftingTime,
-                                this.experience,
-                                this.noBenefitsFromYieldAndEfficiencyUpgrades
-                        )
+            recipeOutput,
+            id,
+            daId -> new SpiritInstillerRecipe(
+                this.group,
+                this.secret,
+                daId,
+                this.centerIngredient,
+                this.firstIngredient,
+                this.secondIngredient,
+                this.result,
+                this.craftingTime,
+                this.experience,
+                this.noBenefitsFromYieldAndEfficiencyUpgrades
+            )
         );
     }
 }

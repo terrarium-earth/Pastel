@@ -13,7 +13,9 @@ import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 
 public class PrefixHelper {
     private final String prefix;
+
     private final RecipeOutput ctx;
+
     private final HolderLookup.Provider lookup;
 
     PrefixHelper(RecipeOutput ctx, HolderLookup.Provider lookup, String prefix) {
@@ -33,7 +35,6 @@ public class PrefixHelper {
     public void generateRecipe(String subId, RecipeBuilder builder) {
         builder.save(ctx, PastelCommon.locate(prefix + subId));
     }
-
 
     public void generateAutoNamedRecipe(RecipeBuilder builder) {
         String name;

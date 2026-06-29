@@ -2,8 +2,8 @@ package earth.terrarium.pastel.particle.effect;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -14,8 +14,8 @@ import net.minecraft.util.ExtraCodecs;
 import org.joml.Vector3f;
 
 public class ColoredSporeBlossomAirParticleEffect implements ParticleOptions {
-    public static final PastelInkColorCollection<ColoredSporeBlossomAirParticleEffect> VALUES =
-        PastelInkColorCollection.VALUES.map(color -> new ColoredSporeBlossomAirParticleEffect(color.getColorInt()));
+    public static final PastelInkColorCollection<ColoredSporeBlossomAirParticleEffect> VALUES = PastelInkColorCollection.VALUES
+        .map(color -> new ColoredSporeBlossomAirParticleEffect(color.getColorInt()));
 
     public static final ColoredSporeBlossomAirParticleEffect BLACK = VALUES.black();
 

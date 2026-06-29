@@ -8,8 +8,16 @@ import earth.terrarium.pastel.data.recipe.builder.SpiritInstillerRecipeBuilder;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.HardcorePlayerRevivalRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.MemoryToHeadRecipe;
-import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.*;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.SpawnerCreatureChangeRecipe;
+import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.SpawnerMaxNearbyEntitiesChangeRecipe;
+import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.SpawnerRequiredPlayerRangeChangeRecipe;
+import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.SpawnerSpawnCountChangeRecipe;
+import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.SpawnerSpawnDelayChangeRecipe;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
@@ -55,197 +63,298 @@ public class SpiritInstillerRecipes {
         // not accepting it
         // lang string
         // recipe.pastel.spirit_instiller.germinated_jade_vine_crossbreeding.hint
-        pfx.generateRecipe(
+        pfx
+            .generateRecipe(
                 "germiniated_jade_vine_crossbreeding",
                 new SpiritInstillerRecipeBuilder(
-                        SizedIngredient.of(PastelItems.VEGETAL, 8),
-                        SizedIngredient.of(PastelBlocks.NEPHRITE_BLOSSOM_BULB, 1),
-                        SizedIngredient.of(PastelBlocks.JADEITE_LOTUS_BULB, 1),
-                        new ItemStack(PastelItems.GERMINATED_JADE_VINE_BULB.asItem())
+                    SizedIngredient.of(PastelItems.VEGETAL, 8),
+                    SizedIngredient.of(PastelBlocks.NEPHRITE_BLOSSOM_BULB, 1),
+                    SizedIngredient.of(PastelBlocks.JADEITE_LOTUS_BULB, 1),
+                    new ItemStack(PastelItems.GERMINATED_JADE_VINE_BULB.asItem())
                 )
-                        .craftingTime(200)
-                        .experience(2.0f)
-                        .secret(true)
-        );
+                    .craftingTime(200)
+                    .experience(2.0f)
+                    .secret(true)
+            );
 
         // Also has a unused hint:
         // recipe.pastel.spirit_instiller.chorus_flower.hint
-        pfx.generateRecipe(
-            "chorus_flower",
+        pfx
+            .generateRecipe(
+                "chorus_flower",
                 new SpiritInstillerRecipeBuilder(
-                        SizedIngredient.of(PastelItems.VEGETAL, 8),
-                        SizedIngredient.of(Items.ECHO_SHARD, 1),
-                        SizedIngredient.of(PastelBlocks.RESONANT_LILY.asItem(), 1),
-                        new ItemStack(Items.CHORUS_FLOWER)
+                    SizedIngredient.of(PastelItems.VEGETAL, 8),
+                    SizedIngredient.of(Items.ECHO_SHARD, 1),
+                    SizedIngredient.of(PastelBlocks.RESONANT_LILY.asItem(), 1),
+                    new ItemStack(Items.CHORUS_FLOWER)
                 )
-                        .craftingTime(1200)
-                        .experience(10.0f)
-                        .secret(true)
-        );
+                    .craftingTime(1200)
+                    .experience(10.0f)
+                    .secret(true)
+            );
     }
 
     private static void spawner(PrefixHelper pfx) {
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "spawner_creature_change",
                 new SpawnerCreatureChangeRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "spawner_max_nearby_entities_change",
                 new SpawnerMaxNearbyEntitiesChangeRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "spawner_required_player_range_change",
                 new SpawnerRequiredPlayerRangeChangeRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "spawner_spawn_count_change",
                 new SpawnerSpawnCountChangeRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "spawner_spawn_delay_change",
                 new SpawnerSpawnDelayChangeRecipe()
-        );
+            );
     }
 
     private static void root(PrefixHelper pfx) {
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "hardcore_player_revival",
                 new HardcorePlayerRevivalRecipe()
-        );
+            );
 
-        pfx.generateDynamicRecipe(
+        pfx
+            .generateDynamicRecipe(
                 "memory_to_head",
                 new MemoryToHeadRecipe()
-        );
+            );
 
-        pfx.generateAutoNamedRecipe(
+        pfx
+            .generateAutoNamedRecipe(
                 new SpiritInstillerRecipeBuilder(
-                        SizedIngredient.of(PastelItems.VEGETAL, 8),
-                        SizedIngredient.of(PastelBlocks.RESONANT_LILY, 1),
-                        SizedIngredient.of(PastelItems.BLOOD_ORCHID_PETAL, 1),
-                        new ItemStack(PastelBlocks.BLOOD_ORCHID)
+                    SizedIngredient.of(PastelItems.VEGETAL, 8),
+                    SizedIngredient.of(PastelBlocks.RESONANT_LILY, 1),
+                    SizedIngredient.of(PastelItems.BLOOD_ORCHID_PETAL, 1),
+                    new ItemStack(PastelBlocks.BLOOD_ORCHID)
                 )
-                        .craftingTime(400)
-                        .experience(4.0f)
-                        .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.BLOOD_ORCHID)
-        );
+                    .craftingTime(400)
+                    .experience(4.0f)
+                    .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.BLOOD_ORCHID)
+            );
 
-        pfx.generateAutoNamedRecipe(
+        pfx
+            .generateAutoNamedRecipe(
                 new SpiritInstillerRecipeBuilder(
-                        SizedIngredient.of(PastelBlocks.ONYX_BLOCK, 1),
-                        SizedIngredient.of(PastelItems.MIDNIGHT_ABERRATION, 1),
-                        SizedIngredient.of(PastelItems.MOONSTRUCK_NECTAR, 1),
-                        new ItemStack(PastelBlocks.BUDDING_ONYX, 1)
+                    SizedIngredient.of(PastelBlocks.ONYX_BLOCK, 1),
+                    SizedIngredient.of(PastelItems.MIDNIGHT_ABERRATION, 1),
+                    SizedIngredient.of(PastelItems.MOONSTRUCK_NECTAR, 1),
+                    new ItemStack(PastelBlocks.BUDDING_ONYX, 1)
                 )
-                        .craftingTime(800)
-                        .experience(4.0f)
-                        .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.BUDDING_ONYX)
-        );
+                    .craftingTime(800)
+                    .experience(4.0f)
+                    .requiredAdvancement(PastelAdvancements.Unlocks.Blocks.BUDDING_ONYX)
+            );
 
-        pfx.generateAutoNamedRecipe(
+        pfx
+            .generateAutoNamedRecipe(
                 new SpiritInstillerRecipeBuilder(
-                        SizedIngredient.of(PastelItems.HIBERNATING_JADE_VINE_BULB, 1),
-                        SizedIngredient.of(PastelItems.LIQUID_CRYSTAL_BUCKET, 1),
-                        SizedIngredient.of(PastelItems.VEGETAL, 16),
-                        new ItemStack(PastelItems.GERMINATED_JADE_VINE_BULB.asItem())
+                    SizedIngredient.of(PastelItems.HIBERNATING_JADE_VINE_BULB, 1),
+                    SizedIngredient.of(PastelItems.LIQUID_CRYSTAL_BUCKET, 1),
+                    SizedIngredient.of(PastelItems.VEGETAL, 16),
+                    new ItemStack(PastelItems.GERMINATED_JADE_VINE_BULB.asItem())
                 )
-                        .craftingTime(600)
-                        .experience(20.0f)
-                        .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_HIBERNATING_JADE_VINE_BULB)
-        );
+                    .craftingTime(600)
+                    .experience(20.0f)
+                    .requiredAdvancement(PastelAdvancements.Hidden.COLLECT_HIBERNATING_JADE_VINE_BULB)
+            );
 
-        pfx.generateAutoNamedRecipe(
+        pfx
+            .generateAutoNamedRecipe(
                 new SpiritInstillerRecipeBuilder(
-                        SizedIngredient.of(Items.NAUTILUS_SHELL, 1),
-                        SizedIngredient.of(PastelItems.MOONSTRUCK_NECTAR, 1),
-                        SizedIngredient.of(PastelItems.MERMAIDS_GEM, 1),
-                        new ItemStack(Items.HEART_OF_THE_SEA)
+                    SizedIngredient.of(Items.NAUTILUS_SHELL, 1),
+                    SizedIngredient.of(PastelItems.MOONSTRUCK_NECTAR, 1),
+                    SizedIngredient.of(PastelItems.MERMAIDS_GEM, 1),
+                    new ItemStack(Items.HEART_OF_THE_SEA)
                 )
-                        .craftingTime(200)
-                        .experience(2.0f)
-        );
+                    .craftingTime(200)
+                    .experience(2.0f)
+            );
 
-        pfx.generateAutoNamedRecipe(
+        pfx
+            .generateAutoNamedRecipe(
                 new SpiritInstillerRecipeBuilder(
-                        SizedIngredient.of(PastelItems.KNOTTED_SWORD, 1),
-                        SizedIngredient.of(PastelItems.EVERNECTAR, 1),
-                        SizedIngredient.of(PastelItems.AETHER_VESTIGES, 1),
-                        new ItemStack(PastelItems.NECTAR_LANCE.asItem())
+                    SizedIngredient.of(PastelItems.KNOTTED_SWORD, 1),
+                    SizedIngredient.of(PastelItems.EVERNECTAR, 1),
+                    SizedIngredient.of(PastelItems.AETHER_VESTIGES, 1),
+                    new ItemStack(PastelItems.NECTAR_LANCE.asItem())
                 )
-                        .craftingTime(1200)
-                        .experience(16.0f)
-                        .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.NECTAR_LANCE)
-        );
+                    .craftingTime(1200)
+                    .experience(16.0f)
+                    .requiredAdvancement(PastelAdvancements.Unlocks.Equipment.NECTAR_LANCE)
+            );
     }
 
     private static void headFusion(PrefixHelper pfx) {
         var h = new HeadGenerator(pfx, 4);
-        h.generateHeadFusion(head(PastelSkullType.PHANTOM), SecondFusionIngredient.NIGHTDEW, head(PastelSkullType.GHAST));
-        h.generateHeadFusion(head(PastelSkullType.SQUID),SecondFusionIngredient.basic(PastelItems.SHIMMERSTONE_GEM, 4), head(PastelSkullType.GLOW_SQUID));
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.PHANTOM),
+                SecondFusionIngredient.NIGHTDEW,
+                head(PastelSkullType.GHAST)
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.SQUID),
+                SecondFusionIngredient.basic(PastelItems.SHIMMERSTONE_GEM, 4),
+                head(PastelSkullType.GLOW_SQUID)
+            );
         h.generateHeadFusion(Items.ZOMBIE_HEAD, SecondFusionIngredient.INCANDESCENT, head(PastelSkullType.HUSK));
-        h.generateHeadFusion(head(PastelSkullType.SLIME), SecondFusionIngredient.INCANDESCENT, head(PastelSkullType.MAGMA_CUBE));
-        h.generateHeadFusion(head(PastelSkullType.COW), SecondFusionIngredient.basic(Items.BROWN_MUSHROOM, 4), head(PastelSkullType.MOOSHROOM_BROWN));
-        h.generateHeadFusion(head(PastelSkullType.COW), SecondFusionIngredient.basic(Items.RED_MUSHROOM, 4), head(PastelSkullType.MOOSHROOM_RED));
-        h.generateHeadFusion(head(PastelSkullType.HORSE), SecondFusionIngredient.basic(head(PastelSkullType.DONKEY)), head(PastelSkullType.MULE));
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.SLIME),
+                SecondFusionIngredient.INCANDESCENT,
+                head(PastelSkullType.MAGMA_CUBE)
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.COW),
+                SecondFusionIngredient.basic(Items.BROWN_MUSHROOM, 4),
+                head(PastelSkullType.MOOSHROOM_BROWN)
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.COW),
+                SecondFusionIngredient.basic(Items.RED_MUSHROOM, 4),
+                head(PastelSkullType.MOOSHROOM_RED)
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.HORSE),
+                SecondFusionIngredient.basic(head(PastelSkullType.DONKEY)),
+                head(PastelSkullType.MULE)
+            );
         h.generateHeadFusion(head(PastelSkullType.BAT), SecondFusionIngredient.NIGHTDEW, head(PastelSkullType.PHANTOM));
-        h.generateHeadFusion(head(PastelSkullType.PIG), SecondFusionIngredient.basic(head(PastelSkullType.PILLAGER)), Items.PIGLIN_HEAD);
-        h.generateHeadFusion(head(PastelSkullType.HORSE), SecondFusionIngredient.STORM_STORM, head(PastelSkullType.SKELETON_HORSE));
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.PIG),
+                SecondFusionIngredient.basic(head(PastelSkullType.PILLAGER)),
+                Items.PIGLIN_HEAD
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.HORSE),
+                SecondFusionIngredient.STORM_STORM,
+                head(PastelSkullType.SKELETON_HORSE)
+            );
         h.generateHeadFusion(Items.SKELETON_SKULL, SecondFusionIngredient.FROSTBITE, head(PastelSkullType.STRAY));
-        h.generateHeadFusion(head(PastelSkullType.CAMEL), SecondFusionIngredient.INCANDESCENT, head(PastelSkullType.STRIDER));
-        h.generateHeadFusion(head(PastelSkullType.VILLAGER), SecondFusionIngredient.STORM_STORM, head(PastelSkullType.WITCH));
-        h.generateHeadFusion(Items.SKELETON_SKULL, SecondFusionIngredient.basic(Items.BLAZE_POWDER, 2), Items.WITHER_SKELETON_SKULL);
-        h.generateHeadFusion(head(PastelSkullType.HOGLIN), SecondFusionIngredient.basic(Items.ZOMBIE_HEAD), head(PastelSkullType.ZOGLIN));
-        h.generateHeadFusion(head(PastelSkullType.HORSE), SecondFusionIngredient.basic(Items.ZOMBIE_HEAD), head(PastelSkullType.ZOMBIE_HORSE));
-        h.generateHeadFusion(head(PastelSkullType.VILLAGER), SecondFusionIngredient.basic(Items.ZOMBIE_HEAD), head(PastelSkullType.ZOMBIE_VILLAGER));
-        h.generateHeadFusion(Items.PIGLIN_HEAD, SecondFusionIngredient.basic(Items.ZOMBIE_HEAD), head(PastelSkullType.ZOMBIFIED_PIGLIN));
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.CAMEL),
+                SecondFusionIngredient.INCANDESCENT,
+                head(PastelSkullType.STRIDER)
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.VILLAGER),
+                SecondFusionIngredient.STORM_STORM,
+                head(PastelSkullType.WITCH)
+            );
+        h
+            .generateHeadFusion(
+                Items.SKELETON_SKULL,
+                SecondFusionIngredient.basic(Items.BLAZE_POWDER, 2),
+                Items.WITHER_SKELETON_SKULL
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.HOGLIN),
+                SecondFusionIngredient.basic(Items.ZOMBIE_HEAD),
+                head(PastelSkullType.ZOGLIN)
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.HORSE),
+                SecondFusionIngredient.basic(Items.ZOMBIE_HEAD),
+                head(PastelSkullType.ZOMBIE_HORSE)
+            );
+        h
+            .generateHeadFusion(
+                head(PastelSkullType.VILLAGER),
+                SecondFusionIngredient.basic(Items.ZOMBIE_HEAD),
+                head(PastelSkullType.ZOMBIE_VILLAGER)
+            );
+        h
+            .generateHeadFusion(
+                Items.PIGLIN_HEAD,
+                SecondFusionIngredient.basic(Items.ZOMBIE_HEAD),
+                head(PastelSkullType.ZOMBIFIED_PIGLIN)
+            );
 
         variantChangingHeadFusion(pfx.subPrefix("variant_changing"));
     }
 
     private record SecondFusionIngredient(
-            ResourceLocation unlock,
-            SizedIngredient ingredient
+        ResourceLocation unlock,
+        SizedIngredient ingredient
 
     ) {
         public static SecondFusionIngredient basic(ItemLike input, int count) {
-            return new SecondFusionIngredient(PastelAdvancements.Unlocks.HeadFusion.BASIC_RECIPES, SizedIngredient.of(input, count));
+            return new SecondFusionIngredient(
+                PastelAdvancements.Unlocks.HeadFusion.BASIC_RECIPES,
+                SizedIngredient.of(input, count)
+            );
         }
 
         public static SecondFusionIngredient basic(ItemLike input) {
             return basic(input, 1);
         }
 
-
         public static final SecondFusionIngredient NIGHTDEW = new SecondFusionIngredient(
-                PastelAdvancements.Unlocks.HeadFusion.NIGHTDEW_RECIPES,
-                SizedIngredient.of(PastelItems.NIGHTDEW_SPROUT, 2)
+            PastelAdvancements.Unlocks.HeadFusion.NIGHTDEW_RECIPES,
+            SizedIngredient.of(PastelItems.NIGHTDEW_SPROUT, 2)
         );
 
         public static final SecondFusionIngredient INCANDESCENT = new SecondFusionIngredient(
-                PastelAdvancements.Unlocks.HeadFusion.INCANDESCENT_RECIPES,
-                SizedIngredient.of(PastelItems.INCANDESCENT_ESSENCE, 4)
+            PastelAdvancements.Unlocks.HeadFusion.INCANDESCENT_RECIPES,
+            SizedIngredient.of(PastelItems.INCANDESCENT_ESSENCE, 4)
         );
 
         public static final SecondFusionIngredient FROSTBITE = new SecondFusionIngredient(
-                PastelAdvancements.Unlocks.HeadFusion.FROSTBITE_RECIPES,
-                SizedIngredient.of(PastelItems.FROSTBITE_ESSENCE, 4)
+            PastelAdvancements.Unlocks.HeadFusion.FROSTBITE_RECIPES,
+            SizedIngredient.of(PastelItems.FROSTBITE_ESSENCE, 4)
         );
 
         public static final SecondFusionIngredient STORM_STORM = new SecondFusionIngredient(
-                PastelAdvancements.Unlocks.HeadFusion.STORM_STONE_RECIPES,
-                SizedIngredient.of(PastelItems.STORM_STONE, 4)
+            PastelAdvancements.Unlocks.HeadFusion.STORM_STONE_RECIPES,
+            SizedIngredient.of(PastelItems.STORM_STONE, 4)
         );
     }
 
     private static void variantChangingHeadFusion(PrefixHelper pfx) {
         // Because God Hates Foxes, foxes are more expensive to convert
         var foxHelper = new HeadGenerator(pfx, 4);
-        foxHelper.generateHeadFusion(head(PastelSkullType.FOX), SecondFusionIngredient.FROSTBITE, head(PastelSkullType.FOX_ARCTIC));
-        foxHelper.generateHeadFusion(head(PastelSkullType.FOX_ARCTIC), SecondFusionIngredient.INCANDESCENT, head(PastelSkullType.FOX));
+        foxHelper
+            .generateHeadFusion(
+                head(PastelSkullType.FOX),
+                SecondFusionIngredient.FROSTBITE,
+                head(PastelSkullType.FOX_ARCTIC)
+            );
+        foxHelper
+            .generateHeadFusion(
+                head(PastelSkullType.FOX_ARCTIC),
+                SecondFusionIngredient.INCANDESCENT,
+                head(PastelSkullType.FOX)
+            );
 
         var helper = new HeadGenerator(pfx, 1);
         var pigments = PastelItems.PIGMENTS.map(SecondFusionIngredient::basic);
@@ -283,7 +392,6 @@ public class SpiritInstillerRecipes {
         helper.generateHeadFusion(shulkerTag, pigments.white(), head(PastelSkullType.SHULKER_WHITE));
         helper.generateHeadFusion(shulkerTag, pigments.yellow(), head(PastelSkullType.SHULKER_YELLOW));
 
-
     }
 
     private static ItemLike head(PastelSkullType kind) {
@@ -296,22 +404,28 @@ public class SpiritInstillerRecipes {
     ) {
         public void generateHeadFusion(Ingredient head, SecondFusionIngredient second, ItemLike result) {
 
-            var headName = BuiltInRegistries.ITEM.getKey(result.asItem()).getPath().replace("_head", "").replace("_skull", "");
+            var headName = BuiltInRegistries.ITEM
+                .getKey(result.asItem())
+                .getPath()
+                .replace("_head", "")
+                .replace("_skull", "");
 
-            pfx.generateRecipe(
+            pfx
+                .generateRecipe(
                     headName,
                     new SpiritInstillerRecipeBuilder(
-                            SizedIngredient.of(PastelItems.VEGETAL, inputVegetal),
-                            new SizedIngredient(head, 1),
-                            second.ingredient,
-                            new ItemStack(result)
+                        SizedIngredient.of(PastelItems.VEGETAL, inputVegetal),
+                        new SizedIngredient(head, 1),
+                        second.ingredient,
+                        new ItemStack(result)
                     )
-                            .craftingTime(800)
-                            .experience(4.0f)
-                            .requiredAdvancement(second.unlock)
-                            .group("head_fusion")
-            );
+                        .craftingTime(800)
+                        .experience(4.0f)
+                        .requiredAdvancement(second.unlock)
+                        .group("head_fusion")
+                );
         }
+
         public void generateHeadFusion(ItemLike head, SecondFusionIngredient second, ItemLike result) {
             generateHeadFusion(Ingredient.of(head), second, result);
         }
@@ -319,31 +433,36 @@ public class SpiritInstillerRecipes {
 
     private static void memories(PrefixHelper pfx) {
 
-        for (MemoryKind kind : MemoryKind.values()) {
+        for (
+            MemoryKind kind : MemoryKind.values()
+        ) {
             var name = kind.name().toLowerCase(Locale.ROOT);
-            var patch =
-                    DataComponentPatch.builder()
-                        .set(DataComponents.ENTITY_DATA, CustomData.of(kind.extra))
-                        .set(PastelDataComponentTypes.MEMORY, new MemoryComponent.Builder(MemoryComponent.DEFAULT).ticksToManifest(kind.timeToManifest).build())
-                        .build();
+            var patch = DataComponentPatch
+                .builder()
+                .set(DataComponents.ENTITY_DATA, CustomData.of(kind.extra))
+                .set(
+                    PastelDataComponentTypes.MEMORY,
+                    new MemoryComponent.Builder(MemoryComponent.DEFAULT).ticksToManifest(kind.timeToManifest).build()
+                )
+                .build();
             generateSimpleMemory(
-                    pfx,
-                    name,
-                    SizedIngredient.of(kind.head, 1),
-                    kind.preferredItems,
-                    "memories",
-                    kind.unlock,
-                    patch
+                pfx,
+                name,
+                SizedIngredient.of(kind.head, 1),
+                kind.preferredItems,
+                "memories",
+                kind.unlock,
+                patch
             );
         }
         generateSimpleMemory(
-                pfx,
-                "kindling_from_dragonbone",
-                SizedIngredient.of(PastelItems.DRAGONBONE_CHUNK, 8),
-                Ingredient.of(PastelItemTags.KINDLING_FOOD),
-                "memories",
-                PastelAdvancements.Unlocks.Blocks.KINDLING_MEMORY,
-                simplePatch(PastelEntityTypes.KINDLING.get(), 8)
+            pfx,
+            "kindling_from_dragonbone",
+            SizedIngredient.of(PastelItems.DRAGONBONE_CHUNK, 8),
+            Ingredient.of(PastelItemTags.KINDLING_FOOD),
+            "memories",
+            PastelAdvancements.Unlocks.Blocks.KINDLING_MEMORY,
+            simplePatch(PastelEntityTypes.KINDLING.get(), 8)
         );
 
         bossMemory(pfx, PastelSkullType.ELDER_GUARDIAN, Ingredient.of(Items.PRISMARINE));
@@ -358,13 +477,13 @@ public class SpiritInstillerRecipes {
         var name = EntityType.getKey(kind).getPath();
         var patch = simplePatch(kind, 64);
         generateSimpleMemory(
-                pfx,
-                name,
-                SizedIngredient.of(head, 1),
-                second,
-                "boss_memories",
-                PastelAdvancements.Milestones.UNLOCK_REMEMBERING_BOSS_MEMORIES,
-                patch
+            pfx,
+            name,
+            SizedIngredient.of(head, 1),
+            second,
+            "boss_memories",
+            PastelAdvancements.Milestones.UNLOCK_REMEMBERING_BOSS_MEMORIES,
+            patch
         );
     }
 
@@ -372,40 +491,77 @@ public class SpiritInstillerRecipes {
         bossMemory(pfx, head(skull), skull.getEntityType().get(), second);
     }
 
-    private static void generateSimpleMemory(PrefixHelper pfx, String name, SizedIngredient input, Ingredient second, String group, ResourceLocation unlock, DataComponentPatch patch) {
-        pfx.generateRecipe(
+    private static void generateSimpleMemory(
+        PrefixHelper pfx,
+        String name,
+        SizedIngredient input,
+        Ingredient second,
+        String group,
+        ResourceLocation unlock,
+        DataComponentPatch patch
+    ) {
+        pfx
+            .generateRecipe(
                 name,
                 new SpiritInstillerRecipeBuilder(
-                        SizedIngredient.of(PastelItemTags.MEMORY_BONDING_AGENTS, 4),
-                        input,
-                        new SizedIngredient(second, 1),
-                        new ItemStack(PastelBlocks.MEMORY.asItem().builtInRegistryHolder(), 1, patch)
+                    SizedIngredient.of(PastelItemTags.MEMORY_BONDING_AGENTS, 4),
+                    input,
+                    new SizedIngredient(second, 1),
+                    new ItemStack(PastelBlocks.MEMORY.asItem().builtInRegistryHolder(), 1, patch)
                 )
-                        .group(group)
-                        .craftingTime(800)
-                        .experience(4.0f)
-                        .requiredAdvancement(unlock)
-        );
+                    .group(group)
+                    .craftingTime(800)
+                    .experience(4.0f)
+                    .requiredAdvancement(unlock)
+            );
     }
 
     private static DataComponentPatch simplePatch(EntityType<?> kind, int ticksToManifest) {
         var tag = new CompoundTag();
         tag.putString("id", EntityType.getKey(kind).toString());
-        return DataComponentPatch.builder()
-                .set(DataComponents.ENTITY_DATA, CustomData.of(tag))
-                .set(PastelDataComponentTypes.MEMORY, new MemoryComponent.Builder(MemoryComponent.DEFAULT).ticksToManifest(ticksToManifest).build())
-                .build();
+        return DataComponentPatch
+            .builder()
+            .set(DataComponents.ENTITY_DATA, CustomData.of(tag))
+            .set(
+                PastelDataComponentTypes.MEMORY,
+                new MemoryComponent.Builder(MemoryComponent.DEFAULT).ticksToManifest(ticksToManifest).build()
+            )
+            .build();
     }
-
 
     private enum MemoryKind {
         ALLAY(head(PastelSkullType.ALLAY), Ingredient.of(Items.AMETHYST_SHARD), 4, basic(EntityType.ALLAY)),
         ARMADILLO(head(PastelSkullType.ARMADILLO), Ingredient.of(Items.SPIDER_EYE), 4, basic(EntityType.ARMADILLO)),
-        AXOLOTL_BLUE(head(PastelSkullType.AXOLOTL_BLUE), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(Axolotl.Variant.BLUE)),
-        AXOLOTL_WILD(head(PastelSkullType.AXOLOTL_WILD), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(Axolotl.Variant.WILD)),
-        AXOLOTL_CYAN(head(PastelSkullType.AXOLOTL_CYAN), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(Axolotl.Variant.CYAN)),
-        AXOLOTL_GOLD(head(PastelSkullType.AXOLOTL_GOLD), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(Axolotl.Variant.GOLD)),
-        AXOLOTL_LEUCISTIC(head(PastelSkullType.AXOLOTL_LEUCISTIC), Ingredient.of(Items.WATER_BUCKET), 4, axolotl(Axolotl.Variant.LUCY)),
+        AXOLOTL_BLUE(
+            head(PastelSkullType.AXOLOTL_BLUE),
+            Ingredient.of(Items.WATER_BUCKET),
+            4,
+            axolotl(Axolotl.Variant.BLUE)
+        ),
+        AXOLOTL_WILD(
+            head(PastelSkullType.AXOLOTL_WILD),
+            Ingredient.of(Items.WATER_BUCKET),
+            4,
+            axolotl(Axolotl.Variant.WILD)
+        ),
+        AXOLOTL_CYAN(
+            head(PastelSkullType.AXOLOTL_CYAN),
+            Ingredient.of(Items.WATER_BUCKET),
+            4,
+            axolotl(Axolotl.Variant.CYAN)
+        ),
+        AXOLOTL_GOLD(
+            head(PastelSkullType.AXOLOTL_GOLD),
+            Ingredient.of(Items.WATER_BUCKET),
+            4,
+            axolotl(Axolotl.Variant.GOLD)
+        ),
+        AXOLOTL_LEUCISTIC(
+            head(PastelSkullType.AXOLOTL_LEUCISTIC),
+            Ingredient.of(Items.WATER_BUCKET),
+            4,
+            axolotl(Axolotl.Variant.LUCY)
+        ),
         BAT(head(PastelSkullType.BAT), Ingredient.of(Items.GLOW_BERRIES), 8, basic(EntityType.BAT)),
         BEE(head(PastelSkullType.BEE), Ingredient.of(Items.HONEYCOMB), 8, basic(EntityType.BEE)),
         BLAZE(head(PastelSkullType.BLAZE), Ingredient.of(Items.BLAZE_ROD), 16, basic(EntityType.BLAZE)),
@@ -413,27 +569,53 @@ public class SpiritInstillerRecipes {
         BREEZE(head(PastelSkullType.BREEZE), Ingredient.of(Items.FEATHER), 16, basic(EntityType.BREEZE)),
         CAMEL(head(PastelSkullType.CAMEL), Ingredient.of(Items.CACTUS), 8, basic(EntityType.CAMEL)),
         CAT(head(PastelSkullType.CAT), Ingredient.of(Items.STRING), 4, basic(EntityType.CAT)),
-        CAVE_SPIDER(head(PastelSkullType.CAVE_SPIDER), Ingredient.of(Items.SPIDER_EYE), 16, basic(EntityType.CAVE_SPIDER)),
+        CAVE_SPIDER(
+            head(PastelSkullType.CAVE_SPIDER),
+            Ingredient.of(Items.SPIDER_EYE),
+            16,
+            basic(EntityType.CAVE_SPIDER)
+        ),
         CHICKEN(head(PastelSkullType.CHICKEN), Ingredient.of(Items.WHEAT_SEEDS), 4, basic(EntityType.CHICKEN)),
         COW(head(PastelSkullType.COW), Ingredient.of(Items.WHEAT), 4, basic(EntityType.COW)),
         CREEPER(Items.CREEPER_HEAD, Ingredient.of(Items.GUNPOWDER), 16, basic(EntityType.CREEPER)),
         DOLPHIN(head(PastelSkullType.DOLPHIN), Ingredient.of(ItemTags.FISHES), 4, basic(EntityType.DOLPHIN)),
         DONKEY(head(PastelSkullType.DONKEY), Ingredient.of(Items.WHEAT), 4, basic(EntityType.DONKEY)),
         DROWNED(head(PastelSkullType.DROWNED), Ingredient.of(Items.WATER_BUCKET), 16, basic(EntityType.DROWNED)),
-        EGG_LAYING_WOOLY_PIG(head(PastelSkullType.EGG_LAYING_WOOLY_PIG), Ingredient.of(PastelBlocks.AMARANTH_BUSHEL), 8, basic(PastelEntityTypes.EGG_LAYING_WOOLY_PIG.get()), PastelAdvancements.Unlocks.Blocks.EGG_LAYING_WOOLY_PIG_HEAD),
+        EGG_LAYING_WOOLY_PIG(
+            head(PastelSkullType.EGG_LAYING_WOOLY_PIG),
+            Ingredient.of(PastelBlocks.AMARANTH_BUSHEL),
+            8,
+            basic(PastelEntityTypes.EGG_LAYING_WOOLY_PIG.get()),
+            PastelAdvancements.Unlocks.Blocks.EGG_LAYING_WOOLY_PIG_HEAD
+        ),
         // skip elder guardian
         // skip ender dragon
         ENDERMAN(head(PastelSkullType.ENDERMAN), Ingredient.of(Items.ENDER_PEARL), 16, basic(EntityType.ENDERMAN)),
         ENDERMITE(head(PastelSkullType.ENDERMITE), Ingredient.of(Items.ENDER_PEARL), 16, basic(EntityType.ENDERMITE)),
-        ERASER(head(PastelSkullType.ERASER), Ingredient.of(Items.SPIDER_EYE), 16, basic(PastelEntityTypes.ERASER.get())),
+        ERASER(
+            head(PastelSkullType.ERASER),
+            Ingredient.of(Items.SPIDER_EYE),
+            16,
+            basic(PastelEntityTypes.ERASER.get())
+        ),
         EVOKER(head(PastelSkullType.EVOKER), Ingredient.of(Items.WATER_BUCKET), 16, basic(EntityType.EVOKER)),
         FOX(head(PastelSkullType.FOX), Ingredient.of(ItemTags.FOX_FOOD), 8, fox(Fox.Type.RED)),
         FOX_ARCTIC(head(PastelSkullType.FOX_ARCTIC), Ingredient.of(ItemTags.FOX_FOOD), 8, fox(Fox.Type.SNOW)),
         FROG_COLD(head(PastelSkullType.FROG_COLD), Ingredient.of(Items.SLIME_BALL), 4, frog(FrogVariant.COLD)),
-        FROG_TEMPERATE(head(PastelSkullType.FROG_TEMPERATE), Ingredient.of(Items.SLIME_BALL), 4, frog(FrogVariant.TEMPERATE)),
+        FROG_TEMPERATE(
+            head(PastelSkullType.FROG_TEMPERATE),
+            Ingredient.of(Items.SLIME_BALL),
+            4,
+            frog(FrogVariant.TEMPERATE)
+        ),
         FROG_WARM(head(PastelSkullType.FROG_WARM), Ingredient.of(Items.SLIME_BALL), 4, frog(FrogVariant.WARM)),
         GHAST(head(PastelSkullType.GHAST), Ingredient.of(Items.PHANTOM_MEMBRANE), 16, basic(EntityType.GHAST)),
-        GLOW_SQUID(head(PastelSkullType.GLOW_SQUID), Ingredient.of(Items.WATER_BUCKET), 8, basic(EntityType.GLOW_SQUID)),
+        GLOW_SQUID(
+            head(PastelSkullType.GLOW_SQUID),
+            Ingredient.of(Items.WATER_BUCKET),
+            8,
+            basic(EntityType.GLOW_SQUID)
+        ),
         GOAT(head(PastelSkullType.GOAT), Ingredient.of(Items.WHEAT), 8, basic(EntityType.GOAT)),
         GUARDIAN(head(PastelSkullType.GUARDIAN), Ingredient.of(Items.PRISMARINE), 16, basic(EntityType.GUARDIAN)),
         HOGLIN(head(PastelSkullType.HOGLIN), Ingredient.of(Items.CRIMSON_FUNGUS), 8, basic(EntityType.HOGLIN)),
@@ -441,67 +623,298 @@ public class SpiritInstillerRecipes {
         HUSK(head(PastelSkullType.HUSK), Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.HUSK)),
         ILLUSIONER(head(PastelSkullType.ILLUSIONER), Ingredient.of(ItemTags.BANNERS), 16, basic(EntityType.ILLUSIONER)),
         IRON_GOLEM(head(PastelSkullType.IRON_GOLEM), Ingredient.of(Items.IRON_BLOCK), 8, basic(EntityType.IRON_GOLEM)),
-        KINDLING(head(PastelSkullType.KINDLING), Ingredient.of(PastelItemTags.KINDLING_FOOD), 8, basic(PastelEntityTypes.KINDLING.get()), PastelAdvancements.Unlocks.Blocks.KINDLING_MEMORY),
-        LIZARD_BLACK(head(PastelSkullType.LIZARD_BLACK), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.BLACK)),
-        LIZARD_BLUE(head(PastelSkullType.LIZARD_BLUE), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.BLUE)),
-        LIZARD_BROWN(head(PastelSkullType.LIZARD_BROWN), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.BROWN)),
-        LIZARD_CYAN(head(PastelSkullType.LIZARD_CYAN), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.CYAN)),
-        LIZARD_GRAY(head(PastelSkullType.LIZARD_GRAY), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.GRAY)),
-        LIZARD_GREEN(head(PastelSkullType.LIZARD_GREEN), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.GREEN)),
-        LIZARD_LIGHT_BLUE(head(PastelSkullType.LIZARD_LIGHT_BLUE), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.LIGHT_BLUE)),
-        LIZARD_LIGHT_GRAY(head(PastelSkullType.LIZARD_LIGHT_GRAY), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.LIGHT_GRAY)),
-        LIZARD_LIME(head(PastelSkullType.LIZARD_LIME), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.LIME)),
-        LIZARD_MAGENTA(head(PastelSkullType.LIZARD_MAGENTA), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.MAGENTA)),
-        LIZARD_ORANGE(head(PastelSkullType.LIZARD_ORANGE), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.ORANGE)),
-        LIZARD_PINK(head(PastelSkullType.LIZARD_PINK), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.PINK)),
-        LIZARD_PURPLE(head(PastelSkullType.LIZARD_PURPLE), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.PURPLE)),
-        LIZARD_RED(head(PastelSkullType.LIZARD_RED), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.RED)),
-        LIZARD_WHITE(head(PastelSkullType.LIZARD_WHITE), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.WHITE)),
-        LIZARD_YELLOW(head(PastelSkullType.LIZARD_YELLOW), Ingredient.of(Tags.Items.FOODS_RAW_MEAT), 16, lizard(InkColors.YELLOW)),
+        KINDLING(
+            head(PastelSkullType.KINDLING),
+            Ingredient.of(PastelItemTags.KINDLING_FOOD),
+            8,
+            basic(PastelEntityTypes.KINDLING.get()),
+            PastelAdvancements.Unlocks.Blocks.KINDLING_MEMORY
+        ),
+        LIZARD_BLACK(
+            head(PastelSkullType.LIZARD_BLACK),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.BLACK)
+        ),
+        LIZARD_BLUE(
+            head(PastelSkullType.LIZARD_BLUE),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.BLUE)
+        ),
+        LIZARD_BROWN(
+            head(PastelSkullType.LIZARD_BROWN),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.BROWN)
+        ),
+        LIZARD_CYAN(
+            head(PastelSkullType.LIZARD_CYAN),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.CYAN)
+        ),
+        LIZARD_GRAY(
+            head(PastelSkullType.LIZARD_GRAY),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.GRAY)
+        ),
+        LIZARD_GREEN(
+            head(PastelSkullType.LIZARD_GREEN),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.GREEN)
+        ),
+        LIZARD_LIGHT_BLUE(
+            head(PastelSkullType.LIZARD_LIGHT_BLUE),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.LIGHT_BLUE)
+        ),
+        LIZARD_LIGHT_GRAY(
+            head(PastelSkullType.LIZARD_LIGHT_GRAY),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.LIGHT_GRAY)
+        ),
+        LIZARD_LIME(
+            head(PastelSkullType.LIZARD_LIME),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.LIME)
+        ),
+        LIZARD_MAGENTA(
+            head(PastelSkullType.LIZARD_MAGENTA),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.MAGENTA)
+        ),
+        LIZARD_ORANGE(
+            head(PastelSkullType.LIZARD_ORANGE),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.ORANGE)
+        ),
+        LIZARD_PINK(
+            head(PastelSkullType.LIZARD_PINK),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.PINK)
+        ),
+        LIZARD_PURPLE(
+            head(PastelSkullType.LIZARD_PURPLE),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.PURPLE)
+        ),
+        LIZARD_RED(
+            head(PastelSkullType.LIZARD_RED),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.RED)
+        ),
+        LIZARD_WHITE(
+            head(PastelSkullType.LIZARD_WHITE),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.WHITE)
+        ),
+        LIZARD_YELLOW(
+            head(PastelSkullType.LIZARD_YELLOW),
+            Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
+            16,
+            lizard(InkColors.YELLOW)
+        ),
         LLAMA(head(PastelSkullType.LLAMA), Ingredient.of(Items.HAY_BLOCK), 4, basic(EntityType.LLAMA)),
-        MAGMA_CUBE(head(PastelSkullType.MAGMA_CUBE), Ingredient.of(Items.MAGMA_CREAM), 16, basic(EntityType.MAGMA_CUBE)),
-        MOOSHROOM_RED(head(PastelSkullType.MOOSHROOM_RED), Ingredient.of(Items.RED_MUSHROOM), 8, mooshroom(MushroomCow.MushroomType.RED)),
-        MOOSHROOM_BROWN(head(PastelSkullType.MOOSHROOM_BROWN), Ingredient.of(Items.BROWN_MUSHROOM), 8, mooshroom(MushroomCow.MushroomType.BROWN)),
+        MAGMA_CUBE(
+            head(PastelSkullType.MAGMA_CUBE),
+            Ingredient.of(Items.MAGMA_CREAM),
+            16,
+            basic(EntityType.MAGMA_CUBE)
+        ),
+        MOOSHROOM_RED(
+            head(PastelSkullType.MOOSHROOM_RED),
+            Ingredient.of(Items.RED_MUSHROOM),
+            8,
+            mooshroom(MushroomCow.MushroomType.RED)
+        ),
+        MOOSHROOM_BROWN(
+            head(PastelSkullType.MOOSHROOM_BROWN),
+            Ingredient.of(Items.BROWN_MUSHROOM),
+            8,
+            mooshroom(MushroomCow.MushroomType.BROWN)
+        ),
         MULE(head(PastelSkullType.MULE), Ingredient.of(Items.WHEAT), 4, basic(EntityType.MULE)),
         OCELOT(head(PastelSkullType.OCELOT), Ingredient.of(Items.STRING), 4, basic(EntityType.OCELOT)),
         PANDA(head(PastelSkullType.PANDA), Ingredient.of(Items.BAMBOO), 4, basic(EntityType.PANDA)),
-        PARROT_BLUE(head(PastelSkullType.PARROT_BLUE), Ingredient.of(Items.WHEAT_SEEDS), 4, parrot(Parrot.Variant.BLUE)),
-        PARROT_CYAN(head(PastelSkullType.PARROT_CYAN), Ingredient.of(Items.WHEAT_SEEDS), 4, parrot(Parrot.Variant.YELLOW_BLUE)),
-        PARROT_GRAY(head(PastelSkullType.PARROT_GRAY), Ingredient.of(Items.WHEAT_SEEDS), 4, parrot(Parrot.Variant.GRAY)),
-        PARROT_GREEN(head(PastelSkullType.PARROT_GREEN), Ingredient.of(Items.WHEAT_SEEDS), 4, parrot(Parrot.Variant.GREEN)),
-        PARROT_RED(head(PastelSkullType.PARROT_RED), Ingredient.of(Items.WHEAT_SEEDS), 4, parrot(Parrot.Variant.RED_BLUE)),
+        PARROT_BLUE(
+            head(PastelSkullType.PARROT_BLUE),
+            Ingredient.of(Items.WHEAT_SEEDS),
+            4,
+            parrot(Parrot.Variant.BLUE)
+        ),
+        PARROT_CYAN(
+            head(PastelSkullType.PARROT_CYAN),
+            Ingredient.of(Items.WHEAT_SEEDS),
+            4,
+            parrot(Parrot.Variant.YELLOW_BLUE)
+        ),
+        PARROT_GRAY(
+            head(PastelSkullType.PARROT_GRAY),
+            Ingredient.of(Items.WHEAT_SEEDS),
+            4,
+            parrot(Parrot.Variant.GRAY)
+        ),
+        PARROT_GREEN(
+            head(PastelSkullType.PARROT_GREEN),
+            Ingredient.of(Items.WHEAT_SEEDS),
+            4,
+            parrot(Parrot.Variant.GREEN)
+        ),
+        PARROT_RED(
+            head(PastelSkullType.PARROT_RED),
+            Ingredient.of(Items.WHEAT_SEEDS),
+            4,
+            parrot(Parrot.Variant.RED_BLUE)
+        ),
         PHANTOM(head(PastelSkullType.PHANTOM), Ingredient.of(Items.PHANTOM_MEMBRANE), 16, basic(EntityType.PHANTOM)),
         PIG(head(PastelSkullType.PIG), Ingredient.of(Items.CARROT), 4, basic(EntityType.PIG)),
         PIGLIN(Items.PIGLIN_HEAD, Ingredient.of(Items.GOLD_INGOT), 8, basic(EntityType.PIGLIN)),
-        PIGLIN_BRUTE(head(PastelSkullType.PIGLIN_BRUTE), Ingredient.of(Items.GOLD_BLOCK), 16, basic(EntityType.PIGLIN_BRUTE)),
+        PIGLIN_BRUTE(
+            head(PastelSkullType.PIGLIN_BRUTE),
+            Ingredient.of(Items.GOLD_BLOCK),
+            16,
+            basic(EntityType.PIGLIN_BRUTE)
+        ),
         PILLAGER(head(PastelSkullType.PILLAGER), Ingredient.of(Tags.Items.GEMS_EMERALD), 8, basic(EntityType.PILLAGER)),
         POLAR_BEAR(head(PastelSkullType.POLAR_BEAR), Ingredient.of(ItemTags.FISHES), 8, basic(EntityType.POLAR_BEAR)),
-        PRESERVATION_TURRET(head(PastelSkullType.PRESERVATION_TURRET), Ingredient.of(PastelItems.MOONSTONE_SHARD), 16, basic(PastelEntityTypes.PRESERVATION_TURRET.get())),
-        PUFFERFISH(head(PastelSkullType.PUFFERFISH), Ingredient.of(Items.WATER_BUCKET), 4, basic(EntityType.PUFFERFISH)),
+        PRESERVATION_TURRET(
+            head(PastelSkullType.PRESERVATION_TURRET),
+            Ingredient.of(PastelItems.MOONSTONE_SHARD),
+            16,
+            basic(PastelEntityTypes.PRESERVATION_TURRET.get())
+        ),
+        PUFFERFISH(
+            head(PastelSkullType.PUFFERFISH),
+            Ingredient.of(Items.WATER_BUCKET),
+            4,
+            basic(EntityType.PUFFERFISH)
+        ),
         RABBIT(head(PastelSkullType.RABBIT), Ingredient.of(Items.CARROT), 4, basic(EntityType.RABBIT)),
         RAVAGER(head(PastelSkullType.RAVAGER), Ingredient.of(ItemTags.BANNERS), 32, basic(EntityType.RAVAGER)),
         SALMON(head(PastelSkullType.SALMON), Ingredient.of(Items.WATER_BUCKET), 4, basic(EntityType.SALMON)),
         SHEEP(head(PastelSkullType.SHEEP), Ingredient.of(Items.WHEAT), 4, sheep()),
         SHULKER(head(PastelSkullType.SHULKER), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(null)),
-        SHULKER_BLACK(head(PastelSkullType.SHULKER_BLACK), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.BLACK)),
-        SHULKER_BLUE(head(PastelSkullType.SHULKER_BLUE), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.BLUE)),
-        SHULKER_BROWN(head(PastelSkullType.SHULKER_BROWN), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.BROWN)),
-        SHULKER_CYAN(head(PastelSkullType.SHULKER_CYAN), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.CYAN)),
-        SHULKER_GRAY(head(PastelSkullType.SHULKER_GRAY), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.GRAY)),
-        SHULKER_GREEN(head(PastelSkullType.SHULKER_GREEN), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.GREEN)),
-        SHULKER_LIGHT_BLUE(head(PastelSkullType.SHULKER_LIGHT_BLUE), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.LIGHT_BLUE)),
-        SHULKER_LIGHT_GRAY(head(PastelSkullType.SHULKER_LIGHT_GRAY), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.LIGHT_GRAY)),
-        SHULKER_LIME(head(PastelSkullType.SHULKER_LIME), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.LIME)),
-        SHULKER_MAGENTA(head(PastelSkullType.SHULKER_MAGENTA), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.MAGENTA)),
-        SHULKER_ORANGE(head(PastelSkullType.SHULKER_ORANGE), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.ORANGE)),
-        SHULKER_PINK(head(PastelSkullType.SHULKER_PINK), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.PINK)),
-        SHULKER_PURPLE(head(PastelSkullType.SHULKER_PURPLE), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.PURPLE)),
-        SHULKER_RED(head(PastelSkullType.SHULKER_RED), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.RED)),
-        SHULKER_WHITE(head(PastelSkullType.SHULKER_WHITE), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.WHITE)),
-        SHULKER_YELLOW(head(PastelSkullType.SHULKER_YELLOW), Ingredient.of(Items.POPPED_CHORUS_FRUIT), 16, shulker(DyeColor.YELLOW)),
-        SILVERFISH(head(PastelSkullType.SILVERFISH), Ingredient.of(Items.STONE_BRICKS), 16, basic(EntityType.SILVERFISH)),
+        SHULKER_BLACK(
+            head(PastelSkullType.SHULKER_BLACK),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.BLACK)
+        ),
+        SHULKER_BLUE(
+            head(PastelSkullType.SHULKER_BLUE),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.BLUE)
+        ),
+        SHULKER_BROWN(
+            head(PastelSkullType.SHULKER_BROWN),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.BROWN)
+        ),
+        SHULKER_CYAN(
+            head(PastelSkullType.SHULKER_CYAN),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.CYAN)
+        ),
+        SHULKER_GRAY(
+            head(PastelSkullType.SHULKER_GRAY),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.GRAY)
+        ),
+        SHULKER_GREEN(
+            head(PastelSkullType.SHULKER_GREEN),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.GREEN)
+        ),
+        SHULKER_LIGHT_BLUE(
+            head(PastelSkullType.SHULKER_LIGHT_BLUE),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.LIGHT_BLUE)
+        ),
+        SHULKER_LIGHT_GRAY(
+            head(PastelSkullType.SHULKER_LIGHT_GRAY),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.LIGHT_GRAY)
+        ),
+        SHULKER_LIME(
+            head(PastelSkullType.SHULKER_LIME),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.LIME)
+        ),
+        SHULKER_MAGENTA(
+            head(PastelSkullType.SHULKER_MAGENTA),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.MAGENTA)
+        ),
+        SHULKER_ORANGE(
+            head(PastelSkullType.SHULKER_ORANGE),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.ORANGE)
+        ),
+        SHULKER_PINK(
+            head(PastelSkullType.SHULKER_PINK),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.PINK)
+        ),
+        SHULKER_PURPLE(
+            head(PastelSkullType.SHULKER_PURPLE),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.PURPLE)
+        ),
+        SHULKER_RED(
+            head(PastelSkullType.SHULKER_RED),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.RED)
+        ),
+        SHULKER_WHITE(
+            head(PastelSkullType.SHULKER_WHITE),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.WHITE)
+        ),
+        SHULKER_YELLOW(
+            head(PastelSkullType.SHULKER_YELLOW),
+            Ingredient.of(Items.POPPED_CHORUS_FRUIT),
+            16,
+            shulker(DyeColor.YELLOW)
+        ),
+        SILVERFISH(
+            head(PastelSkullType.SILVERFISH),
+            Ingredient.of(Items.STONE_BRICKS),
+            16,
+            basic(EntityType.SILVERFISH)
+        ),
         SKELETON(Items.SKELETON_SKULL, Ingredient.of(Items.BONE), 16, basic(EntityType.SKELETON)),
-        SKELETON_HORSE(head(PastelSkullType.SKELETON_HORSE), Ingredient.of(Items.HAY_BLOCK), 16, basic(EntityType.SKELETON_HORSE)),
+        SKELETON_HORSE(
+            head(PastelSkullType.SKELETON_HORSE),
+            Ingredient.of(Items.HAY_BLOCK),
+            16,
+            basic(EntityType.SKELETON_HORSE)
+        ),
         SLIME(head(PastelSkullType.SLIME), Ingredient.of(Items.SLIME_BALL), 16, basic(EntityType.SLIME)),
         // dont be sniffphobic
         SNIFFER(head(PastelSkullType.SNIFFER), Ingredient.of(Items.TORCHFLOWER_SEEDS), 16, basic(EntityType.SNIFFER)),
@@ -511,34 +924,68 @@ public class SpiritInstillerRecipes {
         STRAY(head(PastelSkullType.STRAY), Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.STRAY)),
         STRIDER(head(PastelSkullType.STRIDER), Ingredient.of(Items.WARPED_FUNGUS), 8, basic(EntityType.STRIDER)),
         TADPOLE(head(PastelSkullType.TADPOLE), Ingredient.of(Items.SLIME_BALL), 8, basic(EntityType.TADPOLE)),
-        TROPICAL_FISH(head(PastelSkullType.TROPICAL_FISH), Ingredient.of(Items.WATER_BUCKET), 8, basic(EntityType.TROPICAL_FISH)),
+        TROPICAL_FISH(
+            head(PastelSkullType.TROPICAL_FISH),
+            Ingredient.of(Items.WATER_BUCKET),
+            8,
+            basic(EntityType.TROPICAL_FISH)
+        ),
         TURTLE(head(PastelSkullType.TURTLE), Ingredient.of(Items.SEAGRASS), 4, basic(EntityType.TURTLE)),
         VEX(head(PastelSkullType.VEX), Ingredient.of(ItemTags.BANNERS), 16, basic(EntityType.VEX)),
         VILLAGER(head(PastelSkullType.VILLAGER), Ingredient.of(Items.EMERALD), 32, basic(EntityType.VILLAGER)),
         VINDICATOR(head(PastelSkullType.VINDICATOR), Ingredient.of(ItemTags.BANNERS), 16, basic(EntityType.VINDICATOR)),
-        WANDERING_TRADER(head(PastelSkullType.WANDERING_TRADER), Ingredient.of(Items.EMERALD), 4, basic(EntityType.WANDERING_TRADER)),
+        WANDERING_TRADER(
+            head(PastelSkullType.WANDERING_TRADER),
+            Ingredient.of(Items.EMERALD),
+            4,
+            basic(EntityType.WANDERING_TRADER)
+        ),
         // skip warden in here
         // skip wither
         WITHER_SKELETON(Items.WITHER_SKELETON_SKULL, Ingredient.of(Items.COAL), 16, basic(EntityType.WITHER_SKELETON)),
         WOLF(head(PastelSkullType.WOLF), Ingredient.of(Items.BONE), 8, basic(EntityType.WOLF)),
         ZOGLIN(head(PastelSkullType.ZOGLIN), Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.ZOGLIN)),
         ZOMBIE(Items.ZOMBIE_HEAD, Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.ZOMBIE)),
-        ZOMBIE_HORSE(head(PastelSkullType.ZOMBIE_HORSE), Ingredient.of(Items.HAY_BLOCK), 16, basic(EntityType.ZOMBIE_HORSE)),
-        ZOMBIE_VILLAGER(head(PastelSkullType.ZOMBIE_VILLAGER), Ingredient.of(Items.ROTTEN_FLESH), 32, basic(EntityType.ZOMBIE_VILLAGER)),
-        ZOMBIFIED_PIGLIN(head(PastelSkullType.ZOMBIFIED_PIGLIN), Ingredient.of(Items.ROTTEN_FLESH), 16, basic(EntityType.ZOMBIFIED_PIGLIN))
-        ;
+        ZOMBIE_HORSE(
+            head(PastelSkullType.ZOMBIE_HORSE),
+            Ingredient.of(Items.HAY_BLOCK),
+            16,
+            basic(EntityType.ZOMBIE_HORSE)
+        ),
+        ZOMBIE_VILLAGER(
+            head(PastelSkullType.ZOMBIE_VILLAGER),
+            Ingredient.of(Items.ROTTEN_FLESH),
+            32,
+            basic(EntityType.ZOMBIE_VILLAGER)
+        ),
+        ZOMBIFIED_PIGLIN(
+            head(PastelSkullType.ZOMBIFIED_PIGLIN),
+            Ingredient.of(Items.ROTTEN_FLESH),
+            16,
+            basic(EntityType.ZOMBIFIED_PIGLIN)
+        );
 
         final Item head;
+
         final Ingredient preferredItems;
+
         final int timeToManifest;
+
         final CompoundTag extra;
+
         final ResourceLocation unlock;
 
         MemoryKind(ItemLike head, Ingredient preferredItems, int timeToManifest, CompoundTag tag) {
             this(head, preferredItems, timeToManifest, tag, PastelAdvancements.Unlocks.Blocks.MEMORIES);
         }
 
-        MemoryKind(ItemLike head, Ingredient preferredItems, int timeToManifest, CompoundTag tag, ResourceLocation unlock) {
+        MemoryKind(
+            ItemLike head,
+            Ingredient preferredItems,
+            int timeToManifest,
+            CompoundTag tag,
+            ResourceLocation unlock
+        ) {
             this.head = head.asItem();
             this.preferredItems = preferredItems;
             this.timeToManifest = timeToManifest;
@@ -552,6 +999,7 @@ public class SpiritInstillerRecipes {
             tag.putString("id", id.toString());
             return tag;
         }
+
         // ???
         private static CompoundTag axolotl(Axolotl.Variant variant) {
             var tag = basic(EntityType.AXOLOTL);
@@ -604,6 +1052,5 @@ public class SpiritInstillerRecipes {
             return tag;
         }
     }
-
 
 }

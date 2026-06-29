@@ -36,56 +36,56 @@ public record PastelInkColorCollection<T>(
     T lightGray,
     T white
 ) implements App<PastelInkColorCollection.Mu, T> {
-    public static final class Mu implements K1 {}
+    public static final class Mu implements K1 {
+    }
 
-    public static final PastelInkColorCollection<InkColor> VALUES =
-            new PastelInkColorCollection<>(
-                    InkColors.CYAN,
-                    InkColors.LIGHT_BLUE,
-                    InkColors.BLUE,
-                    InkColors.PURPLE,
-                    InkColors.MAGENTA,
-                    InkColors.PINK,
-                    InkColors.RED,
-                    InkColors.ORANGE,
-                    InkColors.YELLOW,
-                    InkColors.LIME,
-                    InkColors.GREEN,
-                    InkColors.BROWN,
-                    InkColors.BLACK,
-                    InkColors.GRAY,
-                    InkColors.LIGHT_GRAY,
-                    InkColors.WHITE
-            );
+    public static final PastelInkColorCollection<InkColor> VALUES = new PastelInkColorCollection<>(
+        InkColors.CYAN,
+        InkColors.LIGHT_BLUE,
+        InkColors.BLUE,
+        InkColors.PURPLE,
+        InkColors.MAGENTA,
+        InkColors.PINK,
+        InkColors.RED,
+        InkColors.ORANGE,
+        InkColors.YELLOW,
+        InkColors.LIME,
+        InkColors.GREEN,
+        InkColors.BROWN,
+        InkColors.BLACK,
+        InkColors.GRAY,
+        InkColors.LIGHT_GRAY,
+        InkColors.WHITE
+    );
 
-    public static final PastelInkColorCollection<String> NAMES = VALUES.map(it -> it.getDyeColor().get().getSerializedName());
+    public static final PastelInkColorCollection<String> NAMES = VALUES
+        .map(it -> it.getDyeColor().get().getSerializedName());
 
-    public static final PastelInkColorCollection<Item> DYE_ITEMS =
-            new PastelInkColorCollection<>(
-                    Items.CYAN_DYE,
-                    Items.LIGHT_BLUE_DYE,
-                    Items.BLUE_DYE,
-                    Items.PURPLE_DYE,
-                    Items.MAGENTA_DYE,
-                    Items.PINK_DYE,
-                    Items.RED_DYE,
-                    Items.ORANGE_DYE,
-                    Items.YELLOW_DYE,
-                    Items.LIME_DYE,
-                    Items.GREEN_DYE,
-                    Items.BROWN_DYE,
-                    Items.BLACK_DYE,
-                    Items.GRAY_DYE,
-                    Items.LIGHT_GRAY_DYE,
-                    Items.WHITE_DYE
-            );
+    public static final PastelInkColorCollection<Item> DYE_ITEMS = new PastelInkColorCollection<>(
+        Items.CYAN_DYE,
+        Items.LIGHT_BLUE_DYE,
+        Items.BLUE_DYE,
+        Items.PURPLE_DYE,
+        Items.MAGENTA_DYE,
+        Items.PINK_DYE,
+        Items.RED_DYE,
+        Items.ORANGE_DYE,
+        Items.YELLOW_DYE,
+        Items.LIME_DYE,
+        Items.GREEN_DYE,
+        Items.BROWN_DYE,
+        Items.BLACK_DYE,
+        Items.GRAY_DYE,
+        Items.LIGHT_GRAY_DYE,
+        Items.WHITE_DYE
+    );
 
     public static final PastelInkColorCollection<DyeColor> DYE_COLORS =
-            // should be safe because all builtins map to a dye
-            VALUES.map(it -> it.getDyeColor().orElseThrow());
+        // should be safe because all builtins map to a dye
+        VALUES.map(it -> it.getDyeColor().orElseThrow());
 
     public static <T> PastelInkColorCollection<T> unbox(final App<Mu, T> box) {
-        return (PastelInkColorCollection<T>)box;
+        return (PastelInkColorCollection<T>) box;
     }
 
     public T pick(InkColor color) {
@@ -146,53 +146,54 @@ public record PastelInkColorCollection<T>(
 
     public <U> PastelInkColorCollection<U> map(Function<? super T, ? extends U> mapper) {
         return new PastelInkColorCollection<>(
-                mapper.apply(this.cyan()),
-                mapper.apply(this.lightBlue()),
-                mapper.apply(this.blue()),
-                mapper.apply(this.purple()),
-                mapper.apply(this.magenta()),
-                mapper.apply(this.pink()),
-                mapper.apply(this.red()),
-                mapper.apply(this.orange()),
-                mapper.apply(this.yellow()),
-                mapper.apply(this.lime()),
-                mapper.apply(this.green()),
-                mapper.apply(this.brown()),
-                mapper.apply(this.black()),
-                mapper.apply(this.gray()),
-                mapper.apply(this.lightGray()),
-                mapper.apply(this.white())
+            mapper.apply(this.cyan()),
+            mapper.apply(this.lightBlue()),
+            mapper.apply(this.blue()),
+            mapper.apply(this.purple()),
+            mapper.apply(this.magenta()),
+            mapper.apply(this.pink()),
+            mapper.apply(this.red()),
+            mapper.apply(this.orange()),
+            mapper.apply(this.yellow()),
+            mapper.apply(this.lime()),
+            mapper.apply(this.green()),
+            mapper.apply(this.brown()),
+            mapper.apply(this.black()),
+            mapper.apply(this.gray()),
+            mapper.apply(this.lightGray()),
+            mapper.apply(this.white())
         );
     }
-    
+
     public static <T, U, R> PastelInkColorCollection<R> zipMap(
-            PastelInkColorCollection<T> first,
-            PastelInkColorCollection<U> second,
-            BiFunction<T, U, R> operation
+        PastelInkColorCollection<T> first,
+        PastelInkColorCollection<U> second,
+        BiFunction<T, U, R> operation
     ) {
         return new PastelInkColorCollection<>(
-                operation.apply(first.cyan(), second.cyan()),
-                operation.apply(first.lightBlue(), second.lightBlue()),
-                operation.apply(first.blue(), second.blue()),
-                operation.apply(first.purple(), second.purple()),
-                operation.apply(first.magenta(), second.magenta()),
-                operation.apply(first.pink(), second.pink()),
-                operation.apply(first.red(), second.red()),
-                operation.apply(first.orange(), second.orange()),
-                operation.apply(first.yellow(), second.yellow()),
-                operation.apply(first.lime(), second.lime()),
-                operation.apply(first.green(), second.green()),
-                operation.apply(first.brown(), second.brown()),
-                operation.apply(first.black(), second.black()),
-                operation.apply(first.gray(), second.gray()),
-                operation.apply(first.lightGray(), second.lightGray()),
-                operation.apply(first.white(), second.white())
+            operation.apply(first.cyan(), second.cyan()),
+            operation.apply(first.lightBlue(), second.lightBlue()),
+            operation.apply(first.blue(), second.blue()),
+            operation.apply(first.purple(), second.purple()),
+            operation.apply(first.magenta(), second.magenta()),
+            operation.apply(first.pink(), second.pink()),
+            operation.apply(first.red(), second.red()),
+            operation.apply(first.orange(), second.orange()),
+            operation.apply(first.yellow(), second.yellow()),
+            operation.apply(first.lime(), second.lime()),
+            operation.apply(first.green(), second.green()),
+            operation.apply(first.brown(), second.brown()),
+            operation.apply(first.black(), second.black()),
+            operation.apply(first.gray(), second.gray()),
+            operation.apply(first.lightGray(), second.lightGray()),
+            operation.apply(first.white(), second.white())
         );
     }
+
     public static <T, U> void zipApply(
-            PastelInkColorCollection<T> first,
-            PastelInkColorCollection<U> second,
-            BiConsumer<T, U> operation
+        PastelInkColorCollection<T> first,
+        PastelInkColorCollection<U> second,
+        BiConsumer<T, U> operation
     ) {
         operation.accept(first.cyan(), second.cyan());
         operation.accept(first.lightBlue(), second.lightBlue());
@@ -217,26 +218,27 @@ public record PastelInkColorCollection<T>(
     }
 
     public static <B extends Block, Id> PastelInkColorCollection<DeferredBlock<Block>> registerBlocks(
-            PastelInkColorCollection<Id> ids,
-            GroupedCollection.BlockFactory<InkColor, Id> register,
-            BiFunction<InkColor, BlockBehaviour.Properties, B> colorBlockFactory,
-            Function<InkColor, BlockBehaviour.Properties> propertiesSupplier
+        PastelInkColorCollection<Id> ids,
+        GroupedCollection.BlockFactory<InkColor, Id> register,
+        BiFunction<InkColor, BlockBehaviour.Properties, B> colorBlockFactory,
+        Function<InkColor, BlockBehaviour.Properties> propertiesSupplier
     ) {
         return zipMap(
-                VALUES,
-                ids,
-                (key, id) -> register.apply(key, id, p -> colorBlockFactory.apply(key, p), () -> propertiesSupplier.apply(key))
+            VALUES,
+            ids,
+            (key, id) -> register
+                .apply(key, id, p -> colorBlockFactory.apply(key, p), () -> propertiesSupplier.apply(key))
         );
     }
 
     public static <Id> PastelInkColorCollection<DeferredItem<Item>> registerItems(
-            PastelInkColorCollection<Id> ids,
-            BiFunction<Id, InkColor, DeferredItem<Item>> itemFactory
+        PastelInkColorCollection<Id> ids,
+        BiFunction<Id, InkColor, DeferredItem<Item>> itemFactory
     ) {
         return zipMap(
-                ids,
-                VALUES,
-                itemFactory
+            ids,
+            VALUES,
+            itemFactory
         );
     }
 
@@ -247,25 +249,43 @@ public record PastelInkColorCollection<T>(
         @Override
         public <A> App<PastelInkColorCollection.Mu, A> point(A a) {
             return new PastelInkColorCollection<>(
-                    a, a, a, a,
-                    a, a, a, a,
-                    a, a, a, a,
-                    a, a, a, a
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a,
+                a
             );
         }
 
         @Override
-        public <A, R> Function<App<PastelInkColorCollection.Mu, A>, App<PastelInkColorCollection.Mu, R>> lift1(App<PastelInkColorCollection.Mu, Function<A, R>> function) {
+        public <A, R> Function<App<PastelInkColorCollection.Mu, A>, App<PastelInkColorCollection.Mu, R>> lift1(
+            App<PastelInkColorCollection.Mu, Function<A, R>> function
+        ) {
             return in -> {
                 var unboxed = unbox(in);
                 return zipMap(unbox(function), unboxed, Function::apply);
             };
         }
 
-        public static final class Mu implements Applicative.Mu {}
+        public static final class Mu implements Applicative.Mu {
+        }
 
         @Override
-        public <T, R> App<PastelInkColorCollection.Mu, R> map(final Function<? super T, ? extends R> func, final App<PastelInkColorCollection.Mu, T> ts) {
+        public <T, R> App<PastelInkColorCollection.Mu, R> map(
+            final Function<? super T, ? extends R> func,
+            final App<PastelInkColorCollection.Mu, T> ts
+        ) {
             return unbox(ts).map(func);
         }
     }

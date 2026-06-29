@@ -1,6 +1,10 @@
 package earth.terrarium.pastel.data.recipe.builder.fusion_shrine;
 
-import earth.terrarium.pastel.api.predicate.location.*;
+import earth.terrarium.pastel.api.predicate.location.CommandPredicate;
+import earth.terrarium.pastel.api.predicate.location.MoonPhasePredicate;
+import earth.terrarium.pastel.api.predicate.location.TimeOfDayPredicate;
+import earth.terrarium.pastel.api.predicate.location.WeatherPredicate;
+import earth.terrarium.pastel.api.predicate.location.WorldConditionsPredicate;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
 import earth.terrarium.pastel.data.recipe.builder.GatedRecipeBuilder;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
@@ -32,39 +36,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public final class FusionShrineRecipeBuilder extends GatedRecipeBuilder<FusionShrineRecipeBuilder> {
     private final NonNullList<SizedIngredient> ingredients = NonNullList.create();
+
     private final FluidIngredient fluid;
+
     private float experience = 0.0f;
+
     private int craftingTime = 200;
+
     private boolean disableYieldUpgrades = false;
+
     private final List<WorldConditionsPredicate> worldConditionsPredicates = new ArrayList<>();
+
     private FusionShrineRecipeWorldEffect startCraftingEffect = FusionShrineRecipeWorldEffect.NOTHING;
+
     private FusionShrineRecipeWorldEffect finishCraftingEffect = FusionShrineRecipeWorldEffect.NOTHING;
+
     private final List<FusionShrineRecipeWorldEffect> duringCraftingEffects = new ArrayList<>();
-    @Nullable
-    private Component description = null;
+
+    @Nullable private Component description = null;
+
     private boolean copyComponents = false;
+
     private boolean playFinishedCraftingEffects = true;
 
-
     public FusionShrineRecipeBuilder(
-            FluidIngredient fluid,
-            ItemStack result
+        FluidIngredient fluid,
+        ItemStack result
     ) {
         super(result);
         this.fluid = fluid;
     }
 
     public FusionShrineRecipeBuilder(
-            Fluid fluid,
-            ItemStack result
+        Fluid fluid,
+        ItemStack result
     ) {
         this(FluidIngredient.of(fluid), result);
     }
-
 
     public FusionShrineRecipeBuilder experience(float value) {
         this.experience = value;
@@ -154,60 +165,56 @@ public final class FusionShrineRecipeBuilder extends GatedRecipeBuilder<FusionSh
         return this;
     }
 
-
-
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new FusionShrineRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                ingredients,
-                                this.fluid,
-                                this.result,
-                                this.experience,
-                                this.craftingTime,
-                                this.disableYieldUpgrades,
-                                this.playFinishedCraftingEffects,
-                                this.copyComponents,
-                                this.worldConditionsPredicates,
-                                this.startCraftingEffect,
-                                this.duringCraftingEffects,
-                                this.finishCraftingEffect,
-                                Objects.requireNonNullElse(this.description, Component.empty())
-                        )
+            recipeOutput,
+            id,
+            daId -> new FusionShrineRecipe(
+                this.group,
+                this.secret,
+                daId,
+                ingredients,
+                this.fluid,
+                this.result,
+                this.experience,
+                this.craftingTime,
+                this.disableYieldUpgrades,
+                this.playFinishedCraftingEffects,
+                this.copyComponents,
+                this.worldConditionsPredicates,
+                this.startCraftingEffect,
+                this.duringCraftingEffects,
+                this.finishCraftingEffect,
+                Objects.requireNonNullElse(this.description, Component.empty())
+            )
         );
     }
 
     public final class WorldConditionBuilder {
-        @Nullable
-        private MoonPhasePredicate moonPhase = null;
-        @Nullable
-        private TimeOfDayPredicate timeOfDay = null;
-        @Nullable
-        private WeatherPredicate weather = null;
-        @Nullable
-        private CommandPredicate command = null;
-        @Nullable
-        private HolderSet<Biome> biomes = null;
-        @Nullable
-        private HolderSet<Structure> structures = null;
-        @Nullable
-        private ResourceKey<Level> dimension = null;
-        @Nullable
-        private LightPredicate light = null;
-        @Nullable
-        private BlockPredicate block = null;
-        @Nullable
-        private FluidPredicate fluid = null;
-        @Nullable
-        private Boolean smokey = null;
-        @Nullable
-        private Boolean canSeeSky = null;
+        @Nullable private MoonPhasePredicate moonPhase = null;
+
+        @Nullable private TimeOfDayPredicate timeOfDay = null;
+
+        @Nullable private WeatherPredicate weather = null;
+
+        @Nullable private CommandPredicate command = null;
+
+        @Nullable private HolderSet<Biome> biomes = null;
+
+        @Nullable private HolderSet<Structure> structures = null;
+
+        @Nullable private ResourceKey<Level> dimension = null;
+
+        @Nullable private LightPredicate light = null;
+
+        @Nullable private BlockPredicate block = null;
+
+        @Nullable private FluidPredicate fluid = null;
+
+        @Nullable private Boolean smokey = null;
+
+        @Nullable private Boolean canSeeSky = null;
 
         public WorldConditionBuilder() {
 
@@ -247,18 +254,18 @@ public final class FusionShrineRecipeBuilder extends GatedRecipeBuilder<FusionSh
 
         public FusionShrineRecipeBuilder submit() {
             var built = new WorldConditionsPredicate(
-                    Optional.ofNullable(moonPhase),
-                    Optional.ofNullable(timeOfDay),
-                    Optional.ofNullable(weather),
-                    Optional.ofNullable(command),
-                    Optional.ofNullable(biomes),
-                    Optional.ofNullable(structures),
-                    Optional.ofNullable(dimension),
-                    Optional.ofNullable(light),
-                    Optional.ofNullable(block),
-                    Optional.ofNullable(fluid),
-                    Optional.ofNullable(smokey),
-                    Optional.ofNullable(canSeeSky)
+                Optional.ofNullable(moonPhase),
+                Optional.ofNullable(timeOfDay),
+                Optional.ofNullable(weather),
+                Optional.ofNullable(command),
+                Optional.ofNullable(biomes),
+                Optional.ofNullable(structures),
+                Optional.ofNullable(dimension),
+                Optional.ofNullable(light),
+                Optional.ofNullable(block),
+                Optional.ofNullable(fluid),
+                Optional.ofNullable(smokey),
+                Optional.ofNullable(canSeeSky)
             );
 
             worldConditionsPredicates.add(built);

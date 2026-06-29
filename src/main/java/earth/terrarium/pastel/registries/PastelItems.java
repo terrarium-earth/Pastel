@@ -6,13 +6,14 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.api.item.CreativeOnlyItem;
 import earth.terrarium.pastel.blocks.gravity.FloatItem;
 import earth.terrarium.pastel.blocks.jade_vines.GerminatedJadeVineBulbItem;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.components.PairedFoodComponent;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.items.ConcealingOilsItem;
 import earth.terrarium.pastel.items.CookbookItem;
 import earth.terrarium.pastel.items.DecayPlacerItem;
@@ -148,7 +149,6 @@ import earth.terrarium.pastel.items.trinkets.TotemPendantItem;
 import earth.terrarium.pastel.items.trinkets.WeepingCircletItem;
 import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -162,7 +162,21 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.BannerPatternItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
@@ -291,25 +305,24 @@ public class PastelItems {
         item("moonstone_shard", () -> new Item(IS.of()), InkColors.WHITE)
     );
 
-    public static final PastelGemstoneColorCollection<Holder<Item>> GEMSTONE_SHARDS =
-            new PastelGemstoneColorCollection<>(
-                    TOPAZ_SHARD,
-                    Items.AMETHYST_SHARD.builtInRegistryHolder(),
-                    CITRINE_SHARD,
-                    ONYX_SHARD,
-                    MOONSTONE_SHARD
-            );
+    public static final PastelGemstoneColorCollection<Holder<Item>> GEMSTONE_SHARDS = new PastelGemstoneColorCollection<>(
+        TOPAZ_SHARD,
+        Items.AMETHYST_SHARD.builtInRegistryHolder(),
+        CITRINE_SHARD,
+        ONYX_SHARD,
+        MOONSTONE_SHARD
+    );
 
     public static final DeferredItem<Item> SPECTRAL_SHARD = register(
         item("spectral_shard", () -> new Item(IS.of(Rarity.RARE)), InkColors.WHITE)
     );
 
-    public static final PastelGemstoneColorCollection<DeferredItem<Item>> GEMSTONE_POWDERS =
-        PastelGemstoneColorCollection.registerItems(
-                PastelGemstoneColorCollection.prefixWithGemstone("powder"),
-                (id, color) -> register(
-                        item(id, () -> new GemstonePowderItem(IS.of(), color), color.getInkColor())
-                )
+    public static final PastelGemstoneColorCollection<DeferredItem<Item>> GEMSTONE_POWDERS = PastelGemstoneColorCollection
+        .registerItems(
+            PastelGemstoneColorCollection.prefixWithGemstone("powder"),
+            (id, color) -> register(
+                item(id, () -> new GemstonePowderItem(IS.of(), color), color.getInkColor())
+            )
         );
 
     public static final DeferredItem<Item> TOPAZ_POWDER = GEMSTONE_POWDERS.topaz();
@@ -324,14 +337,14 @@ public class PastelItems {
 
     public static DeferredItem<Item> registerPigment(String name, InkColor color) {
         return register(
-                item(name, () -> new PigmentItem(IS.of(), color, PastelInkColorCollection.DYE_ITEMS.pick(color)), color)
+            item(name, () -> new PigmentItem(IS.of(), color, PastelInkColorCollection.DYE_ITEMS.pick(color)), color)
         );
     }
 
     // Pigment
 
-    public static final PastelInkColorCollection<DeferredItem<Item>> PIGMENTS =
-            PastelInkColorCollection.registerItems(PastelInkColorCollection.prefixWithColor("pigment"), PastelItems::registerPigment);
+    public static final PastelInkColorCollection<DeferredItem<Item>> PIGMENTS = PastelInkColorCollection
+        .registerItems(PastelInkColorCollection.prefixWithColor("pigment"), PastelItems::registerPigment);
 
     public static final DeferredItem<Item> WHITE_PIGMENT = PIGMENTS.pick(InkColors.WHITE);
 
@@ -807,21 +820,21 @@ public class PastelItems {
         )
     );
 
-    public static final PastelGemstoneColorCollection<DeferredItem<Item>> GEMSTONE_GLASS_ARROWS =
-            PastelGemstoneColorCollection.registerItems(
-                    PastelGemstoneColorCollection.prefixWithGemstone("glass_arrow"),
-                    (id, color) -> register(
-                            item(
-                                    id,
-                                    () -> new GlassArrowItem(
-                                            IS.of(Rarity.UNCOMMON),
-                                            GlassArrowVariant.VALUES.pick(color),
-                                            ColoredCraftingParticleEffect.VALUES.pick(color.getInkColor())
-                                    ),
-                                    color.getInkColor()
-                            )
-                    )
-            );
+    public static final PastelGemstoneColorCollection<DeferredItem<Item>> GEMSTONE_GLASS_ARROWS = PastelGemstoneColorCollection
+        .registerItems(
+            PastelGemstoneColorCollection.prefixWithGemstone("glass_arrow"),
+            (id, color) -> register(
+                item(
+                    id,
+                    () -> new GlassArrowItem(
+                        IS.of(Rarity.UNCOMMON),
+                        GlassArrowVariant.VALUES.pick(color),
+                        ColoredCraftingParticleEffect.VALUES.pick(color.getInkColor())
+                    ),
+                    color.getInkColor()
+                )
+            )
+        );
 
     public static final DeferredItem<Item> TOPAZ_GLASS_ARROW = GEMSTONE_GLASS_ARROWS.topaz();
 

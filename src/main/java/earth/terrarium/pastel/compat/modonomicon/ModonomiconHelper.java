@@ -14,36 +14,36 @@ import org.jetbrains.annotations.Nullable;
 public class ModonomiconHelper {
     // probably a helper function _somewhere_ out there, but im not finding it LOL
     public static void renderIngredient(
-            GuiGraphics drawContext,
-            BookEntryScreen parentScreen,
-            int x,
-            int y,
-            int mouseX,
-            int mouseY,
-            Ingredient ingredient
+        GuiGraphics drawContext,
+        BookEntryScreen parentScreen,
+        int x,
+        int y,
+        int mouseX,
+        int mouseY,
+        Ingredient ingredient
     ) {
         var stacks = ingredient.getItems();
         if (stacks.length > 0) {
             parentScreen
-                    .renderItemStack(
-                            drawContext,
-                            x,
-                            y,
-                            mouseX,
-                            mouseY,
-                            stacks[parentScreen.getTicksInBook() / 20 % stacks.length]
-                    );
+                .renderItemStack(
+                    drawContext,
+                    x,
+                    y,
+                    mouseX,
+                    mouseY,
+                    stacks[parentScreen.getTicksInBook() / 20 % stacks.length]
+                );
         }
     }
 
     public static void renderSizedIngredient(
-            GuiGraphics drawContext,
-            BookEntryScreen parentScreen,
-            int x,
-            int y,
-            int mouseX,
-            int mouseY,
-            @Nullable SizedIngredient ingredient
+        GuiGraphics drawContext,
+        BookEntryScreen parentScreen,
+        int x,
+        int y,
+        int mouseX,
+        int mouseY,
+        @Nullable SizedIngredient ingredient
     ) {
         if (ingredient == null) {
             return;
@@ -51,14 +51,14 @@ public class ModonomiconHelper {
         var stacks = ingredient.getItems();
         if (stacks.length > 0) {
             parentScreen
-                    .renderItemStack(
-                            drawContext,
-                            x,
-                            y,
-                            mouseX,
-                            mouseY,
-                            stacks[parentScreen.getTicksInBook() / 20 % stacks.length]
-                    );
+                .renderItemStack(
+                    drawContext,
+                    x,
+                    y,
+                    mouseX,
+                    mouseY,
+                    stacks[parentScreen.getTicksInBook() / 20 % stacks.length]
+                );
         }
     }
 

@@ -22,38 +22,52 @@ import java.util.List;
 // NOTE: Crafting & Upgrade don't share a base class because they don't really need to
 public final class EnchanterCraftingRecipeBuilder extends GatedRecipeBuilder<EnchanterCraftingRecipeBuilder> {
     private final Ingredient centerInput;
+
     private final List<Ingredient> ingredientList = new ArrayList<>();
+
     private int craftingTime = 200;
+
     private int requiredExperience = 0;
+
     private boolean noDiscounts = false;
+
     private boolean copyComponents = false;
+
     private final String defaultName;
 
     public EnchanterCraftingRecipeBuilder(
-            Ingredient centerInput,
-            ItemStack result
+        Ingredient centerInput,
+        ItemStack result
     ) {
         this(centerInput, result, result.getItemHolder().getKey().location().getPath());
     }
 
     public EnchanterCraftingRecipeBuilder(
-            Ingredient centerInput,
-            ItemStack result,
-            String defaultName
+        Ingredient centerInput,
+        ItemStack result,
+        String defaultName
     ) {
         super(result);
         this.defaultName = defaultName;
         this.centerInput = centerInput;
     }
 
-    public static EnchanterCraftingRecipeBuilder forEnchantment(HolderLookup.Provider lookup, ResourceKey<Enchantment> enchantment) {
+    public static EnchanterCraftingRecipeBuilder forEnchantment(
+        HolderLookup.Provider lookup,
+        ResourceKey<Enchantment> enchantment
+    ) {
         var stack = new ItemStack(Items.ENCHANTED_BOOK);
         var enchant = lookup.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(enchantment);
         stack.enchant(enchant, 1);
-        var ret = new EnchanterCraftingRecipeBuilder(Ingredient.of(Items.BOOK), stack, enchantment.location().getPath());
-        ret.neoCondition(
-                new PastelResourceConditions.EnchantmentsExistResourceCondition(List.of(enchantment))
+        var ret = new EnchanterCraftingRecipeBuilder(
+            Ingredient.of(Items.BOOK),
+            stack,
+            enchantment.location().getPath()
         );
+        ret
+            .neoCondition(
+                new PastelResourceConditions.EnchantmentsExistResourceCondition(List.of(enchantment))
+            );
         return ret;
     }
 
@@ -61,7 +75,6 @@ public final class EnchanterCraftingRecipeBuilder extends GatedRecipeBuilder<Enc
     public String getDefaultName() {
         return this.defaultName;
     }
-
 
     public EnchanterCraftingRecipeBuilder requires(Ingredient ingredient) {
         this.ingredientList.add(ingredient);
@@ -99,30 +112,35 @@ public final class EnchanterCraftingRecipeBuilder extends GatedRecipeBuilder<Enc
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         if (ingredientList.isEmpty() || 8 % ingredientList.size() != 0) {
-            throw new IllegalStateException("Must specify 8 ingredients (or a divisor of 8 ingredients) for enchanter crafting!");
+            throw new IllegalStateException(
+                "Must specify 8 ingredients (or a divisor of 8 ingredients) for enchanter crafting!"
+            );
         }
 
         var finalList = new ArrayList<Ingredient>();
         finalList.add(centerInput);
-        for (var x = 0; x < (8 / ingredientList.size()); x++) {
+        for (
+            var x = 0;
+            x < (8 / ingredientList.size());
+            x++
+        ) {
             finalList.addAll(ingredientList);
         }
 
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new EnchanterCraftingRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                finalList,
-                                this.result,
-                                this.craftingTime,
-                                this.requiredExperience,
-                                this.noDiscounts,
-                                this.copyComponents
-                        )
+            recipeOutput,
+            id,
+            daId -> new EnchanterCraftingRecipe(
+                this.group,
+                this.secret,
+                daId,
+                finalList,
+                this.result,
+                this.craftingTime,
+                this.requiredExperience,
+                this.noDiscounts,
+                this.copyComponents
+            )
         );
     }
 }

@@ -13,13 +13,11 @@ import java.util.Optional;
     "unused"
 )
 public class PastelSaplingGenerators {
-    public static final PastelInkColorCollection<ResourceLocation> COLORED_SAPLING_IDS =
-            PastelInkColorCollection.NAMES.map(name -> PastelCommon.locate("colored_trees/" + name));
+    public static final PastelInkColorCollection<ResourceLocation> COLORED_SAPLING_IDS = PastelInkColorCollection.NAMES
+        .map(name -> PastelCommon.locate("colored_trees/" + name));
 
-    public static final PastelInkColorCollection<TreeGrower> COLORED_SAPLING_GENERATORS =
-            COLORED_SAPLING_IDS.map(PastelSaplingGenerators::registerRegular);
-
-
+    public static final PastelInkColorCollection<TreeGrower> COLORED_SAPLING_GENERATORS = COLORED_SAPLING_IDS
+        .map(PastelSaplingGenerators::registerRegular);
 
     public static final ResourceLocation WHITE_COLORED_SAPLING_ID = COLORED_SAPLING_IDS.white();
 

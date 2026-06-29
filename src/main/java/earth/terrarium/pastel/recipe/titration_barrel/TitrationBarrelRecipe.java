@@ -69,15 +69,15 @@ public class TitrationBarrelRecipe extends GatedSizedPastelRecipe<FluidRecipeInp
     public final FermentationData fermentationData;
 
     public TitrationBarrelRecipe(
-            String group,
-            boolean secret,
-            Optional<ResourceLocation> requiredAdvancementIdentifier,
-            NonNullList<SizedIngredient> inputStacks,
-            FluidIngredient fluid,
-            ItemStack outputItemStack,
-            Item tappingItem,
-            int minFermentationTimeHours,
-            FermentationData fermentationData
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        NonNullList<SizedIngredient> inputStacks,
+        FluidIngredient fluid,
+        ItemStack outputItemStack,
+        Item tappingItem,
+        int minFermentationTimeHours,
+        FermentationData fermentationData
     ) {
         super(group, secret, requiredAdvancementIdentifier);
 
@@ -350,7 +350,8 @@ public class TitrationBarrelRecipe extends GatedSizedPastelRecipe<FluidRecipeInp
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        NonNullList.codecOf(SizedIngredient.NESTED_CODEC)
+                        NonNullList
+                            .codecOf(SizedIngredient.NESTED_CODEC)
                             .fieldOf("ingredients")
                             .forGetter(recipe -> recipe.inputStacks),
                         FluidIngredient.CODEC

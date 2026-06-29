@@ -1,18 +1,12 @@
 package earth.terrarium.pastel.data.recipe.builder.fluid_converting;
 
-import earth.terrarium.pastel.data.recipe.builder.GatedIORecipe;
 import earth.terrarium.pastel.data.recipe.builder.SimpleGatedIORecipeBuilder;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.HumusConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.LiquidCrystalConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.MidnightSolutionConvertingRecipe;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-
-import java.util.Optional;
 
 public final class FluidConvertingRecipeBuilder {
 

@@ -29,17 +29,17 @@ import java.util.Optional;
 public class ShapelessPedestalRecipe extends PedestalRecipe {
 
     public ShapelessPedestalRecipe(
-            String group,
-            boolean secret,
-            Optional<ResourceLocation> requiredAdvancementIdentifier,
-            PedestalTier tier,
-            NonNullList<Ingredient> craftingInputs,
-            Map<GemstoneColor, Integer> gemstonePowderInputs,
-            ItemStack output,
-            float experience,
-            int craftingTime,
-            boolean skipRecipeRemainders,
-            boolean noBenefitsFromYieldUpgrades
+        String group,
+        boolean secret,
+        Optional<ResourceLocation> requiredAdvancementIdentifier,
+        PedestalTier tier,
+        NonNullList<Ingredient> craftingInputs,
+        Map<GemstoneColor, Integer> gemstonePowderInputs,
+        ItemStack output,
+        float experience,
+        int craftingTime,
+        boolean skipRecipeRemainders,
+        boolean noBenefitsFromYieldUpgrades
     ) {
         super(
             group,
@@ -64,7 +64,9 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
         } else {
             var nonEmptyItems = new ArrayList<ItemStack>(input.ingredientCount());
 
-            for (ItemStack item : input.items()) {
+            for (
+                ItemStack item : input.items()
+            ) {
                 if (!item.isEmpty()) {
                     nonEmptyItems.add(item);
                 }

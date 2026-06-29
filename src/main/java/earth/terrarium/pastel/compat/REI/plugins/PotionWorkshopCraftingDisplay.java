@@ -24,7 +24,8 @@ public class PotionWorkshopCraftingDisplay extends PotionWorkshopRecipeDisplay {
      */
     public PotionWorkshopCraftingDisplay(RecipeHolder<PotionWorkshopCraftingRecipe> recipe) {
         super(recipe);
-        this.baseIngredient = Objects.requireNonNull(recipe.value().getBaseIngredient(), "Base ingredients should never be null");
+        this.baseIngredient = Objects
+            .requireNonNull(recipe.value().getBaseIngredient(), "Base ingredients should never be null");
         this.consumeBaseIngredient = recipe.value().consumesBaseIngredient();
     }
 

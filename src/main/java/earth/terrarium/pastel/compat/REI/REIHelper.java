@@ -15,28 +15,26 @@ import java.util.stream.Collectors;
 
 public class REIHelper {
 
-
     public static List<EntryIngredient> toEntryIngredientsSized(List<SizedIngredient> sizedIngredients) {
         return sizedIngredients
-                .stream()
-                .map(REIHelper::ofSizedIngredient)
-                .collect(Collectors.toCollection(ArrayList::new));
+            .stream()
+            .map(REIHelper::ofSizedIngredient)
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static EntryIngredient ofSizedIngredient(@Nullable SizedIngredient sizedIngredient) {
         if (sizedIngredient == null) {
             return EntryIngredients.of(ItemStack.EMPTY);
         } else {
-            return
-                    EntryIngredients
-                            .ofItemStacks(
-                                    Arrays.stream(sizedIngredient.getItems())
-                                            .toList()
-                            );
+            return EntryIngredients
+                .ofItemStacks(
+                    Arrays
+                        .stream(sizedIngredient.getItems())
+                        .toList()
+                );
         }
 
     }
-
 
     public static EntryIngredient ofFluidIngredient(FluidIngredient fluidIngredient) {
         var fluids = Arrays

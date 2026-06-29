@@ -10,10 +10,15 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<ShapedPedestalRecipeBuilder> {
     private final List<String> rows = new ArrayList<>();
+
     private final Map<Character, Ingredient> keyMap = new HashMap<>();
 
     public ShapedPedestalRecipeBuilder(ItemStack result) {
@@ -48,22 +53,21 @@ public final class ShapedPedestalRecipeBuilder extends PedestalRecipeBuilder<Sha
         var rawRecipe = ShapedRecipePattern.of(keyMap, rows);
 
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new ShapedPedestalRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                this.tier,
-                                rawRecipe,
-                                this.powderInputs,
-                                this.result,
-                                this.experience,
-                                this.craftingTime,
-                                this.skipRemainders,
-                                this.disableYieldUpgrades
-                        )
+            recipeOutput,
+            id,
+            daId -> new ShapedPedestalRecipe(
+                this.group,
+                this.secret,
+                daId,
+                this.tier,
+                rawRecipe,
+                this.powderInputs,
+                this.result,
+                this.experience,
+                this.craftingTime,
+                this.skipRemainders,
+                this.disableYieldUpgrades
+            )
         );
     }
 }

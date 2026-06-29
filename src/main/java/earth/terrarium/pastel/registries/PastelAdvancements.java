@@ -1,9 +1,8 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import net.minecraft.resources.ResourceLocation;
 
 @SuppressWarnings(
@@ -18,8 +17,8 @@ public class PastelAdvancements {
                     "unlocks/colored_lamps/light_gray_lamp"
                 );
 
-            public static final PastelInkColorCollection<ResourceLocation> VALUES =
-                    PastelInkColorCollection.NAMES.map(color -> PastelCommon.locate("unlocks/colored_lamps/" + color + "_lamp"));
+            public static final PastelInkColorCollection<ResourceLocation> VALUES = PastelInkColorCollection.NAMES
+                .map(color -> PastelCommon.locate("unlocks/colored_lamps/" + color + "_lamp"));
 
             public static final ResourceLocation GRAY_LAMP = VALUES.gray();
 
@@ -170,9 +169,11 @@ public class PastelAdvancements {
 
             public static final ResourceLocation DARK_STAKES = PastelCommon.locate("unlocks/equipment/dark_stakes");
 
-            public static final ResourceLocation FOX_O_NINE_TAILS = PastelCommon.locate("unlocks/equipment/fox_o_nine_tails");
+            public static final ResourceLocation FOX_O_NINE_TAILS = PastelCommon
+                .locate("unlocks/equipment/fox_o_nine_tails");
 
-            public static final ResourceLocation VERDIGRIS_LASH = PastelCommon.locate("unlocks/equipment/verdigris_lash");
+            public static final ResourceLocation VERDIGRIS_LASH = PastelCommon
+                .locate("unlocks/equipment/verdigris_lash");
         }
 
         public static class Blocks {
@@ -492,8 +493,8 @@ public class PastelAdvancements {
         public static class Pylons {
             public static final ResourceLocation ANY_PYLON = PastelCommon.locate("unlocks/pylons/any_pylon");
 
-            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES =
-                    PastelGemstoneColorCollection.GEMSTONE_NAMES.map(name -> PastelCommon.locate("unlocks/pylons/" + name + "_pylon"));
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES = PastelGemstoneColorCollection.GEMSTONE_NAMES
+                .map(name -> PastelCommon.locate("unlocks/pylons/" + name + "_pylon"));
 
             public static final ResourceLocation ONYX_PYLON = VALUES.onyx();
 
@@ -625,8 +626,8 @@ public class PastelAdvancements {
         }
 
         public static class GemstoneLights {
-            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES =
-                    PastelGemstoneColorCollection.GEMSTONE_NAMES.map(name -> PastelCommon.locate("unlocks/gemstone_lights/" + name));
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES = PastelGemstoneColorCollection.GEMSTONE_NAMES
+                .map(name -> PastelCommon.locate("unlocks/gemstone_lights/" + name));
 
             public static final ResourceLocation TOPAZ = VALUES.topaz();
 
@@ -683,8 +684,8 @@ public class PastelAdvancements {
         }
 
         public static class GemstoneChimes {
-            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES =
-                    PastelGemstoneColorCollection.GEMSTONE_NAMES.map(it -> PastelCommon.locate("unlocks/gemstone_chimes/" + it + "_chime"));
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES = PastelGemstoneColorCollection.GEMSTONE_NAMES
+                .map(it -> PastelCommon.locate("unlocks/gemstone_chimes/" + it + "_chime"));
 
             public static final ResourceLocation ONYX_CHIME = VALUES.onyx();
 
@@ -923,8 +924,8 @@ public class PastelAdvancements {
                     "unlocks/glowblocks/any_glowblock"
                 );
 
-            public static final PastelInkColorCollection<ResourceLocation> VALUES =
-                    PastelInkColorCollection.NAMES.map(name -> PastelCommon.locate("unlocks/glowblocks/" + name + "_glowblock"));
+            public static final PastelInkColorCollection<ResourceLocation> VALUES = PastelInkColorCollection.NAMES
+                .map(name -> PastelCommon.locate("unlocks/glowblocks/" + name + "_glowblock"));
 
             public static final ResourceLocation LIME_GLOWBLOCK = VALUES.lime();
 
@@ -1172,8 +1173,8 @@ public class PastelAdvancements {
         }
 
         public static class ColoredSaplings {
-            public static final PastelInkColorCollection<ResourceLocation> VALUES =
-                PastelInkColorCollection.NAMES.map(name -> PastelCommon.locate("unlocks/colored_saplings/" + name + "_sapling"));
+            public static final PastelInkColorCollection<ResourceLocation> VALUES = PastelInkColorCollection.NAMES
+                .map(name -> PastelCommon.locate("unlocks/colored_saplings/" + name + "_sapling"));
 
             public static final ResourceLocation GREEN_SAPLING = VALUES.green();
 
@@ -1623,8 +1624,8 @@ public class PastelAdvancements {
         }
 
         public static class CollectPigment {
-            public static final PastelInkColorCollection<ResourceLocation> VALUES =
-                    PastelInkColorCollection.NAMES.map(name -> PastelCommon.locate("hidden/collect_pigment/" + name));
+            public static final PastelInkColorCollection<ResourceLocation> VALUES = PastelInkColorCollection.NAMES
+                .map(name -> PastelCommon.locate("hidden/collect_pigment/" + name));
 
             public static final ResourceLocation LIME = VALUES.lime();
 
@@ -1669,14 +1670,13 @@ public class PastelAdvancements {
             // Even though this isn't technically correct, there are so many places
             // that use these values as the "collect shard" advancement including onyx + moonstone
             // that it's best to have them here so I can reuse them
-            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES =
-                    new PastelGemstoneColorCollection<>(
-                            TOPAZ,
-                            AMETHYST,
-                            CITRINE,
-                            CREATE_ONYX_SHARD,
-                            Lategame.COLLECT_MOONSTONE
-                    );
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES = new PastelGemstoneColorCollection<>(
+                TOPAZ,
+                AMETHYST,
+                CITRINE,
+                CREATE_ONYX_SHARD,
+                Lategame.COLLECT_MOONSTONE
+            );
         }
 
         public static class StatusEffects {

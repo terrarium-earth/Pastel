@@ -5,7 +5,6 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.blocks.BedrockAnvilBlock;
 import earth.terrarium.pastel.blocks.BismuthBudBlock;
 import earth.terrarium.pastel.blocks.BlockWithTooltip;
@@ -227,13 +226,14 @@ import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.data.PastelModelHelper;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.entity.LivingMarkerEntity;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.items.conditional.FourLeafCloverItem;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredFallingSporeBlossomParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredSporeBlossomAirParticleEffect;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
-import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.registries.PastelItems.IS;
 import earth.terrarium.pastel.registries.client.PastelTextures;
 import net.minecraft.core.BlockPos;
@@ -679,30 +679,35 @@ public class PastelBlocks {
     }
 
     private static PastelGemstoneColorCollection<DeferredBlock<Block>> gemstoneGroupWithoutAmethyst(
-            Block vanilla,
-            PastelGemstoneColorCollection<String> ids,
-            Function<PastelGemstoneColor, Block> blockFactory
+        Block vanilla,
+        PastelGemstoneColorCollection<String> ids,
+        Function<PastelGemstoneColor, Block> blockFactory
     ) {
         return new PastelGemstoneColorCollection<>(
-                register(blockWithItem(ids.topaz(), () -> blockFactory.apply(PastelGemstoneColor.CYAN), InkColors.CYAN)),
-                wrapVanillaBlock(vanilla),
-                register(blockWithItem(ids.citrine(), () -> blockFactory.apply(PastelGemstoneColor.YELLOW), InkColors.YELLOW)),
-                register(blockWithItem(ids.onyx(), () -> blockFactory.apply(PastelGemstoneColor.BLACK), InkColors.BLACK)),
-                register(blockWithItem(ids.moonstone(), () -> blockFactory.apply(PastelGemstoneColor.WHITE), InkColors.WHITE))
+            register(blockWithItem(ids.topaz(), () -> blockFactory.apply(PastelGemstoneColor.CYAN), InkColors.CYAN)),
+            wrapVanillaBlock(vanilla),
+            register(
+                blockWithItem(ids.citrine(), () -> blockFactory.apply(PastelGemstoneColor.YELLOW), InkColors.YELLOW)
+            ),
+            register(blockWithItem(ids.onyx(), () -> blockFactory.apply(PastelGemstoneColor.BLACK), InkColors.BLACK)),
+            register(
+                blockWithItem(ids.moonstone(), () -> blockFactory.apply(PastelGemstoneColor.WHITE), InkColors.WHITE)
+            )
         );
     }
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_BLOCKS =
-            gemstoneGroupWithoutAmethyst(
-                    Blocks.AMETHYST_BLOCK,
-                    PastelGemstoneColorCollection.prefixWithGemstone("block"),
-                    color ->
-                            new PastelGemstoneBlock(
-                                    gemstoneBlock(PastelGemstoneColorCollection.MAP_COLORS.pick(color), PastelBlockSoundGroups.GEMSTONE_BLOCKS.pick(color)),
-                                    PastelSounds.GEMSTONE_BLOCK_HIT.pick(color),
-                                    PastelSounds.GEMSTONE_CHIMES.pick(color)
-                            )
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_BLOCKS = gemstoneGroupWithoutAmethyst(
+        Blocks.AMETHYST_BLOCK,
+        PastelGemstoneColorCollection.prefixWithGemstone("block"),
+        color -> new PastelGemstoneBlock(
+            gemstoneBlock(
+                PastelGemstoneColorCollection.MAP_COLORS.pick(color),
+                PastelBlockSoundGroups.GEMSTONE_BLOCKS.pick(color)
+            ),
+            PastelSounds.GEMSTONE_BLOCK_HIT.pick(color),
+            PastelSounds.GEMSTONE_CHIMES.pick(color)
+        )
+    );
 
     public static final DeferredBlock<Block> TOPAZ_CLUSTER = register(
         blockWithItem(
@@ -966,14 +971,16 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> MOONSTONE_BLOCK = GEMSTONE_BLOCKS.moonstone();
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_POWDER_BLOCKS =
-            PastelGemstoneColorCollection.registerBlocks(
-                    PastelGemstoneColorCollection.prefixWithGemstone("powder_block"),
-                    PastelBlocks::registerGemstoneBlock,
-                    (color, props) ->
-                            new ColoredFallingBlock(new ColorRGBA(color.getInkColor().getDyeColor().orElseThrow().getFireworkColor()), props),
-                    color -> Properties.ofFullCopy(SAND).mapColor(PastelGemstoneColorCollection.MAP_COLORS.pick(color))
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_POWDER_BLOCKS = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.prefixWithGemstone("powder_block"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, props) -> new ColoredFallingBlock(
+                new ColorRGBA(color.getInkColor().getDyeColor().orElseThrow().getFireworkColor()),
+                props
+            ),
+            color -> Properties.ofFullCopy(SAND).mapColor(PastelGemstoneColorCollection.MAP_COLORS.pick(color))
+        );
 
     public static final DeferredBlock<Block> TOPAZ_POWDER_BLOCK = GEMSTONE_POWDER_BLOCKS.topaz();
 
@@ -987,44 +994,39 @@ public class PastelBlocks {
 
     // collections for gemstone blocks
 
-
     // This is wrapped like this instead of being generated is because i am NOT
     // dealing with the luminance differences
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CLUSTERS =
-            new PastelGemstoneColorCollection<>(
-                    TOPAZ_CLUSTER,
-                    wrapVanillaBlock(Blocks.AMETHYST_CLUSTER),
-                    CITRINE_CLUSTER,
-                    ONYX_CLUSTER,
-                    MOONSTONE_CLUSTER
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CLUSTERS = new PastelGemstoneColorCollection<>(
+        TOPAZ_CLUSTER,
+        wrapVanillaBlock(Blocks.AMETHYST_CLUSTER),
+        CITRINE_CLUSTER,
+        ONYX_CLUSTER,
+        MOONSTONE_CLUSTER
+    );
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> SMALL_GEMSTONE_BUDS =
-            new PastelGemstoneColorCollection<>(
-                    SMALL_TOPAZ_BUD,
-                    wrapVanillaBlock(Blocks.SMALL_AMETHYST_BUD),
-                    SMALL_CITRINE_BUD,
-                    SMALL_ONYX_BUD,
-                    SMALL_MOONSTONE_BUD
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> SMALL_GEMSTONE_BUDS = new PastelGemstoneColorCollection<>(
+        SMALL_TOPAZ_BUD,
+        wrapVanillaBlock(Blocks.SMALL_AMETHYST_BUD),
+        SMALL_CITRINE_BUD,
+        SMALL_ONYX_BUD,
+        SMALL_MOONSTONE_BUD
+    );
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> MEDIUM_GEMSTONE_BUDS =
-            new PastelGemstoneColorCollection<>(
-                    MEDIUM_TOPAZ_BUD,
-                    wrapVanillaBlock(Blocks.MEDIUM_AMETHYST_BUD),
-                    MEDIUM_CITRINE_BUD,
-                    MEDIUM_ONYX_BUD,
-                    MEDIUM_MOONSTONE_BUD
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> MEDIUM_GEMSTONE_BUDS = new PastelGemstoneColorCollection<>(
+        MEDIUM_TOPAZ_BUD,
+        wrapVanillaBlock(Blocks.MEDIUM_AMETHYST_BUD),
+        MEDIUM_CITRINE_BUD,
+        MEDIUM_ONYX_BUD,
+        MEDIUM_MOONSTONE_BUD
+    );
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> LARGE_GEMSTONE_BUDS =
-            new PastelGemstoneColorCollection<>(
-                    LARGE_TOPAZ_BUD,
-                    wrapVanillaBlock(Blocks.LARGE_AMETHYST_BUD),
-                    LARGE_CITRINE_BUD,
-                    LARGE_ONYX_BUD,
-                    LARGE_MOONSTONE_BUD
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> LARGE_GEMSTONE_BUDS = new PastelGemstoneColorCollection<>(
+        LARGE_TOPAZ_BUD,
+        wrapVanillaBlock(Blocks.LARGE_AMETHYST_BUD),
+        LARGE_CITRINE_BUD,
+        LARGE_ONYX_BUD,
+        LARGE_MOONSTONE_BUD
+    );
 
     public static final DeferredBlock<Block> VEGETAL_BLOCK = register(
         burnable(
@@ -2498,14 +2500,13 @@ public class PastelBlocks {
         )
     );
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CHISELED_BASALTS =
-            new PastelGemstoneColorCollection<>(
-                    TOPAZ_CHISELED_BASALT,
-                    AMETHYST_CHISELED_BASALT,
-                    CITRINE_CHISELED_BASALT,
-                    ONYX_CHISELED_BASALT,
-                    MOONSTONE_CHISELED_BASALT
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CHISELED_BASALTS = new PastelGemstoneColorCollection<>(
+        TOPAZ_CHISELED_BASALT,
+        AMETHYST_CHISELED_BASALT,
+        CITRINE_CHISELED_BASALT,
+        ONYX_CHISELED_BASALT,
+        MOONSTONE_CHISELED_BASALT
+    );
 
     public static final DeferredBlock<Block> CALCITE_STAIRS = register(
         blockWithItem(
@@ -2831,40 +2832,44 @@ public class PastelBlocks {
         )
     );
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CHISELED_CALCITES =
-        new PastelGemstoneColorCollection<>(
-                TOPAZ_CHISELED_CALCITE,
-                AMETHYST_CHISELED_CALCITE,
-                CITRINE_CHISELED_CALCITE,
-                ONYX_CHISELED_CALCITE,
-                MOONSTONE_CHISELED_CALCITE
-        );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_CHISELED_CALCITES = new PastelGemstoneColorCollection<>(
+        TOPAZ_CHISELED_CALCITE,
+        AMETHYST_CHISELED_CALCITE,
+        CITRINE_CHISELED_CALCITE,
+        ONYX_CHISELED_CALCITE,
+        MOONSTONE_CHISELED_CALCITE
+    );
 
-    public static DeferredBlock<Block> registerGemstoneBlock(PastelGemstoneColor color, String name, Function<Properties, Block> blockFactory, Supplier<Properties> properties) {
+    public static DeferredBlock<Block> registerGemstoneBlock(
+        PastelGemstoneColor color,
+        String name,
+        Function<Properties, Block> blockFactory,
+        Supplier<Properties> properties
+    ) {
         return register(
-                blockWithItem(
-                        name,
-                        () -> blockFactory.apply(properties.get()),
-                        color.getInkColor()
-                )
+            blockWithItem(
+                name,
+                () -> blockFactory.apply(properties.get()),
+                color.getInkColor()
+            )
         );
     }
 
     public static Properties gemstoneLightProperties(DeferredBlock<Block> baseBlock) {
-        return Properties.ofFullCopy(baseBlock.get())
-                        .lightLevel(s -> 15)
-                        .noOcclusion()
-                        .forceSolidOn();
+        return Properties
+            .ofFullCopy(baseBlock.get())
+            .lightLevel(s -> 15)
+            .noOcclusion()
+            .forceSolidOn();
     }
 
-
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> BASALT_GEMSTONE_LIGHTS =
-            PastelGemstoneColorCollection.registerBlocks(
-                    PastelGemstoneColorCollection.prefixWithGemstone("basalt_light"),
-                    PastelBlocks::registerGemstoneBlock,
-                    (color, properties) -> new RotatedPillarBlock(properties),
-                    color -> gemstoneLightProperties(POLISHED_BASALT)
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> BASALT_GEMSTONE_LIGHTS = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.prefixWithGemstone("basalt_light"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, properties) -> new RotatedPillarBlock(properties),
+            color -> gemstoneLightProperties(POLISHED_BASALT)
+        );
 
     public static final DeferredBlock<Block> TOPAZ_BASALT_LIGHT = BASALT_GEMSTONE_LIGHTS.topaz();
 
@@ -2876,13 +2881,13 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> MOONSTONE_BASALT_LIGHT = BASALT_GEMSTONE_LIGHTS.moonstone();
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> CALCITE_GEMSTONE_LIGHTS =
-            PastelGemstoneColorCollection.registerBlocks(
-                    PastelGemstoneColorCollection.prefixWithGemstone("calcite_light"),
-                    PastelBlocks::registerGemstoneBlock,
-                    (color, properties) -> new RotatedPillarBlock(properties),
-                    color -> gemstoneLightProperties(POLISHED_CALCITE)
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> CALCITE_GEMSTONE_LIGHTS = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.prefixWithGemstone("calcite_light"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, properties) -> new RotatedPillarBlock(properties),
+            color -> gemstoneLightProperties(POLISHED_CALCITE)
+        );
 
     public static final DeferredBlock<Block> TOPAZ_CALCITE_LIGHT = CALCITE_GEMSTONE_LIGHTS.topaz();
 
@@ -2903,16 +2908,19 @@ public class PastelBlocks {
     }
 
     private static Properties gemstoneGlass(PastelGemstoneColor color) {
-        return gemstoneGlass(PastelBlockSoundGroups.GEMSTONE_CLUSTERS.pick(color), PastelGemstoneColorCollection.MAP_COLORS.pick(color));
+        return gemstoneGlass(
+            PastelBlockSoundGroups.GEMSTONE_CLUSTERS.pick(color),
+            PastelGemstoneColorCollection.MAP_COLORS.pick(color)
+        );
     }
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_GLASSES =
-            PastelGemstoneColorCollection.registerBlocks(
-                    PastelGemstoneColorCollection.prefixWithGemstone("glass"),
-                    PastelBlocks::registerGemstoneBlock,
-                    (color, props) -> new GemstoneGlassBlock(props, color),
-                    PastelBlocks::gemstoneGlass
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_GLASSES = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.prefixWithGemstone("glass"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, props) -> new GemstoneGlassBlock(props, color),
+            PastelBlocks::gemstoneGlass
+        );
 
     public static final DeferredBlock<Block> TOPAZ_GLASS = GEMSTONE_GLASSES.topaz();
 
@@ -2932,14 +2940,14 @@ public class PastelBlocks {
         )
     );
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_GLASS_PANES =
-            PastelGemstoneColorCollection.registerBlocks(
-                    PastelGemstoneColorCollection.prefixWithGemstone("glass_pane"),
-                    PastelBlocks::registerGemstoneBlock,
-                    (color, props) -> new IronBarsBlock(props),
-                    PastelBlocks::gemstoneGlass
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_GLASS_PANES = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.prefixWithGemstone("glass_pane"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, props) -> new IronBarsBlock(props),
+            PastelBlocks::gemstoneGlass
 
-            );
+        );
 
     public static final DeferredBlock<Block> TOPAZ_GLASS_PANE = GEMSTONE_GLASS_PANES.topaz();
 
@@ -2993,14 +3001,17 @@ public class PastelBlocks {
             .noOcclusion();
     }
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> CHIMES =
-            PastelGemstoneColorCollection.registerBlocks(
-                    PastelGemstoneColorCollection.prefixWithGemstone("chime"),
-                    PastelBlocks::registerGemstoneBlock,
-                    (color, props) ->
-                            new GemstoneChimeBlock(props, PastelSounds.GEMSTONE_CHIMES.pick(color), ColoredSparkleRisingParticleEffect.VALUES.pick(color.getInkColor())),
-                    color -> chime(GEMSTONE_CLUSTERS.pick(color).value())
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> CHIMES = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.prefixWithGemstone("chime"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, props) -> new GemstoneChimeBlock(
+                props,
+                PastelSounds.GEMSTONE_CHIMES.pick(color),
+                ColoredSparkleRisingParticleEffect.VALUES.pick(color.getInkColor())
+            ),
+            color -> chime(GEMSTONE_CLUSTERS.pick(color).value())
+        );
 
     public static final DeferredBlock<Block> TOPAZ_CHIME = CHIMES.topaz();
 
@@ -3018,13 +3029,13 @@ public class PastelBlocks {
             .noOcclusion();
     }
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> PYLONS =
-            PastelGemstoneColorCollection.registerBlocks(
-                    PastelGemstoneColorCollection.prefixWithGemstone("pylon"),
-                    PastelBlocks::registerGemstoneBlock,
-                    (color, props) -> new PylonBlock(props),
-                    color -> pylon(GEMSTONE_BLOCKS.pick(color).value())
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> PYLONS = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.prefixWithGemstone("pylon"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, props) -> new PylonBlock(props),
+            color -> pylon(GEMSTONE_BLOCKS.pick(color).value())
+        );
 
     public static final DeferredBlock<Block> TOPAZ_PYLON = PYLONS.topaz();
 
@@ -3064,13 +3075,13 @@ public class PastelBlocks {
         )
     );
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_SEMI_PERMEABLE_GLASSES =
-            PastelGemstoneColorCollection.registerBlocks(
-                    PastelGemstoneColorCollection.prefixWithGemstone("semi_permeable_glass"),
-                    PastelBlocks::registerGemstoneBlock,
-                    (color, props) -> new GemstonePlayerOnlyGlassBlock(props, color),
-                    PastelBlocks::gemstoneGlass
-            );
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> GEMSTONE_SEMI_PERMEABLE_GLASSES = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.prefixWithGemstone("semi_permeable_glass"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, props) -> new GemstonePlayerOnlyGlassBlock(props, color),
+            PastelBlocks::gemstoneGlass
+        );
 
     public static final DeferredBlock<Block> TOPAZ_SEMI_PERMEABLE_GLASS = GEMSTONE_SEMI_PERMEABLE_GLASSES.topaz();
 
@@ -3080,7 +3091,8 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> ONYX_SEMI_PERMEABLE_GLASS = GEMSTONE_SEMI_PERMEABLE_GLASSES.onyx();
 
-    public static final DeferredBlock<Block> MOONSTONE_SEMI_PERMEABLE_GLASS = GEMSTONE_SEMI_PERMEABLE_GLASSES.moonstone();
+    public static final DeferredBlock<Block> MOONSTONE_SEMI_PERMEABLE_GLASS = GEMSTONE_SEMI_PERMEABLE_GLASSES
+        .moonstone();
 
     public static final DeferredBlock<Block> GLISTERING_MELON = register(
         block("glistering_melon", () -> new Block(BlockBehaviour.Properties.ofFullCopy(MELON)))
@@ -3339,66 +3351,69 @@ public class PastelBlocks {
 
     // COLORED BLOCK FAMILIES
 
-
     public static Function<InkColor, Properties> bindColoredBlock(Block baseBlock) {
         return color -> copyWithMapColor(baseBlock, color.getDyeColor().orElse(DyeColor.LIME).getMapColor());
     }
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_PLANKS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("planks"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredPlankBlock(props, color),
-                    bindColoredBlock(OAK_PLANKS)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_PLANKS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("planks"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredPlankBlock(props, color),
+            bindColoredBlock(OAK_PLANKS)
+        );
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_STAIRS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("stairs"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredStairsBlock(COLORED_PLANKS.pick(color).get().defaultBlockState(), props, color),
-                    bindColoredBlock(OAK_STAIRS)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_STAIRS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("stairs"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredStairsBlock(
+                COLORED_PLANKS.pick(color).get().defaultBlockState(),
+                props,
+                color
+            ),
+            bindColoredBlock(OAK_STAIRS)
+        );
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_PRESSURE_PLATES =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("pressure_plate"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredPressurePlateBlock(props, color),
-                    bindColoredBlock(OAK_PRESSURE_PLATE)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_PRESSURE_PLATES = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("pressure_plate"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredPressurePlateBlock(props, color),
+            bindColoredBlock(OAK_PRESSURE_PLATE)
+        );
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_FENCES =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("fence"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredFenceBlock(props, color),
-                    bindColoredBlock(OAK_FENCE)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_FENCES = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("fence"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredFenceBlock(props, color),
+            bindColoredBlock(OAK_FENCE)
+        );
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_FENCE_GATES =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("fence_gate"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredFenceGateBlock(props, color),
-                    bindColoredBlock(OAK_FENCE_GATE)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_FENCE_GATES = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("fence_gate"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredFenceGateBlock(props, color),
+            bindColoredBlock(OAK_FENCE_GATE)
+        );
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_BUTTONS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("button"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredWoodenButtonBlock(props, color),
-                    bindColoredBlock(OAK_BUTTON)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_BUTTONS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("button"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredWoodenButtonBlock(props, color),
+            bindColoredBlock(OAK_BUTTON)
+        );
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SLABS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("slab"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredSlabBlock(props, color),
-                    bindColoredBlock(OAK_SLAB)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SLABS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("slab"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredSlabBlock(props, color),
+            bindColoredBlock(OAK_SLAB)
+        );
 
     // NOT going back by hand to convert all these to use the field access
     // i used find and replace to change these in the first place
@@ -3490,7 +3505,8 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> LIGHT_BLUE_STAIRS = COLORED_STAIRS.pick(InkColors.LIGHT_BLUE);
 
-    public static final DeferredBlock<Block> LIGHT_BLUE_PRESSURE_PLATE = COLORED_PRESSURE_PLATES.pick(InkColors.LIGHT_BLUE);
+    public static final DeferredBlock<Block> LIGHT_BLUE_PRESSURE_PLATE = COLORED_PRESSURE_PLATES
+        .pick(InkColors.LIGHT_BLUE);
 
     public static final DeferredBlock<Block> LIGHT_BLUE_FENCE = COLORED_FENCES.pick(InkColors.LIGHT_BLUE);
 
@@ -3504,7 +3520,8 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> LIGHT_GRAY_STAIRS = COLORED_STAIRS.pick(InkColors.LIGHT_GRAY);
 
-    public static final DeferredBlock<Block> LIGHT_GRAY_PRESSURE_PLATE = COLORED_PRESSURE_PLATES.pick(InkColors.LIGHT_GRAY);
+    public static final DeferredBlock<Block> LIGHT_GRAY_PRESSURE_PLATE = COLORED_PRESSURE_PLATES
+        .pick(InkColors.LIGHT_GRAY);
 
     public static final DeferredBlock<Block> LIGHT_GRAY_FENCE = COLORED_FENCES.pick(InkColors.LIGHT_GRAY);
 
@@ -5015,25 +5032,24 @@ public class PastelBlocks {
     );
 
     // Technically accurate!
-    public static final PastelInkColorCollection<DeferredBlock<Block>> CUSHIONS =
-            new PastelInkColorCollection<>(
-                    CYAN_CUSHION,
-                    LIGHT_BLUE_CUSHION,
-                    BLUE_CUSHION,
-                    PURPLE_CUSHION,
-                    MAGENTA_CUSHION,
-                    PINK_CUSHION,
-                    RED_CUSHION,
-                    ORANGE_CUSHION,
-                    YELLOW_CUSHION,
-                    LIME_CUSHION,
-                    GREEN_CUSHION,
-                    BROWN_CUSHION,
-                    BLACK_CUSHION,
-                    GRAY_CUSHION,
-                    LIGHT_GRAY_CUSHION,
-                    WHITE_CUSHION
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> CUSHIONS = new PastelInkColorCollection<>(
+        CYAN_CUSHION,
+        LIGHT_BLUE_CUSHION,
+        BLUE_CUSHION,
+        PURPLE_CUSHION,
+        MAGENTA_CUSHION,
+        PINK_CUSHION,
+        RED_CUSHION,
+        ORANGE_CUSHION,
+        YELLOW_CUSHION,
+        LIME_CUSHION,
+        GREEN_CUSHION,
+        BROWN_CUSHION,
+        BLACK_CUSHION,
+        GRAY_CUSHION,
+        LIGHT_GRAY_CUSHION,
+        WHITE_CUSHION
+    );
 
     public static Properties basalMarble() {
         return settings(MapColor.COLOR_GRAY, SoundType.DRIPSTONE_BLOCK, 8.0F)
@@ -6838,12 +6854,15 @@ public class PastelBlocks {
         return settings(mapColor, soundGroup, 5.0F, 6.0F);
     }
 
-    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> POLISHED_GEMSTONE_BLOCKS =
-        PastelGemstoneColorCollection.registerBlocks(
-                PastelGemstoneColorCollection.GEMSTONE_NAMES.map(it -> "polished_" + it + "_block"),
-                PastelBlocks::registerGemstoneBlock,
-                (color, props) -> new Block(props),
-                color -> polishedGemBlock(PastelGemstoneColorCollection.MAP_COLORS.pick(color), PastelBlockSoundGroups.GEMSTONE_BLOCKS.pick(color))
+    public static final PastelGemstoneColorCollection<DeferredBlock<Block>> POLISHED_GEMSTONE_BLOCKS = PastelGemstoneColorCollection
+        .registerBlocks(
+            PastelGemstoneColorCollection.GEMSTONE_NAMES.map(it -> "polished_" + it + "_block"),
+            PastelBlocks::registerGemstoneBlock,
+            (color, props) -> new Block(props),
+            color -> polishedGemBlock(
+                PastelGemstoneColorCollection.MAP_COLORS.pick(color),
+                PastelBlockSoundGroups.GEMSTONE_BLOCKS.pick(color)
+            )
         );
 
     public static final DeferredBlock<Block> POLISHED_TOPAZ_BLOCK = POLISHED_GEMSTONE_BLOCKS.topaz();
@@ -6949,13 +6968,17 @@ public class PastelBlocks {
         );
     }
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SAPLINGS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("sapling"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredSaplingBlock(props, color, PastelSaplingGenerators.COLORED_SAPLING_GENERATORS.pick(color)),
-                    color -> copyWithMapColor(OAK_SAPLING, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SAPLINGS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("sapling"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredSaplingBlock(
+                props,
+                color,
+                PastelSaplingGenerators.COLORED_SAPLING_GENERATORS.pick(color)
+            ),
+            color -> copyWithMapColor(OAK_SAPLING, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
+        );
 
     public static final DeferredBlock<Block> BLACK_SAPLING = COLORED_SAPLINGS.black();
 
@@ -7002,12 +7025,12 @@ public class PastelBlocks {
         );
     }
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> POTTED_COLORED_SAPLINGS =
-        PastelInkColorCollection.registerBlocks(
-                PastelInkColorCollection.NAMES.map(name -> "potted_" + name + "_sapling"),
-                PastelBlocks::registerColoredBlockNoItem,
-                (color, props) -> new PottedColoredSaplingBlock(COLORED_SAPLINGS.pick(color).get(), props, color),
-                color -> pottedPlant()
+    public static final PastelInkColorCollection<DeferredBlock<Block>> POTTED_COLORED_SAPLINGS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.NAMES.map(name -> "potted_" + name + "_sapling"),
+            PastelBlocks::registerColoredBlockNoItem,
+            (color, props) -> new PottedColoredSaplingBlock(COLORED_SAPLINGS.pick(color).get(), props, color),
+            color -> pottedPlant()
         );
 
     public static final DeferredBlock<Block> POTTED_BLACK_SAPLING = POTTED_COLORED_SAPLINGS.black();
@@ -7061,13 +7084,13 @@ public class PastelBlocks {
         );
     }
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> STRIPPED_COLORED_LOGS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.NAMES.map(name -> "stripped_" + name + "_log"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredStrippedLogBlock(props, color),
-                    color -> copyWithMapColor(STRIPPED_OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> STRIPPED_COLORED_LOGS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.NAMES.map(name -> "stripped_" + name + "_log"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredStrippedLogBlock(props, color),
+            color -> copyWithMapColor(STRIPPED_OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
+        );
 
     public static final DeferredBlock<Block> STRIPPED_BLACK_LOG = STRIPPED_COLORED_LOGS.black();
 
@@ -7125,13 +7148,13 @@ public class PastelBlocks {
         );
     }
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LOGS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("log"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredLogBlock(props, color, STRIPPED_COLORED_LOGS.pick(color).get()),
-                    color -> copyWithMapColor(OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LOGS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("log"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredLogBlock(props, color, STRIPPED_COLORED_LOGS.pick(color).get()),
+            color -> copyWithMapColor(OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
+        );
 
     public static final DeferredBlock<Block> BLACK_LOG = COLORED_LOGS.black();
 
@@ -7165,13 +7188,13 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> YELLOW_LOG = COLORED_LOGS.yellow();
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_WOODS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("wood"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredWoodBlock(props, color),
-                    color -> copyWithMapColor(OAK_WOOD, color.getDyeColor().orElseThrow().getMapColor())
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_WOODS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("wood"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredWoodBlock(props, color),
+            color -> copyWithMapColor(OAK_WOOD, color.getDyeColor().orElseThrow().getMapColor())
+        );
 
     public static final DeferredBlock<Block> BLACK_WOOD = COLORED_WOODS.black();
 
@@ -7205,13 +7228,13 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> YELLOW_WOOD = COLORED_WOODS.yellow();
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> STRIPPED_COLORED_WOODS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.NAMES.map(it -> "stripped_" + it + "_wood"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredStrippedWoodBlock(props, color),
-                    color -> copyWithMapColor(STRIPPED_OAK_WOOD, color.getDyeColor().orElseThrow().getMapColor())
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> STRIPPED_COLORED_WOODS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.NAMES.map(it -> "stripped_" + it + "_wood"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredStrippedWoodBlock(props, color),
+            color -> copyWithMapColor(STRIPPED_OAK_WOOD, color.getDyeColor().orElseThrow().getMapColor())
+        );
 
     public static final DeferredBlock<Block> STRIPPED_BLACK_WOOD = STRIPPED_COLORED_WOODS.black();
 
@@ -7245,13 +7268,13 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> STRIPPED_YELLOW_WOOD = STRIPPED_COLORED_WOODS.yellow();
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LEAVES =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("leaves"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredLeavesBlock(props, color),
-                    color -> copyWithMapColor(OAK_LEAVES, color.getDyeColor().orElseThrow().getMapColor())
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LEAVES = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("leaves"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredLeavesBlock(props, color),
+            color -> copyWithMapColor(OAK_LEAVES, color.getDyeColor().orElseThrow().getMapColor())
+        );
 
     public static final DeferredBlock<Block> BLACK_LEAVES = COLORED_LEAVES.black();
 
@@ -7285,19 +7308,17 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> YELLOW_LEAVES = COLORED_LEAVES.yellow();
 
-
-    public static final PastelInkColorCollection<DeferredBlock<Block>> GLOWBLOCKS =
-            PastelInkColorCollection.registerBlocks(
-                PastelInkColorCollection.prefixWithColor("glowblock"),
-                PastelBlocks::registerColoredBlock,
-                (color, props) -> new GlowBlock(props, color),
-                color ->
-                    settings(color.getDyeColor().orElseThrow().getMapColor(), SoundType.BASALT, 2.5f)
-                        .requiresCorrectToolForDrops()
-                        .lightLevel(state -> 1)
-                        .hasPostProcess(PastelBlocks::always)
-                        .emissiveRendering(PastelBlocks::always)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> GLOWBLOCKS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("glowblock"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new GlowBlock(props, color),
+            color -> settings(color.getDyeColor().orElseThrow().getMapColor(), SoundType.BASALT, 2.5f)
+                .requiresCorrectToolForDrops()
+                .lightLevel(state -> 1)
+                .hasPostProcess(PastelBlocks::always)
+                .emissiveRendering(PastelBlocks::always)
+        );
 
     public static final DeferredBlock<Block> BLACK_GLOWBLOCK = GLOWBLOCKS.black();
 
@@ -7332,48 +7353,48 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> YELLOW_GLOWBLOCK = GLOWBLOCKS.yellow();
 
     public static DeferredBlock<Block> registerColoredBlock(
-            InkColor color,
-            String name,
-            Function<BlockBehaviour.Properties, Block> constructor,
-            Supplier<BlockBehaviour.Properties> properties) {
+        InkColor color,
+        String name,
+        Function<BlockBehaviour.Properties, Block> constructor,
+        Supplier<BlockBehaviour.Properties> properties
+    ) {
         return register(
-                blockWithItem(
-                        name,
-                        () -> constructor.apply(properties.get()),
-                        color
-                )
+            blockWithItem(
+                name,
+                () -> constructor.apply(properties.get()),
+                color
+            )
         );
     }
-
 
     public static DeferredBlock<Block> registerColoredBlockNoItem(
-            InkColor color,
-            String name,
-            Function<BlockBehaviour.Properties, Block> constructor,
-            Supplier<BlockBehaviour.Properties> properties) {
+        InkColor color,
+        String name,
+        Function<BlockBehaviour.Properties, Block> constructor,
+        Supplier<BlockBehaviour.Properties> properties
+    ) {
         return register(
-                block(
-                        name,
-                        () -> constructor.apply(properties.get())
-                )
+            block(
+                name,
+                () -> constructor.apply(properties.get())
+            )
         );
     }
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LAMPS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("lamp"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new ColoredLightBlock(props, color),
-                    color ->
-                            Properties
-                                    .ofFullCopy(REDSTONE_LAMP)
-                                    .mapColor(
-                                            color
-                                                    .getDyeColor()
-                                                    .orElse(DyeColor.LIME)
-                                                    .getMapColor()
-                                    )
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_LAMPS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("lamp"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredLightBlock(props, color),
+            color -> Properties
+                .ofFullCopy(REDSTONE_LAMP)
+                .mapColor(
+                    color
+                        .getDyeColor()
+                        .orElse(DyeColor.LIME)
+                        .getMapColor()
+                )
+        );
 
     public static final DeferredBlock<Block> BLACK_LAMP = COLORED_LAMPS.pick(InkColors.BLACK);
 
@@ -7407,14 +7428,13 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> YELLOW_LAMP = COLORED_LAMPS.pick(InkColors.YELLOW);
 
-
-    public static final PastelInkColorCollection<DeferredBlock<Block>> PIGMENT_BLOCKS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("block"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new PigmentBlock(props, color),
-                    color -> settings(color.getDyeColor().orElse(DyeColor.LIME).getMapColor(), SoundType.WOOL, 1.0F)
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> PIGMENT_BLOCKS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("block"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new PigmentBlock(props, color),
+            color -> settings(color.getDyeColor().orElse(DyeColor.LIME).getMapColor(), SoundType.WOOL, 1.0F)
+        );
 
     public static final DeferredBlock<Block> BLACK_BLOCK = PIGMENT_BLOCKS.black();
 
@@ -7448,20 +7468,20 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> YELLOW_BLOCK = PIGMENT_BLOCKS.yellow();
 
-
-    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SPORE_BLOSSOMS =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("spore_blossom"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) ->
-                        new ColoredSporeBlossomBlock(
-                                props,
-                                color,
-                                ColoredFallingSporeBlossomParticleEffect.VALUES.pick(color),
-                                ColoredSporeBlossomAirParticleEffect.VALUES.pick(color)),
-                    color ->
-                        Properties.ofFullCopy(SPORE_BLOSSOM).mapColor(color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> COLORED_SPORE_BLOSSOMS = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("spore_blossom"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new ColoredSporeBlossomBlock(
+                props,
+                color,
+                ColoredFallingSporeBlossomParticleEffect.VALUES.pick(color),
+                ColoredSporeBlossomAirParticleEffect.VALUES.pick(color)
+            ),
+            color -> Properties
+                .ofFullCopy(SPORE_BLOSSOM)
+                .mapColor(color.getDyeColor().orElse(DyeColor.LIME).getMapColor())
+        );
 
     public static final DeferredBlock<Block> BLACK_SPORE_BLOSSOM = COLORED_SPORE_BLOSSOMS.black();
 
@@ -8240,13 +8260,13 @@ public class PastelBlocks {
         )
     );
 
-    public static final PastelInkColorCollection<DeferredBlock<Block>> CHISELED_PRESERVATION_STONES =
-            PastelInkColorCollection.registerBlocks(
-                    PastelInkColorCollection.prefixWithColor("chiseled_preservation_stone"),
-                    PastelBlocks::registerColoredBlock,
-                    (color, props) -> new Block(props),
-                    color -> preservationBlock()
-            );
+    public static final PastelInkColorCollection<DeferredBlock<Block>> CHISELED_PRESERVATION_STONES = PastelInkColorCollection
+        .registerBlocks(
+            PastelInkColorCollection.prefixWithColor("chiseled_preservation_stone"),
+            PastelBlocks::registerColoredBlock,
+            (color, props) -> new Block(props),
+            color -> preservationBlock()
+        );
 
     public static final DeferredBlock<Block> BLACK_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.black();
 
@@ -8260,13 +8280,16 @@ public class PastelBlocks {
 
     public static final DeferredBlock<Block> GREEN_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.green();
 
-    public static final DeferredBlock<Block> LIGHT_BLUE_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.lightBlue();
+    public static final DeferredBlock<Block> LIGHT_BLUE_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES
+        .lightBlue();
 
-    public static final DeferredBlock<Block> LIGHT_GRAY_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.lightGray();
+    public static final DeferredBlock<Block> LIGHT_GRAY_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES
+        .lightGray();
 
     public static final DeferredBlock<Block> LIME_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.lime();
 
-    public static final DeferredBlock<Block> MAGENTA_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.magenta();
+    public static final DeferredBlock<Block> MAGENTA_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES
+        .magenta();
 
     public static final DeferredBlock<Block> ORANGE_CHISELED_PRESERVATION_STONE = CHISELED_PRESERVATION_STONES.orange();
 

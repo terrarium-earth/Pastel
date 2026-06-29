@@ -15,8 +15,11 @@ import java.util.List;
 
 public final class CinderhearthRecipeBuilder extends GatedRecipeBuilder<CinderhearthRecipeBuilder> {
     private final SizedIngredient input;
+
     private float experience = 0.0f;
+
     private final List<Tuple<ItemStack, Float>> resultsWithChance = new ArrayList<>();
+
     private final int time;
 
     private CinderhearthRecipeBuilder(SizedIngredient input, int time) {
@@ -63,18 +66,17 @@ public final class CinderhearthRecipeBuilder extends GatedRecipeBuilder<Cinderhe
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
 
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new CinderhearthRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                this.input,
-                                this.time,
-                                this.experience,
-                                this.resultsWithChance
-                        )
+            recipeOutput,
+            id,
+            daId -> new CinderhearthRecipe(
+                this.group,
+                this.secret,
+                daId,
+                this.input,
+                this.time,
+                this.experience,
+                this.resultsWithChance
+            )
         );
     }
 }

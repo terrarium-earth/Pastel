@@ -15,7 +15,10 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
@@ -101,7 +104,10 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
     @Override
     public boolean isIncomplete() {
         var ingredients = this.getIngredients();
-        return ingredients.isEmpty() || ingredients.stream().filter(it -> !it.isEmpty()).anyMatch(Ingredient::hasNoItems);
+        return ingredients.isEmpty() || ingredients
+            .stream()
+            .filter(it -> !it.isEmpty())
+            .anyMatch(Ingredient::hasNoItems);
     }
 
     @Override

@@ -29,10 +29,12 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
             "",
             false,
             Optional.of(PastelCommon.locate("unlocks/memory_to_head")),
-            SizedIngredient.of(
+            SizedIngredient
+                .of(
                     PastelBlocks.MEMORY
                         .get()
-                        .asItem(), 1
+                        .asItem(),
+                    1
                 ),
             SizedIngredient.of(PastelItems.VEGETAL.get(), 4),
             SizedIngredient.of(PastelItems.QUITOXIC_POWDER.get(), 4),

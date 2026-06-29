@@ -41,15 +41,17 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 
-    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList.of(
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList
+        .of(
             SizedIngredient
                 .of(
                     PastelBlocks.JADEITE_LOTUS_BULB
                         .get()
-                        .asItem(), 1
+                        .asItem(),
+                    1
                 ),
             SizedIngredient.of(PastelItems.JADEITE_PETALS.get(), 3)
-    );
+        );
 
     public AquaRegiaRecipe() {
         super(

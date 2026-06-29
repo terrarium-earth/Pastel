@@ -20,7 +20,6 @@ import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class ShootingStarHardeningRecipe extends FusionShrineRecipe {

@@ -12,8 +12,8 @@ import java.util.function.Function;
 
 public abstract class GatedRecipeBuilder<C extends GatedRecipeBuilder<C>> extends SimpleRecipeBuilder<C> {
     protected boolean secret = false;
-    @Nullable
-    private ResourceLocation requiredAdvancementIdentifier;
+
+    @Nullable private ResourceLocation requiredAdvancementIdentifier;
 
     public GatedRecipeBuilder(ItemStack result) {
         super(result);
@@ -33,7 +33,11 @@ public abstract class GatedRecipeBuilder<C extends GatedRecipeBuilder<C>> extend
         return Optional.ofNullable(this.requiredAdvancementIdentifier);
     }
 
-    protected void saveHelperGated(RecipeOutput ctx, ResourceLocation id, Function<Optional<ResourceLocation>, Recipe<?>> recipeMaker) {
+    protected void saveHelperGated(
+        RecipeOutput ctx,
+        ResourceLocation id,
+        Function<Optional<ResourceLocation>, Recipe<?>> recipeMaker
+    ) {
         if (!this.criteria.isEmpty() && this.requiredAdvancementIdentifier != null) {
             throw new IllegalStateException("Required Advancement Identifier and Criteria are mutually exclusive!");
         }

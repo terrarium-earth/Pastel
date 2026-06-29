@@ -15,18 +15,23 @@ import java.util.Optional;
 
 public final class AnvilCrushingRecipeBuilder extends GatedRecipeBuilder<AnvilCrushingRecipeBuilder> {
     private final Ingredient input;
+
     private final float crushedItemsPerPointOfDamage;
-    @Nullable
-    private ResourceLocation particleEffectIdentifier;
+
+    @Nullable private ResourceLocation particleEffectIdentifier;
+
     private int particleCount = 1;
+
     private final ResourceLocation soundEventIdentifier;
+
     private float experience = 0.0f;
 
     private AnvilCrushingRecipeBuilder(
-            ItemStack result,
-            Ingredient input,
-            float crushedItemsPerPointOfDamage,
-            ResourceLocation soundEventIdentifier) {
+        ItemStack result,
+        Ingredient input,
+        float crushedItemsPerPointOfDamage,
+        ResourceLocation soundEventIdentifier
+    ) {
         super(result);
         this.input = input;
         this.crushedItemsPerPointOfDamage = crushedItemsPerPointOfDamage;
@@ -34,24 +39,22 @@ public final class AnvilCrushingRecipeBuilder extends GatedRecipeBuilder<AnvilCr
     }
 
     public static AnvilCrushingRecipeBuilder of(
-            ItemStack result,
-            Ingredient input,
-            float crushedItemsPerPointOfDamage,
-            ResourceLocation soundEventIdentifier
+        ItemStack result,
+        Ingredient input,
+        float crushedItemsPerPointOfDamage,
+        ResourceLocation soundEventIdentifier
     ) {
         return new AnvilCrushingRecipeBuilder(result, input, crushedItemsPerPointOfDamage, soundEventIdentifier);
     }
 
     public static AnvilCrushingRecipeBuilder of(
-            ItemStack result,
-            Ingredient input,
-            float crushedItemsPerPointOfDamage,
-            SoundEvent soundEvent
+        ItemStack result,
+        Ingredient input,
+        float crushedItemsPerPointOfDamage,
+        SoundEvent soundEvent
     ) {
         return of(result, input, crushedItemsPerPointOfDamage, soundEvent.getLocation());
     }
-
-
 
     public AnvilCrushingRecipeBuilder particleCount(int particleCount) {
         this.particleCount = particleCount;
@@ -79,19 +82,22 @@ public final class AnvilCrushingRecipeBuilder extends GatedRecipeBuilder<AnvilCr
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        this.saveHelperGated(recipeOutput, id, daId ->
-                new AnvilCrushingRecipe(
-                        this.group,
-                        this.secret,
-                        daId,
-                        this.input,
-                        this.result,
-                        this.crushedItemsPerPointOfDamage,
-                        this.experience,
-                        Optional.ofNullable(this.particleEffectIdentifier),
-                        this.particleCount,
-                        this.soundEventIdentifier
+        this
+            .saveHelperGated(
+                recipeOutput,
+                id,
+                daId -> new AnvilCrushingRecipe(
+                    this.group,
+                    this.secret,
+                    daId,
+                    this.input,
+                    this.result,
+                    this.crushedItemsPerPointOfDamage,
+                    this.experience,
+                    Optional.ofNullable(this.particleEffectIdentifier),
+                    this.particleCount,
+                    this.soundEventIdentifier
                 )
-        );
+            );
     }
 }

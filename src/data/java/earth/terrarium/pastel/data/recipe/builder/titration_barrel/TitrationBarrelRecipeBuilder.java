@@ -25,22 +25,28 @@ import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<TitrationBarrelRecipeBuilder> {
     private final NonNullList<SizedIngredient> ingredients = NonNullList.create();
+
     private final FluidIngredient fluid;
+
     private final String defaultName;
+
     private Item item = Items.AIR;
+
     private int minFermentationTimeHours = 24;
+
     private float fermentationSpeedMod = 1f;
+
     private float angelsSharePercentPerMcDay = 0.1f;
+
     private final List<FermentationStatusEffectEntry> statusEffectEntries = new ArrayList<>();
 
     public TitrationBarrelRecipeBuilder(
-            String name,
-            FluidIngredient fluid,
-            ItemStack result
+        String name,
+        FluidIngredient fluid,
+        ItemStack result
     ) {
         super(result);
         this.fluid = fluid;
@@ -48,15 +54,15 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
     }
 
     public TitrationBarrelRecipeBuilder(
-            FluidIngredient fluid,
-            ItemStack result
+        FluidIngredient fluid,
+        ItemStack result
     ) {
         this(nameFromResult(result.getItem()), fluid, result);
     }
 
     public TitrationBarrelRecipeBuilder(
-            Fluid fluid,
-            ItemStack result
+        Fluid fluid,
+        ItemStack result
     ) {
         this(FluidIngredient.of(fluid), result);
     }
@@ -66,12 +72,24 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
         return this.defaultName;
     }
 
-    public static TitrationBarrelRecipeBuilder infusedBeverage(Fluid fluid, InfusedBeverageComponent component, int count) {
+    public static TitrationBarrelRecipeBuilder infusedBeverage(
+        Fluid fluid,
+        InfusedBeverageComponent component,
+        int count
+    ) {
         return infusedBeverage(FluidIngredient.of(fluid), component, count);
     }
 
-    public static TitrationBarrelRecipeBuilder infusedBeverage(FluidIngredient fluid, InfusedBeverageComponent component, int count) {
-        var stack = new ItemStack(PastelItems.INFUSED_BEVERAGE, count, DataComponentPatch.builder().set(PastelDataComponentTypes.INFUSED_BEVERAGE, component).build());
+    public static TitrationBarrelRecipeBuilder infusedBeverage(
+        FluidIngredient fluid,
+        InfusedBeverageComponent component,
+        int count
+    ) {
+        var stack = new ItemStack(
+            PastelItems.INFUSED_BEVERAGE,
+            count,
+            DataComponentPatch.builder().set(PastelDataComponentTypes.INFUSED_BEVERAGE, component).build()
+        );
 
         return new TitrationBarrelRecipeBuilder(component.variant(), fluid, stack);
     }
@@ -125,7 +143,6 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
         return this;
     }
 
-
     public FermentationStatusEffectEntryBuilderForBarrel statusEffect(Holder<MobEffect> effect, int baseDuration) {
         return new FermentationStatusEffectEntryBuilderForBarrel(effect, baseDuration);
     }
@@ -135,11 +152,12 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
         return this;
     }
 
-    public final class FermentationStatusEffectEntryBuilderForBarrel extends FermentationStatusEffectEntryBuilder<FermentationStatusEffectEntryBuilderForBarrel> {
+    public final class FermentationStatusEffectEntryBuilderForBarrel extends
+        FermentationStatusEffectEntryBuilder<FermentationStatusEffectEntryBuilderForBarrel> {
 
         public FermentationStatusEffectEntryBuilderForBarrel(
-                Holder<MobEffect> statusEffect,
-                int baseDuration
+            Holder<MobEffect> statusEffect,
+            int baseDuration
         ) {
             super(statusEffect, baseDuration);
         }
@@ -153,20 +171,23 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new TitrationBarrelRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                this.ingredients,
-                                this.fluid,
-                                this.result,
-                                this.item,
-                                this.minFermentationTimeHours,
-                                new FermentationData(this.fermentationSpeedMod, this.angelsSharePercentPerMcDay, this.statusEffectEntries)
-                        )
+            recipeOutput,
+            id,
+            daId -> new TitrationBarrelRecipe(
+                this.group,
+                this.secret,
+                daId,
+                this.ingredients,
+                this.fluid,
+                this.result,
+                this.item,
+                this.minFermentationTimeHours,
+                new FermentationData(
+                    this.fermentationSpeedMod,
+                    this.angelsSharePercentPerMcDay,
+                    this.statusEffectEntries
+                )
+            )
         );
     }
 }

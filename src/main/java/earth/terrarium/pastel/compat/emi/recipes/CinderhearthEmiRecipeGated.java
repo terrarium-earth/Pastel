@@ -21,7 +21,8 @@ public class CinderhearthEmiRecipeGated extends GatedSpectrumEmiRecipe<Cinderhea
             .map(
                 s -> EmiIngredient
                     .of(
-                        Arrays.stream(s.getItems())
+                        Arrays
+                            .stream(s.getItems())
                             .map(EmiStack::of)
                             .toList()
                     )

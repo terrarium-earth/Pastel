@@ -13,21 +13,31 @@ import java.util.Optional;
 
 public final class PotionWorkshopBrewingBuilder extends PotionWorkshopRecipeBuilder<PotionWorkshopBrewingBuilder> {
     boolean applicableToPotions = true;
+
     boolean applicableToTippedArrows = true;
+
     boolean applicableToPotionFillables = true;
+
     boolean applicableToWeapons = true;
+
     int baseDurationTicks = 1600;
+
     float baseYield = (float) PotionWorkshopBrewingRecipe.BASE_POTION_COUNT_ON_BREWING;
+
     int potencyHardCap = -1;
+
     float potencyModifier = 1f;
+
     final Holder<MobEffect> statusEffect;
+
     final InkColor inkColor;
+
     final int inkCost;
 
     public PotionWorkshopBrewingBuilder(
-            Holder<MobEffect> statusEffect,
-            InkColor inkColor,
-            int inkCost
+        Holder<MobEffect> statusEffect,
+        InkColor inkColor,
+        int inkCost
     ) {
         super(ItemStack.EMPTY);
         this.statusEffect = statusEffect;
@@ -83,31 +93,33 @@ public final class PotionWorkshopBrewingBuilder extends PotionWorkshopRecipeBuil
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         var effect = new PotionRecipeEffect(
-                applicableToPotions,
-                applicableToTippedArrows,
-                applicableToPotionFillables,
-                applicableToWeapons,
-                baseDurationTicks,
-                baseYield,
-                potencyHardCap,
-                potencyModifier,
-                statusEffect,
-                inkColor,
-                inkCost
+            applicableToPotions,
+            applicableToTippedArrows,
+            applicableToPotionFillables,
+            applicableToWeapons,
+            baseDurationTicks,
+            baseYield,
+            potencyHardCap,
+            potencyModifier,
+            statusEffect,
+            inkColor,
+            inkCost
         );
 
-        saveHelperGated(recipeOutput, id, daId ->
-                new PotionWorkshopBrewingRecipe(
-                        this.group,
-                        this.secret,
-                        daId,
-                        // nothing overrides the crafting time?
-                        200,
-                        this.ingredient1,
-                        Optional.ofNullable(this.ingredient2),
-                        Optional.ofNullable(this.ingredient3),
-                        effect
-                )
+        saveHelperGated(
+            recipeOutput,
+            id,
+            daId -> new PotionWorkshopBrewingRecipe(
+                this.group,
+                this.secret,
+                daId,
+                // nothing overrides the crafting time?
+                200,
+                this.ingredient1,
+                Optional.ofNullable(this.ingredient2),
+                Optional.ofNullable(this.ingredient3),
+                effect
+            )
         );
     }
 }

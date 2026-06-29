@@ -10,14 +10,18 @@ import java.util.Optional;
 
 public final class PotionWorkshopCraftingBuilder extends PotionWorkshopRecipeBuilder<PotionWorkshopCraftingBuilder> {
     private final SizedIngredient baseIngredient;
+
     private boolean consumeBaseIngredient = true;
+
     private int requiredExperience = 0;
+
     private int color = 0;
+
     private int craftingTime = 200;
 
     public PotionWorkshopCraftingBuilder(
-            SizedIngredient baseIngredient,
-            ItemStack result
+        SizedIngredient baseIngredient,
+        ItemStack result
     ) {
         super(result);
         this.baseIngredient = baseIngredient;
@@ -36,23 +40,22 @@ public final class PotionWorkshopCraftingBuilder extends PotionWorkshopRecipeBui
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId ->
-                        new PotionWorkshopCraftingRecipe(
-                                this.group,
-                                this.secret,
-                                daId,
-                                this.craftingTime,
-                                this.color,
-                                this.ingredient1,
-                                Optional.ofNullable(this.ingredient2),
-                                Optional.ofNullable(this.ingredient3),
-                                baseIngredient,
-                                consumeBaseIngredient,
-                                this.requiredExperience,
-                                this.result
-                        )
+            recipeOutput,
+            id,
+            daId -> new PotionWorkshopCraftingRecipe(
+                this.group,
+                this.secret,
+                daId,
+                this.craftingTime,
+                this.color,
+                this.ingredient1,
+                Optional.ofNullable(this.ingredient2),
+                Optional.ofNullable(this.ingredient3),
+                baseIngredient,
+                consumeBaseIngredient,
+                this.requiredExperience,
+                this.result
+            )
         );
     }
 

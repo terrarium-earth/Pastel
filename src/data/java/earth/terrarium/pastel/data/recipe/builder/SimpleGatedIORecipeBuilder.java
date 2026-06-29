@@ -19,13 +19,19 @@ public final class SimpleGatedIORecipeBuilder extends GatedIORecipe<SimpleGatedI
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         saveHelperGated(
-                recipeOutput,
-                id,
-                daId -> constructor.make(this.group, this.secret, daId, this.input, this.result)
+            recipeOutput,
+            id,
+            daId -> constructor.make(this.group, this.secret, daId, this.input, this.result)
         );
     }
 
     public interface Constructor {
-        Recipe<?> make(String group, boolean secret, Optional<ResourceLocation> requiredAdvancement, Ingredient input, ItemStack output);
+        Recipe<?> make(
+            String group,
+            boolean secret,
+            Optional<ResourceLocation> requiredAdvancement,
+            Ingredient input,
+            ItemStack output
+        );
     }
 }
