@@ -5,7 +5,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.CustomPotionDataComponent;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
@@ -17,7 +16,6 @@ import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -37,6 +35,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -113,9 +112,9 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
         boolean secret,
         Optional<ResourceLocation> requiredAdvancementIdentifier,
         int craftingTime,
-        IngredientStack ingredient1,
-        IngredientStack ingredient2,
-        IngredientStack ingredient3,
+        SizedIngredient ingredient1,
+        Optional<SizedIngredient> ingredient2,
+        Optional<SizedIngredient> ingredient3,
         PotionRecipeEffect recipeData
     ) {
 
@@ -195,11 +194,11 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
-        NonNullList<IngredientStack> defaultedList = NonNullList.create();
-        defaultedList.add(IngredientStack.ofItems(PastelItems.MERMAIDS_GEM.get()));
-        defaultedList.add(IngredientStack.ofItems(Items.GLASS_BOTTLE));
-        addIngredientStacks(defaultedList);
+    public List<SizedIngredient> getSizedIngredients() {
+        List<SizedIngredient> defaultedList = new ArrayList<>();
+        defaultedList.add(SizedIngredient.of(PastelItems.MERMAIDS_GEM, 1));
+        defaultedList.add(SizedIngredient.of(Items.GLASS_BOTTLE, 1));
+        addSizedIngredients(defaultedList);
         return defaultedList;
     }
 
@@ -648,14 +647,14 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
                         Codec.INT
                             .optionalFieldOf("time", 200)
                             .forGetter(c -> c.craftingTime),
-                        IngredientStack.CODEC
+                        SizedIngredient.NESTED_CODEC
                             .fieldOf("ingredient1")
                             .forGetter(c -> c.ingredient1),
-                        IngredientStack.CODEC
-                            .optionalFieldOf("ingredient2", IngredientStack.EMPTY)
+                        SizedIngredient.NESTED_CODEC
+                            .optionalFieldOf("ingredient2")
                             .forGetter(c -> c.ingredient2),
-                        IngredientStack.CODEC
-                            .optionalFieldOf("ingredient3", IngredientStack.EMPTY)
+                        SizedIngredient.NESTED_CODEC
+                            .optionalFieldOf("ingredient3")
                             .forGetter(c -> c.ingredient3),
                         PotionRecipeEffect.CODEC.forGetter(c -> c.recipeData)
                     )
@@ -675,11 +674,11 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
                 c -> c.requiredAdvancementIdentifier,
                 ByteBufCodecs.VAR_INT,
                 c -> c.craftingTime,
-                IngredientStack.STREAM_CODEC,
+                SizedIngredient.STREAM_CODEC,
                 c -> c.ingredient1,
-                IngredientStack.STREAM_CODEC,
+                ByteBufCodecs.optional(SizedIngredient.STREAM_CODEC),
                 c -> c.ingredient2,
-                IngredientStack.STREAM_CODEC,
+                ByteBufCodecs.optional(SizedIngredient.STREAM_CODEC),
                 c -> c.ingredient3,
                 PotionRecipeEffect.STREAM_CODEC,
                 c -> c.recipeData,

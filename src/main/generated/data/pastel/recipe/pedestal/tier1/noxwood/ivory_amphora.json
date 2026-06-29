@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "group": "noxwood_amphoras",
+  "key": {
+    "A": {
+      "item": "minecraft:paper"
+    },
+    "I": {
+      "item": "minecraft:quartz"
+    },
+    "P": {
+      "item": "pastel:ivory_noxwood_planks"
+    },
+    "S": {
+      "item": "pastel:ivory_noxwood_slab"
+    }
+  },
+  "pattern": [
+    "SAS",
+    "I I",
+    "PSP"
+  ],
+  "required_advancement": "pastel:lategame/collect_noxwood",
+  "result": {
+    "count": 1,
+    "id": "pastel:ivory_noxwood_amphora"
+  },
+  "time": 240
+}

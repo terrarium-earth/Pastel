@@ -1,22 +1,21 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 public class CheongRecipe extends TitrationBarrelRecipe {
@@ -29,12 +28,11 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 
     public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(PastelItems.MERMAIDS_JAM.get(), 4);
 
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
-        {
-            add(IngredientStack.ofTag(PastelItemTags.FRUITS, 8));
-            add(IngredientStack.ofItems(Items.SUGAR, 16));
-        }
-    };
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList
+        .of(
+            SizedIngredient.of(PastelItemTags.FRUITS, 8),
+            SizedIngredient.of(Items.SUGAR, 16)
+        );
 
     public CheongRecipe() {
         super(

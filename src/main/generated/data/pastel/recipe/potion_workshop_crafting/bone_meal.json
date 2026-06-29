@@ -1,0 +1,34 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:vegetal"
+    }
+  },
+  "color": 15852761,
+  "ingredient1": {
+    "count": 2,
+    "ingredient": {
+      "item": "pastel:ash_flakes"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:fissure_plum"
+    }
+  },
+  "ingredient3": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:milky_resin"
+    }
+  },
+  "required_advancement": "pastel:unlocks/resources/fertilizer",
+  "result": {
+    "count": 24,
+    "id": "minecraft:bone_meal"
+  },
+  "use_up_base_ingredient": false
+}

@@ -2,7 +2,6 @@ package earth.terrarium.pastel.compat.modonomicon.client.pages;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
@@ -13,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public class BookFusionShrineCraftingPageRenderer
         renderTitle(drawContext, recipeY, second);
 
         // the ingredients
-        List<IngredientStack> ingredients = recipe.getIngredientStacks();
+        List<SizedIngredient> ingredients = recipe.getSizedIngredients();
         int startX = Math.max(-10, 30 - ingredients.size() * 8);
         for (
             int i = 0;
@@ -63,7 +63,7 @@ public class BookFusionShrineCraftingPageRenderer
             i++
         ) {
             ModonomiconHelper
-                .renderIngredientStack(
+                .renderSizedIngredient(
                     drawContext,
                     parentScreen,
                     recipeX + startX + i * 16,

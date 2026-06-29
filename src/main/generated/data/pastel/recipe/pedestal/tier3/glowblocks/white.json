@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 6
+  },
+  "experience": 1.0,
+  "group": "glowblocks",
+  "key": {
+    "P": {
+      "item": "pastel:white_pigment"
+    },
+    "Q": {
+      "item": "pastel:quitoxic_powder"
+    }
+  },
+  "pattern": [
+    "PQP",
+    "QPQ",
+    "PQP"
+  ],
+  "required_advancement": "pastel:unlocks/glowblocks/white_glowblock",
+  "result": {
+    "count": 4,
+    "id": "pastel:white_glowblock"
+  },
+  "tier": "complex"
+}

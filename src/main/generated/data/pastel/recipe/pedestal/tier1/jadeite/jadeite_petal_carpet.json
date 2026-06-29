@@ -1,0 +1,19 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "group": "jadeite_decorations",
+  "key": {
+    "X": {
+      "item": "pastel:jadeite_petal_block"
+    }
+  },
+  "pattern": [
+    "XX"
+  ],
+  "required_advancement": "pastel:hidden/collect_jadeite",
+  "result": {
+    "count": 3,
+    "id": "pastel:jadeite_petal_carpet"
+  },
+  "time": 40
+}

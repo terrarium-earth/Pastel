@@ -1,0 +1,31 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.8,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "minecraft:quartz_bricks"
+    },
+    {
+      "item": "minecraft:quartz_pillar"
+    },
+    {
+      "item": "minecraft:quartz_stairs"
+    },
+    {
+      "item": "minecraft:smooth_quartz"
+    },
+    {
+      "item": "minecraft:smooth_quartz_stairs"
+    },
+    {
+      "item": "minecraft:chiseled_quartz_block"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 2,
+    "id": "minecraft:quartz"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

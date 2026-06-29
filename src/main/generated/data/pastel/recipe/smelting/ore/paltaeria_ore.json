@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.2,
+  "ingredient": {
+    "item": "pastel:paltaeria_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:paltaeria_fragments"
+  }
+}

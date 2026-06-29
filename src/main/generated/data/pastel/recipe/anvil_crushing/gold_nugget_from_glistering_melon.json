@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 3.0,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "pastel:glistering_melon"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 12,
+    "id": "minecraft:gold_nugget"
+  },
+  "soundEventIdentifier": "minecraft:block.wood.break"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.6,
+  "experience": 0.4,
+  "group": "gemstone_crushing",
+  "ingredient": {
+    "item": "pastel:citrine_shard"
+  },
+  "particleEffectIdentifier": "minecraft:explosion",
+  "required_advancement": "pastel:hidden/collect_shards/citrine",
+  "result": {
+    "count": 2,
+    "id": "pastel:citrine_powder"
+  },
+  "soundEventIdentifier": "pastel:block.small_citrine_bud.break"
+}

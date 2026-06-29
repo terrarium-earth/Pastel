@@ -27,7 +27,7 @@ public class SpiritInstillingDisplay extends PastelDisplay {
     public SpiritInstillingDisplay(@NotNull RecipeHolder<SpiritInstillerRecipe> recipe) {
         super(
             recipe,
-            REIHelper.toEntryIngredients(recipe.value().getIngredientStacks()),
+            REIHelper.toEntryIngredientsSized(recipe.value().getSizedIngredients()),
             Collections.singletonList(buildOutput(recipe.value()))
         );
         this.experience = recipe.value().getExperience();

@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "group": "gemstone_glass",
+  "key": {
+    "G": {
+      "item": "pastel:moonstone_glass"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "required_advancement": "pastel:lategame/collect_moonstone",
+  "result": {
+    "count": 16,
+    "id": "pastel:moonstone_glass_pane"
+  },
+  "tier": "complex",
+  "time": 20
+}

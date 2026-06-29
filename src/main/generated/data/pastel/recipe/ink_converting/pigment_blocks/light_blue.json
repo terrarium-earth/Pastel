@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 900,
+  "ingredient": {
+    "item": "pastel:light_blue_block"
+  },
+  "ink_color": "pastel:light_blue",
+  "required_advancement": "pastel:hidden/collect_pigment/light_blue"
+}

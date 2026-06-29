@@ -1,0 +1,38 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:magenta": 6,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "P": {
+      "tag": "pastel:pigments"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "pastel:star_fragment"
+    },
+    "X": {
+      "item": "pastel:polished_calcite"
+    },
+    "Y": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "PXP",
+    "YRY"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/particle_spawner",
+  "result": {
+    "count": 1,
+    "id": "pastel:particle_spawner"
+  },
+  "tier": "simple",
+  "time": 300
+}

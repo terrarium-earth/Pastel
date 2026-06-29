@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.25,
+  "key": {
+    "A": {
+      "item": "minecraft:spider_eye"
+    },
+    "Q": {
+      "item": "pastel:quitoxic_powder"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " S ",
+    "QAQ",
+    " S "
+  ],
+  "required_advancement": "pastel:collect_quitoxic_reeds",
+  "result": {
+    "count": 2,
+    "id": "minecraft:cobweb"
+  },
+  "time": 40
+}

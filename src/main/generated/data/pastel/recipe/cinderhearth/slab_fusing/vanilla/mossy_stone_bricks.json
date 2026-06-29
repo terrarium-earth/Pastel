@@ -1,0 +1,19 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "ingredient": {
+      "item": "minecraft:mossy_stone_brick_slab"
+    }
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "minecraft:mossy_stone_bricks"
+      }
+    }
+  ],
+  "time": 100
+}

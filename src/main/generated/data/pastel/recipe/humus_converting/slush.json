@@ -1,0 +1,11 @@
+{
+  "type": "pastel:humus_converting",
+  "ingredient": {
+    "item": "pastel:ash"
+  },
+  "required_advancement": "pastel:hidden/collect_ash_and_slush",
+  "result": {
+    "count": 1,
+    "id": "pastel:slush"
+  }
+}

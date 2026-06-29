@@ -3,7 +3,6 @@ package earth.terrarium.pastel.helpers.interaction;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.ItemStorage;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.items.armor.CrystalArmorItem;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Tuple;
@@ -13,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -343,21 +343,21 @@ public class InventoryHelper {
     }
 
     // TODO: lots of code overlap with hasInInventory()
-    public static boolean hasIngredientStacksInInventory(
-        List<IngredientStack> ingredients,
+    public static boolean hasSizedIngredientsInInventory(
+        List<SizedIngredient> ingredients,
         IItemHandlerModifiable inventory
     ) {
         List<Ingredient> ingredientsToFind = new ArrayList<>();
         List<Integer> requiredIngredientAmounts = new ArrayList<>();
         for (
-            IngredientStack ingredient : ingredients
+            SizedIngredient ingredient : ingredients
         ) {
-            if (ingredient.isEmpty()) {
+            if (ingredient == null) {
                 continue;
             }
 
-            ingredientsToFind.add(ingredient.getIngredient());
-            requiredIngredientAmounts.add(ingredient.getCount());
+            ingredientsToFind.add(ingredient.ingredient());
+            requiredIngredientAmounts.add(ingredient.count());
         }
 
         for (
@@ -532,8 +532,8 @@ public class InventoryHelper {
 
     // return are the recipe remainders
     // TODO lots of code overlap with removeFromInventoryWithRemainders()
-    public static List<ItemStack> removeIngredientStacksFromInventoryWithRemainders(
-        List<IngredientStack> ingredients,
+    public static List<ItemStack> removeSizedIngredientsFromInventoryWithRemainders(
+        List<SizedIngredient> ingredients,
         IItemHandlerModifiable inventory
     ) {
         List<ItemStack> remainders = new ArrayList<>();
@@ -541,14 +541,14 @@ public class InventoryHelper {
         List<Ingredient> requiredIngredients = new ArrayList<>();
         List<Integer> requiredIngredientAmounts = new ArrayList<>();
         for (
-            IngredientStack ingredient : ingredients
+            SizedIngredient ingredient : ingredients
         ) {
-            if (ingredient.isEmpty()) {
+            if (ingredient == null) {
                 continue;
             }
 
-            requiredIngredients.add(ingredient.getIngredient());
-            requiredIngredientAmounts.add(ingredient.getCount());
+            requiredIngredients.add(ingredient.ingredient());
+            requiredIngredientAmounts.add(ingredient.count());
         }
 
         for (

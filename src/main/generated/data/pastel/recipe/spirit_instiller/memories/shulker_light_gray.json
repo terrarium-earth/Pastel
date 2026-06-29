@@ -1,0 +1,38 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "ingredient": {
+      "tag": "pastel:memory_bonding_agents"
+    }
+  },
+  "experience": 4.0,
+  "group": "memories",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:shulker_light_gray_head"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:popped_chorus_fruit"
+    }
+  },
+  "required_advancement": "pastel:unlocks/blocks/memories",
+  "result": {
+    "components": {
+      "minecraft:entity_data": {
+        "Color": 8,
+        "id": "minecraft:shulker"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 16
+      }
+    },
+    "count": 1,
+    "id": "pastel:memory"
+  },
+  "time": 800
+}

@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 4
+  },
+  "experience": 1.0,
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "GGG",
+    "G G"
+  ],
+  "required_advancement": "pastel:build_basic_pedestal_structure",
+  "result": {
+    "count": 1,
+    "id": "minecraft:bell"
+  },
+  "tier": "simple",
+  "time": 120
+}

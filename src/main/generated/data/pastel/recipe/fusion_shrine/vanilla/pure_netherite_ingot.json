@@ -1,0 +1,33 @@
+{
+  "type": "pastel:fusion_shrine",
+  "during_crafting_effects": [
+    "pastel:nothing",
+    "pastel:visual_explosions_on_shrine"
+  ],
+  "experience": 1.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:dragonrot"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_netherite_scrap"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_gold"
+      }
+    }
+  ],
+  "required_advancement": "pastel:lategame/collect_pure_resource",
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherite_ingot"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 1200
+}

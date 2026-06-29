@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "group": "noxwood_lanterns",
+  "key": {
+    "C": {
+      "item": "pastel:slate_noxcap_block"
+    },
+    "G": {
+      "item": "pastel:slate_noxcap_gills"
+    },
+    "H": {
+      "item": "pastel:shimmerstone_gem"
+    },
+    "I": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "S": {
+      "item": "pastel:slate_noxwood_slab"
+    }
+  },
+  "pattern": [
+    " S ",
+    "GHG",
+    "CIC"
+  ],
+  "required_advancement": "pastel:lategame/collect_noxwood",
+  "result": {
+    "count": 1,
+    "id": "pastel:slate_noxwood_lantern"
+  },
+  "time": 240
+}

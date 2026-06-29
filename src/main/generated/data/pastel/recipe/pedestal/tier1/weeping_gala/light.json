@@ -1,0 +1,25 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "group": "weeping_gala_deco",
+  "key": {
+    "P": {
+      "item": "pastel:weeping_gala_planks"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_block"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "SSS",
+    "PPP"
+  ],
+  "required_advancement": "pastel:hidden/collect_weeping_gala",
+  "result": {
+    "count": 4,
+    "id": "pastel:weeping_gala_light"
+  },
+  "time": 80
+}

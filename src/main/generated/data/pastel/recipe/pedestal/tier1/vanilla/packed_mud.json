@@ -1,0 +1,19 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "experience": 0.1,
+  "ingredients": [
+    {
+      "item": "minecraft:mud"
+    },
+    {
+      "item": "pastel:amaranth_bushel"
+    }
+  ],
+  "required_advancement": "pastel:collect_amaranth_bushel",
+  "result": {
+    "count": 1,
+    "id": "minecraft:packed_mud"
+  },
+  "time": 40
+}

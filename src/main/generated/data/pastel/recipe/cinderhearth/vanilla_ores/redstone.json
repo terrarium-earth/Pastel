@@ -1,0 +1,33 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.2,
+  "ingredient": {
+    "count": 1,
+    "ingredient": {
+      "tag": "minecraft:redstone_ores"
+    }
+  },
+  "results": [
+    {
+      "result": {
+        "count": 4,
+        "id": "minecraft:redstone"
+      }
+    },
+    {
+      "chance": 0.5,
+      "result": {
+        "count": 1,
+        "id": "minecraft:redstone"
+      }
+    },
+    {
+      "chance": 0.1,
+      "result": {
+        "count": 1,
+        "id": "minecraft:glowstone_dust"
+      }
+    }
+  ],
+  "time": 100
+}

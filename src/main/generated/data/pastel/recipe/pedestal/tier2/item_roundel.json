@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2
+  },
+  "experience": 1.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "pastel:polished_calcite"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "BCB",
+    "SCS",
+    "BBB"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/item_roundel",
+  "result": {
+    "count": 1,
+    "id": "pastel:item_roundel"
+  },
+  "tier": "simple",
+  "time": 120
+}

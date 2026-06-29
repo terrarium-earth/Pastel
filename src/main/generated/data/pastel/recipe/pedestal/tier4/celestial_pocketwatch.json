@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 16,
+    "pastel:white": 4
+  },
+  "experience": 4.0,
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "C": {
+      "item": "pastel:paltaeria_gem"
+    },
+    "P": {
+      "item": "pastel:magenta_pigment"
+    }
+  },
+  "pattern": [
+    "PAP",
+    "ACA",
+    "PAP"
+  ],
+  "required_advancement": "pastel:unlocks/items/celestial_pocketwatch",
+  "result": {
+    "count": 1,
+    "id": "pastel:celestial_pocketwatch"
+  },
+  "tier": "complex",
+  "time": 2400
+}

@@ -2,7 +2,6 @@ package earth.terrarium.pastel.recipe.spirit_instiller.dynamic;
 
 import com.mojang.authlib.GameProfile;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.attachments.HardcoreDeathTracker;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
@@ -22,6 +21,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -33,9 +33,9 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
             "",
             false,
             Optional.empty(),
-            IngredientStack.ofItems(Blocks.PLAYER_HEAD.asItem()),
-            IngredientStack.ofItems(Items.TOTEM_OF_UNDYING),
-            IngredientStack.ofItems(Items.ENCHANTED_GOLDEN_APPLE),
+            SizedIngredient.of(Blocks.PLAYER_HEAD.asItem(), 1),
+            SizedIngredient.of(Items.TOTEM_OF_UNDYING, 1),
+            SizedIngredient.of(Items.ENCHANTED_GOLDEN_APPLE, 1),
             ItemStack.EMPTY,
             1200,
             100,

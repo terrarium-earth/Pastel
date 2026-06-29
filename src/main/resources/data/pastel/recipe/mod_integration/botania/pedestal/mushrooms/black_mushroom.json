@@ -13,9 +13,15 @@
     "MPS"
   ],
   "key": {
-    "M": "#c:mushrooms",
-    "P": "pastel:black_pigment",
-    "S": "pastel:shimmerstone_gem"
+    "M": {
+      "tag": "c:mushrooms"
+    },
+    "P": {
+      "item": "pastel:black_pigment"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
   },
   "result": {
     "id": "botania:black_mushroom",

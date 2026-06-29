@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 1,
+    "pastel:magenta": 1,
+    "pastel:yellow": 1
+  },
+  "experience": 1.0,
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "tag": "pastel:pigments"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "SGS",
+    "GPG",
+    "SGS"
+  ],
+  "required_advancement": "pastel:unlocks/items/basic_ink_storage_items",
+  "result": {
+    "count": 1,
+    "id": "pastel:ink_flask"
+  },
+  "tier": "simple",
+  "time": 300
+}

@@ -1,0 +1,10 @@
+{
+  "type": "pastel:primordial_fire_burning",
+  "ingredient": {
+    "item": "minecraft:soul_soil"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:dirt"
+  }
+}

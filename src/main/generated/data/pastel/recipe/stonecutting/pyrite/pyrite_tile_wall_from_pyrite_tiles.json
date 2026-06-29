@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "pastel:pyrite_tiles"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:pyrite_tile_wall"
+  }
+}

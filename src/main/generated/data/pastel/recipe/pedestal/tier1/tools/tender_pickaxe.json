@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 8
+  },
+  "experience": 2.0,
+  "key": {
+    "M": {
+      "item": "pastel:mermaids_gem"
+    },
+    "S": {
+      "item": "minecraft:smooth_basalt"
+    },
+    "T": {
+      "item": "pastel:topaz_shard"
+    }
+  },
+  "pattern": [
+    "TMT",
+    " S ",
+    " S "
+  ],
+  "required_advancement": "pastel:unlocks/equipment/tender_pickaxe",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:silk_touch": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:tender_pickaxe"
+  },
+  "time": 600
+}

@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:magenta": 1,
+    "pastel:yellow": 3
+  },
+  "experience": 1.0,
+  "group": "glowblocks",
+  "key": {
+    "P": {
+      "item": "pastel:green_pigment"
+    },
+    "Q": {
+      "item": "pastel:quitoxic_powder"
+    }
+  },
+  "pattern": [
+    "PQP",
+    "QPQ",
+    "PQP"
+  ],
+  "required_advancement": "pastel:unlocks/glowblocks/green_glowblock",
+  "result": {
+    "count": 4,
+    "id": "pastel:green_glowblock"
+  },
+  "tier": "advanced"
+}

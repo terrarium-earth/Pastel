@@ -1,0 +1,30 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "fermentation_speed_mod": 0.5
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "minecraft:chorus_fruit"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:frostbite_essence"
+      }
+    }
+  ],
+  "min_fermentation_time_hours": 4,
+  "required_advancement": "pastel:unlocks/food/reprise",
+  "result": {
+    "count": 4,
+    "id": "pastel:reprise"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

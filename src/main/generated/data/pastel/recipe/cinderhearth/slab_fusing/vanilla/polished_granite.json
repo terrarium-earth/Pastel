@@ -1,0 +1,19 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "ingredient": {
+      "item": "minecraft:polished_granite_slab"
+    }
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "minecraft:polished_granite"
+      }
+    }
+  ],
+  "time": 100
+}

@@ -1,0 +1,35 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:jadeite_lotus_flower"
+    }
+  },
+  "color": 9753087,
+  "group": "deserts",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:aloe_leaf"
+    }
+  },
+  "ingredient2": {
+    "count": 2,
+    "ingredient": {
+      "item": "pastel:frostbite_essence"
+    }
+  },
+  "ingredient3": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:nightdew_sprout"
+    }
+  },
+  "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",
+  "result": {
+    "count": 1,
+    "id": "pastel:sedatives"
+  },
+  "use_up_base_ingredient": false
+}

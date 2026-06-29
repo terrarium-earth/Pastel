@@ -1,0 +1,27 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.5,
+  "ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:pure_prismarine"
+    }
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource",
+  "results": [
+    {
+      "result": {
+        "count": 4,
+        "id": "minecraft:prismarine_crystals"
+      }
+    },
+    {
+      "chance": 0.5,
+      "result": {
+        "count": 1,
+        "id": "minecraft:prismarine_crystals"
+      }
+    }
+  ],
+  "time": 200
+}

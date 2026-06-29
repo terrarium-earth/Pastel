@@ -1,0 +1,19 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "ingredient": {
+      "item": "minecraft:smooth_stone_slab"
+    }
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "minecraft:smooth_stone"
+      }
+    }
+  ],
+  "time": 100
+}

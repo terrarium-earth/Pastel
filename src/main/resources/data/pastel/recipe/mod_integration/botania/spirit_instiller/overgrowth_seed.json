@@ -2,9 +2,24 @@
   "type": "pastel:spirit_instiller",
   "time": 400,
   "experience": 8.0,
-  "ingredient1": "pastel:moonstruck_nectar",
-  "ingredient2": "botania:terrasteel_ingot",
-  "center_ingredient": "minecraft:wheat_seeds",
+  "ingredient1": {
+    "ingredient": {
+      "item": "pastel:moonstruck_nectar"
+    },
+    "count": 1
+  },
+  "ingredient2": {
+    "ingredient": {
+      "item": "botania:terrasteel_ingot"
+    },
+    "count": 1
+  },
+  "center_ingredient": {
+    "ingredient": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "count": 1
+  },
   "result": {
     "id": "botania:overgrowth_seed"
   },

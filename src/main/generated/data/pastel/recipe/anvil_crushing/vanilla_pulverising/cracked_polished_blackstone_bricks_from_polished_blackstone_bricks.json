@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.9,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:polished_blackstone_bricks"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 1,
+    "id": "minecraft:cracked_polished_blackstone_bricks"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

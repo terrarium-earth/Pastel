@@ -1,0 +1,20 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "key": {
+    "G": {
+      "item": "pastel:hummingstone_glass"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "required_advancement": "pastel:lategame/collect_hummingstone",
+  "result": {
+    "count": 16,
+    "id": "pastel:hummingstone_glass_pane"
+  },
+  "time": 20
+}

@@ -1,0 +1,20 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.1,
+  "ingredient": {
+    "count": 2,
+    "ingredient": {
+      "item": "pastel:blackslag_tile_slab"
+    }
+  },
+  "required_advancement": "pastel:midgame/enter_dimension",
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "pastel:blackslag_tiles"
+      }
+    }
+  ],
+  "time": 100
+}

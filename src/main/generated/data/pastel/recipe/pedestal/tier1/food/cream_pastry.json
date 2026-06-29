@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.2,
+  "key": {
+    "C": {
+      "item": "pastel:clotted_cream"
+    },
+    "E": {
+      "item": "pastel:amaranth_grains"
+    },
+    "S": {
+      "item": "minecraft:honey_bottle"
+    },
+    "X": {
+      "tag": "c:eggs"
+    }
+  },
+  "pattern": [
+    "ESE",
+    "CCC",
+    "EXE"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2",
+  "result": {
+    "count": 5,
+    "id": "pastel:cream_pastry"
+  },
+  "time": 80
+}

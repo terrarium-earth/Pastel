@@ -1,0 +1,39 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 4.0,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "C": {
+      "item": "pastel:clotted_cream"
+    },
+    "E": {
+      "tag": "c:eggs"
+    },
+    "F": {
+      "tag": "pastel:water_meats"
+    },
+    "L": {
+      "tag": "pastel:lean_meats"
+    },
+    "M": {
+      "tag": "pastel:common_meats"
+    },
+    "W": {
+      "tag": "pastel:drinkable_spirits"
+    }
+  },
+  "pattern": [
+    "ECE",
+    "MFL",
+    "AWA"
+  ],
+  "required_advancement": "pastel:unlocks/food/triple_meat_pot_pie",
+  "result": {
+    "count": 1,
+    "id": "pastel:triple_meat_pot_pie"
+  },
+  "time": 120
+}

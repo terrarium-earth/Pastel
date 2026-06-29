@@ -1,0 +1,10 @@
+{
+  "type": "pastel:midnight_solution_converting",
+  "ingredient": {
+    "item": "pastel:gilded_book"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:book"
+  }
+}

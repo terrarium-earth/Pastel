@@ -13,8 +13,8 @@
     "PS"
   ],
   "key": {
-    "P": "botania:magenta_mystical_flower",
-    "S": "pastel:shimmerstone_gem"
+    "P": {"item": "botania:magenta_mystical_flower"},
+    "S": {"item": "pastel:shimmerstone_gem"}
   },
   "result": {
     "id": "botania:magenta_shiny_flower",

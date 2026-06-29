@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 4
+  },
+  "experience": 1.0,
+  "group": "gemstone_chiseled_blocks",
+  "key": {
+    "W": {
+      "item": "pastel:polished_calcite"
+    },
+    "X": {
+      "item": "pastel:moonstone_cluster"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WXW",
+    "WWW"
+  ],
+  "required_advancement": "pastel:lategame/collect_moonstone",
+  "result": {
+    "count": 8,
+    "id": "pastel:moonstone_chiseled_calcite"
+  },
+  "tier": "complex",
+  "time": 80
+}

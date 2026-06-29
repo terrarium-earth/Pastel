@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 2,
+    "pastel:cyan": 8
+  },
+  "experience": 4.0,
+  "key": {
+    "C": {
+      "item": "pastel:four_leaf_clover"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "item": "pastel:stardust"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "SCS",
+    "PPP"
+  ],
+  "required_advancement": "pastel:unlocks/items/artisans_atlas",
+  "result": {
+    "count": 1,
+    "id": "pastel:artisans_atlas"
+  },
+  "tier": "advanced",
+  "time": 3600
+}

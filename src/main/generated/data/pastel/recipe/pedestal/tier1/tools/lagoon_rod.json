@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 1
+  },
+  "experience": 0.5,
+  "key": {
+    "B": {
+      "item": "minecraft:smooth_basalt"
+    },
+    "M": {
+      "item": "pastel:mermaids_gem"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "  B",
+    " BS",
+    "B M"
+  ],
+  "required_advancement": "pastel:unlocks/equipment/lagoon_rod",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:lure": 3
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:lagoon_rod"
+  },
+  "time": 180
+}

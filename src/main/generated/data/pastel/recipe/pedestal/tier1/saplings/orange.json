@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 2,
+    "pastel:yellow": 4
+  },
+  "experience": 1.0,
+  "group": "colored_saplings",
+  "key": {
+    "D": {
+      "item": "minecraft:orange_dye"
+    },
+    "S": {
+      "tag": "minecraft:saplings"
+    },
+    "V": {
+      "item": "pastel:vegetal"
+    }
+  },
+  "pattern": [
+    "DDD",
+    "VSV",
+    "DDD"
+  ],
+  "required_advancement": "pastel:unlocks/colored_saplings/orange_sapling",
+  "result": {
+    "count": 1,
+    "id": "pastel:orange_sapling"
+  },
+  "time": 160
+}

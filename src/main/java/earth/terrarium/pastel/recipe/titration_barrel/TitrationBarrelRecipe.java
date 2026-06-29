@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.item.FermentedItem;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.helpers.Support;
@@ -13,11 +12,12 @@ import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.items.food.beverages.BeverageItem;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
-import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
+import earth.terrarium.pastel.recipe.GatedSizedPastelRecipe;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -34,6 +34,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInput<FluidTank>>
+public class TitrationBarrelRecipe extends GatedSizedPastelRecipe<FluidRecipeInput<FluidTank>>
     implements
     ITitrationBarrelRecipe {
 
@@ -55,7 +56,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
         }
     };
 
-    public final List<IngredientStack> inputStacks;
+    public final NonNullList<SizedIngredient> inputStacks;
 
     public final ItemStack outputItemStack;
 
@@ -71,7 +72,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
         String group,
         boolean secret,
         Optional<ResourceLocation> requiredAdvancementIdentifier,
-        List<IngredientStack> inputStacks,
+        NonNullList<SizedIngredient> inputStacks,
         FluidIngredient fluid,
         ItemStack outputItemStack,
         Item tappingItem,
@@ -103,11 +104,11 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                 return false;
             }
         }
-        return matchIngredientStacksExclusively(recipeInput, getIngredientStacks());
+        return matchIngredientStacksExclusively(recipeInput, getSizedIngredients());
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
+    public NonNullList<SizedIngredient> getSizedIngredients() {
         return this.inputStacks;
     }
 
@@ -230,12 +231,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                     effects
                         .add(
                             new MobEffectInstance(
-                                BuiltInRegistries.MOB_EFFECT
-                                    .getHolderOrThrow(
-                                        BuiltInRegistries.MOB_EFFECT
-                                            .getResourceKey(entry.statusEffect())
-                                            .get()
-                                    ),
+                                entry.statusEffect(),
                                 (int) (durationTicks * durationMultiplier),
                                 potency
                             )
@@ -273,9 +269,9 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
     protected float getThickness(int contentCount) {
         int inputStacksCount = 0;
         for (
-            IngredientStack stack : inputStacks
+            SizedIngredient stack : inputStacks
         ) {
-            inputStacksCount += stack.getCount();
+            inputStacksCount += stack.count();
         }
         return contentCount / (float) inputStacksCount;
     }
@@ -354,8 +350,8 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        IngredientStack.CODEC
-                            .listOf()
+                        NonNullList
+                            .codecOf(SizedIngredient.NESTED_CODEC)
                             .fieldOf("ingredients")
                             .forGetter(recipe -> recipe.inputStacks),
                         FluidIngredient.CODEC
@@ -389,7 +385,7 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
                 c -> c.secret,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
                 c -> c.requiredAdvancementIdentifier,
-                IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                SizedIngredient.STREAM_CODEC.apply(PacketCodecHelper.nonNullList()),
                 c -> c.inputStacks,
                 FluidIngredient.STREAM_CODEC,
                 c -> c.fluid,

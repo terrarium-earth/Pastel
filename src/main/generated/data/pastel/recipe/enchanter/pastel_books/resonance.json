@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:resonance"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:paltaeria_fragments"
+    },
+    {
+      "item": "pastel:resonance_shard"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:paltaeria_fragments"
+    },
+    {
+      "item": "pastel:resonance_shard"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/resonance_crafting",
+  "required_experience": 800,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:resonance": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 400
+}

@@ -1,0 +1,44 @@
+{
+  "type": "pastel:titration_barrel",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nectardew_burgeon"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:bloodboil_syrup"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "pastel:bedrock_dust"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "pastel:stratine_fragments"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:echo_shard"
+      }
+    }
+  ],
+  "min_fermentation_time_hours": 4,
+  "required_advancement": "pastel:hidden/collect_cookbooks/poisoners_handbook",
+  "result": {
+    "count": 6,
+    "id": "pastel:bitter_oils"
+  }
+}

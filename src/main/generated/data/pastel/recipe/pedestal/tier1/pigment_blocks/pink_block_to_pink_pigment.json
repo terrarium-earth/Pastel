@@ -1,0 +1,17 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "pigment_compacting",
+  "ingredients": [
+    {
+      "item": "pastel:pink_block"
+    }
+  ],
+  "required_advancement": "pastel:hidden/collect_pigment/pink",
+  "result": {
+    "count": 9,
+    "id": "pastel:pink_pigment"
+  },
+  "time": 20
+}

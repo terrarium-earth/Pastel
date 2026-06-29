@@ -1,17 +1,19 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import com.cmdpro.databank.DatabankUtils;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopCraftingRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
+
+import java.util.Objects;
 
 public class PotionWorkshopCraftingDisplay extends PotionWorkshopRecipeDisplay {
 
-    protected final IngredientStack baseIngredient;
+    protected final SizedIngredient baseIngredient;
 
     protected final boolean consumeBaseIngredient;
 
@@ -22,7 +24,8 @@ public class PotionWorkshopCraftingDisplay extends PotionWorkshopRecipeDisplay {
      */
     public PotionWorkshopCraftingDisplay(RecipeHolder<PotionWorkshopCraftingRecipe> recipe) {
         super(recipe);
-        this.baseIngredient = recipe.value().getBaseIngredient();
+        this.baseIngredient = Objects
+            .requireNonNull(recipe.value().getBaseIngredient(), "Base ingredients should never be null");
         this.consumeBaseIngredient = recipe.value().consumesBaseIngredient();
     }
 

@@ -16,8 +16,12 @@
     "PCP"
   ],
   "key": {
-    "C": "malum:astral_weave",
-    "P": "pastel:purple_pigment"
+    "C": {
+      "item": "malum:astral_weave"
+    },
+    "P": {
+      "item": "pastel:purple_pigment"
+    }
   },
   "result": {
     "id": "pastel:enchantment_canvas",

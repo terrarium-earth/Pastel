@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.loot.modifiers.TreasureHunterModifier;
@@ -19,6 +18,7 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.Optional;
 
@@ -29,14 +29,15 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
             "",
             false,
             Optional.of(PastelCommon.locate("unlocks/memory_to_head")),
-            IngredientStack
-                .ofItems(
+            SizedIngredient
+                .of(
                     PastelBlocks.MEMORY
                         .get()
-                        .asItem()
+                        .asItem(),
+                    1
                 ),
-            IngredientStack.ofItems(PastelItems.VEGETAL.get(), 4),
-            IngredientStack.ofItems(PastelItems.QUITOXIC_POWDER.get(), 4),
+            SizedIngredient.of(PastelItems.VEGETAL.get(), 4),
+            SizedIngredient.of(PastelItems.QUITOXIC_POWDER.get(), 4),
             new ItemStack(Blocks.ZOMBIE_HEAD),
             200,
             1,

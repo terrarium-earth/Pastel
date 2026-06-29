@@ -7,18 +7,21 @@ import com.klikli_dev.modonomicon.book.conditions.BookNoneCondition;
 import com.klikli_dev.modonomicon.book.page.BookTextPage;
 import com.klikli_dev.modonomicon.util.BookGsonHelper;
 import com.mojang.serialization.JsonOps;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
+
+import java.util.Optional;
 
 public class BookHintPage extends BookTextPage {
 
     private final ResourceLocation completionAdvancement;
 
-    private final IngredientStack cost;
+    private final Optional<SizedIngredient> cost;
 
     public BookHintPage(
         BookTextHolder title,
@@ -28,7 +31,7 @@ public class BookHintPage extends BookTextPage {
         String anchor,
         BookCondition condition,
         ResourceLocation completionAdvancement,
-        IngredientStack cost
+        Optional<SizedIngredient> cost
     ) {
         super(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition);
         this.completionAdvancement = completionAdvancement;
@@ -45,13 +48,15 @@ public class BookHintPage extends BookTextPage {
             ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
             : new BookNoneCondition();
         var completionAdvancement = ResourceLocation.tryParse(GsonHelper.getAsString(json, "completion_advancement"));
-        IngredientStack cost = IngredientStack.EMPTY;
+        Optional<SizedIngredient> cost = Optional.empty();
         if (json.has("cost")) {
             var ingredient = GsonHelper.getAsJsonObject(json, "cost");
-            cost = IngredientStack.CODEC
+            // flat codec SHOULD:tm: be the same as our current ingredientstack codec
+            // NOTE: I'm only ok with using FLAT_CODEC here because we're eventually nuking this class upon
+            // upgrade to 2.0 anyway
+            cost = SizedIngredient.FLAT_CODEC
                 .parse(provider.createSerializationContext(JsonOps.INSTANCE), ingredient)
-                .result()
-                .orElse(cost);
+                .result();
         }
         return new BookHintPage(
             title,
@@ -73,7 +78,7 @@ public class BookHintPage extends BookTextPage {
         var anchor = buffer.readUtf();
         var condition = BookCondition.fromNetwork(buffer);
         var completionAdvancement = buffer.readResourceLocation();
-        var cost = IngredientStack.STREAM_CODEC.decode(buffer);
+        var cost = ByteBufCodecs.optional(SizedIngredient.STREAM_CODEC).decode(buffer);
         return new BookHintPage(
             title,
             text,
@@ -90,7 +95,7 @@ public class BookHintPage extends BookTextPage {
         return completionAdvancement;
     }
 
-    public IngredientStack getCost() {
+    public Optional<SizedIngredient> getCost() {
         return cost;
     }
 
@@ -103,7 +108,7 @@ public class BookHintPage extends BookTextPage {
     public void toNetwork(RegistryFriendlyByteBuf buffer) {
         super.toNetwork(buffer);
         buffer.writeResourceLocation(completionAdvancement);
-        IngredientStack.STREAM_CODEC.encode(buffer, cost);
+        ByteBufCodecs.optional(SizedIngredient.STREAM_CODEC).encode(buffer, cost);
     }
 
 }

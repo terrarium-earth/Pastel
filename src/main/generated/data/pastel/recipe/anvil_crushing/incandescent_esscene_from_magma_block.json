@@ -1,0 +1,15 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.5,
+  "experience": 0.25,
+  "ingredient": {
+    "item": "minecraft:magma_block"
+  },
+  "particleCount": 10,
+  "particleEffectIdentifier": "minecraft:enchanted_hit",
+  "result": {
+    "count": 1,
+    "id": "pastel:incandescent_essence"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

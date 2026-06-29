@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.05,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "minecraft:diamond_horse_armor"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 3,
+    "id": "minecraft:diamond"
+  },
+  "soundEventIdentifier": "minecraft:block.metal.break"
+}

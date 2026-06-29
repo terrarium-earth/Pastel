@@ -231,14 +231,18 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
             // has already been paid
             return;
         }
+        if (page.getCost().isEmpty()) {
+            // cost is empty???
+            return;
+        }
 
         if (mc.player.isCreative() || InventoryHelper
-            .hasIngredientStacksInInventory(List.of(page.getCost()), new InvWrapper(mc.player.getInventory()))) {
+            .hasSizedIngredientsInInventory(List.of(page.getCost().get()), new InvWrapper(mc.player.getInventory()))) {
             soundInstance = new HintRevelationSoundInstance(mc.player);
             Minecraft.getInstance().getSoundManager().play(soundInstance);
 
             PacketDistributor
-                .sendToServer(new GuidebookHintBoughtPayload(page.getCompletionAdvancement(), page.getCost()));
+                .sendToServer(new GuidebookHintBoughtPayload(page.getCompletionAdvancement(), page.getCost().get()));
             revealProgress = 1;
             lastRevealTime = mc.level.getGameTime();
             mc.player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
@@ -270,14 +274,14 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
 
         if (revealProgress == -1) {
             ModonomiconHelper
-                .renderIngredientStack(
+                .renderSizedIngredient(
                     drawContext,
                     parentScreen,
                     BookEntryScreen.PAGE_WIDTH / 2 + 29,
                     BookEntryScreen.PAGE_HEIGHT - Button.DEFAULT_HEIGHT - 1,
                     mouseX,
                     mouseY,
-                    page.getCost()
+                    page.getCost().orElse(null)
                 );
         }
 

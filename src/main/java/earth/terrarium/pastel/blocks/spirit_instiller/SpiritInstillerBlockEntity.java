@@ -3,7 +3,6 @@ package earth.terrarium.pastel.blocks.spirit_instiller;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlockEntity;
 import earth.terrarium.pastel.blocks.decoration.GemstoneChimeBlock;
 import earth.terrarium.pastel.blocks.item_bowl.ItemBowlBlockEntity;
@@ -45,6 +44,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -485,9 +485,9 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
                 .chanceRound(
                     recipe
                         .value()
-                        .getIngredientStacks()
+                        .getSizedIngredients()
                         .get(SpiritInstillerRecipe.CENTER)
-                        .getCount() * efficiencyModifier,
+                        .count() * efficiencyModifier,
                     world.random
                 );
             if (decreasedAmountAfterEfficiencyMod > 0) {
@@ -496,23 +496,23 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity
                     .shrink(decreasedAmountAfterEfficiencyMod);
             }
 
-            List<IngredientStack> ingredientStacks = recipe
+            List<SizedIngredient> ingredientStacks = recipe
                 .value()
-                .getIngredientStacks();
+                .getSizedIngredients();
 
             // first side ingredient
             int amountAfterEfficiencyModFirst = Support
                 .chanceRound(
                     ingredientStacks
                         .get(SpiritInstillerRecipe.FIRST)
-                        .getCount() * efficiencyModifier,
+                        .count() * efficiencyModifier,
                     world.random
                 );
             int amountAfterEfficiencyModSecond = Support
                 .chanceRound(
                     ingredientStacks
                         .get(SpiritInstillerRecipe.SECOND)
-                        .getCount() * efficiencyModifier,
+                        .count() * efficiencyModifier,
                     world.random
                 );
             boolean leftIsFirstIngredient = ingredientStacks

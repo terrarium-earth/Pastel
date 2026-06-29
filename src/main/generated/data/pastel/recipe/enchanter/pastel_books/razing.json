@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:razing"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:gray_pigment"
+    },
+    {
+      "item": "pastel:gray_pigment"
+    },
+    {
+      "item": "pastel:bottle_of_ruin"
+    },
+    {
+      "item": "pastel:dragonbone_chunk"
+    },
+    {
+      "item": "pastel:gray_pigment"
+    },
+    {
+      "item": "pastel:gray_pigment"
+    },
+    {
+      "item": "pastel:bottle_of_ruin"
+    },
+    {
+      "item": "pastel:dragonbone_chunk"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/razing_crafting",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:razing": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

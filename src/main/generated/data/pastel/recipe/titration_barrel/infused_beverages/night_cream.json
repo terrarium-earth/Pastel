@@ -1,0 +1,124 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 6000,
+        "id": "pastel:eternal_slumber"
+      },
+      {
+        "id": "pastel:effect_prolonging",
+        "potency": [
+          {
+            "min_alc": 10.0
+          },
+          {
+            "min_alc": 20.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 40.0,
+            "potency": 3
+          },
+          {
+            "min_alc": 50.0,
+            "potency": 4
+          },
+          {
+            "min_alc": 60.0,
+            "potency": 5
+          },
+          {
+            "min_alc": 70.0,
+            "potency": 6
+          },
+          {
+            "min_alc": 80.0,
+            "potency": 7
+          }
+        ]
+      },
+      {
+        "id": "pastel:deadly_poison",
+        "potency": [
+          {
+            "min_alc": 10.0
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 50.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 70.0,
+            "potency": 3
+          }
+        ]
+      },
+      {
+        "id": "pastel:immunity",
+        "potency": [
+          {
+            "min_alc": 80.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.075
+  },
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:moonstone_powder"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "pastel:neolith"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:jadeite_petals"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:pure_coal"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nectardew_burgeon"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/food/nectardew_titration",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 12982783,
+        "variant": "night_cream"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

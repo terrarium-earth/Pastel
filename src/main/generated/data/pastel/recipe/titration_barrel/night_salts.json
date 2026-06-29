@@ -1,0 +1,38 @@
+{
+  "type": "pastel:titration_barrel",
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nightdew_sprout"
+      }
+    },
+    {
+      "count": 6,
+      "ingredient": {
+        "item": "minecraft:quartz"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:onyx_shard"
+      }
+    }
+  ],
+  "min_fermentation_time_hours": 1,
+  "required_advancement": "pastel:unlocks/items/night_salts",
+  "result": {
+    "count": 6,
+    "id": "pastel:night_salts"
+  }
+}

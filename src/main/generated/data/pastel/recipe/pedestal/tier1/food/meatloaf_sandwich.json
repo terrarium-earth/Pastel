@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "experience": 0.2,
+  "ingredients": [
+    {
+      "item": "pastel:meatloaf"
+    },
+    {
+      "item": "minecraft:bread"
+    },
+    {
+      "item": "pastel:clotted_cream"
+    }
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1",
+  "result": {
+    "count": 4,
+    "id": "pastel:meatloaf_sandwich"
+  },
+  "time": 80
+}

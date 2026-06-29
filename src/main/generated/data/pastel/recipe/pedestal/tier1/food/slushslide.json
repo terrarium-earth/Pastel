@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "experience": 0.2,
+  "ingredients": [
+    {
+      "item": "pastel:fresh_chocolate"
+    },
+    {
+      "item": "pastel:myceylon"
+    },
+    {
+      "item": "pastel:clotted_cream"
+    },
+    {
+      "type": "neoforge:components",
+      "components": {
+        "pastel:infused_beverage": {
+          "color": 13723654,
+          "variant": "sawblade_holly_liquor"
+        }
+      },
+      "items": "pastel:infused_beverage"
+    }
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2",
+  "result": {
+    "count": 2,
+    "id": "pastel:slushslide"
+  },
+  "time": 80
+}

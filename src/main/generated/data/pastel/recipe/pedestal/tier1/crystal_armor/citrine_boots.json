@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "C": {
+      "item": "pastel:citrine_shard"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "S S",
+    "C C",
+    "C C"
+  ],
+  "required_advancement": "pastel:hidden/collect_shards/citrine",
+  "result": {
+    "count": 1,
+    "id": "pastel:citrine_boots"
+  },
+  "time": 400
+}

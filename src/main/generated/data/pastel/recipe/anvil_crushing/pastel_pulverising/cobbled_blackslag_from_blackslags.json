@@ -1,0 +1,20 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.8,
+  "experience": 0.0,
+  "ingredient": [
+    {
+      "item": "pastel:blackslag"
+    },
+    {
+      "item": "pastel:infested_blackslag"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:cloud",
+  "required_advancement": "pastel:hidden/collect_blackslag",
+  "result": {
+    "count": 1,
+    "id": "pastel:cobbled_blackslag"
+  },
+  "soundEventIdentifier": "minecraft:block.deepslate.break"
+}

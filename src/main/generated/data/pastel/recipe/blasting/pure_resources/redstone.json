@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.5,
+  "ingredient": {
+    "item": "pastel:pure_redstone"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:redstone"
+  }
+}

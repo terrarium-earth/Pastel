@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:magenta": 2
+  },
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "pastel:four_leaf_clover"
+    }
+  ],
+  "required_advancement": "pastel:collect_four_leaf_clover",
+  "result": {
+    "count": 1,
+    "id": "minecraft:name_tag"
+  },
+  "tier": "simple",
+  "time": 120
+}

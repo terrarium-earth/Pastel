@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 2,
+    "pastel:cyan": 2,
+    "pastel:magenta": 2,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "E": {
+      "item": "pastel:radiating_ender"
+    },
+    "M": {
+      "item": "pastel:midnight_chip"
+    },
+    "P": {
+      "item": "pastel:black_pigment"
+    }
+  },
+  "pattern": [
+    "PMP",
+    "MEM",
+    "PMP"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/universe_spyhole",
+  "result": {
+    "count": 4,
+    "id": "pastel:universe_spyhole"
+  },
+  "tier": "advanced",
+  "time": 600
+}

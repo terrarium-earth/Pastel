@@ -3,18 +3,18 @@ package earth.terrarium.pastel.recipe.pedestal;
 import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockItem;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -23,15 +23,17 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalRecipeInput> {
+public abstract class PedestalRecipe extends GatedPastelRecipe<PedestalRecipeInput> {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("place_pedestal");
 
@@ -41,7 +43,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 
     protected final PedestalTier tier;
 
-    protected final List<IngredientStack> inputs;
+    protected final NonNullList<Ingredient> inputs;
 
     protected final Map<GemstoneColor, Integer> powderInputs;
 
@@ -60,7 +62,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
         boolean secret,
         Optional<ResourceLocation> requiredAdvancementIdentifier,
         PedestalTier tier,
-        List<IngredientStack> inputs,
+        NonNullList<Ingredient> inputs,
         Map<GemstoneColor, Integer> powderInputs,
         ItemStack output,
         float experience,
@@ -80,6 +82,11 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
         this.noBenefitsFromYieldUpgrades = noBenefitsFromYieldUpgrades;
 
         registerInToastManager(getType(), this);
+    }
+
+    @Override
+    public @NotNull NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     /**
@@ -124,11 +131,6 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 
     private boolean isStackAtLeast(ItemStack sourceItemStack, Item item, int amount) {
         return sourceItemStack.is(item) && sourceItemStack.getCount() >= amount;
-    }
-
-    @Override
-    public List<IngredientStack> getIngredientStacks() {
-        return inputs;
     }
 
     @Override
@@ -241,21 +243,21 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
     }
 
     // This remainder handling is 100% going to break at some point but honestly idc rn
-    protected void decrementGridSlot(PedestalBlockEntity pedestal, int slot, int count, ItemStack invStack) {
+    protected void decrementGridSlot(PedestalBlockEntity pedestal, int slot, ItemStack invStack) {
         ItemStack remainder = this.skipRecipeRemainders() ? ItemStack.EMPTY : invStack.getCraftingRemainingItem();
-        remainder.setCount(count);
+        remainder.setCount(1);
         var inv = pedestal.getInventory();
 
         if (pedestal.getLevel() == null) return;
         if (remainder.isEmpty()) {
-            invStack.shrink(count);
+            invStack.shrink(1);
         } else {
             if (inv
                 .getStackInSlot(slot)
-                .getCount() == count) {
+                .getCount() == 1) {
                 inv.setStackInSlot(slot, remainder);
             } else {
-                inv.extractItem(slot, count, false);
+                inv.extractItem(slot, 1, false);
 
                 ItemEntity itemEntity = new ItemEntity(
                     pedestal.getLevel(),

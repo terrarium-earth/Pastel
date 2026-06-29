@@ -1,0 +1,42 @@
+{
+  "type": "pastel:fusion_shrine",
+  "description": {
+    "translate": "pastel.recipe.fusion_shrine.explanation.netherite_ingot"
+  },
+  "during_crafting_effects": [
+    "pastel:nothing",
+    "pastel:visual_explosions_on_shrine"
+  ],
+  "experience": 4.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "minecraft:lava"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:netherite_scrap"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:midnight_aberration"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/resources/netherite_ingot",
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherite_ingot"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 1200
+}

@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.registries;
 
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 
@@ -208,6 +209,46 @@ public class PastelBlockSoundGroups {
         PastelSounds.BLOCK_LARGE_MOONSTONE_BUD_PLACE,
         PastelSounds.BLOCK_MOONSTONE_CLUSTER_HIT,
         PastelSounds.BLOCK_MOONSTONE_CLUSTER_FALL
+    );
+
+    public static final PastelGemstoneColorCollection<SoundType> GEMSTONE_BLOCKS = new PastelGemstoneColorCollection<>(
+        TOPAZ_BLOCK,
+        SoundType.AMETHYST,
+        CITRINE_BLOCK,
+        ONYX_BLOCK,
+        MOONSTONE_BLOCK
+    );
+
+    public static final PastelGemstoneColorCollection<SoundType> SMALL_GEMSTONE_BUDS = new PastelGemstoneColorCollection<>(
+        SMALL_TOPAZ_BUD,
+        SoundType.SMALL_AMETHYST_BUD,
+        SMALL_CITRINE_BUD,
+        SMALL_ONYX_BUD,
+        SMALL_MOONSTONE_BUD
+    );
+
+    public static final PastelGemstoneColorCollection<SoundType> MEDIUM_GEMSTONE_BUDS = new PastelGemstoneColorCollection<>(
+        MEDIUM_TOPAZ_BUD,
+        SoundType.MEDIUM_AMETHYST_BUD,
+        MEDIUM_CITRINE_BUD,
+        MEDIUM_ONYX_BUD,
+        MEDIUM_MOONSTONE_BUD
+    );
+
+    public static final PastelGemstoneColorCollection<SoundType> LARGE_GEMSTONE_BUDS = new PastelGemstoneColorCollection<>(
+        LARGE_TOPAZ_BUD,
+        SoundType.LARGE_AMETHYST_BUD,
+        LARGE_CITRINE_BUD,
+        LARGE_ONYX_BUD,
+        LARGE_MOONSTONE_BUD
+    );
+
+    public static final PastelGemstoneColorCollection<SoundType> GEMSTONE_CLUSTERS = new PastelGemstoneColorCollection<>(
+        TOPAZ_CLUSTER,
+        SoundType.AMETHYST_CLUSTER,
+        CITRINE_CLUSTER,
+        ONYX_CLUSTER,
+        MOONSTONE_CLUSTER
     );
 
     public static final SoundType SPECTRAL_BLOCK = new SoundType(

@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "group": "noxwood_lamps",
+  "key": {
+    "G": {
+      "item": "pastel:ivory_noxcap_gills"
+    },
+    "I": {
+      "item": "minecraft:quartz"
+    },
+    "S": {
+      "item": "pastel:ivory_noxcap_stem"
+    },
+    "X": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "GXG",
+    "III"
+  ],
+  "required_advancement": "pastel:lategame/collect_noxwood",
+  "result": {
+    "count": 2,
+    "id": "pastel:ivory_noxwood_lamp"
+  },
+  "time": 80
+}

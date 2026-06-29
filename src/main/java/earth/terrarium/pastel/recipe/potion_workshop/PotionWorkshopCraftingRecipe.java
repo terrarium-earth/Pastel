@@ -3,7 +3,6 @@ package earth.terrarium.pastel.recipe.potion_workshop;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
@@ -11,7 +10,6 @@ import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,14 +19,16 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 
-    protected final IngredientStack baseIngredient;
+    protected final SizedIngredient baseIngredient;
 
     protected final boolean consumeBaseIngredient;
 
@@ -42,10 +42,10 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
         Optional<ResourceLocation> requiredAdvancementIdentifier,
         int craftingTime,
         int color,
-        IngredientStack ingredient1,
-        IngredientStack ingredient2,
-        IngredientStack ingredient3,
-        IngredientStack baseIngredient,
+        SizedIngredient ingredient1,
+        Optional<SizedIngredient> ingredient2,
+        Optional<SizedIngredient> ingredient3,
+        SizedIngredient baseIngredient,
         boolean consumeBaseIngredient,
         int requiredExperience,
         ItemStack output
@@ -59,7 +59,7 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
         registerInToastManager(getType(), this);
     }
 
-    public IngredientStack getBaseIngredient() {
+    public SizedIngredient getBaseIngredient() {
         return baseIngredient;
     }
 
@@ -98,11 +98,11 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
-        NonNullList<IngredientStack> defaultedList = NonNullList.create();
-        defaultedList.add(IngredientStack.ofItems(PastelItems.MERMAIDS_GEM.get()));
+    public List<SizedIngredient> getSizedIngredients() {
+        List<SizedIngredient> defaultedList = new ArrayList<>();
+        defaultedList.add(SizedIngredient.of(PastelItems.MERMAIDS_GEM, 1));
         defaultedList.add(this.baseIngredient);
-        addIngredientStacks(defaultedList);
+        addSizedIngredients(defaultedList);
         return defaultedList;
     }
 
@@ -176,16 +176,16 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
                         Codec.INT
                             .optionalFieldOf("color", 0xc03058)
                             .forGetter(c -> c.color),
-                        IngredientStack.CODEC
+                        SizedIngredient.NESTED_CODEC
                             .fieldOf("ingredient1")
                             .forGetter(c -> c.ingredient1),
-                        IngredientStack.CODEC
-                            .optionalFieldOf("ingredient2", IngredientStack.EMPTY)
+                        SizedIngredient.NESTED_CODEC
+                            .optionalFieldOf("ingredient2")
                             .forGetter(c -> c.ingredient2),
-                        IngredientStack.CODEC
-                            .optionalFieldOf("ingredient3", IngredientStack.EMPTY)
+                        SizedIngredient.NESTED_CODEC
+                            .optionalFieldOf("ingredient3")
                             .forGetter(c -> c.ingredient3),
-                        IngredientStack.CODEC
+                        SizedIngredient.NESTED_CODEC
                             .fieldOf("base_ingredient")
                             .forGetter(c -> c.baseIngredient),
                         Codec.BOOL
@@ -216,13 +216,13 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
                 c -> c.craftingTime,
                 ByteBufCodecs.VAR_INT,
                 c -> c.color,
-                IngredientStack.STREAM_CODEC,
+                SizedIngredient.STREAM_CODEC,
                 c -> c.ingredient1,
-                IngredientStack.STREAM_CODEC,
+                ByteBufCodecs.optional(SizedIngredient.STREAM_CODEC),
                 c -> c.ingredient2,
-                IngredientStack.STREAM_CODEC,
+                ByteBufCodecs.optional(SizedIngredient.STREAM_CODEC),
                 c -> c.ingredient3,
-                IngredientStack.STREAM_CODEC,
+                SizedIngredient.STREAM_CODEC,
                 c -> c.baseIngredient,
                 ByteBufCodecs.BOOL,
                 c -> c.consumeBaseIngredient,

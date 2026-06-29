@@ -1,0 +1,17 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "ingredients": [
+    {
+      "item": "pastel:paltaeria_floatblock"
+    }
+  ],
+  "required_advancement": "pastel:lategame/carry_too_many_low_gravity_blocks",
+  "result": {
+    "count": 9,
+    "id": "pastel:paltaeria_fragments"
+  },
+  "time": 20
+}

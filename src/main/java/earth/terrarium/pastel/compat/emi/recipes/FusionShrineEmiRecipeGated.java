@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.FormattedCharSequence;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FusionShrineEmiRecipeGated extends GatedSpectrumEmiRecipe<FusionShrineRecipe> {
@@ -39,13 +40,13 @@ public class FusionShrineEmiRecipeGated extends GatedSpectrumEmiRecipe<FusionShr
         inputs
             .addAll(
                 recipe
-                    .getIngredientStacks()
+                    .getSizedIngredients()
                     .stream()
                     .map(
                         s -> EmiIngredient
                             .of(
-                                s
-                                    .getItems()
+                                Arrays
+                                    .stream(s.getItems())
                                     .map(EmiStack::of)
                                     .toList()
                             )

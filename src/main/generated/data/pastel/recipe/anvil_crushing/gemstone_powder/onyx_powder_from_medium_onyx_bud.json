@@ -1,0 +1,16 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.6,
+  "experience": 0.4,
+  "group": "gemstone_crushing",
+  "ingredient": {
+    "item": "pastel:medium_onyx_bud"
+  },
+  "particleEffectIdentifier": "minecraft:explosion",
+  "required_advancement": "pastel:create_onyx_shard",
+  "result": {
+    "count": 6,
+    "id": "pastel:onyx_powder"
+  },
+  "soundEventIdentifier": "pastel:block.medium_onyx_bud.break"
+}

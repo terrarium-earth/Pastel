@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 2,
+    "pastel:yellow": 4
+  },
+  "experience": 0.5,
+  "group": "colored_spore_blossoms",
+  "key": {
+    "P": {
+      "item": "pastel:orange_pigment"
+    },
+    "S": {
+      "item": "minecraft:spore_blossom"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "required_advancement": "pastel:hidden/collect_pigment/orange",
+  "result": {
+    "count": 1,
+    "id": "pastel:orange_spore_blossom"
+  },
+  "tier": "simple",
+  "time": 80
+}

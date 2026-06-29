@@ -1,0 +1,56 @@
+{
+  "type": "pastel:fusion_shrine",
+  "copy_components": true,
+  "description": {
+    "translate": "pastel.recipe.fusion_shrine.explanation.fox_o_nine_tails"
+  },
+  "during_crafting_effects": [
+    "pastel:nothing",
+    "pastel:visual_explosions_on_shrine",
+    "pastel:nothing"
+  ],
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:legendary_tool_craft",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:verdigris_lash"
+      }
+    },
+    {
+      "count": 16,
+      "ingredient": {
+        "item": "minecraft:copper_ingot"
+      }
+    },
+    {
+      "count": 16,
+      "ingredient": {
+        "item": "minecraft:raw_gold"
+      }
+    },
+    {
+      "count": 16,
+      "ingredient": {
+        "item": "pastel:shimmerstone_gem"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:aether_vestiges"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/equipment/fox_o_nine_tails",
+  "result": {
+    "count": 1,
+    "id": "pastel:fox_o_nine_tails"
+  },
+  "start_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "time": 1200
+}

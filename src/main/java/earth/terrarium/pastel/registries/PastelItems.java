@@ -3,6 +3,7 @@ package earth.terrarium.pastel.registries;
 import com.cmdpro.databank.misc.ColorGradient;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.CreativeOnlyItem;
@@ -11,6 +12,8 @@ import earth.terrarium.pastel.blocks.jade_vines.GerminatedJadeVineBulbItem;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.components.PairedFoodComponent;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import earth.terrarium.pastel.items.ConcealingOilsItem;
 import earth.terrarium.pastel.items.CookbookItem;
 import earth.terrarium.pastel.items.DecayPlacerItem;
@@ -146,7 +149,7 @@ import earth.terrarium.pastel.items.trinkets.TotemPendantItem;
 import earth.terrarium.pastel.items.trinkets.WeepingCircletItem;
 import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -166,6 +169,7 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShearsItem;
@@ -196,24 +200,8 @@ import java.util.function.Supplier;
 
 import static earth.terrarium.pastel.PastelCommon.CONFIG;
 import static earth.terrarium.pastel.PastelCommon.locate;
-import static net.minecraft.world.item.Items.BLACK_DYE;
-import static net.minecraft.world.item.Items.BLUE_DYE;
-import static net.minecraft.world.item.Items.BROWN_DYE;
 import static net.minecraft.world.item.Items.BUCKET;
-import static net.minecraft.world.item.Items.CYAN_DYE;
 import static net.minecraft.world.item.Items.GLASS_BOTTLE;
-import static net.minecraft.world.item.Items.GRAY_DYE;
-import static net.minecraft.world.item.Items.GREEN_DYE;
-import static net.minecraft.world.item.Items.LIGHT_BLUE_DYE;
-import static net.minecraft.world.item.Items.LIGHT_GRAY_DYE;
-import static net.minecraft.world.item.Items.LIME_DYE;
-import static net.minecraft.world.item.Items.MAGENTA_DYE;
-import static net.minecraft.world.item.Items.ORANGE_DYE;
-import static net.minecraft.world.item.Items.PINK_DYE;
-import static net.minecraft.world.item.Items.PURPLE_DYE;
-import static net.minecraft.world.item.Items.RED_DYE;
-import static net.minecraft.world.item.Items.WHITE_DYE;
-import static net.minecraft.world.item.Items.YELLOW_DYE;
 import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_DAMAGE_ID;
 import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_SPEED_ID;
 
@@ -300,6 +288,7 @@ public class PastelItems {
     );
 
     // Gem shards and powders
+
     public static final DeferredItem<Item> TOPAZ_SHARD = register(
         item("topaz_shard", () -> new Item(IS.of()), InkColors.CYAN)
     );
@@ -316,102 +305,78 @@ public class PastelItems {
         item("moonstone_shard", () -> new Item(IS.of()), InkColors.WHITE)
     );
 
+    public static final PastelGemstoneColorCollection<Holder<Item>> GEMSTONE_SHARDS = new PastelGemstoneColorCollection<>(
+        TOPAZ_SHARD,
+        Items.AMETHYST_SHARD.builtInRegistryHolder(),
+        CITRINE_SHARD,
+        ONYX_SHARD,
+        MOONSTONE_SHARD
+    );
+
     public static final DeferredItem<Item> SPECTRAL_SHARD = register(
         item("spectral_shard", () -> new Item(IS.of(Rarity.RARE)), InkColors.WHITE)
     );
 
-    public static final DeferredItem<Item> TOPAZ_POWDER = register(
-        item("topaz_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.CYAN), InkColors.CYAN)
-    );
+    public static final PastelGemstoneColorCollection<DeferredItem<Item>> GEMSTONE_POWDERS = PastelGemstoneColorCollection
+        .registerItems(
+            PastelGemstoneColorCollection.prefixWithGemstone("powder"),
+            (id, color) -> register(
+                item(id, () -> new GemstonePowderItem(IS.of(), color), color.getInkColor())
+            )
+        );
 
-    public static final DeferredItem<Item> AMETHYST_POWDER = register(
-        item("amethyst_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.MAGENTA), InkColors.MAGENTA)
-    );
+    public static final DeferredItem<Item> TOPAZ_POWDER = GEMSTONE_POWDERS.topaz();
 
-    public static final DeferredItem<Item> CITRINE_POWDER = register(
-        item("citrine_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.YELLOW), InkColors.YELLOW)
-    );
+    public static final DeferredItem<Item> AMETHYST_POWDER = GEMSTONE_POWDERS.amethyst();
 
-    public static final DeferredItem<Item> ONYX_POWDER = register(
-        item("onyx_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.BLACK), InkColors.BLACK)
-    );
+    public static final DeferredItem<Item> CITRINE_POWDER = GEMSTONE_POWDERS.citrine();
 
-    public static final DeferredItem<Item> MOONSTONE_POWDER = register(
-        item("moonstone_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.WHITE), InkColors.WHITE)
-    );
+    public static final DeferredItem<Item> ONYX_POWDER = GEMSTONE_POWDERS.onyx();
+
+    public static final DeferredItem<Item> MOONSTONE_POWDER = GEMSTONE_POWDERS.moonstone();
+
+    public static DeferredItem<Item> registerPigment(String name, InkColor color) {
+        return register(
+            item(name, () -> new PigmentItem(IS.of(), color, PastelInkColorCollection.DYE_ITEMS.pick(color)), color)
+        );
+    }
 
     // Pigment
-    public static final DeferredItem<Item> WHITE_PIGMENT = register(
-        item("white_pigment", () -> new PigmentItem(IS.of(), InkColors.WHITE, WHITE_DYE), InkColors.WHITE)
-    );
 
-    public static final DeferredItem<Item> ORANGE_PIGMENT = register(
-        item("orange_pigment", () -> new PigmentItem(IS.of(), InkColors.ORANGE, ORANGE_DYE), InkColors.ORANGE)
-    );
+    public static final PastelInkColorCollection<DeferredItem<Item>> PIGMENTS = PastelInkColorCollection
+        .registerItems(PastelInkColorCollection.prefixWithColor("pigment"), PastelItems::registerPigment);
 
-    public static final DeferredItem<Item> MAGENTA_PIGMENT = register(
-        item("magenta_pigment", () -> new PigmentItem(IS.of(), InkColors.MAGENTA, MAGENTA_DYE), InkColors.MAGENTA)
-    );
+    public static final DeferredItem<Item> WHITE_PIGMENT = PIGMENTS.pick(InkColors.WHITE);
 
-    public static final DeferredItem<Item> LIGHT_BLUE_PIGMENT = register(
-        item(
-            "light_blue_pigment",
-            () -> new PigmentItem(IS.of(), InkColors.LIGHT_BLUE, LIGHT_BLUE_DYE),
-            InkColors.LIGHT_BLUE
-        )
-    );
+    public static final DeferredItem<Item> ORANGE_PIGMENT = PIGMENTS.pick(InkColors.ORANGE);
 
-    public static final DeferredItem<Item> YELLOW_PIGMENT = register(
-        item("yellow_pigment", () -> new PigmentItem(IS.of(), InkColors.YELLOW, YELLOW_DYE), InkColors.YELLOW)
-    );
+    public static final DeferredItem<Item> MAGENTA_PIGMENT = PIGMENTS.pick(InkColors.MAGENTA);
 
-    public static final DeferredItem<Item> LIME_PIGMENT = register(
-        item("lime_pigment", () -> new PigmentItem(IS.of(), InkColors.LIME, LIME_DYE), InkColors.LIME)
-    );
+    public static final DeferredItem<Item> LIGHT_BLUE_PIGMENT = PIGMENTS.pick(InkColors.LIGHT_BLUE);
 
-    public static final DeferredItem<Item> PINK_PIGMENT = register(
-        item("pink_pigment", () -> new PigmentItem(IS.of(), InkColors.PINK, PINK_DYE), InkColors.PINK)
-    );
+    public static final DeferredItem<Item> YELLOW_PIGMENT = PIGMENTS.pick(InkColors.YELLOW);
 
-    public static final DeferredItem<Item> GRAY_PIGMENT = register(
-        item("gray_pigment", () -> new PigmentItem(IS.of(), InkColors.GRAY, GRAY_DYE), InkColors.GRAY)
-    );
+    public static final DeferredItem<Item> LIME_PIGMENT = PIGMENTS.pick(InkColors.LIME);
 
-    public static final DeferredItem<Item> LIGHT_GRAY_PIGMENT = register(
-        item(
-            "light_gray_pigment",
-            () -> new PigmentItem(IS.of(), InkColors.LIGHT_GRAY, LIGHT_GRAY_DYE),
-            InkColors.LIGHT_GRAY
-        )
-    );
+    public static final DeferredItem<Item> PINK_PIGMENT = PIGMENTS.pick(InkColors.PINK);
 
-    public static final DeferredItem<Item> CYAN_PIGMENT = register(
-        item("cyan_pigment", () -> new PigmentItem(IS.of(), InkColors.CYAN, CYAN_DYE), InkColors.CYAN)
-    );
+    public static final DeferredItem<Item> GRAY_PIGMENT = PIGMENTS.pick(InkColors.GRAY);
 
-    public static final DeferredItem<Item> PURPLE_PIGMENT = register(
-        item("purple_pigment", () -> new PigmentItem(IS.of(), InkColors.PURPLE, PURPLE_DYE), InkColors.PURPLE)
-    );
+    public static final DeferredItem<Item> LIGHT_GRAY_PIGMENT = PIGMENTS.pick(InkColors.LIGHT_GRAY);
 
-    public static final DeferredItem<Item> BLUE_PIGMENT = register(
-        item("blue_pigment", () -> new PigmentItem(IS.of(), InkColors.BLUE, BLUE_DYE), InkColors.BLUE)
-    );
+    public static final DeferredItem<Item> CYAN_PIGMENT = PIGMENTS.pick(InkColors.CYAN);
 
-    public static final DeferredItem<Item> BROWN_PIGMENT = register(
-        item("brown_pigment", () -> new PigmentItem(IS.of(), InkColors.BROWN, BROWN_DYE), InkColors.BROWN)
-    );
+    public static final DeferredItem<Item> PURPLE_PIGMENT = PIGMENTS.pick(InkColors.PURPLE);
 
-    public static final DeferredItem<Item> GREEN_PIGMENT = register(
-        item("green_pigment", () -> new PigmentItem(IS.of(), InkColors.GREEN, GREEN_DYE), InkColors.GREEN)
-    );
+    public static final DeferredItem<Item> BLUE_PIGMENT = PIGMENTS.pick(InkColors.BLUE);
 
-    public static final DeferredItem<Item> RED_PIGMENT = register(
-        item("red_pigment", () -> new PigmentItem(IS.of(), InkColors.RED, RED_DYE), InkColors.RED)
-    );
+    public static final DeferredItem<Item> BROWN_PIGMENT = PIGMENTS.pick(InkColors.BROWN);
 
-    public static final DeferredItem<Item> BLACK_PIGMENT = register(
-        item("black_pigment", () -> new PigmentItem(IS.of(), InkColors.BLACK, BLACK_DYE), InkColors.BLACK)
-    );
+    public static final DeferredItem<Item> GREEN_PIGMENT = PIGMENTS.pick(InkColors.GREEN);
+
+    public static final DeferredItem<Item> RED_PIGMENT = PIGMENTS.pick(InkColors.RED);
+
+    public static final DeferredItem<Item> BLACK_PIGMENT = PIGMENTS.pick(InkColors.BLACK);
 
     // Preenchanted tools
     public static final DeferredItem<PreenchantedMultiToolItem> MULTITOOL = register(
@@ -855,65 +820,31 @@ public class PastelItems {
         )
     );
 
-    public static final DeferredItem<Item> TOPAZ_GLASS_ARROW = register(
-        item(
-            "topaz_glass_arrow",
-            () -> new GlassArrowItem(
-                IS.of(Rarity.UNCOMMON),
-                GlassArrowVariant.TOPAZ,
-                ColoredCraftingParticleEffect.CYAN
-            ),
-            InkColors.CYAN
-        )
-    );
+    public static final PastelGemstoneColorCollection<DeferredItem<Item>> GEMSTONE_GLASS_ARROWS = PastelGemstoneColorCollection
+        .registerItems(
+            PastelGemstoneColorCollection.prefixWithGemstone("glass_arrow"),
+            (id, color) -> register(
+                item(
+                    id,
+                    () -> new GlassArrowItem(
+                        IS.of(Rarity.UNCOMMON),
+                        GlassArrowVariant.VALUES.pick(color),
+                        ColoredCraftingParticleEffect.VALUES.pick(color.getInkColor())
+                    ),
+                    color.getInkColor()
+                )
+            )
+        );
 
-    public static final DeferredItem<Item> AMETHYST_GLASS_ARROW = register(
-        item(
-            "amethyst_glass_arrow",
-            () -> new GlassArrowItem(
-                IS.of(Rarity.UNCOMMON),
-                GlassArrowVariant.AMETHYST,
-                ColoredCraftingParticleEffect.MAGENTA
-            ),
-            InkColors.MAGENTA
-        )
-    );
+    public static final DeferredItem<Item> TOPAZ_GLASS_ARROW = GEMSTONE_GLASS_ARROWS.topaz();
 
-    public static final DeferredItem<Item> CITRINE_GLASS_ARROW = register(
-        item(
-            "citrine_glass_arrow",
-            () -> new GlassArrowItem(
-                IS.of(Rarity.UNCOMMON),
-                GlassArrowVariant.CITRINE,
-                ColoredCraftingParticleEffect.YELLOW
-            ),
-            InkColors.YELLOW
-        )
-    );
+    public static final DeferredItem<Item> AMETHYST_GLASS_ARROW = GEMSTONE_GLASS_ARROWS.amethyst();
 
-    public static final DeferredItem<Item> ONYX_GLASS_ARROW = register(
-        item(
-            "onyx_glass_arrow",
-            () -> new GlassArrowItem(
-                IS.of(Rarity.UNCOMMON),
-                GlassArrowVariant.ONYX,
-                ColoredCraftingParticleEffect.BLACK
-            ),
-            InkColors.BLACK
-        )
-    );
+    public static final DeferredItem<Item> CITRINE_GLASS_ARROW = GEMSTONE_GLASS_ARROWS.citrine();
 
-    public static final DeferredItem<Item> MOONSTONE_GLASS_ARROW = register(
-        item(
-            "moonstone_glass_arrow",
-            () -> new GlassArrowItem(
-                IS.of(Rarity.UNCOMMON),
-                GlassArrowVariant.MOONSTONE,
-                ColoredCraftingParticleEffect.WHITE
-            ),
-            InkColors.WHITE
-        )
-    );
+    public static final DeferredItem<Item> ONYX_GLASS_ARROW = GEMSTONE_GLASS_ARROWS.onyx();
+
+    public static final DeferredItem<Item> MOONSTONE_GLASS_ARROW = GEMSTONE_GLASS_ARROWS.moonstone();
 
     public static final DeferredItem<Item> DARK_STAKE = register(
         item(
@@ -3492,8 +3423,16 @@ public class PastelItems {
             if (hasItem) throw new UnsupportedOperationException("Attempted to register two items with id " + id);
             hasItem = true;
             //ItemColors.ITEM_COLORS.registerColorMapping(holder.get(), color); TODO ?????
-            holder = ITEM_REGISTRAR.register(id.getPath(), itemFactory);
+            holder = ITEM_REGISTRAR.register(id.getPath(), injectColorIntoFactory(itemFactory, color));
             return this;
+        }
+
+        private static <T extends Item> Supplier<T> injectColorIntoFactory(Supplier<T> itemFactory, InkColor color) {
+            return () -> {
+                var item = itemFactory.get();
+                ItemColors.ITEM_COLORS.registerColorMapping(item, color);
+                return item;
+            };
         }
 
         public ItemRegistrar<T> withBurnTime(int burnTicks) {

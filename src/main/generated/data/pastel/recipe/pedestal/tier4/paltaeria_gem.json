@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 4
+  },
+  "disable_yield_upgrades": true,
+  "experience": 0.5,
+  "key": {
+    "#": {
+      "item": "pastel:paltaeria_fragments"
+    },
+    "X": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "required_advancement": "pastel:hidden/collect_paltaeria_gem",
+  "result": {
+    "count": 1,
+    "id": "pastel:paltaeria_gem"
+  },
+  "tier": "complex",
+  "time": 400
+}

@@ -1,0 +1,102 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 12000,
+        "id": "pastel:somnolence",
+        "potency": [
+          {},
+          {
+            "min_alc": 15.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 12000,
+        "id": "minecraft:blindness",
+        "potency": [
+          {
+            "min_alc": 20.0
+          }
+        ]
+      },
+      {
+        "base_duration": 12000,
+        "id": "minecraft:weakness",
+        "potency": [
+          {
+            "min_alc": 10.0
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 50.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 12000,
+        "id": "minecraft:slowness",
+        "potency": [
+          {
+            "min_alc": 10.0
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 50.0,
+            "potency": 2
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.25
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "pastel:quitoxic_reeds"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:onyx_powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:nightdew_sprout"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/food/verdigris_wine",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 4237444,
+        "variant": "verdigris_wine"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

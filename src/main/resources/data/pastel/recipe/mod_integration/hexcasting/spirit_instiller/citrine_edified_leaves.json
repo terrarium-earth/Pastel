@@ -2,10 +2,16 @@
   "type": "pastel:spirit_instiller",
   "time": 40,
   "experience": 0.1,
-  "ingredient1": "#minecraft:leaves",
-  "ingredient2": "pastel:citrine_shard",
+  "ingredient1": {
+    "ingredient": { "tag": "minecraft:leaves"},
+    "count": 1
+  },
+  "ingredient2": {
+    "ingredient": {"item": "pastel:citrine_shard"},
+    "count": 1
+  },
   "center_ingredient": {
-    "item": "pastel:vegetal",
+    "ingredient": {"item": "pastel:vegetal"},
     "count": 1
   },
   "result": {

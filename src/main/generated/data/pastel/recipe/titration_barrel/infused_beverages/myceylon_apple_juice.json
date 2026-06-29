@@ -1,0 +1,47 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "minecraft:absorption"
+      },
+      {
+        "base_duration": 9600,
+        "id": "pastel:nourishing"
+      }
+    ],
+    "fermentation_speed_mod": 0.0
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "minecraft:apple"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:myceylon"
+      }
+    }
+  ],
+  "min_fermentation_time_hours": 4,
+  "required_advancement": "pastel:unlocks/food/myceylon_liquor",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 12018987,
+        "variant": "myceylon_apple_juice"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

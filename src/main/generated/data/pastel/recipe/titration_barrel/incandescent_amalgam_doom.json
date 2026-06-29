@@ -1,0 +1,48 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "angels_share_percent_per_mc_day": -0.02,
+    "fermentation_speed_mod": 0.8
+  },
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "pastel:drinkable_spirits"
+      }
+    },
+    {
+      "count": 32,
+      "ingredient": {
+        "item": "pastel:incandescent_essence"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      }
+    },
+    {
+      "count": 16,
+      "ingredient": {
+        "item": "pastel:quitoxic_powder"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:doombloom_seed"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/items/incandescent_amalgam_doom",
+  "result": {
+    "count": 4,
+    "id": "pastel:incandescent_amalgam"
+  }
+}

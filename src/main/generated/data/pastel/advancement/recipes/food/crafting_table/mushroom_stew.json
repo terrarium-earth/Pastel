@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "collected_noxshroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:noxshrooms"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/mushroom_stew"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "collected_noxshroom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/mushroom_stew"
+    ]
+  }
+}

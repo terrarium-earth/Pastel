@@ -1,0 +1,51 @@
+{
+  "type": "pastel:fusion_shrine",
+  "during_crafting_effects": [
+    "pastel:nothing",
+    "pastel:lightning_on_shrine",
+    "pastel:nothing",
+    "pastel:explosions_and_lightning_around_shrine",
+    "pastel:explosions_and_lightning_around_shrine",
+    "pastel:explosions_and_lightning_around_shrine",
+    "pastel:nothing"
+  ],
+  "experience": 8.0,
+  "finish_crafting_effect": "pastel:ridiculously_squeaky_fart",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_bismuth_ring"
+      }
+    },
+    {
+      "count": 64,
+      "ingredient": {
+        "item": "pastel:pure_gold_block"
+      }
+    },
+    {
+      "count": 64,
+      "ingredient": {
+        "item": "pastel:moonstone_shard"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:resonant_lily"
+      }
+    }
+  ],
+  "play_crafting_finished_effects": false,
+  "required_advancement": "pastel:unlocks/trinkets/neat_ring",
+  "result": {
+    "count": 1,
+    "id": "pastel:neat_ring"
+  },
+  "start_crafting_effect": "pastel:play_glass_breaking_sound",
+  "time": 12000
+}

@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 2,
+    "pastel:magenta": 8
+  },
+  "experience": 2.0,
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "G": {
+      "item": "pastel:green_pigment"
+    },
+    "P": {
+      "item": "pastel:purple_pigment"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PEP",
+    "GPG"
+  ],
+  "required_advancement": "pastel:unlocks/items/knowledge_gem",
+  "result": {
+    "count": 1,
+    "id": "pastel:knowledge_gem"
+  },
+  "tier": "advanced",
+  "time": 160
+}

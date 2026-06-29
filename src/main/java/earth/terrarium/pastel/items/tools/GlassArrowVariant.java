@@ -3,6 +3,7 @@ package earth.terrarium.pastel.items.tools;
 import com.cmdpro.databank.misc.ColorGradient;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.GlassArrowEntity;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.Registry;
@@ -110,6 +111,14 @@ public class GlassArrowVariant {
     public static final GlassArrowVariant ONYX = register("onyx", ONY);
 
     public static final GlassArrowVariant MOONSTONE = register("moonstone", MOO);
+
+    public static final PastelGemstoneColorCollection<GlassArrowVariant> VALUES = new PastelGemstoneColorCollection<>(
+        TOPAZ,
+        AMETHYST,
+        CITRINE,
+        ONYX,
+        MOONSTONE
+    );
 
     public GlassArrowVariant(ResourceLocation texture, Attributes attributes) {
         this.texture = texture;

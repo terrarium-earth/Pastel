@@ -1,11 +1,9 @@
 package earth.terrarium.pastel.recipe.pedestal.dynamic;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
-import earth.terrarium.pastel.recipe.pedestal.RawShapedPedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -16,7 +14,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.Level;
 
 import java.util.Map;
@@ -30,7 +30,7 @@ public class EnderCanvasLargeRecipe extends ShapedPedestalRecipe {
             false,
             Optional.of(PastelAdvancements.Unlocks.Items.ENDER_SPLICE),
             PedestalTier.ADVANCED,
-            new RawShapedPedestalRecipe(3, 3, generateInputs(), Optional.empty()),
+            new ShapedRecipePattern(3, 3, generateInputs(), Optional.empty()),
             Map
                 .of(
                     PastelGemstoneColor.MAGENTA,
@@ -48,19 +48,19 @@ public class EnderCanvasLargeRecipe extends ShapedPedestalRecipe {
         );
     }
 
-    private static NonNullList<IngredientStack> generateInputs() {
+    private static NonNullList<Ingredient> generateInputs() {
         return NonNullList
             .of(
-                IngredientStack.EMPTY,
-                IngredientStack.ofItems(Items.STICK),
-                IngredientStack.ofTag(ItemTags.WOOL),
-                IngredientStack.ofItems(Items.STICK),
-                IngredientStack.ofTag(ItemTags.WOOL),
-                IngredientStack.ofItems(PastelItems.ENDER_CANVAS.get()),
-                IngredientStack.ofTag(ItemTags.WOOL),
-                IngredientStack.ofItems(Items.STICK),
-                IngredientStack.ofTag(ItemTags.WOOL),
-                IngredientStack.ofItems(Items.STICK)
+                Ingredient.EMPTY,
+                Ingredient.of(Items.STICK),
+                Ingredient.of(ItemTags.WOOL),
+                Ingredient.of(Items.STICK),
+                Ingredient.of(ItemTags.WOOL),
+                Ingredient.of(PastelItems.ENDER_CANVAS.get()),
+                Ingredient.of(ItemTags.WOOL),
+                Ingredient.of(Items.STICK),
+                Ingredient.of(ItemTags.WOOL),
+                Ingredient.of(Items.STICK)
             );
     }
 

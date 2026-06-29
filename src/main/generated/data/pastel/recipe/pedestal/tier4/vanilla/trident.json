@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:white": 4,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "M": {
+      "item": "pastel:mermaids_gem"
+    },
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " PP",
+    " MP",
+    "S  "
+  ],
+  "required_advancement": "pastel:lategame/build_complex_pedestal_structure",
+  "result": {
+    "count": 1,
+    "id": "minecraft:trident"
+  },
+  "tier": "complex",
+  "time": 1200
+}

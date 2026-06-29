@@ -1,0 +1,10 @@
+{
+  "type": "pastel:dragonrot_converting",
+  "ingredient": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:mud"
+  }
+}

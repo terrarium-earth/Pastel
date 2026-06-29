@@ -1,0 +1,37 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:magenta": 2,
+    "pastel:yellow": 2
+  },
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "E": {
+      "tag": "c:eggs"
+    },
+    "J": {
+      "item": "pastel:jaramel"
+    },
+    "M": {
+      "tag": "c:buckets/milk"
+    },
+    "T": {
+      "item": "minecraft:dragon_breath"
+    }
+  },
+  "pattern": [
+    "JTJ",
+    "EME",
+    "AAA"
+  ],
+  "required_advancement": "pastel:unlocks/food/tarts",
+  "result": {
+    "count": 1,
+    "id": "pastel:puff_tart"
+  },
+  "time": 160
+}

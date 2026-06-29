@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 1
+  },
+  "experience": 1.0,
+  "group": "gemstone_chiseled_blocks",
+  "key": {
+    "W": {
+      "item": "pastel:polished_basalt"
+    },
+    "X": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "pattern": [
+    "WXW",
+    "XXX",
+    "WXW"
+  ],
+  "required_advancement": "pastel:create_onyx_shard",
+  "result": {
+    "count": 1,
+    "id": "pastel:amethyst_chiseled_basalt"
+  },
+  "time": 80
+}

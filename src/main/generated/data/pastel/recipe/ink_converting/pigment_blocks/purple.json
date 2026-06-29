@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 900,
+  "ingredient": {
+    "item": "pastel:purple_block"
+  },
+  "ink_color": "pastel:purple",
+  "required_advancement": "pastel:hidden/collect_pigment/purple"
+}

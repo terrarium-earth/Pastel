@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {
+    "pastel:white": 32
+  },
+  "experience": 4.0,
+  "ingredients": [
+    {
+      "item": "pastel:upgrade_yield"
+    },
+    {
+      "item": "pastel:pure_diamond"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/upgrades/upgrade_yield2",
+  "result": {
+    "count": 1,
+    "id": "pastel:upgrade_yield2"
+  },
+  "tier": "complex",
+  "time": 6000
+}

@@ -1,0 +1,63 @@
+{
+  "type": "pastel:fusion_shrine",
+  "description": {
+    "translate": "pastel.recipe.fusion_shrine.explanation.midnight_aberration"
+  },
+  "during_crafting_effects": [
+    "pastel:nothing",
+    "pastel:lightning_on_shrine",
+    "pastel:visual_explosions_on_shrine",
+    "pastel:lightning_around_shrine",
+    "pastel:maybe_place_midnight_solution"
+  ],
+  "experience": 8.0,
+  "finish_crafting_effect": "pastel:place_midnight_solution",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:topaz_shard"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:citrine_shard"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:onyx_shard"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:neolith"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/blocks/midnight_aberration",
+  "result": {
+    "count": 1,
+    "id": "pastel:midnight_aberration"
+  },
+  "start_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "time": 800,
+  "world_conditions": [
+    {
+      "time_of_day": "day",
+      "weather": "clear_sky"
+    }
+  ]
+}

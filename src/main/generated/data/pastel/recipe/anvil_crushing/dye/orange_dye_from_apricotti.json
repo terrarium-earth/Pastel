@@ -1,0 +1,14 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 2.0,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "pastel:apricotti"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "result": {
+    "count": 4,
+    "id": "minecraft:orange_dye"
+  },
+  "soundEventIdentifier": "minecraft:block.grass.break"
+}

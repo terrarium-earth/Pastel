@@ -1,6 +1,8 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import net.minecraft.resources.ResourceLocation;
 
 @SuppressWarnings(
@@ -15,46 +17,43 @@ public class PastelAdvancements {
                     "unlocks/colored_lamps/light_gray_lamp"
                 );
 
-            public static final ResourceLocation GRAY_LAMP = PastelCommon.locate("unlocks/colored_lamps/gray_lamp");
+            public static final PastelInkColorCollection<ResourceLocation> VALUES = PastelInkColorCollection.NAMES
+                .map(color -> PastelCommon.locate("unlocks/colored_lamps/" + color + "_lamp"));
 
-            public static final ResourceLocation LIME_LAMP = PastelCommon.locate("unlocks/colored_lamps/lime_lamp");
+            public static final ResourceLocation GRAY_LAMP = VALUES.gray();
 
-            public static final ResourceLocation GREEN_LAMP = PastelCommon.locate("unlocks/colored_lamps/green_lamp");
+            public static final ResourceLocation LIME_LAMP = VALUES.lime();
 
-            public static final ResourceLocation RED_LAMP = PastelCommon.locate("unlocks/colored_lamps/red_lamp");
+            public static final ResourceLocation GREEN_LAMP = VALUES.green();
+
+            public static final ResourceLocation RED_LAMP = VALUES.red();
 
             public static final ResourceLocation ANY_COLORED_LAMP = PastelCommon
                 .locate(
                     "unlocks/colored_lamps/any_colored_lamp"
                 );
 
-            public static final ResourceLocation YELLOW_LAMP = PastelCommon.locate("unlocks/colored_lamps/yellow_lamp");
+            public static final ResourceLocation YELLOW_LAMP = VALUES.yellow();
 
-            public static final ResourceLocation PURPLE_LAMP = PastelCommon.locate("unlocks/colored_lamps/purple_lamp");
+            public static final ResourceLocation PURPLE_LAMP = VALUES.purple();
 
-            public static final ResourceLocation PINK_LAMP = PastelCommon.locate("unlocks/colored_lamps/pink_lamp");
+            public static final ResourceLocation PINK_LAMP = VALUES.pink();
 
-            public static final ResourceLocation BROWN_LAMP = PastelCommon.locate("unlocks/colored_lamps/brown_lamp");
+            public static final ResourceLocation BROWN_LAMP = VALUES.brown();
 
-            public static final ResourceLocation BLACK_LAMP = PastelCommon.locate("unlocks/colored_lamps/black_lamp");
+            public static final ResourceLocation BLACK_LAMP = VALUES.black();
 
-            public static final ResourceLocation LIGHT_BLUE_LAMP = PastelCommon
-                .locate(
-                    "unlocks/colored_lamps/light_blue_lamp"
-                );
+            public static final ResourceLocation LIGHT_BLUE_LAMP = VALUES.lightBlue();
 
-            public static final ResourceLocation ORANGE_LAMP = PastelCommon.locate("unlocks/colored_lamps/orange_lamp");
+            public static final ResourceLocation ORANGE_LAMP = VALUES.orange();
 
-            public static final ResourceLocation BLUE_LAMP = PastelCommon.locate("unlocks/colored_lamps/blue_lamp");
+            public static final ResourceLocation BLUE_LAMP = VALUES.blue();
 
-            public static final ResourceLocation CYAN_LAMP = PastelCommon.locate("unlocks/colored_lamps/cyan_lamp");
+            public static final ResourceLocation CYAN_LAMP = VALUES.cyan();
 
-            public static final ResourceLocation WHITE_LAMP = PastelCommon.locate("unlocks/colored_lamps/white_lamp");
+            public static final ResourceLocation WHITE_LAMP = VALUES.white();
 
-            public static final ResourceLocation MAGENTA_LAMP = PastelCommon
-                .locate(
-                    "unlocks/colored_lamps/magenta_lamp"
-                );
+            public static final ResourceLocation MAGENTA_LAMP = VALUES.magenta();
         }
 
         public static class HeadFusion {
@@ -169,6 +168,12 @@ public class PastelAdvancements {
             public static final ResourceLocation CITRINE_BOOTS = PastelCommon.locate("unlocks/equipment/citrine_boots");
 
             public static final ResourceLocation DARK_STAKES = PastelCommon.locate("unlocks/equipment/dark_stakes");
+
+            public static final ResourceLocation FOX_O_NINE_TAILS = PastelCommon
+                .locate("unlocks/equipment/fox_o_nine_tails");
+
+            public static final ResourceLocation VERDIGRIS_LASH = PastelCommon
+                .locate("unlocks/equipment/verdigris_lash");
         }
 
         public static class Blocks {
@@ -488,18 +493,18 @@ public class PastelAdvancements {
         public static class Pylons {
             public static final ResourceLocation ANY_PYLON = PastelCommon.locate("unlocks/pylons/any_pylon");
 
-            public static final ResourceLocation ONYX_PYLON = PastelCommon.locate("unlocks/pylons/onyx_pylon");
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES = PastelGemstoneColorCollection.GEMSTONE_NAMES
+                .map(name -> PastelCommon.locate("unlocks/pylons/" + name + "_pylon"));
 
-            public static final ResourceLocation TOPAZ_PYLON = PastelCommon.locate("unlocks/pylons/topaz_pylon");
+            public static final ResourceLocation ONYX_PYLON = VALUES.onyx();
 
-            public static final ResourceLocation MOONSTONE_PYLON = PastelCommon
-                .locate(
-                    "unlocks/pylons/moonstone_pylon"
-                );
+            public static final ResourceLocation TOPAZ_PYLON = VALUES.topaz();
 
-            public static final ResourceLocation AMETHYST_PYLON = PastelCommon.locate("unlocks/pylons/amethyst_pylon");
+            public static final ResourceLocation MOONSTONE_PYLON = VALUES.moonstone();
 
-            public static final ResourceLocation CITRINE_PYLON = PastelCommon.locate("unlocks/pylons/citrine_pylon");
+            public static final ResourceLocation AMETHYST_PYLON = VALUES.amethyst();
+
+            public static final ResourceLocation CITRINE_PYLON = VALUES.citrine();
         }
 
         public static class Items {
@@ -579,6 +584,10 @@ public class PastelAdvancements {
                     "unlocks/items/exchanging_staff"
                 );
 
+            public static final ResourceLocation FLOWING_STAFF = PastelCommon.locate("unlocks/items/flowing_staff");
+
+            public static final ResourceLocation WIRE_HOOK = PastelCommon.locate("unlocks/items/wire_hook");
+
             public static final ResourceLocation CRAFTING_TABLET = PastelCommon.locate("unlocks/items/crafting_tablet");
 
             public static final ResourceLocation BAG_OF_HOLDING = PastelCommon.locate("unlocks/items/bag_of_holding");
@@ -617,15 +626,18 @@ public class PastelAdvancements {
         }
 
         public static class GemstoneLights {
-            public static final ResourceLocation TOPAZ = PastelCommon.locate("unlocks/gemstone_lights/topaz");
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES = PastelGemstoneColorCollection.GEMSTONE_NAMES
+                .map(name -> PastelCommon.locate("unlocks/gemstone_lights/" + name));
 
-            public static final ResourceLocation AMETHYST = PastelCommon.locate("unlocks/gemstone_lights/amethyst");
+            public static final ResourceLocation TOPAZ = VALUES.topaz();
 
-            public static final ResourceLocation CITRINE = PastelCommon.locate("unlocks/gemstone_lights/citrine");
+            public static final ResourceLocation AMETHYST = VALUES.amethyst();
 
-            public static final ResourceLocation ONYX = PastelCommon.locate("unlocks/gemstone_lights/onyx");
+            public static final ResourceLocation CITRINE = VALUES.citrine();
 
-            public static final ResourceLocation MOONSTONE = PastelCommon.locate("unlocks/gemstone_lights/moonstone");
+            public static final ResourceLocation ONYX = VALUES.onyx();
+
+            public static final ResourceLocation MOONSTONE = VALUES.moonstone();
 
             public static final ResourceLocation ANY = PastelCommon.locate("unlocks/gemstone_lights/any");
         }
@@ -672,29 +684,20 @@ public class PastelAdvancements {
         }
 
         public static class GemstoneChimes {
-            public static final ResourceLocation ONYX_CHIME = PastelCommon.locate("unlocks/gemstone_chimes/onyx_chime");
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES = PastelGemstoneColorCollection.GEMSTONE_NAMES
+                .map(it -> PastelCommon.locate("unlocks/gemstone_chimes/" + it + "_chime"));
 
-            public static final ResourceLocation TOPAZ_CHIME = PastelCommon
-                .locate(
-                    "unlocks/gemstone_chimes/topaz_chime"
-                );
+            public static final ResourceLocation ONYX_CHIME = VALUES.onyx();
+
+            public static final ResourceLocation TOPAZ_CHIME = VALUES.topaz();
 
             public static final ResourceLocation ANY_CHIME = PastelCommon.locate("unlocks/gemstone_chimes/any_chime");
 
-            public static final ResourceLocation MOONSTONE_CHIME = PastelCommon
-                .locate(
-                    "unlocks/gemstone_chimes/moonstone_chime"
-                );
+            public static final ResourceLocation MOONSTONE_CHIME = VALUES.moonstone();
 
-            public static final ResourceLocation AMETHYST_CHIME = PastelCommon
-                .locate(
-                    "unlocks/gemstone_chimes/amethyst_chime"
-                );
+            public static final ResourceLocation AMETHYST_CHIME = VALUES.amethyst();
 
-            public static final ResourceLocation CITRINE_CHIME = PastelCommon
-                .locate(
-                    "unlocks/gemstone_chimes/citrine_chime"
-                );
+            public static final ResourceLocation CITRINE_CHIME = VALUES.citrine();
         }
 
         public static class Enchantments {
@@ -921,85 +924,40 @@ public class PastelAdvancements {
                     "unlocks/glowblocks/any_glowblock"
                 );
 
-            public static final ResourceLocation LIME_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/lime_glowblock"
-                );
+            public static final PastelInkColorCollection<ResourceLocation> VALUES = PastelInkColorCollection.NAMES
+                .map(name -> PastelCommon.locate("unlocks/glowblocks/" + name + "_glowblock"));
 
-            public static final ResourceLocation YELLOW_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/yellow_glowblock"
-                );
+            public static final ResourceLocation LIME_GLOWBLOCK = VALUES.lime();
 
-            public static final ResourceLocation PURPLE_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/purple_glowblock"
-                );
+            public static final ResourceLocation YELLOW_GLOWBLOCK = VALUES.yellow();
 
-            public static final ResourceLocation LIGHT_BLUE_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/light_blue_glowblock"
-                );
+            public static final ResourceLocation PURPLE_GLOWBLOCK = VALUES.purple();
 
-            public static final ResourceLocation BLACK_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/black_glowblock"
-                );
+            public static final ResourceLocation LIGHT_BLUE_GLOWBLOCK = VALUES.lightBlue();
 
-            public static final ResourceLocation LIGHT_GRAY_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/light_gray_glowblock"
-                );
+            public static final ResourceLocation BLACK_GLOWBLOCK = VALUES.black();
 
-            public static final ResourceLocation ORANGE_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/orange_glowblock"
-                );
+            public static final ResourceLocation LIGHT_GRAY_GLOWBLOCK = VALUES.lightGray();
 
-            public static final ResourceLocation GREEN_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/green_glowblock"
-                );
+            public static final ResourceLocation ORANGE_GLOWBLOCK = VALUES.orange();
 
-            public static final ResourceLocation PINK_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/pink_glowblock"
-                );
+            public static final ResourceLocation GREEN_GLOWBLOCK = VALUES.green();
 
-            public static final ResourceLocation RED_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/red_glowblock"
-                );
+            public static final ResourceLocation PINK_GLOWBLOCK = VALUES.pink();
 
-            public static final ResourceLocation CYAN_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/cyan_glowblock"
-                );
+            public static final ResourceLocation RED_GLOWBLOCK = VALUES.red();
 
-            public static final ResourceLocation GRAY_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/gray_glowblock"
-                );
+            public static final ResourceLocation CYAN_GLOWBLOCK = VALUES.cyan();
 
-            public static final ResourceLocation BLUE_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/blue_glowblock"
-                );
+            public static final ResourceLocation GRAY_GLOWBLOCK = VALUES.gray();
 
-            public static final ResourceLocation MAGENTA_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/magenta_glowblock"
-                );
+            public static final ResourceLocation BLUE_GLOWBLOCK = VALUES.blue();
 
-            public static final ResourceLocation WHITE_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/white_glowblock"
-                );
+            public static final ResourceLocation MAGENTA_GLOWBLOCK = VALUES.magenta();
 
-            public static final ResourceLocation BROWN_GLOWBLOCK = PastelCommon
-                .locate(
-                    "unlocks/glowblocks/brown_glowblock"
-                );
+            public static final ResourceLocation WHITE_GLOWBLOCK = VALUES.white();
+
+            public static final ResourceLocation BROWN_GLOWBLOCK = VALUES.brown();
         }
 
         public static class Resources {
@@ -1215,85 +1173,40 @@ public class PastelAdvancements {
         }
 
         public static class ColoredSaplings {
-            public static final ResourceLocation GREEN_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/green_sapling"
-                );
+            public static final PastelInkColorCollection<ResourceLocation> VALUES = PastelInkColorCollection.NAMES
+                .map(name -> PastelCommon.locate("unlocks/colored_saplings/" + name + "_sapling"));
 
-            public static final ResourceLocation BROWN_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/brown_sapling"
-                );
+            public static final ResourceLocation GREEN_SAPLING = VALUES.green();
 
-            public static final ResourceLocation LIGHT_BLUE_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/light_blue_sapling"
-                );
+            public static final ResourceLocation BROWN_SAPLING = VALUES.brown();
 
-            public static final ResourceLocation CYAN_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/cyan_sapling"
-                );
+            public static final ResourceLocation LIGHT_BLUE_SAPLING = VALUES.lightBlue();
 
-            public static final ResourceLocation LIME_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/lime_sapling"
-                );
+            public static final ResourceLocation CYAN_SAPLING = VALUES.cyan();
 
-            public static final ResourceLocation MAGENTA_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/magenta_sapling"
-                );
+            public static final ResourceLocation LIME_SAPLING = VALUES.lime();
 
-            public static final ResourceLocation BLACK_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/black_sapling"
-                );
+            public static final ResourceLocation MAGENTA_SAPLING = VALUES.magenta();
 
-            public static final ResourceLocation WHITE_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/white_sapling"
-                );
+            public static final ResourceLocation BLACK_SAPLING = VALUES.black();
 
-            public static final ResourceLocation YELLOW_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/yellow_sapling"
-                );
+            public static final ResourceLocation WHITE_SAPLING = VALUES.white();
 
-            public static final ResourceLocation ORANGE_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/orange_sapling"
-                );
+            public static final ResourceLocation YELLOW_SAPLING = VALUES.yellow();
 
-            public static final ResourceLocation PURPLE_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/purple_sapling"
-                );
+            public static final ResourceLocation ORANGE_SAPLING = VALUES.orange();
 
-            public static final ResourceLocation LIGHT_GRAY_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/light_gray_sapling"
-                );
+            public static final ResourceLocation PURPLE_SAPLING = VALUES.purple();
 
-            public static final ResourceLocation RED_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/red_sapling"
-                );
+            public static final ResourceLocation LIGHT_GRAY_SAPLING = VALUES.lightGray();
 
-            public static final ResourceLocation BLUE_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/blue_sapling"
-                );
+            public static final ResourceLocation RED_SAPLING = VALUES.red();
 
-            public static final ResourceLocation PINK_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/pink_sapling"
-                );
+            public static final ResourceLocation BLUE_SAPLING = VALUES.blue();
 
-            public static final ResourceLocation GRAY_SAPLING = PastelCommon
-                .locate(
-                    "unlocks/colored_saplings/gray_sapling"
-                );
+            public static final ResourceLocation PINK_SAPLING = VALUES.pink();
+
+            public static final ResourceLocation GRAY_SAPLING = VALUES.gray();
         }
 
         public static final ResourceLocation MEMORY_TO_HEAD = PastelCommon.locate("unlocks/memory_to_head");
@@ -1711,37 +1624,40 @@ public class PastelAdvancements {
         }
 
         public static class CollectPigment {
-            public static final ResourceLocation LIME = PastelCommon.locate("hidden/collect_pigment/lime");
+            public static final PastelInkColorCollection<ResourceLocation> VALUES = PastelInkColorCollection.NAMES
+                .map(name -> PastelCommon.locate("hidden/collect_pigment/" + name));
 
-            public static final ResourceLocation MAGENTA = PastelCommon.locate("hidden/collect_pigment/magenta");
+            public static final ResourceLocation LIME = VALUES.lime();
 
-            public static final ResourceLocation PINK = PastelCommon.locate("hidden/collect_pigment/pink");
+            public static final ResourceLocation MAGENTA = VALUES.magenta();
 
-            public static final ResourceLocation YELLOW = PastelCommon.locate("hidden/collect_pigment/yellow");
+            public static final ResourceLocation PINK = VALUES.pink();
 
-            public static final ResourceLocation CYAN = PastelCommon.locate("hidden/collect_pigment/cyan");
+            public static final ResourceLocation YELLOW = VALUES.yellow();
 
-            public static final ResourceLocation PURPLE = PastelCommon.locate("hidden/collect_pigment/purple");
+            public static final ResourceLocation CYAN = VALUES.cyan();
 
-            public static final ResourceLocation BROWN = PastelCommon.locate("hidden/collect_pigment/brown");
+            public static final ResourceLocation PURPLE = VALUES.purple();
 
-            public static final ResourceLocation GREEN = PastelCommon.locate("hidden/collect_pigment/green");
+            public static final ResourceLocation BROWN = VALUES.brown();
 
-            public static final ResourceLocation RED = PastelCommon.locate("hidden/collect_pigment/red");
+            public static final ResourceLocation GREEN = VALUES.green();
 
-            public static final ResourceLocation BLACK = PastelCommon.locate("hidden/collect_pigment/black");
+            public static final ResourceLocation RED = VALUES.red();
 
-            public static final ResourceLocation ORANGE = PastelCommon.locate("hidden/collect_pigment/orange");
+            public static final ResourceLocation BLACK = VALUES.black();
 
-            public static final ResourceLocation WHITE = PastelCommon.locate("hidden/collect_pigment/white");
+            public static final ResourceLocation ORANGE = VALUES.orange();
 
-            public static final ResourceLocation LIGHT_BLUE = PastelCommon.locate("hidden/collect_pigment/light_blue");
+            public static final ResourceLocation WHITE = VALUES.white();
 
-            public static final ResourceLocation GRAY = PastelCommon.locate("hidden/collect_pigment/gray");
+            public static final ResourceLocation LIGHT_BLUE = VALUES.lightBlue();
 
-            public static final ResourceLocation BLUE = PastelCommon.locate("hidden/collect_pigment/blue");
+            public static final ResourceLocation GRAY = VALUES.gray();
 
-            public static final ResourceLocation LIGHT_GRAY = PastelCommon.locate("hidden/collect_pigment/light_gray");
+            public static final ResourceLocation BLUE = VALUES.blue();
+
+            public static final ResourceLocation LIGHT_GRAY = VALUES.lightGray();
         }
 
         public static class CollectShards {
@@ -1750,6 +1666,17 @@ public class PastelAdvancements {
             public static final ResourceLocation AMETHYST = PastelCommon.locate("hidden/collect_shards/amethyst");
 
             public static final ResourceLocation CITRINE = PastelCommon.locate("hidden/collect_shards/citrine");
+
+            // Even though this isn't technically correct, there are so many places
+            // that use these values as the "collect shard" advancement including onyx + moonstone
+            // that it's best to have them here so I can reuse them
+            public static final PastelGemstoneColorCollection<ResourceLocation> VALUES = new PastelGemstoneColorCollection<>(
+                TOPAZ,
+                AMETHYST,
+                CITRINE,
+                CREATE_ONYX_SHARD,
+                Lategame.COLLECT_MOONSTONE
+            );
         }
 
         public static class StatusEffects {

@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:exuberance"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:purple_pigment"
+    },
+    {
+      "item": "pastel:purple_pigment"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "pastel:raw_azurite"
+    },
+    {
+      "item": "pastel:purple_pigment"
+    },
+    {
+      "item": "pastel:purple_pigment"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "pastel:raw_azurite"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/exuberance",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:exuberance": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

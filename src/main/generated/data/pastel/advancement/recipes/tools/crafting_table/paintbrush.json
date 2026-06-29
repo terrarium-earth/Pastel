@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/paintbrush"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "placed_pedestal": {
+      "conditions": {
+        "advancement": "pastel:place_pedestal"
+      },
+      "trigger": "databank:has_advancement"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "placed_pedestal"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/paintbrush"
+    ]
+  }
+}

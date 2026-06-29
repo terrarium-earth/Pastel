@@ -1,0 +1,10 @@
+{
+  "type": "pastel:midnight_solution_converting",
+  "ingredient": {
+    "item": "minecraft:enchanted_golden_apple"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:golden_apple"
+  }
+}

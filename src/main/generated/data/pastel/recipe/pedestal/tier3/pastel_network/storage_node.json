@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 1
+  },
+  "experience": 1.0,
+  "group": "pastel_network",
+  "key": {
+    "A": {
+      "item": "pastel:raw_azurite"
+    },
+    "S": {
+      "item": "pastel:topaz_shard"
+    },
+    "X": {
+      "item": "pastel:polished_basalt"
+    },
+    "Y": {
+      "item": "pastel:polished_calcite"
+    }
+  },
+  "pattern": [
+    " A ",
+    "ASA",
+    "YXY"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/pastel_network",
+  "result": {
+    "count": 1,
+    "id": "pastel:storage_node"
+  },
+  "tier": "advanced",
+  "time": 80
+}

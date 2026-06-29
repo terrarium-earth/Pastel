@@ -1,0 +1,20 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 1800,
+  "effect": "minecraft:weakness",
+  "group": "vanilla_potions",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:fermented_spider_eye"
+    }
+  },
+  "ink_color": "pastel:red",
+  "ink_cost": 4
+}

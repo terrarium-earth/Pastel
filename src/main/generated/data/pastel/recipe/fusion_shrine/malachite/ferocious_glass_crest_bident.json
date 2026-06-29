@@ -1,0 +1,61 @@
+{
+  "type": "pastel:fusion_shrine",
+  "copy_components": true,
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:malachite_bident"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstone_core"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:pure_prismarine"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:storm_stone"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:mermaids_gem"
+      }
+    },
+    {
+      "count": 16,
+      "ingredient": {
+        "item": "pastel:white_pigment"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/malachite/ferocious_glass_crest_bident",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:impaling": 6
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:ferocious_glass_crest_bident"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 1200
+}

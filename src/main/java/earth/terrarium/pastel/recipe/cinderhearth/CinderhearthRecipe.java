@@ -4,15 +4,15 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
-import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
+import earth.terrarium.pastel.recipe.GatedSizedPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -20,20 +20,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput> {
+public class CinderhearthRecipe extends GatedSizedPastelRecipe<SingleRecipeInput> {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/cinderhearth");
 
-    protected final IngredientStack ingredient;
+    protected final SizedIngredient ingredient;
 
     protected final int time;
 
@@ -45,7 +47,7 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
         String group,
         boolean secret,
         Optional<ResourceLocation> requiredAdvancementIdentifier,
-        IngredientStack ingredient,
+        SizedIngredient ingredient,
         int time,
         float experience,
         List<Tuple<ItemStack, Float>> resultsWithChance
@@ -109,8 +111,9 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
     }
 
     @Override
-    public List<IngredientStack> getIngredientStacks() {
-        return List.of(this.ingredient);
+    public NonNullList<SizedIngredient> getSizedIngredients() {
+        // ????
+        return NonNullList.of(SizedIngredient.of(Items.AIR, 1), this.ingredient);
     }
 
     public float getExperience() {
@@ -176,7 +179,8 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
                         ResourceLocation.CODEC
                             .optionalFieldOf("required_advancement")
                             .forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-                        IngredientStack.CODEC
+                        // bite the bullet on this _now_ so future versions work right
+                        SizedIngredient.NESTED_CODEC
                             .fieldOf("ingredient")
                             .forGetter(recipe -> recipe.ingredient),
                         Codec.INT
@@ -187,13 +191,14 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
                             .forGetter(recipe -> recipe.experience),
                         Codec
                             .withAlternative(
-                                ItemStack.CODEC.xmap(stack -> new Tuple<>(stack, 1.0f), Tuple::getA),
                                 CodecHelper
                                     .mapPair(
                                         ItemStack.CODEC.fieldOf("result"),
                                         Codec.FLOAT.optionalFieldOf("chance", 1.0f)
                                     )
-                                    .codec()
+                                    .codec(),
+                                ItemStack.CODEC.xmap(stack -> new Tuple<>(stack, 1.0f), Tuple::getA)
+
                             )
                             .listOf()
                             .fieldOf(
@@ -215,7 +220,7 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
                 recipe -> recipe.secret,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
                 recipe -> recipe.requiredAdvancementIdentifier,
-                IngredientStack.STREAM_CODEC,
+                SizedIngredient.STREAM_CODEC,
                 recipe -> recipe.ingredient,
                 ByteBufCodecs.VAR_INT,
                 recipe -> recipe.time,

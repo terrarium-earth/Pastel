@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.1,
+  "group": "resplendent_decorations",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "F": {
+      "item": "pastel:resplendent_block"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "###"
+  ],
+  "required_advancement": "pastel:pluck_resplendent_feather",
+  "result": {
+    "count": 1,
+    "id": "pastel:resplendent_bed"
+  },
+  "time": 40
+}

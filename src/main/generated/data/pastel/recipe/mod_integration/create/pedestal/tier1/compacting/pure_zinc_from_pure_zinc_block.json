@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:integration_pack_active",
+      "integration_pack": "create"
+    }
+  ],
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "ingredients": [
+    {
+      "item": "pastel:pure_zinc_block"
+    }
+  ],
+  "required_advancement": "pastel:lategame/collect_pure_resource",
+  "result": {
+    "count": 9,
+    "id": "pastel:pure_zinc"
+  },
+  "time": 20
+}

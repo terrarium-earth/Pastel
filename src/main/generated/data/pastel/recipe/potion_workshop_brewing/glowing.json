@@ -1,0 +1,21 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 1800,
+  "effect": "minecraft:glowing",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "ink_color": "pastel:green",
+  "ink_cost": 1,
+  "potency_modifier": 0.0,
+  "required_advancement": "pastel:midgame/brew_potion_in_potion_workshop"
+}

@@ -1,0 +1,32 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "color": 11972050,
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:pink_pigment"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:yellow_pigment"
+    }
+  },
+  "ingredient3": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:liquid_crystal_bucket"
+  }
+}

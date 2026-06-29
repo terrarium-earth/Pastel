@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "group": "glass_arrows",
+  "key": {
+    "F": {
+      "tag": "pastel:resplendent_feathers"
+    },
+    "M": {
+      "item": "pastel:raw_malachite"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "M",
+    "S",
+    "F"
+  ],
+  "required_advancement": "pastel:unlocks/malachite/glass_arrows",
+  "result": {
+    "count": 4,
+    "id": "pastel:malachite_glass_arrow"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "type": "pastel:titration_barrel",
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "minecraft:fishes"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "pastel:fresh_chocolate"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:clotted_cream"
+      }
+    }
+  ],
+  "min_fermentation_time_hours": 4,
+  "result": {
+    "count": 4,
+    "id": "pastel:le_fishe_au_chocolat"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 1800,
+  "effect": "minecraft:slow_falling",
+  "group": "vanilla_potions",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "ink_color": "pastel:brown",
+  "ink_cost": 2,
+  "potency_modifier": 0.0
+}

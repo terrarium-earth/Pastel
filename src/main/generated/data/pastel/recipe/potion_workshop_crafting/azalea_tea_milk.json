@@ -1,0 +1,38 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "color": 9997393,
+  "group": "azalea_tea",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:flowering_azalea"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:nightdew_sprout"
+    }
+  },
+  "ingredient3": {
+    "count": 1,
+    "ingredient": {
+      "tag": "c:buckets/milk"
+    }
+  },
+  "required_advancement": "pastel:unlocks/food/azalea_tea",
+  "result": {
+    "components": {
+      "pastel:with_milk": {}
+    },
+    "count": 1,
+    "id": "pastel:azalea_tea"
+  },
+  "secret": true
+}

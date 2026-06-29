@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:magenta": 1,
+    "pastel:yellow": 3
+  },
+  "experience": 0.5,
+  "group": "colored_spore_blossoms",
+  "key": {
+    "P": {
+      "item": "pastel:green_pigment"
+    },
+    "S": {
+      "item": "minecraft:spore_blossom"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "required_advancement": "pastel:hidden/collect_pigment/green",
+  "result": {
+    "count": 1,
+    "id": "pastel:green_spore_blossom"
+  },
+  "tier": "simple",
+  "time": 80
+}

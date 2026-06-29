@@ -1,0 +1,19 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.3,
+  "ingredient": {
+    "count": 1,
+    "ingredient": {
+      "tag": "minecraft:logs_that_burn"
+    }
+  },
+  "results": [
+    {
+      "result": {
+        "count": 2,
+        "id": "minecraft:charcoal"
+      }
+    }
+  ],
+  "time": 100
+}

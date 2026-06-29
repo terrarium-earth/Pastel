@@ -1,0 +1,41 @@
+{
+  "type": "pastel:fusion_shrine",
+  "experience": 4.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_bismuth_ring"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "minecraft:popped_chorus_fruit"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:paltaeria_fragments"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:paltaeria_gem"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/ring_of_aetherial_grace",
+  "result": {
+    "count": 1,
+    "id": "pastel:ring_of_aetherial_grace"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 1200
+}

@@ -22,10 +22,10 @@ public abstract class PotionWorkshopRecipeDisplay extends PastelDisplay {
         super(
             recipe,
             REIHelper
-                .toEntryIngredients(
+                .toEntryIngredientsSized(
                     recipe
                         .value()
-                        .getIngredientStacks()
+                        .getSizedIngredients()
                 ),
             Collections
                 .singletonList(

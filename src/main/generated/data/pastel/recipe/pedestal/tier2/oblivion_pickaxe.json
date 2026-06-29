@@ -1,0 +1,38 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:magenta": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "P": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "Q": {
+      "item": "pastel:quitoxic_powder"
+    },
+    "S": {
+      "item": "minecraft:calcite"
+    }
+  },
+  "pattern": [
+    "PQP",
+    " S ",
+    " S "
+  ],
+  "required_advancement": "pastel:unlocks/equipment/oblivion_pickaxe",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "pastel:voiding": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:oblivion_pickaxe"
+  },
+  "tier": "simple",
+  "time": 1200
+}

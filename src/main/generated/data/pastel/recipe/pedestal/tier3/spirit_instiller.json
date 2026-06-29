@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1
+  },
+  "experience": 2.0,
+  "key": {
+    "A": {
+      "item": "pastel:raw_azurite"
+    },
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "pastel:polished_calcite"
+    }
+  },
+  "pattern": [
+    "CCC",
+    " B ",
+    "ACA"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/spirit_instiller",
+  "result": {
+    "count": 1,
+    "id": "pastel:spirit_instiller"
+  },
+  "tier": "advanced",
+  "time": 1200
+}

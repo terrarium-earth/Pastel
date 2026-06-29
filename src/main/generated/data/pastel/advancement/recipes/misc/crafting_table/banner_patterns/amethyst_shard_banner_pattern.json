@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amethyst": {
+      "conditions": {
+        "advancement": "pastel:hidden/collect_shards/amethyst"
+      },
+      "trigger": "databank:has_advancement"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/banner_patterns/amethyst_shard_banner_pattern"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_amethyst"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/banner_patterns/amethyst_shard_banner_pattern"
+    ]
+  }
+}

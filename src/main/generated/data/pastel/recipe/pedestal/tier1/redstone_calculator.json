@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 4
+  },
+  "experience": 1.0,
+  "key": {
+    "C": {
+      "item": "pastel:citrine_shard"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    "TCR",
+    "SSS"
+  ],
+  "required_advancement": "pastel:unlocks/redstone/redstone_calculator",
+  "result": {
+    "count": 1,
+    "id": "pastel:redstone_calculator"
+  }
+}

@@ -2,7 +2,6 @@ package earth.terrarium.pastel.recipe.titration_barrel;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
@@ -22,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
@@ -112,7 +112,7 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
         return PastelRecipeTypes.TITRATION_BARREL;
     }
 
-    List<IngredientStack> getIngredientStacks();
+    List<SizedIngredient> getSizedIngredients();
 
     int getMinFermentationTimeHours();
 

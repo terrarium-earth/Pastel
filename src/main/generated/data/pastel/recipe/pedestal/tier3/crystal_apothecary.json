@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 8
+  },
+  "experience": 4.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_basalt"
+    },
+    "C": {
+      "item": "pastel:polished_calcite"
+    },
+    "L": {
+      "item": "pastel:storm_stone"
+    }
+  },
+  "pattern": [
+    " L ",
+    "LBL",
+    "BCB"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/crystal_apothecary",
+  "result": {
+    "count": 1,
+    "id": "pastel:crystal_apothecary"
+  },
+  "tier": "advanced",
+  "time": 800
+}

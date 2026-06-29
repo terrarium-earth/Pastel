@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4
+  },
+  "experience": 1.0,
+  "group": "gemstone_glass",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "pastel:topaz_shard"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PPP",
+    "GPG"
+  ],
+  "required_advancement": "pastel:hidden/collect_shards/topaz",
+  "result": {
+    "count": 8,
+    "id": "pastel:topaz_glass"
+  },
+  "time": 20
+}

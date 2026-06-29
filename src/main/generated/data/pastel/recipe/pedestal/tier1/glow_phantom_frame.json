@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 4
+  },
+  "experience": 0.5,
+  "group": "phantom_frames",
+  "key": {
+    "C": {
+      "item": "pastel:shimmerstone_gem"
+    },
+    "F": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "G": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SGS",
+    "CLC",
+    "SFS"
+  ],
+  "required_advancement": "pastel:unlocks/items/phantom_frames",
+  "result": {
+    "count": 1,
+    "id": "pastel:glow_phantom_frame"
+  },
+  "time": 80
+}

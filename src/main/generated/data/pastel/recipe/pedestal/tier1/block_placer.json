@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4
+  },
+  "experience": 1.0,
+  "key": {
+    "B": {
+      "item": "pastel:polished_calcite"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "pastel:topaz_shard"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "RTB",
+    "BBB"
+  ],
+  "required_advancement": "pastel:unlocks/redstone/block_placer",
+  "result": {
+    "count": 1,
+    "id": "pastel:block_placer"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 900,
+  "ingredient": {
+    "item": "pastel:green_block"
+  },
+  "ink_color": "pastel:green",
+  "required_advancement": "pastel:hidden/collect_pigment/green"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.5,
+  "ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:pure_echo"
+    }
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource",
+  "results": [
+    {
+      "result": {
+        "count": 2,
+        "id": "minecraft:echo_shard"
+      }
+    },
+    {
+      "chance": 0.25,
+      "result": {
+        "count": 1,
+        "id": "minecraft:echo_shard"
+      }
+    }
+  ],
+  "time": 200
+}

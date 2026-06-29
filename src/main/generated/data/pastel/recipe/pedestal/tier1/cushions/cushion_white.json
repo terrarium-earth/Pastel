@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "C": {
+      "item": "minecraft:white_carpet"
+    },
+    "F": {
+      "tag": "c:feathers"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "FFF",
+    "CCC"
+  ],
+  "required_advancement": "pastel:craft_using_pedestal",
+  "result": {
+    "count": 2,
+    "id": "pastel:cushion_white"
+  },
+  "time": 80
+}

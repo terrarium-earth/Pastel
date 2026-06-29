@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4
+  },
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    "TAR",
+    "III"
+  ],
+  "required_advancement": "pastel:unlocks/redstone/redstone_timer",
+  "result": {
+    "count": 1,
+    "id": "pastel:redstone_timer"
+  }
+}

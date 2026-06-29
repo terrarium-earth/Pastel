@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 2.0,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "M": {
+      "tag": "c:buckets/milk"
+    },
+    "P": {
+      "item": "minecraft:apple"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "Y": {
+      "item": "pastel:myceylon"
+    }
+  },
+  "pattern": [
+    "YPY",
+    "SMS",
+    "AAA"
+  ],
+  "required_advancement": "pastel:unlocks/food/myceylon_pastries",
+  "result": {
+    "count": 1,
+    "id": "pastel:myceylon_apple_pie"
+  },
+  "time": 120
+}

@@ -1,0 +1,41 @@
+{
+  "type": "pastel:fusion_shrine",
+  "experience": 2.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:fanciful_tuff_ring"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "minecraft:quartz"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:stratine_fragments"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:stratine_gem"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/ring_of_denser_steps",
+  "result": {
+    "count": 1,
+    "id": "pastel:ring_of_denser_steps"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 600
+}

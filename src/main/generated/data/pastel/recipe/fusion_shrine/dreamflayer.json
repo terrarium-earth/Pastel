@@ -1,0 +1,74 @@
+{
+  "type": "pastel:fusion_shrine",
+  "copy_components": true,
+  "description": {
+    "translate": "pastel.recipe.fusion_shrine.explanation.dreamflayer"
+  },
+  "during_crafting_effects": [
+    "pastel:nothing",
+    "pastel:visual_explosions_on_shrine",
+    "pastel:nothing"
+  ],
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:legendary_tool_craft",
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:netherite_sword"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:bismuth_crystal"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstruck_nectar"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:red_pigment"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:light_blue_pigment"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:light_gray_pigment"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:black_pigment"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/equipment/dreamflayer",
+  "result": {
+    "count": 1,
+    "id": "pastel:dreamflayer"
+  },
+  "start_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "time": 1200,
+  "world_conditions": [
+    {
+      "moon_phase": "full_moon",
+      "time_of_day": "night"
+    }
+  ]
+}

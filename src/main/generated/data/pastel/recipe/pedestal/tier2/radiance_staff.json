@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 8
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "pastel:yellow_pigment"
+    },
+    "G": {
+      "item": "pastel:shimmerstone_gem"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " BG",
+    " SB",
+    "S  "
+  ],
+  "required_advancement": "pastel:unlocks/items/radiance_staff",
+  "result": {
+    "count": 1,
+    "id": "pastel:radiance_staff"
+  },
+  "tier": "simple",
+  "time": 1200
+}

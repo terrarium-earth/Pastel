@@ -1,0 +1,26 @@
+{
+  "type": "pastel:cinderhearth",
+  "experience": 0.2,
+  "ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:ancient_debris"
+    }
+  },
+  "results": [
+    {
+      "result": {
+        "count": 1,
+        "id": "minecraft:netherite_scrap"
+      }
+    },
+    {
+      "chance": 0.5,
+      "result": {
+        "count": 1,
+        "id": "minecraft:netherite_scrap"
+      }
+    }
+  ],
+  "time": 100
+}

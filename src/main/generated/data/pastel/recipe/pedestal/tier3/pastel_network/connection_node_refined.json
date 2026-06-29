@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 4.0,
+  "group": "pure_pastel_network",
+  "key": {
+    "A": {
+      "item": "pastel:pure_azurite"
+    },
+    "S": {
+      "item": "minecraft:quartz"
+    },
+    "X": {
+      "item": "pastel:polished_basalt"
+    },
+    "Y": {
+      "item": "pastel:polished_calcite"
+    }
+  },
+  "pattern": [
+    " A ",
+    "ASA",
+    "YXY"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/pastel_network",
+  "result": {
+    "count": 16,
+    "id": "pastel:connection_node"
+  },
+  "tier": "advanced",
+  "time": 80
+}

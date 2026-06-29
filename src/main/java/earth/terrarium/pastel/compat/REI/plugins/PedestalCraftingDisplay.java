@@ -1,10 +1,8 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.REI.PastelDisplay;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
-import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
@@ -14,6 +12,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.Collections;
@@ -54,7 +53,7 @@ public class PedestalCraftingDisplay extends PastelDisplay {
 
     private static List<EntryIngredient> mapIngredients(PedestalRecipe recipe) {
         int powderSlotCount = recipe.getTier().getPowderSlotCount();
-        List<IngredientStack> ingredients = recipe.getIngredientStacks();
+        List<Ingredient> ingredients = recipe.getIngredients();
         int ingredientCount = ingredients.size();
 
         List<EntryIngredient> list = NonNullList.withSize(9 + powderSlotCount, EntryIngredient.empty());
@@ -64,7 +63,7 @@ public class PedestalCraftingDisplay extends PastelDisplay {
             i < ingredientCount;
             i++
         ) {
-            list.set(recipe.getGridSlotId(i), REIHelper.ofIngredientStack(recipe.getIngredientStacks().get(i)));
+            list.set(recipe.getGridSlotId(i), EntryIngredients.ofIngredient(ingredients.get(i)));
         }
         for (
             int i = 0;

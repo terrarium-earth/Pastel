@@ -1,0 +1,21 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 2.0,
+  "group": "crystallarieum_growable_crushing",
+  "ingredient": [
+    {
+      "item": "pastel:small_diamond_bud"
+    },
+    {
+      "item": "pastel:large_diamond_bud"
+    }
+  ],
+  "particleEffectIdentifier": "minecraft:explosion",
+  "required_advancement": "pastel:unlocks/blocks/crystallarieum",
+  "result": {
+    "count": 1,
+    "id": "minecraft:diamond"
+  },
+  "soundEventIdentifier": "minecraft:block.amethyst_cluster.break"
+}

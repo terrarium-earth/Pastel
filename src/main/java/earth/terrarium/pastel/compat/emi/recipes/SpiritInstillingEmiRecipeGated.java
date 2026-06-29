@@ -11,6 +11,7 @@ import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulati
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SpiritInstillingEmiRecipeGated extends GatedSpectrumEmiRecipe<SpiritInstillerRecipe> {
@@ -18,13 +19,13 @@ public class SpiritInstillingEmiRecipeGated extends GatedSpectrumEmiRecipe<Spiri
     public SpiritInstillingEmiRecipeGated(SpiritInstillerRecipe recipe) {
         super(PastelEmiRecipeCategories.SPIRIT_INSTILLER, recipe, 116, 48);
         inputs = recipe
-            .getIngredientStacks()
+            .getSizedIngredients()
             .stream()
             .map(
                 s -> EmiIngredient
                     .of(
-                        s
-                            .getItems()
+                        Arrays
+                            .stream(s.getItems())
                             .map(EmiStack::of)
                             .toList()
                     )

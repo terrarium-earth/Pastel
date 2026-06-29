@@ -1,0 +1,21 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "jadeite_decorations",
+  "key": {
+    "X": {
+      "item": "pastel:jadeite_petals"
+    }
+  },
+  "pattern": [
+    "XX",
+    "XX"
+  ],
+  "required_advancement": "pastel:hidden/collect_jadeite",
+  "result": {
+    "count": 1,
+    "id": "pastel:jadeite_petal_block"
+  },
+  "time": 40
+}

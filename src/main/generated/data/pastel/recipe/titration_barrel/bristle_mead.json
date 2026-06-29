@@ -1,0 +1,115 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "minecraft:fire_resistance"
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:speed",
+        "potency": [
+          {},
+          {
+            "min_alc": 20.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 25.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 3
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:strength",
+        "potency": [
+          {
+            "min_alc": 25.0,
+            "min_thickness": 1.5
+          },
+          {
+            "min_alc": 25.0,
+            "min_thickness": 2.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 25.0,
+            "min_thickness": 2.5,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:slowness",
+        "potency": [
+          {
+            "min_thickness": 2.0
+          },
+          {
+            "min_thickness": 3.0,
+            "potency": 1
+          },
+          {
+            "min_thickness": 4.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:blindness",
+        "potency": [
+          {
+            "min_alc": 30.0
+          },
+          {
+            "min_thickness": 3.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.25
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "minecraft:honey_bottle"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:sawblade_holly_berry"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:bristle_sprouts"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "pastel:jaramel"
+      }
+    }
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",
+  "result": {
+    "count": 4,
+    "id": "pastel:bristle_mead"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

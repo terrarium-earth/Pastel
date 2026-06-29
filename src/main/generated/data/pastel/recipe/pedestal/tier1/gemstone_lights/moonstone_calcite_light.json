@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 4
+  },
+  "experience": 0.3,
+  "group": "moonstone_lights",
+  "key": {
+    "B": {
+      "item": "pastel:moonstone_block"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_block"
+    },
+    "T": {
+      "item": "pastel:polished_calcite"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "BSB",
+    "TTT"
+  ],
+  "required_advancement": "pastel:unlocks/gemstone_lights/moonstone",
+  "result": {
+    "count": 4,
+    "id": "pastel:moonstone_calcite_light"
+  },
+  "tier": "complex",
+  "time": 40
+}

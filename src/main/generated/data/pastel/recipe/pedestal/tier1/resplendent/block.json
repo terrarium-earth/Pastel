@@ -1,0 +1,21 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "resplendent_decorations",
+  "key": {
+    "G": {
+      "item": "pastel:resplendent_feather"
+    }
+  },
+  "pattern": [
+    "GG",
+    "GG"
+  ],
+  "required_advancement": "pastel:pluck_resplendent_feather",
+  "result": {
+    "count": 1,
+    "id": "pastel:resplendent_block"
+  },
+  "time": 40
+}

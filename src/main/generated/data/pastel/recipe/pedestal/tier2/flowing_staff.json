@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 6,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "key": {
+    "P": {
+      "item": "pastel:paltaeria_fragments"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "Y": {
+      "item": "pastel:yellow_pigment"
+    }
+  },
+  "pattern": [
+    " YP",
+    " SY",
+    "S  "
+  ],
+  "required_advancement": "pastel:unlocks/items/flowing_staff",
+  "result": {
+    "count": 1,
+    "id": "pastel:flowing_staff"
+  },
+  "tier": "simple",
+  "time": 1200
+}

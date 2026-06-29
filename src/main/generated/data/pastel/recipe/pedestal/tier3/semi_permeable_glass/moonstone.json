@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 8
+  },
+  "experience": 1.0,
+  "group": "semi_permeable_glass",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "pastel:purple_pigment"
+    },
+    "S": {
+      "item": "pastel:moonstone_shard"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PSP",
+    "GPG"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/moonstone_semi_permeable_glass",
+  "result": {
+    "count": 6,
+    "id": "pastel:moonstone_semi_permeable_glass"
+  },
+  "tier": "complex",
+  "time": 80
+}

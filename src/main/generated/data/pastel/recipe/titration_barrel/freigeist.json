@@ -1,0 +1,46 @@
+{
+  "type": "pastel:titration_barrel",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "pastel:amaranth_grains"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:onyx_powder"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:frostbite_essence"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "pastel:bloodboil_syrup"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:nether_wart"
+      }
+    }
+  ],
+  "min_fermentation_time_hours": 48,
+  "required_advancement": "pastel:unlocks/food/freigeist",
+  "result": {
+    "count": 2,
+    "id": "pastel:freigeist"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

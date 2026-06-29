@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "minecraft:glistering_melon_slice"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:gold_nugget"
+  }
+}

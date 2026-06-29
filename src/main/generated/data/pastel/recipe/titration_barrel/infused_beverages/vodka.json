@@ -1,0 +1,113 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "minecraft:strength",
+        "potency": [
+          {},
+          {
+            "min_alc": 35.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 45.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 55.0,
+            "potency": 3
+          },
+          {
+            "min_alc": 65.0,
+            "potency": 4
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "pastel:swiftness",
+        "potency": [
+          {
+            "min_alc": 40.0,
+            "min_thickness": 1.5
+          },
+          {
+            "min_alc": 40.0,
+            "min_thickness": 2.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 40.0,
+            "min_thickness": 2.5,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:fire_resistance",
+        "potency": [
+          {
+            "min_alc": 60.0
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:weakness",
+        "potency": [
+          {
+            "min_thickness": 2.0
+          },
+          {
+            "min_thickness": 3.0,
+            "potency": 1
+          },
+          {
+            "min_thickness": 4.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:poison",
+        "potency": [
+          {
+            "min_alc": 60.0
+          },
+          {
+            "min_thickness": 3.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.125
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 12,
+      "ingredient": {
+        "item": "minecraft:potato"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 14938088,
+        "variant": "vodka"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

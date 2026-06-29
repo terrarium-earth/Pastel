@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4,
+    "pastel:yellow": 2
+  },
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "E": {
+      "tag": "c:eggs"
+    },
+    "J": {
+      "item": "pastel:jaramel"
+    },
+    "M": {
+      "tag": "c:buckets/milk"
+    },
+    "T": {
+      "item": "pastel:nightdew_sprout"
+    }
+  },
+  "pattern": [
+    "JTJ",
+    "EME",
+    "AAA"
+  ],
+  "required_advancement": "pastel:unlocks/food/tarts",
+  "result": {
+    "count": 1,
+    "id": "pastel:whispy_tart"
+  },
+  "time": 160
+}

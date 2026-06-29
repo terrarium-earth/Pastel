@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:foundry"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:orange_pigment"
+    },
+    {
+      "item": "pastel:orange_pigment"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "pastel:stratine_gem"
+    },
+    {
+      "item": "pastel:orange_pigment"
+    },
+    {
+      "item": "pastel:orange_pigment"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "pastel:stratine_gem"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/foundry",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:foundry": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

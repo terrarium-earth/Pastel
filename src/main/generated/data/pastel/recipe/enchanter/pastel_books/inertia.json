@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pastel:enchantments_exist",
+      "values": [
+        "pastel:inertia"
+      ]
+    }
+  ],
+  "type": "pastel:enchanter",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:brown_pigment"
+    },
+    {
+      "item": "pastel:brown_pigment"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "pastel:neolith"
+    },
+    {
+      "item": "pastel:brown_pigment"
+    },
+    {
+      "item": "pastel:brown_pigment"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "pastel:neolith"
+    }
+  ],
+  "required_advancement": "pastel:unlocks/enchantments/inertia",
+  "required_experience": 100,
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "pastel:inertia": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  },
+  "time": 300
+}

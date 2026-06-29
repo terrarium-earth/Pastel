@@ -3,31 +3,27 @@ package earth.terrarium.pastel.compat.modonomicon;
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Rotation;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 public class ModonomiconHelper {
-
-    public static void renderIngredientStack(
+    // probably a helper function _somewhere_ out there, but im not finding it LOL
+    public static void renderIngredient(
         GuiGraphics drawContext,
         BookEntryScreen parentScreen,
         int x,
         int y,
         int mouseX,
         int mouseY,
-        IngredientStack ingredientStack
+        Ingredient ingredient
     ) {
-        List<ItemStack> stacks = ingredientStack
-            .getItems()
-            .toList();
-        if (!stacks.isEmpty()) {
+        var stacks = ingredient.getItems();
+        if (stacks.length > 0) {
             parentScreen
                 .renderItemStack(
                     drawContext,
@@ -35,7 +31,33 @@ public class ModonomiconHelper {
                     y,
                     mouseX,
                     mouseY,
-                    stacks.get(parentScreen.getTicksInBook() / 20 % stacks.size())
+                    stacks[parentScreen.getTicksInBook() / 20 % stacks.length]
+                );
+        }
+    }
+
+    public static void renderSizedIngredient(
+        GuiGraphics drawContext,
+        BookEntryScreen parentScreen,
+        int x,
+        int y,
+        int mouseX,
+        int mouseY,
+        @Nullable SizedIngredient ingredient
+    ) {
+        if (ingredient == null) {
+            return;
+        }
+        var stacks = ingredient.getItems();
+        if (stacks.length > 0) {
+            parentScreen
+                .renderItemStack(
+                    drawContext,
+                    x,
+                    y,
+                    mouseX,
+                    mouseY,
+                    stacks[parentScreen.getTicksInBook() / 20 % stacks.length]
                 );
         }
     }

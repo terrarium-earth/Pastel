@@ -1,82 +1,10 @@
 {
   "values": {
-    "pastel:black_fence": {
-      "burn_time": 300
-    },
-    "pastel:black_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:blue_fence": {
-      "burn_time": 300
-    },
-    "pastel:blue_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:brown_fence": {
-      "burn_time": 300
-    },
-    "pastel:brown_fence_gate": {
-      "burn_time": 300
-    },
     "pastel:chrysocolla": {
       "burn_time": 16000
     },
-    "pastel:cyan_fence": {
-      "burn_time": 300
-    },
-    "pastel:cyan_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:gray_fence": {
-      "burn_time": 300
-    },
-    "pastel:gray_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:green_fence": {
-      "burn_time": 300
-    },
-    "pastel:green_fence_gate": {
-      "burn_time": 300
-    },
     "pastel:incandescent_essence": {
       "burn_time": 2400
-    },
-    "pastel:light_blue_fence": {
-      "burn_time": 300
-    },
-    "pastel:light_blue_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:light_gray_fence": {
-      "burn_time": 300
-    },
-    "pastel:light_gray_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:lime_fence": {
-      "burn_time": 300
-    },
-    "pastel:lime_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:magenta_fence": {
-      "burn_time": 300
-    },
-    "pastel:magenta_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:orange_fence": {
-      "burn_time": 300
-    },
-    "pastel:orange_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:pink_fence": {
-      "burn_time": 300
-    },
-    "pastel:pink_fence_gate": {
-      "burn_time": 300
     },
     "pastel:pure_alcohol": {
       "burn_time": 16000
@@ -86,18 +14,6 @@
     },
     "pastel:pure_coal_block": {
       "burn_time": 32000
-    },
-    "pastel:purple_fence": {
-      "burn_time": 300
-    },
-    "pastel:purple_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:red_fence": {
-      "burn_time": 300
-    },
-    "pastel:red_fence_gate": {
-      "burn_time": 300
     },
     "pastel:stripped_weeping_gala_log": {
       "burn_time": 600
@@ -146,18 +62,6 @@
     },
     "pastel:wet_lava_sponge": {
       "burn_time": 12800
-    },
-    "pastel:white_fence": {
-      "burn_time": 300
-    },
-    "pastel:white_fence_gate": {
-      "burn_time": 300
-    },
-    "pastel:yellow_fence": {
-      "burn_time": 300
-    },
-    "pastel:yellow_fence_gate": {
-      "burn_time": 300
     }
   }
 }

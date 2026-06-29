@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "key": {
+    "A": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "required_advancement": "pastel:collect_shimmerstone",
+  "result": {
+    "count": 1,
+    "id": "pastel:shimmerstone_block"
+  },
+  "time": 20
+}

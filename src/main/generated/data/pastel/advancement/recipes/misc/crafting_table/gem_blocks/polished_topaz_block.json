@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/gem_blocks/polished_topaz_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unlock": {
+      "conditions": {
+        "advancement": "pastel:hidden/collect_shards/topaz"
+      },
+      "trigger": "databank:has_advancement"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/gem_blocks/polished_topaz_block"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.5,
+  "key": {
+    "L": {
+      "item": "minecraft:tuff"
+    }
+  },
+  "pattern": [
+    " L ",
+    "L L",
+    " L "
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/fanciful_tuff_ring",
+  "result": {
+    "count": 1,
+    "id": "pastel:fanciful_tuff_ring"
+  },
+  "tier": "advanced"
+}

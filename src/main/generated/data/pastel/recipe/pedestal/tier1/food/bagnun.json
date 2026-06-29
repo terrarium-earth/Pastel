@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:crawfish"
+    },
+    "B": {
+      "item": "pastel:clotted_cream"
+    },
+    "E": {
+      "item": "pastel:myceylon"
+    },
+    "J": {
+      "tag": "c:mushrooms"
+    },
+    "M": {
+      "item": "pastel:jade_wine"
+    }
+  },
+  "pattern": [
+    "EBE",
+    "JMJ",
+    "AAA"
+  ],
+  "required_advancement": "pastel:hidden/collect_cookbooks/imbrifer_cookbook",
+  "result": {
+    "count": 1,
+    "id": "pastel:bagnun"
+  },
+  "time": 160
+}

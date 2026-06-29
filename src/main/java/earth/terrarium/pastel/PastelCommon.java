@@ -5,7 +5,6 @@ import com.cmdpro.databank.misc.VersionChangeHelper;
 import earth.terrarium.pastel.api.color.ColorRegistry;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.attachments.PastelDataAttachments;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
@@ -166,7 +165,6 @@ public class PastelCommon {
         InkColorMixes.register();
         PastelEntityAttributes.register(pastelBus);
         PastelLoadConditions.register(pastelBus);
-        IngredientStack.register(pastelBus);
 
         logInfo("Registering Component Types...");
         PastelDataComponentTypes.register(pastelBus);

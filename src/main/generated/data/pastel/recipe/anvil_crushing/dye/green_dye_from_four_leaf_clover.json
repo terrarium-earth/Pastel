@@ -1,0 +1,15 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 0.8,
+  "ingredient": {
+    "item": "pastel:four_leaf_clover"
+  },
+  "particleEffectIdentifier": "minecraft:cloud",
+  "required_advancement": "pastel:collect_four_leaf_clover",
+  "result": {
+    "count": 4,
+    "id": "minecraft:green_dye"
+  },
+  "soundEventIdentifier": "minecraft:block.grass.break"
+}

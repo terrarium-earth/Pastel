@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4
+  },
+  "experience": 0.3,
+  "group": "amethyst_lights",
+  "key": {
+    "B": {
+      "item": "minecraft:amethyst_block"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_block"
+    },
+    "T": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "BSB",
+    "TTT"
+  ],
+  "required_advancement": "pastel:unlocks/gemstone_lights/amethyst",
+  "result": {
+    "count": 4,
+    "id": "pastel:amethyst_basalt_light"
+  },
+  "time": 40
+}

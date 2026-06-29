@@ -1,0 +1,10 @@
+{
+  "type": "pastel:midnight_solution_converting",
+  "ingredient": {
+    "tag": "minecraft:dirt"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:soul_soil"
+  }
+}

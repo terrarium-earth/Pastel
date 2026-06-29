@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 6
+  },
+  "experience": 0.5,
+  "group": "colored_lamps",
+  "key": {
+    "P": {
+      "item": "pastel:yellow_pigment"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PRP",
+    "SPS"
+  ],
+  "required_advancement": "pastel:unlocks/colored_lamps/yellow_lamp",
+  "result": {
+    "count": 2,
+    "id": "pastel:yellow_lamp"
+  },
+  "time": 40
+}

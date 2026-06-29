@@ -1,0 +1,17 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "colors": {},
+  "disable_yield_upgrades": true,
+  "group": "compacting",
+  "ingredients": [
+    {
+      "item": "pastel:onyx_powder_block"
+    }
+  ],
+  "required_advancement": "pastel:create_onyx_shard",
+  "result": {
+    "count": 9,
+    "id": "pastel:onyx_powder"
+  },
+  "time": 20
+}

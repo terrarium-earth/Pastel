@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.helpers.Support;
@@ -13,6 +12,7 @@ import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.Holder;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -30,6 +30,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.SuspiciousEffectHolder;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
@@ -48,14 +49,13 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 
     public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/food/suspicious_brew");
 
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
-        {
-            add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
-            add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
-            add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
-            add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
-        }
-    };
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList
+        .of(
+            SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+            SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+            SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1),
+            SizedIngredient.of(ItemTags.SMALL_FLOWERS, 1)
+        );
 
     public SuspiciousBrewRecipe() {
         super(

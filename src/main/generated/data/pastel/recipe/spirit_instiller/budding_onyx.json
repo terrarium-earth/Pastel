@@ -1,0 +1,28 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:onyx_block"
+    }
+  },
+  "experience": 4.0,
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:midnight_aberration"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:moonstruck_nectar"
+    }
+  },
+  "required_advancement": "pastel:unlocks/blocks/budding_onyx",
+  "result": {
+    "count": 1,
+    "id": "pastel:budding_onyx"
+  },
+  "time": 800
+}

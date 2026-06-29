@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.components.JadeWineComponent;
 import earth.terrarium.pastel.helpers.Support;
@@ -9,12 +8,14 @@ import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRe
         String group,
         boolean secret,
         Optional<ResourceLocation> requiredAdvancementIdentifier,
-        List<IngredientStack> inputStacks,
+        NonNullList<SizedIngredient> inputStacks,
         FluidIngredient fluid,
         ItemStack outputItemStack,
         Item tappingItem,

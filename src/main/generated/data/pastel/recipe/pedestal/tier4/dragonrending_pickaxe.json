@@ -1,0 +1,39 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4,
+    "pastel:white": 4,
+    "pastel:yellow": 8
+  },
+  "experience": 2.0,
+  "key": {
+    "M": {
+      "item": "pastel:dragonbone_chunk"
+    },
+    "P": {
+      "tag": "pastel:resplendent_feathers"
+    },
+    "S": {
+      "item": "minecraft:smooth_basalt"
+    }
+  },
+  "pattern": [
+    "MPM",
+    " S ",
+    " S "
+  ],
+  "required_advancement": "pastel:unlocks/equipment/dragonrending_pickaxe",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "pastel:razing": 3
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:dragonrending_pickaxe"
+  },
+  "tier": "complex",
+  "time": 600
+}

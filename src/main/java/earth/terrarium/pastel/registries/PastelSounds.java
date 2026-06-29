@@ -1,9 +1,11 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.helpers.level.collections.PastelGemstoneColorCollection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -296,6 +298,7 @@ public class PastelSounds {
     public static final SoundEvent ITEM_NIGHT_SALTS_USE = register("item.night_salts.use");
 
     // Block Sounds
+
     public static final SoundEvent BLOCK_CITRINE_BLOCK_BREAK = register("block.citrine_block.break");
 
     public static final SoundEvent BLOCK_CITRINE_BLOCK_STEP = register("block.citrine_block.step");
@@ -431,6 +434,62 @@ public class PastelSounds {
     public static final SoundEvent BLOCK_LARGE_MOONSTONE_BUD_PLACE = register("block.large_moonstone_bud.place");
 
     public static final SoundEvent BLOCK_MOONSTONE_BLOCK_CHIME = register("block.moonstone_block.chime");
+
+    public static final PastelGemstoneColorCollection<SoundEvent> GEMSTONE_CHIMES = new PastelGemstoneColorCollection<>(
+        BLOCK_TOPAZ_BLOCK_CHIME,
+        SoundEvents.AMETHYST_BLOCK_CHIME,
+        BLOCK_CITRINE_BLOCK_CHIME,
+        BLOCK_ONYX_BLOCK_CHIME,
+        BLOCK_MOONSTONE_BLOCK_CHIME
+    );
+
+    public static final PastelGemstoneColorCollection<SoundEvent> GEMSTONE_BLOCK_HIT = new PastelGemstoneColorCollection<>(
+        BLOCK_TOPAZ_BLOCK_HIT,
+        SoundEvents.AMETHYST_BLOCK_HIT,
+        BLOCK_CITRINE_BLOCK_HIT,
+        BLOCK_ONYX_BLOCK_HIT,
+        BLOCK_MOONSTONE_BLOCK_HIT
+    );
+
+    public static final PastelGemstoneColorCollection<SoundEvent> GEMSTONE_BLOCK_BREAK = new PastelGemstoneColorCollection<>(
+        BLOCK_TOPAZ_BLOCK_BREAK,
+        SoundEvents.AMETHYST_BLOCK_BREAK,
+        BLOCK_CITRINE_BLOCK_BREAK,
+        BLOCK_ONYX_BLOCK_BREAK,
+        BLOCK_MOONSTONE_BLOCK_BREAK
+    );
+
+    public static final PastelGemstoneColorCollection<SoundEvent> SMALL_GEMSTONE_BUD_BREAK = new PastelGemstoneColorCollection<>(
+        BLOCK_SMALL_TOPAZ_BUD_BREAK,
+        SoundEvents.SMALL_AMETHYST_BUD_BREAK,
+        BLOCK_SMALL_CITRINE_BUD_BREAK,
+        BLOCK_SMALL_ONYX_BUD_BREAK,
+        BLOCK_SMALL_MOONSTONE_BUD_BREAK
+    );
+
+    public static final PastelGemstoneColorCollection<SoundEvent> MEDIUM_GEMSTONE_BUD_BREAK = new PastelGemstoneColorCollection<>(
+        BLOCK_MEDIUM_TOPAZ_BUD_BREAK,
+        SoundEvents.MEDIUM_AMETHYST_BUD_BREAK,
+        BLOCK_MEDIUM_CITRINE_BUD_BREAK,
+        BLOCK_MEDIUM_ONYX_BUD_BREAK,
+        BLOCK_MEDIUM_MOONSTONE_BUD_BREAK
+    );
+
+    public static final PastelGemstoneColorCollection<SoundEvent> LARGE_GEMSTONE_BUD_BREAK = new PastelGemstoneColorCollection<>(
+        BLOCK_LARGE_TOPAZ_BUD_BREAK,
+        SoundEvents.LARGE_AMETHYST_BUD_BREAK,
+        BLOCK_LARGE_CITRINE_BUD_BREAK,
+        BLOCK_LARGE_ONYX_BUD_BREAK,
+        BLOCK_LARGE_MOONSTONE_BUD_BREAK
+    );
+
+    public static final PastelGemstoneColorCollection<SoundEvent> GEMSTONE_CLUSTER_BREAK = new PastelGemstoneColorCollection<>(
+        BLOCK_TOPAZ_CLUSTER_BREAK,
+        SoundEvents.AMETHYST_CLUSTER_BREAK,
+        BLOCK_CITRINE_CLUSTER_BREAK,
+        BLOCK_ONYX_CLUSTER_BREAK,
+        BLOCK_MOONSTONE_CLUSTER_BREAK
+    );
 
     public static final SoundEvent SPECTRAL_BLOCK_BREAK = register("block.spectral_block.break");
 

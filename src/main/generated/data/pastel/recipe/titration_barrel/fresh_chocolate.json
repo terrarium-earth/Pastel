@@ -1,0 +1,28 @@
+{
+  "type": "pastel:titration_barrel",
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "minecraft:cocoa_beans"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:clotted_cream"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:sweet_berries"
+      }
+    }
+  ],
+  "min_fermentation_time_hours": 4,
+  "result": {
+    "count": 8,
+    "id": "pastel:fresh_chocolate"
+  }
+}

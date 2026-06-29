@@ -1,0 +1,38 @@
+{
+  "type": "pastel:titration_barrel",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 16,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:glass_peach"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "pastel:jade_petals"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:blood_orchid_petal"
+      }
+    }
+  ],
+  "min_fermentation_time_hours": 4,
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2",
+  "result": {
+    "count": 4,
+    "id": "pastel:peach_jam"
+  }
+}

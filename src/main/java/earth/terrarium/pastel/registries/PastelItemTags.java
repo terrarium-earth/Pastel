@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.helpers.level.collections.PastelInkColorCollection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +20,8 @@ public class PastelItemTags {
 
     public static final TagKey<Item> SHEARS = common("tools/shear");
 
+    public static final TagKey<Item> ICES = common("ices");
+
     // "pastel" namespace
     public static final TagKey<Item> COOKBOOKS = of("cookbooks");
 
@@ -33,6 +36,8 @@ public class PastelItemTags {
     public static final TagKey<Item> PIGLIN_SAFE_EQUIPMENT = of("piglin_safe_equipment");
 
     public static final TagKey<Item> ENCHANTABLE_BOOKS = of("enchantable_books");
+
+    public static final TagKey<Item> MEMORY_BONDING_AGENTS = of("memory_bonding_agents");
 
     public static final TagKey<Item> MEMORY_BONDING_AGENTS_CONCEALABLE = of("memory_bonding_agents_concealable");
 
@@ -71,6 +76,75 @@ public class PastelItemTags {
     public static final TagKey<Item> WORKSTAFFS = of("workstaffs");
 
     public static final TagKey<Item> PRODUCTIVITY_EXCLUDED = of("productivity_excluded");
+
+    public static final TagKey<Item> RESPLENDENT_FEATHERS = of("resplendent_feathers");
+
+    public static final TagKey<Item> COMMON_MEATS = of("common_meats");
+
+    public static final TagKey<Item> WATER_MEATS = of("water_meats");
+
+    public static final TagKey<Item> LEAN_MEATS = of("lean_meats");
+
+    public static final TagKey<Item> DRINKABLE_SPIRITS = of("drinkable_spirits");
+
+    public static final TagKey<Item> CHESTNUT_NOXCAP_STEMS = of("chestnut_noxcap_stems");
+
+    public static final TagKey<Item> EBONY_NOXCAP_STEMS = of("ebony_noxcap_stems");
+
+    public static final TagKey<Item> IVORY_NOXCAP_STEMS = of("ivory_noxcap_stems");
+
+    public static final TagKey<Item> SLATE_NOXCAP_STEMS = of("slate_noxcap_stems");
+
+    public static final TagKey<Item> PIGMENTS = of("pigments");
+
+    public static final TagKey<Item> PIGMENT_BLOCKS = of("pigment_blocks");
+
+    public static final TagKey<Item> SMELTS_TO_BONE_ASH = of("smelts_to_bone_ash");
+
+    public static final TagKey<Item> AMETHYST_ORES = of("amethyst_ores");
+
+    public static final TagKey<Item> AZURITE_ORES = of("azurite_ores");
+
+    public static final TagKey<Item> CITRINE_ORES = of("citrine_ores");
+
+    public static final TagKey<Item> MOONSTONE_ORES = of("moonstone_ores");
+
+    public static final TagKey<Item> ONYX_ORES = of("onyx_ores");
+
+    public static final TagKey<Item> SHIMMERSTONE_ORES = of("shimmerstone_ores");
+
+    public static final TagKey<Item> TOPAZ_ORES = of("topaz_ores");
+
+    public static final TagKey<Item> NOXSHROOMS = of("noxshrooms");
+
+    public static class ColoredLogs {
+        public static final PastelInkColorCollection<TagKey<Item>> VALUES = PastelInkColorCollection.NAMES
+            .map(it -> of(it + "_logs"));
+    }
+
+    public static class MobHeads {
+        public static final TagKey<Item> AXOLOTL_HEADS = getMobHeadKey("axolotl");
+
+        public static final TagKey<Item> FISH_HEADS = getMobHeadKey("fish");
+
+        public static final TagKey<Item> FOX_HEADS = getMobHeadKey("fox");
+
+        public static final TagKey<Item> GUARDIAN_HEADS = getMobHeadKey("guardian");
+
+        public static final TagKey<Item> BOVINE_HEADS = getMobHeadKey("bovine");
+
+        public static final TagKey<Item> EQUIDAE_HEADS = getMobHeadKey("equidae");
+
+        public static final TagKey<Item> PARROT_HEADS = getMobHeadKey("parrot");
+
+        public static final TagKey<Item> SHULKER_HEADS = getMobHeadKey("shulker");
+
+        public static final TagKey<Item> SLIME_HEADS = getMobHeadKey("slime");
+
+        public static final TagKey<Item> SPIDER_HEADS = getMobHeadKey("spider");
+
+        public static final TagKey<Item> ZOMBIE_HEADS = getMobHeadKey("zombie");
+    }
 
     public static class EnchantableWith {
         public static final TagKey<Item> BIG_CATCH = getEnchantableTag(PastelEnchantments.BIG_CATCH);
@@ -112,6 +186,10 @@ public class PastelItemTags {
         public static final TagKey<Item> TREASURE_HUNTER = getEnchantableTag(PastelEnchantments.TREASURE_HUNTER);
 
         public static final TagKey<Item> VOIDING = getEnchantableTag(PastelEnchantments.VOIDING);
+    }
+
+    private static TagKey<Item> getMobHeadKey(String mobName) {
+        return of("mob_heads/" + mobName + "_heads");
     }
 
     public static TagKey<Item> getEnchantableTag(ResourceKey<Enchantment> key) {

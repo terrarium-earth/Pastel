@@ -1,0 +1,16 @@
+{
+  "type": "pastel:anvil_crushing",
+  "crushedItemsPerPointOfDamage": 0.3,
+  "experience": 5.0,
+  "ingredient": {
+    "tag": "pastel:shooting_stars"
+  },
+  "particleCount": 2,
+  "particleEffectIdentifier": "minecraft:explosion",
+  "required_advancement": "pastel:collect_star_fragment",
+  "result": {
+    "count": 2,
+    "id": "pastel:star_fragment"
+  },
+  "soundEventIdentifier": "minecraft:block.stone.break"
+}

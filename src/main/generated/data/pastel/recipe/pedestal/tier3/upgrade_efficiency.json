@@ -1,0 +1,42 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 4,
+    "pastel:cyan": 16,
+    "pastel:magenta": 16,
+    "pastel:yellow": 16
+  },
+  "experience": 4.0,
+  "key": {
+    "A": {
+      "item": "pastel:polished_amethyst_block"
+    },
+    "C": {
+      "item": "pastel:polished_citrine_block"
+    },
+    "G": {
+      "item": "pastel:green_pigment"
+    },
+    "L": {
+      "item": "pastel:raw_azurite"
+    },
+    "T": {
+      "item": "pastel:polished_topaz_block"
+    },
+    "Y": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "GLG",
+    "TAC",
+    "YYY"
+  ],
+  "required_advancement": "pastel:unlocks/upgrades/upgrade_efficiency",
+  "result": {
+    "count": 1,
+    "id": "pastel:upgrade_efficiency"
+  },
+  "tier": "advanced",
+  "time": 3600
+}

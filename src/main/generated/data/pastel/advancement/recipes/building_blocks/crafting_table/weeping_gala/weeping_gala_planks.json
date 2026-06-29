@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/weeping_gala/weeping_gala_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unlock": {
+      "conditions": {
+        "advancement": "pastel:hidden/collect_weeping_gala"
+      },
+      "trigger": "databank:has_advancement"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/weeping_gala/weeping_gala_planks"
+    ]
+  }
+}

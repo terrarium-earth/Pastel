@@ -2,7 +2,6 @@ package earth.terrarium.pastel.compat.modonomicon.client.pages;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
@@ -13,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.List;
 
@@ -59,9 +59,9 @@ public class BookSpiritInstillerCraftingPageRenderer
         renderTitle(drawContext, recipeY, second);
 
         // the ingredients
-        List<IngredientStack> ingredients = recipe.getIngredientStacks();
+        List<SizedIngredient> ingredients = recipe.getSizedIngredients();
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 3,
@@ -71,7 +71,7 @@ public class BookSpiritInstillerCraftingPageRenderer
                 ingredients.get(1)
             ); // left
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 23,
@@ -81,7 +81,7 @@ public class BookSpiritInstillerCraftingPageRenderer
                 ingredients.get(0)
             ); // center
         ModonomiconHelper
-            .renderIngredientStack(
+            .renderSizedIngredient(
                 drawContext,
                 parentScreen,
                 recipeX + 44,

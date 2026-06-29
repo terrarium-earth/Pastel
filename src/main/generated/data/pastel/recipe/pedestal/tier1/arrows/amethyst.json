@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 1
+  },
+  "experience": 1.0,
+  "group": "glass_arrows",
+  "key": {
+    "A": {
+      "item": "pastel:malachite_glass_arrow"
+    },
+    "B": {
+      "item": "pastel:bismuth_flake"
+    },
+    "G": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "pattern": [
+    "AA",
+    "GB"
+  ],
+  "required_advancement": "pastel:unlocks/malachite/glass_arrows",
+  "result": {
+    "count": 2,
+    "id": "pastel:amethyst_glass_arrow"
+  }
+}

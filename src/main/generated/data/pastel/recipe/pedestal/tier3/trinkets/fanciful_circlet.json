@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {},
+  "experience": 0.5,
+  "key": {
+    "L": {
+      "item": "minecraft:tuff"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    " L ",
+    "L L",
+    "QL "
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/fanciful_circlet",
+  "result": {
+    "count": 1,
+    "id": "pastel:fanciful_circlet"
+  },
+  "tier": "advanced"
+}

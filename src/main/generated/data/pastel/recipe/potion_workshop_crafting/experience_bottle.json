@@ -1,0 +1,34 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "color": 11665152,
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:knowledge_gem"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:purple_pigment"
+    }
+  },
+  "ingredient3": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:lime_pigment"
+    }
+  },
+  "required_advancement": "pastel:unlocks/items/experience_bottle",
+  "required_experience": 10,
+  "result": {
+    "count": 1,
+    "id": "minecraft:experience_bottle"
+  }
+}

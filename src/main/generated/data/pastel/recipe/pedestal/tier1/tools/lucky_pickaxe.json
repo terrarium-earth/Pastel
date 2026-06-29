@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 8
+  },
+  "experience": 2.0,
+  "key": {
+    "C": {
+      "item": "pastel:citrine_shard"
+    },
+    "G": {
+      "item": "pastel:shimmerstone_gem"
+    },
+    "S": {
+      "item": "minecraft:smooth_basalt"
+    }
+  },
+  "pattern": [
+    "CGC",
+    " S ",
+    " S "
+  ],
+  "required_advancement": "pastel:unlocks/equipment/lucky_pickaxe",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:fortune": 3
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:lucky_pickaxe"
+  },
+  "time": 600
+}

@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:magenta": 4,
+    "pastel:yellow": 2
+  },
+  "experience": 1.0,
+  "group": "semi_permeable_glass",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "pastel:purple_pigment"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_gem"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PSP",
+    "GPG"
+  ],
+  "required_advancement": "pastel:midgame/build_advanced_pedestal_structure",
+  "result": {
+    "count": 6,
+    "id": "pastel:radiant_semi_permeable_glass"
+  },
+  "tier": "advanced",
+  "time": 80
+}

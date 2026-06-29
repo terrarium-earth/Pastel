@@ -3,7 +3,6 @@ package earth.terrarium.pastel.blocks.potion_workshop;
 import com.cmdpro.databank.DatabankUtils;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.capabilities.SidedCapabilityProvider;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
@@ -56,6 +55,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -406,7 +406,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity
                 recipe
                     .value()
                     .getBaseIngredient()
-                    .getCount()
+                    .count()
             );
         }
 
@@ -645,7 +645,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity
             .value()
             .getRequiredExperience();
         for (
-            IngredientStack ingredientStack : recipe
+            SizedIngredient ingredientStack : recipe
                 .value()
                 .getOtherIngredients()
         ) {

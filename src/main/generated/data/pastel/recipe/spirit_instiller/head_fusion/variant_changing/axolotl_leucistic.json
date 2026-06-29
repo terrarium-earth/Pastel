@@ -1,0 +1,29 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:vegetal"
+    }
+  },
+  "experience": 4.0,
+  "group": "head_fusion",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "tag": "pastel:mob_heads/axolotl_heads"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:pink_pigment"
+    }
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/basic_recipes",
+  "result": {
+    "count": 1,
+    "id": "pastel:axolotl_leucistic_head"
+  },
+  "time": 800
+}

@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 6
+  },
+  "experience": 0.5,
+  "group": "colored_spore_blossoms",
+  "key": {
+    "P": {
+      "item": "pastel:white_pigment"
+    },
+    "S": {
+      "item": "minecraft:spore_blossom"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "required_advancement": "pastel:hidden/collect_pigment/white",
+  "result": {
+    "count": 1,
+    "id": "pastel:white_spore_blossom"
+  },
+  "tier": "complex",
+  "time": 80
+}

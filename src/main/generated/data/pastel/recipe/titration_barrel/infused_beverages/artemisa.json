@@ -1,0 +1,117 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 800,
+        "id": "minecraft:regeneration",
+        "potency": [
+          {},
+          {
+            "min_alc": 20.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:speed",
+        "potency": [
+          {
+            "min_alc": 25.0,
+            "min_thickness": 1.5
+          },
+          {
+            "min_alc": 25.0,
+            "min_thickness": 2.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 25.0,
+            "min_thickness": 2.5,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:luck",
+        "potency": [
+          {
+            "min_alc": 28.0
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:slowness",
+        "potency": [
+          {
+            "min_thickness": 2.0
+          },
+          {
+            "min_thickness": 3.0,
+            "potency": 1
+          },
+          {
+            "min_thickness": 4.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:blindness",
+        "potency": [
+          {
+            "min_thickness": 3.0
+          },
+          {
+            "min_alc": 9.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.25
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 6,
+      "ingredient": {
+        "item": "minecraft:short_grass"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:fern"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 8055418,
+        "variant": "artemisa"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

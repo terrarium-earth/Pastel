@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "D": {
+      "item": "minecraft:deepslate"
+    },
+    "T": {
+      "item": "pastel:topaz_shard"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "TDT",
+    "T T"
+  ],
+  "required_advancement": "pastel:hidden/collect_shards/topaz",
+  "result": {
+    "count": 1,
+    "id": "pastel:topaz_leggings"
+  },
+  "time": 400
+}

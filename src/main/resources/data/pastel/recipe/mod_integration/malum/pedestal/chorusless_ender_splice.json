@@ -16,10 +16,18 @@
     "PCP"
   ],
   "key": {
-    "T": "pastel:radiating_ender",
-    "C": "malum:warp_flux",
-    "E": "pastel:neolith",
-    "P": "pastel:cyan_pigment"
+    "T": {
+      "item": "pastel:radiating_ender"
+    },
+    "C": {
+      "item": "malum:warp_flux"
+    },
+    "E": {
+      "item": "pastel:neolith"
+    },
+    "P": {
+      "item": "pastel:cyan_pigment"
+    }
   },
   "result": {
     "id": "pastel:ender_splice",

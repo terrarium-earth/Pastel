@@ -1,11 +1,9 @@
 package earth.terrarium.pastel.recipe.pedestal.dynamic;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
-import earth.terrarium.pastel.recipe.pedestal.RawShapedPedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
@@ -16,7 +14,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
             false,
             Optional.of(UNLOCK_IDENTIFIER),
             PedestalTier.BASIC,
-            new RawShapedPedestalRecipe(3, 3, generateInputs(), Optional.empty()),
+            new ShapedRecipePattern(3, 3, generateInputs(), Optional.empty()),
             Map.of(PastelGemstoneColor.YELLOW, 1),
             PastelItems.STAR_CANDY.get().getDefaultInstance(),
             1.0F,
@@ -54,19 +54,19 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
         return this.output.copy();
     }
 
-    private static NonNullList<IngredientStack> generateInputs() {
+    private static NonNullList<Ingredient> generateInputs() {
         return NonNullList
             .of(
-                IngredientStack.EMPTY,
-                IngredientStack.ofItems(Items.SUGAR),
-                IngredientStack.ofItems(Items.SUGAR),
-                IngredientStack.ofItems(Items.SUGAR),
-                IngredientStack.ofItems(PastelItems.STARDUST.get()),
-                IngredientStack.ofItems(PastelItems.STARDUST.get()),
-                IngredientStack.ofItems(PastelItems.STARDUST.get()),
-                IngredientStack.ofItems(PastelItems.AMARANTH_GRAINS.get()),
-                IngredientStack.ofItems(PastelItems.AMARANTH_GRAINS.get()),
-                IngredientStack.ofItems(PastelItems.AMARANTH_GRAINS.get())
+                Ingredient.EMPTY,
+                Ingredient.of(Items.SUGAR),
+                Ingredient.of(Items.SUGAR),
+                Ingredient.of(Items.SUGAR),
+                Ingredient.of(PastelItems.STARDUST.get()),
+                Ingredient.of(PastelItems.STARDUST.get()),
+                Ingredient.of(PastelItems.STARDUST.get()),
+                Ingredient.of(PastelItems.AMARANTH_GRAINS.get()),
+                Ingredient.of(PastelItems.AMARANTH_GRAINS.get()),
+                Ingredient.of(PastelItems.AMARANTH_GRAINS.get())
             );
     }
 

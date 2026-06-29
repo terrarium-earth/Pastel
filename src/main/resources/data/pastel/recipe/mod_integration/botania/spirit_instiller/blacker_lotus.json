@@ -3,14 +3,23 @@
   "time": 400,
   "experience": 8.0,
   "ingredient1": {
-    "item": "pastel:vegetal",
+    "ingredient": {
+      "item": "pastel:vegetal"
+    },
     "count": 4
   },
   "ingredient2": {
-    "item": "pastel:jade_petals",
+    "ingredient": {
+      "item": "pastel:jade_petals"
+    },
     "count": 4
   },
-  "center_ingredient": "botania:black_lotus",
+  "center_ingredient": {
+    "ingredient": {
+      "item": "botania:black_lotus"
+    },
+    "count": 1
+  },
   "result": {
     "id": "botania:blacker_lotus"
   },

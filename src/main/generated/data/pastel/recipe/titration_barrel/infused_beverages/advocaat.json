@@ -1,0 +1,111 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 9600,
+        "id": "pastel:nourishing",
+        "potency": [
+          {},
+          {
+            "min_alc": 20.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 25.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 30.0,
+            "potency": 3
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:fire_resistance",
+        "potency": [
+          {
+            "min_alc": 25.0,
+            "min_thickness": 1.25
+          }
+        ]
+      },
+      {
+        "base_duration": 8,
+        "id": "minecraft:saturation",
+        "potency": [
+          {
+            "min_alc": 28.0
+          }
+        ]
+      },
+      {
+        "base_duration": 9600,
+        "id": "minecraft:slowness",
+        "potency": [
+          {
+            "min_thickness": 2.0
+          },
+          {
+            "min_thickness": 3.0,
+            "potency": 1
+          },
+          {
+            "min_thickness": 4.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:blindness",
+        "potency": [
+          {
+            "min_thickness": 3.0
+          },
+          {
+            "min_alc": 30.0
+          }
+        ]
+      }
+    ],
+    "fermentation_speed_mod": 0.25
+  },
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "minecraft:wheat"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:clotted_cream"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:eggs"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/blocks/titration_barrel",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 15191723,
+        "variant": "advocaat"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

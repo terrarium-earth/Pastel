@@ -1,0 +1,21 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "applicable_to_potion_fillabes": false,
+  "base_duration_ticks": 1800,
+  "effect": "minecraft:absorption",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "pastel:onyx_shard"
+    }
+  },
+  "ink_color": "pastel:blue",
+  "ink_cost": 4,
+  "required_advancement": "pastel:midgame/brew_potion_in_potion_workshop"
+}

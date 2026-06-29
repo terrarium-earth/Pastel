@@ -1,0 +1,35 @@
+{
+  "type": "pastel:fusion_shrine",
+  "experience": 16.0,
+  "finish_crafting_effect": "pastel:single_visual_explosion_on_shrine",
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "minecraft:planks"
+      }
+    },
+    {
+      "count": 16,
+      "ingredient": {
+        "tag": "pastel:pigments"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:spectral_shard"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/trinkets/artists_palette",
+  "result": {
+    "count": 1,
+    "id": "pastel:artists_palette"
+  },
+  "start_crafting_effect": "pastel:nothing",
+  "time": 2400
+}

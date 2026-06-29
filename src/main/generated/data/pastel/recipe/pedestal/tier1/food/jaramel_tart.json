@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 2
+  },
+  "experience": 1.0,
+  "key": {
+    "A": {
+      "item": "pastel:amaranth_grains"
+    },
+    "E": {
+      "tag": "c:eggs"
+    },
+    "J": {
+      "item": "pastel:jaramel"
+    },
+    "M": {
+      "tag": "c:buckets/milk"
+    }
+  },
+  "pattern": [
+    "J J",
+    "EME",
+    "AAA"
+  ],
+  "required_advancement": "pastel:unlocks/food/tarts",
+  "result": {
+    "count": 1,
+    "id": "pastel:jaramel_tart"
+  },
+  "time": 160
+}

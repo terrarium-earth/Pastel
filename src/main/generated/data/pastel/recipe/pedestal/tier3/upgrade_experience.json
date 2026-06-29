@@ -1,0 +1,38 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 8,
+    "pastel:yellow": 4
+  },
+  "experience": 8.0,
+  "key": {
+    "E": {
+      "item": "minecraft:emerald_block"
+    },
+    "L": {
+      "item": "pastel:storm_stone"
+    },
+    "P": {
+      "item": "pastel:purple_pigment"
+    },
+    "X": {
+      "item": "pastel:polished_calcite"
+    },
+    "Y": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "PLP",
+    "XEX",
+    "YYY"
+  ],
+  "required_advancement": "pastel:unlocks/upgrades/upgrade_experience",
+  "result": {
+    "count": 1,
+    "id": "pastel:upgrade_experience"
+  },
+  "tier": "advanced",
+  "time": 1200
+}

@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 4
+  },
+  "experience": 2.0,
+  "key": {
+    "B": {
+      "item": "minecraft:copper_block"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "CIC",
+    "T T",
+    "TBT"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/compacting_chest",
+  "result": {
+    "count": 1,
+    "id": "pastel:compacting_chest"
+  },
+  "time": 800
+}

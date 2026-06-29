@@ -1,0 +1,35 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:black": 1,
+    "pastel:magenta": 4,
+    "pastel:yellow": 2
+  },
+  "experience": 2.0,
+  "group": "idols",
+  "key": {
+    "H": {
+      "item": "pastel:snow_golem_head"
+    },
+    "Q": {
+      "item": "pastel:quitoxic_powder"
+    },
+    "S": {
+      "item": "pastel:stardust"
+    },
+    "V": {
+      "item": "pastel:vegetal"
+    }
+  },
+  "pattern": [
+    "SVS",
+    "VHV",
+    "QVQ"
+  ],
+  "required_advancement": "pastel:unlocks/blocks/idols",
+  "result": {
+    "count": 1,
+    "id": "pastel:snow_golem_idol"
+  },
+  "tier": "advanced"
+}

@@ -16,9 +16,15 @@
     "OOO"
   ],
   "key": {
-    "O": "minecraft:obsidian",
-    "W": "malum:warp_flux",
-    "T": "pastel:radiating_ender"
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "W": {
+      "item": "malum:warp_flux"
+    },
+    "T": {
+      "item": "pastel:radiating_ender"
+    }
   },
   "result": {
     "id": "pastel:bag_of_holding",

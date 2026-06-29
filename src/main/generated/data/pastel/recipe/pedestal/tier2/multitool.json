@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 1,
+    "pastel:magenta": 1,
+    "pastel:yellow": 1
+  },
+  "experience": 2.0,
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "III",
+    "IS ",
+    " S "
+  ],
+  "required_advancement": "pastel:build_basic_pedestal_structure",
+  "result": {
+    "components": {
+      "minecraft:enchantments": {
+        "levels": {
+          "minecraft:efficiency": 1
+        }
+      }
+    },
+    "count": 1,
+    "id": "pastel:multitool"
+  },
+  "tier": "simple",
+  "time": 600
+}

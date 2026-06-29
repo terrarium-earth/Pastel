@@ -1,0 +1,9 @@
+{
+  "type": "pastel:ink_converting",
+  "amount": 5,
+  "ingredient": {
+    "item": "minecraft:green_dye"
+  },
+  "ink_color": "pastel:green",
+  "required_advancement": "pastel:hidden/collect_pigment/green"
+}

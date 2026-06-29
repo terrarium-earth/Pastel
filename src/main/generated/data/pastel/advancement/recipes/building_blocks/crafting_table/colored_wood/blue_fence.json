@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pastel:crafting_table/colored_wood/blue_fence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unlock": {
+      "conditions": {
+        "advancement": "pastel:hidden/collect_pigment/blue"
+      },
+      "trigger": "databank:has_advancement"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pastel:crafting_table/colored_wood/blue_fence"
+    ]
+  }
+}

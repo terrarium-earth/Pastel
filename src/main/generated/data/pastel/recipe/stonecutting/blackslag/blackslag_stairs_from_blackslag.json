@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "pastel:blackslag"
+  },
+  "result": {
+    "count": 1,
+    "id": "pastel:blackslag_stairs"
+  }
+}

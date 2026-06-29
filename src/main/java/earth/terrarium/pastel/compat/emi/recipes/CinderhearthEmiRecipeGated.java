@@ -9,18 +9,20 @@ import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 
+import java.util.Arrays;
+
 public class CinderhearthEmiRecipeGated extends GatedSpectrumEmiRecipe<CinderhearthRecipe> {
 
     public CinderhearthEmiRecipeGated(CinderhearthRecipe recipe) {
         super(PastelEmiRecipeCategories.CINDERHEARTH, recipe, 136, 48);
         this.inputs = recipe
-            .getIngredientStacks()
+            .getSizedIngredients()
             .stream()
             .map(
                 s -> EmiIngredient
                     .of(
-                        s
-                            .getItems()
+                        Arrays
+                            .stream(s.getItems())
                             .map(EmiStack::of)
                             .toList()
                     )

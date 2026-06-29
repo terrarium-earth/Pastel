@@ -22,7 +22,6 @@ import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.HumusConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.LiquidCrystalConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.MidnightSolutionConvertingRecipe;
-import earth.terrarium.pastel.recipe.fluid_converting.dynamic.MeatToRottenFleshRecipe;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
 import earth.terrarium.pastel.recipe.fusion_shrine.dynamic.ShootingStarHardeningRecipe;
 import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
@@ -189,11 +188,6 @@ public class PastelRecipeSerializers {
     public static final FluidConvertingRecipe.Serializer<DragonrotConvertingRecipe> DRAGONROT_CONVERTING_SERIALIZER = register(
         "dragonrot_converting",
         new FluidConvertingRecipe.Serializer<>(DragonrotConvertingRecipe::new)
-    );
-
-    public static final RecipeSerializer<MeatToRottenFleshRecipe> DRAGONROT_MEAT_TO_ROTTEN_FLESH = register(
-        "meat_rotting",
-        new EmptyRecipeSerializer<>(MeatToRottenFleshRecipe::new)
     );
 
     // Spirit Instiller

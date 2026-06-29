@@ -1,0 +1,182 @@
+{
+  "type": "pastel:titration_barrel",
+  "fermentation": {
+    "effects": [
+      {
+        "base_duration": 3600,
+        "id": "pastel:frenzy",
+        "potency": [
+          {},
+          {
+            "min_alc": 28.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 37.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 44.0,
+            "potency": 3
+          },
+          {
+            "min_alc": 57.0,
+            "potency": 4
+          }
+        ]
+      },
+      {
+        "base_duration": 40,
+        "id": "minecraft:blindness",
+        "potency": [
+          {},
+          {
+            "min_alc": 28.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 44.0,
+            "potency": 2
+          },
+          {
+            "min_alc": 50.0,
+            "potency": 3
+          }
+        ]
+      },
+      {
+        "base_duration": 3600,
+        "id": "minecraft:poison",
+        "potency": [
+          {},
+          {
+            "min_alc": 21.0,
+            "potency": 1
+          },
+          {
+            "min_alc": 44.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "base_duration": 300,
+        "id": "minecraft:wither",
+        "potency": [
+          {
+            "min_alc": 21.0
+          },
+          {
+            "min_alc": 44.0,
+            "potency": 1
+          }
+        ]
+      },
+      {
+        "base_duration": 2400,
+        "id": "minecraft:regeneration",
+        "potency": [
+          {
+            "min_alc": 21.0
+          },
+          {
+            "min_alc": 44.0,
+            "potency": 1
+          }
+        ]
+      },
+      {
+        "base_duration": 2400,
+        "id": "minecraft:speed",
+        "potency": [
+          {
+            "potency": 1
+          },
+          {
+            "min_alc": 44.0,
+            "potency": 2
+          }
+        ]
+      },
+      {
+        "id": "minecraft:slowness",
+        "potency": [
+          {
+            "min_alc": 21.0
+          },
+          {
+            "min_alc": 44.0,
+            "potency": 1
+          }
+        ]
+      },
+      {
+        "base_duration": 2400,
+        "id": "minecraft:weakness",
+        "potency": [
+          {
+            "min_alc": 21.0
+          },
+          {
+            "min_alc": 44.0,
+            "potency": 1
+          }
+        ]
+      },
+      {
+        "base_duration": 600,
+        "id": "minecraft:nausea",
+        "potency": [
+          {
+            "min_alc": 30.0
+          },
+          {
+            "min_thickness": 1.25
+          }
+        ]
+      }
+    ]
+  },
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "minecraft:carrot"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "pastel:blood_orchid_petal"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "pastel:quitoxic_powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:bottle_of_ruin"
+      }
+    }
+  ],
+  "required_advancement": "pastel:unlocks/food/rabbit_poison",
+  "result": {
+    "components": {
+      "pastel:infused_beverage": {
+        "color": 9518003,
+        "variant": "rabbit_poison"
+      }
+    },
+    "count": 4,
+    "id": "pastel:infused_beverage"
+  },
+  "tapping_item": "minecraft:glass_bottle"
+}

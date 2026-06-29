@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:yellow": 4
+  },
+  "experience": 0.5,
+  "group": "colored_spore_blossoms",
+  "key": {
+    "P": {
+      "item": "pastel:lime_pigment"
+    },
+    "S": {
+      "item": "minecraft:spore_blossom"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "required_advancement": "pastel:hidden/collect_pigment/lime",
+  "result": {
+    "count": 1,
+    "id": "pastel:lime_spore_blossom"
+  },
+  "tier": "simple",
+  "time": 80
+}

@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
@@ -9,6 +8,7 @@ import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
@@ -36,12 +37,12 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 
     public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 
-    public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {
-        {
-            add(IngredientStack.ofItems(PastelItems.GERMINATED_JADE_VINE_BULB.get()));
-            add(IngredientStack.ofItems(PastelItems.JADE_PETALS.get(), 3));
-        }
-    };
+    public static final NonNullList<SizedIngredient> INGREDIENT_STACKS = NonNullList
+        .of(
+            SizedIngredient.of(PastelItems.GERMINATED_JADE_VINE_BULB.get(), 1),
+            SizedIngredient.of(PastelItems.JADE_PETALS.get(), 3)
+
+        );
 
     public JadeWineRecipe() {
         super(

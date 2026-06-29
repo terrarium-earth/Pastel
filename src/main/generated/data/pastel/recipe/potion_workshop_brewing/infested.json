@@ -1,0 +1,21 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "base_duration_ticks": 1800,
+  "effect": "minecraft:infested",
+  "group": "vanilla_potions",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:nether_wart"
+    }
+  },
+  "ingredient2": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:stone"
+    }
+  },
+  "ink_color": "pastel:lime",
+  "ink_cost": 16,
+  "potency_modifier": 0.0
+}

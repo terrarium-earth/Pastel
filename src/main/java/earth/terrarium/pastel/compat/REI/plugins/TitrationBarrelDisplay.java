@@ -52,7 +52,7 @@ public class TitrationBarrelDisplay extends PastelDisplay {
     }
 
     public static List<EntryIngredient> buildInputs(ITitrationBarrelRecipe recipe) {
-        List<EntryIngredient> inputs = REIHelper.toEntryIngredients(recipe.getIngredientStacks());
+        List<EntryIngredient> inputs = REIHelper.toEntryIngredientsSized(recipe.getSizedIngredients());
         if (!recipe.getFluidInput().isEmpty()) {
             inputs.add(FluidIngredientREI.into(recipe.getFluidInput()));
         }

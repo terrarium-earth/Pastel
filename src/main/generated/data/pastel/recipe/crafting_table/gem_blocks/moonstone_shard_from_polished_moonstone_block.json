@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "compacting",
+  "ingredients": [
+    {
+      "item": "pastel:polished_moonstone_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "pastel:moonstone_shard"
+  }
+}

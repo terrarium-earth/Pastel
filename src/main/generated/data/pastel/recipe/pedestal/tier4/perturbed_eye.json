@@ -1,0 +1,31 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:white": 4,
+    "pastel:yellow": 8
+  },
+  "experience": 4.0,
+  "key": {
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "P": {
+      "item": "pastel:paltaeria_gem"
+    },
+    "R": {
+      "item": "pastel:radiating_ender"
+    }
+  },
+  "pattern": [
+    "EPE",
+    "PRP",
+    "EPE"
+  ],
+  "required_advancement": "pastel:unlocks/items/perturbed_eye",
+  "result": {
+    "count": 12,
+    "id": "pastel:perturbed_eye"
+  },
+  "tier": "complex",
+  "time": 2400
+}

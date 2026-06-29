@@ -13,6 +13,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.mixin.accessors.CachedRegistryInfoGetterAccessor;
 import earth.terrarium.pastel.mixin.accessors.RegistryOpsAccessor;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -207,4 +208,7 @@ public class CodecHelper {
         toNbt(codec, value, elem -> nbt.put(key, elem));
     }
 
+    public static <T> Codec<NonNullList<T>> nonNullListOfSize(Codec<T> entry, int minSize, int maxSize) {
+        return entry.listOf(minSize, maxSize).xmap(NonNullList::copyOf, Function.identity());
+    }
 }

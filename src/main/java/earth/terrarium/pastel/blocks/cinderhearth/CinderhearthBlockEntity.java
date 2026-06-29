@@ -605,9 +605,9 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity
             int amountToDecrementInput = cinderhearth
                 .getCurrentRecipe() instanceof CinderhearthRecipe cinderhearthRecipe
                     ? cinderhearthRecipe
-                        .getIngredientStacks()
+                        .getSizedIngredients()
                         .getFirst()
-                        .getCount()
+                        .count()
                     : 1;
             inputStack.shrink(amountToDecrementInput);
 

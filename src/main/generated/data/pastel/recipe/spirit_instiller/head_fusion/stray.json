@@ -1,0 +1,29 @@
+{
+  "type": "pastel:spirit_instiller",
+  "center_ingredient": {
+    "count": 4,
+    "ingredient": {
+      "item": "pastel:vegetal"
+    }
+  },
+  "experience": 4.0,
+  "group": "head_fusion",
+  "ingredient1": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:skeleton_skull"
+    }
+  },
+  "ingredient2": {
+    "count": 4,
+    "ingredient": {
+      "item": "pastel:frostbite_essence"
+    }
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/frostbite_recipes",
+  "result": {
+    "count": 1,
+    "id": "pastel:stray_head"
+  },
+  "time": 800
+}

@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "colors": {
+    "pastel:yellow": 4
+  },
+  "experience": 0.3,
+  "group": "citrine_lights",
+  "key": {
+    "B": {
+      "item": "pastel:citrine_block"
+    },
+    "S": {
+      "item": "pastel:shimmerstone_block"
+    },
+    "T": {
+      "item": "pastel:polished_basalt"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "BSB",
+    "TTT"
+  ],
+  "required_advancement": "pastel:unlocks/gemstone_lights/citrine",
+  "result": {
+    "count": 4,
+    "id": "pastel:citrine_basalt_light"
+  },
+  "time": 40
+}
