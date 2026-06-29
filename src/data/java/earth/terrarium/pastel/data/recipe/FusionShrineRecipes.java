@@ -238,6 +238,7 @@ public class FusionShrineRecipes {
                         .experience(16.0f)
                         .startCrafting(FusionShrineRecipeWorldEffect.NOTHING)
                         .finishCrafting(SINGLE_VISUAL_EXPLOSION_ON_SHRINE)
+                        .requires(MOONSTONE_CORE)
         );
 
         pfx.generateAutoNamedRecipe(

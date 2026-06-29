@@ -5,7 +5,14 @@
   "fluid": {
     "fluid": "pastel:liquid_crystal"
   },
-  "ingredients": [],
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:moonstone_core"
+      }
+    }
+  ],
   "required_advancement": "pastel:unlocks/mysterious_locket_socketing",
   "result": {
     "components": {

@@ -1958,7 +1958,7 @@ public class PastelPedestalRecipes {
                     new ShapedPedestalRecipeBuilder(new ItemStack(GEMSTONE_GLASS_ARROWS.pick(color).get(), 2))
                             .group("glass_arrows")
                             .craftingTime(200)
-                            .tier(PedestalTier.BASIC)
+                            .tier(PastelGemstoneColorCollection.MINIMUM_TIER.pick(color))
                             .color(color, 1)
                             .experience(1.0f)
                             .pattern("AA")
