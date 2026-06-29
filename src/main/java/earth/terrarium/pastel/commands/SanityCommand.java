@@ -499,7 +499,8 @@ public class SanityCommand {
             String path = advancementId.getPath();
             Optional<ResourceLocation> parentId = advancement.value().parent();
             if (advancementId.getNamespace().equals(modId) && !path.startsWith("hidden") && !path
-                .startsWith("progression") && !path.startsWith("milestones") && parentId.isPresent()) {
+                .startsWith("progression") && !path.startsWith("milestones") &&
+                    !path.startsWith("recipes") && parentId.isPresent()) {
                 ResourceLocation gottenPreviousAdvancementIdentifier = null;
                 for (
                     List<String> requirement : advancement.value().requirements().requirements()
