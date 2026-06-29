@@ -4,8 +4,7 @@
     "effects": [
       {
         "base_duration": 6000,
-        "id": "pastel:eternal_slumber",
-        "potency": []
+        "id": "pastel:eternal_slumber"
       },
       {
         "id": "pastel:effect_prolonging",

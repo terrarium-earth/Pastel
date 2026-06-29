@@ -991,6 +991,7 @@ public class TitrationBarrelRecipes {
                         .minFermentationTimeHours(24)
                         .fermentationSpeedMod(0.25f)
                         .statusEffect(MobEffects.FIRE_RESISTANCE, 9600)
+                            .simplePotencyEntry(0)
                         .submit()
                         .statusEffect(MobEffects.MOVEMENT_SPEED, 9600)
                             .simplePotencyEntry(0)
@@ -1130,6 +1131,7 @@ public class TitrationBarrelRecipes {
                         .minFermentationTimeHours(24)
                         .fermentationSpeedMod(0.075f)
                         .statusEffect(PastelMobEffects.ETERNAL_SLUMBER, 6000)
+                        .simplePotencyEntry(0)
                         .submit()
                         .statusEffect(PastelMobEffects.EFFECT_PROLONGING, 1200)
                             .scaleOnAlc(7, 10, 10)
@@ -1452,8 +1454,10 @@ public class TitrationBarrelRecipes {
                         .minFermentationTimeHours(4)
                         .fermentationSpeedMod(0)
                         .statusEffect(primary, 9600)
+                            .simplePotencyEntry(0)
                         .submit()
                         .statusEffect(PastelMobEffects.NOURISHING, 9600)
+                            .simplePotencyEntry(0)
                         .submit();
     }
 

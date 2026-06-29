@@ -4,13 +4,11 @@
     "effects": [
       {
         "base_duration": 9600,
-        "id": "minecraft:haste",
-        "potency": []
+        "id": "minecraft:haste"
       },
       {
         "base_duration": 9600,
-        "id": "pastel:nourishing",
-        "potency": []
+        "id": "pastel:nourishing"
       }
     ],
     "fermentation_speed_mod": 0.0

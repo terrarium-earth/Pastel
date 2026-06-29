@@ -4,8 +4,7 @@
     "effects": [
       {
         "base_duration": 9600,
-        "id": "minecraft:fire_resistance",
-        "potency": []
+        "id": "minecraft:fire_resistance"
       },
       {
         "base_duration": 9600,
