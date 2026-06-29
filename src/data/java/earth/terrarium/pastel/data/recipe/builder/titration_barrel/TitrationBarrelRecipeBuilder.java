@@ -125,12 +125,9 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
         return this;
     }
 
-    public FermentationStatusEffectEntryBuilderForBarrel statusEffect(MobEffect effect, int baseDuration) {
-        return new FermentationStatusEffectEntryBuilderForBarrel(effect, baseDuration);
-    }
 
     public FermentationStatusEffectEntryBuilderForBarrel statusEffect(Holder<MobEffect> effect, int baseDuration) {
-        return statusEffect(effect.value(), baseDuration);
+        return new FermentationStatusEffectEntryBuilderForBarrel(effect, baseDuration);
     }
 
     public TitrationBarrelRecipeBuilder acceptEffect(FermentationStatusEffectEntry entry) {
@@ -141,7 +138,7 @@ public final class TitrationBarrelRecipeBuilder extends GatedRecipeBuilder<Titra
     public final class FermentationStatusEffectEntryBuilderForBarrel extends FermentationStatusEffectEntryBuilder<FermentationStatusEffectEntryBuilderForBarrel> {
 
         public FermentationStatusEffectEntryBuilderForBarrel(
-                MobEffect statusEffect,
+                Holder<MobEffect> statusEffect,
                 int baseDuration
         ) {
             super(statusEffect, baseDuration);

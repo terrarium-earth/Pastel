@@ -231,12 +231,7 @@ public class TitrationBarrelRecipe extends GatedSizedPastelRecipe<FluidRecipeInp
                     effects
                         .add(
                             new MobEffectInstance(
-                                BuiltInRegistries.MOB_EFFECT
-                                    .getHolderOrThrow(
-                                        BuiltInRegistries.MOB_EFFECT
-                                            .getResourceKey(entry.statusEffect())
-                                            .get()
-                                    ),
+                                entry.statusEffect(),
                                 (int) (durationTicks * durationMultiplier),
                                 potency
                             )

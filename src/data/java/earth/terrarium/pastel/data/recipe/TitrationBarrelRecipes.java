@@ -1,9 +1,7 @@
 package earth.terrarium.pastel.data.recipe;
 
-import earth.terrarium.pastel.blocks.fluid.PastelFluid;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.data.recipe.builder.titration_barrel.FermentationStatusEffectEntryBuilder;
-import earth.terrarium.pastel.data.recipe.builder.titration_barrel.StaticFermentationStatusEffectEntryBuilder;
 import earth.terrarium.pastel.data.recipe.builder.titration_barrel.TitrationBarrelRecipeBuilder;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationStatusEffectEntry;
 import earth.terrarium.pastel.recipe.titration_barrel.dynamic.*;
@@ -17,7 +15,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -1463,7 +1460,7 @@ public class TitrationBarrelRecipes {
 
     private static FermentationStatusEffectEntry ciderPrimary(Holder<MobEffect> effect, int baseDuration) {
         return
-                new StaticFermentationStatusEffectEntryBuilder(effect.value(), baseDuration)
+                FermentationStatusEffectEntryBuilder.of(effect, baseDuration)
                         .simplePotencyEntry(0)
                         .potencyAlc(1, 5)
                         .potencyAlc(2, 8)
@@ -1473,7 +1470,7 @@ public class TitrationBarrelRecipes {
 
     private static FermentationStatusEffectEntry ciderSecondary(Holder<MobEffect> effect, int baseDuration) {
         return
-                new StaticFermentationStatusEffectEntryBuilder(effect.value(), baseDuration)
+                FermentationStatusEffectEntryBuilder.of(effect, baseDuration)
                         .potencyAlc(0, 3)
                         .potencyAlc(1, 6)
                         .build();

@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.PastelCommon;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -15,7 +16,7 @@ import net.minecraft.world.effect.MobEffects;
 import java.util.List;
 
 public record FermentationStatusEffectEntry(
-    MobEffect statusEffect,
+    Holder<MobEffect> statusEffect,
     int baseDuration,
     List<StatusEffectPotencyEntry> potencyEntries
 ) {
@@ -25,13 +26,13 @@ public record FermentationStatusEffectEntry(
             i -> i
                 .group(
                     BuiltInRegistries.MOB_EFFECT
-                        .byNameCodec()
+                        .holderByNameCodec()
                         .orElse(
                             err -> {
                                 PastelCommon.logError(err + ". Falling back to WEAKNESS");
                                 return err;
                             },
-                            MobEffects.WEAKNESS.value()
+                            MobEffects.WEAKNESS
                         )
                         .fieldOf("id")
                         .forGetter(FermentationStatusEffectEntry::statusEffect),
@@ -51,7 +52,7 @@ public record FermentationStatusEffectEntry(
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FermentationStatusEffectEntry> STREAM_CODEC = StreamCodec
         .composite(
-            ByteBufCodecs.registry(Registries.MOB_EFFECT),
+            ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT),
             FermentationStatusEffectEntry::statusEffect,
             ByteBufCodecs.VAR_INT,
             FermentationStatusEffectEntry::baseDuration,

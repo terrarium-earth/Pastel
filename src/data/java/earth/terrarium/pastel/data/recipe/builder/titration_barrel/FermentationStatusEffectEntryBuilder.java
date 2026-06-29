@@ -9,24 +9,27 @@ import java.util.List;
 
 @SuppressWarnings("unchecked")
 public abstract class FermentationStatusEffectEntryBuilder<C extends FermentationStatusEffectEntryBuilder<C>> {
-    private final MobEffect statusEffect;
+    private final Holder<MobEffect> statusEffect;
     private final int baseDuration;
     private final List<FermentationStatusEffectEntry.StatusEffectPotencyEntry> potencyEntries = new ArrayList<>();
 
     public FermentationStatusEffectEntryBuilder(
-            MobEffect statusEffect,
+            Holder<MobEffect> statusEffect,
             int baseDuration
     ) {
         this.statusEffect = statusEffect;
         this.baseDuration = baseDuration;
     }
 
-    public static StaticFermentationStatusEffectEntryBuilder of(MobEffect statusEffect, int baseDuration) {
-        return new StaticFermentationStatusEffectEntryBuilder(statusEffect, baseDuration);
+    public static final class Standalone extends FermentationStatusEffectEntryBuilder<Standalone> {
+
+        public Standalone(Holder<MobEffect> statusEffect, int baseDuration) {
+            super(statusEffect, baseDuration);
+        }
     }
 
-    public static StaticFermentationStatusEffectEntryBuilder of(Holder<MobEffect> statusEffect, int baseDuration) {
-        return of(statusEffect.value(), baseDuration);
+    public static Standalone of(Holder<MobEffect> statusEffect, int baseDuration) {
+        return new Standalone(statusEffect, baseDuration);
     }
 
     public C simplePotencyEntry(int potency) {
