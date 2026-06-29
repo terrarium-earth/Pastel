@@ -48,8 +48,6 @@ repositories {
     }
 
     maven(url = "https://maven.ryanhcode.dev/releases") // sable
-
-    maven(url = "https://maven.ithundxr.dev/snapshots") // Registrate
 }
 
 cloche {
@@ -175,7 +173,6 @@ cloche {
                 modCompileOnly("com.unascribed:ears-api:1.4.6")
                 modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
                 modCompileOnly("maven.modrinth:vanity:xWfEA0yC") // compile only cuz accessories
-                modCompileOnly("com.tterrag.registrate:Registrate:MC1.21-1.3.0+67") // need this to access create during datagen
 
                 modImplementation("maven.modrinth:create:6.0.10+mc1.21.1") { isTransitive = false }
                 modImplementation("maven.modrinth:lodestonelib:1.8.2") { isTransitive = false }

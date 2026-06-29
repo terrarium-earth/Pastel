@@ -1,7 +1,5 @@
 package earth.terrarium.pastel.data.recipe;
 
-import com.simibubi.create.AllItems;
-import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.data.recipe.builder.cinderhearth.CinderhearthRecipeBuilder;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -310,6 +308,7 @@ public class CinderhearthRecipes {
         generateDust(pfx, PastelItems.PURE_PRISMARINE, Items.PRISMARINE_CRYSTALS);
         generateDust(pfx, PastelItems.PURE_QUARTZ, Items.QUARTZ);
 
+        /*
         pfx
             .modIntegration("create")
             .generateRecipe(
@@ -320,7 +319,7 @@ public class CinderhearthRecipes {
                     .requiredAdvancement(unlock)
                     .result(new ItemStack(AllItems.ZINC_INGOT.asItem(), 2))
             );
-
+        */
     }
 
     private static void root(PrefixHelper pfx) {
