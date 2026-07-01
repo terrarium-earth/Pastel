@@ -1,0 +1,14 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "botania:gaia_spirit",
+  "modifiers": {
+    "flat_potency_bonus": 2.5,
+    "flat_yield_bonus": -3.0
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "botania"
+    }
+  ]
+}

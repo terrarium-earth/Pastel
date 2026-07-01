@@ -2,7 +2,7 @@
   "type": "pastel:ink_converting",
   "ingredient": [
     {
-      "item": "botania:magenta_petal"
+      "item": "botania:magenta_mystical_petal"
     }
   ],
   "ink_color": "pastel:magenta",

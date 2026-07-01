@@ -2,7 +2,7 @@
   "values": [
     "pastel:blazing_crystal",
     {
-      "id": "botania:blaze_block",
+      "id": "botania:blaze_mesh",
       "required": false
     }
   ]

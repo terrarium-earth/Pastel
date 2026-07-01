@@ -18,7 +18,7 @@
     "S": "#pastel:pigments"
   },
   "result": {
-    "id": "botania:fertilizer",
+    "id": "botania:floral_fertilizer",
     "count": 4
   },
   "required_advancement": "pastel:collect_pigment",

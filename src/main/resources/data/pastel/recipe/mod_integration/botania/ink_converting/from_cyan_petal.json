@@ -2,7 +2,7 @@
   "type": "pastel:ink_converting",
   "ingredient": [
     {
-      "item": "botania:cyan_petal"
+      "item": "botania:cyan_mystical_petal"
     }
   ],
   "ink_color": "pastel:cyan",
