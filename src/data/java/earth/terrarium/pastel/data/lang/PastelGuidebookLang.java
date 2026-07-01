@@ -3742,7 +3742,7 @@ public class PastelGuidebookLang {
             );
         provider
             .add(
-                "book.pastel.guidebook.mod_integration.botania.life_essence_reagent.text",
+                "book.pastel.guidebook.mod_integration.botania.gaia_spirit_reagent.text",
                 "- +2.5 potency\n- -3 yield\\\n\\\nRequires other reagents to increase the yield, otherwise I will end up" + " with nothing..."
             );
         provider

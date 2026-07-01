@@ -39,7 +39,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.pastel.guidebook.mod_integration.botania.page2.title",
       "item": {
-        "item": "botania:magenta_petal"
+        "item": "botania:magenta_mystical_petal"
       },
       "text": "book.pastel.guidebook.mod_integration.botania.page2.text"
     },
@@ -144,9 +144,9 @@
         "advancement_id": "pastel:midgame/brew_potion_in_potion_workshop"
       },
       "item": {
-        "item": "botania:life_essence"
+        "item": "botania:gaia_spirit"
       },
-      "text": "book.pastel.guidebook.mod_integration.botania.life_essence_reagent.text"
+      "text": "book.pastel.guidebook.mod_integration.botania.gaia_spirit_reagent.text"
     },
     {
       "type": "modonomicon:spotlight",

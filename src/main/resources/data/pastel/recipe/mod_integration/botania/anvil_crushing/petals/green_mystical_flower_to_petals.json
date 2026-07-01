@@ -8,7 +8,7 @@
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.2,
   "result": {
-    "id": "botania:green_petal",
+    "id": "botania:green_mystical_petal",
     "count": 4
   },
   "particleEffectIdentifier": "cloud",

@@ -3156,7 +3156,7 @@
   "book.pastel.guidebook.mod_integration.botania.blackest_lotus_reagent.text": "- +3 efeitos positivos\n- +1 efeito negativo\n- torna a poção não identificável.\\\n\\\n*Estou a fim de uma aposta?*",
   "book.pastel.guidebook.mod_integration.botania.least_black_lotus.text": "Esta... hummm.... hmmm, é.",
   "book.pastel.guidebook.mod_integration.botania.least_black_lotus_reagent.text": "- +1 efeito positivo\n- +3 efeitos negativos\n- torna a poção não identificável.\\\n\\\n*Estou a fim de uma aposta?*",
-  "book.pastel.guidebook.mod_integration.botania.life_essence_reagent.text": "- +2.5 de potência\n- -3 de rendimento\\\n\\\nRequer outros reagentes para aumentar o rendimento, caso contrário, acabarei sem nada...",
+  "book.pastel.guidebook.mod_integration.botania.gaia_spirit_reagent.text": "- +2.5 de potência\n- -3 de rendimento\\\n\\\nRequer outros reagentes para aumentar o rendimento, caso contrário, acabarei sem nada...",
   "book.pastel.guidebook.mod_integration.botania.mana_powder_reagent.text": "- +25%% de duração\n- 15%% de chance de adicionar o último efeito",
   "book.pastel.guidebook.mod_integration.botania.pixie_dust_reagent.text": "- cria Poções Prolongadas e Flechas com Efeito\n- -25%% de potência",
   "book.pastel.guidebook.mod_integration.botania.name": "Botania",
@@ -5167,7 +5167,7 @@
 
   "pastel.rei.potion_workshop_reacting.botania.black_lotus": "• +1 efeito positivo\n• 50%% de chance de efeito negativo\n• torna a poção não identificável\n\nQuer arriscar?",
   "pastel.rei.potion_workshop_reacting.botania.blacker_lotus": "• +2 efeitos positivos\n• +1 efeito negativo\n• torna a poção não identificável\n\nQuer arriscar?",
-  "pastel.rei.potion_workshop_reacting.botania.life_essence": "• +2.5 de potência\n• -3 de rendimento\n\nRequer outros reagentes para aumentar o rendimento, caso contrário, você ficará sem nada...",
+  "pastel.rei.potion_workshop_reacting.botania.gaia_spirit": "• +2.5 de potência\n• -3 de rendimento\n\nRequer outros reagentes para aumentar o rendimento, caso contrário, você ficará sem nada...",
   "pastel.rei.potion_workshop_reacting.botania.mana_powder": "• +25%% de duração\n• 15% de chance de adicionar o último efeito",
   "pastel.rei.potion_workshop_reacting.botania.pixie_dust": "• cria Poções Persistentes e Flechas com Efeito\n• -25% de potência",
   "pastel.rei.potion_workshop_reacting.hexcasting.charged_amethyst": "\n• +15-120s de duração. Às vezes mais, às vezes menos",

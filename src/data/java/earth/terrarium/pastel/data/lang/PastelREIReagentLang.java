@@ -16,7 +16,7 @@ public class PastelREIReagentLang {
             );
         provider
             .add(
-                "pastel.rei.potion_workshop_reacting.botania.life_essence",
+                "pastel.rei.potion_workshop_reacting.botania.gaia_spirit",
                 "• +2.5 potency\n• -3 yield\n\nRequires other reagents to increase the yield, otherwise you will end up " + "with nothing..."
             );
         provider
