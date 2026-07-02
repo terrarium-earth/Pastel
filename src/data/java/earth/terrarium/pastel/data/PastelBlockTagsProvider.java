@@ -29,6 +29,13 @@ public class PastelBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider lookupProvider) {
         tag(PastelBlockTags.C_LIGHTNING_RODS)
             .add(Blocks.LIGHTNING_ROD)
+            .addOptional(ResourceLocation.parse("caverns_and_chasms:exposed_lightning_rod"))
+            .addOptional(ResourceLocation.parse("caverns_and_chasms:weathered_lightning_rod"))
+            .addOptional(ResourceLocation.parse("caverns_and_chasms:oxidized_lightning_rod"))
+            .addOptional(ResourceLocation.parse("caverns_and_chasms:waxed_lightning_rod"))
+            .addOptional(ResourceLocation.parse("caverns_and_chasms:waxed_exposed_lightning_rod"))
+            .addOptional(ResourceLocation.parse("caverns_and_chasms:waxed_weathered_lightning_rod"))
+            .addOptional(ResourceLocation.parse("caverns_and_chasms:waxed_oxidized_lightning_rod"))
             .addOptionalTag(ResourceLocation.parse("friendsandfoes:lightning_rods"));
 
         tag(PastelBlockTags.C_BRUSHABLE_BLOCKS)
