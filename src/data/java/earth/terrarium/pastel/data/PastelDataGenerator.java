@@ -60,5 +60,6 @@ public class PastelDataGenerator {
                     lookupProvider
                 )
             );
+        event.addProvider(new PastelBiomeTagsProvider(packOutput, lookupProvider, existingFileHelper));
     }
 }
