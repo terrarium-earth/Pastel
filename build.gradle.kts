@@ -166,7 +166,7 @@ cloche {
 
                 modImplementation("com.terraformersmc:biolith-neoforge:3.0.10")
 
-                modImplementation("dev.emi:emi-neoforge:1.1.19+1.21.1")
+                modImplementation("dev.emi:emi-neoforge:1.1.24+1.21.1")
 
                 modCompileOnly("maven.modrinth:colorful-hearts:10.3.8") { isTransitive = false }
                 modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.9-neoforge") { isTransitive = false }
