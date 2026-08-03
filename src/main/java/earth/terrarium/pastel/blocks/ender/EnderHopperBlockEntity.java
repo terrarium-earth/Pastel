@@ -25,7 +25,6 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWithName {
 
@@ -115,7 +114,7 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
                     )
                     .stream()
             )
-            .collect(Collectors.toList());
+            .toList();
     }
 
     private static void insertIntoEnderChest(
