@@ -259,7 +259,10 @@ public class WireHookEntity extends Projectile implements HookshotData.FrictionP
             return true;
 
         var player = (Player) getOwner();
-        assert player != null;
+        if (player == null) {
+            discard();
+            return false;
+        }
         var data = HookshotData.get(player);
         if (data.getLinkedHook().map(id -> !id.equals(getUUID())).orElse(true)) {
             discard();
