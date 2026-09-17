@@ -36,7 +36,12 @@ public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
             "",
             false,
             Optional.of(UNLOCK_IDENTIFIER),
-            NonNullList.of(SizedIngredient.of(PastelItemTags.SHOOTING_STARS, 1), SizedIngredient.of(Items.DIAMOND, 1)),
+            NonNullList
+                .of(
+                    SizedIngredient.of(Items.AIR, 1),
+                    SizedIngredient.of(PastelItemTags.SHOOTING_STARS, 1),
+                    SizedIngredient.of(Items.DIAMOND, 1)
+                ),
             FluidIngredient.of(Fluids.WATER),
             getHardenedShootingStar(),
             5,

@@ -59,10 +59,7 @@ public abstract class GatedSizedPastelRecipe<C extends RecipeInput> extends Gate
         }
 
         // match each IngredientStack exclusively
-        ObjectArraySet<SizedIngredient> ingredients = ObjectArraySet
-            .of(
-                ingredientStacks.toArray(new SizedIngredient[0])
-            );
+        var ingredients = new ArrayList<>(ingredientStacks);
         for (
             ItemStack stack : nonEmptyStacks
         ) {

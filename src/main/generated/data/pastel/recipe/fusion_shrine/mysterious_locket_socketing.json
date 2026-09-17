@@ -9,6 +9,12 @@
     {
       "count": 1,
       "ingredient": {
+        "item": "pastel:mysterious_locket"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
         "item": "pastel:moonstone_core"
       }
     }
