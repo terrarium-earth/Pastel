@@ -15,10 +15,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.Optional;
-
-import static net.minecraft.world.entity.Entity.DATA_CUSTOM_NAME;
-
 public class EnderCanvasEntityRenderer extends EntityRenderer<EnderCanvasEntity> {
     private final EntityRendererProvider.Context context;
 
