@@ -24,11 +24,11 @@ import java.util.Objects;
 )
 public class CraftingBlockSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
-    private static List<CraftingBlockSoundInstance> playingSoundInstances = new ArrayList<>();
+    public static List<CraftingBlockSoundInstance> playingSoundInstances = new ArrayList<>();
 
     final ResourceKey<Level> worldKey;
 
-    final BlockPos sourceBlockPos;
+    public final BlockPos sourceBlockPos;
 
     final Block sourceBlock;
 

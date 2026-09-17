@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.blocks.pedestal;
 
+import com.cmdpro.databank.misc.SoundUtil;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PedestalVariant;
@@ -26,6 +27,7 @@ import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.registries.PastelSounds;
+import earth.terrarium.pastel.sound.CraftingBlockSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -106,11 +108,14 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements
 
     protected final ContainerData data;
 
+    protected int craftingSoundTime;
+
     public PedestalBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(PastelBlockEntities.PEDESTAL.get(), blockPos, blockState, SIZE);
         inventory.addListener(i -> setChanged());
         refreshVariant();
         data = initData();
+        craftingSoundTime = 0;
     }
 
     private void clientTick() {
@@ -132,6 +137,15 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements
                     itemColor.map(InkColor::getColorInt).orElse(particleColor)
                 )
         );
+
+        if (active)
+            for (
+                var soundInstance : CraftingBlockSoundInstance.playingSoundInstances
+            ) {
+                if (!soundInstance.sourceBlockPos.equals(getBlockPos())) continue;
+                SoundUtil.setTime(soundInstance, craftingSoundTime);
+            }
+        craftingSoundTime = (craftingSoundTime + 1) % 640;
     }
 
     private int getPowderColor(RandomSource random) {

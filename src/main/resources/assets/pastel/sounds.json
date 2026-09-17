@@ -804,27 +804,27 @@
   },
   "pedestal_matter": {
     "sounds": [
-      "pastel:ost/Pigment Pedestal - Matter"
+      "pastel:ost/pigment_pedestal_matter"
     ]
   },
   "pedestal_time": {
     "sounds": [
-      "pastel:ost/Pigment Pedestal - Time"
+      "pastel:ost/pigment_pedestal_time"
     ]
   },
   "pedestal_energy": {
     "sounds": [
-      "pastel:ost/Pigment Pedestal - Energy"
+      "pastel:ost/pigment_pedestal_energy"
     ]
   },
   "pedestal_conclusion": {
     "sounds": [
-      "pastel:ost/Pigment Pedestal - Conclusion"
+      "pastel:ost/pigment_pedestal_conclusion"
     ]
   },
   "pedestal_purity": {
     "sounds": [
-      "pastel:ost/Pigment Pedestal - Purity"
+      "pastel:ost/pigment_pedestal_purity"
     ]
   },
   "pedestal_upgrade": {

@@ -115,7 +115,8 @@ public record PlayBlockBoundSoundInstancePayload(
                     payload.pos,
                     payload.block.value(),
                     payload.maxDurationTicks,
-                    payload.volume
+                    payload.volume,
+                    payload.override
                 );
         }
     }
