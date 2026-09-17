@@ -91,7 +91,10 @@ public class EnderSpliceItem extends Item {
     public ItemStack finishUsingItem(ItemStack itemStack, Level world, LivingEntity user) {
         if (world.isClientSide) {
             if (getTeleportTargetPos(itemStack).isEmpty() && getTeleportTargetPlayerUUID(itemStack).isEmpty()) {
-                interactWithEntityClient();
+                if (user instanceof Player && user.isShiftKeyDown())
+                    PacketDistributor.sendToServer(new BindEnderSpliceToPlayerPayload(user.getId()));
+                else
+                    interactWithEntityClient();
             }
         } else if (user instanceof ServerPlayer playerEntity) {
             CriteriaTriggers.CONSUME_ITEM.trigger(playerEntity, itemStack);

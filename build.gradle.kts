@@ -48,6 +48,8 @@ repositories {
     }
 
     maven(url = "https://maven.ryanhcode.dev/releases") // sable
+
+    maven(url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1") // devauth
 }
 
 cloche {
@@ -189,6 +191,7 @@ cloche {
                 //modRuntimeOnly("dev.ryanhcode.sable:sable-neoforge-1.21.1:1.2.2") { isTransitive = false }
                 //modRuntimeOnly("maven.modrinth:enchiridion:0.2.0+1.21.1-neoforge") { isTransitive = false }
                 //modRuntimeOnly("maven.modrinth:owo-lib:0.12.15.5-beta.1+1.21") { isTransitive = false }
+                modRuntimeOnly("me.djtheredstoner:DevAuth-neoforge:1.2.2")
             }
 
             dependencies {

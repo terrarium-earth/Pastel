@@ -75,3 +75,4 @@ extendable  method  net/minecraft/world/entity/decoration/HangingEntity recalcul
 accessible field net/minecraft/world/entity/monster/Creeper DATA_IS_POWERED Lnet/minecraft/network/syncher/EntityDataAccessor;
 accessible field net/minecraft/server/level/ServerChunkCache distanceManager Lnet/minecraft/server/level/DistanceManager;
 accessible field net/minecraft/server/level/DistanceManager simulationDistance I
+accessible field net/minecraft/world/entity/Entity DATA_CUSTOM_NAME Lnet/minecraft/network/syncher/EntityDataAccessor;

@@ -25,7 +25,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
@@ -58,6 +57,8 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
 
     public CanvasWorkaroundPlayerEntity cachedPlayer;
 
+    public String cachedBiome;
+
     private static final EntityDataAccessor<EnderSpliceComponent> SPLICE_DATA = SynchedEntityData
         .defineId(
             EnderCanvasEntity.class,
@@ -80,6 +81,17 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
 
     public EnderCanvasEntity(EntityType<? extends EnderCanvasEntity> entityType, Level level) {
         super(entityType, level);
+        // setup the biome cache immediately
+        if (getSpliceData().targetGameProfile().isPresent() && PastelCommon
+            .getSidedServer() != null) {
+            var targetPlayer = PastelCommon
+                .getSidedServer()
+                .getPlayerList()
+                .getPlayer(getSpliceData().targetGameProfile().get().getId());
+            if (targetPlayer != null) {
+                setBiomeCache(targetPlayer.level().getBiome(targetPlayer.blockPosition()).getRegisteredName());
+            }
+        }
     }
 
     @Override
@@ -105,7 +117,9 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
     }
 
     public String getBiomeCache() {
-        return getEntityData().get(BIOME_CACHE);
+        var res = getEntityData().get(BIOME_CACHE);
+        if (res.equals("[unregistered]")) return "";
+        return res;
     }
 
     public void setBiomeCache(String biome) {
@@ -190,6 +204,8 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
     @Override
     public void tick() {
         super.tick();
+        if (this.level().getGameTime() % 20 == 0) // once a second, check if the server's sent a new biome
+            cachedBiome = getBiomeCache();
         if (this
             .level()
             .isClientSide()) return;

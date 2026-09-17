@@ -15,9 +15,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
+
+import static net.minecraft.world.entity.Entity.DATA_CUSTOM_NAME;
 
 public class EnderCanvasEntityRenderer extends EntityRenderer<EnderCanvasEntity> {
     private final EntityRendererProvider.Context context;
@@ -34,12 +34,10 @@ public class EnderCanvasEntityRenderer extends EntityRenderer<EnderCanvasEntity>
         if (component.biome().isPresent())
             result = component.biome().get();
         else if (component.targetGameProfile().isPresent()) {
-            if (entity.getBiomeCache().equals("[unregistered]"))
+            if (entity.cachedBiome == null || entity.cachedBiome.isEmpty())
                 return ResourceLocation.withDefaultNamespace("textures/painting/tides.png");
-            return ResourceLocation.parse(entity.getBiomeCache());
+            result = ResourceLocation.parse(entity.cachedBiome);
         }
-        if (entity.getVariant() != EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE) // todo
-            return ResourceLocation.withDefaultNamespace("textures/painting/tides.png");
         if (result == null)
             return ResourceLocation.withDefaultNamespace("textures/painting/tides.png");
         var path = PastelCommon.locate("textures/entity/endercanvas/biomesprite_" + result.getPath() + ".png");
@@ -109,7 +107,6 @@ public class EnderCanvasEntityRenderer extends EntityRenderer<EnderCanvasEntity>
                         .targetGameProfile()
                         .get()
                 );
-                toRender.setCustomNameVisible(false);
 
                 toRender
                     .getEntityData()
