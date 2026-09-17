@@ -1,6 +1,8 @@
 package earth.terrarium.pastel.sound;
 
+import com.cmdpro.databank.misc.SoundUtil;
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.events.PastelClientEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -46,7 +48,8 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
         BlockPos sourceBlockPos,
         Block sourceBlock,
         int maxDurationTicks,
-        float volumeMul
+        float volumeMul,
+        boolean sync
     ) {
         super(soundEvent, SoundSource.BLOCKS, SoundInstance.createUnseededRandom());
 
@@ -64,6 +67,9 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
         this.z = sourceBlockPos.getZ() + 0.5;
 
         updateVolume();
+
+        if (sync)
+            SoundUtil.setTime(this, ((float) PastelClientEvents.craftingSoundTime) / 20f);
     }
 
     @OnlyIn(
@@ -87,7 +93,8 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
             sourceBlockPos,
             sourceBlock,
             maxDurationTicks,
-            volumeMul
+            volumeMul,
+            !override
         );
         playingSoundInstances.add(newInstance);
         Minecraft

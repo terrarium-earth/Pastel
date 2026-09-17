@@ -104,18 +104,20 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements
 
     protected int storedXp;
 
-    protected boolean active, hadTablet;
+    public boolean active;
+
+    protected boolean hadTablet;
 
     protected final ContainerData data;
 
-    protected int craftingSoundTime;
+    public boolean doParticles;
 
     public PedestalBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(PastelBlockEntities.PEDESTAL.get(), blockPos, blockState, SIZE);
         inventory.addListener(i -> setChanged());
         refreshVariant();
         data = initData();
-        craftingSoundTime = 0;
+        doParticles = false;
     }
 
     private void clientTick() {
@@ -138,14 +140,6 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements
                 )
         );
 
-        if (active)
-            for (
-                var soundInstance : CraftingBlockSoundInstance.playingSoundInstances
-            ) {
-                if (!soundInstance.sourceBlockPos.equals(getBlockPos())) continue;
-                SoundUtil.setTime(soundInstance, craftingSoundTime);
-            }
-        craftingSoundTime = (craftingSoundTime + 1) % 640;
     }
 
     private int getPowderColor(RandomSource random) {
@@ -169,7 +163,7 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements
 
         if (!active) {
             if (getBlockState().getValue(BlockStateProperties.POWERED))
-                active = true;
+                setActive(true);
             else
                 return;
         }
@@ -205,7 +199,7 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements
             setChanged();
             craftingTime = -1;
             totalTime = -1;
-            active = false;
+            setActive(false);
             return;
         }
 

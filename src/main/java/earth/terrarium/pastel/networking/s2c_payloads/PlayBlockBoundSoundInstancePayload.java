@@ -1,7 +1,9 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
+import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.sound.CraftingBlockSoundInstance;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -106,6 +108,13 @@ public record PlayBlockBoundSoundInstancePayload(
     }
 
     public static void execute(PlayBlockBoundSoundInstancePayload payload, IPayloadContext context) {
+        Minecraft client = Minecraft.getInstance();
+        if (client.level != null) {
+            var be = client.level.getBlockEntity(payload.pos);
+            if (be instanceof PedestalBlockEntity pedestal) {
+                pedestal.active = !(payload.maxDurationTicks < 0);
+            }
+        }
         if (payload.maxDurationTicks < 0) {
             CraftingBlockSoundInstance.stopPlayingOnPos(payload.pos);
         } else {

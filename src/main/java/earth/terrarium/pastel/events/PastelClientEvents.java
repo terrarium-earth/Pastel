@@ -97,6 +97,8 @@ import java.util.function.Supplier;
 )
 public class PastelClientEvents {
 
+    public static int craftingSoundTime = 0;
+
     private static boolean postProcessWasOn = PastelCommon.CONFIG.PostProcess;
 
     private static void registerCustomItemRenderer(Item item, Supplier<DynamicItemRenderer> renderer) {
@@ -276,6 +278,8 @@ public class PastelClientEvents {
     private static void afterClientTick(ClientTickEvent.Post event) {
         var client = Minecraft.getInstance();
         var level = client.level;
+
+        craftingSoundTime = (craftingSoundTime + 1) % 640;
 
         Entity cameraEntity = client.getCameraEntity();
         if (level == null || cameraEntity == null) {

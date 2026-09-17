@@ -5,8 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.helpers.render.ParticleHelper;
-import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
 import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
@@ -17,7 +15,6 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
@@ -239,18 +236,27 @@ public class PedestalBlockEntityRenderer<C extends PedestalBlockEntity> implemen
                     var gTime = pedestal.getLevel().getGameTime();
                     var offsetVec = getOffsetVecW(gTime, particleLoc, partialTicks);
                     var test = 1f - (gTime % 50000 + partialTicks) % 200 / 200f;
-                    if (pedestal.active && test < 0.13f && test > 0.129f) {
-                        pedestal
-                            .getLevel()
-                            .addParticle(
-                                ColoredSparkleRisingParticleEffect.WHITE,
-                                pedestal.getBlockPos().getCenter().x,
-                                pedestal.getBlockPos().getCenter().y,
-                                pedestal.getBlockPos().getCenter().z,
-                                (Math.random() - 0.5) / 2.5d,
-                                Math.random() / 5d,
-                                (Math.random() - 0.5) / 2.5d
-                            );
+                    if (!pedestal.doParticles && test > 0.8)
+                        pedestal.doParticles = true;
+                    if (pedestal.active && pedestal.doParticles && test < 0.13f) {
+                        pedestal.doParticles = false;
+                        for (
+                            int i = 0;
+                            i < 64;
+                            i++
+                        ) {
+                            pedestal
+                                .getLevel()
+                                .addParticle(
+                                    ColoredSparkleRisingParticleEffect.WHITE,
+                                    pedestal.getBlockPos().getCenter().x,
+                                    pedestal.getBlockPos().getCenter().y,
+                                    pedestal.getBlockPos().getCenter().z,
+                                    (Math.random() - 0.5) / 2.5d,
+                                    Math.random() / 5d,
+                                    (Math.random() - 0.5) / 2.5d
+                                );
+                        }
                     }
                     if (offsetVec == null) continue;
                     float x = offsetVec.x + pedestal.getBlockPos().getX() + 0.5f;
