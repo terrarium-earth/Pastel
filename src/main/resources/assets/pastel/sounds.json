@@ -802,13 +802,29 @@
       "pastel:ost/azure"
     ]
   },
-  "pedestal_crafting": {
+  "pedestal_matter": {
     "sounds": [
-      {
-        "name": "pastel:pedestal_crafting",
-        "volume": 2.0,
-        "stream": true
-      }
+      "pastel:ost/Pigment Pedestal - Matter"
+    ]
+  },
+  "pedestal_time": {
+    "sounds": [
+      "pastel:ost/Pigment Pedestal - Time"
+    ]
+  },
+  "pedestal_energy": {
+    "sounds": [
+      "pastel:ost/Pigment Pedestal - Energy"
+    ]
+  },
+  "pedestal_conclusion": {
+    "sounds": [
+      "pastel:ost/Pigment Pedestal - Conclusion"
+    ]
+  },
+  "pedestal_purity": {
+    "sounds": [
+      "pastel:ost/Pigment Pedestal - Purity"
     ]
   },
   "pedestal_upgrade": {

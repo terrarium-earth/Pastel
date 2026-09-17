@@ -24,7 +24,8 @@ public record PlayBlockBoundSoundInstancePayload(
     BlockPos pos,
     Holder<Block> block,
     int maxDurationTicks,
-    float volume
+    float volume,
+    boolean override
 ) implements CustomPacketPayload {
 
     public static final Type<PlayBlockBoundSoundInstancePayload> ID = PastelC2SPackets
@@ -44,6 +45,8 @@ public record PlayBlockBoundSoundInstancePayload(
             PlayBlockBoundSoundInstancePayload::maxDurationTicks,
             ByteBufCodecs.FLOAT,
             PlayBlockBoundSoundInstancePayload::volume,
+            ByteBufCodecs.BOOL,
+            PlayBlockBoundSoundInstancePayload::override,
             PlayBlockBoundSoundInstancePayload::new
         );
 
@@ -52,7 +55,8 @@ public record PlayBlockBoundSoundInstancePayload(
         @NotNull ServerLevel world,
         BlockPos pos,
         int maxDurationTicks,
-        float volume
+        float volume,
+        boolean override
     ) {
         PacketDistributor
             .sendToPlayersTrackingChunk(
@@ -66,9 +70,20 @@ public record PlayBlockBoundSoundInstancePayload(
                         .getBlock()
                         .builtInRegistryHolder(),
                     maxDurationTicks,
-                    volume
+                    volume,
+                    override
                 )
             );
+    }
+
+    public static void sendPlayBlockBoundSoundInstance(
+        SoundEvent soundEvent,
+        @NotNull ServerLevel world,
+        BlockPos pos,
+        int maxDurationTicks,
+        float volume
+    ) {
+        sendPlayBlockBoundSoundInstance(soundEvent, world, pos, maxDurationTicks, volume, true);
     }
 
     public static void sendCancelBlockBoundSoundInstance(@NotNull ServerLevel world, BlockPos pos) {
@@ -84,7 +99,8 @@ public record PlayBlockBoundSoundInstancePayload(
                         .getBlock()
                         .builtInRegistryHolder(),
                     -1,
-                    0
+                    0,
+                    true
                 )
             );
     }

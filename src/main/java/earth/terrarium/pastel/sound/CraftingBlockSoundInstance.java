@@ -74,10 +74,12 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
         BlockPos sourceBlockPos,
         Block sourceBlock,
         int maxDurationTicks,
-        float volumeMul
+        float volumeMul,
+        boolean override
     ) {
         Minecraft client = Minecraft.getInstance();
-        stopPlayingOnPos(sourceBlockPos);
+        if (override)
+            stopPlayingOnPos(sourceBlockPos);
 
         CraftingBlockSoundInstance newInstance = new CraftingBlockSoundInstance(
             soundEvent,
@@ -92,6 +94,19 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
             .getInstance()
             .getSoundManager()
             .play(newInstance);
+    }
+
+    @OnlyIn(
+        Dist.CLIENT
+    )
+    public static void startSoundInstance(
+        SoundEvent soundEvent,
+        BlockPos sourceBlockPos,
+        Block sourceBlock,
+        int maxDurationTicks,
+        float volumeMul
+    ) {
+        startSoundInstance(soundEvent, sourceBlockPos, sourceBlock, maxDurationTicks, volumeMul, true);
     }
 
     // if there is already a sound instance playing at given pos: cancel it

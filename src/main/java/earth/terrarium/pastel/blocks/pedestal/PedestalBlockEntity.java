@@ -574,14 +574,66 @@ public class PedestalBlockEntity extends ActionableBlockEntity implements
         this.active = active;
 
         if (active) {
-            PlayBlockBoundSoundInstancePayload
-                .sendPlayBlockBoundSoundInstance(
-                    PastelSounds.PEDESTAL_CRAFTING,
-                    (ServerLevel) getLevel(),
-                    getBlockPos(),
-                    Integer.MAX_VALUE,
-                    16.0f
-                );
+            if (recipe.isPresent()) {
+                var val = recipe.get().value();
+                if (val instanceof PedestalRecipe pr) {
+                    if (pr.getPowder(PastelGemstoneColor.CYAN) > 0) {
+                        PlayBlockBoundSoundInstancePayload
+                            .sendPlayBlockBoundSoundInstance(
+                                PastelSounds.PEDESTAL_MATTER,
+                                (ServerLevel) getLevel(),
+                                getBlockPos(),
+                                Integer.MAX_VALUE,
+                                16.0f,
+                                false
+                            );
+                    }
+                    if (pr.getPowder(PastelGemstoneColor.MAGENTA) > 0) {
+                        PlayBlockBoundSoundInstancePayload
+                            .sendPlayBlockBoundSoundInstance(
+                                PastelSounds.PEDESTAL_TIME,
+                                (ServerLevel) getLevel(),
+                                getBlockPos(),
+                                Integer.MAX_VALUE,
+                                16.0f,
+                                false
+                            );
+                    }
+                    if (pr.getPowder(PastelGemstoneColor.YELLOW) > 0) {
+                        PlayBlockBoundSoundInstancePayload
+                            .sendPlayBlockBoundSoundInstance(
+                                PastelSounds.PEDESTAL_ENERGY,
+                                (ServerLevel) getLevel(),
+                                getBlockPos(),
+                                Integer.MAX_VALUE,
+                                16.0f,
+                                false
+                            );
+                    }
+                    if (pr.getPowder(PastelGemstoneColor.BLACK) > 0) {
+                        PlayBlockBoundSoundInstancePayload
+                            .sendPlayBlockBoundSoundInstance(
+                                PastelSounds.PEDESTAL_CONCLUSION,
+                                (ServerLevel) getLevel(),
+                                getBlockPos(),
+                                Integer.MAX_VALUE,
+                                16.0f,
+                                false
+                            );
+                    }
+                    if (pr.getPowder(PastelGemstoneColor.WHITE) > 0) {
+                        PlayBlockBoundSoundInstancePayload
+                            .sendPlayBlockBoundSoundInstance(
+                                PastelSounds.PEDESTAL_PURITY,
+                                (ServerLevel) getLevel(),
+                                getBlockPos(),
+                                Integer.MAX_VALUE,
+                                16.0f,
+                                false
+                            );
+                    }
+                }
+            }
         } else {
             PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) level, getBlockPos());
         }

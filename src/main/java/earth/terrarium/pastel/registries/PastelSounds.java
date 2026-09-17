@@ -49,7 +49,15 @@ public class PastelSounds {
     public static final SoundEvent MUSIC_IMBRIFER_RAZOR_EDGE = register("music.imbrifer.razor_edge");
 
     // Sounds
-    public static final SoundEvent PEDESTAL_CRAFTING = register("pedestal_crafting");
+    public static final SoundEvent PEDESTAL_MATTER = register("pedestal_matter");
+
+    public static final SoundEvent PEDESTAL_TIME = register("pedestal_time");
+
+    public static final SoundEvent PEDESTAL_ENERGY = register("pedestal_energy");
+
+    public static final SoundEvent PEDESTAL_CONCLUSION = register("pedestal_conclusion");
+
+    public static final SoundEvent PEDESTAL_PURITY = register("pedestal_purity");
 
     public static final SoundEvent PEDESTAL_CRAFTING_FINISHED_GENERIC = register("pedestal_crafting_finished_generic");
 
