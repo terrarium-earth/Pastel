@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 
 public abstract class InWorldInteractionBlock extends BaseEntityBlock {
+    protected boolean singleItemOnly = false;
 
     protected InWorldInteractionBlock(Properties settings) {
         super(settings);
@@ -83,14 +84,27 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
 
     public ItemStack inputStack(Level world, BlockPos pos, ItemStack itemStack) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
+        ItemStack remainingStack;
         if (blockEntity instanceof InWorldInteractionBlockEntity inWorldInteractionBlockEntity) {
             int previousCount = itemStack.getCount();
-            ItemStack remainingStack = InventoryHelper
-                .smartAddToInventory(
-                    itemStack,
-                    inWorldInteractionBlockEntity.inventory,
-                    null
-                );
+            if (singleItemOnly) {
+                if (!inWorldInteractionBlockEntity.inventory.isEmpty()) {
+                    return itemStack;
+                }
+                InventoryHelper
+                    .smartAddToInventory(
+                        itemStack.split(1),
+                        inWorldInteractionBlockEntity.inventory,
+                        null
+                    );
+                remainingStack = itemStack;
+            } else
+                remainingStack = InventoryHelper
+                    .smartAddToInventory(
+                        itemStack,
+                        inWorldInteractionBlockEntity.inventory,
+                        null
+                    );
 
             if (remainingStack.getCount() != previousCount) {
                 world
@@ -141,12 +155,19 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
         } else {
             ItemStack currentStack = blockEntity.getItem(slot);
             if (!handStack.isEmpty() && !currentStack.isEmpty()) {
-                if (ItemStack.isSameItemSameComponents(handStack, currentStack)) {
+                if (!singleItemOnly && ItemStack.isSameItemSameComponents(handStack, currentStack)) {
                     InventoryHelper.setOrCombineStack(blockEntity.inventory, slot, handStack);
                 } else {
                     CrystalArmorItem.removeEmpowered(handStack);
-                    blockEntity.setItem(slot, handStack);
-                    player.setItemInHand(hand, currentStack);
+                    if (!singleItemOnly) {
+                        blockEntity.setItem(slot, handStack);
+                        player.setItemInHand(hand, currentStack);
+                    } else {
+                        blockEntity.setItem(slot, handStack.split(1));
+                        player
+                            .getInventory()
+                            .placeItemBackInInventory(currentStack);
+                    }
                 }
                 itemsChanged = true;
             } else {

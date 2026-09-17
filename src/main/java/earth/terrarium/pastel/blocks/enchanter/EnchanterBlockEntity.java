@@ -47,6 +47,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -122,7 +123,26 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
     }
 
     private void tickServer() {
-        if (level == null || level.isClientSide() || mode == EnchanterMode.IDLE)
+        if (level == null || level.isClientSide())
+            return;
+
+        // hoppers, annoyingly, do not respect a Container's getMaxStackSize. so we have to get a little creative
+        if (inventory.getStackInSlot(CENTER).getCount() > 1) {
+            var stack = inventory.getStackInSlot(CENTER);
+            inventory.setStackInSlot(CENTER, stack.split(1));
+            level
+                .addFreshEntity(
+                    new ItemEntity(
+                        level,
+                        worldPosition.getX(),
+                        worldPosition.above().getY(),
+                        worldPosition.getZ(),
+                        stack
+                    )
+                );
+        }
+
+        if (mode == EnchanterMode.IDLE)
             return;
 
         if (cachedRecipe.isEmpty() && mode.recipeBased) {
@@ -190,6 +210,11 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity
         if (level.getGameTime() % 12 == 0) {
             spawnCraftingOrbs();
         }
+    }
+
+    @Override
+    public int getMaxStackSize() {
+        return 1;
     }
 
     private void finalizeCrafting(EnchanterRecipe recipe) {
