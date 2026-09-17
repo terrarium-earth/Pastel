@@ -11,6 +11,7 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -21,10 +22,12 @@ public record EnderSpliceComponent(
     Optional<Vec3> pos,
     Optional<ResourceKey<Level>> dimension,
     Optional<Component> targetName,
-    Optional<GameProfile> targetGameProfile
+    Optional<GameProfile> targetGameProfile,
+    Optional<ResourceLocation> biome
 ) {
 
     public static final EnderSpliceComponent DEFAULT = new EnderSpliceComponent(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -47,7 +50,10 @@ public record EnderSpliceComponent(
                         .forGetter(c -> c.targetName),
                     ExtraCodecs.GAME_PROFILE
                         .optionalFieldOf("target_uuid")
-                        .forGetter(c -> c.targetGameProfile)
+                        .forGetter(c -> c.targetGameProfile),
+                    ResourceLocation.CODEC
+                        .optionalFieldOf("biome")
+                        .forGetter(c -> c.biome)
                 )
                 .apply(
                     i,
@@ -65,15 +71,29 @@ public record EnderSpliceComponent(
             EnderSpliceComponent::targetName,
             ByteBufCodecs.optional(ByteBufCodecs.GAME_PROFILE),
             EnderSpliceComponent::targetGameProfile,
+            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
+            EnderSpliceComponent::biome,
             EnderSpliceComponent::new
         );
 
-    public EnderSpliceComponent(Vec3 pos, ResourceKey<Level> dimension) {
-        this(Optional.of(pos), Optional.of(dimension), Optional.empty(), Optional.empty());
+    public EnderSpliceComponent(Vec3 pos, ResourceKey<Level> dimension, String targetBiome) {
+        this(
+            Optional.of(pos),
+            Optional.of(dimension),
+            Optional.empty(),
+            Optional.empty(),
+            targetBiome.equals("[unregistered]") ? Optional.empty() : Optional.of(ResourceLocation.parse(targetBiome))
+        );
     }
 
     public EnderSpliceComponent(Component targetName, GameProfile targetGameProfile) {
-        this(Optional.empty(), Optional.empty(), Optional.of(targetName), Optional.of(targetGameProfile));
+        this(
+            Optional.empty(),
+            Optional.empty(),
+            Optional.of(targetName),
+            Optional.of(targetGameProfile),
+            Optional.empty()
+        );
     }
 
 }

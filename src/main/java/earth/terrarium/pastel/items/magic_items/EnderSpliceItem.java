@@ -14,6 +14,7 @@ import earth.terrarium.pastel.registries.PastelSounds;
 import earth.terrarium.pastel.sound.EnderSpliceChargingSoundInstance;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -56,7 +57,15 @@ public class EnderSpliceItem extends Item {
     }
 
     public static void setTeleportTargetPos(@NotNull ItemStack itemStack, Level world, Vec3 pos) {
-        itemStack.set(PastelDataComponentTypes.ENDER_SPLICE, new EnderSpliceComponent(pos, world.dimension()));
+        itemStack
+            .set(
+                PastelDataComponentTypes.ENDER_SPLICE,
+                new EnderSpliceComponent(
+                    pos,
+                    world.dimension(),
+                    world.getBiome(BlockPos.containing(pos)).getRegisteredName()
+                )
+            );
     }
 
     public static void setTeleportTargetPlayer(@NotNull ItemStack itemStack, ServerPlayer player) {

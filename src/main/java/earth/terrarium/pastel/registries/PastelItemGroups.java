@@ -1151,7 +1151,8 @@ public class PastelItemGroups {
                     PastelDataComponentTypes.ENDER_SPLICE,
                     new EnderSpliceComponent(
                         new Vec3(0, 80, 0),
-                        Level.OVERWORLD
+                        Level.OVERWORLD,
+                        "[unregistered]"
                     )
                 );
             entries.accept(canvasStack);

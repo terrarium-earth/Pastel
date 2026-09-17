@@ -25,6 +25,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
@@ -69,6 +70,12 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
             PastelTrackedDataHandlers.ENDER_CANVAS_VARIANT
         );
 
+    private static final EntityDataAccessor<String> BIOME_CACHE = SynchedEntityData
+        .defineId(
+            EnderCanvasEntity.class,
+            PastelTrackedDataHandlers.BIOME_CACHE
+        );
+
     public boolean resonant;
 
     public EnderCanvasEntity(EntityType<? extends EnderCanvasEntity> entityType, Level level) {
@@ -79,6 +86,7 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(SPLICE_DATA, EnderSpliceComponent.DEFAULT);
         builder.define(VARIANT, EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE);
+        builder.define(BIOME_CACHE, "[unregistered]");
     }
 
     @Override
@@ -94,6 +102,14 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
 
     public void setVariant(EnderCanvasEntity.EnderCanvasVariant variant) {
         getEntityData().set(VARIANT, variant);
+    }
+
+    public String getBiomeCache() {
+        return getEntityData().get(BIOME_CACHE);
+    }
+
+    public void setBiomeCache(String biome) {
+        getEntityData().set(BIOME_CACHE, biome);
     }
 
     public EnderSpliceComponent getSpliceData() {
@@ -177,6 +193,19 @@ public class EnderCanvasEntity extends HangingEntity implements VariantHolder<En
         if (this
             .level()
             .isClientSide()) return;
+
+        // only update biome cache once every ten seconds
+        if (this.level().getGameTime() % 200 == 0 && getSpliceData().targetGameProfile().isPresent() && PastelCommon
+            .getSidedServer() != null) {
+            var targetPlayer = PastelCommon
+                .getSidedServer()
+                .getPlayerList()
+                .getPlayer(getSpliceData().targetGameProfile().get().getId());
+            if (targetPlayer != null) {
+                setBiomeCache(targetPlayer.level().getBiome(targetPlayer.blockPosition()).getRegisteredName());
+            }
+        }
+
         EnderCanvasEntity.EnderCanvasVariant variant = getVariant();
         // no teleporting creepers on your friends
         List<? extends Entity> list = (variant == EnderCanvasEntity.EnderCanvasVariant.PORTRAIT)

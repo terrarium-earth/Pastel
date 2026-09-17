@@ -2,6 +2,7 @@ package earth.terrarium.pastel.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.CanvasWorkaroundPlayerEntity;
 import earth.terrarium.pastel.entity.entity.EnderCanvasEntity;
 import net.minecraft.client.Minecraft;
@@ -14,6 +15,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 public class EnderCanvasEntityRenderer extends EntityRenderer<EnderCanvasEntity> {
     private final EntityRendererProvider.Context context;
 
@@ -24,7 +29,24 @@ public class EnderCanvasEntityRenderer extends EntityRenderer<EnderCanvasEntity>
 
     @Override
     public ResourceLocation getTextureLocation(EnderCanvasEntity entity) {
-        return ResourceLocation.withDefaultNamespace("textures/painting/tides.png");
+        var component = entity.getSpliceData();
+        ResourceLocation result = null;
+        if (component.biome().isPresent())
+            result = component.biome().get();
+        else if (component.targetGameProfile().isPresent()) {
+            if (entity.getBiomeCache().equals("[unregistered]"))
+                return ResourceLocation.withDefaultNamespace("textures/painting/tides.png");
+            return ResourceLocation.parse(entity.getBiomeCache());
+        }
+        if (entity.getVariant() != EnderCanvasEntity.EnderCanvasVariant.LANDSCAPELARGE) // todo
+            return ResourceLocation.withDefaultNamespace("textures/painting/tides.png");
+        if (result == null)
+            return ResourceLocation.withDefaultNamespace("textures/painting/tides.png");
+        var path = PastelCommon.locate("textures/entity/endercanvas/biomesprite_" + result.getPath() + ".png");
+        if (Minecraft.getInstance().getResourceManager().getResource(path).isEmpty()) {
+            return ResourceLocation.withDefaultNamespace("textures/painting/tides.png");
+        }
+        return path;
     }
 
     @Override

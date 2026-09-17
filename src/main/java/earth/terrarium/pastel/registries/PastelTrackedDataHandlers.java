@@ -10,6 +10,7 @@ import earth.terrarium.pastel.entity.variants.LizardHornVariant;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.syncher.EntityDataSerializer;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -53,6 +54,11 @@ public class PastelTrackedDataHandlers {
             EnderCanvasEntity.EnderCanvasVariant.STREAM_CODEC
         );
 
+    public static final EntityDataSerializer<String> BIOME_CACHE = EntityDataSerializer
+        .forValueType(
+            ByteBufCodecs.STRING_UTF8
+        );
+
     public static void register(IEventBus bus) {
         REGISTER.register("ink_color", () -> INK_COLOR);
         REGISTER.register("glass_arrow_variant", () -> GLASS_ARROW_VARIANT);
@@ -61,6 +67,7 @@ public class PastelTrackedDataHandlers {
         REGISTER.register("kindling_variant", () -> KINDLING_VARIANT);
         REGISTER.register("ender_splice_component", () -> ENDER_SPLICE_COMPONENT);
         REGISTER.register("ender_canvas_variant", () -> ENDER_CANVAS_VARIANT);
+        REGISTER.register("biome_cache", () -> BIOME_CACHE);
         REGISTER.register(bus);
     }
 
