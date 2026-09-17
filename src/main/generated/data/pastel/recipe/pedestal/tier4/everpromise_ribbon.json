@@ -4,7 +4,8 @@
     "pastel:cyan": 1,
     "pastel:magenta": 1,
     "pastel:white": 8,
-    "pastel:yellow": 1
+    "pastel:yellow": 1,
+    "pastel:black": 1
   },
   "experience": 2.0,
   "key": {
