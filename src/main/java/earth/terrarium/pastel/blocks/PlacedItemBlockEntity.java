@@ -40,7 +40,8 @@ public class PlacedItemBlockEntity extends BlockEntity implements PlayerOwned {
     @Override
     public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
         super.saveAdditional(nbt, registryLookup);
-        nbt.put("stack", this.stack.save(registryLookup));
+        if (!this.stack.isEmpty())
+            nbt.put("stack", this.stack.save(registryLookup));
 
         PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
     }
