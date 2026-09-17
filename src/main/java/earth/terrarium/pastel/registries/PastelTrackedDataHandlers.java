@@ -10,7 +10,6 @@ import earth.terrarium.pastel.entity.variants.LizardHornVariant;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.syncher.EntityDataSerializer;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
