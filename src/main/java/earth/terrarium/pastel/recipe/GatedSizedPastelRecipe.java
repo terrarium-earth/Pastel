@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe;
 
-import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -11,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public abstract class GatedSizedPastelRecipe<C extends RecipeInput> extends GatedPastelRecipe<C> {
 
@@ -29,7 +28,7 @@ public abstract class GatedSizedPastelRecipe<C extends RecipeInput> extends Gate
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
         return NonNullList
-            .copyOf(getSizedIngredients().stream().map(SizedIngredient::ingredient).collect(Collectors.toList()));
+            .copyOf(getSizedIngredients().stream().filter(Objects::nonNull).map(SizedIngredient::ingredient).toList());
     }
 
     protected boolean matchIngredientStacksExclusively(

@@ -675,8 +675,7 @@ public class PastelEmiPlugin implements EmiPlugin {
         try {
             registry.addRecipe(supplier.get());
         } catch (Throwable e) {
-            EmiReloadLog.warn("Exception thrown when parsing EMI recipe (no ID available)");
-            EmiReloadLog.error(e);
+            EmiReloadLog.warn("Exception thrown when parsing EMI recipe (no ID available)", e);
         }
     }
 
