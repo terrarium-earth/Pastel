@@ -2367,7 +2367,7 @@ public class PastelItems {
                     .of()
                     .stacksTo(1)
                     .rarity(Rarity.EPIC),
-                GuidebookItem.addressOf(GuidebookItem.CUISINE_CATEGORY_ID, locate("dimension/lore/poisoners_handbook")),
+                GuidebookItem.addressOf(GuidebookItem.DIMENSION_CATEGORY_ID, locate("dimension/poisoners_handbook")),
                 PastelMobEffects.ETERNAL_SLUMBER_COLOR
             ),
             InkColors.PURPLE
