@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.recipe;
 
-import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
