@@ -11,6 +11,12 @@
       "ingredient": {
         "item": "pastel:moonstone_core"
       }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "pastel:mysterious_locket"
+      }
     }
   ],
   "required_advancement": "pastel:unlocks/mysterious_locket_socketing",

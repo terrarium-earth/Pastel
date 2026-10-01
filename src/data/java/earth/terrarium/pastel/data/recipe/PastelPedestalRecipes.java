@@ -4348,6 +4348,7 @@ public class PastelPedestalRecipes {
                         .cyan(1)
                         .magenta(1)
                         .yellow(1)
+                        .black(1)
                         .white(8)
                         .experience(2.0f)
                         .pattern("PS ")

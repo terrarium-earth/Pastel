@@ -1,6 +1,7 @@
 {
   "type": "pastel:pedestal",
   "colors": {
+    "pastel:black": 1,
     "pastel:cyan": 1,
     "pastel:magenta": 1,
     "pastel:white": 8,
