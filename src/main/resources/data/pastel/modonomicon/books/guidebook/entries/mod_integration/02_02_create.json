@@ -85,7 +85,7 @@
         "advancement_id": "pastel:collect_any_basic_shard"
       },
       "item": {
-        "item": "minecraft:amethyst_shard"
+        "item": "pastel:amethyst_ore"
       },
       "text": "book.pastel.guidebook.mod_integration.create.page1.text"
     },

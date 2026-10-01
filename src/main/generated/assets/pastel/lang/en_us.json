@@ -3089,7 +3089,7 @@
   "book.pastel.guidebook.mod_integration.conjuring.page3.text": "Combining everything I learned as a Spawner expert and Pigment Tinkerer, I was finally able to create my own [#](bb00bb)Mob Spawners[#]()!\\\nI only need to assign a creature to spawn using the [Spirit Instiller](entry://creating_life/spirit_instiller).",
   "book.pastel.guidebook.mod_integration.create.name": "Create",
   "book.pastel.guidebook.mod_integration.create.page0.text": "Everywhere it rattles and fizzles, whistles and smokes. An ensemble of assemblage.\\\n\\\nSurely some of these machines will come in handy.",
-  "book.pastel.guidebook.mod_integration.create.page1.text": "[#](bb00bb)Gemstones[#]() can be crushed, yielding [#](bb00bb)Gemstone Powder[#]().",
+  "book.pastel.guidebook.mod_integration.create.page1.text": "[#](bb00bb)Gemstone Ores[#]() can be crushed, yielding [#](bb00bb)Shards and Powder[#]().",
   "book.pastel.guidebook.mod_integration.create.page2.text": "[#](bb00bb)Colored Leaves[#]() can be crushed, yielding [Pigment](entry://general/pigment) and a higher chance for [#](bb00bb)Colored Saplings[#]().",
   "book.pastel.guidebook.mod_integration.create.page2.title": "Milling Leaves",
   "book.pastel.guidebook.mod_integration.create.page3.text": "Crushing [#](449900)Colored Logs[#]() gives me [Pigment](entry://general/pigment).",

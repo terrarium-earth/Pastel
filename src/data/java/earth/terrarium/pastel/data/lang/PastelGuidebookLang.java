@@ -3861,7 +3861,7 @@ public class PastelGuidebookLang {
         provider
             .add(
                 "book.pastel.guidebook.mod_integration.create.page1.text",
-                "[#](bb00bb)Gemstones[#]() can be crushed, yielding [#](bb00bb)Gemstone Powder[#]()."
+                "[#](bb00bb)Gemstone Ores[#]() can be crushed, yielding [#](bb00bb)Shards and Powder[#]()."
             );
         provider
             .add(
