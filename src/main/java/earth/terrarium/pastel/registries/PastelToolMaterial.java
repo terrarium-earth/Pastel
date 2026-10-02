@@ -16,7 +16,7 @@ public enum PastelToolMaterial implements Tier {
     VOIDING(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1143, 20.0F, 1.0F, 5, Ingredient::of),
     BEDROCK(
         BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
-        0,
+        1337,
         15.0F,
         5.0F,
         3,

@@ -12,7 +12,6 @@ import org.jgrapht.graph.SimpleGraph;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class PastelNetwork<W extends Level> {
 
@@ -140,7 +139,7 @@ public class PastelNetwork<W extends Level> {
                 .mapToInt(vertices::indexOf)
                 .filter(v -> v != currentVertex)
                 .boxed()
-                .collect(Collectors.toList());
+                .toList();
 
             if (edgeIndexes.isEmpty())
                 continue;
