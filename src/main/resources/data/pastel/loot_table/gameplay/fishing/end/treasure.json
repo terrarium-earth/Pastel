@@ -49,6 +49,7 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 3,
           "name": "pastel:paltaeria_fragments",
           "functions": [
             {
