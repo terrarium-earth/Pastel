@@ -147,12 +147,7 @@ import earth.terrarium.pastel.blocks.imbrifer.flora.SnappingIvyBlock;
 import earth.terrarium.pastel.blocks.imbrifer.flora.TallDragonjagBlock;
 import earth.terrarium.pastel.blocks.imbrifer.flora.WeepingGalaFrondsBlock;
 import earth.terrarium.pastel.blocks.imbrifer.flora.WeepingGalaSprigBlock;
-import earth.terrarium.pastel.blocks.imbrifer.groundcover.AshBlock;
-import earth.terrarium.pastel.blocks.imbrifer.groundcover.AshPileBlock;
-import earth.terrarium.pastel.blocks.imbrifer.groundcover.BlackslagBlock;
-import earth.terrarium.pastel.blocks.imbrifer.groundcover.BlackslagVegetationBlock;
-import earth.terrarium.pastel.blocks.imbrifer.groundcover.SlushVegetationBlock;
-import earth.terrarium.pastel.blocks.imbrifer.groundcover.VariableHeightBlock;
+import earth.terrarium.pastel.blocks.imbrifer.groundcover.*;
 import earth.terrarium.pastel.blocks.item_bowl.ItemBowlBlock;
 import earth.terrarium.pastel.blocks.item_roundel.ItemRoundelBlock;
 import earth.terrarium.pastel.blocks.jade_vines.JadeVineBulbBlock;
@@ -2046,7 +2041,7 @@ public class PastelBlocks {
     public static final DeferredBlock<Block> SLUSH = register(
         blockWithItem(
             "slush",
-            () -> new RotatedPillarBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)),
+            () -> new SlushBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)),
             InkColors.BROWN
         )
     );
