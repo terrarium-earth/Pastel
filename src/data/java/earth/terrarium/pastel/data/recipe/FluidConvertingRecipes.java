@@ -44,6 +44,21 @@ public class FluidConvertingRecipes {
                     .dragonrot(Ingredient.of(Items.DEEPSLATE), new ItemStack(PastelBlocks.BLACKSLAG))
             );
 
+      pfx
+            .generateRecipe(
+                "basal_marble_from_tuff",
+                FluidConvertingRecipeBuilder
+                    .dragonrot(Ingredient.of(Items.TUFF), new ItemStack(PastelBlocks.BASAL_MARBLE))
+            );
+
+        pfx
+            .generateRecipe(
+                "shale_clay_from_clay",
+                FluidConvertingRecipeBuilder
+                    .dragonrot(Ingredient.of(Items.CLAY), new ItemStack(PastelBlocks.SHALE_CLAY))
+            );
+
+
         pfx
             .generateRecipe(
                 "blackstone_from_stone",
