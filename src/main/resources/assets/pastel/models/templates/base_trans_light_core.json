@@ -1,5 +1,6 @@
 {
 	"credit": "~ XOXO Azzyypaaras ~",
+	"render_type": "minecraft:translucent",
 	"textures": {
 		"0": "#glass",
 		"1": "#case",

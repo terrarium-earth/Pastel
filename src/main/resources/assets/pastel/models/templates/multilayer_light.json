@@ -1,5 +1,6 @@
 {
 	"credit": "~ XOXO Azzyypaaras ~",
+	"render_type": "minecraft:translucent",
 	"parent": "block/block",
 	"textures": {
 		"0": "#side",
